@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2019-11-05T14:59:11 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="operateur1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a0e4afdf-aab6-4e2e-a856-4a038b316740">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="730"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="256"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="295"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="694"/>
+	<parameter name="opeMatricule" class="java.lang.String"/>
+	<parameter name="report_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT DISTINCT 
+	ope.ope_matricule, ope.ope_login, ope.ope_nom,
+  mdp.mdp_motdepasse , mdp.mdp_statut ,
+  ass.ass_courant , ass.ass_dat_deb , ass.ass_dat_fin ,
+  fon.fon_cod , fon.fon_libelle
+  
+   FROM  
+  t_operateur ope
+  JOIN t_motdepasse mdp ON ope.ope_matricule = mdp.mdp_ope_matricule
+  JOIN t_assignation ass ON ope.ope_matricule = ass.ass_ope_matricule
+  JOIN t_fonction fon ON fon.fon_cod = ass.ass_fon_cod
+  where ass.ass_courant='O' AND mdp.mdp_statut='1' AND ope.ope_matricule=$P{opeMatricule}]]>
+	</queryString>
+	<field name="OPE_MATRICULE" class="java.lang.String"/>
+	<field name="OPE_LOGIN" class="java.lang.String"/>
+	<field name="OPE_NOM" class="java.lang.String"/>
+	<field name="MDP_MOTDEPASSE" class="java.lang.String"/>
+	<field name="MDP_STATUT" class="java.math.BigDecimal"/>
+	<field name="ASS_COURANT" class="java.lang.String"/>
+	<field name="ASS_DAT_DEB" class="java.sql.Timestamp"/>
+	<field name="ASS_DAT_FIN" class="java.sql.Timestamp"/>
+	<field name="FON_COD" class="java.lang.String"/>
+	<field name="FON_LIBELLE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="733" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="129" y="24" width="291" height="45" uuid="a95243b2-97fb-4e08-be88-3bbfa644db22"/>
+				<box>
+					<pen lineWidth="3.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["IDENTIFICATION D'OPERATEUR"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="42" y="179" width="48" height="20" uuid="ba7bc5e6-f6b0-4837-908e-2346750a046c">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[M (Mme):]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="91" y="179" width="309" height="20" uuid="537ad38e-5348-4950-9168-5a67e2efd425"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OPE_NOM}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="42" y="208" width="97" height="20" uuid="0b544dee-2559-4f2b-b711-25677b7a06a0">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Ayant le matricule :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="208" width="381" height="20" uuid="66de9324-6ad2-4666-9c54-556c5eb3ca5e"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OPE_MATRICULE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="243" width="504" height="34" uuid="ea297604-5558-4bad-b089-6863983e8e62">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Est informé(e) qu'il (elle) peut se connecter sur la plateforme se dématérialisation des MarchésPublics (E-MAP).]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="289" width="120" height="20" uuid="73eb92b4-7916-41cd-9cd2-2e26d185929b">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sous le nom utilisateur :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="288" width="360" height="20" uuid="8731ba2c-785c-4c98-b2af-94d1a184845c"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{OPE_LOGIN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="332" width="250" height="20" uuid="1bde030d-e9a6-4ac5-9f41-46287d40c661">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Et qu'il (elle) doit utiliser le mot de passe suivant :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="332" width="230" height="20" uuid="584c5c9a-fc5a-4c12-8def-21d5ea13b586"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MDP_MOTDEPASSE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="332" width="250" height="20" uuid="1c2a2543-158d-434d-b38d-a99663b214f0">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Et qu'il (elle) doit utiliser le mot de passe suivant :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="290" y="332" width="230" height="20" uuid="e5134d90-fc52-4907-b01c-e66d99f5223c"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MDP_MOTDEPASSE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="364" width="70" height="20" uuid="7cc60664-4359-40d6-bbee-0e77f89422a4">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[En tant que :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="110" y="363" width="410" height="20" uuid="f800ea04-ebda-4db4-8ee8-9cb4585d2cdb"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FON_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="408" width="60" height="20" uuid="22afa5f0-ffd8-4780-a391-a960e9cc3608">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[A partir du :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="100" y="408" width="80" height="20" uuid="01b46088-8180-4dac-8ebe-bbbb1c81fd59"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ASS_DAT_DEB}]]></textFieldExpression>
+			</textField>
+			<textField pattern="M-d-yyyy">
+				<reportElement x="180" y="408" width="38" height="20" uuid="c4473043-11c6-4cab-ad63-53a2c246c365"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" au :"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="218" y="407" width="302" height="20" uuid="0926319f-5dbf-4f61-83a2-31feebf1ff76"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ASS_DAT_FIN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="443" width="480" height="20" uuid="a94704f4-f8b7-4e86-a03d-c925767cc2ca">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Le code fonction E-MAP qui lui a été attribué]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="41" y="492" width="139" height="20" uuid="1abb1e08-178f-4000-9b2a-d8578a8b18e4">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Est le suivant :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="180" y="494" width="340" height="20" uuid="142cd401-7360-49d1-a619-4380eddfeb7c"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FON_COD}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="534" width="480" height="42" uuid="88dd6bb5-81b3-47e6-9eb3-0e3cc08ad2f2">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left">
+					<font size="11" isBold="false" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[En cas d'anomalie ou d'erreur sur ce document, vous devez contacter sans delai, la hotline de la E-MAP au (225) 20 21 78 63 / 20 22 26 20, infos@sndi.ci.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="602" width="480" height="71" uuid="7ecff2f4-53bb-4a16-8d0d-a18bffe5b041">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="html">
+					<font size="11" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Le mot de passe vous engage et doit rester strictement confidentiel.Vous êtes invités à changer votre mot de passe dès votre première connexion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="696" width="480" height="20" uuid="37ab7047-bfb3-496c-b99e-e0c636af8349">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[E-MARCHESPUBLICS (E-MAP)]]></text>
+			</staticText>
+			<image>
+				<reportElement x="440" y="10" width="80" height="71" uuid="b1267273-e673-479b-a562-611b86b89a7d"/>
+				<imageExpression><![CDATA[$P{report_image}+"armoiries.png"]]></imageExpression>
+			</image>
+			<image scaleImage="FillFrame">
+				<reportElement x="40" y="10" width="70" height="70" uuid="ecb90b7e-22af-4b65-891c-7151986be22d"/>
+				<imageExpression><![CDATA[$P{report_image}+"logo_dmp.PNG"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="41" y="680" width="479" height="20" uuid="a257b6e5-f675-424d-9b21-766aacb95ba5"/>
+				<text><![CDATA[-------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="102" width="240" height="48" uuid="18c5d47e-b3c0-4091-a138-34f3afec3c0b"/>
+				<box>
+					<pen lineWidth="3.0" lineStyle="Double" lineColor="#14A10A"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="207" y="107" width="96" height="34" forecolor="#F7B52F" uuid="1031d50a-f45f-40f7-b1b8-4bdb553e7f34"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Marchés]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="183" y="109" width="26" height="29" forecolor="#14A10A" uuid="24a08b42-9bba-4dba-a72b-34f5a12846c1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="294" y="109" width="26" height="31" forecolor="#14A10A" uuid="719a2084-dd2d-4cb1-947f-4ed4e5d9d2a0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[P]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="308" y="110" width="75" height="31" forecolor="#F7B52F" uuid="c2fd7e92-dca8-4027-b812-42b82eb24d9b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ublics]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="18">
+			<textField>
+				<reportElement x="93" y="0" width="92" height="15" uuid="b595b9c5-a740-4740-9929-411cc918d77e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[TODAY( )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="2" width="56" height="15" uuid="d2d0353a-0b73-434a-af97-5555ede13e6f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Imprimé le : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="505" y="2" width="42" height="15" uuid="57f51637-e225-4433-9510-75ee6e9cb643">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" / "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+  <ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents"> 
+ <div class="account-pages"></div>
+        <div class="clearfix"></div>
+        <div class="wrapper-page">
+
+        	<div class="ex-page-content text-xs-center">
+                <div class="text-error"><span class="ion-sad"></span></div>
+                <h3 class="text-uppercase text-white font-600">Page en construction</h3>
+                <img src="../resources/images/construction.gif" />
+                <p class="text-white m-t-30">
+                   
+                </p>
+                <br/>
+                
+                <p:commandLink  class="btn btn-pink waves-effect waves-light" action="#{userController.renderPage('accueil')}"  update=":content">Retour à Accueil</p:commandLink>
+
+            </div>
+
+
+        </div>
+		</ui:define>
+		</ui:composition>
+      </html>

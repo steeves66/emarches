@@ -1,0 +1,98 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl">
+<section class="content-header">
+      <h1>
+        Opérateur
+        <small>Modification de l'opérateur #{operateurController.slctdTd.opeMatricule}</small>
+      </h1>
+      <ol class="breadcrumb">
+       <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+        <li><a><i class="fa fa-dashboard"></i> Acueil</a></li>
+        </p:commandLink>
+        <li class="active">Modification</li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+       <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
+       <div class="form-group ">
+	                  <label for="mat" class="col-sm-3 control-label"><b> Matricule  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText  value="#{operateurController.slctdTd.opeMatricule}"  type="text"  styleClass="form-control" readonly="true"  id="mat" style="width: 100%"/>
+	                  </div>
+	                </div> 
+	                  <div class="form-group ">
+	                  <label for="civilite" class="col-sm-3 control-label"><b>Civilité</b></label>
+	                  <div class="col-sm-9">
+	                   	<p:selectOneMenu id="civilite" value="#{operateurController.slctdTd.opeEtatCivil}"   style="width:100%;">
+			            <f:selectItem  itemLabel="Choisir..." itemValue="" />  
+			             <f:selectItem  itemLabel="Mr" itemValue="Mr" />  
+			           	  <f:selectItem  itemLabel="Mlle" itemValue="Mlle" /> 
+			           	    <f:selectItem  itemLabel="Mme" itemValue="Mme" />   	
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>  
+	                <div class="form-group ">
+	                  <label for="nom" class="col-sm-3 control-label"><b> Nom et Prenom(s)  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText  value="#{operateurController.slctdTd.opeNom}" type="text"  styleClass="form-control"  id="nom" style="width: 100%"/>
+	                  </div>
+	                </div>
+	                  <div class="form-group ">
+	                  <label for="Login" class="col-sm-3 control-label"><b>Login<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{operateurController.slctdTd.opeLogin}"  type="text"  styleClass="form-control"  id="Login" style="width: 100%" />
+	                  </div>
+	                </div>
+	                 <div class="form-group ">
+	                  <label for="tit" class="col-sm-3 control-label"><b>Email</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{operateurController.slctdTd.opeMail}"  type="text"  styleClass="form-control"  id="tit" style="width: 100%" />
+	                  </div>
+	                </div>
+	                <div class="form-group ">
+	                  <label for="contact" class="col-sm-3 control-label"><b>Contact</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText  value="#{operateurController.slctdTd.opeContact}"  styleClass="form-control"  id="contact" style="width: 100%"/>
+	                  </div>
+	                </div>
+	     <div class="row">
+	       <div class="col-sm-3"></div> 
+	       <div class="col-sm-9">   
+			 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{operateurController.renderPage('ope1')}"  update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+				      
+		<div class="pull-right ">
+			 <p:commandLink  styleClass="btn btn-success" style="background-color: #036d3b" action="#{operateurController.update()}"  update=":content">
+			    <p:confirm header="Confirmation" message="Confirmez vous la modification?" icon="ui-icon-alert" />
+			    <i class="ace-icon fa fa-save"></i> Modifier
+			 </p:commandLink>
+	     </div>
+		       </div>
+		       </div>
+       
+        
+       </div>    
+    </section>
+    </h:form>
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

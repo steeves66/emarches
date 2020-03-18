@@ -1,0 +1,210 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{agpmController.slctdTd.TAgpm.agpId}
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>AGPM | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>AGPM | 
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <div class="box box-success">
+            
+              <div class="box-body">
+              <div class="row">
+             <div class="col-md-7">
+	          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE PROJET</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Gestion </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TGestion.gesCode}"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Ministère</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TMinistere.minLibelle}"  style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Autorité Contractante</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TFonction.fonLibelle}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Projet de :</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TProjet.proTitre}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	            
+	           </div>
+	           
+	           
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L'ORGANE D'EXECUTION</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Organe d'execution</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decOrganExecLibelle}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Adresse</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decOrganExecAdresse}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	            <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Personne à contacter</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decPersNomPrenom}"   style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Fonction</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decPersFonction}"   style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Bureau de localisation</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decLocalisation}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Numero Porte</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decNumeroPorte}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Celullaire</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decCel}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Telephone</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decTelephone}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Boite Postale</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decBp}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">E-mail</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.slctdTd.TDeclarant.decEmail}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	            </div>
+	           </div>
+            </div>
+            <div class="col-md-5">
+	          
+	           
+	           
+	          
+	          
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">FICHIER(S) JOINT(S)</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:dataTable id="dossierApercu" styleClass="table mb0 dt-on-steroids dataTable" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun dossier enregistré">
+	               <p:column headerText="Nom du dossier" styleClass="">
+	                   <h:outputText value="#{doss.dagCommentaire}" />
+	               </p:column>
+	                <p:column headerText="Action" styleClass="no-sort col-sm-1">
+			 	             <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{agpmController.openDossier}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
+				            </p:commandLink>	
+ 	                    </p:column> 
+                 </p:dataTable>     
+	            </div>
+	           </div>
+            </div>
+            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+           <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{agpmController.imprimerAgpm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AGPM
+				      </p:commandLink>
+				      
+      <p:commandLink styleClass="btn btn-warning" action="#{agpmController.renderPage('agpm1','LIS')}" rendered="#{controleController.fermerSai}"  style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		 <p:commandLink styleClass="btn btn-warning" action="#{agpmController.renderPage('agpm1','VAL')}" rendered="#{controleController.fermerVal}"  style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+    </section>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

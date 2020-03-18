@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+ <!-- LOGO -->
+ 	  <h:form id="frheader">
+ 	      <header class="main-header">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><span style="color:green;font-size: 30px;"><strong>e</strong></span></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><span style="color:green;font-size: 30px;"><strong>e</strong></span>-MarchésPublics</span>
+
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top danger">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+       
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- <img src="#{request.contextPath}/resources/dist/img/user2-160x160.PNG" class="user-image" alt="User Image"/> -->
+              <img src="#{request.contextPath}/resources/dist/img/user23-160x160.png" class="user-image" alt="User Image"/>
+              <span class="hidden-xs"><h:outputText style="font-size: 1.2em;" value="#{userController.operateur.opeNom}"/></span>
+            </a>
+            <ul class="dropdown-menu">
+              <!-- User image -->
+              <li class="user-header">
+                <!-- <img src="#{request.contextPath}/resources/dist/img/user2-160x160.PNG" class="img-circle" alt="User Image"/> -->
+                <img src="#{request.contextPath}/resources/dist/img/user23-160x160.png" class="img-circle" alt="User Image"/> 
+                 <div class="user-info">
+                <p>
+                 <h:outputText value="#{userController.operateur.opeNom}" style="color:#fff;"/><br/>
+                   <h:outputText value="#{userController.fonction.fonLibelle}" style="color:#fff;"/><br/>
+                  <small  style=" color:#fff;">Connecté le : 
+                  <h:outputText value="#{userController.dateCon}">
+              					  <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+          				        </h:outputText>
+                  </small>
+                </p>
+                </div>
+              </li>
+              <!-- Menu Body -->
+             
+              <!-- Menu Footer-->
+              <li class="user-footer" style="background-color:#f88b2e">
+                <div class="pull-left">
+
+                  <p:commandLink  oncomplete="PF('changFonctionDlg').show()" styleClass="btn btn-warning btn-flat" style="background-color: #036d3b" value="Changer fonction">
+                  </p:commandLink> 
+                </div>
+                <div class="pull-right">
+                <!-- SIGMiCAP -->
+                  <h:commandLink  action="#{userController.logout()}" styleClass="btn btn-warning btn-flat" style="background-color: #036d3b" value="Déconnexion">
+                  </h:commandLink> 
+                  
+                </div>
+                 <p:commandLink  oncomplete="PF('changPasswordDlg').show()" styleClass="btn btn-warning btn-flat" style="background-color: #036d3b; color:white" action="#{passwordController.recupMotPass()}" value="Changer mot de passe">
+                  </p:commandLink>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          
+        </ul>
+      </div>
+    </nav>
+  </header>
+      </h:form>
+</html>

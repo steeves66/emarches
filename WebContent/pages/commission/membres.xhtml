@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+      <ui:composition template="/template/templatePage.xhtml">
+	<ui:define name="contents">
+<h:form id="gnl">	
+ <section class="content-header">
+      <h3>
+        #{controleController.libelle}  
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+        <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('com1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Liste
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+  
+    <section class="content">
+     <div class="box"></div>
+		<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+			
+             <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+            
+            <div class="row">  
+                  
+            <div class="col-md-4">
+                <div class="input-group input-group-sm col-md-12">
+                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero de l'avis"></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
+                    </span>
+					 </div>
+					 
+            </div>
+            
+            <div class="col-md-8">
+               <!--  <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Selectionnez la Commission type <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:selectOneMenu id="com" value="#{commissionController.tcoCode}" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Selectionnez le type de commission" itemValue="" />  
+			       <f:selectItems value="#{commissionController.listeTypeCommission}" var="tco" itemLabel="#{tco.tcoLibelle}" itemValue="#{tco.tcoCode}" /> 	
+			        <p:ajax listener="#{commissionController.chargeMembreCommission()}" update=":gnl:ndTble"/>		   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div> -->
+            </div>
+            </div>
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.membresCommission}" emptyMessage="Aucun membre trouvé" 
+					    rowKey="#{slctdTb.tctCode}" selection="#{commissionController.selectionMembres}"   editable="true" editMode="cell"
+                         draggableColumns="true" scrollable="true" scrollHeight="300"
+                          >
+                           <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
+                           
+                            <p:column headerText="TITRE" styleClass="col-sm-1" >
+	         				  <h:outputText value="#{slctdTb.tctTitre}"/>
+					        </p:column>
+					        
+                            <p:column headerText="FONCTION" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.tctLibelle}"/>
+					        </p:column>			        
+					        
+                          <p:column headerText="NOM" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.tctNomMbm}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="nom" value="#{slctdTb.tctNomMbm}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+                         
+                          <p:column headerText="PRENOM(S)" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.tctPreMbm}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="prenom" value="#{slctdTb.tctPreMbm}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				          <p:column headerText="Telephone" styleClass="col-sm-1" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.tctTelMbm}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="tel" value="#{slctdTb.tctTelMbm}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				         <p:column headerText="Mandat ?" styleClass="col-sm-1" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.tctRepMandate}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+	         				   <p:selectOneRadio id="mandat" value="#{slctdTb.tctRepMandate}">
+							  <f:selectItem itemLabel="Oui" itemValue="O" />
+						      </p:selectOneRadio>
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+                       
+		        
+    </p:dataTable> 
+    
+    <div class="row">
+     <div class="col-md-3">
+        <div class="form-group">
+                  <label class="col-sm-4 control-label">Nombre de pli</label>
+				  <div class="col-sm-8">
+                    <table>
+		                 <tr>
+		                 <td style="width: 530px"><p:inputText value="#{commissionController.membre.dcsNbrPli}" type="text" styleClass="form-control" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+     </div>
+     <div class="col-md-3">hchc</div>
+     <div class="col-md-3">hchc</div>
+     <div class="col-md-3">hchc</div>
+    </div>
+    
+    <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+     <div class="col-md-4">
+     <div class="row">
+     
+     <div class="form-group">
+                  <label class="col-sm-6 control-label">Nombre de pli</label>
+				  <div class="col-sm-6">
+                    <table>
+		                 <tr>
+		                 <td style="width: 530px"><p:inputText value="#{commissionController.membre.dcsNbrPli}" type="text" styleClass="form-control" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                
+         <div class="form-group">
+                  <label class="col-sm-6 control-label">Nombre d'Offres recu</label>
+				  <div class="col-sm-6">
+                    <table>
+		                 <tr>
+		                 <td style="width: 530px"><p:inputText value="#{commissionController.membre.dcsAaoNbrOff}" type="text" styleClass="form-control" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+     </div>
+     </div>
+     <div class="col-md-5">
+     <div class="row">
+         <div class="form-group">
+                  <label class="col-sm-6 control-label">Nombre d'Offre hors delai</label>
+				  <div class="col-sm-5">
+                    <table>
+		                 <tr>
+		                 <td style="width: 530px"><p:inputText value="#{commissionController.membre.dcsAaoNbrOffHorDelai}" type="text" styleClass="form-control" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+     </div>
+     </div>
+     <div class="col-md-3">
+      <div class="row">
+       
+                   <div class="col-sm-7"><label class="pull-right">Quorum atteint ?</label></div>
+				  <div class="col-sm-5">
+                    <table>
+		                 <tr>
+		                 <td style="width: 530px">
+		                   <p:selectOneRadio id="quorum" value="#{commissionController.membre.dcsSeaQuorum}">
+							  <f:selectItem itemLabel="Oui" itemValue="O" />
+							  <f:selectItem itemLabel="Non" itemValue="N" />
+						      </p:selectOneRadio>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+               
+     </div>
+     </div>
+    </div>  
+  </div>
+ <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{commissionController.renderPage('com1','LISOUV')}"   update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+ <p:commandLink styleClass="btn btn-success pull-right" style=" background-color: #036d3b" action="#{commissionController.savePresence()}" update=":content">
+		       <i class="ace-icon fa fa-save bigger-130"></i> Enregistrer
+		     </p:commandLink>  
+		     
+		        
+				      <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" rendered="#{commissionController.boutonEdit}" action="#{commissionController.imprimerFicheMbr()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la liste 
+				      </p:commandLink>  
+       </section>
+         
+
+</h:form>
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    </ui:define>
+</ui:composition>
+</html>

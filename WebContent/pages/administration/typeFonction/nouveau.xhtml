@@ -1,0 +1,104 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">    
+	<h:form id="gnl">	
+<section class="content-header">
+      <h1>
+        
+        <small>Nouveau Type fonction</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+        <a href="#"><i class="fa fa-dashboard"></i> Accueil</a>
+        </p:commandLink>
+        </li>
+        <li class="active">Nouveau Type fonction</li>
+      </ol>
+    </section>
+    
+    <section class="content">
+   
+<div class="box box-default">
+<div class="panel-primary">
+           <div class="panel-heading" style="background-color: #f88b2e">FORMULAIRE DE SAISIE DES TYPES FONCTIONS
+          
+           </div>
+          </div>
+          
+          <div class="box-body">
+           <div class="widget-box">
+           
+                  <div class="widget-body">
+                 
+                    <div class="widget-main">
+                     
+                      <h:form id="gnl">
+                 <fieldset style="border: 1px solid;padding: 10px;">
+					   				 <legend>Saisie d'un Type fonction</legend>
+  	 <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+ 
+  
+		         
+		         
+		         <div class="ui-g">
+				    <div class="ui-g-12 ui-md-6 ui-lg-3"><b>Type fonction <span style="color:red;"> *</span></b></div>
+				    <div class="ui-g-12 ui-md-12 ui-lg-6">
+		         	<p:inputText  value="#{typeFonctionController.slctdTb.tyfCod}" style="width:98%;"/>  
+				    </div>
+				  </div>
+		         <div class="ui-g">
+				    <div class="ui-g-12 ui-md-6 ui-lg-3"><b>Type fonction libelle <span style="color:red;"> *</span></b></div>
+				    <div class="ui-g-12 ui-md-12 ui-lg-6">
+		         	<p:inputText  value="#{typeFonctionController.slctdTb.tyfLibelle}" style="width:98%;"/>  
+				    </div>
+				  </div>
+		         <hr />
+		          <div class="btn-group mr5 pull-left">
+       			 <p:commandLink  styleClass="btn btn-success" style="margin-left:10px;" value="Enregistrer"  action="#{typeFonctionController.create()}" update="gnl">
+                <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+                </p:commandLink>
+             	 <p:commandLink  styleClass="btn btn-danger" style="margin-left:10px;" value="Fermer" action="#{userController.renderPage('tyf1')}" update=":content"/>
+               
+     			 </div>
+		        
+		      
+		         </fieldset>
+		         
+		         
+		    
+  
+</h:form>
+                      </div><!-- /.widget-main -->
+                        
+                     </div><!-- /.widget-body -->
+                     
+                   </div>
+                     
+                 </div>
+                 
+             </div>
+             
+               </section>
+
+
+
+  
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    </h:form>
+</ui:define>
+</ui:composition>
+</html>

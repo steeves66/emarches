@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-02-11T11:15:45 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_pso" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c522d3ab-6af2-440a-8892-02575153090f">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<parameter name="param_code" class="java.lang.Long">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="param_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select af.*,tym.tym_libelle_long,tym.tym_libelle_court,mop.mop_libelle_long ,f.fon_libelle, min.min_libelle,st.str_libelle_long, sf.sou_libelle,leb.lbg_imputation,nat.nat_libelle, fg.fpp_montant_cfa,fg.fpp_montant_devise,ba.bai_libelle,dev.dev_libelle,dev.dev_symbole
+from t_affichage_ppm af, t_type_marche tym, t_mode_passation mop, t_fonction f, t_ministere min,t_structure st, t_financement_ppm fg,t_source_financement sf,t_l_budgets leb,t_natures nat, t_bailleur ba, t_devise dev
+where af.aff_dpp_tym_code = tym.tym_code
+and af.aff_dpp_mop_code = mop.mop_code
+and af.aff_dpp_fon_cod = f.fon_cod
+and af.aff_dpp_str_code = st.str_code
+and st.str_min_code = min.min_code
+and af.aff_dpp_lbg_code = leb.lbg_code
+and leb.lbg_nat_code = nat.nat_code
+and af.aff_dpp_id = fg.fpp_dpp_id (+)
+and af.aff_dpp_source_fin = sf.sou_code
+and fg.fpp_sou_code = sf.sou_code
+and fg.fpp_bai_code = ba.bai_code
+and fg.fpp_dev_code = dev.dev_code
+and af.aff_dpp_id= $P{param_code}]]>
+	</queryString>
+	<field name="AFF_ID" class="java.lang.Long"/>
+	<field name="AFF_DPP_PLP_ID" class="java.lang.Long"/>
+	<field name="AFF_DPP_GPG_ID" class="java.lang.Long"/>
+	<field name="AFF_DPP_STA_CODE" class="java.lang.String"/>
+	<field name="AFF_DPP_TYM_CODE" class="java.lang.String"/>
+	<field name="AFF_DPP_MOP_CODE" class="java.lang.String"/>
+	<field name="AFF_DPP_LBG_CODE" class="java.lang.String"/>
+	<field name="AFF_DPP_TYPE_PLAN" class="java.lang.String"/>
+	<field name="AFF_DPP_CODE" class="java.lang.String"/>
+	<field name="AFF_DPP_NUMERO_ORDRE" class="java.lang.Long"/>
+	<field name="AFF_DPP_DATE" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_OBJET" class="java.lang.String"/>
+	<field name="AFF_DPP_SOURCE_FIN" class="java.lang.String"/>
+	<field name="AFF_DPP_ACTEUR_SAISIE" class="java.lang.String"/>
+	<field name="AFF_DPP_DATE_DAO_TRANS" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_DAO_APPROB_DMP" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_DAO_APPROB_BAIL" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_AVIS_AO_PUBLICAT" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_OUVERT_OT" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_OUVERT_OF" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_ELAB_RAPPORT" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_JUGEMENT_OFFRE" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_ATT_APPROB_DMP" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_ATT_APPRO_BAIL" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_NEGOCIATION" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_SIGNAT_ATTRIB" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_SIGNAT_AC" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_MARCHE_APPROB" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_EXEC_DEBUT" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_DATE_EXEC_FIN" class="java.sql.Timestamp"/>
+	<field name="AFF_DPP_ID" class="java.lang.Long"/>
+	<field name="AFF_DPP_STATUT_RETOUR" class="java.lang.String"/>
+	<field name="AFF_DPP_FON_COD" class="java.lang.String"/>
+	<field name="AFF_DPP_STR_CODE" class="java.lang.String"/>
+	<field name="AFF_DPP_STR_CONDUC" class="java.lang.String"/>
+	<field name="AFF_DPP_STR_BENEFI" class="java.lang.String"/>
+	<field name="AFF_DPP_DATE_SAISIE" class="java.sql.Timestamp"/>
+	<field name="AFF_TYP_ID" class="java.lang.String"/>
+	<field name="AFF_DPP_PARTIE_PME_PMI" class="java.lang.String"/>
+	<field name="AFF_DPP_STATUT_DAO" class="java.lang.String"/>
+	<field name="AFF_DPP_PIECE_DAO" class="java.lang.String"/>
+	<field name="AFF_DPP_INV_ENTRE" class="java.sql.Timestamp"/>
+	<field name="TYM_LIBELLE_LONG" class="java.lang.String"/>
+	<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
+	<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
+	<field name="FON_LIBELLE" class="java.lang.String"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+	<field name="SOU_LIBELLE" class="java.lang.String"/>
+	<field name="LBG_IMPUTATION" class="java.lang.String"/>
+	<field name="NAT_LIBELLE" class="java.lang.String"/>
+	<field name="FPP_MONTANT_CFA" class="java.math.BigDecimal"/>
+	<field name="FPP_MONTANT_DEVISE" class="java.math.BigDecimal"/>
+	<field name="BAI_LIBELLE" class="java.lang.String"/>
+	<field name="DEV_LIBELLE" class="java.lang.String"/>
+	<field name="DEV_SYMBOLE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="137" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="67" width="171" height="19" uuid="172d0e19-9895-4a0b-89f3-9f8fd822d325"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direction des Marchés Publics]]></text>
+			</staticText>
+			<image>
+				<reportElement x="109" y="32" width="57" height="33" uuid="1f3204c3-d00b-41bf-8f66-52a6451142b0"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="0" width="281" height="30" uuid="02775980-0f01-4f44-a6d2-28ffa2eb5398"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="383" y="1" width="171" height="17" uuid="cd7aec1b-6ef8-46a2-a46e-4bcfa55465db">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[République de Côte d'Ivoire]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="388" y="19" width="166" height="17" uuid="ae4f9939-3fe2-49d4-be34-3bb696cfaf0b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Union-Discipline-Travail]]></text>
+			</staticText>
+			<rectangle radius="8">
+				<reportElement mode="Opaque" x="40" y="102" width="460" height="31" backcolor="#FA9B3C" uuid="d81f24d0-f962-4e38-9c11-9b846a3058c9"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="41" y="104" width="458" height="26" forecolor="#FFFFFF" uuid="f1e14797-4936-4c33-ac0a-fc89e40f206a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["FICHE D'IDENTIFICATION DE L'OPERATION"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="417" splitType="Stretch">
+			<frame>
+				<reportElement x="0" y="8" width="554" height="192" uuid="71afb710-2468-45fd-af05-be493e0b554e"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="2" y="119" width="152" height="21" uuid="43726017-710c-48d5-9984-4935afbe2952"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Part reservée aux PME ou PMI : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="153" y="119" width="282" height="21" uuid="0da095a0-f81d-4a62-bcee-f4f779cb6ac4"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AFF_DPP_PARTIE_PME_PMI}.equalsIgnoreCase("O")? "OUI " : "NON"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="97" width="109" height="21" uuid="b9a30213-af71-4bac-9e37-f71b7a5daee9"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Type de Marché : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="111" y="97" width="367" height="21" uuid="0b6f5111-e178-4731-8a05-2278884bfd6e"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AFF_DPP_TYM_CODE}+" : "+$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="75" width="109" height="21" uuid="5daefd54-0b8d-4143-9f50-0f002c7f575e"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Mode de Passation : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="110" y="75" width="368" height="21" uuid="b0156a6b-d5dd-438b-8013-8bdac710e39e"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AFF_DPP_MOP_CODE}+" : "+$F{MOP_LIBELLE_LONG}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="109" y="47" width="445" height="28" uuid="33638954-860a-4d44-96a8-d7d0eb2fa36b"/>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MIN_LIBELLE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="2" y="47" width="108" height="21" uuid="c32fdfc7-4182-442b-9c55-73b14935b7cf"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Ministère : ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="1" y="26" width="109" height="21" uuid="42f08984-914b-48a6-aa9e-f23ad070d83d"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Autorité Contractante : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="111" y="26" width="367" height="21" uuid="afee89b2-fb77-439b-ba8f-9964754a3af5"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FON_LIBELLE}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="1" y="22" width="553" height="1" uuid="7efc4e6f-2036-478b-96cd-149fec1d261b"/>
+				</line>
+				<staticText>
+					<reportElement x="179" y="0" width="201" height="21" uuid="ad36fa91-8c52-44a7-ae5a-bac90288fa0c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[INFORMATIONS GENERALES]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="2" y="141" width="112" height="21" uuid="b4723837-fbc2-48ac-8953-a71f9b13288a"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Imputation : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="111" y="140" width="367" height="21" uuid="d9be724c-b392-428d-8a31-1eae89e2ed21">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LBG_IMPUTATION}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="1" y="162" width="112" height="21" uuid="5089499d-3d66-4496-b564-e6c874c311ac"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Nature : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="113" y="162" width="365" height="21" uuid="a5866fae-5d30-48ee-bf7d-05e342c36180"/>
+					<textElement verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NAT_LIBELLE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="214" width="554" height="67" uuid="8f90501e-e4c8-477c-8fef-36f788f3a75d"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="179" y="0" width="201" height="21" uuid="90b4d942-8b33-4553-a940-2615fcf35f6e"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FINANCEMENT]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement x="3" y="25" width="261" height="20" uuid="139ed97e-5d6d-4c0e-8608-0c972b1aab91"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Bailleur : "+$F{BAI_LIBELLE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="3" y="43" width="261" height="21" uuid="401c40cb-64be-448d-96b3-44c4f432b51c"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Montant en devise : "+new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_DEVISE})+$F{DEV_SYMBOLE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="286" y="43" width="266" height="21" uuid="4af6a7e2-f14c-4960-a6b7-abccb3a01f3f"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Montant en CFA : "+new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_CFA})+$F{DEV_SYMBOLE}]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement x="286" y="25" width="268" height="20" uuid="84e95ff7-19ba-442a-b359-75d84e85a29a"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Source de Financement : "+$F{SOU_LIBELLE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement x="1" y="236" width="553" height="1" uuid="6a08fd94-5cef-47f3-be9d-308a9f9f9500"/>
+			</line>
+			<frame>
+				<reportElement x="1" y="293" width="554" height="117" uuid="60ba178e-ffc3-4812-b4b5-f7ad4854f619"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="179" y="0" width="201" height="21" uuid="dccce8b5-6202-4232-8815-1c593e420ecb"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[DATES PREVISIONNELLES]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="4" y="25" width="169" height="21" uuid="0e1f276a-be75-40da-8dfe-104b11e40c4c"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Transmission DC :"+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_TRANS})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="4" y="47" width="169" height="21" uuid="ef6fd5b2-fd86-4c95-9236-72331891ff43"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Validation DC par CPMP : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_APPROB_DMP})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="4" y="69" width="169" height="21" uuid="24251679-93ca-4096-9088-2f3da2dc99b2"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Validation DC Bailleur : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_APPROB_BAIL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="3" y="90" width="170" height="21" uuid="5945402c-fa3b-44d4-9831-2a3a69abe59b"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Publication : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_AVIS_AO_PUBLICAT})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="178" y="92" width="182" height="21" uuid="495bc157-ee18-4cd3-9501-e782bd10ea10"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Offre Financière : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OF})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="178" y="70" width="182" height="21" uuid="02ab259c-3ea4-4e1a-997a-38fa5e26767c"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Offre Technique : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OT})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="178" y="48" width="182" height="21" uuid="ef92b340-dbd0-4bb8-a472-151f673b6379"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Signature de l'AC : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="177" y="26" width="183" height="21" uuid="6bd31365-b752-4883-a323-5764123d2ed4"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Signature Attributaire : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="364" y="26" width="187" height="21" uuid="a5baf6bb-bb59-467d-89a0-ed4fbdaa8bfb"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Approbation Bailleur  : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_ATT_APPRO_BAIL})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="364" y="48" width="187" height="21" uuid="26d94156-228f-45ea-a489-081414c493f5"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Négociation : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_NEGOCIATION})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="364" y="70" width="187" height="21" uuid="b0896d27-8185-44a9-887d-1e493b8f70d7"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Début d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_DEBUT})]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="365" y="92" width="186" height="21" uuid="0932ea87-89c7-419a-89fd-7c1e49012684"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Fin d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_FIN})]]></textFieldExpression>
+				</textField>
+			</frame>
+			<line>
+				<reportElement x="2" y="314" width="553" height="1" uuid="a0ae63c3-482e-432b-bcbc-0b620f77fcb0"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<staticText>
+				<reportElement x="435" y="2" width="39" height="14" uuid="2958e2bf-2ec3-408e-8057-9a24cdc8afa4"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Edité le :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="478" y="2" width="74" height="14" uuid="5caad644-910a-4052-9ab8-86f3ee919747"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[TODAY( )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="2" width="49" height="13" uuid="51bd82be-eac5-40d3-8c79-06cda7a614cc"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" / "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

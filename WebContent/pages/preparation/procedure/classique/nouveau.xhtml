@@ -1,0 +1,926 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+      <h3>
+       #{controleController.libelle} 
+        <!-- <small>Nouveau AGPM </small> -->
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{pgpmAcController.renderPage('pgpmAc1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
+           <!--  #{controleController.libelle1}  -->
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     
+     <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+     
+      <div class="row">
+     <div class="col-md-12">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN #{controleController.type}</div></div>
+         </div>
+         <div class="box-body">
+          <div class="row">
+	            <div class="col-md-2">
+	             <label for="gestion1" class="col-sm-5 control-label">Gestion<span style="color:red;"> *</span></label>
+	              <div class="col-sm-6">
+		                    <p:selectOneMenu id="gestion1" value="#{pgpmAcController.gesCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{pgpmAcController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+	               </div>
+	            </div>
+	            <div class="col-md-10">
+	           <div class="form-group">
+		                  <label for="mini" class="col-sm-1 control-label">Ministère <span style="color:red;"> *</span></label>
+		                  <div class="col-sm-11">
+		                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="mini" readonly="true" style="width: 100%" />
+		                  </div>
+		                </div>
+	            </div> 
+	            
+	            
+	            <div class="col-md-1">
+	            </div>
+	            
+	            <div class="col-md-11">
+	           <div class="form-group">
+	           
+	           
+		                  <label for="mini3" class="col-sm-2 control-label">Autorité Contractante <span style="color:red;"> *</span></label>
+		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
+		                  <div class="col-sm-9">
+		                   <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{pgmAcController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{pgmAcController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                
+		                  <div class="col-sm-1">
+		                
+                          <!-- Bouton Enregistrer -->
+		                  </div>
+		                </div>
+	            </div> 
+	      </div>
+	      
+	      
+	   
+	      
+         </div>
+               </div>
+      </div>
+      
+     <div class="col-md-12">
+          <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                <div class="col-md-10 "><div  style="color: #fff">SAISIE D'UNE OPERATION</div></div>
+                <div class="col-md-2 ">
+                <p:commandLink oncomplete="PF('uploaddlg').show()"  data-toggle="modal" data-target="#modal-reglement" rendered="#{pgpmAcController.etatDossier}" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Joindre Document</span>
+		        </p:commandLink>
+		             </div>  
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="col-md-6">
+             <div class="form-group ">
+	                <label for="operations" class="col-sm-3 control-label">AGPM ?<span style="color:red;"> *</span></label>
+	                 <div class="col-sm-3">
+                     <p:selectOneRadio id="operations" value="#{pgpmAcController.sit}">
+                     <p:ajax  listener="#{pgpmAcController.checkSituation()}" update="gnl"></p:ajax>
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                  </div>
+                   <div class="col-sm-5">
+                   <h:panelGroup  rendered="#{pgpmAcController.etatAgpm}">
+                    <table>
+                 <tr>
+                 <td width="100%"><p:inputText  type="text" value="#{pgpmAcController.recupAgpm.agpCommentaire}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+                 <td>
+                  <p:commandLink  oncomplete="PF('agpmDlg').show()" action="#{pgpmAcController.chargeAgpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+								<i class="fa fa-search-plus"></i>
+								</p:commandLink>
+                 </td>
+                
+                 </tr>
+                </table>
+                </h:panelGroup>
+                  </div>
+	                </div>
+	                 <div class="form-group">
+                  <label for="relalisation" class="col-sm-3 control-label">Réalisation envisagée<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{pgpmAcController.detailPlan.gpgObjet}" id="relalisation" style="width: 100%" />
+                  </div>
+              </div>	
+               <div class="form-group">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="typMa1" type="text" value="#{pgpmAcController.reucpMarche.tymCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="typMa2" type="text" value="#{pgpmAcController.reucpMarche.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                
+                <h:panelGroup rendered="#{controleController.selectLoveModePgpm}" >
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="modeP1" type="text" value="#{pgpmAcController.recupModePassation.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('passationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="modeP2" type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{controleController.selectLoveModePgspm}" >
+                 <div class="form-group">
+                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="modePgs1" type="text" value="#{pgpmAcController.recupModeListe.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('passationPgspmDlg').show()" action="#{pgpmAcController.chargeMode}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="modePgs2" type="text" value="#{pgpmAcController.recupModeListe.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
+                
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Date de Lancement<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td>
+		                  <p:calendar id="oftT" pattern="dd/MM/yyyy" value="#{pgpmAcController.detailPlan.gpgDateDao}" style="width: 100%" >
+		                   </p:calendar>
+		                 </td>
+		                 
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                        
+            </div>
+            <div class="col-md-6">
+            
+           
+                
+                <!-- Part reservée aux PME  -->
+                
+                 <div class="form-group">
+                  <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;"> *</span></label>
+
+                  <div class="col-sm-9">
+                     <p:selectOneRadio value="#{pgpmAcController.detailPlan.gpgPartiePmePmi}" id="part">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                  </div>
+                </div> 
+                
+                
+                 <div class="form-group">
+                  <label for="observation" class="col-sm-3 control-label">Observation</label>
+
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="5" cols="33" styleClass="form-control" value="#{pgpmAcController.detailPlan.gpgCommentaire}"  id="observation" style="width: 100%" />
+                    
+                  </div>
+                </div>	
+            </div>
+            </div>
+            <!-- /.box-body -->
+            
+              <div class="box-footer">
+              
+              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	                </div>
+          </div>
+     </div>
+     </div>
+      <div class="row">
+   <div class="col-md-8">
+    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+         <div class="col-md-10 "><div  style="color: #fff">LISTE DES FINANCEMENTS</div></div> 
+         <div class="col-md-2 ">
+			 <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+			</p:commandLink>
+		</div>
+        </div>
+        <div class="box-body">
+               <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.listeFinancement}" scrollable="true" scrollHeight="90"  emptyMessage="Aucun financement enregistré">
+         				<p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipTypeFinance}" />
+				        </p:column>
+         				
+         				
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
+				        </p:column>
+
+				         <p:column headerText="Montant" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipMontantCfa}" />
+				        </p:column>
+				         <p:column headerText="Actions" styleClass="col-sm-1">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancement}" title="Supprimer" update="gnl">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.selectFinance}" />
+			                </p:commandLink>
+				        </p:column>
+				        
+                 </p:dataTable>   
+                       
+            </div>
+        </div>
+   </div>
+    <div class="col-md-4">
+     <div class="box box-success box-solid">
+        <div class="box-header with-border">
+                <div class="col-md-12 "><div  style="color: #fff"> LISTE DES OPERATIONS <h:panelGroup rendered="#{controleController.nbrepgpm}"> <span  style="color: #fff; font-size:18px; font-weight:bold">( #{pgpmAcController.nbrePgpm} Opération(s) )</span></h:panelGroup> <h:panelGroup rendered="#{controleController.nbrepgspm}"> <span  style="color: #fff; font-size:18px; font-weight:bold">( #{pgpmAcController.nbrePgspm} Opération(s))</span></h:panelGroup> </div></div> 
+            </div>
+            <div class="box-body">
+                 <p:dataTable id="tpgpm" rendered="#{controleController.tpgpm}" styleClass ="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.objetList}" scrollable="true" scrollHeight="100" emptyMessage="Aucun détail enregistré">
+                   <p:column headerText="Operations" styleClass="col-sm-12">
+				            <h:outputText value="#{slctdTb.affGpgObjet}" />
+				        </p:column>
+                 </p:dataTable>
+                  <p:dataTable id="tpgspm" rendered="#{controleController.tpgspm}" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.listPgspm}" scrollable="true" scrollHeight="100" emptyMessage="Aucun détail enregistré">
+                   <p:column headerText="Operations" styleClass="col-sm-12">
+				            <h:outputText value="#{slctdTb.affGpgObjet}" />
+				        </p:column>
+                 </p:dataTable>
+            </div>
+         </div>
+         
+    </div>
+   </div>
+             <table width="100%" >
+                 <tr>
+                 
+                 <td>
+                 <p:commandLink rendered="#{controleController.btn_fermer_saisie_pgpm}" styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{pgpmAcController.fermerPgpm('pgpm1','SAIPGPM')}" update=":content">
+		        <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		         </p:commandLink>
+		          <p:commandLink rendered="#{controleController.btn_fermer_saisie_pgspm}" styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{pgpmAcController.fermerForm('pgspm1','SAIPGSPM')}" update=":content">
+		        <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		         </p:commandLink>
+                 </td>
+                 <td class="pull-right">
+                  <p:commandLink  rendered="#{controleController.btn_edit_pgpm}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{pgpmAcController.imprimerPgpm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PGPM 
+				      </p:commandLink>
+				      
+				       <p:commandLink rendered="#{controleController.btn_edit_pgspm}"  styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{pgpmAcController.imprimerPgspm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PGSPM 
+				      </p:commandLink>
+                 </td>
+               
+                 </tr>
+           </table>
+		  
+		
+    </section>
+    </h:form>
+    
+    
+    <h:form id="dlogOperation" styleClass="form-horizontal">
+	   <p:dialog  widgetVar="operationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-10 "><div  style="color: #fff">NOUVELLE OPERATION</div></div>
+               </div>
+               <div class="box-body">
+              
+               </div>
+               <div class="box-footer">
+               
+               <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e;color:white"  update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+               <p:commandLink action="#{pgpmAcController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('diff').hide()" update=":gnl:finance">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+               </div>
+               </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+     <h:form id="dlogAgpm">
+	        <p:dialog  widgetVar="agpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez l'avis général de passation des marchés">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le code du marché"  > 
+						    <p:ajax event="keyup" update=":dlogAgpm:ndTbleAgpm" listener="#{pgpmAcController.filtreMarche()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleAgpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.agpmList}"
+						  selectionMode="single" rowKey="#{slctdTb.agpId}"
+			               emptyMessage="Aucun Agpm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
+                           <h:commandLink id="agpm" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpm()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.agpId}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
+                           <h:commandLink id="agpm_com" title="Libelle du ministère" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpm()}">				        
+         				  <h:outputText value="#{slctdTb.agpCommentaire}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+						
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+
+    <h:form id="dlogMar">
+	        <p:dialog  widgetVar="marchesDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le type du marché">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le code du marché"  > 
+						    <p:ajax event="keyup" update=":dlogMar:ndTbleMar" listener="#{pgpmAcController.filtreMarche()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeTypeMarches}"
+						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
+			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-1" >
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+         				  <h:outputText value="#{slctdTb.tymCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogPas">
+	        <p:dialog  widgetVar="passationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passtion">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreModePassation}"  class="gui-input"  placeholder="Saisir le mode de Passtion"  > 
+						     <p:ajax event="keyup" update=":dlogPas:ndTblePass" listener="#{pgpmAcController.filtreModePassation()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTblePass" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeModePassation}"
+						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
+			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-1" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.mopCode}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
+                                </h:commandLink>
+				        </p:column>
+				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
+         				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
+                                </h:commandLink>
+				        </p:column>
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+      <h:form id="dlogPasMode">
+	        <p:dialog  widgetVar="passationPgspmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passation">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreModePassation}"  class="gui-input"  placeholder="Saisir le mode de Passation"  > 
+						     <p:ajax event="keyup" update=":dlogPasMode:ndTblePgspm" listener="#{pgpmAcController.filtreModePassation()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeMode}"
+						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
+			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-1" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.mopCode}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.passationListe}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.passationListe}" />
+                                </h:commandLink>
+				        </p:column>
+				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2">				        
+         				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.passationListe}" />
+                                </h:commandLink>
+				        </p:column>
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    <h:form id="finlog" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Ajouter un nouveau Financement">
+			<div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+				<div class="contentpanel">
+				     <div class="form-group ">
+	                  <label for="xbail" class="col-sm-1 control-label"><b>Source</b></label>
+	                  <div class="col-sm-10">
+	               <p:selectOneMenu value="#{pgpmAcController.sourfin}" id="xsource" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			          <f:selectItem  itemLabel="Choisir la source de Financement.." itemValue="empty" />  
+			         <f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+                     <f:selectItem itemLabel="ETAT" itemValue="Etat" />	
+                     <p:ajax listener="#{pgpmAcController.checkBailleur()}" update=":finlog:idBail" />			   				   
+       		       </p:selectOneMenu>
+	                  </div>
+	                </div>
+				
+					<h:panelGroup id="idBail"> 
+	                <h:panelGroup rendered="#{pgpmAcController.selectBailleur}"> 
+					 <div class="form-group ">
+	                  <label for="bail" class="col-sm-1 control-label"><b>Bailleur</b></label>
+	                  <div class="col-sm-11">
+	                   <p:selectOneMenu value="#{pgpmAcController.baiCode}" id="bail" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
+			       <f:selectItems value="#{pgpmAcController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                <div class="form-group ">
+	                  <label for="source" class="col-sm-1 control-label"><b>Type</b></label>
+	                  <div class="col-sm-11">
+	                    <p:selectOneMenu value="#{pgpmAcController.souCode}" id="source" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
+			       <f:selectItems value="#{pgpmAcController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                <div class="form-group ">
+	                  <label for="dev" class="col-sm-1 control-label"><b>Devise</b></label>
+	                  <div class="col-sm-11">
+	                      <p:selectOneMenu value="#{pgpmAcController.devCode}" id="dev" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir la devise.." itemValue="empty" />  
+			       <f:selectItems value="#{pgpmAcController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="montDev" class="col-sm-1 control-label"><b>Montant en Devise</b></label>
+	                  <div class="col-sm-11">
+	                    <p:inputText type="text" value="#{pgpmAcController.newFinancement.fipMontantDevise}" id="montDev" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" update="finlog:montDev" />
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="mont" class="col-sm-1 control-label"><b>Montant FCFA</b></label>
+	                  <div class="col-sm-11">
+	                    <p:inputText type="text" value="#{pgpmAcController.newFinancement.fipMontantCfa}" id="mont" styleClass="form-control" style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" update="finlog:mont" />
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                
+	              
+	                 <div class="row">
+                <div class="pull-right ">
+			            <p:commandLink action="#{pgpmAcController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+              </div>
+                </div>
+	           </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+     <h:form id="uplog" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="uploaddlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Joindre un document">
+				<div class="contentpanel">
+					
+	             <div class="row">
+              <p:messages id="message2" showDetail="false" autoUpdate="true"  closable="true"/>
+								<div class="col-xs-12 col-sm-12">
+								<p:fileUpload fileUploadListener="#{pgpmAcController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":uplog:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
+								</div>
+              </div>
+              <br/>
+	            <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES DOSSIERS DU PGPM N°</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{pgpmAcController.dossListe}" emptyMessage="Aucun Document enrégistré">
+	           <p:column headerText="Nom du document " styleClass="">
+	            <h:outputText value="#{doss.dpgCommentaire}" />
+	        </p:column>
+	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
+	        
+				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeDossier}" title="Supprimer" update="uplog:tabDossier">
+                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                   <f:setPropertyActionListener value="#{doss}" target="#{pgpmAcController.selectedDossier}" />
+                </p:commandLink>
+ 	        </p:column>
+	    </p:dataTable>    
+	            </div>
+	            </div>   
+	                
+	                
+	           </div>
+      </p:dialog>
+    </h:form>
+    
+    
+      <h:form id="dlogMin">
+	        <p:dialog  widgetVar="ministereDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la structure">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreStructure}"  class="gui-input"  placeholder="Saisir le code de la structure"  > 
+						    <p:ajax event="keyup" update=":dlogMin:ndTbleMin" listener="#{pgpmAcController.filtreStructure()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMin" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeStructure}"
+						  selectionMode="single" rowKey="#{slctdTb.strCode}"
+			               emptyMessage="Aucune Structure enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-1" >
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMinisterePgpmCpmp()}" update="gnl:ministre">				        
+         				  <h:outputText value="#{slctdTb.strCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.structure}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="Libelle de la structure" style="font-size:18px;"  action="#{pgpmAcController.onSelectMinisterePgpmCpmp()}">				        
+         				  <h:outputText value="#{slctdTb.strLibelleLong}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.structure}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+         <h:form id="dlogAC">
+	        <p:dialog  widgetVar="autoriteDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmCpmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmCpmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogDMP">
+	        <p:dialog  widgetVar="DMPDlog" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

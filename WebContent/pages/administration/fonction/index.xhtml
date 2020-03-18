@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+      <ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+<h:form id="gnl">	
+ <section class="content-header">
+      <h1>
+        Fonctions
+        <small>Liste des fonctions</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active">Fonctions</li>
+      </ol>
+    </section>
+  
+    <section class="content">
+     <div class="box"></div>
+		<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>	
+			
+             <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+            <div class="row">
+            <div class="col-md-12">
+            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouvelle Fonction" data-toggle="tooltip" action="#{fonctionController.renderPage('fon2')}"  update=":content">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"> Nouvelle Fonction</span>
+				</p:commandLink>
+				
+				<label >
+                      <p:inputText type="text" value="#{fonctionController.filterCode}"  placeholder="saisir le libelle de la fonction">
+                      <p:ajax event="keyup" listener="#{fonctionController.filtrefonction()}" update=":gnl:ndTble"> </p:ajax>
+                      </p:inputText> 	
+					</label>
+            </div>
+            </div>
+            
+              
+
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{fonctionController.fonctionListe}" emptyMessage="Aucune fonction enregistrée" rows="10" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
+
+         				<p:column headerText="Code" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.fonCod}"/>
+				        </p:column>
+				        <p:column headerText="Type" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.TTypeFonction.tyfLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Libellé" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.fonLibelle}"/>
+				        </p:column>
+				       
+                      <p:column headerText="Actions" width="2%">
+				              
+				              <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"
+				              action="#{fonctionController.renderPage('fon3')}" title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{fonctionController.slctdTd}" />
+                                </p:commandLink>
+                            
+                                 
+
+				              <p:commandLink  class="btn btn-xs btn-danger" style="margin-left:5px;"
+				              action="#{fonctionController.delete()}" title="Suprimer" update=":gnl">
+                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{fonctionController.slctdTd}" />
+                                   <p:confirm header="Confirmation" message="Confirmez vous la supression de la fonction #{slctdTb.fonCod} : #{slctdTb.fonLibelle} ?" icon="ui-icon-alert" />                           
+                                </p:commandLink>
+                              
+				         </p:column>   
+				         
+        <f:facet name="paginatorTopLeft">
+            <p:commandButton type="button" icon="fa fa-sync" />
+        </f:facet>
+ 
+        <f:facet name="paginatorBottomRight">
+            <p:commandButton type="button" icon="fa fa-cloud-upload" />
+        </f:facet>
+    </p:dataTable>
+ 
+ <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+ 
+         
+          
+         
+          
+       </section>
+         
+
+</h:form>
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    </ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,38 @@
+
+
+.input-group-addon
+{
+    background-color:#00a65a;
+    border-color:#00a65a;
+    color: rgb(255, 255, 255);
+}
+.form-control:focus
+{
+    background-color:#00a65a;
+    border-color:#00a65a;
+    color: rgb(255, 255, 255);
+}
+.form-signup input[type="text"],.form-signup input[type="password"] { border: 1px solid #00a65a; }
+
+.armoirie{
+	margin-bottom: 40px;
+	
+}
+.spacer{
+	margin-top: 120px;
+}
+.test{
+	margin-top: 30px;
+	margin-left: 585px;
+}
+.copy{
+	margin-left: 650px;
+	margin-top: 30px;
+}
+.aa{
+	width: 100px;
+}
+.content{
+	width: 260px;
+	margin-left:570px;
+}

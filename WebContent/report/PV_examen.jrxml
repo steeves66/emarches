@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-03-16T17:38:51 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_examen" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e45627bb-1d24-49e7-b8b1-f0c236dd5665">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#FAFBFC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="correction" uuid="c592446a-b27f-46c5-b88c-8fdd7e1707ee">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select rownum as pv_id, pv.*
+ from v_etat_pv_correction pv
+where pv.dac_code = $P{param_code_1}]]>
+		</queryString>
+		<field name="PV_ID" class="java.math.BigDecimal"/>
+		<field name="DAC_CODE" class="java.lang.String"/>
+		<field name="DCO_TITRE" class="java.lang.String"/>
+		<field name="DCO_LIBELLE" class="java.lang.String"/>
+		<field name="DCO_PID_CODE" class="java.math.BigDecimal"/>
+		<field name="DCO_PRESENTE" class="java.lang.String"/>
+		<field name="DCO_CONFORME" class="java.lang.String"/>
+		<field name="DCO_OBSERVATION" class="java.lang.String"/>
+		<field name="DCO_RESPO" class="java.lang.String"/>
+		<field name="TPI_LIBELLE" class="java.lang.String"/>
+		<field name="STR_CODE" class="java.lang.String"/>
+		<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="param_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_code_1" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select rownum as cor_id ,dc.dac_code,dc.dac_objet,cs.*,st.str_code,st.str_libelle_long, f.fon_cod || ':'|| f.fon_libelle AC
+from t_dac_specs dc, t_correction_dac cs, t_fonction f, t_structure st
+where dc.dac_code = cs.cor_dac_code
+and dc.dac_fon_cod_ac = f.fon_cod
+and dc.dac_str_code = st.str_code
+and cs.cor_dac_code  = $P{param_code_1}]]>
+	</queryString>
+	<field name="COR_ID" class="java.math.BigDecimal"/>
+	<field name="DAC_CODE" class="java.lang.String"/>
+	<field name="DAC_OBJET" class="java.lang.String"/>
+	<field name="COR_NUM" class="java.math.BigDecimal"/>
+	<field name="COR_DAC_CODE" class="java.lang.String"/>
+	<field name="COR_LIEBLLE" class="java.lang.String"/>
+	<field name="COR_DTE_SAISI" class="java.sql.Timestamp"/>
+	<field name="COR_OPE_MATRICULE" class="java.lang.String"/>
+	<field name="COR_RESULTAT" class="java.lang.String"/>
+	<field name="COR_OBSERVATION" class="java.lang.String"/>
+	<field name="COR_RESULTAT_RESPO" class="java.lang.String"/>
+	<field name="COR_OBSERVATION_RESPO" class="java.lang.String"/>
+	<field name="COR_FONCOD_VALID" class="java.lang.String"/>
+	<field name="STR_CODE" class="java.lang.String"/>
+	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+	<field name="AC" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="156" splitType="Stretch">
+			<staticText>
+				<reportElement x="390" y="19" width="166" height="17" uuid="ca1bf5fd-8bc7-4fa8-aa80-a5ee9ae909f7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Union-Discipline-Travail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="1" width="171" height="17" uuid="29a1d3ef-dd5c-47d7-90c4-40aa814c0992">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[République de Côte d'Ivoire]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="35" width="136" height="14" uuid="af6b4bd7-e825-44d2-b8f7-cb60e0ace039"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[- - - - - - - - - - - - - - - - - - - - -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="411" y="37" width="136" height="14" uuid="21cf5214-2b51-4b78-8323-4500e3f4d12d"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[- - - - - - - - - - - -]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="390" y="84" width="50" height="14" uuid="faf02ae1-67bf-45fb-8c4c-242c453c5c7b"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<text><![CDATA[Abidjan le]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="440" y="84" width="104" height="14" uuid="7dac5b4e-2ef8-4210-89f9-7aafc36e96a6"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(TODAY( ))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="1" width="160" height="36" uuid="474ea7a2-aa28-4963-b687-45702525820e"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
+]]></text>
+			</staticText>
+			<rectangle radius="8">
+				<reportElement mode="Opaque" x="80" y="122" width="400" height="21" backcolor="#FA9B3C" uuid="322a370e-3082-45b3-8dae-c20e2f3a5590"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="80" y="120" width="400" height="26" forecolor="#FFFFFF" uuid="47b35ae4-0aa3-4bf7-a9a0-1c2f7bd90e21"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["SAISIE DU PV D'EXAMEN DAO"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="208" y="13" width="152" height="51" uuid="3b5df6ea-8841-4047-bcb7-fb3b98915613"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="47" y="49" width="43" height="24" uuid="6625c124-baa0-48e6-9266-65d0804d9371"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="1" y="76" width="139" height="19" uuid="0dc0a883-ba4e-406e-b032-6f4d4edc1abc"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direction des Marchés Publics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="90" width="87" height="21" uuid="84567330-9229-4732-bc48-5bdc982ac05b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-MarchesPublics]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="446">
+			<rectangle>
+				<reportElement x="0" y="8" width="561" height="102" uuid="df261a78-0109-40e0-9276-e0e21ac3fc29"/>
+			</rectangle>
+			<line>
+				<reportElement x="0" y="37" width="562" height="1" uuid="eb63b40a-2d17-4581-b7ac-8c7801bed07e"/>
+			</line>
+			<line>
+				<reportElement x="0" y="81" width="562" height="1" uuid="f2a45cba-fbbb-45f4-a992-211b7aa30e52"/>
+			</line>
+			<line>
+				<reportElement x="126" y="8" width="1" height="103" uuid="8e9444d2-f392-4f61-b8bb-309824d73314"/>
+			</line>
+			<line>
+				<reportElement x="257" y="82" width="1" height="29" uuid="e6a24ee6-836c-4f29-af54-9c128fc402fd"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="9" width="121" height="26" uuid="e5e1475b-5d9c-4a94-8ca5-ef7b5f7f8fff"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[N° DAO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="126" height="41" uuid="1b07e237-37d8-45a3-bded-bbe9a4bf243c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Objet de l' A.O]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="82" width="122" height="26" uuid="eaca4b56-bfdd-4260-a61d-be73ca91dbc4"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Code de l'AC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="128" y="83" width="129" height="26" uuid="9ef50651-d316-46a5-81cd-9c194d7c877a"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Structure]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="126" y="37" width="432" height="44" uuid="b31f34e5-9bd3-49c9-b0be-504acad013db"/>
+				<box topPadding="4" leftPadding="5"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Serif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DAC_OBJET}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="257" y="81" width="303" height="27" uuid="3c3c45c0-e6b0-4225-939d-6df588e712c3"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AC} +" /  "+$F{STR_LIBELLE_LONG}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="0" y="115" width="561" height="60" uuid="e62fd16a-c0e1-4819-8620-c49e5c4ebce6">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="correction" uuid="741f268d-3e86-449a-8b2a-2ab254385601">
+						<datasetParameter name="param_code_1">
+							<datasetParameterExpression><![CDATA[$F{DAC_CODE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="50" uuid="273b6ebb-a420-40f6-ba23-96346357e816">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="5082e3b5-090f-4163-a763-ba2ba9e0e440"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[N°]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="30" uuid="a88c68a2-1117-4ce8-96e3-b1f646357c3d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{PV_ID}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="174" uuid="89717229-fec1-48d9-aa2b-07977c8d3c52">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="174" height="30" uuid="340315c8-1c8b-4c17-ac7f-aa2eabc3c06b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[PIECE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="174" height="30" uuid="5f6d5c7b-dbcc-415d-ad45-a9229dcebed7"/>
+								<box leftPadding="7"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TPI_LIBELLE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="1e4ac2e7-f414-4fde-87bc-b50339389d87">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="76" height="30" uuid="98d605ac-6481-4cca-9040-87ddc69ca5d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Présente]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="76" height="30" uuid="ece530d7-55d1-4097-a6d4-65d86195a372"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DCO_PRESENTE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="ee56c89a-bb59-47e2-bbf9-357eeb30ba61">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="33039836-b08b-4bd7-aa49-148ba48dab98"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Conforme]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="70" height="30" uuid="9a65a9f0-5560-403a-b295-8b95118714de"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DCO_CONFORME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="191" uuid="622c5526-92c1-4f94-9750-8a5bd2a05040">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="191" height="30" uuid="45b32a32-47be-4d88-9b81-e65f3af81888"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[Observations]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="191" height="30" uuid="7f910a88-e084-4efa-9b19-cc37156f5206"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DCO_OBSERVATION}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField isBlankWhenNull="true">
+				<reportElement x="128" y="10" width="433" height="25" uuid="076781cc-823c-4137-b602-1a6b3724d87b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{COR_DAC_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="424" width="70" height="21" uuid="58822937-f915-44a2-a39e-1a590655edb4"/>
+				<textElement>
+					<font size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Résultat : ]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="70" y="424" width="150" height="21" uuid="8fb14b79-0140-428a-9ab8-d4323fd9ec67"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["DAO "+$F{COR_RESULTAT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="18" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="303" y="0" width="269" height="14" uuid="bb98650c-d88a-40b7-8f8a-21dce5ce31ad"/>
+				<textElement>
+					<font fontName="SansSerif" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Edité par  " +$F{COR_FONCOD_VALID} +" le "+new SimpleDateFormat("dd/MM/yyyy").format(TODAY( ))]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

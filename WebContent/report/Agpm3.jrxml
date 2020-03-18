@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2019-11-29T07:32:55 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Agpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="71977765-8d50-4230-b434-5e51d55cae97">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<subDataset name="Objectifs" uuid="7f151784-04e5-453a-81da-638127252ab9">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code" class="java.lang.Long"/>
+		<queryString language="SQL">
+			<![CDATA[select DISTINCT  a.agp_id,a.agp_pro_id,ob.obg_pro_id,p.pro_id
+,ob.obg_libelle_court, ob.obg_libelle_long
+from t_agpm a, t_ministere m, t_projet p, t_fonction f, t_financement fi, t_bailleur b, t_source_financement sf, t_objectif_gen ob, t_composante co
+, t_reglementation r1, t_reglementation r2, t_besoin be, t_declarant de
+where a.agp_min_code = m.min_code
+and a.agp_pro_id = p.pro_id
+and a.agp_fon_cod = f.fon_cod
+and p.pro_id = fi.fin_pro_id
+and a.agp_id = fi.fin_agp_id
+and b.bai_code = fi.fin_bai_code
+and sf.sou_code = fi.fin_sou_code
+and p.pro_id = ob.obg_pro_id(+)
+and p.pro_id = co.com_pro_id(+)
+and p.pro_reg_id = r1.reg_id
+and p.pro_id = be.bes_pro_id(+)
+and be.bes_reg_id = r2.reg_id(+)
+and a.agp_pro_id = $P{param_code}]]>
+		</queryString>
+		<field name="AGP_ID" class="java.lang.Long"/>
+		<field name="AGP_PRO_ID" class="java.lang.Long"/>
+		<field name="OBG_PRO_ID" class="java.math.BigDecimal"/>
+		<field name="PRO_ID" class="java.math.BigDecimal"/>
+		<field name="OBG_LIBELLE_COURT" class="java.lang.String"/>
+		<field name="OBG_LIBELLE_LONG" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="Composante" uuid="5a3782f6-cbaa-4756-a0eb-e8a156016d3e">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code" class="java.lang.Long">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[select DISTINCT a.agp_id,a.agp_pro_id,a.agp_pro_id,p.pro_id,
+co.com_id,co.com_libelle_long
+from t_agpm a, t_ministere m, t_projet p, t_fonction f, t_financement fi, t_bailleur b, t_source_financement sf, t_objectif_gen ob, t_composante co
+, t_reglementation r1, t_reglementation r2, t_besoin be, t_declarant de
+where a.agp_min_code = m.min_code
+and a.agp_pro_id = p.pro_id
+and a.agp_fon_cod = f.fon_cod
+and p.pro_id = fi.fin_pro_id
+and a.agp_id = fi.fin_agp_id
+and b.bai_code = fi.fin_bai_code
+and sf.sou_code = fi.fin_sou_code
+and p.pro_id = ob.obg_pro_id(+)
+and p.pro_id = co.com_pro_id(+)
+and p.pro_reg_id = r1.reg_id
+and p.pro_id = be.bes_pro_id(+)
+and be.bes_reg_id = r2.reg_id(+)
+and a.agp_pro_id =  $P{param_code}]]>
+		</queryString>
+		<field name="AGP_ID" class="java.lang.Long"/>
+		<field name="AGP_PRO_ID" class="java.lang.Long"/>
+		<field name="COLUMN_3" class="java.math.BigDecimal"/>
+		<field name="PRO_ID" class="java.lang.Long"/>
+		<field name="COM_ID" class="java.lang.Long"/>
+		<field name="COM_LIBELLE_LONG" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="param_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_code" class="java.lang.Long">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select a.agp_id,a.agp_pro_id,a.agp_mode_passation,m.min_libelle, p.pro_id,p.pro_titre,p.pro_type_projet, f.fon_libelle,a.agp_ges_code,p.pro_libelle,fi.fin_numero_accord,b.bai_libelle,sf.sou_libelle,fi.fin_montant_cfa
+,p.pro_description,ob.obg_libelle_court, r1.reg_libelle_court,a.agp_type_dao,be.bes_libelle, r2.reg_libelle_court
+, de.dec_organ_exec_libelle,de.dec_organ_exec_adresse,de.dec_pers_nom_prenom,de.dec_pers_fonction,de.dec_localisation,de.dec_numero_porte,de.dec_bp,de.dec_telephone,de.dec_email
+from t_agpm a, t_ministere m, t_projet p, t_fonction f, t_financement fi, t_bailleur b, t_source_financement sf, t_objectif_gen ob, t_composante co
+, t_reglementation r1, t_reglementation r2, t_besoin be, t_declarant de
+where a.agp_min_code = m.min_code
+and a.agp_pro_id = p.pro_id
+and a.agp_fon_cod = f.fon_cod
+and p.pro_id = fi.fin_pro_id
+and a.agp_id = fi.fin_agp_id
+and b.bai_code = fi.fin_bai_code
+and sf.sou_code = fi.fin_sou_code
+and p.pro_id = ob.obg_pro_id(+)
+and p.pro_id = co.com_pro_id(+)
+and p.pro_reg_id = r1.reg_id
+and p.pro_id = be.bes_pro_id(+)
+and be.bes_reg_id = r2.reg_id(+)
+and a.agp_dec_id = de.dec_id
+and a.agp_pro_id = $P{param_code}]]>
+	</queryString>
+	<field name="AGP_ID" class="java.lang.Long"/>
+	<field name="AGP_PRO_ID" class="java.lang.Long"/>
+	<field name="AGP_MODE_PASSATION" class="java.lang.String"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="PRO_ID" class="java.math.BigDecimal"/>
+	<field name="PRO_TITRE" class="java.lang.String"/>
+	<field name="PRO_TYPE_PROJET" class="java.lang.String"/>
+	<field name="FON_LIBELLE" class="java.lang.String"/>
+	<field name="AGP_GES_CODE" class="java.math.BigDecimal"/>
+	<field name="PRO_LIBELLE" class="java.lang.String"/>
+	<field name="FIN_NUMERO_ACCORD" class="java.lang.String"/>
+	<field name="BAI_LIBELLE" class="java.lang.String"/>
+	<field name="SOU_LIBELLE" class="java.lang.String"/>
+	<field name="FIN_MONTANT_CFA" class="java.math.BigDecimal"/>
+	<field name="PRO_DESCRIPTION" class="java.lang.String"/>
+	<field name="OBG_LIBELLE_COURT" class="java.lang.String"/>
+	<field name="REG_LIBELLE_COURT" class="java.lang.String"/>
+	<field name="AGP_TYPE_DAO" class="java.lang.String"/>
+	<field name="BES_LIBELLE" class="java.lang.String"/>
+	<field name="COLUMN_20" class="java.lang.String"/>
+	<field name="DEC_ORGAN_EXEC_LIBELLE" class="java.lang.String"/>
+	<field name="DEC_ORGAN_EXEC_ADRESSE" class="java.lang.String"/>
+	<field name="DEC_PERS_NOM_PRENOM" class="java.lang.String"/>
+	<field name="DEC_PERS_FONCTION" class="java.lang.String"/>
+	<field name="DEC_LOCALISATION" class="java.lang.String"/>
+	<field name="DEC_NUMERO_PORTE" class="java.lang.String"/>
+	<field name="DEC_BP" class="java.lang.String"/>
+	<field name="DEC_TELEPHONE" class="java.lang.String"/>
+	<field name="DEC_EMAIL" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="802" splitType="Stretch">
+			<rectangle>
+				<reportElement x="-8" y="0" width="570" height="801" uuid="3b4c6f2b-3a00-4977-8acb-374e817552a1"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double" lineColor="#F88B2E"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="347" y="9" width="206" height="21" uuid="ee23ddbb-348f-4d6e-955a-4008b3f4847d">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DE COTE D'IVOIRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="351" y="28" width="206" height="21" uuid="8149867f-d821-4190-ba99-0ce84f6f02cc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Times New Roman" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Union-Discipline-Travail]]></text>
+			</staticText>
+			<image>
+				<reportElement x="401" y="68" width="95" height="81" uuid="4b8424da-a342-4d93-9f3f-6ab64196f691"/>
+				<imageExpression><![CDATA[$P{param_image}+"armoiries.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="30" y="274" width="500" height="122" uuid="e2ec768e-5f8b-4ee5-8308-5b694b2b0285"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double" lineColor="#F88B2E"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="32" y="277" width="495" height="120" uuid="5cb06a24-1aef-4e95-b7e6-46b0cee9e76b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVIS GENERAL DE PASSATION DES MARCHES (AGPM)]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="29" y="413" width="500" height="52" uuid="544913f0-78ce-46fc-a511-380d088a0bf7"/>
+				<textElement verticalAlignment="Top">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PROJET  DE "+$F{PRO_TITRE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="-2" y="10" width="322" height="40" uuid="73e6aeaf-e26d-4393-b147-e32dad04eed8"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MIN_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="70" y="53" width="159" height="1" uuid="d5308370-6853-420f-8172-ed4a7685a7bd"/>
+			</line>
+			<textField>
+				<reportElement x="347" y="754" width="173" height="33" uuid="9cc764c1-6629-43cd-ad25-940f2f0e626b"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AGP_GES_CODE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="7" y="751" width="116" height="36" uuid="4b245b2b-726d-40a7-89e4-8c35675af846"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GESTION]]></text>
+			</staticText>
+			<break>
+				<reportElement x="0" y="790" width="98" height="1" uuid="f8dc2d5f-7af4-471d-8593-532903cd5e48"/>
+			</break>
+		</band>
+		<band height="802">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="19" y="6" width="511" height="30" uuid="ef28fbe9-c6bc-4b75-bf4a-c8c1c9ae0c05"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVIS GENERAL DE PASSATION DES MARCHES]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="23" y="40" width="505" height="36" uuid="aed0f5d9-6bd1-435d-94d3-8e622e71a708"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PROJET  DE "+$F{PRO_TITRE}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="19" y="38" width="511" height="41" backcolor="#D6D2D2" uuid="d0c3bf73-0778-4181-a7e8-b05e3f8b3f2b"/>
+			</rectangle>
+			<textField>
+				<reportElement x="23" y="39" width="505" height="36" uuid="c25d9a80-d8e9-4be3-8705-5631ff970cc6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PROJET  DE "+$F{PRO_TITRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="82" width="459" height="21" uuid="174d00e3-d920-4322-b74f-25e17cc74554"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FIN_NUMERO_ACCORD}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="120" width="551" height="40" uuid="4816f631-8fba-4eed-a144-936619f72e0f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1. Le Gouvernement de la République de Côte d’Ivoire a obtenu de "+$F{BAI_LIBELLE}+" un "+$F{SOU_LIBELLE} +" d'un montant "+$F{FIN_MONTANT_CFA} +" , pour financer "+$F{PRO_TYPE_PROJET}+" de "+$F{PRO_TITRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="34" y="180" width="517" height="44" uuid="dfabd475-52b1-4eb4-bee3-ad39a0d07cc6"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRO_TYPE_PROJET}.equalsIgnoreCase("PRO")? "projet consiste à " : "programme consiste à " +$F{PRO_DESCRIPTION}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="15" y="179" width="19" height="31" uuid="123ea847-67c0-4b24-8f14-765263435259"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[Le]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="179" width="19" height="31" uuid="739372dd-ee02-4f07-9105-429ed07c9794"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[2.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="234" width="19" height="27" uuid="31c00004-884c-4f60-a4d8-ed4d2506192e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[3.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="234" width="150" height="31" uuid="1af3b7c6-f32a-4478-a81d-65bea20c4be0"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[Les objectifs principaux du]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="159" y="234" width="392" height="31" uuid="07a4c72c-445f-43e6-97b9-19f3e468b4ea"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRO_TYPE_PROJET}.equalsIgnoreCase("PRO")? "projet" : "programme " +"se présentent comme suit : "]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="15" y="261" width="536" height="32" uuid="121ed49d-fbe3-4e2a-8464-77578e0d93db"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Objectifs" uuid="933aa8bf-0cca-4e47-89d9-48b7bc5e4552">
+						<datasetParameter name="param_code">
+							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="32" width="536">
+						<textField isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="536" height="32" uuid="112ec924-b9f8-4954-82d2-13d60fe4baf1"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="Times New Roman" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA["-  "+$F{OBG_LIBELLE_LONG}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+			<staticText>
+				<reportElement x="1" y="359" width="13" height="31" uuid="f2eacd2e-c31b-4629-a3e4-09639040ed3e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[4.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="13" y="359" width="17" height="31" uuid="8e69992c-24af-421f-b4e7-520b54c9464e"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[Le]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="32" y="360" width="519" height="31" uuid="07d58c2c-a6d6-4443-bc61-678ffaaec478"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRO_TYPE_PROJET}.equalsIgnoreCase("PRO")? "projet comprend les composantes / volets suivants :" : "programme comprend les composantes / volets suivants : "]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="798" width="100" height="1" uuid="6fdd7065-1203-4636-900d-dbabf6876a11"/>
+			</break>
+			<staticText>
+				<reportElement x="1" y="500" width="13" height="31" uuid="f6101f6c-39a2-4ebb-aba0-a2b638cce40c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[5.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="15" y="501" width="536" height="30" uuid="73e9b6a3-190c-4453-bd6a-8f4471c56405"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Les acquisitions de Biens et de Travaux seront effectuées conformément aux  :"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1" y="541" width="538" height="22" uuid="b05505bd-3925-4c28-9ddb-ababd7f00130"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[La sélection des fournisseurs, entreprises et consultants par nature de marchés se fera comme suit :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="572" width="119" height="17" uuid="d0e77747-d064-46b0-851e-8d61d720d2ed"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[-Marchés de Biens : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="593" width="13" height="31" uuid="bbe99025-5844-41f1-8e3a-c87a6bbdf986"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[6.]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="15" y="593" width="515" height="49" uuid="59516189-0f44-4286-9e3a-d9474f42cb02"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["L'acquisition de  "+$F{BES_LIBELLE}+" se fera sur la base d'une consultation "+$F{AGP_MODE_PASSATION}+"  , telles que définies dans les "+$F{REG_LIBELLE_COURT}+"."]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="650" width="169" height="17" uuid="fbcd619f-9869-4f93-85ad-75641b951a7f"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[-Marchés de Travaux : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="725" width="169" height="17" uuid="50d90cce-0aa7-4f6e-bc02-3d480bc04578"/>
+				<textElement>
+					<font fontName="Times New Roman" size="13"/>
+				</textElement>
+				<text><![CDATA[-Marchés de Services : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="2" y="746" width="515" height="49" uuid="67171857-b7be-4e7b-a0e1-6b16c24fd383"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["La sélection des consultants pour la réalisation des prestations de "+$F{BES_LIBELLE}+" et se fera sur la base de "+$F{COLUMN_20}+"."]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="27" y="398" width="524" height="32" uuid="bb9cb7b2-c7e4-43d1-988a-1db43d4474c2"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Composante" uuid="56bbb5e1-da47-4a21-a013-a84e6d5aa74f">
+						<datasetParameter name="param_code">
+							<datasetParameterExpression><![CDATA[$F{AGP_PRO_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="32" width="524">
+						<textField>
+							<reportElement x="0" y="0" width="524" height="32" uuid="af2b6d2a-69ad-487b-a905-0ada8629415d">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							</reportElement>
+							<textElement>
+								<font fontName="Times New Roman" size="12"/>
+							</textElement>
+							<textFieldExpression><![CDATA["-  Composante  /  Volet "+ $F{COM_ID}  +" : "+$F{COM_LIBELLE_LONG} +" ;"]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+		<band height="802">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="3" y="6" width="550" height="40" uuid="108607f2-9da9-4b06-a3dd-e7df8043d607"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[7.Les candidats intéressés peuvent obtenir des informations supplémentaires à l’adresse suivante :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="3" y="56" width="550" height="31" uuid="20b37197-6d02-4af8-8d9f-4ee5b7c4dd0f"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-nom de l’organe d’exécution  : " +$F{DEC_ORGAN_EXEC_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="81" width="550" height="29" uuid="ec8a65eb-c355-4b71-b199-94f2ca385330">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-adresse de l’organe d’exécution  : " +$F{DEC_ORGAN_EXEC_ADRESSE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="108" width="550" height="29" uuid="2f4112dd-d0fa-4ce8-96d6-482b4febc7fb">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-personne à contacter M/Mme  : " +$F{DEC_PERS_NOM_PRENOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="137" width="550" height="29" uuid="0b9b01df-82bf-42aa-987c-e254dbf0d320">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-fonction : " +$F{DEC_PERS_FONCTION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="165" width="550" height="30" uuid="bd112b9e-c94b-4cee-a69c-53df322d715b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-localisation précise du bureau  : " +$F{DEC_LOCALISATION}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="198" width="550" height="29" uuid="78b041f9-eeb8-4f5f-be2b-9231a6d9f996">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-numéro de porte  : " +$F{DEC_NUMERO_PORTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="224" width="550" height="29" uuid="d54b860a-1141-475d-bdd0-6ab8ae93f9a3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-boîte postale  : " +$F{DEC_BP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="3" y="252" width="550" height="29" uuid="b79750e5-4b66-49b3-9e98-ecf7004b53fe">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-numéro de téléphone  : " +$F{DEC_TELEPHONE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="3" y="280" width="550" height="29" uuid="39af045f-0d15-43ed-a81f-e0b6605a6537">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-adresse Email  : " +$F{DEC_EMAIL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

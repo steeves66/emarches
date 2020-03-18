@@ -1,0 +1,102 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl">
+<section class="content-header">
+      <h1>
+        Assignation
+        <small>Creation d'une nouvelle assignation</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Admin</a></li>
+        <li class="active">Creation d'une nouvelle assignation</li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     <div class="spacer" style="margin-top:100px"></div>
+       <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
+       <div class="form-group ">
+	                  <label for="nom" class="col-sm-3 control-label"><b> Operateur <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                   <p:inputText  value="#{assignationController.assignation.TOperateur.opeNom}" readonly="true" styleClass="form-control"  id="nom" style="width: 100%"/>
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="fonction" class="col-sm-3 control-label"><b> Fonction <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                   <p:inputText  value="#{assignationController.assignation.TFonction.fonLibelle}" readonly="true" styleClass="form-control"  id="contact" style="width: 100%"/>
+	                  </div>
+	                </div>
+	                
+	                <div class="row">
+	                <label for="debut" class="col-sm-3 control-label"><b> Du <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-2">
+	                <p:calendar id="debut" value="#{assignationController.assignation.assDatDeb}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
+                     <label for="fin" class="col-sm-3 control-label"><b> Au <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-2">
+	                <p:calendar id="fin" value="#{assignationController.assignation.assDatFin}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr" />
+                    </div>
+	                </div>
+	                <br/>
+	                
+	                
+	                
+	                 <div class="row">
+	                <label for="asscstart" class="col-sm-3 control-label"><b> Assignation courante ? <span style="color:red;"> *</span></b></label>
+	                <div class="col-md-3">
+	               <p:selectOneRadio id="asscstart" value="#{assignationController.assignation.assCourant}"> 
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+					    <f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                    </div>
+                     <label for="statut" class="col-sm-2 control-label"><b> Staut <span style="color:red;"> *</span></b></label>
+                       <div class="col-md-4">
+	                 <p:selectOneRadio id="statut" value="#{assignationController.assignation.assStatut}"> 
+						<f:selectItem itemLabel="Actif" itemValue="true" />
+					    <f:selectItem itemLabel="Inactif" itemValue="false" />
+					 </p:selectOneRadio>
+                    </div>
+	                </div>
+	                
+	                
+	     <div class="row">
+	       <div class="col-sm-3"></div> 
+	       <div class="col-sm-9">   
+			 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{fonctionController.renderPage('ass1')}"  update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+				      
+		<div class="pull-right ">
+			 <p:commandLink  styleClass="btn btn-success" style="background-color: #036d3b" action="#{assignationController.updateAssignation() }"   update=":content">
+			    <p:confirm header="Confirmation" message="Confirmez vous la modification?" icon="ui-icon-alert" />
+			    <i class="ace-icon fa fa-save"></i> Modifier
+			 </p:commandLink>
+	     </div>
+		       </div>
+		       </div>
+       
+        
+       </div>    
+    </section>
+    </h:form>
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

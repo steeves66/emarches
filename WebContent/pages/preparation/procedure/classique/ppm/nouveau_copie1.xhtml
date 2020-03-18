@@ -1,0 +1,1239 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+      <h3>
+       #{controleController.libelleProcedure} 
+        <!-- <small>Nouveau AGPM </small> -->
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{ppmController.renderPage('ppm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>PPM | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{ppmController.renderPage('ppm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>PPM | SAISIE 
+           <!--  #{controleController.libelle1}  -->
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     
+      <div class="row">
+      <div class="col-md-12">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN PPM</div></div>
+         </div>
+         <div class="box-body">
+          <div class="row">
+	            <div class="col-md-2">
+	             <label for="gestion1" class="col-sm-5 control-label">Gestion<span style="color:red;"> *</span></label>
+	              <div class="col-sm-6">
+		                    <p:selectOneMenu id="gestion1" value="#{ppmController.gesCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{ppmController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+	               </div>
+	            </div>
+	            <div class="col-md-10">
+	           <div class="form-group">
+		                  <label for="mini" class="col-sm-1 control-label">Ministère <span style="color:red;"> *</span></label>
+		                  <div class="col-sm-11">
+		                   <p:inputText  type="text" value="#{userController.fonction.TMinistere.minLibelle}" styleClass="form-control" id="mini" readonly="true" style="width: 100%" />
+		                  </div>
+		                </div>
+	            </div> 
+	            
+	            
+	            <div class="col-md-1">
+	            </div>
+	            <div class="col-md-11">
+	           <div class="form-group">
+		                  <label for="mini3" class="col-sm-2 control-label">Autorité Contractante <span style="color:red;"> *</span></label>
+		                  <div class="col-sm-9">
+		                   <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control" id="mini3" readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+	                   <p:commandLink  styleClass="btn btn-success row pull-right"   action="#{ppmController.creerPlanPassation()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+			           </h:panelGroup>
+			           
+			           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+	                   <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.creerPlanPassationCpmpDmp()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+			           </h:panelGroup>
+			           
+			           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+	                   <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.creerPlanPassationCpmpDmp()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+			           </h:panelGroup>
+		                  </div>
+		                </div>
+	            </div> 
+	      </div>
+	      
+	      
+	   
+	      
+         </div>
+               </div>
+      </div>
+      
+	 
+	 <div class="col-md-12">
+       <div class="box box-success box-solid">
+        <div class="box-header with-border">
+         <div class="col-md-10 "><div  style="color: #fff"> SAISIE D'UNE OPERATION</div></div>
+         <div class="col-md-2 ">
+                <p:commandLink oncomplete="PF('structuredlg').show()"  data-toggle="modal" data-target="#modal-reglement"  styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Structures</span>
+		        </p:commandLink>
+		  </div>   
+        </div>
+        <!-- /.box-header -->
+        <p:wizard flowListener="#{agpmController.onFlowProcess}"  nextLabel="Suivant" backLabel="Précédent" >
+			        <p:tab id="ope111" title="Saisie des Operations" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="box-body">
+             <div class="row">
+             
+             <div class="col-md-6">
+               <div class="form-group">
+                  <label for="relalisation" class="col-sm-3 control-label">Réalisation envisagée</label>
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{ppmController.detailPass.dppObjet}" id="relalisation" style="width: 100%" />
+                  </div>
+              </div>
+               <div class="form-group">
+                  <label class="col-sm-3 control-label">PGPM<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="pgpm" type="text" value="#{ppmController.recupPgpm.gpgId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('pgpmDlg').show()" value="#{ppmController.chargePgpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="pgpm2" type="text" value="#{ppmController.recupPgpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="typMa1" type="text" value="#{ppmController.reucpMarche.tymCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="typMa2" type="text" value="#{ppmController.reucpMarche.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="modeP1" type="text" value="#{ppmController.recupModePassation.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('passationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="modeP2" type="text" value="#{ppmController.recupModePassation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+           
+                 <div class="form-group">
+                  <label  class="col-sm-3 control-label">Structure Conductrice</label>
+
+                  <div class="col-sm-9">
+                    <p:inputText  type="text" value="#{ppmController.detailPass.dppStructureConduc}" styleClass="form-control"  style="width: 100%" />
+                    
+                  </div>
+                </div>	
+             </div>
+             
+             
+             <div class="col-md-6">
+          
+                 <div class="form-group">
+                  <label  class="col-sm-3 control-label">Structure Bénéficiaire</label>
+
+                  <div class="col-sm-9">
+                    <p:inputText  type="text" value="#{ppmController.detailPass.dppStructureBenefi}" styleClass="form-control" style="width: 100%" />
+                    
+                  </div>
+                </div>	
+                <div class="row">
+                <div class="col-md-6">
+                <div class="form-group">
+                  <label for="date1" class="col-sm-6 control-label">Date de lancement</label>
+
+                  <div class="col-sm-6">
+                    <p:calendar id="date1"  style="width: 100%" />
+                    
+                  </div>
+                </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="date2" class="col-sm-4 control-label"> Date de saisie </label>
+                  <div class="col-sm-7">
+                    <p:calendar id="date2"  style="width: 100%" />
+                  </div>
+                </div>
+                </div>
+                <div class="form-group">
+                  <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME</label>
+
+                  <div class="col-sm-9">
+                     <p:selectOneRadio  id="part">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="observation" class="col-sm-3 control-label">Observation</label>
+
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="5" cols="33" styleClass="form-control"   id="observation" style="width: 100%" />
+                    
+                  </div>
+                </div>	
+                
+                
+             </div>
+             
+             </div>
+            </div>
+			        </p:tab>
+			         <p:tab id="ope222" title="Dates previsionnelles" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="row">
+     <div class="col-md-6">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PREPARATION DE LA PROCEDURE</div>
+         </div>
+          <div class="box-body">
+          <div class="row">
+           <div class="form-group">
+		     <label for="trdao" class="col-sm-6 control-label">Transmission du Dao<span style="color:red;"> *</span></label>
+		     <div class="col-sm-6">
+		       <p:calendar id="trdao" value="#{ppmController.detailPass.dppDateDaoTrans}" style="width: 100%" >
+		       </p:calendar> 
+		     </div>
+		   </div>
+		   <div class="form-group">
+		                  <label for="valdao" class="col-sm-6 control-label">Approbation par le DMP<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="valdao" value="#{ppmController.detailPass.dppDateDaoApprobDmp}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  <div class="form-group">
+		                  <label for="baildao" class="col-sm-6 control-label">Validation DAO par le Bailleur<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="baildao" value="#{ppmController.detailPass.dppDateAttApproBail}"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                  <label for="pubAoo" class="col-sm-6 control-label">Publication de l'AOO<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="pubAoo" value="#{ppmController.detailPass.dppDateAvisAoPublication}"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		   </div>
+          </div>     
+         </div>
+         </div>
+         
+         <div class="col-md-6">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CONTRACTUALISATION</div>
+         </div>
+         <div class="box-body"></div>
+		   <div class="form-group">
+		                  <label for="attr" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="attr" value="#{ppmController.detailPass.dppDateSignatAttrib}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  <div class="form-group">
+		                  <label for="saiAc" class="col-sm-6 control-label">Signature de l'AC<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="saiAc" value="#{ppmController.detailPass.dppDateSignatAc}"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                  <label for="marApp" class="col-sm-6 control-label">Approbation du Marché<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="marApp" value="#{ppmController.detailPass.dppDateMarcheApprob}"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+         </div>
+         </div>
+         </div>
+         
+         <div class="row">
+         <div class="col-md-6">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PASSATION DE MARCHE</div>
+         </div>  
+         <div class="box-body">
+         <div class="row">
+         <div class="col-md-6">
+         <div class="form-group">
+		                  <label for="oft" class="col-sm-6 control-label">Offre Techinique<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="oft" value="#{ppmController.detailPass.dppDateOuvertOt}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  <div class="form-group">
+		                  <label for="off" class="col-sm-6 control-label">Offre Financière<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="off" value="#{ppmController.detailPass.dppDateOuvertOf}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                  <label for="rapp" class="col-sm-6 control-label">Rapport d'évaluation<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rapp" value="#{ppmController.detailPass.dppDateElabRapport}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                  <label for="jug" class="col-sm-6 control-label">Jugement<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jug" value="#{ppmController.detailPass.dppDateJugementOffre}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+         </div>
+         
+         
+         <div class="col-md-6">
+         <div class="form-group">
+		                  <label for="approDm" class="col-sm-6 control-label">Approbation DMP<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approDm" value="#{ppmController.detailPass.dppDateAttApprobDmp}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  <div class="form-group">
+		                  <label for="approba" class="col-sm-6 control-label">Approbation Bailleur<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approba" value="#{ppmController.detailPass.dppDateAttApproBail}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                  <label for="neg" class="col-sm-6 control-label">Négociation<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="neg" value="#{ppmController.detailPass.dppDateNegociation}"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                
+		                 
+         </div>
+         
+         </div>
+         </div>
+           
+         </div>  
+         </div>
+         </div>
+         
+         <div class="col-md-6">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">DATES D'EXECUTION</div>
+         </div>
+         <div class="box-body">
+          <div class="form-group">
+		                  <label for="debut" class="col-sm-6 control-label">Début d'execution du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="debut" value="#{ppmController.detailPass.dppDateExecDebut}"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  <div class="form-group">
+		                  <label for="fin" class="col-sm-6 control-label">Fin d'execution du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="fin" value="#{ppmController.detailPass.dppDateExecFin}" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+         </div>
+               
+         </div>
+         </div>
+       </div>
+			        </p:tab>
+			        </p:wizard>
+			         <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.creerDetailPassation()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+            
+        </div>
+        </div>
+	 </div>
+    
+      <div class="row">
+   <div class="col-md-8">
+    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+         <div class="col-md-10 "><div  style="color: #fff">SOURCES DE FINANCEMENT</div></div> 
+        </div>
+        <div class="box-body">
+        <div class="row">
+        <div class="col-md-12">
+        
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+         <div class="form-group">
+                  <label class="col-sm-3 control-label">Imputation Budgétaire<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 20%"><p:inputText id="Imput11" type="text" value="#{ppmController.recupLigne.liaeImputCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 80%"><p:inputText id="Imput21" type="text" value="#{ppmController.recupLigne.liaeDestCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+        </h:panelGroup>
+        
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+        <div class="form-group">
+                  <label class="col-sm-3 control-label">Imputation Budgétaire<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 20%"><p:inputText id="Imput1" type="text" value="#{ppmController.recupLigne.liaeImputCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('imputationCpmDmpDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 80%"><p:inputText id="Imput2" type="text" value="#{ppmController.recupLigne.liaeDestCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+           </h:panelGroup>
+           
+           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
+        <div class="form-group">
+                  <label class="col-sm-3 control-label">Imputation Budgétaire<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td style="width: 20%"><p:inputText id="Imput13" type="text" value="#{ppmController.recupLigne.liaeImputCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('imputationCpmDmpDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 80%"><p:inputText id="Imput23" type="text" value="#{ppmController.recupLigne.liaeDestCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+           </h:panelGroup>
+        
+     
+                
+        </div>
+        <div class="col-md-12"> 
+                <table width="100%">
+                <tr>
+                <td><strong>Dotation</strong></td>
+                <td><strong>Dotation trésor</strong></td>
+                <td><strong>Dotation Emprunt</strong></td>
+                <td><strong>Dotation Don</strong></td>
+                <td><strong>Disponible</strong></td>
+                </tr>
+                
+                <tr>
+                <td><p:inputText  type="text" value="#{ppmController.recupLigne.liaeDotTot}"  styleClass="form-control" id="dotation" readonly="true" style="width: 100%" /></td>
+                <td><p:inputText  type="text" value="#{ppmController.recupLigne.liaeDotAeTre}"  styleClass="form-control" id="tre" readonly="true" style="width: 100%" /></td>
+                <td><p:inputText  type="text" value="#{ppmController.recupLigne.liaeDotAeEmp}" styleClass="form-control" id="emp" readonly="true" style="width: 100%" /></td>
+                <td><p:inputText  type="text" value="#{ppmController.recupLigne.liaeDotAeDon}"  styleClass="form-control" id="don" readonly="true" style="width: 100%" /></td>
+                <td><p:inputText  type="text" value="#{ppmController.recupLigne.liaeDispoTot}" styleClass="form-control" id="dispo" readonly="true" style="width: 100%" /></td>
+                </tr>
+                </table>
+                <br/>
+                
+        </div>
+        
+        <div class="col-md-12">
+         <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listeFinancementPgpm}"  editable="true" editMode="cell" emptyMessage="Aucun financement enregistré">
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TSourceFinancement.souCode}" />
+				        </p:column>
+
+				         <p:column headerText="Libellé" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
+				        </p:column>
+				        
+				        
+				         <p:column headerText="Cout de l'opération" width="7%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipMontantCfa}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fipMontantCfa}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		               <p:ajax event="blur" update=":gnl:MontTot" listener="#{ppmController.coutOperation()}" />
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+                 </p:dataTable>  
+        </div>
+        <div class="col-md-12">
+        <div class="form-group">
+                  <label for="MontTot" class="col-sm-9 control-label">Cout total de l'operation</label>
+                  <div class="col-sm-3">
+                    <p:inputText  type="text"  styleClass="pull-right" id="MontTot" value="#{ppmController.totalMontant}"  readonly="true">
+                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                    </p:inputText>
+                  </div>
+                </div>
+           </div>
+        </div>
+       
+                 
+            </div>
+        </div>
+   </div>
+    <div class="col-md-4">
+     <div class="box box-success box-solid">
+        <div class="box-header with-border">
+                <div class="col-md-12 "><div  style="color: #fff"> LISTE DES OPERATIONS</div></div> 
+            </div>
+            <div class="box-body">
+                 <p:dataTable styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{ppmController.listePpm}" scrollable="true" scrollHeight="150" emptyMessage="Aucune opération enregistrée">
+                   <p:column headerText="Operations" styleClass="col-sm-12">
+				            <h:outputText value="#{slctdTb.affDppObjet}" />
+				        </p:column>
+                 </p:dataTable>
+            </div>
+         </div>
+         
+    </div>
+   </div>
+             <table >
+                 <tr>
+                 
+                 <td>
+                 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{ppmController.fermer('ppm1','SAIPPM')}" update=":content">
+		        <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		         </p:commandLink>
+                 </td>
+               
+                 </tr>
+           </table>
+	               
+    </section>
+    </h:form>
+    
+    
+    <h:form id="dlogOperation" styleClass="form-horizontal">
+	   <p:dialog  widgetVar="operationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-10 "><div  style="color: #fff">NOUVELLE OPERATION</div></div>
+               </div>
+               <div class="box-body">
+              
+               </div>
+               <div class="box-footer">
+               
+               <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e;color:white"  update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+               <p:commandLink action="#{ppmController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('diff').hide()" update=":gnl:finance">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+               </div>
+               </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+     <h:form id="dlogPgpm">
+	        <p:dialog  widgetVar="pgpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le PGPM">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtrePgpm}"  class="gui-input"  placeholder="Saisir le code du PGPM"  > 
+						    <p:ajax event="keyup" update=":dlogPgpm:ndTblePgpm" listener="#{ppmController.filtreMarche()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTblePgpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePgpm}"
+						  selectionMode="single" rowKey="#{slctdTb.gpgId}"
+			               emptyMessage="Aucun Pgpm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
+                           <h:commandLink id="pgpm" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}">				        
+         				  <h:outputText value="#{slctdTb.gpgId}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
+                           <h:commandLink id="pgpm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}">				        
+         				  <h:outputText value="#{slctdTb.gpgCommentaire}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+
+     <h:form id="dlogMar">
+	        <p:dialog  widgetVar="marchesDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le type du marché">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le code du marché"  > 
+						    <p:ajax event="keyup" update=":dlogMar:ndTbleMar" listener="#{ppmController.filtreMarche()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeTypeMarches}"
+						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
+			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-1" >
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+         				  <h:outputText value="#{slctdTb.tymCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="Libelle du ministère" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogPas">
+	        <p:dialog  widgetVar="passationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passtion">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtreModePassation}"  class="gui-input"  placeholder="Saisir le mode de Passtion"  > 
+						     <p:ajax event="keyup" update=":dlogPas:ndTblePass" listener="#{ppmController.filtreModePassation()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTblePass" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeModePassation}"
+						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
+			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-1" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectModePassation()}"  >				        
+         				  <h:outputText value="#{slctdTb.mopCode}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.modePassation}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectModePassation()}" >				        
+         				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.modePassation}" />
+                                </h:commandLink>
+				        </p:column>
+				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{ppmController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
+         				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.modePassation}" />
+                                </h:commandLink>
+				        </p:column>
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="finlog" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Ajouter un nouveau Financement">
+				<div class="contentpanel">
+					 <div class="form-group ">
+	                  <label for="bail" class="col-sm-1 control-label"><b>Bailleur</b></label>
+	                  <div class="col-sm-11">
+	                   <p:selectOneMenu value="#{ppmController.baiCode}" id="bail" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                <div class="form-group ">
+	                  <label for="source" class="col-sm-1 control-label"><b>Source</b></label>
+	                  <div class="col-sm-11">
+	                    <p:selectOneMenu value="#{ppmController.souCode}" id="source" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir la source de financement.." itemValue="empty" />  	
+			       <f:selectItems value="#{ppmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                <div class="form-group ">
+	                  <label for="dev" class="col-sm-1 control-label"><b>Devise</b></label>
+	                  <div class="col-sm-11">
+	                      <p:selectOneMenu value="#{ppmController.devCode}" id="dev" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir la devise.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="montDev" class="col-sm-1 control-label"><b>Montant Devise</b></label>
+	                  <div class="col-sm-11">
+	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppMontantDevise}" id="montDev" styleClass="form-control"  style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="mont" class="col-sm-1 control-label"><b>Montant FCFA</b></label>
+	                  <div class="col-sm-11">
+	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppMontantCfa}" id="mont" styleClass="form-control" style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+	              
+	                 <div class="row">
+                <div class="pull-right ">
+			            <p:commandLink action="#{ppmController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+              </div>
+                </div>
+	           </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+     <h:form id="structure" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="structuredlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Ajouter une structure">
+		    <div class="row">
+		    <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">SAISIE D'UNE NOUVELLE STRUCTURE</div>
+         </div>
+         <div class="box-body">
+         <p:messages id="message2" showDetail="false" autoUpdate="true"  closable="true"/>
+         <div class="form-group">
+                  <label class="col-sm-2 control-label">PPM<span style="color:red;"> *</span></label>
+				  <div class="col-sm-10">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="ppm" type="text"  styleClass="form-control" value="#{ppmController.recuPpm.dppId}" readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('ppmDlg').show()" value="#{ppmController.chargePpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 500px"><p:inputText id="ppm2" type="text"  styleClass="form-control" value="#{ppmController.recuPpm.dppObjet}" readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label class="col-sm-2 control-label">Structure<span style="color:red;"> *</span></label>
+				  <div class="col-sm-10">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="structure" type="text" value="#{ppmController.recupstructure.strCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('structuresDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="structure2" type="text" value="#{ppmController.recupstructure.strLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>	
+                <div class="form-group">
+                  <label  for="tchrg"  class="col-sm-2 control-label">Type Charge<span style="color:red;"> *</span></label>
+	              <div class="col-sm-10">
+		         <p:selectOneMenu id="tchrg" value="#{ppmController.typCharge}" effect="fade" style="width:100%">
+			      <f:selectItem  itemLabel="Choisir le type Charge.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeTypeCharges}" var="tyc" itemLabel="#{tyc.tycLibelleLong}" itemValue="#{tyc.tycCode}" />			   				   
+				<f:selectItems   />				   				    				   
+		       	</p:selectOneMenu>
+	               </div>
+	            </div>
+	            
+	              <div class="row">
+                <div class="pull-right ">
+			            <p:commandLink action="#{ppmController.creerCharge()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+              </div>
+                </div>
+	            
+	            
+         </div>
+               
+         </div>
+         </div>
+         
+         <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">LISTE DES STRUCTURES</div>
+         </div>
+         <div class="box-body">
+          <p:dataTable id="ndTbleStruture" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeCharges}"
+			               emptyMessage="Aucune Structure enregistréé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			                
+			                <p:column headerText="Code" styleClass="col-sm-1" >
+			               <h:outputText value="#{slctdTb.strCode}"/>
+				           </p:column>
+			               
+				          <p:column headerText="Structure" styleClass="col-sm-6" >
+				          <h:outputText value="#{slctdTb.strLibelleLong}"/>
+				           </p:column>
+                          <p:column headerText="Type" styleClass="col-sm-6">
+                          <h:outputText value="#{slctdTb.TTypeCharge}"/>
+				           </p:column>
+				           
+						</p:dataTable>
+         </div>
+               
+         </div>
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
+    
+    
+     
+    
+          <h:form id="dlogAC">
+	        <p:dialog  widgetVar="autoriteDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{ppmController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectFonctionAgpm()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{ppmController.onSelectFonctionAgpm()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogDMP">
+	        <p:dialog  widgetVar="DMPDlog" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{ppmController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectFonctionPpmDmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{ppmController.onSelectFonctionPpmDmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+      <h:form id="dlogPpm">
+	        <p:dialog  widgetVar="ppmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le PPM">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtrePpm}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
+						    <p:ajax event="keyup" update=":dlogPpm:ndTblePpm" listener="#{ppmController.filtreImputationCpmp()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTblePpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+						  selectionMode="single" rowKey="#{slctdTb.affDppId}"
+			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
+                           <h:commandLink id="ppm1" title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectPpm()}" >				        
+         				  <h:outputText value="#{slctdTb.affDppId}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ppm}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Imputation" styleClass="col-sm-11" >
+                           <h:commandLink id="ppm2" title="Objet Opération" style="font-size:18px;"  action="#{ppmController.onSelectPpm()}" >				        
+         				  <h:outputText value="#{slctdTb.affDppObjet}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ppm}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogStrc">
+	        <p:dialog  widgetVar="structuresDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la structure">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtreStructure}"  class="gui-input"  placeholder="Saisir le code de la structure"  > 
+						    <p:ajax event="keyup" update=":dlogStrc:ndTbleStrc" listener="#{ppmController.filtreStructures()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleStrc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeStructures}"
+						  selectionMode="single" rowKey="#{slctdTb.strCode}"
+			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code Structure" styleClass="col-sm-1" >
+                           <h:commandLink id="structure1" title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectStructure()}" >				        
+         				  <h:outputText value="#{slctdTb.strCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libellé Structure" styleClass="col-sm-11" >
+                           <h:commandLink id="structure2" title="Libéllé" style="font-size:18px;"  action="#{ppmController.onSelectStructure()}" >				        
+         				  <h:outputText value="#{slctdTb.strLibelleLong}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogLignCpmp">
+	        <p:dialog  widgetVar="imputationCpmDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la ligne Budgétaire">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
+						    <p:ajax event="keyup" update=":dlogLignCpmp:ndTbleLignCpm" listener="#{ppmController.filtreImputationCpmp()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleLignCpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeImputations}"
+						  selectionMode="single" rowKey="#{slctdTb.liaeNum}"
+			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code Nature" styleClass="col-sm-1" >
+                           <h:commandLink id="nature1" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.liaeNatuCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Imputation" styleClass="col-sm-11" >
+                           <h:commandLink id="imputation1" title="Imputation" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.liaeImputCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+     <h:form id="dlogLign">
+	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la ligne Budgétaire">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{ppmController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
+						    <p:ajax event="keyup" update=":dlogLign:ndTbleLign" listener="#{ppmController.filtreImputation()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleLign" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeImputations}"
+						  selectionMode="single" rowKey="#{slctdTb.liaeNum}"
+			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code Nature" styleClass="col-sm-1" >
+                           <h:commandLink id="nature" title="Code Nature" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.liaeNatuCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Imputation" styleClass="col-sm-11" >
+                           <h:commandLink id="imputation" title="Imputation" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.liaeImputCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

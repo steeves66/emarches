@@ -1,0 +1,545 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+      
+ <h:body>
+      		<!-- Start content -->
+          <div class="content">
+          <div class="containers">
+<h:form id="gnl">	
+
+<div class="pageheader">
+  <h2><i class="fa fa-user"></i> Profil<span>Afficher les détails de l'opérateur</span></h2>
+  <div class="breadcrumb-wrapper">
+    <span class="label">Vous êtes ici:</span>
+    <ol class="breadcrumb">
+      <li><a href="#">Accueil</a></li>
+      <li class="active">#{operateurController.breadcrumb}</li>
+    </ol>
+  </div>
+</div>
+<div class="contentpanel">
+	<div class="row">
+
+     <div class="col-sm-12">         
+	     <div class="user-profile">
+	     <div class="panel panel-default">
+	     <div class="panel-heading">
+	     <h3 class="panel-title">#{operateurController.slctdTb.opeEtatCivil} &nbsp; #{operateurController.slctdTb.opeNom}</h3> 
+	     </div>
+	     <div class="panel-body panel-body-nopadding">
+	        
+	         <div class="col-sm-3 sidebar">
+
+	          <div class="mb30"></div>
+
+	          <h5 class="subtitle">Général</h5>
+
+	          <ul class="profile-social-list">
+	             <li><a id="account_settings_btn" href="#" class="active">Paramètres de compte</a></li>
+	              <li><a id="password_settings_btn"  href="#">Changer le mot de passe</a></li>  
+	           	  <li><a id="activity_log_btn"  href="#">Log activité</a></li>    	            
+	            	
+	          </ul>
+
+	          <div class="mb30"></div>
+		
+	          <h5 class="subtitle">Gestion des Accès</h5>
+
+	          <ul class="profile-social-list">
+	          	<li><a id="assignations_btn"  href="#">Assignations</a></li>
+	          	
+	          </ul>
+
+	   		  <div class="mb30"></div>
+
+
+	        
+	        </div><!-- col-sm-3 -->
+
+	       <div class="col-sm-9 sidebar">
+	         <div class="mb30"></div>
+
+	        <div id="account_settings">
+	         <div class="col-sm-9">
+
+	         <h5 class="subtitle">Paramètres de compte</h5>
+	          <h:panelGroup id="reviewerform" styleClass="form-horizontal form-bordered">
+	          <p:messages id="msgRevPb" showDetail="false" autoUpdate="true"  closable="true"/>
+	           <div class="form-group">
+	              <label class="col-sm-3">N° Matricule</label>
+	              <div class="col-sm-6">
+	                <p:inputText type="text" required="required" readonly="true" class="form-control" id="matricule"  Placeholder="Matricule" value="#{operateurController.slctdTb.opeMatricule}" />
+	              </div>
+	            </div>
+	          
+	            
+	            <div class="form-group">
+	              <label class="col-sm-3">Nom</label>
+	              <div class="col-sm-6">
+	                <p:inputText type="text" required="required" styleClass="form-control" id="nom"  Placeholder="Nom" value="#{operateurController.slctdTb.opeNom}" />
+	              </div>
+	            </div>
+	             
+              
+               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod != 'ADM'}">  
+              
+	            <div class="form-group">
+				<label class="col-sm-3">Structure*</label>
+                <div class="col-sm-6">
+                   
+                </div>
+              </div> 
+              </h:panelGroup>
+	            
+	           
+       	        <div class="form-group">
+       	          <label class="col-sm-3">Email</label>
+				  <div class="col-sm-6">
+	                <p:inputText type="text" required="required" class="form-control" id="email"  Placeholder="Email" value="#{operateurController.slctdTb.opeMail}" />
+				  </div>
+				</div>
+				
+       	        <div class="form-group">
+       	          <label class="col-sm-3">N° Téléphone</label>
+				  <div class="col-sm-6">
+	                <p:inputText type="text" required="required" class="form-control" id="telephone"  Placeholder="Téléphone" value="#{operateurController.slctdTb.opeContact}" />
+				  </div>
+				</div>
+
+               
+
+	            <br />
+	             <div class="panel-footer">
+	              <div class="col-sm-6">
+		   			<p:commandLink styleClass="btn btn-primary mr5" value="Modifier"  action="#{operateurController.update()}"  update=":gnl:reviewerform" />
+		   			<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ADM'}">
+		   			<p:commandLink styleClass="btn btn-danger mr5" value="Fermer"  action="#{userController.renderPage('ope1')}"  update=":content" />
+		   			</h:panelGroup>
+		   			<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod != 'ADM'}">
+		   			<p:commandLink styleClass="btn btn-danger mr5" value="Fermer"  action="#{userController.renderPage('accueil')}"  update=":content" />
+		   			</h:panelGroup>
+                  </div>
+	            </div>
+	            
+	            <br />
+	            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+			        <p:commandButton value="Oui" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+			        <p:commandButton value="Non" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			    </p:confirmDialog>
+	         </h:panelGroup>
+
+	        	</div>
+		        <div class="col-sm-3 aligncenter">
+		         <div class="mb30"></div>
+		         <img src="../resources/assets_unified/images/photos/profile-1.png" width="200px;" class="thumbnail img-responsive mb0" alt="" />
+	          		         <div align="center" style="margin-top: 5px;">
+		          <button class="btn btn-primary"  >
+					  Changer l'image
+	              </button>
+	             </div>
+		        </div><!-- col-sm-3 -->
+
+	        </div><!-- Account Settings -->
+
+	       
+	        
+	       
+	        
+	        <div id="assignations_settings" style="display: none;">
+	        	<h5 class="subtitle">Assignations</h5>
+	        	<h:panelGroup id="assignationform" class="form-horizontal form-bordered">
+	        	 <p:messages id="msgRevass" showDetail="false" autoUpdate="true"  closable="true"/>
+
+	            <div class="form-group">
+	              <label class="col-sm-6">Liste des assignations</label>
+
+	            <br/>
+	              <div class="col-sm-9">
+	                
+				  </div>
+	            </div>
+
+	            <br />
+	             
+	            <br />
+
+	         </h:panelGroup>
+	        </div><!-- Assignation Settings -->
+	        
+	        
+	        
+	        <div id="password_settings" style="display: none;">
+	        	<h5 class="subtitle">Configuration Mot de passe</h5>
+                      <h:panelGroup id="changepasswordUser" class="form-bordered form-horizontal"  >
+                       <p:messages id="msgRevpass" showDetail="false" autoUpdate="true"  closable="true"/>
+                      
+                        <div class="form-group"><label class="col-sm-2 control-label"><i class="bold-label">Nouveau mot de passe</i></label>
+                            <div class="col-sm-8">
+                                <p:inputText type="password" id="new_password_user" styleClass="form-control"  value="#{operateurController.motPasseUser}" />
+                            </div>
+                        </div>
+
+                        <div class="form-group"><label class="col-sm-2 control-label"><i class="bold-label">Confirmer</i></label>
+                            <div class="col-sm-8">
+                                <p:inputText type="password"  id="confirm_password_user" styleClass="form-control"  value="#{operateurController.motPasse2User}" />
+                            </div>
+                        </div>
+
+                        <div class="panel-footer" align="center">
+		   					<p:commandLink styleClass="btn btn-primary mr5" value="Changer le mot de passe"  action="#{operateurController.changerMotDePasse()}"  update=":gnl:changepasswordUser" />
+		   					<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ADM'}">
+		   					<p:commandLink styleClass="btn btn-danger mr5" value="Fermer"  action="#{userController.renderPage('ope1')}"  update=":content" />
+		   					</h:panelGroup>
+		   					
+		   					<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod != 'ADM'}">
+		   					<p:commandLink styleClass="btn btn-danger mr5" value="Fermer"  action="#{userController.renderPage('accueil')}"  update=":content" />
+		   					</h:panelGroup>
+                        </div>
+
+                    </h:panelGroup>
+                    <hr />
+                    
+             </div><!-- Password Settings -->
+	          
+	        <div id="activity_log" style="display: none;">
+	        	<h5 class="subtitle">Log Activité</h5>
+
+            <div class="panel-body panel-body-nopadding">
+                <!-- BASIC WIZARD -->
+                <div id="basicWizard" class="basic-wizard">
+
+                   <ul class="nav nav-pills nav-justified">
+                      <li><a href="#ptab1" data-toggle="tab">Log</a></li>
+                         <li><a href="#ptab2" data-toggle="tab">Comptes</a></li>
+                            <li><a href="#ptab3" data-toggle="tab">Tâches </a></li>
+                   </ul>
+
+                   <div class="tab-content tab-content-nopadding">
+                     <div class="tab-pane" id="ptab1">
+
+                        <button class="btn btn-primary pull-right" style="margin-top: -15px;" onClick="window.location='/backend.php/users/viewuser/userid/#TODO'">
+							Réinitialiser
+                        </button>
+        	            <button class="btn btn-primary pull-right" style="margin-top: -15px; margin-right: 5px;" data-toggle="modal" data-target="#auditModal">
+							Filtrer
+                        </button>
+
+        	        	<div class="mb30"></div>
+
+        		         <p>Ce log sécurité vous permet de retracer les activités importantes de votre compte</p>
+	          
+        		            <table class="table table-bordered">
+        		            <thead>
+        		            <tr><th>Client IP</th>	<th>Activité</th>	<th>Date </th> <th>Appareil</th></tr>
+        		            </thead>
+        		            <tbody>
+	        		            </tbody>
+        		            </table>
+        		            <div align="center">
+                        	<ul class="pagination pagination-sm mb0 mt0">
+        					    <li><a href="/backend.php/users/viewuser/userid/#TODO/page/1#TODO/todate/#TODO/fromtime/">
+                                <i class="fa fa-angle-left"></i>
+        					    </a></li>
+
+        					   <li> <a href="/backend.php/users/viewuser/userid/#TODO /page/#TODO/fromdate/">
+        					    <i class="fa fa-angle-left"></i>
+        					    </a></li>
+               					        <li><a href="/backend.php/users/viewuser/userid/#TODO /page/me/">#TODO</a></li>
+               					        <li><a href="/backend.php/users/viewuser/userid/#TODO /page/me/">#TODO</a></li>
+        					   <li> <a href="/backend.php/users/viewuser/userid/#/page/#">
+        					      <i class="fa fa-angle-right"></i>
+        					    </a></li>
+
+        					   <li> <a href="/backend.php/users/viewuser/userid/#TODO /page/totime/">
+        					      <i class="fa fa-angle-right"></i>
+        					    </a></li>
+        					  </ul>
+        					  </div>
+        					  <br />
+        					  <br />
+                </div>
+                <div class="tab-pane" id="ptab2">
+
+                   <button class="btn btn-primary pull-right" style="margin-top: -15px;" onClick="window.location='/backend.php/users/viewuser/userid/#TODO'">
+                   Reset
+                   </button>
+                   <button class="btn btn-primary pull-right" style="margin-top: -15px; margin-right: 5px;" data-toggle="modal" data-target="#auditModal">
+                   Filter
+                   </button>
+
+               <div class="mb30"></div>
+
+                <p>Ce log sécurité vous permet d'afficher toutes les demandes sur lesquelles cet opérateur à travaillé</p>
+                   <table class="table table-bordered">
+                   <thead>
+                   <tr><th>Client IP</th>	<th>Activité</th>	<th>Date</th> <th>Appareil</th></tr>
+                   </thead>
+                   <tbody>
+               <tr>
+               	<td>#TODO</td>
+               	<td>#TODO</td>
+               	<td>#TODO</td>
+                <td>#TODO></td>
+               </tr>
+                   </tbody>
+                   </table>
+                   <div align="center">
+                     <ul class="pagination pagination-sm mb0 mt0">
+                 <li><a href="/backend.php/users/viewuser/userid/#TODO/apppage/1">
+                           <i class="fa fa-angle-left"></i>
+                 </a></li>
+
+                <li> <a href="/backend.php/users/viewuser/userid/#TODO/apppage/1">
+                 <i class="fa fa-angle-left"></i>
+                 </a></li>
+                <li> <a href="/backend.php/users/viewuser/userid/#TODO/apppage/1">
+                   <i class="fa fa-angle-right"></i>
+                 </a></li>
+
+                <li> <a href="/backend.php/users/viewuser/userid/#TODO/apppage/1">
+                   <i class="fa fa-angle-right"></i>
+                 </a></li>
+               </ul>
+               </div>
+               <br />
+               <br />
+                </div>
+                <div class="tab-pane" id="ptab3">
+
+                   <button class="btn btn-primary pull-right" style="margin-top: -15px;" onClick="window.location='/backend.php/users/viewuser/userid/#TODO'">
+                   Réinitialiser
+                   </button>
+                   <button class="btn btn-primary pull-right" style="margin-top: -15px; margin-right: 5px;" data-toggle="modal" data-target="#auditModal">
+                   Filtrer
+                   </button>
+
+               <div class="mb30"></div>
+
+                <p>Ce log permet d'afficher toutes les tâches effectué par cet utilisateur.</p>
+                 <table class="table table-bordered">
+                   <thead>
+                   <tr><th>Demandes</th>	<th>Taches</th>	<th>Date </th> <th>Assignée par</th></tr>
+                   </thead>
+                   <tbody>
+                   <tr>
+                       <td>#TODO<a href="/backend.php/applications/view/id/#TODO" target="_blank">#TODO</a></td>
+                       <td><a href="/backend.php/tasks/view/id/#TODO" target="_blank">#TODO</a></td>
+                       <td>#TODO</td>
+                       <td>#TODO</td>
+                   </tr>
+                   </tbody>
+                   </table>
+                   <div align="center">
+                     <ul class="pagination pagination-sm mb0 mt0">
+                 <li><a href="/backend.php/users/viewuser/userid/#/taskpage/1">
+                           <i class="fa fa-angle-left"></i>
+                 </a></li>
+
+                <li> <a href="/backend.php/users/viewuser/userid/#/taskpage/">
+                 <i class="fa fa-angle-left"></i>
+                 </a></li>
+                   
+               </ul>
+               </div>
+               <br />
+               <br />
+                </div>
+              </div>
+            </div>
+          </div>
+
+		        <div class="mb30"></div>
+	        </div><!-- Activity Log -->
+
+	        </div><!-- col-sm-6 -->
+	     </div><!-- end-panel-body -->
+	     </div> <!-- end-panel -->
+	       </div> <!-- end-user-profile -->
+	     </div><!-- col-sm-12 -->
+    </div>
+</div>
+</h:form>
+<p:dialog id="assignationDlg" widgetVar="assignationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="SIGMission">
+<h:form id="dlgForm">
+	<div class="contentpanel">
+		<div class="g12">
+		<div class="panel panel-dark">
+			<div class="panel-heading">
+				<h3 class="panel-title">#{operateurController.dialogueTitle}</h3>
+			</div>
+		</div>			
+		
+		<p:messages id="dlgForm" showDetail="false" autoUpdate="true"  closable="true"/>
+		 
+		<div class="panel-body panel-body-nopadding">
+			<div class="form-bordered form-horizontal">			
+
+           	
+              <h:panelGroup rendered="#{operateurController.modeCreerAssignation}">
+               <div class="form-group">
+				<label class="col-sm-2 control-label"><i class="bold-label">Type Fonction*</i></label>
+                <div class="col-sm-8">
+					<p:selectOneMenu value="#{operateurController.tmpAssignation.TFonction.TTypeFonction.tyfCod}" style="width:70%;">
+						 <f:selectItem  itemLabel="" itemValue=""/>  
+	             		 <f:selectItems value="#{operateurController.tfonList}" var="f" itemLabel="#{f.tyfLibelle}" itemValue="#{f.tyfCod}"/> 
+						<p:ajax listener="#{operateurController.onSelectTypeFonction(operateurController.tmpAssignation)}" process="@this" update="@parent,:dlgForm"/>	
+	       			 </p:selectOneMenu>
+                </div>
+              </div>
+              <h:panelGroup rendered="#{operateurController.tmpAssignation.TFonction.TTypeFonction.tyfCod=='VAL'}">
+	            <div class="form-group">
+				<label class="col-sm-2 control-label"><i class="bold-label">Type de validateur*</i></label>
+                <div class="col-sm-8">
+					<p:selectOneMenu  value="#{operateurController.tmpAssignation.TFonction.fonCod}"  style="width:70%;">
+						 <f:selectItem  itemLabel="" itemValue="empty"/>  
+						 <f:selectItem  itemLabel="Validateur SEPMBPE" itemValue="VALBUD"/>  
+						 <f:selectItem  itemLabel="Validateur MEF" itemValue="VALMEF"/>  
+						 <f:selectItem  itemLabel="Validateur MAE" itemValue="VALMAE"/>  
+						 <f:selectItem  itemLabel="Validateur MFP" itemValue="VALMFP"/>  
+						 <f:selectItem  itemLabel="Validateur SGG" itemValue="VALSGG"/>  
+						 <f:selectItem  itemLabel="Validateur Présidence" itemValue="VALPRD"/>  
+						 <f:selectItem  itemLabel="Validateur Controle Financier" itemValue="VALCTR"/>  
+						 <f:selectItem  itemLabel="Validateur SOLDE" itemValue="VALSLD"/>  
+						 <f:selectItem  itemLabel="Validateur REGISSEUR" itemValue="VALRGI"/>  
+	             		<p:ajax listener="#{operateurController.onSelectTypeVal(operateurController.tmpAssignation)}" update="@this"/>
+	       			 </p:selectOneMenu>
+                </div>
+              </div>
+              </h:panelGroup>
+              
+              </h:panelGroup>
+               
+               <div class="form-group">
+				<label class="col-sm-2 control-label"><i class="bold-label">Libelle fonction*</i></label>
+                <div class="col-sm-6">
+                	<p:inputText type="text"  class="form-control"   value="#{operateurController.tmpAssignation.TFonction.fonLibelle}" >
+                		
+                	</p:inputText>
+                </div>
+              </div>
+	          
+              <h:panelGroup rendered="#{operateurController.modeCreerAssignation}">
+	            <div class="form-group">
+	            
+				<label class="col-sm-2 control-label"><i class="bold-label">Date Début *</i></label>
+                <div class="col-sm-3">
+					<p:calendar  value="#{operateurController.tmpAssignation.assDatDeb}" pattern="dd/MM/yyyy" mask="true" locale="fr"  />
+				             
+				</div>
+				
+				<label class="col-sm-2 control-label"><i class="bold-label">Date Fin *</i></label>
+                <div class="col-sm-3">
+					<p:calendar  value="#{operateurController.tmpAssignation.assDatFin}" pattern="dd/MM/yyyy" mask="true" locale="fr"  />
+					
+                </div>
+              </div>
+              </h:panelGroup>
+              
+              <h:panelGroup rendered="#{!operateurController.modeCreerAssignation}">
+	            <div class="form-group">
+	            
+				<label class="col-sm-2 control-label"><i class="bold-label">Date Début *</i></label>
+                <div class="col-sm-3">
+					<p:calendar  value="#{operateurController.tmpAssignation.assDatDeb}" pattern="dd/MM/yyyy" mask="true" locale="fr" >
+					<p:ajax event="dateSelect" listener="#{operateurController.updateDate()}" update=":dlgForm:dfin"> </p:ajax>
+					</p:calendar>
+				             
+				</div>
+				
+				<label class="col-sm-2 control-label"><i class="bold-label">Date Fin *</i></label>
+                <div class="col-sm-3">
+					<p:calendar id="dfin"  value="#{operateurController.tmpAssignation.assDatFin}" pattern="dd/MM/yyyy" mask="true" locale="fr"  />
+					
+                </div>
+              </div>
+              </h:panelGroup>
+              
+              <div class="form-group">
+				<label class="col-sm-2 control-label"><i class="bold-label">Statut *</i></label>
+                <div class="col-sm-3">
+                   <p:selectOneMenu value="#{operateurController.tmpAssignation.assStatut}" style="width:70%;">
+			            <f:selectItem itemLabel="Activer" itemValue="true"/> 
+			            <f:selectItem itemLabel="Désactiver" itemValue="false"/>   
+			       	</p:selectOneMenu>
+                </div>
+				<label class="col-sm-2 control-label"><i class="bold-label">Défaut *</i></label>
+                <div class="col-sm-3">
+                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+				        <p:selectOneRadio id="assCourant" value="#{operateurController.tmpAssignation.assCourant}">
+				            <f:selectItem itemLabel="Oui" itemValue="O" />
+				            <f:selectItem itemLabel="Non" itemValue="N" />
+				            <p:ajax listener="#{operateurController.onSelectDefaultForAdd(operateurController.tmpAssignation)}" update=":dlgForm"/>
+				        </p:selectOneRadio>
+				   </h:panelGrid>
+                </div>
+              </div>
+               
+              <div class="mb30"></div> 			            		              		              						
+			</div>
+			<div class="panel-footer">
+    			<p:commandLink id="submitAssignation" styleClass="btn btn-primary" value="Soumettre" action="#{operateurController.validerAssignation()}"  update=":gnl:assignationform, :dlgForm" />
+  			</div>
+		</div>			
+	</div>
+	</div>
+	</h:form>
+</p:dialog>	
+ </div>
+    </div>
+    </h:body>
+  <script language="javascript">
+ 				jQuery(document).ready(function(){
+ 					$("#account_settings_btn").click(function(e) {
+		                $("#account_settings").css('display', 'block');
+		                $("#fonction_settings").css('display', 'none');
+		                $("#password_settings").css('display', 'none');
+		                $("#activity_log").css('display', 'none');
+		                $("#assignations_settings").css('display', 'none');
+ 					});
+ 					$("#fonction_settings_btn").click(function(e) {
+		                $("#account_settings").css('display', 'none');
+		                $("#fonction_settings").css('display', 'block');
+		                $("#password_settings").css('display', 'none');
+		                $("#activity_log").css('display', 'none');
+		                $("#assignations_settings").css('display', 'none');
+ 					});
+ 					
+ 					$("#group_settings_btn").click(function(e) {
+		                $("#account_settings").css('display', 'none');
+		                $("#fonction_settings").css('display', 'none');
+		                $("#password_settings").css('display', 'none');
+		                $("#activity_log").css('display', 'none');
+		                $("#assignations_settings").css('display', 'none');
+ 					});
+ 					$("#password_settings_btn").click(function(e) {
+		                $("#account_settings").css('display', 'none');
+		                $("#fonction_settings").css('display', 'none');
+		                $("#password_settings").css('display', 'block');
+		                $("#activity_log").css('display', 'none');
+		                $("#assignations_settings").css('display', 'none');
+ 					});
+ 					$("#activity_log_btn").click(function(e) {
+		                $("#account_settings").css('display', 'none');
+		                $("#password_settings").css('display', 'none');
+		                $("#activity_log").css('display', 'block');
+		                $("#assignations_settings").css('display', 'none');
+ 					});
+ 					$("#assignations_btn").click(function(e) {
+		                $("#account_settings").css('display', 'none');
+		                $("#fonction_settings").css('display', 'none');
+		                $("#password_settings").css('display', 'none');
+		                $("#activity_log").css('display', 'none');
+		                $("#assignations_settings").css('display', 'block');
+ 					});
+
+ 					
+		 				});
+		 			  </script>	          
+   
+</html>
+	          

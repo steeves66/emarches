@@ -1,0 +1,1343 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	    
+	<h:panelGroup  layout="block" id="menu" >
+	<h:form id="frmenu">
+		<h:panelGroup  layout="block" rendered="#{userController.etatPanelPrincipal}">
+ <section class="sidebar">
+      <!-- Sidebar user panel -->
+       <div class="user-panel">
+        <div class="pull-left image">
+         <!--  <img src="#{request.contextPath}/resources/dist/img/user2-160x160.PNG" class="img-circle" alt="User Image"/> -->
+          <img src="#{request.contextPath}/resources/dist/img/user23-160x160.png" class="img-circle" alt="User Image"/>
+        </div>
+        <div class="pull-left info">
+          <p><span class="hidden-xs"><h:outputText value="#{userController.operateur.opeNom}"/></span></p>
+          <a href="#"><i class="fa fa-circle text-warning" style="color:#f88b2e"></i> En ligne</a>
+        </div>
+      </div>
+       <div class="user-panel">
+        <div class="user-info">
+                <p>
+                   <h:outputText value="#{userController.fonction.fonLibelle}" style="color:#fff;"/><br/>
+                  <small  style=" color:#fff;">Connecté le : 
+                  <h:outputText value="#{userController.dateCon}">
+              		<f:convertDateTime pattern="dd/MM/yyyy HH:mm" /></h:outputText>
+                  </small>
+                </p>
+                </div>
+      </div>
+      <!-- /.search form -->
+      <!-- sidebar menu: : style can be found in sidebar.less -->
+      <ul class="sidebar-menu" data-widget="tree">
+      
+      
+          
+         
+         <!-- DEBUT TRAITEMENT AUTORITE CONTRACTANTE -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+         
+          <!-- DEBUT M1 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M1-Procédure de Préparation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','LIS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+              
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Classique</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{ppmController.renderPage('ppm1','SAIPPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          </ul>     
+         </li>
+         
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+              <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{pgpmAcController.renderPage('pgspm1','SAIPGSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+           
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{ppmController.renderPage('pspm1','SAIPSPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+           
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Gestion des AMI / PRQ</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AMI</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie AMI
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie DP
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Pré qualification</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+          <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie PRQ
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie DP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         
+          
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Dossier d'appel à <br/> <span style="margin-left:30px">la concurrence</span> </span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','SAIDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+			
+            
+               <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','OBSDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Prise en compte des <br/><span style="margin-left:20px">Observations</span>
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         
+          </ul>     
+         </li>
+         <!-- FIN M1 -->
+         
+         <!-- DEBUT M2 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M2-Publications</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+          <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Dao en attente de Publication
+             </p:commandLink>
+            </li>
+			
+			
+			
+			
+          </ul>
+        </li>
+         <!-- FIN M2 -->
+         
+           <!-- DEBUT M3 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M3-Demande de dérogations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{demandeController.renderPage('dem1','LISDEMSAI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie 
+             </p:commandLink>
+            </li>            
+            
+        
+         </ul>     
+         </li>
+         <!-- FIN M3 -->
+         
+           <!-- DEBUT M3 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M4-Préparation des Offres</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+           <li>
+              <p:commandLink action="#{daoController.renderPage('dao1','VETDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Vente / Retrait du DAO
+             </p:commandLink>
+            </li>
+            
+              <li>
+              <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Demande de clarification
+             </p:commandLink>
+            </li>
+         </ul>     
+         </li>
+         <!-- FIN M3 -->
+         
+           <!-- DEBUT M4 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M5-Travaux de la Commission</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISOUV')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Ouverture des Offres
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISANA')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Analyse des Offres
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISJUG')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Jugement des Offres
+             </p:commandLink>
+            </li>
+        
+          </ul>
+        </li>   
+         <!-- FIN M4 -->
+         
+         <!-- DEBUT M5 :  -->
+         <h:panelGroup rendered="false">
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M6-Contractualisation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication des résultats
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Projet de Marché
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Approbation du Marché
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Suivie de l'exécution
+             </p:commandLink>
+            </li>
+              
+          </ul>     
+         </li>
+         <!-- FIN M5 -->
+         </h:panelGroup>
+         
+      
+         
+         </h:panelGroup>
+         <!-- FIN TRAITEMENT AUTORITE CONTRACTANTE -->
+         
+         
+         
+          <!-- DEBUT TRAITEMENT CPMP -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Procédure de Préparation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+             <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','VAL')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+              
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Classique</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+            <li>
+            <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','VALPGPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+          
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+             <li>
+            <p:commandLink action="#{ppmController.renderPage('ppm1','VALPPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li> 
+           
+           
+          </ul>     
+         </li>
+         
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+             
+             <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{pgpmAcController.renderPage('pgspm1','VALPGSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{ppmController.renderPage('pspm1','VALPSPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+           
+           
+          </ul>     
+         </li>
+         
+         
+    
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Gestion des AMI</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+              <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AMI</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','VALDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+            
+          </ul>     
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Pré qualification</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+
+           
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAO</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+            <li>
+            <p:commandLink  action="#{daoController.renderPage('dao1','TRADAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         
+          </ul>     
+         </li>
+         
+         
+         <!-- DEBUT M2 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M2-Publications</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+          <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Correspondance 
+             </p:commandLink>
+            </li>
+          </ul>
+        </li>
+         <!-- FIN M2 -->
+         
+           <!-- DEBUT M3 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M3-Gestion des dérogations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+              <li>
+            <p:commandLink action="#{demandeController.renderPage('dem1','LISVALDEM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>          
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Incident à l'exécution</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Avenant
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Résiliation
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+        
+         </ul>     
+         </li>
+         <!-- FIN M3 -->
+         
+           <!-- DEBUT M3 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M4-Préparation des Offres</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{daoController.renderPage('dao1','RETDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Retrait de DAO
+             </p:commandLink>
+            </li>
+         </ul>     
+         </li>
+         <!-- FIN M3 -->
+         
+           <!-- DEBUT M4 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M5-Travaux de la Commission</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISOUV')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Ouverture des Offres
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISANA')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Analyse des Offres
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISJUG')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Jugement des Offres
+             </p:commandLink>
+            </li>
+
+          </ul>
+        </li>   
+         <!-- FIN M4 -->
+         
+         <!-- DEBUT M5 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M6-Contractualisation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication des résultats
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Projet de Marché
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Approbation du Marché
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Suivie de l'exécution
+             </p:commandLink>
+            </li>
+              
+          </ul>     
+         </li>
+         <!-- FIN M5 -->
+         
+         
+         <!-- DEBUT M6 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M7-Archivage</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+          <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','LIS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Archivage 
+             </p:commandLink>
+            </li>
+           
+           <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','LIS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Recherche 
+             </p:commandLink>
+            </li>
+           
+          </ul>
+        </li>
+         <!-- FIN M6 -->
+         
+    
+         </h:panelGroup>
+          <!-- DEBUT TRAITEMENT CPMP-->
+          
+          
+          <!-- DEBUT TRAITEMENT DMP -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Procédure de Préparation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+  
+            <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','VAL')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par DMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+           
+
+              
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Classique</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+               <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+            <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','VALPGPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par DMP
+             </p:commandLink>
+            </li>
+
+          </ul>      
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+          
+            <ul class="treeview-menu">
+             <li>
+            <p:commandLink action="#{ppmController.renderPage('ppm1','VALPPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par DMP
+             </p:commandLink>
+            </li>
+
+          </ul>        
+         </li>
+    
+          </ul>     
+         </li>
+         
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+             
+               <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{pgpmAcController.renderPage('pgspm1','VALPGSPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par CPMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+
+            <li>
+            <p:commandLink action="#{ppmController.renderPage('pspm1','VALPSPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par le DMP
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>   
+             
+           
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Gestion des AMI / PRQ</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+               <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AMI</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+        
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par le DMP
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+         
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Pré qualification</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+         
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par le DMP
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+         
+            
+          </ul>     
+         </li>
+           
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAO</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','VALDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par le DMP
+             </p:commandLink>
+            </li>
+          </ul>     
+        </li> 
+               
+          </ul>     
+         </li>
+         
+         <!-- DEBUT M2 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M2-Publications</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+          <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Correspondance 
+             </p:commandLink>
+            </li>
+          </ul>
+        </li>
+         <!-- FIN M2 -->
+         
+           <!-- DEBUT M3 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M3-Gestion des dérogations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+            <p:commandLink action="#{demandeController.renderPage('dem1','VALDEMDMP')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation de la demande dmp
+             </p:commandLink>
+            </li>           
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Incident à l'exécution</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Avenant
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Résiliation
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+        
+         </ul>     
+         </li>
+         <!-- FIN M3 -->
+         
+           <!-- DEBUT M3 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M4-Préparation des Offres</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{daoController.renderPage('dao1','RETDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Retrait de DAO
+             </p:commandLink>
+            </li>
+         </ul>     
+         </li>
+         <!-- FIN M3 -->
+         
+           <!-- DEBUT M4 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M5-Travaux de la Commission</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISOUV')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Ouverture des Offres
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISANA')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Analyse des Offres
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('com1','LISJUG')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Jugement des Offres
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation des Jugements <br/> des Offres
+             </p:commandLink>
+            </li>
+           
+          </ul>
+        </li>   
+         <!-- FIN M4 -->
+         
+         <!-- DEBUT M5 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M6-Contractualisation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication des résultats
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Projet de Marché
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Approbation du Marché
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Suivie de l'exécution
+             </p:commandLink>
+            </li>
+              
+          </ul>     
+         </li>
+         <!-- FIN M5 -->
+         
+         
+         <!-- DEBUT M6 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M7-Archivage</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+          <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','LIS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Archivage 
+             </p:commandLink>
+            </li>
+           
+           <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','LIS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Recherche 
+             </p:commandLink>
+            </li>
+           
+          </ul>
+        </li>
+         <!-- FIN M6 -->
+         </h:panelGroup>
+          <!-- DEBUT TRAITEMENT DMP-->
+          
+          <!-- DEBUT TRAITEMENT DU MENU CHF DE SERVICE -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+                    <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M1-Procédure de Préparation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAO</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+	           <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','AFFDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  action="#{daoController.renderPage('dao1','VALDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+            
+             <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         </ul>
+         
+         </li>
+         </h:panelGroup>
+         <!-- FIN TRAITEMENT DU MENU CHF DE SERVICE -->
+          
+          
+          <!-- DEBUT TRAITEMENT DU MENU CHARGE D'ETUDE -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}">
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M1-Procédure de Préparation</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAO</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+               <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','CHADAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Examen
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         </ul>
+         
+         </li>
+         
+         </h:panelGroup>
+         <!-- FIN TRAITEMENT DU MENU CHARGE D'ETUDE -->
+          
+         
+           <!-- DEBUT TRAITEMENT DU MENU ADMINISTRATEUR -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ADM'}">
+
+         
+        
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Gestion des acteurs</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{operateurController.renderPage('ope1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Opérateur
+             </p:commandLink>
+            </li>
+            
+            
+            <li>
+            <p:commandLink action="#{fonctionController.renderPage('fon1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Fonction
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{assignationController.renderPage('ass1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Assignation
+             </p:commandLink>
+            </li>
+           
+          </ul>     
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-group"></i> <span>Gestion des commissions</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink  update=":content" > 
+            <i class="fa fa-circle-o"></i>Commission
+             </p:commandLink>
+            </li>
+          
+           
+          </ul>     
+         </li>
+         
+         
+       
+		  <li class="treeview">
+          <a href="#">
+            <i class="fa fa-gear"></i> <span>Données Paramètres</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{ministereController.renderPage('min1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Ministère
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>
+             </p:commandLink>
+            </li>
+            
+            <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>
+             </p:commandLink>
+            </li>
+            
+            <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>
+             </p:commandLink>
+            </li>
+            
+             
+            <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+            
+         
+         </h:panelGroup>
+         <h:panelGroup rendered="false">
+          <!-- FIN TRAITEMENT DU MENU ADMINISTRATEUR-->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Reporting</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>
+             </p:commandLink>
+            </li>
+            
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit2')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>
+             </p:commandLink>
+            </li>
+           
+          </ul>     
+         </li>
+          
+         </h:panelGroup>
+
+         </ul>
+    </section>
+                    
+</h:panelGroup>
+
+
+</h:form>
+</h:panelGroup>
+
+</html>

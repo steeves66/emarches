@@ -1,0 +1,1101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+      <ui:composition template="/template/templatePage.xhtml">
+	<ui:define name="contents">
+<h:form id="gnl">	
+ <section class="content-header">
+      <h3>
+        #{controleController.libelle}
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+        <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>AGPM | Liste
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+  
+    <section class="content">
+     <div class="box"></div>
+     <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-success">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Cliquez pour fermer le tableau de bord
+                      </a>
+                    </h4>
+                  </div>
+                  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">   
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmAcAttenteTransfert}</h3>
+
+              <p>En attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmAcTransmis}</h3>
+
+              <p>Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeAgpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+      
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmAcDifDmpCpmp}</h3>
+
+              <p>Différé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailAcDifDlg').show()" action="#{agpmController.chargeAgpmDifAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+          </h:panelGroup>
+          
+          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
+          <h:panelGroup rendered="#{controleController.panelAgpmTableauBordSai}">
+              
+            <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpSaisie}</h3>
+
+              <p>En attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpTransmis}</h3>
+
+              <p>Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeAgpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink> 
+          </div>
+        </div>
+        <!-- ./col -->
+   
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup> 
+       
+       
+       
+        <h:panelGroup rendered="#{controleController.panelAgpmTableauBordVal}">  
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpAttenteValide}</h3>
+
+              <p>En attente de validation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpValide}</h3>
+
+              <p>Validé(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            
+            <p:commandLink  oncomplete="PF('detailCpmDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpDifCpmp}</h3>
+
+              <p>Différé(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpDifDmp}</h3>
+
+              <p>Différé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+          </h:panelGroup>
+          </h:panelGroup>
+          
+            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
+             <h:panelGroup rendered="#{controleController.panelAgpmTableauBordSaiDmp}">
+              
+            <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.pgpmCpSaisie}</h3>
+
+              <p>En attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmDmTransmis}</h3>
+
+              <p>Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          
+            <p:commandLink  oncomplete="PF('detailDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink> 
+          </div>
+        </div>
+        <!-- ./col -->
+   
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup> 
+       
+          
+
+           <h:panelGroup rendered="#{controleController.panelAgpmTableauBordValDmp}"> 
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->                       
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpValide}</h3>
+
+              <p>En attente de validation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        
+        
+         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmDmValide}</h3>
+
+              <p>Validé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+
+             <p:commandLink  oncomplete="PF('detailDmpDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+				Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> 
+          </div>
+        </div>
+        <!-- ./col -->
+     
+   
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpDifDmp}</h3>
+
+              <p>Différé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+           
+            <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+          </h:panelGroup>
+          </h:panelGroup>
+          
+             
+                </div>
+              </div>
+     
+     
+     
+		<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+			
+             <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+            
+            <div class="row">
+            
+            <div class="col-md-12">
+            
+            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouvel Avis" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{agpmController.renderPage('agpm2','ENG')}"  update=":content">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvel AGPM</span>
+				</p:commandLink>
+                     
+                     
+                     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+				    <div class="input-group input-group-sm col-md-3">
+                     <label >
+                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+                         
+                          <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
+					 </div>
+					 </h:panelGroup>
+					 
+					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+					 <div class="input-group input-group-sm col-md-3">
+                      <label >
+                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+                          <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
+					 </div>
+					 </h:panelGroup>
+					 
+					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+					 <div class="input-group input-group-sm col-md-3">
+                      <label >
+                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+                         
+                          <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
+					 </div>
+					 </h:panelGroup>
+					
+            </div>
+            </div>
+                 <h:panelGroup rendered="#{controleController.panel1}">
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.affichageListe}" emptyMessage="Aucun Avis enregistré" rows="10" 
+                         paginator="true" draggableColumns="true"
+                         rowsPerPageTemplate="5,10,15" >
+                          <p:column headerText="N°" style="width:#{controleController.numero}">
+                          
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affAgpId}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affAgpId}"/>
+         				</h:panelGroup>
+				        </p:column>
+                         
+                         <p:column headerText="Bailleur" styleClass="#{controleController.bailleur}">
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+         				</h:panelGroup>
+				        </p:column>
+				         <p:column headerText="N°Accord" styleClass="#{controleController.accord}">
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
+         				</h:panelGroup>
+				        </p:column>
+				         <p:column headerText="AC" styleClass="#{controleController.ministere}" style="overflow:auto;" 
+				         rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TStructure.strLibelleLong}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         			    <h:outputText value="#{slctdTb.TStructure.strLibelleLong}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        
+				        
+				        <p:column headerText="Autorité Contractante" styleClass="#{controleController.autorite}"  
+				        rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}"/>
+         				</h:panelGroup>
+				        </p:column>
+                         
+                         
+                         <p:column headerText="Projet" styleClass="#{controleController.projet}" >
+                         <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TProjet.proTitre}"/>
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				<p:column headerText="Organe d'Exécution" styleClass="#{controleController.organe}" >
+         				<h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        
+
+                          <p:column headerText="Actions" style="width:#{controleController.actions} ">
+				         <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+	                                 <p:commandLink  oncomplete="PF('motif').show()" action="#{agpmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                                <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
+	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
+	                           </p:commandLink> 
+	         		     </h:panelGroup>
+                             
+                             
+                             <p:commandLink  action="#{etatsAgpmController.renderPage('agpm5')}" styleClass="btn btn-xs btn-success"  title="Apercu Test" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
+                             </p:commandLink>
+                             
+                             
+				              
+				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{agpmController.renderPage('agpm2','MOD')}"
+				               title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
+                            </p:commandLink>
+                            
+                             <p:commandLink  action="#{agpmController.transmettre}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmission" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
+                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
+                                  <p:confirm header="Confirmation" message="Voulez-vous transmettre de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
+                             </p:commandLink> 
+                                  
+                               
+				         </p:column>   
+    </p:dataTable>
+      
+    </h:panelGroup>
+    
+    
+    <!--DEBUT PANEL DE VALIDATION -->
+    <h:panelGroup rendered="#{controleController.panel2}">
+           
+					<p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.validationListe}"  emptyMessage="Aucun AGPM enregistré" rows="10" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
+                 
+                       <p:column headerText="N°" style="width:#{controleController.numero} ">
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affAgpId}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affAgpId}"/>
+         				</h:panelGroup>
+				        </p:column>
+                         
+                         <p:column headerText="Bailleur" styleClass="#{controleController.bailleur}" >
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        
+				        <p:column headerText="N°Accord" styleClass="#{controleController.accord}" >
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        
+				         <p:column headerText="AC" styleClass="#{controleController.ministere}"  >
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TStructure.strLibelleLong}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TStructure.strLibelleLong}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        
+				        
+				         <p:column headerText="Autorité Contractante" styleClass="#{controleController.autorite}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TFonction.fonCod}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TFonction.fonCod}"/>
+         				</h:panelGroup>
+				        </p:column>
+                         
+				       
+         				<p:column headerText="Projet" styleClass="#{controleController.projet}" >
+                         <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TProjet.proTitre}"/>
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				<p:column headerText="Organe d'Exécution" styleClass="#{controleController.organe}" >
+         				<h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        
+				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
+				         <p:column headerText="Date Reception" styleClass="#{controleController.datevalac}" >
+         				<h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        </h:panelGroup>
+				        
+				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
+				        <p:column headerText="Date Reception" styleClass="#{controleController.datevalcpmp}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
+				        </p:column>
+				        </h:panelGroup>
+				        
+				        
+				         
+				       
+                      <p:column headerText="Actions" style="width:#{controleController.actions} ">
+                      
+                       <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{agpmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                               <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
+	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
+	                           </p:commandLink> 
+	         		   </h:panelGroup> 
+                        
+
+                             
+                             <p:commandLink  action="#{etatsAgpmController.renderPage('agpm5')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
+                             </p:commandLink>
+                                 
+                                  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">                       
+                                 <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
+                              </p:commandLink>
+                              </h:panelGroup> 
+                              
+                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+                              <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                              <p:commandLink action="#{agpmController.differer()}"   styleClass="btn btn-xs btn-danger" style="background-color: red; margin-left: 3px" title="Différer" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
+                                <p:confirm header="Confirmation" message="Voulez-vous confirmer la retour de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
+                              </p:commandLink>
+                              </h:panelGroup>
+                              </h:panelGroup>
+                               
+                              
+                              <p:commandLink  action="#{agpmController.valider()}" styleClass="btn btn-xs btn-warning" style="background-color: #036d3b; border: #f88b2e; margin-left: 3px" title="validation" update=":content">
+                                <i class="ace-icon fa fa-mail-forward bigger-130" style="color: white"></i> 
+                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
+                              <p:confirm header="Confirmation" message="Voulez-vous confirmer la validation de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
+                              </p:commandLink>
+                                
+                               
+				         </p:column>   
+       
+    </p:dataTable>
+  
+    </h:panelGroup>
+    <!-- FIN PANEL DE TRANSMISSION GROUPEE -->
+ 
+ <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+ 
+                 
+          
+       </section>
+         
+
+</h:form>
+
+ <h:form id="motif">
+	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+					<div class="g12">
+						<div class="panel-heading">
+						Motif du rejet de l'Agpm N° #{agpmController.slctdTd.affAgpId}
+						</div> 
+					<div class="panel-body panel-body-nopadding">
+	                  <p:inputTextarea rows="4" value="#{agpmController.agpmstatut.hagMotif}" cols="100" style="width:100%;" readonly="true"/>
+	                  </div>
+	                  <div class="par pull-right"> par:<strong>#{agpmController.agpmstatut.fonLibelle}</strong></div>
+                     <div class="panel-footer">
+                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()"/>
+                     </div>
+                    </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="differe">
+	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+					<div class="g12">
+						<div class="panel-heading">
+						Motif du retour de l'Agpm N° #{agpmController.slctdTd.affAgpId}
+						
+						</div> 
+					<div class="panel-body panel-body-nopadding">
+	                 <div class="col-xs-12 col-sm-12">
+						   <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+						   <p:inputTextarea value="#{agpmController.observation}" rows="4" cols="33" style="width:100%;"/>
+						   </div>
+	                  </div>
+	                  
+                     
+                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('diff').hide()"/>
+                       &nbsp; &nbsp;
+                      <p:commandLink styleClass="btn btn-success"  value="Valider" action="#{agpmController.differer()}" oncomplete="PF('diff').hide()" update=":gnl"/>
+                    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    
+       <h:form id="apercu">
+	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="55%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
+						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+			               emptyMessage="Aucun AGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+					   <p:column headerText="N°" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.affAgpId}" />
+				        </p:column>
+						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+				        </p:column>
+				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>
+				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        </p:column>
+				        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                  
+	                   
+	                </div>
+	                
+
+		            </div>
+		           
+	            </div>
+	            
+    
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+       <h:form id="apercuCp">
+	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="55%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValCp}"
+						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="N°" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.affAgpId}" />
+				        </p:column>
+						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+				        </p:column>
+				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>
+				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        </p:column>
+				        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+					   
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                  
+	                   
+	                </div>
+	                
+
+		            </div>
+		           
+	            </div>
+	        
+            </div>
+      </p:dialog>
+    </h:form>
+    
+      <h:form id="apercuDp">
+	        <p:dialog  widgetVar="detailDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="55%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValDmp}"
+						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="N°" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.affAgpId}" />
+				        </p:column>
+						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+				        </p:column>
+				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>
+				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        </p:column>
+				        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+					    
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+	                
+		            </div>
+		           
+	            </div>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="apercuDifCp">
+	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="55%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+					      <p:column headerText="N°" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.affAgpId}" />
+				        </p:column>
+						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+				        </p:column>
+				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>
+				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        </p:column>
+				        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+	                
+		            </div>
+		           
+	            </div>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="apercuDif">
+	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="55%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
+			               
+					     <p:column headerText="N°" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.affAgpId}" />
+				        </p:column>
+						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+				        </p:column>
+				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>
+				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        </p:column>
+				        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+	                
+		            </div>
+		           
+	            </div>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="apercuDifAc">
+	        <p:dialog  widgetVar="detailAcDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+					      <p:column headerText="N°" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.affAgpId}" />
+				        </p:column>
+						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+				        </p:column>
+				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>
+				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        </p:column>
+				        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+	                
+		            </div>
+		           
+	            </div>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    </ui:define>
+</ui:composition>
+</html>

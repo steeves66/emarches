@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">        
+<h:form id="gnl">	
+ <section class="content-header">
+      <h1>
+        Indicateurs
+        <small>Saisie des Types fonctions</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active">Type fonction</li>
+      </ol>
+    </section>
+  
+    <section class="content">
+<div class="box box-default">
+<div class="panel-primary">
+           <div class="panel-heading">Liste des Types fonctions
+           
+           	<div class="pull-right">
+			
+				
+			<p:commandLink styleClass="btn btn-success mr10 btn-rounded waves-effect waves-light" style="margin-top:-7px;margin-left:7px;" data-original-title="Nouveau type fonction" data-toggle="tooltip" action="#{userController.renderPage('tyf2')}"  update=":content">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"> Nouveau type fonction</span>
+				</p:commandLink>
+				
+			</div>
+           </div>
+          </div>
+          <div class="box-body">
+            <div class="col-xs-12">
+              <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+
+					</div>
+					
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{typeFonctionController.currentObjetListe}" emptyMessage="Aucune demande enregistrée" rows="10" 
+                         paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15">
+             
+         				 <p:column headerText="Type fonction code" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.tyfCod}" />
+				        </p:column>
+				        
+                         
+         				 <p:column headerText="Type fonction libelle" styleClass="col-sm-6">
+				            <h:outputText value="#{slctdTb.tyfLibelle}" />
+				        </p:column>
+				        
+                         
+				        
+				        
+				         <p:column headerText="Actions" styleClass="col-sm-1">
+				          
+                              
+                              
+				              <p:commandLink  class="btn btn-xs btn-primary" 
+				              action="#{userController.renderPage('tyf3')}" title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{typeFonctionController.slctdTb}" />
+                                </p:commandLink>
+                              
+                               
+				              <p:commandLink  class="btn btn-xs btn-danger" style="margin-left:5px;"
+				               action="#{typeFonctionController.delete()}" title="Suprimmer" update=":gnl">
+                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{typeFonctionController.slctdTb}" />
+                                </p:commandLink>
+                              
+                              
+                              
+                              
+                     
+				             
+				         </p:column>    
+         
+        <f:facet name="paginatorTopLeft">
+            <p:commandButton type="button" icon="fa fa-sync" />
+        </f:facet>
+ 
+        <f:facet name="paginatorBottomRight">
+            <p:commandButton type="button" icon="fa fa-cloud-upload" />
+        </f:facet>
+    </p:dataTable>
+ <p:commandLink styleClass="btn btn-danger mr10" value="Fermer" style="margin-top:10px;" action="#{userController.renderPage('accueil')}"  update=":content"/>
+ 
+          </div>
+          
+          </div>
+          
+       </section>
+         
+
+</h:form>
+</ui:define>
+</ui:composition>
+
+	
+<!-- 
+		 ConfirmDialog 
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog> -->
+</html>

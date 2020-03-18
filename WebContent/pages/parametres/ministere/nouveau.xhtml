@@ -1,0 +1,79 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl">
+<section class="content-header">
+      <h1>
+        Ministère
+        <small>Nouveau Ministère</small>
+      </h1>
+      <ol class="breadcrumb">
+       <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+        <li><a><i class="fa fa-dashboard"></i> Accueil</a></li>
+        </p:commandLink>
+        <li class="active">Nouveau Ministère</li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
+       <div class="form-group ">
+	                  <label for="code" class="col-sm-3 control-label"><b> Code Ministère  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{ministereController.ministere.minCode}"  type="text"  styleClass="form-control"  id="code" style="width: 100%"/>
+	                  </div>
+	                </div>
+	                  <div class="form-group ">
+	                  <label for="minlib" class="col-sm-3 control-label"><b>Libellé Ministère<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{ministereController.ministere.minLibelle}"  type="text"  styleClass="form-control"  id="minlib" style="width: 100%" />
+	                  </div>
+	                </div>
+	      <div class="form-group ">
+	                  <label for="abgre" class="col-sm-3 control-label"><b> Abrégé</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{ministereController.ministere.minLibelleCourt}"  type="text"  styleClass="form-control"  id="abgre" style="width: 100%"/>
+	                  </div>
+	                </div>
+	                  <div class="form-group ">
+	                  <label for="desc" class="col-sm-3 control-label"><b>Description</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{ministereController.ministere.minDescription}"  type="text"  styleClass="form-control"  id="desc" style="width: 100%" />
+	                  </div>
+	                </div>
+	       <div class="row">
+	       <div class="col-sm-3"></div> 
+	       <div class="col-sm-9">   
+			 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{ministereController.renderPage('min1')}"  update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+				      
+		<div class="pull-right ">
+			 <p:commandLink  styleClass="btn btn-success" style="background-color: #036d3b" action="#{ministereController.saveMinistere}" update=":content">
+			    <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			    <i class="ace-icon fa fa-save"></i> Enregistrer
+			 </p:commandLink>
+	     </div>
+		       </div>
+		       </div>
+     </div>
+    </section>
+    </h:form>
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

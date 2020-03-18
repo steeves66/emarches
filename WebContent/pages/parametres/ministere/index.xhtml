@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="/template/templatePage.xhtml">
+ <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/portail/img/icons/icone.ico" />
+	
+	<ui:define name="contents">      
+<h:form id="gnl">	
+
+ <section class="content-header">
+      <h1>
+        Ministeres
+        <small>Liste des ministères</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active">Ministères</li>
+      </ol>
+    </section>
+  
+    <section class="content">
+     <div class="box"></div>
+     
+             <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+            <div class="row">
+            <div class="col-md-12">
+            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouveau Ministère" data-toggle="tooltip" action="#{ministereController.renderPage('min2')}" update=":content">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"> Nouveau Ministère</span>
+				</p:commandLink>
+				
+				<label >
+                      <p:inputText type="text" value="#{ministereController.filterCode}"  placeholder="saisir le libelle du ministère">
+                      <p:ajax event="keyup" listener="#{ministereController.filtreministere()}" update=":gnl:ndTble"> </p:ajax>
+                      </p:inputText> 	
+					</label>
+					
+					
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ministereController.listMinistere}" emptyMessage="Aucun ministère enregistré" rows="10" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
+                         
+                         <p:column headerText="Code" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.minCode}"/>
+				        </p:column>
+				        
+				           <p:column headerText="Libellé" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.minLibelle}"/>
+				        </p:column>
+				        
+				          <p:column headerText="Abrégé" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.minLibelleCourt}"/>
+				        </p:column>   
+
+         
+				        
+                      <p:column headerText="Actions" width="2%">
+				               <button class="btn btn-xs btn-warning" style="background-color: #f88b2e">
+				              <p:commandLink action="#{ministereController.renderPage('min3')}" title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ministereController.slctdTd}" />
+                                </p:commandLink>
+                              </button>
+				         </p:column>   
+				         
+        <f:facet name="paginatorTopLeft">
+            <p:commandButton type="button" icon="fa fa-sync" />
+        </f:facet>
+ 
+        <f:facet name="paginatorBottomRight">
+            <p:commandButton type="button" icon="fa fa-cloud-upload" />
+        </f:facet>
+    </p:dataTable>
+    
+     <p:commandLink styleClass="btn btn-danger mr10" value="Fermer" style="margin-top:10px;" action="#{userController.renderPage('accueil')}"  update=":content"/>
+            </div>
+            </div>
+    </section>
+    
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    </ui:define>
+    </ui:composition>
+</html>

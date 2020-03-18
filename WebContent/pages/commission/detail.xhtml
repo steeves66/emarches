@@ -1,0 +1,360 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+       <h3>
+       #{controleController.libelle}#{commissionController.slctdTd.aaoCode}
+        <small>
+        <!--  #{controleController.libelle1}  -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{etatsDaoController.renderPage('dao1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | details
+             </p:commandLink>
+            </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <div class="box box-success">
+            
+              <div class="box-body">
+              
+               <div class="row">
+	             <div class="col-md-12">
+	                 <div class="box box-success box-solid">
+		               <div class="box-header with-border">
+		                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L'AVIS D'APPEL D'OFFRE N°#{commissionController.slctdTd.aaoCode}</div></div> 
+					         <div class="col-md-2 "> </div>
+		               </div>
+		                <!-- /.box-header -->
+			             <div class="box-body">
+			             <div class="row">
+			               <div class="col-sm-2"><label class="pull-right">Objet :</label></div>
+		                  <div class="col-sm-10">
+		                    <label><h:outputText value="#{commissionController.slctdTd.TDacSpecs.dacObjet}" styleClass="text-muted" style="width: 100%" readonly="true"/></label>
+		                  </div>
+		                  </div>
+		                   <div class="col-sm-2"><label class="pull-right">Type de marchés :</label></div>
+			                  <div class="col-sm-3">
+			                    <label><h:outputText  styleClass="text-muted" value="#{commissionController.slctdTd.TDacSpecs.TTypeMarche.tymLibelleLong}" style="width: 100%" readonly="true"/></label>
+			                  </div>
+			                  <div class="col-sm-2"><label class="pull-right">Mode de Passation :</label></div>
+			                  <div class="col-sm-3">
+			                    <label><h:outputText styleClass="text-muted" value="#{commissionController.slctdTd.TDacSpecs.TModePassation.mopLibelleLong}"   style="width: 100%" readonly="true"/></label>
+			                  </div>
+			                   <div class="col-sm-1"><label class="pull-right">Nbre lot :</label></div>
+			                  <div class="col-sm-1">
+			                    <label><h:outputText styleClass="text-muted" value="#{commissionController.slctdTd.aaoNbrLot}"  style="width: 100%" readonly="true"/></label>
+			                  </div>
+			                  
+			                  
+			                    <div class="col-sm-2"><label class="pull-right">Date d'ouverture :</label></div>
+			                  <div class="col-sm-3">
+			                    <label><h:outputText styleClass="text-muted" value="#{commissionController.slctdTd.aaoDteHeurOuv}"  style="width: 100%" readonly="true"/></label>
+			                  </div>
+			                  <div class="col-sm-2"><label class="pull-right">Heure d'ouverture:</label></div>
+			                  <div class="col-sm-3">
+			                    <label><h:outputText styleClass="text-muted" value="#{commissionController.slctdTd.aaoDteHeurOuv}"   style="width: 100%" readonly="true"/></label>
+			                  </div>
+			             </div>
+	             </div>
+	             </div>
+             </div>
+             
+
+              <div class="row">
+	             <div class="col-md-12">
+	                 <div class="box box-success box-solid">
+		               <div class="box-header with-border">
+		                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES LOTS</div></div> 
+					         <div class="col-md-2 "> </div>
+			               </div>
+			                <!-- /.box-header -->
+				         <div class="box-body">
+				            <p:dataTable id="TLot" styleClass="table mb0 dt-on-steroids dataTable" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun dépot lot trouvé">
+			               <p:column headerText="N°LOT" styleClass="col-sm-1">
+			                   <h:outputText  />
+			               </p:column>
+			                <p:column headerText="OBJET" styleClass="col-sm-9">
+			                   <h:outputText value="#{doss.dagCommentaire}" />
+			               </p:column>
+			               
+                 </p:dataTable>
+				         </div>
+			       </div>
+			     </div>
+			   </div>
+			   
+			     <div class="row">
+	             <div class="col-md-7">
+	                 <div class="box box-success box-solid">
+		               <div class="box-header with-border">
+		                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES SOUMISSIONNAIRES</div></div> 
+					         <div class="col-md-2 "> </div>
+			               </div>
+			                <!-- /.box-header -->
+				         <div class="box-body">
+				          <p:dataTable id="TDepot" styleClass="table mb0 dt-on-steroids dataTable" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun soumissionnaire trouvé">
+	               <p:column headerText="Ncc" styleClass="col-sm-2">
+	                   <h:outputText  />
+	               </p:column>
+	                <p:column headerText="Entreprise" styleClass="col-sm-5">
+	                   <h:outputText value="#{doss.dagCommentaire}" />
+	               </p:column>
+	                <p:column headerText="Representant" styleClass="col-sm-5">
+	                   <h:outputText value="#{doss.dagCommentaire}" />
+	               </p:column>
+                 </p:dataTable> 
+				         </div>
+			       </div>
+			     </div>
+			     
+			       <div class="col-md-5">
+	                 <div class="box box-success box-solid">
+		               <div class="box-header with-border">
+		                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES PIECES DU SOUMISSIONNAIRES...</div></div> 
+					         <div class="col-md-2 "> </div>
+			               </div>
+			                <!-- /.box-header -->
+				         <div class="box-body">
+				          <p:dataTable id="pieces" styleClass="table mb0 dt-on-steroids dataTable" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun pièce trouvé">
+			               <p:column headerText="Pièces" styleClass="col-sm-12">
+			                   <h:outputText  />
+			               </p:column>
+			               
+		                 </p:dataTable> 
+				         </div>
+			       </div>
+			     </div>
+			    
+			   </div>
+			   
+			   
+			         <div class="row">
+	             <div class="col-md-12">
+	                 <div class="box box-success box-solid">
+		               <div class="box-header with-border">
+		                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE SOUMISSIONNAITE...</div></div> 
+					         <div class="col-md-2 "> </div>
+			               </div>
+			                <!-- /.box-header -->
+				         <div class="box-body">
+				          <div class="row">
+               <div class="col-md-3">
+              
+                 <div class="row">
+                  <div class="col-md-12">
+                 
+               <div class="col-md-6align justify-content-center">
+	                    <fieldset style="border: 1px solid #ffb380;border-radius:6px">
+		                    <legend><small>ANALYSE FINANCIERE</small></legend>
+              
+	            <!-- /.box-header -->
+	            <div class="box-body">
+		           <div class="row">
+		           <div class="col-sm-12">
+		            <div class="form-group">
+	                    <div class="col-sm-5"><label class="pull-right">Montant lu</label></div>
+		                  <div class="col-sm-7">
+		                    <label>
+		                    <h:outputText value="15 000 000" styleClass="text-muted" style="width: 100%" readonly="true">
+		                     <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                    </h:outputText>
+		                    </label>
+		                  </div> 
+	                </div>
+		           </div>
+		           <div class="col-sm-12">
+		            <div class="form-group">
+	                 <div class="col-sm-5"><label class="pull-right"> Montant Corrigé</label></div>
+		                  <div class="col-sm-7">
+		                    <label>
+		                    <h:outputText value="10 000 000" styleClass="text-muted" style="width: 100%" readonly="true">
+		                     <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                    </h:outputText>
+		                    </label>
+		                  </div>
+	                </div>
+		           </div>
+		            <div class="col-sm-12">
+		            <div class="form-group">
+	                 <div class="col-sm-5"><label class="pull-right"> Rang</label></div>
+		                  <div class="col-sm-7">
+		                    <label>
+		                    <h:outputText value="10" styleClass="text-muted" style="width: 100%" readonly="true">
+		                    </h:outputText>
+		                    </label>
+		                  </div>
+	                </div>
+		           </div>
+		           </div>
+		            
+		             <div class="form-group">
+		                  <label class="col-sm-5 control-label">Observation</label>
+		                  <div class="col-sm-7">
+		                     <h:outputText  styleClass="text-muted" value="Test Observation" style="width: 100%" readonly="true"/>
+		                  </div>
+		              </div>
+		              
+	            </div>
+	            </fieldset>
+	            </div>
+                 </div>  
+               </div>
+               </div>
+               
+               
+               
+               <div class="col-md-9">
+               <div class="col-md-6align justify-content-center">
+	                    <fieldset style="border: 1px solid #ffb380;border-radius:4px">
+		                    <legend><small>MODE DE QUALIFICATION</small></legend>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <div class="row ">
+                   <div class="col-md-3">
+                   <div class="col-md-6align justify-content-center">
+	                    <fieldset style="border: 1px solid #ffb380;border-radius:4px">
+		                    <legend><small>Conformité</small></legend>
+		                       <div class="form-group">
+		                       <label class="col-sm-6 control-label" style="margin-top:-8px">Conformité Tech</label>
+				                  <div class="col-sm-6">
+				                     <h:outputText  styleClass="text-muted" value="Conforme" style="width: 100%" readonly="true"/>
+				                  </div>
+			                </div>
+			                 <div class="form-group">
+		                       <label class="col-sm-6 control-label" style="margin-top:-8px">Observation</label>
+				                  <div class="col-sm-6">
+				                     <h:outputText  styleClass="text-muted" value="Test Observation" style="width: 100%" readonly="true"/>
+				                  </div>
+			                </div>
+			                <br/><br/>
+		                    </fieldset>
+	                    </div>
+                    </div>
+                     <div class="col-md-3">
+                   <div class="col-md-6align justify-content-center">
+	                    <fieldset style="border: 1px solid #ffb380;border-radius:4px">
+		                    <legend><small>Score</small></legend>
+		                        <div class="form-group">
+		                       <label class="col-sm-5 control-label" style="margin-top:-8px">Note</label>
+				                  <div class="col-sm-7">
+				                     <h:outputText  styleClass="text-muted" value="10" style="width: 100%" readonly="true"/>
+				                  </div>
+			                </div>
+			                 <div class="form-group">
+		                       <label class="col-sm-5 control-label" style="margin-top:-8px">Observation</label>
+				                  <div class="col-sm-7">
+				                     <h:outputText  styleClass="text-muted" value="Test Observation" style="width: 100%" readonly="true"/>
+				                  </div>
+			                </div>
+			                 <br/><br/>
+		                    </fieldset>
+	                    </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                    
+                     <fieldset style="border: 1px solid #ffb380;padding-left:5px;">
+		                    <legend><small>Autre mode</small></legend>
+		                <div class="row">
+		                  <div class="col-sm-6">
+		                       <div class="form-group">
+			                  <label  class="col-sm-4 control-label" style="margin-top:-8px"> Administraive </label>
+			                  <div class="col-sm-8">
+			                   <h:outputText  styleClass="text-muted" value="Test Admin" style="width: 100%" readonly="true"/>
+			                  </div>
+			                </div>
+			                <div class="form-group">
+			                  <label  class="col-sm-4 control-label" style="margin-top:-8px"> Technique </label>
+			                  <div class="col-sm-8">
+			                   <h:outputText  styleClass="text-muted" value="Test Technique" style="width: 100%" readonly="true"/>
+			                  </div>
+			                </div>
+			                
+		                  </div>
+		                   <div class="col-sm-6">
+		                      <div class="form-group">
+			                 <label  class="col-sm-4 control-label" style="margin-top:-8px"> Financière </label>
+			                  <div class="col-sm-8">
+			                   <h:outputText  styleClass="text-muted" value="Test Financière" style="width: 100%" readonly="true"/>
+			                  </div>
+			                </div>
+			                <label  class="col-sm-4 control-label" style="margin-top:-8px"> Résultats</label>
+			                  <div class="col-sm-8">
+			                   <h:outputText  styleClass="text-muted" value="Test Résultats" style="width: 100%" readonly="true"/>
+			                  </div>
+		                  </div>
+		                 </div>
+		                 <div class="row">
+		                 <div class="col-sm-12">
+		                   <div class="form-group">
+			                  <label  class="col-sm-2 control-label" style="margin-top:-8px"> Observations</label>
+			                  <div class="col-sm-10">
+			                    <h:outputText  styleClass="text-muted" value="Test Observations" style="width: 100%" readonly="true"/>
+			                  </div>
+			                </div>
+			                </div>
+		                 </div>
+		                
+		               </fieldset>
+                    </div>
+                    </div>
+	            </div>
+	           </fieldset>
+	           </div>
+               </div>
+              </div>
+				         </div>
+			       </div>
+			     </div>
+			   </div>
+              
+            </div>
+            <!-- /.box-body -->
+            </div>
+
+			<p:commandLink rendered="#{controleController.btn_fermerAnalyse}" styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISANA')}" style="background-color: #f88b2e;" update=":content">
+	           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+			</p:commandLink>
+			<p:commandLink rendered="#{controleController.btn_fermerOuverture}" styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISOUV')}" style="background-color: #f88b2e;" update=":content">
+	           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+			</p:commandLink>
+			<p:commandLink rendered="#{controleController.btn_fermerJugement}" styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISJUG')}" style="background-color: #f88b2e;" update=":content">
+	           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+			</p:commandLink>
+    </section>
+           
+		 
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

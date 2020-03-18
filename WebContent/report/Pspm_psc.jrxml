@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-02-04T18:07:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pspm_psc" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd56bcf1-e64d-427e-9d36-ff3f7182500e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Table_TH" mode="Opaque" backcolor="#3CA34E">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Details" whenResourceMissingType="Empty" uuid="1a7b3118-438e-4e55-b3a1-f1a48b0bbbd2">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code" class="java.lang.Long">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+			<defaultValueExpression><![CDATA[$P{param_code}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[select *
+from v_ppm_etat vp
+where vp.aff_dpp_type_plan = 'PN'
+and vp.aff_dpp_plp_id = $P{param_code}]]>
+		</queryString>
+		<field name="V_ID" class="java.lang.Long"/>
+		<field name="AFF_ID" class="java.lang.Long"/>
+		<field name="AFF_DPP_ID" class="java.lang.Long"/>
+		<field name="FON_LIBELLE" class="java.lang.String"/>
+		<field name="AFF_DPP_OBJET" class="java.lang.String"/>
+		<field name="AFF_DPP_SOURCE_FIN" class="java.lang.String"/>
+		<field name="LBG_CODE" class="java.lang.String"/>
+		<field name="LBG_IMPUTATION" class="java.lang.String"/>
+		<field name="NAT_CODE" class="java.lang.String"/>
+		<field name="NAT_LIBELLE" class="java.lang.String"/>
+		<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
+		<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
+		<field name="AFF_DPP_DATE_AVIS_AO_PUBLICAT" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_OUVERT_OT" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_OUVERT_OF" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_JUGEMENT_OFFRE" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_ATT_APPROB_DMP" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_ATT_APPRO_BAIL" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_PLP_ID" class="java.math.BigDecimal"/>
+		<field name="AFF_DPP_STR_BENEFI" class="java.lang.String"/>
+		<field name="AFF_DPP_STR_CONDUC" class="java.lang.String"/>
+		<field name="AFF_DPP_TYPE_PLAN" class="java.lang.String"/>
+		<field name="AFF_DPP_DATE_NEGOCIATION" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_ELAB_RAPPORT" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_SIGNAT_ATTRIB" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_SIGNAT_AC" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_EXEC_DEBUT" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_EXEC_FIN" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_DAO_TRANS" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_DAO_APPROB_DMP" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_DATE_DAO_APPROB_BAIL" class="java.sql.Timestamp"/>
+		<group name="AFF_DPP_OBJET">
+			<groupExpression><![CDATA[$F{AFF_DPP_OBJET}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_SOURCE_FIN">
+			<groupExpression><![CDATA[$F{AFF_DPP_SOURCE_FIN}]]></groupExpression>
+		</group>
+		<group name="LBG_IMPUTATION">
+			<groupExpression><![CDATA[$F{LBG_IMPUTATION}]]></groupExpression>
+		</group>
+		<group name="TYM_LIBELLE_COURT">
+			<groupExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_STR_CONDUC">
+			<groupExpression><![CDATA[$F{AFF_DPP_STR_CONDUC}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_STR_BENEFI">
+			<groupExpression><![CDATA[$F{AFF_DPP_STR_BENEFI}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_DATE_NEGOCIATION">
+			<groupExpression><![CDATA[$F{AFF_DPP_DATE_NEGOCIATION}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_DATE_ELAB_RAPPORT">
+			<groupExpression><![CDATA[$F{AFF_DPP_DATE_ELAB_RAPPORT}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_DATE_JUGEMENT_OFFRE">
+			<groupExpression><![CDATA[$F{AFF_DPP_DATE_JUGEMENT_OFFRE}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_DATE_SIGNAT_ATTRIB">
+			<groupExpression><![CDATA[$F{AFF_DPP_DATE_SIGNAT_ATTRIB}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_DATE_SIGNAT_AC">
+			<groupExpression><![CDATA[$F{AFF_DPP_DATE_SIGNAT_AC}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_DATE_EXEC_DEBUT">
+			<groupExpression><![CDATA[$F{AFF_DPP_DATE_EXEC_DEBUT}]]></groupExpression>
+		</group>
+		<group name="AFF_DPP_DATE_EXEC_FIN">
+			<groupExpression><![CDATA[$F{AFF_DPP_DATE_EXEC_FIN}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="param_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_code" class="java.lang.Long">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString>
+		<![CDATA[select pas.plp_ges_code,pas.plp_id,m.min_libelle,pas."PLP_FON_COD",f.fon_libelle,st.str_libelle_long
+from t_plan_passation pas, t_ministere m,t_fonction f, t_structure st
+where pas.plp_str_code = st.str_code
+and st.str_min_code = m.min_code
+and pas.plp_fon_cod = f.fon_cod
+and pas.plp_id = $P{param_code}]]>
+	</queryString>
+	<field name="PLP_GES_CODE" class="java.lang.Long"/>
+	<field name="PLP_ID" class="java.lang.Long"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="PLP_FON_COD" class="java.lang.String"/>
+	<field name="FON_LIBELLE" class="java.lang.String"/>
+	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="148" splitType="Stretch">
+			<staticText>
+				<reportElement x="657" y="1" width="171" height="17" uuid="d596cb2e-54ec-4c77-902a-2f90ed01078c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[République de Côte d'Ivoire]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="662" y="19" width="166" height="17" uuid="5e344b80-ffad-4806-9899-ce7a96e528f5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Union-Discipline-Travail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-11" y="0" width="281" height="30" uuid="74fd6a17-0293-4b3f-90ce-38b74bac5e15"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
+]]></text>
+			</staticText>
+			<image>
+				<reportElement x="83" y="32" width="57" height="33" uuid="97d417b2-0a42-4be8-9e33-ebacd0cbc9e9"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="24" y="67" width="171" height="19" uuid="5349500d-8606-456e-a934-a4e8af3cdc62"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direction des Marchés Publics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="71" y="81" width="87" height="21" uuid="072a35d1-817f-4148-bf7f-93e1b9dfafff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-MarchesPublics]]></text>
+			</staticText>
+			<rectangle radius="8">
+				<reportElement mode="Opaque" x="71" y="116" width="679" height="31" backcolor="#FA9B3C" uuid="512b8cea-f26e-4f37-a6e4-cf19a9301fb9"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="71" y="118" width="679" height="26" forecolor="#FFFFFF" uuid="e286c52c-f9fe-4b1c-8523-26d3a3006ff6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PLAN SIMPLIFIE DE PASSATIONS DES MARCHES (PSPM) "+$F{PLP_GES_CODE}+" (PSC)"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="370" y="13" width="190" height="51" uuid="8bdf5e5d-493a-4b71-8f2f-ad45f342e374"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="112" splitType="Stretch">
+			<textField>
+				<reportElement x="-11" y="9" width="825" height="21" uuid="228035f7-cdb1-4663-a0ad-d7ce85a2f08c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Ministère : "+$F{MIN_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-11" y="29" width="825" height="21" uuid="34aba80d-8bd2-4b9b-a116-b5b77a3bcf3b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Autorité contractante : "+$F{PLP_FON_COD}+" : "+$F{FON_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="-10" y="50" width="824" height="55" uuid="70986c3b-b411-4d6b-bbe7-c75a3d6854d9">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Details" uuid="075ad350-5eb8-44a4-9d81-c873c7b9d9a3">
+						<datasetParameter name="param_code">
+							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="120" uuid="be32e83a-3a82-4b3b-86ff-2f389740f7de">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="120" height="38" forecolor="#FFFFFF" uuid="37f334a2-6a14-4062-8191-9f01d90c30e1"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[OBJET DE L'OPERATION]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="120" height="17" uuid="f4e41172-da0e-4930-9cc0-8b90c0217107"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{FON_LIBELLE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="23e77add-b74b-407e-a797-b7dab10dc296">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne2"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="38" forecolor="#FFFFFF" uuid="94eeb8a7-0ed3-4da9-a94f-48d9f3e84a16"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[SOURCE DE FINANCEMENT]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="17" uuid="46c6fe29-3aa8-4c71-a53a-b6e6ad19a63f"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{AFF_DPP_SOURCE_FIN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="f9b22128-79fd-43ed-85e9-160bf3197bdb">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="38" forecolor="#FFFFFF" uuid="cd40f635-3b7f-4de6-9a84-33ebe7a60355"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[LIGNE BUDGETAIRE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="60" height="17" uuid="d6cce5fa-bca6-4120-af35-f1994ad73c3e"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{LBG_IMPUTATION}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="52" uuid="953eae7b-4a38-401d-a5cc-1b831bc00d99">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne4"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="52" height="38" forecolor="#FFFFFF" uuid="4bd4f95c-b3c2-4c53-83d8-32c8c72ab6de"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[TYPE DE MARCHES]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="52" height="17" uuid="2235f96f-7600-446c-8071-aeddf922bf15"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="68" uuid="e65669ad-2769-4876-a33b-29593f51a8bc">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne5"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="68" height="38" forecolor="#FFFFFF" uuid="3f90968d-0e35-4dec-948a-b74264d4081c">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[STRUCTURE CONDUCTRICE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="68" height="17" uuid="c8ab3116-5d9a-43e0-8c68-8241893705d3"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{AFF_DPP_STR_CONDUC}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="0884788d-fc06-47c9-98f7-806d1b17abac">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne6"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="38" forecolor="#FFFFFF" uuid="1292b795-64bb-4388-af29-f8584727684f">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[STRUCTURE BENEFICIAIRE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="70" height="17" uuid="6f2d17e8-cec7-4707-8605-8cff248d766e"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{AFF_DPP_STR_BENEFI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="69" uuid="de1e2dea-5888-489b-a374-05e37b91c85d">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne7"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="69" height="38" forecolor="#FFFFFF" uuid="417b453a-fdab-44a7-9e23-89b03256d4aa">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[SOLLICITATION DES FACTURE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="69" height="17" uuid="ea227f16-7ee9-42ba-8498-498b98c6a6c1"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_NEGOCIATION})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="ced3512a-f33c-4292-813e-873f343e6403">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne8"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="38" forecolor="#FFFFFF" uuid="85e34b41-1565-4853-adc1-e287d51bb391"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[RECEPTION DES FACTURES]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="60" height="17" uuid="44df3a97-ca44-45e0-a802-0b38838f64e0"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_ELAB_RAPPORT})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="57" uuid="4bc21f8e-3706-4c3e-83d8-588b452cc839">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne9"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="57" height="38" forecolor="#FFFFFF" uuid="188295d6-d11f-44e8-9db0-68df061a0fe2"/>
+								<box padding="3"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[OUVERTUREANALYSE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="57" height="17" uuid="006ab410-02c5-49ac-8756-813350d03d20"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_JUGEMENT_OFFRE})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="67" uuid="ffd07b53-d3a0-4e1b-a4ed-0e41e2512887">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne10"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="67" height="38" forecolor="#FFFFFF" uuid="f7c712a9-ebe6-46bb-a840-25bbb57be52b"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[SIGNATURE ATTRIBUTAIRE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="67" height="17" uuid="8873df35-1e23-4fba-b52b-da7a138da5f9"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="57" uuid="e1862633-ffb5-4e1e-84af-e4e40bcd0a25">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne11"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<staticText>
+								<reportElement x="0" y="0" width="57" height="38" forecolor="#FFFFFF" uuid="302944c7-a75f-4f63-83bb-9e129183f4d4"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[SIGNATURE AC]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="57" height="17" uuid="820a129e-1f16-450b-a255-16b06de79b53"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="573ad3c2-ba8a-487d-9454-efa83088d44e">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne12"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="38" forecolor="#FFFFFF" uuid="3276b842-0790-47ee-8b02-0e00f89c0bd2"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[DEBUT EXEC]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="50" height="17" uuid="2562bc2d-a892-42a2-a441-76665023305d"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_DEBUT})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="45" uuid="ac9f4429-f127-4abd-b4bc-14bd973a3a87">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne13"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="38">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="45" height="38" forecolor="#FFFFFF" uuid="36fb9746-2e7d-4291-b2ae-3bfa49092126"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8" isBold="false"/>
+								</textElement>
+								<text><![CDATA[FIN EXEC]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="17">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="45" height="17" uuid="0626547c-3fac-4c57-b1b8-e61005fb2dda"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="8"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_FIN})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="385" y="2" width="49" height="13" uuid="81a754a3-95b2-45a7-82a0-c2005b16922e"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" / "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="697" y="1" width="39" height="14" uuid="aafa9e57-aa31-4004-a873-adc92221840a"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Edité le :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="740" y="1" width="74" height="14" uuid="3094662a-7be5-4608-977f-3c5926f6fff1"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[TODAY( )]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

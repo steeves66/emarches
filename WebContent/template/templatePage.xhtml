@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<title>E-MarchésPublics</title>
+ <meta charset="utf-8"/>
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+ <link rel="shortcut icon" type="image/x-icon" href="#{request.contextPath}/resources/portail/img/icons/favicon.png" />
+ <link rel="stylesheet" href="#{request.contextPath}/resources/bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="#{request.contextPath}/resources/bower_components/font-awesome/css/font-awesome.min.css"/>
+   <link rel="stylesheet" href="#{request.contextPath}/resources/bower_components/Ionicons/css/ionicons.min.css"/>
+   <link rel="stylesheet" href="#{request.contextPath}/resources/dist/css/AdminLTE.min.css"/>
+   <link rel="stylesheet" href="#{request.contextPath}/resources/dist/css/skins/_all-skins.css"/>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/mystyles.css"/>
+    
+        <!-- App CSS -->
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
+   
+</h:head>
+
+ <h:body class="hold-transition skin-blue sidebar-mini">
+        <!-- Begin page -->
+        <h:panelGroup  layout="block" id="global" >
+          <div class="wrapper">
+          
+            <!-- Header -->
+             <ui:include src="/template/header.xhtml"/>
+            <!-- header End -->
+
+
+            <!-- ========== Left Sidebar Start ========== -->
+           <aside class="main-sidebar">
+             <ui:include src="/template/menu.xhtml" />
+            </aside>   
+            <!-- Left Sidebar End -->
+
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+             <div class="content-wrapper">
+                <!-- Start content -->
+                   <h:panelGroup id="content" layout="block">
+                    
+
+    <!-- Main content -->
+    <section class="content">
+       <ui:insert name="contents" />
+       <ui:include src="/template/ajaxStatut.xhtml" />
+	     
+ 
+    </section>
+    <!-- /.content -->
+    
+    <h:form id="dlg">
+	        <p:dialog  widgetVar="changFonctionDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="E-MAP">
+				<div class="contentpanel">
+					<div class="g12">
+					<div class="panel panel-dark">
+						<div class="panel-heading">
+							<h3 class="panel-title">Changer de fonction</h3>
+						</div>
+					</div>			 
+					<div class="panel-body panel-body-nopadding">
+						<h5 class="subtitle">Liste des fonctions!</h5>
+					
+						<div class="form-bordered form-horizontal">			
+                    <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						<p:dataTable id="ndTble" var="nd" value="#{userController.listeAss}" selectionMode="single" selection="#{userController.slctdTb}" rowKey="#{nd.TFonction.fonCod}" emptyMessage="">
+
+							<p:ajax event="rowSelect" listener="#{userController.onRowSelect}" update=":dlg:ndTble"/>
+							<p:ajax event="rowUnselect" listener="#{userController.onRowSelect}" update=":dlg:ndTble"/>	
+							
+							<p:column headerText="Code Fonction" style="width:15%" styleClass="outputH">
+							<h:outputText value="#{nd.TFonction.fonCod}" />
+							</p:column>
+
+							<p:column headerText="Libellé Fonction" style="width:30%" styleClass="outputH">
+								<h:outputText value="#{nd.TFonction.fonLibelle}" />
+							</p:column>
+							
+							
+								<p:column headerText="Fonc Fin" style="width:10%" styleClass="outputH">
+								<h:outputText value="#{nd.assDatFin}">
+								<f:convertDateTime pattern="dd/MM/yyyy"  />
+								</h:outputText>
+							
+							</p:column>
+							 
+							<p:column headerText="Type Fonction" style="width:20%" styleClass="outputH">
+								<h:outputText value="#{nd.TFonction.TTypeFonction.tyfLibelle}" />
+							</p:column>
+
+						</p:dataTable>
+						</h:panelGrid>
+						<div class="panel-footer">
+                     <h:commandLink styleClass="btn btn-success" value="Valider" action="#{userController.changFonction}"/>
+                     </div>
+                     </div>
+                        
+                     
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+	</h:panelGroup>
+	
+
+            </div>
+            <!-- End content-page -->
+
+
+            <!-- ============================================================== -->
+            <!-- End Right content here -->
+            <!-- ============================================================== -->
+
+
+            <!-- Right Sidebar -->
+            
+            <!-- /Right-bar -->
+
+           <footer class="main-footer">
+           
+           <h:form id="dlpass">
+	        <p:dialog  widgetVar="changPasswordDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="E-MAP">
+	        		<p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+				<div class="contentpanel">
+					
+					<div class="panel panel-dark">
+						<div class="panel-heading">
+							<h3 class="panel-title">Changement de mot de passe</h3>
+						</div>
+					</div>			 
+					<div class="panel-body panel-body-nopadding">
+						 <div class="ui-g">
+				    <div class="ui-g-12 ui-md-6 ui-lg-3"><b>Ancien mot de passe<span style="color:red;"> *</span></b></div>
+				    <div class="ui-g-12 ui-md-6 ui-lg-9"><p:inputText  value="#{passwordController.actuelPass}"/></div>
+				    
+			   </div>
+			   <div class="ui-g">
+			   <div class="ui-g-12 ui-md-6 ui-lg-3"><b>Nouveau<span style="color:red;"> *</span></b></div>
+				<div class="ui-g-12 ui-md-6 ui-lg-9"><p:inputText type="password" value="#{passwordController.nouveauPass}"/></div>
+			 </div>
+			  <div class="ui-g">
+			   <div class="ui-g-12 ui-md-6 ui-lg-3"><b>Confirmer<span style="color:red;"> *</span></b></div>
+				<div class="ui-g-12 ui-md-6 ui-lg-9"><p:inputText type="password"  value="#{passwordController.passConfirme}"/></div>
+			 </div>
+						<div class="form-bordered form-horizontal">			
+                  
+                        
+                     <div class="panel-footer">
+                     <p:commandLink styleClass="btn btn-danger" value="Quitter" oncomplete="PF('changPasswordDlg').hide()"/>
+                     &nbps;&nbsp;
+                     <p:commandLink styleClass="btn btn-primary" value="Valider" action="#{passwordController.changePassword()}" update=":content"/>
+                     </div>
+                    </div>
+				</div>
+			
+	    </div>
+      </p:dialog>
+    </h:form>
+          
+    <div class="pull-right hidden-xs">
+    
+     <!--  <strong>Designed by </strong>
+      <a href="http://www.sndi.ci">
+      <img src="#{request.contextPath}/resources/images/logo-footer.png" style=" width: 130px ; margin-top: -25px;" />
+      </a> -->
+    </div>
+    
+    <strong>
+    Copyright &copy; E-MAP <h:outputText value="#{userController.dateCon}"><f:convertDateTime pattern="yyyy" /></h:outputText>
+    </strong>
+  </footer>
+
+        </div>
+        </h:panelGroup>
+
+        <!-- END wrapper -->
+  
+ <script src="#{request.contextPath}/resources/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> 
+<script src="#{request.contextPath}/resources/dist/js/adminlte.min.js"></script>
+<script src="#{request.contextPath}/resources/dist/js/Chart.js"></script>
+
+
+
+ 
+    </h:body>
+   
+    
+</html>

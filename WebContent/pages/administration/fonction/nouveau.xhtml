@@ -1,0 +1,102 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl">
+<section class="content-header">
+      <h1>
+        Fonction
+        <small>Nouvelle fonction</small>
+      </h1>
+      <ol class="breadcrumb">
+       <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+        <li><a><i class="fa fa-dashboard"></i> Accueil</a></li>
+        </p:commandLink>
+        <li class="active">Nouvelle fonction</li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     <div class="spacer" style="margin-top:150px"></div>
+       <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
+        
+                     <div class="form-group ">
+	                  <label for="foncode" class="col-sm-3 control-label"><b> Code Fonction  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText value="#{fonctionController.fonction.fonCod}" type="text"  styleClass="form-control" readonly="true"  id="foncode" style="width: 100%"/>
+	                  </div>
+	                </div> 
+               
+	                <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Structure <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                    <p:selectOneMenu id="min" value="#{fonctionController.strCode}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir la structure.." itemValue="empty" />  
+			       <f:selectItems value="#{fonctionController.listStructure}" var="str" itemLabel="#{str.strLibelleLong}" itemValue="#{mi.strCode}" /> 
+                   <p:ajax listener="#{fonctionController.genereCodeFonction()}" update=":gnl:fonlib, :gnl:foncode"/>				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="typeFonction" class="col-sm-3 control-label"><b>Type Fonction <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                     <p:selectOneMenu id="typeFonction" value="#{fonctionController.typefonc}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir le type de la fonction.." itemValue="empty" />  
+			            <f:selectItems value="#{fonctionController.listTypefonction}" var="tif" itemLabel="#{tif.tyfCod} : #{tif.tyfLibelle}" itemValue="#{tif.tyfCod}" />
+			              <p:ajax listener="#{fonctionController.genereCodeFonction()}" update=":gnl:fonlib, :gnl:foncode"/>	
+       		        </p:selectOneMenu> 
+	                  </div>
+	                </div> 
+	                 
+	                
+	                  <div class="form-group ">
+	                  <label for="fon" class="col-sm-3 control-label"><b> Libelle Fonction  <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-9">
+	                   <h:panelGroup id="fonlib">
+	                    <p:inputText value="#{fonctionController.fonction.fonLibelle}"  type="text"  styleClass="form-control" id="fon" style="width: 100%"/>
+	                    </h:panelGroup>
+	                  </div>
+	                </div> 
+	                
+	                
+	                    <div class="row">
+	                <div class="col-sm-3"></div> 
+	             <div class="col-sm-9">   
+					                 <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{fonctionController.renderPage('fon1')}"  update=":content">
+				     <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+				      </p:commandLink>
+				      
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success" style="background-color: #036d3b" action="#{fonctionController.saveFonction}"  update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+			            </div>
+		       </div>
+		       </div>
+       
+        
+       </div>    
+    </section>
+    </h:form>
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

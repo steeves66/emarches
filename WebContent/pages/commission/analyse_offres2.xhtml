@@ -1,0 +1,288 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{commissionController.slctdTd.aaoCode}
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>OUVERTURE | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>OUVERTURE  
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <div class="box box-success">
+     
+              <div class="box-body">
+              <div class="row">
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">PIECES ADMINISTRATIVES</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+		           <div class="row">
+		           <div class="col-sm-12">
+		           <p:dataTable id="pièces" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" 
+					 emptyMessage="Aucune pièce enregistrée" rows="10" 
+                         rowsPerPageTemplate="5,10,15" >
+	                       <p:column headerText="Pièces" styleClass="col-sm-10" >
+	         				</p:column>
+	         				 <p:column headerText="Conformité" styleClass="col-sm-2" >
+	         				</p:column>
+         		  </p:dataTable>
+         		    <div class="form-group">
+		                  <label class="col-sm-2 control-label">Observation</label>
+		                  <div class="col-sm-10">
+		                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" style="width: 100%" />
+		                  </div>
+		              </div>
+		           </div>
+		           </div>
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+                 <div class="row">
+                  <div class="col-md-12">
+                 
+               <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE FINANCIERE</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+		           <div class="row">
+		           <div class="col-sm-6">
+		            <div class="form-group">
+	                  <label  class="col-sm-4 control-label"> Montant lu </label>
+	                  <div class="col-sm-7">
+	                    <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+		           </div>
+		           <div class="col-sm-6">
+		            <div class="form-group">
+	                  <label  class="col-sm-5 control-label"> Montant Corrigé</label>
+	                  <div class="col-sm-6">
+	                    <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%">
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+		           </div>
+		           </div>
+		            <div class="row">
+		           <div class="col-sm-6">
+		            <div class="form-group">
+	                  <label  class="col-sm-4 control-label"> Rang </label>
+	                  <div class="col-sm-3">
+	                    <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" />
+	                  </div>
+	                  <div class="col-sm-1">
+	                  <label  class="control-label"> / </label>
+	                  </div>
+	                  <div class="col-sm-3">
+	                    <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+		           </div>
+		           </div>
+		             <div class="form-group">
+		                  <label class="col-sm-2 control-label">Observation</label>
+		                  <div class="col-sm-10">
+		                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" style="width: 100%" />
+		                  </div>
+		              </div>
+	            </div>
+	           </div>
+                 </div>
+                 
+                   
+		                 <div class="col-sm-12">
+		                   <div class="form-group">
+			                  <label  class="col-sm-2 control-label"> Observation </label>
+			                  <div class="col-sm-10">
+			                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" style="width: 100%" />
+			                  </div>
+			                </div>
+			                </div>
+		                
+               </div>
+               </div>
+               
+               
+               
+               <div class="col-md-6">
+               <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">MODE DE QUALIFICATION</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	            
+					  <fieldset style="border: 1px solid; padding: 3px;">
+		               <legend>Conformité</legend>
+		                <div class="row">
+		                  <div class="col-sm-5">
+		                      <div class="form-group">
+			                  <label  class="col-sm-6 control-label"> Conformité Tech </label>
+			                  <div class="col-sm-6">
+			                    <p:selectOneMenu  style="width:100%" >
+							    <f:selectItem  itemLabel="Conforme" itemValue=""/> 
+								 <f:selectItem  itemLabel="Non Conforme" itemValue=""/>    
+				               </p:selectOneMenu> 
+			                  </div>
+			                </div>
+		                  </div>
+		                  <div class="col-sm-7">
+		                      <div class="form-group">
+			                  <label  class="col-sm-3 control-label"> Observation</label>
+			                  <div class="col-sm-9">
+			                     <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" style="width: 100%" />
+			                  </div>
+			                </div>
+		                  </div>
+		                 </div>
+		                
+		               </fieldset>
+		                <fieldset style="border: 1px solid; padding: 3px;">
+		               <legend>Score</legend>
+		                <div class="row">
+		                  <div class="col-sm-5">
+		                      <div class="form-group">
+			                  <label  class="col-sm-6 control-label"> Note </label>
+			                  <div class="col-sm-6">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+		                  </div>
+		                  <div class="col-sm-7">
+		                      <div class="form-group">
+			                  <label  class="col-sm-3 control-label"> Observation</label>
+			                  <div class="col-sm-9">
+			                     <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" style="width: 100%" />
+			                  </div>
+			                </div>
+		                  </div>
+		                 </div>
+		               </fieldset>
+		                <fieldset style="border: 1px solid; padding: 3px;">
+		               <legend>Autre mode</legend>
+		                <div class="row">
+		                  <div class="col-sm-6">
+		                       <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Administraive </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+			                 <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Technique </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+			                
+		                  </div>
+		                   <div class="col-sm-6">
+		                      <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Financière </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+			                 <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Resultats </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div> 
+		                  </div>
+		                 </div>
+		                 <div class="row">
+		                 <div class="col-sm-12">
+		                   <div class="form-group">
+			                  <label  class="col-sm-2 control-label"> Observation </label>
+			                  <div class="col-sm-10">
+			                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" style="width: 100%" />
+			                  </div>
+			                </div>
+			                </div>
+		                 </div>
+		                
+		               </fieldset>
+		           
+	            </div>
+	           </div>
+               </div>
+              </div>
+              
+              
+              
+              
+              
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+           <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
+				     <i class="ace-icon fa fa-save bigger-120"></i> Valider
+				      </p:commandLink>
+				      
+      <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISANA')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+    </section>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

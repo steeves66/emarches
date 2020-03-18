@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+       <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Traitement</h3>
+            </div>
+            <div class="box-body">
+              
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <div class="row">
+          <div class="col-md-12">
+           <p:commandLink styleClass="btn btn-success pull-right" action="#{agpmController.renderPage('agpm1','LIS')}" style="background-color: #036d3b;" update=":content">
+           <i class="ace-icon fa fa-check bigger-130"></i> valider
+		</p:commandLink>
+		 <p:commandLink styleClass="btn btn-warning pull-right" action="#{agpmController.renderPage('agpm1','LIS')}" style="background-color: #f88b2e; margin-left:3px;margin-right:3px" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> differer
+		</p:commandLink>
+		 <p:commandLink styleClass="btn btn-danger pull-right" action="#{agpmController.renderPage('agpm1','LIS')}" update=":content">
+           <i class="ace-icon fa  fa-ban bigger-130"></i> rejeter
+		</p:commandLink>
+          </div>
+          </div>
+          
+</html>

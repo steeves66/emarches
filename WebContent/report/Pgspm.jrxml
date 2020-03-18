@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-03-15T23:35:50 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pgpm2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa970b9-a7ef-4c6b-b72a-fbcc7c94abfa">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#368F45">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Details" uuid="fdee0a7e-e235-4236-b52b-e70a5d094e24">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code" class="java.lang.Long">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[select *
+from v_pgpm_details vp
+where vp.aff_gpg_type_plan = 'PS'
+and vp.plg_id = $P{param_code}]]>
+		</queryString>
+		<field name="AFF_GPG_ID" class="java.math.BigDecimal"/>
+		<field name="SOU_LIBELLE" class="java.lang.String"/>
+		<field name="AFF_GPG_OBJET" class="java.lang.String"/>
+		<field name="AFF_GPG_STA_CODE" class="java.lang.String"/>
+		<field name="AFF_GPG_TYPE_PLAN" class="java.lang.String"/>
+		<field name="AFF_GPG_ACTEUR_SAISIE" class="java.lang.String"/>
+		<field name="FON_LIBELLE" class="java.lang.String"/>
+		<field name="TYM_CODE" class="java.lang.String"/>
+		<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
+		<field name="MOP_CODE" class="java.lang.String"/>
+		<field name="MOP_LIBELLE_COURT" class="java.lang.String"/>
+		<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
+		<field name="AFF_GPG_PARTIE_PME_PMI" class="java.lang.String"/>
+		<field name="AFF_GPG_DATE_DAO" class="java.sql.Timestamp"/>
+		<field name="AFF_GPG_COMMENTAIRE" class="java.lang.String"/>
+		<field name="AFF_GPG_NUMERO_ORDRE" class="java.math.BigDecimal"/>
+		<field name="AFF_GPG_DATE_SAISIE" class="java.sql.Timestamp"/>
+		<field name="PLG_ID" class="java.math.BigDecimal"/>
+		<field name="PLG_GES_CODE" class="java.math.BigDecimal"/>
+		<field name="MIN_LIBELLE" class="java.lang.String"/>
+		<field name="MIN_LIBELLE_COURT" class="java.lang.String"/>
+		<group name="SOU_LIBELLE">
+			<groupExpression><![CDATA[$F{SOU_LIBELLE}]]></groupExpression>
+		</group>
+		<group name="AFF_GPG_OBJET">
+			<groupExpression><![CDATA[$F{AFF_GPG_OBJET}]]></groupExpression>
+		</group>
+		<group name="FON_LIBELLE">
+			<groupExpression><![CDATA[$F{FON_LIBELLE}]]></groupExpression>
+		</group>
+		<group name="TYM_LIBELLE_COURT">
+			<groupExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></groupExpression>
+		</group>
+		<group name="MOP_CODE">
+			<groupExpression><![CDATA[$F{MOP_CODE}]]></groupExpression>
+		</group>
+		<group name="AFF_GPG_PARTIE_PME_PMI">
+			<groupExpression><![CDATA[$F{AFF_GPG_PARTIE_PME_PMI}]]></groupExpression>
+		</group>
+		<group name="AFF_GPG_DATE_DAO">
+			<groupExpression><![CDATA[$F{AFF_GPG_DATE_DAO}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="param_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_code" class="java.lang.Long">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[select distinct pl.plg_ges_code,pl.plg_id, m.min_libelle, st.str_libelle_long
+from t_plan_general pl, t_ministere m, t_structure st
+where pl.plg_str_code = st.str_code
+and st.str_min_code = m.min_code
+and pl.plg_id = $P{param_code}]]>
+	</queryString>
+	<field name="PLG_GES_CODE" class="java.lang.Long"/>
+	<field name="PLG_ID" class="java.lang.Long"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+	<group name="PLG_GES_CODE">
+		<groupExpression><![CDATA[$F{PLG_GES_CODE}]]></groupExpression>
+	</group>
+	<group name="PLG_ID">
+		<groupExpression><![CDATA[$F{PLG_ID}]]></groupExpression>
+	</group>
+	<group name="MIN_LIBELLE">
+		<groupExpression><![CDATA[$F{MIN_LIBELLE}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="199" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="15" y="0" width="281" height="30" uuid="93ba85dd-30fd-452a-b255-300620fbedf8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
+]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="632" y="1" width="171" height="17" uuid="46c3582b-a76b-42b2-9a34-77f390f207f7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[République de Côte d'Ivoire]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="637" y="19" width="166" height="17" uuid="e80c15cc-7825-40bc-9d07-4b0157c1a8fc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Union-Discipline-Travail]]></text>
+			</staticText>
+			<image>
+				<reportElement x="109" y="32" width="57" height="33" uuid="e46f54fc-cb49-49bd-9fda-896594c56351"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="50" y="67" width="171" height="19" uuid="46b682fa-2dde-49af-9980-e9d0a6df32fa"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direction des Marchés Publics]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="81" width="87" height="21" uuid="60495bcc-29ee-4ff2-84d3-80f9538efe47"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-MarchesPublics]]></text>
+			</staticText>
+			<rectangle radius="8">
+				<reportElement mode="Opaque" x="133" y="116" width="566" height="31" backcolor="#FA9B3C" uuid="896c6fca-e605-4091-9920-9390bbdf6a82"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="133" y="118" width="566" height="26" forecolor="#FFFFFF" uuid="d7dfb509-1736-49dc-add2-6463d696a4f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["PLAN GENERAL SIMPLIFIE DE PASSATIONS DES MARCHES GESTION "+$F{PLG_GES_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="156" width="776" height="21" uuid="2211775a-131f-4b7b-922c-d822441395e5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Année  : "+$F{PLG_GES_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="176" width="777" height="21" uuid="30154c7d-590c-4cc6-8ab7-a72bd60b2da1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Ministère / Institution  : "+$F{MIN_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="370" y="13" width="190" height="51" uuid="7440c164-6d9a-492c-b41c-4972ec8057bc"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="45" splitType="Stretch">
+			<componentElement>
+				<reportElement x="16" y="2" width="774" height="42" uuid="14e39689-ab73-46b0-8db5-aa73f2a9a168">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Details" uuid="dabaf81a-ea35-4292-a36c-02c747e8a35a">
+						<datasetParameter name="param_code">
+							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="70" uuid="f5c258f9-e545-4e4e-b0be-e7412c869a34">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="27">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="27" forecolor="#FFFFFF" uuid="2e61664e-9970-4cd9-8cfd-d49b1f7645df"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TYPE DE FINANCEMENT]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="70" height="15" uuid="6d871ce8-1db3-4809-9443-4b6ed0598324"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{SOU_LIBELLE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="270" uuid="1d2f7c13-3369-40ec-8231-668e28580676">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="27">
+							<staticText>
+								<reportElement x="0" y="0" width="270" height="27" forecolor="#FFFFFF" uuid="031a8c75-3152-42b1-aa13-d211d69121b4"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[REALISATIONS ENVISAGEES]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="270" height="15" uuid="0678cc9f-d495-487c-aabc-d4eba44212f6"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{AFF_GPG_OBJET}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="b4f73c43-7e57-4243-9bf2-2df892071169">
+						<jr:tableHeader style="Table_TH" height="27">
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="27" forecolor="#FFFFFF" uuid="5d8b9dab-3d66-42db-a2a6-5df1d4d82f21"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[AUTORITE CONTRACTANTE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="100" height="15" uuid="7a9c3fd0-6642-4565-bfe0-a6a208e2552c"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{FON_LIBELLE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="140" uuid="08697090-7b9d-4aa0-be94-d482e148b079">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="27">
+							<staticText>
+								<reportElement x="0" y="0" width="140" height="27" forecolor="#FFFFFF" uuid="94b2e8c2-27ff-47a2-9881-5c528b9d3a2d"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[TYPE DE MARCHES (1)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="140" height="15" uuid="6e183c59-969d-442c-a99b-75a5b05f649c"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="60" uuid="20b50bba-c628-4816-bec3-6d20d967b38c">
+						<jr:tableHeader style="Table_TH" height="27">
+							<staticText>
+								<reportElement x="0" y="0" width="60" height="27" forecolor="#FFFFFF" uuid="7481ba3b-4cec-49c6-8779-f7e1f47e50cd">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[MODE DE PASSATION ENVISAGE (1)]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="60" height="15" uuid="ea05e119-0415-464f-89e0-98dd3d02350b"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{MOP_CODE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="76" uuid="a355abd0-53a0-45bf-9e7c-97a1ab844233">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table_TH" height="27">
+							<staticText>
+								<reportElement x="0" y="0" width="76" height="27" forecolor="#FFFFFF" uuid="c292d067-e1ad-4ba5-9e08-e05f9265a026">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PART RESERVEE AUX PME]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="76" height="15" uuid="6d614272-51fd-45d9-b140-845308be4ce6"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{AFF_GPG_PARTIE_PME_PMI}.equalsIgnoreCase("O")? "OUI":"NON"]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="58" uuid="0ccc5d6f-b705-4148-baef-72db23522163">
+						<jr:tableHeader style="Table_TH" height="27">
+							<staticText>
+								<reportElement x="0" y="0" width="58" height="27" forecolor="#FFFFFF" uuid="8ceedb1d-d56c-4de1-8fdb-1a83d118aa65">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								</reportElement>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DATE DE LANCEMENT]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="58" height="15" uuid="5739c3ce-08d3-4bc8-acd8-da4b87215613"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_GPG_DATE_DAO})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="385" y="2" width="49" height="13" uuid="7f738bd6-8789-4e98-85f1-6b5007bbc1fa"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" / "+$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="697" y="1" width="39" height="14" uuid="c1b2d052-153b-4f73-ae31-ef692a2b4fbd"/>
+				<textElement>
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<text><![CDATA[Edité le :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="740" y="1" width="74" height="14" uuid="0bcd7ccc-fe22-4706-83f7-5e6ed38ff2b6"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[TODAY( )]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="gnl">
+		<div class="pageheader">
+		  <h2><i class="fa fa-users"></i>Fonction</h2>
+		  <div class="breadcrumb-wrapper">
+		    <span class="label">Vous etes ici:</span>
+		    <ol class="breadcrumb">
+		      <li><a href="#">Choix de Fonction</a></li>
+		      <li class="active"></li>
+		    </ol>
+		  </div>
+		</div>
+		 
+		
+		  		
+		<div class="container-fluid" style="margin-top: 6px;">
+		<div class="col-lg-10">
+		
+		<div class="panel panel-dark">
+<div class="panel-heading">
+ <h3 class="panel-title">Changer de Fontion</h3>
+ </div>
+ 
+   <h:panelGroup id="divChamps" layout="block" style="margin-left: 10px">
+    <p:messages id="message" showDetail="false" autoUpdate="true" closable="true"/>
+ <div class="user-profile">
+	     <div class="panel panel-default">
+	    
+	     <div class="panel-body panel-body-nopadding">
+
+	       
+		
+		
+		
+		<div class="col-sm-9 sidebar">
+	         <div class="mb30"></div>
+
+	        
+
+	        <div id="group_settings" style="display: none;">
+	        	<div id="groupform" class="form-horizontal form-bordered">
+
+	         </div>
+	         
+	        </div><!-- Group Settings -->
+	        
+	        <!-- Ref Admin -->
+	        <div>
+	        	<h5 class="subtitle">Liste des fonctions!</h5>
+                    <div class="form-bordered form-horizontal">
+                    <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						<p:dataTable id="ndTble" var="nd"
+							value="#{userController.listeAss}"
+							selectionMode="single"
+							selection="#{userController.slctdTb}"
+							rowKey="#{nd.fonction.fonCod}"
+							 emptyMessage="">
+
+							<p:ajax event="rowSelect"
+							listener="#{userController.onRowSelect}"
+								update=":gnl:ndTble"/>
+								<p:ajax event="rowUnselect"
+							listener="#{userController.onRowSelect}"
+								update=":gnl:ndTble"/>	
+								
+								<p:column headerText="Code Fonction" style="width:15%" styleClass="outputH">
+								<h:outputText value="#{nd.fonction.fonCod}" />
+							</p:column>
+
+							<p:column headerText="Libellé Fonction" style="width:30%" styleClass="outputH">
+								<h:outputText value="#{nd.fonction.fonLibelle}" />
+							</p:column>
+							
+							
+								<p:column headerText="Fonc Fin" style="width:10%" styleClass="outputH">
+								<h:outputText value="#{nd.fonction.fonDatFin}">
+								<f:convertDateTime pattern="dd/MM/yyyy"  />
+								</h:outputText>
+							
+							</p:column>
+							 
+							<p:column headerText="Type Fonction" style="width:20%" styleClass="outputH">
+								<h:outputText value="#{nd.fonction.typeFonction.tyfLibelle}" />
+							</p:column>
+
+						
+
+
+						</p:dataTable></h:panelGrid>
+                        </div>
+                        
+                     
+                          
+                        <div class="form-group">
+                  
+                            <div class="col-sm-3">
+                          
+		                          <h:commandButton value="Valider" action="#{userController.changFonction}"
+		                          styleClass="btn btn-danger btn-block btn-compose-email">
+						    </h:commandButton> 
+                            </div>
+                            
+                           
+                        </div>
+                     
+                      
+                    </div>
+
+	        </div>
+	        
+	  
+	        
+	        
+	        
+	        
+	        </div>
+		
+		
+		 
+		
+		</div>
+		</div>
+		</div>
+ 
+                             
+                </h:panelGroup>
+              
+					 </div>
+					 </div>
+		</div>
+</h:form>
+	 <!-- ConfirmDialog  -->
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>	
+      </html>

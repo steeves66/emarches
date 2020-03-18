@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+       <div class="box box-success">
+            
+            <div class="box-body">
+              <div class="row">
+             <div class="col-md-5">
+	          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE PROJET</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Reglémentation </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsController.detail.regLibelleCourt}" style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Titre du projet</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.proTitre}"  style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Libelle</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.proLibelle}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Montant </label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.proMontantTotCfa}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Description </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.proDescription}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+                   
+	             
+	            </div>
+	           </div>
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L'AGPM</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Gestion </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.agpGesCode}"   style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Ministère</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.minLibelle}"   style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">fonction</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.fonLibelle}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Type DAO</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.agpTypeDao}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Mode de Passation</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.proDescription}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Commentaire</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{etatsController.detail.agpModePassation}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	            </div>
+	           </div>
+            </div>
+            <div class="col-md-7">
+	          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">FINANCEMENTS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+         				 
+	            </div>
+	           </div>
+	           
+	           
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">BESOINS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:dataTable id="besoinApercu" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" emptyMessage="Aucun besoin enregistré">
+         				<p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+				        <p:column headerText="Montant" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+				        <p:column headerText="Devise" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				         <p:column headerText="Accord" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				         <p:column headerText="Statut" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+                 </p:dataTable>     
+	            </div>
+	           </div>
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">COMPOSANTES</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:dataTable id="composanteApercu" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" emptyMessage="Aucune composante enregistrée">
+         				<p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+				        <p:column headerText="Montant" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+				        <p:column headerText="Devise" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				         <p:column headerText="Accord" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				         <p:column headerText="Statut" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+                 </p:dataTable>     
+	            </div>
+	           </div>
+	           
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">OBJECTIFS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:dataTable id="objectifApercu" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" emptyMessage="Aucun objectif enregistré">
+         				<p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+				        <p:column headerText="Montant" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+				        <p:column headerText="Devise" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				         <p:column headerText="Accord" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				         <p:column headerText="Statut" styleClass="col-sm-1">
+				            <h:outputText />
+				        </p:column>
+				        
+                 </p:dataTable>     
+	            </div>
+	           </div>
+            </div>
+            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+</html>
