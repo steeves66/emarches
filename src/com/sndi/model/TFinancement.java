@@ -29,11 +29,12 @@ public class TFinancement implements java.io.Serializable {
 	private TBailleur TBailleur;
 	private TSourceFinancement TSourceFinancement;
 	private TDevise TDevise;
-	private BigDecimal finMontantCfa;
+	private long finMontantCfa;
 	private BigDecimal finMontantDevise;
 	private String finNumeroAccord;
 	private String finStatut;
 	private String finTypeFinance;
+	private Long finPartTresor;
 	private Set<TAffichageAgpm> TAffichageAgpms = new HashSet<TAffichageAgpm>(0);
 
 	public TFinancement() {
@@ -47,8 +48,8 @@ public class TFinancement implements java.io.Serializable {
 	}
 
 	public TFinancement(long finId, TProjet TProjet, TAgpm TAgpm, TBailleur TBailleur,
-			TSourceFinancement TSourceFinancement, TDevise TDevise, BigDecimal finMontantCfa,
-			BigDecimal finMontantDevise, String finNumeroAccord, String finStatut,String finTypeFinance,
+			TSourceFinancement TSourceFinancement, TDevise TDevise, long finMontantCfa,
+			BigDecimal finMontantDevise, String finNumeroAccord, String finStatut,String finTypeFinance,Long finPartTresor,
 			Set<TAffichageAgpm> TAffichageAgpms) {
 		this.finId = finId;
 		this.TProjet = TProjet;
@@ -61,6 +62,7 @@ public class TFinancement implements java.io.Serializable {
 		this.finNumeroAccord = finNumeroAccord;
 		this.finStatut = finStatut;
 		this.finTypeFinance = finTypeFinance;
+		this.finPartTresor = finPartTresor;
 		this.TAffichageAgpms = TAffichageAgpms;
 	}
 
@@ -86,7 +88,7 @@ public class TFinancement implements java.io.Serializable {
 		this.TProjet = TProjet;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FIN_AGP_ID")
 	public TAgpm getTAgpm() {
 		return this.TAgpm;
@@ -96,7 +98,7 @@ public class TFinancement implements java.io.Serializable {
 		this.TAgpm = TAgpm;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FIN_BAI_CODE")
 	public TBailleur getTBailleur() {
 		return this.TBailleur;
@@ -106,7 +108,7 @@ public class TFinancement implements java.io.Serializable {
 		this.TBailleur = TBailleur;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FIN_SOU_CODE", nullable = false)
 	public TSourceFinancement getTSourceFinancement() {
 		return this.TSourceFinancement;
@@ -116,7 +118,7 @@ public class TFinancement implements java.io.Serializable {
 		this.TSourceFinancement = TSourceFinancement;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FIN_DEV_CODE", nullable = false)
 	public TDevise getTDevise() {
 		return this.TDevise;
@@ -127,11 +129,11 @@ public class TFinancement implements java.io.Serializable {
 	}
 
 	@Column(name = "FIN_MONTANT_CFA", precision = 15)
-	public BigDecimal getFinMontantCfa() {
+	public long getFinMontantCfa() {
 		return this.finMontantCfa;
 	}
 
-	public void setFinMontantCfa(BigDecimal finMontantCfa) {
+	public void setFinMontantCfa(long finMontantCfa) {
 		this.finMontantCfa = finMontantCfa;
 	}
 
@@ -162,6 +164,23 @@ public class TFinancement implements java.io.Serializable {
 		this.finStatut = finStatut;
 	}
 	
+	@Column(name = "FIN_TYPE_FINANCE", length = 20)
+	public String getFinTypeFinance() {
+		return this.finTypeFinance;
+	}
+
+	public void setFinTypeFinance(String finTypeFinance) {
+		this.finTypeFinance = finTypeFinance;
+	}
+	
+	@Column(name = "FIN_PART_TRESOR", precision = 15, scale = 0)
+	public Long getFinPartTresor() {
+		return this.finPartTresor;
+	}
+
+	public void setFinPartTresor(Long finPartTresor) {
+		this.finPartTresor = finPartTresor;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFinancement")
 	public Set<TAffichageAgpm> getTAffichageAgpms() {
@@ -170,15 +189,6 @@ public class TFinancement implements java.io.Serializable {
 
 	public void setTAffichageAgpms(Set<TAffichageAgpm> TAffichageAgpms) {
 		this.TAffichageAgpms = TAffichageAgpms;
-	}
-
-	@Column(name = "FIN_TYPE_FINANCE", length = 20)
-	public String getFinTypeFinance() {
-		return finTypeFinance;
-	}
-
-	public void setFinTypeFinance(String finTypeFinance) {
-		this.finTypeFinance = finTypeFinance;
 	}
 
 }
