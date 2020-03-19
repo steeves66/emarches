@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -51,6 +51,7 @@ public class VPpmDaoId implements java.io.Serializable {
 	private String dppStatutDao;
 	private String dppPieceDao;
 	private String dppDacCode;
+	private String dppBailleur;
 	private String mdtCode;
 	private String mdtTymCode;
 	private String mdtLibelleCourt;
@@ -91,8 +92,9 @@ public class VPpmDaoId implements java.io.Serializable {
 			Date dppDateExecDebut, Date dppDateExecFin, String dppActeurSaisie, String dppStrCode,
 			String dppStatutRetour, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi,
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
-			String mdtCode, String mdtTymCode, String mdtLibelleCourt, String tymCode, String tymLibelleCourt,
-			String mopCode, String mopLibelleLong, String lbgImputation, String natLibelle, String souLibelle) {
+			String dppBailleur, String mdtCode, String mdtTymCode, String mdtLibelleCourt, String tymCode,
+			String tymLibelleCourt, String mopCode, String mopLibelleLong, String lbgImputation, String natLibelle,
+			String souLibelle) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -133,6 +135,7 @@ public class VPpmDaoId implements java.io.Serializable {
 		this.dppStatutDao = dppStatutDao;
 		this.dppPieceDao = dppPieceDao;
 		this.dppDacCode = dppDacCode;
+		this.dppBailleur = dppBailleur;
 		this.mdtCode = mdtCode;
 		this.mdtTymCode = mdtTymCode;
 		this.mdtLibelleCourt = mdtLibelleCourt;
@@ -505,6 +508,15 @@ public class VPpmDaoId implements java.io.Serializable {
 		this.dppDacCode = dppDacCode;
 	}
 
+	@Column(name = "DPP_BAILLEUR", length = 1)
+	public String getDppBailleur() {
+		return this.dppBailleur;
+	}
+
+	public void setDppBailleur(String dppBailleur) {
+		this.dppBailleur = dppBailleur;
+	}
+
 	@Column(name = "MDT_CODE", nullable = false, length = 15)
 	public String getMdtCode() {
 		return this.mdtCode;
@@ -708,6 +720,9 @@ public class VPpmDaoId implements java.io.Serializable {
 								&& this.getDppPieceDao().equals(castOther.getDppPieceDao())))
 				&& ((this.getDppDacCode() == castOther.getDppDacCode()) || (this.getDppDacCode() != null
 						&& castOther.getDppDacCode() != null && this.getDppDacCode().equals(castOther.getDppDacCode())))
+				&& ((this.getDppBailleur() == castOther.getDppBailleur())
+						|| (this.getDppBailleur() != null && castOther.getDppBailleur() != null
+								&& this.getDppBailleur().equals(castOther.getDppBailleur())))
 				&& ((this.getMdtCode() == castOther.getMdtCode()) || (this.getMdtCode() != null
 						&& castOther.getMdtCode() != null && this.getMdtCode().equals(castOther.getMdtCode())))
 				&& ((this.getMdtTymCode() == castOther.getMdtTymCode()) || (this.getMdtTymCode() != null
@@ -779,6 +794,7 @@ public class VPpmDaoId implements java.io.Serializable {
 		result = 37 * result + (getDppStatutDao() == null ? 0 : this.getDppStatutDao().hashCode());
 		result = 37 * result + (getDppPieceDao() == null ? 0 : this.getDppPieceDao().hashCode());
 		result = 37 * result + (getDppDacCode() == null ? 0 : this.getDppDacCode().hashCode());
+		result = 37 * result + (getDppBailleur() == null ? 0 : this.getDppBailleur().hashCode());
 		result = 37 * result + (getMdtCode() == null ? 0 : this.getMdtCode().hashCode());
 		result = 37 * result + (getMdtTymCode() == null ? 0 : this.getMdtTymCode().hashCode());
 		result = 37 * result + (getMdtLibelleCourt() == null ? 0 : this.getMdtLibelleCourt().hashCode());

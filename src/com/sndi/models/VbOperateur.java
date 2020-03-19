@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -35,7 +35,7 @@ public class VbOperateur implements java.io.Serializable {
 			@AttributeOverride(name = "opeLogin", column = @Column(name = "OPE_LOGIN", length = 50)),
 			@AttributeOverride(name = "opeMinCode", column = @Column(name = "OPE_MIN_CODE", length = 3)),
 			@AttributeOverride(name = "opeFonctionAdminist", column = @Column(name = "OPE_FONCTION_ADMINIST", length = 500)),
-			@AttributeOverride(name = "opeStrCode", column = @Column(name = "OPE_STR_CODE", length = 3)) })
+			@AttributeOverride(name = "opeStrCode", column = @Column(name = "OPE_STR_CODE", length = 30)) })
 	public VbOperateurId getId() {
 		return this.id;
 	}

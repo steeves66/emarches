@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VbVenteDacId implements java.io.Serializable {
 
-	private byte venNum;
+	private long venNum;
 	private BigDecimal venCanCode;
 	private String venMrgCod;
 	private String venOpeMatricule;
@@ -21,14 +21,14 @@ public class VbVenteDacId implements java.io.Serializable {
 	public VbVenteDacId() {
 	}
 
-	public VbVenteDacId(byte venNum, BigDecimal venCanCode, String venMrgCod, String venOpeMatricule) {
+	public VbVenteDacId(long venNum, BigDecimal venCanCode, String venMrgCod, String venOpeMatricule) {
 		this.venNum = venNum;
 		this.venCanCode = venCanCode;
 		this.venMrgCod = venMrgCod;
 		this.venOpeMatricule = venOpeMatricule;
 	}
 
-	public VbVenteDacId(byte venNum, BigDecimal venCanCode, String venMrgCod, String venOpeMatricule,
+	public VbVenteDacId(long venNum, BigDecimal venCanCode, String venMrgCod, String venOpeMatricule,
 			Date venDteSaisi) {
 		this.venNum = venNum;
 		this.venCanCode = venCanCode;
@@ -37,12 +37,12 @@ public class VbVenteDacId implements java.io.Serializable {
 		this.venDteSaisi = venDteSaisi;
 	}
 
-	@Column(name = "VEN_NUM", nullable = false, precision = 2, scale = 0)
-	public byte getVenNum() {
+	@Column(name = "VEN_NUM", nullable = false, precision = 10, scale = 0)
+	public long getVenNum() {
 		return this.venNum;
 	}
 
-	public void setVenNum(byte venNum) {
+	public void setVenNum(long venNum) {
 		this.venNum = venNum;
 	}
 
@@ -107,7 +107,7 @@ public class VbVenteDacId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + this.getVenNum();
+		result = 37 * result + (int) this.getVenNum();
 		result = 37 * result + (getVenCanCode() == null ? 0 : this.getVenCanCode().hashCode());
 		result = 37 * result + (getVenMrgCod() == null ? 0 : this.getVenMrgCod().hashCode());
 		result = 37 * result + (getVenOpeMatricule() == null ? 0 : this.getVenOpeMatricule().hashCode());

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,28 +20,28 @@ import javax.persistence.TemporalType;
 public class THistoPlanGeneral implements java.io.Serializable {
 
 	private long hpgId;
+	private TStatut TStatut;
 	private TDetailPlanGeneral TDetailPlanGeneral;
 	private TFonction TFonction;
-	private TStatut TStatut;
 	private Date hpgDate;
 	private String hpgMotif;
 
 	public THistoPlanGeneral() {
 	}
 
-	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction, TStatut TStatut) {
+	public THistoPlanGeneral(long hpgId, TStatut TStatut, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction) {
 		this.hpgId = hpgId;
+		this.TStatut = TStatut;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 	}
 
-	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction, TStatut TStatut,
+	public THistoPlanGeneral(long hpgId, TStatut TStatut, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction,
 			Date hpgDate, String hpgMotif) {
 		this.hpgId = hpgId;
+		this.TStatut = TStatut;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.hpgDate = hpgDate;
 		this.hpgMotif = hpgMotif;
 	}
@@ -55,6 +55,16 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setHpgId(long hpgId) {
 		this.hpgId = hpgId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -75,16 +85,6 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
 	}
 
 	@Temporal(TemporalType.DATE)

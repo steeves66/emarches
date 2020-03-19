@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,12 +21,12 @@ import javax.persistence.TemporalType;
 public class TPiecesOffres implements java.io.Serializable {
 
 	private BigDecimal pofNum;
-	private TDacSpecs TDacSpecs;
-	private TLotAao TLotAao;
-	private TOperateur TOperateur;
 	private TTypePieceOffre TTypePieceOffre;
-	private TOffrePieceDac TOffrePieceDac;
+	private TDacSpecs TDacSpecs;
 	private TDetOffres TDetOffres;
+	private TLotAao TLotAao;
+	private TOffrePieceDac TOffrePieceDac;
+	private TOperateur TOperateur;
 	private String pofPresent;
 	private String pofConforme;
 	private String pofTypeAct;
@@ -40,16 +40,16 @@ public class TPiecesOffres implements java.io.Serializable {
 		this.pofNum = pofNum;
 	}
 
-	public TPiecesOffres(BigDecimal pofNum, TDacSpecs TDacSpecs, TLotAao TLotAao, TOperateur TOperateur,
-			TTypePieceOffre TTypePieceOffre, TOffrePieceDac TOffrePieceDac, TDetOffres TDetOffres, String pofPresent,
+	public TPiecesOffres(BigDecimal pofNum, TTypePieceOffre TTypePieceOffre, TDacSpecs TDacSpecs, TDetOffres TDetOffres,
+			TLotAao TLotAao, TOffrePieceDac TOffrePieceDac, TOperateur TOperateur, String pofPresent,
 			String pofConforme, String pofTypeAct, Date pofDteSaisi, String pofObs) {
 		this.pofNum = pofNum;
-		this.TDacSpecs = TDacSpecs;
-		this.TLotAao = TLotAao;
-		this.TOperateur = TOperateur;
 		this.TTypePieceOffre = TTypePieceOffre;
-		this.TOffrePieceDac = TOffrePieceDac;
+		this.TDacSpecs = TDacSpecs;
 		this.TDetOffres = TDetOffres;
+		this.TLotAao = TLotAao;
+		this.TOffrePieceDac = TOffrePieceDac;
+		this.TOperateur = TOperateur;
 		this.pofPresent = pofPresent;
 		this.pofConforme = pofConforme;
 		this.pofTypeAct = pofTypeAct;
@@ -69,6 +69,16 @@ public class TPiecesOffres implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "POF_OPD_TPO_CODE")
+	public TTypePieceOffre getTTypePieceOffre() {
+		return this.TTypePieceOffre;
+	}
+
+	public void setTTypePieceOffre(TTypePieceOffre TTypePieceOffre) {
+		this.TTypePieceOffre = TTypePieceOffre;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "POF_DAC_CODE")
 	public TDacSpecs getTDacSpecs() {
 		return this.TDacSpecs;
@@ -76,6 +86,16 @@ public class TPiecesOffres implements java.io.Serializable {
 
 	public void setTDacSpecs(TDacSpecs TDacSpecs) {
 		this.TDacSpecs = TDacSpecs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "POF_DOF_NUM")
+	public TDetOffres getTDetOffres() {
+		return this.TDetOffres;
+	}
+
+	public void setTDetOffres(TDetOffres TDetOffres) {
+		this.TDetOffres = TDetOffres;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -89,26 +109,6 @@ public class TPiecesOffres implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "POF_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "POF_OPD_TPO_CODE")
-	public TTypePieceOffre getTTypePieceOffre() {
-		return this.TTypePieceOffre;
-	}
-
-	public void setTTypePieceOffre(TTypePieceOffre TTypePieceOffre) {
-		this.TTypePieceOffre = TTypePieceOffre;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "POF_OPD_NUM")
 	public TOffrePieceDac getTOffrePieceDac() {
 		return this.TOffrePieceDac;
@@ -119,13 +119,13 @@ public class TPiecesOffres implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "POF_DOF_NUM")
-	public TDetOffres getTDetOffres() {
-		return this.TDetOffres;
+	@JoinColumn(name = "POF_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
 	}
 
-	public void setTDetOffres(TDetOffres TDetOffres) {
-		this.TDetOffres = TDetOffres;
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@Column(name = "POF_PRESENT", length = 1)

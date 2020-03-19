@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,29 +20,29 @@ import javax.persistence.TemporalType;
 public class THistoPlanPassation implements java.io.Serializable {
 
 	private long hppId;
+	private TStatut TStatut;
 	private TDetailPlanPassation TDetailPlanPassation;
 	private TFonction TFonction;
-	private TStatut TStatut;
 	private Date hppDate;
 	private String hppMotif;
 
 	public THistoPlanPassation() {
 	}
 
-	public THistoPlanPassation(long hppId, TDetailPlanPassation TDetailPlanPassation, TFonction TFonction,
-			TStatut TStatut) {
+	public THistoPlanPassation(long hppId, TStatut TStatut, TDetailPlanPassation TDetailPlanPassation,
+			TFonction TFonction) {
 		this.hppId = hppId;
+		this.TStatut = TStatut;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 	}
 
-	public THistoPlanPassation(long hppId, TDetailPlanPassation TDetailPlanPassation, TFonction TFonction,
-			TStatut TStatut, Date hppDate, String hppMotif) {
+	public THistoPlanPassation(long hppId, TStatut TStatut, TDetailPlanPassation TDetailPlanPassation,
+			TFonction TFonction, Date hppDate, String hppMotif) {
 		this.hppId = hppId;
+		this.TStatut = TStatut;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.hppDate = hppDate;
 		this.hppMotif = hppMotif;
 	}
@@ -56,6 +56,16 @@ public class THistoPlanPassation implements java.io.Serializable {
 
 	public void setHppId(long hppId) {
 		this.hppId = hppId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPP_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,16 +86,6 @@ public class THistoPlanPassation implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPP_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
 	}
 
 	@Temporal(TemporalType.DATE)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,12 +23,12 @@ import javax.persistence.TemporalType;
 public class TAgpm implements java.io.Serializable {
 
 	private long agpId;
-	private TDeclarant TDeclarant;
-	private TFonction TFonction;
-	private TGestion TGestion;
 	private TProjet TProjet;
 	private TStatut TStatut;
 	private TStructure TStructure;
+	private TDeclarant TDeclarant;
+	private TFonction TFonction;
+	private TGestion TGestion;
 	private String agpCommentaire;
 	private String agpTypeDao;
 	private String agpModePassation;
@@ -46,28 +46,28 @@ public class TAgpm implements java.io.Serializable {
 	public TAgpm() {
 	}
 
-	public TAgpm(long agpId, TFonction TFonction, TGestion TGestion, TProjet TProjet, TStatut TStatut,
-			TStructure TStructure) {
+	public TAgpm(long agpId, TProjet TProjet, TStatut TStatut, TStructure TStructure, TFonction TFonction,
+			TGestion TGestion) {
 		this.agpId = agpId;
-		this.TFonction = TFonction;
-		this.TGestion = TGestion;
 		this.TProjet = TProjet;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
+		this.TFonction = TFonction;
+		this.TGestion = TGestion;
 	}
 
-	public TAgpm(long agpId, TDeclarant TDeclarant, TFonction TFonction, TGestion TGestion, TProjet TProjet,
-			TStatut TStatut, TStructure TStructure, String agpCommentaire, String agpTypeDao, String agpModePassation,
+	public TAgpm(long agpId, TProjet TProjet, TStatut TStatut, TStructure TStructure, TDeclarant TDeclarant,
+			TFonction TFonction, TGestion TGestion, String agpCommentaire, String agpTypeDao, String agpModePassation,
 			String agpActif, String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp,
 			Date agpDateValDmp, Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
 			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
 		this.agpId = agpId;
-		this.TDeclarant = TDeclarant;
-		this.TFonction = TFonction;
-		this.TGestion = TGestion;
 		this.TProjet = TProjet;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
+		this.TDeclarant = TDeclarant;
+		this.TFonction = TFonction;
+		this.TGestion = TGestion;
 		this.agpCommentaire = agpCommentaire;
 		this.agpTypeDao = agpTypeDao;
 		this.agpModePassation = agpModePassation;
@@ -92,36 +92,6 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setAgpId(long agpId) {
 		this.agpId = agpId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_DEC_ID")
-	public TDeclarant getTDeclarant() {
-		return this.TDeclarant;
-	}
-
-	public void setTDeclarant(TDeclarant TDeclarant) {
-		this.TDeclarant = TDeclarant;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_FON_COD", nullable = false)
-	public TFonction getTFonction() {
-		return this.TFonction;
-	}
-
-	public void setTFonction(TFonction TFonction) {
-		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_GES_CODE", nullable = false)
-	public TGestion getTGestion() {
-		return this.TGestion;
-	}
-
-	public void setTGestion(TGestion TGestion) {
-		this.TGestion = TGestion;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -152,6 +122,36 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setTStructure(TStructure TStructure) {
 		this.TStructure = TStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_DEC_ID")
+	public TDeclarant getTDeclarant() {
+		return this.TDeclarant;
+	}
+
+	public void setTDeclarant(TDeclarant TDeclarant) {
+		this.TDeclarant = TDeclarant;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_FON_COD", nullable = false)
+	public TFonction getTFonction() {
+		return this.TFonction;
+	}
+
+	public void setTFonction(TFonction TFonction) {
+		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_GES_CODE", nullable = false)
+	public TGestion getTGestion() {
+		return this.TGestion;
+	}
+
+	public void setTGestion(TGestion TGestion) {
+		this.TGestion = TGestion;
 	}
 
 	@Column(name = "AGP_COMMENTAIRE", length = 1000)

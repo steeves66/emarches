@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -40,7 +40,7 @@ public class VDaoBailleurId implements java.io.Serializable {
 	private String aaoStaCode;
 	private Date aaoDtePub;
 	private Date aaoDteOuvTec;
-	private Date aaoDteHeurOuv;
+	private String aaoDteHeurOuv;
 	private Date aaoDteOuvFin;
 	private BigDecimal aaoNbrLot;
 	private BigDecimal aaoNbrOuv;
@@ -61,7 +61,7 @@ public class VDaoBailleurId implements java.io.Serializable {
 	private BigDecimal aaoCoutDac;
 	private String aaoLieuRecep;
 	private Date aaoDateRecep;
-	private Date aaoHeureRecep;
+	private String aaoHeureRecep;
 	private BigDecimal aaoAdaNum;
 	private String aaoNatPrix;
 	private String aaoRegQual;
@@ -89,12 +89,12 @@ public class VDaoBailleurId implements java.io.Serializable {
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
 			Date dacDateReception, String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur, String aaoCode, String aaoLibelle, String aaoDacCode, Date aaoDteSaisi,
-			String aaoStaCode, Date aaoDtePub, Date aaoDteOuvTec, Date aaoDteHeurOuv, Date aaoDteOuvFin,
+			String aaoStaCode, Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin,
 			BigDecimal aaoNbrLot, BigDecimal aaoNbrOuv, BigDecimal aaoDelaiVal, String aaoFonCodAc,
 			String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux, String aaoLieuExe, String aaoNomResp,
 			String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot, String aaoAvisBail,
 			BigDecimal aaoMtCaut, String aaoModePaiement, BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,
-			Date aaoHeureRecep, BigDecimal aaoAdaNum, String aaoNatPrix, String aaoRegQual, String aaoAvisBai,
+			String aaoHeureRecep, BigDecimal aaoAdaNum, String aaoNatPrix, String aaoRegQual, String aaoAvisBai,
 			String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp,
 			Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai) {
 		this.dacCode = dacCode;
@@ -414,12 +414,12 @@ public class VDaoBailleurId implements java.io.Serializable {
 		this.aaoDteOuvTec = aaoDteOuvTec;
 	}
 
-	@Column(name = "AAO_DTE_HEUR_OUV", length = 7)
-	public Date getAaoDteHeurOuv() {
+	@Column(name = "AAO_DTE_HEUR_OUV", length = 20)
+	public String getAaoDteHeurOuv() {
 		return this.aaoDteHeurOuv;
 	}
 
-	public void setAaoDteHeurOuv(Date aaoDteHeurOuv) {
+	public void setAaoDteHeurOuv(String aaoDteHeurOuv) {
 		this.aaoDteHeurOuv = aaoDteHeurOuv;
 	}
 
@@ -603,12 +603,12 @@ public class VDaoBailleurId implements java.io.Serializable {
 		this.aaoDateRecep = aaoDateRecep;
 	}
 
-	@Column(name = "AAO_HEURE_RECEP", length = 7)
-	public Date getAaoHeureRecep() {
+	@Column(name = "AAO_HEURE_RECEP", length = 20)
+	public String getAaoHeureRecep() {
 		return this.aaoHeureRecep;
 	}
 
-	public void setAaoHeureRecep(Date aaoHeureRecep) {
+	public void setAaoHeureRecep(String aaoHeureRecep) {
 		this.aaoHeureRecep = aaoHeureRecep;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class TModeleDacType implements java.io.Serializable {
 
 	private String mdtCode;
-	private TOperateur TOperateur;
 	private TTypeMarche TTypeMarche;
+	private TOperateur TOperateur;
 	private String mdtLibelleLong;
 	private String mdtLibelleCourt;
 	private Date mdtDteSaisi;
@@ -38,12 +38,12 @@ public class TModeleDacType implements java.io.Serializable {
 		this.mdtCode = mdtCode;
 	}
 
-	public TModeleDacType(String mdtCode, TOperateur TOperateur, TTypeMarche TTypeMarche, String mdtLibelleLong,
+	public TModeleDacType(String mdtCode, TTypeMarche TTypeMarche, TOperateur TOperateur, String mdtLibelleLong,
 			String mdtLibelleCourt, Date mdtDteSaisi, Set<TTypePiecesDac> TTypePiecesDacs,
 			Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.mdtCode = mdtCode;
-		this.TOperateur = TOperateur;
 		this.TTypeMarche = TTypeMarche;
+		this.TOperateur = TOperateur;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtLibelleCourt = mdtLibelleCourt;
 		this.mdtDteSaisi = mdtDteSaisi;
@@ -63,16 +63,6 @@ public class TModeleDacType implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MDT_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MDT_TYM_CODE")
 	public TTypeMarche getTTypeMarche() {
 		return this.TTypeMarche;
@@ -80,6 +70,16 @@ public class TModeleDacType implements java.io.Serializable {
 
 	public void setTTypeMarche(TTypeMarche TTypeMarche) {
 		this.TTypeMarche = TTypeMarche;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MDT_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@Column(name = "MDT_LIBELLE_LONG", length = 500)

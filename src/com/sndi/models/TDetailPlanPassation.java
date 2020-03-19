@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,16 +23,16 @@ import javax.persistence.TemporalType;
 public class TDetailPlanPassation implements java.io.Serializable {
 
 	private long dppId;
-	private TDacSpecs TDacSpecs;
-	private TDetailPlanGeneral TDetailPlanGeneral;
-	private TLBudgets TLBudgets;
-	private TModeleDacType TModeleDacType;
-	private TModePassation TModePassation;
 	private TPlanPassation TPlanPassation;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TTypeMarche TTypeMarche;
 	private TTypeProcedure TTypeProcedure;
+	private TDacSpecs TDacSpecs;
+	private TDetailPlanGeneral TDetailPlanGeneral;
+	private TLBudgets TLBudgets;
+	private TModeleDacType TModeleDacType;
+	private TModePassation TModePassation;
 	private String dppTypePlan;
 	private String dppCode;
 	private Integer dppNumeroOrdre;
@@ -77,21 +77,21 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	public TDetailPlanPassation() {
 	}
 
-	public TDetailPlanPassation(long dppId, TDetailPlanGeneral TDetailPlanGeneral, TModePassation TModePassation,
-			TPlanPassation TPlanPassation, TStatut TStatut, TTypeMarche TTypeMarche, String dppTypePlan) {
+	public TDetailPlanPassation(long dppId, TPlanPassation TPlanPassation, TStatut TStatut, TTypeMarche TTypeMarche,
+			TDetailPlanGeneral TDetailPlanGeneral, TModePassation TModePassation, String dppTypePlan) {
 		this.dppId = dppId;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-		this.TModePassation = TModePassation;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
+		this.TDetailPlanGeneral = TDetailPlanGeneral;
+		this.TModePassation = TModePassation;
 		this.dppTypePlan = dppTypePlan;
 	}
 
-	public TDetailPlanPassation(long dppId, TDacSpecs TDacSpecs, TDetailPlanGeneral TDetailPlanGeneral,
-			TLBudgets TLBudgets, TModeleDacType TModeleDacType, TModePassation TModePassation,
-			TPlanPassation TPlanPassation, TStatut TStatut, TStructure TStructure, TTypeMarche TTypeMarche,
-			TTypeProcedure TTypeProcedure, String dppTypePlan, String dppCode, Integer dppNumeroOrdre, Date dppDate,
+	public TDetailPlanPassation(long dppId, TPlanPassation TPlanPassation, TStatut TStatut, TStructure TStructure,
+			TTypeMarche TTypeMarche, TTypeProcedure TTypeProcedure, TDacSpecs TDacSpecs,
+			TDetailPlanGeneral TDetailPlanGeneral, TLBudgets TLBudgets, TModeleDacType TModeleDacType,
+			TModePassation TModePassation, String dppTypePlan, String dppCode, Integer dppNumeroOrdre, Date dppDate,
 			String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
 			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail,
@@ -103,16 +103,16 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
-		this.TDacSpecs = TDacSpecs;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-		this.TLBudgets = TLBudgets;
-		this.TModeleDacType = TModeleDacType;
-		this.TModePassation = TModePassation;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TTypeMarche = TTypeMarche;
 		this.TTypeProcedure = TTypeProcedure;
+		this.TDacSpecs = TDacSpecs;
+		this.TDetailPlanGeneral = TDetailPlanGeneral;
+		this.TLBudgets = TLBudgets;
+		this.TModeleDacType = TModeleDacType;
+		this.TModePassation = TModePassation;
 		this.dppTypePlan = dppTypePlan;
 		this.dppCode = dppCode;
 		this.dppNumeroOrdre = dppNumeroOrdre;
@@ -167,56 +167,6 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DPP_DAC_CODE")
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DPP_GPG_ID", nullable = false)
-	public TDetailPlanGeneral getTDetailPlanGeneral() {
-		return this.TDetailPlanGeneral;
-	}
-
-	public void setTDetailPlanGeneral(TDetailPlanGeneral TDetailPlanGeneral) {
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DPP_LBG_CODE")
-	public TLBudgets getTLBudgets() {
-		return this.TLBudgets;
-	}
-
-	public void setTLBudgets(TLBudgets TLBudgets) {
-		this.TLBudgets = TLBudgets;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DPP_PIECE_DAO")
-	public TModeleDacType getTModeleDacType() {
-		return this.TModeleDacType;
-	}
-
-	public void setTModeleDacType(TModeleDacType TModeleDacType) {
-		this.TModeleDacType = TModeleDacType;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DPP_MOP_CODE", nullable = false)
-	public TModePassation getTModePassation() {
-		return this.TModePassation;
-	}
-
-	public void setTModePassation(TModePassation TModePassation) {
-		this.TModePassation = TModePassation;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_PLP_ID", nullable = false)
 	public TPlanPassation getTPlanPassation() {
 		return this.TPlanPassation;
@@ -264,6 +214,56 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setTTypeProcedure(TTypeProcedure TTypeProcedure) {
 		this.TTypeProcedure = TTypeProcedure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DPP_DAC_CODE")
+	public TDacSpecs getTDacSpecs() {
+		return this.TDacSpecs;
+	}
+
+	public void setTDacSpecs(TDacSpecs TDacSpecs) {
+		this.TDacSpecs = TDacSpecs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DPP_GPG_ID", nullable = false)
+	public TDetailPlanGeneral getTDetailPlanGeneral() {
+		return this.TDetailPlanGeneral;
+	}
+
+	public void setTDetailPlanGeneral(TDetailPlanGeneral TDetailPlanGeneral) {
+		this.TDetailPlanGeneral = TDetailPlanGeneral;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DPP_LBG_CODE")
+	public TLBudgets getTLBudgets() {
+		return this.TLBudgets;
+	}
+
+	public void setTLBudgets(TLBudgets TLBudgets) {
+		this.TLBudgets = TLBudgets;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DPP_PIECE_DAO")
+	public TModeleDacType getTModeleDacType() {
+		return this.TModeleDacType;
+	}
+
+	public void setTModeleDacType(TModeleDacType TModeleDacType) {
+		this.TModeleDacType = TModeleDacType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DPP_MOP_CODE", nullable = false)
+	public TModePassation getTModePassation() {
+		return this.TModePassation;
+	}
+
+	public void setTModePassation(TModePassation TModePassation) {
+		this.TModePassation = TModePassation;
 	}
 
 	@Column(name = "DPP_TYPE_PLAN", nullable = false, length = 3)

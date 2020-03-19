@@ -1,7 +1,7 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
-import java.util.Date;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -11,74 +11,66 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VDetPlaningId implements java.io.Serializable {
 
-	private Date dppDateExecFin;
-	private Date dppDateExecDebut;
-	private Date dppDateMarcheApprob;
-	private Date dppDateSignatAc;
-	private Date dppDateSignatAttrib;
-	private Date dppDateNegociation;
-	private Date dppDateAttApproBail;
-	private Date dppDateAttApprobDmp;
-	private Date dppDateJugementOffre;
-	private Date dppDateElabRapport;
-	private Date dppDateOuvertOf;
-	private Date dppDateOuvertOt;
-	private Date dppDateAvisAoPublication;
-	private Date dppDateDaoApprobBail;
-	private Date dppDateDaoApprobDmp;
-	private Date dppDateDaoTrans;
-	private String dppSourceFin;
-	private String dppObjet;
-	private Date dppDate;
-	private Integer dppNumeroOrdre;
-	private String dppCode;
-	private String dppTypePlan;
-	private String dppLbgCode;
-	private String dppMopCode;
-	private String dppTymCode;
-	private String dppStaCode;
-	private long dppGpgId;
-	private long dppPlpId;
-	private long dppId;
-	private Date dppDateAttApprobCpmp;
-	private Date dppInvEntre;
-	private String dppDacCode;
-	private String dppPieceDao;
-	private String dppStatutDao;
-	private String dppTypId;
-	private String dppPartiePmePmi;
-	private String dppStructureBenefi;
-	private String dppStructureConduc;
-	private Date dppDateSaisie;
-	private String dppStatutRetour;
-	private String dppStrCode;
-	private String dppActeurSaisie;
-	private Date dppDateJugementOffreTec;
+	private Serializable dppDateExecFin;
+	private Serializable dppDateExecDebut;
+	private Serializable dppDateMarcheApprob;
+	private Serializable dppDateSignatAc;
+	private Serializable dppDateSignatAttrib;
+	private Serializable dppDateNegociation;
+	private Serializable dppDateAttApproBail;
+	private Serializable dppDateAttApprobDmp;
+	private Serializable dppDateJugementOffre;
+	private Serializable dppDateElabRapport;
+	private Serializable dppDateOuvertOf;
+	private Serializable dppDateOuvertOt;
+	private Serializable dppDateAvisAoPublication;
+	private Serializable dppDateDaoApprobBail;
+	private Serializable dppDateDaoApprobDmp;
+	private Serializable dppDateDaoTrans;
+	private Serializable dppSourceFin;
+	private Serializable dppObjet;
+	private Serializable dppDate;
+	private Serializable dppNumeroOrdre;
+	private Serializable dppCode;
+	private Serializable dppTypePlan;
+	private Serializable dppLbgCode;
+	private Serializable dppMopCode;
+	private Serializable dppTymCode;
+	private Serializable dppStaCode;
+	private Serializable dppGpgId;
+	private Serializable dppPlpId;
+	private Serializable dppId;
+	private Serializable dppDateAttApprobCpmp;
+	private Serializable dppInvEntre;
+	private Serializable dppDacCode;
+	private Serializable dppPieceDao;
+	private Serializable dppStatutDao;
+	private Serializable dppTypId;
+	private Serializable dppPartiePmePmi;
+	private Serializable dppStructureBenefi;
+	private Serializable dppStructureConduc;
+	private Serializable dppDateSaisie;
+	private Serializable dppStatutRetour;
+	private Serializable dppStrCode;
+	private Serializable dppActeurSaisie;
+	private Serializable dppDateJugementOffreTec;
 
 	public VDetPlaningId() {
 	}
 
-	public VDetPlaningId(String dppTypePlan, String dppMopCode, String dppTymCode, String dppStaCode, long dppGpgId,
-			long dppPlpId, long dppId) {
-		this.dppTypePlan = dppTypePlan;
-		this.dppMopCode = dppMopCode;
-		this.dppTymCode = dppTymCode;
-		this.dppStaCode = dppStaCode;
-		this.dppGpgId = dppGpgId;
-		this.dppPlpId = dppPlpId;
-		this.dppId = dppId;
-	}
-
-	public VDetPlaningId(Date dppDateExecFin, Date dppDateExecDebut, Date dppDateMarcheApprob, Date dppDateSignatAc,
-			Date dppDateSignatAttrib, Date dppDateNegociation, Date dppDateAttApproBail, Date dppDateAttApprobDmp,
-			Date dppDateJugementOffre, Date dppDateElabRapport, Date dppDateOuvertOf, Date dppDateOuvertOt,
-			Date dppDateAvisAoPublication, Date dppDateDaoApprobBail, Date dppDateDaoApprobDmp, Date dppDateDaoTrans,
-			String dppSourceFin, String dppObjet, Date dppDate, Integer dppNumeroOrdre, String dppCode,
-			String dppTypePlan, String dppLbgCode, String dppMopCode, String dppTymCode, String dppStaCode,
-			long dppGpgId, long dppPlpId, long dppId, Date dppDateAttApprobCpmp, Date dppInvEntre, String dppDacCode,
-			String dppPieceDao, String dppStatutDao, String dppTypId, String dppPartiePmePmi, String dppStructureBenefi,
-			String dppStructureConduc, Date dppDateSaisie, String dppStatutRetour, String dppStrCode,
-			String dppActeurSaisie, Date dppDateJugementOffreTec) {
+	public VDetPlaningId(Serializable dppDateExecFin, Serializable dppDateExecDebut, Serializable dppDateMarcheApprob,
+			Serializable dppDateSignatAc, Serializable dppDateSignatAttrib, Serializable dppDateNegociation,
+			Serializable dppDateAttApproBail, Serializable dppDateAttApprobDmp, Serializable dppDateJugementOffre,
+			Serializable dppDateElabRapport, Serializable dppDateOuvertOf, Serializable dppDateOuvertOt,
+			Serializable dppDateAvisAoPublication, Serializable dppDateDaoApprobBail, Serializable dppDateDaoApprobDmp,
+			Serializable dppDateDaoTrans, Serializable dppSourceFin, Serializable dppObjet, Serializable dppDate,
+			Serializable dppNumeroOrdre, Serializable dppCode, Serializable dppTypePlan, Serializable dppLbgCode,
+			Serializable dppMopCode, Serializable dppTymCode, Serializable dppStaCode, Serializable dppGpgId,
+			Serializable dppPlpId, Serializable dppId, Serializable dppDateAttApprobCpmp, Serializable dppInvEntre,
+			Serializable dppDacCode, Serializable dppPieceDao, Serializable dppStatutDao, Serializable dppTypId,
+			Serializable dppPartiePmePmi, Serializable dppStructureBenefi, Serializable dppStructureConduc,
+			Serializable dppDateSaisie, Serializable dppStatutRetour, Serializable dppStrCode,
+			Serializable dppActeurSaisie, Serializable dppDateJugementOffreTec) {
 		this.dppDateExecFin = dppDateExecFin;
 		this.dppDateExecDebut = dppDateExecDebut;
 		this.dppDateMarcheApprob = dppDateMarcheApprob;
@@ -124,390 +116,390 @@ public class VDetPlaningId implements java.io.Serializable {
 		this.dppDateJugementOffreTec = dppDateJugementOffreTec;
 	}
 
-	@Column(name = "DPP_DATE_EXEC_FIN", length = 7)
-	public Date getDppDateExecFin() {
+	@Column(name = "DPP_DATE_EXEC_FIN")
+	public Serializable getDppDateExecFin() {
 		return this.dppDateExecFin;
 	}
 
-	public void setDppDateExecFin(Date dppDateExecFin) {
+	public void setDppDateExecFin(Serializable dppDateExecFin) {
 		this.dppDateExecFin = dppDateExecFin;
 	}
 
-	@Column(name = "DPP_DATE_EXEC_DEBUT", length = 7)
-	public Date getDppDateExecDebut() {
+	@Column(name = "DPP_DATE_EXEC_DEBUT")
+	public Serializable getDppDateExecDebut() {
 		return this.dppDateExecDebut;
 	}
 
-	public void setDppDateExecDebut(Date dppDateExecDebut) {
+	public void setDppDateExecDebut(Serializable dppDateExecDebut) {
 		this.dppDateExecDebut = dppDateExecDebut;
 	}
 
-	@Column(name = "DPP_DATE_MARCHE_APPROB", length = 7)
-	public Date getDppDateMarcheApprob() {
+	@Column(name = "DPP_DATE_MARCHE_APPROB")
+	public Serializable getDppDateMarcheApprob() {
 		return this.dppDateMarcheApprob;
 	}
 
-	public void setDppDateMarcheApprob(Date dppDateMarcheApprob) {
+	public void setDppDateMarcheApprob(Serializable dppDateMarcheApprob) {
 		this.dppDateMarcheApprob = dppDateMarcheApprob;
 	}
 
-	@Column(name = "DPP_DATE_SIGNAT_AC", length = 7)
-	public Date getDppDateSignatAc() {
+	@Column(name = "DPP_DATE_SIGNAT_AC")
+	public Serializable getDppDateSignatAc() {
 		return this.dppDateSignatAc;
 	}
 
-	public void setDppDateSignatAc(Date dppDateSignatAc) {
+	public void setDppDateSignatAc(Serializable dppDateSignatAc) {
 		this.dppDateSignatAc = dppDateSignatAc;
 	}
 
-	@Column(name = "DPP_DATE_SIGNAT_ATTRIB", length = 7)
-	public Date getDppDateSignatAttrib() {
+	@Column(name = "DPP_DATE_SIGNAT_ATTRIB")
+	public Serializable getDppDateSignatAttrib() {
 		return this.dppDateSignatAttrib;
 	}
 
-	public void setDppDateSignatAttrib(Date dppDateSignatAttrib) {
+	public void setDppDateSignatAttrib(Serializable dppDateSignatAttrib) {
 		this.dppDateSignatAttrib = dppDateSignatAttrib;
 	}
 
-	@Column(name = "DPP_DATE_NEGOCIATION", length = 7)
-	public Date getDppDateNegociation() {
+	@Column(name = "DPP_DATE_NEGOCIATION")
+	public Serializable getDppDateNegociation() {
 		return this.dppDateNegociation;
 	}
 
-	public void setDppDateNegociation(Date dppDateNegociation) {
+	public void setDppDateNegociation(Serializable dppDateNegociation) {
 		this.dppDateNegociation = dppDateNegociation;
 	}
 
-	@Column(name = "DPP_DATE_ATT_APPRO_BAIL", length = 7)
-	public Date getDppDateAttApproBail() {
+	@Column(name = "DPP_DATE_ATT_APPRO_BAIL")
+	public Serializable getDppDateAttApproBail() {
 		return this.dppDateAttApproBail;
 	}
 
-	public void setDppDateAttApproBail(Date dppDateAttApproBail) {
+	public void setDppDateAttApproBail(Serializable dppDateAttApproBail) {
 		this.dppDateAttApproBail = dppDateAttApproBail;
 	}
 
-	@Column(name = "DPP_DATE_ATT_APPROB_DMP", length = 7)
-	public Date getDppDateAttApprobDmp() {
+	@Column(name = "DPP_DATE_ATT_APPROB_DMP")
+	public Serializable getDppDateAttApprobDmp() {
 		return this.dppDateAttApprobDmp;
 	}
 
-	public void setDppDateAttApprobDmp(Date dppDateAttApprobDmp) {
+	public void setDppDateAttApprobDmp(Serializable dppDateAttApprobDmp) {
 		this.dppDateAttApprobDmp = dppDateAttApprobDmp;
 	}
 
-	@Column(name = "DPP_DATE_JUGEMENT_OFFRE", length = 7)
-	public Date getDppDateJugementOffre() {
+	@Column(name = "DPP_DATE_JUGEMENT_OFFRE")
+	public Serializable getDppDateJugementOffre() {
 		return this.dppDateJugementOffre;
 	}
 
-	public void setDppDateJugementOffre(Date dppDateJugementOffre) {
+	public void setDppDateJugementOffre(Serializable dppDateJugementOffre) {
 		this.dppDateJugementOffre = dppDateJugementOffre;
 	}
 
-	@Column(name = "DPP_DATE_ELAB_RAPPORT", length = 7)
-	public Date getDppDateElabRapport() {
+	@Column(name = "DPP_DATE_ELAB_RAPPORT")
+	public Serializable getDppDateElabRapport() {
 		return this.dppDateElabRapport;
 	}
 
-	public void setDppDateElabRapport(Date dppDateElabRapport) {
+	public void setDppDateElabRapport(Serializable dppDateElabRapport) {
 		this.dppDateElabRapport = dppDateElabRapport;
 	}
 
-	@Column(name = "DPP_DATE_OUVERT_OF", length = 7)
-	public Date getDppDateOuvertOf() {
+	@Column(name = "DPP_DATE_OUVERT_OF")
+	public Serializable getDppDateOuvertOf() {
 		return this.dppDateOuvertOf;
 	}
 
-	public void setDppDateOuvertOf(Date dppDateOuvertOf) {
+	public void setDppDateOuvertOf(Serializable dppDateOuvertOf) {
 		this.dppDateOuvertOf = dppDateOuvertOf;
 	}
 
-	@Column(name = "DPP_DATE_OUVERT_OT", length = 7)
-	public Date getDppDateOuvertOt() {
+	@Column(name = "DPP_DATE_OUVERT_OT")
+	public Serializable getDppDateOuvertOt() {
 		return this.dppDateOuvertOt;
 	}
 
-	public void setDppDateOuvertOt(Date dppDateOuvertOt) {
+	public void setDppDateOuvertOt(Serializable dppDateOuvertOt) {
 		this.dppDateOuvertOt = dppDateOuvertOt;
 	}
 
-	@Column(name = "DPP_DATE_AVIS_AO_PUBLICATION", length = 7)
-	public Date getDppDateAvisAoPublication() {
+	@Column(name = "DPP_DATE_AVIS_AO_PUBLICATION")
+	public Serializable getDppDateAvisAoPublication() {
 		return this.dppDateAvisAoPublication;
 	}
 
-	public void setDppDateAvisAoPublication(Date dppDateAvisAoPublication) {
+	public void setDppDateAvisAoPublication(Serializable dppDateAvisAoPublication) {
 		this.dppDateAvisAoPublication = dppDateAvisAoPublication;
 	}
 
-	@Column(name = "DPP_DATE_DAO_APPROB_BAIL", length = 7)
-	public Date getDppDateDaoApprobBail() {
+	@Column(name = "DPP_DATE_DAO_APPROB_BAIL")
+	public Serializable getDppDateDaoApprobBail() {
 		return this.dppDateDaoApprobBail;
 	}
 
-	public void setDppDateDaoApprobBail(Date dppDateDaoApprobBail) {
+	public void setDppDateDaoApprobBail(Serializable dppDateDaoApprobBail) {
 		this.dppDateDaoApprobBail = dppDateDaoApprobBail;
 	}
 
-	@Column(name = "DPP_DATE_DAO_APPROB_DMP", length = 7)
-	public Date getDppDateDaoApprobDmp() {
+	@Column(name = "DPP_DATE_DAO_APPROB_DMP")
+	public Serializable getDppDateDaoApprobDmp() {
 		return this.dppDateDaoApprobDmp;
 	}
 
-	public void setDppDateDaoApprobDmp(Date dppDateDaoApprobDmp) {
+	public void setDppDateDaoApprobDmp(Serializable dppDateDaoApprobDmp) {
 		this.dppDateDaoApprobDmp = dppDateDaoApprobDmp;
 	}
 
-	@Column(name = "DPP_DATE_DAO_TRANS", length = 7)
-	public Date getDppDateDaoTrans() {
+	@Column(name = "DPP_DATE_DAO_TRANS")
+	public Serializable getDppDateDaoTrans() {
 		return this.dppDateDaoTrans;
 	}
 
-	public void setDppDateDaoTrans(Date dppDateDaoTrans) {
+	public void setDppDateDaoTrans(Serializable dppDateDaoTrans) {
 		this.dppDateDaoTrans = dppDateDaoTrans;
 	}
 
-	@Column(name = "DPP_SOURCE_FIN", length = 1000)
-	public String getDppSourceFin() {
+	@Column(name = "DPP_SOURCE_FIN")
+	public Serializable getDppSourceFin() {
 		return this.dppSourceFin;
 	}
 
-	public void setDppSourceFin(String dppSourceFin) {
+	public void setDppSourceFin(Serializable dppSourceFin) {
 		this.dppSourceFin = dppSourceFin;
 	}
 
-	@Column(name = "DPP_OBJET", length = 1000)
-	public String getDppObjet() {
+	@Column(name = "DPP_OBJET")
+	public Serializable getDppObjet() {
 		return this.dppObjet;
 	}
 
-	public void setDppObjet(String dppObjet) {
+	public void setDppObjet(Serializable dppObjet) {
 		this.dppObjet = dppObjet;
 	}
 
-	@Column(name = "DPP_DATE", length = 7)
-	public Date getDppDate() {
+	@Column(name = "DPP_DATE")
+	public Serializable getDppDate() {
 		return this.dppDate;
 	}
 
-	public void setDppDate(Date dppDate) {
+	public void setDppDate(Serializable dppDate) {
 		this.dppDate = dppDate;
 	}
 
-	@Column(name = "DPP_NUMERO_ORDRE", precision = 8, scale = 0)
-	public Integer getDppNumeroOrdre() {
+	@Column(name = "DPP_NUMERO_ORDRE")
+	public Serializable getDppNumeroOrdre() {
 		return this.dppNumeroOrdre;
 	}
 
-	public void setDppNumeroOrdre(Integer dppNumeroOrdre) {
+	public void setDppNumeroOrdre(Serializable dppNumeroOrdre) {
 		this.dppNumeroOrdre = dppNumeroOrdre;
 	}
 
-	@Column(name = "DPP_CODE", length = 50)
-	public String getDppCode() {
+	@Column(name = "DPP_CODE")
+	public Serializable getDppCode() {
 		return this.dppCode;
 	}
 
-	public void setDppCode(String dppCode) {
+	public void setDppCode(Serializable dppCode) {
 		this.dppCode = dppCode;
 	}
 
-	@Column(name = "DPP_TYPE_PLAN", nullable = false, length = 3)
-	public String getDppTypePlan() {
+	@Column(name = "DPP_TYPE_PLAN")
+	public Serializable getDppTypePlan() {
 		return this.dppTypePlan;
 	}
 
-	public void setDppTypePlan(String dppTypePlan) {
+	public void setDppTypePlan(Serializable dppTypePlan) {
 		this.dppTypePlan = dppTypePlan;
 	}
 
-	@Column(name = "DPP_LBG_CODE", length = 50)
-	public String getDppLbgCode() {
+	@Column(name = "DPP_LBG_CODE")
+	public Serializable getDppLbgCode() {
 		return this.dppLbgCode;
 	}
 
-	public void setDppLbgCode(String dppLbgCode) {
+	public void setDppLbgCode(Serializable dppLbgCode) {
 		this.dppLbgCode = dppLbgCode;
 	}
 
-	@Column(name = "DPP_MOP_CODE", nullable = false, length = 3)
-	public String getDppMopCode() {
+	@Column(name = "DPP_MOP_CODE")
+	public Serializable getDppMopCode() {
 		return this.dppMopCode;
 	}
 
-	public void setDppMopCode(String dppMopCode) {
+	public void setDppMopCode(Serializable dppMopCode) {
 		this.dppMopCode = dppMopCode;
 	}
 
-	@Column(name = "DPP_TYM_CODE", nullable = false, length = 3)
-	public String getDppTymCode() {
+	@Column(name = "DPP_TYM_CODE")
+	public Serializable getDppTymCode() {
 		return this.dppTymCode;
 	}
 
-	public void setDppTymCode(String dppTymCode) {
+	public void setDppTymCode(Serializable dppTymCode) {
 		this.dppTymCode = dppTymCode;
 	}
 
-	@Column(name = "DPP_STA_CODE", nullable = false, length = 3)
-	public String getDppStaCode() {
+	@Column(name = "DPP_STA_CODE")
+	public Serializable getDppStaCode() {
 		return this.dppStaCode;
 	}
 
-	public void setDppStaCode(String dppStaCode) {
+	public void setDppStaCode(Serializable dppStaCode) {
 		this.dppStaCode = dppStaCode;
 	}
 
-	@Column(name = "DPP_GPG_ID", nullable = false, precision = 10, scale = 0)
-	public long getDppGpgId() {
+	@Column(name = "DPP_GPG_ID")
+	public Serializable getDppGpgId() {
 		return this.dppGpgId;
 	}
 
-	public void setDppGpgId(long dppGpgId) {
+	public void setDppGpgId(Serializable dppGpgId) {
 		this.dppGpgId = dppGpgId;
 	}
 
-	@Column(name = "DPP_PLP_ID", nullable = false, precision = 10, scale = 0)
-	public long getDppPlpId() {
+	@Column(name = "DPP_PLP_ID")
+	public Serializable getDppPlpId() {
 		return this.dppPlpId;
 	}
 
-	public void setDppPlpId(long dppPlpId) {
+	public void setDppPlpId(Serializable dppPlpId) {
 		this.dppPlpId = dppPlpId;
 	}
 
-	@Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)
-	public long getDppId() {
+	@Column(name = "DPP_ID")
+	public Serializable getDppId() {
 		return this.dppId;
 	}
 
-	public void setDppId(long dppId) {
+	public void setDppId(Serializable dppId) {
 		this.dppId = dppId;
 	}
 
-	@Column(name = "DPP_DATE_ATT_APPROB_CPMP", length = 7)
-	public Date getDppDateAttApprobCpmp() {
+	@Column(name = "DPP_DATE_ATT_APPROB_CPMP")
+	public Serializable getDppDateAttApprobCpmp() {
 		return this.dppDateAttApprobCpmp;
 	}
 
-	public void setDppDateAttApprobCpmp(Date dppDateAttApprobCpmp) {
+	public void setDppDateAttApprobCpmp(Serializable dppDateAttApprobCpmp) {
 		this.dppDateAttApprobCpmp = dppDateAttApprobCpmp;
 	}
 
-	@Column(name = "DPP_INV_ENTRE", length = 7)
-	public Date getDppInvEntre() {
+	@Column(name = "DPP_INV_ENTRE")
+	public Serializable getDppInvEntre() {
 		return this.dppInvEntre;
 	}
 
-	public void setDppInvEntre(Date dppInvEntre) {
+	public void setDppInvEntre(Serializable dppInvEntre) {
 		this.dppInvEntre = dppInvEntre;
 	}
 
-	@Column(name = "DPP_DAC_CODE", length = 20)
-	public String getDppDacCode() {
+	@Column(name = "DPP_DAC_CODE")
+	public Serializable getDppDacCode() {
 		return this.dppDacCode;
 	}
 
-	public void setDppDacCode(String dppDacCode) {
+	public void setDppDacCode(Serializable dppDacCode) {
 		this.dppDacCode = dppDacCode;
 	}
 
-	@Column(name = "DPP_PIECE_DAO", length = 15)
-	public String getDppPieceDao() {
+	@Column(name = "DPP_PIECE_DAO")
+	public Serializable getDppPieceDao() {
 		return this.dppPieceDao;
 	}
 
-	public void setDppPieceDao(String dppPieceDao) {
+	public void setDppPieceDao(Serializable dppPieceDao) {
 		this.dppPieceDao = dppPieceDao;
 	}
 
-	@Column(name = "DPP_STATUT_DAO", length = 2)
-	public String getDppStatutDao() {
+	@Column(name = "DPP_STATUT_DAO")
+	public Serializable getDppStatutDao() {
 		return this.dppStatutDao;
 	}
 
-	public void setDppStatutDao(String dppStatutDao) {
+	public void setDppStatutDao(Serializable dppStatutDao) {
 		this.dppStatutDao = dppStatutDao;
 	}
 
-	@Column(name = "DPP_TYP_ID", length = 5)
-	public String getDppTypId() {
+	@Column(name = "DPP_TYP_ID")
+	public Serializable getDppTypId() {
 		return this.dppTypId;
 	}
 
-	public void setDppTypId(String dppTypId) {
+	public void setDppTypId(Serializable dppTypId) {
 		this.dppTypId = dppTypId;
 	}
 
-	@Column(name = "DPP_PARTIE_PME_PMI", length = 1)
-	public String getDppPartiePmePmi() {
+	@Column(name = "DPP_PARTIE_PME_PMI")
+	public Serializable getDppPartiePmePmi() {
 		return this.dppPartiePmePmi;
 	}
 
-	public void setDppPartiePmePmi(String dppPartiePmePmi) {
+	public void setDppPartiePmePmi(Serializable dppPartiePmePmi) {
 		this.dppPartiePmePmi = dppPartiePmePmi;
 	}
 
-	@Column(name = "DPP_STRUCTURE_BENEFI", length = 500)
-	public String getDppStructureBenefi() {
+	@Column(name = "DPP_STRUCTURE_BENEFI")
+	public Serializable getDppStructureBenefi() {
 		return this.dppStructureBenefi;
 	}
 
-	public void setDppStructureBenefi(String dppStructureBenefi) {
+	public void setDppStructureBenefi(Serializable dppStructureBenefi) {
 		this.dppStructureBenefi = dppStructureBenefi;
 	}
 
-	@Column(name = "DPP_STRUCTURE_CONDUC", length = 500)
-	public String getDppStructureConduc() {
+	@Column(name = "DPP_STRUCTURE_CONDUC")
+	public Serializable getDppStructureConduc() {
 		return this.dppStructureConduc;
 	}
 
-	public void setDppStructureConduc(String dppStructureConduc) {
+	public void setDppStructureConduc(Serializable dppStructureConduc) {
 		this.dppStructureConduc = dppStructureConduc;
 	}
 
-	@Column(name = "DPP_DATE_SAISIE", length = 7)
-	public Date getDppDateSaisie() {
+	@Column(name = "DPP_DATE_SAISIE")
+	public Serializable getDppDateSaisie() {
 		return this.dppDateSaisie;
 	}
 
-	public void setDppDateSaisie(Date dppDateSaisie) {
+	public void setDppDateSaisie(Serializable dppDateSaisie) {
 		this.dppDateSaisie = dppDateSaisie;
 	}
 
-	@Column(name = "DPP_STATUT_RETOUR", length = 4)
-	public String getDppStatutRetour() {
+	@Column(name = "DPP_STATUT_RETOUR")
+	public Serializable getDppStatutRetour() {
 		return this.dppStatutRetour;
 	}
 
-	public void setDppStatutRetour(String dppStatutRetour) {
+	public void setDppStatutRetour(Serializable dppStatutRetour) {
 		this.dppStatutRetour = dppStatutRetour;
 	}
 
-	@Column(name = "DPP_STR_CODE", length = 3)
-	public String getDppStrCode() {
+	@Column(name = "DPP_STR_CODE")
+	public Serializable getDppStrCode() {
 		return this.dppStrCode;
 	}
 
-	public void setDppStrCode(String dppStrCode) {
+	public void setDppStrCode(Serializable dppStrCode) {
 		this.dppStrCode = dppStrCode;
 	}
 
-	@Column(name = "DPP_ACTEUR_SAISIE", length = 12)
-	public String getDppActeurSaisie() {
+	@Column(name = "DPP_ACTEUR_SAISIE")
+	public Serializable getDppActeurSaisie() {
 		return this.dppActeurSaisie;
 	}
 
-	public void setDppActeurSaisie(String dppActeurSaisie) {
+	public void setDppActeurSaisie(Serializable dppActeurSaisie) {
 		this.dppActeurSaisie = dppActeurSaisie;
 	}
 
-	@Column(name = "DPP_DATE_JUGEMENT_OFFRE_TEC", length = 7)
-	public Date getDppDateJugementOffreTec() {
+	@Column(name = "DPP_DATE_JUGEMENT_OFFRE_TEC")
+	public Serializable getDppDateJugementOffreTec() {
 		return this.dppDateJugementOffreTec;
 	}
 
-	public void setDppDateJugementOffreTec(Date dppDateJugementOffreTec) {
+	public void setDppDateJugementOffreTec(Serializable dppDateJugementOffreTec) {
 		this.dppDateJugementOffreTec = dppDateJugementOffreTec;
 	}
 
@@ -592,8 +584,12 @@ public class VDetPlaningId implements java.io.Serializable {
 						&& castOther.getDppTymCode() != null && this.getDppTymCode().equals(castOther.getDppTymCode())))
 				&& ((this.getDppStaCode() == castOther.getDppStaCode()) || (this.getDppStaCode() != null
 						&& castOther.getDppStaCode() != null && this.getDppStaCode().equals(castOther.getDppStaCode())))
-				&& (this.getDppGpgId() == castOther.getDppGpgId()) && (this.getDppPlpId() == castOther.getDppPlpId())
-				&& (this.getDppId() == castOther.getDppId())
+				&& ((this.getDppGpgId() == castOther.getDppGpgId()) || (this.getDppGpgId() != null
+						&& castOther.getDppGpgId() != null && this.getDppGpgId().equals(castOther.getDppGpgId())))
+				&& ((this.getDppPlpId() == castOther.getDppPlpId()) || (this.getDppPlpId() != null
+						&& castOther.getDppPlpId() != null && this.getDppPlpId().equals(castOther.getDppPlpId())))
+				&& ((this.getDppId() == castOther.getDppId()) || (this.getDppId() != null
+						&& castOther.getDppId() != null && this.getDppId().equals(castOther.getDppId())))
 				&& ((this.getDppDateAttApprobCpmp() == castOther.getDppDateAttApprobCpmp())
 						|| (this.getDppDateAttApprobCpmp() != null && castOther.getDppDateAttApprobCpmp() != null
 								&& this.getDppDateAttApprobCpmp().equals(castOther.getDppDateAttApprobCpmp())))
@@ -665,9 +661,9 @@ public class VDetPlaningId implements java.io.Serializable {
 		result = 37 * result + (getDppMopCode() == null ? 0 : this.getDppMopCode().hashCode());
 		result = 37 * result + (getDppTymCode() == null ? 0 : this.getDppTymCode().hashCode());
 		result = 37 * result + (getDppStaCode() == null ? 0 : this.getDppStaCode().hashCode());
-		result = 37 * result + (int) this.getDppGpgId();
-		result = 37 * result + (int) this.getDppPlpId();
-		result = 37 * result + (int) this.getDppId();
+		result = 37 * result + (getDppGpgId() == null ? 0 : this.getDppGpgId().hashCode());
+		result = 37 * result + (getDppPlpId() == null ? 0 : this.getDppPlpId().hashCode());
+		result = 37 * result + (getDppId() == null ? 0 : this.getDppId().hashCode());
 		result = 37 * result + (getDppDateAttApprobCpmp() == null ? 0 : this.getDppDateAttApprobCpmp().hashCode());
 		result = 37 * result + (getDppInvEntre() == null ? 0 : this.getDppInvEntre().hashCode());
 		result = 37 * result + (getDppDacCode() == null ? 0 : this.getDppDacCode().hashCode());

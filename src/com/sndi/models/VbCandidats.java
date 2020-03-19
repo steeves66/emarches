@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,7 +27,7 @@ public class VbCandidats implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "canCode", column = @Column(name = "CAN_CODE", nullable = false, precision = 22, scale = 0)),
+			@AttributeOverride(name = "canCode", column = @Column(name = "CAN_CODE", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "canTieNcc", column = @Column(name = "CAN_TIE_NCC", length = 32)),
 			@AttributeOverride(name = "canSouNcc", column = @Column(name = "CAN_SOU_NCC", length = 20)),
 			@AttributeOverride(name = "canNomResp", column = @Column(name = "CAN_NOM_RESP", length = 500)),
@@ -36,7 +36,7 @@ public class VbCandidats implements java.io.Serializable {
 			@AttributeOverride(name = "canTel", column = @Column(name = "CAN_TEL", length = 50)),
 			@AttributeOverride(name = "canDteSaisi", column = @Column(name = "CAN_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "canOpeMatricule", column = @Column(name = "CAN_OPE_MATRICULE", length = 25)),
-			@AttributeOverride(name = "canEmail", column = @Column(name = "CAN_EMAIL", length = 20)) })
+			@AttributeOverride(name = "canEmail", column = @Column(name = "CAN_EMAIL", length = 50)) })
 	public VbCandidatsId getId() {
 		return this.id;
 	}

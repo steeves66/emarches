@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,37 +18,40 @@ import javax.persistence.Table;
 public class TFinancementPgpm implements java.io.Serializable {
 
 	private long fipId;
-	private TBailleur TBailleur;
+	private TSourceFinancement TSourceFinancement;
 	private TDetailPlanGeneral TDetailPlanGeneral;
 	private TDevise TDevise;
-	private TSourceFinancement TSourceFinancement;
+	private TBailleur TBailleur;
 	private BigDecimal fipMontantCfa;
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
+	private String fipTypeFinance;
+	private Long fipPartTresor;
 
 	public TFinancementPgpm() {
 	}
 
-	public TFinancementPgpm(long fipId, TBailleur TBailleur, TDetailPlanGeneral TDetailPlanGeneral, TDevise TDevise,
-			TSourceFinancement TSourceFinancement) {
+	public TFinancementPgpm(long fipId, TSourceFinancement TSourceFinancement, TDetailPlanGeneral TDetailPlanGeneral,
+			TDevise TDevise) {
 		this.fipId = fipId;
-		this.TBailleur = TBailleur;
+		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TDevise = TDevise;
-		this.TSourceFinancement = TSourceFinancement;
 	}
 
-	public TFinancementPgpm(long fipId, TBailleur TBailleur, TDetailPlanGeneral TDetailPlanGeneral, TDevise TDevise,
-			TSourceFinancement TSourceFinancement, BigDecimal fipMontantCfa, BigDecimal fipMontantDevise,
-			String fipCommentaire) {
+	public TFinancementPgpm(long fipId, TSourceFinancement TSourceFinancement, TDetailPlanGeneral TDetailPlanGeneral,
+			TDevise TDevise, TBailleur TBailleur, BigDecimal fipMontantCfa, BigDecimal fipMontantDevise,
+			String fipCommentaire, String fipTypeFinance, Long fipPartTresor) {
 		this.fipId = fipId;
-		this.TBailleur = TBailleur;
+		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TDevise = TDevise;
-		this.TSourceFinancement = TSourceFinancement;
+		this.TBailleur = TBailleur;
 		this.fipMontantCfa = fipMontantCfa;
 		this.fipMontantDevise = fipMontantDevise;
 		this.fipCommentaire = fipCommentaire;
+		this.fipTypeFinance = fipTypeFinance;
+		this.fipPartTresor = fipPartTresor;
 	}
 
 	@Id
@@ -63,13 +66,13 @@ public class TFinancementPgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_BAI_CODE", nullable = false)
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
+	@JoinColumn(name = "FIP_SOU_CODE", nullable = false)
+	public TSourceFinancement getTSourceFinancement() {
+		return this.TSourceFinancement;
 	}
 
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
+	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
+		this.TSourceFinancement = TSourceFinancement;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -93,13 +96,13 @@ public class TFinancementPgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_SOU_CODE", nullable = false)
-	public TSourceFinancement getTSourceFinancement() {
-		return this.TSourceFinancement;
+	@JoinColumn(name = "FIP_BAI_CODE")
+	public TBailleur getTBailleur() {
+		return this.TBailleur;
 	}
 
-	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
-		this.TSourceFinancement = TSourceFinancement;
+	public void setTBailleur(TBailleur TBailleur) {
+		this.TBailleur = TBailleur;
 	}
 
 	@Column(name = "FIP_MONTANT_CFA", precision = 15)
@@ -127,6 +130,24 @@ public class TFinancementPgpm implements java.io.Serializable {
 
 	public void setFipCommentaire(String fipCommentaire) {
 		this.fipCommentaire = fipCommentaire;
+	}
+
+	@Column(name = "FIP_TYPE_FINANCE", length = 20)
+	public String getFipTypeFinance() {
+		return this.fipTypeFinance;
+	}
+
+	public void setFipTypeFinance(String fipTypeFinance) {
+		this.fipTypeFinance = fipTypeFinance;
+	}
+
+	@Column(name = "FIP_PART_TRESOR", precision = 15, scale = 0)
+	public Long getFipPartTresor() {
+		return this.fipPartTresor;
+	}
+
+	public void setFipPartTresor(Long fipPartTresor) {
+		this.fipPartTresor = fipPartTresor;
 	}
 
 }

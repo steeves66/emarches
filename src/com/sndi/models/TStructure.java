@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,9 +23,9 @@ import javax.persistence.TemporalType;
 public class TStructure implements java.io.Serializable {
 
 	private String strCode;
-	private TMinistere TMinistere;
 	private TRegion TRegion;
 	private TTypeStructure TTypeStructure;
+	private TMinistere TMinistere;
 	private String strLibelleCourt;
 	private String strLibelleLong;
 	private String strAdresse;
@@ -63,7 +63,7 @@ public class TStructure implements java.io.Serializable {
 		this.strLibelleCourt = strLibelleCourt;
 	}
 
-	public TStructure(String strCode, TMinistere TMinistere, TRegion TRegion, TTypeStructure TTypeStructure,
+	public TStructure(String strCode, TRegion TRegion, TTypeStructure TTypeStructure, TMinistere TMinistere,
 			String strLibelleCourt, String strLibelleLong, String strAdresse, String strEmail, String strAdrPost,
 			String strAdrGeo, String strTel, String strFax, String strOpeMatricule, Date strDteSaisi,
 			String strOpeRespo, Set<TAgpm> TAgpms, Set<TDetCommissionSeance> TDetCommissionSeances,
@@ -74,9 +74,9 @@ public class TStructure implements java.io.Serializable {
 			Set<TDetailPlanPassation> TDetailPlanPassations, Set<TPlanGeneral> TPlanGenerals,
 			Set<TLBudgets> TLBudgetses) {
 		this.strCode = strCode;
-		this.TMinistere = TMinistere;
 		this.TRegion = TRegion;
 		this.TTypeStructure = TTypeStructure;
+		this.TMinistere = TMinistere;
 		this.strLibelleCourt = strLibelleCourt;
 		this.strLibelleLong = strLibelleLong;
 		this.strAdresse = strAdresse;
@@ -118,16 +118,6 @@ public class TStructure implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "STR_MIN_CODE", nullable = false)
-	public TMinistere getTMinistere() {
-		return this.TMinistere;
-	}
-
-	public void setTMinistere(TMinistere TMinistere) {
-		this.TMinistere = TMinistere;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "STR_REG_CODE")
 	public TRegion getTRegion() {
 		return this.TRegion;
@@ -145,6 +135,16 @@ public class TStructure implements java.io.Serializable {
 
 	public void setTTypeStructure(TTypeStructure TTypeStructure) {
 		this.TTypeStructure = TTypeStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "STR_MIN_CODE", nullable = false)
+	public TMinistere getTMinistere() {
+		return this.TMinistere;
+	}
+
+	public void setTMinistere(TMinistere TMinistere) {
+		this.TMinistere = TMinistere;
 	}
 
 	@Column(name = "STR_LIBELLE_COURT", nullable = false, length = 500)

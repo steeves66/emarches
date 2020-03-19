@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,9 +20,9 @@ import javax.persistence.Table;
 public class TPlanGeneral implements java.io.Serializable {
 
 	private long plgId;
+	private TStructure TStructure;
 	private TFonction TFonction;
 	private TGestion TGestion;
-	private TStructure TStructure;
 	private String plgCode;
 	private String plgLibelle;
 	private Set<TDetailPlanGeneral> TDetailPlanGenerals = new HashSet<TDetailPlanGeneral>(0);
@@ -31,19 +31,19 @@ public class TPlanGeneral implements java.io.Serializable {
 	public TPlanGeneral() {
 	}
 
-	public TPlanGeneral(long plgId, TFonction TFonction, TGestion TGestion, TStructure TStructure) {
+	public TPlanGeneral(long plgId, TStructure TStructure, TFonction TFonction, TGestion TGestion) {
 		this.plgId = plgId;
+		this.TStructure = TStructure;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
-		this.TStructure = TStructure;
 	}
 
-	public TPlanGeneral(long plgId, TFonction TFonction, TGestion TGestion, TStructure TStructure, String plgCode,
+	public TPlanGeneral(long plgId, TStructure TStructure, TFonction TFonction, TGestion TGestion, String plgCode,
 			String plgLibelle, Set<TDetailPlanGeneral> TDetailPlanGenerals, Set<TAffichagePgpm> TAffichagePgpms) {
 		this.plgId = plgId;
+		this.TStructure = TStructure;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
-		this.TStructure = TStructure;
 		this.plgCode = plgCode;
 		this.plgLibelle = plgLibelle;
 		this.TDetailPlanGenerals = TDetailPlanGenerals;
@@ -59,6 +59,16 @@ public class TPlanGeneral implements java.io.Serializable {
 
 	public void setPlgId(long plgId) {
 		this.plgId = plgId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PLG_STR_CODE", nullable = false)
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -79,16 +89,6 @@ public class TPlanGeneral implements java.io.Serializable {
 
 	public void setTGestion(TGestion TGestion) {
 		this.TGestion = TGestion;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLG_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
 	}
 
 	@Column(name = "PLG_CODE", length = 50)

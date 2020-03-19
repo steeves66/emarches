@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -46,6 +46,9 @@ public class TAffichageDao implements java.io.Serializable {
 	private Date affDacValAc;
 	private String affDacAvisBailleur;
 	private Date affDacDateBailleur;
+	private String affDacBailleur;
+	private Long affDacCout;
+	private String affDacTypePlan;
 
 	public TAffichageDao() {
 	}
@@ -61,7 +64,8 @@ public class TAffichageDao implements java.io.Serializable {
 			BigDecimal affDacGesCode, String affDacFonCodeCpmp, String affDacFonCodAc, Date affDacDacDteValCpmp,
 			Date affDacDacDteValDmp, String affDacTdCode, BigDecimal affDacDppId, Date affDacDateReception,
 			String affDacStatutRetour, String affDacMention, String affDacRecherche, Date affDacValAc,
-			String affDacAvisBailleur, Date affDacDateBailleur) {
+			String affDacAvisBailleur, Date affDacDateBailleur, String affDacBailleur, Long affDacCout,
+			String affDacTypePlan) {
 		this.affDaoId = affDaoId;
 		this.TDacSpecs = TDacSpecs;
 		this.TDetCommissionSeance = TDetCommissionSeance;
@@ -88,6 +92,9 @@ public class TAffichageDao implements java.io.Serializable {
 		this.affDacValAc = affDacValAc;
 		this.affDacAvisBailleur = affDacAvisBailleur;
 		this.affDacDateBailleur = affDacDateBailleur;
+		this.affDacBailleur = affDacBailleur;
+		this.affDacCout = affDacCout;
+		this.affDacTypePlan = affDacTypePlan;
 	}
 
 	@Id
@@ -332,6 +339,33 @@ public class TAffichageDao implements java.io.Serializable {
 
 	public void setAffDacDateBailleur(Date affDacDateBailleur) {
 		this.affDacDateBailleur = affDacDateBailleur;
+	}
+
+	@Column(name = "AFF_DAC_BAILLEUR", length = 1)
+	public String getAffDacBailleur() {
+		return this.affDacBailleur;
+	}
+
+	public void setAffDacBailleur(String affDacBailleur) {
+		this.affDacBailleur = affDacBailleur;
+	}
+
+	@Column(name = "AFF_DAC_COUT", precision = 11, scale = 0)
+	public Long getAffDacCout() {
+		return this.affDacCout;
+	}
+
+	public void setAffDacCout(Long affDacCout) {
+		this.affDacCout = affDacCout;
+	}
+
+	@Column(name = "AFF_DAC_TYPE_PLAN", length = 4)
+	public String getAffDacTypePlan() {
+		return this.affDacTypePlan;
+	}
+
+	public void setAffDacTypePlan(String affDacTypePlan) {
+		this.affDacTypePlan = affDacTypePlan;
 	}
 
 }

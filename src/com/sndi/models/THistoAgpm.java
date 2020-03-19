@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,26 +20,26 @@ import javax.persistence.TemporalType;
 public class THistoAgpm implements java.io.Serializable {
 
 	private long hagId;
-	private TAgpm TAgpm;
-	private TFonction TFonction;
 	private TStatut TStatut;
+	private TFonction TFonction;
+	private TAgpm TAgpm;
 	private Date hagDate;
 	private String hagMotif;
 
 	public THistoAgpm() {
 	}
 
-	public THistoAgpm(long hagId, TAgpm TAgpm, TStatut TStatut) {
+	public THistoAgpm(long hagId, TStatut TStatut, TAgpm TAgpm) {
 		this.hagId = hagId;
-		this.TAgpm = TAgpm;
 		this.TStatut = TStatut;
+		this.TAgpm = TAgpm;
 	}
 
-	public THistoAgpm(long hagId, TAgpm TAgpm, TFonction TFonction, TStatut TStatut, Date hagDate, String hagMotif) {
+	public THistoAgpm(long hagId, TStatut TStatut, TFonction TFonction, TAgpm TAgpm, Date hagDate, String hagMotif) {
 		this.hagId = hagId;
-		this.TAgpm = TAgpm;
-		this.TFonction = TFonction;
 		this.TStatut = TStatut;
+		this.TFonction = TFonction;
+		this.TAgpm = TAgpm;
 		this.hagDate = hagDate;
 		this.hagMotif = hagMotif;
 	}
@@ -56,13 +56,13 @@ public class THistoAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAG_AGP_ID", nullable = false)
-	public TAgpm getTAgpm() {
-		return this.TAgpm;
+	@JoinColumn(name = "HAG_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
 	}
 
-	public void setTAgpm(TAgpm TAgpm) {
-		this.TAgpm = TAgpm;
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,13 +76,13 @@ public class THistoAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAG_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
+	@JoinColumn(name = "HAG_AGP_ID", nullable = false)
+	public TAgpm getTAgpm() {
+		return this.TAgpm;
 	}
 
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
+	public void setTAgpm(TAgpm TAgpm) {
+		this.TAgpm = TAgpm;
 	}
 
 	@Temporal(TemporalType.DATE)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -17,23 +17,26 @@ public class VModeleDaoId implements java.io.Serializable {
 	private String mdtLibelleCourt;
 	private String mdtLibelleLong;
 	private String mdtTymCode;
+	private String gpgMopCode;
 
 	public VModeleDaoId() {
 	}
 
-	public VModeleDaoId(long gpgId, String mdtCode) {
+	public VModeleDaoId(long gpgId, String mdtCode, String gpgMopCode) {
 		this.gpgId = gpgId;
 		this.mdtCode = mdtCode;
+		this.gpgMopCode = gpgMopCode;
 	}
 
 	public VModeleDaoId(BigDecimal VId, long gpgId, String mdtCode, String mdtLibelleCourt, String mdtLibelleLong,
-			String mdtTymCode) {
+			String mdtTymCode, String gpgMopCode) {
 		this.VId = VId;
 		this.gpgId = gpgId;
 		this.mdtCode = mdtCode;
 		this.mdtLibelleCourt = mdtLibelleCourt;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtTymCode = mdtTymCode;
+		this.gpgMopCode = gpgMopCode;
 	}
 
 	@Column(name = "V_ID", precision = 22, scale = 0)
@@ -90,6 +93,15 @@ public class VModeleDaoId implements java.io.Serializable {
 		this.mdtTymCode = mdtTymCode;
 	}
 
+	@Column(name = "GPG_MOP_CODE", nullable = false, length = 3)
+	public String getGpgMopCode() {
+		return this.gpgMopCode;
+	}
+
+	public void setGpgMopCode(String gpgMopCode) {
+		this.gpgMopCode = gpgMopCode;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -110,9 +122,11 @@ public class VModeleDaoId implements java.io.Serializable {
 				&& ((this.getMdtLibelleLong() == castOther.getMdtLibelleLong())
 						|| (this.getMdtLibelleLong() != null && castOther.getMdtLibelleLong() != null
 								&& this.getMdtLibelleLong().equals(castOther.getMdtLibelleLong())))
-				&& ((this.getMdtTymCode() == castOther.getMdtTymCode())
-						|| (this.getMdtTymCode() != null && castOther.getMdtTymCode() != null
-								&& this.getMdtTymCode().equals(castOther.getMdtTymCode())));
+				&& ((this.getMdtTymCode() == castOther.getMdtTymCode()) || (this.getMdtTymCode() != null
+						&& castOther.getMdtTymCode() != null && this.getMdtTymCode().equals(castOther.getMdtTymCode())))
+				&& ((this.getGpgMopCode() == castOther.getGpgMopCode())
+						|| (this.getGpgMopCode() != null && castOther.getGpgMopCode() != null
+								&& this.getGpgMopCode().equals(castOther.getGpgMopCode())));
 	}
 
 	public int hashCode() {
@@ -124,6 +138,7 @@ public class VModeleDaoId implements java.io.Serializable {
 		result = 37 * result + (getMdtLibelleCourt() == null ? 0 : this.getMdtLibelleCourt().hashCode());
 		result = 37 * result + (getMdtLibelleLong() == null ? 0 : this.getMdtLibelleLong().hashCode());
 		result = 37 * result + (getMdtTymCode() == null ? 0 : this.getMdtTymCode().hashCode());
+		result = 37 * result + (getGpgMopCode() == null ? 0 : this.getGpgMopCode().hashCode());
 		return result;
 	}
 

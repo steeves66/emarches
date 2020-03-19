@@ -24,6 +24,7 @@ public class VModeleDao implements java.io.Serializable {
 	private String mdtLibelleCourt;
 	private String mdtLibelleLong;
 	private String mdtTymCode;
+	private String gpgMopCode;
 
 	public VModeleDao() {
 	}
@@ -33,13 +34,14 @@ public class VModeleDao implements java.io.Serializable {
 	}
 
 	public VModeleDao(BigDecimal VId,long gpgId, String mdtCode, String mdtLibelleCourt, String mdtLibelleLong,
-			String mdtTymCode) {
+			String mdtTymCode,String gpgMopCode) {
 		this.VId = VId;
 		this.gpgId = gpgId;
 		this.mdtCode = mdtCode;
 		this.mdtLibelleCourt = mdtLibelleCourt;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtTymCode = mdtTymCode;
+		this.gpgMopCode = gpgMopCode;
 	}
 
 	
@@ -96,6 +98,15 @@ public class VModeleDao implements java.io.Serializable {
 
 	public void setMdtTymCode(String mdtTymCode) {
 		this.mdtTymCode = mdtTymCode;
+	}
+	
+	@Column(name = "GPG_MOP_CODE", nullable = false, length = 3)
+	public String getGpgMopCode() {
+		return this.gpgMopCode;
+	}
+
+	public void setGpgMopCode(String gpgMopCode) {
+		this.gpgMopCode = gpgMopCode;
 	}
 
 }

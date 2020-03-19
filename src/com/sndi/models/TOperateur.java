@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,8 +21,8 @@ import javax.persistence.UniqueConstraint;
 public class TOperateur implements java.io.Serializable {
 
 	private String opeMatricule;
-	private TMinistere TMinistere;
 	private TStructure TStructure;
+	private TMinistere TMinistere;
 	private String opeNom;
 	private String opeContact;
 	private String opeEtatCivil;
@@ -67,7 +67,7 @@ public class TOperateur implements java.io.Serializable {
 		this.opeMatricule = opeMatricule;
 	}
 
-	public TOperateur(String opeMatricule, TMinistere TMinistere, TStructure TStructure, String opeNom,
+	public TOperateur(String opeMatricule, TStructure TStructure, TMinistere TMinistere, String opeNom,
 			String opeContact, String opeEtatCivil, String opeMail, String opeLogin, String opeFonctionAdminist,
 			Set<TRetrait> TRetraits, Set<THistoDemande> THistoDemandes, Set<TVenteDac> TVenteDacs,
 			Set<TOffres> TOffreses, Set<THistoDac> THistoDacs, Set<TDetOffres> TDetOffreses,
@@ -82,8 +82,8 @@ public class TOperateur implements java.io.Serializable {
 			Set<TCommissionType> TCommissionTypes, Set<TAvisPresel> TAvisPreselsForAprOpeMatMotif,
 			Set<TTempParam> TTempParams) {
 		this.opeMatricule = opeMatricule;
-		this.TMinistere = TMinistere;
 		this.TStructure = TStructure;
+		this.TMinistere = TMinistere;
 		this.opeNom = opeNom;
 		this.opeContact = opeContact;
 		this.opeEtatCivil = opeEtatCivil;
@@ -134,16 +134,6 @@ public class TOperateur implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OPE_MIN_CODE")
-	public TMinistere getTMinistere() {
-		return this.TMinistere;
-	}
-
-	public void setTMinistere(TMinistere TMinistere) {
-		this.TMinistere = TMinistere;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OPE_STR_CODE")
 	public TStructure getTStructure() {
 		return this.TStructure;
@@ -151,6 +141,16 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTStructure(TStructure TStructure) {
 		this.TStructure = TStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "OPE_MIN_CODE")
+	public TMinistere getTMinistere() {
+		return this.TMinistere;
+	}
+
+	public void setTMinistere(TMinistere TMinistere) {
+		this.TMinistere = TMinistere;
 	}
 
 	@Column(name = "OPE_NOM")

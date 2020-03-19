@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,8 +24,8 @@ import javax.persistence.TemporalType;
 public class TOffrePieceDac implements java.io.Serializable {
 
 	private BigDecimal opdNum;
-	private TDacSpecs TDacSpecs;
 	private TTypePieceOffre TTypePieceOffre;
+	private TDacSpecs TDacSpecs;
 	private String odpTpoEtapPiece;
 	private Date odpDteSaisi;
 	private String odpOpeMatricule;
@@ -38,11 +38,11 @@ public class TOffrePieceDac implements java.io.Serializable {
 		this.opdNum = opdNum;
 	}
 
-	public TOffrePieceDac(BigDecimal opdNum, TDacSpecs TDacSpecs, TTypePieceOffre TTypePieceOffre,
+	public TOffrePieceDac(BigDecimal opdNum, TTypePieceOffre TTypePieceOffre, TDacSpecs TDacSpecs,
 			String odpTpoEtapPiece, Date odpDteSaisi, String odpOpeMatricule, Set<TPiecesOffres> TPiecesOffreses) {
 		this.opdNum = opdNum;
-		this.TDacSpecs = TDacSpecs;
 		this.TTypePieceOffre = TTypePieceOffre;
+		this.TDacSpecs = TDacSpecs;
 		this.odpTpoEtapPiece = odpTpoEtapPiece;
 		this.odpDteSaisi = odpDteSaisi;
 		this.odpOpeMatricule = odpOpeMatricule;
@@ -61,16 +61,6 @@ public class TOffrePieceDac implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OPD_DAC_CODE")
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OPD_TPO_CODE")
 	public TTypePieceOffre getTTypePieceOffre() {
 		return this.TTypePieceOffre;
@@ -78,6 +68,16 @@ public class TOffrePieceDac implements java.io.Serializable {
 
 	public void setTTypePieceOffre(TTypePieceOffre TTypePieceOffre) {
 		this.TTypePieceOffre = TTypePieceOffre;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "OPD_DAC_CODE")
+	public TDacSpecs getTDacSpecs() {
+		return this.TDacSpecs;
+	}
+
+	public void setTDacSpecs(TDacSpecs TDacSpecs) {
+		this.TDacSpecs = TDacSpecs;
 	}
 
 	@Column(name = "ODP_TPO_ETAP_PIECE", length = 20)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,8 +24,8 @@ import javax.persistence.TemporalType;
 public class TPiecesDacs implements java.io.Serializable {
 
 	private BigDecimal pidCode;
-	private TDacSpecs TDacSpecs;
 	private TTypePiecesDac TTypePiecesDac;
+	private TDacSpecs TDacSpecs;
 	private String pidLibelle;
 	private String pidStaCode;
 	private Date pidDteSaisi;
@@ -42,12 +42,12 @@ public class TPiecesDacs implements java.io.Serializable {
 		this.pidCode = pidCode;
 	}
 
-	public TPiecesDacs(BigDecimal pidCode, TDacSpecs TDacSpecs, TTypePiecesDac TTypePiecesDac, String pidLibelle,
+	public TPiecesDacs(BigDecimal pidCode, TTypePiecesDac TTypePiecesDac, TDacSpecs TDacSpecs, String pidLibelle,
 			String pidStaCode, Date pidDteSaisi, String pidObservation, String pidPresente, String pidConforme,
 			Set<TDetailCorrection> TDetailCorrections, Set<TDossierDacs> TDossierDacses) {
 		this.pidCode = pidCode;
-		this.TDacSpecs = TDacSpecs;
 		this.TTypePiecesDac = TTypePiecesDac;
+		this.TDacSpecs = TDacSpecs;
 		this.pidLibelle = pidLibelle;
 		this.pidStaCode = pidStaCode;
 		this.pidDteSaisi = pidDteSaisi;
@@ -70,16 +70,6 @@ public class TPiecesDacs implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PID_DAC_CODE")
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PID_TPI_CODE")
 	public TTypePiecesDac getTTypePiecesDac() {
 		return this.TTypePiecesDac;
@@ -87,6 +77,16 @@ public class TPiecesDacs implements java.io.Serializable {
 
 	public void setTTypePiecesDac(TTypePiecesDac TTypePiecesDac) {
 		this.TTypePiecesDac = TTypePiecesDac;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PID_DAC_CODE")
+	public TDacSpecs getTDacSpecs() {
+		return this.TDacSpecs;
+	}
+
+	public void setTDacSpecs(TDacSpecs TDacSpecs) {
+		this.TDacSpecs = TDacSpecs;
 	}
 
 	@Column(name = "PID_LIBELLE", length = 1000)

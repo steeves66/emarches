@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,37 +18,40 @@ import javax.persistence.Table;
 public class TFinancementPpm implements java.io.Serializable {
 
 	private long fppId;
-	private TBailleur TBailleur;
+	private TSourceFinancement TSourceFinancement;
 	private TDetailPlanPassation TDetailPlanPassation;
 	private TDevise TDevise;
-	private TSourceFinancement TSourceFinancement;
+	private TBailleur TBailleur;
 	private BigDecimal fppMontantCfa;
 	private BigDecimal fppMontantDevise;
 	private String fppCommentaire;
+	private String fppTypeFinance;
+	private Long fppPartTresor;
 
 	public TFinancementPpm() {
 	}
 
-	public TFinancementPpm(long fppId, TBailleur TBailleur, TDetailPlanPassation TDetailPlanPassation, TDevise TDevise,
-			TSourceFinancement TSourceFinancement) {
+	public TFinancementPpm(long fppId, TSourceFinancement TSourceFinancement, TDetailPlanPassation TDetailPlanPassation,
+			TDevise TDevise) {
 		this.fppId = fppId;
-		this.TBailleur = TBailleur;
+		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TDevise = TDevise;
-		this.TSourceFinancement = TSourceFinancement;
 	}
 
-	public TFinancementPpm(long fppId, TBailleur TBailleur, TDetailPlanPassation TDetailPlanPassation, TDevise TDevise,
-			TSourceFinancement TSourceFinancement, BigDecimal fppMontantCfa, BigDecimal fppMontantDevise,
-			String fppCommentaire) {
+	public TFinancementPpm(long fppId, TSourceFinancement TSourceFinancement, TDetailPlanPassation TDetailPlanPassation,
+			TDevise TDevise, TBailleur TBailleur, BigDecimal fppMontantCfa, BigDecimal fppMontantDevise,
+			String fppCommentaire, String fppTypeFinance, Long fppPartTresor) {
 		this.fppId = fppId;
-		this.TBailleur = TBailleur;
+		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TDevise = TDevise;
-		this.TSourceFinancement = TSourceFinancement;
+		this.TBailleur = TBailleur;
 		this.fppMontantCfa = fppMontantCfa;
 		this.fppMontantDevise = fppMontantDevise;
 		this.fppCommentaire = fppCommentaire;
+		this.fppTypeFinance = fppTypeFinance;
+		this.fppPartTresor = fppPartTresor;
 	}
 
 	@Id
@@ -63,13 +66,13 @@ public class TFinancementPpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FPP_BAI_CODE", nullable = false)
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
+	@JoinColumn(name = "FPP_SOU_CODE", nullable = false)
+	public TSourceFinancement getTSourceFinancement() {
+		return this.TSourceFinancement;
 	}
 
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
+	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
+		this.TSourceFinancement = TSourceFinancement;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -93,13 +96,13 @@ public class TFinancementPpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FPP_SOU_CODE", nullable = false)
-	public TSourceFinancement getTSourceFinancement() {
-		return this.TSourceFinancement;
+	@JoinColumn(name = "FPP_BAI_CODE")
+	public TBailleur getTBailleur() {
+		return this.TBailleur;
 	}
 
-	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
-		this.TSourceFinancement = TSourceFinancement;
+	public void setTBailleur(TBailleur TBailleur) {
+		this.TBailleur = TBailleur;
 	}
 
 	@Column(name = "FPP_MONTANT_CFA", precision = 15)
@@ -127,6 +130,24 @@ public class TFinancementPpm implements java.io.Serializable {
 
 	public void setFppCommentaire(String fppCommentaire) {
 		this.fppCommentaire = fppCommentaire;
+	}
+
+	@Column(name = "FPP_TYPE_FINANCE", length = 20)
+	public String getFppTypeFinance() {
+		return this.fppTypeFinance;
+	}
+
+	public void setFppTypeFinance(String fppTypeFinance) {
+		this.fppTypeFinance = fppTypeFinance;
+	}
+
+	@Column(name = "FPP_PART_TRESOR", precision = 15, scale = 0)
+	public Long getFppPartTresor() {
+		return this.fppPartTresor;
+	}
+
+	public void setFppPartTresor(Long fppPartTresor) {
+		this.fppPartTresor = fppPartTresor;
 	}
 
 }

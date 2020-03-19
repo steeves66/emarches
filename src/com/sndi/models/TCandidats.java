@@ -1,7 +1,6 @@
 package com.sndi.models;
-// Generated 14 mars 2020 14:41:40 by Hibernate Tools 4.3.5.Final
+// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
 
-import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +16,7 @@ import javax.persistence.TemporalType;
 @Table(name = "T_CANDIDATS", schema = "EMAP")
 public class TCandidats implements java.io.Serializable {
 
-	private BigDecimal canCode;
+	private long canCode;
 	private String canTieNcc;
 	private String canSouNcc;
 	private String canNomResp;
@@ -31,11 +30,11 @@ public class TCandidats implements java.io.Serializable {
 	public TCandidats() {
 	}
 
-	public TCandidats(BigDecimal canCode) {
+	public TCandidats(long canCode) {
 		this.canCode = canCode;
 	}
 
-	public TCandidats(BigDecimal canCode, String canTieNcc, String canSouNcc, String canNomResp, String canNom,
+	public TCandidats(long canCode, String canTieNcc, String canSouNcc, String canNomResp, String canNom,
 			String canPrenoms, String canTel, Date canDteSaisi, String canOpeMatricule, String canEmail) {
 		this.canCode = canCode;
 		this.canTieNcc = canTieNcc;
@@ -51,12 +50,12 @@ public class TCandidats implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "CAN_CODE", unique = true, nullable = false, precision = 22, scale = 0)
-	public BigDecimal getCanCode() {
+	@Column(name = "CAN_CODE", unique = true, nullable = false, precision = 10, scale = 0)
+	public long getCanCode() {
 		return this.canCode;
 	}
 
-	public void setCanCode(BigDecimal canCode) {
+	public void setCanCode(long canCode) {
 		this.canCode = canCode;
 	}
 
@@ -133,7 +132,7 @@ public class TCandidats implements java.io.Serializable {
 		this.canOpeMatricule = canOpeMatricule;
 	}
 
-	@Column(name = "CAN_EMAIL", length = 20)
+	@Column(name = "CAN_EMAIL", length = 50)
 	public String getCanEmail() {
 		return this.canEmail;
 	}
