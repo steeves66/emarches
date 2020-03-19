@@ -2484,7 +2484,7 @@ public class PrqController {
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);	 
 		     switch(value) {
-				case "dao1":
+				case "prq1":
 					chargeData();
 					chargeDataPs();
 					chargeGestions();
@@ -2499,23 +2499,23 @@ public class PrqController {
 					chargeDataPriseCompte();
 					_logger.info("value: "+value+" action "+action);	
 					break;
-				case "dao2":
+				case "prq2":
 					chargePPM();
 					//chargePSPM();
 				break;
-				case "dao3":
+				case "prq3":
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dao4":
+                case "prq4":
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao5":
+                case "prq5":
                 	chargeFonctionImput();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dao6":
+                case "prq6":
                 	chargePiecesByDao();
                 	chargePiecesByCsv();
                 	chargePiecesByCharges();
@@ -2524,19 +2524,19 @@ public class PrqController {
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dao7":
+                case "prq7":
                 	//chargeDataARetirer();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;  
 				
-                case "dao9":
+                case "prq9":
                 	//chargeTiers();
                 	 chargeSoumissions();
                 	 chargeLotExiste();
 		 			_logger.info("value: "+value+" action: "+action);
 				break; 
 				
-                case "dao10":
+                case "prq10":
                 	chargeDaoBailleur();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
