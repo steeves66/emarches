@@ -232,7 +232,6 @@ public class AgpmController {
 	 public boolean etatReferenceDeclarant=false;
 	 public boolean boutonEditRappel=false;
 	 public boolean selectBailleur=false;
-	 public boolean selectTresor =false;
 	 private String statutAffiche="";
 	 private String statutUpdate="";
 	 private String statutTrans ="";
@@ -716,7 +715,7 @@ public class AgpmController {
 	    		          FacesContext.getCurrentInstance().addMessage(null,
 	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs", ""));	 
 	                           
-	    	                }else {
+	    	              }else {
 	                            	//Insertion dans T_Projet
 	                                iservice.addObject(projet);
 	        		      			//Insertion dans T_AGPM	 
@@ -769,8 +768,8 @@ public class AgpmController {
 	     		  					affichageAgpm.setTStatut(statuts);
 	     		  					iservice.addObject(affichageAgpm); 
 	     		  						
-	     		  					
-	     		  					String search = affichageAgpm.getAffAgpId()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
+
+	     		  					String search = affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
 	    							String rechercheAll = search.replace("null","");
 	    							
 	     		  						
@@ -1130,15 +1129,9 @@ public class AgpmController {
 		 public void checkBailleur() {
 			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
-				 selectTresor = false;
-			 }else
-			      if(sourfin.equalsIgnoreCase("Cofinance")){
-				 selectBailleur = true; 
-				 selectTresor = true;
 			 }else {
-				 selectBailleur = false;
-				 selectTresor = false;
-			    }
+				 selectBailleur = false; 
+			 }
 		 }
 		 
 		 
@@ -2859,14 +2852,6 @@ public class AgpmController {
 
 	public void setStatutTrans(String statutTrans) {
 		this.statutTrans = statutTrans;
-	}
-
-	public boolean isSelectTresor() {
-		return selectTresor;
-	}
-
-	public void setSelectTresor(boolean selectTresor) {
-		this.selectTresor = selectTresor;
 	}
 	
     
