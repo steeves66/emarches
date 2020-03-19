@@ -46,6 +46,8 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacAvisBailleur;
 	private Date dacDateAvisBailleur;
 	private String dacBailleur;
+	private Long dacCout;
+	private String dacTypePlan;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -67,7 +69,7 @@ public class TDacSpecs implements java.io.Serializable {
 			TGestion TGestion, TTypeMarche TTypeMarche, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur,String dacBailleur, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			Date dacDateAvisBailleur,String dacBailleur, Long dacCout,String dacTypePlan, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -92,6 +94,8 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacAvisBailleur = dacAvisBailleur;
 		this.dacDateAvisBailleur = dacDateAvisBailleur;
 		this.dacBailleur = dacBailleur;
+		this.dacCout = dacCout;
+		this.dacTypePlan = dacTypePlan;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TDossierDacses = TDossierDacses;
 		this.TDetailCorrections = TDetailCorrections;
@@ -317,7 +321,15 @@ public class TDacSpecs implements java.io.Serializable {
 	public void setDacBailleur(String dacBailleur) {
 		this.dacBailleur = dacBailleur;
 	}
+	
+	@Column(name = "DAC_TYPE_PLAN", length = 4)
+	public String getDacTypePlan() {
+		return this.dacTypePlan;
+	}
 
+	public void setDacTypePlan(String dacTypePlan) {
+		this.dacTypePlan = dacTypePlan;
+	}
 
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
@@ -329,14 +341,6 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TAvisAppelOffres = TAvisAppelOffres;
 	}
 	
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
-	public Set<TAffichageDao> getTAffichageDaos() {
-		return this.TAffichageDaos;
-	}
-
-	public void setTAffichageDaos(Set<TAffichageDao> TAffichageDaos) {
-		this.TAffichageDaos = TAffichageDaos;
-	}*/
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
 	public Set<TDossierDacs> getTDossierDacses() {
@@ -400,6 +404,15 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTPiecesOffres(Set<TPiecesOffres> tPiecesOffres) {
 		TPiecesOffres = tPiecesOffres;
+	}
+
+	@Column(name = "DAC_COUT", precision = 11, scale = 0)
+	public Long getDacCout() {
+		return dacCout;
+	}
+
+	public void setDacCout(Long dacCout) {
+		this.dacCout = dacCout;
 	}
 
 }

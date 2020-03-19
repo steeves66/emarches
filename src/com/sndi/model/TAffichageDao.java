@@ -54,6 +54,8 @@ public class TAffichageDao implements java.io.Serializable {
 	private String affDacAvisBailleur;
 	private Date affDacDateBailleur;
 	private String affDacBailleur;
+	private Long affDacCout;
+	private String affDacTypePlan;
 
 	public TAffichageDao() {
 	}
@@ -63,7 +65,7 @@ public class TAffichageDao implements java.io.Serializable {
 			String affStaCode, String affStatutRetour, Date affDacDteSaisi, String affDacObjet,  Long affNbrOuv,
 			String affDacFonCodeCpmp, String affDacFonCodAc, Date affDacDacDteValCpmp, Date affDacDacDteValDmp,
 			Date affDacDateReception, String affDacStatutRetour, String affDacMention, String affDacRecherche,Date affDacValAc, String affDacAvisBailleur, Date affDacDateBailleur
-			, String affDacBailleur) {
+			, String affDacBailleur, Long affDacCout,String affDacTypePlan) {
 		this.affDaoId = affDaoId;
 		this.TDetCommissionSeance = TDetCommissionSeance;
 		this.TModePassation = TModePassation;
@@ -91,6 +93,8 @@ public class TAffichageDao implements java.io.Serializable {
 		this.affDacAvisBailleur = affDacAvisBailleur;
 		this.affDacDateBailleur = affDacDateBailleur;
 		this.affDacBailleur = affDacBailleur;
+		this.affDacCout = affDacCout;
+		this.affDacTypePlan = affDacTypePlan;
 	}
 	
 	@Id
@@ -355,6 +359,25 @@ public class TAffichageDao implements java.io.Serializable {
 
 	public void setAffDacBailleur(String affDacBailleur) {
 		this.affDacBailleur = affDacBailleur;
+	}
+	
+	
+	@Column(name = "AFF_DAC_COUT", precision = 11, scale = 0)
+	public Long getAffDacCout() {
+		return this.affDacCout;
+	}
+
+	public void setAffDacCout(Long affDacCout) {
+		this.affDacCout = affDacCout;
+	}
+	
+	@Column(name = "AFF_DAC_TYPE_PLAN", length = 4)
+	public String getAffDacTypePlan() {
+		return this.affDacTypePlan;
+	}
+
+	public void setAffDacTypePlan(String affDacTypePlan) {
+		this.affDacTypePlan = affDacTypePlan;
 	}
 
 }
