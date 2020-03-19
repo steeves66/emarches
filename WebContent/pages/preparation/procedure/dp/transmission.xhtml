@@ -1,0 +1,179 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+      <h3>
+       <!-- #{controleController.libelle}  -->
+       TRANSMISSION DU DAO N°
+        <!-- <small>Nouveau AGPM </small> -->
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{pgpmAcController.renderPage('pgpmAc1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
+           <!--  #{controleController.libelle1}  -->
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     
+     
+      <div class="row">
+     <div class="col-md-12">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type}</div></div>
+         </div>
+         <div class="box-body">
+        <div class="col-md-6">
+          <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.gesCode}"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Code Dao</label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted" style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
+                  <div class="col-sm-9">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                  </div>
+	             </div>
+	         </div>
+	         <div class="col-md-6">
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.demDetail.TTypeMarche.tymCode} : #{daoController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.demDetail.TModePassation.mopCode} : #{daoController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Mention</label></div>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                  </div>
+                   <div class="col-sm-2"><label class="pull-right">Bailleur</label></div>
+                  <div class="col-sm-4">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                  </div>
+	             </div>
+	             
+	             </div>
+         </div>
+               </div>
+      </div>
+      
+     
+     </div>
+      <div class="row">
+   <div class="col-md-12">
+    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+         <div class="col-md-11 "><div  style="color: #fff">PIECES CONSTITUTIVES DU DAO </div></div> 
+         <div class="col-md-1 ">
+			 <p:commandLink action="#{daoController.AjoutPiece()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":gnl:TBpieces">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+			</p:commandLink>
+		</div>
+        </div>
+        <div class="box-body">
+               <p:dataTable id="TBpieces" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listPieces}" 
+                editable="true" editMode="cell"
+               emptyMessage="Aucune pièce trouvées">
+         				
+				          <p:column headerText="LIBELLE" styleClass="col-sm-10">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText value="#{slctdTb.pidLibelle}" >
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.pidLibelle}" style="width:100%">
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				         <p:column headerText="FICHIERS" styleClass="col-sm-1">
+				        <p:fileUpload fileUploadListener="#{agpmController.upload}" label="Choisir" mode="simple" skinSimple="true" sizeLimit="50000000" 
+				                allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" update=":gnl"/>
+				        </p:column>
+				        
+				        <p:column headerText="" width="3%" >
+				           <p:commandLink styleClass="btn btn-xs btn-danger" action="#{daoController.deletePiece()}"  title="Supprimer"  update=":gnl">
+			 	             <i class="ace-icon fa fa-trash bigger-120"  style="background-color: #f88b2e;color: white"></i> 
+				                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctPiece}" />
+				            </p:commandLink>
+				        </p:column>
+                 </p:dataTable>   
+                       
+            </div>
+        </div>
+   </div>
+    
+   </div>
+
+		         <p:commandLink styleClass="btn btn-warning" action="#{agpmController.fermer('agpm1','LIS')}" style="background-color: #f88b2e;" update=":content">
+		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+				</p:commandLink>
+		
+                <div class="pull-right ">
+			            <p:commandLink   styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:confirm header="Confirmation" message="Confirmez vous la validation ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Transmettre
+			            </p:commandLink>
+              </div>
+    </section>
+    </h:form>
+    
+
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

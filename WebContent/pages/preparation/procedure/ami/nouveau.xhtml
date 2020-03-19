@@ -1,0 +1,1317 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+      <h1>
+        <!-- #{controleController.libelle} -->
+        <!-- SAISIE D'UN NOUVEAU DAO  -->
+        #{controleController.libelleDao1}
+        <small> #{controleController.libellesmall} </small> 
+      </h1>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{amiController.renderPage('ami1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{amiController.renderPage('ami2')}" update=":content" > 
+            <!-- <i class="fa fa-dashboard"></i>AGPM | #{controleController.libelle1}  -->
+            <!-- Saisie d'un nouveau DAO --> 
+            #{controleController.libelle1}
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     
+     <p:wizard flowListener="#{amiController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
+        <p:tab id="creation" title="Initiation du #{controleController.type}" titleStyle="background-color: #f88b2e;background-image: none">
+       
+           <div class="row">
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN #{controleController.type}</div></div>
+         </div>
+         <div class="box-body">
+          <div class="row">
+	            <div class="col-md-2">
+	             <label for="gestion1" class="col-sm-5 control-label">Gestion<span style="color:red;"> *</span></label>
+	              <div class="col-sm-6">
+		                    <p:selectOneMenu id="gestion1" value="#{amiController.gesCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{amiController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+	               </div>
+	            </div>
+	            <div class="col-md-10">
+	           <div class="form-group">
+		                  <label for="mini" class="col-sm-1 control-label">Ministère <span style="color:red;"> *</span></label>
+		                  <div class="col-sm-11">
+		                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="mini" readonly="true" style="width: 100%" />
+		                  </div>
+		                </div>
+	            </div> 
+	            
+	            
+	            <div class="col-md-1">
+	            </div>
+	            
+	            <div class="col-md-11">
+	           <div class="form-group">
+	           
+	           
+		                  <label for="mini3" class="col-sm-2 control-label">Autorité Contractante <span style="color:red;"> *</span></label>
+		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
+		                  <div class="col-sm-10">
+		                   <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{amiController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{amiController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{amiController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		              
+		                  </h:panelGroup>
+		                
+		              
+		                </div>
+	            </div> 
+		      </div>
+	
+	         </div>
+               </div>
+               
+             
+           <div class="row">
+            <div class="col-md-12">
+              <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-12 ">
+                   <div  style="color: #fff">CHOISIR LE(S) PPM POUR CREER VOTRE #{controleController.type}</div>
+                 </div>
+                </div>
+               <div class="box-body">
+                 <div class="input-group input-group-sm col-md-3">
+                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero du PPM"></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
+                    </span>
+					 </div>
+               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.ppmDao}" 
+					rowKey="#{slctdTb.dppId}" selection="#{amiController.listSelectionPpmDao}" emptyMessage="Aucun PPM enregistré" rows="5" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppObjet}" />
+				        </p:column>
+
+                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.souLibelle}" />
+				        </p:column>
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgImputation}" />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
+				        </p:column> 
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
+				        </p:column> 
+				        
+				         
+				       
+                      <p:column headerText="Actions" styleClass="col-sm-2">
+                        
+                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
+                             </p:commandLink>
+                            
+                          
+                          <h:panelGroup rendered="#{controleController.detailP2}">   
+                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPSPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PSPM" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>
+				         </p:column>   
+                    </p:dataTable>
+                    
+                   <div>
+                   
+                   </div>
+    
+	               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{amiController.renseignerDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			             <i class="ace-icon fa fa-save"></i> OK
+	               </p:commandLink>
+	 
+              </div>
+             </div>
+           </div>
+         </div>
+         
+         
+         
+         
+         
+         
+        <div class="row">
+          <div class="col-md-12">
+           <div class="box box-success box-solid">
+            <div class="box-header with-border">
+             <div class="col-md-12 ">
+               <div  style="color: #fff">INFORMATIONS A SAISIR SUR LE #{controleController.type}</div>
+             </div>
+            </div>
+           <div class="box-body">
+	           <div class="row">
+	          <div class="col-md-6">
+	           <div class="form-group">
+                  <label for="relalisation" class="col-sm-3 control-label">Objet de l'Opération</label>
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{amiController.daoDetail.dppObjet}" id="relalisation" style="width: 100%" />
+                  </div>
+              </div>
+               
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+		                <p:inputText id="typMa1" type="text" value="#{amiController.daoDetail.tymCode} : #{amiController.daoDetail.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                  </div>
+                </div> 
+                 
+              
+                 <div class="form-group">
+                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                  <p:inputText id="modeP2" type="text" value="#{amiController.daoDetail.mopCode} : #{amiController.daoDetail.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />    
+                  </div>
+                </div> 
+            
+	          </div>
+	           <div class="col-md-6">
+	               <fieldset>
+		               <legend>Liste des pièces constitutives du #{controleController.type}</legend>
+		  <p:dataTable id="basicDT" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{amiController.detailsPieces}"
+		  rowKey="#{slctdTb.tpiCode}" selection="#{amiController.listSelectionTypePieces}" emptyMessage="Aucune pièce trouvée">
+
+          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+          
+	        <p:column headerText="Code" styleClass="col-sm-2">
+	            <h:outputText value="#{slctdTb.tpiCode}" />
+	        </p:column>
+	        
+	         <p:column headerText="Piece " styleClass="col-sm-10">
+	            <h:outputText value="#{slctdTb.tpiSecNum}. #{slctdTb.tpiLibelle}" />
+	        </p:column>
+	        
+	        </p:dataTable>
+	        
+       
+		      </fieldset>
+		           
+		           
+	          </div>
+	         
+	          </div>
+	          
+	           
+          </div>
+          <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_pn}" action="#{amiController.saveDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+	      </p:commandLink>
+	      
+	      <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_ps}" action="#{amiController.saveDaoPs()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+	      </p:commandLink>
+	      
+         </div>
+        </div>
+       </div>
+         
+            </div>
+            
+            
+           </div>
+       
+         </p:tab>
+         
+        <p:tab id="avis" title="Infos générales" titleStyle="background-color: #f88b2e;background-image: none">
+          <p:panel>
+            <div class="row">    
+            <div class="col-md-6">
+            <div class="box box-success box-solid">
+             <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">INFORMATIONS A SAISIR SUR L'AVIS</div></div>
+         </div>
+         <div class="box-body">
+          <div class="form-group">
+                  <label for="objet" class="col-sm-3 control-label">Objet</label>
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{amiController.newAvis.aaoLibelle}"  id="objet" style="width: 100%" />
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  <label for="nat" class="col-sm-3 control-label">National</label>
+                  <div class="col-sm-9"> 
+                    <p:selectBooleanCheckbox value="#{amiController.value1}"  itemLabel="BOMP"/> 
+                    <p:selectBooleanCheckbox  itemLabel="INTERNATIONAL"/>
+                  </div>
+              </div>
+             
+              
+          
+               
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Avis de non objection du bailleur</label>
+                  <div class="col-sm-9"> 
+                   <table>
+				     <tr>
+				     <td style="width: 50px"> 
+				     <p:selectOneRadio value="#{amiController.newAvis.aaoAvisBai}" id="console22" unselectable="true">
+			            <f:selectItem itemLabel="" itemValue="O" />
+			        </p:selectOneRadio>
+				     </td>
+				     <td style="width: 220px">
+				     <label  class="control-label">Responsabilité des bailleurs</label>
+				     </td>
+				     <td style="width: 320px">
+				     <p:inputText  type="text" styleClass="form-control" value="#{amiController.newAvis.aaoRespBai}"   style="width: 100%" />
+				     </td>
+				     </tr>
+				     </table>
+                    
+                  </div>
+              </div>
+                  
+              <div class="form-group">
+                  <label for="Prix" class="col-sm-3 control-label">Mode de qualification</label>
+                  <div class="col-sm-9"> 
+                     <p:selectOneRadio id="consoless" value="#{amiController.newAvis.aaoRegQual}" unselectable="true">
+                     <p:ajax  listener="#{amiController.checkSituation()}" update="gnl:qualif"></p:ajax>
+			            <f:selectItem itemLabel="Score" itemValue="Unitaire" />
+			            <f:selectItem itemLabel="Conformité" itemValue="Conforme" />
+			            <f:selectItem itemLabel="Autre Mode" itemValue="Autre" />
+			        </p:selectOneRadio>
+                  </div>
+              </div>
+               
+               <h:panelGroup  id="qualif">
+               <h:panelGroup  rendered="#{amiController.etatQualif}">
+                <div class="form-group">
+                <h:panelGroup  rendered="#{amiController.qualifLabel1}">  <label class="col-sm-3 control-label">Seuil de qualification<span style="color:red;"> *</span></label></h:panelGroup>
+                <h:panelGroup  rendered="#{amiController.qualifLabel2}">  <label class="col-sm-3 control-label">Précisez le mode<span style="color:red;"> *</span></label></h:panelGroup>
+				  <div class="col-sm-9">
+		          <p:inputText  type="text" styleClass="form-control" value="#{amiController.newAvis.aaoPrecisModEval}"   style="width: 100%" />
+                  </div>
+                </div>
+                </h:panelGroup>
+                </h:panelGroup>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Nombre de lot<span style="color:red;"> *</span></label>
+				  <div class="col-sm-3">
+		          <p:inputText  type="text" styleClass="form-control" value="#{amiController.newAvis.aaoNbrLot}"  style="width: 100%" />
+                  </div>
+                  
+                  <label class="col-sm-3 control-label">Coût du Dao<span style="color:red;"> *</span></label>
+				  <div class="col-sm-3">
+		          <p:inputText  type="text" styleClass="form-control" value="#{amiController.newAvis.aaoCoutDac}"  style="width: 100%" />
+                  </div>
+                </div>
+                
+               
+                
+         </div>
+         </div>
+         <br/><br/><br/><br/><br/><br/><br/><br/>
+         </div>
+         <div class="row">
+         <div class="col-md-6">
+            <div class="box box-success box-solid">
+             <div class="box-header with-border">
+             <div class="col-md-12 "><div  style="color: #fff">RETRAIT DES #{controleController.type} CHEZ LE REPRESENTANT</div></div> 
+			         <!-- <div class="col-md-2 "> 
+			           <p:commandLink oncomplete="PF('DetailAdr').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+								</p:commandLink>
+			         </div> -->
+         </div>
+         <div class="box-body">
+         <p:messages id="messages" showDetail="false" autoUpdate="true"  closable="true"/>   
+                  <div class="col-sm-12">
+		       	 </div>
+		       	  <div class="form-group">
+                  <label class="col-sm-1 control-label">Adresse</label>
+				  <div class="col-sm-10">
+                    <p:selectOneMenu value="#{amiController.numDetailAdr}" id="adress"
+			            effect="fade" style="width:100%"> 
+			            <f:selectItem  itemLabel="Choisir l'adresse"/>  
+			            <f:selectItems value="#{amiController.listAdresse}" var="l" itemLabel="#{l.adaLibelle}" itemValue="#{l.adaNum}" />	
+			            <p:ajax listener="#{amiController.chargeDetailAdresse()}" update=":gnl:detail"/>				   	   				    				   
+			       </p:selectOneMenu>
+                  </div>
+                  <div class="col-sm-1">
+                   <p:commandLink  oncomplete="PF('Adresse').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-plus"></i>
+				</p:commandLink>
+                  </div>
+                </div>
+                
+                <p:dataList id="detail" value="#{amiController.listDetailAdresse}" var="slctdTb" type="definition">
+			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 
+			    </p:dataList>
+
+              <div class="row">
+                 <div class="box-body">
+	                  <div class="box-group" id="accordion">
+                          <div class="box-header">
+                            <h4 class="box-title">
+		                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed">
+		                        cliquer Ici pour ajouter une nouvelle adresse
+		                      </a>
+		                    </h4>
+                          </div>
+                           <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+		                    <div class="box-body">
+						        <div class="row">
+				                  <div class="col-sm-11">
+							            <p:selectOneMenu id="libelleAdresse" value="#{amiController.numLibAdr}" style="width: 100%">
+							               <f:selectItems value="#{amiController.listLibelleAdresse}" var="l" itemLabel="#{l.liaLibelle}" itemValue="#{l.liaNum}" />		   				    				   
+							            </p:selectOneMenu>
+				                  </div>
+				                  <div class="col-sm-1">
+				                  <p:commandLink  oncomplete="PF('AdresseLib').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="color:#fff;background-color: #f88b2e">
+											<i class="fa fa-plus"></i>
+								  </p:commandLink>
+				                  </div>
+				              </div>
+				               <div class="row">
+								  <div class="col-sm-12">
+						             <p:inputTextarea value="#{amiController.newDtailAdresse.dtaLibelle}" rows="2" cols="33" styleClass="form-control" style="width: 100%" />  
+				                  </div>
+				              </div>
+				                <div class="row">    
+					             <div class="col-sm-8"></div>
+					              <div class="col-sm-4">  
+									      <div class="pull-right ">
+							            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:10px" action="#{amiController.saveDetailAdresse()}"  update=":gnl:detail">
+							             <i class="ace-icon fa fa-save"></i> Enregistrer
+							            </p:commandLink>
+				                     </div>
+				                     
+				                     
+				                   </div>
+				              </div>
+		                    </div>
+		                  </div>
+	                  </div>
+                  </div>
+              </div>
+              
+             
+         </div>
+         </div>
+         </div>
+         
+          <div class="col-md-6">
+            <div class="box box-success box-solid">
+             <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">RECEPTION DES OFFRES</div></div>
+         </div>
+         <div class="box-body">
+           <div class="form-group">
+                  <label  class="col-sm-1 control-label">Lieu</label>
+				  <div class="col-sm-4">
+                  <p:inputText type="text" value="#{amiController.newAvis.aaoLieuRecep}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                  <label  class="col-sm-1 control-label">Date</label>
+				  <div class="col-sm-3">   
+                  <p:calendar  value="#{amiController.newAvis.aaoDateRecep}"   style="width: 100%" /> 
+                  </div>
+                  <label  class="col-sm-1 control-label">Heure</label>
+				  <div class="col-sm-2">
+                  <p:inputText type="text" value="#{amiController.newAvis.aaoHeureRecep}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                </div>
+                 
+         </div>
+         </div>
+         </div>
+          <div class="col-md-6">
+            <div class="box box-success box-solid">
+             <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">OUVERTURE</div></div>
+         </div>
+         <div class="box-body">
+                 <div class="form-group">
+                  <label  class="col-sm-2 control-label">Lieu</label>
+				  <div class="col-sm-7">
+                  <p:inputText type="text" value="#{amiController.newAvis.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                  
+                   <label  class="col-sm-1 control-label">Heure</label>
+				  <div class="col-sm-2">
+                  <p:inputText type="text" value="#{amiController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                </div>
+                 
+                
+                <div class="form-group">
+                 
+                  <label  class="col-sm-3 control-label">Ouv Technique</label>
+				  <div class="col-sm-3">    
+                  <p:calendar value="#{amiController.newAvis.aaoDteOuvTec}"  style="width: 100%" /> 
+                  </div>
+                  <label  class="col-sm-3 control-label">Ouv Financière</label> 
+				  <div class="col-sm-3">
+                  <p:calendar value="#{amiController.newAvis.aaoDteOuvFin}"  style="width: 100%" />   
+                  </div>
+                </div>
+         </div>
+         </div>
+         </div>
+         </div>
+         
+         
+  
+           </div>
+             <div class="row">
+                <div class="pull-right ">
+                       
+                       
+					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{amiController.saveAvis()}"  update=":content">
+				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				             <i class="ace-icon fa fa-save"></i> Enregistrer
+				            </p:commandLink>
+					   
+					     </div>
+           </div>
+          </p:panel>
+         </p:tab>
+         
+		 <p:tab id="tabLot" title="Saisie des lots" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-9 "><div  style="color: #fff">LISTE DES LOTS SAISIS </div></div> 
+            <div class="col-md-1 ">
+			 <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>Générer
+			</p:commandLink>
+		</div>
+            
+         <div class="col-md-1 ">
+			 <p:commandLink oncomplete="PF('newLotdlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>Saisie
+			</p:commandLink>
+		</div>
+         </div>
+         <div class="box-body">
+             <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.listeLots}"  editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
+         				<p:column headerText="N°Lot" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.laaNum}"/>
+				        </p:column>
+				        <p:column headerText="LIBELLE" styleClass="col-sm-6">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText value="#{slctdTb.laaObjet}" >
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText id="LIBELLE" value="#{slctdTb.laaObjet}" style="width:100%">
+		                 </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				        
+				        <p:column headerText="Imputation" styleClass="col-sm-3">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText id="IMPUTATION" value="#{slctdTb.TLBudgets.lbgImputation}" style="width:100%">
+		                 </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+                          <p:column width="3%">
+				              <p:commandLink  oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+				              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.selectLot}" />
+							<i class="fa fa-plus"></i>
+						  </p:commandLink>
+				        </p:column>
+                         
+                           <p:column headerText="Montant Caution" styleClass="col-sm-1">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.laaMtCaut}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input">
+		                 <p:inputText id="modelInput" value="#{slctdTb.laaMtCaut}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                 </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				         <p:column headerText="Cout Lot/Dao" styleClass="col-sm-1">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.laaMtEst}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText id="cout" value="#{slctdTb.laaMtEst}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                
+		                 </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				         <p:column headerText="Actions" width="4%">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{amiController.removeLot}" title="Supprimer" update="gnl">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.selectLot}" />
+			                </p:commandLink>
+				        </p:column>
+				        
+                 </p:dataTable> 
+                 
+                  <br/> 
+                
+         </div>
+         
+         
+         </div>
+         </div>
+           </div>
+         </p:tab> 
+         
+         
+         
+         		 <p:tab id="Poffre" title="Pièces de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-9 "><div  style="color: #fff">PIECES CONSTITUTIVES DE L'OFFRE </div></div> 
+         </div>
+         <div class="box-body">
+             <p:dataTable id="TPOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.listePiecesOffres}" 
+             rowKey="#{slctdTb.tpoCode}" selection="#{amiController.listeSelectionPiecesOffres}" emptyMessage="Aucune Pièce trovée">
+                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+         				<p:column headerText="PIECES" styleClass="col-sm-12">
+				            <h:outputText value="#{slctdTb.tpoLibelle}"/>
+				        </p:column>
+                 </p:dataTable> 
+                  <br/> 
+                 <div class="pull-right ">
+			            <p:commandLink action="#{amiController.savePieceOffres()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl:finance">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                 </div> 
+         </div>
+         
+         
+         </div>
+         </div>
+           </div>
+         </p:tab> 
+             
+              
+            
+            <p:tab rendered="false" id="confirmation" title="Confirmation" titleStyle="background-color: #f88b2e;background-image: none">
+            <p:panel>
+             <div class="row">
+             <div class="col-md-6">
+	          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type}</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Gestion </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.gesCode}"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	             
+	              <fieldset>
+		               <legend style="font-weight: bold">PPM</legend>
+		               <p:dataTable id="ppm" var="slctdTb" value="#{amiController.listSelectionPpmDao}"  styleClass="table dt-on-steroids mb0" emptyMessage="Aucun PPM trouvé">
+					        <p:column headerText="N° Ordre" styleClass="col-sm-2">
+					            <h:outputText value="#{slctdTb.dppId}"/>
+					        </p:column>
+					        
+					         <p:column headerText="Objet de l'Opération" styleClass="col-sm-10">
+					            <h:outputText value="#{slctdTb.dppObjet}" />
+					        </p:column>
+					    </p:dataTable>
+		           </fieldset>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
+                  <div class="col-sm-9">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.dao.dacObjet}" style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted"  value="#{amiController.demDetail.TTypeMarche.tymCode} : #{amiController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.demDetail.TModePassation.mopCode} : #{amiController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <fieldset>
+		               <legend style="font-weight: bold">Liste des pièces</legend>
+		               <p:dataTable id="pieces" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{amiController.listSelectionTypePieces}"  emptyMessage="Aucune pièce trouvée">
+					        <p:column headerText="Code" styleClass="col-sm-2">
+					            <h:outputText value="#{slctdTb.tpiCode}"/>
+					        </p:column>
+					        
+					         <p:column headerText="Libellé" styleClass="col-sm-10">
+					            <h:outputText value="#{slctdTb.tpiSecNum}. #{slctdTb.tpiLibelle}" />
+					        </p:column>
+					    </p:dataTable>
+		           </fieldset>
+	             
+	            </div>
+	           </div>
+
+	          
+	          
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES LOTS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	               <p:dataTable id="lots" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{amiController.listeLots}" emptyMessage="Aucun lot trouvé">
+					        <p:column headerText="N°lot" styleClass="col-sm-1">
+					            <h:outputText value="#{slctdTb.laaNum}"/>
+					        </p:column>
+					        <p:column headerText="Libellé" styleClass="col-sm-5">
+					            <h:outputText value="#{slctdTb.laaObjet}" />
+					        </p:column>
+					         <p:column headerText="Imputation" styleClass="col-sm-2">
+					            <h:outputText  value="#{slctdTb.TLBudgets.lbgImputation}"/>
+					        </p:column>
+					        <p:column headerText="Montant caution" styleClass="col-sm-2">
+					            <h:outputText value="#{slctdTb.laaMtCaut}" />
+					        </p:column>
+					        <p:column headerText="Cout" styleClass="col-sm-2">
+					            <h:outputText value="#{slctdTb.laaMtEst}" />
+					        </p:column>
+					    </p:dataTable>
+	            </div>
+	            </div>
+	  
+	           
+	           
+	           
+            </div>
+            <div class="col-md-6">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L'AVIS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Objet</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoLibelle}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">National</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted"  style="width: 100%" /></label>
+                  </div>
+	             </div>
+	             
+	            <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Nature des Prix</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoNatPrix}" style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	             
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Taux</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoTaux}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Avis de non objection du bailleur</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoAvisBai}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Responsabilité des bailleurs</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoRespBai}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Mode de qualification</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoRegQual}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Seuil de qualification</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoPrecisModEval}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Vente par lot </label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoVenteParLot == 'O'?'OUI':'NON' }"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <fieldset>
+		               <legend style="font-weight: bold">Rétrait des Dao chez le representant</legend>
+		                <div class="row">
+                  
+	                    </div>
+	             <p:dataList id="confdetail" value="#{amiController.listDetailAdresse}" var="slctdTb" type="definition">
+			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 
+			    </p:dataList>
+	             
+		         </fieldset>
+		          <fieldset>
+		               <legend style="font-weight: bold">Réception des offres</legend>
+		               
+		         <div class="row">
+                  <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
+                  <div class="col-sm-4">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoLieuRecep}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+                    <div class="col-sm-1"><label class="pull-right">Date</label></div>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoDateRecep}" style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText></label>
+                  </div>
+                   <div class="col-sm-1"><label class="pull-right">Heure</label></div>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoHeureRecep}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+		              
+		         </fieldset>
+		          <fieldset>
+		               <legend style="font-weight: bold">Ouverture</legend>
+		               
+		                <div class="row">
+                  <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoLieuExe}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+                    <div class="col-sm-2"><label class="pull-right">Heure</label></div>
+                  <div class="col-sm-1">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoDteHeurOuv}" style="width: 100%" readonly="true"/></label>
+                  </div>
+                 
+	             </div>
+		               
+		         <div class="row">
+                 
+                    <div class="col-sm-2"><label class="pull-right">Ouv Technique</label></div>
+                  <div class="col-sm-2">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoDteOuvTec}" style="width: 100%" ><f:convertDateTime pattern="MM/dd/yyyy" type="date" /> </h:outputText></label>
+                  </div>
+                   <div class="col-sm-2"><label class="pull-right">Ouv Financière</label></div>
+                  <div class="col-sm-2">
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoDteOuvFin}" style="width: 100%"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /> </h:outputText></label>
+                  </div>
+	             </div>
+		         </fieldset>
+	            </div>
+	           </div>
+	           
+            </div>
+            </div>
+            </p:panel>
+            </p:tab>
+             <p:tab id="Dossiers" rendered= "#{agpmController.etatPavetDossier}" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
+             <p:panel header="Fichier(s) Joint(s)">
+
+              <div class="row">
+              <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+								<div class="col-xs-12 col-sm-12">
+								<p:fileUpload fileUploadListener="#{agpmController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":gnl" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
+								</div>
+              </div>
+              <br/>
+	            <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES FICHIERS DE L'AGPM </div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun Document enrégistré">
+	           <p:column headerText="Nom du document " styleClass="">
+	            <h:outputText value="#{doss.dagCommentaire}" />
+	        </p:column>
+	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
+	        
+				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmController.removeDossier}" title="Supprimer" update="gnl">
+                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                   <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
+                </p:commandLink>
+ 	        </p:column>
+	    </p:dataTable>    
+	            </div>
+	            </div>
+            </p:panel>
+            </p:tab>
+             
+            
+           
+            </p:wizard>
+     
+      <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+
+    </section>
+    </h:form>
+    
+   
+    <h:form id="dlogLign">
+	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la ligne Budgétaire">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{amiController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
+						    <p:ajax event="keyup" update=":dlogLign:natLigne" listener="#{amiController.filtreImputation()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="natLigne" styleClass="table table-bordered table-hover" var="slctdTb" value="#{amiController.listeImputations}"
+						  selectionMode="single" rowKey="#{slctdTb.lbgCode}"
+			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-4" >
+                           <h:commandLink id="nature" title="Code Ligne" style="font-size:18px;"  action="#{amiController.onSelectLigneBudgetaire()}" >				        
+         				   <h:outputText value="#{slctdTb.lbgCode}" />
+                           <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.ligne}" />
+                           </h:commandLink>
+				         </p:column>
+				         
+				          <p:column headerText="Imputation" styleClass="col-sm-6" >
+                          <h:commandLink id="imputation" title="Imputation" style="font-size:18px;"  action="#{amiController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.lbgImputation}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.ligne}" />
+                          </h:commandLink>
+				          </p:column>	
+				        
+				        <p:column headerText="Nature" styleClass="col-sm-6" >
+                        <h:commandLink id="Nature" title="Nature de la ligne" style="font-size:18px;"  action="#{amiController.onSelectLigneBudgetaire()}" >				        
+         				<h:outputText value="#{slctdTb.natLibelle}" />
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.ligne}" />
+                        </h:commandLink>
+				        </p:column>
+				        
+				        <p:column headerText="Dotation" styleClass="col-sm-6" >
+                        <h:commandLink id="dotation" title="Dotation Totale" style="font-size:18px;"  action="#{amiController.onSelectLigneBudgetaire()}" >				        
+         				<h:outputText value="#{slctdTb.lbgTotDot}" />
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.ligne}" />
+                        </h:commandLink>
+				        </p:column>	
+				        
+				        <p:column headerText="Disponible" styleClass="col-sm-6" >
+                        <h:commandLink id="disponible" title="Montant Disponible" style="font-size:18px;"  action="#{amiController.onSelectLigneBudgetaire()}" >				        
+         				<h:outputText value="#{slctdTb.lbgDisTot}" />
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.ligne}" />
+                        </h:commandLink>
+				        </p:column>		
+				        	
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="lotlog" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Génération des Lots">
+				<div class="contentpanel">
+					 <div class="form-group ">
+	                  <label for="lib" class="col-sm-2 control-label"><b>Libellé</b></label>
+	                  <div class="col-sm-10">
+	                  <p:inputText  type="text" styleClass="form-control" value="#{amiController.newVbTemp.tempLaaLibGenerique}" id="lib" style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+                 
+				  
+				   <div class="form-group ">
+	                  <label for="montCau" class="col-sm-2 control-label"><b>Intervalle de </b></label>
+	                  <div class="col-sm-1">
+	                    <p:inputText type="text" id="montCau" styleClass="form-control" value="#{amiController.newVbTemp.tempLaaNbrLotDebut}" style="width: 100%" />
+	                  </div>
+	                  
+	                  <label for="mont" class="col-sm-1 control-label"><b>à</b></label>
+	                  <div class="col-sm-1">
+	                    <p:inputText type="text" id="mont" styleClass="form-control" value="#{amiController.newVbTemp.tempLaaNbrLotFin}" style="width: 100%" />
+	                  </div>
+	                </div>
+	                 <div class="row">
+                <div class="pull-right ">
+			            <p:commandLink action="#{amiController.genererLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:finance">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Générer			            </p:commandLink>
+              </div>
+                </div>
+	           </div>
+      </p:dialog>
+    </h:form>
+	
+	
+	<h:form id="NewLotlog" styleClass="form-horizontal"> 
+	       <p:dialog  widgetVar="newLotdlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Saisie des lots">
+				<div class="contentpanel">
+					 <div class="form-group ">
+	                  <label for="lib" class="col-sm-2 control-label"><b>Libellé</b></label>
+	                  <div class="col-sm-10">
+	                  <p:inputText  type="text" styleClass="form-control" value="#{amiController.newLot.laaObjet}"  id="lib" style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+	              
+                 <div class="form-group">
+	                  <label  class="col-sm-2 control-label"></label>
+					  <div class="col-sm-10">
+					   <p:selectOneRadio id="consoless" value="#{amiController.sit}">
+                     <p:ajax  listener="#{amiController.checkMtExig()}" update="NewLotlog:MtExig"></p:ajax>
+			            <f:selectItem itemLabel="Caution provisoire exigée" itemValue="Caution_exigee" />
+			        </p:selectOneRadio>
+					  </div>
+				  </div>
+				  
+				   <div class="form-group ">
+				   <h:panelGroup id="MtExig">
+				   <h:panelGroup rendered="#{amiController.etatMtExig}">
+	                  <label for="montCau" class="col-sm-2 control-label"><b>Montant Caution</b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText type="text" id="montCau" styleClass="form-control" value="#{amiController.newLot.laaMtCaut}" style="width: 100%" />
+	                  </div>
+	                 </h:panelGroup>
+	                 </h:panelGroup>
+	                  
+	                  <label for="mont" class="col-sm-2 control-label"><b>Cout Lot/DAO</b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText type="text" id="mont" styleClass="form-control" value="#{amiController.newLot.laaMtEst}" style="width: 100%" />
+	                  </div>
+	                </div>
+                
+	                 <div class="form-group ">
+	                  <label for="lieu" class="col-sm-2 control-label"><b>Lieu d'exécution </b></label>
+	                  <div class="col-sm-10">
+	                  <p:inputText  type="text" styleClass="form-control" id="lieu" value="#{amiController.newLot.laaLieuExe}" style="width: 100%" /> 
+	                  </div>
+	                </div>
+	                
+	              
+	                 <div class="row">
+                <div class="pull-right ">
+			            <p:commandLink action="#{amiController.saveLot()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":NewLotlog">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+              </div>
+                </div>
+	           </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogAC">
+	        <p:dialog  widgetVar="autoriteDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{amiController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogAC:pasFon" listener="#{amiController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="pasFon" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{amiController.onSelectFonctionPgpmCpmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{amiController.onSelectFonctionPgpmCpmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogDMP">
+	        <p:dialog  widgetVar="DMPDlog" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{amiController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogDMP:ntle" listener="#{amiController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ntle" styleClass="table table-bordered table-hover" var="slctdTb" value="#{amiController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{amiController.onSelectFonctionPgpmDmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{amiController.onSelectFonctionPgpmDmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="dlogAdr">
+	  <p:dialog  widgetVar="Adresse" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">NOUVELLE ADRESSE</div>
+         </div>
+         <div class="box-body">
+              
+		       <div class="row">
+                   <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libellé</label>
+				  <div class="col-sm-11">
+                  <p:inputText type="text" value="#{amiController.newAdresse.adaLibelle}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+				 
+                </div>
+                </div>
+                
+                
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{amiController.saveAdresse()}"  update=":gnl:adress">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		            
+         </div>
+         </div>
+         </div>
+		
+      </p:dialog>
+    </h:form> 
+    
+    
+    <h:form id="dlogAdrLib">
+	  <p:dialog  widgetVar="AdresseLib" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">NOUVEAU LIBELLE</div>
+         </div>
+         <div class="box-body">
+              
+		       <div class="row">
+                   <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libellé</label>
+				  <div class="col-sm-11">
+                  <p:inputText type="text" value="#{amiController.newLibelleAdresse.liaLibelle}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+				 
+                </div>
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{amiController.saveLibelleAdresse()}" oncomplete="PF('AdresseLib').hide()" update=":gnl:libelleAdresse">
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+         </div>
+		
+      </p:dialog>
+    </h:form>
+    
+
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

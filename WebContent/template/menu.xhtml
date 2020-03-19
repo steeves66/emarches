@@ -177,7 +177,7 @@
           </a> 
            <ul class="treeview-menu">
             <li>
-            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <p:commandLink action="#{amiController.renderPage('ami1','SAIAMI')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Saisie AMI
              </p:commandLink>
             </li>
@@ -513,14 +513,14 @@
          
          <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>Gestion des AMI</span>
+            <i class="fa fa-list"></i> <span>Gestion des AMI / PRQ</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a> 
            <ul class="treeview-menu">
-            
-              <li class="treeview">
+           
+           <li class="treeview">
           <a href="#">
             <i class="fa fa-list"></i> <span>AMI</span>
             <span class="pull-right-container">
@@ -529,11 +529,11 @@
           </a> 
            <ul class="treeview-menu">
             <li>
-            <p:commandLink action="#{daoController.renderPage('dao1','VALDAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+            <p:commandLink action="#{amiController.renderPage('ami1','TRAAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré Validation CPMP
              </p:commandLink>
             </li>
-            
+           
           </ul>     
          </li>
          
@@ -545,16 +545,21 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-            
-            <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+          <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré Validation PRQ
              </p:commandLink>
             </li>
+              <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré Validation DP
+             </p:commandLink>
+            </li>
+
           </ul>     
          </li>
-
-           
+         
+          
           </ul>     
          </li>
          
@@ -890,7 +895,8 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-               <li class="treeview">
+           
+           <li class="treeview">
           <a href="#">
             <i class="fa fa-list"></i> <span>AMI</span>
             <span class="pull-right-container">
@@ -898,15 +904,18 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-        
             <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>Validation par le DMP
+            <p:commandLink action="#{amiController.renderPage('ami1','VALAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i> Validation DMP
+             </p:commandLink>
+            </li>
+              <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation DMP
              </p:commandLink>
             </li>
           </ul>     
          </li>
-         
          
           <li class="treeview">
           <a href="#">
@@ -916,18 +925,24 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-         
-            <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>Validation par le DMP
+          <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie PRQ
              </p:commandLink>
             </li>
+              <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie DP
+             </p:commandLink>
+            </li>
+
           </ul>     
          </li>
          
-            
+          
           </ul>     
          </li>
+		 
            
         <li class="treeview">
           <a href="#">
@@ -1129,7 +1144,7 @@
           
           <!-- DEBUT TRAITEMENT DU MENU CHF DE SERVICE -->
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
-                    <li class="treeview">
+         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>M1-Procédure de Préparation</span>
             <span class="pull-right-container">
@@ -1165,9 +1180,37 @@
 
           </ul>     
          </li>
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Gestion des AMI / PRQ</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+            <ul class="treeview-menu">
+	           <li>
+            <p:commandLink action="#{amiController.renderPage('ami1','AFFAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  action="#{amiController.renderPage('ami1','VALAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+            
+             <li>
+             <p:commandLink  action="#{amiController.renderPage('ami1','PUAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication
+             </p:commandLink>
+            </li>
+
+          </ul>   
+           </li>
          </ul>
          
          </li>
+         
          </h:panelGroup>
          <!-- FIN TRAITEMENT DU MENU CHF DE SERVICE -->
           
@@ -1186,21 +1229,33 @@
             
             <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>DAO</span>
+            <i class="fa fa-list"></i> <span>Examen</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a> 
            <ul class="treeview-menu">
-               <li>
+             <li>
             <p:commandLink action="#{daoController.renderPage('dao1','CHADAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Examen
+            <i class="fa fa-circle-o"></i>DAO
+             </p:commandLink>
+            </li>
+             <li>
+             <p:commandLink action="#{amiController.renderPage('ami1','CHAAMI')}" update=":content" >  
+            <i class="fa fa-circle-o"></i>AMI
+             </p:commandLink>
+            </li>
+             <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','CHADAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>PRQ
              </p:commandLink>
             </li>
 
           </ul>     
          </li>
          </ul>
+         
+   
          
          </li>
          

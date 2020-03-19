@@ -11,8 +11,8 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-       #{controleController.type} N° #{etatsDaoController.slctdTd.affDacCode}
-       <!--  PPM N° #{etatsPpmController.detail.dppId} -->
+       #{controleController.type} N° #{etatsDaoController.slctdTda.dafDacCode}
+       
         <small>
          #{controleController.libelle1} 
        <!--  Liste des AGPM Saisis  -->
@@ -90,43 +90,43 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTd.TGestion.gesCode}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTda.dafDacGestion}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Structure</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.TStructure.strLibelleLong}"   style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"     style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	      
 	             
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Objet de l'opération : </label></div>
+                  <div class="col-sm-3"><label class="pull-right">Objet de l'opération</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.TDetailPlanPassation.dppObjet}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTda.dafDacObjet}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Type de Marché : </label></div>
+                  <div class="col-sm-3"><label class="pull-right">Type de Marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTd.TTypeMarche.tymCode} : #{etatsDaoController.slctdTd.TTypeMarche.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTda.TTypeMarche.tymCode} : #{etatsDaoController.slctdTda.TTypeMarche.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Mode de Passation : </label></div>
+                  <div class="col-sm-3"><label class="pull-right">Mode de Passation</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.TModePassation.mopCode} : #{etatsDaoController.slctdTd.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTda.TModePassation.mopCode} : #{etatsDaoController.slctdTda.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	            </div>
 	            
 	              <fieldset>
 		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="400" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
+		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="465" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
 	        <p:column headerText="Code" styleClass="col-sm-2">
 	            <h:outputText value="#{slctdTb.pidCode}" />
 	        </p:column>
@@ -143,7 +143,7 @@
 		           
 		            <fieldset>
 		               <legend style="font-weight: bold">DAO joint(s)</legend>
-		              <p:dataTable id="DaoDT" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
+		              <p:dataTable id="DaoDT" styleClass="table mb0 dt-on-steroids dataTable" scrollable="true" scrollHeight="465" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
@@ -203,13 +203,13 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Délai de validité des offres</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.detail.aaoDelaiVal}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText> </label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoDelaiVal}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText> </label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Marge de Préférence</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"   style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
@@ -221,7 +221,7 @@
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Avis de non objection du bailleur</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoAvisBai}"   style="width: 100%" readonly="true" /> </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoAvisBail}"   style="width: 100%" readonly="true" /> </label>
                   </div>
 	             </div>
 	             
@@ -235,7 +235,7 @@
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Mode de qualification</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoRegQual}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	               <div class="row">
@@ -247,9 +247,10 @@
 	                <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Nombre de lot </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrLot}"  style="width: 100%" readonly="true"/> </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrLot}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
+	             
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Vente par lot </label></div>
                   <div class="col-sm-8">
@@ -274,17 +275,17 @@
 		             
 		           <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
                   <div class="col-sm-7">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.detail.aaoLieuRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoLieuRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                   <div class="col-sm-1"><label class="pull-right">Date</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                    <div class="col-sm-1"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
               
 	             </div>
@@ -295,11 +296,11 @@
 		                <div class="row">
 		           <div class="col-sm-2"><label class="pull-right">Lieu</label></div>
                   <div class="col-sm-6">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" />   </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteHeurOuv}" style="width: 100%" /> </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}" style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
@@ -307,17 +308,17 @@
 	              
 		           <div class="col-sm-2"><label class="pull-right">Nbre Ouv</label></div>
                   <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date"/>  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                   <div class="col-sm-2"><label class="pull-right">Ouv Tech</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvTec}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date"/>  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvTec}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                    <div class="col-sm-2"><label class="pull-right">Ouv Fin</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvFin}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date"/>  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvFin}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
               
 	             
@@ -325,15 +326,15 @@
 	           </div>
             </div>
             
-            
-             <div class="col-md-6">
+           
+              <div class="col-md-6">
       
                  <div class="box box-success box-solid">
-               <div class="box-header with-border">
+                  <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">LOTS</div></div> 
 			         <div class="col-md-2 "> </div>
-               </div>
-                <!-- /.box-header -->
+                  </div>
+                  <!-- /.box-header -->
 	             <div class="box-body">
                <p:dataTable id="nbreLots" scrollable="true" scrollHeight="465" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.lotListe}"  emptyMessage="Aucun LOT enregistré">
 
@@ -345,7 +346,7 @@
 				            <h:outputText value="#{slctdTb.laaLbgImputation}" />
 				        </p:column>
 				        
-				        <p:column headerText="Cout lot" styleClass="col-sm-1">
+				        <p:column headerText="Cout Lot" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.laaMtCaut}" />
 				        </p:column>
 				         
@@ -361,16 +362,11 @@
 	            </div>
 	           </div>  
 
-            <br/><br/>
-            </div>
+            </div> 
+           </div>
+           
             
-            
-            </div>
-             
-            
-             
-            
-            
+              
             
             </div>
             <!-- /.box-body -->
@@ -397,12 +393,6 @@
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
 				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','TRADAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
