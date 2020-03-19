@@ -241,10 +241,10 @@
                 </div>
                         
             </div>
-            <div class="col-md-6">
             
-           
-                
+            
+            <div class="col-md-6">
+              
                 <!-- Part reservée aux PME  -->
                 
                  <div class="form-group">
@@ -277,7 +277,13 @@
 	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink> 
+	                
+	                <p:commandLink rendered="#{pgpmAcController.btnAgpmRappel}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanRappel()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
 	                </p:commandLink>
+	                
 	           </h:panelGroup>
 	           
 	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
@@ -322,17 +328,55 @@
    <div class="col-md-8">
     <div class="box box-success box-solid">
         <div class="box-header with-border">
-         <div class="col-md-10 "><div  style="color: #fff">LISTE DES FINANCEMENTS</div></div> 
+         <div class="col-md-10 "><div  style="color: #fff">LISTE DES FINANCEMENTS</div></div>
+        
+        <h:panelGroup rendered="#{pgpmAcController.loveAgpmRappel}">  
          <div class="col-md-2 ">
 			 <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
 			</p:commandLink>
 		</div>
+		</h:panelGroup>
+		
         </div>
         <div class="box-body">
+        
+                <h:panelGroup rendered="#{pgpmAcController.etatFinancement1}"> 
                <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.listeFinancement}" scrollable="true" scrollHeight="90"  emptyMessage="Aucun financement enregistré">
          				<p:column headerText="Source" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fipTypeFinance}" />
+				        </p:column>
+         				
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
+				        </p:column>
+
+				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipMontantCfa}" />
+				        </p:column>
+				        
+				        <p:column headerText="Part Trésor" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipPartTresor}" />
+				        </p:column>
+				         <p:column headerText="Actions" styleClass="col-sm-1">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancement}" title="Supprimer" update="gnl">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.selectFinance}" />
+			                </p:commandLink>
+				        </p:column>
+				        
+                 </p:dataTable>  
+                 </h:panelGroup>
+                
+                <h:panelGroup rendered="#{pgpmAcController.etatFinancement2}"> 
+                  <p:dataTable id="finance2" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.listeFinancementAgpm}" scrollable="true" scrollHeight="90"  emptyMessage="Aucun financement enregistré">
+         				<p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.finTypeFinance}" />
 				        </p:column>
          				
          				
@@ -344,20 +388,20 @@
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 
-				         <p:column headerText="Montant" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fipMontantCfa}" />
-				        </p:column>
-				         <p:column headerText="Actions" styleClass="col-sm-1">
-				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancement}" title="Supprimer" update="gnl">
-			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.selectFinance}" />
-			                </p:commandLink>
+				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.finMontantCfa}" />
 				        </p:column>
 				        
-                 </p:dataTable>   
+				        <p:column headerText="Part Trésor" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.finPartTresor}" />
+				        </p:column>
+				        
+                 </p:dataTable> 
+                  </h:panelGroup>
                        
             </div>
+            
+            
         </div>
    </div>
     <div class="col-md-4">
