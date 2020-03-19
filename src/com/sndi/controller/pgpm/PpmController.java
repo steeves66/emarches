@@ -48,6 +48,7 @@ import com.sndi.model.VDetPlaning;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VModePassation;
+import com.sndi.model.VModeleAmi;
 import com.sndi.model.VModeleDao;
 import com.sndi.model.VPgpmFonction;
 import com.sndi.model.VPpmStatut;
@@ -141,6 +142,7 @@ public class PpmController {
 		 private List<TStructure> listeStructure = new ArrayList<TStructure>();
 		 private List<VModePassation> listeMode = new ArrayList<VModePassation>();
 	     private List<VModeleDao> listeDao = new ArrayList<VModeleDao>();
+	     private List<VModeleAmi> listeAmi = new ArrayList<VModeleAmi>();
 	     
 	     
 	     private List<TStructure> listeStructures = new ArrayList<TStructure>();
@@ -248,6 +250,8 @@ public class PpmController {
 		 private boolean boutonEditPspm =false;
 		 private boolean etatPsl =false;
 		 private boolean etatPso =false;
+		 private boolean modeleAmi =false;
+		 private boolean modeleDao =true;
 	 
 	 
 	 
@@ -1025,7 +1029,6 @@ public class PpmController {
 		 
 		 
 		 public void onSelectPgpm() {
-			 //detailPass = new TDetailPlanPassation();
 			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId())); 
 
 			 recupPgpm = new VPgpmFonction();
@@ -1049,29 +1052,55 @@ public class PpmController {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
-             //Affichage des modèles type de DAO
-			 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-					 new WhereClause("GPG_MOP_CODE",WhereClause.Comparateur.EQ,""+pgpm.getGpgMopCode()),
-					 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
+			 if(pgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
+                //Activation de la liste des Ami et désactivation de l'autre
+				 modeleAmi = true;
+				 modeleDao = false;
+	             //Affichage des modèles type AMI
+				   listeAmi = ((List<VModeleAmi>)iservice.getObjectsByColumn("VModeleAmi",new ArrayList<String>(Arrays.asList("MDT_CODE")),
+						 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId())));
+				   //Affichage du coût total de l'opération
+				    coutOperation();
+					//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
+				  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
+					  
+					   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
+							 chargeImputationPsl();
+						   }else
+						      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
+								  chargeImputationPso();
+							   }
+				                 }else
+					                 if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
+						                    chargeImputation();
+					                  }
+			             }else {
+			        	//Activation de la liste des DAO type et désactivation de la liste des DAO 
+						 modeleAmi = false;
+						 modeleDao = true;
+			    	      //Affichage des modèles type de DAO
+						 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
+								 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
+						//Affichage du coût total de l'opération
+						    coutOperation();
+							//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
+						  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
+							  
+							   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
+									 chargeImputationPsl();
+								   }else
+								      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
+										  chargeImputationPso();
+									   }
+						                 }else
+							                 if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
+								                    chargeImputation();
+							                  }
+			                              } 
+		                            }
 		 
-			 //Affichage du coût total de l'opération
-		    coutOperation();
-			 
-			//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
-		  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
-			  
-			   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
-					 chargeImputationPsl();
-				   }else
-				      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
-						  chargeImputationPso();
-					   }
-		     }else
-			    if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
-				  chargeImputation();
-			  }
-		  	 
-		}
+		 
+		 
 		 
 		 //Methode OnSelect pour PGSPM
 		 public void onSelectPgspm() {
@@ -1100,13 +1129,21 @@ public class PpmController {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
-			
-				 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-						 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
-			 
-			 
-			 coutOperation();
-				} 
+			             
+			             if(pgspm.getGpgMopCode().equalsIgnoreCase("AMI")) {
+			            	    modeleDao = false;
+			            	    modeleAmi = false;
+			                       }else {
+			            	    //Désactivation des listes 
+			            	    modeleDao = true;
+			            	    modeleAmi = false;
+			            	    //Affichage du modèle DAO type
+			   				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
+			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
+			   			       //Affichage du montant total
+			   			       coutOperation();       
+			                 }
+				     } 
 		 
 		 
 		  
@@ -3787,6 +3824,36 @@ public class PpmController {
 
 	public void setStatutTrans(String statutTrans) {
 		this.statutTrans = statutTrans;
+	}
+
+
+	public List<VModeleAmi> getListeAmi() {
+		return listeAmi;
+	}
+
+
+	public void setListeAmi(List<VModeleAmi> listeAmi) {
+		this.listeAmi = listeAmi;
+	}
+
+
+	public boolean isModeleAmi() {
+		return modeleAmi;
+	}
+
+
+	public void setModeleAmi(boolean modeleAmi) {
+		this.modeleAmi = modeleAmi;
+	}
+
+
+	public boolean isModeleDao() {
+		return modeleDao;
+	}
+
+
+	public void setModeleDao(boolean modeleDao) {
+		this.modeleDao = modeleDao;
 	}
 	
 		
