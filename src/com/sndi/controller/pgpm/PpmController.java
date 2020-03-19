@@ -1049,7 +1049,7 @@ public class PpmController {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
-             //Affichage des modèles type de DAO
+             
 			 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
 					 new WhereClause("GPG_MOP_CODE",WhereClause.Comparateur.EQ,""+pgpm.getGpgMopCode()),
 					 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
