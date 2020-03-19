@@ -218,47 +218,95 @@ public class TableauBordController {
 				 /*
 				  Compteur pour l'autorité Contractante
 				   */
-					 private String daoAcSaisie = "";
-					 private String daoAcPs="";
-					 private String daoCpRetournes ="";
-					 private String daoAcTransmis = "";
-					 private String daoAcAttenteValide = "";
-					 private String daoAcDiffCpmp = "";
-					 private String daoAcDiffDmp ="";
-					 private String daoAcAttRetrait ="";
-					 private String daoAcAttVente ="";
-					 private String daoAcRetire="";
+					 private String amiAcSaisie = "";
+					 private String amiAcPs="";
+					 private String amiCpRetournes ="";
+					 private String amiAcTransmis = "";
+					 private String amiAcAttenteValide = "";
+					 private String amiAcDiffCpmp = "";
+					 private String amiAcDiffDmp ="";
+					 private String amiAcAttRetrait ="";
+					 private String amiAcAttVente ="";
+					 private String amiAcRetire="";
 				/*
 				Compteur pour la Cellule de Passation des Marchés
 				 */
-					 private String daoCpSaisie ="";
-					 private String daoCpTransmis ="";
-					 private String daoCpDifCpmp ="";
-					 private String daoCpDifDmp ="";
-					 private String daoCpValide ="";
-					 private String daoCpAttenteValide="";
+					 private String amiCpSaisie ="";
+					 private String amiCpTransmis ="";
+					 private String amiCpDifCpmp ="";
+					 private String amiCpDifDmp ="";
+					 private String amiCpValide ="";
+					 private String amiCpAttenteValide="";
 					 
-					 private String daoaffecte ="";
+					 private String amiaffecte ="";
 					 
 					 /*
 					  Compteur pour le Chargé d'Etudes
 					   */ 
 					 
-					 private String daoChargeAttente ="";
-				     private String daoChargeVal="";
+					 private String amiChargeAttente ="";
+				     private String amiChargeVal="";
 				     /*
 					  Compteur pour le Chef de Service
 					   */
-				     private String daoCsvAttVal="";
-				     private String daoCsvAttAff="";
-					 private String daoCsvgeAffecte ="";
-					 private String daoCsvValide="";
-				     private String daoCsvDiff="";
-				     private String daoCsvTraitCharg="";
+				     private String amiCsvAttVal="";
+				     private String amiCsvAttAff="";
+					 private String amiCsvgeAffecte ="";
+					 private String amiCsvValide="";
+				     private String amiCsvDiff="";
+				     private String amiCsvTraitCharg="";
 					 /*
 					  Compteur pour le Directeur des Marchés Publics
 					   */
 				     
+				     
+				     
+				     //AMI
+					 private String amiTotal=""; 
+					 /*
+					  Compteur pour l'autorité Contractante
+					   */
+						 private String daoAcSaisie = "";
+						 private String daoAcPs="";
+						 private String daoCpRetournes ="";
+						 private String daoAcTransmis = "";
+						 private String daoAcAttenteValide = "";
+						 private String daoAcDiffCpmp = "";
+						 private String daoAcDiffDmp ="";
+						 private String daoAcAttRetrait ="";
+						 private String daoAcAttVente ="";
+						 private String daoAcRetire="";
+					/*
+					Compteur pour la Cellule de Passation des Marchés
+					 */
+						 private String daoCpSaisie ="";
+						 private String daoCpTransmis ="";
+						 private String daoCpDifCpmp ="";
+						 private String daoCpDifDmp ="";
+						 private String daoCpValide ="";
+						 private String daoCpAttenteValide="";
+						 
+						 private String daoaffecte ="";
+						 
+						 /*
+						  Compteur pour le Chargé d'Etudes
+						   */ 
+						 
+						 private String daoChargeAttente ="";
+					     private String daoChargeVal="";
+					     /*
+						  Compteur pour le Chef de Service
+						   */
+					     private String daoCsvAttVal="";
+					     private String daoCsvAttAff="";
+						 private String daoCsvgeAffecte ="";
+						 private String daoCsvValide="";
+					     private String daoCsvDiff="";
+					     private String daoCsvTraitCharg="";
+						 /*
+						  Compteur pour le Directeur des Marchés Publics
+						   */
+					     
 				     
 			
 		
@@ -398,6 +446,34 @@ public class TableauBordController {
 			 daoAcAttRetrait = ""+getDaoAttenteVente("DVE");
 			 daoAcRetire = ""+getDaoAcRetire("RET");
 			 //Fin DAO	
+		}
+		
+		public void chargeDataAmi() {
+			 //Début AMI 
+			 amiTotal = ""+getAmiDossierTotal();
+			 amiAcSaisie = ""+getAcAmiSaisieDossier("D1S");
+			 amiAcPs=""+getAcAmiSaisiePs("D1A");
+			 amiChargeAttente = ""+getAcAmiAttenteCharge("D3A");
+			 amiChargeVal = ""+getAcAmiValCharge("D4V");
+			 amiAcAttenteValide = ""+getAcAmiAttenteValide("D1S","S2D"); 
+			 amiCsvAttAff = ""+getAmiAttAffCsv("D2T");
+			 amiCsvAttVal = ""+getAcAmiValChargeCsv("D4V");
+			 amiaffecte = ""+getAcAmiAffecteDossier("D3A");
+			 amiCsvValide = ""+getAcAmiValidCsvDossier("D5V");
+			 amiCsvDiff = ""+getAcAmiValidCsvDossier("D5R");
+			 amiAcDiffCpmp = ""+getAmiDiffCpmpACDossier("D2T");
+			 amiAcDiffDmp = ""+getAmiDiffDmpACDossier("S3D");
+			 amiAcTransmis = ""+getAcAmiTransmisDossier("D1T");
+			 amiCpSaisie = ""+getAmiSaisieDossier("D1T");
+			 amiCpTransmis = ""+getAmiTransmisDossier("D1T");
+			 amiCpDifCpmp = ""+getAmiDiffDossier("S2D");
+			 amiCpValide = ""+getAmiValideCmp("D2T");
+			 amiCpDifDmp =""+getAmiDiffDmp("S3D");
+			 amiCpAttenteValide = ""+getAmiAttenteValide("S1T","S3D");
+			 amiAcAttVente = ""+getAmiAttenteRetrait("DPU","D6V");
+			 amiAcAttRetrait = ""+getAmiAttenteVente("DVE");
+			 amiAcRetire = ""+getAmiAcRetire("RET");
+			 //Fin AMI	
 		}
 	
 	 
@@ -1476,6 +1552,257 @@ public int getDaoTransmisDmpDossier(String src){
 	return	i;	
 }
 //Fin DAO
+
+
+
+
+//Début AMI
+//Nombre total des DAO
+public int getAmiDossierTotal(){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE");
+	new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI");
+return	i;	
+	} 
+//AMI saisi par le AC
+public int getAcAmiSaisieDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI saisi par le AC en procédure simplifiée
+public int getAcAmiSaisiePs(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI en attente chez le chargé d'Etudes
+public int getAcAmiAttenteCharge(String src){
+	int i = iservice.countTableByColumn("V_DAO_CHARGE_ETUDE", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DCS_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI validé par le chargé d'Etudes
+public int getAcAmiValChargeDet(String src){
+	int i = iservice.countTableByColumn("V_DAO_CHARGE_ETUDE", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DCS_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+public int getAcAmiValCharge(String src){
+	int i = iservice.countTableByColumn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",
+			new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("AFF_DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+			new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+public int getAcAmiValChargeCsv(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+
+//AMI saisi par le AC
+public int getAcAmiAffecteDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI validé par le Chef de Service
+public int getAcAmiValidCsvDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//DAO Transmis par le AC
+public int getAcAmiTransmisDossier(String src){ 
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI en attente de transmission chez le AC
+public int getAcAmiAttenteValide(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;
+}
+
+
+//AMI saisi par le CPMP
+public int getAmiSaisieDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI non transmis par le cpmp
+public int getAmiSaisieDossierIn(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+	return	i;
+}
+
+//AMI transmis par le cpmp
+public int getAmiTransmisDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"));
+			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;	
+}
+
+//AMI retournés par le cpmp chez le AC
+public int getAmiAttAffCsv(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//DAO retournés par le cpmp chez le AC
+public int getAmiDiffCpmpACDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI retournés par le dmp chez le AC
+public int getAmiDiffDmpACDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+	        new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//Ami retournés par le cpmp (Son propre tableau de bord)
+public int getAmiDiffDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI retournés par le dmp
+public int getAmiDiffDmp(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
+			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+	return	i;	
+}
+
+
+//AMI en attente de validation par le CPMP
+public int getAmiAttenteValide(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;
+}
+
+//AMI en attente de retrait chez l'AC
+public int getAmiAttenteRetrait(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+			"AFF_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("AFF_DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("AFF_DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;
+}
+
+
+//AMI en attente de vente chez l'AC
+public int getAmiAttenteVente(String src){
+	int i = iservice.countTableByColumn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",
+			new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("AFF_DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("AFF_DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;	
+}
+
+//AMI retiré chez l'AC
+public int getAmiAcRetire(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;	
+}
+
+
+//AMI validés par le cpmp
+public int getAmiValideCmp(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+
+//AMI validés par le dmp
+public int getAmiValideDmp(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
+			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+	return	i;	
+}
+
+//AMI en attente de validation par le dmp
+public int getAmiAttValideDmp(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
+			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+	return	i;	
+}
+
+
+//AMI transmis par le dmp
+public int getAmiTransmisDmpDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
+			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;	
+}
+//Fin AMI
 
 
 
@@ -2771,6 +3098,246 @@ public int getDaoTransmisDmpDossier(String src){
 
 	public void setPgpmAcDiffDmpCpmp(String pgpmAcDiffDmpCpmp) {
 		this.pgpmAcDiffDmpCpmp = pgpmAcDiffDmpCpmp;
+	}
+
+	public String getAmiAcSaisie() {
+		return amiAcSaisie;
+	}
+
+	public void setAmiAcSaisie(String amiAcSaisie) {
+		this.amiAcSaisie = amiAcSaisie;
+	}
+
+	public String getAmiAcPs() {
+		return amiAcPs;
+	}
+
+	public void setAmiAcPs(String amiAcPs) {
+		this.amiAcPs = amiAcPs;
+	}
+
+	public String getAmiCpRetournes() {
+		return amiCpRetournes;
+	}
+
+	public void setAmiCpRetournes(String amiCpRetournes) {
+		this.amiCpRetournes = amiCpRetournes;
+	}
+
+	public String getAmiAcTransmis() {
+		return amiAcTransmis;
+	}
+
+	public void setAmiAcTransmis(String amiAcTransmis) {
+		this.amiAcTransmis = amiAcTransmis;
+	}
+
+	public String getAmiAcAttenteValide() {
+		return amiAcAttenteValide;
+	}
+
+	public void setAmiAcAttenteValide(String amiAcAttenteValide) {
+		this.amiAcAttenteValide = amiAcAttenteValide;
+	}
+
+	public String getAmiAcDiffCpmp() {
+		return amiAcDiffCpmp;
+	}
+
+	public void setAmiAcDiffCpmp(String amiAcDiffCpmp) {
+		this.amiAcDiffCpmp = amiAcDiffCpmp;
+	}
+
+	public String getAmiAcDiffDmp() {
+		return amiAcDiffDmp;
+	}
+
+	public void setAmiAcDiffDmp(String amiAcDiffDmp) {
+		this.amiAcDiffDmp = amiAcDiffDmp;
+	}
+
+	public String getAmiAcAttRetrait() {
+		return amiAcAttRetrait;
+	}
+
+	public void setAmiAcAttRetrait(String amiAcAttRetrait) {
+		this.amiAcAttRetrait = amiAcAttRetrait;
+	}
+
+	public String getAmiAcAttVente() {
+		return amiAcAttVente;
+	}
+
+	public void setAmiAcAttVente(String amiAcAttVente) {
+		this.amiAcAttVente = amiAcAttVente;
+	}
+
+	public String getAmiAcRetire() {
+		return amiAcRetire;
+	}
+
+	public void setAmiAcRetire(String amiAcRetire) {
+		this.amiAcRetire = amiAcRetire;
+	}
+
+	public String getAmiCpSaisie() {
+		return amiCpSaisie;
+	}
+
+	public void setAmiCpSaisie(String amiCpSaisie) {
+		this.amiCpSaisie = amiCpSaisie;
+	}
+
+	public String getAmiCpTransmis() {
+		return amiCpTransmis;
+	}
+
+	public void setAmiCpTransmis(String amiCpTransmis) {
+		this.amiCpTransmis = amiCpTransmis;
+	}
+
+	public String getAmiCpDifCpmp() {
+		return amiCpDifCpmp;
+	}
+
+	public void setAmiCpDifCpmp(String amiCpDifCpmp) {
+		this.amiCpDifCpmp = amiCpDifCpmp;
+	}
+
+	public String getAmiCpDifDmp() {
+		return amiCpDifDmp;
+	}
+
+	public void setAmiCpDifDmp(String amiCpDifDmp) {
+		this.amiCpDifDmp = amiCpDifDmp;
+	}
+
+	public String getAmiCpValide() {
+		return amiCpValide;
+	}
+
+	public void setAmiCpValide(String amiCpValide) {
+		this.amiCpValide = amiCpValide;
+	}
+
+	public String getAmiCpAttenteValide() {
+		return amiCpAttenteValide;
+	}
+
+	public void setAmiCpAttenteValide(String amiCpAttenteValide) {
+		this.amiCpAttenteValide = amiCpAttenteValide;
+	}
+
+	public String getAmiaffecte() {
+		return amiaffecte;
+	}
+
+	public void setAmiaffecte(String amiaffecte) {
+		this.amiaffecte = amiaffecte;
+	}
+
+	public String getAmiChargeAttente() {
+		return amiChargeAttente;
+	}
+
+	public void setAmiChargeAttente(String amiChargeAttente) {
+		this.amiChargeAttente = amiChargeAttente;
+	}
+
+	public String getAmiChargeVal() {
+		return amiChargeVal;
+	}
+
+	public void setAmiChargeVal(String amiChargeVal) {
+		this.amiChargeVal = amiChargeVal;
+	}
+
+	public String getAmiCsvAttVal() {
+		return amiCsvAttVal;
+	}
+
+	public void setAmiCsvAttVal(String amiCsvAttVal) {
+		this.amiCsvAttVal = amiCsvAttVal;
+	}
+
+	public String getAmiCsvAttAff() {
+		return amiCsvAttAff;
+	}
+
+	public void setAmiCsvAttAff(String amiCsvAttAff) {
+		this.amiCsvAttAff = amiCsvAttAff;
+	}
+
+	public String getAmiCsvgeAffecte() {
+		return amiCsvgeAffecte;
+	}
+
+	public void setAmiCsvgeAffecte(String amiCsvgeAffecte) {
+		this.amiCsvgeAffecte = amiCsvgeAffecte;
+	}
+
+	public String getAmiCsvValide() {
+		return amiCsvValide;
+	}
+
+	public void setAmiCsvValide(String amiCsvValide) {
+		this.amiCsvValide = amiCsvValide;
+	}
+
+	public String getAmiCsvDiff() {
+		return amiCsvDiff;
+	}
+
+	public void setAmiCsvDiff(String amiCsvDiff) {
+		this.amiCsvDiff = amiCsvDiff;
+	}
+
+	public String getAmiCsvTraitCharg() {
+		return amiCsvTraitCharg;
+	}
+
+	public void setAmiCsvTraitCharg(String amiCsvTraitCharg) {
+		this.amiCsvTraitCharg = amiCsvTraitCharg;
+	}
+
+	public String getAmiTotal() {
+		return amiTotal;
+	}
+
+	public void setAmiTotal(String amiTotal) {
+		this.amiTotal = amiTotal;
+	}
+
+	public String getDaoCpTransmis() {
+		return daoCpTransmis;
+	}
+
+	public void setDaoCpTransmis(String daoCpTransmis) {
+		this.daoCpTransmis = daoCpTransmis;
+	}
+
+	public String getDaoCpDifCpmp() {
+		return daoCpDifCpmp;
+	}
+
+	public void setDaoCpDifCpmp(String daoCpDifCpmp) {
+		this.daoCpDifCpmp = daoCpDifCpmp;
+	}
+
+	public String getDaoCpDifDmp() {
+		return daoCpDifDmp;
+	}
+
+	public void setDaoCpDifDmp(String daoCpDifDmp) {
+		this.daoCpDifDmp = daoCpDifDmp;
+	}
+
+	public String getDaoCpAttenteValide() {
+		return daoCpAttenteValide;
+	}
+
+	public void setDaoCpAttenteValide(String daoCpAttenteValide) {
+		this.daoCpAttenteValide = daoCpAttenteValide;
 	}
 	
 	

@@ -414,7 +414,7 @@ public class AmiController {
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDAO.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	} 
 	 
 	//Affichage des DAO vendus
@@ -423,7 +423,7 @@ public class AmiController {
 				 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
 				new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("listeTabdaoDiffCsv  size: "+listeTabdaoDiffCsv.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	} 
 	 
 	 
@@ -434,7 +434,7 @@ public class AmiController {
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("SBO","SRO")),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 //Affichage des DAO Saisies par l'Autorité Contractante, procédure simplifiéee
@@ -445,7 +445,7 @@ public class AmiController {
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDAO.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 
@@ -455,7 +455,7 @@ public class AmiController {
 				      new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 		              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDaoTrans.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 public void chargeDaoTabTrans(){
@@ -463,7 +463,7 @@ public class AmiController {
 				      new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"D1T"),
 		              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("listeTabDaoTrans size: "+listeTabDaoTrans.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 //Liste des DAO retirés (Tableau de Bord)
@@ -472,7 +472,7 @@ public class AmiController {
 				   new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"RET"),
 		              new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoRetire size: "+listeDaoRetire.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 
@@ -481,7 +481,7 @@ public class AmiController {
 			              new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
 			              new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
 				_logger.info("objetListe size: "+examenListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 	  
 	  
@@ -491,7 +491,7 @@ public class AmiController {
 			              new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"AMI"),
 			              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 				_logger.info("daoExamen size: "+daoExamen.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 	  
 	  //Affichage de zone de mention si le chargé d'Etude est un responsable de binôme
@@ -603,7 +603,7 @@ public class AmiController {
     			  				   etatRecu = true;
     			  				   
     			  				  //Actualisation du Tableau de Bord
-    			 		          tableauBordController.chargeDataDao();
+    			 		          tableauBordController.chargeDataAmi();
 		                    	  
     			 		            chargeDaoVendu();
      			  				   //Message de Confirmation
@@ -623,7 +623,7 @@ public class AmiController {
 						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 				          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataAmi();
 					
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -643,7 +643,7 @@ public class AmiController {
 				 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-				      tableauBordController.chargeDataDao();
+				      tableauBordController.chargeDataAmi();
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  
@@ -683,7 +683,7 @@ public class AmiController {
 					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 					new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("publicationListe  size: "+publicationListe.size());		
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 		 
 		 
@@ -694,7 +694,7 @@ public class AmiController {
 					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 					  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"));
 				_logger.info("validationListe  size: "+validationListe.size());					
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 		 
 		
@@ -723,7 +723,7 @@ public class AmiController {
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoVente size: "+listeDaoVente.size());
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataAmi();
 	}
 	 
 	 
@@ -734,7 +734,7 @@ public class AmiController {
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataAmi();
 	}
 	 
 	 
@@ -746,7 +746,7 @@ public class AmiController {
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 				new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("affectationListe  size: "+affectationListe.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 		 
@@ -759,7 +759,7 @@ public class AmiController {
 					 new WhereClause("DCS_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("validationListe  size: "+validationListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 		 
 		 
@@ -770,7 +770,7 @@ public class AmiController {
 					 new WhereClause("DCS_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("validationListe  size: "+validationListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 	 
 //Fin de Staistiques pour le chargé d'Etudes 
@@ -797,7 +797,7 @@ public class AmiController {
 						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoValCsv  size: "+listeTabdaoValCsv.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataAmi();		
 			}
 			 
 			 
@@ -807,7 +807,7 @@ public class AmiController {
 						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5R"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoDiffCsv  size: "+listeTabdaoDiffCsv.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataAmi();		
 			}
 			 
 	
@@ -818,7 +818,7 @@ public class AmiController {
 		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
 				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
 			_logger.info("objetListe size: "+listeLots.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 
@@ -836,7 +836,7 @@ public class AmiController {
 		  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
 				 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
 			_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
-			tableauBordController.chargeDataDao();	
+			tableauBordController.chargeDataAmi();	
 			}
 	  
 	  
@@ -999,7 +999,7 @@ public class AmiController {
 					 chargeDaoTrans();
 					 chargeDataAffecter();
 		          //Actualisation du Tableau de Bord
-		          tableauBordController.chargeDataDao();
+		          tableauBordController.chargeDataAmi();
 			
 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
 			 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1219,7 +1219,7 @@ public class AmiController {
 			       }	 
 				 //chargePiecesByDao();
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataAmi();
 				 //Message de confirmation
 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 				 userController.setRenderMsg(true);
@@ -1280,7 +1280,7 @@ public class AmiController {
 	 				// chargePiecesByDao();
 	 				
 	 				//Actualisation du Tableau de Bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataAmi();
 	 				 //Message de confirmation
 	 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 	 				 userController.setRenderMsg(true);
@@ -1320,7 +1320,7 @@ public class AmiController {
 				 iservice.addObject(detCor);
 			       }	 
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataAmi();
 				 //Message de confirmation
 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 				 userController.setRenderMsg(true);
@@ -1356,7 +1356,7 @@ public class AmiController {
 			           }
 	 				
 	 				//Actualisation du Tableau de Bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataAmi();
 	 				 //Message de confirmation
 	 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 	 				 userController.setRenderMsg(true);
@@ -1415,7 +1415,7 @@ public class AmiController {
 					chargeDaoCharegEtude();
 					renderPage("dao1","CHADAO");
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataAmi();
 					//Message de confirmation
 					userController.setTexteMsg("Validation effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -1466,7 +1466,7 @@ public class AmiController {
 					
 					chargeDataAPublier();
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataAmi();
 					//Message de confirmation
 					userController.setTexteMsg("DAO Publié!");
 					userController.setRenderMsg(true);
@@ -1506,6 +1506,7 @@ public class AmiController {
 		    	 dao.setTGestion(new TGestion(gesCode));
 		    	 dao.setTTypeDacSpecs(new TTypeDacSpecs("AMI"));
 		    	 dao.setDacBailleur(daoDetail.getDppBailleur());
+		    	 dao.setDacNbrOuv(1);
 		    	 iservice.addObject(dao);
 		    	 
 		    	 TAffichageDao affDao = new TAffichageDao();
@@ -1574,7 +1575,7 @@ public class AmiController {
 					     chargeData(); 
 					     //chargePPM();
 					     //Actualisation du tableau de Bord
-					     tableauBordController.chargeDataDao();
+					     tableauBordController.chargeDataAmi();
 					     
 					     userController.setTexteMsg("AMI N° "+dao.getDacCode()+" Initié avec succès!");
 						 userController.setRenderMsg(true);
@@ -1619,7 +1620,7 @@ public class AmiController {
     	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
     	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
     	 dao.setTGestion(new TGestion(gesCode));
-    	 dao.setTTypeDacSpecs(new TTypeDacSpecs("DAO"));
+    	 dao.setTTypeDacSpecs(new TTypeDacSpecs("AMI"));
     	 iservice.addObject(dao);
     	 
     	 TAffichageDao affDao = new TAffichageDao();
@@ -1687,7 +1688,7 @@ public class AmiController {
 			     chargeData(); 
 			     //chargePPM();
 			     //Actualisation du tableau de Bord
-			     tableauBordController.chargeDataDao();
+			     tableauBordController.chargeDataAmi();
 			     
 			     userController.setTexteMsg("DAO N° "+dao.getDacCode()+" Initié avec succès!");
 				 userController.setRenderMsg(true);
@@ -1886,7 +1887,7 @@ public class AmiController {
 			 	   	 }
 			 			chargeDaoAffectes();
 			 			//Chargement des compteurs du tableau de bord
-			 			tableauBordController.chargeDataDao();	
+			 			tableauBordController.chargeDataAmi();	
 			 			//Message de confirmation
     					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
 						userController.setRenderMsg(true);
@@ -1945,7 +1946,7 @@ public class AmiController {
 					chargeDataValCsv();
 					renderPage("dao1","VALDAO");
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataAmi();
 					//Message de confirmation
 					userController.setTexteMsg("Validation effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -2043,7 +2044,7 @@ public class AmiController {
 	 			        
 	 			        chargeDataDiffCsv();
 	 			        //Chargement des compteurs DAO du tableau de bord
-	 			        tableauBordController.chargeDataDao();	
+	 			        tableauBordController.chargeDataAmi();	
 	 			        //Message de confirmation
 				        userController.setTexteMsg("RéAffectation(s) effectuée(s) avec succès!");
 				        userController.setRenderMsg(true);
@@ -2348,7 +2349,7 @@ public class AmiController {
     					
     					chargeDaoTabTrans();
     					//Actualisation du tableau de bord
-    					tableauBordController.chargeDataDao();
+    					tableauBordController.chargeDataAmi();
     					//Message de confirmation
     					userController.setTexteMsg("Transmission effectuée avec succès!");
 						userController.setRenderMsg(true);
@@ -2400,7 +2401,7 @@ public class AmiController {
 					
 					chargeDaoTrans();
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataAmi();
 					//Message de confirmation
 					userController.setTexteMsg("Transmission effectuée avec succès!");
 					userController.setRenderMsg(true);
