@@ -11,8 +11,17 @@
 <h:form id="gnl">	
  <section class="content-header">
       <h3>
-        #{controleController.libelle} 
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
+        #{controleController.libelle}
+        </h:panelGroup> 
         
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
+        #{controleController.libelle1}
+        </h:panelGroup>
+        
+          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
+        #{controleController.libelle}
+        </h:panelGroup>
         <small>
         <!-- #{controleController.libelle1} -->
         
