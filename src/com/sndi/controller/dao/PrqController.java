@@ -405,17 +405,17 @@ public class PrqController {
 					 new WhereClause("SOU_NCC",WhereClause.Comparateur.LIKE,"%"+filtreNcc+"%"));	
 		 }
 	 
-	 //Affichage des DAO Saisies par l'Autorité Contractante
-	 public void chargeData(){
-		 getListeDAO().clear();
-		 listeDAO.clear();
-		 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
-				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-			_logger.info("objetListe size: "+listeDAO.size());	
-			tableauBordController.chargeDataDao();		
-	} 
-	 
+		 //Affichage des DAO Saisies par l'Autorité Contractante
+		 public void chargeData(){
+			 getListeDAO().clear();
+			 listeDAO.clear();
+			 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+					 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
+					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
+			          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				_logger.info("objetListe size: "+listeDAO.size());	
+				tableauBordController.chargeDataAmi();		
+		} 
 	//Affichage des DAO vendus
 	 public void chargeDaoVendu(){
 		 listeDaoVendu = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
@@ -441,18 +441,20 @@ public class PrqController {
 	    daoPs.clear();
 	    daoPs =(List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				 new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ,"DA1"),
+				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDAO.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 
 	 public void chargeDaoTrans(){
 		 listeDaoTrans =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				      "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1T","D2R")),
+				      new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 		              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDaoTrans.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataAmi();		
 	}
 	 
 	 public void chargeDaoTabTrans(){
@@ -485,17 +487,19 @@ public class PrqController {
 	  public void chargeDaoChargeEtude(){
 		  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
 			              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
+			              new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"PRQ"),
 			              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 				_logger.info("daoExamen size: "+daoExamen.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 	  
 	  //Affichage de zone de mention si le chargé d'Etude est un responsable de binôme
 	  public void chargeRespoExiste(){
 		  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
-			              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
-			              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
-			              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+	              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
+	              new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"PRQ"),
+	              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
+	              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 		        if (!daoExamen.isEmpty()) {
 				      etatSanction = true;
 				      etatLoveObs = true;
@@ -670,14 +674,15 @@ public class PrqController {
               }
 	  
 
-	//Affichage des DAO en attente de publication	 
+      //Affichage des DAO en attente de publication	 
 		 public void chargeDataAPublier(){
 			 publicationListe.clear();			 
 			 publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
 					 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
+					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 					new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("publicationListe  size: "+publicationListe.size());		
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
 		 
 		 
@@ -685,11 +690,11 @@ public class PrqController {
 		 public void chargeDataAValider(){
 			 getValidationListe().clear();
 			 validationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAO_ID")), 
+					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 					  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"));
 				_logger.info("validationListe  size: "+validationListe.size());					
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataAmi();		
 		}
-		 
 		
 	  
 		 //Afficher les détails de la correction
@@ -713,31 +718,33 @@ public class PrqController {
 		 //getListeDaoVente().clear();
 		listeDaoVente = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
+				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoVente size: "+listeDaoVente.size());
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataAmi();
 	}
 	 
+	//Affichage des DAO à retirer
+		 public void chargeDataARetirer(){ 
+			 listeDaoARetirer = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+					 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
+					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
+					new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
+				tableauBordController.chargeDataAmi();
+		}
 	 
-	 //Affichage des DAO à retirer
-	 public void chargeDataARetirer(){ 
-		 listeDaoARetirer = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
-				 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
-				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-			_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
-			tableauBordController.chargeDataDao();
-	}
 	 
-	 
-	 //Affichage des DAO en attente d'affectation
-	 public void chargeDataAffecter(){
-		 getAffectationListe().clear();
-		 affectationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
-				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
-				new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
-			_logger.info("affectationListe  size: "+affectationListe.size());	
-			tableauBordController.chargeDataDao();		
-	}
+		 //Affichage des DAO en attente d'affectation
+		 public void chargeDataAffecter(){
+			 getAffectationListe().clear();
+			 affectationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
+					 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
+					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
+					new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+				_logger.info("affectationListe  size: "+affectationListe.size());	
+				tableauBordController.chargeDataAmi();		
+		}
 	 
 	 		 
 //Statistiques pour le chargé d'Etudes
@@ -857,15 +864,16 @@ public class PrqController {
 		}
 	  
 	 
-   //Chargement des PPM n'ayant pas fait l'objet d'un DAO
-	 public void chargePPM() {
-		 ppmDao.clear();
-		 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
-				    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-				    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
-				    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-					new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
-	 }
+	//Chargement des PPM n'ayant pas fait l'objet d'un DAO
+		 public void chargePPM() {
+			 ppmDao.clear();
+			 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+					    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"PRQ"),
+					    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+						new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
+		 }
 	 
 	//Chargement des PSPM n'ayant pas fait l'objet d'un DAO
 	 public void chargePSPM() {
