@@ -1830,7 +1830,7 @@ public class ControleController {
 			    		if(action.equalsIgnoreCase("SAIPRQ")) {
 			    			type = "PRQ";
 			    			libelle1="Index";
-			    			libelleDao3="SAISIE DES PREQUALIFICATION";
+			    			libelleDao3="SAISIE DES PREQUALIFICATIONS";
 			    			 btn_new =true;
 			    			 btn_affec = false;
 							 panel1 =true;
