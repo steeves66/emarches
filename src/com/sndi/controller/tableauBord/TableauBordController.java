@@ -336,6 +336,52 @@ public class TableauBordController {
 			   //Fin AGPM
 		}
 		
+		public void chargeDataPgpm() {
+			//Début PGPM
+			 pgpmTotal = ""+getPgpmDossierTotal();
+			 pgpmAcSaisie = ""+getAcSaisieDossier("S1S");
+			 pgpmAcAttenteTransfert = ""+getPgpmAttenteValide("S1S","S2D","SDR");
+			 pgpmAcDiffDmp =""+getNpDiffDossierDmpAc("S3D");
+			 pgpmAcDiffDmpCpmp =""+getNpDiffDossierCpmpDmpAc("S2D","SDR");
+			 pgpmAcTransmis = ""+getAcTransmisDossier("S1T");   
+			 pgpmCpRetAc = ""+getNpAcCpDiffDossier("S2D");
+			 pgpmCpSaisie = ""+getNpSaisieDossier("S1S");
+			 pgpmCpTransmis = ""+getNpTransmisDossier("S1T");
+			 pgpmCpDifCpmp = ""+getNpDiffDossier("S2D");
+			 pgpmCpValide =""+getNpValideCmp("S2V");
+			 pgpmCpDifDmp =""+getNpDiffDmpCpmp("S3D");
+			 pgpmAttenteValide = ""+getNpAttenteValide("S1T","S3D"); 
+			 pgpmDmAttenteValide = ""+getNpAttValideDmp("S2V","SPG");
+			 pgpmDmValide = ""+getNpValideDmp("S3V");
+			 pgpmDmSaisie = ""+getNpSaisieDossier("S1S");
+			 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR");
+			 pgpmDmTransmis = ""+getNpDmpTransmisDossier("S1T");	
+			
+		}
+		
+		public void chargeDataPgspm() {
+			//Début PGSPM
+			 pgspmTotal = ""+getPgspmDossierTotal();   
+			 pgspmAcDifDmp =""+getNpsAcDiffCpmpDossier("S3D");
+			 pgspmAcDiffCpmp = ""+getNpsAcDiffDmpDossier("S2D");
+			 pgspmAcSaisie = ""+getAcNpsSaisieDossier("S1S");
+			 pgspmAcAttenteValide = ""+getAcNpsAttenteValide("S1S","S2D","PGD");
+			 pgspmAcTransmis = ""+getAcNpsTransmisDossier("S1T","PGS");
+			 pgspmCpSaisie = ""+getNpsSaisieDossier("S1S");
+			 pgspmCpTransmis = ""+getNpsTransmisDossier("S1T");
+			 pgspmCpDifCpmp = ""+getNpsDiffDossier("S2D");
+			 pgspmCpValide =""+getNpsValideCmp("S2V");
+			 pgspmCpDifDmp =""+getNpsDiffDmpCpmp("S3D");
+			 pgspmCpAttenteValide = ""+getNpsAttenteValide("S1T","S3D");
+			 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
+			 pgspmDmValide = ""+getNpsValideDmp("S3V");
+			 pgspmDmSaisie = ""+getNpsSaisieDossier("S1S");
+			 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
+			 pgspmDmTransmis = ""+getNpDmpTransmisDossier("S1T");
+			 //Fin PGSPM
+			
+		}
+		
 		public void chargeDataPgpmPgspm() {
 			//Début PGPM
 			 pgpmTotal = ""+getPgpmDossierTotal();
@@ -376,6 +422,51 @@ public class TableauBordController {
 			 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
 			 pgspmDmTransmis = ""+getNpDmpTransmisDossier("S1T");
 			 //Fin PGSPM
+		}
+		
+		public void chargeDataPpm() {
+			
+			//Début PPM
+			 ppmTotal = ""+getPpmDossierTotal();
+			 ppmAcSaisie = ""+getAcPpmSaisieDossier("S1S");
+			 ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR");
+			 ppmAcDiffCpmp = ""+getPpmDiffCpmpACDossier("S2D");
+			 ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D");
+			 ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT");
+			 ppmCpSaisie = ""+getPpmSaisieDossier("S1S");
+			 ppmCpTransmis = ""+getPpmTransmisDossier("S1T");
+			 ppmCpDifCpmp = ""+getPpmDiffDossier("S2D");
+			 ppmCpValide =""+getPpmValideCmp("S2V");
+			 ppmCpDifDmp =""+getPpmDiffDmp("S3D","SPR");
+			 ppmCpAttenteValide = ""+getPpmAttenteValide("S1T","S3D");
+			 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT");
+			 ppmDmValide = ""+getPpmValideDmp("S3V");
+			 ppmDmSaisie = ""+getPpmSaisieDossier("S1S");
+			 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
+			 ppmDmTransmis = ""+getPpmTransmisDmpDossier("S1T");
+			 //Fin PPM
+			
+		}
+		
+		public void chargeDataPspm() {
+			 pspmTotal = ""+getPspmDossierTotal();
+			 pspmAcSaisie = ""+getAcPspmSaisieDossier("S1S");
+			 pspmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D");
+			 pspmAcDiffCpmp = ""+getPspmDiffCpmpACDossier("S2D");
+			 pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D");
+			 pspmAcTransmis = ""+getAcPspmTransmisDossier("S1T");
+			 pspmCpSaisie = ""+getPspmSaisieDossier("S1S");
+			 pspmCpTransmis = ""+getPspmTransmisDossier("S1T");
+			 pspmCpDifCpmp = ""+getPspmDiffDossier("S2D");
+			 pspmCpValide =""+getPspmValideCmp("S2V");
+			 pspmCpDifDmp =""+getPspmDiffDmp("S3D");
+			 pspmCpAttenteValide = ""+getPspmAttenteValide("S1T","S3D");
+			 pspmDmAttenteValide = ""+getPspmAttValideDmp("S2V");
+			 pspmDmValide = ""+getPspmValideDmp("S3V");
+			 pspmDmSaisie = ""+getPspmSaisieDossier("S1S");
+			 pspmDmDiff = ""+getPspmDiffDmp("S3D");
+			 pspmDmTransmis = ""+getPspmTransmisDmpDossier("S1T");	
+			
 		}
 		
 		public void chargeDataPpmPspm(){

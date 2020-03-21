@@ -48,6 +48,7 @@ import com.sndi.model.VDetPlaning;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VModePassation;
+import com.sndi.model.VModeleAmi;
 import com.sndi.model.VModeleDao;
 import com.sndi.model.VPgpmFonction;
 import com.sndi.model.VPpmStatut;
@@ -141,6 +142,7 @@ public class PpmController {
 		 private List<TStructure> listeStructure = new ArrayList<TStructure>();
 		 private List<VModePassation> listeMode = new ArrayList<VModePassation>();
 	     private List<VModeleDao> listeDao = new ArrayList<VModeleDao>();
+	     private List<VModeleAmi> listeAmi = new ArrayList<VModeleAmi>();
 	     
 	     
 	     private List<TStructure> listeStructures = new ArrayList<TStructure>();
@@ -248,6 +250,8 @@ public class PpmController {
 		 private boolean boutonEditPspm =false;
 		 private boolean etatPsl =false;
 		 private boolean etatPso =false;
+		 private boolean modeleAmi =false;
+		 private boolean modeleDao =true;
 	 
 	 
 	 
@@ -394,7 +398,7 @@ public class PpmController {
 					new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listePpm size: "+listePpm.size());
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataPpmPspm();
+				tableauBordController.chargeDataPpm();
 				//Affichage du nombre de ppm saisis
 				nbrePpm =""+getNbrePpmTotal();
 		  }
@@ -410,7 +414,7 @@ public class PpmController {
 					new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listePpm size: "+listePpm.size());
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataPpmPspm();
+				tableauBordController.chargeDataPspm();
 				//Affichage du nombre des pspm saisis
 				nbrePspm =""+getNbrePspmTotal();
 		  }
@@ -456,7 +460,7 @@ public class PpmController {
 								new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 							_logger.info("affichageListe size: "+validationListe.size());	
 							//Actualisation du Tableau de Bord
-							tableauBordController.chargeDataPpmPspm();
+							tableauBordController.chargeDataPpm();
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 getValidationListe().clear();
@@ -466,7 +470,7 @@ public class PpmController {
 								//new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 								_logger.info("affichageListe size: "+validationListe.size());
 								//Actualisation du Tableau de Bord
-								tableauBordController.chargeDataPpmPspm();
+								tableauBordController.chargeDataPpm();
 					 }
 			     } 
 			   }
@@ -486,7 +490,7 @@ public class PpmController {
 								new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 							_logger.info("affichageListe size: "+validationListe.size());	
 							//Actualisation du Tableau de Bord
-							tableauBordController.chargeDataPpmPspm();
+							tableauBordController.chargeDataPspm();
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 getValidationListe().clear();
@@ -496,7 +500,7 @@ public class PpmController {
 								//new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 								_logger.info("affichageListe size: "+validationListe.size());
 								//Actualisation du Tableau de Bord
-								tableauBordController.chargeDataPpmPspm();
+								tableauBordController.chargeDataPspm();
 					 }
 			     } 
 			   }
@@ -514,7 +518,7 @@ public class PpmController {
 							new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
-						tableauBordController.chargeDataPpmPspm();
+						tableauBordController.chargeDataPpm();
 						//Affichage du nombre de ppm saisis
 						nbrePpm =""+getNbrePpmTotal();
 						
@@ -528,7 +532,7 @@ public class PpmController {
 										    new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 										_logger.info("affichageListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
-										tableauBordController.chargeDataPpmPspm();
+										tableauBordController.chargeDataPpm();
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
@@ -538,7 +542,7 @@ public class PpmController {
 									 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
-									tableauBordController.chargeDataPpmPspm();
+									tableauBordController.chargeDataPpm();
 		         	  }
 			     }
 			
@@ -551,7 +555,7 @@ public class PpmController {
 							new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 							new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 							new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-						tableauBordController.chargeDataPpmPspm();
+						tableauBordController.chargeDataPspm();
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
@@ -561,7 +565,7 @@ public class PpmController {
 											new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 											 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));	
 										//Actualisation du Tableau de Bord
-										tableauBordController.chargeDataPpmPspm();
+										tableauBordController.chargeDataPspm();
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
@@ -570,7 +574,7 @@ public class PpmController {
 									new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
 									 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 									//Actualisation du Tableau de Bord
-									tableauBordController.chargeDataPpmPspm();
+									tableauBordController.chargeDataPspm();
 					    	  }
 			           }
 			
@@ -585,7 +589,7 @@ public class PpmController {
 							new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
-						tableauBordController.chargeDataPpmPspm();
+						tableauBordController.chargeDataPpm();
 						//Affichage du nombre de ppm saisis
 						nbrePpm =""+getNbrePpmTotal();
 						
@@ -598,7 +602,7 @@ public class PpmController {
 											new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 										_logger.info("affichageListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
-										tableauBordController.chargeDataPpmPspm();
+										tableauBordController.chargeDataPpm();
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
@@ -607,7 +611,7 @@ public class PpmController {
 									new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
-									tableauBordController.chargeDataPpmPspm();
+									tableauBordController.chargeDataPpm();
 		         	  }
 			     }
 			
@@ -622,7 +626,7 @@ public class PpmController {
 							new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
-						tableauBordController.chargeDataPpmPspm();
+						tableauBordController.chargeDataPspm();
 						//Affichage du nombre de ppm saisis
 						nbrePpm =""+getNbrePpmTotal();
 						
@@ -635,7 +639,7 @@ public class PpmController {
 											new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 										_logger.info("affichageListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
-										tableauBordController.chargeDataPpmPspm();
+										tableauBordController.chargeDataPspm();
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
@@ -644,7 +648,7 @@ public class PpmController {
 									new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
-									tableauBordController.chargeDataPpmPspm();
+									tableauBordController.chargeDataPspm();
 		         	  }
 			     }
 		 
@@ -1014,10 +1018,9 @@ public class PpmController {
 		
 		 //Méthode Love
 		 public void onSelectMarche() {
-			 //detailPass = new TDetailPlanPassation();
 			 detailPass.setTTypeMarche(new TTypeMarche(marche.getTymCode()));
 
-			 //reucpMarche = new TTypeMarche();
+			
 			 reucpMarche = new VTypeMarcheFils();
 			 reucpMarche.setTymCode(marche.getTymCode());
 			 reucpMarche.setTymLibelleCourt(marche.getTymLibelleCourt());
@@ -1025,7 +1028,6 @@ public class PpmController {
 		 
 		 
 		 public void onSelectPgpm() {
-			 //detailPass = new TDetailPlanPassation();
 			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId())); 
 
 			 recupPgpm = new VPgpmFonction();
@@ -1049,29 +1051,55 @@ public class PpmController {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
-             //Affichage des modèles type de DAO
-			 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-					 new WhereClause("GPG_MOP_CODE",WhereClause.Comparateur.EQ,""+pgpm.getGpgMopCode()),
-					 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
+			 if(pgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
+                //Activation de la liste des Ami et désactivation de l'autre
+				 modeleAmi = true;
+				 modeleDao = false;
+	             //Affichage des modèles type AMI
+				   listeAmi = ((List<VModeleAmi>)iservice.getObjectsByColumn("VModeleAmi",new ArrayList<String>(Arrays.asList("MDT_CODE")),
+						 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId())));
+				   //Affichage du coût total de l'opération
+				    coutOperation();
+					//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
+				  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
+					  
+					   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
+							 chargeImputationPsl();
+						   }else
+						      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
+								  chargeImputationPso();
+							   }
+				                 }else
+					                 if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
+						                    chargeImputation();
+					                  }
+			             }else {
+			        	//Activation de la liste des DAO type et désactivation de la liste des DAO 
+						 modeleAmi = false;
+						 modeleDao = true;
+			    	      //Affichage des modèles type de DAO
+						 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
+								 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
+						//Affichage du coût total de l'opération
+						    coutOperation();
+							//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
+						  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
+							  
+							   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
+									 chargeImputationPsl();
+								   }else
+								      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
+										  chargeImputationPso();
+									   }
+						                 }else
+							                 if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
+								                    chargeImputation();
+							                  }
+			                              } 
+		                            }
 		 
-			 //Affichage du coût total de l'opération
-		    coutOperation();
-			 
-			//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
-		  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
-			  
-			   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
-					 chargeImputationPsl();
-				   }else
-				      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
-						  chargeImputationPso();
-					   }
-		     }else
-			    if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
-				  chargeImputation();
-			  }
-		  	 
-		}
+		 
+		 
 		 
 		 //Methode OnSelect pour PGSPM
 		 public void onSelectPgspm() {
@@ -1100,19 +1128,26 @@ public class PpmController {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
-			
-				 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-						 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
-			 
-			 
-			 coutOperation();
-				} 
+			             
+			             if(pgspm.getGpgMopCode().equalsIgnoreCase("AMI")) {
+			            	    modeleDao = false;
+			            	    modeleAmi = false;
+			                       }else {
+			            	    //Désactivation des listes 
+			            	    modeleDao = true;
+			            	    modeleAmi = false;
+			            	    //Affichage du modèle DAO type
+			   				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
+			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
+			   			       //Affichage du montant total
+			   			       coutOperation();       
+			                 }
+				     } 
 		 
 		 
 		  
 		 
 		 public void onSelectPpm() {
-			 //charge = new TCharge();
 			 charge.setTDetailPlanPassation(new TDetailPlanPassation(ppm.getDppId()));
 			 
               recuPpm = new TDetailPlanPassation();
@@ -1168,27 +1203,21 @@ public class PpmController {
 			 recupLigne.setLbgSigfip(ligne.getLbgSigfip());
 			 recupLigne.setLbgTraitmt(ligne.getLbgTraitmt());
 			 
-			 
 			 //montantOperation();
 			 coutOperation(); 
-			  //chargeMarches();
 				}
 		 
 		 public void onSelectModePassation() {
-			 //detailPass = new TDetailPlanPassation();
 			 detailPass.setTModePassation(new TModePassation(modePassation.getMopCode()));
 			
 			 recupModePassation = new TModePassation();
 			 recupModePassation.setMopLibelleLong(modePassation.getMopLibelleLong());
 			 recupModePassation.setMopCode(modePassation.getMopCode());
-			 //chargeModePassation();
 				}
 		 
 		//Fin Méthode Love 
 		 
-		 
-		 
-		 
+	 
 		//Méthode de création d'un plan de Passtion par l'Autorité Contractante
 	  	 @Transactional
 		 public void creerPlanPassation() throws IOException{
@@ -1222,214 +1251,83 @@ public class PpmController {
 	  	 @Transactional
 	  	 public void creerDetailPassation()throws IOException{
 	  		 
-	  		   if(detailPass.getDppStructureConduc().equalsIgnoreCase("") || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || tydCode.equalsIgnoreCase("")) {
-	  			   //Message d'erreur
-	  			   FacesContext.getCurrentInstance().addMessage(null,
-	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
-	  		    }else {
-	  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
-	 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
-	 	 			       new WhereClause("PLP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
-	 					   new WhereClause("PLP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-	 	 	  if (!listPlan.isEmpty()) {
-	 	 		  planPass= listPlan.get(0);
-	 	 		  
-	 	 		 detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
-	 	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
-	 	  		 detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
-	 	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
-	 	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
-	 	  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-	 	  		 detailPass.setTPlanPassation(planPass);
-	 	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-	 	  		 detailPass.setDppTypePlan("PN");
-	 	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	 	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	 	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
-	 	  		 detailPass.setTStatut(new TStatut("S1S"));
-	 	  		 detailPass.setDppStatutRetour("0");
-	 	  		 detailPass.setDppStatutDao("N");
-	 	  		 iservice.addObject(detailPass);
-	 	
-	 	  		
-	 	  		TAffichagePpm affichagePpm = new TAffichagePpm();
-	 	  		affichagePpm.setAffDppId(detailPass.getDppId());
-	 	  		affichagePpm.setTStructure(new TStructure(detailPass.getTStructure().getStrCode()));
-	 	  		affichagePpm.setTTypeMarche(new TTypeMarche(detailPass.getTTypeMarche().getTymCode()));
-	 	  		affichagePpm.setTModePassation(new TModePassation(detailPass.getTModePassation().getMopCode()));
-	 	  		affichagePpm.setTLBudgets(new TLBudgets(detailPass.getTLBudgets().getLbgCode()));
-	 	  		affichagePpm.setTDetailPlanGeneral(new TDetailPlanGeneral(detailPass.getTDetailPlanGeneral().getGpgId()));
-	 	  		affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
-	 	  		affichagePpm.setTPlanPassation(planPass);
-	 	  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
-	 	  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
-	 	  		affichagePpm.setAffDppTypePlan("PN");
-	 	  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	 	  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	 	  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
-	 	  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
-	 	  		affichagePpm.setAffDppDate(detailPass.getDppDate());
-	 	  		affichagePpm.setAffDppNumeroOrdre(detailPass.getDppNumeroOrdre());
-	 	  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
-	 	  		affichagePpm.setAffDppCode(detailPass.getDppCode());
-	 	  		affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
-	 	  		affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
-	 	  		affichagePpm.setAffDppDateAvisAoPublicat(detailPass.getDppDateAvisAoPublication());
-	 	  		affichagePpm.setAffDppDateDaoApprobBail(detailPass.getDppDateDaoApprobBail());
-	 	  		affichagePpm.setAffDppDateDaoApprobDmp(detailPass.getDppDateDaoApprobDmp());
-	 	  		affichagePpm.setAffDppDateDaoTrans(detailPass.getDppDateDaoTrans());
-	 	  		affichagePpm.setAffDppDateElabRapport(detailPass.getDppDateElabRapport());
-	 	  		affichagePpm.setAffDppDateExecDebut(detailPass.getDppDateExecDebut());
-	 	  		affichagePpm.setAffDppDateExecFin(detailPass.getDppDateExecFin());
-	 	  		affichagePpm.setAffDppDateJugementOffre(detailPass.getDppDateJugementOffre());
-	 	  		affichagePpm.setAffDppDateMarcheApprob(detailPass.getDppDateMarcheApprob());
-	 	  		affichagePpm.setAffDppDateNegociation(detailPass.getDppDateNegociation());
-	 	  		affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
-	 	  		affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
-	 	  		affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
-	 	  		affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
-	 	  		affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
-	 	  		affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
-	 	  		affichagePpm.setAffDppStrBenefi(detailPass.getDppStructureBenefi());
-	 	  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
-	 	  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
-	 	  		iservice.addObject(affichagePpm);
-	 	  		
-	 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
-				String rechercheAll = search.replace("null","");
-				
-				List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-		      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
-	      				TAffichagePpm affgp = new TAffichagePpm();
-	      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-	      				   affgp.setAffDppRecherche(rechercheAll);
-		      			  iservice.updateObject(affgp);
-	 	  		
-	 	  		
-	 	  		if(fipPgpm.getFipId() > 0 ) {
-	 	  		//Insertion dans T_Financement_PPM
-	 	  		TFinancementPpm newFinancement = new TFinancementPpm();
-	 	  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
-	 	  		newFinancement.setFppTypeFinance(fipPgpm.getFipTypeFinance());
-	 	  		newFinancement.setTDetailPlanPassation(detailPass);
-	 	  		newFinancement.setTSourceFinancement(new TSourceFinancement(fipPgpm.getTSourceFinancement().getSouCode()));
-	 	  		newFinancement.setTDevise(new TDevise(fipPgpm.getTDevise().getDevCode()));
-	 	  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
-	 	  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
-	 	  		iservice.addObject(newFinancement);
-	 	  		
-	 	  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
-	 			 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-	 						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-	 			 TDetailPlanPassation pass = new TDetailPlanPassation();
-	 				 if(!PL.isEmpty())  
-	 					 pass =PL.get(0); 
-	 				     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
-	 				     iservice.updateObject(pass);
-	 				     
-	 			List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-	 		   						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-	 		   				TAffichagePpm aff = new TAffichagePpm();
-	 							if(!AF.isEmpty()) aff =AF.get(0);
-	 							aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
-	 							iservice.updateObject(aff);
-	 	  		}
-	 	  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
-	 			List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-	 		    TStatut statuts = new TStatut();
-	 		      if(!LS.isEmpty()) statuts = LS.get(0);
-	 		  //Historisation des Plans Généraux
-	 		     THistoPlanPassation histoPass = new THistoPlanPassation();
-	 		     histoPass.setHppDate(Calendar.getInstance().getTime());
-	 		     histoPass.setHppMotif("PPM enregistré par le AC");
-	 		     histoPass.setTStatut(statuts);
-	 		     histoPass.setTDetailPlanPassation(detailPass);
-	 		     histoPass.setTFonction(userController.getSlctd().getTFonction());
-	 		     iservice.addObject(histoPass);
-	 			
-	 			chargeData();
-	 			boutonEdit =true; 
-	 			boutonEditPspm =false;
-	 			controleController.btn_creerDetailPpm =false;
-	 			//controleController.btn_creerDetailPspmDmp=false;
-	 			//controleController.btn_creerDetailPpm =false;
-	 			//controleController.btn_maj_datePpm = true;
-	 			
-	 			//Actualisation du Tableau de Bord
-	 			tableauBordController.chargeDataPpmPspm();
-	 			
-	 			userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
-	 			userController.setRenderMsg(true);
-	 			userController.setSevrityMsg("success");
-	 	 		  
-	 	 	  }else {
-	 	 		     planPass.setTGestion(new TGestion(gesCode));
-	 	  		     planPass.setTFonction(userController.getSlctd().getTFonction());
-	 	  		     planPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	 	  		     iservice.addObject(planPass);
-	 	  		     
-	 	  		     detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
-	 	  		     detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
-	 		  		 detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
-	 		  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
-	 		  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
-	 		  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-	 		  		 detailPass.setTPlanPassation(planPass);
-	 		  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-	 		  		 detailPass.setDppTypePlan("PN");
-	 		  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	 		  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	 		  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
-	 		  		 detailPass.setTStatut(new TStatut("S1S"));
-	 		  		 detailPass.setDppStatutRetour("0");
-	 		  		 detailPass.setDppStatutDao("N");
-	 		  		 iservice.addObject(detailPass);
-	 		  		 
-	 		  		 
-	 		  		TAffichagePpm affichagePpm = new TAffichagePpm();
-	 		  		affichagePpm.setAffDppId(detailPass.getDppId());
-	 		  		affichagePpm.setTTypeMarche(new TTypeMarche(detailPass.getTTypeMarche().getTymCode()));
-	 		  		affichagePpm.setTModePassation(new TModePassation(detailPass.getTModePassation().getMopCode()));
-	 		  		affichagePpm.setTLBudgets(new TLBudgets(detailPass.getTLBudgets().getLbgCode()));
-	 		  		affichagePpm.setTDetailPlanGeneral(new TDetailPlanGeneral(detailPass.getTDetailPlanGeneral().getGpgId()));
-	 		  		affichagePpm.setTStructure(new TStructure(detailPass.getTStructure().getStrCode()));
-	 		  		affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
-	 		  		affichagePpm.setTPlanPassation(planPass);
-	 		  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
-	 		  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
-	 		  		affichagePpm.setAffDppTypePlan("PN");
-	 		  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	 		  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	 		  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
-	 		  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
-	 		  		affichagePpm.setAffDppDate(detailPass.getDppDate());
-	 		  		affichagePpm.setAffDppNumeroOrdre(detailPass.getDppNumeroOrdre());
-	 		  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
-	 		  		affichagePpm.setAffDppCode(detailPass.getDppCode());
-	 		  		affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
-	 		  		affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
-	 		  		affichagePpm.setAffDppDateAvisAoPublicat(detailPass.getDppDateAvisAoPublication());
-	 		  		affichagePpm.setAffDppDateDaoApprobBail(detailPass.getDppDateDaoApprobBail());
-	 		  		affichagePpm.setAffDppDateDaoApprobDmp(detailPass.getDppDateDaoApprobDmp());
-	 		  		affichagePpm.setAffDppDateDaoTrans(detailPass.getDppDateDaoTrans());
-	 		  		affichagePpm.setAffDppDateElabRapport(detailPass.getDppDateElabRapport());
-	 		  		affichagePpm.setAffDppDateExecDebut(detailPass.getDppDateExecDebut());
-	 		  		affichagePpm.setAffDppDateExecFin(detailPass.getDppDateExecFin());
-	 		  		affichagePpm.setAffDppDateJugementOffre(detailPass.getDppDateJugementOffre());
-	 		  		affichagePpm.setAffDppDateMarcheApprob(detailPass.getDppDateMarcheApprob());
-	 		  		affichagePpm.setAffDppDateNegociation(detailPass.getDppDateNegociation());
-	 		  		affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
-	 		  		affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
-	 		  		affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
-	 		  		affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
-	 		  		affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
-	 		  		affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
-	 		  		affichagePpm.setAffDppStrBenefi(detailPass.getDppStructureBenefi());
-	 		  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
-	 		  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
-	 		  		iservice.addObject(affichagePpm);
-	 		  		
-	 		  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
+	  		if(fipPgpm.getFipId() > 0 ) {
+	  			
+	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("") || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || tydCode.equalsIgnoreCase("") || detailPass.getDppBailleur().equalsIgnoreCase("")
+	  					 || detailPass.getDppDateAvisAoPublication().equals(null)) {
+		  			   //Message d'erreur
+		  			   FacesContext.getCurrentInstance().addMessage(null,
+		  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
+		  		    }else {
+		  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
+		 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+		 	 			       new WhereClause("PLP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
+		 					   new WhereClause("PLP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		 	 	  if (!listPlan.isEmpty()) {
+		 	 		  planPass= listPlan.get(0);
+		 	 		  
+		 	 		 detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
+		 	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
+		 	  		 detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
+		 	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
+		 	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+		 	  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+		 	  		 detailPass.setTPlanPassation(planPass);
+		 	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+		 	  		 detailPass.setDppTypePlan("PN");
+		 	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+		 	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+		 	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+		 	  		 detailPass.setTStatut(new TStatut("S1S"));
+		 	  		 detailPass.setDppStatutRetour("0");
+		 	  		 detailPass.setDppStatutDao("N");
+		 	  		 iservice.addObject(detailPass);
+		 	
+		 	  		
+		 	  		TAffichagePpm affichagePpm = new TAffichagePpm();
+		 	  		affichagePpm.setAffDppId(detailPass.getDppId());
+		 	  		affichagePpm.setTStructure(new TStructure(detailPass.getTStructure().getStrCode()));
+		 	  		affichagePpm.setTTypeMarche(new TTypeMarche(detailPass.getTTypeMarche().getTymCode()));
+		 	  		affichagePpm.setTModePassation(new TModePassation(detailPass.getTModePassation().getMopCode()));
+		 	  		affichagePpm.setTLBudgets(new TLBudgets(detailPass.getTLBudgets().getLbgCode()));
+		 	  		affichagePpm.setTDetailPlanGeneral(new TDetailPlanGeneral(detailPass.getTDetailPlanGeneral().getGpgId()));
+		 	  		affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
+		 	  		affichagePpm.setTPlanPassation(planPass);
+		 	  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
+		 	  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
+		 	  		affichagePpm.setAffDppTypePlan("PN");
+		 	  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+		 	  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+		 	  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
+		 	  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
+		 	  		affichagePpm.setAffDppDate(detailPass.getDppDate());
+		 	  		affichagePpm.setAffDppNumeroOrdre(detailPass.getDppNumeroOrdre());
+		 	  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
+		 	  		affichagePpm.setAffDppCode(detailPass.getDppCode());
+		 	  		affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
+		 	  		affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
+		 	  		affichagePpm.setAffDppDateAvisAoPublicat(detailPass.getDppDateAvisAoPublication());
+		 	  		affichagePpm.setAffDppDateDaoApprobBail(detailPass.getDppDateDaoApprobBail());
+		 	  		affichagePpm.setAffDppDateDaoApprobDmp(detailPass.getDppDateDaoApprobDmp());
+		 	  		affichagePpm.setAffDppDateDaoTrans(detailPass.getDppDateDaoTrans());
+		 	  		affichagePpm.setAffDppDateElabRapport(detailPass.getDppDateElabRapport());
+		 	  		affichagePpm.setAffDppDateExecDebut(detailPass.getDppDateExecDebut());
+		 	  		affichagePpm.setAffDppDateExecFin(detailPass.getDppDateExecFin());
+		 	  		affichagePpm.setAffDppDateJugementOffre(detailPass.getDppDateJugementOffre());
+		 	  		affichagePpm.setAffDppDateMarcheApprob(detailPass.getDppDateMarcheApprob());
+		 	  		affichagePpm.setAffDppDateNegociation(detailPass.getDppDateNegociation());
+		 	  		affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
+		 	  		affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
+		 	  		affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
+		 	  		affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
+		 	  		affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
+		 	  		affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
+		 	  		affichagePpm.setAffDppStrBenefi(detailPass.getDppStructureBenefi());
+		 	  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
+		 	  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
+		 	  		iservice.addObject(affichagePpm);
+		 	  		
+		 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
 					String rechercheAll = search.replace("null","");
 					
 					List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
@@ -1438,66 +1336,208 @@ public class PpmController {
 		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
 		      				   affgp.setAffDppRecherche(rechercheAll);
 			      			  iservice.updateObject(affgp);
-	 		  		
-	 		  		
-	 		  		if(fipPgpm.getFipId() > 0 ) {
-	 		  		//Insertion dans T_Financement_PPM
-	 		  		TFinancementPpm newFinancement = new TFinancementPpm();
-	 		  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
-	 		  		newFinancement.setTDetailPlanPassation(detailPass);
-	 		  		newFinancement.setTSourceFinancement(new TSourceFinancement(fipPgpm.getTSourceFinancement().getSouCode()));
-	 		  		newFinancement.setTDevise(new TDevise(fipPgpm.getTDevise().getDevCode()));
-	 		  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
-	 		  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
-	 		  		iservice.addObject(newFinancement);
-	 		  		
-	 		  		
-	 		  		
-	 		  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
-	 				 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-	 							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-	 				 TDetailPlanPassation pass = new TDetailPlanPassation();
-	 					 if(!PL.isEmpty())  
-	 						 pass =PL.get(0); 
-	 					     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
-	 					     iservice.updateObject(pass);
-	 					     
-	 				List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-	 			   						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-	 			   				TAffichagePpm aff = new TAffichagePpm();
-	 								if(!AF.isEmpty()) aff =AF.get(0);
-	 								aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
-	 								iservice.updateObject(aff);
-	 		  		}
-	 		  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
-	 				List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-	 			    TStatut statuts = new TStatut();
-	 			      if(!LS.isEmpty()) statuts = LS.get(0);
-	 			  //Historisation des Plans Généraux
-	 			     THistoPlanPassation histoPass = new THistoPlanPassation();
-	 			     histoPass.setHppDate(Calendar.getInstance().getTime());
-	 			     histoPass.setHppMotif("PPM enregistré par le AC");
-	 			     histoPass.setTStatut(statuts);
-	 			     histoPass.setTDetailPlanPassation(detailPass);
-	 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
-	 			     iservice.addObject(histoPass);
-	 				
-	 				chargeData();
-	 				boutonEdit =true;
-	 				boutonEditPspm =false;
-	 				controleController.btn_creerDetailPpm =false;
-	 				//controleController.btn_maj_datePpm = true;
+		 	  		
+		 	  		
+		 	  	
+		 	  		//Insertion dans T_Financement_PPM
+		 	  		TFinancementPpm newFinancement = new TFinancementPpm();
+		 	  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
+		 	  		newFinancement.setFppTypeFinance(fipPgpm.getFipTypeFinance());
+		 	  		newFinancement.setTDetailPlanPassation(detailPass);
+		 	  		newFinancement.setTSourceFinancement(new TSourceFinancement(fipPgpm.getTSourceFinancement().getSouCode()));
+		 	  		newFinancement.setTDevise(new TDevise(fipPgpm.getTDevise().getDevCode()));
+		 	  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
+		 	  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
+		 	  		newFinancement.setFppPartTresor(fipPgpm.getFipPartTresor());
+		 	  		iservice.addObject(newFinancement);
+		 	  		
+		 	  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
+		 			 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+		 						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+		 			 TDetailPlanPassation pass = new TDetailPlanPassation();
+		 				 if(!PL.isEmpty())  
+		 					 pass =PL.get(0); 
+		 				     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 				     iservice.updateObject(pass);
+		 				     
+		 			List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+		 		   						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+		 		   				TAffichagePpm aff = new TAffichagePpm();
+		 							if(!AF.isEmpty()) aff =AF.get(0);
+		 							aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 							iservice.updateObject(aff);
+		 	  		
+		 	  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
+		 			List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
+		 		    TStatut statuts = new TStatut();
+		 		      if(!LS.isEmpty()) statuts = LS.get(0);
+		 		  //Historisation des Plans Généraux
+		 		     THistoPlanPassation histoPass = new THistoPlanPassation();
+		 		     histoPass.setHppDate(Calendar.getInstance().getTime());
+		 		     histoPass.setHppMotif("PPM enregistré par le AC");
+		 		     histoPass.setTStatut(statuts);
+		 		     histoPass.setTDetailPlanPassation(detailPass);
+		 		     histoPass.setTFonction(userController.getSlctd().getTFonction());
+		 		     iservice.addObject(histoPass);
+		 			
+		 			chargeData();
+		 			boutonEdit =true; 
+		 			boutonEditPspm =false;
+		 			//controleController.btn_creerDetailPpm =false;
 		 			//controleController.btn_creerDetailPspmDmp=false;
-	 				
-	 				//Actualisation du Tableau de Bord
-	 				tableauBordController.chargeDataPpmPspm();
-	 				
-	 				userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
-	 				userController.setRenderMsg(true);
-	 				userController.setSevrityMsg("success");
-	 	 	         }
-	  		    }
-	  	 }
+		 			//controleController.btn_creerDetailPpm =false;
+		 			//controleController.btn_maj_datePpm = true;
+		 			
+		 			//Actualisation du Tableau de Bord
+		 			tableauBordController.chargeDataPpm();
+		 			
+		 			userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
+		 			userController.setRenderMsg(true);
+		 			userController.setSevrityMsg("success");
+		 	 		  
+		 	 	  }else {
+		 	 		     planPass.setTGestion(new TGestion(gesCode));
+		 	  		     planPass.setTFonction(userController.getSlctd().getTFonction());
+		 	  		     planPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+		 	  		     iservice.addObject(planPass);
+		 	  		     
+		 	  		     detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
+		 	  		     detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
+		 		  		 detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
+		 		  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
+		 		  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+		 		  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+		 		  		 detailPass.setTPlanPassation(planPass);
+		 		  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+		 		  		 detailPass.setDppTypePlan("PN");
+		 		  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+		 		  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+		 		  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+		 		  		 detailPass.setTStatut(new TStatut("S1S"));
+		 		  		 detailPass.setDppStatutRetour("0");
+		 		  		 detailPass.setDppStatutDao("N");
+		 		  		 iservice.addObject(detailPass);
+		 		  		 
+		 		  		 
+		 		  		TAffichagePpm affichagePpm = new TAffichagePpm();
+		 		  		affichagePpm.setAffDppId(detailPass.getDppId());
+		 		  		affichagePpm.setTTypeMarche(new TTypeMarche(detailPass.getTTypeMarche().getTymCode()));
+		 		  		affichagePpm.setTModePassation(new TModePassation(detailPass.getTModePassation().getMopCode()));
+		 		  		affichagePpm.setTLBudgets(new TLBudgets(detailPass.getTLBudgets().getLbgCode()));
+		 		  		affichagePpm.setTDetailPlanGeneral(new TDetailPlanGeneral(detailPass.getTDetailPlanGeneral().getGpgId()));
+		 		  		affichagePpm.setTStructure(new TStructure(detailPass.getTStructure().getStrCode()));
+		 		  		affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
+		 		  		affichagePpm.setTPlanPassation(planPass);
+		 		  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
+		 		  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
+		 		  		affichagePpm.setAffDppTypePlan("PN");
+		 		  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+		 		  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+		 		  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
+		 		  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
+		 		  		affichagePpm.setAffDppDate(detailPass.getDppDate());
+		 		  		affichagePpm.setAffDppNumeroOrdre(detailPass.getDppNumeroOrdre());
+		 		  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
+		 		  		affichagePpm.setAffDppCode(detailPass.getDppCode());
+		 		  		affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
+		 		  		affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
+		 		  		affichagePpm.setAffDppDateAvisAoPublicat(detailPass.getDppDateAvisAoPublication());
+		 		  		affichagePpm.setAffDppDateDaoApprobBail(detailPass.getDppDateDaoApprobBail());
+		 		  		affichagePpm.setAffDppDateDaoApprobDmp(detailPass.getDppDateDaoApprobDmp());
+		 		  		affichagePpm.setAffDppDateDaoTrans(detailPass.getDppDateDaoTrans());
+		 		  		affichagePpm.setAffDppDateElabRapport(detailPass.getDppDateElabRapport());
+		 		  		affichagePpm.setAffDppDateExecDebut(detailPass.getDppDateExecDebut());
+		 		  		affichagePpm.setAffDppDateExecFin(detailPass.getDppDateExecFin());
+		 		  		affichagePpm.setAffDppDateJugementOffre(detailPass.getDppDateJugementOffre());
+		 		  		affichagePpm.setAffDppDateMarcheApprob(detailPass.getDppDateMarcheApprob());
+		 		  		affichagePpm.setAffDppDateNegociation(detailPass.getDppDateNegociation());
+		 		  		affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
+		 		  		affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
+		 		  		affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
+		 		  		affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
+		 		  		affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
+		 		  		affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
+		 		  		affichagePpm.setAffDppStrBenefi(detailPass.getDppStructureBenefi());
+		 		  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
+		 		  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
+		 		  		iservice.addObject(affichagePpm);
+		 		  		
+		 		  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
+						String rechercheAll = search.replace("null","");
+						
+						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+			      				TAffichagePpm affgp = new TAffichagePpm();
+			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
+			      				   affgp.setAffDppRecherche(rechercheAll);
+				      			  iservice.updateObject(affgp);
+		 		  		
+		 		  		
+		 		  		
+		 		  		//Insertion dans T_Financement_PPM
+		 		  		TFinancementPpm newFinancement = new TFinancementPpm();
+		 		  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
+		 		  		newFinancement.setTDetailPlanPassation(detailPass);
+		 		  		newFinancement.setTSourceFinancement(new TSourceFinancement(fipPgpm.getTSourceFinancement().getSouCode()));
+		 		  		newFinancement.setTDevise(new TDevise(fipPgpm.getTDevise().getDevCode()));
+		 		  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
+		 		  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
+		 		  		newFinancement.setFppPartTresor(fipPgpm.getFipPartTresor());
+		 		  		iservice.addObject(newFinancement);
+		 		  		
+		 		  		
+		 		  		
+		 		  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
+		 				 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+		 							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+		 				 TDetailPlanPassation pass = new TDetailPlanPassation();
+		 					 if(!PL.isEmpty())  
+		 						 pass =PL.get(0); 
+		 					     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 					     iservice.updateObject(pass);
+		 					     
+		 				List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+		 			   						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+		 			   				TAffichagePpm aff = new TAffichagePpm();
+		 								if(!AF.isEmpty()) aff =AF.get(0);
+		 								aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 								iservice.updateObject(aff);
+		 		  		
+		 		  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
+		 				List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
+		 			    TStatut statuts = new TStatut();
+		 			      if(!LS.isEmpty()) statuts = LS.get(0);
+		 			  //Historisation des Plans Généraux
+		 			     THistoPlanPassation histoPass = new THistoPlanPassation();
+		 			     histoPass.setHppDate(Calendar.getInstance().getTime());
+		 			     histoPass.setHppMotif("PPM enregistré par le AC");
+		 			     histoPass.setTStatut(statuts);
+		 			     histoPass.setTDetailPlanPassation(detailPass);
+		 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
+		 			     iservice.addObject(histoPass);
+		 				
+		 				chargeData();
+		 				boutonEdit =true;
+		 				boutonEditPspm =false;
+		 				controleController.btn_creerDetailPpm =true;
+		 				//controleController.btn_maj_datePpm = true;
+			 			//controleController.btn_creerDetailPspmDmp=false;
+		 				
+		 				//Actualisation du Tableau de Bord
+		 				tableauBordController.chargeDataPpm();
+		 				
+		 				userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
+		 				userController.setRenderMsg(true);
+		 				userController.setSevrityMsg("success");
+		 	 	         }
+		  		    }
+	  			
+	  		  }else {
+	  			 //Message d'erreur
+	  			   FacesContext.getCurrentInstance().addMessage(null,
+	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre PGPM n'a pas de financement", "")); 
+	  		} 
+	  }
 	  	 
 	  	 
 	  	 public void majDate() {
@@ -1517,6 +1557,8 @@ public class PpmController {
 	  	@Transactional
 		 public void  creerDetailPspm() throws IOException{
 	  		
+	  	  if(fipPgpm.getFipId() > 0 ) {
+	  		  
 	  		 if(detailPass.getDppObjet().equalsIgnoreCase("") || detailPass.getDppPartiePmePmi().equalsIgnoreCase("") || tydCode.equalsIgnoreCase("")) {
 	  			   //Message d'erreur
 	  			   FacesContext.getCurrentInstance().addMessage(null,
@@ -1588,11 +1630,18 @@ public class PpmController {
 			  		    affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
 			  		    affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 			  		    affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
-			  		    //String recherche = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppPartiePmePmi()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppTypePlan()+""+detailPass.getDppNumeroOrdre()+""+detailPass.getTTypeMarche().getTymCode()+""+detailPass.getTTypeMarche().getTymLibelleCourt()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getTModePassation().getMopLibelleLong()+""+detailPass.getTStructure().getStrCode()+""+detailPass.getTStructure().getStrLibelleLong()+""+detailPass.getDppId();
-		   	            //affichagePpm.setAffDppRecherche(recherche);
 			  		    iservice.addObject(affichagePpm);
+			  		    
+			  			String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
+						String rechercheAll = search.replace("null","");
+						
+						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+			      				TAffichagePpm affgp = new TAffichagePpm();
+			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
+			      				   affgp.setAffDppRecherche(rechercheAll);
+				      			  iservice.updateObject(affgp);
 			  		
-			  		   if(fipPgpm.getFipId() > 0 ) {
 			  		   //Insertion dans T_Financement_PPM
 			  		   TFinancementPpm newFinancement = new TFinancementPpm();
 			  		   newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
@@ -1619,7 +1668,7 @@ public class PpmController {
 									if(!AF.isEmpty()) aff =AF.get(0);
 									aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
 									iservice.updateObject(aff);
-			  		}
+			  		
 			  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
 					List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
 				    TStatut statuts = new TStatut();
@@ -1637,13 +1686,13 @@ public class PpmController {
 					chargeDataPspm();
 					
 					//Activation du bouton d'édition du pspm
-					controleController.btn_creerDetailPspm = false;
+					//controleController.btn_creerDetailPspm = false;
 					controleController.btn_creerDetailPpm =false;
 					 //controleController.btn_maj_datePspm = true;
 					boutonEditPspm = true;
 					boutonEdit =false; 
 					//Actualisation du Tableau de Bord
-					tableauBordController.chargeDataPpmPspm();
+					tableauBordController.chargeDataPspm();
 					
 					userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 					userController.setRenderMsg(true);
@@ -1711,11 +1760,19 @@ public class PpmController {
 				  		affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
 				  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 				  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
-				  		//String recherche = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppPartiePmePmi()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppTypePlan()+""+detailPass.getDppNumeroOrdre()+""+detailPass.getTTypeMarche().getTymCode()+""+detailPass.getTTypeMarche().getTymLibelleCourt()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getTModePassation().getMopLibelleLong()+""+detailPass.getTStructure().getStrCode()+""+detailPass.getTStructure().getStrLibelleLong()+""+detailPass.getDppId();
-			   	        //affichagePpm.setAffDppRecherche(recherche);
 				  		iservice.addObject(affichagePpm);
 				  		
-				  		if(fipPgpm.getFipId() > 0 ) {
+				  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
+						String rechercheAll = search.replace("null","");
+						
+						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+			      				TAffichagePpm affgp = new TAffichagePpm();
+			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
+			      				   affgp.setAffDppRecherche(rechercheAll);
+				      			  iservice.updateObject(affgp);
+				  		
+				  		
 				  		//Insertion dans T_Financement_PPM
 				  		TFinancementPpm newFinancement = new TFinancementPpm();
 				  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
@@ -1741,7 +1798,7 @@ public class PpmController {
 										if(!AF.isEmpty()) aff =AF.get(0);
 										aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
 										iservice.updateObject(aff);
-				  		}
+				  		
 				  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
 						List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
 					    TStatut statuts = new TStatut();
@@ -1759,21 +1816,25 @@ public class PpmController {
 						chargeDataPspm();
 						
 						//Activation du bouton d'édition du pspm
-						controleController.btn_creerDetailPspm = false;
+						//controleController.btn_creerDetailPspm = false;
 						controleController.btn_creerDetailPpm =false;
 						 //controleController.btn_maj_datePspm = true;
 						boutonEditPspm = true;
 						boutonEdit =false; 
 						//Actualisation du Tableau de Bord
-						tableauBordController.chargeDataPpmPspm();
+						tableauBordController.chargeDataPspm();
 						
 						userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 			 	         }
-	  		          }
-		  	    }
-	  	 
+	  		           }
+	  	             }else {
+	  		                  //Message d'erreur
+ 			                   FacesContext.getCurrentInstance().addMessage(null,
+ 	   	                       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre PPM n'a pas de financement", "")); 
+	  	                  }
+		            }
 	  	 	 
 	  	 
 	  	//Méthode de création d'un ppm par le CPMP et le DMP
@@ -3787,6 +3848,36 @@ public class PpmController {
 
 	public void setStatutTrans(String statutTrans) {
 		this.statutTrans = statutTrans;
+	}
+
+
+	public List<VModeleAmi> getListeAmi() {
+		return listeAmi;
+	}
+
+
+	public void setListeAmi(List<VModeleAmi> listeAmi) {
+		this.listeAmi = listeAmi;
+	}
+
+
+	public boolean isModeleAmi() {
+		return modeleAmi;
+	}
+
+
+	public void setModeleAmi(boolean modeleAmi) {
+		this.modeleAmi = modeleAmi;
+	}
+
+
+	public boolean isModeleDao() {
+		return modeleDao;
+	}
+
+
+	public void setModeleDao(boolean modeleDao) {
+		this.modeleDao = modeleDao;
 	}
 	
 		

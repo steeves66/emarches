@@ -229,13 +229,27 @@
                 
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Modèle de DAO-type</label>
+                  
+                  <h:panelGroup rendered="#{ppmController.modeleAmi}" >
                   <div class="col-sm-9">
                     <p:selectOneMenu id="tdao" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAO.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmController.listeDao}" var="da" itemLabel="#{da.mdtLibelleLong}" itemValue="#{da.mdtCode}" />			   				   
+			       <f:selectItems value="#{ppmController.listeAmi}" var="da" itemLabel="#{da.mdtLibelleLong}" itemValue="#{da.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
 		       	</p:selectOneMenu>
                   </div>
+                  </h:panelGroup>
+                  
+                  <h:panelGroup rendered="#{ppmController.modeleDao}" >
+                  <div class="col-sm-9">
+                    <p:selectOneMenu id="tami" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAO.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeDao}" var="am" itemLabel="#{am.mdtLibelleLong}" itemValue="#{am.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+                  </div>
+                  </h:panelGroup>  
+                  
                 </div>
             
                 

@@ -232,6 +232,8 @@ public class AgpmController {
 	 public boolean etatReferenceDeclarant=false;
 	 public boolean boutonEditRappel=false;
 	 public boolean selectBailleur=false;
+	 public boolean selectTresor =false;
+	 public boolean selectPartBai =false;
 	 private String statutAffiche="";
 	 private String statutUpdate="";
 	 private String statutTrans ="";
@@ -710,12 +712,12 @@ public class AgpmController {
 	    VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
 	      if(bai == null) {
 	                           
-	    	  if(projet.getProTitre().equalsIgnoreCase("") || agpm.getAgpCommentaire().equalsIgnoreCase("") || projet.getProTypeProjet().equalsIgnoreCase("")) {
+	    	  if(projet.getProTitre().equalsIgnoreCase("") || agpm.getAgpCommentaire().equalsIgnoreCase("") || projet.getProTypeProjet().equalsIgnoreCase("") || baiCode.equalsIgnoreCase("") || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
 	                      //Message d'erreur
 	    		          FacesContext.getCurrentInstance().addMessage(null,
 	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs", ""));	 
 	                           
-	    	              }else {
+	    	                }else {
 	                            	//Insertion dans T_Projet
 	                                iservice.addObject(projet);
 	        		      			//Insertion dans T_AGPM	 
@@ -768,8 +770,8 @@ public class AgpmController {
 	     		  					affichageAgpm.setTStatut(statuts);
 	     		  					iservice.addObject(affichageAgpm); 
 	     		  						
-
-	     		  					String search = affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
+	     		  					
+	     		  					String search = affichageAgpm.getAffAgpId()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
 	    							String rechercheAll = search.replace("null","");
 	    							
 	     		  						
@@ -1126,12 +1128,39 @@ public class AgpmController {
 			          //return renderPage("agpm1","LIS");
 		   }
 		 
+	/*	 public void checkBailleur() {
+			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
+				 selectBailleur = true;
+				 selectTresor = false;
+			 }else
+			      if(sourfin.equalsIgnoreCase("Cofinance")){
+				 selectBailleur = true; 
+				 selectTresor = true;
+			 }else {
+				 selectBailleur = false;
+				 selectTresor = false;
+			    }
+		 }*/
+		 
 		 public void checkBailleur() {
 			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
-			 }else {
-				 selectBailleur = false; 
-			 }
+				 selectTresor = false;
+				 selectPartBai = true;
+			 }else
+			      if(sourfin.equalsIgnoreCase("Cofinance")){
+				 selectBailleur = true; 
+				 selectTresor = true;
+				 selectPartBai = true;
+			 }else if(sourfin.equalsIgnoreCase("Etat")){
+				 selectBailleur = false;
+				 selectTresor = true;
+				 selectPartBai= false;
+			    }else {
+			    	  selectPartBai = false;
+			    	 selectBailleur = false;
+					 selectTresor = false;
+			    }
 		 }
 		 
 		 
@@ -2852,6 +2881,22 @@ public class AgpmController {
 
 	public void setStatutTrans(String statutTrans) {
 		this.statutTrans = statutTrans;
+	}
+
+	public boolean isSelectTresor() {
+		return selectTresor;
+	}
+
+	public void setSelectTresor(boolean selectTresor) {
+		this.selectTresor = selectTresor;
+	}
+
+	public boolean isSelectPartBai() {
+		return selectPartBai;
+	}
+
+	public void setSelectPartBai(boolean selectPartBai) {
+		this.selectPartBai = selectPartBai;
 	}
 	
     

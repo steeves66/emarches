@@ -29,6 +29,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
 	private String fipTypeFinance;
+	private Long fipPartTresor;
 
 	public TFinancementPgpm() {
 	}
@@ -44,7 +45,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 
 	public TFinancementPgpm(long fipId, TDetailPlanGeneral TDetailPlanGeneral, TBailleur TBailleur,
 			TSourceFinancement TSourceFinancement, TDevise TDevise, long fipMontantCfa,
-			BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance) {
+			BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance,Long fipPartTresor) {
 		this.fipId = fipId;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TBailleur = TBailleur;
@@ -54,6 +55,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.fipMontantDevise = fipMontantDevise;
 		this.fipCommentaire = fipCommentaire;
 		this.fipTypeFinance = fipTypeFinance;
+		this.fipPartTresor = fipPartTresor;
 	}
 
 	@Id
@@ -142,6 +144,15 @@ public class TFinancementPgpm implements java.io.Serializable {
 
 	public void setFipTypeFinance(String fipTypeFinance) {
 		this.fipTypeFinance = fipTypeFinance;
+	}
+	
+	@Column(name = "FIP_PART_TRESOR", precision = 15)
+	public Long getFipPartTresor() {
+		return this.fipPartTresor;
+	}
+
+	public void setFipPartTresor(Long fipPartTresor) {
+		this.fipPartTresor = fipPartTresor;
 	}
 
 }

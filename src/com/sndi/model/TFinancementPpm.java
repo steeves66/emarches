@@ -29,6 +29,7 @@ public class TFinancementPpm implements java.io.Serializable {
 	private BigDecimal fppMontantDevise;
 	private String fppCommentaire;
 	private String fppTypeFinance;
+	private long fppPartTresor;
 
 	public TFinancementPpm() {
 	}
@@ -44,7 +45,7 @@ public class TFinancementPpm implements java.io.Serializable {
 
 	public TFinancementPpm(long fppId, TDetailPlanPassation TDetailPlanPassation, TBailleur TBailleur,
 			TSourceFinancement TSourceFinancement, TDevise TDevise, long fppMontantCfa,
-			BigDecimal fppMontantDevise, String fppCommentaire, String fppTypeFinance) {
+			BigDecimal fppMontantDevise, String fppCommentaire, String fppTypeFinance, long fppPartTresor) {
 		this.fppId = fppId;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TBailleur = TBailleur;
@@ -54,6 +55,7 @@ public class TFinancementPpm implements java.io.Serializable {
 		this.fppMontantDevise = fppMontantDevise;
 		this.fppCommentaire = fppCommentaire;
 		this.fppTypeFinance = fppTypeFinance;
+		this.fppPartTresor = fppPartTresor;
 	}
 
 	@Id
@@ -143,5 +145,15 @@ public class TFinancementPpm implements java.io.Serializable {
 	public void setFppTypeFinance(String fppTypeFinance) {
 		this.fppTypeFinance = fppTypeFinance;
 	}
+	
+	@Column(name = "FPP_PART_TRESOR", precision = 10, scale = 0)
+	public long getFppPartTresor() {
+		return this.fppPartTresor;
+	}
+
+	public void setFppPartTresor(long fppPartTresor) {
+		this.fppPartTresor = fppPartTresor;
+	}
+
 
 }

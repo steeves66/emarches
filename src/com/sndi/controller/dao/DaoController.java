@@ -1218,7 +1218,46 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	  @Transactional 
 	 public void resultatCorrection() {
 		  
-		  if(resultat.equalsIgnoreCase("Valide")) { 
+		  if(slctdTd.getAffDacBailleur().equalsIgnoreCase("O")) {
+			   statutSanction ="SBO";
+			   statutSanRetour ="0";
+			  
+		        }else 
+		            if(resultat.equalsIgnoreCase("Valide")){
+		        	  statutSanction ="";
+					  statutSanRetour ="";
+					  
+					  if(slctdTd.getAffDacMention().equalsIgnoreCase("Validé pour publication")) {
+						  statutSanction ="DPU";
+						  statutSanRetour ="0";
+						  
+						  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+									new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+									if (!listAvis.isEmpty()) {
+										                 //Mis à jour du statut
+										                 majAvis= listAvis.get(0);
+										                 majAvis.setTStatut(new TStatut(statutSanction));
+										                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+										                 iservice.updateObject(majAvis);
+									                       }
+						  
+					                  }else 
+					                     if(slctdTd.getAffDacMention().equalsIgnoreCase("Validé et retour à l'AC")){
+					    	                statutSanction ="D5V";
+							                statutSanRetour ="0";
+					                         }
+			  
+		                                }else 
+		                	                if(resultat.equalsIgnoreCase("Rejeté")) {
+				                                  statutSanction ="SRO";
+				                                  statutSanRetour ="1";
+			                                    }else 
+			                    	                if(resultat.equalsIgnoreCase("Retour au binome")) {
+				                                        statutSanction ="D3A";
+				                                        statutSanRetour ="1";
+			                                                }
+		  
+		/*  if(resultat.equalsIgnoreCase("Valide")) { 
 			  statutSanction ="";
 			  statutSanRetour ="";
 			  if(slctdTd.getAffDacMention().equalsIgnoreCase("Validé pour publication")) {
@@ -1244,13 +1283,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 			        		   statutSanction ="SBO";
 							   statutSanRetour ="0";
 			        	   }
+			  
 		               }else if(resultat.equalsIgnoreCase("Rejeté")) {
 			             statutSanction ="SRO";
 			              statutSanRetour ="1";
 		                 }else if(resultat.equalsIgnoreCase("Retour au binome")) {
 			            statutSanction ="D3A";
 			            statutSanRetour ="1";
-		                }
+		                }*/
 		  
 			  listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
 					  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()));
@@ -1285,7 +1325,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 						 userController.setSevrityMsg("success");
 	     }   
 	}
+	
 	  
+	  
+	 public void ouverture () {
+		 
+		 if(newAvis.getAaoNbrOuv() == 1) {
+			    
+			// newAvis.get
+		 }else
+		      if(newAvis.getAaoNbrOuv() == 2){
+			 
+		 }
+	 }
 	  
 	  
 	//Validation des corrections

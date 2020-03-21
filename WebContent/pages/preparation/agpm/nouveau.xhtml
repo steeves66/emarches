@@ -205,7 +205,7 @@
 			         <f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
                      <f:selectItem itemLabel="ETAT" itemValue="Etat" />	
                      <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />	
-                     <p:ajax listener="#{agpmController.checkBailleur()}" update=":gnl:idBail, :gnl:idTres" />			   				   
+                     <p:ajax listener="#{agpmController.checkBailleur()}" update=":gnl:idBail, :gnl:idTres, :gnl:idPartB" />			   				   
        		       </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -265,15 +265,17 @@
 	                  <div class="col-sm-10">
 	                    <p:inputText type="text" value="#{agpmController.newFinancement.finPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" process="@this" update="xmontDev" /> 
+	                    <p:ajax event="blur" process="@this" update="partTresor" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div>
 	                </h:panelGroup>
 	                </h:panelGroup>
 	                
+	                <h:panelGroup id="idPartB"> 
+	                <h:panelGroup rendered="#{agpmController.selectPartBai}">
 	                 <div class="form-group ">
-	                  <label for="xmont" class="col-sm-2 control-label"><b>Montant FCFA</b></label>
+	                  <label for="xmont" class="col-sm-2 control-label"><b>Part Bailleur FCFA</b></label>
 	                  <div class="col-sm-10">
 	                    <p:inputText type="text" value="#{agpmController.newFinancement.finMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
@@ -281,6 +283,8 @@
 	                    </p:inputText>
 	                  </div>
 	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
 	                
 	                <div class="form-group ">
 	                  <label for="accord" class="col-sm-2 control-label"><b>N° Accord</b></label>

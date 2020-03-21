@@ -11,7 +11,17 @@
 <h:form id="gnl">	
  <section class="content-header">
       <h3>
+      <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
         #{controleController.libelle}
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
+        #{controleController.libelle1}
+        </h:panelGroup>
+        
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
+        #{controleController.libelle}
+        </h:panelGroup>
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
@@ -745,7 +755,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -809,8 +819,8 @@
 			        </div>
 		            <div class="box-body"> 
 		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValCp}"
+	                 <h:panelGrid style="width:100%;  vertical-align:top;">
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValCp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -872,7 +882,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -930,7 +940,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -988,7 +998,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			               
@@ -1046,7 +1056,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
