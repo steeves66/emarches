@@ -11,7 +11,7 @@
 <h:form id="gnl">	
  <section class="content-header">
       <h3>
-        #{controleController.libelleAmi} 
+        #{controleController.libelleDao1} 
         
         <small>
         <!-- #{controleController.libelle1} -->
@@ -32,7 +32,7 @@
       </ol>
     </section>
   
-    <section class="content">
+   <section class="content">
      <div class="box"></div>
         <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
@@ -896,7 +896,7 @@
                   </div>
        </h:panelGroup>
        </h:panelGroup>
-         <!-- Fin Tableau de Bord Vente pour l'Autorité Contractante-->           
+         <!-- Fin Tableau de Bord Vente pour l'Autorité Contractante-->             
                   
  
                 </div>
@@ -920,7 +920,7 @@
             
             <div class="col-md-12">
             
-            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouvel AMI" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{amiController.renderPage('ami2','ENGAMI')}"  update=":content">
+            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{amiController.renderPage('dao2','ENGDAO')}"  update=":content">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
 				</p:commandLink>
 			
@@ -928,7 +928,7 @@
 				    <div class="input-group input-group-sm col-md-3">
 				    
                     <label >
-                      <p:inputText type="text" value="#{amiController.multiFiltre}"   placeholder="saisir le numero de l' #{controleController.type}"/> 	
+                      <p:inputText type="text" value="#{amiController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -946,7 +946,7 @@
 					
             </div>
             </div>
-              <h:panelGroup rendered="#{controleController.panel13}">
+              <h:panelGroup rendered="#{controleController.panel1}">
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.listeDAO}" 
 					 emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
                          paginator="true"
@@ -1145,7 +1145,7 @@
                          <p:confirm header="Confirmation" message="Voulez-vous transmettre le DAO N°#{slctdTb.affDacCode} ?" icon="ui-icon-alert" />
                          </p:commandLink> 
                          
-                         <p:commandLink action="#{amiController.renderPage('ami6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                         <p:commandLink action="#{amiController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" /> 
                             </p:commandLink> 
@@ -1234,7 +1234,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
                             <h:panelGroup rendered="#{controleController.affDao}">   
-                             <p:commandLink action="#{amiController.renderPage('ami5','AFFDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('dao5','AFFDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1326,7 +1326,7 @@
                         
                           
                             <h:panelGroup rendered="#{controleController.exaDao}">   
-                             <p:commandLink action="#{amiController.renderPage('ami6','EXADAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('dao6','EXADAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1408,7 +1408,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{amiController.renderPage('ami7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('dao7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1462,7 +1462,7 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                             <p:commandLink  action="#{etatsamiController.renderPage('ami8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsamiController.renderPage('dao8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsamiController.slctdTda}" />
                              </p:commandLink>
@@ -1473,7 +1473,7 @@
                         </p:commandLink>
                         
                         
-                        <p:commandLink action="#{amiController.renderPage('ami6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                        <p:commandLink action="#{amiController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTda}" /> 
                             </p:commandLink> 
@@ -1776,7 +1776,7 @@
                      
                      
                           <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{amiController.renderPage('ami9','VETDAO')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('dao9','VETDAO')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1968,7 +1968,7 @@
                      <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{amiController.renderPage('ami7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Retrait du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('dao7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Retrait du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -2420,7 +2420,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          DAO 
+			          AMI 
 			         </div>
 			         
 			          <div class="col-md-3">

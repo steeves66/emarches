@@ -180,12 +180,12 @@
             <p:commandLink action="#{amiController.renderPage('ami1','SAIAMI')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Saisie AMI
              </p:commandLink>
-            </li>
+            </li>           
               <li>
             <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Saisie DP
              </p:commandLink>
-            </li>
+            </li>  
           </ul>     
          </li>
          
@@ -202,16 +202,42 @@
             <i class="fa fa-circle-o"></i>Saisie PRQ
              </p:commandLink>
             </li>
+           
               <li>
             <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Saisie DP
              </p:commandLink>
             </li>
+          
 
           </ul>     
          </li>
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Observations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{amiController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>AMI
+             </p:commandLink>
+            </li> 
+            <li>
+            <p:commandLink action="#{prqController.renderPage('ami1','SAIPRQ')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>PRQ
+             </p:commandLink>
+            </li>          
+              <li>
+            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>DP
+             </p:commandLink>
+            </li>  
+          </ul>     
+         </li>
          
-          
           </ul>     
          </li>
          
@@ -232,7 +258,7 @@
             
                <li>
             <p:commandLink action="#{daoController.renderPage('dao1','OBSDAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Prise en compte des <br/><span style="margin-left:20px">Observations</span>
+            <i class="fa fa-circle-o"></i>Observations
              </p:commandLink>
             </li>
 
@@ -546,7 +572,7 @@
           </a> 
            <ul class="treeview-menu">
           <li>
-            <p:commandLink action="#{daoController.renderPage('ami1','SAIAMI')}" update=":content" > 
+            <p:commandLink action="#{prqController.renderPage('prq1','SAIPRQ')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Pré Validation PRQ
              </p:commandLink>
             </li>
@@ -565,7 +591,7 @@
          
          <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>DAO</span>
+           <i class="fa fa-list"></i> <span>Dossier d'appel à <br/> <span style="margin-left:30px">la concurrence</span> </span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
