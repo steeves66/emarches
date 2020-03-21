@@ -920,8 +920,8 @@
             
             <div class="col-md-12">
             
-            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{prqController.renderPage('dao2','ENGDAO')}"  update=":content">
-				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
+            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouvelle PQP" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{prqController.renderPage('prq2','ENGPRQ')}"  update=":content">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvelle #{controleController.type}</span>
 				</p:commandLink>
 			
 
@@ -948,7 +948,7 @@
             </div>
               <h:panelGroup rendered="#{controleController.panel1}">
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.listeDAO}" 
-					 emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+					 emptyMessage="Aucune #{controleController.type} enregistrée" rows="10" 
                          paginator="true"
                          rowsPerPageTemplate="5,10,15" >
                          
