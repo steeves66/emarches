@@ -2296,7 +2296,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        				     TAffichagePgpm aff = new TAffichagePgpm();
     					if(!AF.isEmpty()) aff =AF.get(0); 
     					aff.setTSourceFinancement(newFinancement.getTSourceFinancement());
-    					aff.setAffGpgTypFinance(newFinancement.getFipTypeFinance());
+    					aff.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
     					iservice.updateObject(aff);
     					
     				    //methode qui charge les financements du projet crée
