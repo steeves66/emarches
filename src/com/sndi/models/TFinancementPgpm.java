@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
+// Generated 21 mars 2020 13:48:08 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -25,7 +25,6 @@ public class TFinancementPgpm implements java.io.Serializable {
 	private BigDecimal fipMontantCfa;
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
-	private String fipTypeFinance;
 	private Long fipPartTresor;
 
 	public TFinancementPgpm() {
@@ -41,7 +40,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 
 	public TFinancementPgpm(long fipId, TSourceFinancement TSourceFinancement, TDetailPlanGeneral TDetailPlanGeneral,
 			TDevise TDevise, TBailleur TBailleur, BigDecimal fipMontantCfa, BigDecimal fipMontantDevise,
-			String fipCommentaire, String fipTypeFinance, Long fipPartTresor) {
+			String fipCommentaire, Long fipPartTresor) {
 		this.fipId = fipId;
 		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
@@ -50,7 +49,6 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.fipMontantCfa = fipMontantCfa;
 		this.fipMontantDevise = fipMontantDevise;
 		this.fipCommentaire = fipCommentaire;
-		this.fipTypeFinance = fipTypeFinance;
 		this.fipPartTresor = fipPartTresor;
 	}
 
@@ -130,15 +128,6 @@ public class TFinancementPgpm implements java.io.Serializable {
 
 	public void setFipCommentaire(String fipCommentaire) {
 		this.fipCommentaire = fipCommentaire;
-	}
-
-	@Column(name = "FIP_TYPE_FINANCE", length = 20)
-	public String getFipTypeFinance() {
-		return this.fipTypeFinance;
-	}
-
-	public void setFipTypeFinance(String fipTypeFinance) {
-		this.fipTypeFinance = fipTypeFinance;
 	}
 
 	@Column(name = "FIP_PART_TRESOR", precision = 15, scale = 0)

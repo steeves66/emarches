@@ -50,7 +50,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 	private Date affGpgDateValAc;
 	private Date affGpgDateValCpmp;
 	private Date affGpgDateValDmp;
-	private String affGpgTypFinance;
+	private String affGpgTypeFinance;
 
 	public TAffichagePgpm() {
 	}
@@ -95,7 +95,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affGpgDateValAc = affGpgDateValAc;
 		this.affGpgDateValCpmp = affGpgDateValCpmp;
 		this.affGpgDateValDmp = affGpgDateValDmp;
-		this.affGpgTypFinance = affGpgTypFinance;
+		this.affGpgTypeFinance = affGpgTypeFinance;
 	}
 
 	@Id
@@ -340,13 +340,13 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affGpgDateValDmp = affGpgDateValDmp;
 	}
 	
-	@Column(name = "AFF_GPG_TYPE_FINANCE", length = 20)
-	public String getAffGpgTypFinance() {
-		return this.affGpgTypFinance;
+	@Column(name = "AFF_GPG_TYP_FINANCE", length = 20)
+	public String getAffGpgTypeFinance() {
+		return this.affGpgTypeFinance;
 	}
 
-	public void setAffGpgTypFinance(String affGpgTypFinance) {
-		this.affGpgTypFinance = affGpgTypFinance;
+	public void setAffGpgTypeFinance(String affGpgTypeFinance) {
+		this.affGpgTypeFinance = affGpgTypeFinance;
 	}
 
 }

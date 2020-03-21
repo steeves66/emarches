@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
+// Generated 21 mars 2020 13:48:08 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -69,6 +69,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppDateValCpmp;
 	private Date dppDateValDmp;
 	private String dppBailleur;
+	private String dppTypeFinance;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TDacSpecs> TDacSpecses = new HashSet<TDacSpecs>(0);
@@ -99,7 +100,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateExecDebut, Date dppDateExecFin, String dppActeurSaisie, String dppStatutRetour,
 			Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,
 			String dppStatutDao, Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec,
-			Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur,
+			Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance,
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
@@ -149,6 +150,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppDateValCpmp = dppDateValCpmp;
 		this.dppDateValDmp = dppDateValDmp;
 		this.dppBailleur = dppBailleur;
+		this.dppTypeFinance = dppTypeFinance;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TDacSpecses = TDacSpecses;
@@ -612,6 +614,15 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppBailleur(String dppBailleur) {
 		this.dppBailleur = dppBailleur;
+	}
+
+	@Column(name = "DPP_TYPE_FINANCE", length = 20)
+	public String getDppTypeFinance() {
+		return this.dppTypeFinance;
+	}
+
+	public void setDppTypeFinance(String dppTypeFinance) {
+		this.dppTypeFinance = dppTypeFinance;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

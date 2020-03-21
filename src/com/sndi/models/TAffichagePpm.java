@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
+// Generated 21 mars 2020 13:48:08 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -66,6 +66,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	private Date affDppDateValCpmp;
 	private Date affDppDateValDmp;
 	private String affDppBailleur;
+	private String affDppTypeFinance;
 
 	public TAffichagePpm() {
 	}
@@ -95,7 +96,7 @@ public class TAffichagePpm implements java.io.Serializable {
 			Date affDppDateExecFin, Long affDppId, String affDppStatutRetour, String affDppStrConduc,
 			String affDppStrBenefi, Date affDppDateSaisie, String affDppPartiePmePmi, String affDppStatutDao,
 			String affDppPieceDao, Date affDppInvEntre, String affDppRecherche, Date affDppDateValAc,
-			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur) {
+			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance) {
 		this.affId = affId;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
@@ -143,6 +144,7 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affDppDateValCpmp = affDppDateValCpmp;
 		this.affDppDateValDmp = affDppDateValDmp;
 		this.affDppBailleur = affDppBailleur;
+		this.affDppTypeFinance = affDppTypeFinance;
 	}
 
 	@Id
@@ -599,6 +601,15 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setAffDppBailleur(String affDppBailleur) {
 		this.affDppBailleur = affDppBailleur;
+	}
+
+	@Column(name = "AFF_DPP_TYPE_FINANCE", length = 20)
+	public String getAffDppTypeFinance() {
+		return this.affDppTypeFinance;
+	}
+
+	public void setAffDppTypeFinance(String affDppTypeFinance) {
+		this.affDppTypeFinance = affDppTypeFinance;
 	}
 
 }

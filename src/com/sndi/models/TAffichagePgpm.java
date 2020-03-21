@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 19 mars 2020 16:14:06 by Hibernate Tools 4.3.5.Final
+// Generated 21 mars 2020 13:48:08 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -44,6 +44,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 	private Date affGpgDateValAc;
 	private Date affGpgDateValCpmp;
 	private Date affGpgDateValDmp;
+	private String affGpgTypFinance;
 
 	public TAffichagePgpm() {
 	}
@@ -63,7 +64,8 @@ public class TAffichagePgpm implements java.io.Serializable {
 			TPlanGeneral TPlanGeneral, Long affGpgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgCode,
 			String affGpgObjet, Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire,
 			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,
-			String affGpgRecherche, Date affGpgDateValAc, Date affGpgDateValCpmp, Date affGpgDateValDmp) {
+			String affGpgRecherche, Date affGpgDateValAc, Date affGpgDateValCpmp, Date affGpgDateValDmp,
+			String affGpgTypFinance) {
 		this.affId = affId;
 		this.TSourceFinancement = TSourceFinancement;
 		this.TStatut = TStatut;
@@ -89,6 +91,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affGpgDateValAc = affGpgDateValAc;
 		this.affGpgDateValCpmp = affGpgDateValCpmp;
 		this.affGpgDateValDmp = affGpgDateValDmp;
+		this.affGpgTypFinance = affGpgTypFinance;
 	}
 
 	@Id
@@ -329,6 +332,15 @@ public class TAffichagePgpm implements java.io.Serializable {
 
 	public void setAffGpgDateValDmp(Date affGpgDateValDmp) {
 		this.affGpgDateValDmp = affGpgDateValDmp;
+	}
+
+	@Column(name = "AFF_GPG_TYP_FINANCE", length = 20)
+	public String getAffGpgTypFinance() {
+		return this.affGpgTypFinance;
+	}
+
+	public void setAffGpgTypFinance(String affGpgTypFinance) {
+		this.affGpgTypFinance = affGpgTypFinance;
 	}
 
 }
