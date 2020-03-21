@@ -1147,7 +1147,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	  if(finAgpm.getFinId() > 0 ) {
     		  
     		  
-        	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("") ) {
+        	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) || detailPlan.getGpgCommentaire().equalsIgnoreCase("")|| "".equals(detailPlan.getGpgCommentaire()) || marche.getTymCode().equalsIgnoreCase("")|| "".equals(marche.getTymCode()) || modePassation.getMopCode().equalsIgnoreCase("") || "".equals(modePassation.getMopCode()) ) {
         		  //Message d'erreur
         		  FacesContext.getCurrentInstance().addMessage(null,
     	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -1226,6 +1226,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	      				       TAffichagePgpm affgp = new TAffichagePgpm();
     	      				        if(!AFG.isEmpty()) affgp =AFG.get(0); 
     	      				       affgp.setAffGpgRecherche(rechercheAll);
+    	      				       affgp.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
     		      				    iservice.updateObject(affgp);
            			
            			                chargeData();
@@ -1313,6 +1314,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      		      				            TAffichagePgpm affgp = new TAffichagePgpm();
      		      				            if(!AFG.isEmpty()) affgp =AFG.get(0); 
      		      				           affgp.setAffGpgRecherche(rechercheAll);
+     		      				           affgp.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
       		      				           iservice.updateObject(affgp);
          			
          			                       chargeData();
