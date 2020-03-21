@@ -979,7 +979,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       @Transactional
       public void creerDetailPlan() throws IOException{
     	  
-    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("")) {
+    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("") ) {
     		  //Message d'erreur
     		  FacesContext.getCurrentInstance().addMessage(null,
 	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -1147,7 +1147,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	  if(finAgpm.getFinId() > 0 ) {
     		  
     		  
-        	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("")) {
+        	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("") ) {
         		  //Message d'erreur
         		  FacesContext.getCurrentInstance().addMessage(null,
     	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -1909,7 +1909,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          @Transactional
          public void creerDetailPlanPgspm() throws IOException{
         	 
-        	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("")) {
+        	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || marche.getTymCode().equalsIgnoreCase("") || passationListe.getMopCode().equalsIgnoreCase("")) {
        		     //Message d'erreur
        		      FacesContext.getCurrentInstance().addMessage(null,
    	              new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -2271,7 +2271,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             		//Message d'erreur
             		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Veuillez, saisir votre opération!", "");
 			        FacesContext.getCurrentInstance().addMessage(null, msg);
-            	 }else {
+            	    }else {
             		    //Création du financement
             		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
     			        newFinancement.setTDevise(new TDevise(devCode));

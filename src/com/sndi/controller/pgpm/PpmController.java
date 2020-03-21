@@ -1254,7 +1254,7 @@ public class PpmController {
 	  		if(fipPgpm.getFipId() > 0 ) {
 	  			
 	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("") || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || tydCode.equalsIgnoreCase("") || detailPass.getDppBailleur().equalsIgnoreCase("")
-	  					 || detailPass.getDppDateAvisAoPublication().equals(null)) {
+	  					 || detailPass.getDppDateAvisAoPublication().equals(null) || pgpm.getGpgMopCode().equalsIgnoreCase("") || pgpm.getGpgTymCode().equalsIgnoreCase("")) {
 		  			   //Message d'erreur
 		  			   FacesContext.getCurrentInstance().addMessage(null,
 		  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
@@ -1494,6 +1494,7 @@ public class PpmController {
 		 					 if(!PL.isEmpty())  
 		 						 pass =PL.get(0); 
 		 					     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 					     pass.setDppTypeFinance(newFinancement.getFppTypeFinance());
 		 					     iservice.updateObject(pass);
 		 					     
 		 				List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
@@ -1501,6 +1502,7 @@ public class PpmController {
 		 			   				TAffichagePpm aff = new TAffichagePpm();
 		 								if(!AF.isEmpty()) aff =AF.get(0);
 		 								aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 								aff.setAffDppTypeFinance(newFinancement.getFppTypeFinance());
 		 								iservice.updateObject(aff);
 		 		  		
 		 		  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
