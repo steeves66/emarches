@@ -340,7 +340,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affGpgDateValDmp = affGpgDateValDmp;
 	}
 	
-	@Column(name = "AFF_GPG_TYP_FINANCE", length = 20)
+	@Column(name = "AFF_GPG_TYPE_FINANCE", length = 20)
 	public String getAffGpgTypFinance() {
 		return this.affGpgTypFinance;
 	}
