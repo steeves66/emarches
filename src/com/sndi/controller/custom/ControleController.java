@@ -271,6 +271,12 @@ public class ControleController {
 	private boolean btn_apercuJug =false;
 	private boolean etatLoveAgpm = false;
 	private boolean etatLoveAgpmPs = false;
+	
+	//Fermer Apercu DAO,AMI,PRQ
+	private boolean fermerApercuDao = false;
+	private boolean fermerApercuAmi = false;
+	private boolean fermerApercuPrq = false;
+	
 	//statuts
 	private String statutAffiche="";
 	private String statutUpdate="";
@@ -1169,6 +1175,9 @@ public class ControleController {
 				    				detailD = true ;
 									detailA = false; 
 									detailP = false;
+									fermerApercuDao = false;
+									fermerApercuAmi = true;
+									fermerApercuPrq = false;
 				    			}else
 				    				 if(action.equalsIgnoreCase("AFFAMI")) {
 				    				        type = "AMI";
@@ -1909,6 +1918,9 @@ public class ControleController {
 				    				detailD = true ;
 									detailA = false; 
 									detailP = false;
+									fermerApercuDao = true;
+									fermerApercuAmi = false;
+									fermerApercuPrq = false;
 				    			}else
 				    				 if(action.equalsIgnoreCase("AFFDAO")) {
 				    				        type = "DAO";
@@ -2651,6 +2663,9 @@ public class ControleController {
 				    				detailD = true ;
 									detailA = false; 
 									detailP = false;
+									fermerApercuDao = false;
+									fermerApercuAmi = false;
+									fermerApercuPrq = true;
 				    			}else
 				    				 if(action.equalsIgnoreCase("AFFPRQ")) {
 				    				        type = "PRQ";
@@ -5790,6 +5805,36 @@ public class ControleController {
 
 	public void setPanel13(boolean panel13) {
 		this.panel13 = panel13;
+	}
+
+
+	public boolean isFermerApercuDao() {
+		return fermerApercuDao;
+	}
+
+
+	public void setFermerApercuDao(boolean fermerApercuDao) {
+		this.fermerApercuDao = fermerApercuDao;
+	}
+
+
+	public boolean isFermerApercuAmi() {
+		return fermerApercuAmi;
+	}
+
+
+	public void setFermerApercuAmi(boolean fermerApercuAmi) {
+		this.fermerApercuAmi = fermerApercuAmi;
+	}
+
+
+	public boolean isFermerApercuPrq() {
+		return fermerApercuPrq;
+	}
+
+
+	public void setFermerApercuPrq(boolean fermerApercuPrq) {
+		this.fermerApercuPrq = fermerApercuPrq;
 	}
 	
 

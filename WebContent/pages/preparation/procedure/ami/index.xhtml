@@ -11,7 +11,7 @@
 <h:form id="gnl">	
  <section class="content-header">
       <h3>
-        #{controleController.libelleDao1} 
+        #{controleController.libelleDao3} 
         
         <small>
         <!-- #{controleController.libelle1} -->
@@ -920,15 +920,15 @@
             
             <div class="col-md-12">
             
-            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{amiController.renderPage('dao2','ENGDAO')}"  update=":content">
-				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
+            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouvel AMI" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{amiController.renderPage('ami2','ENGAMI')}"  update=":content">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvel #{controleController.type}</span>
 				</p:commandLink>
 			
 
 				    <div class="input-group input-group-sm col-md-3">
 				    
                     <label >
-                      <p:inputText type="text" value="#{amiController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{amiController.multiFiltre}"   placeholder="saisir le numero de l' #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -984,17 +984,6 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -1029,9 +1018,9 @@
 	         		         </h:panelGroup>
                            
                             <h:panelGroup rendered="#{controleController.detailD}">   
-                             <p:commandLink  action="#{etatsamiController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEAMI')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsamiController.slctdTd}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
                               
@@ -1093,17 +1082,7 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
+				       
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -1197,17 +1176,6 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -1287,18 +1255,7 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
+
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
@@ -1372,18 +1329,7 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
+
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
@@ -1436,12 +1382,7 @@
 				       <p:column headerText="Objet" styleClass="col-sm-6" >
          				<h:outputText value="#{slctdTb.dafDacObjet}" />
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dafTypeDac}" />
-				        </p:column>
-				       
+			
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >        				
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
 				        </p:column> 
@@ -1518,18 +1459,7 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
+
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
@@ -1607,17 +1537,6 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-3" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
@@ -1708,17 +1627,6 @@
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
          				</h:panelGroup>
          		
-				        </p:column>
-
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-         				</h:panelGroup> 
-         				
 				        </p:column>
 				        
 				       <p:column headerText="Objet" styleClass="col-sm-6" >
@@ -1823,18 +1731,7 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
+
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
@@ -1933,16 +1830,6 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -2420,7 +2307,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          AMI 
+			          DAO 
 			         </div>
 			         
 			          <div class="col-md-3">

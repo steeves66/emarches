@@ -1483,7 +1483,7 @@ public class PrqController {
 				dao = daoTab.get(0);
 				iservice.updateObject(dao);
 				
-				userController.setTexteMsg("DAO N° "+dao.getDacCode()+" mis à jour avec succès!");
+				userController.setTexteMsg("PRQ N° "+dao.getDacCode()+" mis à jour avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
 				
@@ -1501,7 +1501,7 @@ public class PrqController {
 		    	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
 		    	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
 		    	 dao.setTGestion(new TGestion(gesCode));
-		    	 dao.setTTypeDacSpecs(new TTypeDacSpecs("DAO"));
+		    	 dao.setTTypeDacSpecs(new TTypeDacSpecs("PRQ"));
 		    	 dao.setDacBailleur(daoDetail.getDppBailleur());
 		    	 iservice.addObject(dao);
 		    	 
@@ -1573,7 +1573,7 @@ public class PrqController {
 					     //Actualisation du tableau de Bord
 					     tableauBordController.chargeDataDao();
 					     
-					     userController.setTexteMsg("DAO N° "+dao.getDacCode()+" Initié avec succès!");
+					     userController.setTexteMsg("PRQ N° "+dao.getDacCode()+" Initié avec succès!");
 						 userController.setRenderMsg(true);
 						 userController.setSevrityMsg("success");
 		         }

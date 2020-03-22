@@ -292,6 +292,28 @@ public class EtatsDaoController {
 				chargeDossierAff();
 	   			_logger.info("value: "+value+" action "+action);	
 	    	break;
+	    	
+	   		case "ami3":
+	   			chargeAvis();
+	   			chargePieces();
+				chargeAdresse();
+				chargeLot();
+				chargeDaoPpm();
+				chargeDossier();
+	   		_logger.info("value: "+value+" action "+action);
+	   		break;
+	   		case "ami4":
+	   			_logger.info("value: "+value+" action "+action);	
+	    	break; 
+	   		case "ami8":
+	   			chargeAvisAff();
+	   			chargePiecesAff();
+				chargeAdresseAff();
+				chargeLotAff();
+				chargeDaoPpmAff();
+				chargeDossierAff();
+	   			_logger.info("value: "+value+" action "+action);	
+	    	break;
 	   		}
 	   		
 	   		return userController.renderPage(value);

@@ -407,12 +407,12 @@ public class AmiController {
 	 
 	 //Affichage des DAO Saisies par l'Autorité Contractante
 	 public void chargeData(){
-		 getListeDAO().clear();
-		 listeDAO.clear();
+		 //getListeDAO().clear();
+		 //listeDAO.clear();
 		 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
-		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+		         new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDAO.size());	
 			tableauBordController.chargeDataAmi();		
 	} 
@@ -2496,7 +2496,7 @@ public class AmiController {
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);	 
 		     switch(value) {
-				case "dao1":
+				case "ami1":
 					chargeData();
 					chargeDataPs();
 					chargeGestions();
@@ -2511,23 +2511,23 @@ public class AmiController {
 					chargeDataPriseCompte();
 					_logger.info("value: "+value+" action "+action);	
 					break;
-				case "dao2":
+				case "ami2":
 					chargePPM();
 					//chargePSPM();
 				break;
-				case "dao3":
+				case "ami3":
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dao4":
+                case "ami4":
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao5":
+                case "ami5":
                 	chargeFonctionImput();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dao6":
+                case "ami6":
                 	chargePiecesByDao();
                 	chargePiecesByCsv();
                 	chargePiecesByCharges();
@@ -2536,19 +2536,19 @@ public class AmiController {
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dao7":
+                case "ami7":
                 	//chargeDataARetirer();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;  
 				
-                case "dao9":
+                case "ami9":
                 	//chargeTiers();
                 	 chargeSoumissions();
                 	 chargeLotExiste();
 		 			_logger.info("value: "+value+" action: "+action);
 				break; 
 				
-                case "dao10":
+                case "ami10":
                 	chargeDaoBailleur();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
