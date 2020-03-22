@@ -1108,11 +1108,11 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
-                        <p:commandLink  action="#{etatsamiController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                        <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEAMI')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                         <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                        <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsamiController.slctdTd}" />
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                         </p:commandLink>
-                                  
+                              
                         <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                           <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
@@ -1121,7 +1121,7 @@
                         <p:commandLink  action="#{amiController.transmettreCpmp}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmission" update=":content">
                          <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                          <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" /> 
-                         <p:confirm header="Confirmation" message="Voulez-vous transmettre le DAO N°#{slctdTb.affDacCode} ?" icon="ui-icon-alert" />
+                         <p:confirm header="Confirmation" message="Voulez-vous transmettre l'AMI N°#{slctdTb.affDacCode} ?" icon="ui-icon-alert" />
                          </p:commandLink> 
                          
                          <p:commandLink action="#{amiController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
@@ -1283,7 +1283,7 @@
                         
                           
                             <h:panelGroup rendered="#{controleController.exaDao}">   
-                             <p:commandLink action="#{amiController.renderPage('dao6','EXADAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('ami6','EXAAM')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
