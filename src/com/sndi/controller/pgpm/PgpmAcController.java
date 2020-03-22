@@ -2269,10 +2269,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 
             public void saveFinancement(){
             	
-            	if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || souCode.equalsIgnoreCase("") ||sourfin.equalsIgnoreCase("")) {
-            		//Message d'erreur
-            		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Veuillez, saisir votre opération!", "");
-			        FacesContext.getCurrentInstance().addMessage(null, msg);
+            	if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) ||souCode.equalsIgnoreCase("") ||sourfin.equalsIgnoreCase("")) {
+			        //Message d'erreur
+		    		  FacesContext.getCurrentInstance().addMessage(null,
+			          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, saisir votre opération!", ""));
             	    }else {
             		    //Création du financement
             		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));

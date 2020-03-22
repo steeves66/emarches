@@ -422,7 +422,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
      			               newAff = daoPriseCompte.get(0);
      			               newAff.setAffDacAvisBailleur(slctdTd.getAffDacAvisBailleur());
      			               newAff.setAffDacDateBailleur(slctdTd.getAffDacDateBailleur());
-     			              //newAff.setAffStaCode("");
+     			               newAff.setAffStaCode("DOP");
      			               iservice.updateObject(newAff);   
      		                     }
      		
@@ -432,7 +432,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
      	                    newDao = listDao.get(0);
      	                    newDao.setDacAvisBailleur(slctdTd.getAffDacAvisBailleur());
      	                    newDao.setDacDateAvisBailleur(slctdTd.getAffDacDateBailleur());
-     	                    //newDao.setTStatut(new TStatut(""));
+     	                    newDao.setTStatut(new TStatut("DOP"));
      	                    iservice.updateObject(newDao);
      	                       }
      	          
@@ -1812,6 +1812,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		    	 affDao.setTModePassation(new TModePassation(dao.getTModePassation().getMopCode()));
 		         iservice.addObject(affDao);
 		    	 
+		         String search = dao.getTGestion().getGesCode()+""+dao.getDacCode()+""+dao.getDacObjet()+""+dao.getDacTypePlan()+""+dao.getTModePassation().getMopCode()+""+dao.getTTypeMarche().getTymCode();
+				 String rechercheAll = search.replace("null","");
+					
+					List<TAffichageDao> AFG =iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+			      				new WhereClause("AFF_DAC_CODE",WhereClause.Comparateur.EQ,""+affDao.getAffDacCode()));
+		      				TAffichageDao affgp = new TAffichageDao();
+		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
+		      				   affgp.setAffDacRecherche(rechercheAll);
+			      			   iservice.updateObject(affgp);
+		         
+		         
 		    	 listeDetail =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+daoDetail.getDppId()));
 						if (!listeDetail.isEmpty()) {
@@ -2023,33 +2034,41 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
    	 //Création de l'Avis
         @Transactional
         public void saveAvis() {
-        	avisTab = (List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DAC_CODE")),
-					new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
-    	       if (!avisTab.isEmpty()) {
-    	    	      newAvis = avisTab.get(0);
-				      iservice.updateObject(newAvis);
-    	            }else { 
-    	            	      newAvis.setAaoCode(keyGen.getCodeAvis());
-    	          		      newAvis.setTDacSpecs(dao);
-    	          		      newAvis.setTAdresseAvis(new TAdresseAvis(numDetailAdr)); 
-    	          		      newAvis.setTStatut(new TStatut("D1S"));
-    	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
-    	          		      iservice.addObject(newAvis); 
-    	          		   
-    	          		   
-    	          		   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-    	          				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-    	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-    	     				   if (!listDao.isEmpty()) {
-    	     					    newDao= listDao.get(0);
-    	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
-    	     			            iservice.updateObject(newDao); 
-    	     	   	                 }
-    	          		 
-    	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
-    	          		            userController.setRenderMsg(true);
-    	          		            userController.setSevrityMsg("success"); 
-    	                  }
+        	
+        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || "".equals(newAvis.getAaoCoutDac()) || "".equals(newAvis.getAaoNbrLot()) || "".equals(newAvis.getAaoDelaiVal())) { 
+        		
+        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez remplir tous les champs obligatoires! ","");
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+        		
+        	    }else {
+        	    	avisTab = (List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DAC_CODE")),
+        					new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
+            	       if (!avisTab.isEmpty()) {
+            	    	      newAvis = avisTab.get(0);
+        				      iservice.updateObject(newAvis);
+            	            }else { 
+            	            	      newAvis.setAaoCode(keyGen.getCodeAvis());
+            	          		      newAvis.setTDacSpecs(dao);
+            	          		      newAvis.setTAdresseAvis(new TAdresseAvis(numDetailAdr)); 
+            	          		      newAvis.setTStatut(new TStatut("D1S"));
+            	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
+            	          		      iservice.addObject(newAvis); 
+            	          		   
+            	          		   
+            	          		   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+            	          				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+            	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+            	     				   if (!listDao.isEmpty()) {
+            	     					    newDao= listDao.get(0);
+            	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
+            	     			            iservice.updateObject(newDao); 
+            	     	   	                 }
+            	          		 
+            	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
+            	          		            userController.setRenderMsg(true);
+            	          		            userController.setSevrityMsg("success"); 
+            	                  }
+        	                   } 
                      }
      
         
@@ -2705,7 +2724,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
         @Transactional
         public void transmettre() {
         	
-        	if(dos.getDdaNom().equalsIgnoreCase("") || dos.getDdaReference().equalsIgnoreCase("")) {
+        	if(dos.getDdaNom().equalsIgnoreCase("") || "".equals(dos.getDdaNom()) || dos.getDdaReference().equalsIgnoreCase("") || "".equals(dos.getDdaReference())) {
         		//Message d'erreur
 		          FacesContext.getCurrentInstance().addMessage(null,
 	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez joindre votre fichier avant Transmission", ""));

@@ -131,6 +131,10 @@
                 <!-- /.box-header -->
 	             <div class="box-body">
                <p:dataTable id="financedetail" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsPpmController.financementListe}"  emptyMessage="Aucun financement enregistré">
+         				<p:column headerText="Type Financement" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fppTypeFinance}"/>
+				        </p:column>
+         				
          				<p:column headerText="Bailleur" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
 				        </p:column>
@@ -142,8 +146,11 @@
 				        <p:column headerText="Devise" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TDevise.devLibelle}" />
 				        </p:column>
-				         <p:column headerText="Montant" styleClass="col-sm-1">
+				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fppMontantCfa} #{slctdTb.TDevise.devSymbole}" />
+				        </p:column>
+				        <p:column headerText="Part Trésor" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fppPartTresor}" />
 				        </p:column>
 				        
                  </p:dataTable>     

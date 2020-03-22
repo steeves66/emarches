@@ -358,7 +358,7 @@
         
                 <h:panelGroup rendered="#{pgpmAcController.etatFinancement1}"> 
                <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.listeFinancement}" scrollable="true" scrollHeight="90"  emptyMessage="Aucun financement enregistré">
-         				<p:column headerText="Source" styleClass="col-sm-1">
+         				<p:column headerText="Type" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fipTypeFinance}" />
 				        </p:column>
          				
@@ -366,16 +366,20 @@
 				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
 				        </p:column>
 				        
-				        <p:column headerText="Type" styleClass="col-sm-1">
+				        <p:column headerText="Source" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 
 				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fipMontantCfa}" />
+				            <h:outputText value="#{slctdTb.fipMontantCfa}" >
+				            <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				            </h:outputText>
 				        </p:column>
 				        
 				        <p:column headerText="Part Trésor" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fipPartTresor}" />
+				            <h:outputText value="#{slctdTb.fipTresor}" >
+				            <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				            </h:outputText>
 				        </p:column>
 				         <p:column headerText="Actions" styleClass="col-sm-1">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancement}" title="Supprimer" update="gnl">
@@ -766,9 +770,11 @@
 	                <h:panelGroup id="idTres"> 
 	                <h:panelGroup rendered="#{pgpmAcController.selectTresor}">
 	                <div class="form-group ">
-	                  <label for="partTresor" class="col-sm-1 control-label"><b>Part Trésor</b></label>
+	                  <label for="tresor" class="col-sm-1 control-label"><b>Part Trésor</b></label>
 	                  <div class="col-sm-11">
-	                    <p:inputText type="text" value="#{pgmpAcController.newFinancement.fipPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{pgpmAcController.newFinancement.fipTresor}" id="tresor" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" update="finlog:tresor" />
 	                    </p:inputText>
 	                  </div>
 	                </div>

@@ -51,7 +51,61 @@
 				</h:panelGroup>
      
      <p:wizard flowListener="#{daoController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
-        <p:tab id="creation" title="Initiation du #{controleController.type}" titleStyle="background-color: #f88b2e;background-image: none">
+     
+      <p:tab id="PBailleur" title="Avis du Bailleur" rendered="#{daoController.panelAvisBailleur}" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-9 "><div  style="color: #fff">AVIS DU BAILLEUR</div></div> 
+         </div>
+         <div class="box-body">
+             <div class="row">
+             
+              <div class="col-md-6">
+              
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Date de L'avis<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+                    <table>
+		                 <tr>
+		                 <td>
+		                  <p:calendar id="oftT" pattern="dd/MM/yyyy" value="#{daoController.slctdTd.affDacDateBailleur}" style="width: 100%" >
+		                   </p:calendar>
+		                 </td>
+		                 
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+	          
+	          <div class="form-group">
+                  <label for="avis" class="col-sm-3 control-label">Avis du Bailleur<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                   <p:inputTextarea placeholder="Avis du Bailleur" rows="3" cols="33" styleClass="form-control" value="#{daoController.slctdTd.affDacAvisBailleur}" id="relalisation" style="width: 100%" />
+                  </div>
+              </div>	
+                        
+            </div>
+             </div>
+                  <br/> 
+                 <div class="pull-right ">
+			            <p:commandLink action="#{daoController.saveAvisBailleur()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update="gnl:PBailleur">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                 </div> 
+         </div>
+         
+         
+         </div>
+         </div>
+           </div>
+         </p:tab>
+     
+     
+     
+        <p:tab id="creation" title="Initiation du #{controleController.type}" rendered="#{daoController.pavet2}" titleStyle="background-color: #f88b2e;background-image: none">
        
            <div class="row">
             <div class="col-md-12">
@@ -64,10 +118,7 @@
 	            <div class="col-md-2">
 	             <label for="gestion1" class="col-sm-5 control-label">Gestion<span style="color:red;"> *</span></label>
 	              <div class="col-sm-6">
-		                    <p:selectOneMenu id="gestion1" value="#{daoController.gesCode}"
-			                         effect="fade" style="width:100%">
-					       <f:selectItems value="#{daoController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
-		       		        </p:selectOneMenu>
+		            <p:inputText  type="text" value="#{daoController.slctdTd.TGestion.gesCode}" styleClass="form-control" id="mini" readonly="true" style="width: 100%" />
 	               </div>
 	            </div>
 	            <div class="col-md-10">
@@ -118,159 +169,9 @@
 	         </div>
                </div>
                
-          <h:panelGroup rendered="#{controleController.ppmModePn}">     
-           <div class="row">
-            <div class="col-md-12">
-              <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                <div class="col-md-12 ">
-                   <div  style="color: #fff">CHOISIR LE(S) PPM POUR CREER VOTRE #{controleController.type}</div>
-                 </div>
-                </div>
-               <div class="box-body">
-                 <div class="input-group input-group-sm col-md-3">
-                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero du PPM"></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
-                    </span>
-					 </div>
-               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
-					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" emptyMessage="Aucun PPM enregistré" rows="5" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
-                         
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                         
-                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-
-                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.souLibelle}" />
-				        </p:column>
-				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.lbgImputation}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				       
-         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column> 
-         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column> 
-				        
-				         
-				       
-                      <p:column headerText="Actions" styleClass="col-sm-2">
-                        
-                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
-                             </p:commandLink>
-                            
-                          
-                          <h:panelGroup rendered="#{controleController.detailP2}">   
-                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPSPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PSPM" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
-                             </p:commandLink>
-                            </h:panelGroup>
-				         </p:column>   
-                    </p:dataTable>
-                    
-                   <div>
-                   
-                   </div>
-    
-	               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{daoController.renseignerDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			             <i class="ace-icon fa fa-save"></i> OK
-	               </p:commandLink>
-	 
-              </div>
-             </div>
-           </div>
-         </div>
-         </h:panelGroup>
+      
          
-         
-         <h:panelGroup rendered="#{controleController.pspmModePs}">
-           <div class="row">
-            <div class="col-md-12">
-              <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                <div class="col-md-12 ">
-                   <div  style="color: #fff">CHOISIR LE(S) PSPM POUR CREER VOTRE #{controleController.type}</div>
-                 </div>
-                </div>
-               <div class="box-body">
-                 <div class="input-group input-group-sm col-md-3">
-                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero du PPM"></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
-                    </span>
-					 </div>
-                    <p:dataTable id="pslntbl" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
-					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" emptyMessage="Aucun PSPM enregistré" rows="5" 
-                         paginator="true" rowsPerPageTemplate="5,10,15" >
-                         
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                         
-                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-
-                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.souLibelle}" />
-				        </p:column>
-				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.lbgImputation}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				       
-         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column> 
-         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column> 
-				        
-				         
-				       
-                      <p:column headerText="Actions" styleClass="col-sm-2">
-                        
-                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
-                             </p:commandLink>
-                            
-                          
-                          <h:panelGroup rendered="#{controleController.detailP2}">   
-                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPSPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PSPM" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
-                             </p:commandLink>
-                            </h:panelGroup>
-				         </p:column>   
-                    </p:dataTable>
-                    
-                   <div>
-                   
-                   </div>
     
-	               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{daoController.renseignerDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			             <i class="ace-icon fa fa-save"></i> OK
-	               </p:commandLink>
-	 
-              </div>
-             </div>
-           </div>
-         </div>
-         </h:panelGroup>
          
          
          
@@ -288,14 +189,14 @@
 	           <div class="form-group">
                   <label for="relalisation" class="col-sm-3 control-label">Objet de l'Opération</label>
                   <div class="col-sm-9">
-                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" id="relalisation" style="width: 100%" />
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.slctdTd.affDacObjet}" id="relalisation" style="width: 100%" />
                   </div>
               </div>
                
                  <div class="form-group">
                   <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		                <p:inputText id="typMa1" type="text" value="#{daoController.daoDetail.tymCode} : #{daoController.daoDetail.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                <p:inputText id="typMa1" type="text" value="#{daoController.slctdTd.TTypeMarche.tymCode}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div> 
                  
@@ -303,7 +204,7 @@
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-                  <p:inputText id="modeP2" type="text" value="#{daoController.daoDetail.mopCode} : #{daoController.daoDetail.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />    
+                  <p:inputText id="modeP2" type="text" value="#{daoController.slctdTd.TModePassation.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" />    
                   </div>
                 </div> 
             
@@ -336,12 +237,7 @@
 	          
 	           
           </div>
-          <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_pn}" action="#{daoController.saveDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
-	      </p:commandLink>
-	      
-	      <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_ps}" action="#{daoController.saveDaoPs()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+          <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_pn}" action="#{daoController.modifDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	      </p:commandLink>
@@ -351,13 +247,10 @@
        </div>
          
             </div>
-            
-            
            </div>
-       
          </p:tab>
          
-        <p:tab id="avis" title="Saisie des Avis d'appel d'Offre" titleStyle="background-color: #f88b2e;background-image: none">
+        <p:tab id="avis" title="Saisie des Avis d'appel d'Offre" rendered="#{daoController.pavet3}" titleStyle="background-color: #f88b2e;background-image: none">
          <p:panel>
             <div class="row">    
             <div class="col-md-6">
@@ -467,6 +360,12 @@
 		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%" />
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Coût du DAO<span style="color:red;">*</span></label>
+				  <div class="col-sm-9">
+		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}"  style="width: 100%" />
+                  </div>
+                </div>
                 
          </div>
          </div>
@@ -476,11 +375,7 @@
             <div class="box box-success box-solid">
              <div class="box-header with-border">
              <div class="col-md-12 "><div  style="color: #fff">RETRAIT DES #{controleController.type} CHEZ LE REPRESENTANT</div></div> 
-			         <!-- <div class="col-md-2 "> 
-			           <p:commandLink oncomplete="PF('DetailAdr').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
-								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
-								</p:commandLink>
-			         </div> -->
+			         
          </div>
          <div class="box-body">
          <p:messages id="messages" showDetail="false" autoUpdate="true"  closable="true"/>   
@@ -632,7 +527,7 @@
                 <div class="pull-right ">
                        
                        
-					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.saveAvis()}"  update=":content">
+					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.modifAvis()}"  update=":content">
 				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Enregistrer
 				            </p:commandLink>
@@ -642,7 +537,7 @@
           </p:panel>
          </p:tab>
          
-		 <p:tab id="tabLot" title="Saisie des lots" titleStyle="background-color: #f88b2e;background-image: none">
+		 <p:tab id="tabLot" title="Saisie des lots" rendered="#{daoController.pavet4}" titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
@@ -741,12 +636,7 @@
                  </p:dataTable> 
                  
                   <br/> 
-                 <!-- <div class="pull-right ">
-			            <p:commandLink action="#{daoController.saveDetailLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl:finance">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
-			            </p:commandLink>
-                 </div> --> 
+                
          </div>
          
          
@@ -757,7 +647,7 @@
          
          
          
-         		 <p:tab id="Poffre" title="Pièces de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
+        <p:tab id="Poffre" title="Pièces de l'offre" rendered="#{daoController.pavet5}" titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
@@ -789,7 +679,7 @@
              
               
             
-            <p:tab id="confirmation" title="Confirmation" titleStyle="background-color: #f88b2e;background-image: none">
+            <p:tab id="confirmation" title="Confirmation" rendered="#{daoController.pavet6}" titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel>
              <div class="row">
              <div class="col-md-6">

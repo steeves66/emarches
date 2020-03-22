@@ -1716,9 +1716,9 @@ public class ControleController {
 			    		panelRegister=false;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIDAO")) {
-			    			type = "DAO";
+			    			type = "DAC";
 			    			libelle1="Index";
-			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL D'OFFRES";
+			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
 			    			 btn_new =true;
 			    			 btn_affec = false;
 							 panel1 =true;

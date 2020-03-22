@@ -14,14 +14,16 @@
        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
         #{controleController.libelleProcedure} 
         </h:panelGroup>
+        
       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
         #{controleController.libelleProcedure} 
         </h:panelGroup>
+        
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
          #{controleController.libelle1}
          </h:panelGroup>
         <small>
-        <!-- #{controleController.libelle1} -->
+        
         
         </small>
       </h3>
@@ -980,7 +982,7 @@
     </h:form>
     
     <h:form id="apercuDif">
-	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">

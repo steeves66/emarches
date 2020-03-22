@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 21 mars 2020 13:48:08 by Hibernate Tools 4.3.5.Final
+// Generated 22 mars 2020 01:52:15 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;

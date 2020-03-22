@@ -712,7 +712,7 @@ public class AgpmController {
 	    VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
 	      if(bai == null) {
 	                           
-	    	  if(projet.getProTitre().equalsIgnoreCase("") || agpm.getAgpCommentaire().equalsIgnoreCase("") || projet.getProTypeProjet().equalsIgnoreCase("") || baiCode.equalsIgnoreCase("") || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
+	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || baiCode.equalsIgnoreCase("") || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
 	                      //Message d'erreur
 	    		          FacesContext.getCurrentInstance().addMessage(null,
 	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs", ""));	 

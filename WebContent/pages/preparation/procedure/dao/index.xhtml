@@ -11,7 +11,7 @@
 <h:form id="gnl">	
  <section class="content-header">
       <h3>
-        #{controleController.libelleDao1} 
+        #{controleController.libelleDao3} 
         
         <small>
         <!-- #{controleController.libelle1} -->
@@ -73,7 +73,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoAcTransmis}</h3>
 
-              <p>DAC Transmis</p>
+              <p>#{controleController.type} Transmis</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -91,7 +91,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmAcDiffCpmp}</h3> 
 
-              <p>DAC Differé(s)</p>
+              <p>#{controleController.type} Differé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -106,7 +106,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmAcDiffDmp}</h3>
 
-              <p>DAC Rejeté(s) par le DMP</p>
+              <p>#{controleController.type} Rejeté(s) par le DMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -132,7 +132,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoAcPs}</h3>
 
-              <p>DAO en attente de transmission</p>
+              <p>#{controleController.type} en attente de transmission</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -147,7 +147,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoAcTransmis}</h3>
 
-              <p>DAC Transmis</p>
+              <p>#{controleController.type} Transmis</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -165,7 +165,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmAcDiffCpmp}</h3> 
 
-              <p>DAC Differé(s)</p>
+              <p>#{controleController.type} Differé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -180,7 +180,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmAcDiffDmp}</h3>
 
-              <p>DAC Rejeté(s) par le DMP</p>
+              <p>#{controleController.type} Rejeté(s) par le DMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -215,7 +215,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCsvValide}</h3>
 
-              <p>DAC en attente de Publication</p>
+              <p>#{controleController.type} en attente de Publication</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -234,7 +234,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoChargeVal}</h3>
 
-              <p>DAO publié(s)</p>
+              <p>#{controleController.type} publié(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -252,6 +252,9 @@
        </h:panelGroup> 
        </h:panelGroup> 
         <!-- Fin Tableau de Bord Publication pour le AC -->  
+        
+        
+        
          
            
               
@@ -268,7 +271,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmCpSaisie}</h3>
 
-              <p>DAC en attente de transmission</p>
+              <p>#{controleController.type} en attente de transmission</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -283,7 +286,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmCpTransmis}</h3>
 
-              <p>DAC Transmis</p>
+              <p>#{controleController.type} Transmis</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -312,7 +315,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCsvAttVal}</h3>
 
-              <p>DAC en attente de Validation</p>
+              <p>#{controleController.type} en attente de Validation</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -330,7 +333,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCsvValide}</h3>
 
-              <p>DAC validé(s)</p>
+              <p>#{controleController.type} validé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -350,7 +353,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmCpDifDmp}</h3>
 
-              <p>DAC différé(s) par la DMP</p>
+              <p>#{controleController.type} différé(s) par la DMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -383,7 +386,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmDmSaisie}</h3>
 
-              <p>DAC en attente de transmission</p>
+              <p>#{controleController.type} en attente de transmission</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -398,7 +401,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmDmTransmis}</h3>
 
-              <p>DAC Transmis</p>
+              <p>#{controleController.type} Transmis</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -427,7 +430,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmDmAttenteValide}</h3>
 
-              <p>DACen attente de Validation</p>
+              <p>#{controleController.type} en attente de Validation</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -445,7 +448,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmDmValide}</h3>
 
-              <p>DAC Validé(s) par la dmp</p>
+              <p>#{controleController.type} Validé(s) par la DMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -466,7 +469,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmDmDiff}</h3>
 
-              <p>DAC Différé(s) par la DMP</p>
+              <p>#{controleController.type} Différé(s) par la DMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
@@ -501,7 +504,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCsvAttAff}</h3>
 
-              <p>DAC en attente d'Affectation</p>
+              <p>#{controleController.type} en attente d'Affectation</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -521,7 +524,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoaffecte}</h3>
 
-              <p>DAC affecté(s)</p>
+              <p>#{controleController.type} affecté(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -543,7 +546,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCsvDiff}</h3>
 
-              <p>DAC différé(s)</p>
+              <p>#{controleController.type} différé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -563,7 +566,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmCpValide}</h3>
 
-              <p>DAC en cours chez les C.E</p>
+              <p>#{controleController.type} en cours chez les C.E</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -588,7 +591,7 @@
          
          
          
-                      <!-- Début Tableau de Bord pour le Chargé d'Etudes -->       
+             <!-- Début Tableau de Bord pour le Chargé d'Etudes -->       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}">      
           
        <h:panelGroup rendered="#{controleController.panelDaoTableauBordCha}">
@@ -603,7 +606,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoChargeAttente}</h3>
 
-              <p>DAC en attente de Traitement</p>
+              <p>DAO en attente de Traitement</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -622,12 +625,31 @@
             <div class="inner">
               <h3>#{tableauBordController.daoChargeVal}</h3>
 
-              <p>DAC validé(s)</p>
+              <p>DAO validé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
              <p:commandLink  oncomplete="PF('detailChargeValDlg').show()" action="#{daoController.chargeDataChargeVal()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoChargeCor}</h3>
+
+              <p>DAO corrigé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailChargeCorDlg').show()" action="#{daoController.chargeDaoCorrige()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 			 Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -639,7 +661,7 @@
                   </div>
        </h:panelGroup>
        </h:panelGroup> 
-        <!-- Fin Tableau de Bord pour le Chargé d'Etudes -->  
+        <!-- Fin Tableau de Bord pour le Chargé d'Etudes -->   
         
           
          
@@ -657,7 +679,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmCpAttenteValide}</h3>
 
-              <p>DAC en attente d'examen</p>
+              <p>#{controleController.type} en attente d'examen</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -675,7 +697,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCsvVal}</h3>
 
-              <p>DAC validé(s)</p>
+              <p>#{controleController.type} validé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -694,7 +716,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCsvDiff}</h3>
 
-              <p>DAC différé(s)</p>
+              <p>#{controleController.type} différé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -729,7 +751,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCpSaisie}</h3>
 
-              <p>DAC en attente de Validation</p>
+              <p>#{controleController.type} en attente de Validation</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -747,12 +769,12 @@
             <div class="inner">
               <h3>#{tableauBordController.daoCpValide}</h3>
 
-              <p>DAC validé(s) par la CPMP</p>
+              <p>#{controleController.type} transmi(s) par la CPMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-             <p:commandLink  oncomplete="PF('detailCpmDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+             <p:commandLink  oncomplete="PF('detailCpmTransDlg').show()" action="{daoController.chargeDaoValide()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 			 Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -765,7 +787,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmCpDifCpmp}</h3>
 
-              <p>DAC différé(s) par la cpmp</p>
+              <p>#{controleController.type} différé(s) par la cpmp</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
@@ -797,7 +819,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoAcAttRetrait}</h3>
 
-              <p>DAC en attente de retrait</p>
+              <p>#{controleController.type} en attente de retrait</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -817,7 +839,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoAcRetire}</h3>
 
-              <p>DAC retiré(s)</p>
+              <p>#{controleController.type} retiré(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -855,7 +877,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoAcAttVente}</h3>
 
-              <p>DAC en attente de vente</p>
+              <p>#{controleController.type} en attente de vente</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -875,7 +897,7 @@
             <div class="inner">
               <h3>#{tableauBordController.daoAcRetire}</h3>
 
-              <p>DAC vendu(s)</p>
+              <p>#{controleController.type} vendu(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -1477,6 +1499,21 @@
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" /> 
                             </p:commandLink> 
+                            
+                            
+                            <h:panelGroup rendered="#{slctdTb.dafStaCode != 'DC2'}">
+                            <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
+                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" /> 
+                            </p:commandLink> 
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{slctdTb.dafStaCode == 'DC2'}">
+                           <p:commandLink  oncomplete="PF('transDaoChargeDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i>
+                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" />
+                           </p:commandLink> 
+                           </h:panelGroup>
                         
 				         </p:column>   
     </p:dataTable>
@@ -2240,6 +2277,63 @@
       </p:dialog>
     </h:form>
     
+    <h:form id="apercuCpTrans">
+	        <p:dialog  widgetVar="detailCpmTransDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+			         <div class="col-md-3">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+
+			         </div>
+			         
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoValide}"
+						 selectionMode="single" 
+			               emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+					      <p:column headerText="Gestion" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
+				        </p:column>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+				        </p:column> 
+						</p:dataTable>
+						</h:panelGrid> 
+
+	                </div>
+
+		            </div>
+	            </div>
+
+            </div>
+      </p:dialog>
+    </h:form>
+    
      <h:form id="apercuCp">
 	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
 				<div class="col-md-12">
@@ -2374,7 +2468,7 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover"  
-						 selectionMode="single" 
+						 selectionMode="single"  scrollable="true" scrollHeight="120"
 			               emptyMessage="Aucun #{controleController.type} validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -2432,7 +2526,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" 
 						 selectionMode="single" 
-			               emptyMessage="Aucun DAO différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun DAO différé"  scrollable="true" scrollHeight="120" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2488,7 +2582,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" 
+						 <p:dataTable id="ndTbleFonc"  scrollable="true" scrollHeight="120" styleClass="table table-bordered table-hover" var="slctdTb" 
 						 selectionMode="single" 
 			               emptyMessage="Aucun DAO différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			               
@@ -2642,7 +2736,7 @@
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listDaoValCharge}"  emptyMessage="Aucun Dao validé">
+                <p:dataTable id="tabDossier"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listDaoValCharge}"  emptyMessage="Aucun Dao validé">
 			        
 			           
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -2689,7 +2783,7 @@
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossierVal" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoValCsv}"  emptyMessage="Aucun Dao validé">
+                <p:dataTable id="tabDossierVal"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoValCsv}"  emptyMessage="Aucun Dao validé">
 			        
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2736,7 +2830,7 @@
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossierDiff" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoDiffCsv}"  emptyMessage="Aucun Dao différé">
+                <p:dataTable id="tabDossierDiff"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoDiffCsv}"  emptyMessage="Aucun Dao différé">
 			        
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2771,10 +2865,145 @@
       </p:dialog>
     </h:form>
     
+      <h:form id="apercuDAOCharge">
+	        <p:dialog  widgetVar="transDaoChargeDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	         <div class="row">
+                   <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+             </div>
+				<div class="col-md-12">
+		            <div class="box box-warning box-solid" >
+		              <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-12 "><div  style="color: #fff"> TRANSMISSION DU #{controleController.type} N°#{daoController.slctdTda.dafDacCode}</div></div>
+			         </div>
+			          <div class="box-body">
+				      <div class="row">
+		                  <div class="col-sm-3"><label class="pull-right">Type de Marché</label></div>
+			                  <div class="col-sm-9">
+			                   <label><h:outputText value="#{daoController.slctdTda.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" styleClass="text-muted" style="width: 100%"/></label> 
+		                  </div>
+		             </div>
+		             
+		              <div class="row">
+		                  <div class="col-sm-3"><label class="pull-right">Mode de Passation</label></div>
+			                  <div class="col-sm-9">
+			                   <label><h:outputText value="#{daoController.slctdTda.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleCourt}" styleClass="text-muted" style="width: 100%"/></label> 
+		                  </div>
+		             </div>
+                
+                 <div class="row">
+		                  <div class="col-sm-3"><label class="pull-right">Objet</label></div>
+			                  <div class="col-sm-9">
+			                   <label><h:outputText value="#{daoController.slctdTda.dafDacObjet}" styleClass="text-muted" style="width: 100%"/></label> 
+		                  </div>
+		             </div>
+			          </div>
+		            </div>
+	            </div>
+	            
+	            <div class="col-md-12">
+	             <div class="form-group ">
+	              <div class="col-xs-6 col-sm-8">
+                     
+                  </div>
+	                </div>
+	            <div class="col-xs-6 col-sm-4"><label class="control-label" style="margin-top:20px"><b>Nature du document</b></label></div>
+								<div class="col-xs-6 col-sm-8">
+								<p:selectOneMenu  value="#{daoController.docNature}" style="width:100%; margin-top:20px;">
+							        <f:selectItem  itemLabel="Selectionnez la nature du document..." itemValue=""/>  
+								    <f:selectItems value="#{daoController.natureDocListe}" var="v" itemLabel="#{v.nadLibelle}" itemValue="#{v.nadCode}"/> 
+								    <p:ajax process="@this" update="@this"></p:ajax>
+				       			    </p:selectOneMenu>
+								</div>
+				</div>
+	            <div class="col-md-12">
+	              <p:fileUpload fileUploadListener="#{daoController.uploadCharge}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":apercuDAO:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+	            </div>
+	            
+	            <div class="col-md-12">
+		            <div class="box box-success box-solid" >
+		              <div class="box-header with-border">
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES DAO</div></div>
+			         </div>
+			          <div class="box-body">
+			          
+                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossListe}" emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-10">
+			            <h:outputText value="#{doss.ddaNom}" />
+			        </p:column>
+			        <p:column headerText="Nature Document" styleClass="col-md-10">
+			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
+			        </p:column>
+			        
+			        <p:column headerText="Actions" styleClass="col-md-2">
+			        
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeDossier}" title="Supprimer" update="gnl">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
+		                </p:commandLink>
+		 	        </p:column>
+			    </p:dataTable>  
+			          </div>
+		            </div>
+	            </div>
+	            
+	            
+	             <div class="pull-right ">
+			            <p:commandLink action="#{daoController.transmetttreRespo()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:confirm header="Confirmation" message="Confirmez vous la trasmission ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-exchange"></i> Transmettre  
+			            </p:commandLink>
+              </div>
+	            
+	            
+      </p:dialog>
+    </h:form>  
     
     
+     <h:form id="apercuDAOCor">
+	        <p:dialog  widgetVar="detailChargeCorDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
     
-    
+	            <div class="col-md-12">
+		            <div class="box box-success box-solid" >
+		              <div class="box-header with-border">
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO CORRIGES</div></div>
+			         </div>
+			          <div class="box-body">
+			          
+                <p:dataTable id="tabDossier" scrollable="true" scrollHeight="465" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoCsvValid}"  emptyMessage="Aucun Dao corrigé">
+			           <p:column headerText="Gestion" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dacGesCode}" />
+				        </p:column>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dacCode}" />
+				        </p:column>
+				        
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+			    </p:dataTable>  
+			          </div>
+		            </div>
+	            </div>
+	                 
+      </p:dialog>
+    </h:form>
           
     
     

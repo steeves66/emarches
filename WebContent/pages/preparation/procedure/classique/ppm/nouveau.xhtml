@@ -420,7 +420,7 @@
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 				        
-				        <!--  <p:column headerText="Cout de l'opération" width="7%">
+				        <p:column headerText="Part Bailleur" width="5%">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipMontantCfa}" >
@@ -432,7 +432,21 @@
 		               <p:ajax event="blur" update=":gnl:MontTot" listener="#{ppmController.coutOperation()}" />
 		                 </p:inputText></f:facet>
 		               </p:cellEditor>
-				        </p:column> -->
+				        </p:column>
+				        
+				        <p:column headerText="Part Trésor" width="5%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipPartTresor}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fipPartTresor}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		               <p:ajax event="blur" update=":gnl:MontTot" listener="#{ppmController.coutOperation()}" />
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
 				        
 				   
                  </p:dataTable>  

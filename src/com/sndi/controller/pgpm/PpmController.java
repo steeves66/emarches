@@ -1253,11 +1253,11 @@ public class PpmController {
 	  		 
 	  		if(fipPgpm.getFipId() > 0 ) {
 	  			
-	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("") || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || tydCode.equalsIgnoreCase("") || detailPass.getDppBailleur().equalsIgnoreCase("")
-	  					 || detailPass.getDppDateAvisAoPublication().equals(null) || pgpm.getGpgMopCode().equalsIgnoreCase("") || pgpm.getGpgTymCode().equalsIgnoreCase("")) {
+	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("")|| "".equals(detailPass.getDppStructureConduc()) || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || "".equals(detailPass.getDppStructureBenefi()) || tydCode.equalsIgnoreCase("") || detailPass.getDppBailleur().equalsIgnoreCase("")
+	  					 || detailPass.getDppDateAvisAoPublication().equals(null) || pgpm.getGpgMopCode().equalsIgnoreCase("") ||"".equals(pgpm.getGpgMopCode()) || pgpm.getGpgTymCode().equalsIgnoreCase("") || "".equals(pgpm.getGpgTymCode()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode())) {
 		  			   //Message d'erreur
 		  			   FacesContext.getCurrentInstance().addMessage(null,
-		  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
+		  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs ainsi que l'imputation budgétaire", "")); 
 		  		    }else {
 		  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
 		 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
@@ -1348,7 +1348,7 @@ public class PpmController {
 		 	  		newFinancement.setTDevise(new TDevise(fipPgpm.getTDevise().getDevCode()));
 		 	  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
 		 	  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
-		 	  		newFinancement.setFppPartTresor(fipPgpm.getFipPartTresor());
+		 	  		newFinancement.setFppPartTresor(fipPgpm.getFipTresor());
 		 	  		iservice.addObject(newFinancement);
 		 	  		
 		 	  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
@@ -1482,7 +1482,7 @@ public class PpmController {
 		 		  		newFinancement.setTDevise(new TDevise(fipPgpm.getTDevise().getDevCode()));
 		 		  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
 		 		  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
-		 		  		newFinancement.setFppPartTresor(fipPgpm.getFipPartTresor());
+		 		  		newFinancement.setFppPartTresor(fipPgpm.getFipTresor());
 		 		  		iservice.addObject(newFinancement);
 		 		  		
 		 		  		
@@ -2626,7 +2626,7 @@ public class PpmController {
 				 public void coutOperation() {
 					 totalMontant = 0;
 					 for(TFinancementPgpm n : listeFinancementPgpm) {
-						 totalMontant = totalMontant+ (n.getFipMontantCfa());
+						 totalMontant = totalMontant+ (n.getFipMontantCfa()+n.getFipTresor());
 					 }
 				 }
 				 

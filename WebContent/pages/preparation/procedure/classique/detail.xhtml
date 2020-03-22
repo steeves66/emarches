@@ -131,19 +131,30 @@
 	             <div class="box-body">
 	             
 	             <p:dataTable id="financedetail" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsPgpmController.financementListe}"  emptyMessage="Aucun financement enregistré">
+         				
+         				<p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipTypeFinance}" />
+				        </p:column>
+         				
+         				
          				<p:column headerText="Bailleur" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
 				        </p:column>
 				        
-				        <p:column headerText="Type" styleClass="col-sm-1">
+				        <p:column headerText="Source" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Devise" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TDevise.devLibelle}" />
 				        </p:column>
-				         <p:column headerText="Montant" styleClass="col-sm-1">
+				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fipMontantCfa} #{slctdTb.TDevise.devSymbole}" />
+				        </p:column>
+				        <p:column headerText="Part Trésor" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipTresor}" >
+				            <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				            </h:outputText>
 				        </p:column>
 				        
                  </p:dataTable>

@@ -471,7 +471,10 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Coût du DAO<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}"  style="width: 100%" />
+		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}" id="coutD"  style="width: 100%" >
+		          <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	              <p:ajax event="blur" process="@this" update="gnl:coutD" />
+	              </p:inputText>
                   </div>
                 </div>
                 
@@ -721,21 +724,6 @@
 		               </p:cellEditor>
 				        </p:column>
 				        
-				         <p:column headerText="Cout Lot/Dao" styleClass="col-sm-1">
-				          <p:cellEditor>
-		                <f:facet name="output">
-		                <h:outputText styleClass="pull-right" value="#{slctdTb.laaMtEst}" >
-		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-		                </h:outputText>
-		                </f:facet>
-		                <f:facet name="input"> 
-		                <p:inputText id="cout" value="#{slctdTb.laaMtEst}" style="width:100%">
-		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-		                
-		                 </p:inputText>
-		                 </f:facet>
-		               </p:cellEditor>
-				        </p:column>
 				        
 				         <p:column headerText="Actions" width="4%">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLot}" title="Supprimer" update="gnl">
@@ -792,8 +780,7 @@
          </p:tab> 
              
               
-            
-            <p:tab id="confirmation" title="Confirmation" titleStyle="background-color: #f88b2e;background-image: none">
+    <p:tab id="confirmation" title="Confirmation" titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel>
              <div class="row">
              <div class="col-md-6">
@@ -844,7 +831,7 @@
 	             
 	              <fieldset>
 		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="pieces" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listSelectionTypePieces}"  emptyMessage="Aucune pièce trouvée">
+		               <p:dataTable id="pieces" styleClass="table dt-on-steroids mb0" scrollable="true" scrollHeight="150" var="slctdTb" value="#{daoController.listSelectionTypePieces}"  emptyMessage="Aucune pièce trouvée">
 					        <p:column headerText="Code" styleClass="col-sm-2">
 					            <h:outputText value="#{slctdTb.tpiCode}"/>
 					        </p:column>
@@ -867,7 +854,7 @@
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	               <p:dataTable id="lots" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeLots}" emptyMessage="Aucun lot trouvé">
+	               <p:dataTable id="lots" styleClass="table dt-on-steroids mb0" scrollable="true" scrollHeight="150" var="slctdTb" value="#{daoController.listeLots}" emptyMessage="Aucun lot trouvé">
 					        <p:column headerText="N°lot" styleClass="col-sm-1">
 					            <h:outputText value="#{slctdTb.laaNum}"/>
 					        </p:column>
@@ -879,9 +866,6 @@
 					        </p:column>
 					        <p:column headerText="Montant caution" styleClass="col-sm-2">
 					            <h:outputText value="#{slctdTb.laaMtCaut}" />
-					        </p:column>
-					        <p:column headerText="Cout" styleClass="col-sm-2">
-					            <h:outputText value="#{slctdTb.laaMtEst}" />
 					        </p:column>
 					    </p:dataTable>
 	            </div>
@@ -969,9 +953,12 @@
                   </div>
 	             </div>
 	             <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Vente par lot </label></div>
+                  <div class="col-sm-4"><label class="pull-right">Coût du DAO </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoVenteParLot == 'O'?'OUI':'NON' }"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoCoutDac}" style="width: 100%" readonly="true"> 
+                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                    </h:outputText>  
+                    </label>
                   </div>
 	             </div>
 	             <fieldset>
@@ -1052,7 +1039,8 @@
            
 
             </p:panel>
-            </p:tab>
+            </p:tab>        
+      
              <p:tab id="Dossiers" rendered= "#{agpmController.etatPavetDossier}" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
              <p:panel header="Fichier(s) Joint(s)">
 
