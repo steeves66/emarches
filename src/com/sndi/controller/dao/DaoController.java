@@ -1255,6 +1255,18 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 			                    	                if(resultat.equalsIgnoreCase("Retour au binome")) {
 				                                        statutSanction ="D3A";
 				                                        statutSanRetour ="1";
+				                                          
+				                                        daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+				                    							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+				                    							if (!daoBinome.isEmpty()) {
+				                    								//Mis à  jour de tous les DAO dans T_DAO_AFFECTATION
+				                    								for(TDaoAffectation dao : daoBinome) {
+				                    									 dao.setDafStaCode(statutSanction);
+				                    									 dao.setDafStatutRetour(statutSanRetour);
+				                    									 iservice.updateObject(dao);
+				                    								       }
+				                    							}
+				                                             
 			                                                }
 		  
 		/*  if(resultat.equalsIgnoreCase("Valide")) { 
@@ -1596,7 +1608,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				                                detCor.setDcoRespo("N");
 				                                iservice.addObject(detCor);
 			                                      }
-		  
+		                             //Mis à jour du statut de DAO récu   
+		                             slctdTda.setDafStaCode("DC1");
+		                             iservice.updateObject(slctdTda);
+		                             //Actualisation de la liste des DAO
+		                             chargeDaoChargeEtude();
 				                     //Actualisation du Tableau de Bord
 				                     tableauBordController.chargeDataDao();
 				                     //Message de confirmation
@@ -1634,6 +1650,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				                                        iservice.addObject(detCor);
 			                                              }
 	 				
+		                                             //Mis à jour du statut de DAO en cours de traitement chez le Chargé d'Etudes  
+		       		                                slctdTda.setDafStaCode("DC1");
+		       		                                iservice.updateObject(slctdTda); 
+		       		                                //Actualisation de la liste des DAO
+		       		                                chargeDaoChargeEtude();
 	 				                                //Actualisation du Tableau de Bord
 					                                 tableauBordController.chargeDataDao();
 	 				                                //Message de confirmation
