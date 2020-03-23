@@ -40,6 +40,9 @@ public class VDaoBailleur implements java.io.Serializable {
 	private Date dacDateValAc;
 	private String dacAvisBailleur;
 	private Date dacDateAvisBailleur;
+	private String dacBailleur;
+	private Long dacCout;
+	private String dacTypePlan;
 	private String aaoCode;
 	private String aaoLibelle;
 	private String aaoDacCode;
@@ -91,7 +94,7 @@ public class VDaoBailleur implements java.io.Serializable {
 			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
 			Date dacDateReception, String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur, String aaoCode, String aaoLibelle, String aaoDacCode, Date aaoDteSaisi,
+			Date dacDateAvisBailleur,String dacBailleur, Long dacCout, String dacTypePlan, String aaoCode, String aaoLibelle, String aaoDacCode, Date aaoDteSaisi,
 			String aaoStaCode, Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin,
 			BigDecimal aaoNbrLot, BigDecimal aaoNbrOuv, BigDecimal aaoDelaiVal, String aaoFonCodAc,
 			String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux, String aaoLieuExe, String aaoNomResp,
@@ -120,6 +123,9 @@ public class VDaoBailleur implements java.io.Serializable {
 		this.dacDateValAc = dacDateValAc;
 		this.dacAvisBailleur = dacAvisBailleur;
 		this.dacDateAvisBailleur = dacDateAvisBailleur;
+		this.dacBailleur = dacBailleur;
+		this.dacCout = dacCout;
+		this.dacTypePlan = dacTypePlan;
 		this.aaoCode = aaoCode;
 		this.aaoLibelle = aaoLibelle;
 		this.aaoDacCode = aaoDacCode;
@@ -349,6 +355,34 @@ public class VDaoBailleur implements java.io.Serializable {
 
 	public void setDacDateAvisBailleur(Date dacDateAvisBailleur) {
 		this.dacDateAvisBailleur = dacDateAvisBailleur;
+	}
+	
+
+	@Column(name = "DAC_BAILLEUR", length = 1)
+	public String getDacBailleur() {
+		return this.dacBailleur;
+	}
+
+	public void setDacBailleur(String dacBailleur) {
+		this.dacBailleur = dacBailleur;
+	}
+
+	@Column(name = "DAC_COUT", precision = 11, scale = 0)
+	public Long getDacCout() {
+		return this.dacCout;
+	}
+
+	public void setDacCout(Long dacCout) {
+		this.dacCout = dacCout;
+	}
+
+	@Column(name = "DAC_TYPE_PLAN", length = 4)
+	public String getDacTypePlan() {
+		return this.dacTypePlan;
+	}
+
+	public void setDacTypePlan(String dacTypePlan) {
+		this.dacTypePlan = dacTypePlan;
 	}
 
 	@Column(name = "AAO_CODE", nullable = false, length = 20)

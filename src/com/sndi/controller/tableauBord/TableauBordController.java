@@ -501,6 +501,12 @@ public class TableauBordController {
 			 //Fin AMI	
 		}
 		
+		public void chargeDataPrq() {
+			 //Début PRQ 
+			 
+			 //Fin AMI	
+		}
+		
 		public void chargeDataPpmPspm(){
 			//Début PPM
 			 ppmTotal = ""+getPpmDossierTotal();

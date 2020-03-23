@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 21 mars 2020 13:48:08 by Hibernate Tools 4.3.5.Final
+// Generated 23 mars 2020 10:48:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -25,7 +25,8 @@ public class TFinancementPgpm implements java.io.Serializable {
 	private BigDecimal fipMontantCfa;
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
-	private Long fipPartTresor;
+	private String fipTypeFinance;
+	private BigDecimal fipTresor;
 
 	public TFinancementPgpm() {
 	}
@@ -40,7 +41,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 
 	public TFinancementPgpm(long fipId, TSourceFinancement TSourceFinancement, TDetailPlanGeneral TDetailPlanGeneral,
 			TDevise TDevise, TBailleur TBailleur, BigDecimal fipMontantCfa, BigDecimal fipMontantDevise,
-			String fipCommentaire, Long fipPartTresor) {
+			String fipCommentaire, String fipTypeFinance, BigDecimal fipTresor) {
 		this.fipId = fipId;
 		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
@@ -49,7 +50,8 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.fipMontantCfa = fipMontantCfa;
 		this.fipMontantDevise = fipMontantDevise;
 		this.fipCommentaire = fipCommentaire;
-		this.fipPartTresor = fipPartTresor;
+		this.fipTypeFinance = fipTypeFinance;
+		this.fipTresor = fipTresor;
 	}
 
 	@Id
@@ -130,13 +132,22 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.fipCommentaire = fipCommentaire;
 	}
 
-	@Column(name = "FIP_PART_TRESOR", precision = 15, scale = 0)
-	public Long getFipPartTresor() {
-		return this.fipPartTresor;
+	@Column(name = "FIP_TYPE_FINANCE", length = 20)
+	public String getFipTypeFinance() {
+		return this.fipTypeFinance;
 	}
 
-	public void setFipPartTresor(Long fipPartTresor) {
-		this.fipPartTresor = fipPartTresor;
+	public void setFipTypeFinance(String fipTypeFinance) {
+		this.fipTypeFinance = fipTypeFinance;
+	}
+
+	@Column(name = "FIP_TRESOR", precision = 22, scale = 0)
+	public BigDecimal getFipTresor() {
+		return this.fipTresor;
+	}
+
+	public void setFipTresor(BigDecimal fipTresor) {
+		this.fipTresor = fipTresor;
 	}
 
 }
