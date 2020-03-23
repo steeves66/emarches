@@ -12,7 +12,7 @@
 <section class="content-header">
       <h3>
        <!-- #{controleController.libelle}  -->
-       VALIDATION DU DAO N°
+       VALIDATION DE L'AMI N°
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -60,7 +60,7 @@
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.gesCode}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.gesCode}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
@@ -72,7 +72,7 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.dao.dacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -80,13 +80,13 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.demDetail.TTypeMarche.tymCode} : #{daoController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{amiController.demDetail.TTypeMarche.tymCode} : #{amiController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.demDetail.TModePassation.mopCode} : #{daoController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.demDetail.TModePassation.mopCode} : #{amiController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             </div>
@@ -100,7 +100,7 @@
    <div class="col-md-12">
     <div class="box box-success box-solid">
         <div class="box-header with-border">
-         <div class="col-md-11 "><div  style="color: #fff">PIECES CONSTITUTIVES DU DAO</div></div> 
+         <div class="col-md-11 "><div  style="color: #fff">PIECES CONSTITUTIVES DE L'AMI</div></div> 
          <div class="col-md-1 ">
 			 <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
@@ -189,7 +189,7 @@
         
         </div>
         
-		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.fermer('dao1','VALDAO')}" style="background-color: #f88b2e;" update=":content">
+		         <p:commandLink styleClass="btn btn-warning" action="#{amiController.fermer('ami1','VALAMI')}" style="background-color: #f88b2e;" update=":content">
 		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 				</p:commandLink>
 		
