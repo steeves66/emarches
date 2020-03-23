@@ -1719,6 +1719,7 @@ public class ControleController {
 			    			type = "DAC";
 			    			libelle1="Index";
 			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
+			    			libelle1="Procédure Normale";
 			    			 btn_new =true;
 			    			 btn_affec = false;
 							 panel1 =true;
@@ -2461,6 +2462,7 @@ public class ControleController {
 						    									    		    type = "DAC";
 						    									    			 libelle1="Index";
 						    									    			 libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
+						    									    			 libelleDao1="Procédure Simplifiée";
 						    									    			 btn_new =true;
 						    									    			 btn_affec = false;
 						    													 panel1 =true;
