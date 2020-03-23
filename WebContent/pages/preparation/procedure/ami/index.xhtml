@@ -1117,14 +1117,8 @@
                           <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                         </p:commandLink>
-                        
-                        <p:commandLink  action="#{amiController.transmettreCpmp}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmission" update=":content">
-                         <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
-                         <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" /> 
-                         <p:confirm header="Confirmation" message="Voulez-vous transmettre l'AMI N°#{slctdTb.affDacCode} ?" icon="ui-icon-alert" />
-                         </p:commandLink> 
                          
-                         <p:commandLink action="#{amiController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                         <p:commandLink action="#{amiController.renderPage('ami6','EXAAMI')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" /> 
                             </p:commandLink> 
@@ -1202,7 +1196,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
                             <h:panelGroup rendered="#{controleController.affDao}">   
-                             <p:commandLink action="#{amiController.renderPage('dao5','AFFDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('ami5','AFFAMI')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1354,7 +1348,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{amiController.renderPage('dao7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('ami7','RETAMI')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1403,7 +1397,7 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                             <p:commandLink  action="#{etatsamiController.renderPage('dao8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsamiController.renderPage('ami8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsamiController.slctdTda}" />
                              </p:commandLink>
@@ -1414,7 +1408,7 @@
                         </p:commandLink>
                         
                         
-                        <p:commandLink action="#{amiController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                        <p:commandLink action="#{amiController.renderPage('ami6','EXAAMI')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTda}" /> 
                             </p:commandLink> 
@@ -1493,7 +1487,7 @@
                      <p:column headerText="Actions" styleClass="col-sm-3"> 
                              <p:commandLink action="#{amiController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication du DAO N° #{amiController.slctdTd} ?" icon="ui-icon-alert" />
+                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication de l'AMI N° #{amiController.slctdTd} ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
 				         </p:column> 
@@ -1601,7 +1595,7 @@
                              
                              <p:commandLink action="#{amiController.transmettreCpmp()}" styleClass="btn btn-xs btn-success"  title="Transmettre" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <p:confirm header="Confirmation" message="Confrmez-vous la transmission du DAO N° #{amiController.slctdTd} ?" icon="ui-icon-alert" />
+                                 <p:confirm header="Confirmation" message="Confrmez-vous la transmission de l'AMI N° #{amiController.slctdTd} ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
                              
@@ -1684,7 +1678,7 @@
                      
                      
                           <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{amiController.renderPage('dao9','VETDAO')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('ami9','VETAMI')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1855,7 +1849,7 @@
                      <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{amiController.renderPage('dao7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Retrait du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{amiController.renderPage('ami7','RETAMI')}" styleClass="btn btn-xs btn-success"  title="Retrait du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
@@ -1920,7 +1914,7 @@
 	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif de Retour">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du DAO N° #{amiController.slctdTd.affDacCode}  
+						Motif du retour de l'AMI N° #{amiController.slctdTd.affDacCode}  
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	         
@@ -1938,7 +1932,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du DAO N° #{amiController.slctdTd.affDacCode} 
+						Motif du retour de l'AMI N° #{amiController.slctdTd.affDacCode} 
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">
@@ -1964,7 +1958,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
 			         <div class="col-md-3">
-			          DAO 
+			          AMI
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -1975,7 +1969,7 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{amiController.listeTabDaoTrans}"
-						  emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+						  emptyMessage="Aucun #{controleController.type} transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			            <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2018,7 +2012,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff">DAO EN ATTENETE DE RETRAIT</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff">AMI EN ATTENETE DE RETRAIT</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2075,7 +2069,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff">DAO RETIRES</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff">AMI RETIRES</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2204,7 +2198,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{amiController.listeTabDaoCsvAff}"
 						 selectionMode="single" 
-			               emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun #{controleController.type} transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2307,7 +2301,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          DAO 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -2319,7 +2313,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" 
 						 selectionMode="single" 
-			               emptyMessage="Aucun DAO différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun #{controleController.type} différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2365,7 +2359,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          DAO 
+			          #{controleController.type}  
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -2377,7 +2371,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" 
 						 selectionMode="single" 
-			               emptyMessage="Aucun DAO différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
+			               emptyMessage="Aucun #{controleController.type} différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			               
 					    <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2480,7 +2474,7 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES DAO</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES #{controleController.type} </div></div>
 			         </div>
 			          <div class="box-body">
 			          
@@ -2525,7 +2519,7 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO VALIDES</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.type} VALIDES</div></div>
 			         </div>
 			          <div class="box-body">
 			          
@@ -2572,7 +2566,7 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO VALIDES PAR LE CHEF DE SERVICE</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.type} VALIDES PAR LE CHEF DE SERVICE</div></div>
 			         </div>
 			          <div class="box-body">
 			          
@@ -2619,7 +2613,7 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO DIFFERES PAR LE CHEF DE SERVICE</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.type} DIFFERES PAR LE CHEF DE SERVICE</div></div>
 			         </div>
 			          <div class="box-body">
 			          
