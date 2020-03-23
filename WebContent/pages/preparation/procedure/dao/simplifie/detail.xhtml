@@ -401,25 +401,25 @@
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','SAIDPS')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dps1','SAIDPS')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','TRADPS')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dps1','TRADPS')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','CHADPS')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dps1','CHADPS')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','VALDPS')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dps1','VALDPS')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>

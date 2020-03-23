@@ -1647,7 +1647,7 @@ public int getDaoAttenteVente(String src){
 	int i = iservice.countTableByColumn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",
 			new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("AFF_DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("AFF_DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("AFF_DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }

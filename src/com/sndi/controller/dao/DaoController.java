@@ -474,6 +474,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("listeDAO size: "+listeDAO.size());	
 			tableauBordController.chargeDataDao();		
@@ -533,15 +534,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 			tableauBordController.chargeDataDao();		
 	}
 	 
-	 //Affichage des DAO Saisies par l'Autorité Contractante, procédure simplifiéee
-	 public void chargeDataPs(){ 
-	    daoPs.clear();
-	    daoPs =(List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
-				 new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ,"DA1"),
-		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-			_logger.info("daoPs size: "+daoPs.size());	
-			tableauBordController.chargeDataDao();		
-	}
+	
+	 
+	
 	 
 	 
 	 public void chargeDaoTrans(){
@@ -1053,6 +1048,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		
 		  
 	    //DAO EN PRODEDURE SIMPLIFIEE
+		  
+		  //Affichage des DAO Saisies par l'Autorité Contractante
+			 public void chargeDataPs(){
+				 getListeDao().clear();
+				 listeDao.clear();
+				 listeDao =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
+						 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+						 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+					_logger.info("daoPs size: "+daoPs.size());	
+					tableauBordController.chargeDataDao();		
+			}
 	 
 		//Affichage des DAO en attente d'affectation
 			 public void chargeDataAffecterPs(){
@@ -1084,6 +1092,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 					              new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 					              new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
 						_logger.info("examenListe size: "+examenListe.size());	
+						tableauBordController.chargeDataDao();		
+				}
+			  
+			  public void chargeDaoChargeEtudePs(){
+				  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+						           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+					              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+						_logger.info("daoExamen size: "+daoExamen.size());	
 						tableauBordController.chargeDataDao();		
 				}
 			  
@@ -3135,12 +3151,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dao11":
+                case "dps1":
 					chargeDataPs();
 					chargeGestions();
 					chargeDataAffecterPs();
 					chargeDataAValiderPs();
 					chargeDaoCharegEtudePs();
+					chargeDaoChargeEtudePs();
 					chargeDaoAffectesRPs();
 					chargeDataAPublierPs();
 					chargeDataARetirerPs();
@@ -3148,21 +3165,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 					chargeDataPriseCompte();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao12":
+                case "dps2":
                 	chargePSPM();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao13":
+             
+                case "dps4":
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao14":
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dao15":
+                case "dps5":
                 	chargeFonctionImput();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao16":
+                case "dps6":
                 	chargePiecesByDao();
                 	chargePiecesByCsv();
                 	chargePiecesByCharges();
@@ -3170,20 +3185,21 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
                 	chargePiecesByBinome();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao17":
+                case "dps7":
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao18":
+      
+                case "dps9":
                 	chargeSoumissions();
                	    recupMontantDao();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
-                case "dao19":
-               	 chargeDaoBailleurPs();
-               	 observationAvis();
-               	 chargeLotsRappel();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
+                case "dps10":
+                  	 chargeDaoBailleurPs();
+                  	 observationAvis();
+                  	 chargeLotsRappel();
+   		 			_logger.info("value: "+value+" action: "+action);
+   				break;
 				
 			    }
 		     return userController.renderPage(value);  

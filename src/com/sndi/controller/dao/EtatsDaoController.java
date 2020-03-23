@@ -293,7 +293,7 @@ public class EtatsDaoController {
 	   			_logger.info("value: "+value+" action "+action);	
 	    	break;
 	    	
-	   		case "dao20":
+	   		case "dps4":
 	   			chargeAvis(); 
 	   			chargePieces();
 				chargeAdresse();
@@ -303,7 +303,7 @@ public class EtatsDaoController {
 	   			_logger.info("value: "+value+" action "+action);	
 	    	break;
 	    	
-	   		case "dao21":
+	   		case "dps8":
 	   			chargeAvisAff(); 
 	   			chargePiecesAff();
 				chargeAdresseAff();
