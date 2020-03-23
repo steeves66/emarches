@@ -411,7 +411,7 @@ public class PrqController {
 			 listeDAO.clear();
 			 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 					 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
+					// new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 			          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				_logger.info("objetListe size: "+listeDAO.size());	
 				tableauBordController.chargeDataPrq();		
