@@ -1692,10 +1692,10 @@ public class ControleController {
 			 
 			 //DAO
 			 if(action.equalsIgnoreCase("ENGDAO")) {
-				  type = "DAO";
-				  libelleDao1="SAISIE D'UN NOUVEAU DAO";
-			       libelle1="Saisie d'un nouveau DAO";
-			       libellesmall ="Saisie d'un nouveau DAO";
+				  type = "DAC";
+				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE";
+			       libelle1="Saisie d'un nouveau DAC";
+			       libellesmall ="Saisie d'un nouveau DAC";
 			       panelDetail=false;
 				   panelForm=true;
 				   panelTraitement=false;
@@ -1706,8 +1706,8 @@ public class ControleController {
 			       btn_fermer_saisie_prq = false  ;                     
 			    }else 
 			    	if(action.equalsIgnoreCase("MODDAO")) {
-			    		type = "DAO";
-			    		libelleProcedure="Modification du DAO N°";
+			    		type = "DAC";
+			    		libelleProcedure="Modification du DAC N°";
 			    		libelleDao2 = "Modification";
 			    		panelDetail=false;
 					    panelForm=true;
@@ -2433,7 +2433,31 @@ public class ControleController {
 																		 btn_fermer_saisie_ami = false; 
 																		 btn_fermer_saisie_prq = false;  
 									    						   }else
-						    									    	 if(action.equalsIgnoreCase("SAIDPS")) {
+			                                                          if(action.equalsIgnoreCase("ENGDPS")) {
+									    								  type = "DAC";
+									    								  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE";
+									    							       libelle1="Saisie d'un nouveau DAC";
+									    							       libellesmall ="Saisie d'un nouveau DAC";
+									    							       panelDetail=false;
+									    								   panelForm=true;
+									    								   panelTraitement=false;
+									    							       panelRegister=true;
+									    							       panelUpdate=false;
+									    							       btn_fermer_saisie_dao = true;
+									    							       btn_fermer_saisie_ami = false ;
+									    							       btn_fermer_saisie_prq = false  ;                     
+									    							    }else 
+									    							    	if(action.equalsIgnoreCase("MODDPS")) {
+									    							    		type = "DAC";
+									    							    		libelleProcedure="Modification du DAC N°";
+									    							    		libelleDao2 = "Modification";
+									    							    		panelDetail=false;
+									    									    panelForm=true;
+									    									    panelTraitement=false;
+									    							    		panelUpdate=true;
+									    							    		panelRegister=false;
+									    							    	}else
+						    									    	        if(action.equalsIgnoreCase("SAIDPS")) {
 						    									    		    type = "DAC";
 						    									    			 libelle1="Index";
 						    									    			 libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -2455,10 +2479,6 @@ public class ControleController {
 						    													 panelDaoTableauBordPslpso = false;
 						    													 panelDaoTableauBordVal = false;
 						    													 panelDaoTableauBordPub = false;
-						    													 pspmModePs = false;
-						    													 ppmModePn = true;
-						    													 btn_dao_pn = true;
-						    													 btn_dao_ps = false;
 						    													 panelDaoTableauBordAff =false;
 						    													 panelDaoTableauBordExa =false; 
 						    													 panelDaoTableauBordRet =false;

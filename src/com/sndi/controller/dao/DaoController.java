@@ -1910,7 +1910,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	  
      
          
-     //Initiation du DAO en procédure normale ou procédure Simplifiée
+     //Initiation du DAO en procédure normale 
      @Transactional
      public void saveDao() {
     	 
@@ -1963,6 +1963,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		    	 affDao.setTGestion(new TGestion(dao.getTGestion().getGesCode()));
 		    	 affDao.setAffStaCode(dao.getTStatut().getStaCode());
 		    	 affDao.setAffDacBailleur(dao.getDacBailleur());
+		    	 affDao.setAffDacTypePlan(dao.getDacTypePlan());
 		    	 affDao.setTModePassation(new TModePassation(dao.getTModePassation().getMopCode()));
 		         iservice.addObject(affDao);
 		    	 
@@ -2058,7 +2059,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
     	 dao.setDacCode(keyGen.getCodeDao(exo));
     	 dao.setDacStatutRetour("0");
     	 dao.setDacObjet(daoDetail.getDppObjet());
-    	 dao.setTStatut(new TStatut("DA1"));
+    	 dao.setTStatut(new TStatut("D1S"));
     	 dao.setTModePassation(new TModePassation(daoDetail.getMopCode()));
     	 dao.setTTypeMarche(new TTypeMarche(daoDetail.getDppTymCode()));
     	 dao.setTStructure(userController.getSlctd().getTFonction().getTStructure());
@@ -2067,6 +2068,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
     	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
     	 dao.setTGestion(new TGestion(gesCode));
     	 dao.setTTypeDacSpecs(new TTypeDacSpecs("DAO"));
+    	 dao.setDacTypePlan("PS");
     	 iservice.addObject(dao);
     	 
     	 TAffichageDao affDao = new TAffichageDao();
@@ -2087,6 +2089,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
     	 affDao.setTTypeDacSpecs(new TTypeDacSpecs(dao.getTTypeDacSpecs().getTdcCode()));
     	 affDao.setTGestion(new TGestion(dao.getTGestion().getGesCode()));
     	 affDao.setAffStaCode(dao.getTStatut().getStaCode());
+    	 affDao.setAffDacTypePlan(dao.getDacTypePlan());
     	 affDao.setTModePassation(new TModePassation(dao.getTModePassation().getMopCode()));
          iservice.addObject(affDao);
          
