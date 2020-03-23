@@ -249,19 +249,55 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-            <li>
+           
+           
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
             <p:commandLink action="#{daoController.renderPage('dao1','SAIDAO')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Saisie
              </p:commandLink>
             </li>
-			
-            
-               <li>
+			 
+            <li>
             <p:commandLink action="#{daoController.renderPage('dao1','OBSDAO')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Observations
              </p:commandLink>
             </li>
-
+         
+          </ul>     
+         </li>
+         
+         
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+            <p:commandLink action="#{daoController.renderPage('dao12','SAIDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Saisie
+             </p:commandLink>
+            </li>
+			 
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dao12','OBSDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Observations
+             </p:commandLink>
+            </li>
+         
+          </ul>     
+         </li>
+           
           </ul>     
          </li>
          
