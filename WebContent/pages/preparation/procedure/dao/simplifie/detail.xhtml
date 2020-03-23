@@ -143,7 +143,7 @@
 		           
 		            <fieldset>
 		               <legend style="font-weight: bold">DAO joint(s)</legend>
-		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
+		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAC enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
@@ -401,25 +401,25 @@
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','SAIDPS')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','TRADAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','TRADPS')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','DAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','CHADPS')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao12','VALDPS')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>

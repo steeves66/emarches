@@ -293,6 +293,26 @@ public class EtatsDaoController {
 	   			_logger.info("value: "+value+" action "+action);	
 	    	break;
 	    	
+	   		case "dao20":
+	   			chargeAvis(); 
+	   			chargePieces();
+				chargeAdresse();
+				chargeLot();
+				chargeDaoPpm();
+				chargeDossier();
+	   			_logger.info("value: "+value+" action "+action);	
+	    	break;
+	    	
+	   		case "dao21":
+	   			chargeAvisAff(); 
+	   			chargePiecesAff();
+				chargeAdresseAff();
+				chargeLotAff();
+				chargeDaoPpmAff();
+				chargeDossierAff();
+	   			_logger.info("value: "+value+" action "+action);	
+	    	break;
+	    	
 	   		case "ami3":
 	   			chargeAvis();
 	   			chargePieces();
