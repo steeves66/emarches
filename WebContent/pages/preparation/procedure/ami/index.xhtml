@@ -1018,9 +1018,9 @@
 	         		         </h:panelGroup>
                            
                             <h:panelGroup rendered="#{controleController.detailD}">   
-                             <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEAMI')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsamiController.renderPage('dao3','APEAMI')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsamiController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
                               
@@ -1108,9 +1108,9 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
-                        <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEAMI')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                        <p:commandLink  action="#{etatsamiController.renderPage('dao3','APEAMI')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                         <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                        <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsamiController.slctdTd}" />
                         </p:commandLink>
                               
                         <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
@@ -1850,6 +1850,87 @@
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
                              <p:commandLink action="#{amiController.renderPage('ami7','RETAMI')}" styleClass="btn btn-xs btn-success"  title="Retrait du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>
+                            
+
+                     </p:column> 
+    </p:dataTable>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{controleController.panel12}">
+					<p:dataTable id="obsTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.daoPriseCompte}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                         paginator="true" rowsPerPageTemplate="5,10,15" >
+                         
+                       <p:column headerText="Gestion" styleClass="col-sm-2" >
+                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
+         				</h:panelGroup>
+         		
+				        </p:column>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" />
+         				</h:panelGroup> 
+         				
+				        </p:column>
+				        
+				       <p:column headerText="Objet" styleClass="col-sm-6" >
+         			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				         
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+         				</h:panelGroup>
+				        </p:column>   
+				       
+                     <p:column headerText="Actions" styleClass="col-sm-3">
+                         
+                            <h:panelGroup rendered="#{controleController.retDao}">   
+                             <p:commandLink action="#{amiController.renderPage('ami10','OBSAMI')}" styleClass="btn btn-xs btn-success"  title="Observations de L'AMI" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.slctdTd}" />
                              </p:commandLink>
