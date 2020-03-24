@@ -12,7 +12,7 @@
 <section class="content-header">
       <h3>
        <!-- #{controleController.libelle}  -->
-       VALIDATION DU DAO N°
+       VALIDATION DU PRQ N°
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -58,13 +58,13 @@
          <div class="box-body">
            <div class="col-md-6">
           <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
+                  <div class="col-sm-3"><label class="pull-right">Gestion </label></div> 
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.gesCode}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{prqController.gesCode}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Code Dao</label></div>
+                  <div class="col-sm-3"><label class="pull-right">Code #{controleController.type}</label></div>
                   <div class="col-sm-9">
                    <label><h:outputText styleClass="text-muted" style="width: 100%"/></label> 
                   </div>
@@ -72,7 +72,7 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{prqController.dao.dacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -80,13 +80,13 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.demDetail.TTypeMarche.tymCode} : #{daoController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{prqController.demDetail.TTypeMarche.tymCode} : #{prqController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.demDetail.TModePassation.mopCode} : #{daoController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{prqController.demDetail.TModePassation.mopCode} : #{prqController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             </div>
@@ -189,7 +189,7 @@
         
         </div>
         
-		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.fermer('dao1','VALDAO')}" style="background-color: #f88b2e;" update=":content">
+		         <p:commandLink styleClass="btn btn-warning" action="#{prqController.fermer('prq1','VALPRQ')}" style="background-color: #f88b2e;" update=":content">
 		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 				</p:commandLink>
 		

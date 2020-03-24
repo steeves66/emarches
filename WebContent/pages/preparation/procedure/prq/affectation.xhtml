@@ -11,7 +11,7 @@
 <section class="content-header">
       <h3>
        <!-- #{controleController.libelle} --> 
-       AFFECTATION DES DOSSIERS D'APPEL D'OFFRES
+       AFFECTATION DES PREQUALIFICATIONS
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -26,7 +26,7 @@
              </p:commandLink>
             </li>
         <li class="active">
-         <p:commandLink action="#{daoController.renderPage('dao2')}" update=":content" > 
+         <p:commandLink action="#{prqController.renderPage('prq2')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
            <!--  #{controleController.libelle1}  -->
              </p:commandLink>
@@ -56,12 +56,12 @@
             <div class="inner">
               <h3>#{tableauBordController.daoaffecte}</h3>
 
-              <p>DAO affectés</p>
+              <p>#{controleController.type} affectés</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDaoAffectes()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{prqController.chargeDaoAffectes()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -73,7 +73,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmAcTransmis}</h3>
 
-              <p>DAO en cours de traitement</p>
+              <p>#{controleController.type} en cours de traitement</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
@@ -144,19 +144,19 @@
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{prqController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Code Dao</label></div>
+                  <div class="col-sm-3"><label class="pull-right">Code #{controleController.type}</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{prqController.slctdTd.affDacCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{prqController.slctdTd.affDacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -164,13 +164,13 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{prqController.slctdTd.TTypeMarche.tymCode} : #{prqController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{prqController.slctdTd.TModePassation.mopCode} : #{prqController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             </div>
@@ -187,7 +187,7 @@
          <div class="col-md-10 "><div  style="color: #fff">COMITE D'EXAMEN</div></div> 
          
          <div class="col-md-2 ">
-                <p:commandLink oncomplete="PF('transDaoAff').show()" action="#{daoController.chargeDaoAffectesR()}"  data-toggle="modal"   styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
+                <p:commandLink oncomplete="PF('transDaoAff').show()" action="#{prqController.chargeDaoAffectesR()}"  data-toggle="modal"   styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Réaffectation</span>
 		        </p:commandLink>
 		   </div>     
@@ -199,14 +199,14 @@
             <div class="col-md-12">
 				
 				<label >
-                      <p:inputText type="text" value="#{daoController.filterCode}"  placeholder="saisir le libelle de la fonction">
-                      <p:ajax event="keyup" listener="#{daoController.filtrefonction()}" update=":gnl:ndTble"> </p:ajax>
+                      <p:inputText type="text" value="#{prqController.filterCode}"  placeholder="saisir le libelle de la fonction">
+                      <p:ajax event="keyup" listener="#{prqController.filtrefonction()}" update=":gnl:ndTble"> </p:ajax>
                       </p:inputText> 	
 					</label>
             </div>
             </div>
-          <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeFonctionsImput}" editable="true" editMode="cell" emptyMessage="Aucune fonction enregistrée" rows="10" 
-                       rowKey="#{slctdTb.fonCod}" selection="#{daoController.listSelectionFonctImput}"   paginator="true"
+          <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.listeFonctionsImput}" editable="true" editMode="cell" emptyMessage="Aucune fonction enregistrée" rows="10" 
+                       rowKey="#{slctdTb.fonCod}" selection="#{prqController.listSelectionFonctImput}"   paginator="true"
                          rowsPerPageTemplate="5,10,15" >
                          
                          
@@ -246,12 +246,12 @@
     
    </div>
   
-		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','AFFDAO')}" style="background-color: #f88b2e;" update=":content">
+		         <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','AFFPRQ')}" style="background-color: #f88b2e;" update=":content">
 		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 				</p:commandLink>
 		
                 <div class="pull-right ">
-			            <p:commandLink   styleClass="btn btn-success row pull-right" action="#{daoController.affecterDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:commandLink   styleClass="btn btn-success row pull-right" action="#{prqController.affecterDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
 			            <p:confirm header="Confirmation" message="Confirmez vous la validation ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Affecter
 			            </p:commandLink>
@@ -409,7 +409,7 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{daoController.dacCode}"  class="gui-input"  placeholder="Saisir le code du DAO"  > 
+							<p:inputText type="text" value="#{prqController.dacCode}"  class="gui-input"  placeholder="Saisir le code du DAO"  > 
 						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
 							</p:inputText>
 						
@@ -420,7 +420,7 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeDAO}"
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{prqController.listeDAO}"
 						 selectionMode="single" rowKey="#{slctdTb.affDacCode}"
 			               emptyMessage="Aucun DAO affecté" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -523,8 +523,8 @@
 			         </div>
 			          <div class="box-body">
 			          
-                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.daoAffectes}"
-                        rowKey="#{slctdTb.affDacCode}" selection="#{daoController.daoAffectes}" emptyMessage="Aucun Dao enrégistré">
+                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{prqController.daoAffectes}"
+                        rowKey="#{slctdTb.affDacCode}" selection="#{prqController.daoAffectes}" emptyMessage="Aucun Dao enrégistré">
 			           
 			           
 			           <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
@@ -561,7 +561,7 @@
 	            
 	            
 	             <div class="pull-right ">
-			            <p:commandLink action="#{daoController.reafficherCsv()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
+			            <p:commandLink action="#{prqController.reafficherCsv()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la réaffectation ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-exchange"></i> Réaffecter 
 			            </p:commandLink>
