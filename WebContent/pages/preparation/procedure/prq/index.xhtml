@@ -1010,7 +1010,7 @@
 				    <div class="input-group input-group-sm col-md-3">
 				    
                     <label >
-                      <p:inputText type="text" value="#{prqController.multiFiltre}"   placeholder="saisir le numero du #{controleController.type} "/> 	prq2
+                      <p:inputText type="text" value="#{prqController.multiFiltre}"   placeholder="saisir le numero du #{controleController.type} "/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1067,16 +1067,6 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -1111,9 +1101,9 @@
 	         		         </h:panelGroup>
                            
                             <h:panelGroup rendered="#{controleController.detailD}">   
-                             <p:commandLink  action="#{etatsprqController.renderPage('Prq3','APEPRQ')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('Prq3','APEPRQ')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTd}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
                               
@@ -1176,17 +1166,7 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
+
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
@@ -1211,9 +1191,9 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
-                        <p:commandLink  action="#{etatsprqController.renderPage('Prq3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                        <p:commandLink  action="#{etatsDaoController.renderPage('Prq3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                         <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                        <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTd}" />
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                         </p:commandLink>
                                   
                         <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
@@ -1279,18 +1259,7 @@
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
+
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
@@ -1316,7 +1285,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
                             <h:panelGroup rendered="#{controleController.affDao}">   
-                             <p:commandLink action="#{prqController.renderPage('Prq5','AFFPRQ')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{prqController.renderPage('prq5','AFFPRQ')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
                              </p:commandLink>
@@ -1349,16 +1318,6 @@
          		
 				        </p:column>
 
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-         				</h:panelGroup> 
-         				
-				        </p:column>
 				        
 				       <p:column headerText="Objet" styleClass="col-sm-6" >
          			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -1434,16 +1393,6 @@
          		
 				        </p:column>
 
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-         				</h:panelGroup> 
-         				
-				        </p:column>
 				        
 				       <p:column headerText="Objet" styleClass="col-sm-6" >
          			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -1490,7 +1439,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{prqController.renderPage('Prq7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{prqController.renderPage('Prq7','RETPRQ')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
                              </p:commandLink>
@@ -1519,10 +1468,6 @@
          				<h:outputText value="#{slctdTb.dafDacObjet}" />
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dafTypeDac}" />
-				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >        				
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
@@ -1544,9 +1489,9 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                             <p:commandLink  action="#{etatsprqController.renderPage('Prq8','APEPRQ')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('Prq8','APEPRQ')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTda}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTda}" />
                              </p:commandLink>
                                   
                         <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
@@ -1555,26 +1500,11 @@
                         </p:commandLink>
                         
                         
-                        <p:commandLink action="#{prqController.renderPage('Prq6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                        <p:commandLink action="#{prqController.renderPage('prq6','EXAPRQ')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTda}" /> 
                             </p:commandLink> 
-                            
-                            
-                            <h:panelGroup rendered="#{slctdTb.dafStaCode != 'DC2'}">
-                            <p:commandLink action="#{prqController.renderPage('Prq6','EXAPRQ')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
-                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTda}" /> 
-                            </p:commandLink> 
-                            </h:panelGroup>
-                            
-                            <h:panelGroup rendered="#{slctdTb.dafStaCode == 'DC2'}">
-                           <p:commandLink  oncomplete="PF('transDaoChargeDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i>
-                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTda}" />
-                           </p:commandLink> 
-                           </h:panelGroup>
-                        
+
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
@@ -1613,17 +1543,6 @@
                         
                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affDacObjet}" />
-         				</h:panelGroup>
-				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
          				</h:panelGroup>
 				        </p:column>
 				       
@@ -1764,9 +1683,9 @@
                       <p:column headerText="Actions" styleClass="col-sm-3"> 
                       
                              
-                             <p:commandLink  action="#{etatsprqController.renderPage('Prq3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('Prq3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTd}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
                            
                              
@@ -1805,17 +1724,6 @@
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
          				</h:panelGroup>
          		
-				        </p:column>
-
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-         				</h:panelGroup> 
-         				
 				        </p:column>
 				        
 				       <p:column headerText="Objet" styleClass="col-sm-6" >
@@ -1866,9 +1774,9 @@
 				       
                      <p:column headerText="Actions" styleClass="col-sm-3"> 
                      
-                        <p:commandLink  action="#{etatsprqController.renderPage('Prq3','APEPRQ')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                        <p:commandLink  action="#{etatsDaoController.renderPage('Prq3','APEPRQ')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTd}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                          </p:commandLink>
                      
                      
@@ -1921,16 +1829,6 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -1965,9 +1863,9 @@
 	         		         </h:panelGroup>
                            
                             <h:panelGroup rendered="#{controleController.detailD}">   
-                             <p:commandLink  action="#{etatsprqController.renderPage('Prq3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('Prq3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTd}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
                               
@@ -2030,16 +1928,6 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
@@ -2112,17 +2000,6 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />

@@ -3142,7 +3142,7 @@ public class ControleController {
 								 
 				    		}else
 			    			    if(action.equalsIgnoreCase("VALPRQ")) {
-			    				type = "DAO";
+			    				type = "PRQ";
 			    				libelleDao3="VALIDATION DES PREQUALIFICATIONS";
 			    				panelDetail=false;
 			    				panelForm=false;
@@ -3216,7 +3216,7 @@ public class ControleController {
 									fermerApercuAmi = false;
 									fermerApercuPrq = true;
 				    			}else
-				    				 if(action.equalsIgnoreCase("AFFPRQ")) {
+				    				 if(action.equalsIgnoreCase("AFFPRQ")) { 
 				    				        type = "PRQ";
 							    			libelle1="Index";
 							    			 libelleDao3="AFFECTATION DES PREQUALIFICATIONS";
