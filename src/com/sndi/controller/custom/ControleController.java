@@ -141,6 +141,29 @@ public class ControleController {
 	private boolean pspmModePs = false;
 	private boolean ppmModePn = false;
 	
+	//Recherche pour le DAO (Procédure Normale)
+		private boolean venteRecherche = false; 
+		private boolean affectationRecherche = false;
+		private boolean examenRecherche = false;
+		private boolean publicationRecherche = false;
+		private boolean saisieRecherche = false;
+		private boolean celluleRecherche = false;
+		private boolean validationRecherche = false;
+		private boolean priseRecherche = false;
+		private boolean chargeRecherche = false;
+		
+		//Recherche pour le DAO (Procédure Simplifiée)
+		private boolean venteRecherchePs = false;
+		private boolean affectationRecherchePs = false;
+		private boolean examenRecherchePs = false;
+		private boolean publicationRecherchePs = false;
+		private boolean saisieRecherchePs = false;
+		private boolean celluleRecherchePs = false;
+		private boolean validationRecherchePs = false;
+		private boolean priseRecherchePs = false;
+		private boolean chargeRecherchePs = false;
+		//Fin de Recherche pour le DAO
+	
 	
 	//PREQUALIFICATION
 	private boolean panelPrqTableauBordSai =false;
@@ -2434,433 +2457,489 @@ public class ControleController {
 																		 btn_fermer_saisie_ami = false; 
 																		 btn_fermer_saisie_prq = false;  
 									    						   }else
-			                                                          if(action.equalsIgnoreCase("ENGDPS")) {
-									    								  type = "DAC";
-									    								  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE";
-									    							       libelle1="Saisie d'un nouveau DAC";
-									    							       libellesmall ="Saisie d'un nouveau DAC";
-									    							       panelDetail=false;
-									    								   panelForm=true;
-									    								   panelTraitement=false;
-									    							       panelRegister=true;
-									    							       panelUpdate=false;
-									    							       btn_fermer_saisie_dao = true;
-									    							       btn_fermer_saisie_ami = false ;
-									    							       btn_fermer_saisie_prq = false  ;                     
-									    							    }else 
-									    							    	if(action.equalsIgnoreCase("MODDPS")) {
-									    							    		type = "DAC";
-									    							    		libelleProcedure="Modification du DAC N°";
-									    							    		libelleDao2 = "Modification";
-									    							    		panelDetail=false;
-									    									    panelForm=true;
-									    									    panelTraitement=false;
-									    							    		panelUpdate=true;
-									    							    		panelRegister=false;
-									    							    	}else
-						    									    	        if(action.equalsIgnoreCase("SAIDPS")) {
-						    									    		    type = "DAC";
-						    									    			 libelle1="Index";
-						    									    			 libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
-						    									    			 libelleDao1="Procédure Simplifiée";
-						    									    			 btn_new =true;
-						    									    			 btn_affec = false;
-						    													 panel1 =true;
-						    													 panel2 =false;
-						    													 panel3 =false;
-						    													 panel4 = false;
-						    													 panel5 =false;
-						    													 panel6 =false;
-						    													 panel7=false;
-						    													 panel8 =false;
-						    													 panel9 = false;
-						    													 panel10 = false;
-						    													 panel11 = false;
-						    													 panel12 = false;
-						    													 panelDaoTableauBordSai = true;
-						    													 panelDaoTableauBordPslpso = false;
-						    													 panelDaoTableauBordVal = false;
-						    													 panelDaoTableauBordPub = false;
-						    													 panelDaoTableauBordAff =false;
-						    													 panelDaoTableauBordExa =false; 
-						    													 panelDaoTableauBordRet =false;
-						    													 panelDaoTableauBordVet =false;
-						    													 panelDaoTableauBordCha = false;
-						    													 panelDaoTableauBordPrise = false;
-						    													 panelAmi = false;
-						    													 panelDao = true;  
-						    													 panelPrq = false;
-						    													 btn_trans_ami =false;
-						    													 btn_trans_dao =true;
-						    													 btn_trans_prq =false;
-						    													 
-						    													 btn_creerDetailAmi = false;
-						    													 btn_creerDetailDao = true ;
-						    													 btn_creerDetailPrq = false;
-						    													 
-						    													 btn_creerDetailDaoCmp = true;
-						    													 btn_creerDetailAmiCmp = false;
-						    													 btn_creerDetailPrqCmp = false;
-						    													 btn_creerDetailDaoDmp = true;
-						    													 btn_creerDetailAmiDmp = false; 
-						    													 btn_creerDetailPrqDmp = false;
-						    													 fermerValDao = false;
-						    													 fermerSaiDao = true;
-						    													 detailD = true;
-						    													 detailA= false; 
-						    													 detailP = false;
-						    													 btn_valider_dao_cpmp =  false;
-						    													 btn_valider_dao_dmp = false;
-						    													 btn_valider_ami_cpmp = false; 
-						    													 btn_valider_prq_cpmp = false;
-						    													 btn_valider_ami_dmp = false;
-						    													 btn_valider_prq_dmp = false;
-						    													 btn_fermer_saisie_dao = true; 
-						    													 btn_fermer_saisie_ami = false; 
-						    													 btn_fermer_saisie_prq = false; 
-										    						     }else
-							    									    	 if(action.equalsIgnoreCase("VALDPS")) {
-							    									    		   type = "DAC";
-							    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
-							    								    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
-							    								    				panelDetail=false;
-							    								    				panelForm=false;
-							    								   				    panelTraitement=true;
-							    								    				btn_new =false;
-							    								    				btn_affec = false;
-							    								    				btn_retrait = false;
-							    								    				btn_valid = true;
-							    													panel1 =false;
-							    													panel2 =true;
-							    													panel3 =false;
-							    													panel4 =false;
-							    													panel5 =false;
-							    													panel6=false;
-							    													panel7 = false;
-							    													panel8 = false;
-							    													panel9 = false;
-							    													panel10=false;
-							    													panel11 = false;
-							    													panel12 = false;
-							    													affDao=false;
-							    													exaDao=false;
-							    													panelDaoTableauBordAff =false;
-							    													panelDaoTableauBordRet = false;
-							    													panelDaoTableauBordSai = false;
-							    													panelDaoTableauBordPslpso = false;
-							    													panelDaoTableauBordVal = true;
-							    													panelDaoTableauBordVet =false;
-							    													panelDaoTableauBordExa = false;
-							    													panelDaoTableauBordCha = false;
-							    													panelDaoTableauBordPub = false;
-							    													panelDaoTableauBordPrise = false;
-							    													panelDao = true;
-							    													panelPrq =false;
-							    												    panelAmi = false;
-							    													fermerValDao =true;
-							    													fermerSaiDao = false;
-							    													btn_trans_ami =false;
-							    													btn_trans_dao =false;
-							    													btn_trans_prq =false;
-							    													detailD = true ;
-							    													detailA = false; 
-							    													detailP = false;
-							    													btn_valider_prq_cpmp = false;
-							    													btn_valider_prq_dmp = false; 
-							    													btn_valider_ami_cpmp = false; 
-							    													btn_valider_ami_dmp = false;
-							    													btn_valider_dao_cpmp = true;
-							    													btn_valider_dao_dmp = true;
-							    													btn_fermer_saisie_ami = false; 
-							    													btn_fermer_saisie_prq = false;
-							    													btn_fermer_saisie_dao = true;
-											    						    }else
-								    									    	if(action.equalsIgnoreCase("APEDPS")) {
-								    									    		type = "DAC";
-								    							    				panelDetail=true;
-								    							    				panelForm=false;
-								    							   				    panelTraitement=false;
-								    							    				libelle1="Detail";
-								    							    				libelle2 = "Synthèse du DAC N°";
-								    							    				fermerSaiPrq = false; 
-								    							    				fermerValPrq = false;
-								    							    				fermerSaiAmi = false;
-								    							    				fermerValAmi = false;
-								    							    				fermerSaiDao = true;
-								    							    				fermerValDao = false;
-								    							    				detailD = true ;
-								    												detailA = false; 
-								    												detailP = false;
-								    												fermerApercuDao = true;
-								    												fermerApercuAmi = false;
-								    												fermerApercuPrq = false;
-												    						   }else
-								    									    	  if(action.equalsIgnoreCase("CHADPS")) {
-								    									    		     type = "DAC";
-																		    			 libelle1="Index";
-																		    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
-																		    			 btn_new =false;
-																		    			 btn_affec = false;
-																		    			 btn_exam = false;
-																		    			 btn_retrait = false;
-																		    			 btn_valid = false;
-																						 panel1 =false;
-																						 panel2 =false;
-																						 panel3 = false;
-																						 panel4 = false;
-																						 panel5 = false;
-																						 panel6 = true;
-																						 panel7 =false;
-																						 panel8 =false;
-																						 panel9 =false;
-																						 panel10 = false;
-																						 panel11 = false;
-																						 panel12 = false;
-																						 affDao=false;
-																						 exaDao=false;
-																						 retDao = true;
-																						 panelDaoTableauBordSai = false;
-																						 panelDaoTableauBordVal = false;
-																						 panelDaoTableauBordAff =false;
-																						 panelDaoTableauBordExa =false; 
-																						 panelDaoTableauBordRet =false; 
-																						 panelDaoTableauBordVet =false;
-																						 panelDaoTableauBordCha = true;
-																						 panelDaoTableauBordPub = false;
-																						 panelDaoTableauBordPrise = false;
-																						 panelDao = true;  
-																						 panelPrq = false;
-																						 btn_trans_ami =false;
-																						 btn_trans_dao =false;
-																						 btn_trans_prq =false;
-																						 
-																						 btn_creerDetailAmi = false;
-																						 btn_creerDetailDao = false ;
-																						 btn_creerDetailPrq = false;
-																						 
-																						 btn_creerDetailDaoCmp = false;
-																						 btn_creerDetailAmiCmp = false;
-																						 btn_creerDetailPrqCmp = false;
-																						 btn_creerDetailDaoDmp = false;
-																						 btn_creerDetailAmiDmp = false; 
-																						 btn_creerDetailPrqDmp = false;
-																						 fermerValDao = false;
-																						 fermerSaiDao = true;
-																						 detailD = false;
-																						 detailA= false; 
-																						 detailP = false;
-																						 btn_valider_dao_cpmp =  false;
-																						 btn_valider_dao_dmp = false;
-																						 btn_valider_ami_cpmp = false; 
-																						 btn_valider_prq_cpmp = false;
-																						 btn_valider_ami_dmp = false;
-																						 btn_valider_prq_dmp = false;
-																						 btn_fermer_saisie_dao = false; 
-																						 btn_fermer_saisie_ami = false; 
-																						 btn_fermer_saisie_prq = false;
+				                                                          if(action.equalsIgnoreCase("ENGDPS")) {
+										    								  type = "DAC";
+										    								  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE";
+										    							       libelle1="Saisie d'un nouveau DAC";
+										    							       libellesmall ="Saisie d'un nouveau DAC";
+										    							       panelDetail=false;
+										    								   panelForm=true;
+										    								   panelTraitement=false;
+										    							       panelRegister=true;
+										    							       panelUpdate=false;
+										    							       btn_fermer_saisie_dao = true;
+										    							       btn_fermer_saisie_ami = false ;
+										    							       btn_fermer_saisie_prq = false  ;                     
+										    							    }else 
+										    							    	if(action.equalsIgnoreCase("MODDPS")) {
+										    							    		type = "DAC";
+										    							    		libelleProcedure="Modification du DAC N°";
+										    							    		libelleDao2 = "Modification";
+										    							    		panelDetail=false;
+										    									    panelForm=true;
+										    									    panelTraitement=false;
+										    							    		panelUpdate=true;
+										    							    		panelRegister=false;
+										    							    	}else
+							    									    	        if(action.equalsIgnoreCase("SAIDPS")) {
+							    									    		    type = "DAC";
+							    									    			 libelle1="Index";
+							    									    			 libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
+							    									    			 libelleDao1="Procédure Simplifiée";
+							    									    			 btn_new =true;
+							    									    			 btn_affec = false;
+							    													 panel1 =true;
+							    													 panel2 =false;
+							    													 panel3 =false;
+							    													 panel4 = false;
+							    													 panel5 =false;
+							    													 panel6 =false;
+							    													 panel7=false;
+							    													 panel8 =false;
+							    													 panel9 = false;
+							    													 panel10 = false;
+							    													 panel11 = false;
+							    													 panel12 = false;
+							    													 affectationRecherchePs = false;
+							    													 venteRecherchePs = false;
+							    												     affectationRecherchePs = false;
+							    													 examenRecherchePs = false;
+							    													 publicationRecherchePs = false;
+							    													 saisieRecherchePs = true;
+							    													 celluleRecherchePs = false;
+							    													 validationRecherchePs = false;
+							    													 priseRecherchePs = false;
+							    													 chargeRecherchePs = false;
+							    													 panelDaoTableauBordSai = true;
+							    													 panelDaoTableauBordPslpso = false;
+							    													 panelDaoTableauBordVal = false;
+							    													 panelDaoTableauBordPub = false;
+							    													 panelDaoTableauBordAff =false;
+							    													 panelDaoTableauBordExa =false; 
+							    													 panelDaoTableauBordRet =false;
+							    													 panelDaoTableauBordVet =false;
+							    													 panelDaoTableauBordCha = false;
+							    													 panelDaoTableauBordPrise = false;
+							    													 panelAmi = false;
+							    													 panelDao = true;  
+							    													 panelPrq = false;
+							    													 btn_trans_ami =false;
+							    													 btn_trans_dao =true;
+							    													 btn_trans_prq =false;
+							    													 
+							    													 btn_creerDetailAmi = false;
+							    													 btn_creerDetailDao = true ;
+							    													 btn_creerDetailPrq = false;
+							    													 
+							    													 btn_creerDetailDaoCmp = true;
+							    													 btn_creerDetailAmiCmp = false;
+							    													 btn_creerDetailPrqCmp = false;
+							    													 btn_creerDetailDaoDmp = true;
+							    													 btn_creerDetailAmiDmp = false; 
+							    													 btn_creerDetailPrqDmp = false;
+							    													 fermerValDao = false;
+							    													 fermerSaiDao = true;
+							    													 detailD = true;
+							    													 detailA= false; 
+							    													 detailP = false;
+							    													 btn_valider_dao_cpmp =  false;
+							    													 btn_valider_dao_dmp = false;
+							    													 btn_valider_ami_cpmp = false; 
+							    													 btn_valider_prq_cpmp = false;
+							    													 btn_valider_ami_dmp = false;
+							    													 btn_valider_prq_dmp = false;
+							    													 btn_fermer_saisie_dao = true; 
+							    													 btn_fermer_saisie_ami = false; 
+							    													 btn_fermer_saisie_prq = false; 
+											    						     }else
+								    									    	 if(action.equalsIgnoreCase("VALDPS")) {
+								    									    		   type = "DAC";
+								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
+								    								    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
+								    								    				panelDetail=false;
+								    								    				panelForm=false;
+								    								   				    panelTraitement=true;
+								    								    				btn_new =false;
+								    								    				btn_affec = false;
+								    								    				btn_retrait = false;
+								    								    				btn_valid = true;
+								    													panel1 =false;
+								    													panel2 =true;
+								    													panel3 =false;
+								    													panel4 =false;
+								    													panel5 =false;
+								    													panel6=false;
+								    													panel7 = false;
+								    													panel8 = false;
+								    													panel9 = false;
+								    													panel10=false;
+								    													panel11 = false;
+								    													panel12 = false;
+								    													affectationRecherchePs = false;
+								    													venteRecherchePs = false;
+								    												    affectationRecherchePs = false;
+								    													examenRecherchePs = false;
+								    													publicationRecherchePs = false;
+								    													saisieRecherchePs = false;
+								    													celluleRecherchePs = false;
+								    													validationRecherchePs = true;
+								    													priseRecherchePs = false;
+								    													chargeRecherchePs = false;
+								    													affDao=false;
+								    													exaDao=false;
+								    													panelDaoTableauBordAff =false;
+								    													panelDaoTableauBordRet = false;
+								    													panelDaoTableauBordSai = false;
+								    													panelDaoTableauBordPslpso = false;
+								    													panelDaoTableauBordVal = true;
+								    													panelDaoTableauBordVet =false;
+								    													panelDaoTableauBordExa = false;
+								    													panelDaoTableauBordCha = false;
+								    													panelDaoTableauBordPub = false;
+								    													panelDaoTableauBordPrise = false;
+								    													panelDao = true;
+								    													panelPrq =false;
+								    												    panelAmi = false;
+								    													fermerValDao =true;
+								    													fermerSaiDao = false;
+								    													btn_trans_ami =false;
+								    													btn_trans_dao =false;
+								    													btn_trans_prq =false;
+								    													detailD = true ;
+								    													detailA = false; 
+								    													detailP = false;
+								    													btn_valider_prq_cpmp = false;
+								    													btn_valider_prq_dmp = false; 
+								    													btn_valider_ami_cpmp = false; 
+								    													btn_valider_ami_dmp = false;
+								    													btn_valider_dao_cpmp = true;
+								    													btn_valider_dao_dmp = true;
+								    													btn_fermer_saisie_ami = false; 
+								    													btn_fermer_saisie_prq = false;
+								    													btn_fermer_saisie_dao = true;
 												    						    }else
-									    									    	 if(action.equalsIgnoreCase("EXADPS")) {
-									    									    		 type = "DAC";
-									    								    			 libelle1="Index";
-									    								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
-									    								    			 btn_new =false;
-									    								    			 btn_affec = false;
-									    								    			 btn_exam = true;
-									    								    			 btn_valid = false;
-									    												 panel1 =false;
-									    												 panel2 =false;
-									    												 panel3 = false;
-									    												 panel4 = true;
-									    												 panel5 = false;
-									    												 panel6 = false;
-									    												 panel7=false;
-									    												 panel8 =false;
-									    												 panel9 =false;
-									    												 panel10 = false;
-									    												 panel11 = false;
-									    												 panel12 = false;
-									    												 panelAffectation = false;
-									    												 affDao=false;
-									    												 exaDao=true;
-									    												 panelDaoTableauBordSai = false;
-									    												 panelDaoTableauBordVal = false;
-									    												 panelDaoTableauBordAff =false;
-									    												 panelDaoTableauBordExa =true;
-									    												 panelDaoTableauBordVet =false;
-									    												 panelDaoTableauBordCha = false;
-									    												 panelDaoTableauBordPub = false;
-									    												 panelDaoTableauBordPrise = false;
-									    												 panelDao = true;  
-									    												 panelPrq = false;
-									    												 btn_trans_ami =false;
-									    												 btn_trans_dao =false;
-									    												 btn_trans_prq =false;
-									    												 
-									    												 btn_creerDetailAmi = false;
-									    												 btn_creerDetailDao = false ;
-									    												 btn_creerDetailPrq = false;
-									    												 
-									    												 btn_creerDetailDaoCmp = false;
-									    												 btn_creerDetailAmiCmp = false;
-									    												 btn_creerDetailPrqCmp = false;
-									    												 btn_creerDetailDaoDmp = false;
-									    												 btn_creerDetailAmiDmp = false; 
-									    												 btn_creerDetailPrqDmp = false;
-									    												 fermerValDao = false;
-									    												 fermerSaiDao = true;
-									    												 detailD = false;
-									    												 detailA= false; 
-									    												 detailP = false;
-									    												 btn_valider_dao_cpmp =  false;
-									    												 btn_valider_dao_dmp = false;
-									    												 btn_valider_ami_cpmp = false; 
-									    												 btn_valider_prq_cpmp = false;
-									    												 btn_valider_ami_dmp = false;
-									    												 btn_valider_prq_dmp = false;
-									    												 btn_fermer_saisie_dao = false; 
-									    												 btn_fermer_saisie_ami = false; 
-									    												 btn_fermer_saisie_prq = false; 
-													    							    
+									    									    	if(action.equalsIgnoreCase("APEDPS")) {
+									    									    		type = "DAC";
+									    							    				panelDetail=true;
+									    							    				panelForm=false;
+									    							   				    panelTraitement=false;
+									    							    				libelle1="Detail";
+									    							    				libelle2 = "Synthèse du DAC N°";
+									    							    				fermerSaiPrq = false; 
+									    							    				fermerValPrq = false;
+									    							    				fermerSaiAmi = false;
+									    							    				fermerValAmi = false;
+									    							    				fermerSaiDao = true;
+									    							    				fermerValDao = false;
+									    							    				detailD = true ;
+									    												detailA = false; 
+									    												detailP = false;
+									    												fermerApercuDao = true;
+									    												fermerApercuAmi = false;
+									    												fermerApercuPrq = false;
 													    						   }else
-										    									    	 if(action.equalsIgnoreCase("AFFDPS")) {
-										    									    		    type = "DAC";
-										    									    			libelle1="Index";
-										    									    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL A CONCURRENCE";
-										    									    			 btn_new =false;
-										    									    			 btn_affec = true;
-										    									    			 btn_retrait = false;
-										    									    			 btn_valid = false;
-										    													 panel1 =false;
-										    													 panel2 =false;
-										    													 panel3 = true;
-										    													 panel4 = false;
-										    													 panel5 = false;
-										    													 panel6=false;
-										    													 panel7 = false;
-										    													 panel8 = false;
-										    													 panel9 = false;
-										    													 panel10 = false;
-										    													 panel11 = false;
-										    													 panel12 = false;
-										    													 panelAffectation = true;
-										    													 affDao=true;
-										    													 exaDao=false;
-										    													 panelDaoTableauBordSai = false;
-										    													 panelDaoTableauBordVal = false;
-										    													 panelDaoTableauBordAff =true;
-										    													 panelDaoTableauBordVet =false;
-										    													 panelDaoTableauBordRet = false;
-										    													 panelDaoTableauBordCha = false;
-										    													 panelDaoTableauBordPub = false;
-										    													 panelDaoTableauBordPrise = false;
-										    													 panelDao = true;  
-										    													 panelPrq = false;
-										    													 btn_trans_ami =false;
-										    													 btn_trans_dao =true;
-										    													 btn_trans_prq =false;
-										    													 
-										    													 btn_creerDetailAmi = false;
-										    													 btn_creerDetailDao = false ;
-										    													 btn_creerDetailPrq = false;
-										    													 
-										    													 btn_creerDetailDaoCmp = true;
-										    													 btn_creerDetailAmiCmp = false;
-										    													 btn_creerDetailPrqCmp = false;
-										    													 btn_creerDetailDaoDmp = false;
-										    													 btn_creerDetailAmiDmp = false; 
-										    													 btn_creerDetailPrqDmp = false;
-										    													 fermerValDao = false;
-										    													 fermerSaiDao = true;
-										    													 detailD = false;
-										    													 detailA= false; 
-										    													 detailP = false;
-										    													 btn_valider_dao_cpmp =  false;
-										    													 btn_valider_dao_dmp = false;
-										    													 btn_valider_ami_cpmp = false; 
-										    													 btn_valider_prq_cpmp = false;
-										    													 btn_valider_ami_dmp = false;
-										    													 btn_valider_prq_dmp = false;
-										    													 btn_fermer_saisie_dao = false; 
-										    													 btn_fermer_saisie_ami = false; 
-										    													 btn_fermer_saisie_prq = false;
-														    							     
+									    									    	  if(action.equalsIgnoreCase("CHADPS")) {
+									    									    		     type = "DAC";
+																			    			 libelle1="Index";
+																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+																			    			 btn_new =false;
+																			    			 btn_affec = false;
+																			    			 btn_exam = false;
+																			    			 btn_retrait = false;
+																			    			 btn_valid = false;
+																							 panel1 =false;
+																							 panel2 =false;
+																							 panel3 = false;
+																							 panel4 = false;
+																							 panel5 = false;
+																							 panel6 = true;
+																							 panel7 =false;
+																							 panel8 =false;
+																							 panel9 =false;
+																							 panel10 = false;
+																							 panel11 = false;
+																							 panel12 = false;
+																						     venteRecherchePs = false;
+																							 affectationRecherchePs = false;
+																						     examenRecherchePs = false;
+																							 publicationRecherchePs = false;
+																							 saisieRecherchePs = false;
+																							 celluleRecherchePs = false;
+																							 validationRecherchePs = false;
+																							 priseRecherchePs = false;
+																							 chargeRecherchePs = true;
+																							 affDao=false;
+																							 exaDao=false;
+																							 retDao = true;
+																							 panelDaoTableauBordSai = false;
+																							 panelDaoTableauBordVal = false;
+																							 panelDaoTableauBordAff =false;
+																							 panelDaoTableauBordExa =false; 
+																							 panelDaoTableauBordRet =false; 
+																							 panelDaoTableauBordVet =false;
+																							 panelDaoTableauBordCha = true;
+																							 panelDaoTableauBordPub = false;
+																							 panelDaoTableauBordPrise = false;
+																							 panelDao = true;  
+																							 panelPrq = false;
+																							 btn_trans_ami =false;
+																							 btn_trans_dao =false;
+																							 btn_trans_prq =false;
+																							 
+																							 btn_creerDetailAmi = false;
+																							 btn_creerDetailDao = false ;
+																							 btn_creerDetailPrq = false;
+																							 
+																							 btn_creerDetailDaoCmp = false;
+																							 btn_creerDetailAmiCmp = false;
+																							 btn_creerDetailPrqCmp = false;
+																							 btn_creerDetailDaoDmp = false;
+																							 btn_creerDetailAmiDmp = false; 
+																							 btn_creerDetailPrqDmp = false;
+																							 fermerValDao = false;
+																							 fermerSaiDao = true;
+																							 detailD = false;
+																							 detailA= false; 
+																							 detailP = false;
+																							 btn_valider_dao_cpmp =  false;
+																							 btn_valider_dao_dmp = false;
+																							 btn_valider_ami_cpmp = false; 
+																							 btn_valider_prq_cpmp = false;
+																							 btn_valider_ami_dmp = false;
+																							 btn_valider_prq_dmp = false;
+																							 btn_fermer_saisie_dao = false; 
+																							 btn_fermer_saisie_ami = false; 
+																							 btn_fermer_saisie_prq = false;
+													    						    }else
+										    									    	 if(action.equalsIgnoreCase("EXADPS")) {
+										    									    		 type = "DAC";
+										    								    			 libelle1="Index";
+										    								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+										    								    			 btn_new =false;
+										    								    			 btn_affec = false;
+										    								    			 btn_exam = true;
+										    								    			 btn_valid = false;
+										    												 panel1 =false;
+										    												 panel2 =false;
+										    												 panel3 = false;
+										    												 panel4 = true;
+										    												 panel5 = false;
+										    												 panel6 = false;
+										    												 panel7=false;
+										    												 panel8 =false;
+										    												 panel9 =false;
+										    												 panel10 = false;
+										    												 panel11 = false;
+										    												 panel12 = false;
+										    												 panelAffectation = false;
+										    												 affectationRecherchePs = false;
+									    													 venteRecherchePs = false;
+									    												     affectationRecherchePs = false;
+									    													 examenRecherchePs = true;
+									    													 publicationRecherchePs = false;
+									    													 saisieRecherchePs = false;
+									    													 celluleRecherchePs = false;
+									    													 validationRecherchePs = false;
+									    													 priseRecherchePs = false;
+									    													 chargeRecherchePs = false;
+										    												 affDao=false;
+										    												 exaDao=true;
+										    												 panelDaoTableauBordSai = false;
+										    												 panelDaoTableauBordVal = false;
+										    												 panelDaoTableauBordAff =false;
+										    												 panelDaoTableauBordExa =true;
+										    												 panelDaoTableauBordVet =false;
+										    												 panelDaoTableauBordCha = false;
+										    												 panelDaoTableauBordPub = false;
+										    												 panelDaoTableauBordPrise = false;
+										    												 panelDao = true;  
+										    												 panelPrq = false;
+										    												 btn_trans_ami =false;
+										    												 btn_trans_dao =false;
+										    												 btn_trans_prq =false;
+										    												 
+										    												 btn_creerDetailAmi = false;
+										    												 btn_creerDetailDao = false ;
+										    												 btn_creerDetailPrq = false;
+										    												 
+										    												 btn_creerDetailDaoCmp = false;
+										    												 btn_creerDetailAmiCmp = false;
+										    												 btn_creerDetailPrqCmp = false;
+										    												 btn_creerDetailDaoDmp = false;
+										    												 btn_creerDetailAmiDmp = false; 
+										    												 btn_creerDetailPrqDmp = false;
+										    												 fermerValDao = false;
+										    												 fermerSaiDao = true;
+										    												 detailD = false;
+										    												 detailA= false; 
+										    												 detailP = false;
+										    												 btn_valider_dao_cpmp =  false;
+										    												 btn_valider_dao_dmp = false;
+										    												 btn_valider_ami_cpmp = false; 
+										    												 btn_valider_prq_cpmp = false;
+										    												 btn_valider_ami_dmp = false;
+										    												 btn_valider_prq_dmp = false;
+										    												 btn_fermer_saisie_dao = false; 
+										    												 btn_fermer_saisie_ami = false; 
+										    												 btn_fermer_saisie_prq = false; 
+														    							    
 														    						   }else
-											    									    	 if(action.equalsIgnoreCase("PUBDPS")) {
-											    									    		 type = "DAC";
-																				    			 libelle1="Index";
-																				    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
-																				    			 btn_new =false;
-																				    			 btn_affec = false;
-																				    			 btn_exam = false;
-																				    			 btn_retrait = false;
-																				    			 btn_valid = false;
-																								 panel1 =false;
-																								 panel2 =false;
-																								 panel3 = false;
-																								 panel4 = false;
-																								 panel5 = false;
-																								 panel6 = false;
-																								 panel7 = true;
-																								 panel8 = false;
-																								 panel9 =false;
-																								 panel10 = false;
-																								 panel11 = false;
-																								 panel12 = false;
-																								 affDao=false;
-																								 exaDao=false;
-																								 retDao = false;
-																								 panelDaoTableauBordSai = false;
-																								 panelDaoTableauBordVal = false;
-																								 panelDaoTableauBordAff =false;
-																								 panelDaoTableauBordExa =false; 
-																								 panelDaoTableauBordRet =false;
-																								 panelDaoTableauBordVet =false;
-																								 panelDaoTableauBordCha = false;
-																								 panelDaoTableauBordPub = true;
-																								 panelDaoTableauBordPrise = false;
-																								 panelDao = false;  
-																								 panelPrq = false;
-																								 btn_trans_ami =false;
-																								 btn_trans_dao =false;
-																								 btn_trans_prq =false;
-																								 
-																								 btn_creerDetailAmi = false;
-																								 btn_creerDetailDao = false ;
-																								 btn_creerDetailPrq = false;
-																								 
-																								 btn_creerDetailDaoCmp = false;
-																								 btn_creerDetailAmiCmp = false;
-																								 btn_creerDetailPrqCmp = false;
-																								 btn_creerDetailDaoDmp = false;
-																								 btn_creerDetailAmiDmp = false; 
-																								 btn_creerDetailPrqDmp = false;
-																								 fermerValDao = false;
-																								 fermerSaiDao = true;
-																								 detailD = false;
-																								 detailA= false; 
-																								 detailP = false;
-																								 btn_valider_dao_cpmp =  false;
-																								 btn_valider_dao_dmp = false;
-																								 btn_valider_ami_cpmp = false; 
-																								 btn_valider_prq_cpmp = false;
-																								 btn_valider_ami_dmp = false;
-																								 btn_valider_prq_dmp = false;
-																								 btn_fermer_saisie_dao = false; 
-																								 btn_fermer_saisie_ami = false; 
-																								 btn_fermer_saisie_prq = false;   
-					  
+											    									    	 if(action.equalsIgnoreCase("AFFDPS")) {
+											    									    		    type = "DAC";
+											    									    			libelle1="Index";
+											    									    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL A CONCURRENCE";
+											    									    			 btn_new =false;
+											    									    			 btn_affec = true;
+											    									    			 btn_retrait = false;
+											    									    			 btn_valid = false;
+											    													 panel1 =false;
+											    													 panel2 =false;
+											    													 panel3 = true;
+											    													 panel4 = false;
+											    													 panel5 = false;
+											    													 panel6=false;
+											    													 panel7 = false;
+											    													 panel8 = false;
+											    													 panel9 = false;
+											    													 panel10 = false;
+											    													 panel11 = false;
+											    													 panel12 = false;
+											    													 panelAffectation = true;
+											    													 affectationRecherchePs = true;
+											    													 venteRecherchePs = false;
+											    												     affectationRecherchePs = false;
+											    													 examenRecherchePs = false;
+											    													 publicationRecherchePs = false;
+											    													 saisieRecherchePs = false;
+											    													 celluleRecherchePs = false;
+											    													 validationRecherchePs = false;
+											    													 priseRecherchePs = false;
+											    													 chargeRecherchePs = false;
+											    													 affDao=true;
+											    													 exaDao=false;
+											    													 panelDaoTableauBordSai = false;
+											    													 panelDaoTableauBordVal = false;
+											    													 panelDaoTableauBordAff =true;
+											    													 panelDaoTableauBordVet =false;
+											    													 panelDaoTableauBordRet = false;
+											    													 panelDaoTableauBordCha = false;
+											    													 panelDaoTableauBordPub = false;
+											    													 panelDaoTableauBordPrise = false;
+											    													 panelDao = true;  
+											    													 panelPrq = false;
+											    													 btn_trans_ami =false;
+											    													 btn_trans_dao =true;
+											    													 btn_trans_prq =false;
+											    													 
+											    													 btn_creerDetailAmi = false;
+											    													 btn_creerDetailDao = false ;
+											    													 btn_creerDetailPrq = false;
+											    													 
+											    													 btn_creerDetailDaoCmp = true;
+											    													 btn_creerDetailAmiCmp = false;
+											    													 btn_creerDetailPrqCmp = false;
+											    													 btn_creerDetailDaoDmp = false;
+											    													 btn_creerDetailAmiDmp = false; 
+											    													 btn_creerDetailPrqDmp = false;
+											    													 fermerValDao = false;
+											    													 fermerSaiDao = true;
+											    													 detailD = false;
+											    													 detailA= false; 
+											    													 detailP = false;
+											    													 btn_valider_dao_cpmp =  false;
+											    													 btn_valider_dao_dmp = false;
+											    													 btn_valider_ami_cpmp = false; 
+											    													 btn_valider_prq_cpmp = false;
+											    													 btn_valider_ami_dmp = false;
+											    													 btn_valider_prq_dmp = false;
+											    													 btn_fermer_saisie_dao = false; 
+											    													 btn_fermer_saisie_ami = false; 
+											    													 btn_fermer_saisie_prq = false;
+															    							     
 															    						   }else
-												    									    	 if(action.equalsIgnoreCase("VETDPS")) {
-																    						  
-																    						     }else
-													    									    	 if(action.equalsIgnoreCase("TRADPS")) {
+												    									    	 if(action.equalsIgnoreCase("PUBDPS")) {
+												    									    		 type = "DAC";
+																					    			 libelle1="Index";
+																					    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+																					    			 btn_new =false;
+																					    			 btn_affec = false;
+																					    			 btn_exam = false;
+																					    			 btn_retrait = false;
+																					    			 btn_valid = false;
+																									 panel1 =false;
+																									 panel2 =false;
+																									 panel3 = false;
+																									 panel4 = false;
+																									 panel5 = false;
+																									 panel6 = false;
+																									 panel7 = true;
+																									 panel8 = false;
+																									 panel9 =false;
+																									 panel10 = false;
+																									 panel11 = false;
+																									 panel12 = false;
+																									 affectationRecherchePs = false;
+											    													 venteRecherchePs = false;
+											    												     affectationRecherchePs = false;
+											    													 examenRecherchePs = false;
+											    													 publicationRecherchePs = true;
+											    													 saisieRecherchePs = false;
+											    													 celluleRecherchePs = false;
+											    													 validationRecherchePs = false;
+											    													 chargeRecherchePs = false;
+																									 affDao=false;
+																									 exaDao=false;
+																									 retDao = false;
+																									 panelDaoTableauBordSai = false;
+																									 panelDaoTableauBordVal = false;
+																									 panelDaoTableauBordAff =false;
+																									 panelDaoTableauBordExa =false; 
+																									 panelDaoTableauBordRet =false;
+																									 panelDaoTableauBordVet =false;
+																									 panelDaoTableauBordCha = false;
+																									 panelDaoTableauBordPub = true;
+																									 panelDaoTableauBordPrise = false;
+																									 panelDao = false;  
+																									 panelPrq = false;
+																									 btn_trans_ami =false;
+																									 btn_trans_dao =false;
+																									 btn_trans_prq =false;
+																									 
+																									 btn_creerDetailAmi = false;
+																									 btn_creerDetailDao = false ;
+																									 btn_creerDetailPrq = false;
+																									 
+																									 btn_creerDetailDaoCmp = false;
+																									 btn_creerDetailAmiCmp = false;
+																									 btn_creerDetailPrqCmp = false;
+																									 btn_creerDetailDaoDmp = false;
+																									 btn_creerDetailAmiDmp = false; 
+																									 btn_creerDetailPrqDmp = false;
+																									 fermerValDao = false;
+																									 fermerSaiDao = true;
+																									 detailD = false;
+																									 detailA= false; 
+																									 detailP = false;
+																									 btn_valider_dao_cpmp =  false;
+																									 btn_valider_dao_dmp = false;
+																									 btn_valider_ami_cpmp = false; 
+																									 btn_valider_prq_cpmp = false;
+																									 btn_valider_ami_dmp = false;
+																									 btn_valider_prq_dmp = false;
+																									 btn_fermer_saisie_dao = false; 
+																									 btn_fermer_saisie_ami = false; 
+																									 btn_fermer_saisie_prq = false;   
+						  
+																    						   }else
+													    									    	 if(action.equalsIgnoreCase("VETDPS")) {
 													    									    		 type = "DAC";
+																	    							     libelle="VENTE / RETRAIT DU DAC N°";
 																						    			 libelle1="Index";
-																						    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
+																						    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A CONCURRENCE";
 																						    			 btn_new =false;
 																						    			 btn_affec = false;
 																						    			 btn_exam = false;
-																						    			 btn_retrait = false;
+																						    			 btn_retrait = true;
 																						    			 btn_valid = false;
 																										 panel1 =false;
 																										 panel2 =false;
@@ -2869,20 +2948,29 @@ public class ControleController {
 																										 panel5 = false;
 																										 panel6 = false;
 																										 panel7 = false;
-																										 panel8 = true;
-																										 panel9 = false;
+																										 panel8 = false;
+																										 panel9 =true;
 																										 panel10 = false;
 																										 panel11 = false;
 																										 panel12 = false;
+																										 venteRecherchePs = true; 
+																										 affectationRecherchePs = false;
+																										 examenRecherchePs = false;
+																										 publicationRecherchePs = false;
+																										 saisieRecherchePs = false;
+																										 celluleRecherchePs = false;
+																										 validationRecherchePs = false;
+																										 priseRecherchePs = false;
+																										 chargeRecherchePs = false;
 																										 affDao=false;
 																										 exaDao=false;
 																										 retDao = true;
 																										 panelDaoTableauBordSai = false;
-																										 panelDaoTableauBordVal = true;
+																										 panelDaoTableauBordVal = false;
 																										 panelDaoTableauBordAff =false;
 																										 panelDaoTableauBordExa =false; 
 																										 panelDaoTableauBordRet =false; 
-																										 panelDaoTableauBordVet =false;
+																										 panelDaoTableauBordVet =true;
 																										 panelDaoTableauBordCha = false;
 																										 panelDaoTableauBordPub = false;
 																										 panelDaoTableauBordPrise = false;
@@ -2916,71 +3004,157 @@ public class ControleController {
 																										 btn_fermer_saisie_dao = false; 
 																										 btn_fermer_saisie_ami = false; 
 																										 btn_fermer_saisie_prq = false; 
-																	    						      }else
-															    									    	if(action.equalsIgnoreCase("OBSDPS")) {
-																			    							     type = "DAC";
-																								    			 libelle1="Index";
-																								    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
-																								    			 btn_new =false;
-																								    			 btn_affec = false;
-																								    			 btn_exam = false;
-																								    			 btn_retrait = true;
-																								    			 btn_valid = false;
-																												 panel1 =false;
-																												 panel2 =false;
-																												 panel3 = false;
-																												 panel4 = false;
-																												 panel5 = false;
-																												 panel6 = false;
-																												 panel7 = false;
-																												 panel8 = false;
-																												 panel9 = false;
-																												 panel10 =false;
-																												 panel11 = false;
-																												 panel12 = true;
-																												 affDao=false;
-																												 exaDao=false;
-																												 retDao = true;
-																												 panelDaoTableauBordSai = false;
-																												 panelDaoTableauBordVal = false;
-																												 panelDaoTableauBordAff =false;
-																												 panelDaoTableauBordExa =false; 
-																												 panelDaoTableauBordRet =false; 
-																												 panelDaoTableauBordVet =false;
-																												 panelDaoTableauBordCha = false;
-																												 panelDaoTableauBordPub = false;
-																												 panelDaoTableauBordPrise = true;
-																												 panelDao = true;  
-																												 panelPrq = false;
-																												 btn_trans_ami =false;
-																												 btn_trans_dao =false;
-																												 btn_trans_prq =false;
-																												 
-																												 btn_creerDetailAmi = false;
-																												 btn_creerDetailDao = false ;
-																												 btn_creerDetailPrq = false;
-																												 
-																												 btn_creerDetailDaoCmp = false;
-																												 btn_creerDetailAmiCmp = false;
-																												 btn_creerDetailPrqCmp = false;
-																												 btn_creerDetailDaoDmp = false;
-																												 btn_creerDetailAmiDmp = false; 
-																												 btn_creerDetailPrqDmp = false;
-																												 fermerValDao = false;
-																												 fermerSaiDao = true;
-																												 detailD = false;
-																												 detailA= false; 
-																												 detailP = false;
-																												 btn_valider_dao_cpmp =  false;
-																												 btn_valider_dao_dmp = false;
-																												 btn_valider_ami_cpmp = false; 
-																												 btn_valider_prq_cpmp = false;
-																												 btn_valider_ami_dmp = false;
-																												 btn_valider_prq_dmp = false;
-																												 btn_fermer_saisie_dao = false; 
-																												 btn_fermer_saisie_ami = false; 
-																												 btn_fermer_saisie_prq = false;  
-																			    						   }
+																	    						  
+																	    						     }else
+														    									    	 if(action.equalsIgnoreCase("TRADPS")) {
+														    									    		 type = "DAC";
+																							    			 libelle1="Index";
+																							    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
+																							    			 btn_new =false;
+																							    			 btn_affec = false;
+																							    			 btn_exam = false;
+																							    			 btn_retrait = false;
+																							    			 btn_valid = false;
+																											 panel1 =false;
+																											 panel2 =false;
+																											 panel3 = false;
+																											 panel4 = false;
+																											 panel5 = false;
+																											 panel6 = false;
+																											 panel7 = false;
+																											 panel8 = true;
+																											 panel9 = false;
+																											 panel10 = false;
+																											 panel11 = false;
+																											 panel12 = false;
+																											 affectationRecherchePs = false;
+													    													 venteRecherchePs = false;
+													    												     affectationRecherchePs = false;
+													    													 examenRecherchePs = false;
+													    													 publicationRecherchePs = false;
+													    													 saisieRecherchePs = false;
+													    													 celluleRecherchePs = true;
+													    													 validationRecherchePs = false;
+													    													 priseRecherchePs = false;
+																											 affDao=false;
+																											 exaDao=false;
+																											 retDao = true;
+																											 panelDaoTableauBordSai = false;
+																											 panelDaoTableauBordVal = true;
+																											 panelDaoTableauBordAff =false;
+																											 panelDaoTableauBordExa =false; 
+																											 panelDaoTableauBordRet =false; 
+																											 panelDaoTableauBordVet =false;
+																											 panelDaoTableauBordCha = false;
+																											 panelDaoTableauBordPub = false;
+																											 panelDaoTableauBordPrise = false;
+																											 panelDao = true;  
+																											 panelPrq = false;
+																											 btn_trans_ami =false;
+																											 btn_trans_dao =false;
+																											 btn_trans_prq =false;
+																											 
+																											 btn_creerDetailAmi = false;
+																											 btn_creerDetailDao = false ;
+																											 btn_creerDetailPrq = false;
+																											 
+																											 btn_creerDetailDaoCmp = false;
+																											 btn_creerDetailAmiCmp = false;
+																											 btn_creerDetailPrqCmp = false;
+																											 btn_creerDetailDaoDmp = false;
+																											 btn_creerDetailAmiDmp = false; 
+																											 btn_creerDetailPrqDmp = false;
+																											 fermerValDao = false;
+																											 fermerSaiDao = true;
+																											 detailD = false;
+																											 detailA= false; 
+																											 detailP = false;
+																											 btn_valider_dao_cpmp =  false;
+																											 btn_valider_dao_dmp = false;
+																											 btn_valider_ami_cpmp = false; 
+																											 btn_valider_prq_cpmp = false;
+																											 btn_valider_ami_dmp = false;
+																											 btn_valider_prq_dmp = false;
+																											 btn_fermer_saisie_dao = false; 
+																											 btn_fermer_saisie_ami = false; 
+																											 btn_fermer_saisie_prq = false; 
+																		    						      }else
+																    									    	if(action.equalsIgnoreCase("OBSDPS")) {
+																				    							     type = "DAC";
+																									    			 libelle1="Index";
+																									    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
+																									    			 btn_new =false;
+																									    			 btn_affec = false;
+																									    			 btn_exam = false;
+																									    			 btn_retrait = true;
+																									    			 btn_valid = false;
+																													 panel1 =false;
+																													 panel2 =false;
+																													 panel3 = false;
+																													 panel4 = false;
+																													 panel5 = false;
+																													 panel6 = false;
+																													 panel7 = false;
+																													 panel8 = false;
+																													 panel9 = false;
+																													 panel10 =false;
+																													 panel11 = false;
+																													 panel12 = true;
+																													 affectationRecherchePs = false;
+															    													 venteRecherchePs = false;
+															    												     affectationRecherchePs = false;
+															    													 examenRecherchePs = false;
+															    													 publicationRecherchePs = false;
+															    													 saisieRecherchePs = false;
+															    													 celluleRecherchePs = false;
+															    													 validationRecherchePs = false;
+															    													 priseRecherchePs = true;
+															    													 chargeRecherchePs = false;
+																													 affDao=false;
+																													 exaDao=false;
+																													 retDao = true;
+																													 panelDaoTableauBordSai = false;
+																													 panelDaoTableauBordVal = false;
+																													 panelDaoTableauBordAff =false;
+																													 panelDaoTableauBordExa =false; 
+																													 panelDaoTableauBordRet =false; 
+																													 panelDaoTableauBordVet =false;
+																													 panelDaoTableauBordCha = false;
+																													 panelDaoTableauBordPub = false;
+																													 panelDaoTableauBordPrise = true;
+																													 panelDao = true;  
+																													 panelPrq = false;
+																													 btn_trans_ami =false;
+																													 btn_trans_dao =false;
+																													 btn_trans_prq =false;
+																													 
+																													 btn_creerDetailAmi = false;
+																													 btn_creerDetailDao = false ;
+																													 btn_creerDetailPrq = false;
+																													 
+																													 btn_creerDetailDaoCmp = false;
+																													 btn_creerDetailAmiCmp = false;
+																													 btn_creerDetailPrqCmp = false;
+																													 btn_creerDetailDaoDmp = false;
+																													 btn_creerDetailAmiDmp = false; 
+																													 btn_creerDetailPrqDmp = false;
+																													 fermerValDao = false;
+																													 fermerSaiDao = true;
+																													 detailD = false;
+																													 detailA= false; 
+																													 detailP = false;
+																													 btn_valider_dao_cpmp =  false;
+																													 btn_valider_dao_dmp = false;
+																													 btn_valider_ami_cpmp = false; 
+																													 btn_valider_prq_cpmp = false;
+																													 btn_valider_ami_dmp = false;
+																													 btn_valider_prq_dmp = false;
+																													 btn_fermer_saisie_dao = false; 
+																													 btn_fermer_saisie_ami = false; 
+																													 btn_fermer_saisie_prq = false;  
+																				    						   }
+				 
+				 
 			 
 			 
 			 
@@ -6385,6 +6559,186 @@ public class ControleController {
 	public void setFermerApercuPrq(boolean fermerApercuPrq) {
 		this.fermerApercuPrq = fermerApercuPrq;
 	}
-	
 
+
+	public boolean isVenteRecherche() {
+		return venteRecherche;
+	}
+
+
+	public void setVenteRecherche(boolean venteRecherche) {
+		this.venteRecherche = venteRecherche;
+	}
+
+
+	public boolean isAffectationRecherche() {
+		return affectationRecherche;
+	}
+
+
+	public void setAffectationRecherche(boolean affectationRecherche) {
+		this.affectationRecherche = affectationRecherche;
+	}
+
+
+	public boolean isExamenRecherche() {
+		return examenRecherche;
+	}
+
+
+	public void setExamenRecherche(boolean examenRecherche) {
+		this.examenRecherche = examenRecherche;
+	}
+
+
+	public boolean isPublicationRecherche() {
+		return publicationRecherche;
+	}
+
+
+	public void setPublicationRecherche(boolean publicationRecherche) {
+		this.publicationRecherche = publicationRecherche;
+	}
+
+
+	public boolean isSaisieRecherche() {
+		return saisieRecherche;
+	}
+
+
+	public void setSaisieRecherche(boolean saisieRecherche) {
+		this.saisieRecherche = saisieRecherche;
+	}
+
+
+	public boolean isCelluleRecherche() {
+		return celluleRecherche;
+	}
+
+
+	public void setCelluleRecherche(boolean celluleRecherche) {
+		this.celluleRecherche = celluleRecherche;
+	}
+
+
+	public boolean isValidationRecherche() {
+		return validationRecherche;
+	}
+
+
+	public void setValidationRecherche(boolean validationRecherche) {
+		this.validationRecherche = validationRecherche;
+	}
+
+
+	public boolean isPriseRecherche() {
+		return priseRecherche;
+	}
+
+
+	public void setPriseRecherche(boolean priseRecherche) {
+		this.priseRecherche = priseRecherche;
+	}
+
+
+	public boolean isChargeRecherche() {
+		return chargeRecherche;
+	}
+
+
+	public void setChargeRecherche(boolean chargeRecherche) {
+		this.chargeRecherche = chargeRecherche;
+	}
+
+
+	public boolean isVenteRecherchePs() {
+		return venteRecherchePs;
+	}
+
+
+	public void setVenteRecherchePs(boolean venteRecherchePs) {
+		this.venteRecherchePs = venteRecherchePs;
+	}
+
+
+	public boolean isAffectationRecherchePs() {
+		return affectationRecherchePs;
+	}
+
+
+	public void setAffectationRecherchePs(boolean affectationRecherchePs) {
+		this.affectationRecherchePs = affectationRecherchePs;
+	}
+
+
+	public boolean isExamenRecherchePs() {
+		return examenRecherchePs;
+	}
+
+
+	public void setExamenRecherchePs(boolean examenRecherchePs) {
+		this.examenRecherchePs = examenRecherchePs;
+	}
+
+
+	public boolean isPublicationRecherchePs() {
+		return publicationRecherchePs;
+	}
+
+
+	public void setPublicationRecherchePs(boolean publicationRecherchePs) {
+		this.publicationRecherchePs = publicationRecherchePs;
+	}
+
+
+	public boolean isSaisieRecherchePs() {
+		return saisieRecherchePs;
+	}
+
+
+	public void setSaisieRecherchePs(boolean saisieRecherchePs) {
+		this.saisieRecherchePs = saisieRecherchePs;
+	}
+
+
+	public boolean isCelluleRecherchePs() {
+		return celluleRecherchePs;
+	}
+
+
+	public void setCelluleRecherchePs(boolean celluleRecherchePs) {
+		this.celluleRecherchePs = celluleRecherchePs;
+	}
+
+
+	public boolean isValidationRecherchePs() {
+		return validationRecherchePs;
+	}
+
+
+	public void setValidationRecherchePs(boolean validationRecherchePs) {
+		this.validationRecherchePs = validationRecherchePs;
+	}
+
+
+	public boolean isPriseRecherchePs() {
+		return priseRecherchePs;
+	}
+
+
+	public void setPriseRecherchePs(boolean priseRecherchePs) {
+		this.priseRecherchePs = priseRecherchePs;
+	}
+
+
+	public boolean isChargeRecherchePs() {
+		return chargeRecherchePs;
+	}
+
+
+	public void setChargeRecherchePs(boolean chargeRecherchePs) {
+		this.chargeRecherchePs = chargeRecherchePs;
+	}
+	
+    
 }
