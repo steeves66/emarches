@@ -1007,8 +1007,9 @@
 				</p:commandLink>
 			
 
-				    <div class="input-group input-group-sm col-md-3">
-				    
+				<div class="input-group input-group-sm col-md-3">
+				   
+				  <h:panelGroup rendered="#{controleController.saisieRecherche}">
                     <label >
                       <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
 					</label>
@@ -1022,7 +1023,155 @@
 
                        <span class="input-group-btn">
                         <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
+                       </span>
+                        
+                 </h:panelGroup>   
+                 
+                   <h:panelGroup rendered="#{controleController.validationRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.chargerDaoRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
+                 
+                  <h:panelGroup rendered="#{controleController.affectationRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.chargerDaoRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
+                 
+                 <h:panelGroup rendered="#{controleController.chargeRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.chargerDaoRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
+                 
+                 
+                 <h:panelGroup rendered="#{controleController.examenRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.chargerDaoRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
+                 
+                <h:panelGroup rendered="#{controleController.publicationRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.chargerDaoRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
+                 
+                 
+                 <h:panelGroup rendered="#{controleController.venteRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.venteRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargeDataVente()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
+                 
+                 <h:panelGroup rendered="#{controleController.celluleRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.celluleRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargeDaoTrans()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
+                 
+                  <h:panelGroup rendered="#{controleController.priseRecherche}">
+                    <label >
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.priseRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                       <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargeDataPriseCompte()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                       </span>
+                        
+                 </h:panelGroup>
                  
 					 </div>
 					

@@ -543,6 +543,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		 listeDaoTrans =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				      "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1T","D2R")),
 				      new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				      new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 		              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDaoTrans.size());	
 			tableauBordController.chargeDataDao();		
@@ -720,28 +721,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	            }
 	  //Fin Methode de Paiement
 	  
-	//Filtre multicritère pour les PGPM
-		public void chargerDaoRecherche() { 
-			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				 getListeDAO().clear();
-				 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
-						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-						  new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
-				          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-					tableauBordController.chargeDataDao();
-					
-					 }else 
-					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
-					    	  
-					        }else 
-					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("")) {
-					    		  
-					    	  }
-		               }
-		
-		
-		
+	//Filtre multicritère pour les DAO en Procédure Normale
 		
 		public void reinitialiseDao() { 
 			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -759,6 +739,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 					    		  
 					    	  }
 		               }
+		
 		
 		 //Mis à jour du libellé de lot
         public void updateLibLot() {
@@ -840,6 +821,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		 listeDaoARetirer = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
 			tableauBordController.chargeDataDao();
@@ -852,6 +834,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		 affectationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R","DOP")),
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("affectationListe  size: "+affectationListe.size());	
 			tableauBordController.chargeDataDao();		
@@ -1194,8 +1177,270 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 								       newDao= listDao.get(0); 
 				   	              }	
 				             }
-		  
+				
+				  
+				  
+				//Filtre multicritère pour les DAO en Procédure Simplifiée
+					public void chargerDaoPsRecherche() { 
+						if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+							 getListeDAO().clear();
+							 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+									 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
+									  new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+									  new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+							          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+							          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+								tableauBordController.chargeDataDao();
+								
+								 }
+					        }
+					
+				public void validationPsRecherche() { 
+				     getValidationListe().clear();
+				validationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAO_ID")),
+					  new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					  new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+					  new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+					  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"),
+					  new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+					  _logger.info("validationListe  size: "+validationListe.size());					
+					tableauBordController.chargeDataDao();		
+					        }
+				
+				
+				public void affectationPsRecherche() { 
+					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+							 getAffectationListe().clear();
+							 affectationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
+									 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R","DOP")),
+									 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+									 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+									new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()),
+									new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+								_logger.info("affectationListe  size: "+affectationListe.size());	
+								tableauBordController.chargeDataDao();
+							
+							 }
+				        }
+				
+				
+				public void retraitPsRecherche() { 
+					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+							getListeDaoARetirer().clear();
+								listeDaoARetirer = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+										 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
+										 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+										 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+										new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+										new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+									_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
+									tableauBordController.chargeDataDao();
+							 }
+				        }
+				
+				public void examenPsRecherche() {
+							 daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+							           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+						              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+							_logger.info("daoExamen size: "+daoExamen.size());	
+							tableauBordController.chargeDataDao();	
+				        }  
+				
+							
+							public void publicationPsRecherche() { 
+								if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+										getListeDaoARetirer().clear();
+												publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
+														 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
+														 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+														 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+														new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+														new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+													_logger.info("publicationListe  size: "+publicationListe.size());		
+													tableauBordController.chargeDataDao();
+										 }
+							        }
+					
+			public void ventePsRecherche() { 
+				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					//getListeDaoVente().clear();
+					listeDaoVente = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+							 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
+							 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+							 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+							new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+						_logger.info("listeDaoVente size: "+listeDaoVente.size());
+						tableauBordController.chargeDataDao();
+											 }
+								        }
+
+			public void prisePsRecherche() { 
+				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					 daoPriseCompte.clear();
+					 daoPriseCompte =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+							 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("SBO","SRO")),
+							 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+							 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+					          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+					          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+						_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
+						tableauBordController.chargeDataDao();
+					  }
+					} 
+			
+			public void cellulePsRecherche() { 
+					listeDaoTrans.clear();
+					 listeDaoTrans =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+						      "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1T","D2R")),
+						      new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+						      new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+				              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+				              new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+					_logger.info("objetListe size: "+listeDaoTrans.size());	
+					tableauBordController.chargeDataDao();
+					  
+					}	  
+					//Filtre multicritère pour les DAO en Procédure Simplifiée
+				 
     //FIN DAO PROCEDURE SIMPLIFIEE
+			
+			
+	    //DAO PROCEDURE NORMALE
+			//Filtre multicritère pour les DAO en Procédure Normale
+			public void chargerDaoRecherche() { 
+				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					 getListeDAO().clear();
+					 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+							 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
+							  new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+							  new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+					          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+					          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+						tableauBordController.chargeDataDao();
+						
+						 }else 
+						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
+						    	  
+						        }else 
+						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("")) {
+						    		  
+						    	  }
+			               }
+			
+		public void validationRecherche() { 
+		     getValidationListe().clear();
+		validationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAO_ID")),
+			  new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+			  new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+			  new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+			  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"),
+			  new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+			  _logger.info("validationListe  size: "+validationListe.size());					
+			tableauBordController.chargeDataDao();		
+			        }
+		
+		
+		public void affectationRecherche() { 
+			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+					 getAffectationListe().clear();
+					 affectationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
+							 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R","DOP")),
+							 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+							 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+							new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()),
+							new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+						_logger.info("affectationListe  size: "+affectationListe.size());	
+						tableauBordController.chargeDataDao();
+					
+					 }
+		        }
+		
+		
+		public void retraitRecherche() { 
+			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					getListeDaoARetirer().clear();
+						listeDaoARetirer = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+								 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
+								 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+								 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+								new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+							_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
+							tableauBordController.chargeDataDao();
+					 }
+		        }
+		
+		public void examenRecherche() {
+					 daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+					           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+					_logger.info("daoExamen size: "+daoExamen.size());	
+					tableauBordController.chargeDataDao();	
+		        }  
+		
+					
+					public void publicationRecherche() { 
+						if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+								getListeDaoARetirer().clear();
+										publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
+												 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
+												 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+												 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+												new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+												new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+											_logger.info("publicationListe  size: "+publicationListe.size());		
+											tableauBordController.chargeDataDao();
+								 }
+					        }
+			
+	public void venteRecherche() { 
+		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			//getListeDaoVente().clear();
+			listeDaoVente = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+					 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
+					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+					new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+				_logger.info("listeDaoVente size: "+listeDaoVente.size());
+				tableauBordController.chargeDataDao();
+									 }
+						        }
+	
+	
+	
+	public void priseRecherche() { 
+		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 daoPriseCompte.clear();
+			 daoPriseCompte =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+					 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("SBO","SRO")),
+					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+			          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+			          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+				_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
+				tableauBordController.chargeDataDao();
+			  }
+			} 
+	
+	public void celluleRecherche() { 
+			listeDaoTrans.clear();
+			 listeDaoTrans =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+				      "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1T","D2R")),
+				      new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				      new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+		              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+		              new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+			_logger.info("objetListe size: "+listeDaoTrans.size());	
+			tableauBordController.chargeDataDao();
+			  
+			}
+	
+				  
+			//Filtre multicritère pour les DAO en Procédure Normale
+	
+	//FIN DAO PROCEDURE NORMALE
 		  
 		  
      //Rappel des informations du PPM
