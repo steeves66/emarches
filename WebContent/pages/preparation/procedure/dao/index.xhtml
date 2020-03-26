@@ -107,32 +107,19 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.ppmAcDiffCpmp}</h3> 
+              <h3>#{tableauBordController.daoCpDifCpmp}</h3> 
 
               <p>#{controleController.type} Differé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+            <p:commandLink  oncomplete="PF('detailDaoDifDlg').show()" action="#{daoController.chargeDaoTabDiff()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
           </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>#{tableauBordController.ppmAcDiffDmp}</h3>
-
-              <p>#{controleController.type} Rejeté(s) par le DMP</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
+        
       </div>
                     </div>
                   </div>
@@ -452,7 +439,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.ppmDmSaisie}</h3>
+              <h3>#{tableauBordController.daoAcAttenteValide}</h3>
 
               <p>#{controleController.type} en attente de transmission</p>
             </div>
@@ -467,7 +454,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.ppmDmTransmis}</h3>
+              <h3>#{tableauBordController.daoAcTransmis}</h3>
 
               <p>#{controleController.type} Transmis</p>
             </div>
@@ -2425,6 +2412,61 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeTabDaoTrans}"
 						  emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			            <p:column headerText="Gestion" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
+				        </p:column>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+				        </p:column> 
+				        
+
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="apercuDaoDif">
+	        <p:dialog  widgetVar="detailDaoDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DAC DIFFERES</div></div>
+			         <div class="col-md-3">
+			          DAC 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeTabDaoDiff}"
+						  emptyMessage="Aucun DAC différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			            <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />

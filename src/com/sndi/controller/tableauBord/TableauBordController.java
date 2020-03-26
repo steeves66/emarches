@@ -686,7 +686,7 @@ public class TableauBordController {
 			 daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
 			 daoCpSaisie = ""+getDaoSaisieDossier("D1T");
 			 daoCpTransmis = ""+getDaoTransmisDossier("D1T");
-			 daoCpDifCpmp = ""+getDaoDiffDossier("S2D");
+			 daoCpDifCpmp = ""+getDaoDiffDossier("D1R","D2R");
 			 daoCpValide = ""+getDaoValideCmp("D2T");
 			 daoCpDifDmp =""+getDaoDiffDmp("S3D");
 			 daoCpAttenteValide = ""+getDaoAttenteValide("S1T","S3D");
@@ -1760,9 +1760,9 @@ public int getDaoDiffDmpACDossier(String src){
 }
 
 //DAO retournés par la cpmp (Son propre tableau de bord)
-public int getDaoDiffDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+public int getDaoDiffDossier(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));

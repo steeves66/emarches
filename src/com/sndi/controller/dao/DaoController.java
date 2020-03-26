@@ -153,6 +153,7 @@ public class DaoController {
 	 private List<TAffichageDao> listeDaoVente = new ArrayList<TAffichageDao>();
 	 private List<TAffichageDao> daoPriseCompte = new ArrayList<TAffichageDao>();
 	 private List<TDacSpecs> listeTabDaoTrans = new ArrayList<TDacSpecs>(); 
+	 private List<TDacSpecs> listeTabDaoDiff = new ArrayList<TDacSpecs>(); 
 	 private List<TDacSpecs> daoTab = new ArrayList<TDacSpecs>();
 	 private List<TDacSpecs> listeTabDaoAffecCsv = new ArrayList<TDacSpecs>(); 
 	 private List<TDacSpecs> listeTabDaoCsvAff = new ArrayList<TDacSpecs>();
@@ -594,6 +595,16 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 		              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("listeTabDaoTrans size: "+listeTabDaoTrans.size());	
+			tableauBordController.chargeDataDao();		
+	}
+	 
+	 //Liste des DAO différés chez le AC
+	 public void chargeDaoTabDiff(){
+		 listeTabDaoDiff =(List<TDacSpecs>) iservice.getObjectsByColumnIn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			          "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1R","D2R")),
+				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+		              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			_logger.info("listeTabDaoDiff size: "+listeTabDaoDiff.size());	
 			tableauBordController.chargeDataDao();		
 	}
 	 
@@ -5138,6 +5149,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setListeDaoChargeValid(List<TDaoAffectation> listeDaoChargeValid) {
 		this.listeDaoChargeValid = listeDaoChargeValid;
+	}
+
+	public List<TDacSpecs> getListeTabDaoDiff() {
+		return listeTabDaoDiff;
+	}
+
+	public void setListeTabDaoDiff(List<TDacSpecs> listeTabDaoDiff) {
+		this.listeTabDaoDiff = listeTabDaoDiff;
 	}
 	
 		
