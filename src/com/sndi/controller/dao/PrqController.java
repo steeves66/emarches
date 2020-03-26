@@ -2301,14 +2301,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		  slctdTd.setAffStaCode("D3A");
 		  iservice.updateObject(slctdTd);
 			
-			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 				if (!listDao.isEmpty()) {
 					newDao= listDao.get(0);
 					newDao.setTStatut(new TStatut("D3A"));
 					newDao.setDacStatutRetour("0");
 			        iservice.updateObject(newDao); 
-	   	                 }
+	   	        }
 		  
 		  
 		  //String exo="";
