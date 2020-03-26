@@ -510,6 +510,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 listeDaoVendu = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
 				 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
 				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("listeDaoVendu  size: "+listeDaoVendu.size());	
 			tableauBordController.chargeDataDao();		
@@ -520,6 +521,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 listeDaoValide = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D2T"),
 					new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+				_logger.info("listeDaoValide  size: "+listeDaoValide.size());	
+				tableauBordController.chargeDataDao();		
+		}
+		 
+		//Affichage des DAO validés par la CPMP
+		 public void chargeDaoDiff(){
+			 listeDaoValide.clear();
+			 listeDaoValide = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
+					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D1R"),
+					new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoValide  size: "+listeDaoValide.size());	
 				tableauBordController.chargeDataDao();		
@@ -543,7 +557,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 listeDaoCsvValid =(List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 					  new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"DC2"),
 					  new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					  
+					  new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 			          new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				_logger.info("listeDaoCsvValid size: "+listeDaoCsvValid.size());	
 				tableauBordController.chargeDataDao();		
@@ -617,6 +631,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			_logger.info("listeDaoRetire size: "+listeDaoRetire.size());	
 			tableauBordController.chargeDataDao();		
 	}
+	 
+	
 	 
 	 
 	  public void chargeDaoCharegEtude(){
@@ -916,17 +932,18 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				tableauBordController.chargeDataDao();		
 		}
 		 
-		//Affichage des DAO validé par le C.E
+		//Affichage des DAO validés par le C.E
 		 public void chargeDataChargeValid(){
-			 listeDaoChargeValid.clear();
+			 //listeDaoChargeValid.clear();
 			 listeDaoChargeValid = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")), 
 					 new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"),
 					 new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"DAO"),
+					 new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					 new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAF_DAC_STR",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoChargeValid  size: "+listeDaoChargeValid.size());	
 				tableauBordController.chargeDataDao();		
-		}
+		    }
 	 
 //Fin de Staistiques pour le chargé d'Etudes 
 	 
@@ -943,7 +960,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 
 		 //Affichage des DAO affectés par le chef de Service
 		 public void chargeDaoAffectes(){ 
-			 listeTabDaoCsvAff.clear();
+			 //listeTabDaoCsvAff.clear();
 			 listeTabDaoCsvAff =(List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			              new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
 			              new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
@@ -970,6 +987,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 listeTabdaoDiffCsv = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
 						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5R"),
 						 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoDiffCsv  size: "+listeTabdaoDiffCsv.size());	
 					tableauBordController.chargeDataDao();		
@@ -1382,6 +1400,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					  
 					}	  
 					//Filtre multicritère pour les DAO en Procédure Simplifiée
+			
+			
+			
+			//Affichage des DAO vendus
+			 public void chargeDaoVenduPs(){
+				 listeDaoVendu = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
+						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
+						 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+					_logger.info("listeDaoVendu  size: "+listeDaoVendu.size());	
+					tableauBordController.chargeDataDao();		
+			}
 				 
     //FIN DAO PROCEDURE SIMPLIFIEE
 			
