@@ -2458,8 +2458,9 @@ public class ControleController {
 																	 btn_fermer_saisie_prq = false;  
 								    						   }else
 					    									    	 if(action.equalsIgnoreCase("OBSDAO")) {
-									    							     type = "DAO";
+									    							     type = "DAC";
 														    			 libelle1="Index";
+														    			 libellesmall="Procédure Normale";
 														    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
 														    			 btn_new =false;
 														    			 btn_affec = false;
@@ -2629,6 +2630,7 @@ public class ControleController {
 								    									    		   type = "DAC";
 								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
 								    								    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
+								    								    				libelleDao1="Procédure Simplifiée";
 								    								    				panelDetail=false;
 								    								    				panelForm=false;
 								    								   				    panelTraitement=true;
@@ -2715,6 +2717,7 @@ public class ControleController {
 									    									    		     type = "DAC";
 																			    			 libelle1="Index";
 																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+																			    			 libelleDao1="Procédure Simplifiée";
 																			    			 btn_new =false;
 																			    			 btn_affec = false;
 																			    			 btn_exam = false;
@@ -2788,6 +2791,7 @@ public class ControleController {
 										    									    		 type = "DAC";
 										    								    			 libelle1="Index";
 										    								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+										    								    			 libelleDao1="Procédure Simplifiée";
 										    								    			 btn_new =false;
 										    								    			 btn_affec = false;
 										    								    			 btn_exam = true;
@@ -2861,6 +2865,7 @@ public class ControleController {
 											    									    		    type = "DAC";
 											    									    			libelle1="Index";
 											    									    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL A CONCURRENCE";
+											    									    			 libelleDao1="Procédure Simplifiée";
 											    									    			 btn_new =false;
 											    									    			 btn_affec = true;
 											    									    			 btn_retrait = false;
@@ -2934,6 +2939,7 @@ public class ControleController {
 												    									    		 type = "DAC";
 																					    			 libelle1="Index";
 																					    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+																					    			 libelleDao1="Procédure Simplifiée";
 																					    			 btn_new =false;
 																					    			 btn_affec = false;
 																					    			 btn_exam = false;
@@ -3009,6 +3015,7 @@ public class ControleController {
 																	    							     libelle="VENTE / RETRAIT DU DAC N°";
 																						    			 libelle1="Index";
 																						    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A CONCURRENCE";
+																						    			 libelleDao1="Procédure Simplifiée";
 																						    			 btn_new =false;
 																						    			 btn_affec = false;
 																						    			 btn_exam = false;
@@ -3083,6 +3090,7 @@ public class ControleController {
 														    									    		 type = "DAC";
 																							    			 libelle1="Index";
 																							    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
+																							    			 libelleDao1="Procédure Simplifiée";
 																							    			 btn_new =false;
 																							    			 btn_affec = false;
 																							    			 btn_exam = false;
@@ -3156,6 +3164,7 @@ public class ControleController {
 																				    							     type = "DAC";
 																									    			 libelle1="Index";
 																									    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
+																									    			 libelleDao1="Procédure Simplifiée";
 																									    			 btn_new =false;
 																									    			 btn_affec = false;
 																									    			 btn_exam = false;

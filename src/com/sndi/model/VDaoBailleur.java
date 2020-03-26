@@ -81,6 +81,10 @@ public class VDaoBailleur implements java.io.Serializable {
 	private Date aaoDteValAc;
 	private Date aaoDteValCpmp;
 	private Date aaoDteValDmp;
+	private Short aaoNbrOff;
+	private Short aaoNbrOffAccpet;
+	private Short aaoNbrOffRej;
+	private Short aaoNbrOffHorDelai;
 
 	public VDaoBailleur() {
 	}
@@ -101,7 +105,8 @@ public class VDaoBailleur implements java.io.Serializable {
 			String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot, String aaoAvisBail,
 			BigDecimal aaoMtCaut, String aaoModePaiement, BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,
 			String aaoHeureRecep, BigDecimal aaoAdaNum, String aaoNatPrix, String aaoRegQual, String aaoAvisBai,
-			String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp) {
+			String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp,Short aaoNbrOff, Short aaoNbrOffAccpet,
+			Short aaoNbrOffRej, Short aaoNbrOffHorDelai) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -164,6 +169,10 @@ public class VDaoBailleur implements java.io.Serializable {
 		this.aaoDteValAc = aaoDteValAc;
 		this.aaoDteValCpmp = aaoDteValCpmp;
 		this.aaoDteValDmp = aaoDteValDmp;
+		this.aaoNbrOff = aaoNbrOff;
+		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
+		this.aaoNbrOffRej = aaoNbrOffRej;
+		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
 	}
 
 	
@@ -725,6 +734,42 @@ public class VDaoBailleur implements java.io.Serializable {
 
 	public void setAaoDteValDmp(Date aaoDteValDmp) {
 		this.aaoDteValDmp = aaoDteValDmp;
+	}
+	
+	@Column(name = "AAO_NBR_OFF", precision = 4, scale = 0)
+	public Short getAaoNbrOff() {
+		return this.aaoNbrOff;
+	}
+
+	public void setAaoNbrOff(Short aaoNbrOff) {
+		this.aaoNbrOff = aaoNbrOff;
+	}
+
+	@Column(name = "AAO_NBR_OFF_ACCPET", precision = 4, scale = 0)
+	public Short getAaoNbrOffAccpet() {
+		return this.aaoNbrOffAccpet;
+	}
+
+	public void setAaoNbrOffAccpet(Short aaoNbrOffAccpet) {
+		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
+	}
+
+	@Column(name = "AAO_NBR_OFF_REJ", precision = 4, scale = 0)
+	public Short getAaoNbrOffRej() {
+		return this.aaoNbrOffRej;
+	}
+
+	public void setAaoNbrOffRej(Short aaoNbrOffRej) {
+		this.aaoNbrOffRej = aaoNbrOffRej;
+	}
+
+	@Column(name = "AAO_NBR_OFF_HOR_DELAI", precision = 4, scale = 0)
+	public Short getAaoNbrOffHorDelai() {
+		return this.aaoNbrOffHorDelai;
+	}
+
+	public void setAaoNbrOffHorDelai(Short aaoNbrOffHorDelai) {
+		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
 	}
 
 

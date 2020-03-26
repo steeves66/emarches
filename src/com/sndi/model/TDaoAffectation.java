@@ -36,6 +36,8 @@ public class TDaoAffectation implements java.io.Serializable {
 	private String dafDacObjet;
 	private String dafTypeDac;
 	private String dafMention;
+	private String dafTypePlan;
+	private String dafDacStr;
 
 	public TDaoAffectation() {
 	}
@@ -46,7 +48,7 @@ public class TDaoAffectation implements java.io.Serializable {
 
 	public TDaoAffectation(long dafId, TDetCommissionSeance TDetCommissionSeance,TModePassation TModePassation,
 			TTypeMarche TTypeMarche, String dafDacCode,String dafOpeMatricule, String dafStaCode, String dafDcsMbmRespo, String dafStatutRetour, Long  dafDacGestion, String dafDacObjet,
-			String dafTypeDac,String dafMention) {
+			String dafTypeDac,String dafMention, String dafTypePlan,String dafDacStr) {
 		this.dafId = dafId;
 		this.TDetCommissionSeance = TDetCommissionSeance;
 		this.TModePassation = TModePassation;
@@ -60,6 +62,8 @@ public class TDaoAffectation implements java.io.Serializable {
 		this.dafDacObjet = dafDacObjet;
 		this.dafTypeDac = dafTypeDac;
 		this.dafMention = dafMention;
+		this.dafTypePlan = dafTypePlan;
+		this.dafDacStr = dafDacStr;
 	}
 
 	@Id   
@@ -184,6 +188,24 @@ public class TDaoAffectation implements java.io.Serializable {
 
 	public void setDafMention(String dafMention) {
 		this.dafMention = dafMention;
+	}
+	
+	@Column(name = "DAF_TYPE_PLAN", length = 4)
+	public String getDafTypePlan() {
+		return this.dafTypePlan;
+	}
+
+	public void setDafTypePlan(String dafTypePlan) {
+		this.dafTypePlan = dafTypePlan;
+	}
+	
+	@Column(name = "DAF_DAC_STR", length = 4)
+	public String getDafDacStr() {
+		return this.dafDacStr;
+	}
+
+	public void setDafDacStr(String dafDacStr) {
+		this.dafDacStr = dafDacStr;
 	}
 
 }

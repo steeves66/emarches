@@ -15,6 +15,14 @@
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
         #{controleController.libelleDao3} 
         </h:panelGroup>
+        
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}">
+        #{controleController.libelleDao3} 
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+        #{controleController.libelleDao3} 
+        </h:panelGroup>
       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
         #{controleController.libelleDao3} 
@@ -221,7 +229,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <p:commandLink   class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDataPriseCompte()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -231,7 +239,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcTransmis}</h3>
+              <h3>#{tableauBordController.daoPriseTrait}</h3>
 
               <p>#{controleController.type} Traités</p>
             </div>
@@ -239,7 +247,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
           
-            <p:commandLink   class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink oncomplete="PF('detailDacObsDlg').show()" action="#{daoController.chargeDataPriseCompteTrait()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -690,7 +698,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-             <p:commandLink  oncomplete="PF('detailChargeValDlg').show()" action="#{daoController.chargeDataChargeVal()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+             <p:commandLink  oncomplete="PF('detailChargeValDlg').show()" action="#{daoController.chargeDataChargeValid()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 			 Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -2297,7 +2305,7 @@
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
                              <p:commandLink action="#{daoController.renderPage('dao10','OBSDAO')}" styleClass="btn btn-xs btn-success"  title="Observations du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
+                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
@@ -2452,6 +2460,62 @@
             </div>
       </p:dialog>
     </h:form>
+    
+    <h:form id="apercuDacObs">
+	        <p:dialog  widgetVar="detailDacObsDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DAC TRAITES</div></div>
+			         <div class="col-md-3">
+			          DAC 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="100px" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.daoPriseCompte}"
+						  emptyMessage="Aucun DAC traité" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			            <p:column headerText="Gestion" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
+				        </p:column>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.affDacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+				        </p:column> 
+				        
+
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+            </div>
+      </p:dialog>
+    </h:form>
+    
     
     
     <h:form id="apercuAcAttRet">
@@ -2687,7 +2751,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL AFFECTATION</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2702,7 +2766,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeTabDaoCsvAff}"
 						 selectionMode="single" 
-			               emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun DAC affecté" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -3027,31 +3091,31 @@
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossier"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listDaoValCharge}"  emptyMessage="Aucun Dao validé">
+                <p:dataTable id="tabDossier"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoChargeValid}"  emptyMessage="Aucun Dao validé">
 			        
 			           
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dacGesCode}" />
+         				<h:outputText value="#{slctdTb.dafDacGestion}" />
 				        </p:column>
 
                         <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dacCode}" />
+         				<h:outputText value="#{slctdTb.dafDacCode}" />
 				        </p:column>
 				        
 				        <p:column headerText="Objet" styleClass="col-sm-6" >
-         				<h:outputText value="#{slctdTb.dacObjet}" />
+         				<h:outputText value="#{slctdTb.dafDacObjet}" />
 				        </p:column>
 				        
 				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+         				<h:outputText value="#{slctdTb.dafTypeDac}" />
 				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
 				        </p:column> 
 				       
          				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
 				        </p:column> 
 				        
 			
@@ -3210,7 +3274,7 @@
 	              <p:fileUpload fileUploadListener="#{daoController.uploadCharge}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
 			                      mode="advanced" dragDropSupport="true"
-			                          update=":apercuDAO:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+			                          update=":apercuDAOCharge:tabDossierCharge" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
 	            </div>
 	            
 	            <div class="col-md-12">
@@ -3220,7 +3284,7 @@
 			         </div>
 			          <div class="box-body">
 			          
-                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossListe}" emptyMessage="Aucun Document enrégistré">
+                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossDacListe}" emptyMessage="Aucun Document enrégistré">
 			           <p:column headerText="Nom du document " styleClass="col-md-10">
 			            <h:outputText value="#{doss.ddaNom}" />
 			        </p:column>
@@ -3243,7 +3307,7 @@
 	            
 	            
 	             <div class="pull-right ">
-			            <p:commandLink action="#{daoController.transmetttreRespo()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:commandLink action="#{daoController.transmettreRespo()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoChargeDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
 			            <p:confirm header="Confirmation" message="Confirmez vous la trasmission ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-exchange"></i> Transmettre  
 			            </p:commandLink>

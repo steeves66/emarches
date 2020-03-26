@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 23 mars 2020 10:48:44 by Hibernate Tools 4.3.5.Final
+// Generated 26 mars 2020 03:50:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +17,7 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 	private Date dacDteSaisi;
 	private String dacStaCode;
 	private String dacTymCode;
+	private String dacTypePlan;
 	private String dacMopCode;
 	private BigDecimal dacNbrOuv;
 	private BigDecimal dacGesCode;
@@ -48,16 +49,17 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 	}
 
 	public VDaoChargeEtudeId(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
-			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
-			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
-			Date dacDateReception, String dacStatutRetour, String dacMention, String dcsOpeMatricule, String dcsPreMbm,
-			String dcsComStrCode, String dcsMbmRespo, String dcsFonCod, String tdcLibelle, String tymLibelleCourt,
-			String mopLibelleLong) {
+			String dacTypePlan, String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc,
+			String dacStrCode, String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode,
+			Long dacDppId, Date dacDateReception, String dacStatutRetour, String dacMention, String dcsOpeMatricule,
+			String dcsPreMbm, String dcsComStrCode, String dcsMbmRespo, String dcsFonCod, String tdcLibelle,
+			String tymLibelleCourt, String mopLibelleLong) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
 		this.dacStaCode = dacStaCode;
 		this.dacTymCode = dacTymCode;
+		this.dacTypePlan = dacTypePlan;
 		this.dacMopCode = dacMopCode;
 		this.dacNbrOuv = dacNbrOuv;
 		this.dacGesCode = dacGesCode;
@@ -124,6 +126,15 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 
 	public void setDacTymCode(String dacTymCode) {
 		this.dacTymCode = dacTymCode;
+	}
+
+	@Column(name = "DAC_TYPE_PLAN", length = 4)
+	public String getDacTypePlan() {
+		return this.dacTypePlan;
+	}
+
+	public void setDacTypePlan(String dacTypePlan) {
+		this.dacTypePlan = dacTypePlan;
 	}
 
 	@Column(name = "DAC_MOP_CODE", length = 3)
@@ -335,6 +346,9 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 						&& castOther.getDacStaCode() != null && this.getDacStaCode().equals(castOther.getDacStaCode())))
 				&& ((this.getDacTymCode() == castOther.getDacTymCode()) || (this.getDacTymCode() != null
 						&& castOther.getDacTymCode() != null && this.getDacTymCode().equals(castOther.getDacTymCode())))
+				&& ((this.getDacTypePlan() == castOther.getDacTypePlan())
+						|| (this.getDacTypePlan() != null && castOther.getDacTypePlan() != null
+								&& this.getDacTypePlan().equals(castOther.getDacTypePlan())))
 				&& ((this.getDacMopCode() == castOther.getDacMopCode()) || (this.getDacMopCode() != null
 						&& castOther.getDacMopCode() != null && this.getDacMopCode().equals(castOther.getDacMopCode())))
 				&& ((this.getDacNbrOuv() == castOther.getDacNbrOuv()) || (this.getDacNbrOuv() != null
@@ -398,6 +412,7 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 		result = 37 * result + (getDacDteSaisi() == null ? 0 : this.getDacDteSaisi().hashCode());
 		result = 37 * result + (getDacStaCode() == null ? 0 : this.getDacStaCode().hashCode());
 		result = 37 * result + (getDacTymCode() == null ? 0 : this.getDacTymCode().hashCode());
+		result = 37 * result + (getDacTypePlan() == null ? 0 : this.getDacTypePlan().hashCode());
 		result = 37 * result + (getDacMopCode() == null ? 0 : this.getDacMopCode().hashCode());
 		result = 37 * result + (getDacNbrOuv() == null ? 0 : this.getDacNbrOuv().hashCode());
 		result = 37 * result + (getDacGesCode() == null ? 0 : this.getDacGesCode().hashCode());

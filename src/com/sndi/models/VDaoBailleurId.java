@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 23 mars 2020 10:48:44 by Hibernate Tools 4.3.5.Final
+// Generated 26 mars 2020 03:50:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -36,6 +36,9 @@ public class VDaoBailleurId implements java.io.Serializable {
 	private String dacBailleur;
 	private Long dacCout;
 	private String dacTypePlan;
+	private String aaoCode;
+	private String aaoLibelle;
+	private String aaoDacCode;
 	private Date aaoDteSaisi;
 	private String aaoStaCode;
 	private Date aaoDtePub;
@@ -79,23 +82,25 @@ public class VDaoBailleurId implements java.io.Serializable {
 	public VDaoBailleurId() {
 	}
 
-	public VDaoBailleurId(String dacCode) {
+	public VDaoBailleurId(String dacCode, String aaoCode) {
 		this.dacCode = dacCode;
+		this.aaoCode = aaoCode;
 	}
 
 	public VDaoBailleurId(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
 			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
 			Date dacDateReception, String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, Date aaoDteSaisi,
-			String aaoStaCode, Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin,
-			BigDecimal aaoNbrLot, BigDecimal aaoNbrOuv, BigDecimal aaoDelaiVal, String aaoFonCodAc,
-			String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux, String aaoLieuExe, String aaoNomResp,
-			String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot, String aaoAvisBail,
-			BigDecimal aaoMtCaut, String aaoModePaiement, BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,
-			String aaoHeureRecep, BigDecimal aaoAdaNum, String aaoNatPrix, String aaoRegQual, String aaoAvisBai,
-			String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp,
-			Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai) {
+			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String aaoCode,
+			String aaoLibelle, String aaoDacCode, Date aaoDteSaisi, String aaoStaCode, Date aaoDtePub,
+			Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, BigDecimal aaoNbrLot, BigDecimal aaoNbrOuv,
+			BigDecimal aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux,
+			String aaoLieuExe, String aaoNomResp, String aaoInterPub, String aaoCautDefExig, String aaoBompPub,
+			String aaoVenteParLot, String aaoAvisBail, BigDecimal aaoMtCaut, String aaoModePaiement,
+			BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,
+			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
+			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
+			Short aaoNbrOffRej, Short aaoNbrOffHorDelai) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -120,6 +125,9 @@ public class VDaoBailleurId implements java.io.Serializable {
 		this.dacBailleur = dacBailleur;
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
+		this.aaoCode = aaoCode;
+		this.aaoLibelle = aaoLibelle;
+		this.aaoDacCode = aaoDacCode;
 		this.aaoDteSaisi = aaoDteSaisi;
 		this.aaoStaCode = aaoStaCode;
 		this.aaoDtePub = aaoDtePub;
@@ -375,6 +383,33 @@ public class VDaoBailleurId implements java.io.Serializable {
 
 	public void setDacTypePlan(String dacTypePlan) {
 		this.dacTypePlan = dacTypePlan;
+	}
+
+	@Column(name = "AAO_CODE", nullable = false, length = 20)
+	public String getAaoCode() {
+		return this.aaoCode;
+	}
+
+	public void setAaoCode(String aaoCode) {
+		this.aaoCode = aaoCode;
+	}
+
+	@Column(name = "AAO_LIBELLE", length = 1000)
+	public String getAaoLibelle() {
+		return this.aaoLibelle;
+	}
+
+	public void setAaoLibelle(String aaoLibelle) {
+		this.aaoLibelle = aaoLibelle;
+	}
+
+	@Column(name = "AAO_DAC_CODE", length = 20)
+	public String getAaoDacCode() {
+		return this.aaoDacCode;
+	}
+
+	public void setAaoDacCode(String aaoDacCode) {
+		this.aaoDacCode = aaoDacCode;
 	}
 
 	@Column(name = "AAO_DTE_SAISI", length = 7)
@@ -797,6 +832,12 @@ public class VDaoBailleurId implements java.io.Serializable {
 				&& ((this.getDacTypePlan() == castOther.getDacTypePlan())
 						|| (this.getDacTypePlan() != null && castOther.getDacTypePlan() != null
 								&& this.getDacTypePlan().equals(castOther.getDacTypePlan())))
+				&& ((this.getAaoCode() == castOther.getAaoCode()) || (this.getAaoCode() != null
+						&& castOther.getAaoCode() != null && this.getAaoCode().equals(castOther.getAaoCode())))
+				&& ((this.getAaoLibelle() == castOther.getAaoLibelle()) || (this.getAaoLibelle() != null
+						&& castOther.getAaoLibelle() != null && this.getAaoLibelle().equals(castOther.getAaoLibelle())))
+				&& ((this.getAaoDacCode() == castOther.getAaoDacCode()) || (this.getAaoDacCode() != null
+						&& castOther.getAaoDacCode() != null && this.getAaoDacCode().equals(castOther.getAaoDacCode())))
 				&& ((this.getAaoDteSaisi() == castOther.getAaoDteSaisi())
 						|| (this.getAaoDteSaisi() != null && castOther.getAaoDteSaisi() != null
 								&& this.getAaoDteSaisi().equals(castOther.getAaoDteSaisi())))
@@ -926,6 +967,9 @@ public class VDaoBailleurId implements java.io.Serializable {
 		result = 37 * result + (getDacBailleur() == null ? 0 : this.getDacBailleur().hashCode());
 		result = 37 * result + (getDacCout() == null ? 0 : this.getDacCout().hashCode());
 		result = 37 * result + (getDacTypePlan() == null ? 0 : this.getDacTypePlan().hashCode());
+		result = 37 * result + (getAaoCode() == null ? 0 : this.getAaoCode().hashCode());
+		result = 37 * result + (getAaoLibelle() == null ? 0 : this.getAaoLibelle().hashCode());
+		result = 37 * result + (getAaoDacCode() == null ? 0 : this.getAaoDacCode().hashCode());
 		result = 37 * result + (getAaoDteSaisi() == null ? 0 : this.getAaoDteSaisi().hashCode());
 		result = 37 * result + (getAaoStaCode() == null ? 0 : this.getAaoStaCode().hashCode());
 		result = 37 * result + (getAaoDtePub() == null ? 0 : this.getAaoDtePub().hashCode());

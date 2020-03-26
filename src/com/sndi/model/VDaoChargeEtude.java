@@ -24,6 +24,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 	private Date dacDteSaisi;
 	private String dacStaCode;
 	private String dacTymCode;
+	private String dacTypePlan;
 	private String dacMopCode;
 	private long dacNbrOuv;
 	private long dacGesCode;
@@ -54,7 +55,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 		this.tymLibelleCourt = tymLibelleCourt;
 	}
 
-	public VDaoChargeEtude(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
+	public VDaoChargeEtude(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,String dacTypePlan,
 			String dacMopCode, long dacNbrOuv, long dacGesCode, String dacFonCodAc, String dacStrCode,
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
 			Date dacDateReception, String dacStatutRetour, String dacMention, String dcsOpeMatricule, String dcsPreMbm,
@@ -65,6 +66,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 		this.dacDteSaisi = dacDteSaisi;
 		this.dacStaCode = dacStaCode;
 		this.dacTymCode = dacTymCode;
+		this.dacTypePlan = dacTypePlan;
 		this.dacMopCode = dacMopCode;
 		this.dacNbrOuv = dacNbrOuv;
 		this.dacGesCode = dacGesCode;
@@ -133,6 +135,15 @@ public class VDaoChargeEtude implements java.io.Serializable {
 
 	public void setDacTymCode(String dacTymCode) {
 		this.dacTymCode = dacTymCode;
+	}
+	
+	@Column(name = "DAC_TYPE_PLAN", length = 4)
+	public String getDacTypePlan() {
+		return this.dacTypePlan;
+	}
+
+	public void setDacTypePlan(String dacTypePlan) {
+		this.dacTypePlan = dacTypePlan;
 	}
 
 	@Column(name = "DAC_MOP_CODE", length = 3)

@@ -68,6 +68,7 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
+import com.sndi.model.VAvisAdresse;
 import com.sndi.model.VDaoBailleur;
 import com.sndi.model.VDaoChargeEtude;
 import com.sndi.model.VDaoStatut;
@@ -78,6 +79,7 @@ import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VPieces;
+import com.sndi.model.VPiecesOffreDao;
 import com.sndi.model.VPpmDao;
 import com.sndi.model.VVenteLot;
 import com.sndi.model.VbTempParamVente;
@@ -146,7 +148,7 @@ public class DaoController {
 	 private List<TDacSpecs> listeDaoVendu = new ArrayList<TDacSpecs>();
 	 private List<TDacSpecs> listeDaoValide = new ArrayList<TDacSpecs>();
 	 private List<TDacSpecs> listeDaoCsvValid = new ArrayList<TDacSpecs>();
-	 
+	 private List<TDaoAffectation> listeDaoChargeValid = new ArrayList<TDaoAffectation>();
 	 
 	 private List<TAffichageDao> listeDaoVente = new ArrayList<TAffichageDao>();
 	 private List<TAffichageDao> daoPriseCompte = new ArrayList<TAffichageDao>();
@@ -171,6 +173,7 @@ public class DaoController {
 	 private List<TGestion> listeGestion = new ArrayList<TGestion>();
 	 private List<TDetailPlanPassation> listeDetail = new ArrayList<TDetailPlanPassation>();
 	 private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
+	 private List<TDossierDacs> dossDacListe = new ArrayList<TDossierDacs>();
 	 private List<TTypePiecesDac> detailsPieces = new ArrayList<TTypePiecesDac>();
 	 private List<VPpmDao> ppmDao = new ArrayList<VPpmDao>();
 	 private List<VPpmDao> listSelectionPpmDao = new ArrayList<VPpmDao>();
@@ -191,6 +194,7 @@ public class DaoController {
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
 	private List<VPieces> listePices = new ArrayList<VPieces>();
+	private List<VPiecesOffreDao> offresDao = new ArrayList<VPiecesOffreDao>();
 	private VbTempParametreCorrection newCorrection = new VbTempParametreCorrection();
 	//Avis 
 	private List<TAvisAppelOffre> listAvis = new ArrayList<TAvisAppelOffre>();
@@ -201,6 +205,7 @@ public class DaoController {
 	private List<TLibelleAdresse> listLibelleAdresse = new ArrayList<TLibelleAdresse>();
 	private List<TAdresseAvis> listAdresse = new ArrayList<TAdresseAvis>();
 	private List<VDetailAdresse> listDetailAdresse = new ArrayList<VDetailAdresse>();
+	private List<VAvisAdresse> avisAdresse = new ArrayList<VAvisAdresse>();
 	private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
 	//GESTION PIECES OFFRES
 	private List<TTypePieceOffre> listePiecesOffres= new ArrayList<TTypePieceOffre>();
@@ -356,6 +361,12 @@ public class DaoController {
 						new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));			
 		 }
 		 
+		//Charger la liste des offres du DAO p
+		 public void chargeOffresByDao() {
+			 offresDao= (List<VPiecesOffreDao>) iservice.getObjectsByColumn("VPiecesOffreDao", new ArrayList<String>(Arrays.asList("OPD_NUM")),
+						new WhereClause("OPD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));			
+		 }
+		 
 		 
 		//Charger la liste des pièces a examiner par les chargés d'etude
 		 public void chargePiecesByCharges() {
@@ -411,7 +422,7 @@ public class DaoController {
 @Transactional
 public void saveAvisBailleur() {
 		   
-if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDateBailleur().equals(null) ) {
+if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.getAffDacAvisBailleur()) || slctdTd.getAffDacDateBailleur().equals(null) ) {
 	   //Message d'erreur
 	   FacesContext.getCurrentInstance().addMessage(null,
 	   new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir les informations du Bailleur", ""));
@@ -436,10 +447,23 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
      	                    iservice.updateObject(newDao);
      	                       }
      	          
+     	            chargeDataPriseCompte();
+     	            //Chargement du tableau de bord 
+     	            tableauBordController.chargeDataDao();
+     	            
+     	            //Désactivation des booléens
+     	            panelAvisBailleur = true;
+		    	    pavet2 =false;
+				    pavet3=false;
+				    pavet4=false;
+				    pavet5=false;
+				    pavet6=false;
      	    		//Message de Confirmation 
      	            userController.setTexteMsg("Avis du Bailleur ajouté avec succès");
      	    		userController.setRenderMsg(true);
      	    		userController.setSevrityMsg("success");
+     	    		
+     	    		 FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Avis du Bailleur ajouté avec succès", ""));
                }	
         }
 
@@ -506,6 +530,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 			 listeDaoCsvValid =(List<TDacSpecs>) iservice.getObjectsByColumnIn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D5V","D6V")),
 					  new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					  new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 			          new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				_logger.info("listeDaoCsvValid size: "+listeDaoCsvValid.size());	
 				tableauBordController.chargeDataDao();		
@@ -517,6 +542,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 			 listeDaoCsvValid =(List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 					  new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"DC2"),
 					  new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					  
 			          new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				_logger.info("listeDaoCsvValid size: "+listeDaoCsvValid.size());	
 				tableauBordController.chargeDataDao();		
@@ -529,6 +555,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		 daoPriseCompte =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("SBO","SRO")),
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
+			tableauBordController.chargeDataDao();		
+	}
+	 
+	 //Affichage des DAO retournés pour prise en compte des observation
+	 public void chargeDataPriseCompteTrait(){ 
+		 daoPriseCompte.clear();
+		 daoPriseCompte =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("SB1","DOP")),
+				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
 			tableauBordController.chargeDataDao();		
@@ -865,6 +904,18 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				_logger.info("validationListe  size: "+validationListe.size());	
 				tableauBordController.chargeDataDao();		
 		}
+		 
+		//Affichage des DAO validé par le C.E
+		 public void chargeDataChargeValid(){
+			 listeDaoChargeValid.clear();
+			 listeDaoChargeValid = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")), 
+					 new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"),
+					 new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"DAO"),
+					 new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+					new WhereClause("DAF_DAC_STR",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+				_logger.info("listeDaoChargeValid  size: "+listeDaoChargeValid.size());	
+				tableauBordController.chargeDataDao();		
+		}
 	 
 //Fin de Staistiques pour le chargé d'Etudes 
 	 
@@ -872,6 +923,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	//Statistiques pour le chef de Service
 		 //Affichage des DAO en Attente d'Affectation
 		 public void chargeDaoAttCsv(){ 
+			 listeTabDaoAffecCsv.clear();
 			 listeTabDaoAffecCsv =(List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 				              new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D2T"),
 				              new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
@@ -880,9 +932,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		 
 		 //Affichage des DAO affectés par le chef de Service
 		 public void chargeDaoAffectes(){ 
+			 listeTabDaoCsvAff.clear();
 			 listeTabDaoCsvAff =(List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			              new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
-			              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));		
+			              new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+			              new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+			              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			 _logger.info("listeTabDaoCsvAff  size: "+listeTabDaoCsvAff.size());	
+				tableauBordController.chargeDataDao();
 		}
 		 
 			//Affichage des DAO validé par le Chef de Service
@@ -890,6 +947,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				 listeTabdaoValCsv = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
 						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
 						 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoValCsv  size: "+listeTabdaoValCsv.size());	
 					tableauBordController.chargeDataDao();		
@@ -981,6 +1039,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
 					new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
 	 }
+	 
+	//Chargement du/des PPM du DAO en observation
+		 public void chargePPMObs() {
+			 ppmDao.clear();
+			 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+					    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
+					    new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()),
+						new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
+		 }
 	 
 	//Chargement des PSPM n'ayant pas fait l'objet d'un DAO
 	 public void chargePSPM() {
@@ -1612,7 +1681,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	  @Transactional 
 	 public void resultatCorrection() {
 		  
-		  if(slctdTd.getAffDacBailleur().equalsIgnoreCase("O")) {
+		  if(slctdTd.getAffDacBailleur().equalsIgnoreCase("B")) {
 			   statutSanction ="SBO";
 			   statutSanRetour ="0";
 			  
@@ -1919,9 +1988,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	  
 	  //Transmission du DAO par le Responsable du binôme
 	  @Transactional
-	  public void transmetttreRespo() {
+	  public void transmettreRespo() {
 		  
-		  if(doss.getDdaNom().equalsIgnoreCase("") || doss.getDdaReference().equalsIgnoreCase("")) {
+		  if(dos.getDdaNom().equalsIgnoreCase("") || "".equals(dos.getDdaNom()) || dos.getDdaReference().equalsIgnoreCase("") || "".equals(dos.getDdaReference())) {
 			  //Message d'erreur
 			  FacesContext.getCurrentInstance().addMessage(null,
 			  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez charger le DAO", ""));
@@ -1966,6 +2035,15 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				  dac.setTOperateur(userController.getSlctd().getTOperateur());
 				  dac.setTStatut(statuts);
 				  iservice.addObject(dac);
+				  
+				  chargeDaoChargeEtude();
+				  chargeDataChargeValid();
+				//Actualisation du tableau de bord
+ 					tableauBordController.chargeDataDao();
+ 					//Message de confirmation
+ 					userController.setTexteMsg("Transmission effectuée avec succès!");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
 		        }
 	       }
 	  
@@ -2531,12 +2609,20 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		  }
 	  
 	  
-	  //Récupération de l'avis
-	  public void observationAvis() {
+	  
+	 //Methode de récupération de l'adresse
+	  public void observationAdresse() {
+		  avisAdresse = (List<VAvisAdresse>) iservice.getObjectsByColumn("VAvisAdresse", new ArrayList<String>(Arrays.asList("V_ID")),
+					new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
+	  }
+	  
+	  //Récupération de l'avis et son Adresse
+	  public void observationAvis() { 
 		  avisTab = (List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DAC_CODE")),
 					new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 		       if (!avisTab.isEmpty()) {
 		    	      newAvis = avisTab.get(0);
+		    	      observationAdresse();
 		            }	    
 	          }
 	
@@ -2555,6 +2641,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	  @Transactional
 	  public void modifDao() {
 		    iservice.updateObject(slctdTd);
+		    
+		    listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+		       if (!listDao.isEmpty()) {
+		    	      newDao = listDao.get(0);
+		    	      iservice.updateObject(newDao);
+		            }	
 		  
 		    //Chargement des compteurs du tableau de bord
 			tableauBordController.chargeDataDao();	
@@ -2649,6 +2742,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				 			 newAff.setDafDacObjet(newDao.getDacObjet());
 				 			 newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
 				 			 newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
+				 			 newAff.setDafTypePlan(newDao.getDacTypePlan());
+				 			 newAff.setDafDacStr(newDao.getTStructure().getStrCode());
 				 			 newAff.setDafDcsMbmRespo(n.getStrOpeRespo());
 				 			 newAff.setTDetCommissionSeance(det);
 				 			 newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
@@ -2891,7 +2986,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				int nat = Integer.valueOf(docNature);
 				//check le dossier s'il existe à faire
 				//TDossierDacs dos =new TDossierDacs(); //TDossiersDacs
-				dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+				dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
 				dos.setTDacSpecs(newDao);
 				List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 				TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
@@ -2939,24 +3034,23 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				int nat = Integer.valueOf(docNature);
 				//check le dossier s'il existe à faire
 				//TDossierDacs dos =new TDossierDacs(); //TNatureDocuments
-				doss.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
-				doss.setTDacSpecs(newDao);
+				dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+				dos.setTDacSpecs(newDao);
 				List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 				TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
 				if(!LS.isEmpty()) natureDoc = LS.get(0);
-				doss.setTNatureDocuments(natureDoc);
-				doss.setDdaNom(fileUploadController.getFileName());
-				doss.setDdaDteSaisi(Calendar.getInstance().getTime());
-				doss.setDdaReference(fileUploadController.getDocNom());
-				iservice.addObject(doss); 
+				dos.setTNatureDocuments(natureDoc);
+				dos.setDdaNom(fileUploadController.getFileName());
+				dos.setDdaDteSaisi(Calendar.getInstance().getTime());
+				dos.setDdaReference(fileUploadController.getDocNom());
+				iservice.addObject(dos); 
 				
 				//chargeNatureDocTrans();
-				//chargeDossier();
 				chargeDossierCharge();
 				
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succés!", "");
 				FacesContext.getCurrentInstance().addMessage(null, msg);
-			   chargeDossier();
+				chargeDossierCharge();
 				}else {
 					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);	
@@ -3009,8 +3103,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
      
      
      public void chargeDossierCharge() {
- 		 dossListe.clear();
- 			 dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+    	 dossDacListe.clear();
+    	 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
  					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTda.getDafDacCode())));			
  	 } 
      
@@ -3391,7 +3485,10 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 				
                 case "dao10":
                 	 chargeDaoBailleur();
+                	 chargePPMObs();
+                	 chargePiecesByDao();
                 	 observationAvis();
+                	 chargeOffresByDao();
                 	 chargeLotsRappel();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
@@ -5009,6 +5106,38 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 
 	public void setPavet4(boolean pavet4) {
 		this.pavet4 = pavet4;
+	}
+
+	public List<TDossierDacs> getDossDacListe() {
+		return dossDacListe;
+	}
+
+	public void setDossDacListe(List<TDossierDacs> dossDacListe) {
+		this.dossDacListe = dossDacListe;
+	}
+
+	public List<VPiecesOffreDao> getOffresDao() {
+		return offresDao;
+	}
+
+	public void setOffresDao(List<VPiecesOffreDao> offresDao) {
+		this.offresDao = offresDao;
+	}
+
+	public List<VAvisAdresse> getAvisAdresse() {
+		return avisAdresse;
+	}
+
+	public void setAvisAdresse(List<VAvisAdresse> avisAdresse) {
+		this.avisAdresse = avisAdresse;
+	}
+
+	public List<TDaoAffectation> getListeDaoChargeValid() {
+		return listeDaoChargeValid;
+	}
+
+	public void setListeDaoChargeValid(List<TDaoAffectation> listeDaoChargeValid) {
+		this.listeDaoChargeValid = listeDaoChargeValid;
 	}
 	
 		

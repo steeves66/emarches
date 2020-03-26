@@ -11,7 +11,25 @@
 <h:form id="gnl">	
  <section class="content-header">
       <h3>
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
         #{controleController.libelleDao3} 
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}">
+        #{controleController.libelleDao3} 
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+        #{controleController.libelleDao3} 
+        </h:panelGroup>
+      
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+        #{controleController.libelleDao3} 
+        </h:panelGroup>
+        
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+        #{controleController.libelleDao1} 
+        </h:panelGroup>
         
         <small>
          #{controleController.libelleDao1} 
