@@ -1,7 +1,7 @@
 package com.sndi.model;
 // Generated 23 janv. 2020 16:59:48 by Hibernate Tools 4.3.5.Final
 
-import java.math.BigDecimal;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -48,6 +48,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacBailleur;
 	private Long dacCout;
 	private String dacTypePlan;
+	private String dacRecherche;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -69,7 +70,7 @@ public class TDacSpecs implements java.io.Serializable {
 			TGestion TGestion, TTypeMarche TTypeMarche, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur,String dacBailleur, Long dacCout,String dacTypePlan, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche, Long dacCout,String dacTypePlan, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -96,6 +97,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacBailleur = dacBailleur;
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
+		this.dacRecherche = dacRecherche;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TDossierDacses = TDossierDacses;
 		this.TDetailCorrections = TDetailCorrections;
@@ -329,6 +331,15 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacTypePlan(String dacTypePlan) {
 		this.dacTypePlan = dacTypePlan;
+	}
+	
+	@Column(name = "DAC_RECHERCHE", length = 4000)
+	public String getDacRecherche() {
+		return this.dacRecherche;
+	}
+
+	public void setDacRecherche(String dacRecherche) {
+		this.dacRecherche = dacRecherche;
 	}
 
 

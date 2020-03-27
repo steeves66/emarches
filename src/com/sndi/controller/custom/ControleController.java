@@ -2211,7 +2211,7 @@ public class ControleController {
 														 celluleRecherche = false;
 														 validationRecherche = false;
 														 priseRecherche = false;
-														 chargeRecherche = false;
+														 chargeRecherche = true;
 														 affDao=false;
 														 exaDao=false;
 														 retDao = true;

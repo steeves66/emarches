@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 26 mars 2020 03:50:59 by Hibernate Tools 4.3.5.Final
+// Generated 27 mars 2020 12:01:30 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -31,6 +31,7 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 	private Date dacDateReception;
 	private String dacStatutRetour;
 	private String dacMention;
+	private String dacRecherche;
 	private String dcsOpeMatricule;
 	private String dcsPreMbm;
 	private String dcsComStrCode;
@@ -51,9 +52,9 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 	public VDaoChargeEtudeId(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
 			String dacTypePlan, String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc,
 			String dacStrCode, String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode,
-			Long dacDppId, Date dacDateReception, String dacStatutRetour, String dacMention, String dcsOpeMatricule,
-			String dcsPreMbm, String dcsComStrCode, String dcsMbmRespo, String dcsFonCod, String tdcLibelle,
-			String tymLibelleCourt, String mopLibelleLong) {
+			Long dacDppId, Date dacDateReception, String dacStatutRetour, String dacMention, String dacRecherche,
+			String dcsOpeMatricule, String dcsPreMbm, String dcsComStrCode, String dcsMbmRespo, String dcsFonCod,
+			String tdcLibelle, String tymLibelleCourt, String mopLibelleLong) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -73,6 +74,7 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 		this.dacDateReception = dacDateReception;
 		this.dacStatutRetour = dacStatutRetour;
 		this.dacMention = dacMention;
+		this.dacRecherche = dacRecherche;
 		this.dcsOpeMatricule = dcsOpeMatricule;
 		this.dcsPreMbm = dcsPreMbm;
 		this.dcsComStrCode = dcsComStrCode;
@@ -254,6 +256,15 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 		this.dacMention = dacMention;
 	}
 
+	@Column(name = "DAC_RECHERCHE", length = 4000)
+	public String getDacRecherche() {
+		return this.dacRecherche;
+	}
+
+	public void setDacRecherche(String dacRecherche) {
+		this.dacRecherche = dacRecherche;
+	}
+
 	@Column(name = "DCS_OPE_MATRICULE", length = 20)
 	public String getDcsOpeMatricule() {
 		return this.dcsOpeMatricule;
@@ -381,6 +392,9 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 								&& this.getDacStatutRetour().equals(castOther.getDacStatutRetour())))
 				&& ((this.getDacMention() == castOther.getDacMention()) || (this.getDacMention() != null
 						&& castOther.getDacMention() != null && this.getDacMention().equals(castOther.getDacMention())))
+				&& ((this.getDacRecherche() == castOther.getDacRecherche())
+						|| (this.getDacRecherche() != null && castOther.getDacRecherche() != null
+								&& this.getDacRecherche().equals(castOther.getDacRecherche())))
 				&& ((this.getDcsOpeMatricule() == castOther.getDcsOpeMatricule())
 						|| (this.getDcsOpeMatricule() != null && castOther.getDcsOpeMatricule() != null
 								&& this.getDcsOpeMatricule().equals(castOther.getDcsOpeMatricule())))
@@ -426,6 +440,7 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 		result = 37 * result + (getDacDateReception() == null ? 0 : this.getDacDateReception().hashCode());
 		result = 37 * result + (getDacStatutRetour() == null ? 0 : this.getDacStatutRetour().hashCode());
 		result = 37 * result + (getDacMention() == null ? 0 : this.getDacMention().hashCode());
+		result = 37 * result + (getDacRecherche() == null ? 0 : this.getDacRecherche().hashCode());
 		result = 37 * result + (getDcsOpeMatricule() == null ? 0 : this.getDcsOpeMatricule().hashCode());
 		result = 37 * result + (getDcsPreMbm() == null ? 0 : this.getDcsPreMbm().hashCode());
 		result = 37 * result + (getDcsComStrCode() == null ? 0 : this.getDcsComStrCode().hashCode());

@@ -2786,6 +2786,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 			 newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
 				 			 newAff.setDafTypePlan(newDao.getDacTypePlan());
 				 			 newAff.setDafDacStr(newDao.getTStructure().getStrCode());
+				 			 newAff.setDafDacRecherche(newDao.getDacRecherche());
 				 			 newAff.setDafDcsMbmRespo(n.getStrOpeRespo());
 				 			 newAff.setTDetCommissionSeance(det);
 				 			 newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));

@@ -38,6 +38,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 	private Date dacDateReception;
 	private String dacStatutRetour;
 	private String dacMention;
+	private String dacRecherche;
 	private String dcsOpeMatricule;
 	private String dcsPreMbm;
 	private String dcsComStrCode;
@@ -58,7 +59,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 	public VDaoChargeEtude(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,String dacTypePlan,
 			String dacMopCode, long dacNbrOuv, long dacGesCode, String dacFonCodAc, String dacStrCode,
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
-			Date dacDateReception, String dacStatutRetour, String dacMention, String dcsOpeMatricule, String dcsPreMbm,
+			Date dacDateReception, String dacStatutRetour, String dacMention,String dacRecherche, String dcsOpeMatricule, String dcsPreMbm,
 			String dcsComStrCode, String dcsMbmRespo, String dcsFonCod, String tdcLibelle, String tymLibelleCourt,
 			String mopLibelleLong) {
 		this.dacCode = dacCode;
@@ -80,6 +81,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 		this.dacDateReception = dacDateReception;
 		this.dacStatutRetour = dacStatutRetour;
 		this.dacMention = dacMention;
+		this.dacRecherche = dacRecherche;
 		this.dcsOpeMatricule = dcsOpeMatricule;
 		this.dcsPreMbm = dcsPreMbm;
 		this.dcsComStrCode = dcsComStrCode;
@@ -261,6 +263,15 @@ public class VDaoChargeEtude implements java.io.Serializable {
 
 	public void setDacMention(String dacMention) {
 		this.dacMention = dacMention;
+	}
+	
+	@Column(name = "DAC_RECHERCHE", length = 4000)
+	public String getDacRecherche() {
+		return this.dacRecherche;
+	}
+
+	public void setDacRecherche(String dacRecherche) {
+		this.dacRecherche = dacRecherche;
 	}
 
 	@Column(name = "DCS_OPE_MATRICULE", length = 20)

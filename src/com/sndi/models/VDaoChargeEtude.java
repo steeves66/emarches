@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 26 mars 2020 03:50:59 by Hibernate Tools 4.3.5.Final
+// Generated 27 mars 2020 12:01:30 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -46,6 +46,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 			@AttributeOverride(name = "dacDateReception", column = @Column(name = "DAC_DATE_RECEPTION", length = 7)),
 			@AttributeOverride(name = "dacStatutRetour", column = @Column(name = "DAC_STATUT_RETOUR", length = 2)),
 			@AttributeOverride(name = "dacMention", column = @Column(name = "DAC_MENTION", length = 100)),
+			@AttributeOverride(name = "dacRecherche", column = @Column(name = "DAC_RECHERCHE", length = 4000)),
 			@AttributeOverride(name = "dcsOpeMatricule", column = @Column(name = "DCS_OPE_MATRICULE", length = 20)),
 			@AttributeOverride(name = "dcsPreMbm", column = @Column(name = "DCS_PRE_MBM", length = 200)),
 			@AttributeOverride(name = "dcsComStrCode", column = @Column(name = "DCS_COM_STR_CODE", length = 20)),

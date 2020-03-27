@@ -275,6 +275,7 @@ public class TableauBordController {
 						 private String daoAcAttRetraitPs ="";
 						 private String daoAcAttVentePs ="";
 						 private String daoAcRetirePs="";
+						 private String daoTotalPs = "";
 					/*
 					Compteur pour la Cellule de Passation des Marchés
 					 */
@@ -286,6 +287,7 @@ public class TableauBordController {
 						 private String daoCpAttenteValidePs="";
 						 private String daoPriseTraitPs="";
 						 private String daoaffectePs ="";
+						 private String daoDaoPubPs = "";
 						 
 						 /*
 						  Compteur pour le Chargé d'Etudes
@@ -424,7 +426,7 @@ public class TableauBordController {
 			 agpmCpTransmis = ""+getAgpmCpTransmisDossier("S1T");
 			 agpmCpDifCpmp = ""+getNpDiffDossier("S2D");
 			 agpmCpValide =""+getAgpmCpValideCmp("S2V");
-			 agpmCpDifDmp =""+getAgpmDmDiff("S2D","SDR");
+			 agpmCpDifDmp =""+getAgpmDmDiff("S3D","SDR");
 			 agpmAcDifDmpCpmp =""+getAgpmDmDiffAc("S2D","SDR");
 			 agpmCpDifDmpCpmp  =""+getAgpmAcDiffDmpCpmp("S3D");
 			 agpmCpAttenteValide = ""+getAgpmCpAttenteValide("S1T","S3D");
@@ -701,25 +703,27 @@ public class TableauBordController {
 		}
 		
 		public void chargeDataDaoPs() {
-			 //Début DAO en procédure Simplifiée
-			 daoTotal = ""+getDaoDossierTotalPs();
+			 //Début DAO en procédure Simplifiée 
+			 daoTotalPs = ""+getDaoDossierTotalPs();
 			 daoAcSaisiePs = ""+getAcDaoSaisieDossierPs("D1S");
-			 daoAcPsPs=""+getAcDaoSaisiePsPs("SBO","SRO");
-			 daoPriseTraitPs=""+getAcDaoSaisiePsPs("SB1","DOP");
+			 daoAcPsPs=""+getAcDaoSaisiePs("SBO","SRO");
+			 daoPriseTraitPs=""+getAcDaoSaisiePs("SB1","DOP");
 			 daoChargeAttentePs = ""+getAcDaoAttenteChargePs("D3A");
 			 daoChargeValPs = ""+getAcDaoValChargePs("D4V");
+			 daoDaoPubPs = ""+getAcDaoValidCsvPubDossierPs("DPU");
 			 daoAcAttenteValidePs = ""+getAcDaoAttenteValidePs("D1S","S2D"); 
 			 daoCsvAttAffPs = ""+getDaoAttAffCsvPs("D2T","D5R","DOP");
 			 daoCsvAttValPs = ""+getAcDaoValChargeCsvPs("D4V");
 			 daoaffectePs = ""+getAcDaoAffecteDossierPs("D3A");
 			 daoCsvValidePs = ""+getAcDaoValidCsvDossierPs("D5V");
 			 daoCsvDiffPs = ""+getAcDaoValidCsvDossierPs("D5R");
-			 daoAcDiffCpmpPs = ""+getDaoDiffCpmpACDossierPs("D2T");
+			 daoAcDiffCpmpPs = ""+getDaoDiffCpmpACDossierPs("D1R");
+			 daoAcTransmisPs = ""+getAcDaoTransmisDossierPs("D1T");
 			 daoAcDiffDmpPs = ""+getDaoDiffDmpACDossierPs("S3D");
 			 daoAcTransmisPs = ""+getAcDaoTransmisDossierPs("D1T");
 			 daoCpSaisiePs = ""+getDaoSaisieDossierPs("D1T");
 			 daoCpTransmisPs = ""+getDaoTransmisDossierPs("D1T");
-			 daoCpDifCpmpPs = ""+getDaoDiffDossierPs("S2D");
+			 daoCpDifCpmpPs = ""+getDaoDiffDossierPs("D1R","D2R");
 			 daoCpValidePs = ""+getDaoValideCmpPs("D2T");
 			 daoCpDifDmpPs =""+getDaoDiffDmpPs("S3D");
 			 daoCpAttenteValidePs = ""+getDaoAttenteValidePs("S1T","S3D");
@@ -1900,6 +1904,7 @@ public int getAcDaoSaisiePsPs(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
@@ -1909,7 +1914,18 @@ public int getAcDaoAttenteChargePs(String src){
 	int i = iservice.countTableByColumn("V_DAO_CHARGE_ETUDE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DCS_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//DAO retournés par la cpmp (Son propre tableau de bord)
+public int getDaoDiffDossierPs(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
@@ -1921,6 +1937,16 @@ public int getAcDaoValChargeDetPs(String src){
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DCS_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//DAO publié par le Chef de Service
+public int getAcDaoValidCsvPubDossierPs(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
@@ -4662,6 +4688,22 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setDaoDaoPub(String daoDaoPub) {
 		this.daoDaoPub = daoDaoPub;
+	}
+
+	public String getDaoDaoPubPs() {
+		return daoDaoPubPs;
+	}
+
+	public void setDaoDaoPubPs(String daoDaoPubPs) {
+		this.daoDaoPubPs = daoDaoPubPs;
+	}
+
+	public String getDaoTotalPs() {
+		return daoTotalPs;
+	}
+
+	public void setDaoTotalPs(String daoTotalPs) {
+		this.daoTotalPs = daoTotalPs;
 	}
 
 	

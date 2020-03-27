@@ -38,6 +38,7 @@ public class TDaoAffectation implements java.io.Serializable {
 	private String dafMention;
 	private String dafTypePlan;
 	private String dafDacStr;
+	private String dafDacRecherche;
 
 	public TDaoAffectation() {
 	}
@@ -48,7 +49,7 @@ public class TDaoAffectation implements java.io.Serializable {
 
 	public TDaoAffectation(long dafId, TDetCommissionSeance TDetCommissionSeance,TModePassation TModePassation,
 			TTypeMarche TTypeMarche, String dafDacCode,String dafOpeMatricule, String dafStaCode, String dafDcsMbmRespo, String dafStatutRetour, Long  dafDacGestion, String dafDacObjet,
-			String dafTypeDac,String dafMention, String dafTypePlan,String dafDacStr) {
+			String dafTypeDac,String dafMention, String dafTypePlan,String dafDacStr, String dafDacRecherche) {
 		this.dafId = dafId;
 		this.TDetCommissionSeance = TDetCommissionSeance;
 		this.TModePassation = TModePassation;
@@ -64,6 +65,7 @@ public class TDaoAffectation implements java.io.Serializable {
 		this.dafMention = dafMention;
 		this.dafTypePlan = dafTypePlan;
 		this.dafDacStr = dafDacStr;
+		this.dafDacRecherche = dafDacRecherche;
 	}
 
 	@Id   
@@ -206,6 +208,15 @@ public class TDaoAffectation implements java.io.Serializable {
 
 	public void setDafDacStr(String dafDacStr) {
 		this.dafDacStr = dafDacStr;
+	}
+	
+	@Column(name = "DAF_DAC_RECHERCHE", length = 4000)
+	public String getDafDacRecherche() {
+		return this.dafDacRecherche;
+	}
+
+	public void setDafDacRecherche(String dafDacRecherche) {
+		this.dafDacRecherche = dafDacRecherche;
 	}
 
 }
