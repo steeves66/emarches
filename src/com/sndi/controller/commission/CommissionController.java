@@ -387,7 +387,7 @@ public class CommissionController {
 				iservice.updateObject(slctdTd);
 				
 				//Creation de la séance
-				newSeance.setSeaLibelle("Séance d'ouverture des offres du DAO N° "+slctdTd.getTDacSpecs().getDacCode());
+				newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getTDacSpecs().getDacCode());
 				newSeance.setTTypeSeance(new TTypeSeance("OUV"));
 				newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
 				newSeance.setTFonction(userController.getSlctd().getTFonction());

@@ -1594,14 +1594,21 @@ public class AgpmController {
 	 private boolean skip;
 	 
 	 public String onFlowProcess(FlowEvent event) {
-		 
-	        if(skip) {
-	            skip = false;   //reset in case user goes back
-	            return "confirm";
-	        }
-	        else {
+		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
+		//Controle Pavé création
+		 if(event.getOldStep().equals("creation") && event.getNewStep().equals("Informations")) {
+			 if( "".equals(gesCode) ||"".equals(userController.getFonction().getFonLibelle())||"".equals(userController.getFonction().getTStructure().getTMinistere().getMinLibelle()) 
+					 ||"".equals(agpm.getAgpCommentaire())
+					 ||"".equals(projet.getProTypeProjet()) ||"".equals(projet.getProTitre()))
+			 {
+            	  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, ""
+							+ "Veuillez saisir les champs obligatoire SVP!", ""));
+		          return "creation";
+				} 
+ 
+		     }
+	      
 	            return event.getNewStep();
-	        }
 	    }
 	 
 	 
