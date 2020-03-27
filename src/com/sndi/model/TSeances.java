@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 @Table(name = "T_SEANCES", schema = "EMAP")
 public class TSeances implements java.io.Serializable {
 
-	private BigDecimal seaNum;
+	private long seaNum;
 	private TFonction TFonction;
 	private TOperateur TOperateur;
 	private TTypeSeance TTypeSeance;
@@ -41,11 +41,11 @@ public class TSeances implements java.io.Serializable {
 	public TSeances() {
 	}
 
-	public TSeances(BigDecimal seaNum) {
+	public TSeances(long seaNum) {
 		this.seaNum = seaNum;
 	}
 
-	public TSeances(BigDecimal seaNum, TFonction TFonction, TOperateur TOperateur, TTypeSeance TTypeSeance,
+	public TSeances(long seaNum, TFonction TFonction, TOperateur TOperateur, TTypeSeance TTypeSeance,
 			String seaLibelle, String seaQuorum, BigDecimal seaNbrPli, String seaRes, Date seaSteSaisi,
 			String seaObservation, Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.seaNum = seaNum;
@@ -65,11 +65,11 @@ public class TSeances implements java.io.Serializable {
 	@SequenceGenerator(name = "SEQ_SEA_Sequence", sequenceName = "SEQ_SEA", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_SEA_Sequence")
 	@Column(name = "SEA_NUM", unique = true, nullable = false, precision = 22, scale = 0)
-	public BigDecimal getSeaNum() {
+	public long getSeaNum() {
 		return this.seaNum;
 	}
 
-	public void setSeaNum(BigDecimal seaNum) {
+	public void setSeaNum(long seaNum) {
 		this.seaNum = seaNum;
 	}
 
