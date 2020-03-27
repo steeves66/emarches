@@ -25,7 +25,7 @@ public class TFinancement implements java.io.Serializable {
 
 	private long finId;
 	private TProjet TProjet;
-	private TAgpm TAgpm;
+	private TAgpm TAgpm; 
 	private TBailleur TBailleur;
 	private TSourceFinancement TSourceFinancement;
 	private TDevise TDevise;
