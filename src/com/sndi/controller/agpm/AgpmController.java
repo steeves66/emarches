@@ -184,9 +184,9 @@ public class AgpmController {
 	 private String fonc="";
 	 private String fonCod="";
 	 private long proId;
-	 private String baiCode; 
-	 private String sourfin; 
-	 private String souCode;
+	 private String baiCode=""; 
+	 private String sourfin=""; 
+	 private String souCode="";
 	 private String tcaCode="FIN";
 	 private String devCode="CFA";
 	 private String natPiece ="";
@@ -712,7 +712,7 @@ public class AgpmController {
 	    VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
 	      if(bai == null) {
 	                           
-	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || baiCode.equalsIgnoreCase("") || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
+	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
 	                      //Message d'erreur
 	    		          FacesContext.getCurrentInstance().addMessage(null,
 	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs", ""));	 

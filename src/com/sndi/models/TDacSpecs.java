@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 26 mars 2020 03:50:59 by Hibernate Tools 4.3.5.Final
+// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -47,6 +47,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacBailleur;
 	private Long dacCout;
 	private String dacTypePlan;
+	private String dacRecherche;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
 	private Set<TDetailVente> TDetailVentes = new HashSet<TDetailVente>(0);
@@ -78,7 +79,7 @@ public class TDacSpecs implements java.io.Serializable {
 			TFonction TFonctionByDacFonCodAc, TGestion TGestion, TModePassation TModePassation, String dacObjet,
 			Date dacDteSaisi, BigDecimal dacNbrOuv, Date dacDteValCpmp, Date dacDteValDmp, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan,
+			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
 			Set<TAvisAppelOffre> TAvisAppelOffres, Set<TCommissionSpecifique> TCommissionSpecifiques,
 			Set<TDetailVente> TDetailVentes, Set<TOffres> TOffreses, Set<TAffichageDao> TAffichageDaos,
 			Set<TPiecesOffres> TPiecesOffreses, Set<TCorrectionDac> TCorrectionDacs, Set<TDetailAvis> TDetailAvises,
@@ -110,6 +111,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacBailleur = dacBailleur;
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
+		this.dacRecherche = dacRecherche;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
 		this.TDetailVentes = TDetailVentes;
@@ -361,6 +363,15 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacTypePlan(String dacTypePlan) {
 		this.dacTypePlan = dacTypePlan;
+	}
+
+	@Column(name = "DAC_RECHERCHE", length = 4000)
+	public String getDacRecherche() {
+		return this.dacRecherche;
+	}
+
+	public void setDacRecherche(String dacRecherche) {
+		this.dacRecherche = dacRecherche;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
