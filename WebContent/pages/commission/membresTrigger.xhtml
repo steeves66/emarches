@@ -143,7 +143,7 @@
 					<div class="form-group">
 						<label class="col-sm-4 control-label">Nombre de pli</label>
 						<div class="col-sm-8">
-							<p:inputText value="#{commissionController.newSeance.seaNbrPli}"
+							<p:inputText value="#{commissionController.membre.dcsNbrPli}"
 								type="text" styleClass="form-control" style="width: 100%" />
 						</div>
 					</div>
@@ -152,7 +152,7 @@
 				<div class="form-group">
 						<label class="col-sm-5 control-label">Nombre d'Offres recu</label>
 						<div class="col-sm-7">
-							<p:inputText value="#{commissionController.slctdTd.aaoNbrOff}" 
+							<p:inputText value="#{commissionController.membre.dcsAaoNbrOff}" 
 								type="text" styleClass="form-control" style="width: 100%" />
 					</div>
 				</div>
@@ -162,7 +162,7 @@
        <div class="form-group">
 						<label class="col-sm-6 control-label">Nombre d'Offres hors delai</label>
 						<div class="col-sm-6">
-							<p:inputText value="#{commissionController.slctdTd.aaoNbrOffHorDelai}" 
+							<p:inputText value="#{commissionController.membre.dcsAaoNbrOffHorDelai}" 
 								type="text" styleClass="form-control" style="width: 100%" />
 					</div>
 				</div>
@@ -171,7 +171,7 @@
         <div class="form-group">
 						<label class="col-sm-5 control-label">Quorum atteint ?</label>
 						<div class="col-sm-7">
-						  <p:selectOneRadio value="#{commissionController.newSeance.seaQuorum}">
+						  <p:selectOneRadio value="#{commissionController.membre.dcsSeaQuorum}">
 							  <f:selectItem itemLabel="Oui" itemValue="O" />
 							  <f:selectItem itemLabel="Non" itemValue="N" />
 						  </p:selectOneRadio>

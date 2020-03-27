@@ -127,6 +127,7 @@ public class CommissionController {
 	 
 	 
 	 //Declaration des objets
+	 private TCommissionSpecifique newcomSpec = new TCommissionSpecifique();
 	 private TCommissionType newCom = new TCommissionType();
 	 private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
 	 private VbTempParametreCom membre = new VbTempParametreCom();
@@ -344,8 +345,8 @@ public class CommissionController {
 					 
 		 }
 		 
-		//Enregistrement des membres de la commission
-		public void savePresence() {
+		//Enregistrement des membres de la commission (avec trigger djan)
+		/*public void savePresence() {
 			//membre.setDcsComStrCode(userController.getSlctd().getTOperateur().getTMinistere().getTStructures().);
 			//membre.setDcsComTcoCode(tcoCode);
 			 if (selectionMembres.size()==0) {
@@ -378,9 +379,64 @@ public class CommissionController {
 					  userController.setRenderMsg(true);
 					  userController.setSevrityMsg("success");
 			}
-		}
+		}*/
+		 
+		 
+			public void savePresence() {
+				//Mise a jour dans T_AvisAppelOffrfe
+				iservice.updateObject(slctdTd);
+				
+				//Creation de la séance
+				newSeance.setSeaLibelle("Séance d'ouverture des offres du DAO N° "+slctdTd.getTDacSpecs().getDacCode());
+				newSeance.setTTypeSeance(new TTypeSeance("OUV"));
+				newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
+				newSeance.setTFonction(userController.getSlctd().getTFonction());
+				newSeance.setTOperateur(userController.getSlctd().getTOperateur());
+				iservice.addObject(newSeance);
+				
+				//CREATION DE LA COMMISSION SPECIFIQUE
+				newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
+				newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
+				newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+				newcomSpec.setComMarCode(slctdTd.getTDacSpecs().getTTypeMarche().getTymCode());
+				newcomSpec.setTAvisAppelOffre(slctdTd);
+				newcomSpec.setTDacSpecs(slctdTd.getTDacSpecs());
+/*				newcomSpec.setTCommissionType(new TCommissionType(""));*/
+				newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
+				iservice.addObject(newcomSpec);
+				
+				//COMPOSITION DE LA SEANCE
+				 if (selectionMembres.size()==0) {
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
+						FacesContext.getCurrentInstance().addMessage(null, msg);
+					}else {
+						
+						for(TCommissionType mbr : selectionMembres) {
+							newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
+							newDetailSeance.setDcsNomMbm(mbr.getTctNomMbm());
+							newDetailSeance.setDcsPreMbm(mbr.getTctPreMbm());
+							newDetailSeance.setDcsTelMbm(mbr.getTctTelMbm());
+							newDetailSeance.setDcsRepMandate(mbr.getTctRepMandate());
+							newDetailSeance.setDcsRepMandate(mbr.getTctRepMandate());
+							newDetailSeance.setDcsFonCod(mbr.getTctLibelle());
+							newDetailSeance.setDcsObservation(mbr.getTctTitre());
+							newDetailSeance.setTSeances(newSeance);
+							newDetailSeance.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+							newDetailSeance.setTTypeCommission(new TTypeCommission("COJ"));
+							newDetailSeance.setTDacSpecs(slctdTd.getTDacSpecs());
+							newDetailSeance.setTCommissionSpecifique(newcomSpec);
+							newDetailSeance.setTOperateur(userController.getSlctd().getTOperateur());
+							iservice.addObject(newDetailSeance);
+						}
+					}
+				
+				   boutonEdit = true;
+				  userController.setTexteMsg("Enregistrement effectué avec succès !");
+				  userController.setRenderMsg(true);
+				  userController.setSevrityMsg("success");
+			}
 		
-		//Enregistrement des membres du commité technique
+		//Enregistrement des membres du commité technique 
 		public void saveCommiteEvaluation() {
 			 if (selectionMembresCommite.size()==0) {
 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
@@ -412,9 +468,11 @@ public class CommissionController {
 				}
 		}
 		
+	
+		
 		 //Edition de fiche membres
 		 public void imprimerFicheMbr() {
-			   projetReport.stringparam1(membre.getDcsSeaNum()+"", "membres_cojo", "membres_cojo");    
+			   projetReport.longparam1(newSeance.getSeaNum(), "membres_cojo", "membres_cojo");    
 			}
 		
 		//Ouverture des offres
@@ -1091,6 +1149,22 @@ public class CommissionController {
 
 	public void setListeAffichageAttibutaire(List<TDetOffres> listeAffichageAttibutaire) {
 		this.listeAffichageAttibutaire = listeAffichageAttibutaire;
+	}
+
+	public TCommissionSpecifique getNewcomSpec() {
+		return newcomSpec;
+	}
+
+	public void setNewcomSpec(TCommissionSpecifique newcomSpec) {
+		this.newcomSpec = newcomSpec;
+	}
+
+	public List<TSeances> getListeSeance() {
+		return listeSeance;
+	}
+
+	public void setListeSeance(List<TSeances> listeSeance) {
+		this.listeSeance = listeSeance;
 	}
 
 }

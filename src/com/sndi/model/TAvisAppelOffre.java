@@ -62,6 +62,10 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private Date aaoDteValAc;
 	private Date aaoDteValCpmp;
 	private Date aaoDteValDmp;
+	private Short aaoNbrOff;
+	private Short aaoNbrOffAccpet;
+	private Short aaoNbrOffRej;
+	private Short aaoNbrOffHorDelai;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -79,7 +83,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			long aaoDelaiVal, String aaoNatInt, String aaoTaux, String aaoLieuExe, String aaoNomResp,
 			String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot, String aaoAvisBail,
 			BigDecimal aaoMtCaut, String aaoModePaiement, long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,String aaoHeureRecep, String aaoNatPrix, String aaoRegQual,
-			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp,
+			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
 			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,
 			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.aaoCode = aaoCode;
@@ -120,6 +124,10 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoDteValAc = aaoDteValAc;
 		this.aaoDteValCpmp = aaoDteValCpmp;
 		this.aaoDteValDmp = aaoDteValDmp;
+		this.aaoNbrOff = aaoNbrOff;
+		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
+		this.aaoNbrOffRej = aaoNbrOffRej;
+		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
 		this.TDetailAvises = TDetailAvises;
 		this.TLotAaos = TLotAaos;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
@@ -484,6 +492,41 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoDteValDmp = aaoDteValDmp;
 	}
 
+	@Column(name = "AAO_NBR_OFF", precision = 4, scale = 0)
+	public Short getAaoNbrOff() {
+		return this.aaoNbrOff;
+	}
+
+	public void setAaoNbrOff(Short aaoNbrOff) {
+		this.aaoNbrOff = aaoNbrOff;
+	}
+
+	@Column(name = "AAO_NBR_OFF_ACCPET", precision = 4, scale = 0)
+	public Short getAaoNbrOffAccpet() {
+		return this.aaoNbrOffAccpet;
+	}
+
+	public void setAaoNbrOffAccpet(Short aaoNbrOffAccpet) {
+		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
+	}
+
+	@Column(name = "AAO_NBR_OFF_REJ", precision = 4, scale = 0)
+	public Short getAaoNbrOffRej() {
+		return this.aaoNbrOffRej;
+	}
+
+	public void setAaoNbrOffRej(Short aaoNbrOffRej) {
+		this.aaoNbrOffRej = aaoNbrOffRej;
+	}
+
+	@Column(name = "AAO_NBR_OFF_HOR_DELAI", precision = 4, scale = 0)
+	public Short getAaoNbrOffHorDelai() {
+		return this.aaoNbrOffHorDelai;
+	}
+
+	public void setAaoNbrOffHorDelai(Short aaoNbrOffHorDelai) {
+		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAvisAppelOffre")
 	public Set<TDetailAvis> getTDetailAvises() {
