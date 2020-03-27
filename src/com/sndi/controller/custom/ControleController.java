@@ -330,7 +330,7 @@ public class ControleController {
 	}
 	
 	
-	//Nouvelles methodes dynamiq
+	//Nouvelles methodes dynamique
 	/*public String action() {
 		String act="";
 		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR") && act.equalsIgnoreCase("LISDEMAC")) {

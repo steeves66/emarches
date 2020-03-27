@@ -1046,14 +1046,14 @@
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{daoController.chargerDaoRecherche()}" update=":gnl">
+                      <p:commandLink  title="Recherche" action="#{daoController.affectationRecherche()}" update=":gnl">
                        <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                       </p:commandLink>
                      </button>
                          &nbsp;&nbsp;
 
                        <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargeDataAffecter()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
                        </span>
                         
                  </h:panelGroup>

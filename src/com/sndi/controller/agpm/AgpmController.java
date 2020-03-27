@@ -1298,7 +1298,7 @@ public class AgpmController {
 							  iservice.addObject(agpmStatut);
 							  
 							  
-								//Enregistrement de TAffichag
+								//Enregistrement de TAffichage
 							  validationListe =(List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
 			 							new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
 			 					TAffichageAgpm affiche = new TAffichageAgpm();
