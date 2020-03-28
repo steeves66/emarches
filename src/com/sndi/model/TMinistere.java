@@ -21,7 +21,6 @@ public class TMinistere implements java.io.Serializable {
 	private String minLibelle;
 	private String minLibelleCourt;
 	private String minDescription;
-	private Set<TOperateur> TOperateurs = new HashSet<TOperateur>(0);
 	private Set<TStructure> TStructures = new HashSet<TStructure>(0);
 
 	public TMinistere() {
@@ -31,13 +30,12 @@ public class TMinistere implements java.io.Serializable {
 		this.minCode = minCode;
 	}
 
-	public TMinistere(String minCode, String minLibelle, String minLibelleCourt, String minDescription, Set<TOperateur> TOperateurs,
+	public TMinistere(String minCode, String minLibelle, String minLibelleCourt, String minDescription,
 			Set<TStructure> TStructures) {
 		this.minCode = minCode;
 		this.minLibelle = minLibelle;
 		this.minLibelleCourt = minLibelleCourt;
 		this.minDescription = minDescription;
-		this.TOperateurs = TOperateurs;
 		this.TStructures = TStructures;
 	}
 
@@ -77,15 +75,6 @@ public class TMinistere implements java.io.Serializable {
 
 	public void setMinDescription(String minDescription) {
 		this.minDescription = minDescription;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TMinistere")
-	public Set<TOperateur> getTOperateurs() {
-		return this.TOperateurs;
-	}
-
-	public void setTOperateurs(Set<TOperateur> TOperateurs) {
-		this.TOperateurs = TOperateurs;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TMinistere")
