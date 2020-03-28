@@ -468,10 +468,10 @@
          				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
          				</h:panelGroup>
 				        </p:column>
-				         <p:column headerText="AC" styleClass="#{controleController.ministere}" style="overflow:auto;" 
+				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}" style="overflow:auto;" 
 				         rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TStructure.strLibelleLong}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
          			    <h:outputText value="#{slctdTb.TStructure.strLibelleLong}"/>
@@ -490,7 +490,7 @@
 				        </p:column>
                          
                          
-                         <p:column headerText="Projet" styleClass="#{controleController.projet}" >
+                         <p:column headerText="Projet / Programme" styleClass="#{controleController.projet}" >
                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
          				</h:panelGroup>

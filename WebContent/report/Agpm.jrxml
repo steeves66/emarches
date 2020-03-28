@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-03-19T19:36:45 -->
+<!-- 2020-03-28T17:13:14 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Agpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="71977765-8d50-4230-b434-5e51d55cae97">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -157,7 +157,7 @@ and a.agp_id  = $P{param_code}]]>
 				<text><![CDATA[GESTION]]></text>
 			</staticText>
 		</band>
-		<band height="802">
+		<band height="799">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<componentElement>
 				<reportElement positionType="Float" x="23" y="114" width="500" height="31" uuid="a5f78ed7-b7f8-4550-bf74-b6fb0f96e89d">
@@ -188,6 +188,7 @@ and a.agp_id  = $P{param_code}]]>
 								<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 							</reportElement>
 							<textElement textAlignment="Justified" markup="html">
+								<font size="8"/>
 								<paragraph lineSpacing="Single"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{TDA_COMMENTAIRE}]]></textFieldExpression>

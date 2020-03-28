@@ -1674,6 +1674,12 @@ public class AgpmController {
 				break;
 				case "pgpm3":
 				break;
+				case "agpm3":
+					sourfin = slctdTd.getTFinancement().getFinTypeFinance();
+					baiCode= slctdTd.getTBailleur().getBaiCode();
+					souCode = slctdTd.getTSourceFinancement().getSouCode();
+					devCode = slctdTd.getTDevise().getDevCode();
+					break;
 				case "pgpm4":
 					chargeDetails();
 					chargeDossierDetail();
