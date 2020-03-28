@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 26 mars 2020 03:50:59 by Hibernate Tools 4.3.5.Final
+// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -186,9 +186,9 @@ public class AgpmController {
 	 private String fonc="";
 	 private String fonCod="";
 	 private long proId;
-	 private String baiCode; 
-	 private String sourfin; 
-	 private String souCode;
+	 private String baiCode=""; 
+	 private String sourfin=""; 
+	 private String souCode="";
 	 private String tcaCode="FIN";
 	 private String devCode="CFA";
 	 private String natPiece ="";

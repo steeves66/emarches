@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 12:01:30 by Hibernate Tools 4.3.5.Final
+// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;

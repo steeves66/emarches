@@ -1357,23 +1357,25 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				public void examenPsRecherche() {
 							 daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
 							           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+							           new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"DAO"),
+										new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 						              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 							_logger.info("daoExamen size: "+daoExamen.size());	
 							tableauBordController.chargeDataDao();	
 				        }  
 				
 							
-							public void publicationPsRecherche() { 
-								if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-										getListeDaoARetirer().clear();
-												publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
-														 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
-														 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-														 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-														new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-														new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-													_logger.info("publicationListe  size: "+publicationListe.size());		
-													tableauBordController.chargeDataDao();
+			  public void publicationPsRecherche() { 
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+					 getListeDaoARetirer().clear();
+						publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
+							new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
+							new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+							new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+							new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+							_logger.info("publicationListe  size: "+publicationListe.size());		
+							tableauBordController.chargeDataDao();
 										 }
 							        }
 					
@@ -1458,7 +1460,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			               }
 			
 		public void validationRecherche() { 
-		     getValidationListe().clear();
+		getValidationListe().clear();
 		validationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAO_ID")),
 			  new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 			  new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
@@ -1516,6 +1518,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		public void examenRecherche() {
 					 daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
 					           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
+					           new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"DAO"),
+								new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 					_logger.info("daoExamen size: "+daoExamen.size());	
 					tableauBordController.chargeDataDao();	
@@ -2327,7 +2331,12 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      //Initiation du DAO en procédure normale 
      @Transactional
      public void saveDao() {
-    	 
+    	 if(daoDetail.getTymCode().equalsIgnoreCase("") || "".equals(daoDetail.getTymCode()) || daoDetail.getMopCode().equalsIgnoreCase("") || "".equalsIgnoreCase(daoDetail.getMopCode()) 
+    			 || daoDetail.getDppObjet().equalsIgnoreCase("") || "".equals(daoDetail.getDppObjet()) ) {
+    		 
+    	 }else {
+    		 
+    	 }
     	 daoTab = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
     			     new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
