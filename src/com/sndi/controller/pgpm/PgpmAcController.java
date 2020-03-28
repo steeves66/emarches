@@ -821,6 +821,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						     histoPlan.setTStatut(statuts);
 						     histoPlan.setTDetailPlanGeneral(demDetail);
 						     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+						     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 						     iservice.addObject(histoPlan);
 									  
 							 userController.setTexteMsg(" Transmission effectuée avec succès !");
@@ -886,6 +887,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						     histoPlan.setTStatut(statuts);
 						     histoPlan.setTDetailPlanGeneral(demDetail);
 						     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+						     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 						     iservice.addObject(histoPlan);
 									  
 							 userController.setTexteMsg(" Transmission effectuée avec succès !");
@@ -958,6 +960,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						     histoPlan.setTStatut(statuts);
 						     histoPlan.setTDetailPlanGeneral(demDetail);
 						     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+						     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 						     iservice.addObject(histoPlan);
 									  
 							 userController.setTexteMsg(" Transmission effectuée avec succès !");
@@ -1038,6 +1041,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			   histoPlan.setTStatut(statuts);
        			   histoPlan.setTDetailPlanGeneral(detailPlan);
        			   histoPlan.setTFonction(userController.getSlctd().getTFonction());
+       			   histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
        			   iservice.addObject(histoPlan);
        			   
        			String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
@@ -1114,6 +1118,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      histoPlan.setTStatut(statuts);
      			      histoPlan.setTDetailPlanGeneral(detailPlan);
      			      histoPlan.setTFonction(userController.getSlctd().getTFonction());
+     			     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
      			      iservice.addObject(histoPlan);
      			      
      			     String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
@@ -1216,6 +1221,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            			          histoPlan.setTStatut(statuts);
            			          histoPlan.setTDetailPlanGeneral(detailPlan);
            			          histoPlan.setTFonction(userController.getSlctd().getTFonction());
+           			          histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
            			          iservice.addObject(histoPlan);
            			   
            			          String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
@@ -1304,6 +1310,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          			                       histoPlan.setTStatut(statuts);
          			                       histoPlan.setTDetailPlanGeneral(detailPlan);
          			                       histoPlan.setTFonction(userController.getSlctd().getTFonction());
+         			                       histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
          			                       iservice.addObject(histoPlan);
          			      
          			                       String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
@@ -1397,6 +1404,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			 histoPlan.setTStatut(statuts);
      			 histoPlan.setTDetailPlanGeneral(detailPlan);
      			 histoPlan.setTFonction(userController.getSlctd().getTFonction());
+     			 histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
      			 iservice.addObject(histoPlan);
      			
      			 chargeData();
@@ -1463,6 +1471,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
    			 histoPlan.setTStatut(statuts);
    			 histoPlan.setTDetailPlanGeneral(detailPlan);
    			 histoPlan.setTFonction(userController.getSlctd().getTFonction());
+   			 histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
    			 iservice.addObject(histoPlan);
    			
    			 chargeData();
@@ -1528,6 +1537,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						     histoPlan.setTStatut(statuts);
 						     histoPlan.setTDetailPlanGeneral(demDetail);
 						     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+						     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 						     iservice.addObject(histoPlan);
 									  
 							 userController.setTexteMsg("Transmission effectuée avec succès !");
@@ -1589,6 +1599,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			     histoPlan.setTStatut(statuts);
 			     histoPlan.setTDetailPlanGeneral(demDetail);
 			     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+			     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 			     iservice.addObject(histoPlan); 
 			     
 			     
@@ -1668,6 +1679,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				     histoPlan.setTStatut(statuts);
 				     histoPlan.setTDetailPlanGeneral(demDetail);
 				     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+				     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 				     iservice.addObject(histoPlan);
 				     
 				     //chargeDataAvaliderPgpm();
@@ -1970,6 +1982,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             			 histoPlan.setTStatut(statuts);
             			 histoPlan.setTDetailPlanGeneral(detailPlan);
             			 histoPlan.setTFonction(userController.getSlctd().getTFonction());
+            			 histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
             			 iservice.addObject(histoPlan);
             			
             			 chargeDataPgspm();
@@ -2034,6 +2047,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
           			 histoPlan.setTStatut(statuts);
           			 histoPlan.setTDetailPlanGeneral(detailPlan);
           			 histoPlan.setTFonction(userController.getSlctd().getTFonction());
+          			 histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
           			 iservice.addObject(histoPlan);
           			
           			chargeDataPgspm();
@@ -2124,6 +2138,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 			 histoPlan.setTStatut(statuts);
                 			 histoPlan.setTDetailPlanGeneral(detailPlan);
                 			 histoPlan.setTFonction(userController.getSlctd().getTFonction());
+                			 histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
                 			 iservice.addObject(histoPlan);
                 			
                 			 chargeDataPgspm();
@@ -2197,6 +2212,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
               			 histoPlan.setTStatut(statuts);
               			 histoPlan.setTDetailPlanGeneral(detailPlan);
               			 histoPlan.setTFonction(userController.getSlctd().getTFonction());
+              			 histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
               			 iservice.addObject(histoPlan);
               			
               			chargeDataPgspm();
