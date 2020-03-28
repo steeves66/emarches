@@ -261,7 +261,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.agpmDmTransmis}</h3>
+              <h3>#{tableauBordController.pgpmDmTransmis}</h3>
 
               <p>Transmis</p>
             </div>
@@ -292,7 +292,7 @@
           <!-- small box -->                       
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.agpmCpValide}</h3>
+              <h3>#{tableauBordController.pgpmDmAttenteValide}</h3>
 
               <p>En attente de validation</p>
             </div>
@@ -578,7 +578,7 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				         <p:column headerText="AC" styleClass="#{controleController.ministere}"  >
+				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}"  >
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TStructure.strLibelleLong}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -598,7 +598,7 @@
 				        </p:column>
                          
 				       
-         				<p:column headerText="Projet" styleClass="#{controleController.projet}" >
+         				<p:column headerText="Projet/Programme" styleClass="#{controleController.projet}" >
                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -652,21 +652,19 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
                              </p:commandLink>
                                  
-                                  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">                       
+                                                        
                                  <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
                               </p:commandLink>
-                              </h:panelGroup> 
+                               
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-                              <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
                               <p:commandLink action="#{agpmController.differer()}"   styleClass="btn btn-xs btn-danger" style="background-color: red; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
                                 <p:confirm header="Confirmation" message="Voulez-vous confirmer la retour de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
                               </p:commandLink>
-                              </h:panelGroup>
                               </h:panelGroup>
                                
                               

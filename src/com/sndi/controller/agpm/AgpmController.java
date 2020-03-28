@@ -648,7 +648,7 @@ public class AgpmController {
 					new WhereClause("AFF_AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 					tableauBordController.chargeDataAgpm(); 
 					_logger.info("affichageListe size: "+affichageListe.size());
-					
+					multiFiltre="";
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
@@ -658,7 +658,7 @@ public class AgpmController {
 					    			new WhereClause("AFF_AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							        tableauBordController.chargeDataAgpm();
 								   _logger.info("validationListe size: "+validationListe.size());
-					    	  
+								   multiFiltre="";
 					      }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    	    getValidationListe().clear();
@@ -668,6 +668,7 @@ public class AgpmController {
 								new WhereClause("AFF_AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 								tableauBordController.chargeDataAgpm(); 
 									_logger.info("objetListe size: "+validationListe.size());
+									multiFiltre="";
 					      }
 			          }
 
@@ -1305,6 +1306,7 @@ public class AgpmController {
 			   
 				    chargeData();
 				    
+				    
 				    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
 					 TStatut statuts = new TStatut();
 						if(!LS.isEmpty()) statuts = LS.get(0);
@@ -1328,7 +1330,8 @@ public class AgpmController {
 			 						affiche.setTStatut(new TStatut(statutUpdate));
 			 						affiche.setAffAgpStatutRetour("1");
 								    iservice.updateObject(affiche);
-							 
+								    
+								    chargeData();
 							  chargeDataAvalider();
 							  chargeAgpmDifCp(); 
 							  chargeAgpmDifDmp();
