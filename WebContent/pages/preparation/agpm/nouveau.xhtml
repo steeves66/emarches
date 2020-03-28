@@ -302,7 +302,7 @@
                 <div class="pull-right ">
                        
                         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-					       <p:commandLink rendered="#{agpmController.btn_saveProjet}" btn_saveProjet styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{agpmController.creerProjet}"  update=":content">
+					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{agpmController.creerProjet}"  update=":content">
 				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Enregistrer
 				            </p:commandLink>
