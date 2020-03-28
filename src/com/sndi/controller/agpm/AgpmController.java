@@ -1149,19 +1149,23 @@ public class AgpmController {
 		 }*/
 		 
 		 public void checkBailleur() {
+			 sourfin="";
 			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
 				 selectTresor = false;
 				 selectPartBai = true;
+				 sourfin="";
 			 }else
 			      if(sourfin.equalsIgnoreCase("Cofinance")){
 				 selectBailleur = true; 
 				 selectTresor = true;
 				 selectPartBai = true;
+				 sourfin="";
 			 }else if(sourfin.equalsIgnoreCase("Etat")){
 				 selectBailleur = false;
 				 selectTresor = true;
 				 selectPartBai= false;
+				 sourfin="TRE";
 			    }else {
 			    	  selectPartBai = false;
 			    	 selectBailleur = false;
