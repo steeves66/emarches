@@ -2351,7 +2351,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				
 		    }else {
 		    	
-		    	String exo=daoDetail.getMopCode()+gesCode;
+		    	String exo=gesCode+gesCode+daoDetail.getDppStrCode()+daoDetail.getDppTymCode()+daoDetail.getMopCode();
 		    	 dao.setDacCode(keyGen.getCodeDao(exo));
 		    	 dao.setDacStatutRetour("0");
 		    	 dao.setDacObjet(daoDetail.getDppObjet());

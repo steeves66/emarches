@@ -154,7 +154,7 @@ public String getCodeVisaDetail(String chaine, String exo) {
 public String getCodeDao(String exo) {
 	
 	String pseudo=exo;
-	String codeDao=iservice.getCodeTable(pseudo, 8, 20,
+	String codeDao=iservice.getCodeTable(pseudo, 13, 20,
 			"T_DAC_SPECS", "DAC_CODE");
 	return codeDao;
 }
@@ -211,7 +211,7 @@ public String getCodePiece( String exo) {
 
 public String getOperateurCode() {
 	
-	String pseudo = "OPE-";//4 il reste 5 total 9
+	String pseudo = "EMAP";//4 il reste 5 total 9
 	String code = iservice.getCodeTable(pseudo, 4, 10,
 			"T_OPERATEUR", "OPE_MATRICULE");
 	System.out.println("****code T_OPERATEUR =" + code);

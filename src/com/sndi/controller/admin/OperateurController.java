@@ -70,8 +70,8 @@ public class OperateurController {
 	private String breadcrumb;
 	private Boolean boutonAdd=true;
 	private Boolean boutonSupp=false;
-	private String minCode;
-	private String strCode;
+	private String minCode="";
+	private String strCode="";
 	
 	private TAssignation tmpAssignation = new TAssignation();
 	private List<TAssignation> assignations = new ArrayList<TAssignation>();
@@ -504,7 +504,7 @@ public class OperateurController {
 					if(checkNewOpeStepI()){
 						//CustomPasswordEncoder cp = new CustomPasswordEncoder();
 					    newOpe.setOpeMatricule(keyGen.getOperateurCode());
-					    newOpe.setTMinistere(new TMinistere(minCode));
+					    //newOpe.setTMinistere(new TMinistere(minCode));
 					    newOpe.setTStructure(new TStructure(strCode));
 						iservice.addObject(getNewOpe());
 						//add Mot de passe
