@@ -24,6 +24,16 @@
     
     <section class="content">
      <div class="box"></div>
+      <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
        <div class="box-body col-md-6 col-md-offset-3 form-horizontal">
        <div class="form-group ">
 	                  <label for="mat" class="col-sm-3 control-label"><b> Matricule  <span style="color:red;"> *</span></b></label>

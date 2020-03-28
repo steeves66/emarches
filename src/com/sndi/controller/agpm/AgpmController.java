@@ -995,7 +995,6 @@ public class AgpmController {
 	      					TAffichageAgpm affgp = new TAffichageAgpm();
 	      					if(!AFG.isEmpty()) affgp =AFG.get(0); 
 	      					affgp.setTDeclarant(rect.getTDeclarant());
-	      					
 	  						affgp.setAffAgpRecherche(rechercheAll);
 	      					iservice.updateObject(affgp);
 							

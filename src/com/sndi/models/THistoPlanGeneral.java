@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,6 +23,7 @@ public class THistoPlanGeneral implements java.io.Serializable {
 	private TStatut TStatut;
 	private TDetailPlanGeneral TDetailPlanGeneral;
 	private TFonction TFonction;
+	private TOperateur TOperateur;
 	private Date hpgDate;
 	private String hpgMotif;
 
@@ -37,11 +38,12 @@ public class THistoPlanGeneral implements java.io.Serializable {
 	}
 
 	public THistoPlanGeneral(long hpgId, TStatut TStatut, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction,
-			Date hpgDate, String hpgMotif) {
+			TOperateur TOperateur, Date hpgDate, String hpgMotif) {
 		this.hpgId = hpgId;
 		this.TStatut = TStatut;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TFonction = TFonction;
+		this.TOperateur = TOperateur;
 		this.hpgDate = hpgDate;
 		this.hpgMotif = hpgMotif;
 	}
@@ -85,6 +87,16 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPG_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@Temporal(TemporalType.DATE)
