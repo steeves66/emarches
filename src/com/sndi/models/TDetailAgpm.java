@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;

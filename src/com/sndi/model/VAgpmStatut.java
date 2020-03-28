@@ -26,6 +26,7 @@ public class VAgpmStatut implements java.io.Serializable {
 	private String hagFonCod;
 	private long agpProId;
 	private String fonLibelle;
+	private String opeNom;
 
 	public VAgpmStatut() {
 	}
@@ -35,7 +36,7 @@ public class VAgpmStatut implements java.io.Serializable {
 	}
 
 	public VAgpmStatut(long hagId, Date hagDate, String hagMotif, String hagStaCode, long hagAgpId, String hagFonCod,
-			long agpProId, String fonLibelle) {
+			long agpProId, String fonLibelle, String opeNom) {
 		this.hagId = hagId;
 		this.hagDate = hagDate;
 		this.hagMotif = hagMotif;
@@ -44,6 +45,7 @@ public class VAgpmStatut implements java.io.Serializable {
 		this.hagFonCod = hagFonCod;
 		this.agpProId = agpProId;
 		this.fonLibelle = fonLibelle;
+		this.opeNom = opeNom;
 	}
 
 	@Id
@@ -117,6 +119,15 @@ public class VAgpmStatut implements java.io.Serializable {
 
 	public void setFonLibelle(String fonLibelle) {
 		this.fonLibelle = fonLibelle;
+	}
+	
+	@Column(name = "OPE_NOM")
+	public String getOpeNom() {
+		return this.opeNom;
+	}
+
+	public void setOpeNom(String opeNom) {
+		this.opeNom = opeNom;
 	}
 
 }

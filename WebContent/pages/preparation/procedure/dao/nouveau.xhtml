@@ -49,7 +49,8 @@
 				<i class="fa fa-check pr10"></i>
 				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
-     
+      <p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/>
+      
      <p:wizard flowListener="#{daoController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
         <p:tab id="creation" title="Initiation du #{controleController.type}" titleStyle="background-color: #f88b2e;background-image: none">
        
@@ -194,84 +195,6 @@
            </div>
          </div>
          </h:panelGroup>
-         
-         
-         <h:panelGroup rendered="#{controleController.pspmModePs}">
-           <div class="row">
-            <div class="col-md-12">
-              <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                <div class="col-md-12 ">
-                   <div  style="color: #fff">CHOISIR LE(S) PSPM POUR CREER VOTRE #{controleController.type}</div>
-                 </div>
-                </div>
-               <div class="box-body">
-                 <div class="input-group input-group-sm col-md-3">
-                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero du PPM"></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
-                    </span>
-					 </div>
-                    <p:dataTable id="pslntbl" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
-					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" emptyMessage="Aucun PSPM enregistré" rows="5" 
-                         paginator="true" rowsPerPageTemplate="5,10,15" >
-                         
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                         
-                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-
-                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.souLibelle}" />
-				        </p:column>
-				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.lbgImputation}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				       
-         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column> 
-         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column> 
-				        
-				         
-				       
-                      <p:column headerText="Actions" styleClass="col-sm-2">
-                        
-                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
-                             </p:commandLink>
-                            
-                          
-                          <h:panelGroup rendered="#{controleController.detailP2}">   
-                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPSPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PSPM" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
-                             </p:commandLink>
-                            </h:panelGroup>
-				         </p:column>   
-                    </p:dataTable>
-                    
-                   <div>
-                   
-                   </div>
-    
-	               <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{daoController.renseignerDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			             <i class="ace-icon fa fa-save"></i> OK
-	               </p:commandLink>
-	 
-              </div>
-             </div>
-           </div>
-         </div>
-         </h:panelGroup>
-         
          
          
         <div class="row">

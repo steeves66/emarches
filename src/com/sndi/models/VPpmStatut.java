@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -32,7 +32,8 @@ public class VPpmStatut implements java.io.Serializable {
 			@AttributeOverride(name = "hppId", column = @Column(name = "HPP_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "hppDate", column = @Column(name = "HPP_DATE", length = 7)),
 			@AttributeOverride(name = "hppMotif", column = @Column(name = "HPP_MOTIF", length = 1000)),
-			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)) })
+			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)),
+			@AttributeOverride(name = "opeNom", column = @Column(name = "OPE_NOM")) })
 	public VPpmStatutId getId() {
 		return this.id;
 	}

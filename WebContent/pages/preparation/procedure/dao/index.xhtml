@@ -847,7 +847,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <p:commandLink  oncomplete="PF('detailCpDifDlg').show()" action="#{daoController.}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailCpDifDlg').show()" action="{daoController.chargeDaoDiff()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -2923,7 +2923,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" 
 						 selectionMode="single" 
-			               emptyMessage="Aucun DAO différé"  scrollable="true" scrollHeight="120" var="slctdTb" value="#{daoController.listeDaoValide}" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun DAO différé"  scrollable="true" scrollHeight="120" var="slctdTb" value="#{daoController.listeDaoDiff}" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -29,10 +29,11 @@ public class VFonctionAssignation implements java.io.Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "fonCod", column = @Column(name = "FON_COD", nullable = false, length = 20)),
 			@AttributeOverride(name = "fonTyfCod", column = @Column(name = "FON_TYF_COD", length = 3)),
+			@AttributeOverride(name = "fonStrCode", column = @Column(name = "FON_STR_CODE", length = 20)),
 			@AttributeOverride(name = "fonDatDeb", column = @Column(name = "FON_DAT_DEB", length = 7)),
 			@AttributeOverride(name = "fonDatFin", column = @Column(name = "FON_DAT_FIN", length = 7)),
 			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)),
-			@AttributeOverride(name = "assOpeMatricule", column = @Column(name = "ASS_OPE_MATRICULE", length = 25)) })
+			@AttributeOverride(name = "fonOpeMatricule", column = @Column(name = "FON_OPE_MATRICULE", length = 25)) })
 	public VFonctionAssignationId getId() {
 		return this.id;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -19,6 +19,7 @@ public class VAgpmStatutId implements java.io.Serializable {
 	private String hagFonCod;
 	private long agpProId;
 	private String fonLibelle;
+	private String opeNom;
 
 	public VAgpmStatutId() {
 	}
@@ -31,7 +32,7 @@ public class VAgpmStatutId implements java.io.Serializable {
 	}
 
 	public VAgpmStatutId(long hagId, Date hagDate, String hagMotif, String hagStaCode, long hagAgpId, String hagFonCod,
-			long agpProId, String fonLibelle) {
+			long agpProId, String fonLibelle, String opeNom) {
 		this.hagId = hagId;
 		this.hagDate = hagDate;
 		this.hagMotif = hagMotif;
@@ -40,6 +41,7 @@ public class VAgpmStatutId implements java.io.Serializable {
 		this.hagFonCod = hagFonCod;
 		this.agpProId = agpProId;
 		this.fonLibelle = fonLibelle;
+		this.opeNom = opeNom;
 	}
 
 	@Column(name = "HAG_ID", nullable = false, precision = 10, scale = 0)
@@ -114,6 +116,15 @@ public class VAgpmStatutId implements java.io.Serializable {
 		this.fonLibelle = fonLibelle;
 	}
 
+	@Column(name = "OPE_NOM")
+	public String getOpeNom() {
+		return this.opeNom;
+	}
+
+	public void setOpeNom(String opeNom) {
+		this.opeNom = opeNom;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -134,9 +145,10 @@ public class VAgpmStatutId implements java.io.Serializable {
 				&& ((this.getHagFonCod() == castOther.getHagFonCod()) || (this.getHagFonCod() != null
 						&& castOther.getHagFonCod() != null && this.getHagFonCod().equals(castOther.getHagFonCod())))
 				&& (this.getAgpProId() == castOther.getAgpProId())
-				&& ((this.getFonLibelle() == castOther.getFonLibelle())
-						|| (this.getFonLibelle() != null && castOther.getFonLibelle() != null
-								&& this.getFonLibelle().equals(castOther.getFonLibelle())));
+				&& ((this.getFonLibelle() == castOther.getFonLibelle()) || (this.getFonLibelle() != null
+						&& castOther.getFonLibelle() != null && this.getFonLibelle().equals(castOther.getFonLibelle())))
+				&& ((this.getOpeNom() == castOther.getOpeNom()) || (this.getOpeNom() != null
+						&& castOther.getOpeNom() != null && this.getOpeNom().equals(castOther.getOpeNom())));
 	}
 
 	public int hashCode() {
@@ -150,6 +162,7 @@ public class VAgpmStatutId implements java.io.Serializable {
 		result = 37 * result + (getHagFonCod() == null ? 0 : this.getHagFonCod().hashCode());
 		result = 37 * result + (int) this.getAgpProId();
 		result = 37 * result + (getFonLibelle() == null ? 0 : this.getFonLibelle().hashCode());
+		result = 37 * result + (getOpeNom() == null ? 0 : this.getOpeNom().hashCode());
 		return result;
 	}
 

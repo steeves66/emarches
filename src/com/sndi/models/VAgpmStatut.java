@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -34,7 +34,8 @@ public class VAgpmStatut implements java.io.Serializable {
 			@AttributeOverride(name = "hagAgpId", column = @Column(name = "HAG_AGP_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "hagFonCod", column = @Column(name = "HAG_FON_COD", length = 12)),
 			@AttributeOverride(name = "agpProId", column = @Column(name = "AGP_PRO_ID", nullable = false, precision = 10, scale = 0)),
-			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)) })
+			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)),
+			@AttributeOverride(name = "opeNom", column = @Column(name = "OPE_NOM")) })
 	public VAgpmStatutId getId() {
 		return this.id;
 	}

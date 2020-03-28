@@ -1,5 +1,8 @@
 package com.sndi.controller.tableauBord;
 
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -16,10 +19,12 @@ import org.springframework.stereotype.Component;
 
 import com.sndi.dao.WhereClause;
 import com.sndi.model.TAgpm;
+import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailPlanPassation;
 import com.sndi.model.TDossierDacs;
 import com.sndi.model.THistoDac;
+import com.sndi.model.TLotAao;
 import com.sndi.model.TStatut;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VPpmPgpm;
@@ -56,6 +61,9 @@ public class SituationController {
 	private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
 	private List<THistoDac> listHistoStat = new ArrayList<THistoDac>();
 	private List<TDetailPlanPassation> listPpmStat = new ArrayList<TDetailPlanPassation>();
+	private List<TDossierDacs> listDossierDac = new ArrayList<TDossierDacs>();
+	private List<TLotAao> listeLotsAvis= new ArrayList<TLotAao>();
+	private List<TDacSpecs> listDacPaPeriode = new ArrayList<TDacSpecs>();
 	private List<VPpmPgpm> listPgpmStat = new ArrayList<VPpmPgpm>();
 	private List<TAgpm> listAgpm = new ArrayList<TAgpm>();
 	private TStatut Stat = new TStatut();
@@ -85,6 +93,8 @@ public class SituationController {
 			recupStat();
 			recupHisto();
 			recupPPM();
+			recupDossier();
+			recupLots();
 		}else {
 			vider();
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -104,6 +114,16 @@ public class SituationController {
 	public void recupHisto() {
 		listHistoStat =(List<THistoDac>) iservice.getObjectsByColumn("THistoDac", new ArrayList<String>(Arrays.asList("HAC_ID")),
 				new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+detail.getDacCode()));	
+	}
+	
+	public void recupDossier() {
+		listDossierDac = (List<TDossierDacs>) iservice.getObjectsByColumn("TDossierDacs", new ArrayList<String>(Arrays.asList("DDA_ID")),
+				new WhereClause("DDA_DAC_CODE",WhereClause.Comparateur.EQ,""+detail.getDacCode()));
+	}
+	
+	public void recupLots() {
+		listeLotsAvis = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")),
+				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+detail.getAaoCode()));
 	}
 	
 	public void recupPPM() {
@@ -128,6 +148,27 @@ public class SituationController {
 	public void recupAGPM() {
 		listAgpm =(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
 				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+repPpm.getGpgAgpId()));
+		if (!listAgpm.isEmpty()) {
+			agpm=listAgpm.get(0);
+		}
+	}
+	
+	
+	public void ReqParPeriode() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yy");
+		String dated = df.format(dateDeb);
+		String datef = df.format(dateFin);
+		String dd = "TO_DATE('"+dated+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;
+		String dfin = "TO_DATE('"+datef+"',"+ "'"+"DD/MM/YY"+"'"+","+"'"+"NLS_DATE_LANGUAGE = FRENCH"+"'"+")" ;	
+		
+		listDacPaPeriode =  (List<TDacSpecs>)iservice.getObjectsByColumnNotQuote("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					new WhereClause("DAC_DATE_VAL_AC",WhereClause.Comparateur.BET,dd+" AND "+dfin));
+		
+		if(listDacPaPeriode.isEmpty()){
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN," Dossier(s) non trouvé(s) pour la période de ->"+dated+" à ->"+datef, "")); 
+		}else {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,listDacPaPeriode.size()+" Dossier(s) trouvé(s) pour la période de ->"+dated+" à ->"+datef, ""));
+		}	
 	}
 	
 	
@@ -143,6 +184,19 @@ public class SituationController {
 	
 	
 	
+	 public void renderPage(String value) throws IOException{
+			
+			switch(value) {
+			case "sit1":
+				userController.renderPage(value);
+				break;
+				
+			case "per1":
+				userController.renderPage(value);
+				break;
+			}
+			userController.renderPage(value);
+	}
 	
 	
 	
@@ -311,6 +365,36 @@ public class SituationController {
 
 		public void setAgpm(TAgpm agpm) {
 			this.agpm = agpm;
+		}
+
+
+		public List<TDacSpecs> getListDacPaPeriode() {
+			return listDacPaPeriode;
+		}
+
+
+		public void setListDacPaPeriode(List<TDacSpecs> listDacPaPeriode) {
+			this.listDacPaPeriode = listDacPaPeriode;
+		}
+
+
+		public List<TDossierDacs> getListDossierDac() {
+			return listDossierDac;
+		}
+
+
+		public void setListDossierDac(List<TDossierDacs> listDossierDac) {
+			this.listDossierDac = listDossierDac;
+		}
+
+
+		public List<TLotAao> getListeLotsAvis() {
+			return listeLotsAvis;
+		}
+
+
+		public void setListeLotsAvis(List<TLotAao> listeLotsAvis) {
+			this.listeLotsAvis = listeLotsAvis;
 		}
 
 }

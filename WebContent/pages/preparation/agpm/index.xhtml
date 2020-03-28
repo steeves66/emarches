@@ -525,7 +525,7 @@
                              
                              
 				              
-				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{agpmController.renderPage('agpm3','MOD')}"
+				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{agpmController.renderPage('agpm2','MOD')}"
 				               title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
@@ -704,7 +704,7 @@
 					<div class="panel-body panel-body-nopadding">
 	                  <p:inputTextarea rows="4" value="#{agpmController.agpmstatut.hagMotif}" cols="100" style="width:100%;" readonly="true"/>
 	                  </div>
-	                  <div class="par pull-right"> par:<strong>#{agpmController.agpmstatut.fonLibelle}</strong></div>
+	                  <div class="par pull-right"> par:<strong>#{agpmController.agpmstatut.opeNom}</strong></div>
                      <div class="panel-footer">
                       <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()"/>
                      </div>

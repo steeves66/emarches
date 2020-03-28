@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -41,6 +41,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TModeleDacType> TModeleDacTypes = new HashSet<TModeleDacType>(0);
 	private Set<TNatures> TNatureses = new HashSet<TNatures>(0);
 	private Set<TDestinations> TDestinationses = new HashSet<TDestinations>(0);
+	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TMotdepasse> TMotdepasses = new HashSet<TMotdepasse>(0);
 	private Set<TAssignation> TAssignations = new HashSet<TAssignation>(0);
 	private Set<TSeances> TSeanceses = new HashSet<TSeances>(0);
@@ -49,6 +50,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TTempParametre> TTempParametres = new HashSet<TTempParametre>(0);
 	private Set<TTypeSeance> TTypeSeances = new HashSet<TTypeSeance>(0);
 	private Set<TTypeFonction> TTypeFonctions = new HashSet<TTypeFonction>(0);
+	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
 	private Set<TTypeCommission> TTypeCommissions = new HashSet<TTypeCommission>(0);
 	private Set<TTypePieceOffre> TTypePieceOffres = new HashSet<TTypePieceOffre>(0);
 	private Set<TAvisPresel> TAvisPreselsForAprOpeMatricule = new HashSet<TAvisPresel>(0);
@@ -73,9 +75,10 @@ public class TOperateur implements java.io.Serializable {
 			Set<TOffres> TOffreses, Set<THistoDac> THistoDacs, Set<TDetOffres> TDetOffreses,
 			Set<TPiecesOffres> TPiecesOffreses, Set<TTiers> TTierses, Set<TFonction> TFonctions,
 			Set<TModeleDacType> TModeleDacTypes, Set<TNatures> TNatureses, Set<TDestinations> TDestinationses,
-			Set<TMotdepasse> TMotdepasses, Set<TAssignation> TAssignations, Set<TSeances> TSeanceses,
-			Set<TTypeDemande> TTypeDemandes, Set<TModeReglement> TModeReglements, Set<TTempParametre> TTempParametres,
-			Set<TTypeSeance> TTypeSeances, Set<TTypeFonction> TTypeFonctions, Set<TTypeCommission> TTypeCommissions,
+			Set<THistoPlanPassation> THistoPlanPassations, Set<TMotdepasse> TMotdepasses,
+			Set<TAssignation> TAssignations, Set<TSeances> TSeanceses, Set<TTypeDemande> TTypeDemandes,
+			Set<TModeReglement> TModeReglements, Set<TTempParametre> TTempParametres, Set<TTypeSeance> TTypeSeances,
+			Set<TTypeFonction> TTypeFonctions, Set<THistoAgpm> THistoAgpms, Set<TTypeCommission> TTypeCommissions,
 			Set<TTypePieceOffre> TTypePieceOffres, Set<TAvisPresel> TAvisPreselsForAprOpeMatricule,
 			Set<TDemande> TDemandes, Set<TDetCommissionSeance> TDetCommissionSeances,
 			Set<TDetailCorrection> TDetailCorrections, Set<TSoumissions> TSoumissionses,
@@ -102,6 +105,7 @@ public class TOperateur implements java.io.Serializable {
 		this.TModeleDacTypes = TModeleDacTypes;
 		this.TNatureses = TNatureses;
 		this.TDestinationses = TDestinationses;
+		this.THistoPlanPassations = THistoPlanPassations;
 		this.TMotdepasses = TMotdepasses;
 		this.TAssignations = TAssignations;
 		this.TSeanceses = TSeanceses;
@@ -110,6 +114,7 @@ public class TOperateur implements java.io.Serializable {
 		this.TTempParametres = TTempParametres;
 		this.TTypeSeances = TTypeSeances;
 		this.TTypeFonctions = TTypeFonctions;
+		this.THistoAgpms = THistoAgpms;
 		this.TTypeCommissions = TTypeCommissions;
 		this.TTypePieceOffres = TTypePieceOffres;
 		this.TAvisPreselsForAprOpeMatricule = TAvisPreselsForAprOpeMatricule;
@@ -316,6 +321,15 @@ public class TOperateur implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<THistoPlanPassation> getTHistoPlanPassations() {
+		return this.THistoPlanPassations;
+	}
+
+	public void setTHistoPlanPassations(Set<THistoPlanPassation> THistoPlanPassations) {
+		this.THistoPlanPassations = THistoPlanPassations;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
 	public Set<TMotdepasse> getTMotdepasses() {
 		return this.TMotdepasses;
 	}
@@ -385,6 +399,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTTypeFonctions(Set<TTypeFonction> TTypeFonctions) {
 		this.TTypeFonctions = TTypeFonctions;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<THistoAgpm> getTHistoAgpms() {
+		return this.THistoAgpms;
+	}
+
+	public void setTHistoAgpms(Set<THistoAgpm> THistoAgpms) {
+		this.THistoAgpms = THistoAgpms;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")

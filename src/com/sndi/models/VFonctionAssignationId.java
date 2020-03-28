@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -13,10 +13,11 @@ public class VFonctionAssignationId implements java.io.Serializable {
 
 	private String fonCod;
 	private String fonTyfCod;
+	private String fonStrCode;
 	private Date fonDatDeb;
 	private Date fonDatFin;
 	private String fonLibelle;
-	private String assOpeMatricule;
+	private String fonOpeMatricule;
 
 	public VFonctionAssignationId() {
 	}
@@ -25,14 +26,15 @@ public class VFonctionAssignationId implements java.io.Serializable {
 		this.fonCod = fonCod;
 	}
 
-	public VFonctionAssignationId(String fonCod, String fonTyfCod, Date fonDatDeb, Date fonDatFin, String fonLibelle,
-			String assOpeMatricule) {
+	public VFonctionAssignationId(String fonCod, String fonTyfCod, String fonStrCode, Date fonDatDeb, Date fonDatFin,
+			String fonLibelle, String fonOpeMatricule) {
 		this.fonCod = fonCod;
 		this.fonTyfCod = fonTyfCod;
+		this.fonStrCode = fonStrCode;
 		this.fonDatDeb = fonDatDeb;
 		this.fonDatFin = fonDatFin;
 		this.fonLibelle = fonLibelle;
-		this.assOpeMatricule = assOpeMatricule;
+		this.fonOpeMatricule = fonOpeMatricule;
 	}
 
 	@Column(name = "FON_COD", nullable = false, length = 20)
@@ -51,6 +53,15 @@ public class VFonctionAssignationId implements java.io.Serializable {
 
 	public void setFonTyfCod(String fonTyfCod) {
 		this.fonTyfCod = fonTyfCod;
+	}
+
+	@Column(name = "FON_STR_CODE", length = 20)
+	public String getFonStrCode() {
+		return this.fonStrCode;
+	}
+
+	public void setFonStrCode(String fonStrCode) {
+		this.fonStrCode = fonStrCode;
 	}
 
 	@Column(name = "FON_DAT_DEB", length = 7)
@@ -80,13 +91,13 @@ public class VFonctionAssignationId implements java.io.Serializable {
 		this.fonLibelle = fonLibelle;
 	}
 
-	@Column(name = "ASS_OPE_MATRICULE", length = 25)
-	public String getAssOpeMatricule() {
-		return this.assOpeMatricule;
+	@Column(name = "FON_OPE_MATRICULE", length = 25)
+	public String getFonOpeMatricule() {
+		return this.fonOpeMatricule;
 	}
 
-	public void setAssOpeMatricule(String assOpeMatricule) {
-		this.assOpeMatricule = assOpeMatricule;
+	public void setFonOpeMatricule(String fonOpeMatricule) {
+		this.fonOpeMatricule = fonOpeMatricule;
 	}
 
 	public boolean equals(Object other) {
@@ -102,15 +113,17 @@ public class VFonctionAssignationId implements java.io.Serializable {
 				&& castOther.getFonCod() != null && this.getFonCod().equals(castOther.getFonCod())))
 				&& ((this.getFonTyfCod() == castOther.getFonTyfCod()) || (this.getFonTyfCod() != null
 						&& castOther.getFonTyfCod() != null && this.getFonTyfCod().equals(castOther.getFonTyfCod())))
+				&& ((this.getFonStrCode() == castOther.getFonStrCode()) || (this.getFonStrCode() != null
+						&& castOther.getFonStrCode() != null && this.getFonStrCode().equals(castOther.getFonStrCode())))
 				&& ((this.getFonDatDeb() == castOther.getFonDatDeb()) || (this.getFonDatDeb() != null
 						&& castOther.getFonDatDeb() != null && this.getFonDatDeb().equals(castOther.getFonDatDeb())))
 				&& ((this.getFonDatFin() == castOther.getFonDatFin()) || (this.getFonDatFin() != null
 						&& castOther.getFonDatFin() != null && this.getFonDatFin().equals(castOther.getFonDatFin())))
 				&& ((this.getFonLibelle() == castOther.getFonLibelle()) || (this.getFonLibelle() != null
 						&& castOther.getFonLibelle() != null && this.getFonLibelle().equals(castOther.getFonLibelle())))
-				&& ((this.getAssOpeMatricule() == castOther.getAssOpeMatricule())
-						|| (this.getAssOpeMatricule() != null && castOther.getAssOpeMatricule() != null
-								&& this.getAssOpeMatricule().equals(castOther.getAssOpeMatricule())));
+				&& ((this.getFonOpeMatricule() == castOther.getFonOpeMatricule())
+						|| (this.getFonOpeMatricule() != null && castOther.getFonOpeMatricule() != null
+								&& this.getFonOpeMatricule().equals(castOther.getFonOpeMatricule())));
 	}
 
 	public int hashCode() {
@@ -118,10 +131,11 @@ public class VFonctionAssignationId implements java.io.Serializable {
 
 		result = 37 * result + (getFonCod() == null ? 0 : this.getFonCod().hashCode());
 		result = 37 * result + (getFonTyfCod() == null ? 0 : this.getFonTyfCod().hashCode());
+		result = 37 * result + (getFonStrCode() == null ? 0 : this.getFonStrCode().hashCode());
 		result = 37 * result + (getFonDatDeb() == null ? 0 : this.getFonDatDeb().hashCode());
 		result = 37 * result + (getFonDatFin() == null ? 0 : this.getFonDatFin().hashCode());
 		result = 37 * result + (getFonLibelle() == null ? 0 : this.getFonLibelle().hashCode());
-		result = 37 * result + (getAssOpeMatricule() == null ? 0 : this.getAssOpeMatricule().hashCode());
+		result = 37 * result + (getFonOpeMatricule() == null ? 0 : this.getFonOpeMatricule().hashCode());
 		return result;
 	}
 

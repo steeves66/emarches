@@ -673,7 +673,7 @@ public class TableauBordController {
 		public void chargeDataDao() {
 			 //Début DAO 
 			 daoTotal = ""+getDaoDossierTotal();
-			 daoAcSaisie = ""+getAcDaoSaisieDossier("D1S");
+			 daoAcSaisie = ""+getAcDaoSaisieDossier("D1S","D1R");
 			 daoAcPs=""+getAcDaoSaisiePs("SBO","SRO");
 			 daoPriseTrait=""+getAcDaoSaisiePs("SB1","DOP");
 			 daoChargeAttente = ""+getAcDaoAttenteCharge("D3A");
@@ -705,7 +705,7 @@ public class TableauBordController {
 		public void chargeDataDaoPs() {
 			 //Début DAO en procédure Simplifiée 
 			 daoTotalPs = ""+getDaoDossierTotalPs();
-			 daoAcSaisiePs = ""+getAcDaoSaisieDossierPs("D1S");
+			 daoAcSaisiePs = ""+getAcDaoSaisieDossierPs("D1S","D1R");
 			 daoAcPsPs=""+getAcDaoSaisiePs("SBO","SRO");
 			 daoPriseTraitPs=""+getAcDaoSaisiePs("SB1","DOP");
 			 daoChargeAttentePs = ""+getAcDaoAttenteChargePs("D3A");
@@ -1596,10 +1596,11 @@ public int getDaoDossierTotal(){
 return	i;	
 	} 
 //DAO saisi par le AC
-public int getAcDaoSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+public int getAcDaoSaisieDossier(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
@@ -1891,10 +1892,11 @@ public int getDaoDossierTotalPs(){
 return	i;	
 	} 
 //DAO saisi par le AC
-public int getAcDaoSaisieDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+public int getAcDaoSaisieDossierPs(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }

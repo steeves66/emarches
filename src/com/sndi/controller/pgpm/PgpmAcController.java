@@ -213,7 +213,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private String nbrePgspm ="";
 		 private String observation="";
 		 private String natPiece ="";
-		 private String baiCode;
+		 private String baiCode="";
 		 private String souCode;
 		 private String devCode="CFA";
 		 private String sit = "";

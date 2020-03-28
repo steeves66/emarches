@@ -256,13 +256,19 @@ public class PpmController {
 	 
 	 
 		 public String onFlowProcess(FlowEvent event) {
-		        if(skip) {
-		            skip = false;   //reset in case user goes back
-		            return "confirm";
-		        }
-		        else {
-		            return event.getNewStep();
-		        }
+			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
+				//Controle Pavé création
+				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
+		  			 if("".equals(detailPass.getDppStructureConduc()) || "".equals(detailPass.getDppStructureBenefi()) ||"".equals(tydCode) ||"".equals(detailPass.getDppBailleur())
+		  				  ||"".equals(pgpm.getGpgMopCode()) ||"".equals(pgpm.getGpgTymCode()) ||"".equals(ligne.getLbgCode()))
+		  			   {
+						 FacesContext.getCurrentInstance().addMessage(null,
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
+				          return "creation";
+						} 
+		 
+				     }
+			            return event.getNewStep();
 		    }
 		 
 		 
@@ -471,7 +477,17 @@ public class PpmController {
 								_logger.info("affichageListe size: "+validationListe.size());
 								//Actualisation du Tableau de Bord
 								tableauBordController.chargeDataPpm();
-					 }
+					 }else
+						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							  getValidationListe().clear();
+								validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+								"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
+								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
+								//new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+								_logger.info("affichageListe size: "+validationListe.size());
+								//Actualisation du Tableau de Bord
+								tableauBordController.chargeDataPpm(); 
+				     }
 			     } 
 			   }
 			 }
@@ -1378,6 +1394,7 @@ public class PpmController {
 		 		     histoPass.setTStatut(statuts);
 		 		     histoPass.setTDetailPlanPassation(detailPass);
 		 		     histoPass.setTFonction(userController.getSlctd().getTFonction());
+		 		     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 		 		     iservice.addObject(histoPass);
 		 			
 		 			chargeData();
@@ -1516,6 +1533,7 @@ public class PpmController {
 		 			     histoPass.setTStatut(statuts);
 		 			     histoPass.setTDetailPlanPassation(detailPass);
 		 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
+		 			     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 		 			     iservice.addObject(histoPass);
 		 				
 		 				chargeData();
@@ -1682,6 +1700,7 @@ public class PpmController {
 				     histoPass.setTStatut(statuts);
 				     histoPass.setTDetailPlanPassation(detailPass);
 				     histoPass.setTFonction(userController.getSlctd().getTFonction());
+				     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 				     iservice.addObject(histoPass);
 					
 					chargeData();
@@ -1812,6 +1831,7 @@ public class PpmController {
 					     histoPass.setTStatut(statuts);
 					     histoPass.setTDetailPlanPassation(detailPass);
 					     histoPass.setTFonction(userController.getSlctd().getTFonction());
+					     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 					     iservice.addObject(histoPass);
 						
 						chargeData();
@@ -1914,6 +1934,7 @@ public class PpmController {
 	  		     histoPass.setTStatut(statuts);
 	  		     histoPass.setTDetailPlanPassation(detailPass);
 	  		     histoPass.setTFonction(userController.getSlctd().getTFonction());
+	  		     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 	  		     iservice.addObject(histoPass);
 	  			
 	  			chargeData();
@@ -2006,6 +2027,7 @@ public class PpmController {
 	  		     histoPass.setTStatut(statuts);
 	  		     histoPass.setTDetailPlanPassation(detailPass);
 	  		     histoPass.setTFonction(userController.getSlctd().getTFonction());
+	  		     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 	  		     iservice.addObject(histoPass);
 	  			
 	  			//chargeData();
@@ -2160,6 +2182,7 @@ public class PpmController {
 							     histoPass.setTStatut(statuts);
 							     histoPass.setTDetailPlanPassation(passDetail);
 							     histoPass.setTFonction(userController.getSlctd().getTFonction());
+							     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 							     iservice.addObject(histoPass);
 										  
 								 userController.setTexteMsg("Transmission effectuée avec succès !");
@@ -2251,6 +2274,7 @@ public class PpmController {
 							     histoPass.setTStatut(statuts);
 							     histoPass.setTDetailPlanPassation(passDetail);
 							     histoPass.setTFonction(userController.getSlctd().getTFonction());
+							     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 							     iservice.addObject(histoPass);
 										  
 								 userController.setTexteMsg("Transmission effectuée avec succès !");
@@ -2288,7 +2312,11 @@ public class PpmController {
 		 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 		 							 statutUpdate ="S3V";
 		 							 passDetail.setDppDateValDmp(Calendar.getInstance().getTime());
-		 						 }
+		 						 }else
+		 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+		 								 statutUpdate ="S3V";
+			 							 passDetail.setDppDateValDmp(Calendar.getInstance().getTime());  
+		 					      }
 		 				     } 
 		 			//Parcourir la liste TAffichagePGPM et faire une mise a jour des different statut
 			 		for(TAffichagePpm lignePpm : listSelectionTransmission) {
@@ -2307,7 +2335,10 @@ public class PpmController {
 			 							 }else
 			 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 			 									passDetail.setDppDateValDmp(Calendar.getInstance().getTime()); 
-			 								 }
+			 								 }else
+			 									  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+			 										 passDetail.setDppDateValDmp(Calendar.getInstance().getTime());   
+			 									  }
 			 									 
 									passDetail.setTStatut(new TStatut(statutUpdate));
 									passDetail.setDppStatutRetour("0");
@@ -2326,7 +2357,10 @@ public class PpmController {
 	 							 }else
 	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 	 								   ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
-	 								 }
+	 								 }else
+	 									  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+	 										 ppm.setAffDppDateValDmp(Calendar.getInstance().getTime()); 
+	 									   }
 						        ppm.setTStatut(new TStatut(statutUpdate));
 						        ppm.setAffDppStatutRetour("0");
 						        iservice.updateObject(ppm);
@@ -2348,6 +2382,7 @@ public class PpmController {
 			     histoPass.setTStatut(statuts);
 			     histoPass.setTDetailPlanPassation(passDetail);
 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
+			     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 			     iservice.addObject(histoPass);
 						  
 				 userController.setTexteMsg(" Validation effectuée avec succès !");
@@ -2433,6 +2468,7 @@ public class PpmController {
 			     histoPass.setTStatut(statuts);
 			     histoPass.setTDetailPlanPassation(passDetail);
 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
+			     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 			     iservice.addObject(histoPass);
 						  
 				 userController.setTexteMsg(" Validation effectuée avec succès !");
@@ -2506,6 +2542,7 @@ public class PpmController {
 							     histoPass.setTStatut(statuts);
 							     histoPass.setTDetailPlanPassation(passDetail);
 							     histoPass.setTFonction(userController.getSlctd().getTFonction());
+							     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 							     iservice.addObject(histoPass);
 							     
 							     userController.setTexteMsg("Opération retournée avec succès !");
@@ -2584,6 +2621,7 @@ public class PpmController {
 									     histoPass.setTStatut(statuts);
 									     histoPass.setTDetailPlanPassation(passDetail);
 									     histoPass.setTFonction(userController.getSlctd().getTFonction());
+									     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 									     iservice.addObject(histoPass);
 			                      
 			                      

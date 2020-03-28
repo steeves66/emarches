@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 27 mars 2020 22:20:54 by Hibernate Tools 4.3.5.Final
+// Generated 28 mars 2020 03:24:07 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -46,7 +46,7 @@ public class TAffichageAgpm implements java.io.Serializable {
 
 	public TAffichageAgpm(long affId, TProjet TProjet, TSourceFinancement TSourceFinancement, TStatut TStatut,
 			TStructure TStructure, TDevise TDevise, TFinancement TFinancement, TFonction TFonction, TGestion TGestion,
-			TBailleur TBailleur, long affAgpId) {
+			long affAgpId) {
 		this.affId = affId;
 		this.TProjet = TProjet;
 		this.TSourceFinancement = TSourceFinancement;
@@ -56,7 +56,6 @@ public class TAffichageAgpm implements java.io.Serializable {
 		this.TFinancement = TFinancement;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
-		this.TBailleur = TBailleur;
 		this.affAgpId = affAgpId;
 	}
 
@@ -190,7 +189,7 @@ public class TAffichageAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_BAI_CODE", nullable = false)
+	@JoinColumn(name = "AFF_BAI_CODE")
 	public TBailleur getTBailleur() {
 		return this.TBailleur;
 	}
