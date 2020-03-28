@@ -11,9 +11,9 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
       <h1>
-        #{controleController.libelle} #{agpmController.slctdTd.affAgpId}" 
+        #{controleController.libelle} #{agpmController.slctdTd.affAgpId}
         
-        <small>Nouvel AGPM </small>
+        
       </h1>
       <ol class="breadcrumb">
       <li>
@@ -57,15 +57,10 @@
             <h:panelGroup rendered="#{agpmController.etatReferenceProjet}">
             <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-2 "><div  style="color: #fff">REFERENCE DU PROJET</div></div> 
-			         <div class="col-md-10 ">      
+                  <div class="col-md-7 "><div  style="color: #fff">INFORMATIONS SUR LE PROJET</div></div> 
+			         <div class="col-md-5 ">      
                       <!-- Combobox pour rappeler le projet existant -->
-				           <p:selectOneMenu id="numProjet" value="#{agpmController.proId}"
-		                      effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-		                    <f:selectItem  itemLabel="Saisir le projet" />  
-		                   <f:selectItems value="#{agpmController.acteListe}" var="pr" itemLabel="#{pr.proId} - #{pr.proTitre}" itemValue="#{pr.proId}"/>
-		                   <p:ajax listener="#{agpmController.rechercheProjet()}" update=":gnl" /> 
-		                  </p:selectOneMenu>
+				          
                      <!-- Fin de la combobox -->
 			          </div>
                    </div>
@@ -175,7 +170,7 @@
                   <label for="l6" class="col-sm-3 control-label">Description du projet / Programme<span style="color:red;"> *</span></label>
 
                   <div class="col-sm-9">
-                    <p:inputTextarea placeholder="Le gouvernement de la Republique de Côte d'Ivoire a obtenu ..." value="#{agpmController.agpm.agpCommentaire}" rows="8" cols="33" styleClass="form-control" id="l6" style="width: 100%" >
+                    <p:inputTextarea placeholder="Le gouvernement de la Republique de Côte d'Ivoire a obtenu ..." value="#{agpmController.slctdTd.affAgpCommentaire}" rows="8" cols="33" styleClass="form-control" id="l6" style="width: 100%" >
                     </p:inputTextarea>
                     
                   </div>
@@ -251,7 +246,7 @@
 	                <div class="form-group ">
 	                  <label for="xmontDev" class="col-sm-2 control-label"><b>Montant en Devise</b></label>
 	                  <div class="col-sm-10">
-	                    <p:inputText type="text" value="#{agpmController.newFinancement.finMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{agpmController.slctdTd.TFinancement.finMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                    <p:ajax event="blur" process="@this" update="xmontDev" /> 
 	                    </p:inputText>
@@ -289,7 +284,7 @@
 	                <div class="form-group ">
 	                  <label for="accord" class="col-sm-2 control-label"><b>N° Accord</b></label>
 	                  <div class="col-sm-10">
-	                    <p:inputText type="text" value="#{agpmController.newFinancement.finNumeroAccord}" id="accord" styleClass="form-control"  style="width: 100%" />
+	                    <p:inputText type="text" value="#{agpmController.slctdTd.TFinancement.finNumeroAccord}" id="accord" styleClass="form-control"  style="width: 100%" />
 	                  </div>
 	                </div>               
 	           
@@ -501,7 +496,7 @@
              
             </p:panel>
             </p:tab>
-            <p:tab id="a" title="Informations sur l'organe d'exécution" rendered= "#{agpmController.etatPavetOrgne}" titleStyle="background-color: #f88b2e;background-image: none">
+            <p:tab id="a" title="Informations sur l'organe d'exécution"  titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel header="Informations sur l'organe d'exécution">
              <div class="row">
             
@@ -533,37 +528,37 @@
             <div class="form-group">
                   <label for="l14" class="col-sm-4 control-label">Nom de l’organe d’exécution </label>
                   <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.declarant.decOrganExecLibelle}" styleClass="form-control" id="l14"  style="width: 100%"/>
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decOrganExecLibelle}" styleClass="form-control" id="l14"  style="width: 100%"/>
                   </div>
                 </div>
                  <div class="form-group">
                   <label for="l13" class="col-sm-4 control-label">Adresse de l’organe d’exécution </label>
                   <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.declarant.decOrganExecAdresse}" styleClass="form-control" id="l13" style="width: 100%"/>
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decOrganExecAdresse}" styleClass="form-control" id="l13" style="width: 100%"/>
                   </div>
                 </div>
                  <div class="form-group">
                   <label for="np" class="col-sm-4 control-label">Personne à contacter M/Mme <span style="color:red;"> *</span></label>
                   <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.declarant.decPersNomPrenom}"  styleClass="form-control" id="np" style="width: 100%"/>
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decPersNomPrenom}"  styleClass="form-control" id="np" style="width: 100%"/>
                   </div>
                 </div>
                  <div class="form-group">
                   <label for="l8" class="col-sm-4 control-label">Fonction <span style="color:red;"> *</span></label>
                   <div class="col-sm-8">
-                   <p:inputText  type="text" value="#{agpmController.declarant.decPersFonction}"  styleClass="form-control" id="l8" style="width: 100%"/>
+                   <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decPersFonction}"  styleClass="form-control" id="l8" style="width: 100%"/>
                   </div>
                 </div>
                  <div class="form-group">
                   <label for="l11" class="col-sm-4 control-label">Localisation précise du bureau </label>
                   <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.declarant.decLocalisation}" styleClass="form-control" id="l11" style="width: 100%"/>
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decLocalisation}" styleClass="form-control" id="l11" style="width: 100%"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="l12" class="col-sm-4 control-label">Numéro de porte </label>
                   <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.declarant.decNumeroPorte}" styleClass="form-control" id="l12" style="width: 100%">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decNumeroPorte}" styleClass="form-control" id="l12" style="width: 100%">
                     <p:keyFilter regEx="/[\d\-\.]/"/> 
                     </p:inputText>
                   </div>
@@ -571,7 +566,7 @@
                  <div class="form-group">
                   <label for="l10" class="col-sm-4 control-label">Boîte postale <span style="color:red;"> *</span></label>
                   <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.declarant.decBp}" styleClass="form-control" id="l10" style="width: 100%">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decBp}" styleClass="form-control" id="l10" style="width: 100%">
                      
                     </p:inputText>
                   </div>
@@ -579,19 +574,19 @@
                 <div class="form-group">
                   <label for="l993" class="col-sm-4 control-label">Celullaire <span style="color:red;"> *</span></label>
                   <div class="col-sm-8">
-                     <p:inputMask mask="(+999) 99-99-99-99" value="#{agpmController.declarant.decCel}" styleClass="form-control" id="l993" style="width: 100%"/>
+                     <p:inputMask mask="(+999) 99-99-99-99" value="#{agpmController.slctdTd.TDeclarant.decCel}" styleClass="form-control" id="l993" style="width: 100%"/>
                   </div>
                 </div>
                  <div class="form-group">
                   <label for="l9" class="col-sm-4 control-label">Numéro de téléphone <span style="color:red;"> *</span></label>
                   <div class="col-sm-8">
-                     <p:inputText value="#{agpmController.declarant.decTelephone}" styleClass="form-control" id="l9" style="width: 100%"/>
+                     <p:inputText value="#{agpmController.slctdTd.TDeclarant.decTelephone}" styleClass="form-control" id="l9" style="width: 100%"/>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="l15" class="col-sm-4 control-label">Adresse Email </label>
                   <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.declarant.decEmail}" styleClass="form-control" id="l15" style="width: 100%">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decEmail}" styleClass="form-control" id="l15" style="width: 100%">
                     <p:keyFilter regEx="/[a-z0-9_\.\-@]/i"/> 
                     </p:inputText>
                   </div>
@@ -602,76 +597,7 @@
           </h:panelGroup>
          </h:panelGroup> 
           
-          <h:panelGroup id="declarant_rappel">
-             <h:panelGroup rendered="#{agpmController.etatPanelOrganeRappel}">
-       
-            <!-- /.box-header -->
-            <div class="box-body">
-               <div class="form-group">
-                  <label for="organ1" class="col-sm-4 control-label">Nom de l’organe d’exécution</label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decOrganExecLibelle}" styleClass="form-control" id="organ1" readonly="true" style="width: 100%"/>
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label for="bp1" class="col-sm-4 control-label">Adresse de l’organe d’exécution</label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decBp}" styleClass="form-control" readonly="true" id="bp1" style="width: 100%"/>
-                  </div>
-                </div>
-            <div class="form-group">
-                  <label for="np1" class="col-sm-4 control-label">Personne à contacter M/Mme <span style="color:red;"> *</span></label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decPersNomPrenom}" readonly="true"  styleClass="form-control" id="np1" style="width: 100%"/>
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label for="fon1" class="col-sm-4 control-label" >Fonction <span style="color:red;"> *</span></label>
-                  <div class="col-sm-8">
-                   <p:inputText  type="text" value="#{agpmController.rappelDec.decPersFonction}" readonly="true" styleClass="form-control" id="fon1" style="width: 100%"/>
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label for="loc1" class="col-sm-4 control-label">Localisation précise du bureau</label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decLocalisation}" readonly="true" styleClass="form-control" id="loc1" style="width: 100%"/>
-                  </div>
-                </div>
-                  <div class="form-group">
-                  <label for="porte1" class="col-sm-4 control-label">Numéro de porte</label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decNumeroPorte}" readonly="true" styleClass="form-control" id="porte1" style="width: 100%"/>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="mail1" class="col-sm-4 control-label">Boîte postale<span style="color:red;"> *</span></label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decEmail}" readonly="true" styleClass="form-control" id="mail1" style="width: 100%"/>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="tele123" class="col-sm-4 control-label">Celullaire<span style="color:red;"> *</span></label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decCel}" readonly="true" styleClass="form-control" id="tele123" style="width: 100%"/>
-                  </div>
-                </div>
-                 <div class="form-group">
-                  <label for="tele1" class="col-sm-4 control-label">Numéro de téléphone<span style="color:red;"> *</span></label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decTelephone}" readonly="true" styleClass="form-control" id="tele1" style="width: 100%"/>
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="adress1" class="col-sm-4 control-label">Adresse Email</label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.rappelDec.decEmail}" readonly="true" styleClass="form-control" id="adress1" style="width: 100%"/>
-                  </div>
-                </div>
-            </div>
-            <!-- /.box-body -->
-        
-          </h:panelGroup>
-        </h:panelGroup>
+          
           
   
            

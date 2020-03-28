@@ -30,6 +30,7 @@ import com.sndi.model.TBailleur;
 import com.sndi.model.TBesoin;
 import com.sndi.model.TComposante;
 import com.sndi.model.TContenuAgpm;
+import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDeclarant;
 import com.sndi.model.TDetailAgpm;
 import com.sndi.model.TDevise;
@@ -51,6 +52,7 @@ import com.sndi.model.VAgpmBailleur;
 import com.sndi.model.VAgpmDeclarant;
 import com.sndi.model.VAgpmDetails;
 import com.sndi.model.VAgpmStatut;
+import com.sndi.model.VDetailCorrection;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VProjetAgpm;
 import com.sndi.report.ProjetReport;
@@ -263,7 +265,34 @@ public class AgpmController {
 					}
 		      }
 	  
-	 
+	//Charger la liste des pièces et observations à examiner par le chef de service suivie de l'observation donnée par le responsable
+		 public void editForm() {
+			 affichageListe= (List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+					    new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+							
+						if (!affichageListe.isEmpty()) {
+							slctdTd = affichageListe.get(0);
+					    }
+		             }
+		 
+		 public void deleteAgpm(){
+			 //Suppression du finacement
+			  affichageListe= (List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+					    new WhereClause("AFF_FIN_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTFinancement().getFinId()));	
+						if (!affichageListe.isEmpty()) {
+							slctdTd = affichageListe.get(0);
+							iservice.deleteObject(slctdTd);
+					    }
+				
+				
+			 affichageListe= (List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+					    new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));	
+						if (!affichageListe.isEmpty()) {
+							slctdTd = affichageListe.get(0);
+							iservice.deleteObject(slctdTd);
+					    }
+						
+		 }
 	  
 	  public void verifDeclarant() { 
 		  listeDeclarantsRappel = ((List<VAgpmDeclarant>) iservice.getObjectsByColumn("VAgpmDeclarant", new ArrayList<String>(Arrays.asList("AGP_ID")),
@@ -1654,7 +1683,11 @@ public class AgpmController {
 					chargeDossierDetail();
 					break;
 				case "agpm3":
-					
+					editForm();
+					sourfin = slctdTd.getTFinancement().getFinTypeFinance();
+					baiCode= slctdTd.getTBailleur().getBaiCode();
+					souCode = slctdTd.getTSourceFinancement().getSouCode();
+					devCode = slctdTd.getTDevise().getDevCode();
 					break;
 			    }
 		     
@@ -2908,6 +2941,6 @@ public class AgpmController {
 	public void setSelectPartBai(boolean selectPartBai) {
 		this.selectPartBai = selectPartBai;
 	}
-	
+
     
 }
