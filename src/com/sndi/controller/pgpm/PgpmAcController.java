@@ -440,10 +440,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 										validationListe = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 												"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPG")),
 												new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
-										       tableauBordController.chargeDataPgspm();
-										       multiFiltre="";
 										_logger.info("affichageListe size: "+validationListe.size());
-										
+										       tableauBordController.chargeDataPgspm();
+										       multiFiltre="";	
 						    	  }
 			               }
 		 
@@ -470,15 +469,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectTresor = true;
 					 selectPartBai = true;
 					 sourfin="";
-				 }else if(sourfin.equalsIgnoreCase("Etat")){
+				 }else 
+					 if(sourfin.equalsIgnoreCase("Etat")){
 					 selectBailleur = false;
 					 selectTresor = true;
 					 selectPartBai= false;
 					 souCode="TRE";
 				    }else {
 				    	  selectPartBai = false;
-				    	 selectBailleur = false;
-						 selectTresor = false;
+				    	  selectBailleur = false;
+						  selectTresor = false;
 				    }
 			 }
 			
@@ -2521,7 +2521,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     		 newFinancement = new TFinancementPgpm();
     		 listeFinancement = new ArrayList<TFinancementPgpm>();
     		 etatDossier = false;
-    		 plan = new TPlanGeneral(); 
+    		 //plan = new TPlanGeneral(); 
     		 devCode ="";
     		 baiCode ="";
     		 souCode=""; 

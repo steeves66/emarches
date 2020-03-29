@@ -535,10 +535,10 @@ public class AgpmController {
 		                     etatBoutonEnregDeclarant=false;
 		                     etatPanelConfirmation=false;
 		                     etatPanelConfirmationRappel=true; 
-		                     boutonEdit = true;
+		                     
 		                     //agpm.getTDeclarant().getDecId();
 		                     //etatComboRappel = true;
-		                     boutonEdit = true; 
+		                     boutonEdit = false; 
 		                     boutonEditRappel = true;
 		                     etatPavetDossier = true;
 		                     //etatPanelConfirmationProjet=false;
@@ -551,7 +551,7 @@ public class AgpmController {
 		                     decId =0;
 		                     boutonEdit = true;
 		                     boutonEditRappel = false;
-		                     boutonEdit =false;
+		               
 		                     etatPavetDossier = false;
 		                     //rappelDeclarant();
 		                     //etatPanelConfirmationProjet=true;
@@ -838,7 +838,7 @@ public class AgpmController {
 	    	 				     		  					userController.setSevrityMsg("success");
 	    	 				     		  					etatPavetDeclarant= true;
 	    	 				     		  					etatAutreInfo= false;
-	    	 				     		  					etatPavetDossier= true; 
+	    	 				     		  					etatPavetDossier= false; 
 	    	 				     		  					etatPavetInfoProjet= true; 
 	    	 				     		  					etatPavetOrgne= true;
 	    	 				     		  					btn_saveProjet =false;
@@ -1049,6 +1049,7 @@ public class AgpmController {
 							
 							boutonEdit=true;
 							boutonAdd = false;
+							etatPavetDossier = true;
 				         } 
 				 boutonEdit=true;
 				 boutonAdd = false;
@@ -1079,15 +1080,13 @@ public class AgpmController {
 							boutonAdd = false;
 				         } 
 				   
-				   String search = affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre()+""+affichageAgpm.getTDeclarant().getDecOrganExecLibelle();
-				   String rechercheAll = search.replace("null","");
 				   
 				   List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
      						new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
  					TAffichageAgpm affgp = new TAffichageAgpm();
  					if(!AFG.isEmpty()) affgp =AFG.get(0); 
  					affgp.setTDeclarant(affichageAgpm.getTDeclarant());
-					affgp.setAffAgpRecherche(rechercheAll);
+					//affgp.setAffAgpRecherche(rechercheAll);
  					iservice.updateObject(affgp);
 				   
 				  boutonEdit=true;
