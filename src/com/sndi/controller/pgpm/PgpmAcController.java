@@ -433,6 +433,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 												new WhereClause("AFF_GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 											_logger.info("affichageListe size: "+validationListe.size());
 											tableauBordController.chargeDataPgspm();
+											multiFiltre="";
 						        }else 
 						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						    		  getValidationListe().clear();
@@ -440,26 +441,40 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 												"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPG")),
 												new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
 										       tableauBordController.chargeDataPgspm();
-										_logger.info("affichageListe size: "+validationListe.size());	
+										       multiFiltre="";
+										_logger.info("affichageListe size: "+validationListe.size());
+										
 						    	  }
 			               }
 		 
 		
+			
+			
+			//Tri sur les types de financement  
+			public void chargeSourceCheck() { 
+			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
+			      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
+				}
 			 
 			 public void checkBailleur() {
+				 sourfin="";
 				 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 					 selectBailleur = true;
 					 selectTresor = false;
 					 selectPartBai = true;
+					 chargeSourceCheck();
+					 sourfin="";
 				 }else
 				      if(sourfin.equalsIgnoreCase("Cofinance")){
 					 selectBailleur = true; 
 					 selectTresor = true;
 					 selectPartBai = true;
+					 sourfin="";
 				 }else if(sourfin.equalsIgnoreCase("Etat")){
 					 selectBailleur = false;
 					 selectTresor = true;
 					 selectPartBai= false;
+					 souCode="TRE";
 				    }else {
 				    	  selectPartBai = false;
 				    	 selectBailleur = false;
@@ -468,7 +483,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }
 			
 			
-			//Filtre multicritère pour les PGPM
+			//Filtre multicritère pour les PGSPM
 			public void chargerPgspmRecherche() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						 getObjetList().clear();
@@ -478,7 +493,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								new WhereClause("AFF_GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						        new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							_logger.info("objetListe size: "+objetList.size());	 
-							tableauBordController.chargeDataPgpmPgspm();
+							tableauBordController.chargeDataPgspm();
 							nbrePgpm =""+getNbrePgpmTotal();
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -488,7 +503,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 												new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 												new WhereClause("AFF_GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 												new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-									 tableauBordController.chargeDataPgpmPgspm();;
+									 tableauBordController.chargeDataPgspm();;
 											_logger.info("validationListePgspm size: "+validationListePgspm.size());	
 						        }else 
 						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
@@ -497,7 +512,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 												new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 										        new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
 												new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-										tableauBordController.chargeDataPgpmPgspm();
+										tableauBordController.chargeDataPgspm();
 										_logger.info("validationListePgspm size: "+validationListePgspm.size());
 						    	  }
 			               }
@@ -1705,7 +1720,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					     chargePgpmDifCp();
 					     chargePgpmDifDmp();
 			 			 
-					     tableauBordController.chargeDataPgpmPgspm(); 	  
+					     tableauBordController.chargeDataPgpm(); 	  
 						
 					      userController.setTexteMsg(" Désolé, votre PGPM a été rejeté!");
 						  userController.setRenderMsg(true);
@@ -1809,7 +1824,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								   histoPgpm= listeHisto.get(0); 
 							   }
 				    
-				      chargeData();
+				      chargeDataPgspm();
 				    
 				    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
 				    TStatut statuts = new TStatut();
