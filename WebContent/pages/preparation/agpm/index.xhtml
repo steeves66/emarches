@@ -442,15 +442,15 @@
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.affichageListe}" emptyMessage="Aucun Avis enregistré" rows="10" 
                          paginator="true" draggableColumns="true"
                          rowsPerPageTemplate="5,10,15" >
-                          <p:column headerText="N°" style="width:#{controleController.numero}">
-                          
+                         
+                       <p:column headerText="N°Accord" styleClass="#{controleController.accord}">
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affAgpId}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affAgpId}"/>
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
          				</h:panelGroup>
-				        </p:column>
+				        </p:column> 
                          
                          <p:column headerText="Bailleur" styleClass="#{controleController.bailleur}">
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
@@ -460,37 +460,30 @@
          				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
-				         <p:column headerText="N°Accord" styleClass="#{controleController.accord}">
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
-         				</h:panelGroup>
-				        </p:column>
+				        
 				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}" style="overflow:auto;" 
 				         rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         			    <h:outputText value="#{slctdTb.TStructure.strLibelleLong}"/>
+         			    <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				        
-				        <p:column headerText="Autorité Contractante" styleClass="#{controleController.autorite}"  
+				        <p:column headerText="AC" styleClass="#{controleController.autorite}"  
 				        rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}"/>
+         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
                          
                          
-                         <p:column headerText="Projet / Programme" styleClass="#{controleController.projet}" >
+                         <p:column headerText="Projet/Programme" styleClass="#{controleController.projet}" >
                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -550,13 +543,13 @@
 					<p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.validationListe}"  emptyMessage="Aucun AGPM enregistré" rows="10" 
                          paginator="true"
                          rowsPerPageTemplate="5,10,15" >
-                 
-                       <p:column headerText="N°" style="width:#{controleController.numero} ">
+
+				        <p:column headerText="N°Accord" styleClass="#{controleController.accord}" >
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affAgpId}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affAgpId}"/>
+         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
          				</h:panelGroup>
 				        </p:column>
                          
@@ -568,32 +561,23 @@
          				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
-				        
-				        <p:column headerText="N°Accord" styleClass="#{controleController.accord}" >
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
-         				</h:panelGroup>
-				        </p:column>
-				        
+				               
 				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}"  >
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TStructure.strLibelleLong}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TStructure.strLibelleLong}"/>
+         				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				        
-				         <p:column headerText="Autorité Contractante" styleClass="#{controleController.autorite}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+				         <p:column headerText="AC" styleClass="#{controleController.autorite}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonCod}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonCod}"/>
+         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
                          
@@ -616,8 +600,8 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
-				         <p:column headerText="Date Reception" styleClass="#{controleController.datevalac}" >
+				         
+				         <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
          				<h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.agpDateValAc}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -625,16 +609,11 @@
          				<h:outputText value="#{slctdTb.agpDateValAc}"/>
          				</h:panelGroup>
 				        </p:column>
-				        </h:panelGroup>
 				        
-				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
-				        <p:column headerText="Date Reception" styleClass="#{controleController.datevalcpmp}" >
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
          				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
 				        </p:column>
-				        </h:panelGroup>
-				        
-				        
-				         
+				          
 				       
                       <p:column headerText="Actions" style="width:#{controleController.actions} ">
                       
@@ -660,7 +639,7 @@
                                
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-                              <p:commandLink action="#{agpmController.differer()}"   styleClass="btn btn-xs btn-danger" style="background-color: red; margin-left: 3px" title="Différer" update=":content">
+                              <p:commandLink action="#{agpmController.reDifferer()}"   styleClass="btn btn-xs btn-danger" style="background-color: red; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
                                 <p:confirm header="Confirmation" message="Voulez-vous confirmer la retour de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
@@ -756,30 +735,37 @@
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					   <p:column headerText="N°" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affAgpId}" />
-				        </p:column>
+			            
+			             <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>   
+					  
 						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
 				        </p:column>
-				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
-				        </p:column>
+				       
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}:#{slctdTb.TFonction.fonCod" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}"/>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
 				        </p:column>
 				      
 						</p:dataTable>
@@ -821,30 +807,37 @@
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValCp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-			               <p:column headerText="N°" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affAgpId}" />
-				        </p:column>
+			            
+			            <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column> 
+			              
 						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
 				        </p:column>
-				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
-				        </p:column>
-				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        
+				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}"/>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
 				        </p:column>
 					   
 				      
@@ -883,30 +876,37 @@
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			             
+			            <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column> 
 			               
-			               <p:column headerText="N°" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affAgpId}" />
-				        </p:column>
 						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
 				        </p:column>
-				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
-				        </p:column>
+				        
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}"/>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
 				        </p:column>
 					    
 				      
@@ -942,29 +942,36 @@
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-					      <p:column headerText="N°" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affAgpId}" />
+					     <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
 				        </p:column>
+				        
 						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
 				        </p:column>
-				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
-				        </p:column>
-				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				       
+				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}"/>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
 				        </p:column>
 				      
 						</p:dataTable>
@@ -999,30 +1006,37 @@
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
-			               
-					     <p:column headerText="N°" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affAgpId}" />
-				        </p:column>
+			            
+			             <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+				        </p:column>  
+					    
 						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
 				        </p:column>
-				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
-				        </p:column>
-				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        
+				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}"/>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
 				        </p:column>
 				      
 						</p:dataTable>
@@ -1058,29 +1072,36 @@
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-					      <p:column headerText="N°" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affAgpId}" />
+		                <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
 				        </p:column>
+		
 						<p:column headerText="Bailleur" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
 				        </p:column>
-				        <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
-				        </p:column>
-				        <p:column headerText="Structure" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.strLibelleLong}" />
+				        
+				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}"/>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}"/>
 				        </p:column>
 				      
 						</p:dataTable>

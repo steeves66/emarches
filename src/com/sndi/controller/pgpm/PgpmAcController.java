@@ -137,7 +137,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 
 	    //Declaration des listes
 		//private List<TDetailPlanGeneral> objetListe = new ArrayList<TDetailPlanGeneral>();
-	     private List <VPgpmStatut> pgpmstatutList = new ArrayList<VPgpmStatut>();
+	     private List <VPgpmStatut> pgpmstatutList = new ArrayList<VPgpmStatut>(); 
+	     private List<THistoPlanGeneral> listeHisto = new ArrayList<THistoPlanGeneral>();
 	     private List<VPgpm> objetListe = new ArrayList<VPgpm>();
 	     private List<TAffichagePgpm> objetList = new ArrayList<TAffichagePgpm>();
 	     private List<TAffichagePgpm> listPgpm = new ArrayList<TAffichagePgpm>();
@@ -196,6 +197,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private TFinancementPgpm selectFinance = new TFinancementPgpm();
 		 //private TAgpm agpm = new TAgpm();
 		 private VAgpmFonction agpm = new VAgpmFonction();
+		 private THistoPlanGeneral histoPgpm = new THistoPlanGeneral();
 		 private TAgpm recupAgpm = new TAgpm();
 		 private TDetailPlanGeneral demDetail = new TDetailPlanGeneral();
 		 private TAffichagePgpm slctdTd = new TAffichagePgpm();
@@ -1646,6 +1648,73 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					}
 		 }
 		 
+		//Redifférer par la CPMP 
+		 @Transactional
+		 public void reDifferer() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 statutUpdate ="";
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 statutUpdate ="S2D";
+				 } 
+			 }
+			 
+			 listeDetail =(List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+						new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+					if (!listeDetail.isEmpty()) {
+						demDetail= listeDetail.get(0);
+						demDetail.setTStatut(new TStatut(statutUpdate));
+						demDetail.setGpgStatutRetour("1");
+				        iservice.updateObject(demDetail);
+				       
+
+						 listeHisto =(List<THistoPlanGeneral>) iservice.getObjectsByColumn("THistoPlanGeneral", new ArrayList<String>(Arrays.asList("HPG_ID")),
+									new WhereClause("HPG_GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()),
+									new WhereClause("HPG_STA_CODE",WhereClause.Comparateur.EQ,"S3D"));
+						   if (!listeHisto.isEmpty()) {
+							   histoPgpm= listeHisto.get(0); 
+						   }
+			    
+			      chargeData();
+			    
+			    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
+			    TStatut statuts = new TStatut();
+			      if(!LS.isEmpty()) statuts = LS.get(0);
+			  //Historisation des Plans Généraux
+			     THistoPlanGeneral histoPlan = new THistoPlanGeneral();
+			     histoPlan.setHpgDate(Calendar.getInstance().getTime());
+			     histoPlan.setHpgMotif(histoPgpm.getHpgMotif());
+			     histoPlan.setTStatut(statuts);
+			     histoPlan.setTDetailPlanGeneral(demDetail);
+			     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+			     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
+			     iservice.addObject(histoPlan); 
+			     
+			     
+			 	//Enregistrement de TAffichage
+				  validationListe =(List<TAffichagePgpm>) iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+							new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+					TAffichagePgpm affiche = new TAffichagePgpm();
+					if (!validationListe.isEmpty()) {
+						affiche= validationListe.get(0);
+						affiche.setTStatut(new TStatut(statutUpdate));
+						affiche.setAffGpgStatutRetour("1");
+					    iservice.updateObject(affiche);
+				        
+					     chargeDataAvaliderPgpm();
+					     chargePgpmDifCp();
+					     chargePgpmDifDmp();
+			 			 
+					     tableauBordController.chargeDataPgpmPgspm(); 	  
+						
+					      userController.setTexteMsg(" Désolé, votre PGPM a été rejeté!");
+						  userController.setRenderMsg(true);
+						  userController.setSevrityMsg("success");
+				  		
+                        }
+					}
+		 }
+		 
 		 
 		 //DIFFERER PGSPM CPMP ET DMP
 	      //Differer
@@ -1703,11 +1772,81 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				     
 				     //chargeDataAvaliderPgpm();
 		 			    chargeDataAvaliderPgspm();
-		 			   tableauBordController.chargeDataPgpmPgspm();
+		 			   tableauBordController.chargeDataPgspm();
 					
 					 
 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre Agpm a été retourné!", "");
 				     FacesContext.getCurrentInstance().addMessage(null, msg);
+						}
+			 }
+			 
+			 
+			 
+			//Redifférer par la CPMP 
+			 @Transactional
+			 public void reDiffererPgspm() {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					 statutUpdate ="";
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+						 statutUpdate ="S2D";
+					 } 
+				 }
+				 
+				 listeDetail =(List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+							new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+						if (!listeDetail.isEmpty()) {
+							demDetail= listeDetail.get(0);
+							demDetail.setTStatut(new TStatut(statutUpdate));
+							demDetail.setGpgStatutRetour("1");
+					        iservice.updateObject(demDetail);
+					       
+
+							 listeHisto =(List<THistoPlanGeneral>) iservice.getObjectsByColumn("THistoPlanGeneral", new ArrayList<String>(Arrays.asList("HPG_ID")),
+										new WhereClause("HPG_GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()),
+										new WhereClause("HPG_STA_CODE",WhereClause.Comparateur.EQ,"S3D"));
+							   if (!listeHisto.isEmpty()) {
+								   histoPgpm= listeHisto.get(0); 
+							   }
+				    
+				      chargeData();
+				    
+				    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
+				    TStatut statuts = new TStatut();
+				      if(!LS.isEmpty()) statuts = LS.get(0);
+				  //Historisation des Plans Généraux
+				     THistoPlanGeneral histoPlan = new THistoPlanGeneral();
+				     histoPlan.setHpgDate(Calendar.getInstance().getTime());
+				     histoPlan.setHpgMotif(histoPgpm.getHpgMotif());
+				     histoPlan.setTStatut(statuts);
+				     histoPlan.setTDetailPlanGeneral(demDetail);
+				     histoPlan.setTFonction(userController.getSlctd().getTFonction());
+				     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
+				     iservice.addObject(histoPlan); 
+				     
+				     
+				 	//Enregistrement de TAffichage
+					  validationListe =(List<TAffichagePgpm>) iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+								new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+						TAffichagePgpm affiche = new TAffichagePgpm();
+						if (!validationListe.isEmpty()) {
+							affiche= validationListe.get(0);
+							affiche.setTStatut(new TStatut(statutUpdate));
+							affiche.setAffGpgStatutRetour("1");
+						    iservice.updateObject(affiche);
+					        
+						    
+						     chargePgpmDifCp();
+						     chargePgpmDifDmp();
+				 			 
+						     chargeDataAvaliderPgspm();
+				 			 tableauBordController.chargeDataPgspm(); 	  
+							
+						      userController.setTexteMsg(" Désolé, votre PGPM a été retourné!");
+							  userController.setRenderMsg(true);
+							  userController.setSevrityMsg("success");
+					  		
+	                        }
 						}
 			 }
 		 
@@ -3510,6 +3649,26 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setSelectPartBai(boolean selectPartBai) {
 		this.selectPartBai = selectPartBai;
+	}
+
+
+	public List<THistoPlanGeneral> getListeHisto() {
+		return listeHisto;
+	}
+
+
+	public void setListeHisto(List<THistoPlanGeneral> listeHisto) {
+		this.listeHisto = listeHisto;
+	}
+
+
+	public THistoPlanGeneral getHistoPgpm() {
+		return histoPgpm;
+	}
+
+
+	public void setHistoPgpm(THistoPlanGeneral histoPgpm) {
+		this.histoPgpm = histoPgpm;
 	}
 	
 	

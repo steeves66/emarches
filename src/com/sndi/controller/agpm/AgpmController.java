@@ -113,6 +113,8 @@ public class AgpmController {
 	 private List<TAffichageAgpm> affichageListe = new ArrayList<TAffichageAgpm>();
 	 private List<VAgpm> objetListe = new ArrayList<VAgpm>();
 	 private List<TAgpm> listeAgpm = new ArrayList<TAgpm>();
+	 private List<TProjet> projetUpdate = new ArrayList<TProjet>();
+	 private List<THistoAgpm> listeHisto = new ArrayList<THistoAgpm>();
 	 private List<String> ajoutParagraphe = new ArrayList<String>();
 	 private List<TBailleur> listeBailleurs = new ArrayList<TBailleur>();
 	 private List<TSourceFinancement> listeSourceFinance = new ArrayList<TSourceFinancement>();
@@ -153,6 +155,7 @@ public class AgpmController {
 	 private TAgpm agpm = new TAgpm();
 	 private TAffichageAgpm affichageAgpm = new TAffichageAgpm();
 	 private TAgpm demAgpm = new TAgpm();
+	 private THistoAgpm histoAgpm = new THistoAgpm();
 	 private TDetailAgpm detail = new TDetailAgpm();
 	 private VAgpm addAgpm = new VAgpm(); 
 	 private VAgpmDeclarant rappelDec = new VAgpmDeclarant();
@@ -714,8 +717,8 @@ public class AgpmController {
 	  @Transactional
 	  public void creerProjet() throws IOException{
 	      		 
-	    VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
-	      if(bai == null) {
+	   /* VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
+	      if(bai == null) {*/
 	                           
 	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
 	                      //Message d'erreur
@@ -723,87 +726,129 @@ public class AgpmController {
 	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs", ""));	 
 	                           
 	    	                }else {
-	                            	//Insertion dans T_Projet
-	                                iservice.addObject(projet);
-	        		      			//Insertion dans T_AGPM	 
-	     	      				    agpm.setTGestion(new TGestion(gesCode));
-	     	      				    agpm.setTStatut(new TStatut("S1S"));
-	     	      				    agpm.setAgpActif("1");
-	     	      				    agpm.setAgpStatutRetour("0");
-	     	      			        agpm.setTProjet(projet);
-	     	      			        agpm.setAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	     	      				    agpm.setTFonction(userController.getSlctd().getTFonction());
-	     	      				    agpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	     	      				    iservice.addObject(agpm);
-	     	      				    //Enregistre un financement
-	     		      				newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
-	     		     			    newFinancement.setTDevise(new TDevise(devCode));
-	     		     			    newFinancement.setTBailleur(new TBailleur(baiCode));
-	     		     			    newFinancement.setFinTypeFinance(sourfin);
-	     		     			    newFinancement.setFinStatut("1");
-	     		     			    newFinancement.setTAgpm(agpm);
-	     		     			    newFinancement.setTProjet(projet);
-	     		     				iservice.addObject(newFinancement);
-	     		      				rappelProjet();
-	     		      				List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-	     		  					TStatut statuts = new TStatut();
-	     		  					if(!LS.isEmpty()) statuts = LS.get(0);
-	     		  					//Historisation des Agpm
-	     		  					THistoAgpm agpmStatut = new THistoAgpm();
-	     		  					agpmStatut.setHagDate(Calendar.getInstance().getTime());
-	     		  					agpmStatut.setHagMotif("Création de l'agpm par l'Autorité Contractante");
-	     		  					agpmStatut.setTFonction(userController.getSlctd().getTFonction());
-	     		  					agpmStatut.setTOperateur(userController.getSlctd().getTOperateur());
-	     		  					agpmStatut.setTStatut(statuts);
-	     		  					agpmStatut.setTAgpm(agpm);
-	     		  					iservice.addObject(agpmStatut);
-	     		  						  
-	     		  					//Insertion dans TAffichageAgpm
-	     		  					affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
-	     		  					affichageAgpm.setAffAgpActif(agpm.getAgpActif());
-	     		  					affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
-	     		  					affichageAgpm.setAffAgpId(agpm.getAgpId());
-	     		  					affichageAgpm.setTBailleur(new TBailleur(baiCode));
-	     		  					affichageAgpm.setTDevise(new TDevise(devCode));
-	     		  					affichageAgpm.setTFinancement(newFinancement);
-	     		  					affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
-	     		  					affichageAgpm.setTFonction(userController.getSlctd().getTFonction());
-	     		  					affichageAgpm.setAffAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	     		  					affichageAgpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	     		  					affichageAgpm.setTGestion( new TGestion(gesCode));
-	     		  					affichageAgpm.setTProjet(projet);
-	     		  					affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));
-	     		  					affichageAgpm.setTStatut(statuts);
-	     		  					iservice.addObject(affichageAgpm); 
-	     		  						
-	     		  					
-	     		  					String search = affichageAgpm.getAffAgpId()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
-	    							String rechercheAll = search.replace("null","");
-	    							
-	     		  						
-	     		  					List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
-	     			      				new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+affichageAgpm.getAffAgpId()));
-	     		      				TAffichageAgpm affgp = new TAffichageAgpm();
-	     		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-	     		      					
-	     		  					affgp.setAffAgpRecherche(rechercheAll);
-	     		      				iservice.updateObject(affgp);
-	     		  						
-	     		  					userController.setTexteMsg("Enregistrement effectué avec succès!");
-	     		  					userController.setRenderMsg(true);
-	     		  					userController.setSevrityMsg("success");
-	     		  					etatPavetDeclarant= true;
-	     		  					etatAutreInfo= false;
-	     		  					etatPavetDossier= true; 
-	     		  					etatPavetInfoProjet= true; 
-	     		  					etatPavetOrgne= true;
-	     		  					btn_saveProjet =false;
-	                              }
-		  						 
-	      		              }else {
+	    	                	
+	    	                	projetUpdate =(List<TProjet>) iservice.getObjectsByColumn("TProjet", new ArrayList<String>(Arrays.asList("PRO_ID")),	 
+		    	   						 new WhereClause("PRO_ID",WhereClause.Comparateur.EQ,""+agpm.getTProjet().getProId()));
+	    	 				            if(!projetUpdate.isEmpty()) {
+	    	 				            	projet=projetUpdate.get(0);
+	  	    	 					         iservice.updateObject(projet);
+	    	 				    	           
+	  	    	 					                              listeAgpm=(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),	 
+	  	   	    	   						                              new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+	  	   	    	 				                                               if(!listeAgpm.isEmpty()) {
+	  	   	    	 				                                                    agpm=listeAgpm.get(0);
+	  		    	 					                                                iservice.updateObject(agpm);
+	  		    	 					                                    
+	  		    	 					                                 affichageListe = (List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),	 
+	  		 	  	   	    	   						                      new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+	  	   	    	 				                                                              if(!affichageListe.isEmpty()) {
+	  	   	    	 				                                                                    affichageAgpm=affichageListe.get(0);
+	  	   	    	 				                                                                    affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
+	  		    	 					                                                                iservice.updateObject(affichageAgpm);
+	  	   	    	 				                                                                  }
+	  	   	    	 				                   
+	  	   	    	 				                                       listeFinancement =(List<TFinancement>) iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),	 
+		  	  	  	   	    	   						                           new WhereClause("FIN_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+		   	    	 				                                                         if(!listeFinancement.isEmpty()) {
+		   	    	 				                                                             newFinancement=listeFinancement.get(0);
+		   	    	 				                                                             newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+		   	    	 				     		     			                                 newFinancement.setTDevise(new TDevise(devCode));
+		   	    	 				     		     			                                 newFinancement.setTBailleur(new TBailleur(baiCode));
+		   	    	 				     		     			                                 newFinancement.setFinTypeFinance(sourfin);
+		   	    	 				     		     			                                 newFinancement.setFinStatut("1");
+		   	    	 				     		     			                                 newFinancement.setTAgpm(agpm);
+		   	    	 				     		     			                                 newFinancement.setTProjet(projet);
+			    	 					                                                         iservice.updateObject(newFinancement);
+		   	    	 				                                                            }
+	  	   	    	 				                                                      }
+	  	   	    	 				                                    //Message de confirmation
+		   	    	 				                                    userController.setTexteMsg("Agpm mis à jour avec succès!");
+		   	    	 				     		  				        userController.setRenderMsg(true);
+		   	    	 				     		  				        userController.setSevrityMsg("success");
+	    	 				                          }else {
+	    	 				                        	  
+	    	 				                        	 	//Insertion dans T_Projet
+	    	 				                                iservice.addObject(projet);
+	    	 				        		      			//Insertion dans T_AGPM	 
+	    	 				     	      				    agpm.setTGestion(new TGestion(gesCode));
+	    	 				     	      				    agpm.setTStatut(new TStatut("S1S"));
+	    	 				     	      				    agpm.setAgpActif("1");
+	    	 				     	      				    agpm.setAgpStatutRetour("0");
+	    	 				     	      			        agpm.setTProjet(projet);
+	    	 				     	      			        agpm.setAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+	    	 				     	      				    agpm.setTFonction(userController.getSlctd().getTFonction());
+	    	 				     	      				    agpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+	    	 				     	      				    iservice.addObject(agpm);
+	    	 				     	      				    //Enregistre un financement
+	    	 				     		      				newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+	    	 				     		     			    newFinancement.setTDevise(new TDevise(devCode));
+	    	 				     		     			    newFinancement.setTBailleur(new TBailleur(baiCode));
+	    	 				     		     			    newFinancement.setFinTypeFinance(sourfin);
+	    	 				     		     			    newFinancement.setFinStatut("1");
+	    	 				     		     			    newFinancement.setTAgpm(agpm);
+	    	 				     		     			    newFinancement.setTProjet(projet);
+	    	 				     		     				iservice.addObject(newFinancement);
+	    	 				     		      				rappelProjet();
+	    	 				     		      				List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
+	    	 				     		  					TStatut statuts = new TStatut();
+	    	 				     		  					if(!LS.isEmpty()) statuts = LS.get(0);
+	    	 				     		  					//Historisation des Agpm
+	    	 				     		  					THistoAgpm agpmStatut = new THistoAgpm();
+	    	 				     		  					agpmStatut.setHagDate(Calendar.getInstance().getTime());
+	    	 				     		  					agpmStatut.setHagMotif("Création de l'agpm par l'Autorité Contractante");
+	    	 				     		  					agpmStatut.setTFonction(userController.getSlctd().getTFonction());
+	    	 				     		  					agpmStatut.setTOperateur(userController.getSlctd().getTOperateur());
+	    	 				     		  					agpmStatut.setTStatut(statuts);
+	    	 				     		  					agpmStatut.setTAgpm(agpm);
+	    	 				     		  					iservice.addObject(agpmStatut);
+	    	 				     		  						  
+	    	 				     		  					//Insertion dans TAffichageAgpm
+	    	 				     		  					affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
+	    	 				     		  					affichageAgpm.setAffAgpActif(agpm.getAgpActif());
+	    	 				     		  					affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
+	    	 				     		  					affichageAgpm.setAffAgpId(agpm.getAgpId());
+	    	 				     		  					affichageAgpm.setTBailleur(new TBailleur(baiCode));
+	    	 				     		  					affichageAgpm.setTDevise(new TDevise(devCode));
+	    	 				     		  					affichageAgpm.setTFinancement(newFinancement);
+	    	 				     		  					affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
+	    	 				     		  					affichageAgpm.setTFonction(userController.getSlctd().getTFonction());
+	    	 				     		  					affichageAgpm.setAffAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+	    	 				     		  					affichageAgpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+	    	 				     		  					affichageAgpm.setTGestion( new TGestion(gesCode));
+	    	 				     		  					affichageAgpm.setTProjet(projet);
+	    	 				     		  					affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));
+	    	 				     		  					affichageAgpm.setTStatut(statuts);
+	    	 				     		  					iservice.addObject(affichageAgpm); 
+	    	 				     		  						
+	    	 				     		  					
+	    	 				     		  					String search = affichageAgpm.getAffAgpId()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
+	    	 				    							String rechercheAll = search.replace("null","");
+	    	 				    							
+	    	 				     		  						
+	    	 				     		  					List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+	    	 				     			      				new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+affichageAgpm.getAffAgpId()));
+	    	 				     		      				TAffichageAgpm affgp = new TAffichageAgpm();
+	    	 				     		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
+	    	 				     		      					
+	    	 				     		  					affgp.setAffAgpRecherche(rechercheAll);
+	    	 				     		      				iservice.updateObject(affgp);
+	    	 				     		  						
+	    	 				     		  					userController.setTexteMsg("Enregistrement effectué avec succès!");
+	    	 				     		  					userController.setRenderMsg(true);
+	    	 				     		  					userController.setSevrityMsg("success");
+	    	 				     		  					etatPavetDeclarant= true;
+	    	 				     		  					etatAutreInfo= false;
+	    	 				     		  					etatPavetDossier= true; 
+	    	 				     		  					etatPavetInfoProjet= true; 
+	    	 				     		  					etatPavetOrgne= true;
+	    	 				     		  					btn_saveProjet =false;
+	    	 				    	   
+	    	 				                                }
+	                                                }
+	      		              /*}else {
 	      		                     FacesContext.getCurrentInstance().addMessage(null,
 	      		           	         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce bailleur a déjà saisi son AGPM", ""));
-	      		                   }
+	      		                   }*/
 	      		          }
 	  
 	  
@@ -1354,6 +1399,71 @@ public class AgpmController {
 	        }
 		 }
 		 
+		 
+		 //Re-Differer par la CPMP
+		 @Transactional
+		 public void reDifferer() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 statutUpdate ="";
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 statutUpdate ="S2D";
+				 } 
+			   }
+			 
+			   listeAgpm =(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
+						new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+			   if (!listeAgpm.isEmpty()) {
+				   TAgpm agp = new TAgpm();
+				     agp= listeAgpm.get(0);
+				     agp.setTStatut(new TStatut(statutUpdate));
+					 agp.setAgpStatutRetour("1");
+					 iservice.updateObject(agp);
+			   
+		
+					 listeHisto =(List<THistoAgpm>) iservice.getObjectsByColumn("THistoAgpm", new ArrayList<String>(Arrays.asList("HAG_ID")),
+								new WhereClause("HAG_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()),
+								new WhereClause("HAG_STA_CODE",WhereClause.Comparateur.EQ,"S3D"));
+					   if (!listeHisto.isEmpty()) {
+						   histoAgpm= listeHisto.get(0); 
+					   }
+				    
+				    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
+					 TStatut statuts = new TStatut();
+						if(!LS.isEmpty()) statuts = LS.get(0);
+						  //Historisation des Agpm
+						     THistoAgpm agpmStatut = new THistoAgpm();
+						      agpmStatut.setHagDate(Calendar.getInstance().getTime());
+						      agpmStatut.setHagMotif(histoAgpm.getHagMotif());
+						      agpmStatut.setTFonction(userController.getSlctd().getTFonction());
+						      agpmStatut.setTOperateur(userController.getSlctd().getTOperateur());
+						      agpmStatut.setTStatut(statuts);
+						      agpmStatut.setTAgpm(agp);
+							  iservice.addObject(agpmStatut);
+							  
+							  
+								//Enregistrement de TAffichage
+							  validationListe =(List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+			 							new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+			 					TAffichageAgpm affiche = new TAffichageAgpm();
+			 					if (!validationListe.isEmpty()) {
+			 						affiche= validationListe.get(0);
+			 						affiche.setTStatut(new TStatut(statutUpdate));
+			 						affiche.setAffAgpStatutRetour("1");
+								    iservice.updateObject(affiche);
+								    
+							  chargeData();
+							  chargeDataAvalider();
+							  chargeAgpmDifCp(); 
+							  chargeAgpmDifDmp();
+							  tableauBordController.chargeDataAgpm();
+							  userController.setTexteMsg("Désolé, votre Agpm a été retourner!");
+							  userController.setRenderMsg(true);
+							  userController.setSevrityMsg("success");		
+		       }
+	        }
+		 }
+		 
 		
 		 @Transactional 
 			public String transmettreNew()throws IOException{
@@ -1387,6 +1497,10 @@ public class AgpmController {
 				}
 		 
 
+		 
+		 
+		 
+		 
 			//Methode Transmettre
 	@Transactional 
 	public void transmettre()throws IOException{
@@ -2948,6 +3062,14 @@ public class AgpmController {
 
 	public void setSelectPartBai(boolean selectPartBai) {
 		this.selectPartBai = selectPartBai;
+	}
+
+	public List<TProjet> getProjetUpdate() {
+		return projetUpdate;
+	}
+
+	public void setProjetUpdate(List<TProjet> projetUpdate) {
+		this.projetUpdate = projetUpdate;
 	}
 	
     

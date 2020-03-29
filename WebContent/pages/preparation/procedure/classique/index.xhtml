@@ -641,8 +641,8 @@
          				</h:panelGroup>
 				        </p:column>
 				        
-				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-				        <p:column headerText="Transmission AC" styleClass="col-sm-2" >
+				        
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateValAc}" style="color:red; font-weight:bold ">
          				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
@@ -654,16 +654,13 @@
          				</h:outputText>
          				</h:panelGroup>
 				        </p:column>
-				        </h:panelGroup>
 				        
-				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
-				         <p:column headerText="Date Reception" styleClass="col-sm-2" >
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
          				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
-				        </h:panelGroup>
-				        
 				         
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
@@ -699,10 +696,10 @@
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                                <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-	                                 <p:commandLink action="#{pgpmAcController.differer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                                 <p:commandLink action="#{pgpmAcController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
 	                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
-	                             <p:confirm header="Confirmation" message="Voulez-vous confirmer la retour de #{controleController.type} N°#{slctdTb.affGpgId} ?" icon="ui-icon-alert" />
+	                             <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.affGpgId} ?" icon="ui-icon-alert" />
 	                           </p:commandLink> 
 	         		          </h:panelGroup>
 	         		          </h:panelGroup>
@@ -905,6 +902,19 @@
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
+				        
+				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
 				      
 						</p:dataTable>
 						</h:panelGrid> 
@@ -963,6 +973,19 @@
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
 				      
 						</p:dataTable>
 						</h:panelGrid> 
@@ -1015,6 +1038,19 @@
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
 				        </p:column>
 				      
 						</p:dataTable>
@@ -1070,6 +1106,19 @@
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
 				      
 						</p:dataTable>
 						</h:panelGrid> 
@@ -1124,6 +1173,19 @@
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				</h:outputText>
 				        </p:column>
 				      
 						</p:dataTable>

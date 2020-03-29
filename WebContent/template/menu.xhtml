@@ -962,7 +962,7 @@
            <ul class="treeview-menu">
             <li>
             <p:commandLink action="#{pgpmAcController.renderPage('pgspm1','VALPGSPM')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Validation par CPMP
+            <i class="fa fa-circle-o"></i>Validation par DMP
              </p:commandLink>
             </li>
 
@@ -1398,23 +1398,126 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-            
-            <li class="treeview">
+           
+           <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>PPM</span>
+            <i class="fa fa-list"></i> <span>AGPM</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a> 
            <ul class="treeview-menu">
-             <li>
-            <p:commandLink action="#{ppmController.renderPage('ppm1','VALPPM')}" update=":content" > 
+  
+            <li>
+            <p:commandLink action="#{agpmController.renderPage('agpm1','VAL')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Validation
              </p:commandLink>
             </li>
 
           </ul>     
          </li>
+           
+
+              
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Classique</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+               <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+            <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','VALPGPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+
+          </ul>      
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+          
+            <ul class="treeview-menu">
+             <li>
+            <p:commandLink action="#{ppmController.renderPage('ppm1','VALPPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+
+          </ul>        
+         </li>
+    
+          </ul>     
+         </li>
+         
+         
+              <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+             
+               <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{pgpmAcController.renderPage('pgspm1','VALPGSPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+
+            <li>
+            <p:commandLink action="#{ppmController.renderPage('pspm1','VALPSPM')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>   
+             
+           
+          </ul>     
+         </li>
+            
+           
+           
+           
+         
          </ul>
          </li>
          

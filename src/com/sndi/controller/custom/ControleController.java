@@ -314,6 +314,8 @@ public class ControleController {
 	private String accord="";
 	private String projet="";
 	private String organe="";
+	private String datevalac="";
+	private String datevalcpmp="";
 	private String actions="";
 	private String actionPage="";
 	//String actionPrivilèges ="";
@@ -417,6 +419,8 @@ public class ControleController {
 				 accord="col-sm-1";
 				 projet="col-sm-2";
 				 organe="col-sm-1";
+				 datevalac = "col-sm-1";
+				 datevalcpmp = "col-sm-1";
 				 actions="10%";
 				 _logger.info("action: "+getActions());
 			 } 
@@ -6826,6 +6830,26 @@ public class ControleController {
 
 	public void setChargeRecherchePs(boolean chargeRecherchePs) {
 		this.chargeRecherchePs = chargeRecherchePs;
+	}
+
+
+	public String getDatevalac() {
+		return datevalac;
+	}
+
+
+	public void setDatevalac(String datevalac) {
+		this.datevalac = datevalac;
+	}
+
+
+	public String getDatevalcpmp() {
+		return datevalcpmp;
+	}
+
+
+	public void setDatevalcpmp(String datevalcpmp) {
+		this.datevalcpmp = datevalcpmp;
 	}
 	
     
