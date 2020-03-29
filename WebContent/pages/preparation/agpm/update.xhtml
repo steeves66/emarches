@@ -1,0 +1,1138 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+      <h1>
+        #{controleController.libelle} #{agpmController.slctdTd.affAgpId}
+        
+        
+      </h1>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>AGPM | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>AGPM | #{controleController.libelle1} 
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     
+     <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+     
+     <p:wizard flowListener="#{agpmController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
+        <p:tab id="creation" title="Création du projet / Programme" titleStyle="background-color: #f88b2e;background-image: none">
+         <p:panel header="Informations sur le projet / Programme">
+           <div class="row">
+           
+            <h:panelGroup rendered="#{agpmController.etatReferenceProjet}">
+            <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-7 "><div  style="color: #fff">INFORMATIONS SUR LE PROJET</div></div> 
+			         <div class="col-md-5 ">      
+                      <!-- Combobox pour rappeler le projet existant -->
+				          
+                     <!-- Fin de la combobox -->
+			          </div>
+                   </div>
+	            </div>
+	        </h:panelGroup>
+           
+               <h:panelGroup id="Pro">
+       <h:panelGroup rendered="#{agpmController.etatPanelProjet}">
+        <div class="row">
+	            <div class="col-md-8">
+	               <div class="box-body">
+		              <div class="form-group">
+		                  <label for="gestion" class="col-sm-3 control-label">Gestion<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-9">
+		                    <p:selectOneMenu id="gestion" value="#{agpmController.gesCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{agpmController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+		                    
+		                  </div>
+		                </div>
+		                <h:panelGroup rendered="#{controleController.love_Ac}" > 
+		                 <div class="form-group">
+                  <label for="lx1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="lx1" readonly="true" style="width: 100%" />
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="l21" class="col-sm-3 control-label">Autorité contractante <span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                    <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control" id="l21" style="width: 100%" readonly="true"/>
+                  </div>
+                </div>
+               </h:panelGroup> 
+               
+               
+               <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
+               <div class="form-group">
+                  <label for="S1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="S1" readonly="true" style="width: 100%" />
+                  </div>
+                 <!--  <div class="col-md-1">
+                <p:commandLink  oncomplete="PF('ministereDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+								<i class="fa fa-search-plus"></i>
+								</p:commandLink>
+				</div> -->
+                </div>
+                
+                <div class="form-group">
+                  <label for="S21" class="col-sm-3 control-label">Autorité contractante</label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control" id="S21" style="width: 100%" readonly="true"/>
+                  </div>
+                  <div class="col-md-1">
+                <p:commandLink oncomplete="PF('autoriteDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+								<i class="fa fa-search-plus"></i>
+								</p:commandLink>
+				</div>
+                </div>
+               </h:panelGroup>
+               
+               <h:panelGroup rendered="#{controleController.love_Dmp}" > 
+               <div class="form-group">
+                  <label for="SS1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="SS1" readonly="true" style="width: 100%" />
+                  </div>
+                 
+                </div>
+                
+                 <div class="form-group">
+                  <label for="SS21" class="col-sm-3 control-label">Autorité contractante</label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control" id="SS21" style="width: 100%" readonly="true"/>
+                  </div>
+                  <div class="col-md-1">
+                <p:commandLink oncomplete="PF('DMPDlog').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+								<i class="fa fa-search-plus"></i>
+								</p:commandLink>
+				</div>
+                </div>
+               </h:panelGroup>
+                
+            
+            
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Opération<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                     <p:selectOneRadio id="asscstart" value="#{agpmController.slctdTd.TProjet.proTypeProjet}"> 
+						<f:selectItem itemLabel="Projet" itemValue="Projet" />
+					    <f:selectItem itemLabel="Programme" itemValue="Programme" />
+					 </p:selectOneRadio>
+                  </div>
+                </div>
+               
+                  <div class="form-group">
+                  <label for="l3" class="col-sm-3 control-label">Projet / Programme de<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                    <p:inputText value="#{agpmController.slctdTd.TProjet.proTitre}" placeholder="Le titre du projet / Programme" type="text"  styleClass="form-control" id="l3" style="width: 100%"/>
+                  </div>
+                </div>
+
+                 <div class="form-group">
+                  <label for="l6" class="col-sm-3 control-label">Description du projet / Programme<span style="color:red;"> *</span></label>
+
+                  <div class="col-sm-9">
+                    <p:inputTextarea placeholder="Le gouvernement de la Republique de Côte d'Ivoire a obtenu ..." value="#{agpmController.slctdTd.affAgpCommentaire}" rows="8" cols="33" styleClass="form-control" id="l6" style="width: 100%" >
+                    </p:inputTextarea>
+                    
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.box-body -->
+	            </div>
+	            <div class="col-md-4">
+                        <h5>Le Gouvernement de la République de Côte d'Ivoire a obtenu de </h5>
+	         <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                      <div class="col-md-10 "><div  style="color: #fff">FINANCEMENTS</div></div> 
+			         <div class="col-md-2 ">
+			        <!--   <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+						</p:commandLink> -->
+			         </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+					 <div class="form-group ">
+	                  <label for="xbail" class="col-sm-2 control-label"><b>Source financement</b></label>
+	                  <div class="col-sm-10">
+	               <p:selectOneMenu value="#{agpmController.sourfin}" id="xsource" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			          <f:selectItem  itemLabel="Choisir la source de financement.." itemValue="empty" />  
+			         <f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+                     <f:selectItem itemLabel="ETAT" itemValue="Etat" />	
+                     <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />	
+                     <p:ajax listener="#{agpmController.checkBailleur()}" update=":gnl:idBail, :gnl:idTres, :gnl:idPartB" />			   				   
+       		       </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                <h:panelGroup id="idBail"> 
+	                <h:panelGroup rendered="#{agpmController.selectBailleur}"> 
+	               <div class="form-group ">
+	                  <label for="xbail" class="col-sm-2 control-label"><b>Bailleur</b></label>
+	                  <div class="col-sm-10">
+	                   <p:selectOneMenu value="#{agpmController.baiCode}" id="xbail" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
+			       <f:selectItems value="#{agpmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                <div class="form-group ">
+	                  <label for="source" class="col-sm-2 control-label"><b>Type financement</b></label>
+	                  <div class="col-sm-10">
+	                    <p:selectOneMenu value="#{agpmController.souCode}" id="source" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
+			       <f:selectItems value="#{agpmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                <div class="form-group ">
+	                  <label for="xdev" class="col-sm-2 control-label"><b>Devise</b></label>
+	                  <div class="col-sm-10">
+	                      <p:selectOneMenu value="#{agpmController.devCode}" id="xdev" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir la devise.." itemValue="empty" />  
+			       <f:selectItems value="#{agpmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="xmontDev" class="col-sm-2 control-label"><b>Montant en Devise</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText type="text" value="#{agpmController.slctdTd.TFinancement.finMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" update="xmontDev" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                
+	                <h:panelGroup id="idTres"> 
+	                <h:panelGroup rendered="#{agpmController.selectTresor}">
+	                <div class="form-group ">
+	                  <label for="partTresor" class="col-sm-2 control-label"><b>Part Trésor</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText type="text" value="#{agpmController.newFinancement.finPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" update="partTresor" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                <h:panelGroup id="idPartB"> 
+	                <h:panelGroup rendered="#{agpmController.selectPartBai}">
+	                 <div class="form-group ">
+	                  <label for="xmont" class="col-sm-2 control-label"><b>Part Bailleur FCFA</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText type="text" value="#{agpmController.newFinancement.finMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                     <p:ajax event="blur" process="@this" update="xmont" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                <div class="form-group ">
+	                  <label for="accord" class="col-sm-2 control-label"><b>N° Accord</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText type="text" value="#{agpmController.slctdTd.TFinancement.finNumeroAccord}" id="accord" styleClass="form-control"  style="width: 100%" />
+	                  </div>
+	                </div>               
+	           
+            </div>
+            <!-- /.box-body -->
+          </div>
+	            </div>
+	            </div>
+		           <div class="row">
+                <div class="pull-right ">
+                       
+                        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{agpmController.creerProjet}"  update=":content">
+				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				             <i class="ace-icon fa fa-save"></i> Enregistrer
+				            </p:commandLink>
+					     </h:panelGroup>
+			           
+			             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{agpmController.creerProjetCpmpDmp}"  update=":content">
+				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				             <i class="ace-icon fa fa-save"></i> Enregistrer
+				            </p:commandLink>
+					     </h:panelGroup>
+					     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{agpmController.creerProjetCpmpDmp}"  update=":content">
+				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				             <i class="ace-icon fa fa-save"></i> Enregistrer
+				            </p:commandLink>
+					     </h:panelGroup>
+              </div>
+                </div>    
+       
+      </h:panelGroup>
+      </h:panelGroup>
+      
+
+         <h:panelGroup id="rappelPro">
+       <h:panelGroup rendered="#{agpmController.etatPanelProjetRappel}">
+        <div class="row">
+	            <div class="col-md-8">
+	               <div class="box-body">
+		              <div class="form-group">
+		                  <label for="gestion1" class="col-sm-3 control-label">Gestion<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-9">
+		       	<p:inputText  type="text" value="#{agpmController.acte.agpGesCode}" styleClass="form-control" id="gestion1" readonly="true" style="width: 100%" />
+		                  </div>
+		                </div>
+		 
+		                 <div class="form-group">
+                  <label for="l1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                   <p:inputText  type="text" value="#{agpmController.acte.minLibelle}" styleClass="form-control" id="l1" readonly="true" style="width: 100%" />
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="lx21" class="col-sm-3 control-label">Autorité contractante <span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                    <p:inputText  type="text" value="#{agpmController.acte.fonLibelle}" styleClass="form-control" id="lx21" style="width: 100%" readonly="true"/>
+                  </div>
+                </div>
+               
+               
+
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Opération</label>
+                  <div class="col-sm-9">
+                   <p:inputTextarea value="#{agpmController.acte.proTypeProjet}" row="3" styleClass="form-control" id="lyu61" readonly="true" style="width: 100%" /> 
+                  </div>
+                </div>
+               
+                  <div class="form-group">
+                  <label for="lx3" class="col-sm-3 control-label">Projet / Programme de</label>
+                  <div class="col-sm-9">
+                    <p:inputText value="#{agpmController.acte.proTitre}" placeholder="Le titre du projet / Programme" type="text" readonly="true" styleClass="form-control" id="lx3" style="width: 100%"/>
+                  </div>
+                </div>
+
+                 <div class="form-group">
+                  <label for="lx6" class="col-sm-3 control-label">Le projet / programme consiste à</label>
+
+                  <div class="col-sm-9">
+                    <p:inputTextarea value="#{agpmController.acte.agpCommentaire}" rows="8" cols="33" styleClass="form-control" readonly="true" id="lx6" style="width: 100%" />
+                    
+                  </div>
+                </div>
+
+              </div>
+              <!-- /.box-body -->
+	            </div>
+	            <div class="col-md-4">
+                        <h5>Le Gouvernement de la République de Côte d'Ivoire a obtenu de </h5>
+	         <div class="box box-success box-solid">
+            <div class="box-header with-border">
+                      <div class="col-md-10 "><div  style="color: #fff">FINANCEMENTS</div></div> 
+			         <div class="col-md-2 ">
+			       
+			         </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+					 <div class="form-group ">
+	                  <label for="bail" class="col-sm-2 control-label"><b>Bailleur</b></label>
+	                  <div class="col-sm-10">
+                  <p:inputText type="text" value="#{agpmController.acte.baiLibelle}" id="bail" styleClass="form-control" readonly="true" style="width: 100%" />      
+	                  </div>
+	                </div>
+	                <div class="form-group ">
+	                  <label for="Xsource" class="col-sm-2 control-label"><b>Source</b></label>
+	                  <div class="col-sm-10">
+	                   <p:inputText type="text" value="#{agpmController.acte.souLibelle}" id="Xsource" styleClass="form-control" readonly="true" style="width: 100%" />      
+	                  </div>
+	                </div>
+	                <div class="form-group ">
+	                  <label for="dev" class="col-sm-2 control-label"><b>Devise</b></label>
+	                  <div class="col-sm-10">
+	                  <p:inputText type="text" value="#{agpmController.acte.devLibelle}" id="dev" styleClass="form-control" readonly="true" style="width: 100%" />    
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="montDev" class="col-sm-2 control-label"><b>Montant en Devise</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText type="text" value="#{agpmController.acte.finMontantDevise}" id="montDev" styleClass="form-control" readonly="true"  style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="mont" class="col-sm-2 control-label"><b>Montant FCFA</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText type="text" value="#{agpmController.acte.finMontantCfa}" id="mont" styleClass="form-control" readonly="true" style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="xaccord" class="col-sm-2 control-label"><b>N° Accord</b></label>
+	                  <div class="col-sm-10">
+	                    <p:inputText type="text" value="#{agpmController.acte.finNumeroAccord}" id="xaccord" styleClass="form-control" readonly="true"  style="width: 100%" />
+	                  </div>
+	                </div>               
+	           
+            </div>
+            <!-- /.box-body -->
+          </div>
+	            </div>
+	            </div>
+		           <div class="row">
+              
+                  </div>    
+       
+      </h:panelGroup>
+      </h:panelGroup>
+        
+        <!-- /.col -->
+      </div>
+      </p:panel>
+            </p:tab>
+             
+             <p:tab id="Informations" title="Informations sur le Projet / Programme"   titleStyle="background-color: #f88b2e;background-image: none">
+            <p:panel header="Informations sur le Projet / Programme">
+             
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-11 "><div  style="color: #fff">LISTE DES DETAILS DE L'AGPM</div></div> 
+			         <div class="col-md-1 "> 
+			           <p:commandLink oncomplete="PF('DetailDlg').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+								</p:commandLink>
+			         </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:dataTable id="detail" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{agpmController.listeDetail}" editable="true" editMode="cell" emptyMessage="Aucun detail enregistré">
+         				<p:column headerText="N°Ordre" styleClass="col-sm-1">
+         				
+         				
+         				<p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText  value="#{slctdTb.tdaNumOrdre}" />
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText id="modelInput" value="#{slctdTb.tdaNumOrdre}" style="width:100%">
+		                <p:ajax event="blur" update=":gnl:detail" listener="#{agpmController.updateDetail()}" />
+		                 </p:inputText> 
+		                 </f:facet>
+		                </p:cellEditor>
+				        </p:column>
+				        <p:column headerText="Type" styleClass="col-sm-2">
+				            <h:outputText value="#{slctdTb.TContenuAgpm.tcaLibelle}" />
+				        </p:column>
+				        <p:column headerText="Titre" styleClass="col-sm-8">
+				            <h:outputText value="#{slctdTb.tdaTitre}" />
+				        </p:column>
+				          <p:column headerText="Actions" styleClass="col-sm-1">
+				              
+				              <p:commandLink class="btn btn-xs btn-danger" style="margin-left:5px;"
+				              action="#{agpmController.deleteDetail()}" title="Suprimer" update=":gnl">
+                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>  
+                                <p:confirm header="Confirmation" message="Confirmez vous la supression de : #{slctdTb.tdaTitre}?" icon="ui-icon-alert" />                           
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.detail}" />
+                                </p:commandLink>
+				            <h:outputText  />
+				        </p:column>
+                 </p:dataTable>     
+	            </div>
+	           </div>
+               
+             
+            </p:panel>
+            </p:tab>
+            <p:tab id="a" title="Informations sur l'organe d'exécution"  titleStyle="background-color: #f88b2e;background-image: none">
+            <p:panel header="Informations sur l'organe d'exécution">
+             <div class="row">
+            
+		        <div class="col-md-8 col-md-offset-2">
+		        
+               <h:panelGroup  rendered="#{agpmController.etatReferenceDeclarant}" > 
+                <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-5 "><div  style="color: #fff">REFERENCE DE L'ORGANE D'EXECUTION</div></div> 
+			         <div class="col-md-7 ">      
+                     <!--  Combobox pour rappeler le projet existant -->
+				          <p:selectOneMenu id="numRectif" value="#{agpmController.decId}"
+                           effect="fade" style="width:98%" filter="true" filterMatchMode="startsWith">
+                  <f:selectItem  itemLabel="Saisir l'organe d'exécution"/>  
+                 <f:selectItems value="#{agpmController.listeDeclarantsRappel}" var="dc" itemLabel="#{dc.decOrganExecLibelle} - #{dc.decPersNomPrenom}" itemValue="#{dc.agpDecId}"/>
+                 <p:ajax listener="#{agpmController.rechercheDeclarant()}" update=":gnl:declarant1, :gnl:declarant_rappel, :gnl:confirm_declarant, :gnl:rappel_declarant" /> 
+                  </p:selectOneMenu>
+                   <!--   Fin de la combobox -->
+			          </div>
+                   </div>
+	            </div>
+	            </h:panelGroup> 
+             
+             <h:panelGroup id="declarant1">
+             <h:panelGroup rendered="#{agpmController.etatPanelOrgane}">
+       
+            <!-- /.box-header -->
+            <div class="box-body">
+            <div class="form-group">
+                  <label for="l14" class="col-sm-4 control-label">Nom de l’organe d’exécution </label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decOrganExecLibelle}" styleClass="form-control" id="l14"  style="width: 100%"/>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="l13" class="col-sm-4 control-label">Adresse de l’organe d’exécution </label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decOrganExecAdresse}" styleClass="form-control" id="l13" style="width: 100%"/>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="np" class="col-sm-4 control-label">Personne à contacter M/Mme <span style="color:red;"> *</span></label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decPersNomPrenom}"  styleClass="form-control" id="np" style="width: 100%"/>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="l8" class="col-sm-4 control-label">Fonction <span style="color:red;"> *</span></label>
+                  <div class="col-sm-8">
+                   <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decPersFonction}"  styleClass="form-control" id="l8" style="width: 100%"/>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="l11" class="col-sm-4 control-label">Localisation précise du bureau </label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decLocalisation}" styleClass="form-control" id="l11" style="width: 100%"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="l12" class="col-sm-4 control-label">Numéro de porte </label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decNumeroPorte}" styleClass="form-control" id="l12" style="width: 100%">
+                    <p:keyFilter regEx="/[\d\-\.]/"/> 
+                    </p:inputText>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="l10" class="col-sm-4 control-label">Boîte postale <span style="color:red;"> *</span></label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decBp}" styleClass="form-control" id="l10" style="width: 100%">
+                     
+                    </p:inputText>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="l993" class="col-sm-4 control-label">Celullaire <span style="color:red;"> *</span></label>
+                  <div class="col-sm-8">
+                     <p:inputMask mask="(+999) 99-99-99-99" value="#{agpmController.slctdTd.TDeclarant.decCel}" styleClass="form-control" id="l993" style="width: 100%"/>
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label for="l9" class="col-sm-4 control-label">Numéro de téléphone <span style="color:red;"> *</span></label>
+                  <div class="col-sm-8">
+                     <p:inputText value="#{agpmController.slctdTd.TDeclarant.decTelephone}" styleClass="form-control" id="l9" style="width: 100%"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="l15" class="col-sm-4 control-label">Adresse Email </label>
+                  <div class="col-sm-8">
+                    <p:inputText  type="text" value="#{agpmController.slctdTd.TDeclarant.decEmail}" styleClass="form-control" id="l15" style="width: 100%">
+                    <p:keyFilter regEx="/[a-z0-9_\.\-@]/i"/> 
+                    </p:inputText>
+                  </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        
+          </h:panelGroup>
+         </h:panelGroup> 
+          
+          
+          
+  
+           
+               
+               </div>
+               </div> 
+                
+            </p:panel>
+            </p:tab>
+            
+            <p:tab id="confirmation" title="Confirmation" titleStyle="background-color: #f88b2e;background-image: none">
+            <p:panel header="Confirmation">
+             <div class="row">
+             <div class="col-md-6">
+             <h:panelGroup id="confirme_projet">
+              <h:panelGroup rendered="#{agpmController.etatPanelConfirmationProjet}">
+	          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE PROJET</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Gestion </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.gesCode}"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Titre du projet</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.projet.proTitre}"  style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Description du projet :</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.agpm.agpCommentaire}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	            </div>
+	           </div>
+	          </h:panelGroup>
+	          </h:panelGroup>
+	          <h:panelGroup id="rappel_projet">
+           <h:panelGroup rendered="#{agpmController.etatPanelConfirmationProjetRappel}">
+	          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE PROJET</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Gestion </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.acte.agpGesCode}"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Ministère</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.acte.minLibelle}"  style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Autorité Contractante</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.acte.fonLibelle}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Projet / Programme de :</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.acte.proTitre}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Le Projet / Programme Consiste à :</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.acte.proDescription}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	               
+	           
+	            </div>
+	           </div>
+	        </h:panelGroup>
+	        </h:panelGroup>
+	          
+	  
+	           
+	           
+	           
+            </div>
+            <div class="col-md-6">
+                    <h:panelGroup id="confirm_declarant">
+           <h:panelGroup rendered="#{agpmController.etatPanelConfirmation}">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L'ORGANE D'EXECUTION</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Organe d'execution</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decOrganExecLibelle}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Adresse</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decOrganExecAdresse}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	            <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Personne à contacter</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decPersNomPrenom}"   style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Fonction</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decPersFonction}"   style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Bureau de localisation</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decLocalisation}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Numero Porte</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decNumeroPorte}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Cellulaire</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decCel}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Telephone</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decTelephone}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Boite Postale</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decBp}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">E-mail</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.declarant.decEmail}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	            </div>
+	           </div>
+	           
+	           </h:panelGroup>
+	           </h:panelGroup>
+	           
+	           <h:panelGroup id="rappel_declarant">
+           <h:panelGroup rendered="#{agpmController.etatPanelConfirmationRappel}">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L'ORGANE D'EXECUTION</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Organe d'execution</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decOrganExecLibelle}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Adresse</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decOrganExecAdresse}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	            <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Personne à contacter</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decPersNomPrenom}" readonly="true"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Fonction</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decPersFonction}" readonly="true"  style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Bureau de localisation</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decLocalisation}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Numero Porte</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decNumeroPorte}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Cellulaire</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decCel}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Telephone</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decTelephone}"   style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Boite Postale</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decBp}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">E-mail</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{agpmController.rappelDec.decEmail}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	            </div>
+	           </div>
+	           
+	           </h:panelGroup>
+	           </h:panelGroup>
+            </div>
+            </div>
+             
+              <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4"> 
+	              
+	               
+				      
+				      <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" rendered="#{agpmController.boutonEdit}" action="#{agpmController.imprimerAgpm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer L'AGPM 
+				      </p:commandLink>
+				      
+				         <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{agpmController.etatBoutonEnregDeclarant}" action="#{agpmController.creerDeclarant()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                   </div>
+              </div>
+           
+
+            </p:panel>
+            </p:tab>
+             <p:tab id="Dossiers" rendered= "#{agpmController.etatPavetDossier}" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
+            <p:panel header="Fichier(s) Joint(s)">
+           
+              <div class="row">
+              
+								<div class="col-xs-12 col-sm-12">
+								<p:fileUpload fileUploadListener="#{agpmController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":gnl" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
+								</div>
+              </div>
+              <br/>
+	            <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES FICHIERS DE L'AGPM </div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun Document enrégistré">
+	           <p:column headerText="Nom du document " styleClass="">
+	            <h:outputText value="#{doss.dagCommentaire}" />
+	        </p:column>
+	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
+	        
+				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmController.removeDossier}" title="Supprimer" update="gnl">
+                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                   <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
+                </p:commandLink>
+ 	        </p:column>
+	    </p:dataTable>    
+	            </div>
+	            </div>
+            </p:panel>
+            </p:tab>
+             
+            
+           
+            </p:wizard>
+     
+      <p:commandLink styleClass="btn btn-warning" action="#{agpmController.fermer('agpm1','LIS')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+
+    </section>
+    </h:form>
+    
+    <h:form id="dlogMin">
+	        <p:dialog  widgetVar="ministereDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le ministère">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{agpmController.filtreMinistere}"  class="gui-input"  placeholder="Saisir le code du ministère"  > 
+						    <p:ajax event="keyup" update=":dlogMin:ndTbleMin" listener="#{agpmController.filtreMinistere()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMin" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.listeMinistere}"
+						  selectionMode="single" rowKey="#{slctdTb.minCode}"
+			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-1" >
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{agpmController.onSelectMinistereAgpm()}" update="gnl:ministre">				        
+         				  <h:outputText value="#{slctdTb.minCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.ministere}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="Libelle du ministère" style="font-size:18px;"  action="#{agpmController.onSelectMinistereAgpm()}">				        
+         				  <h:outputText value="#{slctdTb.minLibelle}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.ministere}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="dlogdet">
+	  <p:dialog  widgetVar="DetailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" height="650px" closable="true" header="Ajouter un nouveau detail">
+		<div class="contentpanel">
+			<div class="row">
+		           <div class="col-md-12">
+		           
+		             <div class="row">
+		           <div class="col-md-1">
+                  <label for="s1" class="control-label">type</label>
+                  </div>
+                   <div class="col-md-11">
+                  <p:selectOneMenu id="type11" value="#{agpmController.tcaCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{agpmController.listeContenu}" var="ct" itemLabel="#{ct.tcaLibelle}" itemValue="#{ct.tcaCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+                  </div>
+                  
+		           </div>
+		           
+		           <div class="row">
+		           <div class="col-md-1">
+                  <label for="t1" class="control-label">Titre</label>
+                  </div>
+                   <div class="col-md-11">
+                    <p:inputText type="text" value="#{agpmController.detail.tdaTitre}" id="t1" styleClass="form-control" style="width: 100%" />
+                  </div>
+                  
+		           </div>
+		            <div class="row">
+                  <div class="col-md-1">
+                  <label for="l66" class="control-label">Description</label>
+                  </div>
+                  <div class="col-md-11">
+                  <p:editor id="editor" value="#{agpmController.detail.tdaCommentaire}" widgetVar="editorWidget" height="500"  width="1105" />
+                  </div>
+                  </div>
+		             
+		           
+		           <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{agpmController.saveDetail1()}"  update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                     </div>
+                   </div>
+              </div>
+		           </div>
+		          
+		           
+		        </div>		
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogAC">
+	        <p:dialog  widgetVar="autoriteDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{agpmController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{agpmController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{agpmController.onSelectFonctionAgpm()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{agpmController.onSelectFonctionAgpm()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogDMP">
+	        <p:dialog  widgetVar="DMPDlog" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{agpmController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{agpmController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{agpmController.onSelectFonctionAgpmDmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{agpmController.onSelectFonctionAgpmDmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>
