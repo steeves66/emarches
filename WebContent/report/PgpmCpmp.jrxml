@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-03-29T22:56:57 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pgpm2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa970b9-a7ef-4c6b-b72a-fbcc7c94abfa">
+<!-- 2020-03-29T23:16:38 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PgpmCpmp" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa970b9-a7ef-4c6b-b72a-fbcc7c94abfa">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#368F45">
@@ -34,16 +34,12 @@
 	<subDataset name="Details" uuid="fdee0a7e-e235-4236-b52b-e70a5d094e24">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
-		<parameter name="param_code" class="java.lang.Long">
-			<parameterDescription><![CDATA[]]></parameterDescription>
-		</parameter>
-		<parameter name="param_op" class="java.lang.String"/>
+		<parameter name="param_code" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select *
 from v_pgpm_details vp
 where vp.aff_gpg_type_plan = 'PN'
-and vp.plg_id = $P{param_code}
-and vp.aff_gpg_acteur_saisie =$P{param_op}]]>
+and vp.str_code =$P{param_code}]]>
 		</queryString>
 		<field name="AFF_GPG_ID" class="java.math.BigDecimal"/>
 		<field name="SOU_LIBELLE" class="java.lang.String"/>
@@ -94,17 +90,14 @@ and vp.aff_gpg_acteur_saisie =$P{param_op}]]>
 	<parameter name="param_image" class="java.lang.String">
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="param_code" class="java.lang.Long">
-		<parameterDescription><![CDATA[]]></parameterDescription>
-	</parameter>
-	<parameter name="param_op" class="java.lang.String"/>
+	<parameter name="param_code" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select distinct pl.plg_ges_code,pl.plg_id, m.min_libelle, st.str_libelle_long,pl.plg_fon_cod
 from t_plan_general pl, t_ministere m, t_structure st
 where pl.plg_str_code = st.str_code
 and st.str_min_code = m.min_code
-and pl.plg_id = $P{param_code}
-and pl.plg_fon_cod = $P{param_op}]]>
+and st.str_code = $P{param_code}
+]]>
 	</queryString>
 	<field name="PLG_GES_CODE" class="java.math.BigDecimal"/>
 	<field name="PLG_ID" class="java.math.BigDecimal"/>
@@ -191,7 +184,7 @@ and pl.plg_fon_cod = $P{param_op}]]>
 			<textField>
 				<reportElement x="15" y="176" width="777" height="21" uuid="30154c7d-590c-4cc6-8ab7-a72bd60b2da1"/>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["Ministère / Institution  : "+$F{MIN_LIBELLE}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Structure  : "+$F{STR_LIBELLE_LONG}]]></textFieldExpression>
 			</textField>
 			<image>
 				<reportElement x="360" y="13" width="210" height="51" uuid="1c47a0f7-d08e-456b-8b2c-0d8ce4994edc"/>
@@ -209,12 +202,9 @@ and pl.plg_fon_cod = $P{param_op}]]>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Details" uuid="114f8772-1a0e-4c17-8dee-1990db9737e2">
+					<datasetRun subDataset="Details" uuid="756b30bf-ac71-4a2d-b2eb-7a99db6a44fe">
 						<datasetParameter name="param_code">
 							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
-						</datasetParameter>
-						<datasetParameter name="param_op">
-							<datasetParameterExpression><![CDATA[$P{param_op}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
