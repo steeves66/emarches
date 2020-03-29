@@ -462,13 +462,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectTresor = false;
 					 selectPartBai = true;
 					 chargeSourceCheck();
-					 sourfin="";
+					 //sourfin="";
 				 }else
 				      if(sourfin.equalsIgnoreCase("Cofinance")){
 					 selectBailleur = true; 
 					 selectTresor = true;
 					 selectPartBai = true;
-					 sourfin="";
+					// sourfin="";
 				 }else 
 					 if(sourfin.equalsIgnoreCase("Etat")){
 					 selectBailleur = false;
