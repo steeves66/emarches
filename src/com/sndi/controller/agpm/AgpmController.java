@@ -648,7 +648,7 @@ public class AgpmController {
 					new WhereClause("AFF_AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 					tableauBordController.chargeDataAgpm(); 
 					_logger.info("affichageListe size: "+affichageListe.size());
-					multiFiltre="";
+					
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
@@ -658,7 +658,7 @@ public class AgpmController {
 					    			new WhereClause("AFF_AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							        tableauBordController.chargeDataAgpm();
 								   _logger.info("validationListe size: "+validationListe.size());
-								   multiFiltre="";
+								   
 					      }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    	    getValidationListe().clear();
@@ -668,7 +668,7 @@ public class AgpmController {
 								new WhereClause("AFF_AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 								tableauBordController.chargeDataAgpm(); 
 									_logger.info("objetListe size: "+validationListe.size());
-									multiFiltre="";
+									
 					      }
 			          }
 
@@ -683,7 +683,8 @@ public class AgpmController {
 							new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 							new WhereClause("AFF_AGP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					 
-					       tableauBordController.chargeDataAgpm(); 
+					       tableauBordController.chargeDataAgpm();
+					       multiFiltre="";
 						  _logger.info("affichageListe size: "+affichageListe.size());
 						
 						 }else 
@@ -693,6 +694,7 @@ public class AgpmController {
 												"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 												new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
 									 tableauBordController.chargeDataAgpm();
+									 multiFiltre="";
 										_logger.info("validationListe size: "+validationListe.size()); 
 						    	  
 						      }else 
@@ -702,6 +704,7 @@ public class AgpmController {
 												"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 												new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
 										      tableauBordController.chargeDataAgpm(); 
+										      multiFiltre="";
 											_logger.info("objetListe size: "+validationListe.size());
 						          }
 				             }
@@ -1147,13 +1150,20 @@ public class AgpmController {
 				 selectTresor = false;
 			    }
 		 }*/
-		 
+		//Tri sur les types de financement  
+		public void chargeSourceCheck() { 
+		listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
+		      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
+			}
+		
+		 //Methode checkBailleur
 		 public void checkBailleur() {
 			 sourfin="";
 			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
 				 selectTresor = false;
 				 selectPartBai = true;
+				 chargeSourceCheck();
 				 sourfin="";
 			 }else
 			      if(sourfin.equalsIgnoreCase("Cofinance")){
@@ -1165,7 +1175,8 @@ public class AgpmController {
 				 selectBailleur = false;
 				 selectTresor = true;
 				 selectPartBai= false;
-				 sourfin="TRE";
+				 //sourfin="TRE";
+				 souCode="TRE";
 			    }else {
 			    	  selectPartBai = false;
 			    	 selectBailleur = false;

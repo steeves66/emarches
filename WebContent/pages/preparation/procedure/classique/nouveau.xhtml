@@ -506,8 +506,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le code du marché"  > 
-						    <p:ajax event="keyup" update=":dlogAgpm:ndTbleAgpm" listener="#{pgpmAcController.filtreMarche()}" />
+							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le titre du projet"  > 
+						    <p:ajax event="keyup" update=":dlogAgpm:ndTbleAgpm" listener="#{pgpmAcController.filtreAgpm()}" />
 							</p:inputText>
 						
 						</label>
@@ -527,9 +527,9 @@
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
                                 </h:commandLink>
 				        </p:column>
-				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
+				          <p:column headerText="Titre" styleClass="col-sm-11" >
                            <h:commandLink id="agpm_com" title="Libelle du ministère" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpm()}">				        
-         				  <h:outputText value="#{slctdTb.agpCommentaire}" />
+         				  <h:outputText value="#{slctdTb.proTitre}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
                                 </h:commandLink>
 				        </p:column>		
@@ -555,7 +555,7 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le code du marché"  > 
+							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le libellé du marché"  > 
 						    <p:ajax event="keyup" update=":dlogMar:ndTbleMar" listener="#{pgpmAcController.filtreMarche()}" />
 							</p:inputText>
 						
