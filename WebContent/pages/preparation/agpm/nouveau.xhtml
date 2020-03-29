@@ -488,6 +488,11 @@
 				            <h:outputText value="#{slctdTb.tdaTitre}" />
 				        </p:column>
 				          <p:column headerText="Actions" styleClass="col-sm-1">
+				           <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.sltdetail}" />                             
+                            </p:commandLink>
 				              
 				              <p:commandLink class="btn btn-xs btn-danger" style="margin-left:5px;"
 				              action="#{agpmController.deleteDetail()}" title="Suprimer" update=":gnl">
@@ -1095,6 +1100,64 @@
 			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{agpmController.saveDetail1()}"  update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                     </div>
+                   </div>
+              </div>
+		           </div>
+		          
+		           
+		        </div>		
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogdetMod">
+	  <p:dialog  widgetVar="DetailDlgMod" modal="true"  showEffect="fade" hideEffect="fade" width="70%" height="650px" closable="true" header="Ajouter un nouveau detail">
+		<div class="contentpanel">
+			<div class="row">
+		           <div class="col-md-12">
+		           
+		             <div class="row">
+		           <div class="col-md-1">
+                  <label for="s1" class="control-label">type</label>
+                  </div>
+                   <div class="col-md-11">
+                  <p:selectOneMenu id="type11" value="#{agpmController.tcaCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{agpmController.listeContenu}" var="ct" itemLabel="#{ct.tcaLibelle}" itemValue="#{ct.tcaCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+                  </div>
+                  
+		           </div>
+		           
+		           <div class="row">
+		           <div class="col-md-1">
+                  <label for="t1" class="control-label">Titre</label>
+                  </div>
+                   <div class="col-md-11">
+                    <p:inputText type="text" value="#{agpmController.sltdetail.tdaTitre}" id="t1" styleClass="form-control" style="width: 100%" />
+                  </div>
+                  
+		           </div>
+		            <div class="row">
+                  <div class="col-md-1">
+                  <label for="l66" class="control-label">Description</label>
+                  </div>
+                  <div class="col-md-11">
+                  <p:editor id="editor" value="#{agpmController.sltdetail.tdaCommentaire}" widgetVar="editorWidget" height="500"  width="1105" />
+                  </div>
+                  </div>
+		             
+		           
+		           <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{agpmController.updatedetail()}" oncomplete="PF('DetailDlgMod').hide()"  update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier
 			            </p:commandLink>
                      </div>
                    </div>
