@@ -30,6 +30,7 @@ import com.sndi.model.TFinancementPgpm;
 import com.sndi.model.TFinancementPpm;
 import com.sndi.model.TFonction;
 import com.sndi.model.TGestion;
+import com.sndi.model.THistoPlanGeneral;
 import com.sndi.model.THistoPlanPassation;
 import com.sndi.model.TLBudgets;
 import com.sndi.model.TMinistere;
@@ -134,6 +135,7 @@ public class PpmController {
 		 private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
 		 private List<VDetPlaning> affichPpm = new ArrayList<VDetPlaning>();
 	     private List<TAffichagePpm> listePpm = new ArrayList<TAffichagePpm>();
+	     private List<THistoPlanPassation> listeHisto = new ArrayList<THistoPlanPassation>();
 	     private List<VPgpmFonction> listePgpm = new ArrayList<VPgpmFonction>();
 	     private List<VPgpmFonction> listePgspm = new ArrayList<VPgpmFonction>();
 	     private List<TFinancementPpm> listeFinancement = new ArrayList<TFinancementPpm>();
@@ -209,6 +211,7 @@ public class PpmController {
 		 private TDetailPlanPassation recupPass = new TDetailPlanPassation();
 		 private TDetailPlanPassation passation = new TDetailPlanPassation();
 		 private TStructure recupStructure= new TStructure();
+		 private THistoPlanPassation histoPpm = new THistoPlanPassation();
 		
 	 
 		//Declaration des variables
@@ -264,7 +267,7 @@ public class PpmController {
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
-				          return "creation";
+				          return "ope111";
 						} 
 		 
 				     }
@@ -608,7 +611,7 @@ public class PpmController {
 						tableauBordController.chargeDataPpm();
 						//Affichage du nombre de ppm saisis
 						nbrePpm =""+getNbrePpmTotal();
-						
+						multiFiltre="";
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
@@ -619,6 +622,7 @@ public class PpmController {
 										_logger.info("affichageListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
 										tableauBordController.chargeDataPpm();
+										multiFiltre="";
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
@@ -628,6 +632,7 @@ public class PpmController {
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPpm();
+									multiFiltre="";
 		         	  }
 			     }
 			
@@ -645,6 +650,7 @@ public class PpmController {
 						tableauBordController.chargeDataPspm();
 						//Affichage du nombre de ppm saisis
 						nbrePpm =""+getNbrePpmTotal();
+						multiFiltre="";
 						
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -656,6 +662,7 @@ public class PpmController {
 										_logger.info("affichageListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
 										tableauBordController.chargeDataPspm();
+										multiFiltre="";
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
@@ -665,6 +672,7 @@ public class PpmController {
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPspm();
+									multiFiltre="";
 		         	  }
 			     }
 		 
@@ -2565,6 +2573,77 @@ public class PpmController {
 
 			 }
 			 
+			 
+			 //DIFFERER CPMP ET DMP
+		     //Differer
+				 public void reDifferer() {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						 statutUpdate ="";
+					 }else 
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+							 statutUpdate ="S2D";
+						 } 
+					 
+					//Parcourir la liste et récupérer les demande au statut E1T
+			 			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+								if (!listeTsPpm.isEmpty()) {
+									passDetail= listeTsPpm.get(0);
+									passDetail.setTStatut(new TStatut(statutUpdate));
+									passDetail.setDppStatutRetour("1");
+							       iservice.updateObject(passDetail);
+					
+					    
+					    List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+		  						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+			               TAffichagePpm ppm = new TAffichagePpm();
+			                    if(!AG.isEmpty()) ppm =AG.get(0); 
+			                      ppm.setTStatut(new TStatut(statutUpdate));
+			                     ppm.setAffDppStatutRetour("1");
+			                      iservice.updateObject(ppm);
+			                      
+			                      
+			                      listeHisto =(List<THistoPlanPassation>) iservice.getObjectsByColumn("THistoPlanPassation", new ArrayList<String>(Arrays.asList("HPP_ID")),
+											new WhereClause("HPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()),
+											new WhereClause("HPP_STA_CODE",WhereClause.Comparateur.EQ,"S3D"));
+								   if (!listeHisto.isEmpty()) {
+									   histoPpm= listeHisto.get(0); 
+								   }
+			                    
+			                      
+			                      //Insertion de chaque ligne dans T_histo_detail_plan_passation avec le statut correspondant
+									List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
+								    TStatut statuts = new TStatut();
+								      if(!LS.isEmpty()) statuts = LS.get(0);
+								  //Historisation des Plans Généraux
+								     THistoPlanPassation histoPass = new THistoPlanPassation();
+								     histoPass.setHppDate(Calendar.getInstance().getTime());
+								     histoPass.setHppMotif(histoPpm.getHppMotif());
+								     histoPass.setTStatut(statuts);
+								     histoPass.setTDetailPlanPassation(passDetail);
+								     histoPass.setTFonction(userController.getSlctd().getTFonction());
+								     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
+								     iservice.addObject(histoPass);
+								     
+								     userController.setTexteMsg("Opération retournée avec succès !");
+									 userController.setRenderMsg(true);
+									 userController.setSevrityMsg("success");
+									 //return	null
+									 //chargeData();
+				                   //Chargement des listes 
+						           chargeDataAvaliderPpm();
+						           chargeDataAvaliderPspm();
+						     
+						           chargePpmDifCp();
+						           chargePpmDifDmp();
+						          //Actualisation du Tableau de Bord
+						          tableauBordController.chargeDataPpmPspm();
+								
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
+							 FacesContext.getCurrentInstance().addMessage(null, msg);
+							    }
+				 }
+			 
 			 		 
 			 
 			  //DIFFERER CPMP ET DMP
@@ -2572,11 +2651,11 @@ public class PpmController {
 				 public void differerPspm() {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						 statutUpdate ="";
-					 }else {
+					 }else 
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 							 statutUpdate ="S2D";
 							 observation="Opération retournée avec succès";
-						 }else {
+						 }else 
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 								 //statutUpdate ="S3D";
 								 
@@ -2589,8 +2668,8 @@ public class PpmController {
 										  statutUpdate ="S3D"; 
 									  }
 							 }
-					     } 
-					 }
+					      
+					 
 					//Parcourir la liste et récupérer les demande au statut E1T
 			 			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
@@ -2632,7 +2711,7 @@ public class PpmController {
 						           chargePspmDifCp();
 						           chargePspmDifDmp();
 						          //Actualisation du Tableau de Bord
-						          tableauBordController.chargeDataPpmPspm();
+						          tableauBordController.chargeDataPspm();
 						          
 
 			                 userController.setTexteMsg("Opération retournée avec succès !");
@@ -2640,7 +2719,81 @@ public class PpmController {
 							 userController.setSevrityMsg("success");
 									 
 									  
-							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PSPM a été retourné!", "");
+							 FacesContext.getCurrentInstance().addMessage(null, msg);
+							    }					  	
+				     }
+				 
+				 
+				 
+				//Differer Pspm
+				 public void reDiffererPspm() {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						 statutUpdate ="";
+					 }else 
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+							 statutUpdate ="S2D";
+						 }
+					 
+					//Parcourir la liste et récupérer les demande au statut E1T
+			 			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+								if (!listeTsPpm.isEmpty()) {
+									passDetail= listeTsPpm.get(0);
+									passDetail.setTStatut(new TStatut(statutUpdate));
+									passDetail.setDppStatutRetour("1");
+							       iservice.updateObject(passDetail);
+					
+					    
+					    List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+		  						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+			               TAffichagePpm ppm = new TAffichagePpm();
+			                    if(!AG.isEmpty()) ppm =AG.get(0); 
+			                      ppm.setTStatut(new TStatut(statutUpdate));
+			                     ppm.setAffDppStatutRetour("1");
+			                      iservice.updateObject(ppm);
+			                      
+			                      
+			                      listeHisto =(List<THistoPlanPassation>) iservice.getObjectsByColumn("THistoPlanPassation", new ArrayList<String>(Arrays.asList("HPP_ID")),
+											new WhereClause("HPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()),
+											new WhereClause("HPP_STA_CODE",WhereClause.Comparateur.EQ,"S3D"));
+								   if (!listeHisto.isEmpty()) {
+									   histoPpm= listeHisto.get(0); 
+								   }
+			                    
+			                      
+
+									 //Insertion de chaque ligne dans T_histo_detail_plan_passation avec le statut correspondant
+										List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
+									    TStatut statuts = new TStatut();
+									      if(!LS.isEmpty()) statuts = LS.get(0);
+									  //Historisation des Plans Généraux
+									     THistoPlanPassation histoPass = new THistoPlanPassation();
+									     histoPass.setHppDate(Calendar.getInstance().getTime());
+									     histoPass.setHppMotif(histoPpm.getHppMotif());
+									     histoPass.setTStatut(statuts);
+									     histoPass.setTDetailPlanPassation(passDetail);
+									     histoPass.setTFonction(userController.getSlctd().getTFonction());
+									     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
+									     iservice.addObject(histoPass);
+			                      
+			                      
+									 //chargeData();
+				                   //Chargement des listes 
+						           //chargeDataAvaliderPpm();
+						           chargeDataAvaliderPspm();
+						           chargePspmDifCp();
+						           chargePspmDifDmp();
+						          //Actualisation du Tableau de Bord
+						          tableauBordController.chargeDataPspm();
+						          
+
+			                 userController.setTexteMsg("Opération retournée avec succès !");
+							 userController.setRenderMsg(true);
+							 userController.setSevrityMsg("success");
+									 
+									  
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PSPM a été retourné!", "");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
 							    }					  	
 				     }
@@ -3918,6 +4071,26 @@ public class PpmController {
 
 	public void setModeleDao(boolean modeleDao) {
 		this.modeleDao = modeleDao;
+	}
+
+
+	public List<THistoPlanPassation> getListeHisto() {
+		return listeHisto;
+	}
+
+
+	public void setListeHisto(List<THistoPlanPassation> listeHisto) {
+		this.listeHisto = listeHisto;
+	}
+
+
+	public THistoPlanPassation getHistoPpm() {
+		return histoPpm;
+	}
+
+
+	public void setHistoPpm(THistoPlanPassation histoPpm) {
+		this.histoPpm = histoPpm;
 	}
 	
 		

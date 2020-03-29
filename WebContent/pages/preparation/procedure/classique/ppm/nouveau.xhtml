@@ -415,10 +415,6 @@
 				        <p:column headerText="Type" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souCode}" />
 				        </p:column>
-
-				         <p:column headerText="Libellé" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
-				        </p:column>
 				        
 				        <p:column headerText="Part Bailleur" width="5%">
 				          <p:cellEditor>
@@ -437,11 +433,11 @@
 				        <p:column headerText="Part Trésor" width="5%">
 				          <p:cellEditor>
 		                <f:facet name="output">
-		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipPartTresor}" >
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipTresor}" >
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 		                </h:outputText>
 		                </f:facet>
-		                <f:facet name="input"> <p:inputText id="modelInput1" value="#{slctdTb.fipPartTresor}" style="width:100%">
+		                <f:facet name="input"> <p:inputText id="modelInput1" value="#{slctdTb.fipTresor}" style="width:100%">
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		               <p:ajax event="blur" update=":gnl:MontTot" listener="#{ppmController.coutOperation()}" />
 		                 </p:inputText></f:facet>
