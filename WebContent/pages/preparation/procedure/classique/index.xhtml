@@ -687,12 +687,12 @@
                              </p:commandLink>
                              </h:panelGroup>
                              
-                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+                              
                                 <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                               </p:commandLink>
-                              </h:panelGroup>
+                              
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                                <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">

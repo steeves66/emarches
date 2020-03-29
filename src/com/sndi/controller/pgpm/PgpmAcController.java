@@ -1802,11 +1802,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 public void reDiffererPgspm() {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					 statutUpdate ="";
-				 }else {
+				 }else 
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 						 statutUpdate ="S2D";
 					 } 
-				 }
+				 
 				 
 				 listeDetail =(List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
 							new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));

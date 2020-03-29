@@ -728,24 +728,25 @@ public class AgpmController {
 	                           
 	    	                }else {
 	    	                	
-	    	                	projetUpdate =(List<TProjet>) iservice.getObjectsByColumn("TProjet", new ArrayList<String>(Arrays.asList("PRO_ID")),	 
+	    	                	/*projetUpdate =(List<TProjet>) iservice.getObjectsByColumn("TProjet", new ArrayList<String>(Arrays.asList("PRO_ID")),	 
 		    	   						 new WhereClause("PRO_ID",WhereClause.Comparateur.EQ,""+agpm.getTProjet().getProId()));
-	    	 				            if(!projetUpdate.isEmpty()) {
-	    	 				            	projet=projetUpdate.get(0);
-	  	    	 					         iservice.updateObject(projet);
+	    	 				            if(!projetUpdate.isEmpty())*/
+	    	                	
+	    	                	listeAgpm=(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),	 
+  						                              new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+                                              if(!listeAgpm.isEmpty()) { 
+	    	 				            	 agpm=listeAgpm.get(0);
+	    	 				            	 iservice.updateObject(projet);
+                                             iservice.updateObject(agpm);
 	    	 				    	           
-	  	    	 					                              listeAgpm=(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),	 
-	  	   	    	   						                              new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
-	  	   	    	 				                                               if(!listeAgpm.isEmpty()) {
-	  	   	    	 				                                                    agpm=listeAgpm.get(0);
-	  		    	 					                                                iservice.updateObject(agpm);
+	  	    	 					                          
 	  		    	 					                                    
-	  		    	 					                                 affichageListe = (List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),	 
-	  		 	  	   	    	   						                      new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
-	  	   	    	 				                                                              if(!affichageListe.isEmpty()) {
-	  	   	    	 				                                                                    affichageAgpm=affichageListe.get(0);
-	  	   	    	 				                                                                    affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
-	  		    	 					                                                                iservice.updateObject(affichageAgpm);
+	  		    	 					    affichageListe = (List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),	 
+	  		 	  	   	    	   					new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+	  	   	    	 				                        if(!affichageListe.isEmpty()) {
+	  	   	    	 				                            affichageAgpm=affichageListe.get(0);
+	  	   	    	 				                            affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
+	  		    	 					                        iservice.updateObject(affichageAgpm);
 	  	   	    	 				                                                                  }
 	  	   	    	 				                   
 	  	   	    	 				                                       listeFinancement =(List<TFinancement>) iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),	 
@@ -761,7 +762,7 @@ public class AgpmController {
 		   	    	 				     		     			                                 newFinancement.setTProjet(projet);
 			    	 					                                                         iservice.updateObject(newFinancement);
 		   	    	 				                                                            }
-	  	   	    	 				                                                      }
+	  	   	    	 				                                                      
 	  	   	    	 				                                    //Message de confirmation
 		   	    	 				                                    userController.setTexteMsg("Agpm mis à jour avec succès!");
 		   	    	 				     		  				        userController.setRenderMsg(true);
