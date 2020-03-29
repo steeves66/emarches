@@ -456,7 +456,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				}
 			 
 			 public void checkBailleur() {
-				 sourfin="";
+				 //sourfin="";
 				 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 					 selectBailleur = true;
 					 selectTresor = false;

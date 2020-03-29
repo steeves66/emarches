@@ -1202,19 +1202,19 @@ public class AgpmController {
 		
 		 //Methode checkBailleur
 		 public void checkBailleur() {
-			 sourfin="";
+			// sourfin="";
 			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
 				 selectTresor = false;
 				 selectPartBai = true;
 				 chargeSourceCheck();
-				 sourfin="";
+				 //sourfin="";
 			 }else
 			      if(sourfin.equalsIgnoreCase("Cofinance")){
 				 selectBailleur = true; 
 				 selectTresor = true;
 				 selectPartBai = true;
-				 sourfin="";
+				 //sourfin="";
 			 }else if(sourfin.equalsIgnoreCase("Etat")){
 				 selectBailleur = false;
 				 selectTresor = true;

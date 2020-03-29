@@ -205,7 +205,7 @@
 			         <f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
                      <f:selectItem itemLabel="ETAT" itemValue="Etat" />	
                      <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />	
-                     <p:ajax listener="#{agpmController.checkBailleur()}" update=":gnl:idBail, :gnl:idTres, :gnl:idPartB" />			   				   
+                     <p:ajax listener="#{agpmController.checkBailleur()}" update=":gnl:idBail, :gnl:idTres, :gnl:idPartB, :gnl:source" />			   				   
        		       </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -226,8 +226,9 @@
 	                </h:panelGroup>
 	                </h:panelGroup>
 	                
+	                
 	                <div class="form-group ">
-	                  <label for="source" class="col-sm-2 control-label"><b>Type financement</b></label>
+	                  <label for="source" class="col-sm-2 control-label"><b>Type</b></label>
 	                  <div class="col-sm-10">
 	                    <p:selectOneMenu value="#{agpmController.souCode}" id="source" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
@@ -237,6 +238,8 @@
 
 	                  </div>
 	                </div>
+	                
+	                
 	                <div class="form-group ">
 	                  <label for="xdev" class="col-sm-2 control-label"><b>Devise</b></label>
 	                  <div class="col-sm-10">
