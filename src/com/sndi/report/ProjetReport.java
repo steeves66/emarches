@@ -175,6 +175,47 @@ public class ProjetReport {
 				//Fin Print Fiche avec 2 parametre de type long
 				
 				
+				
+				//Print Fiche avec 2 parametre de type long et String
+				public void longStringparam2(long numero1,String code, String reportName, String jrxmlName ){
+					
+					String pathdir ="";
+					 
+					 pathdir = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/report/images/");
+						pathdir += "/";
+						
+						Map<String, Object> param = new HashMap<String, Object>();
+						param.put("param_code_1", numero1);
+						param.put("param_code_2", code);
+						param.put("param_image", pathdir);
+						try {
+						Connection conn = connectionUtils.getConnection();
+						String jrxmlFile = FacesContext.getCurrentInstance().getExternalContext()
+								.getRealPath("/report/" + jrxmlName + ".jrxml");
+						InputStream input = new FileInputStream(new File(jrxmlFile));
+						JasperReport jasperReport = JasperCompileManager.compileReport(input);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param, conn);
+						
+						HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance()
+								.getExternalContext().getResponse();
+						httpServletResponse.addHeader("contentType", "application/pdf");
+						httpServletResponse.addHeader("Content-disposition",
+								"attachment; filename=" + reportName + "-" + numero1+ code + ".pdf");
+
+						ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+						JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+						servletOutputStream.flush();
+						servletOutputStream.close();
+						FacesContext.getCurrentInstance().responseComplete();
+						 
+						} catch (Exception e) {
+							System.out.println(e);
+						}
+
+				}
+				//Fin Print Fiche avec 2 parametre de type long
+				
+				
 				//Print Fiche avec 1 parametre de type String
 				public void stringparam1(String code,String reportName, String jrxmlName ){
 					

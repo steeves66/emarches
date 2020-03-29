@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+      
+<h:form id="gnl">	
+<section class="content-header">
+      <h1>
+       EDITION DES PGPM
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i>EDITION DES PGPM</a></li>
+        <li class="active">EDITION DES PGPM</li>
+      </ol>
+    </section>
+    <section class="content">
+   <!-- Default box --> 
+    <div class="box">
+       
+        
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+      
+<!--       LES DEUX BOX DU BAS -->
+
+		 <div class="box-body">
+		   
+		   <!--Execution-->
+            <div class="col-md-6 col-md-offset-3">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-6 "><div  style="color: #fff">EDITION DES PGPM</div></div>
+			         <div class="col-md-3">
+			          <p:selectOneMenu value="#{situationController.annee}" id="exercices"
+	                         effect="fade" style="width:98%" filter="true" filterMatchMode="startsWith">
+		 <f:selectItems value="#{situationController.listExercice}" var="e" itemLabel="#{e.gesExe}" itemValue="#{e.gesExe}"/> 
+		 <p:ajax  listener="#{situationController.chargeDestination()}" update=":gnl:destination" ></p:ajax>
+       		        </p:selectOneMenu>
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body">
+		              
+		              <p:selectOneRadio id="situation" value="#{situationController.sit}">
+		              <p:ajax  listener="#{situationController.checkSituation()}" update="gnl"></p:ajax>
+			            <div class="col-md-4">
+						<f:selectItem itemLabel="GLOBALE" itemValue="GLO" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="DETAILLEE" itemValue="DET" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="DESTINATION" itemValue="DES" />
+			            </div>
+			            </p:selectOneRadio>
+		                <br/>
+		              <div class="row">
+			              <div class="col-md-12">
+			              <h:panelGroup  rendered="#{situationController.etatDestination}">
+			          
+			            
+			      
+			             <p:dataTable id="destination" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{situationController.listDestination}" rowKey="#{slctdTb.destCod}" selection="#{situationController.selectionDest}"
+					editable="true" editMode="cell" emptyMessage="Aucun choix">
+
+            <p:column selectionMode="multiple" style="width:20px;text-align:center"/>
+            
+         				<p:column headerText="Code" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.destCod}" >
+				            </h:outputText>
+				        </p:column>
+				        
+				        <p:column headerText="Libellé" styleClass="col-sm-7">
+				            <h:outputText value="#{slctdTb.destLib}" >
+				            </h:outputText>
+				        </p:column>
+				        
+                 </p:dataTable>     
+						</h:panelGroup>
+			                </div>
+		              </div>
+		            </div>
+		           
+	            </div>
+	            <p:commandLink styleClass="btn btn-warning mr10" style="margin-top:10px; background-color: #f88b2e" action="#{situationController.renderPage('accueil')}"  update=":content">
+     <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+      </p:commandLink>
+      <div class="pull-right ">
+		            <p:commandLink styleClass="btn btn-success" style="background-color: #036d3b" action="#{situationController.editer()}"  ajax="false">
+		             <i class="ace-icon fa fa-file-text"></i> Imprimer
+		            </p:commandLink>
+		            
+		            
+		            </div>
+            </div>
+            <!--Fin Execution-->
+         
+		 </div>
+ 
+    
+     </section>
+    <!-- /.content -->
+    
+</h:form>
+
+
+
+</html>

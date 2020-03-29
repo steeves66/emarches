@@ -2677,7 +2677,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				  
 				 //Edition de l'PGPM
 				 public void imprimerPgpm() {
-						projetReport.longparam1(plan.getPlgId(), "Pgpm", "Pgpm");
+					 String operateur = userController.getSlctd().getTFonction().getFonCod();
+						projetReport.longStringparam2(plan.getPlgId(),""+operateur, "Pgpm", "Pgpm");
 					}
 				 //Edition de l'PGSPM
 				 public void imprimerPgspm() {
@@ -2728,6 +2729,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				break;
 				case "pgpm4":
 					chargeFinancementDetail();
+					break;
+				case "pgpm5":
 					break;
 			    }
 		     return userController.renderPage(value);
