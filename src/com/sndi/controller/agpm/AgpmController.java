@@ -157,6 +157,7 @@ public class AgpmController {
 	 private TAgpm demAgpm = new TAgpm();
 	 private THistoAgpm histoAgpm = new THistoAgpm();
 	 private TDetailAgpm detail = new TDetailAgpm();
+	 private TDetailAgpm sltdetail = new TDetailAgpm();
 	 private VAgpm addAgpm = new VAgpm(); 
 	 private VAgpmDeclarant rappelDec = new VAgpmDeclarant();
 	 private VProjetAgpm acte = new VProjetAgpm(); 
@@ -852,6 +853,57 @@ public class AgpmController {
 	      		                   }*/
 	      		          }
 	  
+	  
+	  //Les methodes de l'ecran de methodeModification
+ 	 
+ 	 public void modifier() {
+ 		 slctdTd.setTBailleur(new TBailleur(baiCode));
+ 		 slctdTd.setTDevise(new TDevise(devCode));
+ 		 
+ 		/* List<TDeclarant> DEC =iservice.getObjectsByColumn("TDeclarant", new ArrayList<String>(Arrays.asList("DEC_ID")),
+	      				new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
+ 		 TDeclarant declarant = new TDeclarant();
+   				if(!DEC.isEmpty()) declarant =DEC.get(0); 
+   					
+   				declarant.setAffAgpRecherche(rechercheAll);
+   				iservice.updateObject(declarant);
+ 		 
+ 		 slctdTd.setTProjet(projet);
+ 		 slctdTd.setTDeclarant(TDeclarant);*/
+ 		 slctdTd.setTSourceFinancement(new TSourceFinancement(souCode));
+ 		 iservice.updateObject(slctdTd);
+ 		 chargeData();
+			 userController.setTexteMsg("Modification éffectuée avec succès!");
+			 userController.setRenderMsg(true);
+			 userController.setSevrityMsg("success");
+ 	 }
+ 	 
+ 	 
+ 	 
+ 	 public void updatedetail() {  
+ 		 sltdetail.setTContenuAgpm(new TContenuAgpm(tcaCode));
+			    	iservice.updateObject(sltdetail);
+			    	chargeDetailModif();
+				    userController.setTexteMsg("Mise a jour éffectuée avec succès!");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+	      	 }
+ 	 
+ 	/* public void savedetailupdate() { 
+ 		 List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+	      				new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+   				TAffichageAgpm affgp = new TAffichageAgpm();
+   				if(!AFG.isEmpty()) affgp =AFG.get(0); 
+   					
+					affgp.setAffAgpRecherche(rechercheAll);
+   				iservice.updateObject(affgp);
+ 	 
+ 	 slctdTd.setTAgpm(agpm); 
+	    	detail.setTContenuAgpm(new TContenuAgpm(tcaCode));
+	    	detail.setTdaNumOrdre(keyGen.getNumeroOrdre());
+	    	iservice.addObject(detail); 
+	    	chargeDetail();
+ 	 }*/
 	  
 	      	 
 	      	 //Enregistrement des detail
@@ -1806,6 +1858,7 @@ public class AgpmController {
 					baiCode= slctdTd.getTBailleur().getBaiCode();
 					souCode = slctdTd.getTSourceFinancement().getSouCode();
 					devCode = slctdTd.getTDevise().getDevCode();
+					chargeDetailModif();
 					break;
 				case "pgpm4":
 					chargeDetails();
@@ -1816,6 +1869,21 @@ public class AgpmController {
 		    return userController.renderPage(value);
 		}
 	 
+	 
+	 public void editForm() {
+		 List<TDeclarant> DEC =iservice.getObjectsByColumn("TDeclarant", new ArrayList<String>(Arrays.asList("DEC_ID")),
+   				new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
+		 TDeclarant declarant = new TDeclarant();
+				if(!DEC.isEmpty()) declarant =DEC.get(0); 
+	 }
+	 
+	 
+	 //liste des details
+	 public void chargeDetailModif() {
+		 getListeDetail().clear();
+		 listeDetail= (List<TDetailAgpm>) iservice.getObjectsByColumn("TDetailAgpm", new ArrayList<String>(Arrays.asList("TDA_ID")),
+				 new WhereClause("TDA_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+	 }
 	 //Debut love
 	 
 	 //Debut cpmp
@@ -3070,6 +3138,30 @@ public class AgpmController {
 
 	public void setProjetUpdate(List<TProjet> projetUpdate) {
 		this.projetUpdate = projetUpdate;
+	}
+
+	public List<THistoAgpm> getListeHisto() {
+		return listeHisto;
+	}
+
+	public void setListeHisto(List<THistoAgpm> listeHisto) {
+		this.listeHisto = listeHisto;
+	}
+
+	public THistoAgpm getHistoAgpm() {
+		return histoAgpm;
+	}
+
+	public void setHistoAgpm(THistoAgpm histoAgpm) {
+		this.histoAgpm = histoAgpm;
+	}
+
+	public TDetailAgpm getSltdetail() {
+		return sltdetail;
+	}
+
+	public void setSltdetail(TDetailAgpm sltdetail) {
+		this.sltdetail = sltdetail;
 	}
 	
     
