@@ -53,7 +53,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 	private String finBaiCode;
 	private String finSouCode;
 	private long finProId;
-	private BigDecimal finMontantCfa;
+	private long finMontantCfa;
 	private BigDecimal finMontantDevise;
 	private String finNumeroAccord;
 	private String finStatut;
@@ -141,7 +141,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 			Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp, long proId, Long proRegId,
 			String proCode, String proTitre, String proLibelle, String proDescription, BigDecimal proMontantTotCfa,
 			String proTypeProjet, long finId, String finDevCode, String finBaiCode, String finSouCode, long finProId,
-			BigDecimal finMontantCfa, BigDecimal finMontantDevise, String finNumeroAccord, String finStatut,
+			long finMontantCfa, BigDecimal finMontantDevise, String finNumeroAccord, String finStatut,
 			Long finAgpId, String finTypeFinance, Long finPartTresor, short gesCode, Date gesDateDebut, Date gesDateFin,
 			Long decId, String decOrganExecLibelle, String decOrganExecAdresse, String decPersNomPrenom,
 			String decPersFonction, String decLocalisation, String decNumeroPorte, String decBp, String decTelephone,
@@ -538,11 +538,11 @@ public class VUpdateAgpm implements java.io.Serializable {
 	}
 
 	@Column(name = "FIN_MONTANT_CFA", precision = 15)
-	public BigDecimal getFinMontantCfa() {
+	public long getFinMontantCfa() {
 		return this.finMontantCfa;
 	}
 
-	public void setFinMontantCfa(BigDecimal finMontantCfa) {
+	public void setFinMontantCfa(long finMontantCfa) {
 		this.finMontantCfa = finMontantCfa;
 	}
 

@@ -863,18 +863,66 @@ public class AgpmController {
  		 slctdTd.setTBailleur(new TBailleur(baiCode));
  		 slctdTd.setTDevise(new TDevise(devCode));
  		 
- 		/* List<TDeclarant> DEC =iservice.getObjectsByColumn("TDeclarant", new ArrayList<String>(Arrays.asList("DEC_ID")),
-	      				new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
- 		 TDeclarant declarant = new TDeclarant();
-   				if(!DEC.isEmpty()) declarant =DEC.get(0); 
-   					
-   				declarant.setAffAgpRecherche(rechercheAll);
-   				iservice.updateObject(declarant);
- 		 
- 		 slctdTd.setTProjet(projet);
- 		 slctdTd.setTDeclarant(TDeclarant);*/
- 		 slctdTd.setTSourceFinancement(new TSourceFinancement(souCode));
- 		 iservice.updateObject(slctdTd);
+ 		 //Projet
+ 		 List<TProjet> PRO =iservice.getObjectsByColumn("TProjet", new ArrayList<String>(Arrays.asList("PRO_ID")),
+	      				new WhereClause("PRO_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTProjet().getProId()));
+ 		TProjet projet = new TProjet();
+   				if(!PRO.isEmpty()) projet =PRO.get(0); 	
+   				projet.setProTypeProjet(updateAgpm.getProTypeProjet());
+   				projet.setProTitre(updateAgpm.getProTitre());
+   				iservice.updateObject(projet);
+   			
+   			 //Agpm
+   	 		 List<TAgpm> AGP =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
+   		      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+   	 		TAgpm agpm = new TAgpm();
+   	   				if(!AGP.isEmpty()) agpm =AGP.get(0); 	
+   	   			  agpm.setAgpCommentaire(updateAgpm.getAffAgpCommentaire());
+   	   				iservice.updateObject(agpm);
+   	   				
+   	   			 //Declarant
+   	   	 		 List<TDeclarant> DEC =iservice.getObjectsByColumn("TDeclarant", new ArrayList<String>(Arrays.asList("DEC_ID")),
+   	   		      				new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
+   	   	 		TDeclarant declarant = new TDeclarant();
+   	   	   				if(!DEC.isEmpty()) declarant =DEC.get(0); 	
+   	   	   		         declarant.setDecOrganExecLibelle(updateAgpm.getDecOrganExecLibelle());
+   	   	   		         declarant.setDecOrganExecAdresse(updateAgpm.getDecOrganExecAdresse());
+   	   	   		         declarant.setDecPersNomPrenom(updateAgpm.getDecPersNomPrenom());
+   	   	   		         declarant.setDecPersFonction(updateAgpm.getDecPersFonction());  
+   	   	   		         declarant.setDecLocalisation(updateAgpm.getDecLocalisation());
+   	   	   		         declarant.setDecNumeroPorte(updateAgpm.getDecNumeroPorte()); 
+   	   	   		         declarant.setDecBp(updateAgpm.getDecBp());
+   	   	   		         declarant.setDecCel(updateAgpm.getDecCel());  
+   	   	   		         declarant.setDecTelephone(updateAgpm.getDecTelephone()); 
+   	   	   		         declarant.setDecEmail(updateAgpm.getDecEmail());
+   	   	   				iservice.updateObject(declarant);
+   	   				
+   	   	   		 //Declarant
+   	   	   	 		 List<TFinancement> FIN =iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),
+   	   	   		      				new WhereClause("FIN_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTFinancement().getFinId()));
+   	   	   	TFinancement financement = new TFinancement();
+   	   	   	   				if(!FIN.isEmpty()) financement =FIN.get(0); 	
+   	   	   	           	financement.setFinTypeFinance(updateAgpm.getFinTypeFinance());
+   	   	   	            //financement.setTSourceFinancement(new TSourceFinancement(updateAgpm.getFinSouCode()));
+   	   	   	            financement.setTDevise(new TDevise(updateAgpm.getFinDevCode()));
+   	   	   	            financement.setTBailleur(new TBailleur(updateAgpm.getBaiCode()));
+   	   	   	            financement.setFinMontantDevise(updateAgpm.getFinMontantDevise());
+   	   	   	            //financement.setFinMontantCfa(updateAgpm.getFinMontantCfa());
+   	   	   	            financement.setFinPartTresor(updateAgpm.getFinPartTresor()); 
+   	   	   	            financement.setFinMontantDevise(updateAgpm.getFinMontantDevise());
+   	   	   	            financement.setFinNumeroAccord(updateAgpm.getFinNumeroAccord());
+   	   	   	   			iservice.updateObject(financement);
+
+   	   			 //AffichageAgpm
+   	   			 slctdTd.setAffAgpCommentaire(updateAgpm.getAffAgpCommentaire());
+   	   		     slctdTd.setTProjet(projet);
+   	   		     slctdTd.setTFinancement(financement);
+   	   		     slctdTd.setTBailleur(new TBailleur(updateAgpm.getBaiCode()));
+   	   		     slctdTd.setTDeclarant(declarant);
+   	   		     slctdTd.setTDevise(new TDevise(updateAgpm.getFinDevCode()));
+   	   		     slctdTd.setTSourceFinancement( new TSourceFinancement(updateAgpm.getFinSouCode()));
+   	   	   		 iservice.updateObject(slctdTd);
+   	   				
  		 chargeData();
 			 userController.setTexteMsg("Modification éffectuée avec succès!");
 			 userController.setRenderMsg(true);

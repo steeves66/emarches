@@ -235,7 +235,7 @@
 	                <div class="form-group ">
 	                  <label for="xdev" class="col-sm-2 control-label"><b>Devise</b></label>
 	                  <div class="col-sm-10">
-	                      <p:selectOneMenu value="#{agpmController.updateAgpm.devCode}" id="xdev" 
+	                      <p:selectOneMenu value="#{agpmController.updateAgpm.affDevCode}" id="xdev" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir la devise.." itemValue="empty" />  
 			       <f:selectItems value="#{agpmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
@@ -563,7 +563,7 @@
 	              
 	               
 				      
-				      <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" rendered="#{agpmController.boutonEdit}" action="#{agpmController.imprimerAgpm()}" ajax="false">
+				      <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{agpmController.imprimerAgpm()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer L'AGPM 
 				      </p:commandLink>
 				      
