@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,32 +20,32 @@ import javax.persistence.TemporalType;
 public class THistoPlanGeneral implements java.io.Serializable {
 
 	private long hpgId;
-	private TStatut TStatut;
 	private TDetailPlanGeneral TDetailPlanGeneral;
+	private TStatut TStatut;
 	private TFonction TFonction;
-	private TOperateur TOperateur;
 	private Date hpgDate;
 	private String hpgMotif;
+	private String hpgOpeMatricule;
 
 	public THistoPlanGeneral() {
 	}
 
-	public THistoPlanGeneral(long hpgId, TStatut TStatut, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction) {
+	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TStatut TStatut, TFonction TFonction) {
 		this.hpgId = hpgId;
-		this.TStatut = TStatut;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
+		this.TStatut = TStatut;
 		this.TFonction = TFonction;
 	}
 
-	public THistoPlanGeneral(long hpgId, TStatut TStatut, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction,
-			TOperateur TOperateur, Date hpgDate, String hpgMotif) {
+	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TStatut TStatut, TFonction TFonction,
+			Date hpgDate, String hpgMotif, String hpgOpeMatricule) {
 		this.hpgId = hpgId;
-		this.TStatut = TStatut;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
+		this.TStatut = TStatut;
 		this.TFonction = TFonction;
-		this.TOperateur = TOperateur;
 		this.hpgDate = hpgDate;
 		this.hpgMotif = hpgMotif;
+		this.hpgOpeMatricule = hpgOpeMatricule;
 	}
 
 	@Id
@@ -60,16 +60,6 @@ public class THistoPlanGeneral implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HPG_GPG_ID", nullable = false)
 	public TDetailPlanGeneral getTDetailPlanGeneral() {
 		return this.TDetailPlanGeneral;
@@ -80,6 +70,16 @@ public class THistoPlanGeneral implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HPG_FON_COD", nullable = false)
 	public TFonction getTFonction() {
 		return this.TFonction;
@@ -87,16 +87,6 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPG_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
 	}
 
 	@Temporal(TemporalType.DATE)
@@ -116,6 +106,15 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setHpgMotif(String hpgMotif) {
 		this.hpgMotif = hpgMotif;
+	}
+
+	@Column(name = "HPG_OPE_MATRICULE", length = 20)
+	public String getHpgOpeMatricule() {
+		return this.hpgOpeMatricule;
+	}
+
+	public void setHpgOpeMatricule(String hpgOpeMatricule) {
+		this.hpgOpeMatricule = hpgOpeMatricule;
 	}
 
 }

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,12 +24,12 @@ import javax.persistence.TemporalType;
 public class TDetCommissionSeance implements java.io.Serializable {
 
 	private BigDecimal dcsNum;
-	private TSeances TSeances;
-	private TStructure TStructure;
-	private TTypeCommission TTypeCommission;
 	private TCommissionSpecifique TCommissionSpecifique;
 	private TDacSpecs TDacSpecs;
 	private TOperateur TOperateur;
+	private TSeances TSeances;
+	private TStructure TStructure;
+	private TTypeCommission TTypeCommission;
 	private String dcsFonCod;
 	private String dcsOpeMatricule;
 	private Date dcsDteSaisi;
@@ -50,18 +50,18 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsNum = dcsNum;
 	}
 
-	public TDetCommissionSeance(BigDecimal dcsNum, TSeances TSeances, TStructure TStructure,
-			TTypeCommission TTypeCommission, TCommissionSpecifique TCommissionSpecifique, TDacSpecs TDacSpecs,
-			TOperateur TOperateur, String dcsFonCod, String dcsOpeMatricule, Date dcsDteSaisi, String dcsFonCodSaisi,
-			String dcsObservation, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
-			String dcsMbmRespo, String dcsRepMandate, Set<TAffichageDao> TAffichageDaos) {
+	public TDetCommissionSeance(BigDecimal dcsNum, TCommissionSpecifique TCommissionSpecifique, TDacSpecs TDacSpecs,
+			TOperateur TOperateur, TSeances TSeances, TStructure TStructure, TTypeCommission TTypeCommission,
+			String dcsFonCod, String dcsOpeMatricule, Date dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation,
+			String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent, String dcsMbmRespo,
+			String dcsRepMandate, Set<TAffichageDao> TAffichageDaos) {
 		this.dcsNum = dcsNum;
-		this.TSeances = TSeances;
-		this.TStructure = TStructure;
-		this.TTypeCommission = TTypeCommission;
 		this.TCommissionSpecifique = TCommissionSpecifique;
 		this.TDacSpecs = TDacSpecs;
 		this.TOperateur = TOperateur;
+		this.TSeances = TSeances;
+		this.TStructure = TStructure;
+		this.TTypeCommission = TTypeCommission;
 		this.dcsFonCod = dcsFonCod;
 		this.dcsOpeMatricule = dcsOpeMatricule;
 		this.dcsDteSaisi = dcsDteSaisi;
@@ -85,36 +85,6 @@ public class TDetCommissionSeance implements java.io.Serializable {
 
 	public void setDcsNum(BigDecimal dcsNum) {
 		this.dcsNum = dcsNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DCS_SEA_NUM")
-	public TSeances getTSeances() {
-		return this.TSeances;
-	}
-
-	public void setTSeances(TSeances TSeances) {
-		this.TSeances = TSeances;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DCS_COM_STR_CODE")
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DCS_COM_TCO_CODE")
-	public TTypeCommission getTTypeCommission() {
-		return this.TTypeCommission;
-	}
-
-	public void setTTypeCommission(TTypeCommission TTypeCommission) {
-		this.TTypeCommission = TTypeCommission;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -145,6 +115,36 @@ public class TDetCommissionSeance implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DCS_SEA_NUM")
+	public TSeances getTSeances() {
+		return this.TSeances;
+	}
+
+	public void setTSeances(TSeances TSeances) {
+		this.TSeances = TSeances;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DCS_COM_STR_CODE")
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DCS_COM_TCO_CODE")
+	public TTypeCommission getTTypeCommission() {
+		return this.TTypeCommission;
+	}
+
+	public void setTTypeCommission(TTypeCommission TTypeCommission) {
+		this.TTypeCommission = TTypeCommission;
 	}
 
 	@Column(name = "DCS_FON_COD", length = 100)

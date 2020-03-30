@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,10 +21,10 @@ import javax.persistence.TemporalType;
 public class TAvisPresel implements java.io.Serializable {
 
 	private BigDecimal aprNum;
-	private TSoumissions TSoumissions;
 	private TDemande TDemande;
 	private TOperateur TOperateurByAprOpeMatricule;
 	private TOperateur TOperateurByAprOpeMatMotif;
+	private TSoumissions TSoumissions;
 	private String aprType;
 	private String aprModeInvit;
 	private String aprDetailInvit;
@@ -41,15 +41,15 @@ public class TAvisPresel implements java.io.Serializable {
 		this.aprNum = aprNum;
 	}
 
-	public TAvisPresel(BigDecimal aprNum, TSoumissions TSoumissions, TDemande TDemande,
-			TOperateur TOperateurByAprOpeMatricule, TOperateur TOperateurByAprOpeMatMotif, String aprType,
-			String aprModeInvit, String aprDetailInvit, Date aprDteSaisi, Date aprDteModif, BigDecimal aprMtInit,
-			BigDecimal aprMtDef, String aprRet) {
+	public TAvisPresel(BigDecimal aprNum, TDemande TDemande, TOperateur TOperateurByAprOpeMatricule,
+			TOperateur TOperateurByAprOpeMatMotif, TSoumissions TSoumissions, String aprType, String aprModeInvit,
+			String aprDetailInvit, Date aprDteSaisi, Date aprDteModif, BigDecimal aprMtInit, BigDecimal aprMtDef,
+			String aprRet) {
 		this.aprNum = aprNum;
-		this.TSoumissions = TSoumissions;
 		this.TDemande = TDemande;
 		this.TOperateurByAprOpeMatricule = TOperateurByAprOpeMatricule;
 		this.TOperateurByAprOpeMatMotif = TOperateurByAprOpeMatMotif;
+		this.TSoumissions = TSoumissions;
 		this.aprType = aprType;
 		this.aprModeInvit = aprModeInvit;
 		this.aprDetailInvit = aprDetailInvit;
@@ -69,16 +69,6 @@ public class TAvisPresel implements java.io.Serializable {
 
 	public void setAprNum(BigDecimal aprNum) {
 		this.aprNum = aprNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "APR_SOU_NCC")
-	public TSoumissions getTSoumissions() {
-		return this.TSoumissions;
-	}
-
-	public void setTSoumissions(TSoumissions TSoumissions) {
-		this.TSoumissions = TSoumissions;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -109,6 +99,16 @@ public class TAvisPresel implements java.io.Serializable {
 
 	public void setTOperateurByAprOpeMatMotif(TOperateur TOperateurByAprOpeMatMotif) {
 		this.TOperateurByAprOpeMatMotif = TOperateurByAprOpeMatMotif;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "APR_SOU_NCC")
+	public TSoumissions getTSoumissions() {
+		return this.TSoumissions;
+	}
+
+	public void setTSoumissions(TSoumissions TSoumissions) {
+		this.TSoumissions = TSoumissions;
 	}
 
 	@Column(name = "APR_TYPE", length = 1)

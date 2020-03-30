@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -26,8 +26,8 @@ import javax.persistence.UniqueConstraint;
 public class TLBudgets implements java.io.Serializable {
 
 	private String lbgCode;
-	private TStructure TStructure;
 	private TDestinations TDestinations;
+	private TStructure TStructure;
 	private TFonction TFonctionByLbgFonCode;
 	private TFonction TFonctionByLbgFonCodeAc;
 	private TGestion TGestion;
@@ -103,7 +103,7 @@ public class TLBudgets implements java.io.Serializable {
 		this.lbgAdmCentral = lbgAdmCentral;
 	}
 
-	public TLBudgets(String lbgCode, TStructure TStructure, TDestinations TDestinations,
+	public TLBudgets(String lbgCode, TDestinations TDestinations, TStructure TStructure,
 			TFonction TFonctionByLbgFonCode, TFonction TFonctionByLbgFonCodeAc, TGestion TGestion, TNatures TNatures,
 			BigDecimal lbgResDon, String lbgImputation, Long lbgAnoCode, BigDecimal lbgResTr, Date lbgDteSaisi,
 			BigDecimal lbgAeTr, BigDecimal lbgAeDon, BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp,
@@ -117,8 +117,8 @@ public class TLBudgets implements java.io.Serializable {
 			String lbgFonCodePr, String lbgFonCodeVerou, Set<TLotAao> TLotAaos, Set<TDetailDemandes> TDetailDemandeses,
 			Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.lbgCode = lbgCode;
-		this.TStructure = TStructure;
 		this.TDestinations = TDestinations;
+		this.TStructure = TStructure;
 		this.TFonctionByLbgFonCode = TFonctionByLbgFonCode;
 		this.TFonctionByLbgFonCodeAc = TFonctionByLbgFonCodeAc;
 		this.TGestion = TGestion;
@@ -187,16 +187,6 @@ public class TLBudgets implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LBG_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "LBG_DES_CODE")
 	public TDestinations getTDestinations() {
 		return this.TDestinations;
@@ -204,6 +194,16 @@ public class TLBudgets implements java.io.Serializable {
 
 	public void setTDestinations(TDestinations TDestinations) {
 		this.TDestinations = TDestinations;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LBG_STR_CODE", nullable = false)
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

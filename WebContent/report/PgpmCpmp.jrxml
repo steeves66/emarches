@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-03-29T23:16:38 -->
+<!-- 2020-03-30T00:02:26 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PgpmCpmp" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa970b9-a7ef-4c6b-b72a-fbcc7c94abfa">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -91,19 +91,46 @@ and vp.str_code =$P{param_code}]]>
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="param_code" class="java.lang.String"/>
+	<parameter name="param_gest" class="java.lang.Long">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA[$P{param_gest}]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
-		<![CDATA[select distinct pl.plg_ges_code,pl.plg_id, m.min_libelle, st.str_libelle_long,pl.plg_fon_cod
-from t_plan_general pl, t_ministere m, t_structure st
+		<![CDATA[select * from t_structure st,t_plan_general pl,t_ministere m
 where pl.plg_str_code = st.str_code
 and st.str_min_code = m.min_code
+and pl.plg_ges_code=$P{param_gest}
 and st.str_code = $P{param_code}
 ]]>
 	</queryString>
-	<field name="PLG_GES_CODE" class="java.math.BigDecimal"/>
-	<field name="PLG_ID" class="java.math.BigDecimal"/>
-	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="STR_CODE" class="java.lang.String"/>
+	<field name="STR_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+	<field name="STR_ADRESSE" class="java.lang.String"/>
+	<field name="STR_EMAIL" class="java.lang.String"/>
+	<field name="STR_MIN_CODE" class="java.lang.String"/>
+	<field name="STR_TST_CODE" class="java.lang.String"/>
+	<field name="STR_REG_CODE" class="java.lang.String"/>
+	<field name="STR_ADR_POST" class="java.lang.String"/>
+	<field name="STR_ADR_GEO" class="java.lang.String"/>
+	<field name="STR_TEL" class="java.lang.String"/>
+	<field name="STR_FAX" class="java.lang.String"/>
+	<field name="STR_OPE_MATRICULE" class="java.lang.String"/>
+	<field name="STR_DTE_SAISI" class="java.sql.Timestamp"/>
+	<field name="STR_OPE_RESPO" class="java.lang.String"/>
+	<field name="PLG_ID" class="java.math.BigDecimal"/>
+	<field name="PLG_STR_CODE" class="java.lang.String"/>
 	<field name="PLG_FON_COD" class="java.lang.String"/>
+	<field name="PLG_GES_CODE" class="java.math.BigDecimal"/>
+	<field name="PLG_CODE" class="java.lang.String"/>
+	<field name="PLG_LIBELLE" class="java.lang.String"/>
+	<field name="MIN_CODE" class="java.lang.String"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="MIN_LIBELLE_COURT" class="java.lang.String"/>
+	<field name="MIN_DESCRIPTION" class="java.lang.String"/>
+	<field name="MIN_DTE_SAISI" class="java.sql.Timestamp"/>
+	<field name="MIN_OPE_MATRICULE" class="java.lang.String"/>
+	<field name="MIN_ACTIF" class="java.lang.String"/>
 	<group name="PLG_GES_CODE">
 		<groupExpression><![CDATA[$F{PLG_GES_CODE}]]></groupExpression>
 	</group>

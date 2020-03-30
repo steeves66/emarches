@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,11 +24,11 @@ import javax.persistence.TemporalType;
 public class TDacSpecs implements java.io.Serializable {
 
 	private String dacCode;
+	private TDetailPlanPassation TDetailPlanPassation;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TTypeDacSpecs TTypeDacSpecs;
 	private TTypeMarche TTypeMarche;
-	private TDetailPlanPassation TDetailPlanPassation;
 	private TFonction TFonctionByDacFonCodeCpmp;
 	private TFonction TFonctionByDacFonCodAc;
 	private TGestion TGestion;
@@ -74,8 +74,8 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacCode = dacCode;
 	}
 
-	public TDacSpecs(String dacCode, TStatut TStatut, TStructure TStructure, TTypeDacSpecs TTypeDacSpecs,
-			TTypeMarche TTypeMarche, TDetailPlanPassation TDetailPlanPassation, TFonction TFonctionByDacFonCodeCpmp,
+	public TDacSpecs(String dacCode, TDetailPlanPassation TDetailPlanPassation, TStatut TStatut, TStructure TStructure,
+			TTypeDacSpecs TTypeDacSpecs, TTypeMarche TTypeMarche, TFonction TFonctionByDacFonCodeCpmp,
 			TFonction TFonctionByDacFonCodAc, TGestion TGestion, TModePassation TModePassation, String dacObjet,
 			Date dacDteSaisi, BigDecimal dacNbrOuv, Date dacDteValCpmp, Date dacDteValDmp, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
@@ -88,11 +88,11 @@ public class TDacSpecs implements java.io.Serializable {
 			Set<TDetailDemandes> TDetailDemandeses, Set<TLotAao> TLotAaos, Set<TPiecesDacs> TPiecesDacses,
 			Set<TDetCommissionSeance> TDetCommissionSeances, Set<TRetrait> TRetraits) {
 		this.dacCode = dacCode;
+		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TTypeDacSpecs = TTypeDacSpecs;
 		this.TTypeMarche = TTypeMarche;
-		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
 		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
 		this.TGestion = TGestion;
@@ -144,6 +144,16 @@ public class TDacSpecs implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_DPP_ID")
+	public TDetailPlanPassation getTDetailPlanPassation() {
+		return this.TDetailPlanPassation;
+	}
+
+	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
+		this.TDetailPlanPassation = TDetailPlanPassation;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_STA_CODE")
 	public TStatut getTStatut() {
 		return this.TStatut;
@@ -181,16 +191,6 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTTypeMarche(TTypeMarche TTypeMarche) {
 		this.TTypeMarche = TTypeMarche;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_DPP_ID")
-	public TDetailPlanPassation getTDetailPlanPassation() {
-		return this.TDetailPlanPassation;
-	}
-
-	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
-		this.TDetailPlanPassation = TDetailPlanPassation;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

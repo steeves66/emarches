@@ -53,6 +53,7 @@ import com.sndi.model.VAgpmDetails;
 import com.sndi.model.VAgpmStatut;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VProjetAgpm;
+import com.sndi.model.VUpdateAgpm;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -111,6 +112,7 @@ public class AgpmController {
 	 //Declaration des listes
 	 /*private List<TAgpm> objetListe = new ArrayList<TAgpm>();*/
 	 private List<TAffichageAgpm> affichageListe = new ArrayList<TAffichageAgpm>();
+	 private List<VUpdateAgpm> listUpdate = new ArrayList<VUpdateAgpm>();
 	 private List<VAgpm> objetListe = new ArrayList<VAgpm>();
 	 private List<TAgpm> listeAgpm = new ArrayList<TAgpm>();
 	 private List<TProjet> projetUpdate = new ArrayList<TProjet>();
@@ -159,6 +161,7 @@ public class AgpmController {
 	 private TDetailAgpm detail = new TDetailAgpm();
 	 private TDetailAgpm sltdetail = new TDetailAgpm();
 	 private VAgpm addAgpm = new VAgpm(); 
+	 private VUpdateAgpm updateAgpm = new VUpdateAgpm(); 
 	 private VAgpmDeclarant rappelDec = new VAgpmDeclarant();
 	 private VProjetAgpm acte = new VProjetAgpm(); 
 	 private TAffichageAgpm slctdTd = new TAffichageAgpm();
@@ -1854,6 +1857,7 @@ public class AgpmController {
 				case "pgpm3":
 				break;
 				case "agpm3":
+					editForm();
 					sourfin = slctdTd.getTFinancement().getFinTypeFinance();
 					baiCode= slctdTd.getTBailleur().getBaiCode();
 					souCode = slctdTd.getTSourceFinancement().getSouCode();
@@ -1869,12 +1873,13 @@ public class AgpmController {
 		    return userController.renderPage(value);
 		}
 	 
-	 
+	//Methode de récupération de t_agpm dans t_affichage
 	 public void editForm() {
-		 List<TDeclarant> DEC =iservice.getObjectsByColumn("TDeclarant", new ArrayList<String>(Arrays.asList("DEC_ID")),
-   				new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
-		 TDeclarant declarant = new TDeclarant();
-				if(!DEC.isEmpty()) declarant =DEC.get(0); 
+	    			listUpdate= (List<VUpdateAgpm>) iservice.getObjectsByColumn("VUpdateAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+	    					 new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+	    			if (!listUpdate.isEmpty()) {
+	    				updateAgpm=listUpdate.get(0); 
+	    			}
 	 }
 	 
 	 
@@ -3162,6 +3167,22 @@ public class AgpmController {
 
 	public void setSltdetail(TDetailAgpm sltdetail) {
 		this.sltdetail = sltdetail;
+	}
+
+	public List<VUpdateAgpm> getListUpdate() {
+		return listUpdate;
+	}
+
+	public void setListUpdate(List<VUpdateAgpm> listUpdate) {
+		this.listUpdate = listUpdate;
+	}
+
+	public VUpdateAgpm getUpdateAgpm() {
+		return updateAgpm;
+	}
+
+	public void setUpdateAgpm(VUpdateAgpm updateAgpm) {
+		this.updateAgpm = updateAgpm;
 	}
 	
     

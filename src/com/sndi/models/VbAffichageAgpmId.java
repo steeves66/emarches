@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -32,15 +32,13 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 	}
 
 	public VbAffichageAgpmId(long affId, long affProId, long affFinId, short affGesCode, String affAgpStaCode,
-			long affAgpId, String affBaiCode, String affSouCode, String affDevCode, String affStrCode,
-			String affFonCod) {
+			long affAgpId, String affSouCode, String affDevCode, String affStrCode, String affFonCod) {
 		this.affId = affId;
 		this.affProId = affProId;
 		this.affFinId = affFinId;
 		this.affGesCode = affGesCode;
 		this.affAgpStaCode = affAgpStaCode;
 		this.affAgpId = affAgpId;
-		this.affBaiCode = affBaiCode;
 		this.affSouCode = affSouCode;
 		this.affDevCode = affDevCode;
 		this.affStrCode = affStrCode;
@@ -133,7 +131,7 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 		this.affAgpId = affAgpId;
 	}
 
-	@Column(name = "AFF_BAI_CODE", nullable = false, length = 5)
+	@Column(name = "AFF_BAI_CODE", length = 5)
 	public String getAffBaiCode() {
 		return this.affBaiCode;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,8 +21,8 @@ import javax.persistence.TemporalType;
 public class TDetailAvis implements java.io.Serializable {
 
 	private BigDecimal davCode;
-	private TDacSpecs TDacSpecs;
 	private TAvisAppelOffre TAvisAppelOffre;
+	private TDacSpecs TDacSpecs;
 	private BigDecimal davNumOrd;
 	private String davTitre;
 	private String davContenu;
@@ -37,11 +37,11 @@ public class TDetailAvis implements java.io.Serializable {
 		this.davCode = davCode;
 	}
 
-	public TDetailAvis(BigDecimal davCode, TDacSpecs TDacSpecs, TAvisAppelOffre TAvisAppelOffre, BigDecimal davNumOrd,
+	public TDetailAvis(BigDecimal davCode, TAvisAppelOffre TAvisAppelOffre, TDacSpecs TDacSpecs, BigDecimal davNumOrd,
 			String davTitre, String davContenu, Date davDteSaisi, String davStaCode, String davAutre) {
 		this.davCode = davCode;
-		this.TDacSpecs = TDacSpecs;
 		this.TAvisAppelOffre = TAvisAppelOffre;
+		this.TDacSpecs = TDacSpecs;
 		this.davNumOrd = davNumOrd;
 		this.davTitre = davTitre;
 		this.davContenu = davContenu;
@@ -62,16 +62,6 @@ public class TDetailAvis implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAV_DAC_CODE")
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAV_AAO_CODE")
 	public TAvisAppelOffre getTAvisAppelOffre() {
 		return this.TAvisAppelOffre;
@@ -79,6 +69,16 @@ public class TDetailAvis implements java.io.Serializable {
 
 	public void setTAvisAppelOffre(TAvisAppelOffre TAvisAppelOffre) {
 		this.TAvisAppelOffre = TAvisAppelOffre;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAV_DAC_CODE")
+	public TDacSpecs getTDacSpecs() {
+		return this.TDacSpecs;
+	}
+
+	public void setTDacSpecs(TDacSpecs TDacSpecs) {
+		this.TDacSpecs = TDacSpecs;
 	}
 
 	@Column(name = "DAV_NUM_ORD", precision = 22, scale = 0)

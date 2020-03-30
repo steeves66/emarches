@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,9 +23,9 @@ public class TDetailCorrection implements java.io.Serializable {
 	private BigDecimal dcoNum;
 	private TCorrectionDac TCorrectionDac;
 	private TDacSpecs TDacSpecs;
-	private TFonction TFonction;
 	private TOperateur TOperateur;
 	private TPiecesDacs TPiecesDacs;
+	private TFonction TFonction;
 	private String dcoTitre;
 	private String dcoLibelle;
 	private Date dcoDteSaisi;
@@ -41,15 +41,15 @@ public class TDetailCorrection implements java.io.Serializable {
 		this.dcoNum = dcoNum;
 	}
 
-	public TDetailCorrection(BigDecimal dcoNum, TCorrectionDac TCorrectionDac, TDacSpecs TDacSpecs, TFonction TFonction,
-			TOperateur TOperateur, TPiecesDacs TPiecesDacs, String dcoTitre, String dcoLibelle, Date dcoDteSaisi,
-			String dcoObservation, String dcoConforme, String dcoPresente, String dcoRespo) {
+	public TDetailCorrection(BigDecimal dcoNum, TCorrectionDac TCorrectionDac, TDacSpecs TDacSpecs,
+			TOperateur TOperateur, TPiecesDacs TPiecesDacs, TFonction TFonction, String dcoTitre, String dcoLibelle,
+			Date dcoDteSaisi, String dcoObservation, String dcoConforme, String dcoPresente, String dcoRespo) {
 		this.dcoNum = dcoNum;
 		this.TCorrectionDac = TCorrectionDac;
 		this.TDacSpecs = TDacSpecs;
-		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
 		this.TPiecesDacs = TPiecesDacs;
+		this.TFonction = TFonction;
 		this.dcoTitre = dcoTitre;
 		this.dcoLibelle = dcoLibelle;
 		this.dcoDteSaisi = dcoDteSaisi;
@@ -91,16 +91,6 @@ public class TDetailCorrection implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DCO_FON_COD_SAISI")
-	public TFonction getTFonction() {
-		return this.TFonction;
-	}
-
-	public void setTFonction(TFonction TFonction) {
-		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DCO_OPE_MATRICULE")
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -118,6 +108,16 @@ public class TDetailCorrection implements java.io.Serializable {
 
 	public void setTPiecesDacs(TPiecesDacs TPiecesDacs) {
 		this.TPiecesDacs = TPiecesDacs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DCO_FON_COD_SAISI")
+	public TFonction getTFonction() {
+		return this.TFonction;
+	}
+
+	public void setTFonction(TFonction TFonction) {
+		this.TFonction = TFonction;
 	}
 
 	@Column(name = "DCO_TITRE", length = 200)

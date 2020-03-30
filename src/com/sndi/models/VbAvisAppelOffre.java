@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -34,7 +34,7 @@ public class VbAvisAppelOffre implements java.io.Serializable {
 			@AttributeOverride(name = "aaoStaCode", column = @Column(name = "AAO_STA_CODE", length = 3)),
 			@AttributeOverride(name = "aaoDtePub", column = @Column(name = "AAO_DTE_PUB", length = 7)),
 			@AttributeOverride(name = "aaoDteOuvTec", column = @Column(name = "AAO_DTE_OUV_TEC", length = 7)),
-			@AttributeOverride(name = "aaoDteHeurOuv", column = @Column(name = "AAO_DTE_HEUR_OUV", length = 7)),
+			@AttributeOverride(name = "aaoDteHeurOuv", column = @Column(name = "AAO_DTE_HEUR_OUV", length = 20)),
 			@AttributeOverride(name = "aaoDteOuvFin", column = @Column(name = "AAO_DTE_OUV_FIN", length = 7)),
 			@AttributeOverride(name = "aaoNbrLot", column = @Column(name = "AAO_NBR_LOT", precision = 22, scale = 0)),
 			@AttributeOverride(name = "aaoNbrOuv", column = @Column(name = "AAO_NBR_OUV", precision = 22, scale = 0)),
@@ -55,7 +55,7 @@ public class VbAvisAppelOffre implements java.io.Serializable {
 			@AttributeOverride(name = "aaoCoutDac", column = @Column(name = "AAO_COUT_DAC", precision = 22, scale = 0)),
 			@AttributeOverride(name = "aaoLieuRecep", column = @Column(name = "AAO_LIEU_RECEP", length = 1000)),
 			@AttributeOverride(name = "aaoDateRecep", column = @Column(name = "AAO_DATE_RECEP", length = 7)),
-			@AttributeOverride(name = "aaoHeureRecep", column = @Column(name = "AAO_HEURE_RECEP", length = 7)),
+			@AttributeOverride(name = "aaoHeureRecep", column = @Column(name = "AAO_HEURE_RECEP", length = 20)),
 			@AttributeOverride(name = "aaoAdaNum", column = @Column(name = "AAO_ADA_NUM", precision = 22, scale = 0)),
 			@AttributeOverride(name = "aaoNatPrix", column = @Column(name = "AAO_NAT_PRIX", length = 20)),
 			@AttributeOverride(name = "aaoRegQual", column = @Column(name = "AAO_REG_QUAL", length = 100)),

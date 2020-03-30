@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 public class TAffichagePgpm implements java.io.Serializable {
 
 	private long affId;
+	private TPlanGeneral TPlanGeneral;
 	private TSourceFinancement TSourceFinancement;
 	private TStatut TStatut;
 	private TStructure TStructure;
@@ -27,7 +28,6 @@ public class TAffichagePgpm implements java.io.Serializable {
 	private TFonction TFonction;
 	private TGestion TGestion;
 	private TModePassation TModePassation;
-	private TPlanGeneral TPlanGeneral;
 	private Long affGpgId;
 	private Long affGpgAgpId;
 	private String affGpgTypePlan;
@@ -49,24 +49,25 @@ public class TAffichagePgpm implements java.io.Serializable {
 	public TAffichagePgpm() {
 	}
 
-	public TAffichagePgpm(long affId, TStatut TStatut, TTypeMarche TTypeMarche, TModePassation TModePassation,
-			TPlanGeneral TPlanGeneral, String affGpgTypePlan) {
+	public TAffichagePgpm(long affId, TPlanGeneral TPlanGeneral, TStatut TStatut, TTypeMarche TTypeMarche,
+			TModePassation TModePassation, String affGpgTypePlan) {
 		this.affId = affId;
+		this.TPlanGeneral = TPlanGeneral;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
 		this.TModePassation = TModePassation;
-		this.TPlanGeneral = TPlanGeneral;
 		this.affGpgTypePlan = affGpgTypePlan;
 	}
 
-	public TAffichagePgpm(long affId, TSourceFinancement TSourceFinancement, TStatut TStatut, TStructure TStructure,
-			TTypeMarche TTypeMarche, TFonction TFonction, TGestion TGestion, TModePassation TModePassation,
-			TPlanGeneral TPlanGeneral, Long affGpgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgCode,
+	public TAffichagePgpm(long affId, TPlanGeneral TPlanGeneral, TSourceFinancement TSourceFinancement, TStatut TStatut,
+			TStructure TStructure, TTypeMarche TTypeMarche, TFonction TFonction, TGestion TGestion,
+			TModePassation TModePassation, Long affGpgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgCode,
 			String affGpgObjet, Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire,
 			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,
 			String affGpgRecherche, Date affGpgDateValAc, Date affGpgDateValCpmp, Date affGpgDateValDmp,
 			String affGpgTypeFinance) {
 		this.affId = affId;
+		this.TPlanGeneral = TPlanGeneral;
 		this.TSourceFinancement = TSourceFinancement;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
@@ -74,7 +75,6 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
 		this.TModePassation = TModePassation;
-		this.TPlanGeneral = TPlanGeneral;
 		this.affGpgId = affGpgId;
 		this.affGpgAgpId = affGpgAgpId;
 		this.affGpgTypePlan = affGpgTypePlan;
@@ -103,6 +103,16 @@ public class TAffichagePgpm implements java.io.Serializable {
 
 	public void setAffId(long affId) {
 		this.affId = affId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_GPG_PLG_ID", nullable = false)
+	public TPlanGeneral getTPlanGeneral() {
+		return this.TPlanGeneral;
+	}
+
+	public void setTPlanGeneral(TPlanGeneral TPlanGeneral) {
+		this.TPlanGeneral = TPlanGeneral;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -173,16 +183,6 @@ public class TAffichagePgpm implements java.io.Serializable {
 
 	public void setTModePassation(TModePassation TModePassation) {
 		this.TModePassation = TModePassation;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_GPG_PLG_ID", nullable = false)
-	public TPlanGeneral getTPlanGeneral() {
-		return this.TPlanGeneral;
-	}
-
-	public void setTPlanGeneral(TPlanGeneral TPlanGeneral) {
-		this.TPlanGeneral = TPlanGeneral;
 	}
 
 	@Column(name = "AFF_GPG_ID", precision = 10, scale = 0)

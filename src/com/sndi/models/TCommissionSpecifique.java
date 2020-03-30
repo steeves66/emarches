@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,10 +24,10 @@ import javax.persistence.TemporalType;
 public class TCommissionSpecifique implements java.io.Serializable {
 
 	private BigDecimal comNum;
-	private TStructure TStructure;
-	private TTypeCommission TTypeCommission;
 	private TCommissionType TCommissionType;
 	private TDacSpecs TDacSpecs;
+	private TStructure TStructure;
+	private TTypeCommission TTypeCommission;
 	private Date comDteSaisi;
 	private String comOpeMatricule;
 	private String comMarCode;
@@ -41,14 +41,14 @@ public class TCommissionSpecifique implements java.io.Serializable {
 		this.comNum = comNum;
 	}
 
-	public TCommissionSpecifique(BigDecimal comNum, TStructure TStructure, TTypeCommission TTypeCommission,
-			TCommissionType TCommissionType, TDacSpecs TDacSpecs, Date comDteSaisi, String comOpeMatricule,
+	public TCommissionSpecifique(BigDecimal comNum, TCommissionType TCommissionType, TDacSpecs TDacSpecs,
+			TStructure TStructure, TTypeCommission TTypeCommission, Date comDteSaisi, String comOpeMatricule,
 			String comMarCode, String comAaoCode, Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.comNum = comNum;
-		this.TStructure = TStructure;
-		this.TTypeCommission = TTypeCommission;
 		this.TCommissionType = TCommissionType;
 		this.TDacSpecs = TDacSpecs;
+		this.TStructure = TStructure;
+		this.TTypeCommission = TTypeCommission;
 		this.comDteSaisi = comDteSaisi;
 		this.comOpeMatricule = comOpeMatricule;
 		this.comMarCode = comMarCode;
@@ -65,26 +65,6 @@ public class TCommissionSpecifique implements java.io.Serializable {
 
 	public void setComNum(BigDecimal comNum) {
 		this.comNum = comNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "COM_STR_CODE")
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "COM_TCO_CODE")
-	public TTypeCommission getTTypeCommission() {
-		return this.TTypeCommission;
-	}
-
-	public void setTTypeCommission(TTypeCommission TTypeCommission) {
-		this.TTypeCommission = TTypeCommission;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -105,6 +85,26 @@ public class TCommissionSpecifique implements java.io.Serializable {
 
 	public void setTDacSpecs(TDacSpecs TDacSpecs) {
 		this.TDacSpecs = TDacSpecs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "COM_STR_CODE")
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "COM_TCO_CODE")
+	public TTypeCommission getTTypeCommission() {
+		return this.TTypeCommission;
+	}
+
+	public void setTTypeCommission(TTypeCommission TTypeCommission) {
+		this.TTypeCommission = TTypeCommission;
 	}
 
 	@Temporal(TemporalType.DATE)

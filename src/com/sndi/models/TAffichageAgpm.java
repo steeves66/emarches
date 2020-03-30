@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,16 +20,16 @@ import javax.persistence.TemporalType;
 public class TAffichageAgpm implements java.io.Serializable {
 
 	private long affId;
+	private TBailleur TBailleur;
+	private TDeclarant TDeclarant;
+	private TDevise TDevise;
+	private TFinancement TFinancement;
 	private TProjet TProjet;
 	private TSourceFinancement TSourceFinancement;
 	private TStatut TStatut;
 	private TStructure TStructure;
-	private TDeclarant TDeclarant;
-	private TDevise TDevise;
-	private TFinancement TFinancement;
 	private TFonction TFonction;
 	private TGestion TGestion;
-	private TBailleur TBailleur;
 	private long affAgpId;
 	private String affAgpActeurSaisie;
 	private String affAgpStatutRetour;
@@ -44,37 +44,37 @@ public class TAffichageAgpm implements java.io.Serializable {
 	public TAffichageAgpm() {
 	}
 
-	public TAffichageAgpm(long affId, TProjet TProjet, TSourceFinancement TSourceFinancement, TStatut TStatut,
-			TStructure TStructure, TDevise TDevise, TFinancement TFinancement, TFonction TFonction, TGestion TGestion,
-			long affAgpId) {
+	public TAffichageAgpm(long affId, TDevise TDevise, TFinancement TFinancement, TProjet TProjet,
+			TSourceFinancement TSourceFinancement, TStatut TStatut, TStructure TStructure, TFonction TFonction,
+			TGestion TGestion, long affAgpId) {
 		this.affId = affId;
+		this.TDevise = TDevise;
+		this.TFinancement = TFinancement;
 		this.TProjet = TProjet;
 		this.TSourceFinancement = TSourceFinancement;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
-		this.TDevise = TDevise;
-		this.TFinancement = TFinancement;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
 		this.affAgpId = affAgpId;
 	}
 
-	public TAffichageAgpm(long affId, TProjet TProjet, TSourceFinancement TSourceFinancement, TStatut TStatut,
-			TStructure TStructure, TDeclarant TDeclarant, TDevise TDevise, TFinancement TFinancement,
-			TFonction TFonction, TGestion TGestion, TBailleur TBailleur, long affAgpId, String affAgpActeurSaisie,
+	public TAffichageAgpm(long affId, TBailleur TBailleur, TDeclarant TDeclarant, TDevise TDevise,
+			TFinancement TFinancement, TProjet TProjet, TSourceFinancement TSourceFinancement, TStatut TStatut,
+			TStructure TStructure, TFonction TFonction, TGestion TGestion, long affAgpId, String affAgpActeurSaisie,
 			String affAgpStatutRetour, String affAgpActif, String affAgpTypeDao, String affAgpCommentaire,
 			String affAgpRecherche, Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp) {
 		this.affId = affId;
+		this.TBailleur = TBailleur;
+		this.TDeclarant = TDeclarant;
+		this.TDevise = TDevise;
+		this.TFinancement = TFinancement;
 		this.TProjet = TProjet;
 		this.TSourceFinancement = TSourceFinancement;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
-		this.TDeclarant = TDeclarant;
-		this.TDevise = TDevise;
-		this.TFinancement = TFinancement;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
-		this.TBailleur = TBailleur;
 		this.affAgpId = affAgpId;
 		this.affAgpActeurSaisie = affAgpActeurSaisie;
 		this.affAgpStatutRetour = affAgpStatutRetour;
@@ -96,6 +96,46 @@ public class TAffichageAgpm implements java.io.Serializable {
 
 	public void setAffId(long affId) {
 		this.affId = affId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_BAI_CODE")
+	public TBailleur getTBailleur() {
+		return this.TBailleur;
+	}
+
+	public void setTBailleur(TBailleur TBailleur) {
+		this.TBailleur = TBailleur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_DEC_ID")
+	public TDeclarant getTDeclarant() {
+		return this.TDeclarant;
+	}
+
+	public void setTDeclarant(TDeclarant TDeclarant) {
+		this.TDeclarant = TDeclarant;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_DEV_CODE", nullable = false)
+	public TDevise getTDevise() {
+		return this.TDevise;
+	}
+
+	public void setTDevise(TDevise TDevise) {
+		this.TDevise = TDevise;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_FIN_ID", nullable = false)
+	public TFinancement getTFinancement() {
+		return this.TFinancement;
+	}
+
+	public void setTFinancement(TFinancement TFinancement) {
+		this.TFinancement = TFinancement;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -139,36 +179,6 @@ public class TAffichageAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DEC_ID")
-	public TDeclarant getTDeclarant() {
-		return this.TDeclarant;
-	}
-
-	public void setTDeclarant(TDeclarant TDeclarant) {
-		this.TDeclarant = TDeclarant;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DEV_CODE", nullable = false)
-	public TDevise getTDevise() {
-		return this.TDevise;
-	}
-
-	public void setTDevise(TDevise TDevise) {
-		this.TDevise = TDevise;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_FIN_ID", nullable = false)
-	public TFinancement getTFinancement() {
-		return this.TFinancement;
-	}
-
-	public void setTFinancement(TFinancement TFinancement) {
-		this.TFinancement = TFinancement;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AFF_FON_COD", nullable = false)
 	public TFonction getTFonction() {
 		return this.TFonction;
@@ -186,16 +196,6 @@ public class TAffichageAgpm implements java.io.Serializable {
 
 	public void setTGestion(TGestion TGestion) {
 		this.TGestion = TGestion;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_BAI_CODE")
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
-	}
-
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
 	}
 
 	@Column(name = "AFF_AGP_ID", nullable = false, precision = 10, scale = 0)

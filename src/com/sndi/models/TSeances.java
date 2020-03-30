@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,9 +24,9 @@ import javax.persistence.TemporalType;
 public class TSeances implements java.io.Serializable {
 
 	private BigDecimal seaNum;
+	private TOperateur TOperateur;
 	private TTypeSeance TTypeSeance;
 	private TFonction TFonction;
-	private TOperateur TOperateur;
 	private String seaLibelle;
 	private String seaQuorum;
 	private BigDecimal seaNbrPli;
@@ -42,13 +42,13 @@ public class TSeances implements java.io.Serializable {
 		this.seaNum = seaNum;
 	}
 
-	public TSeances(BigDecimal seaNum, TTypeSeance TTypeSeance, TFonction TFonction, TOperateur TOperateur,
+	public TSeances(BigDecimal seaNum, TOperateur TOperateur, TTypeSeance TTypeSeance, TFonction TFonction,
 			String seaLibelle, String seaQuorum, BigDecimal seaNbrPli, String seaRes, Date seaSteSaisi,
 			String seaObservation, Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.seaNum = seaNum;
+		this.TOperateur = TOperateur;
 		this.TTypeSeance = TTypeSeance;
 		this.TFonction = TFonction;
-		this.TOperateur = TOperateur;
 		this.seaLibelle = seaLibelle;
 		this.seaQuorum = seaQuorum;
 		this.seaNbrPli = seaNbrPli;
@@ -70,6 +70,16 @@ public class TSeances implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SEA_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SEA_TSE_CODE")
 	public TTypeSeance getTTypeSeance() {
 		return this.TTypeSeance;
@@ -87,16 +97,6 @@ public class TSeances implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SEA_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
 	}
 
 	@Column(name = "SEA_LIBELLE", length = 500)

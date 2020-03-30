@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,29 +17,29 @@ import javax.persistence.Table;
 public class TCharge implements java.io.Serializable {
 
 	private long chrId;
+	private TDetailPlanPassation TDetailPlanPassation;
 	private TStructure TStructure;
 	private TTypeCharge TTypeCharge;
-	private TDetailPlanPassation TDetailPlanPassation;
 	private String chrCommentaire;
 	private String chrStatut;
 
 	public TCharge() {
 	}
 
-	public TCharge(long chrId, TStructure TStructure, TTypeCharge TTypeCharge,
-			TDetailPlanPassation TDetailPlanPassation) {
+	public TCharge(long chrId, TDetailPlanPassation TDetailPlanPassation, TStructure TStructure,
+			TTypeCharge TTypeCharge) {
 		this.chrId = chrId;
+		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TStructure = TStructure;
 		this.TTypeCharge = TTypeCharge;
-		this.TDetailPlanPassation = TDetailPlanPassation;
 	}
 
-	public TCharge(long chrId, TStructure TStructure, TTypeCharge TTypeCharge,
-			TDetailPlanPassation TDetailPlanPassation, String chrCommentaire, String chrStatut) {
+	public TCharge(long chrId, TDetailPlanPassation TDetailPlanPassation, TStructure TStructure,
+			TTypeCharge TTypeCharge, String chrCommentaire, String chrStatut) {
 		this.chrId = chrId;
+		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TStructure = TStructure;
 		this.TTypeCharge = TTypeCharge;
-		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.chrCommentaire = chrCommentaire;
 		this.chrStatut = chrStatut;
 	}
@@ -53,6 +53,16 @@ public class TCharge implements java.io.Serializable {
 
 	public void setChrId(long chrId) {
 		this.chrId = chrId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CHR_DPP_ID", nullable = false)
+	public TDetailPlanPassation getTDetailPlanPassation() {
+		return this.TDetailPlanPassation;
+	}
+
+	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
+		this.TDetailPlanPassation = TDetailPlanPassation;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -73,16 +83,6 @@ public class TCharge implements java.io.Serializable {
 
 	public void setTTypeCharge(TTypeCharge TTypeCharge) {
 		this.TTypeCharge = TTypeCharge;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CHR_DPP_ID", nullable = false)
-	public TDetailPlanPassation getTDetailPlanPassation() {
-		return this.TDetailPlanPassation;
-	}
-
-	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
-		this.TDetailPlanPassation = TDetailPlanPassation;
 	}
 
 	@Column(name = "CHR_COMMENTAIRE", length = 1000)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,10 +24,10 @@ import javax.persistence.TemporalType;
 public class TDetOffres implements java.io.Serializable {
 
 	private BigDecimal dofNum;
-	private TFonction TFonction;
-	private TLotAao TLotAao;
 	private TOffres TOffres;
 	private TOperateur TOperateur;
+	private TFonction TFonction;
+	private TLotAao TLotAao;
 	private String dofLaaAaoCode;
 	private String dofTyp;
 	private BigDecimal dofDelai;
@@ -89,15 +89,15 @@ public class TDetOffres implements java.io.Serializable {
 	public TDetOffres() {
 	}
 
-	public TDetOffres(BigDecimal dofNum, TLotAao TLotAao, TOffres TOffres, String dofLaaAaoCode, BigDecimal dofDelai) {
+	public TDetOffres(BigDecimal dofNum, TOffres TOffres, TLotAao TLotAao, String dofLaaAaoCode, BigDecimal dofDelai) {
 		this.dofNum = dofNum;
-		this.TLotAao = TLotAao;
 		this.TOffres = TOffres;
+		this.TLotAao = TLotAao;
 		this.dofLaaAaoCode = dofLaaAaoCode;
 		this.dofDelai = dofDelai;
 	}
 
-	public TDetOffres(BigDecimal dofNum, TFonction TFonction, TLotAao TLotAao, TOffres TOffres, TOperateur TOperateur,
+	public TDetOffres(BigDecimal dofNum, TOffres TOffres, TOperateur TOperateur, TFonction TFonction, TLotAao TLotAao,
 			String dofLaaAaoCode, String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2, Long dofRangOfr,
 			BigDecimal dofMtCor, BigDecimal dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut,
 			String dofBanCode, String dofSeuil, Short dofScore, String dofRecevabl, String dofRet, String dofRetBai,
@@ -111,10 +111,10 @@ public class TDetOffres implements java.io.Serializable {
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofStatut,
 			Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
-		this.TFonction = TFonction;
-		this.TLotAao = TLotAao;
 		this.TOffres = TOffres;
 		this.TOperateur = TOperateur;
+		this.TFonction = TFonction;
+		this.TLotAao = TLotAao;
 		this.dofLaaAaoCode = dofLaaAaoCode;
 		this.dofTyp = dofTyp;
 		this.dofDelai = dofDelai;
@@ -186,26 +186,6 @@ public class TDetOffres implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DOF_FON_CODE_AC")
-	public TFonction getTFonction() {
-		return this.TFonction;
-	}
-
-	public void setTFonction(TFonction TFonction) {
-		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DOF_LAA_ID", nullable = false)
-	public TLotAao getTLotAao() {
-		return this.TLotAao;
-	}
-
-	public void setTLotAao(TLotAao TLotAao) {
-		this.TLotAao = TLotAao;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOF_OFF_NUM", nullable = false)
 	public TOffres getTOffres() {
 		return this.TOffres;
@@ -223,6 +203,26 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DOF_FON_CODE_AC")
+	public TFonction getTFonction() {
+		return this.TFonction;
+	}
+
+	public void setTFonction(TFonction TFonction) {
+		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DOF_LAA_ID", nullable = false)
+	public TLotAao getTLotAao() {
+		return this.TLotAao;
+	}
+
+	public void setTLotAao(TLotAao TLotAao) {
+		this.TLotAao = TLotAao;
 	}
 
 	@Column(name = "DOF_LAA_AAO_CODE", nullable = false, length = 20)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class TDetailVente implements java.io.Serializable {
 
 	private long dveNum;
-	private TVenteDac TVenteDac;
 	private TDacSpecs TDacSpecs;
+	private TVenteDac TVenteDac;
 	private TLotAao TLotAao;
 	private String dveQte;
 	private Long dveCout;
@@ -27,17 +27,17 @@ public class TDetailVente implements java.io.Serializable {
 	public TDetailVente() {
 	}
 
-	public TDetailVente(long dveNum, TVenteDac TVenteDac, TDacSpecs TDacSpecs) {
+	public TDetailVente(long dveNum, TDacSpecs TDacSpecs, TVenteDac TVenteDac) {
 		this.dveNum = dveNum;
-		this.TVenteDac = TVenteDac;
 		this.TDacSpecs = TDacSpecs;
+		this.TVenteDac = TVenteDac;
 	}
 
-	public TDetailVente(long dveNum, TVenteDac TVenteDac, TDacSpecs TDacSpecs, TLotAao TLotAao, String dveQte,
+	public TDetailVente(long dveNum, TDacSpecs TDacSpecs, TVenteDac TVenteDac, TLotAao TLotAao, String dveQte,
 			Long dveCout, String dveCoutLettre) {
 		this.dveNum = dveNum;
-		this.TVenteDac = TVenteDac;
 		this.TDacSpecs = TDacSpecs;
+		this.TVenteDac = TVenteDac;
 		this.TLotAao = TLotAao;
 		this.dveQte = dveQte;
 		this.dveCout = dveCout;
@@ -56,16 +56,6 @@ public class TDetailVente implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DVE_VEN_NUM", nullable = false)
-	public TVenteDac getTVenteDac() {
-		return this.TVenteDac;
-	}
-
-	public void setTVenteDac(TVenteDac TVenteDac) {
-		this.TVenteDac = TVenteDac;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DVE_DAC_CODE", nullable = false)
 	public TDacSpecs getTDacSpecs() {
 		return this.TDacSpecs;
@@ -73,6 +63,16 @@ public class TDetailVente implements java.io.Serializable {
 
 	public void setTDacSpecs(TDacSpecs TDacSpecs) {
 		this.TDacSpecs = TDacSpecs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DVE_VEN_NUM", nullable = false)
+	public TVenteDac getTVenteDac() {
+		return this.TVenteDac;
+	}
+
+	public void setTVenteDac(TVenteDac TVenteDac) {
+		this.TVenteDac = TVenteDac;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

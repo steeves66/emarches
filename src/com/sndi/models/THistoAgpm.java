@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,29 +20,29 @@ import javax.persistence.TemporalType;
 public class THistoAgpm implements java.io.Serializable {
 
 	private long hagId;
+	private TAgpm TAgpm;
+	private TOperateur TOperateur;
 	private TStatut TStatut;
 	private TFonction TFonction;
-	private TOperateur TOperateur;
-	private TAgpm TAgpm;
 	private Date hagDate;
 	private String hagMotif;
 
 	public THistoAgpm() {
 	}
 
-	public THistoAgpm(long hagId, TStatut TStatut, TAgpm TAgpm) {
+	public THistoAgpm(long hagId, TAgpm TAgpm, TStatut TStatut) {
 		this.hagId = hagId;
-		this.TStatut = TStatut;
 		this.TAgpm = TAgpm;
+		this.TStatut = TStatut;
 	}
 
-	public THistoAgpm(long hagId, TStatut TStatut, TFonction TFonction, TOperateur TOperateur, TAgpm TAgpm,
+	public THistoAgpm(long hagId, TAgpm TAgpm, TOperateur TOperateur, TStatut TStatut, TFonction TFonction,
 			Date hagDate, String hagMotif) {
 		this.hagId = hagId;
+		this.TAgpm = TAgpm;
+		this.TOperateur = TOperateur;
 		this.TStatut = TStatut;
 		this.TFonction = TFonction;
-		this.TOperateur = TOperateur;
-		this.TAgpm = TAgpm;
 		this.hagDate = hagDate;
 		this.hagMotif = hagMotif;
 	}
@@ -56,6 +56,26 @@ public class THistoAgpm implements java.io.Serializable {
 
 	public void setHagId(long hagId) {
 		this.hagId = hagId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HAG_AGP_ID", nullable = false)
+	public TAgpm getTAgpm() {
+		return this.TAgpm;
+	}
+
+	public void setTAgpm(TAgpm TAgpm) {
+		this.TAgpm = TAgpm;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HAG_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,26 +96,6 @@ public class THistoAgpm implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAG_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAG_AGP_ID", nullable = false)
-	public TAgpm getTAgpm() {
-		return this.TAgpm;
-	}
-
-	public void setTAgpm(TAgpm TAgpm) {
-		this.TAgpm = TAgpm;
 	}
 
 	@Temporal(TemporalType.DATE)

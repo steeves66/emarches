@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,11 +24,11 @@ import javax.persistence.TemporalType;
 public class TAvisAppelOffre implements java.io.Serializable {
 
 	private String aaoCode;
-	private TStatut TStatut;
+	private TAdresseAvis TAdresseAvis;
 	private TDacSpecs TDacSpecs;
+	private TStatut TStatut;
 	private TFonction TFonctionByAaoFonCodAc;
 	private TFonction TFonctionByAaoFonCodeCpmp;
-	private TAdresseAvis TAdresseAvis;
 	private String aaoLibelle;
 	private Date aaoDteSaisi;
 	private Date aaoDtePub;
@@ -75,8 +75,8 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoCode = aaoCode;
 	}
 
-	public TAvisAppelOffre(String aaoCode, TStatut TStatut, TDacSpecs TDacSpecs, TFonction TFonctionByAaoFonCodAc,
-			TFonction TFonctionByAaoFonCodeCpmp, TAdresseAvis TAdresseAvis, String aaoLibelle, Date aaoDteSaisi,
+	public TAvisAppelOffre(String aaoCode, TAdresseAvis TAdresseAvis, TDacSpecs TDacSpecs, TStatut TStatut,
+			TFonction TFonctionByAaoFonCodAc, TFonction TFonctionByAaoFonCodeCpmp, String aaoLibelle, Date aaoDteSaisi,
 			Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, BigDecimal aaoNbrLot,
 			BigDecimal aaoNbrOuv, BigDecimal aaoDelaiVal, String aaoNatInt, String aaoTaux, String aaoLieuExe,
 			String aaoNomResp, String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot,
@@ -86,11 +86,11 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
 			Set<TDetailAvis> TDetailAvises, Set<TLotAao> TLotAaos) {
 		this.aaoCode = aaoCode;
-		this.TStatut = TStatut;
+		this.TAdresseAvis = TAdresseAvis;
 		this.TDacSpecs = TDacSpecs;
+		this.TStatut = TStatut;
 		this.TFonctionByAaoFonCodAc = TFonctionByAaoFonCodAc;
 		this.TFonctionByAaoFonCodeCpmp = TFonctionByAaoFonCodeCpmp;
-		this.TAdresseAvis = TAdresseAvis;
 		this.aaoLibelle = aaoLibelle;
 		this.aaoDteSaisi = aaoDteSaisi;
 		this.aaoDtePub = aaoDtePub;
@@ -143,13 +143,13 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AAO_STA_CODE")
-	public TStatut getTStatut() {
-		return this.TStatut;
+	@JoinColumn(name = "AAO_ADA_NUM")
+	public TAdresseAvis getTAdresseAvis() {
+		return this.TAdresseAvis;
 	}
 
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
+	public void setTAdresseAvis(TAdresseAvis TAdresseAvis) {
+		this.TAdresseAvis = TAdresseAvis;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -160,6 +160,16 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setTDacSpecs(TDacSpecs TDacSpecs) {
 		this.TDacSpecs = TDacSpecs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AAO_STA_CODE")
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -180,16 +190,6 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setTFonctionByAaoFonCodeCpmp(TFonction TFonctionByAaoFonCodeCpmp) {
 		this.TFonctionByAaoFonCodeCpmp = TFonctionByAaoFonCodeCpmp;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AAO_ADA_NUM")
-	public TAdresseAvis getTAdresseAvis() {
-		return this.TAdresseAvis;
-	}
-
-	public void setTAdresseAvis(TAdresseAvis TAdresseAvis) {
-		this.TAdresseAvis = TAdresseAvis;
 	}
 
 	@Column(name = "AAO_LIBELLE", length = 1000)

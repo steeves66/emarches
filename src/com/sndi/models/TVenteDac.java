@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,8 +24,8 @@ import javax.persistence.TemporalType;
 public class TVenteDac implements java.io.Serializable {
 
 	private long venNum;
-	private TModeReglement TModeReglement;
 	private TOperateur TOperateur;
+	private TModeReglement TModeReglement;
 	private BigDecimal venCanCode;
 	private Date venDteSaisi;
 	private String venPaieCode;
@@ -34,18 +34,18 @@ public class TVenteDac implements java.io.Serializable {
 	public TVenteDac() {
 	}
 
-	public TVenteDac(long venNum, TModeReglement TModeReglement, TOperateur TOperateur, BigDecimal venCanCode) {
+	public TVenteDac(long venNum, TOperateur TOperateur, TModeReglement TModeReglement, BigDecimal venCanCode) {
 		this.venNum = venNum;
-		this.TModeReglement = TModeReglement;
 		this.TOperateur = TOperateur;
+		this.TModeReglement = TModeReglement;
 		this.venCanCode = venCanCode;
 	}
 
-	public TVenteDac(long venNum, TModeReglement TModeReglement, TOperateur TOperateur, BigDecimal venCanCode,
+	public TVenteDac(long venNum, TOperateur TOperateur, TModeReglement TModeReglement, BigDecimal venCanCode,
 			Date venDteSaisi, String venPaieCode, Set<TDetailVente> TDetailVentes) {
 		this.venNum = venNum;
-		this.TModeReglement = TModeReglement;
 		this.TOperateur = TOperateur;
+		this.TModeReglement = TModeReglement;
 		this.venCanCode = venCanCode;
 		this.venDteSaisi = venDteSaisi;
 		this.venPaieCode = venPaieCode;
@@ -64,16 +64,6 @@ public class TVenteDac implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "VEN_MRG_COD", nullable = false)
-	public TModeReglement getTModeReglement() {
-		return this.TModeReglement;
-	}
-
-	public void setTModeReglement(TModeReglement TModeReglement) {
-		this.TModeReglement = TModeReglement;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "VEN_OPE_MATRICULE", nullable = false)
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -81,6 +71,16 @@ public class TVenteDac implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "VEN_MRG_COD", nullable = false)
+	public TModeReglement getTModeReglement() {
+		return this.TModeReglement;
+	}
+
+	public void setTModeReglement(TModeReglement TModeReglement) {
+		this.TModeReglement = TModeReglement;
 	}
 
 	@Column(name = "VEN_CAN_CODE", nullable = false, precision = 22, scale = 0)

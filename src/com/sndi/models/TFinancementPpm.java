@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 28 mars 2020 15:50:26 by Hibernate Tools 4.3.5.Final
+// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,10 +18,10 @@ import javax.persistence.Table;
 public class TFinancementPpm implements java.io.Serializable {
 
 	private long fppId;
-	private TSourceFinancement TSourceFinancement;
+	private TBailleur TBailleur;
 	private TDetailPlanPassation TDetailPlanPassation;
 	private TDevise TDevise;
-	private TBailleur TBailleur;
+	private TSourceFinancement TSourceFinancement;
 	private BigDecimal fppMontantCfa;
 	private BigDecimal fppMontantDevise;
 	private String fppCommentaire;
@@ -31,22 +31,22 @@ public class TFinancementPpm implements java.io.Serializable {
 	public TFinancementPpm() {
 	}
 
-	public TFinancementPpm(long fppId, TSourceFinancement TSourceFinancement, TDetailPlanPassation TDetailPlanPassation,
-			TDevise TDevise) {
+	public TFinancementPpm(long fppId, TDetailPlanPassation TDetailPlanPassation, TDevise TDevise,
+			TSourceFinancement TSourceFinancement) {
 		this.fppId = fppId;
-		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TDevise = TDevise;
+		this.TSourceFinancement = TSourceFinancement;
 	}
 
-	public TFinancementPpm(long fppId, TSourceFinancement TSourceFinancement, TDetailPlanPassation TDetailPlanPassation,
-			TDevise TDevise, TBailleur TBailleur, BigDecimal fppMontantCfa, BigDecimal fppMontantDevise,
+	public TFinancementPpm(long fppId, TBailleur TBailleur, TDetailPlanPassation TDetailPlanPassation, TDevise TDevise,
+			TSourceFinancement TSourceFinancement, BigDecimal fppMontantCfa, BigDecimal fppMontantDevise,
 			String fppCommentaire, String fppTypeFinance, Long fppPartTresor) {
 		this.fppId = fppId;
-		this.TSourceFinancement = TSourceFinancement;
+		this.TBailleur = TBailleur;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TDevise = TDevise;
-		this.TBailleur = TBailleur;
+		this.TSourceFinancement = TSourceFinancement;
 		this.fppMontantCfa = fppMontantCfa;
 		this.fppMontantDevise = fppMontantDevise;
 		this.fppCommentaire = fppCommentaire;
@@ -66,13 +66,13 @@ public class TFinancementPpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FPP_SOU_CODE", nullable = false)
-	public TSourceFinancement getTSourceFinancement() {
-		return this.TSourceFinancement;
+	@JoinColumn(name = "FPP_BAI_CODE")
+	public TBailleur getTBailleur() {
+		return this.TBailleur;
 	}
 
-	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
-		this.TSourceFinancement = TSourceFinancement;
+	public void setTBailleur(TBailleur TBailleur) {
+		this.TBailleur = TBailleur;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -96,13 +96,13 @@ public class TFinancementPpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FPP_BAI_CODE")
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
+	@JoinColumn(name = "FPP_SOU_CODE", nullable = false)
+	public TSourceFinancement getTSourceFinancement() {
+		return this.TSourceFinancement;
 	}
 
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
+	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
+		this.TSourceFinancement = TSourceFinancement;
 	}
 
 	@Column(name = "FPP_MONTANT_CFA", precision = 15)
