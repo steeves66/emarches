@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -18,6 +18,7 @@ public class VPgpmStatutId implements java.io.Serializable {
 	private long hpgGpgId;
 	private String hpgFonCod;
 	private String fonLibelle;
+	private String opeNom;
 
 	public VPgpmStatutId() {
 	}
@@ -30,7 +31,7 @@ public class VPgpmStatutId implements java.io.Serializable {
 	}
 
 	public VPgpmStatutId(long hpgId, Date hpgDate, String hpgMotif, String hpgStaCode, long hpgGpgId, String hpgFonCod,
-			String fonLibelle) {
+			String fonLibelle, String opeNom) {
 		this.hpgId = hpgId;
 		this.hpgDate = hpgDate;
 		this.hpgMotif = hpgMotif;
@@ -38,6 +39,7 @@ public class VPgpmStatutId implements java.io.Serializable {
 		this.hpgGpgId = hpgGpgId;
 		this.hpgFonCod = hpgFonCod;
 		this.fonLibelle = fonLibelle;
+		this.opeNom = opeNom;
 	}
 
 	@Column(name = "HPG_ID", nullable = false, precision = 10, scale = 0)
@@ -103,6 +105,15 @@ public class VPgpmStatutId implements java.io.Serializable {
 		this.fonLibelle = fonLibelle;
 	}
 
+	@Column(name = "OPE_NOM")
+	public String getOpeNom() {
+		return this.opeNom;
+	}
+
+	public void setOpeNom(String opeNom) {
+		this.opeNom = opeNom;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -122,9 +133,10 @@ public class VPgpmStatutId implements java.io.Serializable {
 				&& (this.getHpgGpgId() == castOther.getHpgGpgId())
 				&& ((this.getHpgFonCod() == castOther.getHpgFonCod()) || (this.getHpgFonCod() != null
 						&& castOther.getHpgFonCod() != null && this.getHpgFonCod().equals(castOther.getHpgFonCod())))
-				&& ((this.getFonLibelle() == castOther.getFonLibelle())
-						|| (this.getFonLibelle() != null && castOther.getFonLibelle() != null
-								&& this.getFonLibelle().equals(castOther.getFonLibelle())));
+				&& ((this.getFonLibelle() == castOther.getFonLibelle()) || (this.getFonLibelle() != null
+						&& castOther.getFonLibelle() != null && this.getFonLibelle().equals(castOther.getFonLibelle())))
+				&& ((this.getOpeNom() == castOther.getOpeNom()) || (this.getOpeNom() != null
+						&& castOther.getOpeNom() != null && this.getOpeNom().equals(castOther.getOpeNom())));
 	}
 
 	public int hashCode() {
@@ -137,6 +149,7 @@ public class VPgpmStatutId implements java.io.Serializable {
 		result = 37 * result + (int) this.getHpgGpgId();
 		result = 37 * result + (getHpgFonCod() == null ? 0 : this.getHpgFonCod().hashCode());
 		result = 37 * result + (getFonLibelle() == null ? 0 : this.getFonLibelle().hashCode());
+		result = 37 * result + (getOpeNom() == null ? 0 : this.getOpeNom().hashCode());
 		return result;
 	}
 

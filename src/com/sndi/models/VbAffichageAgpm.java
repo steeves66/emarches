@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -34,7 +34,7 @@ public class VbAffichageAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "affDecId", column = @Column(name = "AFF_DEC_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "affAgpStaCode", column = @Column(name = "AFF_AGP_STA_CODE", nullable = false, length = 3)),
 			@AttributeOverride(name = "affAgpId", column = @Column(name = "AFF_AGP_ID", nullable = false, precision = 10, scale = 0)),
-			@AttributeOverride(name = "affBaiCode", column = @Column(name = "AFF_BAI_CODE", length = 5)),
+			@AttributeOverride(name = "affBaiCode", column = @Column(name = "AFF_BAI_CODE", nullable = false, length = 5)),
 			@AttributeOverride(name = "affSouCode", column = @Column(name = "AFF_SOU_CODE", nullable = false, length = 5)),
 			@AttributeOverride(name = "affDevCode", column = @Column(name = "AFF_DEV_CODE", nullable = false, length = 8)),
 			@AttributeOverride(name = "affStrCode", column = @Column(name = "AFF_STR_CODE", nullable = false, length = 3)),

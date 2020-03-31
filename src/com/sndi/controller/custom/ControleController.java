@@ -821,7 +821,7 @@ public class ControleController {
 			    			if(action.equalsIgnoreCase("VALPPM")) {
 			    				type = "PPM";
 			    				libelleProcedure="VALIDATION DES PLANS DE PASSATION DE MARCHES";	
-			    				libelle1="VALIDATION DES PLANS DE PASSATION DE MARCHES";
+			    				libelle1="PREVALIDATION DES PLANS DE PASSATION DE MARCHES";
 			    				panelDetail=false;
 			    				panelForm=false;
 			   				    panelTraitement=true;

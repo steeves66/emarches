@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,31 +20,31 @@ import javax.persistence.TemporalType;
 public class THistoPlanPassation implements java.io.Serializable {
 
 	private long hppId;
-	private TDetailPlanPassation TDetailPlanPassation;
-	private TOperateur TOperateur;
 	private TStatut TStatut;
+	private TDetailPlanPassation TDetailPlanPassation;
 	private TFonction TFonction;
+	private TOperateur TOperateur;
 	private Date hppDate;
 	private String hppMotif;
 
 	public THistoPlanPassation() {
 	}
 
-	public THistoPlanPassation(long hppId, TDetailPlanPassation TDetailPlanPassation, TStatut TStatut,
+	public THistoPlanPassation(long hppId, TStatut TStatut, TDetailPlanPassation TDetailPlanPassation,
 			TFonction TFonction) {
 		this.hppId = hppId;
-		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TStatut = TStatut;
+		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TFonction = TFonction;
 	}
 
-	public THistoPlanPassation(long hppId, TDetailPlanPassation TDetailPlanPassation, TOperateur TOperateur,
-			TStatut TStatut, TFonction TFonction, Date hppDate, String hppMotif) {
+	public THistoPlanPassation(long hppId, TStatut TStatut, TDetailPlanPassation TDetailPlanPassation,
+			TFonction TFonction, TOperateur TOperateur, Date hppDate, String hppMotif) {
 		this.hppId = hppId;
-		this.TDetailPlanPassation = TDetailPlanPassation;
-		this.TOperateur = TOperateur;
 		this.TStatut = TStatut;
+		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TFonction = TFonction;
+		this.TOperateur = TOperateur;
 		this.hppDate = hppDate;
 		this.hppMotif = hppMotif;
 	}
@@ -61,26 +61,6 @@ public class THistoPlanPassation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPP_DPP_ID", nullable = false)
-	public TDetailPlanPassation getTDetailPlanPassation() {
-		return this.TDetailPlanPassation;
-	}
-
-	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
-		this.TDetailPlanPassation = TDetailPlanPassation;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPP_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HPP_STA_CODE", nullable = false)
 	public TStatut getTStatut() {
 		return this.TStatut;
@@ -91,6 +71,16 @@ public class THistoPlanPassation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPP_DPP_ID", nullable = false)
+	public TDetailPlanPassation getTDetailPlanPassation() {
+		return this.TDetailPlanPassation;
+	}
+
+	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
+		this.TDetailPlanPassation = TDetailPlanPassation;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HPP_FON_COD", nullable = false)
 	public TFonction getTFonction() {
 		return this.TFonction;
@@ -98,6 +88,16 @@ public class THistoPlanPassation implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPP_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@Temporal(TemporalType.DATE)

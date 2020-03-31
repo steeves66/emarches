@@ -35,10 +35,10 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-6 "><div  style="color: #fff">EDITION DES PGPM</div></div>
 			         <div class="col-md-3">
-			          <p:selectOneMenu value="#{editionController.annee}" id="exercices"
+			          <p:selectOneMenu value="#{situationController.annee}" id="exercices"
 	                         effect="fade" style="width:98%" filter="true" filterMatchMode="startsWith">
-		 <f:selectItems value="#{editionController.listExercice}" var="e" itemLabel="#{e.gesExe}" itemValue="#{e.gesExe}"/> 
-		 <p:ajax  listener="#{editionController.chargeDestination()}" update=":gnl:destination" ></p:ajax>
+		 <f:selectItems value="#{situationController.listExercice}" var="e" itemLabel="#{e.gesExe}" itemValue="#{e.gesExe}"/> 
+		 <p:ajax  listener="#{situationController.chargeDestination()}" update=":gnl:destination" ></p:ajax>
        		        </p:selectOneMenu>
 			         </div>
 			         
@@ -48,8 +48,8 @@
 			        </div>
 		            <div class="box-body">
 		              
-		              <p:selectOneRadio id="situation" value="#{editionController.sit}">
-		              <p:ajax  listener="#{editionController.checkSituation()}" update="gnl"></p:ajax>
+		              <p:selectOneRadio id="situation" value="#{situationController.sit}">
+		              <p:ajax  listener="#{situationController.checkSituation()}" update="gnl"></p:ajax>
 			            <div class="col-md-4">
 						<f:selectItem itemLabel="GLOBALE" itemValue="GLO" />
 			            </div>
@@ -63,11 +63,11 @@
 		                <br/>
 		              <div class="row">
 			              <div class="col-md-12">
-			              <h:panelGroup  rendered="#{editionController.etatDestination}">
+			              <h:panelGroup  rendered="#{situationController.etatDestination}">
 			          
 			            
 			      
-			             <p:dataTable id="destination" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{editionController.listDestination}" rowKey="#{slctdTb.destCod}" selection="#{editionController.selectionDest}"
+			             <p:dataTable id="destination" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{situationController.listDestination}" rowKey="#{slctdTb.destCod}" selection="#{situationController.selectionDest}"
 					editable="true" editMode="cell" emptyMessage="Aucun choix">
 
             <p:column selectionMode="multiple" style="width:20px;text-align:center"/>
@@ -89,11 +89,11 @@
 		            </div>
 		           
 	            </div>
-	            <p:commandLink styleClass="btn btn-warning mr10" style="margin-top:10px; background-color: #f88b2e" action="#{editionController.renderPage('accueil')}"  update=":content">
+	            <p:commandLink styleClass="btn btn-warning mr10" style="margin-top:10px; background-color: #f88b2e" action="#{situationController.renderPage('accueil')}"  update=":content">
      <i class="ace-icon fa fa-close bigger-130"></i> Fermer
       </p:commandLink>
       <div class="pull-right ">
-		            <p:commandLink styleClass="btn btn-success" style="background-color: #036d3b" action="#{editionController.editer()}"  ajax="false">
+		            <p:commandLink styleClass="btn btn-success" style="background-color: #036d3b" action="#{situationController.editer()}"  ajax="false">
 		             <i class="ace-icon fa fa-file-text"></i> Imprimer
 		            </p:commandLink>
 		            

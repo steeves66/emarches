@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -15,12 +15,12 @@ import javax.persistence.Table;
 @Table(name = "V_UPDATE_AGPM", schema = "EMAP")
 public class VUpdateAgpm implements java.io.Serializable {
 
-	private VUpdateAgpm id;
+	private VUpdateAgpmId id;
 
 	public VUpdateAgpm() {
 	}
 
-	public VUpdateAgpm(VUpdateAgpm id) {
+	public VUpdateAgpm(VUpdateAgpmId id) {
 		this.id = id;
 	}
 
@@ -105,11 +105,11 @@ public class VUpdateAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "baiLibelle", column = @Column(name = "BAI_LIBELLE", nullable = false, length = 1000)),
 			@AttributeOverride(name = "baiAdresse", column = @Column(name = "BAI_ADRESSE", length = 500)),
 			@AttributeOverride(name = "baiTelephone", column = @Column(name = "BAI_TELEPHONE", length = 500)) })
-	public VUpdateAgpm getId() {
+	public VUpdateAgpmId getId() {
 		return this.id;
 	}
 
-	public void setId(VUpdateAgpm id) {
+	public void setId(VUpdateAgpmId id) {
 		this.id = id;
 	}
 

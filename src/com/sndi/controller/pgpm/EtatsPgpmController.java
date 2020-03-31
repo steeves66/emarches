@@ -158,12 +158,16 @@ public class EtatsPgpmController {
 		     
 		   //Edition du PGPM Detail
 			 public void imprimerPgpmDet() {
-					projetReport.longparam1(detail.getPlgId(), "Pgpm", "Pgpm");
+				 String operateur = userController.getSlctd().getTFonction().getFonCod();
+				 projetReport.longStringparam2(detail.getPlgId(), operateur, "Pgpm", "Pgpm");
+					//projetReport.longparam1(detail.getPlgId(), "Pgpm", "Pgpm");
 				}
 			 
 			 //Edition du PGSPM Detail
 			 public void imprimerPgspmDet() {
-					projetReport.longparam1(detail.getPlgId(), "Pgspm", "Pgspm");
+				 String operateur = userController.getSlctd().getTFonction().getFonCod();
+				 projetReport.longStringparam2(detail.getPlgId(), operateur, "Pgspm", "Pgspm");
+				  //projetReport.longparam1(detail.getPlgId(), "Pgspm", "Pgspm");
 				}
 	
 	

@@ -837,6 +837,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			      						new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+ligne.getAffGpgId()));
 					   TAffichagePgpm pgpm = new TAffichagePgpm();
 					   if(!AG.isEmpty()) pgpm =AG.get(0); 
+					   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+							 pgpm.setAffGpgDateValAc(Calendar.getInstance().getTime());
+						 }else
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) { 
+								pgpm.setAffGpgDateValCpmp(Calendar.getInstance().getTime());
+							 }else
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+								   pgpm.setAffGpgDateValDmp(Calendar.getInstance().getTime());
+								 }
+					   
 					    pgpm.setTStatut(new TStatut(statutTrans));
 					    pgpm.setAffGpgStatutRetour("0");
 					    iservice.updateObject(pgpm);
@@ -895,6 +905,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+ligne.getAffGpgId()));
 							if (!listeDetail.isEmpty()) {
 								demDetail= listeDetail.get(0);
+								if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+									 demDetail.setGpgDateValAc(Calendar.getInstance().getTime());
+								 }else
+									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+										 demDetail.setGpgDateValCpmp(Calendar.getInstance().getTime());
+									 }else
+										 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
+											 demDetail.setGpgDateValDmp(Calendar.getInstance().getTime());
+										 }
 								demDetail.setTStatut(new TStatut(statutTrans));
 								demDetail.setGpgStatutRetour("0");
 						       iservice.updateObject(demDetail);
@@ -902,7 +921,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					List<TAffichagePgpm> AG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 			      						new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+ligne.getAffGpgId()));
 					   TAffichagePgpm pgpm = new TAffichagePgpm();
-					   if(!AG.isEmpty()) pgpm =AG.get(0); 
+					   if(!AG.isEmpty()) pgpm =AG.get(0);
+					   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+							 pgpm.setAffGpgDateValAc(Calendar.getInstance().getTime());
+						 }else
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) { 
+								pgpm.setAffGpgDateValCpmp(Calendar.getInstance().getTime());
+							 }else
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+								   pgpm.setAffGpgDateValDmp(Calendar.getInstance().getTime());
+								 }
 					    pgpm.setTStatut(new TStatut(statutTrans));
 					    pgpm.setAffGpgStatutRetour("0");
 					    iservice.updateObject(pgpm);
@@ -941,7 +969,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune demande selectionnée", ""));
 			}
 	 		else{
-	 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+	 			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 	 					 statutUpdate ="";
 	 				 }else {
 	 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
@@ -975,7 +1003,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					List<TAffichagePgpm> AG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 			      						new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+ligne.getAffGpgId()));
 					   TAffichagePgpm pgpm = new TAffichagePgpm();
-					   if(!AG.isEmpty()) pgpm =AG.get(0); 
+					   if(!AG.isEmpty()) pgpm =AG.get(0);
+					   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+							 pgpm.setAffGpgDateValAc(Calendar.getInstance().getTime());
+						 }else
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+								 pgpm.setAffGpgDateValCpmp(Calendar.getInstance().getTime());
+							 }else
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
+									 pgpm.setAffGpgDateValDmp(Calendar.getInstance().getTime());
+								 }
 					    pgpm.setTStatut(new TStatut(statutUpdate));
 					    pgpm.setAffGpgStatutRetour("0");
 					    iservice.updateObject(pgpm);
@@ -988,20 +1025,21 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						  //Historisation des Plans Généraux
 						     THistoPlanGeneral histoPlan = new THistoPlanGeneral();
 						     histoPlan.setHpgDate(Calendar.getInstance().getTime());
-						     histoPlan.setHpgMotif("Opération transmise à la CPMP");
+						     histoPlan.setHpgMotif("Opération transmise");
 						     histoPlan.setTStatut(statuts);
 						     histoPlan.setTDetailPlanGeneral(demDetail);
 						     histoPlan.setTFonction(userController.getSlctd().getTFonction());
 						     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 						     iservice.addObject(histoPlan);
 									  
-							 userController.setTexteMsg(" Transmission effectuée avec succès !");
+							 userController.setTexteMsg("Transmission effectuée avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
 							 //return	null;
 		 		           }	   
 			 		      }	
 				         }
+	 		       tableauBordController.chargeDataPgpm();
 	 		        chargeDataAvaliderPgpm();
 	 		        chargePgpmValCp();
 	 		        chargePgpmValDmp();
@@ -1092,7 +1130,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			  userController.setRenderMsg(true);
        			  userController.setSevrityMsg("success");
        			
-       			  etatDossier = true;
+       			  //etatDossier = true;
        			  controleController.btn_edit_pgpm = true; 
        			  btnAgpmRappel = false;
       		    
@@ -1170,7 +1208,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      userController.setRenderMsg(true);
      			      userController.setSevrityMsg("success");
      			
-     			      etatDossier = true;
+     			      //etatDossier = true;
      			      controleController.btn_edit_pgpm = true;
      			      btnAgpmRappel = false;
          		     
@@ -1278,6 +1316,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            			                etatDossier = true;
            			                controleController.btn_edit_pgpm = true; 
            			                controleController.btn_save_pgpm = false;
+           			                
+           			                vider();
           		    
                                    }else {
               	                           plan.setTGestion(new TGestion(gesCode));
@@ -1368,6 +1408,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          			                        etatDossier = true;
          			                        controleController.btn_edit_pgpm = true;
          			                       controleController.btn_save_pgpm = false;
+         			                       vider();
                                   }
         	                  }  
     		  
@@ -2458,7 +2499,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 
             public void saveFinancement(){
             	
-            	if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) ||souCode.equalsIgnoreCase("") ||sourfin.equalsIgnoreCase("")) {
+            	if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) 
+            			||souCode.equalsIgnoreCase("") ||"".equals(souCode) ||sourfin.equalsIgnoreCase("") || "".equals(sourfin)) {
 			        //Message d'erreur
 		    		  FacesContext.getCurrentInstance().addMessage(null,
 			          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, saisir votre opération!", ""));
@@ -2498,7 +2540,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    userController.setTexteMsg("Financement enregistré avec succès !");
     				    userController.setRenderMsg(true);
     				    userController.setSevrityMsg("success");
-    				    viderFinancement();
+    				    //viderFinancement();
+    				    vider();
             	} 
 			}
             
@@ -2678,11 +2721,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 //Edition de l'PGPM
 				 public void imprimerPgpm() {
 					 String operateur = userController.getSlctd().getTFonction().getFonCod();
-						projetReport.longStringparam2(plan.getPlgId(),""+operateur, "Pgpm", "Pgpm");
+						projetReport.longStringparam2(plan.getPlgId(), operateur, "Pgpm", "Pgpm");
 					}
 				 //Edition de l'PGSPM
 				 public void imprimerPgspm() {
-						projetReport.longparam1(detailPlan.getTPlanGeneral().getPlgId(), "Pgspm", "Pgspm");
+					    String operateur = userController.getSlctd().getTFonction().getFonCod();
+						projetReport.longStringparam2(plan.getPlgId(), operateur, "Pgspm", "Pgspm");
 					}
 				 
 				 //Edition de l'PGPM Detail

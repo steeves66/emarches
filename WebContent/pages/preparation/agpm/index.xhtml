@@ -637,13 +637,14 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
                              </p:commandLink>
                                  
-                                                        
+                                  <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">                      
                                  <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
                               </p:commandLink>
+                               </h:panelGroup>
                                
-                              
+                             
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                               <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
                               <p:commandLink action="#{agpmController.reDifferer()}"   styleClass="btn btn-xs btn-danger" style="background-color: red; margin-left: 3px" title="Différer" update=":content">
@@ -653,14 +654,15 @@
                               </p:commandLink>
                               </h:panelGroup>
                               </h:panelGroup>
-                               
                               
+                               
+                             <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}"> 
                               <p:commandLink  action="#{agpmController.valider()}" styleClass="btn btn-xs btn-warning" style="background-color: #036d3b; border: #f88b2e; margin-left: 3px" title="validation" update=":content">
                                 <i class="ace-icon fa fa-mail-forward bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
                               <p:confirm header="Confirmation" message="Voulez-vous confirmer la validation de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
                               </p:commandLink>
-                                
+                             </h:panelGroup>   
                                
 				         </p:column>   
        
@@ -987,13 +989,13 @@
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.agpDateValAc}">
+         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
@@ -1056,13 +1058,13 @@
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.agpDateValAc}">
+         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>

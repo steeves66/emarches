@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,12 +22,12 @@ public class TOperateur implements java.io.Serializable {
 
 	private String opeMatricule;
 	private TStructure TStructure;
-	private TMinistere TMinistere;
 	private String opeNom;
 	private String opeContact;
 	private String opeEtatCivil;
 	private String opeMail;
 	private String opeLogin;
+	private String opeMinCode;
 	private String opeFonctionAdminist;
 	private Set<TRetrait> TRetraits = new HashSet<TRetrait>(0);
 	private Set<THistoDemande> THistoDemandes = new HashSet<THistoDemande>(0);
@@ -46,6 +46,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TAssignation> TAssignations = new HashSet<TAssignation>(0);
 	private Set<TSeances> TSeanceses = new HashSet<TSeances>(0);
 	private Set<TTypeDemande> TTypeDemandes = new HashSet<TTypeDemande>(0);
+	private Set<THistoPlanGeneral> THistoPlanGenerals = new HashSet<THistoPlanGeneral>(0);
 	private Set<TModeReglement> TModeReglements = new HashSet<TModeReglement>(0);
 	private Set<TTempParametre> TTempParametres = new HashSet<TTempParametre>(0);
 	private Set<TTypeSeance> TTypeSeances = new HashSet<TTypeSeance>(0);
@@ -55,6 +56,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TTypePieceOffre> TTypePieceOffres = new HashSet<TTypePieceOffre>(0);
 	private Set<TAvisPresel> TAvisPreselsForAprOpeMatricule = new HashSet<TAvisPresel>(0);
 	private Set<TDemande> TDemandes = new HashSet<TDemande>(0);
+	private Set<TParametres> TParametreses = new HashSet<TParametres>(0);
 	private Set<TDetCommissionSeance> TDetCommissionSeances = new HashSet<TDetCommissionSeance>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
 	private Set<TSoumissions> TSoumissionses = new HashSet<TSoumissions>(0);
@@ -69,29 +71,29 @@ public class TOperateur implements java.io.Serializable {
 		this.opeMatricule = opeMatricule;
 	}
 
-	public TOperateur(String opeMatricule, TStructure TStructure, TMinistere TMinistere, String opeNom,
-			String opeContact, String opeEtatCivil, String opeMail, String opeLogin, String opeFonctionAdminist,
-			Set<TRetrait> TRetraits, Set<THistoDemande> THistoDemandes, Set<TVenteDac> TVenteDacs,
-			Set<TOffres> TOffreses, Set<THistoDac> THistoDacs, Set<TDetOffres> TDetOffreses,
-			Set<TPiecesOffres> TPiecesOffreses, Set<TTiers> TTierses, Set<TFonction> TFonctions,
-			Set<TModeleDacType> TModeleDacTypes, Set<TNatures> TNatureses, Set<TDestinations> TDestinationses,
-			Set<THistoPlanPassation> THistoPlanPassations, Set<TMotdepasse> TMotdepasses,
-			Set<TAssignation> TAssignations, Set<TSeances> TSeanceses, Set<TTypeDemande> TTypeDemandes,
+	public TOperateur(String opeMatricule, TStructure TStructure, String opeNom, String opeContact, String opeEtatCivil,
+			String opeMail, String opeLogin, String opeMinCode, String opeFonctionAdminist, Set<TRetrait> TRetraits,
+			Set<THistoDemande> THistoDemandes, Set<TVenteDac> TVenteDacs, Set<TOffres> TOffreses,
+			Set<THistoDac> THistoDacs, Set<TDetOffres> TDetOffreses, Set<TPiecesOffres> TPiecesOffreses,
+			Set<TTiers> TTierses, Set<TFonction> TFonctions, Set<TModeleDacType> TModeleDacTypes,
+			Set<TNatures> TNatureses, Set<TDestinations> TDestinationses, Set<THistoPlanPassation> THistoPlanPassations,
+			Set<TMotdepasse> TMotdepasses, Set<TAssignation> TAssignations, Set<TSeances> TSeanceses,
+			Set<TTypeDemande> TTypeDemandes, Set<THistoPlanGeneral> THistoPlanGenerals,
 			Set<TModeReglement> TModeReglements, Set<TTempParametre> TTempParametres, Set<TTypeSeance> TTypeSeances,
 			Set<TTypeFonction> TTypeFonctions, Set<THistoAgpm> THistoAgpms, Set<TTypeCommission> TTypeCommissions,
 			Set<TTypePieceOffre> TTypePieceOffres, Set<TAvisPresel> TAvisPreselsForAprOpeMatricule,
-			Set<TDemande> TDemandes, Set<TDetCommissionSeance> TDetCommissionSeances,
+			Set<TDemande> TDemandes, Set<TParametres> TParametreses, Set<TDetCommissionSeance> TDetCommissionSeances,
 			Set<TDetailCorrection> TDetailCorrections, Set<TSoumissions> TSoumissionses,
 			Set<TCommissionType> TCommissionTypes, Set<TAvisPresel> TAvisPreselsForAprOpeMatMotif,
 			Set<TTempParam> TTempParams) {
 		this.opeMatricule = opeMatricule;
 		this.TStructure = TStructure;
-		this.TMinistere = TMinistere;
 		this.opeNom = opeNom;
 		this.opeContact = opeContact;
 		this.opeEtatCivil = opeEtatCivil;
 		this.opeMail = opeMail;
 		this.opeLogin = opeLogin;
+		this.opeMinCode = opeMinCode;
 		this.opeFonctionAdminist = opeFonctionAdminist;
 		this.TRetraits = TRetraits;
 		this.THistoDemandes = THistoDemandes;
@@ -110,6 +112,7 @@ public class TOperateur implements java.io.Serializable {
 		this.TAssignations = TAssignations;
 		this.TSeanceses = TSeanceses;
 		this.TTypeDemandes = TTypeDemandes;
+		this.THistoPlanGenerals = THistoPlanGenerals;
 		this.TModeReglements = TModeReglements;
 		this.TTempParametres = TTempParametres;
 		this.TTypeSeances = TTypeSeances;
@@ -119,6 +122,7 @@ public class TOperateur implements java.io.Serializable {
 		this.TTypePieceOffres = TTypePieceOffres;
 		this.TAvisPreselsForAprOpeMatricule = TAvisPreselsForAprOpeMatricule;
 		this.TDemandes = TDemandes;
+		this.TParametreses = TParametreses;
 		this.TDetCommissionSeances = TDetCommissionSeances;
 		this.TDetailCorrections = TDetailCorrections;
 		this.TSoumissionses = TSoumissionses;
@@ -146,16 +150,6 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTStructure(TStructure TStructure) {
 		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OPE_MIN_CODE")
-	public TMinistere getTMinistere() {
-		return this.TMinistere;
-	}
-
-	public void setTMinistere(TMinistere TMinistere) {
-		this.TMinistere = TMinistere;
 	}
 
 	@Column(name = "OPE_NOM")
@@ -201,6 +195,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setOpeLogin(String opeLogin) {
 		this.opeLogin = opeLogin;
+	}
+
+	@Column(name = "OPE_MIN_CODE", length = 3)
+	public String getOpeMinCode() {
+		return this.opeMinCode;
+	}
+
+	public void setOpeMinCode(String opeMinCode) {
+		this.opeMinCode = opeMinCode;
 	}
 
 	@Column(name = "OPE_FONCTION_ADMINIST", length = 500)
@@ -366,6 +369,15 @@ public class TOperateur implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<THistoPlanGeneral> getTHistoPlanGenerals() {
+		return this.THistoPlanGenerals;
+	}
+
+	public void setTHistoPlanGenerals(Set<THistoPlanGeneral> THistoPlanGenerals) {
+		this.THistoPlanGenerals = THistoPlanGenerals;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
 	public Set<TModeReglement> getTModeReglements() {
 		return this.TModeReglements;
 	}
@@ -444,6 +456,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTDemandes(Set<TDemande> TDemandes) {
 		this.TDemandes = TDemandes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<TParametres> getTParametreses() {
+		return this.TParametreses;
+	}
+
+	public void setTParametreses(Set<TParametres> TParametreses) {
+		this.TParametreses = TParametreses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")

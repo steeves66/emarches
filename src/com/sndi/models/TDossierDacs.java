@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,8 +22,8 @@ public class TDossierDacs implements java.io.Serializable {
 
 	private BigDecimal ddaId;
 	private TDacSpecs TDacSpecs;
-	private TPiecesDacs TPiecesDacs;
 	private TNatureDocuments TNatureDocuments;
+	private TPiecesDacs TPiecesDacs;
 	private String ddaNom;
 	private Date ddaDteSaisi;
 	private String ddaStaCode;
@@ -37,13 +37,13 @@ public class TDossierDacs implements java.io.Serializable {
 		this.ddaId = ddaId;
 	}
 
-	public TDossierDacs(BigDecimal ddaId, TDacSpecs TDacSpecs, TPiecesDacs TPiecesDacs,
-			TNatureDocuments TNatureDocuments, String ddaNom, Date ddaDteSaisi, String ddaStaCode, String ddaReference,
+	public TDossierDacs(BigDecimal ddaId, TDacSpecs TDacSpecs, TNatureDocuments TNatureDocuments,
+			TPiecesDacs TPiecesDacs, String ddaNom, Date ddaDteSaisi, String ddaStaCode, String ddaReference,
 			String ddaCommentaire) {
 		this.ddaId = ddaId;
 		this.TDacSpecs = TDacSpecs;
-		this.TPiecesDacs = TPiecesDacs;
 		this.TNatureDocuments = TNatureDocuments;
+		this.TPiecesDacs = TPiecesDacs;
 		this.ddaNom = ddaNom;
 		this.ddaDteSaisi = ddaDteSaisi;
 		this.ddaStaCode = ddaStaCode;
@@ -73,16 +73,6 @@ public class TDossierDacs implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDA_PID_CODE")
-	public TPiecesDacs getTPiecesDacs() {
-		return this.TPiecesDacs;
-	}
-
-	public void setTPiecesDacs(TPiecesDacs TPiecesDacs) {
-		this.TPiecesDacs = TPiecesDacs;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DDA_NAD_CODE")
 	public TNatureDocuments getTNatureDocuments() {
 		return this.TNatureDocuments;
@@ -90,6 +80,16 @@ public class TDossierDacs implements java.io.Serializable {
 
 	public void setTNatureDocuments(TNatureDocuments TNatureDocuments) {
 		this.TNatureDocuments = TNatureDocuments;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DDA_PID_CODE")
+	public TPiecesDacs getTPiecesDacs() {
+		return this.TPiecesDacs;
+	}
+
+	public void setTPiecesDacs(TPiecesDacs TPiecesDacs) {
+		this.TPiecesDacs = TPiecesDacs;
 	}
 
 	@Column(name = "DDA_NOM", length = 200)

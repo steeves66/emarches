@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,8 +20,8 @@ import javax.persistence.TemporalType;
 public class TAssignation implements java.io.Serializable {
 
 	private long assNum;
-	private TOperateur TOperateur;
 	private TFonction TFonction;
+	private TOperateur TOperateur;
 	private Date assDatDeb;
 	private Date assDatFin;
 	private String assCourant;
@@ -34,11 +34,11 @@ public class TAssignation implements java.io.Serializable {
 		this.assNum = assNum;
 	}
 
-	public TAssignation(long assNum, TOperateur TOperateur, TFonction TFonction, Date assDatDeb, Date assDatFin,
+	public TAssignation(long assNum, TFonction TFonction, TOperateur TOperateur, Date assDatDeb, Date assDatFin,
 			String assCourant, Boolean assStatut) {
 		this.assNum = assNum;
-		this.TOperateur = TOperateur;
 		this.TFonction = TFonction;
+		this.TOperateur = TOperateur;
 		this.assDatDeb = assDatDeb;
 		this.assDatFin = assDatFin;
 		this.assCourant = assCourant;
@@ -57,16 +57,6 @@ public class TAssignation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ASS_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ASS_FON_COD")
 	public TFonction getTFonction() {
 		return this.TFonction;
@@ -74,6 +64,16 @@ public class TAssignation implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ASS_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@Temporal(TemporalType.DATE)

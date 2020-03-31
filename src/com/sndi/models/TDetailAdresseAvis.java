@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,8 +21,8 @@ import javax.persistence.TemporalType;
 public class TDetailAdresseAvis implements java.io.Serializable {
 
 	private BigDecimal dtaNum;
-	private TAdresseAvis TAdresseAvis;
 	private TLibelleAdresse TLibelleAdresse;
+	private TAdresseAvis TAdresseAvis;
 	private String dtaTitre;
 	private String dtaLibelle;
 	private Date dtaDteSaisi;
@@ -34,11 +34,11 @@ public class TDetailAdresseAvis implements java.io.Serializable {
 		this.dtaNum = dtaNum;
 	}
 
-	public TDetailAdresseAvis(BigDecimal dtaNum, TAdresseAvis TAdresseAvis, TLibelleAdresse TLibelleAdresse,
+	public TDetailAdresseAvis(BigDecimal dtaNum, TLibelleAdresse TLibelleAdresse, TAdresseAvis TAdresseAvis,
 			String dtaTitre, String dtaLibelle, Date dtaDteSaisi) {
 		this.dtaNum = dtaNum;
-		this.TAdresseAvis = TAdresseAvis;
 		this.TLibelleAdresse = TLibelleAdresse;
+		this.TAdresseAvis = TAdresseAvis;
 		this.dtaTitre = dtaTitre;
 		this.dtaLibelle = dtaLibelle;
 		this.dtaDteSaisi = dtaDteSaisi;
@@ -56,16 +56,6 @@ public class TDetailAdresseAvis implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DTA_ADA_NUM")
-	public TAdresseAvis getTAdresseAvis() {
-		return this.TAdresseAvis;
-	}
-
-	public void setTAdresseAvis(TAdresseAvis TAdresseAvis) {
-		this.TAdresseAvis = TAdresseAvis;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DTA_LIA_NUM")
 	public TLibelleAdresse getTLibelleAdresse() {
 		return this.TLibelleAdresse;
@@ -73,6 +63,16 @@ public class TDetailAdresseAvis implements java.io.Serializable {
 
 	public void setTLibelleAdresse(TLibelleAdresse TLibelleAdresse) {
 		this.TLibelleAdresse = TLibelleAdresse;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DTA_ADA_NUM")
+	public TAdresseAvis getTAdresseAvis() {
+		return this.TAdresseAvis;
+	}
+
+	public void setTAdresseAvis(TAdresseAvis TAdresseAvis) {
+		this.TAdresseAvis = TAdresseAvis;
 	}
 
 	@Column(name = "DTA_TITRE", length = 200)

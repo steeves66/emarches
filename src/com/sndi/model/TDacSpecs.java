@@ -28,7 +28,6 @@ public class TDacSpecs implements java.io.Serializable {
 	private TFonction TFonctionByDacFonCodeCpmp;
 	private TFonction TFonctionByDacFonCodAc;
 	private TModePassation TModePassation;
-	private TDetailPlanPassation TDetailPlanPassation;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TGestion TGestion;
@@ -66,7 +65,7 @@ public class TDacSpecs implements java.io.Serializable {
 	}
 
 	public TDacSpecs(String dacCode, TFonction TFonctionByDacFonCodeCpmp, TFonction TFonctionByDacFonCodAc,
-			TModePassation TModePassation, TDetailPlanPassation TDetailPlanPassation,TStatut TStatut, TStructure TStructure,
+			TModePassation TModePassation, TStatut TStatut, TStructure TStructure,
 			TGestion TGestion, TTypeMarche TTypeMarche, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
@@ -77,7 +76,6 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
 		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
 		this.TModePassation = TModePassation;
-		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TGestion = TGestion;
@@ -146,16 +144,6 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTModePassation(TModePassation TModePassation) {
 		this.TModePassation = TModePassation;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_DPP_ID")
-	public TDetailPlanPassation getTDetailPlanPassation() {
-		return this.TDetailPlanPassation;
-	}
-
-	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
-		this.TDetailPlanPassation = TDetailPlanPassation;
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)

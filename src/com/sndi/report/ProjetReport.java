@@ -185,8 +185,8 @@ public class ProjetReport {
 						pathdir += "/";
 						
 						Map<String, Object> param = new HashMap<String, Object>();
-						param.put("param_code_1", numero1);
-						param.put("param_code_2", code);
+						param.put("param_code", numero1);
+						param.put("param_op", code);
 						param.put("param_image", pathdir);
 						try {
 						Connection conn = connectionUtils.getConnection();

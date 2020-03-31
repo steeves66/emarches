@@ -48,9 +48,13 @@ public class TableauBordController {
 	 @PostConstruct
 	 public void postContr() {
 		 chargeDataAgpm();
-		 chargeDataPgpmPgspm();
-		 chargeDataPpmPspm();
+		 //chargeDataPgpmPgspm();
+		 //chargeDataPpmPspm();
 		 chargeDataDao();
+		 chargeDataPpm();
+		 chargeDataPspm();
+		 chargeDataPgpm();
+		 chargeDataPgspm();
 	 }
 	 
 	 

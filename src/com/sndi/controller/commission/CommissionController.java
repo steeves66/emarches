@@ -215,7 +215,7 @@ public class CommissionController {
 	//Liste des membres de la commssions
 		 public void chargeMembreCommission() {
 			 membresCommission = ((List<TCommissionType>)iservice.getObjectsByColumn("TCommissionType",new ArrayList<String>(Arrays.asList("TCT_CODE")),
-					    new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+					    //new WhereClause("TCT_TCO_CODE",Comparateur.EQ,""+tcoCode)));
 					    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
 					_logger.info("membre size: "+membresCommission.size());	
 		 }

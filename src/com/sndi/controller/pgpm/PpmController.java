@@ -831,6 +831,16 @@ public class PpmController {
 		 }
 		 
 		 //Afficher les Pgpm 
+		 public void chargeRecherchePgpm() { 
+			 listePgpm.clear();
+			 listePgpm = (List<VPgpmFonction>)iservice.getObjectsByColumn("VPgpmFonction",new ArrayList<String>(Arrays.asList("GPG_ID")),
+					 new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+					 new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"),
+					 new WhereClause("PLG_FON_COD",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					 new WhereClause("GPG_OBJET",WhereClause.Comparateur.LIKE,"%"+filtrePgpm+"%"));		 		 
+		 }
+		 
+		 //Afficher les Pgpm 
 		 public void chargePgpm() {
 			 listePgpm.clear();
 			 listePgpm = (List<VPgpmFonction>)iservice.getObjectsByColumn("VPgpmFonction",new ArrayList<String>(Arrays.asList("GPG_ID")),
@@ -2503,7 +2513,7 @@ public class PpmController {
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 						 statutUpdate ="S2D";
-						 observation = "PPM retourné par la CPMP";
+						 //observation = "PPM retourné par la CPMP";
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 							// statutUpdate ="S3D";

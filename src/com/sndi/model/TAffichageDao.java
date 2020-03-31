@@ -30,7 +30,7 @@ public class TAffichageDao implements java.io.Serializable {
 	private long affDaoId;
 	private TDetCommissionSeance TDetCommissionSeance;
 	private TModePassation TModePassation;
-	private TDetailPlanPassation TDetailPlanPassation;
+	//private TDetailPlanPassation TDetailPlanPassation;
 	private TStructure TStructure;
 	private TGestion TGestion;
 	private TTypeMarche TTypeMarche;
@@ -60,7 +60,7 @@ public class TAffichageDao implements java.io.Serializable {
 	public TAffichageDao() {
 	}
 
-	public TAffichageDao(long affDaoId, TDetCommissionSeance TDetCommissionSeance,TModePassation TModePassation, TDetailPlanPassation TDetailPlanPassation, TStructure TStructure,
+	public TAffichageDao(long affDaoId, TDetCommissionSeance TDetCommissionSeance,TModePassation TModePassation, /*TDetailPlanPassation TDetailPlanPassation,*/ TStructure TStructure,
 			TGestion TGestion, TTypeMarche TTypeMarche,TTypeDacSpecs TTypeDacSpecs,String affDacCode, String affOpeMatricule,
 			String affStaCode, String affStatutRetour, Date affDacDteSaisi, String affDacObjet,  Long affNbrOuv,
 			String affDacFonCodeCpmp, String affDacFonCodAc, Date affDacDacDteValCpmp, Date affDacDacDteValDmp,
@@ -69,7 +69,7 @@ public class TAffichageDao implements java.io.Serializable {
 		this.affDaoId = affDaoId;
 		this.TDetCommissionSeance = TDetCommissionSeance;
 		this.TModePassation = TModePassation;
-		this.TDetailPlanPassation = TDetailPlanPassation;
+		//this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TStructure = TStructure;
 		this.TGestion = TGestion;
 		this.TTypeMarche = TTypeMarche;
@@ -129,15 +129,6 @@ public class TAffichageDao implements java.io.Serializable {
 		this.TModePassation = TModePassation;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AFF_DAC_DPP_ID")
-	public TDetailPlanPassation getTDetailPlanPassation() {
-		return this.TDetailPlanPassation;
-	}
-
-	public void setTDetailPlanPassation(TDetailPlanPassation TDetailPlanPassation) {
-		this.TDetailPlanPassation = TDetailPlanPassation;
-	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AFF_DAC_STR_CODE")

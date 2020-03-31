@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,9 +18,9 @@ import javax.persistence.Table;
 public class TDetailDemandes implements java.io.Serializable {
 
 	private BigDecimal ddeNum;
+	private TStructure TStructure;
 	private TDacSpecs TDacSpecs;
 	private TDemande TDemande;
-	private TStructure TStructure;
 	private TLBudgets TLBudgets;
 	private TLotAao TLotAao;
 	private String ddeMarCode;
@@ -34,12 +34,12 @@ public class TDetailDemandes implements java.io.Serializable {
 		this.ddeNum = ddeNum;
 	}
 
-	public TDetailDemandes(BigDecimal ddeNum, TDacSpecs TDacSpecs, TDemande TDemande, TStructure TStructure,
+	public TDetailDemandes(BigDecimal ddeNum, TStructure TStructure, TDacSpecs TDacSpecs, TDemande TDemande,
 			TLBudgets TLBudgets, TLotAao TLotAao, String ddeMarCode, String ddeActNum, String ddeActNumIni) {
 		this.ddeNum = ddeNum;
+		this.TStructure = TStructure;
 		this.TDacSpecs = TDacSpecs;
 		this.TDemande = TDemande;
-		this.TStructure = TStructure;
 		this.TLBudgets = TLBudgets;
 		this.TLotAao = TLotAao;
 		this.ddeMarCode = ddeMarCode;
@@ -56,6 +56,16 @@ public class TDetailDemandes implements java.io.Serializable {
 
 	public void setDdeNum(BigDecimal ddeNum) {
 		this.ddeNum = ddeNum;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DDE_STR_CODE")
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -76,16 +86,6 @@ public class TDetailDemandes implements java.io.Serializable {
 
 	public void setTDemande(TDemande TDemande) {
 		this.TDemande = TDemande;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_STR_CODE")
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

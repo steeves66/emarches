@@ -1489,7 +1489,6 @@ public class DpController {
 		    	 dao.setTModePassation(new TModePassation(daoDetail.getMopCode()));
 		    	 dao.setTTypeMarche(new TTypeMarche(daoDetail.getDppTymCode()));
 		    	 dao.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-		    	 dao.setTDetailPlanPassation(new TDetailPlanPassation(daoDetail.getDppId()));
 		    	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
 		    	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
 		    	 dao.setTGestion(new TGestion(gesCode));
@@ -1507,7 +1506,6 @@ public class DpController {
 		    	 affDao.setAffDacCode(dao.getDacCode());
 		    	 affDao.setAffDacStatutRetour(dao.getDacStatutRetour());
 		    	 affDao.setAffDacFonCodAc(dao.getTFonctionByDacFonCodAc().getFonCod());
-		    	 affDao.setTDetailPlanPassation(new TDetailPlanPassation(dao.getTDetailPlanPassation().getDppId()));
 		    	 affDao.setAffDacMention(dao.getDacMention());
 		    	 affDao.setAffDacDateReception(dao.getDacDateReception());
 		    	 affDao.setAffDacDacDteValDmp(dao.getDacDteValDmp());
@@ -1604,7 +1602,6 @@ public class DpController {
     	 dao.setTModePassation(new TModePassation(daoDetail.getMopCode()));
     	 dao.setTTypeMarche(new TTypeMarche(daoDetail.getDppTymCode()));
     	 dao.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-    	 dao.setTDetailPlanPassation(new TDetailPlanPassation(daoDetail.getDppId()));
     	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
     	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
     	 dao.setTGestion(new TGestion(gesCode));
@@ -1621,7 +1618,6 @@ public class DpController {
     	 affDao.setAffDacCode(dao.getDacCode());
     	 affDao.setAffDacStatutRetour(dao.getDacStatutRetour());
     	 affDao.setAffDacFonCodAc(dao.getTFonctionByDacFonCodAc().getFonCod());
-    	 affDao.setTDetailPlanPassation(new TDetailPlanPassation(dao.getTDetailPlanPassation().getDppId()));
     	 affDao.setAffDacMention(dao.getDacMention());
     	 affDao.setAffDacDateReception(dao.getDacDateReception());
     	 affDao.setAffDacDacDteValDmp(dao.getDacDteValDmp());

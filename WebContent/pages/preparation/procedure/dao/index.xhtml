@@ -31,6 +31,8 @@
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
         #{controleController.libelleDao1} 
         </h:panelGroup>
+        
+        
         <small>
         <!-- #{controleController.libelle1} -->
         
@@ -666,9 +668,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-             <p:commandLink   class="small-box-footer"  style="color:#fff;font-size:13px;">
-			 Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+             
           </div>
         </div>
         <!-- ./col -->
@@ -1692,19 +1692,9 @@
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTda}" />
                              </p:commandLink>
-                                  
-                        <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
-                          <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" />
-                        </p:commandLink>
-                        
-                        
-                        <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
-                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" /> 
-                            </p:commandLink> 
+                      
                             
-                            
+                        
                             <h:panelGroup rendered="#{slctdTb.dafStaCode != 'DC2'}">
                             <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
@@ -2444,6 +2434,7 @@
 	                </div>
 		           </div>
 	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2499,6 +2490,7 @@
 	                </div>
 		           </div>
 	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDaoDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2554,6 +2546,7 @@
 	                </div>
 		           </div>
 	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDacObsDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2612,7 +2605,7 @@
 
 		            </div>
 	            </div>
-
+           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailRetireDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2669,7 +2662,7 @@
 
 		            </div>
 	            </div>
-
+             <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailRetireDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2783,7 +2776,7 @@
 
 		            </div>
 	            </div>
-
+               <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2840,7 +2833,7 @@
 
 		            </div>
 	            </div>
-
+            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCsvValDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2900,6 +2893,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -2956,6 +2950,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -3015,6 +3010,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -3164,6 +3160,7 @@
 			    </p:dataTable>  
 			          </div>
 		            </div>
+		            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailChargeValDlg').hide()"/>
 	            </div>
 	                 
       </p:dialog>

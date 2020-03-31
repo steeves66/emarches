@@ -32,7 +32,6 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private TLBudgets TLBudgets;
 	private TTypeProcedure TTypeProcedure;
 	private TStructure TStructure;
-	//private TMinistere TMinistere;
 	private TDacSpecs TDacSpecs;
 	private TModePassation TModePassation;
 	private TDetailPlanGeneral TDetailPlanGeneral;
@@ -77,9 +76,9 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppDateValDmp;
 	private String dppBailleur;
 	private String dppTypeFinance;
+	private Date dppApprobAno;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
-	private Set<TDacSpecs> TDacSpecses = new HashSet<TDacSpecs>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
 
 	public TDetailPlanPassation() {
@@ -109,7 +108,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail, Date dppDateNegociation,
 			Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, String dppStatutRetour,
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
-			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,
+			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
@@ -160,9 +159,9 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppDateValDmp = dppDateValDmp;
 		this.dppBailleur = dppBailleur;
 		this.dppTypeFinance = dppTypeFinance;
+		this.dppApprobAno = dppApprobAno;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
-		this.TDacSpecses = TDacSpecses;
 		this.TFinancementPpms = TFinancementPpms;
 	}
 
@@ -640,6 +639,16 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	public void setDppTypeFinance(String dppTypeFinance) {
 		this.dppTypeFinance = dppTypeFinance;
 	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DPP_APPROB_ANO", length = 7)
+	public Date getDppApprobAno() {
+		return this.dppApprobAno;
+	}
+
+	public void setDppApprobAno(Date dppApprobAno) {
+		this.dppApprobAno = dppApprobAno;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")
 	public Set<THistoPlanPassation> getTHistoPlanPassations() {
@@ -659,14 +668,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.TCharges = TCharges;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")
-	public Set<TDacSpecs> getTDacSpecses() {
-		return this.TDacSpecses;
-	}
 
-	public void setTDacSpecses(Set<TDacSpecs> TDacSpecses) {
-		this.TDacSpecses = TDacSpecses;
-	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")
 	public Set<TFinancementPpm> getTFinancementPpms() {

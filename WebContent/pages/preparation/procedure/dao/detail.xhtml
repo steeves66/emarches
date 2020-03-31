@@ -106,7 +106,7 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'opération : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.TDetailPlanPassation.dppObjet}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.affDacObjet}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
@@ -120,6 +120,18 @@
                   <div class="col-sm-3"><label class="pull-right">Mode de Passation : </label></div>
                   <div class="col-sm-9">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.TModePassation.mopCode} : #{etatsDaoController.slctdTd.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Date Avis Bailleur : </label></div>
+                  <div class="col-sm-9">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.affDacDateBailleur}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Observation du Bailleur : </label></div>
+                  <div class="col-sm-9">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.affDacAvisBailleur}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	            </div>

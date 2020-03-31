@@ -488,7 +488,7 @@
 		   </div>  
 		    <h:panelGroup rendered="#{controleController.validDMP}"> 
 		    <div class="form-group">
-		                  <label for="valdao" class="col-sm-6 control-label">Approbation par DMP<span style="color:red;"> *</span></label>
+		                  <label for="valdao" class="col-sm-6 control-label">Validation par DMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valdao" value="#{ppmController.detailPass.dppDateDaoApprobDmp}" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
@@ -498,7 +498,7 @@
 		    
 		    <h:panelGroup rendered="#{controleController.validCPMP}">
 		    <div class="form-group">
-		                  <label for="valcp" class="col-sm-6 control-label">Approbation par CPMP<span style="color:red;"> *</span></label>
+		                  <label for="valcp" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valcp" value="#{ppmController.detailPass.dppDateAttApprobCpmp}" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
@@ -507,7 +507,7 @@
 		    </h:panelGroup>
 		                  
 		                  <div class="form-group">
-		                  <label for="baildao" class="col-sm-6 control-label">Validation DAO Bail<span style="color:red;"> *</span></label>
+		                  <label for="baildao" class="col-sm-6 control-label">Validation DAO Bail</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="baildao" value="#{ppmController.detailPass.dppDateAttApproBail}" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
@@ -517,7 +517,7 @@
 		             <h:panelGroup id="pub">
 				    <h:panelGroup rendered="#{controleController.etatPso}"  id="dpso">
 		                <div class="form-group">
-		                  <label for="pubAoo" class="col-sm-6 control-label">Publication de l'AOO<span style="color:red;"></span></label>
+		                  <label for="pubAoo" class="col-sm-6 control-label">Publication / Invitation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="pubAoo" value="#{ppmController.detailPass.dppDateAvisAoPublication}" style="width: 100%" >
 		                   </p:calendar> 
@@ -583,14 +583,14 @@
 		   <div class="row">
          <div class="col-md-6">
          <div class="form-group">
-		                  <label for="oft" class="col-sm-6 control-label">Offre Techinique<span style="color:red;"> *</span></label>
+		                  <label for="oft" class="col-sm-6 control-label">Ouverture Techinique<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="oft" pattern="dd/MM/yyyy" value="#{ppmController.detailPass.dppDateOuvertOt}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
-		                  <label for="off" class="col-sm-6 control-label">Offre Financière<span style="color:red;"> *</span></label>
+		                  <label for="off" class="col-sm-6 control-label">Ouverture Financière<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="off" pattern="dd/MM/yyyy" value="#{ppmController.detailPass.dppDateOuvertOf}" style="width: 100%" >
 		                   </p:calendar> 
@@ -616,12 +616,21 @@
          <div class="col-md-6">
        
 		                  <div class="form-group">
-		                  <label for="approba" class="col-sm-6 control-label">Approbation Bailleur<span style="color:red;"> *</span></label>
+		                  <label for="approba" class="col-sm-6 control-label">Approbation Bailleur</label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="approba" value="#{ppmController.detailPass.dppDateAttApproBail}" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
+		                
+		                 <div class="form-group">
+		                  <label for="approba" class="col-sm-6 control-label">Approbation Ano</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approba" value="#{ppmController.detailPass.dppApprobAno}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
 		                 <div class="form-group">
 		                  <label for="neg" class="col-sm-6 control-label">Négociation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
@@ -1280,8 +1289,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmController.filtrePgpm}"  class="gui-input"  placeholder="Saisir le code du PGPM"  > 
-						    <p:ajax event="keyup" update=":dlogPgpm:ndTblePgpm" listener="#{ppmController.filtreMarche()}" />
+							<p:inputText type="text" value="#{ppmController.filtrePgpm}"  class="gui-input"  placeholder="Saisir une information sur le PGPM"  > 
+						    <p:ajax event="keyup" update=":dlogPgpm:ndTblePgpm" listener="#{ppmController.chargeRecherchePgpm()}" />
 							</p:inputText>
 						
 						</label>
@@ -1301,9 +1310,9 @@
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>
-				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
+				          <p:column headerText="Objet" styleClass="col-sm-11" >
                            <h:commandLink id="pgpm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}">				        
-         				  <h:outputText value="#{slctdTb.gpgCommentaire}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>		
@@ -1456,7 +1465,7 @@
 						
 						
 						  <div class="form-group">
-		                  <label for="offt" class="col-sm-2 control-label">Offre Financière<span style="color:red;"> *</span></label>
+		                  <label for="offt" class="col-sm-2 control-label">Ouverture Financière<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-2">
 		                   <p:calendar id="offt" pattern="dd/MM/yyyy" value="#{ppmController.datePpm.dppDateOuvertOf}" style="width: 100%" >
 		                   </p:calendar> 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,8 +21,8 @@ public class TRetrait implements java.io.Serializable {
 
 	private long retId;
 	private TDacSpecs TDacSpecs;
-	private TOperateur TOperateur;
 	private TFonction TFonction;
+	private TOperateur TOperateur;
 	private String retNom;
 	private String retAdresse;
 	private String retMail;
@@ -38,13 +38,13 @@ public class TRetrait implements java.io.Serializable {
 		this.retId = retId;
 	}
 
-	public TRetrait(long retId, TDacSpecs TDacSpecs, TOperateur TOperateur, TFonction TFonction, String retNom,
+	public TRetrait(long retId, TDacSpecs TDacSpecs, TFonction TFonction, TOperateur TOperateur, String retNom,
 			String retAdresse, String retMail, String retTel, String retPieceNumero, Date retDate,
 			String retTypePiece) {
 		this.retId = retId;
 		this.TDacSpecs = TDacSpecs;
-		this.TOperateur = TOperateur;
 		this.TFonction = TFonction;
+		this.TOperateur = TOperateur;
 		this.retNom = retNom;
 		this.retAdresse = retAdresse;
 		this.retMail = retMail;
@@ -76,16 +76,6 @@ public class TRetrait implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "RET_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "RET_FON_COD")
 	public TFonction getTFonction() {
 		return this.TFonction;
@@ -93,6 +83,16 @@ public class TRetrait implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "RET_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@Column(name = "RET_NOM", length = 1000)

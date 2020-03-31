@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,10 +23,10 @@ import javax.persistence.TemporalType;
 public class TAgpm implements java.io.Serializable {
 
 	private long agpId;
-	private TDeclarant TDeclarant;
 	private TProjet TProjet;
 	private TStatut TStatut;
 	private TStructure TStructure;
+	private TDeclarant TDeclarant;
 	private TFonction TFonction;
 	private TGestion TGestion;
 	private String agpCommentaire;
@@ -56,16 +56,16 @@ public class TAgpm implements java.io.Serializable {
 		this.TGestion = TGestion;
 	}
 
-	public TAgpm(long agpId, TDeclarant TDeclarant, TProjet TProjet, TStatut TStatut, TStructure TStructure,
+	public TAgpm(long agpId, TProjet TProjet, TStatut TStatut, TStructure TStructure, TDeclarant TDeclarant,
 			TFonction TFonction, TGestion TGestion, String agpCommentaire, String agpTypeDao, String agpModePassation,
 			String agpActif, String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp,
 			Date agpDateValDmp, Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
 			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
 		this.agpId = agpId;
-		this.TDeclarant = TDeclarant;
 		this.TProjet = TProjet;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
+		this.TDeclarant = TDeclarant;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
 		this.agpCommentaire = agpCommentaire;
@@ -92,16 +92,6 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setAgpId(long agpId) {
 		this.agpId = agpId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_DEC_ID")
-	public TDeclarant getTDeclarant() {
-		return this.TDeclarant;
-	}
-
-	public void setTDeclarant(TDeclarant TDeclarant) {
-		this.TDeclarant = TDeclarant;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -132,6 +122,16 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setTStructure(TStructure TStructure) {
 		this.TStructure = TStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_DEC_ID")
+	public TDeclarant getTDeclarant() {
+		return this.TDeclarant;
+	}
+
+	public void setTDeclarant(TDeclarant TDeclarant) {
+		this.TDeclarant = TDeclarant;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

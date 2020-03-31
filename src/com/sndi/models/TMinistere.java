@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,7 +28,6 @@ public class TMinistere implements java.io.Serializable {
 	private String minOpeMatricule;
 	private String minActif;
 	private Set<TFonction> TFonctions = new HashSet<TFonction>(0);
-	private Set<TOperateur> TOperateurs = new HashSet<TOperateur>(0);
 	private Set<TStructure> TStructures = new HashSet<TStructure>(0);
 
 	public TMinistere() {
@@ -40,7 +39,7 @@ public class TMinistere implements java.io.Serializable {
 
 	public TMinistere(String minCode, String minLibelle, String minLibelleCourt, String minDescription,
 			Date minDteSaisi, String minOpeMatricule, String minActif, Set<TFonction> TFonctions,
-			Set<TOperateur> TOperateurs, Set<TStructure> TStructures) {
+			Set<TStructure> TStructures) {
 		this.minCode = minCode;
 		this.minLibelle = minLibelle;
 		this.minLibelleCourt = minLibelleCourt;
@@ -49,7 +48,6 @@ public class TMinistere implements java.io.Serializable {
 		this.minOpeMatricule = minOpeMatricule;
 		this.minActif = minActif;
 		this.TFonctions = TFonctions;
-		this.TOperateurs = TOperateurs;
 		this.TStructures = TStructures;
 	}
 
@@ -126,15 +124,6 @@ public class TMinistere implements java.io.Serializable {
 
 	public void setTFonctions(Set<TFonction> TFonctions) {
 		this.TFonctions = TFonctions;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TMinistere")
-	public Set<TOperateur> getTOperateurs() {
-		return this.TOperateurs;
-	}
-
-	public void setTOperateurs(Set<TOperateur> TOperateurs) {
-		this.TOperateurs = TOperateurs;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TMinistere")

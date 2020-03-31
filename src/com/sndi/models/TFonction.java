@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,10 +23,10 @@ import javax.persistence.TemporalType;
 public class TFonction implements java.io.Serializable {
 
 	private String fonCod;
-	private TOperateur TOperateur;
 	private TStructure TStructure;
 	private TTypeFonction TTypeFonction;
 	private TMinistere TMinistere;
+	private TOperateur TOperateur;
 	private Date fonDatDeb;
 	private Date fonDatFin;
 	private String fonLibelle;
@@ -75,8 +75,8 @@ public class TFonction implements java.io.Serializable {
 		this.fonCod = fonCod;
 	}
 
-	public TFonction(String fonCod, TOperateur TOperateur, TStructure TStructure, TTypeFonction TTypeFonction,
-			TMinistere TMinistere, Date fonDatDeb, Date fonDatFin, String fonLibelle, String fonAdr, String fonTel,
+	public TFonction(String fonCod, TStructure TStructure, TTypeFonction TTypeFonction, TMinistere TMinistere,
+			TOperateur TOperateur, Date fonDatDeb, Date fonDatFin, String fonLibelle, String fonAdr, String fonTel,
 			String fonFonCod, String fonCourriel, String fonMobil, Date fonDteSaisi, String fonLibelleCrt,
 			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap,
 			Set<THistoAgpm> THistoAgpms, Set<TAssignation> TAssignations, Set<TLBudgets> TLBudgetsesForLbgFonCode,
@@ -91,10 +91,10 @@ public class TFonction implements java.io.Serializable {
 			Set<TRetrait> TRetraits, Set<THistoDac> THistoDacs, Set<TDetOffres> TDetOffreses,
 			Set<TDacSpecs> TDacSpecsesForDacFonCodAc, Set<TPlanPassation> TPlanPassations) {
 		this.fonCod = fonCod;
-		this.TOperateur = TOperateur;
 		this.TStructure = TStructure;
 		this.TTypeFonction = TTypeFonction;
 		this.TMinistere = TMinistere;
+		this.TOperateur = TOperateur;
 		this.fonDatDeb = fonDatDeb;
 		this.fonDatFin = fonDatFin;
 		this.fonLibelle = fonLibelle;
@@ -149,16 +149,6 @@ public class TFonction implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FON_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FON_STR_CODE")
 	public TStructure getTStructure() {
 		return this.TStructure;
@@ -186,6 +176,16 @@ public class TFonction implements java.io.Serializable {
 
 	public void setTMinistere(TMinistere TMinistere) {
 		this.TMinistere = TMinistere;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FON_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@Temporal(TemporalType.DATE)

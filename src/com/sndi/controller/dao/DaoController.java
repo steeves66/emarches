@@ -30,6 +30,7 @@ import com.sndi.model.TAdresseAvis;
 import com.sndi.model.TAffichageDao;
 import com.sndi.model.TAffichagePgpm;
 import com.sndi.model.TAffichagePpm;
+import com.sndi.model.TAgpm;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TCandidats;
 import com.sndi.model.TCommissionSpecifique;
@@ -42,6 +43,7 @@ import com.sndi.model.TDetailAgpm;
 import com.sndi.model.TDetailCorrection;
 import com.sndi.model.TDetailPlanPassation;
 import com.sndi.model.TDetailVente;
+import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TDossierDacs;
 import com.sndi.model.TFonction;
 import com.sndi.model.TGestion;
@@ -52,6 +54,7 @@ import com.sndi.model.TLotAao;
 import com.sndi.model.TModePassation;
 import com.sndi.model.TModeReglement;
 import com.sndi.model.TNatureDocuments;
+import com.sndi.model.TNaturePiece;
 import com.sndi.model.TOffrePieceDac;
 import com.sndi.model.TPiecesDacs;
 import com.sndi.model.TRetrait;
@@ -257,6 +260,7 @@ public class DaoController {
 	 private String detCom="";
 	 private String dacCode ="";
 	 private String sitDac ="";
+	 private String natPiece ="";
 	 private String libelleFournitures ="DAO_Fournitures_et_services_connexes.doc";
 	 private String libelleTravaux ="dtao_travaux.doc";
 	 private String libellePrestations ="dtao_prestation.doc";
@@ -318,6 +322,7 @@ public class DaoController {
 	  private boolean etatVentePanierLot = false;
 	  private boolean etatVentePanierDao = false;
 	  private boolean panelAvisBailleur = false;
+	  private boolean panelBailleurFichier = false;
 	  private boolean etatRecu = false; 
 	  private boolean confirmPaie = true;
 	  private boolean confirmVente = false;
@@ -404,6 +409,7 @@ public class DaoController {
 		 if (!listeDaoBailleur.isEmpty()) {
 			   daoBailleur = listeDaoBailleur.get(0);
 			   panelAvisBailleur = true;
+			   panelBailleurFichier = true;
 			   pavet2 =false;
 			   pavet3=false;
 			   pavet4=false;
@@ -411,6 +417,7 @@ public class DaoController {
 			   pavet6=false;
 		    }else {
 		    	    panelAvisBailleur = false;
+		    	    panelBailleurFichier = false;
 		    	    pavet2 =true;
 				    pavet3=true;
 				    pavet4=true;
@@ -418,6 +425,63 @@ public class DaoController {
 				    pavet6=true;
 		         }
 		 }
+	 
+	 
+	//Methode Upload
+	 @Transactional
+	 public void uploadBailleur(FileUploadEvent event) throws IOException{
+		 if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.getAffDacAvisBailleur()) || slctdTd.getAffDacDateBailleur().equals(null) 
+				 || "".equals(slctdTd.getAffDacDateBailleur())) 
+		   {
+			//Message d'erreur
+			   FacesContext.getCurrentInstance().addMessage(null,
+			   new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir les informations du Bailleur avant de joindre un fichier", "")); 
+		   }else {
+			 //condition de chargement d'un document : Nature sélectionnée 
+				 if((docNature == null || "".equals(docNature))){
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
+					FacesContext.getCurrentInstance().addMessage(null, msg);	
+					 
+					 }else {
+				
+				      if(fileUploadController.handleFileUpload(event, ""+slctdTd.getAffDacCode(), docNature)) {
+					
+					listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+		 				if (!listDao.isEmpty()) {
+		 					newDao= listDao.get(0);
+		 	   	                 }
+					
+					int nat = Integer.valueOf(docNature);
+					//check le dossier s'il existe à faire
+					//TDossierDacs dos =new TDossierDacs(); //TDossiersDacs
+					dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
+					dos.setTDacSpecs(newDao);
+					List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+					TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+					if(!LS.isEmpty()) natureDoc = LS.get(0);
+					dos.setTNatureDocuments(natureDoc);
+					dos.setDdaNom(fileUploadController.getFileName());
+					dos.setDdaDteSaisi(Calendar.getInstance().getTime());
+					dos.setDdaReference(fileUploadController.getDocNom());
+					iservice.addObject(dos);
+					
+					//chargeNatureDocTrans();
+					chargeDossier();
+					
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succés!", "");
+					FacesContext.getCurrentInstance().addMessage(null, msg);
+				   chargeDossier();
+					}else {
+						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
+						FacesContext.getCurrentInstance().addMessage(null, msg);	
+						
+					}
+				  }
+		     }	   	    	
+ }
+
+ 
 	
 
 //Enregistrement de l'avis du bailleur	
@@ -748,15 +812,15 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      			  				    }
      			  				   
      			  				 //Mis à Jour du DAO au statut de Retrait dans T_AFFICHAGE_DAO
-			                      slctdTd.setAffStaCode("DVE");
-			                      iservice.updateObject(slctdTd);
+			                      //slctdTd.setAffStaCode("DVE");
+			                      //iservice.updateObject(slctdTd);
 	                   
 	                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
 	                              listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 			  				      if (!listDao.isEmpty()) {
 			  					     newDao= listDao.get(0);
-			  					     newDao.setTStatut(new TStatut(slctdTd.getAffStaCode()));
+			  					     //newDao.setTStatut(new TStatut(slctdTd.getAffStaCode()));
 			  			             iservice.updateObject(newDao); 
 			  	   	                 }
 			  				      
@@ -1070,7 +1134,18 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 				    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 				    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-					new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
+					new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));	
+		 multiFiltre="";
+	 }
+	 
+	 public void chargeRecherchePPM() {
+		 ppmDao.clear();
+		 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+				    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+				    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+				    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+					new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+				    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));		 		 
 	 }
 	 
 	//Chargement du/des PPM du DAO en observation
@@ -1083,6 +1158,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					    new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()),
 						new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
 		 }
+		 
+		 //Methode de recherche sur les PSPM
+		 public void chargeRecherchePSPM() {
+			 ppmDao.clear();
+			 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
+					    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+						new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+					    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));		 		 
+		 }
 	 
 	//Chargement des PSPM n'ayant pas fait l'objet d'un DAO
 	 public void chargePSPM() {
@@ -1091,7 +1177,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 				    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
 				    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-					new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
+					new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));
+		 multiFiltre="";
 	 }
 	 
 	 
@@ -1773,17 +1860,32 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					  if(slctdTd.getAffDacMention().equalsIgnoreCase("Validé pour publication")) {
 						  statutSanction ="DPU";
 						  statutSanRetour ="0";
-						  
-						  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
-									new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
-									if (!listAvis.isEmpty()) {
-										                 //Mis à jour du statut
-										                 majAvis= listAvis.get(0);
-										                 majAvis.setTStatut(new TStatut(statutSanction));
-										                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
-										                 iservice.updateObject(majAvis);
-									                       }
-						  
+						    if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("AOR") || slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL"))
+						      {
+						    	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+											new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+											if (!listAvis.isEmpty()) {
+												                 //Mis à jour du statut
+												                 majAvis= listAvis.get(0);
+												                 majAvis.setTStatut(new TStatut(statutSanction));
+												                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+												                 iservice.updateObject(majAvis);
+											                       }
+						    	
+						         }else {
+						        	 
+						        	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+												new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+												if (!listAvis.isEmpty()) {
+													                 //Mis à jour du statut
+													                 majAvis= listAvis.get(0);
+													                 majAvis.setTStatut(new TStatut("APU"));
+													                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+													                 iservice.updateObject(majAvis);
+												                       }
+						                  }
+						    	
+						
 					                  }else 
 					                     if(slctdTd.getAffDacMention().equalsIgnoreCase("Validé et retour à l'AC")){
 					    	                statutSanction ="D5V";
@@ -2359,7 +2461,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		    	 dao.setTModePassation(new TModePassation(daoDetail.getMopCode()));
 		    	 dao.setTTypeMarche(new TTypeMarche(daoDetail.getDppTymCode()));
 		    	 dao.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-		    	 dao.setTDetailPlanPassation(new TDetailPlanPassation(daoDetail.getDppId()));
 		    	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
 		    	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
 		    	 dao.setTGestion(new TGestion(gesCode));
@@ -2378,7 +2479,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		    	 affDao.setAffDacCode(dao.getDacCode());
 		    	 affDao.setAffDacStatutRetour(dao.getDacStatutRetour());
 		    	 affDao.setAffDacFonCodAc(dao.getTFonctionByDacFonCodAc().getFonCod());
-		    	 affDao.setTDetailPlanPassation(new TDetailPlanPassation(dao.getTDetailPlanPassation().getDppId()));
 		    	 affDao.setAffDacMention(dao.getDacMention());
 		    	 affDao.setAffDacDateReception(dao.getDacDateReception());
 		    	 affDao.setAffDacDacDteValDmp(dao.getDacDteValDmp());
@@ -2497,7 +2597,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
         	 dao.setTModePassation(new TModePassation(daoDetail.getMopCode()));
         	 dao.setTTypeMarche(new TTypeMarche(daoDetail.getDppTymCode()));
         	 dao.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-        	 dao.setTDetailPlanPassation(new TDetailPlanPassation(daoDetail.getDppId()));
+        	 //dao.setTDetailPlanPassation(new TDetailPlanPassation(daoDetail.getDppId()));
         	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
         	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
         	 dao.setTGestion(new TGestion(gesCode));
@@ -2515,7 +2615,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
         	 affDao.setAffDacCode(dao.getDacCode());
         	 affDao.setAffDacStatutRetour(dao.getDacStatutRetour());
         	 affDao.setAffDacFonCodAc(dao.getTFonctionByDacFonCodAc().getFonCod());
-        	 affDao.setTDetailPlanPassation(new TDetailPlanPassation(dao.getTDetailPlanPassation().getDppId()));
+        	 //affDao.setTDetailPlanPassation(new TDetailPlanPassation(dao.getTDetailPlanPassation().getDppId()));
         	 affDao.setAffDacMention(dao.getDacMention());
         	 affDao.setAffDacDateReception(dao.getDacDateReception());
         	 affDao.setAffDacDacDteValDmp(dao.getDacDteValDmp());
@@ -3242,7 +3342,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
     public void saveLot(){
     	 if(newAvis.getAaoNbrLot() > newLot.getLaaNum()) {
     		 
-    		 newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+    		 //newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
     		 newLot.setTAvisAppelOffre(newAvis);
         	 iservice.addObject(newLot);
         	 chargeLots();
@@ -5260,6 +5360,22 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setListeDaoDiff(List<TDacSpecs> listeDaoDiff) {
 		this.listeDaoDiff = listeDaoDiff;
+	}
+
+	public boolean isPanelBailleurFichier() {
+		return panelBailleurFichier;
+	}
+
+	public void setPanelBailleurFichier(boolean panelBailleurFichier) {
+		this.panelBailleurFichier = panelBailleurFichier;
+	}
+
+	public String getNatPiece() {
+		return natPiece;
+	}
+
+	public void setNatPiece(String natPiece) {
+		this.natPiece = natPiece;
 	}
 	
 		

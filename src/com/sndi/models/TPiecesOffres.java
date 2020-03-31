@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 mars 2020 01:35:59 by Hibernate Tools 4.3.5.Final
+// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,12 +21,12 @@ import javax.persistence.TemporalType;
 public class TPiecesOffres implements java.io.Serializable {
 
 	private BigDecimal pofNum;
+	private TTypePieceOffre TTypePieceOffre;
 	private TDacSpecs TDacSpecs;
 	private TDetOffres TDetOffres;
+	private TLotAao TLotAao;
 	private TOffrePieceDac TOffrePieceDac;
 	private TOperateur TOperateur;
-	private TTypePieceOffre TTypePieceOffre;
-	private TLotAao TLotAao;
 	private String pofPresent;
 	private String pofConforme;
 	private String pofTypeAct;
@@ -40,16 +40,16 @@ public class TPiecesOffres implements java.io.Serializable {
 		this.pofNum = pofNum;
 	}
 
-	public TPiecesOffres(BigDecimal pofNum, TDacSpecs TDacSpecs, TDetOffres TDetOffres, TOffrePieceDac TOffrePieceDac,
-			TOperateur TOperateur, TTypePieceOffre TTypePieceOffre, TLotAao TLotAao, String pofPresent,
+	public TPiecesOffres(BigDecimal pofNum, TTypePieceOffre TTypePieceOffre, TDacSpecs TDacSpecs, TDetOffres TDetOffres,
+			TLotAao TLotAao, TOffrePieceDac TOffrePieceDac, TOperateur TOperateur, String pofPresent,
 			String pofConforme, String pofTypeAct, Date pofDteSaisi, String pofObs) {
 		this.pofNum = pofNum;
+		this.TTypePieceOffre = TTypePieceOffre;
 		this.TDacSpecs = TDacSpecs;
 		this.TDetOffres = TDetOffres;
+		this.TLotAao = TLotAao;
 		this.TOffrePieceDac = TOffrePieceDac;
 		this.TOperateur = TOperateur;
-		this.TTypePieceOffre = TTypePieceOffre;
-		this.TLotAao = TLotAao;
 		this.pofPresent = pofPresent;
 		this.pofConforme = pofConforme;
 		this.pofTypeAct = pofTypeAct;
@@ -66,6 +66,16 @@ public class TPiecesOffres implements java.io.Serializable {
 
 	public void setPofNum(BigDecimal pofNum) {
 		this.pofNum = pofNum;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "POF_OPD_TPO_CODE")
+	public TTypePieceOffre getTTypePieceOffre() {
+		return this.TTypePieceOffre;
+	}
+
+	public void setTTypePieceOffre(TTypePieceOffre TTypePieceOffre) {
+		this.TTypePieceOffre = TTypePieceOffre;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -89,6 +99,16 @@ public class TPiecesOffres implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "POF_LAA_ID")
+	public TLotAao getTLotAao() {
+		return this.TLotAao;
+	}
+
+	public void setTLotAao(TLotAao TLotAao) {
+		this.TLotAao = TLotAao;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "POF_OPD_NUM")
 	public TOffrePieceDac getTOffrePieceDac() {
 		return this.TOffrePieceDac;
@@ -106,26 +126,6 @@ public class TPiecesOffres implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "POF_OPD_TPO_CODE")
-	public TTypePieceOffre getTTypePieceOffre() {
-		return this.TTypePieceOffre;
-	}
-
-	public void setTTypePieceOffre(TTypePieceOffre TTypePieceOffre) {
-		this.TTypePieceOffre = TTypePieceOffre;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "POF_LAA_ID")
-	public TLotAao getTLotAao() {
-		return this.TLotAao;
-	}
-
-	public void setTLotAao(TLotAao TLotAao) {
-		this.TLotAao = TLotAao;
 	}
 
 	@Column(name = "POF_PRESENT", length = 1)
