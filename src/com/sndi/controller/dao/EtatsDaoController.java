@@ -83,6 +83,9 @@ public class EtatsDaoController {
 	private String libelleFournitures ="DAO_Fournitures_et_services_connexes.doc";
 	private String libelleTravaux ="dtao_travaux.doc";
 	private String libellePrestations ="dtao_prestation.doc";
+	//private String libellePrestations ="dtao_prestation.doc";
+	
+	
 	
 	@PostConstruct
 	 public void postConstru()   {

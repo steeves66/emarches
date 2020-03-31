@@ -740,7 +740,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			            
@@ -790,7 +790,7 @@
 		            </div>
 		           
 	            </div>
-	            
+	          <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>  
     
             </div>
       </p:dialog>
@@ -816,7 +816,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%;  vertical-align:top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValCp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValCp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			            
@@ -867,7 +867,7 @@
 		            </div>
 		           
 	            </div>
-	        
+	        <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -937,6 +937,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -958,7 +959,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -1005,6 +1006,7 @@
 		            </div>
 		           
 	            </div>
+	              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1027,7 +1029,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			            
@@ -1074,6 +1076,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1096,11 +1099,11 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-		                <p:column headerText="N°Accord" styleClass="col-sm-9" >	        
+		                <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
 				        </p:column>
 		
@@ -1120,7 +1123,7 @@
          				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
 				        </p:column>
 				        
-				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-9" >	        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
          				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
 				        </p:column>
 				        
@@ -1143,6 +1146,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailAcDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
