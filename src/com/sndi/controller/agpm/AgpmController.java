@@ -885,17 +885,33 @@ public class AgpmController {
    	   		      				new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
    	   	 		TDeclarant declarant = new TDeclarant();
    	   	   				if(!DEC.isEmpty()) declarant =DEC.get(0); 	
-   	   	   		         declarant.setDecOrganExecLibelle(updateAgpm.getDecOrganExecLibelle());
-   	   	   		         declarant.setDecOrganExecAdresse(updateAgpm.getDecOrganExecAdresse());
-   	   	   		         declarant.setDecPersNomPrenom(updateAgpm.getDecPersNomPrenom());
-   	   	   		         declarant.setDecPersFonction(updateAgpm.getDecPersFonction());  
-   	   	   		         declarant.setDecLocalisation(updateAgpm.getDecLocalisation());
-   	   	   		         declarant.setDecNumeroPorte(updateAgpm.getDecNumeroPorte()); 
-   	   	   		         declarant.setDecBp(updateAgpm.getDecBp());
-   	   	   		         declarant.setDecCel(updateAgpm.getDecCel());  
-   	   	   		         declarant.setDecTelephone(updateAgpm.getDecTelephone()); 
-   	   	   		         declarant.setDecEmail(updateAgpm.getDecEmail());
-   	   	   				iservice.updateObject(declarant);
+   	   	   		if(declarant.getDecId() > 0 ) {
+   	   	   	         declarant.setDecOrganExecLibelle(updateAgpm.getDecOrganExecLibelle());
+	   		         declarant.setDecOrganExecAdresse(updateAgpm.getDecOrganExecAdresse());
+	   		         declarant.setDecPersNomPrenom(updateAgpm.getDecPersNomPrenom());
+	   		         declarant.setDecPersFonction(updateAgpm.getDecPersFonction());  
+	   		         declarant.setDecLocalisation(updateAgpm.getDecLocalisation());
+	   		         declarant.setDecNumeroPorte(updateAgpm.getDecNumeroPorte()); 
+	   		         declarant.setDecBp(updateAgpm.getDecBp());
+	   		         declarant.setDecCel(updateAgpm.getDecCel());  
+	   		         declarant.setDecTelephone(updateAgpm.getDecTelephone()); 
+	   		         declarant.setDecEmail(updateAgpm.getDecEmail());
+	   				iservice.updateObject(declarant);	
+   	   	   		}else
+   	   	   		{
+   	   	   	     declarant.setDecOrganExecLibelle(updateAgpm.getDecOrganExecLibelle());
+		         declarant.setDecOrganExecAdresse(updateAgpm.getDecOrganExecAdresse());
+		         declarant.setDecPersNomPrenom(updateAgpm.getDecPersNomPrenom());
+		         declarant.setDecPersFonction(updateAgpm.getDecPersFonction());  
+		         declarant.setDecLocalisation(updateAgpm.getDecLocalisation());
+		         declarant.setDecNumeroPorte(updateAgpm.getDecNumeroPorte()); 
+		         declarant.setDecBp(updateAgpm.getDecBp());
+		         declarant.setDecCel(updateAgpm.getDecCel());  
+		         declarant.setDecTelephone(updateAgpm.getDecTelephone()); 
+		         declarant.setDecEmail(updateAgpm.getDecEmail());	
+		         iservice.addObject(declarant);
+   	   	   		}
+   	   	   		        
    	   				
    	   	   		 //Declarant
    	   	   	 		 List<TFinancement> FIN =iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),
