@@ -597,7 +597,7 @@ public class AgpmController {
 	           }
 	           //Mis à jour du numéro d'ordre
 	           public void updateDetail() {
-	        	   detail.setTdaNumOrdre(detail.getTdaNumOrdre());
+	        	    detail.setTdaNumOrdre(detail.getTdaNumOrdre());
 	       			iservice.updateObject(getDetail());
 	       			chargeDetail();
 	           }
@@ -724,7 +724,8 @@ public class AgpmController {
 	   /* VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
 	      if(bai == null) {*/
 	                           
-	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
+	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ||
+	    			  souCode.equalsIgnoreCase("") || "".equals(souCode) ) {
 	                      //Message d'erreur
 	    		          FacesContext.getCurrentInstance().addMessage(null,
 	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir tous les champs", ""));	 
@@ -936,7 +937,7 @@ public class AgpmController {
    	   		     slctdTd.setTBailleur(new TBailleur(updateAgpm.getBaiCode()));
    	   		     slctdTd.setTDeclarant(declarant);
    	   		     slctdTd.setTDevise(new TDevise(updateAgpm.getFinDevCode()));
-   	   		     slctdTd.setTSourceFinancement( new TSourceFinancement(updateAgpm.getFinSouCode()));
+   	   		     slctdTd.setTSourceFinancement( new TSourceFinancement(updateAgpm.getAffSouCode()));
    	   	   		 iservice.updateObject(slctdTd);
    	   				
  		 chargeData();
