@@ -54,7 +54,6 @@
          <p:panel header="Informations sur le projet / Programme">
            <div class="row">
            
-           <h:panelGroup rendered="false">
             <h:panelGroup rendered="#{agpmController.etatReferenceProjet}">
             <div class="box box-success box-solid">
                <div class="box-header with-border">
@@ -71,7 +70,6 @@
 			          </div>
                    </div>
 	            </div>
-	        </h:panelGroup>
 	        </h:panelGroup>
            
                <h:panelGroup id="Pro">
@@ -490,7 +488,7 @@
 				            <h:outputText value="#{slctdTb.tdaTitre}" />
 				        </p:column>
 				          <p:column headerText="Actions" styleClass="col-sm-1">
-				           <p:commandLink rendered="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				           <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.sltdetail}" />                             
@@ -1114,8 +1112,7 @@
       </p:dialog>
     </h:form>
     
- 
-    
+   
      <h:form id="dlogAC">
 	        <p:dialog  widgetVar="autoriteDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
 				<div class="contentpanel">
