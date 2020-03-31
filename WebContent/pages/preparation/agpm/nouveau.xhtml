@@ -490,7 +490,7 @@
 				            <h:outputText value="#{slctdTb.tdaTitre}" />
 				        </p:column>
 				          <p:column headerText="Actions" styleClass="col-sm-1">
-				           <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				           <p:commandLink rendered="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.sltdetail}" />                             
