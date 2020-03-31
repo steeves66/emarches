@@ -54,6 +54,7 @@
          <p:panel header="Informations sur le projet / Programme">
            <div class="row">
            
+            <h:panelGroup rendered="false">
             <h:panelGroup rendered="#{agpmController.etatReferenceProjet}">
             <div class="box box-success box-solid">
                <div class="box-header with-border">
@@ -71,7 +72,7 @@
                    </div>
 	            </div>
 	        </h:panelGroup>
-           
+           </h:panelGroup>
                <h:panelGroup id="Pro">
        <h:panelGroup rendered="#{agpmController.etatPanelProjet}">
         <div class="row">
@@ -457,7 +458,7 @@
              
              <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-11 "><div  style="color: #fff">LISTE DES DETAILS DE L'AGPM</div></div> 
+                  <div class="col-md-11 "><div  style="color: #fff">DETAILS DE L'AGPM</div></div> 
 			         <div class="col-md-1 "> 
 			           <p:commandLink oncomplete="PF('DetailDlg').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
@@ -488,7 +489,7 @@
 				            <h:outputText value="#{slctdTb.tdaTitre}" />
 				        </p:column>
 				          <p:column headerText="Actions" styleClass="col-sm-1">
-				           <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				           <p:commandLink rendered="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.sltdetail}" />                             
