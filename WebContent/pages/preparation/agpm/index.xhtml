@@ -504,18 +504,23 @@
 
                           <p:column headerText="Actions" style="width:#{controleController.actions} ">
 				         <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-	                                 <p:commandLink  oncomplete="PF('motif').show()" action="#{agpmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                                 <p:commandLink  oncomplete="PF('motif').show()" action="#{agpmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:5px" update="motif" >
 	                                <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
 	                           </p:commandLink> 
 	         		     </h:panelGroup>
                              
                              
-                             <p:commandLink  action="#{etatsAgpmController.renderPage('agpm5')}" styleClass="btn btn-xs btn-success"  title="Apercu Test" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsAgpmController.renderPage('agpm5')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:5px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
                              </p:commandLink>
                              
+                             <p:commandLink style="margin-right:5px" class="btn btn-xs btn-danger" action="#{agpmController.deleteAgpm()}"
+				               title="Supprimer" update=":content">
+                                <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
+                            </p:commandLink>
                              
 				              
 				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{agpmController.renderPage('agpm3','MOD')}"
@@ -524,7 +529,7 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
                             </p:commandLink>
                             
-                             <p:commandLink  action="#{agpmController.transmettre}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmission" update=":content">
+                             <p:commandLink  action="#{agpmController.transmettre}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmettre" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
                                   <p:confirm header="Confirmation" message="Voulez-vous transmettre de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />

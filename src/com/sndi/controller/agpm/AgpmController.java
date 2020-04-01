@@ -226,7 +226,9 @@ public class AgpmController {
 	 public boolean etatPanelProjetRappel= false;
 	 public boolean etatPanelInfoProjetRappel=false;
 	 public boolean etatPanelProjet= true;
-	 public boolean etatPanelInfoProjet=true;
+	 public boolean etatPanelInfoProjet=true; 
+	 public boolean paveConfirmation=false; 
+	 public boolean paveInformations=false;
 	 public boolean  etatPanelDossiers=true;
 	 public boolean  etatPanelDossiersRappel=false;
 	 public boolean  etatBoutonModifProjet=false;
@@ -248,7 +250,7 @@ public class AgpmController {
 	 private String colonne="";
 	 private String recherche="";
 	 private String dateToday;
-	 public boolean btn_saveProjet =false;
+	 public boolean btn_saveProjet =true;
 	 
 		//Methode
 	  public void DataToday() {
@@ -848,7 +850,9 @@ public class AgpmController {
 	    	 				     		  					etatPavetInfoProjet= true; 
 	    	 				     		  					etatPavetOrgne= true;
 	    	 				     		  					btn_saveProjet =false;
-	    	 				    	   
+	    	 				     		  				    paveInformations = true;
+	    	 				     		  				    paveConfirmation = true;
+	    	 				     		  				    btn_saveProjet =false;
 	    	 				                                }
 	                                                }
 	      		              /*}else {
@@ -857,9 +861,61 @@ public class AgpmController {
 	      		                   }*/
 	      		          }
 	  
+	  //Methode suppression Agpm
+	  public void deleteAgpm() {
+		  //AffichageAgpm
+		  iservice.deleteObject(slctdTd);
+		  
+		  //Financement
+	   	  List<TFinancement> FIN =iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),
+	   		     new WhereClause("FIN_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTFinancement().getFinId()));
+	   	         TFinancement financement = new TFinancement();
+	   	   		 if(!FIN.isEmpty()) financement =FIN.get(0); 	
+	   	   		 iservice.deleteObject(financement);
+	   	   		 
+	   	   	 //Historique
+	   	   	  List<THistoAgpm> HIS =iservice.getObjectsByColumn("THistoAgpm", new ArrayList<String>(Arrays.asList("HAG_ID")),
+	   	   		     new WhereClause("HAG_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+	   	             THistoAgpm histo = new THistoAgpm();
+	   	   	   		 if(!HIS.isEmpty()) histo =HIS.get(0); 	
+	   	   	   		 iservice.deleteObject(histo);
+	   	   	   	   		 
+	   	   	   	 //Dossiers
+	   	   	   	   	  List<TDossierAgpm> DOS =iservice.getObjectsByColumn("TDossierAgpm", new ArrayList<String>(Arrays.asList("DAG_ID")),
+	   	   	   	   		     new WhereClause("DAG_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+	   	   	              	TDossierAgpm dossier = new TDossierAgpm();
+	   	   	   	   	   		 if(!DOS.isEmpty()) dossier =DOS.get(0); 	
+	   	   	   	   	   		 iservice.deleteObject(dossier);
+	   	   	   	   	   		 
+	   	   		   		 
+	   	   		   	   	 //Details
+	   	   		   	   	   	  List<TDetailAgpm> DET =iservice.getObjectsByColumn("TDetailAgpm", new ArrayList<String>(Arrays.asList("TDA_ID")),
+	   	   		   	   	   		     new WhereClause("TDA_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+	   	   		   	                 TDetailAgpm detail = new TDetailAgpm();
+	   	   		   	   	   	   		 if(!DET.isEmpty()) detail =DET.get(0); 	
+	   	   		   	   	   	   		 iservice.deleteObject(detail);
+	   	   		   	   	   	   		 
+	   	   		   	   	       //Agpm
+	   	   	   		   	   	   	  List<TAgpm> AGP =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
+	   	   	   		   	   	   		     new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+	   	   	   		   	                 TAgpm agpm = new TAgpm();
+	   	   	   		   	   	   	   		 if(!AGP.isEmpty()) agpm =AGP.get(0); 	
+	   	   	   		   	   	   	   		 iservice.deleteObject(agpm);
+	   	   	   		   	   	   	   		 
+	   	   	   		   	   	//Projet
+ 	   	   		   	   	   	  List<TProjet> PRO =iservice.getObjectsByColumn("TProjet", new ArrayList<String>(Arrays.asList("PRO_ID")),
+ 	   	   		   	   	   		     new WhereClause("PRO_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTProjet().getProId()));
+ 	   	   		                  	TProjet  projet = new TProjet();
+ 	   	   		   	   	   	   		 if(!PRO.isEmpty()) projet =PRO.get(0); 	
+ 	   	   		   	   	   	   		 iservice.deleteObject(projet);
+	   	   			
+					  chargeData();
+					  userController.setTexteMsg("Sppression éffectuée avec succès!");
+					  userController.setRenderMsg(true);
+					  userController.setSevrityMsg("success");
+	  }
 	  
-	  //Les methodes de l'ecran de methodeModification
- 	 
+	  //Les methodes de l'ecran de methodeModification 
  	 public void modifier() {
  		 slctdTd.setTBailleur(new TBailleur(baiCode));
  		 slctdTd.setTDevise(new TDevise(devCode));
@@ -952,6 +1008,15 @@ public class AgpmController {
  		 sltdetail.setTContenuAgpm(new TContenuAgpm(tcaCode));
 			    	iservice.updateObject(sltdetail);
 			    	chargeDetailModif();
+				    userController.setTexteMsg("Mise a jour éffectuée avec succès!");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+	      	 }
+ 	 
+ 	 public void updatedetailSaisie() {  
+ 		 sltdetail.setTContenuAgpm(new TContenuAgpm(tcaCode));
+			    	iservice.updateObject(sltdetail);
+			    	chargeDetail();
 				    userController.setTexteMsg("Mise a jour éffectuée avec succès!");
 					userController.setRenderMsg(true);
 					userController.setSevrityMsg("success");
@@ -1876,12 +1941,54 @@ public class AgpmController {
 							+ "Veuillez saisir les champs obligatoire SVP!", ""));
 		          return "creation";
 				} 
- 
+			 updateCreation();
+			 chargeDetail();
+			 userController.initMessage();
 		     }
-	      
+		 
+		 
 	            return event.getNewStep();
 	    }
 	 
+	 public void updateCreation() {
+		 //Projet
+		 projet.setProTypeProjet(proTypeProjet); 
+		 projet.setProTitre(projet.getProTitre());
+		 iservice.updateObject(projet);
+		 
+		 //Agpm
+		 agpm.setAgpCommentaire(agpm.getAgpCommentaire());
+		 iservice.updateObject(agpm);
+		 
+		 //Financement
+		 newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+		 newFinancement.setTDevise(new TDevise(devCode));
+		 newFinancement.setTBailleur(new TBailleur(baiCode));
+		 newFinancement.setFinTypeFinance(sourfin);
+		 newFinancement.setTAgpm(agpm);
+		 newFinancement.setTProjet(projet);
+		 iservice.updateObject(newFinancement);
+		 
+		 //AffichageAgpm
+		 affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
+		 affichageAgpm.setAffAgpActif(agpm.getAgpActif());
+		 affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
+		 affichageAgpm.setAffAgpId(agpm.getAgpId());
+		 affichageAgpm.setTBailleur(new TBailleur(baiCode));
+		 affichageAgpm.setTDevise(new TDevise(devCode));
+		 affichageAgpm.setTFinancement(newFinancement);
+		 affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
+		 affichageAgpm.setTFonction(userController.getSlctd().getTFonction());
+		 affichageAgpm.setAffAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+		 affichageAgpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+		 affichageAgpm.setTGestion( new TGestion(gesCode));
+		 affichageAgpm.setTProjet(projet);
+		 affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));
+		 iservice.updateObject(affichageAgpm);
+		 
+		 
+	 }
+	 		 
 	 
 	 public String fermer(String value ,String action) throws IOException {
 		 userController.initMessage();
@@ -1902,8 +2009,13 @@ public class AgpmController {
 					chargeDataAvalider();
 					chargeData();
 					vider();
+					btn_saveProjet =true;
+					 paveInformations = false;
+	  				 paveConfirmation = false;
 					break;
 				case "pgpm2":
+					paveInformations = false;
+					paveConfirmation = false;
 					btn_saveProjet =true;
 					projet.setProTypeProjet("PRO");
 					boutonEdit=false;
@@ -1912,6 +2024,7 @@ public class AgpmController {
 					 etatPavetOrgne= false;
 					 etatBoutonModifDeclarant=false;
 					 etatBoutonEnregDeclarant=true;
+					 btn_saveProjet =true;
 					controleController.fonctionaliteDynamic();
 					userController.initMessage();
 					rappelDeclarant();
@@ -1921,12 +2034,20 @@ public class AgpmController {
 				break;
 				case "pgpm3":
 				break;
+				case "agpm2":
+					paveInformations = false;
+					paveConfirmation = false;
+					btn_saveProjet =true;
+					chargeDataAvalider();
+					chargeData();
+					vider();
+					break;
 				case "agpm3":
 					editForm();
-					sourfin = slctdTd.getTFinancement().getFinTypeFinance();
+					/*sourfin = slctdTd.getTFinancement().getFinTypeFinance();
 					baiCode= slctdTd.getTBailleur().getBaiCode();
 					souCode = slctdTd.getTSourceFinancement().getSouCode();
-					devCode = slctdTd.getTDevise().getDevCode();
+					devCode = slctdTd.getTDevise().getDevCode();*/
 					chargeDetailModif();
 					break;
 				case "pgpm4":
@@ -3248,6 +3369,30 @@ public class AgpmController {
 
 	public void setUpdateAgpm(VUpdateAgpm updateAgpm) {
 		this.updateAgpm = updateAgpm;
+	}
+
+	public boolean isPaveInformations() {
+		return paveInformations;
+	}
+
+	public void setPaveInformations(boolean paveInformations) {
+		this.paveInformations = paveInformations;
+	}
+
+	public boolean isBtn_saveProjet() {
+		return btn_saveProjet;
+	}
+
+	public void setBtn_saveProjet(boolean btn_saveProjet) {
+		this.btn_saveProjet = btn_saveProjet;
+	}
+
+	public boolean isPaveConfirmation() {
+		return paveConfirmation;
+	}
+
+	public void setPaveConfirmation(boolean paveConfirmation) {
+		this.paveConfirmation = paveConfirmation;
 	}
 	
     
