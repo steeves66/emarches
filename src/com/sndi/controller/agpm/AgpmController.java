@@ -773,7 +773,7 @@ public class AgpmController {
 		   	    	 				                                    userController.setTexteMsg("Agpm mis à jour avec succès!");
 		   	    	 				     		  				        userController.setRenderMsg(true);
 		   	    	 				     		  				        userController.setSevrityMsg("success");
-	    	 				                          }else {
+	    	 				                               }else {
 	    	 				                        	  
 	    	 				                        	 	//Insertion dans T_Projet
 	    	 				                                iservice.addObject(projet);
@@ -788,9 +788,15 @@ public class AgpmController {
 	    	 				     	      				    agpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 	    	 				     	      				    iservice.addObject(agpm);
 	    	 				     	      				    //Enregistre un financement
+	    	 				     	      				    if(sourfin.equalsIgnoreCase("ETAT")) {
+	    	 				     	      				      baiCode ="ETAT";
+	    	 				                 	        	  newFinancement.setTBailleur(new TBailleur(baiCode)); 
+	    	 				                 	             }else
+	    	 				                 	        	  {
+	    	 				                 	            	newFinancement.setTBailleur(new TBailleur(baiCode));  
+	    	 				                 	        	  }
 	    	 				     		      				newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
 	    	 				     		     			    newFinancement.setTDevise(new TDevise(devCode));
-	    	 				     		     			    newFinancement.setTBailleur(new TBailleur(baiCode));
 	    	 				     		     			    newFinancement.setFinTypeFinance(sourfin);
 	    	 				     		     			    newFinancement.setFinStatut("1");
 	    	 				     		     			    newFinancement.setTAgpm(agpm);
@@ -2217,12 +2223,10 @@ public class AgpmController {
 		
 	 
 	 //Edition de l'AGPM
+	 //Edition de l'AGPM
 	 public void imprimerAgpm() {
-		   if(acte.getAgpId() > 0) {
-			   projetReport.longparam1(acte.getAgpId(), "Agpm", "Agpm");    
-		   }else {
+		  
 			   projetReport.longparam1(affichageAgpm.getAffAgpId(), "Agpm", "Agpm"); 
-		    }
 		}
 	 
 	 //Edition de l'AGPM

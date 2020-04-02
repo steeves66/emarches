@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-03-28T17:41:48 -->
+<!-- 2020-04-02T12:48:54 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Agpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="71977765-8d50-4230-b434-5e51d55cae97">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -49,7 +49,7 @@ and a.agp_pro_id = p.pro_id
 and a.agp_fon_cod = f.fon_cod
 and p.pro_id = fi.fin_pro_id
 and a.agp_id = fi.fin_agp_id
-and b.bai_code = fi.fin_bai_code
+and b.bai_code = fi.fin_bai_code 
 and sf.sou_code = fi.fin_sou_code 
 and a.agp_dec_id = de.dec_id 
 and a.agp_id  = $P{param_code}]]>
@@ -59,10 +59,10 @@ and a.agp_id  = $P{param_code}]]>
 	<field name="AGP_MODE_PASSATION" class="java.lang.String"/>
 	<field name="MIN_LIBELLE" class="java.lang.String"/>
 	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
-	<field name="PRO_ID" class="java.lang.Long"/>
+	<field name="PRO_ID" class="java.math.BigDecimal"/>
 	<field name="PRO_TITRE" class="java.lang.String"/>
 	<field name="FON_LIBELLE" class="java.lang.String"/>
-	<field name="AGP_GES_CODE" class="java.lang.Long"/>
+	<field name="AGP_GES_CODE" class="java.math.BigDecimal"/>
 	<field name="PRO_LIBELLE" class="java.lang.String"/>
 	<field name="FIN_NUMERO_ACCORD" class="java.lang.String"/>
 	<field name="BAI_LIBELLE" class="java.lang.String"/>
