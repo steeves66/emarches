@@ -1360,6 +1360,7 @@ public class PpmController {
 		 	  		affichagePpm.setAffDppStrBenefi(detailPass.getDppStructureBenefi());
 		 	  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 		 	  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
+		 	  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
 		 	  		iservice.addObject(affichagePpm);
 		 	  		
 		 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
@@ -1496,6 +1497,7 @@ public class PpmController {
 		 		  		affichagePpm.setAffDppStrBenefi(detailPass.getDppStructureBenefi());
 		 		  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 		 		  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
+		 		  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
 		 		  		iservice.addObject(affichagePpm);
 		 		  		
 		 		  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
@@ -1662,7 +1664,7 @@ public class PpmController {
 			  		    affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
 			  		    affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
 			  		    affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
-			  		  affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
+			  		    affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
 			  		    affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
 			  		    affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
 			  		    affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
@@ -1670,6 +1672,7 @@ public class PpmController {
 			  		    affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
 			  		    affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 			  		    affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
+			  		    affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
 			  		    iservice.addObject(affichagePpm);
 			  		    
 			  			String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
@@ -1801,6 +1804,7 @@ public class PpmController {
 				  		affichagePpm.setAffDppPartiePmePmi(detailPass.getDppPartiePmePmi());
 				  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 				  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
+				  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
 				  		iservice.addObject(affichagePpm);
 				  		
 				  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
@@ -2232,13 +2236,10 @@ public class PpmController {
  				
  					}else
  						 if(userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
- 							  if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
+ 							  if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSO") || slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL") ) {
  								 statutTrans ="SPS";
- 							         }else 
- 							              if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL")){
- 							            	 statutTrans ="SPS";
- 							                 }
- 							         //statutTrans ="SPT";  
+ 							         }
+ 							          
  								   }else {
  									  statutTrans ="SPT"; 
  								  }
@@ -2261,7 +2262,7 @@ public class PpmController {
 			 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 			 									passDetail.setDppDateValDmp(Calendar.getInstance().getTime()); 
 			 								 }
-									passDetail.setTStatut(new TStatut("S1T"));
+									passDetail.setTStatut(new TStatut(statutTrans));
 									passDetail.setDppStatutRetour("0");
 							       iservice.updateObject(passDetail);
 							       
@@ -2278,13 +2279,13 @@ public class PpmController {
 	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 	 								   ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
 	 								 }
-						    ppm.setTStatut(new TStatut("S1T"));
+						    ppm.setTStatut(new TStatut(statutTrans));
 						    ppm.setAffDppStatutRetour("0");
 						    iservice.updateObject(ppm);
 								}
 				 			
 				 			//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
-								List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1T"));
+								List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutTrans));
 							    TStatut statuts = new TStatut();
 							      if(!LS.isEmpty()) statuts = LS.get(0);
 							  //Historisation des Plans Généraux
@@ -2307,7 +2308,7 @@ public class PpmController {
 		 		       chargeDataPspm();
 		 		      chargePspmTrans();
 		 		     //Actualisation du Tableau de Bord
-		 			  tableauBordController.chargeDataPpmPspm();
+		 			  tableauBordController.chargeDataPspm();
 	         }
 	     
 	     
