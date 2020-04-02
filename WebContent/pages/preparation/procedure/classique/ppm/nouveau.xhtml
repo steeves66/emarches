@@ -693,23 +693,25 @@
 		 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		 </p:commandLink>
        </div>
-       <div class="col-md-10">
+       <div class="col-md-8">
       
        </div> 
-       <div class="col-md-1">
+       <div class="col-md-3">
        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
        <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.creerDetailPassation()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer PPM
 	   </p:commandLink>
+	   
+	     <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.creerDetailPspm()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer PSPM
+	   </p:commandLink>
 	   <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.majDate()}" rendered="#{controleController.btn_maj_datePpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	   </p:commandLink>
-	   <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.creerDetailPspm()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer PSPM
-	   </p:commandLink>
+	 
 	   <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.majDate()}" rendered="#{controleController.btn_maj_datePspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer

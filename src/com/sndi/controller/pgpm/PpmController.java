@@ -1598,7 +1598,7 @@ public class PpmController {
 	  		
 	  	  if(fipPgpm.getFipId() > 0 ) {
 	  		  
-	  		 if(detailPass.getDppObjet().equalsIgnoreCase("") || detailPass.getDppPartiePmePmi().equalsIgnoreCase("") || tydCode.equalsIgnoreCase("")) {
+	  		 if("".equals(detailPass.getDppObjet())||"".equals(detailPass.getDppPartiePmePmi())||"".equals(tydCode)) {
 	  			   //Message d'erreur
 	  			   FacesContext.getCurrentInstance().addMessage(null,
 	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
@@ -1662,7 +1662,7 @@ public class PpmController {
 			  		    affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
 			  		    affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
 			  		    affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
-			  		    affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
+			  		  affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
 			  		    affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
 			  		    affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
 			  		    affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
