@@ -526,7 +526,7 @@
 				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{agpmModificationController.renderPage('agpm3','MOD')}"
 				               title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmModificationController.slctdTd}" />                             
                             </p:commandLink>
                             
                              <p:commandLink  action="#{agpmController.transmettre}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmettre" update=":content">
