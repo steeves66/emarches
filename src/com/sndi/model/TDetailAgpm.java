@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,7 +25,6 @@ public class TDetailAgpm implements java.io.Serializable {
 	private TContenuAgpm TContenuAgpm;
 	private String tdaNumOrdre;
 	private String tdaTitre;
-	@Lob
 	private String tdaCommentaire;
 
 	public TDetailAgpm() {
@@ -97,7 +95,7 @@ public class TDetailAgpm implements java.io.Serializable {
 		this.tdaTitre = tdaTitre;
 	}
 
-	@Column(name = "TDA_COMMENTAIRE")
+	@Column(name = "TDA_COMMENTAIRE", length = 4000)
 	public String getTdaCommentaire() {
 		return this.tdaCommentaire;
 	}
