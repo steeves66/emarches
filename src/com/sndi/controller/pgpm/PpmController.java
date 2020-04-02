@@ -1353,6 +1353,7 @@ public class PpmController {
 		 	  		affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
 		 	  		affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
 		 	  		affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
+		 	  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
 		 	  		affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
 		 	  		affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
 		 	  		affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
@@ -1661,6 +1662,7 @@ public class PpmController {
 			  		    affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
 			  		    affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
 			  		    affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
+			  		    affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
 			  		    affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
 			  		    affichagePpm.setAffDppDateSaisie(detailPass.getDppDateSaisie());
 			  		    affichagePpm.setAffDppStrConduc(detailPass.getDppStructureConduc());
