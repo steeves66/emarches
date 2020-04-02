@@ -3206,8 +3206,9 @@
 			    </p:dataTable>  
 			          </div>
 		            </div>
+		            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailChargeValDlg').hide()"/>
 	            </div>
-	                 
+	                         
       </p:dialog>
     </h:form>
     
@@ -3253,6 +3254,7 @@
 			    </p:dataTable>  
 			          </div>
 		            </div>
+		            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDiffCsvDlg').hide()"/>
 	            </div>
 	                 
       </p:dialog>
@@ -3366,7 +3368,7 @@
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossier" scrollable="true" scrollHeight="465" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoCsvValid}"  emptyMessage="Aucun Dao corrigé">
+                <p:dataTable id="tabDossier" scrollable="true" scrollHeight="260" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoCsvValid}"  emptyMessage="Aucun Dao corrigé">
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.dacGesCode}" />
 				        </p:column>
@@ -3393,6 +3395,7 @@
 			    </p:dataTable>  
 			          </div>
 		            </div>
+		             <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailChargeCorDlg').hide()"/>
 	            </div>
 	                 
       </p:dialog>
@@ -3450,7 +3453,7 @@
 
 		            </div>
 	            </div>
-
+             <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDaoVendDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>    
