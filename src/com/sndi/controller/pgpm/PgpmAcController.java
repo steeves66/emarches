@@ -2342,7 +2342,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                        iservice.addObject(affichagePgpm);
                        
                        //Insertion dans T_Financement_PGPM
-        	 	  	   newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));
+                       if(finAgpm.getFinTypeFinance().equalsIgnoreCase("ETAT")) {
+            	        	newFinancement.setTBailleur(new TBailleur("ETAT")); 
+            	          }else
+            	        	  {
+            	        	  newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));  
+            	        }
         	 	  	   newFinancement.setFipTypeFinance(finAgpm.getFinTypeFinance());
         	 	  	   newFinancement.setTDetailPlanGeneral(detailPlan);
         	 	  	   newFinancement.setTSourceFinancement(new TSourceFinancement(finAgpm.getTSourceFinancement().getSouCode()));

@@ -70,6 +70,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	private Date affDppDateValAc;
 	private Date affDppDateValCpmp;
 	private Date affDppDateValDmp;
+	private Date affDppApprobAno;
 	private String affDppTypeFinance;
 
 
@@ -98,7 +99,7 @@ public class TAffichagePpm implements java.io.Serializable {
 			String affDppTypePlan, String affDppCode, Integer affDppNumeroOrdre, Date affDppDate, String affDppObjet,
 			String affDppSourceFin, String affDppActeurSaisie, Date affDppDateDaoTrans, Date affDppDateDaoApprobDmp,
 			Date affDppDateDaoApprobBail, Date affDppDateAvisAoPublicat, Date affDppDateOuvertOt,
-			Date affDppDateOuvertOf, Date affDppDateElabRapport, Date affDppDateJugementOffre,
+			Date affDppDateOuvertOf, Date affDppDateElabRapport, Date affDppDateJugementOffre,Date affDppApprobAno,
 			Date affDppDateAttApprobDmp, Date affDppDateAttApproBail, Date affDppDateNegociation,
 			Date affDppDateSignatAttrib, Date affDppDateSignatAc, Date affDppDateMarcheApprob, Date affDppDateExecDebut,
 			Date affDppDateExecFin,long  affDppId, String affDppStatutRetour,String affDppStrConduc,
@@ -149,6 +150,7 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affDppDateValAc = affDppDateValAc;
 		this.affDppDateValCpmp = affDppDateValCpmp;
 		this.affDppDateValDmp = affDppDateValDmp;
+		this.affDppApprobAno = affDppApprobAno;
 		this.affDppTypeFinance = affDppTypeFinance;
 	}
 
@@ -612,6 +614,16 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setAffDppTypeFinance(String affDppTypeFinance) {
 		this.affDppTypeFinance = affDppTypeFinance;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AFF_DPP_APPROB_ANO", length = 7)
+	public Date getAffDppApprobAno() {
+		return affDppApprobAno;
+	}
+
+	public void setAffDppApprobAno(Date affDppApprobAno) {
+		this.affDppApprobAno = affDppApprobAno;
 	}
 
 }
