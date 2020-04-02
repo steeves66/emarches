@@ -34,7 +34,6 @@ public class VDaoChargeEtude implements java.io.Serializable {
 	private Date dacDteValCpmp;
 	private Date dacDteValDmp;
 	private String dacTdCode;
-	private Long dacDppId;
 	private Date dacDateReception;
 	private String dacStatutRetour;
 	private String dacMention;
@@ -58,7 +57,7 @@ public class VDaoChargeEtude implements java.io.Serializable {
 
 	public VDaoChargeEtude(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,String dacTypePlan,
 			String dacMopCode, long dacNbrOuv, long dacGesCode, String dacFonCodAc, String dacStrCode,
-			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
+			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode,
 			Date dacDateReception, String dacStatutRetour, String dacMention,String dacRecherche, String dcsOpeMatricule, String dcsPreMbm,
 			String dcsComStrCode, String dcsMbmRespo, String dcsFonCod, String tdcLibelle, String tymLibelleCourt,
 			String mopLibelleLong) {
@@ -77,7 +76,6 @@ public class VDaoChargeEtude implements java.io.Serializable {
 		this.dacDteValCpmp = dacDteValCpmp;
 		this.dacDteValDmp = dacDteValDmp;
 		this.dacTdCode = dacTdCode;
-		this.dacDppId = dacDppId;
 		this.dacDateReception = dacDateReception;
 		this.dacStatutRetour = dacStatutRetour;
 		this.dacMention = dacMention;
@@ -227,15 +225,6 @@ public class VDaoChargeEtude implements java.io.Serializable {
 
 	public void setDacTdCode(String dacTdCode) {
 		this.dacTdCode = dacTdCode;
-	}
-
-	@Column(name = "DAC_DPP_ID", precision = 10, scale = 0)
-	public Long getDacDppId() {
-		return this.dacDppId;
-	}
-
-	public void setDacDppId(Long dacDppId) {
-		this.dacDppId = dacDppId;
 	}
 
 	@Column(name = "DAC_DATE_RECEPTION", length = 7)

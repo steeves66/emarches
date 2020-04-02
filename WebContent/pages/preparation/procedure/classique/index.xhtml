@@ -71,7 +71,9 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            
+                 <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -106,8 +108,8 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-           <p:commandLink  oncomplete="PF('detailAcDifDlg').show()" action="#{pgpmAcController.chargePgpmDifAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
+           <p:commandLink  class="small-box-footer" oncomplete="PF('detailAcDifDlg').show()" action="#{pgpmAcController.chargePgpmDifAc()}" style="color:#fff;font-size:13px;">
+				Detail <i class="fa fa-arrow-circle-right"></i>		
 						  </p:commandLink>
           </div>
         </div>
@@ -139,6 +141,9 @@
               <i class="ion ion-bag"></i>
             </div>
             
+           <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -182,7 +187,9 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-              
+               <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -256,7 +263,9 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-             <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a> 
+             <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			<i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> 
           </div>
         </div>
         <!-- ./col -->
@@ -300,7 +309,9 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-             
+             <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -520,7 +531,7 @@
 	                                <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
 	                           </p:commandLink> 
-	         		</h:panelGroup>
+	         		          </h:panelGroup>
    
                              
                              <h:panelGroup rendered="#{controleController.detailPg1}">
@@ -549,6 +560,13 @@
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                               </p:commandLink>
+                              
+                              <h:panelGroup rendered="#{slctdTb.TStatut.staCode == 'S1S'}">
+                               <p:commandLink  oncomplete="PF('uploaddlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="Joindre Document" update=":content">
+                                <i class="ace-icon fa fa-download bigger-120" style="color: white"></i>
+                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.detailPlan}" />
+                               </p:commandLink>
+                               </h:panelGroup>
                            
     
 				         </p:column>   
@@ -709,13 +727,7 @@
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                               </p:commandLink>
-                              
-                               <p:commandLink  oncomplete="PF('uploaddlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i>
-                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.detailPlan}" />
-                                </p:commandLink>  
-				              
-				           
+
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
@@ -809,7 +821,7 @@
     
     
    <h:form id="apercu">
-	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -826,7 +838,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmTrans}" scrollable="true" scrollHeight="465"
+			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmTrans}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
 			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -836,18 +848,18 @@
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-6" >	        
          				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
-				        <p:column headerText="Type de Marché" styleClass="col-sm-9" >	        
+				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Mode de Passation" styleClass="col-sm-9" >	        
+				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-9" >	        
+				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				      
@@ -869,7 +881,7 @@
     
     
     <h:form id="apercuCp">
-	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -892,7 +904,7 @@
 					    <p:column headerText="Type Financement" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
 				        </p:column>
-						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-11" >	        
+						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
 				        <p:column headerText="Autorité Contractante" styleClass="col-sm-6" >	        
@@ -906,7 +918,7 @@
          				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-4" >	        
+				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
@@ -940,7 +952,7 @@
     
     
     <h:form id="apercuDp">
-	        <p:dialog  widgetVar="detailDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	        <p:dialog  widgetVar="detailDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -966,7 +978,7 @@
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
-				        <p:column headerText="Autorité Contractante" styleClass="col-sm-9" >	        
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-7" >	        
          				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
@@ -977,7 +989,7 @@
          				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-4" >	        
+				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
@@ -1007,7 +1019,7 @@
     </h:form>
     
        <h:form id="apercuDifAc">
-	        <p:dialog  widgetVar="detailAcDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
+	        <p:dialog  widgetVar="detailAcDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -1023,14 +1035,14 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmDifDmp}" scrollable="true" scrollHeight="465"
+		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmDifDmp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
 			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-					    <p:column headerText="Type Financement" styleClass="col-sm-4" >
+					    <p:column headerText="Type Financement" styleClass="col-sm-3" >
          				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
 				        </p:column>
-						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-11" >	        
+						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
 				        <p:column headerText="AC" styleClass="col-sm-6" >	        
@@ -1044,7 +1056,7 @@
          				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-4" >	        
+				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
@@ -1075,7 +1087,7 @@
     
     
     <h:form id="apercuDif">
-	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -1091,7 +1103,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmDifCp}" scrollable="true" scrollHeight="465"
+			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover"  var="slctdTb" value="#{pgpmAcController.pgpmDifCp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
 			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -1101,7 +1113,7 @@
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
-				        <p:column headerText="AC" styleClass="col-sm-7" >	        
+				        <p:column headerText="AC" styleClass="col-sm-6" >	        
          				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
@@ -1112,7 +1124,7 @@
          				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-4" >	        
+				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
@@ -1144,7 +1156,7 @@
     
     
         <h:form id="apercuDifD">
-	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -1160,7 +1172,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmDifDmp}" scrollable="true" scrollHeight="465"
+			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmDifDmp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
 			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -1170,7 +1182,7 @@
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
-				        <p:column headerText="AC" styleClass="col-sm-7" >	        
+				        <p:column headerText="AC" styleClass="col-sm-6" >	        
          				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
@@ -1181,7 +1193,7 @@
          				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-4" >	        
+				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
@@ -1213,7 +1225,7 @@
     
       
      <h:form id="uplog" styleClass="form-horizontal">
-	       <p:dialog  widgetVar="uploaddlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Joindre un document">
+	       <p:dialog  widgetVar="uploaddlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Joindre un document">
 				<div class="contentpanel">
 					
 	             <div class="row">
