@@ -33,7 +33,6 @@ public class VDaoBailleur implements java.io.Serializable {
 	private Date dacDteValCpmp;
 	private Date dacDteValDmp;
 	private String dacTdCode;
-	private Long dacDppId;
 	private Date dacDateReception;
 	private String dacStatutRetour;
 	private String dacMention;
@@ -96,7 +95,7 @@ public class VDaoBailleur implements java.io.Serializable {
 
 	public VDaoBailleur(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
 			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
-			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
+			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode,
 			Date dacDateReception, String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur, Long dacCout, String dacTypePlan, String aaoCode, String aaoLibelle, String aaoDacCode, Date aaoDteSaisi,
 			String aaoStaCode, Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin,
@@ -121,7 +120,6 @@ public class VDaoBailleur implements java.io.Serializable {
 		this.dacDteValCpmp = dacDteValCpmp;
 		this.dacDteValDmp = dacDteValDmp;
 		this.dacTdCode = dacTdCode;
-		this.dacDppId = dacDppId;
 		this.dacDateReception = dacDateReception;
 		this.dacStatutRetour = dacStatutRetour;
 		this.dacMention = dacMention;
@@ -301,15 +299,6 @@ public class VDaoBailleur implements java.io.Serializable {
 
 	public void setDacTdCode(String dacTdCode) {
 		this.dacTdCode = dacTdCode;
-	}
-
-	@Column(name = "DAC_DPP_ID", precision = 10, scale = 0)
-	public Long getDacDppId() {
-		return this.dacDppId;
-	}
-
-	public void setDacDppId(Long dacDppId) {
-		this.dacDppId = dacDppId;
 	}
 
 	@Column(name = "DAC_DATE_RECEPTION", length = 7)
