@@ -1278,7 +1278,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	          //Insertion dans T_Financement_PGPM
                  	          
                  	          
-                 	          if("".equals(finAgpm.getTBailleur().getBaiCode())) {
+                 	          if(finAgpm.getFinTypeFinance().equalsIgnoreCase("ETAT")) {
                  	        	newFinancement.setTBailleur(new TBailleur("ETAT")); 
                  	          }else
                  	        	  {
