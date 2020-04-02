@@ -225,6 +225,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private String statutAffiche="";
 		 private String statutUpdate="";
 		 private String statutTrans ="";
+		 private String finBaiCaode ="ETAT";
 		 private String multiFiltre="";
 		 public boolean selectBailleur=false;
 		 private String sourfin;
@@ -1275,7 +1276,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	          iservice.addObject(affichagePgpm);
                  	          
                  	          //Insertion dans T_Financement_PGPM
-   	        	 	  		  newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));
+                 	          
+                 	          
+                 	          if("".equals(finAgpm.getTBailleur().getBaiCode())) {
+                 	        	newFinancement.setTBailleur(new TBailleur("ETAT")); 
+                 	          }else
+                 	        	  {
+                 	        	  newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));  
+                 	        	  }
    	        	 	  		  newFinancement.setFipTypeFinance(finAgpm.getFinTypeFinance());
    	        	 	  		  newFinancement.setTDetailPlanGeneral(detailPlan);
    	        	 	  		  newFinancement.setTSourceFinancement(new TSourceFinancement(finAgpm.getTSourceFinancement().getSouCode()));
@@ -3733,6 +3741,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setHistoPgpm(THistoPlanGeneral histoPgpm) {
 		this.histoPgpm = histoPgpm;
+	}
+
+
+	public String getFinBaiCaode() {
+		return finBaiCaode;
+	}
+
+
+	public void setFinBaiCaode(String finBaiCaode) {
+		this.finBaiCaode = finBaiCaode;
 	}
 	
 	
