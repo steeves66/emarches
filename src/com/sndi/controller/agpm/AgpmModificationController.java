@@ -398,7 +398,7 @@ public class AgpmModificationController {
 		 public void chargeDetail() {
 			 getListeDetail().clear();
 			 listeDetail= (List<TDetailAgpm>) iservice.getObjectsByColumn("TDetailAgpm", new ArrayList<String>(Arrays.asList("TDA_ID")),
-					 new WhereClause("TDA_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+					 new WhereClause("TDA_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
 		 }
 		 
 		 //liste des details du projet rappelé
@@ -2049,6 +2049,7 @@ public class AgpmModificationController {
 					souCode = slctdTd.getTSourceFinancement().getSouCode();
 					devCode = slctdTd.getTDevise().getDevCode();*/
 					chargeDetailModif();
+					chargeDetail();
 					break;
 				case "pgpm4":
 					chargeDetails();
@@ -2219,9 +2220,9 @@ public class AgpmModificationController {
 	 //Edition de l'AGPM
 	 public void imprimerAgpm() {
 		   if(acte.getAgpId() > 0) {
-			   projetReport.longparam1(acte.getAgpId(), "Agpm", "Agpm");    
+			   projetReport.longparam1(slctdTd.getAffAgpId(), "Agpm", "Agpm");    
 		   }else {
-			   projetReport.longparam1(affichageAgpm.getAffAgpId(), "Agpm", "Agpm"); 
+			   projetReport.longparam1(slctdTd.getAffAgpId(), "Agpm", "Agpm"); 
 		    }
 		}
 	 

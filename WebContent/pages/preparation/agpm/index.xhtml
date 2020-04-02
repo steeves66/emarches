@@ -516,7 +516,7 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
                              </p:commandLink>
                              
-                             <p:commandLink style="margin-right:5px" class="btn btn-xs btn-danger" action="#{agpmController.deleteAgpm()}"
+                             <p:commandLink rendered="false" style="margin-right:5px" class="btn btn-xs btn-danger" action="#{agpmController.deleteAgpm()}"
 				               title="Supprimer" update=":content">
                                 <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
