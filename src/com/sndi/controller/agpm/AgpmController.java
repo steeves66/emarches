@@ -1518,7 +1518,6 @@ public class AgpmController {
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 statutUpdate ="S2D";
-					 //observation="AGPM retourné par la CPMP";
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
