@@ -713,7 +713,7 @@
 	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du rejet du PGPM N° #{pgpmAcController.slctdTd.affGpgId}
+						Motif du rejet du PGSPM N° #{pgpmAcController.slctdTd.affGpgId}
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	                  <p:inputTextarea rows="4" value="#{pgpmAcController.pgpmstatut.hpgMotif}" cols="100" style="width:100%;" readonly="true"/>
@@ -730,7 +730,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du Pgpm N° #{pgpmAcController.slctdTd.affGpgId}
+						Motif du retour du Pgspm N° #{pgpmAcController.slctdTd.affGpgId}
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">
@@ -763,8 +763,7 @@
 			         </div>
 			         
 			          <div class="col-md-3">
-
-			          
+   
 			         </div>
 			        </div>
 		            <div class="box-body"> 
@@ -806,7 +805,7 @@
 		           
 	            </div>
 	            
-    
+            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -877,7 +876,7 @@
 		            </div>
 		           
 	            </div>
-	        
+	        <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -944,6 +943,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -965,7 +965,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgspmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgspmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
 			               emptyMessage="Aucun PGSPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -1010,6 +1010,7 @@
 		            </div>
 		           
 	            </div>
+	             <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1077,6 +1078,7 @@
 		            </div>
 		           
 	            </div>
+	             <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>

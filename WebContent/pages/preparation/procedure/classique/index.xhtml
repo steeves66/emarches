@@ -446,11 +446,11 @@
                          
                         <p:column headerText="Type Financement" styleClass="col-sm-2" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgTypeFinance}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgTypeFinance}"/>
+         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -582,11 +582,11 @@
                          
                         <p:column headerText="Type Financement" styleClass="col-sm-2" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgTypeFinance}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgTypeFinance}"/>
+         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -681,7 +681,7 @@
 				        </p:column>
 				         
 				       
-                      <p:column headerText="Actions" styleClass="col-sm-2">
+                      <p:column headerText="Actions" styleClass="col-sm-3">
                       
 	         		 <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
 	                                 <p:commandLink  oncomplete="PF('motif').show()" action="#{pgpmAcController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
@@ -843,7 +843,7 @@
 			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Type Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
+         				  <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
@@ -902,7 +902,7 @@
 			               emptyMessage="Aucun PGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Type Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
+         				  <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
@@ -968,12 +968,12 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmValDmp}" scrollable="true" scrollHeight="465"
+		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmValDmp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
 			               emptyMessage="Aucun PGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Type Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
+         				  <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
@@ -1040,7 +1040,7 @@
 			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Type Financement" styleClass="col-sm-3" >
-         				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
+         				  <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
@@ -1108,7 +1108,7 @@
 			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Type Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
+         				  <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
@@ -1177,7 +1177,7 @@
 			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Type Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgTypeFinance}" />
+         				  <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
          				  <h:outputText value="#{slctdTb.affGpgObjet}" />
