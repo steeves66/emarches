@@ -101,16 +101,16 @@ public class GRFProperties {
 	public static final String PARAM_LOG4J ="LOG4J";
 	public static final String PARAM_LOG4J_LIBELLE = "C:/LOG4J/";
 	//public static final String PARAM_UPLOAD_DESTINATION = getProperty("destination", "\\standalone\\Dossiers\\");
-	public static final String PARAM_UPLOAD_DESTINATION = "/wildfly8/standalone/Dossiers/";
-	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/wildfly8/standalone/DAO/Travaux/";
-	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/wildfly8/standalone/DAO/Fournitures/";
-	public static final String PARAM_UPLOAD_DAO_SERVICES = "/wildfly8/standalone/DAO/Services/";
+	public static final String PARAM_UPLOAD_DESTINATION = "/standalone/Dossiers/";
+	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/standalone/Dossiers/DAO/Travaux/";
+	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/standalone/Dossiers/DAO/Fournitures/";
+	public static final String PARAM_UPLOAD_DAO_SERVICES = "/standalone/Dossiers/DAO/Services/";
 	
 	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC = getProperty("destinationTrue", "\\standalone\\Dossiers\\trueDoc\\");
-	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "opt/wildfly8/standalone/Dossiers/");
-	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC_LINUX = getProperty("destinationTrueLinux", "opt/wildfly8/standalone/Dossiers/trueDoc/");
+	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "opt/standalone/Dossiers/");
+	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC_LINUX = getProperty("destinationTrueLinux", "opt/standalone/Dossiers/trueDoc/");
 	public static final String PARAM_SOURCE_LOG = getProperty("sourcelog", "\\standalone\\log\\");
-	public static final String PARAM_SOURCE_LOG_LINUX = getProperty("sourceloglinux", "opt/wildfly8/standalone/log/");
+	public static final String PARAM_SOURCE_LOG_LINUX = getProperty("sourceloglinux", "opt/standalone/log/");
 	
 
 	
