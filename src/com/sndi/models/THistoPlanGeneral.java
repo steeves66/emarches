@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,9 +20,9 @@ import javax.persistence.TemporalType;
 public class THistoPlanGeneral implements java.io.Serializable {
 
 	private long hpgId;
-	private TStatut TStatut;
 	private TDetailPlanGeneral TDetailPlanGeneral;
 	private TFonction TFonction;
+	private TStatut TStatut;
 	private TOperateur TOperateur;
 	private Date hpgDate;
 	private String hpgMotif;
@@ -30,19 +30,19 @@ public class THistoPlanGeneral implements java.io.Serializable {
 	public THistoPlanGeneral() {
 	}
 
-	public THistoPlanGeneral(long hpgId, TStatut TStatut, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction) {
+	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction, TStatut TStatut) {
 		this.hpgId = hpgId;
-		this.TStatut = TStatut;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TFonction = TFonction;
+		this.TStatut = TStatut;
 	}
 
-	public THistoPlanGeneral(long hpgId, TStatut TStatut, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction,
+	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction, TStatut TStatut,
 			TOperateur TOperateur, Date hpgDate, String hpgMotif) {
 		this.hpgId = hpgId;
-		this.TStatut = TStatut;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TFonction = TFonction;
+		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
 		this.hpgDate = hpgDate;
 		this.hpgMotif = hpgMotif;
@@ -57,16 +57,6 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setHpgId(long hpgId) {
 		this.hpgId = hpgId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -87,6 +77,16 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

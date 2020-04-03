@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,25 +26,24 @@ public class VbDacSpecs implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "dacCode", column = @Column(name = "DAC_CODE", nullable = false, length = 20)),
-			@AttributeOverride(name = "dacObjet", column = @Column(name = "DAC_OBJET", length = 1000)),
-			@AttributeOverride(name = "dacDteSaisi", column = @Column(name = "DAC_DTE_SAISI", length = 7)),
-			@AttributeOverride(name = "dacStaCode", column = @Column(name = "DAC_STA_CODE", length = 3)),
-			@AttributeOverride(name = "dacTymCode", column = @Column(name = "DAC_TYM_CODE", length = 5)),
-			@AttributeOverride(name = "dacMopCode", column = @Column(name = "DAC_MOP_CODE", length = 3)),
-			@AttributeOverride(name = "dacNbrOuv", column = @Column(name = "DAC_NBR_OUV", precision = 22, scale = 0)),
-			@AttributeOverride(name = "dacGesCode", column = @Column(name = "DAC_GES_CODE", precision = 22, scale = 0)),
-			@AttributeOverride(name = "dacFonCodAc", column = @Column(name = "DAC_FON_COD_AC", length = 12)),
-			@AttributeOverride(name = "dacStrCode", column = @Column(name = "DAC_STR_CODE", length = 3)),
-			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 12)),
-			@AttributeOverride(name = "dacDteValCpmp", column = @Column(name = "DAC_DTE_VAL_CPMP", length = 7)),
-			@AttributeOverride(name = "dacDteValDmp", column = @Column(name = "DAC_DTE_VAL_DMP", length = 7)),
-			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE", length = 3)),
-			@AttributeOverride(name = "dacDppId", column = @Column(name = "DAC_DPP_ID", precision = 10, scale = 0)),
-			@AttributeOverride(name = "dacDateReception", column = @Column(name = "DAC_DATE_RECEPTION", length = 7)),
-			@AttributeOverride(name = "dacStatutRetour", column = @Column(name = "DAC_STATUT_RETOUR", length = 2)),
-			@AttributeOverride(name = "dacMention", column = @Column(name = "DAC_MENTION", length = 100)) })
+	@AttributeOverrides({ @AttributeOverride(name = "dacCode", column = @Column(name = "DAC_CODE")),
+			@AttributeOverride(name = "dacObjet", column = @Column(name = "DAC_OBJET")),
+			@AttributeOverride(name = "dacDteSaisi", column = @Column(name = "DAC_DTE_SAISI")),
+			@AttributeOverride(name = "dacStaCode", column = @Column(name = "DAC_STA_CODE")),
+			@AttributeOverride(name = "dacTymCode", column = @Column(name = "DAC_TYM_CODE")),
+			@AttributeOverride(name = "dacMopCode", column = @Column(name = "DAC_MOP_CODE")),
+			@AttributeOverride(name = "dacNbrOuv", column = @Column(name = "DAC_NBR_OUV")),
+			@AttributeOverride(name = "dacGesCode", column = @Column(name = "DAC_GES_CODE")),
+			@AttributeOverride(name = "dacFonCodAc", column = @Column(name = "DAC_FON_COD_AC")),
+			@AttributeOverride(name = "dacStrCode", column = @Column(name = "DAC_STR_CODE")),
+			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP")),
+			@AttributeOverride(name = "dacDteValCpmp", column = @Column(name = "DAC_DTE_VAL_CPMP")),
+			@AttributeOverride(name = "dacDteValDmp", column = @Column(name = "DAC_DTE_VAL_DMP")),
+			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE")),
+			@AttributeOverride(name = "dacDppId", column = @Column(name = "DAC_DPP_ID")),
+			@AttributeOverride(name = "dacDateReception", column = @Column(name = "DAC_DATE_RECEPTION")),
+			@AttributeOverride(name = "dacStatutRetour", column = @Column(name = "DAC_STATUT_RETOUR")),
+			@AttributeOverride(name = "dacMention", column = @Column(name = "DAC_MENTION")) })
 	public VbDacSpecsId getId() {
 		return this.id;
 	}

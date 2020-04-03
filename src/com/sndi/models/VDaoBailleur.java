@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -41,7 +41,6 @@ public class VDaoBailleur implements java.io.Serializable {
 			@AttributeOverride(name = "dacDteValCpmp", column = @Column(name = "DAC_DTE_VAL_CPMP", length = 7)),
 			@AttributeOverride(name = "dacDteValDmp", column = @Column(name = "DAC_DTE_VAL_DMP", length = 7)),
 			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE", length = 3)),
-			@AttributeOverride(name = "dacDppId", column = @Column(name = "DAC_DPP_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "dacDateReception", column = @Column(name = "DAC_DATE_RECEPTION", length = 7)),
 			@AttributeOverride(name = "dacStatutRetour", column = @Column(name = "DAC_STATUT_RETOUR", length = 2)),
 			@AttributeOverride(name = "dacMention", column = @Column(name = "DAC_MENTION", length = 100)),

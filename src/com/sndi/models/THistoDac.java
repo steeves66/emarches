@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,9 +20,9 @@ import javax.persistence.TemporalType;
 public class THistoDac implements java.io.Serializable {
 
 	private long hacId;
-	private TStatut TStatut;
 	private TDacSpecs TDacSpecs;
 	private TFonction TFonction;
+	private TStatut TStatut;
 	private TOperateur TOperateur;
 	private Date hacDate;
 	private String hacCommentaire;
@@ -30,20 +30,20 @@ public class THistoDac implements java.io.Serializable {
 	public THistoDac() {
 	}
 
-	public THistoDac(long hacId, TStatut TStatut, TDacSpecs TDacSpecs, TFonction TFonction, TOperateur TOperateur) {
+	public THistoDac(long hacId, TDacSpecs TDacSpecs, TFonction TFonction, TStatut TStatut, TOperateur TOperateur) {
 		this.hacId = hacId;
-		this.TStatut = TStatut;
 		this.TDacSpecs = TDacSpecs;
 		this.TFonction = TFonction;
+		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
 	}
 
-	public THistoDac(long hacId, TStatut TStatut, TDacSpecs TDacSpecs, TFonction TFonction, TOperateur TOperateur,
+	public THistoDac(long hacId, TDacSpecs TDacSpecs, TFonction TFonction, TStatut TStatut, TOperateur TOperateur,
 			Date hacDate, String hacCommentaire) {
 		this.hacId = hacId;
-		this.TStatut = TStatut;
 		this.TDacSpecs = TDacSpecs;
 		this.TFonction = TFonction;
+		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
 		this.hacDate = hacDate;
 		this.hacCommentaire = hacCommentaire;
@@ -58,16 +58,6 @@ public class THistoDac implements java.io.Serializable {
 
 	public void setHacId(long hacId) {
 		this.hacId = hacId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAC_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -88,6 +78,16 @@ public class THistoDac implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HAC_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

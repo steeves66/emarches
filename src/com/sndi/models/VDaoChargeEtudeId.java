@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,7 +27,6 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 	private Date dacDteValCpmp;
 	private Date dacDteValDmp;
 	private String dacTdCode;
-	private Long dacDppId;
 	private Date dacDateReception;
 	private String dacStatutRetour;
 	private String dacMention;
@@ -52,7 +51,7 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 	public VDaoChargeEtudeId(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
 			String dacTypePlan, String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc,
 			String dacStrCode, String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode,
-			Long dacDppId, Date dacDateReception, String dacStatutRetour, String dacMention, String dacRecherche,
+			Date dacDateReception, String dacStatutRetour, String dacMention, String dacRecherche,
 			String dcsOpeMatricule, String dcsPreMbm, String dcsComStrCode, String dcsMbmRespo, String dcsFonCod,
 			String tdcLibelle, String tymLibelleCourt, String mopLibelleLong) {
 		this.dacCode = dacCode;
@@ -70,7 +69,6 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 		this.dacDteValCpmp = dacDteValCpmp;
 		this.dacDteValDmp = dacDteValDmp;
 		this.dacTdCode = dacTdCode;
-		this.dacDppId = dacDppId;
 		this.dacDateReception = dacDateReception;
 		this.dacStatutRetour = dacStatutRetour;
 		this.dacMention = dacMention;
@@ -218,15 +216,6 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 
 	public void setDacTdCode(String dacTdCode) {
 		this.dacTdCode = dacTdCode;
-	}
-
-	@Column(name = "DAC_DPP_ID", precision = 10, scale = 0)
-	public Long getDacDppId() {
-		return this.dacDppId;
-	}
-
-	public void setDacDppId(Long dacDppId) {
-		this.dacDppId = dacDppId;
 	}
 
 	@Column(name = "DAC_DATE_RECEPTION", length = 7)
@@ -382,8 +371,6 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 								&& this.getDacDteValDmp().equals(castOther.getDacDteValDmp())))
 				&& ((this.getDacTdCode() == castOther.getDacTdCode()) || (this.getDacTdCode() != null
 						&& castOther.getDacTdCode() != null && this.getDacTdCode().equals(castOther.getDacTdCode())))
-				&& ((this.getDacDppId() == castOther.getDacDppId()) || (this.getDacDppId() != null
-						&& castOther.getDacDppId() != null && this.getDacDppId().equals(castOther.getDacDppId())))
 				&& ((this.getDacDateReception() == castOther.getDacDateReception())
 						|| (this.getDacDateReception() != null && castOther.getDacDateReception() != null
 								&& this.getDacDateReception().equals(castOther.getDacDateReception())))
@@ -436,7 +423,6 @@ public class VDaoChargeEtudeId implements java.io.Serializable {
 		result = 37 * result + (getDacDteValCpmp() == null ? 0 : this.getDacDteValCpmp().hashCode());
 		result = 37 * result + (getDacDteValDmp() == null ? 0 : this.getDacDteValDmp().hashCode());
 		result = 37 * result + (getDacTdCode() == null ? 0 : this.getDacTdCode().hashCode());
-		result = 37 * result + (getDacDppId() == null ? 0 : this.getDacDppId().hashCode());
 		result = 37 * result + (getDacDateReception() == null ? 0 : this.getDacDateReception().hashCode());
 		result = 37 * result + (getDacStatutRetour() == null ? 0 : this.getDacStatutRetour().hashCode());
 		result = 37 * result + (getDacMention() == null ? 0 : this.getDacMention().hashCode());

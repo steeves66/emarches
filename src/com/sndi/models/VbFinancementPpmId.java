@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -23,10 +23,9 @@ public class VbFinancementPpmId implements java.io.Serializable {
 	public VbFinancementPpmId() {
 	}
 
-	public VbFinancementPpmId(long fppId, String fppDevCode, String fppBaiCode, String fppSouCode, long fppDppId) {
+	public VbFinancementPpmId(long fppId, String fppDevCode, String fppSouCode, long fppDppId) {
 		this.fppId = fppId;
 		this.fppDevCode = fppDevCode;
-		this.fppBaiCode = fppBaiCode;
 		this.fppSouCode = fppSouCode;
 		this.fppDppId = fppDppId;
 	}
@@ -61,7 +60,7 @@ public class VbFinancementPpmId implements java.io.Serializable {
 		this.fppDevCode = fppDevCode;
 	}
 
-	@Column(name = "FPP_BAI_CODE", nullable = false, length = 5)
+	@Column(name = "FPP_BAI_CODE", length = 5)
 	public String getFppBaiCode() {
 		return this.fppBaiCode;
 	}

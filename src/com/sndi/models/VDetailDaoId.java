@@ -1,8 +1,7 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
-import java.math.BigDecimal;
-import java.util.Date;
+import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -12,113 +11,105 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VDetailDaoId implements java.io.Serializable {
 
-	private String dacCode;
-	private String dacObjet;
-	private Date dacDteSaisi;
-	private String dacStaCode;
-	private String dacTymCode;
-	private String dacMopCode;
-	private BigDecimal dacNbrOuv;
-	private BigDecimal dacGesCode;
-	private String dacFonCodAc;
-	private String dacStrCode;
-	private String dacFonCodeCpmp;
-	private Date dacDteValCpmp;
-	private Date dacDteValDmp;
-	private String dacTdCode;
-	private Long dacDppId;
-	private Date dacDateReception;
-	private String dacStatutRetour;
-	private String aaoCode;
-	private String aaoLibelle;
-	private String aaoDacCode;
-	private Date aaoDteSaisi;
-	private String aaoStaCode;
-	private Date aaoDtePub;
-	private Date aaoDteOuvTec;
-	private String aaoDteHeurOuv;
-	private Date aaoDteOuvFin;
-	private BigDecimal aaoNbrLot;
-	private BigDecimal aaoNbrOuv;
-	private BigDecimal aaoDelaiVal;
-	private String aaoFonCodAc;
-	private String aaoFonCodeCpmp;
-	private String aaoNatInt;
-	private String aaoTaux;
-	private String aaoLieuExe;
-	private String aaoNomResp;
-	private String aaoInterPub;
-	private String aaoCautDefExig;
-	private String aaoBompPub;
-	private String aaoVenteParLot;
-	private String aaoAvisBail;
-	private BigDecimal aaoMtCaut;
-	private String aaoModePaiement;
-	private BigDecimal aaoCoutDac;
-	private String aaoLieuRecep;
-	private Date aaoDateRecep;
-	private String aaoHeureRecep;
-	private BigDecimal laaId;
-	private String laaAaoCode;
-	private String laaObjet;
-	private String laaObservation;
-	private BigDecimal laaMtCaut;
-	private BigDecimal laaMtEst;
-	private Date laaDteSaisi;
-	private String laaStaCode;
-	private String laaFonCodSaisi;
-	private String laaFonCodCpmp;
-	private String laaLieuExe;
-	private String laaLbgImputation;
-	private BigDecimal laaNum;
-	private BigDecimal laaCoutLot;
-	private BigDecimal ddaId;
-	private String ddaNom;
-	private Date ddaDteSaisi;
-	private String ddaStaCode;
-	private String ddaDacCode;
-	private BigDecimal ddaPidCode;
-	private String ddaReference;
-	private String ddaCommentaire;
-	private String tymLibelleCourt;
-	private String mopLibelleLong;
-	private String strCode;
-	private String strLibelleCourt;
-	private String strLibelleLong;
-	private String minLibelle;
-	private short plpGesCode;
+	private Serializable dacCode;
+	private Serializable dacObjet;
+	private Serializable dacDteSaisi;
+	private Serializable dacStaCode;
+	private Serializable dacTymCode;
+	private Serializable dacMopCode;
+	private Serializable dacNbrOuv;
+	private Serializable dacGesCode;
+	private Serializable dacFonCodAc;
+	private Serializable dacStrCode;
+	private Serializable dacFonCodeCpmp;
+	private Serializable dacDteValCpmp;
+	private Serializable dacDteValDmp;
+	private Serializable dacTdCode;
+	private Serializable dacDppId;
+	private Serializable dacDateReception;
+	private Serializable dacStatutRetour;
+	private Serializable aaoCode;
+	private Serializable aaoLibelle;
+	private Serializable aaoDacCode;
+	private Serializable aaoDteSaisi;
+	private Serializable aaoStaCode;
+	private Serializable aaoDtePub;
+	private Serializable aaoDteOuvTec;
+	private Serializable aaoDteHeurOuv;
+	private Serializable aaoDteOuvFin;
+	private Serializable aaoNbrLot;
+	private Serializable aaoNbrOuv;
+	private Serializable aaoDelaiVal;
+	private Serializable aaoFonCodAc;
+	private Serializable aaoFonCodeCpmp;
+	private Serializable aaoNatInt;
+	private Serializable aaoTaux;
+	private Serializable aaoLieuExe;
+	private Serializable aaoNomResp;
+	private Serializable aaoInterPub;
+	private Serializable aaoCautDefExig;
+	private Serializable aaoBompPub;
+	private Serializable aaoVenteParLot;
+	private Serializable aaoAvisBail;
+	private Serializable aaoMtCaut;
+	private Serializable aaoModePaiement;
+	private Serializable aaoCoutDac;
+	private Serializable aaoLieuRecep;
+	private Serializable aaoDateRecep;
+	private Serializable aaoHeureRecep;
+	private Serializable laaId;
+	private Serializable laaAaoCode;
+	private Serializable laaObjet;
+	private Serializable laaObservation;
+	private Serializable laaMtCaut;
+	private Serializable laaMtEst;
+	private Serializable laaDteSaisi;
+	private Serializable laaStaCode;
+	private Serializable laaFonCodSaisi;
+	private Serializable laaFonCodCpmp;
+	private Serializable laaLieuExe;
+	private Serializable laaLbgImputation;
+	private Serializable laaNum;
+	private Serializable laaCoutLot;
+	private Serializable ddaId;
+	private Serializable ddaNom;
+	private Serializable ddaDteSaisi;
+	private Serializable ddaStaCode;
+	private Serializable ddaDacCode;
+	private Serializable ddaPidCode;
+	private Serializable ddaReference;
+	private Serializable ddaCommentaire;
+	private Serializable tymLibelleCourt;
+	private Serializable mopLibelleLong;
+	private Serializable strCode;
+	private Serializable strLibelleCourt;
+	private Serializable strLibelleLong;
+	private Serializable minLibelle;
+	private Serializable plpGesCode;
 
 	public VDetailDaoId() {
 	}
 
-	public VDetailDaoId(String dacCode, String aaoCode, BigDecimal laaId, BigDecimal ddaId, String tymLibelleCourt,
-			String strCode, String strLibelleCourt, short plpGesCode) {
-		this.dacCode = dacCode;
-		this.aaoCode = aaoCode;
-		this.laaId = laaId;
-		this.ddaId = ddaId;
-		this.tymLibelleCourt = tymLibelleCourt;
-		this.strCode = strCode;
-		this.strLibelleCourt = strLibelleCourt;
-		this.plpGesCode = plpGesCode;
-	}
-
-	public VDetailDaoId(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
-			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
-			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
-			Date dacDateReception, String dacStatutRetour, String aaoCode, String aaoLibelle, String aaoDacCode,
-			Date aaoDteSaisi, String aaoStaCode, Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv,
-			Date aaoDteOuvFin, BigDecimal aaoNbrLot, BigDecimal aaoNbrOuv, BigDecimal aaoDelaiVal, String aaoFonCodAc,
-			String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux, String aaoLieuExe, String aaoNomResp,
-			String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot, String aaoAvisBail,
-			BigDecimal aaoMtCaut, String aaoModePaiement, BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,
-			String aaoHeureRecep, BigDecimal laaId, String laaAaoCode, String laaObjet, String laaObservation,
-			BigDecimal laaMtCaut, BigDecimal laaMtEst, Date laaDteSaisi, String laaStaCode, String laaFonCodSaisi,
-			String laaFonCodCpmp, String laaLieuExe, String laaLbgImputation, BigDecimal laaNum, BigDecimal laaCoutLot,
-			BigDecimal ddaId, String ddaNom, Date ddaDteSaisi, String ddaStaCode, String ddaDacCode,
-			BigDecimal ddaPidCode, String ddaReference, String ddaCommentaire, String tymLibelleCourt,
-			String mopLibelleLong, String strCode, String strLibelleCourt, String strLibelleLong, String minLibelle,
-			short plpGesCode) {
+	public VDetailDaoId(Serializable dacCode, Serializable dacObjet, Serializable dacDteSaisi, Serializable dacStaCode,
+			Serializable dacTymCode, Serializable dacMopCode, Serializable dacNbrOuv, Serializable dacGesCode,
+			Serializable dacFonCodAc, Serializable dacStrCode, Serializable dacFonCodeCpmp, Serializable dacDteValCpmp,
+			Serializable dacDteValDmp, Serializable dacTdCode, Serializable dacDppId, Serializable dacDateReception,
+			Serializable dacStatutRetour, Serializable aaoCode, Serializable aaoLibelle, Serializable aaoDacCode,
+			Serializable aaoDteSaisi, Serializable aaoStaCode, Serializable aaoDtePub, Serializable aaoDteOuvTec,
+			Serializable aaoDteHeurOuv, Serializable aaoDteOuvFin, Serializable aaoNbrLot, Serializable aaoNbrOuv,
+			Serializable aaoDelaiVal, Serializable aaoFonCodAc, Serializable aaoFonCodeCpmp, Serializable aaoNatInt,
+			Serializable aaoTaux, Serializable aaoLieuExe, Serializable aaoNomResp, Serializable aaoInterPub,
+			Serializable aaoCautDefExig, Serializable aaoBompPub, Serializable aaoVenteParLot, Serializable aaoAvisBail,
+			Serializable aaoMtCaut, Serializable aaoModePaiement, Serializable aaoCoutDac, Serializable aaoLieuRecep,
+			Serializable aaoDateRecep, Serializable aaoHeureRecep, Serializable laaId, Serializable laaAaoCode,
+			Serializable laaObjet, Serializable laaObservation, Serializable laaMtCaut, Serializable laaMtEst,
+			Serializable laaDteSaisi, Serializable laaStaCode, Serializable laaFonCodSaisi, Serializable laaFonCodCpmp,
+			Serializable laaLieuExe, Serializable laaLbgImputation, Serializable laaNum, Serializable laaCoutLot,
+			Serializable ddaId, Serializable ddaNom, Serializable ddaDteSaisi, Serializable ddaStaCode,
+			Serializable ddaDacCode, Serializable ddaPidCode, Serializable ddaReference, Serializable ddaCommentaire,
+			Serializable tymLibelleCourt, Serializable mopLibelleLong, Serializable strCode,
+			Serializable strLibelleCourt, Serializable strLibelleLong, Serializable minLibelle,
+			Serializable plpGesCode) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -196,678 +187,678 @@ public class VDetailDaoId implements java.io.Serializable {
 		this.plpGesCode = plpGesCode;
 	}
 
-	@Column(name = "DAC_CODE", nullable = false, length = 20)
-	public String getDacCode() {
+	@Column(name = "DAC_CODE")
+	public Serializable getDacCode() {
 		return this.dacCode;
 	}
 
-	public void setDacCode(String dacCode) {
+	public void setDacCode(Serializable dacCode) {
 		this.dacCode = dacCode;
 	}
 
-	@Column(name = "DAC_OBJET", length = 1000)
-	public String getDacObjet() {
+	@Column(name = "DAC_OBJET")
+	public Serializable getDacObjet() {
 		return this.dacObjet;
 	}
 
-	public void setDacObjet(String dacObjet) {
+	public void setDacObjet(Serializable dacObjet) {
 		this.dacObjet = dacObjet;
 	}
 
-	@Column(name = "DAC_DTE_SAISI", length = 7)
-	public Date getDacDteSaisi() {
+	@Column(name = "DAC_DTE_SAISI")
+	public Serializable getDacDteSaisi() {
 		return this.dacDteSaisi;
 	}
 
-	public void setDacDteSaisi(Date dacDteSaisi) {
+	public void setDacDteSaisi(Serializable dacDteSaisi) {
 		this.dacDteSaisi = dacDteSaisi;
 	}
 
-	@Column(name = "DAC_STA_CODE", length = 3)
-	public String getDacStaCode() {
+	@Column(name = "DAC_STA_CODE")
+	public Serializable getDacStaCode() {
 		return this.dacStaCode;
 	}
 
-	public void setDacStaCode(String dacStaCode) {
+	public void setDacStaCode(Serializable dacStaCode) {
 		this.dacStaCode = dacStaCode;
 	}
 
-	@Column(name = "DAC_TYM_CODE", length = 5)
-	public String getDacTymCode() {
+	@Column(name = "DAC_TYM_CODE")
+	public Serializable getDacTymCode() {
 		return this.dacTymCode;
 	}
 
-	public void setDacTymCode(String dacTymCode) {
+	public void setDacTymCode(Serializable dacTymCode) {
 		this.dacTymCode = dacTymCode;
 	}
 
-	@Column(name = "DAC_MOP_CODE", length = 3)
-	public String getDacMopCode() {
+	@Column(name = "DAC_MOP_CODE")
+	public Serializable getDacMopCode() {
 		return this.dacMopCode;
 	}
 
-	public void setDacMopCode(String dacMopCode) {
+	public void setDacMopCode(Serializable dacMopCode) {
 		this.dacMopCode = dacMopCode;
 	}
 
-	@Column(name = "DAC_NBR_OUV", precision = 22, scale = 0)
-	public BigDecimal getDacNbrOuv() {
+	@Column(name = "DAC_NBR_OUV")
+	public Serializable getDacNbrOuv() {
 		return this.dacNbrOuv;
 	}
 
-	public void setDacNbrOuv(BigDecimal dacNbrOuv) {
+	public void setDacNbrOuv(Serializable dacNbrOuv) {
 		this.dacNbrOuv = dacNbrOuv;
 	}
 
-	@Column(name = "DAC_GES_CODE", precision = 22, scale = 0)
-	public BigDecimal getDacGesCode() {
+	@Column(name = "DAC_GES_CODE")
+	public Serializable getDacGesCode() {
 		return this.dacGesCode;
 	}
 
-	public void setDacGesCode(BigDecimal dacGesCode) {
+	public void setDacGesCode(Serializable dacGesCode) {
 		this.dacGesCode = dacGesCode;
 	}
 
-	@Column(name = "DAC_FON_COD_AC", length = 12)
-	public String getDacFonCodAc() {
+	@Column(name = "DAC_FON_COD_AC")
+	public Serializable getDacFonCodAc() {
 		return this.dacFonCodAc;
 	}
 
-	public void setDacFonCodAc(String dacFonCodAc) {
+	public void setDacFonCodAc(Serializable dacFonCodAc) {
 		this.dacFonCodAc = dacFonCodAc;
 	}
 
-	@Column(name = "DAC_STR_CODE", length = 3)
-	public String getDacStrCode() {
+	@Column(name = "DAC_STR_CODE")
+	public Serializable getDacStrCode() {
 		return this.dacStrCode;
 	}
 
-	public void setDacStrCode(String dacStrCode) {
+	public void setDacStrCode(Serializable dacStrCode) {
 		this.dacStrCode = dacStrCode;
 	}
 
-	@Column(name = "DAC_FON_CODE_CPMP", length = 12)
-	public String getDacFonCodeCpmp() {
+	@Column(name = "DAC_FON_CODE_CPMP")
+	public Serializable getDacFonCodeCpmp() {
 		return this.dacFonCodeCpmp;
 	}
 
-	public void setDacFonCodeCpmp(String dacFonCodeCpmp) {
+	public void setDacFonCodeCpmp(Serializable dacFonCodeCpmp) {
 		this.dacFonCodeCpmp = dacFonCodeCpmp;
 	}
 
-	@Column(name = "DAC_DTE_VAL_CPMP", length = 7)
-	public Date getDacDteValCpmp() {
+	@Column(name = "DAC_DTE_VAL_CPMP")
+	public Serializable getDacDteValCpmp() {
 		return this.dacDteValCpmp;
 	}
 
-	public void setDacDteValCpmp(Date dacDteValCpmp) {
+	public void setDacDteValCpmp(Serializable dacDteValCpmp) {
 		this.dacDteValCpmp = dacDteValCpmp;
 	}
 
-	@Column(name = "DAC_DTE_VAL_DMP", length = 7)
-	public Date getDacDteValDmp() {
+	@Column(name = "DAC_DTE_VAL_DMP")
+	public Serializable getDacDteValDmp() {
 		return this.dacDteValDmp;
 	}
 
-	public void setDacDteValDmp(Date dacDteValDmp) {
+	public void setDacDteValDmp(Serializable dacDteValDmp) {
 		this.dacDteValDmp = dacDteValDmp;
 	}
 
-	@Column(name = "DAC_TD_CODE", length = 3)
-	public String getDacTdCode() {
+	@Column(name = "DAC_TD_CODE")
+	public Serializable getDacTdCode() {
 		return this.dacTdCode;
 	}
 
-	public void setDacTdCode(String dacTdCode) {
+	public void setDacTdCode(Serializable dacTdCode) {
 		this.dacTdCode = dacTdCode;
 	}
 
-	@Column(name = "DAC_DPP_ID", precision = 10, scale = 0)
-	public Long getDacDppId() {
+	@Column(name = "DAC_DPP_ID")
+	public Serializable getDacDppId() {
 		return this.dacDppId;
 	}
 
-	public void setDacDppId(Long dacDppId) {
+	public void setDacDppId(Serializable dacDppId) {
 		this.dacDppId = dacDppId;
 	}
 
-	@Column(name = "DAC_DATE_RECEPTION", length = 7)
-	public Date getDacDateReception() {
+	@Column(name = "DAC_DATE_RECEPTION")
+	public Serializable getDacDateReception() {
 		return this.dacDateReception;
 	}
 
-	public void setDacDateReception(Date dacDateReception) {
+	public void setDacDateReception(Serializable dacDateReception) {
 		this.dacDateReception = dacDateReception;
 	}
 
-	@Column(name = "DAC_STATUT_RETOUR", length = 2)
-	public String getDacStatutRetour() {
+	@Column(name = "DAC_STATUT_RETOUR")
+	public Serializable getDacStatutRetour() {
 		return this.dacStatutRetour;
 	}
 
-	public void setDacStatutRetour(String dacStatutRetour) {
+	public void setDacStatutRetour(Serializable dacStatutRetour) {
 		this.dacStatutRetour = dacStatutRetour;
 	}
 
-	@Column(name = "AAO_CODE", nullable = false, length = 20)
-	public String getAaoCode() {
+	@Column(name = "AAO_CODE")
+	public Serializable getAaoCode() {
 		return this.aaoCode;
 	}
 
-	public void setAaoCode(String aaoCode) {
+	public void setAaoCode(Serializable aaoCode) {
 		this.aaoCode = aaoCode;
 	}
 
-	@Column(name = "AAO_LIBELLE", length = 1000)
-	public String getAaoLibelle() {
+	@Column(name = "AAO_LIBELLE")
+	public Serializable getAaoLibelle() {
 		return this.aaoLibelle;
 	}
 
-	public void setAaoLibelle(String aaoLibelle) {
+	public void setAaoLibelle(Serializable aaoLibelle) {
 		this.aaoLibelle = aaoLibelle;
 	}
 
-	@Column(name = "AAO_DAC_CODE", length = 20)
-	public String getAaoDacCode() {
+	@Column(name = "AAO_DAC_CODE")
+	public Serializable getAaoDacCode() {
 		return this.aaoDacCode;
 	}
 
-	public void setAaoDacCode(String aaoDacCode) {
+	public void setAaoDacCode(Serializable aaoDacCode) {
 		this.aaoDacCode = aaoDacCode;
 	}
 
-	@Column(name = "AAO_DTE_SAISI", length = 7)
-	public Date getAaoDteSaisi() {
+	@Column(name = "AAO_DTE_SAISI")
+	public Serializable getAaoDteSaisi() {
 		return this.aaoDteSaisi;
 	}
 
-	public void setAaoDteSaisi(Date aaoDteSaisi) {
+	public void setAaoDteSaisi(Serializable aaoDteSaisi) {
 		this.aaoDteSaisi = aaoDteSaisi;
 	}
 
-	@Column(name = "AAO_STA_CODE", length = 3)
-	public String getAaoStaCode() {
+	@Column(name = "AAO_STA_CODE")
+	public Serializable getAaoStaCode() {
 		return this.aaoStaCode;
 	}
 
-	public void setAaoStaCode(String aaoStaCode) {
+	public void setAaoStaCode(Serializable aaoStaCode) {
 		this.aaoStaCode = aaoStaCode;
 	}
 
-	@Column(name = "AAO_DTE_PUB", length = 7)
-	public Date getAaoDtePub() {
+	@Column(name = "AAO_DTE_PUB")
+	public Serializable getAaoDtePub() {
 		return this.aaoDtePub;
 	}
 
-	public void setAaoDtePub(Date aaoDtePub) {
+	public void setAaoDtePub(Serializable aaoDtePub) {
 		this.aaoDtePub = aaoDtePub;
 	}
 
-	@Column(name = "AAO_DTE_OUV_TEC", length = 7)
-	public Date getAaoDteOuvTec() {
+	@Column(name = "AAO_DTE_OUV_TEC")
+	public Serializable getAaoDteOuvTec() {
 		return this.aaoDteOuvTec;
 	}
 
-	public void setAaoDteOuvTec(Date aaoDteOuvTec) {
+	public void setAaoDteOuvTec(Serializable aaoDteOuvTec) {
 		this.aaoDteOuvTec = aaoDteOuvTec;
 	}
 
-	@Column(name = "AAO_DTE_HEUR_OUV", length = 20)
-	public String getAaoDteHeurOuv() {
+	@Column(name = "AAO_DTE_HEUR_OUV")
+	public Serializable getAaoDteHeurOuv() {
 		return this.aaoDteHeurOuv;
 	}
 
-	public void setAaoDteHeurOuv(String aaoDteHeurOuv) {
+	public void setAaoDteHeurOuv(Serializable aaoDteHeurOuv) {
 		this.aaoDteHeurOuv = aaoDteHeurOuv;
 	}
 
-	@Column(name = "AAO_DTE_OUV_FIN", length = 7)
-	public Date getAaoDteOuvFin() {
+	@Column(name = "AAO_DTE_OUV_FIN")
+	public Serializable getAaoDteOuvFin() {
 		return this.aaoDteOuvFin;
 	}
 
-	public void setAaoDteOuvFin(Date aaoDteOuvFin) {
+	public void setAaoDteOuvFin(Serializable aaoDteOuvFin) {
 		this.aaoDteOuvFin = aaoDteOuvFin;
 	}
 
-	@Column(name = "AAO_NBR_LOT", precision = 22, scale = 0)
-	public BigDecimal getAaoNbrLot() {
+	@Column(name = "AAO_NBR_LOT")
+	public Serializable getAaoNbrLot() {
 		return this.aaoNbrLot;
 	}
 
-	public void setAaoNbrLot(BigDecimal aaoNbrLot) {
+	public void setAaoNbrLot(Serializable aaoNbrLot) {
 		this.aaoNbrLot = aaoNbrLot;
 	}
 
-	@Column(name = "AAO_NBR_OUV", precision = 22, scale = 0)
-	public BigDecimal getAaoNbrOuv() {
+	@Column(name = "AAO_NBR_OUV")
+	public Serializable getAaoNbrOuv() {
 		return this.aaoNbrOuv;
 	}
 
-	public void setAaoNbrOuv(BigDecimal aaoNbrOuv) {
+	public void setAaoNbrOuv(Serializable aaoNbrOuv) {
 		this.aaoNbrOuv = aaoNbrOuv;
 	}
 
-	@Column(name = "AAO_DELAI_VAL", precision = 22, scale = 0)
-	public BigDecimal getAaoDelaiVal() {
+	@Column(name = "AAO_DELAI_VAL")
+	public Serializable getAaoDelaiVal() {
 		return this.aaoDelaiVal;
 	}
 
-	public void setAaoDelaiVal(BigDecimal aaoDelaiVal) {
+	public void setAaoDelaiVal(Serializable aaoDelaiVal) {
 		this.aaoDelaiVal = aaoDelaiVal;
 	}
 
-	@Column(name = "AAO_FON_COD_AC", length = 12)
-	public String getAaoFonCodAc() {
+	@Column(name = "AAO_FON_COD_AC")
+	public Serializable getAaoFonCodAc() {
 		return this.aaoFonCodAc;
 	}
 
-	public void setAaoFonCodAc(String aaoFonCodAc) {
+	public void setAaoFonCodAc(Serializable aaoFonCodAc) {
 		this.aaoFonCodAc = aaoFonCodAc;
 	}
 
-	@Column(name = "AAO_FON_CODE_CPMP", length = 12)
-	public String getAaoFonCodeCpmp() {
+	@Column(name = "AAO_FON_CODE_CPMP")
+	public Serializable getAaoFonCodeCpmp() {
 		return this.aaoFonCodeCpmp;
 	}
 
-	public void setAaoFonCodeCpmp(String aaoFonCodeCpmp) {
+	public void setAaoFonCodeCpmp(Serializable aaoFonCodeCpmp) {
 		this.aaoFonCodeCpmp = aaoFonCodeCpmp;
 	}
 
-	@Column(name = "AAO_NAT_INT", length = 1)
-	public String getAaoNatInt() {
+	@Column(name = "AAO_NAT_INT")
+	public Serializable getAaoNatInt() {
 		return this.aaoNatInt;
 	}
 
-	public void setAaoNatInt(String aaoNatInt) {
+	public void setAaoNatInt(Serializable aaoNatInt) {
 		this.aaoNatInt = aaoNatInt;
 	}
 
-	@Column(name = "AAO_TAUX", length = 3)
-	public String getAaoTaux() {
+	@Column(name = "AAO_TAUX")
+	public Serializable getAaoTaux() {
 		return this.aaoTaux;
 	}
 
-	public void setAaoTaux(String aaoTaux) {
+	public void setAaoTaux(Serializable aaoTaux) {
 		this.aaoTaux = aaoTaux;
 	}
 
-	@Column(name = "AAO_LIEU_EXE", length = 200)
-	public String getAaoLieuExe() {
+	@Column(name = "AAO_LIEU_EXE")
+	public Serializable getAaoLieuExe() {
 		return this.aaoLieuExe;
 	}
 
-	public void setAaoLieuExe(String aaoLieuExe) {
+	public void setAaoLieuExe(Serializable aaoLieuExe) {
 		this.aaoLieuExe = aaoLieuExe;
 	}
 
-	@Column(name = "AAO_NOM_RESP", length = 200)
-	public String getAaoNomResp() {
+	@Column(name = "AAO_NOM_RESP")
+	public Serializable getAaoNomResp() {
 		return this.aaoNomResp;
 	}
 
-	public void setAaoNomResp(String aaoNomResp) {
+	public void setAaoNomResp(Serializable aaoNomResp) {
 		this.aaoNomResp = aaoNomResp;
 	}
 
-	@Column(name = "AAO_INTER_PUB", length = 1)
-	public String getAaoInterPub() {
+	@Column(name = "AAO_INTER_PUB")
+	public Serializable getAaoInterPub() {
 		return this.aaoInterPub;
 	}
 
-	public void setAaoInterPub(String aaoInterPub) {
+	public void setAaoInterPub(Serializable aaoInterPub) {
 		this.aaoInterPub = aaoInterPub;
 	}
 
-	@Column(name = "AAO_CAUT_DEF_EXIG", length = 1)
-	public String getAaoCautDefExig() {
+	@Column(name = "AAO_CAUT_DEF_EXIG")
+	public Serializable getAaoCautDefExig() {
 		return this.aaoCautDefExig;
 	}
 
-	public void setAaoCautDefExig(String aaoCautDefExig) {
+	public void setAaoCautDefExig(Serializable aaoCautDefExig) {
 		this.aaoCautDefExig = aaoCautDefExig;
 	}
 
-	@Column(name = "AAO_BOMP_PUB", length = 1)
-	public String getAaoBompPub() {
+	@Column(name = "AAO_BOMP_PUB")
+	public Serializable getAaoBompPub() {
 		return this.aaoBompPub;
 	}
 
-	public void setAaoBompPub(String aaoBompPub) {
+	public void setAaoBompPub(Serializable aaoBompPub) {
 		this.aaoBompPub = aaoBompPub;
 	}
 
-	@Column(name = "AAO_VENTE_PAR_LOT", length = 1)
-	public String getAaoVenteParLot() {
+	@Column(name = "AAO_VENTE_PAR_LOT")
+	public Serializable getAaoVenteParLot() {
 		return this.aaoVenteParLot;
 	}
 
-	public void setAaoVenteParLot(String aaoVenteParLot) {
+	public void setAaoVenteParLot(Serializable aaoVenteParLot) {
 		this.aaoVenteParLot = aaoVenteParLot;
 	}
 
-	@Column(name = "AAO_AVIS_BAIL", length = 1)
-	public String getAaoAvisBail() {
+	@Column(name = "AAO_AVIS_BAIL")
+	public Serializable getAaoAvisBail() {
 		return this.aaoAvisBail;
 	}
 
-	public void setAaoAvisBail(String aaoAvisBail) {
+	public void setAaoAvisBail(Serializable aaoAvisBail) {
 		this.aaoAvisBail = aaoAvisBail;
 	}
 
-	@Column(name = "AAO_MT_CAUT", precision = 22, scale = 0)
-	public BigDecimal getAaoMtCaut() {
+	@Column(name = "AAO_MT_CAUT")
+	public Serializable getAaoMtCaut() {
 		return this.aaoMtCaut;
 	}
 
-	public void setAaoMtCaut(BigDecimal aaoMtCaut) {
+	public void setAaoMtCaut(Serializable aaoMtCaut) {
 		this.aaoMtCaut = aaoMtCaut;
 	}
 
-	@Column(name = "AAO_MODE_PAIEMENT", length = 20)
-	public String getAaoModePaiement() {
+	@Column(name = "AAO_MODE_PAIEMENT")
+	public Serializable getAaoModePaiement() {
 		return this.aaoModePaiement;
 	}
 
-	public void setAaoModePaiement(String aaoModePaiement) {
+	public void setAaoModePaiement(Serializable aaoModePaiement) {
 		this.aaoModePaiement = aaoModePaiement;
 	}
 
-	@Column(name = "AAO_COUT_DAC", precision = 22, scale = 0)
-	public BigDecimal getAaoCoutDac() {
+	@Column(name = "AAO_COUT_DAC")
+	public Serializable getAaoCoutDac() {
 		return this.aaoCoutDac;
 	}
 
-	public void setAaoCoutDac(BigDecimal aaoCoutDac) {
+	public void setAaoCoutDac(Serializable aaoCoutDac) {
 		this.aaoCoutDac = aaoCoutDac;
 	}
 
-	@Column(name = "AAO_LIEU_RECEP", length = 1000)
-	public String getAaoLieuRecep() {
+	@Column(name = "AAO_LIEU_RECEP")
+	public Serializable getAaoLieuRecep() {
 		return this.aaoLieuRecep;
 	}
 
-	public void setAaoLieuRecep(String aaoLieuRecep) {
+	public void setAaoLieuRecep(Serializable aaoLieuRecep) {
 		this.aaoLieuRecep = aaoLieuRecep;
 	}
 
-	@Column(name = "AAO_DATE_RECEP", length = 7)
-	public Date getAaoDateRecep() {
+	@Column(name = "AAO_DATE_RECEP")
+	public Serializable getAaoDateRecep() {
 		return this.aaoDateRecep;
 	}
 
-	public void setAaoDateRecep(Date aaoDateRecep) {
+	public void setAaoDateRecep(Serializable aaoDateRecep) {
 		this.aaoDateRecep = aaoDateRecep;
 	}
 
-	@Column(name = "AAO_HEURE_RECEP", length = 20)
-	public String getAaoHeureRecep() {
+	@Column(name = "AAO_HEURE_RECEP")
+	public Serializable getAaoHeureRecep() {
 		return this.aaoHeureRecep;
 	}
 
-	public void setAaoHeureRecep(String aaoHeureRecep) {
+	public void setAaoHeureRecep(Serializable aaoHeureRecep) {
 		this.aaoHeureRecep = aaoHeureRecep;
 	}
 
-	@Column(name = "LAA_ID", nullable = false, precision = 22, scale = 0)
-	public BigDecimal getLaaId() {
+	@Column(name = "LAA_ID")
+	public Serializable getLaaId() {
 		return this.laaId;
 	}
 
-	public void setLaaId(BigDecimal laaId) {
+	public void setLaaId(Serializable laaId) {
 		this.laaId = laaId;
 	}
 
-	@Column(name = "LAA_AAO_CODE", length = 20)
-	public String getLaaAaoCode() {
+	@Column(name = "LAA_AAO_CODE")
+	public Serializable getLaaAaoCode() {
 		return this.laaAaoCode;
 	}
 
-	public void setLaaAaoCode(String laaAaoCode) {
+	public void setLaaAaoCode(Serializable laaAaoCode) {
 		this.laaAaoCode = laaAaoCode;
 	}
 
-	@Column(name = "LAA_OBJET", length = 1000)
-	public String getLaaObjet() {
+	@Column(name = "LAA_OBJET")
+	public Serializable getLaaObjet() {
 		return this.laaObjet;
 	}
 
-	public void setLaaObjet(String laaObjet) {
+	public void setLaaObjet(Serializable laaObjet) {
 		this.laaObjet = laaObjet;
 	}
 
-	@Column(name = "LAA_OBSERVATION", length = 200)
-	public String getLaaObservation() {
+	@Column(name = "LAA_OBSERVATION")
+	public Serializable getLaaObservation() {
 		return this.laaObservation;
 	}
 
-	public void setLaaObservation(String laaObservation) {
+	public void setLaaObservation(Serializable laaObservation) {
 		this.laaObservation = laaObservation;
 	}
 
-	@Column(name = "LAA_MT_CAUT", precision = 22, scale = 0)
-	public BigDecimal getLaaMtCaut() {
+	@Column(name = "LAA_MT_CAUT")
+	public Serializable getLaaMtCaut() {
 		return this.laaMtCaut;
 	}
 
-	public void setLaaMtCaut(BigDecimal laaMtCaut) {
+	public void setLaaMtCaut(Serializable laaMtCaut) {
 		this.laaMtCaut = laaMtCaut;
 	}
 
-	@Column(name = "LAA_MT_EST", precision = 22, scale = 0)
-	public BigDecimal getLaaMtEst() {
+	@Column(name = "LAA_MT_EST")
+	public Serializable getLaaMtEst() {
 		return this.laaMtEst;
 	}
 
-	public void setLaaMtEst(BigDecimal laaMtEst) {
+	public void setLaaMtEst(Serializable laaMtEst) {
 		this.laaMtEst = laaMtEst;
 	}
 
-	@Column(name = "LAA_DTE_SAISI", length = 7)
-	public Date getLaaDteSaisi() {
+	@Column(name = "LAA_DTE_SAISI")
+	public Serializable getLaaDteSaisi() {
 		return this.laaDteSaisi;
 	}
 
-	public void setLaaDteSaisi(Date laaDteSaisi) {
+	public void setLaaDteSaisi(Serializable laaDteSaisi) {
 		this.laaDteSaisi = laaDteSaisi;
 	}
 
-	@Column(name = "LAA_STA_CODE", length = 3)
-	public String getLaaStaCode() {
+	@Column(name = "LAA_STA_CODE")
+	public Serializable getLaaStaCode() {
 		return this.laaStaCode;
 	}
 
-	public void setLaaStaCode(String laaStaCode) {
+	public void setLaaStaCode(Serializable laaStaCode) {
 		this.laaStaCode = laaStaCode;
 	}
 
-	@Column(name = "LAA_FON_COD_SAISI", length = 20)
-	public String getLaaFonCodSaisi() {
+	@Column(name = "LAA_FON_COD_SAISI")
+	public Serializable getLaaFonCodSaisi() {
 		return this.laaFonCodSaisi;
 	}
 
-	public void setLaaFonCodSaisi(String laaFonCodSaisi) {
+	public void setLaaFonCodSaisi(Serializable laaFonCodSaisi) {
 		this.laaFonCodSaisi = laaFonCodSaisi;
 	}
 
-	@Column(name = "LAA_FON_COD_CPMP", length = 20)
-	public String getLaaFonCodCpmp() {
+	@Column(name = "LAA_FON_COD_CPMP")
+	public Serializable getLaaFonCodCpmp() {
 		return this.laaFonCodCpmp;
 	}
 
-	public void setLaaFonCodCpmp(String laaFonCodCpmp) {
+	public void setLaaFonCodCpmp(Serializable laaFonCodCpmp) {
 		this.laaFonCodCpmp = laaFonCodCpmp;
 	}
 
-	@Column(name = "LAA_LIEU_EXE", length = 1000)
-	public String getLaaLieuExe() {
+	@Column(name = "LAA_LIEU_EXE")
+	public Serializable getLaaLieuExe() {
 		return this.laaLieuExe;
 	}
 
-	public void setLaaLieuExe(String laaLieuExe) {
+	public void setLaaLieuExe(Serializable laaLieuExe) {
 		this.laaLieuExe = laaLieuExe;
 	}
 
-	@Column(name = "LAA_LBG_IMPUTATION", length = 50)
-	public String getLaaLbgImputation() {
+	@Column(name = "LAA_LBG_IMPUTATION")
+	public Serializable getLaaLbgImputation() {
 		return this.laaLbgImputation;
 	}
 
-	public void setLaaLbgImputation(String laaLbgImputation) {
+	public void setLaaLbgImputation(Serializable laaLbgImputation) {
 		this.laaLbgImputation = laaLbgImputation;
 	}
 
-	@Column(name = "LAA_NUM", precision = 22, scale = 0)
-	public BigDecimal getLaaNum() {
+	@Column(name = "LAA_NUM")
+	public Serializable getLaaNum() {
 		return this.laaNum;
 	}
 
-	public void setLaaNum(BigDecimal laaNum) {
+	public void setLaaNum(Serializable laaNum) {
 		this.laaNum = laaNum;
 	}
 
-	@Column(name = "LAA_COUT_LOT", precision = 22, scale = 0)
-	public BigDecimal getLaaCoutLot() {
+	@Column(name = "LAA_COUT_LOT")
+	public Serializable getLaaCoutLot() {
 		return this.laaCoutLot;
 	}
 
-	public void setLaaCoutLot(BigDecimal laaCoutLot) {
+	public void setLaaCoutLot(Serializable laaCoutLot) {
 		this.laaCoutLot = laaCoutLot;
 	}
 
-	@Column(name = "DDA_ID", nullable = false, precision = 22, scale = 0)
-	public BigDecimal getDdaId() {
+	@Column(name = "DDA_ID")
+	public Serializable getDdaId() {
 		return this.ddaId;
 	}
 
-	public void setDdaId(BigDecimal ddaId) {
+	public void setDdaId(Serializable ddaId) {
 		this.ddaId = ddaId;
 	}
 
-	@Column(name = "DDA_NOM", length = 200)
-	public String getDdaNom() {
+	@Column(name = "DDA_NOM")
+	public Serializable getDdaNom() {
 		return this.ddaNom;
 	}
 
-	public void setDdaNom(String ddaNom) {
+	public void setDdaNom(Serializable ddaNom) {
 		this.ddaNom = ddaNom;
 	}
 
-	@Column(name = "DDA_DTE_SAISI", length = 7)
-	public Date getDdaDteSaisi() {
+	@Column(name = "DDA_DTE_SAISI")
+	public Serializable getDdaDteSaisi() {
 		return this.ddaDteSaisi;
 	}
 
-	public void setDdaDteSaisi(Date ddaDteSaisi) {
+	public void setDdaDteSaisi(Serializable ddaDteSaisi) {
 		this.ddaDteSaisi = ddaDteSaisi;
 	}
 
-	@Column(name = "DDA_STA_CODE", length = 3)
-	public String getDdaStaCode() {
+	@Column(name = "DDA_STA_CODE")
+	public Serializable getDdaStaCode() {
 		return this.ddaStaCode;
 	}
 
-	public void setDdaStaCode(String ddaStaCode) {
+	public void setDdaStaCode(Serializable ddaStaCode) {
 		this.ddaStaCode = ddaStaCode;
 	}
 
-	@Column(name = "DDA_DAC_CODE", length = 20)
-	public String getDdaDacCode() {
+	@Column(name = "DDA_DAC_CODE")
+	public Serializable getDdaDacCode() {
 		return this.ddaDacCode;
 	}
 
-	public void setDdaDacCode(String ddaDacCode) {
+	public void setDdaDacCode(Serializable ddaDacCode) {
 		this.ddaDacCode = ddaDacCode;
 	}
 
-	@Column(name = "DDA_PID_CODE", precision = 22, scale = 0)
-	public BigDecimal getDdaPidCode() {
+	@Column(name = "DDA_PID_CODE")
+	public Serializable getDdaPidCode() {
 		return this.ddaPidCode;
 	}
 
-	public void setDdaPidCode(BigDecimal ddaPidCode) {
+	public void setDdaPidCode(Serializable ddaPidCode) {
 		this.ddaPidCode = ddaPidCode;
 	}
 
-	@Column(name = "DDA_REFERENCE", length = 500)
-	public String getDdaReference() {
+	@Column(name = "DDA_REFERENCE")
+	public Serializable getDdaReference() {
 		return this.ddaReference;
 	}
 
-	public void setDdaReference(String ddaReference) {
+	public void setDdaReference(Serializable ddaReference) {
 		this.ddaReference = ddaReference;
 	}
 
-	@Column(name = "DDA_COMMENTAIRE", length = 500)
-	public String getDdaCommentaire() {
+	@Column(name = "DDA_COMMENTAIRE")
+	public Serializable getDdaCommentaire() {
 		return this.ddaCommentaire;
 	}
 
-	public void setDdaCommentaire(String ddaCommentaire) {
+	public void setDdaCommentaire(Serializable ddaCommentaire) {
 		this.ddaCommentaire = ddaCommentaire;
 	}
 
-	@Column(name = "TYM_LIBELLE_COURT", nullable = false, length = 500)
-	public String getTymLibelleCourt() {
+	@Column(name = "TYM_LIBELLE_COURT")
+	public Serializable getTymLibelleCourt() {
 		return this.tymLibelleCourt;
 	}
 
-	public void setTymLibelleCourt(String tymLibelleCourt) {
+	public void setTymLibelleCourt(Serializable tymLibelleCourt) {
 		this.tymLibelleCourt = tymLibelleCourt;
 	}
 
-	@Column(name = "MOP_LIBELLE_LONG", length = 1000)
-	public String getMopLibelleLong() {
+	@Column(name = "MOP_LIBELLE_LONG")
+	public Serializable getMopLibelleLong() {
 		return this.mopLibelleLong;
 	}
 
-	public void setMopLibelleLong(String mopLibelleLong) {
+	public void setMopLibelleLong(Serializable mopLibelleLong) {
 		this.mopLibelleLong = mopLibelleLong;
 	}
 
-	@Column(name = "STR_CODE", nullable = false, length = 20)
-	public String getStrCode() {
+	@Column(name = "STR_CODE")
+	public Serializable getStrCode() {
 		return this.strCode;
 	}
 
-	public void setStrCode(String strCode) {
+	public void setStrCode(Serializable strCode) {
 		this.strCode = strCode;
 	}
 
-	@Column(name = "STR_LIBELLE_COURT", nullable = false, length = 500)
-	public String getStrLibelleCourt() {
+	@Column(name = "STR_LIBELLE_COURT")
+	public Serializable getStrLibelleCourt() {
 		return this.strLibelleCourt;
 	}
 
-	public void setStrLibelleCourt(String strLibelleCourt) {
+	public void setStrLibelleCourt(Serializable strLibelleCourt) {
 		this.strLibelleCourt = strLibelleCourt;
 	}
 
-	@Column(name = "STR_LIBELLE_LONG", length = 1000)
-	public String getStrLibelleLong() {
+	@Column(name = "STR_LIBELLE_LONG")
+	public Serializable getStrLibelleLong() {
 		return this.strLibelleLong;
 	}
 
-	public void setStrLibelleLong(String strLibelleLong) {
+	public void setStrLibelleLong(Serializable strLibelleLong) {
 		this.strLibelleLong = strLibelleLong;
 	}
 
-	@Column(name = "MIN_LIBELLE", length = 1000)
-	public String getMinLibelle() {
+	@Column(name = "MIN_LIBELLE")
+	public Serializable getMinLibelle() {
 		return this.minLibelle;
 	}
 
-	public void setMinLibelle(String minLibelle) {
+	public void setMinLibelle(Serializable minLibelle) {
 		this.minLibelle = minLibelle;
 	}
 
-	@Column(name = "PLP_GES_CODE", nullable = false, precision = 4, scale = 0)
-	public short getPlpGesCode() {
+	@Column(name = "PLP_GES_CODE")
+	public Serializable getPlpGesCode() {
 		return this.plpGesCode;
 	}
 
-	public void setPlpGesCode(short plpGesCode) {
+	public void setPlpGesCode(Serializable plpGesCode) {
 		this.plpGesCode = plpGesCode;
 	}
 
@@ -1062,7 +1053,9 @@ public class VDetailDaoId implements java.io.Serializable {
 								&& this.getStrLibelleLong().equals(castOther.getStrLibelleLong())))
 				&& ((this.getMinLibelle() == castOther.getMinLibelle()) || (this.getMinLibelle() != null
 						&& castOther.getMinLibelle() != null && this.getMinLibelle().equals(castOther.getMinLibelle())))
-				&& (this.getPlpGesCode() == castOther.getPlpGesCode());
+				&& ((this.getPlpGesCode() == castOther.getPlpGesCode())
+						|| (this.getPlpGesCode() != null && castOther.getPlpGesCode() != null
+								&& this.getPlpGesCode().equals(castOther.getPlpGesCode())));
 	}
 
 	public int hashCode() {
@@ -1142,7 +1135,7 @@ public class VDetailDaoId implements java.io.Serializable {
 		result = 37 * result + (getStrLibelleCourt() == null ? 0 : this.getStrLibelleCourt().hashCode());
 		result = 37 * result + (getStrLibelleLong() == null ? 0 : this.getStrLibelleLong().hashCode());
 		result = 37 * result + (getMinLibelle() == null ? 0 : this.getMinLibelle().hashCode());
-		result = 37 * result + this.getPlpGesCode();
+		result = 37 * result + (getPlpGesCode() == null ? 0 : this.getPlpGesCode().hashCode());
 		return result;
 	}
 

@@ -565,16 +565,36 @@ public class ControleController {
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPGPM")) {
 			    		type = "PGPM";
-			    		libelleProcedure=" MODIFICATION DU PLAN GENERAL DE PASSATION DE MARCHES N°";
-			    		libelle1="Modification";
-			    		panelDetail=false;
-			    		//agpmController.etatPavetDossier= true;
-	    				panelForm=true;
-	   				    panelTraitement=false;
-			    		panelUpdate=true;
-			    		panelRegister=false;
-			    		tpgpm =true;
-						tpgspm =false;
+		    			libelleProcedure="Index";
+		    			libelle="MODIFICATION DU PLAN GENERAL DE PASSATION DE MARCHES N°";	
+		    			btn_new_pgpm =true;
+		    			btn_new_pgspm =false;
+		    			btn_trasmettre =true;
+		    			btn_valider_cpmp =false; 
+                        btn_valider_dmp =false;
+                        btn_valider_pgspm_cpmp =false;
+                        btn_valider_pgspm_dmp =false;
+						panel1 =true;
+						panel2 =false;
+						panelPgpm = true;
+						panelPgspm = false;
+						searchPgpm = true;
+						searchPgspm = false;
+						fermerSai = true;
+						fermerVal = false;
+						etatLoveAgpm = true;
+						etatLoveAgpmPs = false;
+						panelPgpmTableauBordSai =true;
+						panelPgpmTableauBordVal =false;
+						selectLoveModePgpm = true;
+						selectLoveModePgspm = false;
+						detailPg1 = true;
+						detailPg2 = false;
+						nbrepgpm = true;
+						nbrepgspm = false;
+						btn_trans_pgpm = true;
+						btn_trans_pgspm = false;
+						btn_trasmettre_pgspm = false;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPGPM")) {
 			    			type = "PGPM";

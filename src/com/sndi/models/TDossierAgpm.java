@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +17,8 @@ import javax.persistence.Table;
 public class TDossierAgpm implements java.io.Serializable {
 
 	private long dagId;
-	private TNaturePiece TNaturePiece;
 	private TAgpm TAgpm;
+	private TNaturePiece TNaturePiece;
 	private String dagCode;
 	private String dagLibelle;
 	private String dagCommentaire;
@@ -27,17 +27,17 @@ public class TDossierAgpm implements java.io.Serializable {
 	public TDossierAgpm() {
 	}
 
-	public TDossierAgpm(long dagId, TNaturePiece TNaturePiece, TAgpm TAgpm) {
+	public TDossierAgpm(long dagId, TAgpm TAgpm, TNaturePiece TNaturePiece) {
 		this.dagId = dagId;
-		this.TNaturePiece = TNaturePiece;
 		this.TAgpm = TAgpm;
+		this.TNaturePiece = TNaturePiece;
 	}
 
-	public TDossierAgpm(long dagId, TNaturePiece TNaturePiece, TAgpm TAgpm, String dagCode, String dagLibelle,
+	public TDossierAgpm(long dagId, TAgpm TAgpm, TNaturePiece TNaturePiece, String dagCode, String dagLibelle,
 			String dagCommentaire, String dagReference) {
 		this.dagId = dagId;
-		this.TNaturePiece = TNaturePiece;
 		this.TAgpm = TAgpm;
+		this.TNaturePiece = TNaturePiece;
 		this.dagCode = dagCode;
 		this.dagLibelle = dagLibelle;
 		this.dagCommentaire = dagCommentaire;
@@ -56,16 +56,6 @@ public class TDossierAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAG_NAP_CODE", nullable = false)
-	public TNaturePiece getTNaturePiece() {
-		return this.TNaturePiece;
-	}
-
-	public void setTNaturePiece(TNaturePiece TNaturePiece) {
-		this.TNaturePiece = TNaturePiece;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAG_AGP_ID", nullable = false)
 	public TAgpm getTAgpm() {
 		return this.TAgpm;
@@ -73,6 +63,16 @@ public class TDossierAgpm implements java.io.Serializable {
 
 	public void setTAgpm(TAgpm TAgpm) {
 		this.TAgpm = TAgpm;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAG_NAP_CODE", nullable = false)
+	public TNaturePiece getTNaturePiece() {
+		return this.TNaturePiece;
+	}
+
+	public void setTNaturePiece(TNaturePiece TNaturePiece) {
+		this.TNaturePiece = TNaturePiece;
 	}
 
 	@Column(name = "DAG_CODE", length = 500)

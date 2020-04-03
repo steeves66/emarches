@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,13 +20,13 @@ import javax.persistence.TemporalType;
 public class TAffichagePpm implements java.io.Serializable {
 
 	private long affId;
+	private TDetailPlanGeneral TDetailPlanGeneral;
+	private TFonction TFonction;
 	private TPlanPassation TPlanPassation;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TTypeMarche TTypeMarche;
 	private TTypeProcedure TTypeProcedure;
-	private TDetailPlanGeneral TDetailPlanGeneral;
-	private TFonction TFonction;
 	private TLBudgets TLBudgets;
 	private TModePassation TModePassation;
 	private String affDppTypePlan;
@@ -67,26 +67,27 @@ public class TAffichagePpm implements java.io.Serializable {
 	private Date affDppDateValDmp;
 	private String affDppBailleur;
 	private String affDppTypeFinance;
+	private Date affDppApprobAno;
 
 	public TAffichagePpm() {
 	}
 
-	public TAffichagePpm(long affId, TPlanPassation TPlanPassation, TStatut TStatut, TTypeMarche TTypeMarche,
-			TDetailPlanGeneral TDetailPlanGeneral, TLBudgets TLBudgets, TModePassation TModePassation,
+	public TAffichagePpm(long affId, TDetailPlanGeneral TDetailPlanGeneral, TPlanPassation TPlanPassation,
+			TStatut TStatut, TTypeMarche TTypeMarche, TLBudgets TLBudgets, TModePassation TModePassation,
 			String affDppTypePlan) {
 		this.affId = affId;
+		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TLBudgets = TLBudgets;
 		this.TModePassation = TModePassation;
 		this.affDppTypePlan = affDppTypePlan;
 	}
 
-	public TAffichagePpm(long affId, TPlanPassation TPlanPassation, TStatut TStatut, TStructure TStructure,
-			TTypeMarche TTypeMarche, TTypeProcedure TTypeProcedure, TDetailPlanGeneral TDetailPlanGeneral,
-			TFonction TFonction, TLBudgets TLBudgets, TModePassation TModePassation, String affDppTypePlan,
+	public TAffichagePpm(long affId, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction,
+			TPlanPassation TPlanPassation, TStatut TStatut, TStructure TStructure, TTypeMarche TTypeMarche,
+			TTypeProcedure TTypeProcedure, TLBudgets TLBudgets, TModePassation TModePassation, String affDppTypePlan,
 			String affDppCode, Integer affDppNumeroOrdre, Date affDppDate, String affDppObjet, String affDppSourceFin,
 			String affDppActeurSaisie, Date affDppDateDaoTrans, Date affDppDateDaoApprobDmp,
 			Date affDppDateDaoApprobBail, Date affDppDateAvisAoPublicat, Date affDppDateOuvertOt,
@@ -96,15 +97,16 @@ public class TAffichagePpm implements java.io.Serializable {
 			Date affDppDateExecFin, Long affDppId, String affDppStatutRetour, String affDppStrConduc,
 			String affDppStrBenefi, Date affDppDateSaisie, String affDppPartiePmePmi, String affDppStatutDao,
 			String affDppPieceDao, Date affDppInvEntre, String affDppRecherche, Date affDppDateValAc,
-			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance) {
+			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance,
+			Date affDppApprobAno) {
 		this.affId = affId;
+		this.TDetailPlanGeneral = TDetailPlanGeneral;
+		this.TFonction = TFonction;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TTypeMarche = TTypeMarche;
 		this.TTypeProcedure = TTypeProcedure;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-		this.TFonction = TFonction;
 		this.TLBudgets = TLBudgets;
 		this.TModePassation = TModePassation;
 		this.affDppTypePlan = affDppTypePlan;
@@ -145,6 +147,7 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affDppDateValDmp = affDppDateValDmp;
 		this.affDppBailleur = affDppBailleur;
 		this.affDppTypeFinance = affDppTypeFinance;
+		this.affDppApprobAno = affDppApprobAno;
 	}
 
 	@Id
@@ -156,6 +159,26 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setAffId(long affId) {
 		this.affId = affId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_DPP_GPG_ID", nullable = false)
+	public TDetailPlanGeneral getTDetailPlanGeneral() {
+		return this.TDetailPlanGeneral;
+	}
+
+	public void setTDetailPlanGeneral(TDetailPlanGeneral TDetailPlanGeneral) {
+		this.TDetailPlanGeneral = TDetailPlanGeneral;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_DPP_FON_COD")
+	public TFonction getTFonction() {
+		return this.TFonction;
+	}
+
+	public void setTFonction(TFonction TFonction) {
+		this.TFonction = TFonction;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -206,26 +229,6 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setTTypeProcedure(TTypeProcedure TTypeProcedure) {
 		this.TTypeProcedure = TTypeProcedure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_GPG_ID", nullable = false)
-	public TDetailPlanGeneral getTDetailPlanGeneral() {
-		return this.TDetailPlanGeneral;
-	}
-
-	public void setTDetailPlanGeneral(TDetailPlanGeneral TDetailPlanGeneral) {
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_FON_COD")
-	public TFonction getTFonction() {
-		return this.TFonction;
-	}
-
-	public void setTFonction(TFonction TFonction) {
-		this.TFonction = TFonction;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -610,6 +613,16 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setAffDppTypeFinance(String affDppTypeFinance) {
 		this.affDppTypeFinance = affDppTypeFinance;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AFF_DPP_APPROB_ANO", length = 7)
+	public Date getAffDppApprobAno() {
+		return this.affDppApprobAno;
+	}
+
+	public void setAffDppApprobAno(Date affDppApprobAno) {
+		this.affDppApprobAno = affDppApprobAno;
 	}
 
 }

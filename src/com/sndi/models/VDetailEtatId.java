@@ -1,6 +1,7 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
+import java.sql.Clob;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -13,7 +14,7 @@ public class VDetailEtatId implements java.io.Serializable {
 	private long agpId;
 	private String tcaLibelle;
 	private String tdaTitre;
-	private String tdaCommentaire;
+	private Clob tdaCommentaire;
 	private String tcaCode;
 	private String tdaNumOrdre;
 
@@ -24,7 +25,7 @@ public class VDetailEtatId implements java.io.Serializable {
 		this.agpId = agpId;
 	}
 
-	public VDetailEtatId(long agpId, String tcaLibelle, String tdaTitre, String tdaCommentaire, String tcaCode,
+	public VDetailEtatId(long agpId, String tcaLibelle, String tdaTitre, Clob tdaCommentaire, String tcaCode,
 			String tdaNumOrdre) {
 		this.agpId = agpId;
 		this.tcaLibelle = tcaLibelle;
@@ -61,12 +62,12 @@ public class VDetailEtatId implements java.io.Serializable {
 		this.tdaTitre = tdaTitre;
 	}
 
-	@Column(name = "TDA_COMMENTAIRE", length = 4000)
-	public String getTdaCommentaire() {
+	@Column(name = "TDA_COMMENTAIRE")
+	public Clob getTdaCommentaire() {
 		return this.tdaCommentaire;
 	}
 
-	public void setTdaCommentaire(String tdaCommentaire) {
+	public void setTdaCommentaire(Clob tdaCommentaire) {
 		this.tdaCommentaire = tdaCommentaire;
 	}
 

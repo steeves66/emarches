@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -43,6 +43,7 @@ public class VPpmEtatId implements java.io.Serializable {
 	private Date affDppDateDaoTrans;
 	private Date affDppDateDaoApprobDmp;
 	private Date affDppDateDaoApprobBail;
+	private Date affDppApprobAno;
 	private Date affDppInvEntre;
 
 	public VPpmEtatId() {
@@ -66,7 +67,7 @@ public class VPpmEtatId implements java.io.Serializable {
 			Date affDppDateAttApproBail, long affDppPlpId, String affDppStrBenefi, String affDppStrConduc,
 			String affDppTypePlan, Date affDppDateNegociation, Date affDppDateElabRapport, Date affDppDateSignatAttrib,
 			Date affDppDateSignatAc, Date affDppDateExecDebut, Date affDppDateExecFin, Date affDppDateDaoTrans,
-			Date affDppDateDaoApprobDmp, Date affDppDateDaoApprobBail, Date affDppInvEntre) {
+			Date affDppDateDaoApprobDmp, Date affDppDateDaoApprobBail, Date affDppApprobAno, Date affDppInvEntre) {
 		this.VId = VId;
 		this.affId = affId;
 		this.affDppId = affDppId;
@@ -98,6 +99,7 @@ public class VPpmEtatId implements java.io.Serializable {
 		this.affDppDateDaoTrans = affDppDateDaoTrans;
 		this.affDppDateDaoApprobDmp = affDppDateDaoApprobDmp;
 		this.affDppDateDaoApprobBail = affDppDateDaoApprobBail;
+		this.affDppApprobAno = affDppApprobAno;
 		this.affDppInvEntre = affDppInvEntre;
 	}
 
@@ -380,6 +382,15 @@ public class VPpmEtatId implements java.io.Serializable {
 		this.affDppDateDaoApprobBail = affDppDateDaoApprobBail;
 	}
 
+	@Column(name = "AFF_DPP_APPROB_ANO", length = 7)
+	public Date getAffDppApprobAno() {
+		return this.affDppApprobAno;
+	}
+
+	public void setAffDppApprobAno(Date affDppApprobAno) {
+		this.affDppApprobAno = affDppApprobAno;
+	}
+
 	@Column(name = "AFF_DPP_INV_ENTRE", length = 7)
 	public Date getAffDppInvEntre() {
 		return this.affDppInvEntre;
@@ -482,6 +493,9 @@ public class VPpmEtatId implements java.io.Serializable {
 				&& ((this.getAffDppDateDaoApprobBail() == castOther.getAffDppDateDaoApprobBail())
 						|| (this.getAffDppDateDaoApprobBail() != null && castOther.getAffDppDateDaoApprobBail() != null
 								&& this.getAffDppDateDaoApprobBail().equals(castOther.getAffDppDateDaoApprobBail())))
+				&& ((this.getAffDppApprobAno() == castOther.getAffDppApprobAno())
+						|| (this.getAffDppApprobAno() != null && castOther.getAffDppApprobAno() != null
+								&& this.getAffDppApprobAno().equals(castOther.getAffDppApprobAno())))
 				&& ((this.getAffDppInvEntre() == castOther.getAffDppInvEntre())
 						|| (this.getAffDppInvEntre() != null && castOther.getAffDppInvEntre() != null
 								&& this.getAffDppInvEntre().equals(castOther.getAffDppInvEntre())));
@@ -524,6 +538,7 @@ public class VPpmEtatId implements java.io.Serializable {
 		result = 37 * result + (getAffDppDateDaoApprobDmp() == null ? 0 : this.getAffDppDateDaoApprobDmp().hashCode());
 		result = 37 * result
 				+ (getAffDppDateDaoApprobBail() == null ? 0 : this.getAffDppDateDaoApprobBail().hashCode());
+		result = 37 * result + (getAffDppApprobAno() == null ? 0 : this.getAffDppApprobAno().hashCode());
 		result = 37 * result + (getAffDppInvEntre() == null ? 0 : this.getAffDppInvEntre().hashCode());
 		return result;
 	}

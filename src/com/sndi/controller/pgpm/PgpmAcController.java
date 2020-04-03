@@ -59,6 +59,8 @@ import com.sndi.model.VModePassationPn;
 import com.sndi.model.VPgpm;
 import com.sndi.model.VPgpmStatut;
 import com.sndi.model.VTypeMarcheFils;
+import com.sndi.model.VUpdateAgpm;
+import com.sndi.model.VUpdatePgpm;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -139,7 +141,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		//private List<TDetailPlanGeneral> objetListe = new ArrayList<TDetailPlanGeneral>();
 	     private List <VPgpmStatut> pgpmstatutList = new ArrayList<VPgpmStatut>(); 
 	     private List<THistoPlanGeneral> listeHisto = new ArrayList<THistoPlanGeneral>();
-	     private List<VPgpm> objetListe = new ArrayList<VPgpm>();
+	     private List<VPgpm> objetListe = new ArrayList<VPgpm>(); 
+	     private List<VUpdatePgpm> listUpdate = new ArrayList<VUpdatePgpm>();
 	     private List<TAffichagePgpm> objetList = new ArrayList<TAffichagePgpm>();
 	     private List<TAffichagePgpm> listPgpm = new ArrayList<TAffichagePgpm>();
 	     private List<TAffichagePgpm> listPgspm = new ArrayList<TAffichagePgpm>();
@@ -186,6 +189,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private TPlanGeneral plan = new TPlanGeneral();
 		 private VPgpmStatut pgpmstatut= new VPgpmStatut();
 		 private TDetailPlanGeneral detailPlan = new TDetailPlanGeneral();
+		 private VUpdatePgpm updateOperation = new VUpdatePgpm();
 		 private VTypeMarcheFils marche = new VTypeMarcheFils();
 		 private TTypeMarche reucpMarche = new TTypeMarche();
 		 private VModePassationPn modePassation = new VModePassationPn();
@@ -242,6 +246,36 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public boolean selectTresor =false;
 		 private boolean btnPgspmRappel =false;
 		 private boolean selectPartBai = false;
+		 
+		 
+		 
+		 //Methodes de modification
+		//Methode de récupération de t_pgpm dans t_affichage
+		 public void editForm() {
+		    			listUpdate= (List<VUpdatePgpm>) iservice.getObjectsByColumn("VUpdatePgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+		    					 new WhereClause("AFF_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffId()));
+		    			if (!listUpdate.isEmpty()) {
+		    				updateOperation=listUpdate.get(0); 
+		    			}
+		 }
+		 
+		 //Afficher les financements du projet ou agpm selectionné
+		 public void chargeFinancementUpdate() {
+			 listeFinancement.clear();
+			 listeFinancement = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+						 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+slctdTd.getAffGpgId())));		 		 
+		 }
+		 
+		 
+		 public void onSelectMarcheModif() {
+			 //detailPlan = new TDetailPlanGeneral();
+			 updateOperation.setGpgTymCode(marche.getTymCode());
+			 updateOperation.setAffGpgTymCode(marche.getTymTymCode());
+			 
+
+			 updateOperation.setGpgTymCode(marche.getTymCode());
+			 reucpMarche.setTymLibelleCourt(marche.getTymLibelleCourt());
+				}
 		 
 		 
 		//Methode
@@ -1050,6 +1084,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 		  //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Transmission effectuée avec succés! ", "")); 	 	
 					}
       
+      
+      //Modification des operations
+     public void modifierDetailPlan(){
+    	 
+    	 iservice.updateObject(updateOperation);
+      }
       
       //Enregistrement d'une opération PGPM sans AGPM
       @Transactional
@@ -2782,6 +2822,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeSourceFinance();
 					chargeAgpm();
 				break;
+				case "pgpm3":
+					editForm();
+					chargeBailleur();
+					chargeDevise();
+					chargeGestions();
+					chargeMarches();
+					chargeModePassation();
+					chargeMode();
+					chargeSourceFinance();
+					chargeAgpm();
+				break;
 				case "pgspm1":
 					chargeDataPgspm();
 		 			chargeDataAvaliderPgspm();
@@ -2790,6 +2841,18 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeFinancementDetail();
 					break;
 				case "pgpm5":
+					break;
+				case "pgpm6":
+					editForm();
+					chargeFinancementUpdate();
+					chargeBailleur();
+					chargeDevise();
+					chargeGestions();
+					chargeMarches();
+					chargeModePassation();
+					chargeMode();
+					chargeSourceFinance();
+					chargeAgpm();
 					break;
 			    }
 		     return userController.renderPage(value);
@@ -3756,6 +3819,26 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setFinBaiCaode(String finBaiCaode) {
 		this.finBaiCaode = finBaiCaode;
+	}
+
+
+	public VUpdatePgpm getUpdateOperation() {
+		return updateOperation;
+	}
+
+
+	public void setUpdateOperation(VUpdatePgpm updateOperation) {
+		this.updateOperation = updateOperation;
+	}
+
+
+	public List<VUpdatePgpm> getListUpdate() {
+		return listUpdate;
+	}
+
+
+	public void setListUpdate(List<VUpdatePgpm> listUpdate) {
+		this.listUpdate = listUpdate;
 	}
 	
 	

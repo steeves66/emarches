@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,16 +20,16 @@ import javax.persistence.TemporalType;
 public class TAffichageAgpm implements java.io.Serializable {
 
 	private long affId;
-	private TProjet TProjet;
-	private TSourceFinancement TSourceFinancement;
-	private TStatut TStatut;
-	private TStructure TStructure;
+	private TBailleur TBailleur;
 	private TDeclarant TDeclarant;
 	private TDevise TDevise;
 	private TFinancement TFinancement;
 	private TFonction TFonction;
 	private TGestion TGestion;
-	private TBailleur TBailleur;
+	private TProjet TProjet;
+	private TSourceFinancement TSourceFinancement;
+	private TStatut TStatut;
+	private TStructure TStructure;
 	private long affAgpId;
 	private String affAgpActeurSaisie;
 	private String affAgpStatutRetour;
@@ -44,37 +44,38 @@ public class TAffichageAgpm implements java.io.Serializable {
 	public TAffichageAgpm() {
 	}
 
-	public TAffichageAgpm(long affId, TProjet TProjet, TSourceFinancement TSourceFinancement, TStatut TStatut,
-			TStructure TStructure, TDevise TDevise, TFinancement TFinancement, TFonction TFonction, TGestion TGestion,
-			long affAgpId) {
+	public TAffichageAgpm(long affId, TDevise TDevise, TFinancement TFinancement, TFonction TFonction,
+			TGestion TGestion, TProjet TProjet, TSourceFinancement TSourceFinancement, TStatut TStatut,
+			TStructure TStructure, long affAgpId) {
 		this.affId = affId;
-		this.TProjet = TProjet;
-		this.TSourceFinancement = TSourceFinancement;
-		this.TStatut = TStatut;
-		this.TStructure = TStructure;
 		this.TDevise = TDevise;
 		this.TFinancement = TFinancement;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
-		this.affAgpId = affAgpId;
-	}
-
-	public TAffichageAgpm(long affId, TProjet TProjet, TSourceFinancement TSourceFinancement, TStatut TStatut,
-			TStructure TStructure, TDeclarant TDeclarant, TDevise TDevise, TFinancement TFinancement,
-			TFonction TFonction, TGestion TGestion, TBailleur TBailleur, long affAgpId, String affAgpActeurSaisie,
-			String affAgpStatutRetour, String affAgpActif, String affAgpTypeDao, String affAgpCommentaire,
-			String affAgpRecherche, Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp) {
-		this.affId = affId;
 		this.TProjet = TProjet;
 		this.TSourceFinancement = TSourceFinancement;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
+		this.affAgpId = affAgpId;
+	}
+
+	public TAffichageAgpm(long affId, TBailleur TBailleur, TDeclarant TDeclarant, TDevise TDevise,
+			TFinancement TFinancement, TFonction TFonction, TGestion TGestion, TProjet TProjet,
+			TSourceFinancement TSourceFinancement, TStatut TStatut, TStructure TStructure, long affAgpId,
+			String affAgpActeurSaisie, String affAgpStatutRetour, String affAgpActif, String affAgpTypeDao,
+			String affAgpCommentaire, String affAgpRecherche, Date affAgpDateValAc, Date affAgpDateValCpmp,
+			Date affAgpDateValDmp) {
+		this.affId = affId;
+		this.TBailleur = TBailleur;
 		this.TDeclarant = TDeclarant;
 		this.TDevise = TDevise;
 		this.TFinancement = TFinancement;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
-		this.TBailleur = TBailleur;
+		this.TProjet = TProjet;
+		this.TSourceFinancement = TSourceFinancement;
+		this.TStatut = TStatut;
+		this.TStructure = TStructure;
 		this.affAgpId = affAgpId;
 		this.affAgpActeurSaisie = affAgpActeurSaisie;
 		this.affAgpStatutRetour = affAgpStatutRetour;
@@ -99,43 +100,13 @@ public class TAffichageAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_PRO_ID", nullable = false)
-	public TProjet getTProjet() {
-		return this.TProjet;
+	@JoinColumn(name = "AFF_BAI_CODE")
+	public TBailleur getTBailleur() {
+		return this.TBailleur;
 	}
 
-	public void setTProjet(TProjet TProjet) {
-		this.TProjet = TProjet;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_SOU_CODE", nullable = false)
-	public TSourceFinancement getTSourceFinancement() {
-		return this.TSourceFinancement;
-	}
-
-	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
-		this.TSourceFinancement = TSourceFinancement;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_AGP_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
+	public void setTBailleur(TBailleur TBailleur) {
+		this.TBailleur = TBailleur;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -189,13 +160,43 @@ public class TAffichageAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_BAI_CODE")
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
+	@JoinColumn(name = "AFF_PRO_ID", nullable = false)
+	public TProjet getTProjet() {
+		return this.TProjet;
 	}
 
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
+	public void setTProjet(TProjet TProjet) {
+		this.TProjet = TProjet;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_SOU_CODE", nullable = false)
+	public TSourceFinancement getTSourceFinancement() {
+		return this.TSourceFinancement;
+	}
+
+	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
+		this.TSourceFinancement = TSourceFinancement;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_AGP_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AFF_STR_CODE", nullable = false)
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@Column(name = "AFF_AGP_ID", nullable = false, precision = 10, scale = 0)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 31 mars 2020 01:27:37 by Hibernate Tools 4.3.5.Final
+// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,9 +20,9 @@ import javax.persistence.Table;
 public class TPlanPassation implements java.io.Serializable {
 
 	private long plpId;
-	private TStructure TStructure;
 	private TFonction TFonction;
 	private TGestion TGestion;
+	private TStructure TStructure;
 	private String plpCode;
 	private String plpLibelle;
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
@@ -31,19 +31,19 @@ public class TPlanPassation implements java.io.Serializable {
 	public TPlanPassation() {
 	}
 
-	public TPlanPassation(long plpId, TStructure TStructure, TFonction TFonction, TGestion TGestion) {
+	public TPlanPassation(long plpId, TFonction TFonction, TGestion TGestion, TStructure TStructure) {
 		this.plpId = plpId;
-		this.TStructure = TStructure;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
+		this.TStructure = TStructure;
 	}
 
-	public TPlanPassation(long plpId, TStructure TStructure, TFonction TFonction, TGestion TGestion, String plpCode,
+	public TPlanPassation(long plpId, TFonction TFonction, TGestion TGestion, TStructure TStructure, String plpCode,
 			String plpLibelle, Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.plpId = plpId;
-		this.TStructure = TStructure;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
+		this.TStructure = TStructure;
 		this.plpCode = plpCode;
 		this.plpLibelle = plpLibelle;
 		this.TAffichagePpms = TAffichagePpms;
@@ -59,16 +59,6 @@ public class TPlanPassation implements java.io.Serializable {
 
 	public void setPlpId(long plpId) {
 		this.plpId = plpId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLP_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -89,6 +79,16 @@ public class TPlanPassation implements java.io.Serializable {
 
 	public void setTGestion(TGestion TGestion) {
 		this.TGestion = TGestion;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PLP_STR_CODE", nullable = false)
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@Column(name = "PLP_CODE", length = 50)
