@@ -293,7 +293,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					new WhereClause("AFF_GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("objetListe size: "+objetList.size());	
-				tableauBordController.chargeDataPgpmPgspm();
+				tableauBordController.chargeDataPgpm();
 				nbrePgpm =""+getNbrePgpmTotal();
 		}
 		 
@@ -1331,7 +1331,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
    	        	 	  		  newFinancement.setFipMontantDevise(finAgpm.getFinMontantDevise());
    	        	 	  		  newFinancement.setFipMontantCfa(finAgpm.getFinMontantCfa());
    	        	 	  		  iservice.addObject(newFinancement);
-    		      				
+   	        	 			
 
               		          List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
            			          TStatut statuts = new TStatut();
@@ -1355,6 +1355,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	      				        if(!AFG.isEmpty()) affgp =AFG.get(0); 
     	      				       affgp.setAffGpgRecherche(rechercheAll);
     	      				       affgp.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
+    	      				       affgp.setTSourceFinancement(newFinancement.getTSourceFinancement());
     		      				    iservice.updateObject(affgp);
            			
            			                chargeData();
@@ -1447,6 +1448,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      		      				            if(!AFG.isEmpty()) affgp =AFG.get(0); 
      		      				           affgp.setAffGpgRecherche(rechercheAll);
      		      				           affgp.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
+     		      				           affgp.setTSourceFinancement(newFinancement.getTSourceFinancement());
       		      				           iservice.updateObject(affgp);
          			
          			                       chargeData();
@@ -2255,7 +2257,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             			userController.setRenderMsg(true);
             			userController.setSevrityMsg("success");
             			
-            			etatDossier = true;
+            			//etatDossier = true;
             			controleController.btn_edit_pgspm = true;  
            		    
                    }else {
@@ -2320,7 +2322,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
           			userController.setRenderMsg(true);
           			userController.setSevrityMsg("success");
           			
-          			etatDossier = true;
+          			//etatDossier = true;
         			controleController.btn_edit_pgspm = true;
               		   
                      }
@@ -2379,6 +2381,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                        affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                        affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                        affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+                       //affichagePgpm.setTSourceFinancement(new TSourceFinancement());
                        iservice.addObject(affichagePgpm);
                        
                        //Insertion dans T_Financement_PGPM
@@ -2416,7 +2419,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 			userController.setRenderMsg(true);
                 			userController.setSevrityMsg("success");
                 			
-                			etatDossier = true;
+                			//etatDossier = true;
                 			controleController.btn_edit_pgspm = true;  
                		    
                        }else {
@@ -2490,7 +2493,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
               			userController.setRenderMsg(true);
               			userController.setSevrityMsg("success");
               			
-              			etatDossier = true;
+              			//etatDossier = true;
             			controleController.btn_edit_pgspm = true;
                   		   
                          }
@@ -2508,6 +2511,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		//Methode Upload
 		 @Transactional
 		 public void upload(FileUploadEvent event) throws IOException{
+			  
+			 listeDetail = (List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+						new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+				     if(!listeDetail.isEmpty()) {
+				    	 detailPlan=listeDetail.get(0);
+				     } 	
 		 	    
 				if(fileUploadController.handleFileUpload(event, detailPlan.getGpgId()+"", natPiece)) {
 					

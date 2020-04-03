@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-02T15:17:24 -->
+<!-- 2020-04-02T15:41:08 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -17,7 +17,7 @@ and af.aff_gpg_fon_cod = f.fon_cod
 and af.aff_gpg_str_code = st.str_code
 and st.str_min_code = min.min_code
 and af.aff_gpg_id = fg.fip_gpg_id (+)
-and af.aff_gpg_source_fin = sf.sou_code
+and af.aff_gpg_source_fin = sf.sou_code 
 and fg.fip_sou_code = sf.sou_code
 and fg.fip_bai_code = ba.bai_code
 and fg.fip_dev_code = dev.dev_code 
@@ -32,7 +32,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 	<field name="AFF_GPG_MOP_CODE" class="java.lang.String"/>
 	<field name="AFF_GPG_CODE" class="java.lang.String"/>
 	<field name="AFF_GPG_OBJET" class="java.lang.String"/>
-	<field name="AFF_GPG_NUMERO_ORDRE" class="java.lang.Long"/>
+	<field name="AFF_GPG_NUMERO_ORDRE" class="java.math.BigDecimal"/>
 	<field name="AFF_GPG_PARTIE_PME_PMI" class="java.lang.String"/>
 	<field name="AFF_GPG_COMMENTAIRE" class="java.lang.String"/>
 	<field name="AFF_GPG_SOURCE_FIN" class="java.lang.String"/>
@@ -41,9 +41,14 @@ and af.aff_gpg_id=  $P{param_code}]]>
 	<field name="AFF_GPG_STATUT_RETOUR" class="java.lang.String"/>
 	<field name="AFF_GPG_DATE_SAISIE" class="java.sql.Timestamp"/>
 	<field name="AFF_GPG_FON_COD" class="java.lang.String"/>
-	<field name="AFF_ID" class="java.lang.Long"/>
+	<field name="AFF_ID" class="java.math.BigDecimal"/>
 	<field name="AFF_GPG_STR_CODE" class="java.lang.String"/>
-	<field name="AFF_GPG_GES_CODE" class="java.lang.Long"/>
+	<field name="AFF_GPG_GES_CODE" class="java.math.BigDecimal"/>
+	<field name="AFF_GPG_RECHERCHE" class="java.lang.String"/>
+	<field name="AFF_GPG_DATE_VAL_AC" class="java.sql.Timestamp"/>
+	<field name="AFF_GPG_DATE_VAL_CPMP" class="java.sql.Timestamp"/>
+	<field name="AFF_GPG_DATE_VAL_DMP" class="java.sql.Timestamp"/>
+	<field name="AFF_GPG_TYPE_FINANCE" class="java.lang.String"/>
 	<field name="TYM_LIBELLE_LONG" class="java.lang.String"/>
 	<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
@@ -53,8 +58,8 @@ and af.aff_gpg_id=  $P{param_code}]]>
 	<field name="STR_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
 	<field name="SOU_LIBELLE" class="java.lang.String"/>
-	<field name="FIP_MONTANT_CFA" class="java.lang.Long"/>
-	<field name="FIP_MONTANT_DEVISE" class="java.lang.Long"/>
+	<field name="FIP_MONTANT_CFA" class="java.math.BigDecimal"/>
+	<field name="FIP_MONTANT_DEVISE" class="java.math.BigDecimal"/>
 	<field name="BAI_LIBELLE" class="java.lang.String"/>
 	<field name="DEV_LIBELLE" class="java.lang.String"/>
 	<field name="DEV_SYMBOLE" class="java.lang.String"/>
