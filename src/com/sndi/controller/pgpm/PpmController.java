@@ -1385,6 +1385,7 @@ public class PpmController {
 		 	  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
 		 	  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
 		 	  		newFinancement.setFppPartTresor(fipPgpm.getFipTresor());
+		 	  		newFinancement.setFppTypeFinance(fipPgpm.getFipTypeFinance());
 		 	  		iservice.addObject(newFinancement);
 		 	  		
 		 	  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
@@ -1394,6 +1395,7 @@ public class PpmController {
 		 				 if(!PL.isEmpty())  
 		 					 pass =PL.get(0); 
 		 				     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 				     pass.setDppTypeFinance(newFinancement.getFppTypeFinance());
 		 				     iservice.updateObject(pass);
 		 				     
 		 			List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
@@ -1401,6 +1403,7 @@ public class PpmController {
 		 		   				TAffichagePpm aff = new TAffichagePpm();
 		 							if(!AF.isEmpty()) aff =AF.get(0);
 		 							aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+		 							aff.setAffDppTypeFinance(newFinancement.getFppTypeFinance());
 		 							iservice.updateObject(aff);
 		 	  		
 		 	  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
@@ -1600,7 +1603,8 @@ public class PpmController {
 	  		
 	  	  if(fipPgpm.getFipId() > 0 ) {
 	  		  
-	  		 if("".equals(detailPass.getDppObjet())||"".equals(detailPass.getDppPartiePmePmi())||"".equals(tydCode)) {
+	  		 if(detailPass.getDppObjet().equalsIgnoreCase("")||"".equals(detailPass.getDppObjet())||"".equals(detailPass.getDppPartiePmePmi())|| 
+	  				detailPass.getDppPartiePmePmi().equalsIgnoreCase("")|| tydCode.equalsIgnoreCase("")||"".equals(tydCode)) {
 	  			   //Message d'erreur
 	  			   FacesContext.getCurrentInstance().addMessage(null,
 	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
@@ -1693,6 +1697,7 @@ public class PpmController {
 			  		   newFinancement.setTDevise(new TDevise(fipPgpm.getTDevise().getDevCode()));
 			  		   newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
 			  		   newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
+			  		   newFinancement.setFppTypeFinance(fipPgpm.getFipTypeFinance());
 			  		   iservice.addObject(newFinancement);
 			  		
 
@@ -1710,6 +1715,7 @@ public class PpmController {
 				   				TAffichagePpm aff = new TAffichagePpm();
 									if(!AF.isEmpty()) aff =AF.get(0);
 									aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+									aff.setAffDppTypeFinance(newFinancement.getFppTypeFinance());
 									iservice.updateObject(aff);
 			  		
 			  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
@@ -1811,11 +1817,11 @@ public class PpmController {
 						String rechercheAll = search.replace("null","");
 						
 						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
-			      				TAffichagePpm affgp = new TAffichagePpm();
-			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-			      				   affgp.setAffDppRecherche(rechercheAll);
-				      			  iservice.updateObject(affgp);
+				      	  new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+			      		   TAffichagePpm affgp = new TAffichagePpm();
+			      			 if(!AFG.isEmpty()) affgp =AFG.get(0); 
+			      			  affgp.setAffDppRecherche(rechercheAll);
+				      		  iservice.updateObject(affgp);
 				  		
 				  		
 				  		//Insertion dans T_Financement_PPM

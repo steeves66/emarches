@@ -726,7 +726,7 @@ public class AgpmController {
 	   /* VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
 	      if(bai == null) {*/
 	                           
-	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || devCode.equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ||
+	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || devCode.equalsIgnoreCase("") ||"".equals(devCode) || sourfin.equalsIgnoreCase("") ||
 	    			  souCode.equalsIgnoreCase("") || "".equals(souCode) ) {
 	                      //Message d'erreur
 	    		          FacesContext.getCurrentInstance().addMessage(null,
@@ -1518,7 +1518,7 @@ public class AgpmController {
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 statutUpdate ="S2D";
-					 observation="AGPM retourné par la CPMP";
+					 //observation="AGPM retourné par la CPMP";
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {

@@ -413,10 +413,10 @@
 				        </p:column>
 				        
 				        <p:column headerText="Type" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TSourceFinancement.souCode}" />
+				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part Bailleur" width="5%">
+				        <p:column headerText="Part Bailleur" width="6%">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipMontantCfa}" >
@@ -1359,9 +1359,9 @@
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgspm}" />
                                 </h:commandLink>
 				        </p:column>
-				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
-                           <h:commandLink id="pgspm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgspm()}">				        
-         				  <h:outputText value="#{slctdTb.gpgCommentaire}" />
+				          <p:column headerText="Objet" styleClass="col-sm-11" >
+                           <h:commandLink id="pgspm_com" title="Objet" style="font-size:18px;"  action="#{ppmController.onSelectPgspm()}">				        
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgspm}" />
                                 </h:commandLink>
 				        </p:column>		
