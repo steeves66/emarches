@@ -108,8 +108,8 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-           <p:commandLink  class="small-box-footer" oncomplete="PF('detailAcDifDlg').show()" action="#{pgpmAcController.chargePgpmDifAc()}" style="color:#fff;font-size:13px;">
-				Detail <i class="fa fa-arrow-circle-right"></i>		
+           <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 <i class="fa fa-arrow-circle-right"></i>		
 						  </p:commandLink>
           </div>
         </div>
@@ -564,7 +564,7 @@
                               <h:panelGroup rendered="#{slctdTb.TStatut.staCode == 'S1S'}">
                                <p:commandLink  oncomplete="PF('uploaddlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="Joindre Document" update=":content">
                                 <i class="ace-icon fa fa-download bigger-120" style="color: white"></i>
-                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.detailPlan}" />
+                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                                </p:commandLink>
                                </h:panelGroup>
                            
@@ -1240,7 +1240,7 @@
               <br/>
 	            <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES DOSSIERS DU PGPM N°</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES DOSSIERS DU PGPM N° #{pgpmAcController.slctdTd.affGpgId}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->

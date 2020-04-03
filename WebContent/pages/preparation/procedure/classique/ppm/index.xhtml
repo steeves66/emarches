@@ -953,7 +953,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmTrans}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmTrans}"
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -988,6 +988,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1010,7 +1011,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmValCp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmValCp}"
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -1055,7 +1056,7 @@
 
 		            </div>
 	            </div>
-
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1079,7 +1080,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmValDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmValDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun PPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -1118,18 +1119,17 @@
 				      
 						</p:dataTable>
 						</h:panelGrid> 
-	                  
-	                   
+
 	                </div>
 		            </div>
-		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
     
     <h:form id="apercuDif">
-	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
+	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -1145,7 +1145,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -1189,6 +1189,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1212,7 +1213,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="465" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmDifDmp}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.ppmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun PPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			               
@@ -1233,7 +1234,7 @@
          				  <h:outputText value="#{slctdTb.affDppStrConduc}" />
 				        </p:column>
 				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3">	        
+				        <p:column headerText="Structure Bénéficiaire" styleClass="col-sm-3">	        
          				  <h:outputText value="#{slctdTb.affDppStrBenefi}" />
 				        </p:column>
 				        
@@ -1256,6 +1257,7 @@
 		            </div>
 		           
 	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
