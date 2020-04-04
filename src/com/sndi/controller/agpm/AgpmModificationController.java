@@ -934,8 +934,9 @@ public class AgpmModificationController {
    		      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
    	 		TAgpm agpm = new TAgpm();
    	   				if(!AGP.isEmpty()) agpm =AGP.get(0); 	
-   	   			  agpm.setAgpCommentaire(updateAgpm.getAffAgpCode());
-   	   		      agpm.setAgpCode(updateAgpm.getAffAgpCode());
+   	   			   agpm.setAgpCommentaire(updateAgpm.getAffAgpCode());
+   	   		       agpm.setAgpCode(updateAgpm.getAgpCode());
+   	   		       agpm.setAgpCode(updateAgpm.getAffAgpCode());
    	   				iservice.updateObject(agpm);
    	   				
    	   			 //Declarant
