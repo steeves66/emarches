@@ -1392,7 +1392,7 @@ public class AgpmModificationController {
 		 //Methode checkBailleur
 		 public void checkBailleur() {
 			// sourfin="";
-			 if(updateAgpm.getAffSouCode().equalsIgnoreCase("Bailleur")) { 
+			 if(updateAgpm.getFinTypeFinance().equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
 				 selectTresor = false;
 				 selectPartBai = true;
@@ -1404,7 +1404,7 @@ public class AgpmModificationController {
 				 selectTresor = true;
 				 selectPartBai = true;
 				 //sourfin="";
-			 }else if(updateAgpm.getAffSouCode().equalsIgnoreCase("Etat")){
+			 }else if(updateAgpm.getFinTypeFinance().equalsIgnoreCase("Etat")){
 				 selectBailleur = false;
 				 selectTresor = true;
 				 selectPartBai= false;
@@ -1414,6 +1414,7 @@ public class AgpmModificationController {
 			    	  selectPartBai = false;
 			    	 selectBailleur = false;
 					 selectTresor = false;
+					 updateAgpm.getAffSouCode().equalsIgnoreCase("");
 			    }
 		 }
 		 

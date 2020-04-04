@@ -1390,6 +1390,7 @@ public class AgpmController {
 		 }*/
 		//Tri sur les types de financement  
 		public void chargeSourceCheck() { 
+			listeSourceFinance.clear();
 		listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 		      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
 			}
@@ -1419,7 +1420,8 @@ public class AgpmController {
 			    	  selectPartBai = false;
 			    	 selectBailleur = false;
 					 selectTresor = false;
-					 souCode.equalsIgnoreCase("");
+					 //souCode.equalsIgnoreCase("");
+					 souCode =  "";
 			    }
 		 }
 		 
