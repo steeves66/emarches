@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -16,19 +16,20 @@ public class VbDetailVenteId implements java.io.Serializable {
 	private byte dveVenNum;
 	private BigDecimal dveLaaNum;
 	private String dveQte;
-	private Long dveCout;
+	private String dveCout;
 
 	public VbDetailVenteId() {
 	}
 
-	public VbDetailVenteId(long dveNum, String dveDacCode, byte dveVenNum) {
+	public VbDetailVenteId(long dveNum, String dveDacCode, byte dveVenNum, BigDecimal dveLaaNum) {
 		this.dveNum = dveNum;
 		this.dveDacCode = dveDacCode;
 		this.dveVenNum = dveVenNum;
+		this.dveLaaNum = dveLaaNum;
 	}
 
 	public VbDetailVenteId(long dveNum, String dveDacCode, byte dveVenNum, BigDecimal dveLaaNum, String dveQte,
-			Long dveCout) {
+			String dveCout) {
 		this.dveNum = dveNum;
 		this.dveDacCode = dveDacCode;
 		this.dveVenNum = dveVenNum;
@@ -64,7 +65,7 @@ public class VbDetailVenteId implements java.io.Serializable {
 		this.dveVenNum = dveVenNum;
 	}
 
-	@Column(name = "DVE_LAA_NUM", precision = 20, scale = 0)
+	@Column(name = "DVE_LAA_NUM", nullable = false, precision = 20, scale = 0)
 	public BigDecimal getDveLaaNum() {
 		return this.dveLaaNum;
 	}
@@ -82,12 +83,12 @@ public class VbDetailVenteId implements java.io.Serializable {
 		this.dveQte = dveQte;
 	}
 
-	@Column(name = "DVE_COUT", precision = 10, scale = 0)
-	public Long getDveCout() {
+	@Column(name = "DVE_COUT", length = 20)
+	public String getDveCout() {
 		return this.dveCout;
 	}
 
-	public void setDveCout(Long dveCout) {
+	public void setDveCout(String dveCout) {
 		this.dveCout = dveCout;
 	}
 

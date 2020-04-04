@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -86,6 +86,7 @@ public class VUpdateAgpmId implements java.io.Serializable {
 	private Date agpDateValAc;
 	private Date agpDateValCpmp;
 	private Date agpDateValDmp;
+	private String agpCode;
 	private String baiCode;
 	private String baiLibelle;
 	private String baiAdresse;
@@ -141,8 +142,8 @@ public class VUpdateAgpmId implements java.io.Serializable {
 			String decEmail, String decCel, String staCode, String staLibelleCourt, String staLibelleLong, long agpId,
 			String agpStrCode, String agpFonCod, short agpGesCode, String agpStaCode, long agpProId, Long agpDecId,
 			String agpCommentaire, String agpTypeDao, String agpModePassation, String agpActif, String agpStatutRetour,
-			String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp, Date agpDateValDmp, String baiCode,
-			String baiLibelle, String baiAdresse, String baiTelephone) {
+			String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp, Date agpDateValDmp, String agpCode,
+			String baiCode, String baiLibelle, String baiAdresse, String baiTelephone) {
 		this.affId = affId;
 		this.affProId = affProId;
 		this.affFinId = affFinId;
@@ -217,6 +218,7 @@ public class VUpdateAgpmId implements java.io.Serializable {
 		this.agpDateValAc = agpDateValAc;
 		this.agpDateValCpmp = agpDateValCpmp;
 		this.agpDateValDmp = agpDateValDmp;
+		this.agpCode = agpCode;
 		this.baiCode = baiCode;
 		this.baiLibelle = baiLibelle;
 		this.baiAdresse = baiAdresse;
@@ -754,7 +756,7 @@ public class VUpdateAgpmId implements java.io.Serializable {
 		this.agpId = agpId;
 	}
 
-	@Column(name = "AGP_STR_CODE", nullable = false, length = 3)
+	@Column(name = "AGP_STR_CODE", nullable = false, length = 20)
 	public String getAgpStrCode() {
 		return this.agpStrCode;
 	}
@@ -763,7 +765,7 @@ public class VUpdateAgpmId implements java.io.Serializable {
 		this.agpStrCode = agpStrCode;
 	}
 
-	@Column(name = "AGP_FON_COD", nullable = false, length = 12)
+	@Column(name = "AGP_FON_COD", nullable = false, length = 20)
 	public String getAgpFonCod() {
 		return this.agpFonCod;
 	}
@@ -887,6 +889,15 @@ public class VUpdateAgpmId implements java.io.Serializable {
 
 	public void setAgpDateValDmp(Date agpDateValDmp) {
 		this.agpDateValDmp = agpDateValDmp;
+	}
+
+	@Column(name = "AGP_CODE", length = 50)
+	public String getAgpCode() {
+		return this.agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
 	}
 
 	@Column(name = "BAI_CODE", nullable = false, length = 5)
@@ -1104,6 +1115,8 @@ public class VUpdateAgpmId implements java.io.Serializable {
 				&& ((this.getAgpDateValDmp() == castOther.getAgpDateValDmp())
 						|| (this.getAgpDateValDmp() != null && castOther.getAgpDateValDmp() != null
 								&& this.getAgpDateValDmp().equals(castOther.getAgpDateValDmp())))
+				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
+						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())))
 				&& ((this.getBaiCode() == castOther.getBaiCode()) || (this.getBaiCode() != null
 						&& castOther.getBaiCode() != null && this.getBaiCode().equals(castOther.getBaiCode())))
 				&& ((this.getBaiLibelle() == castOther.getBaiLibelle()) || (this.getBaiLibelle() != null
@@ -1192,6 +1205,7 @@ public class VUpdateAgpmId implements java.io.Serializable {
 		result = 37 * result + (getAgpDateValAc() == null ? 0 : this.getAgpDateValAc().hashCode());
 		result = 37 * result + (getAgpDateValCpmp() == null ? 0 : this.getAgpDateValCpmp().hashCode());
 		result = 37 * result + (getAgpDateValDmp() == null ? 0 : this.getAgpDateValDmp().hashCode());
+		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
 		result = 37 * result + (getBaiCode() == null ? 0 : this.getBaiCode().hashCode());
 		result = 37 * result + (getBaiLibelle() == null ? 0 : this.getBaiLibelle().hashCode());
 		result = 37 * result + (getBaiAdresse() == null ? 0 : this.getBaiAdresse().hashCode());

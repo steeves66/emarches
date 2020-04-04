@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -21,11 +21,11 @@ import javax.persistence.Table;
 public class TFinancement implements java.io.Serializable {
 
 	private long finId;
-	private TAgpm TAgpm;
-	private TBailleur TBailleur;
-	private TDevise TDevise;
 	private TProjet TProjet;
 	private TSourceFinancement TSourceFinancement;
+	private TDevise TDevise;
+	private TAgpm TAgpm;
+	private TBailleur TBailleur;
 	private BigDecimal finMontantCfa;
 	private BigDecimal finMontantDevise;
 	private String finNumeroAccord;
@@ -37,23 +37,23 @@ public class TFinancement implements java.io.Serializable {
 	public TFinancement() {
 	}
 
-	public TFinancement(long finId, TDevise TDevise, TProjet TProjet, TSourceFinancement TSourceFinancement) {
+	public TFinancement(long finId, TProjet TProjet, TSourceFinancement TSourceFinancement, TDevise TDevise) {
 		this.finId = finId;
-		this.TDevise = TDevise;
 		this.TProjet = TProjet;
 		this.TSourceFinancement = TSourceFinancement;
+		this.TDevise = TDevise;
 	}
 
-	public TFinancement(long finId, TAgpm TAgpm, TBailleur TBailleur, TDevise TDevise, TProjet TProjet,
-			TSourceFinancement TSourceFinancement, BigDecimal finMontantCfa, BigDecimal finMontantDevise,
+	public TFinancement(long finId, TProjet TProjet, TSourceFinancement TSourceFinancement, TDevise TDevise,
+			TAgpm TAgpm, TBailleur TBailleur, BigDecimal finMontantCfa, BigDecimal finMontantDevise,
 			String finNumeroAccord, String finStatut, String finTypeFinance, Long finPartTresor,
 			Set<TAffichageAgpm> TAffichageAgpms) {
 		this.finId = finId;
-		this.TAgpm = TAgpm;
-		this.TBailleur = TBailleur;
-		this.TDevise = TDevise;
 		this.TProjet = TProjet;
 		this.TSourceFinancement = TSourceFinancement;
+		this.TDevise = TDevise;
+		this.TAgpm = TAgpm;
+		this.TBailleur = TBailleur;
 		this.finMontantCfa = finMontantCfa;
 		this.finMontantDevise = finMontantDevise;
 		this.finNumeroAccord = finNumeroAccord;
@@ -75,36 +75,6 @@ public class TFinancement implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIN_AGP_ID")
-	public TAgpm getTAgpm() {
-		return this.TAgpm;
-	}
-
-	public void setTAgpm(TAgpm TAgpm) {
-		this.TAgpm = TAgpm;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIN_BAI_CODE")
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
-	}
-
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIN_DEV_CODE", nullable = false)
-	public TDevise getTDevise() {
-		return this.TDevise;
-	}
-
-	public void setTDevise(TDevise TDevise) {
-		this.TDevise = TDevise;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FIN_PRO_ID", nullable = false)
 	public TProjet getTProjet() {
 		return this.TProjet;
@@ -122,6 +92,36 @@ public class TFinancement implements java.io.Serializable {
 
 	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
 		this.TSourceFinancement = TSourceFinancement;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FIN_DEV_CODE", nullable = false)
+	public TDevise getTDevise() {
+		return this.TDevise;
+	}
+
+	public void setTDevise(TDevise TDevise) {
+		this.TDevise = TDevise;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FIN_AGP_ID")
+	public TAgpm getTAgpm() {
+		return this.TAgpm;
+	}
+
+	public void setTAgpm(TAgpm TAgpm) {
+		this.TAgpm = TAgpm;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FIN_BAI_CODE")
+	public TBailleur getTBailleur() {
+		return this.TBailleur;
+	}
+
+	public void setTBailleur(TBailleur TBailleur) {
+		this.TBailleur = TBailleur;
 	}
 
 	@Column(name = "FIN_MONTANT_CFA", precision = 15)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,8 +21,8 @@ import javax.persistence.TemporalType;
 public class TDetailAvis implements java.io.Serializable {
 
 	private BigDecimal davCode;
-	private TAvisAppelOffre TAvisAppelOffre;
 	private TDacSpecs TDacSpecs;
+	private TAvisAppelOffre TAvisAppelOffre;
 	private BigDecimal davNumOrd;
 	private String davTitre;
 	private String davContenu;
@@ -37,11 +37,11 @@ public class TDetailAvis implements java.io.Serializable {
 		this.davCode = davCode;
 	}
 
-	public TDetailAvis(BigDecimal davCode, TAvisAppelOffre TAvisAppelOffre, TDacSpecs TDacSpecs, BigDecimal davNumOrd,
+	public TDetailAvis(BigDecimal davCode, TDacSpecs TDacSpecs, TAvisAppelOffre TAvisAppelOffre, BigDecimal davNumOrd,
 			String davTitre, String davContenu, Date davDteSaisi, String davStaCode, String davAutre) {
 		this.davCode = davCode;
-		this.TAvisAppelOffre = TAvisAppelOffre;
 		this.TDacSpecs = TDacSpecs;
+		this.TAvisAppelOffre = TAvisAppelOffre;
 		this.davNumOrd = davNumOrd;
 		this.davTitre = davTitre;
 		this.davContenu = davContenu;
@@ -62,16 +62,6 @@ public class TDetailAvis implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAV_AAO_CODE")
-	public TAvisAppelOffre getTAvisAppelOffre() {
-		return this.TAvisAppelOffre;
-	}
-
-	public void setTAvisAppelOffre(TAvisAppelOffre TAvisAppelOffre) {
-		this.TAvisAppelOffre = TAvisAppelOffre;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAV_DAC_CODE")
 	public TDacSpecs getTDacSpecs() {
 		return this.TDacSpecs;
@@ -79,6 +69,16 @@ public class TDetailAvis implements java.io.Serializable {
 
 	public void setTDacSpecs(TDacSpecs TDacSpecs) {
 		this.TDacSpecs = TDacSpecs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAV_AAO_CODE")
+	public TAvisAppelOffre getTAvisAppelOffre() {
+		return this.TAvisAppelOffre;
+	}
+
+	public void setTAvisAppelOffre(TAvisAppelOffre TAvisAppelOffre) {
+		this.TAvisAppelOffre = TAvisAppelOffre;
 	}
 
 	@Column(name = "DAV_NUM_ORD", precision = 22, scale = 0)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class TCommissionType implements java.io.Serializable {
 
 	private String tctCode;
-	private TTypeStructure TTypeStructure;
 	private TTypeCommission TTypeCommission;
+	private TTypeStructure TTypeStructure;
 	private TOperateur TOperateur;
 	private String tctLibelle;
 	private String tctTitre;
@@ -43,13 +43,13 @@ public class TCommissionType implements java.io.Serializable {
 		this.tctCode = tctCode;
 	}
 
-	public TCommissionType(String tctCode, TTypeStructure TTypeStructure, TTypeCommission TTypeCommission,
+	public TCommissionType(String tctCode, TTypeCommission TTypeCommission, TTypeStructure TTypeStructure,
 			TOperateur TOperateur, String tctLibelle, String tctTitre, Date tctDteSaisi, String tctGrpCode,
 			String tctNomMbm, String tctPreMbm, String tctTelMbm, String tctRepMandate,
 			Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.tctCode = tctCode;
-		this.TTypeStructure = TTypeStructure;
 		this.TTypeCommission = TTypeCommission;
+		this.TTypeStructure = TTypeStructure;
 		this.TOperateur = TOperateur;
 		this.tctLibelle = tctLibelle;
 		this.tctTitre = tctTitre;
@@ -74,16 +74,6 @@ public class TCommissionType implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TCT_TST_CODE")
-	public TTypeStructure getTTypeStructure() {
-		return this.TTypeStructure;
-	}
-
-	public void setTTypeStructure(TTypeStructure TTypeStructure) {
-		this.TTypeStructure = TTypeStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TCT_TCO_CODE")
 	public TTypeCommission getTTypeCommission() {
 		return this.TTypeCommission;
@@ -91,6 +81,16 @@ public class TCommissionType implements java.io.Serializable {
 
 	public void setTTypeCommission(TTypeCommission TTypeCommission) {
 		this.TTypeCommission = TTypeCommission;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TCT_TST_CODE")
+	public TTypeStructure getTTypeStructure() {
+		return this.TTypeStructure;
+	}
+
+	public void setTTypeStructure(TTypeStructure TTypeStructure) {
+		this.TTypeStructure = TTypeStructure;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

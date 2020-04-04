@@ -1,7 +1,8 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
-import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -11,33 +12,36 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VbDacSpecsId implements java.io.Serializable {
 
-	private Serializable dacCode;
-	private Serializable dacObjet;
-	private Serializable dacDteSaisi;
-	private Serializable dacStaCode;
-	private Serializable dacTymCode;
-	private Serializable dacMopCode;
-	private Serializable dacNbrOuv;
-	private Serializable dacGesCode;
-	private Serializable dacFonCodAc;
-	private Serializable dacStrCode;
-	private Serializable dacFonCodeCpmp;
-	private Serializable dacDteValCpmp;
-	private Serializable dacDteValDmp;
-	private Serializable dacTdCode;
-	private Serializable dacDppId;
-	private Serializable dacDateReception;
-	private Serializable dacStatutRetour;
-	private Serializable dacMention;
+	private String dacCode;
+	private String dacObjet;
+	private Date dacDteSaisi;
+	private String dacStaCode;
+	private String dacTymCode;
+	private String dacMopCode;
+	private BigDecimal dacNbrOuv;
+	private BigDecimal dacGesCode;
+	private String dacFonCodAc;
+	private String dacStrCode;
+	private String dacFonCodeCpmp;
+	private Date dacDteValCpmp;
+	private Date dacDteValDmp;
+	private String dacTdCode;
+	private Long dacDppId;
+	private Date dacDateReception;
+	private String dacStatutRetour;
+	private String dacMention;
 
 	public VbDacSpecsId() {
 	}
 
-	public VbDacSpecsId(Serializable dacCode, Serializable dacObjet, Serializable dacDteSaisi, Serializable dacStaCode,
-			Serializable dacTymCode, Serializable dacMopCode, Serializable dacNbrOuv, Serializable dacGesCode,
-			Serializable dacFonCodAc, Serializable dacStrCode, Serializable dacFonCodeCpmp, Serializable dacDteValCpmp,
-			Serializable dacDteValDmp, Serializable dacTdCode, Serializable dacDppId, Serializable dacDateReception,
-			Serializable dacStatutRetour, Serializable dacMention) {
+	public VbDacSpecsId(String dacCode) {
+		this.dacCode = dacCode;
+	}
+
+	public VbDacSpecsId(String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode,
+			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
+			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Long dacDppId,
+			Date dacDateReception, String dacStatutRetour, String dacMention) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -58,165 +62,165 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacMention = dacMention;
 	}
 
-	@Column(name = "DAC_CODE")
-	public Serializable getDacCode() {
+	@Column(name = "DAC_CODE", nullable = false, length = 20)
+	public String getDacCode() {
 		return this.dacCode;
 	}
 
-	public void setDacCode(Serializable dacCode) {
+	public void setDacCode(String dacCode) {
 		this.dacCode = dacCode;
 	}
 
-	@Column(name = "DAC_OBJET")
-	public Serializable getDacObjet() {
+	@Column(name = "DAC_OBJET", length = 1000)
+	public String getDacObjet() {
 		return this.dacObjet;
 	}
 
-	public void setDacObjet(Serializable dacObjet) {
+	public void setDacObjet(String dacObjet) {
 		this.dacObjet = dacObjet;
 	}
 
-	@Column(name = "DAC_DTE_SAISI")
-	public Serializable getDacDteSaisi() {
+	@Column(name = "DAC_DTE_SAISI", length = 7)
+	public Date getDacDteSaisi() {
 		return this.dacDteSaisi;
 	}
 
-	public void setDacDteSaisi(Serializable dacDteSaisi) {
+	public void setDacDteSaisi(Date dacDteSaisi) {
 		this.dacDteSaisi = dacDteSaisi;
 	}
 
-	@Column(name = "DAC_STA_CODE")
-	public Serializable getDacStaCode() {
+	@Column(name = "DAC_STA_CODE", length = 3)
+	public String getDacStaCode() {
 		return this.dacStaCode;
 	}
 
-	public void setDacStaCode(Serializable dacStaCode) {
+	public void setDacStaCode(String dacStaCode) {
 		this.dacStaCode = dacStaCode;
 	}
 
-	@Column(name = "DAC_TYM_CODE")
-	public Serializable getDacTymCode() {
+	@Column(name = "DAC_TYM_CODE", length = 5)
+	public String getDacTymCode() {
 		return this.dacTymCode;
 	}
 
-	public void setDacTymCode(Serializable dacTymCode) {
+	public void setDacTymCode(String dacTymCode) {
 		this.dacTymCode = dacTymCode;
 	}
 
-	@Column(name = "DAC_MOP_CODE")
-	public Serializable getDacMopCode() {
+	@Column(name = "DAC_MOP_CODE", length = 3)
+	public String getDacMopCode() {
 		return this.dacMopCode;
 	}
 
-	public void setDacMopCode(Serializable dacMopCode) {
+	public void setDacMopCode(String dacMopCode) {
 		this.dacMopCode = dacMopCode;
 	}
 
-	@Column(name = "DAC_NBR_OUV")
-	public Serializable getDacNbrOuv() {
+	@Column(name = "DAC_NBR_OUV", precision = 22, scale = 0)
+	public BigDecimal getDacNbrOuv() {
 		return this.dacNbrOuv;
 	}
 
-	public void setDacNbrOuv(Serializable dacNbrOuv) {
+	public void setDacNbrOuv(BigDecimal dacNbrOuv) {
 		this.dacNbrOuv = dacNbrOuv;
 	}
 
-	@Column(name = "DAC_GES_CODE")
-	public Serializable getDacGesCode() {
+	@Column(name = "DAC_GES_CODE", precision = 22, scale = 0)
+	public BigDecimal getDacGesCode() {
 		return this.dacGesCode;
 	}
 
-	public void setDacGesCode(Serializable dacGesCode) {
+	public void setDacGesCode(BigDecimal dacGesCode) {
 		this.dacGesCode = dacGesCode;
 	}
 
-	@Column(name = "DAC_FON_COD_AC")
-	public Serializable getDacFonCodAc() {
+	@Column(name = "DAC_FON_COD_AC", length = 12)
+	public String getDacFonCodAc() {
 		return this.dacFonCodAc;
 	}
 
-	public void setDacFonCodAc(Serializable dacFonCodAc) {
+	public void setDacFonCodAc(String dacFonCodAc) {
 		this.dacFonCodAc = dacFonCodAc;
 	}
 
-	@Column(name = "DAC_STR_CODE")
-	public Serializable getDacStrCode() {
+	@Column(name = "DAC_STR_CODE", length = 3)
+	public String getDacStrCode() {
 		return this.dacStrCode;
 	}
 
-	public void setDacStrCode(Serializable dacStrCode) {
+	public void setDacStrCode(String dacStrCode) {
 		this.dacStrCode = dacStrCode;
 	}
 
-	@Column(name = "DAC_FON_CODE_CPMP")
-	public Serializable getDacFonCodeCpmp() {
+	@Column(name = "DAC_FON_CODE_CPMP", length = 12)
+	public String getDacFonCodeCpmp() {
 		return this.dacFonCodeCpmp;
 	}
 
-	public void setDacFonCodeCpmp(Serializable dacFonCodeCpmp) {
+	public void setDacFonCodeCpmp(String dacFonCodeCpmp) {
 		this.dacFonCodeCpmp = dacFonCodeCpmp;
 	}
 
-	@Column(name = "DAC_DTE_VAL_CPMP")
-	public Serializable getDacDteValCpmp() {
+	@Column(name = "DAC_DTE_VAL_CPMP", length = 7)
+	public Date getDacDteValCpmp() {
 		return this.dacDteValCpmp;
 	}
 
-	public void setDacDteValCpmp(Serializable dacDteValCpmp) {
+	public void setDacDteValCpmp(Date dacDteValCpmp) {
 		this.dacDteValCpmp = dacDteValCpmp;
 	}
 
-	@Column(name = "DAC_DTE_VAL_DMP")
-	public Serializable getDacDteValDmp() {
+	@Column(name = "DAC_DTE_VAL_DMP", length = 7)
+	public Date getDacDteValDmp() {
 		return this.dacDteValDmp;
 	}
 
-	public void setDacDteValDmp(Serializable dacDteValDmp) {
+	public void setDacDteValDmp(Date dacDteValDmp) {
 		this.dacDteValDmp = dacDteValDmp;
 	}
 
-	@Column(name = "DAC_TD_CODE")
-	public Serializable getDacTdCode() {
+	@Column(name = "DAC_TD_CODE", length = 3)
+	public String getDacTdCode() {
 		return this.dacTdCode;
 	}
 
-	public void setDacTdCode(Serializable dacTdCode) {
+	public void setDacTdCode(String dacTdCode) {
 		this.dacTdCode = dacTdCode;
 	}
 
-	@Column(name = "DAC_DPP_ID")
-	public Serializable getDacDppId() {
+	@Column(name = "DAC_DPP_ID", precision = 10, scale = 0)
+	public Long getDacDppId() {
 		return this.dacDppId;
 	}
 
-	public void setDacDppId(Serializable dacDppId) {
+	public void setDacDppId(Long dacDppId) {
 		this.dacDppId = dacDppId;
 	}
 
-	@Column(name = "DAC_DATE_RECEPTION")
-	public Serializable getDacDateReception() {
+	@Column(name = "DAC_DATE_RECEPTION", length = 7)
+	public Date getDacDateReception() {
 		return this.dacDateReception;
 	}
 
-	public void setDacDateReception(Serializable dacDateReception) {
+	public void setDacDateReception(Date dacDateReception) {
 		this.dacDateReception = dacDateReception;
 	}
 
-	@Column(name = "DAC_STATUT_RETOUR")
-	public Serializable getDacStatutRetour() {
+	@Column(name = "DAC_STATUT_RETOUR", length = 2)
+	public String getDacStatutRetour() {
 		return this.dacStatutRetour;
 	}
 
-	public void setDacStatutRetour(Serializable dacStatutRetour) {
+	public void setDacStatutRetour(String dacStatutRetour) {
 		this.dacStatutRetour = dacStatutRetour;
 	}
 
-	@Column(name = "DAC_MENTION")
-	public Serializable getDacMention() {
+	@Column(name = "DAC_MENTION", length = 100)
+	public String getDacMention() {
 		return this.dacMention;
 	}
 
-	public void setDacMention(Serializable dacMention) {
+	public void setDacMention(String dacMention) {
 		this.dacMention = dacMention;
 	}
 

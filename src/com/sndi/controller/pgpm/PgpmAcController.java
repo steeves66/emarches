@@ -1141,6 +1141,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
              	     affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
              	     affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
              	     affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+             	     affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
              	     iservice.addObject(affichagePgpm);
 		      				
 
@@ -1217,8 +1218,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            	          affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
            	          affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
            	          affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-           	          String recherche = detailPlan.getGpgObjet()+""+detailPlan.getGpgCode()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgPartiePmePmi()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getGpgStatutRetour()+""+detailPlan.getTTypeMarche().getTymCode()+""+detailPlan.getTPlanGeneral().getPlgId()+""+detailPlan.getGpgAgpId()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
-       	              affichagePgpm.setAffGpgRecherche(recherche);
+           	          affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
+           	          //String recherche = detailPlan.getGpgObjet()+""+detailPlan.getGpgCode()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgPartiePmePmi()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getGpgStatutRetour()+""+detailPlan.getTTypeMarche().getTymCode()+""+detailPlan.getTPlanGeneral().getPlgId()+""+detailPlan.getGpgAgpId()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
+       	              //affichagePgpm.setAffGpgRecherche(recherche);
            	          iservice.addObject(affichagePgpm);
        	 
 
@@ -1313,6 +1315,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	          affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                  	          affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                  	          affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+                 	         affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                  	          iservice.addObject(affichagePgpm);
                  	          
                  	          //Insertion dans T_Financement_PGPM
@@ -1410,8 +1413,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	                           affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                	                           affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                	                           affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-               	                           String recherche = detailPlan.getGpgObjet()+""+detailPlan.getGpgCode()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgPartiePmePmi()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getGpgStatutRetour()+""+detailPlan.getTTypeMarche().getTymCode()+""+detailPlan.getTPlanGeneral().getPlgId()+""+detailPlan.getGpgAgpId()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
-           	                               affichagePgpm.setAffGpgRecherche(recherche);
+               	                        affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
+               	                           //String recherche = detailPlan.getGpgObjet()+""+detailPlan.getGpgCode()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgPartiePmePmi()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getGpgStatutRetour()+""+detailPlan.getTTypeMarche().getTymCode()+""+detailPlan.getTPlanGeneral().getPlgId()+""+detailPlan.getGpgAgpId()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
+           	                               //affichagePgpm.setAffGpgRecherche(recherche);
                	                           iservice.addObject(affichagePgpm);
                	                           
                	                           
@@ -2627,12 +2631,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     		 recupModePassation = new VModePassationPn();
     		 newFinancement = new TFinancementPgpm();
     		 listeFinancement = new ArrayList<TFinancementPgpm>();
+    		 listeFinancementAgpm = new ArrayList<TFinancement>();
     		 etatDossier = false;
     		 //plan = new TPlanGeneral(); 
+    		 controleController.btn_edit_pgpm = false;
     		 devCode ="";
     		 baiCode ="";
     		 souCode=""; 
-    	 }
+    	 } 
     	 
     	 
     	 
@@ -2830,6 +2836,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeMode();
 					chargeSourceFinance();
 					chargeAgpm();
+					controleController.btn_save_pgpm =true ;
+					
 				break;
 				case "pgpm3":
 					editForm();

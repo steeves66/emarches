@@ -46,6 +46,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	private Date gpgDateValAc;
 	private Date gpgDateValCpmp;
 	private Date gpgDateValDmp;
+	private String gpgLibFin;
 	private Set<TDossierPlanGeneral> TDossierPlanGenerals = new HashSet<TDossierPlanGeneral>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 	private Set<TFinancementPgpm> TFinancementPgpms = new HashSet<TFinancementPgpm>(0);
@@ -71,7 +72,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	public TDetailPlanGeneral(long gpgId, TModePassation TModePassation, TPlanGeneral TPlanGeneral, TAgpm TAgpm,
 			TStatut TStatut, TTypeMarche TTypeMarche, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
 			Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao,
-			String gpgActeurSaisie, String gpgStatutRetour,Date gpgDateSaisie, String gpgStrCode,Date gpgDateValAc,
+			String gpgActeurSaisie, String gpgStatutRetour,Date gpgDateSaisie, String gpgStrCode,Date gpgDateValAc,String gpgLibFin,
 			Date gpgDateValCpmp, Date gpgDateValDmp,Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TFinancementPgpm> TFinancementPgpms, Set<THistoPlanGeneral> THistoPlanGenerals) {
 		this.gpgId = gpgId;
@@ -95,6 +96,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgDateValAc = gpgDateValAc;
 		this.gpgDateValCpmp = gpgDateValCpmp;
 		this.gpgDateValDmp = gpgDateValDmp;
+		this.gpgLibFin = gpgLibFin;
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
 		this.TDetailPlanPassations = TDetailPlanPassations;
 		this.TFinancementPgpms = TFinancementPgpms;
@@ -300,6 +302,15 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setGpgDateValDmp(Date gpgDateValDmp) {
 		this.gpgDateValDmp = gpgDateValDmp;
+	}
+	
+	@Column(name = "GPG_LIB_FIN", length = 200)
+	public String getGpgLibFin() {
+		return this.gpgLibFin;
+	}
+
+	public void setGpgLibFin(String gpgLibFin) {
+		this.gpgLibFin = gpgLibFin;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDetailPlanGeneral")

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,9 +20,9 @@ import javax.persistence.Table;
 public class TPlanPassation implements java.io.Serializable {
 
 	private long plpId;
-	private TFonction TFonction;
-	private TGestion TGestion;
 	private TStructure TStructure;
+	private TGestions TGestions;
+	private TFonction TFonction;
 	private String plpCode;
 	private String plpLibelle;
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
@@ -31,19 +31,19 @@ public class TPlanPassation implements java.io.Serializable {
 	public TPlanPassation() {
 	}
 
-	public TPlanPassation(long plpId, TFonction TFonction, TGestion TGestion, TStructure TStructure) {
+	public TPlanPassation(long plpId, TStructure TStructure, TGestions TGestions, TFonction TFonction) {
 		this.plpId = plpId;
-		this.TFonction = TFonction;
-		this.TGestion = TGestion;
 		this.TStructure = TStructure;
+		this.TGestions = TGestions;
+		this.TFonction = TFonction;
 	}
 
-	public TPlanPassation(long plpId, TFonction TFonction, TGestion TGestion, TStructure TStructure, String plpCode,
+	public TPlanPassation(long plpId, TStructure TStructure, TGestions TGestions, TFonction TFonction, String plpCode,
 			String plpLibelle, Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.plpId = plpId;
-		this.TFonction = TFonction;
-		this.TGestion = TGestion;
 		this.TStructure = TStructure;
+		this.TGestions = TGestions;
+		this.TFonction = TFonction;
 		this.plpCode = plpCode;
 		this.plpLibelle = plpLibelle;
 		this.TAffichagePpms = TAffichagePpms;
@@ -62,26 +62,6 @@ public class TPlanPassation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLP_FON_COD", nullable = false)
-	public TFonction getTFonction() {
-		return this.TFonction;
-	}
-
-	public void setTFonction(TFonction TFonction) {
-		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLP_GES_CODE", nullable = false)
-	public TGestion getTGestion() {
-		return this.TGestion;
-	}
-
-	public void setTGestion(TGestion TGestion) {
-		this.TGestion = TGestion;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PLP_STR_CODE", nullable = false)
 	public TStructure getTStructure() {
 		return this.TStructure;
@@ -89,6 +69,26 @@ public class TPlanPassation implements java.io.Serializable {
 
 	public void setTStructure(TStructure TStructure) {
 		this.TStructure = TStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PLP_GES_CODE", nullable = false)
+	public TGestions getTGestions() {
+		return this.TGestions;
+	}
+
+	public void setTGestions(TGestions TGestions) {
+		this.TGestions = TGestions;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PLP_FON_COD", nullable = false)
+	public TFonction getTFonction() {
+		return this.TFonction;
+	}
+
+	public void setTFonction(TFonction TFonction) {
+		this.TFonction = TFonction;
 	}
 
 	@Column(name = "PLP_CODE", length = 50)

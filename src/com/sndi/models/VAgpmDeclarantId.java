@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -15,6 +15,7 @@ public class VAgpmDeclarantId implements java.io.Serializable {
 	private String agpStrCode;
 	private long agpProId;
 	private String agpActeurSaisie;
+	private String agpCode;
 	private String decPersNomPrenom;
 	private String decOrganExecLibelle;
 	private String decPersFonction;
@@ -42,14 +43,15 @@ public class VAgpmDeclarantId implements java.io.Serializable {
 	}
 
 	public VAgpmDeclarantId(long agpId, String agpFonCod, String agpStrCode, long agpProId, String agpActeurSaisie,
-			String decPersNomPrenom, String decOrganExecLibelle, String decPersFonction, String decTelephone,
-			String decNumeroPorte, String decOrganExecAdresse, String decLocalisation, String decEmail, String decBp,
-			String decCel, Long agpDecId) {
+			String agpCode, String decPersNomPrenom, String decOrganExecLibelle, String decPersFonction,
+			String decTelephone, String decNumeroPorte, String decOrganExecAdresse, String decLocalisation,
+			String decEmail, String decBp, String decCel, Long agpDecId) {
 		this.agpId = agpId;
 		this.agpFonCod = agpFonCod;
 		this.agpStrCode = agpStrCode;
 		this.agpProId = agpProId;
 		this.agpActeurSaisie = agpActeurSaisie;
+		this.agpCode = agpCode;
 		this.decPersNomPrenom = decPersNomPrenom;
 		this.decOrganExecLibelle = decOrganExecLibelle;
 		this.decPersFonction = decPersFonction;
@@ -72,7 +74,7 @@ public class VAgpmDeclarantId implements java.io.Serializable {
 		this.agpId = agpId;
 	}
 
-	@Column(name = "AGP_FON_COD", nullable = false, length = 12)
+	@Column(name = "AGP_FON_COD", nullable = false, length = 20)
 	public String getAgpFonCod() {
 		return this.agpFonCod;
 	}
@@ -81,7 +83,7 @@ public class VAgpmDeclarantId implements java.io.Serializable {
 		this.agpFonCod = agpFonCod;
 	}
 
-	@Column(name = "AGP_STR_CODE", nullable = false, length = 3)
+	@Column(name = "AGP_STR_CODE", nullable = false, length = 20)
 	public String getAgpStrCode() {
 		return this.agpStrCode;
 	}
@@ -106,6 +108,15 @@ public class VAgpmDeclarantId implements java.io.Serializable {
 
 	public void setAgpActeurSaisie(String agpActeurSaisie) {
 		this.agpActeurSaisie = agpActeurSaisie;
+	}
+
+	@Column(name = "AGP_CODE", length = 50)
+	public String getAgpCode() {
+		return this.agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
 	}
 
 	@Column(name = "DEC_PERS_NOM_PRENOM", length = 500)
@@ -225,6 +236,8 @@ public class VAgpmDeclarantId implements java.io.Serializable {
 				&& ((this.getAgpActeurSaisie() == castOther.getAgpActeurSaisie())
 						|| (this.getAgpActeurSaisie() != null && castOther.getAgpActeurSaisie() != null
 								&& this.getAgpActeurSaisie().equals(castOther.getAgpActeurSaisie())))
+				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
+						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())))
 				&& ((this.getDecPersNomPrenom() == castOther.getDecPersNomPrenom())
 						|| (this.getDecPersNomPrenom() != null && castOther.getDecPersNomPrenom() != null
 								&& this.getDecPersNomPrenom().equals(castOther.getDecPersNomPrenom())))
@@ -264,6 +277,7 @@ public class VAgpmDeclarantId implements java.io.Serializable {
 		result = 37 * result + (getAgpStrCode() == null ? 0 : this.getAgpStrCode().hashCode());
 		result = 37 * result + (int) this.getAgpProId();
 		result = 37 * result + (getAgpActeurSaisie() == null ? 0 : this.getAgpActeurSaisie().hashCode());
+		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
 		result = 37 * result + (getDecPersNomPrenom() == null ? 0 : this.getDecPersNomPrenom().hashCode());
 		result = 37 * result + (getDecOrganExecLibelle() == null ? 0 : this.getDecOrganExecLibelle().hashCode());
 		result = 37 * result + (getDecPersFonction() == null ? 0 : this.getDecPersFonction().hashCode());

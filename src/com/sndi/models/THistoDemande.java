@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,9 +20,9 @@ import javax.persistence.TemporalType;
 public class THistoDemande implements java.io.Serializable {
 
 	private short hdmNum;
+	private TStatut TStatut;
 	private TDemande TDemande;
 	private TFonction TFonction;
-	private TStatut TStatut;
 	private TOperateur TOperateur;
 	private Date hdmDteSaisi;
 
@@ -34,12 +34,12 @@ public class THistoDemande implements java.io.Serializable {
 		this.TDemande = TDemande;
 	}
 
-	public THistoDemande(short hdmNum, TDemande TDemande, TFonction TFonction, TStatut TStatut, TOperateur TOperateur,
+	public THistoDemande(short hdmNum, TStatut TStatut, TDemande TDemande, TFonction TFonction, TOperateur TOperateur,
 			Date hdmDteSaisi) {
 		this.hdmNum = hdmNum;
+		this.TStatut = TStatut;
 		this.TDemande = TDemande;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
 		this.hdmDteSaisi = hdmDteSaisi;
 	}
@@ -53,6 +53,16 @@ public class THistoDemande implements java.io.Serializable {
 
 	public void setHdmNum(short hdmNum) {
 		this.hdmNum = hdmNum;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HDM_STA_CODE")
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -73,16 +83,6 @@ public class THistoDemande implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HDM_STA_CODE")
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

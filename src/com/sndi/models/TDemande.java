@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,10 +24,10 @@ import javax.persistence.TemporalType;
 public class TDemande implements java.io.Serializable {
 
 	private BigDecimal demNum;
-	private TFonction TFonction;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TTypeDemande TTypeDemande;
+	private TFonction TFonction;
 	private TOperateur TOperateur;
 	private String demObjet;
 	private String demMotif;
@@ -47,15 +47,15 @@ public class TDemande implements java.io.Serializable {
 		this.demNum = demNum;
 	}
 
-	public TDemande(BigDecimal demNum, TFonction TFonction, TStatut TStatut, TStructure TStructure,
-			TTypeDemande TTypeDemande, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,
+	public TDemande(BigDecimal demNum, TStatut TStatut, TStructure TStructure, TTypeDemande TTypeDemande,
+			TFonction TFonction, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,
 			String demRefAvisMin, String demRef, Short demGesCode, String demRefActIni,
 			Set<THistoDemande> THistoDemandes, Set<TDetailDemandes> TDetailDemandeses, Set<TAvisPresel> TAvisPresels) {
 		this.demNum = demNum;
-		this.TFonction = TFonction;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TTypeDemande = TTypeDemande;
+		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
 		this.demObjet = demObjet;
 		this.demMotif = demMotif;
@@ -78,16 +78,6 @@ public class TDemande implements java.io.Serializable {
 
 	public void setDemNum(BigDecimal demNum) {
 		this.demNum = demNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DEM_FON_CODE_AC")
-	public TFonction getTFonction() {
-		return this.TFonction;
-	}
-
-	public void setTFonction(TFonction TFonction) {
-		this.TFonction = TFonction;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -118,6 +108,16 @@ public class TDemande implements java.io.Serializable {
 
 	public void setTTypeDemande(TTypeDemande TTypeDemande) {
 		this.TTypeDemande = TTypeDemande;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DEM_FON_CODE_AC")
+	public TFonction getTFonction() {
+		return this.TFonction;
+	}
+
+	public void setTFonction(TFonction TFonction) {
+		this.TFonction = TFonction;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,10 +23,10 @@ import javax.persistence.TemporalType;
 public class TDetailPlanGeneral implements java.io.Serializable {
 
 	private long gpgId;
-	private TPlanGeneral TPlanGeneral;
 	private TStatut TStatut;
 	private TTypeMarche TTypeMarche;
 	private TModePassation TModePassation;
+	private TPlanGeneral TPlanGeneral;
 	private Long gpgAgpId;
 	private String gpgTypePlan;
 	private String gpgCode;
@@ -43,6 +43,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	private Date gpgDateValAc;
 	private Date gpgDateValCpmp;
 	private Date gpgDateValDmp;
+	private String gpgLibFin;
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
 	private Set<TDossierPlanGeneral> TDossierPlanGenerals = new HashSet<TDossierPlanGeneral>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
@@ -52,28 +53,28 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	public TDetailPlanGeneral() {
 	}
 
-	public TDetailPlanGeneral(long gpgId, TPlanGeneral TPlanGeneral, TStatut TStatut, TTypeMarche TTypeMarche,
-			TModePassation TModePassation, String gpgTypePlan) {
+	public TDetailPlanGeneral(long gpgId, TStatut TStatut, TTypeMarche TTypeMarche, TModePassation TModePassation,
+			TPlanGeneral TPlanGeneral, String gpgTypePlan) {
 		this.gpgId = gpgId;
-		this.TPlanGeneral = TPlanGeneral;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
 		this.TModePassation = TModePassation;
+		this.TPlanGeneral = TPlanGeneral;
 		this.gpgTypePlan = gpgTypePlan;
 	}
 
-	public TDetailPlanGeneral(long gpgId, TPlanGeneral TPlanGeneral, TStatut TStatut, TTypeMarche TTypeMarche,
-			TModePassation TModePassation, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
+	public TDetailPlanGeneral(long gpgId, TStatut TStatut, TTypeMarche TTypeMarche, TModePassation TModePassation,
+			TPlanGeneral TPlanGeneral, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
 			Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao,
 			String gpgActeurSaisie, String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, Date gpgDateValAc,
-			Date gpgDateValCpmp, Date gpgDateValDmp, Set<TAffichagePpm> TAffichagePpms,
+			Date gpgDateValCpmp, Date gpgDateValDmp, String gpgLibFin, Set<TAffichagePpm> TAffichagePpms,
 			Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TFinancementPgpm> TFinancementPgpms, Set<THistoPlanGeneral> THistoPlanGenerals) {
 		this.gpgId = gpgId;
-		this.TPlanGeneral = TPlanGeneral;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
 		this.TModePassation = TModePassation;
+		this.TPlanGeneral = TPlanGeneral;
 		this.gpgAgpId = gpgAgpId;
 		this.gpgTypePlan = gpgTypePlan;
 		this.gpgCode = gpgCode;
@@ -90,6 +91,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgDateValAc = gpgDateValAc;
 		this.gpgDateValCpmp = gpgDateValCpmp;
 		this.gpgDateValDmp = gpgDateValDmp;
+		this.gpgLibFin = gpgLibFin;
 		this.TAffichagePpms = TAffichagePpms;
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
 		this.TDetailPlanPassations = TDetailPlanPassations;
@@ -106,16 +108,6 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setGpgId(long gpgId) {
 		this.gpgId = gpgId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "GPG_PLG_ID", nullable = false)
-	public TPlanGeneral getTPlanGeneral() {
-		return this.TPlanGeneral;
-	}
-
-	public void setTPlanGeneral(TPlanGeneral TPlanGeneral) {
-		this.TPlanGeneral = TPlanGeneral;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -146,6 +138,16 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setTModePassation(TModePassation TModePassation) {
 		this.TModePassation = TModePassation;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "GPG_PLG_ID", nullable = false)
+	public TPlanGeneral getTPlanGeneral() {
+		return this.TPlanGeneral;
+	}
+
+	public void setTPlanGeneral(TPlanGeneral TPlanGeneral) {
+		this.TPlanGeneral = TPlanGeneral;
 	}
 
 	@Column(name = "GPG_AGP_ID", precision = 10, scale = 0)
@@ -295,6 +297,15 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setGpgDateValDmp(Date gpgDateValDmp) {
 		this.gpgDateValDmp = gpgDateValDmp;
+	}
+
+	@Column(name = "GPG_LIB_FIN", length = 200)
+	public String getGpgLibFin() {
+		return this.gpgLibFin;
+	}
+
+	public void setGpgLibFin(String gpgLibFin) {
+		this.gpgLibFin = gpgLibFin;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")

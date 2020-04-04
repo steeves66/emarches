@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,11 +24,11 @@ import javax.persistence.TemporalType;
 public class TLotAao implements java.io.Serializable {
 
 	private BigDecimal laaId;
-	private TAvisAppelOffre TAvisAppelOffre;
 	private TDacSpecs TDacSpecs;
 	private TFonction TFonctionByLaaFonCodCpmp;
 	private TFonction TFonctionByLaaFonCodSaisi;
 	private TLBudgets TLBudgets;
+	private TAvisAppelOffre TAvisAppelOffre;
 	private String laaObjet;
 	private String laaObservation;
 	private BigDecimal laaMtCaut;
@@ -52,18 +52,18 @@ public class TLotAao implements java.io.Serializable {
 		this.laaId = laaId;
 	}
 
-	public TLotAao(BigDecimal laaId, TAvisAppelOffre TAvisAppelOffre, TDacSpecs TDacSpecs,
-			TFonction TFonctionByLaaFonCodCpmp, TFonction TFonctionByLaaFonCodSaisi, TLBudgets TLBudgets,
-			String laaObjet, String laaObservation, BigDecimal laaMtCaut, BigDecimal laaMtEst, Date laaDteSaisi,
-			String laaStaCode, String laaOpeMatricule, String laaLieuExe, BigDecimal laaNum, BigDecimal laaCoutLot,
-			String laaAjoutPanier, Set<TDetailVente> TDetailVentes, Set<TDetailDemandes> TDetailDemandeses,
-			Set<TDetOffres> TDetOffreses, Set<TPiecesOffres> TPiecesOffreses) {
+	public TLotAao(BigDecimal laaId, TDacSpecs TDacSpecs, TFonction TFonctionByLaaFonCodCpmp,
+			TFonction TFonctionByLaaFonCodSaisi, TLBudgets TLBudgets, TAvisAppelOffre TAvisAppelOffre, String laaObjet,
+			String laaObservation, BigDecimal laaMtCaut, BigDecimal laaMtEst, Date laaDteSaisi, String laaStaCode,
+			String laaOpeMatricule, String laaLieuExe, BigDecimal laaNum, BigDecimal laaCoutLot, String laaAjoutPanier,
+			Set<TDetailVente> TDetailVentes, Set<TDetailDemandes> TDetailDemandeses, Set<TDetOffres> TDetOffreses,
+			Set<TPiecesOffres> TPiecesOffreses) {
 		this.laaId = laaId;
-		this.TAvisAppelOffre = TAvisAppelOffre;
 		this.TDacSpecs = TDacSpecs;
 		this.TFonctionByLaaFonCodCpmp = TFonctionByLaaFonCodCpmp;
 		this.TFonctionByLaaFonCodSaisi = TFonctionByLaaFonCodSaisi;
 		this.TLBudgets = TLBudgets;
+		this.TAvisAppelOffre = TAvisAppelOffre;
 		this.laaObjet = laaObjet;
 		this.laaObservation = laaObservation;
 		this.laaMtCaut = laaMtCaut;
@@ -90,16 +90,6 @@ public class TLotAao implements java.io.Serializable {
 
 	public void setLaaId(BigDecimal laaId) {
 		this.laaId = laaId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LAA_AAO_CODE")
-	public TAvisAppelOffre getTAvisAppelOffre() {
-		return this.TAvisAppelOffre;
-	}
-
-	public void setTAvisAppelOffre(TAvisAppelOffre TAvisAppelOffre) {
-		this.TAvisAppelOffre = TAvisAppelOffre;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -140,6 +130,16 @@ public class TLotAao implements java.io.Serializable {
 
 	public void setTLBudgets(TLBudgets TLBudgets) {
 		this.TLBudgets = TLBudgets;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LAA_AAO_CODE")
+	public TAvisAppelOffre getTAvisAppelOffre() {
+		return this.TAvisAppelOffre;
+	}
+
+	public void setTAvisAppelOffre(TAvisAppelOffre TAvisAppelOffre) {
+		this.TAvisAppelOffre = TAvisAppelOffre;
 	}
 
 	@Column(name = "LAA_OBJET", length = 1000)

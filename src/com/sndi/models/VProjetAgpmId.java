@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -26,6 +26,7 @@ public class VProjetAgpmId implements java.io.Serializable {
 	private String agpCommentaire;
 	private String agpStrCode;
 	private String agpActeurSaisie;
+	private String agpCode;
 	private Long regId;
 	private String regLibelleLong;
 	private String regLibelleCourt;
@@ -59,10 +60,10 @@ public class VProjetAgpmId implements java.io.Serializable {
 	public VProjetAgpmId(long proId, String proTitre, String proTypeProjet, String agpTypeDao, String agpStaCode,
 			String agpActif, BigDecimal proMontantTotCfa, String proDescription, long agpId, Long agpDecId,
 			String agpModePassation, short agpGesCode, String agpCommentaire, String agpStrCode, String agpActeurSaisie,
-			Long regId, String regLibelleLong, String regLibelleCourt, String minLibelle, String minLibelleCourt,
-			String baiLibelle, String devLibelle, String souLibelle, String finNumeroAccord, BigDecimal finMontantCfa,
-			BigDecimal finMontantDevise, String fonLibelle, String strCode, String strLibelleCourt,
-			String strLibelleLong) {
+			String agpCode, Long regId, String regLibelleLong, String regLibelleCourt, String minLibelle,
+			String minLibelleCourt, String baiLibelle, String devLibelle, String souLibelle, String finNumeroAccord,
+			BigDecimal finMontantCfa, BigDecimal finMontantDevise, String fonLibelle, String strCode,
+			String strLibelleCourt, String strLibelleLong) {
 		this.proId = proId;
 		this.proTitre = proTitre;
 		this.proTypeProjet = proTypeProjet;
@@ -78,6 +79,7 @@ public class VProjetAgpmId implements java.io.Serializable {
 		this.agpCommentaire = agpCommentaire;
 		this.agpStrCode = agpStrCode;
 		this.agpActeurSaisie = agpActeurSaisie;
+		this.agpCode = agpCode;
 		this.regId = regId;
 		this.regLibelleLong = regLibelleLong;
 		this.regLibelleCourt = regLibelleCourt;
@@ -212,7 +214,7 @@ public class VProjetAgpmId implements java.io.Serializable {
 		this.agpCommentaire = agpCommentaire;
 	}
 
-	@Column(name = "AGP_STR_CODE", nullable = false, length = 3)
+	@Column(name = "AGP_STR_CODE", nullable = false, length = 20)
 	public String getAgpStrCode() {
 		return this.agpStrCode;
 	}
@@ -228,6 +230,15 @@ public class VProjetAgpmId implements java.io.Serializable {
 
 	public void setAgpActeurSaisie(String agpActeurSaisie) {
 		this.agpActeurSaisie = agpActeurSaisie;
+	}
+
+	@Column(name = "AGP_CODE", length = 50)
+	public String getAgpCode() {
+		return this.agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
 	}
 
 	@Column(name = "REG_ID", precision = 10, scale = 0)
@@ -407,6 +418,8 @@ public class VProjetAgpmId implements java.io.Serializable {
 				&& ((this.getAgpActeurSaisie() == castOther.getAgpActeurSaisie())
 						|| (this.getAgpActeurSaisie() != null && castOther.getAgpActeurSaisie() != null
 								&& this.getAgpActeurSaisie().equals(castOther.getAgpActeurSaisie())))
+				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
+						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())))
 				&& ((this.getRegId() == castOther.getRegId()) || (this.getRegId() != null
 						&& castOther.getRegId() != null && this.getRegId().equals(castOther.getRegId())))
 				&& ((this.getRegLibelleLong() == castOther.getRegLibelleLong())
@@ -465,6 +478,7 @@ public class VProjetAgpmId implements java.io.Serializable {
 		result = 37 * result + (getAgpCommentaire() == null ? 0 : this.getAgpCommentaire().hashCode());
 		result = 37 * result + (getAgpStrCode() == null ? 0 : this.getAgpStrCode().hashCode());
 		result = 37 * result + (getAgpActeurSaisie() == null ? 0 : this.getAgpActeurSaisie().hashCode());
+		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
 		result = 37 * result + (getRegId() == null ? 0 : this.getRegId().hashCode());
 		result = 37 * result + (getRegLibelleLong() == null ? 0 : this.getRegLibelleLong().hashCode());
 		result = 37 * result + (getRegLibelleCourt() == null ? 0 : this.getRegLibelleCourt().hashCode());

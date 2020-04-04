@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,11 +18,11 @@ import javax.persistence.Table;
 public class TDetailAgpm implements java.io.Serializable {
 
 	private BigDecimal tdaId;
-	private TAgpm TAgpm;
 	private TContenuAgpm TContenuAgpm;
+	private TAgpm TAgpm;
+	private String tdaCommentaire;
 	private String tdaNumOrdre;
 	private String tdaTitre;
-	private String tdaCommentaire;
 
 	public TDetailAgpm() {
 	}
@@ -32,14 +32,14 @@ public class TDetailAgpm implements java.io.Serializable {
 		this.TAgpm = TAgpm;
 	}
 
-	public TDetailAgpm(BigDecimal tdaId, TAgpm TAgpm, TContenuAgpm TContenuAgpm, String tdaNumOrdre, String tdaTitre,
-			String tdaCommentaire) {
+	public TDetailAgpm(BigDecimal tdaId, TContenuAgpm TContenuAgpm, TAgpm TAgpm, String tdaCommentaire,
+			String tdaNumOrdre, String tdaTitre) {
 		this.tdaId = tdaId;
-		this.TAgpm = TAgpm;
 		this.TContenuAgpm = TContenuAgpm;
+		this.TAgpm = TAgpm;
+		this.tdaCommentaire = tdaCommentaire;
 		this.tdaNumOrdre = tdaNumOrdre;
 		this.tdaTitre = tdaTitre;
-		this.tdaCommentaire = tdaCommentaire;
 	}
 
 	@Id
@@ -54,6 +54,16 @@ public class TDetailAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "TDA_TCA_CODE")
+	public TContenuAgpm getTContenuAgpm() {
+		return this.TContenuAgpm;
+	}
+
+	public void setTContenuAgpm(TContenuAgpm TContenuAgpm) {
+		this.TContenuAgpm = TContenuAgpm;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "TDA_AGP_ID", nullable = false)
 	public TAgpm getTAgpm() {
 		return this.TAgpm;
@@ -63,14 +73,13 @@ public class TDetailAgpm implements java.io.Serializable {
 		this.TAgpm = TAgpm;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TDA_TCA_CODE")
-	public TContenuAgpm getTContenuAgpm() {
-		return this.TContenuAgpm;
+	@Column(name = "TDA_COMMENTAIRE", length = 4000)
+	public String getTdaCommentaire() {
+		return this.tdaCommentaire;
 	}
 
-	public void setTContenuAgpm(TContenuAgpm TContenuAgpm) {
-		this.TContenuAgpm = TContenuAgpm;
+	public void setTdaCommentaire(String tdaCommentaire) {
+		this.tdaCommentaire = tdaCommentaire;
 	}
 
 	@Column(name = "TDA_NUM_ORDRE", length = 3)
@@ -89,15 +98,6 @@ public class TDetailAgpm implements java.io.Serializable {
 
 	public void setTdaTitre(String tdaTitre) {
 		this.tdaTitre = tdaTitre;
-	}
-
-	@Column(name = "TDA_COMMENTAIRE", length = 4000)
-	public String getTdaCommentaire() {
-		return this.tdaCommentaire;
-	}
-
-	public void setTdaCommentaire(String tdaCommentaire) {
-		this.tdaCommentaire = tdaCommentaire;
 	}
 
 }

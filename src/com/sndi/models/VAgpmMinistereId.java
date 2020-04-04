@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -23,6 +23,7 @@ public class VAgpmMinistereId implements java.io.Serializable {
 	private String agpActif;
 	private String agpStatutRetour;
 	private String agpActeurSaisie;
+	private String agpCode;
 	private String minLibelle;
 
 	public VAgpmMinistereId() {
@@ -40,7 +41,7 @@ public class VAgpmMinistereId implements java.io.Serializable {
 
 	public VAgpmMinistereId(long agpId, String agpStrCode, String agpFonCod, short agpGesCode, String agpStaCode,
 			long agpProId, Long agpDecId, String agpCommentaire, String agpTypeDao, String agpModePassation,
-			String agpActif, String agpStatutRetour, String agpActeurSaisie, String minLibelle) {
+			String agpActif, String agpStatutRetour, String agpActeurSaisie, String agpCode, String minLibelle) {
 		this.agpId = agpId;
 		this.agpStrCode = agpStrCode;
 		this.agpFonCod = agpFonCod;
@@ -54,6 +55,7 @@ public class VAgpmMinistereId implements java.io.Serializable {
 		this.agpActif = agpActif;
 		this.agpStatutRetour = agpStatutRetour;
 		this.agpActeurSaisie = agpActeurSaisie;
+		this.agpCode = agpCode;
 		this.minLibelle = minLibelle;
 	}
 
@@ -66,7 +68,7 @@ public class VAgpmMinistereId implements java.io.Serializable {
 		this.agpId = agpId;
 	}
 
-	@Column(name = "AGP_STR_CODE", nullable = false, length = 3)
+	@Column(name = "AGP_STR_CODE", nullable = false, length = 20)
 	public String getAgpStrCode() {
 		return this.agpStrCode;
 	}
@@ -75,7 +77,7 @@ public class VAgpmMinistereId implements java.io.Serializable {
 		this.agpStrCode = agpStrCode;
 	}
 
-	@Column(name = "AGP_FON_COD", nullable = false, length = 12)
+	@Column(name = "AGP_FON_COD", nullable = false, length = 20)
 	public String getAgpFonCod() {
 		return this.agpFonCod;
 	}
@@ -174,6 +176,15 @@ public class VAgpmMinistereId implements java.io.Serializable {
 		this.agpActeurSaisie = agpActeurSaisie;
 	}
 
+	@Column(name = "AGP_CODE", length = 50)
+	public String getAgpCode() {
+		return this.agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
+	}
+
 	@Column(name = "MIN_LIBELLE", length = 1000)
 	public String getMinLibelle() {
 		return this.minLibelle;
@@ -219,6 +230,8 @@ public class VAgpmMinistereId implements java.io.Serializable {
 				&& ((this.getAgpActeurSaisie() == castOther.getAgpActeurSaisie())
 						|| (this.getAgpActeurSaisie() != null && castOther.getAgpActeurSaisie() != null
 								&& this.getAgpActeurSaisie().equals(castOther.getAgpActeurSaisie())))
+				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
+						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())))
 				&& ((this.getMinLibelle() == castOther.getMinLibelle())
 						|| (this.getMinLibelle() != null && castOther.getMinLibelle() != null
 								&& this.getMinLibelle().equals(castOther.getMinLibelle())));
@@ -240,6 +253,7 @@ public class VAgpmMinistereId implements java.io.Serializable {
 		result = 37 * result + (getAgpActif() == null ? 0 : this.getAgpActif().hashCode());
 		result = 37 * result + (getAgpStatutRetour() == null ? 0 : this.getAgpStatutRetour().hashCode());
 		result = 37 * result + (getAgpActeurSaisie() == null ? 0 : this.getAgpActeurSaisie().hashCode());
+		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
 		result = 37 * result + (getMinLibelle() == null ? 0 : this.getMinLibelle().hashCode());
 		return result;
 	}

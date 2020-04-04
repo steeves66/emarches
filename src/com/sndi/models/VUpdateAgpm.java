@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -86,8 +86,8 @@ public class VUpdateAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "staLibelleCourt", column = @Column(name = "STA_LIBELLE_COURT", length = 500)),
 			@AttributeOverride(name = "staLibelleLong", column = @Column(name = "STA_LIBELLE_LONG", length = 1000)),
 			@AttributeOverride(name = "agpId", column = @Column(name = "AGP_ID", nullable = false, precision = 10, scale = 0)),
-			@AttributeOverride(name = "agpStrCode", column = @Column(name = "AGP_STR_CODE", nullable = false, length = 3)),
-			@AttributeOverride(name = "agpFonCod", column = @Column(name = "AGP_FON_COD", nullable = false, length = 12)),
+			@AttributeOverride(name = "agpStrCode", column = @Column(name = "AGP_STR_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "agpFonCod", column = @Column(name = "AGP_FON_COD", nullable = false, length = 20)),
 			@AttributeOverride(name = "agpGesCode", column = @Column(name = "AGP_GES_CODE", nullable = false, precision = 4, scale = 0)),
 			@AttributeOverride(name = "agpStaCode", column = @Column(name = "AGP_STA_CODE", nullable = false, length = 3)),
 			@AttributeOverride(name = "agpProId", column = @Column(name = "AGP_PRO_ID", nullable = false, precision = 10, scale = 0)),
@@ -101,6 +101,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "agpDateValAc", column = @Column(name = "AGP_DATE_VAL_AC", length = 7)),
 			@AttributeOverride(name = "agpDateValCpmp", column = @Column(name = "AGP_DATE_VAL_CPMP", length = 7)),
 			@AttributeOverride(name = "agpDateValDmp", column = @Column(name = "AGP_DATE_VAL_DMP", length = 7)),
+			@AttributeOverride(name = "agpCode", column = @Column(name = "AGP_CODE", length = 50)),
 			@AttributeOverride(name = "baiCode", column = @Column(name = "BAI_CODE", nullable = false, length = 5)),
 			@AttributeOverride(name = "baiLibelle", column = @Column(name = "BAI_LIBELLE", nullable = false, length = 1000)),
 			@AttributeOverride(name = "baiAdresse", column = @Column(name = "BAI_ADRESSE", length = 500)),

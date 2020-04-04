@@ -966,7 +966,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 public void chargeDataAffecter(){
 		 getAffectationListe().clear();
 		 affectationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
-				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R","DOP")),
+				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,6 +28,7 @@ public class VAgpmFonctionId implements java.io.Serializable {
 	private Date agpDateValAc;
 	private Date agpDateValCpmp;
 	private Date agpDateValDmp;
+	private String agpCode;
 	private long finId;
 	private String finDevCode;
 	private String finBaiCode;
@@ -72,10 +73,10 @@ public class VAgpmFonctionId implements java.io.Serializable {
 	public VAgpmFonctionId(long agpId, String agpStrCode, String agpFonCod, short agpGesCode, String agpStaCode,
 			long agpProId, Long agpDecId, String agpCommentaire, String agpTypeDao, String agpModePassation,
 			String agpActif, String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp,
-			Date agpDateValDmp, long finId, String finDevCode, String finBaiCode, String finSouCode, long finProId,
-			BigDecimal finMontantCfa, BigDecimal finMontantDevise, String finNumeroAccord, String finStatut,
-			Long finAgpId, String finTypeFinance, Long finPartTresor, long proId, Long proRegId, String proCode,
-			String proTitre, String proLibelle, String proDescription, BigDecimal proMontantTotCfa,
+			Date agpDateValDmp, String agpCode, long finId, String finDevCode, String finBaiCode, String finSouCode,
+			long finProId, BigDecimal finMontantCfa, BigDecimal finMontantDevise, String finNumeroAccord,
+			String finStatut, Long finAgpId, String finTypeFinance, Long finPartTresor, long proId, Long proRegId,
+			String proCode, String proTitre, String proLibelle, String proDescription, BigDecimal proMontantTotCfa,
 			String proTypeProjet) {
 		this.agpId = agpId;
 		this.agpStrCode = agpStrCode;
@@ -93,6 +94,7 @@ public class VAgpmFonctionId implements java.io.Serializable {
 		this.agpDateValAc = agpDateValAc;
 		this.agpDateValCpmp = agpDateValCpmp;
 		this.agpDateValDmp = agpDateValDmp;
+		this.agpCode = agpCode;
 		this.finId = finId;
 		this.finDevCode = finDevCode;
 		this.finBaiCode = finBaiCode;
@@ -124,7 +126,7 @@ public class VAgpmFonctionId implements java.io.Serializable {
 		this.agpId = agpId;
 	}
 
-	@Column(name = "AGP_STR_CODE", nullable = false, length = 3)
+	@Column(name = "AGP_STR_CODE", nullable = false, length = 20)
 	public String getAgpStrCode() {
 		return this.agpStrCode;
 	}
@@ -133,7 +135,7 @@ public class VAgpmFonctionId implements java.io.Serializable {
 		this.agpStrCode = agpStrCode;
 	}
 
-	@Column(name = "AGP_FON_COD", nullable = false, length = 12)
+	@Column(name = "AGP_FON_COD", nullable = false, length = 20)
 	public String getAgpFonCod() {
 		return this.agpFonCod;
 	}
@@ -257,6 +259,15 @@ public class VAgpmFonctionId implements java.io.Serializable {
 
 	public void setAgpDateValDmp(Date agpDateValDmp) {
 		this.agpDateValDmp = agpDateValDmp;
+	}
+
+	@Column(name = "AGP_CODE", length = 50)
+	public String getAgpCode() {
+		return this.agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
 	}
 
 	@Column(name = "FIN_ID", nullable = false, precision = 10, scale = 0)
@@ -484,6 +495,8 @@ public class VAgpmFonctionId implements java.io.Serializable {
 				&& ((this.getAgpDateValDmp() == castOther.getAgpDateValDmp())
 						|| (this.getAgpDateValDmp() != null && castOther.getAgpDateValDmp() != null
 								&& this.getAgpDateValDmp().equals(castOther.getAgpDateValDmp())))
+				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
+						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())))
 				&& (this.getFinId() == castOther.getFinId())
 				&& ((this.getFinDevCode() == castOther.getFinDevCode()) || (this.getFinDevCode() != null
 						&& castOther.getFinDevCode() != null && this.getFinDevCode().equals(castOther.getFinDevCode())))
@@ -550,6 +563,7 @@ public class VAgpmFonctionId implements java.io.Serializable {
 		result = 37 * result + (getAgpDateValAc() == null ? 0 : this.getAgpDateValAc().hashCode());
 		result = 37 * result + (getAgpDateValCpmp() == null ? 0 : this.getAgpDateValCpmp().hashCode());
 		result = 37 * result + (getAgpDateValDmp() == null ? 0 : this.getAgpDateValDmp().hashCode());
+		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
 		result = 37 * result + (int) this.getFinId();
 		result = 37 * result + (getFinDevCode() == null ? 0 : this.getFinDevCode().hashCode());
 		result = 37 * result + (getFinBaiCode() == null ? 0 : this.getFinBaiCode().hashCode());

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -57,8 +57,9 @@ public class VPpmEtat implements java.io.Serializable {
 			@AttributeOverride(name = "affDppDateDaoTrans", column = @Column(name = "AFF_DPP_DATE_DAO_TRANS", length = 7)),
 			@AttributeOverride(name = "affDppDateDaoApprobDmp", column = @Column(name = "AFF_DPP_DATE_DAO_APPROB_DMP", length = 7)),
 			@AttributeOverride(name = "affDppDateDaoApprobBail", column = @Column(name = "AFF_DPP_DATE_DAO_APPROB_BAIL", length = 7)),
+			@AttributeOverride(name = "affDppInvEntre", column = @Column(name = "AFF_DPP_INV_ENTRE", length = 7)),
 			@AttributeOverride(name = "affDppApprobAno", column = @Column(name = "AFF_DPP_APPROB_ANO", length = 7)),
-			@AttributeOverride(name = "affDppInvEntre", column = @Column(name = "AFF_DPP_INV_ENTRE", length = 7)) })
+			@AttributeOverride(name = "affDppTypeFinance", column = @Column(name = "AFF_DPP_TYPE_FINANCE", length = 20)) })
 	public VPpmEtatId getId() {
 		return this.id;
 	}

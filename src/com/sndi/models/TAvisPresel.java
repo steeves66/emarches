@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 4 avr. 2020 18:03:14 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,8 +21,8 @@ import javax.persistence.TemporalType;
 public class TAvisPresel implements java.io.Serializable {
 
 	private BigDecimal aprNum;
-	private TDemande TDemande;
 	private TSoumissions TSoumissions;
+	private TDemande TDemande;
 	private TOperateur TOperateurByAprOpeMatricule;
 	private TOperateur TOperateurByAprOpeMatMotif;
 	private String aprType;
@@ -41,13 +41,13 @@ public class TAvisPresel implements java.io.Serializable {
 		this.aprNum = aprNum;
 	}
 
-	public TAvisPresel(BigDecimal aprNum, TDemande TDemande, TSoumissions TSoumissions,
+	public TAvisPresel(BigDecimal aprNum, TSoumissions TSoumissions, TDemande TDemande,
 			TOperateur TOperateurByAprOpeMatricule, TOperateur TOperateurByAprOpeMatMotif, String aprType,
 			String aprModeInvit, String aprDetailInvit, Date aprDteSaisi, Date aprDteModif, BigDecimal aprMtInit,
 			BigDecimal aprMtDef, String aprRet) {
 		this.aprNum = aprNum;
-		this.TDemande = TDemande;
 		this.TSoumissions = TSoumissions;
+		this.TDemande = TDemande;
 		this.TOperateurByAprOpeMatricule = TOperateurByAprOpeMatricule;
 		this.TOperateurByAprOpeMatMotif = TOperateurByAprOpeMatMotif;
 		this.aprType = aprType;
@@ -72,16 +72,6 @@ public class TAvisPresel implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "APR_DEM_NUM")
-	public TDemande getTDemande() {
-		return this.TDemande;
-	}
-
-	public void setTDemande(TDemande TDemande) {
-		this.TDemande = TDemande;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "APR_SOU_NCC")
 	public TSoumissions getTSoumissions() {
 		return this.TSoumissions;
@@ -89,6 +79,16 @@ public class TAvisPresel implements java.io.Serializable {
 
 	public void setTSoumissions(TSoumissions TSoumissions) {
 		this.TSoumissions = TSoumissions;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "APR_DEM_NUM")
+	public TDemande getTDemande() {
+		return this.TDemande;
+	}
+
+	public void setTDemande(TDemande TDemande) {
+		this.TDemande = TDemande;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

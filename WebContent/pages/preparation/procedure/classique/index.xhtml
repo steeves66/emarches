@@ -444,13 +444,13 @@
                         
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
-                        <p:column headerText="Type Financement" styleClass="col-sm-2" >
+                        <p:column headerText="Financement" styleClass="col-sm-2" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affGpgLibFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}"/>
+         				<h:outputText value="#{slctdTb.affGpgLibFin}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -581,13 +581,13 @@
                         
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
-                        <p:column headerText="Type Financement" styleClass="col-sm-2" >
+                        <p:column headerText="Financement" styleClass="col-sm-2" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affGpgLibFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}"/>
+         				<h:outputText value="#{slctdTb.affGpgLibFin}"/>
          				</h:panelGroup>
 				        </p:column>
 				        

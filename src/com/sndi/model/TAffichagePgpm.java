@@ -50,6 +50,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 	private Date affGpgDateValCpmp;
 	private Date affGpgDateValDmp;
 	private String affGpgTypeFinance;
+	private String affGpgLibFin;
 
 	public TAffichagePgpm() {
 	}
@@ -68,7 +69,8 @@ public class TAffichagePgpm implements java.io.Serializable {
 			TPlanGeneral TPlanGeneral, TSourceFinancement TSourceFinancement, TGestion TGestion, TStatut TStatut,
 			TTypeMarche TTypeMarche, long affGpgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgCode,
 			String affGpgObjet, Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire,
-			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,String affGpgRecherche,Date affGpgDateValAc, Date affGpgDateValCpmp, Date affGpgDateValDmp,String affGpgTypFinance) {
+			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,String affGpgRecherche,Date affGpgDateValAc, Date affGpgDateValCpmp, 
+			Date affGpgDateValDmp, String affGpgTypeFinance, String affGpgLibFin) {
 		this.affId = affId;
 		this.TStructure = TStructure;
 		this.TFonction = TFonction;
@@ -95,6 +97,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affGpgDateValCpmp = affGpgDateValCpmp;
 		this.affGpgDateValDmp = affGpgDateValDmp;
 		this.affGpgTypeFinance = affGpgTypeFinance;
+		this.affGpgLibFin = affGpgLibFin;
 	}
 
 	@Id
@@ -346,6 +349,15 @@ public class TAffichagePgpm implements java.io.Serializable {
 
 	public void setAffGpgTypeFinance(String affGpgTypeFinance) {
 		this.affGpgTypeFinance = affGpgTypeFinance;
+	}
+	
+	@Column(name = "AFF_GPG_LIB_FIN", length = 200)
+	public String getAffGpgLibFin() {
+		return this.affGpgLibFin;
+	}
+
+	public void setAffGpgLibFin(String affGpgLibFin) {
+		this.affGpgLibFin = affGpgLibFin;
 	}
 
 }
