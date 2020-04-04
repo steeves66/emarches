@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-02T12:49:44 -->
+<!-- 2020-04-03T15:48:44 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ppm" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd56bcf1-e64d-427e-9d36-ff3f7182500e">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -45,8 +45,8 @@ where vp.aff_dpp_type_plan = 'PN'
 and vp.aff_dpp_plp_id = $P{param_code}]]>
 		</queryString>
 		<field name="V_ID" class="java.math.BigDecimal"/>
-		<field name="AFF_ID" class="java.math.BigDecimal"/>
-		<field name="AFF_DPP_ID" class="java.math.BigDecimal"/>
+		<field name="AFF_ID" class="java.lang.Long"/>
+		<field name="AFF_DPP_ID" class="java.lang.Long"/>
 		<field name="FON_LIBELLE" class="java.lang.String"/>
 		<field name="AFF_DPP_OBJET" class="java.lang.String"/>
 		<field name="AFF_DPP_SOURCE_FIN" class="java.lang.String"/>
@@ -75,8 +75,9 @@ and vp.aff_dpp_plp_id = $P{param_code}]]>
 		<field name="AFF_DPP_DATE_DAO_TRANS" class="java.sql.Timestamp"/>
 		<field name="AFF_DPP_DATE_DAO_APPROB_DMP" class="java.sql.Timestamp"/>
 		<field name="AFF_DPP_DATE_DAO_APPROB_BAIL" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_APPROB_ANO" class="java.sql.Timestamp"/>
 		<field name="AFF_DPP_INV_ENTRE" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_APPROB_ANO" class="java.sql.Timestamp"/>
+		<field name="AFF_DPP_TYPE_FINANCE" class="java.lang.String"/>
 		<group name="AFF_DPP_OBJET">
 			<groupExpression><![CDATA[$F{AFF_DPP_OBJET}]]></groupExpression>
 		</group>
@@ -303,7 +304,7 @@ and pas.plp_id = $P{param_code}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{AFF_DPP_SOURCE_FIN}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{AFF_DPP_TYPE_FINANCE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
