@@ -1413,8 +1413,8 @@ public class AgpmController {
 				 selectBailleur = false;
 				 selectTresor = true;
 				 selectPartBai= false;
-				 //sourfin="TRE";
 				 souCode.equalsIgnoreCase("TRE");
+				 souCode = "TRE";
 			    }else {
 			    	  selectPartBai = false;
 			    	 selectBailleur = false;
