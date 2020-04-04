@@ -84,7 +84,7 @@ public class TStructure implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "STR_CODE", unique = true, nullable = false, length = 3)
+	@Column(name = "STR_CODE", unique = true, nullable = false)
 	public String getStrCode() {
 		return this.strCode;
 	}

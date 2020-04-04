@@ -752,6 +752,7 @@ public class AgpmController {
 	  	   	    	 				                        if(!affichageListe.isEmpty()) {
 	  	   	    	 				                            affichageAgpm=affichageListe.get(0);
 	  	   	    	 				                            affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
+	  	   	    	 				                            affichageAgpm.setAffAgpCode(agpm.getAgpCode());
 	  		    	 					                        iservice.updateObject(affichageAgpm);
 	  	   	    	 				                                                                  }
 	  	   	    	 				                   
@@ -819,6 +820,7 @@ public class AgpmController {
 	    	 				     		  					//Insertion dans TAffichageAgpm
 	    	 				     		  					affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
 	    	 				     		  					affichageAgpm.setAffAgpActif(agpm.getAgpActif());
+	    	 				     		  				    affichageAgpm.setAffAgpCode(agpm.getAgpCode());
 	    	 				     		  					affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
 	    	 				     		  					affichageAgpm.setAffAgpId(agpm.getAgpId());
 	    	 				     		  					affichageAgpm.setTBailleur(new TBailleur(baiCode));
@@ -1412,11 +1414,12 @@ public class AgpmController {
 				 selectTresor = true;
 				 selectPartBai= false;
 				 //sourfin="TRE";
-				 souCode="TRE";
+				 souCode.equalsIgnoreCase("TRE");
 			    }else {
 			    	  selectPartBai = false;
 			    	 selectBailleur = false;
 					 selectTresor = false;
+					 souCode.equalsIgnoreCase("");
 			    }
 		 }
 		 
@@ -1958,7 +1961,7 @@ public class AgpmController {
 	 
 	 public void updateCreation() {
 		 //Projet
-		 projet.setProTypeProjet(proTypeProjet); 
+		 projet.setProTypeProjet(projet.getProTypeProjet()); 
 		 projet.setProTitre(projet.getProTitre());
 		 iservice.updateObject(projet);
 		 

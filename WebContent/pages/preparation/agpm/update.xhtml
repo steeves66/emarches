@@ -86,7 +86,7 @@
 		                 <div class="form-group">
                   <label for="lx1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
-                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="lx1" readonly="true" style="width: 100%" />
+                   <p:inputTextarea value="#{userController.fonction.TStructure.TMinistere.minLibelle}" row="3" styleClass="form-control" id="lx1" readonly="true" style="width: 100%" /> 
                   </div>
                 </div>
                 
@@ -151,11 +151,15 @@
             
                  <div class="form-group">
                   <label class="col-sm-3 control-label">Opération<span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
+                  <div class="col-sm-3">
                      <p:selectOneRadio id="asscstart" value="#{agpmModificationController.updateAgpm.proTypeProjet}"> 
 						<f:selectItem itemLabel="Projet" itemValue="Projet" />
 					    <f:selectItem itemLabel="Programme" itemValue="Programme" />
 					 </p:selectOneRadio>
+                  </div>
+                   <label class="col-sm-2 control-label">N°AGPM</label>
+                  <div class="col-sm-4">
+                     <p:inputText value="#{agpmController.updateAgpm.affAgpCode}" type="text"  styleClass="form-control" id="Num" style="width: 100%"/>
                   </div>
                 </div>
                
@@ -222,7 +226,7 @@
 	                </h:panelGroup>
 	                
 	                <div class="form-group ">
-	                  <label for="source" class="col-sm-2 control-label"><b>Type financement</b></label>
+	                  <label for="source" class="col-sm-2 control-label"><b>Type</b></label>
 	                  <div class="col-sm-10">
 	                    <p:selectOneMenu value="#{agpmModificationController.updateAgpm.affSouCode}" id="source" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
@@ -577,7 +581,7 @@
 
             </p:panel>
             </p:tab>
-             <p:tab id="Dossiers" rendered= "#{agpmModificationController.etatPavetDossier}" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
+             <p:tab id="Dossiers" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel header="Fichier(s) Joint(s)">
            
               <div class="row">
@@ -602,6 +606,12 @@
 	            <h:outputText value="#{doss.dagCommentaire}" />
 	        </p:column>
 	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
+	        
+			 	             <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{agpmModificationController.openDossier}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{agpmModificationController.selectedDossier}" />
+				            </p:commandLink>	
+ 	                   
 	        
 				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmModificationController.removeDossier}" title="Supprimer" update="gnl">
                    <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
@@ -766,7 +776,7 @@
                   <label for="l66" class="control-label">Description</label>
                   </div>
                   <div class="col-md-11">
-                  <p:editor id="editor" value="#{agpmModificationController.sltdetail.tdaCommentaire}" widgetVar="editorWidget" height="500"  width="1105" />
+                  <p:editor id="editorMod" value="#{agpmModificationController.sltdetail.tdaCommentaire}" widgetVar="editorWidgetMod" height="500"  width="1105" />
                   </div>
                   </div>
 		             

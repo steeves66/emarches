@@ -34,6 +34,7 @@ public class TAgpm implements java.io.Serializable {
 	private TStatut TStatut;
 	private TFonction TFonction;
 	private String agpCommentaire;
+	private String agpCode;
 	private String agpTypeDao;
 	private String agpModePassation;
 	private String agpActif;
@@ -67,7 +68,7 @@ public class TAgpm implements java.io.Serializable {
 	public TAgpm(long agpId, TProjet TProjet,TStructure TStructure, TGestion TGestion, TDeclarant TDeclarant, TStatut TStatut,
 			TMinistere TMinistere, TFonction TFonction, String agpCommentaire, String agpTypeDao,
 			String agpModePassation, String agpActif, String agpStatutRetour, String agpActeurSaisie,Date agpDateValAc, Date agpDateValCpmp,
-			Date agpDateValDmp,
+			Date agpDateValDmp,String agpCode,
 			 Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
 			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
 		this.agpId = agpId;
@@ -90,6 +91,7 @@ public class TAgpm implements java.io.Serializable {
 		this.TDetailAgpms = TDetailAgpms;
 		this.THistoAgpms = THistoAgpms;
 		this.TDossierAgpms = TDossierAgpms;
+		this.agpCode = agpCode;
 	}
 	@Id
 	@SequenceGenerator(name = "SEQ_AGP_Sequence", sequenceName = "SEQ_AGP", allocationSize=1)
@@ -281,6 +283,15 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setTDossierAgpms(Set<TDossierAgpm> TDossierAgpms) {
 		this.TDossierAgpms = TDossierAgpms;
+	}
+
+	@Column(name = "AGP_CODE")
+	public String getAgpCode() {
+		return agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
 	}
 
 }

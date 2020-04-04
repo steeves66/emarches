@@ -92,7 +92,7 @@
 		                 <div class="form-group">
                   <label for="lx1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
-                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="lx1" readonly="true" style="width: 100%" />
+                    <p:inputTextarea value="#{userController.fonction.TStructure.TMinistere.minLibelle}" row="3" styleClass="form-control" id="lx1" readonly="true" style="width: 100%" /> 
                   </div>
                 </div>
                 
@@ -157,11 +157,16 @@
             
                  <div class="form-group">
                   <label class="col-sm-3 control-label">Opération<span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
+                  <div class="col-sm-3">
                      <p:selectOneRadio id="asscstart" value="#{agpmController.projet.proTypeProjet}"> 
 						<f:selectItem itemLabel="Projet" itemValue="Projet" />
 					    <f:selectItem itemLabel="Programme" itemValue="Programme" />
 					 </p:selectOneRadio>
+                  </div>
+                  
+                  <label class="col-sm-2 control-label">N°AGPM</label>
+                  <div class="col-sm-4">
+                     <p:inputText value="#{agpmController.agpm.agpCode}" type="text"  styleClass="form-control" id="Num" style="width: 100%"/>
                   </div>
                 </div>
                
@@ -245,8 +250,7 @@
 	                  <label for="xdev" class="col-sm-2 control-label"><b>Devise</b></label>
 	                  <div class="col-sm-10">
 	                      <p:selectOneMenu value="#{agpmController.devCode}" id="xdev" 
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir la devise.." itemValue="empty" />  
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
 			       <f:selectItems value="#{agpmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
        		        </p:selectOneMenu>
 	                  </div>
@@ -984,6 +988,10 @@
 	        </p:column>
 	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
 	        
+	         <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{agpmController.openDossier}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
+				            </p:commandLink>	
 				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmController.removeDossier}" title="Supprimer" update="gnl">
                    <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
                    <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              

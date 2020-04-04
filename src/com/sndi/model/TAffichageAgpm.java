@@ -42,6 +42,7 @@ public class TAffichageAgpm implements java.io.Serializable {
 	private String affAgpActif;
 	private String affAgpTypeDao;
 	private String affAgpCommentaire;
+	private String affAgpCode;
 	private String affAgpRecherche;
 	//private Clob affAgpRecherche;
 	private Date affAgpDateValAc;
@@ -64,7 +65,7 @@ public class TAffichageAgpm implements java.io.Serializable {
 	}
 
 	public TAffichageAgpm(long affId, TProjet TProjet,TStructure TStructure, TFinancement TFinancement, TGestion TGestion,
-			TDeclarant TDeclarant, TStatut TStatut, TBailleur TBailleur,
+			TDeclarant TDeclarant, TStatut TStatut, TBailleur TBailleur,String affAgpCode,
 			TSourceFinancement TSourceFinancement, TDevise TDevise, TMinistere TMinistere, TFonction TFonction,long affAgpId,
 			String affAgpActeurSaisie, String affAgpStatutRetour, String affAgpActif,String affAgpTypeDao, String affAgpCommentaire,/*Clob affAgpRecherche,*/String affAgpRecherche,Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp) {
 		this.affId = affId;
@@ -88,6 +89,8 @@ public class TAffichageAgpm implements java.io.Serializable {
 		this.affAgpDateValAc = affAgpDateValAc;
 		this.affAgpDateValCpmp = affAgpDateValCpmp;
 		this.affAgpDateValDmp = affAgpDateValDmp;
+		this.affAgpCode = affAgpCode;
+		
 	}
 
 	@Id
@@ -304,6 +307,15 @@ public class TAffichageAgpm implements java.io.Serializable {
 
 	public void setAffAgpDateValDmp(Date affAgpDateValDmp) {
 		this.affAgpDateValDmp = affAgpDateValDmp;
+	}
+
+	@Column(name = "AFF_AGP_CODE")
+	public String getAffAgpCode() {
+		return affAgpCode;
+	}
+
+	public void setAffAgpCode(String affAgpCode) {
+		this.affAgpCode = affAgpCode;
 	}
 
 }

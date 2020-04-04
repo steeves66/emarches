@@ -36,6 +36,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 	private String affAgpActif;
 	private String affAgpTypeDao;
 	private String affAgpCommentaire;
+	private String affAgpCode;
 	private String affAgpRecherche;
 	private Date affAgpDateValAc;
 	private Date affAgpDateValCpmp;
@@ -149,7 +150,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 			String agpStrCode, String agpFonCod, short agpGesCode, String agpStaCode, long agpProId, Long agpDecId,
 			String agpCommentaire, String agpTypeDao, String agpModePassation, String agpActif, String agpStatutRetour,
 			String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp, Date agpDateValDmp, String baiCode,
-			String baiLibelle, String baiAdresse, String baiTelephone) {
+			String baiLibelle, String baiAdresse, String baiTelephone,String affAgpCode) {
 		this.affId = affId;
 		this.affProId = affProId;
 		this.affFinId = affFinId;
@@ -228,6 +229,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 		this.baiLibelle = baiLibelle;
 		this.baiAdresse = baiAdresse;
 		this.baiTelephone = baiTelephone;
+		this.affAgpCode = affAgpCode;
 	}
 
 	@Id
@@ -931,6 +933,16 @@ public class VUpdateAgpm implements java.io.Serializable {
 
 	public void setBaiTelephone(String baiTelephone) {
 		this.baiTelephone = baiTelephone;
+	}
+
+	@Column(name = "AFF_AGP_CODE")
+	public String getAffAgpCode() {
+		return affAgpCode;
+	}
+
+	
+	public void setAffAgpCode(String affAgpCode) {
+		this.affAgpCode = affAgpCode;
 	}
 
 }

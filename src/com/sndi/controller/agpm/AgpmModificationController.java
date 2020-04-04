@@ -934,7 +934,8 @@ public class AgpmModificationController {
    		      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
    	 		TAgpm agpm = new TAgpm();
    	   				if(!AGP.isEmpty()) agpm =AGP.get(0); 	
-   	   			  agpm.setAgpCommentaire(updateAgpm.getAffAgpCommentaire());
+   	   			  agpm.setAgpCommentaire(updateAgpm.getAffAgpCode());
+   	   		      agpm.setAgpCode(updateAgpm.getAffAgpCode());
    	   				iservice.updateObject(agpm);
    	   				
    	   			 //Declarant
@@ -988,6 +989,7 @@ public class AgpmModificationController {
 
    	   			 //AffichageAgpm
    	   			 slctdTd.setAffAgpCommentaire(updateAgpm.getAffAgpCommentaire());
+   	   		     slctdTd.setAffAgpCommentaire(updateAgpm.getAffAgpCode());
    	   		     slctdTd.setTProjet(projet);
    	   		     slctdTd.setTFinancement(financement);
    	   		     slctdTd.setTBailleur(new TBailleur(updateAgpm.getBaiCode()));
@@ -1057,7 +1059,7 @@ public class AgpmModificationController {
 	      	 
 	    	 public void saveDetail1() { 
 		      		if(acte.getProId() > 0) {
-				    	detail.setTAgpm(new TAgpm(acte.getAgpId())); 
+				    	detail.setTAgpm(new TAgpm(slctdTd.getAffAgpId())); 
 				    	detail.setTContenuAgpm(new TContenuAgpm(tcaCode));
 				    	detail.setTdaNumOrdre(keyGen.getNumeroOrdre());
 				    	iservice.addObject(detail); 
@@ -1070,7 +1072,7 @@ public class AgpmModificationController {
 						etatPavetDossier= true; 
 		      		}else {
 		      			
-		      			detail.setTAgpm(agpm); 
+		      			detail.setTAgpm(new TAgpm(slctdTd.getAffAgpId())); 
 				    	detail.setTContenuAgpm(new TContenuAgpm(tcaCode));
 				    	detail.setTdaNumOrdre(keyGen.getNumeroOrdre());
 				    	iservice.addObject(detail); 
@@ -1389,24 +1391,24 @@ public class AgpmModificationController {
 		 //Methode checkBailleur
 		 public void checkBailleur() {
 			// sourfin="";
-			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
+			 if(updateAgpm.getAffSouCode().equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
 				 selectTresor = false;
 				 selectPartBai = true;
 				 chargeSourceCheck();
 				 //sourfin="";
 			 }else
-			      if(sourfin.equalsIgnoreCase("Cofinance")){
+			      if(updateAgpm.getFinTypeFinance().equalsIgnoreCase("Cofinance")){
 				 selectBailleur = true; 
 				 selectTresor = true;
 				 selectPartBai = true;
 				 //sourfin="";
-			 }else if(sourfin.equalsIgnoreCase("Etat")){
+			 }else if(updateAgpm.getAffSouCode().equalsIgnoreCase("Etat")){
 				 selectBailleur = false;
 				 selectTresor = true;
 				 selectPartBai= false;
 				 //sourfin="TRE";
-				 souCode="TRE";
+				 updateAgpm.getAffSouCode().equalsIgnoreCase("TRE");
 			    }else {
 			    	  selectPartBai = false;
 			    	 selectBailleur = false;
@@ -1754,16 +1756,16 @@ public class AgpmModificationController {
 				 
 				  if(acte.getProId()>0) {
 					  
-					  if(fileUploadController.handleFileUpload(event, acte.getAgpId()+"", natPiece)) {
+					  if(fileUploadController.handleFileUpload(event, slctdTd.getAffAgpId()+"", natPiece)) {
 							
-							TDossierAgpm dos = checkDocument(""+acte.getAgpId(), natPiece);
+							TDossierAgpm dos = checkDocument(""+slctdTd.getAffAgpId(), natPiece);
 							if(dos == null) {
 								//check le dossier s'il existe à faire
 								//TDossierAgpm dos = new TDossierAgpm(); //TNatureDocument 
 								dos = new TDossierAgpm() ;
 								//dos.setDagCode(keyGen.getCodeDossier(filePUploadController.getFileCode()+"-"));
 								dos.setTNaturePiece(new TNaturePiece("AGPM"));
-								dos.setTAgpm(new TAgpm(acte.getAgpId()));
+								dos.setTAgpm(new TAgpm(slctdTd.getAffAgpId()));
 								dos.setDagLibelle(fileUploadController.getFileName());
 								dos.setDagCommentaire(fileUploadController.getDocNom());
 								dos.setDagReference("");
@@ -1799,7 +1801,7 @@ public class AgpmModificationController {
 					  
 					        if(fileUploadController.handleFileUpload(event, agpm.getAgpId()+"", natPiece)) {
 							
-							   TDossierAgpm dos = checkDocument(""+agpm.getAgpId(), natPiece);
+							   TDossierAgpm dos = checkDocument(""+slctdTd.getAffAgpId(), natPiece);
 							    if(dos == null) {
 								//check le dossier s'il existe à faire
 								//TDossierAgpm dos = new TDossierAgpm(); //TNatureDocument 
@@ -1807,7 +1809,7 @@ public class AgpmModificationController {
 								//dos.setDagCode(keyGen.getCodeDossier(filePUploadController.getFileCode()+"-"));
 								dos.setTNaturePiece(new TNaturePiece("AGPM"));
 								//dos.setTAgpm(new TAgpm(acte.getAgpId()));
-								dos.setTAgpm(agpm);
+								dos.setTAgpm(new TAgpm(slctdTd.getAffAgpId()));
 								dos.setDagLibelle(fileUploadController.getFileName());
 								dos.setDagCommentaire(fileUploadController.getDocNom());
 								dos.setDagReference("");
@@ -1857,7 +1859,7 @@ public class AgpmModificationController {
             public void chargeDossier() {
 			 dossListe.clear();
 				 dossListe = ((List<TDossierAgpm>)iservice.getObjectsByColumnDesc("TDossierAgpm",new ArrayList<String>(Arrays.asList("DAG_ID")),
-						 new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+affichageAgpm.getAffAgpId())));
+						 new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+slctdTd.getAffAgpId())));
 		    }
             
             
@@ -2050,6 +2052,7 @@ public class AgpmModificationController {
 					devCode = slctdTd.getTDevise().getDevCode();*/
 					chargeDetailModif();
 					chargeDetail();
+					chargeDossierDetail();
 					break;
 				case "pgpm4":
 					chargeDetails();

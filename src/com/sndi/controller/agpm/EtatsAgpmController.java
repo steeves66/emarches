@@ -17,6 +17,7 @@ import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAffichageAgpm;
 import com.sndi.model.TAgpm;
+import com.sndi.model.TDetailAgpm;
 import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TFinancement;
 import com.sndi.model.VAgpmDetails;
@@ -60,6 +61,8 @@ public class EtatsAgpmController {
 
 	private List<VAgpmDetails> objetListe = new ArrayList<VAgpmDetails>();
 	private List<TFinancement> financementListe = new ArrayList<TFinancement>();
+	private List<TDetailAgpm> detailAgpm = new ArrayList<TDetailAgpm>();
+	
 	//private TAgpm slctdTb = new TAgpm(); 
 	private TAffichageAgpm slctdTd = new TAffichageAgpm();
 	private VAgpmDetails detail = new VAgpmDetails(); 
@@ -98,6 +101,14 @@ public class EtatsAgpmController {
   	dossListe = ((List<TDossierAgpm>)iservice.getObjectsByColumn("TDossierAgpm",new ArrayList<String>(Arrays.asList("DAG_NAP_CODE")),
   	new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+detail.getAffAgpId()))); 		 
   		 }
+     
+    //Afficher detail AGPM
+     public void chargeContenuAgpm() {
+    	 detailAgpm.clear();
+    	 detailAgpm = ((List<TDetailAgpm>)iservice.getObjectsByColumn("TDetailAgpm",new ArrayList<String>(Arrays.asList("TDA_NUM_ORDRE")),
+    	  	new WhereClause("TDA_AGP_ID",Comparateur.EQ,""+detail.getAffAgpId()))); 
+     }
+     
      
      
      public void openDossier() throws IOException{
@@ -152,6 +163,7 @@ public class EtatsAgpmController {
    			chargeDetailAgpm();
    			chargeDossier();
    			chargeFinancement();
+   			chargeContenuAgpm();
    		break;
    		case "pgpm3":
    			
@@ -224,6 +236,16 @@ public class EtatsAgpmController {
 	}
 	public void setFermerDMP(boolean fermerDMP) {
 		this.fermerDMP = fermerDMP;
+	}
+
+
+	public List<TDetailAgpm> getDetailAgpm() {
+		return detailAgpm;
+	}
+
+
+	public void setDetailAgpm(List<TDetailAgpm> detailAgpm) {
+		this.detailAgpm = detailAgpm;
 	}
 	
 }
