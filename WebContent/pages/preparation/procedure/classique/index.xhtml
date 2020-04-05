@@ -650,7 +650,10 @@
             </h:panelGroup>
             
             
-             <h:panelGroup rendered="#{controleController.searchPgpm}">
+           
+            
+             <h:panelGroup rendered="#{controleController.panel2}">
+               <h:panelGroup rendered="#{controleController.searchPgpm}">
 						<div class="col-md-4 ">	
 					  <div class="input-group input-group-sm col-md-12">
 					   <span class="input-group-btn">
@@ -676,8 +679,6 @@
 					 </div>
 					 </div>
 					 </h:panelGroup>
-            
-             <h:panelGroup rendered="#{controleController.panel2}">
   <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.validationListe}" 
 					rowKey="#{slctdTb.affGpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
                          paginator="true"

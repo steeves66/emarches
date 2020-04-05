@@ -39,6 +39,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 	private String affGpgFonCod;
 	private long affId;
 	private String affGpgStrCode;
+	private String gpgLibFin;
 	private Short affGpgGesCode;
 	private String affGpgRecherche;
 	private Date affGpgDateValAc;
@@ -94,7 +95,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 	public VUpdatePgpm() {
 	}
 
-	public VUpdatePgpm(long affGpgPlgId, String affGpgTypePlan, String affGpgStaCode, String affGpgTymCode,
+	public VUpdatePgpm(long affGpgPlgId, String affGpgTypePlan, String affGpgStaCode, String affGpgTymCode,String gpgLibFin,
 			String affGpgMopCode, long affId, long gpgId, long gpgPlgId, String gpgTypePlan, String gpgStaCode,
 			String gpgTymCode, String gpgMopCode, long plgId, String plgStrCode, String plgFonCod, short plgGesCode,
 			long fipId, String fipDevCode, String fipSouCode, long fipGpgId, String mopCode, String mopLibelleCourt,
@@ -123,9 +124,10 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
+		this.gpgLibFin = gpgLibFin;
 	}
 
-	public VUpdatePgpm(Long affGpgId, long affGpgPlgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgStaCode,
+	public VUpdatePgpm(Long affGpgId, long affGpgPlgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgStaCode,String gpgLibFin,
 			String affGpgTymCode, String affGpgMopCode, String affGpgCode, String affGpgObjet,
 			Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire, String affGpgSourceFin,
 			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,
@@ -211,6 +213,8 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.tymLibelleLong = tymLibelleLong;
 		this.tymTymCode = tymTymCode;
 		this.tymGroupe = tymGroupe;
+		this.gpgLibFin = gpgLibFin;
+		
 	}
 	
 	@Id
@@ -853,5 +857,14 @@ public class VUpdatePgpm implements java.io.Serializable {
 
 	public void setTymGroupe(String tymGroupe) {
 		this.tymGroupe = tymGroupe;
+	}
+
+	@Column(name = "GPG_LIB_FIN")
+	public String getGpgLibFin() {
+		return gpgLibFin;
+	}
+
+	public void setGpgLibFin(String gpgLibFin) {
+		this.gpgLibFin = gpgLibFin;
 	}
 }

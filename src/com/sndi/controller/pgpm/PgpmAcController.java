@@ -1096,7 +1096,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       
       
       //Modification des operations
-     public void modifierDetailPlan(){
+     public void modifierDetailPlan() throws IOException{
     	 
     	 //Modification dans TAffichagePgpm
     	 slctdTd.setAffGpgAgpId(updateOperation.getAffGpgAgpId());
@@ -1106,6 +1106,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	 slctdTd.setAffGpgDateDao(updateOperation.getAffGpgDateDao());
     	 slctdTd.setAffGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
     	 slctdTd.setAffGpgCommentaire(updateOperation.getGpgCommentaire()); 
+    	 slctdTd.setAffGpgLibFin(updateOperation.getGpgLibFin());
     	 iservice.updateObject(slctdTd);
     	 
     	//Modification dans TDetailPlanGeneral
@@ -1121,12 +1122,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				detail.setGpgPartiePmePmi(slctdTd.getAffGpgPartiePmePmi());
 				detail.setTModePassation(slctdTd.getTModePassation());
 				detail.setTTypeMarche(slctdTd.getTTypeMarche());
+				detail.setGpgLibFin(updateOperation.getGpgLibFin());
    				iservice.updateObject(detail);
-   				
-    	 userController.setTexteMsg("Modification éffectuée avec succès!");
-	     userController.setRenderMsg(true);
-	     userController.setSevrityMsg("success");
-	     chargeData();
+   			
+   				renderPage("pgpm1","SAIPGPM");
+		    	 userController.setTexteMsg("Modification éffectuée avec succès!");
+			     userController.setRenderMsg(true);
+			     userController.setSevrityMsg("success");
+			     chargeData();
       }
       
       //Enregistrement d'une opération PGPM sans AGPM
