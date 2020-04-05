@@ -8,7 +8,7 @@
 
       <ui:composition template="/template/templatePage.xhtml">
 	<ui:define name="contents">
-<h:form id="gnl" styleClass="form-horizontal">	
+<h:form id="gnl">	
  <section class="content-header">
       <h3>
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
@@ -388,125 +388,59 @@
             <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
             </div>
             
-            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
             <div class="row">
-              
-                 <div class="col-md-12">
-      <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
-            <div class="col-md-2 "><div  style="color: #fff">
-             <label for="gestion1" class="col-sm-5 control-label">GESTION</label>
-	              <div class="col-sm-6">
-		                    <p:selectOneMenu id="gestion1" value="#{pgpmAcController.gesCode}"
-			                         effect="fade" style="width:100%">
-					       <f:selectItems value="#{pgpmAcController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
-		       		        </p:selectOneMenu>
-	               </div>
-            </div></div>
-         </div>
-         <div class="box-body">
-          <div class="row">
-          
-           <div class="col-md-5">
-	           <div class="form-group">
-		                   <label for="mini3" class="col-sm-2 control-label">Autorité Contractante</label>
-		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
-		                  <div class="col-sm-10">
-		                   <p:inputTextarea  value="#{userController.fonction.fonLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{pgmAcController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{pgmAcController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                </div>
-	            </div> 
-	            
-	            
-	            <div class="col-md-7">
-	           <div class="form-group">
-		                  <label for="mini" class="col-sm-1 control-label">Ministère</label>
-		                  <div class="col-sm-11">
-		                    <p:inputTextarea  value="#{userController.fonction.TStructure.TMinistere.minLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
-		                  </div>
-		                </div>
-	            </div> 
+            
+            <div class="col-md-12">
+            
+            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouveau PGPM" data-toggle="tooltip" rendered="#{controleController.btn_new_pgpm}" action="#{pgpmAcController.renderPage('pgpm2','ENGPGPM')}"  update=":content">
+				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
+				</p:commandLink>
+				
+                  <h:panelGroup rendered="#{controleController.searchPgpm}">
+				    <div class="input-group input-group-sm col-md-3">
+                      <label >
+                      <p:inputText type="text"  value="#{pgpmAcController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{pgpmAcController.chargerPgpmRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
 
-	      </div>
-	      
-	      
-	   
-	      
-         </div>
-               </div>
-      </div>
-
-				<div class="col-md-12">
-					<div class="box box-success box-solid">
-						<div class="box-header with-border">
-							<div class="col-md-2 ">
-								<div style="color: #fff">LISTE DES OPERATIONS</div>
-							</div>
-						 <h:panelGroup rendered="#{controleController.searchPgpm}">
-						<div class="col-md-4 ">	
-					  <div class="input-group input-group-sm col-md-12">
-					   <span class="input-group-btn">
-				                <p:commandLink action="#{pgpmAcController.reinitialiserPgpm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span>
-					 </div>
+                      <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{pgpmAcController.reinitialiserPgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
 					 </div>
 					 </h:panelGroup>
-					  <h:panelGroup rendered="#{controleController.searchPgspm}">
-						<div class="col-md-3 ">	
-					    <div class="input-group input-group-sm col-md-12">
-					    <span class="input-group-btn">
-				                <p:commandLink action="#{pgpmAcController.reinitialiserPgspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}" ></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgspmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span>
-					 </div>
-					 </div>
-					 </h:panelGroup>
-					 <div class="col-md-5 ">
-					 </div>
 					 
-							
-							<div class="col-md-1 ">
-								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau PGPM" data-toggle="tooltip" rendered="#{controleController.btn_new_pgpm}" action="#{pgpmAcController.renderPage('pgpm2','ENGPGPM')}"  update=":content">
-								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvelle Opération</span>
-								</p:commandLink>
-							</div>
-							
-						</div>
-						<div class="box-body">
-							
-							    <h:panelGroup rendered="#{controleController.panel1}">
+					<h:panelGroup rendered="#{controleController.searchPgspm}">
+					  <div class="input-group input-group-sm col-md-3">
+                      <label >
+                      <p:inputText type="text"  value="#{pgpmAcController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{pgpmAcController.chargerPgspmRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+
+                      <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.reinitialiserPgspm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
+					 </div>
+					</h:panelGroup>
+					 
+            </div>
+            </div>
+              <h:panelGroup rendered="#{controleController.panel1}">
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.objetList}" 
-					rowKey="#{slctdTb.affGpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type}" 
-                         scrollable="true" scrollHeight="250" >
+					rowKey="#{slctdTb.affGpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
                         
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
@@ -639,45 +573,7 @@
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
-   
-							
-						</div>
-					</div>
-				</div>
-
-            </div>
-            
-            </h:panelGroup>
-            
-            
-             <h:panelGroup rendered="#{controleController.searchPgpm}">
-						<div class="col-md-4 ">	
-					  <div class="input-group input-group-sm col-md-12">
-					   <span class="input-group-btn">
-				                <p:commandLink action="#{pgpmAcController.reinitialiserPgpm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span>
-					 </div>
-					 </div>
-					 </h:panelGroup>
-					  <h:panelGroup rendered="#{controleController.searchPgspm}">
-						<div class="col-md-3 ">	
-					    <div class="input-group input-group-sm col-md-12">
-					    <span class="input-group-btn">
-				                <p:commandLink action="#{pgpmAcController.reinitialiserPgspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}" ></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgspmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span>
-					 </div>
-					 </div>
-					 </h:panelGroup>
-            
-             <h:panelGroup rendered="#{controleController.panel2}">
+    <h:panelGroup rendered="#{controleController.panel2}">
   <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.validationListe}" 
 					rowKey="#{slctdTb.affGpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
                          paginator="true"
@@ -836,7 +732,6 @@
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
-            
  <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		     </p:commandLink>
@@ -849,16 +744,11 @@
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre
     </p:commandLink>
     
-    <p:commandLink rendered="#{controleController.btn_trasmettre}" action="#{pgpmAcController.imprimerPgpm()}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
-    <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer
-    </p:commandLink>
     
     <p:commandLink rendered="#{controleController.btn_trasmettre_pgspm}" action="#{pgpmAcController.transmettrePgspm()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
    <p:confirm header="Confirmation" message="Confrmez-vous la transmission ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre
     </p:commandLink>
-    
-    
     
    </h:panelGroup>
 

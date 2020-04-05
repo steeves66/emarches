@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
       <h3>
-       #{controleController.libelle} 
+       #{controleController.libelle} #{pgpmAcController.updateOperation.gpgId}
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -129,7 +129,7 @@
      <div class="col-md-12">
           <div class="box box-success box-solid">
             <div class="box-header with-border">
-                <div class="col-md-10 "><div  style="color: #fff">MODIFICATION DE L'OPERATION N° #{pgpmAcController.updateOperation.gpgId}"</div></div>
+                <div class="col-md-10 "><div  style="color: #fff">MODIFICATION DE L'OPERATION N° #{pgpmAcController.updateOperation.gpgId}</div></div>
                 <div class="col-md-2 ">
                 <p:commandLink oncomplete="PF('uploaddlg').show()"  data-toggle="modal" data-target="#modal-reglement" rendered="#{pgpmAcController.etatDossier}" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Joindre Document</span>
@@ -372,7 +372,7 @@
    </div>
    <div class="row">
    <div class="col-md-12">
-  <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{pgpmAcController.fermerPgpm('pgpm1','SAIPGPM')}" update=":content">
+  <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content">
 		        <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		         </p:commandLink>
 		          <p:commandLink rendered="#{controleController.btn_fermer_saisie_pgspm}" styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{pgpmAcController.fermerForm('pgspm1','SAIPGSPM')}" update=":content">
@@ -447,13 +447,13 @@
 			               emptyMessage="Aucun Agpm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
-                           <h:commandLink id="agpm" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpm()}" update="gnl">				        
+                           <h:commandLink id="agpm" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpmModif()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.agpId}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Titre" styleClass="col-sm-11" >
-                           <h:commandLink id="agpm_com" title="Libelle du ministère" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpm()}">				        
+                           <h:commandLink id="agpm_com" title="Libelle du ministère" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpmModif()}">				        
          				  <h:outputText value="#{slctdTb.proTitre}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
                                 </h:commandLink>
@@ -496,13 +496,13 @@
 			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarcheModif()}" update="gnl:typMa1, gnl:typMa2">				        
          				  <h:outputText value="#{slctdTb.tymCode}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarcheModif()}" update="gnl:typMa1, gnl:typMa2">				        
          				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
                                 </h:commandLink>
@@ -543,19 +543,19 @@
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationModif()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
-                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationModif()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>
 				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationModif()}" update="gnl:modeP1, gnl:modeP2">				        
          				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
@@ -724,7 +724,7 @@
 	              
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{pgpmAcController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
+			            <p:commandLink action="#{pgpmAcController.saveFinancementUpdate()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>

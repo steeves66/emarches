@@ -266,17 +266,27 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+slctdTd.getAffGpgId())));		 		 
 		 }
 		 
-		 
+		 //OnselectModifications
 		 public void onSelectMarcheModif() {
-			 //detailPlan = new TDetailPlanGeneral();
 			 updateOperation.setGpgTymCode(marche.getTymCode());
-			 updateOperation.setAffGpgTymCode(marche.getTymTymCode());
-			 
-
-			 updateOperation.setGpgTymCode(marche.getTymCode());
-			 reucpMarche.setTymLibelleCourt(marche.getTymLibelleCourt());
-				}
+			 updateOperation.setTymLibelleCourt(marche.getTymLibelleCourt());
+		 }
 		 
+		 public void onSelectModePassationModif() {
+			 updateOperation.setGpgMopCode(modePassation.getMopCode());
+			 updateOperation.setMopLibelleLong(modePassation.getMopLibelleLong());		
+		}
+		
+		 public void onSelectAgpmModif() {
+			 updateOperation.setGpgAgpId(slctdTd.getAffGpgAgpId());
+			 updateOperation.setAffGpgCommentaire(updateOperation.getAffGpgCommentaire());
+	
+			 listeFinancementAgpm =(List<TFinancement>) iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),
+				     new WhereClause("FIN_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgAgpId()));
+			 if (!listeFinancementAgpm.isEmpty()) {
+				  finAgpm=listeFinancementAgpm.get(0);
+				    }  		 
+				}
 		 
 		//Methode
 		  public void DataToday() {
@@ -1088,7 +1098,35 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       //Modification des operations
      public void modifierDetailPlan(){
     	 
-    	 iservice.updateObject(updateOperation);
+    	 //Modification dans TAffichagePgpm
+    	 slctdTd.setAffGpgAgpId(updateOperation.getAffGpgAgpId());
+    	 slctdTd.setAffGpgObjet(updateOperation.getGpgObjet());
+    	 slctdTd.setTTypeMarche(new TTypeMarche(updateOperation.getTymCode()));
+    	 slctdTd.setTModePassation(new TModePassation(updateOperation.getMopCode()));
+    	 slctdTd.setAffGpgDateDao(updateOperation.getAffGpgDateDao());
+    	 slctdTd.setAffGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
+    	 slctdTd.setAffGpgCommentaire(updateOperation.getGpgCommentaire()); 
+    	 iservice.updateObject(slctdTd);
+    	 
+    	//Modification dans TDetailPlanGeneral
+    	 List<TDetailPlanGeneral> PLG =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+   				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+    	 TDetailPlanGeneral detail = new TDetailPlanGeneral();
+				if(!PLG.isEmpty()) detail =PLG.get(0); 
+				detail.setGpgAgpId(slctdTd.getAffGpgAgpId());
+				detail.setGpgCommentaire(slctdTd.getAffGpgCommentaire());
+				detail.setGpgDateDao(slctdTd.getAffGpgDateDao());
+				detail.setGpgLibFin(slctdTd.getAffGpgLibFin());
+				detail.setGpgObjet(slctdTd.getAffGpgObjet());
+				detail.setGpgPartiePmePmi(slctdTd.getAffGpgPartiePmePmi());
+				detail.setTModePassation(slctdTd.getTModePassation());
+				detail.setTTypeMarche(slctdTd.getTTypeMarche());
+   				iservice.updateObject(detail);
+   				
+    	 userController.setTexteMsg("Modification éffectuée avec succès!");
+	     userController.setRenderMsg(true);
+	     userController.setSevrityMsg("success");
+	     chargeData();
       }
       
       //Enregistrement d'une opération PGPM sans AGPM
@@ -2612,7 +2650,68 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    vider();
             	} 
 			}
+                       //SaveFinancement de modification
+                       public void saveFinancementUpdate(){
+            		    //Création du financement
+            		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+    			        newFinancement.setTDevise(new TDevise(devCode));
+    			        newFinancement.setTBailleur(new TBailleur(baiCode));
+    			        newFinancement.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getAffGpgId()));
+    			        newFinancement.setFipTypeFinance(sourfin);
+    			        iservice.addObject(newFinancement);
+    				    
+    				
+    				    //Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
+    				    List<TDetailPlanGeneral> PL =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+       						new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+    				    TDetailPlanGeneral detail = new TDetailPlanGeneral();
+       				     if(!PL.isEmpty())  
+       					 detail =PL.get(0); 
+       				     detail.setGpgSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+       				      iservice.updateObject(detail);
+       				    
+       				    
+       				     List<TAffichagePgpm> AF =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+       						new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
+       				     TAffichagePgpm aff = new TAffichagePgpm();
+    					if(!AF.isEmpty()) aff =AF.get(0); 
+    					aff.setTSourceFinancement(newFinancement.getTSourceFinancement());
+    					aff.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
+    					iservice.updateObject(aff);
+    					
+    				    //methode qui charge les financements du projet crée
+    				    chargeFinancement();
+    				    //methode qui charge la liste des pgpm
+    				    chargeData();
+    				    //Message de Confirmation
+    				    userController.setTexteMsg("Financement enregistré avec succès !");
+    				    userController.setRenderMsg(true);
+    				    userController.setSevrityMsg("success");
+    				    //viderFinancement();
+    				    vider();
+            	
+			}
             
+            public void recupererFinancement() {
+            	selectFinance.setTBailleur(new TBailleur(baiCode));
+            	selectFinance.setTSourceFinancement(new TSourceFinancement(souCode));
+            	selectFinance.setTDevise(new TDevise(devCode));  
+            	selectFinance.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getAffGpgAgpId()));
+            	selectFinance.setFipTypeFinance(sourfin);
+            }
+            
+            public void updateFinance() {
+            	selectFinance.setTBailleur(new TBailleur(baiCode));
+            	selectFinance.setTSourceFinancement(new TSourceFinancement(souCode));
+            	selectFinance.setTDevise(new TDevise(devCode));  
+            	selectFinance.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getAffGpgAgpId()));
+            	selectFinance.setFipTypeFinance(sourfin);
+			    iservice.updateObject(selectFinance);
+			    userController.setTexteMsg("Modification éffectuée avec succès !");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");
+
+            }
             
       	 
       	 //Methodes vider Fiancement
@@ -2791,8 +2890,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 //Edition de l'PGPM
 				 public void imprimerPgpm() {
 					 String operateur = userController.getSlctd().getTFonction().getFonCod();
-						projetReport.longStringparam2(plan.getPlgId(), operateur, "Pgpm", "Pgpm");
+						projetReport.longStringparam2(gesCode, operateur, "Pgpm", "Pgpm");
 					}
+				 
+				
 				 //Edition de l'PGSPM
 				 public void imprimerPgspm() {
 					    String operateur = userController.getSlctd().getTFonction().getFonCod();
@@ -2849,6 +2950,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeMode();
 					chargeSourceFinance();
 					chargeAgpm();
+					controleController.btn_save_pgpm =true ;
 				break;
 				case "pgspm1":
 					chargeDataPgspm();

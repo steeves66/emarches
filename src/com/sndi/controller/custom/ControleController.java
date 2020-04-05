@@ -545,7 +545,7 @@ public class ControleController {
 			 if(action.equalsIgnoreCase("ENGPGPM")) {
 				 type = "PGPM";
 				 libelleProcedure="SAISIE D'UN NOUVEAU  PLAN GENERAL DE PASSATION DE MARCHES";
-			       libelle1="Liste des AGPM Saisie par l'autorité Contractante";
+			       libelle1="PLAN GENERAL DE PASSATIONS DES MARCHES";
 			       panelDetail=false;
 				   panelForm=true;
 				   panelTraitement=false;
@@ -599,7 +599,8 @@ public class ControleController {
 			    		if(action.equalsIgnoreCase("SAIPGPM")) {
 			    			type = "PGPM";
 			    			libelleProcedure="Index";
-			    			libelle="SAISIE DES PLANS GENERAUX DE PASSATION DE MARCHES";	
+			    			libelle="SAISIE DES PLANS GENERAUX DE PASSATION DE MARCHES";
+			    			libelle1="PLAN GENERAL DE PASSATIONS DES MARCHES";
 			    			btn_new_pgpm =true;
 			    			btn_new_pgspm =false;
 			    			btn_trasmettre =true;

@@ -51,7 +51,80 @@
      <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
      
       <div class="row">
-     
+     <div class="col-md-12">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN #{controleController.type}</div></div>
+         </div>
+         <div class="box-body">
+          <div class="row">
+	            <div class="col-md-2">
+	             <label for="gestion1" class="col-sm-5 control-label">Gestion<span style="color:red;"> *</span></label>
+	              <div class="col-sm-6">
+		                    <p:selectOneMenu id="gestion1" value="#{pgpmAcController.gesCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{pgpmAcController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+	               </div>
+	            </div>
+	            <div class="col-md-10">
+	           <div class="form-group">
+		                  <label for="mini" class="col-sm-1 control-label">Ministère <span style="color:red;"> *</span></label>
+		                  <div class="col-sm-11">
+		                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="mini" readonly="true" style="width: 100%" />
+		                  </div>
+		                </div>
+	            </div> 
+	            
+	            
+	            <div class="col-md-1">
+	            </div>
+	            
+	            <div class="col-md-11">
+	           <div class="form-group">
+	           
+	           
+		                  <label for="mini3" class="col-sm-2 control-label">Autorité Contractante <span style="color:red;"> *</span></label>
+		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
+		                  <div class="col-sm-9">
+		                   <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{pgmAcController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{pgmAcController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                
+		                  <div class="col-sm-1">
+		                
+                          <!-- Bouton Enregistrer -->
+		                  </div>
+		                </div>
+	            </div> 
+	      </div>
+	      
+	      
+	   
+	      
+         </div>
+               </div>
+      </div>
       
      <div class="col-md-12">
           <div class="box box-success box-solid">
@@ -102,14 +175,14 @@
                   </div>
 	                </div>
 	                 <div class="form-group">
-                  <label for="relalisation" class="col-sm-2 control-label">Réalisation envisagée<span style="color:red;"> *</span></label>
-                  <div class="col-sm-10">
+                  <label for="relalisation" class="col-sm-3 control-label">Réalisation envisagée<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
                     <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{pgpmAcController.detailPlan.gpgObjet}" id="relalisation" style="width: 100%" />
                   </div>
               </div>	
                <div class="form-group">
-                  <label class="col-sm-2 control-label">Type de marché<span style="color:red;"> *</span></label>
-				  <div class="col-sm-10">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
                     <table>
 		                 <tr>
 		                 <td style="width: 160px"><p:inputText id="typMa1" type="text" value="#{pgpmAcController.reucpMarche.tymCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
@@ -126,8 +199,8 @@
                 
                 <h:panelGroup rendered="#{controleController.selectLoveModePgpm}" >
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
-				  <div class="col-sm-10">
+                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
                     <table>
 		                 <tr>
 		                 <td style="width: 160px"><p:inputText id="modeP1" type="text" value="#{pgpmAcController.recupModePassation.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
@@ -145,8 +218,8 @@
                 
                 <h:panelGroup rendered="#{controleController.selectLoveModePgspm}" >
                  <div class="form-group">
-                  <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
-				  <div class="col-sm-10">
+                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
                     <table>
 		                 <tr>
 		                 <td style="width: 160px"><p:inputText id="modePgs1" type="text" value="#{pgpmAcController.recupModeListe.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
@@ -163,8 +236,8 @@
                 </h:panelGroup>
                 
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Date de Lancement<span style="color:red;"> *</span></label>
-				  <div class="col-sm-4">
+                  <label  class="col-sm-3 control-label">Date de Lancement<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
                     <table>
 		                 <tr>
 		                 <td>
@@ -175,39 +248,107 @@
 		                 </tr>
                      </table>
                   </div>
-                    <label for="part" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;"> *</span></label>
-
-                  <div class="col-sm-3">
-                     <p:selectOneRadio value="#{pgpmAcController.detailPlan.gpgPartiePmePmi}" id="part">
-						<f:selectItem itemLabel="OUI" itemValue="O" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
                 </div>
-   <div class="form-group">
-                  <label for="financement" class="col-sm-2 control-label">Financement<span style="color:red;"> *</span></label>
-                  <div class="col-sm-10">
-                     <p:inputText id="modeP21" type="text" value="#{pgpmAcController.detailPlan.gpgLibFin}" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
                         
             </div>
             
             
             <div class="col-md-6">
               
+                <!-- Part reservée aux PME  -->
                 
+                 <div class="form-group">
+                  <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;"> *</span></label>
+
+                  <div class="col-sm-9">
+                     <p:selectOneRadio value="#{pgpmAcController.detailPlan.gpgPartiePmePmi}" id="part">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                  </div>
+                </div> 
+                
+               <div class="form-group">
+                  <label for="financement" class="col-sm-3 control-label">Financement<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                     <p:inputText id="modeP21" type="text" value="#{pgpmAcController.detailPlan.gpgLibFin}" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
                 
                 
                  <div class="form-group">
-                  <label for="observation" class="col-sm-2 control-label">Observation</label>
+                  <label for="observation" class="col-sm-3 control-label">Observation</label>
 
-                  <div class="col-sm-10">
-                    <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{pgpmAcController.detailPlan.gpgCommentaire}"  id="observation" style="width: 100%" />
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="5" cols="33" styleClass="form-control" value="#{pgpmAcController.detailPlan.gpgCommentaire}"  id="observation" style="width: 100%" />
                     
                   </div>
-                </div>
-                <div class="box box-success box-solid">
+                </div>	
+            </div>
+            </div>
+            <!-- /.box-body -->
+            
+              <div class="box-footer">
+              
+              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink> 
+	                
+	                <p:commandLink rendered="#{pgpmAcController.btnAgpmRappel}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanRappel()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	                
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	                
+	                 <p:commandLink rendered="#{pgpmAcController.btnPgspmRappel}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPgspmRappel()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	           
+	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Creer
+	                </p:commandLink>
+	           </h:panelGroup>
+	                </div>
+          </div>
+     </div>
+     </div>
+      <div class="row">
+   <div class="col-md-8">
+    <div class="box box-success box-solid">
         <div class="box-header with-border">
          <div class="col-md-10 "><div  style="color: #fff">LISTE DES FINANCEMENTS</div></div>
         
@@ -288,84 +429,19 @@
             
             
         </div>
-                
-      	
-            </div>
-            </div>
-            <!-- /.box-body -->
-            
-              <div class="box-footer">
-              
-              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink> 
-	                
-	                <p:commandLink rendered="#{pgpmAcController.btnAgpmRappel}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanRappel()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink>
-	                
-	           </h:panelGroup>
-	           
-	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink>
-	           </h:panelGroup>
-	           
-	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
-	              <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlan()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink>
-	           </h:panelGroup>
-	           
-	             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink>
-	                
-	                 <p:commandLink rendered="#{pgpmAcController.btnPgspmRappel}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPgspmRappel()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink>
-	           </h:panelGroup>
-	           
-	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink>
-	           </h:panelGroup>
-	           
-	            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
-	              <p:commandLink rendered="#{controleController.btn_save_pgspm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanPgspm()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Creer
-	                </p:commandLink>
-	           </h:panelGroup>
-	                </div>
-          </div>
-     </div>
-     </div>
-      <div class="row">
-
-    <div class="col-md-12">
+   </div>
+    <div class="col-md-4">
      <div class="box box-success box-solid">
         <div class="box-header with-border">
                 <div class="col-md-12 "><div  style="color: #fff"> LISTE DES OPERATIONS <h:panelGroup rendered="#{controleController.nbrepgpm}"> <span  style="color: #fff; font-size:18px; font-weight:bold">( #{pgpmAcController.nbrePgpm} Opération(s) )</span></h:panelGroup> <h:panelGroup rendered="#{controleController.nbrepgspm}"> <span  style="color: #fff; font-size:18px; font-weight:bold">( #{pgpmAcController.nbrePgspm} Opération(s))</span></h:panelGroup> </div></div> 
             </div>
             <div class="box-body">
-                 <p:dataTable id="tpgpm" rendered="#{controleController.tpgpm}" styleClass ="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.objetList}" scrollable="true" scrollHeight="150" emptyMessage="Aucun détail enregistré">
+                 <p:dataTable id="tpgpm" rendered="#{controleController.tpgpm}" styleClass ="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.objetList}" scrollable="true" scrollHeight="100" emptyMessage="Aucun détail enregistré">
                    <p:column headerText="Operations" styleClass="col-sm-12">
 				            <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
                  </p:dataTable>
-                  <p:dataTable id="tpgspm" rendered="#{controleController.tpgspm}" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.listPgspm}" scrollable="true" scrollHeight="150" emptyMessage="Aucun détail enregistré">
+                  <p:dataTable id="tpgspm" rendered="#{controleController.tpgspm}" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.listPgspm}" scrollable="true" scrollHeight="100" emptyMessage="Aucun détail enregistré">
                    <p:column headerText="Operations" styleClass="col-sm-12">
 				            <h:outputText value="#{slctdTb.affGpgObjet}" />
 				        </p:column>
