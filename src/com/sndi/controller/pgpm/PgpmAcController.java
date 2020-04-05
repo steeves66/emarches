@@ -1181,6 +1181,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
              	     affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
              	     affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
              	     iservice.addObject(affichagePgpm);
+             	     
+             	     
+             	     
 		      				
 
           		    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -1189,7 +1192,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			    //Historisation des Plan Généraux
        			   THistoPlanGeneral histoPlan = new THistoPlanGeneral();
        			   histoPlan.setHpgDate(Calendar.getInstance().getTime());
-       			   histoPlan.setHpgMotif("Détail crée par l'Autorité Contractante");
+       			   histoPlan.setHpgMotif("PGPM crée par l'Autorité Contractante");
        			   histoPlan.setTStatut(statuts);
        			   histoPlan.setTDetailPlanGeneral(detailPlan);
        			   histoPlan.setTFonction(userController.getSlctd().getTFonction());
@@ -1810,6 +1813,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 statutUpdate ="S2D";
 				 } 
 			   }
+		
 			 
 			 listeDetail =(List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
 						new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
@@ -2606,7 +2610,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             public void saveFinancement(){
             	
             	if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) 
-            			||souCode.equalsIgnoreCase("") ||"".equals(souCode) ||sourfin.equalsIgnoreCase("") || "".equals(sourfin)) {
+            			||souCode.equalsIgnoreCase("") ||"".equals(souCode) ||sourfin.equalsIgnoreCase("") || "".equals(sourfin) || detailPlan.getGpgLibFin().equalsIgnoreCase("") || "".equals(detailPlan.getGpgLibFin())) {
 			        //Message d'erreur
 		    		  FacesContext.getCurrentInstance().addMessage(null,
 			          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, saisir votre opération!", ""));
