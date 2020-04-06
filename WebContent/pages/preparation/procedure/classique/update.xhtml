@@ -248,7 +248,7 @@
 				            </h:outputText>
 				        </p:column>
 				         <p:column headerText="Actions" styleClass="col-sm-1">
-				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancement}" title="Supprimer" update="gnl">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancementUpdate()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.selectFinance}" />
@@ -651,7 +651,7 @@
 	              
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{pgpmAcController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
+			            <p:commandLink action="#{pgpmAcController.saveFinancementUpdate()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>

@@ -2742,9 +2742,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     			        iservice.addObject(newFinancement);
 
     				    //methode qui charge les financements du projet crée
-    				    chargeFinancement();
+    				    chargeFinancementUpdate();
     				    //methode qui charge la liste des pgpm
-    				    chargeData();
+    				   // chargeData();
     				    //Message de Confirmation
     				    userController.setTexteMsg("Financement enregistré avec succès !");
     				    userController.setRenderMsg(true);
@@ -2803,7 +2803,24 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	 
     	 
     	 
-    	 //sppression de financement
+    	 //sppression de financement update
+		 public void removeFinancementUpdate() {
+			 System.out.print("+-------------+ "+getSelectFinance().getFipId());
+			 try {
+				 iservice.deleteObject(getSelectFinance());
+					chargeFinancementUpdate();
+					userController.setTexteMsg("Suppression effectuée avec succès !");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+
+			 } catch (org.hibernate.exception.ConstraintViolationException e) {
+				 userController.setTexteMsg("Impossible de supprimer l'Opérateur !");
+				 userController.setRenderMsg(true);
+				 userController.setSevrityMsg("danger");	 
+			 }
+		 }
+		 
+		 //sppression de financement
 		 public void removeFinancement() {
 			 System.out.print("+-------------+ "+getSelectFinance().getFipId());
 			 try {
