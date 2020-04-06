@@ -242,7 +242,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private boolean etatFinancement2 =false;
 		 private boolean btnNewAgpm =false;
 		 private boolean btnAgpmRappel =false;
-		 private boolean loveAgpmRappel =true;
+		 private boolean loveAgpmRappel =false;
 		 public boolean selectTresor =false;
 		 private boolean btnPgspmRappel =false;
 		 private boolean selectPartBai = false;
@@ -498,6 +498,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			
 			//Tri sur les types de financement  
 			public void chargeSourceCheck() { 
+		    listeSourceFinance.clear();
 			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 			      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
 				}
@@ -1251,7 +1252,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			
        			  chargeData();
        			
-       			  userController.setTexteMsg("Détail enregistré avec succès!");
+       			  userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
        			  userController.setRenderMsg(true);
        			  userController.setSevrityMsg("success");
        			
@@ -1259,6 +1260,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			  controleController.btn_edit_pgpm = true; 
        			  controleController.btn_edit_pgspm = false; 
        			  btnAgpmRappel = false;
+       			  loveAgpmRappel = true;
       		    
                 }else {
           	          plan.setTGestion(new TGestion(gesCode));
@@ -1345,6 +1347,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      controleController.btn_edit_pgpm = true;
      			      controleController.btn_edit_pgspm = false;
      			      btnAgpmRappel = false;
+     			      loveAgpmRappel = true;
          		     
                    }
     	       }  
@@ -2985,6 +2988,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				case "pgpm1":
 					chargeData();
 					chargeDataAvaliderPgpm();
+					listeFinancement.clear();
+					listeFinancementAgpm.clear();
 					break;
 				case "pgpm2":
 					chargeBailleur();
@@ -2996,7 +3001,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeSourceFinance();
 					chargeAgpm();
 					controleController.btn_save_pgpm =true ;
-					
+					listeFinancement.clear();
+					listeFinancementAgpm.clear();
 				break;
 				case "pgpm3":
 					editForm();
