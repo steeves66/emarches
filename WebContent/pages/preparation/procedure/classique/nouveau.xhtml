@@ -302,6 +302,12 @@
 			             <i class="ace-icon fa fa-save"></i> Creer
 	                </p:commandLink> 
 	                
+	                 <p:commandLink rendered="#{controleController.btn_save_pgpm}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.vider()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			             <i class="ace-icon fa fa-save"></i> Réinitialiser
+	                </p:commandLink>
+	                
+	                
+	                
 	                <p:commandLink rendered="#{pgpmAcController.btnAgpmRappel}" styleClass="btn btn-success row pull-right"  action="#{pgpmAcController.creerDetailPlanRappel()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Creer

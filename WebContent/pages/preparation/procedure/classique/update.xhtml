@@ -339,7 +339,7 @@
                <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e;color:white"  update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		     </p:commandLink>
-               <p:commandLink action="#{pgpmAcController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('diff').hide()" update=":gnl:finance">
+               <p:commandLink action="#{pgpmAcController.saveFinancementUpdate()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('diff').hide()" update=":gnl:finance">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
