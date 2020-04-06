@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-06T12:22:00 -->
+<!-- 2020-04-06T16:50:03 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pgpm2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa970b9-a7ef-4c6b-b72a-fbcc7c94abfa">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -46,6 +46,7 @@ and vp.plg_ges_code= $P{param_code}
 and vp.aff_gpg_acteur_saisie =$P{param_op}]]>
 		</queryString>
 		<field name="V_ID" class="java.math.BigDecimal"/>
+		<field name="AFF_STATUT" class="java.lang.String"/>
 		<field name="AFF_GPG_ID" class="java.math.BigDecimal"/>
 		<field name="SOU_LIBELLE" class="java.lang.String"/>
 		<field name="AFF_GPG_OBJET" class="java.lang.String"/>
@@ -242,12 +243,12 @@ and pl.plg_fon_cod = $P{param_op}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="250" uuid="1d2f7c13-3369-40ec-8231-668e28580676">
+					<jr:column width="230" uuid="1d2f7c13-3369-40ec-8231-668e28580676">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
 						<jr:tableHeader style="Table_TH" height="27" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="250" height="27" forecolor="#FFFFFF" uuid="031a8c75-3152-42b1-aa13-d211d69121b4"/>
+								<reportElement x="0" y="0" width="230" height="27" forecolor="#FFFFFF" uuid="031a8c75-3152-42b1-aa13-d211d69121b4"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8" isBold="true"/>
@@ -258,7 +259,7 @@ and pl.plg_fon_cod = $P{param_op}]]>
 						<jr:detailCell style="Table_TD" height="15">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="250" height="15" uuid="0678cc9f-d495-487c-aabc-d4eba44212f6"/>
+								<reportElement x="0" y="0" width="230" height="15" uuid="0678cc9f-d495-487c-aabc-d4eba44212f6"/>
 								<box padding="3"/>
 								<textElement verticalAlignment="Middle">
 									<font size="7"/>
@@ -290,12 +291,12 @@ and pl.plg_fon_cod = $P{param_op}]]>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="140" uuid="08697090-7b9d-4aa0-be94-d482e148b079">
+					<jr:column width="120" uuid="08697090-7b9d-4aa0-be94-d482e148b079">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne5"/>
 						<jr:tableHeader style="Table_TH" height="27" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="140" height="27" forecolor="#FFFFFF" uuid="94b2e8c2-27ff-47a2-9881-5c528b9d3a2d"/>
+								<reportElement x="0" y="0" width="120" height="27" forecolor="#FFFFFF" uuid="94b2e8c2-27ff-47a2-9881-5c528b9d3a2d"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="8" isBold="true"/>
@@ -306,7 +307,7 @@ and pl.plg_fon_cod = $P{param_op}]]>
 						<jr:detailCell style="Table_TD" height="15">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="140" height="15" uuid="6e183c59-969d-442c-a99b-75a5b05f649c"/>
+								<reportElement x="0" y="0" width="120" height="15" uuid="6e183c59-969d-442c-a99b-75a5b05f649c"/>
 								<box padding="3"/>
 								<textElement verticalAlignment="Middle">
 									<font size="7"/>
@@ -389,6 +390,27 @@ and pl.plg_fon_cod = $P{param_op}]]>
 									<font size="7"/>
 								</textElement>
 								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_GPG_DATE_DAO})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="7588c287-8eac-4866-8e7b-9332c6f38620">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne9"/>
+						<jr:tableHeader style="Table_TH" height="27" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="27" forecolor="#FFFFFF" uuid="8b06d653-3cce-4241-a53b-c70608c83b5f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="8" isBold="true"/>
+								</textElement>
+								<text><![CDATA[STATUT]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="15">
+							<textField>
+								<reportElement x="0" y="0" width="40" height="15" uuid="d7404b68-5a08-4b51-b941-e080c5aa7cdd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="7"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{AFF_STATUT}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
