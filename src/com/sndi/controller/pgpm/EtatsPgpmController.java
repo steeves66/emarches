@@ -160,7 +160,7 @@ public class EtatsPgpmController {
 			 public void imprimerPgpmDet() {
 				 //String operateur = userController.getSlctd().getTFonction().getFonCod();
 				 //projetReport.longStringparam2(detail.getPlgId(), operateur, "Pgpm", "Pgpm");
-					projetReport.longparam1(detail.getAffGpgId(), "Pgpm", "Pgpm");
+					projetReport.longparam1(detail.getAffGpgId(), "Fiche_pgpm", "Fiche_pgpm");
 				}
 			 
 			 //Edition du PGSPM Detail

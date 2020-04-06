@@ -1911,8 +1911,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						affiche.setTStatut(new TStatut(statutUpdate));
 						affiche.setAffGpgStatutRetour("1");
 					    iservice.updateObject(affiche);
-				       
-					     chargeData();
+                        }
 					     chargeDataAvaliderPgpm();
 					     chargePgpmDifCp();
 					     chargePgpmDifDmp();
@@ -1920,9 +1919,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					      userController.setTexteMsg(" Désolé, votre PGPM a été rejeté!");
 						  userController.setRenderMsg(true);
 						  userController.setSevrityMsg("success");
-				  		
-                        }
-					}
+					}	     
 		 }
 		 
 		 
