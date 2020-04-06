@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-06T10:52:13 -->
+<!-- 2020-04-06T15:22:00 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -38,7 +38,7 @@
 		<queryString language="SQL">
 			<![CDATA[select f.fip_gpg_id,f.fip_type_finance,b.bai_libelle, f.fip_sou_code ,f.fip_montant_cfa,f.fip_tresor
 from t_financement_pgpm f,t_bailleur b
-where f.fip_bai_code = b.bai_code
+where f.fip_bai_code = b.bai_code (+)
 and f.fip_gpg_id =$P{param_code}]]>
 		</queryString>
 		<field name="FIP_GPG_ID" class="java.math.BigDecimal"/>
@@ -71,23 +71,18 @@ and f.fip_gpg_id =$P{param_code}]]>
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[select af.*,tym.tym_libelle_long,tym.tym_libelle_court,mop.mop_libelle_long ,f.fon_libelle, min.min_libelle,st.str_code,st.str_libelle_court,st.str_libelle_long ,sf.sou_libelle, fg.fip_montant_cfa,fg.fip_montant_devise,ba.bai_libelle,dev.dev_libelle,dev.dev_symbole
-from t_affichage_pgpm af, t_type_marche tym, t_mode_passation mop, t_fonction f, t_ministere min,t_structure st, t_financement_pgpm fg,t_source_financement sf, t_bailleur ba, t_devise dev
+		<![CDATA[select af.*,tym.tym_libelle_long,tym.tym_libelle_court,mop.mop_libelle_long ,f.fon_libelle, min.min_libelle,st.str_code,st.str_libelle_court,st.str_libelle_long 
+from t_affichage_pgpm af, t_type_marche tym, t_mode_passation mop, t_fonction f, t_ministere min,t_structure st
 where af.aff_gpg_tym_code = tym.tym_code
 and af.aff_gpg_mop_code = mop.mop_code
 and af.aff_gpg_fon_cod = f.fon_cod
 and af.aff_gpg_str_code = st.str_code
 and st.str_min_code = min.min_code
-and af.aff_gpg_id = fg.fip_gpg_id (+)
-and af.aff_gpg_source_fin = sf.sou_code (+)
-and fg.fip_sou_code = sf.sou_code 
-and fg.fip_bai_code = ba.bai_code
-and fg.fip_dev_code = dev.dev_code 
 and af.aff_gpg_id=  $P{param_code}]]>
 	</queryString>
-	<field name="AFF_GPG_ID" class="java.lang.Long"/>
-	<field name="AFF_GPG_PLG_ID" class="java.lang.Long"/>
-	<field name="AFF_GPG_AGP_ID" class="java.lang.Long"/>
+	<field name="AFF_GPG_ID" class="java.math.BigDecimal"/>
+	<field name="AFF_GPG_PLG_ID" class="java.math.BigDecimal"/>
+	<field name="AFF_GPG_AGP_ID" class="java.math.BigDecimal"/>
 	<field name="AFF_GPG_TYPE_PLAN" class="java.lang.String"/>
 	<field name="AFF_GPG_STA_CODE" class="java.lang.String"/>
 	<field name="AFF_GPG_TYM_CODE" class="java.lang.String"/>
@@ -111,6 +106,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 	<field name="AFF_GPG_DATE_VAL_CPMP" class="java.sql.Timestamp"/>
 	<field name="AFF_GPG_DATE_VAL_DMP" class="java.sql.Timestamp"/>
 	<field name="AFF_GPG_TYPE_FINANCE" class="java.lang.String"/>
+	<field name="AFF_GPG_LIB_FIN" class="java.lang.String"/>
 	<field name="TYM_LIBELLE_LONG" class="java.lang.String"/>
 	<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
@@ -119,12 +115,6 @@ and af.aff_gpg_id=  $P{param_code}]]>
 	<field name="STR_CODE" class="java.lang.String"/>
 	<field name="STR_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
-	<field name="SOU_LIBELLE" class="java.lang.String"/>
-	<field name="FIP_MONTANT_CFA" class="java.math.BigDecimal"/>
-	<field name="FIP_MONTANT_DEVISE" class="java.math.BigDecimal"/>
-	<field name="BAI_LIBELLE" class="java.lang.String"/>
-	<field name="DEV_LIBELLE" class="java.lang.String"/>
-	<field name="DEV_SYMBOLE" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -315,7 +305,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="140" height="30" uuid="b88d0bd4-4baa-4cb6-b1ea-55930c82d72f"/>
 								<textFieldExpression><![CDATA[$F{FIP_TYPE_FINANCE}]]></textFieldExpression>
 							</textField>
@@ -333,7 +323,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="100" height="30" uuid="6ce456a3-d7e0-4b48-8c3a-cc513b582e58"/>
 								<textFieldExpression><![CDATA[$F{BAI_LIBELLE}]]></textFieldExpression>
 							</textField>
@@ -351,7 +341,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="100" height="30" uuid="c5827b7c-1ce4-4890-a8b7-c0d5ad0f6ce8"/>
 								<textFieldExpression><![CDATA[$F{FIP_SOU_CODE}]]></textFieldExpression>
 							</textField>
@@ -369,7 +359,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="120" height="30" uuid="b0438fda-cfd3-4cc2-8dc0-403d264f5b0b"/>
 								<textFieldExpression><![CDATA[$F{FIP_MONTANT_CFA}]]></textFieldExpression>
 							</textField>
@@ -387,7 +377,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="95" height="30" uuid="b7f4e618-ae4d-4b6e-8966-73b7cb6979b7"/>
 								<textFieldExpression><![CDATA[$F{FIP_TRESOR}]]></textFieldExpression>
 							</textField>

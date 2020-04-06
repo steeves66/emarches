@@ -410,12 +410,11 @@
 		         </p:commandLink>
                  </td>
                  <td class="pull-right">
-                  <p:commandLink  rendered="#{controleController.btn_edit_pgpm}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{pgpmAcController.imprimerPgpm()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la Fiche 
-				      </p:commandLink>
+                  <p:commandLink  rendered="#{controleController.btn_edit_pgpm}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{pgpmAcController.pgpmUniqueSaisie()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'opération				      </p:commandLink>
 				      
 				       <p:commandLink rendered="#{controleController.btn_edit_pgspm}"  styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{pgpmAcController.imprimerPgspm()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la Fiche 
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'opération
 				      </p:commandLink>
                  </td>
                

@@ -1170,8 +1170,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       @Transactional
       public void creerDetailPlan() throws IOException{
     	  
-    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") ||
-    			  marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("")  ) {
+    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("")
+    			 ||"".equals(reucpMarche.getTymCode()) ||  "".equals(recupModePassation.getMopCode())) {
     		  //Message d'erreur
     		  FacesContext.getCurrentInstance().addMessage(null,
 	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -1263,6 +1263,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			  controleController.btn_edit_pgspm = false; 
        			  btnAgpmRappel = false;
        			  loveAgpmRappel = true;
+       			  
       		    
                 }else {
           	          plan.setTGestion(new TGestion(gesCode));
@@ -1350,6 +1351,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      controleController.btn_edit_pgspm = false;
      			      btnAgpmRappel = false;
      			      loveAgpmRappel = true;
+     			     controleController.btn_save_pgpm = true;
          		     
                    }
     	       }  
@@ -2070,14 +2072,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 etatFinancement2 = true;
 				 loveAgpmRappel = false;
 				 btnAgpmRappel = true;
-				 controleController.btn_save_pgpm = false;
+				 
+				 //controleController.btn_save_pgpm = false;
 			 }else {
 				 etatAgpm= false;
 				 etatFinancement1 =true;
 				 etatFinancement2 =false;
-				 loveAgpmRappel = true;
+				 loveAgpmRappel = false;
 				 btnAgpmRappel =false;
-				 controleController.btn_save_pgpm = true;
+				 //controleController.btn_save_pgpm = true;
 			 }
 		 }
 		 
@@ -2158,6 +2161,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       	 public void pgpmUnique() { 
       		 projetReport.longparam1(slctdTd.getAffGpgId(), "Fiche_pgpm", "Fiche_pgpm" );
       	 }
+      	 
+      	 
+      	 
+      	 
+      	//Impression unique du pgpm ou pgspm
+      	 public void pgpmUniqueSaisie() { 
+      		 projetReport.longparam1(detailPlan.getGpgId(), "Fiche_pgpm", "Fiche_pgpm" );
+      	 }
+      	 
+      	 
       	 
   
       	 
