@@ -626,6 +626,20 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));	 		 
 			 }
 			 
+			//Liste des Modes de Passation restreint
+			 public void razchargeMode() {
+				 listeMode.clear();
+				 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));
+				 filtreModePassation="";
+			 } 
+			 
+			 //Filtre de la Liste des Modes de Passation restreint
+			 public void filtreChargeMode() {
+				 listeMode.clear();
+				 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE")),
+						 new WhereClause("MOP_LIBELLE_LONG",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%")));	 		 
+			 }
+			 
 			
 			 
 			//Liste des Pgpm validés par le dmp
@@ -733,6 +747,22 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void chargeMarches() {
 			 listeTypeMarches.clear();
 			 listeTypeMarches =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
+			 filtreTypeMarche ="";
+			}
+		 
+		//Réinitialiser les Types de Marchés
+		 public void razchargeMarches() {
+			 listeTypeMarches.clear();
+			 listeTypeMarches =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
+			 filtreTypeMarche ="";
+			}
+		 
+		 
+		//Réinitialiser les modes de Passation
+		 public void razchargeModePassation() {
+			 listeModePassation.clear();
+			 listeModePassation =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+			 filtreModePassation="";
 			}
 		 
 		 
@@ -740,6 +770,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void chargeModePassation() {
 			 listeModePassation.clear();
 			 listeModePassation =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+			 filtreModePassation="";
 			}
 		 
 		 //Afficher les financements du projet ou agpm selectionné
@@ -1136,7 +1167,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       @Transactional
       public void creerDetailPlan() throws IOException{
     	  
-    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("") ) {
+    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") ||
+    			  marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
     		  //Message d'erreur
     		  FacesContext.getCurrentInstance().addMessage(null,
 	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -1185,9 +1217,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
              	     affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
              	     iservice.addObject(affichagePgpm);
              	     
-             	     
-             	     
-		      				
+             	    //Création du financement
+         		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+ 			        newFinancement.setTDevise(new TDevise(devCode));
+ 			        newFinancement.setTBailleur(new TBailleur(baiCode));
+ 			        newFinancement.setTDetailPlanGeneral(detailPlan);
+ 			        newFinancement.setFipTypeFinance(sourfin);
+ 			        iservice.addObject(newFinancement);
+             	      	
 
           		    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
        			   TStatut statuts = new TStatut();
@@ -1220,6 +1257,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			
        			  //etatDossier = true;
        			  controleController.btn_edit_pgpm = true; 
+       			  controleController.btn_edit_pgspm = false; 
        			  btnAgpmRappel = false;
       		    
                 }else {
@@ -1263,9 +1301,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            	          affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
            	          affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
            	          affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
-           	          //String recherche = detailPlan.getGpgObjet()+""+detailPlan.getGpgCode()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgPartiePmePmi()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getGpgStatutRetour()+""+detailPlan.getTTypeMarche().getTymCode()+""+detailPlan.getTPlanGeneral().getPlgId()+""+detailPlan.getGpgAgpId()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
-       	              //affichagePgpm.setAffGpgRecherche(recherche);
            	          iservice.addObject(affichagePgpm);
+           	          
+           	          //Création du financement
+           		      newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+   			          newFinancement.setTDevise(new TDevise(devCode));
+   			          newFinancement.setTBailleur(new TBailleur(baiCode));
+   			          newFinancement.setTDetailPlanGeneral(detailPlan);
+   			          newFinancement.setFipTypeFinance(sourfin);
+   			          iservice.addObject(newFinancement);
        	 
 
         		      List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -1278,13 +1322,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      histoPlan.setTStatut(statuts);
      			      histoPlan.setTDetailPlanGeneral(detailPlan);
      			      histoPlan.setTFonction(userController.getSlctd().getTFonction());
-     			     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
+     			      histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
      			      iservice.addObject(histoPlan);
      			      
      			     String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
- 					String rechercheAll = search.replace("null","");
+ 					 String rechercheAll = search.replace("null","");
  					
- 					List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+ 					 List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
  			      				new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+affichagePgpm.getAffGpgId()));
  		      				TAffichagePgpm affgp = new TAffichagePgpm();
  		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
@@ -1299,6 +1343,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			
      			      //etatDossier = true;
      			      controleController.btn_edit_pgpm = true;
+     			      controleController.btn_edit_pgspm = false;
      			      btnAgpmRappel = false;
          		     
                    }
@@ -1411,9 +1456,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            			                userController.setRenderMsg(true);
            			                userController.setSevrityMsg("success");
            			
-           			                etatDossier = true;
+           			                //etatDossier = true;
            			                controleController.btn_edit_pgpm = true; 
            			                controleController.btn_save_pgpm = false;
+        			                controleController.btn_save_pgspm = false;
            			                
            			                vider();
           		    
@@ -1457,9 +1503,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	                           affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                	                           affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                	                           affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-               	                        affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
-               	                           //String recherche = detailPlan.getGpgObjet()+""+detailPlan.getGpgCode()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgPartiePmePmi()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getGpgStatutRetour()+""+detailPlan.getTTypeMarche().getTymCode()+""+detailPlan.getTPlanGeneral().getPlgId()+""+detailPlan.getGpgAgpId()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
-           	                               //affichagePgpm.setAffGpgRecherche(recherche);
+               	                           affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                	                           iservice.addObject(affichagePgpm);
                	                           
                	                           
@@ -1505,9 +1549,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          			                        userController.setRenderMsg(true);
          			                        userController.setSevrityMsg("success");
          			
-         			                        etatDossier = true;
+         			                        //etatDossier = true;
          			                        controleController.btn_edit_pgpm = true;
-         			                       controleController.btn_save_pgpm = false;
+         			                        controleController.btn_save_pgpm = false;
+         			                        controleController.btn_edit_pgspm = false; 
+                 			                controleController.btn_save_pgpm = false;
+              			                    controleController.btn_save_pgspm = false;
          			                       vider();
                                   }
         	                  }  
@@ -2238,7 +2285,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          @Transactional
          public void creerDetailPlanPgspm() throws IOException{
         	 
-        	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || marche.getTymCode().equalsIgnoreCase("") || passationListe.getMopCode().equalsIgnoreCase("")) {
+        	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") 
+        			 || marche.getTymCode().equalsIgnoreCase("") || passationListe.getMopCode().equalsIgnoreCase("") || sourfin.equalsIgnoreCase("")) {
        		     //Message d'erreur
        		      FacesContext.getCurrentInstance().addMessage(null,
    	              new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -2284,7 +2332,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                    affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                    affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                    affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+                   affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                    iservice.addObject(affichagePgpm);
+                   
+                    //Création du financement
+        		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+			        newFinancement.setTDevise(new TDevise(devCode));
+			        newFinancement.setTBailleur(new TBailleur(baiCode));
+			        newFinancement.setTDetailPlanGeneral(detailPlan);
+			        newFinancement.setFipTypeFinance(sourfin);
+			        iservice.addObject(newFinancement);
               	 
 
                		 List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -2307,7 +2364,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             			userController.setSevrityMsg("success");
             			
             			//etatDossier = true;
-            			controleController.btn_edit_pgspm = true;  
+            			controleController.btn_edit_pgspm = true;
+            			controleController.btn_edit_pgpm = false;
+            			controleController.btn_save_pgpm = false;
+            			btnPgspmRappel = false;
            		    
                    }else {
                	       plan.setTGestion(new TGestion(gesCode));
@@ -2349,6 +2409,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 	   affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                 	   affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                 	   affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+                	   affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                 	   iservice.addObject(affichagePgpm);
             	 
 
@@ -2371,9 +2432,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
           			userController.setRenderMsg(true);
           			userController.setSevrityMsg("success");
           			
-          			//etatDossier = true;
+          			
         			controleController.btn_edit_pgspm = true;
-              		   
+        			controleController.btn_edit_pgpm = false; 
+        			controleController.btn_save_pgpm = false;
+        			btnPgspmRappel = false;
+        			
                      }
        	        }
          }
@@ -2430,7 +2494,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                        affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                        affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                        affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-                       //affichagePgpm.setTSourceFinancement(new TSourceFinancement());
+                       affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                        iservice.addObject(affichagePgpm);
                        
                        //Insertion dans T_Financement_PGPM
@@ -2468,8 +2532,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 			userController.setRenderMsg(true);
                 			userController.setSevrityMsg("success");
                 			
-                			//etatDossier = true;
-                			controleController.btn_edit_pgspm = true;  
+                			
+                			controleController.btn_edit_pgspm = true;
+                			controleController.btn_edit_pgpm = false;
+                			controleController.btn_save_pgspm = false;
+                			
                		    
                        }else {
                    	       plan.setTGestion(new TGestion(gesCode));
@@ -2511,6 +2578,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                     	   affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                     	   affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                     	   affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+                    	   affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                     	   iservice.addObject(affichagePgpm);
                 	       
                     	   //Insertion dans T_Financement_PGPM
@@ -2542,9 +2610,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
               			userController.setRenderMsg(true);
               			userController.setSevrityMsg("success");
               			
-              			//etatDossier = true;
+              			
             			controleController.btn_edit_pgspm = true;
-                  		   
+            			controleController.btn_edit_pgpm = false;
+            			controleController.btn_save_pgspm = false;
                          }
            	        }
         		 
@@ -2608,8 +2677,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	    
       	 
       	 
-	 
-	 
+	        //Ajout de Financement
+            @Transactional
             public void saveFinancement(){
             	
             	if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) 
@@ -2894,11 +2963,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 return userController.renderPage(value);
 				 }
 				  
-				 //Edition de l'PGPM
+				 //Edition de l'état PGPM
 				 public void imprimerPgpm() {
 					 String operateur = userController.getSlctd().getTFonction().getFonCod();
 						projetReport.longStringparam2(gesCode, operateur, "Pgpm", "Pgpm");
 					}
+				 
 				 
 				
 				 //Edition de l'PGSPM

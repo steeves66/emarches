@@ -22,8 +22,12 @@
           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
         #{controleController.libelle}
         </h:panelGroup>
+        
+          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
+        #{controleController.libelle}
+        </h:panelGroup>
         <small>
-        <!-- #{controleController.libelle1} -->
+         #{controleController.libelleSmall} 
         
         </small>
       </h3>

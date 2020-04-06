@@ -504,13 +504,19 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le libellé du marché"  > 
-						    <p:ajax event="keyup" update=":dlogMar:ndTbleMar" listener="#{pgpmAcController.filtreMarche()}" />
-							</p:inputText>
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{pgpmAcController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{pgpmAcController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmAcController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                    </span>
+					 </div>
+						 
 						
-						</label>
 						</div>
 						</div>
 						
@@ -546,18 +552,23 @@
     </h:form>
     
      <h:form id="dlogPas">
-	        <p:dialog  widgetVar="passationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passtion">
+	        <p:dialog  widgetVar="passationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passation">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreModePassation}"  class="gui-input"  placeholder="Saisir le mode de Passtion"  > 
-						     <p:ajax event="keyup" update=":dlogPas:ndTblePass" listener="#{pgpmAcController.filtreModePassation()}" />
-							</p:inputText>
-						
-						</label>
+						 <div class="col-md-6">
+						 
+						 <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{pgpmAcController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
+				        </span>
+                      <p:inputText  type="text" value="#{pgpmAcController.filtreModePassation}" id="filtrePass"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmAcController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
+                         </span>
+					 </div>
+						 
 						</div>
 						</div>
 						
@@ -605,13 +616,17 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreModePassation}"  class="gui-input"  placeholder="Saisir le mode de Passation"  > 
-						     <p:ajax event="keyup" update=":dlogPasMode:ndTblePgspm" listener="#{pgpmAcController.filtreModePassation()}" />
-							</p:inputText>
-						
-						</label>
+						 <div class="col-md-6">
+
+						 <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{pgpmAcController.razchargeMode()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm, dlogPasMode:filtrePasMode"/>
+				        </span>
+                      <p:inputText  type="text" value="#{pgpmAcController.filtreModePassation}" id="filtrePasMode"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmAcController.filtreChargeMode()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm" />
+                         </span>
+					 </div>
 						</div>
 						</div>
 						
