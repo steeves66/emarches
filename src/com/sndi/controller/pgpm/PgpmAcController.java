@@ -626,6 +626,20 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));	 		 
 			 }
 			 
+			//Liste des Modes de Passation restreint
+			 public void razchargeMode() {
+				 listeMode.clear();
+				 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));
+				 filtreModePassation="";
+			 } 
+			 
+			 //Filtre de la Liste des Modes de Passation restreint
+			 public void filtreChargeMode() {
+				 listeMode.clear();
+				 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE")),
+						 new WhereClause("MOP_LIBELLE_LONG",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%")));	 		 
+			 }
+			 
 			
 			 
 			//Liste des Pgpm validés par le dmp
@@ -733,6 +747,22 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void chargeMarches() {
 			 listeTypeMarches.clear();
 			 listeTypeMarches =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
+			 filtreTypeMarche ="";
+			}
+		 
+		//Réinitialiser les Types de Marchés
+		 public void razchargeMarches() {
+			 listeTypeMarches.clear();
+			 listeTypeMarches =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
+			 filtreTypeMarche ="";
+			}
+		 
+		 
+		//Réinitialiser les modes de Passation
+		 public void razchargeModePassation() {
+			 listeModePassation.clear();
+			 listeModePassation =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+			 filtreModePassation="";
 			}
 		 
 		 
@@ -740,6 +770,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void chargeModePassation() {
 			 listeModePassation.clear();
 			 listeModePassation =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+			 filtreModePassation="";
 			}
 		 
 		 //Afficher les financements du projet ou agpm selectionné
