@@ -25,6 +25,7 @@ public class ControleController {
 	
 	//Libellés
 	private String libelle="";
+	private String libelleSmall="";
 	private String libelle1="";
 	private String libelleProcedure="";
 	private String libellesmall="";
@@ -601,6 +602,7 @@ public class ControleController {
 			    			libelleProcedure="Index";
 			    			libelle="SAISIE DES PLANS GENERAUX DE PASSATION DE MARCHES";
 			    			libelle1="PLAN GENERAL DE PASSATIONS DES MARCHES";
+			    			libelleSmall="Procédure Normale";
 			    			btn_new_pgpm =true;
 			    			btn_new_pgspm =false;
 			    			btn_trasmettre =true;
@@ -635,6 +637,7 @@ public class ControleController {
 			    				type = "PGPM";
 			    				libelle="VALIDATION DES PLANS GENERAUX DE PASSATION DE MARCHES";	
 			    				libelle1="PREVALIDATION DES PLANS GENERAUX DE PASSATION DE MARCHES";
+			    				libelleSmall="Procédure Normale";
 			    				panelDetail=false;
 			    				panelForm=false;
 			   				    panelTraitement=true;
@@ -706,9 +709,10 @@ public class ControleController {
 			    			type = "PGSPM";
 			    			libelleProcedure="Index";
 			    			libelle="SAISIE DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";	
+			    			libelleSmall="Procédure Simplifiée";
 			    			btn_new_pgpm =false;
 			    			btn_new_pgspm =true;
-			    			btn_trasmettre =false;
+			    			btn_trasmettre =true;
 			    			btn_valider_cpmp =false; 
                             btn_valider_dmp =false;
                             btn_valider_pgspm_cpmp =false;
@@ -739,8 +743,9 @@ public class ControleController {
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPGSPM")) {
 			    				type = "PGSPM";
-			    				libelle="VALIDATION DES PLANS GENERAUX SIMPLIFIE DE PASSATION DE MARCHES";
-			    				libelle1="PREVALIDATION DES PLANS GENERAUX SIMPLIFIE DE PASSATION DE MARCHES";
+			    				libelle="VALIDATION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
+			    				libelle1="PREVALIDATION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
+			    				libelleSmall="Procédure Simplifiée";
 			    				panelDetail=false;
 			    				panelForm=false;
 			   				    panelTraitement=true;
@@ -6871,6 +6876,16 @@ public class ControleController {
 
 	public void setDatevalcpmp(String datevalcpmp) {
 		this.datevalcpmp = datevalcpmp;
+	}
+
+
+	public String getLibelleSmall() {
+		return libelleSmall;
+	}
+
+
+	public void setLibelleSmall(String libelleSmall) {
+		this.libelleSmall = libelleSmall;
 	}
 	
     
