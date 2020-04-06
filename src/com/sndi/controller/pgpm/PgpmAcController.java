@@ -1168,7 +1168,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       public void creerDetailPlan() throws IOException{
     	  
     	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") ||
-    			  marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("") || sourfin.equalsIgnoreCase("") ) {
+    			  marche.getTymCode().equalsIgnoreCase("") || modePassation.getMopCode().equalsIgnoreCase("")  ) {
     		  //Message d'erreur
     		  FacesContext.getCurrentInstance().addMessage(null,
 	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -1218,12 +1218,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
              	     iservice.addObject(affichagePgpm);
              	     
              	    //Création du financement
-         		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+         		   /* newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
  			        newFinancement.setTDevise(new TDevise(devCode));
  			        newFinancement.setTBailleur(new TBailleur(baiCode));
  			        newFinancement.setTDetailPlanGeneral(detailPlan);
  			        newFinancement.setFipTypeFinance(sourfin);
- 			        iservice.addObject(newFinancement);
+ 			        iservice.addObject(newFinancement);*/
              	      	
 
           		    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -1304,12 +1304,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            	          iservice.addObject(affichagePgpm);
            	          
            	          //Création du financement
-           		      newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+           		     /* newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
    			          newFinancement.setTDevise(new TDevise(devCode));
    			          newFinancement.setTBailleur(new TBailleur(baiCode));
    			          newFinancement.setTDetailPlanGeneral(detailPlan);
    			          newFinancement.setFipTypeFinance(sourfin);
-   			          iservice.addObject(newFinancement);
+   			          iservice.addObject(newFinancement);*/
        	 
 
         		      List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -2696,7 +2696,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     			        iservice.addObject(newFinancement);
     				    
     				
-    				    //Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
+    				   /* //Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
     				    List<TDetailPlanGeneral> PL =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
        						new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
     				    TDetailPlanGeneral detail = new TDetailPlanGeneral();
@@ -2712,7 +2712,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     					if(!AF.isEmpty()) aff =AF.get(0); 
     					aff.setTSourceFinancement(newFinancement.getTSourceFinancement());
     					aff.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
-    					iservice.updateObject(aff);
+    					iservice.updateObject(aff);*/
     					
     				    //methode qui charge les financements du projet crée
     				    chargeFinancement();
@@ -2723,7 +2723,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    userController.setRenderMsg(true);
     				    userController.setSevrityMsg("success");
     				    //viderFinancement();
-    				    vider();
+    				    //vider();
             	} 
 			}
                        //SaveFinancement de modification
