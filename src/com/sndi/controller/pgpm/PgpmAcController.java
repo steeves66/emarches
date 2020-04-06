@@ -1158,13 +1158,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				detail.setTTypeMarche(slctdTd.getTTypeMarche());
 				detail.setGpgLibFin(updateOperation.getGpgLibFin());
    				iservice.updateObject(detail);
-   			
-   				renderPage("pgpm1","SAIPGPM");
+   				userController.renderPage("pgpm1");
 		    	 userController.setTexteMsg("Modification éffectuée avec succès!");
 			     userController.setRenderMsg(true);
 			     userController.setSevrityMsg("success");
 			     chargeData();
       }
+     
+     
       
       //Enregistrement d'une opération PGPM sans AGPM
       @Transactional
