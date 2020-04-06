@@ -265,7 +265,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgDateSaisie = gpgDateSaisie;
 	}
 	
-	@Column(name = "GPG_STR_CODE", length = 3)
+	@Column(name = "GPG_STR_CODE", length = 50)
 	public String getGpgStrCode() {
 		return this.gpgStrCode;
 	}

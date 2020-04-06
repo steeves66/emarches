@@ -523,10 +523,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectTresor = true;
 					 selectPartBai= false;
 					 souCode="TRE";
-				    }else {
+				    }else 
+				         if(sourfin.equalsIgnoreCase("")){
 				    	  selectPartBai = false;
 				    	  selectBailleur = false;
 						  selectTresor = false;
+						  souCode="";
 				    }
 			 }
 			
@@ -1240,7 +1242,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			   histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
        			   iservice.addObject(histoPlan);
        			   
-       			String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
+       			String search = detailPlan.getGpgLibFin()+""+detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+userController.getSlctd().getTFonction().getFonCod()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
 				String rechercheAll = search.replace("null","");
 				
 				List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
@@ -1327,7 +1329,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
      			      iservice.addObject(histoPlan);
      			      
-     			     String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
+     			     String search = detailPlan.getGpgLibFin()+""+detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+userController.getSlctd().getTFonction().getFonCod()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
  					 String rechercheAll = search.replace("null","");
  					
  					 List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
@@ -1339,7 +1341,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			
      			      chargeData();
      			
-     			      userController.setTexteMsg("Détail enregistré avec succès!");
+     			      userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
      			      userController.setRenderMsg(true);
      			      userController.setSevrityMsg("success");
      			

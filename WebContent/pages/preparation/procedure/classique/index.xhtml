@@ -466,7 +466,7 @@
 					<div class="box box-success box-solid">
 						<div class="box-header with-border">
 							<div class="col-md-2 ">
-								<div style="color: #fff">LISTE DES OPERATIONS</div>
+								<div style="color: #fff">LISTE DES OPERATIONS<span  style="color: #fff; font-size:18px; font-weight:bold">( #{pgpmAcController.nbrePgpm} Opération(s) )</span></div>
 							</div>
 						 <h:panelGroup rendered="#{controleController.searchPgpm}">
 						<div class="col-md-4 ">	
@@ -535,16 +535,7 @@
          				
 				        </p:column>
 				        
-				         <p:column headerText="Autorité Contractante" styleClass="col-sm-4" >
-				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold "/>
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
-         				</h:panelGroup>
-         				
-				        </p:column> 
+				          
 				        
                          <p:column headerText="Type Marché" styleClass="col-sm-3" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
@@ -816,7 +807,7 @@
                              </h:panelGroup>
                              
                               <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-                                <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                                <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px, margin-right:3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                               </p:commandLink>
@@ -900,7 +891,7 @@
 	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du rejet du PGPM N° #{pgpmAcController.slctdTd.affGpgId}
+						Motif du retour du PGPM N° #{pgpmAcController.slctdTd.affGpgId}
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	                  <p:inputTextarea rows="4" value="#{pgpmAcController.pgpmstatut.hpgMotif}" cols="100" style="width:100%;" readonly="true"/>
@@ -917,7 +908,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du Pgpm N° #{pgpmAcController.slctdTd.affGpgId}
+						Motif du retour de l'opération N° #{pgpmAcController.slctdTd.affGpgId} du PGPM de l'AC : #{userController.getSlctd().getTOperateur.getOpeNom()}
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">
