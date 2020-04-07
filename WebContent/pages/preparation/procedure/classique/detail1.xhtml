@@ -192,7 +192,7 @@
             <!-- /.box-body -->
             </div>
             <h:panelGroup rendered="#{controleController.panelPgpm}">
-            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsPgpmController.imprimerPgpmDet()}" ajax="false">
+            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e;"  action="#{etatsPgpmController.imprimerPgpmDet()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'Opération
 				      </p:commandLink>
 				       <p:commandLink styleClass="btn btn-warning" action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" rendered="#{controleController.fermerSai}"  style="background-color: #f88b2e;" update=":content">
@@ -203,8 +203,8 @@
 		</p:commandLink>
 		</h:panelGroup>
 		  <h:panelGroup rendered="#{controleController.panelPgspm}">
-            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsPgpmController.imprimerPgspmDet()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PGSPM
+            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e;"  action="#{etatsPgpmController.imprimerPgspmDet()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'Opération
 				      </p:commandLink>
 				       <p:commandLink styleClass="btn btn-warning" action="#{pgpmAcController.renderPage('pgspm1','SAIPGSPM')}" rendered="#{controleController.fermerSai}"  style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer

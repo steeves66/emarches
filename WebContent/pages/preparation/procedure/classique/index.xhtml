@@ -759,13 +759,13 @@
 				        <p:column headerText="Lancement" styleClass="col-sm-2" >
 				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}"  style="color:red; font-weight:bold" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
          				 <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        </p:column>
@@ -774,12 +774,12 @@
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateValAc}" style="color:red; font-weight:bold ">
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateValAc}">
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        </p:column>
@@ -787,7 +787,7 @@
  
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				         
@@ -834,7 +834,7 @@
 	         		          </h:panelGroup>
                               
                               
-                              <p:commandLink class="btn btn-xs btn-warning" action="#{pgpmAcController.pgpmUnique()}" style="background-color: #f88b2e; margin-letf:3px" title="Editer le PGPM" ajax="false">
+                              <p:commandLink class="btn btn-xs btn-warning" action="#{pgpmAcController.pgpmUnique()}" style="background-color: #f88b2e; margin-left:3px" title="Editer le PGPM" ajax="false">
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                               </p:commandLink>
@@ -901,7 +901,7 @@
 	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du PGPM N° #{pgpmAcController.slctdTd.affGpgId}
+						Motif du retour du #{controleController.type} N° #{pgpmAcController.slctdTd.affGpgId}
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	                  <p:inputTextarea rows="4" value="#{pgpmAcController.pgpmstatut.hpgMotif}" cols="100" style="width:100%;" readonly="true"/>
@@ -943,7 +943,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
 			         <div class="col-md-3">
-			          PGPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -1003,7 +1003,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
 			         <div class="col-md-3">
-			          PGPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -1074,7 +1074,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
 			         <div class="col-md-3">
-			          PGPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -1141,7 +1141,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          PGPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -1209,7 +1209,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          PGPM 
+			          #{controleController.type}
 			         </div>
 			         
 			          <div class="col-md-3">

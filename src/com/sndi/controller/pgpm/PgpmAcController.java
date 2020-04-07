@@ -299,7 +299,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void chargeData(){
 			 getObjetList().clear();
 			 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
-					"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1S")),
+					"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SDR")),
 					//"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SDR")),
 					new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					new WhereClause("AFF_GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1337,10 +1337,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      controleController.btn_edit_pgspm = false;
      			      btnAgpmRappel = false;
      			      loveAgpmRappel = true;
-     			     controleController.btn_save_pgpm = true;
-         		     
+     			      controleController.btn_save_pgpm = true;
                    }
-    	       }  
+    	     }  
         }
       
       
