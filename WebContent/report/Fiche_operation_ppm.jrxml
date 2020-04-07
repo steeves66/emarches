@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-02-11T19:00:57 -->
+<!-- 2020-04-07T12:47:10 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_ppm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266b8536-66d8-494c-802e-76b24cc2afc4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -92,25 +92,6 @@ and af.aff_dpp_id= $P{param_code}]]>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="50" y="67" width="171" height="19" uuid="3fea0f12-33f3-43a6-a75c-48bc8aab7cc9"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Direction des Marchés Publics]]></text>
-			</staticText>
-			<image>
-				<reportElement x="109" y="32" width="57" height="33" uuid="bb1610fd-907f-45ad-8e64-970068071400"/>
-				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="1" y="0" width="281" height="30" uuid="0b37448c-fafe-42bc-9797-518aecd12047"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
-]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="388" y="19" width="166" height="17" uuid="390c8560-c8ea-444a-924f-05334984113f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -135,6 +116,10 @@ and af.aff_dpp_id= $P{param_code}]]>
 				</textElement>
 				<textFieldExpression><![CDATA["FICHE D'IDENTIFICATION DE L'OPERATION"]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="0" width="190" height="51" uuid="90c6e849-8180-4342-9b96-c1b07a7c8885"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<detail>

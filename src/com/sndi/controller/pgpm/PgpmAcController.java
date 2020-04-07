@@ -2303,7 +2303,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          public void creerDetailPlanPgspm() throws IOException{
         	 
         	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") 
-        			 || marche.getTymCode().equalsIgnoreCase("") || passationListe.getMopCode().equalsIgnoreCase("")) {
+        			 ||"".equals(reucpMarche.getTymCode()) ||  "".equals(recupModeListe.getMopCode())) {
        		     //Message d'erreur
        		      FacesContext.getCurrentInstance().addMessage(null,
    	              new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
@@ -2352,13 +2352,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                    affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                    iservice.addObject(affichagePgpm);
                    
-                    //Création du financement
-        		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
-			        newFinancement.setTDevise(new TDevise(devCode));
-			        newFinancement.setTBailleur(new TBailleur(baiCode));
-			        newFinancement.setTDetailPlanGeneral(detailPlan);
-			        newFinancement.setFipTypeFinance(sourfin);
-			        iservice.addObject(newFinancement);
               	 
 
                		 List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -2376,16 +2369,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             			
             			 chargeDataPgspm();
             			
-            			userController.setTexteMsg("Détail enregistré avec succès!");
+            			userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
             			userController.setRenderMsg(true);
             			userController.setSevrityMsg("success");
             			
-            			//etatDossier = true;
+            			
             			controleController.btn_edit_pgspm = true;
             			controleController.btn_edit_pgpm = false;
             			controleController.btn_save_pgpm = false;
             			btnPgspmRappel = false;
-           		    
+            			loveAgpmRappel = true;
+            			
                    }else {
                	       plan.setTGestion(new TGestion(gesCode));
               		   plan.setTFonction(userController.getSlctd().getTFonction());
@@ -2445,7 +2439,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
           			
           			chargeDataPgspm();
           			
-          			userController.setTexteMsg("Détail enregistré avec succès!");
+          			userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
           			userController.setRenderMsg(true);
           			userController.setSevrityMsg("success");
           			
@@ -2454,12 +2448,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
         			controleController.btn_edit_pgpm = false; 
         			controleController.btn_save_pgpm = false;
         			btnPgspmRappel = false;
+        			loveAgpmRappel = true;
         			
                      }
        	        }
          }
-         
-         
          @Transactional
          public void creerDetailPgspmRappel() throws IOException{
         	 
@@ -2640,7 +2633,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            	                  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre AGPM n'a pas de financement", ""));
         	                }
                      }
-      	 
 
 		 
 		//Methode Upload
@@ -3031,7 +3023,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeMode();
 					chargeSourceFinance();
 					chargeAgpm();
-					controleController.btn_save_pgpm =true ;
+					//controleController.btn_save_pgpm =true ;
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
 				break;
