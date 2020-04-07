@@ -305,11 +305,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					new WhereClause("AFF_GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("objetListe size: "+objetList.size());	
 				tableauBordController.chargeDataPgpm();
-				nbrePgpm =""+getNbrePgpmTotal();
+				nbrePgpm =""+getNbrePgpmTotal("S1S","S2D","SDR");
 		}
 		 
-		 public int getNbrePgpmTotal(){
-				int i = iservice.countTableByColumn("T_AFFICHAGE_PGPM", "AFF_ID",
+		 public int getNbrePgpmTotal(String src1,String src2,String src3){
+				int i = iservice.countTableByColumnIn("T_AFFICHAGE_PGPM", "AFF_ID",new ArrayList<String>(Arrays.asList("AFF_ID")),
+						"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 						new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 						new WhereClause("AFF_GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				return	i;	
@@ -401,7 +402,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						        new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							_logger.info("objetListe size: "+objetList.size());	 
 							tableauBordController.chargeDataPgpm();
-							nbrePgpm =""+getNbrePgpmTotal();
+							nbrePgpm =""+getNbrePgpmTotal("S1S","S2D","SDR");
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 						    	  getValidationListe().clear();
@@ -435,7 +436,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							new WhereClause("AFF_GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("objetListe size: "+objetList.size());	
 						tableauBordController.chargeDataPgpm();
-						nbrePgpm =""+getNbrePgpmTotal();
+						nbrePgpm =""+getNbrePgpmTotal("S1S","S2D","SDR");
 						multiFiltre ="";
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -471,7 +472,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							new WhereClause("AFF_GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("objetListe size: "+objetList.size());	
 						tableauBordController.chargeDataPgspm();
-						nbrePgpm =""+getNbrePgpmTotal();
+						nbrePgpm =""+getNbrePgpmTotal("S1S","S2D","SDR");
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 						    	  getValidationListe().clear();
@@ -545,7 +546,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						        new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							_logger.info("objetListe size: "+objetList.size());	 
 							tableauBordController.chargeDataPgspm();
-							nbrePgpm =""+getNbrePgpmTotal();
+							nbrePgpm =""+getNbrePgpmTotal("S1S","S2D","SDR");
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 						    	  getValidationListe().clear();
@@ -2868,6 +2869,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeDataAvaliderPgpm();
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
+					_logger.info("value: "+value+" action: "+action);
 					break;
 				case "pgpm2":
 					chargeBailleur();
@@ -2878,9 +2880,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeMode();
 					chargeSourceFinance();
 					chargeAgpm();
-					controleController.btn_save_pgpm =true ;
+					//controleController.btn_save_pgpm =true ;
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
+					_logger.info("value: "+value+" action: "+action);
 				break;
 				case "pgpm3":
 					editForm();

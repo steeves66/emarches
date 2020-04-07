@@ -115,6 +115,7 @@ public class ControleController {
 	private boolean btn_creerDetailAmi = false;
 	private boolean detailA = false;
 	public boolean btn_trans_ami =false;
+	public boolean btn_imprimpgspm = false;
 	
 	//DAO
 	private boolean panelDaoTableauBordSai =false;
@@ -547,6 +548,7 @@ public class ControleController {
 				 type = "PGPM";
 				 libelleProcedure="SAISIE D'UN NOUVEAU  PLAN GENERAL DE PASSATION DE MARCHES";
 			       libelle1="PLAN GENERAL DE PASSATIONS DES MARCHES";
+			       libelleSmall="Procédure Normale";
 			       panelDetail=false;
 				   panelForm=true;
 				   panelTraitement=false;
@@ -606,6 +608,7 @@ public class ControleController {
 			    			btn_new_pgpm =true;
 			    			btn_new_pgspm =false;
 			    			btn_trasmettre =true;
+			    			btn_imprimpgspm = false;
 			    			btn_valider_cpmp =false; 
                             btn_valider_dmp =false;
                             btn_valider_pgspm_cpmp =false;
@@ -676,9 +679,9 @@ public class ControleController {
 				    			}
 			 //PGSPM
 			 if(action.equalsIgnoreCase("ENGPGSPM")) {
-				 type = "PGSPM";
+				   type = "PGSPM";
 			       libelle1="SAISIE D'UN NOUVEAU PLAN GENERAL SIMPLIFIE DE PASSATION DE MARCHES";
-			       
+			       libelleSmall="Procédure Simplifiée";
 			       panelDetail=false;
 				   panelForm=true;
 				   panelTraitement=false;
@@ -692,6 +695,7 @@ public class ControleController {
 				   tpgspm =true;
 				   detailPg1 = false;
 				   detailPg2 = true;
+				   btn_save_pgpm = false;
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPGSPM")) {
 			    		type = "PGSPM";
@@ -715,6 +719,7 @@ public class ControleController {
 			    			btn_new_pgpm =false;
 			    			btn_new_pgspm =true;
 			    			btn_trasmettre =true;
+			    			btn_imprimpgspm = true;
 			    			btn_valider_cpmp =false; 
                             btn_valider_dmp =false;
                             btn_valider_pgspm_cpmp =false;
@@ -742,6 +747,7 @@ public class ControleController {
 							 btn_trans_pgspm = true;
 							 btn_trasmettre_pgspm =true;
 							 btn_differerPgspm_cpdmp = false;
+							 btn_save_pgpm =false;
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPGSPM")) {
 			    				type = "PGSPM";
@@ -6888,6 +6894,16 @@ public class ControleController {
 
 	public void setLibelleSmall(String libelleSmall) {
 		this.libelleSmall = libelleSmall;
+	}
+
+
+	public boolean isBtn_imprimpgspm() {
+		return btn_imprimpgspm;
+	}
+
+
+	public void setBtn_imprimpgspm(boolean btn_imprimpgspm) {
+		this.btn_imprimpgspm = btn_imprimpgspm;
 	}
 	
     
