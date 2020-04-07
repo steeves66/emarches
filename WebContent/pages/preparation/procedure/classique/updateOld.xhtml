@@ -27,7 +27,7 @@
             </li>
         <li class="active">
          <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | MODIFICATION 
            <!--  #{controleController.libelle1}  -->
              </p:commandLink>
         </li>
@@ -51,80 +51,7 @@
      <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
      
       <div class="row">
-     <div class="col-md-12">
-      <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN #{controleController.type}</div></div>
-         </div>
-         <div class="box-body">
-          <div class="row">
-	            <div class="col-md-2">
-	             <label for="gestion1" class="col-sm-5 control-label">Gestion<span style="color:red;"> *</span></label>
-	              <div class="col-sm-6">
-		                    <p:selectOneMenu id="gestion1" value="#{pgpmAcController.gesCode}"
-			                         effect="fade" style="width:100%">
-					       <f:selectItems value="#{pgpmAcController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
-		       		        </p:selectOneMenu>
-	               </div>
-	            </div>
-	            <div class="col-md-10">
-	           <div class="form-group">
-		                  <label for="mini" class="col-sm-1 control-label">Ministère <span style="color:red;"> *</span></label>
-		                  <div class="col-sm-11">
-		                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="mini" readonly="true" style="width: 100%" />
-		                  </div>
-		                </div>
-	            </div> 
-	            
-	            
-	            <div class="col-md-1">
-	            </div>
-	            
-	            <div class="col-md-11">
-	           <div class="form-group">
-	           
-	           
-		                  <label for="mini3" class="col-sm-2 control-label">Autorité Contractante <span style="color:red;"> *</span></label>
-		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
-		                  <div class="col-sm-9">
-		                   <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{pgmAcController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{pgpmAcController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{pgmAcController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                
-		                  <div class="col-sm-1">
-		                
-                          <!-- Bouton Enregistrer -->
-		                  </div>
-		                </div>
-	            </div> 
-	      </div>
-	      
-	      
-	   
-	      
-         </div>
-               </div>
-      </div>
+     
       
      <div class="col-md-12">
           <div class="box box-success box-solid">
@@ -162,7 +89,7 @@
                    <h:panelGroup  rendered="#{pgpmAcController.etatAgpm}">
                     <table>
                  <tr>
-                 <td width="100%"><p:inputText value="#{pgpmAcController.updateOperation.gpgAgpId}" type="text" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+                 <td width="100%"><p:inputText  type="text" value="#{pgpmAcController.updateOperation.gpgAgpId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
                  <td>
                   <p:commandLink  oncomplete="PF('agpmDlg').show()" action="#{pgpmAcController.chargeAgpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 								<i class="fa fa-search-plus"></i>
@@ -175,14 +102,14 @@
                   </div>
 	                </div>
 	                 <div class="form-group">
-                  <label for="relalisation" class="col-sm-3 control-label">Réalisation envisagée<span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
-                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{pgpmAcController.updateOperation.gpgObjet}"  id="relalisation" style="width: 100%" />
+                  <label for="relalisation" class="col-sm-2 control-label">Réalisation envisagée<span style="color:red;"> *</span></label>
+                  <div class="col-sm-10">
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{pgpmAcController.updateOperation.gpgObjet}" id="relalisation" style="width: 100%" />
                   </div>
               </div>	
                <div class="form-group">
-                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
+                  <label class="col-sm-2 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-10">
                     <table>
 		                 <tr>
 		                 <td style="width: 160px"><p:inputText id="typMa1" type="text" value="#{pgpmAcController.updateOperation.gpgTymCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
@@ -199,8 +126,8 @@
                 
                 <h:panelGroup rendered="#{controleController.selectLoveModePgpm}" >
                 <div class="form-group">
-                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
+                  <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-10">
                     <table>
 		                 <tr>
 		                 <td style="width: 160px"><p:inputText id="modeP1" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
@@ -218,17 +145,17 @@
                 
                 <h:panelGroup rendered="#{controleController.selectLoveModePgspm}" >
                  <div class="form-group">
-                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
+                  <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
+				  <div class="col-sm-10">
                     <table>
 		                 <tr>
-		                 <td style="width: 160px"><p:inputText id="modePgs1" type="text" value="#{pgpmAcController.mopLibelleLong.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 160px"><p:inputText id="modePgs1" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
 		                  <p:commandLink  oncomplete="PF('passationPgspmDlg').show()" action="#{pgpmAcController.chargeMode}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 		                 </td>
-		                 <td style="width: 530px"><p:inputText id="modePgs2" type="text" value="#{pgpmAcController.mopLibelleLong.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 530px"><p:inputText id="modePgs2" type="text" value="#{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 </tr>
                      </table>
                   </div>
@@ -236,8 +163,8 @@
                 </h:panelGroup>
                 
                 <div class="form-group">
-                  <label  class="col-sm-3 control-label">Date de Lancement<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
+                  <label  class="col-sm-2 control-label">Date de Lancement<span style="color:red;"> *</span></label>
+				  <div class="col-sm-4">
                     <table>
 		                 <tr>
 		                 <td>
@@ -248,51 +175,44 @@
 		                 </tr>
                      </table>
                   </div>
+                    <label for="part" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;"> *</span></label>
+
+                  <div class="col-sm-3">
+                     <p:selectOneRadio value="#{pgpmAcController.updateOperation.gpgPartiePmePmi}" id="part">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                  </div>
                 </div>
+   <div class="form-group">
+                  <label for="financement" class="col-sm-2 control-label">Financement<span style="color:red;"> *</span></label>
+                  <div class="col-sm-10">
+                     <p:inputText id="modeP21" type="text" value="#{pgpmAcController.updateOperation.gpgLibFin}" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
                         
             </div>
             
             
             <div class="col-md-6">
               
-                <!-- Part reservée aux PME  -->
                 
-                 <div class="form-group">
-                  <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;"> *</span></label>
-
-                  <div class="col-sm-9">
-                     <p:selectOneRadio value="#{pgpmAcController.updateOperation.gpgPartiePmePmi}" id="part">
-						<f:selectItem itemLabel="OUI" itemValue="O" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
-                </div> 
                 
                 
                  <div class="form-group">
-                  <label for="observation" class="col-sm-3 control-label">Observation</label>
+                  <label for="observation" class="col-sm-2 control-label">Observation</label>
 
-                  <div class="col-sm-9">
-                    <p:inputTextarea  rows="5" cols="33" styleClass="form-control" value="#{pgpmAcController.updateOperation.gpgCommentaire}"  id="observation" style="width: 100%" />
+                  <div class="col-sm-10">
+                    <p:inputTextarea  rows="4" cols="33" styleClass="form-control" value="#{pgpmAcController.updateOperation.gpgCommentaire}"  id="observation" style="width: 100%" />
                     
                   </div>
-                </div>	
-            </div>
-            </div>
-            <!-- /.box-body -->
-            
-              
-          </div>
-     </div>
-     </div>
-      <div class="row">
-   <div class="col-md-12">
-    <div class="box box-success box-solid">
+                </div>
+                <div class="box box-success box-solid">
         <div class="box-header with-border">
-         <div class="col-md-11 "><div  style="color: #fff">LISTE DES FINANCEMENTS</div></div>
+         <div class="col-md-10 "><div  style="color: #fff">LISTE DES FINANCEMENTS</div></div>
         
         <h:panelGroup rendered="#{pgpmAcController.loveAgpmRappel}">  
-         <div class="col-md-1 ">
+         <div class="col-md-2 ">
 			 <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
 			</p:commandLink>
@@ -328,7 +248,7 @@
 				            </h:outputText>
 				        </p:column>
 				         <p:column headerText="Actions" styleClass="col-sm-1">
-				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancement}" title="Supprimer" update="gnl">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeFinancementUpdate()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.selectFinance}" />
@@ -368,9 +288,17 @@
             
             
         </div>
-   </div>
-   </div>
-   <div class="row">
+                
+      	
+            </div>
+            </div>
+            <!-- /.box-body -->
+            
+              
+          </div>
+     </div>
+     </div>
+      <div class="row">
    <div class="col-md-12">
   <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content">
 		        <i class="ace-icon fa fa-close bigger-130"></i> Fermer
@@ -392,8 +320,7 @@
 	            
   </div>
    </div>
-           
-		
+   
     </section>
     </h:form>
     
@@ -412,7 +339,7 @@
                <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e;color:white"  update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		     </p:commandLink>
-               <p:commandLink action="#{pgpmAcController.saveFinancement()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('diff').hide()" update=":gnl:finance">
+               <p:commandLink action="#{pgpmAcController.saveFinancementUpdate()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('diff').hide()" update=":gnl:finance">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
@@ -447,13 +374,13 @@
 			               emptyMessage="Aucun Agpm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
-                           <h:commandLink id="agpm" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpmModif()}" update="gnl">				        
+                           <h:commandLink id="agpm" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpm()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.agpId}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Titre" styleClass="col-sm-11" >
-                           <h:commandLink id="agpm_com" title="Libelle du ministère" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpmModif()}">				        
+                           <h:commandLink id="agpm_com" title="Libelle du ministère" style="font-size:18px;"  action="#{pgpmAcController.onSelectAgpm()}">				        
          				  <h:outputText value="#{slctdTb.proTitre}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.agpm}" />
                                 </h:commandLink>
@@ -496,13 +423,13 @@
 			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarcheModif()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
          				  <h:outputText value="#{slctdTb.tymCode}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarcheModif()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
          				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
                                 </h:commandLink>
@@ -543,19 +470,19 @@
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationModif()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
-                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationModif()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>
 				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationModif()}" update="gnl:modeP1, gnl:modeP2">				        
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
          				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>

@@ -678,6 +678,7 @@ public class ControleController {
 			 if(action.equalsIgnoreCase("ENGPGSPM")) {
 				 type = "PGSPM";
 			       libelle1="SAISIE D'UN NOUVEAU PLAN GENERAL SIMPLIFIE DE PASSATION DE MARCHES";
+			       
 			       panelDetail=false;
 				   panelForm=true;
 				   panelTraitement=false;
@@ -709,6 +710,7 @@ public class ControleController {
 			    			type = "PGSPM";
 			    			libelleProcedure="Index";
 			    			libelle="SAISIE DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";	
+			    			libelle1="PLAN GENERAL SIMPLIFIE DE PASSATIONS DES MARCHES";
 			    			libelleSmall="Procédure Simplifiée";
 			    			btn_new_pgpm =false;
 			    			btn_new_pgspm =true;

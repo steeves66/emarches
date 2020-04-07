@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-06T16:14:56 -->
+<!-- 2020-04-06T22:25:03 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -159,7 +159,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 				<text><![CDATA[République de Côte d'Ivoire]]></text>
 			</staticText>
 			<image>
-				<reportElement x="10" y="1" width="210" height="51" uuid="5d8c61bc-be52-4396-9fa2-19c2ad47da8d"/>
+				<reportElement x="10" y="1" width="210" height="51" uuid="e6b99d1f-8a0b-4434-b1fc-0b62b24874a0"/>
 				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
 			</image>
 		</band>

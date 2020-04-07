@@ -299,7 +299,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void chargeData(){
 			 getObjetList().clear();
 			 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
-					"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SDR")),
+					"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1S")),
+					//"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SDR")),
 					new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					new WhereClause("AFF_GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("objetListe size: "+objetList.size());	
@@ -2071,14 +2072,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 loveAgpmRappel = false;
 				 btnAgpmRappel = true;
 				 
-				 //controleController.btn_save_pgpm = false;
+				 controleController.btn_save_pgpm = false;
 			 }else {
 				 etatAgpm= false;
 				 etatFinancement1 =true;
 				 etatFinancement2 =false;
 				 loveAgpmRappel = false;
 				 btnAgpmRappel =false;
-				 //controleController.btn_save_pgpm = true;
+				 controleController.btn_save_pgpm = true;
 			 }
 		 }
 		 
@@ -2088,7 +2089,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 etatFinancement1 = false;
 				 etatFinancement2 = true;
 				 loveAgpmRappel = false;
-				 btnAgpmRappel = false;
+				 btnAgpmRappel = false;  
 				 controleController.btn_save_pgspm = false;
 				 btnPgspmRappel = true;
 				 controleController.btn_save_pgpm = false;
@@ -2302,7 +2303,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          public void creerDetailPlanPgspm() throws IOException{
         	 
         	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") 
-        			 || marche.getTymCode().equalsIgnoreCase("") || passationListe.getMopCode().equalsIgnoreCase("") || sourfin.equalsIgnoreCase("")) {
+        			 || marche.getTymCode().equalsIgnoreCase("") || passationListe.getMopCode().equalsIgnoreCase("")) {
        		     //Message d'erreur
        		      FacesContext.getCurrentInstance().addMessage(null,
    	              new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
