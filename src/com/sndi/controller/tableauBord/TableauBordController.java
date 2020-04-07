@@ -197,6 +197,7 @@ public class TableauBordController {
 				 private String pspmAcAttenteValide = "";
 				 private String pspmAcDiffCpmp = "";
 				 private String pspmAcDiffDmp ="";
+				 private String pgspmAcDiffDmpCpmp="";
 			/*
 			Compteur pour la Cellule de Passation des Marchés
 			 */
@@ -514,6 +515,7 @@ public class TableauBordController {
 			 pgspmAcDiffCpmp = ""+getNpsAcDiffDmpDossier("S2D");
 			 pgspmAcSaisie = ""+getAcNpsSaisieDossier("S1S");
 			 pgspmAcAttenteValide = ""+getAcNpsAttenteValide("S1S","S2D","PGD");
+			 pgspmAcDiffDmpCpmp =""+getNpsDiffDossierCpmpDmpAc("S2D","SDR");
 			 pgspmAcTransmis = ""+getAcNpsTransmisDossier("S1T","PGS");
 			 pgspmCpSaisie = ""+getNpsSaisieDossier("S1S");
 			 pgspmCpTransmis = ""+getNpsTransmisDossier("S1T");
@@ -1181,6 +1183,15 @@ public int getAcNpsAttenteValide(String src1, String src2, String src3){
 public int getNpsSaisieDossier(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
+			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;	
+}
+
+//pgspm retournés par la CPMP et la DMP chez le AC
+public int getNpsDiffDossierCpmpDmpAc(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
+			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
@@ -4713,6 +4724,14 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setDaoTotalPs(String daoTotalPs) {
 		this.daoTotalPs = daoTotalPs;
+	}
+
+	public String getPgspmAcDiffDmpCpmp() {
+		return pgspmAcDiffDmpCpmp;
+	}
+
+	public void setPgspmAcDiffDmpCpmp(String pgspmAcDiffDmpCpmp) {
+		this.pgspmAcDiffDmpCpmp = pgspmAcDiffDmpCpmp;
 	}
 
 	
