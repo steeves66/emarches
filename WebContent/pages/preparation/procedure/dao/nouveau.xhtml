@@ -667,6 +667,18 @@
            <p:messages id="message3" showDetail="false" autoUpdate="true"  closable="true"/>
            
             <div class="col-md-12">
+            
+            	<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+			
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div class="col-md-9 "><div  style="color: #fff">PIECES CONSTITUTIVES DE L'OFFRE </div></div> 

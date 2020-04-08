@@ -900,12 +900,12 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	//Affichage des DAO en attente de publication	 
 		 public void chargeDataAPublier(){
 			 publicationListe.clear();			 
-			 publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
-					 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
-					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				publicationListe =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D5V","DOP")),
+						 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+						 new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("publicationListe  size: "+publicationListe.size());		
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao();	
 		}
 		 
 		 
@@ -2571,6 +2571,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 			newPieceOffreDac.setTTypePieceOffre(ligne.getTpoCode());
 		 			iservice.addObject(newPieceOffreDac);
 			     }
+		 		userController.setTexteMsg("Pièces enrégisteé avec succès!");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");
 	 		 }
     		userController.setTexteMsg("Pièces enrégisteé avec succès!");
 			userController.setRenderMsg(true);

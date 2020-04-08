@@ -689,8 +689,8 @@ public class TableauBordController {
 			 daoCsvAttAff = ""+getDaoAttAffCsv("D2T","D5R","DOP");
 			 daoCsvAttVal = ""+getAcDaoValChargeCsv("D4V");
 			 daoaffecte = ""+getAcDaoAffecteDossier("D3A");
-			 daoCsvValide = ""+getAcDaoValidCsvDossier("D5V");
-			 daoCsvDiff = ""+getAcDaoValidCsvDossier("D5R");
+			 daoCsvValide = ""+getAcDaoValidCsvDossier("D5V","DOP");
+			 daoCsvDiff = ""+getAcDaoValidCsv("D5R");
 			 daoAcDiffCpmp = ""+getDaoDiffCpmpACDossier("D1R");
 			 daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
 			 daoAcDiffDmp = ""+getDaoDiffDmpACDossier("S3D");
@@ -1696,7 +1696,17 @@ public int getAcDaoAffecteDossier(String src){
 }
 
 //DAO validé par le Chef de Service
-public int getAcDaoValidCsvDossier(String src){
+public int getAcDaoValidCsvDossier(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//
+public int getAcDaoValidCsv(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),

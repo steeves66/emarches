@@ -39,7 +39,15 @@
     
     <section class="content">
      <div class="box"></div>
-    <h:panelGroup rendered="#{userController.renderMsg}">
+   
+     
+     <p:wizard flowListener="#{daoController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
+     
+      <p:tab id="PBailleur" title="Avis du Bailleur" rendered="#{daoController.panelAvisBailleur}" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="row">    
+            <div class="col-md-12">
+            
+            	<h:panelGroup rendered="#{userController.renderMsg}">
 				<br/>
 				<div class="alert alert-success light alert-dismissable" >
 				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
@@ -49,12 +57,8 @@
 				<i class="fa fa-check pr10"></i>
 				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
-     
-     <p:wizard flowListener="#{daoController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
-     
-      <p:tab id="PBailleur" title="Avis du Bailleur" rendered="#{daoController.panelAvisBailleur}" titleStyle="background-color: #f88b2e;background-image: none">
-           <div class="row">    
-            <div class="col-md-12">
+			
+            
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div class="col-md-9 "><div  style="color: #fff">AVIS DU BAILLEUR</div></div> 
@@ -108,7 +112,7 @@
             <p:panel header="Fichier(s) Joint(s)">
             
             <div class="row">
-                   <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+                   <div class="col-xs-12"><p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/></div>
              </div>
 				
 	            <div class="col-md-12">
@@ -955,7 +959,7 @@
 
             </p:panel>
             </p:tab>
-             <p:tab id="Dossiers" rendered= "#{agpmController.etatPavetDossier}" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
+             <p:tab id="Dossiers1" rendered= "#{agpmController.etatPavetDossier}" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
              <p:panel header="Fichier(s) Joint(s)">
 
               <div class="row">
