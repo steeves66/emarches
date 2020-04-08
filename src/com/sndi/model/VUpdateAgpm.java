@@ -36,8 +36,8 @@ public class VUpdateAgpm implements java.io.Serializable {
 	private String affAgpActif;
 	private String affAgpTypeDao;
 	private String affAgpCommentaire;
-	private String agpCode;
 	private String affAgpCode;
+	private String agpCode;
 	private String affAgpRecherche;
 	private Date affAgpDateValAc;
 	private Date affAgpDateValCpmp;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-02-04T21:08:17 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pspm_psc" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd56bcf1-e64d-427e-9d36-ff3f7182500e">
+<!-- 2020-04-08T13:38:33 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pspm_psl" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd56bcf1-e64d-427e-9d36-ff3f7182500e">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<style name="Table_TH" mode="Opaque" backcolor="#3CA34E">
@@ -38,11 +38,13 @@
 			<parameterDescription><![CDATA[]]></parameterDescription>
 			<defaultValueExpression><![CDATA[$P{param_code}]]></defaultValueExpression>
 		</parameter>
+		<parameter name="param_op" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select *
 from v_ppm_etat vp
 where vp.aff_dpp_type_plan = 'PS'
-and vp.aff_dpp_plp_id = $P{param_code}]]>
+and vp.aff_dpp_plp_id = $P{param_code}
+and vp.aff_dpp_acteur_saisie= $P{param_op}]]>
 		</queryString>
 		<field name="V_ID" class="java.lang.Long"/>
 		<field name="AFF_ID" class="java.lang.Long"/>
@@ -121,13 +123,15 @@ and vp.aff_dpp_plp_id = $P{param_code}]]>
 	<parameter name="param_code" class="java.lang.Long">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
+	<parameter name="param_op" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select pas.plp_ges_code,pas.plp_id,m.min_libelle,pas."PLP_FON_COD",f.fon_libelle,st.str_libelle_long
 from t_plan_passation pas, t_ministere m,t_fonction f, t_structure st
 where pas.plp_str_code = st.str_code
 and st.str_min_code = m.min_code
 and pas.plp_fon_cod = f.fon_cod
-and pas.plp_id = $P{param_code}]]>
+and pas.plp_id = $P{param_code}
+and pas.plp_fon_cod = $P{param_op}]]>
 	</queryString>
 	<field name="PLP_GES_CODE" class="java.lang.Long"/>
 	<field name="PLP_ID" class="java.lang.Long"/>
@@ -158,32 +162,6 @@ and pas.plp_id = $P{param_code}]]>
 				</textElement>
 				<text><![CDATA[Union-Discipline-Travail]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="-11" y="0" width="281" height="30" uuid="74fd6a17-0293-4b3f-90ce-38b74bac5e15"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
-]]></text>
-			</staticText>
-			<image>
-				<reportElement x="83" y="32" width="57" height="33" uuid="97d417b2-0a42-4be8-9e33-ebacd0cbc9e9"/>
-				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="24" y="67" width="171" height="19" uuid="5349500d-8606-456e-a934-a4e8af3cdc62"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Direction des Marchés Publics]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="71" y="81" width="87" height="21" uuid="072a35d1-817f-4148-bf7f-93e1b9dfafff"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10" isBold="true"/>
-				</textElement>
-				<text><![CDATA[E-MarchesPublics]]></text>
-			</staticText>
 			<rectangle radius="8">
 				<reportElement mode="Opaque" x="71" y="116" width="679" height="31" backcolor="#FA9B3C" uuid="512b8cea-f26e-4f37-a6e4-cf19a9301fb9"/>
 				<graphicElement>
@@ -198,7 +176,7 @@ and pas.plp_id = $P{param_code}]]>
 				<textFieldExpression><![CDATA["PLAN SIMPLIFIE DE PASSATIONS DES MARCHES (PSPM) "+$F{PLP_GES_CODE}+" (PSL)"]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="370" y="13" width="200" height="51" uuid="a3b94f36-dea4-4480-8916-dc5ff271ee93"/>
+				<reportElement x="1" y="1" width="200" height="51" uuid="a3b94f36-dea4-4480-8916-dc5ff271ee93"/>
 				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
 			</image>
 		</band>
@@ -223,9 +201,12 @@ and pas.plp_id = $P{param_code}]]>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="Details" uuid="075ad350-5eb8-44a4-9d81-c873c7b9d9a3">
+					<datasetRun subDataset="Details" uuid="0e2b4e5b-be80-47e6-bd59-d9a9e529b4ae">
 						<datasetParameter name="param_code">
 							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="param_op">
+							<datasetParameterExpression><![CDATA[$P{param_op}]]></datasetParameterExpression>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
