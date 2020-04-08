@@ -204,15 +204,22 @@
             <!-- /.box-header -->
             <div class="box-body">
 					 <div class="form-group ">
-	                  <label for="xbail" class="col-sm-2 control-label"><b>Source financement</b></label>
+	                  <label for="xbail" class="col-sm-2 control-label"><b>Source</b></label>
 	                  <div class="col-sm-10">
-	               <p:selectOneMenu value="#{agpmController.sourfin}" id="xsource" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			          <f:selectItem  itemLabel="Choisir la source de financement.." itemValue="empty" />  
-			         <f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
-                     <f:selectItem itemLabel="ETAT" itemValue="Etat" />	
-                     <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />	
-                     <p:ajax listener="#{agpmController.checkBailleur()}" update=":gnl:idBail, :gnl:idTres, :gnl:idPartB, :gnl:source" />			   				   
-       		       </p:selectOneMenu>
+
+       		        <p:selectOneRadio id="situation" value="#{agpmController.sourfin}">
+		              <p:ajax listener="#{agpmController.checkBailleur()}" update="gnl:idBail, gnl:idTres, gnl:idPartB, gnl:source" />
+			            <div class="col-md-4">
+						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="ETAT" itemValue="Etat" />
+			            </div>
+			           </p:selectOneRadio>
+		                <br/>
 	                  </div>
 	                </div>
 	                

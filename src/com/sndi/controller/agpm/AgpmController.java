@@ -1375,19 +1375,9 @@ public class AgpmController {
 			          //return renderPage("agpm1","LIS");
 		   }
 		 
-	/*	 public void checkBailleur() {
-			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
-				 selectBailleur = true;
-				 selectTresor = false;
-			 }else
-			      if(sourfin.equalsIgnoreCase("Cofinance")){
-				 selectBailleur = true; 
-				 selectTresor = true;
-			 }else {
-				 selectBailleur = false;
-				 selectTresor = false;
-			    }
-		 }*/
+	
+		 
+		 
 		//Tri sur les types de financement  
 		public void chargeSourceCheck() { 
 			listeSourceFinance.clear();
@@ -1395,34 +1385,37 @@ public class AgpmController {
 		      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
 			}
 		
+		//Tri sur les types de financement 
+		public void chargeSourceEtat() { 
+		    listeSourceFinance.clear();
+			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
+			      "SOU_CODE", new ArrayList<String>(Arrays.asList("TRE")));
+				}
+		
 		 //Methode checkBailleur
 		 public void checkBailleur() {
-			// sourfin="";
+			 //sourfin="";
 			 if(sourfin.equalsIgnoreCase("Bailleur")) { 
 				 selectBailleur = true;
 				 selectTresor = false;
 				 selectPartBai = true;
 				 chargeSourceCheck();
 				 //sourfin="";
-			 }else
-			      if(sourfin.equalsIgnoreCase("Cofinance")){
-				 selectBailleur = true; 
-				 selectTresor = true;
-				 selectPartBai = true;
-				 //sourfin="";
-			 }else if(sourfin.equalsIgnoreCase("Etat")){
-				 selectBailleur = false;
-				 selectTresor = true;
-				 selectPartBai= false;
-				 souCode.equalsIgnoreCase("TRE");
-				 souCode = "TRE";
-			    }else {
-			    	  selectPartBai = false;
-			    	 selectBailleur = false;
-					 selectTresor = false;
-					 //souCode.equalsIgnoreCase("");
-					 souCode =  "";
-			    }
+			 }else {
+				  if(sourfin.equalsIgnoreCase("Cofinance")){
+						 selectBailleur = true; 
+						 selectTresor = true;
+						 selectPartBai = true;
+						 chargeSourceFinance();
+					 }else 
+						 if(sourfin.equalsIgnoreCase("Etat")){
+						 selectBailleur = false;
+						 selectTresor = true;
+						 selectPartBai= false;
+						 souCode="TRE";
+						 chargeSourceEtat();
+					    }
+			     }   
 		 }
 		 
 		 

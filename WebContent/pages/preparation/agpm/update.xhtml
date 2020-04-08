@@ -189,23 +189,26 @@
             <div class="box-header with-border">
                       <div class="col-md-10 "><div  style="color: #fff">FINANCEMENTS</div></div> 
 			         <div class="col-md-2 ">
-			        <!--   <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
-								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
-						</p:commandLink> -->
+			       
 			         </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
 					 <div class="form-group ">
-	                  <label for="xbail" class="col-sm-2 control-label"><b>Source financement</b></label>
+	                  <label for="xbail" class="col-sm-2 control-label"><b>Source</b></label>
 	                  <div class="col-sm-10">
-	               <p:selectOneMenu value="#{agpmModificationController.updateAgpm.finTypeFinance}" id="xsource" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			          <f:selectItem  itemLabel="Choisir la source de financement.." itemValue="empty" />  
-			         <f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
-                     <f:selectItem itemLabel="ETAT" itemValue="Etat" />	
-                     <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />	
-                     <p:ajax listener="#{agpmModificationController.checkBailleur()}" update=":gnl:idBail, :gnl:idTres, :gnl:idPartB" />			   				   
-       		       </p:selectOneMenu>
+       		       <p:selectOneRadio id="situation" value="#{agpmModificationController.updateAgpm.finTypeFinance}">
+		               <p:ajax listener="#{agpmModificationController.checkBailleur()}" update="gnl:idBail, gnl:idTres, gnl:idPartB, gnl:source" />
+			            <div class="col-md-4">
+						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="ETAT" itemValue="Etat" />
+			            </div>
+			       </p:selectOneRadio>
 	                  </div>
 	                </div>
 	                
