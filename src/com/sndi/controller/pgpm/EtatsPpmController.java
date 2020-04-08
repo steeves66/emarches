@@ -149,20 +149,24 @@ public class EtatsPpmController {
      }*/ 
      
      public void imprimerPpmDet() {
-    	 projetReport.longparam1(slctdTd.getTPlanPassation().getPlpId(), "Ppm", "Ppm");
+    	 String operateur = userController.getSlctd().getTFonction().getFonCod();
+    	 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Ppm", "Ppm");
      }
      
      
      public void imprimerPspmDet() {
     	 
     	 if(detail.getMopCode().equalsIgnoreCase("PSO")) {
-    		 projetReport.longparam1(detail.getDppPlpId(), "Pspm_pso", "Pspm_pso");
+    		 String operateur = userController.getSlctd().getTFonction().getFonCod();
+    		 projetReport.longStringparam2(detail.getDppPlpId(), operateur, "Pspm_pso", "Pspm_pso");
     	 }else 
     		 if(detail.getMopCode().equalsIgnoreCase("PSL")) {
-    		 projetReport.longparam1(detail.getDppPlpId(), "Pspm_psl", "Pspm_psl");
+    			 String operateur = userController.getSlctd().getTFonction().getFonCod();
+    		 projetReport.longStringparam2(detail.getDppPlpId(), operateur, "Pspm_psl", "Pspm_psl");
     	 }else 
     		 if(detail.getMopCode().equalsIgnoreCase("PSC")) {
-    			 projetReport.longparam1(detail.getDppPlpId(), "Pspm_psc", "Pspm_psc");
+    			 String operateur = userController.getSlctd().getTFonction().getFonCod();
+    			 projetReport.longStringparam2(detail.getDppPlpId(), operateur, "Pspm_psc", "Pspm_psc");
     		 }
       }
      
