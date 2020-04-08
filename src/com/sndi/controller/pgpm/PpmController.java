@@ -1287,7 +1287,7 @@ public class PpmController {
 	  		 
 	  		if(fipPgpm.getFipId() > 0 ) {
 	  			
-	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("")|| "".equals(detailPass.getDppStructureConduc()) || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || "".equals(detailPass.getDppStructureBenefi()) || tydCode.equalsIgnoreCase("") || detailPass.getDppBailleur().equalsIgnoreCase("")
+	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("")|| "".equals(detailPass.getDppStructureConduc()) || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || "".equals(detailPass.getDppStructureBenefi()) || tydCode.equalsIgnoreCase("") 
 	  					 || detailPass.getDppDateAvisAoPublication().equals(null) || pgpm.getGpgMopCode().equalsIgnoreCase("") ||"".equals(pgpm.getGpgMopCode()) || pgpm.getGpgTymCode().equalsIgnoreCase("") || "".equals(pgpm.getGpgTymCode()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode())) {
 		  			   //Message d'erreur
 		  			   FacesContext.getCurrentInstance().addMessage(null,
@@ -1372,11 +1372,26 @@ public class PpmController {
 		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
 		      				   affgp.setAffDppRecherche(rechercheAll);
 			      			  iservice.updateObject(affgp);
+			      			  
+			      
+			      			//Insertion dans T_Financement_PPM
+		    				  for(TFinancementPgpm fin: listeFinancementPgpm) {
+				      		        TFinancementPpm newFinancement = new TFinancementPpm();
+				      		        newFinancement.setTDetailPlanPassation(detailPass);
+				      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
+				      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
+				      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
+				      		        newFinancement.setFppPartTresor(fin.getFipTresor());
+				      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+				      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
+				      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
+				      				iservice.addObject(newFinancement);
+		    				    }	
 		 	  		
 		 	  		
 		 	  	
 		 	  		//Insertion dans T_Financement_PPM
-		 	  		TFinancementPpm newFinancement = new TFinancementPpm();
+		 	  		/*TFinancementPpm newFinancement = new TFinancementPpm();
 		 	  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
 		 	  		newFinancement.setFppTypeFinance(fipPgpm.getFipTypeFinance());
 		 	  		newFinancement.setTDetailPlanPassation(detailPass);
@@ -1386,10 +1401,10 @@ public class PpmController {
 		 	  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
 		 	  		newFinancement.setFppPartTresor(fipPgpm.getFipTresor());
 		 	  		newFinancement.setFppTypeFinance(fipPgpm.getFipTypeFinance());
-		 	  		iservice.addObject(newFinancement);
+		 	  		iservice.addObject(newFinancement);*/
 		 	  		
 		 	  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
-		 			 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+		 			/* List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 		 						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 		 			 TDetailPlanPassation pass = new TDetailPlanPassation();
 		 				 if(!PL.isEmpty())  
@@ -1404,7 +1419,7 @@ public class PpmController {
 		 							if(!AF.isEmpty()) aff =AF.get(0);
 		 							aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
 		 							aff.setAffDppTypeFinance(newFinancement.getFppTypeFinance());
-		 							iservice.updateObject(aff);
+		 							iservice.updateObject(aff);*/
 		 	  		
 		 	  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
 		 			List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -1516,7 +1531,22 @@ public class PpmController {
 		 		  		
 		 		  		
 		 		  		//Insertion dans T_Financement_PPM
-		 		  		TFinancementPpm newFinancement = new TFinancementPpm();
+				    				  for(TFinancementPgpm fin: listeFinancementPgpm) {
+						      		        TFinancementPpm newFinancement = new TFinancementPpm();
+						      		        newFinancement.setTDetailPlanPassation(detailPass);
+						      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
+						      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
+						      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
+						      		        newFinancement.setFppPartTresor(fin.getFipTresor());
+						      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+						      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
+						      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
+						      				iservice.addObject(newFinancement);
+				    				    }	
+				      	
+				      	
+									
+		 		  		/*TFinancementPpm newFinancement = new TFinancementPpm();
 		 		  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
 		 		  		newFinancement.setTDetailPlanPassation(detailPass);
 		 		  		newFinancement.setTSourceFinancement(new TSourceFinancement(fipPgpm.getTSourceFinancement().getSouCode()));
@@ -1524,11 +1554,11 @@ public class PpmController {
 		 		  		newFinancement.setFppMontantDevise(fipPgpm.getFipMontantDevise());
 		 		  		newFinancement.setFppMontantCfa(fipPgpm.getFipMontantCfa());
 		 		  		newFinancement.setFppPartTresor(fipPgpm.getFipTresor());
-		 		  		iservice.addObject(newFinancement);
+		 		  		iservice.addObject(newFinancement);*/
 		 		  		
 		 		  		
 		 		  		
-		 		  	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
+		 		  /*	//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
 		 				 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 		 							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 		 				 TDetailPlanPassation pass = new TDetailPlanPassation();
@@ -1544,7 +1574,7 @@ public class PpmController {
 		 								if(!AF.isEmpty()) aff =AF.get(0);
 		 								aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
 		 								aff.setAffDppTypeFinance(newFinancement.getFppTypeFinance());
-		 								iservice.updateObject(aff);
+		 								iservice.updateObject(aff);*/
 		 		  		
 		 		  	   //Insertion de chaque ligne dans T_HistoPlanPassation avec le statut correspondant
 		 				List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -1580,7 +1610,8 @@ public class PpmController {
 	  			 //Message d'erreur
 	  			   FacesContext.getCurrentInstance().addMessage(null,
 	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre PGPM n'a pas de financement", "")); 
-	  		} 
+	  		}
+
 	  }
 	  	 
 	  	 

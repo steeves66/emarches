@@ -504,13 +504,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 			      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
 				}
-			
-			//Tri sur les types de financement 
-			public void chargeSourceEtat() { 
-			    listeSourceFinance.clear();
-				listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
-				      "SOU_CODE", new ArrayList<String>(Arrays.asList("TRE")));
-					}
 			 
 			 public void checkBailleur() {
 				 //sourfin="";
@@ -520,21 +513,25 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectPartBai = true;
 					 chargeSourceCheck();
 					 //sourfin="";
-				 }else {
-					  if(sourfin.equalsIgnoreCase("Cofinance")){
-							 selectBailleur = true; 
-							 selectTresor = true;
-							 selectPartBai = true;
-							 chargeSourceFinance();
-						 }else 
-							 if(sourfin.equalsIgnoreCase("Etat")){
-							 selectBailleur = false;
-							 selectTresor = true;
-							 selectPartBai= false;
-							 souCode="TRE";
-							 chargeSourceEtat();
-						    }
-				     }   
+				 }else
+				      if(sourfin.equalsIgnoreCase("Cofinance")){
+					 selectBailleur = true; 
+					 selectTresor = true;
+					 selectPartBai = true;
+					// sourfin="";
+				 }else 
+					 if(sourfin.equalsIgnoreCase("Etat")){
+					 selectBailleur = false;
+					 selectTresor = true;
+					 selectPartBai= false;
+					 souCode="TRE";
+				    }else 
+				         if(sourfin.equalsIgnoreCase("")){
+				    	  selectPartBai = false;
+				    	  selectBailleur = false;
+						  selectTresor = false;
+						  souCode="";
+				    }
 			 }
 			
 			
