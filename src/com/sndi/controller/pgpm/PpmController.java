@@ -1062,7 +1062,8 @@ public class PpmController {
 		 
 		 
 		 public void onSelectPgpm() {
-			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId())); 
+			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+			 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
 
 			 recupPgpm = new VPgpmFonction();
 			 recupPgpm.setGpgObjet(pgpm.getGpgObjet());
@@ -1078,6 +1079,7 @@ public class PpmController {
 			 recupPgpm.setTymTymCode(pgpm.getTymTymCode());
 			 recupPgpm.setGpgMopCode(pgpm.getGpgMopCode());
 			 recupPgpm.setGpgPartiePmePmi(pgpm.getGpgPartiePmePmi());
+			 recupPgpm.setGpgLibFin(pgpm.getGpgLibFin());
 			 
 			 listeFinancementPgpm =(List<TFinancementPgpm>) iservice.getObjectsByColumn("TFinancementPgpm", new ArrayList<String>(Arrays.asList("FIP_ID")),
 				     new WhereClause("FIP_GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()));
@@ -1306,6 +1308,7 @@ public class PpmController {
 		 	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
 		 	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
 		 	  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+		 	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
 		 	  		 detailPass.setTPlanPassation(planPass);
 		 	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
 		 	  		 detailPass.setDppTypePlan("PN");
@@ -1361,9 +1364,10 @@ public class PpmController {
 		 	  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 		 	  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
 		 	  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
+		 	  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
 		 	  		iservice.addObject(affichagePpm);
 		 	  		
-		 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
+		 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 					String rechercheAll = search.replace("null","");
 					
 					List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),

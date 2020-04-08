@@ -36,6 +36,7 @@ public class VPgpmFonction implements java.io.Serializable {
 	private String gpgStatutRetour;
 	private Date gpgDateSaisie;
 	private String gpgStrCode;
+	private String gpgLibFin;
 	private String tymLibelleCourt;
 	private String tymTymCode;
 	private String mopLibelleLong;
@@ -59,7 +60,7 @@ public class VPgpmFonction implements java.io.Serializable {
 
 	public VPgpmFonction(long gpgId, long gpgPlgId, Long gpgAgpId, String gpgTypePlan, String gpgStaCode,
 			String gpgTymCode, String gpgMopCode, String gpgCode, String gpgObjet, Integer gpgNumeroOrdre,
-			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao, String gpgActeurSaisie,
+			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin,String gpgLibFin, Date gpgDateDao, String gpgActeurSaisie,
 			String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, String tymLibelleCourt,String tymTymCode,
 			String mopLibelleLong, String plgFonCod, String fonLibelle) {
 		this.gpgId = gpgId;
@@ -80,6 +81,7 @@ public class VPgpmFonction implements java.io.Serializable {
 		this.gpgStatutRetour = gpgStatutRetour;
 		this.gpgDateSaisie = gpgDateSaisie;
 		this.gpgStrCode = gpgStrCode;
+		this.gpgLibFin = gpgLibFin;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.tymTymCode = tymTymCode;
 		this.mopLibelleLong = mopLibelleLong;
@@ -249,6 +251,15 @@ public class VPgpmFonction implements java.io.Serializable {
 
 	public void setGpgStrCode(String gpgStrCode) {
 		this.gpgStrCode = gpgStrCode;
+	}
+	
+	@Column(name = "GPG_LIB_FIN", length = 200)
+	public String getGpgLibFin() {
+		return this.gpgLibFin;
+	}
+
+	public void setGpgLibFin(String gpgLibFin) {
+		this.gpgLibFin = gpgLibFin;
 	}
 
 	@Column(name = "TYM_LIBELLE_COURT", nullable = false, length = 500)
