@@ -68,7 +68,6 @@ public class VPpmDao implements java.io.Serializable {
 	private String mopLibelleLong;
 	private String lbgImputation;
 	private String natLibelle;
-	private String souLibelle;
 
 	public VPpmDao() {
 	}
@@ -100,7 +99,7 @@ public class VPpmDao implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			String dppBailleur, String mdtCode, String mdtTymCode, String mdtLibelleCourt,
 			 String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleLong,
-			String lbgImputation, String natLibelle, String souLibelle) {
+			String lbgImputation, String natLibelle) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -151,7 +150,6 @@ public class VPpmDao implements java.io.Serializable {
 		this.mopLibelleLong = mopLibelleLong;
 		this.lbgImputation = lbgImputation;
 		this.natLibelle = natLibelle;
-		this.souLibelle = souLibelle;
 	}
 
 	
@@ -606,15 +604,4 @@ public class VPpmDao implements java.io.Serializable {
 	public void setNatLibelle(String natLibelle) {
 		this.natLibelle = natLibelle;
 	}
-
-	@Column(name = "SOU_LIBELLE", length = 500)
-	public String getSouLibelle() {
-		return this.souLibelle;
-	}
-
-	public void setSouLibelle(String souLibelle) {
-		this.souLibelle = souLibelle;
-	}
-
-
 }
