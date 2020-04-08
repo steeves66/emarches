@@ -43,6 +43,7 @@ import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
+import com.sndi.model.VCompoCommission;
 import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VLot;
 import com.sndi.model.VPiecesOffre;
@@ -95,9 +96,9 @@ public class CommissionController {
 	 }
 	 
 	 //Declaration des listes 
-	 private List<TCommissionType> membresCommission = new ArrayList<TCommissionType>();
+	 private List<VCompoCommission> membresCommission = new ArrayList<VCompoCommission>();
 	 private List<TDetCommissionSeance> membresCommite = new ArrayList<TDetCommissionSeance>(); 
-	 private List<TCommissionType> selectionMembres = new ArrayList<TCommissionType>(); 
+	 private List<VCompoCommission> selectionMembres = new ArrayList<VCompoCommission>(); 
 	 private List<TDetCommissionSeance> selectionMembresCommite = new ArrayList<TDetCommissionSeance>(); 
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
@@ -214,8 +215,8 @@ public class CommissionController {
 	 
 	//Liste des membres de la commssions
 		 public void chargeMembreCommission() {
-			 membresCommission = ((List<TCommissionType>)iservice.getObjectsByColumn("TCommissionType",new ArrayList<String>(Arrays.asList("TCT_CODE")),
-					    new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+			 membresCommission = ((List<VCompoCommission>)iservice.getObjectsByColumn("VCompoCommission",new ArrayList<String>(Arrays.asList("TCT_CODE")),
+					    new WhereClause("STR_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
 					_logger.info("membre size: "+membresCommission.size());	
 		 }
@@ -411,7 +412,7 @@ public class CommissionController {
 						FacesContext.getCurrentInstance().addMessage(null, msg);
 					}else {
 						
-						for(TCommissionType mbr : selectionMembres) {
+						for(VCompoCommission mbr : selectionMembres) {
 							newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
 							newDetailSeance.setDcsNomMbm(mbr.getTctNomMbm());
 							newDetailSeance.setDcsPreMbm(mbr.getTctPreMbm());
@@ -734,11 +735,13 @@ public class CommissionController {
 		}
 	}
 
-	public List<TCommissionType> getMembresCommission() {
+
+
+	public List<VCompoCommission> getMembresCommission() {
 		return membresCommission;
 	}
 
-	public void setMembresCommission(List<TCommissionType> membresCommission) {
+	public void setMembresCommission(List<VCompoCommission> membresCommission) {
 		this.membresCommission = membresCommission;
 	}
 
@@ -795,11 +798,11 @@ public class CommissionController {
 		this.newOffre = newOffre;
 	}
 
-	public List<TCommissionType> getSelectionMembres() {
+	public List<VCompoCommission> getSelectionMembres() {
 		return selectionMembres;
 	}
 
-	public void setSelectionMembres(List<TCommissionType> selectionMembres) {
+	public void setSelectionMembres(List<VCompoCommission> selectionMembres) {
 		this.selectionMembres = selectionMembres;
 	}
 
