@@ -77,6 +77,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private String dppBailleur;
 	private String dppTypeFinance;
 	private Date dppApprobAno;
+	private Date dppDteModif;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -109,7 +110,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, String dppStatutRetour,
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
-			Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
+			Date dppDteModif,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TLBudgets = TLBudgets;
@@ -160,6 +161,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppBailleur = dppBailleur;
 		this.dppTypeFinance = dppTypeFinance;
 		this.dppApprobAno = dppApprobAno;
+		this.dppDteModif = dppDteModif;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -648,6 +650,16 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppApprobAno(Date dppApprobAno) {
 		this.dppApprobAno = dppApprobAno;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DPP_DTE_MODIF", length = 7)
+	public Date getDppDteModif() {
+		return this.dppDteModif;
+	}
+
+	public void setDppDteModif(Date dppDteModif) {
+		this.dppDteModif = dppDteModif;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

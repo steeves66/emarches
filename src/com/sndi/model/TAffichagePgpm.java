@@ -51,6 +51,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 	private Date affGpgDateValDmp;
 	private String affGpgTypeFinance;
 	private String affGpgLibFin;
+	private Date affGpgDteModif;
 
 	public TAffichagePgpm() {
 	}
@@ -70,7 +71,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 			TTypeMarche TTypeMarche, long affGpgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgCode,
 			String affGpgObjet, Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire,
 			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,String affGpgRecherche,Date affGpgDateValAc, Date affGpgDateValCpmp, 
-			Date affGpgDateValDmp, String affGpgTypeFinance, String affGpgLibFin) {
+			Date affGpgDateValDmp, String affGpgTypeFinance, String affGpgLibFin, Date affGpgDteModif) {
 		this.affId = affId;
 		this.TStructure = TStructure;
 		this.TFonction = TFonction;
@@ -98,6 +99,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affGpgDateValDmp = affGpgDateValDmp;
 		this.affGpgTypeFinance = affGpgTypeFinance;
 		this.affGpgLibFin = affGpgLibFin;
+		this.affGpgDteModif = affGpgDteModif;
 	}
 
 	@Id
@@ -358,6 +360,16 @@ public class TAffichagePgpm implements java.io.Serializable {
 
 	public void setAffGpgLibFin(String affGpgLibFin) {
 		this.affGpgLibFin = affGpgLibFin;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AFF_GPG_DTE_MODIF", length = 7)
+	public Date getAffGpgDteModif() {
+		return this.affGpgDteModif;
+	}
+
+	public void setAffGpgDteModif(Date affGpgDteModif) {
+		this.affGpgDteModif = affGpgDteModif;
 	}
 
 }

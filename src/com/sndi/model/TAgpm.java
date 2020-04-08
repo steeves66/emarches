@@ -43,6 +43,7 @@ public class TAgpm implements java.io.Serializable {
 	private Date agpDateValAc;
 	private Date agpDateValCpmp;
 	private Date agpDateValDmp;
+	private Date agpDteModif;
 	private Set<TFinancement> TFinancements = new HashSet<TFinancement>(0);
 	private Set<TDetailAgpm> TDetailAgpms = new HashSet<TDetailAgpm>(0);
 	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
@@ -68,7 +69,7 @@ public class TAgpm implements java.io.Serializable {
 	public TAgpm(long agpId, TProjet TProjet,TStructure TStructure, TGestion TGestion, TDeclarant TDeclarant, TStatut TStatut,
 			TMinistere TMinistere, TFonction TFonction, String agpCommentaire, String agpTypeDao,
 			String agpModePassation, String agpActif, String agpStatutRetour, String agpActeurSaisie,Date agpDateValAc, Date agpDateValCpmp,
-			Date agpDateValDmp,String agpCode,
+			Date agpDateValDmp,String agpCode,Date agpDteModif,
 			 Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
 			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
 		this.agpId = agpId;
@@ -87,11 +88,13 @@ public class TAgpm implements java.io.Serializable {
 		this.agpDateValAc = agpDateValAc;
 		this.agpDateValCpmp = agpDateValCpmp;
 		this.agpDateValDmp = agpDateValDmp;
+		this.agpCode = agpCode;
+		this.agpDteModif = agpDteModif;
 		this.TFinancements = TFinancements;
 		this.TDetailAgpms = TDetailAgpms;
 		this.THistoAgpms = THistoAgpms;
 		this.TDossierAgpms = TDossierAgpms;
-		this.agpCode = agpCode;
+		
 	}
 	@Id
 	@SequenceGenerator(name = "SEQ_AGP_Sequence", sequenceName = "SEQ_AGP", allocationSize=1)
@@ -248,6 +251,25 @@ public class TAgpm implements java.io.Serializable {
 	public void setAgpDateValDmp(Date agpDateValDmp) {
 		this.agpDateValDmp = agpDateValDmp;
 	}
+	
+	@Column(name = "AGP_CODE")
+	public String getAgpCode() {
+		return agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AGP_DTE_MODIF", length = 7)
+	public Date getAgpDteModif() {
+		return this.agpDteModif;
+	}
+
+	public void setAgpDteModif(Date agpDteModif) {
+		this.agpDteModif = agpDteModif;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAgpm")
 	public Set<TFinancement> getTFinancements() {
@@ -285,13 +307,6 @@ public class TAgpm implements java.io.Serializable {
 		this.TDossierAgpms = TDossierAgpms;
 	}
 
-	@Column(name = "AGP_CODE")
-	public String getAgpCode() {
-		return agpCode;
-	}
 
-	public void setAgpCode(String agpCode) {
-		this.agpCode = agpCode;
-	}
 
 }

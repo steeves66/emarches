@@ -695,7 +695,7 @@ public class ControleController {
 				   tpgspm =true;
 				   detailPg1 = false;
 				   detailPg2 = true;
-				   btn_save_pgpm = false;
+				  
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPGSPM")) {
 			    		type = "PGSPM";

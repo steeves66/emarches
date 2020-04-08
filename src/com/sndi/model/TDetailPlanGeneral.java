@@ -47,6 +47,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	private Date gpgDateValCpmp;
 	private Date gpgDateValDmp;
 	private String gpgLibFin;
+	private Date gpgDteModif;
 	private Set<TDossierPlanGeneral> TDossierPlanGenerals = new HashSet<TDossierPlanGeneral>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 	private Set<TFinancementPgpm> TFinancementPgpms = new HashSet<TFinancementPgpm>(0);
@@ -72,7 +73,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	public TDetailPlanGeneral(long gpgId, TModePassation TModePassation, TPlanGeneral TPlanGeneral, TAgpm TAgpm,
 			TStatut TStatut, TTypeMarche TTypeMarche, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
 			Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao,
-			String gpgActeurSaisie, String gpgStatutRetour,Date gpgDateSaisie, String gpgStrCode,Date gpgDateValAc,String gpgLibFin,
+			String gpgActeurSaisie, String gpgStatutRetour,Date gpgDateSaisie, String gpgStrCode,Date gpgDateValAc,String gpgLibFin, Date gpgDteModif,
 			Date gpgDateValCpmp, Date gpgDateValDmp,Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TFinancementPgpm> TFinancementPgpms, Set<THistoPlanGeneral> THistoPlanGenerals) {
 		this.gpgId = gpgId;
@@ -97,6 +98,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgDateValCpmp = gpgDateValCpmp;
 		this.gpgDateValDmp = gpgDateValDmp;
 		this.gpgLibFin = gpgLibFin;
+		this.gpgDteModif = gpgDteModif;
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
 		this.TDetailPlanPassations = TDetailPlanPassations;
 		this.TFinancementPgpms = TFinancementPgpms;
@@ -311,6 +313,16 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setGpgLibFin(String gpgLibFin) {
 		this.gpgLibFin = gpgLibFin;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "GPG_DTE_MODIF", length = 7)
+	public Date getGpgDteModif() {
+		return this.gpgDteModif;
+	}
+
+	public void setGpgDteModif(Date gpgDteModif) {
+		this.gpgDteModif = gpgDteModif;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDetailPlanGeneral")

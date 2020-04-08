@@ -48,6 +48,7 @@ public class TAffichageAgpm implements java.io.Serializable {
 	private Date affAgpDateValAc;
 	private Date affAgpDateValCpmp;
 	private Date affAgpDateValDmp;
+	private Date affAgpDteModif;
 
 	public TAffichageAgpm() {
 	}
@@ -67,7 +68,8 @@ public class TAffichageAgpm implements java.io.Serializable {
 	public TAffichageAgpm(long affId, TProjet TProjet,TStructure TStructure, TFinancement TFinancement, TGestion TGestion,
 			TDeclarant TDeclarant, TStatut TStatut, TBailleur TBailleur,String affAgpCode,
 			TSourceFinancement TSourceFinancement, TDevise TDevise, TMinistere TMinistere, TFonction TFonction,long affAgpId,
-			String affAgpActeurSaisie, String affAgpStatutRetour, String affAgpActif,String affAgpTypeDao, String affAgpCommentaire,/*Clob affAgpRecherche,*/String affAgpRecherche,Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp) {
+			String affAgpActeurSaisie, String affAgpStatutRetour, String affAgpActif,String affAgpTypeDao, String affAgpCommentaire,/*Clob affAgpRecherche,*/String affAgpRecherche,
+			Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp,Date affAgpDteModif) {
 		this.affId = affId;
 		this.TProjet = TProjet;
 		this.TStructure = TStructure;
@@ -90,6 +92,7 @@ public class TAffichageAgpm implements java.io.Serializable {
 		this.affAgpDateValCpmp = affAgpDateValCpmp;
 		this.affAgpDateValDmp = affAgpDateValDmp;
 		this.affAgpCode = affAgpCode;
+		this.affAgpDteModif = affAgpDteModif;
 		
 	}
 
@@ -316,6 +319,16 @@ public class TAffichageAgpm implements java.io.Serializable {
 
 	public void setAffAgpCode(String affAgpCode) {
 		this.affAgpCode = affAgpCode;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AFF_AGP_DTE_MODIF", length = 7)
+	public Date getAffAgpDteModif() {
+		return this.affAgpDteModif;
+	}
+
+	public void setAffAgpDteModif(Date affAgpDteModif) {
+		this.affAgpDteModif = affAgpDteModif;
 	}
 
 }
