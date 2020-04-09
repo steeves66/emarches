@@ -36,7 +36,7 @@
                                     <br>  ALLER SUR LE PORTAIL DU GOUVERNEMENT </a>
                             </li> 
                             <li>
-                                <a href="/EMAP/assistance.jsf">
+                                <a href="/E-MarchesPublics/assistance.jsf">
                                     <br>  ASSISTANCE & AIDE </a>
                             </li>
                             
