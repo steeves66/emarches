@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-03-17T11:08:14 -->
+<!-- 2020-04-08T17:29:05 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="membres_cojo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53fc7504-1b87-459d-b8ff-b4a2211a8f07">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -169,32 +169,6 @@ and s.sea_num = $P{param_code}]]>
 	</background>
 	<pageHeader>
 		<band height="238" splitType="Stretch">
-			<image>
-				<reportElement x="47" y="40" width="43" height="24" uuid="dbc2cc19-22f9-416b-8be4-59c12639831c"/>
-				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="0" y="0" width="160" height="40" uuid="e3244bdf-2bb4-480f-97a0-6761fabeb4ac"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
-]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="28" y="81" width="87" height="21" uuid="6c3f4dc0-675d-4db5-980f-577fc70fdca6"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[E-MarchesPublics]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="1" y="67" width="139" height="19" uuid="27c79739-bf8d-4996-84b9-1a0c89ba34fc"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Direction des Marchés Publics]]></text>
-			</staticText>
 			<staticText>
 				<reportElement x="398" y="1" width="171" height="17" uuid="4d4b45d7-e363-4cf3-a469-f83aa806f306">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -214,7 +188,7 @@ and s.sea_num = $P{param_code}]]>
 				<text><![CDATA[Union-Discipline-Travail]]></text>
 			</staticText>
 			<image>
-				<reportElement x="208" y="13" width="152" height="51" uuid="7648cf58-0f5a-4ec4-8744-da2bc235a9b4"/>
+				<reportElement x="1" y="0" width="178" height="51" uuid="7648cf58-0f5a-4ec4-8744-da2bc235a9b4"/>
 				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
 			</image>
 			<rectangle radius="8">

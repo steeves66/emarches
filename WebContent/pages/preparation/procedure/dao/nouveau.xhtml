@@ -624,20 +624,7 @@
 						  </p:commandLink>
 				        </p:column>
                          
-                           <p:column headerText="Montant Caution" styleClass="col-sm-1">
-				          <p:cellEditor>
-		                <f:facet name="output">
-		                <h:outputText styleClass="pull-right" value="#{slctdTb.laaMtCaut}" >
-		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-		                </h:outputText>
-		                </f:facet>
-		                <f:facet name="input">
-		                 <p:inputText id="modelInput" value="#{slctdTb.laaMtCaut}" style="width:100%">
-		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
-		                 </p:inputText>
-		                 </f:facet>
-		               </p:cellEditor>
-				        </p:column>
+                
 				        
 				        
 				         <p:column headerText="Actions" width="4%">
@@ -791,9 +778,7 @@
 					         <p:column headerText="Imputation" styleClass="col-sm-2">
 					            <h:outputText  value="#{slctdTb.TLBudgets.lbgImputation}"/>
 					        </p:column>
-					        <p:column headerText="Montant caution" styleClass="col-sm-2">
-					            <h:outputText value="#{slctdTb.laaMtCaut}" />
-					        </p:column>
+					        
 					    </p:dataTable>
 	            </div>
 	            </div>

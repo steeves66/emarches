@@ -4116,7 +4116,7 @@ public class ControleController {
 							    			else
 								    			if(action.equalsIgnoreCase("LISMBR")) {
 									    			type = "Commission";
-									    			libelle="SEANCE d'OUVERTRURE : Composition de la commssion";
+									    			libelle="SEANCE D'OUVERTURE : Composition de la commssion";
 									    		}else
 									    			if(action.equalsIgnoreCase("LISCOM")) {
 										    			type = "Commission";

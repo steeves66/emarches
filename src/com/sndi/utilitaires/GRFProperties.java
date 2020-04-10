@@ -105,6 +105,13 @@ public class GRFProperties {
 	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/standalone/Dossiers/DAO/Travaux/";
 	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/standalone/Dossiers/DAO/Fournitures/";
 	public static final String PARAM_UPLOAD_DAO_SERVICES = "/standalone/Dossiers/DAO/Services/";
+	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/standalone/Dossiers/DAO/Prestations/";
+	
+	public static final String PARAM_UPLOAD_DESTINATION_DAO_LINUX = getProperty("destinationDao", "\\standalone\\Dossiers\\DAO\\");
+	public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/standalone/Dossiers/DAO/Travaux");
+	public static final String PARAM_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationFournitures","opt/standalone/Dossiers/DAO/Fournitures");
+	public static final String PARAM_UPLOAD_DAO_SERVICES_LINUX = getProperty("destinationServices","opt/standalone/Dossiers/DAO/Services/");
+	public static final String PARAM_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationPrestations","opt/standalone/Dossiers/DAO/Prestations/");
 	
 	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC = getProperty("destinationTrue", "\\standalone\\Dossiers\\trueDoc\\");
 	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "opt/standalone/Dossiers/");
