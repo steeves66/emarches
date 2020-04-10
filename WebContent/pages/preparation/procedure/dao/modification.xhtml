@@ -140,11 +140,11 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES AVIS DU BAIILEUR</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES #{controleController.type}</div></div>
 			         </div>
 			          <div class="box-body">
 			          
-                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossDacListe}" emptyMessage="Aucun Document enrégistré">
+                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossListe}" emptyMessage="Aucun Document enrégistré">
 			           <p:column headerText="Nom du document " styleClass="col-md-10">
 			            <h:outputText value="#{doss.ddaNom}" />
 			        </p:column>

@@ -1018,7 +1018,7 @@
 				   
 				  <h:panelGroup rendered="#{controleController.saisieRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1036,7 +1036,7 @@
                  
                    <h:panelGroup rendered="#{controleController.validationRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1054,7 +1054,7 @@
                  
                   <h:panelGroup rendered="#{controleController.affectationRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1072,7 +1072,7 @@
                  
                  <h:panelGroup rendered="#{controleController.chargeRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1091,7 +1091,7 @@
                  
                  <h:panelGroup rendered="#{controleController.examenRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1109,7 +1109,7 @@
                  
                 <h:panelGroup rendered="#{controleController.publicationRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1128,7 +1128,7 @@
                  
                  <h:panelGroup rendered="#{controleController.venteRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1146,7 +1146,7 @@
                  
                  <h:panelGroup rendered="#{controleController.celluleRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -1164,7 +1164,7 @@
                  
                   <h:panelGroup rendered="#{controleController.priseRecherche}">
                     <label >
-                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le numero du DAC"/> 	
+                      <p:inputText type="text" value="#{daoController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
@@ -2233,17 +2233,25 @@
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
          				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
          		
 				        </p:column>
 
                         <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
                         
                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affDacCode}" />
          				</h:panelGroup> 
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
          				
 				        </p:column>
 				        
@@ -2255,6 +2263,12 @@
                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affDacObjet}" />
          				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				
 				        </p:column>
 				        
 				         
@@ -2266,6 +2280,10 @@
                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
          				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
 				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
@@ -2275,6 +2293,10 @@
                         
                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:green; font-weight:bold " />
          				</h:panelGroup>
 				        </p:column> 
 				        
@@ -2286,6 +2308,10 @@
                         
                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:green; font-weight:bold " />
          				</h:panelGroup>
 				        </p:column>   
 				       
@@ -2357,7 +2383,7 @@
 	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif de Retour">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du DAO N° #{daoController.slctdTd.affDacCode}  
+						Motif du retour du #{controleController.type} N° #{daoController.slctdTd.affDacCode}  
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	         
@@ -2375,7 +2401,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du DAO N° #{daoController.slctdTd.affDacCode} 
+						Motif du retour du #{controleController.type} N° #{daoController.slctdTd.affDacCode} de l'AC : #{daoController.slctdTd.affDacFonCodAc}
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">
@@ -2401,7 +2427,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
 			         <div class="col-md-3">
-			          DAO 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -2412,7 +2438,7 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeTabDaoTrans}"
-						  emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+						  emptyMessage="Aucun DAO transmis" scrollable="true" scrollHeight="120px" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			            <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2455,9 +2481,9 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DAC DIFFERES</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
 			         <div class="col-md-3">
-			          DAC 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -2468,7 +2494,7 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeTabDaoDiff}"
-						  emptyMessage="Aucun DAC différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+						  emptyMessage="Aucun DAC différé" scrollable="true" scrollHeight="120px" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			            <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2511,9 +2537,9 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DAC TRAITES</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} TRAITES</div></div>
 			         <div class="col-md-3">
-			          DAC 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -2523,7 +2549,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="100px" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.daoPriseCompte}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="120px" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.daoPriseCompte}"
 						  emptyMessage="Aucun DAC traité" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			            <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -2569,7 +2595,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff">DAO EN ATTENETE DE RETRAIT</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff">#{controleController.type} EN ATTENTE DE RETRAIT</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2583,7 +2609,7 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoRetire}"
-						 selectionMode="single" 
+						 selectionMode="single" scrollable="true" scrollHeight="120"
 			               emptyMessage="Aucun DAO retiré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -2626,7 +2652,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff">DAO RETIRES</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff">#{controleController.type} RETIRES</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2639,8 +2665,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoRetire}"
-						 selectionMode="single" 
+<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoRetire}" selectionMode="single" scrollable="true" scrollHeight="120"
 			               emptyMessage="Aucun DAO retiré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -2683,7 +2708,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} VALIDATION</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2696,9 +2721,8 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoValide}"
-						 selectionMode="single" 
-			               emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoValide}" scrollable="true" scrollHeight="120" selectionMode="single" 
+			               emptyMessage="Aucun #{controleController.type} transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2740,7 +2764,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} VALIDATION</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2753,9 +2777,8 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeTabDaoAffecCsv}"
-						 selectionMode="single" 
-			               emptyMessage="Aucun DAO transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeTabDaoAffecCsv}" scrollable="true" scrollHeight="120"
+						 selectionMode="single" emptyMessage="Aucun DAC transmis"  rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2797,7 +2820,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DAC AFFECTES</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} AFFECTES</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2810,9 +2833,8 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeTabDaoCsvAff}"
-						 selectionMode="single" 
-			               emptyMessage="Aucun DAC affecté" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeTabDaoCsvAff}"
+						 selectionMode="single" scrollable="true" scrollHeight="120" emptyMessage="Aucun DAC affecté" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					      <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -2856,7 +2878,7 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} VALIDATION</div></div>
 			         <div class="col-md-3">
 			          #{controleController.type} 
 			         </div>
@@ -2868,8 +2890,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover"  
-						 selectionMode="single"  scrollable="true" scrollHeight="120"
+			 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" selectionMode="single"  scrollable="true" scrollHeight="120"
 			               emptyMessage="Aucun #{controleController.type} validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -2914,9 +2935,9 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DAC DIFFERES</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
 			         <div class="col-md-3">
-			          DAC 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -2973,9 +2994,9 @@
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
 			         <div class="col-md-3">
-			          DAO 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -3091,7 +3112,7 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES DAO</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES #{controleController.type}</div></div>
 			         </div>
 			          <div class="box-body">
 			          
@@ -3136,11 +3157,11 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO VALIDES</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.type} VALIDES</div></div>
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossier"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoChargeValid}"  emptyMessage="Aucun Dao validé">
+                <p:dataTable id="tabDossier"  scrollable="true" scrollHeight="120px" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoChargeValid}"  emptyMessage="Aucun Dao validé">
 			        
 			           
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -3184,11 +3205,11 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO VALIDES PAR LE CHEF DE SERVICE</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.type} VALIDES PAR LE CHEF DE SERVICE</div></div>
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossierVal"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoValCsv}"  emptyMessage="Aucun Dao validé">
+                <p:dataTable id="tabDossierVal"  scrollable="true" scrollHeight="120px" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoValCsv}"  emptyMessage="Aucun Dao validé">
 			        
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -3232,11 +3253,11 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO DIFFERES PAR LE CHEF DE SERVICE</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.type} DIFFERES PAR LE CHEF DE SERVICE</div></div>
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossierDiff"  scrollable="true" scrollHeight="120" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoDiffCsv}"  emptyMessage="Aucun Dao différé">
+                <p:dataTable id="tabDossierDiff"  scrollable="true" scrollHeight="120px" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeTabdaoDiffCsv}"  emptyMessage="Aucun Dao différé">
 			        
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
@@ -3332,7 +3353,7 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES DAO</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES #{controleController.type}</div></div>
 			         </div>
 			          <div class="box-body">
 			          
@@ -3376,11 +3397,11 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO CORRIGES</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.type} CORRIGES</div></div>
 			         </div>
 			          <div class="box-body">
 			          
-                <p:dataTable id="tabDossier" scrollable="true" scrollHeight="260" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoCsvValid}"  emptyMessage="Aucun Dao corrigé">
+                <p:dataTable id="tabDossier" scrollable="true" scrollHeight="120px" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDaoCsvValid}"  emptyMessage="Aucun Dao corrigé">
 			           <p:column headerText="Gestion" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.dacGesCode}" />
 				        </p:column>
@@ -3431,7 +3452,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleVendu" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoVendu}"
+						 <p:dataTable id="ndTbleVendu" scrollable="true" scrollHeight="120px" styleClass="table table-bordered table-hover" var="slctdTb" action="#{daoController.listeDaoVendu}"
 						 selectionMode="single" 
 			               emptyMessage="Aucun DAO vendu" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               

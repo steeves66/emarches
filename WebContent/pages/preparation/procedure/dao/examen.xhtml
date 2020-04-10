@@ -401,7 +401,7 @@
 	          </div>
 	          
 	           <div class="pull-right ">
-			            <p:commandLink  action="#{daoController.resultatCorrectionRespo()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
+			            <p:commandLink rendered="#{daoController.validCorrection}" action="#{daoController.resultatCorrectionRespo()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la sanction ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>

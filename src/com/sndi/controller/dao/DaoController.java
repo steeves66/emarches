@@ -332,6 +332,7 @@ public class DaoController {
 	  private boolean pavet4 = false;
 	  private boolean pavet5 = false;
 	  private boolean pavet6 = false;
+	  private boolean validCorrection = false;
 	  
 	 
 	 @PostConstruct
@@ -409,7 +410,7 @@ public class DaoController {
 		 if (!listeDaoBailleur.isEmpty()) {
 			   daoBailleur = listeDaoBailleur.get(0);
 			   panelAvisBailleur = true;
-			   panelBailleurFichier = true;
+			   //panelBailleurFichier = true;
 			   pavet2 =false;
 			   pavet3=false;
 			   pavet4=false;
@@ -466,12 +467,12 @@ public class DaoController {
 					dos.setDdaReference(fileUploadController.getDocNom());
 					iservice.addObject(dos);
 					
-					//chargeNatureDocTrans();
-					chargeDossier();
+	
+					chargeDossier(); 
 					
 					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succés!", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
-				   chargeDossier();
+				     chargeDossier();
 					}else {
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
 						FacesContext.getCurrentInstance().addMessage(null, msg);	
@@ -519,6 +520,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      	            
      	            //Désactivation des booléens
      	            panelAvisBailleur = true;
+     	            panelBailleurFichier = true;
 		    	    pavet2 =false;
 				    pavet3=false;
 				    pavet4=false;
@@ -732,11 +734,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				      etatLoveObs = true;
 				      etatBtnValid = true;
 				      etatBtnValidCharge = false;
+				      
 		         }else {
 		        	 etatSanction = false;	
 		        	 etatLoveObs = false;
 		        	 etatBtnValid = false;
 		        	 etatBtnValidCharge = true;
+		        	 validCorrection = false;
 		         }		
 		    }
 	  
@@ -2081,6 +2085,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 //chargePiecesByDao();
 				//Actualisation du Tableau de Bord
 				tableauBordController.chargeDataDao();
+				//Activation et désactivation des boutons valider
+				etatBtnValid = false;
+				validCorrection = true;
 				 //Message de confirmation
 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 				 userController.setRenderMsg(true);
@@ -2158,6 +2165,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 				                               // chargePiecesByDao();				
 	 				                              //Actualisation du Tableau de Bord
 					                              tableauBordController.chargeDataDao();
+					                              //Activation et désactivation des boutons valider
+					              				  etatBtnValid = false;
+					              				  validCorrection = true;
 	 				                              //Message de confirmation
 	 				                              userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 	 				                              userController.setRenderMsg(true);
@@ -5382,6 +5392,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setNatPiece(String natPiece) {
 		this.natPiece = natPiece;
+	}
+
+	public boolean isValidCorrection() {
+		return validCorrection;
+	}
+
+	public void setValidCorrection(boolean validCorrection) {
+		this.validCorrection = validCorrection;
 	}
 	
 		
