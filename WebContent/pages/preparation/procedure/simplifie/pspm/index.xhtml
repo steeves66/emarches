@@ -533,7 +533,7 @@
                             </p:commandLink>
                             
                            
-                              <p:commandLink action="#{ppmController.pspmUnique()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" title="Editer le PSPM" ajax="false" >
+                              <p:commandLink action="#{ppmController.pspmUnique()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left: 3px" title="Editer le PSPM" ajax="false" >
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                               </p:commandLink>
@@ -672,7 +672,7 @@
 	         		          </h:panelGroup>
 	         		      </h:panelGroup>
                         
-                        <p:commandLink action="#{ppmController.pspmUnique()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" title="Editer le PSPM" ajax="false" >
+                        <p:commandLink action="#{ppmController.pspmUnique()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left: 3px" title="Editer le PSPM" ajax="false" >
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                          </p:commandLink>
@@ -733,7 +733,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du PSPM N° #{ppmController.slctdTd.affDppId} 
+						Motif du retour de l'opération N° #{ppmController.slctdTd.affDppId} du #{controleController.type} de l'AC : #{pgpmAcController.slctdTd.affDppActeurSaisie}
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">
@@ -760,7 +760,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
 			         <div class="col-md-3">
-			          PSPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -813,7 +813,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
 			         <div class="col-md-3">
-			          PSPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -880,7 +880,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
 			         <div class="col-md-3">
-			          PSPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -947,7 +947,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          PSPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -1016,7 +1016,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
 			         <div class="col-md-3">
-			          PSPM 
+			          #{controleController.type} 
 			         </div>
 			         
 			          <div class="col-md-3">
@@ -1083,7 +1083,7 @@
 		            <div class="box-header" style="background-color: #f88b2e">
 			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TOTAL</div></div>
 			         <div class="col-md-3">
-			          PSPM 
+			          #{controleController.type}
 			         </div>
 			         
 			          <div class="col-md-3">
