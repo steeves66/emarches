@@ -3089,8 +3089,8 @@ public class PpmModificationController {
 				
 				 public void coutOperation() {
 					 totalMontant = 0;
-					 for(TFinancementPgpm n : listeFinancementPgpm) {
-						 totalMontant = totalMontant+ (n.getFipMontantCfa()+n.getFipTresor());
+					 for(TFinancementPpm n : listeFinancement) {
+						 totalMontant = totalMontant+ (n.getFppMontantCfa()+n.getFppPartTresor());
 					 }
 				 }
 				 
