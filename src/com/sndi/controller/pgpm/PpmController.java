@@ -3094,8 +3094,18 @@ public class PpmController {
 	    	 projetReport.longStringparam2(planPass.getPlpId(), operateur, "Ppm", "Ppm");
 	     }
 		 
+		 //Edition de l'état PPM en fonction de la gestion
+		 public void imprimerPpmIndex() {
+			 String operateur = userController.getSlctd().getTFonction().getFonCod();
+				projetReport.longStringparam2(gesCode, operateur, "Ppm", "Ppm");
+			}
 		 
-		 
+		 //Edition de l'état PSPM en fonction de la gestion
+		 public void imprimerPspmIndex() {
+			 String operateur = userController.getSlctd().getTFonction().getFonCod();
+				projetReport.longStringparam2(gesCode, operateur, "Pspm", "Pspm");
+			}
+
 		 
 		 //Methode d'impression pspm
 		 public void imprimerPspm() {

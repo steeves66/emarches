@@ -692,6 +692,12 @@
    <p:confirm header="Confirmation" message="Confrmez-vous la transmission ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre 
             </p:commandLink>
+            
+    <p:commandLink action="#{ppmController.imprimerPspmIndex()}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
+    <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer
+    </p:commandLink>        
+            
+            
             </h:panelGroup>
                     
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
