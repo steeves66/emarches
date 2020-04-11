@@ -2991,6 +2991,7 @@ public class PpmModificationController {
 					 slctdTd.setAffDppDateExecDebut(updatePpm.getAffDppDateExecDebut());
 					 slctdTd.setAffDppDateMarcheApprob(updatePpm.getAffDppDateMarcheApprob());
 					 slctdTd.setAffDppDateOuvertOf(updatePpm.getAffDppDateOuvertOf());
+					 slctdTd.setAffDppDateOuvertOt(updatePpm.getAffDppDateOuvertOt());
 					 slctdTd.setAffDppDateElabRapport(updatePpm.getAffDppDateElabRapport());
 					 slctdTd.setAffDppDateNegociation(updatePpm.getAffDppDateNegociation());
 					 slctdTd.setAffDppDateAttApprobDmp(updatePpm.getAffDppDateDaoApprobDmp());
@@ -3034,24 +3035,26 @@ public class PpmModificationController {
 							detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
 							iservice.updateObject(detail);
 							
-							
-							/*listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
-									 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+slctdTd.getAffDppId())));
-							      if(!listeFinancement.isEmpty()) {*/ 
+							 
 							    	//Mis à Jour dans T_Financement_PPM
 				    				  for(TFinancementPpm fin: listeFinancement) {
-						      		        TFinancementPpm newFinancement = new TFinancementPpm();
-						      		        //newFinancement.setTDetailPlanPassation(detail);
-						      		        newFinancement.setFppCommentaire(fin.getFppCommentaire());
-						      		        newFinancement.setFppMontantCfa(fin.getFppMontantCfa());
-						      		        newFinancement.setFppMontantDevise(fin.getFppMontantDevise());
-						      		        newFinancement.setFppPartTresor(fin.getFppPartTresor());
-						      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
-						      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
-						      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
-						      				iservice.updateObject(newFinancement);
-				    				    }
-							       /* }*/
+				    					      listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+													 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+fin.getTDetailPlanPassation().getDppId())));
+											      if(!listeFinancement.isEmpty()) {
+											    	  TFinancementPpm newFinancement = new TFinancementPpm();
+											    	  newFinancement = listeFinancement.get(0);
+											    	
+											    	   newFinancement.setFppCommentaire(fin.getFppCommentaire());
+									      		        newFinancement.setFppMontantCfa(fin.getFppMontantCfa());
+									      		        newFinancement.setFppMontantDevise(fin.getFppMontantDevise());
+									      		        newFinancement.setFppPartTresor(fin.getFppPartTresor());
+									      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+									      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
+									      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
+									      				iservice.updateObject(newFinancement);
+											      }
+				    				       }
+							     
 						
 							
 							//Rédirection sur l'index
