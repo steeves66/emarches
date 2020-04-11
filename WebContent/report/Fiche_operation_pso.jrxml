@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-11T13:13:23 -->
+<!-- 2020-04-11T19:56:13 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_pso" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c522d3ab-6af2-440a-8892-02575153090f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -290,62 +290,62 @@ and af.aff_dpp_id= $P{param_code}]]>
 					</textElement>
 					<text><![CDATA[DATES PREVISIONNELLES]]></text>
 				</staticText>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="4" y="25" width="169" height="21" uuid="0e1f276a-be75-40da-8dfe-104b11e40c4c"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Transmission DC :"+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_TRANS})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="4" y="47" width="169" height="21" uuid="ef6fd5b2-fd86-4c95-9236-72331891ff43"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Validation DC par CPMP : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_APPROB_DMP})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="4" y="69" width="169" height="21" uuid="24251679-93ca-4096-9088-2f3da2dc99b2"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Validation DC Bailleur : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_APPROB_BAIL})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="3" y="90" width="170" height="21" uuid="5945402c-fa3b-44d4-9831-2a3a69abe59b"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Publication : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_AVIS_AO_PUBLICAT})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="178" y="92" width="182" height="21" uuid="495bc157-ee18-4cd3-9501-e782bd10ea10"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Offre Financière : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OF})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="178" y="70" width="182" height="21" uuid="02ab259c-3ea4-4e1a-997a-38fa5e26767c"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Offre Technique : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OT})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="178" y="48" width="182" height="21" uuid="ef92b340-dbd0-4bb8-a472-151f673b6379"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Signature de l'AC : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="177" y="26" width="183" height="21" uuid="6bd31365-b752-4883-a323-5764123d2ed4"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Signature Attributaire : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="364" y="26" width="187" height="21" uuid="a5baf6bb-bb59-467d-89a0-ed4fbdaa8bfb"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Approbation Bailleur  : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_ATT_APPRO_BAIL})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="364" y="48" width="187" height="21" uuid="26d94156-228f-45ea-a489-081414c493f5"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Négociation : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_NEGOCIATION})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="364" y="70" width="187" height="21" uuid="b0896d27-8185-44a9-887d-1e493b8f70d7"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Début d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_DEBUT})]]></textFieldExpression>
 				</textField>
-				<textField>
+				<textField isBlankWhenNull="true">
 					<reportElement x="365" y="92" width="186" height="21" uuid="0932ea87-89c7-419a-89fd-7c1e49012684"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Fin d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_FIN})]]></textFieldExpression>
@@ -395,7 +395,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="e1d77d5f-6511-4e35-85a6-f9923de7e73f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FPP_TYPE_FINANCE}]]></textFieldExpression>
@@ -413,7 +413,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="6de19bdf-e7d5-4710-89fd-fdc61e1268b5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FPP_BAI_CODE}]]></textFieldExpression>
@@ -431,7 +431,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="ccea5afb-eade-432a-b7f3-7337d6dd62e6"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FPP_SOU_CODE}]]></textFieldExpression>
@@ -449,8 +449,9 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="97a03938-fbad-4b9b-87c0-3270fba09d5e"/>
+								<box rightPadding="2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_CFA})]]></textFieldExpression>
 							</textField>
@@ -467,8 +468,9 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="115" height="30" uuid="45243ece-4146-4366-869e-ec1854bd9e1a"/>
+								<box rightPadding="2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_PART_TRESOR})]]></textFieldExpression>
 							</textField>

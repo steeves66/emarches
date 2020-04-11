@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-11T13:12:12 -->
+<!-- 2020-04-11T19:53:12 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_psc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e771a51-deef-488c-b7c0-9a03b76eebc6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -388,7 +388,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="f0bcaf57-3f18-4e19-b8e2-a632956f0b5d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FPP_TYPE_FINANCE}]]></textFieldExpression>
@@ -406,7 +406,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="fb15eb18-12ba-42c3-be2b-32c19f13b868"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FPP_BAI_CODE}]]></textFieldExpression>
@@ -424,7 +424,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="4336f36e-9e1d-42fb-873c-4ec8f29f97f1"/>
 								<textElement verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FPP_SOU_CODE}]]></textFieldExpression>
@@ -442,8 +442,9 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="cb83e672-3c78-4b04-aeb7-57ef6e36a903"/>
+								<box rightPadding="2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_CFA})]]></textFieldExpression>
 							</textField>
@@ -460,8 +461,9 @@ and af.aff_dpp_id= $P{param_code}]]>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
-							<textField>
+							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="115" height="30" uuid="93c76ac0-5229-4f45-bf13-84712d43da6e"/>
+								<box leftPadding="0" rightPadding="2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_PART_TRESOR})]]></textFieldExpression>
 							</textField>

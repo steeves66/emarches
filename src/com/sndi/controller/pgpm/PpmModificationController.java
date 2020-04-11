@@ -265,22 +265,14 @@ public class PpmModificationController {
 	 
 	 
 	 
-		 public String onFlowProcess(FlowEvent event) throws IOException {
-			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
-				//Controle Pavé création
-				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
-		  			 if("".equals(detailPass.getDppStructureConduc()) || "".equals(detailPass.getDppStructureBenefi()) ||"".equals(tydCode) ||"".equals(detailPass.getDppBailleur())
-		  				  ||"".equals(pgpm.getGpgMopCode()) ||"".equals(pgpm.getGpgTymCode()) ||"".equals(ligne.getLbgCode()))
-		  			   {
-						 FacesContext.getCurrentInstance().addMessage(null,
-						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
-				          return "ope111";
-						} 
-		 
-				     }
-				    // recupDateGenere();
-				      creerDetailPassation();
-			            return event.getNewStep();
+		 public String onFlowProcess(FlowEvent event) {
+		        if(skip) {
+		            skip = false;   //reset in case user goes back
+		            return "confirm";
+		        }
+		        else {
+		            return event.getNewStep();
+		        }
 		    }
 		 
 		 
@@ -810,6 +802,15 @@ public class PpmModificationController {
 		listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
 				new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+	}
+	
+	//Affichege du modèle de DAO en modification
+	public void affichageModele() {
+		 //Affichage des modèles type de DAO
+		 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
+				 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+updatePpm.getGpgId()))); 
+		//Affichage du coût total de l'opération
+		    coutOperation();
 	}
 	
 	
@@ -1696,13 +1697,14 @@ public class PpmModificationController {
 		    					 new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
 		    			if (!listUpdate.isEmpty()) {
 		    				updatePpm=listUpdate.get(0); 
+		    				affichageModele();
 		    			}
 		      }
 		 
 		 //Afficher les financements du projet ou pgpm selectionné
 		 public void chargeFinancementUpdate() {
 			 listeFinancement.clear();
-			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
 						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+slctdTd.getAffDppId())));
 			 coutOperation();
 		 }
@@ -2970,15 +2972,16 @@ public class PpmModificationController {
 				 @Transactional
 				 public void modifierDetailPlan() throws IOException{
 					 
-					 slctdTd.setAffDppStrConduc(updatePpm.getAffDppStrConduc());
-					 slctdTd.setAffDppStrBenefi(updatePpm.getAffDppStrBenefi());
-					 slctdTd.setAffDppObjet(updatePpm.getAffDppObjet());
+					 slctdTd.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getAffDppGpgId()));
 					 slctdTd.setTTypeMarche(new TTypeMarche(updatePpm.getAffDppTymCode()));
 					 slctdTd.setTModePassation(new TModePassation(updatePpm.getAffDppMopCode()));
 					 slctdTd.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
+					 slctdTd.setAffDppStrConduc(updatePpm.getAffDppStrConduc());
+					 slctdTd.setAffDppStrBenefi(updatePpm.getAffDppStrBenefi());
+					 slctdTd.setAffDppObjet(updatePpm.getAffDppObjet());
 					 slctdTd.setAffDppPartiePmePmi(updatePpm.getAffDppPartiePmePmi());
 					 slctdTd.setAffDppBailleur(updatePpm.getAffDppBailleur());
-					 slctdTd.setAffDppPieceDao(updatePpm.getAffDppPieceDao());
+					 slctdTd.setAffDppPieceDao(updatePpm.getMdtCode());
 					 slctdTd.setAffDppDateAttApproBail(updatePpm.getAffDppDateAttApproBail());
 					 slctdTd.setAffDppApprobAno(updatePpm.getAffDppApprobAno());
 					 slctdTd.setAffDppDateAvisAoPublicat(updatePpm.getAffDppDateAvisAoPublicat());
@@ -3002,6 +3005,7 @@ public class PpmModificationController {
 			   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
 			    	        TDetailPlanPassation detail = new TDetailPlanPassation();
 							if(!PLG.isEmpty()) detail =PLG.get(0);
+							detail.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getTDetailPlanGeneral().getGpgId()));
 							detail.setDppPartiePmePmi(slctdTd.getAffDppPartiePmePmi());
 							detail.setDppSourceFin(slctdTd.getAffDppSourceFin());
 							detail.setDppObjet(slctdTd.getAffDppObjet());
@@ -3028,23 +3032,27 @@ public class PpmModificationController {
 							detail.setDppApprobAno(slctdTd.getAffDppApprobAno());
 							detail.setDppDateNegociation(slctdTd.getAffDppDateNegociation());
 							detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
-							//detail.setDppDateJugementOffreTec(slctdTd.get);
 							iservice.updateObject(detail);
 							
 							
-							//Mis à Jour dans T_Financement_PPM
-		    				  for(TFinancementPpm fin: listeFinancement) {
-				      		        TFinancementPpm newFinancement = new TFinancementPpm();
-				      		        newFinancement.setTDetailPlanPassation(detailPass);
-				      		        newFinancement.setFppCommentaire(fin.getFppCommentaire());
-				      		        newFinancement.setFppMontantCfa(fin.getFppMontantCfa());
-				      		        newFinancement.setFppMontantDevise(fin.getFppMontantDevise());
-				      		        newFinancement.setFppPartTresor(fin.getFppPartTresor());
-				      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
-				      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
-				      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
-				      				iservice.updateObject(newFinancement);
-		    				    }
+							/*listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+									 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+slctdTd.getAffDppId())));
+							      if(!listeFinancement.isEmpty()) {*/ 
+							    	//Mis à Jour dans T_Financement_PPM
+				    				  for(TFinancementPpm fin: listeFinancement) {
+						      		        TFinancementPpm newFinancement = new TFinancementPpm();
+						      		        //newFinancement.setTDetailPlanPassation(detail);
+						      		        newFinancement.setFppCommentaire(fin.getFppCommentaire());
+						      		        newFinancement.setFppMontantCfa(fin.getFppMontantCfa());
+						      		        newFinancement.setFppMontantDevise(fin.getFppMontantDevise());
+						      		        newFinancement.setFppPartTresor(fin.getFppPartTresor());
+						      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+						      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
+						      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
+						      				iservice.updateObject(newFinancement);
+				    				    }
+							       /* }*/
+						
 							
 							//Rédirection sur l'index
 			   				userController.renderPage("ppm1");
@@ -3143,12 +3151,9 @@ public class PpmModificationController {
 					editForm();
 					chargeFinancementUpdate();
 					chargeGestions();
-					chargeBailleur();
-					chargeDevise();
 					chargeMarches();
 					chargeModePassation();
 					chargePgpm();
-					chargeSourceFinance();
 				break;
 				case "pspm1": 
 					chargeDataPspm();

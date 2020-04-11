@@ -1701,7 +1701,7 @@ public class PpmController {
 		 //Afficher les financements du projet ou pgpm selectionné
 		 public void chargeFinancementUpdate() {
 			 listeFinancement.clear();
-			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
 						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+slctdTd.getAffDppId())));
 			 coutOperation();
 		 }

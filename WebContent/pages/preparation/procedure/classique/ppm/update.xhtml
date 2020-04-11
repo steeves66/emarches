@@ -151,13 +151,13 @@
 				  <div class="col-sm-9">
                     <table>
 		                 <tr>
-		                 <td style="width: 160px"><p:inputText id="pgpm" type="text" value="#{ppmModificationController.recupPgpm.gpgId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 160px"><p:inputText id="pgpm" type="text" value="#{ppmModificationController.updatePpm.gpgId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
 		                  <p:commandLink  oncomplete="PF('pgpmDlg').show()" value="#{ppmModificationController.chargePgpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 		                 </td>
-		                 <td style="width: 530px"><p:inputText id="pgpm2" type="text" value="#{ppmModificationController.recupPgpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 530px"><p:inputText id="pgpm2" type="text" value="#{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 </tr>
                      </table>
                   </div>
@@ -170,13 +170,13 @@
 				  <div class="col-sm-9">
                     <table>
 		                 <tr>
-		                 <td style="width: 160px"><p:inputText id="pgspm" type="text" value="#{ppmModificationController.recupPgspm.gpgId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 160px"><p:inputText id="pgspm" type="text" value="#{ppmModificationController.updatePpm.gpgId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
 		                  <p:commandLink  oncomplete="PF('pgspmDlg').show()" value="#{ppmModificationController.chargePgspm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 		                 </td>
-		                 <td style="width: 530px"><p:inputText id="pgspm2" type="text" value="#{ppmModificationController.recupPgspm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 530px"><p:inputText id="pgspm2" type="text" value="#{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 </tr>
                      </table>
                   </div>
@@ -194,7 +194,7 @@
                   <div class="form-group">
                   <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		          <p:inputText id="typMa2" type="text" value="#{ppmModificationController.recupPgpm.gpgTymCode} : #{ppmModificationController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		          <p:inputText id="typMa2" type="text" value="#{ppmModificationController.updatePpm.affDppTymCode}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -203,7 +203,7 @@
                   <div class="form-group">
                   <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		          <p:inputText id="typMa21" type="text" value="#{ppmModificationController.recupPgspm.gpgTymCode} : #{ppmModificationController.recupPgspm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		          <p:inputText id="typMa21" type="text" value="#{ppmModificationController.updatePpm.affDppTymCode}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -212,7 +212,7 @@
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		         <p:inputText id="modeP2" type="text" value="#{ppmModificationController.recupPgpm.gpgMopCode} : #{ppmModificationController.recupPgpm.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		         <p:inputText id="modeP2" type="text" value="#{ppmModificationController.updatePpm.affDppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -221,7 +221,7 @@
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Mode de Passation</label>
                   <div class="col-sm-9">
-                   <p:inputText id="modeP21" type="text" value="#{ppmModificationController.recupPgspm.gpgMopCode} : #{ppmModificationController.recupPgspm.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                   <p:inputText id="modeP21" type="text" value="#{ppmModificationController.updatePpm.affDppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -230,19 +230,10 @@
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Modèle de DAO-type</label>
                   
-                  <h:panelGroup rendered="#{ppmModificationController.modeleAmi}" >
-                  <div class="col-sm-9">
-                    <p:selectOneMenu id="tdao" value="#{ppmModificationController.updatePpm.affDppPieceDao}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			      <f:selectItem  itemLabel="Choisir le type DAO.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmModificationController.listeAmi}" var="da" itemLabel="#{da.mdtLibelleLong}" itemValue="#{da.mdtCode}" />			   				   
-				<f:selectItems />				   				    				   
-		       	</p:selectOneMenu>
-                  </div>
-                  </h:panelGroup>
                   
                   <h:panelGroup rendered="#{ppmModificationController.modeleDao}" >
                   <div class="col-sm-9">
-                    <p:selectOneMenu id="tami" value="#{ppmModificationController.updatePpm.affDppPieceDao}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+                    <p:selectOneMenu id="tami" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAO.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmModificationController.listeDao}" var="am" itemLabel="#{am.mdtLibelleLong}" itemValue="#{am.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -259,7 +250,7 @@
                   <label  class="col-sm-3 control-label">Structure Conductrice</label>
 
                   <div class="col-sm-9">
-                    <p:inputText  type="text" value="#{ppmModificationController.updatePpm.dppStructureConduc}" styleClass="form-control" style="width: 100%" />
+                    <p:inputText  type="text" value="#{ppmModificationController.updatePpm.affDppStrConduc}" styleClass="form-control" style="width: 100%" />
                   </div>
                 </div>	
                 
@@ -269,7 +260,7 @@
                   <label  class="col-sm-3 control-label">Structure Bénéficiaire</label>
 
                   <div class="col-sm-9">
-                    <p:inputText  type="text" value="#{ppmModificationController.updatePpm.dppStructureBenefi}" styleClass="form-control" style="width: 100%" />
+                    <p:inputText  type="text" value="#{ppmModificationController.updatePpm.affDppStrBenefi}" styleClass="form-control" style="width: 100%" />
                   </div>
                 </div>	
                 
@@ -284,7 +275,7 @@
 
                   <div class="col-sm-9">
        
-				<p:inputText id="modeP78" type="text" value="#{ppmModificationController.updatePpm.gpgPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
+				<p:inputText id="modeP78" type="text" value="#{ppmModificationController.updatePpm.affDppPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -327,13 +318,13 @@
 				  <div class="col-sm-9">
                     <table>
 		                 <tr>
-		                 <td style="width: 20%"><p:inputText id="Imput13" type="text" value="#{ppmModificationController.recupLigne.lbgImputation}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 20%"><p:inputText id="Imput13" type="text" value="#{ppmModificationController.updatePpm.lbgImputation}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
 		                  <p:commandLink  oncomplete="PF('imputationDlg').show()" action="#{ppmModificationController.chargeImputation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 		                 </td>
-		                 <td style="width: 80%"><p:inputText id="Imput23" type="text" value="#{ppmModificationController.recupLigne.natLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 80%"><p:inputText id="Imput23" type="text" value="#{ppmModificationController.updatePpm.natLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 </tr>
                      </table>
                   </div>
@@ -352,11 +343,11 @@
                 </tr>
                 
                 <tr>
-                <td><p:inputText  type="text"  value="#{ppmModificationController.recupLigne.lbgTotDot}" styleClass="form-control" id="dotation" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText>  </td>
-                <td><p:inputText  type="text" value="#{ppmModificationController.recupLigne.lbgAeTr}" styleClass="form-control" id="tre" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber> </p:inputText> </td>
-                <td><p:inputText  type="text" value="#{ppmModificationController.recupLigne.lbgAeEmp}" styleClass="form-control" id="emp" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
-                <td><p:inputText  type="text" value="#{ppmModificationController.recupLigne.lbgAeDon}" styleClass="form-control" id="don" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
-                <td><p:inputText  type="text" value="#{ppmModificationController.recupLigne.lbgDisTot}" styleClass="form-control" id="dispo" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
+                <td><p:inputText  type="text"  value="#{ppmModificationController.updatePpm.lbgTotDot}" styleClass="form-control" id="dotation" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText>  </td>
+                <td><p:inputText  type="text" value="#{ppmModificationController.updatePpm.lbgAeTr}" styleClass="form-control" id="tre" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber> </p:inputText> </td>
+                <td><p:inputText  type="text" value="#{ppmModificationController.updatePpm.lbgAeEmp}" styleClass="form-control" id="emp" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
+                <td><p:inputText  type="text" value="#{ppmModificationController.updatePpm.lbgAeDon}" styleClass="form-control" id="don" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
+                <td><p:inputText  type="text" value="#{ppmModificationController.updatePpm.lbgDisTot}" styleClass="form-control" id="dispo" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
                 </tr>
                 </table>
                 <br/>
@@ -367,24 +358,24 @@
          <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmModificationController.listeFinancement}"
           editable="true" editMode="cell"  emptyMessage="Aucun financement enregistré">
                         
-                        <p:column headerText="Source" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fipTypeFinance}"/>
+                        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fppTypeFinance}"/>
 				        </p:column>
           
          				<p:column headerText="Bailleur" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
 				        </p:column>
 				        
-				        <p:column headerText="Type" styleClass="col-sm-1">
+				        <p:column headerText="Source" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Part Bailleur" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fipMontantCfa}" />
+				            <h:outputText value="#{slctdTb.fppMontantCfa}" />
 				        </p:column>
 				        
 				       <p:column headerText="Part Trésor" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fipTresor}" />
+				            <h:outputText value="#{slctdTb.fppPartTresor}" />
 				        </p:column>
 				        
 				        
@@ -471,7 +462,7 @@
 		                <div class="form-group">
 		                  <label for="pubAoo" class="col-sm-6 control-label">Publication / Invitation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="pubAoo" value="#{ppmModificationController.updatePpm.affDppDateAvisAoPublication}" style="width: 100%" >
+		                   <p:calendar id="pubAoo" value="#{ppmModificationController.updatePpm.affDppDateAvisAoPublicat}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div> 

@@ -2559,24 +2559,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     			        newFinancement.setFipTypeFinance(sourfin);
     			        iservice.addObject(newFinancement);
     				    
-    				
-    				   /* //Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
-    				    List<TDetailPlanGeneral> PL =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
-       						new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
-    				    TDetailPlanGeneral detail = new TDetailPlanGeneral();
-       				     if(!PL.isEmpty())  
-       					 detail =PL.get(0); 
-       				     detail.setGpgSourceFin(newFinancement.getTSourceFinancement().getSouCode());
-       				      iservice.updateObject(detail);
-       				    
-       				    
-       				     List<TAffichagePgpm> AF =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
-       						new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
-       				     TAffichagePgpm aff = new TAffichagePgpm();
-    					if(!AF.isEmpty()) aff =AF.get(0); 
-    					aff.setTSourceFinancement(newFinancement.getTSourceFinancement());
-    					aff.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
-    					iservice.updateObject(aff);*/
     					
     				    //methode qui charge les financements du projet crée
     				    chargeFinancement();

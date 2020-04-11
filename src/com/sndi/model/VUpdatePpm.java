@@ -131,6 +131,8 @@ public class VUpdatePpm implements java.io.Serializable {
 	private String lbgSigfip;
 	private String lbgFonCodePr;
 	private String lbgFonCodeVerou;
+	private String natCode;
+	private String natLibelle;
 	private String mdtCode;
 	private String mdtLibelleLong;
 	private String mdtLibelleCourt;
@@ -140,6 +142,8 @@ public class VUpdatePpm implements java.io.Serializable {
 	private String tymLibelleCourt;
 	private String mopLibelleLong;
 	private String souLibelle;
+	private long gpgId;
+	private String gpgObjet;
 
 	public VUpdatePpm() {
 	}
@@ -202,9 +206,9 @@ public class VUpdatePpm implements java.io.Serializable {
 			String lbgMotifCor, Date lbgDteCor, String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct,
 			String lbgActif, String lbgFonCodeCf, BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2,
 			BigDecimal lbgDotAnPlus0, String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip,
-			String lbgFonCodePr, String lbgFonCodeVerou, String mdtCode, String mdtLibelleLong, String mdtLibelleCourt,
+			String lbgFonCodePr, String lbgFonCodeVerou,String natCode, String natLibelle, String mdtCode, String mdtLibelleLong, String mdtLibelleCourt,
 			Date mdtDteSaisi, String mdtOpeMatricule, String mdtTymCode, String tymLibelleCourt, String mopLibelleLong,
-			String souLibelle) {
+			String souLibelle,long gpgId, String gpgObjet) {
 		this.affId = affId;
 		this.affDppPlpId = affDppPlpId;
 		this.affDppGpgId = affDppGpgId;
@@ -317,6 +321,8 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.lbgSigfip = lbgSigfip;
 		this.lbgFonCodePr = lbgFonCodePr;
 		this.lbgFonCodeVerou = lbgFonCodeVerou;
+		this.natCode = natCode;
+		this.natLibelle = natLibelle;
 		this.mdtCode = mdtCode;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtLibelleCourt = mdtLibelleCourt;
@@ -326,6 +332,8 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
 		this.souLibelle = souLibelle;
+		this.gpgId = gpgId;
+		this.gpgObjet = gpgObjet;
 	}
 
 	@Id
@@ -1336,6 +1344,24 @@ public class VUpdatePpm implements java.io.Serializable {
 	public void setLbgFonCodeVerou(String lbgFonCodeVerou) {
 		this.lbgFonCodeVerou = lbgFonCodeVerou;
 	}
+	
+	@Column(name = "NAT_CODE", nullable = false, length = 20)
+	public String getNatCode() {
+		return this.natCode;
+	}
+
+	public void setNatCode(String natCode) {
+		this.natCode = natCode;
+	}
+
+	@Column(name = "NAT_LIBELLE", length = 200)
+	public String getNatLibelle() {
+		return this.natLibelle;
+	}
+
+	public void setNatLibelle(String natLibelle) {
+		this.natLibelle = natLibelle;
+	}
 
 	@Column(name = "MDT_CODE", nullable = false, length = 15)
 	public String getMdtCode() {
@@ -1416,6 +1442,24 @@ public class VUpdatePpm implements java.io.Serializable {
 
 	public void setSouLibelle(String souLibelle) {
 		this.souLibelle = souLibelle;
-	}	
+	}
+	
+	@Column(name = "GPG_ID", nullable = false, precision = 10, scale = 0)
+	public long getGpgId() {
+		return this.gpgId;
+	}
+
+	public void setGpgId(long gpgId) {
+		this.gpgId = gpgId;
+	}
+
+	@Column(name = "GPG_OBJET", length = 1000)
+	public String getGpgObjet() {
+		return this.gpgObjet;
+	}
+
+	public void setGpgObjet(String gpgObjet) {
+		this.gpgObjet = gpgObjet;
+	}
 
 }
