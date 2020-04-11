@@ -2662,7 +2662,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	 
     	 
     	 
-    	 //sppression de financement update
+    	 //suppression de financement update
 		 public void removeFinancementUpdate() {
 			 System.out.print("+-------------+ "+getSelectFinance().getFipId());
 			 try {
@@ -3056,13 +3056,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	}
 
 
-/*	public TTypeMarche getMarche() {
-		return marche;
-	}
-
-	public void setMarche(TTypeMarche marche) {
-		this.marche = marche;
-	}*/
 
 	public VTypeMarcheFils getMarche() {
 		return marche;
@@ -3073,16 +3066,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		this.marche = marche;
 	}
 
-
-
-/*	public TModePassation getModePassation() {
-		return modePassation;
-	}
-
-
-	public void setModePassation(TModePassation modePassation) {
-		this.modePassation = modePassation;
-	}*/
 
 
 	public String getFiltreModePassation() {

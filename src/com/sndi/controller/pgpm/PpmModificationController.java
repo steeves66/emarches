@@ -20,6 +20,7 @@ import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAffichageAgpm;
 import com.sndi.model.TAffichagePpm;
 import com.sndi.model.TBailleur;
+import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailPlanPassation;
 import com.sndi.model.TDevise;
 import com.sndi.model.TFinancement;
@@ -30,6 +31,7 @@ import com.sndi.model.TGestion;
 import com.sndi.model.TLBudgets;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TModePassation;
+import com.sndi.model.TModeleDacType;
 import com.sndi.model.TPlanPassation;
 import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TTypeMarche;
@@ -406,12 +408,15 @@ public class PpmModificationController {
 		     }
 	 
 		
-	 //Methode de modification	
+	 //Methode de modification du PPM/PSPM
 	 @Transactional
-	 public void modifier() {
+	 public void modifierDetailPlan() throws IOException{
 		 slctdTd.setAffDppStrConduc(updatePpm.getAffDppStrConduc());
 		 slctdTd.setAffDppStrBenefi(updatePpm.getAffDppStrBenefi());
 		 slctdTd.setAffDppObjet(updatePpm.getAffDppObjet());
+		 slctdTd.setTTypeMarche(new TTypeMarche(updatePpm.getAffDppTymCode()));
+		 slctdTd.setTModePassation(new TModePassation(updatePpm.getAffDppMopCode()));
+		 slctdTd.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
 		 slctdTd.setAffDppPartiePmePmi(updatePpm.getAffDppPartiePmePmi());
 		 slctdTd.setAffDppBailleur(updatePpm.getAffDppBailleur());
 		 slctdTd.setAffDppPieceDao(updatePpm.getAffDppPieceDao());
@@ -431,6 +436,48 @@ public class PpmModificationController {
 		 slctdTd.setAffDppDateSignatAc(updatePpm.getAffDppDateSignatAc());
 		 slctdTd.setAffDppInvEntre(updatePpm.getAffDppInvEntre());
 		 iservice.updateObject(slctdTd);
+		 
+		 
+		 //Modification dans TDetailPlanPassation
+    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+    	        TDetailPlanPassation detail = new TDetailPlanPassation();
+				if(!PLG.isEmpty()) detail =PLG.get(0);
+				detail.setDppPartiePmePmi(slctdTd.getAffDppPartiePmePmi());
+				detail.setDppSourceFin(slctdTd.getAffDppSourceFin());
+				detail.setDppObjet(slctdTd.getAffDppObjet());
+				detail.setDppBailleur(slctdTd.getAffDppBailleur());
+				detail.setTModePassation(new TModePassation(slctdTd.getTModePassation().getMopCode()));
+				detail.setTTypeMarche(new TTypeMarche(slctdTd.getTTypeMarche().getTymCode()));
+				detail.setTLBudgets(new TLBudgets(slctdTd.getTLBudgets().getLbgCode()));
+				detail.setTModeleDacType(new TModeleDacType(slctdTd.getAffDppPieceDao()));
+				detail.setDppStructureBenefi(slctdTd.getAffDppStrBenefi());
+				detail.setDppStructureConduc(slctdTd.getAffDppStrConduc());
+				detail.setDppTypeFinance(slctdTd.getAffDppTypeFinance());
+				detail.setDppDateAvisAoPublication(slctdTd.getAffDppDateAvisAoPublicat());
+				detail.setDppDateDaoApprobBail(slctdTd.getAffDppDateDaoApprobBail());
+				detail.setDppDateAttApproBail(slctdTd.getAffDppDateAttApproBail());
+				detail.setDppDateDaoTrans(slctdTd.getAffDppDateDaoTrans());
+				detail.setDppDateElabRapport(slctdTd.getAffDppDateElabRapport());
+				detail.setDppDateExecDebut(slctdTd.getAffDppDateExecDebut());
+				detail.setDppDateExecFin(slctdTd.getAffDppDateExecFin());
+				detail.setDppDateOuvertOf(slctdTd.getAffDppDateOuvertOf());
+				detail.setDppDateOuvertOt(slctdTd.getAffDppDateOuvertOt());
+				detail.setDppDateSignatAc(slctdTd.getAffDppDateSignatAc());
+				detail.setDppDateSignatAttrib(slctdTd.getAffDppDateSignatAttrib());
+				detail.setDppDateJugementOffre(slctdTd.getAffDppDateJugementOffre());
+				detail.setDppApprobAno(slctdTd.getAffDppApprobAno());
+				detail.setDppDateNegociation(slctdTd.getAffDppDateNegociation());
+				detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
+				//detail.setDppDateJugementOffreTec(slctdTd.get);
+				
+				iservice.updateObject(detail);
+   				userController.renderPage("ppm1");
+		    	 userController.setTexteMsg("Modification éffectuée avec succès!");
+			     userController.setRenderMsg(true);
+			     userController.setSevrityMsg("success");
+			     chargeData();
+				
 		 
 		 //Liste des financements
 	   	 		 List<TFinancementPpm> FIN =iservice.getObjectsByColumn("TFinancementPpm", new ArrayList<String>(Arrays.asList("FIN_ID")),

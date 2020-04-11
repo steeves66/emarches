@@ -527,9 +527,10 @@
                              </p:commandLink>
                             </h:panelGroup>
                             
-				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{pgpmAcController.renderPage('ppm3')}"
+				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{ppmController.renderPage('ppm4','MODPSPM')}"
 				               title="Modifier" update=":content">
-                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>                       
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>  
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />                      
                             </p:commandLink>
                             
                            
