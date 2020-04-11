@@ -262,6 +262,7 @@ public class PpmModificationController {
 		 private boolean etatPso =false;
 		 private boolean modeleAmi =false;
 		 private boolean modeleDao =true;
+		 private boolean boutonEditUpdate = false;
 	 
 	 
 	 
@@ -3064,6 +3065,7 @@ public class PpmModificationController {
 						     userController.setRenderMsg(true);
 						     userController.setSevrityMsg("success");
 						     chargeData();
+						     boutonEditUpdate = true;
 				 }
 				 
 				 //Methode d'impression après modification du PPM
@@ -4429,5 +4431,17 @@ public class PpmModificationController {
 	public void setGeneDate(VGenerationDate geneDate) {
 		this.geneDate = geneDate;
 	}
+
+
+	public boolean isBoutonEditUpdate() {
+		return boutonEditUpdate;
+	}
+
+
+	public void setBoutonEditUpdate(boolean boutonEditUpdate) {
+		this.boutonEditUpdate = boutonEditUpdate;
+	}
+	
+	
 
 }

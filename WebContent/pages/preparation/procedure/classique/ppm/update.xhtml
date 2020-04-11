@@ -379,15 +379,14 @@
 				        </p:column>
 				        
 				        
-				        <p:column headerText="Actions" styleClass="col-sm-1">
+				      <!--   <p:column headerText="Actions" styleClass="col-sm-1">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{ppmModificationController.removeFinancementUpdate()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.selectFinance}" />
 			                </p:commandLink>
-				        </p:column>
+				        </p:column> -->
 				        
-				   
                  </p:dataTable>  
         </div>
         <div class="col-md-12">
@@ -654,7 +653,7 @@
 	   </h:panelGroup>
 	   
 	 
-	   <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" rendered="#{ppmModificationController.boutonEdit}" action="#{ppmModificationController.imprimModifPpm()}" ajax="false">
+	   <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" rendered="#{ppmModificationController.boutonEditUpdate}" action="#{ppmModificationController.imprimModifPpm()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PPM 
 		</p:commandLink>
 		
