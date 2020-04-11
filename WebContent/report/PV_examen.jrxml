@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-03-16T17:38:51 -->
+<!-- 2020-04-11T03:11:15 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_examen" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e45627bb-1d24-49e7-b8b1-f0c236dd5665">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -178,7 +178,7 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="446">
+		<band height="502">
 			<rectangle>
 				<reportElement x="0" y="8" width="561" height="102" uuid="df261a78-0109-40e0-9276-e0e21ac3fc29"/>
 			</rectangle>
@@ -349,21 +349,21 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 				<textFieldExpression><![CDATA[$F{COR_DAC_CODE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="424" width="70" height="21" uuid="58822937-f915-44a2-a39e-1a590655edb4"/>
+				<reportElement x="0" y="479" width="70" height="21" uuid="58822937-f915-44a2-a39e-1a590655edb4"/>
 				<textElement>
 					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Résultat : ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="70" y="424" width="150" height="21" uuid="8fb14b79-0140-428a-9ab8-d4323fd9ec67"/>
+				<reportElement x="70" y="479" width="150" height="21" uuid="8fb14b79-0140-428a-9ab8-d4323fd9ec67"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["DAO "+$F{COR_RESULTAT}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="18" splitType="Stretch">
+		<band height="19" splitType="Stretch">
 			<textField isBlankWhenNull="true">
 				<reportElement x="303" y="0" width="269" height="14" uuid="bb98650c-d88a-40b7-8f8a-21dce5ce31ad"/>
 				<textElement>

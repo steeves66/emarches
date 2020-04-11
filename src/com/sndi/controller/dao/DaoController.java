@@ -333,7 +333,7 @@ public class DaoController {
 	  private boolean pavet5 = false;
 	  private boolean pavet6 = false;
 	  private boolean validCorrection = false;
-	  
+	  private boolean etatDaoCorrige = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -741,6 +741,20 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		        	 etatBtnValid = false;
 		        	 etatBtnValidCharge = true;
 		        	 validCorrection = false;
+		         }		
+		    }
+	  
+	  
+	//Affichage de zone de mention si le chargé d'Etude est un responsable de binôme
+	  public void chargeTableauExiste(){
+		  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+			              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
+			              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
+			              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+		        if (!daoExamen.isEmpty()) {
+		        	etatDaoCorrige = true;   
+		         }else {
+		        	 etatDaoCorrige = false;	
 		         }		
 		    }
 	  
@@ -3661,6 +3675,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					chargeGestions();
 					chargeDataAffecter();
 					chargeDataAValider();
+					chargeTableauExiste();
 					chargeDaoCharegEtude();
 					chargeDaoChargeEtude();
 					chargeDaoAffectesR();
@@ -5400,6 +5415,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setValidCorrection(boolean validCorrection) {
 		this.validCorrection = validCorrection;
+	}
+
+	public boolean isEtatDaoCorrige() {
+		return etatDaoCorrige;
+	}
+
+	public void setEtatDaoCorrige(boolean etatDaoCorrige) {
+		this.etatDaoCorrige = etatDaoCorrige;
 	}
 	
 		

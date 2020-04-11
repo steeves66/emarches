@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-06T22:25:03 -->
+<!-- 2020-04-11T03:03:12 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -265,7 +265,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 				</staticText>
 			</frame>
 			<componentElement>
-				<reportElement x="0" y="177" width="549" height="49" uuid="ced8fae9-28ca-459c-adb6-6f3a3e09121c">
+				<reportElement x="0" y="177" width="554" height="61" uuid="ced8fae9-28ca-459c-adb6-6f3a3e09121c">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -292,6 +292,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="140" height="30" uuid="b88d0bd4-4baa-4cb6-b1ea-55930c82d72f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FIP_TYPE_FINANCE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -310,6 +311,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="100" height="30" uuid="6ce456a3-d7e0-4b48-8c3a-cc513b582e58"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{BAI_LIBELLE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -328,6 +330,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="100" height="30" uuid="c5827b7c-1ce4-4890-a8b7-c0d5ad0f6ce8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FIP_SOU_CODE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -346,6 +349,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="120" height="30" uuid="b0438fda-cfd3-4cc2-8dc0-403d264f5b0b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FIP_MONTANT_CFA}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -364,6 +368,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="95" height="30" uuid="b7f4e618-ae4d-4b6e-8966-73b7cb6979b7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{FIP_TRESOR}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
