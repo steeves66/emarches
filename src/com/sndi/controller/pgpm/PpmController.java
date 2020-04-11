@@ -1649,7 +1649,7 @@ public class PpmController {
 		 			     histoPass.setTFonction(userController.getSlctd().getTFonction());
 		 			     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 		 			     iservice.addObject(histoPass);
-		 			    recupDateGenere();
+		 			   recupDateGenere();
 		 				chargeData();
 		 				boutonEdit =true;
 		 				boutonEditPspm =false;
