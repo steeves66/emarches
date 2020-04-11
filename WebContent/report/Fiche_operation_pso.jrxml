@@ -1,9 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-07T12:46:19 -->
+<!-- 2020-04-11T13:13:23 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_pso" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c522d3ab-6af2-440a-8892-02575153090f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#11BA55">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DetailFin" uuid="52bd3599-0467-4634-a271-e522876e7c26">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code" class="java.lang.Long"/>
+		<queryString language="SQL">
+			<![CDATA[select f.*
+from t_financement_ppm f, t_bailleur b
+where f.fpp_bai_code = b.bai_code (+)
+and f.fpp_dpp_id = $P{param_code}]]>
+		</queryString>
+		<field name="FPP_TYPE_FINANCE" class="java.lang.String"/>
+		<field name="FPP_BAI_CODE" class="java.lang.String"/>
+		<field name="FPP_SOU_CODE" class="java.lang.String"/>
+		<field name="FPP_MONTANT_CFA" class="java.math.BigDecimal"/>
+		<field name="FPP_PART_TRESOR" class="java.math.BigDecimal"/>
+	</subDataset>
 	<parameter name="param_code" class="java.lang.Long">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 	</parameter>
@@ -117,7 +160,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["FICHE D'IDENTIFICATION DE L'OPERATION"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["FICHE D'IDENTIFICATION DE L'OPERATION PSPM"]]></textFieldExpression>
 			</textField>
 			<image>
 				<reportElement x="0" y="2" width="190" height="51" uuid="f6e667a5-b3ba-4b67-a2bb-6573be702d41"/>
@@ -126,7 +169,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="417" splitType="Stretch">
+		<band height="474" splitType="Stretch">
 			<frame>
 				<reportElement x="0" y="8" width="554" height="192" uuid="71afb710-2468-45fd-af05-be493e0b554e"/>
 				<box>
@@ -233,48 +276,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="0" y="214" width="554" height="67" uuid="8f90501e-e4c8-477c-8fef-36f788f3a75d"/>
-				<box>
-					<topPen lineWidth="1.0"/>
-					<leftPen lineWidth="1.0"/>
-					<bottomPen lineWidth="1.0"/>
-					<rightPen lineWidth="1.0"/>
-				</box>
-				<staticText>
-					<reportElement x="179" y="0" width="201" height="21" uuid="90b4d942-8b33-4553-a940-2615fcf35f6e"/>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="12" isBold="true"/>
-					</textElement>
-					<text><![CDATA[FINANCEMENT]]></text>
-				</staticText>
-				<textField isBlankWhenNull="true">
-					<reportElement x="3" y="25" width="261" height="20" uuid="139ed97e-5d6d-4c0e-8608-0c972b1aab91"/>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Bailleur : "+$F{BAI_LIBELLE}]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="3" y="43" width="261" height="21" uuid="401c40cb-64be-448d-96b3-44c4f432b51c"/>
-					<textElement verticalAlignment="Middle">
-						<font size="10"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Montant en devise : "+new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_DEVISE})+$F{DEV_SYMBOLE}]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="286" y="43" width="266" height="21" uuid="4af6a7e2-f14c-4960-a6b7-abccb3a01f3f"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Montant en CFA : "+new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_CFA})+$F{DEV_SYMBOLE}]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="286" y="25" width="268" height="20" uuid="84e95ff7-19ba-442a-b359-75d84e85a29a"/>
-					<textElement textAlignment="Right" verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Source de Financement : "+$F{SOU_LIBELLE}]]></textFieldExpression>
-				</textField>
-			</frame>
-			<line>
-				<reportElement x="1" y="236" width="553" height="1" uuid="6a08fd94-5cef-47f3-be9d-308a9f9f9500"/>
-			</line>
-			<frame>
-				<reportElement x="1" y="293" width="554" height="117" uuid="60ba178e-ffc3-4812-b4b5-f7ad4854f619"/>
+				<reportElement x="1" y="204" width="554" height="117" uuid="60ba178e-ffc3-4812-b4b5-f7ad4854f619"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -350,8 +352,130 @@ and af.aff_dpp_id= $P{param_code}]]>
 				</textField>
 			</frame>
 			<line>
-				<reportElement x="2" y="314" width="553" height="1" uuid="a0ae63c3-482e-432b-bcbc-0b620f77fcb0"/>
+				<reportElement x="2" y="225" width="553" height="1" uuid="a0ae63c3-482e-432b-bcbc-0b620f77fcb0"/>
 			</line>
+			<frame>
+				<reportElement x="0" y="325" width="555" height="21" uuid="88629e1a-16f7-4b2a-882a-06f3152f5f96"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<staticText>
+					<reportElement x="179" y="0" width="201" height="21" uuid="3c7f37f3-80af-433c-889a-2a8e1e08bfa1"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[FINANCEMENT(S)]]></text>
+				</staticText>
+			</frame>
+			<componentElement>
+				<reportElement x="0" y="349" width="555" height="57" uuid="ad92f0b9-73d4-4a34-af14-ef51504e15e2">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DetailFin" uuid="d597c24d-160a-4872-b2d5-e95e794abc46">
+						<datasetParameter name="param_code">
+							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="110" uuid="f638ef2a-8ae4-47b0-859c-a5b51509fe3a">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" forecolor="#FFFFFF" uuid="69e1d315-68ce-43d2-85e5-dd8911fe0b19"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[TYPE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="e1d77d5f-6511-4e35-85a6-f9923de7e73f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{FPP_TYPE_FINANCE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="729d178b-ab8b-49c9-a180-3263472a2817">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" forecolor="#FFFFFF" uuid="2657331c-ff99-4033-9e1c-d72df32fd87a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[BAILLEUR]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="6de19bdf-e7d5-4710-89fd-fdc61e1268b5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{FPP_BAI_CODE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="fb4c134c-930a-467d-9501-f9f0a37b5a43">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" forecolor="#FFFFFF" uuid="d2266e4c-6d68-45fc-84a2-c67903b5c62d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[SOURCE]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="ccea5afb-eade-432a-b7f3-7337d6dd62e6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{FPP_SOU_CODE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="0c57cb24-d6c1-4bbf-8795-daf146459357">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" forecolor="#FFFFFF" uuid="2bb450e8-6461-43d7-a40a-a65400558e7b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[PART BAILLEUR]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="30" uuid="97a03938-fbad-4b9b-87c0-3270fba09d5e"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_CFA})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="115" uuid="7ca15a7c-179d-4e0c-abf6-d35e54bc67f4">
+						<jr:tableHeader style="Table_TH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="115" height="30" forecolor="#FFFFFF" uuid="42209a93-bb22-43e2-861e-bb6931000339"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font isBold="true"/>
+								</textElement>
+								<text><![CDATA[PART TRESOR]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="115" height="30" uuid="45243ece-4146-4366-869e-ec1854bd9e1a"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_PART_TRESOR})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
 		</band>
 	</detail>
 	<pageFooter>

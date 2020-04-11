@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-11T01:51:33 -->
+<!-- 2020-04-11T12:23:09 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Ppm" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd56bcf1-e64d-427e-9d36-ff3f7182500e">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -136,8 +136,7 @@ where pas.plp_str_code = st.str_code
 and st.str_min_code = m.min_code
 and pas.plp_fon_cod = f.fon_cod
 and pas.plp_ges_code = $P{param_code}
-and pas.plp_fon_cod = $P{param_op}
-]]>
+and pas.plp_fon_cod = $P{param_op}]]>
 	</queryString>
 	<field name="PLP_GES_CODE" class="java.math.BigDecimal"/>
 	<field name="PLP_ID" class="java.math.BigDecimal"/>
