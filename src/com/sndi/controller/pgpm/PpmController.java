@@ -275,10 +275,11 @@ public class PpmController {
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
-		 
-				     }
-				    // recupDateGenere();
+		                
+		  		// recupDateGenere();
 				      creerDetailPassation();
+				     }
+				    
 			            return event.getNewStep();
 		    }
 		 
@@ -1676,13 +1677,32 @@ public class PpmController {
 	  	 
 	  	 
 	  	 public void majDate() {
-				     iservice.updateObject(datePpm);
-				     boutonEdit =true;
+	  		        detailPass.setDppApprobAno(geneDate.getDppApprobAno());
+	  		        detailPass.setDppBailleur(geneDate.getDppBailleur());
+	  		        detailPass.setDppDate(geneDate.getDppDate());
+	  		        detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
+	  		        detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
+	  		        detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
+	  		        detailPass.setDppDateDaoApprobDmp(geneDate.getDppDateDaoApprobDmp());
+	  		        detailPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
+	  		        detailPass.setDppDateExecDebut(geneDate.getDppDateExecDebut());
+	  		        detailPass.setDppDateExecFin(geneDate.getDppDateExecFin());
+	  		        detailPass.setDppDateJugementOffre(geneDate.getDppDateJugementOffre());
+	  		        detailPass.setDppDateJugementOffreTec(geneDate.getDppDateJugementOffreTec());
+	  		        detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
+	  		        detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
+	  		        detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
+	  		        detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
+	  		        detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
+	  		        detailPass.setDppDateValAc(geneDate.getDppDateValAc());
+	  		        detailPass.setDppDateValCpmp(geneDate.getDppDateValCpmp());
+	  		        detailPass.setDppDateValDmp(geneDate.getDppDateValDmp());
+				    iservice.updateObject(detailPass);
+				    boutonEdit =true;
+				     //controleController.btn_creerDetailPpm =true;
+					 //controleController.btn_maj_datePpm = true;
 				     
-				     controleController.btn_creerDetailPpm =true;
-					 controleController.btn_maj_datePpm = true;
-				     
-				     userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
+				     userController.setTexteMsg("Opération enregistrée avec succès!");
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 	  	   }
