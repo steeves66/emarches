@@ -461,7 +461,7 @@ public class PpmController {
 					new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listePpm size: "+listePpm.size());
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataPpmPspm();
+				tableauBordController.chargeDataPpm();
 		}
 	 
 	 
@@ -2127,7 +2127,7 @@ public class PpmController {
 	  			boutonEditPspm = false;
 	  			
 	  			//Actualisation du Tableau de Bord
-	  			tableauBordController.chargeDataPpmPspm();
+	  			tableauBordController.chargeDataPpm();
 	  			//Message de confirmation
 	  			userController.setTexteMsg("Opération enregistrée avec succès!");
 	  			userController.setRenderMsg(true);
@@ -2220,7 +2220,7 @@ public class PpmController {
 	  			boutonEditPspm = true;
 	  			boutonEdit = false;
 	  			//Actualisation du Tableau de Bord
-	  			tableauBordController.chargeDataPpmPspm();
+	  			tableauBordController.chargeDataPspm();
 	  			//Message de confirmation
 	  			userController.setTexteMsg("Opération enregistrée avec succès!");
 	  			userController.setRenderMsg(true);
@@ -2378,7 +2378,7 @@ public class PpmController {
 		 		       chargePpmTrans();
 		 		       //chargeDataPspm();
 		 		     //Actualisation du Tableau de Bord
-		 			  tableauBordController.chargeDataPpmPspm();
+		 			  tableauBordController.chargeDataPpm();
 	           }
 	     
 	     
@@ -2576,7 +2576,7 @@ public class PpmController {
 		 		  chargePpmValDmp();
 		 		  //chargeDataAvaliderPspm();
 		 		  //Actualisation du Tableau de Bord
-		 		  tableauBordController.chargeDataPpmPspm();
+		 		  tableauBordController.chargeDataPpm();
 						}
 	     
 	     
@@ -2662,13 +2662,14 @@ public class PpmController {
 		 		 chargePspmValCp();
 		 		  chargePspmValDmp();
 		 		  //Actualisation du Tableau de Bord
-		 		  tableauBordController.chargeDataPpmPspm();
+		 		  tableauBordController.chargeDataPspm();
 						}
 	     
 	     
 	     
 	   //DIFFERER CPMP ET DMP
 	     //Differer
+	        @Transactional
 			 public void differer() {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					 statutUpdate ="";
@@ -2737,7 +2738,7 @@ public class PpmController {
 					           chargePpmDifCp();
 					           chargePpmDifDmp();
 					          //Actualisation du Tableau de Bord
-					          tableauBordController.chargeDataPpmPspm();
+					          tableauBordController.chargeDataPpm();
 							
 						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
 						 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -2748,6 +2749,7 @@ public class PpmController {
 			 
 			 //DIFFERER CPMP ET DMP
 		     //Differer
+	            @Transactional
 				 public void reDifferer() {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						 statutUpdate ="";
@@ -2809,7 +2811,7 @@ public class PpmController {
 						           chargePpmDifCp();
 						           chargePpmDifDmp();
 						          //Actualisation du Tableau de Bord
-						          tableauBordController.chargeDataPpmPspm();
+						          tableauBordController.chargeDataPpm();
 								
 							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -2820,6 +2822,7 @@ public class PpmController {
 			 
 			  //DIFFERER CPMP ET DMP
 		     //Differer Pspm
+	            @Transactional
 				 public void differerPspm() {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						 statutUpdate ="";
@@ -2899,6 +2902,7 @@ public class PpmController {
 				 
 				 
 				//Differer Pspm
+	            @Transactional
 				 public void reDiffererPspm() {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						 statutUpdate ="";
@@ -2984,122 +2988,8 @@ public class PpmController {
 					}	
 				}
 				
-				
-				 //Methode de modification des PPM/PSPM
-				 @Transactional
-				 public void modifierDetailPlan() throws IOException{
-					 
-					 slctdTd.setAffDppStrConduc(updatePpm.getAffDppStrConduc());
-					 slctdTd.setAffDppStrBenefi(updatePpm.getAffDppStrBenefi());
-					 slctdTd.setAffDppObjet(updatePpm.getAffDppObjet());
-					 slctdTd.setTTypeMarche(new TTypeMarche(updatePpm.getAffDppTymCode()));
-					 slctdTd.setTModePassation(new TModePassation(updatePpm.getAffDppMopCode()));
-					 slctdTd.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
-					 slctdTd.setAffDppPartiePmePmi(updatePpm.getAffDppPartiePmePmi());
-					 slctdTd.setAffDppBailleur(updatePpm.getAffDppBailleur());
-					 slctdTd.setAffDppPieceDao(updatePpm.getAffDppPieceDao());
-					 slctdTd.setAffDppDateAttApproBail(updatePpm.getAffDppDateAttApproBail());
-					 slctdTd.setAffDppApprobAno(updatePpm.getAffDppApprobAno());
-					 slctdTd.setAffDppDateAvisAoPublicat(updatePpm.getAffDppDateAvisAoPublicat());
-					 slctdTd.setAffDppDateJugementOffre(updatePpm.getAffDppDateJugementOffre());
-					 slctdTd.setAffDppDateDaoTrans(updatePpm.getAffDppDateDaoTrans());
-					 slctdTd.setAffDppDateExecFin(updatePpm.getAffDppDateExecFin());
-					 slctdTd.setAffDppDateExecDebut(updatePpm.getAffDppDateExecDebut());
-					 slctdTd.setAffDppDateMarcheApprob(updatePpm.getAffDppDateMarcheApprob());
-					 slctdTd.setAffDppDateOuvertOf(updatePpm.getAffDppDateOuvertOf());
-					 slctdTd.setAffDppDateElabRapport(updatePpm.getAffDppDateElabRapport());
-					 slctdTd.setAffDppDateNegociation(updatePpm.getAffDppDateNegociation());
-					 slctdTd.setAffDppDateAttApprobDmp(updatePpm.getAffDppDateDaoApprobDmp());
-					 slctdTd.setAffDppDateSignatAttrib(updatePpm.getAffDppDateSignatAttrib());
-					 slctdTd.setAffDppDateSignatAc(updatePpm.getAffDppDateSignatAc());
-					 slctdTd.setAffDppInvEntre(updatePpm.getAffDppInvEntre());
-					 iservice.updateObject(slctdTd);
-					 
-					 
-					 //Modification dans TDetailPlanPassation
-			    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-			   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
-			    	        TDetailPlanPassation detail = new TDetailPlanPassation();
-							if(!PLG.isEmpty()) detail =PLG.get(0);
-							detail.setDppPartiePmePmi(slctdTd.getAffDppPartiePmePmi());
-							detail.setDppSourceFin(slctdTd.getAffDppSourceFin());
-							detail.setDppObjet(slctdTd.getAffDppObjet());
-							detail.setDppBailleur(slctdTd.getAffDppBailleur());
-							detail.setTModePassation(new TModePassation(slctdTd.getTModePassation().getMopCode()));
-							detail.setTTypeMarche(new TTypeMarche(slctdTd.getTTypeMarche().getTymCode()));
-							detail.setTLBudgets(new TLBudgets(slctdTd.getTLBudgets().getLbgCode()));
-							detail.setTModeleDacType(new TModeleDacType(slctdTd.getAffDppPieceDao()));
-							detail.setDppStructureBenefi(slctdTd.getAffDppStrBenefi());
-							detail.setDppStructureConduc(slctdTd.getAffDppStrConduc());
-							detail.setDppTypeFinance(slctdTd.getAffDppTypeFinance());
-							detail.setDppDateAvisAoPublication(slctdTd.getAffDppDateAvisAoPublicat());
-							detail.setDppDateDaoApprobBail(slctdTd.getAffDppDateDaoApprobBail());
-							detail.setDppDateAttApproBail(slctdTd.getAffDppDateAttApproBail());
-							detail.setDppDateDaoTrans(slctdTd.getAffDppDateDaoTrans());
-							detail.setDppDateElabRapport(slctdTd.getAffDppDateElabRapport());
-							detail.setDppDateExecDebut(slctdTd.getAffDppDateExecDebut());
-							detail.setDppDateExecFin(slctdTd.getAffDppDateExecFin());
-							detail.setDppDateOuvertOf(slctdTd.getAffDppDateOuvertOf());
-							detail.setDppDateOuvertOt(slctdTd.getAffDppDateOuvertOt());
-							detail.setDppDateSignatAc(slctdTd.getAffDppDateSignatAc());
-							detail.setDppDateSignatAttrib(slctdTd.getAffDppDateSignatAttrib());
-							detail.setDppDateJugementOffre(slctdTd.getAffDppDateJugementOffre());
-							detail.setDppApprobAno(slctdTd.getAffDppApprobAno());
-							detail.setDppDateNegociation(slctdTd.getAffDppDateNegociation());
-							detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
-							//detail.setDppDateJugementOffreTec(slctdTd.get);
-							iservice.updateObject(detail);
-							
-							
-							//Mis à Jour dans T_Financement_PPM
-		    				  for(TFinancementPpm fin: listeFinancement) {
-				      		        TFinancementPpm newFinancement = new TFinancementPpm();
-				      		        newFinancement.setTDetailPlanPassation(detailPass);
-				      		        newFinancement.setFppCommentaire(fin.getFppCommentaire());
-				      		        newFinancement.setFppMontantCfa(fin.getFppMontantCfa());
-				      		        newFinancement.setFppMontantDevise(fin.getFppMontantDevise());
-				      		        newFinancement.setFppPartTresor(fin.getFppPartTresor());
-				      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
-				      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
-				      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
-				      				iservice.updateObject(newFinancement);
-		    				    }
-							
-							//Rédirection sur l'index
-			   				userController.renderPage("ppm1");
-			   				//Message de Confirmation
-					    	 userController.setTexteMsg("Modification éffectuée avec succès!");
-						     userController.setRenderMsg(true);
-						     userController.setSevrityMsg("success");
-						     chargeData();
-				 }
-				 
-				 //Methode d'impression après modification du PPM
-				 public void imprimModifPpm() {
-					 String operateur = userController.getSlctd().getTFonction().getFonCod();
-			    	 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Ppm", "Ppm");
-			     }
-				 
-				 //Methode d'impression après modification du PSPM
-				 public void imprimModifPspm() {
-					 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
-						 String operateur = userController.getSlctd().getTFonction().getFonCod();
-						 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Pspm_pso", "Pspm_pso");
-					 }else
-					     if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL")){
-					    	 String operateur = userController.getSlctd().getTFonction().getFonCod();
-					    	 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Pspm_psl", "Pspm_psl");
-					 }else
-						  if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSC")) {
-							  String operateur = userController.getSlctd().getTFonction().getFonCod();
-							  projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Pspm_psc", "Pspm_psc");
-						  }
-			         }
-				 
-				
-				
-				
-				
+											
+				//Le coût de l'opération
 				 public void coutOperation() {
 					 totalMontant = 0;
 					 for(TFinancementPgpm n : listeFinancementPgpm) {
@@ -3107,9 +2997,9 @@ public class PpmController {
 					 }
 				 }
 				 
+				 //Action de fermer
 				 public String fermerForm(String value ,String action) throws IOException {
 					 userController.initMessage();
-				     
 					 chargeDataPspm(); 
 					 vider();
 					 return userController.renderPage(value);

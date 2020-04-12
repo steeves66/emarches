@@ -539,7 +539,7 @@ public class TableauBordController {
 			 ppmAcSaisie = ""+getAcPpmSaisieDossier("S1S");
 			 ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR");
 			 ppmAcDiffCpmp = ""+getPpmDiffCpmpACDossier("S2D");
-			 ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D");
+			 ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR"); 
 			 ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT");
 			 ppmCpSaisie = ""+getPpmSaisieDossier("S1S");
 			 ppmCpTransmis = ""+getPpmTransmisDossier("S1T");
@@ -561,7 +561,7 @@ public class TableauBordController {
 			 pspmAcSaisie = ""+getAcPspmSaisieDossier("S1S");
 			 pspmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D");
 			 pspmAcDiffCpmp = ""+getPspmDiffCpmpACDossier("S2D");
-			 pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D");
+			 pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D","SPR");
 			 pspmAcTransmis = ""+getAcPspmTransmisDossier("S1T");
 			 pspmCpSaisie = ""+getPspmSaisieDossier("S1S");
 			 pspmCpTransmis = ""+getPspmTransmisDossier("S1T");
@@ -640,7 +640,7 @@ public class TableauBordController {
 			 ppmAcSaisie = ""+getAcPpmSaisieDossier("S1S");
 			 ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR");
 			 ppmAcDiffCpmp = ""+getPpmDiffCpmpACDossier("S2D");
-			 ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D");
+			 ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR");
 			 ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT");
 			 ppmCpSaisie = ""+getPpmSaisieDossier("S1S");
 			 ppmCpTransmis = ""+getPpmTransmisDossier("S1T");
@@ -660,7 +660,7 @@ public class TableauBordController {
 			 pspmAcSaisie = ""+getAcPspmSaisieDossier("S1S");
 			 pspmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D");
 			 pspmAcDiffCpmp = ""+getPspmDiffCpmpACDossier("S2D");
-			 pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D");
+			 pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D","SPR");
 			 pspmAcTransmis = ""+getAcPspmTransmisDossier("S1T");
 			 pspmCpSaisie = ""+getPspmSaisieDossier("S1S");
 			 pspmCpTransmis = ""+getPspmTransmisDossier("S1T");
@@ -1375,9 +1375,9 @@ public int getPspmDiffCpmpACDossier(String src){
 }
 
 //pspm retournés par le dmp chez le AC
-public int getPspmDiffDmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
-			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
+public int getPspmDiffDmpACDossier(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
@@ -1529,9 +1529,9 @@ public int getPpmDiffCpmpACDossier(String src){
 }
 
 //ppm retournés par le dmp chez le AC
-public int getPpmDiffDmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
-			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
+public int getPpmDiffDmpACDossier(String src1,String src2){
+	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	

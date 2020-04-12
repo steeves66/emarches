@@ -25,8 +25,8 @@
              </p:commandLink>
             </li>
         <li class="active">
-         <p:commandLink action="#{ppmController.renderPage('ppm1')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>PPM | Liste
+         <p:commandLink action="#{ppmController.renderPage('ppm1','SAIPSPM')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>PSPM | Liste
              </p:commandLink>
         </li>
       </ol>
@@ -62,7 +62,9 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -83,34 +85,22 @@
 						  </p:commandLink>
           </div>
         </div>
+      
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.ppmAcDiffCpmp}</h3> 
+              <h3>#{tableauBordController.pspmAcDiffDmp}</h3>
 
-              <p>Differé(s) par la CPMP</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>#{tableauBordController.ppmAcDiffDmp}</h3>
-
-              <p>Différé(s) par la DMP</p>
+              <p>Différé(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+           <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -120,9 +110,6 @@
                  </h:panelGroup>
          <!-- Fin Tableau de Bord pour le AC --> 
          
-       
-              
-              
               
               
            <!-- Début Tableau de Bord pour la CPMP -->      
@@ -144,7 +131,9 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
