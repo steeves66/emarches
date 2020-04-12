@@ -805,6 +805,7 @@ public class ControleController {
 			    		type = "PPM";
 			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PPM N°";
+			    		libelle1="Modification du PPM N°";
 			    		btn_new =true;
 						 panel1 =true;
 						 panel2 =false;

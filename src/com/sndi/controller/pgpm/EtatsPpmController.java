@@ -149,24 +149,20 @@ public class EtatsPpmController {
      }*/ 
      
      public void imprimerPpmDet() {
-    	 String operateur = userController.getSlctd().getTFonction().getFonCod();
-    	 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Ppm", "Ppm");
+    	 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_ppm", "Fiche_operation_ppm");
      }
      
      
      public void imprimerPspmDet() {
     	 
-    	 if(detail.getMopCode().equalsIgnoreCase("PSO")) {
-    		 String operateur = userController.getSlctd().getTFonction().getFonCod();
-    		 projetReport.longStringparam2(detail.getDppPlpId(), operateur, "Pspm_pso", "Pspm_pso");
+    	 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
+    		 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_pso", "Fiche_operation_pso");
     	 }else 
-    		 if(detail.getMopCode().equalsIgnoreCase("PSL")) {
-    			 String operateur = userController.getSlctd().getTFonction().getFonCod();
-    		 projetReport.longStringparam2(detail.getDppPlpId(), operateur, "Pspm_psl", "Pspm_psl");
+    		 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL")) {
+    		 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psl", "Fiche_operation_psl");
     	 }else 
-    		 if(detail.getMopCode().equalsIgnoreCase("PSC")) {
-    			 String operateur = userController.getSlctd().getTFonction().getFonCod();
-    			 projetReport.longStringparam2(detail.getDppPlpId(), operateur, "Pspm_psc", "Pspm_psc");
+    		 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSC")) {
+    			 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psc", "Fiche_operation_psc");
     		 }
       }
      

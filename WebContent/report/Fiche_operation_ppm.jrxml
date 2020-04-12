@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-11T19:50:46 -->
+<!-- 2020-04-12T05:29:27 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_ppm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266b8536-66d8-494c-802e-76b24cc2afc4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -372,7 +372,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="DetailFin" uuid="2ad0e084-a7ec-4d96-aeec-6dbdea0f85de">
+					<datasetRun subDataset="DetailFin" uuid="97f32338-4be6-46b6-acef-9b314ed684c2">
 						<datasetParameter name="param_code">
 							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
 						</datasetParameter>
@@ -445,6 +445,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="925094f5-ef3c-4b29-8f8b-03d36424f217"/>
+								<box rightPadding="2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_MONTANT_CFA})]]></textFieldExpression>
 							</textField>
@@ -463,6 +464,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="115" height="30" uuid="27961e22-c2bd-468c-ab1b-72d20aee651e"/>
+								<box rightPadding="2"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{FPP_PART_TRESOR})]]></textFieldExpression>
 							</textField>

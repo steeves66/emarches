@@ -3046,13 +3046,13 @@ public class PpmModificationController {
 											    	  newFinancement = listeFinancement.get(0);
 											    	
 											    	   newFinancement.setFppCommentaire(fin.getFppCommentaire());
-									      		        newFinancement.setFppMontantCfa(fin.getFppMontantCfa());
-									      		        newFinancement.setFppMontantDevise(fin.getFppMontantDevise());
-									      		        newFinancement.setFppPartTresor(fin.getFppPartTresor());
-									      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
-									      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
-									      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
-									      				iservice.updateObject(newFinancement);
+									      		       newFinancement.setFppMontantCfa(fin.getFppMontantCfa());
+									      		       newFinancement.setFppMontantDevise(fin.getFppMontantDevise());
+									      		       newFinancement.setFppPartTresor(fin.getFppPartTresor());
+									      		       newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+									      		       newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
+									      		       newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
+									      			   iservice.updateObject(newFinancement);
 											      }
 				    				       }
 							     
@@ -3065,28 +3065,24 @@ public class PpmModificationController {
 						     userController.setRenderMsg(true);
 						     userController.setSevrityMsg("success");
 						     chargeData();
-						     boutonEditUpdate = true;
+						     //boutonEditUpdate = true;
 				 }
 				 
 				 //Methode d'impression après modification du PPM
 				 public void imprimModifPpm() {
-					 String operateur = userController.getSlctd().getTFonction().getFonCod();
-			    	 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Ppm", "Ppm");
+			    	 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_ppm", "Fiche_operation_ppm");
 			     }
 				 
 				 //Methode d'impression après modification du PSPM
 				 public void imprimModifPspm() {
 					 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
-						 String operateur = userController.getSlctd().getTFonction().getFonCod();
-						 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Pspm_pso", "Pspm_pso");
+						 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_pso", "Fiche_operation_pso");
 					 }else
 					     if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL")){
-					    	 String operateur = userController.getSlctd().getTFonction().getFonCod();
-					    	 projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Pspm_psl", "Pspm_psl");
+					    projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psl", "Fiche_operation_psl");
 					 }else
 						  if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSC")) {
-							  String operateur = userController.getSlctd().getTFonction().getFonCod();
-							  projetReport.longStringparam2(slctdTd.getTPlanPassation().getPlpId(), operateur, "Pspm_psc", "Pspm_psc");
+							projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psc", "Fiche_operation_psc");
 						  }
 			         }
 				 

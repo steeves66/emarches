@@ -147,7 +147,9 @@
 				            <h:outputText value="#{slctdTb.TDevise.devLibelle}" />
 				        </p:column>
 				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fppMontantCfa} #{slctdTb.TDevise.devSymbole}" />
+				            <h:outputText value="#{slctdTb.fppMontantCfa}" >
+				            <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				            </h:outputText>
 				        </p:column>
 				        <p:column headerText="Part Trésor" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fppPartTresor}" />
@@ -174,8 +176,8 @@
             <!-- /.box-body -->
             </div>
             <h:panelGroup rendered="#{controleController.panelPpm}">
-            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsPpmController.imprimerPpmDet()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PPM
+            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsPpmController.imprimerPpmDet()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'opération
 				      </p:commandLink>
 				       <p:commandLink styleClass="btn btn-warning" action="#{ppmController.renderPage('ppm1','SAIPPM')}" rendered="#{controleController.fermerSai}"  style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
@@ -185,8 +187,8 @@
 		</p:commandLink>
 		</h:panelGroup>
 		  <h:panelGroup rendered="#{controleController.panelPspm}">
-            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsPpmController.imprimerPspmDet()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PSPM
+            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff;border-color:#f88b2e"  action="#{etatsPpmController.imprimerPspmDet()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'opération
 				      </p:commandLink>
 				       <p:commandLink styleClass="btn btn-warning" action="#{ppmController.renderPage('pspm1','SAIPSPM')}" rendered="#{controleController.fermerSaiPspm}"  style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
