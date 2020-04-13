@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-11T03:11:15 -->
+<!-- 2020-04-13T04:18:34 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_examen" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e45627bb-1d24-49e7-b8b1-f0c236dd5665">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -105,13 +105,6 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 				<text><![CDATA[République de Côte d'Ivoire]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="10" y="35" width="136" height="14" uuid="af6b4bd7-e825-44d2-b8f7-cb60e0ace039"/>
-				<textElement>
-					<font size="11" isBold="true"/>
-				</textElement>
-				<text><![CDATA[- - - - - - - - - - - - - - - - - - - - -]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="411" y="37" width="136" height="14" uuid="21cf5214-2b51-4b78-8323-4500e3f4d12d"/>
 				<textElement textAlignment="Center">
 					<font size="11" isBold="true"/>
@@ -132,14 +125,6 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format(TODAY( ))]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="1" width="160" height="36" uuid="474ea7a2-aa28-4963-b687-45702525820e"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Secrétariat d'Etat auprès du Premier Ministre, Chargé du Budget et du Portefeuille de l'Etat
-]]></text>
-			</staticText>
 			<rectangle radius="8">
 				<reportElement mode="Opaque" x="80" y="122" width="400" height="21" backcolor="#FA9B3C" uuid="322a370e-3082-45b3-8dae-c20e2f3a5590"/>
 				<graphicElement>
@@ -154,31 +139,13 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 				<textFieldExpression><![CDATA["SAISIE DU PV D'EXAMEN DAO"]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement x="208" y="13" width="152" height="51" uuid="3b5df6ea-8841-4047-bcb7-fb3b98915613"/>
+				<reportElement x="1" y="1" width="219" height="51" uuid="3b5df6ea-8841-4047-bcb7-fb3b98915613"/>
 				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
 			</image>
-			<image>
-				<reportElement x="47" y="49" width="43" height="24" uuid="6625c124-baa0-48e6-9266-65d0804d9371"/>
-				<imageExpression><![CDATA[$P{param_image}+"logo_dmp.png"]]></imageExpression>
-			</image>
-			<staticText>
-				<reportElement x="1" y="76" width="139" height="19" uuid="0dc0a883-ba4e-406e-b032-6f4d4edc1abc"/>
-				<textElement textAlignment="Center" verticalAlignment="Top">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Direction des Marchés Publics]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="28" y="90" width="87" height="21" uuid="84567330-9229-4732-bc48-5bdc982ac05b"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[E-MarchesPublics]]></text>
-			</staticText>
 		</band>
 	</title>
 	<detail>
-		<band height="502">
+		<band height="459">
 			<rectangle>
 				<reportElement x="0" y="8" width="561" height="102" uuid="df261a78-0109-40e0-9276-e0e21ac3fc29"/>
 			</rectangle>
@@ -349,14 +316,14 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 				<textFieldExpression><![CDATA[$F{COR_DAC_CODE}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="479" width="70" height="21" uuid="58822937-f915-44a2-a39e-1a590655edb4"/>
+				<reportElement x="0" y="437" width="70" height="21" uuid="58822937-f915-44a2-a39e-1a590655edb4"/>
 				<textElement>
 					<font size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Résultat : ]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="70" y="479" width="150" height="21" uuid="8fb14b79-0140-428a-9ab8-d4323fd9ec67"/>
+				<reportElement x="70" y="437" width="150" height="21" uuid="8fb14b79-0140-428a-9ab8-d4323fd9ec67"/>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA["DAO "+$F{COR_RESULTAT}]]></textFieldExpression>
 			</textField>

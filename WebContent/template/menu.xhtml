@@ -662,11 +662,40 @@
           </a> 
            <ul class="treeview-menu">
            
-            <li>
+            
+            
+               <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
             <p:commandLink  action="#{daoController.renderPage('dao1','TRADAO')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Pré validation par CPMP
              </p:commandLink>
             </li>
+          </ul>     
+         </li>
+          
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+            <p:commandLink  action="#{daoController.renderPage('dao1','TRADAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Pré validation par CPMP
+             </p:commandLink>
+            </li>
+			 
+          </ul>     
+         </li>
 
           </ul>     
          </li>
@@ -1288,7 +1317,7 @@
          </li>
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-dashboard"></i> <span>AMI</span>
+            <i class="fa fa-list"></i> <span>AMI</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -1371,7 +1400,7 @@
            <ul class="treeview-menu">
              <li>
             <p:commandLink action="#{daoController.renderPage('dao1','CHADAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>DAO
+            <i class="fa fa-circle-o"></i>DAC
              </p:commandLink>
             </li>
              <li>

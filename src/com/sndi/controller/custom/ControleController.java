@@ -126,6 +126,7 @@ public class ControleController {
 	private boolean panelDaoTableauBordCha =false;
 	private boolean panelDaoTableauBordVet =false;
 	private boolean panelDaoTableauBordPrise = false;
+	private boolean panelDaoTableauBordTra = false;
 	private boolean btn_valider_dao_cpmp =false; 
 	private boolean btn_valider_dao_dmp =false;
 	private boolean panelD =false;
@@ -1893,6 +1894,7 @@ public class ControleController {
 							 panelDaoTableauBordSai = true;
 							 panelDaoTableauBordPslpso = false;
 							 panelDaoTableauBordVal = false;
+							 panelDaoTableauBordTra = false;
 							 panelDaoTableauBordPub = false;
 							 pspmModePs = false;
 							 ppmModePn = true;
@@ -1959,6 +1961,7 @@ public class ControleController {
 								 panelDaoTableauBordSai = false;
 								 panelDaoTableauBordPslpso = true;
 								 panelDaoTableauBordVal = false;
+								 panelDaoTableauBordTra = false;
 								 panelDaoTableauBordPub = false;
 								 pspmModePs = true;
 								 ppmModePn = false;
@@ -2043,6 +2046,7 @@ public class ControleController {
 								panelDaoTableauBordSai = false;
 								panelDaoTableauBordPslpso = false;
 								panelDaoTableauBordVal = true;
+								panelDaoTableauBordTra = false;
 								panelDaoTableauBordVet =false;
 								panelDaoTableauBordExa = false;
 								panelDaoTableauBordCha = false;
@@ -2124,6 +2128,7 @@ public class ControleController {
 											 exaDao=false;
 											 panelDaoTableauBordSai = false;
 											 panelDaoTableauBordVal = false;
+											 panelDaoTableauBordTra = false;
 											 panelDaoTableauBordAff =true;
 											 panelDaoTableauBordVet =false;
 											 panelDaoTableauBordRet = false;
@@ -2195,6 +2200,7 @@ public class ControleController {
 												 exaDao=true;
 												 panelDaoTableauBordSai = false;
 												 panelDaoTableauBordVal = false;
+												 panelDaoTableauBordTra = false;
 												 panelDaoTableauBordAff =false;
 												 panelDaoTableauBordExa =true;
 												 panelDaoTableauBordVet =false;
@@ -2268,6 +2274,7 @@ public class ControleController {
 													 retDao = true;
 													 panelDaoTableauBordSai = false;
 													 panelDaoTableauBordVal = false;
+													 panelDaoTableauBordTra = false;
 													 panelDaoTableauBordAff =false;
 													 panelDaoTableauBordExa =false; 
 													 panelDaoTableauBordRet =false; 
@@ -2341,6 +2348,7 @@ public class ControleController {
 														 retDao = true;
 														 panelDaoTableauBordSai = false;
 														 panelDaoTableauBordVal = false;
+														 panelDaoTableauBordTra = false;
 														 panelDaoTableauBordAff =false;
 														 panelDaoTableauBordExa =false; 
 														 panelDaoTableauBordRet =false; 
@@ -2415,6 +2423,7 @@ public class ControleController {
 															 retDao = false;
 															 panelDaoTableauBordSai = false;
 															 panelDaoTableauBordVal = false;
+															 panelDaoTableauBordTra = false;
 															 panelDaoTableauBordAff =false;
 															 panelDaoTableauBordExa =false; 
 															 panelDaoTableauBordRet =false;
@@ -2457,6 +2466,7 @@ public class ControleController {
 				    									    	 type = "DAC";
 												    			 libelle1="Index";
 												    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
+												    			 libelleDao1 ="PREVALIDATION DU DAC PAR LA CELLULE";
 												    			 btn_new =false;
 												    			 btn_affec = false;
 												    			 btn_exam = false;
@@ -2478,7 +2488,8 @@ public class ControleController {
 																 exaDao=false;
 																 retDao = true;
 																 panelDaoTableauBordSai = false;
-																 panelDaoTableauBordVal = true;
+																 panelDaoTableauBordVal = false;
+																 panelDaoTableauBordTra = true;
 																 panelDaoTableauBordAff =false;
 																 panelDaoTableauBordExa =false; 
 																 panelDaoTableauBordRet =false; 
@@ -2543,6 +2554,7 @@ public class ControleController {
 																	 retDao = true;
 																	 panelDaoTableauBordSai = false;
 																	 panelDaoTableauBordVal = false;
+																	 panelDaoTableauBordTra = false;
 																	 panelDaoTableauBordAff =false;
 																	 panelDaoTableauBordExa =false; 
 																	 panelDaoTableauBordRet =true; 
@@ -2617,6 +2629,7 @@ public class ControleController {
 																		 retDao = true;
 																		 panelDaoTableauBordSai = false;
 																		 panelDaoTableauBordVal = false;
+																		 panelDaoTableauBordTra = false;
 																		 panelDaoTableauBordAff =false;
 																		 panelDaoTableauBordExa =false; 
 																		 panelDaoTableauBordRet =false; 
@@ -6990,6 +7003,16 @@ public class ControleController {
 
 	public void setBtn_imprimpgspm(boolean btn_imprimpgspm) {
 		this.btn_imprimpgspm = btn_imprimpgspm;
+	}
+
+
+	public boolean isPanelDaoTableauBordTra() {
+		return panelDaoTableauBordTra;
+	}
+
+
+	public void setPanelDaoTableauBordTra(boolean panelDaoTableauBordTra) {
+		this.panelDaoTableauBordTra = panelDaoTableauBordTra;
 	}
 	
     

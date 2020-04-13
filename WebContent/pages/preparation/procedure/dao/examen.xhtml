@@ -12,7 +12,7 @@
 <section class="content-header">
       <h3>
        <!-- #{controleController.libelle}  -->
-       EXAMEN DU DAO
+       EXAMEN DU DOSSIER D'APPEL A CONCURRENCE
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -434,7 +434,7 @@
 		     
               <div class="pull-right ">
 			       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-			            <p:commandLink  rendered="#{daoController.etatPV}" action="#{daoController.imprimerPv()}" styleClass="btn btn-success row pull-right" style="background-color: #f88b2e; margin-right:5px;color:#fff" ajax="false">
+			            <p:commandLink  rendered="#{daoController.etatPV}" action="#{daoController.imprimerPv()}" styleClass="btn btn-success row pull-right" style="background-color: #f88b2e; margin-right:5px;color:#fff; border-color:#f88b2e" ajax="false">
 			             <i class="ace-icon fa fa-save"></i>Editer le PV
 			            </p:commandLink>
 			       </h:panelGroup>

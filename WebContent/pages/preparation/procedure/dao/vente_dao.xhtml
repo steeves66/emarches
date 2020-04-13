@@ -150,7 +150,7 @@
 		                  <hr />
 		                        	
 		                     <div class="form-group horizontal">
-		                      <label for="ncc1" class="col-sm-2 control-label text-right"><b>Ncc :<span style="color:red;"> *</span></b></label>
+		                      <label for="ncc1" class="col-sm-2 control-label text-right"><b>Ncc :</b></label>
 		                      <div class="col-sm-3">
 		                        <p:inputText  type="text"  styleClass="form-control" value="#{daoController.newCandidat.canSouNcc}" id="ncc1" style="width: 100%" />
 		                      </div>
@@ -226,7 +226,7 @@
 				   <i class="ace-icon fa fa-save bigger-120"></i> Confirmer Paiement
 				   </p:commandLink>
 				      
-				    <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.etatRecu}" action="#{daoController.imprimerRecu()}" style="background-color: #f88b2e; color:#fff" ajax="false" update=":content">
+				    <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.etatRecu}" action="#{daoController.imprimerRecu()}" style="background-color: #f88b2e; color:#fff;border-color:#f88b2e" ajax="false" update=":content">
 				    <i class="ace-icon fa fa-save bigger-120"></i> Editer Recu
 				    </p:commandLink>
 	            </div> 
