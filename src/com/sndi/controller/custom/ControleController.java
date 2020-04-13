@@ -1851,13 +1851,16 @@ public class ControleController {
 			    }else 
 			    	if(action.equalsIgnoreCase("MODDAO")) {
 			    		type = "DAC";
-			    		libelleProcedure="Modification du DAC N°";
-			    		libelleDao2 = "Modification";
-			    		panelDetail=false;
-					    panelForm=true;
-					    panelTraitement=false;
-			    		panelUpdate=true;
-			    		panelRegister=false;
+			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL A CONCURRENCE N° ";
+			    		 libelle1="Saisie d'un nouveau DAC";
+					     panelDetail=false;
+						 panelForm=true;
+						 panelTraitement=false;
+					     panelRegister=true;
+					     panelUpdate=false;
+					     btn_fermer_saisie_dao = true;
+					     btn_fermer_saisie_ami = false ;
+					     btn_fermer_saisie_prq = false  ;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIDAO")) {
 			    			type = "DAC";
