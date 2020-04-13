@@ -1,0 +1,355 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+      <h3>
+       <!-- #{controleController.libelle} --> 
+       RETRAIT DES DOSSIERS D'APPEL D'OFFRES
+        <!-- <small>Nouveau AGPM </small> -->
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{pgpmAcController.renderPage('pgpmAc1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{daoController.renderPage('dao2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
+           <!--  #{controleController.libelle1}  -->
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+
+     <div class="box"></div>
+      
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     
+     
+      <div class="row">
+     <div class="col-md-12">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">RETRAIT DU DAO N° #{daoController.slctdTd.affDacCode}</div></div>
+         </div>
+         <div class="box-body">
+         <div class="col-md-6">
+          <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Gestion : </label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Code Dao : </label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.affDacCode}" style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Objet de l'Opération : </label></div>
+                  <div class="col-sm-9">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacObjet}" style="width: 100%"/></label>
+                  </div>
+	             </div>
+	         </div>
+	         <div class="col-md-6">
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Type de marché : </label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Mode de passation : </label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             </div>
+         </div>
+               </div>
+      </div>
+    
+     </div>
+
+
+      <div class="row">
+   <div class="col-md-12">
+    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+         <div class="col-md-12 "><div  style="color: #fff">INFORMATIONS SUR LE MANDATAIRE</div></div> 
+        </div>
+        <div class="box-body">
+        
+        <div class="col-xs-6 col-sm-4"><label class="control-label"><b>Nom et prenoms</b></label></div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retNom}" placeholder="Nom et Prenoms" parsley-trigger="change" required="true" style="width:100%;"/> </div>
+								<div class="col-xs-6 col-sm-4"><label class="control-label" style=" margin-top:10px"><b>Adresse</b></label></div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retAdresse}" placeholder="Adresse" parsley-trigger="change" required="true" style="width:100%; margin-top:10px"/> </div>
+								
+								<div class="col-xs-6 col-sm-4"><label class="control-label" style=" margin-top:10px"><b>Email</b></label></div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retMail}" placeholder="Email du Mandataire" parsley-trigger="change" required="true" style="width:100%;margin-top:10px"/> </div>
+								<div class="col-xs-6 col-sm-4"><label class="control-label" style=" margin-top:10px"><b>Telephone</b></label></div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retTel}" placeholder="Téléphone du Mandataire" parsley-trigger="change" required="true" style="width:100%; margin-top:10px"/> </div>
+								
+							 
+								<div class="col-xs-6 col-sm-2">
+								<label class="control-label pull-right" style="margin-top:20px"><b>Numéro de la piece</b></label>
+								</div>
+								
+								<div class="col-xs-6 col-sm-2">
+								<p:inputText value="#{daoController.retrait.retPieceNumero}" placeholder="Numéro de la pièce" style="width:100%; margin-top:20px"/>
+								</div>
+						
+								
+								<div class="col-xs-12 col-sm-4"></div>
+								<div class="col-xs-12 col-sm-8">
+								<p:fileUpload fileUploadListener="#{daoController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir" uploadLabel="Charger le fichier" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":gnl" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+								</div>
+
+              </div>
+              </div>
+   </div>
+    
+   </div>
+
+   
+
+		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','RETDAO')}" style="background-color: #f88b2e;" update=":content">
+		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+				</p:commandLink>
+		
+                <div class="pull-right ">
+			            <p:commandLink action="#{daoController.retirer()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:confirm header="Confirmation" message="Confirmez-vous le Retrait ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Valider
+			            </p:commandLink>
+              </div>
+    </section>
+    </h:form>
+    
+    
+     <h:form id="uplog" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="uploaddlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Joindre un document">
+				<div class="contentpanel">
+					
+	             <div class="row">
+              <p:messages id="message2" showDetail="false" autoUpdate="true"  closable="true"/>
+								<div class="col-xs-12 col-sm-12">
+								<p:fileUpload fileUploadListener="#{pgpmAcController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":uplog:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
+								</div>
+              </div>
+              <br/>
+	            <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES DOSSIERS DU PGPM N°</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{pgpmAcController.dossListe}" emptyMessage="Aucun Document enrégistré">
+	           <p:column headerText="Nom du document " styleClass="">
+	            <h:outputText value="#{doss.dpgCommentaire}" />
+	        </p:column>
+	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
+	        
+				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{pgpmAcController.removeDossier}" title="Supprimer" update="uplog:tabDossier">
+                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                   <f:setPropertyActionListener value="#{doss}" target="#{pgpmAcController.selectedDossier}" />
+                </p:commandLink>
+ 	        </p:column>
+	    </p:dataTable>    
+	            </div>
+	            </div>   
+	                
+	                
+	           </div>
+      </p:dialog>
+    </h:form>
+    
+    
+      <h:form id="dlogMin">
+	        <p:dialog  widgetVar="ministereDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le ministère">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{agpmController.filtreMinistere}"  class="gui-input"  placeholder="Saisir le code du ministère"  > 
+						    <p:ajax event="keyup" update=":dlogMin:ndTbleMin" listener="#{agpmController.filtreMinistere()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMin" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeMinistere}"
+						  selectionMode="single" rowKey="#{slctdTb.minCode}"
+			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-1" >
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMinisterePgpmCpmp()}" update="gnl:ministre">				        
+         				  <h:outputText value="#{slctdTb.minCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.ministere}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="Libelle du ministère" style="font-size:18px;"  action="#{pgpmAcController.onSelectMinisterePgpmCpmp()}">				        
+         				  <h:outputText value="#{slctdTb.minLibelle}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.ministere}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+         <h:form id="dlogAC">
+	        <p:dialog  widgetVar="autoriteDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmCpmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmCpmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogDMP">
+	        <p:dialog  widgetVar="DMPDlog" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{pgpmAcController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeFonctions}"
+						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
+			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-3" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.fonCod}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Fonction" styleClass="col-sm-9" >
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}">				        
+         				  <h:outputText value="#{slctdTb.fonLibelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>
