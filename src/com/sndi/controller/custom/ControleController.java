@@ -2669,18 +2669,18 @@ public class ControleController {
 																		 btn_fermer_saisie_prq = false;  
 									    						   }else
 				                                                          if(action.equalsIgnoreCase("ENGDPS")) {
-										    								  type = "DAC";
-										    								  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE";
-										    							       libelle1="Saisie d'un nouveau DAC";
-										    							       libellesmall ="Saisie d'un nouveau DAC";
-										    							       panelDetail=false;
-										    								   panelForm=true;
-										    								   panelTraitement=false;
-										    							       panelRegister=true;
-										    							       panelUpdate=false;
-										    							       btn_fermer_saisie_dao = true;
-										    							       btn_fermer_saisie_ami = false ;
-										    							       btn_fermer_saisie_prq = false  ;                     
+				                                                        	  type = "DAC";
+				                                            				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
+				                                            			       libelle1="LISTE DES DOSSIERS D'APPEL A CONCURRENCE (DAC)";
+				                                            			       libellesmall ="Procédure Simplifiée";
+				                                            			       panelDetail=false;
+				                                            				   panelForm=true;
+				                                            				   panelTraitement=false;
+				                                            			       panelRegister=true;
+				                                            			       panelUpdate=false;
+				                                            			       btn_fermer_saisie_dao = true;
+				                                            			       btn_fermer_saisie_ami = false ;
+				                                            			       btn_fermer_saisie_prq = false  ;                      
 										    							    }else 
 										    							    	if(action.equalsIgnoreCase("MODDPS")) {
 										    							    		type = "DAC";
@@ -2855,11 +2855,10 @@ public class ControleController {
 									    												fermerApercuPrq = false;
 													    						   }else
 									    									    	  if(action.equalsIgnoreCase("CHADPS")) {
-									    									    		     type = "DAC";
+									    									    		  type = "DAC";
 																			    			 libelle1="Index";
 																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
-																			    			 //libelleDao1="Procédure Simplifiée";
-																			    			 libellesmall="Procédure Simplifiée";
+																			    			 libelleSmall="Procédure Simplifiée";
 																			    			 btn_new =false;
 																			    			 btn_affec = false;
 																			    			 btn_exam = false;
@@ -2877,20 +2876,21 @@ public class ControleController {
 																							 panel10 = false;
 																							 panel11 = false;
 																							 panel12 = false;
-																						     venteRecherchePs = false;
-																							 affectationRecherchePs = false;
-																						     examenRecherchePs = false;
-																							 publicationRecherchePs = false;
-																							 saisieRecherchePs = false;
-																							 celluleRecherchePs = false;
-																							 validationRecherchePs = false;
-																							 priseRecherchePs = false;
-																							 chargeRecherchePs = true;
+																							 venteRecherche = false; 
+																							 affectationRecherche = false;
+																							 examenRecherche = false;
+																							 publicationRecherche = false;
+																							 saisieRecherche = false;
+																							 celluleRecherche = false;
+																							 validationRecherche = false;
+																							 priseRecherche = false;
+																							 chargeRecherche = true;
 																							 affDao=false;
 																							 exaDao=false;
 																							 retDao = true;
 																							 panelDaoTableauBordSai = false;
 																							 panelDaoTableauBordVal = false;
+																							 panelDaoTableauBordTra = false;
 																							 panelDaoTableauBordAff =false;
 																							 panelDaoTableauBordExa =false; 
 																							 panelDaoTableauBordRet =false; 
@@ -3159,8 +3159,7 @@ public class ControleController {
 																	    							     libelle="VENTE / RETRAIT DU DAC N°";
 																						    			 libelle1="Index";
 																						    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A CONCURRENCE";
-																						    			 //libelleDao1="Procédure Simplifiée";
-																						    			 libellesmall="Procédure Simplifiée";
+																						    			 libelleSmall="Procédure Simplifiée";
 																						    			 btn_new =false;
 																						    			 btn_affec = false;
 																						    			 btn_exam = false;
@@ -3178,20 +3177,21 @@ public class ControleController {
 																										 panel10 = false;
 																										 panel11 = false;
 																										 panel12 = false;
-																										 venteRecherchePs = true; 
-																										 affectationRecherchePs = false;
-																										 examenRecherchePs = false;
-																										 publicationRecherchePs = false;
-																										 saisieRecherchePs = false;
-																										 celluleRecherchePs = false;
-																										 validationRecherchePs = false;
-																										 priseRecherchePs = false;
-																										 chargeRecherchePs = false;
+																										 venteRecherche = true; 
+																										 affectationRecherche = false;
+																										 examenRecherche = false;
+																										 publicationRecherche = false;
+																										 saisieRecherche = false;
+																										 celluleRecherche = false;
+																										 validationRecherche = false;
+																										 priseRecherche = false;
+																										 chargeRecherche = false;
 																										 affDao=false;
 																										 exaDao=false;
 																										 retDao = true;
 																										 panelDaoTableauBordSai = false;
 																										 panelDaoTableauBordVal = false;
+																										 panelDaoTableauBordTra = false;
 																										 panelDaoTableauBordAff =false;
 																										 panelDaoTableauBordExa =false; 
 																										 panelDaoTableauBordRet =false; 
@@ -3228,7 +3228,7 @@ public class ControleController {
 																										 btn_valider_prq_dmp = false;
 																										 btn_fermer_saisie_dao = false; 
 																										 btn_fermer_saisie_ami = false; 
-																										 btn_fermer_saisie_prq = false; 
+																										 btn_fermer_saisie_prq = false;
 																	    						  
 																	    						     }else
 														    									    	 if(action.equalsIgnoreCase("TRADPS")) {
@@ -3298,11 +3298,78 @@ public class ControleController {
 																											 btn_fermer_saisie_ami = false; 
 																											 btn_fermer_saisie_prq = false; 
 																		    						      }else
-																    									    	if(action.equalsIgnoreCase("OBSDPS")) {
-																				    							     type = "DAC";
+																    									      if(action.equalsIgnoreCase("RETDPS")) {
+																				    							     type = "DAO";
 																									    			 libelle1="Index";
+																									    			 libelleDao3="RETRAIT DES DOSSIERS D'APPEL A CONCURRENCE";
+																									    			 libelleSmall ="Procédure Simplifiée";
+																									    			 btn_new =false;
+																									    			 btn_affec = false;
+																									    			 btn_exam = false;
+																									    			 btn_retrait = true;
+																									    			 btn_valid = false;
+																													 panel1 =false;
+																													 panel2 =false;
+																													 panel3 = false;
+																													 panel4 = false;
+																													 panel5 = false;
+																													 panel6 = false;
+																													 panel7 = false;
+																													 panel8 = false;
+																													 panel9 = false;
+																													 panel10 =false;
+																													 panel11 = true;
+																													 panel12 = false;
+																													 affDao=false;
+																													 exaDao=false;
+																													 retDao = true;
+																													 panelDaoTableauBordSai = false;
+																													 panelDaoTableauBordVal = false;
+																													 panelDaoTableauBordTra = false;
+																													 panelDaoTableauBordAff =false;
+																													 panelDaoTableauBordExa =false; 
+																													 panelDaoTableauBordRet =true; 
+																													 panelDaoTableauBordVet =false;
+																													 panelDaoTableauBordCha = false;
+																													 panelDaoTableauBordPub = false;
+																													 panelDaoTableauBordPrise = false;
+																													 panelDao = true;  
+																													 panelPrq = false;
+																													 btn_trans_ami =false;
+																													 btn_trans_dao =false;
+																													 btn_trans_prq =false;
+																													 
+																													 btn_creerDetailAmi = false;
+																													 btn_creerDetailDao = false ;
+																													 btn_creerDetailPrq = false;
+																													 
+																													 btn_creerDetailDaoCmp = false;
+																													 btn_creerDetailAmiCmp = false;
+																													 btn_creerDetailPrqCmp = false;
+																													 btn_creerDetailDaoDmp = false;
+																													 btn_creerDetailAmiDmp = false; 
+																													 btn_creerDetailPrqDmp = false;
+																													 fermerValDao = false;
+																													 fermerSaiDao = true;
+																													 detailD = false;
+																													 detailA= false; 
+																													 detailP = false;
+																													 btn_valider_dao_cpmp =  false;
+																													 btn_valider_dao_dmp = false;
+																													 btn_valider_ami_cpmp = false; 
+																													 btn_valider_prq_cpmp = false;
+																													 btn_valider_ami_dmp = false;
+																													 btn_valider_prq_dmp = false;
+																													 btn_fermer_saisie_dao = false; 
+																													 btn_fermer_saisie_ami = false; 
+																													 btn_fermer_saisie_prq = false;  
+																				    						   }else
+																    									    	if(action.equalsIgnoreCase("OBSDPS")) {
+																    									    		 type = "DAC";
+																									    			 libelle1="Index";
+																									    			 libellesmall="Procédure Normale";
 																									    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
-																									    			 libellesmall="Procédure Simplifiée";
+																									    			 libelleSmall="Procédure Simplifiée";
 																									    			 btn_new =false;
 																									    			 btn_affec = false;
 																									    			 btn_exam = false;
@@ -3320,21 +3387,21 @@ public class ControleController {
 																													 panel10 =false;
 																													 panel11 = false;
 																													 panel12 = true;
-																													 affectationRecherchePs = false;
-															    													 venteRecherchePs = false;
-															    												     affectationRecherchePs = false;
-															    													 examenRecherchePs = false;
-															    													 publicationRecherchePs = false;
-															    													 saisieRecherchePs = false;
-															    													 celluleRecherchePs = false;
-															    													 validationRecherchePs = false;
-															    													 priseRecherchePs = true;
-															    													 chargeRecherchePs = false;
+																													 venteRecherche = false; 
+																													 affectationRecherche = false;
+																													 examenRecherche = false;
+																													 publicationRecherche = false;
+																													 saisieRecherche = false;
+																													 celluleRecherche = false;
+																													 validationRecherche = false;
+																													 priseRecherche = true;
+																													 chargeRecherche = false;
 																													 affDao=false;
 																													 exaDao=false;
 																													 retDao = true;
 																													 panelDaoTableauBordSai = false;
 																													 panelDaoTableauBordVal = false;
+																													 panelDaoTableauBordTra = false;
 																													 panelDaoTableauBordAff =false;
 																													 panelDaoTableauBordExa =false; 
 																													 panelDaoTableauBordRet =false; 

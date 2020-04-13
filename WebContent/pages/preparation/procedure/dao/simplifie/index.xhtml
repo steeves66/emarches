@@ -36,7 +36,7 @@
         #{controleController.libelleDao3} 
         </h:panelGroup>
         <small>
-        <!-- #{controleController.libelle1} -->
+         #{controleController.libelleSmall} 
         
         </small>
       </h3>
@@ -1151,7 +1151,7 @@
 					 
 							
 							<div class="col-md-1 ">
-								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoPsController.renderPage('dao2','ENGDAO')}"  update=":content">
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoPsController.renderPage('dps2','ENGDPS')}"  update=":content">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
 								</p:commandLink>
 							</div>
@@ -1238,7 +1238,7 @@
 	         		         </h:panelGroup>
                            
                             <h:panelGroup rendered="#{controleController.detailD}">   
-                             <p:commandLink  action="#{etatsdaoPsController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsdaoPsController.slctdTd}" />
                              </p:commandLink>
@@ -1517,7 +1517,7 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
-                        <p:commandLink  action="#{etatsdaoPsController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                        <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                         <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                         <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsdaoPsController.slctdTd}" />
                         </p:commandLink>
@@ -1535,7 +1535,7 @@
                          </p:commandLink> 
                          </h:panelGroup>
                          
-                         <p:commandLink action="#{daoPsController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                         <p:commandLink action="#{daoPsController.renderPage('dps6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" /> 
                             </p:commandLink> 
@@ -1624,7 +1624,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                         
                             <h:panelGroup rendered="#{controleController.affDao}">   
-                             <p:commandLink action="#{daoPsController.renderPage('dao5','AFFDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{daoPsController.renderPage('dps5','AFFDPS')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" />
                              </p:commandLink>
@@ -1716,7 +1716,7 @@
                         
                           
                             <h:panelGroup rendered="#{controleController.exaDao}">   
-                             <p:commandLink action="#{daoPsController.renderPage('dao6','EXADAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{daoPsController.renderPage('dps6','EXADPS')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" />
                              </p:commandLink>
@@ -1798,7 +1798,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{daoPsController.renderPage('dao7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{daoPsController.renderPage('dps7','RETDPS')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" />
                              </p:commandLink>
@@ -1852,14 +1852,14 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                             <p:commandLink  action="#{etatsdaoPsController.renderPage('dao8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsdaoPsController.slctdTda}" />
                              </p:commandLink>
                       
                         
                             <h:panelGroup rendered="#{slctdTb.dafStaCode != 'DC2'}">
-                            <p:commandLink action="#{daoPsController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                            <p:commandLink action="#{daoPsController.renderPage('dps6','EXADPS')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTda}" /> 
                             </p:commandLink> 
@@ -2061,7 +2061,7 @@
                       <p:column headerText="Actions" styleClass="col-sm-3"> 
                       
                              
-                             <p:commandLink  action="#{etatsdaoPsController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsdaoPsController.slctdTd}" />
                              </p:commandLink>
@@ -2076,7 +2076,7 @@
                              
                              <p:commandLink action="#{daoPsController.transmettreCpmp()}" styleClass="btn btn-xs btn-success"  title="Transmettre" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <p:confirm header="Confirmation" message="Confrmez-vous la transmission du DAO N° #{slctdTb.affDacCode} ?" icon="ui-icon-alert" />
+                                 <p:confirm header="Confirmation" message="Confrmez-vous la transmission du DAC N° #{slctdTb.affDacCode} ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" />
                              </p:commandLink>
                              
@@ -2165,14 +2165,14 @@
 				       
                      <p:column headerText="Actions" styleClass="col-sm-3"> 
                      
-                        <p:commandLink  action="#{etatsdaoPsController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                        <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsdaoPsController.slctdTd}" />
                          </p:commandLink>
                      
                      
                           <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{daoPsController.renderPage('dao9','VETDAO')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{daoPsController.renderPage('dps9','VETDPS')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" />
                              </p:commandLink>
@@ -2264,7 +2264,7 @@
 	         		         </h:panelGroup>
                            
                             <h:panelGroup rendered="#{controleController.detailD}">   
-                             <p:commandLink  action="#{etatsdaoPsController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsdaoPsController.slctdTd}" />
                              </p:commandLink>
@@ -2364,7 +2364,7 @@
                      <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{daoPsController.renderPage('dao7','RETDAO')}" styleClass="btn btn-xs btn-success"  title="Retrait du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{daoPsController.renderPage('dps7','RETDPS')}" styleClass="btn btn-xs btn-success"  title="Retrait du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" />
                              </p:commandLink>
@@ -2444,7 +2444,7 @@
                      <p:column headerText="Actions" styleClass="col-sm-3">
                          
                             <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{daoPsController.renderPage('dao10','OBSDAO')}" styleClass="btn btn-xs btn-success"  title="Avis du Bailleur" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink action="#{daoPsController.renderPage('dps10','OBSDPS')}" styleClass="btn btn-xs btn-success"  title="Avis du Bailleur" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoPsController.slctdTd}" />
                              </p:commandLink>
