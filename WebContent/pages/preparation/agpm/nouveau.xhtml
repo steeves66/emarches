@@ -78,82 +78,6 @@
         <div class="row">
 	            <div class="col-md-8">
 	               <div class="box-body">
-		              <div class="form-group">
-		                  <label for="gestion" class="col-sm-3 control-label">Gestion<span style="color:red;"> *</span></label>
-		                  <div class="col-sm-9">
-		                    <p:selectOneMenu id="gestion" value="#{agpmController.gesCode}"
-			                         effect="fade" style="width:100%">
-					       <f:selectItems value="#{agpmController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
-		       		        </p:selectOneMenu>
-		                    
-		                  </div>
-		                </div>
-		                <h:panelGroup rendered="#{controleController.love_Ac}" > 
-		                 <div class="form-group">
-                  <label for="lx1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
-                    <p:inputTextarea value="#{userController.fonction.TStructure.TMinistere.minLibelle}" row="3" styleClass="form-control" id="lx1" readonly="true" style="width: 100%" /> 
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label for="l21" class="col-sm-3 control-label">Autorité contractante <span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
-                    <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control" id="l21" style="width: 100%" readonly="true"/>
-                  </div>
-                </div>
-               </h:panelGroup> 
-               
-               
-               <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
-               <div class="form-group">
-                  <label for="S1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
-                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="S1" readonly="true" style="width: 100%" />
-                  </div>
-                 <!--  <div class="col-md-1">
-                <p:commandLink  oncomplete="PF('ministereDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-								<i class="fa fa-search-plus"></i>
-								</p:commandLink>
-				</div> -->
-                </div>
-                
-                <div class="form-group">
-                  <label for="S21" class="col-sm-3 control-label">Autorité contractante</label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control" id="S21" style="width: 100%" readonly="true"/>
-                  </div>
-                  <div class="col-md-1">
-                <p:commandLink oncomplete="PF('autoriteDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-								<i class="fa fa-search-plus"></i>
-								</p:commandLink>
-				</div>
-                </div>
-               </h:panelGroup>
-               
-               <h:panelGroup rendered="#{controleController.love_Dmp}" > 
-               <div class="form-group">
-                  <label for="SS1" class="col-sm-3 control-label">Ministère <span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
-                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="SS1" readonly="true" style="width: 100%" />
-                  </div>
-                 
-                </div>
-                
-                 <div class="form-group">
-                  <label for="SS21" class="col-sm-3 control-label">Autorité contractante</label>
-                  <div class="col-sm-8">
-                    <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control" id="SS21" style="width: 100%" readonly="true"/>
-                  </div>
-                  <div class="col-md-1">
-                <p:commandLink oncomplete="PF('DMPDlog').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-								<i class="fa fa-search-plus"></i>
-								</p:commandLink>
-				</div>
-                </div>
-               </h:panelGroup>
-                
-            
             
                  <div class="form-group">
                   <label class="col-sm-3 control-label">Opération<span style="color:red;"> *</span></label>
@@ -173,7 +97,7 @@
                   <div class="form-group">
                   <label for="l3" class="col-sm-3 control-label">Projet / Programme de<span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
-                    <p:inputText value="#{agpmController.projet.proTitre}" placeholder="Le titre du projet / Programme" type="text"  styleClass="form-control" id="l3" style="width: 100%"/>
+                    <p:inputTextarea value="#{agpmController.projet.proTitre}"  rows="3" cols="33"  placeholder="Le titre du projet / Programme" type="text"  styleClass="form-control" id="l3" style="width: 100%"/>
                   </div>
                 </div>
 
@@ -181,7 +105,7 @@
                   <label for="l6" class="col-sm-3 control-label">Description du projet / Programme<span style="color:red;"> *</span></label>
 
                   <div class="col-sm-9">
-                    <p:inputTextarea placeholder="Le gouvernement de la Republique de Côte d'Ivoire a obtenu ..." value="#{agpmController.agpm.agpCommentaire}" rows="8" cols="33" styleClass="form-control" id="l6" style="width: 100%" >
+                    <p:inputTextarea placeholder="Le gouvernement de la Republique de Côte d'Ivoire a obtenu ..." value="#{agpmController.agpm.agpCommentaire}" rows="12" cols="33" styleClass="form-control" id="l6" style="width: 100%" >
                     </p:inputTextarea>
                     
                   </div>
