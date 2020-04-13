@@ -12,7 +12,7 @@
 <section class="content-header">
       <h3>
        <!-- #{controleController.libelle} --> 
-       RETRAIT DES PREQUALIFICATIONS
+       RETRAIT DES DOSSIERS D'APPEL D'OFFRES
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -27,7 +27,7 @@
              </p:commandLink>
             </li>
         <li class="active">
-         <p:commandLink action="#{prqController.renderPage('prq2')}" update=":content" > 
+         <p:commandLink action="#{daoController.renderPage('dao2')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
            <!--  #{controleController.libelle1}  -->
              </p:commandLink>
@@ -55,26 +55,26 @@
      <div class="col-md-12">
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div class="col-md-12 "><div  style="color: #fff">RETRAIT DE #{controleController.type} N° #{prqController.slctdTd.affDacCode}</div></div>
+            <div class="col-md-12 "><div  style="color: #fff">RETRAIT DU DAO N° #{daoController.slctdTd.affDacCode}</div></div>
          </div>
          <div class="box-body">
          <div class="col-md-6">
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{prqController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Code Dao : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{prqController.slctdTd.affDacCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.affDacCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération : </label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{prqController.slctdTd.affDacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -82,13 +82,13 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{prqController.slctdTd.TTypeMarche.tymCode} : #{prqController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{prqController.slctdTd.TModePassation.mopCode} : #{prqController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             </div>
@@ -108,14 +108,14 @@
         <div class="box-body">
         
         <div class="col-xs-6 col-sm-4"><label class="control-label"><b>Nom et prenoms</b></label></div>
-								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{prqController.retrait.retNom}" placeholder="Nom et Prenoms" parsley-trigger="change" required="true" style="width:100%;"/> </div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retNom}" placeholder="Nom et Prenoms" parsley-trigger="change" required="true" style="width:100%;"/> </div>
 								<div class="col-xs-6 col-sm-4"><label class="control-label" style=" margin-top:10px"><b>Adresse</b></label></div>
-								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{prqController.retrait.retAdresse}" placeholder="Adresse" parsley-trigger="change" required="true" style="width:100%; margin-top:10px"/> </div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retAdresse}" placeholder="Adresse" parsley-trigger="change" required="true" style="width:100%; margin-top:10px"/> </div>
 								
 								<div class="col-xs-6 col-sm-4"><label class="control-label" style=" margin-top:10px"><b>Email</b></label></div>
-								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{prqController.retrait.retMail}" placeholder="Email du Mandataire" parsley-trigger="change" required="true" style="width:100%;margin-top:10px"/> </div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retMail}" placeholder="Email du Mandataire" parsley-trigger="change" required="true" style="width:100%;margin-top:10px"/> </div>
 								<div class="col-xs-6 col-sm-4"><label class="control-label" style=" margin-top:10px"><b>Telephone</b></label></div>
-								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{prqController.retrait.retTel}" placeholder="Téléphone du Mandataire" parsley-trigger="change" required="true" style="width:100%; margin-top:10px"/> </div>
+								<div class="col-xs-12 col-sm-8"><p:inputText  value="#{daoController.retrait.retTel}" placeholder="Téléphone du Mandataire" parsley-trigger="change" required="true" style="width:100%; margin-top:10px"/> </div>
 								
 							 
 								<div class="col-xs-6 col-sm-2">
@@ -123,13 +123,13 @@
 								</div>
 								
 								<div class="col-xs-6 col-sm-2">
-								<p:inputText value="#{prqController.retrait.retPieceNumero}" placeholder="Numéro de la pièce" style="width:100%; margin-top:20px"/>
+								<p:inputText value="#{daoController.retrait.retPieceNumero}" placeholder="Numéro de la pièce" style="width:100%; margin-top:20px"/>
 								</div>
 						
 								
 								<div class="col-xs-12 col-sm-4"></div>
 								<div class="col-xs-12 col-sm-8">
-								<p:fileUpload fileUploadListener="#{prqController.upload}" multiple="true"
+								<p:fileUpload fileUploadListener="#{daoController.upload}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir" uploadLabel="Charger le fichier" auto="true"
 			                      mode="advanced" dragDropSupport="true"
 			                          update=":gnl" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
@@ -143,12 +143,12 @@
 
    
 
-		         <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','RETPRQ')}" style="background-color: #f88b2e;" update=":content">
+		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','RETDAO')}" style="background-color: #f88b2e;" update=":content">
 		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 				</p:commandLink>
 		
                 <div class="pull-right ">
-			            <p:commandLink action="#{prqController.retirer()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:commandLink action="#{daoController.retirer()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
 			            <p:confirm header="Confirmation" message="Confirmez-vous le Retrait ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
