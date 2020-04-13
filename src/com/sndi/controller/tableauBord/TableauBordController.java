@@ -244,7 +244,7 @@ public class TableauBordController {
 					 private String daoCpAttenteValide="";
 					 private String daoPriseTrait="";
 					 private String daoaffecte ="";
-					 
+					 private String daoDaoPub = "";
 					 /*
 					  Compteur pour le Chargé d'Etudes
 					   */ 
@@ -268,7 +268,8 @@ public class TableauBordController {
 				     
 				     //DAO EN PROCEDURE SIMPLIFIEE
 				     
-				     /*
+				     private String daoTotalPs=""; 
+					 /*
 					  Compteur pour l'autorité Contractante
 					   */
 						 private String daoAcSaisiePs = "";
@@ -281,7 +282,6 @@ public class TableauBordController {
 						 private String daoAcAttRetraitPs ="";
 						 private String daoAcAttVentePs ="";
 						 private String daoAcRetirePs="";
-						 private String daoTotalPs = "";
 					/*
 					Compteur pour la Cellule de Passation des Marchés
 					 */
@@ -294,7 +294,6 @@ public class TableauBordController {
 						 private String daoPriseTraitPs="";
 						 private String daoaffectePs ="";
 						 private String daoDaoPubPs = "";
-						 
 						 /*
 						  Compteur pour le Chargé d'Etudes
 						   */ 
@@ -311,7 +310,7 @@ public class TableauBordController {
 						 private String daoCsvValidePs="";
 					     private String daoCsvDiffPs="";
 					     private String daoCsvTraitChargPs="";
-					     private String daoDaoPub="";
+					     private String daoCsvValidationPs = "";
 						 /*
 						  Compteur pour le Directeur des Marchés Publics
 						   */
@@ -723,8 +722,9 @@ public class TableauBordController {
 			 daoCsvAttAffPs = ""+getDaoAttAffCsvPs("D2T","D5R","DOP");
 			 daoCsvAttValPs = ""+getAcDaoValChargeCsvPs("D4V");
 			 daoaffectePs = ""+getAcDaoAffecteDossierPs("D3A");
-			 daoCsvValidePs = ""+getAcDaoValidCsvDossierPs("D5V");
-			 daoCsvDiffPs = ""+getAcDaoValidCsvDossierPs("D5R");
+			 daoCsvValidePs = ""+getAcDaoValidCsvDossierPs("D5V","DOP");
+			 daoCsvValidationPs = ""+getAcDaoValidationCsvDossierPs("D5V","DOP","SBO");
+			 daoCsvDiffPs = ""+getAcDaoValidCsvPs("D5R");
 			 daoAcDiffCpmpPs = ""+getDaoDiffCpmpACDossierPs("D1R");
 			 daoAcTransmisPs = ""+getAcDaoTransmisDossierPs("D1T");
 			 daoAcDiffDmpPs = ""+getDaoDiffDmpACDossierPs("S3D");
@@ -1625,7 +1625,7 @@ public int getAcDaoSaisieDossier(String src1, String src2){
 	return	i;	
 }
 
-//DAO saisi par le AC en procédure simplifiée
+//DAO saisi par le AC en procédure Normale
 public int getAcDaoSaisiePs(String src1, String src2){ 
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
@@ -1697,7 +1697,7 @@ public int getAcDaoAffecteDossier(String src){
 	return	i;	
 }
 
-//DAO validé par le Chef de Service
+//DAO validé par le Chef de Service en procédure normale
 public int getAcDaoValidCsvDossier(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
@@ -1707,7 +1707,7 @@ public int getAcDaoValidCsvDossier(String src1, String src2){
 	return	i;	
 }
 
-//DAC validé par le Chef de Service
+//DAC validé par le Chef de Service en procédure normale
 public int getAcDaoValidationCsvDossier(String src1, String src2, String src3){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
@@ -1758,7 +1758,7 @@ public int getAcDaoAttenteValide(String src1, String src2){
 }
 
 
-//DAO saisi par le CPMP
+//DAO saisi par le CPMP en procédure normale
 public int getDaoSaisieDossier(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
@@ -1768,7 +1768,7 @@ public int getDaoSaisieDossier(String src){
 	return	i;	
 }
 
-//DAO non transmis par le cpmp
+//DAO non transmis par le cpmp en procédure normale
 public int getDaoSaisieDossierIn(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
@@ -1778,7 +1778,7 @@ public int getDaoSaisieDossierIn(String src1, String src2){
 	return	i;
 }
 
-//DAO transmis par le cpmp
+//DAO transmis par le cpmp en procédure normale
 public int getDaoTransmisDossier(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
@@ -1788,7 +1788,7 @@ public int getDaoTransmisDossier(String src){
 	return	i;	
 }
 
-//DAO envoyés pour l'affectation chez le chef de service
+//DAO envoyés pour l'affectation chez le chef de service en procédure normale
 public int getDaoAttAffCsv(String src1, String src2,String src3){ 
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
@@ -1798,7 +1798,7 @@ public int getDaoAttAffCsv(String src1, String src2,String src3){
 	return	i;	
 }
 
-//DAO retournés par le cpmp chez le AC
+//DAO retournés par le cpmp chez le AC en procédure normale
 public int getDaoDiffCpmpACDossier(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
@@ -1808,7 +1808,7 @@ public int getDaoDiffCpmpACDossier(String src){
 	return	i;	
 }
 
-//DAO retournés par le dmp chez le AC
+//DAO retournés par le dmp chez le AC en procédure normale
 public int getDaoDiffDmpACDossier(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
@@ -1828,7 +1828,7 @@ public int getDaoDiffDossier(String src1, String src2){
 	return	i;	
 }
 
-//DAO retournés par le dmp
+//DAO retournés par le dmp en procédure normale
 public int getDaoDiffDmp(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
@@ -1838,7 +1838,7 @@ public int getDaoDiffDmp(String src){
 }
 
 
-//DAO en attente de validation par le CPMP
+//DAO en attente de validation par le CPMP en procédure normale
 public int getDaoAttenteValide(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
@@ -1848,7 +1848,7 @@ public int getDaoAttenteValide(String src1, String src2){
 	return	i;
 }
 
-//DAO en attente de retrait chez l'AC
+//DAO en attente de retrait chez l'AC en procédure normale
 public int getDaoAttenteRetrait(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 			"AFF_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
@@ -1859,7 +1859,7 @@ public int getDaoAttenteRetrait(String src1, String src2){
 }
 
 
-//DAO en attente de vente chez l'AC
+//DAO en attente de vente chez l'AC en procédure normale
 public int getDaoAttenteVente(String src){
 	int i = iservice.countTableByColumn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",
 			new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ, src),
@@ -1869,7 +1869,7 @@ public int getDaoAttenteVente(String src){
 	return	i;	
 }
 
-//DAO retiré chez l'AC
+//DAO retiré chez l'AC en procédure normale
 public int getDaoAcRetire(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
@@ -1880,7 +1880,7 @@ public int getDaoAcRetire(String src){
 }
 
 
-//DAO validés par le cpmp
+//DAO validés par le cpmp en procédure normale
 public int getDaoValideCmp(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
@@ -1891,7 +1891,7 @@ public int getDaoValideCmp(String src){
 }
 
 
-//DAO validés par le dmp
+//DAO validés par le dmp en procédure normale
 public int getDaoValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
@@ -1901,7 +1901,7 @@ public int getDaoValideDmp(String src){
 	return	i;	
 }
 
-//DAO en attente de validation par le dmp
+//DAO en attente de validation par la dmp en Procédure Normale
 public int getDaoAttValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
@@ -1931,7 +1931,8 @@ public int getDaoDossierTotalPs(){
 	//new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"PN"));
 return	i;	
 	} 
-//DAO saisi par le AC
+
+//DAO saisi par le AC en procédure simplifiée
 public int getAcDaoSaisieDossierPs(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
@@ -1950,6 +1951,19 @@ public int getAcDaoSaisiePsPs(String src1, String src2){
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
+
+public int getAcDaoValidationCsvDossierPs(String src1, String src2, String src3){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+
+//DAO validé par le Chef de Service en procédure normale
+
 
 //DAO en attente chez le chargé d'Etudes
 public int getAcDaoAttenteChargePs(String src){
@@ -2000,6 +2014,15 @@ public int getAcDaoValChargePs(String src){
 			new WhereClause("AFF_DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 			new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+public int getAcDaoValidCsvPs(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -2112,6 +2135,16 @@ public int getDaoDiffCpmpACDossierPs(String src){
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//DAO validé par le Chef de Service en procédure normale
+public int getAcDaoValidCsvDossierPs(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -4762,6 +4795,14 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setDaoCsvValidation(String daoCsvValidation) {
 		this.daoCsvValidation = daoCsvValidation;
+	}
+
+	public String getDaoCsvValidationPs() {
+		return daoCsvValidationPs;
+	}
+
+	public void setDaoCsvValidationPs(String daoCsvValidationPs) {
+		this.daoCsvValidationPs = daoCsvValidationPs;
 	}
 
 	
