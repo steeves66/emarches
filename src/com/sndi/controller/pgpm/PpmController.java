@@ -1395,6 +1395,13 @@ public class PpmController {
 			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
 			      				   affgp.setAffDppRecherche(rechercheAll);
 				      			  iservice.updateObject(affgp);
+				      	
+				      	List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+					      new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+				      	TDetailPlanPassation detP = new TDetailPlanPassation();
+				      			if(!DET.isEmpty()) detP =DET.get(0); 
+				      			    detP.setDppRecherche(rechercheAll);
+					      			iservice.updateObject(detP);
 				      			  
 				      
 				      			//Insertion dans T_Financement_PPM
@@ -1497,8 +1504,16 @@ public class PpmController {
 			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
 			      				   affgp.setAffDppRecherche(rechercheAll);
 				      			  iservice.updateObject(affgp);
+				      	  
+
+				      List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+							 TDetailPlanPassation detP = new TDetailPlanPassation();
+							  if(!DET.isEmpty()) detP =DET.get(0); 
+							  detP.setDppRecherche(rechercheAll);
+							    iservice.updateObject(detP);			      			  
 				      			  
-				      
+				      			  
 				      			//Insertion dans T_Financement_PPM
 			    				  for(TFinancementPgpm fin: listeFinancementPgpm) {
 					      		        TFinancementPpm newFinancement = new TFinancementPpm();
@@ -1620,7 +1635,14 @@ public class PpmController {
 				      			  iservice.updateObject(affgp);
 		 		  		
 		 		  		
-		 		  		
+				      List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+							  TDetailPlanPassation detP = new TDetailPlanPassation();
+								  if(!DET.isEmpty()) detP =DET.get(0); 
+								     detP.setDppRecherche(rechercheAll);
+									  iservice.updateObject(detP);	
+									  
+									  
 		 		  		//Insertion dans T_Financement_PPM
 				    				  for(TFinancementPgpm fin: listeFinancementPgpm) {
 						      		        TFinancementPpm newFinancement = new TFinancementPpm();
@@ -1842,6 +1864,13 @@ public class PpmController {
 			      				   affgp.setAffDppRecherche(rechercheAll);
 				      			  iservice.updateObject(affgp);
 			  		
+				       List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+							TDetailPlanPassation detP = new TDetailPlanPassation();
+							 if(!DET.isEmpty()) detP =DET.get(0); 
+							  detP.setDppRecherche(rechercheAll);
+								iservice.updateObject(detP);	      			  
+				      			  
 			  		   //Insertion dans T_Financement_PPM
 			  		   TFinancementPpm newFinancement = new TFinancementPpm();
 			  		   newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));
@@ -1976,7 +2005,13 @@ public class PpmController {
 			      			  affgp.setAffDppRecherche(rechercheAll);
 				      		  iservice.updateObject(affgp);
 				  		
-				  		
+				      		List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+								      new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+							      	TDetailPlanPassation detP = new TDetailPlanPassation();
+							      			if(!DET.isEmpty()) detP =DET.get(0); 
+							      			    detP.setDppRecherche(rechercheAll);
+								      			iservice.updateObject(detP);
+								      			
 				  		//Insertion dans T_Financement_PPM
 				  		TFinancementPpm newFinancement = new TFinancementPpm();
 				  		newFinancement.setTBailleur(new TBailleur(fipPgpm.getTBailleur().getBaiCode()));

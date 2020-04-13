@@ -59,6 +59,7 @@ public class VPpmDao implements java.io.Serializable {
 	private String dppPieceDao;
 	private String dppDacCode;
 	private String dppBailleur;
+	private String dppRecherche;
 	private String mdtCode;
 	private String mdtTymCode;
 	private String mdtLibelleCourt;
@@ -97,7 +98,7 @@ public class VPpmDao implements java.io.Serializable {
 			Date dppDateExecDebut, Date dppDateExecFin, String dppActeurSaisie, String dppStrCode,
 			String dppStatutRetour, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi,
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
-			String dppBailleur, String mdtCode, String mdtTymCode, String mdtLibelleCourt,
+			String dppBailleur,String dppRecherche ,String mdtCode, String mdtTymCode, String mdtLibelleCourt,
 			 String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleLong,
 			String lbgImputation, String natLibelle) {
 		this.dppId = dppId;
@@ -141,6 +142,7 @@ public class VPpmDao implements java.io.Serializable {
 		this.dppPieceDao = dppPieceDao;
 		this.dppDacCode = dppDacCode;
 		this.dppBailleur = dppBailleur;
+		this.dppRecherche = dppRecherche;
 		this.mdtCode = mdtCode;
 		this.mdtTymCode = mdtTymCode;
 		this.mdtLibelleCourt = mdtLibelleCourt;
@@ -521,6 +523,15 @@ public class VPpmDao implements java.io.Serializable {
 
 	public void setDppBailleur(String dppBailleur) {
 		this.dppBailleur = dppBailleur;
+	}
+	
+	@Column(name = "DPP_RECHERCHE", length = 4000)
+	public String getDppRecherche() {
+		return this.dppRecherche;
+	}
+
+	public void setDppRecherche(String dppRecherche) {
+		this.dppRecherche = dppRecherche;
 	}
 	
 	@Column(name = "MDT_CODE", nullable = false, length = 15)

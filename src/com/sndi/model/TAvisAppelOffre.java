@@ -30,14 +30,14 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private TDacSpecs TDacSpecs;
 	private TAdresseAvis TAdresseAvis;
 	private TStatut TStatut;
-	private String aaoLibelle;
+	public String aaoLibelle;
 	private Date aaoDteSaisi;
 	private Date aaoDtePub;
 	private Date aaoDteOuvTec;
 	private String aaoDteHeurOuv;
 	private Date aaoDteOuvFin;
 	private long aaoNbrLot;
-	private long aaoNbrOuv;
+	public long aaoNbrOuv;
 	private long aaoDelaiVal;
 	private String aaoNatInt;
 	private String aaoTaux;

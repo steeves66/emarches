@@ -605,7 +605,7 @@
 				        </span>
                       <p:inputText styleClass="form-control" type="text" value="#{ppmController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}" ></p:inputText> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.chargerPppmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                      <p:commandLink action="#{ppmController.chargerPpmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
 					 </div>
 					 </div>
@@ -811,12 +811,12 @@
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affDppDateValAc}" style="color:red; font-weight:bold">
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affDppDateValAc}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        </p:column>
@@ -824,7 +824,7 @@
 				         
 				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-1" >
          				<h:outputText value="#{slctdTb.affDppDateValCpmp}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
@@ -1081,13 +1081,13 @@
 				         
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValAc}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
 				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValCpmp}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				      
@@ -1149,13 +1149,13 @@
 				        
 				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValAc}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
 				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValCpmp}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				      
@@ -1214,13 +1214,13 @@
 				        
 				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValAc}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
 				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValCpmp}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				      
@@ -1282,13 +1282,13 @@
 				        
 				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValAc}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
 				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValCpmp}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				      

@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Date;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -261,6 +262,8 @@ public class DaoController {
 	 private String dacCode ="";
 	 private String sitDac ="";
 	 private String natPiece ="";
+	 private Date ouvTech;
+	 private Date ouvFin;
 	 private String libelleFournitures ="DAO_Fournitures_et_services_connexes.doc";
 	 private String libelleTravaux ="dtao_travaux.doc";
 	 private String libellePrestations ="dtao_prestation.doc";
@@ -334,6 +337,7 @@ public class DaoController {
 	  private boolean pavet6 = false;
 	  private boolean validCorrection = false;
 	  private boolean etatDaoCorrige = false;
+	  private boolean ouvTechnique = true;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -2253,7 +2257,21 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		        }
 	       }
 	  
-	  
+	//Contôle sur le nombre d'ouverture
+	public void verifOuverture() {
+		if(newAvis.aaoNbrOuv == 2) {
+			ouvTechnique = true;
+			
+		  }else {
+			  ouvTechnique = false;
+			  //ouvFin = ouvTech;
+		}
+	}
+	
+	
+	public void equalDate() {
+		ouvFin = ouvTech;
+	}
 	  
 	  
 	//Examen des pièces du DAO par le Chargé d'Etudes du binôme
@@ -2575,6 +2593,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					     userController.setTexteMsg("DAO N° "+dao.getDacCode()+" Initié avec succès!");
 						 userController.setRenderMsg(true);
 						 userController.setSevrityMsg("success");
+						 
+						 newAvis.aaoLibelle = dao.getDacObjet();
 		         }
     	 
     	        }
@@ -2598,10 +2618,16 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 		userController.setTexteMsg("Pièces enrégisteé avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
+				
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Pièces enrégisteé avec succès!", "");
+				FacesContext.getCurrentInstance().addMessage(null, msg);
 	 		 }
     		userController.setTexteMsg("Pièces enrégisteé avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
+			
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Pièces enrégisteé avec succès!", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
       }
      
      
@@ -2771,6 +2797,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             	            	      newAvis.setAaoCode(keyGen.getCodeAvis());
             	          		      newAvis.setTDacSpecs(dao);
             	          		      newAvis.setTAdresseAvis(new TAdresseAvis(numDetailAdr)); 
+            	          		      newAvis.setAaoDteOuvFin(ouvFin);
+            	          		      newAvis.setAaoDteOuvTec(ouvTech);
             	          		      newAvis.setTStatut(new TStatut("D1S"));
             	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
             	          		      iservice.addObject(newAvis); 
@@ -3160,15 +3188,15 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	public void opendaoType() throws IOException{
 		  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
 			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
-			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
+			 // downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
 		  }else
 			  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
 			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
-			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
 		  }else
 			 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
 			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SERVICES+libellePrestations, libellePrestations); 
-			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+			// downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
 		    }
 	  }
 	
@@ -5423,6 +5451,30 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setEtatDaoCorrige(boolean etatDaoCorrige) {
 		this.etatDaoCorrige = etatDaoCorrige;
+	}
+
+	public boolean isOuvTechnique() {
+		return ouvTechnique;
+	}
+
+	public void setOuvTechnique(boolean ouvTechnique) {
+		this.ouvTechnique = ouvTechnique;
+	}
+
+	public Date getOuvTech() {
+		return ouvTech;
+	}
+
+	public void setOuvTech(Date ouvTech) {
+		this.ouvTech = ouvTech;
+	}
+
+	public Date getOuvFin() {
+		return ouvFin;
+	}
+
+	public void setOuvFin(Date ouvFin) {
+		this.ouvFin = ouvFin;
 	}
 	
 		
