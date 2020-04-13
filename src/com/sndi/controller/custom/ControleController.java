@@ -1838,8 +1838,8 @@ public class ControleController {
 			 //DAO
 			 if(action.equalsIgnoreCase("ENGDAO")) {
 				  type = "DAC";
-				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE";
-			       libelle1="Saisie d'un nouveau DAC";
+				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
+			       libelle1="LISTE DES DOSSIERS D'APPEL A CONCURRENCE (DAC)";
 			       libellesmall ="Saisie d'un nouveau DAC";
 			       panelDetail=false;
 				   panelForm=true;
