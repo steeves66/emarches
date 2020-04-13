@@ -356,76 +356,132 @@
             
             <div class="row">
             
-            <div class="col-md-12">
             
-            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouvel Avis" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{agpmController.renderPage('agpm2','ENG')}"  update=":content">
-				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvel AGPM</span>
-				</p:commandLink>
-                     
-                     
-                     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-				    <div class="input-group input-group-sm col-md-3">
-                     <label >
-                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-                         
-                          <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-					 </h:panelGroup>
-					 
-					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-					 <div class="input-group input-group-sm col-md-3">
-                      <label >
-                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-                          <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-					 </h:panelGroup>
-					 
-					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
-					 <div class="input-group input-group-sm col-md-3">
-                      <label >
-                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-                         
-                          <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-					 </h:panelGroup>
-					
             </div>
-            </div>
-                 <h:panelGroup rendered="#{controleController.panel1}">
-					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.affichageListe}" emptyMessage="Aucun Avis enregistré" rows="10" 
-                         paginator="true" draggableColumns="true"
-                         rowsPerPageTemplate="5,10,15" >
-                         
+                 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+            <div class="row">
+              
+                 <div class="col-md-12">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
+            <div class="col-md-2 "><div  style="color: #fff">
+             <label for="gestion1" class="col-sm-5 control-label">GESTION</label>
+	              <div class="col-sm-6">
+		                    <p:selectOneMenu id="gestion1" value="#{agpmController.gesCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{agpmController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+	               </div>
+            </div></div>
+         </div>
+         <div class="box-body">
+          <div class="row">
+          
+           <div class="col-md-5">
+	           <div class="form-group">
+		                   <label for="mini3" class="col-sm-2 control-label">Autorité Contractante</label>
+		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
+		                  <div class="col-sm-10">
+		                   <p:inputTextarea  value="#{userController.fonction.fonLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{agpmController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{agpmController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                </div>
+	            </div> 
+	            
+	            
+	            <div class="col-md-7">
+	           <div class="form-group">
+		                  <label for="mini" class="col-sm-1 control-label">Ministère</label>
+		                  <div class="col-sm-11">
+		                    <p:inputTextarea  value="#{userController.fonction.TStructure.TMinistere.minLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+		                  </div>
+		                </div>
+	            </div> 
+
+	      </div>
+	      
+	      
+	   
+	      
+         </div>
+               </div>
+      </div>
+
+				<div class="col-md-12">
+					<div class="box box-success box-solid">
+						<div class="box-header with-border">
+							<div class="col-md-2 ">
+								<div style="color: #fff">LISTE DES AGPM</div>
+							</div>
+						
+						<div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink  styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{agpmController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{agpmController.chargerFiltreRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>
+					 
+					  <h:panelGroup rendered="#{controleController.searchPgspm}">
+						<div class="col-md-3 ">	
+					    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{pgpmAcController.reinitialiserPgspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmAcController.chargerPgspmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>
+					 </h:panelGroup>
+					 <div class="col-md-3 ">
+					 </div>
+					  <div class="col-md-2">
+					
+					  
+					  
+					 </div>
+					 
+							
+							<div class="col-md-1 ">
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau PGPM" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{agpmController.renderPage('agpm2','ENG')}"  update=":content">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvel AGPM</span>
+								</p:commandLink>
+							</div>
+							
+						</div>
+						<div class="box-body">
+							
+							    <h:panelGroup rendered="#{controleController.panel1}">
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.affichageListe}" 
+                        emptyMessage="Aucun AGPM enregistré" scrollable="true" scrollHeight="250" >
+                        
                           <p:column headerText="N°Agpm" styleClass="#{controleController.accord}">
                           <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affAgpCode}" style="color:red; font-weight:bold " />
@@ -530,12 +586,58 @@
                                
 				         </p:column>   
     </p:dataTable>
-      
     </h:panelGroup>
-    
+   
+							
+						</div>
+					</div>
+				</div>
+
+            </div>
+            
+            </h:panelGroup>
     
     <!--DEBUT PANEL DE VALIDATION -->
     <h:panelGroup rendered="#{controleController.panel2}">
+    <div class="col-md-12">
+					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+					 <div class="input-group input-group-sm col-md-3">
+                      <label >
+                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+                          <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
+					 </div>
+					 </h:panelGroup>
+					 
+					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+					 <div class="input-group input-group-sm col-md-3">
+                      <label >
+                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+                         
+                          <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
+					 </div>
+					 </h:panelGroup>
+					
+            </div>
            
 					<p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.validationListe}"  emptyMessage="Aucun AGPM enregistré" rows="10" 
                          paginator="true"
