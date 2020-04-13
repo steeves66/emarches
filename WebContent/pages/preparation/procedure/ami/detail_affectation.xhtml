@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-       #{controleController.type} N° #{etatsamiController.slctdTda.dafDacCode}
+       #{controleController.type} N° #{etatsDaoController.slctdTda.dafDacCode}
        
         <small>
          #{controleController.libelle1} 
@@ -27,12 +27,12 @@
              </p:commandLink>
             </li>
         <li>
-        <p:commandLink action="#{etatsamiController.renderPage('dao1')}" update=":content" > 
+        <p:commandLink action="#{etatsDaoController.renderPage('dao1')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | Index
              </p:commandLink>
             </li>
         <li class="active">
-         <p:commandLink action="#{etatsamiController.renderPage('dao2')}" update=":content" > 
+         <p:commandLink action="#{etatsDaoController.renderPage('dao2')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | Synthèse
              </p:commandLink>
         </li>
@@ -54,7 +54,7 @@
                </div>
                 <!-- /.box-header -->
 	             <div class="box-body">
-               <p:dataTable id="ppm" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsamiController.ppmListe}"  emptyMessage="Aucun PPM enregistré">
+               <p:dataTable id="ppm" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.ppmListe}"  emptyMessage="Aucun PPM enregistré">
          				<p:column headerText="N°" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.dppId}"/>
 				        </p:column>
@@ -90,43 +90,34 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsamiController.slctdTda.dafDacGestion}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTda.dafDacGestion}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
-	             
-	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Structure</label></div>
-                  <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"     style="width: 100%" readonly="true"/></label>
-                  </div>
-	             </div>
-	             
-	      
-	             
+	                          
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'opération</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.slctdTda.dafDacObjet}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTda.dafDacObjet}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de Marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsamiController.slctdTda.TTypeMarche.tymCode} : #{etatsamiController.slctdTda.TTypeMarche.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.slctdTda.TTypeMarche.tymCode} : #{etatsDaoController.slctdTda.TTypeMarche.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de Passation</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.slctdTda.TModePassation.mopCode} : #{etatsamiController.slctdTda.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTda.TModePassation.mopCode} : #{etatsDaoController.slctdTda.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	            </div>
 	            
 	              <fieldset>
 		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="465" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsamiController.piecesListe}" emptyMessage="Aucune pièce trouvée">
+		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="170" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
 	        <p:column headerText="Code" styleClass="col-sm-2">
 	            <h:outputText value="#{slctdTb.pidCode}" />
 	        </p:column>
@@ -143,7 +134,7 @@
 		           
 		            <fieldset>
 		               <legend style="font-weight: bold">DAO joint(s)</legend>
-		              <p:dataTable id="DaoDT" styleClass="table mb0 dt-on-steroids dataTable" scrollable="true" scrollHeight="465" var="slctdTb" value="#{etatsamiController.dossListe}"  emptyMessage="Aucun DAO enregistré">
+		      <p:dataTable id="DaoDT"  styleClass="table mb0 dt-on-steroids dataTable" scrollable="true" scrollHeight="100" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
@@ -154,9 +145,9 @@
 				        </p:column>
 				        
 				        <p:column headerText="Action" styleClass="no-sort col-sm-1">
-			 	             <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{etatsamiController.openDossier()}"  title="ouvrir"  ajax="false">
+			 	             <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{etatsDaoController.openDossier()}"  title="ouvrir"  ajax="false">
 			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
-				                <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsamiController.selectedDossier}" />
+				                <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.selectedDossier}" />
 				            </p:commandLink>	
  	                    </p:column>
 				         
@@ -180,14 +171,14 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Objet</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoLibelle}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoLibelle}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">National</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoNatInt == 'O'?'OUI':'NON'}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNatInt == 'O'?'OUI':'NON'}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
@@ -196,72 +187,70 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Nature des Prix</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoDelaiVal}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDelaiVal}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Délai de validité des offres</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsamiController.avis.aaoDelaiVal}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText> </label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoDelaiVal}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText> </label>
                   </div>
 	             </div>
-	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Marge de Préférence</label></div>
-                  <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"    style="width: 100%" readonly="true"/></label>
-                  </div>
-	             </div>
+	            
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Taux</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsamiController.avis.aaoTaux}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoTaux}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Avis de non objection du bailleur</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoAvisBail}"   style="width: 100%" readonly="true" /> </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoAvisBail}"   style="width: 100%" readonly="true" /> </label>
                   </div>
 	             </div>
 	             
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Responsabilité des bailleurs</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoRespBai}"   style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoRespBai}"   style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Mode de qualification</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	               <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Seuil de qualification </label></div>
-                  <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{etatsamiController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	                <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Nombre de lot </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoNbrLot}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrLot}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Vente par lot </label></div>
+                  <div class="col-sm-4"><label class="pull-right">Coût du DAO </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoVenteParLot == 'O'?'OUI':'NON'}"  style="width: 100%" readonly="true"/> </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoCoutDac}"  style="width: 100%" readonly="true"> 
+                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                    </h:outputText>
+                    </label>
                   </div>
 	             </div>
 	             
 	            </div>
 	            <fieldset>
 		               <legend style="font-weight: bold">Retrait du dao chez le representant</legend>
-	              <p:dataList id="detail" value="#{etatsamiController.listDetailAdresse}" var="slctdTb" type="definition">
+	              <p:dataList id="detail" value="#{etatsDaoController.listDetailAdresse}" var="slctdTb" type="definition">
                 <div class="box-body">
 			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 
 			     </div>
@@ -274,18 +263,18 @@
 		             <div class="row">
 		             
 		           <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-7">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoLieuRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoLieuRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                   <div class="col-sm-1"><label class="pull-right">Date</label></div>
-                    <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <div class="col-sm-2">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                    <div class="col-sm-1"><label class="pull-right">Heure</label></div>
-                    <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <div class="col-sm-2">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
               
 	             </div>
@@ -295,12 +284,12 @@
 		               <legend style="font-weight: bold">Ouverture</legend>
 		                <div class="row">
 		           <div class="col-sm-2"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-6">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoNbrOuv}" style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}" style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
@@ -308,17 +297,17 @@
 	              
 		           <div class="col-sm-2"><label class="pull-right">Nbre Ouv</label></div>
                   <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                   <div class="col-sm-2"><label class="pull-right">Ouv Tech</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoDteOuvTec}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvTec}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                    <div class="col-sm-2"><label class="pull-right">Ouv Fin</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsamiController.avis.aaoDteOuvFin}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvFin}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
               
 	             
@@ -336,7 +325,7 @@
                   </div>
                   <!-- /.box-header -->
 	             <div class="box-body">
-               <p:dataTable id="nbreLots" scrollable="true" scrollHeight="465" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsamiController.lotListe}"  emptyMessage="Aucun LOT enregistré">
+               <p:dataTable id="nbreLots" scrollable="true" scrollHeight="120" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.lotListe}"  emptyMessage="Aucun LOT enregistré">
 
 				        <p:column headerText="Libellé" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.laaObjet}" />
@@ -345,12 +334,7 @@
 				        <p:column headerText="Imputation" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.laaLbgImputation}" />
 				        </p:column>
-				        
-				        <p:column headerText="Cout Lot" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.laaMtCaut}" />
-				        </p:column>
-				         
-				        
+				        			        
                  </p:dataTable>     
             </div>
 	            <!-- /.box-header -->
@@ -374,37 +358,37 @@
             <h:panelGroup rendered="#{controleController.panelDao}">
             
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsamiController.opendaoType()}" ajax="false">
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsamiController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI type
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoType()}" ajax="false">
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsamiController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI type
+				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','AMI')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','DAO')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','VALAMI')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>

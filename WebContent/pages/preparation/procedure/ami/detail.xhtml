@@ -106,7 +106,7 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'opération : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.TDetailPlanPassation.dppObjet}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.affDacObjet}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
@@ -122,11 +122,23 @@
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.TModePassation.mopCode} : #{etatsDaoController.slctdTd.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
+	             <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Date Avis Bailleur : </label></div>
+                  <div class="col-sm-9">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.affDacDateBailleur}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Observation du Bailleur : </label></div>
+                  <div class="col-sm-9">
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.slctdTd.affDacAvisBailleur}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
 	            </div>
 	            
 	              <fieldset>
 		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="400" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
+		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="250" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
 	        <p:column headerText="Code" styleClass="col-sm-2">
 	            <h:outputText value="#{slctdTb.pidCode}" />
 	        </p:column>
@@ -142,8 +154,8 @@
 	             </div>
 		           
 		            <fieldset>
-		               <legend style="font-weight: bold">#{controleController.type} joint(s)</legend>
-		              <p:dataTable id="DaoDT" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
+		               <legend style="font-weight: bold">DAO joint(s)</legend>
+		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
@@ -251,9 +263,12 @@
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Vente par lot </label></div>
+                  <div class="col-sm-4"><label class="pull-right">Cout du DAO </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoVenteParLot == 'O'?'OUI':'NON'}"  style="width: 100%" readonly="true"/> </label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoCoutDac}"  style="width: 100%" readonly="true"> 
+                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                    </h:outputText>
+                    </label>
                   </div>
 	             </div>
 	             
@@ -273,17 +288,17 @@
 		             <div class="row">
 		             
 		           <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-7">
+                  <div class="col-sm-3">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.detail.aaoLieuRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                   <div class="col-sm-1"><label class="pull-right">Date</label></div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                    <div class="col-sm-1"><label class="pull-right">Heure</label></div>
-                    <div class="col-sm-1">
+                    <div class="col-sm-2">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
               
@@ -294,7 +309,7 @@
 		               <legend style="font-weight: bold">Ouverture</legend>
 		                <div class="row">
 		           <div class="col-sm-2"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-3">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" />   </label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Heure</label></div>
@@ -335,7 +350,7 @@
                </div>
                 <!-- /.box-header -->
 	             <div class="box-body">
-               <p:dataTable id="nbreLots" scrollable="true" scrollHeight="465" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.lotListe}"  emptyMessage="Aucun LOT enregistré">
+               <p:dataTable id="nbreLots" scrollable="true" scrollHeight="120" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.lotListe}"  emptyMessage="Aucun LOT enregistré">
 
 				        <p:column headerText="Libellé" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.laaObjet}" />
@@ -343,10 +358,6 @@
 				        
 				        <p:column headerText="Imputation" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.laaLbgImputation}" />
-				        </p:column>
-				        
-				        <p:column headerText="Cout lot" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.laaMtCaut}" />
 				        </p:column>
 				         
 				        
@@ -375,31 +386,35 @@
             </div>
             <!-- /.box-body -->
             </div>
-            
-            <!-- PANEL DE FERMER DAO -->
-            <h:panelGroup rendered="#{controleController.fermerApercuDao}">
+            <h:panelGroup rendered="#{controleController.panelDao}">
             
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				</p:commandLink>
+				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
+				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
 				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer DAO
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
@@ -422,104 +437,6 @@
 		        </h:panelGroup>
 		        
 		</h:panelGroup>
-		<!-- FIN PANEL FERMER DAO -->
-		
-		
-		<!-- DEBUT PANEL FERMER AMI -->
-		 <h:panelGroup rendered="#{controleController.fermerApercuAmi}">
-            
-               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer AMI
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','TRAAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','AMI')}"   style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','VALAMI')}"   style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		</h:panelGroup>
-		<!-- FIN PANEL FERMER AMI -->
-		
-		<!-- DEBUT PANEL FERMER PRQ -->
-				 <h:panelGroup rendered="#{controleController.fermerApercuPrq}">
-            
-               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','SAIPRQ')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','TRAPRQ')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','PRQ')}"   style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','VALPRQ')}"   style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		        </p:commandLink>
-		        </h:panelGroup>
-		        
-		</h:panelGroup>
-		<!-- FIN PANEL FERMER PRQ -->
 		 
     </section>
     </h:form>

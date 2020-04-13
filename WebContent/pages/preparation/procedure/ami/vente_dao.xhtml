@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-        #{controleController.libelle} #{amiController.slctdTd.affDacCode}
+        #{controleController.libelle} #{daoController.slctdTd.affDacCode}
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
@@ -69,19 +69,19 @@
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Code Dao</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.affDacCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.affDacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -89,13 +89,13 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{amiController.slctdTd.TTypeMarche.tymCode} : #{amiController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.TModePassation.mopCode} : #{amiController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             </div>
@@ -134,54 +134,64 @@
 		                   <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px" >
 		                   <legend><small>Détails de la vente </small></legend>
 		                   		<div class="box-body">
-		                        	
-		                     <div class="form-group horizontal">
-		                      <label for="ncc1" class="col-sm-2 control-label text-right"><b>Ncc :<span style="color:red;"> *</span></b></label>
-		                      <div class="col-sm-10">
-		                        <p:inputText  type="text"  styleClass="form-control" value="#{amiController.newCandidat.canSouNcc}" id="ncc1" style="width: 100%" />
+		                   		
+		                   <div class="form-group horizontal">
+		                      <label for="ncc1" class="col-sm-6 control-label text-center"><b>Le DAO fait-il objet d'une vente ou d'un retrait?<span style="color:red;"> *</span></b></label>
+		                      <div class="col-sm-6">
+		                         <p:selectOneRadio id="operation" value="#{daoController.sitDac}">
+		                            <p:ajax listener="#{daoController.checkVente()}" update="gnl:venteDf" />
+								      <f:selectItem itemLabel="Retrait" itemValue="Retrait" />
+								       <f:selectItem itemLabel="Vente" itemValue="Vente" />
+								   </p:selectOneRadio>
 		                      </div>
 	
+		                  </div>
+		                  
+		                  <hr />
+		                        	
+		                     <div class="form-group horizontal">
+		                      <label for="ncc1" class="col-sm-2 control-label text-right"><b>Ncc :</b></label>
+		                      <div class="col-sm-3">
+		                        <p:inputText  type="text"  styleClass="form-control" value="#{daoController.newCandidat.canSouNcc}" id="ncc1" style="width: 100%" />
+		                      </div>
+		                      
+		                      <h:panelGroup id="venteDf"> 
+		                      <h:panelGroup rendered="#{daoController.confirmVente}"> 
+		                     <label for="montant1" class="col-sm-2 control-label text-right"><b>Montant :</b></label>
+		                      <div class="col-sm-5">
+		                        <p:inputText   type="text" readonly="true" styleClass="form-control" value="#{daoController.newDao.dacCout}" id="montant1" style="width: 100%" >
+		                        <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                        </p:inputText>
+		                      </div>
+	                          </h:panelGroup>
+	                          </h:panelGroup>
 		                  </div>
                
 		                  <div class="form-group horizontal">
 		                      <label for="delaival1" class="col-sm-2 control-label text-right"><b>Nom :<span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-3">
-		                        <p:inputText  type="text"  styleClass="form-control" value="#{amiController.newCandidat.canNom}" id="delaival1" style="width: 100%" />
+		                        <p:inputText  type="text"  styleClass="form-control" value="#{daoController.newCandidat.canNom}" id="delaival1" style="width: 100%" />
 		                      </div>
 		
 		                        <label for="telephone1" class="col-sm-2 control-label text-right"><b>Téléphone :<span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-5">
-		                        <p:inputText   type="text"  styleClass="form-control" value="#{amiController.newCandidat.canTel}" id="telephone1" style="width: 100%" />
+		                        <p:inputText   type="text"  styleClass="form-control" value="#{daoController.newCandidat.canTel}" id="telephone1" style="width: 100%" />
 		                      </div>
 		                  </div>
 		                  
 		                   <div class="form-group horizontal">
 		                    
-		                      <label for="delaiexec1" class="col-sm-2 control-label text-right"><b> Prénoms :</b></label>
+		                      <label for="delaiexec1" class="col-sm-2 control-label text-right"><b> Prénoms :<span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-3">
-		                        <p:inputText   type="text"  styleClass="form-control" value="#{amiController.newCandidat.canPrenoms}"  id="delaiexec1" style="width: 100%"/>
+		                        <p:inputText   type="text"  styleClass="form-control" value="#{daoController.newCandidat.canPrenoms}"  id="delaiexec1" style="width: 100%"/>
 		                      </div>
 		
 		                      <label for="email1" class="col-sm-2 control-label text-right"><b> Email :</b></label>
 		                      <div class="col-sm-5">
-		                        <p:inputText   type="text"  styleClass="form-control" value="#{amiController.newCandidat.canEmail}" id="email1" style="width: 100%"/>
+		                        <p:inputText   type="text"  styleClass="form-control" value="#{daoController.newCandidat.canEmail}" id="email1" style="width: 100%"/>
 		                      </div>
 		                  </div>
 		                  
-		                  	<div class="form-group horizontal">
-		                      <label for="montant1" class="col-sm-2 control-label text-right"><b>Montant :<span style="color:red;"> *</span></b></label>
-		                      <div class="col-sm-3">
-		                        <p:inputText type="text"  styleClass="form-control" value="#{amiController.venteDetail.dveCout}" id="montant1" style="width: 100%">
-		                         <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                              <p:ajax event="blur" process="@this" update="montant1" /> 
-		                        </p:inputText>
-		                      </div>
-		
-		                      <label  class="col-sm-2 control-label text-right"></label>
-		                      <div class="col-sm-5">
-		                       
-		                      </div>
-		                  </div>
 		                        	         	
 		                   		</div>
 		                   </fieldset>
@@ -208,14 +218,15 @@
 		            
 		             
 	            </div>
+	            
 	             <div class="box-footer">
 	             
-				   <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{amiController.confirmPaie}" action="#{amiController.payer()}" style="background-color: #036d3b; color:#fff" update=":content">
+				   <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.confirmPaie}" action="#{daoController.payer()}" style="background-color: #036d3b; color:#fff" update=":content">
 				   <p:confirm header="Confirmation" message="Confirmez vous le paiement?" icon="ui-icon-alert" />
 				   <i class="ace-icon fa fa-save bigger-120"></i> Confirmer Paiement
 				   </p:commandLink>
 				      
-				    <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{amiController.etatRecu}" action="#{amiController.imprimerRecu()}" style="background-color: #f88b2e; color:#fff" ajax="false" update=":content">
+				    <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.etatRecu}" action="#{daoController.imprimerRecu()}" style="background-color: #f88b2e; color:#fff;border-color:#f88b2e" ajax="false" update=":content">
 				    <i class="ace-icon fa fa-save bigger-120"></i> Editer Recu
 				    </p:commandLink>
 	            </div> 
@@ -232,7 +243,7 @@
                        <div class="col-md-10"><div  style="color: #fff">PANIER</div></div>
                        <div class="col-md-2"></div>  
                    </div>
-                   <h:panelGroup rendered="#{amiController.etatVentePanierLot}"> 
+                   <h:panelGroup rendered="#{daoController.etatVentePanierLot}"> 
                    <div class="box-body">
                    <p:dataTable var="slctdTb" value="#{lotController.affichLots}"  id="cc" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun dossier enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
                             <p:column headerText="N° Lot" styleClass="col-sm-1">
@@ -265,7 +276,7 @@
                <div class="form-group">
                   <label for="MontLot" class="col-sm-9 control-label">Montant Total</label>
                   <div class="col-sm-3">
-                    <p:inputText  type="text" value="#{amiController.totalMontantLot}" styleClass="form-control" id="MontTot"  readonly="true">
+                    <p:inputText  type="text" value="#{daoController.totalMontantLot}" styleClass="form-control" id="MontTot"  readonly="true">
                     <f:convertNumber pattern="##,###.##"></f:convertNumber>
                     </p:inputText>
                   </div>
@@ -284,7 +295,7 @@
           </div>
         
 				      
-        <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','VETAMI')}" style="background-color: #f88b2e;" update=":content">
+        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VETDAO')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		
@@ -301,8 +312,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{amiController.filtreNcc}"  class="gui-input"  placeholder="Saisir le Ncc Tier"  > 
-						    <p:ajax event="keyup" update=":dlogSou:ndTbleSou" listener="#{amiController.filtrenNccCandidat()}" />
+							<p:inputText type="text" value="#{daoController.filtreNcc}"  class="gui-input"  placeholder="Saisir le Ncc Tier"  > 
+						    <p:ajax event="keyup" update=":dlogSou:ndTbleSou" listener="#{daoController.filtrenNccCandidat()}" />
 							</p:inputText>
 						
 						</label>
@@ -317,40 +328,40 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleSou" styleClass="table table-bordered table-hover" var="slctdTb" value="#{amiController.listSoumission}"
+						 <p:dataTable id="ndTbleSou" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listSoumission}"
 						  selectionMode="single" rowKey="#{slctdTb.entCode}"
 			               emptyMessage="Aucun candidat trouvé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Ncc Tier" styleClass="col-sm-1" >
-                           <h:commandLink id="ncc" title="Ncc" style="font-size:18px;"  action="#{amiController.onSelectSoumission()}">				        
+                           <h:commandLink id="ncc" title="Ncc" style="font-size:18px;"  action="#{daoController.onSelectSoumission()}">				        
          				  <h:outputText value="#{slctdTb.souNcc}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.soumission}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.soumission}" />
                                 </h:commandLink>
 				        </p:column>
 				        
 				        <p:column headerText="Sigle" styleClass="col-sm-2" >
-                           <h:commandLink id="sigle" title="Sigle" style="font-size:18px;"  action="#{amiController.onSelectSoumission()}">				        
+                           <h:commandLink id="sigle" title="Sigle" style="font-size:18px;"  action="#{daoController.onSelectSoumission()}">				        
          				  <h:outputText value="#{slctdTb.souSigleSte}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.soumission}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.soumission}" />
                           </h:commandLink>
 				        </p:column>
 				        
 				          <p:column headerText="Nom" styleClass="col-sm-2" >
-                           <h:commandLink id="non" title="Nom" style="font-size:18px;"  action="#{amiController.onSelectSoumission()}">				        
+                           <h:commandLink id="non" title="Nom" style="font-size:18px;"  action="#{daoController.onSelectSoumission()}">				        
          				  <h:outputText value="#{slctdTb.souNomCom}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.soumission}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.soumission}" />
                                 </h:commandLink>
 				        </p:column>
 				         <p:column headerText="Adresse" styleClass="col-sm-2" >
-                           <h:commandLink id="Adresse" title="Adresse" style="font-size:18px;"  action="#{amiController.onSelectSoumission()}">				        
+                           <h:commandLink id="Adresse" title="Adresse" style="font-size:18px;"  action="#{daoController.onSelectSoumission()}">				        
          				  <h:outputText value="#{slctdTb.souAdresse}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.soumission}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.soumission}" />
                                 </h:commandLink>
 				        </p:column>	
 				          <p:column headerText="Téléphone" styleClass="col-sm-1" >
-                           <h:commandLink id="Téléphone" title="Téléphone" style="font-size:18px;"  action="#{amiController.onSelectSoumission()}">				        
+                           <h:commandLink id="Téléphone" title="Téléphone" style="font-size:18px;"  action="#{daoController.onSelectSoumission()}">				        
          				  <h:outputText value="#{slctdTb.souTel}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.soumission}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.soumission}" />
                                 </h:commandLink>
 				        </p:column>			
 						</p:dataTable>
@@ -374,8 +385,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{amiController.filtreNcc}"  class="gui-input"  placeholder="Saisir le Ncc Tier"  > 
-						    <p:ajax event="keyup" update=":dlogCan:ndTbleEnt" listener="#{amiController.filtrenNccCandidat()}" />
+							<p:inputText type="text" value="#{daoController.filtreNcc}"  class="gui-input"  placeholder="Saisir le Ncc Tier"  > 
+						    <p:ajax event="keyup" update=":dlogCan:ndTbleEnt" listener="#{daoController.filtrenNccCandidat()}" />
 							</p:inputText>
 						
 						</label>
@@ -390,40 +401,40 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleEnt" styleClass="table table-bordered table-hover" var="slctdTb" value="#{amiController.listTiers}"
+						 <p:dataTable id="ndTbleEnt" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listTiers}"
 						  selectionMode="single" rowKey="#{slctdTb.entCode}"
 			               emptyMessage="Aucun candidat trouvé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Ncc Tier" styleClass="col-sm-1" >
-                           <h:commandLink id="ncc" title="Ncc" style="font-size:18px;"  action="#{amiController.onSelectTiers()}">				        
+                           <h:commandLink id="ncc" title="Ncc" style="font-size:18px;"  action="#{daoController.onSelectTiers()}">				        
          				  <h:outputText value="#{slctdTb.tieNcc}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.tiers}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.tiers}" />
                                 </h:commandLink>
 				        </p:column>
 				        
 				        <p:column headerText="Sigle" styleClass="col-sm-2" >
-                           <h:commandLink id="sigle" title="Sigle" style="font-size:18px;"  action="#{amiController.onSelectTiers()}">				        
+                           <h:commandLink id="sigle" title="Sigle" style="font-size:18px;"  action="#{daoController.onSelectTiers()}">				        
          				  <h:outputText value="#{slctdTb.tieSigleSte}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.tiers}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.tiers}" />
                           </h:commandLink>
 				        </p:column>
 				        
 				          <p:column headerText="Nom" styleClass="col-sm-2" >
-                           <h:commandLink id="non" title="Nom" style="font-size:18px;"  action="#{amiController.onSelectTiers()}">				        
+                           <h:commandLink id="non" title="Nom" style="font-size:18px;"  action="#{daoController.onSelectTiers()}">				        
          				  <h:outputText value="#{slctdTb.tieNomCom}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.tiers}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.tiers}" />
                                 </h:commandLink>
 				        </p:column>
 				         <p:column headerText="Adresse" styleClass="col-sm-2" >
-                           <h:commandLink id="Adresse" title="Adresse" style="font-size:18px;"  action="#{amiController.onSelectTiers()}">				        
+                           <h:commandLink id="Adresse" title="Adresse" style="font-size:18px;"  action="#{daoController.onSelectTiers()}">				        
          				  <h:outputText value="#{slctdTb.tieAdresse}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.tiers}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.tiers}" />
                                 </h:commandLink>
 				        </p:column>	
 				          <p:column headerText="Téléphone" styleClass="col-sm-1" >
-                           <h:commandLink id="Téléphone" title="Téléphone" style="font-size:18px;"  action="#{amiController.onSelectTiers()}">				        
+                           <h:commandLink id="Téléphone" title="Téléphone" style="font-size:18px;"  action="#{daoController.onSelectTiers()}">				        
          				  <h:outputText value="#{slctdTb.entTel}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{amiController.tiers}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.tiers}" />
                                 </h:commandLink>
 				        </p:column>			
 						</p:dataTable>
@@ -454,34 +465,34 @@
                <div class="form-group">
 	                  <label for="nom10" class="col-sm-3 control-label"><b>Ncc</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{amiController.newEntre.tieNcc}"  styleClass="form-control" id="nom10" style="width: 100%"/>
+	                    <p:inputText type="text" value="#{daoController.newEntre.tieNcc}"  styleClass="form-control" id="nom10" style="width: 100%"/>
 	                  </div>
 	                </div>
 	                
 	                  <div class="form-group">
 	                  <label for="nom12" class="col-sm-3 control-label"><b>Sigle</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{amiController.newEntre.tieSigleSte}"  styleClass="form-control" id="nom12" style="width: 100%"/>
+	                    <p:inputText type="text" value="#{daoController.newEntre.tieSigleSte}"  styleClass="form-control" id="nom12" style="width: 100%"/>
 	                  </div>
 	                </div>
 	                <div class="form-group ">
 	                  <label for="adresse1" class="col-sm-3 control-label"><b>Nom</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{amiController.newEntre.tieNomCom}"  styleClass="form-control" id="adresse1" style="width: 100%"/>
+	                    <p:inputText type="text" value="#{daoController.newEntre.tieNomCom}"  styleClass="form-control" id="adresse1" style="width: 100%"/>
 	                  </div>
 	                </div>
 	                
 	                 <div class="form-group ">
 	                  <label for="adresse13" class="col-sm-3 control-label"><b>Adresse</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{amiController.newEntre.tieAdresse}"  styleClass="form-control" id="nomEntreprise" style="width: 100%"/>
+	                    <p:inputText type="text" value="#{daoController.newEntre.tieAdresse}"  styleClass="form-control" id="nomEntreprise" style="width: 100%"/>
 	                  </div>
 	                </div>
 	                
 	                 <div class="form-group ">
 	                  <label for="adresse12" class="col-sm-3 control-label"><b>Téléphone</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{amiController.newEntre.tieTel}"  styleClass="form-control" id="adresse12" style="width: 100%"/>
+	                    <p:inputText type="text" value="#{daoController.newEntre.tieTel}"  styleClass="form-control" id="adresse12" style="width: 100%"/>
 	                  </div>
 	                </div>
 	                
@@ -493,7 +504,7 @@
                 <button type="button" class="btn btn-warning pull-left" data-dismiss="modal">Close</button>
                 
                 
-                <p:commandLink action="#{amiController.saveTiers()}" update=":dlogCan:ndTbleEnt"  styleClass="btn btn-success">
+                <p:commandLink action="#{daoController.saveTiers()}" update=":dlogCan:ndTbleEnt"  styleClass="btn btn-success">
                      Enregistrer
                  </p:commandLink>
               </div>
