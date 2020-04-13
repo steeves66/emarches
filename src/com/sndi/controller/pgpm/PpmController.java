@@ -1361,6 +1361,7 @@ public class PpmController {
 			 	  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
 			 	  		affichagePpm.setAffDppCode(detailPass.getDppCode());
 			 	  		affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
+			 	  		affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobCpmp());
 			 	  		affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
 			 	  		affichagePpm.setAffDppDateAvisAoPublicat(detailPass.getDppDateAvisAoPublication());
 			 	  		affichagePpm.setAffDppDateDaoApprobBail(detailPass.getDppDateDaoApprobBail());
@@ -1370,6 +1371,7 @@ public class PpmController {
 			 	  		affichagePpm.setAffDppDateExecDebut(detailPass.getDppDateExecDebut());
 			 	  		affichagePpm.setAffDppDateExecFin(detailPass.getDppDateExecFin());
 			 	  		affichagePpm.setAffDppDateJugementOffre(detailPass.getDppDateJugementOffre());
+			 	  		affichagePpm.setAffDppDateJugementTech(detailPass.getDppDateJugementOffreTec());
 			 	  		affichagePpm.setAffDppDateMarcheApprob(detailPass.getDppDateMarcheApprob());
 			 	  		affichagePpm.setAffDppDateNegociation(detailPass.getDppDateNegociation());
 			 	  		affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
@@ -1384,6 +1386,7 @@ public class PpmController {
 			 	  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
 			 	  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
 			 	  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
+			 	  		affichagePpm.setAffDppBailleur(detailPass.getDppBailleur());
 			 	  		iservice.updateObject(affichagePpm);
 			 	  		
 			 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
@@ -1397,7 +1400,7 @@ public class PpmController {
 				      			  iservice.updateObject(affgp);
 				      	
 				      	List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-					      new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+					      new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 				      	TDetailPlanPassation detP = new TDetailPlanPassation();
 				      			if(!DET.isEmpty()) detP =DET.get(0); 
 				      			    detP.setDppRecherche(rechercheAll);
@@ -1493,6 +1496,7 @@ public class PpmController {
 			 	  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
 			 	  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
 			 	  		affichagePpm.setAffDppSourceFin(detailPass.getDppSourceFin());
+			 	  		affichagePpm.setAffDppBailleur(detailPass.getDppBailleur());
 			 	  		iservice.addObject(affichagePpm);
 			 	  		
 			 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
@@ -1507,7 +1511,7 @@ public class PpmController {
 				      	  
 
 				      List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 							 TDetailPlanPassation detP = new TDetailPlanPassation();
 							  if(!DET.isEmpty()) detP =DET.get(0); 
 							  detP.setDppRecherche(rechercheAll);
@@ -1622,6 +1626,7 @@ public class PpmController {
 		 		  		affichagePpm.setAffDppStatutDao(detailPass.getDppStatutDao());
 		 		  		affichagePpm.setAffDppPieceDao(detailPass.getTModeleDacType().getMdtCode());
 		 		  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
+		 		  		affichagePpm.setAffDppBailleur(detailPass.getDppBailleur());
 		 		  		iservice.addObject(affichagePpm);
 		 		  		
 		 		  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
@@ -1636,7 +1641,7 @@ public class PpmController {
 		 		  		
 		 		  		
 				      List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 							  TDetailPlanPassation detP = new TDetailPlanPassation();
 								  if(!DET.isEmpty()) detP =DET.get(0); 
 								     detP.setDppRecherche(rechercheAll);
@@ -1697,10 +1702,10 @@ public class PpmController {
 
 	  }
 	  	 
-	  	 
+	  	 //Mis à jour des dates prévisionnelles
+	  	 @Transactional
 	  	 public void majDate() {
 	  		        detailPass.setDppApprobAno(geneDate.getDppApprobAno());
-	  		        detailPass.setDppBailleur(geneDate.getDppBailleur());
 	  		        detailPass.setDppDate(geneDate.getDppDate());
 	  		        detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
 	  		        detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
@@ -1716,10 +1721,27 @@ public class PpmController {
 	  		        detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
 	  		        detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 	  		        detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
-	  		        detailPass.setDppDateValAc(geneDate.getDppDateValAc());
-	  		        detailPass.setDppDateValCpmp(geneDate.getDppDateValCpmp());
-	  		        detailPass.setDppDateValDmp(geneDate.getDppDateValDmp());
 				    iservice.updateObject(detailPass);
+				    
+				    TAffichagePpm affichagePpm = new TAffichagePpm();
+				    affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
+				    affichagePpm.setAffDppDate(detailPass.getDppDate());
+				    affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
+				    affichagePpm.setAffDppDateAttApprobCmp(detailPass.getDppDateAttApprobCpmp());
+				    affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
+				    affichagePpm.setAffDppDateDaoApprobDmp(detailPass.getDppDateDaoApprobDmp());
+				    affichagePpm.setAffDppDateElabRapport(detailPass.getDppDateElabRapport());
+				    affichagePpm.setAffDppDateExecDebut(detailPass.getDppDateExecDebut());
+				    affichagePpm.setAffDppDateExecFin(detailPass.getDppDateExecFin());
+				    affichagePpm.setAffDppDateJugementOffre(detailPass.getDppDateJugementOffre());
+				    affichagePpm.setAffDppDateJugementTech(detailPass.getDppDateJugementOffreTec());
+				    affichagePpm.setAffDppDateMarcheApprob(detailPass.getDppDateMarcheApprob());
+				    affichagePpm.setAffDppDateNegociation(detailPass.getDppDateNegociation());
+				    affichagePpm.setAffDppDateOuvertOf(detailPass.getDppDateOuvertOf());
+				    affichagePpm.setAffDppDateOuvertOt(detailPass.getDppDateOuvertOt());
+				    affichagePpm.setAffDppDateSignatAc(detailPass.getDppDateSignatAc());
+				    affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
+				    iservice.updateObject(affichagePpm);
 				    boutonEdit =true;
 				     //controleController.btn_creerDetailPpm =true;
 					 //controleController.btn_maj_datePpm = true;

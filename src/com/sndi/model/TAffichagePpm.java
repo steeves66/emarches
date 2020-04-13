@@ -74,6 +74,8 @@ public class TAffichagePpm implements java.io.Serializable {
 	private String affDppTypeFinance;
 	private Date affDppApprobAno;
 	private Date affDppDteModif;
+	private Date affDppDateAttApprobCmp;
+	private Date affDppDateJugementTech;
 	
 
 
@@ -107,7 +109,7 @@ public class TAffichagePpm implements java.io.Serializable {
 			Date affDppDateSignatAttrib, Date affDppDateSignatAc, Date affDppDateMarcheApprob, Date affDppDateExecDebut,
 			Date affDppDateExecFin,long  affDppId, String affDppStatutRetour,String affDppStrConduc,
 			String affDppStrBenefi, Date affDppDateSaisie,String affDppPartiePmePmi, String affDppStatutDao,String affDppPieceDao,Date affDppInvEntre, String affDppRecherche, Date affDppDateValAc,
-			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance, Date affDppDteModif) {
+			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance, Date affDppDteModif,Date affDppDateAttApprobCmp, Date affDppDateJugementTech) {
 		this.affId = affId;
 		this.TLBudgets = TLBudgets;
 		this.TFonction = TFonction;
@@ -157,6 +159,8 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affDppBailleur = affDppBailleur;
 		this.affDppTypeFinance = affDppTypeFinance;
 		this.affDppDteModif = affDppDteModif;
+		this.affDppDateAttApprobCmp = affDppDateAttApprobCmp;
+		this.affDppDateJugementTech = affDppDateJugementTech;
 	}
 
 	@Id
@@ -648,6 +652,26 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setAffDppDteModif(Date affDppDteModif) {
 		this.affDppDteModif = affDppDteModif;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AFF_DPP_DATE_ATT_APPROB_CMP", length = 7)
+	public Date getAffDppDateAttApprobCmp() {
+		return this.affDppDateAttApprobCmp;
+	}
+
+	public void setAffDppDateAttApprobCmp(Date affDppDateAttApprobCmp) {
+		this.affDppDateAttApprobCmp = affDppDateAttApprobCmp;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AFF_DPP_DATE_JUGEMENT_TECH", length = 7)
+	public Date getAffDppDateJugementTech() {
+		return this.affDppDateJugementTech;
+	}
+
+	public void setAffDppDateJugementTech(Date affDppDateJugementTech) {
+		this.affDppDateJugementTech = affDppDateJugementTech;
 	}
 
 }
