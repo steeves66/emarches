@@ -252,7 +252,48 @@ public class ProjetReport {
 						}
 
 				}
-				//Fin Print Fiche avec 2 parametre de type long
+				//Fin Print Fiche avec 1 parametre de type string
+				
+				
+				//Print Fiche avec 3 parametres de type String
+				public void stringparam3(String code,String nom,String prenoms,String reportName, String jrxmlName ){
+					
+					String pathdir ="";
+					 
+					 pathdir = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/report/images/");
+						pathdir += "/";
+						
+						Map<String, Object> param = new HashMap<String, Object>();
+						param.put("param_code_1", code);
+						param.put("param_nom", nom);
+						param.put("param_prenom", prenoms);
+						param.put("param_image", pathdir);
+						try {
+						Connection conn = connectionUtils.getConnection();
+						String jrxmlFile = FacesContext.getCurrentInstance().getExternalContext()
+								.getRealPath("/report/" + jrxmlName + ".jrxml");
+						InputStream input = new FileInputStream(new File(jrxmlFile));
+						JasperReport jasperReport = JasperCompileManager.compileReport(input);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param, conn);
+						
+						HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance()
+								.getExternalContext().getResponse();
+						httpServletResponse.addHeader("contentType", "application/pdf");
+						httpServletResponse.addHeader("Content-disposition",
+								"attachment; filename=" + reportName + "-" + code+ ".pdf");
+
+						ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+						JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+						servletOutputStream.flush();
+						servletOutputStream.close();
+						FacesContext.getCurrentInstance().responseComplete();
+						 
+						} catch (Exception e) {
+							System.out.println(e);
+						}
+
+				}
+				//Fin Print Fiche avec 3 parametres de type String
 				
 				//Print Document Opérateur
 				public void showOperateurPDF(String opeMatricule){

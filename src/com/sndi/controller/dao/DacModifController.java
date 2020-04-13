@@ -1166,7 +1166,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));		 		 
 	 }*/
 	 
-	 //Chargement des pices du Dao
+	 //Chargement des pièces du Dao
 	 public void chargePiecesDao() {
 		 listePiecesDao.clear();
 		 listePiecesDao= ((List<VPieceDac>)iservice.getObjectsByColumn("VPieceDac",new ArrayList<String>(Arrays.asList("PID_LIBELLE")),

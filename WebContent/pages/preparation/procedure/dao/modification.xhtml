@@ -169,102 +169,49 @@
             </p:tab>
      
      
-     
         <p:tab id="creation" title="Initiation du #{controleController.type}" rendered="#{daoController.pavet2}" titleStyle="background-color: #f88b2e;background-image: none">
        
            <div class="row">
             <div class="col-md-12">
-                    <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN #{controleController.type}</div></div>
-         </div>
-         <div class="box-body">
-          <div class="row">
-	            <div class="col-md-2">
-	             <label for="gestion1" class="col-sm-5 control-label">Gestion<span style="color:red;"> *</span></label>
-	              <div class="col-sm-6">
-		            <p:inputText  type="text" value="#{daoController.slctdTd.TGestion.gesCode}" styleClass="form-control" id="gest" readonly="true" style="width: 100%" />
-	               </div>
-	            </div>
-	            <div class="col-md-10">
-	           <div class="form-group">
-		                  <label for="mini" class="col-sm-1 control-label">Ministère <span style="color:red;"> *</span></label>
-		                  <div class="col-sm-11">
-		                   <p:inputText  type="text" value="#{userController.fonction.TStructure.TMinistere.minLibelle}" styleClass="form-control" id="mini" readonly="true" style="width: 100%" />
-		                  </div>
-		                </div>
-	            </div> 
-	            
-	            
-	            <div class="col-md-1">
-	            </div>
-	            
-	            <div class="col-md-11">
-	           <div class="form-group">
-	           
-	           
-		                  <label for="mini3" class="col-sm-2 control-label">Autorité Contractante <span style="color:red;"> *</span></label>
-		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
-		                  <div class="col-sm-10">
-		                   <p:inputText  type="text" value="#{userController.fonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{daoController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{daoController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{daoController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		              
-		                  </h:panelGroup>
-		                
-		              
-		                </div>
-	            </div> 
-		      </div>
-	
-	         </div>
-	         
-	         
-	      
-               </div>
-                   
+               
+          <h:panelGroup rendered="#{controleController.ppmModePn}">     
            <div class="row">
             <div class="col-md-12">
               <div class="box box-success box-solid">
                <div class="box-header with-border">
                 <div class="col-md-12 ">
-                   <div  style="color: #fff"> LE(S) PPM DU #{controleController.type}</div>
+                   <div  style="color: #fff">CHOISIR LE(S) PPM POUR CREER VOTRE #{controleController.type}</div>
                  </div>
                 </div>
                <div class="box-body">
                  <div class="input-group input-group-sm col-md-3">
-                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero du PPM"></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
-                    </span>
+                      <label >
+                      <p:inputText type="text"  value="#{daoController.multiFiltre}"  placeholder="saisir du PPM"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{daoController.chargeRecherchePPM()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                        
+
+                      <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargePPM()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
 					 </div>
                <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
-					 emptyMessage="Aucun PPM enregistré" rows="5" 
+					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" emptyMessage="Aucun PPM enregistré" rows="5" 
                          paginator="true"
                          rowsPerPageTemplate="5,10,15" >
                          
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
                          <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
          				<h:outputText value="#{slctdTb.dppObjet}" />
 				        </p:column>
 
-                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.souLibelle}" />
-				        </p:column>
+                     
 				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.lbgImputation}" />
 				        </p:column>
@@ -279,28 +226,19 @@
          				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
 				        </p:column> 
 				        
-				         
 				       
-                      <p:column headerText="Actions" styleClass="col-sm-2">
-                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
-                             </p:commandLink>
-                            
-				         </p:column>   
                     </p:dataTable>
                     
                    <div>
                    
                    </div>
-    
-	             
-	 
+
               </div>
              </div>
            </div>
          </div>
-                
+         </h:panelGroup>
+         
          
         <div class="row">
           <div class="col-md-12">
@@ -316,14 +254,14 @@
 	           <div class="form-group">
                   <label for="relalisation" class="col-sm-3 control-label">Objet de l'Opération</label>
                   <div class="col-sm-9">
-                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.slctdTd.affDacObjet}" id="relalisation" style="width: 100%" />
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.updateDac.dacObjet}" id="relalisation" style="width: 100%" />
                   </div>
               </div>
                
                  <div class="form-group">
                   <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		                <p:inputText id="typMa1" type="text" value="#{daoController.slctdTd.TTypeMarche.tymCode}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                <p:inputText id="typMa1" type="text" value="#{daoController.updateDac.dacTymCode} : #{daoController.updateDac.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div> 
                  
@@ -331,7 +269,7 @@
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-                  <p:inputText id="modeP2" type="text" value="#{daoController.slctdTd.TModePassation.mopCode}" styleClass="form-control"  readonly="true" style="width: 100%" />    
+                  <p:inputText id="modeP2" type="text" value="#{daoController.daoDetail.mopCode} : #{daoController.updateDac.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />    
                   </div>
                 </div> 
             
@@ -339,15 +277,15 @@
 	           <div class="col-md-6">
 	               <fieldset>
 		               <legend>Liste des pièces constitutives du #{controleController.type}</legend>
-		  <p:dataTable id="basicDT" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listePices}"
-		    emptyMessage="Aucune pièce trouvée">
-
+		  <p:dataTable id="basicDT" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listePiecesDao}"
+                        emptyMessage="Aucune pièce trouvée">
+          
 	        <p:column headerText="Code" styleClass="col-sm-2">
 	            <h:outputText value="#{slctdTb.pidTpiCode}" />
 	        </p:column>
 	        
 	         <p:column headerText="Piece " styleClass="col-sm-10">
-	            <h:outputText value=" #{slctdTb.pidLibelle}" />
+	            <h:outputText value="#{slctdTb.pidLibelle}" />
 	        </p:column>
 	        
 	        </p:dataTable>
@@ -362,7 +300,12 @@
 	          
 	           
           </div>
-          <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{daoController.modifDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+          <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_pn}" action="#{daoController.saveDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+	      </p:commandLink>
+	      
+	      <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_ps}" action="#{daoController.saveDaoPs()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	      </p:commandLink>
@@ -372,10 +315,13 @@
        </div>
          
             </div>
+            
+            
            </div>
+       
          </p:tab>
          
-        <p:tab id="avis" title="Saisie des Avis d'appel d'Offre" rendered="#{daoController.pavet3}" titleStyle="background-color: #f88b2e;background-image: none">
+       <p:tab id="avis" title="Informations Générales" rendered="#{daoController.pavet3}" titleStyle="background-color: #f88b2e;background-image: none">
          <p:panel>
             <div class="row">    
             <div class="col-md-6">
@@ -387,7 +333,7 @@
           <div class="form-group">
                   <label for="objet" class="col-sm-3 control-label">Objet</label>
                   <div class="col-sm-9">
-                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.newAvis.aaoLibelle}"  id="objet" style="width: 100%" />
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.updateDac.aaoLibelle}"  id="objet" style="width: 100%" />
                   </div>
               </div>
               
@@ -401,7 +347,7 @@
               <div class="form-group">
                   <label for="Prix" class="col-sm-3 control-label">Nature des Prix</label>
                   <div class="col-sm-9"> 
-                     <p:selectOneRadio value="#{daoController.newAvis.aaoNatPrix}" id="console" unselectable="true">
+                     <p:selectOneRadio value="#{daoController.updateDac.aaoNatPrix}" id="console" unselectable="true">
 			            <f:selectItem itemLabel="Unitaire" itemValue="Unitaire" />
 			            <f:selectItem itemLabel="Global et forfetaire" itemValue="Global et forfetaire" />
 			        </p:selectOneRadio>
@@ -413,20 +359,21 @@
 				  <div class="col-sm-9">
 				     <table>
 				     <tr>
-				     <td style="width: 210px"> <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" styleClass="form-control"/></td>
+				     <td style="width: 210px"> <p:inputText type="text" value="#{daoController.updateDac.aaoDelaiVal}" styleClass="form-control"/></td>
 				     <td style="width: 210px" >
 				    
 				     <!-- <div class="col-sm-9">  -->
                      <p:selectOneRadio value="#{daoController.choixTaux}" id="console12" unselectable="true">
+                        <p:ajax  listener="#{daoController.checkTaux()}" update="gnl:libtaux" />
 			            <f:selectItem itemLabel="Marge de Préférence" itemValue="marge" />
 			        </p:selectOneRadio>
                   <!-- </div> -->
 				     </td>
 				          
-				    
-				     <td>Taux : </td>
-				     <td style="width: 80px"><p:inputText type="text" value="#{daoController.newAvis.aaoTaux}" styleClass="form-control"/> </td>
-				    
+				    <h:panelGroup  id="libtaux">
+				     <td><h:panelGroup rendered="#{daoController.libelleTaux}" id="taux">Taux :</h:panelGroup> </td>
+				     <td style="width: 80px"><h:panelGroup  rendered="#{daoController.etatTaux}"><p:inputText type="text" value="#{daoController.newAvis.aaoTaux}" styleClass="form-control"/></h:panelGroup> </td>
+				    </h:panelGroup>
 				     </tr>
 				     </table>
 				     
@@ -439,7 +386,7 @@
                    <table>
 				     <tr>
 				     <td style="width: 50px"> 
-				     <p:selectOneRadio value="#{daoController.newAvis.aaoAvisBai}" id="console22" unselectable="true">
+				     <p:selectOneRadio value="#{daoController.updateDac.aaoAvisBai}" id="console22" unselectable="true">
 			            <f:selectItem itemLabel="" itemValue="O" />
 			        </p:selectOneRadio>
 				     </td>
@@ -447,7 +394,7 @@
 				     <label  class="control-label">Responsabilité des bailleurs</label>
 				     </td>
 				     <td style="width: 320px">
-				     <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoRespBai}"   style="width: 100%" />
+				     <p:inputText  type="text" styleClass="form-control" value="#{daoController.updateDac.aaoRespBai}"   style="width: 100%" />
 				     </td>
 				     </tr>
 				     </table>
@@ -458,7 +405,7 @@
               <div class="form-group">
                   <label for="Prix" class="col-sm-3 control-label">Mode de qualification</label>
                   <div class="col-sm-9"> 
-                     <p:selectOneRadio id="consoless" value="#{daoController.newAvis.aaoRegQual}" >
+                     <p:selectOneRadio id="consoless" value="#{daoController.updateDac.aaoRegQual}" unselectable="true">
                      <p:ajax  listener="#{daoController.checkSituation()}" update="gnl:qualif"></p:ajax>
 			            <f:selectItem itemLabel="Score" itemValue="Unitaire" />
 			            <f:selectItem itemLabel="Conformité" itemValue="Conforme" />
@@ -473,22 +420,25 @@
                 <h:panelGroup  rendered="#{daoController.qualifLabel1}">  <label class="col-sm-3 control-label">Seuil de qualification<span style="color:red;"> *</span></label></h:panelGroup>
                 <h:panelGroup  rendered="#{daoController.qualifLabel2}">  <label class="col-sm-3 control-label">Précisez le mode<span style="color:red;"> *</span></label></h:panelGroup>
 				  <div class="col-sm-9">
-		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoPrecisModEval}"   style="width: 100%" />
+		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.updateDac.aaoPrecisModEval}"   style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
                 </h:panelGroup>
-                
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Nombre de lot<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%" />
+		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.updateDac.aaoNbrLot}"  style="width: 100%" />
                   </div>
                 </div>
+                
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Coût du DAO<span style="color:red;">*</span></label>
+                  <label class="col-sm-3 control-label">Coût du DAO<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}"  style="width: 100%" />
+		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.updateDac.aaoCoutDac}" id="coutD"  style="width: 100%" >
+		          <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	              <p:ajax event="blur" process="@this" update="gnl:coutD" />
+	              </p:inputText>
                   </div>
                 </div>
                 
@@ -500,17 +450,85 @@
             <div class="box box-success box-solid">
              <div class="box-header with-border">
              <div class="col-md-12 "><div  style="color: #fff">RETRAIT DES #{controleController.type} CHEZ LE REPRESENTANT</div></div> 
-			         
+			         <!-- <div class="col-md-2 "> 
+			           <p:commandLink oncomplete="PF('DetailAdr').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+								</p:commandLink>
+			         </div> -->
          </div>
          <div class="box-body">
-            
+         <p:messages id="messages" showDetail="false" autoUpdate="true"  closable="true"/>   
                   <div class="col-sm-12">
 		       	 </div>
+		       	  <div class="form-group">
+                  <label class="col-sm-1 control-label">Adresse</label>
+				  <div class="col-sm-10">
+                    <p:selectOneMenu value="#{daoController.updateDac.adaNum}" id="adress"
+			            effect="fade" style="width:100%"> 
+			            <f:selectItem  itemLabel="Choisir l'adresse"/>  
+			            <f:selectItems value="#{daoController.listAdresse}" var="l" itemLabel="#{l.adaLibelle}" itemValue="#{l.adaNum}" />	
+			            <p:ajax listener="#{daoController.chargeDetailAdresseDac()}" update=":gnl:detail"/>				   	   				    				   
+			       </p:selectOneMenu>
+                  </div>
+                  <div class="col-sm-1">
+                   <p:commandLink  oncomplete="PF('Adresse').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-plus"></i>
+				</p:commandLink>
+                  </div>
+                </div>
                 
-                <p:dataList id="detail" value="#{daoController.avisAdresse}" var="slctdTb" type="definition">
+                <p:dataList id="detail" value="#{daoController.listDetailAdresse}" var="slctdTb" type="definition">
 			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 
 			    </p:dataList>
+
+              <div class="row">
+                 <div class="box-body">
+	                  <div class="box-group" id="accordion">
+                          <div class="box-header">
+                            <h4 class="box-title">
+		                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class="collapsed">
+		                        cliquer Ici pour ajouter une nouvelle adresse
+		                      </a>
+		                    </h4>
+                          </div>
+                           <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="height: 0px;">
+		                    <div class="box-body">
+						        <div class="row">
+				                  <div class="col-sm-11">
+							            <p:selectOneMenu id="libelleAdresse" value="#{daoController.numLibAdr}" style="width: 100%">
+							               <f:selectItems value="#{daoController.listLibelleAdresse}" var="l" itemLabel="#{l.liaLibelle}" itemValue="#{l.liaNum}" />		   				    				   
+							            </p:selectOneMenu>
+				                  </div>
+				                  <div class="col-sm-1">
+				                  <p:commandLink  oncomplete="PF('AdresseLib').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="color:#fff;background-color: #f88b2e">
+											<i class="fa fa-plus"></i>
+								  </p:commandLink>
+				                  </div>
+				              </div>
+				               <div class="row">
+								  <div class="col-sm-12">
+						             <p:inputTextarea value="#{daoController.newDtailAdresse.dtaLibelle}" rows="2" cols="33" styleClass="form-control" style="width: 100%" />  
+				                  </div>
+				              </div>
+				                <div class="row">    
+					             <div class="col-sm-8"></div>
+					              <div class="col-sm-4">  
+									      <div class="pull-right ">
+							            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:10px" action="#{daoController.saveDetailAdresse()}"  update=":gnl:detail">
+							             <i class="ace-icon fa fa-save"></i> Enregistrer
+							            </p:commandLink>
+				                     </div>
+				                     
+				                     
+				                   </div>
+				              </div>
+		                    </div>
+		                  </div>
+	                  </div>
+                  </div>
+              </div>
               
+             
          </div>
          </div>
          </div>
@@ -524,15 +542,15 @@
            <div class="form-group">
                   <label  class="col-sm-1 control-label">Lieu</label>
 				  <div class="col-sm-4">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuRecep}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputText type="text" value="#{daoController.updateDac.aaoLieuRecep}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                   <label  class="col-sm-1 control-label">Date</label>
 				  <div class="col-sm-3">   
-                  <p:calendar  value="#{daoController.newAvis.aaoDateRecep}"  maxdate="#{pgpmAcController.dateToday}" style="width: 100%" /> 
+                  <p:calendar  value="#{daoController.updateDac.aaoDateRecep}"   style="width: 100%" /> 
                   </div>
                   <label  class="col-sm-1 control-label">Heure</label>
 				  <div class="col-sm-2">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoHeureRecep}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputText type="text" value="#{daoController.updateDac.aaoHeureRecep}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                 </div>
                  
@@ -548,12 +566,12 @@
                  <div class="form-group">
                   <label  class="col-sm-2 control-label">Lieu</label>
 				  <div class="col-sm-7">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputText type="text" value="#{daoController.updateDac.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                   
                    <label  class="col-sm-1 control-label">Heure</label>
 				  <div class="col-sm-2">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
+                  <p:inputText type="text" value="#{daoController.updateDac.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                 </div>
                  
@@ -561,7 +579,7 @@
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Nbre Ouverture</label>
 				  <div class="col-sm-2"> 
-                  <p:selectOneMenu value="#{daoController.newAvis.aaoNbrOuv}"  effect="fade" style="width:100%">   
+                  <p:selectOneMenu value="#{daoController.updateDac.aaoNbrOuv}"  effect="fade" style="width:100%">   
 			            <f:selectItem itemLabel="1" itemValue="1" />
                         <f:selectItem itemLabel="2" itemValue="2" />				   	   				    				   
 			       </p:selectOneMenu>
@@ -569,11 +587,11 @@
                   </div>
                   <label  class="col-sm-2 control-label">Ouv Technique</label>
 				  <div class="col-sm-2">    
-                  <p:calendar value="#{daoController.newAvis.aaoDteOuvTec}" maxdate="#{pgpmAcController.dateToday}" style="width: 100%" /> 
+                  <p:calendar value="#{daoController.updateDac.aaoDteOuvTec}"  style="width: 100%" /> 
                   </div>
                   <label  class="col-sm-2 control-label">Ouv Financière</label> 
 				  <div class="col-sm-2">
-                  <p:calendar value="#{daoController.newAvis.aaoDteOuvFin}" maxdate="#{pgpmAcController.dateToday}" style="width: 100%" />   
+                  <p:calendar value="#{daoController.updateDac.aaoDteOuvFin}"  style="width: 100%" />   
                   </div>
                 </div>
          </div>
@@ -588,7 +606,7 @@
                 <div class="pull-right ">
                        
                        
-					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.modifAvis()}"  update=":content">
+					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.saveAvis()}"  update=":content">
 				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Enregistrer
 				            </p:commandLink>
@@ -598,7 +616,7 @@
           </p:panel>
          </p:tab>
          
-		 <p:tab id="tabLot" title="Saisie des lots" rendered="#{daoController.pavet4}" titleStyle="background-color: #f88b2e;background-image: none">
+		 <p:tab id="tabLot" rendered="#{daoController.pavet4}" title="Saisie des lots" titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
@@ -655,6 +673,8 @@
 						  </p:commandLink>
 				        </p:column>
                          
+                
+				        
 				        
 				         <p:column headerText="Actions" width="4%">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLot}" title="Supprimer" update="gnl">
@@ -678,28 +698,42 @@
          
          
          
-        <p:tab id="Poffre" title="Pièces de l'offre" rendered="#{daoController.pavet5}" titleStyle="background-color: #f88b2e;background-image: none">
-           <div class="row">    
+         <p:tab id="Poffre" rendered="#{daoController.pavet5}" title="Pièces de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="row"> 
+           <p:messages id="message3" showDetail="false" autoUpdate="true"  closable="true"/>
+           
             <div class="col-md-12">
+            
+            	<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+			
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div class="col-md-9 "><div  style="color: #fff">PIECES CONSTITUTIVES DE L'OFFRE </div></div> 
          </div>
          <div class="box-body">
-             <p:dataTable id="TPOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.offresDao}" 
-               emptyMessage="Aucune Pièce trovée">
-                       
+             <p:dataTable id="TPOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listePiecesOffres}" 
+             rowKey="#{slctdTb.tpoCode}" selection="#{daoController.listeSelectionPiecesOffres}" emptyMessage="Aucune Pièce trovée">
+                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
          				<p:column headerText="PIECES" styleClass="col-sm-12">
 				            <h:outputText value="#{slctdTb.tpoLibelle}"/>
 				        </p:column>
                  </p:dataTable> 
                   <br/> 
-                 <!-- <div class="pull-right ">
+                 <div class="pull-right ">
 			            <p:commandLink action="#{daoController.savePieceOffres()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl:finance">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
-                 </div> --> 
+                 </div> 
          </div>
          
          
@@ -709,8 +743,7 @@
          </p:tab> 
              
               
-            
-            <p:tab id="confirmation" title="Confirmation" rendered="#{daoController.pavet6}" titleStyle="background-color: #f88b2e;background-image: none">
+    <p:tab id="confirmation" rendered="#{daoController.pavet6}" title="Confirmation" titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel>
              <div class="row">
              <div class="col-md-6">
@@ -730,7 +763,7 @@
 	             
 	              <fieldset>
 		               <legend style="font-weight: bold">PPM</legend>
-		               <p:dataTable id="ppm" var="slctdTb" value="#{daoController.ppmDao}"  styleClass="table dt-on-steroids mb0" emptyMessage="Aucun PPM trouvé">
+		               <p:dataTable id="ppm" var="slctdTb" value="#{daoController.listSelectionPpmDao}"  styleClass="table dt-on-steroids mb0" emptyMessage="Aucun PPM trouvé">
 					        <p:column headerText="N° Ordre" styleClass="col-sm-2">
 					            <h:outputText value="#{slctdTb.dppId}"/>
 					        </p:column>
@@ -743,25 +776,25 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.dacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.updateDac.tymCode} : #{daoController.updateDac.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.mopCode} : #{daoController.updateDac.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <fieldset>
 		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="pieces" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listePices}"  emptyMessage="Aucune pièce trouvée">
+		               <p:dataTable id="pieces" styleClass="table dt-on-steroids mb0" scrollable="true" scrollHeight="150" var="slctdTb" value="#{daoController.listePiecesDao}"  emptyMessage="Aucune pièce trouvée">
 					        <p:column headerText="Code" styleClass="col-sm-2">
 					            <h:outputText value="#{slctdTb.pidTpiCode}"/>
 					        </p:column>
@@ -770,6 +803,7 @@
 					            <h:outputText value="#{slctdTb.pidLibelle}" />
 					        </p:column>
 					    </p:dataTable>
+	        
 		           </fieldset>
 	             
 	            </div>
@@ -784,7 +818,7 @@
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	               <p:dataTable id="lots" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeLots}" emptyMessage="Aucun lot trouvé">
+	               <p:dataTable id="lots" styleClass="table dt-on-steroids mb0" scrollable="true" scrollHeight="150" var="slctdTb" value="#{daoController.listeLots}" emptyMessage="Aucun lot trouvé">
 					        <p:column headerText="N°lot" styleClass="col-sm-1">
 					            <h:outputText value="#{slctdTb.laaNum}"/>
 					        </p:column>
@@ -814,7 +848,7 @@
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Objet</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoLibelle}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoLibelle}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
@@ -828,56 +862,65 @@
 	            <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Nature des Prix</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoNatPrix}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoNatPrix}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Délai de validité des offres</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoDelaiVal}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoDelaiVal}" style="width: 100%"/></label>
+                  </div>
+	             </div>
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Marge de Préférence</label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoAvisBail}"   style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Taux</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoTaux}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoTaux}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Avis de non objection du bailleur</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoAvisBai == 'O'?'OUI':'NON'}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoAvisBai}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Responsabilité des bailleurs</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoRespBai}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoRespBai}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Mode de qualification</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoRegQual}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoRegQual}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Seuil de qualification</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoPrecisModEval}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoPrecisModEval}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Nombre de lot </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoNbrLot}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Vente par lot </label></div>
+                  <div class="col-sm-4"><label class="pull-right">Coût du DAO </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoVenteParLot == 'O'?'OUI':'NON' }"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoCoutDac}" style="width: 100%" readonly="true"> 
+                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                    </h:outputText>  
+                    </label>
                   </div>
 	             </div>
 	             <fieldset>
@@ -885,7 +928,7 @@
 		                <div class="row">
                   
 	                    </div>
-	             <p:dataList id="confdetail" value="#{daoController.avisAdresse}" var="slctdTb" type="definition">
+	             <p:dataList id="confdetail" value="#{daoController.listDetailAdresse}" var="slctdTb" type="definition">
 			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 
 			    </p:dataList>
 	             
@@ -895,16 +938,16 @@
 		               
 		         <div class="row">
                   <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoLieuRecep}"  style="width: 100%" readonly="true"/></label>
+                  <div class="col-sm-4">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoLieuRecep}"  style="width: 100%" readonly="true"/></label>
                   </div>
                     <div class="col-sm-1"><label class="pull-right">Date</label></div>
-                  <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoDateRecep}" style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText></label>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoDateRecep}" style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText></label>
                   </div>
                    <div class="col-sm-1"><label class="pull-right">Heure</label></div>
-                  <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoHeureRecep}" style="width: 100%" readonly="true"/></label>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoHeureRecep}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 		              
@@ -913,29 +956,29 @@
 		               <legend style="font-weight: bold">Ouverture</legend>
 		               
 		                <div class="row">
-                  <div class="col-sm-2"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoLieuExe}"  style="width: 100%" readonly="true"/></label>
+                  <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
+                  <div class="col-sm-8">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoLieuExe}"  style="width: 100%" readonly="true"/></label>
                   </div>
                     <div class="col-sm-2"><label class="pull-right">Heure</label></div>
                   <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoDteHeurOuv}" style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoDteHeurOuv}" style="width: 100%" readonly="true"/></label>
                   </div>
                  
 	             </div>
 		               
 		         <div class="row">
                   <div class="col-sm-2"><label class="pull-right">Nbre Ouverture</label></div>
-                  <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoNbrOuv}"  style="width: 100%" readonly="true"/></label>
+                  <div class="col-sm-3">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoNbrOuv}"  style="width: 100%" readonly="true"/></label>
                   </div>
                     <div class="col-sm-2"><label class="pull-right">Ouv Technique</label></div>
                   <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoDteOuvTec}" style="width: 100%" ><f:convertDateTime pattern="MM/dd/yyyy" type="date" /> </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoDteOuvTec}" style="width: 100%" ><f:convertDateTime pattern="MM/dd/yyyy" type="date" /> </h:outputText></label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Ouv Financière</label></div>
-                  <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoDteOuvFin}" style="width: 100%"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /> </h:outputText></label>
+                  <div class="col-sm-2">
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.updateDac.aaoDteOuvFin}" style="width: 100%"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /> </h:outputText></label>
                   </div>
 	             </div>
 		         </fieldset>
@@ -958,45 +1001,7 @@
            
 
             </p:panel>
-            </p:tab>
-             <p:tab id="Dossiers1" rendered= "#{agpmController.etatPavetDossier}" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
-             <p:panel header="Fichier(s) Joint(s)">
-
-              <div class="row">
-              <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-								<div class="col-xs-12 col-sm-12">
-								<p:fileUpload fileUploadListener="#{agpmController.upload}" multiple="true"
-			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
-			                      mode="advanced" dragDropSupport="true"
-			                          update=":gnl" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
-								</div>
-              </div>
-              <br/>
-	            <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES FICHIERS DE L'AGPM </div></div> 
-			         <div class="col-md-2 "> </div>
-               </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun Document enrégistré">
-	           <p:column headerText="Nom du document " styleClass="">
-	            <h:outputText value="#{doss.dagCommentaire}" />
-	        </p:column>
-	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
-	        
-				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmController.removeDossier}" title="Supprimer" update="gnl">
-                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-                   <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
-                </p:commandLink>
- 	        </p:column>
-	    </p:dataTable>    
-	            </div>
-	            </div>
-            </p:panel>
-            </p:tab>
-             
+            </p:tab>        
             
            
             </p:wizard>

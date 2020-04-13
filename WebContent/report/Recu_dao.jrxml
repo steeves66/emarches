@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-08T17:27:51 -->
+<!-- 2020-04-13T17:39:03 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Recu_dao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dfc941c-9bce-456e-b151-0f0b4eefdd5f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -8,6 +8,8 @@
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="param_code_1" class="java.lang.String"/>
+	<parameter name="param_nom" class="java.lang.String"/>
+	<parameter name="param_prenom" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select distinct dc.dac_code,v.ven_paie_code,dv.dve_cout,dv.dve_cout_lettre,can.can_nom ||' ' ||can.can_prenoms candidat,can.can_tel,f.fon_libelle||' '||op.ope_matricule fonlibelle,hd.hac_date
 from t_dac_specs dc, t_candidats can, t_vente_dac v, t_detail_vente dv, t_histo_dac hd,t_fonction f, t_assignation a, t_operateur op
@@ -20,7 +22,9 @@ and hd.hac_fon_cod = a.ass_fon_cod
 and a.ass_statut = 1
 and a.ass_ope_matricule = op.ope_matricule
 and hd.hac_sta_code = 'DVE'
-and dc.dac_code = $P{param_code_1}]]>
+and dc.dac_code = $P{param_code_1}
+and can.can_nom = $P{param_nom}
+and can.can_prenoms = $P{param_prenom}]]>
 	</queryString>
 	<field name="DAC_CODE" class="java.lang.String"/>
 	<field name="VEN_PAIE_CODE" class="java.lang.String"/>

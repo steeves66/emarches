@@ -82,9 +82,11 @@ import com.sndi.model.VDetailCorrectionCharge;
 import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
+import com.sndi.model.VPieceDac;
 import com.sndi.model.VPieces;
 import com.sndi.model.VPiecesOffreDao;
 import com.sndi.model.VPpmDao;
+import com.sndi.model.VUpdateDac;
 import com.sndi.model.VVenteLot;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
@@ -173,6 +175,8 @@ public class DaoController {
 	 private List<TLotAao> affichLots = new ArrayList<TLotAao>();
 	 private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
 	 private List<VDaoBailleur> listeDaoBailleur = new ArrayList<VDaoBailleur>();
+	 private List<VUpdateDac> listeDac = new ArrayList<VUpdateDac>();
+	 private List<VPieceDac> listePiecesDao = new ArrayList<VPieceDac>();
 	 private List<VFonctionMinistere> listeFonctions = new ArrayList<VFonctionMinistere>();
 	 private List<TDetailPlanPassation> listSelectionTransmission = new ArrayList<TDetailPlanPassation>();
 	 private List<VFonctionImputation> listeFonctionsImput = new ArrayList<VFonctionImputation>();
@@ -288,6 +292,7 @@ public class DaoController {
 	 private TSoumissions recupSoumission = new TSoumissions();
 	 private TTiers recupTiers = new TTiers();
 	 private VVenteLot nbreLot = new VVenteLot();
+	 private VUpdateDac updateDac= new VUpdateDac();
 	
 	 //Booléens
 	  private boolean skip;
@@ -379,7 +384,7 @@ public class DaoController {
 		//Charger la liste des offres du DAO p
 		 public void chargeOffresByDao() {
 			 offresDao= (List<VPiecesOffreDao>) iservice.getObjectsByColumn("VPiecesOffreDao", new ArrayList<String>(Arrays.asList("OPD_NUM")),
-						new WhereClause("OPD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));			
+						new WhereClause("OPD_DAC_CODE",WhereClause.Comparateur.EQ,""+updateDac.getDacCode()));			
 		 }
 		 
 		 
@@ -410,6 +415,15 @@ public class DaoController {
 		      }
 		 
 		 
+		 //Chargement des pièces du Dao
+		 public void chargePiecesDao() {
+			 listePiecesDao.clear();
+			 listePiecesDao= ((List<VPieceDac>)iservice.getObjectsByColumn("VPieceDac",new ArrayList<String>(Arrays.asList("PID_LIBELLE")),
+					    new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+updateDac.getDacCode())));
+
+		 }
+		 
+		 
 	//Chargement des DAO en procédure normale qui font l'objet de bailleur
 	 public void chargeDaoBailleur() {
 		 listeDaoBailleur =  (List<VDaoBailleur>) iservice.getObjectsByColumn("VDaoBailleur", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -435,7 +449,43 @@ public class DaoController {
 		 }
 	 
 	 
-	//Methode Upload
+	//Chargement des DAO en procédure normale qui font l'objet de bailleur
+		 public void chargeBailleurDao() { 
+			 listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					     new WhereClause("DAC_BAILLEUR",WhereClause.Comparateur.EQ,"B"),
+						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+			 if (!listeDac.isEmpty()) {
+				   panelAvisBailleur = true;
+				   panelBailleurFichier = true;
+				   pavet2 =false;
+				   pavet3=false;
+				   pavet4=false;
+				   pavet5=false;
+				   pavet6=false;
+			    }else {
+			    	    listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+			    	    if (!listeDac.isEmpty()) {
+			    	    updateDac = listeDac.get(0);
+			    	     panelAvisBailleur = false;
+			    	     panelBailleurFichier = false;
+			    	     pavet2 =true;
+					     pavet3=true;
+					     pavet4=true;
+					     pavet5=true;
+					     pavet6=true;
+					     
+					     chargePPMObs();
+					     chargeDetailAdresseDac();
+	                	 chargePiecesDao();
+	                	 chargeOffresByDao();
+	                	 chargeLotsDac();
+			         }
+			    }
+			 }
+	 
+	 
+	//Methode de chargement
 	 @Transactional
 	 public void uploadBailleur(FileUploadEvent event) throws IOException{
 		 if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.getAffDacAvisBailleur()) || slctdTd.getAffDacDateBailleur().equals(null) 
@@ -1187,6 +1237,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			tableauBordController.chargeDataDao();		
 	}
    
+   public void chargeLotsDac(){
+		 //getListeDAO().clear();
+		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
+				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+updateDac.getAaoCode()));
+			_logger.info("objetListe size: "+listeLots.size());	
+			tableauBordController.chargeDataDao();		
+	}
+   
    
    public void chargeLotsRappel(){
 		 getListeLots().clear();
@@ -1271,7 +1329,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 					    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"O"),
 					    new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()),
-						new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
+						new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));
+			 
+			 
 		 }
 		 
 		 //Methode de recherche sur les PSPM
@@ -1322,6 +1382,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		  public void chargeAdresse() { 
 			  listAdresse.clear();
 			  listAdresse =(List<TAdresseAvis>) iservice.getObjectsByColumn("TAdresseAvis", new ArrayList<String>(Arrays.asList("ADA_NUM")));
+		  }
+		  
+		  //Detail Adresse modification
+		  public void chargeDetailAdresseDac() { 
+			  listDetailAdresse.clear();
+			  listDetailAdresse =(List<VDetailAdresse>) iservice.getObjectsByColumn("VDetailAdresse", new ArrayList<String>(Arrays.asList("V_ID")),
+					  new WhereClause("ADA_FON_COD",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					  new WhereClause("ADA_NUM",Comparateur.EQ,""+updateDac.getAdaNum())); 
 		  }
 		  
 		  //Detail Adresse
@@ -3282,7 +3350,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	  
 		//Edition du recu de paiement
 		 public void imprimerRecu() {
-				projetReport.stringparam1(slctdTd.getAffDacCode(), "Recu_dao", "Recu_dao");
+				projetReport.stringparam3(slctdTd.getAffDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
 			}
   
 	//Téléchargement des DAO type depuis la liste d'affichage
@@ -3850,12 +3918,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				break; 
 				
                 case "dao10":
-                	 chargeDaoBailleur();
-                	 chargePPMObs();
-                	 chargePiecesByDao();
-                	 observationAvis();
-                	 chargeOffresByDao();
-                	 chargeLotsRappel();
+                	 chargeBailleurDao();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
@@ -5593,6 +5656,31 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	public void setMontantRetrait(long montantRetrait) {
 		this.montantRetrait = montantRetrait;
 	}
+
+	public List<VUpdateDac> getListeDac() {
+		return listeDac;
+	}
+
+	public void setListeDac(List<VUpdateDac> listeDac) {
+		this.listeDac = listeDac;
+	}
+
+	public VUpdateDac getUpdateDac() {
+		return updateDac;
+	}
+
+	public void setUpdateDac(VUpdateDac updateDac) {
+		this.updateDac = updateDac;
+	}
+
+	public List<VPieceDac> getListePiecesDao() {
+		return listePiecesDao;
+	}
+
+	public void setListePiecesDao(List<VPieceDac> listePiecesDao) {
+		this.listePiecesDao = listePiecesDao;
+	}
+	
 	
 		
 }
