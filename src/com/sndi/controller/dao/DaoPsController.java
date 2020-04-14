@@ -1398,7 +1398,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 public void chargeDataPs(){
 				 getListeDao().clear();
 				 listeDao.clear();
-				 listeDao =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+				 listeDao =(List<TAffichageDao>) iservice.getObjectsByColumnInDesc("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 						 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 						 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
@@ -2803,7 +2803,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
         	 dao.setTModePassation(new TModePassation(daoDetail.getMopCode()));
         	 dao.setTTypeMarche(new TTypeMarche(daoDetail.getDppTymCode()));
         	 dao.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-        	 //dao.setTDetailPlanPassation(new TDetailPlanPassation(daoDetail.getDppId()));
         	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
         	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
         	 dao.setTGestion(new TGestion(gesCode));
@@ -2821,7 +2820,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
         	 affDao.setAffDacCode(dao.getDacCode());
         	 affDao.setAffDacStatutRetour(dao.getDacStatutRetour());
         	 affDao.setAffDacFonCodAc(dao.getTFonctionByDacFonCodAc().getFonCod());
-        	 //affDao.setTDetailPlanPassation(new TDetailPlanPassation(dao.getTDetailPlanPassation().getDppId()));
         	 affDao.setAffDacMention(dao.getDacMention());
         	 affDao.setAffDacDateReception(dao.getDacDateReception());
         	 affDao.setAffDacDacDteValDmp(dao.getDacDteValDmp());
@@ -3223,7 +3221,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					
 					chargeDataAValider();
 					chargeDataValCsv();
-					renderPage("dps1","VALDAO");
+					renderPage("dps1","VALDPS");
 					//Actualisation du tableau de bord
 					tableauBordController.chargeDataDaoPs();
 					//Message de confirmation
@@ -3858,7 +3856,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		     switch(value) {
 				case "dps1":
 					chargeData();
-					//chargeDataPs();
 					chargeGestions();
 					chargeDataAffecter();
 					chargeDataAValider();
