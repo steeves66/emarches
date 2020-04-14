@@ -81,7 +81,7 @@
 
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L' #{controleController.type}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -154,7 +154,7 @@
 	             </div>
 		           
 		            <fieldset>
-		               <legend style="font-weight: bold">DAO joint(s)</legend>
+		               <legend style="font-weight: bold">AMI joint(s)</legend>
 		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
@@ -263,7 +263,7 @@
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Cout du DAO </label></div>
+                  <div class="col-sm-4"><label class="pull-right">Cout de l'AMI </label></div>
                   <div class="col-sm-8">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoCoutDac}"  style="width: 100%" readonly="true"> 
                     <f:convertNumber pattern="##,###.##"></f:convertNumber>
@@ -274,7 +274,7 @@
 	             
 	            </div>
 	            <fieldset>
-		               <legend style="font-weight: bold">Retrait du dao chez le representant</legend>
+		               <legend style="font-weight: bold">Retrait de l'AMI chez le representant</legend>
 	              <p:dataList id="detail" value="#{etatsDaoController.listDetailAdresse}" var="slctdTb" type="definition">
                 <div class="box-body">
 			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 
@@ -390,48 +390,48 @@
             
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
 				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','SAIAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','TRADAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','TRAAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','DAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','AMI')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','VALAMI')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>

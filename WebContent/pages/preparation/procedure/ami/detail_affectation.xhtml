@@ -81,7 +81,7 @@
 
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR L' #{controleController.type}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -359,36 +359,36 @@
             
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
 				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','DAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','AMI')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','VALAMI')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>

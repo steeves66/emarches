@@ -12,7 +12,7 @@
 <section class="content-header">
       <h3>
        <!-- #{controleController.libelle}  -->
-       EXAMEN DU DOSSIER D'APPEL A CONCURRENCE
+       EXAMEN DE L'AMI
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -22,12 +22,12 @@
              </p:commandLink>
             </li>
         <li>
-        <p:commandLink action="#{daoController.renderPage('dao1')}" update=":content" > 
+        <p:commandLink action="#{amiController.renderPage('ami1')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | Index
              </p:commandLink>
             </li>
         <li class="active">
-         <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}" update=":content" > 
+         <p:commandLink action="#{amiController.renderPage('ami7','EXAAMI')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
            <!--  #{controleController.libelle1}  -->
              </p:commandLink>
@@ -62,19 +62,19 @@
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTda.dafDacGestion}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTda.dafDacGestion}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Code Dao : </label></div>
+                  <div class="col-sm-3"><label class="pull-right">Code AMI : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTda.dafDacCode}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTda.dafDacCode}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération : </label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTda.dafDacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTda.dafDacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -82,19 +82,19 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTda.TTypeMarche.tymCode} : #{daoController.slctdTda.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{amiController.slctdTda.TTypeMarche.tymCode} : #{amiController.slctdTda.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTda.TModePassation.mopCode} : #{daoController.slctdTda.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTda.TModePassation.mopCode} : #{amiController.slctdTda.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mention : </label></div>
                   <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTda.dafMention}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTda.dafMention}" style="width: 100%"/></label>
                   </div>
                    
 	             </div>
@@ -114,19 +114,19 @@
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TGestion.gesCode}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.TGestion.gesCode}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Code Dao : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacCode}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.affDacCode}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération : </label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.affDacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -134,19 +134,19 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{amiController.slctdTd.TTypeMarche.tymCode} : #{amiController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.TModePassation.mopCode} : #{amiController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mention : </label></div>
                   <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacMention}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{amiController.slctdTd.affDacMention}" style="width: 100%"/></label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Bailleur</label></div>
                   <div class="col-sm-4">
@@ -171,8 +171,8 @@
          <div class="col-md-11 "><div  style="color: #fff">EXAMEN DES PIECES </div></div> 
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
          <div class="col-md-1 "> 
-         <h:panelGroup rendered="#{daoController.etatLoveObs}">
-			 <p:commandLink action="#{daoController.chargePiecesByBinome()}" oncomplete="PF('financeObs').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+         <h:panelGroup rendered="#{amiController.etatLoveObs}">
+			 <p:commandLink action="#{amiController.chargePiecesByBinome()}" oncomplete="PF('financeObs').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-search-plus"></i> </span><span class="hidden-xs"></span>
 			</p:commandLink>
 			</h:panelGroup>
@@ -181,7 +181,7 @@
         </div>
         
       <!--   <div class="box-body">
-              <p:dataTable id="corrige" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeCorrection}" emptyMessage="Aucune pièce corrigée">
+              <p:dataTable id="corrige" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.listeCorrection}" emptyMessage="Aucune pièce corrigée">
          				<p:column headerText="LIBELLE PIECE" styleClass="col-sm-9">
          				<h:outputText value="#{slctdTb.TPiecesDacs.pidLibelle}" />
 				        </p:column>
@@ -194,7 +194,7 @@
         <div class="box-body">
         
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}">
-              <p:dataTable id="corrigeAff"   editable="true" editMode="cell" var="slctdTb" value="#{daoController.listePices}" emptyMessage="Aucune pièce corrigée">
+              <p:dataTable id="corrigeAff"   editable="true" editMode="cell" var="slctdTb" value="#{amiController.listePices}" emptyMessage="Aucune pièce corrigée">
          				<p:column headerText="LIBELLE PIECE" styleClass="col-sm-4">
          				<h:outputText value="#{slctdTb.pidLibelle}" />
 				        </p:column>
@@ -247,7 +247,7 @@
              
              
              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
-              <p:dataTable id="corrigeObs"   editable="true" editMode="cell" var="slctdTb" value="#{daoController.listeDetailCorrection}" emptyMessage="Aucune pièce corrigée">
+              <p:dataTable id="corrigeObs"   editable="true" editMode="cell" var="slctdTb" value="#{amiController.listeDetailCorrection}" emptyMessage="Aucune pièce corrigée">
          				<p:column headerText="LIBELLE PIECE" styleClass="col-sm-4">
          				<h:outputText value="#{slctdTb.pidLibelle}" />
 				        </p:column>
@@ -271,15 +271,15 @@
               <div class="pull-right ">
                 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
                 
-                        <h:panelGroup rendered="#{daoController.etatBtnValidCharge}"> 
-			            <p:commandLink action="#{daoController.examinerChar()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
+                        <h:panelGroup rendered="#{amiController.etatBtnValidCharge}"> 
+			            <p:commandLink action="#{amiController.examinerChar()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la validation ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
 			            </h:panelGroup>
 			            
-			            <h:panelGroup rendered="#{daoController.etatBtnValid}"> 
-			            <p:commandLink action="#{daoController.examinerPieces()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
+			            <h:panelGroup rendered="#{amiController.etatBtnValid}"> 
+			            <p:commandLink action="#{amiController.examinerPieces()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la validation ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
@@ -302,7 +302,7 @@
          <div class="col-md-12 "><div  style="color: #fff">CHARGES D'ETUDE</div></div> 
         </div>
         <div class="box-body">
-             <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeFonctionsImput}" emptyMessage="Aucune fonction enregistrée" rows="10" 
+             <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.listeFonctionsImput}" emptyMessage="Aucune fonction enregistrée" rows="10" 
                        paginator="true" rowsPerPageTemplate="5,10,15" >
                      
         
@@ -327,7 +327,7 @@
         <div class="box-body">
               <div class="form-group ">
 	                  <div class="col-sm-12">
-	                   <p:inputTextarea  rows="5" cols="33" value="#{daoController.detailCor.corObservationRespo}" styleClass="form-control" readonly="true" style="width: 100%" />
+	                   <p:inputTextarea  rows="5" cols="33" value="#{amiController.detailCor.corObservationRespo}" styleClass="form-control" readonly="true" style="width: 100%" />
 	                  </div>
 	                </div>
         </div>
@@ -345,7 +345,7 @@
           <div class="form-group ">
 	                <label for="avisGene" class="col-sm-2 control-label">Resultat<span style="color:red;"> *</span></label>
 	                 <div class="col-sm-10">
-                      <p:selectOneMenu value="#{daoController.resultat}" id="bail12" 
+                      <p:selectOneMenu value="#{amiController.resultat}" id="bail12" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 						       <f:selectItem  itemLabel="Choisir le resultat" itemValue="empty" />  
 						       <f:selectItem  itemLabel="Validé" itemValue="Valide" />    
@@ -358,12 +358,12 @@
 	          <div class="form-group ">
 	                  <label class="col-sm-2 control-label"><b>Observation</b><span style="color:red;"> *</span></label>
 	                  <div class="col-sm-10">
-	                   <p:inputTextarea  rows="3" value="#{daoController.observationCor}"  cols="33" styleClass="form-control"  style="width: 100%" />
+	                   <p:inputTextarea  rows="3" value="#{amiController.observationCor}"  cols="33" styleClass="form-control"  style="width: 100%" />
 	                  </div>
 	          </div>
 	          
 	           <div class="pull-right ">
-			            <p:commandLink  action="#{daoController.resultatCorrection()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
+			            <p:commandLink  action="#{amiController.resultatCorrection()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la sanction ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
@@ -375,7 +375,7 @@
         </h:panelGroup>
         
         
-        <h:panelGroup rendered="#{daoController.etatSanction}"> 
+        <h:panelGroup rendered="#{amiController.etatSanction}"> 
       <div class="box box-success box-solid">
         <div class="box-header with-border">
          <div class="col-md-12 "><div  style="color: #fff">SANCTION DE L'ANALYSE</div></div> 
@@ -384,7 +384,7 @@
           <div class="form-group ">
 	                <label for="avisGene" class="col-sm-2 control-label">Resultat<span style="color:red;"> *</span></label>
 	                 <div class="col-sm-10">
-                      <p:selectOneMenu value="#{daoController.resultat}" id="bail" 
+                      <p:selectOneMenu value="#{amiController.resultat}" id="bail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 						       <f:selectItem  itemLabel="Choisir le resultat" itemValue="empty" />  
 						       <f:selectItem  itemLabel="Validé" itemValue="Validé" />    
@@ -396,12 +396,12 @@
 	          <div class="form-group ">
 	                  <label class="col-sm-2 control-label"><b>Observation</b><span style="color:red;"> *</span></label>
 	                  <div class="col-sm-10">
-	                   <p:inputTextarea  rows="3" value="#{daoController.observationCor}"  cols="33" styleClass="form-control"  style="width: 100%" />
+	                   <p:inputTextarea  rows="3" value="#{amiController.observationCor}"  cols="33" styleClass="form-control"  style="width: 100%" />
 	                  </div>
 	          </div>
 	          
 	           <div class="pull-right ">
-			            <p:commandLink rendered="#{daoController.validCorrection}" action="#{daoController.resultatCorrectionRespo()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
+			            <p:commandLink rendered="#{amiController.validCorrection}" action="#{amiController.resultatCorrectionRespo()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la sanction ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
@@ -421,20 +421,20 @@
         
         </div>
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','CHADAO')}" style="background-color: #f88b2e;" update=":content">
+		         <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','CHAAMI')}" style="background-color: #f88b2e;" update=":content">
 		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 				</p:commandLink>
 		     </h:panelGroup>
 		     
 		     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}" style="background-color: #f88b2e;" update=":content">
+		         <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','VALAMI')}" style="background-color: #f88b2e;" update=":content">
 		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 				</p:commandLink>
 		     </h:panelGroup>
 		     
               <div class="pull-right ">
 			       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-			            <p:commandLink  rendered="#{daoController.etatPV}" action="#{daoController.imprimerPv()}" styleClass="btn btn-success row pull-right" style="background-color: #f88b2e; margin-right:5px;color:#fff; border-color:#f88b2e" ajax="false">
+			            <p:commandLink  rendered="#{amiController.etatPV}" action="#{amiController.imprimerPv()}" styleClass="btn btn-success row pull-right" style="background-color: #f88b2e; margin-right:5px;color:#fff; border-color:#f88b2e" ajax="false">
 			             <i class="ace-icon fa fa-save"></i>Editer le PV
 			            </p:commandLink>
 			       </h:panelGroup>
@@ -460,10 +460,10 @@
 		           <div class="form-group ">
 	                  <label for="piece" class="col-sm-3 control-label"><b>Pièce</b></label>
 	                  <div class="col-sm-9">
-	                   <p:selectOneMenu id="piece" value="#{daoController.pidCod}"
+	                   <p:selectOneMenu id="piece" value="#{amiController.pidCod}"
 			               effect="fade" style="width:100%">
 			               <f:selectItem  itemLabel="Choisir la pièce..." itemValue="empty" />
-					       <f:selectItems value="#{daoController.listePices}" var="p" itemLabel="#{p.pidLibelle}" itemValue="#{p.pidCode}" />				   				    				   
+					       <f:selectItems value="#{amiController.listePices}" var="p" itemLabel="#{p.pidLibelle}" itemValue="#{p.pidCode}" />				   				    				   
 		       		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -471,14 +471,14 @@
 	                 <div class="form-group ">
 	                  <label for="mont" class="col-sm-3 control-label"><b>Observation</b></label>
 	                  <div class="col-sm-9">
-	                   <p:inputTextarea value="#{daoController.newCorrection.dcoObservation}" rows="6" cols="33" styleClass="form-control" id="relalisation" style="width: 100%" />
+	                   <p:inputTextarea value="#{amiController.newCorrection.dcoObservation}" rows="6" cols="33" styleClass="form-control" id="relalisation" style="width: 100%" />
 	                  </div>
 	                </div>
 	                
 	              
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{daoController.saveCorrecction()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
+			            <p:commandLink action="#{amiController.saveCorrecction()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:">
 			            <p:confirm header="Confirmation" message="Vous confirmez vous la correction ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
@@ -490,10 +490,10 @@
     
     
      <h:form id="finObs" styleClass="form-horizontal">
-	       <p:dialog  widgetVar="financeObs" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="Observations du Chargé d'Etudes  :  #{daoController.detailCharge.operateur}">
+	       <p:dialog  widgetVar="financeObs" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="Observations du Chargé d'Etudes  :  #{amiController.detailCharge.operateur}">
 				<div class="contentpanel">
 				
-		        <p:dataTable id="corrigeObs"  var="slctdTb" value="#{daoController.listeCorrectionCharge}" emptyMessage="Aucune pièce corrigée">
+		        <p:dataTable id="corrigeObs"  var="slctdTb" value="#{amiController.listeCorrectionCharge}" emptyMessage="Aucune pièce corrigée">
          				<p:column headerText="LIBELLE PIECE" styleClass="col-sm-4">
          				<h:outputText value="#{slctdTb.pidLibelle}" />
 				        </p:column>
