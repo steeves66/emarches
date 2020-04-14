@@ -875,7 +875,7 @@
 	             <div class="col-sm-8"></div>
 	              <div class="col-sm-4"> 
 	                   
-				      <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{dacModifController.opendaoNew()}" ajax="false">
+				      <p:commandLink rendered="{controleController.etat_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{dacModifController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
 				      </p:commandLink>
 				      
@@ -928,7 +928,13 @@
            
             </p:wizard>
      
-      <p:commandLink styleClass="btn btn-warning" action="#{dacModifController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+      <p:commandLink rendered="{controleController.etat_dao}" styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		 <p:commandLink rendered="{controleController.etat_ami}" styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		 <p:commandLink rendered="{controleController.etat_prq}" styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','SAIPRQ')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 

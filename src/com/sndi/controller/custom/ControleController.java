@@ -241,6 +241,10 @@ public class ControleController {
 	private boolean btn_valider_pspm_cpmp =false; 
 	private boolean btn_valider_pspm_dmp =false;
 	
+	private boolean etat_prq =false;
+	private boolean etat_dao =false;
+	private boolean etat_ami =false;
+	
 	private boolean btn_valider_dmp =false;
 	public boolean btn_creerDetailPpm = false;
 	public boolean btn_creerDetailPspm = false;
@@ -1111,6 +1115,9 @@ public class ControleController {
 				   			    		type = "AMI";
 				   			    		libelleDao1="MODIFICATION DE L'AVIS A MANIFESTATION D'INTERET° ";
 				   			    		 libelle1="Saisie d'un nouvel AMI";
+				   			    		 etat_dao =false;
+				   			    		 etat_prq =false;
+				   			    		 etat_ami =true;
 				   					     panelDetail=false;
 				   						 panelForm=true;
 				   						 panelTraitement=false;
@@ -1330,8 +1337,12 @@ public class ControleController {
 				   								btn_fermer_saisie_prq = false;
 				   								btn_fermer_saisie_dao = true;
 				   			    			}else
-				   				    			if(action.equalsIgnoreCase("APEDAO")) {
+				   				    			if(action.equalsIgnoreCase("APEAMI")) {
 				   				    				type = "AMI";
+				   				    				libelleDao3="DETAILS DE L'";
+				   				    				etat_dao =false;
+								    				etat_prq =false;
+								    				etat_ami =true;
 				   				    				panelDetail=true;
 				   				    				panelForm=false;
 				   				   				    panelTraitement=false;
@@ -1946,6 +1957,9 @@ public class ControleController {
 			    		type = "DAC";
 			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL A CONCURRENCE N° ";
 			    		 libelle1="Saisie d'un nouveau DAC";
+			    		 etat_dao =true;
+			    		 etat_prq =false;
+			    		 etat_ami =false;
 					     panelDetail=false;
 						 panelForm=true;
 						 panelTraitement=false;
@@ -2167,6 +2181,7 @@ public class ControleController {
 			    			}else
 				    			if(action.equalsIgnoreCase("APEDAO")) {
 				    				type = "DAC";
+				    				libelleDao3="DETAILS DU";
 				    				panelDetail=true;
 				    				panelForm=false;
 				   				    panelTraitement=false;
@@ -2178,6 +2193,9 @@ public class ControleController {
 				    				fermerValAmi = false;
 				    				fermerSaiDao = true;
 				    				fermerValDao = false;
+				    				etat_dao =true;
+				    				etat_prq =false;
+				    				etat_ami =false;
 				    				detailD = true ;
 									detailA = false; 
 									detailP = false;
@@ -3558,6 +3576,9 @@ public class ControleController {
 																    											    		 libelle1="Saisie d'un nouvelle PRQ";
 																    													     panelDetail=false;
 																    														 panelForm=true;
+																    														 etat_dao =false;
+																    														 etat_prq =true;
+																    														 etat_ami =false;
 																    														 panelTraitement=false;
 																    													     panelRegister=true;
 																    													     panelUpdate=false;
@@ -3777,6 +3798,10 @@ public class ControleController {
 																    											    			}else
 																    												    			if(action.equalsIgnoreCase("APEPRQ")) {
 																    												    				type = "PRQ";
+																    												    				libelleDao3="DETAILS DU";
+																    												    				etat_dao =false;
+																    												    				etat_prq =true;
+																    												    				etat_ami =false;
 																    												    				panelDetail=true;
 																    												    				panelForm=false;
 																    												   				    panelTraitement=false;
@@ -7258,6 +7283,36 @@ public class ControleController {
 
 	public void setPanelDaoTableauBordTra(boolean panelDaoTableauBordTra) {
 		this.panelDaoTableauBordTra = panelDaoTableauBordTra;
+	}
+
+
+	public boolean isEtat_prq() {
+		return etat_prq;
+	}
+
+
+	public void setEtat_prq(boolean etat_prq) {
+		this.etat_prq = etat_prq;
+	}
+
+
+	public boolean isEtat_dao() {
+		return etat_dao;
+	}
+
+
+	public void setEtat_dao(boolean etat_dao) {
+		this.etat_dao = etat_dao;
+	}
+
+
+	public boolean isEtat_ami() {
+		return etat_ami;
+	}
+
+
+	public void setEtat_ami(boolean etat_ami) {
+		this.etat_ami = etat_ami;
 	}
 	
     

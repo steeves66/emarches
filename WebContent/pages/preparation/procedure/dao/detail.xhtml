@@ -11,10 +11,10 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-       #{controleController.type} N° #{etatsDaoController.slctdTd.affDacCode}
+      #{controleController.libelleDao3} #{controleController.type} N° #{etatsDaoController.slctdTd.affDacCode}
        <!--  PPM N° #{etatsPpmController.detail.dppId} -->
         <small>
-         #{controleController.libelle1} 
+         <!-- #{controleController.libelle1}  -->
        <!--  Liste des AGPM Saisis  -->
         <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
         </small>
@@ -155,7 +155,7 @@
 		           
 		            <fieldset>
 		               <legend style="font-weight: bold">#{controleController.type} joint(s)</legend>
-		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
+		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun #{controleController.type} enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
@@ -386,7 +386,7 @@
             </div>
             <!-- /.box-body -->
             </div>
-            <h:panelGroup rendered="#{controleController.panelDao}">
+            <h:panelGroup rendered="#{controleController.etat_dao}">
             
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
@@ -432,6 +432,59 @@
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
 		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}"   style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{controleController.etat_ami}">
+				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
+				<p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
+				<p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','TRAAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
+		        <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','CHAAMI')}"   style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
+		        <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','VALAMI')}"   style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		</h:panelGroup>
+		<h:panelGroup rendered="#{controleController.etat_prq}">
+				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
+				<p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','SAIPRQ')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
+				<p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','TRAPRQ')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
+		        <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','CHAPRQ')}"   style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        </p:commandLink>
+		        </h:panelGroup>
+		        
+		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
+		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('prq1','VALPRQ')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
