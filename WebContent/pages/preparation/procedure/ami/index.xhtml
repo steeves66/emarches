@@ -13,27 +13,27 @@
       <h3>
       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-        #{controleController.libelleami3} 
+        #{controleController.libelleDao3} 
         </h:panelGroup>
         
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}">
-        #{controleController.libelleami3} 
+        #{controleController.libelleDao3} 
         </h:panelGroup>
         
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
-        #{controleController.libelleami3} 
+        #{controleController.libelleDao3} 
         </h:panelGroup>
       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
-        #{controleController.libelleami3} 
+        #{controleController.libelleDao3} 
         </h:panelGroup>
         
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-        #{controleController.libelleami1} 
+        #{controleController.libelleDao1} 
         </h:panelGroup>
         
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
-        #{controleController.libelleami3} 
+        #{controleController.libelleDao3} 
         </h:panelGroup>
         <small>
         <!-- #{controleController.libelle1} -->
@@ -78,9 +78,9 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcSaisie}</h3>
+              <h3>#{tableauBordController.amiAcSaisie}</h3>
 
-              <p>DAC en attente de transmission</p>
+              <p>AMI en attente de transmission</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -95,7 +95,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcTransmis}</h3>
+              <h3>#{tableauBordController.amiAcTransmis}</h3>
 
               <p>#{controleController.type} Transmis</p>
             </div>
@@ -113,7 +113,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.daoCpDifCpmp}</h3> 
+              <h3>#{tableauBordController.amiCpDifCpmp}</h3> 
 
               <p>#{controleController.type} Differé(s)</p>
             </div>
@@ -158,7 +158,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcTransmis}</h3>
+              <h3>#{tableauBordController.amiAcTransmis}</h3>
 
               <p>#{controleController.type} Transmis</p>
             </div>
@@ -234,7 +234,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoPriseTrait}</h3>
+              <h3>#{tableauBordController.amiPriseTrait}</h3>
 
               <p>#{controleController.type} Traités</p>
             </div>
@@ -276,7 +276,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvValide}</h3>
+              <h3>#{tableauBordController.ppmAcDiffCpmpCsvValide}</h3>
 
               <p>#{controleController.type} en attente de Publication</p>
             </div>
@@ -295,7 +295,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoDaoPub}</h3>
+              <h3>#{tableauBordController.amiDaoPub}</h3>
 
               <p>#{controleController.type} publié(s)</p>
             </div>
@@ -378,7 +378,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvAttVal}</h3>
+              <h3>#{tableauBordController.amiCsvAttVal}</h3>
 
               <p>#{controleController.type} en attente de Validation</p>
             </div>
@@ -398,7 +398,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvValidation}</h3>
+              <h3>#{tableauBordController.amiCsvValidation}</h3>
 
               <p>#{controleController.type} validé(s)</p>
             </div>
@@ -451,7 +451,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcAttenteValide}</h3>
+              <h3>#{tableauBordController.amiAcAttenteValide}</h3>
 
               <p>#{controleController.type} en attente de transmission</p>
             </div>
@@ -468,7 +468,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcTransmis}</h3>
+              <h3>#{tableauBordController.amiAcTransmis}</h3>
 
               <p>#{controleController.type} Transmis</p>
             </div>
@@ -571,7 +571,7 @@
           
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvAttAff}</h3>
+              <h3>#{tableauBordController.amiCsvAttAff}</h3>
 
               <p>#{controleController.type} en attente d'Affectation</p>
             </div>
@@ -591,7 +591,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoaffecte}</h3>
+              <h3>#{tableauBordController.amiaffecte}</h3>
 
               <p>#{controleController.type} affecté(s)</p>
             </div>
@@ -613,7 +613,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvDiff}</h3>
+              <h3>#{tableauBordController.amiCsvDiff}</h3>
 
               <p>#{controleController.type} différé(s)</p>
             </div>
@@ -651,7 +651,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoChargeAttente}</h3>
+              <h3>#{tableauBordController.amiChargeAttente}</h3>
 
               <p>#{controleController.type} en attente de Traitement</p>
             </div>
@@ -670,7 +670,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoChargeVal}</h3>
+              <h3>#{tableauBordController.amiChargeVal}</h3>
 
               <p>#{controleController.type} validé(s)</p>
             </div>
@@ -690,7 +690,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoChargeCor}</h3>
+              <h3>#{tableauBordController.amiChargeCor}</h3>
 
               <p>#{controleController.type} corrigé(s)</p>
             </div>
@@ -744,7 +744,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvVal}</h3>
+              <h3>#{tableauBordController.amiCsvVal}</h3>
 
               <p>#{controleController.type} validé(s)</p>
             </div>
@@ -763,7 +763,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvDiff}</h3>
+              <h3>#{tableauBordController.amiCsvDiff}</h3>
 
               <p>#{controleController.type} différé(s)</p>
             </div>
@@ -798,7 +798,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoCpSaisie}</h3>
+              <h3>#{tableauBordController.amiCpSaisie}</h3>
 
               <p>#{controleController.type} en attente de Validation</p>
             </div>
@@ -816,7 +816,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoCpValide}</h3>
+              <h3>#{tableauBordController.amiCpValide}</h3>
 
               <p>#{controleController.type} transmi(s) par la CPMP</p>
             </div>
@@ -834,7 +834,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcDiffCpmp}</h3>
+              <h3>#{tableauBordController.amiAcDiffCpmp}</h3>
 
               <p>#{controleController.type} différé(s) par la CPMP</p>
             </div>
@@ -861,7 +861,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoCpSaisie}</h3>
+              <h3>#{tableauBordController.amiCpSaisie}</h3>
 
               <p>#{controleController.type} en attente de Validation </p>
             </div>
@@ -879,7 +879,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoCpValide}</h3>
+              <h3>#{tableauBordController.amiCpValide}</h3>
 
               <p>#{controleController.type} transmi(s) par la CPMP</p>
             </div>
@@ -897,7 +897,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcDiffCpmp}</h3>
+              <h3>#{tableauBordController.amiAcDiffCpmp}</h3>
 
               <p>#{controleController.type} différé(s) par la CPMP</p>
             </div>
@@ -929,7 +929,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcAttRetrait}</h3>
+              <h3>#{tableauBordController.amiAcAttRetrait}</h3>
 
               <p>#{controleController.type} en attente de retrait</p>
             </div>
@@ -949,7 +949,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcRetire}</h3>
+              <h3>#{tableauBordController.amiAcRetire}</h3>
 
               <p>#{controleController.type} retiré(s)</p>
             </div>
@@ -987,7 +987,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcAttVente}</h3>
+              <h3>#{tableauBordController.amiAcAttVente}</h3>
 
               <p>#{controleController.type} en attente de vente</p>
             </div>
@@ -1007,7 +1007,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoAcAttRetrait}</h3>
+              <h3>#{tableauBordController.amiAcAttRetrait}</h3>
 
               <p>#{controleController.type} vendu(s)</p>
             </div>
