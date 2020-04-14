@@ -314,11 +314,41 @@
             </span>
           </a>        
           <ul class="treeview-menu">
-          <li>
-             <p:commandLink  action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
+          
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
             <i class="fa fa-circle-o"></i>DAC en attente de Publication
              </p:commandLink>
             </li>
+
+          </ul>     
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoPsController.renderPage('dps1','PUBDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>DAC en attente de Publication
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+          
             
             <li>
              <p:commandLink  action="#{amiController.renderPage('ami1','PUBAMI')}" update=":content" > 
@@ -1315,12 +1345,7 @@
             <i class="fa fa-circle-o"></i>Validation
              </p:commandLink>
             </li>
-            
-             <li>
-             <p:commandLink  action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Publication
-             </p:commandLink>
-            </li>
+           
           </ul>     
          </li>
            
@@ -1343,12 +1368,7 @@
             <i class="fa fa-circle-o"></i>Validation
              </p:commandLink>
             </li>
-            
-             <li>
-             <p:commandLink  action="#{daoController.renderPage('dps1','PUBDPS')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Publication
-             </p:commandLink>
-            </li>
+          
           </ul>     
          </li>
 
