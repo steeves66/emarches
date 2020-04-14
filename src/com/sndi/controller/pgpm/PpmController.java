@@ -1411,6 +1411,7 @@ public class PpmController {
 			    				  for(TFinancementPgpm fin: listeFinancementPgpm) {
 					      		        TFinancementPpm newFinancement = new TFinancementPpm();
 					      		        newFinancement.setTDetailPlanPassation(detailPass);
+					      		        newFinancement.setFppTypeFinance(fin.getFipTypeFinance());
 					      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
 					      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
 					      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
@@ -1711,7 +1712,6 @@ public class PpmController {
 	  	 @Transactional
 	  	 public void majDate() {
 	  		        detailPass.setDppApprobAno(geneDate.getDppApprobAno());
-	  		        detailPass.setDppDate(geneDate.getDppDate());
 	  		        detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
 	  		        detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
 	  		        detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
@@ -1724,13 +1724,19 @@ public class PpmController {
 	  		        detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
 	  		        detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
 	  		        detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
+	  		        detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
 	  		        detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 	  		        detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
 				    iservice.updateObject(detailPass);
 				    
-				    TAffichagePpm affichagePpm = new TAffichagePpm();
+				    
+				  //Modification dans TAffichagePpm
+			    	List<TAffichagePpm> PLG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+			   			new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+			    	    TAffichagePpm affichagePpm = new TAffichagePpm();
+						 if(!PLG.isEmpty()) affichagePpm =PLG.get(0);
+				    
 				    affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
-				    affichagePpm.setAffDppDate(detailPass.getDppDate());
 				    affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
 				    affichagePpm.setAffDppDateAttApprobCmp(detailPass.getDppDateAttApprobCpmp());
 				    affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
