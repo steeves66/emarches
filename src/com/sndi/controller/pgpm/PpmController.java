@@ -1526,7 +1526,12 @@ public class PpmController {
 					      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
 					      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
 					      		        newFinancement.setFppPartTresor(fin.getFipTresor());
-					      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+					      		        if(fin.getTBailleur().getBaiCode().equalsIgnoreCase(""))
+					      		        {
+					      		        	newFinancement.setTBailleur(new TBailleur("ETAT"));	
+					      		        }else {
+					      		        	newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+					      		        }	
 					      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
 					      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
 					      				iservice.addObject(newFinancement);

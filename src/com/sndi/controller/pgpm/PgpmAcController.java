@@ -2551,10 +2551,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    		  FacesContext.getCurrentInstance().addMessage(null,
 			          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, saisir votre opération!", ""));
             	    }else {
-            		    //Création du financement
+            		        //Création du financement
+            	    	    if(sourfin.equalsIgnoreCase("ETAT")) {
+	      				         baiCode ="ETAT";
+            	        	    newFinancement.setTBailleur(new TBailleur(baiCode)); 
+            	             }else
+            	        	  {
+            	            	newFinancement.setTBailleur(new TBailleur(baiCode));  
+            	        	  }
             		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
     			        newFinancement.setTDevise(new TDevise(devCode));
-    			        newFinancement.setTBailleur(new TBailleur(baiCode));
+    			        //newFinancement.setTBailleur(new TBailleur(baiCode));
     			        newFinancement.setTDetailPlanGeneral(detailPlan);
     			        newFinancement.setFipTypeFinance(sourfin);
     			        iservice.addObject(newFinancement);
