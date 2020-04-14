@@ -164,7 +164,7 @@
     
    </div>
   
-		         <p:commandLink styleClass="btn btn-warning" action="#{daoPsController.renderPage('dao1','AFFDAO')}" style="background-color: #f88b2e;" update=":content">
+		         <p:commandLink styleClass="btn btn-warning" action="#{daoPsController.renderPage('dps1','AFFDPS')}" style="background-color: #f88b2e;" update=":content">
 		           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 				</p:commandLink>
 		
@@ -296,53 +296,7 @@
       </p:dialog>
     </h:form>
     
-     <h:form id="dlogDMP">
-	        <p:dialog  widgetVar="DMPDlog" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
-				<div class="contentpanel">
-					<div class="g12">	 
-					<div class="panel-body panel-body-nopadding">
-					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
-						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
-							</p:inputText>
-						
-						</label>
-						</div>
-						</div>
-						
-						<div class="form-bordered form-horizontal">			
-                        <div class="form-group">
-                        <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeFonctions}"
-						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
-			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-							<p:column headerText="Code" styleClass="col-sm-3" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}" update="gnl:auto">				        
-         				  <h:outputText value="#{slctdTb.fonCod}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
-                                </h:commandLink>
-				        </p:column>
-						<p:column headerText="Fonction" styleClass="col-sm-9" >
-                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}">				        
-         				  <h:outputText value="#{slctdTb.fonLibelle}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
-                                </h:commandLink>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid>
-                     </div>
-                        
-                   
-                    </div>
-				</div>
-			</div>
-	    </div>
-      </p:dialog>
-    </h:form>
+  
     
     <h:form id="apercuDAOAff">
 	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
