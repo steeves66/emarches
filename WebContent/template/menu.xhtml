@@ -1296,7 +1296,16 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-	           <li>
+           
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
             <p:commandLink action="#{daoController.renderPage('dao1','AFFDAO')}" update=":content" > 
             <i class="fa fa-circle-o"></i>Affectation
              </p:commandLink>
@@ -1312,6 +1321,36 @@
             <i class="fa fa-circle-o"></i>Publication
              </p:commandLink>
             </li>
+          </ul>     
+         </li>
+           
+           
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{daoController.renderPage('dps1','AFFDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Affectation
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink  action="#{daoController.renderPage('dps1','VALDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation
+             </p:commandLink>
+            </li>
+            
+             <li>
+             <p:commandLink  action="#{daoController.renderPage('dps1','PUBDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Publication
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
 
           </ul>     
          </li>
@@ -1398,12 +1437,28 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-             <li>
+           
+             <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>DAC</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
             <p:commandLink action="#{daoController.renderPage('dao1','CHADAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>DAC
+            <i class="fa fa-circle-o"></i>Procédure Normale
              </p:commandLink>
-            </li>
-             <li>
+            </li>           
+              <li>
+            <p:commandLink action="#{daoPsController.renderPage('dps1','CHADPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Procédure Simplifiée
+             </p:commandLink>
+            </li>  
+          </ul>     
+         </li>
+            <li>
              <p:commandLink action="#{amiController.renderPage('ami1','CHAAMI')}" update=":content" >  
             <i class="fa fa-circle-o"></i>AMI
              </p:commandLink>
