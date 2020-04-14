@@ -402,36 +402,36 @@
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PRQ
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
 				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PRQ
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','SAIPRQ')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','TRADAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','TRAPRQ')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','DAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','PRQ')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','VALPRQ')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>

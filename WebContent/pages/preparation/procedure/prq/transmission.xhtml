@@ -12,7 +12,7 @@
 <section class="content-header">
       <h3>
        <!-- #{controleController.libelle}  -->
-       TRANSMISSION DU DAO N°
+       TRANSMISSION DU PRQ N°
         <!-- <small>Nouveau AGPM </small> -->
       </h3>
       <ol class="breadcrumb">
@@ -60,7 +60,7 @@
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.gesCode}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{prqController.gesCode}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
@@ -72,7 +72,7 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{prqController.dao.dacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -80,23 +80,23 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.demDetail.TTypeMarche.tymCode} : #{daoController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{prqController.demDetail.TTypeMarche.tymCode} : #{prqController.demDetail.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.demDetail.TModePassation.mopCode} : #{daoController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{prqController.demDetail.TModePassation.mopCode} : #{prqController.demDetail.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mention</label></div>
                   <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{prqController.dao.dacObjet}" style="width: 100%"/></label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Bailleur</label></div>
                   <div class="col-sm-4">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.dao.dacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{prqController.dao.dacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	             
@@ -111,15 +111,15 @@
    <div class="col-md-12">
     <div class="box box-success box-solid">
         <div class="box-header with-border">
-         <div class="col-md-11 "><div  style="color: #fff">PIECES CONSTITUTIVES DU DAO </div></div> 
+         <div class="col-md-11 "><div  style="color: #fff">PIECES CONSTITUTIVES DU PRQ </div></div> 
          <div class="col-md-1 ">
-			 <p:commandLink action="#{daoController.AjoutPiece()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":gnl:TBpieces">
+			 <p:commandLink action="#{prqController.AjoutPiece()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e" update=":gnl:TBpieces">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
 			</p:commandLink>
 		</div>
         </div>
         <div class="box-body">
-               <p:dataTable id="TBpieces" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listPieces}" 
+               <p:dataTable id="TBpieces" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.listPieces}" 
                 editable="true" editMode="cell"
                emptyMessage="Aucune pièce trouvées">
          				
@@ -140,9 +140,9 @@
 				        </p:column>
 				        
 				        <p:column headerText="" width="3%" >
-				           <p:commandLink styleClass="btn btn-xs btn-danger" action="#{daoController.deletePiece()}"  title="Supprimer"  update=":gnl">
+				           <p:commandLink styleClass="btn btn-xs btn-danger" action="#{prqController.deletePiece()}"  title="Supprimer"  update=":gnl">
 			 	             <i class="ace-icon fa fa-trash bigger-120"  style="background-color: #f88b2e;color: white"></i> 
-				                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctPiece}" />
+				                <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctPiece}" />
 				            </p:commandLink>
 				        </p:column>
                  </p:dataTable>   

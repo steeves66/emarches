@@ -63,7 +63,7 @@
 				            <h:outputText value="#{slctdTb.dppObjet}" />
 				        </p:column>
 				        
-				        <p:column headerText="N° DAO" styleClass="col-sm-1">
+				        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TDacSpecs.dacCode}" />
 				        </p:column>
 				         
@@ -154,7 +154,7 @@
 	             </div>
 		           
 		            <fieldset>
-		               <legend style="font-weight: bold">DAO joint(s)</legend>
+		               <legend style="font-weight: bold">#{controleController.type} joint(s)</legend>
 		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
@@ -274,7 +274,7 @@
 	             
 	            </div>
 	            <fieldset>
-		               <legend style="font-weight: bold">Retrait du dao chez le representant</legend>
+		               <legend style="font-weight: bold">Retrait du #{controleController.type} chez le representant</legend>
 	              <p:dataList id="detail" value="#{etatsDaoController.listDetailAdresse}" var="slctdTb" type="definition">
                 <div class="box-body">
 			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 

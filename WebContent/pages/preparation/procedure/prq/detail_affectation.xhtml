@@ -27,12 +27,12 @@
              </p:commandLink>
             </li>
         <li>
-        <p:commandLink action="#{etatsDaoController.renderPage('dao1')}" update=":content" > 
+        <p:commandLink action="#{etatsDaoController.renderPage('prq1')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | Index
              </p:commandLink>
             </li>
         <li class="active">
-         <p:commandLink action="#{etatsDaoController.renderPage('dao2')}" update=":content" > 
+         <p:commandLink action="#{etatsDaoController.renderPage('prq2')}" update=":content" > 
             <i class="fa fa-dashboard"></i>#{controleController.type} | Synthèse
              </p:commandLink>
         </li>
@@ -63,7 +63,7 @@
 				            <h:outputText value="#{slctdTb.dppObjet}" />
 				        </p:column>
 				        
-				        <p:column headerText="N° DAO" styleClass="col-sm-1">
+				        <p:column headerText="N° PRQ" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TDacSpecs.dacCode}" />
 				        </p:column>
 				         
@@ -133,7 +133,7 @@
 	             </div>
 		           
 		            <fieldset>
-		               <legend style="font-weight: bold">DAO joint(s)</legend>
+		               <legend style="font-weight: bold">PRQ joint(s)</legend>
 		      <p:dataTable id="DaoDT"  styleClass="table mb0 dt-on-steroids dataTable" scrollable="true" scrollHeight="100" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
@@ -238,7 +238,7 @@
 	             </div>
 	             
 	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Coût du DAO </label></div>
+                  <div class="col-sm-4"><label class="pull-right">Coût du PRQ </label></div>
                   <div class="col-sm-8">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoCoutDac}"  style="width: 100%" readonly="true"> 
                     <f:convertNumber pattern="##,###.##"></f:convertNumber>
@@ -249,7 +249,7 @@
 	             
 	            </div>
 	            <fieldset>
-		               <legend style="font-weight: bold">Retrait du dao chez le representant</legend>
+		               <legend style="font-weight: bold">Retrait du PRQ chez le representant</legend>
 	              <p:dataList id="detail" value="#{etatsDaoController.listDetailAdresse}" var="slctdTb" type="definition">
                 <div class="box-body">
 			        #{slctdTb.liaLibelle} : <label class="text-muted">#{slctdTb.dtaLibelle}</label> 
@@ -359,36 +359,36 @@
             
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PRQ
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
                <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PRQ
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
 				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
+				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PRQ
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
-				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
+				<p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('prq1','SAIPRQ')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','DAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','PRQ')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','VALDAO')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','VALPRQ')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
