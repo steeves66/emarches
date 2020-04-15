@@ -705,7 +705,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 
 			 //Liste des Pgspm différés par le cpmp
 			 public void chargePgspmDifCp() {
-				 pgspmDifCp.clear();
+				 //pgspmDifCp.clear();
 				 pgspmDifCp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S2D"),
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PS"),
@@ -715,7 +715,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 
 			//Liste des Pgpm différés par le cpmp
 			 public void chargePgspmDifDmp() {
-				 pgspmDifDmp.clear();
+				 //pgspmDifDmp.clear();
 				 pgspmDifDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3D"),
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PS")));
@@ -2137,12 +2137,18 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       	 
     
       	 
-      	 //Impression unique du pgpm ou pgspm
+      	 //Impression unique du pgpm 
       	 public void pgpmUnique() { 
       		 projetReport.longparam1(slctdTd.getAffGpgId(), "Fiche_pgpm", "Fiche_pgpm" );
       	 }
       	 
       	 
+      	//Impression unique du psgpm 
+      	 public void pgspmUnique() { 
+      		 projetReport.longparam1(slctdTd.getAffGpgId(), "Fiche_pgspm", "Fiche_pgspm" );
+      	 }
+      	 
+     	 
       	 
       	 
       	//Impression unique du pgpm ou pgspm

@@ -591,6 +591,19 @@
     
     
     <h:panelGroup rendered="#{controleController.panel2}">
+    
+                 <div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.reinitialiserPspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{ppmController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.chargerPspmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>
+    
   <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.validationListe}" 
 					rowKey="#{slctdTb.affDppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
                          paginator="true"

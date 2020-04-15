@@ -275,9 +275,16 @@ public class PpmController {
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
-		                
-		  		// recupDateGenere();
-				      creerDetailPassation();
+		  			 
+		                 if(controleController.type == "PPM") {
+		                	// recupDateGenere();
+						      creerDetailPassation();
+		                 }else 
+		                      if(controleController.type == "PSPM"){
+		                    	// recupDateGenere();
+							      creerDetailPspm();
+		                 }
+		  		
 				     }
 				    
 			            return event.getNewStep();
@@ -1811,8 +1818,9 @@ public class PpmController {
 	  		
 	  	  if(fipPgpm.getFipId() > 0 ) {
 	  		  
-	  		 if(detailPass.getDppObjet().equalsIgnoreCase("")||"".equals(detailPass.getDppObjet())||"".equals(detailPass.getDppPartiePmePmi())|| 
-	  				detailPass.getDppPartiePmePmi().equalsIgnoreCase("")|| tydCode.equalsIgnoreCase("")||"".equals(tydCode)) {
+	  		 if(detailPass.getDppObjet().equalsIgnoreCase("")||"".equals(detailPass.getDppObjet()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode()) 
+	  				|| tydCode.equalsIgnoreCase("") || "".equals(tydCode) ||detailPass.getDppDateAvisAoPublication().equals(null)
+	  				|| pgspm.getGpgMopCode().equalsIgnoreCase("") || "".equals(pgspm.getGpgMopCode()) || pgspm.getGpgTymCode().equalsIgnoreCase("") || "".equals(pgspm.getGpgTymCode())) {
 	  			   //Message d'erreur
 	  			   FacesContext.getCurrentInstance().addMessage(null,
 	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
@@ -1947,7 +1955,8 @@ public class PpmController {
 				     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 				     iservice.addObject(histoPass);
 					
-					chargeData();
+				    recupDateGenere();
+					//chargeData();
 					chargeDataPspm();
 					
 					//Activation du bouton d'édition du pspm
@@ -2085,8 +2094,10 @@ public class PpmController {
 					     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 					     iservice.addObject(histoPass);
 						
-						chargeData();
+					    recupDateGenere();
+						//chargeData();
 						chargeDataPspm();
+						
 						
 						//Activation du bouton d'édition du pspm
 						//controleController.btn_creerDetailPspm = false;
