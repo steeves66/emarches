@@ -927,16 +927,22 @@
             
            
             </p:wizard>
-     
-      <p:commandLink rendered="{controleController.etat_dao}" styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
+     <h:panelGroup rendered="{controleController.update_fermer_dao}">
+      <p:commandLink  styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','SAIDAO')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
-		 <p:commandLink rendered="{controleController.etat_ami}" styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="{controleController.update_fermer_ami}">
+		 <p:commandLink  styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
-		 <p:commandLink rendered="{controleController.etat_prq}" styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','SAIPRQ')}" style="background-color: #f88b2e;" update=":content">
+		</h:panelGroup>
+		<h:panelGroup rendered="{controleController.update_fermer_prq}">
+		 <p:commandLink styleClass="btn btn-warning" action="#{prqController.renderPage('prq1','SAIPRQ')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
+		</h:panelGroup>
 
     </section>
     </h:form>

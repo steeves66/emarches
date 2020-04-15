@@ -283,6 +283,10 @@ public class ControleController {
 	private boolean retDao=false;
 	private boolean btn_retourner=false;
 	
+	private boolean update_fermer_dao=false;
+	private boolean update_fermer_ami=false;
+	private boolean update_fermer_prq=false;
+	
 
 	//Zone de Recherche pour le PPM
 	private boolean searchAC = false;
@@ -1115,9 +1119,9 @@ public class ControleController {
 				   			    		type = "AMI";
 				   			    		libelleDao1="MODIFICATION DE L'AVIS A MANIFESTATION D'INTERET° ";
 				   			    		 libelle1="Saisie d'un nouvel AMI";
-				   			    		 etat_dao =false;
-				   			    		 etat_prq =false;
-				   			    		 etat_ami =true;
+				   			    		 update_fermer_dao=false;
+							    		 update_fermer_ami=true;
+							    		 update_fermer_prq=false;
 				   					     panelDetail=false;
 				   						 panelForm=true;
 				   						 panelTraitement=false;
@@ -1957,9 +1961,9 @@ public class ControleController {
 			    		type = "DAC";
 			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL A CONCURRENCE N° ";
 			    		 libelle1="Saisie d'un nouveau DAC";
-			    		 etat_dao =true;
-			    		 etat_prq =false;
-			    		 etat_ami =false;
+			    		 update_fermer_dao=true;
+			    		 update_fermer_ami=false;
+			    		 update_fermer_prq=false;
 					     panelDetail=false;
 						 panelForm=true;
 						 panelTraitement=false;
@@ -3576,9 +3580,9 @@ public class ControleController {
 																    											    		 libelle1="Saisie d'un nouvelle PRQ";
 																    													     panelDetail=false;
 																    														 panelForm=true;
-																    														 etat_dao =false;
-																    														 etat_prq =true;
-																    														 etat_ami =false;
+																    														 update_fermer_dao=false;
+																    											    		 update_fermer_ami=false;
+																    											    		 update_fermer_prq=true;
 																    														 panelTraitement=false;
 																    													     panelRegister=true;
 																    													     panelUpdate=false;
@@ -7313,6 +7317,36 @@ public class ControleController {
 
 	public void setEtat_ami(boolean etat_ami) {
 		this.etat_ami = etat_ami;
+	}
+
+
+	public boolean isUpdate_fermer_dao() {
+		return update_fermer_dao;
+	}
+
+
+	public void setUpdate_fermer_dao(boolean update_fermer_dao) {
+		this.update_fermer_dao = update_fermer_dao;
+	}
+
+
+	public boolean isUpdate_fermer_ami() {
+		return update_fermer_ami;
+	}
+
+
+	public void setUpdate_fermer_ami(boolean update_fermer_ami) {
+		this.update_fermer_ami = update_fermer_ami;
+	}
+
+
+	public boolean isUpdate_fermer_prq() {
+		return update_fermer_prq;
+	}
+
+
+	public void setUpdate_fermer_prq(boolean update_fermer_prq) {
+		this.update_fermer_prq = update_fermer_prq;
 	}
 	
     
