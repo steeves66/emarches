@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-15T01:04:35 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
+<!-- 2020-04-15T01:03:49 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgspm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#11BA55">
@@ -138,7 +138,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["FICHE D'IDENTIFICATION DE L'OPERATION PGPM"]]></textFieldExpression>
+				<textFieldExpression><![CDATA["FICHE D'IDENTIFICATION DE L'OPERATION PGSPM"]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="388" y="19" width="166" height="17" uuid="6905632a-093b-4600-90da-905e58bb1d78">

@@ -365,74 +365,115 @@
             <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
             </div>
             
+            
+           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
             <div class="row">
-            
-            <div class="col-md-12">
-            
-            <p:commandLink styleClass="btn btn-success btn-rounded waves-effect waves-light pull-right" style=" background-color: #036d3b" data-original-title="Nouveau PPM" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{ppmController.renderPage('ppm2','ENGPSPM')}"  update=":content">
-				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
-				</p:commandLink>
+              
+                 <div class="col-md-12">
+      <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
+            <div class="col-md-2 "><div  style="color: #fff">
+             <label for="gestion1" class="col-sm-5 control-label">GESTION</label>
+	              <div class="col-sm-6">
+		                    <p:selectOneMenu id="gestion1" value="#{ppmController.gesCode}"
+			                         effect="fade" style="width:100%">
+					       <f:selectItems value="#{ppmController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
+		       		        </p:selectOneMenu>
+	               </div>
+            </div></div>
+         </div>
+         <div class="box-body">
+          <div class="row">
+          
+           <div class="col-md-5">
+	           <div class="form-group">
+		                   <label for="mini3" class="col-sm-2 control-label">Autorité Contractante</label>
+		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
+		                  <div class="col-sm-10">
+		                   <p:inputTextarea  value="#{userController.fonction.fonLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{ppmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{ppmController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
+		                  <div class="col-sm-8">
+		                   <p:inputText  type="text" value="#{ppmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+		                  </div>
+		                  <div class="col-sm-1">
+		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{pgmAcController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                  </div>
+		                  </h:panelGroup>
+		                </div>
+	            </div> 
+	            
+	            
+	            <div class="col-md-7">
+	           <div class="form-group">
+		                  <label for="mini" class="col-sm-1 control-label">Ministère</label>
+		                  <div class="col-sm-11">
+		                    <p:inputTextarea  value="#{userController.fonction.TStructure.TMinistere.minLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+		                  </div>
+		                </div>
+	            </div> 
 
-				    
-					 
-					   <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-                   
-				       <div class="input-group input-group-sm col-md-3">
-                         <label>
-                         <p:inputText type="text"  value="#{ppmController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}"/> 	
-					   </label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{ppmController.chargerPspmRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
+	      </div>
+	      
+	      
+	   
+	      
+         </div>
+               </div>
+      </div>
 
-                      <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{ppmController.reinitialiserPspm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-                        
-					 </div>
-					 
-					 </h:panelGroup>
-					 
-					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
-					 <div class="input-group input-group-sm col-md-3">
-                      
-                      <label >
-                      <p:inputText type="text"  value="#{ppmController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{ppmController.chargerPspmRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-
-                      <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{ppmController.reinitialiserPspm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-					 </h:panelGroup>
-					 
-					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
-					 <div class="input-group input-group-sm col-md-3">
-                      <p:inputText styleClass="form-control" type="text" value="#{ppmController.multiFiltre}" placeholder="saisir"></p:inputText> 
+				<div class="col-md-12">
+					<div class="box box-success box-solid">
+						<div class="box-header with-border">
+							<div class="col-md-2 ">
+								<div style="color: #fff">LISTE DES OPERATIONS</div>
+							</div>
+						 
+						<div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.reinitialiserPspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{ppmController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
                        <span class="input-group-btn">
-                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" action="#{ppmController.chargerPspmRecherche()}" style=" background-color: #f88b2e" update=":content" />
+                      <p:commandLink action="#{ppmController.chargerPspmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
 					 </div>
-					 </h:panelGroup>
-					
-            </div>
-            </div>
-              <h:panelGroup rendered="#{controleController.panel1}">
+					 </div>
+					 
+					 
+					 <div class="col-md-4">
+					 </div>
+					 
+					 
+							
+							<div class="col-md-1 ">
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouvelle Opération" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{ppmController.renderPage('ppm2','ENGPSPM')}" update=":content">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvelle Opération</span>
+								</p:commandLink>
+							</div>
+							
+						</div>
+						<div class="box-body">
+							
+							    <h:panelGroup rendered="#{controleController.panel1}">
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listePpm}" 
-					rowKey="#{slctdTb.affDppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun PSPM enregistré" rows="10" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
+					rowKey="#{slctdTb.affDppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                       scrollable="true" scrollHeight="250" >
                          
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
@@ -448,21 +489,21 @@
 
                          <p:column headerText="Source Financement" styleClass="col-sm-2" >
          				  <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDppSourceFin}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affDppTypeFinance}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDppSourceFin}" />
+         				<h:outputText value="#{slctdTb.affDppTypeFinance}" />
          				</h:panelGroup>
 				        </p:column>
 				        
 				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
          				  <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.TLBudgets.lbgCode}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" />
+         				<h:outputText value="#{slctdTb.TLBudgets.lbgCode}" />
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -502,6 +543,13 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
+                      <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
+	                  <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                        <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
+	                   <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
+	                  </p:commandLink> 
+	         		 </h:panelGroup>
+                      
                               <h:panelGroup rendered="#{controleController.detailP1}">
                              <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
@@ -526,15 +574,25 @@
                               <p:commandLink action="#{ppmController.pspmUnique()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left: 3px" title="Editer le PSPM" ajax="false" >
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
-                              </p:commandLink>
-                          
+                              </p:commandLink>  
                             
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
+   
+							
+						</div>
+					</div>
+				</div>
+
+            </div>
+            
+            </h:panelGroup>
+    
+    
     <h:panelGroup rendered="#{controleController.panel2}">
   <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.validationListe}" 
-					rowKey="#{slctdTb.affDppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun PSPM enregistré" rows="10" 
+					rowKey="#{slctdTb.affDppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
                          paginator="true"
                          rowsPerPageTemplate="5,10,15" >
                         

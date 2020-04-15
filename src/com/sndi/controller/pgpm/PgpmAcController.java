@@ -2151,7 +2151,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       	 }
       	 
       	 
-      	
+      	//Impression unique du pgpm ou pgspm
+      	 public void pgspmUniqueSaisie() { 
+      		 projetReport.longparam1(detailPlan.getGpgId(), "Fiche_pgspm", "Fiche_pgspm" );
+      	 }
       	 
       	 //Enregistrement d'une opération en mode PS
          @Transactional
@@ -2822,10 +2825,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 
 				 
 				
-				 //Edition de l'PGSPM
+				 //Edition de l'état PGSPM
 				 public void imprimerPgspm() {
 					    String operateur = userController.getSlctd().getTFonction().getFonCod();
-						projetReport.longStringparam2(plan.getPlgId(), operateur, "Pgspm", "Pgspm");
+						projetReport.longStringparam2(gesCode, operateur, "Pgspm", "Pgspm");
 					}
 				 
 				 //Edition de l'PGPM Detail
