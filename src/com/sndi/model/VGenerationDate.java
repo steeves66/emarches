@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 11 avr. 2020 09:52:43 by Hibernate Tools 4.3.5.Final
+// Generated 15 avr. 2020 13:45:52 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -68,6 +68,7 @@ public class VGenerationDate implements java.io.Serializable {
 	private String dppTypeFinance;
 	private Date dppApprobAno;
 	private Date dppDteModif;
+	private String dppRecherche;
 
 	public VGenerationDate() {
 	}
@@ -94,7 +95,7 @@ public class VGenerationDate implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno,
-			Date dppDteModif) {
+			Date dppDteModif, String dppRecherche) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -145,8 +146,10 @@ public class VGenerationDate implements java.io.Serializable {
 		this.dppTypeFinance = dppTypeFinance;
 		this.dppApprobAno = dppApprobAno;
 		this.dppDteModif = dppDteModif;
+		this.dppRecherche = dppRecherche;
 	}
 
+	
 	@Id
 	@Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)
 	public long getDppId() {
@@ -597,4 +600,15 @@ public class VGenerationDate implements java.io.Serializable {
 	public void setDppDteModif(Date dppDteModif) {
 		this.dppDteModif = dppDteModif;
 	}
+
+	@Column(name = "DPP_RECHERCHE", length = 4000)
+	public String getDppRecherche() {
+		return this.dppRecherche;
+	}
+
+	public void setDppRecherche(String dppRecherche) {
+		this.dppRecherche = dppRecherche;
+	}
+	
+
 }

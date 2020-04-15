@@ -29,7 +29,7 @@
         </h:panelGroup>
         
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-        #{controleController.libelleDao} 
+        #{controleController.libelleDao3} 
         </h:panelGroup>
         
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
@@ -398,7 +398,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.prsCsvValidation}</h3>
+              <h3>#{tableauBordController.daoCsvValidation}</h3>
 
               <p>#{controleController.type} validé(s)</p>
             </div>

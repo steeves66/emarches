@@ -41,6 +41,7 @@ public class VUpdatePpm implements java.io.Serializable {
 	private Date affDppDateOuvertOf;
 	private Date affDppDateElabRapport;
 	private Date affDppDateJugementOffre;
+	private Date affDppDateJugementTech;
 	private Date affDppDateAttApprobDmp;
 	private Date affDppDateAttApproBail;
 	private Date affDppDateNegociation;
@@ -186,7 +187,7 @@ public class VUpdatePpm implements java.io.Serializable {
 			Integer affDppNumeroOrdre, Date affDppDate, String affDppObjet, String affDppSourceFin,
 			String affDppActeurSaisie, Date affDppDateDaoTrans, Date affDppDateDaoApprobDmp,
 			Date affDppDateDaoApprobBail, Date affDppDateAvisAoPublicat, Date affDppDateOuvertOt,
-			Date affDppDateOuvertOf, Date affDppDateElabRapport, Date affDppDateJugementOffre,
+			Date affDppDateOuvertOf, Date affDppDateElabRapport, Date affDppDateJugementOffre,Date affDppDateJugementTech,
 			Date affDppDateAttApprobDmp, Date affDppDateAttApproBail, Date affDppDateNegociation,
 			Date affDppDateSignatAttrib, Date affDppDateSignatAc, Date affDppDateMarcheApprob, Date affDppDateExecDebut,
 			Date affDppDateExecFin, Long affDppId, String affDppStatutRetour, String affDppFonCod, String affDppStrCode,
@@ -231,6 +232,7 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.affDppDateOuvertOf = affDppDateOuvertOf;
 		this.affDppDateElabRapport = affDppDateElabRapport;
 		this.affDppDateJugementOffre = affDppDateJugementOffre;
+		this.affDppDateJugementTech = affDppDateJugementTech;
 		this.affDppDateAttApprobDmp = affDppDateAttApprobDmp;
 		this.affDppDateAttApproBail = affDppDateAttApproBail;
 		this.affDppDateNegociation = affDppDateNegociation;
@@ -533,6 +535,15 @@ public class VUpdatePpm implements java.io.Serializable {
 
 	public void setAffDppDateJugementOffre(Date affDppDateJugementOffre) {
 		this.affDppDateJugementOffre = affDppDateJugementOffre;
+	}
+	
+	@Column(name = "AFF_DPP_DATE_JUGEMENT_TECH", length = 7)
+	public Date getAffDppDateJugementTech() {
+		return this.affDppDateJugementTech;
+	}
+
+	public void setAffDppDateJugementTech(Date affDppDateJugementTech) {
+		this.affDppDateJugementTech = affDppDateJugementTech;
 	}
 
 	@Column(name = "AFF_DPP_DATE_ATT_APPROB_DMP", length = 7)

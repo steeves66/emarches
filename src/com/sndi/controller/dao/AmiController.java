@@ -2894,8 +2894,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             	            	      newAvis.setAaoCode(keyGen.getCodeAvis());
             	          		      newAvis.setTDacSpecs(dao);
             	          		      newAvis.setTAdresseAvis(new TAdresseAvis(numDetailAdr)); 
-            	          		      newAvis.setAaoDteOuvFin(ouvFin);
-            	          		      newAvis.setAaoDteOuvTec(ouvTech);
+            	          		      //newAvis.setAaoDteOuvFin(ouvFin);
+            	          		      //newAvis.setAaoDteOuvTec(ouvTech);
+            	          		      newAvis.setAaoNbrOuv(1);
             	          		      newAvis.setTStatut(new TStatut("D1S"));
             	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
             	          		      iservice.addObject(newAvis); 

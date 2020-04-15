@@ -466,32 +466,7 @@
                 </div>
                  
                 
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Nbre Ouverture</label>
-				  <div class="col-sm-2"> 
-                  <p:selectOneMenu value="#{amiController.newAvis.aaoNbrOuv}"  effect="fade" style="width:100%">   
-			            <f:selectItem itemLabel="1" itemValue="1" /> 
-                        <f:selectItem itemLabel="2" itemValue="2" />
-                        <p:ajax listener="#{amiController.verifOuverture()}" update="gnl:idOuv"/>				   	   				    				   
-			       </p:selectOneMenu>
-                     
-                  </div>
-                  <label  class="col-sm-2 control-label">Ouv Technique</label>
-				  <div class="col-sm-2">    
-                  <p:calendar value="#{amiController.ouvTech}"  style="width: 100%" > 
-                  <p:ajax event="blur" listener="#{amiController.equalDate()}" update="gnl:idOuv"/>	
-                  </p:calendar>
-                  </div>
-                  
-                  <h:panelGroup id="idOuv">
-                  <h:panelGroup rendered="#{amiController.ouvTechnique}">
-                  <label  class="col-sm-2 control-label">Ouv Financière</label> 
-				  <div class="col-sm-2">
-                  <p:calendar value="#{amiController.ouvFin}"  style="width: 100%" />   
-                  </div>
-                  </h:panelGroup>
-                  </h:panelGroup>
-                </div>
+              
          </div>
          </div>
          </div>
