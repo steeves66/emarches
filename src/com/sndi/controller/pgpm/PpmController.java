@@ -275,9 +275,16 @@ public class PpmController {
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
-		                
-		  		// recupDateGenere();
-				      creerDetailPassation();
+		  			 
+		                 if(controleController.type == "PPM") {
+		                	// recupDateGenere();
+						      creerDetailPassation();
+		                 }else 
+		                      if(controleController.type == "PSPM"){
+		                    	// recupDateGenere();
+							      creerDetailPspm();
+		                 }
+		  		
 				     }
 				    
 			            return event.getNewStep();
@@ -1411,6 +1418,7 @@ public class PpmController {
 			    				  for(TFinancementPgpm fin: listeFinancementPgpm) {
 					      		        TFinancementPpm newFinancement = new TFinancementPpm();
 					      		        newFinancement.setTDetailPlanPassation(detailPass);
+					      		        newFinancement.setFppTypeFinance(fin.getFipTypeFinance());
 					      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
 					      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
 					      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
@@ -1526,7 +1534,12 @@ public class PpmController {
 					      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
 					      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());
 					      		        newFinancement.setFppPartTresor(fin.getFipTresor());
-					      		        newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+					      		        if(fin.getTBailleur().getBaiCode().equalsIgnoreCase(""))
+					      		        {
+					      		        	newFinancement.setTBailleur(new TBailleur("ETAT"));	
+					      		        }else {
+					      		        	newFinancement.setTBailleur(new TBailleur(fin.getTBailleur().getBaiCode()));	
+					      		        }	
 					      		        newFinancement.setTSourceFinancement(new TSourceFinancement(fin.getTSourceFinancement().getSouCode()));
 					      		        newFinancement.setTDevise(new TDevise(fin.getTDevise().getDevCode()));
 					      				iservice.addObject(newFinancement);
@@ -1706,7 +1719,6 @@ public class PpmController {
 	  	 @Transactional
 	  	 public void majDate() {
 	  		        detailPass.setDppApprobAno(geneDate.getDppApprobAno());
-	  		        detailPass.setDppDate(geneDate.getDppDate());
 	  		        detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
 	  		        detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
 	  		        detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
@@ -1719,13 +1731,19 @@ public class PpmController {
 	  		        detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
 	  		        detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
 	  		        detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
+	  		        detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
 	  		        detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
 	  		        detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
 				    iservice.updateObject(detailPass);
 				    
-				    TAffichagePpm affichagePpm = new TAffichagePpm();
+				    
+				  //Modification dans TAffichagePpm
+			    	List<TAffichagePpm> PLG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+			   			new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+			    	    TAffichagePpm affichagePpm = new TAffichagePpm();
+						 if(!PLG.isEmpty()) affichagePpm =PLG.get(0);
+				    
 				    affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
-				    affichagePpm.setAffDppDate(detailPass.getDppDate());
 				    affichagePpm.setAffDppDateAttApproBail(detailPass.getDppDateAttApproBail());
 				    affichagePpm.setAffDppDateAttApprobCmp(detailPass.getDppDateAttApprobCpmp());
 				    affichagePpm.setAffDppDateAttApprobDmp(detailPass.getDppDateAttApprobDmp());
@@ -1800,8 +1818,9 @@ public class PpmController {
 	  		
 	  	  if(fipPgpm.getFipId() > 0 ) {
 	  		  
-	  		 if(detailPass.getDppObjet().equalsIgnoreCase("")||"".equals(detailPass.getDppObjet())||"".equals(detailPass.getDppPartiePmePmi())|| 
-	  				detailPass.getDppPartiePmePmi().equalsIgnoreCase("")|| tydCode.equalsIgnoreCase("")||"".equals(tydCode)) {
+	  		 if(detailPass.getDppObjet().equalsIgnoreCase("")||"".equals(detailPass.getDppObjet()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode()) 
+	  				|| tydCode.equalsIgnoreCase("") || "".equals(tydCode) ||detailPass.getDppDateAvisAoPublication().equals(null)
+	  				|| pgspm.getGpgMopCode().equalsIgnoreCase("") || "".equals(pgspm.getGpgMopCode()) || pgspm.getGpgTymCode().equalsIgnoreCase("") || "".equals(pgspm.getGpgTymCode())) {
 	  			   //Message d'erreur
 	  			   FacesContext.getCurrentInstance().addMessage(null,
 	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", "")); 
@@ -1936,7 +1955,8 @@ public class PpmController {
 				     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 				     iservice.addObject(histoPass);
 					
-					chargeData();
+				    recupDateGenere();
+					//chargeData();
 					chargeDataPspm();
 					
 					//Activation du bouton d'édition du pspm
@@ -2074,8 +2094,10 @@ public class PpmController {
 					     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
 					     iservice.addObject(histoPass);
 						
-						chargeData();
+					    recupDateGenere();
+						//chargeData();
 						chargeDataPspm();
+						
 						
 						//Activation du bouton d'édition du pspm
 						//controleController.btn_creerDetailPspm = false;

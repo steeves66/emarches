@@ -5686,6 +5686,5 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		this.listePiecesDao = listePiecesDao;
 	}
 	
-	
-		
+			
 }

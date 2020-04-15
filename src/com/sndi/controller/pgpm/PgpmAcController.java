@@ -705,7 +705,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 
 			 //Liste des Pgspm différés par le cpmp
 			 public void chargePgspmDifCp() {
-				 pgspmDifCp.clear();
+				 //pgspmDifCp.clear();
 				 pgspmDifCp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S2D"),
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PS"),
@@ -715,7 +715,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 
 			//Liste des Pgpm différés par le cpmp
 			 public void chargePgspmDifDmp() {
-				 pgspmDifDmp.clear();
+				 //pgspmDifDmp.clear();
 				 pgspmDifDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3D"),
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PS")));
@@ -2137,12 +2137,18 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       	 
     
       	 
-      	 //Impression unique du pgpm ou pgspm
+      	 //Impression unique du pgpm 
       	 public void pgpmUnique() { 
       		 projetReport.longparam1(slctdTd.getAffGpgId(), "Fiche_pgpm", "Fiche_pgpm" );
       	 }
       	 
       	 
+      	//Impression unique du psgpm 
+      	 public void pgspmUnique() { 
+      		 projetReport.longparam1(slctdTd.getAffGpgId(), "Fiche_pgspm", "Fiche_pgspm" );
+      	 }
+      	 
+     	 
       	 
       	 
       	//Impression unique du pgpm ou pgspm
@@ -2151,7 +2157,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       	 }
       	 
       	 
-      	
+      	//Impression unique du pgpm ou pgspm
+      	 public void pgspmUniqueSaisie() { 
+      		 projetReport.longparam1(detailPlan.getGpgId(), "Fiche_pgspm", "Fiche_pgspm" );
+      	 }
       	 
       	 //Enregistrement d'une opération en mode PS
          @Transactional
@@ -2551,10 +2560,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    		  FacesContext.getCurrentInstance().addMessage(null,
 			          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, saisir votre opération!", ""));
             	    }else {
-            		    //Création du financement
+            		        //Création du financement
+            	    	    if(sourfin.equalsIgnoreCase("ETAT")) {
+	      				         baiCode ="ETAT";
+            	        	    newFinancement.setTBailleur(new TBailleur(baiCode)); 
+            	             }else
+            	        	  {
+            	            	newFinancement.setTBailleur(new TBailleur(baiCode));  
+            	        	  }
             		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
     			        newFinancement.setTDevise(new TDevise(devCode));
-    			        newFinancement.setTBailleur(new TBailleur(baiCode));
+    			        //newFinancement.setTBailleur(new TBailleur(baiCode));
     			        newFinancement.setTDetailPlanGeneral(detailPlan);
     			        newFinancement.setFipTypeFinance(sourfin);
     			        iservice.addObject(newFinancement);
@@ -2815,10 +2831,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 
 				 
 				
-				 //Edition de l'PGSPM
+				 //Edition de l'état PGSPM
 				 public void imprimerPgspm() {
 					    String operateur = userController.getSlctd().getTFonction().getFonCod();
-						projetReport.longStringparam2(plan.getPlgId(), operateur, "Pgspm", "Pgspm");
+						projetReport.longStringparam2(gesCode, operateur, "Pgspm", "Pgspm");
 					}
 				 
 				 //Edition de l'PGPM Detail

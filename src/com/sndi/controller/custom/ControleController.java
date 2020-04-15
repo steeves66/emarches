@@ -30,7 +30,7 @@ public class ControleController {
 	private String libelleProcedure="";
 	private String libellesmall="";
 	private String libellePgpm ="";
-	private String type="";
+	public String type="";
 	private String libelleValPrq="";
 	private String libelleValami="";
 	private String libelleValP="";
@@ -794,7 +794,7 @@ public class ControleController {
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPGSPM")) {
 				    				type = "PGSPM";
-				    				libelle="DETAILS DU PLANS GENERAL SIMPLIFIE DE PASSATION DE MARCHES N°";
+				    				libelle="DETAILS DU PLAN GENERAL SIMPLIFIE DE PASSATION DE MARCHES N°";
 				    				panelDetail=true;
 				    				panelForm=false;
 				   				    panelTraitement=false;
