@@ -188,6 +188,9 @@ public class ControleController {
 	private boolean selectLovePgspm = false;
 	private boolean selectPartPgpm = false;
 	private boolean selectPartPgspm = false;
+	//Filtres sur la ligne Budgétaire
+	private boolean filtreLignePgpm = false;
+	private boolean filtreLignePgspm = false;
 	
 	private boolean panelPpm =false;
 	private boolean panelPspm =false;
@@ -859,15 +862,17 @@ public class ControleController {
 						 searchDmp = false;
 			    	}else
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
-			    			   type = "PPM";
-			    			   libelleProcedure="SAISIE DES PLANS DE PASSATION DE MARCHES";	
-			    			   btn_new =true;
+			    			 type = "PPM";
+			    			 libelleProcedure="SAISIE DES PLANS DE PASSATION DE MARCHES";	
+			    			 btn_new =true;
 							 panel1 =true;
 							 panel2 =false;
 							 panelPpmTableauBordSai = true;
 							 panelPpmTableauBordVal = false;
 							 selectLovePgpm = true;
 							 selectLovePgspm = false;
+							 filtreLignePgpm = true;
+							 filtreLignePgspm = false;
 							 selectPartPgpm = true;
 							 selectPartPgspm = false;
 							 selectTypMPgpm = true;
@@ -1013,9 +1018,9 @@ public class ControleController {
 						 searchDmpPs = false;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPSPM")) {
-			    			type = "PSPM";
-			    			libelle1="Index";
-			    			libelleProcedure="SAISIE DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";	
+			    			 type = "PSPM";
+			    			 libelle1="Index";
+			    			 libelleProcedure="SAISIE DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";	
 			    			 btn_new =true;
 							 panel1 =true;
 							 panel2 =false;
@@ -1025,6 +1030,8 @@ public class ControleController {
 							 selectLovePgspm = true;
 							 selectPartPgpm = false;
 							 selectPartPgspm = true;
+							 filtreLignePgpm = false;
+							 filtreLignePgspm = true;
 							 selectTypMPgpm = false;
 							 selectTypMPgspm = true;
 							 panelPpm = false;
@@ -7347,6 +7354,26 @@ public class ControleController {
 
 	public void setUpdate_fermer_prq(boolean update_fermer_prq) {
 		this.update_fermer_prq = update_fermer_prq;
+	}
+
+
+	public boolean isFiltreLignePgpm() {
+		return filtreLignePgpm;
+	}
+
+
+	public void setFiltreLignePgpm(boolean filtreLignePgpm) {
+		this.filtreLignePgpm = filtreLignePgpm;
+	}
+
+
+	public boolean isFiltreLignePgspm() {
+		return filtreLignePgspm;
+	}
+
+
+	public void setFiltreLignePgspm(boolean filtreLignePgspm) {
+		this.filtreLignePgspm = filtreLignePgspm;
 	}
 	
     

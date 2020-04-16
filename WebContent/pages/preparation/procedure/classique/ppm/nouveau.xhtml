@@ -622,7 +622,7 @@
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	   </p:commandLink>
 	   
-	     <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.creerDetailPspm()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+	     <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.majDate()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer PSPM
 	   </p:commandLink>
@@ -844,13 +844,34 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
-						    <p:ajax event="keyup" update=":dlogLign:ndTbleLign" listener="#{ppmController.filtreImputation()}" />
-							</p:inputText>
+						 <div class="col-md-6">
 						
-						</label>
+						
+						<h:panelGroup rendered="#{controleController.filtreLignePgpm}" >	 
+					<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.chargeImputation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign, dlogLign:filtrePgm"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtreLigne}" id="filtrePgm"  placeholder="saisir la nature" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreImputation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign" />
+                         </span>
+					 </div> 
+					</h:panelGroup> 
+					
+					<h:panelGroup rendered="#{controleController.filtreLignePgspm}" >	 
+					<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.chargeImputationPs()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign, dlogLign:filtrePgs"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtreLigne}" id="filtrePgs"  placeholder="saisir la nauture" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreImputationPs()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign" />
+                         </span>
+					 </div> 
+					</h:panelGroup> 
+						
+						
 						</div>
 						</div>
 						
@@ -1004,13 +1025,17 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmController.filtrePgpm}"  class="gui-input"  placeholder="Saisir le code du PGPM"  > 
-						    <p:ajax event="keyup" update=":dlogPgpm:ndTblePgpm" listener="#{ppmController.filtreMarche()}" />
-							</p:inputText>
+						 <div class="col-md-6">
 						
-						</label>
+						<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				        <p:commandLink action="#{ppmController.chargePgpm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPgpm:ndTblePgpm, dlogPgpm:filtrePgm1"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtrePgpm}" id="filtrePgm1"  placeholder="saisir l'objet" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreChargePgpm()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPgpm:ndTblePgpm" />
+                         </span>
+					 </div>
 						</div>
 						</div>
 						
@@ -1027,9 +1052,9 @@
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>
-				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
+				          <p:column headerText="Objet" styleClass="col-sm-11" >
                            <h:commandLink id="pgpm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}">				        
-         				  <h:outputText value="#{slctdTb.gpgCommentaire}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>		
@@ -1051,13 +1076,18 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmController.filtrePgspm}"  class="gui-input"  placeholder="Saisir le code du PGSPM"  > 
-						    <p:ajax event="keyup" update=":dlogPgspm:ndTblePgspm" listener="#{ppmController.filtreMarche()}" />
-							</p:inputText>
+						 <div class="col-md-6">
+
+					<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				        <p:commandLink action="#{ppmController.chargePgspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPgspm:ndTblePgspm, dlogPgspm:filtrePgsm1"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtrePgspm}" id="filtrePgsm1"  placeholder="saisir l'objet" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreChargePgspm()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPgspm:ndTblePgspm" />
+                         </span>
+					 </div>
 						
-						</label>
 						</div>
 						</div>
 						
@@ -1074,9 +1104,9 @@
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgspm}" />
                                 </h:commandLink>
 				        </p:column>
-				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
+				          <p:column headerText="Objet" styleClass="col-sm-11" >
                            <h:commandLink id="pgspm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgspm()}">				        
-         				  <h:outputText value="#{slctdTb.gpgCommentaire}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgspm}" />
                                 </h:commandLink>
 				        </p:column>		
@@ -1160,52 +1190,7 @@
 	    </div>
       </p:dialog>
     </h:form>
-    
-    
-      <h:form id="apercuDifDp">
-	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DATES PREVISIONNELLES</div></div>
-			         <div class="col-md-3">
-			          PPM 
-			         </div>
-			         
-			          <div class="col-md-3">
-			          
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						
-						
-						  <div class="form-group">
-		                  <label for="offt" class="col-sm-2 control-label">Offre Financière<span style="color:red;"> *</span></label>
-		                  <div class="col-sm-2">
-		                   <p:calendar id="offt" pattern="dd/MM/yyyy" value="#{ppmController.datePpm.dppDateOuvertOf}" style="width: 100%" >
-		                   </p:calendar> 
-		                  </div>
-		                  
-		                    <label for="jugem" class="col-sm-4 control-label">Jugement<span style="color:red;"></span></label>
-		                  <div class="col-sm-4">
-		                   <p:calendar id="jugem" pattern="dd/MM/yyyy" value="#{ppmController.datePpm.dppDateJugementOffre}" style="width: 100%" >
-		                   </p:calendar> 
-		                      
-		                  </div>
-		   </div>
-						
-					</h:panelGrid> 
-	                </div>
-	                
-		            </div>
-		           
-	            </div>
-            </div>
-      </p:dialog>
-    </h:form>
-    
+     
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
