@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2019-11-05T14:59:11 -->
+<!-- 2020-04-16T14:07:23 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="operateur1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a0e4afdf-aab6-4e2e-a856-4a038b316740">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -42,16 +42,6 @@
 	<detail>
 		<band height="733" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="129" y="24" width="291" height="45" uuid="a95243b2-97fb-4e08-be88-3bbfa644db22"/>
-				<box>
-					<pen lineWidth="3.0" lineStyle="Double"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true" isItalic="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA["IDENTIFICATION D'OPERATEUR"]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="42" y="179" width="48" height="20" uuid="ba7bc5e6-f6b0-4837-908e-2346750a046c">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
@@ -91,7 +81,7 @@
 				<textElement textAlignment="Left">
 					<font size="11" isBold="false" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Est informé(e) qu'il (elle) peut se connecter sur la plateforme se dématérialisation des MarchésPublics (E-MAP).]]></text>
+				<text><![CDATA[Est informé(e) qu'il (elle) peut se connecter sur la plateforme de dématérialisation des MarchésPublics (E-MarchesPublics).]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="40" y="289" width="120" height="20" uuid="73eb92b4-7916-41cd-9cd2-2e26d185929b">
@@ -219,16 +209,16 @@
 				<textElement textAlignment="Left">
 					<font size="11" isBold="false" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[En cas d'anomalie ou d'erreur sur ce document, vous devez contacter sans delai, la hotline de la E-MAP au (225) 20 21 78 63 / 20 22 26 20, infos@sndi.ci.]]></text>
+				<text><![CDATA[En cas d'anomalie ou d'erreur sur ce document, vous devez contacter sans delai, Monsieur YAPO Alomo, S/Directeur du Système d'Information et de la Communication de la Direction des Marchés Publics  au (225) 20 30 52 52 / p 2130, infos@marchespublics.gouv.ci.]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="40" y="602" width="480" height="71" uuid="7ecff2f4-53bb-4a16-8d0d-a18bffe5b041">
+				<reportElement x="40" y="602" width="480" height="48" uuid="7ecff2f4-53bb-4a16-8d0d-a18bffe5b041">
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" markup="html">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[Le mot de passe vous engage et doit rester strictement confidentiel.Vous êtes invités à changer votre mot de passe dès votre première connexion]]></text>
+				<text><![CDATA[Le mot de passe vous engage et doit rester strictement votre propriété exclusive.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="40" y="696" width="480" height="20" uuid="37ab7047-bfb3-496c-b99e-e0c636af8349">
@@ -239,60 +229,45 @@
 				</textElement>
 				<text><![CDATA[E-MARCHESPUBLICS (E-MAP)]]></text>
 			</staticText>
-			<image>
-				<reportElement x="440" y="10" width="80" height="71" uuid="b1267273-e673-479b-a562-611b86b89a7d"/>
-				<imageExpression><![CDATA[$P{report_image}+"armoiries.png"]]></imageExpression>
-			</image>
-			<image scaleImage="FillFrame">
-				<reportElement x="40" y="10" width="70" height="70" uuid="ecb90b7e-22af-4b65-891c-7151986be22d"/>
-				<imageExpression><![CDATA[$P{report_image}+"logo_dmp.PNG"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="41" y="680" width="479" height="20" uuid="a257b6e5-f675-424d-9b21-766aacb95ba5"/>
 				<text><![CDATA[-------------------------------------------------------------------------------------------------------------------------------------------------]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="102" width="240" height="48" uuid="18c5d47e-b3c0-4091-a138-34f3afec3c0b"/>
-				<box>
-					<pen lineWidth="3.0" lineStyle="Double" lineColor="#14A10A"/>
-				</box>
-				<textElement textAlignment="Center">
-					<font size="19" isBold="true"/>
-				</textElement>
-				<text><![CDATA[]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="207" y="107" width="96" height="34" forecolor="#F7B52F" uuid="1031d50a-f45f-40f7-b1b8-4bdb553e7f34"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Marchés]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="183" y="109" width="26" height="29" forecolor="#14A10A" uuid="24a08b42-9bba-4dba-a72b-34f5a12846c1">
+				<reportElement x="383" y="1" width="171" height="17" uuid="29082586-6c54-426b-bdb8-d9eb46a1041d">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="22" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="true"/>
 				</textElement>
-				<text><![CDATA[E-]]></text>
+				<text><![CDATA[République de Côte d'Ivoire]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="294" y="109" width="26" height="31" forecolor="#14A10A" uuid="719a2084-dd2d-4cb1-947f-4ed4e5d9d2a0">
+				<reportElement x="389" y="18" width="166" height="17" uuid="e2e09881-0592-4ef7-a44a-35f3f2abb436">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="22" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="11" isBold="false"/>
 				</textElement>
-				<text><![CDATA[P]]></text>
+				<text><![CDATA[Union-Discipline-Travail]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="308" y="110" width="75" height="31" forecolor="#F7B52F" uuid="c2fd7e92-dca8-4027-b812-42b82eb24d9b"/>
+			<image>
+				<reportElement x="1" y="0" width="239" height="59" uuid="556fe951-e616-4dc4-9ea7-9c9819be3bdd"/>
+				<imageExpression><![CDATA[$P{report_image}+"logo_emarches.png"]]></imageExpression>
+			</image>
+			<rectangle radius="8">
+				<reportElement mode="Opaque" x="48" y="107" width="460" height="31" backcolor="#FA9B3C" uuid="323f343c-9326-4de7-9981-f583ac0a6d42"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="49" y="108" width="458" height="26" forecolor="#FFFFFF" uuid="5371a043-04cf-4a66-9adc-db7d7049d81b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="22" isBold="true"/>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ublics]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["IDENTIFICATION D'OPERATEUR"]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>

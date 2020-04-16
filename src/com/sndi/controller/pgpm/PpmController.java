@@ -3210,6 +3210,7 @@ public class PpmController {
 		    		 //newFinancement = new TFinancementPpm();
 		    		 listeFinancement = new ArrayList<TFinancementPpm>();
 		    		 listeFinancementPgpm = new ArrayList<TFinancementPgpm>();
+		    		 listeDao.clear();
 		    		 //devCode ="";
 		    		 //baiCode ="";
 		    		// souCode=""; 
