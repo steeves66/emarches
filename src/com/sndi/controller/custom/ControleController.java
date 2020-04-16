@@ -1445,7 +1445,7 @@ public class ControleController {
 				   											 btn_fermer_saisie_ami = false; 
 				   											 btn_fermer_saisie_prq = false; 
 				   				    				 }else
-				   				    					  if(action.equalsIgnoreCase("EXAMAI")) {
+				   				    					  if(action.equalsIgnoreCase("EXAAMI")) {
 				   				    						     type = "AMI";
 				   								    			 libelle1="Index";
 				   								    			 libelleDao3="EXAMEN DES AVIS A MANIFESTATION D'INTERET";
