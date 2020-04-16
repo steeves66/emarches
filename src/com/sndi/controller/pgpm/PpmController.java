@@ -3214,6 +3214,7 @@ public class PpmController {
 		    		 //baiCode ="";
 		    		// souCode=""; 
 		    		 tydCode="";
+		    		 totalMontant=0;
 		    	 }
 				 
 				 
