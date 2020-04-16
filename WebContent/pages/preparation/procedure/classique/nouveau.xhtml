@@ -454,13 +454,20 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreTypeMarche}"  class="gui-input"  placeholder="Saisir le titre du projet"  > 
-						    <p:ajax event="keyup" update=":dlogAgpm:ndTbleAgpm" listener="#{pgpmAcController.filtreAgpm()}" />
-							</p:inputText>
+						 <div class="col-md-6">
+	 
+					<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{pgpmAcController.chargeAgpm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogAgpm:ndTbleAgpm, dlogAgpm:filtreAgp"/>
+				        </span>
+                      <p:inputText  type="text" value="#{pgpmAcController.filtreTypeMarche}" id="filtreAgp"  placeholder="saisir le titre du projet" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmAcController.filtreAgpm()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogAgpm:ndTbleAgpm" />
+                         </span>
+					 </div> 
+					
 						
-						</label>
+						
 						</div>
 						</div>
 						
