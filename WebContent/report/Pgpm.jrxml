@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-08T13:39:34 -->
+<!-- 2020-04-16T16:25:52 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pgpm2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa970b9-a7ef-4c6b-b72a-fbcc7c94abfa">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -42,6 +42,7 @@
 			<![CDATA[select *
 from v_pgpm_details vp
 where vp.aff_gpg_type_plan = 'PN'
+and vp.aff_gpg_sta_code ='S1S'
 and vp.plg_ges_code= $P{param_code}
 and vp.aff_gpg_acteur_saisie =$P{param_op}]]>
 		</queryString>
