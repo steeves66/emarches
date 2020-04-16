@@ -14,7 +14,7 @@
        #{controleController.type} N° #{etatsDaoController.slctdTda.dafDacCode}
        
         <small>
-         #{controleController.libelle1} 
+         <!-- #{controleController.libelle1} --> 
        <!--  Liste des AGPM Saisis  -->
         <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
         </small>
@@ -133,7 +133,7 @@
 	             </div>
 		           
 		            <fieldset>
-		               <legend style="font-weight: bold">DAO joint(s)</legend>
+		               <legend style="font-weight: bold">AMI joint(s)</legend>
 		      <p:dataTable id="DaoDT"  styleClass="table mb0 dt-on-steroids dataTable" scrollable="true" scrollHeight="100" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun DAO enregistré">
 
 				        <p:column headerText="Reférence" styleClass="col-sm-1">
@@ -356,25 +356,6 @@
             <!-- /.box-body -->
             </div>
             <h:panelGroup rendered="#{controleController.panelDao}">
-            
-               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoType()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
-				</p:commandLink>
-				</h:panelGroup>
-				
-				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
-				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'AMI
-				</p:commandLink>
-				</h:panelGroup>
-				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
 				<p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','SAIAMI')}" rendered="#{controleController.fermerSaiDao}"  style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
@@ -382,13 +363,13 @@
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','AMI')}"   style="background-color: #f88b2e;" update=":content">
-                <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		        <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','EXAAMI')}"   style="background-color: #f88b2e;" update=":content">
+                <i class="ace-icon fa fa-close bigger-130"></i> Fermer cet
 		        </p:commandLink>
 		        </h:panelGroup>
 		        
 		        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-		        <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('ami1','VALAMI')}"   style="background-color: #f88b2e;" update=":content">
+		        <p:commandLink styleClass="btn btn-warning" action="#{amiController.renderPage('ami1','VALAMI')}"   style="background-color: #f88b2e;" update=":content">
                 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		        </p:commandLink>
 		        </h:panelGroup>
