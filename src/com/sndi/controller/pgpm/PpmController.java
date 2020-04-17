@@ -3244,11 +3244,12 @@ public class PpmController {
 		    		 recupPgpm = new VPgpmFonction();
 		    		 recupPgspm  = new VPgpmFonction();
 		    		 recupLigne = new VLigneImputation();
-		    		 //newFinancement = new TFinancementPpm();
+		    
 		    		 listeFinancement = new ArrayList<TFinancementPpm>();
 		    		 listeFinancementPgpm = new ArrayList<TFinancementPgpm>();
 		    		 listeDao = new ArrayList<VModeleDao>();
 		    		 listeAmi = new ArrayList<VModeleAmi>();
+		    		 listePrq = new ArrayList<VModelePrq>();
 		    		 //devCode ="";
 		    		 //baiCode ="";
 		    		// souCode=""; 

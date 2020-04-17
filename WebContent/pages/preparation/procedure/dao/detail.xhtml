@@ -138,7 +138,7 @@
 	            
 	              <fieldset>
 		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="250" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
+		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="170" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
 	        <p:column headerText="Code" styleClass="col-sm-2">
 	            <h:outputText value="#{slctdTb.pidCode}" />
 	        </p:column>
@@ -218,12 +218,7 @@
                    <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.detail.aaoDelaiVal}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText> </label>
                   </div>
 	             </div>
-	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Marge de Préférence</label></div>
-                  <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"   style="width: 100%" readonly="true"/></label>
-                  </div>
-	             </div>
+	              
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Taux</label></div>
                   <div class="col-sm-8">
@@ -252,7 +247,7 @@
 	             </div>
 	               <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Seuil de qualification </label></div>
-                  <div class="col-sm-9">
+                  <div class="col-sm-8">
                     <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
@@ -389,25 +384,25 @@
             <h:panelGroup rendered="#{controleController.etat_dao}">
             
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoType()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoType()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}"> 
-               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoType()}" ajax="false">
+               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoType()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
-				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
+				<p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsDaoController.opendaoTypeCharge()}" ajax="false">
 				  <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le DAO type
 				</p:commandLink>
 				</h:panelGroup>
