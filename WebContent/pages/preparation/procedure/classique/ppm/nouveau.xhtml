@@ -154,7 +154,7 @@
                   <h:panelGroup rendered="#{ppmController.modeleAmi}" >
                   <div class="col-sm-9">
                     <p:selectOneMenu id="tdao" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			      <f:selectItem  itemLabel="Choisir le type DAO.." itemValue="empty" />  
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeAmi}" var="da" itemLabel="#{da.mdtLibelleLong}" itemValue="#{da.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
 		       	</p:selectOneMenu>
@@ -164,12 +164,22 @@
                   <h:panelGroup rendered="#{ppmController.modeleDao}" >
                   <div class="col-sm-9">
                     <p:selectOneMenu id="tami" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			      <f:selectItem  itemLabel="Choisir le type DAO.." itemValue="empty" />  
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeDao}" var="am" itemLabel="#{am.mdtLibelleLong}" itemValue="#{am.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
 		       	</p:selectOneMenu>
                   </div>
-                  </h:panelGroup>  
+                  </h:panelGroup> 
+                  
+                  <h:panelGroup rendered="#{ppmController.modelePrq}" >
+                  <div class="col-sm-9">
+                    <p:selectOneMenu id="tprq" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listePrq}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+                  </div>
+                  </h:panelGroup> 
                   
                 </div> 
 	        </div>
