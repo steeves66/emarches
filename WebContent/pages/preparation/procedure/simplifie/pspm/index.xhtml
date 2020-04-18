@@ -489,11 +489,11 @@
 
                          <p:column headerText="Source Financement" styleClass="col-sm-2" >
          				  <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDppTypeFinance}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affDppSourceFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDppTypeFinance}" />
+         				<h:outputText value="#{slctdTb.affDppSourceFin}" />
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -1026,7 +1026,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260"  styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.pspmDifCp}"
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
-			               emptyMessage="Aucun PSPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun #{controleController.type} différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					     <p:column headerText="Objet de l'Opération" styleClass="col-sm-7">
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
@@ -1162,7 +1162,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.pspmTrans}"
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
-			               emptyMessage="Aucun PSPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
+			               emptyMessage="Aucun #{controleController.type} différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			               
 					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-6">
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
