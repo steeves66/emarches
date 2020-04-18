@@ -631,11 +631,11 @@
 
                          <p:column headerText="Source Financement" styleClass="col-sm-2" >
          				  <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDppTypeFinance}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affDppSourceFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDppTypeFinance}" />
+         				<h:outputText value="#{slctdTb.affDppSourceFin}" />
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -751,10 +751,10 @@
 
                          <p:column headerText="Source Financement" styleClass="col-sm-2" >
          				  <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDppTypeFinance}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affDppSourceFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDppTypeFinance}" />
+         				<h:outputText value="#{slctdTb.affDppSourceFin}" />
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -927,7 +927,7 @@
 	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du rejet du PPM N° #{ppmController.slctdTd.affDppId}  
+						Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.affDppId}  
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	         
