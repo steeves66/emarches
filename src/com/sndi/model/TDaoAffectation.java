@@ -201,7 +201,7 @@ public class TDaoAffectation implements java.io.Serializable {
 		this.dafTypePlan = dafTypePlan;
 	}
 	
-	@Column(name = "DAF_DAC_STR", length = 4)
+	@Column(name = "DAF_DAC_STR", length = 20)
 	public String getDafDacStr() {
 		return this.dafDacStr;
 	}

@@ -30,7 +30,6 @@ public class TAffichageDao implements java.io.Serializable {
 	private long affDaoId;
 	private TDetCommissionSeance TDetCommissionSeance;
 	private TModePassation TModePassation;
-	//private TDetailPlanPassation TDetailPlanPassation;
 	private TStructure TStructure;
 	private TGestion TGestion;
 	private TTypeMarche TTypeMarche;

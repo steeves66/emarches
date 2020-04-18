@@ -25,7 +25,6 @@ import javax.persistence.Table;
 public class TPlanGeneral implements java.io.Serializable {
 
 	private long plgId;
-	//private TMinistere TMinistere;
 	private TStructure TStructure;
 	private TFonction TFonction;
 	private TGestion TGestion;
@@ -40,15 +39,14 @@ public class TPlanGeneral implements java.io.Serializable {
 		this.plgId = plgId;
 	}
 
-	public TPlanGeneral(long plgId, TStructure TStructure,/*TMinistere TMinistere,*/ TFonction TFonction, TGestion TGestion) {
+	public TPlanGeneral(long plgId, TStructure TStructure,TFonction TFonction, TGestion TGestion) {
 		this.plgId = plgId;
 		this.TStructure = TStructure;
-		//this.TMinistere = TMinistere;
 		this.TFonction = TFonction;
 		this.TGestion = TGestion;
 	}
 
-	public TPlanGeneral(long plgId, TStructure TStructure, /*TMinistere TMinistere,*/ TFonction TFonction, TGestion TGestion, String plgCode,
+	public TPlanGeneral(long plgId, TStructure TStructure, TFonction TFonction, TGestion TGestion, String plgCode,
 			String plgLibelle, Set<TDetailPlanGeneral> TDetailPlanGenerals) {
 		this.plgId = plgId;
 		this.TStructure = TStructure;

@@ -1494,6 +1494,15 @@ public class AgpmController {
 	 					TAffichageAgpm affiche = new TAffichageAgpm();
 	 					if (!validationListe.isEmpty()) {
 	 						affiche= validationListe.get(0);
+	 						if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+	 							affiche.setAffAgpDateValAc(Calendar.getInstance().getTime());
+							 }else
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+									 affiche.setAffAgpDateValCpmp(Calendar.getInstance().getTime());
+								 }else
+									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
+										 affiche.setAffAgpDateValDmp(Calendar.getInstance().getTime());
+									 }
 	 						affiche.setTStatut(new TStatut(statutUpdate));
 	 						affiche.setAffAgpStatutRetour("0");
 						iservice.updateObject(affiche);
