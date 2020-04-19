@@ -281,7 +281,7 @@
 			        </p:selectOneRadio>
 				     </td>
 				     <td style="width: 220px">
-				     <label  class="control-label">Responsabilité des bailleurs</label>
+				     <label  class="control-label">Responsable des bailleurs</label>
 				     </td>
 				     <td style="width: 320px">
 				     <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoRespBai}"   style="width: 100%" />
@@ -436,7 +436,7 @@
                   </div>
                   <label  class="col-sm-1 control-label">Date</label>
 				  <div class="col-sm-3">   
-                  <p:calendar  value="#{daoController.newAvis.aaoDateRecep}"   style="width: 100%" /> 
+                  <p:calendar  value="#{daoController.newAvis.aaoDateRecep}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" /> 
                   </div>
                   <label  class="col-sm-1 control-label">Heure</label>
 				  <div class="col-sm-2">
@@ -478,7 +478,7 @@
                   </div>
                   <label  class="col-sm-2 control-label">Ouv Technique</label>
 				  <div class="col-sm-2">    
-                  <p:calendar value="#{daoController.ouvTech}"  style="width: 100%" > 
+                  <p:calendar value="#{daoController.ouvTech}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" locale="fr" > 
                   <p:ajax event="blur" listener="#{daoController.equalDate()}" update="gnl:idOuv"/>	
                   </p:calendar>
                   </div>
@@ -487,7 +487,7 @@
                   <h:panelGroup rendered="#{daoController.ouvTechnique}">
                   <label  class="col-sm-2 control-label">Ouv Financière</label> 
 				  <div class="col-sm-2">
-                  <p:calendar value="#{daoController.ouvFin}"  style="width: 100%" />   
+                  <p:calendar value="#{daoController.ouvFin}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" />   
                   </div>
                   </h:panelGroup>
                   </h:panelGroup>
@@ -782,7 +782,7 @@
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Responsabilité des bailleurs</label></div>
+                  <div class="col-sm-4"><label class="pull-right">Responsable des bailleurs</label></div>
                   <div class="col-sm-8">
                     <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoRespBai}"  style="width: 100%" readonly="true"/></label>
                   </div>

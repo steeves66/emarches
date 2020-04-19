@@ -525,6 +525,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectTresor = true;
 					 selectPartBai= false;
 					 souCode="TRE";
+					 devCode="CFA";
 				    }else 
 				         if(sourfin.equalsIgnoreCase("")){
 				    	  selectPartBai = false;
@@ -1169,15 +1170,27 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      
      
       
+      
+    /* public void verifMarche() {
+   	  if("".equals(reucpMarche.getTymCode()) || reucpMarche.getTymCode().equalsIgnoreCase("") ) {
+ 		  //Message d'erreur
+ 		  FacesContext.getCurrentInstance().addMessage(null,
+	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs obligatoires", ""));
+ 	  }
+     }
+     */
+     
+     
+     
       //Enregistrement d'une opération PGPM sans AGPM
       @Transactional
       public void creerDetailPlan() throws IOException{
     	  
-    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("")
-    			 ||"".equals(reucpMarche.getTymCode()) ||  "".equals(recupModePassation.getMopCode())) {
+    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || detailPlan.getGpgLibFin().equalsIgnoreCase("") ||"".equalsIgnoreCase(detailPlan.getGpgLibFin())
+    			 ||"".equals(reucpMarche.getTymCode()) || recupModePassation.getMopCode().equalsIgnoreCase("") || "".equals(recupModePassation.getMopCode())) {
     		  //Message d'erreur
     		  FacesContext.getCurrentInstance().addMessage(null,
-	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs", ""));
+	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs obligatoires", ""));
     	  }else {
     		       listPlan = (List<TPlanGeneral>) iservice.getObjectsByColumn("TPlanGeneral", new ArrayList<String>(Arrays.asList("PLG_ID")),
       			    new WhereClause("PLG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
@@ -3217,16 +3230,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		this.natPiece = natPiece;
 	}
 
-
-	/*public TModePassation getRecupModePassation() {
-		return recupModePassation;
-	}
-
-
-	public void setRecupModePassation(TModePassation recupModePassation) {
-		this.recupModePassation = recupModePassation;
-	}*/
-	
 
 	public VModePassationPn getModePassation() {
 		return modePassation;

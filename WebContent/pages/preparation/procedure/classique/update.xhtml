@@ -109,17 +109,7 @@
                <div class="form-group">
                   <label class="col-sm-2 control-label">Type de marché<span style="color:red;"> *</span></label>
 				  <div class="col-sm-10">
-                    <table>
-		                 <tr>
-		                 <td style="width: 160px"><p:inputText id="typMa1" type="text" value="#{pgpmAcController.updateOperation.gpgTymCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 <td>
-		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                 </td>
-		                 <td style="width: 530px"><p:inputText id="typMa2" type="text" value="#{pgpmAcController.updateOperation.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 </tr>
-                     </table>
+				  <p:inputText id="typMa2" type="text" value="#{pgpmAcController.updateOperation.gpgTymCode} : #{pgpmAcController.updateOperation.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 
@@ -127,17 +117,7 @@
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-10">
-                    <table>
-		                 <tr>
-		                 <td style="width: 160px"><p:inputText id="modeP1" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 <td>
-		                  <p:commandLink  oncomplete="PF('passationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                 </td>
-		                 <td style="width: 530px"><p:inputText id="modeP2" type="text" value="#{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 </tr>
-                     </table>
+				  <p:inputText id="modeP2" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode} : #{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -146,17 +126,7 @@
                  <div class="form-group">
                   <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-10">
-                    <table>
-		                 <tr>
-		                 <td style="width: 160px"><p:inputText id="modePgs1" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 <td>
-		                  <p:commandLink  oncomplete="PF('passationPgspmDlg').show()" action="#{pgpmAcController.chargeMode}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                 </td>
-		                 <td style="width: 530px"><p:inputText id="modePgs2" type="text" value="#{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 </tr>
-                     </table>
+				  <p:inputText id="modePgs2" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode} : #{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>

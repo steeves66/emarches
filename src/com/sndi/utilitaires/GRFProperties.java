@@ -102,10 +102,10 @@ public class GRFProperties {
 	public static final String PARAM_LOG4J_LIBELLE = "C:/LOG4J/";
 	//public static final String PARAM_UPLOAD_DESTINATION = getProperty("destination", "\\standalone\\Dossiers\\");
 	public static final String PARAM_UPLOAD_DESTINATION = "/standalone/Dossiers/";
-	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/standalone/Dossiers/DAO/Travaux/";
-	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/standalone/Dossiers/DAO/Fournitures/";
-	public static final String PARAM_UPLOAD_DAO_SERVICES = "/standalone/Dossiers/DAO/Services/";
-	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/standalone/Dossiers/DAO/Prestations/";
+	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/wildfly8/standalone/Dossiers/DAO/Travaux/";
+	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/wildfly8/standalone/Dossiers/DAO/Fournitures/";
+	public static final String PARAM_UPLOAD_DAO_SERVICES = "/wildfly8/standalone/Dossiers/DAO/Services/";
+	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/wildfly8/standalone/Dossiers/DAO/Prestations/";
 	
 	public static final String PARAM_UPLOAD_DESTINATION_DAO_LINUX = getProperty("destinationDao", "\\standalone\\Dossiers\\DAO\\");
 	public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/standalone/Dossiers/DAO/Travaux");

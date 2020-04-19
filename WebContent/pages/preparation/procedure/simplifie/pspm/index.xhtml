@@ -669,7 +669,7 @@
 				        
 				        
 				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
-				        <p:column headerText="Date reception" styleClass="col-sm-1" >
+				        <p:column headerText="Transmission AC" styleClass="col-sm-2" >
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affDppDateValAc}" style="color:red; font-weight:bold">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
@@ -684,7 +684,7 @@
 				        </h:panelGroup>
 				        
 				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
-				         <p:column headerText="Date reception" styleClass="col-sm-1" >
+				         <p:column headerText="Transmission CPMP" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.affDppDateValCpmp}" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>

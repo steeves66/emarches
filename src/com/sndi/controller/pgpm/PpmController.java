@@ -1684,6 +1684,7 @@ public class PpmController {
 			    				  for(TFinancementPgpm fin: listeFinancementPgpm) {
 					      		        TFinancementPpm newFinancement = new TFinancementPpm();
 					      		        newFinancement.setTDetailPlanPassation(detailPass);
+					      		        newFinancement.setFppTypeFinance(fin.getFipTypeFinance());
 					      		        newFinancement.setFppCommentaire(fin.getFipCommentaire());
 					      		        newFinancement.setFppMontantCfa(fin.getFipMontantCfa());
 					      		        newFinancement.setFppMontantDevise(fin.getFipMontantDevise());

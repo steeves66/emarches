@@ -153,7 +153,7 @@
                   
                   <h:panelGroup rendered="#{ppmController.modeleAmi}" >
                   <div class="col-sm-9">
-                    <p:selectOneMenu id="tdao" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+                    <p:selectOneMenu id="tdao" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeAmi}" var="da" itemLabel="#{da.mdtLibelleLong}" itemValue="#{da.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -163,7 +163,7 @@
                   
                   <h:panelGroup rendered="#{ppmController.modeleDao}" >
                   <div class="col-sm-9">
-                    <p:selectOneMenu id="tami" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+                    <p:selectOneMenu id="tami" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeDao}" var="am" itemLabel="#{am.mdtLibelleLong}" itemValue="#{am.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -173,7 +173,7 @@
                   
                   <h:panelGroup rendered="#{ppmController.modelePrq}" >
                   <div class="col-sm-9">
-                    <p:selectOneMenu id="tprq" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+                    <p:selectOneMenu id="tprq" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listePrq}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -239,13 +239,13 @@
               <div class="form-group">
 		     <label for="trdao" class="col-sm-3 control-label">Date Trans<span style="color:red;"> *</span></label>
 		     <div class="col-sm-3">
-		       <p:calendar id="trdao" value="#{ppmController.detailPass.dppDateDaoTrans}" pattern="dd/MM/yyyy" style="width: 100%" >
+		       <p:calendar id="trdao"  value="#{ppmController.detailPass.dppDateDaoTrans}" pattern="dd/MM/yyyy" style="width: 100%" >
 		       </p:calendar> 
 		   </div>
 		   
 		   <label for="rr" class="col-sm-2 control-label">Date Pub<span style="color:red;"> *</span></label>
 		     <div class="col-sm-3">
-		       <p:calendar id="rr" value="#{ppmController.detailPass.dppDateAvisAoPublication}" pattern="dd/MM/yyyy" style="width: 100%" >
+		       <p:calendar id="rr"  value="#{ppmController.detailPass.dppDateAvisAoPublication}" pattern="dd/MM/yyyy" style="width: 100%" >
 		       </p:calendar> 
 		   </div>
 		   </div>        
@@ -1057,13 +1057,13 @@
 			               emptyMessage="Aucun Pgpm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
-                           <h:commandLink id="pgpm" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}">				        
+                           <h:commandLink id="pgpm" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}" update="gnl:pgpm, gnl:pgpm2">				        
          				  <h:outputText value="#{slctdTb.gpgId}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Objet" styleClass="col-sm-11" >
-                           <h:commandLink id="pgpm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}">				        
+                           <h:commandLink id="pgpm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}" update="gnl:pgpm, gnl:pgpm2">				        
          				  <h:outputText value="#{slctdTb.gpgObjet}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
