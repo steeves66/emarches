@@ -858,7 +858,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	//Methode de paiement
 	  @Transactional
 	  public void payer() {
-		  if(newCandidat.getCanSouNcc().equalsIgnoreCase("") ||newCandidat.getCanNom().equalsIgnoreCase("") || sitDac.equalsIgnoreCase("") ||"".equals(sitDac) ) {
+		  if(newCandidat.getCanSouNcc().equalsIgnoreCase("") ||newCandidat.getCanNom().equalsIgnoreCase("") || sitDac.equalsIgnoreCase("") ) {
 			//Message d'erreur
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat ou choisir votre option", ""));
@@ -911,14 +911,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 					  				      if (!listDao.isEmpty()) {
 					  					     newDao= listDao.get(0);
-					  					     newDao.setTStatut(new TStatut(slctdTd.getAffStaCode()));
+					  					     newDao.setTStatut(new TStatut("RET"));
 					  			             iservice.updateObject(newDao); 
 					  	   	                 }
 					  				
 					  				    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"RET"));
 		    			  				TStatut statuts = new TStatut();
 		    			  				if(!LS.isEmpty()) statuts = LS.get(0);
-		    			  				  //Historisation des Agpm
+		    			  				  //Historisation des DAC
 		    			  				     THistoDac dacStatut = new THistoDac();
 		    			  				     dacStatut.setHacDate(Calendar.getInstance().getTime());
 		    			  				     dacStatut.setHacCommentaire("DAO retiré");
@@ -955,7 +955,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 				        
 		 				        String exo=chaine+String.valueOf(year)+mois;
 		 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-		 		               newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
+		 		               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 		 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 		               iservice.addObject(newCandidat);
 		 		               
@@ -977,23 +977,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 		                      iservice.addObject(venteDetail);
 		      			  				    }
 		      			  		    
-		      			  		        //Mis à Jour du DAO au statut de Retrait dans T_AFFICHAGE_DAO
-			                            slctdTd.setAffStaCode("DVE");
-			                            iservice.updateObject(slctdTd);
-		      			  				   
 		 	                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
 		 	                              listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 		 			  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 		 			  				      if (!listDao.isEmpty()) {
 		 			  					     newDao= listDao.get(0);
-		 			  					     newDao.setTStatut(new TStatut(slctdTd.getAffStaCode()));
-		 			  			             iservice.updateObject(newDao); 
+		 			  					     newDao.setTStatut(new TStatut("DVE"));
+		 			  					     iservice.updateObject(newDao);
 		 			  	   	                 }
 		 			  				      
 		 			  				    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"DVE"));
 		     			  				TStatut statuts = new TStatut();
 		     			  				if(!LS.isEmpty()) statuts = LS.get(0);
-		     			  				  //Historisation des Agpm
+		     			  				  //Historisation des DAO
 		     			  				     THistoDac dacStatut = new THistoDac();
 		     			  				     dacStatut.setHacDate(Calendar.getInstance().getTime());
 		     			  				     dacStatut.setHacCommentaire("DAO payé");
@@ -1009,7 +1005,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		     			  				   
 		     			  				  //Actualisation du Tableau de Bord
 		     			 		          tableauBordController.chargeDataDao();
-		 		                    	  
 		      			  				   //Message de Confirmation
 		      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
 		      					           userController.setTexteMsg("Paiement effectué avec succès");
@@ -1019,6 +1014,29 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		                   }    
 	                }
 	  //Fin Methode de Paiement
+	  
+	       //Début de la vente du DAO
+			public void finVente() {
+				String statUpdate = "";
+				String message = "";
+				if(slctdTd.getAffStaCode().equalsIgnoreCase("D6V")) {
+					statUpdate = "DVE";
+					message="Fin de la vente du Dossier d'Appel à Concurrence N°"+slctdTd.getAffDacCode();
+				 }else 
+					 if(slctdTd.getAffStaCode().equalsIgnoreCase("DPU")) {
+							statUpdate = "DVE";
+							message="Fin de la vente du Dossier d'Appel à Concurrence N°"+slctdTd.getAffDacCode();
+					 }
+				slctdTd.setAffStaCode(statUpdate);
+				iservice.updateObject(slctdTd);
+				//Chargement de la liste des ventes et celle du tableau de Bord
+				chargeDataVente();
+				tableauBordController.chargeDataDao();
+				userController.setTexteMsg(message);
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");  
+			}
+	//Fin de la vente du DAO
 	  
 	//Filtre multicritère pour les DAO en Procédure Normale
 		

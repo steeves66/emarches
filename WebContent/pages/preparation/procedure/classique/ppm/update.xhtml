@@ -345,7 +345,7 @@
                <div class="form-group">
 		                  <label for="baildao" class="col-sm-6 control-label">Validation DAO Bail</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="baildao" value="#{ppmModificationController.updatePpm.affDppDateAttApproBail}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="baildao" value="#{ppmModificationController.updatePpm.affDppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                </div>
 		                </div> 
@@ -356,7 +356,7 @@
 		                <div class="form-group">
 		                  <label for="invAoo" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="invAoo" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppInvEntre}" style="width: 100%" >
+		                   <p:calendar id="invAoo"  mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppInvEntre}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div> 
@@ -380,28 +380,28 @@
          <div class="form-group">
 		                  <label for="oft" class="col-sm-6 control-label">Ouverture Technique<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="oft" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateOuvertOt}" style="width: 100%" >
+		                   <p:calendar id="oft" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateOuvertOt}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
 		                  <label for="off" class="col-sm-6 control-label">Ouverture Financière<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="off" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateOuvertOf}" style="width: 100%" >
+		                   <p:calendar id="off" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateOuvertOf}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
 		                 <div class="form-group">
 		                  <label for="rapp" class="col-sm-6 control-label">Rapport d'évaluation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="rapp" value="#{ppmModificationController.updatePpm.affDppDateElabRapport}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="rapp" value="#{ppmModificationController.updatePpm.affDppDateElabRapport}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
 		                 <div class="form-group">
 		                  <label for="jug" class="col-sm-6 control-label">Jugement Technique<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="jug" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateJugementTech}" style="width: 100%" >
+		                   <p:calendar id="jug" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateJugementTech}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -415,7 +415,7 @@
 		                  <div class="form-group">
 		                  <label for="approba" class="col-sm-6 control-label">ANO du Bailleur</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="approba" value="#{ppmModificationController.updatePpm.affDppDateAttApproBail}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="approba" value="#{ppmModificationController.updatePpm.affDppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -423,7 +423,7 @@
 		                 <div class="form-group">
 		                  <label for="approbaAno" class="col-sm-6 control-label">ANO de la DMP</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="approbaAno" value="#{ppmModificationController.updatePpm.affDppApprobAno}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="approbaAno" value="#{ppmModificationController.updatePpm.affDppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -431,7 +431,7 @@
 		                 <div class="form-group">
 		                  <label for="neg" class="col-sm-6 control-label">Négociation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="neg" value="#{ppmModificationController.updatePpm.affDppDateNegociation}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="neg" value="#{ppmModificationController.updatePpm.affDppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                  </div>
@@ -439,7 +439,7 @@
 		                  <div class="form-group">
 		                  <label for="jug2" class="col-sm-6 control-label">Jugement Financier<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="jug2" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateJugementOffre}" style="width: 100%" >
+		                   <p:calendar id="jug2" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateJugementOffre}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -458,14 +458,14 @@
             <div class="form-group">
 		                  <label for="attr" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="attr" value="#{ppmModificationController.updatePpm.affDppDateSignatAttrib}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="attr" value="#{ppmModificationController.updatePpm.affDppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
 		                  <label for="saiAc" class="col-sm-6 control-label">Signature de l'AC<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="saiAc" value="#{ppmModificationController.updatePpm.affDppDateSignatAc}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="saiAc" value="#{ppmModificationController.updatePpm.affDppDateSignatAc}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -474,7 +474,7 @@
                    <div class="form-group">
 		                  <label for="marcheApprob" class="col-sm-6 control-label">Approbation du marché<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="marcheApprob" value="#{ppmModificationController.updatePpm.affDppDateMarcheApprob}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="marcheApprob" value="#{ppmModificationController.updatePpm.affDppDateMarcheApprob}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -482,7 +482,7 @@
 		                <div class="form-group">
 		                  <label for="valDmp" class="col-sm-6 control-label">Validation Marché DMP<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valDmp" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateAttApprobDmp}" style="width: 100%" >
+		                   <p:calendar id="valDmp" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateAttApprobDmp}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -506,7 +506,7 @@
 		          <div class="form-group">
 		                  <label for="debut" class="col-sm-6 control-label">Début d'execution du marché<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="debut" value="#{ppmModificationController.updatePpm.affDppDateExecDebut}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="debut" value="#{ppmModificationController.updatePpm.affDppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                  </div>
@@ -515,7 +515,7 @@
 		         <div class="form-group">
 		                  <label for="fin" class="col-sm-6 control-label">Fin d'execution du marché<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="fin" value="#{ppmModificationController.updatePpm.affDppDateExecFin}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="fin" value="#{ppmModificationController.updatePpm.affDppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>

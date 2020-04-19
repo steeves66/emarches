@@ -2231,7 +2231,6 @@ public class AgpmController {
 	 //Edition de l'AGPM
 	 //Edition de l'AGPM
 	 public void imprimerAgpm() {
-		  
 			   projetReport.longparam1(affichageAgpm.getAffAgpId(), "Agpm", "Agpm"); 
 		}
 	 
