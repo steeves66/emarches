@@ -107,7 +107,7 @@ public class VUpdateDac implements java.io.Serializable {
 	private Date pofDteSaisi;
 	private String pofOpeMatricule;
 	private String pofObs;
-	private BigDecimal adaNum;
+	private long adaNum;
 	private String adaLibelle;
 	private String adaFonCod;
 	private String aaoCode;
@@ -119,9 +119,9 @@ public class VUpdateDac implements java.io.Serializable {
 	private Date aaoDteOuvTec;
 	private String aaoDteHeurOuv;
 	private Date aaoDteOuvFin;
-	private BigDecimal aaoNbrLot;
-	private BigDecimal aaoNbrOuv;
-	private BigDecimal aaoDelaiVal;
+	private long aaoNbrLot;
+	private long aaoNbrOuv;
+	private long aaoDelaiVal;
 	private String aaoFonCodAc;
 	private String aaoFonCodeCpmp;
 	private String aaoNatInt;
@@ -135,7 +135,7 @@ public class VUpdateDac implements java.io.Serializable {
 	private String aaoAvisBail;
 	private BigDecimal aaoMtCaut;
 	private String aaoModePaiement;
-	private BigDecimal aaoCoutDac;
+	private long aaoCoutDac;
 	private String aaoLieuRecep;
 	private Date aaoDateRecep;
 	private String aaoHeureRecep;
@@ -205,13 +205,13 @@ public class VUpdateDac implements java.io.Serializable {
 			BigDecimal dtaNum, BigDecimal dtaAdaNum, String dtaTitre, String dtaLibelle, Date dtaDteSaisi,
 			Short dtaLiaNum, BigDecimal pofNum, String pofDacCode, BigDecimal pofLaaId, BigDecimal pofOpdNum,
 			String pofOpdTpoCode, BigDecimal pofDofNum, String pofPresent, String pofConforme, String pofTypeAct,
-			Date pofDteSaisi, String pofOpeMatricule, String pofObs, BigDecimal adaNum, String adaLibelle,
+			Date pofDteSaisi, String pofOpeMatricule, String pofObs, long adaNum, String adaLibelle,
 			String adaFonCod, String aaoCode, String aaoLibelle, String aaoDacCode, Date aaoDteSaisi, String aaoStaCode,
-			Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, BigDecimal aaoNbrLot,
-			BigDecimal aaoNbrOuv, BigDecimal aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt,
+			Date aaoDtePub, Date aaoDteOuvTec, String aaoDteHeurOuv, Date aaoDteOuvFin, long aaoNbrLot,
+			long aaoNbrOuv, long aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt,
 			String aaoTaux, String aaoLieuExe, String aaoNomResp, String aaoInterPub, String aaoCautDefExig,
 			String aaoBompPub, String aaoVenteParLot, String aaoAvisBail, BigDecimal aaoMtCaut, String aaoModePaiement,
-			BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,
+			long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,
 			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
 			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, BigDecimal laaId, String laaAaoCode, String laaObjet,
@@ -1165,11 +1165,11 @@ public class VUpdateDac implements java.io.Serializable {
 	}
 
 	@Column(name = "ADA_NUM", precision = 22, scale = 0)
-	public BigDecimal getAdaNum() {
+	public long getAdaNum() {
 		return this.adaNum;
 	}
 
-	public void setAdaNum(BigDecimal adaNum) {
+	public void setAdaNum(long adaNum) {
 		this.adaNum = adaNum;
 	}
 
@@ -1273,29 +1273,29 @@ public class VUpdateDac implements java.io.Serializable {
 	}
 
 	@Column(name = "AAO_NBR_LOT", precision = 22, scale = 0)
-	public BigDecimal getAaoNbrLot() {
+	public long getAaoNbrLot() {
 		return this.aaoNbrLot;
 	}
 
-	public void setAaoNbrLot(BigDecimal aaoNbrLot) {
+	public void setAaoNbrLot(long aaoNbrLot) {
 		this.aaoNbrLot = aaoNbrLot;
 	}
 
 	@Column(name = "AAO_NBR_OUV", precision = 22, scale = 0)
-	public BigDecimal getAaoNbrOuv() {
+	public long getAaoNbrOuv() {
 		return this.aaoNbrOuv;
 	}
 
-	public void setAaoNbrOuv(BigDecimal aaoNbrOuv) {
+	public void setAaoNbrOuv(long aaoNbrOuv) {
 		this.aaoNbrOuv = aaoNbrOuv;
 	}
 
 	@Column(name = "AAO_DELAI_VAL", precision = 22, scale = 0)
-	public BigDecimal getAaoDelaiVal() {
+	public long getAaoDelaiVal() {
 		return this.aaoDelaiVal;
 	}
 
-	public void setAaoDelaiVal(BigDecimal aaoDelaiVal) {
+	public void setAaoDelaiVal(long aaoDelaiVal) {
 		this.aaoDelaiVal = aaoDelaiVal;
 	}
 
@@ -1417,11 +1417,11 @@ public class VUpdateDac implements java.io.Serializable {
 	}
 
 	@Column(name = "AAO_COUT_DAC", precision = 22, scale = 0)
-	public BigDecimal getAaoCoutDac() {
+	public long getAaoCoutDac() {
 		return this.aaoCoutDac;
 	}
 
-	public void setAaoCoutDac(BigDecimal aaoCoutDac) {
+	public void setAaoCoutDac(long aaoCoutDac) {
 		this.aaoCoutDac = aaoCoutDac;
 	}
 

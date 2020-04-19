@@ -520,25 +520,37 @@ public class CommissionController {
 				userController.setSevrityMsg("success");	
 		}
 		
+		public void chargeListe(String statut) {
+			 listeAppelOffre.clear();
+			 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+			 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut));
+			_logger.info("listeAppelOffre size: "+listeAppelOffre.size());
+		}
+		
 		//Fin Ouverture
 		public void finOuverture() {
 			String statUpdate = "";
 			String message = "";
 			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
 				statUpdate = "OUV";
-				message="Fin de l'ouverture des Offres !";
+				message="Fin de l'ouverture des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
+				chargeListe("OUV");
+				
 			 }else {
 				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
 						statUpdate = "ANA";
-						message="Fin de l'analyse des Offres !";
+						chargeListe("ANA");
+						message="Fin de l'analyse des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 				 }else {
 					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
 						 statUpdate = "JUG";
-							message="Fin du jugement des Offres !";
+						 chargeListe("JUG");
+						 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 					 }else {
 						 
 					 }	 
 				 }
+ 
 			 }
 			
 			slctdTd.setTStatut(new TStatut(statUpdate));	

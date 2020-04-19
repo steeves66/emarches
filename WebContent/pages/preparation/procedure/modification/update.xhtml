@@ -84,12 +84,7 @@
                         </span>
 					 </div>
                <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{dacModifController.ppmDao}" 
-					rowKey="#{slctdTb.dppId}" selection="#{dacModifController.listSelectionPpmDao}" emptyMessage="Aucun PPM enregistré" rows="5" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
-                         
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                         
+                    emptyMessage="Aucun PPM enregistré" rows="5">
                          <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
          				<h:outputText value="#{slctdTb.dppObjet}" />
 				        </p:column>
@@ -109,6 +104,13 @@
          				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
 				        </p:column> 
 				        
+				        
+				           <p:column width="5%" rendered="false">
+				              <p:commandLink  oncomplete="PF('ppmDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+				              <f:setPropertyActionListener value="#{slctdTb}" target="#{dacModifController.selectLot}" />
+							<i class="fa fa-pencil"></i>
+						  </p:commandLink>
+				        </p:column>
 				       
                     </p:dataTable>
                     
@@ -183,15 +185,12 @@
 	          
 	           
           </div>
-          <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_pn}" action="#{dacModifController.saveDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+          <p:commandLink  styleClass="btn btn-success row pull-right" rendered="false" action="#{dacModifController.saveDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	      </p:commandLink>
 	      
-	      <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{controleController.btn_dao_ps}" action="#{dacModifController.saveDaoPs()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
-	      </p:commandLink>
+	     
 	      
          </div>
         </div>
@@ -274,7 +273,7 @@
 			        </p:selectOneRadio>
 				     </td>
 				     <td style="width: 220px">
-				     <label  class="control-label">Responsabilité des bailleurs</label>
+				     <label  class="control-label">Responsable des bailleurs</label>
 				     </td>
 				     <td style="width: 320px">
 				     <p:inputText  type="text" styleClass="form-control" value="#{dacModifController.updateDac.aaoRespBai}"   style="width: 100%" />
@@ -489,7 +488,7 @@
                 <div class="pull-right ">
                        
                        
-					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{dacModifController.saveAvis()}"  update=":content">
+					       <p:commandLink rendered="false" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{dacModifController.saveAvis()}"  update=":content">
 				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Enregistrer
 				            </p:commandLink>
@@ -604,15 +603,14 @@
          </div>
          <div class="box-body">
              <p:dataTable id="TPOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{dacModifController.listePiecesOffres}" 
-             rowKey="#{slctdTb.tpoCode}" selection="#{dacModifController.listeSelectionPiecesOffres}" emptyMessage="Aucune Pièce trovée">
-                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+             emptyMessage="Aucune Pièce trovée">
          				<p:column headerText="PIECES" styleClass="col-sm-12">
 				            <h:outputText value="#{slctdTb.tpoLibelle}"/>
 				        </p:column>
                  </p:dataTable> 
                   <br/> 
                  <div class="pull-right ">
-			            <p:commandLink action="#{dacModifController.savePieceOffres()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl:finance">
+			            <p:commandLink rendered="false" action="#{dacModifController.savePieceOffres()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl:finance">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
@@ -886,43 +884,6 @@
             </p:panel>
             </p:tab>        
       
-             <p:tab id="Dossiers" title="Fichier(s) Joint(s)" titleStyle="background-color: #f88b2e;background-image: none">
-             <p:panel header="Fichier(s) Joint(s)">
-
-              <div class="row">
-              <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-								<div class="col-xs-12 col-sm-12">
-								<p:fileUpload fileUploadListener="#{agpmController.upload}" multiple="true"
-			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
-			                      mode="advanced" dragDropSupport="true"
-			                          update=":gnl" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
-								</div>
-              </div>
-              <br/>
-	            <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES FICHIERS DE L'AGPM </div></div> 
-			         <div class="col-md-2 "> </div>
-               </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{agpmController.dossListe}" emptyMessage="Aucun Document enrégistré">
-	           <p:column headerText="Nom du document " styleClass="">
-	            <h:outputText value="#{doss.dagCommentaire}" />
-	        </p:column>
-	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
-	        
-				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{agpmController.removeDossier}" title="Supprimer" update="gnl">
-                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-                   <f:setPropertyActionListener value="#{doss}" target="#{agpmController.selectedDossier}" />
-                </p:commandLink>
- 	        </p:column>
-	    </p:dataTable>    
-	            </div>
-	            </div>
-            </p:panel>
-            </p:tab>
              
             
            
@@ -943,6 +904,19 @@
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		</h:panelGroup>
+		
+		
+		 <div class="row">
+		   <div class="col-md-5"></div>
+		   <div class="col-md-6">
+		     <p:commandLink rendered="{controleController.etat_dao}" styleClass="btn btn-warning mr10" style="background-color: #f88b2e; color:#fff" action="#{dacModifController.opendaoNew()}" ajax="false">
+				   <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
+		    </p:commandLink>
+		   </div>
+		   <div class="col-md-6"></div>
+		  </div>
+		  
+				    
 
     </section>
     </h:form>
@@ -1007,6 +981,58 @@
 				        </p:column>		
 				        	
 						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="dlogPPM">
+	        <p:dialog  widgetVar="ppmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le PPM">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{dacModifController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
+						    <p:ajax event="keyup" update=":dlogLign:natLigne" listener="#{dacModifController.filtreImputation()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						<p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{dacModifController.ppmDao}" 
+                    emptyMessage="Aucun PPM enregistré" rows="5">
+                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppObjet}" />
+				        </p:column>
+
+                     
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgImputation}" />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
+				        </p:column> 
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
+				        </p:column> 
+				        </p:dataTable>
 						</h:panelGrid>
                      </div>
                         

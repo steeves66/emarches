@@ -36,6 +36,7 @@ public class TOffres implements java.io.Serializable {
 	private BigDecimal offMtTotCor;
 	private Date offDteOuvTec;
 	private Date offDteStaCour;
+	private String offSouSigleSte;
 	private Set<TDetOffres> TDetOffreses = new HashSet<TDetOffres>(0);
 
 	public TOffres() {
@@ -50,7 +51,7 @@ public class TOffres implements java.io.Serializable {
 
 	public TOffres(BigDecimal offNum, TSoumissions TSoumissions, TStatut TStatut, TOperateur TOperateur,
 			TAvisAppelOffre TAvisAppelOffre, TDacSpecs TDacSpecs, Date offDteSaisi, Date offDteOuvFin,
-			BigDecimal offMtTotOfr, Date offDteJug, BigDecimal offMtTotCor, Date offDteOuvTec, Date offDteStaCour,
+			BigDecimal offMtTotOfr, Date offDteJug, BigDecimal offMtTotCor, Date offDteOuvTec, Date offDteStaCour,String offSouSigleSte,
 			Set<TDetOffres> TDetOffreses) {
 		this.offNum = offNum;
 		this.TSoumissions = TSoumissions;
@@ -65,6 +66,7 @@ public class TOffres implements java.io.Serializable {
 		this.offMtTotCor = offMtTotCor;
 		this.offDteOuvTec = offDteOuvTec;
 		this.offDteStaCour = offDteStaCour;
+		this.TDetOffreses = TDetOffreses;
 		this.TDetOffreses = TDetOffreses;
 	}
 
@@ -195,6 +197,15 @@ public class TOffres implements java.io.Serializable {
 
 	public void setOffDteStaCour(Date offDteStaCour) {
 		this.offDteStaCour = offDteStaCour;
+	}
+	
+	@Column(name = "OFF_SOU_SIGLE_STE", length = 500)
+	public String getOffSouSigleSte() {
+		return this.offSouSigleSte;
+	}
+
+	public void setOffSouSigleSte(String offSouSigleSte) {
+		this.offSouSigleSte = offSouSigleSte;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOffres")
