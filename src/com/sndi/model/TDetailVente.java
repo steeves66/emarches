@@ -99,7 +99,7 @@ public class TDetailVente implements java.io.Serializable {
 		this.dveQte = dveQte;
 	}
 
-	@Column(name = "DVE_COUT", precision = 10, scale = 0)
+	@Column(name = "DVE_COUT", precision = 11)
 	public long getDveCout() {
 		return this.dveCout;
 	}

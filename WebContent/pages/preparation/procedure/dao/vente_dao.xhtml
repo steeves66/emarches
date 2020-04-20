@@ -138,7 +138,7 @@
 		                   <div class="form-group horizontal">
 		                      <label for="ncc1" class="col-sm-6 control-label text-center"><b>Le DAO fait-il objet d'une vente ou d'un retrait?<span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-6">
-		                         <p:selectOneRadio id="operation" value="#{daoController.sitDac}">
+		                         <p:selectOneRadio id="operation" required="true" requiredMessage="Veuillez choisir votre opération" value="#{daoController.sitDac}">
 		                            <p:ajax listener="#{daoController.checkVente()}" update="gnl:venteDf" />
 								      <f:selectItem itemLabel="Retrait" itemValue="Retrait" />
 								       <f:selectItem itemLabel="Vente" itemValue="Vente" />

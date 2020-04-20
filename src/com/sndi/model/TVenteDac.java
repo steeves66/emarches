@@ -57,7 +57,7 @@ public class TVenteDac implements java.io.Serializable {
 	@Id
 	@SequenceGenerator(name = "SEQ_VEN_NUM_Sequence", sequenceName = "SEQ_VEN_NUM", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_VEN_NUM_Sequence")
-	@Column(name = "VEN_NUM", unique = true, nullable = false, precision = 2, scale = 0)
+	@Column(name = "VEN_NUM", unique = true, nullable = false, precision = 10, scale = 0)
 	public long getVenNum() {
 		return this.venNum;
 	}

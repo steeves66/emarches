@@ -3921,6 +3921,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
                 	 //chargeLotExiste();
                 	 chargeSoumissions();
                 	 recupMontantDao();
+                	 newCandidat = new TCandidats();
+                	 etatRecu = false;
+                	 sitDac = "";
 		 			_logger.info("value: "+value+" action: "+action);
 				break; 
 				

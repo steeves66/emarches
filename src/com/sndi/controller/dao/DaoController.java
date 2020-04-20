@@ -880,7 +880,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						        
 						        String exo=chaine+String.valueOf(year)+mois;
 				               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-				               newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
+				               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 				               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 				               iservice.addObject(newCandidat);
 				               
@@ -3940,64 +3940,16 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
                 	 //chargeLotExiste();
                 	 chargeSoumissions();
                 	 recupMontantDao();
+                	 newCandidat = new TCandidats();
+                	 etatRecu = false;
+                	 sitDac = "";
 		 			_logger.info("value: "+value+" action: "+action);
 				break; 
 				
                 case "dao10":
                 	 chargeBailleurDao();
 		 			_logger.info("value: "+value+" action: "+action);
-				break;
-				
-                case "dps1":
-					chargeDataPs();
-					chargeGestions();
-					chargeDataAffecterPs();
-					chargeDataAValiderPs();
-					chargeDaoCharegEtudePs();
-					chargeDaoChargeEtudePs();
-					chargeDaoAffectesRPs();
-					chargeDataAPublierPs();
-					chargeDataARetirerPs();
-					chargeDataVentePs();
-					chargeDataPriseCompte();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps2":
-                	chargePSPM();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-             
-                case "dps4":
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps5":
-                	chargeFonctionImput();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps6":
-                	chargePiecesByDao();
-                	chargePiecesByCsv();
-                	chargePiecesByCharges();
-                	chargeRespoExiste();
-                	chargePiecesByBinome();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps7":
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-      
-                case "dps9":
-                	chargeSoumissions();
-               	    recupMontantDao();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps10":
-                  	 chargeDaoBailleurPs();
-                  	 observationAvis();
-                  	 chargeLotsRappel();
-   		 			_logger.info("value: "+value+" action: "+action);
-   				break;
-				
+				break;		
 			    }
 		     return userController.renderPage(value);  
 	 }
