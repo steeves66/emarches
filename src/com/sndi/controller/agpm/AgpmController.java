@@ -329,6 +329,15 @@ public class AgpmController {
 									new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
 							tableauBordController.chargeDataAgpm(); 
 								_logger.info("objetListe size: "+validationListe.size());
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 getValidationListe().clear();
+								validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+										"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
+								tableauBordController.chargeDataAgpm(); 
+									_logger.info("objetListe size: "+validationListe.size());
+						 }
 					 }
 			     } 
 			   }
@@ -678,7 +687,17 @@ public class AgpmController {
 								tableauBordController.chargeDataAgpm(); 
 									_logger.info("objetListe size: "+validationListe.size());
 									
-					      }
+					      }else 
+					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						    	    getValidationListe().clear();
+									validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+											"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V")),
+											new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+									new WhereClause("AFF_AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+									tableauBordController.chargeDataAgpm(); 
+										_logger.info("objetListe size: "+validationListe.size());
+										
+						      }
 			          }
 
 	   
@@ -715,7 +734,18 @@ public class AgpmController {
 										      tableauBordController.chargeDataAgpm(); 
 										      multiFiltre="";
 											_logger.info("objetListe size: "+validationListe.size());
-						          }
+						          }else 
+							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							    		  getValidationListe().clear();
+											validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+													"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+													new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
+											      tableauBordController.chargeDataAgpm(); 
+											      multiFiltre="";
+												_logger.info("objetListe size: "+validationListe.size());
+							          }
+			
+				
 				             }
 	      	 
 	      	 

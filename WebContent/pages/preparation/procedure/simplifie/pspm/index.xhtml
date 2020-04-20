@@ -345,7 +345,126 @@
        
     
        </h:panelGroup>
-         <!-- Fin Tableau de Bord pour le DMP -->       
+         <!-- Fin Tableau de Bord pour le DMP -->  
+         
+         <!-- Debut SPP -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">      
+          <h:panelGroup rendered="#{controleController.panelPspmTableauBordSai}">
+              
+              <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+             
+          <!-- ./col -->              
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.pspmDmSaisie}</h3>
+
+              <p>En attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.pspmDmTransmis}</h3>
+
+              <p>Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePspmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        </div>
+        </div>
+        </div>
+       </h:panelGroup> 
+       
+       <h:panelGroup rendered="#{controleController.panelPspmTableauBordVal}">
+        <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+            
+ 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.pspmDmAttenteValide}</h3>
+
+              <p>En attente de Validation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.pspmDmValide}</h3>
+
+              <p>Validé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+
+            <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePspmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+      
+       
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.pspmDmDiff}</h3>
+
+              <p>Différé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{ppmController.chargePspmDifDmp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+       
+      </div>
+            </div>
+                  </div>
+       </h:panelGroup>
+       
+    
+       </h:panelGroup>
+         <!-- Fin SPP  -->    
 
                   
                 </div>

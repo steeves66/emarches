@@ -358,7 +358,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								//new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 								tableauBordController.chargeDataPgpm();
 								_logger.info("affichageListe size: "+validationListe.size());	
-					 }
+					 }else
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						 getValidationListe().clear();
+							validationListe = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_DTE_MODIF")),
+									"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+									new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
+							//new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+							tableauBordController.chargeDataPgpm();
+							_logger.info("affichageListe size: "+validationListe.size());	
+				 }
+			 
 			     
 			   
 			 }
@@ -385,7 +395,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								//new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 								tableauBordController.chargeDataPgspm();
 								_logger.info("affichageListe size: "+validationListePgspm.size());	
-					 }
+					 }else
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 getValidationListe().clear();
+							 validationListePgspm = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+									 "AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","PGS")),
+									new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
+									//new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+									tableauBordController.chargeDataPgspm();
+									_logger.info("affichageListe size: "+validationListePgspm.size());	
+				 }
+					 
 			     } 
 			   }
 			 }
@@ -422,7 +442,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 												new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 										tableauBordController.chargeDataPgpm();
 										_logger.info("affichageListe size: "+validationListe.size());
-						    	  }
+						    	  }else 
+							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							    		  getValidationListe().clear();
+											validationListe = (List<TAffichagePgpm>) iservice.getObjectsByColumnDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+													new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+											        new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
+													new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+											tableauBordController.chargeDataPgpm();
+											_logger.info("affichageListe size: "+validationListe.size());
+							    	  }
 			               }
 			
 			
@@ -567,7 +596,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 												new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 										tableauBordController.chargeDataPgspm();
 										_logger.info("validationListePgspm size: "+validationListePgspm.size());
-						    	  }
+						    	  }else 
+							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							    		  getValidationListe().clear();
+							    		  validationListePgspm = (List<TAffichagePgpm>) iservice.getObjectsByColumnDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+													new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+											        new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
+													new WhereClause("AFF_GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+											tableauBordController.chargeDataPgspm();
+											_logger.info("validationListePgspm size: "+validationListePgspm.size());
+							    	  }
 			               }
 		 
 		 

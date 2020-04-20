@@ -536,6 +536,16 @@ public class PpmController {
 								_logger.info("affichageListe size: "+validationListe.size());
 								//Actualisation du Tableau de Bord
 								tableauBordController.chargeDataPspm();
+					   }else {
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+								 getValidationListe().clear();
+										validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+												"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPS")), 
+										     new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
+										_logger.info("affichageListe size: "+validationListe.size());
+										//Actualisation du Tableau de Bord
+										tableauBordController.chargeDataPspm();
+							   }
 					   }
 			       } 
 			    }
@@ -578,7 +588,17 @@ public class PpmController {
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPpm();
-		         	  }
+		         	  }else 
+				    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+				    		  getValidationListe().clear();
+								validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
+								 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+								_logger.info("affichageListe size: "+validationListe.size());
+								//Actualisation du Tableau de Bord
+								tableauBordController.chargeDataPpm();
+	         	  }
 			     }
 			
 			//Filtre multicritère pour les PSPM
@@ -610,7 +630,16 @@ public class PpmController {
 									 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPspm();
-					    	  }
+					    	  }else 
+						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						    		  getValidationListe().clear();
+										validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+										new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+										new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
+										 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+										//Actualisation du Tableau de Bord
+										tableauBordController.chargeDataPspm();
+						    	  }
 			           }
 			
 			
