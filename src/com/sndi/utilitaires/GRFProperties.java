@@ -104,8 +104,7 @@ public class GRFProperties {
 	public static final String PARAM_UPLOAD_DESTINATION = "/standalone/Dossiers/";
 	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/wildfly8/standalone/Dossiers/DAO/Travaux/";
 	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/wildfly8/standalone/Dossiers/DAO/Fournitures/";
-	public static final String PARAM_UPLOAD_DAO_SERVICES = "/wildfly8/standalone/Dossiers/DAO/Services/";
-	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/wildfly8/standalone/Dossiers/DAO/Prestations/";
+	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/wildfly8/standalone/Dossiers/DAO/Prestations_Services/";
 	
 	public static final String PARAM_UPLOAD_DESTINATION_DAO_LINUX = getProperty("destinationDao", "\\standalone\\Dossiers\\DAO\\");
 	public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/standalone/Dossiers/DAO/Travaux");
