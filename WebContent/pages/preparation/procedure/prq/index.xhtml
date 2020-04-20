@@ -2177,6 +2177,14 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
                              </p:commandLink>
                           </h:panelGroup>
+                          
+                          <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{prqController.finVente()}"
+                                title="Fin de la vente" update=":content">
+                              <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
+                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente de la préqualification N° #{slctdTb.affDacCode} ?" icon="ui-icon-alert" /> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />                             
+                          </p:commandLink>
+                          
 				         </p:column> 
     </p:dataTable>
     </h:panelGroup>

@@ -1015,7 +1015,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	                }
 	  //Fin Methode de Paiement
 	  
-	       //Début de la vente du DAO
+	   //Début de la vente du DAO
 			public void finVente() {
 				String statUpdate = "";
 				String message = "";
