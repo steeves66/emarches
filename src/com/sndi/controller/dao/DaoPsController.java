@@ -3199,8 +3199,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 		 }
 				}
 	      
-	  
-	  
 	//Validation chef de service 
 	  @Transactional
       public void validerCsv() throws IOException { 
