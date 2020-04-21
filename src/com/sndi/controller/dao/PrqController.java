@@ -702,7 +702,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-			tableauBordController.chargeDataPrq();		
+			tableauBordController.chargeDataPrq();	
+			multiFiltre="";
 	}
 	 
 	 //Affichage des DAO retournés pour prise en compte des observation
@@ -1040,12 +1041,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				      tableauBordController.chargeDataPrq();
+				      multiFiltre="";
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
-					    	  
+					    	  multiFiltre="";
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-					    		  
+					    		  multiFiltre="";
 					    	  }
 		               }
 		
@@ -1081,6 +1083,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("publicationListe  size: "+publicationListe.size());		
 				tableauBordController.chargeDataPrq();	
+				multiFiltre="";
 		}
 		 
 		 
@@ -1122,6 +1125,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoVente size: "+listeDaoVente.size());
 			tableauBordController.chargeDataPrq();
+			multiFiltre="";
 	}
 	 
 	 
@@ -1632,11 +1636,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				
 							
 			  public void publicationPsRecherche() { 
-				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					 getListeDaoARetirer().clear();
-						publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
-							new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
-							new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+						publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+								 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D5V","DOP")),
+							new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 							new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 							new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
@@ -1787,10 +1791,10 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		
 					
 					public void publicationRecherche() { 
-						if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+						if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 								getListeDaoARetirer().clear();
-										publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
-												 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
+										publicationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+												 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D5V","DOP")),
 												 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 												new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 												new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));

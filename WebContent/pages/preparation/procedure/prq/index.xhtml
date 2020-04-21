@@ -1140,6 +1140,49 @@
 					 </div>
 					 </div>
 					 </h:panelGroup>
+					 
+					  <h:panelGroup rendered="#{controleController.publicationRecherche}">
+					 <div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink action="#{prqController.chargeDataAPublier()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{prqController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{prqController.publicationRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>  
+                 </h:panelGroup>
+                 
+                 
+                 <h:panelGroup rendered="#{controleController.venteRecherche}">
+                 <div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink action="#{prqController.chargeDataVente()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{prqController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{prqController.venteRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>
+                 </h:panelGroup>
+                 
+                  <h:panelGroup rendered="#{controleController.priseRecherche}">
+                  <div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink action="#{prqController.chargeDataPriseCompte()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{prqController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{prqController.priseRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>
+                 </h:panelGroup>
 					  
 					 <div class="col-md-3 ">
 					 </div>
@@ -1159,7 +1202,7 @@
 						</div>
 						<div class="box-body">
 							
-							    <h:panelGroup rendered="#{controleController.panel1}">
+					<h:panelGroup rendered="#{controleController.panel1}">
 					<p:dataTable id="ndTble0" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.listeDAO}" 
 					 emptyMessage="Aucun #{controleController.type}" scrollable="true" scrollHeight="250" >
                           <p:column headerText="Gestion" styleClass="col-sm-2" >
@@ -1266,7 +1309,274 @@
 				         </p:column>   
 				    </p:dataTable>
 				    </h:panelGroup>
-   
+				    
+				       <h:panelGroup rendered="#{controleController.panel7}">
+					<p:dataTable id="pubTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.publicationListe}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                         paginator="true" rowsPerPageTemplate="5,10,15" >
+                         
+                       <p:column headerText="Gestion" styleClass="col-sm-2" >
+                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
+         				</h:panelGroup>
+         		
+				        </p:column>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" />
+         				</h:panelGroup> 
+         				
+				        </p:column>
+				        
+				       <p:column headerText="Objet" styleClass="col-sm-6" >
+         			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				         
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				          <p:column headerText="Mention" styleClass="col-sm-3" >
+	                    <h:panelGroup rendered="#{slctdTb.affDacMention == 'Validé pour publication'}">
+	                         <span class="badge bg-green">#{slctdTb.affDacMention}</span>
+	                    </h:panelGroup>
+	                     <h:panelGroup rendered="#{slctdTb.affDacMention != 'Validé pour publication'}">
+	                         <span class="badge bg-yellow">#{slctdTb.affDacMention}</span>
+	                    </h:panelGroup>
+				        </p:column> 
+				       
+                     <p:column headerText="Actions" styleClass="col-sm-3"> 
+                             <p:commandLink action="#{prqController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
+                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication du DAO ?" icon="ui-icon-alert" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
+                             </p:commandLink>
+				         </p:column> 
+    </p:dataTable>
+    </h:panelGroup>
+    
+    
+	  <h:panelGroup rendered="#{controleController.panel9}">
+					<p:dataTable id="retdTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.listeDaoVente}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                         paginator="true" rowsPerPageTemplate="5,10,15" >
+                         
+                       <p:column headerText="Gestion" styleClass="col-sm-2" >
+                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
+         				</h:panelGroup>
+         		
+				        </p:column>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" />
+         				</h:panelGroup> 
+         				
+				        </p:column>
+				        
+				       <p:column headerText="Objet" styleClass="col-sm-6" >
+         			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				         
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				          <p:column headerText="Date Reception" styleClass="col-sm-3" >
+	                     <h:outputText value="#{slctdTb.affDacValAc}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column> 
+				       
+                     <p:column headerText="Actions" styleClass="col-sm-3"> 
+                     
+                        <p:commandLink  action="#{etatsprqController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTd}" />
+                         </p:commandLink>
+                     
+                     
+                          <h:panelGroup rendered="#{controleController.retDao}">   
+                             <p:commandLink action="#{prqController.renderPage('prq9','VETPRQ')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
+                             </p:commandLink>
+                          </h:panelGroup>
+                          
+                          <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{prqController.finVente()}"
+                                title="Fin de la vente" update=":content">
+                              <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
+                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente de la préqualification N° #{slctdTb.affDacCode} ?" icon="ui-icon-alert" /> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />                             
+                          </p:commandLink>
+                          
+				         </p:column> 
+    </p:dataTable>
+    </h:panelGroup>			    
+				    
+    <h:panelGroup rendered="#{controleController.panel12}">
+					<p:dataTable id="obsTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.daoPriseCompte}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                         paginator="true" rowsPerPageTemplate="5,10,15" >
+                         
+                       <p:column headerText="Gestion" styleClass="col-sm-2" >
+                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
+         		
+				        </p:column>
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.affDacCode}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				       <p:column headerText="Objet" styleClass="col-sm-6" >
+         			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				         
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                      
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:green; font-weight:bold " />
+         				</h:panelGroup>
+				        </p:column>   
+				       
+                     <p:column headerText="Actions" styleClass="col-sm-3">
+                         
+                            <h:panelGroup rendered="#{controleController.retDao}">   
+                             <p:commandLink action="#{prqController.renderPage('prq10','OBSPRQ')}" styleClass="btn btn-xs btn-success"  title="Avis du Bailleur" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>
+                            
+
+                     </p:column> 
+    </p:dataTable>
+    </h:panelGroup>
 							
 						</div>
 					</div>
@@ -1277,22 +1587,12 @@
             </h:panelGroup>
             
             
-            
-            
-            
-            
-            
-            
-            
-            
+                   
             
             <div class="row">
             
             <div class="col-md-12">
             
-           
-			
-
 				<div class="input-group input-group-sm col-md-3">
                    <h:panelGroup rendered="#{controleController.validationRecherche}">
                     <label >
@@ -1366,43 +1666,7 @@
                        </span>
                         
                  </h:panelGroup>
-                 
-                <h:panelGroup rendered="#{controleController.publicationRecherche}">
-                    <label >
-                      <p:inputText type="text" value="#{prqController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{prqController.chargerDaoRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-
-                       <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{prqController.reinitialiseDao()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                       </span>
-                        
-                 </h:panelGroup>
-                 
-                 
-                 <h:panelGroup rendered="#{controleController.venteRecherche}">
-                    <label >
-                      <p:inputText type="text" value="#{prqController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{prqController.venteRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-
-                       <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{prqController.chargeDataVente()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                       </span>
-                        
-                 </h:panelGroup>
+                  
                  
                  <h:panelGroup rendered="#{controleController.celluleRecherche}">
                     <label >
@@ -1422,23 +1686,7 @@
                         
                  </h:panelGroup>
                  
-                  <h:panelGroup rendered="#{controleController.priseRecherche}">
-                    <label >
-                      <p:inputText type="text" value="#{prqController.multiFiltre}"   placeholder="saisir le #{controleController.type}"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{prqController.priseRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-
-                       <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{prqController.chargeDataPriseCompte()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                       </span>
-                        
-                 </h:panelGroup>
+                 
                  
 					 </div>
 					
@@ -1877,92 +2125,7 @@
     </h:panelGroup>
     
     
-    <h:panelGroup rendered="#{controleController.panel7}">
-					<p:dataTable id="pubTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.publicationListe}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
-                         paginator="true" rowsPerPageTemplate="5,10,15" >
-                         
-                       <p:column headerText="Gestion" styleClass="col-sm-2" >
-                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
-         				</h:panelGroup>
-         		
-				        </p:column>
-
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-         				</h:panelGroup> 
-         				
-				        </p:column>
-				        
-				       <p:column headerText="Objet" styleClass="col-sm-6" >
-         			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacObjet}" />
-         				</h:panelGroup>
-				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
-         				</h:panelGroup>
-				        </p:column> 
-				        
-				       
-         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
-         				</h:panelGroup>
-				        </p:column> 
-				        
-				          <p:column headerText="Mention" styleClass="col-sm-3" >
-	                    <h:panelGroup rendered="#{slctdTb.affDacMention == 'Validé pour publication'}">
-	                         <span class="badge bg-green">#{slctdTb.affDacMention}</span>
-	                    </h:panelGroup>
-	                     <h:panelGroup rendered="#{slctdTb.affDacMention != 'Validé pour publication'}">
-	                         <span class="badge bg-yellow">#{slctdTb.affDacMention}</span>
-	                    </h:panelGroup>
-				        </p:column> 
-				       
-                     <p:column headerText="Actions" styleClass="col-sm-3"> 
-                             <p:commandLink action="#{prqController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication du DAO ?" icon="ui-icon-alert" />
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
-                             </p:commandLink>
-				         </p:column> 
-    </p:dataTable>
-    </h:panelGroup>
+ 
     
     
     <h:panelGroup rendered="#{controleController.panel8}">
@@ -2089,105 +2252,7 @@
     </p:dataTable>
     </h:panelGroup>
     
-        <h:panelGroup rendered="#{controleController.panel9}">
-					<p:dataTable id="retdTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.listeDaoVente}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
-                         paginator="true" rowsPerPageTemplate="5,10,15" >
-                         
-                       <p:column headerText="Gestion" styleClass="col-sm-2" >
-                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
-         				</h:panelGroup>
-         		
-				        </p:column>
-
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                           <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-         				</h:panelGroup> 
-         				
-				        </p:column>
-				        
-				       <p:column headerText="Objet" styleClass="col-sm-6" >
-         			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDacObjet}" />
-         				</h:panelGroup>
-				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
-         				</h:panelGroup>
-				        </p:column> 
-				        
-				       
-         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.affDacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
-         				</h:panelGroup>
-				        </p:column> 
-				        
-				          <p:column headerText="Date Reception" styleClass="col-sm-3" >
-	                     <h:outputText value="#{slctdTb.affDacValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column> 
-				       
-                     <p:column headerText="Actions" styleClass="col-sm-3"> 
-                     
-                        <p:commandLink  action="#{etatsprqController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsprqController.slctdTd}" />
-                         </p:commandLink>
-                     
-                     
-                          <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{prqController.renderPage('prq9','VETPRQ')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
-                             </p:commandLink>
-                          </h:panelGroup>
-                          
-                          <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{prqController.finVente()}"
-                                title="Fin de la vente" update=":content">
-                              <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
-                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente de la préqualification N° #{slctdTb.affDacCode} ?" icon="ui-icon-alert" /> 
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />                             
-                          </p:commandLink>
-                          
-				         </p:column> 
-    </p:dataTable>
-    </h:panelGroup>
+      
     
     <h:panelGroup rendered="#{controleController.panel10}">
 					<p:dataTable id="ndTble10" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.daoPs}" 
@@ -2383,85 +2448,7 @@
     </p:dataTable>
     </h:panelGroup>
     
-     <h:panelGroup rendered="#{controleController.panel12}">
-					<p:dataTable id="obsTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{prqController.daoPriseCompte}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
-                         paginator="true" rowsPerPageTemplate="5,10,15" >
-                         
-                       <p:column headerText="Gestion" styleClass="col-sm-2" >
-                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-         				
-         				
-         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" style="color:green; font-weight:bold " />
-         				</h:panelGroup>
-         		
-				        </p:column>
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-                         <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
-         				<h:outputText value="#{slctdTb.affDacCode}" style="color:green; font-weight:bold " />
-         				</h:panelGroup>
-				        </p:column>
-				        
-				       <p:column headerText="Objet" styleClass="col-sm-6" >
-         			   <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-
-         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
-         				<h:outputText value="#{slctdTb.affDacObjet}" style="color:green; font-weight:bold " />
-         				</h:panelGroup>
-				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                      
-         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" style="color:green; font-weight:bold " />
-         				</h:panelGroup>
-				        </p:column>
-				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-
-         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:green; font-weight:bold " />
-         				</h:panelGroup>
-				        </p:column> 
-				        
-				       
-         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
-         				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-         				<h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" style="color:green; font-weight:bold " />
-         				</h:panelGroup>
-				        </p:column>   
-				       
-                     <p:column headerText="Actions" styleClass="col-sm-3">
-                         
-                            <h:panelGroup rendered="#{controleController.retDao}">   
-                             <p:commandLink action="#{prqController.renderPage('prq10','OBSPRQ')}" styleClass="btn btn-xs btn-success"  title="Avis du Bailleur" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
-                             </p:commandLink>
-                            </h:panelGroup>
-                            
-
-                     </p:column> 
-    </p:dataTable>
-    </h:panelGroup>
+    
     
     
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">

@@ -335,6 +335,7 @@ public class TableauBordController {
 							 private String amiAcAttRetrait ="";
 							 private String amiAcAttVente ="";
 							 private String amiAcRetire="";
+							 private String amiDaoPub="";
 						/*
 						Compteur pour la Cellule de Passation des Marchés
 						 */
@@ -391,7 +392,7 @@ public class TableauBordController {
 								 private String prqCpDifDmp ="";
 								 private String prqCpValide ="";
 								 private String prqCpAttenteValide="";
-								 
+								 private String prqDaoPub ="";
 								 private String prqaffecte ="";
 								 
 								 /*
@@ -588,7 +589,8 @@ public class TableauBordController {
 			 amiCsvAttAff = ""+getAmiAttAffCsv("D2T");
 			 amiCsvAttVal = ""+getAcAmiValChargeCsv("D4V");
 			 amiaffecte = ""+getAcAmiAffecteDossier("D3A");
-			 amiCsvValide = ""+getAcAmiValidCsvDossier("D5V");
+			 amiDaoPub = ""+getAcAmiPublieDossier("DPU");
+			 amiCsvValide = ""+getAmiAttentePub("D5V","DOP");
 			 amiCsvDiff = ""+getAcAmiValidCsvDossier("D5R");
 			 amiAcDiffCpmp = ""+getAmiDiffCpmpACDossier("D2T");
 			 amiAcDiffDmp = ""+getAmiDiffDmpACDossier("S3D");
@@ -616,7 +618,8 @@ public class TableauBordController {
 			 prqCsvAttAff = ""+getPrqAttAffCsv("D2T");
 			 prqCsvAttVal = ""+getAcPrqValChargeCsv("D4V");
 			 prqaffecte = ""+getAcPrqAffecteDossier("D3A");
-			 prqCsvValide = ""+getAcPrqValidCsvDossier("D5V");
+			 prqCsvValide = ""+getPrqAttentePub("D5V","DOP");
+			 prqDaoPub = ""+getAcPrqValidCsvDossier("D5V");
 			 prqCsvDiff = ""+getAcPrqValidCsvDossier("D5R");
 			 prqAcDiffCpmp = ""+getPrqDiffCpmpACDossier("D2T");
 			 prqAcDiffDmp = ""+getPrqDiffDmpACDossier("S3D");
@@ -2456,6 +2459,15 @@ public int getPrqAttenteValide(String src1, String src2){
 	return	i;
 }
 
+//PRQ en attente de validation par le CPMP
+public int getPrqAttentePub(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;
+}
+
 //PRQ en attente de retrait chez l'AC
 public int getPrqAttenteRetrait(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
@@ -2597,6 +2609,15 @@ public int getAcAmiAffecteDossier(String src){
 	return	i;	
 }
 
+//AMI publié par le AC
+public int getAcAmiPublieDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
 //AMI validé par le Chef de Service
 public int getAcAmiValidCsvDossier(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
@@ -2700,6 +2721,15 @@ public int getAmiDiffDmp(String src){
 
 //AMI en attente de validation par le CPMP
 public int getAmiAttenteValide(String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;
+}
+
+//AMI en attente de validation par le CPMP
+public int getAmiAttentePub(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
@@ -4803,6 +4833,22 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setDaoCsvValidationPs(String daoCsvValidationPs) {
 		this.daoCsvValidationPs = daoCsvValidationPs;
+	}
+
+	public String getAmiDaoPub() {
+		return amiDaoPub;
+	}
+
+	public void setAmiDaoPub(String amiDaoPub) {
+		this.amiDaoPub = amiDaoPub;
+	}
+
+	public String getPrqDaoPub() {
+		return prqDaoPub;
+	}
+
+	public void setPrqDaoPub(String prqDaoPub) {
+		this.prqDaoPub = prqDaoPub;
 	}
 
 	

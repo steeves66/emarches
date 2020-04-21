@@ -2817,7 +2817,7 @@ public class ControleController {
 							    									    	        	type = "DAC";
 							    										    			libelle1="Index";
 							    										    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
-							    										    			libelleDao1="Procédure Simplifiée";
+							    										    			libelleSmall="Procédure Simplifiée";
 							    										    			 btn_new =true;
 							    										    			 btn_affec = false;
 							    														 panel1 =true;
@@ -2889,7 +2889,7 @@ public class ControleController {
 							    														 btn_fermer_saisie_prq = false; 
 											    						     }else
 								    									    	 if(action.equalsIgnoreCase("VALDPS")) {
-								    									    		 type = "DAC";
+								    									    		   type = "DAC";
 								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
 								    								    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
 								    								    				libelleSmall="Procédure Simplifiée";
@@ -3125,8 +3125,8 @@ public class ControleController {
 														    							    
 														    						   }else
 											    									    	 if(action.equalsIgnoreCase("AFFDPS")) {
-											    									    		 type = "DAC";
-											    									    			libelle1="Index";
+											    									    		     type = "DAC";
+											    									    			 libelle1="Index";
 											    									    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
 											    									    			 libelleSmall="Procédure Simplifiée";
 											    									    			 btn_new =false;
