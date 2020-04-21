@@ -1479,10 +1479,14 @@ public class AgpmController {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 statutUpdate ="S2V";
 					 commentaire="AGPM validé par le CPMP";
-				 }else {
-					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+				 }else 
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 						 statutUpdate ="S3V";
-						 commentaire="AGPM validé par le DMP";
+						 commentaire="AGPM validé par la DMP";
+				   }else {
+					   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 statutUpdate ="S3V";
+						 commentaire="AGPM validé par la DMP";
 					 }
 			     } 
 			 }
@@ -1500,7 +1504,10 @@ public class AgpmController {
 							 }else
 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
 									 agp.setAgpDateValDmp(Calendar.getInstance().getTime());
-								 }
+								 }else
+									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {	
+										 agp.setAgpDateValDmp(Calendar.getInstance().getTime());
+									 }
 					agp.setTStatut(new TStatut(statutUpdate));
 					agp.setAgpStatutRetour("0");
 				iservice.updateObject(agp);
@@ -1532,7 +1539,10 @@ public class AgpmController {
 								 }else
 									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
 										 affiche.setAffAgpDateValDmp(Calendar.getInstance().getTime());
-									 }
+									 }else
+										 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {	
+											 affiche.setAffAgpDateValDmp(Calendar.getInstance().getTime());
+										 }
 	 						affiche.setTStatut(new TStatut(statutUpdate));
 	 						affiche.setAffAgpStatutRetour("0");
 						iservice.updateObject(affiche);

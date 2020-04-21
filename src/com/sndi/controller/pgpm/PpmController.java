@@ -678,7 +678,17 @@ public class PpmController {
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPpm();
 									multiFiltre="";
-		         	  }
+		         	  }else 
+				    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+				    		  getValidationListe().clear();
+								validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+								_logger.info("affichageListe size: "+validationListe.size());
+								//Actualisation du Tableau de Bord
+								tableauBordController.chargeDataPpm();
+								multiFiltre="";
+	         	  }
 			     }
 			
 			
@@ -718,14 +728,24 @@ public class PpmController {
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPspm();
 									multiFiltre="";
-		         	  }
+		         	  }else 
+				    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+				    		  getValidationListe().clear();
+								validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+								new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+								_logger.info("affichageListe size: "+validationListe.size());
+								//Actualisation du Tableau de Bord
+								tableauBordController.chargeDataPspm();
+								multiFiltre="";
+	         	  }
 			     }
 		 
 		 
 		 
 		
 		 
-		 //Affichage dynamique des dates prévisionnelles
+		 //Affichage dynamique des dates prévisionnelles en procédure simplifiée
 		 public void checkDatePrevisionnelle() {
 			 if(typProce.equalsIgnoreCase("PSO")) {
 				controleController.etatPso = true;
@@ -2699,7 +2719,10 @@ public class PpmController {
 	 							 }else
 	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 	 								   ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
-	 								 }
+	 								 }else
+	 									  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+	 										 ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());  
+	 									  }
 						    ppm.setTStatut(new TStatut(statutTrans));
 						    ppm.setAffDppStatutRetour("0");
 						    iservice.updateObject(ppm);
@@ -2862,7 +2885,11 @@ public class PpmController {
 		 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 		 							 statutUpdate ="S3V";
 		 						     passDetail.setDppDateValDmp(Calendar.getInstance().getTime());
-		 						 }
+		 						 }else
+		 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+		 								 statutUpdate ="S3V";
+			 							 passDetail.setDppDateValDmp(Calendar.getInstance().getTime());  
+		 					      }
 		 				     } 
 		 			//Parcourir la liste TAffichagePGPM et faire une mise a jour des different statut
 			 		for(TAffichagePpm lignePpm : listSelectionTransmission) {
@@ -2889,7 +2916,10 @@ public class PpmController {
 	 							 }else
 	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 	 								ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
-	 								 }
+	 								 }else
+		 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+		 	 								ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
+		 	 								 }
 						    ppm.setTStatut(new TStatut(statutUpdate));
 						    ppm.setAffDppStatutRetour("0");
 						    iservice.updateObject(ppm);
@@ -2930,7 +2960,7 @@ public class PpmController {
 	     
 	     
 	   //DIFFERER CPMP ET DMP
-	     //Differer
+	     //Differer un PPM
 	        @Transactional
 			 public void differer() {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -2939,10 +2969,19 @@ public class PpmController {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 						 statutUpdate ="S2D";
 						 //observation = "PPM retourné par la CPMP";
-					 }else {
-						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-							// statutUpdate ="S3D";
-							 
+					 }else
+						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							  if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
+									 statutUpdate ="S3D"; 
+								 }else
+									  if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
+										  statutUpdate ="SPR";  
+									  }else {
+										  statutUpdate ="S3D"; 
+									  }
+				      }else {
+						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+
 							 if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
 								 statutUpdate ="S3D"; 
 							 }else
@@ -2951,7 +2990,6 @@ public class PpmController {
 								  }else {
 									  statutUpdate ="S3D"; 
 								  }
-							 
 						 }
 				     } 
 				 }
@@ -3005,7 +3043,6 @@ public class PpmController {
 						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
 						 FacesContext.getCurrentInstance().addMessage(null, msg);
 						    }
-
 			 }
 			 
 			 
@@ -3091,7 +3128,18 @@ public class PpmController {
 					 }else 
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 							 statutUpdate ="S2D";
-							 observation="Opération retournée avec succès";
+							 //observation="Opération retournée avec succès";
+						 }else 
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+
+								 if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
+									 statutUpdate ="S3D"; 
+								 }else
+									  if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
+										  statutUpdate ="SPD";  
+									  }else {
+										  statutUpdate ="S3D"; 
+									  }
 						 }else 
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 								 //statutUpdate ="S3D";

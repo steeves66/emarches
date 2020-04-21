@@ -3148,7 +3148,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 			 			    }else {
 			 			    	     FacesContext.getCurrentInstance().addMessage(null,
-			 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Choisir un binôme !", ""));
+			 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Choisir un binôme et désigner le responsable !", ""));
 			 			          }	
 			 		 }
 				}

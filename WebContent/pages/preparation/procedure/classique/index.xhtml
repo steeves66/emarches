@@ -999,7 +999,7 @@
      </p:commandLink>  
    </h:panelGroup>
                     
-                     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
+      <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
 	<p:commandLink rendered="#{controleController.btn_valider_dmp}" action="#{pgpmAcController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
     <p:confirm header="Confirmation" message="Confrmez-vous la validation ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
@@ -1009,7 +1009,21 @@
     <p:confirm header="Confirmation" message="Confrmez-vous la validation ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
    </p:commandLink>
-                    </h:panelGroup>
+     </h:panelGroup>
+     
+     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
+	<p:commandLink rendered="#{controleController.btn_valider_dmp}" action="#{pgpmAcController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+    <p:confirm header="Confirmation" message="Confrmez-vous la validation ?" icon="ui-icon-alert" />
+    <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
+   </p:commandLink>
+   
+   <p:commandLink rendered="#{controleController.btn_valider_pgspm_dmp}" action="#{pgpmAcController.validerPgspmCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+    <p:confirm header="Confirmation" message="Confrmez-vous la validation ?" icon="ui-icon-alert" />
+    <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
+   </p:commandLink>
+     </h:panelGroup>
+     
+     
        </section>
          
 

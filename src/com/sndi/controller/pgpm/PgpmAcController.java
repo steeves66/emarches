@@ -487,7 +487,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 										tableauBordController.chargeDataPgpm();
 										_logger.info("affichageListe size: "+validationListe.size());
 										multiFiltre ="";
-						    	  }
+						    	  }else 
+							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							    		  getValidationListe().clear();
+											validationListe = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+													"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPG")),
+													new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
+											//new WhereClause("AFF_GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+											tableauBordController.chargeDataPgpm();
+											_logger.info("affichageListe size: "+validationListe.size());
+											multiFiltre ="";
+							    	  }
 			               }
 			
 			
@@ -521,7 +531,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 										_logger.info("affichageListe size: "+validationListe.size());
 										       tableauBordController.chargeDataPgspm();
 										       multiFiltre="";	
-						    	  }
+						    	  }else 
+							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							    		  getValidationListe().clear();
+											validationListe = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+													"AFF_GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPG")),
+													new WhereClause("AFF_GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
+											_logger.info("affichageListe size: "+validationListe.size());
+											       tableauBordController.chargeDataPgspm();
+											       multiFiltre="";	
+							    	  }
 			               }
 		 
 		
@@ -1099,6 +1118,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 					 }else {
 	 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 	 							 statutUpdate ="S3V";
+	 						 }else {
+		 							if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+			 							 statutUpdate ="S3V";
+		 						 }
 	 						 }
 	 				     } 
 	 			//Parcourir la liste TAffichagePGPM et faire une mise a jour des different statut
@@ -1295,8 +1318,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		      				new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+affichagePgpm.getAffGpgId()));
 	      				TAffichagePgpm affgp = new TAffichagePgpm();
 	      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-	      				    affgp.setAffGpgRecherche(rechercheAll);
-		      				    iservice.updateObject(affgp);
+	      				   affgp.setAffGpgRecherche(rechercheAll);
+		      			   iservice.updateObject(affgp);
        			
        			  chargeData();
        			
@@ -1305,13 +1328,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
        			  userController.setSevrityMsg("success");
        			
        			 
-       			  controleController.btn_edit_pgpm = true; 
+       			  //controleController.btn_edit_pgpm = true; 
        			  controleController.btn_edit_pgspm = false; 
        			  btnAgpmRappel = false;
        			  loveAgpmRappel = true;
-       			  
-      		    
-                }else {
+       			  controleController.btn_save_pgpm = false;
+       			  controleController.btn_save_pgspm = false;
+                 }else {
           	          plan.setTGestion(new TGestion(gesCode));
          		      plan.setTFonction(userController.getSlctd().getTFonction());
          		      plan.setTStructure(userController.getSlctd().getTFonction().getTStructure());
@@ -1385,11 +1408,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      			      userController.setSevrityMsg("success");
      			
      			
-     			      controleController.btn_edit_pgpm = true;
+     			      //controleController.btn_edit_pgpm = true;
      			      controleController.btn_edit_pgspm = false;
      			      btnAgpmRappel = false;
      			      loveAgpmRappel = true;
-     			      controleController.btn_save_pgpm = true;
+     			      controleController.btn_save_pgpm = false;
+           			  controleController.btn_save_pgspm = false;
                    }
     	     }  
         }
@@ -1504,7 +1528,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            			                controleController.btn_edit_pgpm = true; 
            			                controleController.btn_save_pgpm = false;
         			                controleController.btn_save_pgspm = false;
-           			                
+        			                btnAgpmRappel = false;
            			                vider();
           		    
                                    }else {
@@ -1599,7 +1623,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          			                        controleController.btn_edit_pgspm = false; 
                  			                controleController.btn_save_pgpm = false;
               			                    controleController.btn_save_pgspm = false;
-         			                       vider();
+              			                    btnAgpmRappel = false;
+         			                        vider();
                                   }
         	                  }  
     		  
@@ -1830,7 +1855,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 statutUpdate ="S2D";
-					 //observation ="PGPM retourné par la CPMP";
+					 
+				 }else 
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						 if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
+							 statutUpdate ="S3D"; 
+						 }else
+							  if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
+								  statutUpdate ="SDR";  
+							  }else {
+								  statutUpdate ="SDR"; 
+							  }
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
@@ -1972,21 +2007,34 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 						 statutUpdate ="S2D";
 						 observation="";
-					 }else {
-						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-							 statutUpdate ="S3D";
+					 }else
+						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							  statutUpdate ="S3D";
+							  
+							  if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
+						            statutUpdate ="S3D"; 
+					            }else
+						           if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
+							           statutUpdate ="PGD";  
+						               }else {
+							          statutUpdate ="PGD"; 
+						            }
+							  
+						      }else {
+						          if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+							       statutUpdate ="S3D";
 							 
-							 if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
-								 statutUpdate ="S3D"; 
-							 }else
-								  if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
-									  statutUpdate ="PGD";  
-								  }else {
-									  statutUpdate ="PGD"; 
-								  }
-						 }
-				     } 
-				 }
+							           if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("02")) {
+								            statutUpdate ="S3D"; 
+							            }else
+								           if(slctdTd.getTStructure().getTTypeStructure().getTstCode().equalsIgnoreCase("03")) {
+									           statutUpdate ="PGD";  
+								               }else {
+									          statutUpdate ="PGD"; 
+								            }
+						          }
+				              } 
+				          }
 				 
 				 listeDetail =(List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
 							new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
@@ -2289,11 +2337,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             			userController.setSevrityMsg("success");
             			
             			
-            			controleController.btn_edit_pgspm = true;
+            			//controleController.btn_edit_pgspm = true;
             			controleController.btn_edit_pgpm = false;
-            			controleController.btn_save_pgpm = false;
             			btnPgspmRappel = false;
+            			btnAgpmRappel = false;
             			loveAgpmRappel = true;
+            			controleController.btn_save_pgpm = false;
+              			controleController.btn_save_pgspm = false;
             			
                    }else {
                	       plan.setTGestion(new TGestion(gesCode));
@@ -2359,11 +2409,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
           			userController.setSevrityMsg("success");
           			
           			
-        			controleController.btn_edit_pgspm = true;
+        			//controleController.btn_edit_pgspm = true;
         			controleController.btn_edit_pgpm = false; 
-        			controleController.btn_save_pgpm = false;
         			btnPgspmRappel = false;
+        			btnAgpmRappel = false;
         			loveAgpmRappel = true;
+        			controleController.btn_save_pgpm = false;
+          			controleController.btn_save_pgspm = false;
         			
                      }
        	        }
@@ -2461,7 +2513,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 			controleController.btn_edit_pgspm = true;
                 			controleController.btn_edit_pgpm = false;
                 			controleController.btn_save_pgspm = false;
-                			
+                			btnPgspmRappel = false;
                		    
                        }else {
                    	       plan.setTGestion(new TGestion(gesCode));
@@ -2539,6 +2591,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             			controleController.btn_edit_pgspm = true;
             			controleController.btn_edit_pgpm = false;
             			controleController.btn_save_pgspm = false;
+            			btnPgspmRappel = false;
                          }
            	        }
         		 
@@ -2621,16 +2674,24 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             	        	  }
             		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
     			        newFinancement.setTDevise(new TDevise(devCode));
-    			        //newFinancement.setTBailleur(new TBailleur(baiCode));
     			        newFinancement.setTDetailPlanGeneral(detailPlan);
     			        newFinancement.setFipTypeFinance(sourfin);
     			        iservice.addObject(newFinancement);
     				    
-    					
-    				    //methode qui charge les financements du projet crée
+       				    //methode qui charge les financements du projet crée
     				    chargeFinancement();
     				    //methode qui charge la liste des pgpm
     				    chargeData();
+    				    //Affichage du bouton édition en fonction de l'action demandée
+    				    if(controleController.type == "PGPM") {
+    				    	//Activation du bouton d'édition
+        				    controleController.btn_edit_pgpm = true;
+        				    controleController.btn_edit_pgspm = false;
+    				    }else {
+    				    	//Activation du bouton d'édition
+        				    controleController.btn_edit_pgspm = true;
+        				    controleController.btn_edit_pgpm = false;
+    				    }
     				    //Message de Confirmation
     				    userController.setTexteMsg("Financement enregistré avec succès !");
     				    userController.setRenderMsg(true);
@@ -2639,6 +2700,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    //vider();
             	} 
 			}
+            
+            
                        //SaveFinancement de modification
                        public void saveFinancementUpdate(){
             		    //Création du financement
@@ -2648,7 +2711,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     			        newFinancement.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getAffGpgId()));
     			        newFinancement.setFipTypeFinance(sourfin);
     			        iservice.addObject(newFinancement);
-
     				    //methode qui charge les financements du projet crée
     				    chargeFinancementUpdate();
     				    //methode qui charge la liste des pgpm
@@ -2658,8 +2720,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    userController.setRenderMsg(true);
     				    userController.setSevrityMsg("success");
     				    //viderFinancement();
-    				    //vider();
-            	
+    				    //vider();	
 			}
             
             public void recupererFinancement() {

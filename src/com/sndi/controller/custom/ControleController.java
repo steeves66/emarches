@@ -2716,7 +2716,7 @@ public class ControleController {
 								    						   }else
 					    									    	 if(action.equalsIgnoreCase("OBSDAO")) {
 									    							     type = "DAC";
-														    			 libelle1="Index";
+														    			 libelle1="Procédure Normale";
 														    			 libellesmall="Procédure Normale";
 														    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
 														    			 btn_new =false;

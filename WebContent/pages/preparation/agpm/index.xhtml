@@ -333,9 +333,8 @@
           </h:panelGroup>
           </h:panelGroup>
           
-          
-          
-          
+      
+          <!-- Tableau de Bord pour l'acteur SPP -->
           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
              <h:panelGroup rendered="#{controleController.panelAgpmTableauBordSaiDmp}">
               
@@ -381,8 +380,6 @@
                   </div>
        </h:panelGroup> 
        
-          
-
            <h:panelGroup rendered="#{controleController.panelAgpmTableauBordValDmp}"> 
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
@@ -449,7 +446,7 @@
                   </div>
           </h:panelGroup>
           </h:panelGroup>
-          
+          <!--Fin du Tableau de Bord pour l'acteur SPP -->
              
                 </div>
               </div>
@@ -753,6 +750,27 @@
                         </span>
 					 </div>
 					 </h:panelGroup>
+					 
+					  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+					 <div class="input-group input-group-sm col-md-3">
+                      <label >
+                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
+					</label>
+					
+					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
+                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                      </p:commandLink>
+                     </button>
+                         &nbsp;&nbsp;
+                         
+                          <span class="input-group-btn">
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        </span>
+					 </div>
+					 </h:panelGroup>
+					 
+					 
 					
             </div>
            
