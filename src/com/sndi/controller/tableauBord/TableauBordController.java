@@ -1684,8 +1684,8 @@ public int getAcDaoValChargeCsv(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -1796,8 +1796,8 @@ public int getDaoAttAffCsv(String src1, String src2,String src3){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -2044,8 +2044,8 @@ public int getAcDaoValChargeCsvPs(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -2335,8 +2335,8 @@ public int getAcPrqCorCharge(String src){
 public int getAcPrqValChargeCsv(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -2594,8 +2594,9 @@ public int getAcAmiValCharge(String src){
 
 public int getAcAmiValChargeCsv(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 

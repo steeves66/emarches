@@ -2874,11 +2874,9 @@ public class PpmController {
 				 userController.setSevrityMsg("success");
 				//return null;
 				 
-		 		 
 		 		  chargeDataAvaliderPpm();
 		 		  chargePpmValCp();
 		 		  chargePpmValDmp();
-		 		  //chargeDataAvaliderPspm();
 		 		  //Actualisation du Tableau de Bord
 		 		  tableauBordController.chargeDataPpm();
 						}

@@ -1875,6 +1875,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					     //MAJ dans T_DAC_SPECS
 					     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 					    		    new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+					    		    new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 				 				if (!listDao.isEmpty()) {
 				 					newDao= listDao.get(0);
