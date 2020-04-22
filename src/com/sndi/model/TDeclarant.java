@@ -71,7 +71,7 @@ public class TDeclarant implements java.io.Serializable {
 		this.decId = decId;
 	}
 
-	@Column(name = "DEC_ORGAN_EXEC_LIBELLE", nullable = false, length = 500)
+	@Column(name = "DEC_ORGAN_EXEC_LIBELLE", length = 500)
 	public String getDecOrganExecLibelle() {
 		return this.decOrganExecLibelle;
 	}
@@ -98,7 +98,7 @@ public class TDeclarant implements java.io.Serializable {
 		this.decPersNomPrenom = decPersNomPrenom;
 	}
 
-	@Column(name = "DEC_PERS_FONCTION", nullable = false, length = 500)
+	@Column(name = "DEC_PERS_FONCTION", length = 500)
 	public String getDecPersFonction() {
 		return this.decPersFonction;
 	}
@@ -125,7 +125,7 @@ public class TDeclarant implements java.io.Serializable {
 		this.decNumeroPorte = decNumeroPorte;
 	}
 
-	@Column(name = "DEC_BP", nullable = false, length = 500)
+	@Column(name = "DEC_BP", length = 500)
 	public String getDecBp() {
 		return this.decBp;
 	}

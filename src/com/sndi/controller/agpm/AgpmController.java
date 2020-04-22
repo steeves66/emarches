@@ -1288,43 +1288,50 @@ public class AgpmController {
 				 
 					 
 				 }else {
-					 
-					 iservice.addObject(declarant);
-					    
-				     listeAgpm=(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),	 
-						 new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
-				   if(!listeAgpm.isEmpty()) {
-					  TAgpm rect = new TAgpm();
-							rect=listeAgpm.get(0);
-							rect.setTDeclarant(new TDeclarant(declarant.getDecId()));
-							iservice.updateObject(rect);
-							affichageAgpm.setTDeclarant(rect.getTDeclarant());
-							iservice.updateObject(affichageAgpm);
-							boutonEdit=true;
-							boutonAdd = false;
-				         } 
-				   
-				   
-				   List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
-     						new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
- 					TAffichageAgpm affgp = new TAffichageAgpm();
- 					if(!AFG.isEmpty()) affgp =AFG.get(0); 
- 					affgp.setTDeclarant(affichageAgpm.getTDeclarant());
-					//affgp.setAffAgpRecherche(rechercheAll);
- 					iservice.updateObject(affgp);
-				   
-				  boutonEdit=true;
-				  boutonAdd = false;
-				  userController.setTexteMsg("Adresse ajoutée avec succès !");
-				  userController.setRenderMsg(true);
-				  userController.setSevrityMsg("success");
-				 etatPavetDeclarant= true;
-				 etatAutreInfo= false;
-				 etatPavetDossier= true; 
-				 etatPavetInfoProjet= false; 
-				 etatPavetOrgne= true; 
-				 }	    
-			}
+					     if(declarant.getDecPersFonction().equalsIgnoreCase("") || declarant.getDecPersNomPrenom().equalsIgnoreCase("")
+					    	 || declarant.getDecBp().equalsIgnoreCase("") ) {
+					    	 
+					    	 FacesContext.getCurrentInstance().addMessage(null,
+				    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir les champs obligatoires de l'organe d'exécution", ""));
+					     }else {
+					    	     iservice.addObject(declarant);
+							    
+						       listeAgpm=(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),	 
+								 new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+						      if(!listeAgpm.isEmpty()) {
+							    TAgpm rect = new TAgpm();
+									rect=listeAgpm.get(0);
+									rect.setTDeclarant(new TDeclarant(declarant.getDecId()));
+									iservice.updateObject(rect);
+									affichageAgpm.setTDeclarant(rect.getTDeclarant());
+									iservice.updateObject(affichageAgpm);
+									boutonEdit=true;
+									boutonAdd = false;
+						         } 
+						   
+						   
+						   List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+		     						new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+		 					TAffichageAgpm affgp = new TAffichageAgpm();
+		 					if(!AFG.isEmpty()) affgp =AFG.get(0); 
+		 					affgp.setTDeclarant(affichageAgpm.getTDeclarant());
+							//affgp.setAffAgpRecherche(rechercheAll);
+		 					iservice.updateObject(affgp);
+						   
+						  boutonEdit=true;
+						  boutonAdd = false;
+						  userController.setTexteMsg("Adresse ajoutée avec succès !");
+						  userController.setRenderMsg(true);
+						  userController.setSevrityMsg("success");
+						 etatPavetDeclarant= true;
+						 etatAutreInfo= false;
+						 etatPavetDossier= true; 
+						 etatPavetInfoProjet= false; 
+						 etatPavetOrgne= true; 
+					    	 
+					           }
+				        }	    
+			       }
 		 
 		 
 		 @Transactional

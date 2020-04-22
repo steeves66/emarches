@@ -76,7 +76,8 @@ public class TAffichagePpm implements java.io.Serializable {
 	private Date affDppDteModif;
 	private Date affDppDateAttApprobCmp;
 	private Date affDppDateJugementTech;
-	
+	private String affFonCodPf;
+	private String affFonCodDmp;
 
 
 	public TAffichagePpm() {
@@ -109,7 +110,8 @@ public class TAffichagePpm implements java.io.Serializable {
 			Date affDppDateSignatAttrib, Date affDppDateSignatAc, Date affDppDateMarcheApprob, Date affDppDateExecDebut,
 			Date affDppDateExecFin,long  affDppId, String affDppStatutRetour,String affDppStrConduc,
 			String affDppStrBenefi, Date affDppDateSaisie,String affDppPartiePmePmi, String affDppStatutDao,String affDppPieceDao,Date affDppInvEntre, String affDppRecherche, Date affDppDateValAc,
-			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance, Date affDppDteModif,Date affDppDateAttApprobCmp, Date affDppDateJugementTech) {
+			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance, Date affDppDteModif,Date affDppDateAttApprobCmp, Date affDppDateJugementTech,
+			String affFonCodPf, String affFonCodDmp) {
 		this.affId = affId;
 		this.TLBudgets = TLBudgets;
 		this.TFonction = TFonction;
@@ -161,6 +163,8 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affDppDteModif = affDppDteModif;
 		this.affDppDateAttApprobCmp = affDppDateAttApprobCmp;
 		this.affDppDateJugementTech = affDppDateJugementTech;
+		this.affFonCodPf = affFonCodPf;
+		this.affFonCodDmp = affFonCodDmp;
 	}
 
 	@Id
@@ -672,6 +676,24 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setAffDppDateJugementTech(Date affDppDateJugementTech) {
 		this.affDppDateJugementTech = affDppDateJugementTech;
+	}
+	
+	@Column(name = "AFF_FON_COD_PF", length = 20)
+	public String getAffFonCodPf() {
+		return this.affFonCodPf;
+	}
+
+	public void setAffFonCodPf(String affFonCodPf) {
+		this.affFonCodPf = affFonCodPf;
+	}
+
+	@Column(name = "AFF_FON_COD_DMP", length = 20)
+	public String getAffFonCodDmp() {
+		return this.affFonCodDmp;
+	}
+
+	public void setAffFonCodDmp(String affFonCodDmp) {
+		this.affFonCodDmp = affFonCodDmp;
 	}
 
 }

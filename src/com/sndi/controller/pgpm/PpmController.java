@@ -1515,6 +1515,8 @@ public class PpmController {
 			 	  		 detailPass.setDppTypePlan("PN");
 			 	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			 	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+			 	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+			 	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 			 	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
 			 	  		 detailPass.setTStatut(new TStatut("S1S"));
 			 	  		 detailPass.setDppStatutRetour("0");
@@ -1539,6 +1541,8 @@ public class PpmController {
 			 	  		affichagePpm.setAffDppTypePlan("PN");
 			 	  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
 			 	  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+			 	  		affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
+			 	  		affichagePpm.setAffFonCodDmp(detailPass.getDppFonCodDmp());
 			 	  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
 			 	  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
 			 	  		affichagePpm.setAffDppDate(detailPass.getDppDate());
@@ -1656,6 +1660,8 @@ public class PpmController {
 			 	  		 detailPass.setDppTypePlan("PN");
 			 	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			 	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+			 	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+			 	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 			 	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
 			 	  		 detailPass.setTStatut(new TStatut("S1S"));
 			 	  		 detailPass.setDppStatutRetour("0");
@@ -1675,6 +1681,8 @@ public class PpmController {
 			 	  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
 			 	  		affichagePpm.setAffDppTypePlan("PN");
 			 	  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+			 	  		affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
+			 	  		affichagePpm.setAffFonCodDmp(detailPass.getDppFonCodDmp());
 			 	  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			 	  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
 			 	  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
@@ -1793,6 +1801,8 @@ public class PpmController {
 		 		  		 detailPass.setDppTypePlan("PN");
 		 		  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 		 		  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+		 		  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+			 	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 		 		  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
 		 		  		 detailPass.setTStatut(new TStatut("S1S"));
 		 		  		 detailPass.setDppStatutRetour("0");
@@ -1813,6 +1823,8 @@ public class PpmController {
 		 		  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
 		 		  		affichagePpm.setAffDppTypePlan("PN");
 		 		  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+		 		  		affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
+		 		  		affichagePpm.setAffFonCodDmp(detailPass.getDppFonCodDmp());
 		 		  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 		 		  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
 		 		  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
@@ -2045,6 +2057,8 @@ public class PpmController {
 			  		    detailPass.setDppTypePlan("PS");
 			  		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			  		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+			  		    detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+			 	  		detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 			  		    detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
 			  		    detailPass.setTStatut(new TStatut("S1S"));
 			  		    detailPass.setDppStatutRetour("0");
@@ -2065,6 +2079,8 @@ public class PpmController {
 			  		    affichagePpm.setTFonction(userController.getSlctd().getTFonction());
 			  		    affichagePpm.setAffDppTypePlan(detailPass.getDppTypePlan());
 			  		    affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+			  		    affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
+			  		    affichagePpm.setAffFonCodDmp(detailPass.getDppFonCodDmp());
 			  		    affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			  		    affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
 			  		    affichagePpm.setAffDppObjet(detailPass.getDppObjet());
@@ -2190,6 +2206,8 @@ public class PpmController {
 				  		 detailPass.setDppTypePlan("PS");
 				  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 				  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+				  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+			 	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 				  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
 				  		 detailPass.setTStatut(new TStatut("S1S"));
 				  		 detailPass.setDppStatutRetour("0");
@@ -2208,6 +2226,8 @@ public class PpmController {
 				  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
 				  		affichagePpm.setAffDppTypePlan(detailPass.getDppTypePlan());
 				  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+				  		affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
+				  		affichagePpm.setAffFonCodDmp(detailPass.getDppFonCodDmp());
 				  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 				  		affichagePpm.setAffDppStatutRetour(detailPass.getDppStatutRetour());
 				  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
@@ -2298,7 +2318,6 @@ public class PpmController {
 					     iservice.addObject(histoPass);
 						
 					    recupDateGenere();
-						//chargeData();
 						chargeDataPspm();
 						
 						

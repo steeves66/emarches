@@ -52,6 +52,8 @@ public class TAffichagePgpm implements java.io.Serializable {
 	private String affGpgTypeFinance;
 	private String affGpgLibFin;
 	private Date affGpgDteModif;
+	private String affFonCodPf;
+	private String affFonCodDmp;
 
 	public TAffichagePgpm() {
 	}
@@ -71,7 +73,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 			TTypeMarche TTypeMarche, long affGpgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgCode,
 			String affGpgObjet, Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire,
 			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,String affGpgRecherche,Date affGpgDateValAc, Date affGpgDateValCpmp, 
-			Date affGpgDateValDmp, String affGpgTypeFinance, String affGpgLibFin, Date affGpgDteModif) {
+			Date affGpgDateValDmp, String affGpgTypeFinance, String affGpgLibFin, Date affGpgDteModif,String affFonCodPf, String affFonCodDmp) {
 		this.affId = affId;
 		this.TStructure = TStructure;
 		this.TFonction = TFonction;
@@ -100,6 +102,8 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affGpgTypeFinance = affGpgTypeFinance;
 		this.affGpgLibFin = affGpgLibFin;
 		this.affGpgDteModif = affGpgDteModif;
+		this.affFonCodPf = affFonCodPf;
+		this.affFonCodDmp = affFonCodDmp;
 	}
 
 	@Id
@@ -370,6 +374,24 @@ public class TAffichagePgpm implements java.io.Serializable {
 
 	public void setAffGpgDteModif(Date affGpgDteModif) {
 		this.affGpgDteModif = affGpgDteModif;
+	}
+	
+	@Column(name = "AFF_FON_COD_PF", length = 20)
+	public String getAffFonCodPf() {
+		return this.affFonCodPf;
+	}
+
+	public void setAffFonCodPf(String affFonCodPf) {
+		this.affFonCodPf = affFonCodPf;
+	}
+
+	@Column(name = "AFF_FON_DMP", length = 20)
+	public String getAffFonCodDmp() {
+		return this.affFonCodDmp;
+	}
+
+	public void setAffFonCodDmp(String affFonCodDmp) {
+		this.affFonCodDmp = affFonCodDmp;
 	}
 
 }

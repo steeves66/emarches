@@ -35,6 +35,12 @@ public class TFonction implements java.io.Serializable {
 	private String fonFonCod;
 	private String fonCourriel;
 	private String fonMobil;
+	private Date fonDteSaisi;
+	private String fonLibelleCrt;
+	private String fonCodeDmp;
+	private String fonCodePf;
+	private String fonLibelleLngDmp;
+	private String fonSourceSigmap;
 	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
 	private Set<TPlanGeneral> TPlanGenerals = new HashSet<TPlanGeneral>(0);
 	private Set<TAgpm> TAgpms = new HashSet<TAgpm>(0);
@@ -51,14 +57,14 @@ public class TFonction implements java.io.Serializable {
 		this.fonCod = fonCod;
 	}
 
-	public TFonction(String fonCod, /*TMinistere TMinistere,*/ TStructure TStructure, TTypeFonction TTypeFonction, Date fonDatDeb, Date fonDatFin,
-			String fonLibelle, String fonAdr, String fonTel, String fonFonCod, String fonCourriel, String fonMobil,
+	public TFonction(String fonCod, TStructure TStructure, TTypeFonction TTypeFonction, Date fonDatDeb, Date fonDatFin,
+			String fonLibelle, String fonAdr, String fonTel, String fonFonCod, String fonCourriel, String fonMobil,Date fonDteSaisi, String fonLibelleCrt,
+			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap,
 			Set<THistoAgpm> THistoAgpms, Set<TPlanGeneral> TPlanGenerals, Set<TAgpm> TAgpms,
 			Set<THistoPlanGeneral> THistoPlanGenerals, Set<TAssignation> TAssignations,
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TAffichageAgpm> TAffichageAgpms,
 			Set<TPlanPassation> TPlanPassations) {
 		this.fonCod = fonCod;
-		//this.TMinistere = TMinistere;
 		this.TStructure = TStructure;
 		this.TTypeFonction = TTypeFonction;
 		this.fonDatDeb = fonDatDeb;
@@ -69,6 +75,12 @@ public class TFonction implements java.io.Serializable {
 		this.fonFonCod = fonFonCod;
 		this.fonCourriel = fonCourriel;
 		this.fonMobil = fonMobil;
+		this.fonDteSaisi = fonDteSaisi;
+		this.fonLibelleCrt = fonLibelleCrt;
+		this.fonCodeDmp = fonCodeDmp;
+		this.fonCodePf = fonCodePf;
+		this.fonLibelleLngDmp = fonLibelleLngDmp;
+		this.fonSourceSigmap = fonSourceSigmap;
 		this.THistoAgpms = THistoAgpms;
 		this.TPlanGenerals = TPlanGenerals;
 		this.TAgpms = TAgpms;
@@ -89,16 +101,6 @@ public class TFonction implements java.io.Serializable {
 		this.fonCod = fonCod;
 	}
 
-/*	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "FON_MIN_CODE")
-	public TMinistere getTMinistere() {
-		return this.TMinistere;
-	}
-
-	public void setTMinistere(TMinistere TMinistere) {
-		this.TMinistere = TMinistere;
-	}
-*/
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FON_TYF_COD")
 	public TTypeFonction getTTypeFonction() {
@@ -191,6 +193,61 @@ public class TFonction implements java.io.Serializable {
 
 	public void setFonMobil(String fonMobil) {
 		this.fonMobil = fonMobil;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "FON_DTE_SAISI", length = 7)
+	public Date getFonDteSaisi() {
+		return this.fonDteSaisi;
+	}
+
+	public void setFonDteSaisi(Date fonDteSaisi) {
+		this.fonDteSaisi = fonDteSaisi;
+	}
+
+	@Column(name = "FON_LIBELLE_CRT", length = 500)
+	public String getFonLibelleCrt() {
+		return this.fonLibelleCrt;
+	}
+
+	public void setFonLibelleCrt(String fonLibelleCrt) {
+		this.fonLibelleCrt = fonLibelleCrt;
+	}
+
+	@Column(name = "FON_CODE_DMP", length = 20)
+	public String getFonCodeDmp() {
+		return this.fonCodeDmp;
+	}
+
+	public void setFonCodeDmp(String fonCodeDmp) {
+		this.fonCodeDmp = fonCodeDmp;
+	}
+
+	@Column(name = "FON_CODE_PF", length = 20)
+	public String getFonCodePf() {
+		return this.fonCodePf;
+	}
+
+	public void setFonCodePf(String fonCodePf) {
+		this.fonCodePf = fonCodePf;
+	}
+
+	@Column(name = "FON_LIBELLE_LNG_DMP", length = 500)
+	public String getFonLibelleLngDmp() {
+		return this.fonLibelleLngDmp;
+	}
+
+	public void setFonLibelleLngDmp(String fonLibelleLngDmp) {
+		this.fonLibelleLngDmp = fonLibelleLngDmp;
+	}
+
+	@Column(name = "FON_SOURCE_SIGMAP", length = 1)
+	public String getFonSourceSigmap() {
+		return this.fonSourceSigmap;
+	}
+
+	public void setFonSourceSigmap(String fonSourceSigmap) {
+		this.fonSourceSigmap = fonSourceSigmap;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFonction")

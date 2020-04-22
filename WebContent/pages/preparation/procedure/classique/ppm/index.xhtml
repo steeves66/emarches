@@ -367,124 +367,7 @@
     
        </h:panelGroup>
          <!-- Fin Tableau de Bord pour le DMP --> 
-         <!-- Debut SPP -->
-         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">      
-          <h:panelGroup rendered="#{controleController.panelPpmTableauBordSai}">
-              
-              <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-              <!-- ./col -->              
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.ppmDmSaisie}</h3>
-
-              <p>En attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.ppmDmTransmis}</h3>
-
-              <p>Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-        
-        </div>
-        </div>
-        </div>
-       </h:panelGroup> 
-       
-       <h:panelGroup rendered="#{controleController.panelPpmTableauBordVal}">
-        <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-            
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.ppmDmAttenteValide}</h3>
-
-              <p>En attente de Validation</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        
-        
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.ppmDmValide}</h3>
-
-              <p>Validé(s) par la dmp</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-             <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePpmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-						  </p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-        
-        
-       
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <h3>#{tableauBordController.ppmDmDiff}</h3>
-
-              <p>Différé(s) par la DMP</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-             <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{ppmController.chargePpmDifDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
-                    </div>
-                  </div>
-       </h:panelGroup>
-       
     
-       </h:panelGroup>
-         <!-- Fin SPP -->
-         
-         
       <!-- Début Tableau de Bord pour le Chef de Service Préparation et Procédures -->       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">      
           <h:panelGroup rendered="#{controleController.panelPpmTableauBordSai}">
@@ -561,7 +444,7 @@
             <div class="inner">
               <h3>#{tableauBordController.ppmDmValide}</h3>
 
-              <p>Validé(s) par la dmp</p>
+              <p>Validé(s) par la DMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>

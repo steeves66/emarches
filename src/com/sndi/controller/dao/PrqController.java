@@ -1145,8 +1145,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 getAffectationListe().clear();
 		 affectationListe = (List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")), 
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
-				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
-				new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"));
+				//new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("affectationListe  size: "+affectationListe.size());	
 			tableauBordController.chargeDataPrq();		
 	}
@@ -3032,6 +3032,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 			    }else {
 			 			    	     FacesContext.getCurrentInstance().addMessage(null,
 			 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Choisir un binôme !", ""));
+
+			 			    	    //Réinitialisation des chargés d'études selectionnés
+			 			    	    listSelectionFonctImput.clear();
 			 			          }	
 			 		 }
 				}

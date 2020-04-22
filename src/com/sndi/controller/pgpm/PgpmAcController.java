@@ -1164,13 +1164,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							}
 			 			
 			 			//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
-							List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1T"));
+							List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
 						    TStatut statuts = new TStatut();
 						      if(!LS.isEmpty()) statuts = LS.get(0);
 						  //Historisation des Plans Généraux
 						     THistoPlanGeneral histoPlan = new THistoPlanGeneral();
 						     histoPlan.setHpgDate(Calendar.getInstance().getTime());
-						     histoPlan.setHpgMotif("Opération transmise");
+						     histoPlan.setHpgMotif("Opération Validée");
 						     histoPlan.setTStatut(statuts);
 						     histoPlan.setTDetailPlanGeneral(demDetail);
 						     histoPlan.setTFonction(userController.getSlctd().getTFonction());
@@ -1444,6 +1444,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	           detailPlan.setTModePassation(new TModePassation(modePassation.getMopCode()));
                  	           detailPlan.setGpgAgpId(agpm.getAgpId());
                  	           detailPlan.setGpgActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+                 	           detailPlan.setGpgFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+                               detailPlan.setGpgFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
                  	           detailPlan.setGpgTypePlan("PN");
                  	           detailPlan.setTPlanGeneral(plan);
                  	           detailPlan.setGpgDateSaisie(Calendar.getInstance().getTime());
@@ -1472,7 +1474,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	          affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                  	          affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                  	          affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-                 	         affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
+                 	          affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
+                 	          affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
+                 	          affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
                  	          iservice.addObject(affichagePgpm);
                  	          
                  	          //Insertion dans T_Financement_PGPM
@@ -1543,6 +1547,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	                           detailPlan.setTModePassation(new TModePassation(modePassation.getMopCode()));
                	                           detailPlan.setGpgAgpId(agpm.getAgpId());
                	                           detailPlan.setGpgActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+               	                           detailPlan.setGpgFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+               	                           detailPlan.setGpgFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
                	                           detailPlan.setGpgTypePlan("PN");
                	                           detailPlan.setTPlanGeneral(plan);
                	                           detailPlan.setGpgDateSaisie(Calendar.getInstance().getTime());
@@ -1572,6 +1578,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	                           affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                	                           affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
                	                           affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
+               	                           affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
+               	                           affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
                	                           iservice.addObject(affichagePgpm);
                	                           
                	                           
@@ -1820,20 +1828,20 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							}
 			 			
 			 			//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
-							List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1T"));
+							List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
 						    TStatut statuts = new TStatut();
 						      if(!LS.isEmpty()) statuts = LS.get(0);
 						  //Historisation des Plans Généraux
 						     THistoPlanGeneral histoPlan = new THistoPlanGeneral();
 						     histoPlan.setHpgDate(Calendar.getInstance().getTime());
-						     histoPlan.setHpgMotif("Opération transmise à la CPMP");
+						     histoPlan.setHpgMotif("Opération validée");
 						     histoPlan.setTStatut(statuts);
 						     histoPlan.setTDetailPlanGeneral(demDetail);
 						     histoPlan.setTFonction(userController.getSlctd().getTFonction());
 						     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 						     iservice.addObject(histoPlan);
 									  
-							 userController.setTexteMsg("Transmission effectuée avec succès !");
+							 userController.setTexteMsg("Validation effectuée avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
 							 //return	null;
@@ -2288,6 +2296,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                    detailPlan.setTPlanGeneral(plan);
                    detailPlan.setGpgDateSaisie(Calendar.getInstance().getTime());
                    detailPlan.setGpgStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+                   detailPlan.setGpgFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+                   detailPlan.setGpgFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
                    iservice.addObject(detailPlan);
                   	 
                   	 
@@ -2312,6 +2322,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                    affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                    affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                    affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+                   affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
+                   affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
                    affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                    iservice.addObject(affichagePgpm);
                    
@@ -2361,6 +2373,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 	   detailPlan.setTPlanGeneral(plan);
                 	   detailPlan.setGpgDateSaisie(Calendar.getInstance().getTime());
                 	   detailPlan.setGpgStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+                	   detailPlan.setGpgFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+                       detailPlan.setGpgFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
                 	   iservice.addObject(detailPlan);
                 	 
                 	 
@@ -2386,6 +2400,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 	   affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                 	   affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
                 	   affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
+                	   affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
+                       affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
                 	   iservice.addObject(affichagePgpm);
             	 
 
@@ -2447,6 +2463,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                        detailPlan.setTPlanGeneral(plan);
                        detailPlan.setGpgDateSaisie(Calendar.getInstance().getTime());
                        detailPlan.setGpgStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+                       detailPlan.setGpgFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+                       detailPlan.setGpgFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
                        iservice.addObject(detailPlan);
                       	 
                       	 
@@ -2471,6 +2489,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                        affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
                        affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
                        affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
+                       affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
+                       affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
                        affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                        iservice.addObject(affichagePgpm);
                        

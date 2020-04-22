@@ -79,6 +79,8 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppApprobAno;
 	private Date dppDteModif;
 	private String dppRecherche;
+	private String dppFonCodPf;
+	private String dppFonCodDmp;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -111,7 +113,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, String dppStatutRetour,
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
-			Date dppDteModif,String dppRecherche,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
+			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TLBudgets = TLBudgets;
@@ -164,6 +166,8 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppApprobAno = dppApprobAno;
 		this.dppDteModif = dppDteModif;
 		this.dppRecherche = dppRecherche;
+		this.dppFonCodPf = dppFonCodPf;
+		this.dppFonCodDmp = dppFonCodDmp;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -671,6 +675,24 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppRecherche(String dppRecherche) {
 		this.dppRecherche = dppRecherche;
+	}
+	
+	@Column(name = "DPP_FON_COD_PF", length = 20)
+	public String getDppFonCodPf() {
+		return this.dppFonCodPf;
+	}
+
+	public void setDppFonCodPf(String dppFonCodPf) {
+		this.dppFonCodPf = dppFonCodPf;
+	}
+
+	@Column(name = "DPP_FON_COD_DMP", length = 20)
+	public String getDppFonCodDmp() {
+		return this.dppFonCodDmp;
+	}
+
+	public void setDppFonCodDmp(String dppFonCodDmp) {
+		this.dppFonCodDmp = dppFonCodDmp;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")
