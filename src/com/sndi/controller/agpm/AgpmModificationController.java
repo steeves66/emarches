@@ -941,8 +941,8 @@ public class AgpmModificationController {
    	   				
    	   			 //Declarant
    	   	 		 List<TDeclarant> DEC =iservice.getObjectsByColumn("TDeclarant", new ArrayList<String>(Arrays.asList("DEC_ID")),
-   	   		      				new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
-   	   	 		TDeclarant declarant = new TDeclarant();
+   	   		      	new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
+   	   	 		 TDeclarant declarant = new TDeclarant();
    	   	   				if(!DEC.isEmpty()) declarant =DEC.get(0); 	
    	   	   		if(declarant.getDecId() > 0 ) {
    	   	   	         declarant.setDecOrganExecLibelle(updateAgpm.getDecOrganExecLibelle());

@@ -363,6 +363,7 @@ public class TableauBordController {
 							 private String amiCsvValide="";
 						     private String amiCsvDiff="";
 						     private String amiCsvTraitCharg="";
+						     private String amiCsvValidation="";
 							 /*
 							  Compteur pour le Directeur des Marchés Publics
 							   */
@@ -411,6 +412,7 @@ public class TableauBordController {
 								 private String prqCsvValide="";
 							     private String prqCsvDiff="";
 							     private String prqCsvTraitCharg="";
+							     private String prqCsvValidation="";
 								 /*
 								  Compteur pour le Directeur des Marchés Publics
 								   */
@@ -588,6 +590,7 @@ public class TableauBordController {
 			 amiAcAttenteValide = ""+getAcAmiAttenteValide("D1S","S2D"); 
 			 amiCsvAttAff = ""+getAmiAttAffCsv("D2T");
 			 amiCsvAttVal = ""+getAcAmiValChargeCsv("D4V");
+			 amiCsvValidation = ""+getAcAmiValidationCsvDossier("D5V","DOP","SBO");
 			 amiaffecte = ""+getAcAmiAffecteDossier("D3A");
 			 amiDaoPub = ""+getAcAmiPublieDossier("DPU");
 			 amiCsvValide = ""+getAmiAttentePub("D5V","DOP");
@@ -617,10 +620,11 @@ public class TableauBordController {
 			 prqAcAttenteValide = ""+getAcPrqAttenteValide("D1S","S2D"); 
 			 prqCsvAttAff = ""+getPrqAttAffCsv("D2T");
 			 prqCsvAttVal = ""+getAcPrqValChargeCsv("D4V");
+			 prqCsvValidation = ""+getAcPrqValidationCsvDossier("D5V","DOP","SBO");
 			 prqaffecte = ""+getAcPrqAffecteDossier("D3A");
 			 prqCsvValide = ""+getPrqAttentePub("D5V","DOP");
 			 prqDaoPub = ""+getAcPrqValidCsvDossier("D5V");
-			 prqCsvDiff = ""+getAcPrqValidCsvDossier("D5R");
+			 prqCsvDiff = ""+getAcPrqDiffCsvDossier("D5R");
 			 prqAcDiffCpmp = ""+getPrqDiffCpmpACDossier("D2T");
 			 prqAcDiffDmp = ""+getPrqDiffDmpACDossier("S3D");
 			 prqAcTransmis = ""+getAcPrqTransmisDossier("D1T");
@@ -1715,8 +1719,8 @@ public int getAcDaoValidationCsvDossier(String src1, String src2, String src3){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -1725,8 +1729,8 @@ public int getAcDaoValidCsv(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -1959,8 +1963,8 @@ public int getAcDaoValidationCsvDossierPs(String src1, String src2, String src3)
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -2024,8 +2028,8 @@ public int getAcDaoValidCsvPs(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -2359,6 +2363,15 @@ public int getAcPrqValidCsvDossier(String src){
 	return	i;	
 }
 
+//PRQ différé par le Chef de Service
+public int getAcPrqDiffCsvDossier(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
 //PRQ Transmis par le AC
 public int getAcPrqTransmisDossier(String src){ 
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
@@ -2507,12 +2520,21 @@ public int getPrqValideCmp(String src){
 }
 
 
-//PRQ validés par le dmp
+//PRQ validés par la dmp
 public int getPrqValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+	return	i;	
+}
+
+//PRQ validé par le Chef de Service en procédure normale
+public int getAcPrqValidationCsvDossier(String src1, String src2, String src3){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
@@ -2623,12 +2645,21 @@ public int getAcAmiPublieDossier(String src){
 public int getAcAmiValidCsvDossier(String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
-			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
-//DAO Transmis par le AC
+//AMI validé par le Chef de Service en procédure normale
+public int getAcAmiValidationCsvDossier(String src1, String src2, String src3){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//AMI Transmis par le AC
 public int getAcAmiTransmisDossier(String src){ 
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
@@ -4850,6 +4881,22 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setPrqDaoPub(String prqDaoPub) {
 		this.prqDaoPub = prqDaoPub;
+	}
+
+	public String getAmiCsvValidation() {
+		return amiCsvValidation;
+	}
+
+	public void setAmiCsvValidation(String amiCsvValidation) {
+		this.amiCsvValidation = amiCsvValidation;
+	}
+
+	public String getPrqCsvValidation() {
+		return prqCsvValidation;
+	}
+
+	public void setPrqCsvValidation(String prqCsvValidation) {
+		this.prqCsvValidation = prqCsvValidation;
 	}
 
 	
