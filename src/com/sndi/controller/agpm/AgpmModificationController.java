@@ -939,9 +939,15 @@ public class AgpmModificationController {
    	   		       agpm.setAgpCode(updateAgpm.getAffAgpCode());
    	   				iservice.updateObject(agpm);
    	   				
+   	   				if(slctdTd.getTDeclarant() == null) {
+   	   				decId = 0;	
+   	   				}else {
+   	   				decId= slctdTd.getTDeclarant().getDecId();
+   	   				}
+   	   				
    	   			 //Declarant
    	   	 		 List<TDeclarant> DEC =iservice.getObjectsByColumn("TDeclarant", new ArrayList<String>(Arrays.asList("DEC_ID")),
-   	   		      	new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+slctdTd.getTDeclarant().getDecId()));
+   	   		      	new WhereClause("DEC_ID",WhereClause.Comparateur.EQ,""+decId));
    	   	 		 TDeclarant declarant = new TDeclarant();
    	   	   				if(!DEC.isEmpty()) declarant =DEC.get(0); 	
    	   	   		if(declarant.getDecId() > 0 ) {
@@ -969,6 +975,24 @@ public class AgpmModificationController {
 		         declarant.setDecTelephone(updateAgpm.getDecTelephone()); 
 		         declarant.setDecEmail(updateAgpm.getDecEmail());	
 		         iservice.addObject(declarant);
+		         
+		         listeAgpm=(List<TAgpm>) iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),	 
+						 new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+updateAgpm.getAgpId()));
+				      if(!listeAgpm.isEmpty()) {
+					    TAgpm updateAgpm = new TAgpm();
+					        updateAgpm=listeAgpm.get(0);
+					        updateAgpm.setTDeclarant(new TDeclarant(declarant.getDecId()));
+							iservice.updateObject(updateAgpm);
+				         } 
+				      
+				      affichageListe=(List<TAffichageAgpm>) iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),	 
+								 new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+updateAgpm.getAgpId()));
+						      if(!listeAgpm.isEmpty()) {
+							    TAffichageAgpm updateAff = new TAffichageAgpm();
+							       updateAff=affichageListe.get(0);
+							       updateAff.setTDeclarant(new TDeclarant(declarant.getDecId()));
+									iservice.updateObject(updateAff);
+						         } 
    	   	   		}
    	   	   		        
    	   				
