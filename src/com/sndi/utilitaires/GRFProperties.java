@@ -108,7 +108,7 @@ public class GRFProperties {
 	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX = "/standalone/Dossiers/DAO/Entretien_ des_locaux/";
 	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE = "/standalone/Dossiers/DAO/dao_ gestion_de_main_doeuvre_occasionnelle_2016/";
 	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE = "/standalone/Dossiers/DAO/Location_main_doeuvre_ 2016/";
-	static final String PARAM_UPLOAD_DAO_RESTAURATION= "/standalone/Dossiers/DAO/Dao_Restauration/";
+	public static final String PARAM_UPLOAD_DAO_RESTAURATION= "/standalone/Dossiers/DAO/Dao_Restauration/";
 	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE = "/standalone/Dossiers/DAO/Securite_privee_ 2016/";
 
 	
