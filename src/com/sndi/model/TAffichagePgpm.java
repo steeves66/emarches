@@ -385,7 +385,7 @@ public class TAffichagePgpm implements java.io.Serializable {
 		this.affFonCodPf = affFonCodPf;
 	}
 
-	@Column(name = "AFF_FON_DMP", length = 20)
+	@Column(name = "AFF_FON_COD_DMP", length = 20)
 	public String getAffFonCodDmp() {
 		return this.affFonCodDmp;
 	}

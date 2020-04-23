@@ -4559,10 +4559,14 @@ public class ControleController {
 											    			type = "Commission";
 											    			libelle="JUGEMENT DES OFFRES";	
 											    		}else
-											    			if(action.equalsIgnoreCase("LISDEMSAI") && userConnecte().equalsIgnoreCase("ACR")) {
+											    			
+											    			//DEBUT GESTION DES PROCEDURES DERROGATOIRES
+											    			if(action.equalsIgnoreCase("LISDEMSAI")) {
 												    			type = "Demandes";
 												    			fonctionalite = "listSaisieAc";
 												    			libelle="LISTE DES DEMANDE SAISIES";	
+												    			libelleFinCom = "Transmission éffectuée avec succès !";
+												    			libelleConfirm = "Confirmez-vous la transmission de la demande N°";
 																btn_new =true;
 															    fermerSai=true;
 																fermerVal=false;
@@ -4572,6 +4576,8 @@ public class ControleController {
 													    			type = "Demandes";
 													    			fonctionalite = "listValidationCpmp";
 													    			libelle="LISTE DES DEMANDES EN ATTENTE DE VALIDATION PAR LA CELLULE";
+													    			libelleFinCom = "Validation éffectuée avec succès !";
+													    			libelleConfirm = "Confirmez-vous la validation de la demande N°";
 																	btn_new =false;
 																	btn_retourner = true;
 																    fermerSai=true;
@@ -4588,6 +4594,8 @@ public class ControleController {
 															    			type = "Demandes";
 															    			fonctionalite = "listValidationDmp";
 															    			libelle="LISTE DES DEMANDES EN ATTENTE DE VALIDATION PAR LA DMP";
+															    			libelleFinCom = "Validation éffectuée avec succès !";
+															    			libelleConfirm = "Confirmez-vous la validation de la demande N°";
 															    			panel1 =true;
 															    			btn_retourner = true;
 																			panel2 =false;
@@ -4596,7 +4604,7 @@ public class ControleController {
 																			fermerVal=false;
 															    		}
 							    		
-
+							    		                       //FIN GESTION DES PROCEDURES DERROGATOIRES
 			 	    			
 			return action;
 		 }

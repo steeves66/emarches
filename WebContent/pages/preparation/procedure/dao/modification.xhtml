@@ -64,7 +64,7 @@
             <div class="col-md-9 "><div  style="color: #fff">AVIS DU BAILLEUR</div></div> 
          </div>
          <div class="box-body">
-         <p:messages id="messages" showDetail="false" autoUpdate="true"  closable="true"/> 
+         <p:messages id="messages1" showDetail="false" autoUpdate="true"  closable="true"/> 
              <div class="row">
              
               <div class="col-md-6">
@@ -112,7 +112,7 @@
             <p:panel header="Fichier(s) Joint(s)">
             
             <div class="row">
-                   <div class="col-xs-12"><p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/></div>
+                   <div class="col-xs-12"><p:messages id="message5" showDetail="false" autoUpdate="true"  closable="true"/></div>
              </div>
 				
 	            <div class="col-md-12">
@@ -134,7 +134,7 @@
 	              <p:fileUpload fileUploadListener="#{daoController.uploadBailleur}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
 			                      mode="advanced" dragDropSupport="true"
-			                          update=":apercuDAOCharge:tabDossierCharge" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+			                           sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
 	            </div>
 	            
 	            <div class="col-md-12">

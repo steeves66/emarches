@@ -272,6 +272,11 @@ public class DacModifController {
 	 private String libelleFournitures ="DAO_Fournitures_et_services_connexes.doc";
 	 private String libelleTravaux ="dtao_travaux.doc";
 	 private String libellePrestations ="dtao_prestation.doc";
+	 private String libelleEntretienLocaux ="dao_ entretien_ des_locaux.doc";
+	 private String libelleMainDouevreOcca ="dao_ gestion_de_main_doeuvre_occasionnelle_2016.doc";
+	 private String libelleLocationMainDoeuvre ="dao_location_main_doeuvre_ 2016.doc";
+	 private String libelleRestauration ="Dao_Restauration.doc";
+	 private String libelleSecurite ="dao_securite_privee_ 2016.doc";
 	 
 	 private VLigneImputation ligne = new VLigneImputation();
 	 private VLigneImputation recupLigne = new VLigneImputation();
@@ -3105,18 +3110,39 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
   
 	//Téléchargement des DAO type depuis la liste d'affichage
 	public void opendaoType() throws IOException{
-		  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
-			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+		if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
+			  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
 			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
 		  }else
 			  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
-			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
+				  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
 			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
 		  }else
 			 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
-			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+				 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
 			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
 		    }
+
+		  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+			  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX+libelleEntretienLocaux, libelleEntretienLocaux); 
+			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX+libelleEntretienLocaux, libelleEntretienLocaux);  
+		  }else
+			  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
+				  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE+libelleMainDouevreOcca, libelleMainDouevreOcca); 
+			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX+libelleMainDouevreOcca, libelleMainDouevreOcca);
+		  }else
+			 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+				 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre); 
+			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
+		    }else
+				 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+					 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
+				 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX+libelleRestauration, libelleRestauration);
+			  }else
+			   if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+						 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE+libelleSecurite, libelleSecurite); 
+					 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX+libelleSecurite, libelleSecurite);
+			}
 	  }
 	
 	
@@ -3129,15 +3155,39 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						slctdTd = daoRecup.get(0);
 		   	                 }
 					
-			  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
-				  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures);  
-			  }else
-				  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
-				downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux);  
-			  }else
-				 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
-				 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations);  
-			    }
+					if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
+						  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+						  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
+					  }else
+						  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
+							  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
+						downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+					  }else
+						 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+							 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+						 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+					    }
+
+					  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+						  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX+libelleEntretienLocaux, libelleEntretienLocaux); 
+						  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX+libelleEntretienLocaux, libelleEntretienLocaux);  
+					  }else
+						  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
+							  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE+libelleMainDouevreOcca, libelleMainDouevreOcca); 
+						downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX+libelleMainDouevreOcca, libelleMainDouevreOcca);
+					  }else
+						 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+							 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre); 
+						 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
+					    }else
+							 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+								 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
+							 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX+libelleRestauration, libelleRestauration);
+						  }else
+						   if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+									 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE+libelleSecurite, libelleSecurite); 
+								 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX+libelleSecurite, libelleSecurite);
+						}
 		  }
 	
 	
@@ -5403,6 +5453,54 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		this.listePiecesDao = listePiecesDao;
 	}
 
+
+	public String getLibelleEntretienLocaux() {
+		return libelleEntretienLocaux;
+	}
+
+
+	public void setLibelleEntretienLocaux(String libelleEntretienLocaux) {
+		this.libelleEntretienLocaux = libelleEntretienLocaux;
+	}
+
+
+	public String getLibelleMainDouevreOcca() {
+		return libelleMainDouevreOcca;
+	}
+
+
+	public void setLibelleMainDouevreOcca(String libelleMainDouevreOcca) {
+		this.libelleMainDouevreOcca = libelleMainDouevreOcca;
+	}
+
+
+	public String getLibelleLocationMainDoeuvre() {
+		return libelleLocationMainDoeuvre;
+	}
+
+
+	public void setLibelleLocationMainDoeuvre(String libelleLocationMainDoeuvre) {
+		this.libelleLocationMainDoeuvre = libelleLocationMainDoeuvre;
+	}
+
+
+	public String getLibelleRestauration() {
+		return libelleRestauration;
+	}
+
+
+	public void setLibelleRestauration(String libelleRestauration) {
+		this.libelleRestauration = libelleRestauration;
+	}
+
+
+	public String getLibelleSecurite() {
+		return libelleSecurite;
+	}
+
+
+	public void setLibelleSecurite(String libelleSecurite) {
+		this.libelleSecurite = libelleSecurite;
+	}
 	
-		
 }

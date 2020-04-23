@@ -102,15 +102,26 @@ public class GRFProperties {
 	public static final String PARAM_LOG4J_LIBELLE = "C:/LOG4J/";
 	//public static final String PARAM_UPLOAD_DESTINATION = getProperty("destination", "\\standalone\\Dossiers\\");
 	public static final String PARAM_UPLOAD_DESTINATION = "/standalone/Dossiers/";
-	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/wildfly8/standalone/Dossiers/DAO/Travaux/";
-	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/wildfly8/standalone/Dossiers/DAO/Fournitures/";
-	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/wildfly8/standalone/Dossiers/DAO/Prestations_Services/";
+	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/standalone/Dossiers/DAO/Travaux/";
+	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/standalone/Dossiers/DAO/Fournitures/";
+	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/standalone/Dossiers/DAO/Prestations_Services/";	
+	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX = "/standalone/Dossiers/DAO/Entretien_ des_locaux/";
+	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE = "/standalone/Dossiers/DAO/dao_ gestion_de_main_doeuvre_occasionnelle_2016/";
+	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE = "/standalone/Dossiers/DAO/Location_main_doeuvre_ 2016/";
+	static final String PARAM_UPLOAD_DAO_RESTAURATION= "/standalone/Dossiers/DAO/Dao_Restauration/";
+	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE = "/standalone/Dossiers/DAO/Securite_privee_ 2016/";
+
 	
 	public static final String PARAM_UPLOAD_DESTINATION_DAO_LINUX = getProperty("destinationDao", "\\standalone\\Dossiers\\DAO\\");
 	public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/standalone/Dossiers/DAO/Travaux");
 	public static final String PARAM_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationFournitures","opt/standalone/Dossiers/DAO/Fournitures");
 	public static final String PARAM_UPLOAD_DAO_SERVICES_LINUX = getProperty("destinationServices","opt/standalone/Dossiers/DAO/Services/");
-	public static final String PARAM_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationPrestations","opt/standalone/Dossiers/DAO/Prestations/");
+	public static final String PARAM_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationPrestations","opt/standalone/Dossiers/DAO/Prestations/");	
+	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX = getProperty("destinationTravaux","opt/standalone/Dossiers/DAO/Entretien_ des_locaux");
+	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX = getProperty("destinationFournitures","opt/standalone/Dossiers/DAO/dao_ gestion_de_main_doeuvre_occasionnelle_2016");
+	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX = getProperty("destinationServices","opt/standalone/Dossiers/DAO/Location_main_doeuvre_ 2016/");
+	public static final String PARAM_UPLOAD_DAO_RESTAURATION_LINUX = getProperty("destinationPrestations","opt/standalone/Dossiers/DAO/Dao_Restauration/");
+	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationPrestations","opt/standalone/Dossiers/DAO/Securite_privee_ 2016/");
 	
 	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC = getProperty("destinationTrue", "\\standalone\\Dossiers\\trueDoc\\");
 	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "opt/standalone/Dossiers/");

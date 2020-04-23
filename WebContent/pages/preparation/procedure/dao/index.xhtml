@@ -1280,15 +1280,13 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
-                              
-                            <!-- <h:panelGroup rendered="false"> -->
+
 				            <p:commandLink action="#{dacModifController.renderPage('dac1','MODDAO')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				               title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{dacModifController.slctdTd}" />                       
                             </p:commandLink>
-                            <!-- </h:panelGroup> -->
-                            
+
                               <p:commandLink action="#{daoController.opendaoType()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				               title="Télécharger le DAO type" ajax="false">
                                 <i class="ace-icon fa fa-download bigger-120"  style="color: white"></i> 
