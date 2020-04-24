@@ -278,7 +278,13 @@ public class ControleController {
 	
 	public boolean fermerSai=false;
 	public boolean fermerVal=false;
-	
+	//Bouton Fermer PGPM
+	public boolean fermerSaiPgpm=false;
+	public boolean fermerValPgpm=false;
+	//Bouton Fermer PGSPM
+	public boolean fermerSaiPgspm=false;
+	public boolean fermerValPgspm=false;
+	//Bouton fermer PSPM
 	public boolean fermerSaiPspm=false;
 	public boolean fermerValPspm=false;
 	
@@ -617,6 +623,8 @@ public class ControleController {
 						btn_trans_pgpm = true;
 						btn_trans_pgspm = false;
 						btn_trasmettre_pgspm = false;
+						btn_fermer_saisie_pgpm = true;
+						btn_fermer_saisie_pgspm = false;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPGPM")) {
 			    			type = "PGPM";
@@ -640,6 +648,10 @@ public class ControleController {
 							searchPgspm = false;
 							fermerSai = true;
 							fermerVal = false;
+							/*fermerSaiPgpm = true;
+							fermerValPgpm = false;
+							fermerSaiPgspm = false;
+							fermerValPgspm = false;*/
 							etatLoveAgpm = true;
 							etatLoveAgpmPs = false;
 							panelPgpmTableauBordSai =true;
@@ -675,8 +687,10 @@ public class ControleController {
 								panel2 =true;
 								panelPgpm = true;
 								panelPgspm = false;
-								fermerSai = false;
-								fermerVal = true;
+								fermerSaiPgpm = false;
+								fermerValPgpm = true;
+								fermerSaiPgspm = false;
+								fermerValPgspm = false;
 								panelPgpmTableauBordSai =false;
 								panelPgpmTableauBordVal =true;
 								detailPg1 = true;
@@ -728,6 +742,8 @@ public class ControleController {
 	 				    panelTraitement=false;
 			    		panelUpdate=true;
 			    		panelRegister=false;
+			    		btn_fermer_saisie_pgpm = false;
+						btn_fermer_saisie_pgspm = true;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPGSPM")) {
 			    			type = "PGSPM";
@@ -756,6 +772,10 @@ public class ControleController {
 							 nbrepgspm = true;
 							 fermerSai = true;
 							 fermerVal = false;
+							 /*fermerSaiPgpm = false;
+							 fermerValPgpm = false;
+							 fermerSaiPgspm = true;
+							 fermerValPgspm = false;*/
 							 panelPgspmTableauBordSai =true;
 							 panelPgspmTableauBordVal =false;
 							 detailPg1 = false;
@@ -789,8 +809,10 @@ public class ControleController {
 								panel2 =true;
 								 panelPgpm = false;
 								 panelPgspm = true;
-								 fermerSai = false;
-								 fermerVal = true;
+								 fermerSaiPgpm = false;
+								 fermerValPgpm = false;
+								 fermerSaiPgspm = false;
+								 fermerValPgspm = true;
 								 searchPgpm = false;
 								 searchPgspm = true;
 								 panelPgspmTableauBordSai =false;
@@ -7418,6 +7440,46 @@ public class ControleController {
 
 	public void setUpdate_fermer_dps(boolean update_fermer_dps) {
 		this.update_fermer_dps = update_fermer_dps;
+	}
+
+
+	public boolean isFermerSaiPgpm() {
+		return fermerSaiPgpm;
+	}
+
+
+	public void setFermerSaiPgpm(boolean fermerSaiPgpm) {
+		this.fermerSaiPgpm = fermerSaiPgpm;
+	}
+
+
+	public boolean isFermerValPgpm() {
+		return fermerValPgpm;
+	}
+
+
+	public void setFermerValPgpm(boolean fermerValPgpm) {
+		this.fermerValPgpm = fermerValPgpm;
+	}
+
+
+	public boolean isFermerSaiPgspm() {
+		return fermerSaiPgspm;
+	}
+
+
+	public void setFermerSaiPgspm(boolean fermerSaiPgspm) {
+		this.fermerSaiPgspm = fermerSaiPgspm;
+	}
+
+
+	public boolean isFermerValPgspm() {
+		return fermerValPgspm;
+	}
+
+
+	public void setFermerValPgspm(boolean fermerValPgspm) {
+		this.fermerValPgspm = fermerValPgspm;
 	}
 	
     
