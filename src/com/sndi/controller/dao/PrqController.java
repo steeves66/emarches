@@ -2912,7 +2912,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	  
 	  
 	  //Methode d'Affectation
-	  @Transactional
+	 /* @Transactional
 	  public void affecterDao() {
 		//Insertion des chargés d'études choisis 
 			if (listSelectionFonctImput.size()==0) {
@@ -3011,7 +3011,99 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 		 }
 				}
 	     //Fin d'affectation PRQ 
+*/	  
 	  
+	  
+	  //Methode d'Affectation
+	  @Transactional
+	  public void affecterDao() {
+		  slctdTd.setAffStaCode("D3A");
+		  iservice.updateObject(slctdTd);
+			
+			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+				if (!listDao.isEmpty()) {
+					newDao= listDao.get(0);
+					newDao.setTStatut(new TStatut("D3A"));
+					newDao.setDacStatutRetour("0");
+			        iservice.updateObject(newDao); 
+	   	                 }
+		  
+		  
+		  //String exo="";
+		  String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DE LA PREQUALIFICATION N°";
+		  String exo=chaine+newDao.getDacCode();
+		  newSeance.setTFonction(userController.getSlctd().getTFonction());
+		  newSeance.setTOperateur(userController.getSlctd().getTOperateur());
+		  newSeance.setTTypeSeance(new TTypeSeance("CIA"));
+		  newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
+		  newSeance.setSeaLibelle(exo);
+		  iservice.addObject(newSeance);
+		  
+		  
+		//Insertion des chargés d'études choisis 
+			if (listSelectionFonctImput.size()==0) {
+						FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+					}
+			 		else{
+			 			
+			 			for(VFonctionImputation n : listSelectionFonctImput) {
+			 	    		 
+			 	    		 TCommissionSpecifique com = new TCommissionSpecifique();
+			 	    		 com.setTStructure(new TStructure(n.getStrCode()));
+			 	    		 com.setTDacSpecs(newDao);
+			 	    		 com.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 	    		 com.setTTypeCommission(new TTypeCommission("CIA"));
+			 	    		 com.setComDteSaisi(Calendar.getInstance().getTime());
+			 	    		 com.setComMarCode(slctdTd.getTTypeMarche().getTymCode());
+			 	    		 iservice.addObject(com);
+			 	    		 
+			 	    		 TDetCommissionSeance det = new TDetCommissionSeance();
+			 	    		 det.setDcsDteSaisi(Calendar.getInstance().getTime());
+			 	    		 det.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+			 	    		 det.setTDacSpecs(newDao);
+			 	    		 det.setTSeances(newSeance);
+			 	    		 det.setDcsFonCod(n.getFonCod());
+			 	    		 det.setDcsOpeMatricule(n.getOpeMatricule());
+			 	    		 det.setTStructure(new TStructure(n.getStrCode()));
+			 	    		 det.setTCommissionSpecifique(com);
+			 	    		 det.setTOperateur(userController.getSlctd().getTOperateur());
+			 	    		 det.setTTypeCommission(new TTypeCommission(com.getTTypeCommission().getTcoCode()));
+			 	    		 det.setDcsPresent("O");
+			 	    		 det.setDcsNomMbm(n.getOpeNom());
+			 	    		 det.setDcsTelMbm(n.getOpeContact());
+			 	    		 det.setDcsMbmRespo(n.getStrOpeRespo());
+			 	    		 iservice.addObject(det);
+			 	    		 
+			 	    		//Enregistrement dans TDaoAffectation
+				 	    	 TDaoAffectation newAff = new TDaoAffectation(); 
+				 			 newAff.setDafDacCode(newDao.getDacCode());
+				 			 newAff.setDafOpeMatricule(n.getOpeMatricule());
+				 			 newAff.setDafStaCode(newDao.getTStatut().getStaCode());
+				 			 newAff.setDafStatutRetour(newDao.getDacStatutRetour());
+				 			 newAff.setDafDacObjet(newDao.getDacObjet());
+				 			 newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
+				 			 newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
+				 			 newAff.setDafTypePlan(newDao.getDacTypePlan());
+				 			 newAff.setDafDacStr(newDao.getTStructure().getStrCode());
+				 			 newAff.setDafDacRecherche(newDao.getDacRecherche());
+				 			 newAff.setDafDcsMbmRespo(n.getStrOpeRespo());
+				 			 newAff.setTDetCommissionSeance(det);
+				 			 newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
+				 			 newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
+				 			 newAff.setDafMention(newDao.getDacMention());
+				 			 iservice.addObject(newAff);
+			 	   	 }
+			 			chargeDaoAffectes();
+			 			//Chargement des compteurs du tableau de bord
+			 			tableauBordController.chargeDataDao();	
+			 			//Message de confirmation
+    					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
+						userController.setRenderMsg(true);
+						userController.setSevrityMsg("success");
+				}
+	      }
 	  
 	//Validation chef de service 
 	  @Transactional
