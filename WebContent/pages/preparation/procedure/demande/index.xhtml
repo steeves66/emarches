@@ -11,22 +11,7 @@
 <h:form id="gnl">	
  <section class="content-header">
       <h3>
-      <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
         #{controleController.libelle}
-        SAISIE DES DEMANDES
-        </h:panelGroup>
-        
-        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
-        #{controleController.libelle1}
-        </h:panelGroup>
-        
-         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
-        #{controleController.libelle}
-        </h:panelGroup>
-        
-          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
-        #{controleController.libelle}
-        </h:panelGroup>
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisi  -->
@@ -73,12 +58,14 @@
             
             
             </div>
-                 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+               
             <div class="row">  
                  <div class="col-md-12">
+                   <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                 
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
+            <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS DE L'AUTORITE CONTRACTANTE</div></div>
             <div class="col-md-2 "><div  style="color: #fff">
              <label for="gestion1" class="col-sm-5 control-label">GESTION</label>
 	              <div class="col-sm-6">
@@ -140,16 +127,27 @@
 	      
          </div>
                </div>
+               </h:panelGroup>
       </div>
 
 				<div class="col-md-12">
 					<div class="box box-success box-solid">
 						<div class="box-header with-border">
 							<div class="col-md-2 ">
-								<div style="color: #fff">LISTE DES DEMANDES</div>
+								<div style="color: #fff">#{controleController.libelle}</div>
 							</div>
 						
-					
+					 	<div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink  styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{agpmController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{agpmController.chargerFiltreRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>
 					 
 					  
 					 <div class="col-md-3 ">
@@ -162,21 +160,86 @@
 					 
 							
 							<div class="col-md-1 ">
-								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau PGPM" data-toggle="tooltip" action="#{agpmController.renderPage('agpm2','ENG')}"  update=":content">
+							   <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouvelle Démande" data-toggle="tooltip" action="#{demandeController.renderPage('dem2','SAIDEMAC')}"  update=":content">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvelle Demande</span>
 								</p:commandLink>
+								</h:panelGroup>
 							</div>
 							
 						</div>
 						<div class="box-body">
 							
 							   
-					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listeDemandes}" 
                         emptyMessage="Aucune demande enregistrée" scrollable="true" scrollHeight="250" >
+                        
+                            <p:column headerText="Référence" styleClass="col-sm-2" >
+                           <h:panelGroup rendered="#{slctdTb.demStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.demRef}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.demStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.demRef}" />
+         				</h:panelGroup> 
+         				</p:column>
 
-                          <p:column headerText="Actions">
+                         <p:column headerText="Type" styleClass="col-sm-3" >
+                         <h:panelGroup rendered="#{slctdTb.demStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDemande.tdmLibelle}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.demStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.TTypeDemande.tdmLibelle}" />
+         				</h:panelGroup> 
+         				</p:column>
+         				
+                          <p:column headerText="Objet" styleClass="col-sm-4">
+                         <h:panelGroup rendered="#{slctdTb.demStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.demObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.demStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.demObjet}" />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				           <p:column headerText="Motif" styleClass="col-sm-2">
+                         <h:panelGroup rendered="#{slctdTb.demStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.demMotif}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.demStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.demMotif}" />
+         				</h:panelGroup>
+				        </p:column>
 
-				         </p:column>   
+                        <p:column headerText="Actions" styleClass="col-sm-1">
+                          <h:panelGroup rendered="#{slctdTb.demStatutRetour == '1'}">
+	                            <p:commandLink  oncomplete="PF('motif').show()"  styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                              <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
+	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
+	                           </p:commandLink> 
+	         		         </h:panelGroup>
+
+                             <p:commandLink  styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
+                             </p:commandLink>
+
+				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				               title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />                       
+                            </p:commandLink>
+
+                                <p:commandLink action="#{demandeController.valider()}" styleClass="btn btn-xs btn-success"  title="#{controleController.libelleTitle}" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
+                                <p:confirm header="Confirmation" message="#{controleController.libelleConfirm} #{slctdTb.demNum} ?" icon="ui-icon-alert" /> 
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
+                             </p:commandLink>
+                             
+				        </p:column>   
     </p:dataTable>
    
    
@@ -187,7 +250,7 @@
 
             </div>
             
-            </h:panelGroup>
+            
     
     <!--DEBUT PANEL DE VALIDATION -->
    
@@ -205,6 +268,45 @@
 </h:form>
 
  
+ 
+ <h:form id="motif">
+	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+					<div class="g12">
+						<div class="panel-heading">
+						Motif du rejet de la demande N° #{demandeController.slctdTd.demNum}
+						</div> 
+					<div class="panel-body panel-body-nopadding">
+	                  <p:inputTextarea rows="4"  cols="100" style="width:100%;" readonly="true"/>
+	                  </div>
+	                  <div class="par pull-right"> par:<strong></strong></div>
+                     <div class="panel-footer">
+                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()"/>
+                     </div>
+                    </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="differe">
+	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+					<div class="g12">
+						<div class="panel-heading">
+						Motif du retour de la demande N° #{demandeController.slctdTd.demNum}
+						
+						</div> 
+					<div class="panel-body panel-body-nopadding">
+	                 <div class="col-xs-12 col-sm-12">
+						   <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+						   <p:inputTextarea  rows="4" cols="33" style="width:100%;"/>
+						   </div>
+	                  </div>
+	                  
+                     
+                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('diff').hide()"/>
+                       &nbsp; &nbsp;
+                      <p:commandLink styleClass="btn btn-success"  value="Valider"  oncomplete="PF('diff').hide()" update=":gnl"/>
+                    </div>
+      </p:dialog>
+    </h:form>
     
     
     

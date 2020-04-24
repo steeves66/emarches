@@ -36,6 +36,7 @@ public class TDemande implements java.io.Serializable {
 	private String demRef;
 	private Short demGesCode;
 	private String demRefActIni;
+	private String demStatutRetour;
 	private Set<THistoDemande> THistoDemandes = new HashSet<THistoDemande>(0);
 	private Set<TDetailDemandes> TDetailDemandeses = new HashSet<TDetailDemandes>(0);
 	private Set<TAvisPresel> TAvisPresels = new HashSet<TAvisPresel>(0);
@@ -49,7 +50,7 @@ public class TDemande implements java.io.Serializable {
 
 	public TDemande(BigDecimal demNum, TTypeDemande TTypeDemande, TStatut TStatut, TStructure TStructure,
 			TFonction TFonction, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,
-			String demRefAvisMin, String demRef, Short demGesCode, String demRefActIni,
+			String demRefAvisMin, String demRef, Short demGesCode, String demRefActIni,String demStatutRetour,
 			Set<THistoDemande> THistoDemandes, Set<TDetailDemandes> TDetailDemandeses, Set<TAvisPresel> TAvisPresels) {
 		this.demNum = demNum;
 		this.TTypeDemande = TTypeDemande;
@@ -64,6 +65,7 @@ public class TDemande implements java.io.Serializable {
 		this.demRef = demRef;
 		this.demGesCode = demGesCode;
 		this.demRefActIni = demRefActIni;
+		this.demStatutRetour = demStatutRetour;
 		this.THistoDemandes = THistoDemandes;
 		this.TDetailDemandeses = TDetailDemandeses;
 		this.TAvisPresels = TAvisPresels;
@@ -80,7 +82,7 @@ public class TDemande implements java.io.Serializable {
 		this.demNum = demNum;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DEM_TDM_CODE")
 	public TTypeDemande getTTypeDemande() {
 		return this.TTypeDemande;
@@ -90,7 +92,7 @@ public class TDemande implements java.io.Serializable {
 		this.TTypeDemande = TTypeDemande;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DEM_STA_CODE")
 	public TStatut getTStatut() {
 		return this.TStatut;
@@ -100,7 +102,7 @@ public class TDemande implements java.io.Serializable {
 		this.TStatut = TStatut;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DEM_STR_CODE")
 	public TStructure getTStructure() {
 		return this.TStructure;
@@ -110,7 +112,7 @@ public class TDemande implements java.io.Serializable {
 		this.TStructure = TStructure;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DEM_FON_CODE_AC")
 	public TFonction getTFonction() {
 		return this.TFonction;
@@ -120,7 +122,7 @@ public class TDemande implements java.io.Serializable {
 		this.TFonction = TFonction;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DEM_OPE_MATRICULE")
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -192,6 +194,15 @@ public class TDemande implements java.io.Serializable {
 
 	public void setDemRefActIni(String demRefActIni) {
 		this.demRefActIni = demRefActIni;
+	}
+	
+	@Column(name = "DEM_STATUT_RETOUR", length = 1)
+	public String getDemStatutRetour() {
+		return this.demStatutRetour;
+	}
+
+	public void setDemStatutRetour(String demStatutRetour) {
+		this.demStatutRetour = demStatutRetour;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDemande")

@@ -3013,8 +3013,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
 		    }else
 				 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
-					 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
-					 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX+libelleRestauration, libelleRestauration);
+					 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
+					 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX+libelleRestauration, libelleRestauration);
 			  }else
 			   if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
 						 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE+libelleSecurite, libelleSecurite); 
@@ -3058,8 +3058,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
 					    }else
 							 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
-								 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
-								 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX+libelleRestauration, libelleRestauration);
+								 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
+							 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX+libelleRestauration, libelleRestauration);
 						  }else
 						   if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
 									 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE+libelleSecurite, libelleSecurite); 

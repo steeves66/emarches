@@ -50,6 +50,7 @@ public class ControleController {
 	private String libelleDao4="";
 	private String libelleFinCom="";
 	private String libelleConfirm="";
+	private String libelleTitle="";
 	//Panels
     private boolean panelForm=false;
 	private boolean panelTraitement=false;
@@ -375,6 +376,11 @@ public class ControleController {
 					 //Si le type de la depense est DPS prend le statut E1T sinon ENG statut L3T
  					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
  						utilisateur= "DMP";	
+ 					}else {
+ 						 //Si le type de la depense est DPS prend le statut E1T sinon ENG statut L3T
+ 	 					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPD")) {
+ 	 						utilisateur= "SPD";	
+ 	 					}
  					}
 				 }	 
 			 }
@@ -4565,19 +4571,20 @@ public class ControleController {
 												    			type = "Demandes";
 												    			fonctionalite = "listSaisieAc";
 												    			libelle="LISTE DES DEMANDE SAISIES";	
-												    			libelleFinCom = "Transmission éffectuée avec succès !";
+												    			libelleTitle = "Transmettre";
 												    			libelleConfirm = "Confirmez-vous la transmission de la demande N°";
 																btn_new =true;
 															    fermerSai=true;
 																fermerVal=false;
 																
 												    		}else
-												    			if(action.equalsIgnoreCase("LISVALDEM")) {
+												    			if(action.equalsIgnoreCase("LISVALDEM")) { 
 													    			type = "Demandes";
 													    			fonctionalite = "listValidationCpmp";
-													    			libelle="LISTE DES DEMANDES EN ATTENTE DE VALIDATION PAR LA CELLULE";
+													    			libelle="LISTE DES DEMANDES EN ATTENTE DE PREVALIDATION PAR LA CELLULE";
 													    			libelleFinCom = "Validation éffectuée avec succès !";
-													    			libelleConfirm = "Confirmez-vous la validation de la demande N°";
+													    			libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
+													    			libelleTitle = "Prévalidation";
 																	btn_new =false;
 																	btn_retourner = true;
 																    fermerSai=true;
@@ -4590,12 +4597,13 @@ public class ControleController {
 																	    fermerSai=true;
 																		fermerVal=false;
 														    		}else
-														    			if(action.equalsIgnoreCase("VALDEMDMP")) {
+														    			if(action.equalsIgnoreCase("VALDEMSPD")) {
 															    			type = "Demandes";
-															    			fonctionalite = "listValidationDmp";
-															    			libelle="LISTE DES DEMANDES EN ATTENTE DE VALIDATION PAR LA DMP";
-															    			libelleFinCom = "Validation éffectuée avec succès !";
+															    			fonctionalite = "listValidationSPD";
+															    			libelle="LISTE DES DEMANDES EN ATTENTE DE VALIDATION PAR LE SERVICE PROCEDURE DEROGAOIRE";
+															    			libelleTitle = "Validation";
 															    			libelleConfirm = "Confirmez-vous la validation de la demande N°";
+															    			libelleFinCom = "Validation éffectuée avec succès !";
 															    			panel1 =true;
 															    			btn_retourner = true;
 																			panel2 =false;
@@ -7382,6 +7390,16 @@ public class ControleController {
 
 	public void setFiltreLignePgspm(boolean filtreLignePgspm) {
 		this.filtreLignePgspm = filtreLignePgspm;
+	}
+
+
+	public String getLibelleTitle() {
+		return libelleTitle;
+	}
+
+
+	public void setLibelleTitle(String libelleTitle) {
+		this.libelleTitle = libelleTitle;
 	}
 	
     
