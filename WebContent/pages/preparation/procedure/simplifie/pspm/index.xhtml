@@ -835,7 +835,7 @@
                              </p:commandLink>
                             </h:panelGroup>
                             
-                        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">  
+                        <h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}"> 
                         <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                           <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />

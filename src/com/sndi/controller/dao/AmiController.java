@@ -3030,7 +3030,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	  
 	  
 	  //Methode d'Affectation
-	 /* @Transactional
+	  @Transactional
 	  public void affecterDao() {
 		//Insertion des chargés d'études choisis 
 			if (listSelectionFonctImput.size()==0) {
@@ -3127,11 +3127,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 			          }	
 			 		 }
 				}
-	      */
+	      
 	  
 	  
 	  //Methode d'Affectation
-	  @Transactional
+	  /*@Transactional
 	  public void affecterDao() {
 		  slctdTd.setAffStaCode("D3A");
 		  iservice.updateObject(slctdTd);
@@ -3219,7 +3219,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 				}
-	      }
+	      }*/
 	  
 	  
 	//Validation chef de service 

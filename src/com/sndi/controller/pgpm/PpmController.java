@@ -760,11 +760,11 @@ public class PpmController {
 		 
 		 //Impression unique du pspm
       	 public void pspmUnique() { 
-      		 if(slctdTd.getTModePassation().getMopCode() == "PSO") {
+      		 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
       			 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_pso", "Fiche_operation_pso" ); 
-      		 }else if(slctdTd.getTModePassation().getMopCode() == "PSL") {
+      		 }else if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL")) {
       			 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psl", "Fiche_operation_psl" ); 
-      		 }else if(slctdTd.getTModePassation().getMopCode() == "PSC") {
+      		 }else if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSC")) {
       			 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psc", "Fiche_operation_psc" );  
       		 }
       	 }

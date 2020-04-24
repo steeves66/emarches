@@ -1140,7 +1140,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 									 }else
 										 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
 											 demDetail.setGpgDateValDmp(Calendar.getInstance().getTime());
-										 }
+										 }else
+											 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {	
+												 demDetail.setGpgDateValDmp(Calendar.getInstance().getTime());
+											 }
 								demDetail.setTStatut(new TStatut(statutUpdate));
 								demDetail.setGpgStatutRetour("0");
 						       iservice.updateObject(demDetail);
@@ -1157,7 +1160,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							 }else
 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
 									 pgpm.setAffGpgDateValDmp(Calendar.getInstance().getTime());
-								 }
+								 }else
+									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {	
+										 pgpm.setAffGpgDateValDmp(Calendar.getInstance().getTime());
+									 }
 					    pgpm.setTStatut(new TStatut(statutUpdate));
 					    pgpm.setAffGpgStatutRetour("0");
 					    iservice.updateObject(pgpm);
@@ -1812,7 +1818,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 					 }else {
 	 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 	 							 statutUpdate ="S3V";
-	 						 }
+	 						 }else
+	 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+	 								 statutUpdate ="S3V";
+	 							  }
 	 				     } 
 	 			//Parcourir la liste TAffichagePGPM et faire une mise a jour des different statut
 		 		for(TAffichagePgpm ligne : listSelectionTransmission) {
@@ -1822,6 +1831,18 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+ligne.getAffGpgId()));
 							if (!listeDetail.isEmpty()) {
 								demDetail= listeDetail.get(0);
+								if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+									 demDetail.setGpgDateValAc(Calendar.getInstance().getTime());
+								 }else
+									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+										 demDetail.setGpgDateValCpmp(Calendar.getInstance().getTime());
+									 }else
+										 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
+											 demDetail.setGpgDateValDmp(Calendar.getInstance().getTime());
+										 }else
+											 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {	
+												 demDetail.setGpgDateValDmp(Calendar.getInstance().getTime());
+											 }
 								demDetail.setTStatut(new TStatut(statutUpdate));
 								demDetail.setGpgStatutRetour("0");
 						       iservice.updateObject(demDetail);
@@ -1830,6 +1851,18 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			      						new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+ligne.getAffGpgId()));
 					   TAffichagePgpm pgpm = new TAffichagePgpm();
 					   if(!AG.isEmpty()) pgpm =AG.get(0); 
+					   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+							 pgpm.setAffGpgDateValAc(Calendar.getInstance().getTime());
+						 }else
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+								 pgpm.setAffGpgDateValCpmp(Calendar.getInstance().getTime());
+							 }else
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {	
+									 pgpm.setAffGpgDateValDmp(Calendar.getInstance().getTime());
+								 }else
+									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {	
+										 pgpm.setAffGpgDateValDmp(Calendar.getInstance().getTime());
+									 }
 					    pgpm.setTStatut(new TStatut(statutUpdate));
 					    pgpm.setAffGpgStatutRetour("0");
 					    iservice.updateObject(pgpm);
