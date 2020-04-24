@@ -1,0 +1,477 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+      <h3>
+       #{controleController.libelle} 
+        <!-- <small>Nouveau AGPM </small> -->
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{ppmController.renderPage('pgpmAc1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Prcédures dérogatoire | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>DEMANDE | SAISIE 
+           <!--  #{controleController.libelle1}  -->
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     
+     <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+     
+      <div class="row">
+       
+	 <div class="col-md-12">
+       
+        
+        <!-- /.box-header -->
+        <p:wizard flowListener="#{demandeController.onFlowProcess}"  nextLabel="Suivant" backLabel="Précédent" >
+	      <p:tab id="demande" title="Informations sur la démande" titleStyle="background-color: #f88b2e;background-image: none">
+	      
+	        <div class="box box-success box-solid">
+              <div class="box-header with-border">
+               <div class="col-md-12 "><div  style="color: #fff">INFORMATIONS DE LA DEMANDE</div></div>
+             </div>
+             
+             <div class="box-body">
+              
+	                 <div class="col-md-6">
+
+               <div class="form-group">
+                  <label for="relalisation" class="col-sm-3 control-label">Objet de la démande<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" id="relalisation" style="width: 100%" />
+                  </div>
+              </div>
+               
+                
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Type de la démande</label>
+                  
+                  <div class="col-sm-9">
+                    <p:selectOneMenu id="tami" required="true" requiredMessage="Veuillez choisir le type de la demande" value="#{demandeController.tdmCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type de la démande.." itemValue="empty" />  
+			       <f:selectItems value="#{demandeController.listeTypeDemandes}" var="dem" itemLabel="#{dem.tdmLibelle}" itemValue="#{dem.tdmCode}" />	
+			       <p:ajax listener="#{demandeController.chargeListBytype()}" update=":gnl:panelDetail" /> 		   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+                  </div>
+                 
+             
+                  
+                </div> 
+	        </div>
+	        
+	       <div class="col-md-6">
+	       
+	        <div class="form-group">
+                  <label class="col-sm-3 control-label">Motif de la démande<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control"  style="width: 100%" />
+                  </div>
+              </div>
+              <div class="form-group">
+		     <label for="trdao" class="col-sm-3 control-label">Date de la demande<span style="color:red;"> *</span></label>
+		     <div class="col-sm-3">
+		       <p:calendar id="trdao"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		       </p:calendar> 
+		   </div>
+
+		   </div>        
+	       </div>
+               
+               </div>
+	      </div>
+	      <h:panelGroup id="panelDetail">
+		<h:panelGroup rendered="#{demandeController.panelRestreint}">
+		  <div class="box box-success box-solid">
+              <div class="box-header with-border">
+               <div class="col-md-12 "><div  style="color: #fff">CHOISIR LE(S) DAO POUR CREER VOTRE DEMANDE</div></div>
+             </div>
+             
+             <div class="box-body">
+              <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-4">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{commissionController.chargeOffre()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"  />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"  />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>    
+
+										
+											<p:dataTable id="finance"
+												styleClass="table mb0 dt-on-steroids dataTable"
+												var="slctdTb" value="#{ppmController.listeFinancementPgpm}"
+												 editMode="cell" scrollable="true" scrollHeight="270"
+												emptyMessage="Aucun DAO Trouvé">
+												 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+
+												<p:column headerText="N°DAO" styleClass="col-sm-1">
+													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+												</p:column>
+													<p:column headerText="Objet" styleClass="col-sm-5">
+													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+												</p:column>
+													<p:column headerText="Type Marché" styleClass="col-sm-3">
+													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+												</p:column>
+													<p:column headerText="Mode de Passation" styleClass="col-sm-3">
+													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+												</p:column>
+													
+											</p:dataTable>
+									</div>
+             
+             
+             </div>
+             
+            </h:panelGroup> 
+             
+             
+            <h:panelGroup rendered="#{demandeController.panelGreAgre}">
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-12 ">
+                   <div  style="color: #fff">CHOISIR LE(S) PPM POUR CREER VOTRE DEMANDE</div>
+                 </div>
+                </div>
+               <div class="box-body">
+               
+               <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-4">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{daoController.chargeRecherchePPM()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"  />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"  />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>    
+                 
+               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
+					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" 
+				scrollable="true" scrollHeight="270" emptyMessage="Aucun PPM enregistré" rows="5">
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppObjet}" />
+				        </p:column>
+
+                     
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgImputation}" />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
+				        </p:column> 
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
+				        </p:column> 
+				        
+				       
+                    </p:dataTable>
+                    
+                   <div>
+                   
+                   </div>
+	 
+              </div>
+             </div>
+            </h:panelGroup>
+            
+             
+             <h:panelGroup rendered="#{demandeController.panelAvenant}">
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-12 ">
+                   <div  style="color: #fff">CHOISIR LE(S) LIGNE BUDGETAIRE(S) POUR CREER VOTRE DEMANDE</div>
+                 </div>
+                </div>
+               <div class="box-body">
+               
+               <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-4">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{daoController.chargeRecherchePPM()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"  />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"  />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>    
+                 
+               <p:dataTable id="tbligne" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
+					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" 
+				scrollable="true" scrollHeight="270" emptyMessage="Aucune ligne budgétaire trouvée" rows="5">
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppObjet}" />
+				        </p:column>
+
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgImputation}" />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
+				        </p:column> 
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
+				        </p:column> 
+				        
+				       
+                    </p:dataTable>
+                    
+                   <div>
+                   
+                   </div>
+	 
+              </div>
+             </div>
+               
+           </h:panelGroup>
+          
+          </h:panelGroup>
+			        </p:tab>
+			         <p:tab id="autres" title="Informations complémentaire" titleStyle="background-color: #f88b2e;background-image: none">
+			          <div class="box box-success box-solid">
+              <div class="box-header with-border">
+               <div class="col-md-12 "><div  style="color: #fff">INFORMATIONS COMPLEMENTAIRE</div></div>
+             </div>
+             
+             <div class="box-body">
+            <h:panelGroup rendered="#{demandeController.panelRestreint}"> 
+	         <div class="col-md-6">
+               <div class="form-group">
+                  <label class="col-sm-3 control-label">Restreint 1</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Restreint 2</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+               
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Restreint 3</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+             
+	        </div>
+	        
+	       <div class="col-md-6">
+	          <div class="form-group">
+                  <label class="col-sm-3 control-label">Restreint 4</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Restreint 5</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Restreint 6</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>	            
+	       </div>
+          </h:panelGroup>    
+          
+          
+          
+          <h:panelGroup rendered="#{demandeController.panelGreAgre}"> 
+	         <div class="col-md-6">
+               <div class="form-group">
+                  <label class="col-sm-3 control-label">GréAgré 1</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">GréAgré 2</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+               
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">GréAgré 3</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+             
+	        </div>
+	        
+	       <div class="col-md-6">
+	          <div class="form-group">
+                  <label class="col-sm-3 control-label">GréAgré 4</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">GréAgré 5</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">GréAgré 6</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>	            
+	       </div>
+          </h:panelGroup> 
+          
+          
+          
+          <h:panelGroup rendered="#{demandeController.panelAvenant}"> 
+	         <div class="col-md-6">
+               <div class="form-group">
+                  <label class="col-sm-3 control-label">Avenant 1</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Avenant 2</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+               
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Avenant 3</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+             
+	        </div>
+	        
+	       <div class="col-md-6">
+	          <div class="form-group">
+                  <label class="col-sm-3 control-label">Avenant 4</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Avenant 5</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>
+                 <div class="form-group">
+                  <label class="col-sm-3 control-label">Avenant 6</label>
+                  <div class="col-sm-9">
+                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+                  </div>
+              </div>	            
+	       </div>
+          </h:panelGroup> 
+          
+             
+          
+               </div>
+             <div class="box-footer">
+              <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+	      </p:commandLink>
+             </div>
+	      </div>
+			        </p:tab>
+			        </p:wizard>
+			         
+            
+        
+        </div>
+	 </div>
+    
+      <div class="row">
+       <br/>
+        <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{demandeController.renderPage('dem1','LISDEMSAI')}" update=":content">
+		<i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+
+     </div>
+            
+    </section>
+    </h:form>
+    
+    
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

@@ -6,8 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -18,6 +21,7 @@ import com.sndi.model.TAffichageAgpm;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TDemande;
 import com.sndi.model.TStatut;
+import com.sndi.model.TTypeDemande;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
@@ -55,14 +59,59 @@ public class DemandeController {
 	 
 	 //Déclaration des listes
 	 private List<TDemande> listeDemandes = new ArrayList<TDemande>();
+	 private List<TTypeDemande> listeTypeDemandes = new ArrayList<TTypeDemande>();
 	 
 	 //Déclaration des Objets
 	 private TDemande slctdTd = new TDemande();
 	
+	//Déclaration des Variables
+	 private String tdmCode ="";
+	 private boolean panelRestreint =false;
+	 private boolean panelGreAgre =false;
+	 private boolean panelAvenant =false;
+	 
+	 public String onFlowProcess(FlowEvent event) throws IOException {
+		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
+		 return event.getNewStep();
+	    }
+	 
+	 
+	 
+	 //Methode de chargement des types de demande
+	 public void chargeTypeDemande() {
+		 listeTypeDemandes.clear();
+		/* listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")));
+		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());*/
+		
+		listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumnIn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
+				"TDM_CODE", new ArrayList<String>(Arrays.asList("AOR","GAG","AVE")),
+               new WhereClause("TDM_CODE",WhereClause.Comparateur.NEQ,"PSL"));
+		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());
+		
+	 }
+	 //Methode de chargement 
+	 public void chargeListBytype() {
+		 if(tdmCode.equalsIgnoreCase("AOR")) {
+			 panelRestreint =true;
+			 panelGreAgre =false;
+			 panelAvenant =false; 
+		 }else
+			 if(tdmCode.equalsIgnoreCase("GAG")) {
+				 panelRestreint =false;
+				 panelGreAgre =true;
+				 panelAvenant =false;  
+			 }else
+				 if(tdmCode.equalsIgnoreCase("AVE")) {
+					 panelRestreint =false;
+					 panelGreAgre =false;
+					 panelAvenant =true; 
+				 }
+	 }
 	public String renderPage(String value ,String action) throws IOException{ 
 		controleController.redirectionDynamicProcedures(action);
 		     switch(value) {
 				case "dem1":
+					tdmCode="";
 					String fonct = controleController.getFonctionalite();	
 					String statutAffiche = "";
 					String statutDiffere = "";
@@ -105,7 +154,8 @@ public class DemandeController {
 					chargeData(statutAffiche,statutDiffere);
 					break;
 				case "dem2":
-					
+					chargeTypeDemande();
+					chargeListBytype();
 				break;
 				case "dem3":
 				break;
@@ -172,6 +222,58 @@ public class DemandeController {
 	}
 	public void setSlctdTd(TDemande slctdTd) {
 		this.slctdTd = slctdTd;
+	}
+
+	public List<TTypeDemande> getListeTypeDemandes() {
+		return listeTypeDemandes;
+	}
+
+	public void setListeTypeDemandes(List<TTypeDemande> listeTypeDemandes) {
+		this.listeTypeDemandes = listeTypeDemandes;
+	}
+
+	public String getTdmCode() {
+		return tdmCode;
+	}
+
+	public void setTdmCode(String tdmCode) {
+		this.tdmCode = tdmCode;
+	}
+
+
+
+	public boolean isPanelRestreint() {
+		return panelRestreint;
+	}
+
+
+
+	public void setPanelRestreint(boolean panelRestreint) {
+		this.panelRestreint = panelRestreint;
+	}
+
+
+
+	public boolean isPanelGreAgre() {
+		return panelGreAgre;
+	}
+
+
+
+	public void setPanelGreAgre(boolean panelGreAgre) {
+		this.panelGreAgre = panelGreAgre;
+	}
+
+
+
+	public boolean isPanelAvenant() {
+		return panelAvenant;
+	}
+
+
+
+	public void setPanelAvenant(boolean panelAvenant) {
+		this.panelAvenant = panelAvenant;
 	}
 	 
 }
