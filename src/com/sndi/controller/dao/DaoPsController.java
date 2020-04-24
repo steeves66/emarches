@@ -236,6 +236,7 @@ public class DaoPsController {
 	 private VDaoBailleur daoBailleur = new VDaoBailleur();
 	 private TDacSpecs newDao = new TDacSpecs();
 	 private TDaoAffectation daoAffec = new TDaoAffectation();
+	 private TAffichageDao affDac = new TAffichageDao();
 	 private TTiers newEntre = new TTiers();
 	 private TCandidats newCandidat = new TCandidats();
 	 private VbTempParamVente newVbTempVente = new VbTempParamVente();
@@ -443,34 +444,11 @@ public class DaoPsController {
 		 public void chargeBailleurDao() { 
 			 listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 					     new WhereClause("DAC_BAILLEUR",WhereClause.Comparateur.EQ,"B"),
+					     new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 			 if (!listeDac.isEmpty()) {
 				   panelAvisBailleur = true;
-				   panelBailleurFichier = true;
-				   pavet2 =false;
-				   pavet3=false;
-				   pavet4=false;
-				   pavet5=false;
-				   pavet6=false;
-			    }else {
-			    	    listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
-			    	    if (!listeDac.isEmpty()) {
-			    	    updateDac = listeDac.get(0);
-			    	     panelAvisBailleur = false;
-			    	     panelBailleurFichier = false;
-			    	     pavet2 =true;
-					     pavet3=true;
-					     pavet4=true;
-					     pavet5=true;
-					     pavet6=true;
-					     
-					     chargePPMObs();
-					     chargeDetailAdresseDac();
-	                	 chargePiecesDao();
-	                	 chargeOffresByDao();
-	                	 chargeLotsDac();
-			         }
+				   panelBailleurFichier = false;
 			    }
 			 }
 	 
@@ -495,6 +473,7 @@ public class DaoPsController {
 				      if(fileUploadController.handleFileUpload(event, ""+slctdTd.getAffDacCode(), docNature)) {
 					
 					listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+							new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 		 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 		 				if (!listDao.isEmpty()) {
 		 					newDao= listDao.get(0);
@@ -552,7 +531,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      		                     }
      		
           listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-     			new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+        		  new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PRQ"),
+     			  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
      	             if (!listDao.isEmpty()) {
      	                    newDao = listDao.get(0);
      	                    newDao.setDacAvisBailleur(slctdTd.getAffDacAvisBailleur());
@@ -566,19 +546,12 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      	            tableauBordController.chargeDataDaoPs();
      	            
      	            //Désactivation des booléens
-     	           // panelAvisBailleur = true;
+     	            panelAvisBailleur = true;
      	            panelBailleurFichier = true;
-		    	    pavet2 =false;
-				    pavet3=false;
-				    pavet4=false;
-				    pavet5=false;
-				    pavet6=false;
      	    		//Message de Confirmation 
      	            userController.setTexteMsg("Avis du Bailleur ajouté avec succès");
      	    		userController.setRenderMsg(true);
      	    		userController.setSevrityMsg("success");
-     	    		
-     	    		 FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Avis du Bailleur ajouté avec succès", ""));
                }	
         }
 
@@ -2570,12 +2543,24 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             	          		   
             	          		   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
             	          				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+            	          				new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
             	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
             	     				   if (!listDao.isEmpty()) {
             	     					    newDao= listDao.get(0);
             	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
             	     			            iservice.updateObject(newDao); 
             	     	   	                 }
+            	     				   
+            	     				   
+            	     				  listeDAO = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+                  	          				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+                  	          				new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+                 	     					 new WhereClause("AFF_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+                 	     				   if (!listeDAO.isEmpty()) {
+                 	     					    affDac= listeDAO.get(0);
+                 	     					    affDac.setAffDacCout(newAvis.getAaoCoutDac());
+                 	     			            iservice.updateObject(affDac); 
+                 	     	   	                 }
             	          		 
             	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
             	          		            userController.setRenderMsg(true);
@@ -2700,7 +2685,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		//Insertion des chargés d'études choisis 
 			if (listSelectionFonctImput.size()==0) {
 						FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun chargé d'études selectionné", ""));
 					}
 			 		else{
 			 			
@@ -5237,6 +5222,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setListePiecesDao(List<VPieceDac> listePiecesDao) {
 		this.listePiecesDao = listePiecesDao;
+	}
+
+	public TAffichageDao getAffDac() {
+		return affDac;
+	}
+
+	public void setAffDac(TAffichageDao affDac) {
+		this.affDac = affDac;
 	}
 	
 

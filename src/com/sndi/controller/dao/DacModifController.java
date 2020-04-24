@@ -3613,6 +3613,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			     }
 		            return event.getNewStep();
 	    }
+	 
+	 
+	 
 	
 	 
 	 
@@ -3666,19 +3669,52 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		}
 	 
 	 
-	//Methode de récupération de t_agpm dans t_affichage
+	//Methode de récupération 
 		 public void editForm() {
 			 listeDac= (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 		    					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 		    			if (!listeDac.isEmpty()) {
 		    				updateDac=listeDac.get(0); 
 		    			}
-		    			
 		  chargePPM();
 		  chargePiecesDao();
 		  chargeLots();
 		  chargeDetailAdresse();
 		 }
+		 
+			//Chargement des DAO en procédure normale qui font l'objet de bailleur
+		 public void chargeBailleurDao() { 
+			 listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					     new WhereClause("DAC_BAILLEUR",WhereClause.Comparateur.EQ,"B"),
+						 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+			 if (!listeDac.isEmpty()) {
+				   panelAvisBailleur = true;
+				   panelBailleurFichier = true;
+				   pavet2 =false;
+				   pavet3=false;
+				   pavet4=false;
+				   pavet5=false;
+				   pavet6=false;
+			    }else {
+			    	    listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+			    	    if (!listeDac.isEmpty()) {
+			    	    updateDac = listeDac.get(0);
+			    	     panelAvisBailleur = false;
+			    	     panelBailleurFichier = false;
+			    	     pavet2 =true;
+					     pavet3=true;
+					     pavet4=true;
+					     pavet5=true;
+					     pavet6=true;
+					     
+					      chargePPM();
+						  chargePiecesDao();
+						  chargeLots();
+						  chargeDetailAdresse();
+			         }
+			    }
+			 }
 		 
  
 	 
@@ -3693,6 +3729,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					chargePPM();
 				break;
 				case "dao3":
+		 			_logger.info("value: "+value+" action: "+action);
+				break;
+				case "dac3":
+					chargeBailleurDao();
+		 			_logger.info("value: "+value+" action: "+action);
+				break;
+				case "dac4":
+					 editForm();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
@@ -3734,49 +3778,10 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
-                case "dps1":
-					chargeDataPs();
-					chargeGestions();
-					chargeDataAffecterPs();
-					chargeDataAValiderPs();
-					chargeDaoCharegEtudePs();
-					chargeDaoChargeEtudePs();
-					chargeDaoAffectesRPs();
-					chargeDataAPublierPs();
-					chargeDataARetirerPs();
-					chargeDataVentePs();
-					chargeDataPriseCompte();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps2":
-                	chargePSPM();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-             
-                case "dps4":
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps5":
-                	chargeFonctionImput();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps6":
-                	chargePiecesByDao();
-                	chargePiecesByCsv();
-                	chargePiecesByCharges();
-                	chargeRespoExiste();
-                	chargePiecesByBinome();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
-                case "dps7":
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
+              
+              
       
-                case "dps9":
-                	chargeSoumissions();
-               	    recupMontantDao();
-		 			_logger.info("value: "+value+" action: "+action);
-				break;
+                
                 case "dps10":
                   	 chargeDaoBailleurPs();
                   	 observationAvis();

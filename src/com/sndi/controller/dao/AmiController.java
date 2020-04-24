@@ -283,6 +283,7 @@ public class AmiController {
 	 private VDaoStatut daostatut= new VDaoStatut();
 	 private VFonctionImputation newImput = new VFonctionImputation();
 	 private TAffichageDao newAff = new TAffichageDao();
+	 private TAffichageDao affDac = new TAffichageDao();
 	 private TAffichageDao sltDaoAff = new TAffichageDao();
 	 private VDetailAdresse detailAdresse = new VDetailAdresse(); 
 	 private TCorrectionDac correction = new TCorrectionDac();
@@ -456,31 +457,7 @@ public class AmiController {
 						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 			 if (!listeDac.isEmpty()) {
 				   panelAvisBailleur = true;
-				   panelBailleurFichier = true;
-				   pavet2 =false;
-				   pavet3=false;
-				   pavet4=false;
-				   pavet5=false;
-				   pavet6=false;
-			    }else {
-			    	    listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
-			    	    if (!listeDac.isEmpty()) {
-			    	    updateDac = listeDac.get(0);
-			    	     panelAvisBailleur = false;
-			    	     panelBailleurFichier = false;
-			    	     pavet2 =true;
-					     pavet3=true;
-					     pavet4=true;
-					     pavet5=true;
-					     pavet6=true;
-					     
-					     chargePPMObs();
-					     chargeDetailAdresseDac();
-	                	 chargePiecesDao();
-	                	 chargeOffresByDao();
-	                	 chargeLotsDac();
-			         }
+				   panelBailleurFichier = false;
 			    }
 			 }
 	 
@@ -576,19 +553,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      	            tableauBordController.chargeDataAmi();
      	            
      	            //Désactivation des booléens
-     	           // panelAvisBailleur = true;
+     	            panelAvisBailleur = true;
      	            panelBailleurFichier = true;
-		    	    pavet2 =false;
-				    pavet3=false;
-				    pavet4=false;
-				    pavet5=false;
-				    pavet6=false;
+		    	   
      	    		//Message de Confirmation 
      	            userController.setTexteMsg("Avis du Bailleur ajouté avec succès");
      	    		userController.setRenderMsg(true);
      	    		userController.setSevrityMsg("success");
-     	    		
-     	    		 FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Avis du Bailleur ajouté avec succès", ""));
                }	
         }
 
@@ -2910,8 +2881,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             	            	      newAvis.setAaoCode(keyGen.getCodeAvis());
             	          		      newAvis.setTDacSpecs(dao);
             	          		      newAvis.setTAdresseAvis(new TAdresseAvis(numDetailAdr)); 
-            	          		      //newAvis.setAaoDteOuvFin(ouvFin);
-            	          		      //newAvis.setAaoDteOuvTec(ouvTech);
             	          		      newAvis.setAaoNbrOuv(1);
             	          		      newAvis.setTStatut(new TStatut("D1S"));
             	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
@@ -2926,6 +2895,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
             	     			            iservice.updateObject(newDao); 
             	     	   	                 }
+            	     				   
+            	     				   
+            	     				  listeDAO = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
+                   	          				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+                   	          				new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"AMI"),
+                  	     					 new WhereClause("AFF_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+                  	     				   if (!listeDAO.isEmpty()) {
+                  	     					    affDac= listeDAO.get(0);
+                  	     					    affDac.setAffDacCout(newAvis.getAaoCoutDac());
+                  	     			            iservice.updateObject(affDac); 
+                  	     	   	                 }
             	          		 
             	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
             	          		            userController.setRenderMsg(true);
@@ -3055,7 +3035,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		//Insertion des chargés d'études choisis 
 			if (listSelectionFonctImput.size()==0) {
 						FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun chargé d'études selectionné", ""));
 					}
 			 		else{
 			 			
@@ -3833,7 +3813,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		     switch(value) {
 				case "ami1":
 					chargeData();
-					//chargeDataPs();
 					chargeGestions();
 					chargeDataAffecter();
 					chargeDataAValider();
@@ -5645,7 +5624,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	public void setListePiecesDao(List<VPieceDac> listePiecesDao) {
 		this.listePiecesDao = listePiecesDao;
 	}
-	
-	
+
+	public TAffichageDao getAffDac() {
+		return affDac;
+	}
+
+	public void setAffDac(TAffichageDao affDac) {
+		this.affDac = affDac;
+	}
 		
 }

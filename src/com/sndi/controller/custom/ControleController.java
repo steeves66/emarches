@@ -290,6 +290,7 @@ public class ControleController {
 	private boolean update_fermer_dao=false;
 	private boolean update_fermer_ami=false;
 	private boolean update_fermer_prq=false;
+	private boolean update_fermer_dps=false;
 	
 
 	//Zone de Recherche pour le PPM
@@ -1135,6 +1136,7 @@ public class ControleController {
 				   			    		 update_fermer_dao=false;
 							    		 update_fermer_ami=true;
 							    		 update_fermer_prq=false;
+							    		 update_fermer_dps=false;
 				   					     panelDetail=false;
 				   						 panelForm=true;
 				   						 panelTraitement=false;
@@ -1977,6 +1979,7 @@ public class ControleController {
 			    		 update_fermer_dao=true;
 			    		 update_fermer_ami=false;
 			    		 update_fermer_prq=false;
+			    		 update_fermer_dps=false;
 					     panelDetail=false;
 						 panelForm=true;
 						 panelTraitement=false;
@@ -2813,6 +2816,10 @@ public class ControleController {
 										    							    		type = "DAC";
 										    							    		libelleProcedure="Modification du DAC N°";
 										    							    		libelleDao2 = "Modification";
+										    							    		update_fermer_dao=false;
+										   							    		    update_fermer_ami=false;
+										   							    		    update_fermer_prq=false;
+										   							    		    update_fermer_dps=true;
 										    							    		panelDetail=false;
 										    									    panelForm=true;
 										    									    panelTraitement=false;
@@ -3596,6 +3603,7 @@ public class ControleController {
 																    														 update_fermer_dao=false;
 																    											    		 update_fermer_ami=false;
 																    											    		 update_fermer_prq=true;
+																					   							    		 update_fermer_dps=false;
 																    														 panelTraitement=false;
 																    													     panelRegister=true;
 																    													     panelUpdate=false;
@@ -7400,6 +7408,16 @@ public class ControleController {
 
 	public void setLibelleTitle(String libelleTitle) {
 		this.libelleTitle = libelleTitle;
+	}
+
+
+	public boolean isUpdate_fermer_dps() {
+		return update_fermer_dps;
+	}
+
+
+	public void setUpdate_fermer_dps(boolean update_fermer_dps) {
+		this.update_fermer_dps = update_fermer_dps;
 	}
 	
     

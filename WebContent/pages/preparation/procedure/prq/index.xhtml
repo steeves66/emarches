@@ -1513,7 +1513,7 @@
          				</h:panelGroup>
          		
 				        </p:column>
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-5" >
                          <h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affDacCode}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -1544,7 +1544,7 @@
          				</h:panelGroup>
 				        </p:column>
 				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				 <p:column headerText="Type Marché" styleClass="col-sm-3" >
          				<h:panelGroup rendered="#{slctdTb.affDacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -1564,12 +1564,19 @@
          				</h:panelGroup>
 				        </p:column>   
 				       
-                     <p:column headerText="Actions" styleClass="col-sm-3">
+                     <p:column headerText="Actions" styleClass="col-sm-2">
                          
-                            <h:panelGroup rendered="#{controleController.retDao}">   
+                            <h:panelGroup rendered="#{slctdTb.affStaCode == 'SBO'}">  
                              <p:commandLink action="#{prqController.renderPage('prq10','OBSPRQ')}" styleClass="btn btn-xs btn-success"  title="Avis du Bailleur" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{prqController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>
+                            
+                             <h:panelGroup rendered="#{slctdTb.affStaCode == 'SRO'}">   
+                             <p:commandLink action="#{dacModifController.renderPage('dac1','MODPRQ')}" styleClass="btn btn-xs btn-success"  title="Prise en compte des observations" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{dacModifController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
                             

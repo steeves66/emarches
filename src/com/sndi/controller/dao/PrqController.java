@@ -456,31 +456,7 @@ public class PrqController {
 						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 			 if (!listeDac.isEmpty()) {
 				   panelAvisBailleur = true;
-				   panelBailleurFichier = true;
-				   pavet2 =false;
-				   pavet3=false;
-				   pavet4=false;
-				   pavet5=false;
-				   pavet6=false;
-			    }else {
-			    	    listeDac =  (List<VUpdateDac>) iservice.getObjectsByColumn("VUpdateDac", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
-			    	    if (!listeDac.isEmpty()) {
-			    	    updateDac = listeDac.get(0);
-			    	     panelAvisBailleur = false;
-			    	     panelBailleurFichier = false;
-			    	     pavet2 =true;
-					     pavet3=true;
-					     pavet4=true;
-					     pavet5=true;
-					     pavet6=true;
-					     
-					     chargePPMObs();
-					     chargeDetailAdresseDac();
-	                	 chargePiecesDao();
-	                	 chargeOffresByDao();
-	                	 chargeLotsDac();
-			         }
+				   panelBailleurFichier = false;
 			    }
 			 }
 	 
@@ -505,6 +481,7 @@ public class PrqController {
 				      if(fileUploadController.handleFileUpload(event, ""+slctdTd.getAffDacCode(), docNature)) {
 					
 					listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+							new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PRQ"),
 		 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 		 				if (!listDao.isEmpty()) {
 		 					newDao= listDao.get(0);
@@ -575,20 +552,14 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      	            //Chargement du tableau de bord 
      	            tableauBordController.chargeDataDao();
      	            
-     	            //Désactivation des booléens
-     	           // panelAvisBailleur = true;
+     	            //Activation des booléens
+     	            panelAvisBailleur = true;
      	            panelBailleurFichier = true;
-		    	    pavet2 =false;
-				    pavet3=false;
-				    pavet4=false;
-				    pavet5=false;
-				    pavet6=false;
      	    		//Message de Confirmation 
      	            userController.setTexteMsg("Avis du Bailleur ajouté avec succès");
      	    		userController.setRenderMsg(true);
      	    		userController.setSevrityMsg("success");
-     	    		
-     	    		 FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Avis du Bailleur ajouté avec succès", ""));
+
                }	
         }
 
@@ -2946,7 +2917,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		//Insertion des chargés d'études choisis 
 			if (listSelectionFonctImput.size()==0) {
 						FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun Chargé d'études selectionné", ""));
 					}
 			 		else{
 			 			
@@ -2955,6 +2926,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 				  iservice.updateObject(slctdTd);
 			 					
 			 					listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			 							new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PRQ"),
 			 							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
 			 						if (!listDao.isEmpty()) {
 			 							newDao= listDao.get(0);
@@ -3724,7 +3696,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		     switch(value) {
 				case "prq1":
 					chargeData();
-					//chargeDataPs();
 					chargeGestions();
 					chargeDataAffecter();
 					chargeDataAValider();
@@ -3767,7 +3738,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				break;  
 				
                 case "prq9":
-                	 //chargeLotExiste();
                 	 chargeSoumissions();
                 	 recupMontantDao();
 		 			_logger.info("value: "+value+" action: "+action);
