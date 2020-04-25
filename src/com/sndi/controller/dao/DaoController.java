@@ -3075,7 +3075,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
 		    }
 
-		  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+		 /* if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
 			  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX+libelleEntretienLocaux, libelleEntretienLocaux); 
 			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX+libelleEntretienLocaux, libelleEntretienLocaux);  
 		  }else
@@ -3094,7 +3094,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			   if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
 						 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE+libelleSecurite, libelleSecurite); 
 					 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX+libelleSecurite, libelleSecurite);
-			}
+			}*/
 	  }
 	
 	
@@ -3120,7 +3120,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
 					    }
 
-					  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+					  /*if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
 						  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX+libelleEntretienLocaux, libelleEntretienLocaux); 
 						  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX+libelleEntretienLocaux, libelleEntretienLocaux);  
 					  }else
@@ -3139,7 +3139,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						   if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
 									 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE+libelleSecurite, libelleSecurite); 
 								 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX+libelleSecurite, libelleSecurite);
-						}
+						}*/
 		  }
 	
 	

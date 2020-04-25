@@ -30,7 +30,7 @@ import com.sndi.model.TPiecesOffres;
 @Table(name = "T_LOT_AAO", schema = "EMAP")
 public class TLotAao implements java.io.Serializable {
 
-	private long laaId;
+	private Long laaId;
 	private TLBudgets TLBudgets;
 	private TFonction TFonctionByLaaFonCodSaisi;
 	private TFonction TFonctionByLaaFonCodCpmp;
@@ -44,7 +44,7 @@ public class TLotAao implements java.io.Serializable {
 	private String laaStaCode;
 	private String laaOpeMatricule;
 	private String laaLieuExe;
-	private long laaNum;
+	private Long laaNum;
 	private Long laaCoutLot;
 	private String laaAjoutPanier;
 	private Set<TPiecesOffres> TPiecesOffres = new HashSet<TPiecesOffres>(0);
@@ -56,10 +56,10 @@ public class TLotAao implements java.io.Serializable {
 		this.laaId = laaId;
 	}
 
-	public TLotAao(long laaId, TLBudgets TLBudgets, TFonction TFonctionByLaaFonCodSaisi,
+	public TLotAao(Long laaId, TLBudgets TLBudgets, TFonction TFonctionByLaaFonCodSaisi,
 			TFonction TFonctionByLaaFonCodCpmp, TAvisAppelOffre TAvisAppelOffre,TDacSpecs TDacSpecs, String laaObjet, String laaObservation,
 			Long laaMtCaut, long laaMtEst, Date laaDteSaisi, String laaStaCode, String laaOpeMatricule,
-			String laaLieuExe, long laaNum, Long laaCoutLot,String laaAjoutPanier,
+			String laaLieuExe, Long laaNum, Long laaCoutLot,String laaAjoutPanier,
 			Set<TPiecesOffres> TPiecesOffres) {
 		this.laaId = laaId;
 		this.TLBudgets = TLBudgets;
@@ -85,11 +85,11 @@ public class TLotAao implements java.io.Serializable {
 	@SequenceGenerator(name = "SEQ_LOT_Sequence", sequenceName = "SEQ_LOT", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_LOT_Sequence")
 	@Column(name = "LAA_ID", unique = true, nullable = false, precision = 22, scale = 0)
-	public long getLaaId() {
+	public Long getLaaId() {
 		return this.laaId;
 	}
 
-	public void setLaaId(long laaId) {
+	public void setLaaId(Long laaId) {
 		this.laaId = laaId;
 	}
 
@@ -217,11 +217,11 @@ public class TLotAao implements java.io.Serializable {
 	}
 
 	@Column(name = "LAA_NUM", precision = 22, scale = 0)
-	public long getLaaNum() {
+	public Long getLaaNum() {
 		return this.laaNum;
 	}
 
-	public void setLaaNum(long laaNum) {
+	public void setLaaNum(Long laaNum) {
 		this.laaNum = laaNum;
 	}
 
