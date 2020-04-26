@@ -70,7 +70,7 @@
                <div class="form-group">
                   <label for="relalisation" class="col-sm-3 control-label">Objet de la démande<span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
-                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" id="relalisation" style="width: 100%" />
+                    <p:inputTextarea value="#{demandeController.newDem.demObjet}" rows="2" cols="33" styleClass="form-control" id="relalisation" style="width: 100%" />
                   </div>
               </div>
                
@@ -97,7 +97,7 @@
 	        <div class="form-group">
                   <label class="col-sm-3 control-label">Motif de la démande<span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
-                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control"  style="width: 100%" />
+                    <p:inputTextarea value="#{demandeController.newDem.demMotif}" rows="2" cols="33" styleClass="form-control"  style="width: 100%" />
                   </div>
               </div>
               <div class="form-group">
@@ -135,24 +135,24 @@
                       </div>    
 
 										
-											<p:dataTable id="finance"
+											<p:dataTable id="TbDao"
 												styleClass="table mb0 dt-on-steroids dataTable"
-												var="slctdTb" value="#{ppmController.listeFinancementPgpm}"
-												 editMode="cell" scrollable="true" scrollHeight="270"
+												var="slctdTb" value="#{demandeController.listeDao}"
+												rowKey="#{slctdTb.dacCode}" selection="#{demandeController.selectionligneDao}" editMode="cell" scrollable="true" scrollHeight="270"
 												emptyMessage="Aucun DAO Trouvé">
 												 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 
-												<p:column headerText="N°DAO" styleClass="col-sm-1">
-													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+												<p:column headerText="N°DAO" styleClass="col-sm-2">
+													<h:outputText value="#{slctdTb.dacCode}" />
 												</p:column>
 													<p:column headerText="Objet" styleClass="col-sm-5">
-													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+													<h:outputText value="#{slctdTb.dacObjet}" />
 												</p:column>
 													<p:column headerText="Type Marché" styleClass="col-sm-3">
-													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+													<h:outputText value="#{slctdTb.tymLibelleCourt}" />
 												</p:column>
-													<p:column headerText="Mode de Passation" styleClass="col-sm-3">
-													<h:outputText value="#{slctdTb.fipTypeFinance}" />
+													<p:column headerText="Mode de Passation" styleClass="col-sm-2">
+													<h:outputText value="#{slctdTb.mopLibelleCourt}" />
 												</p:column>
 													
 											</p:dataTable>
@@ -187,8 +187,8 @@
 		                 </div>
                       </div>    
                  
-               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
-					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" 
+               <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listePPM}" 
+					rowKey="#{slctdTb.dppId}" selection="#{demandeController.selectionlignePPM}" 
 				scrollable="true" scrollHeight="270" emptyMessage="Aucun PPM enregistré" rows="5">
                          
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
@@ -247,31 +247,46 @@
 		                 </div>
                       </div>    
                  
-               <p:dataTable id="tbligne" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
-					rowKey="#{slctdTb.dppId}" selection="#{daoController.listSelectionPpmDao}" 
+               <p:dataTable id="tbligne" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listeLigneBugetaire}" 
+					rowKey="#{slctdTb.lbgCode}" selection="#{demandeController.selectionligneBugetaire}" 
 				scrollable="true" scrollHeight="270" emptyMessage="Aucune ligne budgétaire trouvée" rows="5">
                          
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
-                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppObjet}" />
+                         <p:column headerText="Code" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.lbgCode}" />
 				        </p:column>
 
 				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.lbgImputation}" />
 				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        <p:column headerText="Trésor" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.lbgAeTr}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
 				        </p:column>
 				       
-         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
+         				 <p:column headerText="Emprunt" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgAeEmp}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
 				        </p:column> 
-         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
+         				<p:column headerText="Don" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgAeDon}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column>
+				        <p:column headerText="Disponible" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgDisTot}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
 				        </p:column> 
-				        
-				       
+				         <p:column headerText="Total" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgTotDot}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+
                     </p:dataTable>
                     
                    <div>
@@ -438,9 +453,9 @@
           
                </div>
              <div class="box-footer">
-              <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+              <p:commandLink action="#{demandeController.saveDemande()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			             <i class="ace-icon fa fa-save"></i> Enregistrer  
 	      </p:commandLink>
              </div>
 	      </div>

@@ -5,9 +5,12 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -20,9 +23,9 @@ public class TDetailDemandes implements java.io.Serializable {
 	private BigDecimal ddeNum;
 	private TDemande TDemande;
 	private TStructure TStructure;
-	private TLBudgets TLBudgets;
+	private String TLBudgets;
 	private TLotAao TLotAao;
-	private TDacSpecs TDacSpecs;
+	private String TDacSpecs;
 	private String ddeMarCode;
 	private String ddeActNum;
 	private String ddeActNumIni;
@@ -34,8 +37,8 @@ public class TDetailDemandes implements java.io.Serializable {
 		this.ddeNum = ddeNum;
 	}
 
-	public TDetailDemandes(BigDecimal ddeNum, TDemande TDemande, TStructure TStructure, TLBudgets TLBudgets,
-			TLotAao TLotAao, TDacSpecs TDacSpecs, String ddeMarCode, String ddeActNum, String ddeActNumIni) {
+	public TDetailDemandes(BigDecimal ddeNum, TDemande TDemande, TStructure TStructure, String TLBudgets,
+			TLotAao TLotAao, String TDacSpecs, String ddeMarCode, String ddeActNum, String ddeActNumIni) {
 		this.ddeNum = ddeNum;
 		this.TDemande = TDemande;
 		this.TStructure = TStructure;
@@ -48,7 +51,8 @@ public class TDetailDemandes implements java.io.Serializable {
 	}
 
 	@Id
-
+	@SequenceGenerator(name = "SEQ_DET_DEM_Sequence", sequenceName = "SEQ_DET_DEM", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_DET_DEM_Sequence")
 	@Column(name = "DDE_NUM", unique = true, nullable = false, precision = 22, scale = 0)
 	public BigDecimal getDdeNum() {
 		return this.ddeNum;
@@ -78,13 +82,12 @@ public class TDetailDemandes implements java.io.Serializable {
 		this.TStructure = TStructure;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_LBG_CODE")
-	public TLBudgets getTLBudgets() {
+	@Column(name = "DDE_LBG_CODE")
+	public String getTLBudgets() {
 		return this.TLBudgets;
 	}
 
-	public void setTLBudgets(TLBudgets TLBudgets) {
+	public void setTLBudgets(String TLBudgets) {
 		this.TLBudgets = TLBudgets;
 	}
 
@@ -98,13 +101,12 @@ public class TDetailDemandes implements java.io.Serializable {
 		this.TLotAao = TLotAao;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_DAC_CODE")
-	public TDacSpecs getTDacSpecs() {
+	@Column(name = "DDE_DAC_CODE")
+	public String getTDacSpecs() {
 		return this.TDacSpecs;
 	}
 
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
+	public void setTDacSpecs(String TDacSpecs) {
 		this.TDacSpecs = TDacSpecs;
 	}
 
