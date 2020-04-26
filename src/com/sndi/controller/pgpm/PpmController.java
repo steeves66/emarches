@@ -278,11 +278,9 @@ public class PpmController {
 						} 
 		  			 
 		                 if(controleController.type == "PPM") {
-		                	// recupDateGenere();
 						      creerDetailPassation();
 		                 }else 
 		                      if(controleController.type == "PSPM"){
-		                    	// recupDateGenere();
 							      creerDetailPspm();
 		                 }
 		  		
