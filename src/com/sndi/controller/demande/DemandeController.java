@@ -22,6 +22,7 @@ import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetailDemandes;
 import com.sndi.model.THistoDemande;
+import com.sndi.model.TSoumissions;
 import com.sndi.model.TStatut;
 import com.sndi.model.TTypeDemande;
 import com.sndi.model.VAgpmStatut;
@@ -73,6 +74,7 @@ public class DemandeController {
 	 private List<VLigneImputation> listeLigneBugetaire = new ArrayList<VLigneImputation>();
 	 private List<VLigneImputation> selectionligneBugetaire = new ArrayList<VLigneImputation>();
 	 private List<VMotifRetourDemande> listeMotifs = new ArrayList<VMotifRetourDemande>();
+	 private List<TSoumissions> listeEntreprises= new ArrayList<TSoumissions>();
 	 
 	 
 	 //Déclaration des Objets
@@ -112,6 +114,14 @@ public class DemandeController {
 		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());*/
 		
 	 }
+	 
+	 //Liste des entreprises
+	 public void chargeEntreprses() {
+		 listeEntreprises.clear();
+		 listeEntreprises = (List<TSoumissions>) iservice.getObjectsByColumn("TSoumissions", new ArrayList<String>(Arrays.asList("SOU_NOM_COM")));
+		_logger.info("listeEntreprises size: "+listeEntreprises.size());
+		 
+	 }
 	 //Methode de chargement 
 	 public void chargeListBytype() {
 		 if(tdmCode.equalsIgnoreCase("AOR")) {
@@ -123,6 +133,7 @@ public class DemandeController {
 			 panelEclaissisement =false;
 			 panelLigneBudgetaire =false;
 			 chargeDao();
+			 chargeEntreprses();
 		 }else
 			 if(tdmCode.equalsIgnoreCase("GAG")) {
 				 panelRestreint =false;
@@ -715,6 +726,18 @@ public class DemandeController {
 
 	public void setPanelLigneBudgetaire(boolean panelLigneBudgetaire) {
 		this.panelLigneBudgetaire = panelLigneBudgetaire;
+	}
+
+
+
+	public List<TSoumissions> getListeEntreprises() {
+		return listeEntreprises;
+	}
+
+
+
+	public void setListeEntreprises(List<TSoumissions> listeEntreprises) {
+		this.listeEntreprises = listeEntreprises;
 	}
 
 

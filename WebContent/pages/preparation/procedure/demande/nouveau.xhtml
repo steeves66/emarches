@@ -145,7 +145,7 @@
 												var="slctdTb" value="#{demandeController.listeDao}"
 												rowKey="#{slctdTb.dacCode}" selection="#{demandeController.selectionligneDao}" editMode="cell" scrollable="true" scrollHeight="270"
 												emptyMessage="Aucun DAO Trouvé">
-												 <p:column selectionMode="Single" style="width:40px;text-align:center"/>
+												 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 
 												<p:column headerText="N°DAO" styleClass="col-sm-2">
 													<h:outputText value="#{slctdTb.dacCode}" />
@@ -528,164 +528,64 @@
           </h:panelGroup>
 			        </p:tab>
 			         <p:tab id="autres" title="Informations complémentaire" titleStyle="background-color: #f88b2e;background-image: none">
-			          <div class="box box-success box-solid">
-              <div class="box-header with-border">
-               <div class="col-md-12 "><div  style="color: #fff">INFORMATIONS COMPLEMENTAIRE</div></div>
-             </div>
-             
-             <div class="box-body">
-            <h:panelGroup rendered="#{demandeController.panelRestreint}"> 
-	         <div class="col-md-6">
-               <div class="form-group">
-                  <label class="col-sm-3 control-label">Restreint 1</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Restreint 2</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-               
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Restreint 3</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-             
-	        </div>
-	        
-	       <div class="col-md-6">
-	          <div class="form-group">
-                  <label class="col-sm-3 control-label">Restreint 4</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Restreint 5</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Restreint 6</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>	            
-	       </div>
-          </h:panelGroup>    
-          
-          
-          
-          <h:panelGroup rendered="#{demandeController.panelGreAgre}"> 
-	         <div class="col-md-6">
-               <div class="form-group">
-                  <label class="col-sm-3 control-label">GréAgré 1</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">GréAgré 2</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-               
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">GréAgré 3</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-             
-	        </div>
-	        
-	       <div class="col-md-6">
-	          <div class="form-group">
-                  <label class="col-sm-3 control-label">GréAgré 4</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">GréAgré 5</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">GréAgré 6</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>	            
-	       </div>
-          </h:panelGroup> 
-          
-          
-          
-          <h:panelGroup rendered="#{demandeController.panelAvenant}"> 
-	         <div class="col-md-6">
-               <div class="form-group">
-                  <label class="col-sm-3 control-label">Avenant 1</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Avenant 2</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-               
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Avenant 3</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-             
-	        </div>
-	        
-	       <div class="col-md-6">
-	          <div class="form-group">
-                  <label class="col-sm-3 control-label">Avenant 4</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Avenant 5</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>
-                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Avenant 6</label>
-                  <div class="col-sm-9">
-                     <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
-                  </div>
-              </div>	            
-	       </div>
-          </h:panelGroup> 
-          
-             
-          
-               </div>
-             <div class="box-footer">
-              <p:commandLink action="#{demandeController.saveDemande()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer  
-	      </p:commandLink>
-             </div>
-	      </div>
+			          <h:panelGroup rendered="#{demandeController.panelRestreint}"> 
+					   <div class="box box-success box-solid">
+					 
+		              <div class="box-header with-border">
+		               <div class="col-md-12 "><div  style="color: #fff">LISTE DES ENTRERISES SOUMISSIONNAIRE</div></div>
+		             </div>
+		             
+		             <div class="box-body">
+		                <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-4">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{daoController.chargeRecherchePPM()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"  />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"  />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>    
+                 
+               <p:dataTable id="tblEntreprises" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listeEntreprises}" 
+					
+				scrollable="true" scrollHeight="270" emptyMessage="Aucune marché trouvé" rows="5">
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Ncc" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.souNcc}" />
+				        </p:column>
+
+				        <p:column headerText="Nom Commercial" styleClass="col-sm-7" >
+         				<h:outputText value="#{slctdTb.souNomCom}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Sigle" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.souSigleSte}" />
+				        </p:column> 
+				        
+				          <p:column headerText="Adresse" styleClass="col-sm-2">  
+         				  <h:outputText value="#{slctdTb.souAdresse}" />
+				        </p:column>
+				        
+         				<p:column headerText="Telephone" styleClass="col-sm-1" >
+         				<h:outputText value="#{slctdTb.souTel}" />
+				        </p:column>
+				        
+                    </p:dataTable>
+		             </div>
+		             <div class="box-footer">
+		              <p:commandLink action="#{demandeController.saveDemande()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+					            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+					             <i class="ace-icon fa fa-save"></i> Enregistrer  
+			      </p:commandLink>
+		             </div>
+			      </div>
+			      </h:panelGroup>
 			        </p:tab>
 			        </p:wizard>
 			         
