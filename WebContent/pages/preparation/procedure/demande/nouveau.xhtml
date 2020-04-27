@@ -106,6 +106,11 @@
 		       <p:calendar id="trdao"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		       </p:calendar> 
 		   </div>
+		   
+		    <label for="ref" class="col-sm-3 control-label">reference de la demande</label>
+		     <div class="col-sm-3">
+		        <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+		   </div>
 
 		   </div>        
 	       </div>
@@ -140,7 +145,7 @@
 												var="slctdTb" value="#{demandeController.listeDao}"
 												rowKey="#{slctdTb.dacCode}" selection="#{demandeController.selectionligneDao}" editMode="cell" scrollable="true" scrollHeight="270"
 												emptyMessage="Aucun DAO Trouvé">
-												 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+												 <p:column selectionMode="Single" style="width:40px;text-align:center"/>
 
 												<p:column headerText="N°DAO" styleClass="col-sm-2">
 													<h:outputText value="#{slctdTb.dacCode}" />
@@ -224,7 +229,7 @@
             </h:panelGroup>
             
              
-             <h:panelGroup rendered="#{demandeController.panelAvenant}">
+             <h:panelGroup rendered="#{demandeController.panelLigneBudgetaire}">
              <div class="box box-success box-solid">
                <div class="box-header with-border">
                 <div class="col-md-12 ">
@@ -283,6 +288,228 @@
 				        </p:column> 
 				         <p:column headerText="Total" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.lbgTotDot}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+
+                    </p:dataTable>
+                    
+                   <div>
+                   
+                   </div>
+	 
+              </div>
+             </div>
+               
+           </h:panelGroup>
+           
+           <h:panelGroup rendered="#{demandeController.panelAvenant}">
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-12 ">
+                   <div  style="color: #fff">CHOISIR LE(S) MARCHE(S) POUR CREER VOTRE DEMANDE</div>
+                 </div>
+                </div>
+               <div class="box-body">
+               
+               <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-4">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{daoController.chargeRecherchePPM()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"  />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"  />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>    
+                 
+               <p:dataTable id="tbleMarche" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" 
+					
+				scrollable="true" scrollHeight="270" emptyMessage="Aucune marché trouvé" rows="5">
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Code" styleClass="col-sm-1" >
+         				<h:outputText />
+				        </p:column>
+
+				       <p:column headerText="Marché" styleClass="col-sm-2" >
+         				<h:outputText  />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-1" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column>
+				       
+         				 <p:column headerText="Emprunt" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgAeEmp}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+         				<p:column headerText="Don" styleClass="col-sm-2" >
+         				<h:outputText >
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column>
+				        <p:column headerText="Disponible" styleClass="col-sm-2" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+				         <p:column headerText="Total" styleClass="col-sm-2" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+
+                    </p:dataTable>
+                    
+                   <div>
+                   
+                   </div>
+	 
+              </div>
+             </div>
+               
+           </h:panelGroup>
+           
+            <h:panelGroup rendered="#{demandeController.panelClarification}">
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-12 ">
+                   <div  style="color: #fff">CHOISIR LE(S) AVIS(S) D'APPEL D'OFFRE(S) POUR CREER VOTRE DEMANDE</div>
+                 </div>
+                </div>
+               <div class="box-body">
+               
+               <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-4">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{daoController.chargeRecherchePPM()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"  />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"  />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>    
+                 
+               <p:dataTable id="tblClarification" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" 
+					
+				scrollable="true" scrollHeight="270" emptyMessage="Aucune marché trouvé" rows="5">
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Code" styleClass="col-sm-1" >
+         				<h:outputText />
+				        </p:column>
+
+				       <p:column headerText="Marché" styleClass="col-sm-2" >
+         				<h:outputText  />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-1" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column>
+				       
+         				 <p:column headerText="Emprunt" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgAeEmp}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+         				<p:column headerText="Don" styleClass="col-sm-2" >
+         				<h:outputText >
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column>
+				        <p:column headerText="Disponible" styleClass="col-sm-2" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+				         <p:column headerText="Total" styleClass="col-sm-2" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+
+                    </p:dataTable>
+                    
+                   <div>
+                   
+                   </div>
+	 
+              </div>
+             </div>
+               
+           </h:panelGroup>
+           
+            <h:panelGroup rendered="#{demandeController.panelEclaissisement}">
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                <div class="col-md-12 ">
+                   <div  style="color: #fff">CHOISIR LE(S) OFFRE(S) POUR CREER VOTRE DEMANDE</div>
+                 </div>
+                </div>
+               <div class="box-body">
+               
+               <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-4">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{daoController.chargeRecherchePPM()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"  />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="Effectuer une recherche"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b"  />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>    
+                 
+               <p:dataTable id="tblApelOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" 
+					
+				scrollable="true" scrollHeight="270" emptyMessage="Aucune marché trouvé" rows="5">
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Code" styleClass="col-sm-1" >
+         				<h:outputText />
+				        </p:column>
+
+				       <p:column headerText="Marché" styleClass="col-sm-2" >
+         				<h:outputText  />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-1" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column>
+				       
+         				 <p:column headerText="Emprunt" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.lbgAeEmp}">
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+         				<p:column headerText="Don" styleClass="col-sm-2" >
+         				<h:outputText >
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column>
+				        <p:column headerText="Disponible" styleClass="col-sm-2" >
+         				<h:outputText>
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+				        </p:column> 
+				         <p:column headerText="Total" styleClass="col-sm-2" >
+         				<h:outputText>
          				<f:convertNumber pattern="##,###.##"></f:convertNumber>
          				</h:outputText>
 				        </p:column> 

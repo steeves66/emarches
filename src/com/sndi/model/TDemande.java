@@ -39,6 +39,8 @@ public class TDemande implements java.io.Serializable {
 	private String demRef;
 	private Short demGesCode;
 	private String demRefActIni;
+	private String demFonCodePf;
+	private String demFonCodeDmp;
 	private String demStatutRetour;
 	private Set<THistoDemande> THistoDemandes = new HashSet<THistoDemande>(0);
 	private Set<TDetailDemandes> TDetailDemandeses = new HashSet<TDetailDemandes>(0);
@@ -52,8 +54,8 @@ public class TDemande implements java.io.Serializable {
 	}
 
 	public TDemande(BigDecimal demNum, TTypeDemande TTypeDemande, TStatut TStatut, TStructure TStructure,
-			TFonction TFonction, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,
-			String demRefAvisMin, String demRef, Short demGesCode, String demRefActIni,String demStatutRetour,
+			TFonction TFonction, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,String demFonCodePf,
+            String demFonCodeDmp,String demRefAvisMin, String demRef, Short demGesCode, String demRefActIni,String demStatutRetour,
 			Set<THistoDemande> THistoDemandes, Set<TDetailDemandes> TDetailDemandeses, Set<TAvisPresel> TAvisPresels) {
 		this.demNum = demNum;
 		this.TTypeDemande = TTypeDemande;
@@ -72,6 +74,8 @@ public class TDemande implements java.io.Serializable {
 		this.THistoDemandes = THistoDemandes;
 		this.TDetailDemandeses = TDetailDemandeses;
 		this.TAvisPresels = TAvisPresels;
+		this.demFonCodePf =demFonCodePf;
+		this.demFonCodeDmp = demFonCodeDmp;
 	}
 
 	@Id
@@ -234,6 +238,24 @@ public class TDemande implements java.io.Serializable {
 
 	public void setTAvisPresels(Set<TAvisPresel> TAvisPresels) {
 		this.TAvisPresels = TAvisPresels;
+	}
+
+	@Column(name = "DEM_FON_CODE_PF")
+	public String getDemFonCodePf() {
+		return demFonCodePf;
+	}
+
+	public void setDemFonCodePf(String demFonCodePf) {
+		this.demFonCodePf = demFonCodePf;
+	}
+
+	@Column(name = "DEM_FON_CODE_DMP")
+	public String getDemFonCodeDmp() {
+		return demFonCodeDmp;
+	}
+
+	public void setDemFonCodeDmp(String demFonCodeDmp) {
+		this.demFonCodeDmp = demFonCodeDmp;
 	}
 
 }

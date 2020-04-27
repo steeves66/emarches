@@ -28,6 +28,7 @@ public class THistoDemande implements java.io.Serializable {
 	private TFonction TFonction;
 	private TOperateur TOperateur;
 	private Date hdmDteSaisi;
+	private String hdmMotif;
 
 	public THistoDemande() {
 	}
@@ -38,13 +39,14 @@ public class THistoDemande implements java.io.Serializable {
 	}
 
 	public THistoDemande(short hdmNum, TDemande TDemande, TStatut TStatut, TFonction TFonction, TOperateur TOperateur,
-			Date hdmDteSaisi) {
+			Date hdmDteSaisi,String hdmMotif) {
 		this.hdmNum = hdmNum;
 		this.TDemande = TDemande;
 		this.TStatut = TStatut;
 		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
 		this.hdmDteSaisi = hdmDteSaisi;
+		this.hdmMotif = hdmMotif;
 	}
 
 	@Id
@@ -107,6 +109,15 @@ public class THistoDemande implements java.io.Serializable {
 
 	public void setHdmDteSaisi(Date hdmDteSaisi) {
 		this.hdmDteSaisi = hdmDteSaisi;
+	}
+
+	@Column(name = "HDM_MOTIF")
+	public String getHdmMotif() {
+		return hdmMotif;
+	}
+
+	public void setHdmMotif(String hdmMotif) {
+		this.hdmMotif = hdmMotif;
 	}
 
 }

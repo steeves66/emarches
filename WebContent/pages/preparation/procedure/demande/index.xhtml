@@ -36,9 +36,8 @@
     <section class="content">
      <div class="box"></div>
      
-     
-     
-     
+      <!-- <ui:include src="tableauBord.xhtml"  /> -->
+
 		<h:panelGroup rendered="#{userController.renderMsg}">
 				<br/>
 				<div class="alert alert-success light alert-dismissable" >
@@ -87,26 +86,7 @@
 		                   <p:inputTextarea  value="#{userController.fonction.fonLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
 		                  </div>
 		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{agpmController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{agpmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{agpmController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
+
 		                </div>
 	            </div> 
 	            
@@ -216,7 +196,7 @@
 
                         <p:column headerText="Actions" styleClass="col-sm-1">
                           <h:panelGroup rendered="#{slctdTb.demStatutRetour == '1'}">
-	                            <p:commandLink  oncomplete="PF('motif').show()"  styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{demandeController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
 	                              <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
 	                           </p:commandLink> 
@@ -226,15 +206,22 @@
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
                              </p:commandLink>
-
-				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+                         
+				            <p:commandLink rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-right:3px " 
 				               title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />                       
                             </p:commandLink>
+                          
+                           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'SPD'}">
+                           <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-right: 3px" title="Différer" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
+                              </p:commandLink>
+                              </h:panelGroup>
 
                                 <p:commandLink action="#{demandeController.valider()}" styleClass="btn btn-xs btn-success"  title="#{controleController.libelleTitle}" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
+                                <i class="ace-icon fa  fa-mail-forward bigger-130"  style="color: white"></i>
                                 <p:confirm header="Confirmation" message="#{controleController.libelleConfirm} #{slctdTb.demNum} ?" icon="ui-icon-alert" /> 
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
                              </p:commandLink>
@@ -276,9 +263,9 @@
 						Motif du rejet de la demande N° #{demandeController.slctdTd.demNum}
 						</div> 
 					<div class="panel-body panel-body-nopadding">
-	                  <p:inputTextarea rows="4"  cols="100" style="width:100%;" readonly="true"/>
+	                  <p:inputTextarea rows="4" value="#{demandeController.motif.hdmMotif}" cols="100" style="width:100%;" readonly="true"/>
 	                  </div>
-	                  <div class="par pull-right"> par:<strong></strong></div>
+	                  <div class="par pull-right"> par:<strong>#{demandeController.motif.opeNom}</strong></div>
                      <div class="panel-footer">
                       <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()"/>
                      </div>
@@ -296,14 +283,14 @@
 					<div class="panel-body panel-body-nopadding">
 	                 <div class="col-xs-12 col-sm-12">
 						   <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-						   <p:inputTextarea  rows="4" cols="33" style="width:100%;"/>
+						   <p:inputTextarea value="#{demandeController.observation}" rows="4" cols="33" style="width:100%;"/>
 						   </div>
 	                  </div>
 	                  
                      
                       <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('diff').hide()"/>
                        &nbsp; &nbsp;
-                      <p:commandLink styleClass="btn btn-success"  value="Valider"  oncomplete="PF('diff').hide()" update=":gnl"/>
+                      <p:commandLink styleClass="btn btn-success"  value="Valider" action="#{demandeController.differe()}"  oncomplete="PF('diff').hide()" update=":gnl"/>
                     </div>
       </p:dialog>
     </h:form>

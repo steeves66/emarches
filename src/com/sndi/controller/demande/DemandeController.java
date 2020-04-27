@@ -24,8 +24,10 @@ import com.sndi.model.TDetailDemandes;
 import com.sndi.model.THistoDemande;
 import com.sndi.model.TStatut;
 import com.sndi.model.TTypeDemande;
+import com.sndi.model.VAgpmStatut;
 import com.sndi.model.VDaoDemande;
 import com.sndi.model.VLigneImputation;
+import com.sndi.model.VMotifRetourDemande;
 import com.sndi.model.VPpmDao;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
@@ -70,12 +72,13 @@ public class DemandeController {
 	 private List<VPpmDao> selectionlignePPM = new ArrayList<VPpmDao>();
 	 private List<VLigneImputation> listeLigneBugetaire = new ArrayList<VLigneImputation>();
 	 private List<VLigneImputation> selectionligneBugetaire = new ArrayList<VLigneImputation>();
+	 private List<VMotifRetourDemande> listeMotifs = new ArrayList<VMotifRetourDemande>();
 	 
 	 
 	 //Déclaration des Objets
 	 private TDemande newDem = new TDemande();
 	 private TDemande slctdTd = new TDemande();
-	 private VDaoDemande dao = new VDaoDemande();
+	 private VMotifRetourDemande motif = new VMotifRetourDemande();
 	 
 	
 	//Déclaration des Variables
@@ -84,6 +87,11 @@ public class DemandeController {
 	 private boolean panelRestreint =false;
 	 private boolean panelGreAgre =false;
 	 private boolean panelAvenant =false;
+	 private boolean panelVerrouillage =false;
+	 private boolean panelClarification =false;
+	 private boolean panelEclaissisement =false;
+	 private boolean panelLigneBudgetaire =false;
+	 private String observation="";
 	 
 	 public String onFlowProcess(FlowEvent event) throws IOException {
 		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -95,13 +103,13 @@ public class DemandeController {
 	 //Methode de chargement des types de demande
 	 public void chargeTypeDemande() {
 		 listeTypeDemandes.clear();
-		/* listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")));
-		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());*/
+		 listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")));
+		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());
 		
-		listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumnIn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
+	/*	listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumnIn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
 				"TDM_CODE", new ArrayList<String>(Arrays.asList("AOR","GAG","AVE")),
                new WhereClause("TDM_CODE",WhereClause.Comparateur.NEQ,"PSL"));
-		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());
+		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());*/
 		
 	 }
 	 //Methode de chargement 
@@ -110,20 +118,56 @@ public class DemandeController {
 			 panelRestreint =true;
 			 panelGreAgre =false;
 			 panelAvenant =false; 
+			 panelVerrouillage =false;
+			 panelClarification =false;
+			 panelEclaissisement =false;
+			 panelLigneBudgetaire =false;
 			 chargeDao();
 		 }else
 			 if(tdmCode.equalsIgnoreCase("GAG")) {
 				 panelRestreint =false;
 				 panelGreAgre =true;
-				 panelAvenant =false;  
+				 panelAvenant =false; 
+				 panelClarification =false;
+				 panelEclaissisement =false;
+				 panelLigneBudgetaire =false;
 				 chargePPM();
 			 }else
 				 if(tdmCode.equalsIgnoreCase("AVE")) {
 					 panelRestreint =false;
 					 panelGreAgre =false;
 					 panelAvenant =true;
-					 chargeLigneBugetaire();
-				 }
+					 panelEclaissisement =false;
+					 panelLigneBudgetaire =false;
+					 
+				 }else
+					 if(tdmCode.equalsIgnoreCase("LBG")) {
+						 panelRestreint =false;
+						 panelGreAgre =false;
+						 panelAvenant =false; 
+						 panelClarification =false;
+						 panelEclaissisement =false;
+						 panelLigneBudgetaire =true;
+						 chargeLigneBugetaire();
+					 }else
+						 if(tdmCode.equalsIgnoreCase("CLA")) {
+							 panelRestreint =false;
+							 panelGreAgre =false;
+							 panelAvenant =false; 
+							 panelClarification =true;
+							 panelEclaissisement =false;
+							 panelLigneBudgetaire =false;
+							 chargePPM();
+						 }else
+							 if(tdmCode.equalsIgnoreCase("ECL")) {
+								 panelRestreint =false;
+								 panelGreAgre =false;
+								 panelAvenant =false;
+								 panelClarification =false;
+								 panelEclaissisement =true;
+								 panelLigneBudgetaire =false;
+								 chargeLigneBugetaire();
+							 }
 	 }
 	 
 	 public void saveDemande() {
@@ -134,6 +178,8 @@ public class DemandeController {
 		 newDem.setTOperateur(userController.getSlctd().getTOperateur());
 		 newDem.setTStatut(new TStatut("E1S"));
 		 newDem.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+		 newDem.setDemFonCodePf(userController.getSlctd().getTFonction().getFonCodePf());
+		 newDem.setDemFonCodeDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 		 newDem.setTTypeDemande(new TTypeDemande(tdmCode));
 		 iservice.addObject(newDem);
 		 
@@ -149,21 +195,22 @@ public class DemandeController {
 				 }
 		 
 		 //Historisation de la demande dans THistoDemande
-		 historiser(""+newDem.getTStatut().getStaCode());
-				
+		 historiser(""+newDem.getTStatut().getStaCode(),newDem);
+		 vider();	
 		 userController.setTexteMsg("Enregistrement effectué avec succès!");
 		 userController.setRenderMsg(true);
 		 userController.setSevrityMsg("success");
 	 }
 	 
 	 //Methode d'historisation
-	 public void historiser(String statut) {
+	 public void historiser(String statut,TDemande demande) {
 		 List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,""+statut));
 			TStatut statuts = new TStatut();
 			if(!LS.isEmpty()) statuts = LS.get(0);
 			THistoDemande histoDem = new THistoDemande();
 			histoDem.setHdmDteSaisi(Calendar.getInstance().getTime());
-			histoDem.setTDemande(newDem);
+			histoDem.setHdmMotif(getObservation());
+			histoDem.setTDemande(demande);
 			histoDem.setTFonction(userController.getSlctd().getTFonction());
 			histoDem.setTOperateur(userController.getSlctd().getTOperateur());
 			histoDem.setTStatut(statuts);
@@ -247,19 +294,36 @@ public class DemandeController {
 						}
 				 }
 	 
+				 public void vider() {
+					newDem = new TDemande();
+                    selectionligneDao = new ArrayList<VDaoDemande>();
+                    selectionligneDao.clear();
+					selectionlignePPM = new ArrayList<VPpmDao>();
+					selectionlignePPM.clear();
+					selectionligneBugetaire = new ArrayList<VLigneImputation>();
+					selectionligneBugetaire.clear();
+					tdmCode ="";
+				 }
 	 
 	public String renderPage(String value ,String action) throws IOException{ 
 		controleController.redirectionDynamicProcedures(action);
 		     switch(value) {
 				case "dem1":
 					tdmCode="";
+					panelRestreint =false;
+					panelGreAgre =false;
+					panelAvenant =false;
+					vider();
+					userController.initMessage();
 					String fonct = controleController.getFonctionalite();	
 					String statutAffiche = "";
 					String statutDiffere = "";
+					String colonneFonction ="";
 					//Ramener le statut en fonction de l'utilisateur connecté et de l'action a mener
 					if(fonct.equalsIgnoreCase("listSaisieAc")) {
 						statutAffiche = "E1S";
 						statutDiffere = "E2D";
+						colonneFonction ="DEM_FON_CODE_AC";
 						_logger.info("staut: "+statutAffiche);	
 						_logger.info("staut: "+statutDiffere);
 						_logger.info("fonctionalité: "+fonct);	
@@ -268,6 +332,7 @@ public class DemandeController {
 						 if(fonct.equalsIgnoreCase("listValidationCpmp")) {
 							 statutAffiche = "E1T";	
 							 statutDiffere = "E3D";
+							 colonneFonction ="DEM_FON_CODE_PF";
 								_logger.info("staut: "+statutAffiche);
 								_logger.info("staut: "+statutDiffere);
 								_logger.info("fonctionalité: "+fonct);	
@@ -275,7 +340,8 @@ public class DemandeController {
 						 }else {
 							 if(fonct.equalsIgnoreCase("listValidationSPD")) {
 								 statutAffiche = "E2V";	
-								 statutDiffere = "D2T";
+								 statutDiffere = "E2V";
+								 colonneFonction ="DEM_FON_CODE_DMP";
 									_logger.info("staut: "+statutAffiche);	
 									_logger.info("staut: "+statutDiffere);
 									_logger.info("fonctionalité: "+fonct);	
@@ -292,7 +358,7 @@ public class DemandeController {
 						 }
 					 }
 					//Chargement de la liste des demandes
-					chargeData(statutAffiche,statutDiffere);
+					chargeData(statutAffiche,statutDiffere,colonneFonction);
 					break;
 				case "dem2":
 					chargeTypeDemande();
@@ -309,33 +375,36 @@ public class DemandeController {
 		    return userController.renderPage(value);
 		}
 	//methode Chargement de la liste des demandes
-	public void chargeData(String statutAffiche, String statutDiffere) {
+	public void chargeData(String statutAffiche, String statutDiffere,String colonneFonction) {
 		listeDemandes.clear();	
 		listeDemandes = (List<TDemande>) iservice.getObjectsByColumnInDesc("TDemande", new ArrayList<String>(Arrays.asList("DEM_DTE_SAISI")),
 				"DEM_STA_CODE", new ArrayList<String>(Arrays.asList(""+statutAffiche,""+statutDiffere)),
-				//new WhereClause("DEM_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-               new WhereClause("DEM_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				new WhereClause(""+colonneFonction,WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	}
 	
 	
 	public void valider() {
 		String statUpdate = "";
 		String message = "";
+		String motif = "";
 		if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1S")) {
 			statUpdate = "E1T";
 			message="Transmission de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
-			chargeData("E1T","E2D");
+			motif = "Demande Transmise par l'AC";
+			//chargeData("E1S","E2D","DEM_FON_CODE_AC");
 			
 		 }else {
 			 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1T")) {
 					statUpdate = "E2V";
-					chargeData("E2V","E3D");
+					//chargeData("E1T","E3D","DEM_FON_CODE_PF");
 					message="Prévalidation de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
+					motif = "Demande Prévalidée par la Céllule";
 			 }else {
 				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E2V")) {
 					 statUpdate = "E3V";
-					 chargeData("E3V","E3V");
+					 //chargeData("E2V","E3V","DEM_FON_CODE_DMP");
 					 message="Validation de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
+					 motif = "Demande Validée par le Service Procédure dérogatoire";
 				 }else {
 					 
 				 }	 
@@ -345,12 +414,63 @@ public class DemandeController {
 		
 		slctdTd.setTStatut(new TStatut(statUpdate));	
 		iservice.updateObject(slctdTd);
-		historiser(statUpdate);
+		historiser(statUpdate,slctdTd);
+		
+		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			chargeData("E1S","E2D","DEM_FON_CODE_AC");
+		 }else {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					chargeData("E1T","E3D","DEM_FON_CODE_PF");
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPD")) {
+					chargeData("E2V","E3V","DEM_FON_CODE_DMP");
+				 }	 
+			 }
+
+		 }
 		userController.setTexteMsg(message);
 		userController.setRenderMsg(true);
 		userController.setSevrityMsg("success");
 		
 	}
+	
+	public void differe() {
+		String statUpdate = "";
+		String message = "";
+		String motif = "";
+
+			 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1T")) {
+					statUpdate = "E2D";
+					chargeData("E1T","E3D","DEM_FON_CODE_PF");
+					message="Démande N°"+slctdTd.getDemNum()+"différée avec succès";
+			 }else {
+				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E2V")) {
+					 statUpdate = "E3D";
+					 chargeData("E2V","E3V","DEM_FON_CODE_DMP");
+					 message="Démande N°"+slctdTd.getDemNum()+"différée avec succès";
+				 } 
+			 }
+
+		slctdTd.setTStatut(new TStatut(statUpdate));
+		slctdTd.setDemStatutRetour("1");
+		iservice.updateObject(slctdTd);
+		historiser(statUpdate,slctdTd);
+		userController.setTexteMsg(message);
+		userController.setRenderMsg(true);
+		userController.setSevrityMsg("success");
+		
+	}
+	
+	//Affichage des motifs de retour
+			public void chargerObservation() {
+				listeMotifs=(List<VMotifRetourDemande>) iservice.getObjectsByColumn("VMotifRetourDemande", new ArrayList<String>(Arrays.asList("HDM_DEM_NUM")),
+						new WhereClause("HDM_DEM_NUM",WhereClause.Comparateur.EQ,""+slctdTd.getDemNum()));
+				if(!listeMotifs.isEmpty()) {
+					int i=listeMotifs.size();
+					int obs=i-1;
+					motif=listeMotifs.get(obs);
+				}	
+			}	
 
 	public List<TDemande> getListeDemandes() {
 		return listeDemandes;
@@ -455,19 +575,6 @@ public class DemandeController {
 	}
 
 
-
-	public VDaoDemande getDao() {
-		return dao;
-	}
-
-
-
-	public void setDao(VDaoDemande dao) {
-		this.dao = dao;
-	}
-
-
-
 	public List<VDaoDemande> getSelectionligneDao() {
 		return selectionligneDao;
 	}
@@ -524,6 +631,90 @@ public class DemandeController {
 
 	public void setSelectionligneBugetaire(List<VLigneImputation> selectionligneBugetaire) {
 		this.selectionligneBugetaire = selectionligneBugetaire;
+	}
+
+
+
+	public String getObservation() {
+		return observation;
+	}
+
+
+
+	public void setObservation(String observation) {
+		this.observation = observation;
+	}
+
+
+
+	public List<VMotifRetourDemande> getListeMotifs() {
+		return listeMotifs;
+	}
+
+
+
+	public void setListeMotifs(List<VMotifRetourDemande> listeMotifs) {
+		this.listeMotifs = listeMotifs;
+	}
+
+
+
+	public VMotifRetourDemande getMotif() {
+		return motif;
+	}
+
+
+
+	public void setMotif(VMotifRetourDemande motif) {
+		this.motif = motif;
+	}
+
+
+
+	public boolean isPanelVerrouillage() {
+		return panelVerrouillage;
+	}
+
+
+
+	public void setPanelVerrouillage(boolean panelVerrouillage) {
+		this.panelVerrouillage = panelVerrouillage;
+	}
+
+
+
+	public boolean isPanelClarification() {
+		return panelClarification;
+	}
+
+
+
+	public void setPanelClarification(boolean panelClarification) {
+		this.panelClarification = panelClarification;
+	}
+
+
+
+	public boolean isPanelEclaissisement() {
+		return panelEclaissisement;
+	}
+
+
+
+	public void setPanelEclaissisement(boolean panelEclaissisement) {
+		this.panelEclaissisement = panelEclaissisement;
+	}
+
+
+
+	public boolean isPanelLigneBudgetaire() {
+		return panelLigneBudgetaire;
+	}
+
+
+
+	public void setPanelLigneBudgetaire(boolean panelLigneBudgetaire) {
+		this.panelLigneBudgetaire = panelLigneBudgetaire;
 	}
 
 

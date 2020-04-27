@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:panelGroup  layout="block" id="tableauBord" >
+<div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-success">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Cliquez pour fermer le tableau de bord
+                      </a>
+                    </h4>
+                  </div>
+                  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">   
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmAcAttenteTransfert}</h3>
+
+              <p>En attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmAcTransmis}</h3>
+
+              <p>Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeAgpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+      
+        
+      </div>
+                    </div>
+                  </div>
+          </h:panelGroup>
+          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+         
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpAttenteValide}</h3>
+
+              <p>En attente de Prévalidation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpValide}</h3>
+
+              <p>Validé(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            
+            <p:commandLink  oncomplete="PF('detailCpmDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpDifCpmp}</h3>
+
+              <p>Différé(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpDifDmpCpmp}</h3>
+
+              <p>Différé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+          
+          </h:panelGroup>
+          
+          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPD'}">
+         
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpAttenteValide}</h3>
+
+              <p>En attente de validation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.agpmCpValide}</h3>
+
+              <p>Validé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            
+            <p:commandLink  oncomplete="PF('detailCpmDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+
+      </div>
+                    </div>
+                  </div>
+          
+          </h:panelGroup>
+            </div>
+      </div>
+
+  </h:panelGroup>   
+</html>

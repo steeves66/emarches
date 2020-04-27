@@ -1657,7 +1657,32 @@
          </li>
          
          </h:panelGroup>
-         <!-- DEBUT TRAITEMENT DU MENU CHEF DE SERVICE PREPARATION ET PROCEDURES -->
+         
+         
+                   <!-- DEBUT TRAITEMENT DU MENU SERVICE PROCEDURE DEROGATOIRE -->
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPD'}">
+         
+                  
+           <!-- DEBUT M3 :  -->
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M3-Gestion des dérogations</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+            <p:commandLink action="#{demandeController.renderPage('dem1','VALDEMSPD')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Validation par le SPD
+             </p:commandLink>
+            </li>           
+         </ul>     
+         </li>
+         <!-- FIN M3 -->
+        
+         </h:panelGroup>
+         <!-- FIN TRAITEMENT DU MENU SERVICE PROCEDURE DEROGATOIRE -->
           
          
            <!-- DEBUT TRAITEMENT DU MENU ADMINISTRATEUR -->
