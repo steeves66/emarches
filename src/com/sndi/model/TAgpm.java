@@ -44,6 +44,8 @@ public class TAgpm implements java.io.Serializable {
 	private Date agpDateValCpmp;
 	private Date agpDateValDmp;
 	private Date agpDteModif;
+	private String agpFonCodPf;
+	private String agpFonCodDmp;
 	private Set<TFinancement> TFinancements = new HashSet<TFinancement>(0);
 	private Set<TDetailAgpm> TDetailAgpms = new HashSet<TDetailAgpm>(0);
 	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
@@ -69,7 +71,7 @@ public class TAgpm implements java.io.Serializable {
 	public TAgpm(long agpId, TProjet TProjet,TStructure TStructure, TGestion TGestion, TDeclarant TDeclarant, TStatut TStatut,
 			TMinistere TMinistere, TFonction TFonction, String agpCommentaire, String agpTypeDao,
 			String agpModePassation, String agpActif, String agpStatutRetour, String agpActeurSaisie,Date agpDateValAc, Date agpDateValCpmp,
-			Date agpDateValDmp,String agpCode,Date agpDteModif,
+			Date agpDateValDmp,String agpCode,Date agpDteModif,String agpFonCodPf,String agpFonCodDmp,
 			 Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
 			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
 		this.agpId = agpId;
@@ -90,6 +92,8 @@ public class TAgpm implements java.io.Serializable {
 		this.agpDateValDmp = agpDateValDmp;
 		this.agpCode = agpCode;
 		this.agpDteModif = agpDteModif;
+		this.agpFonCodPf = agpFonCodPf;
+		this.agpFonCodDmp = agpFonCodDmp;
 		this.TFinancements = TFinancements;
 		this.TDetailAgpms = TDetailAgpms;
 		this.THistoAgpms = THistoAgpms;
@@ -269,6 +273,24 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setAgpDteModif(Date agpDteModif) {
 		this.agpDteModif = agpDteModif;
+	}
+	
+	@Column(name = "AGP_FON_COD_PF", length = 20)
+	public String getAgpFonCodPf() {
+		return this.agpFonCodPf;
+	}
+
+	public void setAgpFonCodPf(String agpFonCodPf) {
+		this.agpFonCodPf = agpFonCodPf;
+	}
+
+	@Column(name = "AGP_FON_COD_DMP", length = 20)
+	public String getAgpFonCodDmp() {
+		return this.agpFonCodDmp;
+	}
+
+	public void setAgpFonCodDmp(String agpFonCodDmp) {
+		this.agpFonCodDmp = agpFonCodDmp;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAgpm")

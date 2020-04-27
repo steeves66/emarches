@@ -931,10 +931,12 @@ public class ControleController {
 							 //btn_maj_datePpm = false;
 							 detailP1 = true;
 							 detailP2 = false;
-							 validDMP = true;
-							 validCPMP = false;
-							 etatPso = true;
-							 etatPsl = false;
+							 /*validDMP = true;
+							 validCPMP = false;*/
+							 validCPMP = true;
+							 validDMP = false;
+							 //etatPso = true;
+							 etatPsl = true;
 							 searchAC = true;
 							 searchCpmp = false;
 							 searchDmp = false;
@@ -1086,11 +1088,13 @@ public class ControleController {
 							 btn_valider_ppm_dmp = false;
 							 btn_fermer_saisie_ppm = false;
 							 btn_fermer_saisie_pspm = true;
-							 validDMP = false;
-							 validCPMP = true;
+							 //validDMP = false;
+							 validCPMP = false;
+							 validDMP = true;
 							 searchAcPs = true;
 							 searchCpmpPs = false;
 							 searchDmpPs = false;
+							 etatPsl = false;
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPSPM")) {
 			    				type = "PSPM";

@@ -342,7 +342,45 @@ public class AgpmController {
 			     } 
 			   }
 			 }
-		 
+	
+		//Début Nouvelle Methode d'Affichage des AGPM 
+	/*	 public void chargeDataAvalider() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 getValidationListe().clear();
+					 validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+								"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+								new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+					          new WhereClause("AFF_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+					 tableauBordController.chargeDataAgpm();
+						_logger.info("validationListe size: "+validationListe.size()); 
+					 
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 getValidationListe().clear();
+							validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+									"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+									new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+							     new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+							tableauBordController.chargeDataAgpm(); 
+								_logger.info("objetListe size: "+validationListe.size());
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 getValidationListe().clear();
+								validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
+										"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+								new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+								tableauBordController.chargeDataAgpm(); 
+									_logger.info("objetListe size: "+validationListe.size());
+						 }
+					 }
+			     } 
+			   }
+			 }*/
+		 // Fin Nouvelle methode d'Affichage des AGPM 
 		 
 		 
 		 
@@ -816,6 +854,8 @@ public class AgpmController {
 	    	 				     	      			        agpm.setTProjet(projet);
 	    	 				     	      			        agpm.setAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
 	    	 				     	      				    agpm.setTFonction(userController.getSlctd().getTFonction());
+	    	 				     	      				    agpm.setAgpFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+	    	 				     	      				    agpm.setAgpFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 	    	 				     	      				    agpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 	    	 				     	      				    iservice.addObject(agpm);
 	    	 				     	      				    //Enregistre un financement
@@ -860,6 +900,8 @@ public class AgpmController {
 	    	 				     		  					affichageAgpm.setTFonction(userController.getSlctd().getTFonction());
 	    	 				     		  					affichageAgpm.setAffAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
 	    	 				     		  					affichageAgpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+	    	 				     		  					affichageAgpm.setAffFonCodPf(agpm.getAgpFonCodPf());
+	    	 				     		  					affichageAgpm.setAffFonCodDmp(agpm.getAgpFonCodDmp());
 	    	 				     		  					affichageAgpm.setTGestion( new TGestion(gesCode));
 	    	 				     		  					affichageAgpm.setTProjet(projet);
 	    	 				     		  					affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));

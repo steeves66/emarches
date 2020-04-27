@@ -49,6 +49,8 @@ public class TAffichageAgpm implements java.io.Serializable {
 	private Date affAgpDateValCpmp;
 	private Date affAgpDateValDmp;
 	private Date affAgpDteModif;
+	private String affFonCodPf;
+	private String affFonCodDmp;
 
 	public TAffichageAgpm() {
 	}
@@ -69,7 +71,7 @@ public class TAffichageAgpm implements java.io.Serializable {
 			TDeclarant TDeclarant, TStatut TStatut, TBailleur TBailleur,String affAgpCode,
 			TSourceFinancement TSourceFinancement, TDevise TDevise, TMinistere TMinistere, TFonction TFonction,long affAgpId,
 			String affAgpActeurSaisie, String affAgpStatutRetour, String affAgpActif,String affAgpTypeDao, String affAgpCommentaire,/*Clob affAgpRecherche,*/String affAgpRecherche,
-			Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp,Date affAgpDteModif) {
+			Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp,Date affAgpDteModif,String affFonCodPf, String affFonCodDmp) {
 		this.affId = affId;
 		this.TProjet = TProjet;
 		this.TStructure = TStructure;
@@ -93,6 +95,8 @@ public class TAffichageAgpm implements java.io.Serializable {
 		this.affAgpDateValDmp = affAgpDateValDmp;
 		this.affAgpCode = affAgpCode;
 		this.affAgpDteModif = affAgpDteModif;
+		this.affFonCodPf = affFonCodPf;
+		this.affFonCodDmp = affFonCodDmp;
 		
 	}
 
@@ -329,6 +333,24 @@ public class TAffichageAgpm implements java.io.Serializable {
 
 	public void setAffAgpDteModif(Date affAgpDteModif) {
 		this.affAgpDteModif = affAgpDteModif;
+	}
+	
+	@Column(name = "AFF_FON_COD_PF", length = 20)
+	public String getAffFonCodPf() {
+		return this.affFonCodPf;
+	}
+
+	public void setAffFonCodPf(String affFonCodPf) {
+		this.affFonCodPf = affFonCodPf;
+	}
+
+	@Column(name = "AFF_FON_COD_DMP", length = 20)
+	public String getAffFonCodDmp() {
+		return this.affFonCodDmp;
+	}
+
+	public void setAffFonCodDmp(String affFonCodDmp) {
+		this.affFonCodDmp = affFonCodDmp;
 	}
 
 }

@@ -94,6 +94,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
      catch (IllegalStateException localIllegalStateException) {}
    
    }
+   
    public void downloadFile(String fichierComplet, String nomFichier) throws IOException
    {
 	   HttpServletRequest request = (HttpServletRequest)
