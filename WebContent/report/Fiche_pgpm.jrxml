@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-17T00:46:16 -->
+<!-- 2020-04-28T14:02:19 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgpm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -36,17 +36,18 @@
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select f.fip_gpg_id,f.fip_type_finance,b.bai_libelle, f.fip_sou_code ,f.fip_montant_cfa,f.fip_tresor
-from t_financement_pgpm f,t_bailleur b
+			<![CDATA[select f.fip_gpg_id,f.fip_type_finance,b.bai_libelle ,f.fip_montant_cfa,f.fip_tresor,sf.sou_libelle
+from t_financement_pgpm f,t_bailleur b, t_source_financement sf
 where f.fip_bai_code = b.bai_code (+)
+and f.fip_sou_code = sf.sou_code
 and f.fip_gpg_id =$P{param_code}]]>
 		</queryString>
 		<field name="FIP_GPG_ID" class="java.math.BigDecimal"/>
 		<field name="FIP_TYPE_FINANCE" class="java.lang.String"/>
 		<field name="BAI_LIBELLE" class="java.lang.String"/>
-		<field name="FIP_SOU_CODE" class="java.lang.String"/>
 		<field name="FIP_MONTANT_CFA" class="java.math.BigDecimal"/>
 		<field name="FIP_TRESOR" class="java.math.BigDecimal"/>
+		<field name="SOU_LIBELLE" class="java.lang.String"/>
 		<group name="FIP_GPG_ID">
 			<groupExpression><![CDATA[$F{FIP_GPG_ID}]]></groupExpression>
 		</group>
@@ -56,8 +57,8 @@ and f.fip_gpg_id =$P{param_code}]]>
 		<group name="BAI_LIBELLE">
 			<groupExpression><![CDATA[$F{BAI_LIBELLE}]]></groupExpression>
 		</group>
-		<group name="FIP_SOU_CODE">
-			<groupExpression><![CDATA[$F{FIP_SOU_CODE}]]></groupExpression>
+		<group name="SOU_LIBELLE">
+			<groupExpression><![CDATA[$F{SOU_LIBELLE}]]></groupExpression>
 		</group>
 		<group name="FIP_MONTANT_CFA">
 			<groupExpression><![CDATA[$F{FIP_MONTANT_CFA}]]></groupExpression>
@@ -286,7 +287,7 @@ and af.aff_gpg_id=  $P{param_code}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
-								<text><![CDATA[TYPE]]></text>
+								<text><![CDATA[SOURCE]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
@@ -324,14 +325,14 @@ and af.aff_gpg_id=  $P{param_code}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
-								<text><![CDATA[SOURCE]]></text>
+								<text><![CDATA[TYPE]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="100" height="30" uuid="c5827b7c-1ce4-4890-a8b7-c0d5ad0f6ce8"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{FIP_SOU_CODE}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{SOU_LIBELLE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

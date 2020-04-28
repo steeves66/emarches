@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
       <h3>
-        #{controleController.libelle1} #{ppmModificationController.updatePpm.affDppId} 
+        #{controleController.libelle} #{ppmModificationController.updatePpm.affDppId} 
        
       </h3>
       <ol class="breadcrumb">
@@ -308,8 +308,9 @@
                
            
 			        </p:tab>
-			         <p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
-			         <div class="row">
+			        
+	<p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
+	 <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
      <div class="col-md-12">
              <div class="box box-success box-solid">
@@ -325,7 +326,7 @@
 		       
 		                  <label for="valdao" class="col-sm-6 control-label">Validation DAO par DMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valdao" value="#{ppmModificationController.updatePpm.affDppDateDaoApprobDmp}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valdao" value="#{ppmModificationController.updatePpm.affDppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		    </div>
@@ -335,7 +336,7 @@
 		    <div class="form-group">
 		                  <label for="valcp" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valcp" value="#{ppmModificationController.updatePpm.affDppDateAttApprobCpmp}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valcp" value="#{ppmModificationController.updatePpm.affDppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -356,7 +357,7 @@
 		                <div class="form-group">
 		                  <label for="invAoo" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="invAoo"  mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppInvEntre}" style="width: 100%" >
+		                   <p:calendar id="invAoo" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.detailPass.affDppInvEntre}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div> 
@@ -394,7 +395,7 @@
 		                 <div class="form-group">
 		                  <label for="rapp" class="col-sm-6 control-label">Rapport d'évaluation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="rapp" value="#{ppmModificationController.updatePpm.affDppDateElabRapport}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="rapp" mask="true" locale="fr" value="#{ppmModificationController.updatePpm.affDppDateElabRapport}" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -404,9 +405,7 @@
 		                   <p:calendar id="jug" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateJugementTech}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
-		                </div>
-		           
-		                
+		                </div>       
          </div>
          
          
@@ -465,16 +464,18 @@
 		                  <div class="form-group">
 		                  <label for="saiAc" class="col-sm-6 control-label">Signature de l'AC<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="saiAc" value="#{ppmModificationController.updatePpm.affDppDateSignatAc}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="saiAc" value="#{ppmModificationController.updatePpm.affDppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
          </div>
          <div class="col-md-6">
+               <h:panelGroup id="psl_inv">
+				    <h:panelGroup rendered="#{controleController.etatPsl}">
                    <div class="form-group">
 		                  <label for="marcheApprob" class="col-sm-6 control-label">Approbation du marché<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="marcheApprob" value="#{ppmModificationController.updatePpm.affDppDateMarcheApprob}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="marcheApprob" value="#{ppmModificationController.updatePpm.affDppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -482,17 +483,17 @@
 		                <div class="form-group">
 		                  <label for="valDmp" class="col-sm-6 control-label">Validation Marché DMP<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valDmp" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateAttApprobDmp}" style="width: 100%" >
+		                   <p:calendar id="valDmp" mask="true" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppDateAttApprobDmp}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
+		                
+		            </h:panelGroup>
+		         </h:panelGroup>
          </div>
          </div>
          
-		 
-		                
-		      
-		              
+              
          </div>
          </div>
          <div class="col-md-12">
@@ -525,6 +526,9 @@
 	         
 	         
          </div>
+     	
+         
+         
           <div class="row">
           <div class="col-md-12">
        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">

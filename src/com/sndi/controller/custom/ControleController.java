@@ -284,6 +284,9 @@ public class ControleController {
 	//Bouton Fermer PGSPM
 	public boolean fermerSaiPgspm=false;
 	public boolean fermerValPgspm=false;
+	//BoutonFermer PPM
+	public boolean fermerSaiPpm = false;
+	public boolean fermerValPpm = false;
 	//Bouton fermer PSPM
 	public boolean fermerSaiPspm=false;
 	public boolean fermerValPspm=false;
@@ -646,8 +649,10 @@ public class ControleController {
 							panelPgspm = false;
 							searchPgpm = true;
 							searchPgspm = false;
-							fermerSai = true;
-							fermerVal = false;
+							fermerSaiPgpm = true;
+							fermerValPgpm = false;
+							fermerSaiPgspm = false;
+							fermerValPgspm = false;
 							/*fermerSaiPgpm = true;
 							fermerValPgpm = false;
 							fermerSaiPgspm = false;
@@ -709,6 +714,8 @@ public class ControleController {
 				    				libelle1="Detail";
 				    				detailPg1 = true;
 									detailPg2 = false;
+									panelPgpm = true;
+									panelPgspm = false;
 				    			}
 			 //PGSPM
 			 if(action.equalsIgnoreCase("ENGPGSPM")) {
@@ -770,8 +777,10 @@ public class ControleController {
 							 searchPgpm = false;
 							 searchPgspm = true;
 							 nbrepgspm = true;
-							 fermerSai = true;
-							 fermerVal = false;
+							 fermerSaiPgpm = false;
+							 fermerValPgpm = false;
+							 fermerSaiPgspm = true;
+							 fermerValPgspm = false;
 							 /*fermerSaiPgpm = false;
 							 fermerValPgpm = false;
 							 fermerSaiPgspm = true;
@@ -834,6 +843,8 @@ public class ControleController {
 				    				libelleProcedure="Détail de l'AGPM N°";
 				    				detailPg1 = false;
 									detailPg2 = true;
+									panelPgpm = false;
+									panelPgspm = true;
 				    			}
 			 
 			 //PPM
@@ -846,6 +857,7 @@ public class ControleController {
 			    		type = "PPM";
 			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PPM N°";
+			    		libelle="Modification du PPM N°";
 			    		libelle1="Modification du PPM N°";
 			    		btn_new =true;
 						 panel1 =true;
@@ -882,13 +894,13 @@ public class ControleController {
 						 btn_creerDetailPspmDmp = false;
 						 detailP1 = true;
 						 detailP2 = false;
-						 validDMP = true;
-						 validCPMP = false;
-						 etatPso = true;
-						 etatPsl = false;
 						 searchAC = true;
 						 searchCpmp = false;
 						 searchDmp = false;
+						 validCPMP = true;
+						 validDMP = false;
+						 //etatPso = true;
+						 etatPsl = true;
 			    	}else
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
 			    			 type = "PPM";
@@ -910,6 +922,10 @@ public class ControleController {
 							 panelPspm = false;
 							 fermerVal = false;
 							 fermerSai = true;
+							 fermerValPpm = false;
+							 fermerSaiPpm = true;
+							 fermerValPspm = false;
+							 fermerSaiPspm = false;
 							 btn_trans_ppm = true;
 							 btn_trans_pspm = false;
 							 nbreppm = true;
@@ -957,6 +973,10 @@ public class ControleController {
 								panelPspm = false;
 								fermerVal = true;
 								fermerSai = false;
+								fermerValPpm = true;
+								fermerSaiPpm = false;
+								fermerValPspm = false;
+								fermerSaiPspm = false;
 								detailP1 = true;
 								detailP2 = false;
 								btn_trans_ppm = false;
@@ -980,6 +1000,8 @@ public class ControleController {
 				    				libelle="Détail du PPM N°";
 				    				//fermerSai = true;
 				    				//fermerVal = false;
+				    				panelPpm = true;
+				    				panelPspm = false;
 				    				fermerSaiPspm = false;
 				    				fermerValPspm = false;
 				    				detailP1 = true;
@@ -1001,6 +1023,7 @@ public class ControleController {
 			    	if(action.equalsIgnoreCase("MODPSPM")) {
 			    		type = "PSPM";
 			    		libelleProcedure="Modification du PSPM N°";
+			    		libelle="Modification du PSPM N°";
 			    		libelle1="Modification";
 			    		panelDetail=false;
 			    		//agpmController.etatPavetDossier= true;
@@ -1042,11 +1065,12 @@ public class ControleController {
 						 btn_valider_ppm_dmp = false;
 						 btn_fermer_saisie_ppm = false;
 						 btn_fermer_saisie_pspm = true;
-						 validDMP = false;
-						 validCPMP = true;
 						 searchAcPs = true;
 						 searchCpmpPs = false;
 						 searchDmpPs = false;
+						 validCPMP = false;
+						 validDMP = true;
+						 etatPsl = false;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPSPM")) {
 			    			 type = "PSPM";
@@ -1078,6 +1102,8 @@ public class ControleController {
 							// btn_maj_datePspm = false;
 							 fermerValPspm = false;
 							 fermerSaiPspm = true;
+							 fermerValPpm = false;
+							 fermerSaiPpm = false;
 							 detailP1 = false;
 							 detailP2 = true;
 							 nbreppm = false;
@@ -1112,6 +1138,8 @@ public class ControleController {
 								panelPspm = true;
 								fermerValPspm = true;
 								fermerSaiPspm = false;
+								fermerValPpm = false;
+								fermerSaiPpm = false;
 								detailP1 = false;
 								detailP2 = true;
 								btn_valider_ppm_cpmp = false;
@@ -1133,6 +1161,8 @@ public class ControleController {
 				    				libelle="Détail du PSPM N°";
 				    				fermerSai = false;
 				    				fermerVal = false;
+				    				panelPpm = false;
+				    				panelPspm = true;
 				    				//fermerSaiPspm = true;
 				    				//fermerValPspm = false;
 				    				detailP1 = false;
@@ -7484,6 +7514,26 @@ public class ControleController {
 
 	public void setFermerValPgspm(boolean fermerValPgspm) {
 		this.fermerValPgspm = fermerValPgspm;
+	}
+
+
+	public boolean isFermerSaiPpm() {
+		return fermerSaiPpm;
+	}
+
+
+	public void setFermerSaiPpm(boolean fermerSaiPpm) {
+		this.fermerSaiPpm = fermerSaiPpm;
+	}
+
+
+	public boolean isFermerValPpm() {
+		return fermerValPpm;
+	}
+
+
+	public void setFermerValPpm(boolean fermerValPpm) {
+		this.fermerValPpm = fermerValPpm;
 	}
 	
     

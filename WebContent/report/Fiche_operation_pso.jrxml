@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-11T19:56:13 -->
+<!-- 2020-04-28T15:32:15 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_pso" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c522d3ab-6af2-440a-8892-02575153090f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -36,16 +36,21 @@
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code" class="java.lang.Long"/>
 		<queryString language="SQL">
-			<![CDATA[select f.*
-from t_financement_ppm f, t_bailleur b
+			<![CDATA[select f.*,sf.sou_libelle
+from t_financement_ppm f, t_bailleur b, t_source_financement sf
 where f.fpp_bai_code = b.bai_code (+)
+and f.fpp_sou_code = sf.sou_code (+)
 and f.fpp_dpp_id = $P{param_code}]]>
 		</queryString>
-		<field name="FPP_TYPE_FINANCE" class="java.lang.String"/>
+		<field name="FPP_ID" class="java.math.BigDecimal"/>
+		<field name="FPP_DEV_CODE" class="java.lang.String"/>
 		<field name="FPP_BAI_CODE" class="java.lang.String"/>
-		<field name="FPP_SOU_CODE" class="java.lang.String"/>
+		<field name="FPP_DPP_ID" class="java.math.BigDecimal"/>
 		<field name="FPP_MONTANT_CFA" class="java.math.BigDecimal"/>
+		<field name="FPP_MONTANT_DEVISE" class="java.math.BigDecimal"/>
+		<field name="FPP_TYPE_FINANCE" class="java.lang.String"/>
 		<field name="FPP_PART_TRESOR" class="java.math.BigDecimal"/>
+		<field name="SOU_LIBELLE" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="param_code" class="java.lang.Long">
 		<parameterDescription><![CDATA[]]></parameterDescription>
@@ -391,7 +396,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
-								<text><![CDATA[TYPE]]></text>
+								<text><![CDATA[SOURCE]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
@@ -427,14 +432,14 @@ and af.aff_dpp_id= $P{param_code}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font isBold="true"/>
 								</textElement>
-								<text><![CDATA[SOURCE]]></text>
+								<text><![CDATA[TYPE]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="110" height="30" uuid="ccea5afb-eade-432a-b7f3-7337d6dd62e6"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{FPP_SOU_CODE}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{SOU_LIBELLE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

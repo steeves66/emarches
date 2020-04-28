@@ -131,7 +131,7 @@
                 <!-- /.box-header -->
 	             <div class="box-body">
                <p:dataTable id="financedetail" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsPpmController.financementListe}"  emptyMessage="Aucun financement enregistré">
-         				<p:column headerText="Type Financement" styleClass="col-sm-1">
+         				<p:column headerText="Source" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fppTypeFinance}"/>
 				        </p:column>
          				
@@ -139,7 +139,7 @@
 				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
 				        </p:column>
 				        
-				        <p:column headerText="Source" styleClass="col-sm-1">
+				        <p:column headerText="Type Financement" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 				        
@@ -179,10 +179,10 @@
             <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsPpmController.imprimerPpmDet()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'opération
 				      </p:commandLink>
-				       <p:commandLink styleClass="btn btn-warning" action="#{ppmController.renderPage('ppm1','SAIPPM')}" rendered="#{controleController.fermerSai}"  style="background-color: #f88b2e;" update=":content">
+				       <p:commandLink styleClass="btn btn-warning" action="#{ppmController.renderPage('ppm1','SAIPPM')}" rendered="#{controleController.fermerSaiPpm}"  style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
-		 <p:commandLink styleClass="btn btn-warning" action="#{ppmController.renderPage('ppm1','VALPPM')}" rendered="#{controleController.fermerVal}"  style="background-color: #f88b2e;" update=":content">
+		 <p:commandLink styleClass="btn btn-warning" action="#{ppmController.renderPage('ppm1','VALPPM')}" rendered="#{controleController.fermerValPpm}"  style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		</h:panelGroup>

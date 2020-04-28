@@ -677,13 +677,13 @@
 				         <p:column headerText="Lancement" styleClass="col-sm-2" >
 				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}"  style="color:red; font-weight:bold" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
          				 <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        </p:column>
@@ -839,13 +839,13 @@
 				        <p:column headerText="Lancement" styleClass="col-sm-2" >
 				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}"  style="color:red; font-weight:bold" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
          				 <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        </p:column>
