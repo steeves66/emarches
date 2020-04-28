@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import com.sndi.controller.custom.ControleController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
+import com.sndi.model.TAvisPresel;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetailDemandes;
 import com.sndi.model.THistoDemande;
@@ -75,11 +76,13 @@ public class DemandeController {
 	 private List<VLigneImputation> selectionligneBugetaire = new ArrayList<VLigneImputation>();
 	 private List<VMotifRetourDemande> listeMotifs = new ArrayList<VMotifRetourDemande>();
 	 private List<TSoumissions> listeEntreprises= new ArrayList<TSoumissions>();
+	 private List<TSoumissions> selectionEntreprises= new ArrayList<TSoumissions>();
 	 
 	 
 	 //Déclaration des Objets
 	 private TDemande newDem = new TDemande();
 	 private TDemande slctdTd = new TDemande();
+	 private TSoumissions newSoum = new TSoumissions();
 	 private VMotifRetourDemande motif = new VMotifRetourDemande();
 	 
 	
@@ -93,10 +96,30 @@ public class DemandeController {
 	 private boolean panelClarification =false;
 	 private boolean panelEclaissisement =false;
 	 private boolean panelLigneBudgetaire =false;
+	 private boolean panelEntreprise =false;
+	 private boolean panelAutre =false;
 	 private String observation="";
 	 
 	 public String onFlowProcess(FlowEvent event) throws IOException {
 		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
+		 
+		//Controle Pavé création
+		 if(event.getOldStep().equals("demande") && event.getNewStep().equals("autres")) {
+			 /*if(selectionligneDao.size()==0)
+			 {
+            	  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, ""
+							+ "Aucun Dao selectionné!", ""));
+		          return "demande";
+				} else
+					 if(selectionligneDao.size()>1) {
+						 FacesContext.getCurrentInstance().addMessage(null,
+									new FacesMessage(FacesMessage.SEVERITY_ERROR, "Vous pouvez selectionner q'un seul DAO", ""));
+						 return "demande";
+					 }*/
+
+			 userController.initMessage();
+		     }
+		 
 		 return event.getNewStep();
 	    }
 	 
@@ -105,13 +128,13 @@ public class DemandeController {
 	 //Methode de chargement des types de demande
 	 public void chargeTypeDemande() {
 		 listeTypeDemandes.clear();
-		 listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")));
-		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());
-		
-	/*	listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumnIn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
-				"TDM_CODE", new ArrayList<String>(Arrays.asList("AOR","GAG","AVE")),
-               new WhereClause("TDM_CODE",WhereClause.Comparateur.NEQ,"PSL"));
+		/* listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")));
 		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());*/
+		
+		listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumnIn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
+				"TDM_CODE", new ArrayList<String>(Arrays.asList("AOR","GAG","AVE","LBG")),
+               new WhereClause("TDM_CODE",WhereClause.Comparateur.NEQ,"PSL"));
+		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());
 		
 	 }
 	 
@@ -132,6 +155,7 @@ public class DemandeController {
 			 panelClarification =false;
 			 panelEclaissisement =false;
 			 panelLigneBudgetaire =false;
+			 panelEntreprise = true;
 			 chargeDao();
 			 chargeEntreprses();
 		 }else
@@ -142,7 +166,9 @@ public class DemandeController {
 				 panelClarification =false;
 				 panelEclaissisement =false;
 				 panelLigneBudgetaire =false;
+				 panelEntreprise = true;
 				 chargePPM();
+				 chargeEntreprses();
 			 }else
 				 if(tdmCode.equalsIgnoreCase("AVE")) {
 					 panelRestreint =false;
@@ -150,6 +176,7 @@ public class DemandeController {
 					 panelAvenant =true;
 					 panelEclaissisement =false;
 					 panelLigneBudgetaire =false;
+					 panelEntreprise = false;
 					 
 				 }else
 					 if(tdmCode.equalsIgnoreCase("LBG")) {
@@ -159,6 +186,7 @@ public class DemandeController {
 						 panelClarification =false;
 						 panelEclaissisement =false;
 						 panelLigneBudgetaire =true;
+						 panelEntreprise = false;
 						 chargeLigneBugetaire();
 					 }else
 						 if(tdmCode.equalsIgnoreCase("CLA")) {
@@ -168,6 +196,7 @@ public class DemandeController {
 							 panelClarification =true;
 							 panelEclaissisement =false;
 							 panelLigneBudgetaire =false;
+							 panelEntreprise = false;
 							 chargePPM();
 						 }else
 							 if(tdmCode.equalsIgnoreCase("ECL")) {
@@ -177,7 +206,16 @@ public class DemandeController {
 								 panelClarification =false;
 								 panelEclaissisement =true;
 								 panelLigneBudgetaire =false;
+								 panelEntreprise = false;
 								 chargeLigneBugetaire();
+							 }else {
+								 panelRestreint =false;
+								 panelGreAgre =false;
+								 panelAvenant =false;
+								 panelClarification =false;
+								 panelEclaissisement =false;
+								 panelLigneBudgetaire =false; 
+								 panelEntreprise = false;
 							 }
 	 }
 	 
@@ -267,6 +305,8 @@ public class DemandeController {
 					iservice.addObject(demDet);
 				}
 			}
+		//Entreprise
+		 saveEntrepsise();
 	 }
 	 
 	// Methode d'enregistrement des PPM selectopnné
@@ -285,6 +325,8 @@ public class DemandeController {
 						iservice.addObject(demDet);
 					}
 				}
+			//Entreprise
+			 saveEntrepsise();
 		 }
 		 
 		// Methode d'enregistrement des Lignes bugétaires selectopnné
@@ -305,6 +347,24 @@ public class DemandeController {
 						}
 				 }
 	 
+				 
+		public void saveEntrepsise() {
+			 //Enregistement des Entreprises dans t_soumission
+			 if (selectionEntreprises.size()==0) {
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune entreprise selectionnée", ""));
+				}else {
+					for(TSoumissions entreprise : selectionEntreprises) {
+						TAvisPresel newPresel = new TAvisPresel();
+						newPresel.setTDemande(newDem);
+						newPresel.setAprDteSaisi(Calendar.getInstance().getTime());
+						newPresel.setTSoumissions(newPresel.getTSoumissions());
+						//newPresel.setAprDetailInvit(entreprise.getSouTel()+" "+entreprise.getSouAdresse());
+						newPresel.setTOperateurByAprOpeMatricule(userController.getSlctd().getTOperateur());
+						iservice.addObject(newPresel);
+					}
+				}
+		}
 				 public void vider() {
 					newDem = new TDemande();
                     selectionligneDao = new ArrayList<VDaoDemande>();
@@ -321,9 +381,14 @@ public class DemandeController {
 		     switch(value) {
 				case "dem1":
 					tdmCode="";
-					panelRestreint =false;
-					panelGreAgre =false;
-					panelAvenant =false;
+					 panelRestreint =false;
+					 panelGreAgre =false;
+					 panelAvenant =false;
+					 panelClarification =false;
+					 panelEclaissisement =false;
+					 panelLigneBudgetaire =false; 
+					 panelAutre =false;
+					 panelEntreprise = false;
 					vider();
 					userController.initMessage();
 					String fonct = controleController.getFonctionalite();	
@@ -374,6 +439,7 @@ public class DemandeController {
 				case "dem2":
 					chargeTypeDemande();
 					chargeListBytype();
+					
 				break;
 				case "dem3":
 				break;
@@ -385,6 +451,7 @@ public class DemandeController {
 		     
 		    return userController.renderPage(value);
 		}
+	
 	//methode Chargement de la liste des demandes
 	public void chargeData(String statutAffiche, String statutDiffere,String colonneFonction) {
 		listeDemandes.clear();	
@@ -738,6 +805,54 @@ public class DemandeController {
 
 	public void setListeEntreprises(List<TSoumissions> listeEntreprises) {
 		this.listeEntreprises = listeEntreprises;
+	}
+
+
+
+	public List<TSoumissions> getSelectionEntreprises() {
+		return selectionEntreprises;
+	}
+
+
+
+	public void setSelectionEntreprises(List<TSoumissions> selectionEntreprises) {
+		this.selectionEntreprises = selectionEntreprises;
+	}
+
+
+
+	public TSoumissions getNewSoum() {
+		return newSoum;
+	}
+
+
+
+	public void setNewSoum(TSoumissions newSoum) {
+		this.newSoum = newSoum;
+	}
+
+
+
+	public boolean isPanelAutre() {
+		return panelAutre;
+	}
+
+
+
+	public void setPanelAutre(boolean panelAutre) {
+		this.panelAutre = panelAutre;
+	}
+
+
+
+	public boolean isPanelEntreprise() {
+		return panelEntreprise;
+	}
+
+
+
+	public void setPanelEntreprise(boolean panelEntreprise) {
+		this.panelEntreprise = panelEntreprise;
 	}
 
 

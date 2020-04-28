@@ -107,9 +107,9 @@
 		       </p:calendar> 
 		   </div>
 		   
-		    <label for="ref" class="col-sm-3 control-label">reference de la demande</label>
+		    <label for="ref" class="col-sm-3 control-label">Référence</label>
 		     <div class="col-sm-3">
-		        <p:inputText  type="text" styleClass="form-control" style="width: 100%" />
+		        <p:inputText value="#{demandeController.newDem.demRef}" type="text" styleClass="form-control" style="width: 100%" />
 		   </div>
 
 		   </div>        
@@ -527,8 +527,8 @@
           
           </h:panelGroup>
 			        </p:tab>
-			         <p:tab id="autres" title="Informations complémentaire" titleStyle="background-color: #f88b2e;background-image: none">
-			          <h:panelGroup rendered="#{demandeController.panelRestreint}"> 
+			         <p:tab id="autres"  title="Informations complémentaire" titleStyle="background-color: #f88b2e;background-image: none">
+			          <h:panelGroup rendered="#{demandeController.panelEntreprise}"> 
 					   <div class="box box-success box-solid">
 					 
 		              <div class="box-header with-border">
@@ -551,10 +551,11 @@
                       </div>    
                  
                <p:dataTable id="tblEntreprises" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listeEntreprises}" 
-					
+				rowKey="#{slctdTb.souNcc}"	selection="#{demandeController.selectionEntreprises}" 
 				scrollable="true" scrollHeight="270" emptyMessage="Aucune marché trouvé" rows="5">
                          
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center">
+                         </p:column>
                          
                          <p:column headerText="Ncc" styleClass="col-sm-1" >
          				<h:outputText value="#{slctdTb.souNcc}" />
