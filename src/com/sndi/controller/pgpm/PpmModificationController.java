@@ -2996,6 +2996,7 @@ public class PpmModificationController {
 					 slctdTd.setAffDppDateElabRapport(updatePpm.getAffDppDateElabRapport());
 					 slctdTd.setAffDppDateNegociation(updatePpm.getAffDppDateNegociation());
 					 slctdTd.setAffDppDateAttApprobDmp(updatePpm.getAffDppDateDaoApprobDmp());
+					 slctdTd.setAffDppDateAttApprobCmp(updatePpm.getAffDppDateAttApprobCmp());
 					 slctdTd.setAffDppDateSignatAttrib(updatePpm.getAffDppDateSignatAttrib());
 					 slctdTd.setAffDppDateSignatAc(updatePpm.getAffDppDateSignatAc());
 					 slctdTd.setAffDppInvEntre(updatePpm.getAffDppInvEntre());
@@ -3031,6 +3032,8 @@ public class PpmModificationController {
 							detail.setDppDateSignatAc(slctdTd.getAffDppDateSignatAc());
 							detail.setDppDateSignatAttrib(slctdTd.getAffDppDateSignatAttrib());
 							detail.setDppDateJugementOffre(slctdTd.getAffDppDateJugementOffre());
+							detail.setDppDateAttApprobCpmp(slctdTd.getAffDppDateAttApprobCmp());
+							detail.setDppDateAttApprobDmp(slctdTd.getAffDppDateAttApprobDmp());
 							detail.setDppApprobAno(slctdTd.getAffDppApprobAno());
 							detail.setDppDateNegociation(slctdTd.getAffDppDateNegociation());
 							detail.setDppInvEntre(slctdTd.getAffDppInvEntre());

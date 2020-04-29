@@ -8,6 +8,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Immutable;
 
@@ -43,6 +45,7 @@ public class VUpdatePpm implements java.io.Serializable {
 	private Date affDppDateJugementOffre;
 	private Date affDppDateJugementTech;
 	private Date affDppDateAttApprobDmp;
+	private Date affDppDateAttApprobCmp;
 	private Date affDppDateAttApproBail;
 	private Date affDppDateNegociation;
 	private Date affDppDateSignatAttrib;
@@ -188,7 +191,7 @@ public class VUpdatePpm implements java.io.Serializable {
 			String affDppActeurSaisie, Date affDppDateDaoTrans, Date affDppDateDaoApprobDmp,
 			Date affDppDateDaoApprobBail, Date affDppDateAvisAoPublicat, Date affDppDateOuvertOt,
 			Date affDppDateOuvertOf, Date affDppDateElabRapport, Date affDppDateJugementOffre,Date affDppDateJugementTech,
-			Date affDppDateAttApprobDmp, Date affDppDateAttApproBail, Date affDppDateNegociation,
+			Date affDppDateAttApprobDmp, Date affDppDateAttApprobCmp, Date affDppDateAttApproBail, Date affDppDateNegociation,
 			Date affDppDateSignatAttrib, Date affDppDateSignatAc, Date affDppDateMarcheApprob, Date affDppDateExecDebut,
 			Date affDppDateExecFin, Long affDppId, String affDppStatutRetour, String affDppFonCod, String affDppStrCode,
 			String affDppStrConduc, String affDppStrBenefi, Date affDppDateSaisie, String affTypId,
@@ -234,6 +237,7 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.affDppDateJugementOffre = affDppDateJugementOffre;
 		this.affDppDateJugementTech = affDppDateJugementTech;
 		this.affDppDateAttApprobDmp = affDppDateAttApprobDmp;
+		this.affDppDateAttApprobCmp = affDppDateAttApprobCmp;
 		this.affDppDateAttApproBail = affDppDateAttApproBail;
 		this.affDppDateNegociation = affDppDateNegociation;
 		this.affDppDateSignatAttrib = affDppDateSignatAttrib;
@@ -553,6 +557,16 @@ public class VUpdatePpm implements java.io.Serializable {
 
 	public void setAffDppDateAttApprobDmp(Date affDppDateAttApprobDmp) {
 		this.affDppDateAttApprobDmp = affDppDateAttApprobDmp;
+	}
+	
+
+	@Column(name = "AFF_DPP_DATE_ATT_APPROB_CMP", length = 7)
+	public Date getAffDppDateAttApprobCmp() {
+		return this.affDppDateAttApprobCmp;
+	}
+
+	public void setAffDppDateAttApprobCmp(Date affDppDateAttApprobCmp) {
+		this.affDppDateAttApprobCmp = affDppDateAttApprobCmp;
 	}
 
 	@Column(name = "AFF_DPP_DATE_ATT_APPRO_BAIL", length = 7)

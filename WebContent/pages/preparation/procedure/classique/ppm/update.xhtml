@@ -336,7 +336,7 @@
 		    <div class="form-group">
 		                  <label for="valcp" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valcp" value="#{ppmModificationController.updatePpm.affDppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valcp" value="#{ppmModificationController.updatePpm.affDppDateAttApprobCmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -353,11 +353,11 @@
              </div>
 		  
 		           <h:panelGroup id="inv">
-				    <h:panelGroup rendered="#{controleController.etatPsl}" id="dpsl">
+				    <h:panelGroup rendered="#{controleController.etatPso}" id="dpsl">
 		                <div class="form-group">
 		                  <label for="invAoo" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="invAoo" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.detailPass.affDppInvEntre}" style="width: 100%" >
+		                   <p:calendar id="invAoo" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.affDppInvEntre}" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div> 

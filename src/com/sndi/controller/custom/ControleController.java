@@ -899,7 +899,7 @@ public class ControleController {
 						 searchDmp = false;
 						 validCPMP = true;
 						 validDMP = false;
-						 //etatPso = true;
+						 etatPso = false;
 						 etatPsl = true;
 			    	}else
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
@@ -951,7 +951,7 @@ public class ControleController {
 							 validCPMP = false;*/
 							 validCPMP = true;
 							 validDMP = false;
-							 //etatPso = true;
+							 etatPso = false;
 							 etatPsl = true;
 							 searchAC = true;
 							 searchCpmp = false;
@@ -1071,6 +1071,7 @@ public class ControleController {
 						 validCPMP = false;
 						 validDMP = true;
 						 etatPsl = false;
+						 etatPso = false;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPSPM")) {
 			    			 type = "PSPM";
@@ -1121,6 +1122,7 @@ public class ControleController {
 							 searchCpmpPs = false;
 							 searchDmpPs = false;
 							 etatPsl = false;
+							 etatPso = false;
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPSPM")) {
 			    				type = "PSPM";
