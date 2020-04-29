@@ -2779,6 +2779,7 @@ public class PpmController {
 		 
 		 
 		    //Transmission par l'AC,CPMP,DMP
+		 @Transactional
 	     public void transmettre()throws IOException{
 	     	if (listSelectionTransmission.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,
@@ -2812,7 +2813,10 @@ public class PpmController {
 			 							 }else
 			 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 			 									passDetail.setDppDateValDmp(Calendar.getInstance().getTime()); 
-			 								 }
+			 								 }else
+				 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+					 									passDetail.setDppDateValDmp(Calendar.getInstance().getTime()); 
+					 								 }
 									passDetail.setTStatut(new TStatut(statutTrans));
 									passDetail.setDppStatutRetour("0");
 							       iservice.updateObject(passDetail);
@@ -2864,6 +2868,7 @@ public class PpmController {
 	     
 	     
 	     //Transmission par l'AC,CPMP,DMP
+		 @Transactional
 	     public void transmettrePspm()throws IOException{
 	     	if (listSelectionTransmission.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,
@@ -2901,7 +2906,10 @@ public class PpmController {
 			 							 }else
 			 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 			 									passDetail.setDppDateValDmp(Calendar.getInstance().getTime()); 
-			 								 }
+			 								 }else
+				 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+					 									passDetail.setDppDateValDmp(Calendar.getInstance().getTime()); 
+					 								 }
 									passDetail.setTStatut(new TStatut(statutTrans));
 									passDetail.setDppStatutRetour("0");
 							       iservice.updateObject(passDetail);

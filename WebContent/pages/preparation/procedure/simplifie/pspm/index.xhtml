@@ -608,11 +608,11 @@
 
                          <p:column headerText="Source Financement" styleClass="col-sm-2" >
          				  <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDppSourceFin}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affDppTypeFinance}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDppSourceFin}" />
+         				<h:outputText value="#{slctdTb.affDppTypeFinance}" />
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -741,10 +741,10 @@
 
                          <p:column headerText="Source Financement" styleClass="col-sm-2" >
          				  <h:panelGroup rendered="#{slctdTb.affDppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affDppSourceFin}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.affDppTypeFinance}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				<h:panelGroup rendered="#{slctdTb.affDppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affDppSourceFin}" />
+         				<h:outputText value="#{slctdTb.affDppTypeFinance}" />
          				</h:panelGroup>
 				        </p:column>
 				        
@@ -867,7 +867,7 @@
 		     
 		     
 		     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-	<p:commandLink action="#{ppmController.transmettre()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+	<p:commandLink action="#{ppmController.transmettrePspm()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
    <p:confirm header="Confirmation" message="Confrmez-vous la transmission ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre 
             </p:commandLink>
@@ -949,7 +949,7 @@
     
     
     <h:form id="apercu">
-	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="55%" closable="true" header="">
+	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -969,24 +969,24 @@
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun PSPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-6" >
+					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-7" >
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
 				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.affDppSourceFin}" />
+						<p:column headerText="Source Financement" styleClass="col-sm-4" >	        
+         				  <h:outputText value="#{slctdTb.affDppTypeFinance}" />
 				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-9" >	        
+				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" />
 				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-9" >	        
+				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-9" >	        
+				        <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.affDppStrConduc}" />
 				        </p:column>
 				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-9" >	        
+				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.affDppStrBenefi}" />
 				        </p:column>
 				      
@@ -1002,7 +1002,7 @@
     </h:form>
     
      <h:form id="apercuCp">
-	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="55%" closable="true" header="">
+	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -1023,24 +1023,24 @@
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun PSPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-7" >
+					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
 				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.affDppSourceFin}" />
+						<p:column headerText="Source Financement" styleClass="col-sm-4" >	        
+         				  <h:outputText value="#{slctdTb.affDppTypeFinance}" />
 				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-9" >	        
+				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" />
 				        </p:column>
 				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
 				        </p:column>
 				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-5" >	        
+				        <p:column headerText="Structure Conductrice" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.affDppStrConduc}" />
 				        </p:column>
 				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-5" >	        
+				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.affDppStrBenefi}" />
 				        </p:column>
 				        
@@ -1093,9 +1093,9 @@
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
 				        </p:column>
 						<p:column headerText="Source Financement" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.affDppSourceFin}" />
+         				  <h:outputText value="#{slctdTb.affDppTypeFinance}" />
 				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-9" >	        
+				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" />
 				        </p:column>
 				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
@@ -1160,9 +1160,9 @@
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
 				        </p:column>
 						<p:column headerText="Source Financement" styleClass="col-sm-4">	        
-         				  <h:outputText value="#{slctdTb.affDppSourceFin}" />
+         				  <h:outputText value="#{slctdTb.affDppTypeFinance}" />
 				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-6" >	        
+				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" />
 				        </p:column>
 				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
@@ -1229,7 +1229,7 @@
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
 				        </p:column>
 						<p:column headerText="Source Financement" styleClass="col-sm-4">	        
-         				  <h:outputText value="#{slctdTb.affDppSourceFin}" />
+         				  <h:outputText value="#{slctdTb.affDppTypeFinance}" />
 				        </p:column>
 				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" />
@@ -1292,24 +1292,24 @@
 						 selectionMode="single" rowKey="#{slctdTb.affDppId}"
 			               emptyMessage="Aucun #{controleController.type} différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			               
-					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-6">
+					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-7">
          				  <h:outputText value="#{slctdTb.affDppObjet}" />
 				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-9">	        
-         				  <h:outputText value="#{slctdTb.affDppSourceFin}" />
+						<p:column headerText="Source Financement" styleClass="col-sm-4">	        
+         				  <h:outputText value="#{slctdTb.affDppTypeFinance}" />
 				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-9" >	        
+				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" />
 				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-9" >	        
+				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}"/>
 				        </p:column>
 				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-9">	        
+				        <p:column headerText="Structure Conductrice" styleClass="col-sm-4">	        
          				  <h:outputText value="#{slctdTb.affDppStrConduc}" />
 				        </p:column>
 				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-9">	        
+				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-4">	        
          				  <h:outputText value="#{slctdTb.affDppStrBenefi}" />
 				        </p:column>
 				      
