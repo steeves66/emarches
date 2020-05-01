@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-28T15:31:04 -->
+<!-- 2020-04-29T11:02:37 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_psc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e771a51-deef-488c-b7c0-9a03b76eebc6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -309,7 +309,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA["Négociation : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_NEGOCIATION})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="178" y="25" width="182" height="21" uuid="66dd425a-5fe2-41ad-85b4-25e5a177cc98"/>
+					<reportElement x="178" y="47" width="182" height="21" uuid="66dd425a-5fe2-41ad-85b4-25e5a177cc98"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Signature de l'AC : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
 				</textField>
@@ -324,12 +324,12 @@ and af.aff_dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA["Validation DC Bailleur : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_APPROB_BAIL})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="178" y="69" width="182" height="21" uuid="4d4cc817-0a8a-42f6-9d21-9eead915d7fd"/>
+					<reportElement x="178" y="91" width="182" height="21" uuid="4d4cc817-0a8a-42f6-9d21-9eead915d7fd"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Offre Financière : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OF})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="178" y="47" width="182" height="21" uuid="f501be70-b041-454a-968e-d9afb306d20b"/>
+					<reportElement x="178" y="69" width="182" height="21" uuid="f501be70-b041-454a-968e-d9afb306d20b"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Offre Technique : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OT})]]></textFieldExpression>
 				</textField>
@@ -344,7 +344,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA["Fin d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_FIN})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="5" y="90" width="168" height="21" uuid="15e1f12e-685b-4069-af3f-2f887ae83c22"/>
+					<reportElement x="180" y="26" width="179" height="21" uuid="15e1f12e-685b-4069-af3f-2f887ae83c22"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Signature Attributaire : "+new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
 				</textField>

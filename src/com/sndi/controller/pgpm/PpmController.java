@@ -270,7 +270,7 @@ public class PpmController {
 				//Controle Pavé création
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
 		  			 if("".equals(detailPass.getDppStructureConduc()) || "".equals(detailPass.getDppStructureBenefi()) ||"".equals(tydCode) ||"".equals(detailPass.getDppBailleur())
-		  				  ||"".equals(pgpm.getGpgMopCode()) ||"".equals(pgpm.getGpgTymCode()) ||"".equals(ligne.getLbgCode()))
+		  				  ||"".equals(pgpm.getGpgMopCode()) ||"".equals(pgpm.getGpgTymCode()) ||"".equals(ligne.getLbgCode()) || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
@@ -1669,7 +1669,8 @@ public class PpmController {
 	  		if(fipPgpm.getFipId() > 0 ) {
 	  			
 	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("")|| "".equals(detailPass.getDppStructureConduc()) || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || "".equals(detailPass.getDppStructureBenefi()) || tydCode.equalsIgnoreCase("") 
-	  					 || detailPass.getDppDateAvisAoPublication().equals(null) || pgpm.getGpgMopCode().equalsIgnoreCase("") ||"".equals(pgpm.getGpgMopCode()) || pgpm.getGpgTymCode().equalsIgnoreCase("") || "".equals(pgpm.getGpgTymCode()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode())) {
+	  					 || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null || pgpm.getGpgMopCode().equalsIgnoreCase("") ||"".equals(pgpm.getGpgMopCode()) || pgpm.getGpgTymCode().equalsIgnoreCase("")
+	  					 || "".equals(pgpm.getGpgTymCode()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode())) {
 		  			   //Message d'erreur
 		  			   FacesContext.getCurrentInstance().addMessage(null,
 		  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs ainsi que l'imputation budgétaire", "")); 
@@ -2214,7 +2215,7 @@ public class PpmController {
 	  	  if(fipPgpm.getFipId() > 0 ) {
 	  		  
 	  		 if(detailPass.getDppObjet().equalsIgnoreCase("")||"".equals(detailPass.getDppObjet()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode()) 
-	  				|| tydCode.equalsIgnoreCase("") || "".equals(tydCode) ||detailPass.getDppDateAvisAoPublication().equals(null)
+	  				|| tydCode.equalsIgnoreCase("") || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null 
 	  				|| pgspm.getGpgMopCode().equalsIgnoreCase("") || "".equals(pgspm.getGpgMopCode()) || pgspm.getGpgTymCode().equalsIgnoreCase("") || "".equals(pgspm.getGpgTymCode())) {
 	  			   //Message d'erreur
 	  			   FacesContext.getCurrentInstance().addMessage(null,

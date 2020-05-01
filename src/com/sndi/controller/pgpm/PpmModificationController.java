@@ -3036,7 +3036,7 @@ public class PpmModificationController {
 							detail.setDppDateAttApprobDmp(slctdTd.getAffDppDateAttApprobDmp());
 							detail.setDppApprobAno(slctdTd.getAffDppApprobAno());
 							detail.setDppDateNegociation(slctdTd.getAffDppDateNegociation());
-							detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
+							//detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
 							iservice.updateObject(detail);
 							
 							 
@@ -3075,6 +3075,7 @@ public class PpmModificationController {
 				 public void imprimModifPpm() {
 			    	 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_ppm", "Fiche_operation_ppm");
 			     }
+				 
 				 
 				 //Methode d'impression après modification du PSPM
 				 public void imprimModifPspm() {

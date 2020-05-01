@@ -113,19 +113,19 @@ public class GRFProperties {
 
 	
 	public static final String PARAM_UPLOAD_DESTINATION_DAO_LINUX = getProperty("destinationDao", "\\standalone\\Dossiers\\DAO\\");
-	public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Dossiers/DAO/Travaux/");
-	public static final String PARAM_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationFournitures","opt/wildfly8/standalone/Dossiers/DAO/Fournitures/");
-	public static final String PARAM_UPLOAD_DAO_SERVICES_LINUX = getProperty("destinationServices","opt/wildfly8/standalone/Dossiers/DAO/Services/");
-	public static final String PARAM_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Prestations/");	
-	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Dossiers/DAO/Entretien_ des_locaux/");
-	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX = getProperty("destinationFournitures","opt/wildfly8/standalone/Dossiers/DAO/dao_ gestion_de_main_doeuvre_occasionnelle_2016/");
-	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX = getProperty("destinationServices","opt/wildfly8/standalone/Dossiers/DAO/Location_main_doeuvre_ 2016/");
-	public static final String PARAM_UPLOAD_DAO_RESTAURATION_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Dao_Restauration/");
-	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Securite_privee_ 2016/");
+	public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","/opt/wildfly8/standalone/Dossiers/DAO/Travaux/");
+	public static final String PARAM_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationFournitures","/opt/wildfly8/standalone/Dossiers/DAO/Fournitures/");
+	public static final String PARAM_UPLOAD_DAO_SERVICES_LINUX = getProperty("destinationServices","/opt/wildfly8/standalone/Dossiers/DAO/Services/");
+	public static final String PARAM_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationPrestations","/opt/wildfly8/standalone/Dossiers/DAO/Prestations_Services/");	
+	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX = getProperty("destinationTravaux","/opt/wildfly8/standalone/Dossiers/DAO/Entretien_ des_locaux/");
+	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX = getProperty("destinationFournitures","/opt/wildfly8/standalone/Dossiers/DAO/dao_ gestion_de_main_doeuvre_occasionnelle_2016/");
+	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX = getProperty("destinationServices","/opt/wildfly8/standalone/Dossiers/DAO/Location_main_doeuvre_ 2016/");
+	public static final String PARAM_UPLOAD_DAO_RESTAURATION_LINUX = getProperty("destinationPrestations","/opt/wildfly8/standalone/Dossiers/DAO/Dao_Restauration/");
+	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationPrestations","/opt/wildfly8/standalone/Dossiers/DAO/Securite_privee_ 2016/");
 	
 	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC = getProperty("destinationTrue", "\\standalone\\Dossiers\\trueDoc\\");
-	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "opt/wildfly8/standalone/Dossiers/");
-	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC_LINUX = getProperty("destinationTrueLinux", "opt/wildfly8/standalone/Dossiers/trueDoc/");
+	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "/opt/wildfly8/standalone/Dossiers/");
+	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC_LINUX = getProperty("destinationTrueLinux", "/opt/wildfly8/standalone/Dossiers/trueDoc/");
 	public static final String PARAM_SOURCE_LOG = getProperty("sourcelog", "\\standalone\\log\\");
 	public static final String PARAM_SOURCE_LOG_LINUX = getProperty("sourceloglinux", "opt/standalone/log/");
 	

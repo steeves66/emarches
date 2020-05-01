@@ -299,6 +299,8 @@ public class PrqController {
 	  private long natdoc= 7;
 	  private long totalMontantLot;
 	  private long montantRetrait = 0;
+	  private long lotTotal = 0;
+	  private long coutLot = 0;
 	  private String filtreLigne ="";
 	  private String filtreFonction="";
 	  private String filterCode="";
@@ -345,6 +347,8 @@ public class PrqController {
 	  private boolean etatDaoCorrige = false;
 	  private boolean ouvTechnique = true;
 	  private boolean btn_affecter = false;
+	  private boolean btn_save_avis = false;
+	  private boolean btn_save_offre = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -1213,8 +1217,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
 				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
 			_logger.info("objetListe size: "+listeLots.size());	
-			tableauBordController.chargeDataPrq();		
+			tableauBordController.chargeDataPrq();
+			 lotTotal = getNbreLotTotal();
 	}
+     
+
+  //le nombre de lots pour cet avis en cours
+  public int getNbreLotTotal(){ 
+  	int i = iservice.countTableByColumn("T_LOT_AAO", "LAA_ID",
+  			new WhereClause("LAA_AAO_CODE", WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
+  	return	i;	
+  }
    
    public void chargeLotsDac(){
 		 //getListeDAO().clear();
@@ -2578,19 +2591,12 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 			newPieceOffreDac.setTTypePieceOffre(ligne.getTpoCode());
 		 			iservice.addObject(newPieceOffreDac);
 			     }
-		 		userController.setTexteMsg("Pièces enrégisteé avec succès!");
+		 		userController.setTexteMsg("Pièces enrégistrée(s) avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
-				
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Pièces enrégisteé avec succès!", "");
-				FacesContext.getCurrentInstance().addMessage(null, msg);
+				//Désactivation du Bouton d'Enregistrement
+				btn_save_offre = false;
 	 		 }
-    		userController.setTexteMsg("Pièces enrégisteé avec succès!");
-			userController.setRenderMsg(true);
-			userController.setSevrityMsg("success");
-			
-			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Pièces enrégisteé avec succès!", "");
-			FacesContext.getCurrentInstance().addMessage(null, msg);
       }
      
      
@@ -2715,8 +2721,12 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 							 userController.setSevrityMsg("success");
 	 							 
 	 							 newAvis.aaoLibelle = dao.getDacObjet();
-	 			   }
-		    	
+	 							 //Désactivation du bouton d'enregistrement du DAO
+	 							 controleController.btn_dao_pn = false;
+	 							 //Activation du Bouton d'enregistrement d'un Avis d'Appel d'Offres
+	 							  btn_save_avis = true;
+	 							  verifOuverture();
+	 			     }
 		    					//Insertion des pièces
 		          }
     	        }
@@ -2774,8 +2784,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             	            	      newAvis.setAaoCode(keyGen.getCodeAvis());
             	          		      newAvis.setTDacSpecs(dao);
             	          		      newAvis.setTAdresseAvis(new TAdresseAvis(numDetailAdr)); 
-            	          		      newAvis.setAaoDteOuvFin(ouvFin);
-            	          		      newAvis.setAaoDteOuvTec(ouvTech);
+            	          		      if(newAvis.aaoNbrOuv == 1) {
+              	            		  newAvis.setAaoDteOuvFin(ouvTech);
+                	          		  newAvis.setAaoDteOuvTec(ouvTech);
+              	            		  }else {
+              	            		  newAvis.setAaoDteOuvFin(ouvFin);
+                  	          		  newAvis.setAaoDteOuvTec(ouvTech);
+              	            		  }
             	          		      newAvis.setTStatut(new TStatut("D1S"));
             	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
             	          		      iservice.addObject(newAvis); 
@@ -2792,13 +2807,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             	          		 
             	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
             	          		            userController.setRenderMsg(true);
-            	          		            userController.setSevrityMsg("success"); 
+            	          		            userController.setSevrityMsg("success");
+            	          		           //Désactivation du bouton enregistrerAvis
+                	     				    btn_save_avis =false;
+                	     				   //Activation du bouton d'enregistrement des offres
+                	     				    btn_save_offre = true;
             	                  }
         	                   } 
                      }
      
         
-     public void genererLot() {  
+    /* public void genererLot() {  
     	 newVbTemp.setTempLaaAaoCode(newAvis.getAaoCode());
     	 newVbTemp.setTempLaaDacCode(dao.getDacCode());
 		  newVbTemp.setTempLaaDteSaisi(Calendar.getInstance().getTime());
@@ -2811,7 +2830,36 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
 		  userController.setRenderMsg(true);
 		  userController.setSevrityMsg("success");
-	  }
+	  }*/
+        
+      //Methode de Génération des Lots 
+        @Transactional
+        public void genererLot() {  
+       	 if(newAvis.getAaoNbrLot() > lotTotal) {
+       		 newVbTemp.setTempLaaAaoCode(newAvis.getAaoCode());
+           	 newVbTemp.setTempLaaDacCode(dao.getDacCode());
+       		  newVbTemp.setTempLaaDteSaisi(Calendar.getInstance().getTime());
+       		  newVbTemp.setTempLaaMtLot("0");
+       		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(newAvis.getAaoNbrLot()));//Convertir un long en String
+       		  newVbTemp.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+       		  newVbTemp.setTempType("LOT");
+       		  iservice.addObject(newVbTemp);
+       		  chargeLots();
+       		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
+       		  userController.setRenderMsg(true);
+       		  userController.setSevrityMsg("success");
+       		
+       	 }else {
+       		 /*userController.setTexteMsg("Veuillez respecter le nombre de lots renseigné !");
+   			 userController.setRenderMsg(true);
+   			 userController.setSevrityMsg("success");*/
+   			 
+   			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
+			 FacesContext.getCurrentInstance().addMessage(null, msg);
+       	 }
+       	 
+   	  }
+	  
 	  
      
      //Enregistrement d'une adresse
@@ -2823,6 +2871,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	    userController.setRenderMsg(true);
 		userController.setSevrityMsg("success");
 	  }
+	  
+	    //Methode vider
+	     public void vider() { 
+	    	 daoDetail = new VPpmDao();
+	    	 dao = new TDacSpecs();
+	    	 detailsPieces.clear();
+	    	 listSelectionTypePieces.clear();
+	    	 newAvis = new TAvisAppelOffre();
+	    	 newVbTemp = new VbTempParametreLot();
+	    	 listeLots = new ArrayList<TLotAao>();
+	     }
 	  
 	  
 	  
@@ -3485,21 +3544,30 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 }
 	 }
 	 
-	  //Ajouter manuellement un lot
+	//Ajouter manuellement un lot
+	 @Transactional
     public void saveLot(){
-    	 if(newAvis.getAaoNbrLot() > newLot.getLaaNum()) {
-    		 
-    		 //newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+    	 if(newAvis.getAaoNbrLot() > lotTotal) {
+    		 newLot.setTDacSpecs(dao);
+    		 newLot.setLaaOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+    		 newLot.setLaaDteSaisi(Calendar.getInstance().getTime());
+    		 newLot.setLaaCoutLot(coutLot);
     		 newLot.setTAvisAppelOffre(newAvis);
         	 iservice.addObject(newLot);
         	 chargeLots();
+        	 newLot = new TLotAao();
         	 userController.setTexteMsg("Lot enregistré avec succès !");
 			 userController.setRenderMsg(true);
 			 userController.setSevrityMsg("success");
     		 
     	 }else {
-    		 FacesContext.getCurrentInstance().addMessage(null,
-			new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez respecter le nombre de lots renseigné", ""));
+    		
+    		 /*userController.setTexteMsg("Veuillez respecter le nombre de lots renseigné !");
+			 userController.setRenderMsg(true);
+			 userController.setSevrityMsg("success");*/
+			 
+			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
+			 FacesContext.getCurrentInstance().addMessage(null, msg);
     	 }
 	}
     
@@ -3752,7 +3820,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			  TStatut statuts = new TStatut();
 					  
 			  if(!LS.isEmpty()) {statuts = LS.get(0);
-			   //historisation d
+			   //historisation des PRQ
 				THistoDac histo =new THistoDac();
 				histo.setHacCommentaire("PRQ retiré");
 				histo.setHacDate(Calendar.getInstance().getTime());
@@ -3761,7 +3829,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				histo.setTOperateur(userController.getSlctd().getTOperateur());
 				histo.setTFonction(userController.getSlctd().getTFonction());
 				iservice.addObject(histo);
-				//Afficher la liste des DAO en attente de retrait
+				//Afficher la liste des PRQ en attente de retrait
 				chargeDataARetirer();
 				//Message de confirmation du retrait
 				userController.setTexteMsg("Retrait effectué avec succès!");
@@ -3799,6 +3867,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					chargeDataARetirer();
 					chargeDataVente();
 					chargeDataPriseCompte();
+					vider();
 					_logger.info("value: "+value+" action "+action);	
 					break;
 				case "prq2":
@@ -5598,7 +5667,37 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	public void setListePiecesDao(List<VPieceDac> listePiecesDao) {
 		this.listePiecesDao = listePiecesDao;
 	}
-	
-	
-		
+
+	public long getLotTotal() {
+		return lotTotal;
+	}
+
+	public void setLotTotal(long lotTotal) {
+		this.lotTotal = lotTotal;
+	}
+
+	public long getCoutLot() {
+		return coutLot;
+	}
+
+	public void setCoutLot(long coutLot) {
+		this.coutLot = coutLot;
+	}
+
+	public boolean isBtn_save_avis() {
+		return btn_save_avis;
+	}
+
+	public void setBtn_save_avis(boolean btn_save_avis) {
+		this.btn_save_avis = btn_save_avis;
+	}
+
+	public boolean isBtn_save_offre() {
+		return btn_save_offre;
+	}
+
+	public void setBtn_save_offre(boolean btn_save_offre) {
+		this.btn_save_offre = btn_save_offre;
+	}
+			
 }

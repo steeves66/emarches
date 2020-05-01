@@ -49,6 +49,7 @@
 				<i class="fa fa-check pr10"></i>
 				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
+				
       <p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/>
       
      <p:wizard flowListener="#{amiController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
@@ -281,7 +282,7 @@
 			        </p:selectOneRadio>
 				     </td>
 				     <td style="width: 220px">
-				     <label  class="control-label">Responsabilité des bailleurs</label>
+				     <label  class="control-label">Responsable des bailleurs</label>
 				     </td>
 				     <td style="width: 320px">
 				     <p:inputText  type="text" styleClass="form-control" value="#{amiController.newAvis.aaoRespBai}"   style="width: 100%" />
@@ -316,7 +317,7 @@
                 </h:panelGroup>
                 </h:panelGroup>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Nombre de lot<span style="color:red;"> *</span></label>
+                  <label class="col-sm-3 control-label">Nombre de lot(s)<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
 		          <p:inputText  type="text" styleClass="form-control" value="#{amiController.newAvis.aaoNbrLot}"  style="width: 100%" />
                   </div>
@@ -340,11 +341,7 @@
             <div class="box box-success box-solid">
              <div class="box-header with-border">
              <div class="col-md-12 "><div  style="color: #fff">RETRAIT DES #{controleController.type} CHEZ LE REPRESENTANT</div></div> 
-			         <!-- <div class="col-md-2 "> 
-			           <p:commandLink oncomplete="PF('DetailAdr').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
-								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
-								</p:commandLink>
-			         </div> -->
+			         
          </div>
          <div class="box-body">
          <p:messages id="messages" showDetail="false" autoUpdate="true"  closable="true"/>   
@@ -463,28 +460,20 @@
 				  <div class="col-sm-2">
                   <p:inputText type="text" value="#{amiController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
                   </div>
-                </div>
-                 
-                
-              
+                </div> 
          </div>
          </div>
          </div>
          </div>
-         
-         
-  
+
            </div>
              <div class="row">
                 <div class="pull-right ">
-                       
-                       
-					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{amiController.saveAvis()}"  update=":content">
-				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-				             <i class="ace-icon fa fa-save"></i> Enregistrer
-				            </p:commandLink>
-					   
-					     </div>
+				<p:commandLink rendered="#{amiController.btn_save_avis}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{amiController.saveAvis()}"  update=":content">
+				 <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				  <i class="ace-icon fa fa-save"></i> Enregistrer
+				 </p:commandLink>
+				</div>
            </div>
           </p:panel>
          </p:tab>
@@ -510,7 +499,7 @@
          <div class="box-body">
              <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{amiController.listeLots}"  editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
          				<p:column headerText="N°Lot" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.laaNum}"/>
+				            <h:outputText value="#{slctdTb.laaId}"/>
 				        </p:column>
 				        <p:column headerText="LIBELLE" styleClass="col-sm-6">
 				          <p:cellEditor>
@@ -545,10 +534,7 @@
 							<i class="fa fa-plus"></i>
 						  </p:commandLink>
 				        </p:column>
-                         
-                
-				        
-				        
+
 				         <p:column headerText="Actions" width="4%">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{amiController.removeLot}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
@@ -559,11 +545,8 @@
 				        
                  </p:dataTable> 
                  
-                  <br/> 
-                
+                  <br/>  
          </div>
-         
-         
          </div>
          </div>
            </div>
@@ -573,21 +556,7 @@
          
          <p:tab id="Poffre" title="Pièces de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row"> 
-           <p:messages id="message3" showDetail="false" autoUpdate="true"  closable="true"/>
-           
             <div class="col-md-12">
-            
-            	<h:panelGroup rendered="#{userController.renderMsg}">
-				<br/>
-				<div class="alert alert-success light alert-dismissable" >
-				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
-				  action="#{userController.initMessage()}"  update=":content">
-				<span class="hidden-xs"> x</span>
-				</p:commandLink>
-				<i class="fa fa-check pr10"></i>
-				<strong>Succès!</strong> #{userController.texteMsg}.</div>
-				</h:panelGroup>
-			
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div class="col-md-9 "><div  style="color: #fff">PIECES CONSTITUTIVES DE L'OFFRE </div></div> 
@@ -602,7 +571,7 @@
                  </p:dataTable> 
                   <br/> 
                  <div class="pull-right ">
-			            <p:commandLink action="#{amiController.savePieceOffres()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl:finance">
+			            <p:commandLink rendered="#{amiController.btn_save_offre}" action="#{amiController.savePieceOffres()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
@@ -692,7 +661,7 @@
 	            <div class="box-body">
 	               <p:dataTable id="lots" styleClass="table dt-on-steroids mb0" scrollable="true" scrollHeight="150" var="slctdTb" value="#{amiController.listeLots}" emptyMessage="Aucun lot trouvé">
 					        <p:column headerText="N°lot" styleClass="col-sm-1">
-					            <h:outputText value="#{slctdTb.laaNum}"/>
+					            <h:outputText value="#{slctdTb.laaId}"/>
 					        </p:column>
 					        <p:column headerText="Libellé" styleClass="col-sm-5">
 					            <h:outputText value="#{slctdTb.laaObjet}" />
@@ -757,7 +726,7 @@
                   </div>
 	             </div>
 	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Responsabilité des bailleurs</label></div>
+                  <div class="col-sm-4"><label class="pull-right">Responsable des bailleurs</label></div>
                   <div class="col-sm-8">
                     <label><h:outputText styleClass="text-muted" value="#{amiController.newAvis.aaoRespBai}"  style="width: 100%" readonly="true"/></label>
                   </div>
@@ -996,9 +965,7 @@
 	                  <p:inputText  type="text" styleClass="form-control" value="#{amiController.newVbTemp.tempLaaLibGenerique}" id="lib" style="width: 100%" />
 	                  </div>
 	                </div>
-	                
-                 
-				  
+
 				   <div class="form-group ">
 	                  <label for="montCau" class="col-sm-2 control-label"><b>Intervalle de </b></label>
 	                  <div class="col-sm-1">
@@ -1012,7 +979,7 @@
 	                </div>
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{amiController.genererLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:finance">
+			            <p:commandLink action="#{amiController.genererLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Générer			            </p:commandLink>
               </div>
@@ -1031,45 +998,19 @@
 	                  <p:inputText  type="text" styleClass="form-control" value="#{amiController.newLot.laaObjet}"  id="lib" style="width: 100%" />
 	                  </div>
 	                </div>
-	                
-	              
-                 <div class="form-group">
-	                  <label  class="col-sm-2 control-label"></label>
-					  <div class="col-sm-10">
-					   <p:selectOneRadio id="consoless" value="#{amiController.sit}">
-                     <p:ajax  listener="#{amiController.checkMtExig()}" update="NewLotlog:MtExig"></p:ajax>
-			            <f:selectItem itemLabel="Caution provisoire exigée" itemValue="Caution_exigee" />
-			        </p:selectOneRadio>
-					  </div>
-				  </div>
 				  
-				   <div class="form-group ">
-				   <h:panelGroup id="MtExig">
-				   <h:panelGroup rendered="#{amiController.etatMtExig}">
-	                  <label for="montCau" class="col-sm-2 control-label"><b>Montant Caution</b></label>
-	                  <div class="col-sm-4">
-	                    <p:inputText type="text" id="montCau" styleClass="form-control" value="#{amiController.newLot.laaMtCaut}" style="width: 100%" />
-	                  </div>
-	                 </h:panelGroup>
-	                 </h:panelGroup>
-	                  
-	                  <label for="mont" class="col-sm-2 control-label"><b>Cout Lot/DAO</b></label>
-	                  <div class="col-sm-4">
-	                    <p:inputText type="text" id="mont" styleClass="form-control" value="#{amiController.newLot.laaMtEst}" style="width: 100%" />
-	                  </div>
-	                </div>
-                
-	                 <div class="form-group ">
+
+	               <div class="form-group ">
 	                  <label for="lieu" class="col-sm-2 control-label"><b>Lieu d'exécution </b></label>
 	                  <div class="col-sm-10">
 	                  <p:inputText  type="text" styleClass="form-control" id="lieu" value="#{amiController.newLot.laaLieuExe}" style="width: 100%" /> 
 	                  </div>
-	                </div>
+	              </div>
 	                
 	              
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{amiController.saveLot()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":NewLotlog">
+			            <p:commandLink action="#{amiController.saveLot()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>

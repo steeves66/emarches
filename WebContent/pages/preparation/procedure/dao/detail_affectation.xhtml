@@ -194,7 +194,7 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Délai de validité des offres</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoDelaiVal}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText> </label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoDelaiVal}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="dd/MM/yyyy" type="date" /></h:outputText> </label>
                   </div>
 	             </div>
 	            
@@ -212,28 +212,28 @@
 	             </div>
 	             
 	             <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Responsabilité des bailleurs</label></div>
+                  <div class="col-sm-4"><label class="pull-right">Responsable des bailleurs</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoRespBai}"   style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoRespBai}"   style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Mode de qualification</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	               <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Seuil de qualification </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted" value="#{etatsDaoController.avis.aaoPrecisModEval}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	                <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Nombre de lot </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrLot}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrLot}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
@@ -264,17 +264,17 @@
 		             
 		           <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
                   <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoLieuRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoLieuRecep}"  style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                   <div class="col-sm-1"><label class="pull-right">Date</label></div>
                     <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                    <div class="col-sm-1"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
               
 	             </div>
@@ -285,11 +285,11 @@
 		                <div class="row">
 		           <div class="col-sm-2"><label class="pull-right">Lieu</label></div>
                   <div class="col-sm-3">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
                    <div class="col-sm-2"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}" style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}" style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
@@ -297,17 +297,17 @@
 	              
 		           <div class="col-sm-2"><label class="pull-right">Nbre Ouv</label></div>
                   <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                   <div class="col-sm-2"><label class="pull-right">Ouv Tech</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvTec}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvTec}"  style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
                   
                    <div class="col-sm-2"><label class="pull-right">Ouv Fin</label></div>
                     <div class="col-sm-1">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvFin}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteOuvFin}"  style="width: 100%" > <f:convertDateTime pattern="dd/MM/yyyy" type="date" />  </h:outputText></label>
                   </div>
               
 	             

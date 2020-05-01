@@ -14,7 +14,7 @@
         <!-- #{controleController.libelle} -->
         <!-- SAISIE D'UN NOUVEAU DAO  -->
         #{controleController.libelleDao1}
-        <small> #{controleController.libellesmall} </small> 
+        <small>  </small> 
       </h1>
       <ol class="breadcrumb">
       <li>
@@ -340,11 +340,7 @@
             <div class="box box-success box-solid">
              <div class="box-header with-border">
              <div class="col-md-12 "><div  style="color: #fff">RETRAIT DES #{controleController.type} CHEZ LE REPRESENTANT</div></div> 
-			         <!-- <div class="col-md-2 "> 
-			           <p:commandLink oncomplete="PF('DetailAdr').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
-								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
-								</p:commandLink>
-			         </div> -->
+			         
          </div>
          <div class="box-body">
          <p:messages id="messages" showDetail="false" autoUpdate="true"  closable="true"/>   
@@ -478,8 +474,7 @@
                   </div>
                   <label  class="col-sm-2 control-label">Ouv Technique</label>
 				  <div class="col-sm-2">    
-                  <p:calendar value="#{daoController.ouvTech}" style="width: 100%" > 
-                  <p:ajax event="blur" listener="#{daoController.equalDate()}" update="gnl:idOuv"/>	
+                  <p:calendar value="#{daoController.ouvTech}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
                   </p:calendar>
                   </div>
                   
@@ -487,7 +482,7 @@
                   <h:panelGroup rendered="#{daoController.ouvTechnique}">
                   <label  class="col-sm-2 control-label">Ouv Financière</label> 
 				  <div class="col-sm-2">
-                  <p:calendar value="#{daoController.ouvFin}" style="width: 100%" />   
+                  <p:calendar value="#{daoController.ouvFin}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" />   
                   </div>
                   </h:panelGroup>
                   </h:panelGroup>
@@ -497,25 +492,20 @@
          </div>
          </div>
          
-         
-  
            </div>
              <div class="row">
-                <div class="pull-right ">
-                       
-                       
-					       <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.saveAvis()}"  update=":content">
-				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-				             <i class="ace-icon fa fa-save"></i> Enregistrer
-				            </p:commandLink>
-					   
-					     </div>
+                <div class="pull-right ">      
+				  <p:commandLink rendered="#{daoController.btn_save_avis}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{daoController.saveAvis()}"  update=":content">
+				  <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				  <i class="ace-icon fa fa-save"></i> Enregistrer
+				  </p:commandLink>
+			  </div>
            </div>
           </p:panel>
          </p:tab>
          
 		 <p:tab id="tabLot" title="Saisie des lots" titleStyle="background-color: #f88b2e;background-image: none">
-           <div class="row">    
+           <div class="row">   
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
@@ -535,7 +525,7 @@
          <div class="box-body">
              <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeLots}"  editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
          				<p:column headerText="N°Lot" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.laaNum}"/>
+				            <h:outputText value="#{slctdTb.laaId}"/>
 				        </p:column>
 				        <p:column headerText="LIBELLE" styleClass="col-sm-6">
 				          <p:cellEditor>
@@ -597,21 +587,9 @@
          
          <p:tab id="Poffre" title="Pièces de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row"> 
-           <p:messages id="message3" showDetail="false" autoUpdate="true"  closable="true"/>
            
             <div class="col-md-12">
-            
-            	<h:panelGroup rendered="#{userController.renderMsg}">
-				<br/>
-				<div class="alert alert-success light alert-dismissable" >
-				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
-				  action="#{userController.initMessage()}"  update=":content">
-				<span class="hidden-xs"> x</span>
-				</p:commandLink>
-				<i class="fa fa-check pr10"></i>
-				<strong>Succès!</strong> #{userController.texteMsg}.</div>
-				</h:panelGroup>
-			
+
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div class="col-md-9 "><div  style="color: #fff">PIECES CONSTITUTIVES DE L'OFFRE </div></div> 
@@ -626,7 +604,7 @@
                  </p:dataTable> 
                   <br/> 
                  <div class="pull-right ">
-			            <p:commandLink action="#{daoController.savePieceOffres()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl:finance">
+			            <p:commandLink action="#{daoController.savePieceOffres()}" styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_offre}" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
@@ -716,7 +694,7 @@
 	            <div class="box-body">
 	               <p:dataTable id="lots" styleClass="table dt-on-steroids mb0" scrollable="true" scrollHeight="150" var="slctdTb" value="#{daoController.listeLots}" emptyMessage="Aucun lot trouvé">
 					        <p:column headerText="N°lot" styleClass="col-sm-1">
-					            <h:outputText value="#{slctdTb.laaNum}"/>
+					            <h:outputText value="#{slctdTb.laaId}"/>
 					        </p:column>
 					        <p:column headerText="Libellé" styleClass="col-sm-5">
 					            <h:outputText value="#{slctdTb.laaObjet}" />
@@ -833,7 +811,7 @@
                   </div>
                     <div class="col-sm-1"><label class="pull-right">Date</label></div>
                   <div class="col-sm-2">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoDateRecep}" style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" /></h:outputText></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.newAvis.aaoDateRecep}" style="width: 100%" readonly="true"><f:convertDateTime pattern="dd/MM/yyyy" type="date" /></h:outputText></label>
                   </div>
                    <div class="col-sm-1"><label class="pull-right">Heure</label></div>
                   <div class="col-sm-3">
@@ -1038,7 +1016,7 @@
 	                </div>
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{daoController.genererLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl:finance">
+			            <p:commandLink action="#{daoController.genererLot()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Générer			            </p:commandLink>
               </div>
@@ -1058,33 +1036,6 @@
 	                  </div>
 	                </div>
 	                
-	              
-                 <div class="form-group">
-	                  <label  class="col-sm-2 control-label"></label>
-					  <div class="col-sm-10">
-					   <p:selectOneRadio id="consoless" value="#{daoController.sit}">
-                     <p:ajax  listener="#{daoController.checkMtExig()}" update="NewLotlog:MtExig"></p:ajax>
-			            <f:selectItem itemLabel="Caution provisoire exigée" itemValue="Caution_exigee" />
-			        </p:selectOneRadio>
-					  </div>
-				  </div>
-				  
-				   <div class="form-group ">
-				   <h:panelGroup id="MtExig">
-				   <h:panelGroup rendered="#{daoController.etatMtExig}">
-	                  <label for="montCau" class="col-sm-2 control-label"><b>Montant Caution</b></label>
-	                  <div class="col-sm-4">
-	                    <p:inputText type="text" id="montCau" styleClass="form-control" value="#{daoController.newLot.laaMtCaut}" style="width: 100%" />
-	                  </div>
-	                 </h:panelGroup>
-	                 </h:panelGroup>
-	                  
-	                  <label for="mont" class="col-sm-2 control-label"><b>Cout Lot/DAO</b></label>
-	                  <div class="col-sm-4">
-	                    <p:inputText type="text" id="mont" styleClass="form-control" value="#{daoController.newLot.laaMtEst}" style="width: 100%" />
-	                  </div>
-	                </div>
-                
 	                 <div class="form-group ">
 	                  <label for="lieu" class="col-sm-2 control-label"><b>Lieu d'exécution </b></label>
 	                  <div class="col-sm-10">
@@ -1095,7 +1046,7 @@
 	              
 	                 <div class="row">
                 <div class="pull-right ">
-			            <p:commandLink action="#{daoController.saveLot()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":NewLotlog">
+			            <p:commandLink action="#{daoController.saveLot()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('newLotdlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
