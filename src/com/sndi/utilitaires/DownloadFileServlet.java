@@ -95,6 +95,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
    
    }
    
+   
    public void downloadFile(String fichierComplet, String nomFichier) throws IOException
    {
 	   HttpServletRequest request = (HttpServletRequest)
@@ -102,10 +103,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
       File file = new File(fichierComplet);
       if(file.exists() && file.isFile()) {
     	  InputStream fis = new FileInputStream(file);
-          
-          
-    	     
-          
+                 
           
           ServletContext context = request.getServletContext();
           
@@ -133,7 +131,6 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
           while ((bytesRead = fis.read(buffer)) != -1) {
         	  response.getOutputStream().write(buffer, 0, bytesRead);
           }
-          
           			fis.close();
           			response.getOutputStream().flush();
           			response.getOutputStream().close();
@@ -145,6 +142,11 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
     	}
      
    }
+   
+   
+   
+   
+   
    
    public void copieFileToTrueFolder(String fichierComplet, String nomFichier) throws IOException
    {

@@ -37,6 +37,8 @@ public class VPgpmFonction implements java.io.Serializable {
 	private Date gpgDateSaisie;
 	private String gpgStrCode;
 	private String gpgLibFin;
+	/*private String gpgFonCodPf;
+	private String gpgFonCodDmp;*/
 	private String tymLibelleCourt;
 	private String tymTymCode;
 	private String mopLibelleLong;
@@ -60,7 +62,8 @@ public class VPgpmFonction implements java.io.Serializable {
 
 	public VPgpmFonction(long gpgId, long gpgPlgId, Long gpgAgpId, String gpgTypePlan, String gpgStaCode,
 			String gpgTymCode, String gpgMopCode, String gpgCode, String gpgObjet, Integer gpgNumeroOrdre,
-			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin,String gpgLibFin, Date gpgDateDao, String gpgActeurSaisie,
+			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin,String gpgLibFin,/*String gpgFonCodPf,
+			String gpgFonCodDmp,*/ Date gpgDateDao, String gpgActeurSaisie,
 			String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, String tymLibelleCourt,String tymTymCode,
 			String mopLibelleLong, String plgFonCod, String fonLibelle) {
 		this.gpgId = gpgId;
@@ -82,6 +85,8 @@ public class VPgpmFonction implements java.io.Serializable {
 		this.gpgDateSaisie = gpgDateSaisie;
 		this.gpgStrCode = gpgStrCode;
 		this.gpgLibFin = gpgLibFin;
+		/*this.gpgFonCodPf = gpgFonCodPf;
+		this.gpgFonCodDmp = gpgFonCodDmp;*/
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.tymTymCode = tymTymCode;
 		this.mopLibelleLong = mopLibelleLong;
@@ -261,6 +266,24 @@ public class VPgpmFonction implements java.io.Serializable {
 	public void setGpgLibFin(String gpgLibFin) {
 		this.gpgLibFin = gpgLibFin;
 	}
+	
+/*	@Column(name = "GPG_FON_COD_PF", length = 20)
+	public String getGpgFonCodPf() {
+		return this.gpgFonCodPf;
+	}
+
+	public void setGpgFonCodPf(String gpgFonCodPf) {
+		this.gpgFonCodPf = gpgFonCodPf;
+	}
+
+	@Column(name = "GPG_FON_COD_DMP", length = 20)
+	public String getGpgFonCodDmp() {
+		return this.gpgFonCodDmp;
+	}
+
+	public void setGpgFonCodDmp(String gpgFonCodDmp) {
+		this.gpgFonCodDmp = gpgFonCodDmp;
+	}*/
 
 	@Column(name = "TYM_LIBELLE_COURT", nullable = false, length = 500)
 	public String getTymLibelleCourt() {
