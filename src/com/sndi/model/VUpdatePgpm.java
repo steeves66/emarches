@@ -20,7 +20,7 @@ import org.hibernate.annotations.Immutable;
 public class VUpdatePgpm implements java.io.Serializable {
 
 	private Long affGpgId;
-	private long affGpgPlgId;
+	private Long affGpgPlgId;
 	private Long affGpgAgpId;
 	private String affGpgTypePlan;
 	private String affGpgStaCode;
@@ -73,11 +73,11 @@ public class VUpdatePgpm implements java.io.Serializable {
 	private short plgGesCode;
 	private String plgCode;
 	private String plgLibelle;
-	private long fipId;
+	private Long fipId;
 	private String fipDevCode;
 	private String fipBaiCode;
 	private String fipSouCode;
-	private long fipGpgId;
+	private Long fipGpgId;
 	private BigDecimal fipMontantCfa;
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
@@ -95,10 +95,10 @@ public class VUpdatePgpm implements java.io.Serializable {
 	public VUpdatePgpm() {
 	}
 
-	public VUpdatePgpm(long affGpgPlgId, String affGpgTypePlan, String affGpgStaCode, String affGpgTymCode,String gpgLibFin,
+	public VUpdatePgpm(Long affGpgPlgId, String affGpgTypePlan, String affGpgStaCode, String affGpgTymCode,String gpgLibFin,
 			String affGpgMopCode, long affId, long gpgId, long gpgPlgId, String gpgTypePlan, String gpgStaCode,
 			String gpgTymCode, String gpgMopCode, long plgId, String plgStrCode, String plgFonCod, short plgGesCode,
-			long fipId, String fipDevCode, String fipSouCode, long fipGpgId, String mopCode, String mopLibelleCourt,
+			Long fipId, String fipDevCode, String fipSouCode, Long fipGpgId, String mopCode, String mopLibelleCourt,
 			String tymCode, String tymLibelleCourt) {
 		this.affGpgPlgId = affGpgPlgId;
 		this.affGpgTypePlan = affGpgTypePlan;
@@ -127,7 +127,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.gpgLibFin = gpgLibFin;
 	}
 
-	public VUpdatePgpm(Long affGpgId, long affGpgPlgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgStaCode,String gpgLibFin,
+	public VUpdatePgpm(Long affGpgId, Long affGpgPlgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgStaCode,String gpgLibFin,
 			String affGpgTymCode, String affGpgMopCode, String affGpgCode, String affGpgObjet,
 			Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire, String affGpgSourceFin,
 			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,
@@ -137,8 +137,8 @@ public class VUpdatePgpm implements java.io.Serializable {
 			String gpgCode, String gpgObjet, Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire,
 			String gpgSourceFin, Date gpgDateDao, String gpgActeurSaisie, String gpgStatutRetour, Date gpgDateSaisie,
 			String gpgStrCode, Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp, long plgId,
-			String plgStrCode, String plgFonCod, short plgGesCode, String plgCode, String plgLibelle, long fipId,
-			String fipDevCode, String fipBaiCode, String fipSouCode, long fipGpgId, BigDecimal fipMontantCfa,
+			String plgStrCode, String plgFonCod, short plgGesCode, String plgCode, String plgLibelle, Long fipId,
+			String fipDevCode, String fipBaiCode, String fipSouCode, Long fipGpgId, BigDecimal fipMontantCfa,
 			BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance, BigDecimal fipTresor,
 			String mopCode, String mopLibelleCourt, String mopLibelleLong, String tymCode, String tymLibelleCourt,
 			String tymLibelleLong, String tymTymCode, String tymGroupe) {
@@ -237,11 +237,11 @@ public class VUpdatePgpm implements java.io.Serializable {
 	}
 
 	@Column(name = "AFF_GPG_PLG_ID", nullable = false, precision = 10, scale = 0)
-	public long getAffGpgPlgId() {
+	public Long getAffGpgPlgId() {
 		return this.affGpgPlgId;
 	}
 
-	public void setAffGpgPlgId(long affGpgPlgId) {
+	public void setAffGpgPlgId(Long affGpgPlgId) {
 		this.affGpgPlgId = affGpgPlgId;
 	}
 
@@ -698,11 +698,11 @@ public class VUpdatePgpm implements java.io.Serializable {
 	}
 
 	@Column(name = "FIP_ID", nullable = false, precision = 10, scale = 0)
-	public long getFipId() {
+	public Long getFipId() {
 		return this.fipId;
 	}
 
-	public void setFipId(long fipId) {
+	public void setFipId(Long fipId) {
 		this.fipId = fipId;
 	}
 
@@ -734,11 +734,11 @@ public class VUpdatePgpm implements java.io.Serializable {
 	}
 
 	@Column(name = "FIP_GPG_ID", nullable = false, precision = 10, scale = 0)
-	public long getFipGpgId() {
+	public Long getFipGpgId() {
 		return this.fipGpgId;
 	}
 
-	public void setFipGpgId(long fipGpgId) {
+	public void setFipGpgId(Long fipGpgId) {
 		this.fipGpgId = fipGpgId;
 	}
 
