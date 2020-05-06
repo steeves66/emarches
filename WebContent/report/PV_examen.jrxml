@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-13T04:18:34 -->
+<!-- 2020-05-06T11:07:22 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_examen" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e45627bb-1d24-49e7-b8b1-f0c236dd5665">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -52,6 +52,7 @@ where pv.dac_code = $P{param_code_1}]]>
 		<field name="TPI_LIBELLE" class="java.lang.String"/>
 		<field name="STR_CODE" class="java.lang.String"/>
 		<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+		<field name="COR_RESULTAT" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="param_image" class="java.lang.String">
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
@@ -145,7 +146,7 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 		</band>
 	</title>
 	<detail>
-		<band height="459">
+		<band height="177">
 			<rectangle>
 				<reportElement x="0" y="8" width="561" height="102" uuid="df261a78-0109-40e0-9276-e0e21ac3fc29"/>
 			</rectangle>
@@ -220,7 +221,8 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
 					<jr:column width="50" uuid="273b6ebb-a420-40f6-ba23-96346357e816">
-						<jr:tableHeader style="Table_TH" height="30">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="50" height="30" uuid="5082e3b5-090f-4163-a763-ba2ba9e0e440"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -236,7 +238,8 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="174" uuid="89717229-fec1-48d9-aa2b-07977c8d3c52">
-						<jr:tableHeader style="Table_TH" height="30">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne2"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="174" height="30" uuid="340315c8-1c8b-4c17-ac7f-aa2eabc3c06b"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -255,7 +258,8 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="76" uuid="1e4ac2e7-f414-4fde-87bc-b50339389d87">
-						<jr:tableHeader style="Table_TH" height="30">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="76" height="30" uuid="98d605ac-6481-4cca-9040-87ddc69ca5d5"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -273,7 +277,8 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="70" uuid="ee56c89a-bb59-47e2-bbf9-357eeb30ba61">
-						<jr:tableHeader style="Table_TH" height="30">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne4"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="70" height="30" uuid="33039836-b08b-4bd7-aa49-148ba48dab98"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -282,6 +287,14 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 								<text><![CDATA[Conforme]]></text>
 							</staticText>
 						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="3c711d9f-0fd0-43fb-a6e8-4a4eb3f32c2f"/>
+								<box padding="5"/>
+								<textElement textAlignment="Right" verticalAlignment="Middle"/>
+								<text><![CDATA[RESULTAT]]></text>
+							</staticText>
+						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="70" height="30" uuid="9a65a9f0-5560-403a-b295-8b95118714de"/>
@@ -291,7 +304,8 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 						</jr:detailCell>
 					</jr:column>
 					<jr:column width="191" uuid="622c5526-92c1-4f94-9750-8a5bd2a05040">
-						<jr:tableHeader style="Table_TH" height="30">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne5"/>
+						<jr:tableHeader style="Table_TH" height="30" rowSpan="1">
 							<staticText>
 								<reportElement x="0" y="0" width="191" height="30" uuid="45b32a32-47be-4d88-9b81-e65f3af81888"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -300,6 +314,13 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 								<text><![CDATA[Observations]]></text>
 							</staticText>
 						</jr:tableHeader>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="191" height="30" uuid="3cca1164-6b31-4fa8-bc61-57686f66337d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA["Dossier "+$F{COR_RESULTAT}]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
 						<jr:detailCell style="Table_TD" height="30">
 							<textField isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="191" height="30" uuid="7f910a88-e084-4efa-9b19-cc37156f5206"/>
@@ -315,24 +336,12 @@ and cs.cor_dac_code  = $P{param_code_1}]]>
 				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{COR_DAC_CODE}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="0" y="437" width="70" height="21" uuid="58822937-f915-44a2-a39e-1a590655edb4"/>
-				<textElement>
-					<font size="14" isBold="true" isUnderline="true"/>
-				</textElement>
-				<text><![CDATA[Résultat : ]]></text>
-			</staticText>
-			<textField isBlankWhenNull="true">
-				<reportElement x="70" y="437" width="150" height="21" uuid="8fb14b79-0140-428a-9ab8-d4323fd9ec67"/>
-				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA["DAO "+$F{COR_RESULTAT}]]></textFieldExpression>
-			</textField>
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="19" splitType="Stretch">
-			<textField isBlankWhenNull="true">
-				<reportElement x="303" y="0" width="269" height="14" uuid="bb98650c-d88a-40b7-8f8a-21dce5ce31ad"/>
+		<band height="30" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="323" y="0" width="238" height="30" uuid="bb98650c-d88a-40b7-8f8a-21dce5ce31ad"/>
 				<textElement>
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
