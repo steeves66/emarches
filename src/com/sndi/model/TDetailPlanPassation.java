@@ -81,6 +81,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private String dppRecherche;
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
+	private Long dppMontant;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -113,7 +114,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, String dppStatutRetour,
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
-			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
+			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TLBudgets = TLBudgets;
@@ -168,6 +169,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppRecherche = dppRecherche;
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
+		this.dppMontant = dppMontant;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -693,6 +695,15 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppFonCodDmp(String dppFonCodDmp) {
 		this.dppFonCodDmp = dppFonCodDmp;
+	}
+	
+	@Column(name = "DPP_MONTANT", precision = 15, scale = 0)
+	public Long getDppMontant() {
+		return this.dppMontant;
+	}
+
+	public void setDppMontant(Long dppMontant) {
+		this.dppMontant = dppMontant;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

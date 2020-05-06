@@ -779,7 +779,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectPartBai = true;
 					// sourfin="";
 				 }else 
-					 if(sourfin.equalsIgnoreCase("Etat")){
+					 if(sourfin.equalsIgnoreCase("ETAT")){
 					 selectBailleur = false;
 					 selectTresor = true;
 					 selectPartBai= false;
@@ -1778,8 +1778,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       @Transactional
       public void creerDetailPlanRappel() throws IOException{
     	  
-    	  if(finAgpm.getFinId() > 0 ) {
-    		  
+    	 /* if(finAgpm.getFinId() > 0 ) {*/
     		  
         	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) || detailPlan.getGpgCommentaire().equalsIgnoreCase("")|| "".equals(detailPlan.getGpgCommentaire()) || marche.getTymCode().equalsIgnoreCase("")|| "".equals(marche.getTymCode()) || modePassation.getMopCode().equalsIgnoreCase("") || "".equals(modePassation.getMopCode()) ) {
         		  //Message d'erreur
@@ -1835,9 +1834,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	          iservice.addObject(affichagePgpm);
                  	          
                  	          //Insertion dans T_Financement_PGPM
-                 	          
-                 	          
-                 	          if(finAgpm.getFinTypeFinance().equalsIgnoreCase("ETAT")) {
+                 	        /* if(finAgpm.getFinTypeFinance().equalsIgnoreCase("ETAT")) {
                  	        	newFinancement.setTBailleur(new TBailleur("ETAT")); 
                  	          }else
                  	        	  {
@@ -1850,7 +1847,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
    	        	 	  		  newFinancement.setFipMontantDevise(finAgpm.getFinMontantDevise());
    	        	 	  		  newFinancement.setFipMontantCfa(finAgpm.getFinMontantCfa());
    	        	 	  		  newFinancement.setFipTresor(finAgpm.getFinPartTresor());
-   	        	 	  		  iservice.addObject(newFinancement);
+   	        	 	  		  iservice.addObject(newFinancement);*/
    	        	 			
 
               		          List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -1889,6 +1886,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            			                controleController.btn_save_pgpm = false;
         			                controleController.btn_save_pgspm = false;
         			                btnAgpmRappel = false;
+        			                loveAgpmRappel = true;
            			                vider();
           		    
                                    }else {
@@ -1938,17 +1936,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	                           affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
                	                           iservice.addObject(affichagePgpm);
                	                           
-               	                           
                	                           //Insertion dans T_Financement_PGPM
-               	        	 	  		  newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));
+               	        	 	  		 /* newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));
                	        	 	  		  newFinancement.setFipTypeFinance(finAgpm.getFinTypeFinance());
                	        	 	  		  newFinancement.setTDetailPlanGeneral(detailPlan);
                	        	 	  		  newFinancement.setTSourceFinancement(new TSourceFinancement(finAgpm.getTSourceFinancement().getSouCode()));
                	        	 	  		  newFinancement.setTDevise(new TDevise(finAgpm.getTDevise().getDevCode()));
                	        	 	  		  newFinancement.setFipMontantDevise(finAgpm.getFinMontantDevise());
                	        	 	  		  newFinancement.setFipMontantCfa(finAgpm.getFinMontantCfa());
-               	        	 	  		  iservice.addObject(newFinancement);
-           	 
+               	        	 	  		  iservice.addObject(newFinancement);*/
 
             		                       List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
          			                       TStatut statuts = new TStatut();
@@ -1988,15 +1984,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  			                controleController.btn_save_pgpm = false;
               			                    controleController.btn_save_pgspm = false;
               			                    btnAgpmRappel = false;
+
+
          			                        vider();
                                   }
         	                  }  
     		  
-    	   }else {
+    	  /* }else {
     		  //Message d'erreur
     		  FacesContext.getCurrentInstance().addMessage(null,
 	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre AGPM n'a pas de financement", "")); 
-    	      }
+    	      }*/
         }
       
       
@@ -2538,12 +2536,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void checkSituation() {
 			 if(sit.equalsIgnoreCase("O")) {
 				 etatAgpm = true;
-				 etatFinancement1 = false;
-				 etatFinancement2 = true;
+				 //etatFinancement1 = false;
+				 etatFinancement1 = true;
+				 //etatFinancement2 = true;
+				 etatFinancement2 = false;
 				 loveAgpmRappel = false;
 				 btnAgpmRappel = true;
-				 
+				 //btnAgpmRappel = false;
 				 controleController.btn_save_pgpm = false;
+				 controleController.btn_save_pgspm = false;
 			 }else {
 				 etatAgpm= false;
 				 etatFinancement1 =true;
@@ -2557,8 +2558,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void checkSituationPs() {
 			 if(sit.equalsIgnoreCase("O")) {
 				 etatAgpm = true;
-				 etatFinancement1 = false;
-				 etatFinancement2 = true;
+				 //etatFinancement1 = false;
+				 etatFinancement1 = true;
+				 //etatFinancement2 = true;
+				 etatFinancement2 = false;
 				 loveAgpmRappel = false;
 				 btnAgpmRappel = false;  
 				 controleController.btn_save_pgspm = false;
@@ -2822,7 +2825,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          @Transactional
          public void creerDetailPgspmRappel() throws IOException{
         	 
-        	 if(finAgpm.getFinId() > 0 ) {
+        	/* if(finAgpm.getFinId() > 0 ) {*/
         		 
         		 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("")) {
            		     //Message d'erreur
@@ -2878,7 +2881,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                        iservice.addObject(affichagePgpm);
                        
                        //Insertion dans T_Financement_PGPM
-                       if(finAgpm.getFinTypeFinance().equalsIgnoreCase("ETAT")) {
+                       /*if(finAgpm.getFinTypeFinance().equalsIgnoreCase("ETAT")) {
             	        	newFinancement.setTBailleur(new TBailleur("ETAT")); 
             	          }else
             	        	  {
@@ -2890,7 +2893,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
         	 	  	   newFinancement.setTDevise(new TDevise(finAgpm.getTDevise().getDevCode()));
         	 	  	   newFinancement.setFipMontantDevise(finAgpm.getFinMontantDevise());
         	 	  	   newFinancement.setFipMontantCfa(finAgpm.getFinMontantCfa());
-        	 	  	   iservice.addObject(newFinancement);
+        	 	  	   iservice.addObject(newFinancement);*/
                   	 
 
                    		 List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
@@ -2917,6 +2920,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 			controleController.btn_edit_pgpm = false;
                 			controleController.btn_save_pgspm = false;
                 			btnPgspmRappel = false;
+                			loveAgpmRappel = true;
                		    
                        }else {
                    	       plan.setTGestion(new TGestion(gesCode));
@@ -2962,14 +2966,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                     	   iservice.addObject(affichagePgpm);
                 	       
                     	   //Insertion dans T_Financement_PGPM
-            	 	  	   newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));
+            	 	  	 /*  newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));
             	 	  	   newFinancement.setFipTypeFinance(finAgpm.getFinTypeFinance());
             	 	  	   newFinancement.setTDetailPlanGeneral(detailPlan);
             	 	  	   newFinancement.setTSourceFinancement(new TSourceFinancement(finAgpm.getTSourceFinancement().getSouCode()));
             	 	  	   newFinancement.setTDevise(new TDevise(finAgpm.getTDevise().getDevCode()));
             	 	  	   newFinancement.setFipMontantDevise(finAgpm.getFinMontantDevise());
             	 	  	   newFinancement.setFipMontantCfa(finAgpm.getFinMontantCfa());
-            	 	  	   iservice.addObject(newFinancement);
+            	 	  	   iservice.addObject(newFinancement);*/
 
                  		 List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
               			 TStatut statuts = new TStatut();
@@ -2995,14 +2999,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             			controleController.btn_edit_pgpm = false;
             			controleController.btn_save_pgspm = false;
             			btnPgspmRappel = false;
+            			loveAgpmRappel = true;
                          }
            	        }
         		 
-        	          }else {
+        	         /* }else {
         	        	     //Message d'erreur
                		         FacesContext.getCurrentInstance().addMessage(null,
            	                  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre AGPM n'a pas de financement", ""));
-        	                }
+        	                }*/
                      }
 
 		 
