@@ -1849,6 +1849,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
    	        	 	  		  newFinancement.setTDevise(new TDevise(finAgpm.getTDevise().getDevCode()));
    	        	 	  		  newFinancement.setFipMontantDevise(finAgpm.getFinMontantDevise());
    	        	 	  		  newFinancement.setFipMontantCfa(finAgpm.getFinMontantCfa());
+   	        	 	  		  newFinancement.setFipTresor(finAgpm.getFinPartTresor());
    	        	 	  		  iservice.addObject(newFinancement);
    	        	 			
 

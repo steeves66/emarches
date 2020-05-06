@@ -283,7 +283,7 @@
         
                 <h:panelGroup rendered="#{pgpmAcController.etatFinancement1}"> 
                <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.listeFinancement}" scrollable="true" scrollHeight="425"  emptyMessage="Aucun financement enregistré">
-         				<p:column headerText="Type" styleClass="col-sm-1">
+         				<p:column headerText="Source" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fipTypeFinance}" />
 				        </p:column>
          				
@@ -291,7 +291,7 @@
 				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
 				        </p:column>
 				        
-				        <p:column headerText="Source" styleClass="col-sm-1">
+				        <p:column headerText="Type" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
 				        </p:column>
 
@@ -343,16 +343,10 @@
                  </p:dataTable> 
                   </h:panelGroup>
                        
-            </div>
-            
-            
+            </div>  
         </div>
-                
-      	
-            </div>
+   </div>
           
-     
-     
      </div>
      <h:panelGroup rendered="false">
       <div class="row">
