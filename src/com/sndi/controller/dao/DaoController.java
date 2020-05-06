@@ -2831,6 +2831,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 				chargeDaoAffectes();
 				 			//Chargement des compteurs du tableau de bord
 				 			tableauBordController.chargeDataDao();	
+				 			//Désactivation du bouton d'affectation 
+				 			btn_affecter =  false;
 				 			//Message de confirmation
 	    					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
 							userController.setRenderMsg(true);
