@@ -123,7 +123,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		chargePgpmDifAc();
 		chargePgspmTrans();
 		chargePgpmValDmp();
+		chargePgpmValDmpAc();
 		chargePgspmValDmp();
+		chargePgspmValDmpAc();
 		chargePgspmValCp();
 		chargePgspmDifCp();
 		chargePgspmDifDmp();
@@ -920,8 +922,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 new WhereClause("MOP_LIBELLE_LONG",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%")));	 		 
 			 }
 			 
-			
-			 
+		 
 			//Liste des Pgpm validés par la DMP
 			 public void chargePgpmValDmp() {
 				 pgpmValDmp.clear();
@@ -930,12 +931,47 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PN")));		 		 
 			 } 
 			 
+
 			//Liste des Pgpm validés par la DMP : Nouvelle Methode
 			 /*public void chargePgpmValDmp() {
 				 pgpmValDmp.clear();
 				 pgpmValDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PN"),
+						    new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp())));
+			 }*/
+			 
+			//Liste des Pgpm validés par la DMP Côté AC
+			 public void chargePgpmValDmpAc() {
+				 pgpmValDmp.clear();
+				 pgpmValDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PN")));		 		 
+			 }
+			 
+			//Liste des Pgpm validés par la DMP Côté AC : Nouvelle Méthode
+			/* public void chargePgpmValDmpAc() {
+				 pgpmValDmp.clear();
+				 pgpmValDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PN"),
+						    new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp())));
+			 }*/
+			 
+			//Liste des Pgspm validés par la DMP Côté AC
+			 public void chargePgspmValDmpAc() {
+				 pgspmValDmp.clear();
+				 pgspmValDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PS")));		 		 
+			 }
+			 
+			//Liste des Pgpm validés par la DMP Côté AC : Nouvelle Méthode
+			/* public void chargePgspmValDmpAc() {
+				 pgspmValDmp.clear();
+				 pgspmValDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PS"),
 						    new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp())));
 			 }*/
 			 

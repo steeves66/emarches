@@ -101,6 +101,7 @@ public class TableauBordController {
 	 private String pgpmAcAttenteTransfert="";
 	 private String pgpmAcDiffDmp="";
 	 private String pgpmAcDiffDmpCpmp ="";
+	 private String pgpmAcDmpValid="";
 	 /*
 	  Compteur pour la Cellule de Passation des Marchés
 	   */
@@ -132,6 +133,7 @@ public class TableauBordController {
 		 private String pgspmAcAttenteValide = "";
 		 private String pgspmAcDifDmp ="";
 		 private String pgspmAcDiffCpmp = "";
+		 private String pgspmAcDmpValid = "";
 	/*
 	Compteur pour la Cellule de Passation des Marchés
 	 */
@@ -508,7 +510,7 @@ public class TableauBordController {
 			 pgpmDmSaisie = ""+getNpSaisieDossier("S1S");
 			 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR");
 			 pgpmDmTransmis = ""+getNpDmpTransmisDossier("S1T");	
-			
+			 pgpmAcDmpValid  = ""+getNpValideDmpAc("S3V");
 		}
 		
 		public void chargeDataPgspm() {
@@ -531,8 +533,8 @@ public class TableauBordController {
 			 pgspmDmSaisie = ""+getNpsSaisieDossier("S1S");
 			 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
 			 pgspmDmTransmis = ""+getNpDmpTransmisDossier("S1T");
+			 pgspmAcDmpValid  = ""+getNpsValideDmpAc("S3V");
 			 //Fin PGSPM
-			
 		}
 
 		public void chargeDataPpm() {
@@ -1138,6 +1140,41 @@ public int getNpValideDmp(String src){
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
 	return	i;	
 }
+
+//pgpm validés par la DMP Côté AC
+public int getNpValideDmpAc(String src){
+	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+	return	i;	
+}
+
+//pgpm validés par la DMP Côté AC : Nouvelle Methode
+/*public int getNpValideDmpAc(String src){
+	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+	return	i;	
+}*/
+
+//pgspm validés par la DMP Côté AC
+public int getNpsValideDmpAc(String src){
+	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
+	return	i;	
+}
+//pgspm validés par la DMP Côté AC : Nouvelle Methode
+/*public int getNpsValideDmpAc(String src){
+	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
+	return	i;	
+}*/
+
+
 
 //pgpm validés par la DMP : Nouvelle Methode
 /*public int getNpValideDmp(String src){
@@ -5114,5 +5151,19 @@ public int getAmiTransmisDmpDossier(String src){
 		this.prqCsvValidation = prqCsvValidation;
 	}
 
-	
+	public String getPgpmAcDmpValid() {
+		return pgpmAcDmpValid;
+	}
+
+	public void setPgpmAcDmpValid(String pgpmAcDmpValid) {
+		this.pgpmAcDmpValid = pgpmAcDmpValid;
+	}
+
+	public String getPgspmAcDmpValid() {
+		return pgspmAcDmpValid;
+	}
+
+	public void setPgspmAcDmpValid(String pgspmAcDmpValid) {
+		this.pgspmAcDmpValid = pgspmAcDmpValid;
+	}
 }
