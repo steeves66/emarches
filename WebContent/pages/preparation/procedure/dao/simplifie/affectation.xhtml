@@ -155,7 +155,7 @@
 				        
                       <p:column headerText=" Re" width="2%">  
                                 <p:selectOneRadio id="operation" value="#{slctdTb.strOpeRespo}">
-                                <p:ajax  listener="#{daoPsController.openAffectation()}" update="gnl"></p:ajax>
+                                <p:ajax  listener="#{daoPsController.openAffectation()}" update="gnl:btn_aff"></p:ajax>
 									      <f:selectItem itemValue="O" />
 							    </p:selectOneRadio>
 				         </p:column>   
@@ -171,10 +171,12 @@
 				</p:commandLink>
 		
                 <div class="pull-right ">
+                   <h:panelGroup id="btn_aff">
 			            <p:commandLink  rendered="#{daoPsController.btn_affecter}" styleClass="btn btn-success row pull-right" action="#{daoPsController.affecterDao()}" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
 			            <p:confirm header="Confirmation" message="Confirmez-vous l'affectation ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Affecter
 			            </p:commandLink>
+			       </h:panelGroup>
               </div>
     </section>
     </h:form>

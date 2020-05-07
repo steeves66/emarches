@@ -119,6 +119,7 @@ public class PpmController {
 		 chargePpmTrans();
 		 chargePspmTrans();
 		 chargePpmValDmp();
+		 chargePspmValDmpAc();
 		 chargePpmValCp();
 		 chargePpmDifCp();
 		 chargePpmDifDmp();
@@ -318,7 +319,7 @@ public class PpmController {
 						 new WhereClause("AFF_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf())));		 		 
 		 }*/
 		 
-		//Liste des Ppm validés par le cpmp
+		//Liste des Ppm validés par la CPMP
 		 public void chargePpmValDmp() {
 			 ppmValDmp.clear();
 			 ppmValDmp = ((List<TAffichagePpm>)iservice.getObjectsByColumn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
@@ -326,7 +327,18 @@ public class PpmController {
 					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
 		 }
 		 
-		//Liste des Ppm validés par la CPMP : Nouvelle Methode
+		//Liste des Ppm validés par la CPMP Côté AC
+		 public void chargePpmValDmpAc() {
+			 ppmValDmp.clear();
+			 ppmValDmp = ((List<TAffichagePpm>)iservice.getObjectsByColumn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+					    new WhereClause("AFF_DPP_STA_CODE",Comparateur.EQ,"S3V"),
+					    new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
+		 }
+		 
+		
+		 
+		//Liste des Ppm validés par la CPMP : Nouvelle Methode 
 		/* public void chargePpmValDmp() {
 			 ppmValDmp.clear();
 			 ppmValDmp = ((List<TAffichagePpm>)iservice.getObjectsByColumn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
@@ -387,6 +399,16 @@ public class PpmController {
 					    new WhereClause("AFF_DPP_STA_CODE",Comparateur.EQ,"S3V"),
 					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
 		 }  
+		 
+		 
+		//Liste des Ppm validés par la CPMP Côté AC
+		 public void chargePspmValDmpAc() { 
+			 pspmValDmp.clear();
+		     pspmValDmp = ((List<TAffichagePpm>)iservice.getObjectsByColumn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
+					    new WhereClause("AFF_DPP_STA_CODE",Comparateur.EQ,"S3V"),
+					    new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
+		 }
 		 
 		//Liste des Ppm validés par la DMP : Nouvelle Methode
 		 /*public void chargePspmValDmp() {

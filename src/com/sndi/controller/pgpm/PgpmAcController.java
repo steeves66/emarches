@@ -942,10 +942,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }*/
 			 
 			//Liste des Pgpm validés par la DMP Côté AC
-			 public void chargePgpmValDmpAc() {
+			 public void chargePgpmValDmpAc() { 
 				 pgpmValDmp.clear();
 				 pgpmValDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("AFF_GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PN")));		 		 
 			 }
 			 
@@ -963,6 +964,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 pgspmValDmp.clear();
 				 pgspmValDmp = ((List<TAffichagePgpm>)iservice.getObjectsByColumn("TAffichagePgpm",new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
 						    new WhereClause("AFF_GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("AFF_GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						    new WhereClause("AFF_GPG_TYPE_PLAN",Comparateur.EQ,"PS")));		 		 
 			 }
 			 
@@ -3085,7 +3087,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     			        newFinancement.setTDetailPlanGeneral(detailPlan);
     			        newFinancement.setFipTypeFinance(sourfin);
     			        iservice.addObject(newFinancement);
-    				    
+    				    //Initialisation du financement(
+    			        newFinancement = new TFinancementPgpm();
        				    //methode qui charge les financements du projet crée
     				    chargeFinancement();
     				    //methode qui charge la liste des pgpm
@@ -3123,6 +3126,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    chargeFinancementUpdate();
     				    //methode qui charge la liste des pgpm
     				   // chargeData();
+    				    //Réinitialisation 
+    				    newFinancement = new TFinancementPgpm();
     				    //Message de Confirmation
     				    userController.setTexteMsg("Financement enregistré avec succès !");
     				    userController.setRenderMsg(true);
