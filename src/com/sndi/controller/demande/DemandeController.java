@@ -132,7 +132,7 @@ public class DemandeController {
 		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());*/
 		
 		listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumnIn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
-				"TDM_CODE", new ArrayList<String>(Arrays.asList("AOR","GAG","AVE","LBG")),
+				"TDM_CODE", new ArrayList<String>(Arrays.asList("AOR","GAG")),
                new WhereClause("TDM_CODE",WhereClause.Comparateur.NEQ,"PSL"));
 		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());
 		

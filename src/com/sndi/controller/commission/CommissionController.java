@@ -44,6 +44,7 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
 import com.sndi.model.VCompoCommission;
+import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VLot;
 import com.sndi.model.VPiecesOffre;
@@ -97,7 +98,8 @@ public class CommissionController {
 	 
 	 //Declaration des listes 
 	 private List<VCompoCommission> membresCommission = new ArrayList<VCompoCommission>();
-	 private List<TDetCommissionSeance> membresCommite = new ArrayList<TDetCommissionSeance>(); 
+	 /*private List<TDetCommissionSeance> membresCommite = new ArrayList<TDetCommissionSeance>(); */
+	 private List<VDetCommissionSeance> membresCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<VCompoCommission> selectionMembres = new ArrayList<VCompoCommission>(); 
 	 private List<TDetCommissionSeance> selectionMembresCommite = new ArrayList<TDetCommissionSeance>(); 
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
@@ -170,7 +172,7 @@ public class CommissionController {
 		//Liste des membres du commite d'evaluation
 	 public void chargeMembreCommite() {
 		 membresCommite.clear();
-		 membresCommite = ((List<TDetCommissionSeance>)iservice.getObjectsByColumn("TDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
+		 membresCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
 				 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"COJ"),
 				    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
 				// );
@@ -818,11 +820,12 @@ public class CommissionController {
 		this.selectionMembres = selectionMembres;
 	}
 
-	public List<TDetCommissionSeance> getMembresCommite() {
+
+	public List<VDetCommissionSeance> getMembresCommite() {
 		return membresCommite;
 	}
 
-	public void setMembresCommite(List<TDetCommissionSeance> membresCommite) {
+	public void setMembresCommite(List<VDetCommissionSeance> membresCommite) {
 		this.membresCommite = membresCommite;
 	}
 
