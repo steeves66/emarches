@@ -51,6 +51,7 @@ public class ControleController {
 	private String libelleFinCom="";
 	private String libelleConfirm="";
 	private String libelleTitle="";
+	private String opdPiece="";
 	//Panels
     private boolean panelForm=false;
 	private boolean panelTraitement=false;
@@ -4560,6 +4561,7 @@ public class ControleController {
 								    			//DETAIL OUVERTURE
 								    			if(action.equalsIgnoreCase("DETOUV")) {
 									    			type = "Commission";
+									    			opdPiece = "Ouverture";
 									    			libelle="DEAILS DE L'OFFRRE N°";
 									    			btn_fermerOuverture =true;
 									    			btn_fermerAnalyse =false;
@@ -4591,6 +4593,7 @@ public class ControleController {
 									    			//DETAIL ANALYSE DES OFFRES
 									    			if(action.equalsIgnoreCase("DETANA")) {
 										    			type = "Commission";
+										    			opdPiece = "Analyse";
 										    			libelle="DEAILS DE L'OFFRRE N°";
 										    			btn_fermerOuverture =false;
 										    			btn_fermerAnalyse =true;
@@ -4621,6 +4624,7 @@ public class ControleController {
 										    			//DETAIL JUGEMENT
 										    			if(action.equalsIgnoreCase("DETJUG")) {
 											    			type = "Commission";
+											    			opdPiece = "Jugement";
 											    			libelle="DEAILS DE L'OFFRRE N°";
 											    			btn_fermerOuverture =false;
 											    			btn_fermerAnalyse =false;
@@ -7536,6 +7540,16 @@ public class ControleController {
 
 	public void setFermerValPpm(boolean fermerValPpm) {
 		this.fermerValPpm = fermerValPpm;
+	}
+
+
+	public String getOpdPiece() {
+		return opdPiece;
+	}
+
+
+	public void setOpdPiece(String opdPiece) {
+		this.opdPiece = opdPiece;
 	}
 	
     

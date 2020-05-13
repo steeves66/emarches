@@ -89,18 +89,18 @@
 				        </p:column>			        
 				         <p:column headerText="ACTIONS" styleClass="col-sm-2" >
 				           <!-- BOUTONS APERCU -->
-         				   <p:commandLink rendered="#{controleController.btn_apercuOuv}" action="#{commissionController.renderPage('com7','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
+         				   <p:commandLink rendered="#{controleController.btn_apercuOuv}" action="#{etatsCommissionController.renderPage('detc1','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />  
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
                              </p:commandLink>
                              
-                              <p:commandLink rendered="#{controleController.btn_apercuAna}" action="#{commissionController.renderPage('com7','DETANA')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
+                              <p:commandLink rendered="#{controleController.btn_apercuAna}" action="#{etatsCommissionController.renderPage('detc1','DETANA')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />  
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
                              </p:commandLink>
-                              <p:commandLink rendered="#{controleController.btn_apercuJug}" action="#{commissionController.renderPage('com7','DETJUG')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
+                              <p:commandLink rendered="#{controleController.btn_apercuJug}" action="#{etatsCommissionController.renderPage('detc1','DETJUG')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />  
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
                              </p:commandLink>
                              <!--FIN BOUTONS APERCU -->
                              
