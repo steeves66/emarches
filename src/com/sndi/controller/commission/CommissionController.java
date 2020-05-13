@@ -671,7 +671,7 @@ public class CommissionController {
 				userController.setSevrityMsg("success");
 	    	
 			}
-			chargeOffre();
+			onSelectLot();
 			
 		}
 		//Ajouter attributaire
