@@ -32,7 +32,7 @@ public class TSeances implements java.io.Serializable {
 	private TTypeSeance TTypeSeance;
 	private String seaLibelle;
 	private String seaQuorum;
-	private BigDecimal seaNbrPli;
+	private long seaNbrPli;
 	private String seaRes;
 	private Date seaSteSaisi;
 	private String seaObservation;
@@ -46,7 +46,7 @@ public class TSeances implements java.io.Serializable {
 	}
 
 	public TSeances(long seaNum, TFonction TFonction, TOperateur TOperateur, TTypeSeance TTypeSeance,
-			String seaLibelle, String seaQuorum, BigDecimal seaNbrPli, String seaRes, Date seaSteSaisi,
+			String seaLibelle, String seaQuorum, long seaNbrPli, String seaRes, Date seaSteSaisi,
 			String seaObservation, Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.seaNum = seaNum;
 		this.TFonction = TFonction;
@@ -122,11 +122,11 @@ public class TSeances implements java.io.Serializable {
 	}
 
 	@Column(name = "SEA_NBR_PLI", precision = 22, scale = 0)
-	public BigDecimal getSeaNbrPli() {
+	public long getSeaNbrPli() {
 		return this.seaNbrPli;
 	}
 
-	public void setSeaNbrPli(BigDecimal seaNbrPli) {
+	public void setSeaNbrPli(long seaNbrPli) {
 		this.seaNbrPli = seaNbrPli;
 	}
 

@@ -84,6 +84,8 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofTelSign;
 	private Date dofDteSaisi;
 	private String dofStaut;
+	private String dofSouNcc;
+	private String dofSigle;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -108,7 +110,7 @@ public class TDetOffres implements java.io.Serializable {
 			Short dofNotAdmBai, String dofNotTecBai, Short dofNotFinBai, Short dofNotFin2Bai, BigDecimal dofMtAttDmp,
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
-			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,
+			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle,
 			Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
@@ -171,6 +173,8 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofTelSign = dofTelSign;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofStaut = dofStaut;
+		this.dofSouNcc = dofSouNcc;
+		this.dofSigle = dofSigle;
 		this.TPiecesOffreses = TPiecesOffreses;
 		
 		
@@ -740,5 +744,24 @@ public class TDetOffres implements java.io.Serializable {
 	public void setDofStaut(String dofStaut) {
 		this.dofStaut = dofStaut;
 	}
+	
+	@Column(name = "DOF_SOU_NCC", length = 500)
+	public String getDofSouNcc() {
+		return this.dofSouNcc;
+	}
+
+	public void setDofSouNcc(String dofSouNcc) {
+		this.dofSouNcc = dofSouNcc;
+	}
+
+	@Column(name = "DOF_SIGLE", length = 500)
+	public String getDofSigle() {
+		return this.dofSigle;
+	}
+
+	public void setDofSigle(String dofSigle) {
+		this.dofSigle = dofSigle;
+	}
+
 
 }

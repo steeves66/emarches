@@ -19,32 +19,28 @@ import org.hibernate.annotations.Immutable;
 public class VPiecesOffreAnalyse implements java.io.Serializable {
 	
 	private BigDecimal pofNum;
-	private BigDecimal opdNum;
+	private BigDecimal pofDofNum;
 	private String tpoCode;
-	private String opdDacCode;
 	private String pofLaaId;
 	private String tpoLibelle;
-	private String odpTpoEtapPiece;
 	private String pofConforme;
 
 	public VPiecesOffreAnalyse() {
 	}
 
-	public VPiecesOffreAnalyse(BigDecimal opdNum, String tpoCode) {
-		this.opdNum = opdNum;
+	public VPiecesOffreAnalyse( String tpoCode) {
 		this.tpoCode = tpoCode;
 	}
 
-	public VPiecesOffreAnalyse(BigDecimal pofNum,BigDecimal opdNum, String tpoCode, String opdDacCode, String pofLaaId,
-			String tpoLibelle, String odpTpoEtapPiece, String pofConforme) {
+	public VPiecesOffreAnalyse(BigDecimal pofNum,BigDecimal pofDofNum, String tpoCode, String pofLaaId,
+			String tpoLibelle, String pofConforme) {
 		this.pofNum = pofNum;
-		this.opdNum = opdNum;
 		this.tpoCode = tpoCode;
-		this.opdDacCode = opdDacCode;
 		this.pofLaaId = pofLaaId;
 		this.tpoLibelle = tpoLibelle;
-		this.odpTpoEtapPiece = odpTpoEtapPiece;
 		this.pofConforme = pofConforme;
+		this.pofDofNum = pofDofNum;
+		
 	}
     @Id
     @Column(name = "POF_NUM", nullable = false, precision = 22, scale = 0)
@@ -56,13 +52,13 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.pofNum = pofNum;
 	}
 	
-	@Column(name = "OPD_NUM", nullable = false, precision = 22, scale = 0)
-	public BigDecimal getOpdNum() {
-		return this.opdNum;
+	@Column(name = "POF_DOF_NUM")
+	public BigDecimal getPofDofNum() {
+		return pofDofNum;
 	}
 
-	public void setOpdNum(BigDecimal opdNum) {
-		this.opdNum = opdNum;
+	public void setPofDofNum(BigDecimal pofDofNum) {
+		this.pofDofNum = pofDofNum;
 	}
 
 	@Column(name = "TPO_CODE", nullable = false, length = 10)
@@ -72,15 +68,6 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setTpoCode(String tpoCode) {
 		this.tpoCode = tpoCode;
-	}
-
-	@Column(name = "OPD_DAC_CODE", length = 25)
-	public String getOpdDacCode() {
-		return this.opdDacCode;
-	}
-
-	public void setOpdDacCode(String opdDacCode) {
-		this.opdDacCode = opdDacCode;
 	}
 
 	@Column(name = "POF_LAA_ID", precision = 22, scale = 0)
@@ -99,15 +86,6 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setTpoLibelle(String tpoLibelle) {
 		this.tpoLibelle = tpoLibelle;
-	}
-
-	@Column(name = "ODP_TPO_ETAP_PIECE", length = 20)
-	public String getOdpTpoEtapPiece() {
-		return this.odpTpoEtapPiece;
-	}
-
-	public void setOdpTpoEtapPiece(String odpTpoEtapPiece) {
-		this.odpTpoEtapPiece = odpTpoEtapPiece;
 	}
 
 	@Column(name = "POF_CONFORME", length = 1)

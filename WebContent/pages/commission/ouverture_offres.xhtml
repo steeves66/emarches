@@ -84,7 +84,7 @@
 		                   <div class="form-group horizontal">
 		                      <label  class="col-sm-2 control-label text-right"><b> Sigle :</b></label>
 		                      <div class="col-sm-10">
-		                        <p:inputText  type="text" styleClass="form-control"  style="width: 100%"/>
+		                        <p:inputText value="#{commissionController.newOffre.dofSigle}" type="text" styleClass="form-control"  style="width: 100%"/>
 		                      </div>
 		                  </div>
                 		
@@ -161,55 +161,8 @@
 		                   		<div class="box-body">
 		                   		
                                    <div class="row">
-	            <h:panelGroup rendered="false">
-	            <div class="form-group ">
-	                <label class="col-sm-5 control-label"><b>Attestation de régularité fiscale (Impot)</b></label>
-	                <label class="col-sm-2 control-label"><b>Présent ?</b></label>
-	                 <div class="col-sm-5">
-                     <p:selectOneRadio  style="margin-top:7px" value="#{commissionController.newOffre.dofOffImpot}">
-						<f:selectItem itemLabel="OUI" itemValue="O" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
-	            </div>   
 	            
-	            
-	            <div class="form-group ">
-	                <label class="col-sm-5 control-label"><b>Attestation de régularité Social(CNPS)</b></label>
-	                <label class="col-sm-2 control-label"><b>Présent ?</b></label>
-	                 <div class="col-sm-5">
-                     <p:selectOneRadio  style="margin-top:7px" value="#{commissionController.newOffre.dofOffCnps}">
-						<f:selectItem itemLabel="OUI" itemValue="O" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
-	            </div>   
-	            
-	            
-	            <div class="form-group ">
-	                <label class="col-sm-5 control-label"><b>Registre de commerce</b></label>
-	                <label class="col-sm-2 control-label"><b>Présent ?</b></label>
-	                 <div class="col-sm-5">
-                     <p:selectOneRadio  style="margin-top:7px" value="#{commissionController.newOffre.dofOffRc}">
-						<f:selectItem itemLabel="OUI" itemValue="O" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
-	            </div>   
-	            
-	            
-	            <div class="form-group ">
-	                <label class="col-sm-5 control-label"><b>Cautionnement</b></label>
-	                <label class="col-sm-2 control-label"><b>Présent ?</b></label>
-	                 <div class="col-sm-5">
-                     <p:selectOneRadio  style="margin-top:7px" value="#{commissionController.newOffre.dofCaut}">
-						<f:selectItem itemLabel="OUI" itemValue="O" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
-	            </div> 
-	            </h:panelGroup>   
-				 </div>
+				                   </div>
 		                  
 		          		
 		                        	<p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffres}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
@@ -228,29 +181,37 @@
 	                       <div class="col-md-12">
                    <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
                    <legend><small>Offres financières (4)</small></legend>
+                   
+                     <div class="form-group ">
+		                 
+		                 <label class="col-sm-2 control-label">type de l'offre</label>	
+                  <div class="col-sm-4">
+				           <p:selectOneMenu id="variante"  value="#{commissionController.dofTyp}" style="width:100%" >
+						    <f:selectItem  itemLabel="Selectionnez le type de l'offre..." itemValue=""/> 
+						    <f:selectItem  itemLabel="Variante" itemValue="V"/> 
+						    <f:selectItem  itemLabel="Offre de base" itemValue="B"/> 
+						     <p:ajax listener="#{commissionController.checkMontantVar()}"  update=":gnl:montvar,:gnl:cond"/>   
+				     </p:selectOneMenu> 
+		                  </div>
+		                  </div>
                                      <div class="form-group">
-		                  <label class="col-sm-1 control-label">Montant lu</label>
-						  <div class="col-sm-3">
-				          <p:inputText id="montLu" type="text" styleClass="form-control" value="#{commissionController.montLu}" style="width: 100%" >
+		                  <label class="col-sm-2 control-label">Montant lu</label>
+						  <div class="col-sm-4">
+				          <p:inputText id="montLu" type="text" styleClass="form-control text-right" value="#{commissionController.montLu}" style="width: 100%" >
 				          <p:ajax listener="#{commissionController.calculMontNet()}" event="blur" process="@this" update="montNet" /> 
 		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         	        </p:inputText>
 		                  </div>
 		                  
-		                  <label class="col-sm-2 control-label">Rabais %</label>
-						  <div class="col-sm-2">
-				          <p:inputText id="rab" type="text" styleClass="form-control" value="#{commissionController.pourcentRab}" style="width: 100%" >
+		                  <label class="col-sm-1 control-label">Rabais %</label>
+						  <div class="col-sm-5">
+				          <p:inputText id="rab" type="text" styleClass="form-control text-right" value="#{commissionController.pourcentRab}" style="width: 100%" >
 				           <p:ajax listener="#{commissionController.calculMontNet()}" event="blur" process="@this" update="montNet" /> 
 		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
 		                  </div>
 		                  
-		                   <label class="col-sm-1 control-label">Montant Net</label>
-						  <div class="col-sm-3">
-				          <p:inputText id="montNet" type="text" styleClass="form-control" value="#{commissionController.montN}" style="width: 100%" readonly="true">
-				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
-				          </p:inputText>
-		                  </div>
+		                 
 		                  
 		                
 		                 
@@ -261,38 +222,40 @@
 		                
 		                
 		                 <div class="form-group">
-		                   <label class="col-sm-1 control-label">type de l'offre</label>
-						  <div class="col-sm-3">
-				           <p:selectOneMenu id="variante"  value="#{commissionController.dofTyp}" style="width:100%" >
-						    <f:selectItem  itemLabel="Selectionnez le type de l'offre..." itemValue=""/> 
-						    <f:selectItem  itemLabel="Variante" itemValue="V"/> 
-						    <f:selectItem  itemLabel="Offre de base" itemValue="B"/>    
-				     </p:selectOneMenu> 
+		                     <label class="col-sm-2 control-label">Montant Net</label>
+						  <div class="col-sm-4">
+				          <p:inputText id="montNet" type="text" styleClass="form-control text-right" value="#{commissionController.montN}" style="width: 100%" readonly="true">
+				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				          </p:inputText>
 		                  </div>
-		                  
-		                   <label class="col-sm-2 control-label">Montant variante</label>
-						  <div class="col-sm-3">
-				          <p:inputText  type="text" styleClass="form-control" value="#{commissionController.newOffre.dofEstimRab}" style="width: 100%" />
+		                  <h:panelGroup id="montvar" rendered="#{commissionController.etatMontVar}">
+		                   <label class="col-sm-1 control-label">Montant variante</label>
+						  <div class="col-sm-5">
+				          <p:inputText  type="text" styleClass="form-control text-right" value="#{commissionController.newOffre.dofEstimRab}" style="width: 100%" />
 		                  </div>
-		                  
-		                   <label class="col-sm-2 control-label">Délai de validité</label>
-						  <div class="col-sm-1">
-				          <p:inputText  type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
-		                  </div>
-		                  
-		                 
-		                  
-		                </div>        
+		                  </h:panelGroup>
+		                </div>  
 		                
+		                 <div class="form-group ">
+                
+	                  <label for="delai" class="col-sm-2 control-label"><b>Délai de validité<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-4">
+	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
+	                  </div>
+	                  
+	                   <h:panelGroup id="cond" rendered="#{commissionController.etatMontVar}">  
 		                <div class="form-group">
                   <label for="l6" class="col-sm-1 control-label">Condition</label>
 
-                  <div class="col-sm-11">
-                    <p:inputTextarea rows="2" cols="33" styleClass="form-control" id="l6" style="width: 100%" />
+                  <div class="col-sm-5">
+                    <p:inputTextarea rows="3" cols="33" styleClass="form-control" id="l6" style="width: 100%" />
                     
                   </div>
-                </div> 
-                <br/><br/><br/><br/><br/><br/>                        				        						
+                </div>
+                </h:panelGroup> 
+	                </div>      
+		             
+                <br/>                    				        						
 
                    </fieldset>
                 </div>
@@ -324,15 +287,13 @@
                    <div class="box-body">
                     <p:dataTable var="slctdTb" value="#{commissionController.listeOffre}"  id="cc" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune Offre trouvée" rows="10"
                      scrollable="true" scrollHeight="300">
-                            <p:column headerText="N° Offre" styleClass="col-sm-1">
-                                <h:outputText value="#{slctdTb.dofNum}" />
-                            </p:column>
-                             <p:column headerText="N° Lot" styleClass="col-sm-1">
-                                <h:outputText value="#{slctdTb.dofLaaId}" />
+                           
+                             <p:column headerText="Lot" styleClass="col-sm-5">
+                                <h:outputText value="#{slctdTb.laaObjet}" />
                             </p:column>
 
-                            <p:column headerText="Entreprise" styleClass="col-sm-7">
-                                <h:outputText value="#{slctdTb.dofNomRep} #{slctdTb.dofPreRep}" />
+                            <p:column headerText="Entreprise" styleClass="col-sm-5">
+                                <h:outputText value="#{slctdTb.offSouSigleSte}" />
                             </p:column>
                             
                             <p:column headerText="Montant" styleClass="col-sm-1">

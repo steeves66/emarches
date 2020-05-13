@@ -118,7 +118,7 @@
 				                </span>
 			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="saisir le numero de l'offre"></p:inputText> 
 			                       <span class="input-group-btn">
-			                      <p:commandLink action="#{commissionController.chargeOffreFilterOffre()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:Toffre" />
+			                      <p:commandLink action="#{commissionController.chargeFilterOffres()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:Toffre" />
 			                    </span>
 						  </div> 
 		                 </div>
@@ -127,7 +127,7 @@
                <p:dataTable var="slctdTb"  id="Toffre" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeOffres}" 
                scrollable="true" scrollHeight="465" emptyMessage="Aucune Offre trouvée">
                
-                            <p:column headerText="N° Offre" styleClass="col-sm-2">
+                          <p:column headerText="N°Offre" styleClass="col-sm-2">
                               <h:panelGroup rendered="#{slctdTb.dofStaut != '1'}">
 	         				    <h:outputText value="#{slctdTb.dofNum}" />
 	         				  </h:panelGroup>
@@ -138,10 +138,10 @@
 
                             <p:column headerText="Entreprise" styleClass="col-sm-6">
 	                              <h:panelGroup rendered="#{slctdTb.dofStaut != '1'}">
-		         				    <h:outputText />
+		         				    <h:outputText value="#{slctdTb.dofSigle}" />
 		         				  </h:panelGroup>
 		         				   <h:panelGroup rendered="#{slctdTb.dofStaut == '1' }">
-		         				    <h:outputText style="color:green; font-weight:bold " />
+		         				    <h:outputText value="#{slctdTb.dofSigle}" style="color:green; font-weight:bold " />
 		         				  </h:panelGroup>
                             </p:column>
                             
@@ -199,6 +199,7 @@
 	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="Analyse de l'Offre N° #{commissionController.sltOffre.dofNum}">
 				<div class="contentpanel">
                  <div class="row">
+                 <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
                <div class="col-md-6">
                 <div class="row">
                  <div class="col-md-12">
@@ -210,7 +211,7 @@
 	            <!-- /.box-header -->
 	            <div class="box-body">
 	            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
-		                        	 rowKey="#{slctdTb.opdNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" paginator="false" rowsPerPageTemplate="5,10,15">
+		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" paginator="false" rowsPerPageTemplate="5,10,15">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 		                            	<p:column headerText="PIECES" styleClass="col-sm-11">
 		                                   <h:outputText value="#{slctdTb.tpoLibelle}"/>
@@ -235,7 +236,7 @@
 		            <div class="form-group">
 	                  <label  class="col-sm-4 control-label"> Montant lu </label>
 	                  <div class="col-sm-7">
-	                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtOfr}" styleClass="form-control" style="width: 100%" >
+	                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtOfr}" readonly="true" styleClass="form-control" style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                    </p:inputText>
 	                  </div>
@@ -387,13 +388,15 @@
 		            <div class="form-group">
 	                  <label  class="col-sm-4 control-label"> Rang </label>
 	                  <div class="col-sm-3">
-	                    <p:inputText type="text" value="#{commissionController.sltOffre.dofRangOfr}" styleClass="form-control" style="width: 100%" />
+	                    <p:inputText id="rang" type="text" value="#{commissionController.sltOffre.dofRangOfr}" styleClass="form-control" style="width: 100%" >	                    
+	                     <p:ajax listener="#{commissionController.controleNbrLot()}" event="blur" update="rang" />
+	                    </p:inputText>
 	                  </div>
 	                  <div class="col-sm-1">
 	                  <label  class="control-label"> / </label>
 	                  </div>
 	                  <div class="col-sm-3">
-	                    <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" />
+	                    <p:inputText type="text" value="#{commissionController.nbrLot}" readonly="true" styleClass="form-control" style="width: 100%" />
 	                  </div>
 	                </div>
 	                

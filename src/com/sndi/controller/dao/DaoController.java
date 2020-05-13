@@ -360,7 +360,7 @@ public class DaoController {
 	 @PostConstruct
 	 public void postContr() {
 		 controleController.fonctionaliteDynamic();
-		 chargeData();
+		/* chargeData();
 		 chargeGestions();
 		 chargeImputation();
 		 chargeFonctionImput();
@@ -377,7 +377,7 @@ public class DaoController {
 		 chargeDaoAffectesR();
 		 chargePiecesByDao();
 		 chargePiecesByCsv();
-		 chargePiecesOffres();
+		 chargePiecesOffres();*/
 	 }
 	 
 	 //liste des pièces de l'offre

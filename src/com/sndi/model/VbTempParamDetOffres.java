@@ -45,6 +45,8 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 	private String dofTelRep;
 	private String dofMailRep;
 	private String dofSouNcc;
+	private String dofSigle;
+
 
 	public VbTempParamDetOffres() {
 	}
@@ -57,7 +59,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 			String dofLaaAaoCode, String dofLaaId, String dofDelai, String dofOffCnps, String dofOffImpot,
 			String dofOffRc, String dofCaut, String dofTyp, String dofBanCode, String dofEstimRab, String dofRab,
 			String dofMtOfr, String dofOffNum, String dofNum, String dofNomRep, String dofPreRep, String dofTelRep,
-			String dofMailRep, String dofSouNcc) {
+			String dofMailRep, String dofSouNcc, String dofSigle) {
 		this.tempNum = tempNum;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofOpeMatricule = dofOpeMatricule;
@@ -81,6 +83,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 		this.dofTelRep = dofTelRep;
 		this.dofMailRep = dofMailRep;
 		this.dofSouNcc = dofSouNcc;
+		this.dofSigle = dofSigle;
 	}
 
 	@Id
@@ -292,5 +295,15 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 	public void setDofSouNcc(String dofSouNcc) {
 		this.dofSouNcc = dofSouNcc;
 	}
+	
+	@Column(name = "DOF_SIGLE", length = 500)
+	public String getDofSigle() {
+		return this.dofSigle;
+	}
+
+	public void setDofSigle(String dofSigle) {
+		this.dofSigle = dofSigle;
+	}
+
 
 }

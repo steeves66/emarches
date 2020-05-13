@@ -45,6 +45,7 @@ import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
 import com.sndi.model.VCompoCommission;
 import com.sndi.model.VDetCommissionSeance;
+import com.sndi.model.VDetailOffres;
 import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VLot;
 import com.sndi.model.VPiecesOffre;
@@ -101,7 +102,7 @@ public class CommissionController {
 	 /*private List<TDetCommissionSeance> membresCommite = new ArrayList<TDetCommissionSeance>(); */
 	 private List<VDetCommissionSeance> membresCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<VCompoCommission> selectionMembres = new ArrayList<VCompoCommission>(); 
-	 private List<TDetCommissionSeance> selectionMembresCommite = new ArrayList<TDetCommissionSeance>(); 
+	 private List<VDetCommissionSeance> selectionMembresCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
@@ -112,7 +113,7 @@ public class CommissionController {
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
 	 private List<VPiecesOffreAnalyse> listePiecesOffresAnalyse = new ArrayList<VPiecesOffreAnalyse>();
 	 private List<VPiecesOffreAnalyse> listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
-	 private List<VbTempParamDetOffres> listeOffre = new ArrayList<VbTempParamDetOffres>();
+	 private List<VDetailOffres> listeOffre = new ArrayList<VDetailOffres>();
 	 private List<TDetailVente> listeVentes = new ArrayList<TDetailVente>();
 	 private List<VPiecesOffre> listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();
 	 private List<VbTempParamDetOffres> listeOffreByLot = new ArrayList<VbTempParamDetOffres>();
@@ -156,6 +157,8 @@ public class CommissionController {
 	 private boolean saisie=false;
 	 private boolean affichage=false;
 	 
+	 private boolean etatMontVar=false;
+	 
 	 private long montLu=0;
 	 private long montN=0;
 	 private long pourcentRab=0;
@@ -166,6 +169,7 @@ public class CommissionController {
 	 private String ncc;
 	 private BigDecimal dofNum;
 	 private long laaNum;
+	 private int nbrLot;
 	 //private long rabais
 	 
 	 
@@ -177,6 +181,15 @@ public class CommissionController {
 				    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
 				// );
 				_logger.info("membreCommite size: "+membresCommite.size());	
+	 }
+	 
+	 public void checkMontantVar() {
+		 if(dofTyp.equalsIgnoreCase("B")) {
+			 etatMontVar = false; 
+		 }else {
+			 etatMontVar = true;  
+		 }
+		 
 	 }
 	 
 	 public void calculMontNet() {
@@ -211,8 +224,15 @@ public class CommissionController {
 		 public void chargePiecesAnalyse() {
 			 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
 					// new WhereClause("POF_LAA_ID",Comparateur.EQ,""+sltOffre.getDofLaaId())));
-					 new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
-					 new WhereClause("POF_LAA_ID",Comparateur.EQ,""+sltOffre.getTLotAao().getLaaId())));
+					 //new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
+					 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
+			 nbrLot =nonbreLot();
+		 }
+		 
+		 public void controleNbrLot() {
+			if(sltOffre.getDofRangOfr()> nbrLot) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
+			}
 		 }
 	 
 	//Liste des membres de la commssions
@@ -221,6 +241,8 @@ public class CommissionController {
 					    new WhereClause("STR_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
 					_logger.info("membre size: "+membresCommission.size());	
+					
+					
 		 }
 		 
 		//Liste des candidats
@@ -241,8 +263,8 @@ public class CommissionController {
 		//Liste des offres VBdetaiOffre
 		 public void chargeOffres() {
 			 listeOffre.clear();
-			 listeOffre = ((List<VbTempParamDetOffres>)iservice.getObjectsByColumn("VbTempParamDetOffres",new ArrayList<String>(Arrays.asList("TEMP_NUM"))
-					 //new WhereClause("DOF_LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode())
+			 listeOffre = ((List<VDetailOffres>)iservice.getObjectsByColumn("VDetailOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode())
 					 ));
 				_logger.info("listeOffres size: "+listeOffre.size());	
 			 
@@ -300,6 +322,7 @@ public class CommissionController {
 		 public void chargeLotFilterLot() {
 			 listeLots.clear();
 			listeLotsByAvis=(List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")),
+					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
 					new WhereClause("LAA_NUM",WhereClause.Comparateur.LIKE,"%"+laaNum+"%")); 
 			_logger.info("listeLotsByAvis size: "+listeLotsByAvis.size());
 		 }
@@ -309,7 +332,21 @@ public class CommissionController {
 			 listeOffres.clear();
 			 listeOffres = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())));
-				_logger.info("listeOffres size: "+listeOffres.size());	
+				_logger.info("listeOffres size: "+listeOffre.size());	
+				
+				//pour jugelment
+				 saisie=false;
+				 affichage=true;
+				 chargeAffAttributaire();
+		 }
+		 
+		 public void chargeFilterOffres() {
+			 listeAttibutaire.clear();
+			 listeOffre.clear();
+			 listeOffre = ((List<VDetailOffres>)iservice.getObjectsByColumn("VDetailOffres",new ArrayList<String>(Arrays.asList("LAA_NUM")),
+					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId()),
+					  new WhereClause("DOF_NUM",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")));
+				_logger.info("listeOffres size: "+listeOffre.size());	
 				
 				//pour jugelment
 				 saisie=false;
@@ -387,56 +424,62 @@ public class CommissionController {
 		 
 			public void savePresence() {
 				//Mise a jour dans T_AvisAppelOffrfe
-				iservice.updateObject(slctdTd);
-				
-				//Creation de la séance
-				newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getTDacSpecs().getDacCode());
-				newSeance.setTTypeSeance(new TTypeSeance("OUV"));
-				newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
-				newSeance.setTFonction(userController.getSlctd().getTFonction());
-				newSeance.setTOperateur(userController.getSlctd().getTOperateur());
-				iservice.addObject(newSeance);
-				
-				//CREATION DE LA COMMISSION SPECIFIQUE
-				newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
-				newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
-				newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-				newcomSpec.setComMarCode(slctdTd.getTDacSpecs().getTTypeMarche().getTymCode());
-				newcomSpec.setTAvisAppelOffre(slctdTd);
-				newcomSpec.setTDacSpecs(slctdTd.getTDacSpecs());
-/*				newcomSpec.setTCommissionType(new TCommissionType(""));*/
-				newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
-				iservice.addObject(newcomSpec);
-				
-				//COMPOSITION DE LA SEANCE
-				 if (selectionMembres.size()==0) {
-					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
-						FacesContext.getCurrentInstance().addMessage(null, msg);
-					}else {
-						
-						for(VCompoCommission mbr : selectionMembres) {
-							newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
-							newDetailSeance.setDcsNomMbm(mbr.getTctNomMbm());
-							newDetailSeance.setDcsPreMbm(mbr.getTctPreMbm());
-							newDetailSeance.setDcsTelMbm(mbr.getTctTelMbm());
-							newDetailSeance.setDcsRepMandate(mbr.getTctRepMandate());
-							newDetailSeance.setDcsRepMandate(mbr.getTctRepMandate());
-							newDetailSeance.setDcsFonCod(mbr.getTctLibelle());
-							newDetailSeance.setDcsObservation(mbr.getTctTitre());
-							newDetailSeance.setTSeances(newSeance);
-							newDetailSeance.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-							newDetailSeance.setTTypeCommission(new TTypeCommission("COJ"));
-							newDetailSeance.setTDacSpecs(slctdTd.getTDacSpecs());
-							newDetailSeance.setTCommissionSpecifique(newcomSpec);
-							newDetailSeance.setTOperateur(userController.getSlctd().getTOperateur());
-							iservice.addObject(newDetailSeance);
+				if(slctdTd.getAaoNbrOff()> newSeance.getSeaNbrPli()) {
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Le nombre d'offres recu ne doit pas etre supérieur au nombre de pli", "");
+						FacesContext.getCurrentInstance().addMessage(null, msg);	
+				}else {
+					iservice.updateObject(slctdTd);
+					
+					//Creation de la séance
+					newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getTDacSpecs().getDacCode());
+					newSeance.setTTypeSeance(new TTypeSeance("OUV"));
+					newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
+					newSeance.setTFonction(userController.getSlctd().getTFonction());
+					newSeance.setTOperateur(userController.getSlctd().getTOperateur());
+					iservice.addObject(newSeance);
+					
+					//CREATION DE LA COMMISSION SPECIFIQUE
+					newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
+					newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
+					newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+					newcomSpec.setComMarCode(slctdTd.getTDacSpecs().getTTypeMarche().getTymCode());
+					newcomSpec.setTAvisAppelOffre(slctdTd);
+					newcomSpec.setTDacSpecs(slctdTd.getTDacSpecs());
+	/*				newcomSpec.setTCommissionType(new TCommissionType(""));*/
+					newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
+					iservice.addObject(newcomSpec);
+					
+					//COMPOSITION DE LA SEANCE
+					 if (selectionMembres.size()==0) {
+						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
+							FacesContext.getCurrentInstance().addMessage(null, msg);
+						}else {
+							
+							for(VCompoCommission mbr : selectionMembres) {
+								newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
+								newDetailSeance.setDcsNomMbm(mbr.getTctNomMbm());
+								newDetailSeance.setDcsPreMbm(mbr.getTctPreMbm());
+								newDetailSeance.setDcsTelMbm(mbr.getTctTelMbm());
+								newDetailSeance.setDcsRepMandate(mbr.getTctRepMandate());
+								newDetailSeance.setDcsRepMandate(mbr.getTctRepMandate());
+								newDetailSeance.setDcsFonCod(mbr.getTctLibelle());
+								newDetailSeance.setDcsObservation(mbr.getTctTitre());
+								newDetailSeance.setTSeances(newSeance);
+								newDetailSeance.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+								newDetailSeance.setTTypeCommission(new TTypeCommission("COJ"));
+								newDetailSeance.setTDacSpecs(slctdTd.getTDacSpecs());
+								newDetailSeance.setTCommissionSpecifique(newcomSpec);
+								newDetailSeance.setTOperateur(userController.getSlctd().getTOperateur());
+								iservice.addObject(newDetailSeance);
+							}
 						}
-					}
+					
+					   boutonEdit = true;
+					  userController.setTexteMsg("Enregistrement effectué avec succès !");
+					  userController.setRenderMsg(true);
+					  userController.setSevrityMsg("success");
+				}
 				
-				   boutonEdit = true;
-				  userController.setTexteMsg("Enregistrement effectué avec succès !");
-				  userController.setRenderMsg(true);
-				  userController.setSevrityMsg("success");
 			}
 		
 		//Enregistrement des membres du commité technique 
@@ -445,7 +488,7 @@ public class CommissionController {
 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				}else {
-					for(TDetCommissionSeance mbr : selectionMembresCommite) {
+					for(VDetCommissionSeance mbr : selectionMembresCommite) {
 						membre.setDcsDteSaisi(Calendar.getInstance().getTime().toString());
 						membre.setTempDteSaisi(Calendar.getInstance().getTime());
 						membre.setDcsComTcoCode("CEV");
@@ -480,23 +523,18 @@ public class CommissionController {
 		
 		//Ouverture des offres
 		public void saveOuverture() {
-			
 				newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 				newOffre.setDofLaaId(laaId);
 				newOffre.setTempType("OFF");
 				newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 				newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
 				newOffre.setDofTyp(dofTyp);
-				newOffre.setDofSouNcc(ncc);
 				//convertir le montant net en qui est en long en string
 				String montantOffre =String.valueOf(montN);
 				String rabais =String.valueOf(pourcentRab);
 				newOffre.setDofMtOfr(montantOffre);
 				newOffre.setDofRab(rabais);
 				iservice.addObject(newOffre);
-				chargeOffres();
-					
-			
 			  //enregister la liste des pièces du dao
 		    
 		    	if (listeSelectionPiecesOffres.size()==0) {
@@ -506,21 +544,34 @@ public class CommissionController {
 				 		for(VPiecesOffre ligne : listeSelectionPiecesOffres) {
 				 			newPieceOffre.setPofDteSaisi(Calendar.getInstance().getTime());
 				 			newPieceOffre.setPofPresent("O");
-				 			newPieceOffre.setPofTypeAct("COJO");
+				 			newPieceOffre.setPofTypeAct("COJO");  
 				 			newPieceOffre.setTDacSpecs(ligne.getOpdDacCode());
 				 			newPieceOffre.setTOperateur(userController.getSlctd().getTOperateur());
 				 			newPieceOffre.setTTypePieceOffre(ligne.getTpoCode());
 				 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
-				 			newPieceOffre.setTDetOffres(newOffre.getDofOffNum());
+				 			//A revoir
+				 			//newPieceOffre.setTDetOffres(newOffre.getDofNum());
 				 			newPieceOffre.setTLotAao(laaId);
 				 			iservice.addObject(newPieceOffre);
 					     }	
 			 }
 		     
+		    	chargeOffres();
+		    	vider();
 		    	userController.setTexteMsg("Ouverture effectuée avec succès !");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");	
 		}
+		
+		
+		public int nonbreLot(){
+			int i = iservice.countTableByColumn("T_LOT_AAO", "LAA_ID",
+					new WhereClause("LAA_DAC_CODE", WhereClause.Comparateur.EQ,slctdTd.getTDacSpecs().getDacCode()));
+			return	i;	
+		}
+		
+		
+		
 		
 		public void chargeListe(String statut) {
 			 listeAppelOffre.clear();
@@ -593,7 +644,14 @@ public class CommissionController {
 		public void analyser() {
 			
 			//Modification des pieces selectionnées a conforme
-	    	if (listeSelectionPiecesOffresAnalyse.size()==0) {
+			if(sltOffre.getDofRangOfr()> nbrLot) {
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
+			}else
+			{
+				sltOffre.setDofStaut("1");
+				iservice.updateObject(sltOffre);
+				
+				if (listeSelectionPiecesOffresAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
 		 		else{
@@ -607,13 +665,14 @@ public class CommissionController {
 				     }	
 			 		}
 		         }
+				
+				userController.setTexteMsg("Analyse effectuée avec succès !");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");
 	    	
-	    	sltOffre.setDofStaut("1");
-			iservice.updateObject(sltOffre);
+			}
 			chargeOffre();
-			userController.setTexteMsg("Analyse effectuée avec succès !");
-			userController.setRenderMsg(true);
-			userController.setSevrityMsg("success");
+			
 		}
 		//Ajouter attributaire
 		public void ajouterAttributaire() {
@@ -665,10 +724,28 @@ public class CommissionController {
 							
 		}
 		 
+		 public void vider() {
+			 newOffre = new VbTempParamDetOffres();
+			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
+			 listeSelectionPiecesOffresAnalyse.clear();
+			 listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();
+			 listeSelectionPiecesOffres.clear();
+			 //listeOffres = new ArrayList<TDetOffres>(); 
+			 //listeOffre = new ArrayList<VDetailOffres>();
+			 listeOffres.clear();
+			 montLu=0;
+			 pourcentRab=0;
+			 montN=0;
+			 dofTyp="";
+			 laaId="";
+			 
+		 }
+		 
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);
 		     switch(value) {
 				case "com1":
+					vider();
 					String fonct = controleController.getFonctionalite();	
 					String statutAffiche = "";
 					//Ramener le statut en fonction de l'utilisateur connecté et de l'action a mener
@@ -718,7 +795,7 @@ public class CommissionController {
 				case "com4":
 					chargeLots();
 					chargeLotByAvis();
-					chargeOffres();
+					//chargeOffres();
 					//chargeOffre();
 					break;
 				case "com5":
@@ -829,11 +906,12 @@ public class CommissionController {
 		this.membresCommite = membresCommite;
 	}
 
-	public List<TDetCommissionSeance> getSelectionMembresCommite() {
+
+	public List<VDetCommissionSeance> getSelectionMembresCommite() {
 		return selectionMembresCommite;
 	}
 
-	public void setSelectionMembresCommite(List<TDetCommissionSeance> selectionMembresCommite) {
+	public void setSelectionMembresCommite(List<VDetCommissionSeance> selectionMembresCommite) {
 		this.selectionMembresCommite = selectionMembresCommite;
 	}
 
@@ -1028,11 +1106,12 @@ public class CommissionController {
 		this.newPieceOffre = newPieceOffre;
 	}
 
-	public List<VbTempParamDetOffres> getListeOffre() {
+
+	public List<VDetailOffres> getListeOffre() {
 		return listeOffre;
 	}
 
-	public void setListeOffre(List<VbTempParamDetOffres> listeOffre) {
+	public void setListeOffre(List<VDetailOffres> listeOffre) {
 		this.listeOffre = listeOffre;
 	}
 
@@ -1184,5 +1263,23 @@ public class CommissionController {
 	public void setListeSeance(List<TSeances> listeSeance) {
 		this.listeSeance = listeSeance;
 	}
+
+	public boolean isEtatMontVar() {
+		return etatMontVar;
+	}
+
+	public void setEtatMontVar(boolean etatMontVar) {
+		this.etatMontVar = etatMontVar;
+	}
+
+	public int getNbrLot() {
+		return nbrLot;
+	}
+
+	public void setNbrLot(int nbrLot) {
+		this.nbrLot = nbrLot;
+	}
+
+
 
 }
