@@ -190,7 +190,7 @@
 						    <f:selectItem  itemLabel="Selectionnez le type de l'offre..." itemValue=""/> 
 						    <f:selectItem  itemLabel="Variante" itemValue="V"/> 
 						    <f:selectItem  itemLabel="Offre de base" itemValue="B"/> 
-						     <p:ajax listener="#{commissionController.checkMontantVar()}"  update=":gnl:montvar,:gnl:cond"/>   
+						     <p:ajax listener="#{commissionController.checkMontantVar()}"  update="gnl:montvar,gnl:cond"/>   
 				     </p:selectOneMenu> 
 		                  </div>
 		                  </div>
@@ -228,11 +228,13 @@
 				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
 		                  </div>
-		                  <h:panelGroup id="montvar" rendered="#{commissionController.etatMontVar}">
+		                  <h:panelGroup id="montvar">
+		                  <h:panelGroup rendered="#{commissionController.etatMontVar}">
 		                   <label class="col-sm-1 control-label">Montant variante</label>
 						  <div class="col-sm-5">
 				          <p:inputText  type="text" styleClass="form-control text-right" value="#{commissionController.newOffre.dofEstimRab}" style="width: 100%" />
 		                  </div>
+		                  </h:panelGroup>
 		                  </h:panelGroup>
 		                </div>  
 		                
@@ -243,7 +245,8 @@
 	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
 	                  </div>
 	                  
-	                   <h:panelGroup id="cond" rendered="#{commissionController.etatMontVar}">  
+	                   <h:panelGroup id="cond">  
+	                   <h:panelGroup rendered="#{commissionController.etatMontVar}"> 
 		                <div class="form-group">
                   <label for="l6" class="col-sm-1 control-label">Condition</label>
 
@@ -252,6 +255,7 @@
                     
                   </div>
                 </div>
+                </h:panelGroup>
                 </h:panelGroup> 
 	                </div>      
 		             

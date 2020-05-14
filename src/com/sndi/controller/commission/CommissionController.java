@@ -343,10 +343,10 @@ public class CommissionController {
 		 public void chargeFilterOffres() {
 			 listeAttibutaire.clear();
 			 listeOffre.clear();
-			 listeOffre = ((List<VDetailOffres>)iservice.getObjectsByColumn("VDetailOffres",new ArrayList<String>(Arrays.asList("LAA_NUM")),
+			 listeOffres = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId()),
 					  new WhereClause("DOF_NUM",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")));
-				_logger.info("listeOffres size: "+listeOffre.size());	
+				_logger.info("listeOffres size: "+listeOffres.size());	
 				
 				//pour jugelment
 				 saisie=false;
@@ -694,10 +694,11 @@ public class CommissionController {
 			
 			//update dans t_detail offre
 			sltOffre.setDofRet("O");
+			sltOffre.setDofStaut("2");
 			iservice.updateObject(sltOffre);
 			saisie=true;
 			affichage=false;
-			chargeAttributaire();
+			
 			
 			/*//Création de details seance
 			newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
@@ -708,7 +709,8 @@ public class CommissionController {
 			//newDetailSeance.set
 			iservice.addObject(newDetailSeance);*/
 			
-			
+			chargeAttributaire();
+			chargeAffAttributaire();
 			userController.setTexteMsg("Seance crééé avec succès !");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
