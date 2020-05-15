@@ -304,7 +304,7 @@ public class DemandeController {
 				for(TParamPieceDemande ligne : selectionPieces) {
 					TPieceDemande newPiece = new TPieceDemande();
 					newPiece.setTDemande(newDem);
-					newPiece.setTParamPieceDemande(new TParamPieceDemande());
+					newPiece.setTParamPieceDemande(ligne.getPidNum());
 					newPiece.setPdmLibeleCourt(ligne.getPidLibeleCourt());
 					newPiece.setPdmLibeleLong(ligne.getPidLibeleLong());
 					iservice.addObject(newPiece);

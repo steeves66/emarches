@@ -23,7 +23,7 @@ import com.sndi.model.TParamPieceDemande;
 public class TPieceDemande implements java.io.Serializable {
 
 	private BigDecimal pdmNum;
-	private TParamPieceDemande TParamPieceDemande;
+	private BigDecimal TParamPieceDemande;
 	private TDemande TDemande;
 	private String pdmLibeleCourt;
 	private String pdmLibeleLong;
@@ -31,13 +31,13 @@ public class TPieceDemande implements java.io.Serializable {
 	public TPieceDemande() {
 	}
 
-	public TPieceDemande(BigDecimal pdmNum, TParamPieceDemande TParamPieceDemande, TDemande TDemande) {
+	public TPieceDemande(BigDecimal pdmNum, BigDecimal TParamPieceDemande, TDemande TDemande) {
 		this.pdmNum = pdmNum;
 		this.TParamPieceDemande = TParamPieceDemande;
 		this.TDemande = TDemande;
 	}
 
-	public TPieceDemande(BigDecimal pdmNum, TParamPieceDemande TParamPieceDemande, TDemande TDemande,
+	public TPieceDemande(BigDecimal pdmNum, BigDecimal TParamPieceDemande, TDemande TDemande,
 			String pdmLibeleCourt, String pdmLibeleLong) {
 		this.pdmNum = pdmNum;
 		this.TParamPieceDemande = TParamPieceDemande;
@@ -58,13 +58,12 @@ public class TPieceDemande implements java.io.Serializable {
 		this.pdmNum = pdmNum;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PDM_PID_NUM", nullable = false)
-	public TParamPieceDemande getTParamPieceDemande() {
+	@Column(name = "PDM_PID_NUM", nullable = false)
+	public BigDecimal getTParamPieceDemande() {
 		return this.TParamPieceDemande;
 	}
 
-	public void setTParamPieceDemande(TParamPieceDemande TParamPieceDemande) {
+	public void setTParamPieceDemande(BigDecimal TParamPieceDemande) {
 		this.TParamPieceDemande = TParamPieceDemande;
 	}
 
