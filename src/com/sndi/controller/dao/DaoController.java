@@ -360,7 +360,7 @@ public class DaoController {
 	 @PostConstruct
 	 public void postContr() {
 		 controleController.fonctionaliteDynamic();
-		/* chargeData();
+		 chargeData();
 		 chargeGestions();
 		 chargeImputation();
 		 chargeFonctionImput();
@@ -377,7 +377,7 @@ public class DaoController {
 		 chargeDaoAffectesR();
 		 chargePiecesByDao();
 		 chargePiecesByCsv();
-		 chargePiecesOffres();*/
+		 chargePiecesOffres();
 	 }
 	 
 	 //liste des pièces de l'offre
@@ -2728,13 +2728,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	  public void chargeNatureDocTrans() {
 			 natureDocListe.clear();
-				/*natureDocListe = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadCode")),
-					    new WhereClause("NAD_TYPE",Comparateur.EQ,"PRQ")));*/	
-				
-				natureDocListe =(List<TNatureDocuments>) iservice.getObjectsByColumnIn("TNatureDocuments", new ArrayList<String>(Arrays.asList("nadCode")),
+				natureDocListe = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadCode")),
+					    new WhereClause("NAD_TYPE",Comparateur.EQ,"DAO")));	
+				/*natureDocListe =(List<TNatureDocuments>) iservice.getObjectsByColumnIn("TNatureDocuments", new ArrayList<String>(Arrays.asList("nadCode")),
 						 "NAD_TYPE", new ArrayList<String>(Arrays.asList("DAO","AUT","ANN")),
-						 new WhereClause("NAD_TYPE",Comparateur.NEQ,"AMI"));	
-				
+						 new WhereClause("NAD_TYPE",Comparateur.NEQ,"DAO"));*/	
 			}
 	  
 	  
