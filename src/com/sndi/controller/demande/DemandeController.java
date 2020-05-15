@@ -23,6 +23,8 @@ import com.sndi.model.TAvisPresel;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetailDemandes;
 import com.sndi.model.THistoDemande;
+import com.sndi.model.TParamPieceDemande;
+import com.sndi.model.TPieceDemande;
 import com.sndi.model.TSoumissions;
 import com.sndi.model.TStatut;
 import com.sndi.model.TTypeDemande;
@@ -77,6 +79,8 @@ public class DemandeController {
 	 private List<VMotifRetourDemande> listeMotifs = new ArrayList<VMotifRetourDemande>();
 	 private List<TSoumissions> listeEntreprises= new ArrayList<TSoumissions>();
 	 private List<TSoumissions> selectionEntreprises= new ArrayList<TSoumissions>();
+	 private List<TParamPieceDemande> listePieces= new ArrayList<TParamPieceDemande>();
+	 private List<TParamPieceDemande> selectionPieces= new ArrayList<TParamPieceDemande>();
 	 
 	 
 	 //Déclaration des Objets
@@ -84,6 +88,7 @@ public class DemandeController {
 	 private TDemande slctdTd = new TDemande();
 	 private TSoumissions newSoum = new TSoumissions();
 	 private VMotifRetourDemande motif = new VMotifRetourDemande();
+	 private TParamPieceDemande newPiece = new TParamPieceDemande();
 	 
 	
 	//Déclaration des Variables
@@ -217,6 +222,7 @@ public class DemandeController {
 								 panelLigneBudgetaire =false; 
 								 panelEntreprise = false;
 							 }
+		 chargePieces();
 	 }
 	 
 	 public void saveDemande() {
@@ -242,7 +248,8 @@ public class DemandeController {
 				 if(tdmCode.equalsIgnoreCase("AVE")) {
 					 saveLigneBugetaire(); 
 				 }
-		 
+		//Enregistrement des pièces de la demande		 
+		 savePieces();
 		 //Historisation de la demande dans THistoDemande
 		 historiser(""+newDem.getTStatut().getStaCode(),newDem);
 		 vider();	
@@ -287,7 +294,23 @@ public class DemandeController {
 				 new WhereClause("LBG_FON_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeLigneBugetaire size: "+listeLigneBugetaire.size());
 	 }
-	  
+	 
+	 // Methode d'enregistrement des pièces
+	 public void savePieces() {
+		 if (selectionPieces.size()==0) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+			}else {
+				for(TParamPieceDemande ligne : selectionPieces) {
+					TPieceDemande newPiece = new TPieceDemande();
+					newPiece.setTDemande(newDem);
+					newPiece.setTParamPieceDemande(new TParamPieceDemande());
+					newPiece.setPdmLibeleCourt(ligne.getPidLibeleCourt());
+					newPiece.setPdmLibeleLong(ligne.getPidLibeleLong());
+					iservice.addObject(newPiece);
+				}
+			}
+	 }
 	 
 	 // Methode d'enregistrement des DAO selectopnné
 	 public void saveDao() {
@@ -365,6 +388,15 @@ public class DemandeController {
 					}
 				}
 		}
+		
+		//Liste des pièces
+		public void chargePieces() {
+             listePieces.clear();
+			 listePieces = (List<TParamPieceDemande>) iservice.getObjectsByColumn("TParamPieceDemande", new ArrayList<String>(Arrays.asList("PID_LIBELE_LONG")),
+					 new WhereClause("PID_TDM_CODE",WhereClause.Comparateur.EQ,""+tdmCode));
+				_logger.info("listePieces size: "+listePieces.size());
+		}
+		
 				 public void vider() {
 					newDem = new TDemande();
                     selectionligneDao = new ArrayList<VDaoDemande>();
@@ -438,7 +470,7 @@ public class DemandeController {
 					break;
 				case "dem2":
 					chargeTypeDemande();
-					chargeListBytype();
+					//chargeListBytype();
 					
 				break;
 				case "dem3":
@@ -853,6 +885,42 @@ public class DemandeController {
 
 	public void setPanelEntreprise(boolean panelEntreprise) {
 		this.panelEntreprise = panelEntreprise;
+	}
+
+
+
+	public List<TParamPieceDemande> getListePieces() {
+		return listePieces;
+	}
+
+
+
+	public void setListePieces(List<TParamPieceDemande> listePieces) {
+		this.listePieces = listePieces;
+	}
+
+
+
+	public List<TParamPieceDemande> getSelectionPieces() {
+		return selectionPieces;
+	}
+
+
+
+	public void setSelectionPieces(List<TParamPieceDemande> selectionPieces) {
+		this.selectionPieces = selectionPieces;
+	}
+
+
+
+	public TParamPieceDemande getNewPiece() {
+		return newPiece;
+	}
+
+
+
+	public void setNewPiece(TParamPieceDemande newPiece) {
+		this.newPiece = newPiece;
 	}
 
 
