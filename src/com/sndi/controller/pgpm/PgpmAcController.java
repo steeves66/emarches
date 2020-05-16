@@ -2661,7 +2661,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          @Transactional
          public void creerDetailPlanPgspm() throws IOException{
         	 
-        	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") 
+        	 if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || detailPlan.getGpgLibFin().equalsIgnoreCase("")
         			 ||"".equals(reucpMarche.getTymCode()) ||  "".equals(recupModeListe.getMopCode())) {
        		     //Message d'erreur
        		      FacesContext.getCurrentInstance().addMessage(null,

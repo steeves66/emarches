@@ -111,7 +111,7 @@ public class TFonction implements java.io.Serializable {
 		this.TTypeFonction = TTypeFonction;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FON_STR_CODE")
 	public TStructure getTStructure() {
 		return this.TStructure;
