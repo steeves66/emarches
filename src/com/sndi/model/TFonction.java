@@ -24,7 +24,6 @@ import javax.persistence.TemporalType;
 public class TFonction implements java.io.Serializable {
 
 	private String fonCod;
-	//private TMinistere TMinistere;
 	private TStructure TStructure;
 	private TTypeFonction TTypeFonction;
 	private Date fonDatDeb;
@@ -111,7 +110,7 @@ public class TFonction implements java.io.Serializable {
 		this.TTypeFonction = TTypeFonction;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "FON_STR_CODE")
 	public TStructure getTStructure() {
 		return this.TStructure;

@@ -73,6 +73,7 @@ import com.sndi.model.VDetailCorrectionCharge;
 import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
+import com.sndi.model.VLigneLot;
 import com.sndi.model.VPieceDac;
 import com.sndi.model.VPieces;
 import com.sndi.model.VPiecesOffreDao;
@@ -163,7 +164,8 @@ public class DaoPsController {
 	 //Fin T_Affichage
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<TLotAao> affichLots = new ArrayList<TLotAao>();
-	 private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 //private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
 	 private List<VDaoBailleur> listeDaoBailleur = new ArrayList<VDaoBailleur>();
 	 private List<VUpdateDac> listeDac = new ArrayList<VUpdateDac>();
 	 private List<VPieceDac> listePiecesDao = new ArrayList<VPieceDac>();
@@ -263,8 +265,10 @@ public class DaoPsController {
 	 private String libelleTravaux ="dtao_travaux.doc";
 	 private String libellePrestations ="dtao_prestation.doc";
 	 
-	 private VLigneImputation ligne = new VLigneImputation();
-	 private VLigneImputation recupLigne = new VLigneImputation();
+	/* private VLigneImputation ligne = new VLigneImputation();
+	 private VLigneImputation recupLigne = new VLigneImputation();*/
+	 private VLigneLot ligne = new VLigneLot();
+	 private VLigneLot recupLigne = new VLigneLot();
 	 private VFonctionMinistere fonction =new VFonctionMinistere();
 	 private TAdresseAvis newAdresse = new TAdresseAvis(); 
 	 private TDetailAdresseAvis newDtailAdresse = new TDetailAdresseAvis(); 
@@ -1261,10 +1265,17 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 
 	 
 	//Chargement des imputations ou lignes budgétaires pour le AC
-	  public void chargeImputation() { 
+	 /* public void chargeImputation() { 
 		 listeImputations.clear();
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
+			}*/
+	  
+	//Chargement des imputations ou lignes budgétaires pour le AC
+	  public void chargeImputation() { 
+		 listeImputations.clear();
+		 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+				 new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())); 
 			} 
 	  
 	  
@@ -1289,10 +1300,19 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	  
 	  
 	  //Filtre Imputation
-	  public void filtreImputation() {
+	 /* public void filtreImputation() {
 			listeImputations.clear();
 			listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 					new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
+					new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+		}*/
+	  
+	//Filtre Imputation
+	  public void filtreImputation() {
+			listeImputations.clear();
+			listeImputations = (List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+					new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
+					new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode()),
 					new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 		}
 	  
@@ -2464,6 +2484,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 							 //Activation du Bouton d'enregistrement d'un Avis d'Appel d'Offres
 	 							  btn_save_avis = true;
 	 							  verifOuverture();
+	 							 chargeImputation();
 	 			      }
 		    					//Insertion des pièces
 		          }
@@ -3043,7 +3064,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		  }
 	
 	
-	  
+	       //Chargement de fichiers
 	       @Transactional
 			public void upload(FileUploadEvent event) throws java.io.FileNotFoundException { 
 			 //condition de chargement d'un document : Nature sélectionnée 
@@ -3091,7 +3112,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	       
 	       
 	       
-	       
+	       //Chargement de fichiers par le chargé d'études
 	       @Transactional
 			public void uploadCharge(FileUploadEvent event) throws java.io.FileNotFoundException { 
 			 //condition de chargement d'un document : Nature sélectionnée 
@@ -3140,7 +3161,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	  
 	
 	  
-	  
+	  //Methode de choix de vente ou retrait
 	   public void checkVente() {
 			 if(sitDac.equalsIgnoreCase("Retrait")) { 
 				 confirmVente = false;
@@ -3244,7 +3265,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
     
     
 	  
-	//Affichage des motifs de retour
+	        //Affichage des motifs de retour
 			public void chargerObservation() {
 				daostatutList=(List<VDaoStatut>) iservice.getObjectsByColumn("VDaoStatut", new ArrayList<String>(Arrays.asList("HAC_DAC_CODE")),
 						new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()),
@@ -3262,7 +3283,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      public void onSelectLigneBudgetaire() {
          newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
          
-		 recupLigne = new VLigneImputation();
+		 //recupLigne = new VLigneImputation();
+         recupLigne = new VLigneLot();
 		 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
 		 recupLigne.setLbgAeEmp(ligne.getLbgAeEmp());
 		 recupLigne.setLbgAeTr(ligne.getLbgAeTr());
@@ -3274,7 +3296,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 recupLigne.setLbgDisTot(ligne.getLbgDisTot());
 		 recupLigne.setLbgDisTre(ligne.getLbgDisTre());
 		 recupLigne.setLbgDteVal(ligne.getLbgDteVal());
-		
 		 recupLigne.setLbgNatCode(ligne.getLbgNatCode());
 		 recupLigne.setLbgImputation(ligne.getLbgImputation());
 		 recupLigne.setLbgGesCode(ligne.getLbgGesCode());
@@ -3285,7 +3306,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 		 iservice.updateObject(getSelectLot());
 		 chargeLots();
-		 
 			}
      
      
@@ -3814,7 +3834,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	}
 	
 
-	public VLigneImputation getLigne() {
+/*	public VLigneImputation getLigne() {
 		return ligne;
 	}
 	public void setLigne(VLigneImputation ligne) {
@@ -3827,16 +3847,16 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setRecupLigne(VLigneImputation recupLigne) {
 		this.recupLigne = recupLigne;
-	}
+	}*/
 
 
-	public List<VLigneImputation> getListeImputations() {
+	/*public List<VLigneImputation> getListeImputations() {
 		return listeImputations;
 	}
 
 	public void setListeImputations(List<VLigneImputation> listeImputations) {
 		this.listeImputations = listeImputations;
-	}
+	}*/
 
 
 	public List<TLibelleAdresse> getListLibelleAdresse() {
@@ -5333,4 +5353,13 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		this.btn_save_offre = btn_save_offre;
 	}
 
+	public List<VLigneLot> getListeImputations() {
+		return listeImputations;
+	}
+
+	public void setListeImputations(List<VLigneLot> listeImputations) {
+		this.listeImputations = listeImputations;
+	}
+    
+	
 }

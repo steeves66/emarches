@@ -555,7 +555,7 @@
 				        </p:column>
 				        
                           <p:column width="3%">
-				              <p:commandLink  oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+				              <p:commandLink action="#{daoController.chargeImputation()}" oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 				              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
 							<i class="fa fa-plus"></i>
 						  </p:commandLink>
