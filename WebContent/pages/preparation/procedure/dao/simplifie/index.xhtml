@@ -3224,7 +3224,7 @@
 	             <div class="form-group ">
 	                <label for="mention" class="col-xs-6 col-sm-4 control-label"><b>Mention<span style="color:red;"> *</span></b></label>
 	                 <div class="col-xs-6 col-sm-8">
-                     <p:selectOneRadio id="mention" value="#{daoPsController.slctdTd.affDacMention}">
+                     <p:selectOneRadio required="true" requiredMessage="Veuillez indiquer la mention" id="mention" value="#{daoPsController.slctdTd.affDacMention}">
 						<f:selectItem itemLabel="Validé pour publication" itemValue="Validé pour publication" />
 						<f:selectItem itemLabel="Validé et retour à l'AC" itemValue="Validé et retour à l'AC" />
 					 </p:selectOneRadio>
@@ -3263,7 +3263,7 @@
 			        
 			        <p:column headerText="Actions" styleClass="col-md-2">
 			        
-						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoPsController.removeDossier}" title="Supprimer" update="gnl">
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoPsController.removeDossier}" title="Supprimer" update="apercuDAO:tabDossier">
 		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 		                   <f:setPropertyActionListener value="#{doss}" target="#{daoPsController.selectedDossier}" />
@@ -3276,7 +3276,7 @@
 	            
 	            
 	             <div class="pull-right ">
-			            <p:commandLink action="#{daoPsController.transmettre()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:commandLink action="#{daoPsController.transmettre()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update="gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la trasmission ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-exchange"></i> Transmettre  
 			            </p:commandLink>

@@ -2403,6 +2403,8 @@ public class PpmController {
 				    affichagePpm.setAffDppDateSignatAttrib(detailPass.getDppDateSignatAttrib());
 				    iservice.updateObject(affichagePpm);
 				    boutonEdit =true;
+				    controleController.btn_creerDetailPpm = false;
+				    controleController.btn_creerDetailPspm = false;
 				     //controleController.btn_creerDetailPpm =true;
 					 //controleController.btn_maj_datePpm = true;
 				     

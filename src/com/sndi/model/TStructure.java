@@ -93,7 +93,7 @@ public class TStructure implements java.io.Serializable {
 		this.strCode = strCode;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "STR_TST_CODE")
 	public TTypeStructure getTTypeStructure() {
 		return this.TTypeStructure;

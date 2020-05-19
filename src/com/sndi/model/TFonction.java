@@ -24,7 +24,6 @@ import javax.persistence.TemporalType;
 public class TFonction implements java.io.Serializable {
 
 	private String fonCod;
-	//private TMinistere TMinistere;
 	private TStructure TStructure;
 	private TTypeFonction TTypeFonction;
 	private Date fonDatDeb;

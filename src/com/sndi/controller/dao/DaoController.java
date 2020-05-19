@@ -82,6 +82,7 @@ import com.sndi.model.VDetailCorrectionCharge;
 import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
+import com.sndi.model.VLigneLot;
 import com.sndi.model.VPieceDac;
 import com.sndi.model.VPieces;
 import com.sndi.model.VPiecesOffreDao;
@@ -173,7 +174,8 @@ public class DaoController {
 	 //Fin T_Affichage
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<TLotAao> affichLots = new ArrayList<TLotAao>();
-	 private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 //private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
 	 private List<VDaoBailleur> listeDaoBailleur = new ArrayList<VDaoBailleur>();
 	 private List<VUpdateDac> listeDac = new ArrayList<VUpdateDac>();
 	 private List<VPieceDac> listePiecesDao = new ArrayList<VPieceDac>();
@@ -195,6 +197,7 @@ public class DaoController {
 	 private List<VVenteLot> listSelectionVerifLot = new ArrayList<VVenteLot>();
 	 private List<VVenteLot> listVerifLot = new ArrayList<VVenteLot>();
 	 private List<TLotAao> listLots = new ArrayList<TLotAao>();
+	 //private List <VDonneeCandidat> donneeListe = new ArrayList<VDonneeCandidat>();
 	 
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
 	 private List<VFonctionImputation>listSelectionFonctImput =new ArrayList<VFonctionImputation>();
@@ -251,6 +254,7 @@ public class DaoController {
 	 private TCandidats newCandidat = new TCandidats();
 	 private VbTempParamVente newVbTempVente = new VbTempParamVente();
 	 private TVenteDac newVente = new TVenteDac();
+	 //private VDonneeCandidat donneeCandidat= new VDonneeCandidat();
 	 private TDetailVente venteDetail = new TDetailVente();
 	 //GESTION DES PIECES DE L'OFFRE
 	 private TTypePieceOffre newPieceOffre = new TTypePieceOffre();
@@ -279,8 +283,11 @@ public class DaoController {
 	 private String libelleRestauration ="Dao_Restauration.doc";
 	 private String libelleSecurite ="dao_securite_privee_ 2016.doc";
 	 
-	 private VLigneImputation ligne = new VLigneImputation();
-	 private VLigneImputation recupLigne = new VLigneImputation();
+	 //private VLigneImputation ligne = new VLigneImputation();
+	 //private VLigneImputation recupLigne = new VLigneImputation();
+	 private VLigneLot ligne = new VLigneLot();
+	 private VLigneLot recupLigne = new VLigneLot();
+	 
 	 private VFonctionMinistere fonction =new VFonctionMinistere();
 	 private TAdresseAvis newAdresse = new TAdresseAvis(); 
 	 private TDetailAdresseAvis newDtailAdresse = new TDetailAdresseAvis(); 
@@ -356,6 +363,7 @@ public class DaoController {
 	  private boolean btn_affecter = false;
 	  private boolean btn_save_avis = false;
 	  private boolean btn_save_offre = false;
+	  private boolean btn_corrige = true;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -476,8 +484,7 @@ public class DaoController {
 	//Methode de chargement
 	 @Transactional
 	 public void uploadBailleur(FileUploadEvent event) throws IOException{
-		 if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.getAffDacAvisBailleur()) || slctdTd.getAffDacDateBailleur().equals(null) 
-				 || "".equals(slctdTd.getAffDacDateBailleur())) 
+		 if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.getAffDacAvisBailleur()) || slctdTd.getAffDacDateBailleur() == null ) 
 		   {
 			//Message d'erreur
 			   FacesContext.getCurrentInstance().addMessage(null,
@@ -991,6 +998,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		     			  				   
 		     			  				  //Actualisation du Tableau de Bord
 		     			 		          tableauBordController.chargeDataDao();
+		     			 		          //Réinitialisation des champs du Candidat
+		     			 		          //viderCandidat();
 		      			  				   //Message de Confirmation
 		      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
 		      					           userController.setTexteMsg("Paiement effectué avec succès");
@@ -1278,11 +1287,22 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 
 	 
 	//Chargement des imputations ou lignes budgétaires pour le AC
-	  public void chargeImputation() { 
+	 /* public void chargeImputation() { 
 		 listeImputations.clear();
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
 			} 
+	  */
+	 
+	
+   
+	//Chargement des imputations ou lignes budgétaires pour le AC
+	  public void chargeImputation() { 
+		 listeImputations.clear();
+		 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+				 new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())); 
+			} 
+	  
 	  
 	  
 	//Chargement des imputations ou lignes budgétaires pour le AC
@@ -1306,12 +1326,24 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	  
 	  
 	  //Filtre Imputation
-	  public void filtreImputation() {
+	  /*public void filtreImputation() {
 			listeImputations.clear();
 			listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 					new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
 					new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+		}*/
+	  
+	  
+	//Filtre Imputation
+	  public void filtreImputation() {
+			listeImputations.clear();
+			listeImputations = (List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+					new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
+					new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode()),
+					new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 		}
+	  
+	  
 	  
 	  public void filtreFonctionMin() {
 			getListeFonctions().clear();
@@ -1890,11 +1922,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 public void ouverture () {
 		 
 		 if(newAvis.getAaoNbrOuv() == 1) {
-			    
 			// newAvis.get
 		 }else
 		      if(newAvis.getAaoNbrOuv() == 2){
-			 
 		 }
 	 }
 	  
@@ -2130,7 +2160,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				  
 				  chargeDaoChargeEtude();
 				  chargeDataChargeValid();
-				//Actualisation du tableau de bord
+				  //Actualisation du tableau de bord
  					tableauBordController.chargeDataDao();
  					//Message de confirmation
  					userController.setTexteMsg("Transmission effectuée avec succès!");
@@ -2193,6 +2223,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		                             chargeDaoChargeEtude();
 				                     //Actualisation du Tableau de Bord
 				                     tableauBordController.chargeDataDao();
+				                     //visibilité du bouton
+				                     btn_corrige = false;
 				                     //Message de confirmation
 				                     userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 				                     userController.setRenderMsg(true);
@@ -2235,6 +2267,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		       		                                chargeDaoChargeEtude();
 	 				                                //Actualisation du Tableau de Bord
 					                                 tableauBordController.chargeDataDao();
+					                                //visibilité du bouton
+								                     btn_corrige = false;
 	 				                                //Message de confirmation
 	 				                                userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 	 				                                userController.setRenderMsg(true);
@@ -2481,6 +2515,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 							 //Activation du Bouton d'enregistrement d'un Avis d'Appel d'Offres
 	 							  btn_save_avis = true;
 	 							  verifOuverture();
+	 							  chargeImputation();
 	 			   }
 		    	
 		    					//Insertion des pièces
@@ -3104,9 +3139,44 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	  
 		//Edition du recu de paiement
 		 public void imprimerRecu() {
-				projetReport.stringparam3(slctdTd.getAffDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
+			 if(newCandidat.getCanNom().equalsIgnoreCase("") || newCandidat.getCanPrenoms().equalsIgnoreCase("")) {
+				    //Message d'erreur
+					FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat avant impression du recu", ""));
+			 }else {
+				    projetReport.stringparam3(slctdTd.getAffDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
+			      }
 			}
-  
+        
+		 
+		//Edition du recu de paiement
+		/*public void imprimerRecu() {
+		 
+		 donneeListe=(List<VDonneeCandidat>) iservice.getObjectsByColumn("VDonneeCandidat", new ArrayList<String>(Arrays.asList("CAN_CODE")),
+							new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,slctdTd.getAffDacCode()));
+					if(!donneeListe.isEmpty()) {
+						int i=donneeListe.size();
+						int baoule=i-1;
+						donneeCandidat=donneeListe.get(baoule);
+					}
+		  
+			 if(donneeCandidat.getCanNom().equalsIgnoreCase("") || donneeCandidat.getCanPrenoms().equalsIgnoreCase("")) {
+				    //Message d'erreur
+					FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat avant impression du recu", ""));
+			 }else {
+				    projetReport.stringparam3(slctdTd.getAffDacCode(), donneeCandidat.getCanNom(), donneeCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
+			      }
+			}
+			*/
+		//Fin de la methode
+        
+		 
+		 //vider les champs candidat
+		 public void viderCandidat() {
+			 newCandidat = new TCandidats(); 
+		 }
+		 
 	//Téléchargement des DAO type depuis la liste d'affichage
 	public void opendaoType() throws IOException{
 		  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
@@ -3414,7 +3484,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      public void onSelectLigneBudgetaire() {
          newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
          
-		 recupLigne = new VLigneImputation();
+		 //recupLigne = new VLigneImputation();
+		 recupLigne = new VLigneLot();
 		 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
 		 recupLigne.setLbgAeEmp(ligne.getLbgAeEmp());
 		 recupLigne.setLbgAeTr(ligne.getLbgAeTr());
@@ -3473,10 +3544,10 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
         @Transactional
         public void transmettre() {
         	
-        	if(dos.getDdaNom().equalsIgnoreCase("") || "".equals(dos.getDdaNom()) || dos.getDdaReference().equalsIgnoreCase("") || "".equals(dos.getDdaReference())) {
+        	if(dos.getDdaNom().equalsIgnoreCase("") || "".equals(dos.getDdaNom()) || dos.getDdaReference().equalsIgnoreCase("") || "".equals(dos.getDdaReference()) ) {
         		//Message d'erreur
 		          FacesContext.getCurrentInstance().addMessage(null,
-	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez joindre votre fichier avant Transmission", ""));
+	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez joindre votre fichier ou choisir la mention avant Transmission du DAO", ""));
         	      }else {
         		          slctdTd.setAffStaCode("D1T");
            	              slctdTd.setAffDacStatutRetour("0");
@@ -3966,7 +4037,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	}
 	
 
-	public VLigneImputation getLigne() {
+	/*public VLigneImputation getLigne() {
 		return ligne;
 	}
 	public void setLigne(VLigneImputation ligne) {
@@ -3979,16 +4050,16 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setRecupLigne(VLigneImputation recupLigne) {
 		this.recupLigne = recupLigne;
-	}
+	}*/
 
 
-	public List<VLigneImputation> getListeImputations() {
+/*	public List<VLigneImputation> getListeImputations() {
 		return listeImputations;
 	}
 
 	public void setListeImputations(List<VLigneImputation> listeImputations) {
 		this.listeImputations = listeImputations;
-	}
+	}*/
 
 
 	public List<TLibelleAdresse> getListLibelleAdresse() {
@@ -5532,6 +5603,56 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	public void setAffichLog(String affichLog) {
 		this.affichLog = affichLog;
 	}
+
+	public boolean isBtn_corrige() {
+		return btn_corrige;
+	}
+
+	public void setBtn_corrige(boolean btn_corrige) {
+		this.btn_corrige = btn_corrige;
+	}
+
+	public List<VLigneLot> getListeImputations() {
+		return listeImputations;
+	}
+
+	public void setListeImputations(List<VLigneLot> listeImputations) {
+		this.listeImputations = listeImputations;
+	}
+
+	public VLigneLot getLigne() {
+		return ligne;
+	}
+
+	public void setLigne(VLigneLot ligne) {
+		this.ligne = ligne;
+	}
+
+	public VLigneLot getRecupLigne() {
+		return recupLigne;
+	}
+
+	public void setRecupLigne(VLigneLot recupLigne) {
+		this.recupLigne = recupLigne;
+	}
+	
+	
+
+	/*public List <VDonneeCandidat> getDonneeListe() {
+		return donneeListe;
+	}
+
+	public void setDonneeListe(List <VDonneeCandidat> donneeListe) {
+		this.donneeListe = donneeListe;
+	}*/
+
+	/*public VDonneeCandidat getDonneeCandidat() {
+		return donneeCandidat;
+	}
+
+	public void setDonneeCandidat(VDonneeCandidat donneeCandidat) {
+		this.donneeCandidat = donneeCandidat;
+	}*/
 	
 			
 }
