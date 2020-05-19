@@ -9,8 +9,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,10 +21,17 @@ import org.springframework.stereotype.Component;
 import com.sndi.controller.custom.ControleController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
+import com.sndi.model.TAgpm;
 import com.sndi.model.TAvisPresel;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetailDemandes;
+import com.sndi.model.TDetailPlanGeneral;
+import com.sndi.model.TDossierAgpm;
+import com.sndi.model.TDossierDemande;
+import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.THistoDemande;
+import com.sndi.model.TNatureDocuments;
+import com.sndi.model.TNaturePiece;
 import com.sndi.model.TParamPieceDemande;
 import com.sndi.model.TPieceDemande;
 import com.sndi.model.TSoumissions;
@@ -30,6 +39,7 @@ import com.sndi.model.TStatut;
 import com.sndi.model.TTypeDemande;
 import com.sndi.model.VAgpmStatut;
 import com.sndi.model.VDaoDemande;
+import com.sndi.model.VDetailDemande;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VMotifRetourDemande;
 import com.sndi.model.VPpmDao;
@@ -81,6 +91,13 @@ public class DemandeController {
 	 private List<TSoumissions> selectionEntreprises= new ArrayList<TSoumissions>();
 	 private List<TParamPieceDemande> listePieces= new ArrayList<TParamPieceDemande>();
 	 private List<TParamPieceDemande> selectionPieces= new ArrayList<TParamPieceDemande>();
+	 private List<VDetailDemande> listeDetails= new ArrayList<VDetailDemande>();
+	 private List<String> repeat = new ArrayList<String>();
+	 
+	 private List<TPieceDemande> listePiecesDemande= new ArrayList<TPieceDemande>();
+	 private List<TPieceDemande> listePiecesDem= new ArrayList<TPieceDemande>();
+	 
+	 
 	 
 	 
 	 //Déclaration des Objets
@@ -104,7 +121,12 @@ public class DemandeController {
 	 private boolean panelEntreprise =false;
 	 private boolean panelAutre =false;
 	 private String observation="";
+	 private Long numPiece;
 	 
+	 private Boolean boutonAdd=true;
+	 private Boolean boutonSupp=false;
+	 
+	// private Long natPiece ;
 	 public String onFlowProcess(FlowEvent event) throws IOException {
 		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
 		 
@@ -127,6 +149,16 @@ public class DemandeController {
 		 
 		 return event.getNewStep();
 	    }
+	 
+	 public void add() {
+		 repeat.add("a");
+			setBoutonSupp(true);
+		}
+		public void supp() {
+				int i=repeat.size();
+				int posit=i-1;
+				repeat.remove(posit);		
+			}
 	 
 	 
 	 
@@ -397,6 +429,9 @@ public class DemandeController {
 				_logger.info("listePieces size: "+listePieces.size());
 		}
 		
+		
+		
+		
 				 public void vider() {
 					newDem = new TDemande();
                     selectionligneDao = new ArrayList<VDaoDemande>();
@@ -407,6 +442,64 @@ public class DemandeController {
 					selectionligneBugetaire.clear();
 					tdmCode ="";
 				 }
+//DEBUT ENSEMBLE DES METHODES POUR L'APERCU
+				 //Liste des dao de la demande
+				 public void chargeDaoApercu() {
+					 listeDetails.clear();
+					 listeDetails = (List<VDetailDemande>) iservice.getObjectsByColumn("VDetailDemande", new ArrayList<String>(Arrays.asList("DAC_DTE_SAISI")),
+							 new WhereClause("DDE_DEM_NUM",WhereClause.Comparateur.EQ,""+slctdTd.getDemNum()));
+						_logger.info("listePiecesDemande size: "+listePiecesDemande.size());
+				 }
+				 
+				 
+				//Liste des pieces de la demande
+				 public void chargePiecesDemande() {
+					 listePiecesDemande.clear();
+					 listePiecesDemande = (List<TPieceDemande>) iservice.getObjectsByColumn("TPieceDemande", new ArrayList<String>(Arrays.asList("PDM_LIBELE_LONG")),
+							 new WhereClause("PDM_DEM_NUM",WhereClause.Comparateur.EQ,""+slctdTd.getDemNum()));
+						_logger.info("listePiecesDemande size: "+listePiecesDemande.size());
+						chargePiecesCombobx();
+				 }
+				 
+				//Liste pieces combobox
+					public void chargePiecesCombobx() {
+						listePiecesDem.clear();
+						listePiecesDem = (List<TPieceDemande>) iservice.getObjectsByColumn("TPieceDemande", new ArrayList<String>(Arrays.asList("PDM_LIBELE_LONG")),
+								 new WhereClause("PDM_DEM_NUM",WhereClause.Comparateur.EQ,""+slctdTd.getDemNum()));
+							_logger.info("listePiecesDem size: "+listePiecesDem.size());
+						
+					}
+//FIN ENSEMBLE DES METHODES POUR L'APERCU
+				 
+				//Methode Upload
+				 @Transactional
+				 public void upload(FileUploadEvent event) throws IOException{
+						if(fileUploadController.handleFileUpload(event, slctdTd.getDemNum()+"", numPiece)) {
+								TDossierDemande dos = new TDossierDemande(); //TNatureDocument 
+								dos = new TDossierDemande() ;
+								dos.setDodLibelle(fileUploadController.getFileName());
+								dos.setTDemande(slctdTd);
+					            dos.setDodReference(fileUploadController.getDocNom());
+					            dos.setTPieceDemande(new TPieceDemande(numPiece));
+								iservice.addObject(dos);
+								//chargeDossier();
+								
+								//Message de Confirmation
+								 userController.setTexteMsg("Document enregistré!");
+								 userController.setRenderMsg(true);
+								 userController.setSevrityMsg("success");
+							
+						     }else {
+						    	//Message d'erreur
+								 userController.setTexteMsg("Document non enregistré, charger à nouveau un document!");
+								 userController.setRenderMsg(true);
+								 userController.setSevrityMsg("danger");
+									}
+						  }
+				 
+		     	 
+				 
+				 
 	 
 	public String renderPage(String value ,String action) throws IOException{ 
 		controleController.redirectionDynamicProcedures(action);
@@ -474,12 +567,24 @@ public class DemandeController {
 					
 				break;
 				case "dem3":
+					chargeDaoApercu();
+					chargePiecesDemande();
 				break;
 				
 				case "dem4":
 					break;
-
+					
+				case "dem5":
+				break;
+				
+				case "dem6":
+					chargePiecesDemande();
+					chargePiecesCombobx();
+					break;
+					
 			    }
+		     
+		     
 		     
 		    return userController.renderPage(value);
 		}
@@ -496,25 +601,20 @@ public class DemandeController {
 	public void valider() {
 		String statUpdate = "";
 		String message = "";
-		String motif = "";
 		if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1S")) {
 			statUpdate = "E1T";
 			message="Transmission de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
-			motif = "Demande Transmise par l'AC";
-			//chargeData("E1S","E2D","DEM_FON_CODE_AC");
 			
 		 }else {
 			 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1T")) {
 					statUpdate = "E2V";
 					//chargeData("E1T","E3D","DEM_FON_CODE_PF");
 					message="Prévalidation de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
-					motif = "Demande Prévalidée par la Céllule";
 			 }else {
 				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E2V")) {
 					 statUpdate = "E3V";
 					 //chargeData("E2V","E3V","DEM_FON_CODE_DMP");
 					 message="Validation de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
-					 motif = "Demande Validée par le Service Procédure dérogatoire";
 				 }else {
 					 
 				 }	 
@@ -547,9 +647,7 @@ public class DemandeController {
 	public void differe() {
 		String statUpdate = "";
 		String message = "";
-		String motif = "";
-
-			 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1T")) {
+		if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1T")) {
 					statUpdate = "E2D";
 					chargeData("E1T","E3D","DEM_FON_CODE_PF");
 					message="Démande N°"+slctdTd.getDemNum()+"différée avec succès";
@@ -922,6 +1020,79 @@ public class DemandeController {
 	public void setNewPiece(TParamPieceDemande newPiece) {
 		this.newPiece = newPiece;
 	}
+
+
+
+	public List<VDetailDemande> getListeDetails() {
+		return listeDetails;
+	}
+
+
+
+	public void setListeDetails(List<VDetailDemande> listeDetails) {
+		this.listeDetails = listeDetails;
+	}
+
+
+
+	public List<TPieceDemande> getListePiecesDemande() {
+		return listePiecesDemande;
+	}
+
+
+
+	public void setListePiecesDemande(List<TPieceDemande> listePiecesDemande) {
+		this.listePiecesDemande = listePiecesDemande;
+	}
+
+
+
+	public Long getNumPiece() {
+		return numPiece;
+	}
+
+
+
+	public void setNumPiece(Long numPiece) {
+		this.numPiece = numPiece;
+	}
+
+
+
+	public List<TPieceDemande> getListePiecesDem() {
+		return listePiecesDem;
+	}
+
+
+
+	public void setListePiecesDem(List<TPieceDemande> listePiecesDem) {
+		this.listePiecesDem = listePiecesDem;
+	}
+
+	public List<String> getRepeat() {
+		return repeat;
+	}
+
+	public void setRepeat(List<String> repeat) {
+		this.repeat = repeat;
+	}
+
+	public Boolean getBoutonAdd() {
+		return boutonAdd;
+	}
+
+	public void setBoutonAdd(Boolean boutonAdd) {
+		this.boutonAdd = boutonAdd;
+	}
+
+	public Boolean getBoutonSupp() {
+		return boutonSupp;
+	}
+
+	public void setBoutonSupp(Boolean boutonSupp) {
+		this.boutonSupp = boutonSupp;
+	}
+
 
 
 }

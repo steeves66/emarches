@@ -202,7 +202,7 @@
 	                           </p:commandLink> 
 	         		         </h:panelGroup>
 
-                             <p:commandLink  styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" action="#{demandeController.renderPage('dem3','MOD')}" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
                              </p:commandLink>
@@ -219,12 +219,29 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
                               </p:commandLink>
                               </h:panelGroup>
-
+                              
+                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                                 <p:commandLink action="#{demandeController.valider()}" styleClass="btn btn-xs btn-success"  title="#{controleController.libelleTitle}" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa  fa-mail-forward bigger-130"  style="color: white"></i>
                                 <p:confirm header="Confirmation" message="#{controleController.libelleConfirm} #{slctdTb.demNum} ?" icon="ui-icon-alert" /> 
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
                              </p:commandLink>
+                             </h:panelGroup>
+                             
+                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPD'}">
+                                <p:commandLink action="#{demandeController.renderPage('dem5','TRADEMCE')}" styleClass="btn btn-xs btn-success" 
+                                 title="#{controleController.libelleTitle}" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa  fa-mail-forward bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
+                             </p:commandLink>
+                             </h:panelGroup>
+                             
+                              <p:commandLink  styleClass="btn btn-xs btn-success" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"  title="Transmission" style="background-color: #036d3b;margin-right:3px" action="#{demandeController.renderPage('dem6','TRANDEM')}" update=":content">
+                                <i class="ace-icon fa  fa-mail-forward bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{demandeController.slctdTd}" />
+                             </p:commandLink>
+                             
+                          
                              
 				        </p:column>   
     </p:dataTable>
@@ -254,6 +271,92 @@
 
 </h:form>
 
+
+ <h:form id="Piece">
+	        <p:dialog  widgetVar="Piece" modal="true"   showEffect="fade" hideEffect="fade" width="50%" height="60%" closable="true" header="Transmission de la demande N°#{demandeController.slctdTd.demNum}">
+					<div class="row">
+                   <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+             </div>
+             <div class="col-md-12">
+		            <div class="box box-warning box-solid" >
+		              <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES PIECES DE LA DEMANDE N°#{demandeController.slctdTd.demNum}</div></div>
+			         </div>
+			          <div class="box-body">
+				       <p:dataTable id="TabPiecesDem" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{demandeController.listePiecesDemande}" emptyMessage="Aucune pièce trouvée">
+                          <p:column headerText="Pièces" styleClass="col-sm-12" >
+         				<h:outputText value="#{slctdTb.pdmLibeleLong}" />
+				        </p:column>
+	                <p:column rendered="false" headerText="Action" styleClass="no-sort col-sm-1">
+			 	             <p:commandLink styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e;" action="#{etatsAgpmController.openDossier}"  title="ouvrir"  ajax="false">
+			 	                <i class="ace-icon fa fa-folder-open bigger-120"  style="background-color: #f88b2e;color: white"></i> 
+				                <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.selectedDossier}" />
+				            </p:commandLink>	
+ 	                </p:column> 
+                 </p:dataTable>     
+			          </div>
+		            </div>
+	            </div>
+	            
+	            <div class="col-md-12">
+	             <div class="form-group ">
+	              <div class="col-xs-6 col-sm-8">
+                     
+                  </div>
+	                </div>
+	            
+	            <div class="col-xs-6 col-sm-3"><label class="control-label" style="margin-top:20px"><b>Sélectionnez la pièce</b></label></div>
+								<div class="col-xs-6 col-sm-9">
+								<p:selectOneMenu  value="#{demandeController.numPiece}" style="width:100%; margin-top:20px;"> 
+								    <f:selectItems value="#{demandeController.listePiecesDem}" var="p" itemLabel="#{p.pdmLibeleLong}" itemValue="#{p.pdmNum}"/> 
+				       			    </p:selectOneMenu>
+								</div>
+            
+				</div>
+	            <div class="col-md-12">
+	              <p:fileUpload fileUploadListener="#{demandeController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger la pièce" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+	            </div>
+	            
+	            <div class="col-md-12">
+		            <div class="box box-success box-solid" >
+		              <div class="box-header with-border">
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES PIECES JOINTES DE LA DEMANDE N°#{demandeController.slctdTd.demNum}</div></div>
+			         </div>
+			          <div class="box-body">
+			          
+                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss"  emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-10">
+			            <h:outputText value="#{doss.ddaNom}" />
+			        </p:column>
+			        <p:column headerText="Nature Document" styleClass="col-md-10">
+			            <h:outputText />
+			        </p:column>
+			        
+			        <p:column headerText="Actions" styleClass="col-md-2">
+			        
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeDossier}" title="Supprimer" update="gnl">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
+		                </p:commandLink>
+		 	        </p:column>
+			    </p:dataTable>  
+			          </div>
+		            </div>
+	            </div>
+	            
+	            
+	             <div class="pull-right ">
+			            <p:commandLink action="#{daoController.transmettreRespo()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoChargeDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl:">
+			            <p:confirm header="Confirmation" message="Confirmez vous la trasmission ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-exchange"></i> Transmettre  
+			            </p:commandLink>
+              </div>
+      </p:dialog>
+    </h:form>
  
  
  <h:form id="motif">

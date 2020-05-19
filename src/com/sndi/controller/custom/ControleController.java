@@ -4680,7 +4680,19 @@ public class ControleController {
 																			btn_new =false;
 																		    fermerSai=true;
 																			fermerVal=false;
-															    		}
+															    		}else
+															    			if(action.equalsIgnoreCase("TRADEMCE")) {
+																    			type = "Demandes";
+																    			//fonctionalite = "listAvenantAc";
+																    			libelle="TRAITEMENT DU DOSSIER N°";	
+																			    fermerSai=true;
+																				fermerVal=false;
+																    		}else
+																    			if(action.equalsIgnoreCase("TRANDEM")) {
+																	    			type = "Demandes";
+																	    			//fonctionalite = "listAvenantAc";
+																	    			libelle="TRANSMISSION DE LA DU DEMANDE N°";	
+																	    		}
 							    		
 							    		                       //FIN GESTION DES PROCEDURES DERROGATOIRES
 			 	    			

@@ -50,7 +50,21 @@ public class FileUploadController {
 	 public boolean handleFileUpload(FileUploadEvent event, String name, String type) {
 			return upload(event.getFile(), name, type);
 		    }
+	 
+	 public boolean handleFileUpload(FileUploadEvent event, String name, long type) {
+			return upload(event.getFile(), name, type);
+		    }
 	
+	 
+	 public boolean upload(UploadedFile event, String demCode, long docNature) { 	
+			file = event;
+			boolean rep= false;
+			String name="";
+			 name="DOC-";
+			return rep;			
+			
+	 }
+		
 	
 	public boolean upload(UploadedFile event, String demCode, String docNature) { 	
 		file = event;
