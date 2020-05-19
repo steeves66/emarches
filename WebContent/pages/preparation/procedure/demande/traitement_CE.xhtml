@@ -1,0 +1,250 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{demandeController.slctdTd.demNum}
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{demandeController.renderPage('demm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Precédure derogatoire | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{demandeController.renderPage('demm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Precédure derogatoire  | 
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+    <div class="box box-success">
+            
+              <div class="box-body">
+              <div class="row">
+             <div class="col-md-12">
+	          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LA DEMANDE</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="row">
+                  <div class="col-sm-1"><label class="pull-right">type</label></div>
+                  <div class="col-sm-5">
+                   <label><h:outputText styleClass="text-muted" value="#{demandeController.slctdTd.TTypeDemande.tdmLibelle}"  style="width: 100%"/></label> 
+                  </div>
+                  <div class="col-sm-1"><label class="pull-right">Motif</label></div>
+                  <div class="col-sm-5">
+                   <label><h:outputText styleClass="text-muted" value="#{demandeController.slctdTd.demMotif}"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-1"><label class="pull-right">Objet</label></div>
+                  <div class="col-sm-5">
+                   <label><h:outputText styleClass="text-muted" value="#{demandeController.slctdTd.demObjet}"  style="width: 100%"/></label> 
+                  </div>
+                  <div class="col-sm-1"><label class="pull-right">Date </label></div>
+                  <div class="col-sm-2">
+                   <label><h:outputText styleClass="text-muted" value="#{demandeController.slctdTd.demDteSaisi}"  style="width: 100%">
+                   <f:convertDateTime pattern="dd/MM/yyyy" />
+                   </h:outputText>
+                   </label> 
+                  </div>
+                  <div class="col-sm-1"><label class="pull-right">Référence </label></div>
+                  <div class="col-sm-2">
+                   <label><h:outputText styleClass="text-muted" value="#{demandeController.slctdTd.demRef}"  style="width: 100%"/></label> 
+                  </div>
+	             </div>
+	             
+	           </div>
+	           <div class="row">
+	           <div class="col-md-4">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">NIVEAU I : CHEF DE SERVICE</div></div> 
+			         <div class="col-md-2 "> 
+			
+			         </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	                <p:repeat value="#{demandeController.repeat}" var="car">
+	                <h:panelGroup id="repeat">
+	                 <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend><small>Première validation</small></legend>
+                       <div class="form-group horizontal">
+		                      <label  class="col-sm-1 control-label text-right"><b>Date</b></label>
+		                      <div class="col-sm-4">
+		                        <p:calendar  mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" />
+		                      </div>
+		                      
+		                       <label  class="col-sm-3 control-label text-right"><b>Validé ?</b></label>
+		                      <div class="col-sm-4">
+		                         <p:selectOneRadio>
+									<f:selectItem itemLabel="OUI" itemValue="O" />
+									<f:selectItem itemLabel="NON" itemValue="N" />
+								 </p:selectOneRadio>
+		                      </div>
+		                  </div>	
+                   </fieldset>
+                   </h:panelGroup>
+                 </p:repeat>
+	            </div>
+	            <div class="box-footer">
+	               <p:commandLink action="#{demandeController.supp}" rendered="#{demandeController.boutonSupp}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" update=":gnl" style="background-color: #f88b2e">
+			 <i class="fa fa-minus"></i>
+			 </p:commandLink>
+			 <p:commandLink action="#{demandeController.add}" rendered="#{demandeController.boutonAdd}" update=":gnl" styleClass="btn btn-success btn-rounded waves-effect waves-light">
+								<i class="fa fa-plus"></i>
+								</p:commandLink>
+								
+					 <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{agpmController.creerDeclarant()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Valider
+			            </p:commandLink>
+					
+	            </div>
+	           </div>
+            </div>
+            
+            <div class="col-md-4">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">NIVEAU II : SOUS-DIRECTEUR</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:repeat value="#{demandeController.repeat}" var="car">
+	                 <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend><small>Première validation</small></legend>
+                       <div class="form-group horizontal">
+		                      <label  class="col-sm-1 control-label text-right"><b>Date</b></label>
+		                      <div class="col-sm-4">
+		                        <p:calendar  mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" />
+		                      </div>
+		                      
+		                       <label  class="col-sm-3 control-label text-right"><b>Validé ?</b></label>
+		                      <div class="col-sm-4">
+		                         <p:selectOneRadio>
+									<f:selectItem itemLabel="OUI" itemValue="O" />
+									<f:selectItem itemLabel="NON" itemValue="N" />
+								 </p:selectOneRadio>
+		                      </div>
+		                  </div>	
+                   </fieldset>
+                   </p:repeat>
+	            </div>
+	             <div class="box-footer">
+	               <p:commandLink action="#{demandeController.supp}" rendered="#{demandeController.boutonSupp}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" update=":gnl" style="background-color: #f88b2e">
+			 <i class="fa fa-minus"></i>
+			 </p:commandLink>
+			 <p:commandLink action="#{demandeController.add}" rendered="#{demandeController.boutonAdd}" update=":gnl" styleClass="btn btn-success btn-rounded waves-effect waves-light">
+								<i class="fa fa-plus"></i>
+								</p:commandLink>
+					
+					<p:commandLink  styleClass="btn btn-success row pull-right"  action="#{agpmController.creerDeclarant()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Valider
+			            </p:commandLink>			
+					
+	            </div>
+	           </div>
+            </div>
+            
+            <div class="col-md-4">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">NIVEAU III : DMP</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:repeat value="#{demandeController.repeat}" var="car">
+	                 <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend><small>Première validation</small></legend>	
+                   
+                   <div class="form-group horizontal">
+		                      <label  class="col-sm-1 control-label text-right"><b>Date</b></label>
+		                      <div class="col-sm-4">
+		                        <p:calendar  mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" />
+		                      </div>
+		                      
+		                       <label  class="col-sm-3 control-label text-right"><b>Validé ?</b></label>
+		                      <div class="col-sm-4">
+		                         <p:selectOneRadio  id="part">
+									<f:selectItem itemLabel="OUI" itemValue="O" />
+									<f:selectItem itemLabel="NON" itemValue="N" />
+								 </p:selectOneRadio>
+		                      </div>
+		                  </div>
+                   </fieldset>
+                 </p:repeat>  
+	            </div>
+	            <div class="box-footer">
+	               <p:commandLink action="#{demandeController.supp}" rendered="#{demandeController.boutonSupp}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" update=":gnl" style="background-color: #f88b2e">
+			 <i class="fa fa-minus"></i>
+			 </p:commandLink>
+			 <p:commandLink action="#{demandeController.add}" rendered="#{demandeController.boutonAdd}" update=":gnl" styleClass="btn btn-success btn-rounded waves-effect waves-light">
+								<i class="fa fa-plus"></i>
+								</p:commandLink>
+								
+					<p:commandLink  styleClass="btn btn-success row pull-right"  action="#{agpmController.creerDeclarant()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Valider
+			            </p:commandLink>
+	            </div>
+	           </div>
+            </div>
+	          </div> 
+
+	           
+            </div>
+  
+            </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          
+				      
+      <p:commandLink styleClass="btn btn-warning" action="#{demandeController.renderPage('dem1','LISDEMSAI')}"  style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		 
+    </section>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>
