@@ -82,6 +82,7 @@ import com.sndi.model.VDetailCorrectionCharge;
 import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
+import com.sndi.model.VLigneLot;
 import com.sndi.model.VPieceDac;
 import com.sndi.model.VPieces;
 import com.sndi.model.VPiecesOffreDao;
@@ -173,7 +174,8 @@ public class AmiController {
 	 //Fin T_Affichage
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<TLotAao> affichLots = new ArrayList<TLotAao>();
-	 private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 //private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
 	 private List<VDaoBailleur> listeDaoBailleur = new ArrayList<VDaoBailleur>();
 	 private List<VUpdateDac> listeDac = new ArrayList<VUpdateDac>();
 	 private List<VPieceDac> listePiecesDao = new ArrayList<VPieceDac>();
@@ -272,8 +274,10 @@ public class AmiController {
 	 private String libelleTravaux ="dtao_travaux.doc";
 	 private String libellePrestations ="dtao_prestation.doc";
 	 
-	 private VLigneImputation ligne = new VLigneImputation();
-	 private VLigneImputation recupLigne = new VLigneImputation();
+	/* private VLigneImputation ligne = new VLigneImputation();
+	 private VLigneImputation recupLigne = new VLigneImputation();*/
+	 private VLigneLot ligne = new VLigneLot();
+	 private VLigneLot recupLigne = new VLigneLot();
 	 private VFonctionMinistere fonction =new VFonctionMinistere();
 	 private TAdresseAvis newAdresse = new TAdresseAvis(); 
 	 private TDetailAdresseAvis newDtailAdresse = new TDetailAdresseAvis(); 
@@ -1247,12 +1251,19 @@ public int getNbreLotTotal(){
 	}
 	 
 	 
-	//Chargement des imputations ou lignes budgétaires pour le AC
-	  public void chargeImputation() { 
+	   //Chargement des imputations ou lignes budgétaires pour le AC
+	  /* public void chargeImputation() { 
 		 listeImputations.clear();
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
-			} 
+			}*/
+	   
+	 //Chargement des imputations ou lignes budgétaires pour le AC
+		  public void chargeImputation() { 
+			 listeImputations.clear();
+			 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+					 new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())); 
+				} 
 	  
 	  
 	//Chargement des imputations ou lignes budgétaires pour le AC
@@ -1276,12 +1287,24 @@ public int getNbreLotTotal(){
 	  
 	  
 	  //Filtre Imputation
-	  public void filtreImputation() {
+	/*  public void filtreImputation() {
 			listeImputations.clear();
 			listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 					new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
 					new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+		}*/
+	  
+	  //Filtre Imputation
+	  public void filtreImputation() {
+			listeImputations.clear();
+			listeImputations = (List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+					new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
+					new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode()),
+					new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 		}
+	  
+	  
+	  
 	  
 	  public void filtreFonctionMin() {
 			getListeFonctions().clear();
@@ -3700,7 +3723,8 @@ public int getNbreLotTotal(){
      public void onSelectLigneBudgetaire() {
          newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
          
-		 recupLigne = new VLigneImputation();
+		 //recupLigne = new VLigneImputation();
+         recupLigne = new VLigneLot();
 		 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
 		 recupLigne.setLbgAeEmp(ligne.getLbgAeEmp());
 		 recupLigne.setLbgAeTr(ligne.getLbgAeTr());
@@ -4297,7 +4321,7 @@ public int getNbreLotTotal(){
 	}
 	
 
-	public VLigneImputation getLigne() {
+/*	public VLigneImputation getLigne() {
 		return ligne;
 	}
 	public void setLigne(VLigneImputation ligne) {
@@ -4319,7 +4343,7 @@ public int getNbreLotTotal(){
 
 	public void setListeImputations(List<VLigneImputation> listeImputations) {
 		this.listeImputations = listeImputations;
-	}
+	}*/
 
 
 	public List<TLibelleAdresse> getListLibelleAdresse() {
@@ -5815,5 +5839,30 @@ public int getNbreLotTotal(){
 	public void setCoutLot(long coutLot) {
 		this.coutLot = coutLot;
 	}
+
+	public List<VLigneLot> getListeImputations() {
+		return listeImputations;
+	}
+
+	public void setListeImputations(List<VLigneLot> listeImputations) {
+		this.listeImputations = listeImputations;
+	}
+
+	public VLigneLot getLigne() {
+		return ligne;
+	}
+
+	public void setLigne(VLigneLot ligne) {
+		this.ligne = ligne;
+	}
+
+	public VLigneLot getRecupLigne() {
+		return recupLigne;
+	}
+
+	public void setRecupLigne(VLigneLot recupLigne) {
+		this.recupLigne = recupLigne;
+	}
+	
 	
 }
