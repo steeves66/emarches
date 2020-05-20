@@ -556,8 +556,8 @@ public class CommissionController {
 					     }	
 			 }
 		     
-		    	chargeOffres();
 		    	vider();
+		    	chargeOffres();		    	
 		    	userController.setTexteMsg("Ouverture effectuée avec succès !");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");	
@@ -748,6 +748,7 @@ public class CommissionController {
 		     switch(value) {
 				case "com1":
 					vider();
+					userController.initMessage();
 					String fonct = controleController.getFonctionalite();	
 					String statutAffiche = "";
 					//Ramener le statut en fonction de l'utilisateur connecté et de l'action a mener
