@@ -79,6 +79,7 @@ import com.sndi.model.VDaoStatut;
 import com.sndi.model.VDetailAdresse;
 import com.sndi.model.VDetailCorrection;
 import com.sndi.model.VDetailCorrectionCharge;
+import com.sndi.model.VDonneeCandidat;
 import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
@@ -197,7 +198,7 @@ public class DaoController {
 	 private List<VVenteLot> listSelectionVerifLot = new ArrayList<VVenteLot>();
 	 private List<VVenteLot> listVerifLot = new ArrayList<VVenteLot>();
 	 private List<TLotAao> listLots = new ArrayList<TLotAao>();
-	 //private List <VDonneeCandidat> donneeListe = new ArrayList<VDonneeCandidat>();
+	 private List <VDonneeCandidat> donneeListe = new ArrayList<VDonneeCandidat>();
 	 
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
 	 private List<VFonctionImputation>listSelectionFonctImput =new ArrayList<VFonctionImputation>();
@@ -254,7 +255,7 @@ public class DaoController {
 	 private TCandidats newCandidat = new TCandidats();
 	 private VbTempParamVente newVbTempVente = new VbTempParamVente();
 	 private TVenteDac newVente = new TVenteDac();
-	 //private VDonneeCandidat donneeCandidat= new VDonneeCandidat();
+	 private VDonneeCandidat donneeCandidat= new VDonneeCandidat();
 	 private TDetailVente venteDetail = new TDetailVente();
 	 //GESTION DES PIECES DE L'OFFRE
 	 private TTypePieceOffre newPieceOffre = new TTypePieceOffre();
@@ -999,7 +1000,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		     			  				  //Actualisation du Tableau de Bord
 		     			 		          tableauBordController.chargeDataDao();
 		     			 		          //Réinitialisation des champs du Candidat
-		     			 		          //viderCandidat();
+		     			 		          viderCandidat();
 		      			  				   //Message de Confirmation
 		      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
 		      					           userController.setTexteMsg("Paiement effectué avec succès");
@@ -3138,7 +3139,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			}
 	  
 		//Edition du recu de paiement
-		 public void imprimerRecu() {
+		 /*public void imprimerRecu() {
 			 if(newCandidat.getCanNom().equalsIgnoreCase("") || newCandidat.getCanPrenoms().equalsIgnoreCase("")) {
 				    //Message d'erreur
 					FacesContext.getCurrentInstance().addMessage(null,
@@ -3146,11 +3147,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 }else {
 				    projetReport.stringparam3(slctdTd.getAffDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
 			      }
-			}
+			}*/
         
 		 
 		//Edition du recu de paiement
-		/*public void imprimerRecu() {
+		public void imprimerRecu() {
 		 
 		 donneeListe=(List<VDonneeCandidat>) iservice.getObjectsByColumn("VDonneeCandidat", new ArrayList<String>(Arrays.asList("CAN_CODE")),
 							new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,slctdTd.getAffDacCode()));
@@ -3168,7 +3169,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				    projetReport.stringparam3(slctdTd.getAffDacCode(), donneeCandidat.getCanNom(), donneeCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
 			      }
 			}
-			*/
+			
 		//Fin de la methode
         
 		 
@@ -5638,21 +5639,21 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	
 	
 
-	/*public List <VDonneeCandidat> getDonneeListe() {
+	public List <VDonneeCandidat> getDonneeListe() {
 		return donneeListe;
 	}
 
 	public void setDonneeListe(List <VDonneeCandidat> donneeListe) {
 		this.donneeListe = donneeListe;
-	}*/
+	}
 
-	/*public VDonneeCandidat getDonneeCandidat() {
+	public VDonneeCandidat getDonneeCandidat() {
 		return donneeCandidat;
 	}
 
 	public void setDonneeCandidat(VDonneeCandidat donneeCandidat) {
 		this.donneeCandidat = donneeCandidat;
-	}*/
+	}
 	
 			
 }
