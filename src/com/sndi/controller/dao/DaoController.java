@@ -198,7 +198,7 @@ public class DaoController {
 	 private List<VVenteLot> listSelectionVerifLot = new ArrayList<VVenteLot>();
 	 private List<VVenteLot> listVerifLot = new ArrayList<VVenteLot>();
 	 private List<TLotAao> listLots = new ArrayList<TLotAao>();
-	 private List <VDonneeCandidat> donneeListe = new ArrayList<VDonneeCandidat>();
+	 //private List <VDonneeCandidat> donneeListe = new ArrayList<VDonneeCandidat>();
 	 
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
 	 private List<VFonctionImputation>listSelectionFonctImput =new ArrayList<VFonctionImputation>();
@@ -255,7 +255,7 @@ public class DaoController {
 	 private TCandidats newCandidat = new TCandidats();
 	 private VbTempParamVente newVbTempVente = new VbTempParamVente();
 	 private TVenteDac newVente = new TVenteDac();
-	 private VDonneeCandidat donneeCandidat= new VDonneeCandidat();
+	 //private VDonneeCandidat donneeCandidat= new VDonneeCandidat();
 	 private TDetailVente venteDetail = new TDetailVente();
 	 //GESTION DES PIECES DE L'OFFRE
 	 private TTypePieceOffre newPieceOffre = new TTypePieceOffre();
@@ -874,7 +874,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						        
 						        String exo=chaine+String.valueOf(year)+mois;
 				               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-				               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 				               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 				               iservice.addObject(newCandidat);
 				               
@@ -922,9 +921,9 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		    			  				     dacStatut.setTStatut(statuts);
 		    			  				     iservice.addObject(dacStatut);	
 		    			  				    
-		    			  				 //Activation du bouton édition du récu
-			     			  				   confirmPaie = true; 
-			     			  				   etatRecu = false;
+		    			  				   //Activation du bouton édition du récu
+			     			  			   confirmPaie = true; 
+			     			  			   etatRecu = false;
 		    			  				  //Actualisation du Tableau de Bord
 		    			 		          tableauBordController.chargeDataDao();
 				                    	  
@@ -949,7 +948,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 				        
 		 				        String exo=chaine+String.valueOf(year)+mois;
 		 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-		 		               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 		 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 		               iservice.addObject(newCandidat);
 		 		               
@@ -1000,7 +998,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		     			  				  //Actualisation du Tableau de Bord
 		     			 		          tableauBordController.chargeDataDao();
 		     			 		          //Réinitialisation des champs du Candidat
-		     			 		          viderCandidat();
+		     			 		           viderCandidat();
 		      			  				   //Message de Confirmation
 		      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
 		      					           userController.setTexteMsg("Paiement effectué avec succès");
@@ -1011,7 +1009,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	                }
 	  //Fin Methode de Paiement
 	  
-	   //Début de la vente du DAO
+	     //Début de la vente du DAO
+	      @Transactional
 			public void finVente() {
 				String statUpdate = "";
 				String message = "";
@@ -1153,7 +1152,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
-				//new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("affectationListe  size: "+affectationListe.size());	
 			tableauBordController.chargeDataDao();		
 	}
@@ -3139,7 +3137,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			}
 	  
 		//Edition du recu de paiement
-		 /*public void imprimerRecu() {
+		 public void imprimerRecu() {
 			 if(newCandidat.getCanNom().equalsIgnoreCase("") || newCandidat.getCanPrenoms().equalsIgnoreCase("")) {
 				    //Message d'erreur
 					FacesContext.getCurrentInstance().addMessage(null,
@@ -3147,11 +3145,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 }else {
 				    projetReport.stringparam3(slctdTd.getAffDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
 			      }
-			}*/
+			}
         
 		 
 		//Edition du recu de paiement
-		public void imprimerRecu() {
+	/*	public void imprimerRecu() {
 		 
 		 donneeListe=(List<VDonneeCandidat>) iservice.getObjectsByColumn("VDonneeCandidat", new ArrayList<String>(Arrays.asList("CAN_CODE")),
 							new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,slctdTd.getAffDacCode()));
@@ -3168,7 +3166,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 }else {
 				    projetReport.stringparam3(slctdTd.getAffDacCode(), donneeCandidat.getCanNom(), donneeCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
 			      }
-			}
+			}*/
 			
 		//Fin de la methode
         
@@ -5638,7 +5636,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	}
 	
 	
-
+/*
 	public List <VDonneeCandidat> getDonneeListe() {
 		return donneeListe;
 	}
@@ -5653,7 +5651,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 
 	public void setDonneeCandidat(VDonneeCandidat donneeCandidat) {
 		this.donneeCandidat = donneeCandidat;
-	}
+	}*/
 	
 			
 }
