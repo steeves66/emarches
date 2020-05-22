@@ -79,7 +79,6 @@ import com.sndi.model.VDaoStatut;
 import com.sndi.model.VDetailAdresse;
 import com.sndi.model.VDetailCorrection;
 import com.sndi.model.VDetailCorrectionCharge;
-import com.sndi.model.VDonneeCandidat;
 import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
@@ -1618,7 +1617,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
             						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun PPM selectionné", ""));
             			}
             	 		else{
-            	 			//Parcourir la liste TDetailPlanPassation et faire une mise a jour des different statut
+            	 			//Parcourir la liste de sélection listSelectionPpmDao
             		 		for(VPpmDao ligne : listSelectionPpmDao) {
             		 			 
             		 			//Parcourir la liste et récupére
@@ -1692,8 +1691,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 }
 	 
 	 
-	//Enregistrement des entreprises candidates
-	  @Transactional
+	 //Enregistrement des entreprises candidates
+	 @Transactional
 	 public void saveTiers() {
 		  if(newEntre == null) {
 			  FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Veuillez, remplir tous les champs!", "");
@@ -3149,7 +3148,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
         
 		 
 		//Edition du recu de paiement
-	/*	public void imprimerRecu() {
+	  /*public void imprimerRecu() {
 		 
 		 donneeListe=(List<VDonneeCandidat>) iservice.getObjectsByColumn("VDonneeCandidat", new ArrayList<String>(Arrays.asList("CAN_CODE")),
 							new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,slctdTd.getAffDacCode()));
