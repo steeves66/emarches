@@ -1055,7 +1055,7 @@ public int getNpDiffDossier(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1113,7 +1113,7 @@ public int getNpAttenteValide(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
@@ -1132,7 +1132,7 @@ public int getNpValideCmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1237,14 +1237,14 @@ public int getNpDmpTransmisDossier(String src){
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
 	return	i;
-}*/
+}*/ 
 
 //pgpm retournés par la DMP : Nouvelle Methode 
 public int getNpDiffDmp(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 //Fin PGPM
@@ -1355,7 +1355,7 @@ public int getNpsDiffDossier(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1383,7 +1383,7 @@ public int getNpsAttenteValide(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
@@ -1402,7 +1402,7 @@ public int getNpsValideCmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1420,7 +1420,7 @@ public int getNpsValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-		    new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+		    new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1437,7 +1437,7 @@ public int getNpsAttValideDmp(String src1, String src2){
 	int i  = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1454,7 +1454,7 @@ public int getNpsDiffDmp(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1557,7 +1557,7 @@ public int getPspmDiffDossier(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1574,7 +1574,7 @@ public int getPspmDiffDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-	        new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+	        new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1592,7 +1592,7 @@ public int getPspmAttenteValide(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
@@ -1611,7 +1611,7 @@ public int getPspmValideCmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1628,7 +1628,7 @@ public int getPspmValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-	        new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+	        new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 } 
 
@@ -1655,7 +1655,7 @@ public int getPspmAttValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-	        new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+	        new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1768,7 +1768,7 @@ public int getPpmDiffDossier(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1784,7 +1784,7 @@ public int getPpmDiffDossier(String src){
 public int getPpmDiffDmp(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
+			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
 	return	i;	
 }
@@ -1804,7 +1804,7 @@ public int getPpmAttenteValide(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
@@ -1823,7 +1823,7 @@ public int getPpmValideCmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1852,7 +1852,7 @@ public int getPpmValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1869,7 +1869,7 @@ public int getPpmValideDmp(String src){
 public int getPpmAttValideDmp(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
+			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
 	return	i;	
 }
