@@ -122,6 +122,7 @@ public class DemandeController {
 	 private boolean panelAutre =false;
 	 private String observation="";
 	 private Long numPiece;
+	 private long pdmNum;
 	 
 	 private Boolean boutonAdd=true;
 	 private Boolean boutonSupp=false;
@@ -474,13 +475,13 @@ public class DemandeController {
 				//Methode Upload
 				 @Transactional
 				 public void upload(FileUploadEvent event) throws IOException{
-						if(fileUploadController.handleFileUpload(event, slctdTd.getDemNum()+"", numPiece)) {
+						if(fileUploadController.handleFileUpload(event, slctdTd.getDemNum()+"", pdmNum)) {
 								TDossierDemande dos = new TDossierDemande(); //TNatureDocument 
-								dos = new TDossierDemande() ;
+								//dos = new TDossierDemande() ;
 								dos.setDodLibelle(fileUploadController.getFileName());
 								dos.setTDemande(slctdTd);
 					            dos.setDodReference(fileUploadController.getDocNom());
-					            dos.setTPieceDemande(new TPieceDemande(numPiece));
+					            dos.setTPieceDemande(new TPieceDemande(pdmNum));
 								iservice.addObject(dos);
 								//chargeDossier();
 								
@@ -490,11 +491,12 @@ public class DemandeController {
 								 userController.setSevrityMsg("success");
 							
 						     }else {
-						    	//Message d'erreur
-								 userController.setTexteMsg("Document non enregistré, charger à nouveau un document!");
-								 userController.setRenderMsg(true);
-								 userController.setSevrityMsg("danger");
+						    	//Message d'erreur								 
+								 FacesContext.getCurrentInstance().addMessage(null,
+					    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Document non enregistré, charger à nouveau un document!", ""));
 									}
+					      System.out.print("num demande :"+slctdTd);
+					      System.out.print("num piece :"+pdmNum);
 						  }
 				 
 		     	 
@@ -1091,6 +1093,14 @@ public class DemandeController {
 
 	public void setBoutonSupp(Boolean boutonSupp) {
 		this.boutonSupp = boutonSupp;
+	}
+
+	public long getPdmNum() {
+		return pdmNum;
+	}
+
+	public void setPdmNum(long pdmNum) {
+		this.pdmNum = pdmNum;
 	}
 
 

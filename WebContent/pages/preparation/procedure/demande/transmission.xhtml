@@ -8,7 +8,7 @@
 
 	
 	<ui:define name="contents">
-	<h:form id="gnl" styleClass="form-horizontal">
+	<h:form id="gnl" enctype="multipart/form-data" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
         #{controleController.libelle} #{demandeController.slctdTd.demNum}
@@ -40,6 +40,17 @@
     
     <section class="content">
      <div class="box"></div>
+     <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+     	<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
     <div class="box box-success">
             
               <div class="box-body">
@@ -71,15 +82,16 @@
              <div class="row">
              <div class="col-xs-6 col-sm-2"><label class="control-label" style="margin-top:20px"><b>Sélectionnez la pièce</b></label></div>
 								<div class="col-xs-6 col-sm-6">
-								<p:selectOneMenu  value="#{demandeController.numPiece}" style="width:100%; margin-top:20px;"> 
-								    <f:selectItems value="#{demandeController.listePiecesDem}" var="p" itemLabel="#{p.pdmLibeleLong}" itemValue="#{p.pdmNum}"/> 
+								<p:selectOneMenu  value="#{demandeController.pdmNum}" style="width:100%; margin-top:20px;"> 
+								    <f:selectItems value="#{demandeController.listePiecesDem}" var="p" itemLabel="#{p.pdmLibeleLong}" itemValue="#{p.pdmNum}"/>
+								     <p:ajax  update=":gnl"/> 
 				       			    </p:selectOneMenu>
 								</div>
               <div class="col-md-4">
 	              <p:fileUpload fileUploadListener="#{demandeController.upload}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger la pièce" auto="true"
 			                      mode="advanced" dragDropSupport="true"
-			                          sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+			                          sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" update="gnl" />
 	            </div>
 	           </div>
 	           <div class="row">
