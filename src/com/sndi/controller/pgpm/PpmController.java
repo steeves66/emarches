@@ -126,6 +126,8 @@ public class PpmController {
 		 chargePspmDifCp();
 		 chargePspmDifDmp();
 		 chargeSourceFinance();
+		 chargePspmDifDmp();
+		 chargePspmValDmp();
 		 //chargeImputation();
 		 chargeFonction();
 		 chargeTypeCharges();
@@ -488,22 +490,22 @@ public class PpmController {
 						 new WhereClause("AFF_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf())));		 		 
 		 }*/
 		 
-		//Liste des Pspm différés par la DMP
-		 public void chargePspmDifDmp() {
+		//Liste des Pspm différés par la DMP : Ancienne Methode
+	/*	 public void chargePspmDifDmp() {
 			 pspmDifDmp.clear();
 			 pspmDifDmp = ((List<TAffichagePpm>)iservice.getObjectsByColumnIn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
 					    "AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SPD")),
 					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
-		      }
+		      }*/
 		 
 		//Liste des Pspm différés par la DMP : Nouvelle Methode
-		 /*public void chargePspmDifDmp() {
+		 public void chargePspmDifDmp() { 
 			 pspmDifDmp.clear();
 			 pspmDifDmp = ((List<TAffichagePpm>)iservice.getObjectsByColumnIn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
 					    "AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SPD")),
 					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
-					    new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp())));		 		 
-		      }*/
+					    new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+		      }
 		 
 	 
 		 //Methode Principale de Chargement des PPM
