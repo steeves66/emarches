@@ -309,7 +309,7 @@ public class AgpmController {
 					_logger.info("affichageListe size: "+affichageListe.size());	
 			}
 		 
-		 public void chargeDataAvalider() {
+		 /*public void chargeDataAvalider() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				
 			 }else {
@@ -341,10 +341,10 @@ public class AgpmController {
 					 }
 			     } 
 			   }
-			 }
+			 }*/
 	
 		//Début Nouvelle Methode d'Affichage des AGPM 
-	/*	 public void chargeDataAvalider() {
+		 public void chargeDataAvalider() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				
 			 }else {
@@ -379,7 +379,7 @@ public class AgpmController {
 					 }
 			     } 
 			   }
-			 }*/
+			 }
 		 // Fin Nouvelle methode d'Affichage des AGPM 
 		 
 		 

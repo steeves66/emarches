@@ -339,7 +339,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 
 		 //PGPM
-		 public void chargeDataAvaliderPgpm() {
+		/* public void chargeDataAvaliderPgpm() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				
 			 }else 
@@ -370,10 +370,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							_logger.info("affichageListe size: "+validationListe.size());	
 				 }   
 			   
-			 }
+			 }*/
 		 
 		 
-		/*//PGPM : Nouvelle Methode
+		//PGPM : Nouvelle Methode
 		 public void chargeDataAvaliderPgpm() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				
@@ -406,10 +406,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							_logger.info("affichageListe size: "+validationListe.size());	
 				 }   
 			   
-			 }*/
+			 }
 		 
 		//PGSPM : Nouvelle Methode
-		 /*public void chargeDataAvaliderPgspm() {
+		 public void chargeDataAvaliderPgspm() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				
 			 }else {
@@ -443,11 +443,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 
 			     } 
 			   }
-			 }*/
+			 }
 		 
 		 
 		 //Filtre multicritère pour les PGPM : Nouvelle Methode
-			/*public void chargerPgpmRecherche() { 
+			public void chargerPgpmRecherche() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						 getObjetList().clear();
 						 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
@@ -489,11 +489,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 											tableauBordController.chargeDataPgpm();
 											_logger.info("affichageListe size: "+validationListe.size());
 							    	  }
-			               }*/
+			               }
 		 
 		 
-		//Réinitialisation pour les PGPM
-			/*public void reinitialiserPgpm() { 
+		//Réinitialisation pour les PGPM : Nouvelle Methode
+			public void reinitialiserPgpm() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getObjetList().clear();
 					 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
@@ -536,9 +536,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 											multiFiltre ="";
 							    	  }
 			               }
-			        */       
+			              
 			//Réinitialisation pour les PGPM : Nouvelle Methode
-			/*public void reinitialiserPgspm() { 
+			public void reinitialiserPgspm() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getObjetList().clear();
 					 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
@@ -580,12 +580,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 											       multiFiltre="";	
 							    	  }
 			               }
-		 
-			*/
 			
 		 
 		 //PGSPM
-		 public void chargeDataAvaliderPgspm() {
+		/* public void chargeDataAvaliderPgspm() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				
 			 }else {
@@ -619,11 +617,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 
 			     } 
 			   }
-			 }
+			 }*/
 		 
 		 
 		//Filtre multicritère pour les PGPM
-			public void chargerPgpmRecherche() { 
+			/*public void chargerPgpmRecherche() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						 getObjetList().clear();
 						 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
@@ -664,10 +662,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 											_logger.info("affichageListe size: "+validationListe.size());
 							    	  }
 			               }
-			
+			*/
 			
 			//Réinitialisation pour les PGPM
-			public void reinitialiserPgpm() { 
+			/*public void reinitialiserPgpm() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getObjetList().clear();
 					 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
@@ -710,10 +708,10 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 											multiFiltre ="";
 							    	  }
 			               }
-			
+			*/
 			
 			//Réinitialisation pour les PGPM
-			public void reinitialiserPgspm() { 
+			/*public void reinitialiserPgspm() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getObjetList().clear();
 					 objetList = (List<TAffichagePgpm>) iservice.getObjectsByColumnInDesc("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")), 
@@ -753,7 +751,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 											       multiFiltre="";	
 							    	  }
 			               }
-		 
+		 */
 		
 			
 			
