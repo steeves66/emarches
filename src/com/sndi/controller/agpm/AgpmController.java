@@ -353,7 +353,7 @@ public class AgpmController {
 					 validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
 								"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 								new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-					          new WhereClause("AFF_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()));
+					          new WhereClause("AFF_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					 tableauBordController.chargeDataAgpm();
 						_logger.info("validationListe size: "+validationListe.size()); 
 					 
@@ -363,7 +363,7 @@ public class AgpmController {
 							validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
 									"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 									new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-							     new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+							     new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 							tableauBordController.chargeDataAgpm(); 
 								_logger.info("objetListe size: "+validationListe.size());
 					 }else {
@@ -372,7 +372,7 @@ public class AgpmController {
 								validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
 										"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 										new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-								new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()));
+								new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								tableauBordController.chargeDataAgpm(); 
 									_logger.info("objetListe size: "+validationListe.size());
 						 }
@@ -409,7 +409,6 @@ public class AgpmController {
 			 agpmValDmp = ((List<TAffichageAgpm>)iservice.getObjectsByColumn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
 					    new WhereClause("AFF_AGP_STA_CODE",Comparateur.EQ,"S3V"),
 					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1")));
-						// new WhereClause("AFF_DPP_MIN_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTMinistere().getMinCode())));		 		 
 		 }
 		 
 		 //Liste des Agpm différés par le cpmp
