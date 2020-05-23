@@ -433,19 +433,19 @@ public class TableauBordController {
 			 agpmAcAttenteTransfert = ""+getAgpmAcAttenteTransfert("S1S","S2D","SDR");
 			 agpmAcTransmis = ""+getAgpmAcTransmisDossier("S1T","SDT");
 			 agpmCpmDiffAc = ""+getNpDiffDossierCpmpAc("S2D");
-			 agpmCpSaisie = ""+getAgpmCpSaisieDossier("S1S");
+			 //agpmCpSaisie = ""+getAgpmCpSaisieDossier("S1S");
 			 pgspmAcDifDmp = ""+getAgpmCpDiffAcDossier("S2D");
-			 agpmCpTransmis = ""+getAgpmCpTransmisDossier("S1T");
-			 agpmCpDifCpmp = ""+getNpDiffDossier("S2D");
+			 //agpmCpTransmis = ""+getAgpmCpTransmisDossier("S1T");
+			 agpmCpDifCpmp = ""+getAgpmCpDiffCmp("S2D");
 			 agpmCpValide =""+getAgpmCpValideCmp("S2V");
 			 agpmCpDifDmp =""+getAgpmDmDiff("S3D","SDR");
 			 agpmAcDifDmpCpmp =""+getAgpmDmDiffAc("S2D","SDR");
 			 agpmCpDifDmpCpmp  =""+getAgpmAcDiffDmpCpmp("S3D");
 			 agpmCpAttenteValide = ""+getAgpmCpAttenteValide("S1T","S3D");
 			 agpmDmValide = ""+getAgpmDmValide("S3V");
-			 agpmDmSaisie = ""+getAgpmDmSaise("S1S");
+			 //agpmDmSaisie = ""+getAgpmDmSaise("S1S");
 			 agpmDmAttenteValide = ""+getAgpmDmAttValide("S2V","SDT");
-			 agpmDmTransmis = ""+getAgpmDmpTransmisDossier("S1T");
+			 //agpmDmTransmis = ""+getAgpmDmpTransmisDossier("S1T");
 			 agpmDmDiffAc =""+getNpDiffDossierCpmpAc("S3D");
 			   //Fin AGPM
 		}
@@ -501,17 +501,17 @@ public class TableauBordController {
 			 pgpmAcDiffDmpCpmp =""+getNpDiffDossierCpmpDmpAc("S2D","SDR");
 			 pgpmAcTransmis = ""+getAcTransmisDossier("S1T");   
 			 pgpmCpRetAc = ""+getNpAcCpDiffDossier("S2D");
-			 pgpmCpSaisie = ""+getNpSaisieDossier("S1S");
-			 pgpmCpTransmis = ""+getNpTransmisDossier("S1T");
+			 //pgpmCpSaisie = ""+getNpSaisieDossier("S1S");
+			 //pgpmCpTransmis = ""+getNpTransmisDossier("S1T");
 			 pgpmCpDifCpmp = ""+getNpDiffDossier("S2D");
 			 pgpmCpValide =""+getNpValideCmp("S2V");
 			 pgpmCpDifDmp =""+getNpDiffDmpCpmp("S3D");
 			 pgpmAttenteValide = ""+getNpAttenteValide("S1T","S3D"); 
 			 pgpmDmAttenteValide = ""+getNpAttValideDmp("S2V","SPG");
 			 pgpmDmValide = ""+getNpValideDmp("S3V");
-			 pgpmDmSaisie = ""+getNpSaisieDossier("S1S");
+			 //pgpmDmSaisie = ""+getNpSaisieDossier("S1S");
 			 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR");
-			 pgpmDmTransmis = ""+getNpDmpTransmisDossier("S1T");	
+			 //pgpmDmTransmis = ""+getNpDmpTransmisDossier("S1T");	
 			 pgpmAcDmpValid  = ""+getNpValideDmpAc("S3V");
 		}
 		
@@ -524,17 +524,17 @@ public class TableauBordController {
 			 pgspmAcAttenteValide = ""+getAcNpsAttenteValide("S1S","S2D","PGD");
 			 pgspmAcDiffDmpCpmp =""+getNpsDiffDossierCpmpDmpAc("S2D","SDR");
 			 pgspmAcTransmis = ""+getAcNpsTransmisDossier("S1T","PGS");
-			 pgspmCpSaisie = ""+getNpsSaisieDossier("S1S");
-			 pgspmCpTransmis = ""+getNpsTransmisDossier("S1T");
+			 //pgspmCpSaisie = ""+getNpsSaisieDossier("S1S");
+			 //pgspmCpTransmis = ""+getNpsTransmisDossier("S1T");
 			 pgspmCpDifCpmp = ""+getNpsDiffDossier("S2D");
 			 pgspmCpValide =""+getNpsValideCmp("S2V");
 			 pgspmCpDifDmp =""+getNpsDiffDmpCpmp("S3D");
 			 pgspmCpAttenteValide = ""+getNpsAttenteValide("S1T","S3D");
 			 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
 			 pgspmDmValide = ""+getNpsValideDmp("S3V");
-			 pgspmDmSaisie = ""+getNpsSaisieDossier("S1S");
+			 //pgspmDmSaisie = ""+getNpsSaisieDossier("S1S");
 			 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
-			 pgspmDmTransmis = ""+getNpDmpTransmisDossier("S1T");
+			 //pgspmDmTransmis = ""+getNpDmpTransmisDossier("S1T");
 			 pgspmAcDmpValid  = ""+getNpsValideDmpAc("S3V");
 			 //Fin PGSPM
 		}
@@ -548,8 +548,8 @@ public class TableauBordController {
 			 ppmAcDiffCpmp = ""+getPpmDiffCpmpACDossier("S2D");
 			 ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR"); 
 			 ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT");
-			 ppmCpSaisie = ""+getPpmSaisieDossier("S1S");
-			 ppmCpTransmis = ""+getPpmTransmisDossier("S1T");
+			 //ppmCpSaisie = ""+getPpmSaisieDossier("S1S");
+			//ppmCpTransmis = ""+getPpmTransmisDossier("S1T");
 			 ppmCpDifCpmp = ""+getPpmDiffDossier("S2D");
 			 ppmCpValide =""+getPpmValideCmp("S2V");
 			 ppmCpDifDmp =""+getPpmDiffDmp("S3D","SPR");
@@ -557,9 +557,9 @@ public class TableauBordController {
 			 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT");
 			 ppmDmValide = ""+getPpmValideDmp("S3V");
 			 ppmDmValideAc = ""+getPpmValideDmpAc("S3V");
-			 ppmDmSaisie = ""+getPpmSaisieDossier("S1S");
+			 //ppmDmSaisie = ""+getPpmSaisieDossier("S1S");
 			 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
-			 ppmDmTransmis = ""+getPpmTransmisDmpDossier("S1T");
+			 //ppmDmTransmis = ""+getPpmTransmisDmpDossier("S1T");
 			 //Fin PPM
 			
 		}
@@ -571,17 +571,17 @@ public class TableauBordController {
 			 pspmAcDiffCpmp = ""+getPspmDiffCpmpACDossier("S2D");
 			 pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D","SPR");
 			 pspmAcTransmis = ""+getAcPspmTransmisDossier("S1T");
-			 pspmCpSaisie = ""+getPspmSaisieDossier("S1S");
-			 pspmCpTransmis = ""+getPspmTransmisDossier("S1T");
+			 //pspmCpSaisie = ""+getPspmSaisieDossier("S1S");
+			 //pspmCpTransmis = ""+getPspmTransmisDossier("S1T");
 			 pspmCpDifCpmp = ""+getPspmDiffDossier("S2D");
 			 pspmCpValide =""+getPspmValideCmp("S2V");
 			 pspmCpDifDmp =""+getPspmDiffDmp("S3D");
 			 pspmCpAttenteValide = ""+getPspmAttenteValide("S1T","S3D");
 			 pspmDmAttenteValide = ""+getPspmAttValideDmp("S2V");
 			 pspmDmValide = ""+getPspmValideDmp("S3V");
-			 pspmDmSaisie = ""+getPspmSaisieDossier("S1S");
+			 //pspmDmSaisie = ""+getPspmSaisieDossier("S1S");
 			 pspmDmDiff = ""+getPspmDiffDmp("S3D");
-			 pspmDmTransmis = ""+getPspmTransmisDmpDossier("S1T");
+			 //pspmDmTransmis = ""+getPspmTransmisDmpDossier("S1T");
 			 pspmDmValideAc =""+getPspmValideDmpAc("S3V");
 			
 		}
@@ -849,12 +849,21 @@ public class TableauBordController {
 			
 			
 
-			//agpm retournés par le dmp chez la cpmp
-			public int getAgpmAcDiffDmpCpmp(String src){
+			//agpm retournés par le DMP chez la CPMP : Ancienne Methode
+			/*public int getAgpmAcDiffDmpCpmp(String src){
 				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
 						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src),
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 						new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				return	i;	
+			}*/
+			
+			//agpm retournés par le DMP chez la CPMP : Nouvelle Methode
+			public int getAgpmAcDiffDmpCpmp(String src){
+				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
+						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src),
+						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+						new WhereClause("AGP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				return	i;	
 			}
 
@@ -869,12 +878,30 @@ public class TableauBordController {
 			}
 
 
-			//agpm validés par le cpmp
-			public int getAgpmCpValideCmp(String src){
+			//agpm validés par la CPMP : Ancienne Methode
+			/*public int getAgpmCpValideCmp(String src){
 				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
 						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src),
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 						new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				return	i;	
+			}*/
+			
+			//agpm validés par la CPMP : Nouvelle Methode 
+			public int getAgpmCpValideCmp(String src){
+				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
+						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src),
+						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+						new WhereClause("AGP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				return	i;	
+			}
+			
+			//agpm retournés par la CPMP : Nouvelle Methode 
+			public int getAgpmCpDiffCmp(String src){
+				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
+						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src),
+						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+						new WhereClause("AGP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				return	i;	
 			}
 			
@@ -889,21 +916,38 @@ public class TableauBordController {
 	
 
 
-			//agpm validés par le dmp
+			//agpm validés par la DMP : Ancienne Methode
+			/*public int getAgpmDmValide(String src){
+				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
+						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src));
+				return	i;	
+			}*/
+			
+			//agpm validés par la DMP : Ancienne Methode
 			public int getAgpmDmValide(String src){
 				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+						new WhereClause("AGP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src));
 				return	i;	
 			}
 			
 			
-			//agpm retourné par la DMP
-			public int getAgpmDmDiff(String src1, String src2){
+			//agpm retourné par la DMP : Ancienne Methode
+			/*public int getAgpmDmDiff(String src1, String src2){
 				int i = iservice.countTableByColumnIn("T_AGPM", "AGP_ID",new ArrayList<String>(Arrays.asList("AGP_ID")),
 						"AGP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
-						//new WhereClause("AGP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+						return	i;
+			}*/
+			
+			//agpm retourné par la DMP : Nouvelle Methode
+			public int getAgpmDmDiff(String src1, String src2){
+				int i = iservice.countTableByColumnIn("T_AGPM", "AGP_ID",new ArrayList<String>(Arrays.asList("AGP_ID")),
+						"AGP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+						new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				return	i;
 			}
 			
@@ -916,13 +960,20 @@ public class TableauBordController {
 				return	i;
 			}
 			
+
+			//agpm en attente de validation par la DMP : Ancienne Methode
+			/*public int getAgpmDmAttValide(String src1, String src2){
+				int i = iservice.countTableByColumnIn("T_AGPM", "AGP_ID",new ArrayList<String>(Arrays.asList("AGP_ID")),
+						"AGP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
+				return	i;
+			}*/
 			
-		
-			
-			//agpm en attente de validation par la dmp
+			//agpm en attente de validation par la DMP : Nouvelle Methode
 			public int getAgpmDmAttValide(String src1, String src2){
 				int i = iservice.countTableByColumnIn("T_AGPM", "AGP_ID",new ArrayList<String>(Arrays.asList("AGP_ID")),
 						"AGP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+						new WhereClause("AGP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
 				return	i;
 			}

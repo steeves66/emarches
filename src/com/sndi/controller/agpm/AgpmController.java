@@ -395,38 +395,76 @@ public class AgpmController {
 		 }
 		 
 		//Liste des Agpm validés par le cpmp
-		 public void chargeAgpmValCp() {
+		/* public void chargeAgpmValCp() {
 			 agpmValCp.clear();
 			 agpmValCp = ((List<TAffichageAgpm>)iservice.getObjectsByColumn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
 					    new WhereClause("AFF_AGP_STA_CODE",Comparateur.EQ,"S2V"),
 					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1"),
 						 new WhereClause("AFF_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
+		 }*/
+		 
+		//Liste des Agpm validés par la CPMP : Nouvelle Methode
+		 public void chargeAgpmValCp() {
+			 agpmValCp.clear();
+			 agpmValCp = ((List<TAffichageAgpm>)iservice.getObjectsByColumn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+					    new WhereClause("AFF_AGP_STA_CODE",Comparateur.EQ,"S2V"),
+					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1"),
+					    new WhereClause("AFF_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 		 
-		//Liste des Pgpm validés par le cpmp
-		 public void chargeAgpmValDmp() {
+		//Liste des Pgpm validés par la DMP : Ancienne Methode
+		 /*public void chargeAgpmValDmp() {
 			 agpmValDmp.clear();
 			 agpmValDmp = ((List<TAffichageAgpm>)iservice.getObjectsByColumn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
 					    new WhereClause("AFF_AGP_STA_CODE",Comparateur.EQ,"S3V"),
 					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1")));
+		 }*/
+		 
+		//Liste des Pgpm validés par la DMP : Nouvelle Methode
+		 public void chargeAgpmValDmp() {
+			 agpmValDmp.clear();
+			 agpmValDmp = ((List<TAffichageAgpm>)iservice.getObjectsByColumn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+					    new WhereClause("AFF_AGP_STA_CODE",Comparateur.EQ,"S3V"),
+					    new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),	 		 
+					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1")));
 		 }
 		 
-		 //Liste des Agpm différés par le cpmp
-		 public void chargeAgpmDifCp() {
+		 //Liste des Agpm différés par la CPMP : Ancienne Methode
+		/* public void chargeAgpmDifCp() {
 			 agpmDifCp.clear();
 			 agpmDifCp = ((List<TAffichageAgpm>)iservice.getObjectsByColumn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
 					    new WhereClause("AFF_AGP_STA_CODE",Comparateur.EQ,"S2D"),
 					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1"),
 						 new WhereClause("AFF_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
+		 }*/
+		 
+		 //Liste des Agpm différés par la CPMP : Nouvelle Methode
+		 public void chargeAgpmDifCp() {
+			 agpmDifCp.clear();
+			 agpmDifCp = ((List<TAffichageAgpm>)iservice.getObjectsByColumn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+					    new WhereClause("AFF_AGP_STA_CODE",Comparateur.EQ,"S2D"),
+					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1"),
+					    new WhereClause("AFF_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 		 
-		//Liste des Agpm différés par le cpmp
-		 public void chargeAgpmDifDmp() {
+		//Liste des Agpm différés par la CPMP : Ancienne Methode
+		/* public void chargeAgpmDifDmp() {
 			 agpmDifDmp.clear();
 			 agpmDifDmp = ((List<TAffichageAgpm>)iservice.getObjectsByColumnIn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
 					   "AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SDR")),
 					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1")));		 		 
+		      }*/
+		 
+		 
+		//Liste des Agpm différés par la CPMP : Nouvelle Methode
+		 public void chargeAgpmDifDmp() {
+			 agpmDifDmp.clear();
+			 agpmDifDmp = ((List<TAffichageAgpm>)iservice.getObjectsByColumnIn("TAffichageAgpm",new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+					   "AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SDR")),
+					   new WhereClause("AFF_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),		 		 
+					    new WhereClause("AFF_AGP_ACTIF",Comparateur.EQ,"1")));		 		 
 		      }
+		 
 		 
 		 
 		//Liste des Agpm retournés chez l'AC
