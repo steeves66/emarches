@@ -1228,7 +1228,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 agpmList = (List<VAgpmFonction>)iservice.getObjectsByColumnDesc("VAgpmFonction",new ArrayList<String>(Arrays.asList("AGP_ID")),
 					     new WhereClause("AGP_STA_CODE",WhereClause.Comparateur.EQ,"S3V"),
 					     new WhereClause("AGP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-					     new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					     new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
 						 new WhereClause("AGP_ACTIF",Comparateur.EQ,"1"));
 			 if (!agpmList.isEmpty()) {
 				  agpm=agpmList.get(0);
