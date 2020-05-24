@@ -634,7 +634,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 listeDaoValide = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D2T"),
 					new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
-					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+					new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					//new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoValide  size: "+listeDaoValide.size());	
 				tableauBordController.chargeDataAmi();		
 		}
@@ -645,7 +646,8 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 listeDaoDiff = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D1R"),
 					new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
-					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+					new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					//new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoDiff  size: "+listeDaoDiff.size());	
 				tableauBordController.chargeDataAmi();		
 		}
@@ -2632,6 +2634,8 @@ public int getNbreLotTotal(){
 	 				    	 dao.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 	 				    	 dao.setDacDteSaisi(Calendar.getInstance().getTime());
 	 				    	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
+	 				    	 dao.setDacFonCodePf(userController.getSlctd().getTFonction().getFonCodePf());
+	 				    	 dao.setDacFonCodeDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 	 				    	 dao.setTGestion(new TGestion(gesCode));
 	 				    	 dao.setTTypeDacSpecs(new TTypeDacSpecs("AMI"));
 	 				    	 dao.setDacBailleur(daoDetail.getDppBailleur());
@@ -2647,6 +2651,8 @@ public int getNbreLotTotal(){
 	 				    	 affDao.setAffDacCode(dao.getDacCode());
 	 				    	 affDao.setAffDacStatutRetour(dao.getDacStatutRetour());
 	 				    	 affDao.setAffDacFonCodAc(dao.getTFonctionByDacFonCodAc().getFonCod());
+	 				    	 affDao.setAffFonCodeDmp(dao.getDacFonCodeDmp());
+	 				    	 affDao.setAffFonCodePf(dao.getDacFonCodePf());
 	 				    	 affDao.setAffDacMention(dao.getDacMention());
 	 				    	 affDao.setAffDacDateReception(dao.getDacDateReception());
 	 				    	 affDao.setAffDacDacDteValDmp(dao.getDacDteValDmp());

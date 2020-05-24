@@ -48,6 +48,8 @@ public class TDacSpecs implements java.io.Serializable {
 	private Long dacCout;
 	private String dacTypePlan;
 	private String dacRecherche;
+	private String dacFonCodeDmp;
+	private String dacFonCodePf;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -69,7 +71,7 @@ public class TDacSpecs implements java.io.Serializable {
 			TGestion TGestion, TTypeMarche TTypeMarche, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche, Long dacCout,String dacTypePlan, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -96,6 +98,8 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
 		this.dacRecherche = dacRecherche;
+		this.dacFonCodeDmp = dacFonCodeDmp;
+		this.dacFonCodePf = dacFonCodePf;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TDossierDacses = TDossierDacses;
 		this.TDetailCorrections = TDetailCorrections;
@@ -328,6 +332,24 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacRecherche(String dacRecherche) {
 		this.dacRecherche = dacRecherche;
+	}
+    
+	@Column(name = "DAC_FON_CODE_DMP", length = 20)
+	public String getDacFonCodeDmp() {
+		return this.dacFonCodeDmp;
+	}
+
+	public void setDacFonCodeDmp(String dacFonCodeDmp) {
+		this.dacFonCodeDmp = dacFonCodeDmp;
+	}
+	
+	@Column(name = "DAC_FON_CODE_PF", length = 20)
+	public String getDacFonCodePf() {
+		return this.dacFonCodePf;
+	}
+
+	public void setDacFonCodePf(String dacFonCodePf) {
+		this.dacFonCodePf = dacFonCodePf;
 	}
 
 

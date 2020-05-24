@@ -55,6 +55,8 @@ public class TAffichageDao implements java.io.Serializable {
 	private String affDacBailleur;
 	private Long affDacCout;
 	private String affDacTypePlan;
+	private String affFonCodeDmp;
+	private String affFonCodePf;
 
 	public TAffichageDao() {
 	}
@@ -64,11 +66,10 @@ public class TAffichageDao implements java.io.Serializable {
 			String affStaCode, String affStatutRetour, Date affDacDteSaisi, String affDacObjet,  Long affNbrOuv,
 			String affDacFonCodeCpmp, String affDacFonCodAc, Date affDacDacDteValCpmp, Date affDacDacDteValDmp,
 			Date affDacDateReception, String affDacStatutRetour, String affDacMention, String affDacRecherche,Date affDacValAc, String affDacAvisBailleur, Date affDacDateBailleur
-			, String affDacBailleur, Long affDacCout,String affDacTypePlan) {
+			, String affDacBailleur, Long affDacCout,String affDacTypePlan, String affFonCodeDmp, String affFonCodePf) {
 		this.affDaoId = affDaoId;
 		this.TDetCommissionSeance = TDetCommissionSeance;
 		this.TModePassation = TModePassation;
-		//this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TStructure = TStructure;
 		this.TGestion = TGestion;
 		this.TTypeMarche = TTypeMarche;
@@ -94,6 +95,8 @@ public class TAffichageDao implements java.io.Serializable {
 		this.affDacBailleur = affDacBailleur;
 		this.affDacCout = affDacCout;
 		this.affDacTypePlan = affDacTypePlan;
+		this.affFonCodeDmp = affFonCodeDmp;
+		this.affFonCodePf = affFonCodePf;
 	}
 	
 	@Id
@@ -368,6 +371,24 @@ public class TAffichageDao implements java.io.Serializable {
 
 	public void setAffDacTypePlan(String affDacTypePlan) {
 		this.affDacTypePlan = affDacTypePlan;
+	}
+	
+	@Column(name = "AFF_FON_CODE_DMP", length = 20)
+	public String getAffFonCodeDmp() {
+		return this.affFonCodeDmp;
+	}
+
+	public void setAffFonCodeDmp(String affFonCodeDmp) {
+		this.affFonCodeDmp = affFonCodeDmp;
+	}
+	
+	@Column(name = "AFF_FON_CODE_PF", length = 20)
+	public String getAffFonCodePf() {
+		return this.affFonCodePf;
+	}
+
+	public void setAffFonCodePf(String affFonCodePf) {
+		this.affFonCodePf = affFonCodePf;
 	}
 
 }
