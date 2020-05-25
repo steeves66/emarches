@@ -2754,8 +2754,6 @@ public class AgpmController {
 		return filtreOrgane;
 	}
 
-
-
 	public void setFiltreOrgane(String filtreOrgane) {
 		this.filtreOrgane = filtreOrgane;
 	}
@@ -2765,9 +2763,6 @@ public class AgpmController {
 	public String getFiltreAutorite() {
 		return filtreAutorite;
 	}
-
-
-
 	public void setFiltreAutorite(String filtreAutorite) {
 		this.filtreAutorite = filtreAutorite;
 	}
@@ -2777,111 +2772,66 @@ public class AgpmController {
 	public String getFiltreProjet() {
 		return filtreProjet;
 	}
-
-
-
 	public void setFiltreProjet(String filtreProjet) {
 		this.filtreProjet = filtreProjet;
 	}
 
-
-
 	public String getFiltreExercice() {
 		return filtreExercice;
 	}
-
-
-
 	public void setFiltreExercice(String filtreExercice) {
 		this.filtreExercice = filtreExercice;
 	}
-
-
 
 
 	public String getProTypeProjet() {
 		return proTypeProjet;
 	}
 
-
-
-
 	public void setProTypeProjet(String proTypeProjet) {
 		this.proTypeProjet = proTypeProjet;
 	}
-
-
 
 
 	public TFinancement getSelectFinance() {
 		return selectFinance;
 	}
 
-
-
-
 	public void setSelectFinance(TFinancement selectFinance) {
 		this.selectFinance = selectFinance;
 	}
-
-
-
 
 	public List<TDeclarant> getListeDeclarants() {
 		return listeDeclarants;
 	}
 
-
-
-
 	public void setListeDeclarants(List<TDeclarant> listeDeclarants) {
 		this.listeDeclarants = listeDeclarants;
 	}
 
-
-
-
 	public TDeclarant getDec() {
 		return dec;
 	}
-
-
-
-
 	public void setDec(TDeclarant dec) {
 		this.dec = dec;
 	}
 
 
-
-
 	public long getDecId() {
 		return decId;
 	}
-
-
-
-
 	public void setDecId(long decId) {
 		this.decId = decId;
 	}
-
-
 
 
 	public VProjetAgpm getActe() {
 		return acte;
 	}
 
-
-
-
 	public void setActe(VProjetAgpm acte) {
 		this.acte = acte;
 	}
-
-
-
 
 	public boolean isEtatPanelOrganeRappel() {
 		return etatPanelOrganeRappel;
@@ -2902,112 +2852,66 @@ public class AgpmController {
 	}
 
 
-
-
 	public boolean isEtatPavetInfoProjet() {
 		return etatPavetInfoProjet;
 	}
-
-
-
 
 	public void setEtatPavetInfoProjet(boolean etatPavetInfoProjet) {
 		this.etatPavetInfoProjet = etatPavetInfoProjet;
 	}
 
 
-
-
 	public boolean isEtatPavetOrgne() {
 		return etatPavetOrgne;
 	}
-
-
-
 
 	public void setEtatPavetOrgne(boolean etatPavetOrgne) {
 		this.etatPavetOrgne = etatPavetOrgne;
 	}
 
-
-
-
 	public boolean isEtatBoutonModifDeclarant() {
 		return etatBoutonModifDeclarant;
 	}
-
-
-
-
 	public void setEtatBoutonModifDeclarant(boolean etatBoutonModifDeclarant) {
 		this.etatBoutonModifDeclarant = etatBoutonModifDeclarant;
 	}
-
-
-
 
 	public boolean isEtatBoutonEnregDeclarant() {
 		return etatBoutonEnregDeclarant;
 	}
 
-
-
-
 	public void setEtatBoutonEnregDeclarant(boolean etatBoutonEnregDeclarant) {
 		this.etatBoutonEnregDeclarant = etatBoutonEnregDeclarant;
 	}
-
-
-
 
 	public TBesoin getSelectBesoin() {
 		return selectBesoin;
 	}
 
-
-
-
 	public void setSelectBesoin(TBesoin selectBesoin) {
 		this.selectBesoin = selectBesoin;
 	}
 
-
-
-
 	public TComposante getSelectComposante() {
 		return selectComposante;
 	}
-
-
-
 
 	public void setSelectComposante(TComposante selectComposante) {
 		this.selectComposante = selectComposante;
 	}
 
 
-
-
 	public TObjectifGen getSelectBojectif() {
 		return selectBojectif;
 	}
-
-
-
 
 	public void setSelectBojectif(TObjectifGen selectBojectif) {
 		this.selectBojectif = selectBojectif;
 	}
 
-
-
-
 	public boolean isEtatPanelConfirmation() {
 		return etatPanelConfirmation;
 	}
-
-
-
 
 	public void setEtatPanelConfirmation(boolean etatPanelConfirmation) {
 		this.etatPanelConfirmation = etatPanelConfirmation;
@@ -3544,10 +3448,12 @@ public class AgpmController {
 		this.vAgpm = vAgpm;
 	}
 
+	public VAgpmliste getSlctdTd() {
+		return slctdTd;
+	}
+
 	public void setSlctdTd(VAgpmliste slctdTd) {
 		this.slctdTd = slctdTd;
 	}
-	
-	
     
 }
