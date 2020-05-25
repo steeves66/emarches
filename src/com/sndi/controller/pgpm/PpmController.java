@@ -1206,9 +1206,11 @@ public class PpmController {
 	  public void chargeImputation() {
 		 listeImputations.clear();
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
+				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+				 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
+				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode));
 		 filtreLigne="";
-			}
+			} 
 	  
 	  
 	//Réinitialisation sur ligne budgétaire en procédure simplifiée
@@ -1218,6 +1220,8 @@ public class PpmController {
 				 listeImputations.clear();
 				 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 						 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
+						 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
+						 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 						 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"));
 				 filtreLigne="";
 			  }else 
@@ -1226,6 +1230,8 @@ public class PpmController {
 					     listeImputations.clear();
 						 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 								 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
+								 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
+								 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 								 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"));
 						 filtreLigne="";
 				}		
@@ -1236,6 +1242,8 @@ public class PpmController {
 		 listeImputations.clear();
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
+				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
+				 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'")); 
 			}
 	  
@@ -1245,6 +1253,8 @@ public class PpmController {
 		 listeImputations.clear();
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
+				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
+				 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'")); 
 			}
 	
@@ -1252,6 +1262,7 @@ public class PpmController {
 	public void chargeImputationCpmpDmp() {
 		 listeImputations.clear();
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,fonction.getFonCod()));
 			}
 	
@@ -1260,7 +1271,9 @@ public class PpmController {
 	public void filtreImputation() {
 		listeImputations.clear();
 		listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-				new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
+				new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+				new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
+				 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 				new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 	}
 	
@@ -1273,6 +1286,8 @@ public class PpmController {
 			 listeImputations.clear();
 			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 					 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
+					 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
+					 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
 					 new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 		  }else 
@@ -1281,6 +1296,8 @@ public class PpmController {
 				     listeImputations.clear();
 					 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 							 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
+							 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
+							 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 							 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
 							 new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));	
 			}		
@@ -1300,6 +1317,7 @@ public class PpmController {
 			 listeTypeMarches.clear();
 			 listeTypeMarches =(List<TTypeMarche>) iservice.getObjectsByColumn("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")));
 			}
+		 
 		//Chargement des modes de Passtion
 		 public void chargeModePassation() {
 			 listeModePassation.clear();
