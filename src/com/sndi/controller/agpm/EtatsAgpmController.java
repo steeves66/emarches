@@ -21,6 +21,7 @@ import com.sndi.model.TDetailAgpm;
 import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TFinancement;
 import com.sndi.model.VAgpmDetails;
+import com.sndi.model.VAgpmliste;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -64,7 +65,7 @@ public class EtatsAgpmController {
 	private List<TDetailAgpm> detailAgpm = new ArrayList<TDetailAgpm>();
 	
 	//private TAgpm slctdTb = new TAgpm(); 
-	private TAffichageAgpm slctdTd = new TAffichageAgpm();
+	private VAgpmliste slctdTd = new VAgpmliste();
 	private VAgpmDetails detail = new VAgpmDetails(); 
 	private List<TDossierAgpm> dossListe = new ArrayList<TDossierAgpm>();
 	private TDossierAgpm selectedDossier = new TDossierAgpm();
@@ -79,8 +80,8 @@ public class EtatsAgpmController {
 
 	//Afficher les détails de du projet
 	 public void chargeDetailAgpm(){
-			objetListe =(List<VAgpmDetails>) iservice.getObjectsByColumn("VAgpmDetails", new ArrayList<String>(Arrays.asList("affAgpId")),
-					new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
+			objetListe =(List<VAgpmDetails>) iservice.getObjectsByColumn("VAgpmDetails", new ArrayList<String>(Arrays.asList("agpId")),
+					new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAgpId()));
 			if (!objetListe.isEmpty()) {
 				detail=objetListe.get(0);
 			}
@@ -91,7 +92,7 @@ public class EtatsAgpmController {
 	 public void chargeFinancement() {
 		 financementListe.clear();
 			 financementListe = ((List<TFinancement>)iservice.getObjectsByColumn("TFinancement",new ArrayList<String>(Arrays.asList("FIN_ID")),
-					 new WhereClause("FIN_AGP_ID",Comparateur.EQ,""+detail.getAffAgpId())));		 		 
+					 new WhereClause("FIN_AGP_ID",Comparateur.EQ,""+detail.getAgpId())));		 		 
 	 }
 	 
 	 
@@ -99,14 +100,14 @@ public class EtatsAgpmController {
      public void chargeDossier() {
   	dossListe.clear();
   	dossListe = ((List<TDossierAgpm>)iservice.getObjectsByColumn("TDossierAgpm",new ArrayList<String>(Arrays.asList("DAG_NAP_CODE")),
-  	new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+detail.getAffAgpId()))); 		 
+  	new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+detail.getAgpId()))); 		 
   		 }
      
     //Afficher detail AGPM
      public void chargeContenuAgpm() {
     	 detailAgpm.clear();
     	 detailAgpm = ((List<TDetailAgpm>)iservice.getObjectsByColumn("TDetailAgpm",new ArrayList<String>(Arrays.asList("TDA_NUM_ORDRE")),
-    	  	new WhereClause("TDA_AGP_ID",Comparateur.EQ,""+detail.getAffAgpId()))); 
+    	  	new WhereClause("TDA_AGP_ID",Comparateur.EQ,""+detail.getAgpId()))); 
      }
      
      
@@ -152,7 +153,7 @@ public class EtatsAgpmController {
       
       //Edition de l'AGPM
  	 public void imprimerAgpm() {
- 			projetReport.longparam1(detail.getAffAgpId(), "Agpm", "Agpm");
+ 			projetReport.longparam1(detail.getAgpId(), "Agpm", "Agpm");
  		}
       
       
@@ -189,12 +190,16 @@ public class EtatsAgpmController {
 		this.financementListe = financementListe;
 	}
 
-	public TAffichageAgpm getSlctdTd() {
+	public VAgpmliste getSlctdTd() {
 		return slctdTd;
 	}
-	public void setSlctdTd(TAffichageAgpm slctdTd) {
+
+
+	public void setSlctdTd(VAgpmliste slctdTd) {
 		this.slctdTd = slctdTd;
 	}
+
+
 	public VAgpmDetails getDetail() {
 		return detail;
 	}
