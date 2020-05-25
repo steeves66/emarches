@@ -280,8 +280,8 @@ public class AgpmController {
    			   new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+acte.getAgpId()),
 			   new WhereClause("AGP_DEC_ID",WhereClause.Comparateur.EQ,""+acte.getAgpDecId()))); 
 			if (!listeDeclarantsRappel.isEmpty()) {
-				rappelDec=listeDeclarantsRappel.get(0);
-				etatPavetOrgne = true;
+				  rappelDec=listeDeclarantsRappel.get(0);
+				  etatPavetOrgne = true;
 				  etatPanelOrgane = false;
 				  etatPanelOrganeRappel=true;
 				  etatPanelConfirmation = false;
