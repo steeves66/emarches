@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 23 mai 2020 18:03:53 by Hibernate Tools 4.3.5.Final
+// Generated 25 mai 2020 15:11:28 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -23,8 +23,11 @@ public class VAgpmliste implements java.io.Serializable {
 	private String finNumeroAccord;
 	private String proTitre;
 	private String baiLibelle;
-	private String fonLibelle;
+	private String fonctionAc;
 	private String decOrganExecLibelle;
+	private String minLibelleCourt;
+	private String strTstCode;
+	private String agpActif;
 	private String agpFonCod;
 	private String agpFonCodPf;
 	private String agpStaCode;
@@ -34,28 +37,36 @@ public class VAgpmliste implements java.io.Serializable {
 	private Date agpDateValDmp;
 	private Date agpDteModif;
 	private String agpFonCodDmp;
+	private Long finId;
+	private long proId;
+	private Long decId;
 
 	public VAgpmliste() {
 	}
 
-	public VAgpmliste(long agpId, String proTitre, String agpFonCod, String agpStaCode) {
+	public VAgpmliste(long agpId, String proTitre, String agpFonCod, String agpStaCode, long proId) {
 		this.agpId = agpId;
 		this.proTitre = proTitre;
 		this.agpFonCod = agpFonCod;
 		this.agpStaCode = agpStaCode;
+		this.proId = proId;
 	}
 
 	public VAgpmliste(long agpId, String agpCode, String finNumeroAccord, String proTitre, String baiLibelle,
-			String fonLibelle, String decOrganExecLibelle, String agpFonCod, String agpFonCodPf, String agpStaCode,
-			String agpStatutRetour, Date agpDateValAc, Date agpDateValCpmp, Date agpDateValDmp, Date agpDteModif,
-			String agpFonCodDmp) {
+			String fonctionAc, String decOrganExecLibelle, String minLibelleCourt, String strTstCode, String agpActif,
+			String agpFonCod, String agpFonCodPf, String agpStaCode, String agpStatutRetour, Date agpDateValAc,
+			Date agpDateValCpmp, Date agpDateValDmp, Date agpDteModif, String agpFonCodDmp, Long finId, long proId,
+			Long decId) {
 		this.agpId = agpId;
 		this.agpCode = agpCode;
 		this.finNumeroAccord = finNumeroAccord;
 		this.proTitre = proTitre;
 		this.baiLibelle = baiLibelle;
-		this.fonLibelle = fonLibelle;
+		this.fonctionAc = fonctionAc;
 		this.decOrganExecLibelle = decOrganExecLibelle;
+		this.minLibelleCourt = minLibelleCourt;
+		this.strTstCode = strTstCode;
+		this.agpActif = agpActif;
 		this.agpFonCod = agpFonCod;
 		this.agpFonCodPf = agpFonCodPf;
 		this.agpStaCode = agpStaCode;
@@ -65,8 +76,11 @@ public class VAgpmliste implements java.io.Serializable {
 		this.agpDateValDmp = agpDateValDmp;
 		this.agpDteModif = agpDteModif;
 		this.agpFonCodDmp = agpFonCodDmp;
+		this.finId = finId;
+		this.proId = proId;
+		this.decId = decId;
 	}
-
+    
 	@Id
 	@Column(name = "AGP_ID", nullable = false, precision = 10, scale = 0)
 	public long getAgpId() {
@@ -113,13 +127,13 @@ public class VAgpmliste implements java.io.Serializable {
 		this.baiLibelle = baiLibelle;
 	}
 
-	@Column(name = "FON_LIBELLE", length = 500)
-	public String getFonLibelle() {
-		return this.fonLibelle;
+	@Column(name = "FONCTION_AC", length = 523)
+	public String getFonctionAc() {
+		return this.fonctionAc;
 	}
 
-	public void setFonLibelle(String fonLibelle) {
-		this.fonLibelle = fonLibelle;
+	public void setFonctionAc(String fonctionAc) {
+		this.fonctionAc = fonctionAc;
 	}
 
 	@Column(name = "DEC_ORGAN_EXEC_LIBELLE", length = 500)
@@ -129,6 +143,33 @@ public class VAgpmliste implements java.io.Serializable {
 
 	public void setDecOrganExecLibelle(String decOrganExecLibelle) {
 		this.decOrganExecLibelle = decOrganExecLibelle;
+	}
+
+	@Column(name = "MIN_LIBELLE_COURT", length = 500)
+	public String getMinLibelleCourt() {
+		return this.minLibelleCourt;
+	}
+
+	public void setMinLibelleCourt(String minLibelleCourt) {
+		this.minLibelleCourt = minLibelleCourt;
+	}
+
+	@Column(name = "STR_TST_CODE", length = 3)
+	public String getStrTstCode() {
+		return this.strTstCode;
+	}
+
+	public void setStrTstCode(String strTstCode) {
+		this.strTstCode = strTstCode;
+	}
+
+	@Column(name = "AGP_ACTIF", length = 1)
+	public String getAgpActif() {
+		return this.agpActif;
+	}
+
+	public void setAgpActif(String agpActif) {
+		this.agpActif = agpActif;
 	}
 
 	@Column(name = "AGP_FON_COD", nullable = false, length = 20)
@@ -210,5 +251,32 @@ public class VAgpmliste implements java.io.Serializable {
 
 	public void setAgpFonCodDmp(String agpFonCodDmp) {
 		this.agpFonCodDmp = agpFonCodDmp;
+	}
+
+	@Column(name = "FIN_ID", precision = 10, scale = 0)
+	public Long getFinId() {
+		return this.finId;
+	}
+
+	public void setFinId(Long finId) {
+		this.finId = finId;
+	}
+
+	@Column(name = "PRO_ID", nullable = false, precision = 10, scale = 0)
+	public long getProId() {
+		return this.proId;
+	}
+
+	public void setProId(long proId) {
+		this.proId = proId;
+	}
+
+	@Column(name = "DEC_ID", precision = 10, scale = 0)
+	public Long getDecId() {
+		return this.decId;
+	}
+
+	public void setDecId(Long decId) {
+		this.decId = decId;
 	}
 }

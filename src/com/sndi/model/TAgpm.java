@@ -46,6 +46,7 @@ public class TAgpm implements java.io.Serializable {
 	private Date agpDteModif;
 	private String agpFonCodPf;
 	private String agpFonCodDmp;
+	private String agpRecherche;
 	private Set<TFinancement> TFinancements = new HashSet<TFinancement>(0);
 	private Set<TDetailAgpm> TDetailAgpms = new HashSet<TDetailAgpm>(0);
 	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
@@ -71,7 +72,7 @@ public class TAgpm implements java.io.Serializable {
 	public TAgpm(long agpId, TProjet TProjet,TStructure TStructure, TGestion TGestion, TDeclarant TDeclarant, TStatut TStatut,
 			TMinistere TMinistere, TFonction TFonction, String agpCommentaire, String agpTypeDao,
 			String agpModePassation, String agpActif, String agpStatutRetour, String agpActeurSaisie,Date agpDateValAc, Date agpDateValCpmp,
-			Date agpDateValDmp,String agpCode,Date agpDteModif,String agpFonCodPf,String agpFonCodDmp,
+			Date agpDateValDmp,String agpCode,Date agpDteModif,String agpFonCodPf,String agpFonCodDmp,String agpRecherche,
 			 Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
 			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
 		this.agpId = agpId;
@@ -94,6 +95,7 @@ public class TAgpm implements java.io.Serializable {
 		this.agpDteModif = agpDteModif;
 		this.agpFonCodPf = agpFonCodPf;
 		this.agpFonCodDmp = agpFonCodDmp;
+		this.agpRecherche = agpRecherche;
 		this.TFinancements = TFinancements;
 		this.TDetailAgpms = TDetailAgpms;
 		this.THistoAgpms = THistoAgpms;
@@ -293,6 +295,14 @@ public class TAgpm implements java.io.Serializable {
 		this.agpFonCodDmp = agpFonCodDmp;
 	}
 
+	@Column(name = "AGP_RECHERCHE", length = 4000)
+	public String getAgpRecherche() {
+		return this.agpRecherche;
+	}
+
+	public void setAgpRecherche(String agpRecherche) {
+		this.agpRecherche = agpRecherche;
+	}
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAgpm")
 	public Set<TFinancement> getTFinancements() {
 		return this.TFinancements;
