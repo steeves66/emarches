@@ -597,112 +597,78 @@
 						<div class="box-body">
 							
 							    <h:panelGroup rendered="#{controleController.panel1}">
-					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.affichageListe}" 
+					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.agpmListe}" 
                         emptyMessage="Aucun AGPM enregistré" scrollable="true" scrollHeight="250" >
                         
                           <p:column headerText="N°Agpm" styleClass="#{controleController.accord}">
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affAgpCode}" style="color:red; font-weight:bold " />
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.agpCode}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affAgpCode}"/>
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.agpCode}"/>
          				</h:panelGroup>
 				        </p:column> 
                          
                        <p:column headerText="N°Accord" styleClass="#{controleController.accord}">
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.finNumeroAccord}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.finNumeroAccord}"/>
          				</h:panelGroup>
 				        </p:column> 
                          
                          <p:column headerText="Bailleur" styleClass="#{controleController.bailleur}">
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}" style="color:red; font-weight:bold " />
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.baiLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.baiLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}" style="overflow:auto;" 
 				         rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" style="color:red; font-weight:bold " />
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.minLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         			    <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}"/>
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+         			    <h:outputText value="#{slctdTb.minLibelleCourt}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				        
 				        <p:column headerText="AC" styleClass="#{controleController.autorite}"  
 				        rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold " />
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.fonctionAc}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}"/>
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.fonctionAc}"/>
          				</h:panelGroup>
 				        </p:column>
                          
                          
                          <p:column headerText="Projet/Programme" styleClass="#{controleController.projet}" >
-                         <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
+                         <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.proTitre}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TProjet.proTitre}"/>
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.proTitre}"/>
          				</h:panelGroup>
 				        </p:column>
 				       
          				<p:column headerText="Organe d'Exécution" styleClass="#{controleController.organe}" >
-         				<h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" style="color:red; font-weight:bold " />
+         				<h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.decOrganExecLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}"/>
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.decOrganExecLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 
-                          <p:column headerText="Actions" style="width:#{controleController.actions} ">
-				         <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
-	                                 <p:commandLink  oncomplete="PF('motif').show()" action="#{agpmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:5px" update="motif" >
-	                                <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
-	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
-	                           </p:commandLink> 
-	         		     </h:panelGroup>
-                             
-                             
-                             <p:commandLink  action="#{etatsAgpmController.renderPage('agpm5')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:5px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
-                             </p:commandLink>
-                             
-                             <p:commandLink rendered="false" style="margin-right:5px" class="btn btn-xs btn-danger" action="#{agpmController.deleteAgpm()}"
-				               title="Supprimer" update=":content">
-                                <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
-                            </p:commandLink>
-                             
-				              
-				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{agpmModificationController.renderPage('agpm3','MOD')}"
-				               title="Modifier" update=":content">
-                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmModificationController.slctdTd}" />                             
-                            </p:commandLink>
-                            
-                             <p:commandLink  action="#{agpmController.transmettre}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmettre" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
-                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
-                                  <p:confirm header="Confirmation" message="Voulez-vous transmettre de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
-                             </p:commandLink> 
-                                  
-                               
-				         </p:column>   
+                           
     </p:dataTable>
     </h:panelGroup>
    
@@ -783,78 +749,78 @@
                          rowsPerPageTemplate="5,10,15" >
                          
                            <p:column headerText="N°Agpm" styleClass="#{controleController.accord}">
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affAgpCode}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affAgpCode}"/>
          				</h:panelGroup>
 				        </p:column> 
 
 				        <p:column headerText="N°Accord" styleClass="#{controleController.accord}" >
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
          				</h:panelGroup>
 				        </p:column>
                          
                          <p:column headerText="Bailleur" styleClass="#{controleController.bailleur}" >
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				               
 				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}"  >
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				        
 				         <p:column headerText="AC" styleClass="#{controleController.autorite}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-                          <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
                          
 				       
          				<p:column headerText="Projet/Programme" styleClass="#{controleController.projet}" >
-                         <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                         <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TProjet.proTitre}"/>
          				</h:panelGroup>
 				        </p:column>
 				       
          				<p:column headerText="Organe d'Exécution" styleClass="#{controleController.organe}" >
-         				<h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				         
 				         <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+         				<h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affAgpDateValAc}" style="color:red; font-weight:bold " >
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affAgpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
@@ -870,7 +836,7 @@
 				       
                       <p:column headerText="Actions" style="width:#{controleController.actions} ">
                       
-                       <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                       <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
 	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{agpmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
 	                               <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
@@ -884,7 +850,7 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
                              </p:commandLink>
 
-                               <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour != '1'}">
+                               <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
                                 <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
@@ -893,11 +859,11 @@
                                
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-                              <h:panelGroup rendered="#{slctdTb.affAgpStatutRetour == '1'}">
+                              <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
                               <p:commandLink action="#{agpmController.reDifferer()}"   styleClass="btn btn-xs btn-danger" style="background-color: red; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
-                                <p:confirm header="Confirmation" message="Voulez-vous confirmer la retour de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
+                                <p:confirm header="Confirmation" message="Voulez-vous confirmer la retour de l'AGPM N°#{slctdTb.agpId} ?" icon="ui-icon-alert" />
                               </p:commandLink>
                               </h:panelGroup>
                               </h:panelGroup>
@@ -906,7 +872,7 @@
                               <p:commandLink  action="#{agpmController.valider()}" styleClass="btn btn-xs btn-warning" style="background-color: #036d3b; border: #f88b2e; margin-left: 3px" title="validation" update=":content">
                                 <i class="ace-icon fa fa-mail-forward bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
-                              <p:confirm header="Confirmation" message="Voulez-vous confirmer la validation de l'AGPM N°#{slctdTb.affAgpId} ?" icon="ui-icon-alert" />
+                              <p:confirm header="Confirmation" message="Voulez-vous confirmer la validation de l'AGPM N°#{slctdTb.agpId} ?" icon="ui-icon-alert" />
                               </p:commandLink>
                                 
                                

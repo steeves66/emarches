@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.sndi.model.TBailleur;
 import com.sndi.model.TDevise;
+import com.sndi.model.TMinistere;
 import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
 
@@ -35,6 +36,9 @@ public class ConstantService {
 	
 	private Map<String, TSourceFinancement> HM_SOURCE_FINACEMENT = new HashMap<String, TSourceFinancement>();
 	private List<TSourceFinancement> listeSourceFinance = new ArrayList<TSourceFinancement>();
+	
+	private Map<String, TMinistere> HM_MINISTERE = new HashMap<String, TMinistere>();
+	private List<TMinistere> listeMinistere = new ArrayList<TMinistere>();
 
 	//---- FIN VARIABLES GLOBALES ----//
 	@PostConstruct
@@ -56,6 +60,7 @@ public class ConstantService {
 		 chargeTBailleurTable();
 		 chargeTDeviseTable();
 		 chargeTSourceFinancementTable();
+		 chargeTMinitereTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
@@ -70,6 +75,10 @@ public class ConstantService {
 		  _logger.info("HM_STATUS.size :"+ HM_STATUS.size());
 	}
 	
+	public TStatut getStatut(String code_statut){
+		return HM_STATUS.get(code_statut);
+	
+	}
 	//TBailleur
 	public void chargeTBailleurTable(){	
 		listeBailleurs.clear();
@@ -105,6 +114,20 @@ public class ConstantService {
 					HM_SOURCE_FINACEMENT =  Collections.unmodifiableMap(aMap);	
 					_logger.info("HM_SOURCE_FINACEMENT.size :"+ HM_SOURCE_FINACEMENT.size());	
 				}
+				
+		//Ministere
+				
+				public void chargeTMinitereTable(){
+					listeMinistere.clear();
+					listeMinistere =  iservice.getObjects("TMinistere", new ArrayList<String>(Arrays.asList("minCode")));
+					HashMap<String, TMinistere> aMap = new HashMap<String, TMinistere>();
+					for (TMinistere st: listeMinistere) {
+						aMap.put(""+st.getMinCode(), st);
+					}
+					HM_MINISTERE =  Collections.unmodifiableMap(aMap);	
+					_logger.info("HM_MINISTERE.size :"+ HM_MINISTERE.size());	
+				}
+				
 	
 	
 	public static Logger get_logger() {
