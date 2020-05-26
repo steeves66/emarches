@@ -163,6 +163,7 @@ public class AgpmController {
 	 private TAgpm agpm = new TAgpm();
 	 private TAffichageAgpm affichageAgpm = new TAffichageAgpm();
 	 private VAgpmliste vAgpm = new VAgpmliste();
+	 private VAgpmliste varAgpm = new VAgpmliste();
 	 private TAgpm demAgpm = new TAgpm();
 	 private THistoAgpm histoAgpm = new THistoAgpm();
 	 private TDetailAgpm detail = new TDetailAgpm();
@@ -935,7 +936,26 @@ public class AgpmController {
 	    	 				     		      			   TStatut statuts = constantService.getStatut("S1S");
 	    	 				     		  					//Historisation des Agpm
 	    	 				     		      			    historiser("S1S",agpm,"Création de l'agpm par l'Autorité Contractante");
-	    	 				     		  						  
+	    	 				     		      			    
+	    	 				     		      			    agpmListe =(List<VAgpmliste>) iservice.getObjectsByColumn("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+	    	 				     		  					 new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ,"S1S"),
+	    	 				     		  						new WhereClause("AGP_ID", WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+	    	 				     		  					if (!agpmListe.isEmpty()) varAgpm =agpmListe.get(0); 
+	    	 				     		  					
+	    	 				     		  				
+	    	 				     		      			  String search = varAgpm.getAgpCode()+""+varAgpm.getBaiLibelle()+""+varAgpm.getFinNumeroAccord()+""+varAgpm.getProTitre();
+	    	 				     		      			  String rechercheAll = search.replace("null","");
+	    	 				     		      			  
+	    	 				     		      			List<TAgpm> AFG =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
+	    	 				     			      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
+	    	 				     		      				TAgpm agp = new TAgpm();
+	    	 				     		      				if(!AFG.isEmpty()) agp =AFG.get(0); 
+	    	 				     		  					agp.setAgpRecherche(rechercheAll);
+	    	 				     		      				iservice.updateObject(agp);
+	    	 				     		      				
+	    	 				     		      			  /*String search = agpm.getAgpCode()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+agpm.getTGestion().getGesCode()+""+agpm.getTProjet().getProTitre();
+    	 				    							  String rechercheAll = search.replace("null","");
+	    	 				     		  						  */
 	    	 				     		  					//Insertion dans TAffichageAgpm
 	    	 				     		  				/*	affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
 	    	 				     		  					affichageAgpm.setAffAgpActif(agpm.getAgpActif());
@@ -3451,6 +3471,14 @@ public class AgpmController {
 
 	public void setSlctdTd(VAgpmliste slctdTd) {
 		this.slctdTd = slctdTd;
+	}
+
+	public VAgpmliste getVarAgpm() {
+		return varAgpm;
+	}
+
+	public void setVarAgpm(VAgpmliste varAgpm) {
+		this.varAgpm = varAgpm;
 	}
     
 }
