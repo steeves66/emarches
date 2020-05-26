@@ -36,8 +36,9 @@ public class VAgpmFonction implements java.io.Serializable {
 	private Date agpDateValCpmp;
 	private Date agpDateValDmp;
 	private String agpCode;
-	//private String agpFonCodPf;
-	//private String agpFonCodDmp;
+	private String agpFonCodPf;
+	private String agpFonCodDmp;
+	private String agpRecherche;
 	private long finId;
 	private String finDevCode;
 	private String finBaiCode;
@@ -82,7 +83,7 @@ public class VAgpmFonction implements java.io.Serializable {
 	public VAgpmFonction(long agpId, String agpStrCode, String agpFonCod, short agpGesCode, String agpStaCode,
 			long agpProId, Long agpDecId, String agpCommentaire, String agpTypeDao, String agpModePassation,
 			String agpActif, String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp,
-			Date agpDateValDmp,String agpCode, /*String agpFonCodPf, String agpFonCodDmp,*/ long finId, String finDevCode, String finBaiCode, String finSouCode, long finProId,
+			Date agpDateValDmp,String agpCode, String agpFonCodPf, String agpFonCodDmp,String agpRecherche, long finId, String finDevCode, String finBaiCode, String finSouCode, long finProId,
 			BigDecimal finMontantCfa, BigDecimal finMontantDevise, String finNumeroAccord, String finStatut,
 			Long finAgpId, String finTypeFinance, Long finPartTresor, long proId, Long proRegId, String proCode,
 			String proTitre, String proLibelle, String proDescription, BigDecimal proMontantTotCfa,
@@ -104,8 +105,9 @@ public class VAgpmFonction implements java.io.Serializable {
 		this.agpDateValCpmp = agpDateValCpmp;
 		this.agpDateValDmp = agpDateValDmp;
 		this.agpCode = agpCode;
-	/*	this.agpFonCodPf = agpFonCodPf;
-		this.agpFonCodDmp = agpFonCodDmp;*/
+		this.agpFonCodPf = agpFonCodPf;
+		this.agpFonCodDmp = agpFonCodDmp;
+		this.agpRecherche = agpRecherche;
 		this.finId = finId;
 		this.finDevCode = finDevCode;
 		this.finBaiCode = finBaiCode;
@@ -283,7 +285,7 @@ public class VAgpmFonction implements java.io.Serializable {
 		this.agpCode = agpCode;
 	}
 
-/*	@Column(name = "AGP_FON_COD_PF", length = 20)
+	@Column(name = "AGP_FON_COD_PF", length = 20)
 	public String getAgpFonCodPf() {
 		return this.agpFonCodPf;
 	}
@@ -299,7 +301,16 @@ public class VAgpmFonction implements java.io.Serializable {
 
 	public void setAgpFonCodDmp(String agpFonCodDmp) {
 		this.agpFonCodDmp = agpFonCodDmp;
-	}*/
+	}
+	
+	@Column(name = "AGP_RECHERCHE", length = 4000)
+	public String getAgpRecherche() {
+		return this.agpRecherche;
+	}
+
+	public void setAgpRecherche(String agpRecherche) {
+		this.agpRecherche = agpRecherche;
+	}
 
 
 	@Column(name = "FIN_ID", nullable = false, precision = 10, scale = 0)

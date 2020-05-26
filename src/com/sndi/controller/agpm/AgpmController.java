@@ -992,7 +992,7 @@ public class AgpmController {
 	  
 	  
 	  public void historiser(String statut,TAgpm TAgpm,String motif) {
-		  THistoAgpm agpmStatut = new THistoAgpm();
+		        THistoAgpm agpmStatut = new THistoAgpm();
 				agpmStatut.setHagDate(Calendar.getInstance().getTime());
 				agpmStatut.setHagMotif(motif);
 				agpmStatut.setTFonction(userController.getSlctd().getTFonction());
