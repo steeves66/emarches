@@ -940,24 +940,27 @@ public class AgpmController {
 	    	 				     		      			    agpmListe =(List<VAgpmliste>) iservice.getObjectsByColumn("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
 	    	 				     		  					 new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ,"S1S"),
 	    	 				     		  						new WhereClause("AGP_ID", WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
-	    	 				     		  					if (!agpmListe.isEmpty()) varAgpm =agpmListe.get(0); 
+	    	 				     		  					if (!agpmListe.isEmpty()) { 
+	    	 				     		  						varAgpm =agpmListe.get(0); 
+	    	 				     		  					   String search = varAgpm.getAgpCode()+""+varAgpm.getBaiLibelle()+""+varAgpm.getFinNumeroAccord()+""+varAgpm.getProTitre();
+	    	 				     		  					   String rechercheAll = search.replace("null","");
+	    	 				     		  					   
+	    	 				     		  					 List<TAgpm> AFFG =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
+	 	    	 				     			      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+varAgpm.getAgpId()));
+	 	    	 				     		      				TAgpm agpf = new TAgpm();
+	 	    	 				     		      				if(!AFFG.isEmpty()) agpf =AFFG.get(0); 
+	 	    	 				     		  					agpf.setAgpRecherche(rechercheAll);
+	 	    	 				     		      				iservice.updateObject(agpf);
+	    	 				     		  					   }
 	    	 				     		  					
 	    	 				     		  				
-	    	 				     		      			  String search = varAgpm.getAgpCode()+""+varAgpm.getBaiLibelle()+""+varAgpm.getFinNumeroAccord()+""+varAgpm.getProTitre();
-	    	 				     		      			  String rechercheAll = search.replace("null","");
-	    	 				     		      			  
-	    	 				     		      			List<TAgpm> AFG =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
-	    	 				     			      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
-	    	 				     		      				TAgpm agp = new TAgpm();
-	    	 				     		      				if(!AFG.isEmpty()) agp =AFG.get(0); 
-	    	 				     		  					agp.setAgpRecherche(rechercheAll);
-	    	 				     		      				iservice.updateObject(agp);
-	    	 				     		      				
+	    	 				     		      			  //String search = varAgpm.getAgpCode()+""+varAgpm.getBaiLibelle()+""+varAgpm.getFinNumeroAccord()+""+varAgpm.getProTitre();
+	    	 				     		      			  //String rechercheAll = search.replace("null","");
 	    	 				     		      			  /*String search = agpm.getAgpCode()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+agpm.getTGestion().getGesCode()+""+agpm.getTProjet().getProTitre();
     	 				    							  String rechercheAll = search.replace("null","");
 	    	 				     		  						  */
 	    	 				     		  					//Insertion dans TAffichageAgpm
-	    	 				     		  				/*	affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
+	    	 				     		  				  /*affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
 	    	 				     		  					affichageAgpm.setAffAgpActif(agpm.getAgpActif());
 	    	 				     		  				    affichageAgpm.setAffAgpCode(agpm.getAgpCode());
 	    	 				     		  					affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
@@ -1038,7 +1041,7 @@ public class AgpmController {
    				iservice.updateObject(projet);
    			
    			 //Agpm
-/*   	 		 List<TAgpm> AGP =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
+        /*List<TAgpm> AGP =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
    		      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffAgpId()));
    	 		TAgpm agpm = new TAgpm();
    	   				if(!AGP.isEmpty()) agpm =AGP.get(0); 	
