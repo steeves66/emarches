@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sndi.model.TBailleur;
+import com.sndi.model.TContenuAgpm;
 import com.sndi.model.TDevise;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TSourceFinancement;
@@ -39,6 +40,9 @@ public class ConstantService {
 	
 	private Map<String, TMinistere> HM_MINISTERE = new HashMap<String, TMinistere>();
 	private List<TMinistere> listeMinistere = new ArrayList<TMinistere>();
+	
+	private List<TContenuAgpm> listeContenu = new ArrayList<TContenuAgpm>();
+	private Map<String, TContenuAgpm> HM_CONTENU = new HashMap<String, TContenuAgpm>();
 
 	//---- FIN VARIABLES GLOBALES ----//
 	@PostConstruct
@@ -91,6 +95,10 @@ public class ConstantService {
 		_logger.info("HM_BAILLEURS.size :"+ HM_BAILLEURS.size());	
 	}
 	
+	public TBailleur getTBailleur(String baiCode){
+		return HM_BAILLEURS.get(baiCode);
+	}
+	
 	//TDevise
 		public void chargeTDeviseTable(){	
 			listeDevise.clear();
@@ -103,6 +111,10 @@ public class ConstantService {
 			_logger.info("HM_DEVISE.size :"+ HM_DEVISE.size());	
 		}
 		
+		public TDevise getTDevise(String devCode){
+			return HM_DEVISE.get(devCode);
+		}
+		
 		//TDevise
 				public void chargeTSourceFinancementTable(){
 					listeSourceFinance.clear();
@@ -113,6 +125,10 @@ public class ConstantService {
 					}
 					HM_SOURCE_FINACEMENT =  Collections.unmodifiableMap(aMap);	
 					_logger.info("HM_SOURCE_FINACEMENT.size :"+ HM_SOURCE_FINACEMENT.size());	
+				}
+				
+				public TSourceFinancement getTSourceFinancement(String souCode){
+					return HM_SOURCE_FINACEMENT.get(souCode);
 				}
 				
 		//Ministere
@@ -128,7 +144,29 @@ public class ConstantService {
 					_logger.info("HM_MINISTERE.size :"+ HM_MINISTERE.size());	
 				}
 				
+				public TMinistere getTMinistere(String minCode){
+					return HM_MINISTERE.get(minCode);
+				}
+			
+//Contenu Agpm
+				
+				public void chargeTContenuAgpmTable(){
+					listeContenu.clear();
+					listeContenu =  iservice.getObjects("TContenuAgpm", new ArrayList<String>(Arrays.asList("TCA_CODE")));
+					HashMap<String, TContenuAgpm> aMap = new HashMap<String, TContenuAgpm>();
+					for (TContenuAgpm st: listeContenu) {
+						aMap.put(""+st.getTcaCode(), st);
+					}
+					HM_CONTENU =  Collections.unmodifiableMap(aMap);	
+					_logger.info("HM_CONTENU.size :"+ HM_CONTENU.size());	
+				}
+				
+				public TContenuAgpm getTContenuAgpm(String tca_code){
+					return HM_CONTENU.get(tca_code);
+				}
+				
 	
+				
 	
 	public static Logger get_logger() {
 		return _logger;
@@ -177,6 +215,18 @@ public class ConstantService {
 	}
 	public void setListeSourceFinance(List<TSourceFinancement> listeSourceFinance) {
 		this.listeSourceFinance = listeSourceFinance;
+	}
+	public List<TContenuAgpm> getListeContenu() {
+		return listeContenu;
+	}
+	public void setListeContenu(List<TContenuAgpm> listeContenu) {
+		this.listeContenu = listeContenu;
+	}
+	public Map<String, TContenuAgpm> getHM_CONTENU() {
+		return HM_CONTENU;
+	}
+	public void setHM_CONTENU(Map<String, TContenuAgpm> hM_CONTENU) {
+		HM_CONTENU = hM_CONTENU;
 	}
 	
 	

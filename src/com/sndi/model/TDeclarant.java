@@ -161,7 +161,7 @@ public class TDeclarant implements java.io.Serializable {
 		this.decCel = decCel;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDeclarant")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDeclarant")
 	public Set<TAgpm> getTAgpms() {
 		return this.TAgpms;
 	}
@@ -170,7 +170,7 @@ public class TDeclarant implements java.io.Serializable {
 		this.TAgpms = TAgpms;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDeclarant")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDeclarant")
 	public Set<TAffichageAgpm> getTAffichageAgpms() {
 		return this.TAffichageAgpms;
 	}

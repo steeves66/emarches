@@ -99,11 +99,10 @@ public class AgpmController {
 		chargeData();
 		chargeDataAvalider();
 		//chargeBailleur();
-		chargeDevise();
-		chargeSourceFinance();
+		//chargeDevise();
+		//chargeSourceFinance();
 		chargeMinisteres();
 		chargeGestions();
-		chargeContenu();
 		chargeDetail();
 		DataToday();
 		chargeAgpmTrans();
@@ -369,7 +368,7 @@ public class AgpmController {
 					 validationListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
 								"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 								new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-					          new WhereClause("FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					          new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					 tableauBordController.chargeDataAgpm();
 						_logger.info("validationListe size: "+validationListe.size()); 
 					 
@@ -379,7 +378,7 @@ public class AgpmController {
 							validationListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
 									"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 									new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-							     new WhereClause("FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+							     new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 							tableauBordController.chargeDataAgpm(); 
 								_logger.info("objetListe size: "+validationListe.size());
 					 }else {
@@ -509,12 +508,13 @@ public class AgpmController {
 		 }
 
 	 public void chargeContenu(){
-		 listeContenu=(List<TContenuAgpm>) iservice.getObjectsByColumn("TContenuAgpm", new ArrayList<String>(Arrays.asList("TCA_CODE")));	
+		 listeContenu=new ArrayList<>(constantService.getListeContenu());
 	 }
 	
 		//Combobox reglémentations 
 		 public void chargeMinisteres(){
 			 listeMinistere=(List<TMinistere>) iservice.getObjectsByColumn("TMinistere", new ArrayList<String>(Arrays.asList("MIN_CODE")));	
+			 listeDevise=new ArrayList<>(constantService.getListeDevise());	
 		 }
 		//ACombobox Gestions
 		 public void chargeGestions(){
@@ -522,20 +522,15 @@ public class AgpmController {
 		 }
 	//Combobox Bailleur
 	 public void chargeBailleur() {
-		 //listeBailleurs.clear();
-		 //listeBailleurs =(List<TBailleur>) iservice.getObjectsByColumn("TBailleur", new ArrayList<String>(Arrays.asList("baiCode")));
-		 
 		 listeBailleurs=new ArrayList<>(constantService.getListeBailleurs());
 		}
 	//Combobox Source de finacement
 		 public void chargeSourceFinance() {
-			 listeSourceFinance.clear();
-			 listeSourceFinance =(List<TSourceFinancement>) iservice.getObjectsByColumn("TSourceFinancement", new ArrayList<String>(Arrays.asList("souCode")));
+			 listeSourceFinance=new ArrayList<>(constantService.getListeSourceFinance());
 			}
 		//Combobox Devises
 		 public void chargeDevise() {
-			 listeDevise.clear();
-			 listeDevise =(List<TDevise>) iservice.getObjectsByColumn("TDevise", new ArrayList<String>(Arrays.asList("devCode")));
+			 listeDevise=new ArrayList<>(constantService.getListeDevise());			
 			}
 		 
 		 //Début des filtres
@@ -2162,7 +2157,6 @@ public class AgpmController {
 	  				 paveConfirmation = false;
 					break;
 				case "pgpm2":
-					chargeBailleur();
 					paveInformations = false;
 					paveConfirmation = false;
 					btn_saveProjet =true;
@@ -2189,6 +2183,10 @@ public class AgpmController {
 					btn_saveProjet =true;
 					chargeDataAvalider();
 					chargeData();
+					chargeBailleur();
+					chargeContenu();
+					chargeSourceFinance();
+					chargeDevise();
 					vider();
 					break;
 				case "agpm3":
