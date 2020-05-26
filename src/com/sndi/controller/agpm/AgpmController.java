@@ -98,7 +98,7 @@ public class AgpmController {
 		verifProjet();
 		chargeData();
 		chargeDataAvalider();
-		chargeBailleur();
+		//chargeBailleur();
 		chargeDevise();
 		chargeSourceFinance();
 		chargeMinisteres();
@@ -521,8 +521,10 @@ public class AgpmController {
 		 }
 	//Combobox Bailleur
 	 public void chargeBailleur() {
-		 listeBailleurs.clear();
-		 listeBailleurs =(List<TBailleur>) iservice.getObjectsByColumn("TBailleur", new ArrayList<String>(Arrays.asList("baiCode")));
+		 //listeBailleurs.clear();
+		 //listeBailleurs =(List<TBailleur>) iservice.getObjectsByColumn("TBailleur", new ArrayList<String>(Arrays.asList("baiCode")));
+		 
+		 listeBailleurs=new ArrayList<>(constantService.getListeBailleurs());
 		}
 	//Combobox Source de finacement
 		 public void chargeSourceFinance() {
@@ -932,17 +934,10 @@ public class AgpmController {
 	    	 				     		      				
 	    	 				     		      			   TStatut statuts = constantService.getStatut("S1S");
 	    	 				     		  					//Historisation des Agpm
-	    	 				     		  					/*THistoAgpm agpmStatut = new THistoAgpm();
-	    	 				     		  					agpmStatut.setHagDate(Calendar.getInstance().getTime());
-	    	 				     		  					agpmStatut.setHagMotif("Création de l'agpm par l'Autorité Contractante");
-	    	 				     		  					agpmStatut.setTFonction(userController.getSlctd().getTFonction());
-	    	 				     		  					agpmStatut.setTOperateur(userController.getSlctd().getTOperateur());
-	    	 				     		  					agpmStatut.setTStatut(statuts);
-	    	 				     		  					agpmStatut.setTAgpm(agpm);
-	    	 				     		  					iservice.addObject(agpmStatut);*/
+	    	 				     		      			    historiser("S1S",agpm,"Création de l'agpm par l'Autorité Contractante");
 	    	 				     		  						  
 	    	 				     		  					//Insertion dans TAffichageAgpm
-	    	 				     		  					affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
+	    	 				     		  				/*	affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
 	    	 				     		  					affichageAgpm.setAffAgpActif(agpm.getAgpActif());
 	    	 				     		  				    affichageAgpm.setAffAgpCode(agpm.getAgpCode());
 	    	 				     		  					affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
@@ -961,9 +956,9 @@ public class AgpmController {
 	    	 				     		  					affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));
 	    	 				     		  					affichageAgpm.setTStatut(statuts);
 	    	 				     		  					iservice.addObject(affichageAgpm); 
-	    	 				     		  						
+	    	 				     		  						*/
 	    	 				     		  					
-	    	 				     		  					String search = agpm.getAgpCode()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
+	    	 				     		  					/*String search = agpm.getAgpCode()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
 	    	 				    							String rechercheAll = search.replace("null","");
 	    	 				    							
 	    	 				     		  						
@@ -973,7 +968,7 @@ public class AgpmController {
 	    	 				     		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
 	    	 				     		      					
 	    	 				     		  					affgp.setAffAgpRecherche(rechercheAll);
-	    	 				     		      				iservice.updateObject(affgp);
+	    	 				     		      				iservice.updateObject(affgp);*/
 	    	 				     		  						
 	    	 				     		  					userController.setTexteMsg("Enregistrement effectué avec succès!");
 	    	 				     		  					userController.setRenderMsg(true);
@@ -996,14 +991,14 @@ public class AgpmController {
 	      		          }
 	  
 	  
-	  public void historiser(TStatut statuts,String motif) {
+	  public void historiser(String statut,TAgpm TAgpm,String motif) {
 		  THistoAgpm agpmStatut = new THistoAgpm();
 				agpmStatut.setHagDate(Calendar.getInstance().getTime());
 				agpmStatut.setHagMotif(motif);
 				agpmStatut.setTFonction(userController.getSlctd().getTFonction());
 				agpmStatut.setTOperateur(userController.getSlctd().getTOperateur());
-				agpmStatut.setTStatut(statuts);
-				agpmStatut.setTAgpm(agpm);
+				agpmStatut.setTStatut(new TStatut(statut));
+				agpmStatut.setTAgpm(TAgpm);
 				iservice.addObject(agpmStatut); 
 	  }
 	  
@@ -1844,14 +1839,15 @@ public class AgpmController {
 							if(!LS.isEmpty()) statuts = LS.get(0);*/
 							  TStatut statuts = constantService.getStatut(statutTrans);
 								  //Historisation des Agpm
-								     THistoAgpm agpmStatut = new THistoAgpm();
+							  historiser(""+statutTrans,agpp,"Demande Transmise à la CPMP");
+								  /*   THistoAgpm agpmStatut = new THistoAgpm();
 								      agpmStatut.setHagDate(Calendar.getInstance().getTime());
 								      agpmStatut.setHagMotif("Demande Transmise à la CPMP");
 								      agpmStatut.setTFonction(userController.getSlctd().getTFonction());
 								      agpmStatut.setTOperateur(userController.getSlctd().getTOperateur());
 								      agpmStatut.setTStatut(statuts);
 								      agpmStatut.setTAgpm(agpp);
-									  iservice.addObject(agpmStatut);
+									  iservice.addObject(agpmStatut);*/
 									  
 									  
 									/*//Enregistrement de TAffichage
@@ -2143,6 +2139,7 @@ public class AgpmController {
 	  				 paveConfirmation = false;
 					break;
 				case "pgpm2":
+					chargeBailleur();
 					paveInformations = false;
 					paveConfirmation = false;
 					btn_saveProjet =true;
