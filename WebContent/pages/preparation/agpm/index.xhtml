@@ -104,52 +104,6 @@
           </h:panelGroup>
           
           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
-          <h:panelGroup rendered="#{controleController.panelAgpmTableauBordSai}">
-              
-            <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.agpmCpSaisie}</h3>
-
-              <p>En attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.agpmCpTransmis}</h3>
-
-              <p>Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-          
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeAgpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-						  </p:commandLink> 
-          </div>
-        </div>
-        <!-- ./col -->
-   
-      </div>
-                    </div>
-                  </div>
-       </h:panelGroup> 
-       
-       
-       
         <h:panelGroup rendered="#{controleController.panelAgpmTableauBordVal}">  
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
@@ -224,52 +178,6 @@
           </h:panelGroup>
           
             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
-             <h:panelGroup rendered="#{controleController.panelAgpmTableauBordSaiDmp}">
-              
-            <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.pgpmCpSaisie}</h3>
-
-              <p>En attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.pgpmDmTransmis}</h3>
-
-              <p>Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-          
-            <p:commandLink  oncomplete="PF('detailDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-						  </p:commandLink> 
-          </div>
-        </div>
-        <!-- ./col -->
-   
-      </div>
-                    </div>
-                  </div>
-       </h:panelGroup> 
-       
-          
-
            <h:panelGroup rendered="#{controleController.panelAgpmTableauBordValDmp}"> 
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
@@ -340,50 +248,7 @@
       
           <!-- Tableau de Bord pour l'acteur SPP -->
           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
-             <h:panelGroup rendered="#{controleController.panelAgpmTableauBordSaiDmp}">
-              
-            <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.pgpmCpSaisie}</h3>
-
-              <p>En attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer"><i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.pgpmDmTransmis}</h3>
-
-              <p>Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-          
-            <p:commandLink  oncomplete="PF('detailDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-						  </p:commandLink> 
-          </div>
-        </div>
-        <!-- ./col -->
-   
-      </div>
-                    </div>
-                  </div>
-       </h:panelGroup> 
-       
+             
            <h:panelGroup rendered="#{controleController.panelAgpmTableauBordValDmp}"> 
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
@@ -784,78 +649,78 @@
                          
                            <p:column headerText="N°Agpm" styleClass="#{controleController.accord}">
                           <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affAgpCode}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.agpCode}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affAgpCode}"/>
+         				<h:outputText value="#{slctdTb.agpCode}"/>
          				</h:panelGroup>
 				        </p:column> 
 
 				        <p:column headerText="N°Accord" styleClass="#{controleController.accord}" >
                           <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.finNumeroAccord}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}"/>
+         				<h:outputText value="#{slctdTb.finNumeroAccord}"/>
          				</h:panelGroup>
 				        </p:column>
                          
                          <p:column headerText="Bailleur" styleClass="#{controleController.bailleur}" >
                           <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.baiLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+         				<h:outputText value="#{slctdTb.baiLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				               
 				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}"  >
                           <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.minLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}"/>
+         				<h:outputText value="#{slctdTb.minLibelleCourt}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				        
 				         <p:column headerText="AC" styleClass="#{controleController.autorite}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
                           <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.fonctionAc}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}"/>
+         				<h:outputText value="#{slctdTb.fonctionAc}"/>
          				</h:panelGroup>
 				        </p:column>
                          
 				       
          				<p:column headerText="Projet/Programme" styleClass="#{controleController.projet}" >
                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TProjet.proTitre}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.proTitre}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TProjet.proTitre}"/>
+         				<h:outputText value="#{slctdTb.proTitre}"/>
          				</h:panelGroup>
 				        </p:column>
 				       
          				<p:column headerText="Organe d'Exécution" styleClass="#{controleController.organe}" >
          				<h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.decOrganExecLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}"/>
+         				<h:outputText value="#{slctdTb.decOrganExecLibelle}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				         
 				         <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
          				<h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}" style="color:red; font-weight:bold " >
+         				<h:outputText value="#{slctdTb.agpDateValAc}" style="color:red; font-weight:bold " >
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
          				</h:panelGroup>
@@ -989,41 +854,41 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
-						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			            
 			             <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+         				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column>   
 					  
 						<p:column headerText="Bailleur" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+         				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				       
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}:#{slctdTb.TFonction.fonCod}" />
+         				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
 				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+         				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+         				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
@@ -1065,41 +930,41 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%;  vertical-align:top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValCp}"
-						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			            
 			            <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+         				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column> 
 			              
 						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+         				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
 				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+         				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+         				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
@@ -1138,41 +1003,41 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValDmp}"
-						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			             
 			            <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+         				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column> 
 			               
 						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+         				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
 				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+         				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+         				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
@@ -1208,31 +1073,31 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
-						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					     <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+         				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column>
 				        
 						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+         				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				       
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
 				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+         				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+         				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
@@ -1242,7 +1107,7 @@
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
@@ -1278,41 +1143,41 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
-						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			            
 			             <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+         				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column>  
 					    
 						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+         				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
 				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+         				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+         				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
@@ -1348,41 +1213,41 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
-						 selectionMode="single" rowKey="#{slctdTb.affAgpId}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 		                <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TFinancement.finNumeroAccord}" />
+         				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column>
 		
 						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TBailleur.baiLibelle}" />
+         				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
-         				  <h:outputText value="#{slctdTb.TStructure.TMinistere.minLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
 				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.TProjet.proTitre}" />
+         				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TDeclarant.decOrganExecLibelle}" />
+         				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>
 				        
 			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>

@@ -3,6 +3,7 @@ package com.sndi.controller.tableauBord;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import com.sndi.controller.custom.ControleController;
 import com.sndi.dao.WhereClause;
+import com.sndi.model.VAgpmliste;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -45,17 +47,17 @@ public class TableauBordController {
 	 DownloadFileServlet downloadFileServlet;
 	 
 	 
-	 @PostConstruct
+/*	 @PostConstruct
 	 public void postContr() {
 		 chargeDataAgpm();
 		 //chargeDataPgpmPgspm();
 		 //chargeDataPpmPspm();
-		 chargeDataDao();
-		 chargeDataPpm();
-		 chargeDataPspm();
-		 chargeDataPgpm();
-		 chargeDataPgspm();
-	 }
+		 //chargeDataDao();
+		 //chargeDataPpm();
+		 //chargeDataPspm();
+		 //chargeDataPgpm();
+		 //chargeDataPgspm();
+	 }*/
 	 
 	 
 	 //AGPM
@@ -422,31 +424,62 @@ public class TableauBordController {
 								   */
 				     
 				     
-			
+		public void agpmAc() {
+			agpmAcAttenteTransfert = ""+getAgpmAcAttenteTransfert("S1S","S2D","SDR");
+			agpmAcTransmis = ""+getAgpmAcTransmisDossier("S1T","SDT");	
+		}
 		
 	
 		
 		public void chargeDataAgpm() {
 			   //Début AGPM
-			 agpmTotal = ""+getAgpmDossierTotal();
-			 agpmAcSaisies = ""+getAgpmAcSaisieDossier("S1S");
-			 agpmAcAttenteTransfert = ""+getAgpmAcAttenteTransfert("S1S","S2D","SDR");
-			 agpmAcTransmis = ""+getAgpmAcTransmisDossier("S1T","SDT");
-			 agpmCpmDiffAc = ""+getNpDiffDossierCpmpAc("S2D");
+			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				agpmAcAttenteTransfert = ""+getAgpmAcAttenteTransfert("S1S","S2D","SDR");
+				agpmAcTransmis = ""+getAgpmAcTransmisDossier("S1T","SDT");
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 agpmCpAttenteValide = ""+getAgpmCpAttenteValide("S1T","S3D");
+					 agpmCpValide =""+getAgpmCpValideCmp("S2V");
+					 agpmCpDifCpmp = ""+getAgpmCpDiffCmp("S2D");
+					 agpmCpDifDmpCpmp  =""+getAgpmAcDiffDmpCpmp("S3D");
+					 
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 agpmDmAttenteValide = ""+getAgpmDmAttValide("S2V","SDT");
+						 agpmDmValide = ""+getAgpmDmValide("S3V");
+						 agpmCpDifDmp =""+getAgpmDmDiff("S3D","SDR");
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 agpmDmAttenteValide = ""+getAgpmDmAttValide("S2V","SDT");
+							 agpmDmValide = ""+getAgpmDmValide("S3V");
+							 agpmCpDifDmp =""+getAgpmDmDiff("S3D","SDR");
+						 }
+					 }
+			     } 
+			   }
+			
+			
+			//Fin Tableau de bord AC
+			
+			 //agpmTotal = ""+getAgpmDossierTotal();
+			 //agpmAcSaisies = ""+getAgpmAcSaisieDossier("S1S");
+			 
+			 
+			 //agpmCpmDiffAc = ""+getNpDiffDossierCpmpAc("S2D");
 			 //agpmCpSaisie = ""+getAgpmCpSaisieDossier("S1S");
-			 pgspmAcDifDmp = ""+getAgpmCpDiffAcDossier("S2D");
+			 //pgspmAcDifDmp = ""+getAgpmCpDiffAcDossier("S2D");
 			 //agpmCpTransmis = ""+getAgpmCpTransmisDossier("S1T");
-			 agpmCpDifCpmp = ""+getAgpmCpDiffCmp("S2D");
-			 agpmCpValide =""+getAgpmCpValideCmp("S2V");
-			 agpmCpDifDmp =""+getAgpmDmDiff("S3D","SDR");
-			 agpmAcDifDmpCpmp =""+getAgpmDmDiffAc("S2D","SDR");
-			 agpmCpDifDmpCpmp  =""+getAgpmAcDiffDmpCpmp("S3D");
-			 agpmCpAttenteValide = ""+getAgpmCpAttenteValide("S1T","S3D");
-			 agpmDmValide = ""+getAgpmDmValide("S3V");
+			 //agpmCpDifCpmp = ""+getAgpmCpDiffCmp("S2D");
+			 //agpmCpValide =""+getAgpmCpValideCmp("S2V");
+			 //agpmCpDifDmp =""+getAgpmDmDiff("S3D","SDR");
+			 //agpmAcDifDmpCpmp =""+getAgpmDmDiffAc("S2D","SDR");
+			 //agpmCpDifDmpCpmp  =""+getAgpmAcDiffDmpCpmp("S3D");
+			 //agpmCpAttenteValide = ""+getAgpmCpAttenteValide("S1T","S3D");
+			 //agpmDmValide = ""+getAgpmDmValide("S3V");
 			 //agpmDmSaisie = ""+getAgpmDmSaise("S1S");
-			 agpmDmAttenteValide = ""+getAgpmDmAttValide("S2V","SDT");
+			 //agpmDmAttenteValide = ""+getAgpmDmAttValide("S2V","SDT");
 			 //agpmDmTransmis = ""+getAgpmDmpTransmisDossier("S1T");
-			 agpmDmDiffAc =""+getNpDiffDossierCpmpAc("S3D");
+			 //agpmDmDiffAc =""+getNpDiffDossierCpmpAc("S3D");
 			   //Fin AGPM
 		}
 		
