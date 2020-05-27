@@ -341,11 +341,12 @@
             
             
             </div>
-                 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                 
             <div class="row">
-              
-                 <div class="col-md-12">
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">     
+        <div class="col-md-12">
       <div class="box box-success box-solid">
+      
         <div class="box-header with-border">
             <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
             <div class="col-md-2 "><div  style="color: #fff">
@@ -410,6 +411,7 @@
          </div>
                </div>
       </div>
+      </h:panelGroup>
 
 				<div class="col-md-12">
 					<div class="box box-success box-solid">
@@ -430,19 +432,6 @@
 					 </div>
 					 </div>
 					 
-					  <h:panelGroup rendered="#{controleController.searchPgspm}">
-						<div class="col-md-3 ">	
-					    <div class="input-group input-group-sm col-md-12">
-					    <span class="input-group-btn">
-				                <p:commandLink action="#{pgpmAcController.reinitialiserPgspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}" ></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgspmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span>
-					 </div>
-					 </div>
-					 </h:panelGroup>
 					 <div class="col-md-3 ">
 					 </div>
 					  <div class="col-md-2">
@@ -453,15 +442,17 @@
 					 
 							
 							<div class="col-md-1 ">
+							<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
 								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau PGPM" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{agpmController.renderPage('agpm2','ENG')}"  update=":content">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvel AGPM</span>
 								</p:commandLink>
+								</h:panelGroup>
 							</div>
 							
 						</div>
 						<div class="box-body">
 							
-							    <h:panelGroup rendered="#{controleController.panel1}">
+							    
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.agpmListe}" 
                         emptyMessage="Aucun AGPM enregistré" scrollable="true" scrollHeight="250" >
                         
@@ -553,211 +544,15 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />                             
                             </p:commandLink>
                              
-				              
+				             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">   
 				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{agpmModificationController.renderPage('agpm3','MOD')}"
 				               title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmModificationController.slctdTd}" />                             
                             </p:commandLink>
+                            </h:panelGroup>
                             
-                             <p:commandLink  action="#{agpmController.transmettre}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmettre" update=":content">
-                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
-                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
-                                  <p:confirm header="Confirmation" message="Voulez-vous transmettre de l'AGPM N°#{slctdTb.agpId} ?" icon="ui-icon-alert" />
-                             </p:commandLink> 
-                                  
-                               
-				         </p:column>   
-    </p:dataTable>
-    </h:panelGroup>
-   
-							
-						</div>
-					</div>
-				</div>
-
-            </div>
-            
-            </h:panelGroup>
-    
-    <!--DEBUT PANEL DE VALIDATION -->
-    <h:panelGroup rendered="#{controleController.panel2}">
-    <div class="col-md-12">
-					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-					 <div class="input-group input-group-sm col-md-3">
-                      <label >
-                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-                          <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-					 </h:panelGroup>
-					 
-					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
-					 <div class="input-group input-group-sm col-md-3">
-                      <label >
-                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-                         
-                          <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-					 </h:panelGroup>
-					 
-					  <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
-					 <div class="input-group input-group-sm col-md-3">
-                      <label >
-                      <p:inputText type="text"  value="#{agpmController.multiFiltre}"  placeholder="Effectuez une recherche"/> 	
-					</label>
-					
-					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{agpmController.chargerFiltreRecherche()}" update=":gnl">
-                       <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                      </p:commandLink>
-                     </button>
-                         &nbsp;&nbsp;
-                         
-                          <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{agpmController.reinitialiserAgpm()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
-                        </span>
-					 </div>
-					 </h:panelGroup>
-					 
-					 
-					
-            </div>
-           
-					<p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{agpmController.validationListe}"  emptyMessage="Aucun AGPM enregistré" rows="10" 
-                         paginator="true"
-                         rowsPerPageTemplate="5,10,15" >
-                         
-                           <p:column headerText="N°Agpm" styleClass="#{controleController.accord}">
-                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.agpCode}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.agpCode}"/>
-         				</h:panelGroup>
-				        </p:column> 
-
-				        <p:column headerText="N°Accord" styleClass="#{controleController.accord}" >
-                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.finNumeroAccord}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.finNumeroAccord}"/>
-         				</h:panelGroup>
-				        </p:column>
-                         
-                         <p:column headerText="Bailleur" styleClass="#{controleController.bailleur}" >
-                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.baiLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.baiLibelle}"/>
-         				</h:panelGroup>
-				        </p:column>
-				               
-				         <p:column headerText="Ministere" styleClass="#{controleController.ministere}"  >
-                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.minLibelleCourt}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.minLibelleCourt}"/>
-         				</h:panelGroup>
-				        </p:column>
-				        
-				        
-				         <p:column headerText="AC" styleClass="#{controleController.autorite}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-                          <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.fonctionAc}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.fonctionAc}"/>
-         				</h:panelGroup>
-				        </p:column>
-                         
-				       
-         				<p:column headerText="Projet/Programme" styleClass="#{controleController.projet}" >
-                         <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.proTitre}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.proTitre}"/>
-         				</h:panelGroup>
-				        </p:column>
-				       
-         				<p:column headerText="Organe d'Exécution" styleClass="#{controleController.organe}" >
-         				<h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.decOrganExecLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.decOrganExecLibelle}"/>
-         				</h:panelGroup>
-				        </p:column>
-				        
-				         
-				         <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.agpDateValAc}" style="color:red; font-weight:bold " >
-         				<f:convertDateTime pattern="dd/MM/yyyy" />
-         				</h:outputText>
-         				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.agpDateValAc}">
-         				<f:convertDateTime pattern="dd/MM/yyyy" />
-         				</h:outputText>
-         				</h:panelGroup>
-				        </p:column>
-				        
-			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValCpmp}">
-         				<f:convertDateTime pattern="dd/MM/yyyy" />
-         				</h:outputText>
-				        </p:column>
-				          
-				       
-                      <p:column headerText="Actions" style="width:#{controleController.actions} ">
-                      
-                       <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
-	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{agpmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
-	                               <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
-	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
-	                           </p:commandLink> 
-	         		   </h:panelGroup> 
-                        
-
-                             
-                             <p:commandLink  action="#{etatsAgpmController.renderPage('agpm5')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
-                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsAgpmController.slctdTd}" />  
-                             </p:commandLink>
-
-                               <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
-                                <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
-                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
-                              </p:commandLink>
-                              </h:panelGroup>
-                               
-                              
-                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                               <h:panelGroup rendered="#{slctdTb.agpStatutRetour == '1'}">
                               <p:commandLink action="#{agpmController.reDifferer()}"   styleClass="btn btn-xs btn-danger" style="background-color: red; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
@@ -766,20 +561,44 @@
                               </p:commandLink>
                               </h:panelGroup>
                               </h:panelGroup>
-                               
                               
+                           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
+                             <p:commandLink  action="#{agpmController.transmettre}" styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="transmettre" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
+                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
+                                  <p:confirm header="Confirmation" message="Voulez-vous transmettre de l'AGPM N°#{slctdTb.agpId} ?" icon="ui-icon-alert" />
+                             </p:commandLink> 
+                             </h:panelGroup>
+                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+                              <h:panelGroup rendered="#{slctdTb.agpStatutRetour != '1'}">
+                                <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" />
+                              </p:commandLink>
+                              </h:panelGroup>
+                             </h:panelGroup>
+                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
                               <p:commandLink  action="#{agpmController.valider()}" styleClass="btn btn-xs btn-warning" style="background-color: #036d3b; border: #f88b2e; margin-left: 3px" title="validation" update=":content">
                                 <i class="ace-icon fa fa-mail-forward bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{agpmController.slctdTd}" /> 
                               <p:confirm header="Confirmation" message="Voulez-vous confirmer la validation de l'AGPM N°#{slctdTb.agpId} ?" icon="ui-icon-alert" />
                               </p:commandLink>
-                                
+                              </h:panelGroup>   
                                
 				         </p:column>   
-       
     </p:dataTable>
-  
-    </h:panelGroup>
+   
+							
+						</div>
+					</div>
+				</div>
+
+            </div>
+            
+           
+    
+    <!--DEBUT PANEL DE VALIDATION -->
+    
     <!-- FIN PANEL DE TRANSMISSION GROUPEE -->
  
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">

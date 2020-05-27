@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import com.sndi.model.TBailleur;
 import com.sndi.model.TContenuAgpm;
 import com.sndi.model.TDevise;
+import com.sndi.model.TGestion;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
@@ -43,6 +44,9 @@ public class ConstantService {
 	
 	private List<TContenuAgpm> listeContenu = new ArrayList<TContenuAgpm>();
 	private Map<String, TContenuAgpm> HM_CONTENU = new HashMap<String, TContenuAgpm>();
+	
+	private List<TGestion> listeGestion = new ArrayList<TGestion>();
+	private Map<String, TGestion> HM_GESTION = new HashMap<String, TGestion>();
 
 	//---- FIN VARIABLES GLOBALES ----//
 	@PostConstruct
@@ -65,6 +69,7 @@ public class ConstantService {
 		 chargeTDeviseTable();
 		 chargeTSourceFinancementTable();
 		 chargeTMinitereTable();
+		 chargeTGestionTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
@@ -165,7 +170,22 @@ public class ConstantService {
 					return HM_CONTENU.get(tca_code);
 				}
 				
+				public void chargeTGestionTable(){
+					 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
+					HashMap<String, TGestion> aMap = new HashMap<String, TGestion>();
+					for (TGestion st: listeGestion) {
+						aMap.put(""+st.getGesCode(), st);
+					}
+					HM_GESTION =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_GESTION.size());	
+				}
+				
+				public TGestion getTGestion(String GES_CODE){
+					return HM_GESTION.get(GES_CODE);
+				}
+				
 	
+				
 				
 	
 	public static Logger get_logger() {
@@ -227,6 +247,30 @@ public class ConstantService {
 	}
 	public void setHM_CONTENU(Map<String, TContenuAgpm> hM_CONTENU) {
 		HM_CONTENU = hM_CONTENU;
+	}
+	public Map<String, TMinistere> getHM_MINISTERE() {
+		return HM_MINISTERE;
+	}
+	public void setHM_MINISTERE(Map<String, TMinistere> hM_MINISTERE) {
+		HM_MINISTERE = hM_MINISTERE;
+	}
+	public List<TMinistere> getListeMinistere() {
+		return listeMinistere;
+	}
+	public void setListeMinistere(List<TMinistere> listeMinistere) {
+		this.listeMinistere = listeMinistere;
+	}
+	public List<TGestion> getListeGestion() {
+		return listeGestion;
+	}
+	public void setListeGestion(List<TGestion> listeGestion) {
+		this.listeGestion = listeGestion;
+	}
+	public Map<String, TGestion> getHM_GESTION() {
+		return HM_GESTION;
+	}
+	public void setHM_GESTION(Map<String, TGestion> hM_GESTION) {
+		HM_GESTION = hM_GESTION;
 	}
 	
 	
