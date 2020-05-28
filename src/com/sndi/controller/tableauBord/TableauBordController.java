@@ -457,31 +457,130 @@ public class TableauBordController {
 					 }
 			     } 
 			   }
-			
-			
-			//Fin Tableau de bord AC
-			
-			 //agpmTotal = ""+getAgpmDossierTotal();
-			 //agpmAcSaisies = ""+getAgpmAcSaisieDossier("S1S");
-			 
-			 
-			 //agpmCpmDiffAc = ""+getNpDiffDossierCpmpAc("S2D");
-			 //agpmCpSaisie = ""+getAgpmCpSaisieDossier("S1S");
-			 //pgspmAcDifDmp = ""+getAgpmCpDiffAcDossier("S2D");
-			 //agpmCpTransmis = ""+getAgpmCpTransmisDossier("S1T");
-			 //agpmCpDifCpmp = ""+getAgpmCpDiffCmp("S2D");
-			 //agpmCpValide =""+getAgpmCpValideCmp("S2V");
-			 //agpmCpDifDmp =""+getAgpmDmDiff("S3D","SDR");
-			 //agpmAcDifDmpCpmp =""+getAgpmDmDiffAc("S2D","SDR");
-			 //agpmCpDifDmpCpmp  =""+getAgpmAcDiffDmpCpmp("S3D");
-			 //agpmCpAttenteValide = ""+getAgpmCpAttenteValide("S1T","S3D");
-			 //agpmDmValide = ""+getAgpmDmValide("S3V");
-			 //agpmDmSaisie = ""+getAgpmDmSaise("S1S");
-			 //agpmDmAttenteValide = ""+getAgpmDmAttValide("S2V","SDT");
-			 //agpmDmTransmis = ""+getAgpmDmpTransmisDossier("S1T");
-			 //agpmDmDiffAc =""+getNpDiffDossierCpmpAc("S3D");
-			   //Fin AGPM
 		}
+		
+		//Tableau de Bord pour PGPM
+		public void chargeDataPgpm() {
+			//Début PGPM
+			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				pgpmAcAttenteTransfert = ""+getPgpmAttenteValide("S1S","S2D","SDR");
+				pgpmAcTransmis = ""+getAcTransmisDossier("S1T");
+				pgpmAcDmpValid  = ""+getNpValideDmpAc("S3V");
+				pgpmAcDiffDmpCpmp =""+getNpDiffDossierCpmpDmpAc("S2D","SDR");
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 pgpmAttenteValide = ""+getNpAttenteValide("S1T","S3D");
+					 pgpmCpValide =""+getNpValideCmp("S2V");
+					 pgpmCpDifCpmp = ""+getNpDiffDossier("S2D");
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 pgpmDmAttenteValide = ""+getNpAttValideDmp("S2V","SPG");
+						 pgpmDmValide = ""+getNpValideDmp("S3V");
+						 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR");
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 pgpmDmAttenteValide = ""+getNpAttValideDmp("S2V","SPG");
+							 pgpmDmValide = ""+getNpValideDmp("S3V");
+							 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR"); 
+						 }
+					 }
+			     } 
+			   }
+			//Fin PGPM
+		}
+		
+		//Tableau de Bord pour les PGSPM
+		public void chargeDataPgspm() {
+			//Début PGSPM
+			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				pgspmAcAttenteValide = ""+getAcNpsAttenteValide("S1S","S2D","PGD");
+				pgspmAcTransmis = ""+getAcNpsTransmisDossier("S1T","PGS");
+				pgspmAcDmpValid  = ""+getNpsValideDmpAc("S3V");
+				pgspmAcDiffDmpCpmp =""+getNpsDiffDossierCpmpDmpAc("S2D","SDR");
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 pgspmCpAttenteValide = ""+getNpsAttenteValide("S1T","S3D");
+					 pgspmCpValide =""+getNpsValideCmp("S2V");
+					 pgspmCpDifCpmp = ""+getNpsDiffDossier("S2D");
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
+						 pgspmDmValide = ""+getNpsValideDmp("S3V");
+						 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
+							 pgspmDmValide = ""+getNpsValideDmp("S3V");
+							 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
+						 }
+					 }
+			     } 
+			   }
+			//Fin PGSPM
+		}
+		
+		
+		  //Tableau de Bord pour les PPM
+			public void chargeDataPpm() {
+					//Début PPM
+					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR");
+						ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT");
+						ppmDmValideAc = ""+getPpmValideDmpAc("S3V");
+						ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR"); 
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+							 ppmCpAttenteValide = ""+getPpmAttenteValide("S1T","S3D");
+							 ppmCpValide =""+getPpmValideCmp("S2V");
+							 ppmCpDifCpmp = ""+getPpmDiffDossier("S2D");
+							 ppmCpDifDmp =""+getPpmDiffDmp("S3D","SPR");
+						 }else {
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+								 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT");
+								 ppmDmValide = ""+getPpmValideDmp("S3V");
+								 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
+							 }else {
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+									 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT");
+									 ppmDmValide = ""+getPpmValideDmp("S3V");
+									 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
+								 }
+							 }
+					     } 
+					   }
+					//Fin PPM
+				}
+		
+			//Tableau de Bord pour les PSPM
+			public void chargeDataPspm() {
+				//Début PSPM
+				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					pspmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D");
+					pspmAcTransmis = ""+getAcPspmTransmisDossier("S1T");
+					pspmDmValideAc =""+getPspmValideDmpAc("S3V");
+					pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D","SPR");
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+						 pspmCpAttenteValide = ""+getPspmAttenteValide("S1T","S3D");
+						 pspmCpValide =""+getPspmValideCmp("S2V");
+						 pspmCpDifCpmp = ""+getPspmDiffDossier("S2D");
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+							 pspmDmAttenteValide = ""+getPspmAttValideDmp("S2V");
+							 pspmDmValide = ""+getPspmValideDmp("S3V");
+							 pspmDmDiff = ""+getPspmDiffDmp("S3D");
+						 }else {
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+								 pspmDmAttenteValide = ""+getPspmAttValideDmp("S2V");
+								 pspmDmValide = ""+getPspmValideDmp("S3V");
+								 pspmDmDiff = ""+getPspmDiffDmp("S3D");
+							 }
+						 }
+				     } 
+				   }
+				//Fin PSPM
+			}
+		
 		
 		public void chargeDataPgpmPgspm() {
 			//Début PGPM
@@ -524,8 +623,10 @@ public class TableauBordController {
 			 pgspmDmTransmis = ""+getNpDmpTransmisDossier("S1T");
 			 //Fin PGSPM
 		}
+		
+		
 
-		public void chargeDataPgpm() {
+	/*	public void chargeDataPgpm() {
 			//Début PGPM
 			 pgpmTotal = ""+getPgpmDossierTotal();
 			 pgpmAcSaisie = ""+getAcSaisieDossier("S1S");
@@ -546,9 +647,11 @@ public class TableauBordController {
 			 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR");
 			 //pgpmDmTransmis = ""+getNpDmpTransmisDossier("S1T");	
 			 pgpmAcDmpValid  = ""+getNpValideDmpAc("S3V");
-		}
+		}*/
 		
-		public void chargeDataPgspm() {
+		
+		
+	/*	public void chargeDataPgspm() {
 			//Début PGSPM
 			 pgspmTotal = ""+getPgspmDossierTotal();   
 			 pgspmAcDifDmp =""+getNpsAcDiffCpmpDossier("S3D");
@@ -570,10 +673,12 @@ public class TableauBordController {
 			 //pgspmDmTransmis = ""+getNpDmpTransmisDossier("S1T");
 			 pgspmAcDmpValid  = ""+getNpsValideDmpAc("S3V");
 			 //Fin PGSPM
-		}
+		}*/
 
-		public void chargeDataPpm() {
-			
+		
+		
+		
+		/*public void chargeDataPpm() {
 			//Début PPM
 			 ppmTotal = ""+getPpmDossierTotal();
 			 ppmAcSaisie = ""+getAcPpmSaisieDossier("S1S");
@@ -594,10 +699,11 @@ public class TableauBordController {
 			 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
 			 //ppmDmTransmis = ""+getPpmTransmisDmpDossier("S1T");
 			 //Fin PPM
-			
-		}
+		}*/
 		
-		public void chargeDataPspm() {
+		
+		
+		/*public void chargeDataPspm() {
 			 pspmTotal = ""+getPspmDossierTotal();
 			 pspmAcSaisie = ""+getAcPspmSaisieDossier("S1S");
 			 pspmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D");
@@ -617,7 +723,7 @@ public class TableauBordController {
 			 //pspmDmTransmis = ""+getPspmTransmisDmpDossier("S1T");
 			 pspmDmValideAc =""+getPspmValideDmpAc("S3V");
 			
-		}
+		}*/
 		
 		public void chargeDataAmi() {
 			 //Début AMI 
