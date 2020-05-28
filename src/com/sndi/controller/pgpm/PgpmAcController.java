@@ -110,8 +110,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 public void postContr() {
 		controleController.fonctionaliteDynamic();
 		chargeData();	
-		chargeBailleur();
-		chargeDevise();
+		//chargeBailleur();
+		//chargeDevise();
 		chargeGestions();
 		chargeMinisteres();
 		chargeFonctionCpm();
@@ -166,8 +166,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private List<VAgpmFonction> agpmList = new ArrayList<VAgpmFonction>();
 		 private List<TDevise> listeDevise = new ArrayList<TDevise>();
 		// private List<TTypeMarche> listeTypeMarches = new ArrayList<TTypeMarche>();
-		 private List<VTypeMarcheFils> listeTypeMarches = new ArrayList<VTypeMarcheFils>();
-		 private List<VModePassationPn> listeModePassation = new ArrayList<VModePassationPn>();
+		 private List<VTypeMarcheFils> listeTypeMarchesFils = new ArrayList<VTypeMarcheFils>();
+		 private List<VModePassationPn> listeModePassationPn = new ArrayList<VModePassationPn>();
 		 private List<TFinancement> listeFinancementAgpm = new ArrayList<TFinancement>();
 		 
 		 
@@ -341,7 +341,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				nbrePgspm =""+getNbrePgspmTotal();
 		}
 		 
-		 
+	
 		 
 		 //PGPM
 		/* public void chargeDataAvaliderPgpm() {
@@ -965,9 +965,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }
 			 
 			 //Liste des Modes de Passation restreint
-			 public void chargeMode() {
-				 listeMode.clear();
-				 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));	 		 
+			 public void chargeMode() { 
+				 //listeMode.clear();
+			     listeMode=new ArrayList<>(constantService.getListeMode());
 			 }
 			 
 			//Liste des Modes de Passation restreint
@@ -1163,19 +1163,28 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 
 	 
 		//ACombobox Gestions
-		 public void chargeGestions(){
+		/* public void chargeGestions(){
 			 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
-		 }
+		 }*/
 		 
-	  
-		//Combobox Bailleur
+		//ACombobox Gestions
+		 public void chargeGestions(){
+			 listeGestion=new ArrayList<>(constantService.getListeGestion());
+		 } 
+		 
+		/*//Combobox Bailleur
 	  public void chargeBailleur() {
 		 listeBailleurs.clear();
 		 listeBailleurs =(List<TBailleur>) iservice.getObjectsByColumn("TBailleur", new ArrayList<String>(Arrays.asList("baiCode")));
-		}
+		}*/
+		 
+		//Combobox Bailleur
+		 public void chargeBailleur() {
+			 listeBailleurs=new ArrayList<>(constantService.getListeBailleurs());
+			}
 	  
-	//Combobox Source de finacement
-		 public void chargeSourceFinance() {
+	     //Combobox Source de finacement
+	    /*public void chargeSourceFinance() {
 			 listeSourceFinance.clear();
 			 listeSourceFinance =(List<TSourceFinancement>) iservice.getObjectsByColumn("TSourceFinancement", new ArrayList<String>(Arrays.asList("souCode")));
 			}
@@ -1183,35 +1192,49 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void chargeDevise() {
 			 listeDevise.clear();
 			 listeDevise =(List<TDevise>) iservice.getObjectsByColumn("TDevise", new ArrayList<String>(Arrays.asList("devCode")));
+			}*/
+		 
+		 //Combobox Source de finacement
+		 public void chargeSourceFinance() {
+			 listeSourceFinance=new ArrayList<>(constantService.getListeSourceFinance());
+			}
+		//Combobox Devises
+		 public void chargeDevise() {
+			 listeDevise=new ArrayList<>(constantService.getListeDevise());			
 			}
 		 
 		//Chargement des Types de Marchés
-		 public void chargeMarches() {
-			 listeTypeMarches.clear();
-			 listeTypeMarches =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
+		 /*public void chargeMarches() {
+			 //listeTypeMarchesFils.clear();
+			 listeTypeMarchesFils =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
 			 filtreTypeMarche ="";
-			}
+			}*/
+		 
+		 public void chargeMarches() {
+			 listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
+			 filtreTypeMarche ="";
+		 }
 		 
 		//Réinitialiser les Types de Marchés
 		 public void razchargeMarches() {
-			 listeTypeMarches.clear();
-			 listeTypeMarches =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
+			 listeTypeMarchesFils.clear();
+			 listeTypeMarchesFils =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
 			 filtreTypeMarche ="";
 			}
 		 
 		 
 		//Réinitialiser les modes de Passation
 		 public void razchargeModePassation() {
-			 listeModePassation.clear();
-			 listeModePassation =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+			 listeModePassationPn.clear();
+			 listeModePassationPn =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
 			 filtreModePassation="";
 			}
 		 
 		 
 		//Chargement des modes de Passtion
 		 public void chargeModePassation() {
-			 listeModePassation.clear();
-			 listeModePassation =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+			 listeModePassationPn.clear();
+			 listeModePassationPn =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
 			 filtreModePassation="";
 			}
 		 
@@ -1277,16 +1300,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 //Filtre les marchés en fonction du code Marché
 		 public void filtreMarche() {
-			 listeTypeMarches.clear();
-			 listeTypeMarches = (List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("TYM_CODE")),
+			 listeTypeMarchesFils.clear();
+			 listeTypeMarchesFils = (List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("TYM_CODE")),
 						new WhereClause("TYM_LIBELLE_COURT",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
 		 }
 		 
 		 
 		//Filtre les modes de Passtion en fonction du code Passation
 		 public void filtreModePassation() {
-			 listeModePassation.clear();
-			 listeModePassation =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("MOP_CODE")),
+			 listeModePassationPn.clear();
+			 listeModePassationPn =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("MOP_CODE")),
 					 new WhereClause("MOP_LIBELLE_LONG",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%"));
 			}
 		 
@@ -1791,7 +1814,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	           iservice.addObject(detailPlan);
                  	 
                  	 
-                 	          TAffichagePgpm affichagePgpm = new TAffichagePgpm();
+                 	          /*TAffichagePgpm affichagePgpm = new TAffichagePgpm();
                  	          affichagePgpm.setAffGpgId(detailPlan.getGpgId());
                  	          affichagePgpm.setTPlanGeneral(new TPlanGeneral(detailPlan.getTPlanGeneral().getPlgId()));
                  	          affichagePgpm.setAffGpgAgpId(detailPlan.getGpgAgpId());
@@ -1815,7 +1838,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                  	          affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
                  	          affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
                  	          affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
-                 	          iservice.addObject(affichagePgpm);
+                 	          iservice.addObject(affichagePgpm);*/
                  	          
                  	          //Insertion dans T_Financement_PGPM
                  	        /* if(finAgpm.getFinTypeFinance().equalsIgnoreCase("ETAT")) {
@@ -1850,14 +1873,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            			   
            			          
     				
-    				          List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+    				          /*List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
     		      				new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+affichagePgpm.getAffGpgId()));
     	      				       TAffichagePgpm affgp = new TAffichagePgpm();
     	      				        if(!AFG.isEmpty()) affgp =AFG.get(0); 
     	      				       affgp.setAffGpgRecherche(rechercheAll);
     	      				       affgp.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
     	      				       affgp.setTSourceFinancement(newFinancement.getTSourceFinancement());
-    		      				    iservice.updateObject(affgp);
+    		      				    iservice.updateObject(affgp);*/
            			
            			                chargeData();
            			
@@ -3469,7 +3492,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	}
 
 
-
+/*
 	public List<VTypeMarcheFils> getListeTypeMarches() {
 		return listeTypeMarches;
 	}
@@ -3481,7 +3504,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	
 
 
-/*	public List<TModePassation> getListeModePassation() {
+	public List<TModePassation> getListeModePassation() {
 		return listeModePassation;
 	}
 
@@ -3491,7 +3514,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	
 	
 
-
+/*
 	public List<VModePassationPn> getListeModePassation() {
 		return listeModePassation;
 	}
@@ -3499,7 +3522,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setListeModePassation(List<VModePassationPn> listeModePassation) {
 		this.listeModePassation = listeModePassation;
-	}
+	}*/
 
 
 
@@ -4366,6 +4389,21 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	public void setVarPgpm(VPgpmliste varPgpm) {
 		this.varPgpm = varPgpm;
 	}
-	
+
+	public List<VTypeMarcheFils> getListeTypeMarchesFils() {
+		return listeTypeMarchesFils;
+	}
+
+	public void setListeTypeMarchesFils(List<VTypeMarcheFils> listeTypeMarchesFils) {
+		this.listeTypeMarchesFils = listeTypeMarchesFils;
+	}
+
+	public List<VModePassationPn> getListeModePassationPn() {
+		return listeModePassationPn;
+	}
+
+	public void setListeModePassationPn(List<VModePassationPn> listeModePassationPn) {
+		this.listeModePassationPn = listeModePassationPn;
+	}
 	
 }

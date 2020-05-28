@@ -23,6 +23,9 @@ import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeMarche;
+import com.sndi.model.VModePassation;
+import com.sndi.model.VModePassationPn;
+import com.sndi.model.VTypeMarcheFils;
 
 
 @Service
@@ -54,8 +57,17 @@ public class ConstantService {
 	private List<TTypeMarche> listeTypeMarches = new ArrayList<TTypeMarche>();
 	private Map<String, TTypeMarche> HM_TYPE_MARCHE = new HashMap<String, TTypeMarche>();
 	
+	private List<VTypeMarcheFils> listeTypeMarchesFils = new ArrayList<VTypeMarcheFils>();
+	private Map<String, VTypeMarcheFils> HM_TYPE_MARCHE_FILS = new HashMap<String, VTypeMarcheFils>();
+	
 	private List<TModePassation> listeModePassation = new ArrayList<TModePassation>();
 	private Map<String, TModePassation> HM_TYPE_MODE_PASSATION = new HashMap<String, TModePassation>();
+	
+	private List<VModePassationPn> listeModePassationPn = new ArrayList<VModePassationPn>();
+	private Map<String, VModePassationPn> HM_TYPE_MODE_PASSATION_PN = new HashMap<String, VModePassationPn>();
+	
+	private List<VModePassation> listeMode = new ArrayList<VModePassation>();
+	private Map<String, VModePassation> HM_TYPE_VMODE_PASSATION = new HashMap<String, VModePassation>();
 	
 	private List<TStructure> listeStructures = new ArrayList<TStructure>();
 	private Map<String, TStructure> HM_STEUCTURE= new HashMap<String, TStructure>();
@@ -173,8 +185,7 @@ public class ConstantService {
 					return HM_MINISTERE.get(minCode);
 				}
 			
-//Contenu Agpm
-				
+               //Contenu Agpm
 				public void chargeTContenuAgpmTable(){
 					listeContenu.clear();
 					listeContenu =  iservice.getObjects("TContenuAgpm", new ArrayList<String>(Arrays.asList("TCA_CODE")));
@@ -190,7 +201,7 @@ public class ConstantService {
 					return HM_CONTENU.get(tca_code);
 				}
 				
-		//GESTION
+		        //GESTION
 				public void chargeTGestionTable(){
 					 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
 					HashMap<String, TGestion> aMap = new HashMap<String, TGestion>();
@@ -205,7 +216,7 @@ public class ConstantService {
 					return HM_GESTION.get(GES_CODE);
 				}
 				
-		//TTYPE_MARCHE
+		        //TTYPE_MARCHE
 				public void chargeTTypeMarcheTable(){
 					 listeTypeMarches.clear();
 					listeTypeMarches=(List<TTypeMarche>) iservice.getObjectsByColumnDesc("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")));	
@@ -221,7 +232,25 @@ public class ConstantService {
 					return HM_TYPE_MARCHE.get(TYM_CODE);
 				}
 				
-		//MODE_PASSATION
+				
+				//TTYPE_MARCHE_FILS
+				public void chargeTTypeMarcheFilsTable(){
+					listeTypeMarches.clear();
+					listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumnDesc("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));	
+					HashMap<String, VTypeMarcheFils> aMap = new HashMap<String, VTypeMarcheFils>();
+					for (VTypeMarcheFils st: listeTypeMarchesFils) {
+						aMap.put(""+st.getTymCode(), st);
+					}
+					HM_TYPE_MARCHE_FILS =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_TYPE_MARCHE_FILS.size());	
+				}
+				
+				public VTypeMarcheFils getVTypeMarcheFils(String TYM_CODE){
+					return HM_TYPE_MARCHE_FILS.get(TYM_CODE);
+				}
+		
+				
+		        //MODE_PASSATION
 				public void chargeTModePassationTable(){
 					listeModePassation.clear();
 					listeModePassation =(List<TModePassation>) iservice.getObjectsByColumn("TModePassation", new ArrayList<String>(Arrays.asList("mopCode")));
@@ -235,6 +264,38 @@ public class ConstantService {
 				
 				public TModePassation getTTModePassation(String MOP_CODE){
 					return HM_TYPE_MODE_PASSATION.get(MOP_CODE);
+				}
+				
+				//MODE_PASSATION_PROCEDURE_NORMALE
+				public void chargeTModePassationPnTable(){
+					listeModePassationPn.clear();
+					listeModePassationPn =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+					HashMap<String, VModePassationPn> aMap = new HashMap<String, VModePassationPn>();
+					for (VModePassationPn st: listeModePassationPn) {
+						aMap.put(""+st.getMopCode(), st);
+					}
+					HM_TYPE_MODE_PASSATION_PN =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_TYPE_MODE_PASSATION_PN.size());	
+				}
+				
+				public VModePassationPn getVModePassationPn(String MOP_CODE){
+					return HM_TYPE_MODE_PASSATION_PN.get(MOP_CODE);
+				}
+				
+				//V_MODE_PASSATION
+				public void chargeVModePassationTable(){
+					listeMode.clear();
+					listeMode =(List<VModePassation>) iservice.getObjectsByColumn("VModePassation", new ArrayList<String>(Arrays.asList("mopCode")));
+					HashMap<String, VModePassation> aMap = new HashMap<String, VModePassation>();
+					for (VModePassation st: listeMode) {
+						aMap.put(""+st.getMopCode(), st);
+					}
+					HM_TYPE_VMODE_PASSATION =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_TYPE_VMODE_PASSATION.size());	
+				}
+				
+				public VModePassation getVModePassation(String MOP_CODE){
+					return HM_TYPE_VMODE_PASSATION.get(MOP_CODE);
 				}
 				
 				//STRUCURE
@@ -378,7 +439,41 @@ public class ConstantService {
 		HM_STEUCTURE = hM_STEUCTURE;
 	}
 	
-	
-
+	public List<VTypeMarcheFils> getListeTypeMarchesFils() {
+		return listeTypeMarchesFils;
+	}
+	public void setListeTypeMarchesFils(List<VTypeMarcheFils> listeTypeMarchesFils) {
+		this.listeTypeMarchesFils = listeTypeMarchesFils;
+	}
+	public Map<String, VTypeMarcheFils> getHM_TYPE_MARCHE_FILS() {
+		return HM_TYPE_MARCHE_FILS;
+	}
+	public void setHM_TYPE_MARCHE_FILS(Map<String, VTypeMarcheFils> hM_TYPE_MARCHE_FILS) {
+		HM_TYPE_MARCHE_FILS = hM_TYPE_MARCHE_FILS;
+	}
+	public List<VModePassationPn> getListeModePassationPn() {
+		return listeModePassationPn;
+	}
+	public void setListeModePassationPn(List<VModePassationPn> listeModePassationPn) {
+		this.listeModePassationPn = listeModePassationPn;
+	}
+	public Map<String, VModePassationPn> getHM_TYPE_MODE_PASSATION_PN() {
+		return HM_TYPE_MODE_PASSATION_PN;
+	}
+	public void setHM_TYPE_MODE_PASSATION_PN(Map<String, VModePassationPn> hM_TYPE_MODE_PASSATION_PN) {
+		HM_TYPE_MODE_PASSATION_PN = hM_TYPE_MODE_PASSATION_PN;
+	}
+	public List<VModePassation> getListeMode() {
+		return listeMode;
+	}
+	public void setListeMode(List<VModePassation> listeMode) {
+		this.listeMode = listeMode;
+	}
+	public Map<String, VModePassation> getHM_TYPE_VMODE_PASSATION() {
+		return HM_TYPE_VMODE_PASSATION;
+	}
+	public void setHM_TYPE_VMODE_PASSATION(Map<String, VModePassation> hM_TYPE_VMODE_PASSATION) {
+		HM_TYPE_VMODE_PASSATION = hM_TYPE_VMODE_PASSATION;
+	}
 
 }
