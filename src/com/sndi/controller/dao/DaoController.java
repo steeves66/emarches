@@ -3828,6 +3828,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					chargeDataARetirer();
 					chargeDataVente();
 					chargeDataPriseCompte();
+					btn_corrige = true;
 					vider();
 					_logger.info("value: "+value+" action "+action);	
 					break;

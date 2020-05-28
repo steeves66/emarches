@@ -698,12 +698,8 @@ public class AgpmController {
 	      	 
 	      	 
 	  //Méthode de création du projet
-	  @Transactional
 	  public void creerProjet() throws IOException{
-	      		 
-	   /* VAgpmBailleur bai = checkAgpm(""+agpm.getAgpId(), baiCode);   
-	      if(bai == null) {*/
-	                           
+	      		          
 	    	  if(projet.getProTitre().equalsIgnoreCase("") || "".equals(projet.getProTitre()) || agpm.getAgpCommentaire().equalsIgnoreCase("") || "".equals(agpm.getAgpCommentaire()) || projet.getProTypeProjet().equalsIgnoreCase("") || "".equals(projet.getProTypeProjet()) || devCode.equalsIgnoreCase("") ||"".equals(devCode) || sourfin.equalsIgnoreCase("") ||
 	    			  souCode.equalsIgnoreCase("") || "".equals(souCode) ) {
 	                      //Message d'erreur
@@ -768,71 +764,22 @@ public class AgpmController {
 	    	 				     		     			    newFinancement.setTAgpm(agpm);
 	    	 				     		     			    newFinancement.setTProjet(projet);
 	    	 				     		     				iservice.addObject(newFinancement);
-	    	 				     		      				//rappelProjet();
-	    	 				     		      				/*List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-	    	 				     		  					TStatut statuts = new TStatut();
-	    	 				     		  					if(!LS.isEmpty()) statuts = LS.get(0);*/
+	    	 				     		      				
 	    	 				     		      				
 	    	 				     		      			   TStatut statuts = constantService.getStatut("S1S");
 	    	 				     		  					//Historisation des Agpm
 	    	 				     		      			    historiser("S1S",agpm,"Création de l'agpm par l'Autorité Contractante");
 	    	 				     		      			    
 	    	 				     		      			    agpmListe =(List<VAgpmliste>) iservice.getObjectsByColumn("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
-	    	 				     		  					 new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ,"S1S"),
 	    	 				     		  						new WhereClause("AGP_ID", WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
-	    	 				     		  					if (!agpmListe.isEmpty()) { 
+	    	 				     		  					if (!agpmListe.isEmpty())  
 	    	 				     		  						varAgpm =agpmListe.get(0); 
 	    	 				     		  					   String search = varAgpm.getAgpCode()+""+varAgpm.getBaiLibelle()+""+varAgpm.getFinNumeroAccord()+""+varAgpm.getProTitre();
 	    	 				     		  					   String rechercheAll = search.replace("null","");
 	    	 				     		  					   
-	    	 				     		  					 List<TAgpm> AFFG =iservice.getObjectsByColumn("TAgpm", new ArrayList<String>(Arrays.asList("AGP_ID")),
-	 	    	 				     			      				new WhereClause("AGP_ID",WhereClause.Comparateur.EQ,""+varAgpm.getAgpId()));
-	 	    	 				     		      				TAgpm agpf = new TAgpm();
-	 	    	 				     		      				if(!AFFG.isEmpty()) agpf =AFFG.get(0); 
-	 	    	 				     		  					agpf.setAgpRecherche(rechercheAll);
-	 	    	 				     		      				iservice.updateObject(agpf);
-	    	 				     		  					   }
-	    	 				     		  					
+	    	 				     		  					  agpm.setAgpRecherche(rechercheAll);
+	    	 				     		  					  iservice.updateObject(agpm); 
 	    	 				     		  				
-	    	 				     		      			  //String search = varAgpm.getAgpCode()+""+varAgpm.getBaiLibelle()+""+varAgpm.getFinNumeroAccord()+""+varAgpm.getProTitre();
-	    	 				     		      			  //String rechercheAll = search.replace("null","");
-	    	 				     		      			  /*String search = agpm.getAgpCode()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+agpm.getTGestion().getGesCode()+""+agpm.getTProjet().getProTitre();
-    	 				    							  String rechercheAll = search.replace("null","");
-	    	 				     		  						  */
-	    	 				     		  					//Insertion dans TAffichageAgpm
-	    	 				     		  				  /*affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
-	    	 				     		  					affichageAgpm.setAffAgpActif(agpm.getAgpActif());
-	    	 				     		  				    affichageAgpm.setAffAgpCode(agpm.getAgpCode());
-	    	 				     		  					affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
-	    	 				     		  					affichageAgpm.setAffAgpId(agpm.getAgpId());
-	    	 				     		  					affichageAgpm.setTBailleur(new TBailleur(baiCode));
-	    	 				     		  					affichageAgpm.setTDevise(new TDevise(devCode));
-	    	 				     		  					affichageAgpm.setTFinancement(newFinancement);
-	    	 				     		  					affichageAgpm.setAffAgpCommentaire(agpm.getAgpCommentaire());
-	    	 				     		  					affichageAgpm.setTFonction(userController.getSlctd().getTFonction());
-	    	 				     		  					affichageAgpm.setAffAgpActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	    	 				     		  					affichageAgpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	    	 				     		  					affichageAgpm.setAffFonCodPf(agpm.getAgpFonCodPf());
-	    	 				     		  					affichageAgpm.setAffFonCodDmp(agpm.getAgpFonCodDmp());
-	    	 				     		  					affichageAgpm.setTGestion( new TGestion(gesCode));
-	    	 				     		  					affichageAgpm.setTProjet(projet);
-	    	 				     		  					affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));
-	    	 				     		  					affichageAgpm.setTStatut(statuts);
-	    	 				     		  					iservice.addObject(affichageAgpm); 
-	    	 				     		  						*/
-	    	 				     		  					
-	    	 				     		  					/*String search = agpm.getAgpCode()+""+affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre();
-	    	 				    							String rechercheAll = search.replace("null","");
-	    	 				    							
-	    	 				     		  						
-	    	 				     		  					List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
-	    	 				     			      				new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+affichageAgpm.getAffAgpId()));
-	    	 				     		      				TAffichageAgpm affgp = new TAffichageAgpm();
-	    	 				     		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-	    	 				     		      					
-	    	 				     		  					affgp.setAffAgpRecherche(rechercheAll);
-	    	 				     		      				iservice.updateObject(affgp);*/
-	    	 				     		  						
 	    	 				     		  					userController.setTexteMsg("Enregistrement effectué avec succès!");
 	    	 				     		  					userController.setRenderMsg(true);
 	    	 				     		  					userController.setSevrityMsg("success");
@@ -847,10 +794,6 @@ public class AgpmController {
 	    	 				     		  				    btn_saveProjet =false;
 	    	 				                                }
 	                                                }
-	      		              /*}else {
-	      		                     FacesContext.getCurrentInstance().addMessage(null,
-	      		           	         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Ce bailleur a déjà saisi son AGPM", ""));
-	      		                   }*/
 	      		          }
 	  
 	  
@@ -1171,19 +1114,7 @@ public class AgpmController {
 							rect=listeAgpm.get(0);
 							rect.setTDeclarant(new TDeclarant(declarant.getDecId()));
 							iservice.updateObject(rect);
-							
-							 
-							String search = affichageAgpm.getTBailleur().getBaiCode()+""+affichageAgpm.getTFinancement().getFinNumeroAccord()+""+affichageAgpm.getTGestion().getGesCode()+""+affichageAgpm.getTProjet().getProTitre()+""+affichageAgpm.getTDeclarant().getDecOrganExecLibelle();
-							String rechercheAll = search.replace("null","");
-							
-							List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
-		      						new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+acte.getAgpId()));
-	      					TAffichageAgpm affgp = new TAffichageAgpm();
-	      					if(!AFG.isEmpty()) affgp =AFG.get(0); 
-	      					affgp.setTDeclarant(rect.getTDeclarant());
-	  						affgp.setAffAgpRecherche(rechercheAll);
-	      					iservice.updateObject(affgp);
-							
+						
 							boutonEdit=true;
 							boutonAdd = false;
 							etatPavetDossier = true;
@@ -1889,7 +1820,7 @@ public class AgpmController {
 		 iservice.updateObject(newFinancement);
 		 
 		 //AffichageAgpm
-		 affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
+		 /*affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
 		 affichageAgpm.setAffAgpActif(agpm.getAgpActif());
 		 affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
 		 affichageAgpm.setAffAgpId(agpm.getAgpId());
@@ -1903,9 +1834,7 @@ public class AgpmController {
 		 affichageAgpm.setTGestion( new TGestion(gesCode));
 		 affichageAgpm.setTProjet(projet);
 		 affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));
-		 iservice.updateObject(affichageAgpm);
-		 
-		 
+		 iservice.updateObject(affichageAgpm);*/ 
 	 }
 	 		 
 	 

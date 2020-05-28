@@ -647,7 +647,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D1R"),
 					new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"AMI"),
 					new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-					//new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoDiff  size: "+listeDaoDiff.size());	
 				tableauBordController.chargeDataAmi();		
 		}

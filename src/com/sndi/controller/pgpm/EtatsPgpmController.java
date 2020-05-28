@@ -97,7 +97,7 @@ public class EtatsPgpmController {
 			 public void chargeFinancement() {
 				 financementListe.clear();
 					 financementListe = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
-							 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+detail.getAffGpgId())));		 		 
+							 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+detail.getGpgId())));		 		 
 			 }
 	
 	
@@ -105,7 +105,7 @@ public class EtatsPgpmController {
 		    public void chargeDossier() {
 		  	dossListe.clear();
 		  	dossListe = ((List<TDossierPlanGeneral>)iservice.getObjectsByColumn("TDossierPlanGeneral",new ArrayList<String>(Arrays.asList("DPG_NAP_CODE")),
-		  	new WhereClause("DPG_GPG_ID",Comparateur.EQ,""+detail.getAffGpgId()))); 		 
+		  	new WhereClause("DPG_GPG_ID",Comparateur.EQ,""+detail.getGpgId()))); 		 
 		  		 }
 		    
 		    //Afficher les financements du projet ou agpm selectionné
@@ -160,12 +160,12 @@ public class EtatsPgpmController {
 			 public void imprimerPgpmDet() {
 				 //String operateur = userController.getSlctd().getTFonction().getFonCod();
 				 //projetReport.longStringparam2(detail.getPlgId(), operateur, "Pgpm", "Pgpm");
-					projetReport.longparam1(detail.getAffGpgId(), "Fiche_pgpm", "Fiche_pgpm");
+					projetReport.longparam1(detail.getGpgId(), "Fiche_pgpm", "Fiche_pgpm");
 				}
 			 
 			 //Edition du PGSPM Detail
 			 public void imprimerPgspmDet() {
-				 projetReport.longparam1(detail.getAffGpgId(), "Fiche_pgspm", "Fiche_pgspm");
+				 projetReport.longparam1(detail.getGpgId(), "Fiche_pgspm", "Fiche_pgspm");
 				  //projetReport.longparam1(detail.getPlgId(), "Pgspm", "Pgspm");
 				}
 	

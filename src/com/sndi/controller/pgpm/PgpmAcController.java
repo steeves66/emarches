@@ -281,7 +281,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		
 		 public void onSelectAgpmModif() {
 			 updateOperation.setGpgAgpId(slctdTd.getAffGpgAgpId());
-			 updateOperation.setAffGpgCommentaire(updateOperation.getAffGpgCommentaire());
+			 updateOperation.setGpgCommentaire(updateOperation.getGpgCommentaire());
 	
 			 listeFinancementAgpm =(List<TFinancement>) iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),
 				     new WhereClause("FIN_AGP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgAgpId()));
@@ -1585,11 +1585,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      public void modifierDetailPlan() throws IOException{
     	 
     	 //Modification dans TAffichagePgpm
-    	 slctdTd.setAffGpgAgpId(updateOperation.getAffGpgAgpId());
+    	 slctdTd.setAffGpgAgpId(updateOperation.getGpgAgpId());
     	 slctdTd.setAffGpgObjet(updateOperation.getGpgObjet());
     	 slctdTd.setTTypeMarche(new TTypeMarche(updateOperation.getTymCode()));
     	 slctdTd.setTModePassation(new TModePassation(updateOperation.getMopCode()));
-    	 slctdTd.setAffGpgDateDao(updateOperation.getAffGpgDateDao());
+    	 slctdTd.setAffGpgDateDao(updateOperation.getGpgDateDao());
     	 slctdTd.setAffGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
     	 slctdTd.setAffGpgCommentaire(updateOperation.getGpgCommentaire()); 
     	 slctdTd.setAffGpgLibFin(updateOperation.getGpgLibFin());

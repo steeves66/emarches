@@ -140,7 +140,7 @@
 	               <div class="form-group ">
 	                  <label for="xbail" class="col-sm-2 control-label"><b>Bailleur</b></label>
 	                  <div class="col-sm-10">
-	                   <p:selectOneMenu value="#{agpmModificationController.updateAgpm.baiCode}" id="xbail" 
+	                   <p:selectOneMenu value="#{agpmModificationController.updateAgpm.finBaiCode}" id="xbail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
 			       <f:selectItems value="#{agpmModificationController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
@@ -154,7 +154,7 @@
 	                <div class="form-group ">
 	                  <label for="source" class="col-sm-2 control-label"><b>Type</b></label>
 	                  <div class="col-sm-10">
-	                    <p:selectOneMenu value="#{agpmModificationController.updateAgpm.affSouCode}" id="source" 
+	                    <p:selectOneMenu value="#{agpmModificationController.updateAgpm.finSouCode}" id="source" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
 			       <f:selectItems value="#{agpmModificationController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
@@ -165,7 +165,7 @@
 	                <div class="form-group ">
 	                  <label for="xdev" class="col-sm-2 control-label"><b>Devise</b></label>
 	                  <div class="col-sm-10">
-	                      <p:selectOneMenu value="#{agpmModificationController.updateAgpm.affDevCode}" id="xdev" 
+	                      <p:selectOneMenu value="#{agpmModificationController.updateAgpm.finDevCode}" id="xdev" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir la devise.." itemValue="empty" />  
 			       <f:selectItems value="#{agpmModificationController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
@@ -390,7 +390,7 @@
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Gestion </label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{agpmModificationController.updateAgpm.gesCode}"  style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{agpmModificationController.updateAgpm.agpGesCode}"  style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
@@ -402,7 +402,7 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Description du projet :</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{agpmModificationController.updateAgpm.affAgpCommentaire}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{agpmModificationController.updateAgpm.agpCommentaire}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	            </div>

@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 3 avr. 2020 00:55:57 by Hibernate Tools 4.3.5.Final
+// Generated 28 mai 2020 00:04:34 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,33 +19,6 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_UPDATE_PGPM")
 public class VUpdatePgpm implements java.io.Serializable {
 
-	private Long affGpgId;
-	private Long affGpgPlgId;
-	private Long affGpgAgpId;
-	private String affGpgTypePlan;
-	private String affGpgStaCode;
-	private String affGpgTymCode;
-	private String affGpgMopCode;
-	private String affGpgCode;
-	private String affGpgObjet;
-	private Integer affGpgNumeroOrdre;
-	private String affGpgPartiePmePmi;
-	private String affGpgCommentaire;
-	private String affGpgSourceFin;
-	private Date affGpgDateDao;
-	private String affGpgActeurSaisie;
-	private String affGpgStatutRetour;
-	private Date affGpgDateSaisie;
-	private String affGpgFonCod;
-	private long affId;
-	private String affGpgStrCode;
-	private String gpgLibFin;
-	private Short affGpgGesCode;
-	private String affGpgRecherche;
-	private Date affGpgDateValAc;
-	private Date affGpgDateValCpmp;
-	private Date affGpgDateValDmp;
-	private String affGpgTypeFinance;
 	private long gpgId;
 	private long gpgPlgId;
 	private Long gpgAgpId;
@@ -67,12 +40,11 @@ public class VUpdatePgpm implements java.io.Serializable {
 	private Date gpgDateValAc;
 	private Date gpgDateValCpmp;
 	private Date gpgDateValDmp;
-	private long plgId;
-	private String plgStrCode;
-	private String plgFonCod;
-	private short plgGesCode;
-	private String plgCode;
-	private String plgLibelle;
+	private String gpgLibFin;
+	private Date gpgDteModif;
+	private String gpgFonCodPf;
+	private String gpgFonCodDmp;
+	private String gpgRecherche;
 	private Long fipId;
 	private String fipDevCode;
 	private String fipBaiCode;
@@ -95,79 +67,29 @@ public class VUpdatePgpm implements java.io.Serializable {
 	public VUpdatePgpm() {
 	}
 
-	public VUpdatePgpm(Long affGpgPlgId, String affGpgTypePlan, String affGpgStaCode, String affGpgTymCode,String gpgLibFin,
-			String affGpgMopCode, long affId, long gpgId, long gpgPlgId, String gpgTypePlan, String gpgStaCode,
-			String gpgTymCode, String gpgMopCode, long plgId, String plgStrCode, String plgFonCod, short plgGesCode,
-			Long fipId, String fipDevCode, String fipSouCode, Long fipGpgId, String mopCode, String mopLibelleCourt,
-			String tymCode, String tymLibelleCourt) {
-		this.affGpgPlgId = affGpgPlgId;
-		this.affGpgTypePlan = affGpgTypePlan;
-		this.affGpgStaCode = affGpgStaCode;
-		this.affGpgTymCode = affGpgTymCode;
-		this.affGpgMopCode = affGpgMopCode;
-		this.affId = affId;
+	public VUpdatePgpm(long gpgId, long gpgPlgId, String gpgTypePlan, String gpgStaCode, String gpgTymCode,
+			String gpgMopCode, String mopCode, String mopLibelleCourt, String tymCode, String tymLibelleCourt) {
 		this.gpgId = gpgId;
 		this.gpgPlgId = gpgPlgId;
 		this.gpgTypePlan = gpgTypePlan;
 		this.gpgStaCode = gpgStaCode;
 		this.gpgTymCode = gpgTymCode;
 		this.gpgMopCode = gpgMopCode;
-		this.plgId = plgId;
-		this.plgStrCode = plgStrCode;
-		this.plgFonCod = plgFonCod;
-		this.plgGesCode = plgGesCode;
-		this.fipId = fipId;
-		this.fipDevCode = fipDevCode;
-		this.fipSouCode = fipSouCode;
-		this.fipGpgId = fipGpgId;
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
-		this.gpgLibFin = gpgLibFin;
 	}
 
-	public VUpdatePgpm(Long affGpgId, Long affGpgPlgId, Long affGpgAgpId, String affGpgTypePlan, String affGpgStaCode,String gpgLibFin,
-			String affGpgTymCode, String affGpgMopCode, String affGpgCode, String affGpgObjet,
-			Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire, String affGpgSourceFin,
-			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,
-			String affGpgFonCod, long affId, String affGpgStrCode, Short affGpgGesCode, String affGpgRecherche,
-			Date affGpgDateValAc, Date affGpgDateValCpmp, Date affGpgDateValDmp, String affGpgTypeFinance, long gpgId,
-			long gpgPlgId, Long gpgAgpId, String gpgTypePlan, String gpgStaCode, String gpgTymCode, String gpgMopCode,
-			String gpgCode, String gpgObjet, Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire,
-			String gpgSourceFin, Date gpgDateDao, String gpgActeurSaisie, String gpgStatutRetour, Date gpgDateSaisie,
-			String gpgStrCode, Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp, long plgId,
-			String plgStrCode, String plgFonCod, short plgGesCode, String plgCode, String plgLibelle, Long fipId,
-			String fipDevCode, String fipBaiCode, String fipSouCode, Long fipGpgId, BigDecimal fipMontantCfa,
-			BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance, BigDecimal fipTresor,
-			String mopCode, String mopLibelleCourt, String mopLibelleLong, String tymCode, String tymLibelleCourt,
-			String tymLibelleLong, String tymTymCode, String tymGroupe) {
-		this.affGpgId = affGpgId;
-		this.affGpgPlgId = affGpgPlgId;
-		this.affGpgAgpId = affGpgAgpId;
-		this.affGpgTypePlan = affGpgTypePlan;
-		this.affGpgStaCode = affGpgStaCode;
-		this.affGpgTymCode = affGpgTymCode;
-		this.affGpgMopCode = affGpgMopCode;
-		this.affGpgCode = affGpgCode;
-		this.affGpgObjet = affGpgObjet;
-		this.affGpgNumeroOrdre = affGpgNumeroOrdre;
-		this.affGpgPartiePmePmi = affGpgPartiePmePmi;
-		this.affGpgCommentaire = affGpgCommentaire;
-		this.affGpgSourceFin = affGpgSourceFin;
-		this.affGpgDateDao = affGpgDateDao;
-		this.affGpgActeurSaisie = affGpgActeurSaisie;
-		this.affGpgStatutRetour = affGpgStatutRetour;
-		this.affGpgDateSaisie = affGpgDateSaisie;
-		this.affGpgFonCod = affGpgFonCod;
-		this.affId = affId;
-		this.affGpgStrCode = affGpgStrCode;
-		this.affGpgGesCode = affGpgGesCode;
-		this.affGpgRecherche = affGpgRecherche;
-		this.affGpgDateValAc = affGpgDateValAc;
-		this.affGpgDateValCpmp = affGpgDateValCpmp;
-		this.affGpgDateValDmp = affGpgDateValDmp;
-		this.affGpgTypeFinance = affGpgTypeFinance;
+	public VUpdatePgpm(long gpgId, long gpgPlgId, Long gpgAgpId, String gpgTypePlan, String gpgStaCode,
+			String gpgTymCode, String gpgMopCode, String gpgCode, String gpgObjet, Integer gpgNumeroOrdre,
+			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao, String gpgActeurSaisie,
+			String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, Date gpgDateValAc, Date gpgDateValCpmp,
+			Date gpgDateValDmp, String gpgLibFin, Date gpgDteModif, String gpgFonCodPf, String gpgFonCodDmp,
+			String gpgRecherche, Long fipId, String fipDevCode, String fipBaiCode, String fipSouCode, Long fipGpgId,
+			BigDecimal fipMontantCfa, BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance,
+			BigDecimal fipTresor, String mopCode, String mopLibelleCourt, String mopLibelleLong, String tymCode,
+			String tymLibelleCourt, String tymLibelleLong, String tymTymCode, String tymGroupe) {
 		this.gpgId = gpgId;
 		this.gpgPlgId = gpgPlgId;
 		this.gpgAgpId = gpgAgpId;
@@ -189,12 +111,11 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.gpgDateValAc = gpgDateValAc;
 		this.gpgDateValCpmp = gpgDateValCpmp;
 		this.gpgDateValDmp = gpgDateValDmp;
-		this.plgId = plgId;
-		this.plgStrCode = plgStrCode;
-		this.plgFonCod = plgFonCod;
-		this.plgGesCode = plgGesCode;
-		this.plgCode = plgCode;
-		this.plgLibelle = plgLibelle;
+		this.gpgLibFin = gpgLibFin;
+		this.gpgDteModif = gpgDteModif;
+		this.gpgFonCodPf = gpgFonCodPf;
+		this.gpgFonCodDmp = gpgFonCodDmp;
+		this.gpgRecherche = gpgRecherche;
 		this.fipId = fipId;
 		this.fipDevCode = fipDevCode;
 		this.fipBaiCode = fipBaiCode;
@@ -213,247 +134,10 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.tymLibelleLong = tymLibelleLong;
 		this.tymTymCode = tymTymCode;
 		this.tymGroupe = tymGroupe;
-		this.gpgLibFin = gpgLibFin;
-		
 	}
+
 	
 	@Id
-	@Column(name = "AFF_ID", nullable = false, precision = 10, scale = 0)
-	public long getAffId() {
-		return this.affId;
-	}
-
-	public void setAffId(long affId) {
-		this.affId = affId;
-	}
-
-	@Column(name = "AFF_GPG_ID", precision = 10, scale = 0)
-	public Long getAffGpgId() {
-		return this.affGpgId;
-	}
-
-	public void setAffGpgId(Long affGpgId) {
-		this.affGpgId = affGpgId;
-	}
-
-	@Column(name = "AFF_GPG_PLG_ID", nullable = false, precision = 10, scale = 0)
-	public Long getAffGpgPlgId() {
-		return this.affGpgPlgId;
-	}
-
-	public void setAffGpgPlgId(Long affGpgPlgId) {
-		this.affGpgPlgId = affGpgPlgId;
-	}
-
-	@Column(name = "AFF_GPG_AGP_ID", precision = 10, scale = 0)
-	public Long getAffGpgAgpId() {
-		return this.affGpgAgpId;
-	}
-
-	public void setAffGpgAgpId(Long affGpgAgpId) {
-		this.affGpgAgpId = affGpgAgpId;
-	}
-
-	@Column(name = "AFF_GPG_TYPE_PLAN", nullable = false, length = 3)
-	public String getAffGpgTypePlan() {
-		return this.affGpgTypePlan;
-	}
-
-	public void setAffGpgTypePlan(String affGpgTypePlan) {
-		this.affGpgTypePlan = affGpgTypePlan;
-	}
-
-	@Column(name = "AFF_GPG_STA_CODE", nullable = false, length = 3)
-	public String getAffGpgStaCode() {
-		return this.affGpgStaCode;
-	}
-
-	public void setAffGpgStaCode(String affGpgStaCode) {
-		this.affGpgStaCode = affGpgStaCode;
-	}
-
-	@Column(name = "AFF_GPG_TYM_CODE", nullable = false, length = 3)
-	public String getAffGpgTymCode() {
-		return this.affGpgTymCode;
-	}
-
-	public void setAffGpgTymCode(String affGpgTymCode) {
-		this.affGpgTymCode = affGpgTymCode;
-	}
-
-	@Column(name = "AFF_GPG_MOP_CODE", nullable = false, length = 3)
-	public String getAffGpgMopCode() {
-		return this.affGpgMopCode;
-	}
-
-	public void setAffGpgMopCode(String affGpgMopCode) {
-		this.affGpgMopCode = affGpgMopCode;
-	}
-
-	@Column(name = "AFF_GPG_CODE", length = 50)
-	public String getAffGpgCode() {
-		return this.affGpgCode;
-	}
-
-	public void setAffGpgCode(String affGpgCode) {
-		this.affGpgCode = affGpgCode;
-	}
-
-	@Column(name = "AFF_GPG_OBJET", length = 1000)
-	public String getAffGpgObjet() {
-		return this.affGpgObjet;
-	}
-
-	public void setAffGpgObjet(String affGpgObjet) {
-		this.affGpgObjet = affGpgObjet;
-	}
-
-	@Column(name = "AFF_GPG_NUMERO_ORDRE", precision = 8, scale = 0)
-	public Integer getAffGpgNumeroOrdre() {
-		return this.affGpgNumeroOrdre;
-	}
-
-	public void setAffGpgNumeroOrdre(Integer affGpgNumeroOrdre) {
-		this.affGpgNumeroOrdre = affGpgNumeroOrdre;
-	}
-
-	@Column(name = "AFF_GPG_PARTIE_PME_PMI", length = 1)
-	public String getAffGpgPartiePmePmi() {
-		return this.affGpgPartiePmePmi;
-	}
-
-	public void setAffGpgPartiePmePmi(String affGpgPartiePmePmi) {
-		this.affGpgPartiePmePmi = affGpgPartiePmePmi;
-	}
-
-	@Column(name = "AFF_GPG_COMMENTAIRE", length = 1000)
-	public String getAffGpgCommentaire() {
-		return this.affGpgCommentaire;
-	}
-
-	public void setAffGpgCommentaire(String affGpgCommentaire) {
-		this.affGpgCommentaire = affGpgCommentaire;
-	}
-
-	@Column(name = "AFF_GPG_SOURCE_FIN", length = 5)
-	public String getAffGpgSourceFin() {
-		return this.affGpgSourceFin;
-	}
-
-	public void setAffGpgSourceFin(String affGpgSourceFin) {
-		this.affGpgSourceFin = affGpgSourceFin;
-	}
-
-	@Column(name = "AFF_GPG_DATE_DAO", length = 7)
-	public Date getAffGpgDateDao() {
-		return this.affGpgDateDao;
-	}
-
-	public void setAffGpgDateDao(Date affGpgDateDao) {
-		this.affGpgDateDao = affGpgDateDao;
-	}
-
-	@Column(name = "AFF_GPG_ACTEUR_SAISIE", length = 12)
-	public String getAffGpgActeurSaisie() {
-		return this.affGpgActeurSaisie;
-	}
-
-	public void setAffGpgActeurSaisie(String affGpgActeurSaisie) {
-		this.affGpgActeurSaisie = affGpgActeurSaisie;
-	}
-
-	@Column(name = "AFF_GPG_STATUT_RETOUR", length = 4)
-	public String getAffGpgStatutRetour() {
-		return this.affGpgStatutRetour;
-	}
-
-	public void setAffGpgStatutRetour(String affGpgStatutRetour) {
-		this.affGpgStatutRetour = affGpgStatutRetour;
-	}
-
-	@Column(name = "AFF_GPG_DATE_SAISIE", length = 7)
-	public Date getAffGpgDateSaisie() {
-		return this.affGpgDateSaisie;
-	}
-
-	public void setAffGpgDateSaisie(Date affGpgDateSaisie) {
-		this.affGpgDateSaisie = affGpgDateSaisie;
-	}
-
-	@Column(name = "AFF_GPG_FON_COD", length = 12)
-	public String getAffGpgFonCod() {
-		return this.affGpgFonCod;
-	}
-
-	public void setAffGpgFonCod(String affGpgFonCod) {
-		this.affGpgFonCod = affGpgFonCod;
-	}
-
-	
-
-	@Column(name = "AFF_GPG_STR_CODE", length = 3)
-	public String getAffGpgStrCode() {
-		return this.affGpgStrCode;
-	}
-
-	public void setAffGpgStrCode(String affGpgStrCode) {
-		this.affGpgStrCode = affGpgStrCode;
-	}
-
-	@Column(name = "AFF_GPG_GES_CODE", precision = 4, scale = 0)
-	public Short getAffGpgGesCode() {
-		return this.affGpgGesCode;
-	}
-
-	public void setAffGpgGesCode(Short affGpgGesCode) {
-		this.affGpgGesCode = affGpgGesCode;
-	}
-
-	@Column(name = "AFF_GPG_RECHERCHE", length = 4000)
-	public String getAffGpgRecherche() {
-		return this.affGpgRecherche;
-	}
-
-	public void setAffGpgRecherche(String affGpgRecherche) {
-		this.affGpgRecherche = affGpgRecherche;
-	}
-
-	@Column(name = "AFF_GPG_DATE_VAL_AC", length = 7)
-	public Date getAffGpgDateValAc() {
-		return this.affGpgDateValAc;
-	}
-
-	public void setAffGpgDateValAc(Date affGpgDateValAc) {
-		this.affGpgDateValAc = affGpgDateValAc;
-	}
-
-	@Column(name = "AFF_GPG_DATE_VAL_CPMP", length = 7)
-	public Date getAffGpgDateValCpmp() {
-		return this.affGpgDateValCpmp;
-	}
-
-	public void setAffGpgDateValCpmp(Date affGpgDateValCpmp) {
-		this.affGpgDateValCpmp = affGpgDateValCpmp;
-	}
-
-	@Column(name = "AFF_GPG_DATE_VAL_DMP", length = 7)
-	public Date getAffGpgDateValDmp() {
-		return this.affGpgDateValDmp;
-	}
-
-	public void setAffGpgDateValDmp(Date affGpgDateValDmp) {
-		this.affGpgDateValDmp = affGpgDateValDmp;
-	}
-
-	@Column(name = "AFF_GPG_TYPE_FINANCE", length = 20)
-	public String getAffGpgTypeFinance() {
-		return this.affGpgTypeFinance;
-	}
-
-	public void setAffGpgTypeFinance(String affGpgTypeFinance) {
-		this.affGpgTypeFinance = affGpgTypeFinance;
-	}
-
 	@Column(name = "GPG_ID", nullable = false, precision = 10, scale = 0)
 	public long getGpgId() {
 		return this.gpgId;
@@ -607,7 +291,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.gpgDateSaisie = gpgDateSaisie;
 	}
 
-	@Column(name = "GPG_STR_CODE", length = 3)
+	@Column(name = "GPG_STR_CODE", length = 20)
 	public String getGpgStrCode() {
 		return this.gpgStrCode;
 	}
@@ -643,61 +327,52 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.gpgDateValDmp = gpgDateValDmp;
 	}
 
-	@Column(name = "PLG_ID", nullable = false, precision = 10, scale = 0)
-	public long getPlgId() {
-		return this.plgId;
+	@Column(name = "GPG_LIB_FIN", length = 200)
+	public String getGpgLibFin() {
+		return this.gpgLibFin;
 	}
 
-	public void setPlgId(long plgId) {
-		this.plgId = plgId;
+	public void setGpgLibFin(String gpgLibFin) {
+		this.gpgLibFin = gpgLibFin;
 	}
 
-	@Column(name = "PLG_STR_CODE", nullable = false, length = 3)
-	public String getPlgStrCode() {
-		return this.plgStrCode;
+	@Column(name = "GPG_DTE_MODIF", length = 7)
+	public Date getGpgDteModif() {
+		return this.gpgDteModif;
 	}
 
-	public void setPlgStrCode(String plgStrCode) {
-		this.plgStrCode = plgStrCode;
+	public void setGpgDteModif(Date gpgDteModif) {
+		this.gpgDteModif = gpgDteModif;
 	}
 
-	@Column(name = "PLG_FON_COD", nullable = false, length = 12)
-	public String getPlgFonCod() {
-		return this.plgFonCod;
+	@Column(name = "GPG_FON_COD_PF", length = 20)
+	public String getGpgFonCodPf() {
+		return this.gpgFonCodPf;
 	}
 
-	public void setPlgFonCod(String plgFonCod) {
-		this.plgFonCod = plgFonCod;
+	public void setGpgFonCodPf(String gpgFonCodPf) {
+		this.gpgFonCodPf = gpgFonCodPf;
 	}
 
-	@Column(name = "PLG_GES_CODE", nullable = false, precision = 4, scale = 0)
-	public short getPlgGesCode() {
-		return this.plgGesCode;
+	@Column(name = "GPG_FON_COD_DMP", length = 20)
+	public String getGpgFonCodDmp() {
+		return this.gpgFonCodDmp;
 	}
 
-	public void setPlgGesCode(short plgGesCode) {
-		this.plgGesCode = plgGesCode;
+	public void setGpgFonCodDmp(String gpgFonCodDmp) {
+		this.gpgFonCodDmp = gpgFonCodDmp;
 	}
 
-	@Column(name = "PLG_CODE", length = 50)
-	public String getPlgCode() {
-		return this.plgCode;
+	@Column(name = "GPG_RECHERCHE", length = 4000)
+	public String getGpgRecherche() {
+		return this.gpgRecherche;
 	}
 
-	public void setPlgCode(String plgCode) {
-		this.plgCode = plgCode;
+	public void setGpgRecherche(String gpgRecherche) {
+		this.gpgRecherche = gpgRecherche;
 	}
 
-	@Column(name = "PLG_LIBELLE", length = 1000)
-	public String getPlgLibelle() {
-		return this.plgLibelle;
-	}
-
-	public void setPlgLibelle(String plgLibelle) {
-		this.plgLibelle = plgLibelle;
-	}
-
-	@Column(name = "FIP_ID", nullable = false, precision = 10, scale = 0)
+	@Column(name = "FIP_ID", precision = 10, scale = 0)
 	public Long getFipId() {
 		return this.fipId;
 	}
@@ -706,7 +381,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.fipId = fipId;
 	}
 
-	@Column(name = "FIP_DEV_CODE", nullable = false, length = 8)
+	@Column(name = "FIP_DEV_CODE", length = 8)
 	public String getFipDevCode() {
 		return this.fipDevCode;
 	}
@@ -724,7 +399,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.fipBaiCode = fipBaiCode;
 	}
 
-	@Column(name = "FIP_SOU_CODE", nullable = false, length = 5)
+	@Column(name = "FIP_SOU_CODE", length = 5)
 	public String getFipSouCode() {
 		return this.fipSouCode;
 	}
@@ -733,7 +408,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.fipSouCode = fipSouCode;
 	}
 
-	@Column(name = "FIP_GPG_ID", nullable = false, precision = 10, scale = 0)
+	@Column(name = "FIP_GPG_ID", precision = 10, scale = 0)
 	public Long getFipGpgId() {
 		return this.fipGpgId;
 	}
@@ -859,12 +534,4 @@ public class VUpdatePgpm implements java.io.Serializable {
 		this.tymGroupe = tymGroupe;
 	}
 
-	@Column(name = "GPG_LIB_FIN")
-	public String getGpgLibFin() {
-		return gpgLibFin;
-	}
-
-	public void setGpgLibFin(String gpgLibFin) {
-		this.gpgLibFin = gpgLibFin;
-	}
 }

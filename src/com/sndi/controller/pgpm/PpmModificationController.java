@@ -2973,33 +2973,33 @@ public class PpmModificationController {
 				 @Transactional
 				 public void modifierDetailPlan() throws IOException{
 					 
-					 slctdTd.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getAffDppGpgId()));
-					 slctdTd.setTTypeMarche(new TTypeMarche(updatePpm.getAffDppTymCode()));
-					 slctdTd.setTModePassation(new TModePassation(updatePpm.getAffDppMopCode()));
+					 slctdTd.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+					 slctdTd.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
+					 slctdTd.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
 					 slctdTd.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
-					 slctdTd.setAffDppStrConduc(updatePpm.getAffDppStrConduc());
-					 slctdTd.setAffDppStrBenefi(updatePpm.getAffDppStrBenefi());
-					 slctdTd.setAffDppObjet(updatePpm.getAffDppObjet());
-					 slctdTd.setAffDppPartiePmePmi(updatePpm.getAffDppPartiePmePmi());
-					 slctdTd.setAffDppBailleur(updatePpm.getAffDppBailleur());
+					 slctdTd.setAffDppStrConduc(updatePpm.getDppStructureConduc());
+					 slctdTd.setAffDppStrBenefi(updatePpm.getDppStructureBenefi());
+					 slctdTd.setAffDppObjet(updatePpm.getDppObjet());
+					 slctdTd.setAffDppPartiePmePmi(updatePpm.getDppPartiePmePmi());
+					 slctdTd.setAffDppBailleur(updatePpm.getDppBailleur());
 					 slctdTd.setAffDppPieceDao(updatePpm.getMdtCode());
-					 slctdTd.setAffDppDateAttApproBail(updatePpm.getAffDppDateAttApproBail());
-					 slctdTd.setAffDppApprobAno(updatePpm.getAffDppApprobAno());
-					 slctdTd.setAffDppDateAvisAoPublicat(updatePpm.getAffDppDateAvisAoPublicat());
-					 slctdTd.setAffDppDateJugementOffre(updatePpm.getAffDppDateJugementOffre());
-					 slctdTd.setAffDppDateDaoTrans(updatePpm.getAffDppDateDaoTrans());
-					 slctdTd.setAffDppDateExecFin(updatePpm.getAffDppDateExecFin());
-					 slctdTd.setAffDppDateExecDebut(updatePpm.getAffDppDateExecDebut());
-					 slctdTd.setAffDppDateMarcheApprob(updatePpm.getAffDppDateMarcheApprob());
-					 slctdTd.setAffDppDateOuvertOf(updatePpm.getAffDppDateOuvertOf());
-					 slctdTd.setAffDppDateOuvertOt(updatePpm.getAffDppDateOuvertOt());
-					 slctdTd.setAffDppDateElabRapport(updatePpm.getAffDppDateElabRapport());
-					 slctdTd.setAffDppDateNegociation(updatePpm.getAffDppDateNegociation());
-					 slctdTd.setAffDppDateAttApprobDmp(updatePpm.getAffDppDateDaoApprobDmp());
-					 slctdTd.setAffDppDateAttApprobCmp(updatePpm.getAffDppDateAttApprobCmp());
-					 slctdTd.setAffDppDateSignatAttrib(updatePpm.getAffDppDateSignatAttrib());
-					 slctdTd.setAffDppDateSignatAc(updatePpm.getAffDppDateSignatAc());
-					 slctdTd.setAffDppInvEntre(updatePpm.getAffDppInvEntre());
+					 slctdTd.setAffDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
+					 slctdTd.setAffDppApprobAno(updatePpm.getDppApprobAno());
+					 slctdTd.setAffDppDateAvisAoPublicat(updatePpm.getDppDateAvisAoPublication());
+					 slctdTd.setAffDppDateJugementOffre(updatePpm.getDppDateJugementOffre());
+					 slctdTd.setAffDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
+					 slctdTd.setAffDppDateExecFin(updatePpm.getDppDateExecFin());
+					 slctdTd.setAffDppDateExecDebut(updatePpm.getDppDateExecDebut());
+					 slctdTd.setAffDppDateMarcheApprob(updatePpm.getDppDateMarcheApprob());
+					 slctdTd.setAffDppDateOuvertOf(updatePpm.getDppDateOuvertOf());
+					 slctdTd.setAffDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
+					 slctdTd.setAffDppDateElabRapport(updatePpm.getDppDateElabRapport());
+					 slctdTd.setAffDppDateNegociation(updatePpm.getDppDateNegociation());
+					 slctdTd.setAffDppDateAttApprobDmp(updatePpm.getDppDateDaoApprobDmp());
+					 slctdTd.setAffDppDateAttApprobCmp(updatePpm.getDppDateAttApprobCpmp());
+					 slctdTd.setAffDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
+					 slctdTd.setAffDppDateSignatAc(updatePpm.getDppDateSignatAc());
+					 slctdTd.setAffDppInvEntre(updatePpm.getDppInvEntre());
 					 iservice.updateObject(slctdTd);
 					 
 					 

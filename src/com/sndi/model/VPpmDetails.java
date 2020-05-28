@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 6 déc. 2019 16:17:06 by Hibernate Tools 4.3.5.Final
+// Generated 28 mai 2020 00:32:17 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,6 +25,7 @@ public class VPpmDetails implements java.io.Serializable {
 	private String dppStaCode;
 	private String dppTymCode;
 	private String dppMopCode;
+	private String dppLbgCode;
 	private String dppTypePlan;
 	private String dppCode;
 	private Integer dppNumeroOrdre;
@@ -47,11 +48,12 @@ public class VPpmDetails implements java.io.Serializable {
 	private Date dppDateMarcheApprob;
 	private Date dppDateExecDebut;
 	private Date dppDateExecFin;
-	private long plpGesCode;
+	private short plpGesCode;
 	private Date dppDateSaisie;
 	private String dppTypId;
 	private String plpLibelle;
 	private String gpgObjet;
+	private String chrCommentaire;
 	private String strLibelleLong;
 	private String strLibelleCourt;
 	private String strEmail;
@@ -62,7 +64,6 @@ public class VPpmDetails implements java.io.Serializable {
 	private String mopCode;
 	private String mopLibelleCourt;
 	private String mopLibelleLong;
-	//T_L_BUDGETS
 	private String lbgCode;
 	private String lbgStrCode;
 	private short lbgGesCode;
@@ -116,7 +117,6 @@ public class VPpmDetails implements java.io.Serializable {
 	private String lbgSigfip;
 	private String lbgFonCodePr;
 	private String lbgFonCodeVerou;
-	//FIN T_L_BUDGETS
 	private BigDecimal fppMontantCfa;
 	private BigDecimal fppMontantDevise;
 	private String fppCommentaire;
@@ -129,35 +129,46 @@ public class VPpmDetails implements java.io.Serializable {
 	}
 
 	public VPpmDetails(long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
-			String dppMopCode, /*long dppLiaeNum,*/ String dppTypePlan, long plpGesCode, String strLibelleCourt,
-			String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleCourt,  String baiLibelle) {
+			String dppMopCode, String dppTypePlan, short plpGesCode, String tymCode, String tymLibelleCourt,
+			String mopCode, String mopLibelleCourt, String lbgCode, String lbgStrCode, short lbgGesCode,
+			BigDecimal lbgResDon, String lbgImputation, String lbgNatCode, BigDecimal lbgResTr, BigDecimal lbgAeTr,
+			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
 		this.dppStaCode = dppStaCode;
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
-		//this.dppLiaeNum = dppLiaeNum;
 		this.dppTypePlan = dppTypePlan;
 		this.plpGesCode = plpGesCode;
-		this.strLibelleCourt = strLibelleCourt;
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
-		this.baiLibelle = baiLibelle;
+		this.lbgCode = lbgCode;
+		this.lbgStrCode = lbgStrCode;
+		this.lbgGesCode = lbgGesCode;
+		this.lbgResDon = lbgResDon;
+		this.lbgImputation = lbgImputation;
+		this.lbgNatCode = lbgNatCode;
+		this.lbgResTr = lbgResTr;
+		this.lbgAeTr = lbgAeTr;
+		this.lbgAeDon = lbgAeDon;
+		this.lbgAeEmp = lbgAeEmp;
+		this.lbgTotDot = lbgTotDot;
+		this.lbgAdmCentral = lbgAdmCentral;
 	}
 
 	public VPpmDetails(long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
-			String dppMopCode, String dppTypePlan, String dppCode, Integer dppNumeroOrdre,
+			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, Integer dppNumeroOrdre,
 			Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
 			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail,
 			Date dppDateNegociation, Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob,
-			Date dppDateExecDebut, Date dppDateExecFin, long plpGesCode, Date dppDateSaisie, String dppTypId, String plpLibelle, String gpgObjet,
-			 String strLibelleLong, String strLibelleCourt, String strEmail, String tymCode,
-			String tymLibelleCourt,String tymTymCode, String tymLibelleLong, String mopCode, String mopLibelleCourt,
-			String mopLibelleLong,  String lbgCode, String lbgStrCode,
+			Date dppDateExecDebut, Date dppDateExecFin, short plpGesCode, Date dppDateSaisie, String dppTypId,
+			String plpLibelle, String gpgObjet, String chrCommentaire, String strLibelleLong, String strLibelleCourt,
+			String strEmail, String tymCode, String tymLibelleCourt, String tymLibelleLong, String tymTymCode,
+			String mopCode, String mopLibelleCourt, String mopLibelleLong, String lbgCode, String lbgStrCode,
 			short lbgGesCode, BigDecimal lbgResDon, String lbgImputation, Long lbgAnoCode, String lbgNatCode,
 			BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr, BigDecimal lbgAeDon, BigDecimal lbgAeEmp,
 			String lbgMp, String lbgReglMp, BigDecimal lbgTotDot, String lbgUtilSaisi, String lbgDesCode,
@@ -168,14 +179,15 @@ public class VPpmDetails implements java.io.Serializable {
 			String lbgMotifCor, Date lbgDteCor, String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct,
 			String lbgActif, String lbgFonCodeCf, BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2,
 			BigDecimal lbgDotAnPlus0, String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip,
-			String lbgFonCodePr, String lbgFonCodeVerou, BigDecimal fppMontantCfa, BigDecimal fppMontantDevise, String fppCommentaire,
-			String baiLibelle, String devLibelle, String devSymbole, String minLibelle) {
+			String lbgFonCodePr, String lbgFonCodeVerou, BigDecimal fppMontantCfa, BigDecimal fppMontantDevise,
+			String fppCommentaire, String baiLibelle, String devLibelle, String devSymbole, String minLibelle) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
 		this.dppStaCode = dppStaCode;
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
+		this.dppLbgCode = dppLbgCode;
 		this.dppTypePlan = dppTypePlan;
 		this.dppCode = dppCode;
 		this.dppNumeroOrdre = dppNumeroOrdre;
@@ -203,6 +215,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.dppTypId = dppTypId;
 		this.plpLibelle = plpLibelle;
 		this.gpgObjet = gpgObjet;
+		this.chrCommentaire = chrCommentaire;
 		this.strLibelleLong = strLibelleLong;
 		this.strLibelleCourt = strLibelleCourt;
 		this.strEmail = strEmail;
@@ -331,14 +344,14 @@ public class VPpmDetails implements java.io.Serializable {
 		this.dppMopCode = dppMopCode;
 	}
 
-/*	@Column(name = "DPP_LIAE_NUM", nullable = false, precision = 10, scale = 0)
-	public long getDppLiaeNum() {
-		return this.dppLiaeNum;
+	@Column(name = "DPP_LBG_CODE", length = 50)
+	public String getDppLbgCode() {
+		return this.dppLbgCode;
 	}
 
-	public void setDppLiaeNum(long dppLiaeNum) {
-		this.dppLiaeNum = dppLiaeNum;
-	}*/
+	public void setDppLbgCode(String dppLbgCode) {
+		this.dppLbgCode = dppLbgCode;
+	}
 
 	@Column(name = "DPP_TYPE_PLAN", nullable = false, length = 3)
 	public String getDppTypePlan() {
@@ -539,15 +552,14 @@ public class VPpmDetails implements java.io.Serializable {
 	}
 
 	@Column(name = "PLP_GES_CODE", nullable = false, precision = 4, scale = 0)
-	public long getPlpGesCode() {
+	public short getPlpGesCode() {
 		return this.plpGesCode;
 	}
 
-	public void setPlpGesCode(long plpGesCode) {
+	public void setPlpGesCode(short plpGesCode) {
 		this.plpGesCode = plpGesCode;
 	}
-	
-	
+
 	@Column(name = "DPP_DATE_SAISIE", length = 7)
 	public Date getDppDateSaisie() {
 		return this.dppDateSaisie;
@@ -556,7 +568,7 @@ public class VPpmDetails implements java.io.Serializable {
 	public void setDppDateSaisie(Date dppDateSaisie) {
 		this.dppDateSaisie = dppDateSaisie;
 	}
-	
+
 	@Column(name = "DPP_TYP_ID", length = 5)
 	public String getDppTypId() {
 		return this.dppTypId;
@@ -584,6 +596,15 @@ public class VPpmDetails implements java.io.Serializable {
 		this.gpgObjet = gpgObjet;
 	}
 
+	@Column(name = "CHR_COMMENTAIRE", length = 1000)
+	public String getChrCommentaire() {
+		return this.chrCommentaire;
+	}
+
+	public void setChrCommentaire(String chrCommentaire) {
+		this.chrCommentaire = chrCommentaire;
+	}
+
 	@Column(name = "STR_LIBELLE_LONG", length = 1000)
 	public String getStrLibelleLong() {
 		return this.strLibelleLong;
@@ -593,7 +614,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.strLibelleLong = strLibelleLong;
 	}
 
-	@Column(name = "STR_LIBELLE_COURT", nullable = false, length = 500)
+	@Column(name = "STR_LIBELLE_COURT", length = 500)
 	public String getStrLibelleCourt() {
 		return this.strLibelleCourt;
 	}
@@ -637,7 +658,7 @@ public class VPpmDetails implements java.io.Serializable {
 	public void setTymLibelleLong(String tymLibelleLong) {
 		this.tymLibelleLong = tymLibelleLong;
 	}
-	
+
 	@Column(name = "TYM_TYM_CODE", length = 3)
 	public String getTymTymCode() {
 		return this.tymTymCode;
@@ -683,7 +704,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgCode = lbgCode;
 	}
 
-	@Column(name = "LBG_STR_CODE", nullable = false, length = 10)
+	@Column(name = "LBG_STR_CODE", nullable = false, length = 30)
 	public String getLbgStrCode() {
 		return this.lbgStrCode;
 	}
@@ -710,7 +731,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgResDon = lbgResDon;
 	}
 
-	@Column(name = "LBG_IMPUTATION", nullable = false, length = 20)
+	@Column(name = "LBG_IMPUTATION", nullable = false, length = 50)
 	public String getLbgImputation() {
 		return this.lbgImputation;
 	}
@@ -818,7 +839,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgUtilSaisi = lbgUtilSaisi;
 	}
 
-	@Column(name = "LBG_DES_CODE", length = 10)
+	@Column(name = "LBG_DES_CODE", length = 30)
 	public String getLbgDesCode() {
 		return this.lbgDesCode;
 	}
@@ -854,7 +875,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgResTot = lbgResTot;
 	}
 
-	@Column(name = "LBG_UTIL_MODIF", length = 12)
+	@Column(name = "LBG_UTIL_MODIF", length = 20)
 	public String getLbgUtilModif() {
 		return this.lbgUtilModif;
 	}
@@ -863,7 +884,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgUtilModif = lbgUtilModif;
 	}
 
-	@Column(name = "LBG_FON_CODE", length = 12)
+	@Column(name = "LBG_FON_CODE", length = 20)
 	public String getLbgFonCode() {
 		return this.lbgFonCode;
 	}
@@ -908,7 +929,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgDisTot = lbgDisTot;
 	}
 
-	@Column(name = "LBG_FON_CODE_AC", length = 12)
+	@Column(name = "LBG_FON_CODE_AC", length = 30)
 	public String getLbgFonCodeAc() {
 		return this.lbgFonCodeAc;
 	}
@@ -917,7 +938,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgFonCodeAc = lbgFonCodeAc;
 	}
 
-	@Column(name = "LBG_STA_CODE", length = 3)
+	@Column(name = "LBG_STA_CODE", length = 10)
 	public String getLbgStaCode() {
 		return this.lbgStaCode;
 	}
@@ -1025,7 +1046,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgDteCor = lbgDteCor;
 	}
 
-	@Column(name = "LBG_FON_CODE_COR", length = 10)
+	@Column(name = "LBG_FON_CODE_COR", length = 30)
 	public String getLbgFonCodeCor() {
 		return this.lbgFonCodeCor;
 	}
@@ -1034,7 +1055,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgFonCodeCor = lbgFonCodeCor;
 	}
 
-	@Column(name = "LBG_FON_CODE_PF", length = 12)
+	@Column(name = "LBG_FON_CODE_PF", length = 30)
 	public String getLbgFonCodePf() {
 		return this.lbgFonCodePf;
 	}
@@ -1043,7 +1064,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgFonCodePf = lbgFonCodePf;
 	}
 
-	@Column(name = "LBG_FON_CODE_VAL_ACT", length = 10)
+	@Column(name = "LBG_FON_CODE_VAL_ACT", length = 30)
 	public String getLbgFonCodeValAct() {
 		return this.lbgFonCodeValAct;
 	}
@@ -1061,7 +1082,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgActif = lbgActif;
 	}
 
-	@Column(name = "LBG_FON_CODE_CF", length = 20)
+	@Column(name = "LBG_FON_CODE_CF", length = 30)
 	public String getLbgFonCodeCf() {
 		return this.lbgFonCodeCf;
 	}
@@ -1115,7 +1136,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgDteMp = lbgDteMp;
 	}
 
-	@Column(name = "LBG_UTIL_SAISI_ACT", length = 10)
+	@Column(name = "LBG_UTIL_SAISI_ACT", length = 30)
 	public String getLbgUtilSaisiAct() {
 		return this.lbgUtilSaisiAct;
 	}
@@ -1133,7 +1154,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgSigfip = lbgSigfip;
 	}
 
-	@Column(name = "LBG_FON_CODE_PR", length = 20)
+	@Column(name = "LBG_FON_CODE_PR", length = 30)
 	public String getLbgFonCodePr() {
 		return this.lbgFonCodePr;
 	}
@@ -1142,7 +1163,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.lbgFonCodePr = lbgFonCodePr;
 	}
 
-	@Column(name = "LBG_FON_CODE_VEROU", length = 20)
+	@Column(name = "LBG_FON_CODE_VEROU", length = 30)
 	public String getLbgFonCodeVerou() {
 		return this.lbgFonCodeVerou;
 	}
@@ -1178,7 +1199,7 @@ public class VPpmDetails implements java.io.Serializable {
 		this.fppCommentaire = fppCommentaire;
 	}
 
-	@Column(name = "BAI_LIBELLE", nullable = false, length = 1000)
+	@Column(name = "BAI_LIBELLE", length = 1000)
 	public String getBaiLibelle() {
 		return this.baiLibelle;
 	}
@@ -1204,7 +1225,7 @@ public class VPpmDetails implements java.io.Serializable {
 	public void setDevSymbole(String devSymbole) {
 		this.devSymbole = devSymbole;
 	}
-	
+
 	@Column(name = "MIN_LIBELLE", length = 1000)
 	public String getMinLibelle() {
 		return this.minLibelle;
@@ -1213,6 +1234,4 @@ public class VPpmDetails implements java.io.Serializable {
 	public void setMinLibelle(String minLibelle) {
 		this.minLibelle = minLibelle;
 	}
-
-
 }
