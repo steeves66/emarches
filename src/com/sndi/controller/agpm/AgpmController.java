@@ -325,6 +325,7 @@ public class AgpmController {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
 							"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SDR")),
+							//new WhereClause("AGP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
 							new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 							new WhereClause("AGP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						     tableauBordController.chargeDataAgpm(); 
@@ -1147,20 +1148,20 @@ public class AgpmController {
 									rect=listeAgpm.get(0);
 									rect.setTDeclarant(new TDeclarant(declarant.getDecId()));
 									iservice.updateObject(rect);
-									affichageAgpm.setTDeclarant(rect.getTDeclarant());
-									iservice.updateObject(affichageAgpm);
+						/*			affichageAgpm.setTDeclarant(rect.getTDeclarant());
+									iservice.updateObject(affichageAgpm);*/
 									boutonEdit=true;
 									boutonAdd = false;
 						         } 
 						   
 						   
-						   List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
+						/*   List<TAffichageAgpm> AFG =iservice.getObjectsByColumn("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_AGP_ID")),
 		     						new WhereClause("AFF_AGP_ID",WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
 		 					TAffichageAgpm affgp = new TAffichageAgpm();
 		 					if(!AFG.isEmpty()) affgp =AFG.get(0); 
 		 					affgp.setTDeclarant(affichageAgpm.getTDeclarant());
 							//affgp.setAffAgpRecherche(rechercheAll);
-		 					iservice.updateObject(affgp);
+		 					iservice.updateObject(affgp);*/
 						   
 						  boutonEdit=true;
 						  boutonAdd = false;

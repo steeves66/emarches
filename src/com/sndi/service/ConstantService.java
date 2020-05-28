@@ -18,8 +18,11 @@ import com.sndi.model.TContenuAgpm;
 import com.sndi.model.TDevise;
 import com.sndi.model.TGestion;
 import com.sndi.model.TMinistere;
+import com.sndi.model.TModePassation;
 import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
+import com.sndi.model.TStructure;
+import com.sndi.model.TTypeMarche;
 
 
 @Service
@@ -47,6 +50,19 @@ public class ConstantService {
 	
 	private List<TGestion> listeGestion = new ArrayList<TGestion>();
 	private Map<String, TGestion> HM_GESTION = new HashMap<String, TGestion>();
+	
+	private List<TTypeMarche> listeTypeMarches = new ArrayList<TTypeMarche>();
+	private Map<String, TTypeMarche> HM_TYPE_MARCHE = new HashMap<String, TTypeMarche>();
+	
+	private List<TModePassation> listeModePassation = new ArrayList<TModePassation>();
+	private Map<String, TModePassation> HM_TYPE_MODE_PASSATION = new HashMap<String, TModePassation>();
+	
+	private List<TStructure> listeStructures = new ArrayList<TStructure>();
+	private Map<String, TStructure> HM_STEUCTURE= new HashMap<String, TStructure>();
+	
+	
+	
+	
 
 	//---- FIN VARIABLES GLOBALES ----//
 	@PostConstruct
@@ -70,6 +86,10 @@ public class ConstantService {
 		 chargeTSourceFinancementTable();
 		 chargeTMinitereTable();
 		 chargeTGestionTable();
+		 chargeTContenuAgpmTable();
+		 chargeTTypeMarcheTable();
+		 chargeTModePassationTable();
+		 chargeTStructureTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
@@ -170,6 +190,7 @@ public class ConstantService {
 					return HM_CONTENU.get(tca_code);
 				}
 				
+		//GESTION
 				public void chargeTGestionTable(){
 					 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
 					HashMap<String, TGestion> aMap = new HashMap<String, TGestion>();
@@ -182,6 +203,54 @@ public class ConstantService {
 				
 				public TGestion getTGestion(String GES_CODE){
 					return HM_GESTION.get(GES_CODE);
+				}
+				
+		//TTYPE_MARCHE
+				public void chargeTTypeMarcheTable(){
+					 listeTypeMarches.clear();
+					listeTypeMarches=(List<TTypeMarche>) iservice.getObjectsByColumnDesc("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")));	
+					HashMap<String, TTypeMarche> aMap = new HashMap<String, TTypeMarche>();
+					for (TTypeMarche st: listeTypeMarches) {
+						aMap.put(""+st.getTymCode(), st);
+					}
+					HM_TYPE_MARCHE =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_TYPE_MARCHE.size());	
+				}
+				
+				public TTypeMarche getTTypeMarche(String TYM_CODE){
+					return HM_TYPE_MARCHE.get(TYM_CODE);
+				}
+				
+		//MODE_PASSATION
+				public void chargeTModePassationTable(){
+					listeModePassation.clear();
+					listeModePassation =(List<TModePassation>) iservice.getObjectsByColumn("TModePassation", new ArrayList<String>(Arrays.asList("mopCode")));
+					HashMap<String, TModePassation> aMap = new HashMap<String, TModePassation>();
+					for (TModePassation st: listeModePassation) {
+						aMap.put(""+st.getMopCode(), st);
+					}
+					HM_TYPE_MODE_PASSATION =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_TYPE_MODE_PASSATION.size());	
+				}
+				
+				public TModePassation getTTModePassation(String MOP_CODE){
+					return HM_TYPE_MODE_PASSATION.get(MOP_CODE);
+				}
+				
+				//STRUCURE
+				public void chargeTStructureTable(){
+					listeStructures.clear();
+					listeStructures =(List<TStructure>) iservice.getObjectsByColumn("TStructure", new ArrayList<String>(Arrays.asList("STR_CODE")));
+					HashMap<String, TStructure> aMap = new HashMap<String, TStructure>();
+					for (TStructure st: listeStructures) {
+						aMap.put(""+st.getStrCode(), st);
+					}
+					HM_STEUCTURE =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_STEUCTURE.size());	
+				}
+				
+				public TStructure getTStructure(String STR_CODE){
+					return HM_STEUCTURE.get(STR_CODE);
 				}
 				
 	
@@ -271,6 +340,42 @@ public class ConstantService {
 	}
 	public void setHM_GESTION(Map<String, TGestion> hM_GESTION) {
 		HM_GESTION = hM_GESTION;
+	}
+	public List<TTypeMarche> getListeTypeMarches() {
+		return listeTypeMarches;
+	}
+	public void setListeTypeMarches(List<TTypeMarche> listeTypeMarches) {
+		this.listeTypeMarches = listeTypeMarches;
+	}
+	public Map<String, TTypeMarche> getHM_TYPE_MARCHE() {
+		return HM_TYPE_MARCHE;
+	}
+	public void setHM_TYPE_MARCHE(Map<String, TTypeMarche> hM_TYPE_MARCHE) {
+		HM_TYPE_MARCHE = hM_TYPE_MARCHE;
+	}
+	public List<TModePassation> getListeModePassation() {
+		return listeModePassation;
+	}
+	public void setListeModePassation(List<TModePassation> listeModePassation) {
+		this.listeModePassation = listeModePassation;
+	}
+	public Map<String, TModePassation> getHM_TYPE_MODE_PASSATION() {
+		return HM_TYPE_MODE_PASSATION;
+	}
+	public void setHM_TYPE_MODE_PASSATION(Map<String, TModePassation> hM_TYPE_MODE_PASSATION) {
+		HM_TYPE_MODE_PASSATION = hM_TYPE_MODE_PASSATION;
+	}
+	public List<TStructure> getListeStructures() {
+		return listeStructures;
+	}
+	public void setListeStructures(List<TStructure> listeStructures) {
+		this.listeStructures = listeStructures;
+	}
+	public Map<String, TStructure> getHM_STEUCTURE() {
+		return HM_STEUCTURE;
+	}
+	public void setHM_STEUCTURE(Map<String, TStructure> hM_STEUCTURE) {
+		HM_STEUCTURE = hM_STEUCTURE;
 	}
 	
 	

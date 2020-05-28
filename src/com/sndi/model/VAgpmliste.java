@@ -37,6 +37,7 @@ public class VAgpmliste implements java.io.Serializable {
 	private Date agpDateValDmp;
 	private Date agpDteModif;
 	private String agpFonCodDmp;
+	private short agpGesCode;
 	private Long finId;
 	private long proId;
 	private Long decId;
@@ -44,18 +45,19 @@ public class VAgpmliste implements java.io.Serializable {
 	public VAgpmliste() {
 	}
 
-	public VAgpmliste(long agpId, String proTitre, String agpFonCod, String agpStaCode, long proId) {
+	public VAgpmliste(long agpId, String proTitre, String agpFonCod, String agpStaCode, short agpGesCode, long proId) {
 		this.agpId = agpId;
 		this.proTitre = proTitre;
 		this.agpFonCod = agpFonCod;
 		this.agpStaCode = agpStaCode;
+		this.agpGesCode = agpGesCode;
 		this.proId = proId;
 	}
 
 	public VAgpmliste(long agpId, String agpCode, String finNumeroAccord, String proTitre, String baiLibelle,
 			String fonctionAc, String decOrganExecLibelle, String minLibelleCourt, String strTstCode, String agpActif,
 			String agpFonCod, String agpFonCodPf, String agpStaCode, String agpStatutRetour, Date agpDateValAc,
-			Date agpDateValCpmp, Date agpDateValDmp, Date agpDteModif, String agpFonCodDmp, Long finId, long proId,
+			Date agpDateValCpmp, Date agpDateValDmp, Date agpDteModif, String agpFonCodDmp, short agpGesCode, Long finId, long proId,
 			Long decId) {
 		this.agpId = agpId;
 		this.agpCode = agpCode;
@@ -76,6 +78,7 @@ public class VAgpmliste implements java.io.Serializable {
 		this.agpDateValDmp = agpDateValDmp;
 		this.agpDteModif = agpDteModif;
 		this.agpFonCodDmp = agpFonCodDmp;
+		this.agpGesCode = agpGesCode;
 		this.finId = finId;
 		this.proId = proId;
 		this.decId = decId;
@@ -251,6 +254,15 @@ public class VAgpmliste implements java.io.Serializable {
 
 	public void setAgpFonCodDmp(String agpFonCodDmp) {
 		this.agpFonCodDmp = agpFonCodDmp;
+	}
+	
+	@Column(name = "AGP_GES_CODE", nullable = false, precision = 4, scale = 0)
+	public short getAgpGesCode() {
+		return this.agpGesCode;
+	}
+
+	public void setAgpGesCode(short agpGesCode) {
+		this.agpGesCode = agpGesCode;
 	}
 
 	@Column(name = "FIN_ID", precision = 10, scale = 0)

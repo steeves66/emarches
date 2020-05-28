@@ -67,6 +67,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
+import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
 import com.sndi.utilitaires.FileUploadController;
@@ -99,6 +100,9 @@ public class PpmController {
 	 
 	 @Autowired
 	 DownloadFileServlet downloadFileServlet;
+	 
+	 @Autowired
+	 ConstantService constantService;
 
 
 	 
@@ -111,11 +115,11 @@ public class PpmController {
 		 chargeDataAvaliderPpm();
 		 chargeDataAvaliderPspm();
 		 chargeGestions();
-		 chargeBailleur();
-		 chargeDevise();
-		 chargeFinancement();
-		 chargeMarches();
-		 chargeModePassation();
+		 //chargeBailleur();
+		 //chargeDevise();
+		 //chargeFinancement();
+		 //chargeMarches();
+		 //chargeModePassation();
 		 chargePpmTrans();
 		 chargePspmTrans();
 		 chargePpmValDmp();
@@ -1151,12 +1155,11 @@ public class PpmController {
 		//Début des méthodes pour les affichages 
 			//Combobox Gestions
 		 public void chargeGestions(){
-			 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
+			 listeGestion=new ArrayList<>(constantService.getListeGestion());
 		 } 
 	   //Combobox Bailleur
 	   public void chargeBailleur() {
-		 listeBailleurs.clear();
-		 listeBailleurs =(List<TBailleur>) iservice.getObjectsByColumn("TBailleur", new ArrayList<String>(Arrays.asList("baiCode")));
+		   listeBailleurs=new ArrayList<>(constantService.getListeBailleurs());
 		} 
 	   
 	 //Combobox type Charge
@@ -1179,8 +1182,7 @@ public class PpmController {
 	   
 		  //Love pour Structure
 		 public void chargeStructures() {
-			 listeStructures.clear();
-			 listeStructures =(List<TStructure>) iservice.getObjectsByColumn("TStructure", new ArrayList<String>(Arrays.asList("STR_CODE")));
+			 listeStructures=new ArrayList<>(constantService.getListeStructures());
 		 }
 		 
 		  //Love pour Structure
@@ -1192,13 +1194,11 @@ public class PpmController {
 		 
 	    //Combobox Source de finacement
 		 public void chargeSourceFinance() {
-			 listeSourceFinance.clear();
-			 listeSourceFinance =(List<TSourceFinancement>) iservice.getObjectsByColumn("TSourceFinancement", new ArrayList<String>(Arrays.asList("souCode")));
+			 listeSourceFinance=new ArrayList<>(constantService.getListeSourceFinance());
 			}
 		//Combobox Devises
 		 public void chargeDevise() {
-			 listeDevise.clear();
-			 listeDevise =(List<TDevise>) iservice.getObjectsByColumn("TDevise", new ArrayList<String>(Arrays.asList("devCode")));
+			 listeDevise=new ArrayList<>(constantService.getListeDevise());	
 			} 
 		 
 		 
@@ -1314,14 +1314,12 @@ public class PpmController {
 		 
 		//Chargement des Types de Marchés
 		 public void chargeMarches() {
-			 listeTypeMarches.clear();
-			 listeTypeMarches =(List<TTypeMarche>) iservice.getObjectsByColumn("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")));
+			 listeTypeMarches=new ArrayList<>(constantService.getListeTypeMarches());
 			}
 		 
 		//Chargement des modes de Passtion
 		 public void chargeModePassation() {
-			 listeModePassation.clear();
-			 listeModePassation =(List<TModePassation>) iservice.getObjectsByColumn("TModePassation", new ArrayList<String>(Arrays.asList("mopCode")));
+			 listeModePassation=new ArrayList<>(constantService.getListeModePassation());
 			}
 		 
 		//Afficher les financements du projet ou agpm selectionné
