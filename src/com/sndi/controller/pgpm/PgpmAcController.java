@@ -53,16 +53,19 @@ import com.sndi.model.TTypeMarche;
 import com.sndi.model.VAgpm;
 import com.sndi.model.VAgpmFonction;
 import com.sndi.model.VAgpmMinistere;
+import com.sndi.model.VAgpmliste;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
 import com.sndi.model.VPgpm;
 import com.sndi.model.VPgpmStatut;
+import com.sndi.model.VPgpmliste;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VUpdateAgpm;
 import com.sndi.model.VUpdatePgpm;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
+import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
 import com.sndi.utilitaires.FileUploadController;
@@ -99,7 +102,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 @Autowired
 	 TableauBordController tableauBordController;
 
-
+	 @Autowired
+	 ConstantService constantService;
 	 
 	
 	 @PostConstruct
@@ -141,6 +145,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 
 	    //Declaration des listes
 		//private List<TDetailPlanGeneral> objetListe = new ArrayList<TDetailPlanGeneral>();
+	      private List<VPgpmliste> pgpmListe = new ArrayList<VPgpmliste>();
 	     private List <VPgpmStatut> pgpmstatutList = new ArrayList<VPgpmStatut>(); 
 	     private List<THistoPlanGeneral> listeHisto = new ArrayList<THistoPlanGeneral>();
 	     private List<VPgpm> objetListe = new ArrayList<VPgpm>(); 
@@ -213,6 +218,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private TStructure structure= new TStructure();
 		 private TStructure recupStructure= new TStructure(); 
 		 private TFinancement finAgpm = new TFinancement();
+		 private VPgpmliste varPgpm = new VPgpmliste();
 		//Declaration des variables
 		 private long gesCode;	
 		 private String filtreTypeMarche="";
@@ -580,7 +586,20 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							    	  }
 			               }
 			
-		 
+		     //Historiser
+			 public void historiser(String statut,TDetailPlanGeneral TDetailPlanGeneral,String motif) {
+					   THistoPlanGeneral histoPlan = new THistoPlanGeneral();
+	       			   histoPlan.setHpgDate(Calendar.getInstance().getTime());
+	       			   histoPlan.setHpgMotif(motif);
+	       			   histoPlan.setTStatut(new TStatut(statut));
+	       			   histoPlan.setTDetailPlanGeneral(TDetailPlanGeneral);
+	       			   histoPlan.setTFonction(userController.getSlctd().getTFonction());
+	       			   histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
+	       			   iservice.addObject(histoPlan);
+		        }	
+			
+			
+			
 		 //PGSPM
 		/* public void chargeDataAvaliderPgspm() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -1632,7 +1651,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
      
      
       //Enregistrement d'une opération PGPM sans AGPM
-      @Transactional
       public void creerDetailPlan() throws IOException{
     	  
     	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || detailPlan.getGpgLibFin().equalsIgnoreCase("") ||"".equalsIgnoreCase(detailPlan.getGpgLibFin())
@@ -1661,66 +1679,28 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
              	     detailPlan.setGpgDateSaisie(Calendar.getInstance().getTime());
              	     detailPlan.setGpgStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
              	     iservice.addObject(detailPlan);
-             	 
-             	 
-             	     TAffichagePgpm affichagePgpm = new TAffichagePgpm();
-             	     affichagePgpm.setAffGpgId(detailPlan.getGpgId());
-             	     affichagePgpm.setTPlanGeneral(new TPlanGeneral(detailPlan.getTPlanGeneral().getPlgId()));
-             	     affichagePgpm.setAffGpgAgpId(detailPlan.getGpgAgpId());
-             	     affichagePgpm.setAffGpgTypePlan(detailPlan.getGpgTypePlan());
-             	     affichagePgpm.setTFonction(userController.getSlctd().getTFonction());
-             	     affichagePgpm.setAffFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
-             	     affichagePgpm.setAffFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
-             	     affichagePgpm.setTStatut(new TStatut(detailPlan.getTStatut().getStaCode()));
-             	     affichagePgpm.setTStructure(new TStructure(userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-             	     affichagePgpm.setTTypeMarche(new TTypeMarche(detailPlan.getTTypeMarche().getTymCode()));
-             	     affichagePgpm.setTModePassation(new TModePassation(detailPlan.getTModePassation().getMopCode()));
-             	     affichagePgpm.setAffGpgCode(detailPlan.getGpgCode());
-             	     affichagePgpm.setAffGpgObjet(detailPlan.getGpgObjet());
-             	     affichagePgpm.setAffGpgNumeroOrdre(detailPlan.getGpgNumeroOrdre());
-             	     affichagePgpm.setAffGpgPartiePmePmi(detailPlan.getGpgPartiePmePmi());
-             	     affichagePgpm.setAffGpgCommentaire(detailPlan.getGpgCommentaire());
-             	     affichagePgpm.setAffGpgDateDao(detailPlan.getGpgDateDao());
-             	     affichagePgpm.setAffGpgActeurSaisie(detailPlan.getGpgActeurSaisie());
-             	     affichagePgpm.setAffGpgStatutRetour(detailPlan.getGpgStatutRetour());
-             	     affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
-             	     affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
-             	     affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-             	     affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
-             	     iservice.addObject(affichagePgpm);
-             	     
+          
+             	     //Récupération du Statut
+             	    TStatut statuts = constantService.getStatut("S1S");
+	  				//Historisation des Pgpm
+	      			historiser("S1S",detailPlan,"PGPM crée par l'Autorité Contractante");
 
-          		    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-       			   TStatut statuts = new TStatut();
-       			   if(!LS.isEmpty()) statuts = LS.get(0);
-       			    //Historisation des Plan Généraux
-       			   THistoPlanGeneral histoPlan = new THistoPlanGeneral();
-       			   histoPlan.setHpgDate(Calendar.getInstance().getTime());
-       			   histoPlan.setHpgMotif("PGPM crée par l'Autorité Contractante");
-       			   histoPlan.setTStatut(statuts);
-       			   histoPlan.setTDetailPlanGeneral(detailPlan);
-       			   histoPlan.setTFonction(userController.getSlctd().getTFonction());
-       			   histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
-       			   iservice.addObject(histoPlan);
-       			   
-       			String search = detailPlan.getGpgLibFin()+""+detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+userController.getSlctd().getTFonction().getFonCod()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
-				String rechercheAll = search.replace("null","");
+	      			pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
+		  						new WhereClause("GPG_ID", WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
+		  					if (!pgpmListe.isEmpty())  
+		  						varPgpm =pgpmListe.get(0); 
+		  		   String search = varPgpm.getGpgLibFin()+""+varPgpm.getGpgObjet()+""+userController.getSlctd().getTFonction().getFonCod()+""+varPgpm.getGpgActeurSaisie()+""+varPgpm.getGpgTypePlan()+""+varPgpm.getMopCode()+""+varPgpm.getMopLibelleCourt()+""+varPgpm.getTymCode()+""+varPgpm.getTymLibelleCourt()+""+varPgpm.getGpgDateDao();
+				   String rechercheAll = search.replace("null","");
 				
-				List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
-		      				new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+affichagePgpm.getAffGpgId()));
-	      				TAffichagePgpm affgp = new TAffichagePgpm();
-	      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-	      				   affgp.setAffGpgRecherche(rechercheAll);
-		      			   iservice.updateObject(affgp);
-       			
+				   detailPlan.setGpgRecherche(rechercheAll);
+				   iservice.updateObject(detailPlan);
+				
        			  chargeData();
        			
        			  userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
        			  userController.setRenderMsg(true);
        			  userController.setSevrityMsg("success");
        			
-       			 
-       			  //controleController.btn_edit_pgpm = true; 
        			  controleController.btn_edit_pgspm = false; 
        			  btnAgpmRappel = false;
        			  loveAgpmRappel = true;
@@ -1746,63 +1726,26 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            	          detailPlan.setGpgStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
            	          iservice.addObject(detailPlan);
            	 
-           	 
-           	          TAffichagePgpm affichagePgpm = new TAffichagePgpm();
-           	          affichagePgpm.setAffGpgId(detailPlan.getGpgId());
-           	          affichagePgpm.setTPlanGeneral(new TPlanGeneral(detailPlan.getTPlanGeneral().getPlgId()));
-           	          affichagePgpm.setAffGpgAgpId(detailPlan.getGpgAgpId());
-           	          affichagePgpm.setAffGpgTypePlan(detailPlan.getGpgTypePlan());
-           	          affichagePgpm.setTFonction(userController.getSlctd().getTFonction());
-           	          affichagePgpm.setTStatut(new TStatut(detailPlan.getTStatut().getStaCode()));
-           	          affichagePgpm.setTStructure(new TStructure(userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-           	          affichagePgpm.setTTypeMarche(new TTypeMarche(detailPlan.getTTypeMarche().getTymCode()));
-           	          affichagePgpm.setTModePassation(new TModePassation(detailPlan.getTModePassation().getMopCode()));
-           	          affichagePgpm.setAffGpgCode(detailPlan.getGpgCode());
-           	          affichagePgpm.setAffGpgObjet(detailPlan.getGpgObjet());
-           	          affichagePgpm.setAffGpgNumeroOrdre(detailPlan.getGpgNumeroOrdre());
-           	          affichagePgpm.setAffGpgPartiePmePmi(detailPlan.getGpgPartiePmePmi());
-           	          affichagePgpm.setAffGpgCommentaire(detailPlan.getGpgCommentaire());
-           	          affichagePgpm.setAffGpgDateDao(detailPlan.getGpgDateDao());
-           	          affichagePgpm.setAffGpgActeurSaisie(detailPlan.getGpgActeurSaisie());
-           	          affichagePgpm.setAffGpgStatutRetour(detailPlan.getGpgStatutRetour());
-           	          affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
-           	          affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
-           	          affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-           	          affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
-           	          affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
-           	          affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
-           	          iservice.addObject(affichagePgpm);
-           	          
-
-        		      List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-     			      TStatut statuts = new TStatut();
-     			       if(!LS.isEmpty()) statuts = LS.get(0);
-     			       //Historisation des Plan Généraux
-     			      THistoPlanGeneral histoPlan = new THistoPlanGeneral();
-     			      histoPlan.setHpgDate(Calendar.getInstance().getTime());
-     			      histoPlan.setHpgMotif("Détail crée par l'Autorité Contractante");
-     			      histoPlan.setTStatut(statuts);
-     			      histoPlan.setTDetailPlanGeneral(detailPlan);
-     			      histoPlan.setTFonction(userController.getSlctd().getTFonction());
-     			      histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
-     			      iservice.addObject(histoPlan);
-     			      
-     			     String search = detailPlan.getGpgLibFin()+""+detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+userController.getSlctd().getTFonction().getFonCod()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
- 					 String rechercheAll = search.replace("null","");
- 					
- 					 List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
- 			      				new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+affichagePgpm.getAffGpgId()));
- 		      				TAffichagePgpm affgp = new TAffichagePgpm();
- 		      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
- 		      				    affgp.setAffGpgRecherche(rechercheAll);
-  		      				    iservice.updateObject(affgp);
+      
+           	       TStatut statuts = constantService.getStatut("S1S");
+	  				//Historisation des Pgpm
+	      			historiser("S1S",detailPlan,"PGPM crée par l'Autorité Contractante");
+                    //
+	      			pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
+		  						new WhereClause("GPG_ID", WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
+		  					if (!pgpmListe.isEmpty())  
+		  						varPgpm =pgpmListe.get(0); 
+		  		      String search = varPgpm.getGpgLibFin()+""+varPgpm.getGpgObjet()+""+varPgpm.getGpgActeurSaisie()+""+varPgpm.getGpgTypePlan()+""+varPgpm.getMopCode()+""+varPgpm.getMopLibelleCourt()+""+varPgpm.getTymCode()+""+varPgpm.getTymLibelleCourt()+""+varPgpm.getGpgDateDao();
+				      String rechercheAll = search.replace("null","");
+				
+				      detailPlan.setGpgRecherche(rechercheAll);
+				      iservice.updateObject(detailPlan);
      			
      			      chargeData();
      			
      			      userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
      			      userController.setRenderMsg(true);
      			      userController.setSevrityMsg("success");
-     			
      			
      			      //controleController.btn_edit_pgpm = true;
      			      controleController.btn_edit_pgspm = false;
@@ -1891,21 +1834,21 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
    	        	 	  		  iservice.addObject(newFinancement);*/
    	        	 			
 
-              		          List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-           			          TStatut statuts = new TStatut();
-           			          if(!LS.isEmpty()) statuts = LS.get(0);
-           			          //Historisation des Plan Généraux
-           			          THistoPlanGeneral histoPlan = new THistoPlanGeneral();
-           			          histoPlan.setHpgDate(Calendar.getInstance().getTime());
-           			          histoPlan.setHpgMotif("Détail crée par l'Autorité Contractante");
-           			          histoPlan.setTStatut(statuts);
-           			          histoPlan.setTDetailPlanGeneral(detailPlan);
-           			          histoPlan.setTFonction(userController.getSlctd().getTFonction());
-           			          histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
-           			          iservice.addObject(histoPlan);
+                 	         TStatut statuts = constantService.getStatut("S1S");
+         	  				//Historisation des Pgpm
+         	      			historiser("S1S",detailPlan,"PGPM crée par l'Autorité Contractante");
+
+         	      			pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
+         		  						new WhereClause("GPG_ID", WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
+         		  					if (!pgpmListe.isEmpty())  
+         		  						varPgpm =pgpmListe.get(0); 
+         		  		   String search = varPgpm.getGpgLibFin()+""+varPgpm.getGpgObjet()+""+userController.getSlctd().getTFonction().getFonCod()+""+varPgpm.getGpgActeurSaisie()+""+varPgpm.getGpgTypePlan()+""+varPgpm.getMopCode()+""+varPgpm.getMopLibelleCourt()+""+varPgpm.getTymCode()+""+varPgpm.getTymLibelleCourt()+""+varPgpm.getGpgDateDao();
+         				   String rechercheAll = search.replace("null","");
+         				
+         				   detailPlan.setGpgRecherche(rechercheAll);
+         				   iservice.updateObject(detailPlan);
            			   
-           			          String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
-    				          String rechercheAll = search.replace("null","");
+           			          
     				
     				          List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
     		      				new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+affichagePgpm.getAffGpgId()));
@@ -1950,32 +1893,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	                           detailPlan.setGpgStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
                	                           iservice.addObject(detailPlan);
                	 
-               	 
-               	                           TAffichagePgpm affichagePgpm = new TAffichagePgpm();
-               	                           affichagePgpm.setAffGpgId(detailPlan.getGpgId());
-               	                           affichagePgpm.setTPlanGeneral(new TPlanGeneral(detailPlan.getTPlanGeneral().getPlgId()));
-               	                           affichagePgpm.setAffGpgAgpId(detailPlan.getGpgAgpId());
-               	                           affichagePgpm.setAffGpgTypePlan(detailPlan.getGpgTypePlan());
-               	                           affichagePgpm.setTFonction(userController.getSlctd().getTFonction());
-               	                           affichagePgpm.setTStatut(new TStatut(detailPlan.getTStatut().getStaCode()));
-               	                           affichagePgpm.setTStructure(new TStructure(userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-               	                           affichagePgpm.setTTypeMarche(new TTypeMarche(detailPlan.getTTypeMarche().getTymCode()));
-               	                           affichagePgpm.setTModePassation(new TModePassation(detailPlan.getTModePassation().getMopCode()));
-               	                           affichagePgpm.setAffGpgCode(detailPlan.getGpgCode());
-               	                           affichagePgpm.setAffGpgObjet(detailPlan.getGpgObjet());
-               	                           affichagePgpm.setAffGpgNumeroOrdre(detailPlan.getGpgNumeroOrdre());
-               	                           affichagePgpm.setAffGpgPartiePmePmi(detailPlan.getGpgPartiePmePmi());
-               	                           affichagePgpm.setAffGpgCommentaire(detailPlan.getGpgCommentaire());
-               	                           affichagePgpm.setAffGpgDateDao(detailPlan.getGpgDateDao());
-               	                           affichagePgpm.setAffGpgActeurSaisie(detailPlan.getGpgActeurSaisie());
-               	                           affichagePgpm.setAffGpgStatutRetour(detailPlan.getGpgStatutRetour());
-               	                           affichagePgpm.setAffGpgDateSaisie(detailPlan.getGpgDateSaisie());
-               	                           affichagePgpm.setAffGpgDateSaisie(Calendar.getInstance().getTime());
-               	                           affichagePgpm.setTGestion(new TGestion(plan.getTGestion().getGesCode()));
-               	                           affichagePgpm.setAffGpgLibFin(detailPlan.getGpgLibFin());
-               	                           affichagePgpm.setAffFonCodPf(detailPlan.getGpgFonCodPf());
-               	                           affichagePgpm.setAffFonCodDmp(detailPlan.getGpgFonCodDmp());
-               	                           iservice.addObject(affichagePgpm);
                	                           
                	                           //Insertion dans T_Financement_PGPM
                	        	 	  		 /* newFinancement.setTBailleur(new TBailleur(finAgpm.getTBailleur().getBaiCode()));
@@ -1987,30 +1904,30 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	        	 	  		  newFinancement.setFipMontantCfa(finAgpm.getFinMontantCfa());
                	        	 	  		  iservice.addObject(newFinancement);*/
 
-            		                       List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"S1S"));
-         			                       TStatut statuts = new TStatut();
-         			                       if(!LS.isEmpty()) statuts = LS.get(0);
-         			                       //Historisation des Plan Généraux
-         			                       THistoPlanGeneral histoPlan = new THistoPlanGeneral();
-         			                       histoPlan.setHpgDate(Calendar.getInstance().getTime());
-         			                       histoPlan.setHpgMotif("Détail crée par l'Autorité Contractante");
-         			                       histoPlan.setTStatut(statuts);
-         			                       histoPlan.setTDetailPlanGeneral(detailPlan);
-         			                       histoPlan.setTFonction(userController.getSlctd().getTFonction());
-         			                       histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
-         			                       iservice.addObject(histoPlan);
+               	                          TStatut statuts = constantService.getStatut("S1S");
+               	 	  				       //Historisation des Pgpm
+               	 	      			      historiser("S1S",detailPlan,"PGPM crée par l'Autorité Contractante");
+
+               	 	      			      pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
+               	 		  						new WhereClause("GPG_ID", WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
+               	 		  					if (!pgpmListe.isEmpty())  
+               	 		  						varPgpm =pgpmListe.get(0); 
+               	 		  		           String search = varPgpm.getGpgLibFin()+""+varPgpm.getGpgObjet()+""+userController.getSlctd().getTFonction().getFonCod()+""+varPgpm.getGpgActeurSaisie()+""+varPgpm.getGpgTypePlan()+""+varPgpm.getMopCode()+""+varPgpm.getMopLibelleCourt()+""+varPgpm.getTymCode()+""+varPgpm.getTymLibelleCourt()+""+varPgpm.getGpgDateDao();
+               	 				           String rechercheAll = search.replace("null","");
+               	 				
+               	 				           detailPlan.setGpgRecherche(rechercheAll);
+               	 				           iservice.updateObject(detailPlan);
          			      
-         			                       String search = detailPlan.getGpgObjet()+""+detailPlan.getGpgCommentaire()+""+detailPlan.getGpgSourceFin()+""+detailPlan.getGpgActeurSaisie()+""+detailPlan.getGpgTypePlan()+""+detailPlan.getGpgStrCode()+""+detailPlan.getTModePassation().getMopCode()+""+detailPlan.getTTypeMarche().getTymCode()+""+plan.getTGestion().getGesCode()+""+detailPlan.getGpgDateDao()+""+detailPlan.getTModePassation().getMopLibelleLong()+""+detailPlan.getTTypeMarche().getTymLibelleCourt();
-     					                   String rechercheAll = search.replace("null","");
+         			                       
      					
-     					                   List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
+     					                   /*List<TAffichagePgpm> AFG =iservice.getObjectsByColumn("TAffichagePgpm", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
      			      				        new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+affichagePgpm.getAffGpgId()));
      		      				            TAffichagePgpm affgp = new TAffichagePgpm();
      		      				            if(!AFG.isEmpty()) affgp =AFG.get(0); 
      		      				           affgp.setAffGpgRecherche(rechercheAll);
      		      				           affgp.setAffGpgTypeFinance(newFinancement.getFipTypeFinance());
      		      				           affgp.setTSourceFinancement(newFinancement.getTSourceFinancement());
-      		      				           iservice.updateObject(affgp);
+      		      				           iservice.updateObject(affgp);*/
          			
          			                       chargeData();
          			
@@ -4414,8 +4331,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	public String getFinBaiCaode() {
 		return finBaiCaode;
 	}
-
-
 	public void setFinBaiCaode(String finBaiCaode) {
 		this.finBaiCaode = finBaiCaode;
 	}
@@ -4424,8 +4339,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	public VUpdatePgpm getUpdateOperation() {
 		return updateOperation;
 	}
-
-
 	public void setUpdateOperation(VUpdatePgpm updateOperation) {
 		this.updateOperation = updateOperation;
 	}
@@ -4434,10 +4347,24 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	public List<VUpdatePgpm> getListUpdate() {
 		return listUpdate;
 	}
-
-
 	public void setListUpdate(List<VUpdatePgpm> listUpdate) {
 		this.listUpdate = listUpdate;
+	}
+
+	public List<VPgpmliste> getPgpmListe() {
+		return pgpmListe;
+	}
+
+	public void setPgpmListe(List<VPgpmliste> pgpmListe) {
+		this.pgpmListe = pgpmListe;
+	}
+
+	public VPgpmliste getVarPgpm() {
+		return varPgpm;
+	}
+
+	public void setVarPgpm(VPgpmliste varPgpm) {
+		this.varPgpm = varPgpm;
 	}
 	
 	

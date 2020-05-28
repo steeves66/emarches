@@ -50,6 +50,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	private Date gpgDteModif;
 	private String gpgFonCodPf;
 	private String gpgFonCodDmp;
+	private String gpgRecherche;
 	private Set<TDossierPlanGeneral> TDossierPlanGenerals = new HashSet<TDossierPlanGeneral>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 	private Set<TFinancementPgpm> TFinancementPgpms = new HashSet<TFinancementPgpm>(0);
@@ -76,7 +77,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 			TStatut TStatut, TTypeMarche TTypeMarche, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
 			Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao,
 			String gpgActeurSaisie, String gpgStatutRetour,Date gpgDateSaisie, String gpgStrCode,Date gpgDateValAc,String gpgLibFin, Date gpgDteModif,
-			String gpgFonCodPf,String gpgFonCodDmp,Date gpgDateValCpmp, Date gpgDateValDmp,Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
+			String gpgFonCodPf,String gpgFonCodDmp,Date gpgDateValCpmp, Date gpgDateValDmp,String gpgRecherche,Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TFinancementPgpm> TFinancementPgpms, Set<THistoPlanGeneral> THistoPlanGenerals) {
 		this.gpgId = gpgId;
 		this.TModePassation = TModePassation;
@@ -103,6 +104,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgDteModif = gpgDteModif;
 		this.gpgFonCodPf = gpgFonCodPf;
 		this.gpgFonCodDmp = gpgFonCodDmp;
+		this.gpgRecherche = gpgRecherche;
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
 		this.TDetailPlanPassations = TDetailPlanPassations;
 		this.TFinancementPgpms = TFinancementPgpms;
@@ -345,6 +347,15 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setGpgFonCodDmp(String gpgFonCodDmp) {
 		this.gpgFonCodDmp = gpgFonCodDmp;
+	}
+	
+	@Column(name = "GPG_RECHERCHE", length = 4000)
+	public String getGpgRecherche() {
+		return this.gpgRecherche;
+	}
+
+	public void setGpgRecherche(String gpgRecherche) {
+		this.gpgRecherche = gpgRecherche;
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDetailPlanGeneral")
