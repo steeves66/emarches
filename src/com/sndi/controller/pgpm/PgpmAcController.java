@@ -145,6 +145,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	 
 	    //Declaration des listes
 		//private List<TDetailPlanGeneral> objetListe = new ArrayList<TDetailPlanGeneral>();
+	    private List<TDetailPlanGeneral> recupPgpm = new ArrayList<TDetailPlanGeneral>();
 	      private List<VPgpmliste> pgpmListe = new ArrayList<VPgpmliste>();
 	     private List <VPgpmStatut> pgpmstatutList = new ArrayList<VPgpmStatut>(); 
 	     private List<THistoPlanGeneral> listeHisto = new ArrayList<THistoPlanGeneral>();
@@ -282,6 +283,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    				updateOperation=listUpdate.get(0); 
 		    			}
 		 }
+		 
+		//Methode de récupération de t_pgpm dans v_pgpmliste
+		/* public void recupForm() {
+			 recupPgpm= (List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+		    					 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()));
+		    			if (!recupPgpm.isEmpty()) {
+		    				detailPlan=recupPgpm.get(0); 
+		    			}
+		 }*/
 		 
 		 //Afficher les financements du projet ou agpm selectionné
 		 public void chargeFinancementUpdate() {
@@ -1557,22 +1567,31 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       //Modification des operations
      public void modifierDetailPlan() throws IOException{
 
-    	 
-    	 //iservice.updateObject(updateOperation);
+    	//Modification dans TAffichagePgpm
+    	/* slctdTd.setAffGpgAgpId(updateOperation.getAffGpgAgpId());
+    	 slctdTd.setAffGpgObjet(updateOperation.getGpgObjet());
+    	 slctdTd.setTTypeMarche(new TTypeMarche(updateOperation.getTymCode()));
+    	 slctdTd.setTModePassation(new TModePassation(updateOperation.getMopCode()));
+    	 slctdTd.setAffGpgDateDao(updateOperation.getAffGpgDateDao());
+    	 slctdTd.setAffGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
+    	 slctdTd.setAffGpgCommentaire(updateOperation.getGpgCommentaire()); 
+    	 slctdTd.setAffGpgLibFin(updateOperation.getGpgLibFin());
+    	 iservice.updateObject(slctdTd);*/
     	 
     	//Modification dans TDetailPlanGeneral
     	 List<TDetailPlanGeneral> PLG =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
-   				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+updateOperation.getGpgId()));
-    	      TDetailPlanGeneral detail = new TDetailPlanGeneral();
+   				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()));
+    	 TDetailPlanGeneral detail = new TDetailPlanGeneral();
 				if(!PLG.isEmpty()) detail =PLG.get(0); 
 				detail.setGpgAgpId(updateOperation.getGpgAgpId());
 				detail.setGpgCommentaire(updateOperation.getGpgCommentaire());
 				detail.setGpgDateDao(updateOperation.getGpgDateDao());
 				detail.setGpgLibFin(updateOperation.getGpgLibFin());
-				detail.setGpgObjet(slctdTd.getGpgObjet());
+				detail.setGpgObjet(updateOperation.getGpgObjet());
 				detail.setGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
-				/*detail.setTModePassation(slctdTd.getTModePassation());
-				detail.setTTypeMarche(slctdTd.getTymCode());*/
+				detail.setTModePassation(new TModePassation(updateOperation.getMopCode()));
+				detail.setTTypeMarche(new TTypeMarche(updateOperation.getGpgTymCode()));
+				//detail.setGpgLibFin(updateOperation.getGpgLibFin());
    				iservice.updateObject(detail);
    				userController.renderPage("pgpm1");
 		    	 userController.setTexteMsg("Modification éffectuée avec succès!");
@@ -2163,12 +2182,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				        listeHisto =(List<THistoPlanGeneral>) iservice.getObjectsByColumn("THistoPlanGeneral", new ArrayList<String>(Arrays.asList("HPG_ID")),
 								new WhereClause("HPG_GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()),
 								new WhereClause("HPG_STA_CODE",WhereClause.Comparateur.EQ,"S3D"));
-					   if (!listeHisto.isEmpty()) {
+					   if (!listeHisto.isEmpty()) 
 						   histoPgpm= listeHisto.get(0); 
-					   }
 					   
-					   chargeDataAvaliderPgpm();
-			
 			    List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
 			    TStatut statuts = new TStatut();
 			      if(!LS.isEmpty()) statuts = LS.get(0);
@@ -2183,16 +2199,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			     iservice.addObject(histoPlan); 
 			     
 			     
-			 	//Enregistrement de TAffichage
-				 /* validationListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
-							new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
-				     VPgpmliste affiche = new VPgpmliste();
-					if (!validationListe.isEmpty()) {
-						affiche= validationListe.get(0);
-						affiche.setTStatut(new TStatut(statutUpdate));
-						affiche.setAffGpgStatutRetour("1");
-					    iservice.updateObject(affiche);
-                        }*/
+			 
 					     chargeDataAvaliderPgpm();
 					     chargePgpmDifCp();
 					     chargePgpmDifDmp();
@@ -3088,6 +3095,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				break;
 				case "pgpm3":
 					editForm();
+					//recupForm();
 					chargeBailleur();
 					chargeDevise();
 					chargeGestions();
@@ -4231,6 +4239,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setValidationListePgspm(List<VPgpmliste> validationListePgspm) {
 		this.validationListePgspm = validationListePgspm;
+	}
+
+	public List<TDetailPlanGeneral> getRecupPgpm() {
+		return recupPgpm;
+	}
+
+	public void setRecupPgpm(List<TDetailPlanGeneral> recupPgpm) {
+		this.recupPgpm = recupPgpm;
 	}
 
 	
