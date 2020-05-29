@@ -139,7 +139,7 @@
                     <table>
 		                 <tr>
 		                 <td>
-		                  <p:calendar id="oftT" pattern="dd/MM/yyyy" value="#{pgpmAcController.updateOperation.affGpgDateDao}" style="width: 100%" >
+		                  <p:calendar id="oftT" pattern="dd/MM/yyyy" value="#{pgpmAcController.updateOperation.gpgDateDao}" style="width: 100%" >
 		                   </p:calendar>
 		                 </td>
 		                 
@@ -355,7 +355,7 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeTypeMarches}"
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeTypeMarchesFils}"
 						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
 			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
@@ -402,7 +402,7 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTblePass" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeModePassation}"
+						 <p:dataTable id="ndTblePass" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeModePassationPn}"
 						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               

@@ -25,6 +25,7 @@ import com.sndi.model.VAgpmDetails;
 import com.sndi.model.VFinancement;
 import com.sndi.model.VPgpm;
 import com.sndi.model.VPgpmDetails;
+import com.sndi.model.VPgpmliste;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -67,7 +68,8 @@ public class EtatsPgpmController {
 	private TAgpm slctdTb = new TAgpm(); 
 	//private VPgpm slctdTd = new VPgpm();
 	
-	private TAffichagePgpm slctdTd = new TAffichagePgpm();
+	//private TAffichagePgpm slctdTd = new TAffichagePgpm();
+	private VPgpmliste slctdTd = new VPgpmliste();
 	
 	private VPgpmDetails detail = new VPgpmDetails(); 
 	private List<TDossierPlanGeneral> dossListe = new ArrayList<TDossierPlanGeneral>();
@@ -85,8 +87,8 @@ public class EtatsPgpmController {
 	
 	//Afficher les détails de du projet
 		 public void chargeDetailPgpm(){
-				objetListe =(List<VPgpmDetails>) iservice.getObjectsByColumn("VPgpmDetails", new ArrayList<String>(Arrays.asList("AFF_GPG_ID")),
-						new WhereClause("AFF_GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffGpgId()));
+				objetListe =(List<VPgpmDetails>) iservice.getObjectsByColumn("VPgpmDetails", new ArrayList<String>(Arrays.asList("GPG_ID")),
+						new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()));
 				if (!objetListe.isEmpty()) {
 					detail=objetListe.get(0);
 				}
@@ -112,7 +114,7 @@ public class EtatsPgpmController {
 			 public void chargeFinancementDetail() {
 				 financementListe.clear();
 				 financementListe = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
-							 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+slctdTd.getAffGpgId())));		 		 
+							 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+slctdTd.getGpgId())));		 		 
 			 }
 	
 	        //Ouverture d'un dossier chargé
@@ -269,7 +271,7 @@ public class EtatsPgpmController {
 		this.slctdTd = slctdTd;
 	}*/
 	
-
+/*
 	public TAffichagePgpm getSlctdTd() {
 		return slctdTd;
 	}
@@ -278,7 +280,7 @@ public class EtatsPgpmController {
 	public void setSlctdTd(TAffichagePgpm slctdTd) {
 		this.slctdTd = slctdTd;
 	}
-	
+	*/
 
 
 	public List<TFinancementPgpm> getFinancementListe() {
@@ -321,6 +323,16 @@ public class EtatsPgpmController {
 
 	public void setFermerDMP(boolean fermerDMP) {
 		this.fermerDMP = fermerDMP;
+	}
+
+
+	public VPgpmliste getSlctdTd() {
+		return slctdTd;
+	}
+
+
+	public void setSlctdTd(VPgpmliste slctdTd) {
+		this.slctdTd = slctdTd;
 	}
 	
 	

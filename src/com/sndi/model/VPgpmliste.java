@@ -38,6 +38,7 @@ public class VPgpmliste implements java.io.Serializable {
 	private Date gpgDateValAc;
 	private Date gpgDateValCpmp;
 	private Date gpgDateValDmp;
+	private String gpgStatutRetour;
 	private String ac;
 	private Long gpgAgpId;
 	private String gpgCommentaire;
@@ -65,7 +66,7 @@ public class VPgpmliste implements java.io.Serializable {
 	public VPgpmliste(String fipTypeFinance, long gpgId,String gpgLibFin, Date gpgDteModif, String gpgObjet, String gpgStaCode,
 			String gpgTypePlan, String gpgActeurSaisie, Date gpgDateDao, String gpgFonCodPf, String gpgFonCodDmp,
 			String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleCourt, String mopLibelleLong,
-			String gpgRecherche,Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp,String ac, Long gpgAgpId,String gpgCommentaire, String gpgPartiePmePmi,
+			String gpgRecherche,Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp,String gpgStatutRetour,String ac, Long gpgAgpId,String gpgCommentaire, String gpgPartiePmePmi,
 			String tstCode, long plgId, long plgGesCode) {
 		this.fipTypeFinance = fipTypeFinance;
 		this.gpgId = gpgId;
@@ -78,6 +79,7 @@ public class VPgpmliste implements java.io.Serializable {
 		this.gpgDateDao = gpgDateDao;
 		this.gpgFonCodPf = gpgFonCodPf;
 		this.gpgFonCodDmp = gpgFonCodDmp;
+		this.gpgStatutRetour = gpgStatutRetour;
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.mopCode = mopCode;
@@ -274,6 +276,15 @@ public class VPgpmliste implements java.io.Serializable {
 
 	public void setGpgDateValDmp(Date gpgDateValDmp) {
 		this.gpgDateValDmp = gpgDateValDmp;
+	}
+	
+	@Column(name = "GPG_STATUT_RETOUR", length = 4)
+	public String getGpgStatutRetour() {
+		return this.gpgStatutRetour;
+	}
+
+	public void setGpgStatutRetour(String gpgStatutRetour) {
+		this.gpgStatutRetour = gpgStatutRetour;
 	}
 	
 	@Column(name = "AC", length = 515)

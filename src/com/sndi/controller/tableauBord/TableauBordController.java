@@ -1167,7 +1167,7 @@ public int getAcSaisieDossier(String src){
 
 //pgpm Transmis par l'AC
 public int getAcTransmisDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+	int i = iservice.countTableByColumn("V_PGPMLISTE", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1185,7 +1185,7 @@ public int getAcAttenteValide(String src1, String src2, String src3){
 
 //pgpm en attente de transmission par le AC
 public int getPgpmAttenteValide(String src1, String src2, String src3){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
+	int i = iservice.countTableByColumnIn("V_PGPMLISTE", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1242,7 +1242,7 @@ public int getNpAcCpDiffDossier(String src){
 
 //pgpm retournés par la CPMP (Son propre tableau de Bord) : Nouvelle Methode
 public int getNpDiffDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+	int i = iservice.countTableByColumn("V_PGPMLISTE", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1271,7 +1271,7 @@ public int getNpDiffDossierDmpAc(String src){
 
 //pgpm retournés par la CPMP et la DMP chez le AC
 public int getNpDiffDossierCpmpDmpAc(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
+	int i = iservice.countTableByColumnIn("V_PGPMLISTE", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1319,7 +1319,7 @@ public int getNpAttenteValide(String src1, String src2){
 
 //pgpm validés par la CPMP : Nouvelle Methode
 public int getNpValideCmp(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+	int i = iservice.countTableByColumn("V_PGPMLISTE", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("GPG_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1340,7 +1340,7 @@ public int getNpValideCmp(String src){
 
 //pgpm validés par la DMP Côté AC : Nouvelle Methode
 public int getNpValideDmpAc(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+	int i = iservice.countTableByColumn("V_PGPMLISTE", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));

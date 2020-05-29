@@ -1557,17 +1557,20 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       //Modification des operations
      public void modifierDetailPlan() throws IOException{
 
+    	 
+    	 //iservice.updateObject(updateOperation);
+    	 
     	//Modification dans TDetailPlanGeneral
     	 List<TDetailPlanGeneral> PLG =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
-   				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()));
+   				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+updateOperation.getGpgId()));
     	      TDetailPlanGeneral detail = new TDetailPlanGeneral();
 				if(!PLG.isEmpty()) detail =PLG.get(0); 
-				detail.setGpgAgpId(slctdTd.getGpgAgpId());
-				detail.setGpgCommentaire(slctdTd.getGpgCommentaire());
-				detail.setGpgDateDao(slctdTd.getGpgDateDao());
-				detail.setGpgLibFin(slctdTd.getGpgLibFin());
+				detail.setGpgAgpId(updateOperation.getGpgAgpId());
+				detail.setGpgCommentaire(updateOperation.getGpgCommentaire());
+				detail.setGpgDateDao(updateOperation.getGpgDateDao());
+				detail.setGpgLibFin(updateOperation.getGpgLibFin());
 				detail.setGpgObjet(slctdTd.getGpgObjet());
-				detail.setGpgPartiePmePmi(slctdTd.getGpgPartiePmePmi());
+				detail.setGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
 				/*detail.setTModePassation(slctdTd.getTModePassation());
 				detail.setTTypeMarche(slctdTd.getTymCode());*/
    				iservice.updateObject(detail);

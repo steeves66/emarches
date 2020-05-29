@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-        #{controleController.libelle} #{etatsPgpmController.detail.affGpgId}
+        #{controleController.libelle} #{etatsPgpmController.detail.gpgId}
         <small>
          #{controleController.libelle1} 
        <!--  Liste des AGPM Saisis  -->
@@ -49,7 +49,7 @@
             
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type} N° #{etatsPgpmController.detail.affGpgId}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type} N° #{etatsPgpmController.detail.gpgId}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -74,7 +74,7 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Réalisation envisagée</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.affGpgObjet}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.gpgObjet}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
@@ -87,33 +87,33 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Mode de Passation</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.mopCode} : #{etatsPgpmController.slctdTd.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.mopCode} : #{etatsPgpmController.detail.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Part Reservée aux PME</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsPgpmController.detail.affGpgPartiePmePmi =='O'?'OUI':'NON'}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsPgpmController.detail.gpgPartiePmePmi =='O'?'OUI':'NON'}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Date de Lancement</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.affGpgDateDao}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.gpgDateDao}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Date de Saisie</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.affGpgDateSaisie}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.gpgDateSaisie}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Commentaire </label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.affGpgCommentaire}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsPgpmController.detail.gpgCommentaire}"  style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
