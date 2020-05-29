@@ -456,7 +456,7 @@ public class AgpmController {
 	 public void chargeBailleur() {
 		 listeBailleurs=new ArrayList<>(constantService.getListeBailleurs());
 		}
-	//Combobox Source de finacement
+	     //Combobox Source de finacement
 		 public void chargeSourceFinance() {
 			 listeSourceFinance=new ArrayList<>(constantService.getListeSourceFinance());
 			}

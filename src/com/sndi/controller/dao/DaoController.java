@@ -1313,10 +1313,11 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 
    public void chargeLots(){
 		 //getListeDAO().clear();
-		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")), 			
+		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")), 
+				 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
-			_logger.info("objetListe size: "+listeLots.size());	
-			tableauBordController.chargeDataDao();
+			_logger.info("listeLots size: "+listeLots.size());	
+			tableauBordController.chargeDataDao(); 
 			
 			lotTotal = getNbreLotTotal();
 	}

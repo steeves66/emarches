@@ -633,28 +633,28 @@
 							
 							    <h:panelGroup rendered="#{controleController.panel1}">
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.listPgspm}" 
-					rowKey="#{slctdTb.affGpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type}" 
+					rowKey="#{slctdTb.gpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type}" 
                          scrollable="true" scrollHeight="250" >
                         
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
                         <p:column headerText="Financement" styleClass="col-sm-2" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgLibFin}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.gpgLibFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgLibFin}"/>
+         				<h:outputText value="#{slctdTb.gpgLibFin}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
 				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgObjet}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.gpgObjet}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgObjet}" />
+         				<h:outputText value="#{slctdTb.gpgObjet}" />
          				</h:panelGroup>
          				
 				        </p:column>
@@ -663,33 +663,33 @@
 				        
                          <p:column headerText="Type Marché" styleClass="col-sm-3" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold" />
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				       
          				<p:column headerText="Mode de passation" styleClass="col-sm-3" >
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopCode}" style="color:red; font-weight:bold"/>
+         				<h:outputText value="#{slctdTb.mopCode}" style="color:red; font-weight:bold"/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				<h:outputText value="#{slctdTb.mopCode}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				        <p:column headerText="Part réservée aux PME" styleClass="col-sm-3" >
 				        <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" style="color:red; font-weight:bold"/>  
+         				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" style="color:red; font-weight:bold"/>  
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}"/>  
+         				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}"/>  
          				</h:panelGroup>
          				
 				        </p:column>
@@ -785,7 +785,7 @@
 					 </div>
 					 
   <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.validationListePgspm}" 
-					rowKey="#{slctdTb.affGpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+					rowKey="#{slctdTb.gpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
                          paginator="true"
                          rowsPerPageTemplate="5,10,15" >
                         
@@ -793,65 +793,65 @@
                          
                         <p:column headerText="Financement" styleClass="col-sm-2" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgLibFin}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.gpgLibFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgLibFin}"/>
+         				<h:outputText value="#{slctdTb.gpgLibFin}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
 				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgObjet}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.gpgObjet}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgObjet}" />
+         				<h:outputText value="#{slctdTb.gpgObjet}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				         <p:column headerText="Autorité Contractante" styleClass="col-sm-4" >
 				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}" style="color:red; font-weight:bold "/>
+         				<h:outputText value="#{slctdTb.ac}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+         				<h:outputText value="#{slctdTb.ac}" />
          				</h:panelGroup>
          				
 				        </p:column> 
 				        
                          <p:column headerText="Type Marché" styleClass="col-sm-3" >
                          <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" style="color:red; font-weight:bold" />
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				       
          				<p:column headerText="Mode de passation" styleClass="col-sm-3" >
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopCode}" style="color:red; font-weight:bold"/>
+         				<h:outputText value="#{slctdTb.mopCode}" style="color:red; font-weight:bold"/>
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour !=  '1'}">
-         				<h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				<h:outputText value="#{slctdTb.mopCode}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				        <p:column headerText="Part réservée aux PME" styleClass="col-sm-3" >
 				        <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" style="color:red; font-weight:bold"/>  
+         				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" style="color:red; font-weight:bold"/>  
          				</h:panelGroup>
          				
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}"/>  
+         				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}"/>  
          				</h:panelGroup>
          				
 				        </p:column>
@@ -873,12 +873,12 @@
 				        
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
          				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgDateValAc}" style="color:red; font-weight:bold ">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}" style="color:red; font-weight:bold ">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
@@ -886,7 +886,7 @@
 				        
  
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
@@ -922,7 +922,7 @@
 	                                 <p:commandLink action="#{pgpmAcController.reDiffererPgspm()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
 	                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
-	                             <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.affGpgId} ?" icon="ui-icon-alert" />
+	                             <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.gpgId} ?" icon="ui-icon-alert" />
 	                           </p:commandLink> 
 	         		          </h:panelGroup>
 	         		          </h:panelGroup>
@@ -1010,7 +1010,7 @@
 	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour du #{controleController.type} N° #{pgpmAcController.slctdTd.affGpgId}
+						Motif du retour du #{controleController.type} N° #{pgpmAcController.slctdTd.gpgId}
 						</div> 
 					<div class="panel-body panel-body-nopadding">
 	                  <p:inputTextarea rows="4" value="#{pgpmAcController.pgpmstatut.hpgMotif}" cols="100" style="width:100%;" readonly="true"/>
@@ -1027,7 +1027,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour de l'opération N° #{pgpmAcController.slctdTd.affGpgId} du #{controleController.type} de l'AC : #{pgpmAcController.slctdTd.affGpgActeurSaisie}
+						Motif du retour de l'opération N° #{pgpmAcController.slctdTd.gpgId} du #{controleController.type} de l'AC : #{pgpmAcController.slctdTd.affGpgActeurSaisie}
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">
@@ -1064,28 +1064,28 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgspmTrans}" scrollable="true" scrollHeight="260"
-						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
+						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgLibFin}" />
+         				  <h:outputText value="#{slctdTb.gpgLibFin}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.affGpgObjet}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
 				        </p:column>
 				        <p:column headerText="Autorité Contractante" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.ac}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				  <h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+         				  <h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				      
 						</p:dataTable>
@@ -1123,39 +1123,39 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgspmValCp}" scrollable="true" scrollHeight="465"
-						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
+						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun PGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgLibFin}" />
+         				  <h:outputText value="#{slctdTb.gpgLibFin}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.affGpgObjet}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
 				        </p:column>
 				        <p:column headerText="Autorité Contractante" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.ac}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				  <h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+         				  <h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
 				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
  
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
@@ -1194,39 +1194,39 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgspmValDmp}" scrollable="true" scrollHeight="260"
-						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
+						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun #{controleController.type}  validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgLibFin}" />
+         				  <h:outputText value="#{slctdTb.gpgLibFin}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.affGpgObjet}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
 				        </p:column>
 				        <p:column headerText="Autorité Contractante" styleClass="col-sm-7" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.ac}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				  <h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+         				  <h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
  
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
@@ -1261,39 +1261,39 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgspmDifDmp}" scrollable="true" scrollHeight="260"
-						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
+						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-3" >
-         				  <h:outputText value="#{slctdTb.affGpgLibFin}" />
+         				  <h:outputText value="#{slctdTb.gpgLibFin}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.affGpgObjet}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
 				        </p:column>
 				        <p:column headerText="AC" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.ac}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				  <h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+         				  <h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
  
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
@@ -1329,39 +1329,39 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover"  var="slctdTb" value="#{pgpmAcController.pgspmDifCp}" scrollable="true" scrollHeight="260"
-						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
+						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgLibFin}" />
+         				  <h:outputText value="#{slctdTb.gpgLibFin}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.affGpgObjet}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
 				        </p:column>
 				        <p:column headerText="AC" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonCod}:#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.ac}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				  <h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+         				  <h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
  
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
@@ -1398,39 +1398,39 @@
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgspmDifDmp}" scrollable="true" scrollHeight="260"
-						 selectionMode="single" rowKey="#{slctdTb.affGpgId}"
+						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.affGpgLibFin}" />
+         				  <h:outputText value="#{slctdTb.gpgLibFin}" />
 				        </p:column>
 						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
-         				  <h:outputText value="#{slctdTb.affGpgObjet}" />
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
 				        </p:column>
 				        <p:column headerText="AC" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.TFonction.fonLibelle}" />
+         				  <h:outputText value="#{slctdTb.ac}" />
 				        </p:column>
 				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				        
 				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				  <h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
 				        
 				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.affGpgPartiePmePmi =='O'?'OUI':'NON'}" />
+         				  <h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValAc}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				        
  
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgDateValCpmp}">
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
@@ -1465,7 +1465,7 @@
               <br/>
 	            <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES DOSSIERS DU PGSPM N° #{pgpmAcController.slctdTd.affGpgId}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES DOSSIERS DU PGSPM N° #{pgpmAcController.slctdTd.gpgId}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->

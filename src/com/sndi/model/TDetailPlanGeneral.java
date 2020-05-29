@@ -123,7 +123,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgId = gpgId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GPG_MOP_CODE", nullable = false)
 	public TModePassation getTModePassation() {
 		return this.TModePassation;
@@ -133,7 +133,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.TModePassation = TModePassation;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GPG_PLG_ID", nullable = false)
 	public TPlanGeneral getTPlanGeneral() {
 		return this.TPlanGeneral;
@@ -152,7 +152,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgAgpId = gpgAgpId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GPG_STA_CODE", nullable = false)
 	public TStatut getTStatut() {
 		return this.TStatut;
@@ -162,7 +162,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.TStatut = TStatut;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GPG_TYM_CODE", nullable = false)
 	public TTypeMarche getTTypeMarche() {
 		return this.TTypeMarche;
@@ -358,7 +358,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgRecherche = gpgRecherche;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDetailPlanGeneral")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
 	public Set<TDossierPlanGeneral> getTDossierPlanGenerals() {
 		return this.TDossierPlanGenerals;
 	}
@@ -367,7 +367,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDetailPlanGeneral")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
 	public Set<TDetailPlanPassation> getTDetailPlanPassations() {
 		return this.TDetailPlanPassations;
 	}
@@ -376,7 +376,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.TDetailPlanPassations = TDetailPlanPassations;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDetailPlanGeneral")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
 	public Set<TFinancementPgpm> getTFinancementPgpms() {
 		return this.TFinancementPgpms;
 	}
@@ -385,7 +385,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.TFinancementPgpms = TFinancementPgpms;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "TDetailPlanGeneral")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
 	public Set<THistoPlanGeneral> getTHistoPlanGenerals() {
 		return this.THistoPlanGenerals;
 	}

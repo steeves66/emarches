@@ -35,8 +35,16 @@ public class VPgpmliste implements java.io.Serializable {
 	private String mopLibelleCourt;
 	private String mopLibelleLong;
 	private String gpgRecherche;
+	private Date gpgDateValAc;
+	private Date gpgDateValCpmp;
+	private Date gpgDateValDmp;
+	private String ac;
+	private Long gpgAgpId;
+	private String gpgCommentaire;
+	private String gpgPartiePmePmi;
+	private String tstCode;
 	private long plgId;
-	private short plgGesCode;
+	private long plgGesCode;
 
 	public VPgpmliste() {
 	}
@@ -57,7 +65,8 @@ public class VPgpmliste implements java.io.Serializable {
 	public VPgpmliste(String fipTypeFinance, long gpgId,String gpgLibFin, Date gpgDteModif, String gpgObjet, String gpgStaCode,
 			String gpgTypePlan, String gpgActeurSaisie, Date gpgDateDao, String gpgFonCodPf, String gpgFonCodDmp,
 			String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleCourt, String mopLibelleLong,
-			String gpgRecherche, long plgId, short plgGesCode) {
+			String gpgRecherche,Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp,String ac, Long gpgAgpId,String gpgCommentaire, String gpgPartiePmePmi,
+			String tstCode, long plgId, long plgGesCode) {
 		this.fipTypeFinance = fipTypeFinance;
 		this.gpgId = gpgId;
 		this.gpgLibFin = gpgLibFin;
@@ -75,6 +84,14 @@ public class VPgpmliste implements java.io.Serializable {
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
 		this.gpgRecherche = gpgRecherche;
+		this.gpgDateValAc = gpgDateValAc;
+		this.gpgDateValCpmp = gpgDateValCpmp;
+		this.gpgDateValDmp = gpgDateValDmp;
+		this.ac = ac;
+		this.gpgAgpId = gpgAgpId;
+		this.gpgCommentaire = gpgCommentaire;
+		this.gpgPartiePmePmi = gpgPartiePmePmi;
+		this.tstCode = tstCode;
 		this.plgId = plgId;
 		this.plgGesCode = plgGesCode;
 	}
@@ -231,6 +248,80 @@ public class VPgpmliste implements java.io.Serializable {
 	public void setGpgRecherche(String gpgRecherche) {
 		this.gpgRecherche = gpgRecherche;
 	}
+	
+	@Column(name = "GPG_DATE_VAL_AC", length = 7)
+	public Date getGpgDateValAc() {
+		return this.gpgDateValAc;
+	}
+
+	public void setGpgDateValAc(Date gpgDateValAc) {
+		this.gpgDateValAc = gpgDateValAc;
+	}
+
+	@Column(name = "GPG_DATE_VAL_CPMP", length = 7)
+	public Date getGpgDateValCpmp() {
+		return this.gpgDateValCpmp;
+	}
+
+	public void setGpgDateValCpmp(Date gpgDateValCpmp) {
+		this.gpgDateValCpmp = gpgDateValCpmp;
+	}
+
+	@Column(name = "GPG_DATE_VAL_DMP", length = 7)
+	public Date getGpgDateValDmp() {
+		return this.gpgDateValDmp;
+	}
+
+	public void setGpgDateValDmp(Date gpgDateValDmp) {
+		this.gpgDateValDmp = gpgDateValDmp;
+	}
+	
+	@Column(name = "AC", length = 515)
+	public String getAc() {
+		return this.ac;
+	}
+
+	public void setAc(String ac) {
+		this.ac = ac;
+	}
+
+	@Column(name = "GPG_AGP_ID", precision = 10, scale = 0)
+	public Long getGpgAgpId() {
+		return this.gpgAgpId;
+	}
+
+	public void setGpgAgpId(Long gpgAgpId) {
+		this.gpgAgpId = gpgAgpId;
+	}
+	
+	@Column(name = "GPG_COMMENTAIRE", length = 1000)
+	public String getGpgCommentaire() {
+		return this.gpgCommentaire;
+	}
+
+	public void setGpgCommentaire(String gpgCommentaire) {
+		this.gpgCommentaire = gpgCommentaire;
+	}
+
+	@Column(name = "GPG_PARTIE_PME_PMI", length = 1)
+	public String getGpgPartiePmePmi() {
+		return this.gpgPartiePmePmi;
+	}
+
+	public void setGpgPartiePmePmi(String gpgPartiePmePmi) {
+		this.gpgPartiePmePmi = gpgPartiePmePmi;
+	}
+
+	@Column(name = "TST_CODE", nullable = false, length = 3)
+	public String getTstCode() {
+		return this.tstCode;
+	}
+
+	public void setTstCode(String tstCode) {
+		this.tstCode = tstCode;
+	}
+
+
 
 	@Column(name = "PLG_ID", nullable = false, precision = 10, scale = 0)
 	public long getPlgId() {
@@ -241,12 +332,12 @@ public class VPgpmliste implements java.io.Serializable {
 		this.plgId = plgId;
 	}
 
-	@Column(name = "PLG_GES_CODE", nullable = false, precision = 4, scale = 0)
-	public short getPlgGesCode() {
+	@Column(name = "PLG_GES_CODE")
+	public long getPlgGesCode() {
 		return this.plgGesCode;
 	}
 
-	public void setPlgGesCode(short plgGesCode) {
+	public void setPlgGesCode(long plgGesCode) {
 		this.plgGesCode = plgGesCode;
 	}
 
