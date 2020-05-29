@@ -1004,18 +1004,18 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						  selectionMode="single" rowKey="#{slctdTb.affDppId}"
+						  selectionMode="single" rowKey="#{slctdTb.dppId}"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
                            <h:commandLink id="ppm1" title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectPpm()}" >				        
-         				  <h:outputText value="#{slctdTb.affDppId}" />
+         				  <h:outputText value="#{slctdTb.dppId}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ppm}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Imputation" styleClass="col-sm-11" >
                            <h:commandLink id="ppm2" title="Objet Opération" style="font-size:18px;"  action="#{ppmController.onSelectPpm()}" >				        
-         				  <h:outputText value="#{slctdTb.affDppObjet}" />
+         				  <h:outputText value="#{slctdTb.dppObjet}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ppm}" />
                                 </h:commandLink>
 				        </p:column>		

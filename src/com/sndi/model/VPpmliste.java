@@ -31,23 +31,33 @@ public class VPpmliste implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private String dppActeurSaisie;
+	private String dppTypePlan;
 	private long plpId;
 	private short plpGesCode;
+	private String dppStatutRetour;
+	private String dppStaCode;
+	private String dppStrCode;
+	private Date dppDateValAc;
+	private Date dppDateValCpmp;
+	private Date dppDateValDmp;
+	private String dppMopCode;
 
 	public VPpmliste() {
 	}
 
-	public VPpmliste(long dppId, String tymLibelleCourt, long plpId, short plpGesCode) {
+	public VPpmliste(long dppId, String tymLibelleCourt,String dppTypePlan, long plpId, short plpGesCode) {
 		this.dppId = dppId;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.plpId = plpId;
 		this.plpGesCode = plpGesCode;
+		this.dppTypePlan = dppTypePlan;
 	}
 
-	public VPpmliste(long dppId, Date dppDteModif, String dppObjet, String dppSourceFin, String dppLbgCode,
+	public VPpmliste(long dppId, Date dppDteModif, String dppObjet, String dppSourceFin, String dppLbgCode,String dppTypePlan,
 			String tymLibelleCourt, String mopLibelleLong, String dppStructureConduc, String dppStructureBenefi,
-			String dppRecherche, String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie, long plpId,
-			short plpGesCode) {
+			String dppRecherche, String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie, long plpId,String dppStatutRetour,
+			short plpGesCode,String dppStaCode,String dppStrCode, String dppMopCode, Date dppDateValAc, Date dppDateValCpmp,
+			Date dppDateValDmp) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -63,6 +73,14 @@ public class VPpmliste implements java.io.Serializable {
 		this.dppActeurSaisie = dppActeurSaisie;
 		this.plpId = plpId;
 		this.plpGesCode = plpGesCode;
+		this.dppTypePlan = dppTypePlan;
+		this.dppStatutRetour = dppStatutRetour;
+		this.dppStaCode = dppStaCode;
+		this.dppStrCode = dppStrCode;
+		this.dppMopCode = dppMopCode;
+		this.dppDateValAc = dppDateValAc;
+		this.dppDateValCpmp = dppDateValCpmp;
+		this.dppDateValDmp = dppDateValDmp;
 	}
 
 	
@@ -200,6 +218,77 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setPlpGesCode(short plpGesCode) {
 		this.plpGesCode = plpGesCode;
-	}	
+	}
+
+	@Column(name = "DPP_TYPE_PLAN", length = 20)
+	public String getDppTypePlan() {
+		return dppTypePlan;
+	}
+
+	public void setDppTypePlan(String dppTypePlan) {
+		this.dppTypePlan = dppTypePlan;
+	}
+	@Column(name = "DPP_STATUT_RETOUR", length = 4)
+	public String getDppStatutRetour() {
+		return this.dppStatutRetour;
+	}
+
+	public void setDppStatutRetour(String dppStatutRetour) {
+		this.dppStatutRetour = dppStatutRetour;
+	}
+
+	@Column(name = "DPP_STA_CODE")
+	public String getDppStaCode() {
+		return dppStaCode;
+	}
+
+	public void setDppStaCode(String dppStaCode) {
+		this.dppStaCode = dppStaCode;
+	}
+
+	@Column(name = "DPP_STR_CODE", length = 1000)
+	public String getDppStrCode() {
+		return dppStrCode;
+	}
+
+	public void setDppStrCode(String dppStrCode) {
+		this.dppStrCode = dppStrCode;
+	}
+
+	@Column(name = "DPP_MOP_CODE", length = 1000)
+	public String getDppMopCode() {
+		return dppMopCode;
+	}
+
+	public void setDppMopCode(String dppMopCode) {
+		this.dppMopCode = dppMopCode;
+	}
+	
+	@Column(name = "DPP_DATE_VAL_AC", length = 7)
+	public Date getDppDateValAc() {
+		return this.dppDateValAc;
+	}
+
+	public void setDppDateValAc(Date dppDateValAc) {
+		this.dppDateValAc = dppDateValAc;
+	}
+
+	@Column(name = "DPP_DATE_VAL_CPMP", length = 7)
+	public Date getDppDateValCpmp() {
+		return this.dppDateValCpmp;
+	}
+
+	public void setDppDateValCpmp(Date dppDateValCpmp) {
+		this.dppDateValCpmp = dppDateValCpmp;
+	}
+
+	@Column(name = "DPP_DATE_VAL_DMP", length = 7)
+	public Date getDppDateValDmp() {
+		return this.dppDateValDmp;
+	}
+
+	public void setDppDateValDmp(Date dppDateValDmp) {
+		this.dppDateValDmp = dppDateValDmp;
+	}
 
 }

@@ -576,7 +576,8 @@ public class CommissionController {
 		public void chargeListe(String statut) {
 			 listeAppelOffre.clear();
 			 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
-			 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut));
+			 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut),
+			 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeAppelOffre size: "+listeAppelOffre.size());
 		}
 		
