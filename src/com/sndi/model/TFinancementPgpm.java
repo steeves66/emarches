@@ -72,7 +72,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.fipId = fipId;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FIP_GPG_ID", nullable = false)
 	public TDetailPlanGeneral getTDetailPlanGeneral() {
 		return this.TDetailPlanGeneral;
@@ -82,7 +82,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FIP_BAI_CODE")
 	public TBailleur getTBailleur() {
 		return this.TBailleur;
@@ -92,7 +92,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.TBailleur = TBailleur;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FIP_SOU_CODE", nullable = false)
 	public TSourceFinancement getTSourceFinancement() {
 		return this.TSourceFinancement;
@@ -102,7 +102,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 		this.TSourceFinancement = TSourceFinancement;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FIP_DEV_CODE", nullable = false)
 	public TDevise getTDevise() {
 		return this.TDevise;

@@ -639,21 +639,21 @@
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
                         <p:column headerText="Financement" styleClass="col-sm-2" >
-                         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+                         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgLibFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgLibFin}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
-				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgObjet}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgObjet}" />
          				</h:panelGroup>
          				
@@ -662,46 +662,46 @@
 				          
 				        
                          <p:column headerText="Type Marché" styleClass="col-sm-3" >
-                         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+                         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				       
          				<p:column headerText="Mode de passation" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.mopCode}" style="color:red; font-weight:bold"/>
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.mopCode}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				        <p:column headerText="Part réservée aux PME" styleClass="col-sm-3" >
-				        <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+				        <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" style="color:red; font-weight:bold"/>  
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}"/>  
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				         <p:column headerText="Lancement" styleClass="col-sm-2" >
-				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}"  style="color:red; font-weight:bold" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
-         				 <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				 <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
@@ -711,7 +711,7 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
-                           <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+                           <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
 	                                 <p:commandLink  oncomplete="PF('motif').show()" action="#{pgpmAcController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
 	                                <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
@@ -792,78 +792,78 @@
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
                         <p:column headerText="Financement" styleClass="col-sm-2" >
-                         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+                         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgLibFin}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgLibFin}"/>
          				</h:panelGroup>
 				        </p:column>
 				        
 				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
-				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgObjet}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgObjet}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				         <p:column headerText="Autorité Contractante" styleClass="col-sm-4" >
-				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.ac}" style="color:red; font-weight:bold "/>
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.ac}" />
          				</h:panelGroup>
          				
 				        </p:column> 
 				        
                          <p:column headerText="Type Marché" styleClass="col-sm-3" >
-                         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+                         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				       
          				<p:column headerText="Mode de passation" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.mopCode}" style="color:red; font-weight:bold"/>
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour !=  '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour !=  '1'}">
          				<h:outputText value="#{slctdTb.mopCode}" />
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				        <p:column headerText="Part réservée aux PME" styleClass="col-sm-3" >
-				        <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+				        <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" style="color:red; font-weight:bold"/>  
          				</h:panelGroup>
          				
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}"/>  
          				</h:panelGroup>
          				
 				        </p:column>
 				        
 				        <p:column headerText="Lancement" styleClass="col-sm-2" >
-				         <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}"  style="color:red; font-weight:bold" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
-         				 <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+         				 <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.affGpgDateDao}" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
@@ -872,12 +872,12 @@
 				        
 				        
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgDateValAc}" style="color:red; font-weight:bold ">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
-				        <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+				        <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
@@ -894,7 +894,7 @@
 				       
                       <p:column headerText="Actions" styleClass="col-sm-3">
                       
-	         		 <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
+	         		 <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
 	                                 <p:commandLink  oncomplete="PF('motif').show()" action="#{pgpmAcController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
 	                                <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
@@ -910,7 +910,7 @@
                              </p:commandLink>
                          
                              
-                              <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour != '1'}">
+                              <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
                                 <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px, margin-right:3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
@@ -918,8 +918,8 @@
                               </h:panelGroup>
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-                               <h:panelGroup rendered="#{slctdTb.affGpgStatutRetour == '1'}">
-	                                 <p:commandLink action="#{pgpmAcController.reDiffererPgspm()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+                               <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+	                                 <p:commandLink action="#{pgpmAcController.reDiffererPgspm()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update=":content" >
 	                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
 	                             <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.gpgId} ?" icon="ui-icon-alert" />

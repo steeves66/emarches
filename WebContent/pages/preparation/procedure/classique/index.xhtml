@@ -963,7 +963,7 @@
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                                <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
-	                                 <p:commandLink action="#{pgpmAcController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+	                                 <p:commandLink action="#{pgpmAcController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update=":content" >
 	                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
 	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
 	                             <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.gpgId} ?" icon="ui-icon-alert" />

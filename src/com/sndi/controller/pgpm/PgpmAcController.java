@@ -299,8 +299,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 //Afficher les financements du projet ou agpm selectionné
 		 public void chargeFinancementUpdate() {
-			 listeFinancement.clear();
-			 listeFinancement = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+			 listeFinancementPgpm.clear();
+			 listeFinancementPgpm = ((List<VFinancementPgpm>)iservice.getObjectsByColumn("VFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
 						 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+slctdTd.getGpgId())));		 		 
 		 }
 		 
@@ -2882,9 +2882,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     	 
     	 //suppression de financement update
 		 public void removeFinancementUpdate() {
-			 System.out.print("+-------------+ "+getSelectFinance().getFipId());
+			 System.out.print("+-------------+ "+getSelectFinancePg().getFipId());
 			 try {
-				 iservice.deleteObject(getSelectFinance());
+				 listeFinancement = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+						 new WhereClause("FIP_ID",Comparateur.EQ,""+selectFinancePg.getFipId())));
+				       if (!listeFinancement.isEmpty()) {
+		    				newFinancement=listeFinancement.get(0); 
+		    			}
+				 
+				 iservice.deleteObject(getNewFinancement());
 					chargeFinancementUpdate();
 					userController.setTexteMsg("Suppression effectuée avec succès !");
 					userController.setRenderMsg(true);
