@@ -18,7 +18,9 @@ import com.sndi.dao.WhereClause;
 import com.sndi.model.TAffichagePpm;
 import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TFinancementPpm;
+import com.sndi.model.VFinancementPpm;
 import com.sndi.model.VPpmDetails;
+import com.sndi.model.VPpmliste;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -55,9 +57,9 @@ public class EtatsPpmController {
 	
 	
 	private List<VPpmDetails> objetListe = new ArrayList<VPpmDetails>(); 
-	private TAffichagePpm slctdTd = new TAffichagePpm();
+	private VPpmliste slctdTd = new VPpmliste();
 	private VPpmDetails detail = new VPpmDetails(); 
-	private List<TFinancementPpm> financementListe = new ArrayList<TFinancementPpm>();
+	private List<VFinancementPpm> financementListe = new ArrayList<VFinancementPpm>();
 	private List<TDossierAgpm> dossListe = new ArrayList<TDossierAgpm>();
 	private TDossierAgpm selectedDossier = new TDossierAgpm();
 
@@ -72,7 +74,7 @@ public class EtatsPpmController {
 	//Afficher les détails du ppm
 		 public void chargeDetailPpm(){
 				objetListe =(List<VPpmDetails>) iservice.getObjectsByColumn("VPpmDetails", new ArrayList<String>(Arrays.asList("DPP_ID")),
-						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
 				if (!objetListe.isEmpty()) {
 					detail=objetListe.get(0);
 				}
@@ -82,7 +84,7 @@ public class EtatsPpmController {
 		 public void chargeDetailPspm(){
 				objetListe =(List<VPpmDetails>) iservice.getObjectsByColumn("VPpmDetails", new ArrayList<String>(Arrays.asList("DPP_ID")),
 						new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
 				if (!objetListe.isEmpty()) {
 					detail=objetListe.get(0);
 				}
@@ -92,8 +94,8 @@ public class EtatsPpmController {
 		 
 		//Afficher les détails du financement
 		 public void chargeDetailFinancement(){
-			 financementListe =(List<TFinancementPpm>) iservice.getObjectsByColumn("TFinancementPpm", new ArrayList<String>(Arrays.asList("FPP_ID")),
-						new WhereClause("FPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
+			 financementListe =(List<VFinancementPpm>) iservice.getObjectsByColumn("VFinancementPpm", new ArrayList<String>(Arrays.asList("FPP_ID")),
+						new WhereClause("FPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
 				
 			}
 		 
@@ -149,20 +151,20 @@ public class EtatsPpmController {
      }*/ 
      
      public void imprimerPpmDet() {
-    	 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_ppm", "Fiche_operation_ppm");
+    	 projetReport.longparam1(slctdTd.getDppId(), "Fiche_operation_ppm", "Fiche_operation_ppm");
      }
      
      
      public void imprimerPspmDet() {
     	 
-    	 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
-    		 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_pso", "Fiche_operation_pso");
+    	 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")) {
+    		 projetReport.longparam1(slctdTd.getDppId(), "Fiche_operation_pso", "Fiche_operation_pso");
     	 }else 
-    		 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSL")) {
-    		 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psl", "Fiche_operation_psl");
+    		 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSL")) {
+    		 projetReport.longparam1(slctdTd.getDppId(), "Fiche_operation_psl", "Fiche_operation_psl");
     	 }else 
-    		 if(slctdTd.getTModePassation().getMopCode().equalsIgnoreCase("PSC")) {
-    			 projetReport.longparam1(slctdTd.getAffDppId(), "Fiche_operation_psc", "Fiche_operation_psc");
+    		 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSC")) {
+    			 projetReport.longparam1(slctdTd.getDppId(), "Fiche_operation_psc", "Fiche_operation_psc");
     		 }
       }
      
@@ -246,24 +248,30 @@ public class EtatsPpmController {
 	public void setObjetListe(List<VPpmDetails> objetListe) {
 		this.objetListe = objetListe;
 	}
-	public TAffichagePpm getSlctdTd() {
+
+	public VPpmliste getSlctdTd() {
 		return slctdTd;
 	}
-	public void setSlctdTd(TAffichagePpm slctdTd) {
+
+	public void setSlctdTd(VPpmliste slctdTd) {
 		this.slctdTd = slctdTd;
 	}
+
 	public VPpmDetails getDetail() {
 		return detail;
 	}
 	public void setDetail(VPpmDetails detail) {
 		this.detail = detail;
 	}
-	public List<TFinancementPpm> getFinancementListe() {
+
+	public List<VFinancementPpm> getFinancementListe() {
 		return financementListe;
 	}
-	public void setFinancementListe(List<TFinancementPpm> financementListe) {
+
+	public void setFinancementListe(List<VFinancementPpm> financementListe) {
 		this.financementListe = financementListe;
 	}
+
 	
 
 }

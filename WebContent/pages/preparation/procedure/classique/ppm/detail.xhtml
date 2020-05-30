@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-       #{controleController.type} N° #{etatsPpmController.slctdTd.affDppId}
+       #{controleController.type} N° #{etatsPpmController.slctdTd.dppId}
        <!--  PPM N° #{etatsPpmController.detail.dppId} -->
         <small>
          #{controleController.libelle1} 
@@ -59,14 +59,14 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Gestion</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.TPlanPassation.TGestion.gesCode}"  style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.plpGesCode}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Structure</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.TStructure.strLibelleLong}"   style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.strLibelleLong}"   style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
@@ -75,48 +75,42 @@
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Objet de l'opération</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.affDppObjet}"    style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppObjet}"    style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Type de Marché</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.TTypeMarche.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.tymLibelleCourt}"   style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Mode de Passation</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.TModePassation.mopCode} : #{etatsPpmController.slctdTd.TModePassation.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppMopCode} : #{etatsPpmController.slctdTd.mopLibelleLong}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Part Reservée aux PME</label></div>
                   <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.affDppPartiePmePmi}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppPartiePmePmi}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Date de Lancement</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.affDppDateSaisie}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateSaisie}"   style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
 	             <div class="row">
                   <div class="col-sm-4"><label class="pull-right">Date de Saisie</label></div>
                   <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.affDppDateSaisie}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
+                    <label><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateSaisie}"  style="width: 100%" > <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
 	             </div>
 	             
-	             <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Commentaire </label></div>
-                  <div class="col-sm-8">
-                    <label><h:outputText styleClass="text-muted"    style="width: 100%" readonly="true"><f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
-                  </div>
-	             </div>
 	             
 	            </div>
 	           </div>
@@ -136,15 +130,15 @@
 				        </p:column>
          				
          				<p:column headerText="Bailleur" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+				            <h:outputText value="#{slctdTb.baiLibelle}"/>
 				        </p:column>
 				        
 				        <p:column headerText="Type Financement" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
+				            <h:outputText value="#{slctdTb.souLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Devise" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TDevise.devLibelle}" />
+				            <h:outputText value="#{slctdTb.devLibelle}" />
 				        </p:column>
 				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.fppMontantCfa}" >
