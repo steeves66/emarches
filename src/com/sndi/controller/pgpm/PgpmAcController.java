@@ -54,6 +54,7 @@ import com.sndi.model.VAgpm;
 import com.sndi.model.VAgpmFonction;
 import com.sndi.model.VAgpmMinistere;
 import com.sndi.model.VAgpmliste;
+import com.sndi.model.VFinancementPgpm;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
@@ -178,6 +179,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 private List<TGestion> listeGestion = new ArrayList<TGestion>();
 		 private List<TFinancementPgpm> listeFinancement = new ArrayList<TFinancementPgpm>();
+		 private List<VFinancementPgpm> listeFinancementPgpm = new ArrayList<VFinancementPgpm>();
 		 private List<TFinancementPgpm> financementListe = new ArrayList<TFinancementPgpm>();
 		 //private List<TAffichagePgpm>listSelectionTransmission =new ArrayList<TAffichagePgpm>();
 		 private List<VPgpmliste>listSelectionTransmission =new ArrayList<VPgpmliste>();
@@ -222,6 +224,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private VFonctionMinistere fonction =new VFonctionMinistere();
 		 private TFinancementPgpm newFinancement = new TFinancementPgpm();
 		 private TFinancementPgpm selectFinance = new TFinancementPgpm();
+		 
+		 private VFinancementPgpm selectFinancePg = new VFinancementPgpm();
 		 //private TAgpm agpm = new TAgpm();
 		 private VAgpmFonction agpm = new VAgpmFonction();
 		 private THistoPlanGeneral histoPgpm = new THistoPlanGeneral();
@@ -1275,6 +1279,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+detailPlan.getGpgId())));		 		 
 		 }
 		 
+		//Afficher les financements du projet ou agpm selectionné
+		 public void chargeFinancementPgpm() {
+			 listeFinancementPgpm.clear();
+			 listeFinancementPgpm = ((List<VFinancementPgpm>)iservice.getObjectsByColumn("VFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+						 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+detailPlan.getGpgId())));		 		 
+		 }
+		 
 		 //Afficher les financements du projet ou agpm selectionné
 		 public void chargeFinancementDetail() {
 			 financementListe.clear();
@@ -2198,16 +2209,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 			     iservice.addObject(histoPlan); 
 			     
-			     
-			 
-					     chargeDataAvaliderPgpm();
-					     chargePgpmDifCp();
-					     chargePgpmDifDmp();
-					     tableauBordController.chargeDataPgpm(); 	  
-					      userController.setTexteMsg("Désolé, votre PGPM a été rejeté!");
-						  userController.setRenderMsg(true);
-						  userController.setSevrityMsg("success");
-					}	     
+					}	
+				     chargeDataAvaliderPgpm();
+				     chargePgpmDifCp();
+				     chargePgpmDifDmp();
+				     tableauBordController.chargeDataPgpm(); 	  
+				      userController.setTexteMsg("Désolé, votre PGPM a été rejeté!");
+					  userController.setRenderMsg(true);
+					  userController.setSevrityMsg("success");
 		 }
 		 
 		 
@@ -2775,7 +2784,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    //Initialisation du financement(
     			        newFinancement = new TFinancementPgpm();
        				    //methode qui charge les financements du projet crée
-    				    chargeFinancement();
+    				    //chargeFinancement();
+    			        chargeFinancementPgpm();
     				    //methode qui charge la liste des pgpm
     				    chargeData();
     				    //Affichage du bouton édition en fonction de l'action demandée
@@ -2889,10 +2899,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 //sppression de financement
 		 public void removeFinancement() {
-			 System.out.print("+-------------+ "+getSelectFinance().getFipId());
+			 System.out.print("+-------------+ "+getSelectFinancePg().getFipId());
 			 try {
-				 iservice.deleteObject(getSelectFinance());
-					chargeFinancement();
+				 
+				 listeFinancement = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+						 new WhereClause("FIP_ID",Comparateur.EQ,""+selectFinancePg.getFipId())));
+				       if (!listeFinancement.isEmpty()) {
+		    				newFinancement=listeFinancement.get(0); 
+		    			}
+				 
+				    iservice.deleteObject(getNewFinancement());
+					chargeFinancementPgpm();
 					userController.setTexteMsg("Suppression effectuée avec succès !");
 					userController.setRenderMsg(true);
 					userController.setSevrityMsg("success");
@@ -4249,6 +4266,24 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		this.recupPgpm = recupPgpm;
 	}
 
+	public List<VFinancementPgpm> getListeFinancementPgpm() {
+		return listeFinancementPgpm;
+	}
+
+	public void setListeFinancementPgpm(List<VFinancementPgpm> listeFinancementPgpm) {
+		this.listeFinancementPgpm = listeFinancementPgpm;
+	}
+
+	public VFinancementPgpm getSelectFinancePg() {
+		return selectFinancePg;
+	}
+
+	public void setSelectFinancePg(VFinancementPgpm selectFinancePg) {
+		this.selectFinancePg = selectFinancePg;
+	}
+
+
+	
 	
 
 }

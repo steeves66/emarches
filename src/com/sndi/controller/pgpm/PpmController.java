@@ -2874,13 +2874,13 @@ public class PpmController {
 						 pass =PL.get(0); 
 					     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
 					     iservice.updateObject(pass);
-					     
+				/*	     
 				List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
 			   						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 			   				TAffichagePpm aff = new TAffichagePpm();
 								if(!AF.isEmpty()) aff =AF.get(0);
 								aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
-								iservice.updateObject(aff);
+								iservice.updateObject(aff);*/
 			
 				//methode qui charge les financements du projet crée
 				chargeFinancement();
