@@ -414,8 +414,8 @@
         
        
         <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
+         <div class="col-lg-3 col-xs-6">
+          small box
           <div class="small-box bg-red">
             <div class="inner">
               <h3>#{tableauBordController.ppmCpDifDmp}</h3>
@@ -427,7 +427,7 @@
             </div>
             <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
           </div>
-        </div>
+        </div> 
         <!-- ./col -->
       </div>
                     </div>
@@ -776,14 +776,6 @@
 			</p:commandLink>
           </div>
         </div>
-        <!-- ./col -->
-        
-        
-        
-        
-        <!-- ./col -->
-       
-        <!-- ./col -->
       </div>
                     </div>
                   </div>
@@ -1011,6 +1003,26 @@
               <h3>#{tableauBordController.daoAcAttRetrait}</h3>
 
               <p>#{controleController.type} vendu(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDaoVendDlg').show()" action="#{daoController.chargeDaoVendu()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcRetire}</h3>
+
+              <p>#{controleController.type} retiré(s)</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>

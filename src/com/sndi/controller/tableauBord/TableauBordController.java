@@ -828,37 +828,86 @@ public class TableauBordController {
 			 //Fin PSPM
 		}
 		
-		public void chargeDataDao() {
+		/*public void chargeDataDao() {
 			 //Début DAO 
 			 daoTotal = ""+getDaoDossierTotal();
-			 daoAcSaisie = ""+getAcDaoSaisieDossier("D1S","D1R");
-			 daoAcPs=""+getAcDaoSaisiePs("SBO","SRO");
-			 daoPriseTrait=""+getAcDaoSaisiePs("SB1","DOP");
-			 daoChargeAttente = ""+getAcDaoAttenteCharge("D3A");
-			 daoChargeVal = ""+getAcDaoValCharge("D4V");
-			 daoDaoPub = ""+getAcDaoValidCsvPubDossier("DPU");
+			 //daoAcSaisie = ""+getAcDaoSaisieDossier("D1S","D1R");
+			 //daoAcPs=""+getAcDaoSaisiePs("SBO","SRO");
+			 //daoPriseTrait=""+getAcDaoSaisiePs("SB1","DOP");
+			 //daoChargeAttente = ""+getAcDaoAttenteCharge("D3A");
+			 //daoChargeVal = ""+getAcDaoValCharge("D4V");
+			 //daoDaoPub = ""+getAcDaoValidCsvPubDossier("DPU");
 			 daoAcAttenteValide = ""+getAcDaoAttenteValide("D1S","S2D"); 
-			 daoCsvAttAff = ""+getDaoAttAffCsv("D2T","D5R","DOP");
-			 daoCsvAttVal = ""+getAcDaoValChargeCsv("D4V");
-			 daoaffecte = ""+getAcDaoAffecteDossier("D3A");
+			 //daoCsvAttAff = ""+getDaoAttAffCsv("D2T","D5R","DOP");
+			 //daoCsvAttVal = ""+getAcDaoValChargeCsv("D4V");
+			 //daoaffecte = ""+getAcDaoAffecteDossier("D3A");
 			 daoCsvValide = ""+getAcDaoValidCsvDossier("D5V","DOP");
-			 daoCsvValidation = ""+getAcDaoValidationCsvDossier("D5V","DOP","SBO");
-			 daoCsvDiff = ""+getAcDaoDiffCsv("D5R");
+			 //daoCsvValidation = ""+getAcDaoValidationCsvDossier("D5V","DOP","SBO");
+			 //daoCsvDiff = ""+getAcDaoDiffCsv("D5R");
 			 daoAcDiffCpmp = ""+getDaoDiffCpmpACDossier("D1R");
+			 //daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
+			 //daoAcDiffDmp = ""+getDaoDiffDmpACDossier("S3D");
 			 daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
-			 daoAcDiffDmp = ""+getDaoDiffDmpACDossier("S3D");
-			 daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
-			 daoCpSaisie = ""+getDaoSaisieDossier("D1T");
+			 //daoCpSaisie = ""+getDaoSaisieDossier("D1T");
 			 daoCpTransmis = ""+getDaoTransmisDossier("D1T");
-			 daoCpDifCpmp = ""+getDaoDiffDossier("D1R","D2R");
-			 daoCpValide = ""+getDaoValideCmp("D2T");
+			 //daoCpDifCpmp = ""+getDaoDiffDossier("D1R","D2R");
+			 //daoCpValide = ""+getDaoValideCmp("D2T");
 			 daoCpDifDmp =""+getDaoDiffDmp("S3D");
 			 daoCpAttenteValide = ""+getDaoAttenteValide("S1T","S3D");
-			 daoAcAttVente = ""+getDaoAttenteRetrait("DPU","D6V");
-			 daoAcAttRetrait = ""+getDaoAttenteVente("DVE");
+			 //daoAcAttVente = ""+getDaoAttenteRetrait("DPU","D6V");
+			 //daoAcAttRetrait = ""+getDaoAttenteVente("DVE");
 			 daoAcRetire = ""+getDaoAcRetire("RET");
-			 daoChargeCor = ""+getAcDaoCorCharge("DC2");
+			 //daoChargeCor = ""+getAcDaoCorCharge("DC2");
 			 //Fin DAO	en Procédure Normale
+		}*/
+		
+		
+		
+		//Tableau de Bord pour le module DAO
+		public void chargeDataDao() {
+			//Début Tableau de Bord pour le module DAO
+			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 //Saisie des DAO
+				 daoAcSaisie = ""+getAcDaoSaisieDossier("D1S","D1R");
+				 daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
+				 daoCpDifCpmp = ""+getDaoDiffDossier("D1R","D2R");
+				 //Publication des DAO
+				 daoCsvValide = ""+getAcDaoValidCsvDossier("D5V","DOP");
+				 daoDaoPub = ""+getAcDaoValidCsvPubDossier("DPU");
+				 //Vente ou Retrait du DAO
+				 daoAcAttVente = ""+getDaoAttenteRetrait("DPU","D6V");
+				 daoAcAttRetrait = ""+getDaoAttenteVente("DVE");
+				 daoAcRetire = ""+getDaoAcRetire("RET");
+				 //Prise en compte des observations des DAO
+				 daoAcPs=""+getAcDaoSaisiePs("SBO","SRO");
+				 daoPriseTrait=""+getAcDaoSaisiePs("SB1","DOP");
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 //Prévalidation des DAC
+					 daoCpSaisie = ""+getDaoSaisieDossier("D1T");
+					 daoCpValide = ""+getDaoValideCmp("D2T");
+					 daoAcDiffDmp = ""+getDaoDiffDmpACDossier("S3D");
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+						 //Affectation des DAC
+						 daoCsvAttAff = ""+getDaoAttAffCsv("D2T","D5R","DOP");
+						 daoaffecte = ""+getAcDaoAffecteDossier("D3A");
+						 daoCsvDiff = ""+getAcDaoDiffCsv("D5R");
+						 //Validation des DAC
+						 daoCsvAttVal = ""+getAcDaoValChargeCsv("D4V");
+						 daoCsvValidation = ""+getAcDaoValidationCsvDossier("D5V","DOP","SBO");
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+							 //Correction du DAC
+							 daoChargeCor = ""+getAcDaoCorCharge("DC2");
+							 daoChargeAttente = ""+getAcDaoAttenteCharge("D3A");
+							 daoChargeVal = ""+getAcDaoValCharge("D4V");
+						 }
+					 }
+			     } 
+			   }
+			//Fin Tableau de Bord pour le module DAO
+			
 		}
 		
 		public void chargeDataDaoPs() {
