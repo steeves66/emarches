@@ -21,7 +21,7 @@ import com.sndi.model.TFinancementPpm;
 import com.sndi.model.VFinancementPpm;
 import com.sndi.model.VPpmDetails;
 import com.sndi.model.VPpmliste;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -38,7 +38,7 @@ public class EtatsPpmController {
 	@Autowired
 	UserController userController;
 	@Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 @Autowired
 	ControleController controleController;
 	@Autowired

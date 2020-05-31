@@ -92,7 +92,7 @@ import com.sndi.model.VVenteLot;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
 import com.sndi.model.VbTempParametreLot;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -117,7 +117,7 @@ public class DacModifController {
 	KeyGen keyGen;
 	
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 
 	 @Autowired
 	ControleController controleController;

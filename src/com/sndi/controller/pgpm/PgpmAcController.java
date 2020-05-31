@@ -64,7 +64,7 @@ import com.sndi.model.VPgpmliste;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VUpdateAgpm;
 import com.sndi.model.VUpdatePgpm;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
@@ -88,7 +88,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	KeyGen keyGen;
 	
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 
 	 @Autowired
 	ControleController controleController;

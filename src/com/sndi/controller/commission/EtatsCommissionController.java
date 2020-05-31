@@ -24,7 +24,7 @@ import com.sndi.model.VDetailCommission;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VLotDao;
 import com.sndi.model.VPiecesOffre;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -42,7 +42,7 @@ public class EtatsCommissionController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 @Autowired
 	ControleController controleController;
 	 @Autowired

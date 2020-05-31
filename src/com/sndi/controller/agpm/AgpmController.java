@@ -54,7 +54,7 @@ import com.sndi.model.VAgpmliste;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VProjetAgpm;
 import com.sndi.model.VUpdateAgpm;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
@@ -76,7 +76,7 @@ public class AgpmController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 @Autowired
 	ControleController controleController;
 	 @Autowired

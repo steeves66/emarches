@@ -21,7 +21,7 @@ import com.sndi.model.TAgpm;
 import com.sndi.model.THistoAgpm;
 import com.sndi.model.TStatut;
 import com.sndi.model.VAgpmStatut;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -41,7 +41,7 @@ public class CpmpController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 @Autowired
 	ControleController controleController;
 	 @Autowired

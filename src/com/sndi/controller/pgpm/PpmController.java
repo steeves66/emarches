@@ -66,7 +66,7 @@ import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
@@ -87,7 +87,7 @@ public class PpmController {
 	KeyGen keyGen;
 	
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 
 	 @Autowired
 	ControleController controleController;

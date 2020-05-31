@@ -43,7 +43,7 @@ import com.sndi.model.VDetailDemande;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VMotifRetourDemande;
 import com.sndi.model.VPpmDao;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -63,7 +63,7 @@ public class DemandeController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 @Autowired
 	FileUploadController fileUploadController;
 	 

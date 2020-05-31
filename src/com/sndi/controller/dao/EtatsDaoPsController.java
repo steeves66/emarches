@@ -26,7 +26,7 @@ import com.sndi.model.VAdresseAvis;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VLotDao;
 import com.sndi.model.VPiecesDao;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -47,7 +47,7 @@ public class EtatsDaoPsController {
 	ControleController controleController;
 	 
 	@Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	@Autowired
 	 FileUploadController fileUploadController;
 	 

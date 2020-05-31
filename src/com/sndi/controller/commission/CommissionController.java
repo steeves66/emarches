@@ -54,7 +54,7 @@ import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamDetOffres;
 import com.sndi.model.VbTempParametreCom;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -74,7 +74,7 @@ public class CommissionController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	 @Autowired
 	ControleController controleController;
 	 @Autowired

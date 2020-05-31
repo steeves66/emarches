@@ -22,7 +22,7 @@ import com.sndi.model.TFonction;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeFonction;
-import com.sndi.report.ProjetReport;
+import com.sndi.report.ProjetReportOld;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
@@ -42,7 +42,7 @@ public class FonctionController {
 	UserController userController;
 	
 	@Autowired
-	ProjetReport projetReport;
+	ProjetReportOld projetReport;
 	@Autowired
 	ConstantService constantService;
 	
