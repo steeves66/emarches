@@ -812,6 +812,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 			      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
 				}
+			
+			//Tri sur les types de financement  
+			public void chargeSourceEtat() { 
+		    listeSourceFinance.clear();
+			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
+			      "SOU_CODE", new ArrayList<String>(Arrays.asList("TRE")));
+				}
 			 
 			 public void checkBailleur() {
 				 //sourfin="";
@@ -834,6 +841,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectPartBai= false;
 					 souCode="TRE";
 					 devCode="CFA";
+					 chargeSourceEtat();
 				    }else 
 				         if(sourfin.equalsIgnoreCase("")){
 				    	  selectPartBai = false;
@@ -2811,9 +2819,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                        //SaveFinancement de modification
                        public void saveFinancementUpdate(){
             		    //Création du financement
+                    	   if(sourfin.equalsIgnoreCase("ETAT")) {
+	      				         baiCode ="ETAT";
+          	        	    newFinancement.setTBailleur(new TBailleur(baiCode)); 
+          	             }else
+          	        	  {
+          	            	newFinancement.setTBailleur(new TBailleur(baiCode));  
+          	        	  }
             		    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
     			        newFinancement.setTDevise(new TDevise(devCode));
-    			        newFinancement.setTBailleur(new TBailleur(baiCode));
+    			        //newFinancement.setTBailleur(new TBailleur(baiCode));
     			        newFinancement.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getGpgId()));
     			        newFinancement.setFipTypeFinance(sourfin);
     			        iservice.addObject(newFinancement);
@@ -3099,6 +3114,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeDataAvaliderPgpm();
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
+					newFinancement = new TFinancementPgpm();
 					_logger.info("value: "+value+" action: "+action);
 					break;
 				case "pgpm2":
@@ -3113,6 +3129,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					//controleController.btn_save_pgpm =true ;
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
+					newFinancement = new TFinancementPgpm();
 					vider();
 					_logger.info("value: "+value+" action: "+action);
 				break;
@@ -3149,6 +3166,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeMode();
 					chargeSourceFinance();
 					chargeAgpm();
+					newFinancement = new TFinancementPgpm();
 					break;
 			    }
 		     return userController.renderPage(value);

@@ -27,6 +27,7 @@ public class VPgpmDetails implements java.io.Serializable {
 	private String gpgStaCode;
 	private String gpgTypePlan;
 	private String gpgActeurSaisie;
+	private String gpgLibFin;
 	private String fonLibelle;
 	private String tymCode;
 	private String tymLibelleCourt;
@@ -66,7 +67,7 @@ public class VPgpmDetails implements java.io.Serializable {
 	}
 
 	public VPgpmDetails(BigDecimal VId, String affStatut, long gpgId, String souLibelle, String gpgObjet,
-			String gpgStaCode, String gpgTypePlan, String gpgActeurSaisie, String fonLibelle, String tymCode,
+			String gpgStaCode, String gpgTypePlan, String gpgActeurSaisie, String gpgLibFin, String fonLibelle, String tymCode,
 			String tymLibelleCourt, String mopCode, String mopLibelleCourt, String mopLibelleLong,
 			String gpgPartiePmePmi, Date gpgDateDao, String gpgCommentaire, Integer gpgNumeroOrdre, Date gpgDateSaisie,
 			long plgId, short plgGesCode, String minLibelle, String minLibelleCourt, String strCode,
@@ -79,6 +80,7 @@ public class VPgpmDetails implements java.io.Serializable {
 		this.gpgStaCode = gpgStaCode;
 		this.gpgTypePlan = gpgTypePlan;
 		this.gpgActeurSaisie = gpgActeurSaisie;
+		this.gpgLibFin = gpgLibFin;
 		this.fonLibelle = fonLibelle;
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
@@ -172,6 +174,15 @@ public class VPgpmDetails implements java.io.Serializable {
 
 	public void setGpgActeurSaisie(String gpgActeurSaisie) {
 		this.gpgActeurSaisie = gpgActeurSaisie;
+	}
+	
+	@Column(name = "GPG_LIB_FIN", length = 200)
+	public String getGpgLibFin() {
+		return this.gpgLibFin;
+	}
+
+	public void setGpgLibFin(String gpgLibFin) {
+		this.gpgLibFin = gpgLibFin;
 	}
 
 	@Column(name = "FON_LIBELLE", length = 500)

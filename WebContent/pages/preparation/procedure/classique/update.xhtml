@@ -498,14 +498,20 @@
 				<div class="contentpanel">
 				     <div class="form-group ">
 	                  <label for="xbail" class="col-sm-1 control-label"><b>Source</b></label>
-	                  <div class="col-sm-10">
-	               <p:selectOneMenu value="#{pgpmAcController.sourfin}" id="xsource" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			          <f:selectItem  itemLabel="Choisir la source de Financement.." itemValue="empty" />  
-			         <f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
-                     <f:selectItem itemLabel="ETAT" itemValue="Etat" />	
-                     <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
-                     <p:ajax listener="#{pgpmAcController.checkBailleur()}" update=":finlog:idBail, :finlog:idTres, :finlog:idPartB, :finlog:source" />			   				   
-       		       </p:selectOneMenu>
+	                   <div class="col-sm-10">
+       		       <p:selectOneRadio id="situation" value="#{pgpmAcController.sourfin}">
+		              <p:ajax  listener="#{pgpmAcController.checkBailleur()}" update="finlog:idBail, finlog:idTres, finlog:idPartB, finlog:source"></p:ajax>
+			            <div class="col-md-4">
+						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="ETAT" itemValue="ETAT" />
+			            </div>
+			            </p:selectOneRadio>
+		                <br/>
 	                  </div>
 	                </div>
 				

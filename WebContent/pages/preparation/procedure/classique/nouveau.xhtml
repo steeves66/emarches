@@ -359,32 +359,32 @@
             <div class="box-body">
                  <p:dataTable id="tpgpm" rendered="#{controleController.tpgpm}" styleClass ="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.objetList}" scrollable="true" scrollHeight="150" emptyMessage="Aucun détail enregistré">
                      <p:column headerText="Financement" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgLibFin}"/>
+         				<h:outputText value="#{slctdTb.gpgLibFin}"/>
          				</p:column>
                     <p:column headerText="Réalisations envisagées" styleClass="col-sm-5" >
-         				<h:outputText value="#{slctdTb.affGpgObjet}" />
+         				<h:outputText value="#{slctdTb.gpgObjet}" />
 				     </p:column>
 				     <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				       
          				<p:column headerText="Mode de passation" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				<h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
                  </p:dataTable>
                   <p:dataTable id="tpgspm" rendered="#{controleController.tpgspm}" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.listPgspm}" scrollable="true" scrollHeight="150" emptyMessage="Aucun détail enregistré">
                   <p:column headerText="Financement" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.affGpgLibFin}"/>
+         				<h:outputText value="#{slctdTb.gpgLibFin}"/>
          				</p:column>
                     <p:column headerText="Réalisations envisagées" styleClass="col-sm-6" >
-         				<h:outputText value="#{slctdTb.affGpgObjet}" />
+         				<h:outputText value="#{slctdTb.gpgObjet}" />
 				     </p:column>
 				     <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column>
 				       
          				<p:column headerText="Mode de passation" styleClass="col-sm-1" >
-         				<h:outputText value="#{slctdTb.TModePassation.mopCode}" />
+         				<h:outputText value="#{slctdTb.mopCode}" />
 				        </p:column>
                  </p:dataTable>
             </div>

@@ -23,6 +23,7 @@ import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
 import com.sndi.model.VAgpmDetails;
 import com.sndi.model.VFinancement;
+import com.sndi.model.VFinancementPgpm;
 import com.sndi.model.VPgpm;
 import com.sndi.model.VPgpmDetails;
 import com.sndi.model.VPgpmliste;
@@ -74,7 +75,8 @@ public class EtatsPgpmController {
 	private VPgpmDetails detail = new VPgpmDetails(); 
 	private List<TDossierPlanGeneral> dossListe = new ArrayList<TDossierPlanGeneral>();
 	private TDossierPlanGeneral selectedDossier = new TDossierPlanGeneral();
-	private List<TFinancementPgpm> financementListe = new ArrayList<TFinancementPgpm>();
+	//private List<TFinancementPgpm> financementListe = new ArrayList<TFinancementPgpm>();
+	private List<VFinancementPgpm> financementListe = new ArrayList<VFinancementPgpm>();
 	private String page;
 	static  String workingDir = "";
 	public boolean fermerAC=false;
@@ -98,7 +100,7 @@ public class EtatsPgpmController {
 		   //Afficher les financements du projet ou agpm selectionné
 			 public void chargeFinancement() {
 				 financementListe.clear();
-					 financementListe = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+					 financementListe = ((List<VFinancementPgpm>)iservice.getObjectsByColumn("VFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
 							 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+detail.getGpgId())));		 		 
 			 }
 	
@@ -113,7 +115,7 @@ public class EtatsPgpmController {
 		    //Afficher les financements du projet ou agpm selectionné
 			 public void chargeFinancementDetail() {
 				 financementListe.clear();
-				 financementListe = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+				 financementListe = ((List<VFinancementPgpm>)iservice.getObjectsByColumn("VFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
 							 new WhereClause("FIP_GPG_ID",Comparateur.EQ,""+slctdTd.getGpgId())));		 		 
 			 }
 	
@@ -283,14 +285,14 @@ public class EtatsPgpmController {
 	*/
 
 
-	public List<TFinancementPgpm> getFinancementListe() {
+/*	public List<TFinancementPgpm> getFinancementListe() {
 		return financementListe;
 	}
 
 
 	public void setFinancementListe(List<TFinancementPgpm> financementListe) {
 		this.financementListe = financementListe;
-	}
+	}*/
 	
 	
 
@@ -334,7 +336,15 @@ public class EtatsPgpmController {
 	public void setSlctdTd(VPgpmliste slctdTd) {
 		this.slctdTd = slctdTd;
 	}
-	
-	
+
+
+	public List<VFinancementPgpm> getFinancementListe() {
+		return financementListe;
+	}
+
+
+	public void setFinancementListe(List<VFinancementPgpm> financementListe) {
+		this.financementListe = financementListe;
+	}
 
 }
