@@ -1065,7 +1065,6 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	//Fin de la vente du DAO
 	      
 	      //Début de retrait du DAO
-	     // @Transactional
 			public void finRetrait() {
 				String statRetrait = "";
 				String message = "";
@@ -2483,7 +2482,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      
          
      //Initiation du DAO en procédure normale 
-     @Transactional
+     //@Transactional
      public void saveDao() {
     	 if(daoDetail.getTymCode().equalsIgnoreCase("") || "".equals(daoDetail.getTymCode()) || daoDetail.getMopCode().equalsIgnoreCase("") || "".equalsIgnoreCase(daoDetail.getMopCode()) 
     			 || daoDetail.getDppObjet().equalsIgnoreCase("") || "".equals(daoDetail.getDppObjet()) ) {
@@ -2584,7 +2583,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 			 	    		   iservice.addObject(det);
 	 			 	    	       }
 	 			 			   
-	 			 			   
+	 			 			/*   
 	 			 			 List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,"D1S"));
 	 						TStatut statuts = new TStatut();
 	 						if(!LS.isEmpty()) statuts = LS.get(0);
@@ -2596,7 +2595,12 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 						     dacStatut.setTDacSpecs(dao);
 	 						     dacStatut.setTOperateur(userController.getSlctd().getTOperateur());
 	 						     dacStatut.setTStatut(statuts);
-	 						     iservice.addObject(dacStatut);	 
+	 						     iservice.addObject(dacStatut);	 */
+	 						     
+	 						        //Récupération du Statut
+							       TStatut statuts = constantService.getStatut("D1S");
+								   //Historisation du DAC
+								   historiser("D1S",dao,"Initiation du DAO par une Autorité Contractante");
 	 						     
 	 						     chargeData(); 
 	 						     //chargePPM();

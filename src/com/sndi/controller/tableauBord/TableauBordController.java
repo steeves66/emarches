@@ -863,7 +863,7 @@ public class TableauBordController {
 		
 		
 		
-		//Tableau de Bord pour le module DAO
+		//Tableau de Bord pour le module DAO en Procédure Normale
 		public void chargeDataDao() {
 			//Début Tableau de Bord pour le module DAO
 			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -907,10 +907,9 @@ public class TableauBordController {
 			     } 
 			   }
 			//Fin Tableau de Bord pour le module DAO
-			
 		}
 		
-		public void chargeDataDaoPs() {
+		/*public void chargeDataDaoPs() {
 			 //Début DAO en procédure Simplifiée 
 			 daoTotalPs = ""+getDaoDossierTotalPs();
 			 daoAcSaisiePs = ""+getAcDaoSaisieDossierPs("D1S","D1R");
@@ -941,7 +940,54 @@ public class TableauBordController {
 			 daoAcRetirePs = ""+getDaoAcRetirePs("RET");
 			 daoChargeCorPs = ""+getAcDaoCorChargePs("DC2");
 			 //Fin DAO en procédure simplifiée
-		}
+		}*/
+		
+		
+		//Tableau de Bord pour le module DAO en Procédure Simplifée
+				public void chargeDataDaoPs() {
+					//Début Tableau de Bord pour le module DAO
+					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						 //Saisie des DAO
+						 daoAcSaisiePs = ""+getAcDaoSaisieDossierPs("D1S","D1R");
+						 daoAcTransmisPs = ""+getAcDaoTransmisDossierPs("D1T");
+						 daoCpDifCpmpPs = ""+getDaoDiffDossierPs("D1R","D2R");
+						 //Publication des DAO
+						 daoCsvValidePs = ""+getAcDaoValidCsvDossierPs("D5V","DOP");
+						 daoDaoPubPs = ""+getAcDaoValidCsvPubDossierPs("DPU");
+						 //Vente ou Retrait du DAO
+						 daoAcAttVentePs = ""+getDaoAttenteRetraitPs("DPU","D6V");
+						 daoAcAttRetraitPs = ""+getDaoAttenteVentePs("DVE");
+						 daoAcRetirePs = ""+getDaoAcRetirePs("RET");
+						 //Prise en compte des observations des DAO
+						 daoAcPsPs=""+getAcDaoSaisiePsPs("SBO","SRO");
+						 daoPriseTraitPs=""+getAcDaoSaisiePsPs("SB1","DOP");
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+							 //Prévalidation des DAC
+							 daoCpSaisiePs = ""+getDaoSaisieDossierPs("D1T");
+							 daoCpValidePs = ""+getDaoValideCmpPs("D2T");
+							 daoAcDiffDmpPs = ""+getDaoDiffDmpACDossierPs("S3D");
+						 }else {
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+								 //Affectation des DAC
+								 daoCsvAttAffPs = ""+getDaoAttAffCsvPs("D2T","D5R","DOP");
+								 daoaffectePs = ""+getAcDaoAffecteDossierPs("D3A");
+								 daoCsvDiffPs = ""+getAcDaoDiffCsvPs("D5R");
+								 //Validation des DAC
+								 daoCsvAttValPs = ""+getAcDaoValChargeCsvPs("D4V");
+								 daoCsvValidationPs = ""+getAcDaoValidationCsvDossierPs("D5V","DOP","SBO");
+							 }else {
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+									 //Correction du DAC
+									 daoChargeCorPs = ""+getAcDaoCorChargePs("DC2");
+									 daoChargeAttentePs = ""+getAcDaoAttenteChargePs("D3A");
+									 daoChargeValPs = ""+getAcDaoValChargePs("D4V");
+								 }
+							 }
+					     } 
+					   }
+					//Fin Tableau de Bord pour le module DAO en Procédure Simplifiée
+				}
 	
 	 
 		
@@ -2520,6 +2566,16 @@ public int getAcDaoSaisiePsPs(String src1, String src2){
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+//DAO différé par le Chef de Service DAO (Acteur DMP)
+public int getAcDaoDiffCsvPs(String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
+			//new WhereClause("DAC_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
