@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-28T15:30:29 -->
+<!-- 2020-05-31T19:52:29 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_ppm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266b8536-66d8-494c-802e-76b24cc2afc4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -172,7 +172,9 @@ and af.aff_dpp_id= $P{param_code}]]>
 	<detail>
 		<band height="503" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="8" width="554" height="192" uuid="c190889a-1858-4a9e-a59b-2a8ae0a818ef"/>
+				<reportElement x="0" y="8" width="554" height="208" uuid="c190889a-1858-4a9e-a59b-2a8ae0a818ef">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -180,36 +182,36 @@ and af.aff_dpp_id= $P{param_code}]]>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<staticText>
-					<reportElement x="2" y="119" width="152" height="21" uuid="c5db295e-82e1-4fdd-a3f5-87b882b1dac2"/>
+					<reportElement x="2" y="142" width="152" height="21" uuid="c5db295e-82e1-4fdd-a3f5-87b882b1dac2"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Part reservée aux PME ou PMI : ]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="153" y="119" width="250" height="21" uuid="5e884b53-7459-44b5-93b1-885011329229"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="153" y="142" width="250" height="21" uuid="5e884b53-7459-44b5-93b1-885011329229"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{AFF_DPP_PARTIE_PME_PMI}.equalsIgnoreCase("O")? "OUI " : "NON"]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="1" y="97" width="109" height="21" uuid="063db855-7440-4698-9798-71306e3d1dfe"/>
+					<reportElement x="1" y="120" width="109" height="21" uuid="063db855-7440-4698-9798-71306e3d1dfe"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Type de Marché : ]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="111" y="97" width="290" height="21" uuid="f72750e3-1869-4007-a76e-95bab3acab83"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="111" y="120" width="290" height="21" uuid="f72750e3-1869-4007-a76e-95bab3acab83"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{AFF_DPP_TYM_CODE}+" : "+$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="1" y="75" width="109" height="21" uuid="3fa9974b-9d71-430c-b768-cde6a9912e7a"/>
+					<reportElement x="1" y="98" width="109" height="21" uuid="3fa9974b-9d71-430c-b768-cde6a9912e7a"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Mode de Passation : ]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="110" y="75" width="292" height="21" uuid="d422fb23-a1ad-4e41-9a5f-701ea05cf5d7"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="110" y="98" width="292" height="21" uuid="d422fb23-a1ad-4e41-9a5f-701ea05cf5d7"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -250,32 +252,44 @@ and af.aff_dpp_id= $P{param_code}]]>
 					<text><![CDATA[INFORMATIONS GENERALES]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="141" width="112" height="21" uuid="37344ca0-b2ba-4e08-b7a2-01e4501a0217"/>
+					<reportElement x="2" y="164" width="112" height="21" uuid="37344ca0-b2ba-4e08-b7a2-01e4501a0217"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Imputation : ]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="111" y="140" width="290" height="22" uuid="f3cff751-35e4-41e1-bf2c-b0c5fc790100"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="111" y="163" width="290" height="22" uuid="f3cff751-35e4-41e1-bf2c-b0c5fc790100"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{LBG_IMPUTATION}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="1" y="162" width="112" height="21" uuid="3be3802c-bd70-42f6-8799-981c05f241bb"/>
+					<reportElement x="1" y="185" width="112" height="21" uuid="3be3802c-bd70-42f6-8799-981c05f241bb"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Nature : ]]></text>
 				</staticText>
-				<textField>
-					<reportElement x="113" y="163" width="290" height="21" uuid="34a594f3-e899-4ea7-96fa-caa71322584d"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement x="113" y="186" width="290" height="21" uuid="34a594f3-e899-4ea7-96fa-caa71322584d"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{NAT_LIBELLE}]]></textFieldExpression>
 				</textField>
+				<staticText>
+					<reportElement x="2" y="69" width="108" height="21" uuid="e4a2ccd3-3370-489a-9636-dd8955015b92"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Objet : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="109" y="69" width="445" height="28" uuid="01b5185a-87b4-4c12-919d-9ed4a8a90c2e"/>
+					<textElement verticalAlignment="Top">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{AFF_DPP_OBJET}]]></textFieldExpression>
+				</textField>
 			</frame>
 			<frame>
-				<reportElement x="1" y="205" width="554" height="117" uuid="bff3718b-c01a-4622-963d-a4cfa60979b7"/>
+				<reportElement x="1" y="221" width="554" height="117" uuid="bff3718b-c01a-4622-963d-a4cfa60979b7"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -351,10 +365,10 @@ and af.aff_dpp_id= $P{param_code}]]>
 				</textField>
 			</frame>
 			<line>
-				<reportElement x="2" y="227" width="553" height="1" uuid="e326ea60-5451-4238-9ff9-1326643571a0"/>
+				<reportElement x="2" y="243" width="553" height="1" uuid="e326ea60-5451-4238-9ff9-1326643571a0"/>
 			</line>
 			<frame>
-				<reportElement x="0" y="326" width="555" height="20" uuid="74789acc-4624-46a6-9b4e-6972a57c80ec"/>
+				<reportElement x="0" y="340" width="555" height="20" uuid="74789acc-4624-46a6-9b4e-6972a57c80ec"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -370,7 +384,7 @@ and af.aff_dpp_id= $P{param_code}]]>
 				</staticText>
 			</frame>
 			<componentElement>
-				<reportElement x="0" y="348" width="555" height="57" uuid="17e1b3da-3aca-4e15-acf8-0c77616c489b">
+				<reportElement x="0" y="362" width="555" height="57" uuid="17e1b3da-3aca-4e15-acf8-0c77616c489b">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
