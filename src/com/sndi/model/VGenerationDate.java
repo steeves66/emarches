@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 15 avr. 2020 13:45:52 by Hibernate Tools 4.3.5.Final
+// Generated 31 mai 2020 18:16:08 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -69,6 +69,9 @@ public class VGenerationDate implements java.io.Serializable {
 	private Date dppApprobAno;
 	private Date dppDteModif;
 	private String dppRecherche;
+	private String dppFonCodPf;
+	private String dppFonCodDmp;
+	private Long dppMontant;
 
 	public VGenerationDate() {
 	}
@@ -95,7 +98,7 @@ public class VGenerationDate implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno,
-			Date dppDteModif, String dppRecherche) {
+			Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -147,9 +150,11 @@ public class VGenerationDate implements java.io.Serializable {
 		this.dppApprobAno = dppApprobAno;
 		this.dppDteModif = dppDteModif;
 		this.dppRecherche = dppRecherche;
+		this.dppFonCodPf = dppFonCodPf;
+		this.dppFonCodDmp = dppFonCodDmp;
+		this.dppMontant = dppMontant;
 	}
 
-	
 	@Id
 	@Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)
 	public long getDppId() {
@@ -421,7 +426,7 @@ public class VGenerationDate implements java.io.Serializable {
 		this.dppActeurSaisie = dppActeurSaisie;
 	}
 
-	@Column(name = "DPP_STR_CODE", length = 3)
+	@Column(name = "DPP_STR_CODE", length = 20)
 	public String getDppStrCode() {
 		return this.dppStrCode;
 	}
@@ -609,6 +614,32 @@ public class VGenerationDate implements java.io.Serializable {
 	public void setDppRecherche(String dppRecherche) {
 		this.dppRecherche = dppRecherche;
 	}
-	
+
+	@Column(name = "DPP_FON_COD_PF", length = 20)
+	public String getDppFonCodPf() {
+		return this.dppFonCodPf;
+	}
+
+	public void setDppFonCodPf(String dppFonCodPf) {
+		this.dppFonCodPf = dppFonCodPf;
+	}
+
+	@Column(name = "DPP_FON_COD_DMP", length = 20)
+	public String getDppFonCodDmp() {
+		return this.dppFonCodDmp;
+	}
+
+	public void setDppFonCodDmp(String dppFonCodDmp) {
+		this.dppFonCodDmp = dppFonCodDmp;
+	}
+
+	@Column(name = "DPP_MONTANT", precision = 15, scale = 0)
+	public Long getDppMontant() {
+		return this.dppMontant;
+	}
+
+	public void setDppMontant(Long dppMontant) {
+		this.dppMontant = dppMontant;
+	}
 
 }

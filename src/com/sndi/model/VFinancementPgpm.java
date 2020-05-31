@@ -23,11 +23,11 @@ public class VFinancementPgpm implements java.io.Serializable {
 	private String fipBaiCode;
 	private String fipSouCode;
 	private long fipGpgId;
-	private BigDecimal fipMontantCfa;
+	private long fipMontantCfa;
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
 	private String fipTypeFinance;
-	private BigDecimal fipTresor;
+	private long fipTresor;
 	private String baiLibelle;
 	private String devLibelle;
 	private String devSymbole;
@@ -44,8 +44,8 @@ public class VFinancementPgpm implements java.io.Serializable {
 	}
 
 	public VFinancementPgpm(long fipId, String fipDevCode, String fipBaiCode, String fipSouCode, long fipGpgId,
-			BigDecimal fipMontantCfa, BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance,
-			BigDecimal fipTresor, String baiLibelle, String devLibelle,String devSymbole, String souLibelle) {
+			long fipMontantCfa, BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance,
+			long fipTresor, String baiLibelle, String devLibelle,String devSymbole, String souLibelle) {
 		this.fipId = fipId;
 		this.fipDevCode = fipDevCode;
 		this.fipBaiCode = fipBaiCode;
@@ -109,11 +109,11 @@ public class VFinancementPgpm implements java.io.Serializable {
 	}
 
 	@Column(name = "FIP_MONTANT_CFA", precision = 15)
-	public BigDecimal getFipMontantCfa() {
+	public long getFipMontantCfa() {
 		return this.fipMontantCfa;
 	}
 
-	public void setFipMontantCfa(BigDecimal fipMontantCfa) {
+	public void setFipMontantCfa(long fipMontantCfa) {
 		this.fipMontantCfa = fipMontantCfa;
 	}
 
@@ -145,11 +145,11 @@ public class VFinancementPgpm implements java.io.Serializable {
 	}
 
 	@Column(name = "FIP_TRESOR", precision = 22, scale = 0)
-	public BigDecimal getFipTresor() {
+	public long getFipTresor() {
 		return this.fipTresor;
 	}
 
-	public void setFipTresor(BigDecimal fipTresor) {
+	public void setFipTresor(long fipTresor) {
 		this.fipTresor = fipTresor;
 	}
 
