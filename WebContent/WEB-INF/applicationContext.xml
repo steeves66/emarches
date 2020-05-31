@@ -15,8 +15,6 @@
  
  
    <!-- definition de la datasource -->
-  
-   
    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		 <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
 		

@@ -280,34 +280,7 @@ public class PpmModificationController {
 		    }
 		 
 		 
-		 //Liste des Ppm transmis par l'acteur connecté
-		 public void chargePpmTrans() {
-			 ppmTrans.clear();
-			 ppmTrans = ((List<TAffichagePpm>)iservice.getObjectsByColumnIn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-					   "AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
-					   // new WhereClause("AFF_DPP_STA_CODE",Comparateur.EQ,"S1T"),SS
-					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
-						 new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
-		 }
-		 
-		 //Liste des Ppm validés par le cpmp
-		 public void chargePpmValCp() {
-			 ppmValCp.clear();
-			 ppmValCp = ((List<TAffichagePpm>)iservice.getObjectsByColumn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-					    new WhereClause("AFF_DPP_STA_CODE",Comparateur.EQ,"S2V"),
-					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
-						 new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
-		 }
-		 
-		//Liste des Ppm validés par le cpmp
-		 public void chargePpmValDmp() {
-			 ppmValDmp.clear();
-			 ppmValDmp = ((List<TAffichagePpm>)iservice.getObjectsByColumn("TAffichagePpm",new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-					    new WhereClause("AFF_DPP_STA_CODE",Comparateur.EQ,"S3V"),
-					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
-		 }
-		 
-		 
+		
 		 //Liste des Modes de Passation restreint
 		 public void chargeMode() {
 			 listeMode.clear();
@@ -2034,7 +2007,7 @@ public class PpmModificationController {
 				 		   }	
 					     }
 		 		        chargeData(); 
-		 		       chargePpmTrans();
+		 		       //chargePpmTrans();
 		 		       //chargeDataPspm();
 		 		     //Actualisation du Tableau de Bord
 		 			  tableauBordController.chargeDataPpmPspm();
@@ -2197,8 +2170,8 @@ public class PpmModificationController {
 				 
 		 		 
 		 		  chargeDataAvaliderPpm();
-		 		  chargePpmValCp();
-		 		  chargePpmValDmp();
+		 		  //chargePpmValCp();
+		 		  //chargePpmValDmp();
 		 		  //chargeDataAvaliderPspm();
 		 		  //Actualisation du Tableau de Bord
 		 		  tableauBordController.chargeDataPpmPspm();

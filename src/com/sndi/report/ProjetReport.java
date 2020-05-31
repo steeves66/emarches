@@ -295,8 +295,6 @@ public class ProjetReport {
 		
 		//Print Document Opérateur
 		public void showOperateurPDF(String opeMatricule){
-			
-			
 			 String pathdir ="";
 			
 			 if (CheckSysTem.isWindows()) {

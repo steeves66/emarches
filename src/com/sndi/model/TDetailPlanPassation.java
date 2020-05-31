@@ -187,7 +187,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppId = dppId;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_LBG_CODE")
 	public TLBudgets getTLBudgets() {
 		return this.TLBudgets;
@@ -207,7 +207,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.TTypeProcedure = TTypeProcedure;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_STR_CODE")
 	public TStructure getTStructure() {
 		return this.TStructure;
@@ -218,7 +218,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	}
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_DAC_CODE")
 	public TDacSpecs getTDacSpecs() {
 		return this.TDacSpecs;
@@ -228,7 +228,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.TDacSpecs = TDacSpecs;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_MOP_CODE", nullable = false)
 	public TModePassation getTModePassation() {
 		return this.TModePassation;
@@ -238,7 +238,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.TModePassation = TModePassation;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_GPG_ID", nullable = false)
 	public TDetailPlanGeneral getTDetailPlanGeneral() {
 		return this.TDetailPlanGeneral;
@@ -249,7 +249,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	}
 
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_PLP_ID", nullable = false)
 	public TPlanPassation getTPlanPassation() {
 		return this.TPlanPassation;
@@ -269,7 +269,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.TStatut = TStatut;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_TYM_CODE", nullable = false)
 	public TTypeMarche getTTypeMarche() {
 		return this.TTypeMarche;
