@@ -138,6 +138,7 @@ public class VUpdatePpm implements java.io.Serializable {
 	private String souLibelle;
 	private long gpgId;
 	private String gpgObjet;
+	private String natLibelle;
 
 	public VUpdatePpm() {
 	}
@@ -197,7 +198,7 @@ public class VUpdatePpm implements java.io.Serializable {
 			Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou,
 			String mdtCode, String mdtLibelleLong, String mdtLibelleCourt, Date mdtDteSaisi, String mdtOpeMatricule,
 			String mdtTymCode, String tymLibelleCourt, String mopLibelleLong, String souLibelle, long gpgId,
-			String gpgObjet) {
+			String gpgObjet, String natLibelle) {
 		this.plpId = plpId;
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
@@ -317,6 +318,7 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.souLibelle = souLibelle;
 		this.gpgId = gpgId;
 		this.gpgObjet = gpgObjet;
+		this.natLibelle = natLibelle;
 	}
 
 
@@ -1390,5 +1392,14 @@ public class VUpdatePpm implements java.io.Serializable {
 
 	public void setGpgObjet(String gpgObjet) {
 		this.gpgObjet = gpgObjet;
+	}
+	
+	@Column(name = "NAT_LIBELLE", length = 200)
+	public String getNatLibelle() {
+		return this.natLibelle;
+	}
+
+	public void setNatLibelle(String natLibelle) {
+		this.natLibelle = natLibelle;
 	}
 }

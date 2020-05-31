@@ -302,7 +302,7 @@ public class PpmController {
 		 //Liste des Ppm transmis par l'acteur connecté
 		 public void chargePpmTrans() {
 			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 						 new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
@@ -364,7 +364,7 @@ public class PpmController {
 		 //Liste des Pspm transmis par l'acteur connecté
 		 public void chargePspmTrans() {
 			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					     new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S1T"),
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
 						 new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
@@ -374,7 +374,7 @@ public class PpmController {
 		 //Liste totale des Pspm transmis par l'acteur connecté
 		 public void chargePspmTot() {
 			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					     new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S1T"),
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
 		 }
@@ -392,7 +392,7 @@ public class PpmController {
 		//Liste des Ppm validés par la CPMP : Nouvelle Methode
 		 public void chargePspmValCp() {
 			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2V"),
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
 						 new WhereClause("DPP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
@@ -402,7 +402,7 @@ public class PpmController {
 		//Liste des Ppm validés par la CPMP Côté AC
 		 public void chargePspmValDmpAc() { 
 			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 					    new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
@@ -420,7 +420,7 @@ public class PpmController {
 		//Liste des Ppm validés par la DMP : Nouvelle Methode
 		 public void chargePspmValDmp() {
 			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
 					    new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
@@ -438,7 +438,7 @@ public class PpmController {
 		 //Liste des Ppm différés par la CPMP : Nouvelle Methode
 		 public void chargePpmDifCp() {
 			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2D"),
 					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 						 new WhereClause("DPP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 

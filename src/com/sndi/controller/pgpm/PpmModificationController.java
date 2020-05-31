@@ -65,7 +65,7 @@ import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -86,7 +86,7 @@ public class PpmModificationController {
 	KeyGen keyGen;
 	
 	 @Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	 
 	 @Autowired
 	ControleController controleController;
@@ -138,7 +138,8 @@ public class PpmModificationController {
 	      //Déclaration des Listes
 		 private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
 		 private List<VDetPlaning> affichPpm = new ArrayList<VDetPlaning>();
-	     private List<TAffichagePpm> listePpm = new ArrayList<TAffichagePpm>();
+	     //private List<TAffichagePpm> listePpm = new ArrayList<TAffichagePpm>();
+	     private List<VPpmliste> listePpm = new ArrayList<VPpmliste>();
 	     private List<THistoPlanPassation> listeHisto = new ArrayList<THistoPlanPassation>();
 	     private List<VPgpmFonction> listePgpm = new ArrayList<VPgpmFonction>();
 	     private List<VPgpmFonction> listePgspm = new ArrayList<VPgpmFonction>();
@@ -164,8 +165,9 @@ public class PpmModificationController {
 		 private List<TDevise> listeDevise = new ArrayList<TDevise>();
 		 private List<TTypeMarche> listeTypeMarches = new ArrayList<TTypeMarche>();
 		 private List<TModePassation> listeModePassation = new ArrayList<TModePassation>();
-		 private List<TGestion> listeGestion = new ArrayList<TGestion>();
-		 private List<TAffichagePpm> validationListe = new ArrayList<TAffichagePpm>();
+		 private List<TGestion> listeGestion = new ArrayList<TGestion>(); 
+		 //private List<TAffichagePpm> validationListe = new ArrayList<TAffichagePpm>();
+		 private List<VPpmliste> validationListe = new ArrayList<VPpmliste>();
 		 private List<TAffichagePpm>listSelectionTransmission =new ArrayList<TAffichagePpm>();
 		 private TModePassation recupModePassation = new TModePassation();
 		 private List <VPpmStatut> ppmstatutList = new ArrayList<VPpmStatut>();
@@ -404,10 +406,10 @@ public class PpmModificationController {
 		 //Methode Principale de Chargement des PPM
 		 public void chargeData(){
 			 getListePpm().clear();
-			 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")), 
-					"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPR")),
-					new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-					new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
+					"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPR")),
+					new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+					new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listePpm size: "+listePpm.size());
 				//Actualisation du Tableau de Bord
 				tableauBordController.chargeDataPpm();
@@ -420,10 +422,10 @@ public class PpmModificationController {
 		//Methode Principale de Chargement des PSPM
 		 public void chargeDataPspm(){ 
 			 getListePpm().clear();
-			 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")), 
-					"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPD")),
-					new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-					new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
+					"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPD")),
+					new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+					new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listePpm size: "+listePpm.size());
 				//Actualisation du Tableau de Bord
 				tableauBordController.chargeDataPspm();
@@ -433,16 +435,16 @@ public class PpmModificationController {
 		 
 		 
 		 public int getNbrePpmTotal(){
-				int i = iservice.countTableByColumn("T_AFFICHAGE_PPM", "AFF_ID",
-						new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-						new WhereClause("AFF_DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
+						new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+						new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				return	i;	
 			}
 		 
 		 public int getNbrePspmTotal(){
-				int i = iservice.countTableByColumn("T_AFFICHAGE_PPM", "AFF_ID",
-						new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-						new WhereClause("AFF_DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
+						new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+						new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				return	i;	
 			}
 		
@@ -450,9 +452,9 @@ public class PpmModificationController {
 		//Liste des PPM Transmis (Box des ppm transmis)
 		 public void chargeDataTransmission(){
 			 getListePpm().clear();
-			 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-					 new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S1T"),
-					new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					 new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S1T"),
+					new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listePpm size: "+listePpm.size());
 				//Actualisation du Tableau de Bord
 				tableauBordController.chargeDataPpmPspm();
@@ -466,19 +468,19 @@ public class PpmModificationController {
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 getValidationListe().clear();
-					 validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-								"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-								new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-							_logger.info("affichageListe size: "+validationListe.size());	
+					 validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+							_logger.info("validationListe size: "+validationListe.size());	
 							//Actualisation du Tableau de Bord
 							tableauBordController.chargeDataPpm();
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 getValidationListe().clear();
-								validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-								"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
-								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
+								validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
 								//new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 								_logger.info("affichageListe size: "+validationListe.size());
 								//Actualisation du Tableau de Bord
@@ -486,9 +488,9 @@ public class PpmModificationController {
 					 }else
 						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 							  getValidationListe().clear();
-								validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-								"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
-								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
+								validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
 								//new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 								_logger.info("affichageListe size: "+validationListe.size());
 								//Actualisation du Tableau de Bord
@@ -505,22 +507,22 @@ public class PpmModificationController {
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 getValidationListe().clear();
-					 validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-								"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-								new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-								new WhereClause("AFF_DPP_MOP_CODE",WhereClause.Comparateur.EQ,"PSC"),
-								new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+					 validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+								new WhereClause("DPP_MOP_CODE",WhereClause.Comparateur.EQ,"PSC"),
+								new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 							_logger.info("affichageListe size: "+validationListe.size());	
 							//Actualisation du Tableau de Bord
 							tableauBordController.chargeDataPspm();
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 getValidationListe().clear();
-								validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-										"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPS")), 
-								     new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
+								validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+										"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPS")), 
+								     new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
 								//new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
-								_logger.info("affichageListe size: "+validationListe.size());
+								_logger.info("validationListe size: "+validationListe.size());
 								//Actualisation du Tableau de Bord
 								tableauBordController.chargeDataPspm();
 					 }
@@ -533,11 +535,11 @@ public class PpmModificationController {
 			public void chargerPpmRecherche() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
-					 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")), 
-							"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
-							new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-							new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-							new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
+							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
+							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+							new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
 						tableauBordController.chargeDataPpm();
@@ -547,21 +549,21 @@ public class PpmModificationController {
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
-								 validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-											"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-											new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-											new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
-										    new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-										_logger.info("affichageListe size: "+validationListe.size());	
+								 validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+											"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+											new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+										    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+										_logger.info("validationListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
 										tableauBordController.chargeDataPpm();
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
-									validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-									new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-									new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
-									 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+									validationListe = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+									new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
+									 new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPpm();
@@ -572,29 +574,29 @@ public class PpmModificationController {
 			public void chargerPspmRecherche() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
-					 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")), 
-							"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
-							new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-							new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-							new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
+							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
+							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+							new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						tableauBordController.chargeDataPspm();
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
-								 validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-											"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-											new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-											new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
-											 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));	
+								 validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+											"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+											new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+											 new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));	
 										//Actualisation du Tableau de Bord
 										tableauBordController.chargeDataPspm();
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
-									validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-									new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-									new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
-									 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+									validationListe = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+									new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
+									 new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPspm();
 					    	  }
@@ -605,10 +607,10 @@ public class PpmModificationController {
 			public void reinitialiserPpm() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
-					 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")), 
-							"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
-							new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-							new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
+							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
+							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
 						tableauBordController.chargeDataPpm();
@@ -618,10 +620,10 @@ public class PpmModificationController {
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
-								 validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-											"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-											new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-											new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+								 validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+											"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+											new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 										_logger.info("affichageListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
 										tableauBordController.chargeDataPpm();
@@ -629,9 +631,9 @@ public class PpmModificationController {
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
-									validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-									new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-									new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+									validationListe = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+									new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
 									_logger.info("affichageListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPpm();
@@ -644,10 +646,10 @@ public class PpmModificationController {
 			public void reinitialiserPspm() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
-					 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")), 
-							"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
-							new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-							new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_ID")), 
+							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
+							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
 						tableauBordController.chargeDataPspm();
@@ -658,21 +660,21 @@ public class PpmModificationController {
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  getValidationListe().clear();
-								 validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnInDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-											"AFF_DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-											new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-											new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-										_logger.info("affichageListe size: "+validationListe.size());	
+								 validationListe = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+											"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+											new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+										_logger.info("validationListe size: "+validationListe.size());	
 										//Actualisation du Tableau de Bord
 										tableauBordController.chargeDataPspm();
 										multiFiltre="";
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  getValidationListe().clear();
-									validationListe = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-									new WhereClause("AFF_DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
-									new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
-									_logger.info("affichageListe size: "+validationListe.size());
+									validationListe = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
+									new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+									_logger.info("validationListe size: "+validationListe.size());
 									//Actualisation du Tableau de Bord
 									tableauBordController.chargeDataPspm();
 									multiFiltre="";
@@ -876,9 +878,9 @@ public class PpmModificationController {
 		 //Afficher les Ppm dans la love
 		 public void chargePpm(){
 			 listePpm.clear();
-			 listePpm = (List<TAffichagePpm>) iservice.getObjectsByColumnDesc("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")), 
-					new WhereClause("AFF_DPP_STA_CODE",WhereClause.Comparateur.EQ,"S1S"),
-					new WhereClause("AFF_DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_ID")), 
+					new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S1S"),
+					new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 		}
 		 
 		 //Filtre les marchés en fonction du code Marché
@@ -1392,12 +1394,7 @@ public class PpmModificationController {
 			 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 						String rechercheAll = search.replace("null","");
 						
-						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
-			      				TAffichagePpm affgp = new TAffichagePpm();
-			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-			      				   affgp.setAffDppRecherche(rechercheAll);
-				      			  iservice.updateObject(affgp);
+						
 				      			  
 				      
 				      			//Insertion dans T_Financement_PPM
@@ -1494,12 +1491,7 @@ public class PpmModificationController {
 			 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 						String rechercheAll = search.replace("null","");
 						
-						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
-			      				TAffichagePpm affgp = new TAffichagePpm();
-			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-			      				   affgp.setAffDppRecherche(rechercheAll);
-				      			  iservice.updateObject(affgp);
+						
 				      			  
 				      
 				      			//Insertion dans T_Financement_PPM
@@ -1614,13 +1606,7 @@ public class PpmModificationController {
 		 		  		
 		 		  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc();
 						String rechercheAll = search.replace("null","");
-						
-						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
-			      				TAffichagePpm affgp = new TAffichagePpm();
-			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-			      				   affgp.setAffDppRecherche(rechercheAll);
-				      			  iservice.updateObject(affgp);
+					
 		 		  		
 		 		  		
 		 		  		
@@ -1961,13 +1947,7 @@ public class PpmModificationController {
 						 pass =PL.get(0); 
 					     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
 					     iservice.updateObject(pass);
-					     
-				List<TAffichagePpm> AF =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-			   						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-			   				TAffichagePpm aff = new TAffichagePpm();
-								if(!AF.isEmpty()) aff =AF.get(0);
-								aff.setAffDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
-								iservice.updateObject(aff);
+		
 			
 				//methode qui charge les financements du projet crée
 				chargeFinancement();
@@ -2030,23 +2010,7 @@ public class PpmModificationController {
 									passDetail.setTStatut(new TStatut(statutTrans));
 									passDetail.setDppStatutRetour("0");
 							       iservice.updateObject(passDetail);
-							       
-						List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+lignePpm.getAffDppId()));
-						   TAffichagePpm ppm = new TAffichagePpm();
-						   if(!AG.isEmpty()) ppm =AG.get(0); 
-						   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-	 							 ppm.setAffDppDateValAc(Calendar.getInstance().getTime());
-	 						 }else
-	 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-	 								ppm.setAffDppDateValCpmp(Calendar.getInstance().getTime()); 
-	 							 }else
-	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-	 								   ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
-	 								 }
-						    ppm.setTStatut(new TStatut(statutTrans));
-						    ppm.setAffDppStatutRetour("0");
-						    iservice.updateObject(ppm);
+						
 								}
 				 			
 				 			//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
@@ -2120,22 +2084,7 @@ public class PpmModificationController {
 									passDetail.setDppStatutRetour("0");
 							       iservice.updateObject(passDetail);
 							       
-						List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+lignePpm.getAffDppId()));
-						   TAffichagePpm ppm = new TAffichagePpm();
-						   if(!AG.isEmpty()) ppm =AG.get(0); 
-						   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-	 							 ppm.setAffDppDateValAc(Calendar.getInstance().getTime());
-	 						 }else
-	 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-	 								ppm.setAffDppDateValCpmp(Calendar.getInstance().getTime()); 
-	 							 }else
-	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-	 								   ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
-	 								 }
-						    ppm.setTStatut(new TStatut(statutTrans));
-						    ppm.setAffDppStatutRetour("0");
-						    iservice.updateObject(ppm);
+						
 								}
 				 			
 				 			//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
@@ -2219,26 +2168,7 @@ public class PpmModificationController {
 									passDetail.setDppStatutRetour("0");
 							        iservice.updateObject(passDetail);
 							       
-							List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+lignePpm.getAffDppId()));
-						   TAffichagePpm ppm = new TAffichagePpm();
-						   if(!AG.isEmpty()) ppm =AG.get(0); 
-						   
-						   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-	 							 ppm.setAffDppDateValAc(Calendar.getInstance().getTime());
-	 						 }else
-	 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-	 								ppm.setAffDppDateValCpmp(Calendar.getInstance().getTime()); 
-	 							 }else
-	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-	 								   ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
-	 								 }else
-	 									  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-	 										 ppm.setAffDppDateValDmp(Calendar.getInstance().getTime()); 
-	 									   }
-						        ppm.setTStatut(new TStatut(statutUpdate));
-						        ppm.setAffDppStatutRetour("0");
-						        iservice.updateObject(ppm);
+							
 								}
 				 				 
 			 		        }	   
@@ -2309,23 +2239,7 @@ public class PpmModificationController {
 									passDetail.setDppStatutRetour("0");
 							       iservice.updateObject(passDetail);
 							       
-							List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+lignePpm.getAffDppId()));
-						   TAffichagePpm ppm = new TAffichagePpm();
-						   if(!AG.isEmpty()) ppm =AG.get(0); 
-						   
-						   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-	 							 ppm.setAffDppDateValAc(Calendar.getInstance().getTime());
-	 						 }else
-	 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-	 								ppm.setAffDppDateValCpmp(Calendar.getInstance().getTime()); 
-	 							 }else
-	 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-	 								ppm.setAffDppDateValDmp(Calendar.getInstance().getTime());	 
-	 								 }
-						    ppm.setTStatut(new TStatut(statutUpdate));
-						    ppm.setAffDppStatutRetour("0");
-						    iservice.updateObject(ppm);
+							
 								}
 	 
 			 		          }	   
@@ -2397,14 +2311,6 @@ public class PpmModificationController {
 								passDetail.setDppStatutRetour("1");
 						       iservice.updateObject(passDetail);
 				
-				    
-				    List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-	  						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
-		               TAffichagePpm ppm = new TAffichagePpm();
-		                    if(!AG.isEmpty()) ppm =AG.get(0); 
-		                      ppm.setTStatut(new TStatut(statutUpdate));
-		                     ppm.setAffDppStatutRetour("1");
-		                      iservice.updateObject(ppm);
 		                      
 		                      //Insertion de chaque ligne dans T_histo_detail_plan_passation avec le statut correspondant
 								List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
@@ -2461,13 +2367,7 @@ public class PpmModificationController {
 							       iservice.updateObject(passDetail);
 					
 					    
-					    List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-		  						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
-			               TAffichagePpm ppm = new TAffichagePpm();
-			                    if(!AG.isEmpty()) ppm =AG.get(0); 
-			                      ppm.setTStatut(new TStatut(statutUpdate));
-			                     ppm.setAffDppStatutRetour("1");
-			                      iservice.updateObject(ppm);
+					  
 			                      
 			                      
 			                      listeHisto =(List<THistoPlanPassation>) iservice.getObjectsByColumn("THistoPlanPassation", new ArrayList<String>(Arrays.asList("HPP_ID")),
@@ -2611,14 +2511,6 @@ public class PpmModificationController {
 									passDetail.setDppStatutRetour("1");
 							       iservice.updateObject(passDetail);
 					
-					    
-					    List<TAffichagePpm> AG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-		  						new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
-			               TAffichagePpm ppm = new TAffichagePpm();
-			                    if(!AG.isEmpty()) ppm =AG.get(0); 
-			                      ppm.setTStatut(new TStatut(statutUpdate));
-			                     ppm.setAffDppStatutRetour("1");
-			                      iservice.updateObject(ppm);
 			                      
 			                      
 			                      listeHisto =(List<THistoPlanPassation>) iservice.getObjectsByColumn("THistoPlanPassation", new ArrayList<String>(Arrays.asList("HPP_ID")),
@@ -2681,10 +2573,43 @@ public class PpmModificationController {
 				
 				
 				 //Methode de modification des PPM/PSPM
-				 @Transactional
+				 //@Transactional
 				 public void modifierDetailPlan() throws IOException{
 					 
-					 slctdTd.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+					 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+				   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+					     TDetailPlanPassation detail = new TDetailPlanPassation();
+								if(!PLG.isEmpty()) detail =PLG.get(0); 
+					             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+					             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
+					             detail.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
+					             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
+					             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
+					             detail.setDppStructureBenefi(updatePpm.getDppStructureBenefi());
+					             detail.setDppObjet(updatePpm.getDppObjet());
+					             detail.setDppPartiePmePmi(updatePpm.getDppPartiePmePmi());
+					             detail.setDppBailleur(updatePpm.getDppBailleur());
+					             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
+					             detail.setDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
+					             detail.setDppApprobAno(updatePpm.getDppApprobAno());
+					             detail.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
+					             detail.setDppDateJugementOffre(updatePpm.getDppDateJugementOffre());
+					             detail.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
+					             detail.setDppDateExecFin(updatePpm.getDppDateExecFin());
+					             detail.setDppDateExecDebut(updatePpm.getDppDateExecDebut());
+					             detail.setDppDateMarcheApprob(updatePpm.getDppDateMarcheApprob());
+					             detail.setDppDateOuvertOf(updatePpm.getDppDateOuvertOf());
+					             detail.setDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
+					             detail.setDppDateElabRapport(updatePpm.getDppDateElabRapport());
+					             detail.setDppDateNegociation(updatePpm.getDppDateNegociation());
+					             detail.setDppDateAttApprobDmp(updatePpm.getDppDateDaoApprobDmp());
+					             detail.setDppDateAttApprobCpmp(updatePpm.getDppDateAttApprobCpmp());
+					             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
+					             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
+					             detail.setDppInvEntre(updatePpm.getDppInvEntre());
+					             iservice.updateObject(detail);
+		
+					/* slctdTd.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
 					 slctdTd.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
 					 slctdTd.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
 					 slctdTd.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
@@ -2695,7 +2620,7 @@ public class PpmModificationController {
 					 slctdTd.setAffDppBailleur(updatePpm.getDppBailleur());
 					 slctdTd.setAffDppPieceDao(updatePpm.getMdtCode());
 					 slctdTd.setAffDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
-					 slctdTd.setAffDppApprobAno(updatePpm.getDppApprobAno());
+					 slctdTd.setDppApprobAno(updatePpm.getDppApprobAno());
 					 slctdTd.setAffDppDateAvisAoPublicat(updatePpm.getDppDateAvisAoPublication());
 					 slctdTd.setAffDppDateJugementOffre(updatePpm.getDppDateJugementOffre());
 					 slctdTd.setAffDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
@@ -2703,18 +2628,18 @@ public class PpmModificationController {
 					 slctdTd.setAffDppDateExecDebut(updatePpm.getDppDateExecDebut());
 					 slctdTd.setAffDppDateMarcheApprob(updatePpm.getDppDateMarcheApprob());
 					 slctdTd.setAffDppDateOuvertOf(updatePpm.getDppDateOuvertOf());
-					 slctdTd.setAffDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
-					 slctdTd.setAffDppDateElabRapport(updatePpm.getDppDateElabRapport());
+					 slctdTd.setDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
+					 slctdTd.setDppDateElabRapport(updatePpm.getDppDateElabRapport());
 					 slctdTd.setAffDppDateNegociation(updatePpm.getDppDateNegociation());
 					 slctdTd.setAffDppDateAttApprobDmp(updatePpm.getDppDateDaoApprobDmp());
 					 slctdTd.setAffDppDateAttApprobCmp(updatePpm.getDppDateAttApprobCpmp());
 					 slctdTd.setAffDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
 					 slctdTd.setAffDppDateSignatAc(updatePpm.getDppDateSignatAc());
 					 slctdTd.setAffDppInvEntre(updatePpm.getDppInvEntre());
-					 iservice.updateObject(slctdTd);
+					 iservice.updateObject(slctdTd);*/
 					 
 					 
-					 //Modification dans TDetailPlanPassation
+					 /*//Modification dans TDetailPlanPassation
 			    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 			   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
 			    	        TDetailPlanPassation detail = new TDetailPlanPassation();
@@ -2748,7 +2673,7 @@ public class PpmModificationController {
 							detail.setDppApprobAno(slctdTd.getAffDppApprobAno());
 							detail.setDppDateNegociation(slctdTd.getAffDppDateNegociation());
 							//detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
-							iservice.updateObject(detail);
+							iservice.updateObject(detail);*/
 							
 							 
 							    	//Mis à Jour dans T_Financement_PPM
@@ -2928,7 +2853,7 @@ public class PpmModificationController {
 		this.listeTsPpm = listeTsPpm;
 	}
 
-
+/*
 	public List<TAffichagePpm> getListePpm() {
 		return listePpm;
 	}
@@ -2936,7 +2861,7 @@ public class PpmModificationController {
 
 	public void setListePpm(List<TAffichagePpm> listePpm) {
 		this.listePpm = listePpm;
-	}
+	}*/
 
 	public List<VPgpmFonction> getListePgpm() {
 		return listePgpm;
@@ -3089,7 +3014,7 @@ public class PpmModificationController {
 		this.listeGestion = listeGestion;
 	}
 
-
+/*
 	public List<TAffichagePpm> getValidationListe() {
 		return validationListe;
 	}
@@ -3097,7 +3022,7 @@ public class PpmModificationController {
 	public void setValidationListe(List<TAffichagePpm> validationListe) {
 		this.validationListe = validationListe;
 	}
-
+*/
 
 
 	public List<TAffichagePpm> getListSelectionTransmission() {
@@ -4146,7 +4071,25 @@ public class PpmModificationController {
 	public void setBoutonEditUpdate(boolean boutonEditUpdate) {
 		this.boutonEditUpdate = boutonEditUpdate;
 	}
-	
-	
+
+
+	public List<VPpmliste> getListePpm() {
+		return listePpm;
+	}
+
+
+	public void setListePpm(List<VPpmliste> listePpm) {
+		this.listePpm = listePpm;
+	}
+
+
+	public List<VPpmliste> getValidationListe() {
+		return validationListe;
+	}
+
+
+	public void setValidationListe(List<VPpmliste> validationListe) {
+		this.validationListe = validationListe;
+	}
 
 }
