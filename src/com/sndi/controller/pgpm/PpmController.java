@@ -112,10 +112,10 @@ public class PpmController {
 	 @PostConstruct
 	 public void postContr() {
 		 controleController.fonctionaliteDynamic();
-		 chargeData();
-		 chargeDataPspm();
+		// chargeData();
+		 //chargeDataPspm();
 		 //chargeDataAvaliderPpm();
-		 chargeDataAvaliderPspm();
+		 //chargeDataAvaliderPspm();
 		 chargeGestions();
 		 //chargeBailleur();
 		 //chargeDevise();
@@ -290,10 +290,11 @@ public class PpmController {
 						} 
 		  			 
 		                 if(controleController.type == "PPM") {
-						      creerDetailPassation();
+						      //creerDetailPassation();
+		                	 creerDetailPassation("PN");
 		                 }else 
 		                      if(controleController.type == "PSPM"){
-							      creerDetailPspm();
+		                    	  creerDetailPassation("PS");
 		                 }
 		  		
 				     }
@@ -533,7 +534,7 @@ public class PpmController {
 		 
 		 
 		//Methode Principale de Chargement des PSPM
-		 public void chargeDataPspm(){ 
+/*		 public void chargeDataPspm(){ 
 			 listePpm.clear();
 			 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_ID")), 
 					"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPD")),
@@ -544,7 +545,7 @@ public class PpmController {
 				tableauBordController.chargeDataPspm();
 				//Affichage du nombre des pspm saisis
 				nbrePspm =""+getNbrePspmTotal();
-		  }
+		  }*/
 		 
 		 
 		 public int getNbrePpmTotal(){
@@ -614,12 +615,12 @@ public class PpmController {
 			 }*/
 		 
 		//Methode de validation des PPM
-		 public void chargeData() {
+		 public void chargeData(String typePlan) {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 listePpm.clear();
 				 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_ID")), 
 						"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPR")),
-						new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+						new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 						new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					_logger.info("listePpm size: "+listePpm.size());
 					//Actualisation du Tableau de Bord
@@ -631,7 +632,7 @@ public class PpmController {
 					 listePpm.clear();
 					 listePpm= (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								new WhereClause("DPP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 							_logger.info("listePpm size: "+listePpm.size());	
 							//Actualisation du Tableau de Bord
@@ -641,7 +642,7 @@ public class PpmController {
 						 listePpm.clear();
 						 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
-								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								_logger.info("listePpm size: "+listePpm.size());
 								//Actualisation du Tableau de Bord
@@ -651,7 +652,7 @@ public class PpmController {
 							  listePpm.clear();
 							  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 								"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SPT")),
-								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								_logger.info("listePpm size: "+listePpm.size());
 								//Actualisation du Tableau de Bord
@@ -702,7 +703,7 @@ public class PpmController {
 			 }*/
 		 //Fin Methode de validation des PSPM
 		 
-		//Nouvelle Methode de validation des PSPM : Nouvelle Methode
+		/*//Nouvelle Methode de validation des PSPM : Nouvelle Methode
 		public void chargeDataAvaliderPspm() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				
@@ -742,7 +743,7 @@ public class PpmController {
 			    }
 			 }
 		 //Fin de Nouvelle Methode de Validation des PSPM
-		 
+*/		 
 		 
 		//Filtre multicritère pour les PPM : Nouvelle Methode
 			public void chargerPpmRecherche() { 
@@ -1848,17 +1849,11 @@ public class PpmController {
 	  	 
 	  	//Méthode de création d'un ppm par le AC
 	  	 @Transactional
-	  	 public void creerDetailPassation()throws IOException{
+	  	 public void creerDetailPassation(String typePlan)throws IOException{
 	  		 
 	  		if(fipPgpm.getFipId() > 0 ) {
 	  			
-	  			 if(detailPass.getDppStructureConduc().equalsIgnoreCase("")|| "".equals(detailPass.getDppStructureConduc()) || detailPass.getDppStructureBenefi().equalsIgnoreCase("") || "".equals(detailPass.getDppStructureBenefi()) || tydCode.equalsIgnoreCase("") 
-	  					 || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null || pgpm.getGpgMopCode().equalsIgnoreCase("") ||"".equals(pgpm.getGpgMopCode()) || pgpm.getGpgTymCode().equalsIgnoreCase("")
-	  					 || "".equals(pgpm.getGpgTymCode()) || ligne.getLbgCode().equalsIgnoreCase("") || "".equals(ligne.getLbgCode())) {
-		  			   //Message d'erreur
-		  			   FacesContext.getCurrentInstance().addMessage(null,
-		  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs ainsi que l'imputation budgétaire", "")); 
-		  		    }else {
+	  			
 		  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
 		 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 		 	 			       new WhereClause("PLP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
@@ -1867,7 +1862,7 @@ public class PpmController {
 		 	 		  planPass= listPlan.get(0);
 		 	 		  
 		 	 		  if(detailPass.getDppId()>0) {
-		 	 			  updateDetailPlan(planPass, "PN");
+		 	 			  updateDetailPlan(planPass, ""+typePlan);
 			 	  		 
 			 	  	     //Modification dans TAffichagePpm
 				    	 List<TAffichagePpm> PLG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
@@ -1884,7 +1879,7 @@ public class PpmController {
 			 	  		affichagePpm.setTPlanPassation(planPass);
 			 	  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
 			 	  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
-			 	  		affichagePpm.setAffDppTypePlan("PN");
+			 	  		affichagePpm.setAffDppTypePlan(typePlan);
 			 	  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
 			 	  		affichagePpm.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			 	  		affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
@@ -1941,7 +1936,7 @@ public class PpmController {
 				      			    detP.setDppRecherche(rechercheAll);
 					      			iservice.updateObject(detP);
 			 		     recupDateGenere();
-			 			chargeData();
+			 			chargeData(typePlan);
 			 			boutonEdit =true; 
 			 			boutonEditPspm =false;
 			 			//Actualisation du Tableau de Bord
@@ -1955,7 +1950,7 @@ public class PpmController {
 		 	 		  }else
 		 	 		  {
 		 	 			  
-		 	 			saveDetailPlan(planPass, "PN");
+		 	 			saveDetailPlan(planPass, ""+typePlan);
 			 	  		
 			 	  		TAffichagePpm affichagePpm = new TAffichagePpm();
 			 	  		affichagePpm.setAffDppId(detailPass.getDppId());
@@ -1968,7 +1963,7 @@ public class PpmController {
 			 	  		affichagePpm.setTPlanPassation(planPass);
 			 	  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
 			 	  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
-			 	  		affichagePpm.setAffDppTypePlan("PN");
+			 	  		affichagePpm.setAffDppTypePlan(typePlan);
 			 	  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
 			 	  		affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
 			 	  		affichagePpm.setAffFonCodDmp(detailPass.getDppFonCodDmp());
@@ -2048,7 +2043,7 @@ public class PpmController {
 			 	  		          //Historisation
 			    				  historiser("S1S",detailPass,"PPM enregistré par le AC");
 			 		     recupDateGenere();
-			 			chargeData();
+			 			chargeData(typePlan);
 			 			boutonEdit =true; 
 			 			boutonEditPspm =false;
 			 			
@@ -2067,7 +2062,7 @@ public class PpmController {
 		 	  		     planPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 		 	  		     iservice.addObject(planPass);
 		 	  		    
-		 	  		    saveDetailPlan(planPass, "PN");
+		 	  		    saveDetailPlan(planPass, ""+typePlan);
 		 		  		 
 		 		  		 
 		 		  		TAffichagePpm affichagePpm = new TAffichagePpm();
@@ -2081,7 +2076,7 @@ public class PpmController {
 		 		  		affichagePpm.setTPlanPassation(planPass);
 		 		  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
 		 		  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
-		 		  		affichagePpm.setAffDppTypePlan("PN");
+		 		  		affichagePpm.setAffDppTypePlan(typePlan);
 		 		  		affichagePpm.setAffDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
 		 		  		affichagePpm.setAffFonCodPf(detailPass.getDppFonCodPf());
 		 		  		affichagePpm.setAffFonCodDmp(detailPass.getDppFonCodDmp());
@@ -2152,7 +2147,7 @@ public class PpmController {
 				      	//Historisation
 				    	historiser("S1S",detailPass,"PPM enregistré par le AC");
 		 			   recupDateGenere();
-		 				chargeData();
+		 				chargeData(typePlan);
 		 				boutonEdit =true;
 		 				boutonEditPspm =false;
 		 				controleController.btn_creerDetailPpm =true;
@@ -2168,16 +2163,12 @@ public class PpmController {
 		 	 	         }
 		  		    }
 	  			
-	  		  }else {
-	  			 //Message d'erreur
-	  			   FacesContext.getCurrentInstance().addMessage(null,
-	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre PGPM n'a pas de financement", "")); 
-	  		}
+	  		  }
 	  		
 	  		
 	  		
 
-	  }
+	  
 	  	 
 	  	 
 	  	 //Methode detail plan
@@ -2340,7 +2331,7 @@ public class PpmController {
 	  	 
 	  	 
 	  	//Méthode de création d'un pspm par le AC
-	  	@Transactional
+	  /*	@Transactional
 		 public void  creerDetailPspm() throws IOException{
 	  		
 	  	  if(fipPgpm.getFipId() > 0 ) {
@@ -2501,10 +2492,10 @@ public class PpmController {
  			                   FacesContext.getCurrentInstance().addMessage(null,
  	   	                       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre PPM n'a pas de financement", "")); 
 	  	                  }
-		            }
+		            }*/
 	  	 	 
 	  	 
-	  	//Méthode de création d'un ppm par le CPMP et le DMP
+	  	/*//Méthode de création d'un ppm par le CPMP et le DMP
 	  	 @Transactional
 	  	 public void creerDetailPassationCpmpDmp()throws IOException{
 	  		 detailPass.setTTypeMarche(new TTypeMarche(marche.getTymCode()));
@@ -2546,10 +2537,10 @@ public class PpmController {
 	  			userController.setTexteMsg("Opération enregistrée avec succès!");
 	  			userController.setRenderMsg(true);
 	  			userController.setSevrityMsg("success");
-	  	 }
+	  	 }*/
 	  	 
 	   	//Méthode de création d'un ppm par le CPMP et le DMP
-	  	 @Transactional
+	  	/* @Transactional
 	  	 public void creerDetailPspmCpmpDmp()throws IOException{
 	  		 detailPass.setTTypeMarche(new TTypeMarche(marche.getTymCode()));
 	  		 detailPass.setTModePassation(new TModePassation(modePassation.getMopCode()));
@@ -2592,13 +2583,13 @@ public class PpmController {
 	  			userController.setTexteMsg("Opération enregistrée avec succès!");
 	  			userController.setRenderMsg(true);
 	  			userController.setSevrityMsg("success");
-	  	 }
+	  	 }*/
 	  	 
 	  	 
 	  	 
 	  	public String fermerPspm(String value ,String action) throws IOException { 
 			 userController.initMessage();
-		     chargeDataPspm();
+		     chargeData("PS");
 		     //chargeDataPgspm();
 			 //vider();
 			 return userController.renderPage(value);
@@ -2638,7 +2629,7 @@ public class PpmController {
 				//methode qui charge les financements du projet crée
 				chargeFinancement();
 				//methode qui charge la liste des pgpm
-				chargeData();
+				//chargeData(typePlan);
 				
 				//Message de Confirmation
 				 userController.setTexteMsg("Financement enregistré avec succès !");
@@ -2711,7 +2702,14 @@ public class PpmController {
 								 userController.setSevrityMsg("success");
 								 //return	null;  
 								 //listSelectionTransmission.clear();
-								 chargeData(); 
+								  if(controleController.type == "PPM") {
+								      //creerDetailPassation();
+									  chargeData("PN");
+				                 }else 
+				                      if(controleController.type == "PSPM"){
+				                    	  chargeData("PS");
+				                 }
+								  
 					 		     //chargePpmTrans();
 				 		   }
 			 		   
@@ -2780,8 +2778,8 @@ public class PpmController {
 								 userController.setSevrityMsg("success");
 				 		   }	
 					     } 
-		 		       chargeDataPspm();
-		 		      chargePspmTrans();
+	     	            chargeData("PS");
+		 		      //chargePspmTrans();
 		 		     //Actualisation du Tableau de Bord
 		 			  tableauBordController.chargeDataPspm();
 	         }
@@ -2856,7 +2854,13 @@ public class PpmController {
 				 userController.setSevrityMsg("success");
 				//return null;
 				 
-				   chargeData();
+				  if(controleController.type == "PPM") {
+				      //creerDetailPassation();
+					  chargeData("PN");
+                 }else 
+                      if(controleController.type == "PSPM"){
+                    	  chargeData("PS");
+                 }
 		 		  //chargePpmValDmp();
 		 		  //Actualisation du Tableau de Bord
 		 		  tableauBordController.chargeDataPpm();
@@ -2917,7 +2921,7 @@ public class PpmController {
 				 
 		 		  //chargeData();
 		 		  //chargeDataAvaliderPpm();
-		 		  chargeDataAvaliderPspm();
+		 		  //chargeDataAvaliderPspm();
 		 		 chargePspmValCp();
 		 		  chargePspmValDmp();
 		 		  //Actualisation du Tableau de Bord
@@ -2977,7 +2981,13 @@ public class PpmController {
 								 userController.setRenderMsg(true);
 								 userController.setSevrityMsg("success");
 			
-								 chargeData();
+								  if(controleController.type == "PPM") {
+								      //creerDetailPassation();
+									  chargeData("PN");
+				                 }else 
+				                      if(controleController.type == "PSPM"){
+				                    	  chargeData("PS");
+				                 }
 			                   //Chargement des listes 
 					           //chargeDataAvaliderPpm();
 					           //chargeDataAvaliderPspm();
@@ -3043,7 +3053,7 @@ public class PpmController {
 									 userController.setSevrityMsg("success");
 				                   //Chargement des listes 
 						           //chargeDataAvaliderPpm();
-						           chargeDataAvaliderPspm();
+						          // chargeDataAvaliderPspm();
 						     
 						           chargePpmDifCp();
 						           chargePpmDifDmp();
@@ -3120,7 +3130,7 @@ public class PpmController {
 			                      
 				                   //Chargement des listes 
 						           //chargeDataAvaliderPpm();
-						           chargeDataAvaliderPspm();
+						           //chargeDataAvaliderPspm();
 						           chargePspmDifCp();
 						           chargePspmDifDmp();
 						          //Actualisation du Tableau de Bord
@@ -3184,7 +3194,7 @@ public class PpmController {
 			                      
 				                   //Chargement des listes 
 						           //chargeDataAvaliderPpm();
-						           chargeDataAvaliderPspm();
+						           //chargeDataAvaliderPspm();
 						           chargePspmDifCp();
 						           chargePspmDifDmp();
 						          //Actualisation du Tableau de Bord
@@ -3227,7 +3237,7 @@ public class PpmController {
 				 //Action de fermer
 				 public String fermerForm(String value ,String action) throws IOException {
 					 userController.initMessage();
-					 chargeDataPspm(); 
+					 chargeData("PS"); 
 					 vider();
 					 return userController.renderPage(value);
 				 }
@@ -3268,7 +3278,13 @@ public class PpmController {
 		 controleController.redirectionDynamicProcedures(action);	 
 		     switch(value) {
 				case "ppm1":
-					 chargeData();
+					  if(controleController.type == "PPM") {
+					      //creerDetailPassation();
+						  chargeData("PN");
+	                 }else 
+	                      if(controleController.type == "PSPM"){
+	                    	  chargeData("PS");
+	                 }
 					 //chargeDataAvaliderPpm();
 					 vider();
 					_logger.info("value: "+value+" action "+action);	
@@ -3296,8 +3312,8 @@ public class PpmController {
 					chargeSourceFinance();
 				break;
 				case "pspm1": 
-					chargeDataPspm();
-		 			chargeDataAvaliderPspm();
+					chargeData("PS");
+		 			//chargeDataAvaliderPspm();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 			    }
