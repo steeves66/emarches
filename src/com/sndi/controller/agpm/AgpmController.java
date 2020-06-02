@@ -1,5 +1,6 @@
 package com.sndi.controller.agpm;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -54,7 +55,7 @@ import com.sndi.model.VAgpmliste;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VProjetAgpm;
 import com.sndi.model.VUpdateAgpm;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
@@ -76,7 +77,7 @@ public class AgpmController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	 @Autowired
 	ControleController controleController;
 	 @Autowired
@@ -156,6 +157,8 @@ public class AgpmController {
      private List<VAgpmliste> agpmValDmp = new ArrayList<VAgpmliste>();
      private List<VAgpmliste> agpmDifCp = new ArrayList<VAgpmliste>();
      private List<VAgpmliste> agpmDifDmp = new ArrayList<VAgpmliste>();
+     
+     private String documentlog;
 	  
 	
 	 //Declaration des objets
@@ -809,6 +812,31 @@ public class AgpmController {
 				iservice.addObject(agpmStatut); 
 	  }
 	  
+	  
+	  public void Checklog() {
+			setDocumentlog("Fichier direct log ");
+			double kilobytes =0;
+			/*File file = new File("/opt/wildfly/standalone/log/server.log");*/
+			File file = new File("standalone/log/server.log");
+			
+			if(file.exists()){
+				
+				double bytes = file.length();
+				kilobytes = (bytes / 1024);
+				setDocumentlog(getDocumentlog() + ""+ kilobytes+"kb");
+				
+			}else{
+				System.out.println("File does not exists!");
+				setDocumentlog(getDocumentlog() + "File does not exists!");
+			}
+			
+		}
+	  
+	  public void openLog() throws IOException{
+			//downloadFileServlet.downloadFile("/opt/wildfly/standalone/log/server.log", "server.log");
+			downloadFileServlet.downloadFile("standalone/log/server.log", "server.log");
+
+		   }
 	  
 	  //Les methodes de l'ecran de methodeModification 
  	 public void modifier() {
@@ -3188,6 +3216,14 @@ public class AgpmController {
 
 	public void setVarAgpm(VAgpmliste varAgpm) {
 		this.varAgpm = varAgpm;
+	}
+
+	public String getDocumentlog() {
+		return documentlog;
+	}
+
+	public void setDocumentlog(String documentlog) {
+		this.documentlog = documentlog;
 	}
     
 }

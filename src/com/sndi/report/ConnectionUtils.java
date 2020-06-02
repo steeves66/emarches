@@ -1,31 +1,22 @@
 package com.sndi.report;
 
 import java.sql.Connection;
+
 import java.sql.SQLException;
- 
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+@org.springframework.stereotype.Service
 public class ConnectionUtils {
+	@Autowired
+	 DataSource dataSource;
  
-    public static Connection getConnection() throws SQLException,
-            ClassNotFoundException {
- 
-        // Using Oracle
-        // You may be replaced by other Database.
-        return OracleConnUtilsOld.getOracleConnection();
-    }
- 
-    //
-    // Test Connection ...
-    //
-    public static void main(String[] args) throws SQLException,
-            ClassNotFoundException {
- 
-        System.out.println("Get connection ... ");
- 
-        // Get a Connection object
-        Connection conn = ConnectionUtils.getConnection();
- 
-        System.out.println("Get connection " + conn);
- 
-        System.out.println("Done!");
-    }
+	 public  Connection getConnection() throws ClassNotFoundException,
+     SQLException, NamingException {
+
+	Connection conn = dataSource.getConnection();
+ return conn;
+}
 }

@@ -600,6 +600,13 @@
     <!--DEBUT PANEL DE VALIDATION -->
     
     <!-- FIN PANEL DE TRANSMISSION GROUPEE -->
+     <p:commandLink rendered="false" styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e;"  action="#{agpmController.Checklog()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Telecharger le log check
+				      </p:commandLink>
+				      
+	<p:commandLink rendered="false" styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e;"  action="#{agpmController.openLog()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Telecharger le log open
+				      </p:commandLink>
  
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer

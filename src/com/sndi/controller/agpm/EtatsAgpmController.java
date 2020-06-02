@@ -22,7 +22,7 @@ import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TFinancement;
 import com.sndi.model.VAgpmDetails;
 import com.sndi.model.VAgpmliste;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -39,7 +39,7 @@ public class EtatsAgpmController {
 	@Autowired
 	UserController userController;
 	@Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	@Autowired
 	 FileUploadController fileUploadController;
 	 

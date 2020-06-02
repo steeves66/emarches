@@ -33,7 +33,7 @@ import com.sndi.model.VAgpmDetails;
 import com.sndi.model.VBesoin;
 import com.sndi.model.VFinancement;
 import com.sndi.model.VPgpm;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -50,7 +50,7 @@ public class EtatsController {
 	@Autowired
 	UserController userController;
 	@Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	@Autowired
 	 FileUploadController fileUploadController;
 	 

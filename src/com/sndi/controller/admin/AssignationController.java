@@ -24,7 +24,7 @@ import com.sndi.model.TFonction;
 import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
 import com.sndi.model.VFonctionAssignation;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.KeyGen;
@@ -43,7 +43,7 @@ public class AssignationController {
 	UserController userController;
 	
 	@Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	
 	private String filterCode="";
 	private TAssignation assignation= new TAssignation();

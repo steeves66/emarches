@@ -94,7 +94,7 @@ import com.sndi.model.VVenteLot;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
 import com.sndi.model.VbTempParametreLot;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
@@ -120,7 +120,7 @@ public class DaoController {
 	 KeyGen keyGen;
 	
 	 @Autowired
-	 ProjetReportOld projetReport;
+	 ProjetReport projetReport;
 	 
 	 @Autowired
 	 ControleController controleController;

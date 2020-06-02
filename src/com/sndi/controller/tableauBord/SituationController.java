@@ -28,7 +28,7 @@ import com.sndi.model.TLotAao;
 import com.sndi.model.TStatut;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VPpmPgpm;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.KeyGen;
@@ -46,7 +46,7 @@ public class SituationController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	 
 	 
 	 @PostConstruct

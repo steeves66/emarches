@@ -4,35 +4,47 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 import com.sndi.utilitaires.GRFProperties;
  
 public class OracleConnUtils {
  
     public static Connection getOracleConnection()
             throws ClassNotFoundException, SQLException {
-    	
-    	//Parametres local 
-    	
-    	String hostName = "localhost";
-          String sid = "xe";
-          String userName = "emap";
-          String password = "adminemap";
-		
-        
-        return getOracleConnection(hostName, sid, userName, password);
+    	 
+         
+        return getOracleConnection();
     }
  
-    public static Connection getOracleConnection(String hostName, String sid,
-            String userName, String password) throws ClassNotFoundException,
-            SQLException { 
-        Class.forName("oracle.jdbc.driver.OracleDriver");
+    public static Connection getConnection() throws ClassNotFoundException,
+            SQLException, NamingException {
  
- 
-        // Example: jdbc:oracle:thin:@localhost:1521:db11g
-        String connectionURL = "jdbc:oracle:thin:@" + hostName + ":1521:" + sid;
- 
-        Connection conn = DriverManager.getConnection(connectionURL, userName,
-                password);
+    	InitialContext initialContext = new InitialContext();
+    	DataSource dataSource = (DataSource)initialContext.lookup("java:/jdbc/emapDS");
+    	/*DataSource dataSource = (DataSource)initialContext.lookup("java:/jdbc/emapDevDS"); */
+    	Connection conn = dataSource.getConnection();
         return conn;
     }
-}
+/*    public static Connection getOracleConnection(String hostName, String sid,
+    		String userName, String password) throws ClassNotFoundException,
+    SQLException {
+    	
+    	
+    	// Declare the class Driver for ORACLE DB
+    	// This is necessary with Java 5 (or older)
+    	// Java6 (or newer) automatically find the appropriate driver.
+    	// If you use Java> 5, then this line is not needed.    
+    	Class.forName("oracle.jdbc.driver.OracleDriver");
+    	
+    	
+    	// Example: jdbc:oracle:thin:@localhost:1521:db11g
+    	String connectionURL = "jdbc:oracle:thin:@" + hostName + ":1521:" + sid;
+    	
+    	Connection conn = DriverManager.getConnection(connectionURL, userName,
+    			password);
+    	return conn;
+    }
+*/}

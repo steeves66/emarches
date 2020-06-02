@@ -37,7 +37,7 @@ public class VAgpmliste implements java.io.Serializable {
 	private Date agpDateValDmp;
 	private Date agpDteModif;
 	private String agpFonCodDmp;
-	private short agpGesCode;
+	private long agpGesCode;
 	private Long finId;
 	private long proId;
 	private Long decId;
@@ -57,7 +57,7 @@ public class VAgpmliste implements java.io.Serializable {
 	public VAgpmliste(long agpId, String agpCode, String finNumeroAccord, String proTitre, String baiLibelle,
 			String fonctionAc, String decOrganExecLibelle, String minLibelleCourt, String strTstCode, String agpActif,
 			String agpFonCod, String agpFonCodPf, String agpStaCode, String agpStatutRetour, Date agpDateValAc,
-			Date agpDateValCpmp, Date agpDateValDmp, Date agpDteModif, String agpFonCodDmp, short agpGesCode, Long finId, long proId,
+			Date agpDateValCpmp, Date agpDateValDmp, Date agpDteModif, String agpFonCodDmp, long agpGesCode, Long finId, long proId,
 			Long decId) {
 		this.agpId = agpId;
 		this.agpCode = agpCode;
@@ -257,11 +257,11 @@ public class VAgpmliste implements java.io.Serializable {
 	}
 	
 	@Column(name = "AGP_GES_CODE", nullable = false, precision = 4, scale = 0)
-	public short getAgpGesCode() {
+	public long getAgpGesCode() {
 		return this.agpGesCode;
 	}
 
-	public void setAgpGesCode(short agpGesCode) {
+	public void setAgpGesCode(long agpGesCode) {
 		this.agpGesCode = agpGesCode;
 	}
 

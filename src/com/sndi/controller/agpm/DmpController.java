@@ -20,7 +20,7 @@ import com.sndi.model.TAgpm;
 import com.sndi.model.THistoAgpm;
 import com.sndi.model.TOperateur;
 import com.sndi.model.TStatut;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -40,7 +40,7 @@ public class DmpController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	 @Autowired
 	ControleController controleController;
 	 @Autowired

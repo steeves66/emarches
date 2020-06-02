@@ -31,7 +31,7 @@ import com.sndi.model.TMotdepasse;
 import com.sndi.model.TOperateur;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeFonction;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.CustomPasswordEncoder;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
@@ -56,7 +56,7 @@ public class OperateurController {
 	@Autowired
 	KeyGen keyGen;
 	 @Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	@Autowired
 	ConstantService constantService;
 	

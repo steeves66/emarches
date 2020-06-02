@@ -27,7 +27,7 @@ import com.sndi.model.VFinancementPgpm;
 import com.sndi.model.VPgpm;
 import com.sndi.model.VPgpmDetails;
 import com.sndi.model.VPgpmliste;
-import com.sndi.report.ProjetReportOld;
+import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
@@ -44,7 +44,7 @@ public class EtatsPgpmController {
 	@Autowired
 	UserController userController;
 	@Autowired
-	ProjetReportOld projetReport;
+	ProjetReport projetReport;
 	@Autowired
 	 FileUploadController fileUploadController;
 	@Autowired
