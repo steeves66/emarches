@@ -746,12 +746,12 @@ public class PpmController {
 */		 
 		 
 		//Filtre multicritère pour les PPM : Nouvelle Methode
-			public void chargerPpmRecherche() { 
+			public void chargerPpmRecherche(String typePlan) { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
 					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
 							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
-							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 							new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("listePpm size: "+listePpm.size());
@@ -765,34 +765,34 @@ public class PpmController {
 					    	  listePpm.clear();
 					    	  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 											"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 											new WhereClause("DPP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 										    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 										_logger.info("listePpm size: "+listePpm.size());	
 										//Actualisation du Tableau de Bord
-										tableauBordController.chargeDataPpm();
+										//tableauBordController.chargeDataPpm();
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  listePpm.clear();
 					    		  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 									new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
 									new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 									 new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 									_logger.info("listePpm size: "+listePpm.size());
 									//Actualisation du Tableau de Bord
-									tableauBordController.chargeDataPpm();
+									//tableauBordController.chargeDataPpm();
 		         	  }else 
 				    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 				    		  listePpm.clear();
 				    		  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
 								new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 								 new WhereClause("AFF_DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 								_logger.info("listePpm size: "+listePpm.size());
 								//Actualisation du Tableau de Bord
-								tableauBordController.chargeDataPpm();
+								//tableauBordController.chargeDataPpm();
 	         	  }
 			     }
 		 //Fin de Recherche pour nouvelle Methode
@@ -889,7 +889,7 @@ public class PpmController {
 			//Fin de Recherche pour les PSPM
 			
 			//Filtre multicritère pour les PSPM : Nouvelle Methode
-			public void chargerPspmRecherche() { 
+			/*public void chargerPspmRecherche() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
 					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
@@ -929,20 +929,20 @@ public class PpmController {
 										//Actualisation du Tableau de Bord
 										tableauBordController.chargeDataPspm();
 						    	  }
-			           }
+			           }*/
 			//Fin de la methode de recherche des pspm pour la nouvelle methode
 			
 			//Réinitialiser les PPM : Nouvelle Methode
-			public void reinitialiserPpm() { 
+			public void reinitialiserPpm(String typePlan) { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
 					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
 							"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D")),
-							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+							new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listePpm size: "+listePpm.size());
 						//Actualisation du Tableau de Bord
-						tableauBordController.chargeDataPpm();
+						//tableauBordController.chargeDataPpm();
 						//Affichage du nombre de ppm saisis
 						nbrePpm =""+getNbrePpmTotal();
 						multiFiltre="";
@@ -951,40 +951,40 @@ public class PpmController {
 					    	  listePpm.clear();
 					    	  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 											"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
-											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+											new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								            new WhereClause("DPP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 										_logger.info("listePpm size: "+listePpm.size());	
 										//Actualisation du Tableau de Bord
-										tableauBordController.chargeDataPpm();
+										//tableauBordController.chargeDataPpm();
 										multiFiltre="";
 					        }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 					    		  listePpm.clear();
 					    		  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+									new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 									new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
 									new WhereClause("DPP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 									_logger.info("listePpm size: "+listePpm.size());
 									//Actualisation du Tableau de Bord
-									tableauBordController.chargeDataPpm();
+									//tableauBordController.chargeDataPpm();
 									multiFiltre="";
 		         	  }else 
 				    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 				    		  listePpm.clear();
 				    		  listePpm = (List<VPpmliste>) iservice.getObjectsByColumnDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 								new WhereClause("DPP_STA_CODE",WhereClause.Comparateur.EQ,"S2V"),
 								new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								_logger.info("listePpm size: "+listePpm.size());
 								//Actualisation du Tableau de Bord
-								tableauBordController.chargeDataPpm();
+								//tableauBordController.chargeDataPpm();
 								multiFiltre="";
 	         	  }
 			     }
 			
 		 
 			//Réinitialisation de la recherche multicritère pour les PSPM : Nouvelle Methode
-			public void reinitialiserPspm() { 
+			/*public void reinitialiserPspm() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					getListePpm().clear();
 					 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")), 
@@ -1033,7 +1033,7 @@ public class PpmController {
 								multiFiltre="";
 	         	     }
 			     }
-		 
+		 */
 		
 		 
 		 //Affichage dynamique des dates prévisionnelles en procédure simplifiée
@@ -1921,20 +1921,9 @@ public class PpmController {
 			 	  		
 			 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 						String rechercheAll = search.replace("null","");
+						detailPass.setDppRecherche(rechercheAll);
+						iservice.updateObject(detailPass);
 						
-						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
-			      				TAffichagePpm affgp = new TAffichagePpm();
-			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-			      				   affgp.setAffDppRecherche(rechercheAll);
-				      			  iservice.updateObject(affgp);
-				      	
-				      	List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-					      new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-				      	TDetailPlanPassation detP = new TDetailPlanPassation();
-				      			if(!DET.isEmpty()) detP =DET.get(0); 
-				      			    detP.setDppRecherche(rechercheAll);
-					      			iservice.updateObject(detP);
 			 		     recupDateGenere();
 			 			chargeData(typePlan);
 			 			boutonEdit =true; 
@@ -2003,21 +1992,8 @@ public class PpmController {
 			 	  		
 			 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 						String rechercheAll = search.replace("null","");
-						
-						List<TAffichagePpm> AFG =iservice.getObjectsByColumn("TAffichagePpm", new ArrayList<String>(Arrays.asList("AFF_DPP_ID")),
-				      				new WhereClause("AFF_DPP_ID",WhereClause.Comparateur.EQ,""+affichagePpm.getAffDppId()));
-			      				TAffichagePpm affgp = new TAffichagePpm();
-			      				if(!AFG.isEmpty()) affgp =AFG.get(0); 
-			      				   affgp.setAffDppRecherche(rechercheAll);
-				      			  iservice.updateObject(affgp);
-				      	  
-
-				      List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-							 TDetailPlanPassation detP = new TDetailPlanPassation();
-							  if(!DET.isEmpty()) detP =DET.get(0); 
-							  detP.setDppRecherche(rechercheAll);
-							    iservice.updateObject(detP);			      			  
+						detailPass.setDppRecherche(rechercheAll);
+						iservice.updateObject(detailPass);
 				      			  
 				      			  
 				      			//Insertion dans T_Financement_PPM
@@ -2195,25 +2171,50 @@ public class PpmController {
 	  	 }
 	  	 
 	  	 public void saveDetailPlan(TPlanPassation TPlanPassation,String typePlan) {
-		     detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
-	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
-	  		 detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
-	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
-	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
-	  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
-	  		 detailPass.setTPlanPassation(TPlanPassation);
-	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-	  		 detailPass.setDppTypePlan(typePlan);
-	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
-	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
-	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
-	  		 detailPass.setTStatut(new TStatut("S1S"));
-	  		 detailPass.setDppStatutRetour("0");
-	  		 detailPass.setDppStatutDao("N");
-	  		 iservice.addObject(detailPass);
+	  		 
+	  		 
+
+             if(controleController.type == "PPM") {
+            	 detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
+    	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
+    	  		 detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
+    	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
+    	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+    	  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+    	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
+    	  		 detailPass.setTPlanPassation(TPlanPassation);
+    	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+    	  		 detailPass.setDppTypePlan(typePlan);
+    	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+    	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+    	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+    	  		 detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+    	  		 detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+    	  		 detailPass.setTStatut(new TStatut("S1S"));
+    	  		 detailPass.setDppStatutRetour("0");
+    	  		 detailPass.setDppStatutDao("N");
+    	  		 iservice.addObject(detailPass);
+             }else 
+                  if(controleController.type == "PSPM"){
+                	  detailPass.setTTypeMarche(new TTypeMarche(pgspm.getGpgTymCode()));
+            		    detailPass.setTModePassation(new TModePassation(pgspm.getGpgMopCode()));
+            		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgspm.getGpgId()));
+            		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
+            		    detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+            		    detailPass.setTPlanPassation(planPass);
+            		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+            		    detailPass.setDppTypePlan(typePlan);
+            		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+            		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+            		    detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+           	  		    detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+            		    detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+            		    detailPass.setTStatut(new TStatut("S1S"));
+            		    detailPass.setDppStatutRetour("0");
+            		    detailPass.setDppStatutDao("N");
+            		    iservice.addObject(detailPass);  
+             } 
+	  		
 	  	 }
 	  	 
 	  	//Methode d'historisation
@@ -2705,9 +2706,11 @@ public class PpmController {
 								  if(controleController.type == "PPM") {
 								      //creerDetailPassation();
 									  chargeData("PN");
+									  tableauBordController.chargeDataPpm();
 				                 }else 
 				                      if(controleController.type == "PSPM"){
 				                    	  chargeData("PS");
+				                    	  tableauBordController.chargeDataPspm();
 				                 }
 								  
 					 		     //chargePpmTrans();
@@ -2723,7 +2726,7 @@ public class PpmController {
 	     
 	     //Transmission par l'AC,CPMP,DMP
 		 //@Transactional
-	     public void transmettrePspm()throws IOException{
+	   /*  public void transmettrePspm()throws IOException{
 	     	if (listSelectionTransmission.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,
 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune opération selectionnée", ""));
@@ -2784,7 +2787,7 @@ public class PpmController {
 		 			  tableauBordController.chargeDataPspm();
 	         }
 	     
-	     
+	     */
 	     
 	     
 	     //Validation par le CPMP DMP
@@ -2857,20 +2860,22 @@ public class PpmController {
 				  if(controleController.type == "PPM") {
 				      //creerDetailPassation();
 					  chargeData("PN");
+					  tableauBordController.chargeDataPpm();
                  }else 
                       if(controleController.type == "PSPM"){
                     	  chargeData("PS");
+                    	  tableauBordController.chargeDataPspm();
                  }
 		 		  //chargePpmValDmp();
 		 		  //Actualisation du Tableau de Bord
-		 		  tableauBordController.chargeDataPpm();
+		 		  
 						}
 	     
 	     
 	     
 	   //Validation par le CPMP DMP
 	     //@Transactional
-			public void validerPspmCPMPDMP()throws IOException{ 
+			/*public void validerPspmCPMPDMP()throws IOException{ 
 		 		if (listSelectionTransmission.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,
 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune opération selectionnée", ""));
@@ -2926,7 +2931,7 @@ public class PpmController {
 		 		  chargePspmValDmp();
 		 		  //Actualisation du Tableau de Bord
 		 		  tableauBordController.chargeDataPspm();
-						}
+						}*/
 	     
 	     
 	     
