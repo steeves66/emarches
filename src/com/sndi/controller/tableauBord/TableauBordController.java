@@ -525,6 +525,7 @@ public class TableauBordController {
 					//Début PPM
 					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 						ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR",typePlan);
+						 pgspmAcAttenteValide = ""+getAcNpsAttenteValide("S1S","S2D","PGD");
 						ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT",typePlan);
 						ppmDmValideAc = ""+getPpmValideDmpAc("S3V",typePlan);
 						ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR",typePlan); 

@@ -630,6 +630,7 @@ public class PpmController {
 						new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 						new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					_logger.info("listePpm size: "+listePpm.size());
+					_logger.info("type plan: "+typePlan);
 					//Actualisation du Tableau de Bord
 					//tableauBordController.chargeDataPpm();
 					 if(controleController.type == "PPM") {
@@ -2746,6 +2747,19 @@ public class PpmController {
 				 			
 				 			    //Insertion de chaque ligne dans T_adep_log avec le statut correspondant
 								historiser(""+statutTrans,passDetail,"Opération transmise à la Cellule de Passation");
+								
+								if(controleController.type == "PPM") {
+								
+									tableauBordController.chargeDataPpm("PN");
+									chargePpmTrans("PN");
+									chargeData("PN");
+							          }else 
+							              if(controleController.type == "PSPM"){
+							            	  
+							             	 tableauBordController.chargeDataPpm("PS");
+							             	chargePpmTrans("PS");
+							             	chargeData("PS");
+							         }
 								 
 								 userController.setTexteMsg("Transmission effectuée avec succès !");
 								 userController.setRenderMsg(true);
@@ -2762,12 +2776,12 @@ public class PpmController {
 		 		       //chargeDataPspm();
 		 		     //Actualisation du Tableau de Bord
 		 			  //tableauBordController.chargeDataPpm();
-				     	 if(controleController.type == "PPM") {
+				     	 /*if(controleController.type == "PPM") {
 								tableauBordController.chargeDataPpm("PN");
 			          }else 
 			              if(controleController.type == "PSPM"){
 			             	 tableauBordController.chargeDataPpm("PS");
-			         }
+			         }*/
 	           }
 	     
 	     
@@ -2898,6 +2912,19 @@ public class PpmController {
 				//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
 			     historiser(""+statutUpdate,passDetail,"Opération validée par la DMP");
 			     
+			 	if(controleController.type == "PPM") {
+					
+					tableauBordController.chargeDataPpm("PN");
+					chargePpmTrans("PN");
+					chargeData("PN");
+			          }else 
+			              if(controleController.type == "PSPM"){
+			            	  
+			             	 tableauBordController.chargeDataPpm("PS");
+			             	chargePpmTrans("PS");
+			             	chargeData("PS");
+			         }
+			     
 				//Message de confirmation		  
 				 userController.setTexteMsg(" Validation effectuée avec succès !");
 				 userController.setRenderMsg(true);
@@ -2907,12 +2934,12 @@ public class PpmController {
 				
 		 		  //chargePpmValDmp();
 		 		  //Actualisation du Tableau de Bord
-				 if(controleController.type == "PPM") {
+				/* if(controleController.type == "PPM") {
 						tableauBordController.chargeDataPpm("PN");
              }else 
                   if(controleController.type == "PSPM"){
                  	 tableauBordController.chargeDataPpm("PS");
-             }
+             }*/
 		 		  
 						}
 	     
@@ -3353,7 +3380,7 @@ public class PpmController {
 		     switch(value) {
 				case "ppm1":
 						  chargeData("PN");
-						  chargePpmTrans("PN");
+						  //chargePpmTrans("PN");
 					 //chargeDataAvaliderPpm();
 					 vider();
 					_logger.info("value: "+value+" action "+action);	
@@ -3382,7 +3409,7 @@ public class PpmController {
 				break;
 				case "pspm1": 
 	                    chargeData("PS");
-	                    chargePpmTrans("PS");
+	                    //chargePpmTrans("PS");
 	                 
 		 			//chargeDataAvaliderPspm();
 		 			_logger.info("value: "+value+" action: "+action);
