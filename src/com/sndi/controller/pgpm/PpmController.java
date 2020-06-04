@@ -122,7 +122,7 @@ public class PpmController {
 		 chargeFinancement();
 		 //chargeMarches();
 		 //chargeModePassation();
-		 chargePpmTrans();
+		// chargePpmTrans();
 		 chargePspmTrans();
 		 chargePpmValDmp();
 		 chargePpmValDmpAc();
@@ -304,11 +304,11 @@ public class PpmController {
 		 
 		 
 		 //Liste des Ppm transmis par l'acteur connecté
-		 public void chargePpmTrans() {
+		 public void chargePpmTrans(String typePlan) {
 			 listePpm.clear();
 			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 					   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
-					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
 						 new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 		 
@@ -571,7 +571,14 @@ public class PpmController {
 					new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listePpm size: "+listePpm.size());
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataPpm();
+				
+				 if(controleController.type == "PPM") {
+						tableauBordController.chargeDataPpm("PN");
+                }else 
+                     if(controleController.type == "PSPM"){
+                    	 tableauBordController.chargeDataPpm("PS");
+                }
+			
 		}
 	 
 	 
@@ -624,7 +631,13 @@ public class PpmController {
 						new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					_logger.info("listePpm size: "+listePpm.size());
 					//Actualisation du Tableau de Bord
-					tableauBordController.chargeDataPpm();
+					//tableauBordController.chargeDataPpm();
+					 if(controleController.type == "PPM") {
+							tableauBordController.chargeDataPpm("PN");
+	                }else 
+	                     if(controleController.type == "PSPM"){
+	                    	 tableauBordController.chargeDataPpm("PS");
+	                }
 					//Affichage du nombre de ppm saisis
 					//nbrePpm =""+getNbrePpmTotal();
 			 }else {
@@ -636,7 +649,13 @@ public class PpmController {
 								new WhereClause("DPP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 							_logger.info("listePpm size: "+listePpm.size());	
 							//Actualisation du Tableau de Bord
-							tableauBordController.chargeDataPpm();
+							//tableauBordController.chargeDataPpm();
+							 if(controleController.type == "PPM") {
+									tableauBordController.chargeDataPpm("PN");
+			                }else 
+			                     if(controleController.type == "PSPM"){
+			                    	 tableauBordController.chargeDataPpm("PS");
+			                }
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 listePpm.clear();
@@ -646,7 +665,13 @@ public class PpmController {
 								new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								_logger.info("listePpm size: "+listePpm.size());
 								//Actualisation du Tableau de Bord
-								tableauBordController.chargeDataPpm();
+								//tableauBordController.chargeDataPpm();
+								 if(controleController.type == "PPM") {
+										tableauBordController.chargeDataPpm("PN");
+				                }else 
+				                     if(controleController.type == "PSPM"){
+				                    	 tableauBordController.chargeDataPpm("PS");
+				                }
 					 }else
 						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 							  listePpm.clear();
@@ -656,7 +681,13 @@ public class PpmController {
 								new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								_logger.info("listePpm size: "+listePpm.size());
 								//Actualisation du Tableau de Bord
-								tableauBordController.chargeDataPpm(); 
+								//tableauBordController.chargeDataPpm(); 
+								 if(controleController.type == "PPM") {
+										tableauBordController.chargeDataPpm("PN");
+				                }else 
+				                     if(controleController.type == "PSPM"){
+				                    	 tableauBordController.chargeDataPpm("PS");
+				                }
 				     }
 			     } 
 			   }
@@ -1929,7 +1960,13 @@ public class PpmController {
 			 			boutonEdit =true; 
 			 			boutonEditPspm =false;
 			 			//Actualisation du Tableau de Bord
-			 			tableauBordController.chargeDataPpm();
+			 			//tableauBordController.chargeDataPpm();
+			 			 if(controleController.type == "PPM") {
+								tableauBordController.chargeDataPpm("PN");
+		                }else 
+		                     if(controleController.type == "PSPM"){
+		                    	 tableauBordController.chargeDataPpm("PS");
+		                }
 			 			
 			 			userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 			 			userController.setRenderMsg(true);
@@ -2024,7 +2061,13 @@ public class PpmController {
 			 			boutonEditPspm =false;
 			 			
 			 			//Actualisation du Tableau de Bord
-			 			tableauBordController.chargeDataPpm();
+			 			//tableauBordController.chargeDataPpm();
+			 			 if(controleController.type == "PPM") {
+								tableauBordController.chargeDataPpm("PN");
+		                }else 
+		                     if(controleController.type == "PSPM"){
+		                    	 tableauBordController.chargeDataPpm("PS");
+		                }
 			 			
 			 			userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 			 			userController.setRenderMsg(true);
@@ -2131,7 +2174,13 @@ public class PpmController {
 			 			//controleController.btn_creerDetailPspmDmp=false;
 		 				
 		 				//Actualisation du Tableau de Bord
-		 				tableauBordController.chargeDataPpm();
+		 				//tableauBordController.chargeDataPpm();
+		 				 if(controleController.type == "PPM") {
+								tableauBordController.chargeDataPpm("PN");
+		                }else 
+		                     if(controleController.type == "PSPM"){
+		                    	 tableauBordController.chargeDataPpm("PS");
+		                }
 		 				
 		 				userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 		 				userController.setRenderMsg(true);
@@ -2703,15 +2752,7 @@ public class PpmController {
 								 userController.setSevrityMsg("success");
 								 //return	null;  
 								 //listSelectionTransmission.clear();
-								  if(controleController.type == "PPM") {
-								      //creerDetailPassation();
-									  chargeData("PN");
-									  tableauBordController.chargeDataPpm();
-				                 }else 
-				                      if(controleController.type == "PSPM"){
-				                    	  chargeData("PS");
-				                    	  tableauBordController.chargeDataPspm();
-				                 }
+								
 								  
 					 		     //chargePpmTrans();
 				 		   }
@@ -2720,7 +2761,13 @@ public class PpmController {
 		 		        
 		 		       //chargeDataPspm();
 		 		     //Actualisation du Tableau de Bord
-		 			  tableauBordController.chargeDataPpm();
+		 			  //tableauBordController.chargeDataPpm();
+				     	 if(controleController.type == "PPM") {
+								tableauBordController.chargeDataPpm("PN");
+			          }else 
+			              if(controleController.type == "PSPM"){
+			             	 tableauBordController.chargeDataPpm("PS");
+			         }
 	           }
 	     
 	     
@@ -2857,17 +2904,15 @@ public class PpmController {
 				 userController.setSevrityMsg("success");
 				//return null;
 				 
-				  if(controleController.type == "PPM") {
-				      //creerDetailPassation();
-					  chargeData("PN");
-					  tableauBordController.chargeDataPpm();
-                 }else 
-                      if(controleController.type == "PSPM"){
-                    	  chargeData("PS");
-                    	  tableauBordController.chargeDataPspm();
-                 }
+				
 		 		  //chargePpmValDmp();
 		 		  //Actualisation du Tableau de Bord
+				 if(controleController.type == "PPM") {
+						tableauBordController.chargeDataPpm("PN");
+             }else 
+                  if(controleController.type == "PSPM"){
+                 	 tableauBordController.chargeDataPpm("PS");
+             }
 		 		  
 						}
 	     
@@ -2997,10 +3042,16 @@ public class PpmController {
 					           //chargeDataAvaliderPpm();
 					           //chargeDataAvaliderPspm();
 					     
-					           chargePpmDifCp();
-					           chargePpmDifDmp();
+					           //chargePpmDifCp();
+					          // chargePpmDifDmp();
 					          //Actualisation du Tableau de Bord
-					          tableauBordController.chargeDataPpm();
+					          //tableauBordController.chargeDataPpm();
+								  if(controleController.type == "PPM") {
+										tableauBordController.chargeDataPpm("PN");
+				                }else 
+				                     if(controleController.type == "PSPM"){
+				                    	 tableauBordController.chargeDataPpm("PS");
+				                }
 							
 						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
 						 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -3063,7 +3114,13 @@ public class PpmController {
 						           chargePpmDifCp();
 						           chargePpmDifDmp();
 						          //Actualisation du Tableau de Bord
-						          tableauBordController.chargeDataPpm();
+						          //tableauBordController.chargeDataPpm();
+						           if(controleController.type == "PPM") {
+										tableauBordController.chargeDataPpm("PN");
+				                }else 
+				                     if(controleController.type == "PSPM"){
+				                    	 tableauBordController.chargeDataPpm("PS");
+				                }
 								
 							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PPM a été retourné!", "");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -3139,7 +3196,13 @@ public class PpmController {
 						           chargePspmDifCp();
 						           chargePspmDifDmp();
 						          //Actualisation du Tableau de Bord
-						          tableauBordController.chargeDataPspm();
+						          //tableauBordController.chargeDataPspm();
+						           if(controleController.type == "PPM") {
+										tableauBordController.chargeDataPpm("PN");
+				                }else 
+				                     if(controleController.type == "PSPM"){
+				                    	 tableauBordController.chargeDataPpm("PS");
+				                }
 						          
                              //Message de confirmation
 			                 userController.setTexteMsg("Opération retournée avec succès !");
@@ -3203,7 +3266,13 @@ public class PpmController {
 						           chargePspmDifCp();
 						           chargePspmDifDmp();
 						          //Actualisation du Tableau de Bord
-						          tableauBordController.chargeDataPspm();
+						          //tableauBordController.chargeDataPspm();
+						           if(controleController.type == "PPM") {
+										tableauBordController.chargeDataPpm("PN");
+				                }else 
+				                     if(controleController.type == "PSPM"){
+				                    	 tableauBordController.chargeDataPpm("PS");
+				                }
 						          
 
 			                 userController.setTexteMsg("Opération retournée avec succès !");
@@ -3283,13 +3352,8 @@ public class PpmController {
 		 controleController.redirectionDynamicProcedures(action);	 
 		     switch(value) {
 				case "ppm1":
-					  if(controleController.type == "PPM") {
-					      //creerDetailPassation();
 						  chargeData("PN");
-	                 }else 
-	                      if(controleController.type == "PSPM"){
-	                    	  chargeData("PS");
-	                 }
+						  chargePpmTrans("PN");
 					 //chargeDataAvaliderPpm();
 					 vider();
 					_logger.info("value: "+value+" action "+action);	
@@ -3317,7 +3381,9 @@ public class PpmController {
 					chargeSourceFinance();
 				break;
 				case "pspm1": 
-					chargeData("PS");
+	                    chargeData("PS");
+	                    chargePpmTrans("PS");
+	                 
 		 			//chargeDataAvaliderPspm();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;

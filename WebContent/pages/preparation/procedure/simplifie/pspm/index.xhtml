@@ -72,7 +72,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pspmAcTransmis}</h3>
+              <h3>#{tableauBordController.ppmAcTransmis}</h3>
 
               <p>Transmis</p>
             </div>
@@ -80,7 +80,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePspmTrans()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PS')}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -91,7 +91,7 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmValideAc}</h3>
+              <h3>#{tableauBordController.ppmDmValideAc}</h3>
 
               <p>Validé(s) par la DMP</p>
             </div>
@@ -99,7 +99,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
 
-            <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePspmValDmpAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePpmValDmpAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -111,7 +111,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.pspmAcDiffDmp}</h3>
+              <h3>#{tableauBordController.ppmAcDiffDmp}</h3>
 
               <p>Différé(s)</p>
             </div>
@@ -145,7 +145,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pspmCpSaisie}</h3>
+              <h3>#{tableauBordController.ppmCpSaisie}</h3>
 
               <p>En attente de transmission</p>
             </div>
@@ -162,14 +162,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pspmCpTransmis}</h3>
+              <h3>#{tableauBordController.ppmCpTransmis}</h3>
 
               <p>Transmis</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePspmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PS')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -190,7 +190,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pspmCpAttenteValide}</h3>
+              <h3>#{tableauBordController.ppmCpAttenteValide}</h3>
 
               <p>En attente de Validation</p>
             </div>
@@ -208,7 +208,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pspmCpValide}</h3>
+              <h3>#{tableauBordController.ppmCpValide}</h3>
 
               <p>Validé(s) par la CPMP</p>
             </div>
@@ -226,7 +226,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.pspmCpDifCpmp}</h3>
+              <h3>#{tableauBordController.ppmCpDifCpmp}</h3>
 
               <p>Différé(s) par la CPMP</p>
             </div>
@@ -262,7 +262,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmSaisie}</h3>
+              <h3>#{tableauBordController.ppmDmSaisie}</h3>
 
               <p>En attente de transmission</p>
             </div>
@@ -277,7 +277,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmTransmis}</h3>
+              <h3>#{tableauBordController.ppmDmTransmis}</h3>
 
               <p>Transmis</p>
             </div>
@@ -285,7 +285,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePspmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PS')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -307,7 +307,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmAttenteValide}</h3>
+              <h3>#{tableauBordController.ppmDmAttenteValide}</h3>
 
               <p>En attente de Validation</p>
             </div>
@@ -325,7 +325,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmValide}</h3>
+              <h3>#{tableauBordController.ppmDmValide}</h3>
 
               <p>Validé(s) par la DMP</p>
             </div>
@@ -345,7 +345,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmDiff}</h3>
+              <h3>#{tableauBordController.ppmDmDiff}</h3>
 
               <p>Différé(s) par la DMP</p>
             </div>
@@ -396,7 +396,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmTransmis}</h3>
+              <h3>#{tableauBordController.ppmDmTransmis}</h3>
 
               <p>Transmis</p>
             </div>
@@ -404,7 +404,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePspmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PS')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -426,7 +426,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmAttenteValide}</h3>
+              <h3>#{tableauBordController.ppmDmAttenteValide}</h3>
 
               <p>En attente de Validation</p>
             </div>
@@ -444,7 +444,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmValide}</h3>
+              <h3>#{tableauBordController.ppmDmValide}</h3>
 
               <p>Validé(s) par la DMP</p>
             </div>
@@ -464,7 +464,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.pspmDmDiff}</h3>
+              <h3>#{tableauBordController.ppmDmDiff}</h3>
 
               <p>Différé(s) par la DMP</p>
             </div>

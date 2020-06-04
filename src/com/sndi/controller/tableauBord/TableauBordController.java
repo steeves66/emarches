@@ -521,29 +521,29 @@ public class TableauBordController {
 		
 		
 		  //Tableau de Bord pour les PPM
-			public void chargeDataPpm() {
+			public void chargeDataPpm(String typePlan) {
 					//Début PPM
 					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-						ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR");
-						ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT");
-						ppmDmValideAc = ""+getPpmValideDmpAc("S3V");
-						ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR"); 
+						ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR",typePlan);
+						ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT",typePlan);
+						ppmDmValideAc = ""+getPpmValideDmpAc("S3V",typePlan);
+						ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR",typePlan); 
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-							 ppmCpAttenteValide = ""+getPpmAttenteValide("S1T","S3D");
-							 ppmCpValide =""+getPpmValideCmp("S2V");
-							 ppmCpDifCpmp = ""+getPpmDiffDossier("S2D");
-							 ppmCpDifDmp =""+getPpmDiffDmp("S3D","SPR");
+							 ppmCpAttenteValide = ""+getPpmAttenteValide("S1T","S3D",typePlan);
+							 ppmCpValide =""+getPpmValideCmp("S2V",typePlan);
+							 ppmCpDifCpmp = ""+getPpmDiffDossier("S2D",typePlan);
+							 ppmCpDifDmp =""+getPpmDiffDmp("S3D","SPR",typePlan);
 						 }else {
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-								 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT");
-								 ppmDmValide = ""+getPpmValideDmp("S3V");
-								 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
+								 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT",typePlan);
+								 ppmDmValide = ""+getPpmValideDmp("S3V",typePlan);
+								 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);
 							 }else {
 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-									 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT");
-									 ppmDmValide = ""+getPpmValideDmp("S3V");
-									 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
+									 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT",typePlan);
+									 ppmDmValide = ""+getPpmValideDmp("S3V",typePlan);
+									 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);
 								 }
 							 }
 					     } 
@@ -552,7 +552,7 @@ public class TableauBordController {
 				}
 		
 			//Tableau de Bord pour les PSPM
-			public void chargeDataPspm() {
+			/*public void chargeDataPspm() {
 				//Début PSPM
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 					pspmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D");
@@ -579,7 +579,7 @@ public class TableauBordController {
 				     } 
 				   }
 				//Fin PSPM
-			}
+			}*/
 		
 		
 		public void chargeDataPgpmPgspm() {
@@ -786,80 +786,6 @@ public class TableauBordController {
 		}
 		//Fin PRQ 	
 		
-		public void chargeDataPpmPspm(){
-			//Début PPM
-			 ppmTotal = ""+getPpmDossierTotal();
-			 ppmAcSaisie = ""+getAcPpmSaisieDossier("S1S");
-			 ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR");
-			 ppmAcDiffCpmp = ""+getPpmDiffCpmpACDossier("S2D");
-			 ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR");
-			 ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT");
-			 ppmCpSaisie = ""+getPpmSaisieDossier("S1S");
-			 ppmCpTransmis = ""+getPpmTransmisDossier("S1T");
-			 ppmCpDifCpmp = ""+getPpmDiffDossier("S2D");
-			 ppmCpValide =""+getPpmValideCmp("S2V");
-			 ppmCpDifDmp =""+getPpmDiffDmp("S3D","SPR");
-			 ppmCpAttenteValide = ""+getPpmAttenteValide("S1T","S3D");
-			 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT");
-			 ppmDmValide = ""+getPpmValideDmp("S3V");
-			 ppmDmSaisie = ""+getPpmSaisieDossier("S1S");
-			 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR");
-			 ppmDmTransmis = ""+getPpmTransmisDmpDossier("S1T");
-			 //Fin PPM
-			 
-			 //Début PSPM
-			 pspmTotal = ""+getPspmDossierTotal();
-			 pspmAcSaisie = ""+getAcPspmSaisieDossier("S1S");
-			 pspmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D");
-			 pspmAcDiffCpmp = ""+getPspmDiffCpmpACDossier("S2D");
-			 pspmAcDiffDmp = ""+getPspmDiffDmpACDossier("S3D","SPR");
-			 pspmAcTransmis = ""+getAcPspmTransmisDossier("S1T");
-			 pspmCpSaisie = ""+getPspmSaisieDossier("S1S");
-			 pspmCpTransmis = ""+getPspmTransmisDossier("S1T");
-			 pspmCpDifCpmp = ""+getPspmDiffDossier("S2D");
-			 pspmCpValide =""+getPspmValideCmp("S2V");
-			 pspmCpDifDmp =""+getPspmDiffDmp("S3D");
-			 pspmCpAttenteValide = ""+getPspmAttenteValide("S1T","S3D");
-			 pspmDmAttenteValide = ""+getPspmAttValideDmp("S2V");
-			 pspmDmValide = ""+getPspmValideDmp("S3V");
-			 pspmDmSaisie = ""+getPspmSaisieDossier("S1S");
-			 pspmDmDiff = ""+getPspmDiffDmp("S3D");
-			 pspmDmTransmis = ""+getPspmTransmisDmpDossier("S1T");
-			 //Fin PSPM
-		}
-		
-		/*public void chargeDataDao() {
-			 //Début DAO 
-			 daoTotal = ""+getDaoDossierTotal();
-			 //daoAcSaisie = ""+getAcDaoSaisieDossier("D1S","D1R");
-			 //daoAcPs=""+getAcDaoSaisiePs("SBO","SRO");
-			 //daoPriseTrait=""+getAcDaoSaisiePs("SB1","DOP");
-			 //daoChargeAttente = ""+getAcDaoAttenteCharge("D3A");
-			 //daoChargeVal = ""+getAcDaoValCharge("D4V");
-			 //daoDaoPub = ""+getAcDaoValidCsvPubDossier("DPU");
-			 daoAcAttenteValide = ""+getAcDaoAttenteValide("D1S","S2D"); 
-			 //daoCsvAttAff = ""+getDaoAttAffCsv("D2T","D5R","DOP");
-			 //daoCsvAttVal = ""+getAcDaoValChargeCsv("D4V");
-			 //daoaffecte = ""+getAcDaoAffecteDossier("D3A");
-			 daoCsvValide = ""+getAcDaoValidCsvDossier("D5V","DOP");
-			 //daoCsvValidation = ""+getAcDaoValidationCsvDossier("D5V","DOP","SBO");
-			 //daoCsvDiff = ""+getAcDaoDiffCsv("D5R");
-			 daoAcDiffCpmp = ""+getDaoDiffCpmpACDossier("D1R");
-			 //daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
-			 //daoAcDiffDmp = ""+getDaoDiffDmpACDossier("S3D");
-			 daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
-			 //daoCpSaisie = ""+getDaoSaisieDossier("D1T");
-			 daoCpTransmis = ""+getDaoTransmisDossier("D1T");
-			 //daoCpDifCpmp = ""+getDaoDiffDossier("D1R","D2R");
-			 //daoCpValide = ""+getDaoValideCmp("D2T");
-			 daoCpDifDmp =""+getDaoDiffDmp("S3D");
-			 daoCpAttenteValide = ""+getDaoAttenteValide("S1T","S3D");
-			 //daoAcAttVente = ""+getDaoAttenteRetrait("DPU","D6V");
-			 //daoAcAttRetrait = ""+getDaoAttenteVente("DVE");
-			 daoAcRetire = ""+getDaoAcRetire("RET");
-			 //daoChargeCor = ""+getAcDaoCorCharge("DC2");
-			 //Fin DAO	en Procédure Normale
-		}*/
 		
 		
 		
@@ -1747,7 +1673,7 @@ public int getNpsDiffDmp(String src1, String src2){
 
 
 
-//Début PSPM
+/*//Début PSPM
 //Nombre total des Pspm
 public int getPspmDossierTotal(){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
@@ -1829,13 +1755,13 @@ public int getPspmDiffDmpACDossier(String src1, String src2){
 }
 
 //pspm retournés par la CPMP (Son propre tableau de bord) : Ancienne Methode
-/*public int getPspmDiffDossier(String src){
+public int getPspmDiffDossier(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DPP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
-}*/
+}
 
 //pspm retournés par la CPMP (Son propre tableau de bord) : Nouvelle Methode
 public int getPspmDiffDossier(String src){
@@ -1847,12 +1773,12 @@ public int getPspmDiffDossier(String src){
 }
 
 //pspm retournés par la DMP : Ancienne Methode
-/*public int getPspmDiffDmp(String src){
+public int getPspmDiffDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
 	return	i;	
-} */
+} 
 
 //pspm retournés par la DMP : Nouvelle Methode
 public int getPspmDiffDmp(String src){
@@ -1864,13 +1790,13 @@ public int getPspmDiffDmp(String src){
 }
 
 //pspm en attente de validation par la CPMP : Ancienne Methode
-/*public int getPspmAttenteValide(String src1, String src2){
+public int getPspmAttenteValide(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DPP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;
-}*/
+}
 
 //pspm en attente de validation par la CPMP : Nouvelle Methode
 public int getPspmAttenteValide(String src1, String src2){
@@ -1883,13 +1809,13 @@ public int getPspmAttenteValide(String src1, String src2){
 
 
 //pspm validés par la CPMP : Ancienne Methode
-/*public int getPspmValideCmp(String src){
+public int getPspmValideCmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DPP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
-}*/ 
+} 
 
 //pspm validés par la CPMP : Nouvelle Methode
 public int getPspmValideCmp(String src){
@@ -1901,12 +1827,12 @@ public int getPspmValideCmp(String src){
 }
 
 //pspm validés par la DMP : Ancienne Methode
-/*public int getPspmValideDmp(String src){
+public int getPspmValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
 	return	i;	
-} */
+} 
 
 //pspm validés par la DMP : Nouvelle Methode
 public int getPspmValideDmp(String src){
@@ -1928,12 +1854,12 @@ public int getPspmValideDmpAc(String src){
 }
 
 //ppm en attente de validation par la DMP : Ancienne Methode
-/*public int getPspmAttValideDmp(String src){
+public int getPspmAttValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
 	return	i;	
-}*/
+}
 
 //ppm en attente de validation par la DMP : Nouvelle Methode
 public int getPspmAttValideDmp(String src){
@@ -1954,20 +1880,20 @@ public int getPspmTransmisDmpDossier(String src){
 	return	i;	
 }
 //Fin PSPM
-
+*/
 
 
 
 //Début PPM
 //Nombre total des Ppm
-public int getPpmDossierTotal(){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
-	new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+public int getPpmDossierTotal(String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
+	new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 return	i;	
 	} 
 //ppm saisi par le AC
 public int getAcPpmSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1975,66 +1901,66 @@ public int getAcPpmSaisieDossier(String src){
 }
 
 //ppm Transmis par le AC
-public int getAcPpmTransmisDossier(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+public int getAcPpmTransmisDossier(String src1, String src2,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //ppm en attente de transmission chez le AC
-public int getAcPpmAttenteValide(String src1, String src2, String src3){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+public int getAcPpmAttenteValide(String src1, String src2, String src3,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
 
 //ppm saisi par le CPMP
-public int getPpmSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmSaisieDossier(String src,String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 //ppm non transmis par la cpmp
-public int getPpmSaisieDossierIn(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+public int getPpmSaisieDossierIn(String src1, String src2,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 			new WhereClause("DPP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;
 }
 
 //ppm transmis par la cpmp
-public int getPpmTransmisDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmTransmisDossier(String src, String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 
 //ppm retournés par le cpmp chez le AC
-public int getPpmDiffCpmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmDiffCpmpACDossier(String src,String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //ppm retournés par le dmp chez le AC
-public int getPpmDiffDmpACDossier(String src1,String src2){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+public int getPpmDiffDmpACDossier(String src1,String src2,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
@@ -2049,10 +1975,10 @@ public int getPpmDiffDmpACDossier(String src1,String src2){
 }*/
 
 //ppm retournés par le cpmp (Son propre tableau de bord): Nouvelle Methode
-public int getPpmDiffDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmDiffDossier(String src,String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
@@ -2066,11 +1992,11 @@ public int getPpmDiffDossier(String src){
 }*/
 
 //ppm retournés par la dmp : Nouvelle Methode
-public int getPpmDiffDmp(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+public int getPpmDiffDmp(String src1, String src2,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 	return	i;	
 }
 
@@ -2085,10 +2011,10 @@ public int getPpmDiffDmp(String src1, String src2){
 }*/
 
 //ppm en attente de validation par le CPMP : Nouvelle Methode
-public int getPpmAttenteValide(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+public int getPpmAttenteValide(String src1, String src2,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
@@ -2104,21 +2030,21 @@ public int getPpmAttenteValide(String src1, String src2){
 }*/
 
 //ppm validés par la cpmp : Nouvelle Methode
-public int getPpmValideCmp(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmValideCmp(String src,String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 
 //ppm validés par la DMP côté AC
-public int getPpmValideDmpAc(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmValideDmpAc(String src,String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 	return	i;	
 }
 
@@ -2133,10 +2059,10 @@ public int getPpmValideDmpAc(String src){
 
 
 //ppm validés par la DMP : Nouvelle Methode 
-public int getPpmValideDmp(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmValideDmp(String src,String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
@@ -2151,20 +2077,20 @@ public int getPpmValideDmp(String src){
 
 
 //ppm en attente de validation par le dmp : Nouvelle Methode
-public int getPpmAttValideDmp(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_PASSATION", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+public int getPpmAttValideDmp(String src1, String src2,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
 			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 	return	i;	
 }
 
 
 //ppm transmis par le dmp
-public int getPpmTransmisDmpDossier(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_PASSATION", "DPP_ID",
+public int getPpmTransmisDmpDossier(String src,String typePlan){
+	int i = iservice.countTableByColumn("V_PPMLISTE", "DPP_ID",
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
