@@ -2885,6 +2885,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     		 detailPlan = new TDetailPlanGeneral();
     		 recupFonction = new TFonction();
     		 reucpMarche = new TTypeMarche();
+    		 recupAgpm = new TAgpm();
     		 recupModePassation = new VModePassationPn();
     		 newFinancement = new TFinancementPgpm();
     		 listeFinancement = new ArrayList<TFinancementPgpm>();
@@ -2897,6 +2898,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     		 baiCode ="";
     		 souCode=""; 
     		 sourfin="";
+    		 sit = "";
     	 } 
     	 
     
@@ -3140,6 +3142,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					listeFinancementPgpm.clear();
 					newFinancement = new TFinancementPgpm();
 					vider();
+					//controleController.etatLoveAgpm = false;
 					_logger.info("value: "+value+" action: "+action);
 				break;
 				case "pgpm3":

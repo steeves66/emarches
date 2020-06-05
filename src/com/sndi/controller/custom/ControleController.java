@@ -318,7 +318,7 @@ public class ControleController {
 	private boolean btn_apercuOuv =false;
 	private boolean btn_apercuAna =false;
 	private boolean btn_apercuJug =false;
-	private boolean etatLoveAgpm = false;
+	public boolean etatLoveAgpm = false;
 	private boolean etatLoveAgpmPs = false;
 	
 	//Fermer Apercu DAO,AMI,PRQ
