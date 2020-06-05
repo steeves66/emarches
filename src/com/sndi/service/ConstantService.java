@@ -104,6 +104,7 @@ public class ConstantService {
 		 chargeTStructureTable();
 		 chargeTTypeMarcheFilsTable();
 		 chargeTModePassationPnTable();
+		 chargeVModePassationTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
