@@ -696,13 +696,13 @@
 				        
 				         <p:column headerText="Lancement" styleClass="col-sm-2" >
 				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgDateDao}"  style="color:red; font-weight:bold" >
+         				<h:outputText value="#{slctdTb.gpgDateDao}"  style="color:red; font-weight:bold" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
          				 <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgDateDao}" >
+         				<h:outputText value="#{slctdTb.gpgDateDao}" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
@@ -747,7 +747,7 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
                               </p:commandLink>
                               
-                              <h:panelGroup rendered="#{slctdTb.TStatut.staCode == 'S1S'}">
+                              <h:panelGroup rendered="#{slctdTb.gpgStaCode == 'S1S'}">
                                <p:commandLink  oncomplete="PF('uploaddlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="Joindre Document" update=":content">
                                 <i class="ace-icon fa fa-download bigger-120" style="color: white"></i>
                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
@@ -858,13 +858,13 @@
 				        
 				        <p:column headerText="Lancement" styleClass="col-sm-2" >
 				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.affGpgDateDao}"  style="color:red; font-weight:bold" >
+         				<h:outputText value="#{slctdTb.gpgDateDao}"  style="color:red; font-weight:bold" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
          				 <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.affGpgDateDao}" >
+         				<h:outputText value="#{slctdTb.gpgDateDao}" >
          				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
@@ -1027,7 +1027,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
 					<div class="g12">
 						<div class="panel-heading">
-						Motif du retour de l'opération N° #{pgpmAcController.slctdTd.gpgId} du #{controleController.type} de l'AC : #{pgpmAcController.slctdTd.affGpgActeurSaisie}
+						Motif du retour de l'opération N° #{pgpmAcController.slctdTd.gpgId} du #{controleController.type} de l'AC : #{pgpmAcController.slctdTd.gpgActeurSaisie}
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">
