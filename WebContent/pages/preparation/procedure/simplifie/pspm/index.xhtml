@@ -55,7 +55,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmAcAttenteValide}</h3>
+              <h3>#{tableauBordController.pspmAcAttenteValide}</h3>
 
               <p>En attente de transmission</p>
             </div>
@@ -80,7 +80,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePspmTrans()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PS')}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -145,7 +145,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.ppmCpSaisie}</h3>
+              <h3>#{tableauBordController.ppmAcAttenteValide}</h3>
 
               <p>En attente de transmission</p>
             </div>

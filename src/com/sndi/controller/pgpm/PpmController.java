@@ -122,8 +122,8 @@ public class PpmController {
 		 chargeFinancement();
 		 //chargeMarches();
 		 //chargeModePassation();
-		// chargePpmTrans();
-		 chargePspmTrans();
+		 //chargePpmTrans();
+		 //chargePspmTrans();
 		 chargePpmValDmp();
 		 chargePpmValDmpAc();
 		 chargePspmValDmpAc();
@@ -304,12 +304,12 @@ public class PpmController {
 		 
 		 
 		 //Liste des Ppm transmis par l'acteur connecté
-		 public void chargePpmTrans(String typePlan) {
-			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-					   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
-					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
-						 new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+		 public void chargePpmTrans(String typePlan) { 
+				 listePpm.clear();
+				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+						   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+							 new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 		 
 		 //Liste des Ppm validés par la CPMP : Ancienne Methode

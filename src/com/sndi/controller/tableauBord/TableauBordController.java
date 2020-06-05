@@ -524,8 +524,15 @@ public class TableauBordController {
 			public void chargeDataPpm(String typePlan) {
 					//Début PPM
 					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-						ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR",typePlan);
-						 pgspmAcAttenteValide = ""+getAcNpsAttenteValide("S1S","S2D","PGD");
+						if(typePlan.equalsIgnoreCase("PN")) {
+							ppmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR",typePlan);
+						}else
+							if(typePlan.equalsIgnoreCase("PS")) {
+							ppmAcAttenteValide = ""+getAcPspmAttenteValide("S1S","S2D",typePlan);	
+							}
+						
+						
+						pspmAcAttenteValide = ""+getAcPpmAttenteValide("S1S","S2D","SPR",typePlan);
 						ppmAcTransmis = ""+getAcPpmTransmisDossier("S1T","SPT",typePlan);
 						ppmDmValideAc = ""+getPpmValideDmpAc("S3V",typePlan);
 						ppmAcDiffDmp = ""+getPpmDiffDmpACDossier("S3D","SPR",typePlan); 
@@ -1636,6 +1643,8 @@ public int getNpsValideDmp(String src){
 	return	i;	
 }
 
+
+
 //pgspm en attente de validation par la DMP : Ancienne Methode
 /*public int getNpsAttValideDmp(String src1, String src2){
 	int i  = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
@@ -1672,6 +1681,14 @@ public int getNpsDiffDmp(String src1, String src2){
 
 //Fin PGSPM
 
+//pspm en attente de transmission chez le AC
+public int getAcPspmAttenteValide(String src1, String src2,String typePlan){
+	int i = iservice.countTableByColumnIn("V_PPMLISTE", "DPP_ID",new ArrayList<String>(Arrays.asList("DPP_ID")),
+			"DPP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
+			new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;
+}
 
 
 /*//Début PSPM
