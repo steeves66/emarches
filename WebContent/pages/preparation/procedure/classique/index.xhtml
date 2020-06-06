@@ -93,7 +93,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
            
-            <p:commandLink  oncomplete="PF('detailDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink action="#{pgpmAcController.chargePgpmTrans()}" oncomplete="PF('detailDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -620,7 +620,7 @@
 				        </span>
                       <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche('PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
 					 </div>
 					 </div>
@@ -633,7 +633,7 @@
 				        </span>
                       <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="saisir le numero du #{controleController.type}" ></p:inputText> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgspmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche('PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
 					 </div>
 					 </div>
@@ -805,7 +805,7 @@
 				        </span>
                       <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche('PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
 					 </div>
 					 </div>
@@ -1107,9 +1107,9 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmTrans}" scrollable="true" scrollHeight="260"
+			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmListe}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
-			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PGPM transmis">
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.gpgLibFin}" />
@@ -1168,7 +1168,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmValCp}" scrollable="true" scrollHeight="465"
 						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
-			               emptyMessage="Aucun PGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PGPM validé">
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.gpgLibFin}" />
@@ -1239,7 +1239,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmValDmp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
-			               emptyMessage="Aucun PGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PGPM validé">
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.gpgLibFin}" />
@@ -1306,7 +1306,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 		<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmDifDmp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
-			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PGPM différé">
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-3" >
          				  <h:outputText value="#{slctdTb.gpgLibFin}" />
@@ -1374,7 +1374,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover"  var="slctdTb" value="#{pgpmAcController.pgpmDifCp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
-			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PGPM différé">
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.gpgLibFin}" />
@@ -1443,7 +1443,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 			<p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmDifDmp}" scrollable="true" scrollHeight="260"
 						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
-			               emptyMessage="Aucun PGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PGPM transmis">
 			               
 					    <p:column headerText="Financement" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.gpgLibFin}" />

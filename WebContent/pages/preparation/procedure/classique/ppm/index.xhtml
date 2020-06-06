@@ -640,7 +640,7 @@
 							
 							  
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listePpm}" 
-					rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun PPM enregistré" 
+					rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucune operation enregistrée" 
                        scrollable="true" scrollHeight="250" >
                          
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
@@ -925,7 +925,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
 						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PPM transmis">
 			               
 					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
          				  <h:outputText value="#{slctdTb.dppObjet}" />
@@ -983,7 +983,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
 						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PPM transmis">
 			               
 					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
          				  <h:outputText value="#{slctdTb.dppObjet}" />
@@ -1052,7 +1052,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
 						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PPM validé">
 			               
 					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
          				  <h:outputText value="#{slctdTb.dppObjet}" />
@@ -1117,7 +1117,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
 						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucun PGPM différé">
 			               
 					     <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
          				  <h:outputText value="#{slctdTb.dppObjet}" />
@@ -1185,7 +1185,7 @@
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
 						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
+			               emptyMessage="Aucun PPM différé">
 			               
 					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
          				  <h:outputText value="#{slctdTb.dppObjet}" />
