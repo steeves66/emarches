@@ -163,7 +163,7 @@ public class AgpmController {
 	
 	 //Declaration des objets
 	 private TAgpm agpm = new TAgpm();
-	 private TAffichageAgpm affichageAgpm = new TAffichageAgpm();
+	 //private TAffichageAgpm affichageAgpm = new TAffichageAgpm();
 	 private VAgpmliste vAgpm = new VAgpmliste();
 	 private VAgpmliste varAgpm = new VAgpmliste();
 	 private TAgpm demAgpm = new TAgpm();
@@ -326,40 +326,44 @@ public class AgpmController {
 		 public void chargeData() {
 			 agpmListe.clear();
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+				 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 							"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SDR")),
 							//new WhereClause("AGP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
 							new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 							new WhereClause("AGP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						     tableauBordController.chargeDataAgpm(); 
+						     multiFiltre="";
 							_logger.info("agpmListe size: "+agpmListe.size());
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 getValidationListe().clear();
-					 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+					 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 								"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 								new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 					          new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					 tableauBordController.chargeDataAgpm();
+					 multiFiltre="";
 						_logger.info("agpmListe size: "+agpmListe.size()); 
 					 
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 getValidationListe().clear();
-						 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+						 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 									"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 									new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 							     new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-							tableauBordController.chargeDataAgpm(); 
+							tableauBordController.chargeDataAgpm();
+							multiFiltre="";
 								_logger.info("agpmListe size: "+agpmListe.size());
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 							 getValidationListe().clear();
-							 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+							 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 										"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 										new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 								new WhereClause("FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								tableauBordController.chargeDataAgpm(); 
+								multiFiltre="";
 									_logger.info("objetListe size: "+agpmListe.size());
 						 }
 					 }
@@ -626,7 +630,7 @@ public class AgpmController {
 		public void chargerFiltreRecherche() { 
 			agpmListe.clear();
 			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+				agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 						"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SDR")),
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 						new WhereClause("AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
@@ -635,32 +639,32 @@ public class AgpmController {
 						_logger.info("agpmListe size: "+agpmListe.size());
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
-					    	  getValidationListe().clear();
-					    	  validationListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+					    	  agpmListe.clear();
+					    	  agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 									"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 									new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 					    			new WhereClause("AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							        //tableauBordController.chargeDataAgpm();
-								   _logger.info("validationListe size: "+validationListe.size());
+								   _logger.info("agpmListe size: "+agpmListe.size());
 								   
 					      }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-					    		  validationListe.clear();
-								validationListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+					    		  agpmListe.clear();
+					    		  agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 										"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V")),
 										new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 								new WhereClause("AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 								//tableauBordController.chargeDataAgpm(); 
-									_logger.info("objetListe size: "+validationListe.size());
+									_logger.info("agpmListe size: "+agpmListe.size());
 									
 					      }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-						    	    getValidationListe().clear();
-									validationListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+					    		  agpmListe.clear();
+					    		  agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 											"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V")),
 											new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 									new WhereClause("AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-										_logger.info("objetListe size: "+validationListe.size());
+										_logger.info("agpmListe size: "+agpmListe.size());
 										
 						      }
 			          }
@@ -668,16 +672,16 @@ public class AgpmController {
 	   
 		
 	  	//Filtre multicritère
-			public void reinitialiserAgpm() {  	
+			/*public void reinitialiserAgpm() {  	
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {						
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
-						    	  validationListe.clear();
-									 validationListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
+						    	  agpmListe.clear();
+						    	  agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
 												"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 												new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
 									 multiFiltre="";
-										_logger.info("validationListe size: "+validationListe.size()); 
+										_logger.info("agpmListe size: "+agpmListe.size()); 
 						    	  
 						      }else 
 						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
@@ -698,7 +702,7 @@ public class AgpmController {
 							          }
 			
 				
-				             }
+				             }*/
 	      	 
 	      	 
 	  //Méthode de création du projet
@@ -1100,7 +1104,7 @@ public class AgpmController {
 						  iservice.addObject(agpmStatut);
 						  
 						  //Insertion dans TAffichageAgpm
-						affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
+			/*			affichageAgpm.setAffAgpActeurSaisie(agpm.getAgpActeurSaisie());
 						affichageAgpm.setAffAgpActif(agpm.getAgpActif());
 						affichageAgpm.setAffAgpStatutRetour(agpm.getAgpStatutRetour());
 						affichageAgpm.setAffAgpId(agpm.getAgpId());
@@ -1115,7 +1119,7 @@ public class AgpmController {
 						affichageAgpm.setTProjet(projet);
 						affichageAgpm.setTSourceFinancement(new TSourceFinancement(souCode));
 						affichageAgpm.setTStatut(statuts);
-						iservice.addObject(affichageAgpm);
+						iservice.addObject(affichageAgpm);*/
 						 userController.setTexteMsg("Enregistrement effectué avec succès!");
 						 userController.setRenderMsg(true);
 						 userController.setSevrityMsg("success");
@@ -1728,7 +1732,7 @@ public class AgpmController {
 		 public void chargeDetails() {
 			 detailsList.clear();
 			 detailsList = ((List<VAgpmDetails>)iservice.getObjectsByColumnDesc("VAgpmDetails",new ArrayList<String>(Arrays.asList("DAG_ID")),
-						 new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+affichageAgpm.getAffAgpId())));
+						 new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+agpm.getAgpId())));
 		    }
 		 
 		 
@@ -1736,7 +1740,7 @@ public class AgpmController {
             public void chargeDossier() {
 			 dossListe.clear();
 				 dossListe = ((List<TDossierAgpm>)iservice.getObjectsByColumnDesc("TDossierAgpm",new ArrayList<String>(Arrays.asList("DAG_ID")),
-						 new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+affichageAgpm.getAffAgpId())));
+						 new WhereClause("DAG_AGP_ID",Comparateur.EQ,""+agpm.getAgpId())));
 		    }
             
             
@@ -2922,7 +2926,7 @@ public class AgpmController {
 	
 	
 
-	public TAffichageAgpm getAffichageAgpm() {
+/*	public TAffichageAgpm getAffichageAgpm() {
 		return affichageAgpm;
 	}
 
@@ -2930,7 +2934,7 @@ public class AgpmController {
 
 	public void setAffichageAgpm(TAffichageAgpm affichageAgpm) {
 		this.affichageAgpm = affichageAgpm;
-	}
+	}*/
 
 	public String getColonne() {
 		return colonne;
