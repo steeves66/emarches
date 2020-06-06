@@ -374,7 +374,6 @@
                  </p:dataTable>
                   <p:dataTable id="tpgspm" rendered="#{controleController.tpgspm}" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb"  value="#{pgpmAcController.listPgspm}" scrollable="true" scrollHeight="150" emptyMessage="Aucun détail enregistré">
                   <p:column headerText="Financement" styleClass="col-sm-2" >
-<<<<<<< HEAD
          				<h:outputText value="#{slctdTb.gpgLibFin}"/>
          				</p:column>
                     <p:column headerText="Réalisations envisagées" styleClass="col-sm-6" >
@@ -386,19 +385,6 @@
 				       
          				<p:column headerText="Mode de passation" styleClass="col-sm-1" >
          				<h:outputText value="#{slctdTb.mopCode}" />
-=======
-         				<h:outputText value="#{slctdTb.affGpgLibFin}"/>
-         				</p:column>
-                    <p:column headerText="Réalisations envisagées" styleClass="col-sm-6" >
-         				<h:outputText value="#{slctdTb.affGpgObjet}" />
-				     </p:column>
-				     <p:column headerText="Type Marché" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
-				        </p:column>
-				       
-         				<p:column headerText="Mode de passation" styleClass="col-sm-1" >
-         				<h:outputText value="#{slctdTb.TModePassation.mopCode}" />
->>>>>>> 2d960c72a9e88f758bad14861e1794462adf03e4
 				        </p:column>
                  </p:dataTable>
             </div>
@@ -543,11 +529,7 @@
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeTypeMarchesFils}"
 						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
-<<<<<<< HEAD
 			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-=======
-			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
->>>>>>> 2d960c72a9e88f758bad14861e1794462adf03e4
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
                            <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
