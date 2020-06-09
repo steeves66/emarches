@@ -340,7 +340,8 @@ public class AgpmController {
 					 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 								"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 								new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-					          new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+								new WhereClause("AGP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+					         // new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 					 tableauBordController.chargeDataAgpm();
 					 multiFiltre="";
 						_logger.info("agpmListe size: "+agpmListe.size()); 
@@ -350,8 +351,8 @@ public class AgpmController {
 						 getValidationListe().clear();
 						 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 									"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
-									new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-							     new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+									new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
+							     //new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 							tableauBordController.chargeDataAgpm();
 							multiFiltre="";
 								_logger.info("agpmListe size: "+agpmListe.size());
@@ -360,8 +361,8 @@ public class AgpmController {
 							 getValidationListe().clear();
 							 agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 										"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
-										new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-								new WhereClause("FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+										new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
+								//new WhereClause("FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 								tableauBordController.chargeDataAgpm(); 
 								multiFiltre="";
 									_logger.info("objetListe size: "+agpmListe.size());
@@ -390,7 +391,8 @@ public class AgpmController {
 			 agpmValCp = ((List<VAgpmliste>)iservice.getObjectsByColumn("VAgpmliste",new ArrayList<String>(Arrays.asList("AGP_ID")),
 					    new WhereClause("AGP_STA_CODE",Comparateur.EQ,"S2V"),
 					    new WhereClause("AGP_ACTIF",Comparateur.EQ,"1"),
-					    new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+					    new WhereClause("AGP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));
+					    //new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 
 		//Liste des Pgpm validés par la DMP : Nouvelle Methode
@@ -398,7 +400,7 @@ public class AgpmController {
 			 agpmValDmp.clear();
 			 agpmValDmp = ((List<VAgpmliste>)iservice.getObjectsByColumn("VAgpmliste",new ArrayList<String>(Arrays.asList("AGP_ID")),
 					    new WhereClause("AGP_STA_CODE",Comparateur.EQ,"S3V"),
-					    new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),	 		 
+					    //new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),	 		 
 					    new WhereClause("AGP_ACTIF",Comparateur.EQ,"1")));
 		 }
 		 
@@ -408,15 +410,16 @@ public class AgpmController {
 			 agpmDifCp = ((List<VAgpmliste>)iservice.getObjectsByColumn("VAgpmliste",new ArrayList<String>(Arrays.asList("AGP_ID")),
 					    new WhereClause("AGP_STA_CODE",Comparateur.EQ,"S2D"),
 					    new WhereClause("AGP_ACTIF",Comparateur.EQ,"1"),
-					    new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+					    new WhereClause("AGP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));
+					   // new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 		 
-		//Liste des Agpm différés par la CPMP : Nouvelle Methode
+		//Liste des Agpm différés par la DMP : Nouvelle Methode
 		 public void chargeAgpmDifDmp() {
 			 agpmDifDmp.clear();
 			 agpmDifDmp = ((List<VAgpmliste>)iservice.getObjectsByColumnIn("VAgpmliste",new ArrayList<String>(Arrays.asList("AGP_ID")),
 					   "AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SDR")),
-					   new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),		 		 
+					   //new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),		 		 
 					    new WhereClause("AGP_ACTIF",Comparateur.EQ,"1")));		 		 
 		      }
 		 
@@ -643,6 +646,7 @@ public class AgpmController {
 					    	  agpmListe = (List<VAgpmliste>) iservice.getObjectsByColumnInDesc("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_DTE_MODIF")),
 									"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 									new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+									new WhereClause("AGP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					    			new WhereClause("AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							        //tableauBordController.chargeDataAgpm();
 								   _logger.info("agpmListe size: "+agpmListe.size());

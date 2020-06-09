@@ -30,6 +30,11 @@ public class VPpmliste implements java.io.Serializable {
 	private String dppStrCode;
 	private String strLibelleCourt;
 	private String strLibelleLong;
+	private String lbgFonCodePf;
+	private String lbgFonCodeAc;
+	private String lbgFonCodeCf;
+	private String lbgFonCodeCor;
+	private String lbgFonCodeVal;
 	private Date dppDateValAc;
 	private Date dppDateValCpmp;
 	private Date dppDateValDmp;
@@ -64,7 +69,8 @@ public class VPpmliste implements java.io.Serializable {
 
 	public VPpmliste(long dppId, Date dppDteModif, String dppObjet, String dppSourceFin, String dppLbgCode,
 			String dppStaCode, String dppMopCode, String mopLibelleCourt, String mopLibelleLong, String dppStrCode,
-			String strLibelleCourt, String strLibelleLong, Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp,
+			String strLibelleCourt, String strLibelleLong,String lbgFonCodePf, String lbgFonCodeAc,
+			String lbgFonCodeCf, String lbgFonCodeCor, String lbgFonCodeVal, Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp,
 			String dppPartiePmePmi, Date dppDateSaisie, String dppTypePlan, String tymLibelleCourt,
 			String dppStatutRetour, String dppStructureConduc, String dppStructureBenefi, String dppRecherche,
 			String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie, long plpId, long plpGesCode) {
@@ -80,6 +86,11 @@ public class VPpmliste implements java.io.Serializable {
 		this.dppStrCode = dppStrCode;
 		this.strLibelleCourt = strLibelleCourt;
 		this.strLibelleLong = strLibelleLong;
+		this.lbgFonCodePf = lbgFonCodePf;
+		this.lbgFonCodeAc = lbgFonCodeAc;
+		this.lbgFonCodeCf = lbgFonCodeCf;
+		this.lbgFonCodeCor = lbgFonCodeCor;
+		this.lbgFonCodeVal = lbgFonCodeVal;
 		this.dppDateValAc = dppDateValAc;
 		this.dppDateValCpmp = dppDateValCpmp;
 		this.dppDateValDmp = dppDateValDmp;
@@ -205,6 +216,51 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setStrLibelleLong(String strLibelleLong) {
 		this.strLibelleLong = strLibelleLong;
+	}
+	
+	@Column(name = "LBG_FON_CODE_PF", length = 30)
+	public String getLbgFonCodePf() {
+		return this.lbgFonCodePf;
+	}
+
+	public void setLbgFonCodePf(String lbgFonCodePf) {
+		this.lbgFonCodePf = lbgFonCodePf;
+	}
+
+	@Column(name = "LBG_FON_CODE_AC", length = 30)
+	public String getLbgFonCodeAc() {
+		return this.lbgFonCodeAc;
+	}
+
+	public void setLbgFonCodeAc(String lbgFonCodeAc) {
+		this.lbgFonCodeAc = lbgFonCodeAc;
+	}
+
+	@Column(name = "LBG_FON_CODE_CF", length = 30)
+	public String getLbgFonCodeCf() {
+		return this.lbgFonCodeCf;
+	}
+
+	public void setLbgFonCodeCf(String lbgFonCodeCf) {
+		this.lbgFonCodeCf = lbgFonCodeCf;
+	}
+
+	@Column(name = "LBG_FON_CODE_COR", length = 30)
+	public String getLbgFonCodeCor() {
+		return this.lbgFonCodeCor;
+	}
+
+	public void setLbgFonCodeCor(String lbgFonCodeCor) {
+		this.lbgFonCodeCor = lbgFonCodeCor;
+	}
+
+	@Column(name = "LBG_FON_CODE_VAL", length = 10)
+	public String getLbgFonCodeVal() {
+		return this.lbgFonCodeVal;
+	}
+
+	public void setLbgFonCodeVal(String lbgFonCodeVal) {
+		this.lbgFonCodeVal = lbgFonCodeVal;
 	}
 
 	@Column(name = "DPP_DATE_VAL_AC", length = 7)

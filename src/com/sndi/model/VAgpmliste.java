@@ -42,24 +42,26 @@ public class VAgpmliste implements java.io.Serializable {
 	private long proId;
 	private Long decId;
 	private String agpRecherche;
+	private String agpStrCode;
 
 	public VAgpmliste() {
 	}
 
-	public VAgpmliste(long agpId, String proTitre, String agpFonCod, String agpStaCode, short agpGesCode, long proId) {
+	public VAgpmliste(long agpId, String proTitre, String agpFonCod, String agpStaCode, short agpGesCode, long proId,String agpStrCode) {
 		this.agpId = agpId;
 		this.proTitre = proTitre;
 		this.agpFonCod = agpFonCod;
 		this.agpStaCode = agpStaCode;
 		this.agpGesCode = agpGesCode;
 		this.proId = proId;
+		this.agpStrCode = agpStrCode;
 	}
 
 	public VAgpmliste(long agpId, String agpCode, String finNumeroAccord, String proTitre, String baiLibelle,
 			String fonctionAc, String decOrganExecLibelle, String minLibelleCourt, String strTstCode, String agpActif,
 			String agpFonCod, String agpFonCodPf, String agpStaCode, String agpStatutRetour, Date agpDateValAc,
 			Date agpDateValCpmp, Date agpDateValDmp, Date agpDteModif, String agpFonCodDmp, long agpGesCode, Long finId, long proId,
-			Long decId,String agpRecherche) {
+			Long decId,String agpRecherche, String agpStrCode) {
 		this.agpId = agpId;
 		this.agpCode = agpCode;
 		this.finNumeroAccord = finNumeroAccord;
@@ -84,6 +86,7 @@ public class VAgpmliste implements java.io.Serializable {
 		this.proId = proId;
 		this.decId = decId;
 		this.agpRecherche = agpRecherche;
+		this.agpStrCode = agpStrCode;
 	}
     
 	@Id
@@ -301,5 +304,14 @@ public class VAgpmliste implements java.io.Serializable {
 
 	public void setAgpRecherche(String agpRecherche) {
 		this.agpRecherche = agpRecherche;
+	}
+	
+	@Column(name = "AGP_STR_CODE", nullable = false, length = 20)
+	public String getAgpStrCode() {
+		return this.agpStrCode;
+	}
+
+	public void setAgpStrCode(String agpStrCode) {
+		this.agpStrCode = agpStrCode;
 	}
 }

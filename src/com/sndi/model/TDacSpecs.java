@@ -140,7 +140,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_MOP_CODE")
 	public TModePassation getTModePassation() {
 		return this.TModePassation;
@@ -150,7 +150,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TModePassation = TModePassation;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_STA_CODE")
 	public TStatut getTStatut() {
 		return this.TStatut;
@@ -160,7 +160,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TStatut = TStatut;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_STR_CODE")
 	public TStructure getTStructure() {
 		return this.TStructure;
@@ -170,7 +170,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TStructure = TStructure;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_GES_CODE")
 	public TGestion getTGestion() {
 		return this.TGestion;
@@ -180,7 +180,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TGestion = TGestion;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_TYM_CODE")
 	public TTypeMarche getTTypeMarche() {
 		return this.TTypeMarche;
@@ -190,7 +190,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TTypeMarche = TTypeMarche;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_TD_CODE")
 	public TTypeDacSpecs getTTypeDacSpecs() {
 		return this.TTypeDacSpecs;

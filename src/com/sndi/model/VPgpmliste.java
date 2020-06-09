@@ -43,6 +43,7 @@ public class VPgpmliste implements java.io.Serializable {
 	private Long gpgAgpId;
 	private String gpgCommentaire;
 	private String gpgPartiePmePmi;
+	private String gpgStrCode;
 	private String tstCode;
 	private long plgId;
 	private long plgGesCode;
@@ -67,7 +68,7 @@ public class VPgpmliste implements java.io.Serializable {
 			String gpgTypePlan, String gpgActeurSaisie, Date gpgDateDao, String gpgFonCodPf, String gpgFonCodDmp,
 			String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleCourt, String mopLibelleLong,
 			String gpgRecherche,Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp,String gpgStatutRetour,String ac, Long gpgAgpId,String gpgCommentaire, String gpgPartiePmePmi,
-			String tstCode, long plgId, long plgGesCode) {
+			String gpgStrCode,String tstCode, long plgId, long plgGesCode) {
 		this.fipTypeFinance = fipTypeFinance;
 		this.gpgId = gpgId;
 		this.gpgLibFin = gpgLibFin;
@@ -93,6 +94,7 @@ public class VPgpmliste implements java.io.Serializable {
 		this.gpgAgpId = gpgAgpId;
 		this.gpgCommentaire = gpgCommentaire;
 		this.gpgPartiePmePmi = gpgPartiePmePmi;
+		this.gpgStrCode = gpgStrCode;
 		this.tstCode = tstCode;
 		this.plgId = plgId;
 		this.plgGesCode = plgGesCode;
@@ -322,6 +324,15 @@ public class VPgpmliste implements java.io.Serializable {
 	public void setGpgPartiePmePmi(String gpgPartiePmePmi) {
 		this.gpgPartiePmePmi = gpgPartiePmePmi;
 	}
+	
+	@Column(name = "GPG_STR_CODE", length = 20)
+	public String getGpgStrCode() {
+		return this.gpgStrCode;
+	}
+
+	public void setGpgStrCode(String gpgStrCode) {
+		this.gpgStrCode = gpgStrCode;
+	}
 
 	@Column(name = "TST_CODE", nullable = false, length = 3)
 	public String getTstCode() {
@@ -331,7 +342,6 @@ public class VPgpmliste implements java.io.Serializable {
 	public void setTstCode(String tstCode) {
 		this.tstCode = tstCode;
 	}
-
 
 
 	@Column(name = "PLG_ID", nullable = false, precision = 10, scale = 0)
