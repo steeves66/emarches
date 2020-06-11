@@ -70,7 +70,7 @@
 	                 <div class="col-sm-3">
 	                 <h:panelGroup  rendered="#{controleController.etatLoveAgpm}">
                      <p:selectOneRadio id="operations" value="#{pgpmAcController.sit}">
-                     <p:ajax  listener="#{pgpmAcController.checkSituation()}" update="gnl:rappelAgpm"></p:ajax>
+                     <p:ajax  listener="#{pgpmAcController.checkSituation()}" global="false" update="gnl:rappelAgpm"></p:ajax>
 						<f:selectItem itemLabel="OUI" itemValue="O" />
 						<f:selectItem itemLabel="NON" itemValue="N" />
 					 </p:selectOneRadio>
@@ -78,7 +78,7 @@
 					 
 					 <h:panelGroup  rendered="#{controleController.etatLoveAgpmPs}">
 					 <p:selectOneRadio id="operationsPgs" value="#{pgpmAcController.sit}">
-                     <p:ajax  listener="#{pgpmAcController.checkSituationPs()}" update="gnl:rappelAgpm"></p:ajax>
+                     <p:ajax  listener="#{pgpmAcController.checkSituationPs()}" global="false" update="gnl:rappelAgpm"></p:ajax>
 						<f:selectItem itemLabel="OUI" itemValue="O" />
 						<f:selectItem itemLabel="NON" itemValue="N" />
 					 </p:selectOneRadio>
@@ -681,7 +681,7 @@
 	                  <label for="xbail" class="col-sm-1 control-label"><b>Source</b></label>
 	                  <div class="col-sm-10">
        		       <p:selectOneRadio id="situation" value="#{pgpmAcController.sourfin}">
-		              <p:ajax  listener="#{pgpmAcController.checkBailleur()}" update="finlog:idBail, finlog:idTres, finlog:idPartB, finlog:source"></p:ajax>
+		              <p:ajax  listener="#{pgpmAcController.checkBailleur()}" global="false" update="finlog:idBail, finlog:idTres, finlog:idPartB, finlog:source"></p:ajax>
 			            <div class="col-md-4">
 						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
 			            </div>
@@ -738,7 +738,7 @@
 	                  <div class="col-sm-11">
 	                    <p:inputText type="text" value="#{pgpmAcController.newFinancement.fipMontantDevise}" id="montDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" process="@this" update="finlog:montDev" />
+	                    <p:ajax event="blur" global="false" process="@this" update="finlog:montDev" />
 	                    </p:inputText>
 	                  </div>
 	                </div>
@@ -750,7 +750,7 @@
 	                  <div class="col-sm-11">
 	                    <p:inputText type="text" value="#{pgpmAcController.newFinancement.fipTresor}" id="tresor" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" process="@this" update="finlog:tresor" />
+	                    <p:ajax event="blur" global="false" process="@this" update="finlog:tresor" />
 	                    </p:inputText>
 	                  </div>
 	                </div>
@@ -765,7 +765,7 @@
 	                  <div class="col-sm-11">
 	                    <p:inputText type="text" value="#{pgpmAcController.newFinancement.fipMontantCfa}" id="mont" styleClass="form-control" style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" process="@this" update="finlog:mont" />
+	                    <p:ajax event="blur" global="false" process="@this" update="finlog:mont" />
 	                    </p:inputText>
 	                  </div>
 	                </div>

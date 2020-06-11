@@ -558,7 +558,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      	          
      	            chargeDataPriseCompte();
      	            //Chargement du tableau de bord 
-     	            tableauBordController.chargeDataDao();
+     	            tableauBordController.chargeDataDao("PN","PRQ");
      	            
      	            //Activation des booléens
      	            panelAvisBailleur = true;
@@ -1468,7 +1468,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					              new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 					              new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
 						_logger.info("examenListe size: "+examenListe.size());	
-						tableauBordController.chargeDataDao();		
+						tableauBordController.chargeDataDao("PN","PRQ");		
 				}
 			  
 			  public void chargeDaoChargeEtudePs(){
@@ -1680,7 +1680,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","PRQ");
 					  }
 					} 
 			
@@ -1724,7 +1724,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							  new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"PRQ"),
 					          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","PRQ");
 						
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -1806,7 +1806,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 												new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 												new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 											_logger.info("publicationListe  size: "+publicationListe.size());		
-											tableauBordController.chargeDataDao();
+											tableauBordController.chargeDataDao("PN","DAO");
 								 }
 					        }
 			
@@ -1932,7 +1932,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					 chargeDaoTrans();
 					 chargeDataAffecter();
 		          //Actualisation du Tableau de Bord
-		          tableauBordController.chargeDataDao();
+		          tableauBordController.chargeDataDao("PN","PRQ");
 			
 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PRQ a été retourné!", "");
 			 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -2225,7 +2225,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					iservice.addObject(dac);
 				 //chargePiecesByDao();
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataDao("PN","PRQ");
 				//Activation et désactivation des boutons valider
 				etatBtnValid = false;
 				validCorrection = true;
@@ -2741,7 +2741,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 						     chargeData(); 
 	 						     //chargePPM();
 	 						     //Actualisation du tableau de Bord
-	 						     tableauBordController.chargeDataDao();
+	 						     tableauBordController.chargeDataDao("PN","PRQ");
 	 						     
 	 						     userController.setTexteMsg("PRQ N° "+dao.getDacCode()+" Initié avec succès!");
 	 							 userController.setRenderMsg(true);
@@ -3183,7 +3183,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 	   	 }
 			 			chargeDaoAffectes();
 			 			//Chargement des compteurs du tableau de bord
-			 			tableauBordController.chargeDataDao();	
+			 			tableauBordController.chargeDataDao("PN","DAO");	
 			 			//Désactivation du bouton d'affectation 
 			 			btn_affecter =  false;
 			 			//Message de confirmation
@@ -3243,7 +3243,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					chargeDataValCsv();
 					renderPage("prq1","VALPRQ");
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","PRQ");
 					//Message de confirmation
 					userController.setTexteMsg("Validation effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -3341,7 +3341,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 			        
 	 			        chargeDataDiffCsv();
 	 			        //Chargement des compteurs DAO du tableau de bord
-	 			        tableauBordController.chargeDataDao();	
+	 			        tableauBordController.chargeDataDao("PN","PRQ");	
 	 			        //Message de confirmation
 				        userController.setTexteMsg("RéAffectation(s) effectuée(s) avec succès!");
 				        userController.setRenderMsg(true);
@@ -3729,7 +3729,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
        					
        					chargeDaoTabTrans();
        					//Actualisation du tableau de bord
-       					tableauBordController.chargeDataDao();
+       					tableauBordController.chargeDataDao("PN","PRQ");
        					//Message de confirmation
        					userController.setTexteMsg("Transmission effectuée avec succès!");
    						userController.setRenderMsg(true);

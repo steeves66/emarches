@@ -413,7 +413,7 @@ public class DpController {
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDAO.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	} 
 	 
 	//Affichage des DAO vendus
@@ -422,7 +422,7 @@ public class DpController {
 				 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
 				new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("listeTabdaoDiffCsv  size: "+listeTabdaoDiffCsv.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	} 
 	 
 	 
@@ -433,7 +433,7 @@ public class DpController {
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("SBO","SRO")),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	}
 	 
 	 //Affichage des DAO Saisies par l'Autorité Contractante, procédure simplifiéee
@@ -443,7 +443,7 @@ public class DpController {
 				 new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ,"DA1"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDAO.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	}
 	 
 	 
@@ -452,7 +452,7 @@ public class DpController {
 				      "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1T","D2R")),
 		              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDaoTrans.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	}
 	 
 	 public void chargeDaoTabTrans(){
@@ -460,7 +460,7 @@ public class DpController {
 				      new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"D1T"),
 		              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("listeTabDaoTrans size: "+listeTabDaoTrans.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	}
 	 
 	 //Liste des DAO retirés (Tableau de Bord)
@@ -469,7 +469,7 @@ public class DpController {
 				   new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"RET"),
 		              new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoRetire size: "+listeDaoRetire.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	}
 	 
 	 
@@ -478,7 +478,7 @@ public class DpController {
 			              new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
 			              new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
 				_logger.info("objetListe size: "+examenListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DP");		
 		}
 	  
 	  
@@ -487,7 +487,7 @@ public class DpController {
 			              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
 			              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 				_logger.info("daoExamen size: "+daoExamen.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DP");		
 		}
 	  
 	  //Affichage de zone de mention si le chargé d'Etude est un responsable de binôme
@@ -598,7 +598,7 @@ public class DpController {
     			  				   etatRecu = true;
     			  				   
     			  				  //Actualisation du Tableau de Bord
-    			 		          tableauBordController.chargeDataDao();
+    			 		          tableauBordController.chargeDataDao("PN","DP");
 		                    	  
     			 		            chargeDaoVendu();
      			  				   //Message de Confirmation
@@ -618,7 +618,7 @@ public class DpController {
 						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 				          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DAO");
 					
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -638,7 +638,7 @@ public class DpController {
 				 listeDAO =(List<TAffichageDao>) iservice.getObjectsByColumnIn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
 						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-				      tableauBordController.chargeDataDao();
+				      tableauBordController.chargeDataDao("PN","DP");
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  
@@ -677,7 +677,7 @@ public class DpController {
 					 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
 					new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("publicationListe  size: "+publicationListe.size());		
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DP");		
 		}
 		 
 		 
@@ -687,7 +687,7 @@ public class DpController {
 			 validationListe = (List<TAffichageDao>) iservice.getObjectsByColumn("TAffichageDao", new ArrayList<String>(Arrays.asList("AFF_DAO_ID")), 
 					  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"));
 				_logger.info("validationListe  size: "+validationListe.size());					
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DP");		
 		}
 		 
 		
@@ -715,7 +715,7 @@ public class DpController {
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoVente size: "+listeDaoVente.size());
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataDao("PN","DP");
 	}
 	 
 	 
@@ -725,7 +725,7 @@ public class DpController {
 				 new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"DVE"),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataDao("PN","DP");
 	}
 	 
 	 
@@ -736,7 +736,7 @@ public class DpController {
 				 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
 				new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("affectationListe  size: "+affectationListe.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	}
 	 
 	 		 
@@ -749,7 +749,7 @@ public class DpController {
 					 new WhereClause("DCS_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("validationListe  size: "+validationListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DP");		
 		}
 		 
 		 
@@ -760,7 +760,7 @@ public class DpController {
 					 new WhereClause("DCS_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("validationListe  size: "+validationListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DP");		
 		}
 	 
 //Fin de Staistiques pour le chargé d'Etudes 
@@ -787,7 +787,7 @@ public class DpController {
 						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoValCsv  size: "+listeTabdaoValCsv.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DP");		
 			}
 			 
 			 
@@ -797,7 +797,7 @@ public class DpController {
 						 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5R"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoDiffCsv  size: "+listeTabdaoDiffCsv.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DP");		
 			}
 			 
 	
@@ -808,7 +808,7 @@ public class DpController {
 		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
 				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
 			_logger.info("objetListe size: "+listeLots.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DP");		
 	}
 	 
 	 
@@ -826,7 +826,7 @@ public class DpController {
 		  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
 				 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
 			_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
-			tableauBordController.chargeDataDao();	
+			tableauBordController.chargeDataDao("PN","DP");
 			}
 	  
 	  
@@ -988,7 +988,7 @@ public class DpController {
 					 chargeDaoTrans();
 					 chargeDataAffecter();
 		          //Actualisation du Tableau de Bord
-		          tableauBordController.chargeDataDao();
+		          tableauBordController.chargeDataDao("PN","DP");
 			
 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
 			 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1208,7 +1208,7 @@ public class DpController {
 			       }	 
 				 //chargePiecesByDao();
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataDao("PN","DP");
 				 //Message de confirmation
 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 				 userController.setRenderMsg(true);
@@ -1269,7 +1269,7 @@ public class DpController {
 	 				// chargePiecesByDao();
 	 				
 	 				//Actualisation du Tableau de Bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DP");
 	 				 //Message de confirmation
 	 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 	 				 userController.setRenderMsg(true);
@@ -1309,7 +1309,7 @@ public class DpController {
 				 iservice.addObject(detCor);
 			       }	 
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataDao("PN","DP");
 				 //Message de confirmation
 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 				 userController.setRenderMsg(true);
@@ -1345,7 +1345,7 @@ public class DpController {
 			           }
 	 				
 	 				//Actualisation du Tableau de Bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DP");
 	 				 //Message de confirmation
 	 				 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 	 				 userController.setRenderMsg(true);
@@ -1404,7 +1404,7 @@ public class DpController {
 					chargeDaoCharegEtude();
 					renderPage("dao1","CHADAO");
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DP");
 					//Message de confirmation
 					userController.setTexteMsg("Validation effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -1455,7 +1455,7 @@ public class DpController {
 					
 					chargeDataAPublier();
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DP");
 					//Message de confirmation
 					userController.setTexteMsg("DAO Publié!");
 					userController.setRenderMsg(true);
@@ -1561,7 +1561,7 @@ public class DpController {
 					     chargeData(); 
 					     //chargePPM();
 					     //Actualisation du tableau de Bord
-					     tableauBordController.chargeDataDao();
+					     tableauBordController.chargeDataDao("PN","DP");
 					     
 					     userController.setTexteMsg("DAO N° "+dao.getDacCode()+" Initié avec succès!");
 						 userController.setRenderMsg(true);
@@ -1672,7 +1672,7 @@ public class DpController {
 			     chargeData(); 
 			     //chargePPM();
 			     //Actualisation du tableau de Bord
-			     tableauBordController.chargeDataDao();
+			     tableauBordController.chargeDataDao("PN","DP");
 			     
 			     userController.setTexteMsg("DAO N° "+dao.getDacCode()+" Initié avec succès!");
 				 userController.setRenderMsg(true);
@@ -1871,7 +1871,7 @@ public class DpController {
 			 	   	 }
 			 			chargeDaoAffectes();
 			 			//Chargement des compteurs du tableau de bord
-			 			tableauBordController.chargeDataDao();	
+			 			tableauBordController.chargeDataDao("PN","DP");	
 			 			//Message de confirmation
     					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
 						userController.setRenderMsg(true);
@@ -1930,7 +1930,7 @@ public class DpController {
 					chargeDataValCsv();
 					renderPage("dao1","VALDAO");
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DP");
 					//Message de confirmation
 					userController.setTexteMsg("Validation effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -2028,7 +2028,7 @@ public class DpController {
 	 			        
 	 			        chargeDataDiffCsv();
 	 			        //Chargement des compteurs DAO du tableau de bord
-	 			        tableauBordController.chargeDataDao();	
+	 			        tableauBordController.chargeDataDao("PN","DP");	
 	 			        //Message de confirmation
 				        userController.setTexteMsg("RéAffectation(s) effectuée(s) avec succès!");
 				        userController.setRenderMsg(true);
@@ -2333,7 +2333,7 @@ public class DpController {
     					
     					chargeDaoTabTrans();
     					//Actualisation du tableau de bord
-    					tableauBordController.chargeDataDao();
+    					tableauBordController.chargeDataDao("PN","DP");
     					//Message de confirmation
     					userController.setTexteMsg("Transmission effectuée avec succès!");
 						userController.setRenderMsg(true);
@@ -2385,7 +2385,7 @@ public class DpController {
 					
 					chargeDaoTrans();
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DP");
 					//Message de confirmation
 					userController.setTexteMsg("Transmission effectuée avec succès!");
 					userController.setRenderMsg(true);

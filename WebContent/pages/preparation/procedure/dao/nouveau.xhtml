@@ -74,14 +74,14 @@
 					</label>
 					
 					<button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
-                      <p:commandLink  title="Recherche" action="#{daoController.chargeRecherchePPM()}" update=":gnl">
+                      <p:commandLink  title="Recherche" action="#{daoController.chargeRecherchePPM('PN')}" update=":gnl">
                        <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                       </p:commandLink>
                      </button>
                         
 
                       <span class="input-group-btn">
-                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargePPM()}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
+                        <p:commandLink styleClass="btn btn-warning btn-flat" action="#{daoController.chargePPM('PN')}" value="Réinitialiser" style=" background-color: #f88b2e" update=":content" />
                         </span>
 					 </div>
                <p:dataTable id="tblnat" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.ppmDao}" 
@@ -239,7 +239,7 @@
                   <div class="col-sm-9"> 
                      <p:selectOneRadio value="#{daoController.newAvis.aaoNatPrix}" id="console" unselectable="true">
 			            <f:selectItem itemLabel="Unitaire" itemValue="Unitaire" />
-			            <f:selectItem itemLabel="Global et forfaitaire" itemValue="Global et forfaitaire" />
+			            <f:selectItem itemLabel="Global et forfetaire" itemValue="Global et forfetaire" />
 			        </p:selectOneRadio>
                   </div>
               </div>

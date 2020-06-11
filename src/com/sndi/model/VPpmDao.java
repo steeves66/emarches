@@ -69,6 +69,7 @@ public class VPpmDao implements java.io.Serializable {
 	private String mopLibelleLong;
 	private String lbgImputation;
 	private String natLibelle;
+	private String strTstCode;
 
 	public VPpmDao() {
 	}
@@ -100,7 +101,7 @@ public class VPpmDao implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			String dppBailleur,String dppRecherche ,String mdtCode, String mdtTymCode, String mdtLibelleCourt,
 			 String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleLong,
-			String lbgImputation, String natLibelle) {
+			String lbgImputation, String natLibelle, String strTstCode) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -152,6 +153,7 @@ public class VPpmDao implements java.io.Serializable {
 		this.mopLibelleLong = mopLibelleLong;
 		this.lbgImputation = lbgImputation;
 		this.natLibelle = natLibelle;
+		this.strTstCode = strTstCode;
 	}
 
 	
@@ -614,5 +616,14 @@ public class VPpmDao implements java.io.Serializable {
 
 	public void setNatLibelle(String natLibelle) {
 		this.natLibelle = natLibelle;
+	}
+	
+	@Column(name = "STR_TST_CODE", length = 3)
+	public String getStrTstCode() {
+		return this.strTstCode;
+	}
+
+	public void setStrTstCode(String strTstCode) {
+		this.strTstCode = strTstCode;
 	}
 }

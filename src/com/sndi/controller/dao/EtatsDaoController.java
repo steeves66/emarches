@@ -28,6 +28,7 @@ import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TDossierDacs;
 import com.sndi.model.TLotAao;
 import com.sndi.model.VAdresseAvis;
+import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoPieces;
 import com.sndi.model.VDetailDao;
 import com.sndi.model.VLotDao;
@@ -73,7 +74,7 @@ public class EtatsDaoController {
 	private List<VLotDao> lotListe = new ArrayList<VLotDao>();
 	private TDossierDacs selectedDossier = new TDossierDacs(); 
 	
-	private TAffichageDao slctdTd = new TAffichageDao();
+	private VDacliste slctdTd = new VDacliste();
 	private TDaoAffectation slctdTda = new TDaoAffectation();
 	private VDetailDao detail = new VDetailDao(); 
 	private VDetailDao affectes = new VDetailDao();
@@ -97,9 +98,9 @@ public class EtatsDaoController {
 	
 
 	//Afficher les détails du DAO
-		 public void chargeDetailDao(){
+		/* public void chargeDetailDao(){
 				objetListe =(List<VDetailDao>) iservice.getObjectsByColumn("VDetailDao", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAffDacCode()));
+						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 				if (!objetListe.isEmpty()) {
 					detail=objetListe.get(0);
 					chargePieces();
@@ -108,7 +109,7 @@ public class EtatsDaoController {
 					chargeDaoPpm();
 					chargeDossier();
 				}
-			}
+			}*/
 		 
 		//Afficher les détails du DAO chez les chargés d'Etude
 		 public void chargeDetailDaoCharge(){
@@ -130,7 +131,7 @@ public class EtatsDaoController {
     public void chargeDossier() {
  	dossListe.clear();
  	dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
- 	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()))); 		 
+ 	         new WhereClause("DDA_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
  		 }
     
     
@@ -138,7 +139,7 @@ public class EtatsDaoController {
     public void chargeDaoPpm() {
  	ppmListe.clear();
  	ppmListe = ((List<TDetailPlanPassation>)iservice.getObjectsByColumn("TDetailPlanPassation",new ArrayList<String>(Arrays.asList("DPP_ID")),
- 	new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()))); 		 
+ 	new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
  		 }
 	
 	
@@ -146,7 +147,7 @@ public class EtatsDaoController {
     public void chargeAvis() {
  	avisListe.clear();
  	avisListe = ((List<TAvisAppelOffre>)iservice.getObjectsByColumn("TAvisAppelOffre",new ArrayList<String>(Arrays.asList("AAO_CODE")),
- 	new WhereClause("AAO_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode())));
+ 	new WhereClause("AAO_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
  	if (!avisListe.isEmpty()) {
  		avis=avisListe.get(0);
 	       }
@@ -156,7 +157,7 @@ public class EtatsDaoController {
     public void chargeLot() {
  	lotListe.clear();
  	lotListe = ((List<VLotDao>)iservice.getObjectsByColumn("VLotDao",new ArrayList<String>(Arrays.asList("LAA_ID")),
- 	new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()))); 		 
+ 	new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
  		 }
     
     
@@ -164,14 +165,14 @@ public class EtatsDaoController {
     public void chargePieces() {
  	//piecesListe.clear();
  	piecesListe = ((List<VPiecesDao>)iservice.getObjectsByColumn("VPiecesDao",new ArrayList<String>(Arrays.asList("PID_CODE")),
- 	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()))); 		 
+ 	new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
  		 }
     
   //Afficher les adresses du DAO selectionné
     public void chargeAdresse() {
     listDetailAdresse.clear();
     listDetailAdresse = ((List<VAdresseAvis>)iservice.getObjectsByColumn("VAdresseAvis",new ArrayList<String>(Arrays.asList("V_AD")),
- 	new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getAffDacCode()))); 		 
+ 	new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()))); 		 
  		 }
   
   //Détails sur le DAO Affecté  
@@ -244,15 +245,15 @@ public class EtatsDaoController {
   	
   //Téléchargement des DAO type depuis la liste d'affichage
   	public void opendaoType() throws IOException{
-  		  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("0")) {
+  		  if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
   			  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
   			 // downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
   		  }else
-  			  if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("2")) {
+  			  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
   			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
   			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
   		  }else
-  			 if(slctdTd.getTTypeMarche().getTymTymCode().equalsIgnoreCase("1")) {
+  			 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
   			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
   			 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
   		    }
@@ -426,13 +427,15 @@ public class EtatsDaoController {
 	}
 	
 
-	public TAffichageDao getSlctdTd() {
+	public VDacliste getSlctdTd() {
 		return slctdTd;
 	}
 
-	public void setSlctdTd(TAffichageDao slctdTd) {
+	public void setSlctdTd(VDacliste slctdTd) {
 		this.slctdTd = slctdTd;
 	}
+
+
 
 
 

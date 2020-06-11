@@ -1299,8 +1299,10 @@ public class AgpmController {
 		//Tri sur les types de financement  
 		public void chargeSourceCheck() { 
 			listeSourceFinance.clear();
-		listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
+		    listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 		      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
+		    
+		    newFinancement = new TFinancement();
 			}
 		
 		//Tri sur les types de financement 
@@ -1308,6 +1310,8 @@ public class AgpmController {
 		    listeSourceFinance.clear();
 			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 			      "SOU_CODE", new ArrayList<String>(Arrays.asList("TRE")));
+			
+			newFinancement = new TFinancement();
 				}
 		
 		 //Methode checkBailleur
@@ -1318,6 +1322,7 @@ public class AgpmController {
 				 selectTresor = false;
 				 selectPartBai = true;
 				 chargeSourceCheck();
+				 //newFinancement = new TFinancement();
 				 //sourfin="";
 			 }else {
 				  if(sourfin.equalsIgnoreCase("Cofinance")){
@@ -1325,6 +1330,7 @@ public class AgpmController {
 						 selectTresor = true;
 						 selectPartBai = true;
 						 chargeSourceFinance();
+						 newFinancement = new TFinancement();
 					 }else 
 						 if(sourfin.equalsIgnoreCase("Etat")){
 						 selectBailleur = false;
@@ -1332,6 +1338,7 @@ public class AgpmController {
 						 selectPartBai= false;
 						 souCode="TRE";
 						 chargeSourceEtat();
+						 //newFinancement = new TFinancement();
 					    }
 			     }   
 		 }

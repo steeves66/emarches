@@ -154,7 +154,7 @@ public String getCodeVisaDetail(String chaine, String exo) {
 public String getCodeDao(String exo) {
 	
 	String pseudo=exo;
-	String codeDao=iservice.getCodeTable(pseudo, 13, 20,
+	String codeDao=iservice.getCodeTable(pseudo, 9, 13,
 			"T_DAC_SPECS", "DAC_CODE");
 	return codeDao;
 }

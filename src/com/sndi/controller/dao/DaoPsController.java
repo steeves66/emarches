@@ -1092,7 +1092,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				     			  	confirmPaie = true; 
 				     			  	etatRecu = false;
 			    			  		//Actualisation du Tableau de Bord
-			    			 		tableauBordController.chargeDataDao();
+			    			 		tableauBordController.chargeDataDao("PS","DAO");;
 			     			  		//Message de Confirmation
 			     					userController.setTexteMsg("Retrait effectué avec succès");
 			     				    userController.setRenderMsg(true);
@@ -1143,7 +1143,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			     			  	   confirmPaie = true;
 			     			  	   etatRecu = true;
 			     			  	   //Actualisation du Tableau de Bord
-			     			 	   tableauBordController.chargeDataDao();
+			     			 	   tableauBordController.chargeDataDao("PS","DAO");;
 			     			 	   //Réinitialisation des champs du Candidat
 			     			 	   //viderCandidat();
 			      			  	   //Message de Confirmation
@@ -1194,7 +1194,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			iservice.updateObject(slctdTd);
 			//Chargement de la liste des ventes et celle du tableau de Bord
 			chargeDataVente();
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataDao("PS","DAO");;
 			userController.setTexteMsg(message);
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");  
@@ -2670,7 +2670,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 						     chargeData(); 
 	 						     //chargePPM();
 	 						     //Actualisation du tableau de Bord
-	 						     tableauBordController.chargeDataDao();
+	 						     tableauBordController.chargeDataDao("PS","DAO");;
 	 						     
 	 						     userController.setTexteMsg("DAO N° "+dao.getDacCode()+" Initié avec succès!");
 	 							 userController.setRenderMsg(true);
@@ -3038,7 +3038,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 				 
 			 				chargeDaoAffectes();
 				 			//Chargement des compteurs du tableau de bord
-				 			tableauBordController.chargeDataDao();
+				 			tableauBordController.chargeDataDao("PS","DAO");;
 				 			//Désactivation du bouton d'affectation 
 				 			btn_affecter =  false;
 				 			//Message de confirmation

@@ -576,7 +576,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
      	          
      	            chargeDataPriseCompte();
      	            //Chargement du tableau de bord 
-     	            tableauBordController.chargeDataDao();
+     	            tableauBordController.chargeDataDao("PN","DAO");
      	            
      	            //Désactivation des booléens
      	            panelAvisBailleur = true;
@@ -629,7 +629,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("listeDAO size: "+listeDAO.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	} 
 	 
 	//Affichage des DAO vendus
@@ -640,7 +640,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("listeDaoVendu  size: "+listeDaoVendu.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	} 
 	 
 	//Affichage des DAO validés par la CPMP
@@ -651,7 +651,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoValide  size: "+listeDaoValide.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 		 
 		//Affichage des DAO validés par la CPMP
@@ -663,7 +663,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoDiff  size: "+listeDaoDiff.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 		 
 		 
@@ -675,7 +675,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					  new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 			          new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				_logger.info("listeDaoCsvValid size: "+listeDaoCsvValid.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 		 
 		 
@@ -687,7 +687,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					  new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 			          new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				_logger.info("listeDaoCsvValid size: "+listeDaoCsvValid.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 	 
 	 
@@ -700,7 +700,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	 //Affichage des DAO retournés pour prise en compte des observation
@@ -712,7 +712,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 		          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	
@@ -727,7 +727,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				      new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 		              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("objetListe size: "+listeDaoTrans.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	 public void chargeDaoTabTrans(){
@@ -736,7 +736,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 		              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("listeTabDaoTrans size: "+listeTabDaoTrans.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	 //Liste des DAO différés chez le AC
@@ -746,7 +746,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 		              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			_logger.info("listeTabDaoDiff size: "+listeTabDaoDiff.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	 //Liste des DAO retirés (Tableau de Bord)
@@ -756,7 +756,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				   new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 		              new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoRetire size: "+listeDaoRetire.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	
@@ -769,7 +769,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			              new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 			              new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
 				_logger.info("examenListe size: "+examenListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 	  
 	  
@@ -780,7 +780,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 			              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 				_logger.info("daoExamen size: "+daoExamen.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 	  
 	  //Affichage de zone de mention si le chargé d'Etude est un responsable de binôme
@@ -921,7 +921,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
     			  				   etatRecu = true;
     			  				   
     			  				  //Actualisation du Tableau de Bord
-    			 		          tableauBordController.chargeDataDao();
+    			 		          tableauBordController.chargeDataDao("PN","DAO");
 		                    	  
     			 		            chargeDaoVendu();
      			  				   //Message de Confirmation
@@ -942,7 +942,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 "AFF_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
 						 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-				      tableauBordController.chargeDataDao();
+				      tableauBordController.chargeDataDao("PN","DAO");
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
 					    	  
@@ -983,7 +983,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 						 new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("publicationListe  size: "+publicationListe.size());		
-				tableauBordController.chargeDataDao();	
+				tableauBordController.chargeDataDao("PN","DAO");	
 		}
 		 
 		 
@@ -994,7 +994,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 					  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"));
 				_logger.info("validationListe  size: "+validationListe.size());					
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 		 
 		
@@ -1024,7 +1024,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("AFF_DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoVente size: "+listeDaoVente.size());
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataDao("PN","DAO");
 	}
 	 
 	 
@@ -1036,7 +1036,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataDao("PN","DAO");
 	}
 	 
 	 
@@ -1049,7 +1049,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			_logger.info("affectationListe  size: "+affectationListe.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	 		 
@@ -1063,7 +1063,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					 new WhereClause("DCS_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("validationListe  size: "+validationListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 		 
 		 
@@ -1075,7 +1075,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					 new WhereClause("DCS_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("validationListe  size: "+validationListe.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		}
 		 
 		//Affichage des DAO validés par le C.E
@@ -1088,7 +1088,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					 new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					new WhereClause("DAF_DAC_STR",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 				_logger.info("listeDaoChargeValid  size: "+listeDaoChargeValid.size());	
-				tableauBordController.chargeDataDao();		
+				tableauBordController.chargeDataDao("PN","DAO");		
 		    }
 	 
 //Fin de Staistiques pour le chargé d'Etudes 
@@ -1113,7 +1113,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			              new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 			              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 			 _logger.info("listeTabDaoCsvAff  size: "+listeTabDaoCsvAff.size());	
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataDao("PN","DAO");
 		}
 		 
 			//Affichage des DAO validé par le Chef de Service
@@ -1124,7 +1124,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoValCsv  size: "+listeTabdaoValCsv.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 			}
 			 
 			 
@@ -1136,7 +1136,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeTabdaoDiffCsv  size: "+listeTabdaoDiffCsv.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 			}
 			 
 	
@@ -1147,7 +1147,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
 				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+updateDac.getAaoCode()));
 			_logger.info("objetListe size: "+listeLots.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
    
    
@@ -1156,7 +1156,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
 				 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+updateDac.getAffDacCode()));
 			_logger.info("objetListe size: "+listeLots.size());	
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 	}
 	 
 	 
@@ -1174,7 +1174,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
 				 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
 			_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
-			tableauBordController.chargeDataDao();	
+			tableauBordController.chargeDataDao("PN","DAO");	
 			}
 	  
 	  
@@ -1312,7 +1312,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 				          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 					_logger.info("daoPs size: "+daoPs.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 			}
 	 
 		//Affichage des DAO en attente d'affectation
@@ -1324,7 +1324,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 						new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("affectationListe  size: "+affectationListe.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 			} 
 			 
 		
@@ -1338,7 +1338,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 						          new WhereClause("DAF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));
 						_logger.info("daoExamen size: "+daoExamen.size());	
-						tableauBordController.chargeDataDao();		
+						tableauBordController.chargeDataDao("PN","DAO");		
 				}
 			 }
 	     
@@ -1350,7 +1350,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 						  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"));
 					_logger.info("validationListe  size: "+validationListe.size());					
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 			}
 			 
 			  public void chargeDaoCharegEtudePs(){
@@ -1360,7 +1360,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					              new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 					              new WhereClause("AFF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
 						_logger.info("examenListe size: "+examenListe.size());	
-						tableauBordController.chargeDataDao();		
+						tableauBordController.chargeDataDao("PN","DAO");		
 				}
 			  
 			  public void chargeDaoChargeEtudePs(){
@@ -1368,7 +1368,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
 					              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 						_logger.info("daoExamen size: "+daoExamen.size());	
-						tableauBordController.chargeDataDao();		
+						tableauBordController.chargeDataDao("PN","DAO");		
 				}
 			  
 			  
@@ -1389,7 +1389,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("publicationListe  size: "+publicationListe.size());		
-						tableauBordController.chargeDataDao();		
+						tableauBordController.chargeDataDao("PN","DAO");		
 				}
 				 
 				 
@@ -1401,7 +1401,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","DAO");
 				}
 			
 				 //Affichage des DAO à retirer
@@ -1413,7 +1413,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						_logger.info("listeDaoVente size: "+listeDaoVente.size());
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","DAO");
 				}
 				 
 				 public void chargeDataPriseComptePs(){ 
@@ -1424,7 +1424,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							 new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 					          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 						_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-						tableauBordController.chargeDataDao();		
+						tableauBordController.chargeDataDao("PN","DAO");		
 				}
 				 
 			
@@ -1475,7 +1475,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 									  new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 							          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 							          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-								tableauBordController.chargeDataDao();
+								tableauBordController.chargeDataDao("PN","DAO");
 								
 								 }
 					        }
@@ -1489,7 +1489,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"),
 					  new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 					  _logger.info("validationListe  size: "+validationListe.size());					
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 					        }
 				
 				
@@ -1503,7 +1503,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 									new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()),
 									new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 								_logger.info("affectationListe  size: "+affectationListe.size());	
-								tableauBordController.chargeDataDao();
+								tableauBordController.chargeDataDao("PN","DAO");
 							
 							 }
 				        }
@@ -1519,7 +1519,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 										new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 										new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 									_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
-									tableauBordController.chargeDataDao();
+									tableauBordController.chargeDataDao("PN","DAO");
 							 }
 				        }
 				
@@ -1530,7 +1530,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 										new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 						              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 							_logger.info("daoExamen size: "+daoExamen.size());	
-							tableauBordController.chargeDataDao();	
+							tableauBordController.chargeDataDao("PN","DAO");	
 				        }  
 				
 							
@@ -1544,7 +1544,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 							new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							_logger.info("publicationListe  size: "+publicationListe.size());		
-							tableauBordController.chargeDataDao();
+							tableauBordController.chargeDataDao("PN","DAO");
 										 }
 							        }
 					
@@ -1558,7 +1558,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 							new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("listeDaoVente size: "+listeDaoVente.size());
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","DAO");
 											 }
 								        }
 
@@ -1572,7 +1572,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","DAO");
 					  }
 					} 
 			
@@ -1585,7 +1585,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 				              new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 					_logger.info("objetListe size: "+listeDaoTrans.size());	
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DAO");
 					  
 					}	  
 					//Filtre multicritère pour les DAO en Procédure Simplifiée
@@ -1600,7 +1600,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 						new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 					_logger.info("listeDaoVendu  size: "+listeDaoVendu.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 			}
 				 
     //FIN DAO PROCEDURE SIMPLIFIEE
@@ -1617,7 +1617,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							  new WhereClause("AFF_DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 					          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","DAO");
 						
 						 }else 
 						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -1637,7 +1637,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			  new WhereClause("AFF_STA_CODE",WhereClause.Comparateur.EQ,"D4V"),
 			  new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 			  _logger.info("validationListe  size: "+validationListe.size());					
-			tableauBordController.chargeDataDao();		
+			tableauBordController.chargeDataDao("PN","DAO");		
 			        }
 		
 		
@@ -1651,7 +1651,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 							new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()),
 							new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 						_logger.info("affectationListe  size: "+affectationListe.size());	
-						tableauBordController.chargeDataDao();
+						tableauBordController.chargeDataDao("PN","DAO");
 					
 					 }
 		        }
@@ -1666,7 +1666,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 					          new WhereClause("DAF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));
 					_logger.info("daoExamen size: "+daoExamen.size());	
-					tableauBordController.chargeDataDao();		
+					tableauBordController.chargeDataDao("PN","DAO");		
 			}
 		 }
 		
@@ -1680,7 +1680,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 								new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 								new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 							_logger.info("listeDaoARetirer size: "+listeDaoARetirer.size());
-							tableauBordController.chargeDataDao();
+							tableauBordController.chargeDataDao("PN","DAO");
 					 }
 		        }
 		
@@ -1691,7 +1691,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 								new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 					_logger.info("daoExamen size: "+daoExamen.size());	
-					tableauBordController.chargeDataDao();	
+					tableauBordController.chargeDataDao("PN","DAO");	
 		        }  
 		
 					
@@ -1705,7 +1705,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 												new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 												new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 											_logger.info("publicationListe  size: "+publicationListe.size());		
-											tableauBordController.chargeDataDao();
+											tableauBordController.chargeDataDao("PN","DAO");
 								 }
 					        }
 			
@@ -1719,7 +1719,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					new WhereClause("AFF_DAC_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 					new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 				_logger.info("listeDaoVente size: "+listeDaoVente.size());
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataDao("PN","DAO");
 									 }
 						        }
 	
@@ -1735,7 +1735,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			          new WhereClause("AFF_DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 			          new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 				_logger.info("daoPriseCompte size: "+daoPriseCompte.size());	
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataDao("PN","DAO");
 			  }
 			} 
 	
@@ -1748,7 +1748,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		              new WhereClause("AFF_DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 		              new WhereClause("AFF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 			_logger.info("objetListe size: "+listeDaoTrans.size());	
-			tableauBordController.chargeDataDao();
+			tableauBordController.chargeDataDao("PN","DAO");
 			  
 			}
 	
@@ -1834,7 +1834,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					 chargeDaoTrans();
 					 chargeDataAffecter();
 		          //Actualisation du Tableau de Bord
-		          tableauBordController.chargeDataDao();
+		          tableauBordController.chargeDataDao("PN","DAO");
 			
 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
 			 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -2161,7 +2161,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					iservice.addObject(dac);
 				 //chargePiecesByDao();
 				//Actualisation du Tableau de Bord
-				tableauBordController.chargeDataDao();
+				tableauBordController.chargeDataDao("PN","DAO");
 				//Activation et désactivation des boutons valider
 				etatBtnValid = false;
 				validCorrection = true;
@@ -2241,7 +2241,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 									              iservice.addObject(dac);
 	 				                               // chargePiecesByDao();				
 	 				                              //Actualisation du Tableau de Bord
-					                              tableauBordController.chargeDataDao();
+					                              tableauBordController.chargeDataDao("PN","DAO");
 					                              //Activation et désactivation des boutons valider
 					              				  etatBtnValid = false;
 					              				  validCorrection = true;
@@ -2308,7 +2308,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 				  chargeDaoChargeEtude();
 				  chargeDataChargeValid();
 				//Actualisation du tableau de bord
- 					tableauBordController.chargeDataDao();
+ 					tableauBordController.chargeDataDao("PN","DAO");
  					//Message de confirmation
  					userController.setTexteMsg("Transmission effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -2355,7 +2355,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		                             //Actualisation de la liste des DAO
 		                             chargeDaoChargeEtude();
 				                     //Actualisation du Tableau de Bord
-				                     tableauBordController.chargeDataDao();
+				                     tableauBordController.chargeDataDao("PN","DAO");
 				                     //Message de confirmation
 				                     userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 				                     userController.setRenderMsg(true);
@@ -2397,7 +2397,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		       		                                //Actualisation de la liste des DAO
 		       		                                chargeDaoChargeEtude();
 	 				                                //Actualisation du Tableau de Bord
-					                                 tableauBordController.chargeDataDao();
+					                                 tableauBordController.chargeDataDao("PN","DAO");
 	 				                                //Message de confirmation
 	 				                                userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 	 				                                userController.setRenderMsg(true);
@@ -2456,7 +2456,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					chargeDaoCharegEtude();
 					renderPage("dao1","CHADAO");
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DAO");
 					//Message de confirmation
 					userController.setTexteMsg("Validation effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -2508,7 +2508,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					
 					chargeDataAPublier();
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DAO");
 					//Message de confirmation
 					userController.setTexteMsg("DAO Publié!");
 					userController.setRenderMsg(true);
@@ -2827,7 +2827,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 		            }	
 		  
 		    //Chargement des compteurs du tableau de bord
-			tableauBordController.chargeDataDao();	
+			tableauBordController.chargeDataDao("PN","DAO");	
 			//Message de confirmation
 			userController.setTexteMsg("DAO mis à jour avec succès!");
 			userController.setRenderMsg(true);
@@ -2931,7 +2931,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 			 	   	 }
 			 			chargeDaoAffectes();
 			 			//Chargement des compteurs du tableau de bord
-			 			tableauBordController.chargeDataDao();	
+			 			tableauBordController.chargeDataDao("PN","DAO");	
 			 			//Message de confirmation
     					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
 						userController.setRenderMsg(true);
@@ -2990,7 +2990,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					chargeDataValCsv();
 					renderPage("dao1","VALDAO");
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DAO");
 					//Message de confirmation
 					userController.setTexteMsg("Validation effectuée avec succès!");
 					userController.setRenderMsg(true);
@@ -3088,7 +3088,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 			        
 	 			        chargeDataDiffCsv();
 	 			        //Chargement des compteurs DAO du tableau de bord
-	 			        tableauBordController.chargeDataDao();	
+	 			        tableauBordController.chargeDataDao("PN","DAO");	
 	 			        //Message de confirmation
 				        userController.setTexteMsg("RéAffectation(s) effectuée(s) avec succès!");
 				        userController.setRenderMsg(true);
@@ -3511,7 +3511,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
        					
        					chargeDaoTabTrans();
        					//Actualisation du tableau de bord
-       					tableauBordController.chargeDataDao();
+       					tableauBordController.chargeDataDao("PN","DAO");
        					//Message de confirmation
        					userController.setTexteMsg("Transmission effectuée avec succès!");
    						userController.setRenderMsg(true);
@@ -3564,7 +3564,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 					
 					chargeDaoTrans();
 					//Actualisation du tableau de bord
-					tableauBordController.chargeDataDao();
+					tableauBordController.chargeDataDao("PN","DAO");
 					//Message de confirmation
 					userController.setTexteMsg("Transmission effectuée avec succès!");
 					userController.setRenderMsg(true);

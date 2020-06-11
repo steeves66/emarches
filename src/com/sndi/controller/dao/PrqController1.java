@@ -963,7 +963,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 		  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
 				 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
 			_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
-			tableauBordController.chargeDataDao();	
+			tableauBordController.chargeDataDao("PN","PRQ");	
 			}
 	  
 	  
@@ -2122,7 +2122,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 			     chargeData(); 
 			     //chargePPM();
 			     //Actualisation du tableau de Bord
-			     tableauBordController.chargeDataDao();
+			     tableauBordController.chargeDataDao("PN","PRQ");
 			     
 			     userController.setTexteMsg("PRQ N° "+dao.getDacCode()+" Initié avec succès!");
 				 userController.setRenderMsg(true);
@@ -2371,7 +2371,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 			 	   	 }
 			 			chargeDaoAffectes();
 			 			//Chargement des compteurs du tableau de bord
-			 			tableauBordController.chargeDataDao();	
+			 			tableauBordController.chargeDataDao("PN","PRQ");	
 			 			//Message de confirmation
     					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
 						userController.setRenderMsg(true);
@@ -2530,7 +2530,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || slctdTd.getAffDacDate
 	 			        
 	 			        chargeDataDiffCsv();
 	 			        //Chargement des compteurs DAO du tableau de bord
-	 			        tableauBordController.chargeDataDao();	
+	 			        tableauBordController.chargeDataDao("PN","PRQ");	
 	 			        //Message de confirmation
 				        userController.setTexteMsg("RéAffectation(s) effectuée(s) avec succès!");
 				        userController.setRenderMsg(true);

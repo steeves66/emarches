@@ -794,54 +794,55 @@ public class TableauBordController {
 		}
 		//Fin PRQ 	
 		
-		
-		
-		
 		//Tableau de Bord pour le module DAO en Procédure Normale
-		public void chargeDataDao() {
-			//Début Tableau de Bord pour le module DAO
-			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				 //Saisie des DAO
-				 daoAcSaisie = ""+getAcDaoSaisieDossier("D1S","D1R");
-				 daoAcTransmis = ""+getAcDaoTransmisDossier("D1T");
-				 daoCpDifCpmp = ""+getDaoDiffDossier("D1R","D2R");
-				 //Publication des DAO
-				 daoCsvValide = ""+getAcDaoValidCsvDossier("D5V","DOP");
-				 daoDaoPub = ""+getAcDaoValidCsvPubDossier("DPU");
-				 //Vente ou Retrait du DAO
-				 daoAcAttVente = ""+getDaoAttenteRetrait("DPU","D6V");
-				 daoAcAttRetrait = ""+getDaoAttenteVente("DVE");
-				 daoAcRetire = ""+getDaoAcRetire("RET");
-				 //Prise en compte des observations des DAO
-				 daoAcPs=""+getAcDaoSaisiePs("SBO","SRO");
-				 daoPriseTrait=""+getAcDaoSaisiePs("SB1","DOP");
-			 }else {
-				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-					 //Prévalidation des DAC
-					 daoCpSaisie = ""+getDaoSaisieDossier("D1T");
-					 daoCpValide = ""+getDaoValideCmp("D2T");
-					 daoAcDiffDmp = ""+getDaoDiffDmpACDossier("S3D");
-				 }else {
-					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-						 //Affectation des DAC
-						 daoCsvAttAff = ""+getDaoAttAffCsv("D2T","D5R","DOP");
-						 daoaffecte = ""+getAcDaoAffecteDossier("D3A");
-						 daoCsvDiff = ""+getAcDaoDiffCsv("D5R");
-						 //Validation des DAC
-						 daoCsvAttVal = ""+getAcDaoValChargeCsv("D4V");
-						 daoCsvValidation = ""+getAcDaoValidationCsvDossier("D5V","DOP","SBO");
+				public void chargeDataDao(String typePlan,String typeDac) {
+					//Début Tableau de Bord pour le module DAO
+					if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						 //Saisie des DAO
+						 daoAcSaisie = ""+getAcDaoSaisieDossier(typePlan,typeDac,"D1S","D1R");
+						 daoAcTransmis = ""+getAcDaoTransmisDossier(typePlan,typeDac,"D1T");
+						 daoCpDifCpmp = ""+getDaoDiffDossier(typePlan,typeDac,"D1R","D2R");
+						 //Publication des DAO
+						 daoCsvValide = ""+getAcDaoValidCsvDossier(typePlan,typeDac,"D5V","DOP");
+						 daoDaoPub = ""+getAcDaoValidCsvPubDossier(typePlan,typeDac,"DPU");
+						 //Vente ou Retrait du DAO
+						 daoAcAttVente = ""+getDaoAttenteRetrait(typePlan,typeDac,"DPU","D6V");
+						 daoAcAttRetrait = ""+getDaoAttenteVente(typePlan,typeDac,"DVE");
+						 daoAcRetire = ""+getDaoAcRetire(typePlan,typeDac,"RET");
+						 //Prise en compte des observations des DAO
+						 daoAcPs=""+getAcDaoSaisiePs(typePlan,"SBO","SRO");
+						 daoPriseTrait=""+getAcDaoSaisiePs(typePlan,"SB1","DOP");
 					 }else {
-						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
-							 //Correction du DAC
-							 daoChargeCor = ""+getAcDaoCorCharge("DC2");
-							 daoChargeAttente = ""+getAcDaoAttenteCharge("D3A");
-							 daoChargeVal = ""+getAcDaoValCharge("D4V");
-						 }
-					 }
-			     } 
-			   }
-			//Fin Tableau de Bord pour le module DAO
-		}
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+							 //Prévalidation des DAC
+							 daoCpSaisie = ""+getDaoSaisieDossier(typePlan,typeDac,"D1T");
+							 daoCpValide = ""+getDaoValideCmp(typePlan,typeDac,"D2T");
+							 daoAcDiffDmp = ""+getDaoDiffDmpACDossier(typePlan,typeDac,"S3D");
+						 }else {
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+								 //Affectation des DAC
+								 daoCsvAttAff = ""+getDaoAttAffCsv(typePlan,typeDac,"D2T","D5R","DOP");
+								 daoaffecte = ""+getAcDaoAffecteDossier(typePlan,typeDac,"D3A");
+								 daoCsvDiff = ""+getAcDaoDiffCsv(typePlan,typeDac,"D5R");
+								 //Validation des DAC
+								 daoCsvAttVal = ""+getAcDaoValChargeCsv(typePlan,typeDac,"D4V");
+								 daoCsvValidation = ""+getAcDaoValidationCsvDossier(typePlan,typeDac,"D5V","DOP","SBO");
+							 }else {
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+									 //Correction du DAC
+									 daoChargeCor = ""+getAcDaoCorCharge(typePlan,typeDac,"DC2");
+									 daoChargeAttente = ""+getAcDaoAttenteCharge(typePlan,typeDac,"D3A");
+									 daoChargeVal = ""+getAcDaoValCharge(typePlan,typeDac,"D4V");
+								 }
+							 }
+					     } 
+					   }
+					//Fin Tableau de Bord pour le module DAO
+				}
+				
+		
+		
+		
 		
 		/*public void chargeDataDaoPs() {
 			 //Début DAO en procédure Simplifiée 
@@ -2128,121 +2129,121 @@ public int getPpmTransmisDmpDossier(String src,String typePlan){
 
 //Début DAO Procédure Normale
 //Nombre total des DAO
-public int getDaoDossierTotal(){
+public int getDaoDossierTotal(String typePlan,String typeDac){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"));
-	//new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+	new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 return	i;	
 	} 
 //DAO saisi par le AC
-public int getAcDaoSaisieDossier(String src1, String src2){
+public int getAcDaoSaisieDossier(String typePlan,String typeDac,String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO saisi par le AC en procédure Normale
-public int getAcDaoSaisiePs(String src1, String src2){ 
+public int getAcDaoSaisiePs(String typePlan,String src1, String src2){ 
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO en attente chez le chargé d'Etudes
-public int getAcDaoAttenteCharge(String src){
+public int getAcDaoAttenteCharge(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("V_DAO_CHARGE_ETUDE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DCS_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO validé par le chargé d'Etudes
-public int getAcDaoValChargeDet(String src){
+public int getAcDaoValChargeDet(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("V_DAO_CHARGE_ETUDE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DCS_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
-public int getAcDaoValCharge(String src){
+public int getAcDaoValCharge(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAO_AFFECTATION", "DAF_DAC_CODE",
 			new WhereClause("DAF_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAF_TYPE_DAC", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAF_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAF_TYPE_DAC", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAF_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 			new WhereClause("DAF_DAC_STR", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //Nombre de DAO corrigé par le responsable de saisie
-public int getAcDaoCorCharge(String src){
+public int getAcDaoCorCharge(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAO_AFFECTATION", "DAF_DAC_CODE",
 			new WhereClause("DAF_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAF_TYPE_DAC", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAF_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAF_TYPE_DAC", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAF_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 			new WhereClause("DAF_DAC_STR", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
-public int getAcDaoValChargeCsv(String src){
+public int getAcDaoValChargeCsv(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 
 //DAO saisi par le AC
-public int getAcDaoAffecteDossier(String src){
+public int getAcDaoAffecteDossier(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			//new WhereClause("DAC_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO validé par le Chef de Service en procédure normale
-public int getAcDaoValidCsvDossier(String src1, String src2){
+public int getAcDaoValidCsvDossier(String typePlan,String typeDac,String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAC validé par le Chef de Service en procédure normale
-public int getAcDaoValidationCsvDossier(String src1, String src2, String src3){
+public int getAcDaoValidationCsvDossier(String typePlan,String typeDac,String src1, String src2, String src3){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //
-public int getAcDaoValidCsv(String src){
+public int getAcDaoValidCsv(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
@@ -2258,41 +2259,41 @@ public int getAcDaoValidCsv(String src){
 }*/
 
 //DAO différé par le Chef de Service DAO (Acteur DMP)
-public int getAcDaoDiffCsv(String src){
+public int getAcDaoDiffCsv(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 			//new WhereClause("DAC_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //DAO publié par le Chef de Service
-public int getAcDaoValidCsvPubDossier(String src){
+public int getAcDaoValidCsvPubDossier(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO Transmis par le AC
-public int getAcDaoTransmisDossier(String src){ 
+public int getAcDaoTransmisDossier(String typePlan,String typeDac,String src){ 
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO en attente de transmission chez le AC
-public int getAcDaoAttenteValide(String src1, String src2){
+public int getAcDaoAttenteValide(String typePlan,String typeDac,String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
@@ -2309,41 +2310,41 @@ public int getAcDaoAttenteValide(String src1, String src2){
 }*/
 
 //DAO saisi par le CPMP en procédure normale : Nouvelle Methode
-public int getDaoSaisieDossier(String src){
+public int getDaoSaisieDossier(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //DAO non transmis par le cpmp en procédure normale
-public int getDaoSaisieDossierIn(String src1, String src2){
+public int getDaoSaisieDossierIn(String typePlan,String typeDac,String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 	return	i;
 }
 
 //DAO transmis par le cpmp en procédure normale
-public int getDaoTransmisDossier(String src){
+public int getDaoTransmisDossier(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //DAO envoyés pour l'affectation chez le chef de service en procédure normale
-public int getDaoAttAffCsv(String src1, String src2,String src3){ 
+public int getDaoAttAffCsv(String typePlan,String typeDac,String src1, String src2,String src3){ 
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 	        new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			//new WhereClause("DAC_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
@@ -2360,82 +2361,82 @@ public int getDaoAttAffCsv(String src1, String src2,String src3){
 }*/
 
 //DAO retournés par le cpmp chez le AC en procédure normale : Nouvelle Methode
-public int getDaoDiffCpmpACDossier(String src){
+public int getDaoDiffCpmpACDossier(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //DAO retournés par le dmp chez le AC en procédure normale
-public int getDaoDiffDmpACDossier(String src){
+public int getDaoDiffDmpACDossier(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 	        new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO retournés par la cpmp (Son propre tableau de bord)
-public int getDaoDiffDossier(String src1, String src2){
+public int getDaoDiffDossier(String typePlan,String typeDac,String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
 }
 
 //DAO retournés par le dmp en procédure normale
-public int getDaoDiffDmp(String src){
+public int getDaoDiffDmp(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 	return	i;	
 }
 
 
 //DAO en attente de validation par le CPMP en procédure normale
-public int getDaoAttenteValide(String src1, String src2){
+public int getDaoAttenteValide(String typePlan,String typeDac,String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;
 }
 
 //DAO en attente de retrait chez l'AC en procédure normale
-public int getDaoAttenteRetrait(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",new ArrayList<String>(Arrays.asList("AFF_DAC_CODE")),
-			"AFF_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("AFF_DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"), 
-			new WhereClause("AFF_DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("AFF_DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+public int getDaoAttenteRetrait(String typePlan,String typeDac,String src1, String src2){
+	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac), 
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
+			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
 
 //DAO en attente de vente chez l'AC en procédure normale
-public int getDaoAttenteVente(String src){
-	int i = iservice.countTableByColumn("T_AFFICHAGE_DAO", "AFF_DAC_CODE",
-			new WhereClause("AFF_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("AFF_DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("AFF_DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("AFF_DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+public int getDaoAttenteVente(String typePlan,String typeDac,String src){
+	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
+			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //DAO retiré chez l'AC en procédure normale
-public int getDaoAcRetire(String src){
+public int getDaoAcRetire(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
@@ -2452,46 +2453,47 @@ public int getDaoAcRetire(String src){
 }*/
 
 //DAO validés par le cpmp en procédure normale : Ancienne Methode DAC_FON_CODE_PF
-public int getDaoValideCmp(String src){
+public int getDaoValideCmp(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 
 //DAO validés par la DMP en procédure normale
-public int getDaoValideDmp(String src){
+public int getDaoValideDmp(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
 	return	i;	
 }
 
-//DAO en attente de validation par la dmp en Procédure Normale
-public int getDaoAttValideDmp(String src){
+//DAO en attente de validation par la DMP en Procédure Normale
+public int getDaoAttValideDmp(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 	return	i;	
 }
 
 
-//DAO transmis par le dmp
-public int getDaoTransmisDmpDossier(String src){
+//DAO transmis par la DMP
+public int getDaoTransmisDmpDossier(String typePlan,String typeDac,String src){
 	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
-			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 //Fin DAO en Procédure Normale
+
 
 
 //Début DAO Procédure Simplifiée

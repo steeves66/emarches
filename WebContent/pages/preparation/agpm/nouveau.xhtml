@@ -65,7 +65,7 @@
 		                      effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 		                    <f:selectItem  itemLabel="Saisir le projet" />  
 		                   <f:selectItems value="#{agpmController.acteListe}" var="pr" itemLabel="#{pr.proId} - #{pr.proTitre}" itemValue="#{pr.proId}"/>
-		                   <p:ajax listener="#{agpmController.rechercheProjet()}" update=":gnl" /> 
+		                   <p:ajax listener="#{agpmController.rechercheProjet()}" global="false" update=":gnl" /> 
 		                  </p:selectOneMenu>
                      <!-- Fin de la combobox -->
 			          </div>
@@ -132,7 +132,7 @@
 	                  <div class="col-sm-10">
 
        		        <p:selectOneRadio id="situation" value="#{agpmController.sourfin}">
-		              <p:ajax listener="#{agpmController.checkBailleur()}" update="gnl:idBail, gnl:idTres, gnl:idPartB, gnl:source" />
+		              <p:ajax listener="#{agpmController.checkBailleur()}" global="false" update="gnl:idBail, gnl:idTres, gnl:idPartB, gnl:source" />
 			            <div class="col-md-4">
 						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
 			            </div>
@@ -164,7 +164,7 @@
 	                </h:panelGroup>
 	                
 	                
-	                <div class="form-group ">
+	                <div class="form-group">
 	                  <label for="source" class="col-sm-2 control-label"><b>Type</b></label>
 	                  <div class="col-sm-10">
 	                    <p:selectOneMenu value="#{agpmController.souCode}" id="source" 
@@ -187,12 +187,12 @@
 	                  </div>
 	                </div>
 	                
-	                <div class="form-group ">
+	                <div class="form-group">
 	                  <label for="xmontDev" class="col-sm-2 control-label"><b>Montant en Devise</b></label>
 	                  <div class="col-sm-10">
 	                    <p:inputText type="text" value="#{agpmController.newFinancement.finMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" process="@this" update="xmontDev" /> 
+	                    <p:ajax event="blur" global="false" process="@this" update="xmontDev" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div>
@@ -204,7 +204,7 @@
 	                  <div class="col-sm-10">
 	                    <p:inputText type="text" value="#{agpmController.newFinancement.finPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" process="@this" update="partTresor" /> 
+	                    <p:ajax event="blur" global="false" process="@this" update="partTresor" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div>
@@ -218,14 +218,14 @@
 	                  <div class="col-sm-10">
 	                    <p:inputText type="text" value="#{agpmController.newFinancement.finMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                     <p:ajax event="blur" process="@this" update="xmont" /> 
+	                     <p:ajax event="blur" global="false" process="@this" update="xmont" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div>
 	                </h:panelGroup>
 	                </h:panelGroup>
 	                
-	                <div class="form-group ">
+	                <div class="form-group">
 	                  <label for="accord" class="col-sm-2 control-label"><b>N° Accord</b></label>
 	                  <div class="col-sm-10">
 	                    <p:inputText type="text" value="#{agpmController.newFinancement.finNumeroAccord}" id="accord" styleClass="form-control"  style="width: 100%" />
@@ -238,7 +238,7 @@
 	            </div>
 	            </div>
 		           <div class="row">
-                <div class="pull-right ">
+                <div class="pull-right">
                        
                         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
 					       <p:commandLink rendered="#{agpmController.btn_saveProjet}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{agpmController.creerProjet}"  update=":content">

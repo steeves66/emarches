@@ -31,6 +31,7 @@ public class ControleController {
 	private String libellesmall="";
 	private String libellePgpm ="";
 	public String type="";
+	public String typePlan="";
 	private String libelleValPrq="";
 	private String libelleValami="";
 	private String libelleValP="";
@@ -898,10 +899,14 @@ public class ControleController {
 						 searchAC = true;
 						 searchCpmp = false;
 						 searchDmp = false;
+						 /*validCPMP = true;
+						 validDMP = false;
+						 etatPso = false;
+						 etatPsl = true;*/
 						 validCPMP = true;
 						 validDMP = false;
 						 etatPso = false;
-						 etatPsl = true;
+						 etatPsl = false;
 			    	}else
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
 			    			 type = "PPM";
@@ -1119,6 +1124,8 @@ public class ControleController {
 							 //validDMP = false;
 							 validCPMP = false;
 							 validDMP = true;
+							 etatPsl = false;
+							 etatPso = false;
 							 searchAcPs = true;
 							 searchCpmpPs = false;
 							 searchDmpPs = false;
@@ -2018,6 +2025,7 @@ public class ControleController {
 			 
 			 //DAO
 			 if(action.equalsIgnoreCase("ENGDAO")) {
+				 typePlan ="PN";
 				  type = "DAC";
 				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
 			       libelle1="LISTE DES DOSSIERS D'APPEL A CONCURRENCE (DAC)";
@@ -2032,6 +2040,7 @@ public class ControleController {
 			       btn_fermer_saisie_prq = false  ;                     
 			    }else 
 			    	if(action.equalsIgnoreCase("MODDAO")) {
+			    		typePlan ="PN";
 			    		type = "DAC";
 			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL A CONCURRENCE N° ";
 			    		 libelle1="Saisie d'un nouveau DAC";
@@ -2049,6 +2058,7 @@ public class ControleController {
 					     btn_fermer_saisie_prq = false  ;
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIDAO")) {
+			    			typePlan ="PN";
 			    			type = "DAC";
 			    			libelle1="Index";
 			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -2125,6 +2135,7 @@ public class ControleController {
 							 
 			    		}else
 				    		if(action.equalsIgnoreCase("DAOPS")) {
+				    			typePlan ="PN";
 				    			type = "DAO";
 				    			libelle1="Index";
 				    			 libelleDao3="SAISIE DES DOSSIERS D'APPEL D'OFFRES";
@@ -2193,6 +2204,7 @@ public class ControleController {
 								 
 				    		}else
 			    			    if(action.equalsIgnoreCase("VALDAO")) {
+			    			    typePlan ="PN";
 			    				type = "DAC";
 			    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
 			    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -2259,6 +2271,7 @@ public class ControleController {
 								btn_fermer_saisie_dao = true;
 			    			}else
 				    			if(action.equalsIgnoreCase("APEDAO")) {
+				    				typePlan ="PN";
 				    				type = "DAC";
 				    				libelleDao3="DETAILS DU";
 				    				panelDetail=true;
@@ -2283,6 +2296,7 @@ public class ControleController {
 									fermerApercuPrq = false;
 				    			}else
 				    				 if(action.equalsIgnoreCase("AFFDAO")) {
+				    					 typePlan ="PN";
 				    				        type = "DAC";
 							    			libelle1="Index";
 							    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
@@ -2356,6 +2370,7 @@ public class ControleController {
 											 btn_fermer_saisie_prq = false; 
 				    				 }else
 				    					  if(action.equalsIgnoreCase("EXADAO")) {
+				    						  typePlan ="PN";
 				    						     type = "DAC";
 								    			 libelle1="Index";
 								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -2428,6 +2443,7 @@ public class ControleController {
 												 btn_fermer_saisie_prq = false; 
 				    					  }else
 				    						   if(action.equalsIgnoreCase("VETDAO")) {
+				    							   typePlan ="PN";
 				    							     type = "DAC";
 				    							     libelle="VENTE / RETRAIT DU DAC N°";
 									    			 libelle1="Index";
@@ -2503,6 +2519,7 @@ public class ControleController {
 													 btn_fermer_saisie_prq = false;  
 				    						   }else
 				    							   if(action.equalsIgnoreCase("CHADAO")) {
+				    								     typePlan ="PN";
 				    								     type = "DAC";
 										    			 libelle1="Index";
 										    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -2578,6 +2595,7 @@ public class ControleController {
 				    								   
 				    							   }else 
 				    								   if(action.equalsIgnoreCase("PUBDAO")) {
+				    									    typePlan ="PN";
 				    									     type = "DAC";
 											    			 libelle1="Index";
 											    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
@@ -2652,6 +2670,7 @@ public class ControleController {
 															 btn_fermer_saisie_prq = false;   
 				    								   }else
 				    									     if(action.equalsIgnoreCase("TRADAO")) {
+				    									    	 typePlan ="PN";
 				    									    	 type = "DAC";
 												    			 libelle1="Index";
 												    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
@@ -2718,6 +2737,7 @@ public class ControleController {
 																 btn_fermer_saisie_prq = false; 
 				    									     }else
 				    									    	 if(action.equalsIgnoreCase("RETDAO")) {
+				    									    		 typePlan ="PN";
 								    							     type = "DAO";
 													    			 libelle1="Index";
 													    			 libelleDao3="RETRAIT DES DOSSIERS D'APPEL D'OFFRES";
@@ -2783,6 +2803,7 @@ public class ControleController {
 																	 btn_fermer_saisie_prq = false;  
 								    						   }else
 					    									    	 if(action.equalsIgnoreCase("OBSDAO")) {
+					    									    		 typePlan ="PN";
 									    							     type = "DAC";
 														    			 libelle1="Procédure Normale";
 														    			 libellesmall="Procédure Normale";
@@ -2858,6 +2879,7 @@ public class ControleController {
 																		 btn_fermer_saisie_prq = false;  
 									    						   }else
 				                                                          if(action.equalsIgnoreCase("ENGDPS")) {
+				                                                        	  typePlan ="PS";
 				                                                        	  type = "DAC";
 				                                            				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
 				                                            			       libelle1="LISTE DES DOSSIERS D'APPEL A CONCURRENCE (DAC)";
@@ -2872,6 +2894,7 @@ public class ControleController {
 				                                            			       btn_fermer_saisie_prq = false  ;                      
 										    							    }else 
 										    							    	if(action.equalsIgnoreCase("MODDPS")) {
+										    							    		typePlan ="PS";
 										    							    		type = "DAC";
 										    							    		libelleProcedure="Modification du DAC N°";
 										    							    		libelleDao2 = "Modification";
@@ -2886,6 +2909,7 @@ public class ControleController {
 										    							    		panelRegister=false;
 										    							    	}else
 							    									    	        if(action.equalsIgnoreCase("SAIDPS")) {
+							    									    	        	typePlan ="PS";
 							    									    	        	type = "DAC";
 							    										    			libelle1="Index";
 							    										    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -2961,6 +2985,7 @@ public class ControleController {
 							    														 btn_fermer_saisie_prq = false; 
 											    						     }else
 								    									    	 if(action.equalsIgnoreCase("VALDPS")) {
+								    									    		   typePlan ="PS";
 								    									    		   type = "DAC";
 								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
 								    								    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -3028,6 +3053,7 @@ public class ControleController {
 								    													btn_fermer_saisie_dao = true;
 												    						    }else
 									    									    	if(action.equalsIgnoreCase("APEDPS")) {
+									    									    		typePlan ="PS";
 									    									    		type = "DAC";
 									    							    				panelDetail=true;
 									    							    				panelForm=false;
@@ -3048,6 +3074,7 @@ public class ControleController {
 									    												fermerApercuPrq = false;
 													    						   }else
 									    									    	  if(action.equalsIgnoreCase("CHADPS")) {
+									    									    		  typePlan ="PS";
 									    									    		  type = "DAC";
 																			    			 libelle1="Index";
 																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -3123,6 +3150,7 @@ public class ControleController {
 																							 btn_fermer_saisie_prq = false;
 													    						    }else
 										    									    	 if(action.equalsIgnoreCase("EXADPS")) {
+										    									    		 typePlan ="PS";
 										    									    		 type = "DAC";
 										    								    			 libelle1="Index";
 										    								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
@@ -7562,6 +7590,16 @@ public class ControleController {
 
 	public void setOpdPiece(String opdPiece) {
 		this.opdPiece = opdPiece;
+	}
+
+
+	public String getTypePlan() {
+		return typePlan;
+	}
+
+
+	public void setTypePlan(String typePlan) {
+		this.typePlan = typePlan;
 	}
 	
     

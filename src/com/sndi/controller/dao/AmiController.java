@@ -2711,7 +2711,7 @@ public int getNbreLotTotal(){
 	 						     chargeData(); 
 	 						     //chargePPM();
 	 						     //Actualisation du tableau de Bord
-	 						     tableauBordController.chargeDataDao();
+	 						     tableauBordController.chargeDataDao("PN","AMI");
 	 						     
 	 						     userController.setTexteMsg("AMI N° "+dao.getDacCode()+" Initié avec succès!");
 	 							 userController.setRenderMsg(true);
@@ -3191,7 +3191,7 @@ public int getNbreLotTotal(){
 			 				 
 			 				chargeDaoAffectes();
 				 			//Chargement des compteurs du tableau de bord
-				 			tableauBordController.chargeDataDao();	
+				 			tableauBordController.chargeDataDao("PN","DAO");	
 				 			//Désactivation du bouton d'affectation 
 				 			btn_affecter =  false;
 				 			//Message de confirmation

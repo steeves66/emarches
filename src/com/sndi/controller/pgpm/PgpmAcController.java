@@ -811,6 +811,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    listeSourceFinance.clear();
 			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 			      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
+			newFinancement = new TFinancementPgpm();
 				}
 			
 			//Tri sur les types de financement  
@@ -818,6 +819,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    listeSourceFinance.clear();
 			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
 			      "SOU_CODE", new ArrayList<String>(Arrays.asList("TRE")));
+			newFinancement = new TFinancementPgpm();
 				}
 			 
 			 public void checkBailleur() {
@@ -833,6 +835,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 selectBailleur = true; 
 					 selectTresor = true;
 					 selectPartBai = true;
+					 chargeSourceFinance();
+					 newFinancement = new TFinancementPgpm();
 					// sourfin="";
 				 }else 
 					 if(sourfin.equalsIgnoreCase("ETAT")){

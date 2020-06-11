@@ -23,6 +23,7 @@ import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeMarche;
+import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
 import com.sndi.model.VTypeMarcheFils;
@@ -72,7 +73,10 @@ public class ConstantService {
 	private List<TStructure> listeStructures = new ArrayList<TStructure>();
 	private Map<String, TStructure> HM_STEUCTURE= new HashMap<String, TStructure>();
 	
+	private List<TTypePieceOffre> listePiecesOffres = new ArrayList<TTypePieceOffre>();
+	private Map<String, TTypePieceOffre> HM_PIECES_OFFRES= new HashMap<String, TTypePieceOffre>();
 	
+	//chargePiecesOffres()
 	
 	
 
@@ -105,6 +109,7 @@ public class ConstantService {
 		 chargeTTypeMarcheFilsTable();
 		 chargeTModePassationPnTable();
 		 chargeVModePassationTable();
+		 chargePiecesOffresTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
@@ -317,6 +322,22 @@ public class ConstantService {
 					return HM_STEUCTURE.get(STR_CODE);
 				}
 				
+			//LISTE PIECES OFFRES
+			public void chargePiecesOffresTable(){
+					listePiecesOffres.clear();
+					listePiecesOffres =(List<TTypePieceOffre>) iservice.getObjectsByColumn("TTypePieceOffre", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")));
+					HashMap<String, TTypePieceOffre> aMap = new HashMap<String, TTypePieceOffre>();
+					for (TTypePieceOffre of: listePiecesOffres) {
+						aMap.put(""+of.getTpoCode(), of);
+					}
+					HM_PIECES_OFFRES =  Collections.unmodifiableMap(aMap);	
+					_logger.info("V.size :"+ HM_PIECES_OFFRES.size());	
+				}
+				
+				public TTypePieceOffre getTTypePieceOffre(String TOP_CODE){
+					return HM_PIECES_OFFRES.get(TOP_CODE);
+				}
+				
 	
 				
 				
@@ -477,6 +498,18 @@ public class ConstantService {
 	}
 	public void setHM_TYPE_VMODE_PASSATION(Map<String, VModePassation> hM_TYPE_VMODE_PASSATION) {
 		HM_TYPE_VMODE_PASSATION = hM_TYPE_VMODE_PASSATION;
+	}
+	public List<TTypePieceOffre> getListePiecesOffres() {
+		return listePiecesOffres;
+	}
+	public void setListePiecesOffres(List<TTypePieceOffre> listePiecesOffres) {
+		this.listePiecesOffres = listePiecesOffres;
+	}
+	public Map<String, TTypePieceOffre> getHM_PIECES_OFFRES() {
+		return HM_PIECES_OFFRES;
+	}
+	public void setHM_PIECES_OFFRES(Map<String, TTypePieceOffre> hM_PIECES_OFFRES) {
+		HM_PIECES_OFFRES = hM_PIECES_OFFRES;
 	}
 
 }
