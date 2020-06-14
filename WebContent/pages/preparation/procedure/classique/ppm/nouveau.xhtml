@@ -1115,13 +1115,13 @@
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
                            <h:commandLink id="pgspm" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectPgspm()}">				        
          				  <h:outputText value="#{slctdTb.gpgId}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgspm}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Objet" styleClass="col-sm-11" >
                            <h:commandLink id="pgspm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgspm()}">				        
          				  <h:outputText value="#{slctdTb.gpgObjet}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgspm}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>

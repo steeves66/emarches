@@ -1634,7 +1634,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       //Enregistrement d'une opération PGPM sans AGPM
       public void creerDetailPlan() throws IOException{
     	  
-    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || detailPlan.getGpgLibFin().equalsIgnoreCase("") ||"".equalsIgnoreCase(detailPlan.getGpgLibFin())
+    	  if(detailPlan.getGpgObjet().equalsIgnoreCase("") || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") || detailPlan.getGpgCommentaire().equalsIgnoreCase("") || detailPlan.getGpgLibFin().equalsIgnoreCase("")
     			 ||marche.getTymCode() == null || modePassation.getMopCode() == null ) {
     		  //Message d'erreur
     		  FacesContext.getCurrentInstance().addMessage(null,

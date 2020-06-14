@@ -2358,7 +2358,7 @@ public int getDaoAttAffCsv(String typePlan,String typeDac,String src1, String sr
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 	return	i;	
-}*/
+}*/               
 
 //DAO retournés par le cpmp chez le AC en procédure normale : Nouvelle Methode
 public int getDaoDiffCpmpACDossier(String typePlan,String typeDac,String src){

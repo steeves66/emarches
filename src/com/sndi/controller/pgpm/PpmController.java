@@ -179,7 +179,7 @@ public class PpmController {
 		 private List<VPpmliste>listSelectionTransmission =new ArrayList<VPpmliste>();
 		 private TModePassation recupModePassation = new TModePassation();
 		 private List <VPpmStatut> ppmstatutList = new ArrayList<VPpmStatut>();
-	/*	 private List<TAffichagePpm> ppmTrans = new ArrayList<TAffichagePpm>();
+	   /*private List<TAffichagePpm> ppmTrans = new ArrayList<TAffichagePpm>();
 	     private List<TAffichagePpm> pspmTrans = new ArrayList<TAffichagePpm>();
 	     private List<TAffichagePpm> ppmValCp = new ArrayList<TAffichagePpm>();
 	     private List<TAffichagePpm> ppmValDmp = new ArrayList<TAffichagePpm>();
@@ -281,11 +281,11 @@ public class PpmController {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
 				//Controle Pavé création
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
-		  			 if("".equals(detailPass.getDppStructureConduc()) || "".equals(detailPass.getDppStructureBenefi()) ||"".equals(tydCode) ||"".equals(detailPass.getDppBailleur())
-		  				  ||"".equals(pgpm.getGpgMopCode()) ||"".equals(pgpm.getGpgTymCode()) ||"".equals(ligne.getLbgCode()) || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null)
+		  			 if("".equals(detailPass.getDppStructureConduc()) || "".equals(detailPass.getDppStructureBenefi()) || detailPass.getDppObjet() == null || tydCode == null ||detailPass.getDppBailleur() == null
+		  				  ||pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null || ligne.getLbgCode() == null || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
-						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
 						} 
 		  			 
@@ -518,7 +518,7 @@ public class PpmController {
 		 
 	 
 		 //Methode Principale de Chargement des PPM
-	/*	 public void chargeData(){
+	    /* public void chargeData(){
 			 listePpm.clear();
 			 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_ID")), 
 					"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPR")),
@@ -534,7 +534,7 @@ public class PpmController {
 		 
 		 
 		//Methode Principale de Chargement des PSPM
-/*		 public void chargeDataPspm(){ 
+       /* public void chargeDataPspm(){ 
 			 listePpm.clear();
 			 listePpm = (List<VPpmliste>) iservice.getObjectsByColumnInDesc("VPpmliste", new ArrayList<String>(Arrays.asList("DPP_ID")), 
 					"DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","SPD")),
@@ -1168,7 +1168,7 @@ public class PpmController {
 				 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 						 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
 						 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-						 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
+						 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 						 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"));
 				 filtreLigne="";
 			  }else 
@@ -1178,7 +1178,7 @@ public class PpmController {
 						 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 								 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
 								 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-								 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
+								 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 								 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"));
 						 filtreLigne="";
 				}		
@@ -1190,7 +1190,7 @@ public class PpmController {
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
 				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-				 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
+				 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'")); 
 			}
 	  
@@ -1201,7 +1201,7 @@ public class PpmController {
 		 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
 				 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-				 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
+				 //new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 				 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'")); 
 			}
 	
@@ -1234,7 +1234,7 @@ public class PpmController {
 			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 					 new WhereClause("LBG_TOT_DOT",Comparateur.BET,psoInf+" AND "+psoSup),
 					 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-					 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
+					// new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
 					 new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 		  }else 
@@ -1244,7 +1244,7 @@ public class PpmController {
 					 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumnNotQuote("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 							 new WhereClause("LBG_TOT_DOT",Comparateur.BET,pslInf+" AND "+pslSup),
 							 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
-							 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
+						  // new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 							 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
 							 new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));	
 			}		
@@ -1696,33 +1696,33 @@ public class PpmController {
 		 
 		 //Methode OnSelect pour PGSPM
 		 public void onSelectPgspm() {
-			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgspm.getGpgId())); 
+			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId())); 
 
 			 recupPgspm = new VPgpmFonction();
-			 recupPgspm.setGpgObjet(pgspm.getGpgObjet());
-			 recupPgspm.setGpgId(pgspm.getGpgId());
-			 recupPgspm.setGpgTypePlan(pgspm.getGpgTypePlan());
-			 recupPgspm.setGpgCommentaire(pgspm.getGpgCommentaire());
-			 recupPgspm.setGpgNumeroOrdre(pgspm.getGpgNumeroOrdre());
-			 recupPgspm.setGpgDateSaisie(pgspm.getGpgDateSaisie());
-			 recupPgspm.setGpgPartiePmePmi(pgspm.getGpgPartiePmePmi());
-			 recupPgspm.setMopLibelleLong(pgspm.getMopLibelleLong());
-			 recupPgspm.setTymLibelleCourt(pgspm.getTymLibelleCourt());
-			 recupPgspm.setGpgTymCode(pgspm.getGpgTymCode());
-			 recupPgspm.setTymTymCode(pgspm.getTymTymCode());
-			 recupPgspm.setGpgMopCode(pgspm.getGpgMopCode());
-			 recupPgspm.setGpgPartiePmePmi(pgspm.getGpgPartiePmePmi());
+			 recupPgspm.setGpgObjet(pgpm.getGpgObjet());
+			 recupPgspm.setGpgId(pgpm.getGpgId());
+			 recupPgspm.setGpgTypePlan(pgpm.getGpgTypePlan());
+			 recupPgspm.setGpgCommentaire(pgpm.getGpgCommentaire());
+			 recupPgspm.setGpgNumeroOrdre(pgpm.getGpgNumeroOrdre());
+			 recupPgspm.setGpgDateSaisie(pgpm.getGpgDateSaisie());
+			 recupPgspm.setGpgPartiePmePmi(pgpm.getGpgPartiePmePmi());
+			 recupPgspm.setMopLibelleLong(pgpm.getMopLibelleLong());
+			 recupPgspm.setTymLibelleCourt(pgpm.getTymLibelleCourt());
+			 recupPgspm.setGpgTymCode(pgpm.getGpgTymCode());
+			 recupPgspm.setTymTymCode(pgpm.getTymTymCode());
+			 recupPgspm.setGpgMopCode(pgpm.getGpgMopCode());
+			 recupPgspm.setGpgPartiePmePmi(pgpm.getGpgPartiePmePmi());
 			 
 			 
 			 
 			 listeFinancementPgpm =(List<VFinancementPgpm>) iservice.getObjectsByColumn("VFinancementPgpm", new ArrayList<String>(Arrays.asList("FIP_ID")),
-				     new WhereClause("FIP_GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()));
+				     new WhereClause("FIP_GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()));
 			 if (!listeFinancementPgpm.isEmpty()) {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
 			 
-			  if(pgspm.getGpgMopCode().equalsIgnoreCase("PSO")) {
+			  if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
 				  chargeImputationPso();
 				  
 				modeleDao = true;
@@ -1730,11 +1730,11 @@ public class PpmController {
           	    modelePrq = false;
           	    //Affichage du modèle DAO type
  				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
- 				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
+ 				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
  			       //Affichage du montant total
  			       coutOperation(); 
 			    }else
-				   if(pgspm.getGpgMopCode().equalsIgnoreCase("PSL")) {
+				   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
 					   chargeImputationPsl();
 					   
 					   modeleDao = true;
@@ -1742,16 +1742,16 @@ public class PpmController {
 	            	    modelePrq = false;
 	            	    //Affichage du modèle DAO type
 	   				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-	   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
+	   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
 	   			       //Affichage du montant total
 	   			       coutOperation(); 
 				    }else
-			             if(pgspm.getGpgMopCode().equalsIgnoreCase("AMI")) {
+			             if(pgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
 			            	    modeleDao = false;
 			            	    modeleAmi = true;
 			            	    modelePrq = false;
 			                       }else
-			  			             if(pgspm.getGpgMopCode().equalsIgnoreCase("PRQ")) {
+			  			             if(pgpm.getGpgMopCode().equalsIgnoreCase("PRQ")) {
 						            	    modeleDao = false;
 						            	    modeleAmi = false;
 						            	    modelePrq = true;
@@ -1761,7 +1761,7 @@ public class PpmController {
 			            	    modeleAmi = false;
 			            	    //Affichage du modèle DAO type
 			   				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
+			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
 			   			       //Affichage du montant total
 			   			       coutOperation();       
 			                 }
@@ -1885,7 +1885,6 @@ public class PpmController {
 	  		 
 	  		if(fipPgpm.getFipId() > 0 ) {
 	  			
-	  			
 		  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
 		 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 		 	 			       new WhereClause("PLP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
@@ -1923,6 +1922,7 @@ public class PpmController {
 		 	 		  {
 		 	 			  
 		 	 			saveDetailPlan(planPass, ""+typePlan);
+		 	 			
 			 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 						String rechercheAll = search.replace("null","");
 						detailPass.setDppRecherche(rechercheAll);
@@ -1949,8 +1949,8 @@ public class PpmController {
 					      				iservice.addObject(newFinancement);
 			    				    }	
 
-			 	  		          //Historisation
-			    				  historiser("S1S",detailPass,"PPM enregistré par le AC");
+			 	  		 //Historisation
+			    		 historiser("S1S",detailPass,"PPM enregistré par le AC");
 			 		     recupDateGenere();
 			 			chargeData(typePlan);
 			 			boutonEdit =true; 
@@ -2028,9 +2028,10 @@ public class PpmController {
 		 				userController.setRenderMsg(true);
 		 				userController.setSevrityMsg("success");
 		 	 	         }
-		  		    }
+		 	 	  
+		  		  }
 	  			
-	  		  }
+	  	}
 	  		
 	  		
 	  		
@@ -2061,10 +2062,9 @@ public class PpmController {
  	  		 iservice.updateObject(detailPass);
 	  	 }
 	  	 
+	  	 
 	  	 public void saveDetailPlan(TPlanPassation TPlanPassation,String typePlan) {
 	  		 
-	  		 
-
              if(controleController.type == "PPM") {
             	 detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
     	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
@@ -2087,9 +2087,9 @@ public class PpmController {
     	  		 iservice.addObject(detailPass);
              }else 
                   if(controleController.type == "PSPM"){
-                	  detailPass.setTTypeMarche(new TTypeMarche(pgspm.getGpgTymCode()));
-            		    detailPass.setTModePassation(new TModePassation(pgspm.getGpgMopCode()));
-            		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgspm.getGpgId()));
+                	  detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
+            		    detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
+            		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
             		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
             		    detailPass.setTModeleDacType(new TModeleDacType(tydCode));
             		    detailPass.setTPlanPassation(planPass);

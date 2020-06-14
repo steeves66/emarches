@@ -504,7 +504,7 @@
           </p:panel>
          </p:tab>
          
-		 <p:tab id="tabLot" title="Saisie des lots" titleStyle="background-color: #f88b2e;background-image: none">
+		 <p:tab id="tabLot" title="Saisie des lots" rendered="#{daoController.pavet_lot}" titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row">   
             <div class="col-md-12">
                     <div class="box box-success box-solid">
@@ -585,7 +585,7 @@
          
          
          
-         <p:tab id="Poffre" title="Pièces de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
+         <p:tab id="Poffre" rendered="#{daoController.pavet_offre}" title="Pièces de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row"> 
            
             <div class="col-md-12">
@@ -608,6 +608,10 @@
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 			            </p:commandLink>
+			            
+			              <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
+				      </p:commandLink>
                  </div> 
          </div>
          
@@ -618,7 +622,7 @@
          </p:tab> 
              
               
-    <p:tab id="confirmation" title="Confirmation" titleStyle="background-color: #f88b2e;background-image: none">
+    <p:tab id="confirmation" title="Confirmation" rendered="false" titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel>
              <div class="row">
              <div class="col-md-6">

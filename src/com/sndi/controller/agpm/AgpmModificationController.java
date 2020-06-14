@@ -2301,8 +2301,6 @@ public class AgpmModificationController {
 	}
 
 
-
-
 	public void setDecId(long decId) {
 		this.decId = decId;
 	}
