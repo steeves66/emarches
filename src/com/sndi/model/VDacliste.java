@@ -220,6 +220,7 @@ public class VDacliste implements java.io.Serializable {
 	private Short aaoNbrOffAccpet;
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
+	private BigDecimal adaNum;
 
 	public VDacliste() {
 	}
@@ -278,7 +279,7 @@ public class VDacliste implements java.io.Serializable {
 			BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,
 			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
-			Short aaoNbrOffRej, Short aaoNbrOffHorDelai) {
+			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, BigDecimal adaNum) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -480,6 +481,7 @@ public class VDacliste implements java.io.Serializable {
 		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
 		this.aaoNbrOffRej = aaoNbrOffRej;
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+		this.adaNum = adaNum;
 	}
 
 	@Id
@@ -2290,6 +2292,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setDacDteModif(Date dacDteModif) {
 		this.dacDteModif = dacDteModif;
+	}
+	
+	@Column(name = "ADA_NUM", precision = 22, scale = 0)
+	public BigDecimal getAdaNum() {
+		return this.adaNum;
+	}
+
+	public void setAdaNum(BigDecimal adaNum) {
+		this.adaNum = adaNum;
 	}
 
 }
