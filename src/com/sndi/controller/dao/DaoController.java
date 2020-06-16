@@ -143,15 +143,19 @@ public class DaoController {
 	
 	 //listes
 	 private List<VDacliste> listeDAO = new ArrayList<VDacliste>();
-	 private List<VDacliste> listeDAOTB = new ArrayList<VDacliste>();
+	 private List<VDacliste> detailTB = new ArrayList<VDacliste>();
 	 private List<TDacSpecs> listDao = new ArrayList<TDacSpecs>(); 
 	 private List<TGestion> listeGestion = new ArrayList<TGestion>();
 	 private List<TAvisAppelOffre> avisTab = new ArrayList<TAvisAppelOffre>(); 
 	 private List<TDaoAffectation> daoExamen = new ArrayList<TDaoAffectation>();
+	 private List<TDaoAffectation> daoBinome = new ArrayList<TDaoAffectation>();
 	 private List<VDetailCorrection> listeDetailCorrection = new ArrayList<VDetailCorrection>();
+	 private List<VFonctionImputation> listeFonctionsImput = new ArrayList<VFonctionImputation>();
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
 	 private List<TDetailPlanPassation> listeDetail = new ArrayList<TDetailPlanPassation>();
-	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
+	 private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 private List<TCorrectionDac> listCorrection = new ArrayList<TCorrectionDac>();
+	 private List<TCorrectionDac> listPieceCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
 	 private List<TDossierDacs> dossDacListe = new ArrayList<TDossierDacs>();
 	 private List<VPpmDao> ppmDao = new ArrayList<VPpmDao>();
@@ -171,6 +175,7 @@ public class DaoController {
 	private List<VPieces> listePices = new ArrayList<VPieces>();
 	private List<VPiecesOffreDao> offresDao = new ArrayList<VPiecesOffreDao>();
 	private VbTempParametreCorrection newCorrection = new VbTempParametreCorrection();
+	 private List<VDetailCorrectionCharge> listeCorrectionCharge = new ArrayList<VDetailCorrectionCharge>();
 	//Avis 
 	private List<TAvisAppelOffre> listAvis = new ArrayList<TAvisAppelOffre>();
 	private List<TAffichageDao> examenListe = new ArrayList<TAffichageDao>(); 
@@ -204,6 +209,7 @@ public class DaoController {
 	 private TLotAao selectLot = new TLotAao();
 	 private TTempParametre newTemp = new TTempParametre();
 	 private VbTempParametreLot newVbTemp = new VbTempParametreLot();
+	 private List<TSoumissions> listSoumission = new ArrayList<TSoumissions>();
 	 private TAvisAppelOffre majAvis = new TAvisAppelOffre();
 	 private TCorrectionDac daoCorr = new TCorrectionDac();
 	 private VDetailCorrection detailCor = new VDetailCorrection();
@@ -286,13 +292,17 @@ public class DaoController {
 	  private String statutUpdate="";
 	  private String choixTaux = "";
 	  private String multiFiltre="";
+	  private String value1 ="N";
 	  private long lotTotal = 0;
 	  private long coutLot = 0;
 	  private boolean ouvTechnique = true;
 	  private boolean btn_save_avis = false;
 	  private boolean btn_save_offre = false;
+	  private boolean pavet_lot = false;
+	  private boolean pavet_offre = false;
+	  private boolean btn_dao = false;
 	//Booléen
-	  private boolean value1 =true;
+	  //private boolean value1 =true;
 	  private boolean etatQualif =false;
 	  private boolean etatPV =false;
 	  private boolean etatValiderCsv =true;
@@ -324,13 +334,12 @@ public class DaoController {
 	  private boolean etatDaoCorrige = false;
 	  private boolean btn_affecter = false;
 	  private boolean btn_corrige = true;
+	  private boolean ouverture = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
 		 controleController.fonctionaliteDynamic();
-		 chargeGestions();
-		 chargeDaoTabTrans();
-		
+		 chargeGestions();	 	
 	 }
 	 
 	 public String onFlowProcess(FlowEvent event) {
@@ -376,19 +385,67 @@ public class DaoController {
 			 }
 	 }
 	 
+	 
+	 //Affichage des AC en lui passant en parametre les statuts concerné (2 statuts)
+	 public void chargeDataAc2(String typeDac,String typePlan,String stat1,String stat2){
+		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+				 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+				 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+		         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		         multiFiltre ="";
+			_logger.info("listeDAO size: "+listeDAO.size());	
+			typeActionTb(); 
+	 }
+	 
+	 //DEBUT AFFICHAGE LISTE DAC DMP
+	//Affichage des DMP en lui passant en parametre le statut concerné (1 statuts)
+	 public void chargeDataDMP1(String typeDac,String typePlan,String stat1){
+		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+				 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+				 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+				 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+		         multiFiltre ="";
+			_logger.info("listeDAO size: "+listeDAO.size());	
+			typeActionTb(); 
+	 }
+	 
+	//Affichage des DMP en lui passant en parametre les statuts concerné (2 statuts)
+		 public void chargeDataDMP2(String typeDac,String typePlan,String stat1,String stat2){
+			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+			         multiFiltre ="";
+				_logger.info("listeDAO size: "+listeDAO.size());	
+				typeActionTb(); 
+		 }
+		//FIN AFFICHAGE LISTE DAC DMP
+	 
 	//Methode d'affichage la liste des DAC en fonction du type plan et du type DAC passé en parametre
 		 public void chargeDataByAction(String typeDac,String typePlan){
-			 listeDAO.clear();		 
+			 listeDAO.clear();	
+			 String fonct = controleController.getFonctionalite();
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-						 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-						 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-				         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-				         multiFiltre ="";
-					_logger.info("listeDAO size: "+listeDAO.size());	
-					//tableauBordController.chargeDataDao();
-					typeActionTb();
+				      //Affichage des differentes listes de l'AC en faction de l'action 
+						 if(fonct.equalsIgnoreCase("listSaisieAc")) {
+							 chargeDataAc2(typeDac,typePlan,"D1S","D1R");
+						 }else {
+							 //Liste Publication
+							 if(fonct.equalsIgnoreCase("ListePubDacPn")) {
+								 chargeDataAc2(typeDac,typePlan,"D5V","DOP");
+							 }else {
+								 if(fonct.equalsIgnoreCase("listeDaoVentePn")) {
+									 chargeDataAc2(typeDac,typePlan,"D6V","DPU");
+								 }else {
+									 if(fonct.equalsIgnoreCase("listeDaoCorrectionPn")) {
+										 chargeDataAc2(typeDac,typePlan,"SBO","SRO");
+									 }
+								 }	 
+							 }	 
+						 }
+			 
+				//Finaffichage ac
 					
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
@@ -403,44 +460,29 @@ public class DaoController {
 					 
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
-						 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-								 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-								 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-								 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-						         multiFiltre ="";
-							_logger.info("listeDAO size: "+listeDAO.size());
-							typeActionTb();
-						
+						 chargeDataDMP2(typeDac,typePlan,"D1S","D1R");
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-							 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-									 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-									 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-									 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-							         multiFiltre ="";
-								_logger.info("listeDAO size: "+listeDAO.size());
-								typeActionTb();
+							 chargeDataDMP2(typeDac,typePlan,"D1S","D1R");
 							
 						 }else {
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-								 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
-										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-								         multiFiltre ="";
-									_logger.info("listeDAO size: "+listeDAO.size());
-									typeActionTb();
+								 
+								//Affichage des differentes listes de l'AC en fonction de l'action								  
+								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
+									 chargeDataDMP2(typeDac,typePlan,"D2T","D5R");
+								 }else {
+									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
+										 chargeDataDMP1(typeDac,typePlan,"D4V");
+									 }else {
+										
+									 }	 
+								 }
+								
 								
 							 }else {
 								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
-									 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-											 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-											 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-									         multiFiltre ="";
-										_logger.info("listeDAO size: "+listeDAO.size());
-										typeActionTb();
-									
+									 chargeDaoChargeEtude();	
 								 }
 							 }
 						 }
@@ -471,19 +513,90 @@ public class DaoController {
 		 
 		//Filtre multicritère pour les DAO en Procédure Normale
 		 
+		 public void chercherDac() {
+			 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
+				 chercher("DAO","PN");
+				 }else {
+					 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+						 chercher("DAO","PS");
+					 }else {
+						 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+							 chercher("AMI","PN");
+						 }else {
+							 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+								 chercher("PRQ","PN");
+							 }/*else {
+								 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
+								 
+								 }else {
+									 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
+									 }
+								 }
+							 }*/
+						 }
+				     } 
+				 }
+		 }
 		 
-		 public void chercherDac(String typeDac,String typePlan){
-			 listeDAO.clear();		 
+		 public void chercher(String typeDac,String typePlan){
+			 listeDAO.clear();
+			 String fonct = controleController.getFonctionalite();
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-						 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
-						 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-						 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-						 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
-				         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));			 
-					_logger.info("listeDAO size: "+listeDAO.size());	
-					//tableauBordController.chargeDataDao();
-					typeActionTb();
+				 
+				//Affichage des differentes listes de l'AC en faction de l'action
+				         //Liste saisie
+						 if(fonct.equalsIgnoreCase("listSaisieAc")) {
+							 listeDAO.clear(); 
+							 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+									 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
+									 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+									 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+									 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+							         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));			 
+								_logger.info("listeDAO size: "+listeDAO.size());
+						 }else {
+							 //Liste Publication
+							 if(fonct.equalsIgnoreCase("ListePubDacPn")) {
+								 listeDAO.clear(); 
+								 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D5V","DOP")),
+										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+										 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+								         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+								         multiFiltre ="";
+									_logger.info("listeDAO size: "+listeDAO.size());	
+							 }else {
+								 //liste vente
+								 if(fonct.equalsIgnoreCase("listeDaoVentePn")) {
+									 listeDAO.clear();
+									 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D6V","DPU")),
+											 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+											 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+											 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+									         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+									         multiFiltre ="";
+										_logger.info("listeDAO size: "+listeDAO.size());	
+								 }else {
+									 //Liste correction
+									 if(fonct.equalsIgnoreCase("listeDaoCorrectionPn")) {
+										 listeDAO.clear();
+										 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+												 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("SBO","SRO")),
+												 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+												 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+												 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+										         new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+										         multiFiltre ="";
+											_logger.info("listeDAO size: "+listeDAO.size());	
+									 }
+								 }
+									 
+							 }	 
+						 }
+				//Finaffichage ac
+
 			 }else {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
@@ -492,7 +605,8 @@ public class DaoController {
 							 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 							 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 					         new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-						_logger.info("listeDAO size: "+listeDAO.size());	
+						_logger.info("listeDAO size: "+listeDAO.size());
+						
 					 
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
@@ -513,21 +627,39 @@ public class DaoController {
 								_logger.info("listeDAO size: "+listeDAO.size());
 							
 						 }else {
+							 //Debut Filtre chef de service
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-								 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
-										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-										 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
-										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-									_logger.info("listeDAO size: "+listeDAO.size());
-								
-							 }else {
-								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+								 //Filtre affectation
+								 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
 									 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
-											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1S","D1R")),
+											 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
 											 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+											 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 											 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-										_logger.info("listeDAO size: "+listeDAO.size());
+										_logger.info("listeDAO size: "+listeDAO.size()); 
+								 }else {
+									//Filtre validation
+									 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
+										 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+												 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D5V")),
+												 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+												 new WhereClause("DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+												 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+											_logger.info("listeDAO size: "+listeDAO.size());
+									 }else {
+										
+									 }	 
+								 }
+					       //Fin details CSV
+								 
+								
+								
+							 }else 
+							//FIN Filtre chef de service 
+							 
+							 {
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+									 chargeDaoChargeEtudeFilter();
 									
 								 }
 							 }
@@ -570,58 +702,238 @@ public class DaoController {
 	 
 		 //Liste des Dao affectées aux chargés d'etude
 		 public void chargeDaoChargeEtude(){
+				 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
+					 chargeDaoChargeEtudeByType("PN","DAO","D3A","DC2");
+				 }else {
+					 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+						 chargeDaoChargeEtudeByType("PS","DAO","D3A","DC2");
+					 }else {
+						 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+							 chargeDaoChargeEtudeByType("PN","AMI","D3A","DC2");
+						 }else {
+							 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+								 chargeDaoChargeEtudeByType("PN","PRQ","D3A","DC2");
+							 }
+						 }
+				     } 
+				   }
+			}
+		 
+		 //Liste des Dao affectées aux chargés d'etude
+		 public void chargeDaoChargeEtudeByType(String typePlan, String typeDac, String stat1,String stat2){
+			 daoExamen.clear();
 			  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
-					           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList("D3A","DC2")),
-					           new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,"DAO"),
-					           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+					           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					           new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+					           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+			  multiFiltre="";
+					_logger.info("daoExamen size: "+daoExamen.size());	
+					//tableauBordController.chargeDataDao();
+					//typeActionTb();
+			}
+		 
+		 //Filtre parametré en foction du type plan et dac
+		 public void chargeDaoChargeEtudeFilter(){
+		 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
+			 chargeDaoChargeEtudeByTypeFilter("PN","DAO","D3A","DC2");
+		 }else {
+			 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+				 chargeDaoChargeEtudeByTypeFilter("PS","DAO","D3A","DC2");
+			 }else {
+				 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+					 chargeDaoChargeEtudeByType("PN","AMI","D3A","DC2");
+				 }else {
+					 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+						 chargeDaoChargeEtudeByTypeFilter("PN","PRQ","D3A","DC2");
+					 }
+				 }
+		     } 
+		   }
+	}
+		 
+		 //Recherche Dao affectées aux chargés d'etude 
+		 public void chargeDaoChargeEtudeByTypeFilter(String typePlan, String typeDac, String stat1,String stat2){
+			  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+					           "DAF_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					           new WhereClause("DAF_TYPE_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+					           new WhereClause("DAF_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+					           new WhereClause("DAF_DAC_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 				              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
 					_logger.info("daoExamen size: "+daoExamen.size());	
 					//tableauBordController.chargeDataDao();
-					typeActionTb();
+					//typeActionTb();
 			}
 		 
-		 public void chargeDaoTrans(){
-			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1T","D2R")),
-					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+		 public void chargeDaoTrans(String typePlan, String typeDac, String stat1,String stat2){
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 			              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-				_logger.info("listeDaoTrans size: "+listeDAO.size());	
-				typeActionTb();	
+				_logger.info("Nbre DAC: "+detailTB.size());	
 		}
 		 
-		 public void chargeDaoTabTrans(){
-			 listeDAOTB =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-					      new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"D1T"),
-					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-			              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())
-			              );
-				_logger.info("listeTabDaoTrans size: "+listeDAOTB.size());	
-				//typeActionTb();		
+		 
+		 //Debut Charge detail LBG_FON_CODE_AC
+		 public void chargeDetailAC1(String typePlan, String typeDac, String stat1){
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+			              new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTB.size());	
+		}
+		 public void chargeDetailAC2(String typePlan, String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+			              new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTB.size());	
 		}
 		 
-		 //Liste des DAO différés chez le AC
-		 public void chargeDaoTabDiff(){
-			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-				          "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D1R","D2R")),
-					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-			              new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-				_logger.info("listeTabDaoDiff size: "+listeDAO.size());	
-				typeActionTb();		
+		 //DEBUT GESTION DES TABLAUX DE BORD
+		 public void chargeDetailTB() {
+			 String fonct = controleController.getFonctionalite();
+			 //DEBUT DAO PN
+			 if(controleController.type == "DAC" && controleController.typePlan == "PN") { 
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					 
+					 //Affichage des differentes listes de l'AC en faction de l'action
+						 if(fonct.equalsIgnoreCase("listSaisieAc")) {
+							 chargeDetailAC1("PN", "DAO", "D1T");	
+						 }else {
+							 if(fonct.equalsIgnoreCase("listeDaoVentePn")) {
+								 chargeDetailAC1("PN", "DAO", "DEV");
+							 }else {
+								
+							 }	 
+						 }
+			       //Finaffichage ac
+					 
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+						 chargeDetailPF1("PN", "DAO", "D2T"); 
+					 }else {
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+							
+						 }else {
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+								
+							 }else {
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+									 
+									 //Affichage des details de du CSV en faction de l'action
+									 if(fonct.equalsIgnoreCase("listeAffectationCsv")) {
+										 //Detail DAC affectés par CSV
+										 chargeDetailDPM1("PN", "DAO", "D3A"); 
+									 }else {
+										 if(fonct.equalsIgnoreCase("listeValidationCsv")) {
+											//Detail DAC validé par CSV
+											 chargeDetailDMP3("PN", "DAO", "D5V","DOP","SBO"); 
+										 }else {
+											
+										 }	 
+									 }
+						       //Fin details CSV
+									 
+									
+								 }else {
+									 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CET")) {
+										
+										
+									 }
+								 }
+							 }
+						 }
+				     } 
+				   }
+			 }
+			//FIN DAO PN
+			 
+			 
+			//DEBUT DAO PS
+			 else {
+				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+					 chargeDetailAC1("PS", "DAO", "D1T");
+				 }
+				//FIN DAO PS
+				 
+				//DEBUT DAO AMI 
+				 else {
+					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+						 chargeDetailPF1("PN", "AMI", "D1T");
+					 }
+					//FIN AMI
+					 
+					//DEBUT PRQ
+					 else {
+						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+							 chargeDetailAC1("PN", "PRQ", "D1T");
+						 }
+						 
+						//FIN PRQ
+					 }
+			     } 
+			   }
+		 }
+		 
+		//Fin Charge Charge detail LBG_FON_CODE_AC
+		 
+		 //Debut Charge detail PF 
+		 public void chargeDetailPF1(String typePlan, String typeDac, String stat1){
+			 detailTB.clear();
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+			              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTB.size());	
+		}
+		 public void chargeDetailPF2(String typePlan, String typeDac, String stat1, String stat2){
+			 detailTB.clear();
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+			              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTB.size());	
 		}
 		 
-		 //Liste des DAO retirés (Tableau de Bord)
-		 public void chargeDaoRetires(){ 
-			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-					   new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"RET"),
-					   new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					   new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-			           new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-				_logger.info("listeDaoRetire size: "+listeDAO.size());	
-				typeActionTb();		
+		//Fin Charge detail PF 
+		 
+		 
+		 //Debut Charge detail PF 
+		 public void chargeDetailDPM1(String typePlan, String typeDac, String stat1){
+			 detailTB.clear();
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				_logger.info("Nbre DAC: "+detailTB.size());	
 		}
+		 public void chargeDetailDMP2(String typePlan, String typeDac, String stat1, String stat2){
+			 detailTB.clear();
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				_logger.info("Nbre DAC: "+detailTB.size());	
+		}
+		 public void chargeDetailDMP3(String typePlan, String typeDac, String stat1, String stat2, String stat3){
+			 detailTB.clear();
+			 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2,""+stat3)),
+					      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				_logger.info("Nbre DAC: "+detailTB.size());	
+		}
+		 
+		//Fin Charge detail PF 
+		 
+		//DEBUT GESTION DES TABLAUX DE BORD
 		 
 		 public void priseRecherche() { 
 				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -637,67 +949,7 @@ public class DaoController {
 					  }
 					} 
 		 
-			//Affichage des DAO validés par la CPMP : Nouvelle Methode
-		 public void chargeDaoValide(){
-			 listeDAO.clear();
-			 listeDAO = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
-					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D2T"),
-					new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-					new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-				_logger.info("listeDaoValide  size: "+listeDAO.size());	
-				typeActionTb();		
-		}
-		 
-		 
-		 //Affichage des DAO en attente d'affectation
-		 public void chargeDataAffecter(){
-			 listeDAO.clear();
-			 listeDAO = (List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
-					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D2T","D5R")),
-					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
-			         //new WhereClause("AFF_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-				_logger.info("affectationListe  size: "+listeDAO.size());	
-				typeActionTb();			
-		}
-		 
-			//Affichage des DAO validé par le Chef de Service
-		 public void chargeDataValCsv(){ 
-			// listeTabdaoValCsv
-			 listeDAO = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
-					 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5V"),
-					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-					new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
-				_logger.info("listeTabdaoValCsv  size: "+listeDAO.size());		
-				typeActionTb();	
-		}
-		 
-		//Affichage des DAO différé par le Chef de Service : Nouvelle Methode
-		 public void chargeDataDiffCsv(){
-			 //listeTabdaoDiffCsv
-			 listeDAO = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")), 
-					 new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D5R"),
-					 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN")
-					//new WhereClause("DAC_FON_CODE_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())
-					);
-				_logger.info("listeTabdaoDiffCsv  size: "+listeDAO.size());	
-				typeActionTb();	
-		}
-		 
-		 public void chargeDaoCsvValid(){ 
-			 //listeDaoCsvValid.clear();
-			 listeDAO.clear();
-			 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-					 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList("D5V","D6V")),
-					  new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-					  new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-			          new WhereClause("DAC_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-				_logger.info("listeDaoCsvValid size: "+listeDAO.size());	
-				typeActionTb();	
-		}
+		
 		 
 		  public void chargeDossier() {
 		 		 dossListe.clear();
@@ -852,17 +1104,8 @@ public class DaoController {
 			       			                      //Récupération du Statut
 						 						        TStatut statuts = constantService.getStatut("D1T");
 						 							  	//Historisation du / des retraits
-						 							    //historiser("D1T",newDao,"DAO transmit par l'Autorité Contractante");
+						 						       historiser("D1T",slctdTd.getDacCode(),"DAO transmit par l'Autorité Contractante");
 						 							  
-						 				       			  //Histo Dac
-						 				       					THistoDac dac=new THistoDac();
-						 				       					dac.setHacDate(Calendar.getInstance().getTime());
-						 				       					dac.setHacCommentaire("DAO transmit par l'Autorité Contractante");
-						 				       					dac.setTDacSpecs(newDao);
-						 				       					dac.setTFonction(userController.getSlctd().getTFonction());
-						 				       					dac.setTOperateur(userController.getSlctd().getTOperateur());
-						 				       					dac.setTStatut(statuts);
-						 				       					iservice.addObject(dac);
 			       	   	                           } 
 			       				
 			       					chargeData();
@@ -891,8 +1134,95 @@ public class DaoController {
 			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDdaReference()+" supprimé!", "");
 				FacesContext.getCurrentInstance().addMessage(null, msg);	
 			}
+		    
+		    
+		    
+		    public void transmettreCpmp() {
+	        	
+				listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+					if (!listDao.isEmpty()) {
+						newDao= listDao.get(0);
+						newDao.setTStatut(new TStatut("D2T"));
+						newDao.setDacStatutRetour("0");
+				        iservice.updateObject(newDao); 
+		   	                 }
+			
+				    //Récupération du Statut
+	 				TStatut statuts = constantService.getStatut("D2T");
+	 				//Historisation du DAC
+	 				historiser("D2T",slctdTd.getDacCode(),"DAO transmit par la Cellule de Passation");
+						
+						//chargeDataAExaminer();
+						
+						chargeData();
+						//Actualisation du tableau de bord
+						typeActionTb();
+						//Message de confirmation
+						userController.setTexteMsg("Transmission effectuée avec succès!");
+						userController.setRenderMsg(true);
+						userController.setSevrityMsg("success");		
+	     }
+		 
 		     
-		     
+		  
+		    //DIFFERER PAR CPMP ET DMP
+		    //Differer
+		 	 public void differer() {
+		 		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+		 			 statutUpdate ="";
+		 		 }else {
+		 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+		 				 statutUpdate ="D1R";
+		 			 }else {
+		 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+		 					 statutUpdate ="D2R";
+		 				 }
+		 		      } 
+		 		   }
+		 		   /*//Mis à jour dans T_Affichage_DAO et dans T_Dac_specs
+		 		    slctdTd.setDacStaCode(statutUpdate);
+		 			slctdTd.setDacStatutRetour("1");
+		 			iservice.updateObject(slctdTd);*/
+		 			
+		 			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		  					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+		  				if (!listDao.isEmpty()) {
+		  					newDao= listDao.get(0);
+		  					newDao.setTStatut(new TStatut(statutUpdate));
+		  					newDao.setDacStatutRetour("1");
+		  			        iservice.updateObject(newDao); 
+		  	   	                 }
+		  				//Historisation du DAO	 		  
+		 					 TStatut statuts = constantService.getStatut("D1T");
+							  	//Historisation du / des retraits
+						       historiser(""+statutUpdate,slctdTd.getDacCode(),""+getObservation());
+		 					//Message de confirmation
+		 					 userController.setTexteMsg("DAO retourné !");
+		 					 userController.setRenderMsg(true);
+		 					 userController.setSevrityMsg("success");
+		 					 //return	null;
+		 					 
+		 					 chargeData();
+		 		          //Actualisation du Tableau de Bord
+		 		          typeActionTb();
+		 			
+		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
+		 			 FacesContext.getCurrentInstance().addMessage(null, msg);
+		 	 }
+		 	 
+		 	//Affichage des motifs de retour
+				public void chargerObservation() {
+					daostatutList=(List<VDaoStatut>) iservice.getObjectsByColumn("VDaoStatut", new ArrayList<String>(Arrays.asList("HAC_DAC_CODE")),
+							new WhereClause("HAC_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()),
+							new WhereClause("HAC_STA_CODE",WhereClause.Comparateur.EQ,slctdTd.getDacStaCode()));
+					if(!daostatutList.isEmpty()) {
+						int i=daostatutList.size();
+						int baoule=i-1;
+						daostatut=daostatutList.get(baoule);
+					}	
+				}	
+
 		 
 		 		 
 	//Statistiques pour le chargé d'Etudes
@@ -962,7 +1292,19 @@ public class DaoController {
 					_logger.info("listeDaoDiff  size: "+listeDAO.size());	
 					typeActionTb();		
 			}
+			 
+			 
+			 public void panelOuverture(){	
+		    	 if(controleController.type == "DAC" ||controleController.type == "PRQ") {
+		    		 ouverture = true;	
+				 }else {
+					 ouverture = false;
+				   }
+
+		     }
 		 
+			 
+			 
 		    //Premier enregistrement DAC en fonction du type et du plan
 		    public void saveDao(){	
 		    	 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
@@ -1068,7 +1410,7 @@ public class DaoController {
 		 			 	    	       }
 		 			 			   
 		 			 			    //Historisation   
-		 			 			   historiser("D1S",dao,"Initiation du "+typeDac+" par une Autorité Contractante");
+		 			 			   historiser("D1S",dao.getDacCode(),"Initiation du "+typeDac+" par une Autorité Contractante");
 		 			 			 
 		 			 			   //Affichage de la liste DAC en fonction type plan et du type DAC
 		 			 		
@@ -1097,17 +1439,19 @@ public class DaoController {
 	          }
 	     
 	 	//Methode d'historisation
-		 public void historiser(String statut,TDacSpecs TDacSpecs, String motif) {
-			     TStatut statuts = constantService.getStatut(statut);
-			     THistoDac dacStatut = new THistoDac();
-			     dacStatut.setHacDate(Calendar.getInstance().getTime());
-			     dacStatut.setHacCommentaire(motif);
-			     dacStatut.setTStatut(statuts);
-			     dacStatut.setTDacSpecs(dao);
-			     dacStatut.setTFonction(userController.getSlctd().getTFonction());
-			     dacStatut.setTOperateur(userController.getSlctd().getTOperateur());
-			     iservice.addObject(dacStatut);
-		 }
+		 
+		 public void historiser(String statut,String dacCode, String motif) {
+		     TStatut statuts = constantService.getStatut(statut);
+		     THistoDac dacStatut = new THistoDac();
+		     dacStatut.setHacDate(Calendar.getInstance().getTime());
+		     dacStatut.setHacCommentaire(motif);
+		     dacStatut.setTStatut(statuts);
+		     dacStatut.setTDacSpecs(new TDacSpecs(dacCode));
+		     dacStatut.setTFonction(userController.getSlctd().getTFonction());
+		     dacStatut.setTOperateur(userController.getSlctd().getTOperateur());
+		     iservice.addObject(dacStatut);
+	 }
+	 
 		 
 		 
 		//Avis
@@ -1157,6 +1501,7 @@ public class DaoController {
 	                	          		  newAvis.setAaoDteOuvTec(ouvTech);
 	            	            		  }
 	            	          		      newAvis.setTStatut(new TStatut("D1S"));
+	            	          		      newAvis.setAaoNatInt(value1);
 	            	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
 	            	          		      iservice.addObject(newAvis); 
 	            	          		   
@@ -1181,6 +1526,9 @@ public class DaoController {
 	                	     				    btn_save_avis =false;
 	                	     				//Activation du bouton d'enregistrement des offres
 	                	     				    btn_save_offre = true;
+	                	     				 //Activation du pavet pour la saisie des lots
+		                	     		       pavet_lot = true;
+	                	     				   
 	            	                  }
 	        	                   } 
 	                     }
@@ -1208,32 +1556,65 @@ public class DaoController {
 				_logger.info("listeDaoChargeValid  size: "+listeDaoChargeValid.size());	
 				typeActionTb();		
 		    }
-	 	//Chargement des imputations ou lignes budgétaires pour le AC
-		  public void chargeImputation() { 
-			 listeImputations.clear();
-			 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
-					 new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())); 
-				} 
-		  
+
 		//Chargement des PPM n'ayant pas fait l'objet d'un DAO
-			 public void chargePPM(String typePlan) {
-				 ppmDao.clear();
-				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
-						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
-						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-							new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));	
-				 multiFiltre="";
+			 public void chargePPM() {
+				 if(controleController.typePlan == "PN") {	
+					 ppmDao.clear();
+					 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+							    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+								new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));	
+					 multiFiltre="";
+				 }else {
+					 if(controleController.typePlan == "PS") {
+						 ppmDao.clear();
+						 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+								    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+								    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
+								    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+									new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));	
+						 multiFiltre="";
+					 }else {
+						 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+								    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+								    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+									new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));	
+						 multiFiltre="";
+				     } 
+				   } 
+				
 			 }
 			 
-			 public void chargeRecherchePPM(String typePlan) {
-				 ppmDao.clear();
-				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
-						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
-						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
-							new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
-						    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));		 		 
+			 public void chargeRecherchePPM() {
+				 
+				 if(controleController.typePlan == "PN") {	
+					 ppmDao.clear();
+					 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+							    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+							    new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+							    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));
+				 }else {
+					 if(controleController.typePlan == "PS") {
+						 ppmDao.clear();
+						 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+								    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+								    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
+								    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+								    new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+								    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));
+					 }else {
+						 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+								    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+								    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+								    new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+								    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%")));
+				     } 
+				   } 
+				 	 		 
 			 }
 			 
 			  //Rappel des informations du PPM
@@ -1328,14 +1709,10 @@ public class DaoController {
 				  // DEBUT GESTION DES LOTS
 				  
 				//GESTION DES MODIFICATIONS
-				  public void chargePiecesDao() {
-						 listePiecesDao.clear();
-						 listePiecesDao= ((List<VPieceDac>)iservice.getObjectsByColumn("VPieceDac",new ArrayList<String>(Arrays.asList("PID_LIBELLE")),
-								    new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
-					 }
+				 
 				  
 				  //Chargement des PPM n'ayant pas fait l'objet d'un DAO
-					 public void chargePPM() {
+					 public void chargePPMUpdate() {
 						 ppmDao.clear();
 						 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
 								    new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode())));
@@ -1402,9 +1779,13 @@ public class DaoController {
 				    		  newVbTemp.setTempType("LOT");
 				    		  iservice.addObject(newVbTemp);
 				    		  chargeLots();
+				    		  
 				    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
 				    		  userController.setRenderMsg(true);
 				    		  userController.setSevrityMsg("success");
+				    		  
+				    		  //Activation du pavet de saisie des pièces des offres 
+						      pavet_offre = true;
 				    		
 				    	 }else {
 				    		 /*userController.setTexteMsg("Veuillez respecter le nombre de lots renseigné !");
@@ -1430,6 +1811,8 @@ public class DaoController {
 				        	 iservice.addObject(newLot);
 				        	 chargeLots();
 				        	 newLot = new TLotAao();
+				        	//Activation du pavet de saisie des pièces des offres 
+							 pavet_offre = true;
 				        	 userController.setTexteMsg("Lot enregistré avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
@@ -1538,6 +1921,8 @@ public class DaoController {
 								userController.setSevrityMsg("success");
 								//Désactivation du Bouton d'Enregistrement
 								btn_save_offre = false;
+								//Activation du bouton du téléchargement du DAO
+								btn_dao = true;
 					 		 }
 
 				      }
@@ -1655,6 +2040,937 @@ public class DaoController {
 						
 			
 				
+							
+			
+							//Chargement des imputations ou lignes budgétaires pour le AC
+							  public void chargeImputation() { 
+								 listeImputations.clear();
+								 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+										 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
+									} 
+							  
+							  
+							//Chargement des imputations ou lignes budgétaires pour le AC
+							  public void chargeFonctionImput() { 
+								  listeFonctionsImput.clear();
+								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
+										 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
+									_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
+									typeActionTb();
+									}
+							  
+							  
+							   
+							  //Filtre sur la liste des chargés d'Etudes
+							  public void filtrefonction() { 
+								  listeFonctionsImput.clear();
+								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
+										 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
+										 new WhereClause("FON_LIBELLE",WhereClause.Comparateur.LIKE,"%"+filterCode+"%")); 
+									}
+							  
+							  
+							  //Filtre Imputation
+							  public void filtreImputation() {
+									listeImputations.clear();
+									listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+											new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
+											new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+								}
+							  
+							  
+							  //Examen des pièces du DAO par le Responsable du binôme
+							  @Transactional
+							  public void examinerPieces() {
+								  //Mis à Jour du Statut du DAO dans T_Dao_Affectation, puis dans t_dac_specs
+								  // slctdTda.setDafStaCode("D4V"); //Ancien Statut
+								   slctdTda.setDafStaCode("DC2");
+								   slctdTda.setDafStatutRetour("0");
+								   iservice.updateObject(slctdTda);
+								   
+								   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										   new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+											new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+										if (!listDao.isEmpty()) {
+											 newDao= listDao.get(0);
+											 newDao.setTStatut(new TStatut(slctdTda.getDafStaCode()));
+											 newDao.setDacStatutRetour(slctdTda.getDafStatutRetour());
+									         iservice.updateObject(newDao); 
+							   	                 }
+											  
+								  
+								  listPieceCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+										   new WhereClause("COR_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+							  if (!listPieceCorrection.isEmpty()) {
+								  correction = listPieceCorrection.get(0);
+								  
+								  for(VPieces n : listePices) {
+										 TDetailCorrection detCor = new TDetailCorrection();
+										 detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
+										 detCor.setDcoObservation(n.getPidObservation());
+										 detCor.setDcoPresente(n.getPidPresente());
+										 detCor.setTCorrectionDac(correction);
+										 detCor.setTFonction(userController.getSlctd().getTFonction());
+										 detCor.setTOperateur(userController.getSlctd().getTOperateur());
+										 detCor.setTDacSpecs(newDao);
+										 detCor.setDcoConforme(n.getPidConforme());
+										 detCor.setDcoTitre(correction.getCorLieblle());
+										 detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
+										 detCor.setDcoRespo(slctdTda.getDafDcsMbmRespo());
+										 iservice.addObject(detCor);
+									       }
+								  
+								  //Récupération du Statut
+	 						        TStatut statuts = constantService.getStatut("DC2");
+	 							  	//Historisation du / des retraits
+	 						       historiser("DC2",newDao.getDacCode(),"DAO Corrigé par le responsable du binôme");
+										//Actualisation du Tableau de Bord
+										typeActionTb();
+										//Activation et désactivation des boutons valider
+										etatBtnValid = false;
+										validCorrection = true;
+										etatDaoCorrige = true;
+										 //Message de confirmation
+										 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
+										 userController.setRenderMsg(true);
+										 userController.setSevrityMsg("success");
+								
+							         }else { 
+							        	 
+								           listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+								        		   //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+											       new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+										               if (!listDao.isEmpty()) { newDao= listDao.get(0);}
+								                             String chaine="CORRECTION DU DOSSIER D''APPEL D''OFFRES N°";
+								                             String exo=chaine+newDao.getDacCode();
+								                             correction.setCorLieblle(exo); 
+								                             correction.setCorOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+								                             correction.setTDacSpecs(newDao);
+								                             correction.setCorDteSaisi(Calendar.getInstance().getTime());
+								                             iservice.addObject(correction);
+								     
+								                               for(VPieces n : listePices) {
+										                            TDetailCorrection detCor = new TDetailCorrection();
+										                            detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
+										                            detCor.setDcoObservation(n.getPidObservation());
+										                            detCor.setDcoPresente(n.getPidPresente());
+										                            detCor.setTFonction(userController.getSlctd().getTFonction());
+										                            detCor.setTOperateur(userController.getSlctd().getTOperateur());
+										                            detCor.setTCorrectionDac(correction);
+										                            detCor.setTDacSpecs(newDao);
+										                            detCor.setDcoConforme(n.getPidConforme());
+										                            detCor.setDcoTitre(correction.getCorLieblle());
+										                            detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
+										                            detCor.setDcoRespo(slctdTda.getDafDcsMbmRespo());
+										                            iservice.addObject(detCor);
+									                                      }
+								     
+								                                       //Mis à Jour du Statut du DAO dans T_Affichage_Dao, puis dans t_dac_specs
+									                                       //slctdTda.setDafStaCode("D4V"); //Ancien Statut
+								                                           slctdTda.setDafStaCode("DC2");
+										                                   slctdTda.setDafStatutRetour("0");
+										                                   iservice.updateObject(slctdTda);
+									   
+												                      listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+												                              // new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+														                       new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+													                           if (!listDao.isEmpty()) {
+														                                      newDao= listDao.get(0);
+														                                      newDao.setTStatut(new TStatut(slctdTda.getDafStaCode()));
+														                                      newDao.setDacStatutRetour(slctdTda.getDafStatutRetour());
+												                                              iservice.updateObject(newDao); 
+										   	                                                 }
+													                           
+													                           //Récupération du Statut
+												 						        TStatut statuts = constantService.getStatut("DC2");
+												 							  	//Historisation du / des retraits
+												 						       historiser("D1T",newDao.getDacCode(),"DAO Corrigé par le responsable du binôme");	
+							 				                              //Actualisation du Tableau de Bord
+											                              typeActionTb();
+											                              //Activation et désactivation des boutons valider
+											              				  etatBtnValid = false;
+											              				  validCorrection = true;
+											              				  etatDaoCorrige = true;
+							 				                              //Message de confirmation
+							 				                              userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
+							 				                              userController.setRenderMsg(true);
+							 				                              userController.setSevrityMsg("success");
+							                                   }
+							                              }
+							  
+							  
+							  //Choisir au moins un responsable avant de faire une affectation
+							  public void openAffectation() {
+								  btn_affecter = true;
+							  }
+							//Methode d'Affectation
+							  @Transactional
+							  public void affecterDao() {
+								  
+								//Insertion des chargés d'études choisis 
+									if (listSelectionFonctImput.size()==0) {
+												FacesContext.getCurrentInstance().addMessage(null,
+												new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun chargé d'études selectionné", ""));
+											}
+									 		else{
+									 			    
+									 			  if (listSelectionFonctImput.size()==2) {
+									 					
+									 					listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+									 							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+									 						if (!listDao.isEmpty()) {
+									 							newDao= listDao.get(0);
+									 							newDao.setTStatut(new TStatut("D3A"));
+									 							newDao.setDacStatutRetour("0");
+									 					        iservice.updateObject(newDao); 
+									 			   	                 }
+									 				  			 				  
+									 				  //String exo="";
+									 				  String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DU DAO N°";
+									 				  String exo=chaine+newDao.getDacCode();
+									 				  newSeance.setTFonction(userController.getSlctd().getTFonction());
+									 				  newSeance.setTOperateur(userController.getSlctd().getTOperateur());
+									 				  newSeance.setTTypeSeance(new TTypeSeance("CIA"));
+									 				  newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
+									 				  newSeance.setSeaLibelle(exo);
+									 				  iservice.addObject(newSeance);
+									 				  
+									 				  
+									 				 for(VFonctionImputation n : listSelectionFonctImput) {
+										 	    		 
+										 	    		 TCommissionSpecifique com = new TCommissionSpecifique();
+										 	    		 com.setTStructure(new TStructure(n.getStrCode()));
+										 	    		 com.setTDacSpecs(newDao);
+										 	    		 com.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+										 	    		 com.setTTypeCommission(new TTypeCommission("CIA"));
+										 	    		 com.setComDteSaisi(Calendar.getInstance().getTime());
+										 	    		 com.setComMarCode(slctdTd.getTymCode());
+										 	    		 iservice.addObject(com);
+										 	    		 
+										 	    		 TDetCommissionSeance det = new TDetCommissionSeance();
+										 	    		 det.setDcsDteSaisi(Calendar.getInstance().getTime());
+										 	    		 det.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+										 	    		 det.setTDacSpecs(newDao);
+										 	    		 det.setTSeances(newSeance);
+										 	    		 det.setDcsFonCod(n.getFonCod());
+										 	    		 det.setDcsOpeMatricule(n.getOpeMatricule());
+										 	    		 det.setTStructure(new TStructure(n.getStrCode()));
+										 	    		 det.setTCommissionSpecifique(com);
+										 	    		 det.setTOperateur(userController.getSlctd().getTOperateur());
+										 	    		 det.setTTypeCommission(new TTypeCommission(com.getTTypeCommission().getTcoCode()));
+										 	    		 det.setDcsPresent("O");
+										 	    		 det.setDcsNomMbm(n.getOpeNom());
+										 	    		 det.setDcsTelMbm(n.getOpeContact());
+										 	    		 det.setDcsMbmRespo(n.getStrOpeRespo());
+										 	    		 iservice.addObject(det);
+										 	    		 
+										 	    		//Enregistrement dans TDaoAffectation
+											 	    	 TDaoAffectation newAff = new TDaoAffectation(); 
+											 			 newAff.setDafDacCode(newDao.getDacCode());
+											 			 newAff.setDafOpeMatricule(n.getOpeMatricule());
+											 			 newAff.setDafStaCode(newDao.getTStatut().getStaCode());
+											 			 newAff.setDafStatutRetour(newDao.getDacStatutRetour());
+											 			 newAff.setDafDacObjet(newDao.getDacObjet());
+											 			 newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
+											 			 newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
+											 			 newAff.setDafTypePlan(newDao.getDacTypePlan());
+											 			 newAff.setDafDacStr(newDao.getTStructure().getStrCode());
+											 			 newAff.setDafDacRecherche(newDao.getDacRecherche());
+											 			 newAff.setDafDcsMbmRespo(n.getStrOpeRespo());
+											 			 newAff.setTDetCommissionSeance(det);
+											 			 newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
+											 			 newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
+											 			 newAff.setDafMention(newDao.getDacMention());
+											 			 iservice.addObject(newAff);
+										 	   	   }
+									 				 
+									 				chargeData();
+										 			//Chargement des compteurs du tableau de bord
+										 			typeActionTb();	
+										 			//Message de confirmation
+							    					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
+													userController.setRenderMsg(true);
+													userController.setSevrityMsg("success");
+
+									 			    }else {
+									 			    	     FacesContext.getCurrentInstance().addMessage(null,
+									 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Choisir un binôme !", ""));
+									 			    	     //Réinitialiser la liste de selection
+									 			    	      listSelectionFonctImput.clear();
+									 			          }	
+									 		 }
+										}
+							     
+								
+								 public void chargeDaoAffectesR(){
+									 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										              new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
+										              new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+										              new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));		
+									}  	  
+							  
+							
+							 
+								//Charger la liste des pièces et observations à examiner par le chef de service suivie de l'observation donnée par le responsable
+								 public void chargePiecesByCsv() {
+									 listeDetailCorrection= (List<VDetailCorrection>) iservice.getObjectsByColumn("VDetailCorrection", new ArrayList<String>(Arrays.asList("PID_CODE")),
+											    new WhereClause("DCO_RESPO",WhereClause.Comparateur.EQ,"O"),
+												new WhereClause("DCO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));	
+												if (!listeDetailCorrection.isEmpty()) {
+													detailCor = listeDetailCorrection.get(0);
+											    }
+								             }
+								 
+								//Chargement la liste des pièces et observations à examiner par le responsable
+								 public void chargePiecesByBinome() {
+									 listeCorrectionCharge= (List<VDetailCorrectionCharge>) iservice.getObjectsByColumn("VDetailCorrectionCharge", new ArrayList<String>(Arrays.asList("PID_CODE")),
+												new WhereClause("DCO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+									 if (!listeCorrectionCharge.isEmpty()) {
+										 detailCharge = listeCorrectionCharge.get(0);
+									    }
+								      }
+								 
+								 
+								 //Chargement des pièces du Dao
+								 public void chargePiecesDao() {
+									 listePiecesDao.clear();
+									 listePiecesDao= ((List<VPieceDac>)iservice.getObjectsByColumn("VPieceDac",new ArrayList<String>(Arrays.asList("PID_LIBELLE")),
+											    new WhereClause("PID_DAC_CODE",Comparateur.EQ,""+updateDac.getDacCode())));
+
+								 }	
+								 
+								//Affichage de zone de mention si le chargé d'Etude est un responsable de binôme
+								  public void chargeRespoExiste(){
+									  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+										              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
+										              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
+										              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+									        if (!daoExamen.isEmpty()) {
+											      etatSanction = true;
+											      etatLoveObs = true;
+											      etatBtnValid = true;
+											      etatBtnValidCharge = false;
+											      
+									         }else {
+									        	 etatSanction = false;	
+									        	 etatLoveObs = false;
+									        	 etatBtnValid = false;
+									        	 etatBtnValidCharge = true;
+									        	 validCorrection = false;
+									         }		
+									    }
+								  
+								  
+								//Affichage de zone de mention si le chargé d'Etude est un responsable de binôme
+								  public void chargeTableauExiste(){
+									  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
+										              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
+										              new WhereClause("DAF_DCS_MBM_RESPO",WhereClause.Comparateur.EQ,"O"),
+										              new WhereClause("DAF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+									        if (!daoExamen.isEmpty()) {
+									        	etatDaoCorrige = true;   
+									         }else {
+									        	 etatDaoCorrige = false;	
+									         }		
+									    }
+								  
+								//Examen des pièces du DAO par le Chargé d'Etudes du binôme
+									@Transactional
+								    public void examinerChar() {
+										  
+									listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+											        new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+											        new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+										                if (!listDao.isEmpty()) {newDao= listDao.get(0); }
+													  
+										  
+										  listPieceCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+												   new WhereClause("COR_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+									                        if (!listPieceCorrection.isEmpty()) {
+										                           correction = listPieceCorrection.get(0);
+										  
+										                                  for(VPieces n : listePices) {
+												                                TDetailCorrection detCor = new TDetailCorrection();
+												                                detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
+												                                detCor.setDcoObservation(n.getPidObservation());
+												                                detCor.setDcoPresente(n.getPidPresente());
+												                                detCor.setTFonction(userController.getSlctd().getTFonction());
+												                                detCor.setTOperateur(userController.getSlctd().getTOperateur());
+												                                detCor.setTCorrectionDac(correction);
+												                                detCor.setTDacSpecs(newDao);
+												                                detCor.setDcoConforme(n.getPidConforme());
+												                                detCor.setDcoTitre(correction.getCorLieblle());
+												                                detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
+												                                detCor.setDcoRespo("N");
+												                                iservice.addObject(detCor);
+											                                      }
+										                             //Mis à jour du statut de DAO récu   
+										                             slctdTda.setDafStaCode("DC1");
+										                             iservice.updateObject(slctdTda);
+										                             //Actualisation de la liste des DAO
+										                             //chargeDaoChargeEtude();
+												                     //Actualisation du Tableau de Bord
+												                     typeActionTb();
+												                     //Message de confirmation
+												                     userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
+												                     userController.setRenderMsg(true);
+												                     userController.setSevrityMsg("success");
+												                     
+									                          }else { 
+									        	 
+										                                  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										                                		     new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+													                                 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+												                                  if (!listDao.isEmpty()) { newDao= listDao.get(0);}
+										                                          String chaine="CORRECTION DU DOSSIER D''APPEL D''OFFRES N°";
+										                                          String exo=chaine+newDao.getDacCode();
+										                                          correction.setCorLieblle(exo); 
+										                                          correction.setCorOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+										                                          correction.setTDacSpecs(newDao);
+										                                          correction.setCorDteSaisi(Calendar.getInstance().getTime());
+										                                          iservice.addObject(correction);
+										     
+										                                            for(VPieces n : listePices) {
+												                                         TDetailCorrection detCor = new TDetailCorrection();
+												                                         detCor.setDcoDteSaisi(Calendar.getInstance().getTime());
+												                                         detCor.setDcoObservation(n.getPidObservation());
+												                                         detCor.setDcoPresente(n.getPidPresente());
+												                                         detCor.setTCorrectionDac(correction);
+												                                         detCor.setTDacSpecs(newDao);
+												                                         detCor.setDcoConforme(n.getPidConforme());
+												                                         detCor.setTFonction(userController.getSlctd().getTFonction());
+												                                         detCor.setTOperateur(userController.getSlctd().getTOperateur());
+												                                         detCor.setDcoTitre(correction.getCorLieblle());
+												                                         detCor.setTPiecesDacs(new TPiecesDacs(n.getPidCode()));
+												                                         detCor.setDcoRespo("N");
+												                                        iservice.addObject(detCor);
+											                                              }
+									 				
+										                                             //Mis à jour du statut de DAO en cours de traitement chez le Chargé d'Etudes  
+										       		                                slctdTda.setDafStaCode("DC1");
+										       		                                iservice.updateObject(slctdTda); 
+										       		                                //Actualisation de la liste des DAO
+										       		                                //chargeDaoChargeEtude();
+									 				                                //Actualisation du Tableau de Bord
+													                                 typeActionTb();
+									 				                                //Message de confirmation
+									 				                                userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
+									 				                                userController.setRenderMsg(true);
+									 				                                userController.setSevrityMsg("success");
+									                                         }
+									                                       }
+									  
+									//Enregistrement des corrections
+									  @Transactional
+									  public void examiner() {
+										  for(VPieces n : listePices) {
+											  newCorrection.setDcoPidCode(String.valueOf(n.getPidCode()));
+											  newCorrection.setDcoDacCode(n.getPidDacCode());
+											  newCorrection.setDcoDteSaisi(Calendar.getInstance().getTime());
+											  newCorrection.setDcoFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+											  newCorrection.setDcoOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+											  newCorrection.setTempType("DAC_CORRECTION");
+											  iservice.addObject(newCorrection);
+										       } 
+										   //chargePiecesByDao();
+										
+											 //Message de confirmation
+											 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
+											 userController.setRenderMsg(true);
+											 userController.setSevrityMsg("success");	
+									  }
+
+									  
+								     ////Validation chargé d'Etudes
+									  @Transactional
+									  public void valider() throws IOException {
+								       	List<TDacSpecs> DA  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+								       	TDacSpecs dao = new TDacSpecs();
+											if(!DA.isEmpty()) dao = DA.get(0);
+											dao.setTStatut(new TStatut("D4V"));
+											dao.setDacStatutRetour(slctdTd.getDacStatutRetour());
+											iservice.updateObject(dao);
+								       
+											  //Récupération du Statut
+			 						        TStatut statuts = constantService.getStatut("D4V");
+			 							  	//Historisation du / des retraits
+			 						       historiser("D4V",slctdTd.getDacCode()," ");
+													
+													chargeData();
+													renderPage("dao1","CHADAO");
+													//Actualisation du tableau de bord
+													typeActionTb();
+													//Message de confirmation
+													userController.setTexteMsg("Validation effectuée avec succès!");
+													userController.setRenderMsg(true);
+													userController.setSevrityMsg("success");		
+								    }
+									  
+									  
+									  
+									//Validation des corrections
+									  @Transactional 
+									 public void resultatCorrectionRespo() {
+										 listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+												  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTda.getDafDacCode()));
+										           if (!listCorrection.isEmpty()) {
+										        	 daoCorr= listCorrection.get(0);
+										        	 daoCorr.setCorObservationRespo(getObservationCor());
+										        	 daoCorr.setCorResultatRespo(resultat);
+												     iservice.updateObject(daoCorr);
+												 
+												     //Message de confirmation
+													 userController.setTexteMsg("Validation éffectuée avec succès!");
+													 userController.setRenderMsg(true);
+													 userController.setSevrityMsg("success");
+										          }	                     
+									   } 
+									  
+									  
+									  //Transmission du DAO par le Responsable du binôme
+									  @Transactional
+									  public void transmettreRespo() {
+										  
+										  if(dos.getDdaNom().equalsIgnoreCase("") || "".equals(dos.getDdaNom()) || dos.getDdaReference().equalsIgnoreCase("") || "".equals(dos.getDdaReference())) {
+											  //Message d'erreur
+											  FacesContext.getCurrentInstance().addMessage(null,
+											  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez charger le DAO", ""));
+											  
+										        }else {
+											     //Mis à Jour du Statut du DAO dans T_Dao_Affectation, puis dans t_dac_specs
+											      slctdTda.setDafStaCode("D4V");
+											      slctdTda.setDafStatutRetour("0");
+											      iservice.updateObject(slctdTda);
+											  
+											   //Mis à jour du statut et de l'option retour dans TDacSpecs
+											   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+													    //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+														new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+													         if (!listDao.isEmpty()) {
+														         newDao= listDao.get(0);
+														         newDao.setTStatut(new TStatut(slctdTda.getDafStaCode()));
+														         newDao.setDacStatutRetour(slctdTda.getDafStatutRetour());
+												                 iservice.updateObject(newDao); 
+										   	                        }
+
+													         //Récupération du Statut
+								 						        TStatut statuts = constantService.getStatut("D4V");
+								 							  	//Historisation du / des retraits
+								 						       historiser("D4V",newDao.getDacCode(),"DAO Transmis par le responsable du binôme");
+												  
+												  chargeData();
+												  
+												//Actualisation du tableau de bord
+								 					typeActionTb();
+								 					//Message de confirmation
+								 					userController.setTexteMsg("Transmission effectuée avec succès!");
+													userController.setRenderMsg(true);
+													userController.setSevrityMsg("success");
+										        }
+									       } 
+								
+									  
+									  @Transactional
+										public void uploadCharge(FileUploadEvent event) throws java.io.FileNotFoundException { 
+										 //condition de chargement d'un document : Nature sélectionnée 
+										 if((docNature == null || "".equals(docNature))){
+											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
+											FacesContext.getCurrentInstance().addMessage(null, msg);	
+											 
+											 }else {
+										
+										if(fileUploadController.handleFileUpload(event, ""+slctdTda.getDafDacCode(), docNature)) {
+											
+											listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+								 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
+								 				if (!listDao.isEmpty()) {
+								 					newDao= listDao.get(0);
+								 	   	                 }
+											
+											int nat = Integer.valueOf(docNature);
+											//check le dossier s'il existe à faire
+											//TDossierDacs dos =new TDossierDacs(); //TNatureDocuments
+											dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+											dos.setTDacSpecs(newDao);
+											List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+											TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+											if(!LS.isEmpty()) natureDoc = LS.get(0);
+											dos.setTNatureDocuments(natureDoc);
+											dos.setDdaNom(fileUploadController.getFileName());
+											dos.setDdaDteSaisi(Calendar.getInstance().getTime());
+											dos.setDdaReference(fileUploadController.getDocNom());
+											iservice.addObject(dos); 
+											
+											//chargeNatureDocTrans();
+											chargeDossierCharge();
+											
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succés!", "");
+											FacesContext.getCurrentInstance().addMessage(null, msg);
+											chargeDossierCharge();
+											}else {
+												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
+												FacesContext.getCurrentInstance().addMessage(null, msg);	
+												
+											}
+										  }
+										}
+				
+									//Validation des corrections
+									  @Transactional 
+									 public void resultatCorrection() {
+										  
+										  if(slctdTd.getDacBailleur().equalsIgnoreCase("B")) {
+											   statutSanction ="SBO";
+											   statutSanRetour ="0";
+											  
+										        }else 
+										            if(resultat.equalsIgnoreCase("Valide")){
+										        	  statutSanction ="";
+													  statutSanRetour ="";
+													  
+													  if(slctdTd.getDacMention().equalsIgnoreCase("Validé pour publication")) {
+														  statutSanction ="DPU";
+														  statutSanRetour ="0";
+														    if(slctdTd.getMopCode().equalsIgnoreCase("AOR") || slctdTd.getMopCode().equalsIgnoreCase("PSL"))
+														      {
+														    	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+																			new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+																			if (!listAvis.isEmpty()) {
+																				                 //Mis à jour du statut
+																				                 majAvis= listAvis.get(0);
+																				                 majAvis.setTStatut(new TStatut(statutSanction));
+																				                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+																				                 iservice.updateObject(majAvis);
+																			                       }
+														    	
+														         }else {
+														        	 
+														        	  listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+																				new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+																				if (!listAvis.isEmpty()) {
+																					                 //Mis à jour du statut
+																					                 majAvis= listAvis.get(0);
+																					                 majAvis.setTStatut(new TStatut("APU"));
+																					                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+																					                 iservice.updateObject(majAvis);
+																				                       }
+														                  }
+														    	
+														
+													                  }else 
+													                     if(slctdTd.getDacMention().equalsIgnoreCase("Validé et retour à l'AC")){
+													    	                statutSanction ="D5V";
+															                statutSanRetour ="0";
+													                         }
+											  
+										                                }else 
+										                	                if(resultat.equalsIgnoreCase("Rejeté")) {
+												                                  statutSanction ="SRO";
+												                                  statutSanRetour ="1";
+											                                    }else 
+											                    	                if(resultat.equalsIgnoreCase("Retour au binome")) {
+												                                        statutSanction ="D3A";
+												                                        statutSanRetour ="1";
+												                                          
+												                                        daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+												                    							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												                    							if (!daoBinome.isEmpty()) {
+												                    								//Mis à  jour de tous les DAO dans T_DAO_AFFECTATION
+												                    								for(TDaoAffectation dao : daoBinome) {
+												                    									 dao.setDafStaCode(statutSanction);
+												                    									 dao.setDafStatutRetour(statutSanRetour);
+												                    									 iservice.updateObject(dao);
+												                    								       }
+												                    							}
+												                                             
+											                                                }
+							
+										  
+											  listCorrection = (List<TCorrectionDac>) iservice.getObjectsByColumn("TCorrectionDac", new ArrayList<String>(Arrays.asList("COR_NUM")),
+													  new WhereClause("COR_DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
+											           if (!listCorrection.isEmpty()) {
+											        	 daoCorr= listCorrection.get(0);
+											        	 daoCorr.setCorObservation(getObservationCor());
+											        	 daoCorr.setCorFoncodValid(userController.getSlctd().getTOperateur().getOpeNom());
+											        	 daoCorr.setCorResultat(resultat);
+													     iservice.updateObject(daoCorr);
+													     
+													     //MAJ dans T_DAC_SPECS
+													     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+													    		    //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+													    		    //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+												 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												 				if (!listDao.isEmpty()) {
+												 					newDao= listDao.get(0);
+												 					newDao.setTStatut(new TStatut(statutSanction));
+												 					newDao.setDacStatutRetour(slctdTd.getDacStatutRetour());
+												 			        iservice.updateObject(newDao); 
+												 	   	                 }
+													     //Activation du bouton d'édition du PV
+												 		 etatPV = true;
+										     			 etatValiderCsv = false;
+										     				     
+														 userController.setTexteMsg("Votre sanction a été apportée avec succès!");
+														 userController.setRenderMsg(true);
+														 userController.setSevrityMsg("success");
+									     }   
+									}					  
+			
+									  
+									//Edition du PV de Correction
+										 public void imprimerPv() {
+												projetReport.stringparam1(slctdTd.getDacCode(), "PV_examen", "PV_examen");
+											}
+										 
+										 
+										 
+										//Publication du DAO
+											//@Transactional
+										  public void publier() {
+												  
+												listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+														new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+														if (!listAvis.isEmpty()) {
+															//Mis à jour du statut
+															majAvis= listAvis.get(0);
+															majAvis.setTStatut(new TStatut("APU"));
+															majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+															iservice.updateObject(majAvis);
+														}
+												 
+												
+												listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+														//new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+									 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+									 				if (!listDao.isEmpty()) {
+									 					newDao= listDao.get(0);
+									 					newDao.setTStatut(new TStatut("D6V"));
+									 					newDao.setDacStatutRetour("0");
+									 			        iservice.updateObject(newDao); 
+									 	   	                 }
+									 				
+									 				  //Récupération du Statut
+					 						        TStatut statuts = constantService.getStatut("DPU");
+					 							  	//Historisation du / des retraits
+					 						       historiser("DPU",newDao.getDacCode()," ");
+					 						     
+														chargeData();
+														
+														//chargeData();
+														//Actualisation du tableau de bord
+														typeActionTb();
+														//Message de confirmation
+														userController.setTexteMsg("DAO Publié!");
+														userController.setRenderMsg(true);
+														userController.setSevrityMsg("success");		
+									   }
+										  
+										  
+										  
+										   public void checkVente() {
+												 if(sitDac.equalsIgnoreCase("Retrait")) { 
+													 confirmVente = false;
+												 }else 
+												      if(sitDac.equalsIgnoreCase("Vente")){
+													 confirmVente = true; 
+												 }
+											 }
+										   
+										   
+										 //Methode de paiement
+											  @Transactional
+											  public void payer() {
+												  if(newCandidat.getCanSouNcc().equalsIgnoreCase("") ||newCandidat.getCanNom().equalsIgnoreCase("") || sitDac.equalsIgnoreCase("") ) {
+													//Message d'erreur
+														FacesContext.getCurrentInstance().addMessage(null,
+																new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat ou choisir votre option", ""));
+													  
+												      }else { 
+												    	  
+												    	        if(sitDac.equalsIgnoreCase("Retrait")) {
+												    	        	
+												    	        	 String mois="";
+																        Calendar c = Calendar.getInstance();
+																        int year = c.get(Calendar.YEAR);
+																        int month= c.get(Calendar.MONTH)+1;
+																        String chaine="P";
+																        if(month<10) {
+																        mois="0"+String.valueOf(month);
+																        }else {
+																		mois=String.valueOf(month);
+																	    }
+																        
+																        String exo=chaine+String.valueOf(year)+mois;
+														               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
+														               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
+														               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+														               iservice.addObject(newCandidat);
+														               
+														               newVente.setVenPaieCode(keyGen.getNumVente(exo));
+														               newVente.setVenDteSaisi(Calendar.getInstance().getTime());
+														               newVente.setTModeReglement(new TModeReglement("ESP"));
+														               newVente.setTOperateur(userController.getSlctd().getTOperateur());
+														               newVente.setTCandidats(newCandidat);
+														               iservice.addObject(newVente);
+														                    
+														                //Recupération du DAO dans T_DAC_SPECS
+															            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+												     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												     			  		    if (!listDao.isEmpty()) {
+												     			  			  newDao= listDao.get(0);
+												     			  			  venteDetail.setTVenteDac(newVente);
+												     			  			  venteDetail.setDveCout(montantRetrait);
+														        	          venteDetail.setTDacSpecs(newDao);
+														                      iservice.addObject(venteDetail);
+												     			  				    }
+												     			  		    
+												     			  		      
+													                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
+													                              listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+															  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+															  				      if (!listDao.isEmpty()) {
+															  					     newDao= listDao.get(0);
+															  					     newDao.setTStatut(new TStatut("RET"));
+															  			             iservice.updateObject(newDao); 
+															  	   	                 }
+															  				      
+															  				    //Récupération du Statut
+													 						        TStatut statuts = constantService.getStatut("RET");
+													 							  	//Historisation du / des retraits
+													 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
+															  				
+												    			  				 //Activation du bouton édition du récu
+													     			  				   confirmPaie = true; 
+													     			  				   etatRecu = false;
+												    			  				  //Actualisation du Tableau de Bord
+												    			 		          typeActionTb();
+														                    	  
+												     			  				   //Message de Confirmation
+												     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
+												     					           userController.setTexteMsg("Retrait effectué avec succès");
+												     							   userController.setRenderMsg(true);
+												     							   userController.setSevrityMsg("success");	
+												    	        }else
+												    	        	 if(sitDac.equalsIgnoreCase("Vente")) 
+												    	        	 {
+												    	        		 String mois="";
+												 				        Calendar c = Calendar.getInstance();
+												 				        int year = c.get(Calendar.YEAR);
+												 				        int month= c.get(Calendar.MONTH)+1;
+												 				        String chaine="P";
+												 				        if(month<10) {
+												 				        mois="0"+String.valueOf(month);
+												 				        }else {
+												 						mois=String.valueOf(month);
+												 					    }
+												 				        
+												 				        String exo=chaine+String.valueOf(year)+mois;
+												 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
+												 		               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
+												 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+												 		               iservice.addObject(newCandidat);
+												 		               
+												 		               newVente.setVenPaieCode(keyGen.getNumVente(exo));
+												 		               newVente.setVenDteSaisi(Calendar.getInstance().getTime());
+												 		               newVente.setTModeReglement(new TModeReglement("ESP"));
+												 		               newVente.setTOperateur(userController.getSlctd().getTOperateur());
+												 		               newVente.setTCandidats(newCandidat);
+												 		               iservice.addObject(newVente);
+												 		                    
+												 		                //Recupération du DAO dans T_DAC_SPECS
+												 			            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+												      			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												      			  		    if (!listDao.isEmpty()) {
+												      			  			  newDao= listDao.get(0);
+												      			  			  venteDetail.setTVenteDac(newVente);
+												      			  			  venteDetail.setDveCout(newDao.getDacCout());
+												 		        	          venteDetail.setTDacSpecs(newDao);
+												 		                      iservice.addObject(venteDetail);
+												      			  				    }
+												      			  		    
+												 	                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
+												 	                              listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+												 			  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+												 			  				      if (!listDao.isEmpty()) {
+												 			  					     newDao= listDao.get(0);
+												 			  					     newDao.setTStatut(new TStatut("DVE"));
+												 			  					     iservice.updateObject(newDao);
+												 			  	   	                 }
+												 			  				      
+												 			  				 //Récupération du Statut
+													 						        TStatut statuts = constantService.getStatut("DVE");
+													 							  	//Historisation du / des retraits
+													 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
+												 			  				      
+												     			  				    
+												     			  				   //Activation du bouton édition du récu
+												     			  				   confirmPaie = true;
+												     			  				   etatRecu = true;
+												     			  				   
+												     			  				  //Actualisation du Tableau de Bord
+												     			 		          typeActionTb();
+												      			  				   //Message de Confirmation
+												      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
+												      					           userController.setTexteMsg("Paiement effectué avec succès");
+												      							   userController.setRenderMsg(true);
+												      							   userController.setSevrityMsg("success");	
+												    	        	   }
+												                   }    
+											                }
+											  //Fin Methode de Paiement
+											  
+											   //Début de la vente du DAO
+													public void finVente() {
+														String statUpdate = "";
+														String message = "";
+														if(slctdTd.getDacStaCode().equalsIgnoreCase("D6V")) {
+															statUpdate = "DVE";
+															message="Fin de la vente du Dossier d'Appel à Concurrence N°"+slctdTd.getDacCode();
+														 }else 
+															 if(slctdTd.getDacStaCode().equalsIgnoreCase("DPU")) {
+																	statUpdate = "DVE";
+																	message="Fin de la vente du Dossier d'Appel à Concurrence N°"+slctdTd.getDacCode();
+															 }
+														//Recupération du DAO dans T_DAC_SPECS
+											            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+								     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+								     			  		    if (!listDao.isEmpty()) {
+								     			  			  newDao= listDao.get(0);
+								     			  			newDao.setTStatut(new TStatut(""+statUpdate));
+										                      iservice.updateObject(newDao);
+								     			  			}
+													
+														//Chargement de la liste des ventes et celle du tableau de Bord
+														chargeData();
+														typeActionTb();
+														userController.setTexteMsg(message);
+														userController.setRenderMsg(true);
+														userController.setSevrityMsg("success");  
+													}
+											//Fin de la vente du DAO
+													
+													
+													//Récupération du montant du DAO
+													  public void recupMontantDao() {
+														  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+																      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+																      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+																	  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+																      if (!listDao.isEmpty()) {
+																	         newDao= listDao.get(0); 
+													   	              }	
+													             }
+													  
+													  
+													//Liste des entreprises de la love
+														 public void chargeSoumissions(){
+															 listSoumission=(List<TSoumissions>) iservice.getObjectsByColumnDesc("TSoumissions", new ArrayList<String>(Arrays.asList("SOU_NCC")));	
+														 } 
+														 
+														//Edition du recu de paiement
+														 public void imprimerRecu() {
+																projetReport.stringparam3(slctdTd.getDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
+															}
 		     
 		     //Methode vider
 		     public void vider() { 
@@ -1672,6 +2988,8 @@ public class DaoController {
 		     switch(value) {
 				case "dao1":
 					chargeData();
+					chargeDetailTB();
+					chargeNatureDocTrans();
 					//chargeDataPs();
 					/*chargeGestions();
 					chargeDataAffecter();
@@ -1683,18 +3001,19 @@ public class DaoController {
 					chargeDataAPublier();
 					chargeDataARetirer();
 					chargeDataVente();
-					chargeDataPriseCompte();
-					btn_corrige = true;*/
+					chargeDataPriseCompte();*/
+					btn_corrige = true;
+					etatPV = false;
 					vider();
 					_logger.info("value: "+value+" action "+action);	
 					break;
 				case "dao2":
-					chargePPM("PN");
+					chargePPM();
 					chargeAdresse();
 					chargeLots();
 					chargeImputation();
 					chargePiecesOffres();
-					chargeDaoTabTrans();
+					panelOuverture();
 				break;
 				case "dao3":
 		 			_logger.info("value: "+value+" action: "+action);
@@ -1704,16 +3023,17 @@ public class DaoController {
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
                 case "dao5":
-                	//chargeFonctionImput();
+                	 chargeFonctionImput();
+                	 chargeDaoAffectesR();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
                 case "dao6":
                 	//chargePiecesByDao();
-                	/*chargePiecesByCsv();
+                	chargePiecesByCsv();
                 	chargePiecesByCharges();
                 	chargeRespoExiste();
-                	chargePiecesByBinome();*/
+                	chargePiecesByBinome();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 				
@@ -1723,11 +3043,11 @@ public class DaoController {
 				
                 case "dao9":
                 	 //chargeLotExiste();
-                	/* chargeSoumissions();
+                	chargeSoumissions();
                 	 recupMontantDao();
                 	 newCandidat = new TCandidats();
                 	 etatRecu = false;
-                	 sitDac = "";*/
+                	 sitDac = "";
 		 			_logger.info("value: "+value+" action: "+action);
 				break; 
 				
@@ -2543,11 +3863,12 @@ public class DaoController {
 		this.listeDetail = listeDetail;
 	}
 
-	public List<VLigneLot> getListeImputations() {
+
+	public List<VLigneImputation> getListeImputations() {
 		return listeImputations;
 	}
 
-	public void setListeImputations(List<VLigneLot> listeImputations) {
+	public void setListeImputations(List<VLigneImputation> listeImputations) {
 		this.listeImputations = listeImputations;
 	}
 
@@ -2775,13 +4096,13 @@ public class DaoController {
 		this.listeSelectionPiecesOffres = listeSelectionPiecesOffres;
 	}
 
-	public boolean isValue1() {
+	/*public boolean isValue1() {
 		return value1;
 	}
 
 	public void setValue1(boolean value1) {
 		this.value1 = value1;
-	}
+	}*/
 
 	public boolean isEtatQualif() {
 		return etatQualif;
@@ -3079,13 +4400,108 @@ public class DaoController {
 		this.dossDacListe = dossDacListe;
 	}
 
-	public List<VDacliste> getListeDAOTB() {
-		return listeDAOTB;
+	public List<VDacliste> getDetailTB() {
+		return detailTB;
 	}
 
-	public void setListeDAOTB(List<VDacliste> listeDAOTB) {
-		this.listeDAOTB = listeDAOTB;
+	public void setDetailTB(List<VDacliste> detailTB) {
+		this.detailTB = detailTB;
 	}
-	
+
+	public List<VFonctionImputation> getListeFonctionsImput() {
+		return listeFonctionsImput;
+	}
+
+	public void setListeFonctionsImput(List<VFonctionImputation> listeFonctionsImput) {
+		this.listeFonctionsImput = listeFonctionsImput;
+	}
+
+	public List<TCorrectionDac> getListCorrection() {
+		return listCorrection;
+	}
+
+	public void setListCorrection(List<TCorrectionDac> listCorrection) {
+		this.listCorrection = listCorrection;
+	}
+
+	public List<TCorrectionDac> getListPieceCorrection() {
+		return listPieceCorrection;
+	}
+
+	public void setListPieceCorrection(List<TCorrectionDac> listPieceCorrection) {
+		this.listPieceCorrection = listPieceCorrection;
+	}
+
+	public boolean isOuverture() {
+		return ouverture;
+	}
+
+	public void setOuverture(boolean ouverture) {
+		this.ouverture = ouverture;
+	}
+
+	public List<VDetailCorrectionCharge> getListeCorrectionCharge() {
+		return listeCorrectionCharge;
+	}
+
+	public void setListeCorrectionCharge(List<VDetailCorrectionCharge> listeCorrectionCharge) {
+		this.listeCorrectionCharge = listeCorrectionCharge;
+	}
+
+	public List<TDaoAffectation> getDaoBinome() {
+		return daoBinome;
+	}
+
+	public void setDaoBinome(List<TDaoAffectation> daoBinome) {
+		this.daoBinome = daoBinome;
+	}
+
+	public List<TDacSpecs> getListeDaoCsvValid() {
+		return listeDaoCsvValid;
+	}
+
+	public void setListeDaoCsvValid(List<TDacSpecs> listeDaoCsvValid) {
+		this.listeDaoCsvValid = listeDaoCsvValid;
+	}
+
+	public List<TSoumissions> getListSoumission() {
+		return listSoumission;
+	}
+
+	public void setListSoumission(List<TSoumissions> listSoumission) {
+		this.listSoumission = listSoumission;
+	}
+
+	public boolean isPavet_lot() {
+		return pavet_lot;
+	}
+
+	public void setPavet_lot(boolean pavet_lot) {
+		this.pavet_lot = pavet_lot;
+	}
+
+	public boolean isPavet_offre() {
+		return pavet_offre;
+	}
+
+	public void setPavet_offre(boolean pavet_offre) {
+		this.pavet_offre = pavet_offre;
+	}
+
+	public boolean isBtn_dao() {
+		return btn_dao;
+	}
+
+	public void setBtn_dao(boolean btn_dao) {
+		this.btn_dao = btn_dao;
+	}
+
+	public String getValue1() {
+		return value1;
+	}
+
+	public void setValue1(String value1) {
+		this.value1 = value1;
+	}
 			
 }

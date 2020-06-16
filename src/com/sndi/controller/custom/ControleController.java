@@ -134,8 +134,13 @@ public class ControleController {
 	private boolean btn_valider_dao_dmp =false;
 	private boolean panelD =false;
 	private boolean btn_fermer_saisie_dao =false;
+	private boolean btn_fermer_saisie_daoPs =false;
 	public boolean fermerSaiDao=false;
 	public boolean fermerValDao=false;
+	private boolean btn_daoPn =false;
+	private boolean btn_daoPs =false;
+	private boolean btn_ami =false;
+	private boolean btn_prq =false;
 	private boolean panelDao =false;
 	private boolean btn_creerDetailDaoCmp = false;
 	private boolean btn_creerDetailDaoDmp = false;
@@ -146,6 +151,7 @@ public class ControleController {
 	public boolean btn_dao_ps =false;
 	private boolean pspmModePs = false;
 	private boolean ppmModePn = false;
+	private boolean btn_pub = false;
 	
 	//Recherche pour le DAO (Procédure Normale)
 		private boolean venteRecherche = false; 
@@ -326,6 +332,15 @@ public class ControleController {
 	private boolean fermerApercuDao = false;
 	private boolean fermerApercuAmi = false;
 	private boolean fermerApercuPrq = false;
+	
+	//Actions de l'AC
+	private boolean saisie=false;
+	private boolean publication=false;
+	private boolean vente=false;
+	private boolean correction=false;
+	
+	
+		
 	
 	//statuts
 	private String statutAffiche="";
@@ -526,7 +541,7 @@ public class ControleController {
 		    		}else
 		    			if(action.equalsIgnoreCase("VAL")) {
 		    				libelle="VALIDATION DES AVIS GENERAUX DE PASSATION DE MARCHES";
-		    				libelle1="PREVALIDATION DES AVIS GENERAUX DE PASSATION DE MARCHES";
+		    				libelle1="TRANSMISSION DES AVIS GENERAUX DE PASSATION DE MARCHES";
 		    				panelDetail=false;
 		    				panelForm=false;
 		   				    panelTraitement=true;
@@ -677,7 +692,7 @@ public class ControleController {
 			    			if(action.equalsIgnoreCase("VALPGPM")) {
 			    				type = "PGPM";
 			    				libelle="VALIDATION DES PLANS GENERAUX DE PASSATION DE MARCHES";	
-			    				libelle1="PREVALIDATION DES PLANS GENERAUX DE PASSATION DE MARCHES";
+			    				libelle1="TRANSMISSION DES PLANS GENERAUX DE PASSATION DE MARCHES";
 			    				libelleSmall="Procédure Normale";
 			    				panelDetail=false;
 			    				panelForm=false;
@@ -802,7 +817,7 @@ public class ControleController {
 			    			if(action.equalsIgnoreCase("VALPGSPM")) {
 			    				type = "PGSPM";
 			    				libelle="VALIDATION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
-			    				libelle1="PREVALIDATION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
+			    				libelle1="TRANSMISSION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
 			    				libelleSmall="Procédure Simplifiée";
 			    				panelDetail=false;
 			    				panelForm=false;
@@ -899,14 +914,10 @@ public class ControleController {
 						 searchAC = true;
 						 searchCpmp = false;
 						 searchDmp = false;
-						 /*validCPMP = true;
-						 validDMP = false;
-						 etatPso = false;
-						 etatPsl = true;*/
 						 validCPMP = true;
 						 validDMP = false;
 						 etatPso = false;
-						 etatPsl = false;
+						 etatPsl = true;
 			    	}else
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
 			    			 type = "PPM";
@@ -966,7 +977,7 @@ public class ControleController {
 			    			if(action.equalsIgnoreCase("VALPPM")) {
 			    				type = "PPM";
 			    				libelleProcedure="VALIDATION DES PLANS DE PASSATION DE MARCHES";	
-			    				libelle1="PREVALIDATION DES PLANS DE PASSATION DE MARCHES";
+			    				libelle1="TRANSMISSION DES PLANS DE PASSATION DE MARCHES";
 			    				panelDetail=false;
 			    				panelForm=false;
 			   				    panelTraitement=true;
@@ -1124,8 +1135,6 @@ public class ControleController {
 							 //validDMP = false;
 							 validCPMP = false;
 							 validDMP = true;
-							 etatPsl = false;
-							 etatPso = false;
 							 searchAcPs = true;
 							 searchCpmpPs = false;
 							 searchDmpPs = false;
@@ -1135,7 +1144,7 @@ public class ControleController {
 			    			if(action.equalsIgnoreCase("VALPSPM")) {
 			    				type = "PSPM";
 			    				libelleProcedure="VALIDATION DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";	
-			    				libelle1="PREVALIDATION DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";
+			    				libelle1="TRANSMISSION DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";
 			    				panelDetail=false;
 			    				panelForm=false;
 			   				    panelTraitement=true;
@@ -1183,20 +1192,23 @@ public class ControleController {
 				    			//AMI
 				   			 if(action.equalsIgnoreCase("ENGAMI")) {
 				   				  type = "AMI";
+								 typePlan ="PN";
+								 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   				  libelleDao1="SAISIE D'UN NOUVEL AVIS A MANIFESTATION D'INTERET (AMI)";
-				   			       libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   			       libellesmall ="Saisie d'un nouvel AMI";
 				   			       panelDetail=false;
 				   				   panelForm=true;
 				   				   panelTraitement=false;
 				   			       panelRegister=true;
 				   			       panelUpdate=false;
-				   			       btn_fermer_saisie_dao = true;
-				   			       btn_fermer_saisie_ami = false ;
-				   			       btn_fermer_saisie_prq = false  ;                     
+				   			       btn_fermer_saisie_dao = false;
+				   			       btn_fermer_saisie_daoPs =false;
+				   			       btn_fermer_saisie_ami = true ;
+				   			       btn_fermer_saisie_prq = false;                     
 				   			    }else 
 				   			    	if(action.equalsIgnoreCase("MODAMI")) {
 				   			    		type = "AMI";
+										 typePlan ="PN";
 				   			    		libelleDao1="MODIFICATION DE L'AVIS A MANIFESTATION D'INTERET° ";
 				   			    		 libelle1="Saisie d'un nouvel AMI";
 				   			    		 update_fermer_dao=false;
@@ -1214,23 +1226,29 @@ public class ControleController {
 				   			    	}else
 				   			    		if(action.equalsIgnoreCase("SAIAMI")) {
 				   			    			type = "AMI";
-				   			    			libelle1="Index";
+											 typePlan ="PN";
+											 fonctionalite = "listSaisieAc";
+											 libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
 				   			    			libelleDao3="SAISIE DES AVIS A MANIFESTATION D'INTERET";
-				   			    			libelle1=" ";
+				   			    			libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
+				   			    			btn_daoPn =false;
+							    			btn_daoPs =false;
+							    			btn_ami =true;
+							    			btn_prq =false;
 				   			    			 btn_new =true;
 				   			    			 btn_affec = false;
-				   							 panel1 =true;
-				   							 panel2 =false;
-				   							 panel3 =false;
-				   							 panel4 = false;
-				   							 panel5 =false;
-				   							 panel6 =false;
-				   							 panel7=false;
-				   							 panel8 =false;
-				   							 panel9 = false;
-				   							 panel10 = false;
-				   							 panel11 = false;
-				   							 panel12 = false;
+				   			    			panel1 =true;
+											 panel2 =false;
+											 panel3 = false;
+											/* panel4 = false;
+											 panel5 = false;
+											 panel6 = false;
+											 panel7 = false;
+											 panel8 = true;
+											 panel9 = false;
+											 panel10 = false;
+											 panel11 = false;
+											 panel12 = false;*/
 				   							 venteRecherche = false; 
 				   							 affectationRecherche = false;
 				   							 examenRecherche = false;
@@ -1290,23 +1308,24 @@ public class ControleController {
 				   			    		}else
 				   				    		if(action.equalsIgnoreCase("AMIPS")) {
 				   				    			type = "AMI";
-				   				    			libelle1="Index";
+												 typePlan ="PN";
+												 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   				    			 libelleDao3="SAISIE DES AVIS A MANIFESTATION D'INTERET";
 				   				    			 libellesmall ="";
 				   				    			 btn_new =true;
 				   				    			 btn_affec = false;
-				   								 panel1 =false;
-				   								 panel2 =false;
-				   								 panel3 =false;
-				   								 panel4 = false;
-				   								 panel5 =false;
-				   								 panel6 =false;
-				   								 panel7=false;
-				   								 panel8 =false;
-				   								 panel9 = false;
-				   								 panel10 = true;
-				   								 panel11 = false;
-				   								 panel12 = false;
+				   				    			panel1 =true;
+												 panel2 =false;
+												 panel3 = false;
+												/* panel4 = false;
+												 panel5 = false;
+												 panel6 = false;
+												 panel7 = false;
+												 panel8 = true;
+												 panel9 = false;
+												 panel10 = false;
+												 panel11 = false;
+												 panel12 = false;*/
 				   								 panelDaoTableauBordSai = false;
 				   								 panelDaoTableauBordPslpso = true;
 				   								 panelDaoTableauBordVal = false;
@@ -1357,9 +1376,11 @@ public class ControleController {
 				   								 
 				   				    		}else
 				   			    			    if(action.equalsIgnoreCase("VALAMI")) {
-				   			    				type = "AMI";
+				   			    			    	type = "AMI";
+				   								 typePlan ="PN";
+				   								 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   			    				libelleDao3="VALIDATION DES AVIS A MANIFESTATION D'INTERET";
-				   			    				libelleDao1="PREVALIDATION DES AVIS A MANIFESTATION D'INTERET";
+				   			    				libelleDao1="TRANSMISSION DES AVIS A MANIFESTATION D'INTERET";
 				   			    				panelDetail=false;
 				   			    				panelForm=false;
 				   			   				    panelTraitement=true;
@@ -1367,18 +1388,18 @@ public class ControleController {
 				   			    				btn_affec = false;
 				   			    				btn_retrait = false;
 				   			    				btn_valid = true;
-				   								panel1 =false;
-				   								panel2 =true;
-				   								panel3 =false;
-				   								panel4 =false;
-				   								panel5 =false;
-				   								panel6=false;
-				   								panel7 = false;
-				   								panel8 = false;
-				   								panel9 = false;
-				   								panel10=false;
-				   								panel11 = false;
-				   								panel12 = false;
+				   			    				panel1 =true;
+												 panel2 =false;
+												 panel3 = false;
+												/* panel4 = false;
+												 panel5 = false;
+												 panel6 = false;
+												 panel7 = false;
+												 panel8 = true;
+												 panel9 = false;
+												 panel10 = false;
+												 panel11 = false;
+												 panel12 = false;*/
 				   								venteRecherche = false; 
 				   								affectationRecherche = false;
 				   								examenRecherche = false;
@@ -1424,6 +1445,7 @@ public class ControleController {
 				   			    			}else
 				   				    			if(action.equalsIgnoreCase("APEAMI")) {
 				   				    				type = "AMI";
+				   								 typePlan ="PN";
 				   				    				libelleDao3="DETAILS DE L'";
 				   				    				etat_dao =false;
 								    				etat_prq =false;
@@ -1447,25 +1469,27 @@ public class ControleController {
 				   									fermerApercuPrq = false;
 				   				    			}else
 				   				    				 if(action.equalsIgnoreCase("AFFAMI")) {
-				   				    				        type = "AMI";
-				   							    			libelle1="Index";
+				   				    					type = "AMI";
+				   									 typePlan ="PN";
+				   									 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   							    			 libelleDao3="AFFECTATION DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   							    			 btn_new =false;
 				   							    			 btn_affec = true;
 				   							    			 btn_retrait = false;
 				   							    			 btn_valid = false;
 				   											 panel1 =false;
-				   											 panel2 =false;
-				   											 panel3 = true;
-				   											 panel4 = false;
-				   											 panel5 = false;
-				   											 panel6=false;
-				   											 panel7 = false;
-				   											 panel8 = false;
-				   											 panel9 = false;
-				   											 panel10 = false;
-				   											 panel11 = false;
-				   											 panel12 = false;
+				   											panel1 =true;
+															 panel2 =false;
+															 panel3 = false;
+															/* panel4 = false;
+															 panel5 = false;
+															 panel6 = false;
+															 panel7 = false;
+															 panel8 = true;
+															 panel9 = false;
+															 panel10 = false;
+															 panel11 = false;
+															 panel12 = false;*/
 				   											 venteRecherche = false; 
 				   											 affectationRecherche = true;
 				   											 examenRecherche = false;
@@ -1520,25 +1544,26 @@ public class ControleController {
 				   											 btn_fermer_saisie_prq = false; 
 				   				    				 }else
 				   				    					  if(action.equalsIgnoreCase("EXAAMI")) {
-				   				    						     type = "AMI";
-				   								    			 libelle1="Index";
+				   				    						type = "AMI";
+				   										 typePlan ="PN";
+				   										 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   								    			 libelleDao3="EXAMEN DES AVIS A MANIFESTATION D'INTERET";
 				   								    			 btn_new =false;
 				   								    			 btn_affec = false;
 				   								    			 btn_exam = true;
 				   								    			 btn_valid = false;
-				   												 panel1 =false;
-				   												 panel2 =false;
-				   												 panel3 = false;
-				   												 panel4 = true;
-				   												 panel5 = false;
-				   												 panel6 = false;
-				   												 panel7=false;
-				   												 panel8 =false;
-				   												 panel9 =false;
-				   												 panel10 = false;
-				   												 panel11 = false;
-				   												 panel12 = false;
+				   								    			panel1 =true;
+																 panel2 =false;
+																 panel3 = false;
+																/* panel4 = false;
+																 panel5 = false;
+																 panel6 = false;
+																 panel7 = false;
+																 panel8 = true;
+																 panel9 = false;
+																 panel10 = false;
+																 panel11 = false;
+																 panel12 = false;*/
 				   												 venteRecherche = false; 
 				   												 affectationRecherche = false;
 				   												 examenRecherche = true;
@@ -1592,27 +1617,29 @@ public class ControleController {
 				   												 btn_fermer_saisie_prq = false; 
 				   				    					  }else
 				   				    						   if(action.equalsIgnoreCase("VETAMI")) {
-				   				    							     type = "AMI";
-				   				    							     libelle="VENTE / RETRAIT DE L'AMI N°";
-				   									    			 libelle1="Index";
+				   				    							type = "AMI";
+						   											 typePlan ="PN";
+						   											 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
+						   				    						 libelle="VENTE / RETRAIT DE L'AMI N°";
 				   									    			 libelleDao3="VENTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
+				   									    			 fonctionalite="listeDaoVentePn";
 				   									    			 btn_new =false;
 				   									    			 btn_affec = false;
 				   									    			 btn_exam = false;
 				   									    			 btn_retrait = true;
 				   									    			 btn_valid = false;
-				   													 panel1 =false;
-				   													 panel2 =false;
-				   													 panel3 = false;
-				   													 panel4 = false;
-				   													 panel5 = false;
-				   													 panel6 = false;
-				   													 panel7 = false;
-				   													 panel8 = false;
-				   													 panel9 =true;
-				   													 panel10 = false;
-				   													 panel11 = false;
-				   													 panel12 = false;
+				   									    			panel1 =true;
+																	 panel2 =false;
+																	 panel3 = false;
+																	/* panel4 = false;
+																	 panel5 = false;
+																	 panel6 = false;
+																	 panel7 = false;
+																	 panel8 = true;
+																	 panel9 = false;
+																	 panel10 = false;
+																	 panel11 = false;
+																	 panel12 = false;*/
 				   													 venteRecherche = true; 
 				   													 affectationRecherche = false;
 				   													 examenRecherche = false;
@@ -1667,26 +1694,27 @@ public class ControleController {
 				   													 btn_fermer_saisie_prq = false;  
 				   				    						   }else
 				   				    							   if(action.equalsIgnoreCase("CHAAMI")) {
-				   				    								     type = "AMI";
-				   										    			 libelle1="Index";
+						   				    							 type = "AMI";
+						   												 typePlan ="PN";
+						   												 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   										    			 libelleDao3="EXAMEN DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   										    			 btn_new =false;
 				   										    			 btn_affec = false;
 				   										    			 btn_exam = false;
 				   										    			 btn_retrait = false;
 				   										    			 btn_valid = false;
-				   														 panel1 =false;
-				   														 panel2 =false;
-				   														 panel3 = false;
-				   														 panel4 = false;
-				   														 panel5 = false;
-				   														 panel6 = true;
-				   														 panel7 =false;
-				   														 panel8 =false;
-				   														 panel9 =false;
-				   														 panel10 = false;
-				   														 panel11 = false;
-				   														 panel12 = false;
+				   										    			panel1 =false;
+																		 panel2 =false;
+																		 panel3 = true;
+																		/* panel4 = false;
+																		 panel5 = false;
+																		 panel6 = false;
+																		 panel7 = false;
+																		 panel8 = true;
+																		 panel9 = false;
+																		 panel10 = false;
+																		 panel11 = false;
+																		 panel12 = false;*/
 				   														 venteRecherche = false; 
 				   														 affectationRecherche = false;
 				   														 examenRecherche = false;
@@ -1742,26 +1770,29 @@ public class ControleController {
 				   				    								   
 				   				    							   }else 
 				   				    								   if(action.equalsIgnoreCase("PUBAMI")) {
-				   				    									     type = "AMI";
-				   											    			 libelle1="Index";
+					   				    									type = "AMI";
+					   				    								    typePlan ="PN";
+					   				    								    fonctionalite="ListePubDacPn";
+					   				    								    libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   											    			 libelleDao3="AMI EN ATTENTE DE PUBLICATION";
 				   											    			 btn_new =false;
 				   											    			 btn_affec = false;
+				   											    			 btn_pub =true;
 				   											    			 btn_exam = false;
 				   											    			 btn_retrait = false;
 				   											    			 btn_valid = false;
-				   															 panel1 =false;
-				   															 panel2 =false;
-				   															 panel3 = false;
-				   															 panel4 = false;
-				   															 panel5 = false;
-				   															 panel6 = false;
-				   															 panel7 = true;
-				   															 panel8 = false;
-				   															 panel9 =false;
-				   															 panel10 = false;
-				   															 panel11 = false;
-				   															 panel12 = false;
+				   											    			panel1 =true;
+																			 panel2 =false;
+																			 panel3 = false;
+																			/* panel4 = false;
+																			 panel5 = false;
+																			 panel6 = false;
+																			 panel7 = false;
+																			 panel8 = true;
+																			 panel9 = false;
+																			 panel10 = false;
+																			 panel11 = false;
+																			 panel12 = false;*/
 				   															 venteRecherche = false; 
 				   															 affectationRecherche = false;
 				   															 examenRecherche = false;
@@ -1816,27 +1847,28 @@ public class ControleController {
 				   															 btn_fermer_saisie_prq = false;   
 				   				    								   }else
 				   				    									     if(action.equalsIgnoreCase("TRAAMI")) {
-				   				    									    	 type = "AMI";
-				   												    			 libelle1="Index";
-				   												    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
-				   												    			 libelleDao1 ="PREVALIDATION DU DAC PAR LA CELLULE";
+				   				    									    	type = "AMI";
+				   				    										    typePlan ="PN";
+				   				    										     libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
+				   												    			 libelleDao3="TRANSMISSION DU DAC PAR LA CELLULE";
+				   												    			 libelleDao1 ="TRANSMISSION DU DAC PAR LA CELLULE";
 				   												    			 btn_new =false;
 				   												    			 btn_affec = false;
 				   												    			 btn_exam = false;
 				   												    			 btn_retrait = false;
 				   												    			 btn_valid = false;
-				   																 panel1 =false;
-				   																 panel2 =false;
-				   																 panel3 = false;
-				   																 panel4 = false;
-				   																 panel5 = false;
-				   																 panel6 = false;
-				   																 panel7 = false;
-				   																 panel8 = true;
-				   																 panel9 = false;
-				   																 panel10 = false;
-				   																 panel11 = false;
-				   																 panel12 = false;
+				   												    			panel1 =true;
+																				 panel2 =false;
+																				 panel3 = false;
+																				/* panel4 = false;
+																				 panel5 = false;
+																				 panel6 = false;
+																				 panel7 = false;
+																				 panel8 = true;
+																				 panel9 = false;
+																				 panel10 = false;
+																				 panel11 = false;
+																				 panel12 = false;*/
 				   																 affDao=false;
 				   																 exaDao=false;
 				   																 retDao = true;
@@ -1882,26 +1914,27 @@ public class ControleController {
 				   																 btn_fermer_saisie_prq = false; 
 				   				    									     }else
 				   				    									    	 if(action.equalsIgnoreCase("RETAMI")) {
-				   								    							     type = "AMI";
-				   													    			 libelle1="Index";
+				   				    									    		type = "AMI";
+				   				    											    typePlan ="PN";
+				   				    											    libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   													    			 libelleDao3="RETRAIT DES AVIS A MANIFESTATION D'INTERET 5AMI)";
 				   													    			 btn_new =false;
 				   													    			 btn_affec = false;
 				   													    			 btn_exam = false;
 				   													    			 btn_retrait = true;
 				   													    			 btn_valid = false;
-				   																	 panel1 =false;
-				   																	 panel2 =false;
-				   																	 panel3 = false;
-				   																	 panel4 = false;
-				   																	 panel5 = false;
-				   																	 panel6 = false;
-				   																	 panel7 = false;
-				   																	 panel8 = false;
-				   																	 panel9 = false;
-				   																	 panel10 =false;
-				   																	 panel11 = true;
-				   																	 panel12 = false;
+				   													    			panel1 =true;
+																					 panel2 =false;
+																					 panel3 = false;
+																					/* panel4 = false;
+																					 panel5 = false;
+																					 panel6 = false;
+																					 panel7 = false;
+																					 panel8 = true;
+																					 panel9 = false;
+																					 panel10 = false;
+																					 panel11 = false;
+																					 panel12 = false;*/
 				   																	 affDao=false;
 				   																	 exaDao=false;
 				   																	 retDao = true;
@@ -1947,27 +1980,29 @@ public class ControleController {
 				   																	 btn_fermer_saisie_prq = false;  
 				   								    						   }else
 				   					    									    	 if(action.equalsIgnoreCase("OBSAMI")) {
-				   									    							     type = "AMI";
-				   														    			 libelle1="Index";
+				   					    									    		type = "AMI";
+				   					    											    typePlan ="PN";
+				   					    											    libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   														    			 libellesmall=" ";
 				   														    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
+				   														    			fonctionalite="listeDaoCorrectionPn";
 				   														    			 btn_new =false;
 				   														    			 btn_affec = false;
 				   														    			 btn_exam = false;
 				   														    			 btn_retrait = true;
 				   														    			 btn_valid = false;
-				   																		 panel1 =false;
-				   																		 panel2 =false;
-				   																		 panel3 = false;
-				   																		 panel4 = false;
-				   																		 panel5 = false;
-				   																		 panel6 = false;
-				   																		 panel7 = false;
-				   																		 panel8 = false;
-				   																		 panel9 = false;
-				   																		 panel10 =false;
-				   																		 panel11 = false;
-				   																		 panel12 = true;
+				   														    			panel1 =true;
+																						 panel2 =false;
+																						 panel3 = false;
+																						/* panel4 = false;
+																						 panel5 = false;
+																						 panel6 = false;
+																						 panel7 = false;
+																						 panel8 = true;
+																						 panel9 = false;
+																						 panel10 = false;
+																						 panel11 = false;
+																						 panel12 = false;*/
 				   																		 venteRecherche = false; 
 				   																		 affectationRecherche = false;
 				   																		 examenRecherche = false;
@@ -2028,7 +2063,7 @@ public class ControleController {
 				 typePlan ="PN";
 				  type = "DAC";
 				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
-			       libelle1="LISTE DES DOSSIERS D'APPEL A CONCURRENCE (DAC)";
+				  libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 			       libellesmall ="Saisie d'un nouveau DAC";
 			       panelDetail=false;
 				   panelForm=true;
@@ -2036,8 +2071,9 @@ public class ControleController {
 			       panelRegister=true;
 			       panelUpdate=false;
 			       btn_fermer_saisie_dao = true;
-			       btn_fermer_saisie_ami = false ;
-			       btn_fermer_saisie_prq = false  ;                     
+   			       btn_fermer_saisie_daoPs =false;
+   			       btn_fermer_saisie_ami = false ;
+   			       btn_fermer_saisie_prq = false;                     
 			    }else 
 			    	if(action.equalsIgnoreCase("MODDAO")) {
 			    		typePlan ="PN";
@@ -2060,15 +2096,24 @@ public class ControleController {
 			    		if(action.equalsIgnoreCase("SAIDAO")) {
 			    			typePlan ="PN";
 			    			type = "DAC";
-			    			libelle1="Index";
+			    			fonctionalite = "listSaisieAc";
+			    			libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
+			    			libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
-			    			libelle1="Procédure Normale";
+			    			btn_daoPn =true;
+			    			btn_daoPs =false;
+			    			btn_ami =false;
+			    			btn_prq =false;
 			    			 btn_new =true;
 			    			 btn_affec = false;
-							 panel1 =true;
+			    			 saisie=true;
+			    			 publication=false;
+			    			 vente=false;
+			    			 correction=false;
+			    			 panel1 =true;
 							 panel2 =false;
-							 panel3 =false;
-							 panel4 = false;
+							 panel3 = false;
+						/*	 panel4 = false;
 							 panel5 =false;
 							 panel6 =false;
 							 panel7=false;
@@ -2076,7 +2121,7 @@ public class ControleController {
 							 panel9 = false;
 							 panel10 = false;
 							 panel11 = false;
-							 panel12 = false;
+							 panel12 = false;*/
 							 venteRecherche = false; 
 							 affectationRecherche = false;
 							 examenRecherche = false;
@@ -2137,15 +2182,19 @@ public class ControleController {
 				    		if(action.equalsIgnoreCase("DAOPS")) {
 				    			typePlan ="PN";
 				    			type = "DAO";
-				    			libelle1="Index";
+				    			libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 				    			 libelleDao3="SAISIE DES DOSSIERS D'APPEL D'OFFRES";
-				    			 libellesmall ="Procédure Simplifiée";
+				    			 libellesmall ="Procédure Normale";
 				    			 btn_new =true;
 				    			 btn_affec = false;
-								 panel1 =false;
+				    			 saisie=true;
+				    			 publication=false;
+				    			 vente=false;
+				    			  correction=false;
+				    			 panel1 =true;
 								 panel2 =false;
-								 panel3 =false;
-								 panel4 = false;
+								 panel3 = false;
+								/* panel4 = false;
 								 panel5 =false;
 								 panel6 =false;
 								 panel7=false;
@@ -2153,7 +2202,7 @@ public class ControleController {
 								 panel9 = false;
 								 panel10 = true;
 								 panel11 = false;
-								 panel12 = false;
+								 panel12 = false;*/
 								 panelDaoTableauBordSai = false;
 								 panelDaoTableauBordPslpso = true;
 								 panelDaoTableauBordVal = false;
@@ -2206,19 +2255,25 @@ public class ControleController {
 			    			    if(action.equalsIgnoreCase("VALDAO")) {
 			    			    typePlan ="PN";
 			    				type = "DAC";
+			    				fonctionalite ="listeValidationCsv";
+			    				libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 			    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
-			    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
+			    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL A CONCURRENCE";
 			    				panelDetail=false;
 			    				panelForm=false;
 			   				    panelTraitement=true;
 			    				btn_new =false;
+			    				 saisie=false;
+				    			 publication=false;
+				    			 vente=false;
+				    			  correction=false;
 			    				btn_affec = false;
 			    				btn_retrait = false;
 			    				btn_valid = true;
-								panel1 =false;
-								panel2 =true;
-								panel3 =false;
-								panel4 =false;
+			    				panel1 =true;
+								panel2 =false;
+								panel3 = false;
+							/*	panel4 =false;
 								panel5 =false;
 								panel6=false;
 								panel7 = false;
@@ -2226,7 +2281,7 @@ public class ControleController {
 								panel9 = false;
 								panel10=false;
 								panel11 = false;
-								panel12 = false;
+								panel12 = false;*/
 								venteRecherche = false; 
 								affectationRecherche = false;
 								examenRecherche = false;
@@ -2298,16 +2353,17 @@ public class ControleController {
 				    				 if(action.equalsIgnoreCase("AFFDAO")) {
 				    					 typePlan ="PN";
 				    				        type = "DAC";
-							    			libelle1="Index";
+				    				        fonctionalite ="listeAffectationCsv";
+				    				        libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 							    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
 							    			 btn_new =false;
 							    			 btn_affec = true;
 							    			 btn_retrait = false;
 							    			 btn_valid = false;
-											 panel1 =false;
+							    			 panel1 =true;
 											 panel2 =false;
-											 panel3 = true;
-											 panel4 = false;
+											 panel3 = false;
+									/*		 panel4 = false;
 											 panel5 = false;
 											 panel6=false;
 											 panel7 = false;
@@ -2315,7 +2371,7 @@ public class ControleController {
 											 panel9 = false;
 											 panel10 = false;
 											 panel11 = false;
-											 panel12 = false;
+											 panel12 = false;*/
 											 venteRecherche = false; 
 											 affectationRecherche = true;
 											 examenRecherche = false;
@@ -2372,16 +2428,20 @@ public class ControleController {
 				    					  if(action.equalsIgnoreCase("EXADAO")) {
 				    						  typePlan ="PN";
 				    						     type = "DAC";
-								    			 libelle1="Index";
+				    						     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
 								    			 btn_new =false;
 								    			 btn_affec = false;
+								    			 saisie=false;
+								    			 publication=false;
+								    			 vente=false;
+								    			  correction=false;
 								    			 btn_exam = true;
 								    			 btn_valid = false;
-												 panel1 =false;
+								    			 panel1 =true;
 												 panel2 =false;
 												 panel3 = false;
-												 panel4 = true;
+											/*	 panel4 = true;
 												 panel5 = false;
 												 panel6 = false;
 												 panel7=false;
@@ -2389,7 +2449,7 @@ public class ControleController {
 												 panel9 =false;
 												 panel10 = false;
 												 panel11 = false;
-												 panel12 = false;
+												 panel12 = false;*/
 												 venteRecherche = false; 
 												 affectationRecherche = false;
 												 examenRecherche = true;
@@ -2446,17 +2506,22 @@ public class ControleController {
 				    							   typePlan ="PN";
 				    							     type = "DAC";
 				    							     libelle="VENTE / RETRAIT DU DAC N°";
-									    			 libelle1="Index";
+				    							     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 									    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A CONCURRENCE";
+									    			 fonctionalite="listeDaoVentePn";
 									    			 btn_new =false;
 									    			 btn_affec = false;
 									    			 btn_exam = false;
 									    			 btn_retrait = true;
 									    			 btn_valid = false;
-													 panel1 =false;
+									    			 saisie=false;
+									    			 publication=false;
+									    			 vente=true;
+									    			  correction=false;
+									    			 panel1 =true;
 													 panel2 =false;
 													 panel3 = false;
-													 panel4 = false;
+												/*	 panel4 = false;
 													 panel5 = false;
 													 panel6 = false;
 													 panel7 = false;
@@ -2464,7 +2529,7 @@ public class ControleController {
 													 panel9 =true;
 													 panel10 = false;
 													 panel11 = false;
-													 panel12 = false;
+													 panel12 = false;*/
 													 venteRecherche = true; 
 													 affectationRecherche = false;
 													 examenRecherche = false;
@@ -2521,17 +2586,21 @@ public class ControleController {
 				    							   if(action.equalsIgnoreCase("CHADAO")) {
 				    								     typePlan ="PN";
 				    								     type = "DAC";
-										    			 libelle1="Index";
+				    								     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 										    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
 										    			 btn_new =false;
 										    			 btn_affec = false;
 										    			 btn_exam = false;
 										    			 btn_retrait = false;
 										    			 btn_valid = false;
+										    			 saisie=false;
+										    			 publication=false;
+										    			 vente=false;
+										    			  correction=false;
 														 panel1 =false;
 														 panel2 =false;
-														 panel3 = false;
-														 panel4 = false;
+														 panel3 = true;
+														 /*panel4 = false;
 														 panel5 = false;
 														 panel6 = true;
 														 panel7 =false;
@@ -2539,7 +2608,7 @@ public class ControleController {
 														 panel9 =false;
 														 panel10 = false;
 														 panel11 = false;
-														 panel12 = false;
+														 panel12 = false;*/
 														 venteRecherche = false; 
 														 affectationRecherche = false;
 														 examenRecherche = false;
@@ -2597,17 +2666,23 @@ public class ControleController {
 				    								   if(action.equalsIgnoreCase("PUBDAO")) {
 				    									    typePlan ="PN";
 				    									     type = "DAC";
-											    			 libelle1="Index";
+				    									     fonctionalite="ListePubDacPn";
+				    									     btn_pub =true;
+				    									     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 											    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
 											    			 btn_new =false;
 											    			 btn_affec = false;
 											    			 btn_exam = false;
 											    			 btn_retrait = false;
 											    			 btn_valid = false;
-															 panel1 =false;
+											    			 saisie=false;
+											    			 publication=true;
+											    			 vente=false;
+											    			  correction=false;
+											    			 panel1 =true;
 															 panel2 =false;
 															 panel3 = false;
-															 panel4 = false;
+														/*	 panel4 = false;
 															 panel5 = false;
 															 panel6 = false;
 															 panel7 = true;
@@ -2615,7 +2690,7 @@ public class ControleController {
 															 panel9 =false;
 															 panel10 = false;
 															 panel11 = false;
-															 panel12 = false;
+															 panel12 = false;*/
 															 venteRecherche = false; 
 															 affectationRecherche = false;
 															 examenRecherche = false;
@@ -2672,18 +2747,22 @@ public class ControleController {
 				    									     if(action.equalsIgnoreCase("TRADAO")) {
 				    									    	 typePlan ="PN";
 				    									    	 type = "DAC";
-												    			 libelle1="Index";
-												    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
-												    			 libelleDao1 ="PREVALIDATION DU DAC PAR LA CELLULE";
+				    									    	 libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
+												    			 libelleDao3="TRANSMISSION DU DAC PAR LA CELLULE";
+												    			 libelleDao1 ="TRANSMISSION DU DAC PAR LA CELLULE";
 												    			 btn_new =false;
 												    			 btn_affec = false;
 												    			 btn_exam = false;
 												    			 btn_retrait = false;
 												    			 btn_valid = false;
-																 panel1 =false;
+												    			 saisie=false;
+												    			 publication=false;
+												    			 vente=false;
+												    			  correction=false;
+												    			 panel1 =true;
 																 panel2 =false;
 																 panel3 = false;
-																 panel4 = false;
+															/*	 panel4 = false;
 																 panel5 = false;
 																 panel6 = false;
 																 panel7 = false;
@@ -2691,7 +2770,7 @@ public class ControleController {
 																 panel9 = false;
 																 panel10 = false;
 																 panel11 = false;
-																 panel12 = false;
+																 panel12 = false;*/
 																 affDao=false;
 																 exaDao=false;
 																 retDao = true;
@@ -2739,17 +2818,21 @@ public class ControleController {
 				    									    	 if(action.equalsIgnoreCase("RETDAO")) {
 				    									    		 typePlan ="PN";
 								    							     type = "DAO";
-													    			 libelle1="Index";
+								    							     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 													    			 libelleDao3="RETRAIT DES DOSSIERS D'APPEL D'OFFRES";
 													    			 btn_new =false;
 													    			 btn_affec = false;
 													    			 btn_exam = false;
 													    			 btn_retrait = true;
 													    			 btn_valid = false;
-																	 panel1 =false;
+													    			 saisie=false;
+													    			 publication=false;
+													    			 vente=true;
+													    			  correction=false;
+													    			 panel1 =true;
 																	 panel2 =false;
 																	 panel3 = false;
-																	 panel4 = false;
+																/*	 panel4 = false;
 																	 panel5 = false;
 																	 panel6 = false;
 																	 panel7 = false;
@@ -2757,7 +2840,7 @@ public class ControleController {
 																	 panel9 = false;
 																	 panel10 =false;
 																	 panel11 = true;
-																	 panel12 = false;
+																	 panel12 = false;*/
 																	 affDao=false;
 																	 exaDao=false;
 																	 retDao = true;
@@ -2805,7 +2888,7 @@ public class ControleController {
 					    									    	 if(action.equalsIgnoreCase("OBSDAO")) {
 					    									    		 typePlan ="PN";
 									    							     type = "DAC";
-														    			 libelle1="Procédure Normale";
+									    							     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 														    			 libellesmall="Procédure Normale";
 														    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
 														    			 btn_new =false;
@@ -2813,10 +2896,15 @@ public class ControleController {
 														    			 btn_exam = false;
 														    			 btn_retrait = true;
 														    			 btn_valid = false;
-																		 panel1 =false;
+														    			 fonctionalite="listeDaoCorrectionPn";
+														    			 saisie=false;
+														    			 publication=false;
+														    			 vente=false;
+														    			  correction=true;
+														    			 panel1 =true;
 																		 panel2 =false;
 																		 panel3 = false;
-																		 panel4 = false;
+																/*		 panel4 = false;
 																		 panel5 = false;
 																		 panel6 = false;
 																		 panel7 = false;
@@ -2824,7 +2912,7 @@ public class ControleController {
 																		 panel9 = false;
 																		 panel10 =false;
 																		 panel11 = false;
-																		 panel12 = true;
+																		 panel12 = true;*/
 																		 venteRecherche = false; 
 																		 affectationRecherche = false;
 																		 examenRecherche = false;
@@ -2882,16 +2970,17 @@ public class ControleController {
 				                                                        	  typePlan ="PS";
 				                                                        	  type = "DAC";
 				                                            				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
-				                                            			       libelle1="LISTE DES DOSSIERS D'APPEL A CONCURRENCE (DAC)";
+				                                            				  libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 				                                            			       libellesmall ="Procédure Simplifiée";
 				                                            			       panelDetail=false;
 				                                            				   panelForm=true;
 				                                            				   panelTraitement=false;
 				                                            			       panelRegister=true;
 				                                            			       panelUpdate=false;
-				                                            			       btn_fermer_saisie_dao = true;
-				                                            			       btn_fermer_saisie_ami = false ;
-				                                            			       btn_fermer_saisie_prq = false  ;                      
+				                                            			       btn_fermer_saisie_dao = false;
+				                            				   			       btn_fermer_saisie_daoPs =true;
+				                            				   			       btn_fermer_saisie_ami = false ;
+				                            				   			       btn_fermer_saisie_prq = false;                    
 										    							    }else 
 										    							    	if(action.equalsIgnoreCase("MODDPS")) {
 										    							    		typePlan ="PS";
@@ -2911,15 +3000,23 @@ public class ControleController {
 							    									    	        if(action.equalsIgnoreCase("SAIDPS")) {
 							    									    	        	typePlan ="PS";
 							    									    	        	type = "DAC";
-							    										    			libelle1="Index";
+							    									    	        	libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 							    										    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
 							    										    			libelleSmall="Procédure Simplifiée";
+							    										    			btn_daoPn =false;
+							    										    			btn_daoPs =true;
+							    										    			btn_ami =false;
+							    										    			btn_prq =false;
 							    										    			 btn_new =true;
 							    										    			 btn_affec = false;
-							    														 panel1 =true;
+							    										    			 btn_fermer_saisie_dao = false;
+							    										    			 btn_fermer_saisie_daoPs = true;
+							    														 btn_fermer_saisie_ami = false ;
+							    														 btn_fermer_saisie_prq = false  ;
+							    										    			 panel1 =true;
 							    														 panel2 =false;
-							    														 panel3 =false;
-							    														 panel4 = false;
+							    														 panel3 = false;
+							    													/*	 panel4 = false;
 							    														 panel5 =false;
 							    														 panel6 =false;
 							    														 panel7=false;
@@ -2927,7 +3024,7 @@ public class ControleController {
 							    														 panel9 = false;
 							    														 panel10 = false;
 							    														 panel11 = false;
-							    														 panel12 = false;
+							    														 panel12 = false;*/
 							    														 venteRecherche = false; 
 							    														 affectationRecherche = false;
 							    														 examenRecherche = false;
@@ -2987,8 +3084,9 @@ public class ControleController {
 								    									    	 if(action.equalsIgnoreCase("VALDPS")) {
 								    									    		   typePlan ="PS";
 								    									    		   type = "DAC";
+								    									    		   libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
-								    								    				libelleDao1="PREVALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
+								    								    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL A CONCURRENCE";
 								    								    				libelleSmall="Procédure Simplifiée";
 								    								    				panelDetail=false;
 								    								    				panelForm=false;
@@ -2997,10 +3095,10 @@ public class ControleController {
 								    								    				btn_affec = false;
 								    								    				btn_retrait = false;
 								    								    				btn_valid = true;
-								    													panel1 =false;
-								    													panel2 =true;
-								    													panel3 =false;
-								    													panel4 =false;
+								    								    				panel1 =true;
+								    													panel2 =false;
+								    													panel3 = false;
+								    												/*	panel4 =false;
 								    													panel5 =false;
 								    													panel6=false;
 								    													panel7 = false;
@@ -3008,7 +3106,7 @@ public class ControleController {
 								    													panel9 = false;
 								    													panel10=false;
 								    													panel11 = false;
-								    													panel12 = false;
+								    													panel12 = false;*/
 								    													venteRecherche = false; 
 								    													affectationRecherche = false;
 								    													examenRecherche = false;
@@ -3076,7 +3174,7 @@ public class ControleController {
 									    									    	  if(action.equalsIgnoreCase("CHADPS")) {
 									    									    		  typePlan ="PS";
 									    									    		  type = "DAC";
-																			    			 libelle1="Index";
+									    									    		  libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
 																			    			 libelleSmall="Procédure Simplifiée";
 																			    			 btn_new =false;
@@ -3084,10 +3182,10 @@ public class ControleController {
 																			    			 btn_exam = false;
 																			    			 btn_retrait = false;
 																			    			 btn_valid = false;
-																							 panel1 =false;
+																			    			 panel1 =true;
 																							 panel2 =false;
 																							 panel3 = false;
-																							 panel4 = false;
+																						/*	 panel4 = false;
 																							 panel5 = false;
 																							 panel6 = true;
 																							 panel7 =false;
@@ -3095,7 +3193,7 @@ public class ControleController {
 																							 panel9 =false;
 																							 panel10 = false;
 																							 panel11 = false;
-																							 panel12 = false;
+																							 panel12 = false;*/
 																							 venteRecherche = false; 
 																							 affectationRecherche = false;
 																							 examenRecherche = false;
@@ -3152,17 +3250,17 @@ public class ControleController {
 										    									    	 if(action.equalsIgnoreCase("EXADPS")) {
 										    									    		 typePlan ="PS";
 										    									    		 type = "DAC";
-										    								    			 libelle1="Index";
+										    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 										    								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
 										    								    			 libelleSmall="Procédure Simplifiée";
 										    								    			 btn_new =false;
 										    								    			 btn_affec = false;
 										    								    			 btn_exam = true;
 										    								    			 btn_valid = false;
-										    												 panel1 =false;
+										    								    			 panel1 =true;
 										    												 panel2 =false;
 										    												 panel3 = false;
-										    												 panel4 = true;
+										    											/*	 panel4 = true;
 										    												 panel5 = false;
 										    												 panel6 = false;
 										    												 panel7=false;
@@ -3170,7 +3268,7 @@ public class ControleController {
 										    												 panel9 =false;
 										    												 panel10 = false;
 										    												 panel11 = false;
-										    												 panel12 = false;
+										    												 panel12 = false;*/
 										    												 venteRecherche = false; 
 										    												 affectationRecherche = false;
 										    												 examenRecherche = true;
@@ -3225,18 +3323,19 @@ public class ControleController {
 														    							    
 														    						   }else
 											    									    	 if(action.equalsIgnoreCase("AFFDPS")) {
-											    									    		     type = "DAC";
-											    									    			 libelle1="Index";
+											    									    		 typePlan ="PS";
+											    									    		 type = "DAC";
+											    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 											    									    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
 											    									    			 libelleSmall="Procédure Simplifiée";
 											    									    			 btn_new =false;
 											    									    			 btn_affec = true;
 											    									    			 btn_retrait = false;
 											    									    			 btn_valid = false;
-											    													 panel1 =false;
+											    									    			 panel1 =true;
 											    													 panel2 =false;
-											    													 panel3 = true;
-											    													 panel4 = false;
+											    													 panel3 = false;
+											    											/*		 panel4 = false;
 											    													 panel5 = false;
 											    													 panel6=false;
 											    													 panel7 = false;
@@ -3244,7 +3343,7 @@ public class ControleController {
 											    													 panel9 = false;
 											    													 panel10 = false;
 											    													 panel11 = false;
-											    													 panel12 = false;
+											    													 panel12 = false;*/
 											    													 venteRecherche = false; 
 											    													 affectationRecherche = true;
 											    													 examenRecherche = false;
@@ -3300,19 +3399,22 @@ public class ControleController {
 															    							     
 															    						   }else
 												    									    	 if(action.equalsIgnoreCase("PUBDPS")) {
+												    									    		 typePlan ="PS";
 												    									    		 type = "DAC";
-																					    			 libelle1="Index";
+												    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 																					    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
 																					    			 libelleSmall="Procédure Simplifiée";
+																					    			 fonctionalite =" ListePubDacPn";
 																					    			 btn_new =false;
+																					    			 btn_pub =true;
 																					    			 btn_affec = false;
 																					    			 btn_exam = false;
 																					    			 btn_retrait = false;
 																					    			 btn_valid = false;
-																									 panel1 =false;
+																					    			 panel1 =true;
 																									 panel2 =false;
 																									 panel3 = false;
-																									 panel4 = false;
+																									/* panel4 = false;
 																									 panel5 = false;
 																									 panel6 = false;
 																									 panel7 = true;
@@ -3320,7 +3422,7 @@ public class ControleController {
 																									 panel9 =false;
 																									 panel10 = false;
 																									 panel11 = false;
-																									 panel12 = false;
+																									 panel12 = false;*/
 																									 venteRecherche = false; 
 																									 affectationRecherche = false;
 																									 examenRecherche = false;
@@ -3376,9 +3478,11 @@ public class ControleController {
 						  
 																    						   }else
 													    									    	 if(action.equalsIgnoreCase("VETDPS")) {
+													    									    		 typePlan ="PS";
 													    									    		 type = "DAC";
+													    									    		 fonctionalite="listeDaoVentePn";
+													    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 																	    							     libelle="VENTE / RETRAIT DU DAC N°";
-																						    			 libelle1="Index";
 																						    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A CONCURRENCE";
 																						    			 libelleSmall="Procédure Simplifiée";
 																						    			 btn_new =false;
@@ -3386,10 +3490,10 @@ public class ControleController {
 																						    			 btn_exam = false;
 																						    			 btn_retrait = true;
 																						    			 btn_valid = false;
-																										 panel1 =false;
+																						    			 panel1 =true;
 																										 panel2 =false;
 																										 panel3 = false;
-																										 panel4 = false;
+																										/* panel4 = false;
 																										 panel5 = false;
 																										 panel6 = false;
 																										 panel7 = false;
@@ -3397,7 +3501,7 @@ public class ControleController {
 																										 panel9 =true;
 																										 panel10 = false;
 																										 panel11 = false;
-																										 panel12 = false;
+																										 panel12 = false;*/
 																										 venteRecherche = true; 
 																										 affectationRecherche = false;
 																										 examenRecherche = false;
@@ -3453,20 +3557,21 @@ public class ControleController {
 																	    						  
 																	    						     }else
 														    									    	 if(action.equalsIgnoreCase("TRADPS")) {
+														    									    		 typePlan ="PS";
 														    									    		 type = "DAC";
-																							    			 libelle1="Index";
-																							    			 libelleDao3="PREVALIDATION DU DAC PAR LA CELLULE";
-																							    			 libelleDao1 ="PREVALIDATION DU DAC PAR LA CELLULE";
+														    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
+																							    			 libelleDao3="TRANSMISSION DU DAC PAR LA CELLULE";
+																							    			 libelleDao1 ="TRANSMISSION DU DAC PAR LA CELLULE";
 																							    			 libelleSmall="Procédure Simplifiée";
 																							    			 btn_new =false;
 																							    			 btn_affec = false;
 																							    			 btn_exam = false;
 																							    			 btn_retrait = false;
 																							    			 btn_valid = false;
-																											 panel1 =false;
+																											 panel1 =true;
 																											 panel2 =false;
 																											 panel3 = false;
-																											 panel4 = false;
+																											/* panel4 = false;
 																											 panel5 = false;
 																											 panel6 = false;
 																											 panel7 = false;
@@ -3474,7 +3579,7 @@ public class ControleController {
 																											 panel9 = false;
 																											 panel10 = false;
 																											 panel11 = false;
-																											 panel12 = false;
+																											 panel12 = false;*/
 																											 affDao=false;
 																											 exaDao=false;
 																											 retDao = true;
@@ -3520,8 +3625,9 @@ public class ControleController {
 																											 btn_fermer_saisie_prq = false; 
 																		    						      }else
 																    									      if(action.equalsIgnoreCase("RETDPS")) {
-																				    							     type = "DAO";
-																									    			 libelle1="Index";
+																    									    	  typePlan ="PS";
+																    									    		 type = "DAC";
+																    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 																									    			 libelleDao3="RETRAIT DES DOSSIERS D'APPEL A CONCURRENCE";
 																									    			 libelleSmall ="Procédure Simplifiée";
 																									    			 btn_new =false;
@@ -3529,18 +3635,18 @@ public class ControleController {
 																									    			 btn_exam = false;
 																									    			 btn_retrait = true;
 																									    			 btn_valid = false;
-																													 panel1 =false;
+																									    			 panel1 =true;
 																													 panel2 =false;
 																													 panel3 = false;
-																													 panel4 = false;
+																													/* panel4 = false;
 																													 panel5 = false;
 																													 panel6 = false;
 																													 panel7 = false;
-																													 panel8 = false;
+																													 panel8 = true;
 																													 panel9 = false;
-																													 panel10 =false;
-																													 panel11 = true;
-																													 panel12 = false;
+																													 panel10 = false;
+																													 panel11 = false;
+																													 panel12 = false;*/
 																													 affDao=false;
 																													 exaDao=false;
 																													 retDao = true;
@@ -3586,9 +3692,11 @@ public class ControleController {
 																													 btn_fermer_saisie_prq = false;  
 																				    						   }else
 																    									    	if(action.equalsIgnoreCase("OBSDPS")) {
+																    									    		 typePlan ="PS";
 																    									    		 type = "DAC";
-																									    			 libelle1="Index";
-																									    			 libellesmall="Procédure Normale";
+																    									    		 fonctionalite="listeDaoCorrectionPn";
+																    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
+																									    			 libellesmall="Procédure Simplifiéé";
 																									    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
 																									    			 libelleSmall="Procédure Simplifiée";
 																									    			 btn_new =false;
@@ -3596,18 +3704,18 @@ public class ControleController {
 																									    			 btn_exam = false;
 																									    			 btn_retrait = true;
 																									    			 btn_valid = false;
-																													 panel1 =false;
+																									    			 panel1 =true;
 																													 panel2 =false;
 																													 panel3 = false;
-																													 panel4 = false;
+																													/* panel4 = false;
 																													 panel5 = false;
 																													 panel6 = false;
 																													 panel7 = false;
-																													 panel8 = false;
+																													 panel8 = true;
 																													 panel9 = false;
-																													 panel10 =false;
+																													 panel10 = false;
 																													 panel11 = false;
-																													 panel12 = true;
+																													 panel12 = false;*/
 																													 venteRecherche = false; 
 																													 affectationRecherche = false;
 																													 examenRecherche = false;
@@ -3669,6 +3777,7 @@ public class ControleController {
 			                                                                                                    //PREQUALIFICATION
 																    									    	if(action.equalsIgnoreCase("ENGPRQ")) {
 																    												  type = "PRQ";
+																    												  typePlan ="PN";
 																    												  libelleDao1="SAISIE D'UN NOUVELLE PREQUALIFICATION (PRQ)";
 																    											       libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    											       libellesmall ="Saisie d'une nouvelle PRQ";
@@ -3677,9 +3786,10 @@ public class ControleController {
 																    												   panelTraitement=false;
 																    											       panelRegister=true;
 																    											       panelUpdate=false;
-																    											       btn_fermer_saisie_dao = true;
-																    											       btn_fermer_saisie_ami = false ;
-																    											       btn_fermer_saisie_prq = false  ;                     
+																    											       btn_fermer_saisie_dao = false;
+																    								   			       btn_fermer_saisie_daoPs =false;
+																    								   			       btn_fermer_saisie_ami = false ;
+																    								   			       btn_fermer_saisie_prq = true;                      
 																    											    }else 
 																    											    	if(action.equalsIgnoreCase("MODPRQ")) {
 																    											    		type = "PRQ";
@@ -3699,24 +3809,30 @@ public class ControleController {
 																    													     btn_fermer_saisie_prq = false  ;
 																    											    	}else
 																    											    		if(action.equalsIgnoreCase("SAIPRQ")) {
-																    											    			type = "PRQ";
-																    											    			libelle1="Index";
+																    											    			 type = "PRQ";
+																			    												 typePlan ="PN";
+																			    												 fonctionalite = "listSaisieAc";
+																			    												 libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
+																			    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    											    			libelleDao3="SAISIE DES PREQUALIFICATIONS";
-																    											    			libelle1=" ";
+																    											    			btn_daoPn =false;
+																    											    			btn_daoPs =false;
+																    											    			btn_ami =false;
+																    											    			btn_prq =true;
 																    											    			 btn_new =true;
 																    											    			 btn_affec = false;
-																    															 panel1 =true;
-																    															 panel2 =false;
-																    															 panel3 =false;
-																    															 panel4 = false;
-																    															 panel5 =false;
-																    															 panel6 =false;
-																    															 panel7=false;
-																    															 panel8 =false;
-																    															 panel9 = false;
-																    															 panel10 = false;
-																    															 panel11 = false;
-																    															 panel12 = false;
+																    											    			 panel1 =true;
+																																 panel2 =false;
+																																 panel3 = false;
+																																/* panel4 = false;
+																																 panel5 = false;
+																																 panel6 = false;
+																																 panel7 = false;
+																																 panel8 = true;
+																																 panel9 = false;
+																																 panel10 = false;
+																																 panel11 = false;
+																																 panel12 = false;*/
 																    															 venteRecherche = false; 
 																    															 affectationRecherche = false;
 																    															 examenRecherche = false;
@@ -3775,24 +3891,25 @@ public class ControleController {
 																    															 
 																    											    		}else
 																    												    		if(action.equalsIgnoreCase("PRQPS")) {
-																    												    			type = "PRQ";
-																    												    			libelle1="Index";
+																    												    			 type = "PRQ";
+																				    												 typePlan ="PN";
+																				    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    												    			 libelleDao3="SAISIE DES PREQUALIFICATIONS";
 																    												    			 libellesmall ="";
 																    												    			 btn_new =true;
 																    												    			 btn_affec = false;
-																    																 panel1 =false;
-																    																 panel2 =false;
-																    																 panel3 =false;
-																    																 panel4 = false;
-																    																 panel5 =false;
-																    																 panel6 =false;
-																    																 panel7=false;
-																    																 panel8 =false;
-																    																 panel9 = false;
-																    																 panel10 = true;
-																    																 panel11 = false;
-																    																 panel12 = false;
+																    												    			 panel1 =true;
+																																	 panel2 =false;
+																																	 panel3 = false;
+																																	/* panel4 = false;
+																																	 panel5 = false;
+																																	 panel6 = false;
+																																	 panel7 = false;
+																																	 panel8 = true;
+																																	 panel9 = false;
+																																	 panel10 = false;
+																																	 panel11 = false;
+																																	 panel12 = false;*/
 																    																 panelDaoTableauBordSai = false;
 																    																 panelDaoTableauBordPslpso = true;
 																    																 panelDaoTableauBordVal = false;
@@ -3843,9 +3960,11 @@ public class ControleController {
 																    																 
 																    												    		}else
 																    											    			    if(action.equalsIgnoreCase("VALPRQ")) {
-																    											    				type = "PRQ";
+																    											    			    	 type = "PRQ";
+																					    												 typePlan ="PN";
+																					    												
 																    											    				libelleDao3="VALIDATION DES PREQUALIFICATIONS";
-																    											    				libelleDao1="PREVALIDATION DES PREQUALIFICATIONS";
+																    											    				libelleDao1="TRANSMISSION DES PREQUALIFICATIONS";
 																    											    				panelDetail=false;
 																    											    				panelForm=false;
 																    											   				    panelTraitement=true;
@@ -3853,18 +3972,18 @@ public class ControleController {
 																    											    				btn_affec = false;
 																    											    				btn_retrait = false;
 																    											    				btn_valid = true;
-																    																panel1 =false;
-																    																panel2 =true;
-																    																panel3 =false;
-																    																panel4 =false;
-																    																panel5 =false;
-																    																panel6=false;
-																    																panel7 = false;
-																    																panel8 = false;
-																    																panel9 = false;
-																    																panel10=false;
-																    																panel11 = false;
-																    																panel12 = false;
+																    											    				panel1 =true;
+																																	 panel2 =false;
+																																	 panel3 = false;
+																																	/* panel4 = false;
+																																	 panel5 = false;
+																																	 panel6 = false;
+																																	 panel7 = false;
+																																	 panel8 = true;
+																																	 panel9 = false;
+																																	 panel10 = false;
+																																	 panel11 = false;
+																																	 panel12 = false;*/
 																    																venteRecherche = false; 
 																    																affectationRecherche = false;
 																    																examenRecherche = false;
@@ -3909,7 +4028,8 @@ public class ControleController {
 																    																btn_fermer_saisie_dao = true;
 																    											    			}else
 																    												    			if(action.equalsIgnoreCase("APEPRQ")) {
-																    												    				type = "PRQ";
+																    												    				 type = "PRQ";
+																					    												 typePlan ="PN";
 																    												    				libelleDao3="DETAILS DU";
 																    												    				etat_dao =false;
 																    												    				etat_prq =true;
@@ -3933,25 +4053,26 @@ public class ControleController {
 																    																	fermerApercuPrq = false;
 																    												    			}else
 																    												    				 if(action.equalsIgnoreCase("AFFPRQ")) {
-																    												    				        type = "PRQ";
-																    															    			libelle1="Index";
+																    												    					 type = "PRQ";
+																						    												 typePlan ="PN";
+																						    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    															    			 libelleDao3="AFFECTATION DES PREQUALIFICATIONS (PRQ)";
 																    															    			 btn_new =false;
 																    															    			 btn_affec = true;
 																    															    			 btn_retrait = false;
 																    															    			 btn_valid = false;
-																    																			 panel1 =false;
-																    																			 panel2 =false;
-																    																			 panel3 = true;
-																    																			 panel4 = false;
-																    																			 panel5 = false;
-																    																			 panel6=false;
-																    																			 panel7 = false;
-																    																			 panel8 = false;
-																    																			 panel9 = false;
-																    																			 panel10 = false;
-																    																			 panel11 = false;
-																    																			 panel12 = false;
+																    															    			 panel1 =true;
+																																				 panel2 =false;
+																																				 panel3 = false;
+																																				/* panel4 = false;
+																																				 panel5 = false;
+																																				 panel6 = false;
+																																				 panel7 = false;
+																																				 panel8 = true;
+																																				 panel9 = false;
+																																				 panel10 = false;
+																																				 panel11 = false;
+																																				 panel12 = false;*/
 																    																			 venteRecherche = false; 
 																    																			 affectationRecherche = true;
 																    																			 examenRecherche = false;
@@ -4006,25 +4127,26 @@ public class ControleController {
 																    																			 btn_fermer_saisie_prq = false; 
 																    												    				 }else
 																    												    					  if(action.equalsIgnoreCase("EXAPRQ")) {
-																    												    						     type = "PRQ";
-																    																    			 libelle1="Index";
+																    												    						  type = "PRQ";
+																								    												 typePlan ="PN";
+																								    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    																    			 libelleDao3="EXAMEN DES PREQUALIFICATIONS";
 																    																    			 btn_new =false;
 																    																    			 btn_affec = false;
 																    																    			 btn_exam = true;
 																    																    			 btn_valid = false;
-																    																				 panel1 =false;
-																    																				 panel2 =false;
-																    																				 panel3 = false;
-																    																				 panel4 = true;
-																    																				 panel5 = false;
-																    																				 panel6 = false;
-																    																				 panel7=false;
-																    																				 panel8 =false;
-																    																				 panel9 =false;
-																    																				 panel10 = false;
-																    																				 panel11 = false;
-																    																				 panel12 = false;
+																    																    			 panel1 =true;
+																																					 panel2 =false;
+																																					 panel3 = false;
+																																					/* panel4 = false;
+																																					 panel5 = false;
+																																					 panel6 = false;
+																																					 panel7 = false;
+																																					 panel8 = true;
+																																					 panel9 = false;
+																																					 panel10 = false;
+																																					 panel11 = false;
+																																					 panel12 = false;*/
 																    																				 venteRecherche = false; 
 																    																				 affectationRecherche = false;
 																    																				 examenRecherche = true;
@@ -4078,27 +4200,29 @@ public class ControleController {
 																    																				 btn_fermer_saisie_prq = false; 
 																    												    					  }else
 																    												    						   if(action.equalsIgnoreCase("VETPRQ")) {
-																    												    							     type = "PRQ";
+																    												    							   type = "PRQ";
+																									    												 typePlan ="PN";
+																									    												 fonctionalite="listeDaoVentePn";
+																									    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    												    							     libelle="VENTE / RETRAIT DU PRQ N°";
-																    																	    			 libelle1="Index";
 																    																	    			 libelleDao3="VENTE DES PREQUALIFICATIONS (PRQ)";
 																    																	    			 btn_new =false;
 																    																	    			 btn_affec = false;
 																    																	    			 btn_exam = false;
 																    																	    			 btn_retrait = true;
 																    																	    			 btn_valid = false;
-																    																					 panel1 =false;
-																    																					 panel2 =false;
-																    																					 panel3 = false;
-																    																					 panel4 = false;
-																    																					 panel5 = false;
-																    																					 panel6 = false;
-																    																					 panel7 = false;
-																    																					 panel8 = false;
-																    																					 panel9 =true;
-																    																					 panel10 = false;
-																    																					 panel11 = false;
-																    																					 panel12 = false;
+																    																	    			 panel1 =true;
+																																						 panel2 =false;
+																																						 panel3 = false;
+																																						/* panel4 = false;
+																																						 panel5 = false;
+																																						 panel6 = false;
+																																						 panel7 = false;
+																																						 panel8 = true;
+																																						 panel9 = false;
+																																						 panel10 = false;
+																																						 panel11 = false;
+																																						 panel12 = false;*/
 																    																					 venteRecherche = true; 
 																    																					 affectationRecherche = false;
 																    																					 examenRecherche = false;
@@ -4153,26 +4277,27 @@ public class ControleController {
 																    																					 btn_fermer_saisie_prq = false;  
 																    												    						   }else
 																    												    							   if(action.equalsIgnoreCase("CHAPRQ")) {
-																    												    								     type = "PRQ";
-																    																		    			 libelle1="Index";
+																    												    								   type = "PRQ";
+																										    												 typePlan ="PN";
+																										    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    																		    			 libelleDao3="EXAMEN DES PREQUALIFICATIONS (PRQ)";
 																    																		    			 btn_new =false;
 																    																		    			 btn_affec = false;
 																    																		    			 btn_exam = false;
 																    																		    			 btn_retrait = false;
 																    																		    			 btn_valid = false;
-																    																						 panel1 =false;
-																    																						 panel2 =false;
-																    																						 panel3 = false;
-																    																						 panel4 = false;
-																    																						 panel5 = false;
-																    																						 panel6 = true;
-																    																						 panel7 =false;
-																    																						 panel8 =false;
-																    																						 panel9 =false;
-																    																						 panel10 = false;
-																    																						 panel11 = false;
-																    																						 panel12 = false;
+																    																		    			 panel1 =false;
+																																							 panel2 =false;
+																																							 panel3 = true;
+																																							/* panel4 = false;
+																																							 panel5 = false;
+																																							 panel6 = false;
+																																							 panel7 = false;
+																																							 panel8 = true;
+																																							 panel9 = false;
+																																							 panel10 = false;
+																																							 panel11 = false;
+																																							 panel12 = false;*/
 																    																						 venteRecherche = false; 
 																    																						 affectationRecherche = false;
 																    																						 examenRecherche = false;
@@ -4228,26 +4353,29 @@ public class ControleController {
 																    												    								   
 																    												    							   }else 
 																    												    								   if(action.equalsIgnoreCase("PUBPRQ")) {
-																    												    									     type = "PRQ";
-																    																			    			 libelle1="Index";
+																    												    									   type = "PRQ";
+																											    												 typePlan ="PN";
+																											    												 fonctionalite="ListePubDacPn";
+																											    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    																			    			 libelleDao3="PRQ EN ATTENTE DE PUBLICATION";
 																    																			    			 btn_new =false;
 																    																			    			 btn_affec = false;
 																    																			    			 btn_exam = false;
+																    																			    			 btn_pub =true;
 																    																			    			 btn_retrait = false;
 																    																			    			 btn_valid = false;
-																    																							 panel1 =false;
-																    																							 panel2 =false;
-																    																							 panel3 = false;
-																    																							 panel4 = false;
-																    																							 panel5 = false;
-																    																							 panel6 = false;
-																    																							 panel7 = true;
-																    																							 panel8 = false;
-																    																							 panel9 =false;
-																    																							 panel10 = false;
-																    																							 panel11 = false;
-																    																							 panel12 = false;
+																    																			    			 panel1 =true;
+																																								 panel2 =false;
+																																								 panel3 = false;
+																																								/* panel4 = false;
+																																								 panel5 = false;
+																																								 panel6 = false;
+																																								 panel7 = false;
+																																								 panel8 = true;
+																																								 panel9 = false;
+																																								 panel10 = false;
+																																								 panel11 = false;
+																																								 panel12 = false;*/
 																    																							 venteRecherche = false; 
 																    																							 affectationRecherche = false;
 																    																							 examenRecherche = false;
@@ -4303,26 +4431,27 @@ public class ControleController {
 																    												    								   }else
 																    												    									     if(action.equalsIgnoreCase("TRAPRQ")) {
 																    												    									    	 type = "PRQ";
-																    																				    			 libelle1="Index";
-																    																				    			 libelleDao3="PREVALIDATION DU PRQ PAR LA CELLULE";
-																    																				    			 libelleDao1 ="PREVALIDATION DU PRQ PAR LA CELLULE";
+																												    												 typePlan ="PN";
+																												    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
+																    																				    			 libelleDao3="TRANSMISSION DU PRQ PAR LA CELLULE";
+																    																				    			 libelleDao1 ="TRANSMISSION DU PRQ PAR LA CELLULE";
 																    																				    			 btn_new =false;
 																    																				    			 btn_affec = false;
 																    																				    			 btn_exam = false;
 																    																				    			 btn_retrait = false;
 																    																				    			 btn_valid = false;
-																    																								 panel1 =false;
-																    																								 panel2 =false;
-																    																								 panel3 = false;
-																    																								 panel4 = false;
-																    																								 panel5 = false;
-																    																								 panel6 = false;
-																    																								 panel7 = false;
-																    																								 panel8 = true;
-																    																								 panel9 = false;
-																    																								 panel10 = false;
-																    																								 panel11 = false;
-																    																								 panel12 = false;
+																    																				    			 panel1 =true;
+																																									 panel2 =false;
+																																									 panel3 = false;
+																																									/* panel4 = false;
+																																									 panel5 = false;
+																																									 panel6 = false;
+																																									 panel7 = false;
+																																									 panel8 = true;
+																																									 panel9 = false;
+																																									 panel10 = false;
+																																									 panel11 = false;
+																																									 panel12 = false;*/
 																    																								 affDao=false;
 																    																								 exaDao=false;
 																    																								 retDao = true;
@@ -4368,26 +4497,27 @@ public class ControleController {
 																    																								 btn_fermer_saisie_prq = false; 
 																    												    									     }else
 																    												    									    	 if(action.equalsIgnoreCase("RETPRQ")) {
-																    																    							     type = "PRQ";
-																    																					    			 libelle1="Index";
+																    												    									    		 type = "PRQ";
+																													    												 typePlan ="PN";
+																													    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    																					    			 libelleDao3="RETRAIT DES PREQUALIFICATIONS (PRQ)";
 																    																					    			 btn_new =false;
 																    																					    			 btn_affec = false;
 																    																					    			 btn_exam = false;
 																    																					    			 btn_retrait = true;
 																    																					    			 btn_valid = false;
-																    																									 panel1 =false;
-																    																									 panel2 =false;
-																    																									 panel3 = false;
-																    																									 panel4 = false;
-																    																									 panel5 = false;
-																    																									 panel6 = false;
-																    																									 panel7 = false;
-																    																									 panel8 = false;
-																    																									 panel9 = false;
-																    																									 panel10 =false;
-																    																									 panel11 = true;
-																    																									 panel12 = false;
+																    																					    			 panel1 =true;
+																																										 panel2 =false;
+																																										 panel3 = false;
+																																										/* panel4 = false;
+																																										 panel5 = false;
+																																										 panel6 = false;
+																																										 panel7 = false;
+																																										 panel8 = true;
+																																										 panel9 = false;
+																																										 panel10 = false;
+																																										 panel11 = false;
+																																										 panel12 = false;*/
 																    																									 affDao=false;
 																    																									 exaDao=false;
 																    																									 retDao = true;
@@ -4433,27 +4563,29 @@ public class ControleController {
 																    																									 btn_fermer_saisie_prq = false;  
 																    																    						   }else
 																    													    									    	 if(action.equalsIgnoreCase("OBSPRQ")) {
-																    																	    							     type = "PRQ";
-																    																						    			 libelle1="Index";
+																    													    									    		 type = "PRQ";
+																														    												 typePlan ="PN";
+																														    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    																						    			 libellesmall=" ";
 																    																						    			 libelleDao3="PRISE EN COMPTE DES OBSERVATIONS";
 																    																						    			 btn_new =false;
+																    																						    			 fonctionalite="listeDaoCorrectionPn";
 																    																						    			 btn_affec = false;
 																    																						    			 btn_exam = false;
 																    																						    			 btn_retrait = true;
 																    																						    			 btn_valid = false;
-																    																										 panel1 =false;
-																    																										 panel2 =false;
-																    																										 panel3 = false;
-																    																										 panel4 = false;
-																    																										 panel5 = false;
-																    																										 panel6 = false;
-																    																										 panel7 = false;
-																    																										 panel8 = false;
-																    																										 panel9 = false;
-																    																										 panel10 =false;
-																    																										 panel11 = false;
-																    																										 panel12 = true;
+																    																						    			 panel1 =true;
+																																											 panel2 =false;
+																																											 panel3 = false;
+																																											/* panel4 = false;
+																																											 panel5 = false;
+																																											 panel6 = false;
+																																											 panel7 = false;
+																																											 panel8 = true;
+																																											 panel9 = false;
+																																											 panel10 = false;
+																																											 panel11 = false;
+																																											 panel12 = false;*/
 																    																										 venteRecherche = false; 
 																    																										 affectationRecherche = false;
 																    																										 examenRecherche = false;
@@ -4679,7 +4811,7 @@ public class ControleController {
 												    			if(action.equalsIgnoreCase("LISVALDEM")) { 
 													    			type = "Demandes";
 													    			fonctionalite = "listValidationCpmp";
-													    			libelle="LISTE DES DEMANDES EN ATTENTE DE PREVALIDATION PAR LA CELLULE";
+													    			libelle="LISTE DES DEMANDES EN ATTENTE DE TRANSMISSION PAR LA CELLULE";
 													    			libelleFinCom = "Validation éffectuée avec succès !";
 													    			libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
 													    			libelleTitle = "Prévalidation";
@@ -7600,6 +7732,107 @@ public class ControleController {
 
 	public void setTypePlan(String typePlan) {
 		this.typePlan = typePlan;
+	}
+
+
+
+	public boolean isBtn_ami() {
+		return btn_ami;
+	}
+
+
+	public void setBtn_ami(boolean btn_ami) {
+		this.btn_ami = btn_ami;
+	}
+
+
+	public boolean isBtn_prq() {
+		return btn_prq;
+	}
+
+
+	public void setBtn_prq(boolean btn_prq) {
+		this.btn_prq = btn_prq;
+	}
+
+
+	public boolean isBtn_daoPn() {
+		return btn_daoPn;
+	}
+
+
+	public void setBtn_daoPn(boolean btn_daoPn) {
+		this.btn_daoPn = btn_daoPn;
+	}
+
+
+	public boolean isBtn_daoPs() {
+		return btn_daoPs;
+	}
+
+
+	public void setBtn_daoPs(boolean btn_daoPs) {
+		this.btn_daoPs = btn_daoPs;
+	}
+
+
+	public boolean isBtn_fermer_saisie_daoPs() {
+		return btn_fermer_saisie_daoPs;
+	}
+
+
+	public void setBtn_fermer_saisie_daoPs(boolean btn_fermer_saisie_daoPs) {
+		this.btn_fermer_saisie_daoPs = btn_fermer_saisie_daoPs;
+	}
+
+
+	public boolean isBtn_pub() {
+		return btn_pub;
+	}
+
+
+	public void setBtn_pub(boolean btn_pub) {
+		this.btn_pub = btn_pub;
+	}
+
+
+	public boolean isSaisie() {
+		return saisie;
+	}
+
+
+	public void setSaisie(boolean saisie) {
+		this.saisie = saisie;
+	}
+
+
+	public boolean isPublication() {
+		return publication;
+	}
+
+
+	public void setPublication(boolean publication) {
+		this.publication = publication;
+	}
+
+
+	public boolean isVente() {
+		return vente;
+	}
+
+
+	public void setVente(boolean vente) {
+		this.vente = vente;
+	}
+
+
+	public boolean isCorrection() {
+		return correction;
+	}
+
+
+	public void setCorrection(boolean correction) {
+		this.correction = correction;
 	}
 	
     

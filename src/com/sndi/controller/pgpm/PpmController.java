@@ -281,7 +281,7 @@ public class PpmController {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
 				//Controle Pavé création
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
-		  			 if("".equals(detailPass.getDppStructureConduc()) || "".equals(detailPass.getDppStructureBenefi()) || detailPass.getDppObjet() == null || tydCode == null ||detailPass.getDppBailleur() == null
+		  			 if(detailPass.getDppStructureConduc() == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null || tydCode == null ||detailPass.getDppBailleur() == null
 		  				  ||pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null || ligne.getLbgCode() == null || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
@@ -1880,7 +1880,7 @@ public class PpmController {
 	  	 
 	  	 
 	  	//Méthode de création d'un ppm par le AC
-	  	 @Transactional
+	  	// @Transactional
 	  	 public void creerDetailPassation(String typePlan)throws IOException{
 	  		 
 	  		if(fipPgpm.getFipId() > 0 ) {

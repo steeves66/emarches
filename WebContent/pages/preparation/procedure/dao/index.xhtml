@@ -80,10 +80,11 @@
             <div class="row">
               
         <div class="col-md-12">
+        <h:panelGroup rendered="#{controleController.saisie}">
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
+            <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle}</div></div>
             <div class="col-md-2 "><div  style="color: #fff">
              <label for="gestion1" class="col-sm-5 control-label">GESTION</label>
 	              <div class="col-sm-6">
@@ -143,92 +144,62 @@
          </div>
                </div>
                </h:panelGroup>
+         </h:panelGroup>
       </div>
 
 				<div class="col-md-12">
 					<div class="box box-success box-solid">
 						<div class="box-header with-border"> 
-							 <div class="col-md-2 ">
-								<div style="color: #fff">#{controleController.libelle1}</div>
-							</div> 
-						 <h:panelGroup rendered="#{controleController.saisieRecherche}">
-						<div class="col-md-4 ">	
+						<div class="col-md-5 ">
+					   <div style="color: #fff">#{controleController.libelle1}</div>
+					 </div>
+						<div class="col-md-5 ">	
 					  <div class="input-group input-group-sm col-md-12">
 					   <span class="input-group-btn">
-				                <p:commandLink action="#{daoController.chargeData('DAO','PN')}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				                <p:commandLink action="#{daoController.chargeData()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
 				        </span>
                       <p:inputText styleClass="form-control" type="text" value="#{daoController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{daoController.chercherDac('DAO','PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                      <p:commandLink action="#{daoController.chercherDac()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
 					 </div>
 					 </div>
-					 </h:panelGroup>
 					 
-					 <h:panelGroup rendered="#{controleController.venteRecherche}">
-					 <div class="col-md-4 ">	
-					 <div class="input-group input-group-sm col-md-12">
-					 <span class="input-group-btn">
-				        <p:commandLink action="#{daoController.chargeDataVente()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-				     <p:inputText styleClass="form-control" type="text" value="#{daoController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
-				     <span class="input-group-btn">
-                      <p:commandLink action="#{daoController.venteRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span> 
-                    </div>
-					 </div>
-                   </h:panelGroup>
-                   
-                   
-                    <h:panelGroup rendered="#{controleController.publicationRecherche}">
-                     <div class="col-md-4 ">	
-					 <div class="input-group input-group-sm col-md-12">
-					 <span class="input-group-btn">
-				        <p:commandLink action="#{daoController.chargeDataAPublier()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-				     <p:inputText styleClass="form-control" type="text" value="#{daoController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
-				     <span class="input-group-btn">
-                      <p:commandLink action="#{daoController.publicationRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span> 
-                    </div>
-					 </div>
-                 </h:panelGroup>
-                 
-                 
-                 <h:panelGroup rendered="#{controleController.priseRecherche}">
-                 <div class="col-md-4 ">	
-					 <div class="input-group input-group-sm col-md-12">
-					 <span class="input-group-btn">
-				        <p:commandLink action="#{daoController.chargeDataPriseCompte()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-				     <p:inputText styleClass="form-control" type="text" value="#{daoController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
-				     <span class="input-group-btn">
-                      <p:commandLink action="#{daoController.priseRecherche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span> 
-                    </div>
-					 </div>     
-                 </h:panelGroup>
 					 
-					 <div class="col-md-3 ">
-					 </div>
-					  <div class="col-md-2">
 					
-					 </div>
 					 	
-							<div class="col-md-1 ">
+							<div class="col-md-2 ">
+							<h:panelGroup rendered="#{controleController.btn_daoPn}" >
 								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGDAO')}"  update=":content">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
 								</p:commandLink>
+						  </h:panelGroup>
+						  <h:panelGroup rendered="#{controleController.btn_daoPs}" >
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGDPS')}"  update=":content">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
+								</p:commandLink>
+						  </h:panelGroup>
+						  <h:panelGroup rendered="#{controleController.btn_ami}" >
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau AMI" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGAMI')}"  update=":content">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
+								</p:commandLink>
+						  </h:panelGroup>
+						  <h:panelGroup rendered="#{controleController.btn_prq}" >
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau PRQ" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGPRQ')}"  update=":content">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
+								</p:commandLink>
+						  </h:panelGroup>
 							</div>
 							
 						</div>
 						<div class="box-body">
 							
 					
+					<h:panelGroup rendered="#{controleController.panel1}">
 					<p:dataTable id="ndTble0" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeDAO}" 
 					 emptyMessage="Aucun #{controleController.type}" scrollable="true" scrollHeight="250" >
 
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-1" >
                            <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.dacCode}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -239,7 +210,7 @@
          				
 				        </p:column>
 				        
-				       <p:column headerText="Objet" styleClass="col-sm-6" >
+				       <p:column headerText="Objet" styleClass="col-sm-4" >
          			   <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.dacObjet}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -248,19 +219,8 @@
          				<h:outputText value="#{slctdTb.dacObjet}" />
          				</h:panelGroup>
 				        </p:column>
-				        
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.tdcLibelle}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-                        
-                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.tdcLibelle}" />
-         				</h:panelGroup>
-				        </p:column>
 				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				 <p:column headerText="Type Marché" styleClass="col-sm-2" >
          				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -271,7 +231,7 @@
 				        </p:column> 
 				        
 				       
-         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-2" >
          				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
@@ -281,8 +241,33 @@
          				</h:panelGroup>
 				        </p:column> 
 				        
+				        
+				        <p:column headerText="Date reception" styleClass="col-sm-1" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">			
+         				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dacDateValAc}" style="color:red; font-weight:bold " >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dacDateValAc}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				         <p:column headerText="Mention" styleClass="col-sm-1"  rendered="#{userController.fonction.TTypeFonction.tyfCod != 'ACR'}">
+	                    <h:panelGroup rendered="#{slctdTb.dacMention == 'Validé pour publication'}">
+	                         <span class="badge bg-green">#{slctdTb.dacMention}</span>
+	                    </h:panelGroup>
+	                     <h:panelGroup rendered="#{slctdTb.dacMention != 'Validé pour publication'}">
+	                         <span class="badge bg-yellow">#{slctdTb.dacMention}</span>
+	                    </h:panelGroup>
+				        </p:column> 
+				       
+				        
 
-                      <p:column headerText="Actions" styleClass="col-sm-3">
+                      <p:column headerText="Actions" styleClass="col-sm-1">
                            
                             <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
 	                            <p:commandLink  oncomplete="PF('motif').show()" action="#{daoController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
@@ -291,34 +276,166 @@
 	                           </p:commandLink> 
 	         		         </h:panelGroup>
                            
-                            <h:panelGroup rendered="#{controleController.detailD}">   
                              <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
-                            </h:panelGroup>
-
-				            <p:commandLink action="#{daoController.renderPage('dao11','MODDAO')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+                            
+                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+				           <h:panelGroup rendered="#{slctdTb.aaoStaCode == 'D1S' }">
+				            <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.renderPage('dao11','MODDAO')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				               title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                       
                             </p:commandLink>
-
-                              <p:commandLink action="#{daoController.opendaoType()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+                            </h:panelGroup>
+                            
+                              <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.opendaoType()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				               title="Télécharger le DAO type" ajax="false">
                                 <i class="ace-icon fa fa-download bigger-120"  style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                      
                             </p:commandLink>
                             
-                            <h:panelGroup rendered="#{slctdTb.aaoStaCode == 'D1S'}">
-                              <p:commandLink action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('transDaoDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
+                              <p:commandLink rendered="#{controleController.saisie}" action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('transDaoDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i>
                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                                 </p:commandLink>  
                              </h:panelGroup>
+                             
+                             
+                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+                               <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-right: 3px" title="Différer" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                              </p:commandLink>
+                              </h:panelGroup>
+                              
+                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+                              <p:commandLink action="#{daoController.transmettreCpmp()}" styleClass="btn btn-xs btn-success"  title="Transmettre" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
+                                 <p:confirm header="Confirmation" message="Confrmez-vous la transmission du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                             </p:commandLink>
+                              </h:panelGroup>
+                              
+                              
+                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+                                <h:panelGroup rendered="#{controleController.affDao}">   
+                             <p:commandLink action="#{daoController.renderPage('dao5','AFFDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
+                             <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
+                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" /> 
+                            </p:commandLink>
+                            </h:panelGroup>
                             
+                               <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
+                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication du DAO ?" icon="ui-icon-alert" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                             </p:commandLink>
+                             
+                             <h:panelGroup rendered="#{controleController.vente}">
+                               <h:panelGroup rendered="#{controleController.retDao}">   
+                             <p:commandLink action="#{daoController.renderPage('dao9','VETDAO')}" styleClass="btn btn-xs btn-success"  title="Vente du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                             </p:commandLink>
+                          </h:panelGroup>
+                          
+                          <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{daoController.finVente()}"
+                                title="Fin de la vente" update=":content">
+                              <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
+                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente du DAC N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
+                          </p:commandLink>
+                          
+                          <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #f88b2e;margin-right:3px"  action="#{daoController.finRetrait()}"
+                                title="Fin de retrait" update=":content">
+                              <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
+                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin au retrait du DAC N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
+                          </p:commandLink>
+                         </h:panelGroup> 
+                         
+                           <h:panelGroup rendered="#{slctdTb.dacStaCode == 'SBO'}">   
+                             <p:commandLink rendered="#{daoController.correction}" action="#{daoController.renderPage('dao10','OBSDAO')}" styleClass="btn btn-xs btn-success"  title="Avis du Bailleur" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{slctdTb.dacStaCode == 'SRO'}">   
+                             <p:commandLink rendered="#{daoController.correction}" action="#{dacModifController.renderPage('dac1','MODDAO')}" styleClass="btn btn-xs btn-success"  title="Prise en compte des observations" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{dacModifController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>  
 				         </p:column>   
 				    </p:dataTable>
+				   </h:panelGroup> 
+				   <h:panelGroup rendered="#{controleController.panel3}">
+  <p:dataTable id="chrTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.daoExamen}"  
+					 emptyMessage="Aucun #{controleController.type}" scrollable="true" scrollHeight="250" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-1" >                         
+         				<h:outputText value="#{slctdTb.dafDacCode}" />
+				        </p:column>
+				        
+				       <p:column headerText="Objet" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.dafDacObjet}" />
+				        </p:column>
+				        
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-2" >        				
+         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-2" >        			
+         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+				        </p:column> 
+				        
+				         <p:column headerText="Mention" styleClass="col-sm-1" >
+	                    <h:panelGroup rendered="#{slctdTb.dafMention == 'Validé pour publication'}">
+	                         <span class="badge bg-green">#{slctdTb.dafMention}</span>
+	                    </h:panelGroup>
+	                     <h:panelGroup rendered="#{slctdTb.dafMention != 'Validé pour publication'}">
+	                         <span class="badge bg-yellow">#{slctdTb.dafMention}</span>
+	                    </h:panelGroup>
+				        </p:column> 
+				       
+                      <p:column headerText="Actions" styleClass="col-sm-1">
+                      
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao8','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTda}" />
+                             </p:commandLink>
+                      
+                        
+                            <h:panelGroup rendered="#{slctdTb.dafStaCode != 'DC2'}">
+                            <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
+                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" /> 
+                            </p:commandLink> 
+                            </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{slctdTb.dafStaCode == 'DC2'}">
+                           <p:commandLink action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('transDaoChargeDlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="transmission" update=":content">
+                                <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i>
+                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTda}" />
+                           </p:commandLink> 
+                           </h:panelGroup>
+                        
+				         </p:column>   
+    </p:dataTable>
+    </h:panelGroup>
 							
 						 </div>
 					</div> 

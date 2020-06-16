@@ -523,45 +523,52 @@ public class CommissionController {
 		
 		//Ouverture des offres
 		public void saveOuverture() {
-				newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
-				newOffre.setDofLaaId(laaId);
-				newOffre.setTempType("OFF");
-				newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-				newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
-				newOffre.setDofTyp(dofTyp);
-				//convertir le montant net en qui est en long en string
-				String montantOffre =String.valueOf(montN);
-				String rabais =String.valueOf(pourcentRab);
-				newOffre.setDofMtOfr(montantOffre);
-				newOffre.setDofRab(rabais);
-				iservice.addObject(newOffre);
-			  //enregister la liste des pièces du dao
-		    
-		    	if (listeSelectionPiecesOffres.size()==0) {
-						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
-					}
-			 		else{
-				 		for(VPiecesOffre ligne : listeSelectionPiecesOffres) {
-				 			newPieceOffre.setPofDteSaisi(Calendar.getInstance().getTime());
-				 			newPieceOffre.setPofPresent("O");
-				 			newPieceOffre.setPofTypeAct("COJO");  
-				 			newPieceOffre.setTDacSpecs(ligne.getOpdDacCode());
-				 			newPieceOffre.setTOperateur(userController.getSlctd().getTOperateur());
-				 			newPieceOffre.setTTypePieceOffre(ligne.getTpoCode());
-				 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
-				 			//A revoir
-				 			//newPieceOffre.setTDetOffres(newOffre.getDofNum());
-				 			newPieceOffre.setTLotAao(laaId);
-				 			iservice.addObject(newPieceOffre);
-					     }	
-			 }
-		     
-		    	vider();
-		    	chargeOffres();		    	
-		    	userController.setTexteMsg("Ouverture effectuée avec succès !");
-				userController.setRenderMsg(true);
-				userController.setSevrityMsg("success");	
+			
+			   if(newOffre.getDofDelai() == null) {
+				   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
+					newOffre.setDofLaaId(laaId);
+					newOffre.setTempType("OFF");
+					newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+					newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
+					newOffre.setDofTyp(dofTyp);
+					//convertir le montant net en qui est en long en string
+					String montantOffre =String.valueOf(montN);
+					String rabais =String.valueOf(pourcentRab);
+					newOffre.setDofMtOfr(montantOffre);
+					newOffre.setDofRab(rabais);
+					iservice.addObject(newOffre);
+				  //enregister la liste des pièces du dao
+			    
+			    	if (listeSelectionPiecesOffres.size()==0) {
+							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+						}
+				 		else{
+					 		for(VPiecesOffre ligne : listeSelectionPiecesOffres) {
+					 			newPieceOffre.setPofDteSaisi(Calendar.getInstance().getTime());
+					 			newPieceOffre.setPofPresent("O");
+					 			newPieceOffre.setPofTypeAct("COJO");  
+					 			newPieceOffre.setTDacSpecs(ligne.getOpdDacCode());
+					 			newPieceOffre.setTOperateur(userController.getSlctd().getTOperateur());
+					 			newPieceOffre.setTTypePieceOffre(ligne.getTpoCode());
+					 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
+					 			//A revoir
+					 			//newPieceOffre.setTDetOffres(newOffre.getDofNum());
+					 			newPieceOffre.setTLotAao(laaId);
+					 			iservice.addObject(newPieceOffre);
+						     }	
+				 }
+			     
+			    	vider();
+			    	chargeOffres();		    	
+			    	userController.setTexteMsg("Ouverture effectuée avec succès !");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+				   
+			   }else {
+				   FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir les champs obligatoires", ""));
+			   }	
 		}
+	//Fin de la methode d'Ouverture	des Offres
 		
 		
 		public int nonbreLot(){
@@ -675,6 +682,7 @@ public class CommissionController {
 			onSelectLot();
 			
 		}
+		
 		//Ajouter attributaire
 		public void ajouterAttributaire() {
 			

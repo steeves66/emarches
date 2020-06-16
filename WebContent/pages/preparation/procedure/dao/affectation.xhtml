@@ -64,19 +64,19 @@
           <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Gestion </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TGestion.gesCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.dacGesCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Code Dao</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacCode}" style="width: 100%"/></label> 
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.dacCode}" style="width: 100%"/></label> 
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Objet de l'Opération</label></div>
                   <div class="col-sm-9">
-                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.affDacObjet}" style="width: 100%"/></label>
+                    <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.dacObjet}" style="width: 100%"/></label>
                   </div>
 	             </div>
 	         </div>
@@ -84,13 +84,13 @@
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Type de marché</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.TTypeMarche.tymCode} : #{daoController.slctdTd.TTypeMarche.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted"  value="#{daoController.slctdTd.tymCode} : #{daoController.slctdTd.tymLibelleCourt}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	              <div class="row">
                   <div class="col-sm-3"><label class="pull-right">Mode de passation</label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.TModePassation.mopCode} : #{daoController.slctdTd.TModePassation.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
+                   <label><h:outputText styleClass="text-muted" value="#{daoController.slctdTd.mopCode} : #{daoController.slctdTd.mopLibelleLong}" style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             </div>
@@ -115,16 +115,7 @@
         </div>
         <div class="box-body">
         
-         <div class="row">
-            <div class="col-md-12">
-				
-				<label>
-                      <p:inputText type="text" value="#{daoController.filterCode}"  placeholder="saisir le libelle de la fonction">
-                      <p:ajax event="keyup" listener="#{daoController.filtrefonction()}" update=":gnl:ndTble"> </p:ajax>
-                      </p:inputText> 	
-			  </label>
-            </div>
-            </div>
+
           <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeFonctionsImput}" editable="true" editMode="cell" emptyMessage="Aucune fonction enregistrée" rows="10" 
                        rowKey="#{slctdTb.fonCod}" selection="#{daoController.listSelectionFonctImput}"   paginator="true"
                          rowsPerPageTemplate="5,10,15" >
@@ -185,169 +176,12 @@
     
   
     
-     <h:form id="dlogPas">
-	        <p:dialog  widgetVar="passationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passtion">
-				<div class="contentpanel">
-					<div class="g12">	 
-					<div class="panel-body panel-body-nopadding">
-					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreModePassation}"  class="gui-input"  placeholder="Saisir le mode de Passtion"  > 
-						     <p:ajax event="keyup" update=":dlogPas:ndTblePass" listener="#{pgpmAcController.filtreModePassation()}" />
-							</p:inputText>
-						
-						</label>
-						</div>
-						</div>
-						
-						<div class="form-bordered form-horizontal">			
-                        <div class="form-group">
-                        <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTblePass" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeModePassation}"
-						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
-			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
-         				  <h:outputText value="#{slctdTb.mopCode}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
-                                </h:commandLink>
-				        </p:column>
-						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
-                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
-         				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
-                                </h:commandLink>
-				        </p:column>
-				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
-         				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
-                                </h:commandLink>
-				        </p:column>
-						</p:dataTable>
-						</h:panelGrid>
-                     </div>
-                        
-                   
-                    </div>
-				</div>
-			</div>
-	    </div>
-      </p:dialog>
-    </h:form>
-    
+     
   
 
     
-         <h:form id="dlogAC">
-	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez le DAO">
-				<div class="contentpanel">
-					<div class="g12">	 
-					<div class="panel-body panel-body-nopadding">
-					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{daoController.dacCode}"  class="gui-input"  placeholder="Saisir le code du DAO"  > 
-						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
-							</p:inputText>
-						
-						</label>
-						</div>
-						</div>
-						
-						<div class="form-bordered form-horizontal">			
-                        <div class="form-group">
-                        <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.listeDAO}"
-						 selectionMode="single" rowKey="#{slctdTb.affDacCode}"
-			               emptyMessage="Aucun DAO affecté" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-			            <p:column headerText="Gestion" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
-				        </p:column>
-
-                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-				        </p:column>
-				        
-				       <p:column headerText="Objet" styleClass="col-sm-6" >
-         				<h:outputText value="#{slctdTb.affDacCode}" />
-				        </p:column>
-				         
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
-				        </p:column>
-				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
-				        </p:column> 
-				        
-         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
-				        </p:column> 
-				       
-				      
-						</p:dataTable>
-						</h:panelGrid>
-                     </div>
-                        
-                   
-                    </div>
-				</div>
-			</div>
-	    </div>
-      </p:dialog>
-    </h:form>
-    
-     <h:form id="dlogDMP">
-	        <p:dialog  widgetVar="DMPDlog" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez l'autorité contractante">
-				<div class="contentpanel">
-					<div class="g12">	 
-					<div class="panel-body panel-body-nopadding">
-					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{pgpmAcController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
-						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{pgpmAcController.filtreFonctionMin()}" />
-							</p:inputText>
-						
-						</label>
-						</div>
-						</div>
-						
-						<div class="form-bordered form-horizontal">			
-                        <div class="form-group">
-                        <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeFonctions}"
-						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
-			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-							<p:column headerText="Code" styleClass="col-sm-3" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}" update="gnl:auto">				        
-         				  <h:outputText value="#{slctdTb.fonCod}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
-                                </h:commandLink>
-				        </p:column>
-						<p:column headerText="Fonction" styleClass="col-sm-9" >
-                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{pgpmAcController.onSelectFonctionPgpmDmp()}">				        
-         				  <h:outputText value="#{slctdTb.fonLibelle}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.fonction}" />
-                                </h:commandLink>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid>
-                     </div>
-                        
-                   
-                    </div>
-				</div>
-			</div>
-	    </div>
-      </p:dialog>
-    </h:form>
+        
+     
     
     <h:form id="apercuDAOAff">
 	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
@@ -363,34 +197,30 @@
 			         </div>
 			          <div class="box-body">
 			          
-                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.daoAffectes}"
-                        rowKey="#{slctdTb.affDacCode}" selection="#{daoController.daoAffectes}" emptyMessage="Aucun Dao enrégistré">
+                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDAO}"
+                        rowKey="#{slctdTb.dacCode}" selection="#{daoController.listeDAO}" emptyMessage="Aucun Dao enrégistré">
 			           
 			           
 			           <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-			           
-			           <p:column headerText="Gestion" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.TGestion.gesCode}" />
-				        </p:column>
 
                         <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
 				        </p:column>
 				        
 				        <p:column headerText="Objet" styleClass="col-sm-6" >
-         				<h:outputText value="#{slctdTb.affDacObjet}" />
+         				<h:outputText value="#{slctdTb.dacObjet}" />
 				        </p:column>
 				        
 				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.TTypeDacSpecs.tdcLibelle}" />
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
 				        </p:column>
 				       
          				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.TTypeMarche.tymLibelleCourt}" />
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column> 
 				       
          				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
-         				<h:outputText value="#{slctdTb.TModePassation.mopLibelleLong}" />
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
 				        </p:column> 
 				        
 				      

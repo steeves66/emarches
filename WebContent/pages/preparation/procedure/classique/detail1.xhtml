@@ -148,7 +148,14 @@
 				            <h:outputText value="#{slctdTb.devLibelle}" />
 				        </p:column>
 				         <p:column headerText="Part Bailleur" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fipMontantCfa} #{slctdTb.devSymbole}" />
+				            <h:outputText value="#{slctdTb.fipMontantCfa}" >
+				            <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				            </h:outputText>
+				        </p:column>
+				         <p:column headerText="Part Trésor" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipTresor}" >
+				            <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				            </h:outputText>
 				        </p:column>
 				        
                  </p:dataTable>

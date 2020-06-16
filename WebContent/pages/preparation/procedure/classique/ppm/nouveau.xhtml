@@ -1188,7 +1188,9 @@
 				        
 				        <p:column headerText="Disponible" styleClass="col-sm-11" >
                            <h:commandLink id="imputation5" title="Montant Disponible" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
-         				  <h:outputText value="#{slctdTb.lbgDisTot}" />
+         				  <h:outputText value="#{slctdTb.lbgDisTot}" >
+         				   <f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				  </h:outputText>
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                          </h:commandLink>
 				        </p:column>	

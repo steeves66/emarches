@@ -2575,7 +2575,7 @@ if(slctdTd.getAffDacAvisBailleur().equalsIgnoreCase("") || "".equals(slctdTd.get
 	 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 	 					}
 	 			 		else{      
-	 			 			 String exo=gesCode+gesCode+daoDetail.getDppStrCode()+daoDetail.getDppTymCode()+daoDetail.getMopCode();
+	 			 			 String exo=gesCode+daoDetail.getDppStrCode()+daoDetail.getDppTymCode()+daoDetail.getMopCode();
 	 				    	 dao.setDacCode(keyGen.getCodeDao(exo));
 	 				    	 dao.setDacStatutRetour("0");
 	 				    	 dao.setDacObjet(daoDetail.getDppObjet());
