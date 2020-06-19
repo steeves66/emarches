@@ -82,7 +82,6 @@ public class TableauBordController {
 	 private String agpmAcDifDmpCpmp ="";
 	 private String agpmCpValide ="";
 	 private String agpmCpAttenteValide="";
-	 
 	 /*
 	  Compteur pour le Directeur des Marchés Publics
 	   */
@@ -90,7 +89,6 @@ public class TableauBordController {
 	 private String agpmDmTransmis ="";
 	 private String agpmDmValide ="";
 	 private String agpmDmAttenteValide ="";
-	 
  
 	 //PGPM
 	 private String pgpmTotal="";
@@ -121,8 +119,9 @@ public class TableauBordController {
 	 private String pgpmDmTransmis ="";
 	 private String pgpmDmValide ="";
 	 private String pgpmDmAttenteValide ="";
+	 private String pgpmDmAttentePub = "";
+	 private String pgpmPub = "";
 	 private String pgpmDmDiff="";
-	
 	 
 	 //PGSPM
 	 private String pgspmTotal=""; 
@@ -145,7 +144,6 @@ public class TableauBordController {
 		 private String pgspmCpDifDmp ="";
 		 private String pgspmCpValide ="";
 		 private String pgspmCpAttenteValide="";
-		 
 		 /*
 		  Compteur pour le Directeur des Marchés Publics
 		   */
@@ -153,12 +151,11 @@ public class TableauBordController {
 		 private String pgspmDmTransmis ="";
 		 private String pgspmDmValide ="";
 	     private String pgspmDmAttenteValide ="";
+	     private String pgspmDmAttentePub = "";
+		 private String pgspmPub = "";
 	     private String pgspmDmDiff="";
 	    
-	     
-	     
-	     
-	     
+	 
 	     //PPM
 		 private String ppmTotal=""; 
 		 /*
@@ -189,7 +186,8 @@ public class TableauBordController {
 			 private String ppmDmValide ="";
 		     private String ppmDmAttenteValide ="";
 		     private String ppmDmDiff="";
-		     
+		     private String ppmDmAttentePub = "";
+		     private String ppmPub = "";
 		     
 		     //PSPM
 			 private String pspmTotal=""; 
@@ -482,6 +480,8 @@ public class TableauBordController {
 							 pgpmDmAttenteValide = ""+getNpAttValideDmp("S2V","SPG");
 							 pgpmDmValide = ""+getNpValideDmp("S3V");
 							 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR"); 
+							 pgpmDmAttentePub = ""+getNpValideDmp("S3V");
+							 pgpmPub = ""+getNpValideDmp("PGU");
 						 }
 					 }
 			     } 
@@ -512,6 +512,8 @@ public class TableauBordController {
 							 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
 							 pgspmDmValide = ""+getNpsValideDmp("S3V");
 							 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
+							 pgspmDmAttentePub = ""+getNpsValideDmp("S3V");
+							 pgspmPub = ""+getNpsValideDmp("PGU");
 						 }
 					 }
 			     } 
@@ -552,6 +554,8 @@ public class TableauBordController {
 									 ppmDmAttenteValide = ""+getPpmAttValideDmp("S2V","SPT",typePlan);
 									 ppmDmValide = ""+getPpmValideDmp("S3V",typePlan);
 									 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);
+									 ppmDmAttentePub = ""+getPpmValideDmp("S3V",typePlan);
+									 ppmPub = ""+getPpmValideDmp("PPU",typePlan);
 								 }
 							 }
 					     } 
@@ -1031,7 +1035,7 @@ public class TableauBordController {
 				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
 						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src),
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-						new WhereClause("AGP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+						new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				return	i;	
 			}
 
@@ -1060,7 +1064,7 @@ public class TableauBordController {
 				int i = iservice.countTableByColumn("T_AGPM", "AGP_ID",
 						new WhereClause("AGP_STA_CODE", WhereClause.Comparateur.EQ, src),
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-						new WhereClause("AGP_FON_COD_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+						new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 				return	i;	
 			}
 			
@@ -1114,8 +1118,8 @@ public class TableauBordController {
 			public int getAgpmDmDiff(String src1, String src2){
 				int i = iservice.countTableByColumnIn("T_AGPM", "AGP_ID",new ArrayList<String>(Arrays.asList("AGP_ID")),
 						"AGP_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
-						new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
+						//new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				return	i;
 			}
 			
@@ -1406,8 +1410,8 @@ public int getNpsValideDmpAc(String src){
 public int getNpValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-	      new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+	      //new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -1435,8 +1439,8 @@ public int getAcNpAttenteValide(String src1, String src2){
 public int getNpAttValideDmp(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			//new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
@@ -1462,8 +1466,8 @@ public int getNpDmpTransmisDossier(String src){
 public int getNpDiffDmp(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
 			"GPG_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
-			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
-			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
+			//new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 //Fin PGPM
@@ -1638,8 +1642,8 @@ public int getNpsValideCmp(String src){
 public int getNpsValideDmp(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
-		    new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
+		    //new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -2401,32 +2405,32 @@ public int getDaoAttenteValide(String typePlan,String typeDac,String src1, Strin
 
 //DAO en attente de retrait chez l'AC en procédure normale
 public int getDaoAttenteRetrait(String typePlan,String typeDac,String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac), 
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
-			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
 }
 
 
 //DAO en attente de vente chez l'AC en procédure normale
 public int getDaoAttenteVente(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
-			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
 //DAO retiré chez l'AC en procédure normale
 public int getDaoAcRetire(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
-			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -2454,7 +2458,7 @@ public int getDaoValideCmp(String typePlan,String typeDac,String src){
 
 //DAO validés par la DMP en procédure normale
 public int getDaoValideDmp(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2464,7 +2468,7 @@ public int getDaoValideDmp(String typePlan,String typeDac,String src){
 
 //DAO en attente de validation par la dmp en Procédure Normale
 public int getDaoAttValideDmp(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2474,7 +2478,7 @@ public int getDaoAttValideDmp(String typePlan,String typeDac,String src){
 
 //DAO transmis par le dmp
 public int getDaoTransmisDmpDossier(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2487,7 +2491,7 @@ public int getDaoTransmisDmpDossier(String typePlan,String typeDac,String src){
 //Début DAO Procédure Simplifiée
 //Nombre total des DAO
 public int getDaoDossierTotalPs(){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"));
 	//new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"PN"));
 return	i;	
@@ -5502,5 +5506,77 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setPspmDmValideAc(String pspmDmValideAc) {
 		this.pspmDmValideAc = pspmDmValideAc;
+	}
+
+
+
+	public String getPgpmDmAttentePub() {
+		return pgpmDmAttentePub;
+	}
+
+
+
+	public void setPgpmDmAttentePub(String pgpmDmAttentePub) {
+		this.pgpmDmAttentePub = pgpmDmAttentePub;
+	}
+
+
+
+	public String getPgpmPub() {
+		return pgpmPub;
+	}
+
+
+
+	public void setPgpmPub(String pgpmPub) {
+		this.pgpmPub = pgpmPub;
+	}
+
+
+
+	public String getPgspmDmAttentePub() {
+		return pgspmDmAttentePub;
+	}
+
+
+
+	public void setPgspmDmAttentePub(String pgspmDmAttentePub) {
+		this.pgspmDmAttentePub = pgspmDmAttentePub;
+	}
+
+
+
+	public String getPgspmPub() {
+		return pgspmPub;
+	}
+
+
+
+	public void setPgspmPub(String pgspmPub) {
+		this.pgspmPub = pgspmPub;
+	}
+
+
+
+	public String getPpmDmAttentePub() {
+		return ppmDmAttentePub;
+	}
+
+
+
+	public void setPpmDmAttentePub(String ppmDmAttentePub) {
+		this.ppmDmAttentePub = ppmDmAttentePub;
+	}
+
+
+
+	public String getPpmPub() {
+		return ppmPub;
+	}
+
+
+
+	public void setPpmPub(String ppmPub) {
+		this.ppmPub = ppmPub;
 	}
 }

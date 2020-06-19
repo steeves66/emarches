@@ -187,6 +187,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private TDossierPlanGeneral selectedDossier = new TDossierPlanGeneral();
 		 //private List<TAffichagePgpm> validationListe = new ArrayList<TAffichagePgpm>(); 
 		 private List<VPgpmliste> validationListe = new ArrayList<VPgpmliste>();
+		 private List<VPgpmliste> publicationListe = new ArrayList<VPgpmliste>();
 		 //private List<TAffichagePgpm> validationListePgspm = new ArrayList<TAffichagePgpm>();
 		 private List<VPgpmliste> validationListePgspm = new ArrayList<VPgpmliste>();
 		 //private List<TAffichagePgpm> pgpmValCp = new ArrayList<TAffichagePgpm>();
@@ -257,6 +258,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private String filtreStructure="";
 		 private String statutAffiche="";
 		 private String statutUpdate="";
+		 private String statutPub="";
 		 private String statutTrans ="";
 		 private String finBaiCaode ="ETAT";
 		 private String multiFiltre="";
@@ -446,6 +448,35 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			   
 			 }
 		 
+		 
+		//PGPM / PGSPM en Attenten de Publication
+		 public void chargeDataAPublierPgpm(String typePlan) {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				
+			 }else 
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 
+				 }else 
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 getPublicationListe().clear(); 
+						 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+								tableauBordController.chargeDataPgpm();
+								_logger.info("publicationListe size: "+publicationListe.size());	
+					 }else
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						 getPublicationListe().clear(); 
+						 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+							tableauBordController.chargeDataPgpm();
+							_logger.info("publicationListe size: "+publicationListe.size());	
+				 }   
+			   
+			 }
+		 //Fin Methode Publication
+		 
 		//PGSPM : Nouvelle Methode
 		 public void chargeDataAvaliderPgspm() {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -528,7 +559,65 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 											_logger.info("affichageListe size: "+validationListe.size());
 							    	  }
 			               }
-		 
+		 //Fin de la methode de Recherche
+			
+			//Filtre multicritère pour les PGPM : Nouvelle Methode
+			public void chargerRecherchePub(String typePlan) { 
+				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						
+						 }else 
+						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
+						    	 
+						        }else 
+						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						    		  getPublicationListe().clear(); 
+										 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+													new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+											        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"),
+												    new WhereClause("GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+												tableauBordController.chargeDataPgpm();
+										_logger.info("publicationListe size: "+publicationListe.size());
+						    	  }else 
+							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							    		  getPublicationListe().clear(); 
+											 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+														new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+												        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"),
+													    new WhereClause("GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
+											tableauBordController.chargeDataPgpm();
+											_logger.info("publicationListe size: "+publicationListe.size());
+							    	  }
+			               }
+		 //Fin de la methode de Recherche des PGPM en attente de publication
+			
+			//Réinitialisation pour les PGPM en attente de Publication : Nouvelle Methode
+			public void reinitialiserPgpmPub(String typePlan) { 
+				if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						multiFiltre =""; 
+						 }else 
+						      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
+									multiFiltre ="";
+						        }else 
+						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						    		  getPublicationListe().clear(); 
+										 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+													new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+											        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+												tableauBordController.chargeDataPgpm();
+												_logger.info("publicationListe size: "+publicationListe.size());
+										multiFiltre ="";
+						    	  }else 
+							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							    		  getPublicationListe().clear(); 
+											 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+														new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+												        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+													tableauBordController.chargeDataPgpm();
+													_logger.info("publicationListe size: "+publicationListe.size());
+											multiFiltre ="";
+							    	  }
+			               }
+			   //Fin de la réinitialisation de liste des PGPM en attente de publication           
 		 
 		//Réinitialisation pour les PGPM : Nouvelle Methode
 			public void reinitialiserPgpm() { 
@@ -1044,6 +1133,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 pgpmValDmp.clear();
 				 pgpmValDmp = ((List<VPgpmliste>)iservice.getObjectsByColumn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 						    new WhereClause("GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("GPG_TYPE_PLAN",Comparateur.EQ,"PN")));
+						   // new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
+			 }
+			 
+			//Liste des Pgpm publiés par la DMP : Nouvelle Methode 
+			 public void chargePgpmPubDmp(String typePlan) {
+				 pgpmValDmp.clear();
+				 pgpmValDmp = ((List<VPgpmliste>)iservice.getObjectsByColumn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+						    new WhereClause("GPG_STA_CODE",Comparateur.EQ,"PGU"),
+						    new WhereClause("GPG_STA_CODE",Comparateur.EQ,""+typePlan),
 						    new WhereClause("GPG_TYPE_PLAN",Comparateur.EQ,"PN")));
 						   // new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
 			 }
@@ -1583,8 +1682,67 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 					}
-      
-      
+      //Fin de la Methode de validation
+		
+	
+		//publication par le SPP
+		public void publierSPP()throws IOException{ 
+	 		if (listSelectionTransmission.size()==0) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune opération selectionnée", ""));
+			}
+	 		else{
+	 			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+	 				statutPub ="";
+	 				 }else {
+	 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+	 						statutPub ="";
+	 					 }else {
+	 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+	 							statutPub ="PGU";
+	 						 }else {
+		 							if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+		 								statutPub ="PGU";
+		 						 }
+	 						 }
+	 				     } 
+	 			//Parcourir la liste TAffichagePGPM et faire une mise a jour des different statut
+		 		for(VPgpmliste ligne : listSelectionTransmission) {
+		 			 
+		 			//Parcourir la liste et faire la mise à jour 
+		 			 listeDetail =(List<TDetailPlanGeneral>) iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+								new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+ligne.getGpgId()));
+							if (!listeDetail.isEmpty()) 
+								demDetail= listeDetail.get(0);
+								demDetail.setTStatut(new TStatut(statutPub));
+								demDetail.setGpgStatutRetour("0");
+						       iservice.updateObject(demDetail);
+					
+						       //Récupération du Statut
+			             	    TStatut statuts = constantService.getStatut(statutPub);
+				  				//Historisation des Pgpm
+				      			historiser(""+statutPub,demDetail,"Opération Publiée");
+		 		           }	   
+			 		      }	
+				         }
+	 		         tableauBordController.chargeDataPgpm();
+	 		         
+	 		         if(controleController.typePlan == "PGPM") {
+	 		        	chargeDataAPublierPgpm("PN");
+		 		        chargePgpmPubDmp("PN");
+	 		         }else {
+	 		        	chargeDataAPublierPgpm("PS");
+		 		        chargePgpmPubDmp("PS");
+	 		         }
+	 		        
+	 		        //Message de confirmation
+	 		        userController.setTexteMsg("Publication effectuée avec succès !");
+					 userController.setRenderMsg(true);
+					 userController.setSevrityMsg("success");
+					}
+      //Fin de la Methode de publication
+		
+		
       //Modification des operations
      public void modifierDetailPlan() throws IOException{
 
@@ -3116,6 +3274,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				case "pgpm1":
 					chargeData();
 					chargeDataAvaliderPgpm();
+					chargeDataAPublierPgpm("PN");
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
 					listeFinancementPgpm.clear();
@@ -3158,6 +3317,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				case "pgspm1":
 					chargeDataPgspm();
 		 			chargeDataAvaliderPgspm();
+		 			chargeDataAPublierPgpm("PS");
 				break;
 				case "pgpm4":
 					chargeFinancementDetail();
@@ -4315,8 +4475,22 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		this.selectFinancePg = selectFinancePg;
 	}
 
+	public List<VPgpmliste> getPublicationListe() {
+		return publicationListe;
+	}
 
-	
+	public void setPublicationListe(List<VPgpmliste> publicationListe) {
+		this.publicationListe = publicationListe;
+	}
+
+	public String getStatutPub() {
+		return statutPub;
+	}
+
+	public void setStatutPub(String statutPub) {
+		this.statutPub = statutPub;
+	}
+
 	
 
 }

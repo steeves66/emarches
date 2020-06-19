@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-13T17:39:03 -->
+<!-- 2020-06-17T20:34:59 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Recu_dao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dfc941c-9bce-456e-b151-0f0b4eefdd5f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -11,7 +11,7 @@
 	<parameter name="param_nom" class="java.lang.String"/>
 	<parameter name="param_prenom" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select distinct dc.dac_code,v.ven_paie_code,dv.dve_cout,dv.dve_cout_lettre,can.can_nom ||' ' ||can.can_prenoms candidat,can.can_tel,f.fon_libelle||' '||op.ope_matricule fonlibelle,hd.hac_date
+		<![CDATA[select distinct dc.dac_code,dc.dac_objet,v.ven_paie_code,dv.dve_cout,dv.dve_cout_lettre,can.can_nom ||' ' ||can.can_prenoms candidat,can.can_tel,f.fon_libelle||' '||op.ope_matricule fonlibelle,hd.hac_date
 from t_dac_specs dc, t_candidats can, t_vente_dac v, t_detail_vente dv, t_histo_dac hd,t_fonction f, t_assignation a, t_operateur op
 where dc.dac_code = hd.hac_dac_code
 and hd.hac_fon_cod = f.fon_cod
@@ -27,6 +27,7 @@ and can.can_nom = $P{param_nom}
 and can.can_prenoms = $P{param_prenom}]]>
 	</queryString>
 	<field name="DAC_CODE" class="java.lang.String"/>
+	<field name="DAC_OBJET" class="java.lang.String"/>
 	<field name="VEN_PAIE_CODE" class="java.lang.String"/>
 	<field name="DVE_COUT" class="java.math.BigDecimal"/>
 	<field name="DVE_COUT_LETTRE" class="java.lang.String"/>
@@ -191,31 +192,31 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<textFieldExpression><![CDATA["Par "+$F{FONLIBELLE}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="40" y="87" width="471" height="161" uuid="2ddaeeb6-b7dd-41e6-882a-046f42283cea">
+				<reportElement x="20" y="87" width="491" height="161" uuid="2ddaeeb6-b7dd-41e6-882a-046f42283cea">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="46" y="99" width="100" height="23" uuid="87c1960d-fd22-40e2-bbff-4c51ca696a7c"/>
+				<reportElement x="22" y="99" width="100" height="23" uuid="87c1960d-fd22-40e2-bbff-4c51ca696a7c"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Désignation]]></text>
 			</staticText>
 			<line>
-				<reportElement x="40" y="123" width="471" height="1" uuid="b97e3ddc-5033-4793-9ac6-c9313abbefe8"/>
+				<reportElement x="20" y="123" width="491" height="1" uuid="b97e3ddc-5033-4793-9ac6-c9313abbefe8"/>
 			</line>
 			<staticText>
-				<reportElement x="45" y="148" width="177" height="34" uuid="fea6848c-41c2-418e-8843-4c7dc5c92dd8"/>
+				<reportElement x="22" y="148" width="177" height="34" uuid="fea6848c-41c2-418e-8843-4c7dc5c92dd8"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Dossier d'Appel d'Offres N°]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="198" y="148" width="199" height="30" uuid="47df8447-382a-45ee-8943-6f08be6357c5">
+				<reportElement x="175" y="148" width="222" height="30" uuid="47df8447-382a-45ee-8943-6f08be6357c5">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -261,6 +262,23 @@ and can.can_prenoms = $P{param_prenom}]]>
 			<line>
 				<reportElement x="399" y="282" width="113" height="1" uuid="805804ca-2086-4c02-b314-237d6bc22056"/>
 			</line>
+			<staticText>
+				<reportElement x="22" y="182" width="44" height="27" uuid="1d4f6983-1bc5-4bf0-81be-b27a8920123d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Objet :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="65" y="182" width="332" height="48" uuid="031af476-41b6-4c3b-be38-2a386e831144">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DAC_OBJET}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<pageFooter>

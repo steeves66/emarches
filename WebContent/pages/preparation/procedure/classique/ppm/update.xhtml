@@ -147,17 +147,17 @@
 	       <div class="col-md-6">
 	          <div class="form-group">
                   <label  class="col-sm-3 control-label">Structure Conductrice</label>
-
                   <div class="col-sm-9">
-                    <p:inputText  type="text" value="#{ppmModificationController.updatePpm.dppStructureConduc}" styleClass="form-control" style="width: 100%" />
+                  <p:selectOneMenu id="tpcond" value="#{ppmModificationController.updatePpm.dppStructureConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">  
+			       <f:selectItems value="#{ppmModificationController.listeTypStruConduc}" var="typ" itemLabel="#{typ.libelle}" itemValue="#{typ.libelle}" />			   				   
+				  <f:selectItems />				   				    				   
+		       	 </p:selectOneMenu>
                   </div>
                 </div>	
                 
-                     
-          
+        
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Structure Bénéficiaire</label>
-
                   <div class="col-sm-9">
                     <p:inputText  type="text" value="#{ppmModificationController.updatePpm.dppStructureBenefi}" styleClass="form-control" style="width: 100%" />
                   </div>

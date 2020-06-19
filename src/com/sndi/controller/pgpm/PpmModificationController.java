@@ -56,6 +56,7 @@ import com.sndi.model.VPgpmFonction;
 import com.sndi.model.VPpmStatut;
 import com.sndi.model.VPpmliste;
 import com.sndi.model.VTypeMarcheFils;
+import com.sndi.model.VTypeStructConduc;
 import com.sndi.model.VUpdatePpm;
 
 import javax.annotation.PostConstruct;
@@ -67,6 +68,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import com.sndi.report.ProjetReportOld1;
 import com.sndi.security.UserController;
+import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
 import com.sndi.utilitaires.FileUploadController;
@@ -104,7 +106,8 @@ public class PpmModificationController {
 	 @Autowired
 	 PpmController ppmController;
 
-
+	 @Autowired
+	 ConstantService constantService;
 	 
 	
 	 @PostConstruct
@@ -115,6 +118,7 @@ public class PpmModificationController {
 		// chargeDataAvaliderPpm();
 		 //chargeDataAvaliderPspm();
 		 chargeGestions();
+		 chargeTypeStrucConduc();
 		 chargeBailleur();
 		 chargeDevise();
 		 chargeFinancement();
@@ -153,7 +157,7 @@ public class PpmModificationController {
 		 private List<VModePassation> listeMode = new ArrayList<VModePassation>();
 	     private List<VModeleDao> listeDao = new ArrayList<VModeleDao>();
 	     private List<VModeleAmi> listeAmi = new ArrayList<VModeleAmi>();
-	     
+	     private List<VTypeStructConduc> listeTypStruConduc = new ArrayList<VTypeStructConduc>();
 	     
 	     private List<TStructure> listeStructures = new ArrayList<TStructure>();
 	     private List<TCharge> listeCharges = new ArrayList<TCharge>();
@@ -284,6 +288,12 @@ public class PpmModificationController {
 		 
 		 
 		
+		  //Combobox type de structures conductrices
+		   public void chargeTypeStrucConduc(){
+			   listeTypStruConduc=new ArrayList<>(constantService.getListeTypStruConduc());
+			 }
+		 
+		 
 		 //Liste des Modes de Passation restreint
 		 public void chargeMode() {
 			 listeMode.clear();
@@ -2774,8 +2784,6 @@ public class PpmModificationController {
 	public boolean isBoutonEditUpdate() {
 		return boutonEditUpdate;
 	}
-
-
 	public void setBoutonEditUpdate(boolean boutonEditUpdate) {
 		this.boutonEditUpdate = boutonEditUpdate;
 	}
@@ -2784,8 +2792,6 @@ public class PpmModificationController {
 	public List<VPpmliste> getListePpm() {
 		return listePpm;
 	}
-
-
 	public void setListePpm(List<VPpmliste> listePpm) {
 		this.listePpm = listePpm;
 	}
@@ -2794,10 +2800,17 @@ public class PpmModificationController {
 	public List<VPpmliste> getValidationListe() {
 		return validationListe;
 	}
-
-
 	public void setValidationListe(List<VPpmliste> validationListe) {
 		this.validationListe = validationListe;
+	}
+	
+	
+	public List<VTypeStructConduc> getListeTypStruConduc() {
+		return listeTypStruConduc;
+	}
+
+	public void setListeTypStruConduc(List<VTypeStructConduc> listeTypStruConduc) {
+		this.listeTypStruConduc = listeTypStruConduc;
 	}
 
 }

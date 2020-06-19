@@ -36,6 +36,8 @@ public class TCandidats implements java.io.Serializable {
 	private Date canDteSaisi;
 	private String canOpeMatricule;
 	private String canEmail;
+	private String canRepCode;
+	private String canSouSigleSte;
 	private Set<TVenteDac> TVenteDacs = new HashSet<TVenteDac>(0);
 
 	public TCandidats() {
@@ -46,8 +48,8 @@ public class TCandidats implements java.io.Serializable {
 	}
 
 	public TCandidats(long canCode, String canTieNcc, String canSouNcc, String canNomResp, String canNom,
-			String canPrenoms, String canTel, Date canDteSaisi, String canOpeMatricule,String canEmail,
-			Set<TVenteDac> TVenteDacs) {
+			String canPrenoms, String canTel, Date canDteSaisi, String canOpeMatricule,String canEmail, 
+			String canRepCode, String canSouSigleSte,Set<TVenteDac> TVenteDacs) {
 		this.canCode = canCode;
 		this.canTieNcc = canTieNcc;
 		this.canSouNcc = canSouNcc;
@@ -59,6 +61,8 @@ public class TCandidats implements java.io.Serializable {
 		this.canOpeMatricule = canOpeMatricule;
 		this.canEmail = canEmail;
 		this.TVenteDacs = TVenteDacs;
+		this.canRepCode = canRepCode;
+		this.canSouSigleSte = canSouSigleSte;
 	}
 
 	@Id
@@ -153,6 +157,24 @@ public class TCandidats implements java.io.Serializable {
 
 	public void setCanEmail(String canEmail) {
 		this.canEmail = canEmail;
+	}
+	
+	@Column(name = "CAN_REP_CODE", length = 10)
+	public String getCanRepCode() {
+		return this.canRepCode;
+	}
+
+	public void setCanRepCode(String canRepCode) {
+		this.canRepCode = canRepCode;
+	}
+
+	@Column(name = "CAN_SOU_SIGLE_STE", length = 500)
+	public String getCanSouSigleSte() {
+		return this.canSouSigleSte;
+	}
+
+	public void setCanSouSigleSte(String canSouSigleSte) {
+		this.canSouSigleSte = canSouSigleSte;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TCandidats")

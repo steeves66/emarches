@@ -27,6 +27,8 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
 import com.sndi.model.VTypeMarcheFils;
+import com.sndi.model.VTypeStructConduc;
+import com.sndi.model.VbPaysReference;
 
 
 @Service
@@ -71,10 +73,16 @@ public class ConstantService {
 	private Map<String, VModePassation> HM_TYPE_VMODE_PASSATION = new HashMap<String, VModePassation>();
 	
 	private List<TStructure> listeStructures = new ArrayList<TStructure>();
-	private Map<String, TStructure> HM_STEUCTURE= new HashMap<String, TStructure>();
+	private Map<String, TStructure> HM_STEUCTURE= new HashMap<String, TStructure>(); 
 	
 	private List<TTypePieceOffre> listePiecesOffres = new ArrayList<TTypePieceOffre>();
 	private Map<String, TTypePieceOffre> HM_PIECES_OFFRES= new HashMap<String, TTypePieceOffre>();
+	
+	private List<VTypeStructConduc> listeTypStruConduc = new ArrayList<VTypeStructConduc>();
+	private Map<String, VTypeStructConduc> HM_TYPE_STRUC_CONDUC= new HashMap<String, VTypeStructConduc>();
+	
+	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
+	private Map<String, VbPaysReference> HM_LISTE_PAYS= new HashMap<String, VbPaysReference>();
 	
 	//chargePiecesOffres()
 	
@@ -110,6 +118,8 @@ public class ConstantService {
 		 chargeTModePassationPnTable();
 		 chargeVModePassationTable();
 		 chargePiecesOffresTable();
+		 chargeTypeStructureTable();
+		 chargePaysTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
@@ -217,7 +227,7 @@ public class ConstantService {
 						aMap.put(""+st.getGesCode(), st);
 					}
 					HM_GESTION =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_GESTION.size());	
+					_logger.info("HM_GESTION.size :"+ HM_GESTION.size());	
 				}
 				
 				public TGestion getTGestion(String GES_CODE){
@@ -233,7 +243,7 @@ public class ConstantService {
 						aMap.put(""+st.getTymCode(), st);
 					}
 					HM_TYPE_MARCHE =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_TYPE_MARCHE.size());	
+					_logger.info("HM_TYPE_MARCHE.size :"+ HM_TYPE_MARCHE.size());	
 				}
 				
 				public TTypeMarche getTTypeMarche(String TYM_CODE){
@@ -250,7 +260,7 @@ public class ConstantService {
 						aMap.put(""+st.getTymCode(), st);
 					}
 					HM_TYPE_MARCHE_FILS =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_TYPE_MARCHE_FILS.size());	
+					_logger.info("HM_TYPE_MARCHE_FILS :"+ HM_TYPE_MARCHE_FILS.size());	
 				}
 				
 				public VTypeMarcheFils getVTypeMarcheFils(String TYM_CODE){
@@ -267,7 +277,7 @@ public class ConstantService {
 						aMap.put(""+st.getMopCode(), st);
 					}
 					HM_TYPE_MODE_PASSATION =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_TYPE_MODE_PASSATION.size());	
+					_logger.info("HM_TYPE_MODE_PASSATION.size :"+ HM_TYPE_MODE_PASSATION.size());	
 				}
 				
 				public TModePassation getTTModePassation(String MOP_CODE){
@@ -283,7 +293,7 @@ public class ConstantService {
 						aMap.put(""+st.getMopCode(), st);
 					}
 					HM_TYPE_MODE_PASSATION_PN =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_TYPE_MODE_PASSATION_PN.size());	
+					_logger.info("HM_TYPE_MODE_PASSATION_PN.size :"+ HM_TYPE_MODE_PASSATION_PN.size());	
 				}
 				
 				public VModePassationPn getVModePassationPn(String MOP_CODE){
@@ -299,7 +309,7 @@ public class ConstantService {
 						aMap.put(""+st.getMopCode(), st);
 					}
 					HM_TYPE_VMODE_PASSATION =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_TYPE_VMODE_PASSATION.size());	
+					_logger.info("HM_TYPE_VMODE_PASSATION.size :"+ HM_TYPE_VMODE_PASSATION.size());	
 				}
 				
 				public VModePassation getVModePassation(String MOP_CODE){
@@ -315,7 +325,7 @@ public class ConstantService {
 						aMap.put(""+st.getStrCode(), st);
 					}
 					HM_STEUCTURE =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_STEUCTURE.size());	
+					_logger.info("HM_STEUCTURE.size :"+ HM_STEUCTURE.size());	
 				}
 				
 				public TStructure getTStructure(String STR_CODE){
@@ -331,12 +341,46 @@ public class ConstantService {
 						aMap.put(""+of.getTpoCode(), of);
 					}
 					HM_PIECES_OFFRES =  Collections.unmodifiableMap(aMap);	
-					_logger.info("V.size :"+ HM_PIECES_OFFRES.size());	
+					_logger.info("HM_PIECES_OFFRES.size :"+ HM_PIECES_OFFRES.size());	
 				}
 				
 				public TTypePieceOffre getTTypePieceOffre(String TOP_CODE){
 					return HM_PIECES_OFFRES.get(TOP_CODE);
 				}
+				
+				
+				//LISTE DES TYPES DE STRUCTURES CONDUCTRICES
+				public void chargeTypeStructureTable(){
+					listeTypStruConduc.clear();
+					listeTypStruConduc =(List<VTypeStructConduc>) iservice.getObjectsByColumn("VTypeStructConduc", new ArrayList<String>(Arrays.asList("CODE")));
+						HashMap<String, VTypeStructConduc> aMap = new HashMap<String, VTypeStructConduc>();
+						for (VTypeStructConduc of: listeTypStruConduc) {
+							aMap.put(""+of.getCode(), of);
+						}
+						HM_TYPE_STRUC_CONDUC =  Collections.unmodifiableMap(aMap);	
+						_logger.info("HM_TYPE_STRUC_CONDUC.size :"+ HM_TYPE_STRUC_CONDUC.size());	
+					}
+					
+					public VTypeStructConduc getListeTypStruConduc(String CODE){
+						return HM_TYPE_STRUC_CONDUC.get(CODE);
+					}
+					
+					
+					//LISTE DES PAYS
+					public void chargePaysTable(){
+						listePays.clear();
+						listePays =(List<VbPaysReference>) iservice.getObjectsByColumn("VbPaysReference", new ArrayList<String>(Arrays.asList("REP_CODE")));
+							HashMap<String, VbPaysReference> aMap = new HashMap<String, VbPaysReference>();
+							for (VbPaysReference pa: listePays) {
+								aMap.put(""+pa.getRepCode(), pa);
+							}
+							HM_LISTE_PAYS =  Collections.unmodifiableMap(aMap);	
+							_logger.info("HM_LISTE_PAYS.size :"+ HM_LISTE_PAYS.size());	
+						}
+						
+						public VbPaysReference getListePays(String REP_CODE){
+							return HM_LISTE_PAYS.get(REP_CODE);
+						}
 				
 	
 				
@@ -510,6 +554,30 @@ public class ConstantService {
 	}
 	public void setHM_PIECES_OFFRES(Map<String, TTypePieceOffre> hM_PIECES_OFFRES) {
 		HM_PIECES_OFFRES = hM_PIECES_OFFRES;
+	}
+	public List<VTypeStructConduc> getListeTypStruConduc() {
+		return listeTypStruConduc;
+	}
+	public void setListeTypStruConduc(List<VTypeStructConduc> listeTypStruConduc) {
+		this.listeTypStruConduc = listeTypStruConduc;
+	}
+	public Map<String, VTypeStructConduc> getHM_TYPE_STRUC_CONDUC() {
+		return HM_TYPE_STRUC_CONDUC;
+	}
+	public void setHM_TYPE_STRUC_CONDUC(Map<String, VTypeStructConduc> hM_TYPE_STRUC_CONDUC) {
+		HM_TYPE_STRUC_CONDUC = hM_TYPE_STRUC_CONDUC;
+	}
+	public List<VbPaysReference> getListePays() {
+		return listePays;
+	}
+	public void setListePays(List<VbPaysReference> listePays) {
+		this.listePays = listePays;
+	}
+	public Map<String, VbPaysReference> getHM_LISTE_PAYS() {
+		return HM_LISTE_PAYS;
+	}
+	public void setHM_LISTE_PAYS(Map<String, VbPaysReference> hM_LISTE_PAYS) {
+		HM_LISTE_PAYS = hM_LISTE_PAYS;
 	}
 
 }

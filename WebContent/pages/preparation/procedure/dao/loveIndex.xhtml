@@ -194,7 +194,109 @@
 	            
 	            
       </p:dialog>
-    </h:form>  
+    </h:form> 
+    
+    
+     <h:form id="apercuDAO">
+	        <p:dialog  widgetVar="transDaoDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	         <div class="row">
+                   <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+             </div>
+				<div class="col-md-12">
+		            <div class="box box-warning box-solid" >
+		              <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-12 "><div  style="color: #fff"> TRANSMISSION DU #{controleController.type} N°#{daoController.slctdTd.dacCode}</div></div>
+			         </div>
+			          <div class="box-body">
+				      <div class="row">
+		                  <div class="col-sm-3"><label class="pull-right">Type de Marché</label></div>
+			                  <div class="col-sm-9">
+			                   <label><h:outputText value="#{daoController.slctdTd.tymCode} : #{daoController.slctdTd.tymLibelleCourt}" styleClass="text-muted" style="width: 100%"/></label> 
+		                  </div>
+		             </div>
+		             
+		              <div class="row">
+		                  <div class="col-sm-3"><label class="pull-right">Mode de Passation</label></div>
+			                  <div class="col-sm-9">
+			                   <label><h:outputText value="#{daoController.slctdTd.mopCode} : #{daoController.slctdTd.mopLibelleCourt}" styleClass="text-muted" style="width: 100%"/></label> 
+		                  </div>
+		             </div>
+                
+                 <div class="row">
+		                  <div class="col-sm-3"><label class="pull-right">Objet</label></div>
+			                  <div class="col-sm-9">
+			                   <label><h:outputText value="#{daoController.slctdTd.dacObjet}" styleClass="text-muted" style="width: 100%"/></label> 
+		                  </div>
+		             </div>
+			          </div>
+		            </div>
+	            </div>
+	            
+	            <div class="col-md-12">
+	             <div class="form-group ">
+	                <label for="mention" class="col-xs-6 col-sm-4 control-label"><b>Mention<span style="color:red;"> *</span></b></label>
+	                 <div class="col-xs-6 col-sm-8">
+                     <p:selectOneRadio required="true" requiredMessage="Veuillez indiquer la mention" id="mention" value="#{daoController.slctdTd.dacMention}">
+						<f:selectItem itemLabel="Validé pour publication" itemValue="Validé pour publication" />
+						<f:selectItem itemLabel="Validé et retour à l'AC" itemValue="Validé et retour à l'AC" />
+					 </p:selectOneRadio>
+                  </div>
+	                </div>
+	            <div class="col-xs-6 col-sm-4"><label class="control-label" style="margin-top:20px"><b>Nature du document</b></label></div>
+								<div class="col-xs-6 col-sm-8">
+								<p:selectOneMenu  value="#{daoController.docNature}" style="width:100%; margin-top:20px;">
+							        <f:selectItem  itemLabel="Selectionnez la nature du document..." itemValue=""/>  
+								    <f:selectItems value="#{daoController.natureDocListe}" var="v" itemLabel="#{v.nadLibelle}" itemValue="#{v.nadCode}"/> 
+								    <p:ajax process="@this" update="@this"></p:ajax>
+				       			    </p:selectOneMenu>
+								</div>
+				</div>
+	            <div class="col-md-12">
+	              <p:fileUpload fileUploadListener="#{daoController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":apercuDAO:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+	            </div>
+	            
+	            <div class="col-md-12">
+		            <div class="box box-success box-solid" >
+		              <div class="box-header with-border">
+			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES #{controleController.type}</div></div>
+			         </div>
+			          <div class="box-body">
+			          
+                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossListe}" emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-10">
+			            <h:outputText value="#{doss.ddaNom}" />
+			        </p:column>
+			        <p:column headerText="Nature Document" styleClass="col-md-10">
+			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
+			        </p:column>
+			        
+			        <p:column headerText="Actions" styleClass="col-md-2">
+			        
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeDossier}" title="Supprimer" update="apercuDAO:tabDossier">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
+		                </p:commandLink>
+		 	        </p:column>
+			    </p:dataTable>  
+			          </div>
+		            </div>
+	            </div>
+	            
+	            
+	             <div class="pull-right ">
+			            <p:commandLink action="#{daoController.transmettre()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update="gnl">
+			            <p:confirm header="Confirmation" message="Confirmez vous la trasmission ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-exchange"></i> Transmettre  
+			            </p:commandLink>
+              </div>
+	            
+	            
+      </p:dialog>
+    </h:form> 
     
       
   </h:panelGroup>   

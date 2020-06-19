@@ -8,8 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Date;
-import org.primefaces.model.DefaultTreeNode;
-import org.primefaces.model.TreeNode;
+
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -29,8 +28,6 @@ import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAdresseAvis;
 import com.sndi.model.TAffichageDao;
-import com.sndi.model.TAffichagePgpm;
-import com.sndi.model.TAffichagePpm;
 import com.sndi.model.TAgpm;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TCandidats;
@@ -40,25 +37,19 @@ import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDaoAffectation;
 import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetailAdresseAvis;
-import com.sndi.model.TDetailAgpm;
 import com.sndi.model.TDetailCorrection;
-import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailPlanPassation;
 import com.sndi.model.TDetailVente;
-import com.sndi.model.TDossierAgpm;
 import com.sndi.model.TDossierDacs;
 import com.sndi.model.TFonction;
 import com.sndi.model.TGestion;
 import com.sndi.model.THistoDac;
-import com.sndi.model.THistoPlanGeneral;
-import com.sndi.model.THistoPlanPassation;
 import com.sndi.model.TLBudgets;
 import com.sndi.model.TLibelleAdresse;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TModePassation;
 import com.sndi.model.TModeReglement;
 import com.sndi.model.TNatureDocuments;
-import com.sndi.model.TNaturePiece;
 import com.sndi.model.TOffrePieceDac;
 import com.sndi.model.TPiecesDacs;
 import com.sndi.model.TRetrait;
@@ -75,11 +66,11 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
-import com.sndi.model.VAgpmliste;
 import com.sndi.model.VAvisAdresse;
+import com.sndi.model.VCommissionTypeExp;
+import com.sndi.model.VDacMembre;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoBailleur;
-import com.sndi.model.VDaoChargeEtude;
 import com.sndi.model.VDaoStatut;
 import com.sndi.model.VDetailAdresse;
 import com.sndi.model.VDetailCorrection;
@@ -94,6 +85,9 @@ import com.sndi.model.VPiecesOffreDao;
 import com.sndi.model.VPpmDao;
 import com.sndi.model.VUpdateDac;
 import com.sndi.model.VVenteLot;
+import com.sndi.model.VbCommissionSpecifique;
+import com.sndi.model.VbCommissionType;
+import com.sndi.model.VbPaysReference;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
 import com.sndi.model.VbTempParametreLot;
@@ -153,7 +147,8 @@ public class DaoController {
 	 private List<VFonctionImputation> listeFonctionsImput = new ArrayList<VFonctionImputation>();
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
 	 private List<TDetailPlanPassation> listeDetail = new ArrayList<TDetailPlanPassation>();
-	 private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 //private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
+	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
 	 private List<TCorrectionDac> listCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TCorrectionDac> listPieceCorrection = new ArrayList<TCorrectionDac>();
 	 private List<TDossierDacs> dossListe = new ArrayList<TDossierDacs>();
@@ -170,6 +165,13 @@ public class DaoController {
 	 private List<TAffichageDao> affectationListe = new ArrayList<TAffichageDao>();
 	 private List<TAffichageDao> validationListe = new ArrayList<TAffichageDao>();
 	 private List <VDaoStatut> daostatutList = new ArrayList<VDaoStatut>();
+	//GESTION DES MEMBRES DE LA COMMISSION
+	private List<VbCommissionType> membresCommission = new ArrayList<VbCommissionType>();
+	private List<VbCommissionType> selectionMembres = new ArrayList<VbCommissionType>(); 
+	private List<VCommissionTypeExp> listeExpert = new ArrayList<VCommissionTypeExp>(); 
+	private List<VCommissionTypeExp> selectionlisteExpert = new ArrayList<VCommissionTypeExp>(); 
+	private List<VbCommissionSpecifique> listeMbr = new ArrayList<VbCommissionSpecifique>(); 
+	private List<VDacMembre> listeMembre = new ArrayList<VDacMembre>(); 
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
 	private List<VPieces> listePices = new ArrayList<VPieces>();
@@ -189,6 +191,7 @@ public class DaoController {
 	//GESTION PIECES OFFRES
 	private List<TTypePieceOffre> listePiecesOffres= new ArrayList<TTypePieceOffre>();
 	private List<TTypePieceOffre> listeSelectionPiecesOffres= new ArrayList<TTypePieceOffre>();
+	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
 	 
 	//variables
 	private long gesCode;
@@ -225,7 +228,7 @@ public class DaoController {
 	 private TDetailVente venteDetail = new TDetailVente();
 	 //GESTION DES PIECES DE L'OFFRE
 	 private TTypePieceOffre newPieceOffre = new TTypePieceOffre();
-	 private TOffrePieceDac newPieceOffreDac = new TOffrePieceDac();
+	 private TOffrePieceDac newPieceOffreDac = new TOffrePieceDac(); 
 	//VARIABLES
 	 private long adaNum;
 	 private String pidCod;
@@ -239,6 +242,7 @@ public class DaoController {
 	 private String affichLog;
 	 private String detCom="";
 	 private String dacCode ="";
+	 private String newSouncc ="";
 	 private String sitDac ="";
 	 private String natPiece ="";
 	 private Date ouvTech;
@@ -273,6 +277,14 @@ public class DaoController {
 	 private TTiers recupTiers = new TTiers();
 	 private VVenteLot nbreLot = new VVenteLot();
 	 private VUpdateDac updateDac= new VUpdateDac();
+	//GESTION DES COMMISSIONS
+	 private VbCommissionSpecifique newcomSpec = new VbCommissionSpecifique();
+	 private VbCommissionSpecifique sltCompsec = new VbCommissionSpecifique();
+	 private boolean btn_save_presence = true;
+	 private boolean btn_save_expert = false;
+	 private boolean btn_ad_expert = false;
+	 private boolean panelMbr = true;
+	 private boolean panelExpert = false;
 	 
 	//Booléens
 	  private boolean skip;
@@ -286,21 +298,19 @@ public class DaoController {
 	  private String nbreDaoTrans ="";
 	  private String sit = "";
 	  private String resultat = "";
+	  private String value1 ="N";
 	  private String statutSanction = "";
 	  private String statutSanRetour="";
 	  private String observationCor ="";
 	  private String statutUpdate="";
 	  private String choixTaux = "";
 	  private String multiFiltre="";
-	  private String value1 ="N";
+	  private String paieCode ="";
 	  private long lotTotal = 0;
 	  private long coutLot = 0;
 	  private boolean ouvTechnique = true;
 	  private boolean btn_save_avis = false;
 	  private boolean btn_save_offre = false;
-	  private boolean pavet_lot = false;
-	  private boolean pavet_offre = false;
-	  private boolean btn_dao = false;
 	//Booléen
 	  //private boolean value1 =true;
 	  private boolean etatQualif =false;
@@ -324,6 +334,9 @@ public class DaoController {
 	  private boolean etatRecu = false; 
 	  private boolean confirmPaie = true;
 	  private boolean confirmVente = false;
+	  private boolean titreVente = false;
+	  private boolean confirmRetrait = false;
+	  private boolean titreRetrait = false;
 	  private boolean pavet1 = false;
 	  private boolean pavet2 = false;
 	  private boolean pavet3 = false;
@@ -335,11 +348,18 @@ public class DaoController {
 	  private boolean btn_affecter = false;
 	  private boolean btn_corrige = true;
 	  private boolean ouverture = false;
+	  private boolean pavet_lot = false;
+	  private boolean pavet_offre = false;
+	  private boolean btn_dao = false;
+	  private boolean btn_titre_paie = false;
+	  private boolean btn_titre_retrait = false;
+	  private boolean infoNcc = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
 		 controleController.fonctionaliteDynamic();
-		 chargeGestions();	 	
+		 chargeGestions();
+		 chargePays();
 	 }
 	 
 	 public String onFlowProcess(FlowEvent event) {
@@ -699,6 +719,11 @@ public class DaoController {
 							new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
 			 }
 			 
+			  //Combobox liste des Pays
+			   public void chargePays(){
+				   listePays=new ArrayList<>(constantService.getListePays());
+				 }
+			 
 	 
 		 //Liste des Dao affectées aux chargés d'etude
 		 public void chargeDaoChargeEtude(){
@@ -950,13 +975,14 @@ public class DaoController {
 					} 
 		 
 		
-		 
+		 //Methode de Chargement des Dossiers chez l'Autorité Contractante
 		  public void chargeDossier() {
 		 		 dossListe.clear();
 		 			 dossListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
 		 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,slctdTd.getDacCode())));			
 		 	 } 
 		  
+		//Methode de Chargement des Dossiers chez le Chargé d'Etudes
 		  public void chargeDossierCharge() {
 		    	 dossDacListe.clear();
 		    	 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
@@ -1104,7 +1130,7 @@ public class DaoController {
 			       			                      //Récupération du Statut
 						 						        TStatut statuts = constantService.getStatut("D1T");
 						 							  	//Historisation du / des retraits
-						 						       historiser("D1T",slctdTd.getDacCode(),"DAO transmit par l'Autorité Contractante");
+						 						       historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorité Contractante");
 						 							  
 			       	   	                           } 
 			       				
@@ -1223,7 +1249,117 @@ public class DaoController {
 					}	
 				}	
 
-		 
+				// ENSEMBLE DES METHODES DE LA COMMISSION
+				 //Liste des membres de la commssions
+					 public void chargeMembreCommission() {
+						 membresCommission = ((List<VbCommissionType>)iservice.getObjectsByColumn("VbCommissionType",new ArrayList<String>(Arrays.asList("TCT_CODE")),
+								    new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
+								    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
+								_logger.info("membre size: "+membresCommission.size());	
+								
+								
+					 }
+					 
+
+						//Liste des membres de la commssions
+						 public void chargeExpert() {
+							 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE")),
+									 new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
+									    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
+									_logger.info("expert size: "+listeExpert.size());	
+									
+									
+						 }
+						 
+						//Liste des membres de la commssions
+						 public void chargeMembres() {
+							 listeMembre = ((List<VDacMembre>)iservice.getObjectsByColumn("VDacMembre",new ArrayList<String>(Arrays.asList("TCT_CODE")),
+									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
+									_logger.info("listeMembre size: "+listeMembre.size());	
+									
+									
+						 }
+					 
+						 
+						 public void afficheExpert() {
+							 btn_save_presence = false;
+							 btn_save_expert = true;
+							 panelMbr = false;
+							 panelExpert = true;
+							 chargeExpert();
+							 userController.initMessage();
+							 
+						 }
+					 
+				 	
+				 	public void savePresence() {
+				 		//COMPOSITION DE LA SEANCE
+						 if (selectionMembres.size()==0) {
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
+								FacesContext.getCurrentInstance().addMessage(null, msg);
+							}else {
+								
+								for(VbCommissionType mbr : selectionMembres) {
+									//newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
+									newcomSpec.setComDteSaisi(Calendar.getInstance().getTime());
+									newcomSpec.setComTctCode(mbr.getTctCode());
+									newcomSpec.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+									newcomSpec.setComDacCode(dao.getDacCode());
+									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+									newcomSpec.setComTcoCode("COJ");
+									iservice.addObject(newcomSpec);
+								}
+								//chargeExpert();
+								chargeMembres();
+								btn_ad_expert = true;
+								 //Message de confirmation
+			  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
+			  		            userController.setRenderMsg(true);
+			  		            userController.setSevrityMsg("success");
+								
+							}
+				 	}
+				 	
+				 	
+				 	public void saveExpert() {
+				 		//COMPOSITION DE LA SEANCE
+						 if (selectionlisteExpert.size()==0) {
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un expert ", "");
+								FacesContext.getCurrentInstance().addMessage(null, msg);
+							}else {
+								
+								for(VCommissionTypeExp mbr : selectionlisteExpert) {
+									//newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
+									newcomSpec.setComDteSaisi(Calendar.getInstance().getTime());
+									newcomSpec.setComTctCode(mbr.getTctCode());
+									newcomSpec.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+									newcomSpec.setComDacCode(dao.getDacCode());
+									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+									newcomSpec.setComTcoCode("COJ");
+									iservice.addObject(newcomSpec);
+								}
+								//chargeExpert();
+								chargeMembres();
+								userController.setTexteMsg("Expert(s) enregistré(s) avec succès!");
+			  		            userController.setRenderMsg(true);
+			  		            userController.setSevrityMsg("success");
+								
+								btn_save_presence = false;
+								btn_save_expert = false;
+								panelMbr = false;
+								panelExpert = true;
+							}
+				 	}
+				
+				 	public void removeMembre() {			
+				 		listeMbr = (List<VbCommissionSpecifique>) iservice.getObjectsByColumn("VbCommissionSpecifique", new ArrayList<String>(Arrays.asList("TCT_CODE")),
+			    					new WhereClause("COM_DAC_CODE",WhereClause.Comparateur.EQ,""+sltCompsec.getComTctCode()));
+			        	       if (!listeMbr.isEmpty()) {
+			        	    	   newcomSpec = listeMbr.get(0);
+			        	       }
+			        	       iservice.deleteObject(getNewcomSpec());
+							   FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+				 	}	 
 		 		 
 	//Statistiques pour le chargé d'Etudes
 			 
@@ -1418,7 +1554,7 @@ public class DaoController {
 		 						     //chargePPM();
 		 						     //Actualisation du tableau de Bord
 		 						     //tableauBordController.chargeDataDao();
-		 			 			typeActionTb();
+		 			 			    //typeActionTb();
 		 						     
 		 						     userController.setTexteMsg(typeDac+" N° "+dao.getDacCode()+" Initié avec succès!");
 		 							 userController.setRenderMsg(true);
@@ -1501,7 +1637,7 @@ public class DaoController {
 	                	          		  newAvis.setAaoDteOuvTec(ouvTech);
 	            	            		  }
 	            	          		      newAvis.setTStatut(new TStatut("D1S"));
-	            	          		      newAvis.setAaoNatInt(value1);
+										  newAvis.setAaoNatInt(value1);
 	            	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
 	            	          		      iservice.addObject(newAvis); 
 	            	          		   
@@ -1526,9 +1662,8 @@ public class DaoController {
 	                	     				    btn_save_avis =false;
 	                	     				//Activation du bouton d'enregistrement des offres
 	                	     				    btn_save_offre = true;
-	                	     				 //Activation du pavet pour la saisie des lots
-		                	     		       pavet_lot = true;
-	                	     				   
+                	     				    //Activation du pavet pour la saisie des lots
+	                	     		         pavet_lot = true;
 	            	                  }
 	        	                   } 
 	                     }
@@ -1779,13 +1914,12 @@ public class DaoController {
 				    		  newVbTemp.setTempType("LOT");
 				    		  iservice.addObject(newVbTemp);
 				    		  chargeLots();
-				    		  
 				    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
 				    		  userController.setRenderMsg(true);
 				    		  userController.setSevrityMsg("success");
-				    		  
-				    		  //Activation du pavet de saisie des pièces des offres 
-						      pavet_offre = true;
+							  
+							  //Activation du pavet de saisie des pièces des offres 
+		                      pavet_offre = true;
 				    		
 				    	 }else {
 				    		 /*userController.setTexteMsg("Veuillez respecter le nombre de lots renseigné !");
@@ -1811,8 +1945,9 @@ public class DaoController {
 				        	 iservice.addObject(newLot);
 				        	 chargeLots();
 				        	 newLot = new TLotAao();
-				        	//Activation du pavet de saisie des pièces des offres 
-							 pavet_offre = true;
+							 
+							 //Activation du pavet de saisie des pièces des offres 
+			                 pavet_offre = true;
 				        	 userController.setTexteMsg("Lot enregistré avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
@@ -1868,8 +2003,6 @@ public class DaoController {
 				   	 
 				   	 public void onSelectLigneBudgetaire() {
 				         newLot.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-				         
-						 //recupLigne = new VLigneImputation();
 						 recupLigne = new VLigneLot();
 						 recupLigne.setLbgAeDon(ligne.getLbgAeDon());
 						 recupLigne.setLbgAeEmp(ligne.getLbgAeEmp());
@@ -1922,7 +2055,7 @@ public class DaoController {
 								//Désactivation du Bouton d'Enregistrement
 								btn_save_offre = false;
 								//Activation du bouton du téléchargement du DAO
-								btn_dao = true;
+				                btn_dao = true;
 					 		 }
 
 				      }
@@ -2023,29 +2156,43 @@ public class DaoController {
 						
 						
 						//Téléchargement des DAO type après la saisie du DAO  
-							public void opendaoNew() throws IOException{
-										 if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
-											  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
-											  // downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
-										  }else
-											  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
-												  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
-												  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
-										  }else
-											 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
-												 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
-												 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
-										    }	
-							  }
+							//Téléchargement des DAO type après la saisie du DAO  
+				  public void opendaoNew() throws IOException{
+					listeDAO = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+		    	              if (!listeDAO.isEmpty()) {
+						         slctdTd = listeDAO.get(0);
+		    	                }
+							 if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
+								  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+								  // downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
+							  }else
+								  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
+									  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
+									  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+							  }else
+								 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
+									 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+									 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+							    }	
+				  }
+			
 						
 			
 				
 							
 			
 							//Chargement des imputations ou lignes budgétaires pour le AC
-							  public void chargeImputation() { 
+							/*  public void chargeImputation() { 
 								 listeImputations.clear();
 								 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+										 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
+									} */
+							  
+							//Chargement des imputations ou lignes budgétaires pour le AC
+							  public void chargeImputation() { 
+								 listeImputations.clear();
+								 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 										 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())); 
 									} 
 							  
@@ -2071,13 +2218,22 @@ public class DaoController {
 							  
 							  
 							  //Filtre Imputation
-							  public void filtreImputation() {
+							/*  public void filtreImputation() {
 									listeImputations.clear();
 									listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 											new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
 											new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 								}
+							  */
 							  
+							//Filtre Imputation
+							  public void filtreImputation() {
+									listeImputations.clear();
+									listeImputations = (List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+											new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()), 
+											new WhereClause("DPP_DAC_CODE",Comparateur.EQ,""+dao.getDacCode()),
+											new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+								}
 							  
 							  //Examen des pièces du DAO par le Responsable du binôme
 							  @Transactional
@@ -2802,6 +2958,9 @@ public class DaoController {
 																        
 																        String exo=chaine+String.valueOf(year)+mois;
 														               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
+														               newCandidat.setCanRepCode(paieCode);
+														               newCandidat.setCanSouNcc(newSouncc);
+														               newCandidat.setCanSouSigleSte(soumission.getSouNcc());
 														               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 														               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 														               iservice.addObject(newCandidat);
@@ -2866,6 +3025,9 @@ public class DaoController {
 												 				        
 												 				        String exo=chaine+String.valueOf(year)+mois;
 												 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
+												 		               newCandidat.setCanRepCode(paieCode);
+												 		               newCandidat.setCanSouNcc(newSouncc);
+												 		               newCandidat.setCanSouSigleSte(soumission.getSouNcc());
 												 		               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 												 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 												 		               iservice.addObject(newCandidat);
@@ -2919,6 +3081,22 @@ public class DaoController {
 											                }
 											  //Fin Methode de Paiement
 											  
+											  
+											  
+											  //Verification du numero de vente
+												 public void verifierNumNcc() {
+													 listSoumission =(List<TSoumissions>) iservice.getObjectsByColumn("TSoumissions", new ArrayList<String>(Arrays.asList("SOU_NCC")),
+													new WhereClause("SOU_NCC",WhereClause.Comparateur.EQ,""+newSouncc));
+													if (!listSoumission.isEmpty()) {
+														soumission=listSoumission.get(0);
+														//infoNcc=true;
+													}else {
+														//infoNcc=false;
+														soumission = new TSoumissions();
+														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero de vente n'existe pas! ", "")); 	 
+													}
+												 }
+											  
 											   //Début de la vente du DAO
 													public void finVente() {
 														String statUpdate = "";
@@ -2951,7 +3129,7 @@ public class DaoController {
 													
 													
 													//Récupération du montant du DAO
-													  public void recupMontantDao() {
+													  public void recupMontantDao() { 
 														  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 																      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 																      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
@@ -2959,6 +3137,23 @@ public class DaoController {
 																      if (!listDao.isEmpty()) {
 																	         newDao= listDao.get(0); 
 													   	              }	
+																      
+																     //Contrôle sur la vente ou le retrait
+																         if(newDao.getDacCout() == 0) {
+																        	 confirmRetrait = true;
+																        	 confirmVente = false;
+																        	 titreRetrait = true;
+																        	 titreVente = false;
+																        	 btn_titre_paie = false;
+																        	 btn_titre_retrait = true;
+																         }else {
+																        	 confirmRetrait = false;
+																        	 confirmVente = true;
+																        	 titreRetrait = false;
+																        	 titreVente = true;
+																        	 btn_titre_paie = true;
+																        	 btn_titre_retrait = false;
+																         }
 													             }
 													  
 													  
@@ -2971,7 +3166,9 @@ public class DaoController {
 														 public void imprimerRecu() {
 																projetReport.stringparam3(slctdTd.getDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
 															}
-		     
+								
+														 					 
+														 
 		     //Methode vider
 		     public void vider() { 
 		    	 daoDetail = new VPpmDao();
@@ -2982,6 +3179,8 @@ public class DaoController {
 		    	 newVbTemp = new VbTempParametreLot();
 		    	 setListeLots(new ArrayList<TLotAao>());
 		     }
+		     
+		     
 		     
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);	 
@@ -3013,7 +3212,15 @@ public class DaoController {
 					chargeLots();
 					chargeImputation();
 					chargePiecesOffres();
-					panelOuverture();
+					 panelOuverture();
+					 chargeMembreCommission();
+					 btn_save_presence = true;
+					 btn_save_expert = false;
+					 panelMbr = true;
+					 panelExpert = false;
+					 btn_ad_expert = false;
+					 selectionMembres.clear();
+					 selectionlisteExpert.clear();
 				break;
 				case "dao3":
 		 			_logger.info("value: "+value+" action: "+action);
@@ -3863,12 +4070,19 @@ public class DaoController {
 		this.listeDetail = listeDetail;
 	}
 
-
-	public List<VLigneImputation> getListeImputations() {
+/*	public List<VLigneImputation> getListeImputations() {
 		return listeImputations;
 	}
 
 	public void setListeImputations(List<VLigneImputation> listeImputations) {
+		this.listeImputations = listeImputations;
+	}*/
+
+	public List<VLigneLot> getListeImputations() {
+		return listeImputations;
+	}
+
+	public void setListeImputations(List<VLigneLot> listeImputations) {
 		this.listeImputations = listeImputations;
 	}
 
@@ -4096,13 +4310,6 @@ public class DaoController {
 		this.listeSelectionPiecesOffres = listeSelectionPiecesOffres;
 	}
 
-	/*public boolean isValue1() {
-		return value1;
-	}
-
-	public void setValue1(boolean value1) {
-		this.value1 = value1;
-	}*/
 
 	public boolean isEtatQualif() {
 		return etatQualif;
@@ -4471,8 +4678,7 @@ public class DaoController {
 	public void setListSoumission(List<TSoumissions> listSoumission) {
 		this.listSoumission = listSoumission;
 	}
-
-	public boolean isPavet_lot() {
+		public boolean isPavet_lot() {
 		return pavet_lot;
 	}
 
@@ -4496,6 +4702,7 @@ public class DaoController {
 		this.btn_dao = btn_dao;
 	}
 
+
 	public String getValue1() {
 		return value1;
 	}
@@ -4503,5 +4710,175 @@ public class DaoController {
 	public void setValue1(String value1) {
 		this.value1 = value1;
 	}
-			
+
+	public boolean isConfirmRetrait() {
+		return confirmRetrait;
+	}
+
+	public void setConfirmRetrait(boolean confirmRetrait) {
+		this.confirmRetrait = confirmRetrait;
+	}
+
+	public boolean isTitreVente() {
+		return titreVente;
+	}
+
+	public void setTitreVente(boolean titreVente) {
+		this.titreVente = titreVente;
+	}
+
+	public boolean isTitreRetrait() {
+		return titreRetrait;
+	}
+
+	public void setTitreRetrait(boolean titreRetrait) {
+		this.titreRetrait = titreRetrait;
+	}
+
+	public boolean isBtn_titre_paie() {
+		return btn_titre_paie;
+	}
+
+	public void setBtn_titre_paie(boolean btn_titre_paie) {
+		this.btn_titre_paie = btn_titre_paie;
+	}
+
+	public boolean isBtn_titre_retrait() {
+		return btn_titre_retrait;
+	}
+
+	public void setBtn_titre_retrait(boolean btn_titre_retrait) {
+		this.btn_titre_retrait = btn_titre_retrait;
+	}
+
+	public List<VbPaysReference> getListePays() {
+		return listePays;
+	}
+
+	public void setListePays(List<VbPaysReference> listePays) {
+		this.listePays = listePays;
+	}
+
+	public List<VbCommissionType> getMembresCommission() {
+		return membresCommission;
+	}
+
+	public void setMembresCommission(List<VbCommissionType> membresCommission) {
+		this.membresCommission = membresCommission;
+	}
+
+	public List<VbCommissionType> getSelectionMembres() {
+		return selectionMembres;
+	}
+
+	public void setSelectionMembres(List<VbCommissionType> selectionMembres) {
+		this.selectionMembres = selectionMembres;
+	}
+
+	public List<VCommissionTypeExp> getListeExpert() {
+		return listeExpert;
+	}
+
+	public void setListeExpert(List<VCommissionTypeExp> listeExpert) {
+		this.listeExpert = listeExpert;
+	}
+
+	public List<VCommissionTypeExp> getSelectionlisteExpert() {
+		return selectionlisteExpert;
+	}
+
+	public void setSelectionlisteExpert(List<VCommissionTypeExp> selectionlisteExpert) {
+		this.selectionlisteExpert = selectionlisteExpert;
+	}
+
+	public VbCommissionSpecifique getNewcomSpec() {
+		return newcomSpec;
+	}
+
+	public void setNewcomSpec(VbCommissionSpecifique newcomSpec) {
+		this.newcomSpec = newcomSpec;
+	}
+
+	public boolean isBtn_save_presence() {
+		return btn_save_presence;
+	}
+
+	public void setBtn_save_presence(boolean btn_save_presence) {
+		this.btn_save_presence = btn_save_presence;
+	}
+
+	public boolean isBtn_save_expert() {
+		return btn_save_expert;
+	}
+
+	public void setBtn_save_expert(boolean btn_save_expert) {
+		this.btn_save_expert = btn_save_expert;
+	}
+
+	public boolean isBtn_ad_expert() {
+		return btn_ad_expert;
+	}
+
+	public void setBtn_ad_expert(boolean btn_ad_expert) {
+		this.btn_ad_expert = btn_ad_expert;
+	}
+
+	public boolean isPanelMbr() {
+		return panelMbr;
+	}
+
+	public void setPanelMbr(boolean panelMbr) {
+		this.panelMbr = panelMbr;
+	}
+
+	public boolean isPanelExpert() {
+		return panelExpert;
+	}
+
+	public void setPanelExpert(boolean panelExpert) {
+		this.panelExpert = panelExpert;
+	}
+
+	public String getPaieCode() {
+		return paieCode;
+	}
+
+	public void setPaieCode(String paieCode) {
+		this.paieCode = paieCode;
+	}
+
+	public String getNewSouncc() {
+		return newSouncc;
+	}
+
+	public void setNewSouncc(String newSouncc) {
+		this.newSouncc = newSouncc;
+	}
+
+	public boolean isInfoNcc() {
+		return infoNcc;
+	}
+
+	public void setInfoNcc(boolean infoNcc) {
+		this.infoNcc = infoNcc;
+	}
+
+	public List<VbCommissionSpecifique> getListeMbr() {
+		return listeMbr;
+	}
+
+	public void setListeMbr(List<VbCommissionSpecifique> listeMbr) {
+		this.listeMbr = listeMbr;
+	}
+
+	public List<VDacMembre> getListeMembre() {
+		return listeMembre;
+	}
+
+	public void setListeMembre(List<VDacMembre> listeMembre) {
+		this.listeMembre = listeMembre;
+	}
+	
+	
+		
 }

@@ -59,7 +59,7 @@
                   </div>
                   
                   
-                <!-- Tableau de Bord pour le AC -->       
+            <!-- Tableau de Bord pour le AC -->       
             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">    
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
@@ -506,18 +506,62 @@
           </div>
         </div>
        <!-- ./col -->
-        
-    
       </div>
                     </div>
                   </div>
        </h:panelGroup>
        
        
+         <h:panelGroup rendered="#{controleController.panelPgpmTableauBordPgPub}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.pgpmDmAttentePub}</h3>
+
+              <p>En attente de Publication</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.pgpmPub}</h3>
+
+              <p>Publié(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          
+              <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{pgpmAcController.chargePgpmPubDmp('PN')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink> 
+          </div>
+        </div>
+        <!-- ./col --> 
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+
        </h:panelGroup>
          <!-- Fin SPP -->
-         
-         
                 </div>
               </div> 
                    
@@ -981,6 +1025,142 @@
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
+    
+    
+    <h:panelGroup rendered="#{controleController.panel3}">
+               <h:panelGroup rendered="#{controleController.searchPgpm}">
+						<div class="col-md-4 ">	
+					  <div class="input-group input-group-sm col-md-12">
+					   <span class="input-group-btn">
+				                <p:commandLink action="#{pgpmAcController.reinitialiserPgpmPub('PN')}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+				        </span>
+                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmAcController.chargerRecherchePub('PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                    </span>
+					 </div>
+					 </div>
+					 </h:panelGroup>
+					
+               <p:dataTable id="ndTble4" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.publicationListe}" 
+					rowKey="#{slctdTb.gpgId}" selection="#{pgpmAcController.listSelectionTransmission}" emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15" >
+                        
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                        <p:column headerText="Financement" styleClass="col-sm-2" >
+                         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.gpgLibFin}" style="color:red; font-weight:bold "/>
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.gpgLibFin}"/>
+         				</h:panelGroup>
+				        </p:column>
+				        
+				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.gpgObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.gpgObjet}" />
+         				</h:panelGroup>
+         				
+				        </p:column>
+				         <p:column headerText="Autorité Contractante" styleClass="col-sm-4" >
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.ac}" style="color:red; font-weight:bold "/>
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.ac}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+                         <p:column headerText="Type Marché" styleClass="col-sm-3" >
+                         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+         				</h:panelGroup>
+         				
+				        </p:column>
+				       
+         				<p:column headerText="Mode de passation" styleClass="col-sm-3" >
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.mopCode}" style="color:red; font-weight:bold"/>
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour !=  '1'}">
+         				<h:outputText value="#{slctdTb.mopCode}" />
+         				</h:panelGroup>
+         				
+				        </p:column>
+				        
+				        <p:column headerText="Part réservée aux PME" styleClass="col-sm-3" >
+				        <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" style="color:red; font-weight:bold"/>  
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}"/>  
+         				</h:panelGroup>
+         				
+				        </p:column>
+				        
+				        <p:column headerText="Lancement" styleClass="col-sm-2" >
+				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.gpgDateDao}"  style="color:red; font-weight:bold" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+         				
+         				 <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.gpgDateDao}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+				        </p:column>
+				        
+				        
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}" style="color:red; font-weight:bold ">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+				        <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+				        </p:column>
+				        
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				         
+				       
+                      <p:column headerText="Actions" styleClass="col-sm-2">
+                             <p:commandLink  action="#{etatsPgpmController.renderPage('pgpm3','APEPGPM')}" styleClass="btn btn-xs btn-success"  title="Apercu Test" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPgpmController.slctdTd}" />   
+                             </p:commandLink>
+                             
+                              <p:commandLink class="btn btn-xs btn-warning" action="#{pgpmAcController.pgpmUnique()}" style="background-color: #f88b2e; margin-left:3px" title="Editer le PGPM" ajax="false">
+                                <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />
+                              </p:commandLink>
+
+				         </p:column>   
+    </p:dataTable>
+    </h:panelGroup>
             
  <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
@@ -1039,8 +1219,13 @@
    </p:commandLink>
    
    <p:commandLink rendered="#{controleController.btn_valider_pgspm_dmp}" action="#{pgpmAcController.validerPgspmCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
-    <p:confirm header="Confirmation" message="Confrmez-vous la validation ?" icon="ui-icon-alert" />
+    <p:confirm header="Confirmation" message="Confirmez-vous la validation ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
+   </p:commandLink>
+   
+    <p:commandLink rendered="#{controleController.btn_publier_pgpm}" action="#{pgpmAcController.publierSPP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+    <p:confirm header="Confirmation" message="Confirmez-vous la publication ?" icon="ui-icon-alert" />
+    <i class="ace-icon fa fa-exchange bigger-130"></i> Publier
    </p:commandLink>
      </h:panelGroup>
      

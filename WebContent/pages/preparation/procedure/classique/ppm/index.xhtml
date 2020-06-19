@@ -92,7 +92,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
           
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PN')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>
@@ -178,7 +178,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PN')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -306,7 +306,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PN')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -425,7 +425,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PN')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -441,7 +441,6 @@
         <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
                       <div class="row">
-            
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
@@ -478,9 +477,6 @@
           </div>
         </div>
         <!-- ./col -->
-        
-        
-       
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
@@ -504,13 +500,55 @@
                   </div>
        </h:panelGroup>
        
-    
+          <h:panelGroup rendered="#{controleController.panelPgpmTableauBordPpPub}">
+        <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+            
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmDmAttentePub}</h3>
+
+              <p>En attente de Publication</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmPub}</h3>
+
+              <p>Publié(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePpmPubDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
        </h:panelGroup>
-         <!-- Fin Tableau de Bord pour le DMP -->             
+
+       </h:panelGroup>
+         <!-- Fin Tableau de Bord pour la DMP -->             
                               
-                  
-                  
-                  
                 </div>
               </div>
 		<h:panelGroup rendered="#{userController.renderMsg}">
@@ -638,7 +676,7 @@
 						</div>
 						<div class="box-body">
 							
-							  
+					  
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listePpm}" 
 					rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucune operation enregistrée" 
                        scrollable="true" scrollHeight="250" >
@@ -784,9 +822,126 @@
                                </p:commandLink>     
                             
 				         </p:column>   
-    </p:dataTable>
-   
-							
+                       </p:dataTable>
+                       
+                       
+                       <h:panelGroup rendered="#{controleController.panel2}">	  
+					<p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.publicationListe}" 
+					rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucune operation enregistrée" 
+                       scrollable="true" scrollHeight="250" >
+                         
+                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         
+                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-4" >
+         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dppObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+         				
+         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dppObjet}" />
+         				</h:panelGroup>
+				        </p:column>
+
+                         <p:column headerText="Source Financement" styleClass="col-sm-2" >
+         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dppSourceFin}" style="color:red; font-weight:bold "/>
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dppSourceFin}" />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dppLbgCode}" style="color:red; font-weight:bold "/>
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dppLbgCode}" />
+         				</h:panelGroup>
+				        </p:column>
+				        
+				         
+				        <p:column headerText="Type Marché" styleClass="col-sm-2" >
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
+         				 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
+         				</h:panelGroup>
+         				
+         				 <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
+         				</h:panelGroup>
+         				
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dppDateValAc}" style="color:red; font-weight:bold">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dppDateValAc}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+				        </p:column>
+				       </h:panelGroup> 
+				         
+				         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        </h:panelGroup>
+				         
+				       
+                      <p:column headerText="Actions" styleClass="col-sm-2">
+                          
+                        <h:panelGroup rendered="#{controleController.detailP1}">
+                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
+                             </p:commandLink>
+                           </h:panelGroup>  
+                          
+                          <h:panelGroup rendered="#{controleController.detailP2}">   
+                             <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPSPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PSPM" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPpmController.slctdTd}" />
+                             </p:commandLink>
+                            </h:panelGroup>
+                          
+                             
+                              <p:commandLink action="#{ppmController.ppmUnique()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left: 3px" title="Editer le PPM" ajax="false">
+                                <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
+                               </p:commandLink>     
+				         </p:column>   
+                       </p:dataTable>
+                       </h:panelGroup>
+   	
 						</div>
 					</div>
 				</div>
@@ -843,21 +998,31 @@
     </p:commandLink> 
                           
      <p:commandLink rendered="#{controleController.btn_valider_pspm_dmp}" action="#{ppmController.validerPspmCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
-     <p:confirm header="Confirmation" message="Confrmez-vous la validation ?" icon="ui-icon-alert" />
+     <p:confirm header="Confirmation" message="Confirmez-vous la validation ?" icon="ui-icon-alert" />
      <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
     </p:commandLink>                                   
    </h:panelGroup>
    
    <h:panelGroup  rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
 	<p:commandLink rendered="#{controleController.btn_valider_ppm_dmp}" action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
-    <p:confirm header="Confirmation" message="Confrmez-vous la validation  ?" icon="ui-icon-alert" />
+    <p:confirm header="Confirmation" message="Confirmez-vous la validation  ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
     </p:commandLink> 
                           
      <p:commandLink rendered="#{controleController.btn_valider_pspm_dmp}" action="#{ppmController.validerPspmCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
-     <p:confirm header="Confirmation" message="Confrmez-vous la validation ?" icon="ui-icon-alert" />
+     <p:confirm header="Confirmation" message="Confirmez-vous la validation ?" icon="ui-icon-alert" />
      <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
-    </p:commandLink>                                   
+    </p:commandLink>  
+    
+    <p:commandLink rendered="#{controleController.btn_publier_ppm}" action="#{ppmController.publierSPP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+     <p:confirm header="Confirmation" message="Confirmez-vous la publication ?" icon="ui-icon-alert" />
+     <i class="ace-icon fa fa-exchange bigger-130"></i> Publier
+    </p:commandLink>
+    
+    <p:commandLink rendered="#{controleController.btn_publier_pspm}" action="#{ppmController.publierSPP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+     <p:confirm header="Confirmation" message="Confirmez-vous la publication ?" icon="ui-icon-alert" />
+     <i class="ace-icon fa fa-exchange bigger-130"></i> Publier
+    </p:commandLink>                                 
    </h:panelGroup>
        </section>
          
