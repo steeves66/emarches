@@ -1,0 +1,1002 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:panelGroup  layout="block" id="tableauBord" >
+<div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-success">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Cliquez pour fermer le tableau de bord
+                      </a>
+                    </h4>
+                  </div>
+                  
+                  
+                <!-- Tableau de Bord pour le AC -->       
+            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                <h:panelGroup rendered="#{controleController.panelDaoTableauBordSai}">
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcSaisie}</h3>
+
+              <p>#{controleController.type} en attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcTransmis}</h3>
+
+              <p>#{controleController.type} Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          
+            <p:commandLink  oncomplete="PF('detailDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCpDifCpmp}</h3> 
+
+              <p>#{controleController.type} Differé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+						 <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+        
+      </div>
+                    </div>
+                  </div>
+                  
+                  </h:panelGroup>
+                  
+                  
+               <h:panelGroup rendered="#{controleController.panelDaoTableauBordPslpso}">
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcPs}</h3>
+
+              <p>#{controleController.type} en attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcTransmis}</h3>
+
+              <p>#{controleController.type} Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDaoTabTrans()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmAcDiffCpmp}</h3> 
+
+              <p>#{controleController.type} Differé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmAcDiffDmp}</h3>
+
+              <p>#{controleController.type} Rejeté(s) par le DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+                  
+                  </h:panelGroup> 
+                  
+                  
+      <h:panelGroup rendered="#{controleController.panelDaoTableauBordPrise}">
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcPs}</h3>
+
+              <p>#{controleController.type} en attente de traitement</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <p:commandLink oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailTB()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoPriseTrait}</h3>
+
+              <p>#{controleController.type} Traités</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+          
+            <p:commandLink oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailTB()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        <!-- ./col -->
+        
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+                  
+                  </h:panelGroup>   
+                  
+                  
+                 </h:panelGroup>
+         <!-- Fin Tableau de Bord pour le AC --> 
+         
+         
+                 <!-- Début Tableau de Bord pour le AC -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
+          
+        <h:panelGroup rendered="#{controleController.panelDaoTableauBordPub}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+            
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvValide}</h3>
+
+              <p>#{controleController.type} en attente de Publication</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink   class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoDaoPub}</h3>
+
+              <p>#{controleController.type} publié(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink   class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+   
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup> 
+       </h:panelGroup> 
+        <!-- Fin Tableau de Bord Publication pour le AC -->  
+        
+        
+        
+         
+           
+              
+          <!-- Début Tableau de Bord pour le chef de Service -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">      
+          <h:panelGroup rendered="#{controleController.panelDaoTableauBordSai}">
+              
+            <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmCpSaisie}</h3>
+
+              <p>#{controleController.type} en attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmCpTransmis}</h3>
+
+              <p>#{controleController.type} Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            
+            <p:commandLink  oncomplete="PF('detailDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+   
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup> 
+       
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordVal}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvAttVal}</h3>
+
+              <p>#{controleController.type} en attente de Validation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvValidation}</h3>
+
+              <p>#{controleController.type} validé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+       
+        <!-- ./col -->
+         <div class="col-lg-3 col-xs-6">
+          small box
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmCpDifDmp}</h3>
+
+              <p>#{controleController.type} différé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div> 
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       
+       </h:panelGroup>
+         <!-- Fin Tableau de Bord pour le Chef de Service -->       
+              
+              
+              
+        <!-- Début Tableau de Bord pour le DMP -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">      
+          <h:panelGroup rendered="#{controleController.panelDaoTableauBordSai}">
+              
+              <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+              <!-- ./col -->              
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcAttenteValide}</h3>
+
+              <p>#{controleController.type} en attente de transmission</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcTransmis}</h3>
+
+              <p>#{controleController.type} Transmis</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <p:commandLink  oncomplete="PF('detailDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        </div>
+        </div>
+        </div>
+       </h:panelGroup> 
+       
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordVal}">
+        <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+            
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmDmAttenteValide}</h3>
+
+              <p>#{controleController.type} en attente de Validation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmDmValide}</h3>
+
+              <p>#{controleController.type} Validé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDmpDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+       
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmDmDiff}</h3>
+
+              <p>#{controleController.type} Différé(s) par la DMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       
+    
+       </h:panelGroup>
+         <!-- Fin Tableau de Bord pour le DMP --> 
+         
+         
+                   <!-- Début Tableau de Bord Affectation pour le Chef de Service DMP -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">      
+          
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordAff}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvAttAff}</h3>
+
+              <p>#{controleController.type} en attente d'Affectation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <p:commandLink    class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div> 
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoaffecte}</h3>
+
+              <p>#{controleController.type} affecté(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  class="small-box-footer" oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailTB()}" style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> 
+          </div>
+        </div>
+        <!-- ./col -->
+        
+         
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvDiff}</h3>
+
+              <p>#{controleController.type} différé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDiffCsvDlg').show()" action="#{daoController.chargeDataDiffCsv()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+
+    
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       </h:panelGroup>
+         <!-- Fin Tableau de Bord Affectation pour le Chef de Service --> 
+         
+         
+         
+             <!-- Début Tableau de Bord pour le Chargé d'Etudes -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}">      
+        
+        <h:panelGroup rendered="false">  
+      <!--  <h:panelGroup rendered="#{controleController.panelDaoTableauBordCha}"> -->
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+            
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoChargeAttente}</h3>
+
+              <p>#{controleController.type} en attente de Traitement</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoChargeVal}</h3>
+
+              <p>#{controleController.type} validé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailChargeValDlg').show()" action="#{daoController.chargeDataChargeValid()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        <h:panelGroup rendered="#{daoController.etatDaoCorrige}">
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoChargeCor}</h3>
+
+              <p>#{controleController.type} corrigé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailChargeCorDlg').show()" action="#{daoController.chargeDaoCorrige()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        </h:panelGroup>
+   
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       </h:panelGroup> 
+        <!-- Fin Tableau de Bord pour le Chargé d'Etudes -->   
+        
+          
+         
+              <!-- Début Tableau de Bord Examen pour le CPMP -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
+          
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordExa}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.ppmCpAttenteValide}</h3>
+
+              <p>#{controleController.type} en attente d'examen</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+       <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvVal}</h3>
+
+              <p>#{controleController.type} validé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailValCsvDlg').show()" action="#{daoController.chargeDataValCsv()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+                <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvDiff}</h3>
+
+              <p>#{controleController.type} différé(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDiffCsvDlg').show()" action="#{daoController.chargeDataDiffCsv()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       
+       
+           <h:panelGroup rendered="#{controleController.panelDaoTableauBordVal}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCpSaisie}</h3>
+
+              <p>#{controleController.type} en attente de Validation</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCpValide}</h3>
+
+              <p>#{controleController.type} transmi(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink action="#{daoController.chargeDetailTB()}" oncomplete="PF('detailDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcDiffCpmp}</h3>
+
+              <p>#{controleController.type} différé(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <p:commandLink  oncomplete="PF('detailCpDifDlg').show()" action="#{daoController.chargeDaoDiff()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       
+       
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordTra}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCpSaisie}</h3>
+
+              <p>#{controleController.type} en attente de Validation </p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCpValide}</h3>
+
+              <p>#{controleController.type} transmi(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailTB()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcDiffCpmp}</h3>
+
+              <p>#{controleController.type} différé(s) par la CPMP</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-add"></i>
+            </div>
+            <p:commandLink  oncomplete="PF('detailCpDifDlg').show()" action="#{daoController.chargeDaoDiff()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+							Detail <i class="fa fa-arrow-circle-right"></i>
+						  </p:commandLink>
+          </div>
+        </div>
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+          
+       </h:panelGroup>
+         <!-- Fin Tableau de Bord Examen pour le CPMP --> 
+         
+           <!-- Début Tableau de Bord Retrait pour l'Autorité Contractante -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
+          
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordRet}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcAttRetrait}</h3>
+
+              <p>#{controleController.type} en attente de retrait</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <p:commandLink oncomplete="PF('detailAttRetDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcRetire}</h3>
+
+              <p>#{controleController.type} retiré(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailRetireDlg').show()" action="#{daoController.chargeDaoRetires()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+     
+        <!-- ./col -->
+       
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       </h:panelGroup>
+         <!-- Fin Tableau de Bord Retrait pour l'Autorité Contractante-->  
+         
+         
+              <!-- Début Tableau de Bord Retrait pour l'Autorité Contractante -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
+          
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordVet}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcAttVente}</h3>
+
+              <p>#{controleController.type} en attente de vente</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcAttRetrait}</h3>
+
+              <p>#{controleController.type} vendu(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailTB()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoAcRetire}</h3>
+
+              <p>#{controleController.type} retiré(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDaoVendDlg').show()" action="#{daoController.chargeDaoVendu()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+     
+        <!-- ./col -->
+       
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       </h:panelGroup>
+         <!-- Fin Tableau de Bord Vente pour l'Autorité Contractante-->           
+                  
+ 
+                </div>
+              </div>
+  </h:panelGroup>   
+</html>
