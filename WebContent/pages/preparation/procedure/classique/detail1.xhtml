@@ -220,6 +220,18 @@
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{controleController.panelPub}">
+            <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e"  action="#{etatsPgpmController.imprimerPgspmDet()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer l'Opération
+				      </p:commandLink>
+				       <p:commandLink styleClass="btn btn-warning" action="#{pgpmAcController.renderPage('pgpm1','PUBPGPM')}" rendered="#{controleController.fermerValPgpm}"  style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		 <p:commandLink styleClass="btn btn-warning" action="#{pgpmAcController.renderPage('pgspm1','PUBPGSPM')}" rendered="#{controleController.fermerValPgspm}"  style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		</h:panelGroup>
     </section>
     </h:form>
     

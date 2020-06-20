@@ -1257,18 +1257,120 @@
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>        
-          <ul class="treeview-menu">
-          <li>
-             <p:commandLink  action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Publication
+            <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>En attente de publication</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+              <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','PUBPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGPM
              </p:commandLink>
             </li>
             <li>
-            <p:commandLink  update=":content" > 
-            <i class="fa fa-circle-o"></i>Correspondance 
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','PUBPPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PPM
              </p:commandLink>
             </li>
-          </ul>
+          </ul>  
+         
+          
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','PUBPGSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGSPM
+             </p:commandLink>
+            </li>
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','PUBPSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PSPM
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          
+          </ul>      
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Déja publié</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','DPUBPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGPM
+             </p:commandLink>
+            </li>
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','DPUBPPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PPM
+             </p:commandLink>
+            </li>   
+          </ul>  
+           
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGSPM
+             </p:commandLink>
+            </li>
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PSPM
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          </ul> 
+          
+             
+         </li>
+          </ul>   
         </li>
          <!-- FIN M2 -->
          
@@ -1553,6 +1655,121 @@
          
          </li>
          
+         
+         <!-- DEBUT M2 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M2-Publications</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+            <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>En attente de publication</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+              <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{daoController.renderPage('dao1','PUBDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>DAC
+             </p:commandLink>
+            </li>
+          </ul>  
+         
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+            <li>
+               <p:commandLink action="#{daoController.renderPage('dao1','PUBDPS')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>DAC
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUBAMI')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>AMI
+             </p:commandLink>
+            </li>
+            
+            <li>
+             <p:commandLink  action="#{daoController.renderPage('dao1','PUBPRQ')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>PRQ
+             </p:commandLink>
+            </li>
+          </ul>      
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Déja publié</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>DAC
+             </p:commandLink>
+            </li>
+          </ul>  
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>DAC
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          </ul> 
+          
+             
+         </li>
+          </ul>   
+        </li>
+         <!-- FIN M2 -->
+         
          </h:panelGroup>
          <!-- FIN TRAITEMENT DU MENU CHF DE SERVICE -->
           
@@ -1620,6 +1837,7 @@
             <!-- DEBUT TRAITEMENT DU MENU CHEF DE SERVICE PREPARATION ET PROCEDURES -->
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
          
+         !--
          <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>M1-Procédure de Préparation</span>
@@ -1738,18 +1956,136 @@
             </li>
 
           </ul>     
-         </li>   
-             
-           
+         </li>       
           </ul>     
          </li>
-            
-           
-           
-           
-         
          </ul>
          </li>
+   
+          <!-- DEBUT M2 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>M2-Publications</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+            <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>En attente de publication</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+              <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','PUBPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGPM
+             </p:commandLink>
+            </li>
+            <li>
+              <p:commandLink action="#{ppmController.renderPage('ppm1','PUBPPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PPM
+             </p:commandLink>
+            </li>
+          </ul>  
+         
+          
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgspm1','PUBPGSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGSPM
+             </p:commandLink>
+            </li>
+            <li>
+              <p:commandLink action="#{ppmController.renderPage('ppm1','PUBPSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PSPM
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          
+          </ul>      
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Déja publié</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','DPUBPGPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGPM
+             </p:commandLink>
+            </li>
+            <li>
+              <p:commandLink action="#{ppmController.renderPage('ppm1','DPUBPPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PPM
+             </p:commandLink>
+            </li>   
+          </ul>  
+           
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','DPUBPGSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PGSPM
+             </p:commandLink>
+            </li>
+            <li>
+              <p:commandLink action="#{ppmController.renderPage('ppm1','DPUBPSPM')}" update=":content" >
+            <i class="fa fa-circle-o"></i>PSPM
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          </ul> 
+          
+             
+         </li>
+          </ul>   
+        </li>
+         <!-- FIN M2 -->
          
          </h:panelGroup>
          

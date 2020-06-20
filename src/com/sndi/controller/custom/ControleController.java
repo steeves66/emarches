@@ -152,6 +152,7 @@ public class ControleController {
 	private boolean pspmModePs = false;
 	private boolean ppmModePn = false;
 	private boolean btn_pub = false;
+	private boolean panelPub = false;
 	
 	//Recherche pour le DAO (Procédure Normale)
 	private boolean venteRecherche = false; 
@@ -775,7 +776,23 @@ public class ControleController {
 									btn_trans_pgpm = false;
 									btn_trans_pgspm = false;
 									btn_trasmettre_pgspm=false;
-					    			}
+					    			}else
+						    			if(action.equalsIgnoreCase("APUPGPM")) {
+						    				type = "PGPM";
+						    				libelle="DETAILS DU PLAN GENERAL DE PASSATION DE MARCHES N°";
+						    				libellePgpm ="PUBLICATION DES PLANS GENERAUX DE PASSATION DE MARCHES";
+						    				panelDetail=true;
+						    				panelForm=false;
+						   				    panelTraitement=false;
+						    				libelle1="Detail Publication";
+						    				detailPg1 = true;
+											detailPg2 = false;
+											panelPgpm = false;
+											panelPgspm = false;
+											panelPub = true;
+											fermerValPgpm = true;
+											fermerValPgspm = false;
+						    			}
 			 //PGSPM
 			 if(action.equalsIgnoreCase("ENGPGSPM")) {
 				   type = "PGSPM";
@@ -939,7 +956,23 @@ public class ControleController {
 									btn_trans_pgpm = false;
 									btn_trans_pgspm = false;
 									btn_trasmettre_pgspm=false;
-					    			}
+					    			}else
+						    			if(action.equalsIgnoreCase("APUPGSPM")) {
+						    				type = "PGSPM";
+						    				libelle="DETAILS DU PLAN GENERAL DE PASSATION DE MARCHES N°";
+						    				libellePgpm ="PUBLICATION DES PLANS GENERAUX DE PASSATION DE MARCHES";
+						    				panelDetail=true;
+						    				panelForm=false;
+						   				    panelTraitement=false;
+						    				libelle1="Detail Publication";
+						    				detailPg1 = true;
+											detailPg2 = false;
+											panelPgpm = false;
+											panelPgspm = false;
+											panelPub = true;
+											fermerValPgpm = false;
+											fermerValPgspm = true;
+						    			}
 			 
 			 //PPM
 			 if(action.equalsIgnoreCase("ENGPPM")) {
@@ -8048,6 +8081,14 @@ public class ControleController {
 	public void setBtn_publier_pspm(boolean btn_publier_pspm) {
 		this.btn_publier_pspm = btn_publier_pspm;
 	}
-	
 
+
+	public boolean isPanelPub() {
+		return panelPub;
+	}
+	public void setPanelPub(boolean panelPub) {
+		this.panelPub = panelPub;
+	}
+	
+   
 }

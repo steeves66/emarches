@@ -549,7 +549,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
           
-              <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{pgpmAcController.chargePgpmPubDmp('PN')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+              <p:commandLink  oncomplete="PF('detailPubDlg').show()" action="#{pgpmAcController.chargePgpmPubDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink> 
           </div>
@@ -1148,7 +1148,7 @@
 				         
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
-                             <p:commandLink  action="#{etatsPgpmController.renderPage('pgpm3','APEPGPM')}" styleClass="btn btn-xs btn-success"  title="Apercu Test" style="background-color: #036d3b;margin-right:3px" update=":content">
+                             <p:commandLink  action="#{etatsPgpmController.renderPage('pgpm3','APUPGPM')}" styleClass="btn btn-xs btn-success"  title="Apercu Test" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsPgpmController.slctdTd}" />   
                              </p:commandLink>
@@ -1471,6 +1471,75 @@
             </div>
       </p:dialog>
     </h:form>
+    
+    
+    <h:form id="apercuPu">
+	        <p:dialog  widgetVar="detailPubDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL PUBLICATION</div></div>
+			         <div class="col-md-3">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+		<p:dataTable id="ndTblePub" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.pgpmPubDmp}" scrollable="true" scrollHeight="260"
+						 selectionMode="single" rowKey="#{slctdTb.gpgId}"
+			               emptyMessage="Aucun PGPM publié">
+			               
+					    <p:column headerText="Financement" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.gpgLibFin}" />
+				        </p:column>
+						<p:column headerText="Réalisation(s) envisagée(s)" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
+				        </p:column>
+				        <p:column headerText="Autorité Contractante" styleClass="col-sm-7" >	        
+         				  <h:outputText value="#{slctdTb.ac}" />
+				        </p:column>
+				        <p:column headerText="Type de Marché" styleClass="col-sm-4" >	        
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column>
+				        
+				        <p:column headerText="Mode de Passation" styleClass="col-sm-4" >	        
+         				  <h:outputText value="#{slctdTb.mopCode}" />
+				        </p:column>
+				        
+				        <p:column headerText="Part reservée aux PME" styleClass="col-sm-3" >	        
+         				  <h:outputText value="#{slctdTb.gpgPartiePmePmi =='O'?'OUI':'NON'}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        
+ 
+				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+	                
+		            </div>
+		           
+	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailPubDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
+    
     
        <h:form id="apercuDifAc">
 	        <p:dialog  widgetVar="detailAcDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">

@@ -128,6 +128,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		chargePgpmDifAc();
 		chargePgspmTrans();
 		chargePgpmValDmp();
+		 chargePgspmPubDmp();
+		 chargePgpmPubDmp();
 		chargePgpmValDmpAc();
 		chargePgspmValDmp();
 		chargePgspmValDmpAc();
@@ -194,6 +196,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private List<VPgpmliste> pgpmValCp = new ArrayList<VPgpmliste>(); 
 	     //private List<TAffichagePgpm> pgpmValDmp = new ArrayList<TAffichagePgpm>();
 		 private List<VPgpmliste> pgpmValDmp = new ArrayList<VPgpmliste>();
+		 private List<VPgpmliste> pgpmPubDmp = new ArrayList<VPgpmliste>();
+		 private List<VPgpmliste> pgspmPubDmp = new ArrayList<VPgpmliste>();
 	     //private List<TAffichagePgpm> pgspmValCp = new ArrayList<TAffichagePgpm>();
 	     private List<VPgpmliste> pgspmValCp = new ArrayList<VPgpmliste>();
 	     //private List<TAffichagePgpm> pgspmValDmp = new ArrayList<TAffichagePgpm>();
@@ -461,7 +465,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 getPublicationListe().clear(); 
 						 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"));
 								tableauBordController.chargeDataPgpm();
 								_logger.info("publicationListe size: "+publicationListe.size());	
 					 }else
@@ -469,7 +473,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 getPublicationListe().clear(); 
 						 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S2V"));
+							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"));
 							tableauBordController.chargeDataPgpm();
 							_logger.info("publicationListe size: "+publicationListe.size());	
 				 }   
@@ -1138,12 +1142,22 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }
 			 
 			//Liste des Pgpm publiés par la DMP : Nouvelle Methode 
-			 public void chargePgpmPubDmp(String typePlan) {
-				 pgpmValDmp.clear();
-				 pgpmValDmp = ((List<VPgpmliste>)iservice.getObjectsByColumn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+			 public void chargePgpmPubDmp() { 
+				 pgpmPubDmp.clear();
+				 pgpmPubDmp = ((List<VPgpmliste>)iservice.getObjectsByColumn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 						    new WhereClause("GPG_STA_CODE",Comparateur.EQ,"PGU"),
-						    new WhereClause("GPG_STA_CODE",Comparateur.EQ,""+typePlan),
 						    new WhereClause("GPG_TYPE_PLAN",Comparateur.EQ,"PN")));
+						   // new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
+			 }
+			 
+			 
+			 
+			//Liste des Pgpm publiés par la DMP : Nouvelle Methode 
+			 public void chargePgspmPubDmp() {
+				 pgspmPubDmp.clear();
+				 pgspmPubDmp = ((List<VPgpmliste>)iservice.getObjectsByColumn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+						    new WhereClause("GPG_STA_CODE",Comparateur.EQ,"PGU"),
+						    new WhereClause("GPG_TYPE_PLAN",Comparateur.EQ,"PS")));
 						   // new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
 			 }
 			 
@@ -1725,14 +1739,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 		           }	   
 			 		      }	
 				         }
-	 		         tableauBordController.chargeDataPgpm();
 	 		         
 	 		         if(controleController.typePlan == "PGPM") {
+	 		        	tableauBordController.chargeDataPgpm();
 	 		        	chargeDataAPublierPgpm("PN");
-		 		        chargePgpmPubDmp("PN");
+		 		        chargePgpmPubDmp();
 	 		         }else {
+	 		        	tableauBordController.chargeDataPgspm();
 	 		        	chargeDataAPublierPgpm("PS");
-		 		        chargePgpmPubDmp("PS");
+		 		        chargePgspmPubDmp();
 	 		         }
 	 		        
 	 		        //Message de confirmation
@@ -3318,6 +3333,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeDataPgspm();
 		 			chargeDataAvaliderPgspm();
 		 			chargeDataAPublierPgpm("PS");
+		 			userController.initMessage();
 				break;
 				case "pgpm4":
 					chargeFinancementDetail();
@@ -4489,6 +4505,22 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setStatutPub(String statutPub) {
 		this.statutPub = statutPub;
+	}
+
+	public List<VPgpmliste> getPgpmPubDmp() {
+		return pgpmPubDmp;
+	}
+
+	public void setPgpmPubDmp(List<VPgpmliste> pgpmPubDmp) {
+		this.pgpmPubDmp = pgpmPubDmp;
+	}
+
+	public List<VPgpmliste> getPgspmPubDmp() {
+		return pgspmPubDmp;
+	}
+
+	public void setPgspmPubDmp(List<VPgpmliste> pgspmPubDmp) {
+		this.pgspmPubDmp = pgspmPubDmp;
 	}
 
 	

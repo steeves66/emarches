@@ -1408,7 +1408,7 @@ public int getNpsValideDmpAc(String src){
 
 //pgpm validés par la DMP : Nouvelle Methode
 public int getNpValideDmp(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+	int i = iservice.countTableByColumn("V_PGPMLISTE", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
 	      //new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -1640,7 +1640,7 @@ public int getNpsValideCmp(String src){
 
 //pgspm validés par la DMP : Nouvelle Methode
 public int getNpsValideDmp(String src){
-	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
+	int i = iservice.countTableByColumn("V_PGPMLISTE", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
 		    //new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
