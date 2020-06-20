@@ -33,9 +33,12 @@ import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TCandidats;
 import com.sndi.model.TCommissionSpecifique;
 import com.sndi.model.TCorrectionDac;
+import com.sndi.model.TCritereAnalyse;
 import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDaoAffectation;
 import com.sndi.model.TDetCommissionSeance;
+import com.sndi.model.TDetCritAnalyse;
+import com.sndi.model.TDetOffres;
 import com.sndi.model.TDetailAdresseAvis;
 import com.sndi.model.TDetailCorrection;
 import com.sndi.model.TDetailPlanPassation;
@@ -87,6 +90,9 @@ import com.sndi.model.VUpdateDac;
 import com.sndi.model.VVenteLot;
 import com.sndi.model.VbCommissionSpecifique;
 import com.sndi.model.VbCommissionType;
+import com.sndi.model.VbCritereAnalyse;
+import com.sndi.model.VbDetCritAnalyse;
+import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbPaysReference;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
@@ -192,6 +198,11 @@ public class DaoController {
 	private List<TTypePieceOffre> listePiecesOffres= new ArrayList<TTypePieceOffre>();
 	private List<TTypePieceOffre> listeSelectionPiecesOffres= new ArrayList<TTypePieceOffre>();
 	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
+	//GESTION DES CRITERES D'ANALYSE
+	private List<VbCritereAnalyse> listeCritereAnalyse = new ArrayList<VbCritereAnalyse>();
+	private List<VbDetCritAnalyse> listeCritereDetAnalyse = new ArrayList<VbDetCritAnalyse>();
+	private List<VbDetCritAnalyse> selectionDetCritere = new ArrayList<VbDetCritAnalyse>();
+
 	 
 	//variables
 	private long gesCode;
@@ -229,6 +240,8 @@ public class DaoController {
 	 //GESTION DES PIECES DE L'OFFRE
 	 private TTypePieceOffre newPieceOffre = new TTypePieceOffre();
 	 private TOffrePieceDac newPieceOffreDac = new TOffrePieceDac(); 
+	//GESTION DES CRITERES D'ANALYSE
+	 private VbCritereAnalyse sltCritere = new VbCritereAnalyse();
 	//VARIABLES
 	 private long adaNum;
 	 private String pidCod;
@@ -280,6 +293,8 @@ public class DaoController {
 	//GESTION DES COMMISSIONS
 	 private VbCommissionSpecifique newcomSpec = new VbCommissionSpecifique();
 	 private VbCommissionSpecifique sltCompsec = new VbCommissionSpecifique();
+	//GESTION DES CRTIERE
+	 private VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
 	 private boolean btn_save_presence = true;
 	 private boolean btn_save_expert = false;
 	 private boolean btn_ad_expert = false;
@@ -405,7 +420,43 @@ public class DaoController {
 			 }
 	 }
 	 
+	 //GESTION DES CRITERES
+	 public void chargeCritere() { 
+		 listeCritereAnalyse= (List<VbCritereAnalyse>) iservice.getObjectsByColumn("VbCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
+					new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,""+dao.getTTypeMarche().getTymCode()));
+		 /*new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,"2"));*/
+	 }
 	 
+		//Liste des offres d'un lot
+	 public void onSelectCritere() {
+		 listeCritereDetAnalyse = ((List<VbDetCritAnalyse>)iservice.getObjectsByColumn("VbDetCritAnalyse",new ArrayList<String>(Arrays.asList("DAN_LIBELLE")),
+				  new WhereClause("DAN_CRA_CODE",WhereClause.Comparateur.EQ,""+sltCritere.getCraCode())));
+			_logger.info("Nbr detail critere : "+listeCritereDetAnalyse.size());	
+	 }
+	 
+	 public void saveCritere() {
+		 if (selectionDetCritere.size()==0) {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère sélectionné", ""));
+			}
+	 		else{
+		 		 for(VbDetCritAnalyse ligne : selectionDetCritere) {
+		 			newCritereDac.setDcadDacCode(dao.getDacCode());
+		 			newCritereDac.setDcadDanCode(ligne.getDanCode());
+		 			newCritereDac.setDcadDanCraCode(sltCritere.getCraCode());
+		 			newCritereDac.setDcadDteSaisie(Calendar.getInstance().getTime());
+		 			newCritereDac.setDcadLibAjust(ligne.getDanLibelle());
+		 			newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
+		 			newCritereDac.setDcadStatut("0");
+		 			iservice.addObject(newCritereDac);
+			     }
+		 		userController.setTexteMsg("Critère(s) d'analyse enrégistré(s) avec succès!");
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");
+				
+	 		 }
+	 }
+	 //FIN GESTION DES CRITERES
 	 //Affichage des AC en lui passant en parametre les statuts concerné (2 statuts)
 	 public void chargeDataAc2(String typeDac,String typePlan,String stat1,String stat2){
 		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
@@ -1548,8 +1599,8 @@ public class DaoController {
 		 			 			    //Historisation   
 		 			 			   historiser("D1S",dao.getDacCode(),"Initiation du "+typeDac+" par une Autorité Contractante");
 		 			 			 
-		 			 			   //Affichage de la liste DAC en fonction type plan et du type DAC
-		 			 		
+		 			 			   //Chargement des criteres d'analyse
+		 			 			  chargeCritere();
 		 						     
 		 						     //chargePPM();
 		 						     //Actualisation du tableau de Bord
@@ -3214,6 +3265,7 @@ public class DaoController {
 					chargePiecesOffres();
 					 panelOuverture();
 					 chargeMembreCommission();
+					 //chargeCritere();
 					 btn_save_presence = true;
 					 btn_save_expert = false;
 					 panelMbr = true;
@@ -4877,6 +4929,54 @@ public class DaoController {
 
 	public void setListeMembre(List<VDacMembre> listeMembre) {
 		this.listeMembre = listeMembre;
+	}
+
+	public List<VbCritereAnalyse> getListeCritereAnalyse() {
+		return listeCritereAnalyse;
+	}
+
+	public void setListeCritereAnalyse(List<VbCritereAnalyse> listeCritereAnalyse) {
+		this.listeCritereAnalyse = listeCritereAnalyse;
+	}
+
+	public List<VbDetCritAnalyse> getListeCritereDetAnalyse() {
+		return listeCritereDetAnalyse;
+	}
+
+	public void setListeCritereDetAnalyse(List<VbDetCritAnalyse> listeCritereDetAnalyse) {
+		this.listeCritereDetAnalyse = listeCritereDetAnalyse;
+	}
+
+	public List<VbDetCritAnalyse> getSelectionDetCritere() {
+		return selectionDetCritere;
+	}
+
+	public void setSelectionDetCritere(List<VbDetCritAnalyse> selectionDetCritere) {
+		this.selectionDetCritere = selectionDetCritere;
+	}
+
+	public VbCommissionSpecifique getSltCompsec() {
+		return sltCompsec;
+	}
+
+	public void setSltCompsec(VbCommissionSpecifique sltCompsec) {
+		this.sltCompsec = sltCompsec;
+	}
+
+	public VbCritereAnalyse getSltCritere() {
+		return sltCritere;
+	}
+
+	public void setSltCritere(VbCritereAnalyse sltCritere) {
+		this.sltCritere = sltCritere;
+	}
+
+	public VbDetCritAnalyseDac getNewCritereDac() {
+		return newCritereDac;
+	}
+
+	public void setNewCritereDac(VbDetCritAnalyseDac newCritereDac) {
+		this.newCritereDac = newCritereDac;
 	}
 	
 	
