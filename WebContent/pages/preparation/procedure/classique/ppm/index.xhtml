@@ -662,9 +662,7 @@
 					 
 					 <div class="col-md-4">
 					 </div>
-					 
-					 
-							
+
 							<div class="col-md-1 ">
 							<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
 								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouvelle Opération" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{ppmController.renderPage('ppm2','ENGPPM')}" update=":content">
@@ -676,7 +674,7 @@
 						</div>
 						<div class="box-body">
 							
-					  
+					 <h:panelGroup rendered="#{controleController.panel1}">	
 					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listePpm}" 
 					rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucune operation enregistrée" 
                        scrollable="true" scrollHeight="250" >
@@ -823,9 +821,9 @@
                             
 				         </p:column>   
                        </p:dataTable>
+                    </h:panelGroup>   
                        
-                       
-                       <h:panelGroup rendered="#{controleController.panel2}">	  
+                 <h:panelGroup rendered="#{controleController.panel2}">	  
 					<p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.publicationListe}" 
 					rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucune operation enregistrée" 
                        scrollable="true" scrollHeight="250" >

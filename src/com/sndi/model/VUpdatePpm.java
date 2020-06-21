@@ -74,6 +74,9 @@ public class VUpdatePpm implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private Long dppMontant;
+	private String dppNatInt;
+	private String dppStatutAno;
+	private String dppTypeStrConduc;
 	private String lbgCode;
 	private String lbgStrCode;
 	private short lbgGesCode;
@@ -185,7 +188,7 @@ public class VUpdatePpm implements java.io.Serializable {
 			Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno,
 			Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant,
-			String lbgCode, String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon, String lbgImputation,
+			String dppNatInt, String dppStatutAno, String dppTypeStrConduc,String lbgCode, String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon, String lbgImputation,
 			Long lbgAnoCode, String lbgNatCode, BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr,
 			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp, BigDecimal lbgTotDot,
 			String lbgUtilSaisi, String lbgDesCode, Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot,
@@ -254,6 +257,9 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
 		this.dppMontant = dppMontant;
+		this.dppNatInt = dppNatInt;
+		this.dppStatutAno = dppStatutAno;
+		this.dppTypeStrConduc = dppTypeStrConduc;
 		this.lbgCode = lbgCode;
 		this.lbgStrCode = lbgStrCode;
 		this.lbgGesCode = lbgGesCode;
@@ -816,6 +822,33 @@ public class VUpdatePpm implements java.io.Serializable {
 
 	public void setDppMontant(Long dppMontant) {
 		this.dppMontant = dppMontant;
+	}
+	
+	@Column(name = "DPP_NAT_INT", length = 3)
+	public String getDppNatInt() {
+		return this.dppNatInt;
+	}
+
+	public void setDppNatInt(String dppNatInt) {
+		this.dppNatInt = dppNatInt;
+	}
+
+	@Column(name = "DPP_STATUT_ANO", length = 3)
+	public String getDppStatutAno() {
+		return this.dppStatutAno;
+	}
+
+	public void setDppStatutAno(String dppStatutAno) {
+		this.dppStatutAno = dppStatutAno;
+	}
+
+	@Column(name = "DPP_TYPE_STR_CONDUC", length = 50)
+	public String getDppTypeStrConduc() {
+		return this.dppTypeStrConduc;
+	}
+
+	public void setDppTypeStrConduc(String dppTypeStrConduc) {
+		this.dppTypeStrConduc = dppTypeStrConduc;
 	}
 
 	@Column(name = "LBG_CODE", nullable = false, length = 50)

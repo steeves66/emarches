@@ -82,6 +82,9 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private Long dppMontant;
+	private String dppNatInt;
+	private String dppTypeStrConduc;
+	private String dppStatutAno;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -114,7 +117,8 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, String dppStatutRetour,
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
-			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
+			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno,
+			Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TLBudgets = TLBudgets;
@@ -170,6 +174,9 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
 		this.dppMontant = dppMontant;
+		this.dppNatInt = dppNatInt;
+		this.dppTypeStrConduc = dppTypeStrConduc;
+		this.dppStatutAno = dppStatutAno;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -704,6 +711,34 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppMontant(Long dppMontant) {
 		this.dppMontant = dppMontant;
+	}
+	
+
+	@Column(name = "DPP_NAT_INT", length = 3)
+	public String getDppNatInt() {
+		return this.dppNatInt;
+	}
+
+	public void setDppNatInt(String dppNatInt) {
+		this.dppNatInt = dppNatInt;
+	}
+
+	@Column(name = "DPP_TYPE_STR_CONDUC", length = 50)
+	public String getDppTypeStrConduc() {
+		return this.dppTypeStrConduc;
+	}
+
+	public void setDppTypeStrConduc(String dppTypeStrConduc) {
+		this.dppTypeStrConduc = dppTypeStrConduc;
+	}
+
+	@Column(name = "DPP_STATUT_ANO", length = 3)
+	public String getDppStatutAno() {
+		return this.dppStatutAno;
+	}
+
+	public void setDppStatutAno(String dppStatutAno) {
+		this.dppStatutAno = dppStatutAno;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

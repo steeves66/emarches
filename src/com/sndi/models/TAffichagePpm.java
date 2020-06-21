@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 18 juin 2020 16:45:49 by Hibernate Tools 4.3.5.Final
+// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -74,6 +74,8 @@ public class TAffichagePpm implements java.io.Serializable {
 	private String affFonCodPf;
 	private String affFonCodDmp;
 	private Long affDppMontant;
+	private String affDppNatInt;
+	private String affDppStatutAno;
 
 	public TAffichagePpm() {
 	}
@@ -105,7 +107,7 @@ public class TAffichagePpm implements java.io.Serializable {
 			String affDppPieceDao, Date affDppInvEntre, String affDppRecherche, Date affDppDateValAc,
 			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance,
 			Date affDppApprobAno, Date affDppDteModif, Date affDppDateAttApprobCmp, Date affDppDateJugementTech,
-			String affFonCodPf, String affFonCodDmp, Long affDppMontant) {
+			String affFonCodPf, String affFonCodDmp, Long affDppMontant, String affDppNatInt, String affDppStatutAno) {
 		this.affId = affId;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
@@ -161,6 +163,8 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affFonCodPf = affFonCodPf;
 		this.affFonCodDmp = affFonCodDmp;
 		this.affDppMontant = affDppMontant;
+		this.affDppNatInt = affDppNatInt;
+		this.affDppStatutAno = affDppStatutAno;
 	}
 
 	@Id
@@ -693,6 +697,24 @@ public class TAffichagePpm implements java.io.Serializable {
 
 	public void setAffDppMontant(Long affDppMontant) {
 		this.affDppMontant = affDppMontant;
+	}
+
+	@Column(name = "AFF_DPP_NAT_INT", length = 3)
+	public String getAffDppNatInt() {
+		return this.affDppNatInt;
+	}
+
+	public void setAffDppNatInt(String affDppNatInt) {
+		this.affDppNatInt = affDppNatInt;
+	}
+
+	@Column(name = "AFF_DPP_STATUT_ANO", length = 3)
+	public String getAffDppStatutAno() {
+		return this.affDppStatutAno;
+	}
+
+	public void setAffDppStatutAno(String affDppStatutAno) {
+		this.affDppStatutAno = affDppStatutAno;
 	}
 
 }

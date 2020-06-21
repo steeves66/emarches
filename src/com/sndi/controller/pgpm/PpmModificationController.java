@@ -1290,6 +1290,9 @@ public class PpmModificationController {
 					             detail.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
 					             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
 					             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
+					             detail.setDppNatInt(updatePpm.getDppNatInt());
+					             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
+					             detail.setDppStatutAno(updatePpm.getDppStatutAno());
 					             detail.setDppStructureBenefi(updatePpm.getDppStructureBenefi());
 					             detail.setDppObjet(updatePpm.getDppObjet());
 					             detail.setDppPartiePmePmi(updatePpm.getDppPartiePmePmi());

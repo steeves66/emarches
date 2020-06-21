@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 18 juin 2020 16:45:49 by Hibernate Tools 4.3.5.Final
+// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -82,6 +82,9 @@ public class VUpdatePpm implements java.io.Serializable {
 			@AttributeOverride(name = "dppFonCodPf", column = @Column(name = "DPP_FON_COD_PF", length = 20)),
 			@AttributeOverride(name = "dppFonCodDmp", column = @Column(name = "DPP_FON_COD_DMP", length = 20)),
 			@AttributeOverride(name = "dppMontant", column = @Column(name = "DPP_MONTANT", precision = 15, scale = 0)),
+			@AttributeOverride(name = "dppNatInt", column = @Column(name = "DPP_NAT_INT", length = 3)),
+			@AttributeOverride(name = "dppStatutAno", column = @Column(name = "DPP_STATUT_ANO", length = 3)),
+			@AttributeOverride(name = "dppTypeStrConduc", column = @Column(name = "DPP_TYPE_STR_CONDUC", length = 50)),
 			@AttributeOverride(name = "lbgCode", column = @Column(name = "LBG_CODE", nullable = false, length = 50)),
 			@AttributeOverride(name = "lbgStrCode", column = @Column(name = "LBG_STR_CODE", nullable = false, length = 30)),
 			@AttributeOverride(name = "lbgGesCode", column = @Column(name = "LBG_GES_CODE", nullable = false, precision = 4, scale = 0)),

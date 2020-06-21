@@ -142,19 +142,36 @@
                   </h:panelGroup>  
                   
                 </div> 
+                
+                 <div class="form-group">
+                  <label  class="col-sm-3 control-label">Appel d'Offres</label>
+
+                  <div class="col-sm-9">
+                  <p:selectOneRadio value="#{ppmModificationController.updatePpm.dppNatInt}" id="natInt">
+						<f:selectItem itemLabel="NATIONAL" itemValue="N" />
+						<f:selectItem itemLabel="INTERNATIONAL" itemValue="I" />
+					 </p:selectOneRadio>
+                  </div>
+                </div>
 	        </div>
 	        
 	       <div class="col-md-6">
 	          <div class="form-group">
                   <label  class="col-sm-3 control-label">Structure Conductrice</label>
                   <div class="col-sm-9">
-                  <p:selectOneMenu id="tpcond" value="#{ppmModificationController.updatePpm.dppStructureConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">  
+                  <p:selectOneMenu id="tpcond" value="#{ppmModificationController.updatePpm.dppTypeStrConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">  
 			       <f:selectItems value="#{ppmModificationController.listeTypStruConduc}" var="typ" itemLabel="#{typ.libelle}" itemValue="#{typ.libelle}" />			   				   
 				  <f:selectItems />				   				    				   
 		       	 </p:selectOneMenu>
                   </div>
                 </div>	
                 
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Structure Conductrice</label>
+                  <div class="col-sm-9">
+                    <p:inputText  type="text" value="#{ppmController.detailPass.dppStructureConduc}" styleClass="form-control" style="width: 100%" />
+                  </div>
+                </div>	
         
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Structure Bénéficiaire</label>
@@ -186,12 +203,19 @@
                 </h:panelGroup>
                 
                   <div class="form-group">
-                  <label for="prod" class="col-sm-3 control-label">Procédure<span style="color:red;"> *</span></label>
-
-                  <div class="col-sm-9">
+                  <label for="prod" class="col-sm-3 control-label">Bailleur<span style="color:red;"> *</span></label>
+                  <div class="col-sm-2">
                      <p:selectOneRadio value="#{ppmModificationController.updatePpm.dppBailleur}" id="prod">
-						<f:selectItem itemLabel="Bailleur" itemValue="B" />
-						<f:selectItem itemLabel="National" itemValue="N" />
+						<f:selectItem itemLabel="OUI" itemValue="B" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                  </div>
+                  
+                  <label for="ano1" class="col-sm-3 control-label">ANO<span style="color:red;"> *</span></label>
+                  <div class="col-sm-2">
+                     <p:selectOneRadio value="#{ppmController.updatePpm.dppStatutAno}" id="ano1">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
 					 </p:selectOneRadio>
                   </div>
                 </div> 

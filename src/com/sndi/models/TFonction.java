@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 18 juin 2020 16:45:49 by Hibernate Tools 4.3.5.Final
+// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -47,6 +47,7 @@ public class TFonction implements java.io.Serializable {
 	private Set<TSeances> TSeanceses = new HashSet<TSeances>(0);
 	private Set<TAffichagePgpm> TAffichagePgpms = new HashSet<TAffichagePgpm>(0);
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
+	private Set<TDetCritAnalyse> TDetCritAnalyses = new HashSet<TDetCritAnalyse>(0);
 	private Set<TAvisAppelOffre> TAvisAppelOffresForAaoFonCodAc = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDemande> TDemandes = new HashSet<TDemande>(0);
 	private Set<TLotAao> TLotAaosForLaaFonCodCpmp = new HashSet<TLotAao>(0);
@@ -81,8 +82,8 @@ public class TFonction implements java.io.Serializable {
 			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap,
 			Set<THistoAgpm> THistoAgpms, Set<TAssignation> TAssignations, Set<TLBudgets> TLBudgetsesForLbgFonCode,
 			Set<TSeances> TSeanceses, Set<TAffichagePgpm> TAffichagePgpms, Set<TAffichagePpm> TAffichagePpms,
-			Set<TAvisAppelOffre> TAvisAppelOffresForAaoFonCodAc, Set<TDemande> TDemandes,
-			Set<TLotAao> TLotAaosForLaaFonCodCpmp, Set<THistoPlanGeneral> THistoPlanGenerals,
+			Set<TDetCritAnalyse> TDetCritAnalyses, Set<TAvisAppelOffre> TAvisAppelOffresForAaoFonCodAc,
+			Set<TDemande> TDemandes, Set<TLotAao> TLotAaosForLaaFonCodCpmp, Set<THistoPlanGeneral> THistoPlanGenerals,
 			Set<TAvisAppelOffre> TAvisAppelOffresForAaoFonCodeCpmp, Set<THistoDemande> THistoDemandes,
 			Set<TAdresseAvis> TAdresseAvises, Set<TDetailCorrection> TDetailCorrections,
 			Set<TPlanGeneral> TPlanGenerals, Set<TLotAao> TLotAaosForLaaFonCodSaisi,
@@ -115,6 +116,7 @@ public class TFonction implements java.io.Serializable {
 		this.TSeanceses = TSeanceses;
 		this.TAffichagePgpms = TAffichagePgpms;
 		this.TAffichagePpms = TAffichagePpms;
+		this.TDetCritAnalyses = TDetCritAnalyses;
 		this.TAvisAppelOffresForAaoFonCodAc = TAvisAppelOffresForAaoFonCodAc;
 		this.TDemandes = TDemandes;
 		this.TLotAaosForLaaFonCodCpmp = TLotAaosForLaaFonCodCpmp;
@@ -369,6 +371,15 @@ public class TFonction implements java.io.Serializable {
 
 	public void setTAffichagePpms(Set<TAffichagePpm> TAffichagePpms) {
 		this.TAffichagePpms = TAffichagePpms;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFonction")
+	public Set<TDetCritAnalyse> getTDetCritAnalyses() {
+		return this.TDetCritAnalyses;
+	}
+
+	public void setTDetCritAnalyses(Set<TDetCritAnalyse> TDetCritAnalyses) {
+		this.TDetCritAnalyses = TDetCritAnalyses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFonctionByAaoFonCodAc")

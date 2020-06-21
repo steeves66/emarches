@@ -98,6 +98,8 @@ public class ControleController {
 	private boolean panelPspmTableauBordSai =false;
 	private boolean panelPspmTableauBordVal =false;
 	private boolean panelDaoTableauBordPub = false;
+	private boolean panelDaoTableauBordPubCsv = false;
+	private boolean panelDaoTableauBordPubDps = false;
 	private boolean selectLoveModePgpm = false;
 	private boolean selectLoveModePgspm = false;
 	public boolean btn_maj_datePpm =false;
@@ -119,7 +121,9 @@ public class ControleController {
 	private boolean detailA = false;
 	public boolean btn_trans_ami =false;
 	public boolean btn_imprimpgspm = false;
-	
+	//PUBLICATION
+	public boolean btn_pub_csv = false;
+	public boolean btn_pub_dps = false;
 	//DAO
 	private boolean panelDaoTableauBordSai =false;
 	private boolean panelDaoTableauBordVal =false;
@@ -278,10 +282,8 @@ public class ControleController {
 	private boolean searchAcPs = false;
 	private boolean searchCpmpPs = false;
 	private boolean searchDmpPs = false;
-	
 	private boolean nbreppm =false;
 	private boolean nbrepspm =false;
-	
 	private boolean detailPg1 = false;
 	private boolean detailPg2 = false;
 	
@@ -345,6 +347,8 @@ public class ControleController {
 	private boolean panelPgpmTableauBordPgsPub = false;
 	private boolean panelPgpmTableauBordPpPub = false;	
 	private boolean panelPgpmTableauBordPspPub = false;
+	private boolean panelPgpmTableauBordDpgPub = false;
+	private boolean panelPgpmTableauBordDpsgPub = false;
 	private boolean btn_publier_pgpm = false;
 	private boolean btn_publier_pgspm = false;
 	private boolean btn_publier_ppm = false;
@@ -762,6 +766,7 @@ public class ControleController {
 									panel1 =false;
 									panel2 =false;
 									panel3= true;
+									panel4 = false;
 									panelPgpm = true;
 									panelPgspm = false;
 									fermerSaiPgpm = false;
@@ -792,7 +797,45 @@ public class ControleController {
 											panelPub = true;
 											fermerValPgpm = true;
 											fermerValPgspm = false;
-						    			}
+						    			}else
+							    			if(action.equalsIgnoreCase("DPUBPGPM")) { 
+								    			type = "PGPM";
+							    				libelle="PLANS GENERAUX DE PASSATION DE MARCHES PUBLIES";	
+							    				libelle1="PLANS GENERAUX DE PASSATION DE MARCHES PUBLIES";
+							    				libelleSmall="Procédure Normale";
+							    				panelDetail=false;
+							    				panelForm=false;
+							   				    panelTraitement=true;
+							    				btn_new =false;
+							    				btn_trasmettre =false;
+								    			btn_valider_cpmp =false; 
+					                            btn_valider_dmp =false;
+					                            btn_valider_pgspm_cpmp =false;
+					                            btn_valider_pgspm_dmp =false;
+					                            btn_publier_pgpm = false;
+					                            btn_publier_pgspm = false;
+					                            searchPgpm = true;
+												searchPgspm = false;
+												panel1 =false;
+												panel2 =false;
+												panel3= false;
+												panel4= true;
+												panelPgpm = true;
+												panelPgspm = false;
+												fermerSaiPgpm = false;
+												fermerValPgpm = true;
+												fermerSaiPgspm = false;
+												fermerValPgspm = false;
+												panelPgpmTableauBordSai =false;
+												panelPgpmTableauBordVal =false;
+												panelPgpmTableauBordPgPub = false;
+												panelPgpmTableauBordDpgPub = true;
+												detailPg1 = true;
+												detailPg2 = false;
+												btn_trans_pgpm = false;
+												btn_trans_pgspm = false;
+												btn_trasmettre_pgspm=false;
+								    			}
 			 //PGSPM
 			 if(action.equalsIgnoreCase("ENGPGSPM")) {
 				   type = "PGSPM";
@@ -943,6 +986,7 @@ public class ControleController {
 									panel1 =false;
 									panel2 =false;
 									panel3= true;
+									panel4 = false;
 									panelPgpm = false;
 									panelPgspm = true;
 									fermerSaiPgpm = false;
@@ -959,8 +1003,8 @@ public class ControleController {
 					    			}else
 						    			if(action.equalsIgnoreCase("APUPGSPM")) {
 						    				type = "PGSPM";
-						    				libelle="DETAILS DU PLAN GENERAL DE PASSATION DE MARCHES N°";
-						    				libellePgpm ="PUBLICATION DES PLANS GENERAUX DE PASSATION DE MARCHES";
+						    				libelle="DETAILS DU PLAN GENERAL  SIMPLIFIE DE PASSATION DE MARCHES N°";
+						    				libellePgpm ="PUBLICATION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
 						    				panelDetail=true;
 						    				panelForm=false;
 						   				    panelTraitement=false;
@@ -972,7 +1016,46 @@ public class ControleController {
 											panelPub = true;
 											fermerValPgpm = false;
 											fermerValPgspm = true;
-						    			}
+						    			}else
+							    			if(action.equalsIgnoreCase("DPUBPGSPM")) { 
+								    			type = "PGSPM";
+							    				libelle="PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES PUBLIES";	
+							    				libelle1="PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES PUBLIES";
+							    				libelleSmall="Procédure Simplifiée";
+							    				panelDetail=false;
+							    				panelForm=false;
+							   				    panelTraitement=true;
+							    				btn_new =false;
+							    				btn_trasmettre =false;
+								    			btn_valider_cpmp =false; 
+					                            btn_valider_dmp =false;
+					                            btn_valider_pgspm_cpmp =false;
+					                            btn_valider_pgspm_dmp =false;
+					                            btn_publier_pgpm = false;
+					                            btn_publier_pgspm = false;
+					                            searchPgpm = true;
+												searchPgspm = false;
+												panel1 =false;
+												panel2 =false;
+												panel3= false;
+												panel4= true;
+												panelPgpm = false;
+												panelPgspm = true;
+												fermerSaiPgpm = false;
+												fermerValPgpm = true;
+												fermerSaiPgspm = false;
+												fermerValPgspm = false;
+												panelPgpmTableauBordSai =false;
+												panelPgpmTableauBordVal =false;
+												panelPgpmTableauBordPgPub = false;
+												panelPgpmTableauBordDpgPub = false;
+												panelPgpmTableauBordDpsgPub = true;
+												detailPg1 = true;
+												detailPg2 = false;
+												btn_trans_pgpm = false;
+												btn_trans_pgspm = false;
+												btn_trasmettre_pgspm=false;
+								    			}
 			 
 			 //PPM
 			 if(action.equalsIgnoreCase("ENGPPM")) {
@@ -1092,8 +1175,8 @@ public class ControleController {
 			    				panelForm=false;
 			   				    panelTraitement=true;
 			    				btn_new =false;
-								panel1 =false;
-								panel2 =true;
+								panel1 =true;
+								panel2 =false;
 								panelPpmTableauBordSai = false;
 								panelPpmTableauBordVal = true;
 								panelPpm = true;
@@ -1136,6 +1219,8 @@ public class ControleController {
 				    			}else
 					    			if(action.equalsIgnoreCase("PUBPPM")) {
 					    			type = "PPM";
+					    			typePlan = "PN";
+					    			fonctionalite ="listeAttPub";
 				    				libelleProcedure="PUBLICATION DES PLANS DE PASSATION DE MARCHES";	
 				    				libelle1="PUBLICATION DES PLANS DE PASSATION DE MARCHES";
 				    				panelDetail=false;
@@ -1171,7 +1256,47 @@ public class ControleController {
 									searchAC = false;
 									searchCpmp = true;
 									searchDmp = true;
-					    			}
+					    			}else
+						    			if(action.equalsIgnoreCase("DPUBPPM")) {
+							    			type = "PPM";
+							    			typePlan = "PN";
+							    			fonctionalite ="listePpmPub";
+						    				libelleProcedure="PLANS DE PASSATION DE MARCHES PUBLIES";	
+						    				libelle1="PLANS DE PASSATION DE MARCHES PUBLIES ";
+						    				panelDetail=false;
+						    				panelForm=false;
+						   				    panelTraitement=true;
+						    				btn_new =false;
+											panel1 =false;
+											panel2 =true;
+											panelPpmTableauBordSai = false;
+											panelPpmTableauBordVal = false;
+											panelPgpmTableauBordPpPub = true;
+											panelPgpmTableauBordPspPub = false;
+											panelPpm = true;
+											panelPspm = false;
+											fermerVal = true;
+											fermerSai = false;
+											fermerValPpm = true;
+											fermerSaiPpm = false;
+											fermerValPspm = false;
+											fermerSaiPspm = false;
+											detailP1 = true;
+											detailP2 = false;
+											btn_trans_ppm = false;
+											btn_trans_pspm = false;
+											btn_valider_ppm_cpmp = false;
+											btn_valider_ppm_dmp = false;
+											btn_valider_pspm_cpmp = false;
+											btn_valider_pspm_dmp = false;
+											btn_fermer_saisie_ppm = true;
+											btn_fermer_saisie_pspm = false;
+											btn_publier_ppm = true;
+											btn_publier_pspm = false;
+											searchAC = false;
+											searchCpmp = true;
+											searchDmp = true;
+							    			}
 			 //PSPM
 			 if(action.equalsIgnoreCase("ENGPSPM")) {
 				 type = "PSPM";
@@ -1297,8 +1422,8 @@ public class ControleController {
 			    				panelForm=false;
 			   				    panelTraitement=true;
 			    				btn_new =false;
-								panel1 =false;
-								panel2 =true;
+								panel1 =true;
+								panel2 =false;
 								panelPspmTableauBordSai = false;
 								panelPspmTableauBordVal = true;
 								panelPpm = false;
@@ -1337,6 +1462,8 @@ public class ControleController {
 				    			}else
 					    			if(action.equalsIgnoreCase("PUBPSPM")) {
 					    			type = "PSPM";
+					    			typePlan = "PS";
+					    			fonctionalite ="listeAttPub";
 				    				libelleProcedure="PUBLICATION DES PLANS DE PASSATION DE MARCHES";	
 				    				libelle1="PUBLICATION DES PLANS DE PASSATION DE MARCHES";
 				    				panelDetail=false;
@@ -3151,8 +3278,93 @@ public class ControleController {
 																		 btn_fermer_saisie_dao = false; 
 																		 btn_fermer_saisie_ami = false; 
 																		 btn_fermer_saisie_prq = false;  
-									    						   }else
-				                                                          if(action.equalsIgnoreCase("ENGDPS")) {
+									    						   }else 
+								    								   if(action.equalsIgnoreCase("PUBCSV")) {
+								    									    typePlan ="PN";
+								    									     type = "DAC";
+								    									     fonctionalite="listePubCsv";
+								    									     btn_pub =false;
+								    									     btn_pub_csv = true;
+								    									     btn_pub_dps = false;
+								    									     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
+															    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+															    			 btn_new =false;
+															    			 btn_affec = false;
+															    			 btn_exam = false;
+															    			 btn_retrait = false;
+															    			 btn_valid = false;
+															    			 saisie=false;
+															    			 publication=true;
+															    			 vente=false;
+															    			  correction=false;
+															    			 panel1 =false;
+																			 panel2 =false;
+																			 panel3 = false;
+																		     panel4 = true;
+																			/* panel5 = false;
+																			 panel6 = false;
+																			 panel7 = true;
+																			 panel8 = false;
+																			 panel9 =false;
+																			 panel10 = false;
+																			 panel11 = false;
+																			 panel12 = false;*/
+																			 venteRecherche = false; 
+																			 affectationRecherche = false;
+																			 examenRecherche = false;
+																			 publicationRecherche = true;
+																			 saisieRecherche = false;
+																			 celluleRecherche = false;
+																			 validationRecherche = false;
+																			 priseRecherche = false;
+																			 chargeRecherche = false;
+																			 affDao=false;
+																			 exaDao=false;
+																			 retDao = false;
+																			 panelDaoTableauBordSai = false;
+																			 panelDaoTableauBordVal = false;
+																			 panelDaoTableauBordTra = false;
+																			 panelDaoTableauBordAff =false;
+																			 panelDaoTableauBordExa =false; 
+																			 panelDaoTableauBordRet =false;
+																			 panelDaoTableauBordVet =false;
+																			 panelDaoTableauBordCha = false;
+																			 panelDaoTableauBordPub = false;
+																			 panelDaoTableauBordPrise = false;
+																			 panelDaoTableauBordPubDps = false;
+																			 panelDaoTableauBordPubCsv = true;
+																			 panelDao = false;  
+																			 panelPrq = false;
+																			 btn_trans_ami =false;
+																			 btn_trans_dao =false;
+																			 btn_trans_prq =false;
+																			 
+																			 btn_creerDetailAmi = false;
+																			 btn_creerDetailDao = false ;
+																			 btn_creerDetailPrq = false;
+																			 
+																			 btn_creerDetailDaoCmp = false;
+																			 btn_creerDetailAmiCmp = false;
+																			 btn_creerDetailPrqCmp = false;
+																			 btn_creerDetailDaoDmp = false;
+																			 btn_creerDetailAmiDmp = false; 
+																			 btn_creerDetailPrqDmp = false;
+																			 fermerValDao = false;
+																			 fermerSaiDao = true;
+																			 detailD = false;
+																			 detailA= false; 
+																			 detailP = false;
+																			 btn_valider_dao_cpmp =  false;
+																			 btn_valider_dao_dmp = false;
+																			 btn_valider_ami_cpmp = false; 
+																			 btn_valider_prq_cpmp = false;
+																			 btn_valider_ami_dmp = false;
+																			 btn_valider_prq_dmp = false;
+																			 btn_fermer_saisie_dao = false; 
+																			 btn_fermer_saisie_ami = false; 
+																			 btn_fermer_saisie_prq = false;   
+								    								   }else
+				                                                         if(action.equalsIgnoreCase("ENGDPS")) {
 				                                                        	  typePlan ="PS";
 				                                                        	  type = "DAC";
 				                                            				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
@@ -3954,7 +4166,92 @@ public class ControleController {
 																													 btn_fermer_saisie_dao = false; 
 																													 btn_fermer_saisie_ami = false; 
 																													 btn_fermer_saisie_prq = false;  
-																				    						   }
+																				    						   }else 
+																			    								   if(action.equalsIgnoreCase("DPSPUBCSV")) {
+																			    									    typePlan ="PN";
+																			    									     type = "DAC";
+																			    									     fonctionalite="listePubDpsCsv";
+																			    									     btn_pub =false;
+																			    									     btn_pub_csv = false;
+																			    									     btn_pub_dps = true;
+																			    									     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
+																										    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+																										    			 btn_new =false;
+																										    			 btn_affec = false;
+																										    			 btn_exam = false;
+																										    			 btn_retrait = false;
+																										    			 btn_valid = false;
+																										    			 saisie=false;
+																										    			 publication=true;
+																										    			 vente=false;
+																										    			  correction=false;
+																										    			 panel1 =false;
+																														 panel2 =false;
+																														 panel3 = false;
+																													     panel4 = true;
+																														/* panel5 = false;
+																														 panel6 = false;
+																														 panel7 = true;
+																														 panel8 = false;
+																														 panel9 =false;
+																														 panel10 = false;
+																														 panel11 = false;
+																														 panel12 = false;*/
+																														 venteRecherche = false; 
+																														 affectationRecherche = false;
+																														 examenRecherche = false;
+																														 publicationRecherche = true;
+																														 saisieRecherche = false;
+																														 celluleRecherche = false;
+																														 validationRecherche = false;
+																														 priseRecherche = false;
+																														 chargeRecherche = false;
+																														 affDao=false;
+																														 exaDao=false;
+																														 retDao = false;
+																														 panelDaoTableauBordSai = false;
+																														 panelDaoTableauBordVal = false;
+																														 panelDaoTableauBordTra = false;
+																														 panelDaoTableauBordAff =false;
+																														 panelDaoTableauBordExa =false; 
+																														 panelDaoTableauBordRet =false;
+																														 panelDaoTableauBordVet =false;
+																														 panelDaoTableauBordCha = false;
+																														 panelDaoTableauBordPub = false;
+																														 panelDaoTableauBordPrise = false;
+																														 panelDaoTableauBordPubDps = true;
+																														 panelDaoTableauBordPubCsv = false;
+																														 panelDao = false;  
+																														 panelPrq = false;
+																														 btn_trans_ami =false;
+																														 btn_trans_dao =false;
+																														 btn_trans_prq =false;
+																														 
+																														 btn_creerDetailAmi = false;
+																														 btn_creerDetailDao = false ;
+																														 btn_creerDetailPrq = false;
+																														 
+																														 btn_creerDetailDaoCmp = false;
+																														 btn_creerDetailAmiCmp = false;
+																														 btn_creerDetailPrqCmp = false;
+																														 btn_creerDetailDaoDmp = false;
+																														 btn_creerDetailAmiDmp = false; 
+																														 btn_creerDetailPrqDmp = false;
+																														 fermerValDao = false;
+																														 fermerSaiDao = true;
+																														 detailD = false;
+																														 detailA= false; 
+																														 detailP = false;
+																														 btn_valider_dao_cpmp =  false;
+																														 btn_valider_dao_dmp = false;
+																														 btn_valider_ami_cpmp = false; 
+																														 btn_valider_prq_cpmp = false;
+																														 btn_valider_ami_dmp = false;
+																														 btn_valider_prq_dmp = false;
+																														 btn_fermer_saisie_dao = false; 
+																														 btn_fermer_saisie_ami = false; 
+																														 btn_fermer_saisie_prq = false;   
+																			    								   }
 				 
 				 
 			 
@@ -8088,6 +8385,59 @@ public class ControleController {
 	}
 	public void setPanelPub(boolean panelPub) {
 		this.panelPub = panelPub;
+	}
+
+
+	public boolean isPanelPgpmTableauBordDpgPub() {
+		return panelPgpmTableauBordDpgPub;
+	}
+	public void setPanelPgpmTableauBordDpgPub(boolean panelPgpmTableauBordDpgPub) {
+		this.panelPgpmTableauBordDpgPub = panelPgpmTableauBordDpgPub;
+	}
+
+
+	public boolean isPanelPgpmTableauBordDpsgPub() {
+		return panelPgpmTableauBordDpsgPub;
+	}
+
+	public void setPanelPgpmTableauBordDpsgPub(boolean panelPgpmTableauBordDpsgPub) {
+		this.panelPgpmTableauBordDpsgPub = panelPgpmTableauBordDpsgPub;
+	}
+
+
+	public boolean isBtn_pub_csv() {
+		return btn_pub_csv;
+	}
+
+	public void setBtn_pub_csv(boolean btn_pub_csv) {
+		this.btn_pub_csv = btn_pub_csv;
+	}
+
+
+	public boolean isBtn_pub_dps() {
+		return btn_pub_dps;
+	}
+
+	public void setBtn_pub_dps(boolean btn_pub_dps) {
+		this.btn_pub_dps = btn_pub_dps;
+	}
+
+
+	public boolean isPanelDaoTableauBordPubCsv() {
+		return panelDaoTableauBordPubCsv;
+	}
+
+
+	public void setPanelDaoTableauBordPubCsv(boolean panelDaoTableauBordPubCsv) {
+		this.panelDaoTableauBordPubCsv = panelDaoTableauBordPubCsv;
+	}
+
+
+	public boolean isPanelDaoTableauBordPubDps() {
+		return panelDaoTableauBordPubDps;
+	}
+	public void setPanelDaoTableauBordPubDps(boolean panelDaoTableauBordPubDps) {
+		this.panelDaoTableauBordPubDps = panelDaoTableauBordPubDps;
 	}
 	
    

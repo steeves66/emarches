@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 18 juin 2020 16:45:49 by Hibernate Tools 4.3.5.Final
+// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -27,6 +27,7 @@ public class TTypeMarche implements java.io.Serializable {
 	private Set<TModeleDacType> TModeleDacTypes = new HashSet<TModeleDacType>(0);
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
 	private Set<TAffichagePgpm> TAffichagePgpms = new HashSet<TAffichagePgpm>(0);
+	private Set<TCritereAnalyse> TCritereAnalyses = new HashSet<TCritereAnalyse>(0);
 	private Set<TDetailPlanGeneral> TDetailPlanGenerals = new HashSet<TDetailPlanGeneral>(0);
 
 	public TTypeMarche() {
@@ -40,7 +41,7 @@ public class TTypeMarche implements java.io.Serializable {
 	public TTypeMarche(String tymCode, String tymLibelleCourt, String tymLibelleLong, String tymTymCode,
 			String tymGroupe, Set<TDacSpecs> TDacSpecses, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TModeleDacType> TModeleDacTypes, Set<TAffichagePpm> TAffichagePpms, Set<TAffichagePgpm> TAffichagePgpms,
-			Set<TDetailPlanGeneral> TDetailPlanGenerals) {
+			Set<TCritereAnalyse> TCritereAnalyses, Set<TDetailPlanGeneral> TDetailPlanGenerals) {
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.tymLibelleLong = tymLibelleLong;
@@ -51,6 +52,7 @@ public class TTypeMarche implements java.io.Serializable {
 		this.TModeleDacTypes = TModeleDacTypes;
 		this.TAffichagePpms = TAffichagePpms;
 		this.TAffichagePgpms = TAffichagePgpms;
+		this.TCritereAnalyses = TCritereAnalyses;
 		this.TDetailPlanGenerals = TDetailPlanGenerals;
 	}
 
@@ -144,6 +146,15 @@ public class TTypeMarche implements java.io.Serializable {
 
 	public void setTAffichagePgpms(Set<TAffichagePgpm> TAffichagePgpms) {
 		this.TAffichagePgpms = TAffichagePgpms;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypeMarche")
+	public Set<TCritereAnalyse> getTCritereAnalyses() {
+		return this.TCritereAnalyses;
+	}
+
+	public void setTCritereAnalyses(Set<TCritereAnalyse> TCritereAnalyses) {
+		this.TCritereAnalyses = TCritereAnalyses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypeMarche")

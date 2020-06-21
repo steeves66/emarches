@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 18 juin 2020 16:45:49 by Hibernate Tools 4.3.5.Final
+// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -67,6 +67,9 @@ public class VUpdatePpmId implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private Long dppMontant;
+	private String dppNatInt;
+	private String dppStatutAno;
+	private String dppTypeStrConduc;
 	private String lbgCode;
 	private String lbgStrCode;
 	private short lbgGesCode;
@@ -177,20 +180,20 @@ public class VUpdatePpmId implements java.io.Serializable {
 			Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno,
 			Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant,
-			String lbgCode, String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon, String lbgImputation,
-			Long lbgAnoCode, String lbgNatCode, BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr,
-			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp, BigDecimal lbgTotDot,
-			String lbgUtilSaisi, String lbgDesCode, Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot,
-			String lbgUtilModif, String lbgFonCode, BigDecimal lbgDisTre, BigDecimal lbgDisDon, BigDecimal lbgDisEmp,
-			BigDecimal lbgDisTot, String lbgFonCodeAc, String lbgStaCode, String lbgActNumModif, Date lbgDteVal,
-			String lbgFonCodeVal, String lbgTraitmt, String lbgTraitmtNotif, Date lbgDteStaCour, String lbgTitre,
-			String lbgCor, String lbgAdmCentral, String lbgMotifCor, Date lbgDteCor, String lbgFonCodeCor,
-			String lbgFonCodePf, String lbgFonCodeValAct, String lbgActif, String lbgFonCodeCf,
-			BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2, BigDecimal lbgDotAnPlus0, String lbgTypBud,
-			Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou,
-			String mdtCode, String mdtLibelleLong, String mdtLibelleCourt, Date mdtDteSaisi, String mdtOpeMatricule,
-			String mdtTymCode, String tymLibelleCourt, String mopLibelleLong, String souLibelle, long gpgId,
-			String gpgObjet, String natLibelle) {
+			String dppNatInt, String dppStatutAno, String dppTypeStrConduc, String lbgCode, String lbgStrCode,
+			short lbgGesCode, BigDecimal lbgResDon, String lbgImputation, Long lbgAnoCode, String lbgNatCode,
+			BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr, BigDecimal lbgAeDon, BigDecimal lbgAeEmp,
+			String lbgMp, String lbgReglMp, BigDecimal lbgTotDot, String lbgUtilSaisi, String lbgDesCode,
+			Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot, String lbgUtilModif, String lbgFonCode,
+			BigDecimal lbgDisTre, BigDecimal lbgDisDon, BigDecimal lbgDisEmp, BigDecimal lbgDisTot, String lbgFonCodeAc,
+			String lbgStaCode, String lbgActNumModif, Date lbgDteVal, String lbgFonCodeVal, String lbgTraitmt,
+			String lbgTraitmtNotif, Date lbgDteStaCour, String lbgTitre, String lbgCor, String lbgAdmCentral,
+			String lbgMotifCor, Date lbgDteCor, String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct,
+			String lbgActif, String lbgFonCodeCf, BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2,
+			BigDecimal lbgDotAnPlus0, String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip,
+			String lbgFonCodePr, String lbgFonCodeVerou, String mdtCode, String mdtLibelleLong, String mdtLibelleCourt,
+			Date mdtDteSaisi, String mdtOpeMatricule, String mdtTymCode, String tymLibelleCourt, String mopLibelleLong,
+			String souLibelle, long gpgId, String gpgObjet, String natLibelle) {
 		this.plpId = plpId;
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
@@ -246,6 +249,9 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
 		this.dppMontant = dppMontant;
+		this.dppNatInt = dppNatInt;
+		this.dppStatutAno = dppStatutAno;
+		this.dppTypeStrConduc = dppTypeStrConduc;
 		this.lbgCode = lbgCode;
 		this.lbgStrCode = lbgStrCode;
 		this.lbgGesCode = lbgGesCode;
@@ -806,6 +812,33 @@ public class VUpdatePpmId implements java.io.Serializable {
 
 	public void setDppMontant(Long dppMontant) {
 		this.dppMontant = dppMontant;
+	}
+
+	@Column(name = "DPP_NAT_INT", length = 3)
+	public String getDppNatInt() {
+		return this.dppNatInt;
+	}
+
+	public void setDppNatInt(String dppNatInt) {
+		this.dppNatInt = dppNatInt;
+	}
+
+	@Column(name = "DPP_STATUT_ANO", length = 3)
+	public String getDppStatutAno() {
+		return this.dppStatutAno;
+	}
+
+	public void setDppStatutAno(String dppStatutAno) {
+		this.dppStatutAno = dppStatutAno;
+	}
+
+	@Column(name = "DPP_TYPE_STR_CONDUC", length = 50)
+	public String getDppTypeStrConduc() {
+		return this.dppTypeStrConduc;
+	}
+
+	public void setDppTypeStrConduc(String dppTypeStrConduc) {
+		this.dppTypeStrConduc = dppTypeStrConduc;
 	}
 
 	@Column(name = "LBG_CODE", nullable = false, length = 50)
@@ -1549,6 +1582,14 @@ public class VUpdatePpmId implements java.io.Serializable {
 								&& this.getDppFonCodDmp().equals(castOther.getDppFonCodDmp())))
 				&& ((this.getDppMontant() == castOther.getDppMontant()) || (this.getDppMontant() != null
 						&& castOther.getDppMontant() != null && this.getDppMontant().equals(castOther.getDppMontant())))
+				&& ((this.getDppNatInt() == castOther.getDppNatInt()) || (this.getDppNatInt() != null
+						&& castOther.getDppNatInt() != null && this.getDppNatInt().equals(castOther.getDppNatInt())))
+				&& ((this.getDppStatutAno() == castOther.getDppStatutAno())
+						|| (this.getDppStatutAno() != null && castOther.getDppStatutAno() != null
+								&& this.getDppStatutAno().equals(castOther.getDppStatutAno())))
+				&& ((this.getDppTypeStrConduc() == castOther.getDppTypeStrConduc())
+						|| (this.getDppTypeStrConduc() != null && castOther.getDppTypeStrConduc() != null
+								&& this.getDppTypeStrConduc().equals(castOther.getDppTypeStrConduc())))
 				&& ((this.getLbgCode() == castOther.getLbgCode()) || (this.getLbgCode() != null
 						&& castOther.getLbgCode() != null && this.getLbgCode().equals(castOther.getLbgCode())))
 				&& ((this.getLbgStrCode() == castOther.getLbgStrCode()) || (this.getLbgStrCode() != null
@@ -1768,6 +1809,9 @@ public class VUpdatePpmId implements java.io.Serializable {
 		result = 37 * result + (getDppFonCodPf() == null ? 0 : this.getDppFonCodPf().hashCode());
 		result = 37 * result + (getDppFonCodDmp() == null ? 0 : this.getDppFonCodDmp().hashCode());
 		result = 37 * result + (getDppMontant() == null ? 0 : this.getDppMontant().hashCode());
+		result = 37 * result + (getDppNatInt() == null ? 0 : this.getDppNatInt().hashCode());
+		result = 37 * result + (getDppStatutAno() == null ? 0 : this.getDppStatutAno().hashCode());
+		result = 37 * result + (getDppTypeStrConduc() == null ? 0 : this.getDppTypeStrConduc().hashCode());
 		result = 37 * result + (getLbgCode() == null ? 0 : this.getLbgCode().hashCode());
 		result = 37 * result + (getLbgStrCode() == null ? 0 : this.getLbgStrCode().hashCode());
 		result = 37 * result + this.getLbgGesCode();

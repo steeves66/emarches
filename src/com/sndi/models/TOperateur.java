@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 18 juin 2020 16:45:49 by Hibernate Tools 4.3.5.Final
+// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -43,6 +43,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TDestinations> TDestinationses = new HashSet<TDestinations>(0);
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TMotdepasse> TMotdepasses = new HashSet<TMotdepasse>(0);
+	private Set<TCritereAnalyseSpec> TCritereAnalyseSpecs = new HashSet<TCritereAnalyseSpec>(0);
 	private Set<TAssignation> TAssignations = new HashSet<TAssignation>(0);
 	private Set<TSeances> TSeanceses = new HashSet<TSeances>(0);
 	private Set<TTypeDemande> TTypeDemandes = new HashSet<TTypeDemande>(0);
@@ -55,7 +56,9 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TTypeCommission> TTypeCommissions = new HashSet<TTypeCommission>(0);
 	private Set<TTypePieceOffre> TTypePieceOffres = new HashSet<TTypePieceOffre>(0);
 	private Set<TAvisPresel> TAvisPreselsForAprOpeMatricule = new HashSet<TAvisPresel>(0);
+	private Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeSaisie = new HashSet<TDetCritAnalyse>(0);
 	private Set<TDemande> TDemandes = new HashSet<TDemande>(0);
+	private Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeModif = new HashSet<TDetCritAnalyse>(0);
 	private Set<TParametres> TParametreses = new HashSet<TParametres>(0);
 	private Set<TDetCommissionSeance> TDetCommissionSeances = new HashSet<TDetCommissionSeance>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -77,12 +80,14 @@ public class TOperateur implements java.io.Serializable {
 			Set<THistoDac> THistoDacs, Set<TDetOffres> TDetOffreses, Set<TPiecesOffres> TPiecesOffreses,
 			Set<TTiers> TTierses, Set<TFonction> TFonctions, Set<TModeleDacType> TModeleDacTypes,
 			Set<TNatures> TNatureses, Set<TDestinations> TDestinationses, Set<THistoPlanPassation> THistoPlanPassations,
-			Set<TMotdepasse> TMotdepasses, Set<TAssignation> TAssignations, Set<TSeances> TSeanceses,
-			Set<TTypeDemande> TTypeDemandes, Set<THistoPlanGeneral> THistoPlanGenerals,
-			Set<TModeReglement> TModeReglements, Set<TTempParametre> TTempParametres, Set<TTypeSeance> TTypeSeances,
-			Set<TTypeFonction> TTypeFonctions, Set<THistoAgpm> THistoAgpms, Set<TTypeCommission> TTypeCommissions,
-			Set<TTypePieceOffre> TTypePieceOffres, Set<TAvisPresel> TAvisPreselsForAprOpeMatricule,
-			Set<TDemande> TDemandes, Set<TParametres> TParametreses, Set<TDetCommissionSeance> TDetCommissionSeances,
+			Set<TMotdepasse> TMotdepasses, Set<TCritereAnalyseSpec> TCritereAnalyseSpecs,
+			Set<TAssignation> TAssignations, Set<TSeances> TSeanceses, Set<TTypeDemande> TTypeDemandes,
+			Set<THistoPlanGeneral> THistoPlanGenerals, Set<TModeReglement> TModeReglements,
+			Set<TTempParametre> TTempParametres, Set<TTypeSeance> TTypeSeances, Set<TTypeFonction> TTypeFonctions,
+			Set<THistoAgpm> THistoAgpms, Set<TTypeCommission> TTypeCommissions, Set<TTypePieceOffre> TTypePieceOffres,
+			Set<TAvisPresel> TAvisPreselsForAprOpeMatricule, Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeSaisie,
+			Set<TDemande> TDemandes, Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeModif,
+			Set<TParametres> TParametreses, Set<TDetCommissionSeance> TDetCommissionSeances,
 			Set<TDetailCorrection> TDetailCorrections, Set<TSoumissions> TSoumissionses,
 			Set<TCommissionType> TCommissionTypes, Set<TAvisPresel> TAvisPreselsForAprOpeMatMotif,
 			Set<TTempParam> TTempParams) {
@@ -109,6 +114,7 @@ public class TOperateur implements java.io.Serializable {
 		this.TDestinationses = TDestinationses;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TMotdepasses = TMotdepasses;
+		this.TCritereAnalyseSpecs = TCritereAnalyseSpecs;
 		this.TAssignations = TAssignations;
 		this.TSeanceses = TSeanceses;
 		this.TTypeDemandes = TTypeDemandes;
@@ -121,7 +127,9 @@ public class TOperateur implements java.io.Serializable {
 		this.TTypeCommissions = TTypeCommissions;
 		this.TTypePieceOffres = TTypePieceOffres;
 		this.TAvisPreselsForAprOpeMatricule = TAvisPreselsForAprOpeMatricule;
+		this.TDetCritAnalysesForDanOpeSaisie = TDetCritAnalysesForDanOpeSaisie;
 		this.TDemandes = TDemandes;
+		this.TDetCritAnalysesForDanOpeModif = TDetCritAnalysesForDanOpeModif;
 		this.TParametreses = TParametreses;
 		this.TDetCommissionSeances = TDetCommissionSeances;
 		this.TDetailCorrections = TDetailCorrections;
@@ -342,6 +350,15 @@ public class TOperateur implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<TCritereAnalyseSpec> getTCritereAnalyseSpecs() {
+		return this.TCritereAnalyseSpecs;
+	}
+
+	public void setTCritereAnalyseSpecs(Set<TCritereAnalyseSpec> TCritereAnalyseSpecs) {
+		this.TCritereAnalyseSpecs = TCritereAnalyseSpecs;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
 	public Set<TAssignation> getTAssignations() {
 		return this.TAssignations;
 	}
@@ -449,6 +466,15 @@ public class TOperateur implements java.io.Serializable {
 		this.TAvisPreselsForAprOpeMatricule = TAvisPreselsForAprOpeMatricule;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateurByDanOpeSaisie")
+	public Set<TDetCritAnalyse> getTDetCritAnalysesForDanOpeSaisie() {
+		return this.TDetCritAnalysesForDanOpeSaisie;
+	}
+
+	public void setTDetCritAnalysesForDanOpeSaisie(Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeSaisie) {
+		this.TDetCritAnalysesForDanOpeSaisie = TDetCritAnalysesForDanOpeSaisie;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
 	public Set<TDemande> getTDemandes() {
 		return this.TDemandes;
@@ -456,6 +482,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTDemandes(Set<TDemande> TDemandes) {
 		this.TDemandes = TDemandes;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateurByDanOpeModif")
+	public Set<TDetCritAnalyse> getTDetCritAnalysesForDanOpeModif() {
+		return this.TDetCritAnalysesForDanOpeModif;
+	}
+
+	public void setTDetCritAnalysesForDanOpeModif(Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeModif) {
+		this.TDetCritAnalysesForDanOpeModif = TDetCritAnalysesForDanOpeModif;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")

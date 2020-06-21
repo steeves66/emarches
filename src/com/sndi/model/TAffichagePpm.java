@@ -78,6 +78,8 @@ public class TAffichagePpm implements java.io.Serializable {
 	private Date affDppDateJugementTech;
 	private String affFonCodPf;
 	private String affFonCodDmp;
+	private String affDppNatInt;
+	private String affDppStatutAno;
 
 
 	public TAffichagePpm() {
@@ -111,7 +113,7 @@ public class TAffichagePpm implements java.io.Serializable {
 			Date affDppDateExecFin,long  affDppId, String affDppStatutRetour,String affDppStrConduc,
 			String affDppStrBenefi, Date affDppDateSaisie,String affDppPartiePmePmi, String affDppStatutDao,String affDppPieceDao,Date affDppInvEntre, String affDppRecherche, Date affDppDateValAc,
 			Date affDppDateValCpmp, Date affDppDateValDmp, String affDppBailleur, String affDppTypeFinance, Date affDppDteModif,Date affDppDateAttApprobCmp, Date affDppDateJugementTech,
-			String affFonCodPf, String affFonCodDmp) {
+			String affFonCodPf, String affFonCodDmp,String affDppNatInt, String affDppStatutAno) {
 		this.affId = affId;
 		this.TLBudgets = TLBudgets;
 		this.TFonction = TFonction;
@@ -165,6 +167,8 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affDppDateJugementTech = affDppDateJugementTech;
 		this.affFonCodPf = affFonCodPf;
 		this.affFonCodDmp = affFonCodDmp;
+		this.affDppNatInt = affDppNatInt;
+		this.affDppStatutAno = affDppStatutAno;
 	}
 
 	@Id
@@ -696,4 +700,22 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.affFonCodDmp = affFonCodDmp;
 	}
 
+	
+	@Column(name = "AFF_DPP_NAT_INT", length = 3)
+	public String getAffDppNatInt() {
+		return this.affDppNatInt;
+	}
+
+	public void setAffDppNatInt(String affDppNatInt) {
+		this.affDppNatInt = affDppNatInt;
+	}
+
+	@Column(name = "AFF_DPP_STATUT_ANO", length = 3)
+	public String getAffDppStatutAno() {
+		return this.affDppStatutAno;
+	}
+
+	public void setAffDppStatutAno(String affDppStatutAno) {
+		this.affDppStatutAno = affDppStatutAno;
+	}
 }

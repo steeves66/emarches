@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 18 juin 2020 16:45:49 by Hibernate Tools 4.3.5.Final
+// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -52,6 +52,8 @@ public class TDacSpecs implements java.io.Serializable {
 	private Date dacDteModif;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
+	private Set<TDetCritAnalyseDac> TDetCritAnalyseDacs = new HashSet<TDetCritAnalyseDac>(0);
+	private Set<TCritereAnalyseSpec> TCritereAnalyseSpecs = new HashSet<TCritereAnalyseSpec>(0);
 	private Set<TDetailVente> TDetailVentes = new HashSet<TDetailVente>(0);
 	private Set<TOffres> TOffreses = new HashSet<TOffres>(0);
 	private Set<TAffichageDao> TAffichageDaos = new HashSet<TAffichageDao>(0);
@@ -83,6 +85,7 @@ public class TDacSpecs implements java.io.Serializable {
 			String dacMention, Date dacDateValAc, String dacAvisBailleur, Date dacDateAvisBailleur, String dacBailleur,
 			Long dacCout, String dacTypePlan, String dacRecherche, String dacFonCodeDmp, String dacFonCodePf,
 			Date dacDteModif, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TCommissionSpecifique> TCommissionSpecifiques,
+			Set<TDetCritAnalyseDac> TDetCritAnalyseDacs, Set<TCritereAnalyseSpec> TCritereAnalyseSpecs,
 			Set<TDetailVente> TDetailVentes, Set<TOffres> TOffreses, Set<TAffichageDao> TAffichageDaos,
 			Set<TPiecesOffres> TPiecesOffreses, Set<TCorrectionDac> TCorrectionDacs, Set<TDetailAvis> TDetailAvises,
 			Set<TOffrePieceDac> TOffrePieceDacs, Set<THistoDac> THistoDacs, Set<TDossierDacs> TDossierDacses,
@@ -118,6 +121,8 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacDteModif = dacDteModif;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
+		this.TDetCritAnalyseDacs = TDetCritAnalyseDacs;
+		this.TCritereAnalyseSpecs = TCritereAnalyseSpecs;
 		this.TDetailVentes = TDetailVentes;
 		this.TOffreses = TOffreses;
 		this.TAffichageDaos = TAffichageDaos;
@@ -412,6 +417,24 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTCommissionSpecifiques(Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
+	public Set<TDetCritAnalyseDac> getTDetCritAnalyseDacs() {
+		return this.TDetCritAnalyseDacs;
+	}
+
+	public void setTDetCritAnalyseDacs(Set<TDetCritAnalyseDac> TDetCritAnalyseDacs) {
+		this.TDetCritAnalyseDacs = TDetCritAnalyseDacs;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
+	public Set<TCritereAnalyseSpec> getTCritereAnalyseSpecs() {
+		return this.TCritereAnalyseSpecs;
+	}
+
+	public void setTCritereAnalyseSpecs(Set<TCritereAnalyseSpec> TCritereAnalyseSpecs) {
+		this.TCritereAnalyseSpecs = TCritereAnalyseSpecs;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
