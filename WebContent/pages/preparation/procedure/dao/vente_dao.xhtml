@@ -148,7 +148,11 @@
 								    	<i class="fa fa-plus"></i>
 								    </p:commandLink>
 						        </td>
-	                       <td style="width:1000px"> <label><h:outputText styleClass="text-muted" value=" "  style="width: 100%" readonly="true"/></label></td>
+	                       <td style="width:1510px">
+	                       <h:panelGroup id="idncc">
+	                       <p:inputText value="#{daoController.soumission.souSigleSte}" readonly="true" type="text" styleClass="form-control" style="width:100%" />
+	                       </h:panelGroup>
+	                       </td>
 					        </tr>
 		                </table>
 	                </div>
@@ -157,12 +161,12 @@
                    </div>
 		                        	
 		                  <div class="form-group horizontal">
-		                      <label for="ncc1" class="col-sm-2 control-label text-right"><b>Ncc :</b></label>
-		                      <div class="col-sm-3">
-		                        
 		                       
-		                     
+		                      <label for="com1" class="col-sm-2 control-label text-right"><b>Nom Commercial :</b></label>
+		                      <div class="col-sm-3">
+		                        <p:inputText  type="text"  styleClass="form-control" value="#{daoController.newCandidat.canSouNcc}" id="com1" style="width: 100%" />
 		                      </div>
+		                
 		                      
 		                     <label for="montant1" class="col-sm-2 control-label text-right"><b>Montant :</b></label>
 		                      <div class="col-sm-5">
@@ -172,21 +176,9 @@
 		                      </div>
 		                  </div>
 		                  
-		                  <h:panelGroup id="idncc">
-		                  <div class="form-group horizontal">
-		                      <label for="com1" class="col-sm-2 control-label text-right"><b>Nom Commercial :</b></label>
-		                      <div class="col-sm-3">
-		                        <p:inputText  type="text"  styleClass="form-control" value="#{daoController.newCandidat.canSouNcc}" id="com1" style="width: 100%" />
-		                      </div>
-		                      
-		                     <label for="sigle1" class="col-sm-2 control-label text-right"><b>Sigle</b></label>
-		                     
-		                      <div class="col-sm-5">
-		                        <p:inputText   type="text" value="#{daoController.soumission.souSigleSte}" readonly="true" styleClass="form-control" id="sigle1" style="width: 100%" />
-		                      </div>
-		                      
-		                  </div>
-		                  </h:panelGroup>
+		                
+		                
+		                  
 		           	                 
                
 		                  <div class="form-group horizontal">

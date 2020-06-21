@@ -55,6 +55,7 @@ import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VbCommissionSpecifique;
+import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamDetOffres;
 import com.sndi.model.VbTempParametreCom;
@@ -129,6 +130,7 @@ public class CommissionController {
 	 private List<TDetOffres> listeAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TDetOffres> listeAffichageAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
+	 private List<VbDetCritAnalyseDac> listeCritereAnalyse = new ArrayList<VbDetCritAnalyseDac>(); 
 	 
 	 
 	 
@@ -255,6 +257,14 @@ public class CommissionController {
 				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+sltOffre.getTLotAao().getLaaId())));
 	 }
 	 
+	 public void chargeCritereAnalyse() {
+		 listeCritereAnalyse.clear();
+		 listeCritereAnalyse = ((List<VbDetCritAnalyseDac>)iservice.getObjectsByColumn("VbDetCritAnalyseDac",new ArrayList<String>(Arrays.asList("DCAD_LIB_AJUST")),
+				new WhereClause("DCAD_OPE_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+	 }
+	 
+	 
+	 
 	//Liste des piecs de l'offre a l'analyse
 		 public void chargePiecesAnalyse() {
 			 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
@@ -262,6 +272,7 @@ public class CommissionController {
 					 //new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
 					 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 			 nbrLot =nonbreLot();
+			 chargeCritereAnalyse();
 		 }
 		 
 		 public void controleNbrLot() {
@@ -650,8 +661,8 @@ public class CommissionController {
 		
 		
 		public int nonbreLot(){
-			int i = iservice.countTableByColumn("T_LOT_AAO", "LAA_ID",
-					new WhereClause("LAA_DAC_CODE", WhereClause.Comparateur.EQ,slctdTd.getTDacSpecs().getDacCode()));
+			int i = iservice.countTableByColumn("T_DET_OFFRES", "DOF_NUM",
+					new WhereClause("DOF_LAA_ID", WhereClause.Comparateur.EQ,""+sltOffre.getTLotAao().getLaaId()));
 			return	i;	
 		}
 		
@@ -1426,6 +1437,14 @@ public class CommissionController {
 
 	public void setMbrSup(TDetCommissionSeance mbrSup) {
 		this.mbrSup = mbrSup;
+	}
+
+	public List<VbDetCritAnalyseDac> getListeCritereAnalyse() {
+		return listeCritereAnalyse;
+	}
+
+	public void setListeCritereAnalyse(List<VbDetCritAnalyseDac> listeCritereAnalyse) {
+		this.listeCritereAnalyse = listeCritereAnalyse;
 	}
 
 

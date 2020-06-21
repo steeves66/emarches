@@ -280,47 +280,115 @@
                <div class="col-md-6">
                <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">EVALUATION</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">OUVERTURE TECHINIQUE</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-
 	            
-	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" emptyMessage="Aucun critère trouvé" var="slctdTb" 
-					 editable="true" editMode="cell" draggableColumns="true" scrollable="true" scrollHeight="300">
-	                <p:column headerText="Critère" styleClass="col-sm-10">
-	         				    <h:outputText value="#{slctdTb.dcadLibAjust}" />
-                     </p:column>
-                    
-                     
-                      <p:column headerText="NOM" styleClass="col-sm-2" >
-                          <p:cellEditor>
-                          <f:facet name="output">
-         				  <h:outputText />
-         				  </f:facet>
-         				  <f:facet name="input">
-	         				   <h:selectOneMenu id="mandat"  style="width:100%; color:#0000">
-				              <f:selectItem itemLabel="Choisir" itemValue="" />
-	                         <f:selectItem itemLabel="CONFORME" itemValue="O" />
-	                         <f:selectItem itemLabel="NON CONFORME" itemValue="N" />
-	                          </h:selectOneMenu>
-         				  </f:facet>
-         				  </p:cellEditor>
-				        </p:column>
-			    </p:dataTable>
 	            
-					  
+					  <fieldset style="border: 1px solid; padding: 3px;">
+		               <legend>Conformité</legend>
+		                <div class="row">
+		                  <div class="col-sm-5">
+		                      <div class="form-group">
+			                  <label  class="col-sm-6 control-label"> Conformité Tech </label>
+			                  <div class="col-sm-6">
+			                    <p:selectOneMenu value="#{commissionController.sltOffre.dofRecevabl}"   style="width:100%" >
+							    <f:selectItem  itemLabel="Conforme" itemValue="O"/> 
+								 <f:selectItem  itemLabel="Non Conforme" itemValue="N"/>    
+				               </p:selectOneMenu> 
+			                  </div>
+			                </div>
+		                  </div>
+		                  <div class="col-sm-7">
+		                      <div class="form-group">
+			                  <label  class="col-sm-3 control-label"> Observation</label>
+			                  <div class="col-sm-9">
+			                     <p:inputTextarea value="#{commissionController.sltOffre.dofObsAdm}" rows="2" cols="33" styleClass="form-control" style="width: 100%" />
+			                  </div>
+			                </div>
+		                  </div>
+		                 </div>
 		                
+		               </fieldset>
+		                <fieldset style="border: 1px solid; padding: 3px;">
+		               <legend>Score</legend>
+		                <div class="row">
+		                  <div class="col-sm-5">
+		                      <div class="form-group">
+			                  <label  class="col-sm-6 control-label"> Note </label> 
+			                  <div class="col-sm-6">
+			                   <p:inputText type="text" value="#{commissionController.sltOffre.dofScore}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+		                  </div>
+		                  <div class="col-sm-7">
+		                      <div class="form-group">
+			                  <label  class="col-sm-3 control-label"> Observation</label>
+			                  <div class="col-sm-9">
+			                     <p:inputTextarea value="#{commissionController.sltOffre.dofObsAdm}" rows="2" cols="33" styleClass="form-control" style="width: 100%" />
+			                  </div>
+			                </div>
+		                  </div>
+		                 </div>
+		               </fieldset>
 		               
-		          
+		               <h:panelGroup rendered="false">
+		                <fieldset  style="border: 1px solid; padding: 3px;">
+		               <legend>Autre mode</legend>
+		                <div class="row">
+		                  <div class="col-sm-6">
+		                       <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Administraive </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+			                 <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Technique </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+			                
+		                  </div>
+		                   <div class="col-sm-6">
+		                      <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Financière </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div>
+			                 <div class="form-group">
+			                  <label  class="col-sm-4 control-label"> Resultats </label>
+			                  <div class="col-sm-8">
+			                   <p:inputText type="text" value="#{pgpmAcController.recupModePassation.mopLibelleLong}" styleClass="form-control" style="width: 100%" /> 
+			                  </div>
+			                </div> 
+		                  </div>
+		                 </div>
+		                 <div class="row">
+		                 <div class="col-sm-12">
+		                   <div class="form-group">
+			                  <label  class="col-sm-2 control-label"> Observation </label>
+			                  <div class="col-sm-10">
+			                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.daoDetail.dppObjet}" style="width: 100%" />
+			                  </div>
+			                </div>
+			                </div>
+		                 </div>
+		                
+		               </fieldset>
+		           </h:panelGroup>
+		           <br/> <br/> <br/>
 	            </div>
 	           </div>
                </div>
               </div>
               
               <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-12">
                  
                <div class="box box-success box-solid">
                <div class="box-header with-border">

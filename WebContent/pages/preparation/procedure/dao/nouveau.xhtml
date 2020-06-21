@@ -593,49 +593,27 @@
            <div class="row">   
             <div class="col-md-12">
               <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES CRITERES</div></div> 
-			         <div class="col-md-2 "> </div>
+                  <div class="col-md-8 "><div  style="color: #fff">LISTE DES CRITERES</div></div> 
+			           <div class="col-sm-4">
+				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
+								  </p:commandLink>
+				                  </div>
                </div>
 	            <!-- /.box-header -->
 	                  <div class="box-body">    
                  <p:dataTable var="slctdTb"   styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereAnalyse}" 
-                 scrollable="true" scrollHeight="355" rowKey="#{slctdTb.craCode}" emptyMessage="Aucun critère trouvé">
-                           <p:column selectionMode="single" style="width:26px;text-align:center"/>
-                          
-				         <p:column headerText="Critère" styleClass="col-sm-12">
-				           <h:commandLink  title="Critère" styleClass="col-sm-10"
-         				 action="#{daoController.onSelectCritere()}">
-                                #{slctdTb.craLibelle}
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritere}" />
-                         </h:commandLink>
-	
-				        </p:column>
-                        </p:dataTable>  
-	            </div>
-	           </div>
-            </div>
-            <div class="col-md-8">
-	           <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">#{daoController.sltCritere.craLibelle}</div></div> 
-			         <div class="col-md-2 "> </div>
-               </div>
-	            <!-- /.box-header -->
-	                      <div class="box-body">     
-	            
-               <p:dataTable var="slctdTb"  id="Toffre" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereDetAnalyse}" 
-               scrollable="true" scrollHeight="300" rowKey="#{slctdTb.danCode}" selection="#{daoController.selectionDetCritere}" emptyMessage="Aucun détail trouvé">
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-                            <p:column headerText="Detail critère" styleClass="col-sm-12">
-		         				    <h:outputText value="#{slctdTb.danLibelle}" />
+                selection="#{daoController.selectionlisteCritereAnalyse}" scrollable="true" scrollHeight="550" rowKey="#{slctdTb.craCode}" emptyMessage="Aucun critère trouvé">
+                           <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+				         <p:column headerText="CRITERES" styleClass="col-sm-12">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" />
                             </p:column>
                         </p:dataTable>  
-		           
 	            </div>
-	            <div class="box-footer">
+	              <div class="box-footer">
 	              <p:commandLink  styleClass="btn btn-success row pull-right" action="#{daoController.saveCritere()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
@@ -643,70 +621,31 @@
 	            </div>
 	           </div>
             </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-	          <div class="box box-success box-solid">
+            <div class="col-md-6">
+	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-9 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
-			         <div class="col-md-3 "> <div  style="color: #fff"></div> </div>
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
+			         <div class="col-md-2 "> </div>
                </div>
-	            <div class="box-body">
-	            
-	                <p:dataTable rendered="#{commissionController.saisie}" var="slctdTb" value="#{commissionController.listeAttibutaire}" id="Tattributaire" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun Attributaire trouvé">
-               
-                           <p:column headerText="N° Offre" styleClass="col-sm-2">
-		         		      <h:outputText value="#{slctdTb.dofNum}" />		         				
-                            </p:column> 
-                            <p:column headerText="Entreprise" styleClass="col-sm-8">
-		         			   <h:outputText value="#{slctdTb.dofSigle}" />	         				
-                            </p:column>                           
-                             <p:column headerText="Montant" styleClass="col-sm-1">
-		         				<h:outputText value="#{slctdTb.dofMtOfr}" />	         				
+	            <!-- /.box-header -->
+	                      <div class="box-body">     
+                      <p:dataTable var="slctdTb"   styleClass="table mb0 dt-on-steroids dataTable"  
+                scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
+				         <p:column headerText="CRITERES" styleClass="col-sm-12">
+		         				    <h:outputText  />
                             </p:column>
-                            <p:column headerText="Action" styleClass="col-sm-1">
-								 
-                              <p:commandLink rendered="false" action="#{commissionController.ajouterAttributaire()}" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-left:3px"
-				               title="detail sur l'attibutaire" update=":content">
-				               <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />  
-                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>                            
-                            </p:commandLink>
-                            
-                            </p:column>
-                        </p:dataTable> 
-                        
-                        
-                        <p:dataTable rendered="#{commissionController.affichage}" var="slctdTb" value="#{commissionController.listeAttibutaire}" id="Tattributaire1" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun Attributaire trouvé">
-               
-                           <p:column headerText="N° Offre" styleClass="col-sm-2">
-		         		      <h:outputText value="#{slctdTb.dofNum}" />		         				
-                            </p:column> 
-                            <p:column headerText="Entreprise" styleClass="col-sm-8">
-		         			   <h:outputText value="#{slctdTb.dofNum}" />	         				
-                            </p:column>                           
-                             <p:column headerText="Montant" styleClass="col-sm-1">
-		         				<h:outputText value="#{slctdTb.dofMtOfr}" />	         				
-                            </p:column>
-                            <p:column headerText="Action" styleClass="col-sm-1">
-								 
-                              <p:commandLink rendered="false" action="#{commissionController.ajouterAttributaire()}" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-left:3px"
-				               title="detail sur l'attibutaire" update=":content">
-				               <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />  
-                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>                            
-                            </p:commandLink>
-                            
-                            </p:column>
-                        </p:dataTable>
-	             
-	             
-	              
+                        </p:dataTable>  
 	            </div>
-	             
-	            
+	            <div class="box-footer">
+	             <!--  <p:commandLink  styleClass="btn btn-success row pull-right"  style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Editer la liste
+	               </p:commandLink> -->
+	            </div>
 	           </div>
             </div>
-
             </div>
+            
       
                
                </div>
@@ -1459,6 +1398,58 @@
 					      <div class="pull-right ">
 			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveLibelleAdresse()}" oncomplete="PF('AdresseLib').hide()" update=":gnl:libelleAdresse">
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+         </div>
+		
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogCritere">
+	  <p:dialog  widgetVar="dlogCritere" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">AJOUTER NOUVEAU CRITERE</div>
+         </div>
+         <div class="box-body">
+              
+		       <div class="row">
+                   <div class="form-group">
+                  <label  class="col-sm-1 control-label">Critère</label>
+				  <div class="col-sm-11">
+				   <p:selectOneMenu id="cri" value="#{daoController.craCode}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
+			       <f:selectItems value="#{daoController.listeCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.craCode}" /> 
+       		        </p:selectOneMenu> 
+                  </div>
+                </div>
+                 <div class="form-group">
+                  <label  class="col-sm-1 control-label">Detail</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.newDetCritere.danLibelle}" rows="2" cols="5" styleClass="form-control" id="l6" style="width: 100%" />  
+                  </div>
+                </div>
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritere()}" oncomplete="PF('dlogCritere').hide()" update=":gnl">
+			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
                      </div>
                      
