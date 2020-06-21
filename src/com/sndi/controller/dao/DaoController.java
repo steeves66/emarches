@@ -71,6 +71,7 @@ import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAdresse;
 import com.sndi.model.VCommissionTypeExp;
+import com.sndi.model.VCritereAnalyse;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoBailleur;
@@ -199,9 +200,10 @@ public class DaoController {
 	private List<TTypePieceOffre> listeSelectionPiecesOffres= new ArrayList<TTypePieceOffre>();
 	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
 	//GESTION DES CRITERES D'ANALYSE
-	private List<VbCritereAnalyse> listeCritereAnalyse = new ArrayList<VbCritereAnalyse>();
-	private List<VbDetCritAnalyse> listeCritereDetAnalyse = new ArrayList<VbDetCritAnalyse>();
-	private List<VbDetCritAnalyse> selectionDetCritere = new ArrayList<VbDetCritAnalyse>();
+	private List<VCritereAnalyse> listeCritereAnalyse = new ArrayList<VCritereAnalyse>();
+	private List<VCritereAnalyse> selectionlisteCritereAnalyse = new ArrayList<VCritereAnalyse>();
+	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
+	//private List<VbDetCritAnalyse> selectionDetCritere = new ArrayList<VbDetCritAnalyse>();
 
 	 
 	//variables
@@ -242,6 +244,7 @@ public class DaoController {
 	 private TOffrePieceDac newPieceOffreDac = new TOffrePieceDac(); 
 	//GESTION DES CRITERES D'ANALYSE
 	 private VbCritereAnalyse sltCritere = new VbCritereAnalyse();
+	 private VbDetCritAnalyse newDetCritere = new VbDetCritAnalyse();
 	//VARIABLES
 	 private long adaNum;
 	 private String pidCod;
@@ -253,6 +256,7 @@ public class DaoController {
 	 private short numDetailAdr;
 	 private String dtaLibelle;
 	 private String affichLog;
+	 private String craCode="";
 	 private String detCom="";
 	 private String dacCode ="";
 	 private String newSouncc ="";
@@ -375,6 +379,7 @@ public class DaoController {
 		 controleController.fonctionaliteDynamic();
 		 chargeGestions();
 		 chargePays();
+		 chargeCritereCombobox();
 	 }
 	 
 	 public String onFlowProcess(FlowEvent event) {
@@ -421,31 +426,71 @@ public class DaoController {
 	 }
 	 
 	 //GESTION DES CRITERES
-	 public void chargeCritere() { 
-		 listeCritereAnalyse= (List<VbCritereAnalyse>) iservice.getObjectsByColumn("VbCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
-					new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,""+dao.getTTypeMarche().getTymCode()));
+	//Parametrage des criteres en fonction du type plan et du type dac
+	 public void chargeCritereByType(String typePlan , String typeDac) { 
+		 listeCritereAnalyse= (List<VCritereAnalyse>) iservice.getObjectsByColumn("VCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+					new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,""+dao.getTTypeMarche().getTymCode()),
+					new WhereClause("CRA_TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					new WhereClause("CRA_TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
 		 /*new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,"2"));*/
+		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
+		 _logger.info("procédure: "+typePlan);
+		 _logger.info("type dac: "+typeDac);
 	 }
 	 
-		//Liste des offres d'un lot
-	 public void onSelectCritere() {
-		 listeCritereDetAnalyse = ((List<VbDetCritAnalyse>)iservice.getObjectsByColumn("VbDetCritAnalyse",new ArrayList<String>(Arrays.asList("DAN_LIBELLE")),
-				  new WhereClause("DAN_CRA_CODE",WhereClause.Comparateur.EQ,""+sltCritere.getCraCode())));
-			_logger.info("Nbr detail critere : "+listeCritereDetAnalyse.size());	
+	 
+	 //Afficahe de la liste des critères en fonction des types passé en parametre
+	 public void chargeCritere() {
+		 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
+			 chargeCritereByType("DAO","PN");
+			 }else {
+				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+					 chargeCritereByType("DAO","PS");
+				 }else {
+					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+						 chargeCritereByType("AMI","PN");
+					 }else {
+						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+							 chargeCritereByType("PRQ","PN");
+						 }
+					 }
+			     } 
+			 }
+		 _logger.info("procédure: "+controleController.getTypePlan());
+		 _logger.info("type dac: "+controleController.getType());
+	 }
+	 
+		//Combo box critère
+	 
+	 public void chargeCritereCombobox() {
+		 listeCritere= (List<VbCritereAnalyse>) iservice.getObjectsByColumn("VbCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
+					new WhereClause("CRA_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTOperateur().getOpeMatricule()),
+					new WhereClause("CRA_STATUT",WhereClause.Comparateur.EQ,"1"));
+		 
+	 }
+	 
+	 public void saveDetailCritere() {
+		 newDetCritere.setDanCraCode((craCode));
+		 newDetCritere.setDanDteSaisie(Calendar.getInstance().getTime());
+		 newDetCritere.setDanFonCodeAc(userController.getSlctdTb().getTFonction().getFonCod());
+		 newDetCritere.setDanOpeSaisie(userController.getSlctdTb().getTOperateur().getOpeMatricule());
+		 newDetCritere.setDanStatut("1");
+		iservice.addObject(newDetCritere); 
+		chargeCritere();
 	 }
 	 
 	 public void saveCritere() {
-		 if (selectionDetCritere.size()==0) {
+		 if (selectionlisteCritereAnalyse.size()==0) {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère sélectionné", ""));
 			}
 	 		else{
-		 		 for(VbDetCritAnalyse ligne : selectionDetCritere) {
+		 		 for(VCritereAnalyse ligne : selectionlisteCritereAnalyse) {
 		 			newCritereDac.setDcadDacCode(dao.getDacCode());
-		 			newCritereDac.setDcadDanCode(ligne.getDanCode());
-		 			newCritereDac.setDcadDanCraCode(sltCritere.getCraCode());
+		 			newCritereDac.setDcadDanCode(ligne.getCraCode());
+		 			newCritereDac.setDcadDanCraCode(ligne.getCodparent());
 		 			newCritereDac.setDcadDteSaisie(Calendar.getInstance().getTime());
-		 			newCritereDac.setDcadLibAjust(ligne.getDanLibelle());
+		 			newCritereDac.setDcadLibAjust(ligne.getCraLibelle());
 		 			newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 			newCritereDac.setDcadStatut("0");
 		 			iservice.addObject(newCritereDac);
@@ -1599,7 +1644,7 @@ public class DaoController {
 		 			 			    //Historisation   
 		 			 			   historiser("D1S",dao.getDacCode(),"Initiation du "+typeDac+" par une Autorité Contractante");
 		 			 			 
-		 			 			   //Chargement des criteres d'analyse
+		 			 			   //Chargement des criteres d'éva
 		 			 			  chargeCritere();
 		 						     
 		 						     //chargePPM();
@@ -3265,6 +3310,7 @@ public class DaoController {
 					chargePiecesOffres();
 					 panelOuverture();
 					 chargeMembreCommission();
+					 chargeCritereCombobox();
 					 //chargeCritere();
 					 btn_save_presence = true;
 					 btn_save_expert = false;
@@ -4931,28 +4977,12 @@ public class DaoController {
 		this.listeMembre = listeMembre;
 	}
 
-	public List<VbCritereAnalyse> getListeCritereAnalyse() {
+	public List<VCritereAnalyse> getListeCritereAnalyse() {
 		return listeCritereAnalyse;
 	}
 
-	public void setListeCritereAnalyse(List<VbCritereAnalyse> listeCritereAnalyse) {
+	public void setListeCritereAnalyse(List<VCritereAnalyse> listeCritereAnalyse) {
 		this.listeCritereAnalyse = listeCritereAnalyse;
-	}
-
-	public List<VbDetCritAnalyse> getListeCritereDetAnalyse() {
-		return listeCritereDetAnalyse;
-	}
-
-	public void setListeCritereDetAnalyse(List<VbDetCritAnalyse> listeCritereDetAnalyse) {
-		this.listeCritereDetAnalyse = listeCritereDetAnalyse;
-	}
-
-	public List<VbDetCritAnalyse> getSelectionDetCritere() {
-		return selectionDetCritere;
-	}
-
-	public void setSelectionDetCritere(List<VbDetCritAnalyse> selectionDetCritere) {
-		this.selectionDetCritere = selectionDetCritere;
 	}
 
 	public VbCommissionSpecifique getSltCompsec() {
@@ -4977,6 +5007,38 @@ public class DaoController {
 
 	public void setNewCritereDac(VbDetCritAnalyseDac newCritereDac) {
 		this.newCritereDac = newCritereDac;
+	}
+
+	public List<VCritereAnalyse> getSelectionlisteCritereAnalyse() {
+		return selectionlisteCritereAnalyse;
+	}
+
+	public void setSelectionlisteCritereAnalyse(List<VCritereAnalyse> selectionlisteCritereAnalyse) {
+		this.selectionlisteCritereAnalyse = selectionlisteCritereAnalyse;
+	}
+
+	public List<VbCritereAnalyse> getListeCritere() {
+		return listeCritere;
+	}
+
+	public void setListeCritere(List<VbCritereAnalyse> listeCritere) {
+		this.listeCritere = listeCritere;
+	}
+
+	public String getCraCode() {
+		return craCode;
+	}
+
+	public void setCraCode(String craCode) {
+		this.craCode = craCode;
+	}
+
+	public VbDetCritAnalyse getNewDetCritere() {
+		return newDetCritere;
+	}
+
+	public void setNewDetCritere(VbDetCritAnalyse newDetCritere) {
+		this.newDetCritere = newDetCritere;
 	}
 	
 	
