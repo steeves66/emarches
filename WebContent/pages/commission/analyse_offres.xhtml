@@ -212,88 +212,84 @@
          <h:form id="lotlog" styleClass="form-horizontal">
 	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="Analyse de l'Offre N° #{commissionController.sltOffre.dofNum}">
 				<div class="contentpanel">
-                 <div class="row">
-                 <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-               <div class="col-md-6">
-                <div class="row">
-                 <div class="col-md-12">
-                   <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">PIECES ADMINISTRATIVES</div></div> 
-			         <div class="col-md-2 "> </div>
-               </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-	            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
-		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" paginator="false" rowsPerPageTemplate="5,10,15">
-		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-		                            	<p:column headerText="PIECES" styleClass="col-sm-11">
-		                                   <h:outputText value="#{slctdTb.tpoLibelle}"/>
-		                                </p:column>
-		                             </p:dataTable>
-	            </div>
-	           </div>
-                 </div>
-                 </div>
-                 <div class="row">
-                  <div class="col-md-12">
                  
-               <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE FINANCIERE</div></div> 
-			         <div class="col-md-2 "> </div>
-               </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-		           <div class="row">
-		           <div class="col-sm-6">
-		            <div class="form-group">
-	                  <label  class="col-sm-4 control-label"> Montant lu </label>
-	                  <div class="col-sm-7">
-	                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtOfr}" readonly="true" styleClass="form-control" style="width: 100%" >
-	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    </p:inputText>
-	                  </div>
-	                </div>
-		           </div>
-		           <div class="col-sm-6">
-		            <div class="form-group">
-	                  <label  class="col-sm-5 control-label"> Montant Corrigé</label>
-	                  <div class="col-sm-6">
-	                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtCor}" styleClass="form-control" style="width: 100%">
-	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    </p:inputText>
-	                  </div>
-	                </div>
-		           </div>
-		           </div>
+                 <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+                 
+                  <div class="row">
+                  
+	                 <div class="col-md-6">
+	                   <div class="box box-success box-solid">
+			               <div class="box-header with-border">
+			                  <div class="col-md-10 "><div  style="color: #fff">PIECES ADMINISTRATIVES</div></div> 
+						         <div class="col-md-2 "> </div>
+			                </div>
+	                         <!-- /.box-header -->
+	                         <div class="box-body">
+	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
+		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" scrollable="true" scrollHeight="160">
+		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+		                               <p:column headerText="PIECES" styleClass="col-sm-11">
+		                                  <h:outputText value="#{slctdTb.tpoLibelle}"/>
+		                                </p:column>
+		                        </p:dataTable>
+	                        </div>
+	                       </div>
+	                       
+	                                  <div class="box box-success box-solid">
+			               <div class="box-header with-border">
+			                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE FINANCIERE</div></div> 
+						         <div class="col-md-2 "> </div>
+			               </div>
+				            <!-- /.box-header -->
+				            <div class="box-body">
+					           <div class="row">
+					           <div class="col-sm-6">
+					            <div class="form-group">
+				                  <label  class="col-sm-4 control-label"> Montant lu </label>
+				                  <div class="col-sm-7">
+				                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtOfr}" readonly="true" styleClass="form-control" style="width: 100%" >
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           <div class="col-sm-6">
+					            <div class="form-group">
+				                  <label  class="col-sm-5 control-label"> Montant Corrigé</label>
+				                  <div class="col-sm-6">
+				                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtCor}" styleClass="form-control" style="width: 100%">
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           </div>
 		           
 	            </div>
 	           </div>
-                 </div>
-                 
-               </div>
-               </div>
-               
-               
-               
-               <div class="col-md-6">
-               <div class="box box-success box-solid">
+	                    </div>
+	                    
+	                    
+	                    
+	                    
+	                    
+	                    
+	                    
+	                    
+	        <div class="col-md-6">
+	         <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">EVALUATION</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-
-	            
 	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" emptyMessage="Aucun critère trouvé" var="slctdTb" 
-					 editable="true" editMode="cell" draggableColumns="true" scrollable="true" scrollHeight="300">
+					 editable="true" editMode="cell" rowKey="#{slctdTb.dcadNum}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="300">
+		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 	                <p:column headerText="Critère" styleClass="col-sm-10">
 	         				    <h:outputText value="#{slctdTb.dcadLibAjust}" />
                      </p:column>
-                    
-                     
                       <p:column headerText="NOM" styleClass="col-sm-2" >
                           <p:cellEditor>
                           <f:facet name="output">
@@ -308,21 +304,18 @@
          				  </f:facet>
          				  </p:cellEditor>
 				        </p:column>
-			    </p:dataTable>
-	            
-					  
-		                
-		               
-		          
+			    </p:dataTable> 
 	            </div>
 	           </div>
-               </div>
-              </div>
+	           </div>
               
-              <div class="row">
-                  <div class="col-md-6">
-                 
-               <div class="box box-success box-solid">
+             </div>
+             
+             
+             
+             <div class="row">
+                <div class="col-md-12">
+                  <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">RESULTAT DE L'EVALUATION</div></div> 
 			         <div class="col-md-2 "> </div>
@@ -346,40 +339,25 @@
 	                    <p:inputText type="text" value="#{commissionController.nbrLot}" readonly="true" styleClass="form-control" style="width: 100%" />
 	                  </div>
 	                </div>
-	                
 		           </div>
-		           </div>
-	             <div class="form-group">
+		           
+		           <div class="col-sm-6">
+		               <div class="form-group">
 			                  <label  class="col-sm-2 control-label"> Observation </label>
 			                  <div class="col-sm-10">
-			                    <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{commissionController.sltOffre.dofObsCom}" style="width: 100%" />
+			                    <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{commissionController.sltOffre.dofObsCom}" style="width: 100%" />
 			                  </div>
 			                </div>
-		           <div class="row">
-		           <div class="col-sm-6">
+		           </div>
 		           
-		           </div>
-		           <div class="col-sm-6">
-		           
-		           </div>
-		           </div>
-		            <div class="row">
-		           <div class="col-sm-6">
-		          
-	                
-		           </div>
 		           </div>
 		             
 	            </div>
 	           </div>
                  </div>
-                 
-                   
-		                 <div class="col-sm-12">
-		                  
-			                </div>
-		                
-               </div>
+              </div>
+              
+              
 	                 <div class="row">
                 <div class="pull-right ">
 			            <p:commandLink action="#{commissionController.analyser()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">

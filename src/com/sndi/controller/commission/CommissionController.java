@@ -57,6 +57,7 @@ import com.sndi.model.VLot;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VTypeMarcheFils;
+import com.sndi.model.VbAnalyseOffre;
 import com.sndi.model.VbCommissionSpecifique;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
@@ -133,8 +134,14 @@ public class CommissionController {
 	 private List<TDetOffres> listeAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TDetOffres> listeAffichageAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
+	 //Remplacer par la vue du diyen
 	 private List<VbDetCritAnalyseDac> listeCritereAnalyse = new ArrayList<VbDetCritAnalyseDac>(); 
+	 private List<VbDetCritAnalyseDac> selectionCritereAnalyse = new ArrayList<VbDetCritAnalyseDac>();
+	 //Fin remplacer
 	private VCandidatDac candidat =new VCandidatDac();
+	
+	
+	
 	 
 	 
 	 
@@ -164,6 +171,7 @@ public class CommissionController {
 	 private TSeances newSeance = new TSeances();
 	 private TDetCommissionSeance newDetailSeance = new TDetCommissionSeance();
 	 private VDetCommissionSeance sltMbr = new VDetCommissionSeance();
+	 private VbAnalyseOffre newAnalyseOffre =new VbAnalyseOffre();
 	 
 	 
 	 //Declaration des variables
@@ -664,6 +672,27 @@ public class CommissionController {
 				newOffre.setDofMtOfr(montantOffre);
 				newOffre.setDofRab(rabais);
 				iservice.addObject(newOffre);
+				
+				//enregister dans T_analyse_offre
+				if (selectionCritereAnalyse.size()==0) {
+					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+				}
+		 		else{
+			 		for(VbDetCritAnalyseDac ligne : selectionCritereAnalyse) {
+			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
+			 			newAnalyseOffre.setAnfDanCode(ligne.getDcadDanCode());
+			 			//newAnalyseOffre.setAnfDteModif(ligne.get);
+			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
+			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
+			 			//newAnalyseOffre.setAnfLaaId("1");
+			 			newAnalyseOffre.setAnfObser(sltOffre.getDofObsCom());
+			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 			newAnalyseOffre.setAnfValeur("0");
+			 			iservice.addObject(newAnalyseOffre);
+				     }	
+		 }
+				 
+				
 			  //enregister la liste des pièces du dao
 		    
 		    	if (listeSelectionPiecesOffres.size()==0) {
@@ -1496,6 +1525,22 @@ public class CommissionController {
 
 	public void setFiltreCandidat(String filtreCandidat) {
 		this.filtreCandidat = filtreCandidat;
+	}
+
+	public VbAnalyseOffre getNewAnalyseOffre() {
+		return newAnalyseOffre;
+	}
+
+	public void setNewAnalyseOffre(VbAnalyseOffre newAnalyseOffre) {
+		this.newAnalyseOffre = newAnalyseOffre;
+	}
+
+	public List<VbDetCritAnalyseDac> getSelectionCritereAnalyse() {
+		return selectionCritereAnalyse;
+	}
+
+	public void setSelectionCritereAnalyse(List<VbDetCritAnalyseDac> selectionCritereAnalyse) {
+		this.selectionCritereAnalyse = selectionCritereAnalyse;
 	}
 
 
