@@ -48,7 +48,7 @@ public class TBailleur implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "BAI_CODE", unique = true, nullable = false, length = 5)
+	@Column(name = "BAI_CODE", unique = true, nullable = false)
 	public String getBaiCode() {
 		return this.baiCode;
 	}

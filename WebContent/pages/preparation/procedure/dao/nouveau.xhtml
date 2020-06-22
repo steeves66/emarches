@@ -589,7 +589,45 @@
          </div>
            </div>
          </p:tab> 
-         <p:tab id="critere" title="Saisie des critères d'évalution"  titleStyle="background-color: #f88b2e;background-image: none">
+         
+         
+        
+         
+         <p:tab id="Poffre" rendered="#{daoController.pavet_offre}" title=" Saisie des pièces de recevabilité de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="row"> 
+           
+            <div class="col-md-12">
+
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div class="col-md-9 "><div  style="color: #fff"> SAISIE DES PIECES DE RECEVABILITE DE L'OFFRE </div></div> 
+         </div>
+         <div class="box-body">
+             <p:dataTable id="TPOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listePiecesOffres}" 
+             rowKey="#{slctdTb.tpoCode}" selection="#{daoController.listeSelectionPiecesOffres}" emptyMessage="Aucune Pièce trouvée">
+                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+         				<p:column headerText="PIECES" styleClass="col-sm-12">
+				            <h:outputText value="#{slctdTb.tpoLibelle}"/>
+				        </p:column>
+                 </p:dataTable> 
+                  <br/> 
+                 <div class="pull-right ">
+			            <p:commandLink action="#{daoController.savePieceOffres()}" styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_offre}" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			            </p:commandLink>
+			            
+                 </div> 
+         </div>
+         
+         
+         </div>
+         </div>
+           </div>
+         </p:tab> 
+          
+          
+          <p:tab rendered="#{daoController.pavet_critere}" id="critere" title="Saisie des critères d'évalution"  titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row">   
             <div class="col-md-12">
               <div class="row">
@@ -598,7 +636,7 @@
                <div class="box-header with-border">
                   <div class="col-md-8 "><div  style="color: #fff">LISTE DES CRITERES</div></div> 
 			           <div class="col-sm-4">
-				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+				                  <p:commandLink rendered="false" oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
 								  </p:commandLink>
 				                  </div>
@@ -652,9 +690,10 @@
                      
          </div>
            
-         </p:tab> 
+         </p:tab>  
          
-        <p:tab id="cojo" title="Saisie des membres de la commission" titleStyle="background-color: #f88b2e;background-image: none">
+         
+         <p:tab id="cojo" rendered="#{daoController.pavet_commission}" title="Saisie des membres de la commission" titleStyle="background-color: #f88b2e;background-image: none">
        
            <div class="row">
             <div class="col-md-12">
@@ -738,9 +777,14 @@
                        
 		        
     </p:dataTable> 
+    
+    
+			           
             </div>
             </div>
-            
+               <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
+				      </p:commandLink>
        </div>
          
             </div>
@@ -748,44 +792,7 @@
             
            </div>
        
-         </p:tab>
-         
-         <p:tab id="Poffre" rendered="#{daoController.pavet_offre}" title="Pièces de recevabilité de l'offre" titleStyle="background-color: #f88b2e;background-image: none">
-           <div class="row"> 
-           
-            <div class="col-md-12">
-
-                    <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <div class="col-md-9 "><div  style="color: #fff">PIECES DE RECEVABILITE DE L'OFFRE </div></div> 
-         </div>
-         <div class="box-body">
-             <p:dataTable id="TPOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listePiecesOffres}" 
-             rowKey="#{slctdTb.tpoCode}" selection="#{daoController.listeSelectionPiecesOffres}" emptyMessage="Aucune Pièce trouvée">
-                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-         				<p:column headerText="PIECES" styleClass="col-sm-12">
-				            <h:outputText value="#{slctdTb.tpoLibelle}"/>
-				        </p:column>
-                 </p:dataTable> 
-                  <br/> 
-                 <div class="pull-right ">
-			            <p:commandLink action="#{daoController.savePieceOffres()}" styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_offre}" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
-			            </p:commandLink>
-			            
-			              <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
-				      </p:commandLink>
-                 </div> 
-         </div>
-         
-         
-         </div>
-         </div>
-           </div>
-         </p:tab> 
-             
+         </p:tab>  
               
     <p:tab id="confirmation" title="Confirmation" rendered="false" titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel>
@@ -1420,6 +1427,7 @@
 	    <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
+                     
         <div class="box-header with-border">
             <div  style="color: #fff">AJOUTER NOUVEAU CRITERE</div>
          </div>

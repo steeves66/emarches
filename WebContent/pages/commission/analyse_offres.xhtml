@@ -287,10 +287,10 @@
 	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" emptyMessage="Aucun critère trouvé" var="slctdTb" 
 					 editable="true" editMode="cell" rowKey="#{slctdTb.dcadNum}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="300">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-	                <p:column headerText="Critère" styleClass="col-sm-10">
+	                <p:column headerText="CRITERES" styleClass="col-sm-10">
 	         				    <h:outputText value="#{slctdTb.dcadLibAjust}" />
                      </p:column>
-                      <p:column headerText="NOM" styleClass="col-sm-2" >
+                      <p:column headerText="CONFORMITE" styleClass="col-sm-2" >
                           <p:cellEditor>
                           <f:facet name="output">
          				  <h:outputText />

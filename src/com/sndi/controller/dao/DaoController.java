@@ -369,6 +369,8 @@ public class DaoController {
 	  private boolean ouverture = false;
 	  private boolean pavet_lot = false;
 	  private boolean pavet_offre = false;
+	  private boolean pavet_critere = false;
+	  private boolean pavet_commission = false;
 	  private boolean btn_dao = false;
 	  private boolean btn_titre_paie = false;
 	  private boolean btn_titre_retrait = false;
@@ -393,8 +395,29 @@ public class DaoController {
 					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez terminer votre Saisie, avant de cliquer sur suivant!", ""));
 			          return "creation";
 					} 
-	 
+	              userController.initMessage();
 			     }
+			 //Infos generales
+			 if(event.getOldStep().equals("creation") && event.getNewStep().equals("avis")) {
+				 userController.initMessage();
+			     }
+			 
+			 //lot
+			 if(event.getOldStep().equals("avis") && event.getNewStep().equals("tabLot")) {
+				 userController.initMessage();
+			     }
+			 
+			 //Pieces offres
+			 if(event.getOldStep().equals("tabLot") && event.getNewStep().equals("Poffre")) {
+				 userController.initMessage();
+			     }
+			 
+			 //Critere
+			 if(event.getOldStep().equals("Poffre") && event.getNewStep().equals("cojo")) {
+				 userController.initMessage();
+			     }
+			 
+			
 		            return event.getNewStep();
 	    }
 	 
@@ -436,22 +459,23 @@ public class DaoController {
 		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
 		 _logger.info("procédure: "+typePlan);
 		 _logger.info("type dac: "+typeDac);
+		 _logger.info("type dac: "+dao.getTTypeMarche().getTymCode());
 	 }
 	 
 	 
 	 //Afficahe de la liste des critères en fonction des types passé en parametre
 	 public void chargeCritere() {
 		 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
-			 chargeCritereByType("DAO","PN");
+			 chargeCritereByType("PN","DAO");
 			 }else {
 				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
-					 chargeCritereByType("DAO","PS");
+					 chargeCritereByType("PS","DAO");
 				 }else {
 					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
-						 chargeCritereByType("AMI","PN");
+						 chargeCritereByType("PN","AMI");
 					 }else {
 						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
-							 chargeCritereByType("PRQ","PN");
+							 chargeCritereByType("PN","PRQ");
 						 }
 					 }
 			     } 
@@ -463,9 +487,9 @@ public class DaoController {
 		//Combo box critère
 	 
 	 public void chargeCritereCombobox() {
-		 listeCritere= (List<VbCritereAnalyse>) iservice.getObjectsByColumn("VbCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
-					new WhereClause("CRA_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTOperateur().getOpeMatricule()),
-					new WhereClause("CRA_STATUT",WhereClause.Comparateur.EQ,"1"));
+		 listeCritere= (List<VbCritereAnalyse>) iservice.getObjectsByColumn("VbCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_LIBELLE"))//s,
+					/*new WhereClause("CRA_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTOperateur().getOpeMatricule()),
+					new WhereClause("CRA_STATUT",WhereClause.Comparateur.EQ,"1")*/);
 		 
 	 }
 	 
@@ -495,6 +519,7 @@ public class DaoController {
 		 			newCritereDac.setDcadStatut("0");
 		 			iservice.addObject(newCritereDac);
 			     }
+		 		pavet_commission = true;
 		 		userController.setTexteMsg("Critère(s) d'analyse enrégistré(s) avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
@@ -1408,6 +1433,7 @@ public class DaoController {
 								//chargeExpert();
 								chargeMembres();
 								btn_ad_expert = true;
+								btn_dao = true;
 								 //Message de confirmation
 			  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
@@ -1747,8 +1773,8 @@ public class DaoController {
 	            	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
 	            	     			            iservice.updateObject(newDao); 
 	            	     	   	                 }
-
-	            	          		            
+                                             //Charger la liste des pieces de l'offre
+	            	     				     chargePiecesOffres();
 	                	     				    //Message de confirmation
 	            	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
 	            	          		            userController.setRenderMsg(true);
@@ -2150,6 +2176,7 @@ public class DaoController {
 								userController.setSevrityMsg("success");
 								//Désactivation du Bouton d'Enregistrement
 								btn_save_offre = false;
+								pavet_critere=true;
 								//Activation du bouton du téléchargement du DAO
 				                btn_dao = true;
 					 		 }
@@ -3307,10 +3334,10 @@ public class DaoController {
 					chargeAdresse();
 					chargeLots();
 					chargeImputation();
-					chargePiecesOffres();
+					//chargePiecesOffres();
 					 panelOuverture();
 					 chargeMembreCommission();
-					 chargeCritereCombobox();
+					 //chargeCritereCombobox();
 					 //chargeCritere();
 					 btn_save_presence = true;
 					 btn_save_expert = false;
@@ -3319,6 +3346,10 @@ public class DaoController {
 					 btn_ad_expert = false;
 					 selectionMembres.clear();
 					 selectionlisteExpert.clear();
+					 pavet_critere = false;
+					 pavet_lot = false;
+					 pavet_offre = false;
+					 pavet_commission = false;
 				break;
 				case "dao3":
 		 			_logger.info("value: "+value+" action: "+action);
@@ -5039,6 +5070,22 @@ public class DaoController {
 
 	public void setNewDetCritere(VbDetCritAnalyse newDetCritere) {
 		this.newDetCritere = newDetCritere;
+	}
+
+	public boolean isPavet_critere() {
+		return pavet_critere;
+	}
+
+	public void setPavet_critere(boolean pavet_critere) {
+		this.pavet_critere = pavet_critere;
+	}
+
+	public boolean isPavet_commission() {
+		return pavet_commission;
+	}
+
+	public void setPavet_commission(boolean pavet_commission) {
+		this.pavet_commission = pavet_commission;
 	}
 	
 	
