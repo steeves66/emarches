@@ -32,6 +32,7 @@ import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetOffres;
 import com.sndi.model.TDetailVente;
 import com.sndi.model.TFinancementPgpm;
+import com.sndi.model.TFonction;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TOperateur;
 import com.sndi.model.TPiecesOffres;
@@ -44,11 +45,13 @@ import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
+import com.sndi.model.VCandidatDac;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCompoCommission;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetailOffres;
+import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VLot;
 import com.sndi.model.VPiecesOffre;
@@ -118,7 +121,7 @@ public class CommissionController {
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
-	 private List<TCandidats> listCandidats = new ArrayList<TCandidats>();
+	 private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
 	 private List<TDetOffres> listeOffres = new ArrayList<TDetOffres>(); 
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
 	 private List<VPiecesOffreAnalyse> listePiecesOffresAnalyse = new ArrayList<VPiecesOffreAnalyse>();
@@ -131,6 +134,7 @@ public class CommissionController {
 	 private List<TDetOffres> listeAffichageAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
 	 private List<VbDetCritAnalyseDac> listeCritereAnalyse = new ArrayList<VbDetCritAnalyseDac>(); 
+	private VCandidatDac candidat =new VCandidatDac();
 	 
 	 
 	 
@@ -148,7 +152,7 @@ public class CommissionController {
 	 private TCommissionType newCom = new TCommissionType();
 	 private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
 	 private VbTempParametreCom membre = new VbTempParametreCom();
-	 private TCandidats candidat = new TCandidats(); 
+	 //private TCandidats candidat = new TCandidats(); 
 	 private VbTempParamDetOffres newOffre = new VbTempParamDetOffres();
 	 private TDetOffres detailOffre = new TDetOffres();
 	 private TDetOffres sltOffre = new TDetOffres();
@@ -185,6 +189,7 @@ public class CommissionController {
 	 private BigDecimal dofNum;
 	 private long laaNum;
 	 private int nbrLot;
+	 private String filtreCandidat="";
 	 //private long rabais
 	 
 	 
@@ -303,20 +308,7 @@ public class CommissionController {
 					
 		 }*/
 		 
-		//Liste des candidats
-		 public void chargeCandidats() {
-			 listCandidats = ((List<TCandidats>)iservice.getObjectsByColumn("TCandidats",new ArrayList<String>(Arrays.asList("CAN_NOM"))));
-					_logger.info("listCandidats size: "+listCandidats.size());	
-		 }
-		 
-		//Filtre les marchés en fonction du code Marché
-		 public void filtrenNccCandidat() {
-			 listCandidats.clear();
-			 listCandidats = ((List<TCandidats>)iservice.getObjectsByColumn("TCandidats",new ArrayList<String>(Arrays.asList("CAN_NOM")),
-					 new WhereClause("CAN_TIE_NCC",WhereClause.Comparateur.LIKE,"%"+filtreNcc+"%")));
-				_logger.info("listCandidats size: "+listCandidats.size());	
-			 
-		 }
+
 		 
 		//Liste des offres VBdetaiOffre
 		 public void chargeOffres() {
@@ -351,13 +343,7 @@ public class CommissionController {
 		 
 		 
 		
-		 //Love pour recuperer les candidats
-		 public void onSelectCandidat() {
-			 soumission = new TSoumissions();
-			 soumission.setSouNcc(candidat.getCanSouNcc());
-			 soumission.setSouNomCom(candidat.getCanNom()+" "+candidat.getCanPrenoms());
-			 soumission.setSouTel(candidat.getCanTel());
-				}
+		 
 		 
 		//Liste des lot d'un avis d'avis d'appel d'offre
 		 public void chargeLots() {
@@ -616,6 +602,53 @@ public class CommissionController {
 		 public void imprimerFicheMbr() {
 			   projetReport.longparam1(newSeance.getSeaNum(), "membres_cojo", "membres_cojo");    
 			}
+		 
+		 //Love condidat
+		 
+		 
+		 //private TFonction recupFonction= new TFonction();
+		/* public void onSelectCandidat() {
+				
+			 
+			 recupFonction = new TFonction();
+			 recupFonction.setFonCod(fonction.getFonCod());
+			 recupFonction.setFonLibelle(fonction.getFonLibelle());
+			 chargePgpmCpmpDmp();
+			 chargeImputationCpmpDmp();
+				}*/
+		 //Afficher la liste des candidats dans v_candidat_da(love)
+		 public void chargeCandidats() {
+			 listCandidats.clear();
+			 listCandidats = ((List<VCandidatDac>)iservice.getObjectsByColumn("VCandidatDac",new ArrayList<String>(Arrays.asList("CAN_SOU_SIGLE_STE")),
+					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+			 _logger.info("Nbr candidat: "+listCandidats.size());
+		 }
+		 
+
+		 public void chargeFilterCandidats(){
+			 listCandidats.clear();
+			 listCandidats = ((List<VCandidatDac>)iservice.getObjectsByColumn("VCandidatDac",new ArrayList<String>(Arrays.asList("CAN_SOU_SIGLE_STE")),
+					 new WhereClause("CAN_SOU_NCC",WhereClause.Comparateur.LIKE,"%"+filtreCandidat+"%"),
+					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+			}
+			
+		 
+			//Filtre les marchés en fonction du code Marché
+			/* public void filtrenNccCandidat() {
+				 listCandidats.clear();
+				 listCandidats = ((List<TCandidats>)iservice.getObjectsByColumn("TCandidats",new ArrayList<String>(Arrays.asList("CAN_NOM")),
+						 new WhereClause("CAN_TIE_NCC",WhereClause.Comparateur.LIKE,"%"+filtreNcc+"%")));
+					_logger.info("listCandidats size: "+listCandidats.size());	
+				 
+			 }
+		 */
+		//Love pour recuperer les candidats
+		 public void onSelectCandidat() {
+			 newOffre= new VbTempParamDetOffres();
+			 newOffre.setDofSigle(candidat.getCanSouSigleSte());
+			 newOffre.setDofSouNcc(candidat.getCanSouNcc());
+				}
+		
 		
 		//Ouverture des offres
 		public void saveOuverture() {
@@ -909,6 +942,7 @@ public class CommissionController {
 					chargeLots();
 					chargeOffres();
 					chargePieces();
+					chargeCandidats();
 					break;
 				case "com7":
 					chargeLots();
@@ -1043,11 +1077,11 @@ public class CommissionController {
 		this.laaId = laaId;
 	}
 
-	public List<TCandidats> getListCandidats() {
+	public List<VCandidatDac> getListCandidats() {
 		return listCandidats;
 	}
 
-	public void setListCandidats(List<TCandidats> listCandidats) {
+	public void setListCandidats(List<VCandidatDac> listCandidats) {
 		this.listCandidats = listCandidats;
 	}
 
@@ -1059,12 +1093,21 @@ public class CommissionController {
 		this.filtreNcc = filtreNcc;
 	}
 
-	public TCandidats getCandidat() {
+
+	public VCandidatDac getCandidat() {
 		return candidat;
 	}
 
-	public void setCandidat(TCandidats candidat) {
+	public void setCandidat(VCandidatDac candidat) {
 		this.candidat = candidat;
+	}
+
+	public VbCommissionSpecifique getNewcomSpecif() {
+		return newcomSpecif;
+	}
+
+	public void setNewcomSpecif(VbCommissionSpecifique newcomSpecif) {
+		this.newcomSpecif = newcomSpecif;
 	}
 
 	public TSoumissions getSoumission() {
@@ -1445,6 +1488,14 @@ public class CommissionController {
 
 	public void setListeCritereAnalyse(List<VbDetCritAnalyseDac> listeCritereAnalyse) {
 		this.listeCritereAnalyse = listeCritereAnalyse;
+	}
+
+	public String getFiltreCandidat() {
+		return filtreCandidat;
+	}
+
+	public void setFiltreCandidat(String filtreCandidat) {
+		this.filtreCandidat = filtreCandidat;
 	}
 
 

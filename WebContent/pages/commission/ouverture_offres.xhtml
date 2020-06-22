@@ -78,13 +78,29 @@
 		                  <div class="form-group horizontal">
 		                      <label  class="col-sm-2 control-label text-right"><b>Ncc :</b></label>
 		                      <div class="col-sm-10">
-		                        <p:inputText value="#{commissionController.newOffre.dofSouNcc}" type="text"  styleClass="form-control" style="width: 100%" />
-		                      </div>
+				                <table>
+							        <tr>
+		                            <td style="width: 1000px">
+		                            <p:inputText value="#{commissionController.newOffre.dofSouNcc}" readonly="true" type="text" styleClass="form-control" style="width:100%" />
+		                            </td>		                 
+		                            <td>
+									        <p:commandLink oncomplete="PF('candidatDlg').show()" action="#{commissionController.chargeCandidats()}"  title="Selectionnez l'entreprise" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+										    	<i class="fa fa-search"></i>
+										    </p:commandLink>
+								        </td>
+			                       <td style="width:1510px">
+			                       <h:panelGroup id="idncc">
+			                      
+			                       </h:panelGroup>
+			                       </td>
+							        </tr>
+				                </table>
+			                </div>
 		                  </div>
 		                   <div class="form-group horizontal">
 		                      <label  class="col-sm-2 control-label text-right"><b> Sigle :</b></label>
 		                      <div class="col-sm-10">
-		                        <p:inputText value="#{commissionController.newOffre.dofSigle}" type="text" styleClass="form-control"  style="width: 100%"/>
+		                        <p:inputText value="#{commissionController.newOffre.dofSigle}" readonly="true" type="text" styleClass="form-control"  style="width: 100%"/>
 		                      </div>
 		                  </div>
                 		
@@ -338,6 +354,54 @@
 		</p:commandLink>
 		
     </section>
+    </h:form>
+    
+    
+     <h:form id="candidatDlg">
+	        <p:dialog  widgetVar="candidatDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez une entreprise">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{commissionController.filtreCandidat}"  class="gui-input"  placeholder="Saisir le NCC"  > 
+						     <p:ajax event="keyup" update=":candidatDlg:ndTbleCand" listener="#{commissionController.chargeFilterCandidats()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleCand" styleClass="table table-bordered table-hover" var="slctdTb" value="#{commissionController.listCandidats}"
+						 selectionMode="single" rowKey="#{slctdTb.canSouNcc}"
+			               emptyMessage="Aucune entreprise trouvée" scrollable="true" scrollHeight="300">
+			               
+							<p:column headerText="NCC" styleClass="col-sm-3" >
+                        <h:commandLink  title="Ncc" style="font-size:18px;"  action="#{commissionController.onSelectCandidat()}" update="gnl:auto">				        
+         				  <h:outputText value="#{slctdTb.canSouNcc}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.candidat}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="SIGLE" styleClass="col-sm-9" >
+                        <h:commandLink  title="Sigle" style="font-size:18px;"  action="#{commissionController.onSelectCandidat()}">				        
+         				  <h:outputText value="#{slctdTb.canSouSigleSte}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.candidat}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                      
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
     </h:form>
     
     
