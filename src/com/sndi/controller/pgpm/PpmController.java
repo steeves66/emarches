@@ -342,6 +342,16 @@ public class PpmController {
 						 new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
 		 }*/
 		 
+		 public void chargePpmAC1(String typeplan, String stat1) {
+		   
+		 }
+		 
+		 
+         public void chargePpmAC2(String typeplan, String stat1) {
+			 
+		 } 
+		 
+		 
 		//Liste des Ppm validés par la CPMP : Nouvelle Methode
 		 public void chargePpmValCp() {
 			 
@@ -405,14 +415,14 @@ public class PpmController {
 		 public void chargePpmPubDmp() {
 			 
 			 if(controleController.type == "PPM") {
-				 listePpm.clear();
-				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+				 publicationListe.clear();
+				 publicationListe = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
 			 }else 
 				 if(controleController.type == "PSPM"){
-					 listePpm.clear();
-					 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					 publicationListe.clear();
+					 publicationListe = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
 			 }
@@ -2241,18 +2251,7 @@ public class PpmController {
     	  		 detailPass.setDppStatutDao("N");
     	  		 iservice.addObject(detailPass);
     	  		 
-    	  		TAffichagePpm affichagePpm = new TAffichagePpm();
-	 	  		affichagePpm.setAffDppId(detailPass.getDppId());
-	 	  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
-	 	  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
-	 	  		affichagePpm.setAffDppTypePlan("PN");
-	 	  		affichagePpm.setAffDppDateAvisAoPublicat(detailPass.getDppDateAvisAoPublication());
-	 	  		affichagePpm.setAffDppDateDaoTrans(detailPass.getDppDateDaoTrans());
-	 	  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
-	 	  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
-	 	  		affichagePpm.setAffDppStatutAno(detailPass.getDppStatutAno());
-	 	  		affichagePpm.setAffDppNatInt(detailPass.getDppNatInt());
-	 	  		iservice.addObject(affichagePpm);
+    	  		
              }else 
                   if(controleController.type == "PSPM"){
                 	  detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
@@ -2273,19 +2272,7 @@ public class PpmController {
             		    detailPass.setDppStatutRetour("0");
             		    detailPass.setDppStatutDao("N");
             		    iservice.addObject(detailPass); 
-            		    
-            		    TAffichagePpm affichagePpm = new TAffichagePpm();
-        	 	  		affichagePpm.setAffDppId(detailPass.getDppId());
-        	 	  		affichagePpm.setTStatut(new TStatut(detailPass.getTStatut().getStaCode()));
-        	 	  		affichagePpm.setTFonction(userController.getSlctd().getTFonction());
-        	 	  		affichagePpm.setAffDppTypePlan("PS");
-        	 	  		affichagePpm.setAffDppDateAvisAoPublicat(detailPass.getDppDateAvisAoPublication());
-        	 	  		affichagePpm.setAffDppDateDaoTrans(detailPass.getDppDateDaoTrans());
-        	 	  		affichagePpm.setAffDppObjet(detailPass.getDppObjet());
-        	 	  		affichagePpm.setAffDppApprobAno(detailPass.getDppApprobAno());
-        	 	  		affichagePpm.setAffDppStatutAno(detailPass.getDppStatutAno());
-        	 	  		affichagePpm.setAffDppNatInt(detailPass.getDppNatInt());
-        	 	  		iservice.addObject(affichagePpm);
+            		   
              } 
 	  		
 	  	 }
@@ -2978,13 +2965,13 @@ public class PpmController {
 				     
 				 	if(controleController.type == "PPM") {
 						tableauBordController.chargeDataPpm("PN");
+						//chargeData("PN");
 						chargePpmPubDmp();
-						chargeData("PN");
 				          }else 
 				              if(controleController.type == "PSPM"){
 				             	 tableauBordController.chargeDataPpm("PS");
+				             	//chargeData("PS");
 				             	chargePpmPubDmp();
-				             	chargeData("PS");
 				         }
 					//Message de confirmation		  
 					 userController.setTexteMsg(" Publication effectuée avec succès !");
