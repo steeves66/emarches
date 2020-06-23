@@ -128,6 +128,7 @@ public class PpmController {
 		 //chargePpmTrans();
 		 //chargePspmTrans();
 		 chargePpmValDmp();
+		 chargePpmTrans();
 		 //chargePpmPubDmp(typePlan);
 		 chargePpmValDmpAc();
 		 chargePspmValDmpAc();
@@ -152,6 +153,7 @@ public class PpmController {
 		 private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
 		 private List<VDetPlaning> affichPpm = new ArrayList<VDetPlaning>();
 	     private List<VPpmliste> listePpm = new ArrayList<VPpmliste>();
+	     private List<VPpmliste> listePspm = new ArrayList<VPpmliste>();
 	     private List<VPpmliste> publicationListe = new ArrayList<VPpmliste>();
 	     private List<THistoPlanPassation> listeHisto = new ArrayList<THistoPlanPassation>();
 	     private List<VPgpmFonction> listePgpm = new ArrayList<VPgpmFonction>();
@@ -321,9 +323,10 @@ public class PpmController {
 						   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
-			   }else {
-					 listePpm.clear();
-					 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+			   }else
+			        if(controleController.type == "PSPM"){
+			        	listePpm.clear();
+			        	listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 							   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
 							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
 								new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));

@@ -1004,6 +1004,8 @@ public class ControleController {
 									panelPgpmTableauBordVal =false;
 									panelPgpmTableauBordPgPub = false;
 									panelPgpmTableauBordPgsPub = true;
+									panelPgspmTableauBordSai =false;
+									panelPgspmTableauBordVal =false;
 									btn_trans_pgpm = false;
 									btn_trans_pgspm = false;
 									btn_trasmettre_pgspm=false;
