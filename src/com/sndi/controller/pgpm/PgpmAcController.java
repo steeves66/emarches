@@ -2179,7 +2179,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
       
       
       //Validation par le CPMP DMP
-      @Transactional
+      //@Transactional
 		public void validerPgspmCPMPDMP()throws IOException{ 
 	 		if (listSelectionTransmission.size()==0) {
 				FacesContext.getCurrentInstance().addMessage(null,
@@ -2228,6 +2228,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		             	    TStatut statuts = constantService.getStatut(statutUpdate);
 			  				//Historisation des Pgpm
 			      			historiser(""+statutUpdate,demDetail,"Opération Validée");
+			      			
+			      			 tableauBordController.chargeDataPgspm();
+				 			 chargeDataAvaliderPgspm();
+				 			 chargePgspmValCp();
+				 		     chargePgspmValDmp();
 									  
 							 userController.setTexteMsg("Validation effectuée avec succès !");
 							 userController.setRenderMsg(true);
@@ -2236,12 +2241,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 		        }	   
 			 		   }	
 				     }
-	 		        //chargeDataAvaliderPgpm();
-	 			    chargeDataAvaliderPgspm();
-	 			   chargePgspmValCp();
-	 		       chargePgspmValDmp();
 					}
-
+//Fin ValiderPgspmCPMPDMP
 		
       //DIFFERER CPMP ET DMP
       //Differer
