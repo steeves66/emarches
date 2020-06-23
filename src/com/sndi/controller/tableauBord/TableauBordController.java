@@ -266,6 +266,8 @@ public class TableauBordController {
 				     private String daoCsvDiff="";
 				     private String daoCsvTraitCharg="";
 				     private String daoCsvValidation = "";
+				     private String daoCsvAttPub = "";
+				     private String daoCsvPub = "";
 					 /*
 					  Compteur pour le Directeur des Marchés Publics
 					   */
@@ -812,8 +814,9 @@ public class TableauBordController {
 				 //Publication des DAO
 				 daoCsvValide = ""+getAcDaoValidCsvDossier(typePlan,typeDac,"D5V","DOP");
 				 daoDaoPub = ""+getAcDaoValidCsvPubDossier(typePlan,typeDac,"DPU");
-				 //Vente ou Retrait du DAO
-				 daoAcAttVente = ""+getDaoAttenteRetrait(typePlan,typeDac,"DPU","D6V");
+				 //Vente ou Retrait du DAO 
+				 //daoAcAttVente = ""+getDaoAttenteRetrait(typePlan,typeDac,"DPU","D6V");
+				 daoAcAttVente = ""+getDaoAttenteRetrait(typePlan,typeDac,"DAP");
 				 daoAcAttRetrait = ""+getDaoAttenteVente(typePlan,typeDac,"DVE");
 				 daoAcRetire = ""+getDaoAcRetire(typePlan,typeDac,"RET");
 				 //Prise en compte des observations des DAO
@@ -831,6 +834,9 @@ public class TableauBordController {
 						 daoCsvAttAff = ""+getDaoAttAffCsv(typePlan,typeDac,"D2T","D5R","DOP");
 						 daoaffecte = ""+getAcDaoAffecteDossier(typePlan,typeDac,"D3A");
 						 daoCsvDiff = ""+getAcDaoDiffCsv(typePlan,typeDac,"D5R");
+						 //Publication des DAC
+						 daoCsvAttPub = ""+getAcDaoAttPubDossier(typePlan,typeDac,"D6V","DPU");
+						 daoCsvPub = ""+getAcDaoPubDossier(typePlan,typeDac,"DAP");
 						 //Validation des DAC
 						 daoCsvAttVal = ""+getAcDaoValChargeCsv(typePlan,typeDac,"D4V");
 						 daoCsvValidation = ""+getAcDaoValidationCsvDossier(typePlan,typeDac,"D5V","DOP","SBO");
@@ -2123,14 +2129,14 @@ public int getPpmTransmisDmpDossier(String src,String typePlan){
 //Début DAO Procédure Normale
 //Nombre total des DAO
 public int getDaoDossierTotal(String typePlan,String typeDac){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 	new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 return	i;	
 	} 
 //DAO saisi par le AC
 public int getAcDaoSaisieDossier(String typePlan,String typeDac,String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2140,7 +2146,7 @@ public int getAcDaoSaisieDossier(String typePlan,String typeDac,String src1, Str
 
 //DAO saisi par le AC en procédure Normale
 public int getAcDaoSaisiePs(String typePlan,String src1, String src2){ 
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -2191,7 +2197,7 @@ public int getAcDaoCorCharge(String typePlan,String typeDac,String src){
 }
 
 public int getAcDaoValChargeCsv(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
@@ -2202,7 +2208,7 @@ public int getAcDaoValChargeCsv(String typePlan,String typeDac,String src){
 
 //DAO saisi par le AC
 public int getAcDaoAffecteDossier(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2211,9 +2217,30 @@ public int getAcDaoAffecteDossier(String typePlan,String typeDac,String src){
 	return	i;	
 }
 
+
+//DAC en Attente de Publication le Chef de Service
+public int getAcDaoAttPubDossier(String typePlan,String typeDac,String src1, String src2){
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
+			//new WhereClause("DAC_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
+public int getAcDaoPubDossier(String typePlan,String typeDac,String src1){
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src1),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
+			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+	return	i;	
+}
+
 //DAO validé par le Chef de Service en procédure normale
 public int getAcDaoValidCsvDossier(String typePlan,String typeDac,String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2223,7 +2250,7 @@ public int getAcDaoValidCsvDossier(String typePlan,String typeDac,String src1, S
 
 //DAC validé par le Chef de Service en procédure normale
 public int getAcDaoValidationCsvDossier(String typePlan,String typeDac,String src1, String src2, String src3){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
@@ -2233,7 +2260,7 @@ public int getAcDaoValidationCsvDossier(String typePlan,String typeDac,String sr
 
 //
 public int getAcDaoValidCsv(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
@@ -2243,7 +2270,7 @@ public int getAcDaoValidCsv(String typePlan,String typeDac,String src){
 
 //DAO différé par le Chef de Service DAO (Acteur DMP)
 /*public int getAcDaoDiffCsv(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
@@ -2253,7 +2280,7 @@ public int getAcDaoValidCsv(String typePlan,String typeDac,String src){
 
 //DAO différé par le Chef de Service DAO (Acteur DMP)
 public int getAcDaoDiffCsv(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
@@ -2263,7 +2290,7 @@ public int getAcDaoDiffCsv(String typePlan,String typeDac,String src){
 
 //DAO publié par le Chef de Service
 public int getAcDaoValidCsvPubDossier(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2273,7 +2300,7 @@ public int getAcDaoValidCsvPubDossier(String typePlan,String typeDac,String src)
 
 //DAO Transmis par le AC
 public int getAcDaoTransmisDossier(String typePlan,String typeDac,String src){ 
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2283,7 +2310,7 @@ public int getAcDaoTransmisDossier(String typePlan,String typeDac,String src){
 
 //DAO en attente de transmission chez le AC
 public int getAcDaoAttenteValide(String typePlan,String typeDac,String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2294,7 +2321,7 @@ public int getAcDaoAttenteValide(String typePlan,String typeDac,String src1, Str
 
 //DAO saisi par le CPMP en procédure normale : Ancienne Methode
 /*public int getDaoSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
@@ -2314,7 +2341,7 @@ public int getDaoSaisieDossier(String typePlan,String typeDac,String src){
 
 //DAO non transmis par le cpmp en procédure normale
 public int getDaoSaisieDossierIn(String typePlan,String typeDac,String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2324,7 +2351,7 @@ public int getDaoSaisieDossierIn(String typePlan,String typeDac,String src1, Str
 
 //DAO transmis par le cpmp en procédure normale
 public int getDaoTransmisDossier(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2334,7 +2361,7 @@ public int getDaoTransmisDossier(String typePlan,String typeDac,String src){
 
 //DAO envoyés pour l'affectation chez le chef de service en procédure normale
 public int getDaoAttAffCsv(String typePlan,String typeDac,String src1, String src2,String src3){ 
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2345,7 +2372,7 @@ public int getDaoAttAffCsv(String typePlan,String typeDac,String src1, String sr
 
 //DAO retournés par le cpmp chez le AC en procédure normale : Ancienne Methode
 /*public int getDaoDiffCpmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
@@ -2375,7 +2402,7 @@ public int getDaoDiffDmpACDossier(String typePlan,String typeDac,String src){
 
 //DAO retournés par la cpmp (Son propre tableau de bord)
 public int getDaoDiffDossier(String typePlan,String typeDac,String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2385,7 +2412,7 @@ public int getDaoDiffDossier(String typePlan,String typeDac,String src1, String 
 
 //DAO retournés par le dmp en procédure normale
 public int getDaoDiffDmp(String typePlan,String typeDac,String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2395,7 +2422,7 @@ public int getDaoDiffDmp(String typePlan,String typeDac,String src){
 
 //DAO en attente de validation par le CPMP en procédure normale
 public int getDaoAttenteValide(String typePlan,String typeDac,String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
@@ -2408,6 +2435,16 @@ public int getDaoAttenteRetrait(String typePlan,String typeDac,String src1, Stri
 	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac), 
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
+			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;
+}
+
+//DAO en attente de retrait chez l'AC en procédure normale / procédure Simplifiée
+public int getDaoAttenteRetrait(String typePlan,String typeDac,String src1){
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
+			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src1),
+			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;
@@ -2437,7 +2474,7 @@ public int getDaoAcRetire(String typePlan,String typeDac,String src){
 
 //DAO validés par le cpmp en procédure normale : Ancienne Methode 
 /*public int getDaoValideCmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"),
@@ -2499,7 +2536,7 @@ return	i;
 
 //DAO saisi par le AC en procédure simplifiée
 public int getAcDaoSaisieDossierPs(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2509,7 +2546,7 @@ public int getAcDaoSaisieDossierPs(String src1, String src2){
 
 //DAO saisi par le AC en procédure simplifiée
 public int getAcDaoSaisiePsPs(String src1, String src2){ 
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
@@ -2519,7 +2556,7 @@ public int getAcDaoSaisiePsPs(String src1, String src2){
 
 //DAO différé par le Chef de Service DAO (Acteur DMP)
 public int getAcDaoDiffCsvPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
@@ -2528,7 +2565,7 @@ public int getAcDaoDiffCsvPs(String src){
 }
 
 public int getAcDaoValidationCsvDossierPs(String src1, String src2, String src3){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
@@ -2553,7 +2590,7 @@ public int getAcDaoAttenteChargePs(String src){
 
 //DAO retournés par la cpmp (Son propre tableau de bord)
 public int getDaoDiffDossierPs(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2574,7 +2611,7 @@ public int getAcDaoValChargeDetPs(String src){
 
 //DAO publié par le Chef de Service
 public int getAcDaoValidCsvPubDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2593,7 +2630,7 @@ public int getAcDaoValChargePs(String src){
 }
 
 public int getAcDaoValidCsvPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
@@ -2613,7 +2650,7 @@ public int getAcDaoCorChargePs(String src){
 }
 
 public int getAcDaoValChargeCsvPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
@@ -2624,7 +2661,7 @@ public int getAcDaoValChargeCsvPs(String src){
 
 //DAO saisi par le AC
 public int getAcDaoAffecteDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2634,7 +2671,7 @@ public int getAcDaoAffecteDossierPs(String src){
 
 //DAO validé par le Chef de Service
 public int getAcDaoValidCsvDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2644,7 +2681,7 @@ public int getAcDaoValidCsvDossierPs(String src){
 
 //DAO Transmis par le AC
 public int getAcDaoTransmisDossierPs(String src){ 
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2654,7 +2691,7 @@ public int getAcDaoTransmisDossierPs(String src){
 
 //DAO en attente de transmission chez le AC
 public int getAcDaoAttenteValidePs(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2665,7 +2702,7 @@ public int getAcDaoAttenteValidePs(String src1, String src2){
 
 //DAO saisi par la CPMP
 public int getDaoSaisieDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2676,7 +2713,7 @@ public int getDaoSaisieDossierPs(String src){
 
 //DAO non transmis par le cpmp
 public int getDaoSaisieDossierInPs(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2686,7 +2723,7 @@ public int getDaoSaisieDossierInPs(String src1, String src2){
 
 //DAO transmis par le cpmp
 public int getDaoTransmisDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2696,7 +2733,7 @@ public int getDaoTransmisDossierPs(String src){
 
 //DAO envoyés pour l'affectation chez le chef de service
 public int getDaoAttAffCsvPs(String src1, String src2,String src3){ 
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2706,7 +2743,7 @@ public int getDaoAttAffCsvPs(String src1, String src2,String src3){
 
 //DAO retournés par la CPMP chez le AC
 public int getDaoDiffCpmpACDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2717,7 +2754,7 @@ public int getDaoDiffCpmpACDossierPs(String src){
 
 //DAO validé par le Chef de Service en procédure normale
 public int getAcDaoValidCsvDossierPs(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2727,7 +2764,7 @@ public int getAcDaoValidCsvDossierPs(String src1, String src2){
 
 //DAO retournés par le dmp chez le AC
 public int getDaoDiffDmpACDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2737,7 +2774,7 @@ public int getDaoDiffDmpACDossierPs(String src){
 
 //DAO retournés par la cpmp (Son propre tableau de bord)
 public int getDaoDiffDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2747,7 +2784,7 @@ public int getDaoDiffDossierPs(String src){
 
 //DAO retournés par le dmp
 public int getDaoDiffDmpPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2757,7 +2794,7 @@ public int getDaoDiffDmpPs(String src){
 
 //DAO en attente de validation par le CPMP
 public int getDaoAttenteValidePs(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2788,7 +2825,7 @@ public int getDaoAttenteVentePs(String src){
 
 //DAO retiré chez l'AC
 public int getDaoAcRetirePs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2799,7 +2836,7 @@ public int getDaoAcRetirePs(String src){
 
 //DAO validés par le cpmp
 public int getDaoValideCmpPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
@@ -2811,7 +2848,7 @@ public int getDaoValideCmpPs(String src){
 
 //DAO validés par le dmp
 public int getDaoValideDmpPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2821,7 +2858,7 @@ public int getDaoValideDmpPs(String src){
 
 //DAO en attente de validation par le dmp
 public int getDaoAttValideDmpPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2831,7 +2868,7 @@ public int getDaoAttValideDmpPs(String src){
 
 //DAO transmis par le dmp
 public int getDaoTransmisDmpDossierPs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"DAO"),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
@@ -2846,14 +2883,14 @@ public int getDaoTransmisDmpDossierPs(String src){
 //Début PRQ
 //Nombre total des PRQ
 public int getPrqDossierTotal(){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"));
 	//new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ,"PN"));
 return	i;	
 	} 
 //PRQ saisi par le AC
 public int getAcPrqSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -2862,7 +2899,7 @@ public int getAcPrqSaisieDossier(String src){
 
 //PRQ saisi par le AC en procédure simplifiée
 public int getAcPrqSaisiePs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 	return	i;	
@@ -2908,7 +2945,7 @@ public int getAcPrqCorCharge(String src){
 }
 
 public int getAcPrqValChargeCsv(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -2918,7 +2955,7 @@ public int getAcPrqValChargeCsv(String src){
 
 //PRQ saisi par le AC
 public int getAcPrqAffecteDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -2927,7 +2964,7 @@ public int getAcPrqAffecteDossier(String src){
 
 //PRQ validé par le Chef de Service
 public int getAcPrqValidCsvDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -2936,7 +2973,7 @@ public int getAcPrqValidCsvDossier(String src){
 
 //PRQ différé par le Chef de Service
 public int getAcPrqDiffCsvDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -2945,7 +2982,7 @@ public int getAcPrqDiffCsvDossier(String src){
 
 //PRQ Transmis par le AC
 public int getAcPrqTransmisDossier(String src){ 
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -2954,7 +2991,7 @@ public int getAcPrqTransmisDossier(String src){
 
 //PRQ en attente de transmission chez le AC
 public int getAcPrqAttenteValide(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -2964,7 +3001,7 @@ public int getAcPrqAttenteValide(String src1, String src2){
 
 //DAO saisi par le CPMP
 public int getPrqSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -2974,7 +3011,7 @@ public int getPrqSaisieDossier(String src){
 
 //PRQ non transmis par le cpmp
 public int getPrqSaisieDossierIn(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
@@ -2983,7 +3020,7 @@ public int getPrqSaisieDossierIn(String src1, String src2){
 
 //PRQ transmis par le cpmp
 public int getPrqTransmisDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -2992,7 +3029,7 @@ public int getPrqTransmisDossier(String src){
 
 //PRQ retournés par le cpmp chez le AC
 public int getPrqAttAffCsv(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
@@ -3001,7 +3038,7 @@ public int getPrqAttAffCsv(String src){
 
 //PRQ retournés par le cpmp chez le AC
 public int getPrqDiffCpmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3011,7 +3048,7 @@ public int getPrqDiffCpmpACDossier(String src){
 
 //PRQ retournés par le dmp chez le AC
 public int getPrqDiffDmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 	        new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
@@ -3020,7 +3057,7 @@ public int getPrqDiffDmpACDossier(String src){
 
 //PRQ retournés par la cpmp (Son propre tableau de bord)
 public int getPrqDiffDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3029,7 +3066,7 @@ public int getPrqDiffDossier(String src){
 
 //PRQ retournés par le dmp
 public int getPrqDiffDmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 	return	i;	
@@ -3038,7 +3075,7 @@ public int getPrqDiffDmp(String src){
 
 //PRQ en attente de validation par le CPMP
 public int getPrqAttenteValide(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3047,7 +3084,7 @@ public int getPrqAttenteValide(String src1, String src2){
 
 //PRQ en attente de validation par le CPMP
 public int getPrqAttentePub(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3075,7 +3112,7 @@ public int getPrqAttenteVente(String src){
 
 //PRQ retiré chez l'AC
 public int getPrqAcRetire(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3085,7 +3122,7 @@ public int getPrqAcRetire(String src){
 
 //PRQ validés par la CPMP
 public int getPrqValideCmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3096,7 +3133,7 @@ public int getPrqValideCmp(String src){
 
 //PRQ validés par la dmp
 public int getPrqValideDmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
@@ -3105,7 +3142,7 @@ public int getPrqValideDmp(String src){
 
 //PRQ validé par le Chef de Service en procédure normale
 public int getAcPrqValidationCsvDossier(String src1, String src2, String src3){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3114,7 +3151,7 @@ public int getAcPrqValidationCsvDossier(String src1, String src2, String src3){
 
 //PRQ en attente de validation par le dmp
 public int getPrqAttValideDmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 	return	i;	
@@ -3123,7 +3160,7 @@ public int getPrqAttValideDmp(String src){
 
 //PRQ transmis par le dmp
 public int getPrqTransmisDmpDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"PRQ"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3137,13 +3174,13 @@ public int getPrqTransmisDmpDossier(String src){
 //Début AMI
 //Nombre total des DAO
 public int getAmiDossierTotal(){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE");
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE");
 	new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI");
 return	i;	
 	} 
 //AMI saisi par le AC
 public int getAcAmiSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3152,7 +3189,7 @@ public int getAcAmiSaisieDossier(String src){
 
 //AMI saisi par le AC en procédure simplifiée
 public int getAcAmiSaisiePs(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3189,7 +3226,7 @@ public int getAcAmiValCharge(String src){
 }
 
 public int getAcAmiValChargeCsv(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3199,7 +3236,7 @@ public int getAcAmiValChargeCsv(String src){
 
 //AMI saisi par le AC
 public int getAcAmiAffecteDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3208,7 +3245,7 @@ public int getAcAmiAffecteDossier(String src){
 
 //AMI publié par le AC
 public int getAcAmiPublieDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3217,7 +3254,7 @@ public int getAcAmiPublieDossier(String src){
 
 //AMI validé par le Chef de Service
 public int getAcAmiValidCsvDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3226,7 +3263,7 @@ public int getAcAmiValidCsvDossier(String src){
 
 //AMI validé par le Chef de Service en procédure normale
 public int getAcAmiValidationCsvDossier(String src1, String src2, String src3){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"));
 			//new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3235,7 +3272,7 @@ public int getAcAmiValidationCsvDossier(String src1, String src2, String src3){
 
 //AMI Transmis par le AC
 public int getAcAmiTransmisDossier(String src){ 
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3244,7 +3281,7 @@ public int getAcAmiTransmisDossier(String src){
 
 //AMI en attente de transmission chez le AC
 public int getAcAmiAttenteValide(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3254,7 +3291,7 @@ public int getAcAmiAttenteValide(String src1, String src2){
 
 //AMI saisi par le CPMP
 public int getAmiSaisieDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3264,7 +3301,7 @@ public int getAmiSaisieDossier(String src){
 
 //AMI non transmis par le cpmp
 public int getAmiSaisieDossierIn(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
@@ -3273,7 +3310,7 @@ public int getAmiSaisieDossierIn(String src1, String src2){
 
 //AMI transmis par le cpmp
 public int getAmiTransmisDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"));
 			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3282,7 +3319,7 @@ public int getAmiTransmisDossier(String src){
 
 //AMI retournés par le cpmp chez le AC
 public int getAmiAttAffCsv(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
@@ -3291,7 +3328,7 @@ public int getAmiAttAffCsv(String src){
 
 //DAO retournés par le cpmp chez le AC
 public int getAmiDiffCpmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3301,7 +3338,7 @@ public int getAmiDiffCpmpACDossier(String src){
 
 //AMI retournés par le dmp chez le AC
 public int getAmiDiffDmpACDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 	        new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
@@ -3310,7 +3347,7 @@ public int getAmiDiffDmpACDossier(String src){
 
 //Ami retournés par le cpmp (Son propre tableau de bord)
 public int getAmiDiffDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3319,7 +3356,7 @@ public int getAmiDiffDossier(String src){
 
 //AMI retournés par le dmp
 public int getAmiDiffDmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
@@ -3329,7 +3366,7 @@ public int getAmiDiffDmp(String src){
 
 //AMI en attente de validation par le CPMP
 public int getAmiAttenteValide(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3338,7 +3375,7 @@ public int getAmiAttenteValide(String src1, String src2){
 
 //AMI en attente de validation par le CPMP
 public int getAmiAttentePub(String src1, String src2){
-	int i = iservice.countTableByColumnIn("T_DAC_SPECS", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
+	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
@@ -3366,7 +3403,7 @@ public int getAmiAttenteVente(String src){
 
 //AMI retiré chez l'AC
 public int getAmiAcRetire(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
@@ -3375,7 +3412,7 @@ public int getAmiAcRetire(String src){
 
 //AMI validés par la CPMP
 public int getAmiValideCmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -3386,7 +3423,7 @@ public int getAmiValideCmp(String src){
 
 //AMI validés par le dmp
 public int getAmiValideDmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
@@ -3395,7 +3432,7 @@ public int getAmiValideDmp(String src){
 
 //AMI en attente de validation par le dmp
 public int getAmiAttValideDmp(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
@@ -3405,7 +3442,7 @@ public int getAmiAttValideDmp(String src){
 
 //AMI transmis par le dmp
 public int getAmiTransmisDmpDossier(String src){
-	int i = iservice.countTableByColumn("T_DAC_SPECS", "DAC_CODE",
+	int i = iservice.countTableByColumn("V_DACLISTE", "DAC_CODE",
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,"AMI"),
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src));
 			//new WhereClause("DPP_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
@@ -5578,5 +5615,25 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setPpmPub(String ppmPub) {
 		this.ppmPub = ppmPub;
+	}
+
+
+
+	public String getDaoCsvAttPub() {
+		return daoCsvAttPub;
+	}
+
+	public void setDaoCsvAttPub(String daoCsvAttPub) {
+		this.daoCsvAttPub = daoCsvAttPub;
+	}
+
+
+
+	public String getDaoCsvPub() {
+		return daoCsvPub;
+	}
+
+	public void setDaoCsvPub(String daoCsvPub) {
+		this.daoCsvPub = daoCsvPub;
 	}
 }

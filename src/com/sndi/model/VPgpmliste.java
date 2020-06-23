@@ -19,7 +19,7 @@ import org.hibernate.annotations.Immutable;
 public class VPgpmliste implements java.io.Serializable {
 
 	private long gpgId;
-	private String fipTypeFinance;
+	//private String fipTypeFinance;
 	private String gpgLibFin;
 	private Date gpgDteModif;
 	private String gpgObjet;
@@ -64,12 +64,12 @@ public class VPgpmliste implements java.io.Serializable {
 		this.plgGesCode = plgGesCode;
 	}
 
-	public VPgpmliste(String fipTypeFinance, long gpgId,String gpgLibFin, Date gpgDteModif, String gpgObjet, String gpgStaCode,
+	public VPgpmliste(/*String fipTypeFinance,*/ long gpgId,String gpgLibFin, Date gpgDteModif, String gpgObjet, String gpgStaCode,
 			String gpgTypePlan, String gpgActeurSaisie, Date gpgDateDao, String gpgFonCodPf, String gpgFonCodDmp,
 			String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleCourt, String mopLibelleLong,
 			String gpgRecherche,Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp,String gpgStatutRetour,String ac, Long gpgAgpId,String gpgCommentaire, String gpgPartiePmePmi,
 			String gpgStrCode,String tstCode, long plgId, long plgGesCode) {
-		this.fipTypeFinance = fipTypeFinance;
+		//this.fipTypeFinance = fipTypeFinance;
 		this.gpgId = gpgId;
 		this.gpgLibFin = gpgLibFin;
 		this.gpgDteModif = gpgDteModif;
@@ -109,14 +109,14 @@ public class VPgpmliste implements java.io.Serializable {
 	public void setGpgId(long gpgId) {
 		this.gpgId = gpgId;
 	}
-	@Column(name = "FIP_TYPE_FINANCE", length = 20)
+	/*@Column(name = "FIP_TYPE_FINANCE", length = 20)
 	public String getFipTypeFinance() {
 		return this.fipTypeFinance;
 	}
 
 	public void setFipTypeFinance(String fipTypeFinance) {
 		this.fipTypeFinance = fipTypeFinance;
-	}
+	}*/
 	
 	@Column(name = "GPG_LIB_FIN", length = 200)
 	public String getGpgLibFin() {

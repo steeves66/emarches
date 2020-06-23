@@ -185,6 +185,8 @@ public class DaoController {
 	private List<VPiecesOffreDao> offresDao = new ArrayList<VPiecesOffreDao>();
 	private VbTempParametreCorrection newCorrection = new VbTempParametreCorrection();
 	 private List<VDetailCorrectionCharge> listeCorrectionCharge = new ArrayList<VDetailCorrectionCharge>();
+	 private List<VDacliste> publicationListe = new ArrayList<VDacliste>();
+	 private List<VDacliste> publicationSelection = new ArrayList<VDacliste>();
 	//Avis 
 	private List<TAvisAppelOffre> listAvis = new ArrayList<TAvisAppelOffre>();
 	private List<TAffichageDao> examenListe = new ArrayList<TAffichageDao>(); 
@@ -272,6 +274,15 @@ public class DaoController {
 	 private String libelleLocationMainDoeuvre ="dao_location_main_doeuvre_ 2016.doc";
 	 private String libelleRestauration ="Dao_Restauration.doc";
 	 private String libelleSecurite ="dao_securite_privee_ 2016.doc";
+	 private String fourniture_PSL = "dossier_de_consultation_de_fourniture_en_PSL.docx";
+	 private String fourniture_PSO= "dossier_de_consultation_de_fourniture_en_PSO_final.docx";
+	 private String fourniture_PSC="";
+	 private String travaux_PSL= "dossier_de_consultation_travaux_en_PSL_final.docx";
+	 private String travaux_PSO= "dossier_de_consultation_travaux_en_PSO_final.docx";
+	 private String travaux_PSC = "";
+	 private String prestations_PSL = "dossier_de_consultation_de_services_courants_en_PSL_FINAL.docx";
+	 private String prestations_PSO = "dossier_de_consultation_de_services_courants_en_PSO.docx";
+	 private String prestations_PSC = "";
 	 
 	 private VLigneLot ligne = new VLigneLot();
 	 private VLigneLot recupLigne = new VLigneLot();
@@ -325,6 +336,7 @@ public class DaoController {
 	  private String choixTaux = "";
 	  private String multiFiltre="";
 	  private String paieCode ="";
+	  private String statutPub ="";
 	  private long lotTotal = 0;
 	  private long coutLot = 0;
 	  private boolean ouvTechnique = true;
@@ -539,6 +551,18 @@ public class DaoController {
 			typeActionTb(); 
 	 }
 	 
+	 //Affichage des AC en lui passant en parametre les statuts concerné (1 statut)
+	 public void chargeDataAc3(String typeDac,String typePlan,String stat1){
+		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+					new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,""+stat1),
+					new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+					new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+					new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		         multiFiltre ="";
+			_logger.info("listeDAO size: "+listeDAO.size());	
+			typeActionTb(); 
+	 }
+	 
 	 //DEBUT AFFICHAGE LISTE DAC DMP
 	//Affichage des DMP en lui passant en parametre le statut concerné (1 statuts)
 	 public void chargeDataDMP1(String typeDac,String typePlan,String stat1){
@@ -563,7 +587,7 @@ public class DaoController {
 		 }
 		//FIN AFFICHAGE LISTE DAC DMP
 	 
-	//Methode d'affichage la liste des DAC en fonction du type plan et du type DAC passé en parametre
+			//Methode d'affichage la liste des DAC en fonction du type plan et du type DAC passé en parametre
 		 public void chargeDataByAction(String typeDac,String typePlan){
 			 listeDAO.clear();	
 			 String fonct = controleController.getFonctionalite();
@@ -577,7 +601,8 @@ public class DaoController {
 								 chargeDataAc2(typeDac,typePlan,"D5V","DOP");
 							 }else {
 								 if(fonct.equalsIgnoreCase("listeDaoVentePn")) {
-									 chargeDataAc2(typeDac,typePlan,"D6V","DPU");
+									 //chargeDataAc2(typeDac,typePlan,"D6V","DPU");
+									 chargeDataAc3(typeDac,typePlan,"DAP");
 								 }else {
 									 if(fonct.equalsIgnoreCase("listeDaoCorrectionPn")) {
 										 chargeDataAc2(typeDac,typePlan,"SBO","SRO");
@@ -632,7 +657,6 @@ public class DaoController {
 			   }
 					
 		} 
-		 
 		 
 		 public void typeActionTb() {
 			 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
@@ -2259,46 +2283,138 @@ public class DaoController {
 						 }
 					 }
 				 
-					//Téléchargement des DAO type depuis la liste d'affichage
+					//Téléchargement des DAO type après la saisie du DAO					
 						public void opendaoType() throws IOException{
-							  if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
-								 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
-								 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
-								  //System.out.println(""+downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures)); 
-								  System.out.println("");
-							  }else
-								  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
-									  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
-									  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
-							  }else
-								 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
-									 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
-									 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
-							    }
-						  }
-						
+							
+						  if(controleController.type == "DAC" && controleController.typePlan == "PN"){
+								if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
+									downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+								    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+										}else
+										  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
+											downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
+											//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+											  }else
+												 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
+													downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+													//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+													 }
+									}else
+										 if(controleController.type == "DAC" && controleController.typePlan == "PS"){
+
+										       if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
+										    	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSL, fourniture_PSL); 
+												    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+										           }else
+										               if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("1")){
+										            	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSL, prestations_PSL); 
+														    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libelleFournitures, libelleFournitures);    
+										              }else
+										                   if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("2")){
+										                	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSL, travaux_PSL); 
+															    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSL, travaux_PSL);
+										                }else
+										                    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
+										                    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSO, fourniture_PSO); 
+															    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+										                    }else 
+										                    	if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("1")){
+										                    		downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSO, prestations_PSO); 
+																    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSO, prestations_PSO);
+										                    	}else 
+										                    		if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("2")){
+										                    			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSO, travaux_PSO); 
+																	    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSO, travaux_PSO);
+										                    	    }else 
+										                    		    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
+										                    		    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+fourniture_PSC, fourniture_PSC); 
+										    							    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+										                    		       }else
+										                    		    	    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
+										                    		    	    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSC, prestations_PSC); 
+										            							    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSC, prestations_PSC);
+										                    		    	     }else
+										                    		    	    	 if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
+										                    		    	    		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSC, travaux_PSC); 
+										                 							    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSC, travaux_PSC);
+										                    		    	    	    }else
+										                    		    	    		    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSI")) {
+										                    		    	    		    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+										                    								    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures); 
+										                    		    	    		  }
+
+										                                                }
+								                                                }
 						
 						//Téléchargement des DAO type après la saisie du DAO  
 							//Téléchargement des DAO type après la saisie du DAO  
-				  public void opendaoNew() throws IOException{
-					listeDAO = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-							new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		    	              if (!listeDAO.isEmpty()) {
-						         slctdTd = listeDAO.get(0);
-		    	                }
-							 if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
-								  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
-								  // downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);  
-							  }else
-								  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
-									  downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
-									  //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
-							  }else
-								 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
-									 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
-									 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
-							    }	
-				  }
+						//Téléchargement des DAO type après la saisie du DAO 
+						 public void opendaoNew() throws IOException{
+								listeDAO = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+					    	              if (!listeDAO.isEmpty()) {
+									         slctdTd = listeDAO.get(0);
+					    	                }
+					    	              
+					    	              if(controleController.type == "DAC" && controleController.typePlan == "PN"){
+					    	      			if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
+					    	      				downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+					    	      			    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      					}else
+					    	      					  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
+					    	      						downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
+					    	      						//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+					    	      						  }else
+					    	      							 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
+					    	      								downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+					    	      								//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+					    	      								 }
+					    	      				}else
+					    	      					 if(controleController.type == "DAC" && controleController.typePlan == "PS"){
+
+					    	      					       if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
+					    	      					    	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSL, fourniture_PSL); 
+					    	      							    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      					           }else
+					    	      					               if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("1")){
+					    	      					            	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSL, prestations_PSL); 
+					    	      									    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libelleFournitures, libelleFournitures);    
+					    	      					              }else
+					    	      					                   if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("2")){
+					    	      					                	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSL, travaux_PSL); 
+					    	      										    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSL, travaux_PSL);
+					    	      					                }else
+					    	      					                    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
+					    	      					                    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSO, fourniture_PSO); 
+					    	      										    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      					                    }else 
+					    	      					                    	if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("1")){
+					    	      					                    		downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSO, prestations_PSO); 
+					    	      											    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSO, prestations_PSO);
+					    	      					                    	}else 
+					    	      					                    		if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("2")){
+					    	      					                    			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSO, travaux_PSO); 
+					    	      												    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSO, travaux_PSO);
+					    	      					                    	    }else 
+					    	      					                    		    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
+					    	      					                    		    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+fourniture_PSC, fourniture_PSC); 
+					    	      					    							    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      					                    		       }else
+					    	      					                    		    	    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
+					    	      					                    		    	    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSC, prestations_PSC); 
+					    	      					            							    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSC, prestations_PSC);
+					    	      					                    		    	     }else
+					    	      					                    		    	    	 if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
+					    	      					                    		    	    		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSC, travaux_PSC); 
+					    	      					                 							    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSC, travaux_PSC);
+					    	      					                    		    	    	    }else
+					    	      					                    		    	    		    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSI")) {
+					    	      					                    		    	    		    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+					    	      					                    								    //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures); 
+					    	      					                    		    	    		  }
+
+					    	      					                                                }	
+							           }			 
 			
 						
 			
@@ -3220,18 +3336,14 @@ public class DaoController {
 													}
 												 }
 											  
-											   //Début de la vente du DAO
+												 //Début de la vente du DAO
 													public void finVente() {
 														String statUpdate = "";
 														String message = "";
-														if(slctdTd.getDacStaCode().equalsIgnoreCase("D6V")) {
+														if(slctdTd.getDacStaCode().equalsIgnoreCase("DAP")) {
 															statUpdate = "DVE";
 															message="Fin de la vente du Dossier d'Appel à Concurrence N°"+slctdTd.getDacCode();
-														 }else 
-															 if(slctdTd.getDacStaCode().equalsIgnoreCase("DPU")) {
-																	statUpdate = "DVE";
-																	message="Fin de la vente du Dossier d'Appel à Concurrence N°"+slctdTd.getDacCode();
-															 }
+														 }
 														//Recupération du DAO dans T_DAC_SPECS
 											            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 								     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
@@ -3248,7 +3360,34 @@ public class DaoController {
 														userController.setRenderMsg(true);
 														userController.setSevrityMsg("success");  
 													}
-											//Fin de la vente du DAO
+											        //Fin de la vente du DAO
+													
+													
+													//Début de retrait du DAO
+													 public void finRetrait() {
+														String statRetrait = "";
+														String message = "";
+														if(slctdTd.getDacStaCode().equalsIgnoreCase("DAP")) {
+															statRetrait = "RET";
+															message="Fin de retrait du Dossier d'Appel à Concurrence N°"+slctdTd.getDacCode();
+														 }
+														
+														 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+										 					     new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+										 				           if (!listDao.isEmpty()) {
+										 					            newDao= listDao.get(0);
+										 					            newDao.setTStatut(new TStatut(statRetrait));
+										 			                    iservice.updateObject(newDao); 
+														
+										 			    //Chargement de la liste des retraits et celle du tableau de Bord
+														chargeData();
+														typeActionTb();
+														userController.setTexteMsg(message);
+														userController.setRenderMsg(true);
+														userController.setSevrityMsg("success");  
+													}
+												}
+											//Fin de retrait du DAO
 													
 													
 													//Récupération du montant du DAO
@@ -3290,7 +3429,124 @@ public class DaoController {
 																projetReport.stringparam3(slctdTd.getDacCode(), newCandidat.getCanNom(), newCandidat.getCanPrenoms(), "Recu_dao", "Recu_dao");
 															}
 								
-														 					 
+														//chargement des listes pour la publication
+														  public void chargeDaoPUB() throws IOException{ 
+																 String fonct = controleController.getFonctionalite();
+																 //DEBUT DAO Publié 
+																 if(controleController.type == "DAC" && controleController.typePlan == "PN") { 
+																	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+																		 //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
+																			 if(fonct.equalsIgnoreCase("listePubCsv")) {
+																				chargeDataAPublier("DAO","PN","D6V","DPU");	
+																			 }else {
+																				 if(fonct.equalsIgnoreCase("listeDpubCsv")) {
+																					 //chargeDetailAC1("PN", "DAO", "DEV");
+																				 }else {
+																					
+																				 }	 
+																			 }
+																       //Fin affichage CSV
+																	     }
+
+																	 }else
+																	      if(controleController.type == "DAC" && controleController.typePlan == "PS"){
+													                           //if(controleController.type == "DAC" && controleController.typePlan == "PS") { 
+																	              if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+																		                //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
+																			       if(fonct.equalsIgnoreCase("listePubDpsCsv")) {
+																				      chargeDataAPublier("DAO", "PS","D6V","DPU");	
+																			        }else {
+																				       if(fonct.equalsIgnoreCase("listePubDdpsCsv")) {
+																					        //chargeDetailAC1("PS", "DAO", "");
+																				     }else {
+																				 }	 
+																			 }
+																       //Fin affichage  CSV 
+																	 }
+																	//}
+																}else
+																	 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+																		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+																                //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
+																	       if(fonct.equalsIgnoreCase("listeAmiCsv")) {
+																		      chargeDataAPublier("AMI", "PN","D6V","DPU");	
+																	        }else {
+																		       if(fonct.equalsIgnoreCase("listeDamiCsv")) {
+																			        //chargeDetailAC1("PS", "DAO", "");
+																		     }else {
+																			
+																		               }	 
+																	                }
+														       //Fin affichage  CSV 
+															                 }	    
+																	 }else  
+																		  if(controleController.type == "AMI" && controleController.typePlan == "PS") {
+																			  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+																	                //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
+																		       if(fonct.equalsIgnoreCase("listePubDamiCsv")) {
+																			      chargeDataAPublier("AMI", "PS","D6V","DPU");	
+																		        }else {
+																			       if(fonct.equalsIgnoreCase("listePubAdpsCsv")) {
+																				        //chargeDetailAC1("PS", "DAO", "");
+																			     }else {
+																				
+																			               }	 
+																		                }
+															       //Fin affichage  CSV 
+																                 }	
+																		  }else
+																			   if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+																				   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+																		                //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
+																			       if(fonct.equalsIgnoreCase("listePrqCsv")) {
+																				      chargeDataAPublier("PRQ","PN","D6V","DPU");	
+																			        }else {
+																				       if(fonct.equalsIgnoreCase("listeDprqCsv")) {
+																					        //chargeDetailAC1("PS", "DAO", "");
+																				     }else {
+																					
+																				               }	 
+																			                }
+																       //Fin affichage  CSV 
+																	                 }	
+																			   }
+															     }
+														  //Fin de la Methode	
+														  
+														  public void chargeDataAPublier(String typeDac,String typePlan,String stat1,String stat2) throws IOException{ 
+														 		
+														 		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+														 					
+														 				 }else {
+														 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+														 						 
+														 					 }else {
+														 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+														 							 publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+													 										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+													 										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+													 										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+													 								         //multiFiltre ="";
+													 									_logger.info("publicationListe size: "+publicationListe.size());	
+													 									typeActionTb(); 
+														 						 }else
+														 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+														 								 publicationListe =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
+														 										 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+														 										 new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+														 										 new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+														 								        // multiFiltre ="";
+														 									_logger.info("publicationListe size: "+publicationListe.size());	
+														 									typeActionTb(); 
+														 					      }
+														 				     } 
+															 	
+															 		        }	   
+																 		  
+																	     }
+												     //Fin de la methode de Publication
+														  
+														  
 														 
 		     //Methode vider
 		     public void vider() { 
@@ -3302,6 +3558,59 @@ public class DaoController {
 		    	 newVbTemp = new VbTempParametreLot();
 		    	 setListeLots(new ArrayList<TLotAao>());
 		     }
+		     
+		     
+		     
+		     //Publication Des DAO
+			  public void publierDao() throws IOException{ 
+			 		if (publicationSelection.size()==0) {
+						FacesContext.getCurrentInstance().addMessage(null,
+								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun DAC selectionné", ""));
+					}
+			 		else{
+			 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			 					 statutPub ="";
+			 				 }else {
+			 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+			 						 statutPub ="";
+			 					 }else {
+			 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+			 							 statutUpdate ="DAP";
+			 						 }else
+			 							  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+			 								 statutPub ="DAP";
+			 					      }
+			 				     } 
+			 			//Parcourir la liste VPpmListe et faire une mise a jour des different statut
+				 		for(VDacliste ligneDac : publicationSelection) {
+				 			 
+				 			//Parcourir la liste et récupérer les demande au statut E1T
+				 			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+      	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+ligneDac.getDacCode()));
+      	     				   if (!listDao.isEmpty()) {
+      	     					    newDao= listDao.get(0);
+      	     					    newDao.setTStatut(new TStatut(statutPub));
+      	     			            iservice.updateObject(newDao); 
+      	     	   	                 }	
+									}
+				 		
+				 		//Historisation de l'opération
+					     historiser(""+statutPub, newDao.getDacCode(),"Opération publiée par la DMP");
+					     
+                        //Actualisation du Tableau de Bord
+					     typeActionTb();
+					    //Rafraichissement de la liste
+						 chargeDaoPUB();
+						//Message de confirmation		  
+						 userController.setTexteMsg(" Publication effectuée avec succès !");
+						 userController.setRenderMsg(true);
+						 userController.setSevrityMsg("success");
+						//return null;
+				 		
+				 		        }	   
+					 		   }	
+						     }
+	     //Fin de la methode de Publication
 		     
 		     
 		     
@@ -3324,6 +3633,7 @@ public class DaoController {
 					chargeDataARetirer();
 					chargeDataVente();
 					chargeDataPriseCompte();*/
+					chargeDaoPUB();
 					btn_corrige = true;
 					etatPV = false;
 					vider();
@@ -5086,6 +5396,102 @@ public class DaoController {
 
 	public void setPavet_commission(boolean pavet_commission) {
 		this.pavet_commission = pavet_commission;
+	}
+
+	public List<VDacliste> getPublicationListe() {
+		return publicationListe;
+	}
+
+	public void setPublicationListe(List<VDacliste> publicationListe) {
+		this.publicationListe = publicationListe;
+	}
+
+	public List<VDacliste> getPublicationSelection() {
+		return publicationSelection;
+	}
+
+	public void setPublicationSelection(List<VDacliste> publicationSelection) {
+		this.publicationSelection = publicationSelection;
+	}
+
+	public String getFourniture_PSL() {
+		return fourniture_PSL;
+	}
+
+	public void setFourniture_PSL(String fourniture_PSL) {
+		this.fourniture_PSL = fourniture_PSL;
+	}
+
+	public String getFourniture_PSO() {
+		return fourniture_PSO;
+	}
+
+	public void setFourniture_PSO(String fourniture_PSO) {
+		this.fourniture_PSO = fourniture_PSO;
+	}
+
+	public String getFourniture_PSC() {
+		return fourniture_PSC;
+	}
+
+	public void setFourniture_PSC(String fourniture_PSC) {
+		this.fourniture_PSC = fourniture_PSC;
+	}
+
+	public String getTravaux_PSL() {
+		return travaux_PSL;
+	}
+
+	public void setTravaux_PSL(String travaux_PSL) {
+		this.travaux_PSL = travaux_PSL;
+	}
+
+	public String getTravaux_PSO() {
+		return travaux_PSO;
+	}
+
+	public void setTravaux_PSO(String travaux_PSO) {
+		this.travaux_PSO = travaux_PSO;
+	}
+
+	public String getTravaux_PSC() {
+		return travaux_PSC;
+	}
+
+	public void setTravaux_PSC(String travaux_PSC) {
+		this.travaux_PSC = travaux_PSC;
+	}
+
+	public String getPrestations_PSL() {
+		return prestations_PSL;
+	}
+
+	public void setPrestations_PSL(String prestations_PSL) {
+		this.prestations_PSL = prestations_PSL;
+	}
+
+	public String getPrestations_PSO() {
+		return prestations_PSO;
+	}
+
+	public void setPrestations_PSO(String prestations_PSO) {
+		this.prestations_PSO = prestations_PSO;
+	}
+
+	public String getPrestations_PSC() {
+		return prestations_PSC;
+	}
+
+	public void setPrestations_PSC(String prestations_PSC) {
+		this.prestations_PSC = prestations_PSC;
+	}
+
+	public String getStatutPub() {
+		return statutPub;
+	}
+
+	public void setStatutPub(String statutPub) {
+		this.statutPub = statutPub;
 	}
 	
 	

@@ -436,6 +436,93 @@
 				         </p:column>   
     </p:dataTable>
     </h:panelGroup>
+    
+    <h:panelGroup rendered="#{controleController.panel4}">
+					<p:dataTable id="ndTblepub0" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.publicationListe}" 
+					 rowKey="#{slctdTb.dacCode}" selection="#{daoController.publicationSelection}" emptyMessage="Aucun #{controleController.type}" 
+					 scrollable="true" scrollHeight="250" >
+					 
+					 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-2" >
+                           <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dacCode}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dacCode}" />
+         				</h:panelGroup> 
+         				
+				        </p:column>
+				        
+				       <p:column headerText="Objet" styleClass="col-sm-4" >
+         			   <h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dacObjet}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+         				</h:panelGroup>
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-2" >
+         				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-2" >
+         				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold " />
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				        
+				        <p:column headerText="Date reception" styleClass="col-sm-1" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">			
+         				<h:panelGroup rendered="#{slctdTb.dacStatutRetour == '1'}">
+         				<h:outputText value="#{slctdTb.dacDateValAc}" style="color:red; font-weight:bold " >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{slctdTb.dacStatutRetour != '1'}">
+         				<h:outputText value="#{slctdTb.dacDateValAc}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+         				</h:panelGroup>
+				        </p:column> 
+				        
+				         <p:column headerText="Mention" styleClass="col-sm-1"  rendered="#{userController.fonction.TTypeFonction.tyfCod != 'ACR'}">
+	                    <h:panelGroup rendered="#{slctdTb.dacMention == 'Validé pour publication'}">
+	                         <span class="badge bg-green">#{slctdTb.dacMention}</span>
+	                    </h:panelGroup>
+	                     <h:panelGroup rendered="#{slctdTb.dacMention != 'Validé pour publication'}">
+	                         <span class="badge bg-yellow">#{slctdTb.dacMention}</span>
+	                    </h:panelGroup>
+				        </p:column> 
+				       
+				        
+
+                      <p:column headerText="Actions" styleClass="col-sm-1">
+                           
+                             <p:commandLink  action="#{etatsDaoController.renderPage('dao3','APEDAO')}" styleClass="btn btn-xs btn-success"  title="Apercu" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
+                             </p:commandLink>
+                            
+                             
+				         </p:column>   
+				    </p:dataTable>
+				   </h:panelGroup> 
 							
 						 </div>
 					</div> 

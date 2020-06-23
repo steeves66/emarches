@@ -1529,7 +1529,7 @@
          </h:panelGroup>
           <!-- DEBUT TRAITEMENT DMP-->
           
-          <!-- DEBUT TRAITEMENT DU MENU CHF DE SERVICE -->
+          <!-- DEBUT TRAITEMENT DU MENU CHEF DE SERVICE -->
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
          <li class="treeview">
           <a href="#">
@@ -1740,7 +1740,7 @@
           </a> 
            <ul class="treeview-menu">
             <li>
-              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content" >
+              <p:commandLink action="#{daoController.renderPage('dao1','DPUBCSV')}" update=":content" >
             <i class="fa fa-circle-o"></i>DAC
              </p:commandLink>
             </li>
@@ -1756,7 +1756,7 @@
           </a> 
            <ul class="treeview-menu">
             <li>
-              <p:commandLink action="#{pgpmAcController.renderPage('pgpm1','SAIPGPM')}" update=":content" >
+              <p:commandLink action="#{daoController.renderPage('dao1','DDPSPUBCSV')}" update=":content" >
             <i class="fa fa-circle-o"></i>DAC
              </p:commandLink>
             </li>

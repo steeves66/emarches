@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-06-22T17:50:36 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Liste_Avis_Ac" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0616c00a-0553-4b8f-a5cd-05fa955096a6">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
+	<parameter name="ac" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select aao.aao_code,dac.dac_code,aao.aao_libelle,aao.aao_nbr_lot,fon.fon_cod,fon.fon_libelle,mit.min_code,mit.min_libelle,mop.mop_libelle_court,
+dac.dac_cout,tym.tym_code,tym.tym_libelle_court,plp.dpp_lbg_code,sta.sta_libelle_long
+from vb_avis_appel_offre aao, vb_fonction fon, vb_ministere mit, vb_dac_specs dac, vb_type_marche tym, vb_mode_passation mop, vb_detail_plan_passation plp,vb_statut sta
+where dac.dac_code=plp.dpp_dac_code
+and aao.aao_dac_code=dac.dac_code
+and aao.aao_fon_cod_ac=fon.fon_cod
+and fon.fon_min_code=mit.min_code
+and dac.dac_mop_code=mop.mop_code
+and dac.dac_tym_code=tym.tym_code
+and aao.aao_fon_cod_ac =$P{ac}
+order by mit.min_code,fon.fon_cod,aao.aao_code]]>
+	</queryString>
+	<field name="AAO_CODE" class="java.lang.String"/>
+	<field name="DAC_CODE" class="java.lang.String"/>
+	<field name="AAO_LIBELLE" class="java.lang.String"/>
+	<field name="AAO_NBR_LOT" class="java.math.BigDecimal"/>
+	<field name="FON_COD" class="java.lang.String"/>
+	<field name="FON_LIBELLE" class="java.lang.String"/>
+	<field name="MIN_CODE" class="java.lang.String"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="MOP_LIBELLE_COURT" class="java.lang.String"/>
+	<field name="DAC_COUT" class="java.math.BigDecimal"/>
+	<field name="TYM_CODE" class="java.lang.String"/>
+	<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
+	<field name="DPP_LBG_CODE" class="java.lang.String"/>
+	<field name="STA_LIBELLE_LONG" class="java.lang.String"/>
+	<group name="Ministère">
+		<groupExpression><![CDATA[$F{MIN_LIBELLE}]]></groupExpression>
+		<groupHeader>
+			<band height="33">
+				<staticText>
+					<reportElement x="0" y="3" width="177" height="20" uuid="2f72d5c0-b8ce-4576-91f8-0c5963515fb3"/>
+					<textElement textAlignment="Right">
+						<font size="12" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Ministère :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="180" y="3" width="620" height="27" uuid="3d8a0091-8939-4164-ad5d-d0921f5d3663"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{MIN_CODE}+"  "+$F{MIN_LIBELLE}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Structure">
+		<groupExpression><![CDATA[$F{FON_LIBELLE}]]></groupExpression>
+		<groupHeader>
+			<band height="77">
+				<staticText>
+					<reportElement x="0" y="0" width="177" height="20" uuid="fd379281-fba4-411a-9008-0e6959de3ff3"/>
+					<textElement textAlignment="Right">
+						<font size="12" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Autorité contractante :]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="180" y="0" width="620" height="30" uuid="dc131ca2-f9b1-4d66-9fc7-e635dbd31ba9"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FON_COD}+"  "+$F{FON_LIBELLE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="0" y="42" width="70" height="34" backcolor="#53D647" uuid="103dd21f-bb44-4966-8e50-0d2702f5c78f"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[N° avis]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="70" y="42" width="254" height="34" backcolor="#53D647" uuid="fa1028ba-1a0f-4844-8a92-75edc17ad5f8"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Objet]]></text>
+				</staticText>
+				<staticText>
+					<reportElement stretchType="ContainerHeight" mode="Opaque" x="324" y="42" width="40" height="34" isPrintWhenDetailOverflows="true" backcolor="#53D647" uuid="276577ea-da8d-4cad-b723-b091b671bc2a">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombre de lot(s)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="364" y="42" width="50" height="34" backcolor="#53D647" uuid="b6be9f98-7930-47d0-b08b-3e336e6d356c"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mode de passation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="414" y="42" width="96" height="34" backcolor="#53D647" uuid="44443106-73c9-4321-bca7-8d1becdde3bd"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Type de marché]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="510" y="42" width="145" height="34" backcolor="#53D647" uuid="54577223-4c1e-4319-8b57-dc61229ba764"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Imputation]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="655" y="42" width="143" height="34" backcolor="#53D647" uuid="931481f8-e371-4282-b5d8-8927f4769e09"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font isBold="true"/>
+					</textElement>
+					<text><![CDATA[Situation]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="56" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="2" width="230" height="51" uuid="1c4d146b-ac74-4c02-9ac4-f0e08b578cbf"/>
+				<imageExpression><![CDATA["WebContent/report/images/logo_emarches.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement stretchType="ElementGroupHeight" x="580" y="1" width="220" height="50" uuid="88c68278-5148-45e8-b2da-7a85cefd9ee3"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DE COTE D’IVOIRE
+Union – Discipline – Travail
+ ------------------
+]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="70" splitType="Stretch">
+			<rectangle radius="15">
+				<reportElement x="187" y="9" width="366" height="50" backcolor="#FC7B1E" uuid="4f3d15db-df4c-4594-a5d7-996e557e8cd4"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="9">
+				<reportElement x="194" y="14" width="352" height="39" forecolor="#FFFFFF" backcolor="#FC7B1E" uuid="297c981e-ccf7-4d51-9d1d-bbd30dcd0c25"/>
+				<graphicElement>
+					<pen lineWidth="3.0"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="200" y="18" width="340" height="30" forecolor="#FFFAFA" uuid="f61db536-ebd3-43a6-beaa-90e3bb74dc2d"/>
+				<box padding="1">
+					<pen lineWidth="3.0"/>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTE DES AVIS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="70" height="50" uuid="58febd68-b15f-4855-bed5-dd3811cf6854"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AAO_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="70" y="0" width="254" height="50" uuid="910deed6-944d-4f5f-9397-a8900a8a3767"/>
+				<box leftPadding="4">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AAO_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="0" width="40" height="50" uuid="478343f8-1137-4ce9-8d17-579488eb37c8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{AAO_NBR_LOT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="0" width="50" height="50" uuid="cf526efd-5cef-47da-921b-0aed824767cd"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{MOP_LIBELLE_COURT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="414" y="0" width="96" height="50" uuid="8a489050-fad6-45ec-815c-14f6035fd5bd"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="510" y="0" width="145" height="50" uuid="98474d9a-70b2-4edb-aa7e-675166dfc329"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DPP_LBG_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="655" y="0" width="143" height="50" uuid="e3c34889-22d9-4555-8d80-940c993a07f9"/>
+				<box leftPadding="4">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{STA_LIBELLE_LONG}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="660" y="8" width="70" height="31" uuid="be7baea8-9b7a-488d-bc9c-dac82776bf58"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="730" y="8" width="70" height="31" uuid="66ae23be-81dd-4fb4-a6b0-48a6cced6146"/>
+				<textElement textAlignment="Left"/>
+				<textFieldExpression><![CDATA[" of " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="15" width="660" height="21" uuid="276fae86-6b9f-486f-8c60-f2d700f14373"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Liste des avis de"+ $F{FON_LIBELLE}+" du "+$F{MIN_LIBELLE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

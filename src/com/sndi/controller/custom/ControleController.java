@@ -124,6 +124,12 @@ public class ControleController {
 	//PUBLICATION
 	public boolean btn_pub_csv = false;
 	public boolean btn_pub_dps = false;
+	public boolean btn_ami_csv = false; 
+    public boolean btn_ami_dps = false;
+    public boolean btn_prq_csv = false;
+    public boolean btn_prq_dps = false;
+	public boolean panelDaoTableauBordDPubCsv = false;
+	public boolean panelDaoTableauBordDPubDps = false;
 	//DAO
 	private boolean panelDaoTableauBordSai =false;
 	private boolean panelDaoTableauBordVal =false;
@@ -157,6 +163,7 @@ public class ControleController {
 	private boolean ppmModePn = false;
 	private boolean btn_pub = false;
 	private boolean panelPub = false;
+	
 	
 	//Recherche pour le DAO (Procédure Normale)
 	private boolean venteRecherche = false; 
@@ -1553,8 +1560,8 @@ public class ControleController {
 				   			    			panel1 =true;
 											 panel2 =false;
 											 panel3 = false;
-											/* panel4 = false;
-											 panel5 = false;
+											panel4 = false;
+											 /*panel5 = false;
 											 panel6 = false;
 											 panel7 = false;
 											 panel8 = true;
@@ -1586,6 +1593,11 @@ public class ControleController {
 				   							 panelDaoTableauBordVet =false;
 				   							 panelDaoTableauBordCha = false;
 				   							 panelDaoTableauBordPrise = false;
+				   							 panelDaoTableauBordPubCsv = false;
+											 panelDaoTableauBordDPubCsv = false;
+											 panelDaoTableauBordPubDps = false;
+											 panelDaoTableauBordDPubCsv = false;
+											 panelDaoTableauBordDPubDps = false;
 				   							 panelAmi = false;
 				   							 panelDao = true;  
 				   							 panelPrq = false;
@@ -1630,8 +1642,8 @@ public class ControleController {
 				   				    			panel1 =true;
 												 panel2 =false;
 												 panel3 = false;
-												/* panel4 = false;
-												 panel5 = false;
+												 panel4 = false;
+												 /*panel5 = false;
 												 panel6 = false;
 												 panel7 = false;
 												 panel8 = true;
@@ -1654,7 +1666,11 @@ public class ControleController {
 				   								 panelDaoTableauBordVet =false;
 				   								 panelDaoTableauBordCha = false;
 				   								 panelDaoTableauBordPrise = false;
-
+				   								 panelDaoTableauBordPubCsv = false;
+												 panelDaoTableauBordDPubCsv = false;
+												 panelDaoTableauBordPubDps = false;
+												 panelDaoTableauBordDPubCsv = false;
+												 panelDaoTableauBordDPubDps = false;
 				   								 panelAmi = false;
 				   								 panelDao = true;  
 				   								 panelPrq = false;
@@ -1704,6 +1720,7 @@ public class ControleController {
 				   			    				panel1 =true;
 												 panel2 =false;
 												 panel3 = false;
+												 panel4 = false;
 												/* panel4 = false;
 												 panel5 = false;
 												 panel6 = false;
@@ -1735,6 +1752,8 @@ public class ControleController {
 				   								panelDaoTableauBordCha = false;
 				   								panelDaoTableauBordPub = false;
 				   								panelDaoTableauBordPrise = false;
+				   							    panelDaoTableauBordPubDps = false;
+											    panelDaoTableauBordPubCsv = false;
 				   								panelDao = true;
 				   								panelPrq =false;
 				   							    panelAmi = false;
@@ -1780,20 +1799,200 @@ public class ControleController {
 				   									fermerApercuDao = true;
 				   									fermerApercuAmi = false;
 				   									fermerApercuPrq = false;
-				   				    			}else
-				   				    				 if(action.equalsIgnoreCase("AFFAMI")) {
-				   				    					type = "AMI";
-				   									 typePlan ="PN";
-				   									 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
+				   				    			}else 
+				    								   if(action.equalsIgnoreCase("AMICSV")) {
+				    									    typePlan ="PN";
+				    									     type = "AMI";
+				    									     fonctionalite="listeAmiCsv";
+				    									     btn_pub =false;
+				    									     btn_pub_csv = false;
+				    									     btn_pub_dps = false;
+				    									     btn_ami_csv = true; 
+				    									     btn_ami_dps = false;
+				    									     btn_prq_dps = false;
+				    									     btn_prq_csv = false;
+				    									     libelle1="LISTE DES AMI EN PROCEDURE NORMALE";
+											    			 libelleDao3="AVIS A MANIFESTATION D'INTERET EN ATTENTE DE PUBLICATION";
+											    			 btn_new =false;
+											    			 btn_affec = false;
+											    			 btn_exam = false;
+											    			 btn_retrait = false;
+											    			 btn_valid = false;
+											    			 saisie=false;
+											    			 publication=true;
+											    			 vente=false;
+											    			  correction=false;
+											    			 panel1 =false;
+															 panel2 =false;
+															 panel3 = false;
+														     panel4 = true;
+															/* panel5 = false;
+															 panel6 = false;
+															 panel7 = true;
+															 panel8 = false;
+															 panel9 =false;
+															 panel10 = false;
+															 panel11 = false;
+															 panel12 = false;*/
+															 venteRecherche = false; 
+															 affectationRecherche = false;
+															 examenRecherche = false;
+															 publicationRecherche = true;
+															 saisieRecherche = false;
+															 celluleRecherche = false;
+															 validationRecherche = false;
+															 priseRecherche = false;
+															 chargeRecherche = false;
+															 affDao=false;
+															 exaDao=false;
+															 retDao = false;
+															 panelDaoTableauBordSai = false;
+															 panelDaoTableauBordVal = false;
+															 panelDaoTableauBordTra = false;
+															 panelDaoTableauBordAff =false;
+															 panelDaoTableauBordExa =false; 
+															 panelDaoTableauBordRet =false;
+															 panelDaoTableauBordVet =false;
+															 panelDaoTableauBordCha = false;
+															 panelDaoTableauBordPub = false;
+															 panelDaoTableauBordPrise = false;
+															 panelDaoTableauBordPubDps = false;
+															 panelDaoTableauBordPubCsv = true;
+															 panelDao = false;  
+															 panelPrq = false;
+															 btn_trans_ami =false;
+															 btn_trans_dao =false;
+															 btn_trans_prq =false;
+															 
+															 btn_creerDetailAmi = false;
+															 btn_creerDetailDao = false ;
+															 btn_creerDetailPrq = false;
+															 
+															 btn_creerDetailDaoCmp = false;
+															 btn_creerDetailAmiCmp = false;
+															 btn_creerDetailPrqCmp = false;
+															 btn_creerDetailDaoDmp = false;
+															 btn_creerDetailAmiDmp = false; 
+															 btn_creerDetailPrqDmp = false;
+															 fermerValDao = false;
+															 fermerSaiDao = true;
+															 detailD = false;
+															 detailA= false; 
+															 detailP = false;
+															 btn_valider_dao_cpmp =  false;
+															 btn_valider_dao_dmp = false;
+															 btn_valider_ami_cpmp = false; 
+															 btn_valider_prq_cpmp = false;
+															 btn_valider_ami_dmp = false;
+															 btn_valider_prq_dmp = false;
+															 btn_fermer_saisie_dao = false; 
+															 btn_fermer_saisie_ami = false; 
+															 btn_fermer_saisie_prq = false;   
+				    								   }else 
+					    								   if(action.equalsIgnoreCase("DAMICSV")) {
+					    									     typePlan ="PN";
+					    									     type = "AMI";
+					    									     fonctionalite="listeDamiCsv";
+					    									     btn_pub =false;
+					    									     btn_pub_csv = false;
+					    									     btn_pub_dps = false;
+					    									     btn_ami_csv = false; 
+					    									     btn_ami_dps = true;
+					    									     btn_prq_dps = false;
+					    									     libelle1="LISTE DES AMI EN PROCEDURE NORMALE";
+												    			 libelleDao3="AVIS A MANIFESTATION D'INTERET PUBLIES";
+												    			 btn_new =false;
+												    			 btn_affec = false;
+												    			 btn_exam = false;
+												    			 btn_retrait = false;
+												    			 btn_valid = false;
+												    			 saisie=false;
+												    			 publication=true;
+												    			 vente=false;
+												    			 correction=false;
+												    			 panel1 =false;
+																 panel2 =false;
+																 panel3 = false;
+															     panel4 = true;
+																/* panel5 = false;
+																 panel6 = false;
+																 panel7 = true;
+																 panel8 = false;
+																 panel9 =false;
+																 panel10 = false;
+																 panel11 = false;
+																 panel12 = false;*/
+																 venteRecherche = false; 
+																 affectationRecherche = false;
+																 examenRecherche = false;
+																 publicationRecherche = true;
+																 saisieRecherche = false;
+																 celluleRecherche = false;
+																 validationRecherche = false;
+																 priseRecherche = false;
+																 chargeRecherche = false;
+																 affDao=false;
+																 exaDao=false;
+																 retDao = false;
+																 panelDaoTableauBordSai = false;
+																 panelDaoTableauBordVal = false;
+																 panelDaoTableauBordTra = false;
+																 panelDaoTableauBordAff =false;
+																 panelDaoTableauBordExa =false; 
+																 panelDaoTableauBordRet =false;
+																 panelDaoTableauBordVet =false;
+																 panelDaoTableauBordCha = false;
+																 panelDaoTableauBordPub = false;
+																 panelDaoTableauBordPrise = false;
+																 panelDaoTableauBordPubDps = false;
+																 panelDaoTableauBordPubCsv = false;
+																 panelDaoTableauBordDPubCsv = true;
+																 panelDaoTableauBordDPubDps = false;
+																 panelDao = false;  
+																 panelPrq = false;
+																 btn_trans_ami =false;
+																 btn_trans_dao =false;
+																 btn_trans_prq =false;
+																 
+																 btn_creerDetailAmi = false;
+																 btn_creerDetailDao = false ;
+																 btn_creerDetailPrq = false;
+																 
+																 btn_creerDetailDaoCmp = false;
+																 btn_creerDetailAmiCmp = false;
+																 btn_creerDetailPrqCmp = false;
+																 btn_creerDetailDaoDmp = false;
+																 btn_creerDetailAmiDmp = false; 
+																 btn_creerDetailPrqDmp = false;
+																 fermerValDao = false;
+																 fermerSaiDao = true;
+																 detailD = false;
+																 detailA= false; 
+																 detailP = false;
+																 btn_valider_dao_cpmp =  false;
+																 btn_valider_dao_dmp = false;
+																 btn_valider_ami_cpmp = false; 
+																 btn_valider_prq_cpmp = false;
+																 btn_valider_ami_dmp = false;
+																 btn_valider_prq_dmp = false;
+																 btn_fermer_saisie_dao = false; 
+																 btn_fermer_saisie_ami = false; 
+																 btn_fermer_saisie_prq = false;   
+					    								   }else
+				   				    				           if(action.equalsIgnoreCase("AFFAMI")) {
+				   				    					     type = "AMI";
+				   									         typePlan ="PN";
+				   									         libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   							    			 libelleDao3="AFFECTATION DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   							    			 btn_new =false;
 				   							    			 btn_affec = true;
 				   							    			 btn_retrait = false;
 				   							    			 btn_valid = false;
 				   											 panel1 =false;
-				   											panel1 =true;
+				   											 panel1 =true;
 															 panel2 =false;
 															 panel3 = false;
+															 panel4 = false;
 															/* panel4 = false;
 															 panel5 = false;
 															 panel6 = false;
@@ -1825,6 +2024,8 @@ public class ControleController {
 				   											 panelDaoTableauBordCha = false;
 				   											 panelDaoTableauBordPub = false;
 				   											 panelDaoTableauBordPrise = false;
+				   											 panelDaoTableauBordPubDps = false;
+															 panelDaoTableauBordPubCsv = false;
 				   											 panelDao = true;  
 				   											 panelPrq = false;
 				   											 btn_trans_ami =false;
@@ -1868,6 +2069,7 @@ public class ControleController {
 				   								    			panel1 =true;
 																 panel2 =false;
 																 panel3 = false;
+																 panel4 = false;
 																/* panel4 = false;
 																 panel5 = false;
 																 panel6 = false;
@@ -1898,6 +2100,11 @@ public class ControleController {
 				   												 panelDaoTableauBordCha = false;
 				   												 panelDaoTableauBordPub = false;
 				   												 panelDaoTableauBordPrise = false;
+				   												 panelDaoTableauBordPubCsv = false;
+		   														 panelDaoTableauBordDPubCsv = false;
+		   														 panelDaoTableauBordPubDps = false;
+		   														 panelDaoTableauBordDPubCsv = false;
+		   														 panelDaoTableauBordDPubDps = false;
 				   												 panelDao = true;  
 				   												 panelPrq = false;
 				   												 btn_trans_ami =false;
@@ -1944,6 +2151,7 @@ public class ControleController {
 				   									    			panel1 =true;
 																	 panel2 =false;
 																	 panel3 = false;
+																	 panel4 = false;
 																	/* panel4 = false;
 																	 panel5 = false;
 																	 panel6 = false;
@@ -1975,6 +2183,11 @@ public class ControleController {
 				   													 panelDaoTableauBordCha = false;
 				   													 panelDaoTableauBordPub = false;
 				   													 panelDaoTableauBordPrise = false;
+				   													 panelDaoTableauBordPubCsv = false;
+			   														 panelDaoTableauBordDPubCsv = false;
+			   														 panelDaoTableauBordPubDps = false;
+			   														 panelDaoTableauBordDPubCsv = false;
+			   														 panelDaoTableauBordDPubDps = false;
 				   													 panelDao = true;  
 				   													 panelPrq = false;
 				   													 btn_trans_ami =false;
@@ -2019,6 +2232,7 @@ public class ControleController {
 				   										    			panel1 =false;
 																		 panel2 =false;
 																		 panel3 = true;
+																		 panel4 = false;
 																		/* panel4 = false;
 																		 panel5 = false;
 																		 panel6 = false;
@@ -2050,6 +2264,11 @@ public class ControleController {
 				   														 panelDaoTableauBordCha = true;
 				   														 panelDaoTableauBordPub = false;
 				   														 panelDaoTableauBordPrise = false;
+				   														 panelDaoTableauBordPubCsv = false;
+				   														 panelDaoTableauBordDPubCsv = false;
+				   														 panelDaoTableauBordPubDps = false;
+				   														 panelDaoTableauBordDPubCsv = false;
+				   														 panelDaoTableauBordDPubDps = false;
 				   														 panelDao = true;  
 				   														 panelPrq = false;
 				   														 btn_trans_ami =false;
@@ -2094,11 +2313,11 @@ public class ControleController {
 				   											    			 btn_exam = false;
 				   											    			 btn_retrait = false;
 				   											    			 btn_valid = false;
-				   											    			panel1 =true;
+				   											    			 panel1 =true;
 																			 panel2 =false;
 																			 panel3 = false;
-																			/* panel4 = false;
-																			 panel5 = false;
+																			 panel4 = false;
+																			 /*panel5 = false;
 																			 panel6 = false;
 																			 panel7 = false;
 																			 panel8 = true;
@@ -2128,6 +2347,11 @@ public class ControleController {
 				   															 panelDaoTableauBordCha = false;
 				   															 panelDaoTableauBordPub = true;
 				   															 panelDaoTableauBordPrise = false;
+				   															 panelDaoTableauBordPubCsv = false;
+					   														 panelDaoTableauBordDPubCsv = false;
+					   														 panelDaoTableauBordPubDps = false;
+					   														 panelDaoTableauBordDPubCsv = false;
+					   														 panelDaoTableauBordDPubDps = false;
 				   															 panelDao = false;  
 				   															 panelPrq = false;
 				   															 btn_trans_ami =false;
@@ -2173,8 +2397,8 @@ public class ControleController {
 				   												    			panel1 =true;
 																				 panel2 =false;
 																				 panel3 = false;
-																				/* panel4 = false;
-																				 panel5 = false;
+																				 panel4 = false;
+																				 /*panel5 = false;
 																				 panel6 = false;
 																				 panel7 = false;
 																				 panel8 = true;
@@ -2195,6 +2419,11 @@ public class ControleController {
 				   																 panelDaoTableauBordCha = false;
 				   																 panelDaoTableauBordPub = false;
 				   																 panelDaoTableauBordPrise = false;
+				   																 panelDaoTableauBordPubCsv = false;
+						   														 panelDaoTableauBordDPubCsv = false;
+						   														 panelDaoTableauBordPubDps = false;
+						   														 panelDaoTableauBordDPubCsv = false;
+						   														 panelDaoTableauBordDPubDps = false;
 				   																 panelDao = true;  
 				   																 panelPrq = false;
 				   																 btn_trans_ami =false;
@@ -2239,8 +2468,8 @@ public class ControleController {
 				   													    			panel1 =true;
 																					 panel2 =false;
 																					 panel3 = false;
-																					/* panel4 = false;
-																					 panel5 = false;
+																					panel4 = false;
+																					 /*panel5 = false;
 																					 panel6 = false;
 																					 panel7 = false;
 																					 panel8 = true;
@@ -2261,6 +2490,11 @@ public class ControleController {
 				   																	 panelDaoTableauBordCha = false;
 				   																	 panelDaoTableauBordPub = false;
 				   																	 panelDaoTableauBordPrise = false;
+				   																	 panelDaoTableauBordPubCsv = false;
+							   														 panelDaoTableauBordDPubCsv = false;
+							   														 panelDaoTableauBordPubDps = false;
+							   														 panelDaoTableauBordDPubCsv = false;
+							   														 panelDaoTableauBordDPubDps = false;
 				   																	 panelDao = true;  
 				   																	 panelPrq = false;
 				   																	 btn_trans_ami =false;
@@ -2307,8 +2541,8 @@ public class ControleController {
 				   														    			panel1 =true;
 																						 panel2 =false;
 																						 panel3 = false;
-																						/* panel4 = false;
-																						 panel5 = false;
+																						panel4 = false;
+																						 /*panel5 = false;
 																						 panel6 = false;
 																						 panel7 = false;
 																						 panel8 = true;
@@ -2338,6 +2572,11 @@ public class ControleController {
 				   																		 panelDaoTableauBordCha = false;
 				   																		 panelDaoTableauBordPub = false;
 				   																		 panelDaoTableauBordPrise = true;
+				   																		 panelDaoTableauBordPubCsv = false;
+								   														 panelDaoTableauBordDPubCsv = false;
+								   														 panelDaoTableauBordPubDps = false;
+								   														 panelDaoTableauBordDPubCsv = false;
+								   														 panelDaoTableauBordDPubDps = false;
 				   																		 panelDao = true;  
 				   																		 panelPrq = false;
 				   																		 btn_trans_ami =false;
@@ -2368,11 +2607,195 @@ public class ControleController {
 				   																		 btn_fermer_saisie_dao = false; 
 				   																		 btn_fermer_saisie_ami = false; 
 				   																		 btn_fermer_saisie_prq = false;  
-				   									    						   }
+				   									    						   }else 
+												    								   if(action.equalsIgnoreCase("AMIDPS")) {
+												    									     typePlan ="PS";
+												    									     type = "AMI";
+												    									     fonctionalite="listePubDamiCsv";
+												    									     btn_pub =false;
+												    									     btn_pub_csv = false;
+												    									     btn_pub_dps = false;
+												    									     btn_pub_dps = false;
+												    									     btn_ami_csv = false;
+												    									     btn_ami_dps = true;
+												    									     libelle1="LISTE DES AMI EN PROCEDURE SIMPLIFIEE";
+																			    			 libelleDao3="AVIS A MANIFESTATION D'INTERET EN ATTENTE DE PUBLICATION";
+																			    			 btn_new =false;
+																			    			 btn_affec = false;
+																			    			 btn_exam = false;
+																			    			 btn_retrait = false;
+																			    			 btn_valid = false;
+																			    			 saisie=false;
+																			    			 publication=true;
+																			    			 vente=false;
+																			    			 correction=false;
+																			    			 panel1 =false;
+																							 panel2 =false;
+																							 panel3 = false;
+																						     panel4 = true;
+																							/* panel5 = false;
+																							 panel6 = false;
+																							 panel7 = true;
+																							 panel8 = false;
+																							 panel9 =false;
+																							 panel10 = false;
+																							 panel11 = false;
+																							 panel12 = false;*/
+																							 venteRecherche = false; 
+																							 affectationRecherche = false;
+																							 examenRecherche = false;
+																							 publicationRecherche = true;
+																							 saisieRecherche = false;
+																							 celluleRecherche = false;
+																							 validationRecherche = false;
+																							 priseRecherche = false;
+																							 chargeRecherche = false;
+																							 affDao=false;
+																							 exaDao=false;
+																							 retDao = false;
+																							 panelDaoTableauBordSai = false;
+																							 panelDaoTableauBordVal = false;
+																							 panelDaoTableauBordTra = false;
+																							 panelDaoTableauBordAff =false;
+																							 panelDaoTableauBordExa =false; 
+																							 panelDaoTableauBordRet =false;
+																							 panelDaoTableauBordVet =false;
+																							 panelDaoTableauBordCha = false;
+																							 panelDaoTableauBordPub = false;
+																							 panelDaoTableauBordPrise = false;
+																							 panelDaoTableauBordPubDps = true;
+																							 panelDaoTableauBordPubCsv = false;
+																							 panelDaoTableauBordPubCsv = false;
+									   														 panelDaoTableauBordDPubCsv = false;
+									   														 panelDaoTableauBordPubDps = false;
+									   														 panelDaoTableauBordDPubCsv = false;
+									   														 panelDaoTableauBordDPubDps = false;
+																							 panelDao = false;  
+																							 panelPrq = false;
+																							 btn_trans_ami =false;
+																							 btn_trans_dao =false;
+																							 btn_trans_prq =false;
+																							 
+																							 btn_creerDetailAmi = false;
+																							 btn_creerDetailDao = false ;
+																							 btn_creerDetailPrq = false;
+																							 
+																							 btn_creerDetailDaoCmp = false;
+																							 btn_creerDetailAmiCmp = false;
+																							 btn_creerDetailPrqCmp = false;
+																							 btn_creerDetailDaoDmp = false;
+																							 btn_creerDetailAmiDmp = false; 
+																							 btn_creerDetailPrqDmp = false;
+																							 fermerValDao = false;
+																							 fermerSaiDao = true;
+																							 detailD = false;
+																							 detailA= false; 
+																							 detailP = false;
+																							 btn_valider_dao_cpmp =  false;
+																							 btn_valider_dao_dmp = false;
+																							 btn_valider_ami_cpmp = false; 
+																							 btn_valider_prq_cpmp = false;
+																							 btn_valider_ami_dmp = false;
+																							 btn_valider_prq_dmp = false;
+																							 btn_fermer_saisie_dao = false; 
+																							 btn_fermer_saisie_ami = false; 
+																							 btn_fermer_saisie_prq = false;   
+												    								   }else 
+													    								   if(action.equalsIgnoreCase("DAMIDPS")) {
+													    									    typePlan ="PS";
+													    									     type = "AMI";
+													    									     fonctionalite="listePubAdpsCsv";
+													    									     btn_pub =false;
+													    									     btn_pub_csv = false;
+													    									     btn_pub_dps = false;
+													    									     btn_ami_csv = false;
+													    									     btn_ami_dps = true;
+													    									     btn_prq_csv = false;
+													    									     btn_prq_dps = false; 
+													    									     libelle1="LISTE DES AMI EN PROCEDURE SIMPLIFIEE";
+																				    			 libelleDao3="AVIS A MANIFESTATION D'INTERET PUBLIES";
+																				    			 btn_new =false;
+																				    			 btn_affec = false;
+																				    			 btn_exam = false;
+																				    			 btn_retrait = false;
+																				    			 btn_valid = false;
+																				    			 saisie=false;
+																				    			 publication=true;
+																				    			 vente=false;
+																				    			  correction=false;
+																				    			 panel1 =false;
+																								 panel2 =false;
+																								 panel3 = false;
+																							     panel4 = true;
+																								/* panel5 = false;
+																								 panel6 = false;
+																								 panel7 = true;
+																								 panel8 = false;
+																								 panel9 =false;
+																								 panel10 = false;
+																								 panel11 = false;
+																								 panel12 = false;*/
+																								 venteRecherche = false; 
+																								 affectationRecherche = false;
+																								 examenRecherche = false;
+																								 publicationRecherche = true;
+																								 saisieRecherche = false;
+																								 celluleRecherche = false;
+																								 validationRecherche = false;
+																								 priseRecherche = false;
+																								 chargeRecherche = false;
+																								 affDao=false;
+																								 exaDao=false;
+																								 retDao = false;
+																								 panelDaoTableauBordSai = false;
+																								 panelDaoTableauBordVal = false;
+																								 panelDaoTableauBordTra = false;
+																								 panelDaoTableauBordAff =false;
+																								 panelDaoTableauBordExa =false; 
+																								 panelDaoTableauBordRet =false;
+																								 panelDaoTableauBordVet =false;
+																								 panelDaoTableauBordCha = false;
+																								 panelDaoTableauBordPub = false;
+																								 panelDaoTableauBordPrise = false;
+																								 panelDaoTableauBordPubDps = false;
+																								 panelDaoTableauBordPubCsv = false;
+																								 panelDaoTableauBordDPubCsv = false;
+																								 panelDaoTableauBordDPubDps = true;
+																								 panelDao = false;  
+																								 panelPrq = false;
+																								 btn_trans_ami =false;
+																								 btn_trans_dao =false;
+																								 btn_trans_prq =false;
+																								 
+																								 btn_creerDetailAmi = false;
+																								 btn_creerDetailDao = false ;
+																								 btn_creerDetailPrq = false;
+																								 
+																								 btn_creerDetailDaoCmp = false;
+																								 btn_creerDetailAmiCmp = false;
+																								 btn_creerDetailPrqCmp = false;
+																								 btn_creerDetailDaoDmp = false;
+																								 btn_creerDetailAmiDmp = false; 
+																								 btn_creerDetailPrqDmp = false;
+																								 fermerValDao = false;
+																								 fermerSaiDao = true;
+																								 detailD = false;
+																								 detailA= false; 
+																								 detailP = false;
+																								 btn_valider_dao_cpmp =  false;
+																								 btn_valider_dao_dmp = false;
+																								 btn_valider_ami_cpmp = false; 
+																								 btn_valider_prq_cpmp = false;
+																								 btn_valider_ami_dmp = false;
+																								 btn_valider_prq_dmp = false;
+																								 btn_fermer_saisie_dao = false; 
+																								 btn_fermer_saisie_ami = false; 
+																								 btn_fermer_saisie_prq = false;   
+													    								   }
 				   					    									    	 else
 			 
 			 //DAO
-			 if(action.equalsIgnoreCase("ENGDAO")) {
+				if(action.equalsIgnoreCase("ENGDAO")) {
 				 typePlan ="PN";
 				  type = "DAC";
 				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
@@ -2426,6 +2849,7 @@ public class ControleController {
 			    			 panel1 =true;
 							 panel2 =false;
 							 panel3 = false;
+							 panel4 = false;
 						/*	 panel4 = false;
 							 panel5 =false;
 							 panel6 =false;
@@ -2459,6 +2883,8 @@ public class ControleController {
 							 panelDaoTableauBordVet =false;
 							 panelDaoTableauBordCha = false;
 							 panelDaoTableauBordPrise = false;
+							 panelDaoTableauBordDPubCsv = false;
+							 panelDaoTableauBordDPubDps = false;
 							 panelAmi = false;
 							 panelDao = true;  
 							 panelPrq = false;
@@ -2507,6 +2933,7 @@ public class ControleController {
 				    			 panel1 =true;
 								 panel2 =false;
 								 panel3 = false;
+								 panel4 = false;
 								/* panel4 = false;
 								 panel5 =false;
 								 panel6 =false;
@@ -2521,6 +2948,8 @@ public class ControleController {
 								 panelDaoTableauBordVal = false;
 								 panelDaoTableauBordTra = false;
 								 panelDaoTableauBordPub = false;
+								 panelDaoTableauBordDPubCsv = false;
+								 panelDaoTableauBordDPubDps = false;
 								 pspmModePs = true;
 								 ppmModePn = false;
 								 btn_dao_pn = false;
@@ -2586,6 +3015,7 @@ public class ControleController {
 			    				panel1 =true;
 								panel2 =false;
 								panel3 = false;
+								panel4 = false;
 							/*	panel4 =false;
 								panel5 =false;
 								panel6=false;
@@ -2617,6 +3047,10 @@ public class ControleController {
 								panelDaoTableauBordCha = false;
 								panelDaoTableauBordPub = false;
 								panelDaoTableauBordPrise = false;
+								panelDaoTableauBordPubDps = false;
+								panelDaoTableauBordPubCsv = false;
+								panelDaoTableauBordDPubCsv = false;
+								 panelDaoTableauBordDPubDps = false;
 								panelDao = true;
 								panelPrq =false;
 							    panelAmi = false;
@@ -2676,6 +3110,7 @@ public class ControleController {
 							    			 panel1 =true;
 											 panel2 =false;
 											 panel3 = false;
+											 panel4 = false;
 									/*		 panel4 = false;
 											 panel5 = false;
 											 panel6=false;
@@ -2707,6 +3142,10 @@ public class ControleController {
 											 panelDaoTableauBordCha = false;
 											 panelDaoTableauBordPub = false;
 											 panelDaoTableauBordPrise = false;
+											 panelDaoTableauBordPubDps = false;
+											 panelDaoTableauBordPubCsv = false;
+											 panelDaoTableauBordDPubCsv = false;
+											 panelDaoTableauBordDPubDps = false;
 											 panelDao = true;  
 											 panelPrq = false;
 											 btn_trans_ami =false;
@@ -2754,6 +3193,7 @@ public class ControleController {
 								    			 panel1 =true;
 												 panel2 =false;
 												 panel3 = false;
+												 panel4 = false;
 											/*	 panel4 = true;
 												 panel5 = false;
 												 panel6 = false;
@@ -2784,6 +3224,10 @@ public class ControleController {
 												 panelDaoTableauBordCha = false;
 												 panelDaoTableauBordPub = false;
 												 panelDaoTableauBordPrise = false;
+												 panelDaoTableauBordPubDps = false;
+												 panelDaoTableauBordPubCsv = false;
+												 panelDaoTableauBordDPubCsv = false;
+												 panelDaoTableauBordDPubDps = false;
 												 panelDao = true;  
 												 panelPrq = false;
 												 btn_trans_ami =false;
@@ -2834,6 +3278,7 @@ public class ControleController {
 									    			 panel1 =true;
 													 panel2 =false;
 													 panel3 = false;
+													 panel4 = false;
 												/*	 panel4 = false;
 													 panel5 = false;
 													 panel6 = false;
@@ -2865,6 +3310,10 @@ public class ControleController {
 													 panelDaoTableauBordCha = false;
 													 panelDaoTableauBordPub = false;
 													 panelDaoTableauBordPrise = false;
+													 panelDaoTableauBordPubDps = false;
+													 panelDaoTableauBordPubCsv = false;
+													 panelDaoTableauBordDPubCsv = false;
+													 panelDaoTableauBordDPubDps = false;
 													 panelDao = true;  
 													 panelPrq = false;
 													 btn_trans_ami =false;
@@ -2913,6 +3362,7 @@ public class ControleController {
 														 panel1 =false;
 														 panel2 =false;
 														 panel3 = true;
+														 panel4 = false;
 														 /*panel4 = false;
 														 panel5 = false;
 														 panel6 = true;
@@ -2944,6 +3394,10 @@ public class ControleController {
 														 panelDaoTableauBordCha = true;
 														 panelDaoTableauBordPub = false;
 														 panelDaoTableauBordPrise = false;
+														 panelDaoTableauBordPubDps = false;
+														 panelDaoTableauBordPubCsv = false;
+														 panelDaoTableauBordDPubCsv = false;
+														 panelDaoTableauBordDPubDps = false;
 														 panelDao = true;  
 														 panelPrq = false;
 														 btn_trans_ami =false;
@@ -2995,6 +3449,7 @@ public class ControleController {
 											    			 panel1 =true;
 															 panel2 =false;
 															 panel3 = false;
+															 panel4 = false;
 														/*	 panel4 = false;
 															 panel5 = false;
 															 panel6 = false;
@@ -3026,6 +3481,10 @@ public class ControleController {
 															 panelDaoTableauBordCha = false;
 															 panelDaoTableauBordPub = true;
 															 panelDaoTableauBordPrise = false;
+															 panelDaoTableauBordPubDps = false;
+															 panelDaoTableauBordPubCsv = false;
+															 panelDaoTableauBordDPubCsv = false;
+															 panelDaoTableauBordDPubDps = false;
 															 panelDao = false;  
 															 panelPrq = false;
 															 btn_trans_ami =false;
@@ -3075,6 +3534,7 @@ public class ControleController {
 												    			 panel1 =true;
 																 panel2 =false;
 																 panel3 = false;
+																 panel4 = false;
 															/*	 panel4 = false;
 																 panel5 = false;
 																 panel6 = false;
@@ -3097,6 +3557,10 @@ public class ControleController {
 																 panelDaoTableauBordCha = false;
 																 panelDaoTableauBordPub = false;
 																 panelDaoTableauBordPrise = false;
+																 panelDaoTableauBordPubDps = false;
+																 panelDaoTableauBordPubCsv = false;
+																 panelDaoTableauBordDPubCsv = false;
+																 panelDaoTableauBordDPubDps = false;
 																 panelDao = true;  
 																 panelPrq = false;
 																 btn_trans_ami =false;
@@ -3145,6 +3609,7 @@ public class ControleController {
 													    			 panel1 =true;
 																	 panel2 =false;
 																	 panel3 = false;
+																	 panel4 = false;
 																/*	 panel4 = false;
 																	 panel5 = false;
 																	 panel6 = false;
@@ -3167,6 +3632,10 @@ public class ControleController {
 																	 panelDaoTableauBordCha = false;
 																	 panelDaoTableauBordPub = false;
 																	 panelDaoTableauBordPrise = false;
+																	 panelDaoTableauBordPubDps = false;
+																	 panelDaoTableauBordPubCsv = false;
+																	 panelDaoTableauBordDPubCsv = false;
+																	 panelDaoTableauBordDPubDps = false;
 																	 panelDao = true;  
 																	 panelPrq = false;
 																	 btn_trans_ami =false;
@@ -3217,6 +3686,7 @@ public class ControleController {
 														    			 panel1 =true;
 																		 panel2 =false;
 																		 panel3 = false;
+																		 panel4 = false;
 																/*		 panel4 = false;
 																		 panel5 = false;
 																		 panel6 = false;
@@ -3248,6 +3718,10 @@ public class ControleController {
 																		 panelDaoTableauBordCha = false;
 																		 panelDaoTableauBordPub = false;
 																		 panelDaoTableauBordPrise = true;
+																		 panelDaoTableauBordPubDps = false;
+																		 panelDaoTableauBordPubCsv = false;
+																		 panelDaoTableauBordDPubCsv = false;
+																		 panelDaoTableauBordDPubDps = false;
 																		 panelDao = true;  
 																		 panelPrq = false;
 																		 btn_trans_ami =false;
@@ -3286,7 +3760,9 @@ public class ControleController {
 								    									     btn_pub =false;
 								    									     btn_pub_csv = true;
 								    									     btn_pub_dps = false;
-								    									     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
+								    									     btn_ami_csv = false;
+								    									     btn_prq_dps = false;
+								    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
 															    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
 															    			 btn_new =false;
 															    			 btn_affec = false;
@@ -3333,6 +3809,8 @@ public class ControleController {
 																			 panelDaoTableauBordPrise = false;
 																			 panelDaoTableauBordPubDps = false;
 																			 panelDaoTableauBordPubCsv = true;
+																			 panelDaoTableauBordDPubCsv = false;
+																			 panelDaoTableauBordDPubDps = false;
 																			 panelDao = false;  
 																			 panelPrq = false;
 																			 btn_trans_ami =false;
@@ -3363,8 +3841,99 @@ public class ControleController {
 																			 btn_fermer_saisie_dao = false; 
 																			 btn_fermer_saisie_ami = false; 
 																			 btn_fermer_saisie_prq = false;   
-								    								   }else
-				                                                         if(action.equalsIgnoreCase("ENGDPS")) {
+								    								   }else 
+									    								   if(action.equalsIgnoreCase("DPUBCSV")) {
+									    									     typePlan ="PN";
+									    									     type = "DAC";
+									    									     fonctionalite="listeDpubCsv";
+									    									     btn_pub =false;
+									    									     btn_pub_csv = false;
+									    									     btn_pub_dps = false;
+									    									     btn_pub_dps = false;
+									    									     btn_ami_csv = false;
+									    									     btn_prq_dps = false;
+									    									     btn_prq_dps = false;
+									    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
+																    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE PUBLIES";
+																    			 btn_new =false;
+																    			 btn_affec = false;
+																    			 btn_exam = false;
+																    			 btn_retrait = false;
+																    			 btn_valid = false;
+																    			 saisie=false;
+																    			 publication=true;
+																    			 vente=false;
+																    			 correction=false;
+																    			 panel1 =false;
+																				 panel2 =false;
+																				 panel3 = false;
+																			     panel4 = true;
+																				/* panel5 = false;
+																				 panel6 = false;
+																				 panel7 = true;
+																				 panel8 = false;
+																				 panel9 =false;
+																				 panel10 = false;
+																				 panel11 = false;
+																				 panel12 = false;*/
+																				 venteRecherche = false; 
+																				 affectationRecherche = false;
+																				 examenRecherche = false;
+																				 publicationRecherche = true;
+																				 saisieRecherche = false;
+																				 celluleRecherche = false;
+																				 validationRecherche = false;
+																				 priseRecherche = false;
+																				 chargeRecherche = false;
+																				 affDao=false;
+																				 exaDao=false;
+																				 retDao = false;
+																				 panelDaoTableauBordSai = false;
+																				 panelDaoTableauBordVal = false;
+																				 panelDaoTableauBordTra = false;
+																				 panelDaoTableauBordAff =false;
+																				 panelDaoTableauBordExa =false; 
+																				 panelDaoTableauBordRet =false;
+																				 panelDaoTableauBordVet =false;
+																				 panelDaoTableauBordCha = false;
+																				 panelDaoTableauBordPub = false;
+																				 panelDaoTableauBordPrise = false;
+																				 panelDaoTableauBordPubDps = false;
+																				 panelDaoTableauBordPubCsv = false;
+																				 panelDaoTableauBordDPubCsv = true;
+																				 panelDaoTableauBordDPubDps = false;
+																				 panelDao = false;  
+																				 panelPrq = false;
+																				 btn_trans_ami =false;
+																				 btn_trans_dao =false;
+																				 btn_trans_prq =false;
+																				 
+																				 btn_creerDetailAmi = false;
+																				 btn_creerDetailDao = false ;
+																				 btn_creerDetailPrq = false;
+																				 
+																				 btn_creerDetailDaoCmp = false;
+																				 btn_creerDetailAmiCmp = false;
+																				 btn_creerDetailPrqCmp = false;
+																				 btn_creerDetailDaoDmp = false;
+																				 btn_creerDetailAmiDmp = false; 
+																				 btn_creerDetailPrqDmp = false;
+																				 fermerValDao = false;
+																				 fermerSaiDao = true;
+																				 detailD = false;
+																				 detailA= false; 
+																				 detailP = false;
+																				 btn_valider_dao_cpmp =  false;
+																				 btn_valider_dao_dmp = false;
+																				 btn_valider_ami_cpmp = false; 
+																				 btn_valider_prq_cpmp = false;
+																				 btn_valider_ami_dmp = false;
+																				 btn_valider_prq_dmp = false;
+																				 btn_fermer_saisie_dao = false; 
+																				 btn_fermer_saisie_ami = false; 
+																				 btn_fermer_saisie_prq = false;   
+									    								   }else
+				                                                             if(action.equalsIgnoreCase("ENGDPS")) {
 				                                                        	  typePlan ="PS";
 				                                                        	  type = "DAC";
 				                                            				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
@@ -3414,6 +3983,7 @@ public class ControleController {
 							    										    			 panel1 =true;
 							    														 panel2 =false;
 							    														 panel3 = false;
+							    														 panel4 = false;
 							    													/*	 panel4 = false;
 							    														 panel5 =false;
 							    														 panel6 =false;
@@ -3437,6 +4007,10 @@ public class ControleController {
 							    														 panelDaoTableauBordVal = false;
 							    														 panelDaoTableauBordTra = false;
 							    														 panelDaoTableauBordPub = false;
+							    														 panelDaoTableauBordPubDps = false;
+																						 panelDaoTableauBordPubCsv = false;
+																						 panelDaoTableauBordDPubCsv = false;
+																						 panelDaoTableauBordDPubDps = false;
 							    														 pspmModePs = false;
 							    														 ppmModePn = true;
 							    														 btn_dao_pn = true;
@@ -3496,6 +4070,7 @@ public class ControleController {
 								    								    				panel1 =true;
 								    													panel2 =false;
 								    													panel3 = false;
+								    													panel4 = false;
 								    												/*	panel4 =false;
 								    													panel5 =false;
 								    													panel6=false;
@@ -3527,6 +4102,10 @@ public class ControleController {
 								    													panelDaoTableauBordCha = false;
 								    													panelDaoTableauBordPub = false;
 								    													panelDaoTableauBordPrise = false;
+								    													panelDaoTableauBordPubDps = false;
+																						panelDaoTableauBordPubCsv = false;
+																						panelDaoTableauBordDPubCsv = false;
+																						panelDaoTableauBordDPubDps = false;
 								    													panelDao = true;
 								    													panelPrq =false;
 								    												    panelAmi = false;
@@ -3583,6 +4162,7 @@ public class ControleController {
 																			    			 panel1 =true;
 																							 panel2 =false;
 																							 panel3 = false;
+																							 panel4 =  false;
 																						/*	 panel4 = false;
 																							 panel5 = false;
 																							 panel6 = true;
@@ -3614,6 +4194,10 @@ public class ControleController {
 																							 panelDaoTableauBordCha = true;
 																							 panelDaoTableauBordPub = false;
 																							 panelDaoTableauBordPrise = false;
+																							 panelDaoTableauBordPubDps = false;
+																							 panelDaoTableauBordPubCsv = false;
+																							 panelDaoTableauBordDPubCsv = false;
+																							 panelDaoTableauBordDPubDps = false;
 																							 panelDao = true;  
 																							 panelPrq = false;
 																							 btn_trans_ami =false;
@@ -3658,6 +4242,7 @@ public class ControleController {
 										    								    			 panel1 =true;
 										    												 panel2 =false;
 										    												 panel3 = false;
+										    												 panel4 = false;
 										    											/*	 panel4 = true;
 										    												 panel5 = false;
 										    												 panel6 = false;
@@ -3688,6 +4273,10 @@ public class ControleController {
 										    												 panelDaoTableauBordCha = false;
 										    												 panelDaoTableauBordPub = false;
 										    												 panelDaoTableauBordPrise = false;
+										    												 panelDaoTableauBordPubDps = false;
+																							 panelDaoTableauBordPubCsv = false;
+																							 panelDaoTableauBordDPubCsv = false;
+																							 panelDaoTableauBordDPubDps = false;
 										    												 panelDao = true;  
 										    												 panelPrq = false;
 										    												 btn_trans_ami =false;
@@ -3733,6 +4322,7 @@ public class ControleController {
 											    									    			 panel1 =true;
 											    													 panel2 =false;
 											    													 panel3 = false;
+											    													 panel4 = false;
 											    											/*		 panel4 = false;
 											    													 panel5 = false;
 											    													 panel6=false;
@@ -3764,6 +4354,10 @@ public class ControleController {
 											    													 panelDaoTableauBordCha = false;
 											    													 panelDaoTableauBordPub = false;
 											    													 panelDaoTableauBordPrise = false;
+											    													 panelDaoTableauBordPubDps = false;
+																									 panelDaoTableauBordPubCsv = false;
+																									 panelDaoTableauBordDPubCsv = false;
+																									 panelDaoTableauBordDPubDps = false;
 											    													 panelDao = true;  
 											    													 panelPrq = false;
 											    													 btn_trans_ami =false;
@@ -3812,6 +4406,7 @@ public class ControleController {
 																					    			 panel1 =true;
 																									 panel2 =false;
 																									 panel3 = false;
+																									 panel4 = false;
 																									/* panel4 = false;
 																									 panel5 = false;
 																									 panel6 = false;
@@ -3843,6 +4438,10 @@ public class ControleController {
 																									 panelDaoTableauBordCha = false;
 																									 panelDaoTableauBordPub = true;
 																									 panelDaoTableauBordPrise = false;
+																									 panelDaoTableauBordPubDps = false;
+																									 panelDaoTableauBordPubCsv = false;
+																									 panelDaoTableauBordDPubCsv = false;
+																									 panelDaoTableauBordDPubDps = false;
 																									 panelDao = false;  
 																									 panelPrq = false;
 																									 btn_trans_ami =false;
@@ -3891,6 +4490,7 @@ public class ControleController {
 																						    			 panel1 =true;
 																										 panel2 =false;
 																										 panel3 = false;
+																										 panel4 = false;
 																										/* panel4 = false;
 																										 panel5 = false;
 																										 panel6 = false;
@@ -3922,6 +4522,10 @@ public class ControleController {
 																										 panelDaoTableauBordCha = false;
 																										 panelDaoTableauBordPub = false;
 																										 panelDaoTableauBordPrise = false;
+																										 panelDaoTableauBordPubDps = false;
+																										 panelDaoTableauBordPubCsv = false;
+																										 panelDaoTableauBordDPubCsv = false;
+																										 panelDaoTableauBordDPubDps = false;
 																										 panelDao = true;  
 																										 panelPrq = false;
 																										 btn_trans_ami =false;
@@ -3969,6 +4573,7 @@ public class ControleController {
 																											 panel1 =true;
 																											 panel2 =false;
 																											 panel3 = false;
+																											 panel4 = false;
 																											/* panel4 = false;
 																											 panel5 = false;
 																											 panel6 = false;
@@ -3991,6 +4596,10 @@ public class ControleController {
 																											 panelDaoTableauBordCha = false;
 																											 panelDaoTableauBordPub = false;
 																											 panelDaoTableauBordPrise = false;
+																											 panelDaoTableauBordPubDps = false;
+																											 panelDaoTableauBordPubCsv = false;
+																											 panelDaoTableauBordDPubCsv = false;
+																											 panelDaoTableauBordDPubDps = false;
 																											 panelDao = true;  
 																											 panelPrq = false;
 																											 btn_trans_ami =false;
@@ -4036,6 +4645,7 @@ public class ControleController {
 																									    			 panel1 =true;
 																													 panel2 =false;
 																													 panel3 = false;
+																													 panel4 = true;
 																													/* panel4 = false;
 																													 panel5 = false;
 																													 panel6 = false;
@@ -4058,6 +4668,10 @@ public class ControleController {
 																													 panelDaoTableauBordCha = false;
 																													 panelDaoTableauBordPub = false;
 																													 panelDaoTableauBordPrise = false;
+																													 panelDaoTableauBordPubDps = false;
+																													 panelDaoTableauBordPubCsv = false;
+																													 panelDaoTableauBordDPubCsv = false;
+																													 panelDaoTableauBordDPubDps = false;
 																													 panelDao = true;  
 																													 panelPrq = false;
 																													 btn_trans_ami =false;
@@ -4105,6 +4719,7 @@ public class ControleController {
 																									    			 panel1 =true;
 																													 panel2 =false;
 																													 panel3 = false;
+																													 panel4 = false;
 																													/* panel4 = false;
 																													 panel5 = false;
 																													 panel6 = false;
@@ -4136,6 +4751,10 @@ public class ControleController {
 																													 panelDaoTableauBordCha = false;
 																													 panelDaoTableauBordPub = false;
 																													 panelDaoTableauBordPrise = true;
+																													 panelDaoTableauBordPubDps = false;
+																													 panelDaoTableauBordPubCsv = false;
+																													 panelDaoTableauBordDPubCsv = false;
+																													 panelDaoTableauBordDPubDps = false;
 																													 panelDao = true;  
 																													 panelPrq = false;
 																													 btn_trans_ami =false;
@@ -4168,13 +4787,17 @@ public class ControleController {
 																													 btn_fermer_saisie_prq = false;  
 																				    						   }else 
 																			    								   if(action.equalsIgnoreCase("DPSPUBCSV")) {
-																			    									    typePlan ="PN";
+																			    									    typePlan ="PS";
 																			    									     type = "DAC";
 																			    									     fonctionalite="listePubDpsCsv";
 																			    									     btn_pub =false;
 																			    									     btn_pub_csv = false;
 																			    									     btn_pub_dps = true;
-																			    									     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
+																			    									     //btn_pub_dps = false;
+																			    									     btn_ami_csv = false;
+																			    									     btn_prq_dps = false;
+																			    									     btn_prq_dps = false;
+																			    									     libelle1="LISTE DES DAC EN PROCEDURE SIMPLIFIEE";
 																										    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
 																										    			 btn_new =false;
 																										    			 btn_affec = false;
@@ -4219,8 +4842,8 @@ public class ControleController {
 																														 panelDaoTableauBordCha = false;
 																														 panelDaoTableauBordPub = false;
 																														 panelDaoTableauBordPrise = false;
-																														 panelDaoTableauBordPubDps = true;
-																														 panelDaoTableauBordPubCsv = false;
+																														// panelDaoTableauBordPubDps = true;
+																														 panelDaoTableauBordPubCsv = true;
 																														 panelDao = false;  
 																														 panelPrq = false;
 																														 btn_trans_ami =false;
@@ -4251,7 +4874,96 @@ public class ControleController {
 																														 btn_fermer_saisie_dao = false; 
 																														 btn_fermer_saisie_ami = false; 
 																														 btn_fermer_saisie_prq = false;   
-																			    								   }
+																			    								   }else 
+																				    								   if(action.equalsIgnoreCase("DDPSPUBCSV")) {
+																				    									    typePlan ="PS";
+																				    									     type = "DAC";
+																				    									     fonctionalite="listePubDdpsCsv";
+																				    									     btn_pub =false;
+																				    									     btn_pub_csv = false;
+																				    									     btn_pub_dps = false;
+																				    									     btn_ami_csv = false;
+																				    									     btn_prq_dps = false;
+																				    									     libelle1="LISTE DES DAC EN PROCEDURE SIMPLIFIEE";
+																											    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE PUBLIES";
+																											    			 btn_new =false;
+																											    			 btn_affec = false;
+																											    			 btn_exam = false;
+																											    			 btn_retrait = false;
+																											    			 btn_valid = false;
+																											    			 saisie=false;
+																											    			 publication=true;
+																											    			 vente=false;
+																											    			  correction=false;
+																											    			 panel1 =false;
+																															 panel2 =false;
+																															 panel3 = false;
+																														     panel4 = true;
+																															/* panel5 = false;
+																															 panel6 = false;
+																															 panel7 = true;
+																															 panel8 = false;
+																															 panel9 =false;
+																															 panel10 = false;
+																															 panel11 = false;
+																															 panel12 = false;*/
+																															 venteRecherche = false; 
+																															 affectationRecherche = false;
+																															 examenRecherche = false;
+																															 publicationRecherche = true;
+																															 saisieRecherche = false;
+																															 celluleRecherche = false;
+																															 validationRecherche = false;
+																															 priseRecherche = false;
+																															 chargeRecherche = false;
+																															 affDao=false;
+																															 exaDao=false;
+																															 retDao = false;
+																															 panelDaoTableauBordSai = false;
+																															 panelDaoTableauBordVal = false;
+																															 panelDaoTableauBordTra = false;
+																															 panelDaoTableauBordAff =false;
+																															 panelDaoTableauBordExa =false; 
+																															 panelDaoTableauBordRet =false;
+																															 panelDaoTableauBordVet =false;
+																															 panelDaoTableauBordCha = false;
+																															 panelDaoTableauBordPub = false;
+																															 panelDaoTableauBordPrise = false;
+																															 panelDaoTableauBordPubDps = false;
+																															 panelDaoTableauBordPubCsv = false;
+																															 panelDaoTableauBordDPubCsv = true;
+																															 //panelDaoTableauBordDPubDps = true;
+																															 panelDao = false;  
+																															 panelPrq = false;
+																															 btn_trans_ami =false;
+																															 btn_trans_dao =false;
+																															 btn_trans_prq =false;
+																															 
+																															 btn_creerDetailAmi = false;
+																															 btn_creerDetailDao = false ;
+																															 btn_creerDetailPrq = false;
+																															 
+																															 btn_creerDetailDaoCmp = false;
+																															 btn_creerDetailAmiCmp = false;
+																															 btn_creerDetailPrqCmp = false;
+																															 btn_creerDetailDaoDmp = false;
+																															 btn_creerDetailAmiDmp = false; 
+																															 btn_creerDetailPrqDmp = false;
+																															 fermerValDao = false;
+																															 fermerSaiDao = true;
+																															 detailD = false;
+																															 detailA= false; 
+																															 detailP = false;
+																															 btn_valider_dao_cpmp =  false;
+																															 btn_valider_dao_dmp = false;
+																															 btn_valider_ami_cpmp = false; 
+																															 btn_valider_prq_cpmp = false;
+																															 btn_valider_ami_dmp = false;
+																															 btn_valider_prq_dmp = false;
+																															 btn_fermer_saisie_dao = false; 
+																															 btn_fermer_saisie_ami = false; 
+																															 btn_fermer_saisie_prq = false;   
+																				    								   }else
 				 
 				 
 			 
@@ -4330,6 +5042,10 @@ public class ControleController {
 																    															 panelDaoTableauBordVal = false;
 																    															 panelDaoTableauBordTra = false;
 																    															 panelDaoTableauBordPub = false;
+																    															 panelDaoTableauBordPubDps = false;
+																																 panelDaoTableauBordPubCsv = false;
+																																 panelDaoTableauBordDPubCsv = false;
+																																 panelDaoTableauBordDPubDps = false;
 																    															 pspmModePs = false;
 																    															 ppmModePn = true;
 																    															 btn_dao_pn = true;
@@ -4398,6 +5114,10 @@ public class ControleController {
 																    																 panelDaoTableauBordVal = false;
 																    																 panelDaoTableauBordTra = false;
 																    																 panelDaoTableauBordPub = false;
+																    																 panelDaoTableauBordPubDps = false;
+																																	 panelDaoTableauBordPubCsv = false;
+																																	 panelDaoTableauBordDPubCsv = false;
+																																	 panelDaoTableauBordDPubDps = false;
 																    																 pspmModePs = true;
 																    																 ppmModePn = false;
 																    																 btn_dao_pn = false;
@@ -4489,6 +5209,10 @@ public class ControleController {
 																    																panelDaoTableauBordCha = false;
 																    																panelDaoTableauBordPub = false;
 																    																panelDaoTableauBordPrise = false;
+																    																panelDaoTableauBordPubDps = false;
+																																	panelDaoTableauBordPubCsv = false;
+																																	panelDaoTableauBordDPubCsv = false;
+																																	panelDaoTableauBordDPubDps = false;
 																    																panelDao = true;
 																    																panelPrq =false;
 																    															    panelAmi = false;
@@ -4578,6 +5302,10 @@ public class ControleController {
 																    																			 panelDaoTableauBordCha = false;
 																    																			 panelDaoTableauBordPub = false;
 																    																			 panelDaoTableauBordPrise = false;
+																    																			 panelDaoTableauBordPubDps = false;
+																																				 panelDaoTableauBordPubCsv = false;
+																																				 panelDaoTableauBordDPubCsv = false;
+																																				 panelDaoTableauBordDPubDps = false;
 																    																			 panelDao = true;  
 																    																			 panelPrq = false;
 																    																			 btn_trans_ami =false;
@@ -4651,6 +5379,10 @@ public class ControleController {
 																    																				 panelDaoTableauBordCha = false;
 																    																				 panelDaoTableauBordPub = false;
 																    																				 panelDaoTableauBordPrise = false;
+																    																				 panelDaoTableauBordPubDps = false;
+																    																				 panelDaoTableauBordPubCsv = false;
+																    																				 panelDaoTableauBordDPubCsv = false;
+																																					 panelDaoTableauBordDPubDps = false;
 																    																				 panelDao = true;  
 																    																				 panelPrq = false;
 																    																				 btn_trans_ami =false;
@@ -4728,6 +5460,10 @@ public class ControleController {
 																    																					 panelDaoTableauBordCha = false;
 																    																					 panelDaoTableauBordPub = false;
 																    																					 panelDaoTableauBordPrise = false;
+																    																					 panelDaoTableauBordPubDps = false;
+																    																					 panelDaoTableauBordPubCsv = false;
+																    																					 panelDaoTableauBordDPubCsv = false;
+																																						 panelDaoTableauBordDPubDps = false;
 																    																					 panelDao = true;  
 																    																					 panelPrq = false;
 																    																					 btn_trans_ami =false;
@@ -4803,6 +5539,10 @@ public class ControleController {
 																    																						 panelDaoTableauBordCha = true;
 																    																						 panelDaoTableauBordPub = false;
 																    																						 panelDaoTableauBordPrise = false;
+																    																						 panelDaoTableauBordPubDps = false;
+																    																						 panelDaoTableauBordPubCsv = false;
+																    																						 panelDaoTableauBordDPubCsv = false;
+																																							 panelDaoTableauBordDPubDps = false;
 																    																						 panelDao = true;  
 																    																						 panelPrq = false;
 																    																						 btn_trans_ami =false;
@@ -4881,6 +5621,10 @@ public class ControleController {
 																    																							 panelDaoTableauBordCha = false;
 																    																							 panelDaoTableauBordPub = true;
 																    																							 panelDaoTableauBordPrise = false;
+																    																							 panelDaoTableauBordPubDps = false;
+																    																							 panelDaoTableauBordPubCsv = false;
+																    																							 panelDaoTableauBordDPubCsv = false;
+																																								 panelDaoTableauBordDPubDps = false;
 																    																							 panelDao = false;  
 																    																							 panelPrq = false;
 																    																							 btn_trans_ami =false;
@@ -4948,6 +5692,10 @@ public class ControleController {
 																    																								 panelDaoTableauBordCha = false;
 																    																								 panelDaoTableauBordPub = false;
 																    																								 panelDaoTableauBordPrise = false;
+																    																								 panelDaoTableauBordPubDps = false;
+																    																								 panelDaoTableauBordPubCsv = false;
+																    																								 panelDaoTableauBordDPubCsv = false;
+																																									 panelDaoTableauBordDPubDps = false;
 																    																								 panelDao = true;  
 																    																								 panelPrq = false;
 																    																								 btn_trans_ami =false;
@@ -5014,6 +5762,10 @@ public class ControleController {
 																    																									 panelDaoTableauBordCha = false;
 																    																									 panelDaoTableauBordPub = false;
 																    																									 panelDaoTableauBordPrise = false;
+																    																									 panelDaoTableauBordPubDps = false;
+																    																									 panelDaoTableauBordPubCsv = false;
+																    																									 panelDaoTableauBordDPubCsv = false;
+																																										 panelDaoTableauBordDPubDps = false;
 																    																									 panelDao = true;  
 																    																									 panelPrq = false;
 																    																									 btn_trans_ami =false;
@@ -5091,6 +5843,10 @@ public class ControleController {
 																    																										 panelDaoTableauBordCha = false;
 																    																										 panelDaoTableauBordPub = false;
 																    																										 panelDaoTableauBordPrise = true;
+																    																										 panelDaoTableauBordPubDps = false;
+																    																										 panelDaoTableauBordPubCsv = false;
+																    																										 panelDaoTableauBordDPubCsv = false;
+																																											 panelDaoTableauBordDPubDps = false;
 																    																										 panelDao = true;  
 																    																										 panelPrq = false;
 																    																										 btn_trans_ami =false;
@@ -5121,8 +5877,369 @@ public class ControleController {
 																    																										 btn_fermer_saisie_dao = false; 
 																    																										 btn_fermer_saisie_ami = false; 
 																    																										 btn_fermer_saisie_prq = false;  
-																    																	    						   }else
-			 
+																    																	    						   }else 
+																    																    								   if(action.equalsIgnoreCase("PRQCSV")) {
+																    																    									     typePlan ="PN";
+																    																    									     type = "PRQ";
+																    																    									     fonctionalite="listePrqCsv";
+																    																    									     btn_pub =false;
+																    																    									     btn_pub_csv = false;
+																    																    									     btn_pub_dps = false;
+																    																    									     btn_ami_csv = false; 
+																    																    									     btn_ami_dps = false;
+																    																    									     btn_prq_csv = true; 
+																    																    									     btn_prq_dps = false;
+																    																    									     libelle1="LISTE DES PRQ EN PROCEDURE NORMALE";
+																    																							    			 libelleDao3="PREQUALIFICATION EN ATTENTE DE PUBLICATION";
+																    																							    			 btn_new =false;
+																    																							    			 btn_affec = false;
+																    																							    			 btn_exam = false;
+																    																							    			 btn_retrait = false;
+																    																							    			 btn_valid = false;
+																    																							    			 saisie=false;
+																    																							    			 publication=true;
+																    																							    			 vente=false;
+																    																							    			  correction=false;
+																    																							    			 panel1 =false;
+																    																											 panel2 =false;
+																    																											 panel3 = false;
+																    																										     panel4 = true;
+																    																											/* panel5 = false;
+																    																											 panel6 = false;
+																    																											 panel7 = true;
+																    																											 panel8 = false;
+																    																											 panel9 =false;
+																    																											 panel10 = false;
+																    																											 panel11 = false;
+																    																											 panel12 = false;*/
+																    																											 venteRecherche = false; 
+																    																											 affectationRecherche = false;
+																    																											 examenRecherche = false;
+																    																											 publicationRecherche = true;
+																    																											 saisieRecherche = false;
+																    																											 celluleRecherche = false;
+																    																											 validationRecherche = false;
+																    																											 priseRecherche = false;
+																    																											 chargeRecherche = false;
+																    																											 affDao=false;
+																    																											 exaDao=false;
+																    																											 retDao = false;
+																    																											 panelDaoTableauBordSai = false;
+																    																											 panelDaoTableauBordVal = false;
+																    																											 panelDaoTableauBordTra = false;
+																    																											 panelDaoTableauBordAff =false;
+																    																											 panelDaoTableauBordExa =false; 
+																    																											 panelDaoTableauBordRet =false;
+																    																											 panelDaoTableauBordVet =false;
+																    																											 panelDaoTableauBordCha = false;
+																    																											 panelDaoTableauBordPub = false;
+																    																											 panelDaoTableauBordPrise = false;
+																    																											 panelDaoTableauBordPubDps = false;
+																    																											 panelDaoTableauBordPubCsv = true;
+																    																											 panelDao = false;  
+																    																											 panelPrq = false;
+																    																											 btn_trans_ami =false;
+																    																											 btn_trans_dao =false;
+																    																											 btn_trans_prq =false;
+																    																											 
+																    																											 btn_creerDetailAmi = false;
+																    																											 btn_creerDetailDao = false ;
+																    																											 btn_creerDetailPrq = false;
+																    																											 
+																    																											 btn_creerDetailDaoCmp = false;
+																    																											 btn_creerDetailAmiCmp = false;
+																    																											 btn_creerDetailPrqCmp = false;
+																    																											 btn_creerDetailDaoDmp = false;
+																    																											 btn_creerDetailAmiDmp = false; 
+																    																											 btn_creerDetailPrqDmp = false;
+																    																											 fermerValDao = false;
+																    																											 fermerSaiDao = true;
+																    																											 detailD = false;
+																    																											 detailA= false; 
+																    																											 detailP = false;
+																    																											 btn_valider_dao_cpmp =  false;
+																    																											 btn_valider_dao_dmp = false;
+																    																											 btn_valider_ami_cpmp = false; 
+																    																											 btn_valider_prq_cpmp = false;
+																    																											 btn_valider_ami_dmp = false;
+																    																											 btn_valider_prq_dmp = false;
+																    																											 btn_fermer_saisie_dao = false; 
+																    																											 btn_fermer_saisie_ami = false; 
+																    																											 btn_fermer_saisie_prq = false;   
+																    																    								   }else 
+																    																	    								   if(action.equalsIgnoreCase("DPRQCSV")) {
+																    																	    									     typePlan ="PN";
+																    																	    									     type = "PRQ";
+																    																	    									     fonctionalite="listeDprqCsv";
+																    																	    									     btn_pub =false;
+																    																	    									     btn_pub_csv = false;
+																    																	    									     btn_pub_dps = false;
+																    																	    									     btn_ami_csv = false; 
+																    																	    									     btn_ami_dps = false;
+																    																	    									     btn_prq_csv = false; 
+																    																	    									     btn_prq_dps = true;
+																    																	    									     libelle1="LISTE DES PRQ EN PROCEDURE NORMALE";
+																    																								    			 libelleDao3="PREQUALIFICATIONS PUBLIEES";
+																    																								    			 btn_new =false;
+																    																								    			 btn_affec = false;
+																    																								    			 btn_exam = false;
+																    																								    			 btn_retrait = false;
+																    																								    			 btn_valid = false;
+																    																								    			 saisie=false;
+																    																								    			 publication=true;
+																    																								    			 vente=false;
+																    																								    			 correction=false;
+																    																								    			 panel1 =false;
+																    																												 panel2 =false;
+																    																												 panel3 = false;
+																    																											     panel4 = true;
+																    																												/* panel5 = false;
+																    																												 panel6 = false;
+																    																												 panel7 = true;
+																    																												 panel8 = false;
+																    																												 panel9 =false;
+																    																												 panel10 = false;
+																    																												 panel11 = false;
+																    																												 panel12 = false;*/
+																    																												 venteRecherche = false; 
+																    																												 affectationRecherche = false;
+																    																												 examenRecherche = false;
+																    																												 publicationRecherche = true;
+																    																												 saisieRecherche = false;
+																    																												 celluleRecherche = false;
+																    																												 validationRecherche = false;
+																    																												 priseRecherche = false;
+																    																												 chargeRecherche = false;
+																    																												 affDao=false;
+																    																												 exaDao=false;
+																    																												 retDao = false;
+																    																												 panelDaoTableauBordSai = false;
+																    																												 panelDaoTableauBordVal = false;
+																    																												 panelDaoTableauBordTra = false;
+																    																												 panelDaoTableauBordAff =false;
+																    																												 panelDaoTableauBordExa =false; 
+																    																												 panelDaoTableauBordRet =false;
+																    																												 panelDaoTableauBordVet =false;
+																    																												 panelDaoTableauBordCha = false;
+																    																												 panelDaoTableauBordPub = false;
+																    																												 panelDaoTableauBordPrise = false;
+																    																												 panelDaoTableauBordPubDps = false;
+																    																												 panelDaoTableauBordPubCsv = false;
+																    																												 panelDaoTableauBordDPubCsv = true;
+																    																												 panelDaoTableauBordDPubDps = false;
+																    																												 panelDao = false;  
+																    																												 panelPrq = false;
+																    																												 btn_trans_ami =false;
+																    																												 btn_trans_dao =false;
+																    																												 btn_trans_prq =false;
+																    																												 
+																    																												 btn_creerDetailAmi = false;
+																    																												 btn_creerDetailDao = false ;
+																    																												 btn_creerDetailPrq = false;
+																    																												 
+																    																												 btn_creerDetailDaoCmp = false;
+																    																												 btn_creerDetailAmiCmp = false;
+																    																												 btn_creerDetailPrqCmp = false;
+																    																												 btn_creerDetailDaoDmp = false;
+																    																												 btn_creerDetailAmiDmp = false; 
+																    																												 btn_creerDetailPrqDmp = false;
+																    																												 fermerValDao = false;
+																    																												 fermerSaiDao = true;
+																    																												 detailD = false;
+																    																												 detailA= false; 
+																    																												 detailP = false;
+																    																												 btn_valider_dao_cpmp =  false;
+																    																												 btn_valider_dao_dmp = false;
+																    																												 btn_valider_ami_cpmp = false; 
+																    																												 btn_valider_prq_cpmp = false;
+																    																												 btn_valider_ami_dmp = false;
+																    																												 btn_valider_prq_dmp = false;
+																    																												 btn_fermer_saisie_dao = false; 
+																    																												 btn_fermer_saisie_ami = false; 
+																    																												 btn_fermer_saisie_prq = false;   
+																    																	    								   }else 
+																    																		    								   if(action.equalsIgnoreCase("PRQDPS")) {
+																    																		    									     typePlan ="PS";
+																    																		    									     type = "PRQ";
+																    																		    									     fonctionalite="listePubDprqCsv";
+																    																		    									     btn_pub =false;
+																    																		    									     btn_pub_csv = false;
+																    																		    									     btn_pub_dps = true;
+																    																		    									     btn_pub_dps = false;
+																    																		    									     btn_ami_csv = false;
+																    																		    									     btn_ami_dps = false;
+																    																		    									     btn_prq_csv = false;
+																    																		    									     btn_prq_dps = true;
+																    																		    									     libelle1="LISTE DES PRQ EN PROCEDURE SIMPLIFIEE";
+																    																									    			 libelleDao3="PREQUALIFICATION EN ATTENTE DE PUBLICATION";
+																    																									    			 btn_new =false;
+																    																									    			 btn_affec = false;
+																    																									    			 btn_exam = false;
+																    																									    			 btn_retrait = false;
+																    																									    			 btn_valid = false;
+																    																									    			 saisie=false;
+																    																									    			 publication=true;
+																    																									    			 vente=false;
+																    																									    			 correction=false;
+																    																									    			 panel1 =false;
+																    																													 panel2 =false;
+																    																													 panel3 = false;
+																    																												     panel4 = true;
+																    																													/* panel5 = false;
+																    																													 panel6 = false;
+																    																													 panel7 = true;
+																    																													 panel8 = false;
+																    																													 panel9 =false;
+																    																													 panel10 = false;
+																    																													 panel11 = false;
+																    																													 panel12 = false;*/
+																    																													 venteRecherche = false; 
+																    																													 affectationRecherche = false;
+																    																													 examenRecherche = false;
+																    																													 publicationRecherche = true;
+																    																													 saisieRecherche = false;
+																    																													 celluleRecherche = false;
+																    																													 validationRecherche = false;
+																    																													 priseRecherche = false;
+																    																													 chargeRecherche = false;
+																    																													 affDao=false;
+																    																													 exaDao=false;
+																    																													 retDao = false;
+																    																													 panelDaoTableauBordSai = false;
+																    																													 panelDaoTableauBordVal = false;
+																    																													 panelDaoTableauBordTra = false;
+																    																													 panelDaoTableauBordAff =false;
+																    																													 panelDaoTableauBordExa =false; 
+																    																													 panelDaoTableauBordRet =false;
+																    																													 panelDaoTableauBordVet =false;
+																    																													 panelDaoTableauBordCha = false;
+																    																													 panelDaoTableauBordPub = false;
+																    																													 panelDaoTableauBordPrise = false;
+																    																													 panelDaoTableauBordPubDps = true;
+																    																													 panelDaoTableauBordPubCsv = false;
+																    																													 panelDao = false;  
+																    																													 panelPrq = false;
+																    																													 btn_trans_ami =false;
+																    																													 btn_trans_dao =false;
+																    																													 btn_trans_prq =false;
+																    																													 
+																    																													 btn_creerDetailAmi = false;
+																    																													 btn_creerDetailDao = false ;
+																    																													 btn_creerDetailPrq = false;
+																    																													 
+																    																													 btn_creerDetailDaoCmp = false;
+																    																													 btn_creerDetailAmiCmp = false;
+																    																													 btn_creerDetailPrqCmp = false;
+																    																													 btn_creerDetailDaoDmp = false;
+																    																													 btn_creerDetailAmiDmp = false; 
+																    																													 btn_creerDetailPrqDmp = false;
+																    																													 fermerValDao = false;
+																    																													 fermerSaiDao = true;
+																    																													 detailD = false;
+																    																													 detailA= false; 
+																    																													 detailP = false;
+																    																													 btn_valider_dao_cpmp =  false;
+																    																													 btn_valider_dao_dmp = false;
+																    																													 btn_valider_ami_cpmp = false; 
+																    																													 btn_valider_prq_cpmp = false;
+																    																													 btn_valider_ami_dmp = false;
+																    																													 btn_valider_prq_dmp = false;
+																    																													 btn_fermer_saisie_dao = false; 
+																    																													 btn_fermer_saisie_ami = false; 
+																    																													 btn_fermer_saisie_prq = false;   
+																    																		    								   }else 
+																    																			    								   if(action.equalsIgnoreCase("DPRQDPS")) {
+																    																			    									    typePlan ="PS";
+																    																			    									     type = "PRQ";
+																    																			    									     fonctionalite="listePubPdpsCsv";
+																    																			    									     btn_pub =false;
+																    																			    									     btn_pub_csv = false;
+																    																			    									     btn_pub_dps = false;
+																    																			    									     btn_pub_dps = false;
+																    																			    									     btn_ami_csv = false;
+																    																			    									     btn_ami_dps = false;
+																    																			    									     btn_prq_csv = false;
+																    																			    									     btn_prq_dps = false;
+																    																			    									     libelle1="LISTE DES PRQ EN PROCEDURE SIMPLIFIEE";
+																    																										    			 libelleDao3="PREQUALIFICATIONS PUBLIEES";
+																    																										    			 btn_new =false;
+																    																										    			 btn_affec = false;
+																    																										    			 btn_exam = false;
+																    																										    			 btn_retrait = false;
+																    																										    			 btn_valid = false;
+																    																										    			 saisie=false;
+																    																										    			 publication=true;
+																    																										    			 vente=false;
+																    																										    			  correction=false;
+																    																										    			 panel1 =false;
+																    																														 panel2 =false;
+																    																														 panel3 = false;
+																    																													     panel4 = true;
+																    																														/* panel5 = false;
+																    																														 panel6 = false;
+																    																														 panel7 = true;
+																    																														 panel8 = false;
+																    																														 panel9 =false;
+																    																														 panel10 = false;
+																    																														 panel11 = false;
+																    																														 panel12 = false;*/
+																    																														 venteRecherche = false; 
+																    																														 affectationRecherche = false;
+																    																														 examenRecherche = false;
+																    																														 publicationRecherche = true;
+																    																														 saisieRecherche = false;
+																    																														 celluleRecherche = false;
+																    																														 validationRecherche = false;
+																    																														 priseRecherche = false;
+																    																														 chargeRecherche = false;
+																    																														 affDao=false;
+																    																														 exaDao=false;
+																    																														 retDao = false;
+																    																														 panelDaoTableauBordSai = false;
+																    																														 panelDaoTableauBordVal = false;
+																    																														 panelDaoTableauBordTra = false;
+																    																														 panelDaoTableauBordAff =false;
+																    																														 panelDaoTableauBordExa =false; 
+																    																														 panelDaoTableauBordRet =false;
+																    																														 panelDaoTableauBordVet =false;
+																    																														 panelDaoTableauBordCha = false;
+																    																														 panelDaoTableauBordPub = false;
+																    																														 panelDaoTableauBordPrise = false;
+																    																														 panelDaoTableauBordPubDps = false;
+																    																														 panelDaoTableauBordPubCsv = false;
+																    																														 panelDaoTableauBordDPubCsv = false;
+																    																														 panelDaoTableauBordDPubDps = true;
+																    																														 panelDao = false;  
+																    																														 panelPrq = false;
+																    																														 btn_trans_ami =false;
+																    																														 btn_trans_dao =false;
+																    																														 btn_trans_prq =false;
+																    																														 
+																    																														 btn_creerDetailAmi = false;
+																    																														 btn_creerDetailDao = false ;
+																    																														 btn_creerDetailPrq = false;
+																    																														 
+																    																														 btn_creerDetailDaoCmp = false;
+																    																														 btn_creerDetailAmiCmp = false;
+																    																														 btn_creerDetailPrqCmp = false;
+																    																														 btn_creerDetailDaoDmp = false;
+																    																														 btn_creerDetailAmiDmp = false; 
+																    																														 btn_creerDetailPrqDmp = false;
+																    																														 fermerValDao = false;
+																    																														 fermerSaiDao = true;
+																    																														 detailD = false;
+																    																														 detailA= false; 
+																    																														 detailP = false;
+																    																														 btn_valider_dao_cpmp =  false;
+																    																														 btn_valider_dao_dmp = false;
+																    																														 btn_valider_ami_cpmp = false; 
+																    																														 btn_valider_prq_cpmp = false;
+																    																														 btn_valider_ami_dmp = false;
+																    																														 btn_valider_prq_dmp = false;
+																    																														 btn_fermer_saisie_dao = false; 
+																    																														 btn_fermer_saisie_ami = false; 
+																    																														 btn_fermer_saisie_prq = false;   
+																    																			    								   }else
 				    		//GESTION DES DEPOTS D'APPLEL D'OFFRE
 				    				if(action.equalsIgnoreCase("LISAAO")) {
 						    			type = "Dépot des Offres";
@@ -8426,8 +9543,6 @@ public class ControleController {
 	public boolean isPanelDaoTableauBordPubCsv() {
 		return panelDaoTableauBordPubCsv;
 	}
-
-
 	public void setPanelDaoTableauBordPubCsv(boolean panelDaoTableauBordPubCsv) {
 		this.panelDaoTableauBordPubCsv = panelDaoTableauBordPubCsv;
 	}
@@ -8438,6 +9553,61 @@ public class ControleController {
 	}
 	public void setPanelDaoTableauBordPubDps(boolean panelDaoTableauBordPubDps) {
 		this.panelDaoTableauBordPubDps = panelDaoTableauBordPubDps;
+	}
+
+
+	public boolean isBtn_ami_csv() {
+		return btn_ami_csv;
+	}
+
+
+	public void setBtn_ami_csv(boolean btn_ami_csv) {
+		this.btn_ami_csv = btn_ami_csv;
+	}
+
+
+	public boolean isBtn_ami_dps() {
+		return btn_ami_dps;
+	}
+
+
+	public void setBtn_ami_dps(boolean btn_ami_dps) {
+		this.btn_ami_dps = btn_ami_dps;
+	}
+
+
+	public boolean isBtn_prq_csv() {
+		return btn_prq_csv;
+	}
+
+
+	public void setBtn_prq_csv(boolean btn_prq_csv) {
+		this.btn_prq_csv = btn_prq_csv;
+	}
+
+
+	public boolean isBtn_prq_dps() {
+		return btn_prq_dps;
+	}
+	public void setBtn_prq_dps(boolean btn_prq_dps) {
+		this.btn_prq_dps = btn_prq_dps;
+	}
+
+
+	public boolean isPanelDaoTableauBordDPubCsv() {
+		return panelDaoTableauBordDPubCsv;
+	}
+	public void setPanelDaoTableauBordDPubCsv(boolean panelDaoTableauBordDPubCsv) {
+		this.panelDaoTableauBordDPubCsv = panelDaoTableauBordDPubCsv;
+	}
+
+
+	public boolean isPanelDaoTableauBordDPubDps() {
+		return panelDaoTableauBordDPubDps;
+	}
+
+	public void setPanelDaoTableauBordDPubDps(boolean panelDaoTableauBordDPubDps) {
+		this.panelDaoTableauBordDPubDps = panelDaoTableauBordDPubDps;
 	}
 	
    
