@@ -431,6 +431,7 @@ public class TableauBordController {
 		private VTabBordAc tableauBord = new VTabBordAc();
 		
 		public void ChargeTbAcAgpm() {
+			listeTbAc.clear();
 			listeTbAc =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
 					new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
@@ -441,6 +442,7 @@ public class TableauBordController {
 		
 		//PGPM,PGSPM,PPM,PSPM
 		public void ChargeTbAcProcedure(String typeProc, String type) {
+			listeTbAc.clear();
 			listeTbAc =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP",WhereClause.Comparateur.EQ,""+type),
 					new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
@@ -453,6 +455,7 @@ public class TableauBordController {
 		
 		//DAC
 		public void ChargeTbAcDac(String typeProc, String typeDac) {
+			listeTbAc.clear();
 			listeTbAc =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 					new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
