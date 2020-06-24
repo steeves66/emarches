@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-08T13:36:10 -->
+<!-- 2020-06-24T15:31:55 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pspm_pso" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd56bcf1-e64d-427e-9d36-ff3f7182500e">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -42,51 +42,55 @@
 		<queryString language="SQL">
 			<![CDATA[select *
 from v_ppm_etat vp
-where vp.aff_dpp_type_plan = 'PS'
-and vp.aff_dpp_plp_id = $P{param_code}
-and vp.aff_dpp_acteur_saisie= $P{param_op}
-]]>
+where vp.dpp_type_plan = 'PS'
+and vp.dpp_plp_id = $P{param_code}
+and vp.dpp_acteur_saisie= $P{param_op}]]>
 		</queryString>
-		<field name="V_ID" class="java.lang.Long"/>
-		<field name="AFF_ID" class="java.lang.Long"/>
-		<field name="AFF_DPP_ID" class="java.lang.Long"/>
+		<field name="V_ID" class="java.math.BigDecimal"/>
+		<field name="DPP_ID" class="java.math.BigDecimal"/>
 		<field name="FON_LIBELLE" class="java.lang.String"/>
-		<field name="AFF_DPP_OBJET" class="java.lang.String"/>
-		<field name="AFF_DPP_SOURCE_FIN" class="java.lang.String"/>
+		<field name="DPP_OBJET" class="java.lang.String"/>
+		<field name="DPP_SOURCE_FIN" class="java.lang.String"/>
 		<field name="LBG_CODE" class="java.lang.String"/>
 		<field name="LBG_IMPUTATION" class="java.lang.String"/>
+		<field name="LBG_FON_CODE_AC" class="java.lang.String"/>
 		<field name="NAT_CODE" class="java.lang.String"/>
 		<field name="NAT_LIBELLE" class="java.lang.String"/>
 		<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
 		<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
-		<field name="AFF_DPP_DATE_AVIS_AO_PUBLICAT" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_OUVERT_OT" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_OUVERT_OF" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_JUGEMENT_OFFRE" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_ATT_APPROB_DMP" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_ATT_APPRO_BAIL" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_PLP_ID" class="java.math.BigDecimal"/>
-		<field name="AFF_DPP_STR_BENEFI" class="java.lang.String"/>
-		<field name="AFF_DPP_STR_CONDUC" class="java.lang.String"/>
-		<field name="AFF_DPP_TYPE_PLAN" class="java.lang.String"/>
-		<field name="AFF_DPP_DATE_NEGOCIATION" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_ELAB_RAPPORT" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_SIGNAT_ATTRIB" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_SIGNAT_AC" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_EXEC_DEBUT" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_EXEC_FIN" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_DAO_TRANS" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_DAO_APPROB_DMP" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_DATE_DAO_APPROB_BAIL" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_INV_ENTRE" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_APPROB_ANO" class="java.sql.Timestamp"/>
-		<field name="AFF_DPP_TYPE_FINANCE" class="java.lang.String"/>
-		<field name="AFF_DPP_ACTEUR_SAISIE" class="java.lang.String"/>
-		<group name="AFF_DPP_OBJET">
-			<groupExpression><![CDATA[$F{AFF_DPP_OBJET}]]></groupExpression>
+		<field name="DPP_DATE_AVIS_AO_PUBLICATION" class="java.sql.Timestamp"/>
+		<field name="DPP_STATUT_ANO" class="java.lang.String"/>
+		<field name="DPP_NAT_INT" class="java.lang.String"/>
+		<field name="DPP_TYPE_STR_CONDUC" class="java.lang.String"/>
+		<field name="DPP_DATE_OUVERT_OT" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_OUVERT_OF" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_JUGEMENT_OFFRE" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_ATT_APPROB_DMP" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_ATT_APPRO_BAIL" class="java.sql.Timestamp"/>
+		<field name="DPP_PLP_ID" class="java.math.BigDecimal"/>
+		<field name="DPP_STRUCTURE_BENEFI" class="java.lang.String"/>
+		<field name="DPP_STRUCTURE_CONDUC" class="java.lang.String"/>
+		<field name="DPP_TYPE_PLAN" class="java.lang.String"/>
+		<field name="DPP_DATE_NEGOCIATION" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_ELAB_RAPPORT" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_SIGNAT_ATTRIB" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_SIGNAT_AC" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_EXEC_DEBUT" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_EXEC_FIN" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_DAO_TRANS" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_DAO_APPROB_DMP" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_DAO_APPROB_BAIL" class="java.sql.Timestamp"/>
+		<field name="DPP_INV_ENTRE" class="java.sql.Timestamp"/>
+		<field name="DPP_APPROB_ANO" class="java.sql.Timestamp"/>
+		<field name="DPP_TYPE_FINANCE" class="java.lang.String"/>
+		<field name="DPP_ACTEUR_SAISIE" class="java.lang.String"/>
+		<field name="DPP_STA_CODE" class="java.lang.String"/>
+		<field name="PLP_GES_CODE" class="java.math.BigDecimal"/>
+		<group name="DPP_OBJET">
+			<groupExpression><![CDATA[$F{DPP_OBJET}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_SOURCE_FIN">
-			<groupExpression><![CDATA[$F{AFF_DPP_SOURCE_FIN}]]></groupExpression>
+		<group name="DPP_SOURCE_FIN">
+			<groupExpression><![CDATA[$F{DPP_SOURCE_FIN}]]></groupExpression>
 		</group>
 		<group name="LBG_IMPUTATION">
 			<groupExpression><![CDATA[$F{LBG_IMPUTATION}]]></groupExpression>
@@ -94,32 +98,32 @@ and vp.aff_dpp_acteur_saisie= $P{param_op}
 		<group name="TYM_LIBELLE_COURT">
 			<groupExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_STR_CONDUC">
-			<groupExpression><![CDATA[$F{AFF_DPP_STR_CONDUC}]]></groupExpression>
+		<group name="DPP_STRUCTURE_CONDUC">
+			<groupExpression><![CDATA[$F{DPP_STRUCTURE_CONDUC}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_STR_BENEFI">
-			<groupExpression><![CDATA[$F{AFF_DPP_STR_BENEFI}]]></groupExpression>
+		<group name="DPP_STRUCTURE_BENEFI">
+			<groupExpression><![CDATA[$F{DPP_STRUCTURE_BENEFI}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_DATE_NEGOCIATION">
-			<groupExpression><![CDATA[$F{AFF_DPP_DATE_NEGOCIATION}]]></groupExpression>
+		<group name="DPP_DATE_NEGOCIATION">
+			<groupExpression><![CDATA[$F{DPP_DATE_NEGOCIATION}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_DATE_ELAB_RAPPORT">
-			<groupExpression><![CDATA[$F{AFF_DPP_DATE_ELAB_RAPPORT}]]></groupExpression>
+		<group name="DPP_DATE_ELAB_RAPPORT">
+			<groupExpression><![CDATA[$F{DPP_DATE_ELAB_RAPPORT}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_DATE_JUGEMENT_OFFRE">
-			<groupExpression><![CDATA[$F{AFF_DPP_DATE_JUGEMENT_OFFRE}]]></groupExpression>
+		<group name="DPP_DATE_JUGEMENT_OFFRE">
+			<groupExpression><![CDATA[$F{DPP_DATE_JUGEMENT_OFFRE}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_DATE_SIGNAT_ATTRIB">
-			<groupExpression><![CDATA[$F{AFF_DPP_DATE_SIGNAT_ATTRIB}]]></groupExpression>
+		<group name="DPP_DATE_SIGNAT_ATTRIB">
+			<groupExpression><![CDATA[$F{DPP_DATE_SIGNAT_ATTRIB}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_DATE_SIGNAT_AC">
-			<groupExpression><![CDATA[$F{AFF_DPP_DATE_SIGNAT_AC}]]></groupExpression>
+		<group name="DPP_DATE_SIGNAT_AC">
+			<groupExpression><![CDATA[$F{DPP_DATE_SIGNAT_AC}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_DATE_EXEC_DEBUT">
-			<groupExpression><![CDATA[$F{AFF_DPP_DATE_EXEC_DEBUT}]]></groupExpression>
+		<group name="DPP_DATE_EXEC_DEBUT">
+			<groupExpression><![CDATA[$F{DPP_DATE_EXEC_DEBUT}]]></groupExpression>
 		</group>
-		<group name="AFF_DPP_DATE_EXEC_FIN">
-			<groupExpression><![CDATA[$F{AFF_DPP_DATE_EXEC_FIN}]]></groupExpression>
+		<group name="DPP_DATE_EXEC_FIN">
+			<groupExpression><![CDATA[$F{DPP_DATE_EXEC_FIN}]]></groupExpression>
 		</group>
 	</subDataset>
 	<parameter name="param_image" class="java.lang.String">
@@ -264,7 +268,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{AFF_DPP_OBJET}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{DPP_OBJET}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -289,7 +293,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{AFF_DPP_SOURCE_FIN}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{DPP_SOURCE_FIN}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -370,7 +374,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{AFF_DPP_STR_CONDUC}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{DPP_STRUCTURE_CONDUC}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -397,7 +401,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{AFF_DPP_STR_BENEFI}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{DPP_STRUCTURE_BENEFI}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -422,7 +426,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_DAO_TRANS})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_DAO_TRANS})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -449,7 +453,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_NEGOCIATION})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_NEGOCIATION})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -476,7 +480,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_ELAB_RAPPORT})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_ELAB_RAPPORT})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -501,7 +505,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_AVIS_AO_PUBLICAT})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_AVIS_AO_PUBLICATION})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -526,7 +530,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OT})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_OUVERT_OT})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -549,7 +553,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_OUVERT_OF})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_OUVERT_OF})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -574,7 +578,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_ATT_APPROB_DMP})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_ATT_APPROB_DMP})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -597,7 +601,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_ATT_APPRO_BAIL})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_ATT_APPRO_BAIL})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -620,7 +624,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -643,7 +647,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -668,7 +672,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_DEBUT})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_EXEC_DEBUT})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -693,7 +697,7 @@ and pas.plp_fon_cod = $P{param_op}]]>
 								<textElement verticalAlignment="Middle">
 									<font size="5"/>
 								</textElement>
-								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{AFF_DPP_DATE_EXEC_FIN})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_EXEC_FIN})]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
