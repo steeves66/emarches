@@ -114,22 +114,12 @@ public class PpmController {
 	 @PostConstruct
 	 public void postContr() {
 		 controleController.fonctionaliteDynamic();
-		// chargeData();
-		 //chargeDataPspm();
-		 //chargeDataAvaliderPpm();
-		 //chargeDataAvaliderPspm();
+       
 		 chargeGestions();
 		 chargeTypeStrucConduc();
-		 //chargeBailleur();
-		 //chargeDevise();
 		 chargeFinancement();
-		 //chargeMarches();
-		 //chargeModePassation();
-		 //chargePpmTrans();
-		 //chargePspmTrans();
 		 chargePpmValDmp();
 		 chargePpmTrans();
-		 //chargePpmPubDmp(typePlan);
 		 chargePpmValDmpAc();
 		 chargePspmValDmpAc();
 		 chargePpmValCp();
@@ -146,6 +136,7 @@ public class PpmController {
 		 chargeTypeProcedures(); 
 		 chargeFonctionDmp();
 		 chargeMode();
+		 tableauBordbAc();
 	 }
 	
 	 
@@ -313,6 +304,16 @@ public class PpmController {
 			            return event.getNewStep();
 		    }
 		 
+		 
+
+                public void tableauBordbAc() {
+				   if(controleController.type == "PPM") {
+						      tableauBordController.ChargeTbAcProcedure("PN","PPM");
+		                 }else 
+		                      if(controleController.type == "PSPM"){
+		                    	   tableauBordController.ChargeTbAcProcedure("PS","PPM");
+		                 }
+		      }
 		 
 		 //Liste des Ppm transmis par l'acteur connecté
 		 public void chargePpmTrans() { 
@@ -2069,12 +2070,7 @@ public class PpmController {
 				 			boutonEditPspm =false;
 				 			//Actualisation du Tableau de Bord
 				 			//tableauBordController.chargeDataPpm();
-				 			 if(controleController.type == "PPM") {
-									tableauBordController.chargeDataPpm("PN");
-			                }else 
-			                     if(controleController.type == "PSPM"){
-			                    	 tableauBordController.chargeDataPpm("PS");
-			                }
+				 			tableauBordbAc();
 				 			
 				 			userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 				 			userController.setRenderMsg(true);
@@ -2121,12 +2117,7 @@ public class PpmController {
 				 			
 				 			//Actualisation du Tableau de Bord
 				 			//tableauBordController.chargeDataPpm();
-				 			 if(controleController.type == "PPM") {
-									tableauBordController.chargeDataPpm("PN");
-			                }else 
-			                     if(controleController.type == "PSPM"){
-			                    	 tableauBordController.chargeDataPpm("PS");
-			                }
+				 			tableauBordbAc();
 				 			
 				 			userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 				 			userController.setRenderMsg(true);
@@ -2734,16 +2725,17 @@ public class PpmController {
 				 			    //Insertion de chaque ligne dans T_adep_log avec le statut correspondant
 								historiser(""+statutTrans,passDetail,"Opération transmise à la Cellule de Passation");
 								
+								tableauBordbAc();
 								if(controleController.type == "PPM") {
 								
-									tableauBordController.chargeDataPpm("PN");
+									//tableauBordController.chargeDataPpm("PN");
 									//chargePpmTrans("PN");
 									chargePpmTrans();
 									chargeData("PN");
 							          }else 
 							              if(controleController.type == "PSPM"){
 							            	  
-							             	 tableauBordController.chargeDataPpm("PS");
+							             	 //tableauBordController.chargeDataPpm("PS");
 							             	//chargePpmTrans("PS");
 							             	chargePpmTrans();
 							             	chargeData("PS");
@@ -3092,7 +3084,7 @@ public class PpmController {
 			
 							  //Historisation des Plans Généraux
 							     historiser(""+statutUpdate,passDetail,""+getObservation());
-							     
+							     tableauBordbAc();
 							     userController.setTexteMsg("Opération retournée avec succès !");
 								 userController.setRenderMsg(true);
 								 userController.setSevrityMsg("success");
@@ -3419,7 +3411,7 @@ public class PpmController {
 		     switch(value) {
 				case "ppm1":
 					chargeData("PN");
-						  //chargePpmTrans("PN");
+					tableauBordController.ChargeTbAcProcedure("PN","PPM");
 					 //chargeDataAvaliderPpm();
 					chargePpmPUB();
 					 vider();
@@ -3450,6 +3442,7 @@ public class PpmController {
 				case "pspm1": 
 	                    chargeData("PS");
 	                    //chargePpmTrans("PS");
+	                    tableauBordController.ChargeTbAcProcedure("PS","PPM");
 	                    chargePpmPUB();
 		 			//chargeDataAvaliderPspm();
 		 			_logger.info("value: "+value+" action: "+action);

@@ -22,21 +22,21 @@ public class VTabBordAc implements java.io.Serializable {
 	private String codeAc;
 	private String typ;
 	private String typProc;
-	private BigDecimal saisi;
-	private BigDecimal transAc;
-	private BigDecimal valPf;
-	private BigDecimal difPf;
-	private BigDecimal valDmp;
-	private BigDecimal difDmp;
-	private BigDecimal pub;
+	private long saisi;
+	private long transAc;
+	private long valPf;
+	private long difPf;
+	private long valDmp;
+	private long difDmp;
+	private long pub;
 	private String typDac;
 
 	public VTabBordAc() {
 	}
 
-	public VTabBordAc(BigDecimal codeId, String codeAc, String typ, String typProc, BigDecimal saisi,
-			BigDecimal transAc, BigDecimal valPf, BigDecimal difPf, BigDecimal valDmp, BigDecimal difDmp,
-			BigDecimal pub, String typDac) {
+	public VTabBordAc(BigDecimal codeId, String codeAc, String typ, String typProc, long saisi,
+			long transAc, long valPf, long difPf, long valDmp, long difDmp,
+			long pub, String typDac) {
 		this.codeId = codeId;
 		this.codeAc = codeAc;
 		this.typ = typ;
@@ -89,65 +89,65 @@ public class VTabBordAc implements java.io.Serializable {
 	}
 
 	@Column(name = "SAISI", precision = 22, scale = 0)
-	public BigDecimal getSaisi() {
+	public long getSaisi() {
 		return this.saisi;
 	}
 
-	public void setSaisi(BigDecimal saisi) {
+	public void setSaisi(long saisi) {
 		this.saisi = saisi;
 	}
 
 	@Column(name = "TRANS_AC", precision = 22, scale = 0)
-	public BigDecimal getTransAc() {
+	public long getTransAc() {
 		return this.transAc;
 	}
 
-	public void setTransAc(BigDecimal transAc) {
+	public void setTransAc(long transAc) {
 		this.transAc = transAc;
 	}
 
 	@Column(name = "VAL_PF", precision = 22, scale = 0)
-	public BigDecimal getValPf() {
+	public long getValPf() {
 		return this.valPf;
 	}
 
-	public void setValPf(BigDecimal valPf) {
+	public void setValPf(long valPf) {
 		this.valPf = valPf;
 	}
 
 	@Column(name = "DIF_PF", precision = 22, scale = 0)
-	public BigDecimal getDifPf() {
+	public long getDifPf() {
 		return this.difPf;
 	}
 
-	public void setDifPf(BigDecimal difPf) {
+	public void setDifPf(long difPf) {
 		this.difPf = difPf;
 	}
 
 	@Column(name = "VAL_DMP", precision = 22, scale = 0)
-	public BigDecimal getValDmp() {
+	public long getValDmp() {
 		return this.valDmp;
 	}
 
-	public void setValDmp(BigDecimal valDmp) {
+	public void setValDmp(long valDmp) {
 		this.valDmp = valDmp;
 	}
 
 	@Column(name = "DIF_DMP", precision = 22, scale = 0)
-	public BigDecimal getDifDmp() {
+	public long getDifDmp() {
 		return this.difDmp;
 	}
 
-	public void setDifDmp(BigDecimal difDmp) {
+	public void setDifDmp(long difDmp) {
 		this.difDmp = difDmp;
 	}
 
 	@Column(name = "PUB", precision = 22, scale = 0)
-	public BigDecimal getPub() {
+	public long getPub() {
 		return this.pub;
 	}
 
-	public void setPub(BigDecimal pub) {
+	public void setPub(long pub) {
 		this.pub = pub;
 	}
 
@@ -158,59 +158,6 @@ public class VTabBordAc implements java.io.Serializable {
 
 	public void setTypDac(String typDac) {
 		this.typDac = typDac;
-	}
-
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof VTabBordAc))
-			return false;
-		VTabBordAc castOther = (VTabBordAc) other;
-
-		return ((this.getCodeId() == castOther.getCodeId()) || (this.getCodeId() != null
-				&& castOther.getCodeId() != null && this.getCodeId().equals(castOther.getCodeId())))
-				&& ((this.getCodeAc() == castOther.getCodeAc()) || (this.getCodeAc() != null
-						&& castOther.getCodeAc() != null && this.getCodeAc().equals(castOther.getCodeAc())))
-				&& ((this.getTyp() == castOther.getTyp()) || (this.getTyp() != null && castOther.getTyp() != null
-						&& this.getTyp().equals(castOther.getTyp())))
-				&& ((this.getTypProc() == castOther.getTypProc()) || (this.getTypProc() != null
-						&& castOther.getTypProc() != null && this.getTypProc().equals(castOther.getTypProc())))
-				&& ((this.getSaisi() == castOther.getSaisi()) || (this.getSaisi() != null
-						&& castOther.getSaisi() != null && this.getSaisi().equals(castOther.getSaisi())))
-				&& ((this.getTransAc() == castOther.getTransAc()) || (this.getTransAc() != null
-						&& castOther.getTransAc() != null && this.getTransAc().equals(castOther.getTransAc())))
-				&& ((this.getValPf() == castOther.getValPf()) || (this.getValPf() != null
-						&& castOther.getValPf() != null && this.getValPf().equals(castOther.getValPf())))
-				&& ((this.getDifPf() == castOther.getDifPf()) || (this.getDifPf() != null
-						&& castOther.getDifPf() != null && this.getDifPf().equals(castOther.getDifPf())))
-				&& ((this.getValDmp() == castOther.getValDmp()) || (this.getValDmp() != null
-						&& castOther.getValDmp() != null && this.getValDmp().equals(castOther.getValDmp())))
-				&& ((this.getDifDmp() == castOther.getDifDmp()) || (this.getDifDmp() != null
-						&& castOther.getDifDmp() != null && this.getDifDmp().equals(castOther.getDifDmp())))
-				&& ((this.getPub() == castOther.getPub()) || (this.getPub() != null && castOther.getPub() != null
-						&& this.getPub().equals(castOther.getPub())))
-				&& ((this.getTypDac() == castOther.getTypDac()) || (this.getTypDac() != null
-						&& castOther.getTypDac() != null && this.getTypDac().equals(castOther.getTypDac())));
-	}
-
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (getCodeId() == null ? 0 : this.getCodeId().hashCode());
-		result = 37 * result + (getCodeAc() == null ? 0 : this.getCodeAc().hashCode());
-		result = 37 * result + (getTyp() == null ? 0 : this.getTyp().hashCode());
-		result = 37 * result + (getTypProc() == null ? 0 : this.getTypProc().hashCode());
-		result = 37 * result + (getSaisi() == null ? 0 : this.getSaisi().hashCode());
-		result = 37 * result + (getTransAc() == null ? 0 : this.getTransAc().hashCode());
-		result = 37 * result + (getValPf() == null ? 0 : this.getValPf().hashCode());
-		result = 37 * result + (getDifPf() == null ? 0 : this.getDifPf().hashCode());
-		result = 37 * result + (getValDmp() == null ? 0 : this.getValDmp().hashCode());
-		result = 37 * result + (getDifDmp() == null ? 0 : this.getDifDmp().hashCode());
-		result = 37 * result + (getPub() == null ? 0 : this.getPub().hashCode());
-		result = 37 * result + (getTypDac() == null ? 0 : this.getTypDac().hashCode());
-		return result;
 	}
 
 }

@@ -111,6 +111,8 @@ public class AgpmController {
 		chargeAgpmValDmp();
 		chargeAgpmDifCp();
 		chargeAgpmDifDmp();
+		tableauBordController.ChargeTbAcAgpm();
+		
 	 }
 	 
 	 //Declaration des listes
@@ -331,7 +333,7 @@ public class AgpmController {
 							//new WhereClause("AGP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
 							new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 							new WhereClause("AGP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-						     tableauBordController.chargeDataAgpm(); 
+						     tableauBordController.ChargeTbAcAgpm(); 
 						     multiFiltre="";
 							_logger.info("agpmListe size: "+agpmListe.size());
 			 }else {
@@ -1633,6 +1635,7 @@ public class AgpmController {
 									  chargeData();  
 									 // rappelProjet();
 									  chargeAgpmTrans();
+									 tableauBordController.ChargeTbAcAgpm();
 									  userController.setTexteMsg(" Transmission effectuée avec succès !");
 									  userController.setRenderMsg(true);
 									  userController.setSevrityMsg("success");

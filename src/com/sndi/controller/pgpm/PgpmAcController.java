@@ -1755,6 +1755,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 					}
+		
+		
+		
+
+		
       //Fin de la Methode de publication
 		
 		
@@ -3262,6 +3267,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeData();
 					chargeDataAvaliderPgpm();
 					chargeDataAPublierPgpm("PN");
+					tableauBordController.ChargeTbAcProcedure("PN","PGPM");
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
 					listeFinancementPgpm.clear();
@@ -3305,6 +3311,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					chargeDataPgspm();
 		 			chargeDataAvaliderPgspm();
 		 			chargeDataAPublierPgpm("PS");
+		 			tableauBordController.ChargeTbAcProcedure("PS","PGPM");
 		 			userController.initMessage();
 				break;
 				case "pgpm4":

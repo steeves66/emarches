@@ -67,7 +67,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.agpmAcAttenteTransfert}</h3>
+              <h3>#{tableauBordController.tableauBord.saisi}</h3>
 
               <p>En attente de transmission</p>
             </div>
@@ -82,7 +82,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.agpmAcTransmis}</h3>
+              <h3>#{tableauBordController.tableauBord.transAc}</h3>
 
               <p>Transmis</p>
             </div>
@@ -93,6 +93,22 @@
             <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeAgpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+          <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h3>#{tableauBordController.tableauBord.difPf}</h3>
+
+              <p>Différé(s) par la cellule</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
