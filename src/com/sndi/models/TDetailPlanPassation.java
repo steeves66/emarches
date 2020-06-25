@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -79,6 +79,10 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private String dppNatInt;
 	private String dppTypeStrConduc;
 	private String dppStatutAno;
+	private Date dppDateSolFact;
+	private Date dppDateRecepFact;
+	private Date dppDateRecepLettr;
+	private Date dppDateNotAtt;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -109,7 +113,8 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			String dppStatutDao, Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec,
 			Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance,
 			Date dppApprobAno, Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp,
-			Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno,
+			Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno, Date dppDateSolFact,
+			Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
@@ -169,6 +174,10 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppNatInt = dppNatInt;
 		this.dppTypeStrConduc = dppTypeStrConduc;
 		this.dppStatutAno = dppStatutAno;
+		this.dppDateSolFact = dppDateSolFact;
+		this.dppDateRecepFact = dppDateRecepFact;
+		this.dppDateRecepLettr = dppDateRecepLettr;
+		this.dppDateNotAtt = dppDateNotAtt;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -723,6 +732,46 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppStatutAno(String dppStatutAno) {
 		this.dppStatutAno = dppStatutAno;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DPP_DATE_SOL_FACT", length = 7)
+	public Date getDppDateSolFact() {
+		return this.dppDateSolFact;
+	}
+
+	public void setDppDateSolFact(Date dppDateSolFact) {
+		this.dppDateSolFact = dppDateSolFact;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DPP_DATE_RECEP_FACT", length = 7)
+	public Date getDppDateRecepFact() {
+		return this.dppDateRecepFact;
+	}
+
+	public void setDppDateRecepFact(Date dppDateRecepFact) {
+		this.dppDateRecepFact = dppDateRecepFact;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DPP_DATE_RECEP_LETTR", length = 7)
+	public Date getDppDateRecepLettr() {
+		return this.dppDateRecepLettr;
+	}
+
+	public void setDppDateRecepLettr(Date dppDateRecepLettr) {
+		this.dppDateRecepLettr = dppDateRecepLettr;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DPP_DATE_NOT_ATT", length = 7)
+	public Date getDppDateNotAtt() {
+		return this.dppDateNotAtt;
+	}
+
+	public void setDppDateNotAtt(Date dppDateNotAtt) {
+		this.dppDateNotAtt = dppDateNotAtt;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,7 @@ public class TTypeMarche implements java.io.Serializable {
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
 	private Set<TAffichagePgpm> TAffichagePgpms = new HashSet<TAffichagePgpm>(0);
 	private Set<TCritereAnalyse> TCritereAnalyses = new HashSet<TCritereAnalyse>(0);
+	private Set<TPublicationAvis> TPublicationAvises = new HashSet<TPublicationAvis>(0);
 	private Set<TDetailPlanGeneral> TDetailPlanGenerals = new HashSet<TDetailPlanGeneral>(0);
 
 	public TTypeMarche() {
@@ -41,7 +42,8 @@ public class TTypeMarche implements java.io.Serializable {
 	public TTypeMarche(String tymCode, String tymLibelleCourt, String tymLibelleLong, String tymTymCode,
 			String tymGroupe, Set<TDacSpecs> TDacSpecses, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TModeleDacType> TModeleDacTypes, Set<TAffichagePpm> TAffichagePpms, Set<TAffichagePgpm> TAffichagePgpms,
-			Set<TCritereAnalyse> TCritereAnalyses, Set<TDetailPlanGeneral> TDetailPlanGenerals) {
+			Set<TCritereAnalyse> TCritereAnalyses, Set<TPublicationAvis> TPublicationAvises,
+			Set<TDetailPlanGeneral> TDetailPlanGenerals) {
 		this.tymCode = tymCode;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.tymLibelleLong = tymLibelleLong;
@@ -53,6 +55,7 @@ public class TTypeMarche implements java.io.Serializable {
 		this.TAffichagePpms = TAffichagePpms;
 		this.TAffichagePgpms = TAffichagePgpms;
 		this.TCritereAnalyses = TCritereAnalyses;
+		this.TPublicationAvises = TPublicationAvises;
 		this.TDetailPlanGenerals = TDetailPlanGenerals;
 	}
 
@@ -155,6 +158,15 @@ public class TTypeMarche implements java.io.Serializable {
 
 	public void setTCritereAnalyses(Set<TCritereAnalyse> TCritereAnalyses) {
 		this.TCritereAnalyses = TCritereAnalyses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypeMarche")
+	public Set<TPublicationAvis> getTPublicationAvises() {
+		return this.TPublicationAvises;
+	}
+
+	public void setTPublicationAvises(Set<TPublicationAvis> TPublicationAvises) {
+		this.TPublicationAvises = TPublicationAvises;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypeMarche")

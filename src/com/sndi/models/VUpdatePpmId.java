@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -70,6 +70,10 @@ public class VUpdatePpmId implements java.io.Serializable {
 	private String dppNatInt;
 	private String dppStatutAno;
 	private String dppTypeStrConduc;
+	private Date dppDateRecepFact;
+	private Date dppDateRecepLettr;
+	private Date dppDateSolFact;
+	private Date dppDateNotAtt;
 	private String lbgCode;
 	private String lbgStrCode;
 	private short lbgGesCode;
@@ -180,7 +184,8 @@ public class VUpdatePpmId implements java.io.Serializable {
 			Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno,
 			Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant,
-			String dppNatInt, String dppStatutAno, String dppTypeStrConduc, String lbgCode, String lbgStrCode,
+			String dppNatInt, String dppStatutAno, String dppTypeStrConduc, Date dppDateRecepFact,
+			Date dppDateRecepLettr, Date dppDateSolFact, Date dppDateNotAtt, String lbgCode, String lbgStrCode,
 			short lbgGesCode, BigDecimal lbgResDon, String lbgImputation, Long lbgAnoCode, String lbgNatCode,
 			BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr, BigDecimal lbgAeDon, BigDecimal lbgAeEmp,
 			String lbgMp, String lbgReglMp, BigDecimal lbgTotDot, String lbgUtilSaisi, String lbgDesCode,
@@ -252,6 +257,10 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.dppNatInt = dppNatInt;
 		this.dppStatutAno = dppStatutAno;
 		this.dppTypeStrConduc = dppTypeStrConduc;
+		this.dppDateRecepFact = dppDateRecepFact;
+		this.dppDateRecepLettr = dppDateRecepLettr;
+		this.dppDateSolFact = dppDateSolFact;
+		this.dppDateNotAtt = dppDateNotAtt;
 		this.lbgCode = lbgCode;
 		this.lbgStrCode = lbgStrCode;
 		this.lbgGesCode = lbgGesCode;
@@ -839,6 +848,42 @@ public class VUpdatePpmId implements java.io.Serializable {
 
 	public void setDppTypeStrConduc(String dppTypeStrConduc) {
 		this.dppTypeStrConduc = dppTypeStrConduc;
+	}
+
+	@Column(name = "DPP_DATE_RECEP_FACT", length = 7)
+	public Date getDppDateRecepFact() {
+		return this.dppDateRecepFact;
+	}
+
+	public void setDppDateRecepFact(Date dppDateRecepFact) {
+		this.dppDateRecepFact = dppDateRecepFact;
+	}
+
+	@Column(name = "DPP_DATE_RECEP_LETTR", length = 7)
+	public Date getDppDateRecepLettr() {
+		return this.dppDateRecepLettr;
+	}
+
+	public void setDppDateRecepLettr(Date dppDateRecepLettr) {
+		this.dppDateRecepLettr = dppDateRecepLettr;
+	}
+
+	@Column(name = "DPP_DATE_SOL_FACT", length = 7)
+	public Date getDppDateSolFact() {
+		return this.dppDateSolFact;
+	}
+
+	public void setDppDateSolFact(Date dppDateSolFact) {
+		this.dppDateSolFact = dppDateSolFact;
+	}
+
+	@Column(name = "DPP_DATE_NOT_ATT", length = 7)
+	public Date getDppDateNotAtt() {
+		return this.dppDateNotAtt;
+	}
+
+	public void setDppDateNotAtt(Date dppDateNotAtt) {
+		this.dppDateNotAtt = dppDateNotAtt;
 	}
 
 	@Column(name = "LBG_CODE", nullable = false, length = 50)
@@ -1590,6 +1635,18 @@ public class VUpdatePpmId implements java.io.Serializable {
 				&& ((this.getDppTypeStrConduc() == castOther.getDppTypeStrConduc())
 						|| (this.getDppTypeStrConduc() != null && castOther.getDppTypeStrConduc() != null
 								&& this.getDppTypeStrConduc().equals(castOther.getDppTypeStrConduc())))
+				&& ((this.getDppDateRecepFact() == castOther.getDppDateRecepFact())
+						|| (this.getDppDateRecepFact() != null && castOther.getDppDateRecepFact() != null
+								&& this.getDppDateRecepFact().equals(castOther.getDppDateRecepFact())))
+				&& ((this.getDppDateRecepLettr() == castOther.getDppDateRecepLettr())
+						|| (this.getDppDateRecepLettr() != null && castOther.getDppDateRecepLettr() != null
+								&& this.getDppDateRecepLettr().equals(castOther.getDppDateRecepLettr())))
+				&& ((this.getDppDateSolFact() == castOther.getDppDateSolFact())
+						|| (this.getDppDateSolFact() != null && castOther.getDppDateSolFact() != null
+								&& this.getDppDateSolFact().equals(castOther.getDppDateSolFact())))
+				&& ((this.getDppDateNotAtt() == castOther.getDppDateNotAtt())
+						|| (this.getDppDateNotAtt() != null && castOther.getDppDateNotAtt() != null
+								&& this.getDppDateNotAtt().equals(castOther.getDppDateNotAtt())))
 				&& ((this.getLbgCode() == castOther.getLbgCode()) || (this.getLbgCode() != null
 						&& castOther.getLbgCode() != null && this.getLbgCode().equals(castOther.getLbgCode())))
 				&& ((this.getLbgStrCode() == castOther.getLbgStrCode()) || (this.getLbgStrCode() != null
@@ -1812,6 +1869,10 @@ public class VUpdatePpmId implements java.io.Serializable {
 		result = 37 * result + (getDppNatInt() == null ? 0 : this.getDppNatInt().hashCode());
 		result = 37 * result + (getDppStatutAno() == null ? 0 : this.getDppStatutAno().hashCode());
 		result = 37 * result + (getDppTypeStrConduc() == null ? 0 : this.getDppTypeStrConduc().hashCode());
+		result = 37 * result + (getDppDateRecepFact() == null ? 0 : this.getDppDateRecepFact().hashCode());
+		result = 37 * result + (getDppDateRecepLettr() == null ? 0 : this.getDppDateRecepLettr().hashCode());
+		result = 37 * result + (getDppDateSolFact() == null ? 0 : this.getDppDateSolFact().hashCode());
+		result = 37 * result + (getDppDateNotAtt() == null ? 0 : this.getDppDateNotAtt().hashCode());
 		result = 37 * result + (getLbgCode() == null ? 0 : this.getLbgCode().hashCode());
 		result = 37 * result + (getLbgStrCode() == null ? 0 : this.getLbgStrCode().hashCode());
 		result = 37 * result + this.getLbgGesCode();

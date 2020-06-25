@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +24,7 @@ public class TModePassation implements java.io.Serializable {
 	private Set<TDetailPlanGeneral> TDetailPlanGenerals = new HashSet<TDetailPlanGeneral>(0);
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
+	private Set<TPublicationAvis> TPublicationAvises = new HashSet<TPublicationAvis>(0);
 	private Set<TDacSpecs> TDacSpecses = new HashSet<TDacSpecs>(0);
 
 	public TModePassation() {
@@ -37,7 +38,7 @@ public class TModePassation implements java.io.Serializable {
 	public TModePassation(String mopCode, String mopLibelleCourt, String mopLibelleLong,
 			Set<TAffichagePgpm> TAffichagePgpms, Set<TDetailPlanGeneral> TDetailPlanGenerals,
 			Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations,
-			Set<TDacSpecs> TDacSpecses) {
+			Set<TPublicationAvis> TPublicationAvises, Set<TDacSpecs> TDacSpecses) {
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
@@ -45,6 +46,7 @@ public class TModePassation implements java.io.Serializable {
 		this.TDetailPlanGenerals = TDetailPlanGenerals;
 		this.TAffichagePpms = TAffichagePpms;
 		this.TDetailPlanPassations = TDetailPlanPassations;
+		this.TPublicationAvises = TPublicationAvises;
 		this.TDacSpecses = TDacSpecses;
 	}
 
@@ -111,6 +113,15 @@ public class TModePassation implements java.io.Serializable {
 
 	public void setTDetailPlanPassations(Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.TDetailPlanPassations = TDetailPlanPassations;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModePassation")
+	public Set<TPublicationAvis> getTPublicationAvises() {
+		return this.TPublicationAvises;
+	}
+
+	public void setTPublicationAvises(Set<TPublicationAvis> TPublicationAvises) {
+		this.TPublicationAvises = TPublicationAvises;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModePassation")

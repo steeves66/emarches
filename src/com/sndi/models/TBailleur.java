@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -49,7 +49,7 @@ public class TBailleur implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "BAI_CODE", unique = true, nullable = false, length = 5)
+	@Column(name = "BAI_CODE", unique = true, nullable = false, length = 20)
 	public String getBaiCode() {
 		return this.baiCode;
 	}

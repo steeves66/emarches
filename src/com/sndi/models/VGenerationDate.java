@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -80,7 +80,14 @@ public class VGenerationDate implements java.io.Serializable {
 			@AttributeOverride(name = "dppRecherche", column = @Column(name = "DPP_RECHERCHE", length = 4000)),
 			@AttributeOverride(name = "dppFonCodPf", column = @Column(name = "DPP_FON_COD_PF", length = 20)),
 			@AttributeOverride(name = "dppFonCodDmp", column = @Column(name = "DPP_FON_COD_DMP", length = 20)),
-			@AttributeOverride(name = "dppMontant", column = @Column(name = "DPP_MONTANT", precision = 15, scale = 0)) })
+			@AttributeOverride(name = "dppMontant", column = @Column(name = "DPP_MONTANT", precision = 15, scale = 0)),
+			@AttributeOverride(name = "dppNatInt", column = @Column(name = "DPP_NAT_INT", length = 3)),
+			@AttributeOverride(name = "dppTypeStrConduc", column = @Column(name = "DPP_TYPE_STR_CONDUC", length = 50)),
+			@AttributeOverride(name = "dppStatutAno", column = @Column(name = "DPP_STATUT_ANO", length = 3)),
+			@AttributeOverride(name = "dppDateSolFact", column = @Column(name = "DPP_DATE_SOL_FACT", length = 7)),
+			@AttributeOverride(name = "dppDateRecepFact", column = @Column(name = "DPP_DATE_RECEP_FACT", length = 7)),
+			@AttributeOverride(name = "dppDateRecepLettr", column = @Column(name = "DPP_DATE_RECEP_LETTR", length = 7)),
+			@AttributeOverride(name = "dppDateNotAtt", column = @Column(name = "DPP_DATE_NOT_ATT", length = 7)) })
 	public VGenerationDateId getId() {
 		return this.id;
 	}

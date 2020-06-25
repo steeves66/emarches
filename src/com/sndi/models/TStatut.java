@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +30,7 @@ public class TStatut implements java.io.Serializable {
 	private Set<TOffres> TOffreses = new HashSet<TOffres>(0);
 	private Set<TAffichagePgpm> TAffichagePgpms = new HashSet<TAffichagePgpm>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
+	private Set<TPublicationAvis> TPublicationAvises = new HashSet<TPublicationAvis>(0);
 	private Set<TDacSpecs> TDacSpecses = new HashSet<TDacSpecs>(0);
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
@@ -48,8 +49,8 @@ public class TStatut implements java.io.Serializable {
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TDemande> TDemandes, Set<THistoAgpm> THistoAgpms,
 			Set<TAffichageAgpm> TAffichageAgpms, Set<TDetailPlanGeneral> TDetailPlanGenerals, Set<TOffres> TOffreses,
 			Set<TAffichagePgpm> TAffichagePgpms, Set<TDetailPlanPassation> TDetailPlanPassations,
-			Set<TDacSpecs> TDacSpecses, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TAffichagePpm> TAffichagePpms,
-			Set<THistoDemande> THistoDemandes, Set<TAgpm> TAgpms) {
+			Set<TPublicationAvis> TPublicationAvises, Set<TDacSpecs> TDacSpecses, Set<TAvisAppelOffre> TAvisAppelOffres,
+			Set<TAffichagePpm> TAffichagePpms, Set<THistoDemande> THistoDemandes, Set<TAgpm> TAgpms) {
 		this.staCode = staCode;
 		this.staLibelleCourt = staLibelleCourt;
 		this.staLibelleLong = staLibelleLong;
@@ -63,6 +64,7 @@ public class TStatut implements java.io.Serializable {
 		this.TOffreses = TOffreses;
 		this.TAffichagePgpms = TAffichagePgpms;
 		this.TDetailPlanPassations = TDetailPlanPassations;
+		this.TPublicationAvises = TPublicationAvises;
 		this.TDacSpecses = TDacSpecses;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TAffichagePpms = TAffichagePpms;
@@ -187,6 +189,15 @@ public class TStatut implements java.io.Serializable {
 
 	public void setTDetailPlanPassations(Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.TDetailPlanPassations = TDetailPlanPassations;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TStatut")
+	public Set<TPublicationAvis> getTPublicationAvises() {
+		return this.TPublicationAvises;
+	}
+
+	public void setTPublicationAvises(Set<TPublicationAvis> TPublicationAvises) {
+		this.TPublicationAvises = TPublicationAvises;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TStatut")

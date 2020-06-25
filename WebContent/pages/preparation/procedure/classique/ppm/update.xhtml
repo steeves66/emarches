@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
       <h3>
-        #{controleController.libelle} #{ppmModificationController.updatePpm.dppId} 
+        #{controleController.libelle} #{controleController.type} #{ppmModificationController.updatePpm.dppId} 
        
       </h3>
       <ol class="breadcrumb">
@@ -22,12 +22,12 @@
             </li>
         <li>
         <p:commandLink action="#{ppmModificationController.renderPage('ppm1','SAIPPM')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>PPM | Index
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Index
              </p:commandLink>
             </li>
         <li class="active">
          <p:commandLink action="#{ppmModificationController.renderPage('ppm4','MODPPM')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>PPM | MODIFICATION 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | MODIFICATION 
            <!--  #{controleController.libelle1}  -->
              </p:commandLink>
         </li>
@@ -124,7 +124,17 @@
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Mode de Passation</label>
                   <div class="col-sm-9">
-                   <p:inputText id="modeP21" type="text" value="#{ppmModificationController.updatePpm.dppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                  <!--  <p:inputText id="modeP21" type="text" value="#{ppmModificationController.updatePpm.dppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /> -->
+                    <table>
+		                 <tr>
+		                 <td style="width:650px"><p:inputText id="modeP21" type="text" value="#{ppmModificationController.updatePpm.dppMopCode} : #{ppmModificationController.updatePpm.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('passationPgspmDlg').show()" action="#{ppmModificationController.chargeMode}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
                   </div>
                 </div>
                 </h:panelGroup>
@@ -375,18 +385,51 @@
 		                </div>
 		                </div> 
              </div>
-		  
-		           <h:panelGroup id="inv">
-				    <h:panelGroup rendered="#{controleController.etatPso}" id="dpsl">
-		                <div class="form-group">
-		                  <label for="invAoo" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
+             
+             <h:panelGroup rendered="#{controleController.etatPsc}">
+            <div class="col-md-6">
+             <div class="form-group">
+             <label for="solEnt" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="invAoo" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.dppInvEntre}" style="width: 100%" >
+		                   <p:calendar id="solEnt" value="#{ppmController.updatePpm.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
-		                </div> 
-		              </h:panelGroup>
-		           </h:panelGroup>
+             </div>
+             
+             
+             <div class="form-group">
+              <label for="solFact" class="col-sm-6 control-label">Reception des Factures<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="solFact" value="#{ppmController.updatePpm.dppDateRecepFact}"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+             </div>
+              </div>
+              </h:panelGroup>
+              
+              
+              <h:panelGroup rendered="#{controleController.etatPsl}">
+             <div class="col-md-6">
+              <div class="form-group">
+		                  <label for="invAoo" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="invAoo" value="#{ppmController.updatePpm.dppInvEntre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		        </div>
+             
+             
+             <div class="form-group">
+              <label for="repFact" class="col-sm-6 control-label">Reception des Lettres d'Intention<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar value="#{ppmController.updatePpm.dppDateRecepLettr}" id="repFact"   mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+             </div>
+             </div>
+             </h:panelGroup>
+		  
+		         
 		                        
 		   </div>
           </div>     
@@ -426,10 +469,17 @@
 		                 <div class="form-group">
 		                  <label for="jug" class="col-sm-6 control-label">Jugement Technique<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="jug" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.dppDateJugementOffreTec}" style="width: 100%" >
+		                   <p:calendar id="jug" value="#{ppmModificationController.updatePpm.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
-		                </div>       
+		                </div> 
+		                <div class="form-group">
+		                  <label for="notA" class="col-sm-6 control-label">Notification de l'Attribution<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="notA" value="#{ppmModificationController.updatePpm.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>      
          </div>
          
          
@@ -1075,7 +1125,62 @@
       </p:dialog>
     </h:form>
     
-    
+    <h:form id="dlogPasMode">
+	        <p:dialog  widgetVar="passationPgspmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passation">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+
+						 <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmModificationController.razchargeMode()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm, dlogPasMode:filtrePasMode"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmModificationController.filtreModePassation}" id="filtrePasMode"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmModificationController.filtreChargeMode()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm" />
+                         </span>
+					 </div>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeMode}"
+						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
+			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-1" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.mopCode}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
+                                </h:commandLink>
+				        </p:column>
+				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2">				        
+         				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
+                                </h:commandLink>
+				        </p:column>
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>  
      
   
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

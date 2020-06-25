@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -80,17 +80,8 @@ public class TAffichagePpm implements java.io.Serializable {
 	public TAffichagePpm() {
 	}
 
-	public TAffichagePpm(long affId, TPlanPassation TPlanPassation, TStatut TStatut, TTypeMarche TTypeMarche,
-			TDetailPlanGeneral TDetailPlanGeneral, TLBudgets TLBudgets, TModePassation TModePassation,
-			String affDppTypePlan) {
+	public TAffichagePpm(long affId) {
 		this.affId = affId;
-		this.TPlanPassation = TPlanPassation;
-		this.TStatut = TStatut;
-		this.TTypeMarche = TTypeMarche;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-		this.TLBudgets = TLBudgets;
-		this.TModePassation = TModePassation;
-		this.affDppTypePlan = affDppTypePlan;
 	}
 
 	public TAffichagePpm(long affId, TPlanPassation TPlanPassation, TStatut TStatut, TStructure TStructure,
@@ -179,7 +170,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_PLP_ID", nullable = false)
+	@JoinColumn(name = "AFF_DPP_PLP_ID")
 	public TPlanPassation getTPlanPassation() {
 		return this.TPlanPassation;
 	}
@@ -189,7 +180,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_STA_CODE", nullable = false)
+	@JoinColumn(name = "AFF_DPP_STA_CODE")
 	public TStatut getTStatut() {
 		return this.TStatut;
 	}
@@ -209,7 +200,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_TYM_CODE", nullable = false)
+	@JoinColumn(name = "AFF_DPP_TYM_CODE")
 	public TTypeMarche getTTypeMarche() {
 		return this.TTypeMarche;
 	}
@@ -229,7 +220,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_GPG_ID", nullable = false)
+	@JoinColumn(name = "AFF_DPP_GPG_ID")
 	public TDetailPlanGeneral getTDetailPlanGeneral() {
 		return this.TDetailPlanGeneral;
 	}
@@ -249,7 +240,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_LBG_CODE", nullable = false)
+	@JoinColumn(name = "AFF_DPP_LBG_CODE")
 	public TLBudgets getTLBudgets() {
 		return this.TLBudgets;
 	}
@@ -259,7 +250,7 @@ public class TAffichagePpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AFF_DPP_MOP_CODE", nullable = false)
+	@JoinColumn(name = "AFF_DPP_MOP_CODE")
 	public TModePassation getTModePassation() {
 		return this.TModePassation;
 	}
@@ -268,7 +259,7 @@ public class TAffichagePpm implements java.io.Serializable {
 		this.TModePassation = TModePassation;
 	}
 
-	@Column(name = "AFF_DPP_TYPE_PLAN", nullable = false, length = 3)
+	@Column(name = "AFF_DPP_TYPE_PLAN", length = 3)
 	public String getAffDppTypePlan() {
 		return this.affDppTypePlan;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -29,7 +29,7 @@ public class VPpmEtatRevise implements java.io.Serializable {
 	@AttributeOverrides({ @AttributeOverride(name = "VId", column = @Column(name = "V_ID", precision = 22, scale = 0)),
 			@AttributeOverride(name = "dppId", column = @Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "dppPlpId", column = @Column(name = "DPP_PLP_ID", nullable = false, precision = 10, scale = 0)),
-			@AttributeOverride(name = "dppGpgId", column = @Column(name = "DPP_GPG_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "dppGpgId", column = @Column(name = "DPP_GPG_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "dppStaCode", column = @Column(name = "DPP_STA_CODE", nullable = false, length = 3)),
 			@AttributeOverride(name = "dppTymCode", column = @Column(name = "DPP_TYM_CODE", nullable = false, length = 3)),
 			@AttributeOverride(name = "dppMopCode", column = @Column(name = "DPP_MOP_CODE", nullable = false, length = 3)),
@@ -81,9 +81,12 @@ public class VPpmEtatRevise implements java.io.Serializable {
 			@AttributeOverride(name = "dppFonCodPf", column = @Column(name = "DPP_FON_COD_PF", length = 20)),
 			@AttributeOverride(name = "dppFonCodDmp", column = @Column(name = "DPP_FON_COD_DMP", length = 20)),
 			@AttributeOverride(name = "dppMontant", column = @Column(name = "DPP_MONTANT", precision = 15, scale = 0)),
+			@AttributeOverride(name = "dppStatutAno", column = @Column(name = "DPP_STATUT_ANO", length = 3)),
+			@AttributeOverride(name = "dppTypeStrConduc", column = @Column(name = "DPP_TYPE_STR_CONDUC", length = 50)),
+			@AttributeOverride(name = "dppNatInt", column = @Column(name = "DPP_NAT_INT", length = 3)),
 			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)),
-			@AttributeOverride(name = "lbgCode", column = @Column(name = "LBG_CODE", length = 50)),
-			@AttributeOverride(name = "lbgImputation", column = @Column(name = "LBG_IMPUTATION", length = 50)),
+			@AttributeOverride(name = "lbgCode", column = @Column(name = "LBG_CODE", nullable = false, length = 50)),
+			@AttributeOverride(name = "lbgImputation", column = @Column(name = "LBG_IMPUTATION", nullable = false, length = 50)),
 			@AttributeOverride(name = "lbgFonCodeAc", column = @Column(name = "LBG_FON_CODE_AC", length = 30)),
 			@AttributeOverride(name = "natCode", column = @Column(name = "NAT_CODE", length = 20)),
 			@AttributeOverride(name = "natLibelle", column = @Column(name = "NAT_LIBELLE", length = 200)),

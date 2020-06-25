@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -42,6 +42,7 @@ public class TFonction implements java.io.Serializable {
 	private String fonLibelleLngDmp;
 	private String fonSourceSigmap;
 	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
+	private Set<TPublicationAvis> TPublicationAvises = new HashSet<TPublicationAvis>(0);
 	private Set<TAssignation> TAssignations = new HashSet<TAssignation>(0);
 	private Set<TLBudgets> TLBudgetsesForLbgFonCode = new HashSet<TLBudgets>(0);
 	private Set<TSeances> TSeanceses = new HashSet<TSeances>(0);
@@ -80,10 +81,11 @@ public class TFonction implements java.io.Serializable {
 			TOperateur TOperateur, Date fonDatDeb, Date fonDatFin, String fonLibelle, String fonAdr, String fonTel,
 			String fonFonCod, String fonCourriel, String fonMobil, Date fonDteSaisi, String fonLibelleCrt,
 			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap,
-			Set<THistoAgpm> THistoAgpms, Set<TAssignation> TAssignations, Set<TLBudgets> TLBudgetsesForLbgFonCode,
-			Set<TSeances> TSeanceses, Set<TAffichagePgpm> TAffichagePgpms, Set<TAffichagePpm> TAffichagePpms,
-			Set<TDetCritAnalyse> TDetCritAnalyses, Set<TAvisAppelOffre> TAvisAppelOffresForAaoFonCodAc,
-			Set<TDemande> TDemandes, Set<TLotAao> TLotAaosForLaaFonCodCpmp, Set<THistoPlanGeneral> THistoPlanGenerals,
+			Set<THistoAgpm> THistoAgpms, Set<TPublicationAvis> TPublicationAvises, Set<TAssignation> TAssignations,
+			Set<TLBudgets> TLBudgetsesForLbgFonCode, Set<TSeances> TSeanceses, Set<TAffichagePgpm> TAffichagePgpms,
+			Set<TAffichagePpm> TAffichagePpms, Set<TDetCritAnalyse> TDetCritAnalyses,
+			Set<TAvisAppelOffre> TAvisAppelOffresForAaoFonCodAc, Set<TDemande> TDemandes,
+			Set<TLotAao> TLotAaosForLaaFonCodCpmp, Set<THistoPlanGeneral> THistoPlanGenerals,
 			Set<TAvisAppelOffre> TAvisAppelOffresForAaoFonCodeCpmp, Set<THistoDemande> THistoDemandes,
 			Set<TAdresseAvis> TAdresseAvises, Set<TDetailCorrection> TDetailCorrections,
 			Set<TPlanGeneral> TPlanGenerals, Set<TLotAao> TLotAaosForLaaFonCodSaisi,
@@ -111,6 +113,7 @@ public class TFonction implements java.io.Serializable {
 		this.fonLibelleLngDmp = fonLibelleLngDmp;
 		this.fonSourceSigmap = fonSourceSigmap;
 		this.THistoAgpms = THistoAgpms;
+		this.TPublicationAvises = TPublicationAvises;
 		this.TAssignations = TAssignations;
 		this.TLBudgetsesForLbgFonCode = TLBudgetsesForLbgFonCode;
 		this.TSeanceses = TSeanceses;
@@ -326,6 +329,15 @@ public class TFonction implements java.io.Serializable {
 
 	public void setTHistoAgpms(Set<THistoAgpm> THistoAgpms) {
 		this.THistoAgpms = THistoAgpms;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFonction")
+	public Set<TPublicationAvis> getTPublicationAvises() {
+		return this.TPublicationAvises;
+	}
+
+	public void setTPublicationAvises(Set<TPublicationAvis> TPublicationAvises) {
+		this.TPublicationAvises = TPublicationAvises;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFonction")

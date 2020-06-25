@@ -327,6 +327,8 @@ public class ControleController {
 	//Champ PPM
 	public boolean etatPsl =false;
 	public boolean etatPso =false;
+	public boolean etatPsc =false;
+	public boolean etatPsl_Pso =false;
 	
 	private boolean love_Ac=false;
 	private boolean love_Cpmp=false;
@@ -360,6 +362,7 @@ public class ControleController {
 	private boolean btn_publier_pgspm = false;
 	private boolean btn_publier_ppm = false;
 	private boolean btn_publier_pspm = false;
+	private boolean btn_imprimer = false;
 	//statuts
 	private String statutAffiche="";
 	private String statutUpdate="";
@@ -1076,7 +1079,7 @@ public class ControleController {
 			    		type = "PPM";
 			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PPM N°";
-			    		libelle="Modification du PPM N°";
+			    		libelle="Modification du";
 			    		libelle1="Modification du PPM N°";
 			    		btn_new =true;
 						 panel1 =true;
@@ -1123,6 +1126,7 @@ public class ControleController {
 			    	}else
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
 			    			 type = "PPM";
+			    			 typePlan = "PN";
 			    			 libelleProcedure="SAISIE DES PLANS DE PASSATION DE MARCHES";	
 			    			 btn_new =true;
 							 panel1 =true;
@@ -1170,8 +1174,12 @@ public class ControleController {
 							 validCPMP = false;*/
 							 validCPMP = true;
 							 validDMP = false;
-							 etatPso = false;
-							 etatPsl = false;
+							 //etatPso = false;
+							 //etatPsl = false;
+							 etatPso = true;
+							 etatPsl = true;
+							 etatPsc = true;
+							 etatPsl_Pso = true;
 							 searchAC = true;
 							 searchCpmp = false;
 							 searchDmp = false;
@@ -1263,6 +1271,7 @@ public class ControleController {
 									btn_fermer_saisie_pspm = false;
 									btn_publier_ppm = true;
 									btn_publier_pspm = false;
+									btn_imprimer = false;
 									searchAC = false;
 									searchCpmp = true;
 									searchDmp = true;
@@ -1295,6 +1304,7 @@ public class ControleController {
 											detailP2 = false;
 											btn_trans_ppm = false;
 											btn_trans_pspm = false;
+											btn_imprimer = true; 
 											btn_valider_ppm_cpmp = false;
 											btn_valider_ppm_dmp = false;
 											btn_valider_pspm_cpmp = false;
@@ -1322,59 +1332,55 @@ public class ControleController {
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPSPM")) {
 			    		type = "PSPM";
+			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PSPM N°";
-			    		libelle="Modification du PSPM N°";
-			    		libelle1="Modification";
-			    		panelDetail=false;
-			    		//agpmController.etatPavetDossier= true;
-					    panelForm=true;
-					    panelTraitement=false;
-			    		panelUpdate=true;
-			    		panelRegister=false;
-			    		btn_new =true;
+			    		libelle="Modification du";
+			    		libelle1="Modification du PSPM N°";
+			    		 btn_new =true;
 						 panel1 =true;
 						 panel2 =false;
-						 panelPspmTableauBordSai = true;
-						 panelPspmTableauBordVal = false;
+						 panelPpmTableauBordSai = true;
+						 panelPpmTableauBordVal = false;
 						 selectLovePgpm = false;
 						 selectLovePgspm = true;
 						 selectPartPgpm = false;
 						 selectPartPgspm = true;
-						 selectTypMPgpm = false;
-						 selectTypMPgspm = true;
-						 panelPpm = false;
-						 panelPspm = true;
-						 selectOneMenuProcedure =true;
-						 selectOneMenuPassation =false;
-						 btn_creerDetailPpm = false;
-						 btn_creerDetailPspm = true;
-						 btn_creerDetailPpmCmp = false;
-						 btn_creerDetailPspmCmp = true;
-						 btn_creerDetailPpmDmp = false;
-						 btn_creerDetailPspmDmp = true;
-						// btn_maj_datePspm = false;
-						 fermerValPspm = false;
-						 fermerSaiPspm = true;
-						 detailP1 = false;
-						 detailP2 = true;
-						 nbreppm = false;
-						 nbrepspm = true;
+						 selectTypMPgpm = true;
+						 selectTypMPgspm = false;
+						 panelPpm = true;
+						 panelPspm = false;
+						 fermerVal = false;
+						 fermerSai = true;
+						 btn_trans_ppm = true;
+						 btn_trans_pspm = false;
+						 nbreppm = true;
+						 nbrepspm = false;
+						 btn_fermer_saisie_ppm = true;
+						 btn_fermer_saisie_pspm = false;
 						 btn_valider_pspm_cpmp = false;
 						 btn_valider_pspm_dmp = false;
 						 btn_valider_ppm_cpmp = false;
 						 btn_valider_ppm_dmp = false;
-						 btn_fermer_saisie_ppm = false;
-						 btn_fermer_saisie_pspm = true;
-						 searchAcPs = true;
-						 searchCpmpPs = false;
-						 searchDmpPs = false;
-						 validCPMP = false;
-						 validDMP = true;
-						 etatPsl = false;
-						 etatPso = false;
+						 selectOneMenuProcedure =true;
+						 selectOneMenuPassation =false;
+						 btn_creerDetailPpm = true;
+						 btn_creerDetailPspm = false;
+						 btn_creerDetailPpmCmp = true;
+						 btn_creerDetailPspmCmp = false;
+						 btn_creerDetailPpmDmp = true;
+						 btn_creerDetailPspmDmp = false;
+						 detailP1 = true;
+						 detailP2 = false;
+						 searchAC = true;
+						 searchCpmp = false;
+						 searchDmp = false;
+						 validCPMP = true;
+						 validDMP = false;
+						 
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPSPM")) {
 			    			 type = "PSPM";
+			    			 typePlan = "PS";
 			    			 libelle1="Index";
 			    			 libelleProcedure="SAISIE DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";	
 			    			 btn_new =true;
@@ -1421,8 +1427,12 @@ public class ControleController {
 							 searchAcPs = true;
 							 searchCpmpPs = false;
 							 searchDmpPs = false;
-							 etatPsl = false;
+							 /*etatPsl = false;
+							 etatPso = false;*/
 							 etatPso = false;
+							 etatPsl = false;
+							 etatPsc = false;
+							 etatPsl_Pso = false;
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPSPM")) {
 			    				type = "PSPM";
@@ -1506,10 +1516,52 @@ public class ControleController {
 									btn_fermer_saisie_pspm = false;
 									btn_publier_ppm = false;
 									btn_publier_pspm = true;
+									btn_imprimer = false;
 									searchAC = false;
 									searchCpmp = true;
 									searchDmp = true;
-					    			}
+					    			}else
+						    			if(action.equalsIgnoreCase("DPUBPSPM")) {
+						    				type = "PSPM";
+							    			typePlan = "PS";
+							    			fonctionalite ="listePpsmPub";
+						    				libelleProcedure="PLANS SIMPLIFIES DE PASSATION DE MARCHES PUBLIES";	
+						    				libelle1="PLANS SIMPLIFIES DE PASSATION DE MARCHES PUBLIES ";
+						    				panelDetail=false;
+						    				panelForm=false;
+						   				    panelTraitement=true;
+						    				btn_new =false;
+											panel1 =false;
+											panel2 =true;
+											panelPpmTableauBordSai = false;
+											panelPpmTableauBordVal = false;
+											panelPgpmTableauBordPpPub = true;
+											panelPgpmTableauBordPspPub = false;
+											panelPpm = true;
+											panelPspm = false;
+											fermerVal = true;
+											fermerSai = false;
+											fermerValPpm = true;
+											fermerSaiPpm = false;
+											fermerValPspm = false;
+											fermerSaiPspm = false;
+											detailP1 = true;
+											detailP2 = false;
+											btn_trans_ppm = false;
+											btn_trans_pspm = false;
+											btn_imprimer = true;
+											btn_valider_ppm_cpmp = false;
+											btn_valider_ppm_dmp = false;
+											btn_valider_pspm_cpmp = false;
+											btn_valider_pspm_dmp = false;
+											btn_fermer_saisie_ppm = true;
+											btn_fermer_saisie_pspm = false;
+											btn_publier_ppm = true;
+											btn_publier_pspm = false;
+											searchAC = false;
+											searchCpmp = true;
+											searchDmp = true;
+							    			}
 			 
 			
 				    			//AMI
@@ -9611,6 +9663,35 @@ public class ControleController {
 
 	public void setPanelDaoTableauBordDPubDps(boolean panelDaoTableauBordDPubDps) {
 		this.panelDaoTableauBordDPubDps = panelDaoTableauBordDPubDps;
+	}
+
+
+	public boolean isBtn_imprimer() {
+		return btn_imprimer;
+	}
+
+	public void setBtn_imprimer(boolean btn_imprimer) {
+		this.btn_imprimer = btn_imprimer;
+	}
+
+
+	public boolean isEtatPsc() {
+		return etatPsc;
+	}
+
+
+	public void setEtatPsc(boolean etatPsc) {
+		this.etatPsc = etatPsc;
+	}
+
+
+	public boolean isEtatPsl_Pso() {
+		return etatPsl_Pso;
+	}
+
+
+	public void setEtatPsl_Pso(boolean etatPsl_Pso) {
+		this.etatPsl_Pso = etatPsl_Pso;
 	}
 	
    

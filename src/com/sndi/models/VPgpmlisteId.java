@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -11,7 +11,6 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VPgpmlisteId implements java.io.Serializable {
 
-	private String fipTypeFinance;
 	private String gpgLibFin;
 	private long gpgId;
 	private Date gpgDteModif;
@@ -57,13 +56,12 @@ public class VPgpmlisteId implements java.io.Serializable {
 		this.plgGesCode = plgGesCode;
 	}
 
-	public VPgpmlisteId(String fipTypeFinance, String gpgLibFin, long gpgId, Date gpgDteModif, String gpgObjet,
-			String gpgStaCode, String gpgTypePlan, String gpgActeurSaisie, Date gpgDateDao, String gpgFonCodPf,
-			String gpgFonCodDmp, String gpgStatutRetour, String tymCode, String tymLibelleCourt, String mopCode,
-			String mopLibelleCourt, String mopLibelleLong, String gpgRecherche, Date gpgDateValAc, Date gpgDateValCpmp,
-			Date gpgDateValDmp, String ac, Long gpgAgpId, String gpgCommentaire, String gpgPartiePmePmi,
-			String gpgStrCode, String tstCode, long plgId, short plgGesCode) {
-		this.fipTypeFinance = fipTypeFinance;
+	public VPgpmlisteId(String gpgLibFin, long gpgId, Date gpgDteModif, String gpgObjet, String gpgStaCode,
+			String gpgTypePlan, String gpgActeurSaisie, Date gpgDateDao, String gpgFonCodPf, String gpgFonCodDmp,
+			String gpgStatutRetour, String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleCourt,
+			String mopLibelleLong, String gpgRecherche, Date gpgDateValAc, Date gpgDateValCpmp, Date gpgDateValDmp,
+			String ac, Long gpgAgpId, String gpgCommentaire, String gpgPartiePmePmi, String gpgStrCode, String tstCode,
+			long plgId, short plgGesCode) {
 		this.gpgLibFin = gpgLibFin;
 		this.gpgId = gpgId;
 		this.gpgDteModif = gpgDteModif;
@@ -92,15 +90,6 @@ public class VPgpmlisteId implements java.io.Serializable {
 		this.tstCode = tstCode;
 		this.plgId = plgId;
 		this.plgGesCode = plgGesCode;
-	}
-
-	@Column(name = "FIP_TYPE_FINANCE", length = 20)
-	public String getFipTypeFinance() {
-		return this.fipTypeFinance;
-	}
-
-	public void setFipTypeFinance(String fipTypeFinance) {
-		this.fipTypeFinance = fipTypeFinance;
 	}
 
 	@Column(name = "GPG_LIB_FIN", length = 200)
@@ -364,11 +353,8 @@ public class VPgpmlisteId implements java.io.Serializable {
 			return false;
 		VPgpmlisteId castOther = (VPgpmlisteId) other;
 
-		return ((this.getFipTypeFinance() == castOther.getFipTypeFinance())
-				|| (this.getFipTypeFinance() != null && castOther.getFipTypeFinance() != null
-						&& this.getFipTypeFinance().equals(castOther.getFipTypeFinance())))
-				&& ((this.getGpgLibFin() == castOther.getGpgLibFin()) || (this.getGpgLibFin() != null
-						&& castOther.getGpgLibFin() != null && this.getGpgLibFin().equals(castOther.getGpgLibFin())))
+		return ((this.getGpgLibFin() == castOther.getGpgLibFin()) || (this.getGpgLibFin() != null
+				&& castOther.getGpgLibFin() != null && this.getGpgLibFin().equals(castOther.getGpgLibFin())))
 				&& (this.getGpgId() == castOther.getGpgId())
 				&& ((this.getGpgDteModif() == castOther.getGpgDteModif())
 						|| (this.getGpgDteModif() != null && castOther.getGpgDteModif() != null
@@ -439,7 +425,6 @@ public class VPgpmlisteId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getFipTypeFinance() == null ? 0 : this.getFipTypeFinance().hashCode());
 		result = 37 * result + (getGpgLibFin() == null ? 0 : this.getGpgLibFin().hashCode());
 		result = 37 * result + (int) this.getGpgId();
 		result = 37 * result + (getGpgDteModif() == null ? 0 : this.getGpgDteModif().hashCode());

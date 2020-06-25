@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -86,6 +86,7 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofStatut;
 	private String dofSouNcc;
 	private String dofSigle;
+	private Set<TAnalyseOffre> TAnalyseOffres = new HashSet<TAnalyseOffre>(0);
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -111,7 +112,7 @@ public class TDetOffres implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofStatut,
-			String dofSouNcc, String dofSigle, Set<TPiecesOffres> TPiecesOffreses) {
+			String dofSouNcc, String dofSigle, Set<TAnalyseOffre> TAnalyseOffres, Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
@@ -175,6 +176,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofStatut = dofStatut;
 		this.dofSouNcc = dofSouNcc;
 		this.dofSigle = dofSigle;
+		this.TAnalyseOffres = TAnalyseOffres;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
 
@@ -750,6 +752,15 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setDofSigle(String dofSigle) {
 		this.dofSigle = dofSigle;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetOffres")
+	public Set<TAnalyseOffre> getTAnalyseOffres() {
+		return this.TAnalyseOffres;
+	}
+
+	public void setTAnalyseOffres(Set<TAnalyseOffre> TAnalyseOffres) {
+		this.TAnalyseOffres = TAnalyseOffres;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetOffres")

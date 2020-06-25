@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -60,6 +60,8 @@ public class TDacSpecs implements java.io.Serializable {
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 	private Set<TCorrectionDac> TCorrectionDacs = new HashSet<TCorrectionDac>(0);
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
+	private Set<TPublicationAvis> TPublicationAvises = new HashSet<TPublicationAvis>(0);
+	private Set<TAnalyseOffre> TAnalyseOffres = new HashSet<TAnalyseOffre>(0);
 	private Set<TOffrePieceDac> TOffrePieceDacs = new HashSet<TOffrePieceDac>(0);
 	private Set<THistoDac> THistoDacs = new HashSet<THistoDac>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
@@ -88,6 +90,7 @@ public class TDacSpecs implements java.io.Serializable {
 			Set<TDetCritAnalyseDac> TDetCritAnalyseDacs, Set<TCritereAnalyseSpec> TCritereAnalyseSpecs,
 			Set<TDetailVente> TDetailVentes, Set<TOffres> TOffreses, Set<TAffichageDao> TAffichageDaos,
 			Set<TPiecesOffres> TPiecesOffreses, Set<TCorrectionDac> TCorrectionDacs, Set<TDetailAvis> TDetailAvises,
+			Set<TPublicationAvis> TPublicationAvises, Set<TAnalyseOffre> TAnalyseOffres,
 			Set<TOffrePieceDac> TOffrePieceDacs, Set<THistoDac> THistoDacs, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TDetailDemandes> TDetailDemandeses, Set<TLotAao> TLotAaos, Set<TPiecesDacs> TPiecesDacses,
@@ -129,6 +132,8 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TPiecesOffreses = TPiecesOffreses;
 		this.TCorrectionDacs = TCorrectionDacs;
 		this.TDetailAvises = TDetailAvises;
+		this.TPublicationAvises = TPublicationAvises;
+		this.TAnalyseOffres = TAnalyseOffres;
 		this.TOffrePieceDacs = TOffrePieceDacs;
 		this.THistoDacs = THistoDacs;
 		this.TDossierDacses = TDossierDacses;
@@ -489,6 +494,24 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTDetailAvises(Set<TDetailAvis> TDetailAvises) {
 		this.TDetailAvises = TDetailAvises;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
+	public Set<TPublicationAvis> getTPublicationAvises() {
+		return this.TPublicationAvises;
+	}
+
+	public void setTPublicationAvises(Set<TPublicationAvis> TPublicationAvises) {
+		this.TPublicationAvises = TPublicationAvises;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")
+	public Set<TAnalyseOffre> getTAnalyseOffres() {
+		return this.TAnalyseOffres;
+	}
+
+	public void setTAnalyseOffres(Set<TAnalyseOffre> TAnalyseOffres) {
+		this.TAnalyseOffres = TAnalyseOffres;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")

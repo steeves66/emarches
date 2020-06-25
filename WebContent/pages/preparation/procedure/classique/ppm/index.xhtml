@@ -807,16 +807,17 @@
 	         		          </h:panelGroup>
 	         		         </h:panelGroup>
                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                             
                              <h:panelGroup rendered="#{slctdTb.dppTypePlan == 'PN'}">
                             <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{ppmModificationController.renderPage('ppm4','MODPPM')}"
-				               title="Modifier" update=":content">
+				               title="Modifier ppm" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.slctdTd}" />                             
                             </p:commandLink>
                             </h:panelGroup>
                             <h:panelGroup rendered="#{slctdTb.dppTypePlan == 'PS'}">
                             <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{ppmModificationController.renderPage('ppm4','MODPSPM')}"
-				               title="Modifier" update=":content">
+				               title="Modifier pspm" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.slctdTd}" />                             
                             </p:commandLink>
@@ -980,10 +981,10 @@
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre
     </p:commandLink>
     
-       <p:commandLink rendered="#{controleController.btn_trans_pspm}" action="#{ppmController.imprimerPspmIndex()}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
+    <p:commandLink rendered="#{controleController.btn_trans_pspm}" action="#{ppmController.imprimerPspmIndex()}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
     <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer
     </p:commandLink>
-            </h:panelGroup>
+    </h:panelGroup>
                     
       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
       
@@ -1016,6 +1017,10 @@
     <p:confirm header="Confirmation" message="Confirmez-vous la validation  ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
     </p:commandLink> 
+    
+    <p:commandLink rendered="#{controleController.btn_imprimer}"  style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
+    <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer
+    </p:commandLink>
                           
      <p:commandLink rendered="#{controleController.btn_valider_pspm_dmp}" action="#{ppmController.validerPspmCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
      <p:confirm header="Confirmation" message="Confirmez-vous la validation ?" icon="ui-icon-alert" />
@@ -1030,7 +1035,8 @@
     <p:commandLink rendered="#{controleController.btn_publier_pspm}" action="#{ppmController.publierSPP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
      <p:confirm header="Confirmation" message="Confirmez-vous la publication ?" icon="ui-icon-alert" />
      <i class="ace-icon fa fa-exchange bigger-130"></i> Publier
-    </p:commandLink>                                 
+    </p:commandLink>  
+                                   
    </h:panelGroup>
        </section>
          

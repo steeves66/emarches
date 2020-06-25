@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -65,6 +65,13 @@ public class VGenerationDateId implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private Long dppMontant;
+	private String dppNatInt;
+	private String dppTypeStrConduc;
+	private String dppStatutAno;
+	private Date dppDateSolFact;
+	private Date dppDateRecepFact;
+	private Date dppDateRecepLettr;
+	private Date dppDateNotAtt;
 
 	public VGenerationDateId() {
 	}
@@ -90,7 +97,9 @@ public class VGenerationDateId implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno,
-			Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant) {
+			Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant,
+			String dppNatInt, String dppTypeStrConduc, String dppStatutAno, Date dppDateSolFact, Date dppDateRecepFact,
+			Date dppDateRecepLettr, Date dppDateNotAtt) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -145,6 +154,13 @@ public class VGenerationDateId implements java.io.Serializable {
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
 		this.dppMontant = dppMontant;
+		this.dppNatInt = dppNatInt;
+		this.dppTypeStrConduc = dppTypeStrConduc;
+		this.dppStatutAno = dppStatutAno;
+		this.dppDateSolFact = dppDateSolFact;
+		this.dppDateRecepFact = dppDateRecepFact;
+		this.dppDateRecepLettr = dppDateRecepLettr;
+		this.dppDateNotAtt = dppDateNotAtt;
 	}
 
 	@Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)
@@ -633,6 +649,69 @@ public class VGenerationDateId implements java.io.Serializable {
 		this.dppMontant = dppMontant;
 	}
 
+	@Column(name = "DPP_NAT_INT", length = 3)
+	public String getDppNatInt() {
+		return this.dppNatInt;
+	}
+
+	public void setDppNatInt(String dppNatInt) {
+		this.dppNatInt = dppNatInt;
+	}
+
+	@Column(name = "DPP_TYPE_STR_CONDUC", length = 50)
+	public String getDppTypeStrConduc() {
+		return this.dppTypeStrConduc;
+	}
+
+	public void setDppTypeStrConduc(String dppTypeStrConduc) {
+		this.dppTypeStrConduc = dppTypeStrConduc;
+	}
+
+	@Column(name = "DPP_STATUT_ANO", length = 3)
+	public String getDppStatutAno() {
+		return this.dppStatutAno;
+	}
+
+	public void setDppStatutAno(String dppStatutAno) {
+		this.dppStatutAno = dppStatutAno;
+	}
+
+	@Column(name = "DPP_DATE_SOL_FACT", length = 7)
+	public Date getDppDateSolFact() {
+		return this.dppDateSolFact;
+	}
+
+	public void setDppDateSolFact(Date dppDateSolFact) {
+		this.dppDateSolFact = dppDateSolFact;
+	}
+
+	@Column(name = "DPP_DATE_RECEP_FACT", length = 7)
+	public Date getDppDateRecepFact() {
+		return this.dppDateRecepFact;
+	}
+
+	public void setDppDateRecepFact(Date dppDateRecepFact) {
+		this.dppDateRecepFact = dppDateRecepFact;
+	}
+
+	@Column(name = "DPP_DATE_RECEP_LETTR", length = 7)
+	public Date getDppDateRecepLettr() {
+		return this.dppDateRecepLettr;
+	}
+
+	public void setDppDateRecepLettr(Date dppDateRecepLettr) {
+		this.dppDateRecepLettr = dppDateRecepLettr;
+	}
+
+	@Column(name = "DPP_DATE_NOT_ATT", length = 7)
+	public Date getDppDateNotAtt() {
+		return this.dppDateNotAtt;
+	}
+
+	public void setDppDateNotAtt(Date dppDateNotAtt) {
+		this.dppDateNotAtt = dppDateNotAtt;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -786,9 +865,28 @@ public class VGenerationDateId implements java.io.Serializable {
 				&& ((this.getDppFonCodDmp() == castOther.getDppFonCodDmp())
 						|| (this.getDppFonCodDmp() != null && castOther.getDppFonCodDmp() != null
 								&& this.getDppFonCodDmp().equals(castOther.getDppFonCodDmp())))
-				&& ((this.getDppMontant() == castOther.getDppMontant())
-						|| (this.getDppMontant() != null && castOther.getDppMontant() != null
-								&& this.getDppMontant().equals(castOther.getDppMontant())));
+				&& ((this.getDppMontant() == castOther.getDppMontant()) || (this.getDppMontant() != null
+						&& castOther.getDppMontant() != null && this.getDppMontant().equals(castOther.getDppMontant())))
+				&& ((this.getDppNatInt() == castOther.getDppNatInt()) || (this.getDppNatInt() != null
+						&& castOther.getDppNatInt() != null && this.getDppNatInt().equals(castOther.getDppNatInt())))
+				&& ((this.getDppTypeStrConduc() == castOther.getDppTypeStrConduc())
+						|| (this.getDppTypeStrConduc() != null && castOther.getDppTypeStrConduc() != null
+								&& this.getDppTypeStrConduc().equals(castOther.getDppTypeStrConduc())))
+				&& ((this.getDppStatutAno() == castOther.getDppStatutAno())
+						|| (this.getDppStatutAno() != null && castOther.getDppStatutAno() != null
+								&& this.getDppStatutAno().equals(castOther.getDppStatutAno())))
+				&& ((this.getDppDateSolFact() == castOther.getDppDateSolFact())
+						|| (this.getDppDateSolFact() != null && castOther.getDppDateSolFact() != null
+								&& this.getDppDateSolFact().equals(castOther.getDppDateSolFact())))
+				&& ((this.getDppDateRecepFact() == castOther.getDppDateRecepFact())
+						|| (this.getDppDateRecepFact() != null && castOther.getDppDateRecepFact() != null
+								&& this.getDppDateRecepFact().equals(castOther.getDppDateRecepFact())))
+				&& ((this.getDppDateRecepLettr() == castOther.getDppDateRecepLettr())
+						|| (this.getDppDateRecepLettr() != null && castOther.getDppDateRecepLettr() != null
+								&& this.getDppDateRecepLettr().equals(castOther.getDppDateRecepLettr())))
+				&& ((this.getDppDateNotAtt() == castOther.getDppDateNotAtt())
+						|| (this.getDppDateNotAtt() != null && castOther.getDppDateNotAtt() != null
+								&& this.getDppDateNotAtt().equals(castOther.getDppDateNotAtt())));
 	}
 
 	public int hashCode() {
@@ -850,6 +948,13 @@ public class VGenerationDateId implements java.io.Serializable {
 		result = 37 * result + (getDppFonCodPf() == null ? 0 : this.getDppFonCodPf().hashCode());
 		result = 37 * result + (getDppFonCodDmp() == null ? 0 : this.getDppFonCodDmp().hashCode());
 		result = 37 * result + (getDppMontant() == null ? 0 : this.getDppMontant().hashCode());
+		result = 37 * result + (getDppNatInt() == null ? 0 : this.getDppNatInt().hashCode());
+		result = 37 * result + (getDppTypeStrConduc() == null ? 0 : this.getDppTypeStrConduc().hashCode());
+		result = 37 * result + (getDppStatutAno() == null ? 0 : this.getDppStatutAno().hashCode());
+		result = 37 * result + (getDppDateSolFact() == null ? 0 : this.getDppDateSolFact().hashCode());
+		result = 37 * result + (getDppDateRecepFact() == null ? 0 : this.getDppDateRecepFact().hashCode());
+		result = 37 * result + (getDppDateRecepLettr() == null ? 0 : this.getDppDateRecepLettr().hashCode());
+		result = 37 * result + (getDppDateNotAtt() == null ? 0 : this.getDppDateNotAtt().hashCode());
 		return result;
 	}
 

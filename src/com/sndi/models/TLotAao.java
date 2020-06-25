@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -40,6 +40,7 @@ public class TLotAao implements java.io.Serializable {
 	private BigDecimal laaNum;
 	private BigDecimal laaCoutLot;
 	private String laaAjoutPanier;
+	private Set<TAnalyseOffre> TAnalyseOffres = new HashSet<TAnalyseOffre>(0);
 	private Set<TDetailVente> TDetailVentes = new HashSet<TDetailVente>(0);
 	private Set<TDetailDemandes> TDetailDemandeses = new HashSet<TDetailDemandes>(0);
 	private Set<TDetOffres> TDetOffreses = new HashSet<TDetOffres>(0);
@@ -56,8 +57,8 @@ public class TLotAao implements java.io.Serializable {
 			TFonction TFonctionByLaaFonCodSaisi, TLBudgets TLBudgets, TAvisAppelOffre TAvisAppelOffre, String laaObjet,
 			String laaObservation, BigDecimal laaMtCaut, BigDecimal laaMtEst, Date laaDteSaisi, String laaStaCode,
 			String laaOpeMatricule, String laaLieuExe, BigDecimal laaNum, BigDecimal laaCoutLot, String laaAjoutPanier,
-			Set<TDetailVente> TDetailVentes, Set<TDetailDemandes> TDetailDemandeses, Set<TDetOffres> TDetOffreses,
-			Set<TPiecesOffres> TPiecesOffreses) {
+			Set<TAnalyseOffre> TAnalyseOffres, Set<TDetailVente> TDetailVentes, Set<TDetailDemandes> TDetailDemandeses,
+			Set<TDetOffres> TDetOffreses, Set<TPiecesOffres> TPiecesOffreses) {
 		this.laaId = laaId;
 		this.TDacSpecs = TDacSpecs;
 		this.TFonctionByLaaFonCodCpmp = TFonctionByLaaFonCodCpmp;
@@ -75,6 +76,7 @@ public class TLotAao implements java.io.Serializable {
 		this.laaNum = laaNum;
 		this.laaCoutLot = laaCoutLot;
 		this.laaAjoutPanier = laaAjoutPanier;
+		this.TAnalyseOffres = TAnalyseOffres;
 		this.TDetailVentes = TDetailVentes;
 		this.TDetailDemandeses = TDetailDemandeses;
 		this.TDetOffreses = TDetOffreses;
@@ -240,6 +242,15 @@ public class TLotAao implements java.io.Serializable {
 
 	public void setLaaAjoutPanier(String laaAjoutPanier) {
 		this.laaAjoutPanier = laaAjoutPanier;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLotAao")
+	public Set<TAnalyseOffre> getTAnalyseOffres() {
+		return this.TAnalyseOffres;
+	}
+
+	public void setTAnalyseOffres(Set<TAnalyseOffre> TAnalyseOffres) {
+		this.TAnalyseOffres = TAnalyseOffres;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLotAao")

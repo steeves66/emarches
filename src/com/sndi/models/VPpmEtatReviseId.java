@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,7 +15,7 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 	private BigDecimal VId;
 	private long dppId;
 	private long dppPlpId;
-	private long dppGpgId;
+	private Long dppGpgId;
 	private String dppStaCode;
 	private String dppTymCode;
 	private String dppMopCode;
@@ -67,6 +67,9 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private Long dppMontant;
+	private String dppStatutAno;
+	private String dppTypeStrConduc;
+	private String dppNatInt;
 	private String fonLibelle;
 	private String lbgCode;
 	private String lbgImputation;
@@ -80,20 +83,21 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 	public VPpmEtatReviseId() {
 	}
 
-	public VPpmEtatReviseId(long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
-			String dppMopCode, String dppTypePlan, String tymLibelleCourt, short plpGesCode) {
+	public VPpmEtatReviseId(long dppId, long dppPlpId, String dppStaCode, String dppTymCode, String dppMopCode,
+			String dppTypePlan, String lbgCode, String lbgImputation, String tymLibelleCourt, short plpGesCode) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
-		this.dppGpgId = dppGpgId;
 		this.dppStaCode = dppStaCode;
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
 		this.dppTypePlan = dppTypePlan;
+		this.lbgCode = lbgCode;
+		this.lbgImputation = lbgImputation;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.plpGesCode = plpGesCode;
 	}
 
-	public VPpmEtatReviseId(BigDecimal VId, long dppId, long dppPlpId, long dppGpgId, String dppStaCode,
+	public VPpmEtatReviseId(BigDecimal VId, long dppId, long dppPlpId, Long dppGpgId, String dppStaCode,
 			String dppTymCode, String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode,
 			Integer dppNumeroOrdre, Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans,
 			Date dppDateDaoApprobDmp, Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt,
@@ -105,8 +109,9 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 			String dppDacCode, Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec,
 			Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance,
 			Date dppApprobAno, Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp,
-			Long dppMontant, String fonLibelle, String lbgCode, String lbgImputation, String lbgFonCodeAc,
-			String natCode, String natLibelle, String tymLibelleCourt, String mopLibelleLong, short plpGesCode) {
+			Long dppMontant, String dppStatutAno, String dppTypeStrConduc, String dppNatInt, String fonLibelle,
+			String lbgCode, String lbgImputation, String lbgFonCodeAc, String natCode, String natLibelle,
+			String tymLibelleCourt, String mopLibelleLong, short plpGesCode) {
 		this.VId = VId;
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
@@ -162,6 +167,9 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
 		this.dppMontant = dppMontant;
+		this.dppStatutAno = dppStatutAno;
+		this.dppTypeStrConduc = dppTypeStrConduc;
+		this.dppNatInt = dppNatInt;
 		this.fonLibelle = fonLibelle;
 		this.lbgCode = lbgCode;
 		this.lbgImputation = lbgImputation;
@@ -200,12 +208,12 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		this.dppPlpId = dppPlpId;
 	}
 
-	@Column(name = "DPP_GPG_ID", nullable = false, precision = 10, scale = 0)
-	public long getDppGpgId() {
+	@Column(name = "DPP_GPG_ID", precision = 10, scale = 0)
+	public Long getDppGpgId() {
 		return this.dppGpgId;
 	}
 
-	public void setDppGpgId(long dppGpgId) {
+	public void setDppGpgId(Long dppGpgId) {
 		this.dppGpgId = dppGpgId;
 	}
 
@@ -668,6 +676,33 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		this.dppMontant = dppMontant;
 	}
 
+	@Column(name = "DPP_STATUT_ANO", length = 3)
+	public String getDppStatutAno() {
+		return this.dppStatutAno;
+	}
+
+	public void setDppStatutAno(String dppStatutAno) {
+		this.dppStatutAno = dppStatutAno;
+	}
+
+	@Column(name = "DPP_TYPE_STR_CONDUC", length = 50)
+	public String getDppTypeStrConduc() {
+		return this.dppTypeStrConduc;
+	}
+
+	public void setDppTypeStrConduc(String dppTypeStrConduc) {
+		this.dppTypeStrConduc = dppTypeStrConduc;
+	}
+
+	@Column(name = "DPP_NAT_INT", length = 3)
+	public String getDppNatInt() {
+		return this.dppNatInt;
+	}
+
+	public void setDppNatInt(String dppNatInt) {
+		this.dppNatInt = dppNatInt;
+	}
+
 	@Column(name = "FON_LIBELLE", length = 500)
 	public String getFonLibelle() {
 		return this.fonLibelle;
@@ -677,7 +712,7 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		this.fonLibelle = fonLibelle;
 	}
 
-	@Column(name = "LBG_CODE", length = 50)
+	@Column(name = "LBG_CODE", nullable = false, length = 50)
 	public String getLbgCode() {
 		return this.lbgCode;
 	}
@@ -686,7 +721,7 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		this.lbgCode = lbgCode;
 	}
 
-	@Column(name = "LBG_IMPUTATION", length = 50)
+	@Column(name = "LBG_IMPUTATION", nullable = false, length = 50)
 	public String getLbgImputation() {
 		return this.lbgImputation;
 	}
@@ -761,7 +796,8 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		return ((this.getVId() == castOther.getVId())
 				|| (this.getVId() != null && castOther.getVId() != null && this.getVId().equals(castOther.getVId())))
 				&& (this.getDppId() == castOther.getDppId()) && (this.getDppPlpId() == castOther.getDppPlpId())
-				&& (this.getDppGpgId() == castOther.getDppGpgId())
+				&& ((this.getDppGpgId() == castOther.getDppGpgId()) || (this.getDppGpgId() != null
+						&& castOther.getDppGpgId() != null && this.getDppGpgId().equals(castOther.getDppGpgId())))
 				&& ((this.getDppStaCode() == castOther.getDppStaCode()) || (this.getDppStaCode() != null
 						&& castOther.getDppStaCode() != null && this.getDppStaCode().equals(castOther.getDppStaCode())))
 				&& ((this.getDppTymCode() == castOther.getDppTymCode()) || (this.getDppTymCode() != null
@@ -905,6 +941,14 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 								&& this.getDppFonCodDmp().equals(castOther.getDppFonCodDmp())))
 				&& ((this.getDppMontant() == castOther.getDppMontant()) || (this.getDppMontant() != null
 						&& castOther.getDppMontant() != null && this.getDppMontant().equals(castOther.getDppMontant())))
+				&& ((this.getDppStatutAno() == castOther.getDppStatutAno())
+						|| (this.getDppStatutAno() != null && castOther.getDppStatutAno() != null
+								&& this.getDppStatutAno().equals(castOther.getDppStatutAno())))
+				&& ((this.getDppTypeStrConduc() == castOther.getDppTypeStrConduc())
+						|| (this.getDppTypeStrConduc() != null && castOther.getDppTypeStrConduc() != null
+								&& this.getDppTypeStrConduc().equals(castOther.getDppTypeStrConduc())))
+				&& ((this.getDppNatInt() == castOther.getDppNatInt()) || (this.getDppNatInt() != null
+						&& castOther.getDppNatInt() != null && this.getDppNatInt().equals(castOther.getDppNatInt())))
 				&& ((this.getFonLibelle() == castOther.getFonLibelle()) || (this.getFonLibelle() != null
 						&& castOther.getFonLibelle() != null && this.getFonLibelle().equals(castOther.getFonLibelle())))
 				&& ((this.getLbgCode() == castOther.getLbgCode()) || (this.getLbgCode() != null
@@ -934,7 +978,7 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		result = 37 * result + (getVId() == null ? 0 : this.getVId().hashCode());
 		result = 37 * result + (int) this.getDppId();
 		result = 37 * result + (int) this.getDppPlpId();
-		result = 37 * result + (int) this.getDppGpgId();
+		result = 37 * result + (getDppGpgId() == null ? 0 : this.getDppGpgId().hashCode());
 		result = 37 * result + (getDppStaCode() == null ? 0 : this.getDppStaCode().hashCode());
 		result = 37 * result + (getDppTymCode() == null ? 0 : this.getDppTymCode().hashCode());
 		result = 37 * result + (getDppMopCode() == null ? 0 : this.getDppMopCode().hashCode());
@@ -988,6 +1032,9 @@ public class VPpmEtatReviseId implements java.io.Serializable {
 		result = 37 * result + (getDppFonCodPf() == null ? 0 : this.getDppFonCodPf().hashCode());
 		result = 37 * result + (getDppFonCodDmp() == null ? 0 : this.getDppFonCodDmp().hashCode());
 		result = 37 * result + (getDppMontant() == null ? 0 : this.getDppMontant().hashCode());
+		result = 37 * result + (getDppStatutAno() == null ? 0 : this.getDppStatutAno().hashCode());
+		result = 37 * result + (getDppTypeStrConduc() == null ? 0 : this.getDppTypeStrConduc().hashCode());
+		result = 37 * result + (getDppNatInt() == null ? 0 : this.getDppNatInt().hashCode());
 		result = 37 * result + (getFonLibelle() == null ? 0 : this.getFonLibelle().hashCode());
 		result = 37 * result + (getLbgCode() == null ? 0 : this.getLbgCode().hashCode());
 		result = 37 * result + (getLbgImputation() == null ? 0 : this.getLbgImputation().hashCode());

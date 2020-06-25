@@ -229,6 +229,8 @@ public class PpmModificationController {
 		 private TStructure recupStructure= new TStructure();
 		 private THistoPlanPassation histoPpm = new THistoPlanPassation();
 		 private VUpdatePpm updatePpm = new VUpdatePpm();
+		 private VModePassation recupModeListe = new VModePassation();
+		 private VModePassation passationListe = new VModePassation();
 		
 	 
 		//Declaration des variables
@@ -292,13 +294,21 @@ public class PpmModificationController {
 		   public void chargeTypeStrucConduc(){
 			   listeTypStruConduc=new ArrayList<>(constantService.getListeTypStruConduc());
 			 }
+		
 		 
-		 
-		 //Liste des Modes de Passation restreint
-		 public void chargeMode() {
-			 listeMode.clear();
-			 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));	 		 
+		//Liste des Modes de Passation restreint
+		 public void chargeMode() { 
+			 //listeMode.clear();
+		     listeMode=new ArrayList<>(constantService.getListeMode());
 		 }
+		 
+		 
+		//Liste des Modes de Passation restreint
+		  public void razchargeMode() {
+			listeMode.clear();
+			listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));
+			filtreModePassation="";
+			} 
 		 
 		 
 		 //Liste des Pspm transmis par l'acteur connecté
@@ -398,18 +408,44 @@ public class PpmModificationController {
 				return	i;	
 			}
 		
+		//Gestion des Panels
+		 public void controlPanel() {
+			 if(slctdTd.getDppMopCode().equalsIgnoreCase("PSC")) {
+				 controleController.etatPsc = true;
+				 controleController.etatPsl = false;
+				 controleController.etatPso = false;
+				 controleController.etatPsl_Pso = false;
+			 }else {
+				   if(slctdTd.getDppMopCode().equalsIgnoreCase("PSO")) {
+					    controleController.etatPsc = false;
+						 controleController.etatPsl = false;
+						 controleController.etatPso = true;
+						 controleController.etatPsl_Pso = true;
+				   }else {
+					     controleController.etatPsc = false;
+						 controleController.etatPsl = true;
+						 controleController.etatPso = false;
+						 controleController.etatPsl_Pso = true;
+				   }
+			 }
+		 }
+		 
+		 
+		 public void onSelectModePassationPgspm() {
+			 detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
 
-	 
-	   
-		
-		
-			
-			
-			
-			
-			
-			
-		
+		    recupModeListe = new VModePassation();
+		    recupModeListe.setMopLibelleLong(passationListe.getMopLibelleLong());
+		    recupModeListe.setMopCode(passationListe.getMopCode());
+		    
+		    updatePpm.setDppMopCode(passationListe.getMopCode());
+		    updatePpm.setMopLibelleLong(passationListe.getMopLibelleLong());
+		    
+		    recupPgspm.setGpgMopCode(passationListe.getMopCode());
+		    recupPgspm.setMopLibelleLong(passationListe.getMopLibelleLong());
+		    chargeMode();
+				}
+		 	
 		 
 		 //Affichage dynamique des dates prévisionnelles
 		 public void checkDatePrevisionnelle() {
@@ -597,6 +633,7 @@ public class PpmModificationController {
 					 new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"),
 					 new WhereClause("PLG_FON_COD",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));		 		 
 		 }
+		 
 		 
 		
 		 
@@ -1085,16 +1122,7 @@ public class PpmModificationController {
 				 userController.setSevrityMsg("danger");	 
 			 }
 		 }
-		 
-		 
-		 
-	  	 
-	  	 
-	  	
-	  	 
-	  	
-	   	
-	  	 
+		 	 
 	  	 
 	  	public String fermerPspm(String value ,String action) throws IOException { 
 			 userController.initMessage();
@@ -1157,13 +1185,6 @@ public class PpmModificationController {
 		 }
 		 
 		 
-		 
-		  
-	    
-	     
-	     
-	     
-	     
 	     //Validation par le CPMP DMP
 	     @Transactional
 			public void validerCPMPDMP()throws IOException{ 
@@ -1209,15 +1230,11 @@ public class PpmModificationController {
 			 								 }else
 			 									  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 			 										 passDetail.setDppDateValDmp(Calendar.getInstance().getTime());   
-			 									  }
-			 									 
+			 									  } 
 									passDetail.setTStatut(new TStatut(statutUpdate));
 									passDetail.setDppStatutRetour("0");
 							        iservice.updateObject(passDetail);
-							       
-							
 								}
-				 				 
 			 		        }	   
 				 		   }	
 					     }
@@ -1250,18 +1267,7 @@ public class PpmModificationController {
 		 		  //Actualisation du Tableau de Bord
 		 		 // tableauBordController.chargeDataPpmPspm();
 						}
-	     
-	     
-	     
-	
-	     
-	   
-			 
-			
-			
-				 
-				 
-				
+	     		
 			 
 	  
 			//Affichage des motifs de retour
@@ -1281,71 +1287,79 @@ public class PpmModificationController {
 				 //@Transactional
 				 public void modifierDetailPlan() throws IOException{
 					 
-					 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-				   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
-					     TDetailPlanPassation detail = new TDetailPlanPassation();
-								if(!PLG.isEmpty()) detail =PLG.get(0); 
-					             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
-					             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
-					             detail.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
-					             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
-					             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
-					             detail.setDppNatInt(updatePpm.getDppNatInt());
-					             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
-					             detail.setDppStatutAno(updatePpm.getDppStatutAno());
-					             detail.setDppStructureBenefi(updatePpm.getDppStructureBenefi());
-					             detail.setDppObjet(updatePpm.getDppObjet());
-					             detail.setDppPartiePmePmi(updatePpm.getDppPartiePmePmi());
-					             detail.setDppBailleur(updatePpm.getDppBailleur());
-					             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
-					             detail.setDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
-					             detail.setDppApprobAno(updatePpm.getDppApprobAno());
-					             detail.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
-					             detail.setDppDateJugementOffre(updatePpm.getDppDateJugementOffre());
-					             detail.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
-					             detail.setDppDateExecFin(updatePpm.getDppDateExecFin());
-					             detail.setDppDateExecDebut(updatePpm.getDppDateExecDebut());
-					             detail.setDppDateMarcheApprob(updatePpm.getDppDateMarcheApprob());
-					             detail.setDppDateOuvertOf(updatePpm.getDppDateOuvertOf());
-					             detail.setDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
-					             detail.setDppDateElabRapport(updatePpm.getDppDateElabRapport());
-					             detail.setDppDateNegociation(updatePpm.getDppDateNegociation());
-					             detail.setDppDateAttApprobDmp(updatePpm.getDppDateDaoApprobDmp());
-					             detail.setDppDateAttApprobCpmp(updatePpm.getDppDateAttApprobCpmp());
-					             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
-					             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
-					             detail.setDppInvEntre(updatePpm.getDppInvEntre());
-					             iservice.updateObject(detail);
-		
-					/* slctdTd.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
-					 slctdTd.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
-					 slctdTd.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
-					 slctdTd.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
-					 slctdTd.setAffDppStrConduc(updatePpm.getDppStructureConduc());
-					 slctdTd.setAffDppStrBenefi(updatePpm.getDppStructureBenefi());
-					 slctdTd.setAffDppObjet(updatePpm.getDppObjet());
-					 slctdTd.setAffDppPartiePmePmi(updatePpm.getDppPartiePmePmi());
-					 slctdTd.setAffDppBailleur(updatePpm.getDppBailleur());
-					 slctdTd.setAffDppPieceDao(updatePpm.getMdtCode());
-					 slctdTd.setAffDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
-					 slctdTd.setDppApprobAno(updatePpm.getDppApprobAno());
-					 slctdTd.setAffDppDateAvisAoPublicat(updatePpm.getDppDateAvisAoPublication());
-					 slctdTd.setAffDppDateJugementOffre(updatePpm.getDppDateJugementOffre());
-					 slctdTd.setAffDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
-					 slctdTd.setAffDppDateExecFin(updatePpm.getDppDateExecFin());
-					 slctdTd.setAffDppDateExecDebut(updatePpm.getDppDateExecDebut());
-					 slctdTd.setAffDppDateMarcheApprob(updatePpm.getDppDateMarcheApprob());
-					 slctdTd.setAffDppDateOuvertOf(updatePpm.getDppDateOuvertOf());
-					 slctdTd.setDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
-					 slctdTd.setDppDateElabRapport(updatePpm.getDppDateElabRapport());
-					 slctdTd.setAffDppDateNegociation(updatePpm.getDppDateNegociation());
-					 slctdTd.setAffDppDateAttApprobDmp(updatePpm.getDppDateDaoApprobDmp());
-					 slctdTd.setAffDppDateAttApprobCmp(updatePpm.getDppDateAttApprobCpmp());
-					 slctdTd.setAffDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
-					 slctdTd.setAffDppDateSignatAc(updatePpm.getDppDateSignatAc());
-					 slctdTd.setAffDppInvEntre(updatePpm.getDppInvEntre());
-					 iservice.updateObject(slctdTd);*/
-					 
+					 if(passationListe.getMopCode() == null) {
+						 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+					   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+						     TDetailPlanPassation detail = new TDetailPlanPassation();
+									if(!PLG.isEmpty()) detail =PLG.get(0); 
+						             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+						             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
+						             detail.setTModePassation(new TModePassation(passationListe.getMopCode()));
+						             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
+						             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
+						             detail.setDppNatInt(updatePpm.getDppNatInt());
+						             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
+						             detail.setDppStatutAno(updatePpm.getDppStatutAno());
+						             detail.setDppStructureBenefi(updatePpm.getDppStructureBenefi());
+						             detail.setDppObjet(updatePpm.getDppObjet());
+						             detail.setDppPartiePmePmi(updatePpm.getDppPartiePmePmi());
+						             detail.setDppBailleur(updatePpm.getDppBailleur());
+						             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
+						             detail.setDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
+						             detail.setDppApprobAno(updatePpm.getDppApprobAno());
+						             detail.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
+						             detail.setDppDateJugementOffre(updatePpm.getDppDateJugementOffre());
+						             detail.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
+						             detail.setDppDateExecFin(updatePpm.getDppDateExecFin());
+						             detail.setDppDateExecDebut(updatePpm.getDppDateExecDebut());
+						             detail.setDppDateMarcheApprob(updatePpm.getDppDateMarcheApprob());
+						             detail.setDppDateOuvertOf(updatePpm.getDppDateOuvertOf());
+						             detail.setDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
+						             detail.setDppDateElabRapport(updatePpm.getDppDateElabRapport());
+						             detail.setDppDateNegociation(updatePpm.getDppDateNegociation());
+						             detail.setDppDateAttApprobDmp(updatePpm.getDppDateDaoApprobDmp());
+						             detail.setDppDateAttApprobCpmp(updatePpm.getDppDateAttApprobCpmp());
+						             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
+						             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
+						             detail.setDppInvEntre(updatePpm.getDppInvEntre());
+						             iservice.updateObject(detail);
+					     }else {
+					    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+						   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+							     TDetailPlanPassation detail = new TDetailPlanPassation();
+										if(!PLG.isEmpty()) detail =PLG.get(0); 
+							             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+							             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
+							             detail.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
+							             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
+							             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
+							             detail.setDppNatInt(updatePpm.getDppNatInt());
+							             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
+							             detail.setDppStatutAno(updatePpm.getDppStatutAno());
+							             detail.setDppStructureBenefi(updatePpm.getDppStructureBenefi());
+							             detail.setDppObjet(updatePpm.getDppObjet());
+							             detail.setDppPartiePmePmi(updatePpm.getDppPartiePmePmi());
+							             detail.setDppBailleur(updatePpm.getDppBailleur());
+							             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
+							             detail.setDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
+							             detail.setDppApprobAno(updatePpm.getDppApprobAno());
+							             detail.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
+							             detail.setDppDateJugementOffre(updatePpm.getDppDateJugementOffre());
+							             detail.setDppDateDaoTrans(updatePpm.getDppDateDaoTrans());
+							             detail.setDppDateExecFin(updatePpm.getDppDateExecFin());
+							             detail.setDppDateExecDebut(updatePpm.getDppDateExecDebut());
+							             detail.setDppDateMarcheApprob(updatePpm.getDppDateMarcheApprob());
+							             detail.setDppDateOuvertOf(updatePpm.getDppDateOuvertOf());
+							             detail.setDppDateOuvertOt(updatePpm.getDppDateOuvertOt());
+							             detail.setDppDateElabRapport(updatePpm.getDppDateElabRapport());
+							             detail.setDppDateNegociation(updatePpm.getDppDateNegociation());
+							             detail.setDppDateAttApprobDmp(updatePpm.getDppDateDaoApprobDmp());
+							             detail.setDppDateAttApprobCpmp(updatePpm.getDppDateAttApprobCpmp());
+							             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
+							             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
+							             detail.setDppInvEntre(updatePpm.getDppInvEntre());
+							             iservice.updateObject(detail);
+					       }
 					 
 					 /*//Modification dans TDetailPlanPassation
 			    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
@@ -1502,6 +1516,7 @@ public class PpmModificationController {
 					chargeSourceFinance();
 				break;
 				case "ppm4":
+					controlPanel();
 					editForm();
 					chargeFinancementUpdate();
 					chargeGestions();
@@ -2815,5 +2830,27 @@ public class PpmModificationController {
 	public void setListeTypStruConduc(List<VTypeStructConduc> listeTypStruConduc) {
 		this.listeTypStruConduc = listeTypStruConduc;
 	}
+
+
+
+	public VModePassation getRecupModeListe() {
+		return recupModeListe;
+	}
+
+	public void setRecupModeListe(VModePassation recupModeListe) {
+		this.recupModeListe = recupModeListe;
+	}
+
+
+
+	public VModePassation getPassationListe() {
+		return passationListe;
+	}
+
+	public void setPassationListe(VModePassation passationListe) {
+		this.passationListe = passationListe;
+	}
+	
+	
 
 }

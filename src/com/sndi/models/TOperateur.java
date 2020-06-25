@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 20 juin 2020 17:16:02 by Hibernate Tools 4.3.5.Final
+// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +44,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TMotdepasse> TMotdepasses = new HashSet<TMotdepasse>(0);
 	private Set<TCritereAnalyseSpec> TCritereAnalyseSpecs = new HashSet<TCritereAnalyseSpec>(0);
+	private Set<TAnalyseOffre> TAnalyseOffres = new HashSet<TAnalyseOffre>(0);
 	private Set<TAssignation> TAssignations = new HashSet<TAssignation>(0);
 	private Set<TSeances> TSeanceses = new HashSet<TSeances>(0);
 	private Set<TTypeDemande> TTypeDemandes = new HashSet<TTypeDemande>(0);
@@ -81,16 +82,16 @@ public class TOperateur implements java.io.Serializable {
 			Set<TTiers> TTierses, Set<TFonction> TFonctions, Set<TModeleDacType> TModeleDacTypes,
 			Set<TNatures> TNatureses, Set<TDestinations> TDestinationses, Set<THistoPlanPassation> THistoPlanPassations,
 			Set<TMotdepasse> TMotdepasses, Set<TCritereAnalyseSpec> TCritereAnalyseSpecs,
-			Set<TAssignation> TAssignations, Set<TSeances> TSeanceses, Set<TTypeDemande> TTypeDemandes,
-			Set<THistoPlanGeneral> THistoPlanGenerals, Set<TModeReglement> TModeReglements,
-			Set<TTempParametre> TTempParametres, Set<TTypeSeance> TTypeSeances, Set<TTypeFonction> TTypeFonctions,
-			Set<THistoAgpm> THistoAgpms, Set<TTypeCommission> TTypeCommissions, Set<TTypePieceOffre> TTypePieceOffres,
-			Set<TAvisPresel> TAvisPreselsForAprOpeMatricule, Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeSaisie,
-			Set<TDemande> TDemandes, Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeModif,
-			Set<TParametres> TParametreses, Set<TDetCommissionSeance> TDetCommissionSeances,
-			Set<TDetailCorrection> TDetailCorrections, Set<TSoumissions> TSoumissionses,
-			Set<TCommissionType> TCommissionTypes, Set<TAvisPresel> TAvisPreselsForAprOpeMatMotif,
-			Set<TTempParam> TTempParams) {
+			Set<TAnalyseOffre> TAnalyseOffres, Set<TAssignation> TAssignations, Set<TSeances> TSeanceses,
+			Set<TTypeDemande> TTypeDemandes, Set<THistoPlanGeneral> THistoPlanGenerals,
+			Set<TModeReglement> TModeReglements, Set<TTempParametre> TTempParametres, Set<TTypeSeance> TTypeSeances,
+			Set<TTypeFonction> TTypeFonctions, Set<THistoAgpm> THistoAgpms, Set<TTypeCommission> TTypeCommissions,
+			Set<TTypePieceOffre> TTypePieceOffres, Set<TAvisPresel> TAvisPreselsForAprOpeMatricule,
+			Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeSaisie, Set<TDemande> TDemandes,
+			Set<TDetCritAnalyse> TDetCritAnalysesForDanOpeModif, Set<TParametres> TParametreses,
+			Set<TDetCommissionSeance> TDetCommissionSeances, Set<TDetailCorrection> TDetailCorrections,
+			Set<TSoumissions> TSoumissionses, Set<TCommissionType> TCommissionTypes,
+			Set<TAvisPresel> TAvisPreselsForAprOpeMatMotif, Set<TTempParam> TTempParams) {
 		this.opeMatricule = opeMatricule;
 		this.TStructure = TStructure;
 		this.opeNom = opeNom;
@@ -115,6 +116,7 @@ public class TOperateur implements java.io.Serializable {
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TMotdepasses = TMotdepasses;
 		this.TCritereAnalyseSpecs = TCritereAnalyseSpecs;
+		this.TAnalyseOffres = TAnalyseOffres;
 		this.TAssignations = TAssignations;
 		this.TSeanceses = TSeanceses;
 		this.TTypeDemandes = TTypeDemandes;
@@ -356,6 +358,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTCritereAnalyseSpecs(Set<TCritereAnalyseSpec> TCritereAnalyseSpecs) {
 		this.TCritereAnalyseSpecs = TCritereAnalyseSpecs;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<TAnalyseOffre> getTAnalyseOffres() {
+		return this.TAnalyseOffres;
+	}
+
+	public void setTAnalyseOffres(Set<TAnalyseOffre> TAnalyseOffres) {
+		this.TAnalyseOffres = TAnalyseOffres;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")

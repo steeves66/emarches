@@ -77,6 +77,10 @@ public class VUpdatePpm implements java.io.Serializable {
 	private String dppNatInt;
 	private String dppStatutAno;
 	private String dppTypeStrConduc;
+	private Date dppDateRecepFact;
+	private Date dppDateRecepLettr;
+	private Date dppDateSolFact;
+	private Date dppDateNotAtt;
 	private String lbgCode;
 	private String lbgStrCode;
 	private short lbgGesCode;
@@ -188,7 +192,9 @@ public class VUpdatePpm implements java.io.Serializable {
 			Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno,
 			Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant,
-			String dppNatInt, String dppStatutAno, String dppTypeStrConduc,String lbgCode, String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon, String lbgImputation,
+			String dppNatInt, String dppStatutAno, String dppTypeStrConduc,Date dppDateRecepFact,
+			Date dppDateRecepLettr, Date dppDateSolFact, Date dppDateNotAtt,String lbgCode, String lbgStrCode, 
+			short lbgGesCode, BigDecimal lbgResDon, String lbgImputation,
 			Long lbgAnoCode, String lbgNatCode, BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr,
 			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp, BigDecimal lbgTotDot,
 			String lbgUtilSaisi, String lbgDesCode, Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot,
@@ -260,6 +266,10 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.dppNatInt = dppNatInt;
 		this.dppStatutAno = dppStatutAno;
 		this.dppTypeStrConduc = dppTypeStrConduc;
+		this.dppDateRecepFact = dppDateRecepFact;
+		this.dppDateRecepLettr = dppDateRecepLettr;
+		this.dppDateSolFact = dppDateSolFact;
+		this.dppDateNotAtt = dppDateNotAtt;
 		this.lbgCode = lbgCode;
 		this.lbgStrCode = lbgStrCode;
 		this.lbgGesCode = lbgGesCode;
@@ -849,6 +859,42 @@ public class VUpdatePpm implements java.io.Serializable {
 
 	public void setDppTypeStrConduc(String dppTypeStrConduc) {
 		this.dppTypeStrConduc = dppTypeStrConduc;
+	}
+	
+	@Column(name = "DPP_DATE_RECEP_FACT", length = 7)
+	public Date getDppDateRecepFact() {
+		return this.dppDateRecepFact;
+	}
+
+	public void setDppDateRecepFact(Date dppDateRecepFact) {
+		this.dppDateRecepFact = dppDateRecepFact;
+	}
+
+	@Column(name = "DPP_DATE_RECEP_LETTR", length = 7)
+	public Date getDppDateRecepLettr() {
+		return this.dppDateRecepLettr;
+	}
+
+	public void setDppDateRecepLettr(Date dppDateRecepLettr) {
+		this.dppDateRecepLettr = dppDateRecepLettr;
+	}
+
+	@Column(name = "DPP_DATE_SOL_FACT", length = 7)
+	public Date getDppDateSolFact() {
+		return this.dppDateSolFact;
+	}
+
+	public void setDppDateSolFact(Date dppDateSolFact) {
+		this.dppDateSolFact = dppDateSolFact;
+	}
+
+	@Column(name = "DPP_DATE_NOT_ATT", length = 7)
+	public Date getDppDateNotAtt() {
+		return this.dppDateNotAtt;
+	}
+
+	public void setDppDateNotAtt(Date dppDateNotAtt) {
+		this.dppDateNotAtt = dppDateNotAtt;
 	}
 
 	@Column(name = "LBG_CODE", nullable = false, length = 50)

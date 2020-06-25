@@ -51,6 +51,7 @@ import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VGenerationDate;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VModePassation;
+import com.sndi.model.VModePassationPn;
 import com.sndi.model.VModeleAmi;
 import com.sndi.model.VModeleDao;
 import com.sndi.model.VModelePrq;
@@ -208,6 +209,8 @@ public class PpmController {
 		 private TMinistere recupMinistere= new TMinistere();
 		 private TFonction recupFonction= new TFonction();
 		 private VTypeMarcheFils marche = new VTypeMarcheFils();
+		 private VModePassation recupModeListe = new VModePassation();
+		 private VModePassation passationListe = new VModePassation();
 		 private VGenerationDate geneDate = new VGenerationDate();
 		 //private TTypeMarche reucpMarche = new TTypeMarche();
 		 private VTypeMarcheFils reucpMarche = new VTypeMarcheFils();
@@ -297,12 +300,16 @@ public class PpmController {
 		                 }else 
 		                      if(controleController.type == "PSPM"){
 		                    	  creerDetailPassation("PS");
+		                    	  controlPanel();
 		                 }
 		  		
 				     }
 				    
 			            return event.getNewStep();
 		    }
+		 
+		 
+		 
 		 
 		 
 
@@ -430,12 +437,25 @@ public class PpmController {
 			 
 		 }
 		 
-		 
 		 //Liste des Modes de Passation restreint
-		 public void chargeMode() {
+		/* public void chargeMode() {
 			 listeMode.clear();
 			 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));	 		 
+		 }*/
+		 
+		//Liste des Modes de Passation restreint
+		 public void chargeMode() { 
+			 //listeMode.clear();
+		     listeMode=new ArrayList<>(constantService.getListeMode());
 		 }
+		 
+		 
+		//Liste des Modes de Passation restreint
+		 public void razchargeMode() {
+			 listeMode.clear();
+			 listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));
+			 filtreModePassation="";
+		 } 
 		 
 		 
 		 //Liste des Pspm transmis par l'acteur connecté
@@ -1857,6 +1877,27 @@ public class PpmController {
 		                            }
 		 
 		 
+		 //Gestion des Panels
+		 public void controlPanel() {
+			 if(pgpm.getGpgMopCode().equalsIgnoreCase("PSC")) {
+				 controleController.etatPsc = true;
+				 controleController.etatPsl = false;
+				 controleController.etatPso = false;
+				 controleController.etatPsl_Pso = false;
+			 }else {
+				   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
+					    controleController.etatPsc = false;
+						 controleController.etatPsl = false;
+						 controleController.etatPso = true;
+						 controleController.etatPsl_Pso = true;
+				   }else {
+					   controleController.etatPsc = false;
+						 controleController.etatPsl = true;
+						 controleController.etatPso = false;
+						 controleController.etatPsl_Pso = true;
+				   }
+			 }
+		 }
 		 
 		 
 		 //Methode OnSelect pour PGSPM
@@ -2001,6 +2042,19 @@ public class PpmController {
 			 recupModePassation = new TModePassation();
 			 recupModePassation.setMopLibelleLong(modePassation.getMopLibelleLong());
 			 recupModePassation.setMopCode(modePassation.getMopCode());
+				}
+		 
+		 //
+		 public void onSelectModePassationPgspm() {
+			 detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
+
+		    recupModeListe = new VModePassation();
+		    recupModeListe.setMopLibelleLong(passationListe.getMopLibelleLong());
+		    recupModeListe.setMopCode(passationListe.getMopCode());
+		    
+		    recupPgspm.setGpgMopCode(passationListe.getMopCode());
+		    recupPgspm.setMopLibelleLong(passationListe.getMopLibelleLong());
+		    chargeMode();
 				}
 		 
 		//Fin Méthode Love 
@@ -2245,25 +2299,47 @@ public class PpmController {
     	  		
              }else 
                   if(controleController.type == "PSPM"){
-                	  detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
-            		    detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
-            		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
-            		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
-            		    detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-            		    detailPass.setDppTypeStrConduc(strucCond);
-            		    detailPass.setTPlanPassation(planPass);
-            		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-            		    detailPass.setDppTypePlan(typePlan);
-            		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-            		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
-            		    detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
-           	  		    detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
-            		    detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
-            		    detailPass.setTStatut(new TStatut("S1S"));
-            		    detailPass.setDppStatutRetour("0");
-            		    detailPass.setDppStatutDao("N");
-            		    iservice.addObject(detailPass); 
-            		   
+                	  
+                	  if(passationListe.getMopCode() == null) {
+                		detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
+              		    detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
+              		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+              		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
+              		    detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+              		    detailPass.setDppTypeStrConduc(strucCond);
+              		    detailPass.setTPlanPassation(planPass);
+              		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+              		    detailPass.setDppTypePlan(typePlan);
+              		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+              		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+              		    detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+             	  		detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+              		    detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+              		    detailPass.setTStatut(new TStatut("S1S"));
+              		    detailPass.setDppStatutRetour("0");
+              		    detailPass.setDppStatutDao("N");
+              		    iservice.addObject(detailPass); 
+                	    }else {
+                	    	detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
+                		    detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
+                		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+                		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
+                		    detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+                		    detailPass.setDppTypeStrConduc(strucCond);
+                		    detailPass.setTPlanPassation(planPass);
+                		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+                		    detailPass.setDppTypePlan(typePlan);
+                		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+                		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
+                		    detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
+               	  		    detailPass.setDppFonCodDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+                		    detailPass.setDppDateSaisie(Calendar.getInstance().getTime());
+                		    detailPass.setTStatut(new TStatut("S1S"));
+                		    detailPass.setDppStatutRetour("0");
+                		    detailPass.setDppStatutDao("N");
+                		    iservice.addObject(detailPass); 
+                	    }
+	   
              } 
 	  		
 	  	 }
@@ -4776,6 +4852,33 @@ public class PpmController {
 	}
 	public void setPublicationListe(List<VPpmliste> publicationListe) {
 		this.publicationListe = publicationListe;
+	}
+
+	public List<VPpmliste> getListePspm() {
+		return listePspm;
+	}
+
+	public void setListePspm(List<VPpmliste> listePspm) {
+		this.listePspm = listePspm;
+	}
+
+
+	public VModePassation getRecupModeListe() {
+		return recupModeListe;
+	}
+
+	public void setRecupModeListe(VModePassation recupModeListe) {
+		this.recupModeListe = recupModeListe;
+	}
+
+
+
+	public VModePassation getPassationListe() {
+		return passationListe;
+	}
+
+	public void setPassationListe(VModePassation passationListe) {
+		this.passationListe = passationListe;
 	}
 	
 	
