@@ -426,15 +426,28 @@ public class TableauBordController {
 								 /*
 								  Compteur pour le Directeur des Marchés Publics
 								   */
+							     
+							     //Tableau de bord
+							     private String condition="";
+							     private String valeur="";
 		//Test tableau de bord
 		private List<VTabBord> listeTableauBord = new ArrayList<VTabBord>();
 		private VTabBord tableauBord = new VTabBord();
 		
-		public void ChargeTbAcAgpm() {
+		public void ChargeTbAgpm() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				condition="CODE_AC";
+				valeur=""+userController.getSlctd().getTFonction().getFonCod();
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 condition="CODE_PF";
+					 valeur=""+userController.getSlctd().getTFonction().getTStructure().getStrCode();
+				 }
+			   }
 			listeTableauBord.clear();
 			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
-					new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+					new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur));
 			if (!listeTableauBord.isEmpty()) {
 				tableauBord=listeTableauBord.get(0);
 			}
@@ -5689,6 +5702,22 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setTableauBord(VTabBord tableauBord) {
 		this.tableauBord = tableauBord;
+	}
+
+	public String getCondition() {
+		return condition;
+	}
+
+	public void setCondition(String condition) {
+		this.condition = condition;
+	}
+
+	public String getValeur() {
+		return valeur;
+	}
+
+	public void setValeur(String valeur) {
+		this.valeur = valeur;
 	}
 
 
