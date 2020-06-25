@@ -20,6 +20,7 @@ public class TModePassation implements java.io.Serializable {
 	private String mopCode;
 	private String mopLibelleCourt;
 	private String mopLibelleLong;
+	private String mopTypPlan;
 	private Set<TDetailPlanGeneral> TDetailPlanGenerals = new HashSet<TDetailPlanGeneral>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 
@@ -36,11 +37,12 @@ public class TModePassation implements java.io.Serializable {
 		this.mopLibelleCourt = mopLibelleCourt;
 	}
 
-	public TModePassation(String mopCode, String mopLibelleCourt, String mopLibelleLong,
+	public TModePassation(String mopCode, String mopLibelleCourt, String mopLibelleLong,String mopTypPlan,
 			Set<TDetailPlanGeneral> TDetailPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
+		this.mopTypPlan = mopTypPlan;
 		this.TDetailPlanGenerals = TDetailPlanGenerals;
 		this.TDetailPlanPassations = TDetailPlanPassations;
 	}
@@ -72,6 +74,15 @@ public class TModePassation implements java.io.Serializable {
 
 	public void setMopLibelleLong(String mopLibelleLong) {
 		this.mopLibelleLong = mopLibelleLong;
+	}
+	
+	@Column(name = "MOP_TYP_PLAN", length = 10)
+	public String getMopTypPlan() {
+		return this.mopTypPlan;
+	}
+
+	public void setMopTypPlan(String mopTypPlan) {
+		this.mopTypPlan = mopTypPlan;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModePassation")

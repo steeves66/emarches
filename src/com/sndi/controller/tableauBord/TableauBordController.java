@@ -18,7 +18,7 @@ import com.sndi.model.TOffrePieceDac;
 import com.sndi.model.VAgpmliste;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VPgpm;
-import com.sndi.model.VTabBordAc;
+import com.sndi.model.VTabBord;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -427,41 +427,41 @@ public class TableauBordController {
 								  Compteur pour le Directeur des Marchés Publics
 								   */
 		//Test tableau de bord
-		private List<VTabBordAc> listeTbAc = new ArrayList<VTabBordAc>();
-		private VTabBordAc tableauBord = new VTabBordAc();
+		private List<VTabBord> listeTableauBord = new ArrayList<VTabBord>();
+		private VTabBord tableauBord = new VTabBord();
 		
 		public void ChargeTbAcAgpm() {
-			listeTbAc.clear();
-			listeTbAc =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
+			listeTableauBord.clear();
+			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
 					new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
-			if (!listeTbAc.isEmpty()) {
-				tableauBord=listeTbAc.get(0);
+			if (!listeTableauBord.isEmpty()) {
+				tableauBord=listeTableauBord.get(0);
 			}
 		}
 		
 		//PGPM,PGSPM,PPM,PSPM
 		public void ChargeTbAcProcedure(String typeProc, String type) {
-			listeTbAc.clear();
-			listeTbAc =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
+			listeTableauBord.clear();
+			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP",WhereClause.Comparateur.EQ,""+type),
 					new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 					new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
-			if (!listeTbAc.isEmpty()) {
-				tableauBord=listeTbAc.get(0);
+			if (!listeTableauBord.isEmpty()) {
+				tableauBord=listeTableauBord.get(0);
 			}
 		}
 		
 		
 		//DAC
 		public void ChargeTbAcDac(String typeProc, String typeDac) {
-			listeTbAc.clear();
-			listeTbAc =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
+			listeTableauBord.clear();
+			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 					new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
 					new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
-			if (!listeTbAc.isEmpty()) {
-				tableauBord=listeTbAc.get(0);
+			if (!listeTableauBord.isEmpty()) {
+				tableauBord=listeTableauBord.get(0);
 			}
 		}
 		//Fin Test tableau de bor
@@ -5675,26 +5675,21 @@ public int getAmiTransmisDmpDossier(String src){
 	}
 
 
-
-	public List<VTabBordAc> getListeTbAc() {
-		return listeTbAc;
+	public List<VTabBord> getListeTableauBord() {
+		return listeTableauBord;
 	}
 
-
-
-	public void setListeTbAc(List<VTabBordAc> listeTbAc) {
-		this.listeTbAc = listeTbAc;
+	public void setListeTableauBord(List<VTabBord> listeTableauBord) {
+		this.listeTableauBord = listeTableauBord;
 	}
 
-
-
-	public VTabBordAc getTableauBord() {
+	public VTabBord getTableauBord() {
 		return tableauBord;
 	}
 
-
-
-	public void setTableauBord(VTabBordAc tableauBord) {
+	public void setTableauBord(VTabBord tableauBord) {
 		this.tableauBord = tableauBord;
 	}
+
+
 }
