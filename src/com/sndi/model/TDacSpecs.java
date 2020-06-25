@@ -32,6 +32,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private TStructure TStructure;
 	private TGestion TGestion;
 	private TTypeMarche TTypeMarche;
+	private TModeleDacType TModeleDacType;
 	private TTypeDacSpecs TTypeDacSpecs;
 	private String dacObjet;
 	private Date dacDteSaisi;
@@ -68,7 +69,7 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public TDacSpecs(String dacCode, TFonction TFonctionByDacFonCodeCpmp, TFonction TFonctionByDacFonCodAc,
 			TModePassation TModePassation, TStatut TStatut, TStructure TStructure,
-			TGestion TGestion, TTypeMarche TTypeMarche, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
+			TGestion TGestion, TTypeMarche TTypeMarche, TModeleDacType TModeleDacType, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
@@ -82,6 +83,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TStructure = TStructure;
 		this.TGestion = TGestion;
 		this.TTypeMarche = TTypeMarche;
+		this.TModeleDacType = TModeleDacType;
 		this.TTypeDacSpecs = TTypeDacSpecs;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -188,6 +190,16 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTTypeMarche(TTypeMarche TTypeMarche) {
 		this.TTypeMarche = TTypeMarche;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_MOD_TYPE")
+	public TModeleDacType getTModeleDacType() {
+		return this.TModeleDacType;
+	}
+
+	public void setTModeleDacType(TModeleDacType TModeleDacType) {
+		this.TModeleDacType = TModeleDacType;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)

@@ -52,6 +52,7 @@ import com.sndi.model.TLibelleAdresse;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TModePassation;
 import com.sndi.model.TModeReglement;
+import com.sndi.model.TModeleDacType;
 import com.sndi.model.TNatureDocuments;
 import com.sndi.model.TOffrePieceDac;
 import com.sndi.model.TPiecesDacs;
@@ -1598,60 +1599,47 @@ public class DaoController {
 		 
 			 
 			 
-		    //Premier enregistrement DAC en fonction du type et du plan
-		    public void saveDao(){	
-		    	 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-		    		 saveDac("PN","DAO");	
-				 }else {
-					 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
-						 saveDac("PS","DAO"); 
+			  //Premier enregistrement DAC en fonction du type et du plan
+			    public void saveDao(){	
+			    	 if(controleController.type == "DAC") {
+			    		 saveDac("DAO");	
 					 }else {
-						 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
-							 saveDac("PN","AMI");
+						 if(controleController.type == "DAC") {
+							 saveDac("DAO"); 
 						 }else {
-							 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
-								 saveDac("PN","PRQ");
-							 }/*else {
-								 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-								 
-								 }else {
-									 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
+							 if(controleController.type == "AMI") {
+								 saveDac("AMI");
+							 }else {
+								 if(controleController.type == "PRQ") {
+									 saveDac("PRQ");
+								 }/*else {
+									 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
+									 
+									 }else {
+										 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
+										 }
 									 }
-								 }
-							 }*/
-						 }
-				     } 
-				   }
-		 		 /*  if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-		 			  saveDac("PN","DAO");
-	              }else 
-	                   if(controleController.type == "AMI"){
-	                 	  saveDac("PN","AMI"); 
-	                   }*/
-		     }
+								 }*/
+							 }
+					     } 
+					   }
+			 		 /*  if(controleController.type == "DAC" && controleController.typePlan == "PN") {
+			 			  saveDac("PN","DAO");
+		              }else 
+		                   if(controleController.type == "AMI"){
+		                 	  saveDac("PN","AMI"); 
+		                   }*/
+			     }
 		    
 		//Initiation du DAO en procédure normale 
 	     @Transactional
-	     public void saveDac(String typePlan,String typeDac) {
+	     public void saveDac(String typeDac) {
 	    	 if(daoDetail.getTymCode().equalsIgnoreCase("") || "".equals(daoDetail.getTymCode()) || daoDetail.getMopCode().equalsIgnoreCase("") || "".equalsIgnoreCase(daoDetail.getMopCode()) 
 	    			 || daoDetail.getDppObjet().equalsIgnoreCase("") || "".equals(daoDetail.getDppObjet()) ) {
 	    		 //Message d'Erreur
 	    		 FacesContext.getCurrentInstance().addMessage(null,
 		         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez sélectionnez votre PPM, puis faites OK!", ""));
-	    	 }else {
-	    		 daoTab = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-	    			     new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-						new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-	    	 if (!daoTab.isEmpty()) {
-					dao = daoTab.get(0);
-					iservice.updateObject(dao);
-					
-					userController.setTexteMsg(typeDac+"N ° "+dao.getDacCode()+" mis à jour avec succès!");
-					userController.setRenderMsg(true);
-					userController.setSevrityMsg("success");
-					
-			    }else {
-			    	
+	    	 }else 
 		 			    //Insertion des pièces constitutives du DAO 
 		 			     if(listSelectionTypePieces.size()==0) {
 		 						FacesContext.getCurrentInstance().addMessage(null,
@@ -1672,7 +1660,8 @@ public class DaoController {
 		 				    	 dao.setTFonctionByDacFonCodAc(userController.getSlctd().getTFonction());
 		 				    	 dao.setTGestion(new TGestion(gesCode));
 		 				    	 dao.setTTypeDacSpecs(new TTypeDacSpecs(""+typeDac));
-		 				    	 dao.setDacTypePlan(""+typePlan);
+		 				    	 dao.setTModeleDacType(new TModeleDacType(""+daoDetail.getDppPieceDao()));
+		 				    	 dao.setDacTypePlan(""+daoDetail.getDppTypePlan());
 		 				    	 dao.setDacBailleur(daoDetail.getDppBailleur());
 		 				    	 iservice.addObject(dao);
                                 //Recherche
@@ -1728,8 +1717,8 @@ public class DaoController {
 			    	
 			    					//Insertion des pièces
 			          }
-	    	        }
-	          }
+	    	        
+	          
 	     
 	 	//Methode d'historisation
 		 
