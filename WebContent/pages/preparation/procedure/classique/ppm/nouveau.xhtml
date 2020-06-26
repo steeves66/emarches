@@ -22,12 +22,12 @@
             </li>
         <li>
         <p:commandLink action="#{ppmController.renderPage('pgpmAc1')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>PPM | Index
+            <i class="fa fa-dashboard"></i>#{controleController.type}| Index
              </p:commandLink>
             </li>
         <li class="active">
-         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>PPM | SAISIE 
+         <p:commandLink action="#{ppmController.renderPage('ppm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | SAISIE 
            <!--  #{controleController.libelle1}  -->
              </p:commandLink>
         </li>
@@ -56,6 +56,7 @@
         <!-- /.box-header -->
         <!-- /.box-header -->
         <p:wizard flowListener="#{ppmController.onFlowProcess}"  nextLabel="Suivant" backLabel="Précédent" >
+        
 	      <p:tab id="ope111" title="Saisie des Operations" titleStyle="background-color: #f88b2e;background-image: none">
 	      
 	        <div class="box box-success box-solid">
@@ -126,7 +127,6 @@
 		                 </td>
 		                 </tr>
                      </table>
-		    <!--   <p:inputText id="typMa2" type="text" value="#{ppmController.recupPgpm.gpgTymCode} : #{ppmController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /> -->
                   </div>
                 </div>
                 </h:panelGroup>
@@ -145,7 +145,6 @@
 		                 </td>
 		                 </tr>
                      </table>
-		          <!-- <p:inputText id="typMa21" type="text" value="#{ppmController.recupPgspm.gpgTymCode} : #{ppmController.recupPgspm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /> -->
                   </div>
                 </div>
                 </h:panelGroup>
@@ -433,36 +432,35 @@
                 </div>
            </div>
              </div>
-             
-             
              </div>
-			        </p:tab>
-			        
-			         <p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
+	</p:tab>
+		--------------------------	        
+	<p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
 			         <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
      <div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
-         </div>
-          <div class="box-body">
-          <div class="row"> 
-          
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+            
             <div class="col-md-6">
-            <div class="form-group">
-            <label for="moldao" class="col-sm-6 control-label">Modèle Dao<span style="color:red;"> *</span></label>
+            <label for="moldao2" class="col-sm-6 control-label">Dao Type</label>
             <div class="col-sm-6">
-                    <p:selectOneMenu id="moldao" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldao2" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
 		       	</p:selectOneMenu>
-                  </div>
+	         </div>
             </div>
-            </div>
-          
-          
+            
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
              <div class="col-md-6">
              <h:panelGroup rendered="#{controleController.validDMP}"> 
 		    <div class="form-group">
@@ -765,22 +763,12 @@
          
          </div>  
      
-     
-     
-     
-     
-     
          </div>
          
          </div>
-         
-        
        </div>
-			        </p:tab>
+			      </p:tab>
 			        </p:wizard>
-			         
-            
-        
         </div>
 	 </div>
     

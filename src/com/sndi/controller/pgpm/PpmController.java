@@ -300,12 +300,21 @@ public class PpmController {
 						} 
 		  			 
 		                 if(controleController.type == "PPM") {
-						      //creerDetailPassation();
-		                	 creerDetailPassation("PN");
+						        if(modePassation.getMopTypPlan() == null) {
+						        	creerDetailPassation(modePassation.getMopTypPlan());
+						        }else {
+						        	creerDetailPassation(pgpm.getMopTypPlan());
+						        }
+		                	 //creerDetailPassation("PN");
 		                	 recupModeleDao();
 		                 }else 
 		                      if(controleController.type == "PSPM"){
-		                    	  creerDetailPassation("PS");
+		                    	  if(passationListe.getMopTypPlan() == null) {
+		                    		creerDetailPassation(passationListe.getMopTypPlan());
+		                    	  }else {
+		                    		 creerDetailPassation(pgpm.getMopTypPlan());  
+		                    	  }
+		                    	  //creerDetailPassation("PS");
 		                    	  recupModeleDao();
 		                    	  controlPanel();
 		                 }
@@ -2334,7 +2343,7 @@ public class PpmController {
             	 
             	 if(modePassation.getMopCode() == null) {
         	  		detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
-        	  		detailPass.setDppTypePlan(typePlan);
+        	  		detailPass.setDppTypePlan(pgpm.getGpgTypePlan());
         	  	  }else {
         	  		detailPass.setTModePassation(new TModePassation(modePassation.getMopCode()));
         	  		detailPass.setDppTypePlan(modePassation.getMopTypPlan());
@@ -3566,6 +3575,7 @@ public class PpmController {
 					 //chargeDataAvaliderPpm();
 					chargePpmPUB();
 					 vider();
+					 userController.initMessage();
 					_logger.info("value: "+value+" action "+action);	
 					break;
 				case "ppm2":
@@ -3578,6 +3588,7 @@ public class PpmController {
 					chargeSourceFinance();
 					chargeImputation();
 					vider();
+					userController.initMessage();
 				break;
 				case "ppm4":
 					editForm();
@@ -3589,6 +3600,7 @@ public class PpmController {
 					chargeModePassation();
 					chargePgpm();
 					chargeSourceFinance();
+					userController.initMessage();
 				break;
 				case "pspm1": 
 	                    chargeData("PS");
@@ -3596,6 +3608,7 @@ public class PpmController {
 	                    tableauBordController.ChargeTbAcProcedure("PS","PPM");
 	                    chargePpmPUB();
 		 			//chargeDataAvaliderPspm();
+	                    userController.initMessage();
 		 			_logger.info("value: "+value+" action: "+action);
 				break;
 			    }
