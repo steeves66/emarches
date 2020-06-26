@@ -111,7 +111,7 @@ public class AgpmController {
 		chargeAgpmValDmp();
 		chargeAgpmDifCp();
 		chargeAgpmDifDmp();
-		tableauBordController.ChargeTbAgpm();
+		//tableauBordController.ChargeTbAgpm();
 		
 	 }
 	 
@@ -344,7 +344,7 @@ public class AgpmController {
 								new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 								new WhereClause("AGP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 					         // new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-					 tableauBordController.chargeDataAgpm();
+					 tableauBordController.ChargeTbAgpm();
 					 multiFiltre="";
 						_logger.info("agpmListe size: "+agpmListe.size()); 
 					 
@@ -355,7 +355,7 @@ public class AgpmController {
 									"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 									new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
 							     //new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-							tableauBordController.chargeDataAgpm();
+						 tableauBordController.ChargeTbAgpm();
 							multiFiltre="";
 								_logger.info("agpmListe size: "+agpmListe.size());
 					 }else {
@@ -365,7 +365,7 @@ public class AgpmController {
 										"AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 										new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
 								//new WhereClause("FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-								tableauBordController.chargeDataAgpm(); 
+							 tableauBordController.ChargeTbAgpm();
 								multiFiltre="";
 									_logger.info("objetListe size: "+agpmListe.size());
 						 }
@@ -640,7 +640,6 @@ public class AgpmController {
 						new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 						new WhereClause("AGP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
 						new WhereClause("AGP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-					     tableauBordController.chargeDataAgpm(); 
 						_logger.info("agpmListe size: "+agpmListe.size());
 					 }else 
 					      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")){
@@ -1530,7 +1529,7 @@ public class AgpmController {
 								  //chargeDataAvalider();
 								  chargeAgpmDifCp(); 
 								  chargeAgpmDifDmp();
-								  tableauBordController.chargeDataAgpm();
+								  tableauBordController.ChargeTbAgpm();
 								  userController.setTexteMsg(" Désolé, votre Agpm a été rejeté!");
 								  userController.setRenderMsg(true);
 								  userController.setSevrityMsg("success");
@@ -1596,7 +1595,7 @@ public class AgpmController {
 								  //chargeDataAvalider();
 								  chargeAgpmDifCp(); 
 								  chargeAgpmDifDmp();
-								  tableauBordController.chargeDataAgpm();
+								  tableauBordController.ChargeTbAgpm();
 								  userController.setTexteMsg("Désolé, votre Agpm a été retourner!");
 								  userController.setRenderMsg(true);
 								  userController.setSevrityMsg("success");	

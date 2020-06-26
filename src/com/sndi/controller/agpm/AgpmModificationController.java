@@ -306,7 +306,7 @@ public class AgpmModificationController {
 						new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
 						new WhereClause("AFF_AGP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				 
-				     tableauBordController.chargeDataAgpm(); 
+				 tableauBordController.ChargeTbAgpm(); 
 					_logger.info("affichageListe size: "+affichageListe.size());	
 			}
 		 
@@ -319,7 +319,7 @@ public class AgpmModificationController {
 					 validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
 								"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 								new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
-					 tableauBordController.chargeDataAgpm();
+					 tableauBordController.ChargeTbAgpm(); 
 						_logger.info("validationListe size: "+validationListe.size()); 
 					 
 				 }else {
@@ -328,7 +328,7 @@ public class AgpmModificationController {
 							validationListe = (List<TAffichageAgpm>) iservice.getObjectsByColumnInDesc("TAffichageAgpm", new ArrayList<String>(Arrays.asList("AFF_ID")),
 									"AFF_AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 									new WhereClause("AFF_AGP_ACTIF",WhereClause.Comparateur.EQ,"1"));
-							tableauBordController.chargeDataAgpm(); 
+							 tableauBordController.ChargeTbAgpm();  
 								_logger.info("objetListe size: "+validationListe.size());
 					 }
 			     } 

@@ -19,6 +19,7 @@ import com.sndi.model.VAgpmliste;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VPgpm;
 import com.sndi.model.VTabBord;
+import com.sndi.model.VTabBordDmp;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -434,27 +435,47 @@ public class TableauBordController {
 							     private String valeur1="";
 		//Test tableau de bord
 		private List<VTabBord> listeTableauBord = new ArrayList<VTabBord>();
+		private List<VTabBordDmp> listeTableauBordDmp = new ArrayList<VTabBordDmp>();
 		private VTabBord tableauBord = new VTabBord();
-		
+		private VTabBordDmp tableauBordDmp = new VTabBordDmp();
+
+		//TABLEAU DE BORD AGPM
 		public void ChargeTbAgpm() {
+			//AC
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				condition="CODE_AC";
-				valeur=""+userController.getSlctd().getTFonction().getFonCod();
+				 listeTableauBord.clear();
+					listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+							new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
+							new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+					if (!listeTableauBord.isEmpty()) {
+						tableauBord=listeTableauBord.get(0);
+					}
 			 }else {
+				 //CPMP
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-					 condition="CODE_PF";
-					 valeur=""+userController.getSlctd().getTFonction().getTStructure().getStrCode();
+					 listeTableauBord.clear();
+						listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+								new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
+								new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+						if (!listeTableauBord.isEmpty()) {
+							tableauBord=listeTableauBord.get(0);
+						}
+				 }else {
+					 //DMP ET SPP
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") 
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						 listeTableauBordDmp.clear();
+						 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+									new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"));
+							if (!listeTableauBordDmp.isEmpty()) {
+								tableauBordDmp=listeTableauBordDmp.get(0);
+							}
+					 }
 				 }
 			   }
-			listeTableauBord.clear();
-			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
-					new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
-					new WhereClause(""+condition,WhereClause.Comparateur.EQ,valeur));
-			if (!listeTableauBord.isEmpty()) {
-				tableauBord=listeTableauBord.get(0);
-			}
+			
 		}
-		
+		//FIN TABLEAU DE BORD AGPM	
 		//PGPM,PGSPM,PPM,PSPM
 		public void ChargeTbAcProcedure(String typeProc, String type) {
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -498,7 +519,7 @@ public class TableauBordController {
 		
 	
 		
-		public void chargeDataAgpm() {
+		/*public void chargeDataAgpm() {
 			   //Début AGPM
 			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				//agpmAcAttenteTransfert = ""+getAgpmAcAttenteTransfert("S1S","S2D","SDR");
@@ -524,7 +545,7 @@ public class TableauBordController {
 					 }
 			     } 
 			   }
-		}
+		}*/
 		
 		//Tableau de Bord pour PGPM
 		public void chargeDataPgpm() {
@@ -5750,6 +5771,22 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setValeur1(String valeur1) {
 		this.valeur1 = valeur1;
+	}
+
+	public List<VTabBordDmp> getListeTableauBordDmp() {
+		return listeTableauBordDmp;
+	}
+
+	public void setListeTableauBordDmp(List<VTabBordDmp> listeTableauBordDmp) {
+		this.listeTableauBordDmp = listeTableauBordDmp;
+	}
+
+	public VTabBordDmp getTableauBordDmp() {
+		return tableauBordDmp;
+	}
+
+	public void setTableauBordDmp(VTabBordDmp tableauBordDmp) {
+		this.tableauBordDmp = tableauBordDmp;
 	}
 
 
