@@ -42,6 +42,7 @@ public class VPgpmFonction implements java.io.Serializable {
 	private String tymLibelleCourt;
 	private String tymTymCode;
 	private String mopLibelleLong;
+	private String mopTypPlan;
 	private String plgFonCod;
 	private String fonLibelle;
 
@@ -65,7 +66,7 @@ public class VPgpmFonction implements java.io.Serializable {
 			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin,String gpgLibFin,String gpgFonCodPf,
 			String gpgFonCodDmp, Date gpgDateDao, String gpgActeurSaisie,
 			String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, String tymLibelleCourt,String tymTymCode,
-			String mopLibelleLong, String plgFonCod, String fonLibelle) {
+			String mopLibelleLong, String mopTypPlan, String plgFonCod, String fonLibelle) {
 		this.gpgId = gpgId;
 		this.gpgPlgId = gpgPlgId;
 		this.gpgAgpId = gpgAgpId;
@@ -90,6 +91,7 @@ public class VPgpmFonction implements java.io.Serializable {
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.tymTymCode = tymTymCode;
 		this.mopLibelleLong = mopLibelleLong;
+		this.mopTypPlan = mopTypPlan;
 		this.plgFonCod = plgFonCod;
 		this.fonLibelle = fonLibelle;
 	}
@@ -311,6 +313,15 @@ public class VPgpmFonction implements java.io.Serializable {
 
 	public void setMopLibelleLong(String mopLibelleLong) {
 		this.mopLibelleLong = mopLibelleLong;
+	}
+	
+	@Column(name = "MOP_TYP_PLAN", length = 10)
+	public String getMopTypPlan() {
+		return this.mopTypPlan;
+	}
+
+	public void setMopTypPlan(String mopTypPlan) {
+		this.mopTypPlan = mopTypPlan;
 	}
 
 	@Column(name = "PLG_FON_COD", nullable = false, length = 12)
