@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-09T13:56:58 -->
+<!-- 2020-06-26T15:58:16 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_psc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e771a51-deef-488c-b7c0-9a03b76eebc6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -128,6 +128,13 @@ and dps.dpp_id= $P{param_code}]]>
 	<field name="DPP_FON_COD_PF" class="java.lang.String"/>
 	<field name="DPP_FON_COD_DMP" class="java.lang.String"/>
 	<field name="DPP_MONTANT" class="java.math.BigDecimal"/>
+	<field name="DPP_NAT_INT" class="java.lang.String"/>
+	<field name="DPP_TYPE_STR_CONDUC" class="java.lang.String"/>
+	<field name="DPP_STATUT_ANO" class="java.lang.String"/>
+	<field name="DPP_DATE_SOL_FACT" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_RECEP_FACT" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_RECEP_LETTR" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_NOT_ATT" class="java.sql.Timestamp"/>
 	<field name="TYM_LIBELLE_LONG" class="java.lang.String"/>
 	<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
@@ -304,7 +311,7 @@ and dps.dpp_id= $P{param_code}]]>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="1" y="224" width="554" height="117" uuid="f65743f4-2a14-4548-8fbc-8886c146e9bf"/>
+				<reportElement x="1" y="224" width="554" height="89" uuid="f65743f4-2a14-4548-8fbc-8886c146e9bf"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -319,66 +326,64 @@ and dps.dpp_id= $P{param_code}]]>
 					<text><![CDATA[DATES PREVISIONNELLES]]></text>
 				</staticText>
 				<textField isBlankWhenNull="true">
-					<reportElement x="4" y="25" width="169" height="21" uuid="ae31b748-19b2-4621-9dbb-96f7d92fe042"/>
+					<reportElement x="2" y="23" width="176" height="21" uuid="ae31b748-19b2-4621-9dbb-96f7d92fe042">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
 					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Transmission DC :"+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_DAO_TRANS})]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Sollicitation des Factures :"+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SOL_FACT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="364" y="26" width="187" height="21" uuid="791f381f-6ebe-4841-805c-859338ffe7b1"/>
+					<reportElement x="363" y="23" width="190" height="21" uuid="454fb39e-652a-4be2-96fd-bcf8634f9b80"/>
 					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Approbation Bailleur  : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_ATT_APPRO_BAIL})]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Notification Attribution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_NOT_ATT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="364" y="48" width="187" height="21" uuid="454fb39e-652a-4be2-96fd-bcf8634f9b80"/>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Négociation : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_NEGOCIATION})]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="178" y="47" width="182" height="21" uuid="66dd425a-5fe2-41ad-85b4-25e5a177cc98"/>
+					<reportElement x="177" y="23" width="184" height="21" uuid="66dd425a-5fe2-41ad-85b4-25e5a177cc98"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Signature de l'AC : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="4" y="47" width="169" height="21" uuid="b130e1fc-24be-4ee0-be38-d61c53a96090"/>
+					<reportElement x="2" y="45" width="176" height="21" uuid="b130e1fc-24be-4ee0-be38-d61c53a96090"/>
 					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Validation DC par CPMP : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_DAO_APPROB_DMP})]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Reception des Factures : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_RECEP_FACT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="4" y="69" width="169" height="21" uuid="ebb87ca3-783c-459d-8493-9b64a17ec09c"/>
+					<reportElement x="2" y="67" width="176" height="21" uuid="ebb87ca3-783c-459d-8493-9b64a17ec09c">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
 					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Validation DC Bailleur : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_DAO_APPROB_BAIL})]]></textFieldExpression>
+					<textFieldExpression><![CDATA["Signature Attributaire : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="178" y="91" width="182" height="21" uuid="4d4cc817-0a8a-42f6-9d21-9eead915d7fd"/>
+					<reportElement x="177" y="67" width="184" height="21" uuid="4d4cc817-0a8a-42f6-9d21-9eead915d7fd"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Offre Financière : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_OUVERT_OF})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="178" y="69" width="182" height="21" uuid="f501be70-b041-454a-968e-d9afb306d20b"/>
+					<reportElement x="177" y="45" width="184" height="21" uuid="f501be70-b041-454a-968e-d9afb306d20b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Offre Technique : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_OUVERT_OT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="364" y="70" width="187" height="21" uuid="beed93a0-8070-42f2-a02f-cffec3aa7d8e"/>
+					<reportElement x="363" y="45" width="190" height="21" uuid="beed93a0-8070-42f2-a02f-cffec3aa7d8e">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Début d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_EXEC_DEBUT})]]></textFieldExpression>
 				</textField>
 				<textField isBlankWhenNull="true">
-					<reportElement x="365" y="92" width="186" height="21" uuid="4061ab51-8dc4-4b30-a7e3-dc0868bed72b"/>
+					<reportElement x="364" y="67" width="190" height="21" uuid="4061ab51-8dc4-4b30-a7e3-dc0868bed72b"/>
 					<textElement verticalAlignment="Middle"/>
 					<textFieldExpression><![CDATA["Fin d'exécution : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_EXEC_FIN})]]></textFieldExpression>
-				</textField>
-				<textField isBlankWhenNull="true">
-					<reportElement x="180" y="26" width="179" height="21" uuid="15e1f12e-685b-4069-af3f-2f887ae83c22"/>
-					<textElement verticalAlignment="Middle"/>
-					<textFieldExpression><![CDATA["Signature Attributaire : "+new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
 				</textField>
 			</frame>
 			<line>
 				<reportElement x="2" y="245" width="553" height="1" uuid="089ecc9d-7896-49f0-9359-8a2e92a5e5b9"/>
 			</line>
 			<frame>
-				<reportElement x="0" y="343" width="555" height="21" uuid="d4af95c7-a5c7-4e00-b54f-ce4e99bff855"/>
+				<reportElement x="0" y="315" width="555" height="21" uuid="d4af95c7-a5c7-4e00-b54f-ce4e99bff855"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -394,7 +399,7 @@ and dps.dpp_id= $P{param_code}]]>
 				</staticText>
 			</frame>
 			<componentElement>
-				<reportElement x="0" y="366" width="555" height="61" uuid="41a4a10f-e22c-4742-975c-106ee288ab56">
+				<reportElement x="0" y="338" width="555" height="61" uuid="41a4a10f-e22c-4742-975c-106ee288ab56">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
