@@ -661,25 +661,25 @@ public class DaoController {
 		 
 		 public void typeActionTb() {
 			 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
-				 tableauBordController.ChargeTbAcDac("PN","DAO");
+				 tableauBordController.ChargeTableauBord("PN","DAO");
 				 //Enlever lorsque j'aurai le TB cpmp et DMP
-	    		 tableauBordController.chargeDataDao("PN","DAO");
+	    		 tableauBordController.ChargeTableauBord("PN","DAO");
 	    		 
 			 }else {
 				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
-					 tableauBordController.ChargeTbAcDac("PS","DAO");
+					 tableauBordController.ChargeTableauBord("PS","DAO");
 					//Enlever lorsque j'aurai le TB cpmp et DMP
 					 tableauBordController.chargeDataDao("PS","DAO");
 				 }else {
 					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
-						 tableauBordController.ChargeTbAcDac("PN","AMI");
+						 tableauBordController.ChargeTableauBord("PN","AMI");
 						//Enlever lorsque j'aurai le TB cpmp et DMP
 						 tableauBordController.chargeDataDao("PN","AMI");
 						 ;
 					 }else {
 						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
 							//Enlever lorsque j'aurai le TB cpmp et DMP
-							 tableauBordController.ChargeTbAcDac("PN","PRQ");
+							 tableauBordController.ChargeTableauBord("PN","PRQ");
 							 tableauBordController.chargeDataDao("PN","PRQ");
 							 
 						 }

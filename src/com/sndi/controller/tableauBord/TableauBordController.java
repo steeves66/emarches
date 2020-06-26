@@ -430,6 +430,8 @@ public class TableauBordController {
 							     //Tableau de bord
 							     private String condition="";
 							     private String valeur="";
+							     private String condition1="";
+							     private String valeur1="";
 		//Test tableau de bord
 		private List<VTabBord> listeTableauBord = new ArrayList<VTabBord>();
 		private VTabBord tableauBord = new VTabBord();
@@ -455,24 +457,38 @@ public class TableauBordController {
 		
 		//PGPM,PGSPM,PPM,PSPM
 		public void ChargeTbAcProcedure(String typeProc, String type) {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					condition="CODE_AC";
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+						 condition="CODE_PF";
+					 }
+				   }
 			listeTableauBord.clear();
 			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP",WhereClause.Comparateur.EQ,""+type),
 					new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
-					new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+			        new WhereClause(""+condition,WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
 			if (!listeTableauBord.isEmpty()) {
 				tableauBord=listeTableauBord.get(0);
 			}
 		}
 		
 		
-		//DAC
-		public void ChargeTbAcDac(String typeProc, String typeDac) {
+		//Tableau de bord AC CPMP en pgpm,pgspm,ppm,pspm,DAO(PN,PS),AMI(PN,PS),PRQ(PN,PS)
+		public void ChargeTableauBord(String typeProc, String typeDac) {
+			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				condition="CODE_AC";
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 condition="CODE_PF";
+				 }
+			   }
 			listeTableauBord.clear();
 			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
 					new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 					new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
-					new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+					new WhereClause(""+condition,WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
 			if (!listeTableauBord.isEmpty()) {
 				tableauBord=listeTableauBord.get(0);
 			}
@@ -5718,6 +5734,22 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setValeur(String valeur) {
 		this.valeur = valeur;
+	}
+
+	public String getCondition1() {
+		return condition1;
+	}
+
+	public void setCondition1(String condition1) {
+		this.condition1 = condition1;
+	}
+
+	public String getValeur1() {
+		return valeur1;
+	}
+
+	public void setValeur1(String valeur1) {
+		this.valeur1 = valeur1;
 	}
 
 
