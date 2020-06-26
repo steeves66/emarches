@@ -1490,6 +1490,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 reucpMarche.setTymLibelleCourt(marche.getTymLibelleCourt());
 				}
 		 
+		 public void onSelectMarcheUpdate() {
+			 
+			 updateOperation.setGpgTymCode(marche.getTymCode());
+			 updateOperation.setTymLibelleCourt(marche.getTymLibelleCourt());
+				}
+		 
 		 
 		 public void onSelectAgpm() {
 			 detailPlan.setGpgAgpId(agpm.getAgpId());
@@ -1755,59 +1761,78 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 					}
-		
-		
-		
-
-		
       //Fin de la Methode de publication
 		
 		
-      //Modification des operations
+      //Modification des operations PGPM/PGSPM0
      public void modifierDetailPlan() throws IOException{
 
-    	//Modification dans TAffichagePgpm
-    	/* slctdTd.setAffGpgAgpId(updateOperation.getAffGpgAgpId());
-    	 slctdTd.setAffGpgObjet(updateOperation.getGpgObjet());
-    	 slctdTd.setTTypeMarche(new TTypeMarche(updateOperation.getTymCode()));
-    	 slctdTd.setTModePassation(new TModePassation(updateOperation.getMopCode()));
-    	 slctdTd.setAffGpgDateDao(updateOperation.getAffGpgDateDao());
-    	 slctdTd.setAffGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
-    	 slctdTd.setAffGpgCommentaire(updateOperation.getGpgCommentaire()); 
-    	 slctdTd.setAffGpgLibFin(updateOperation.getGpgLibFin());
-    	 iservice.updateObject(slctdTd);*/
+        if(controleController.type == "PGPM") {
+        	//Modification dans TDetailPlanGeneral
+       	 List<TDetailPlanGeneral> PLG =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+      				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()));
+       	 TDetailPlanGeneral detail = new TDetailPlanGeneral();
+   				if(!PLG.isEmpty()) detail =PLG.get(0); 
+   				detail.setGpgAgpId(updateOperation.getGpgAgpId());
+   				if(marche.getTymCode() == null) {
+   				detail.setTTypeMarche(new TTypeMarche(updateOperation.getGpgTymCode()));	
+   				}else {
+   				detail.setTTypeMarche(new TTypeMarche(marche.getTymCode()));	
+   				}
+   				if(modePassation.getMopCode() == null) {
+   				detail.setTModePassation(new TModePassation(updateOperation.getGpgMopCode()));	
+   				}else {
+   				detail.setTModePassation(new TModePassation(modePassation.getMopCode()));	
+   				}
+   				detail.setGpgCommentaire(updateOperation.getGpgCommentaire());
+   				detail.setGpgDateDao(updateOperation.getGpgDateDao());
+   				detail.setGpgLibFin(updateOperation.getGpgLibFin());
+   				detail.setGpgObjet(updateOperation.getGpgObjet());
+   				detail.setGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
+   				detail.setTModePassation(new TModePassation(updateOperation.getMopCode()));
+   				detail.setTTypeMarche(new TTypeMarche(updateOperation.getGpgTymCode()));
+      			 iservice.updateObject(detail);
+      			 userController.renderPage("pgpm1");
+   		    	 userController.setTexteMsg("Modification éffectuée avec succès!");
+   			     userController.setRenderMsg(true);
+   			     userController.setSevrityMsg("success");
+   			     chargeData();
+        }else {
+        	//Modification dans TDetailPlanGeneral
+       	 List<TDetailPlanGeneral> PLG =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
+      				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()));
+       	 TDetailPlanGeneral detail = new TDetailPlanGeneral();
+   				if(!PLG.isEmpty()) detail =PLG.get(0); 
+   				detail.setGpgAgpId(updateOperation.getGpgAgpId());
+   				if(marche.getTymCode() == null) {
+   	   			detail.setTTypeMarche(new TTypeMarche(updateOperation.getGpgTymCode()));	
+   	   			}else {
+   	   			detail.setTTypeMarche(new TTypeMarche(marche.getTymCode()));	
+   	   			}
+   				if(passationListe.getMopCode() == null) {
+   	   			detail.setTModePassation(new TModePassation(updateOperation.getGpgMopCode()));	
+   	   			}else {
+   	   			detail.setTModePassation(new TModePassation(passationListe.getMopCode()));	
+   	   			}
+   				detail.setGpgCommentaire(updateOperation.getGpgCommentaire());
+   				detail.setGpgDateDao(updateOperation.getGpgDateDao());
+   				detail.setGpgLibFin(updateOperation.getGpgLibFin());
+   				detail.setGpgObjet(updateOperation.getGpgObjet());
+   				detail.setGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
+   				detail.setTModePassation(new TModePassation(updateOperation.getMopCode()));
+   				detail.setTTypeMarche(new TTypeMarche(updateOperation.getGpgTymCode()));
+      			iservice.updateObject(detail);
+      			userController.renderPage("pgpm1");
+   		    	userController.setTexteMsg("Modification éffectuée avec succès!");
+   			    userController.setRenderMsg(true);
+   			    userController.setSevrityMsg("success");
+   			    chargeData();
+        }
     	 
-    	//Modification dans TDetailPlanGeneral
-    	 List<TDetailPlanGeneral> PLG =iservice.getObjectsByColumn("TDetailPlanGeneral", new ArrayList<String>(Arrays.asList("GPG_ID")),
-   				new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+slctdTd.getGpgId()));
-    	 TDetailPlanGeneral detail = new TDetailPlanGeneral();
-				if(!PLG.isEmpty()) detail =PLG.get(0); 
-				detail.setGpgAgpId(updateOperation.getGpgAgpId());
-				detail.setGpgCommentaire(updateOperation.getGpgCommentaire());
-				detail.setGpgDateDao(updateOperation.getGpgDateDao());
-				detail.setGpgLibFin(updateOperation.getGpgLibFin());
-				detail.setGpgObjet(updateOperation.getGpgObjet());
-				detail.setGpgPartiePmePmi(updateOperation.getGpgPartiePmePmi());
-				detail.setTModePassation(new TModePassation(updateOperation.getMopCode()));
-				detail.setTTypeMarche(new TTypeMarche(updateOperation.getGpgTymCode()));
-				//detail.setGpgLibFin(updateOperation.getGpgLibFin());
-   				iservice.updateObject(detail);
-   				userController.renderPage("pgpm1");
-		    	 userController.setTexteMsg("Modification éffectuée avec succès!");
-			     userController.setRenderMsg(true);
-			     userController.setSevrityMsg("success");
-			     chargeData();
+    	
       }
           
-      
-    /* public void verifMarche() {
-   	  if("".equals(reucpMarche.getTymCode()) || reucpMarche.getTymCode().equalsIgnoreCase("") ) {
- 		  //Message d'erreur
- 		  FacesContext.getCurrentInstance().addMessage(null,
-	          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez remplir tous les champs obligatoires", ""));
- 	  }
-     }
-     */ 
+   
      
       //Enregistrement d'une opération PGPM sans AGPM
       public void creerDetailPlan() throws IOException{
@@ -2569,7 +2594,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 recupModePassation = new VModePassationPn();
 			 recupModePassation.setMopLibelleLong(modePassation.getMopLibelleLong());
 			 recupModePassation.setMopCode(modePassation.getMopCode());
-			 chargeModePassation();
+			// chargeModePassation();
+				}
+		 
+             public void onSelectModePassationUpdate() {
+			 updateOperation.setMopCode(modePassation.getMopCode());
+			 updateOperation.setMopLibelleLong(modePassation.getMopLibelleLong());
 				}
 		 
 		 
@@ -2579,10 +2609,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    recupModeListe = new VModePassation();
 		    recupModeListe.setMopLibelleLong(passationListe.getMopLibelleLong());
 		    recupModeListe.setMopCode(passationListe.getMopCode());
-		    chargeMode();
+		    //chargeMode();
 				}
 	 
-	 
+		  public void onSelectModePassationPgspmUpdate() {
+			 updateOperation.setMopCode(passationListe.getMopCode());
+			 updateOperation.setMopLibelleLong(passationListe.getMopLibelleLong());
+		    //chargeMode();
+				}
 	 
 		//Méthode de création d'un plan général
       	 @Transactional

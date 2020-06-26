@@ -50,7 +50,9 @@ import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VGenerationDate;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VModePassation;
+import com.sndi.model.VModePassationPn;
 import com.sndi.model.VModeleAmi;
+import com.sndi.model.VModeleDac;
 import com.sndi.model.VModeleDao;
 import com.sndi.model.VPgpmFonction;
 import com.sndi.model.VPpmStatut;
@@ -153,6 +155,7 @@ public class PpmModificationController {
 	     private List<TFinancementPpm> listeFinancement = new ArrayList<TFinancementPpm>();
 	     private List<TFinancementPgpm> listeFinancementPgpm = new ArrayList<TFinancementPgpm>();
 	     private List<TMinistere> listeMinistere = new ArrayList<TMinistere>();
+	     private List<VTypeMarcheFils> listeTypeMarchesFils = new ArrayList<VTypeMarcheFils>();
 		 private List<TStructure> listeStructure = new ArrayList<TStructure>();
 		 private List<VModePassation> listeMode = new ArrayList<VModePassation>();
 	     private List<VModeleDao> listeDao = new ArrayList<VModeleDao>();
@@ -173,6 +176,7 @@ public class PpmModificationController {
 		 private List<TTypeMarche> listeTypeMarches = new ArrayList<TTypeMarche>();
 		 private List<TModePassation> listeModePassation = new ArrayList<TModePassation>();
 		 private List<TGestion> listeGestion = new ArrayList<TGestion>(); 
+		 private List<VModePassationPn> listeModePassationPn = new ArrayList<VModePassationPn>();
 		 //private List<TAffichagePpm> validationListe = new ArrayList<TAffichagePpm>();
 		 private List<VPpmliste> validationListe = new ArrayList<VPpmliste>();
 		 private List<TAffichagePpm>listSelectionTransmission =new ArrayList<TAffichagePpm>();
@@ -211,6 +215,7 @@ public class PpmModificationController {
 		 private VGenerationDate geneDate = new VGenerationDate();
 		 //private TTypeMarche reucpMarche = new TTypeMarche();
 		 private VTypeMarcheFils reucpMarche = new VTypeMarcheFils();
+		 private List<VModeleDac> listeModele = new ArrayList<VModeleDac>();
 		 private VLigneImputation ligne = new VLigneImputation();
 		 private VLigneImputation recupLigne = new VLigneImputation();
 		 private TFinancementPpm newFinancement = new TFinancementPpm();
@@ -434,9 +439,9 @@ public class PpmModificationController {
 		 public void onSelectModePassationPgspm() {
 			 detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
 
-		    recupModeListe = new VModePassation();
+		   /* recupModeListe = new VModePassation();
 		    recupModeListe.setMopLibelleLong(passationListe.getMopLibelleLong());
-		    recupModeListe.setMopCode(passationListe.getMopCode());
+		    recupModeListe.setMopCode(passationListe.getMopCode());*/
 		    
 		    updatePpm.setDppMopCode(passationListe.getMopCode());
 		    updatePpm.setMopLibelleLong(passationListe.getMopLibelleLong());
@@ -444,6 +449,17 @@ public class PpmModificationController {
 		    recupPgspm.setGpgMopCode(passationListe.getMopCode());
 		    recupPgspm.setMopLibelleLong(passationListe.getMopLibelleLong());
 		    chargeMode();
+				}
+		 
+		 public void onSelectModePassation() {
+			 detailPass.setTModePassation(new TModePassation(modePassation.getMopCode()));
+
+		    updatePpm.setDppMopCode(modePassation.getMopCode());
+		    updatePpm.setMopLibelleLong(modePassation.getMopLibelleLong());
+		    
+		    recupPgpm.setGpgMopCode(modePassation.getMopCode());
+		    recupPgpm.setMopLibelleLong(modePassation.getMopLibelleLong());
+		    chargeModePassation();
 				}
 		 	
 		 
@@ -588,15 +604,39 @@ public class PpmModificationController {
 				new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 	}
 		 
+	
+	//Récupération du modèle DAO type
+	 public void recupModeleDao() {
+	    			listeModele= (List<VModeleDac>) iservice.getObjectsByColumn("VModeleDac", new ArrayList<String>(Arrays.asList("DPP_ID")),
+	    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+	    			/*if (!listeModele.isEmpty()) {
+	    				geneDate=listeModele.get(0); 
+	    			}*/
+	 }
+	
+	
+	 
 		//Chargement des Types de Marchés
-		 public void chargeMarches() {
+		 /*public void chargeMarches() {
 			 listeTypeMarches.clear();
 			 listeTypeMarches =(List<TTypeMarche>) iservice.getObjectsByColumn("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")));
-			}
+			}*/
+		 
+		 public void chargeMarches() {
+			 listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
+			 //filtreTypeMarche ="";
+		 }
+		 
 		//Chargement des modes de Passtion
-		 public void chargeModePassation() {
+		 /*public void chargeModePassation() {
 			 listeModePassation.clear();
 			 listeModePassation =(List<TModePassation>) iservice.getObjectsByColumn("TModePassation", new ArrayList<String>(Arrays.asList("mopCode")));
+			}*/
+		 
+			//Chargement des modes de Passtion
+		 public void chargeModePassation() {
+			 listeModePassationPn = new ArrayList<>(constantService.getListeModePassationPn()); 
+			 filtreModePassation="";
 			}
 		 
 		//Afficher les financements du projet ou agpm selectionné
@@ -654,12 +694,12 @@ public class PpmModificationController {
 		 }
 		 
 		 
-		//Filtre les modes de Passtion en fonction du code Passation
+		/*//Filtre les modes de Passtion en fonction du code Passation
 		 public void filtreModePassation() {
 			 listeModePassation.clear();
 			 listeModePassation =(List<TModePassation>) iservice.getObjectsByColumn("TModePassation", new ArrayList<String>(Arrays.asList("mopCode")),
 					 new WhereClause("MOP_CODE",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%"));
-			}
+			}*/
 		 
 		 
 			//Debut cpmp
@@ -800,6 +840,13 @@ public class PpmModificationController {
 							new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+filtreMinistere+"%"));
 				}
 				
+				//Réinitialiser les Types de Marchés
+				 public void razchargeMarches() {
+					 listeTypeMarchesFils.clear();
+					 listeTypeMarchesFils =(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")));
+					 filtreTypeMarche ="";
+					}
+				
 				public void onSelectFonctionPpmDmp() {
 					//planPass = new TPlanPassation();
 					planPass.setTFonction(new TFonction(fonction.getFonCod()));
@@ -830,11 +877,9 @@ public class PpmModificationController {
 		 //Méthode Love
 		 public void onSelectMarche() {
 			 detailPass.setTTypeMarche(new TTypeMarche(marche.getTymCode()));
-
-			
-			 reucpMarche = new VTypeMarcheFils();
-			 reucpMarche.setTymCode(marche.getTymCode());
-			 reucpMarche.setTymLibelleCourt(marche.getTymLibelleCourt());
+           
+			 updatePpm.setDppTymCode(marche.getTymCode());
+			 updatePpm.setTymLibelleCourt(marche.getTymLibelleCourt());
 				}
 		 
 		 
@@ -1020,13 +1065,27 @@ public class PpmModificationController {
 			 coutOperation(); 
 				}
 		 
-		 public void onSelectModePassation() {
+		 /*public void onSelectModePassation() {
 			 detailPass.setTModePassation(new TModePassation(modePassation.getMopCode()));
 			
 			 recupModePassation = new TModePassation();
 			 recupModePassation.setMopLibelleLong(modePassation.getMopLibelleLong());
 			 recupModePassation.setMopCode(modePassation.getMopCode());
-				}
+				}*/
+		 
+		//Réinitialiser les modes de Passation
+		 public void razchargeModePassation() {
+			 listeModePassationPn.clear();
+			 listeModePassationPn =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("mopCode")));
+			 filtreModePassation="";
+			}
+		 
+		//Filtre les modes de Passtion en fonction du code Passation
+		 public void filtreModePassation() {
+			 listeModePassationPn.clear();
+			 listeModePassationPn =(List<VModePassationPn>) iservice.getObjectsByColumn("VModePassationPn", new ArrayList<String>(Arrays.asList("MOP_CODE")),
+					 new WhereClause("MOP_LIBELLE_LONG",WhereClause.Comparateur.LIKE,"%"+filtreModePassation+"%"));
+			}
 		 
 		//Fin Méthode Love 
 		 
@@ -1287,14 +1346,23 @@ public class PpmModificationController {
 				 //@Transactional
 				 public void modifierDetailPlan() throws IOException{
 					 
-					 if(passationListe.getMopCode() == null) {
+					 
+					 if(controleController.type == "PPM") {
 						 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 					   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
 						     TDetailPlanPassation detail = new TDetailPlanPassation();
 									if(!PLG.isEmpty()) detail =PLG.get(0); 
 						             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
-						             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
-						             detail.setTModePassation(new TModePassation(passationListe.getMopCode()));
+						             if(marche.getTymCode() == null) {
+						             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));	 
+						             }else {
+						             detail.setTTypeMarche(new TTypeMarche(marche.getTymCode()));	 
+						             }
+						             if(modePassation.getMopCode() == null) {
+						             detail.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));	 
+						             }else {
+						             detail.setTModePassation(new TModePassation(modePassation.getMopCode()));	 	 
+						             }
 						             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
 						             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
 						             detail.setDppNatInt(updatePpm.getDppNatInt());
@@ -1323,14 +1391,23 @@ public class PpmModificationController {
 						             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
 						             detail.setDppInvEntre(updatePpm.getDppInvEntre());
 						             iservice.updateObject(detail);
-					     }else {
-					    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+					          
+					           }else {
+					        	        List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
 						   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
-							     TDetailPlanPassation detail = new TDetailPlanPassation();
+							            TDetailPlanPassation detail = new TDetailPlanPassation();
 										if(!PLG.isEmpty()) detail =PLG.get(0); 
 							             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
-							             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));
-							             detail.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));
+							             if(marche.getTymCode() == null) {
+							             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));	 
+							             }else {
+							             detail.setTTypeMarche(new TTypeMarche(marche.getTymCode()));	 
+							             }
+							             if(passationListe.getMopCode() == null) {
+								         detail.setTModePassation(new TModePassation(updatePpm.getDppMopCode()));	 
+								         }else {
+								         detail.setTModePassation(new TModePassation(modePassation.getMopCode()));	 	 
+								         }
 							             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
 							             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
 							             detail.setDppNatInt(updatePpm.getDppNatInt());
@@ -1359,44 +1436,9 @@ public class PpmModificationController {
 							             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
 							             detail.setDppInvEntre(updatePpm.getDppInvEntre());
 							             iservice.updateObject(detail);
-					       }
+					            }
 					 
-					 /*//Modification dans TDetailPlanPassation
-			    	 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-			   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getAffDppId()));
-			    	        TDetailPlanPassation detail = new TDetailPlanPassation();
-							if(!PLG.isEmpty()) detail =PLG.get(0);
-							detail.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getTDetailPlanGeneral().getGpgId()));
-							detail.setDppPartiePmePmi(slctdTd.getAffDppPartiePmePmi());
-							detail.setDppSourceFin(slctdTd.getAffDppSourceFin());
-							detail.setDppObjet(slctdTd.getAffDppObjet());
-							detail.setDppBailleur(slctdTd.getAffDppBailleur());
-							detail.setTModePassation(new TModePassation(slctdTd.getTModePassation().getMopCode()));
-							detail.setTTypeMarche(new TTypeMarche(slctdTd.getTTypeMarche().getTymCode()));
-							detail.setTLBudgets(new TLBudgets(slctdTd.getTLBudgets().getLbgCode()));
-							detail.setTModeleDacType(new TModeleDacType(slctdTd.getAffDppPieceDao()));
-							detail.setDppStructureBenefi(slctdTd.getAffDppStrBenefi());
-							detail.setDppStructureConduc(slctdTd.getAffDppStrConduc());
-							detail.setDppTypeFinance(slctdTd.getAffDppTypeFinance());
-							detail.setDppDateAvisAoPublication(slctdTd.getAffDppDateAvisAoPublicat());
-							detail.setDppDateDaoApprobBail(slctdTd.getAffDppDateDaoApprobBail());
-							detail.setDppDateAttApproBail(slctdTd.getAffDppDateAttApproBail());
-							detail.setDppDateDaoTrans(slctdTd.getAffDppDateDaoTrans());
-							detail.setDppDateElabRapport(slctdTd.getAffDppDateElabRapport());
-							detail.setDppDateExecDebut(slctdTd.getAffDppDateExecDebut());
-							detail.setDppDateExecFin(slctdTd.getAffDppDateExecFin());
-							detail.setDppDateOuvertOf(slctdTd.getAffDppDateOuvertOf());
-							detail.setDppDateOuvertOt(slctdTd.getAffDppDateOuvertOt());
-							detail.setDppDateSignatAc(slctdTd.getAffDppDateSignatAc());
-							detail.setDppDateSignatAttrib(slctdTd.getAffDppDateSignatAttrib());
-							detail.setDppDateJugementOffre(slctdTd.getAffDppDateJugementOffre());
-							detail.setDppDateAttApprobCpmp(slctdTd.getAffDppDateAttApprobCmp());
-							detail.setDppDateAttApprobDmp(slctdTd.getAffDppDateAttApprobDmp());
-							detail.setDppApprobAno(slctdTd.getAffDppApprobAno());
-							detail.setDppDateNegociation(slctdTd.getAffDppDateNegociation());
-							//detail.setDppInvEntre(slctdTd.getAffDppInvEntre());
-							iservice.updateObject(detail);*/
-							
+					
 							 
 							    	//Mis à Jour dans T_Financement_PPM
 				    				  for(TFinancementPpm fin: listeFinancement) {
@@ -1510,7 +1552,7 @@ public class PpmModificationController {
 					chargeGestions();
 					chargeBailleur();
 					chargeDevise();
-					chargeMarches();
+					//chargeMarches();
 					chargeModePassation();
 					chargePgpm();
 					chargeSourceFinance();
@@ -2850,7 +2892,35 @@ public class PpmModificationController {
 	public void setPassationListe(VModePassation passationListe) {
 		this.passationListe = passationListe;
 	}
-	
-	
+
+
+
+	public List<VModePassationPn> getListeModePassationPn() {
+		return listeModePassationPn;
+	}
+
+	public void setListeModePassationPn(List<VModePassationPn> listeModePassationPn) {
+		this.listeModePassationPn = listeModePassationPn;
+	}
+
+
+
+	public List<VTypeMarcheFils> getListeTypeMarchesFils() {
+		return listeTypeMarchesFils;
+	}
+
+	public void setListeTypeMarchesFils(List<VTypeMarcheFils> listeTypeMarchesFils) {
+		this.listeTypeMarchesFils = listeTypeMarchesFils;
+	}
+
+
+
+	public List<VModeleDac> getListeModele() {
+		return listeModele;
+	}
+
+	public void setListeModele(List<VModeleDac> listeModele) {
+		this.listeModele = listeModele;
+	}
 
 }
