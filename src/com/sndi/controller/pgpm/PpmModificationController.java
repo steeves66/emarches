@@ -222,7 +222,8 @@ public class PpmModificationController {
 		 private TFinancementPpm selectFinance = new TFinancementPpm();
 		 private TFinancementPgpm fipPgpm = new TFinancementPgpm();
 		 private VPpmliste slctdTd = new VPpmliste();
-		 private TModePassation modePassation = new TModePassation();
+		 //private TModePassation modePassation = new TModePassation();
+		 private VModePassationPn modePassation = new VModePassationPn();
 		 private VPpmStatut ppmstatut= new VPpmStatut();
 		 private VFonctionMinistere fonction =new VFonctionMinistere();
 		 private TStructure structure =new TStructure();
@@ -437,29 +438,19 @@ public class PpmModificationController {
 		 
 		 
 		 public void onSelectModePassationPgspm() {
-			 detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
-
-		   /* recupModeListe = new VModePassation();
-		    recupModeListe.setMopLibelleLong(passationListe.getMopLibelleLong());
-		    recupModeListe.setMopCode(passationListe.getMopCode());*/
-		    
+			 //detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
 		    updatePpm.setDppMopCode(passationListe.getMopCode());
 		    updatePpm.setMopLibelleLong(passationListe.getMopLibelleLong());
 		    
 		    recupPgspm.setGpgMopCode(passationListe.getMopCode());
 		    recupPgspm.setMopLibelleLong(passationListe.getMopLibelleLong());
-		    chargeMode();
+		    //chargeMode();
 				}
 		 
 		 public void onSelectModePassation() {
-			 detailPass.setTModePassation(new TModePassation(modePassation.getMopCode()));
-
+			 
 		    updatePpm.setDppMopCode(modePassation.getMopCode());
 		    updatePpm.setMopLibelleLong(modePassation.getMopLibelleLong());
-		    
-		    recupPgpm.setGpgMopCode(modePassation.getMopCode());
-		    recupPgpm.setMopLibelleLong(modePassation.getMopLibelleLong());
-		    chargeModePassation();
 				}
 		 	
 		 
@@ -690,7 +681,7 @@ public class PpmModificationController {
 		 public void filtreMarche() {
 			 listeTypeMarches.clear();
 			 listeTypeMarches = (List<TTypeMarche>) iservice.getObjectsByColumn("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")),
-						new WhereClause("TYM_CODE",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
+						new WhereClause("TYM_LIBELLE_COURT",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
 		 }
 		 
 		 
@@ -2029,21 +2020,31 @@ public class PpmModificationController {
 		this.slctdTd = slctdTd;
 	}
 
-
+/*
 	public TModePassation getModePassation() {
 		return modePassation;
 	}
 
 	public void setModePassation(TModePassation modePassation) {
 		this.modePassation = modePassation;
+	}*/
+	
+
+
+
+	public VModePassationPn getModePassation() {
+		return modePassation;
 	}
+
+	public void setModePassation(VModePassationPn modePassation) {
+		this.modePassation = modePassation;
+	}
+
 
 
 	public VPpmStatut getPpmstatut() {
 		return ppmstatut;
 	}
-
-
 
 	public void setPpmstatut(VPpmStatut ppmstatut) {
 		this.ppmstatut = ppmstatut;

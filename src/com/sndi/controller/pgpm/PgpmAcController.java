@@ -1828,8 +1828,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
    			    userController.setSevrityMsg("success");
    			    chargeData();
         }
-    	 
-    	
       }
           
    
@@ -3326,6 +3324,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					newFinancement = new TFinancementPgpm();
 					vider();
 					//controleController.etatLoveAgpm = false;
+					userController.initMessage();
 					_logger.info("value: "+value+" action: "+action);
 				break;
 				case "pgpm3":

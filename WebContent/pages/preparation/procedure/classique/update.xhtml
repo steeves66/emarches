@@ -111,7 +111,17 @@
                <div class="form-group">
                   <label class="col-sm-2 control-label">Type de marché<span style="color:red;"> *</span></label>
 				  <div class="col-sm-10">
-				  <p:inputText id="typMa2" type="text" value="#{pgpmAcController.updateOperation.gpgTymCode} : #{pgpmAcController.updateOperation.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
+				  <table>
+		                 <tr>
+		                 <td style="width: 650px"><p:inputText id="typMa2" type="text" value="#{pgpmAcController.updateOperation.gpgTymCode} : #{pgpmAcController.updateOperation.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{pgpmAcController.chargeMarches}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+				 
                   </div>
                 </div>
                 
@@ -119,7 +129,17 @@
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-10">
-				  <p:inputText id="modeP2" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode} : #{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />
+				  <table>
+		                 <tr>
+		                 <td style="width: 650px"><p:inputText id="modeP2" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode} : #{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('passationDlg').show()" action="#{pgpmAcController.chargeModePassation}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+				 
                   </div>
                 </div>
                 </h:panelGroup>
@@ -128,7 +148,17 @@
                  <div class="form-group">
                   <label  class="col-sm-2 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-10">
-				  <p:inputText id="modePgs2" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode} : #{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />
+				  <table>
+		                 <tr>
+		                 <td style="width: 650px"><p:inputText id="modePgs2" type="text" value="#{pgpmAcController.updateOperation.gpgMopCode} : #{pgpmAcController.updateOperation.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('passationPgspmDlg').show()" action="#{pgpmAcController.chargeMode}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+				  
                   </div>
                 </div>
                 </h:panelGroup>
@@ -360,13 +390,13 @@
 			               emptyMessage="Aucun ministère enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarcheUpdate()}" update="gnl:typMa1, gnl:typMa2">				        
          				  <h:outputText value="#{slctdTb.tymCode}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{pgpmAcController.onSelectMarcheUpdate()}" update="gnl:typMa1, gnl:typMa2">				        
          				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.marche}" />
                                 </h:commandLink>
@@ -407,19 +437,19 @@
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationUpdate()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
-                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationUpdate()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>
 				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationUpdate()}" update="gnl:modeP1, gnl:modeP2">				        
          				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
@@ -461,19 +491,19 @@
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspmUpdate()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
-                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspmUpdate()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2">				        
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassationPgspmUpdate()}" update="gnl:modeP1, gnl:modeP2">				        
          				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.passationListe}" />
                                 </h:commandLink>

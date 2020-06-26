@@ -1598,7 +1598,7 @@ public class PpmController {
 		 public void filtreMarche() {
 			 listeTypeMarches.clear();
 			 listeTypeMarches = (List<TTypeMarche>) iservice.getObjectsByColumn("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")),
-						new WhereClause("TYM_CODE",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
+						new WhereClause("TYM_LIBELLE_COURT",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
 		 }
 		 
 		 

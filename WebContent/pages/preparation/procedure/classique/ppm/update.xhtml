@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
       <h3>
-        #{controleController.libelle} #{controleController.type} #{ppmModificationController.updatePpm.dppId} 
+        #{controleController.libelleProcedure} #{ppmModificationController.updatePpm.dppId} 
        
       </h3>
       <ol class="breadcrumb">
@@ -137,13 +137,13 @@
 		                 <tr>
 		                 <td style="width: 650px"><p:inputText id="modeP2" type="text" value="#{ppmModificationController.updatePpm.dppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
-		                  <p:commandLink  oncomplete="PF('passationDlg').show()" action="#{ppmController.chargeModePassation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+		                  <p:commandLink  oncomplete="PF('passationDlg').show()" action="#{ppmModificationController.chargeModePassation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 		                 </td>
 		                 </tr>
                      </table>
-		         <!-- <p:inputText id="modeP2" type="text" value="#{ppmModificationController.updatePpm.dppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /> -->
+		         
                   </div>
                 </div>
                 </h:panelGroup>
@@ -195,7 +195,7 @@
 	        
 	       <div class="col-md-6">
 	          <div class="form-group">
-                  <label  class="col-sm-3 control-label">Structure Conductrice</label>
+                  <label  class="col-sm-3 control-label">Type Structure Conductrice</label>
                   <div class="col-sm-9">
                   <p:selectOneMenu id="tpcond" value="#{ppmModificationController.updatePpm.dppTypeStrConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">  
 			       <f:selectItems value="#{ppmModificationController.listeTypStruConduc}" var="typ" itemLabel="#{typ.libelle}" itemValue="#{typ.libelle}" />			   				   
@@ -207,7 +207,7 @@
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Structure Conductrice</label>
                   <div class="col-sm-9">
-                    <p:inputText  type="text" value="#{ppmController.detailPass.dppStructureConduc}" styleClass="form-control" style="width: 100%" />
+                    <p:inputText  type="text" value="#{ppmModificationController.updatePpm.dppStructureConduc}" styleClass="form-control" style="width: 100%" />
                   </div>
                 </div>	
         
@@ -1253,7 +1253,7 @@
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmModificationControllerr.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.modePassation}" />
                                 </h:commandLink>
