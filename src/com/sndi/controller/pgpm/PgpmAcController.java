@@ -2592,6 +2592,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 recupModePassation = new VModePassationPn();
 			 recupModePassation.setMopLibelleLong(modePassation.getMopLibelleLong());
 			 recupModePassation.setMopCode(modePassation.getMopCode());
+			 recupModePassation.setMopTypPlan(modePassation.getMopTypPlan());
 			// chargeModePassation();
 				}
 		 
@@ -2607,6 +2608,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    recupModeListe = new VModePassation();
 		    recupModeListe.setMopLibelleLong(passationListe.getMopLibelleLong());
 		    recupModeListe.setMopCode(passationListe.getMopCode());
+		    recupModeListe.setMopTypPlan(passationListe.getMopTypPlan());
 		    //chargeMode();
 				}
 	 
