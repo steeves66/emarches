@@ -256,49 +256,7 @@
       
       <!-- Début Tableau de Bord pour le DMP -->       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">      
-          <h:panelGroup rendered="#{controleController.panelPgspmTableauBordSai}">
-              
-              <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-              <!-- ./col -->              
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.pgspmDmSaisie}</h3>
-
-              <p>En attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.pgspmDmTransmis}</h3>
-
-              <p>Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{pgpmAcController.chargePgspmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-              Detail <i class="fa fa-arrow-circle-right"></i>
-              </p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-        
-        </div>
-        </div>
-        </div>
-       </h:panelGroup> 
+          
        
        <h:panelGroup rendered="#{controleController.panelPgspmTableauBordVal}">
         <div id="collapseOne" class="panel-collapse collapse in">
@@ -310,7 +268,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmDmAttenteValide}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valPf}</h3>
 
               <p>En attente de Validation</p>
             </div>
@@ -330,7 +288,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmDmValide}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3>
 
               <p>Validé(s) par la DMP</p>
             </div>
@@ -351,7 +309,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmDmDiff}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.difDmp}</h3>
 
               <p>Différé(s) par la DMP</p>
             </div>
@@ -374,49 +332,7 @@
          
          <!-- Debut SPP -->
           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}">      
-          <h:panelGroup rendered="#{controleController.panelPgspmTableauBordSai}">
-              
-              <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-              <!-- ./col -->              
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.pgspmDmSaisie}</h3>
-
-              <p>En attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.pgspmDmTransmis}</h3>
-
-              <p>Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{pgpmAcController.chargePgspmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-              Detail <i class="fa fa-arrow-circle-right"></i>
-              </p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-        
-        </div>
-        </div>
-        </div>
-       </h:panelGroup> 
+          
        
        <h:panelGroup rendered="#{controleController.panelPgspmTableauBordVal}">
         <div id="collapseOne" class="panel-collapse collapse in">
@@ -428,7 +344,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmDmAttenteValide}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valPf}</h3>
 
               <p>En attente de Validation</p>
             </div>
@@ -448,7 +364,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmDmValide}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3>
 
               <p>Validé(s) par la DMP</p>
             </div>
@@ -498,7 +414,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmDmAttentePub}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3>
 
               <p>En attente de Publication</p>
             </div>
@@ -518,7 +434,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmPub}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.pub}</h3>
 
               <p>Publié(s) par la DMP</p>
             </div>
@@ -548,7 +464,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.pgspmPub}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.pub}</h3>
 
               <p>Publié(s) dans le Journal</p>
             </div>
