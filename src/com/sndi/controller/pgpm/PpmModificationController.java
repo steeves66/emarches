@@ -902,13 +902,13 @@ public class PpmModificationController {
 			 
 			 if(pgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
                 //Activation de la liste des Ami et désactivation de l'autre
-				 modeleAmi = true;
+				/* modeleAmi = true;
 				 modeleDao = false;
 	             //Affichage des modèles type AMI
 				   listeAmi = ((List<VModeleAmi>)iservice.getObjectsByColumn("VModeleAmi",new ArrayList<String>(Arrays.asList("MDT_CODE")),
 						 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId())));
 				   //Affichage du coût total de l'opération
-				    coutOperation();
+				    coutOperation();*/
 					//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
 				  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
 					  
@@ -924,11 +924,11 @@ public class PpmModificationController {
 					                  }
 			             }else {
 			        	//Activation de la liste des DAO type et désactivation de la liste des DAO 
-						 modeleAmi = false;
+						/* modeleAmi = false;
 						 modeleDao = true;
 			    	      //Affichage des modèles type de DAO
 						 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-								 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
+								 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); */
 						//Affichage du coût total de l'opération
 						    coutOperation();
 							//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
@@ -979,15 +979,15 @@ public class PpmModificationController {
 			 
 			             
 			             if(pgspm.getGpgMopCode().equalsIgnoreCase("AMI")) {
-			            	    modeleDao = false;
-			            	    modeleAmi = false;
+			            	    /*modeleDao = false;
+			            	    modeleAmi = false;*/
 			                       }else {
 			            	    //Désactivation des listes 
-			            	    modeleDao = true;
+			            	/*    modeleDao = true;
 			            	    modeleAmi = false;
 			            	    //Affichage du modèle DAO type
 			   				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId()))); 
+			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId())));*/ 
 			   			       //Affichage du montant total
 			   			       coutOperation();       
 			                 }
