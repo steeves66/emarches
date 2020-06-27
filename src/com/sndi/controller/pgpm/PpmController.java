@@ -331,10 +331,10 @@ public class PpmController {
 
                 public void tableauBordbAc() {
 				   if(controleController.type == "PPM") {
-						      tableauBordController.ChargeTbAcProcedure("PN","PPM");
+						      tableauBordController.ChargeTbProcedure("PN","PPM");
 		                 }else 
 		                      if(controleController.type == "PSPM"){
-		                    	   tableauBordController.ChargeTbAcProcedure("PS","PPM");
+		                    	   tableauBordController.ChargeTbProcedure("PS","PPM");
 		                 }
 		      }
 		 
@@ -3571,7 +3571,7 @@ public class PpmController {
 		     switch(value) {
 				case "ppm1":
 					chargeData("PN");
-					tableauBordController.ChargeTbAcProcedure("PN","PPM");
+					tableauBordController.ChargeTbProcedure("PN","PPM");
 					 //chargeDataAvaliderPpm();
 					chargePpmPUB();
 					 vider();
@@ -3605,7 +3605,7 @@ public class PpmController {
 				case "pspm1": 
 	                    chargeData("PS");
 	                    //chargePpmTrans("PS");
-	                    tableauBordController.ChargeTbAcProcedure("PS","PPM");
+	                    tableauBordController.ChargeTbProcedure("PS","PPM");
 	                    chargePpmPUB();
 		 			//chargeDataAvaliderPspm();
 	                    userController.initMessage();

@@ -477,7 +477,7 @@ public class TableauBordController {
 		}
 		//FIN TABLEAU DE BORD AGPM	
 		//PGPM,PGSPM,PPM,PSPM
-		public void ChargeTbAcProcedure(String typeProc, String type) {
+		public void ChargeTbProcedure(String typeProc, String type) {
 			
 			//AC
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
