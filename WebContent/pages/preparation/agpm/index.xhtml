@@ -128,7 +128,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.saisi}</h3>
+              <h3>#{tableauBordController.tableauBord.transAc}</h3>
 
               <p>En attente de transmission</p>
             </div>
@@ -143,7 +143,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.transAc}</h3>
+              <h3>#{tableauBordController.tableauBord.valPf}</h3>
 
               <p>Transmis par la CPMP</p>
             </div>
@@ -943,7 +943,7 @@
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
-         				<h:outputText value="#{slctdTb.affAgpDateValAc}">
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
          				<f:convertDateTime pattern="dd/MM/yyyy" />
          				</h:outputText>
 				        </p:column>

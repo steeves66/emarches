@@ -391,51 +391,6 @@
               
         <!-- Début Tableau de Bord pour le DMP -->       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">      
-          <h:panelGroup rendered="#{controleController.panelDaoTableauBordSai}">
-              
-              <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-              <!-- ./col -->              
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <h3>#{tableauBordController.daoAcAttenteValide}</h3>
-
-              <p>#{controleController.type} en attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
-					 <i class="fa fa-arrow-circle-right"></i>		
-						  </p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.daoAcTransmis}</h3>
-
-              <p>#{controleController.type} Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <p:commandLink  oncomplete="PF('detailDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-        
-        </div>
-        </div>
-        </div>
-       </h:panelGroup> 
        
        <h:panelGroup rendered="#{controleController.panelDaoTableauBordVal}">
         <div id="collapseOne" class="panel-collapse collapse in">
@@ -447,7 +402,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.ppmDmAttenteValide}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valPf}</h3>
 
               <p>#{controleController.type} en attente de Validation</p>
             </div>
@@ -465,7 +420,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.ppmDmValide}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3>
 
               <p>#{controleController.type} Validé(s) par la DMP</p>
             </div>
@@ -486,7 +441,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.ppmDmDiff}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.difDmp}</h3>
 
               <p>#{controleController.type} Différé(s) par la DMP</p>
             </div>
@@ -521,7 +476,7 @@
           
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvAttAff}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valPf}</h3>
 
               <p>#{controleController.type} en attente d'Affectation</p>
             </div>
@@ -541,7 +496,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoaffecte}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3>
 
               <p>#{controleController.type} affecté(s)</p>
             </div>
@@ -563,7 +518,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvDiff}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.difDmp}</h3>
 
               <p>#{controleController.type} différé(s)</p>
             </div>
