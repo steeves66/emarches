@@ -1575,7 +1575,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		             	    TStatut statuts = constantService.getStatut(statutTrans);
 			  				//Historisation des Pgpm
 			      			historiser(""+statutTrans,demDetail,"Opération Transmise à la CPMP");
-			 		   }	
+			 		   }
+		 		      tableauBordController.ChargeTbProcedure("PN", "PGPM");
 				     }
         	
 	 		        chargeData(); 	
