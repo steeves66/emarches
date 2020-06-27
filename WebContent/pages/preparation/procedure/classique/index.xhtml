@@ -709,13 +709,13 @@
 				         <p:column headerText="Lancement" styleClass="col-sm-2" >
 				         <h:panelGroup rendered="#{slctdTb.gpgStatutRetour == '1'}">
          				<h:outputText value="#{slctdTb.gpgDateDao}"  style="color:red; font-weight:bold" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
          				
          				 <h:panelGroup rendered="#{slctdTb.gpgStatutRetour != '1'}">
          				<h:outputText value="#{slctdTb.gpgDateDao}" >
-         				<f:convertDateTime pattern="MM/dd/yyyy" type="date" />
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
          				</h:panelGroup>
 				        </p:column>

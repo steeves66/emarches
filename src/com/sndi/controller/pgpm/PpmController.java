@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+//import java.sql.Date;
 import java.util.List;
 
 
@@ -59,6 +60,7 @@ import com.sndi.model.VModeleDao;
 import com.sndi.model.VModelePrq;
 import com.sndi.model.VPgpmFonction;
 import com.sndi.model.VPgpmliste;
+import com.sndi.model.VPpmPub;
 import com.sndi.model.VPpmStatut;
 import com.sndi.model.VPpmliste;
 import com.sndi.model.VTypeMarcheFils;
@@ -232,6 +234,7 @@ public class PpmController {
 		 //private TModePassation modePassation = new TModePassation();
 		 private VModePassationPn modePassation = new VModePassationPn();
 		 private VPpmStatut ppmstatut= new VPpmStatut();
+		 private VDatePub pubDate = new VDatePub();
 		 private VFonctionMinistere fonction =new VFonctionMinistere();
 		 private TStructure structure =new TStructure();
 		 private TStructure newStr =new TStructure();
@@ -295,7 +298,7 @@ public class PpmController {
 				//Controle Pavé création
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
-		  					|| detailPass.getDppStatutAno() == null 
+		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
 		  				  ||pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null || ligne.getLbgCode() == null || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
@@ -1710,9 +1713,11 @@ public class PpmController {
 				recupPass = new TDetailPlanPassation();
 				recupPass.setDppId(passation.getDppId());
 				recupPass.setDppObjet(passation.getDppObjet());
-				
-				
 					}
+			
+			public void onSelectDatePub() {
+				detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());	
+			}
 			
 			//Méthode de création d'une charge 
 		  	 @Transactional
@@ -2340,7 +2345,7 @@ public class PpmController {
 	  	 
 	  	@Transactional
 	  	 public void saveDetailPlan(TPlanPassation TPlanPassation,String typePlan) {
-	  		 
+	  		
              if(controleController.type == "PPM") {
             	 
             	 if(marche.getTymCode() == null) {
@@ -2360,7 +2365,7 @@ public class PpmController {
     	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
     	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
     	  		 detailPass.setDppTypeStrConduc(strucCond);
-    	  		 detailPass.setDppDateAvisAoPublication(datePub);
+    	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
     	  		 //detailPass.setTModeleDacType(new TModeleDacType(tydCode));
     	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
     	  		 detailPass.setTPlanPassation(TPlanPassation);
@@ -2399,7 +2404,7 @@ public class PpmController {
               		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
               		    //detailPass.setTModeleDacType(new TModeleDacType(tydCode));
               		    detailPass.setDppTypeStrConduc(strucCond);
-              		    detailPass.setDppDateAvisAoPublication(datePub);
+              		    detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
               		    detailPass.setTPlanPassation(planPass);
               		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
               		    
@@ -3980,34 +3985,6 @@ public class PpmController {
 	
 	
 
-/*
-	public TTypeMarche getReucpMarche() {
-		return reucpMarche;
-	}
-
-
-	public void setReucpMarche(TTypeMarche reucpMarche) {
-		this.reucpMarche = reucpMarche;
-	}
-	
-	
-	public TLigneBudgetaire getLigne() {
-		return ligne;
-	}
-
-
-	public void setLigne(TLigneBudgetaire ligne) {
-		this.ligne = ligne;
-	}
-
-
-	public TLigneBudgetaire getRecupLigne() {
-		return recupLigne;
-	}
-	public void setRecupLigne(TLigneBudgetaire recupLigne) {
-		this.recupLigne = recupLigne;
-	}*/
-
 	public VTypeMarcheFils getReucpMarche() {
 		return reucpMarche;
 	}
@@ -5026,4 +5003,14 @@ public class PpmController {
 	public void setModePassation(VModePassationPn modePassation) {
 		this.modePassation = modePassation;
 	}
+
+
+	public VDatePub getPubDate() {
+		return pubDate;
+	}
+
+	public void setPubDate(VDatePub pubDate) {
+		this.pubDate = pubDate;
+	}
+
 }

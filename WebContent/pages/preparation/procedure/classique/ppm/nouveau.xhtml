@@ -279,17 +279,22 @@
 		   
 		   <label for="rr" class="col-sm-2 control-label">Date Pub<span style="color:red;"> *</span></label>
 		     <div class="col-sm-3">
-		     <p:selectOneMenu id="rr" required="true" value="#{ppmController.datePub}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			      <f:selectItem  itemLabel="Choisir la date de publication.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmController.listeDatePub}" var="dat" itemLabel="#{dat.libelle}" itemValue="#{dat.datepub}" />			   				   
-				  <f:selectItems />				   				    				   
-		       </p:selectOneMenu>
-		      
+		    <table>
+		      <tr>
+		      <td style="width:50px"><p:calendar id="rr"  value="#{ppmController.detailPass.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		       </p:calendar></td>
+		       <td>
+		       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmController.listeDatePub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+			   <i class="fa fa-search-plus"></i>
+			  </p:commandLink>
+		     </td>
+		   </tr>
+          </table>    
 		   </div>
 		   </div>        
 	       </div>
                
-               </div>
+           </div>
 	      </div>
 			 
 		  <div class="box box-success box-solid">
@@ -438,7 +443,7 @@
              </div>
              </div>
 	</p:tab>
-		--------------------------	        
+		        
 	<p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
 			         <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
@@ -1408,9 +1413,9 @@
 					<div class="row">
 						 <div class="col-md-6">
 						 
-						 <div class="input-group input-group-sm col-md-12">
+				    <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
+				        <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
 				        </span>
                       <p:inputText  type="text" value="#{ppmController.filtreModePassation}" id="filtrePass"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
@@ -1444,6 +1449,62 @@
                         <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{ppmController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
          				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.modePassation}" />
+                                </h:commandLink>
+				        </p:column>
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    <h:form id="dlogDate">
+	        <p:dialog  widgetVar="datePubDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passation">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				        <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtreModePassation}" id="filtrePass"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
+                         </span>
+					 </div>
+						 
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleDateP" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeDatePub}"
+						 selectionMode="single" rowKey="#{slctdTb.datepub}"
+			               emptyMessage="Aucune date de Publication enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Code" styleClass="col-sm-1" >
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectDatePub()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.datepub}" >
+         				  <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				  </h:outputText>
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pubDate}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectDatePub()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.libelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pubDate}" />
                                 </h:commandLink>
 				        </p:column>
 						</p:dataTable>
