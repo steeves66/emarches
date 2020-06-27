@@ -348,7 +348,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					//new WhereClause("PLG_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
 					new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("objetListe size: "+objetList.size());	
-				tableauBordController.chargeDataPgpm();
+				tableauBordController.ChargeTbProcedure("PN", "PGPM");
 				nbrePgpm =""+getNbrePgpmTotal("S1S");
 		}
 		 

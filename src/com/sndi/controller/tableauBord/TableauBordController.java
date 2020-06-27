@@ -477,8 +477,7 @@ public class TableauBordController {
 		}
 		//FIN TABLEAU DE BORD AGPM	
 		//PGPM,PGSPM,PPM,PSPM
-		public void ChargeTbProcedure(String typeProc, String type) {
-			
+		public void ChargeTbProcedure(String typeProc, String type) {	
 			//AC
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 listeTableauBord.clear();
@@ -518,24 +517,45 @@ public class TableauBordController {
 		
 		
 		//Tableau de bord AC CPMP en pgpm,pgspm,ppm,pspm,DAO(PN,PS),AMI(PN,PS),PRQ(PN,PS)
-		public void ChargeTableauBord(String typeProc, String typeDac) {
-			if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
-				condition="CODE_AC";
+		public void ChargeTableauBordDac(String typeProc, String typeDac) {
+			//AC
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 listeTableauBord.clear();
+					listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+							new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+							new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+							new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+					if (!listeTableauBord.isEmpty()) {
+						tableauBord=listeTableauBord.get(0);
+					}
 			 }else {
+				 //CPMP
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-					 condition="CODE_PF";
+					 listeTableauBord.clear();
+						listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+								new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+								new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+								new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+						if (!listeTableauBord.isEmpty()) {
+							tableauBord=listeTableauBord.get(0);
+						}
+				 }else {
+					 //DMP ET SPP
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") 
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						 listeTableauBordDmp.clear();
+						 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+								 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+								 new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+							if (!listeTableauBordDmp.isEmpty()) {
+								tableauBordDmp=listeTableauBordDmp.get(0);
+							}
+					 }
 				 }
 			   }
-			listeTableauBord.clear();
-			listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
-					new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
-					new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
-					new WhereClause(""+condition,WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
-			if (!listeTableauBord.isEmpty()) {
-				tableauBord=listeTableauBord.get(0);
-			}
+			
 		}
-		//Fin Test tableau de bor
+		//Fin Test tableau de bord
 				     
 		
 	
