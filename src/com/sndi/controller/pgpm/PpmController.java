@@ -295,7 +295,7 @@ public class PpmController {
 				//Controle Pavé création
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
-		  					|| detailPass.getDppStatutAno() == null 
+		  					|| detailPass.getDppStatutAno() == null || datePub == null
 		  				  ||pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null || ligne.getLbgCode() == null || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,

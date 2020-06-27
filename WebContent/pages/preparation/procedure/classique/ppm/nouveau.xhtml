@@ -279,7 +279,7 @@
 		   
 		   <label for="rr" class="col-sm-2 control-label">Date Pub<span style="color:red;"> *</span></label>
 		     <div class="col-sm-3">
-		     <p:selectOneMenu id="rr" required="true" value="#{ppmController.datePub}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		     <p:selectOneMenu id="rr" value="#{ppmController.datePub}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir la date de publication.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeDatePub}" var="dat" itemLabel="#{dat.libelle}" itemValue="#{dat.datepub}" />			   				   
 				  <f:selectItems />				   				    				   
@@ -438,7 +438,7 @@
              </div>
              </div>
 	</p:tab>
-		--------------------------	        
+		        
 	<p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
 			         <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
@@ -1408,9 +1408,9 @@
 					<div class="row">
 						 <div class="col-md-6">
 						 
-						 <div class="input-group input-group-sm col-md-12">
+				    <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
+				        <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
 				        </span>
                       <p:inputText  type="text" value="#{ppmController.filtreModePassation}" id="filtrePass"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
