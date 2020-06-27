@@ -45,6 +45,7 @@ import com.sndi.model.TTypeCharge;
 import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeProcedure;
+import com.sndi.model.VDatePub;
 import com.sndi.model.VDetPlaning;
 import com.sndi.model.VFinancementPgpm;
 import com.sndi.model.VFonctionMinistere;
@@ -139,6 +140,7 @@ public class PpmController {
 		 chargeTypeProcedures(); 
 		 chargeFonctionDmp();
 		 chargeMode();
+		 chargeDatepub();
 		 tableauBordbAc();
 	 }
 	
@@ -160,7 +162,8 @@ public class PpmController {
 		 private List<VModePassation> listeMode = new ArrayList<VModePassation>();
 	     private List<VModeleDao> listeDao = new ArrayList<VModeleDao>();
 	     private List<VModeleAmi> listeAmi = new ArrayList<VModeleAmi>();
-	     private List<VModelePrq> listePrq = new ArrayList<VModelePrq>();
+	     private List<VModelePrq> listePrq = new ArrayList<VModelePrq>(); 
+	     private List<VDatePub> listeDatePub = new ArrayList<VDatePub>();
 	     
 	     private List<VTypeStructConduc> listeTypStruConduc = new ArrayList<VTypeStructConduc>();
 	     private List<TStructure> listeStructures = new ArrayList<TStructure>();
@@ -226,7 +229,8 @@ public class PpmController {
 		 //private TFinancementPgpm fipPgpm = new TFinancementPgpm();
 		 private VFinancementPgpm fipPgpm = new VFinancementPgpm();
 		 private VPpmliste slctdTd = new VPpmliste();
-		 private TModePassation modePassation = new TModePassation();
+		 //private TModePassation modePassation = new TModePassation();
+		 private VModePassationPn modePassation = new VModePassationPn();
 		 private VPpmStatut ppmstatut= new VPpmStatut();
 		 private VFonctionMinistere fonction =new VFonctionMinistere();
 		 private TStructure structure =new TStructure();
@@ -463,6 +467,11 @@ public class PpmController {
 		 public void chargeMode() { 
 			 //listeMode.clear();
 		     listeMode=new ArrayList<>(constantService.getListeMode());
+		 }
+		 
+		 //liste des dates de publication
+		 public void chargeDatepub() {
+			 listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
 		 }
 		 
 		 
@@ -2188,8 +2197,7 @@ public class PpmController {
 				 			userController.setTexteMsg("Opération(s) enregistrée(s) avec succès!");
 				 			userController.setRenderMsg(true);
 				 			userController.setSevrityMsg("success");
-				 	 		  
-			 	 			  
+				 	 		    
 			 	 		  }else
 			 	 		  {
 			 	 			  
@@ -2352,6 +2360,7 @@ public class PpmController {
     	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
     	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
     	  		 detailPass.setDppTypeStrConduc(strucCond);
+    	  		 detailPass.setDppDateAvisAoPublication(datePub);
     	  		 //detailPass.setTModeleDacType(new TModeleDacType(tydCode));
     	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
     	  		 detailPass.setTPlanPassation(TPlanPassation);
@@ -2390,6 +2399,7 @@ public class PpmController {
               		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
               		    //detailPass.setTModeleDacType(new TModeleDacType(tydCode));
               		    detailPass.setDppTypeStrConduc(strucCond);
+              		    detailPass.setDppDateAvisAoPublication(datePub);
               		    detailPass.setTPlanPassation(planPass);
               		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
               		    
@@ -4061,14 +4071,14 @@ public class PpmController {
 		this.slctdTdPpm = slctdTdPpm;
 	}
 
-
+   /*
 	public TModePassation getModePassation() {
 		return modePassation;
 	}
 
 	public void setModePassation(TModePassation modePassation) {
 		this.modePassation = modePassation;
-	}
+	}*/
 
 
 	public VPpmStatut getPpmstatut() {
@@ -4997,5 +5007,23 @@ public class PpmController {
 	public void setListeModele(List<VModeleDac> listeModele) {
 		this.listeModele = listeModele;
 	}
-	
+
+
+	public List<VDatePub> getListeDatePub() {
+		return listeDatePub;
+	}
+
+	public void setListeDatePub(List<VDatePub> listeDatePub) {
+		this.listeDatePub = listeDatePub;
+	}
+
+
+
+	public VModePassationPn getModePassation() {
+		return modePassation;
+	}
+
+	public void setModePassation(VModePassationPn modePassation) {
+		this.modePassation = modePassation;
+	}
 }

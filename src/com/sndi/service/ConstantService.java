@@ -3,6 +3,7 @@ package com.sndi.service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ import com.sndi.model.TStatut;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePieceOffre;
+import com.sndi.model.VDatePub;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
 import com.sndi.model.VTypeMarcheFils;
@@ -84,6 +86,9 @@ public class ConstantService {
 	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
 	private Map<String, VbPaysReference> HM_LISTE_PAYS= new HashMap<String, VbPaysReference>();
 	
+	private List<VDatePub> listeDatePub = new ArrayList<VDatePub>();
+	private Map<String, VDatePub> HM_LISTE_DATE_PUB= new HashMap<String, VDatePub>();
+	
 	//chargePiecesOffres()
 	
 	
@@ -120,6 +125,7 @@ public class ConstantService {
 		 chargePiecesOffresTable();
 		 chargeTypeStructureTable();
 		 chargePaysTable();
+		 chargeDatepubTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
@@ -381,10 +387,26 @@ public class ConstantService {
 						public VbPaysReference getListePays(String REP_CODE){
 							return HM_LISTE_PAYS.get(REP_CODE);
 						}
+						
+						
+						
+						//LISTE DES DATES DE PUBLICATION
+						public void chargeDatepubTable(){
+							listeDatePub.clear();
+							listeDatePub =(List<VDatePub>) iservice.getObjectsByColumn("VDatePub", new ArrayList<String>(Arrays.asList("DATEPUB")));
+								HashMap<String, VDatePub> aMap = new HashMap<String, VDatePub>();
+								for (VDatePub da: listeDatePub) {
+									aMap.put(""+da.getDatepub(), da);
+								}
+								HM_LISTE_DATE_PUB =  Collections.unmodifiableMap(aMap);	
+								_logger.info("HM_LISTE_DATE_PUB .size :"+ HM_LISTE_DATE_PUB.size());	
+							}
+							
+							public VDatePub getListeDatePub(String DATE_PUB){
+								return HM_LISTE_DATE_PUB.get(DATE_PUB);
+							}
 				
-	
-				
-				
+
 	
 	public static Logger get_logger() {
 		return _logger;
@@ -578,6 +600,18 @@ public class ConstantService {
 	}
 	public void setHM_LISTE_PAYS(Map<String, VbPaysReference> hM_LISTE_PAYS) {
 		HM_LISTE_PAYS = hM_LISTE_PAYS;
+	}
+	public List<VDatePub> getListeDatePub() {
+		return listeDatePub;
+	}
+	public void setListeDatePub(List<VDatePub> listeDatePub) {
+		this.listeDatePub = listeDatePub;
+	}
+	public Map<String, VDatePub> getHM_LISTE_DATE_PUB() {
+		return HM_LISTE_DATE_PUB;
+	}
+	public void setHM_LISTE_DATE_PUB(Map<String, VDatePub> hM_LISTE_DATE_PUB) {
+		HM_LISTE_DATE_PUB = hM_LISTE_DATE_PUB;
 	}
 
 }
