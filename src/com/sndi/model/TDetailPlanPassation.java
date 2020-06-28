@@ -254,7 +254,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DPP_GPG_ID", nullable = false)
+	@JoinColumn(name = "DPP_GPG_ID")
 	public TDetailPlanGeneral getTDetailPlanGeneral() {
 		return this.TDetailPlanGeneral;
 	}
