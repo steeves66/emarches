@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-09T12:56:44 -->
+<!-- 2020-06-28T16:55:03 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_ppm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266b8536-66d8-494c-802e-76b24cc2afc4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -57,8 +57,8 @@ and f.fpp_dpp_id = $P{param_code}]]>
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
 	<queryString language="SQL">
-		<![CDATA[select dps.*,tym.tym_libelle_long,tym.tym_libelle_court,mop.mop_libelle_long ,f.fon_libelle, min.min_libelle,st.str_libelle_long, sf.sou_libelle,leb.lbg_imputation,nat.nat_libelle, fg.fpp_montant_cfa,fg.fpp_montant_devise,ba.bai_libelle,dev.dev_libelle,dev.dev_symbole
-from t_detail_plan_passation dps, t_type_marche tym, t_mode_passation mop, t_fonction f, t_ministere min,t_structure st, t_financement_ppm fg,t_source_financement sf,t_l_budgets leb,t_natures nat, t_bailleur ba, t_devise dev
+		<![CDATA[select dps.*,tym.tym_libelle_long,tym.tym_libelle_court,mop.mop_libelle_long ,f.fon_libelle, min.min_libelle,st.str_libelle_long,leb.lbg_imputation,nat.nat_libelle
+from t_detail_plan_passation dps, t_type_marche tym, t_mode_passation mop, t_fonction f, t_ministere min,t_structure st,t_l_budgets leb,t_natures nat
 where dps.dpp_tym_code = tym.tym_code
 and dps.dpp_mop_code = mop.mop_code
 and dps.dpp_acteur_saisie = f.fon_cod
@@ -66,10 +66,6 @@ and dps.dpp_str_code = st.str_code
 and st.str_min_code = min.min_code
 and dps.dpp_lbg_code = leb.lbg_code(+)
 and leb.lbg_nat_code = nat.nat_code
-and dps.dpp_id = fg.fpp_dpp_id (+)
-and fg.fpp_sou_code = sf.sou_code (+)
-and fg.fpp_bai_code = ba.bai_code
-and fg.fpp_dev_code = dev.dev_code
 and dps.dpp_id= $P{param_code}]]>
 	</queryString>
 	<field name="DPP_ID" class="java.lang.Long"/>
@@ -126,20 +122,21 @@ and dps.dpp_id= $P{param_code}]]>
 	<field name="DPP_FON_COD_PF" class="java.lang.String"/>
 	<field name="DPP_FON_COD_DMP" class="java.lang.String"/>
 	<field name="DPP_MONTANT" class="java.math.BigDecimal"/>
+	<field name="DPP_NAT_INT" class="java.lang.String"/>
+	<field name="DPP_TYPE_STR_CONDUC" class="java.lang.String"/>
+	<field name="DPP_STATUT_ANO" class="java.lang.String"/>
+	<field name="DPP_DATE_SOL_FACT" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_RECEP_FACT" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_RECEP_LETTR" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_NOT_ATT" class="java.sql.Timestamp"/>
 	<field name="TYM_LIBELLE_LONG" class="java.lang.String"/>
 	<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
 	<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
 	<field name="FON_LIBELLE" class="java.lang.String"/>
 	<field name="MIN_LIBELLE" class="java.lang.String"/>
 	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
-	<field name="SOU_LIBELLE" class="java.lang.String"/>
 	<field name="LBG_IMPUTATION" class="java.lang.String"/>
 	<field name="NAT_LIBELLE" class="java.lang.String"/>
-	<field name="FPP_MONTANT_CFA" class="java.math.BigDecimal"/>
-	<field name="FPP_MONTANT_DEVISE" class="java.math.BigDecimal"/>
-	<field name="BAI_LIBELLE" class="java.lang.String"/>
-	<field name="DEV_LIBELLE" class="java.lang.String"/>
-	<field name="DEV_SYMBOLE" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

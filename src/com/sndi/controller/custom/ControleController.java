@@ -130,6 +130,7 @@ public class ControleController {
     public boolean btn_prq_dps = false;
 	public boolean panelDaoTableauBordDPubCsv = false;
 	public boolean panelDaoTableauBordDPubDps = false;
+	public boolean panelPgpmTableauBordDjPub = false;
 	//DAO
 	private boolean panelDaoTableauBordSai =false;
 	private boolean panelDaoTableauBordVal =false;
@@ -1129,8 +1130,12 @@ public class ControleController {
 						 searchDmp = false;
 						 validCPMP = true;
 						 validDMP = false;
+						 /*etatPso = false;
+						 etatPsl = true;*/
 						 etatPso = false;
-						 etatPsl = true;
+						 etatPsl = false;
+						 etatPsc = false;
+						 etatPsl_Pso = false;
 			    	}else
 			    		 if(action.equalsIgnoreCase("SAIPPM")) {
 			    			 type = "PPM";
@@ -1184,10 +1189,10 @@ public class ControleController {
 							 validDMP = false;
 							 //etatPso = false;
 							 //etatPsl = false;
-							 etatPso = true;
-							 etatPsl = true;
-							 etatPsc = true;
-							 etatPsl_Pso = true;
+							 etatPso = false;
+							 etatPsl = false;
+							 etatPsc = false;
+							 etatPsl_Pso = false;
 							 searchAC = true;
 							 searchCpmp = false;
 							 searchDmp = false;
@@ -1255,10 +1260,15 @@ public class ControleController {
 				    				btn_new =false;
 									panel1 =false;
 									panel2 =true;
+									panel3 = false;
 									panelPpmTableauBordSai = false;
 									panelPpmTableauBordVal = false;
 									panelPgpmTableauBordPpPub = true;
 									panelPgpmTableauBordPspPub = false;
+									panelPpmTableauBordSai = false;
+									panelPpmTableauBordVal = false;
+									panelPgpmTableauBordDpgPub = false;
+									panelPgpmTableauBordDpsgPub = false;
 									panelPpm = true;
 									panelPspm = false;
 									fermerVal = true;
@@ -1299,8 +1309,9 @@ public class ControleController {
 											panel3 = true;
 											panelPpmTableauBordSai = false;
 											panelPpmTableauBordVal = false;
-											panelPgpmTableauBordPpPub = true;
+											panelPgpmTableauBordPpPub = false;
 											panelPgpmTableauBordPspPub = false;
+											panelPgpmTableauBordDpgPub = true;
 											panelPpm = true;
 											panelPspm = false;
 											fermerVal = true;
@@ -1545,8 +1556,10 @@ public class ControleController {
 											panel3 = true;
 											panelPpmTableauBordSai = false;
 											panelPpmTableauBordVal = false;
-											panelPgpmTableauBordPpPub = true;
+											panelPgpmTableauBordPpPub = false;
 											panelPgpmTableauBordPspPub = false;
+											panelPgpmTableauBordDpgPub = false;
+											panelPgpmTableauBordDpsgPub = true;
 											panelPpm = true;
 											panelPspm = false;
 											fermerVal = true;
@@ -3965,8 +3978,9 @@ public class ControleController {
 																				 panelDaoTableauBordPrise = false;
 																				 panelDaoTableauBordPubDps = false;
 																				 panelDaoTableauBordPubCsv = false;
-																				 panelDaoTableauBordDPubCsv = true;
+																				 //panelDaoTableauBordDPubCsv = true;
 																				 panelDaoTableauBordDPubDps = false;
+																				 panelPgpmTableauBordDpsgPub = true;
 																				 panelDao = false;  
 																				 panelPrq = false;
 																				 btn_trans_ami =false;
@@ -9703,6 +9717,15 @@ public class ControleController {
 	public void setEtatPsl_Pso(boolean etatPsl_Pso) {
 		this.etatPsl_Pso = etatPsl_Pso;
 	}
+
+
+	public boolean isPanelPgpmTableauBordDjPub() {
+		return panelPgpmTableauBordDjPub;
+	}
+
+
+	public void setPanelPgpmTableauBordDjPub(boolean panelPgpmTableauBordDjPub) {
+		this.panelPgpmTableauBordDjPub = panelPgpmTableauBordDjPub;
+	}
 	
-   
 }

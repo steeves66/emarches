@@ -167,7 +167,7 @@
                 </div>
                 </h:panelGroup>
                 
-                <div class="form-group">
+            <!--     <div class="form-group">
                   <label  class="col-sm-3 control-label">Modèle de DAO-type</label>
                   
                   <h:panelGroup rendered="#{ppmModificationController.modeleDao}" >
@@ -179,6 +179,16 @@
                   </div>
                   </h:panelGroup>  
                   
+                </div>  -->
+                
+                 <div class="form-group">
+                  <label for="prod" class="col-sm-3 control-label">Bailleur<span style="color:red;"> *</span></label>
+                  <div class="col-sm-9">
+                     <p:selectOneRadio value="#{ppmModificationController.updatePpm.dppBailleur}" id="prod">
+						<f:selectItem itemLabel="OUI" itemValue="B" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+                  </div>
                 </div> 
                 
                  <div class="form-group">
@@ -241,16 +251,8 @@
                 </h:panelGroup>
                 
                   <div class="form-group">
-                  <label for="prod" class="col-sm-3 control-label">Bailleur<span style="color:red;"> *</span></label>
-                  <div class="col-sm-2">
-                     <p:selectOneRadio value="#{ppmModificationController.updatePpm.dppBailleur}" id="prod">
-						<f:selectItem itemLabel="OUI" itemValue="B" />
-						<f:selectItem itemLabel="NON" itemValue="N" />
-					 </p:selectOneRadio>
-                  </div>
-                  
                   <label for="ano1" class="col-sm-3 control-label">ANO<span style="color:red;"> *</span></label>
-                  <div class="col-sm-2">
+                  <div class="col-sm-9">
                      <p:selectOneRadio value="#{ppmController.updatePpm.dppStatutAno}" id="ano1">
 						<f:selectItem itemLabel="OUI" itemValue="O" />
 						<f:selectItem itemLabel="NON" itemValue="N" />
@@ -267,8 +269,17 @@
 		   
 		   <label for="rr" class="col-sm-2 control-label">Date Pub<span style="color:red;"> *</span></label>
 		     <div class="col-sm-3">
-		       <p:calendar id="rr" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" pattern="dd/MM/yyyy" style="width: 100%" >
-		       </p:calendar> 
+		    <table>
+		      <tr>
+		      <td style="width:50px"><p:calendar id="rr" readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		       </p:calendar></td>
+		       <td>
+		       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+			   <i class="fa fa-search-plus"></i>
+			  </p:commandLink>
+		     </td>
+		   </tr>
+          </table>    
 		   </div>
 		   </div>        
 	       </div>
@@ -1335,6 +1346,55 @@
 	    </div>
       </p:dialog>
     </h:form>
+    
+     
+    <h:form id="dlogDate">
+	        <p:dialog  widgetVar="datePubDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Selectionnez la date de Publication">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <!-- <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				        <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtreModePassation}" id="filtrePass"  placeholder="saisir la date de Publication" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{pgpmController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
+                         </span>
+					 </div> -->
+						 
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleDateP" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeDatePub}"
+						 selectionMode="single" rowKey="#{slctdTb.datepub}"
+			               emptyMessage="Aucune date de Publication enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							
+						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmModificationController.onSelectDatePub()}" update="gnl:modeP1, gnl:modeP2" >				        
+         				  <h:outputText value="#{slctdTb.libelle}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.pubDate}" />
+                                </h:commandLink>
+				        </p:column>
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
      
   
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

@@ -45,6 +45,7 @@ import com.sndi.model.TTypeCharge;
 import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeProcedure;
+import com.sndi.model.VDatePub;
 import com.sndi.model.VDetPlaning;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VGenerationDate;
@@ -126,6 +127,7 @@ public class PpmModificationController {
 		 chargeFinancement();
 		 chargeMarches();
 		 chargeModePassation();
+		 chargeDatepub();
 		 //chargePpmTrans();
 		 //chargePspmTrans();
 		 //chargePpmValDmp();
@@ -194,6 +196,7 @@ public class PpmModificationController {
 	     private List<TAffichagePpm> pspmDifDmp = new ArrayList<TAffichagePpm>();
 	     private List<TPlanPassation> listPlan = new ArrayList<TPlanPassation>();
 	     private List<VUpdatePpm> listUpdate = new ArrayList<VUpdatePpm>();
+	     private List<VDatePub> listeDatePub = new ArrayList<VDatePub>();
 	 
 		//Declaration des objets
 		 private TPlanPassation planPass = new TPlanPassation();
@@ -235,6 +238,7 @@ public class PpmModificationController {
 		 private TStructure recupStructure= new TStructure();
 		 private THistoPlanPassation histoPpm = new THistoPlanPassation();
 		 private VUpdatePpm updatePpm = new VUpdatePpm();
+		 private VDatePub pubDate = new VDatePub();
 		 private VModePassation recupModeListe = new VModePassation();
 		 private VModePassation passationListe = new VModePassation();
 		
@@ -307,6 +311,13 @@ public class PpmModificationController {
 			 //listeMode.clear();
 		     listeMode=new ArrayList<>(constantService.getListeMode());
 		 }
+		 
+		 
+		 //liste des dates de publication
+		 public void chargeDatepub() {
+			 listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
+		 }
+		 
 		 
 		 
 		//Liste des Modes de Passation restreint
@@ -1003,6 +1014,12 @@ public class PpmModificationController {
 			  recuPpm.setDppObjet(ppm.getDppObjet());
 			  recuPpm.setDppId(ppm.getDppId());
 				}
+		 
+		 
+		 
+		 public void onSelectDatePub() {	
+				updatePpm.setDppDateAvisAoPublication(pubDate.getDatepub());
+			}
 		 
 		 
 		 public void onSelectLigneBudgetaire() { 
@@ -2922,6 +2939,22 @@ public class PpmModificationController {
 
 	public void setListeModele(List<VModeleDac> listeModele) {
 		this.listeModele = listeModele;
+	}
+
+	public List<VDatePub> getListeDatePub() {
+		return listeDatePub;
+	}
+
+	public void setListeDatePub(List<VDatePub> listeDatePub) {
+		this.listeDatePub = listeDatePub;
+	}
+
+
+	public VDatePub getPubDate() {
+		return pubDate;
+	}
+	public void setPubDate(VDatePub pubDate) {
+		this.pubDate = pubDate;
 	}
 
 }

@@ -193,7 +193,7 @@ public class TableauBordController {
 		     private String ppmDmDiff="";
 		     private String ppmDmAttentePub = "";
 		     private String ppmPub = "";
-		     
+		     private String ppmdjPub = "";
 		     //PSPM
 			 private String pspmTotal=""; 
 			 /*
@@ -687,6 +687,7 @@ public class TableauBordController {
 									 ppmDmDiff = ""+getPpmDiffDmp("S3D","SPR",typePlan);
 									 ppmDmAttentePub = ""+getPpmValideDmp("S3V",typePlan);
 									 ppmPub = ""+getPpmValideDmp("PPU",typePlan);
+									 setPpmdjPub(""+getPpmDejaPub());
 								 }
 							 }
 					     } 
@@ -2221,6 +2222,11 @@ public int getPpmValideDmp(String src,String typePlan){
 			new WhereClause("DPP_STA_CODE", WhereClause.Comparateur.EQ, src),
 			new WhereClause("DPP_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
 			//new WhereClause("DPP_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;	
+}
+
+public int getPpmDejaPub(){
+	int i = iservice.countTableByColumn("V_PPM_PUB", "NUMERO");
 	return	i;	
 }
 
@@ -5828,6 +5834,12 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setTableauBordDmp(VTabBordDmp tableauBordDmp) {
 		this.tableauBordDmp = tableauBordDmp;
+	}
+	public String getPpmdjPub() {
+		return ppmdjPub;
+	}
+	public void setPpmdjPub(String ppmdjPub) {
+		this.ppmdjPub = ppmdjPub;
 	}
 
 
