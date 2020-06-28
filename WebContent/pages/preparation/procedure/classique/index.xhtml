@@ -1121,113 +1121,43 @@
 					 </div>
 					 </h:panelGroup>
 					
-               <p:dataTable id="ndTble5" styleClass="table mb0 dt-on-steroids dataTable"  
+               <p:dataTable id="ndTble51" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.pgpmPub}" 
 					  emptyMessage="Aucun #{controleController.type} enregistré" rows="10" 
                          paginator="true"
                          rowsPerPageTemplate="5,10,15" >
                         
-                         <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
+                         <p:column headerText="N Journal" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.gpgNumJnlPub}" />
+				        </p:column>
+				        
+				          
+				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.gpgObjet}" />
+				        </p:column>
                          
                         <p:column headerText="Financement" styleClass="col-sm-2" >
-                         <h:panelGroup >
-         				<h:outputText  style="color:red; font-weight:bold "/>
-         				</h:panelGroup>
-         				
-         				<h:panelGroup >
-         				<h:outputText />
-         				</h:panelGroup>
+         				<h:outputText value="#{slctdTb.gpgLibFin}" />
 				        </p:column>
-				        
-				       <p:column headerText="Réalisations envisagées" styleClass="col-sm-3" >
-				         <h:panelGroup >
-         				<h:outputText  style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-         				<h:panelGroup >
-         				<h:outputText  />
-         				</h:panelGroup>
-         				
-				        </p:column>
-				         <p:column headerText="Autorité Contractante" styleClass="col-sm-4" >
-				         <h:panelGroup >
-         				<h:outputText  style="color:red; font-weight:bold "/>
-         				</h:panelGroup>
-         				
-         				<h:panelGroup >
-         				<h:outputText  />
-         				</h:panelGroup>
-				        </p:column> 
-				        
+
                          <p:column headerText="Type Marché" styleClass="col-sm-3" >
-                         <h:panelGroup >
-         				<h:outputText  style="color:red; font-weight:bold" />
-         				</h:panelGroup>
-         				
-         				<h:panelGroup >
-         				<h:outputText  />
-         				</h:panelGroup>
-         				
+         				<h:outputText value="#{slctdTb.tymLibelle}" />
 				        </p:column>
 				       
-         				<p:column headerText="Mode de passation" styleClass="col-sm-3" >
-         				<h:panelGroup >
-         				<h:outputText  style="color:red; font-weight:bold"/>
-         				</h:panelGroup>
-         				
-         				<h:panelGroup >
-         				<h:outputText  />
-         				</h:panelGroup>
-         				
-				        </p:column>
-				        
-				        <p:column headerText="Part réservée aux PME" styleClass="col-sm-3" >
-				        <h:panelGroup >
-         				<h:outputText style="color:red; font-weight:bold"/>  
-         				</h:panelGroup>
-         				
-         				<h:panelGroup >
-         				<h:outputText />  
-         				</h:panelGroup>
-         				
-				        </p:column>
-				        
-				        <p:column headerText="Lancement" styleClass="col-sm-2" >
-				         <h:panelGroup >
-         				<h:outputText   style="color:red; font-weight:bold" >
-         				</h:outputText>
-         				</h:panelGroup>
-         				
-         				 <h:panelGroup >
-         				<h:outputText  >
-         				
-         				</h:outputText>
-         				</h:panelGroup>
-				        </p:column>
-				        
-				        
 				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:panelGroup >
-         				<h:outputText  style="color:red; font-weight:bold ">
-         				
+         				<h:outputText value="#{slctdTb.gpgDateValAc}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
-         				</h:panelGroup>
-				        <h:panelGroup >
-         				<h:outputText >
-         				
-         				</h:outputText>
-         				</h:panelGroup>
 				        </p:column>
 				        
- 
 				        <p:column  headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText >
-         				
+         				<h:outputText value="#{slctdTb.gpgDateValCpmp}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
          				</h:outputText>
 				        </p:column>
 				         
 				       
                       <p:column headerText="Actions" styleClass="col-sm-2">
-                            
-                             
+                        
                               <p:commandLink class="btn btn-xs btn-warning" action="#{pgpmAcController.pgpmUnique()}" style="background-color: #f88b2e; margin-left:3px" title="Editer le PGPM" ajax="false">
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.slctdTd}" />

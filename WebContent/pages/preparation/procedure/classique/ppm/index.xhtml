@@ -862,6 +862,66 @@
 				         </p:column>   
                        </p:dataTable>
                        </h:panelGroup>
+                       
+                       
+                       
+                    <h:panelGroup rendered="#{controleController.panel3}">	  
+					<p:dataTable id="ndTble3" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.ppmPub}" 
+					rowKey="#{slctdTb.numero}" emptyMessage="Aucune operation publiée" 
+                       scrollable="true" scrollHeight="250" >
+                         
+                         <p:column headerText="N° Journal" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.dppNumJnlPub}" />
+				        </p:column>
+                         
+                         <p:column headerText="Objet de l'Opération" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.dppObjet}" />
+				        </p:column>
+
+                        <p:column headerText="Source Financement" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dppSourceFin}" />
+				        </p:column>
+				        
+				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dppLbgCode}" />
+				        </p:column>
+				        
+				         
+				        <p:column headerText="Type Marché" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.tymLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppStrucConduc}" />
+				        </p:column> 
+				        
+				       
+         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.dppStrucBenef}" />
+				        </p:column> 
+				        
+				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dppDateValAc}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				       </h:panelGroup> 
+				         
+				         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
+         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+         				</h:outputText>
+				        </p:column>
+				        </h:panelGroup>
+				         
+				       
+                      <p:column headerText="Actions" styleClass="col-sm-2">
+                             
+				         </p:column>   
+                       </p:dataTable>
+                       </h:panelGroup>
    	
 						</div>
 					</div>

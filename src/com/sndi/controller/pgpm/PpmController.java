@@ -201,7 +201,8 @@ public class PpmController {
 	     private List<VUpdatePpm> listUpdate = new ArrayList<VUpdatePpm>();
 	     private List<VTypeMarcheFils> listeTypeMarchesFils = new ArrayList<VTypeMarcheFils>();
 	     private List<VModeleDac> listeModele = new ArrayList<VModeleDac>();
-	 
+	     private List<VPpmPub> ppmPub = new ArrayList<VPpmPub>();
+	     
 		//Declaration des objets
 		 private TPlanPassation planPass = new TPlanPassation();
 		 private TDetailPlanPassation detailPass = new TDetailPlanPassation();
@@ -864,6 +865,31 @@ public class PpmController {
 			 }
 		 //Fin de la Methode de Publication des PPM
 	 
+	 //Affichage des PPM déjà publiés
+	 public void chargePpmPublier() {
+		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			
+		 }else {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+			
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+					 getPpmPub().clear(); 
+					 ppmPub = (List<VPpmPub>) iservice.getObjectsByColumnDesc("VPpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
+							tableauBordController.chargeDataPgpm();
+							_logger.info("ppmPub size: "+ppmPub.size());
+				 }else
+					  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						  getPpmPub().clear(); 
+							 ppmPub = (List<VPpmPub>) iservice.getObjectsByColumnDesc("VPpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
+									tableauBordController.chargeDataPgpm();
+									_logger.info("ppmPub size: "+ppmPub.size());
+			     }
+		     } 
+		   }
+		 }
+	 //Fin de la Methode de Publication des PPM déjà publiés
+	 
 	 //Methode de Gestion des listes de Publication des PPM
 	 public void chargePpmPUB() {
 		 String fonct = controleController.getFonctionalite();
@@ -876,6 +902,7 @@ public class PpmController {
 					 }else {
 						 if(fonct.equalsIgnoreCase("listePpmPub")) {
 							 //chargeDataAPublier("PN", "S3V");
+							 chargePpmPublier();
 						 }else {
 							
 						 }	 
@@ -892,6 +919,7 @@ public class PpmController {
 					        }else {
 						       if(fonct.equalsIgnoreCase("listePpmPub")) {
 							       //  chargeDataAPublier("PS", "S3V");
+						    	   chargePpmPublier();
 						     }else {
 							
 						 }	 
@@ -5011,6 +5039,24 @@ public class PpmController {
 
 	public void setPubDate(VDatePub pubDate) {
 		this.pubDate = pubDate;
+	}
+
+
+
+
+
+
+	public List<VPpmPub> getPpmPub() {
+		return ppmPub;
+	}
+
+
+
+
+
+
+	public void setPpmPub(List<VPpmPub> ppmPub) {
+		this.ppmPub = ppmPub;
 	}
 
 }

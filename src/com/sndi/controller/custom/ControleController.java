@@ -757,8 +757,10 @@ public class ControleController {
 				    			}else
 					    			if(action.equalsIgnoreCase("PUBPGPM")) { 
 					    			type = "PGPM";
-				    				libelle="PUBLICATION DES PLANS GENERAUX DE PASSATION DE MARCHES";	
-				    				libelle1="PUBLICATION DES PLANS GENERAUX DE PASSATION DE MARCHES";
+					    			typePlan ="PN";
+					    			fonctionalite = "listePgpmAttPub";
+				    				libelle="PLANS GENERAUX DE PASSATION DE MARCHES EN ATTENTE DE PUBLICATION";	
+				    				libelle1="PLANS GENERAUX DE PASSATION DE MARCHES EN ATTENTE DE PUBLICATION";
 				    				libelleSmall="Procédure Normale";
 				    				panelDetail=false;
 				    				panelForm=false;
@@ -810,6 +812,8 @@ public class ControleController {
 						    			}else
 							    			if(action.equalsIgnoreCase("DPUBPGPM")) { 
 								    			type = "PGPM";
+								    			typePlan ="PN";
+								    			fonctionalite = "listePgpmPub";
 							    				libelle="PLANS GENERAUX DE PASSATION DE MARCHES PUBLIES";	
 							    				libelle1="PLANS GENERAUX DE PASSATION DE MARCHES PUBLIES";
 							    				libelleSmall="Procédure Normale";
@@ -977,8 +981,10 @@ public class ControleController {
 				    			}else
 					    			if(action.equalsIgnoreCase("PUBPGSPM")) { 
 					    			type = "PGSPM";
-				    				libelle="PUBLICATION DES PLANS GENERAUX DE PASSATION DE MARCHES";	
-				    				libelle1="PUBLICATION DES PLANS GENERAUX DE PASSATION DE MARCHES";
+					    			typePlan ="PS";
+					    			fonctionalite = "listePgspmAttPub";
+				    				libelle="PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES EN ATTENTE DE PUBLICATION";	
+				    				libelle1="PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES EN ATTENTE DE PUBLICATION";
 				    				libelleSmall="Procédure Simplifiée";
 				    				panelDetail=false;
 				    				panelForm=false;
@@ -1031,6 +1037,8 @@ public class ControleController {
 						    			}else
 							    			if(action.equalsIgnoreCase("DPUBPGSPM")) { 
 								    			type = "PGSPM";
+								    			typePlan ="PS";
+								    			fonctionalite = "listePgspmPub";
 							    				libelle="PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES PUBLIES";	
 							    				libelle1="PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES PUBLIES";
 							    				libelleSmall="Procédure Simplifiée";
@@ -1287,7 +1295,8 @@ public class ControleController {
 						   				    panelTraitement=true;
 						    				btn_new =false;
 											panel1 =false;
-											panel2 =true;
+											panel2 =false;
+											panel3 = true;
 											panelPpmTableauBordSai = false;
 											panelPpmTableauBordVal = false;
 											panelPgpmTableauBordPpPub = true;
@@ -1532,7 +1541,8 @@ public class ControleController {
 						   				    panelTraitement=true;
 						    				btn_new =false;
 											panel1 =false;
-											panel2 =true;
+											panel2 =false;
+											panel3 = true;
 											panelPpmTableauBordSai = false;
 											panelPpmTableauBordVal = false;
 											panelPgpmTableauBordPpPub = true;

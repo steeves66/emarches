@@ -59,8 +59,10 @@ import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VModePassation;
 import com.sndi.model.VModePassationPn;
 import com.sndi.model.VPgpm;
+import com.sndi.model.VPgpmPub;
 import com.sndi.model.VPgpmStatut;
 import com.sndi.model.VPgpmliste;
+import com.sndi.model.VPpmPub;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VUpdateAgpm;
 import com.sndi.model.VUpdatePgpm;
@@ -245,6 +247,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private TStructure recupStructure= new TStructure(); 
 		 private TFinancement finAgpm = new TFinancement();
 		 private VPgpmliste varPgpm = new VPgpmliste();
+		 private List<VPgpmPub> pgpmPub = new ArrayList<VPgpmPub>();
 		//Declaration des variables
 		 private long gesCode;	
 		 private String filtreTypeMarche="";
@@ -480,6 +483,73 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			   
 			 }
 		 //Fin Methode Publication
+		 
+		 //Affichage des PGPM déjà publiés
+		 public void chargePgpmPublier() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+				
+				 }else {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 getPgpmPub().clear(); 
+						 pgpmPub = (List<VPgpmPub>) iservice.getObjectsByColumnDesc("VPgpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
+								tableauBordController.chargeDataPgpm();
+								_logger.info("pgpmPub size: "+pgpmPub.size());
+					 }else
+						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							  getPgpmPub().clear(); 
+								 pgpmPub = (List<VPgpmPub>) iservice.getObjectsByColumnDesc("VPgpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
+										tableauBordController.chargeDataPgpm();
+										_logger.info("pgpmPub size: "+pgpmPub.size());
+				     }
+			     } 
+			   }
+			 }
+		 //Fin de la Methode de Publication des PPM déjà publiés
+		 
+		 
+		//Methode de Gestion des listes de Publication des PPM
+		 public void chargePpgmPUB() {
+			 String fonct = controleController.getFonctionalite();
+			 //DEBUT PPM Publié 
+			 if(controleController.type == "PGPM" && controleController.typePlan == "PN") { 
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+					 //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
+						 if(fonct.equalsIgnoreCase("listePgpmAttPub")) {
+							chargeDataAPublierPgpm("PN");	
+						 }else {
+							 if(fonct.equalsIgnoreCase("listePgpmPub")) {
+								 //chargeDataAPublier("PN", "S3V");
+								 chargePgpmPublier();
+							 }else {
+								
+							 }	 
+						 }
+			       //Fin affichage SPP
+				     }
+
+				 }else{
+	                       if(controleController.type == "PGSPM" && controleController.typePlan == "PS") { 
+				              if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+					                //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
+						       if(fonct.equalsIgnoreCase("listePgspmAttPub")) {
+							        chargeDataAPublierPgpm("PS");	
+						        }else {
+							       if(fonct.equalsIgnoreCase("listePgspmPub")) {
+								       //  chargeDataAPublier("PS", "S3V");
+							    	   chargePgpmPublier();
+							     }else {
+								
+							 }	 
+						 }
+			       //Fin affichage  SPP 
+				 }
+				}
+			}
+		}
+	//Fin de la Methode de Gestion des listes des publications
 		 
 		//PGSPM : Nouvelle Methode
 		 public void chargeDataAvaliderPgspm() {
@@ -3301,7 +3371,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				case "pgpm1":
 					chargeData();
 					chargeDataAvaliderPgpm();
-					chargeDataAPublierPgpm("PN");
+					/*chargeDataAPublierPgpm("PN");*/
+					chargePpgmPUB();
 					tableauBordController.ChargeTbProcedure("PN","PGPM");
 					listeFinancement.clear();
 					listeFinancementAgpm.clear();
@@ -3346,7 +3417,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				case "pgspm1":
 					chargeDataPgspm();
 		 			chargeDataAvaliderPgspm();
-		 			chargeDataAPublierPgpm("PS");
+		 			//chargeDataAPublierPgpm("PS");
+		 			chargePpgmPUB();
 		 			tableauBordController.ChargeTbProcedure("PS","PGPM");
 		 			userController.initMessage();
 				break;
@@ -4538,6 +4610,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		this.pgspmPubDmp = pgspmPubDmp;
 	}
 
-	
+	public List<VPgpmPub> getPgpmPub() {
+		return pgpmPub;
+	}
+
+	public void setPgpmPub(List<VPgpmPub> pgpmPub) {
+		this.pgpmPub = pgpmPub;
+	}
 
 }
