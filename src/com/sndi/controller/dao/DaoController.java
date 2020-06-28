@@ -73,6 +73,7 @@ import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAdresse;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCritereAnalyse;
+import com.sndi.model.VCritereAnalyseModel;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoBailleur;
@@ -203,8 +204,8 @@ public class DaoController {
 	private List<TTypePieceOffre> listeSelectionPiecesOffres= new ArrayList<TTypePieceOffre>();
 	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
 	//GESTION DES CRITERES D'ANALYSE
-	private List<VCritereAnalyse> listeCritereAnalyse = new ArrayList<VCritereAnalyse>();
-	private List<VCritereAnalyse> selectionlisteCritereAnalyse = new ArrayList<VCritereAnalyse>();
+	private List<VCritereAnalyseModel> listeCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
+	private List<VCritereAnalyseModel> selectionlisteCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
 	//private List<VbDetCritAnalyse> selectionDetCritere = new ArrayList<VbDetCritAnalyse>();
 
@@ -463,21 +464,16 @@ public class DaoController {
 	 
 	 //GESTION DES CRITERES
 	//Parametrage des criteres en fonction du type plan et du type dac
-	 public void chargeCritereByType(String typePlan , String typeDac) { 
-		 listeCritereAnalyse= (List<VCritereAnalyse>) iservice.getObjectsByColumn("VCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_CODE")),
-					new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,""+dao.getTTypeMarche().getTymCode()),
-					new WhereClause("CRA_TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
-					new WhereClause("CRA_TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+	 public void chargeCritere() { 
+		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()));
 		 /*new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,"2"));*/
 		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
-		 _logger.info("procédure: "+typePlan);
-		 _logger.info("type dac: "+typeDac);
-		 _logger.info("type dac: "+dao.getTTypeMarche().getTymCode());
 	 }
 	 
 	 
 	 //Afficahe de la liste des critères en fonction des types passé en parametre
-	 public void chargeCritere() {
+	/* public void chargeCritere() {
 		 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
 			 chargeCritereByType("PN","DAO");
 			 }else {
@@ -495,7 +491,7 @@ public class DaoController {
 			 }
 		 _logger.info("procédure: "+controleController.getTypePlan());
 		 _logger.info("type dac: "+controleController.getType());
-	 }
+	 }*/
 	 
 		//Combo box critère
 	 
@@ -522,10 +518,10 @@ public class DaoController {
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère sélectionné", ""));
 			}
 	 		else{
-		 		 for(VCritereAnalyse ligne : selectionlisteCritereAnalyse) {
+		 		 for(VCritereAnalyseModel ligne : selectionlisteCritereAnalyse) {
 		 			newCritereDac.setDcadDacCode(dao.getDacCode());
-		 			newCritereDac.setDcadDanCode(ligne.getCraCode());
-		 			newCritereDac.setDcadDanCraCode(ligne.getCodparent());
+		 			newCritereDac.setDcadDanCode(ligne.getCodedetail());
+		 			//newCritereDac.setDcadDanCraCode(ligne.getCraCode());
 		 			newCritereDac.setDcadDteSaisie(Calendar.getInstance().getTime());
 		 			newCritereDac.setDcadLibAjust(ligne.getCraLibelle());
 		 			newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
@@ -5309,13 +5305,7 @@ public class DaoController {
 		this.listeMembre = listeMembre;
 	}
 
-	public List<VCritereAnalyse> getListeCritereAnalyse() {
-		return listeCritereAnalyse;
-	}
 
-	public void setListeCritereAnalyse(List<VCritereAnalyse> listeCritereAnalyse) {
-		this.listeCritereAnalyse = listeCritereAnalyse;
-	}
 
 	public VbCommissionSpecifique getSltCompsec() {
 		return sltCompsec;
@@ -5339,14 +5329,6 @@ public class DaoController {
 
 	public void setNewCritereDac(VbDetCritAnalyseDac newCritereDac) {
 		this.newCritereDac = newCritereDac;
-	}
-
-	public List<VCritereAnalyse> getSelectionlisteCritereAnalyse() {
-		return selectionlisteCritereAnalyse;
-	}
-
-	public void setSelectionlisteCritereAnalyse(List<VCritereAnalyse> selectionlisteCritereAnalyse) {
-		this.selectionlisteCritereAnalyse = selectionlisteCritereAnalyse;
 	}
 
 	public List<VbCritereAnalyse> getListeCritere() {
@@ -5483,6 +5465,22 @@ public class DaoController {
 
 	public void setStatutPub(String statutPub) {
 		this.statutPub = statutPub;
+	}
+
+	public List<VCritereAnalyseModel> getListeCritereAnalyse() {
+		return listeCritereAnalyse;
+	}
+
+	public void setListeCritereAnalyse(List<VCritereAnalyseModel> listeCritereAnalyse) {
+		this.listeCritereAnalyse = listeCritereAnalyse;
+	}
+
+	public List<VCritereAnalyseModel> getSelectionlisteCritereAnalyse() {
+		return selectionlisteCritereAnalyse;
+	}
+
+	public void setSelectionlisteCritereAnalyse(List<VCritereAnalyseModel> selectionlisteCritereAnalyse) {
+		this.selectionlisteCritereAnalyse = selectionlisteCritereAnalyse;
 	}
 	
 	

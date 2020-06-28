@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-05-31T01:40:34 -->
+<!-- 2020-06-28T15:37:23 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Pgpm2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fa970b9-a7ef-4c6b-b72a-fbcc7c94abfa">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -40,61 +40,26 @@
 		<parameter name="param_op" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select *
-from v_pgpm_details vp
+from v_etat_liste_pgpm vp
 where vp.gpg_type_plan = 'PS'
-and vp.gpg_sta_code = 'S1S'
+and vp.gpg_sta_code in('S1S','S2D') 
 and vp.plg_ges_code = $P{param_code}
 and vp.gpg_acteur_saisie = $P{param_op}
 order by vp.v_id]]>
 		</queryString>
 		<field name="V_ID" class="java.math.BigDecimal"/>
 		<field name="AFF_STATUT" class="java.lang.String"/>
-		<field name="GPG_ID" class="java.lang.Long"/>
-		<field name="SOU_LIBELLE" class="java.lang.String"/>
 		<field name="GPG_OBJET" class="java.lang.String"/>
 		<field name="GPG_STA_CODE" class="java.lang.String"/>
 		<field name="GPG_TYPE_PLAN" class="java.lang.String"/>
 		<field name="GPG_ACTEUR_SAISIE" class="java.lang.String"/>
 		<field name="GPG_LIB_FIN" class="java.lang.String"/>
 		<field name="FON_LIBELLE" class="java.lang.String"/>
-		<field name="TYM_CODE" class="java.lang.String"/>
 		<field name="TYM_LIBELLE_COURT" class="java.lang.String"/>
-		<field name="MOP_CODE" class="java.lang.String"/>
-		<field name="MOP_LIBELLE_COURT" class="java.lang.String"/>
-		<field name="MOP_LIBELLE_LONG" class="java.lang.String"/>
-		<field name="GPG_PARTIE_PME_PMI" class="java.lang.String"/>
+		<field name="GPG_MOP_CODE" class="java.lang.String"/>
 		<field name="GPG_DATE_DAO" class="java.sql.Timestamp"/>
-		<field name="GPG_COMMENTAIRE" class="java.lang.String"/>
-		<field name="GPG_NUMERO_ORDRE" class="java.math.BigDecimal"/>
-		<field name="GPG_DATE_SAISIE" class="java.sql.Timestamp"/>
-		<field name="PLG_ID" class="java.math.BigDecimal"/>
 		<field name="PLG_GES_CODE" class="java.math.BigDecimal"/>
-		<field name="MIN_LIBELLE" class="java.lang.String"/>
-		<field name="MIN_LIBELLE_COURT" class="java.lang.String"/>
-		<field name="STR_CODE" class="java.lang.String"/>
-		<field name="STR_LIBELLE_COURT" class="java.lang.String"/>
-		<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
-		<group name="SOU_LIBELLE">
-			<groupExpression><![CDATA[$F{SOU_LIBELLE}]]></groupExpression>
-		</group>
-		<group name="GPG_OBJET">
-			<groupExpression><![CDATA[$F{GPG_OBJET}]]></groupExpression>
-		</group>
-		<group name="FON_LIBELLE">
-			<groupExpression><![CDATA[$F{FON_LIBELLE}]]></groupExpression>
-		</group>
-		<group name="TYM_LIBELLE_COURT">
-			<groupExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></groupExpression>
-		</group>
-		<group name="MOP_CODE">
-			<groupExpression><![CDATA[$F{MOP_CODE}]]></groupExpression>
-		</group>
-		<group name="GPG_PARTIE_PME_PMI">
-			<groupExpression><![CDATA[$F{GPG_PARTIE_PME_PMI}]]></groupExpression>
-		</group>
-		<group name="GPG_DATE_DAO">
-			<groupExpression><![CDATA[$F{GPG_DATE_DAO}]]></groupExpression>
-		</group>
+		<field name="GPG_PARTIE_PME_PMI" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="param_image" class="java.lang.String">
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
@@ -218,7 +183,7 @@ and pl.plg_fon_cod = $P{param_op}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{SOU_LIBELLE}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{GPG_LIB_FIN}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
@@ -312,7 +277,7 @@ and pl.plg_fon_cod = $P{param_op}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="7"/>
 								</textElement>
-								<textFieldExpression><![CDATA[$F{MOP_CODE}]]></textFieldExpression>
+								<textFieldExpression><![CDATA[$F{GPG_MOP_CODE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>

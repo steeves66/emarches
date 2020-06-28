@@ -149,52 +149,6 @@
               
           <!-- Début Tableau de Bord pour le CPMP -->       
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">      
-          <h:panelGroup rendered="#{controleController.panelPgpmTableauBordSai}">
-              
-            <div id="collapseOne" class="panel-collapse collapse in">
-                    <div class="box-body">
-                      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <h3>#{tableauBordController.tableauBord.valPf}</h3>
-
-              <p>En attente de transmission</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            
-           <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
-					 <i class="fa fa-arrow-circle-right"></i>		
-						  </p:commandLink>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <h3>#{tableauBordController.tableauBord.valPf}</h3>
-
-              <p>Transmis</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-          
-            <p:commandLink  oncomplete="PF('detailDlg').show()" class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-						  </p:commandLink> 
-          </div>
-        </div>
-        <!-- ./col -->
-   
-      </div>
-                    </div>
-                  </div>
-       </h:panelGroup> 
        
        <h:panelGroup rendered="#{controleController.panelPgpmTableauBordVal}">
                      <div id="collapseOne" class="panel-collapse collapse in">
