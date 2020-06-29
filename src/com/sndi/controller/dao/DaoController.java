@@ -217,6 +217,7 @@ public class DaoController {
 	 private TDetailPlanPassation demDetail = new TDetailPlanPassation();
 	 private List<TDacSpecs> listeDaoCsvValid = new ArrayList<TDacSpecs>();
 	 private VPpmDao daoDetail = new VPpmDao();
+	 private VDacMembre selecMembre = new VDacMembre();
 	 private TDacSpecs dao= new TDacSpecs();
 	 private VDacliste slctdTd = new VDacliste();
 	 private TDaoAffectation slctdTda = new TDaoAffectation();
@@ -1447,9 +1448,7 @@ public class DaoController {
 						 public void chargeMembres() {
 							 listeMembre = ((List<VDacMembre>)iservice.getObjectsByColumn("VDacMembre",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
-									_logger.info("listeMembre size: "+listeMembre.size());	
-									
-									
+									_logger.info("listeMembre size: "+listeMembre.size());				
 						 }
 					 
 						 
@@ -1524,12 +1523,13 @@ public class DaoController {
 							}
 				 	}
 				
-				 	public void removeMembre() {			
+				 	public void removeMembre() {		
 				 		listeMbr = (List<VbCommissionSpecifique>) iservice.getObjectsByColumn("VbCommissionSpecifique", new ArrayList<String>(Arrays.asList("TCT_CODE")),
-			    					new WhereClause("COM_DAC_CODE",WhereClause.Comparateur.EQ,""+sltCompsec.getComTctCode()));
+			    					new WhereClause("COM_TCT_CODE",WhereClause.Comparateur.EQ,""+selecMembre.getComTctCode()));
 			        	       if (!listeMbr.isEmpty()) {
 			        	    	   newcomSpec = listeMbr.get(0);
 			        	       }
+			        	       
 			        	       iservice.deleteObject(getNewcomSpec());
 							   FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
 				 	}	 
@@ -5509,6 +5509,14 @@ public class DaoController {
 
 	public void setListeCritereSaisie(List<VbDetCritAnalyseDac > listeCritereSaisie) {
 		this.listeCritereSaisie = listeCritereSaisie;
+	}
+
+	public VDacMembre getSelecMembre() {
+		return selecMembre;
+	}
+
+	public void setSelecMembre(VDacMembre selecMembre) {
+		this.selecMembre = selecMembre;
 	}
 	
 	

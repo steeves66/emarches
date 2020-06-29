@@ -776,7 +776,7 @@
 	         				    <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeMembre()}" title="Supprimer" update="gnl:tbMbr">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-			                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.newcomSpec}" />
+			                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selecMembre}" />
 			                </p:commandLink>
 					        </p:column>
 					        
