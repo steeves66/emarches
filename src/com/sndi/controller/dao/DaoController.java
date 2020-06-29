@@ -207,6 +207,7 @@ public class DaoController {
 	private List<VCritereAnalyseModel> listeCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VCritereAnalyseModel> selectionlisteCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
+	private List<VbDetCritAnalyseDac > listeCritereSaisie = new ArrayList<VbDetCritAnalyseDac >();
 	//private List<VbDetCritAnalyse> selectionDetCritere = new ArrayList<VbDetCritAnalyse>();
 
 	 
@@ -471,6 +472,13 @@ public class DaoController {
 		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
 	 }
 	 
+	 //Liste des critères saisie
+	 public void chargeCritereSaisie() { 
+		 listeCritereSaisie= (List<VbDetCritAnalyseDac>) iservice.getObjectsByColumn("VbDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_DAN_CODE")),
+					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+		 _logger.info("liste critere saisie: "+listeCritereSaisie.size());
+	 }
+	 
 	 
 	 //Afficahe de la liste des critères en fonction des types passé en parametre
 	/* public void chargeCritere() {
@@ -528,6 +536,7 @@ public class DaoController {
 		 			newCritereDac.setDcadStatut("0");
 		 			iservice.addObject(newCritereDac);
 			     }
+		 		chargeCritereSaisie();
 		 		pavet_commission = true;
 		 		userController.setTexteMsg("Critère(s) d'analyse enrégistré(s) avec succès!");
 				userController.setRenderMsg(true);
@@ -850,7 +859,17 @@ public class DaoController {
 		 //liste des pièces de l'offre
 		 
 		 public void chargePiecesOffres() {
-			 listePiecesOffres= (List<TTypePieceOffre>) iservice.getObjectsByColumn("TTypePieceOffre", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")));			
+			 listePiecesOffres.clear();
+			 if(dao.getDacBailleur().equalsIgnoreCase("N")) {
+				 listePiecesOffres= (List<TTypePieceOffre>) iservice.getObjectsByColumn("TTypePieceOffre", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
+						 new WhereClause("TPO_BAI_ETAT",WhereClause.Comparateur.EQ,"E")); 
+				
+			 }else
+			 {
+				 listePiecesOffres= (List<TTypePieceOffre>) iservice.getObjectsByColumn("TTypePieceOffre", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
+						 new WhereClause("TPO_BAI_ETAT",WhereClause.Comparateur.EQ,"B"));  
+			 }
+			
 		 }
 		 
 		  //Charger la liste des pièces a examiner par le charge d'etude
@@ -3537,6 +3556,7 @@ public class DaoController {
 														 
 		     //Methode vider
 		     public void vider() { 
+		    	 listeCritereSaisie.clear();
 		    	 daoDetail = new VPpmDao();
 		    	 dao = new TDacSpecs();
 		    	 detailsPieces.clear();
@@ -5481,6 +5501,14 @@ public class DaoController {
 
 	public void setSelectionlisteCritereAnalyse(List<VCritereAnalyseModel> selectionlisteCritereAnalyse) {
 		this.selectionlisteCritereAnalyse = selectionlisteCritereAnalyse;
+	}
+
+	public List<VbDetCritAnalyseDac > getListeCritereSaisie() {
+		return listeCritereSaisie;
+	}
+
+	public void setListeCritereSaisie(List<VbDetCritAnalyseDac > listeCritereSaisie) {
+		this.listeCritereSaisie = listeCritereSaisie;
 	}
 	
 	

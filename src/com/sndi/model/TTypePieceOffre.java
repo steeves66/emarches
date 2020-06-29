@@ -27,6 +27,7 @@ public class TTypePieceOffre implements java.io.Serializable {
 	private String tpoLibelle;
 	private Date tpoDteSaisi;
 	private String tpoEtapPiece;
+	private String tpoBaiEtat;
 	private Set<TOffrePieceDac> TOffrePieceDacs = new HashSet<TOffrePieceDac>(0);
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
@@ -38,12 +39,13 @@ public class TTypePieceOffre implements java.io.Serializable {
 	}
 
 	public TTypePieceOffre(String tpoCode, TOperateur TOperateur, String tpoLibelle, Date tpoDteSaisi,
-			String tpoEtapPiece, Set<TOffrePieceDac> TOffrePieceDacs, Set<TPiecesOffres> TPiecesOffreses) {
+			String tpoEtapPiece,String tpoBaiEtat, Set<TOffrePieceDac> TOffrePieceDacs, Set<TPiecesOffres> TPiecesOffreses) {
 		this.tpoCode = tpoCode;
 		this.TOperateur = TOperateur;
 		this.tpoLibelle = tpoLibelle;
 		this.tpoDteSaisi = tpoDteSaisi;
 		this.tpoEtapPiece = tpoEtapPiece;
+		this.tpoBaiEtat = tpoBaiEtat;
 		this.TOffrePieceDacs = TOffrePieceDacs;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
@@ -104,6 +106,15 @@ public class TTypePieceOffre implements java.io.Serializable {
 
 	public void setTPiecesOffreses(Set<TPiecesOffres> TPiecesOffreses) {
 		this.TPiecesOffreses = TPiecesOffreses;
+	}
+
+	@Column(name = "TPO_BAI_ETAT")
+	public String getTpoBaiEtat() {
+		return tpoBaiEtat;
+	}
+
+	public void setTpoBaiEtat(String tpoBaiEtat) {
+		this.tpoBaiEtat = tpoBaiEtat;
 	}
 
 }
