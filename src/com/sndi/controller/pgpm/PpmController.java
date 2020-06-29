@@ -2535,7 +2535,6 @@ public class PpmController {
     	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
     	  		 detailPass.setDppTypeStrConduc(strucCond);
     	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
-    	  		 //detailPass.setTModeleDacType(new TModeleDacType(tydCode));
     	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
     	  		 detailPass.setTPlanPassation(TPlanPassation);
     	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
@@ -2629,33 +2628,39 @@ public class PpmController {
 	  	 //Mis à jour des dates prévisionnelles
 	  	 @Transactional
 	  	 public void majDate() {
-	  		        detailPass.setDppApprobAno(geneDate.getDppApprobAno());
-	  		        detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
-	  		        detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
-	  		        detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
-	  		        detailPass.setDppDateDaoApprobDmp(geneDate.getDppDateDaoApprobDmp());
-	  		        detailPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
-	  		        detailPass.setDppDateExecDebut(geneDate.getDppDateExecDebut());
-	  		        detailPass.setDppDateExecFin(geneDate.getDppDateExecFin());
-	  		        detailPass.setDppDateJugementOffre(geneDate.getDppDateJugementOffre());
-	  		        detailPass.setDppDateJugementOffreTec(geneDate.getDppDateJugementOffreTec());
-	  		        detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
-	  		        detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
-	  		        detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
-	  		        detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
-	  		        detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
-	  		        detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
-	  		        detailPass.setTModeleDacType(new TModeleDacType(tydCode));
-				    iservice.updateObject(detailPass);
-				    boutonEdit =true;
-				    controleController.btn_creerDetailPpm = false;
-				    controleController.btn_creerDetailPspm = false;
-				     //controleController.btn_creerDetailPpm =true;
-					 //controleController.btn_maj_datePpm = true;
-				     
-				     userController.setTexteMsg("Opération enregistrée avec succès!");
-					 userController.setRenderMsg(true);
-					 userController.setSevrityMsg("success");
+	  		 
+	  		 if(tydCode == null) {
+       		  FacesContext.getCurrentInstance().addMessage(null,
+        	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
+       	      }else {
+       	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
+  		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
+  		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
+  		              detailPass.setDppDateAttApprobDmp(geneDate.getDppDateAttApprobDmp());
+  		              detailPass.setDppDateDaoApprobDmp(geneDate.getDppDateDaoApprobDmp());
+  		              detailPass.setDppDateElabRapport(geneDate.getDppDateElabRapport());
+  		              detailPass.setDppDateExecDebut(geneDate.getDppDateExecDebut());
+  		              detailPass.setDppDateExecFin(geneDate.getDppDateExecFin());
+  		              detailPass.setDppDateJugementOffre(geneDate.getDppDateJugementOffre());
+  		              detailPass.setDppDateJugementOffreTec(geneDate.getDppDateJugementOffreTec());
+  		              detailPass.setDppDateMarcheApprob(geneDate.getDppDateMarcheApprob());
+  		              detailPass.setDppDateNegociation(geneDate.getDppDateNegociation());
+  		              detailPass.setDppDateOuvertOf(geneDate.getDppDateOuvertOt());
+  		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
+  		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
+  		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
+  		              detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+			          iservice.updateObject(detailPass);
+			          boutonEdit =true;
+			          controleController.btn_creerDetailPpm = false;
+			          controleController.btn_creerDetailPspm = false;
+			          //controleController.btn_creerDetailPpm =true;
+				      //controleController.btn_maj_datePpm = true;
+			     
+			          userController.setTexteMsg("Opération enregistrée avec succès!");
+				      userController.setRenderMsg(true);
+				      userController.setSevrityMsg("success");
+       	      }       
 	  	   }
 	  	
 	  	 
