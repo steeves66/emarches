@@ -3277,7 +3277,7 @@ public class DaoController {
 																			if (!listSoumission.isEmpty()) {
 																				soumission=listSoumission.get(0);
 																				soumission.setSouSigleDmp(newSoumission.getSouSigleDmp());
-																				iservice.updateObject(newSoumission);
+																				iservice.updateObject(soumission);
 																			}
 													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
 													               newCandidat.setCanRepCode(paieCode);
@@ -3350,7 +3350,7 @@ public class DaoController {
 																			if (!listSoumission.isEmpty()) {
 																				soumission=listSoumission.get(0);
 																				soumission.setSouSigleDmp(newSoumission.getSouSigleDmp());
-																				iservice.updateObject(newSoumission);
+																				iservice.updateObject(soumission);
 																			}
 											 				        
 											 				        String exo=chaine+String.valueOf(year)+mois;
