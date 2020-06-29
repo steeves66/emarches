@@ -3298,13 +3298,13 @@ public class DaoController {
 											     			  		    
 											     			  		      
 												                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
-												                              listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+												                            /*  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 														  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 														  				      if (!listDao.isEmpty()) {
 														  					     newDao= listDao.get(0);
 														  					     newDao.setTStatut(new TStatut("RET"));
 														  			             iservice.updateObject(newDao); 
-														  	   	                 }
+														  	   	                 }*/
 														  				      
 														  				    //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("RET");
@@ -3363,13 +3363,13 @@ public class DaoController {
 											      			  				    }
 											      			  		    
 											 	                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
-											 	                              listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+											 	                             /* listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 											 			  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 											 			  				      if (!listDao.isEmpty()) {
 											 			  					     newDao= listDao.get(0);
 											 			  					     newDao.setTStatut(new TStatut("DVE"));
 											 			  					     iservice.updateObject(newDao);
-											 			  	   	                 }
+											 			  	   	                 }*/
 											 			  				      
 											 			  				 //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("DVE");

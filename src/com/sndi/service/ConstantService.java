@@ -20,6 +20,7 @@ import com.sndi.model.TDevise;
 import com.sndi.model.TGestion;
 import com.sndi.model.TMinistere;
 import com.sndi.model.TModePassation;
+import com.sndi.model.TSoumissions;
 import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
 import com.sndi.model.TStructure;
@@ -86,8 +87,11 @@ public class ConstantService {
 	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
 	private Map<String, VbPaysReference> HM_LISTE_PAYS= new HashMap<String, VbPaysReference>();
 	
-	private List<VDatePub> listeDatePub = new ArrayList<VDatePub>();
+	private List<VDatePub> listeDatePub = new ArrayList<VDatePub>(); 
 	private Map<String, VDatePub> HM_LISTE_DATE_PUB= new HashMap<String, VDatePub>();
+	
+	private List<TSoumissions> listSoumission = new ArrayList<TSoumissions>(); 
+	private Map<String, TSoumissions> HM_LISTE_SOUMISSIONS= new HashMap<String, TSoumissions>();
 	
 	//chargePiecesOffres()
 	
@@ -405,9 +409,27 @@ public class ConstantService {
 							public VDatePub getListeDatePub(String DATE_PUB){
 								return HM_LISTE_DATE_PUB.get(DATE_PUB);
 							}
-				
+							
+							
+							
 
-	
+							//LISTE DES SOUMISSIONNAIRES
+							public void chargeDataSoumissions(){
+								listSoumission.clear();
+							    listSoumission =(List<TSoumissions>) iservice.getObjectsByColumn("TSoumissions", new ArrayList<String>(Arrays.asList("SOU_NCC")));
+									HashMap<String, TSoumissions> aMap = new HashMap<String, TSoumissions>();
+									for (TSoumissions sm: listSoumission) {
+										aMap.put(""+sm.getSouNcc(), sm);
+									}
+									HM_LISTE_SOUMISSIONS =  Collections.unmodifiableMap(aMap);	
+									_logger.info("HM_LISTE_SOUMISSIONS.size :"+ HM_LISTE_SOUMISSIONS.size());	
+								}
+								
+								public TSoumissions geTSoumissions(String SOU_NCC){
+									return HM_LISTE_SOUMISSIONS.get(SOU_NCC);
+							}
+							
+				
 	public static Logger get_logger() {
 		return _logger;
 	}
@@ -613,5 +635,17 @@ public class ConstantService {
 	public void setHM_LISTE_DATE_PUB(Map<String, VDatePub> hM_LISTE_DATE_PUB) {
 		HM_LISTE_DATE_PUB = hM_LISTE_DATE_PUB;
 	}
-
+	public List<TSoumissions> getListSoumission() {
+		return listSoumission;
+	}
+	public void setListSoumission(List<TSoumissions> listSoumission) {
+		this.listSoumission = listSoumission;
+	}
+	public Map<String, TSoumissions> getHM_LISTE_SOUMISSIONS() {
+		return HM_LISTE_SOUMISSIONS;
+	}
+	public void setHM_LISTE_SOUMISSIONS(Map<String, TSoumissions> hM_LISTE_SOUMISSIONS) {
+		HM_LISTE_SOUMISSIONS = hM_LISTE_SOUMISSIONS;
+	}
+	
 }
