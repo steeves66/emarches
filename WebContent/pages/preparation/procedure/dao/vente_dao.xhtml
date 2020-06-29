@@ -190,8 +190,8 @@
 		                      <label for="pays1" class="col-sm-2 control-label text-right"><b>Pays :<span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-5">
 		                         <p:selectOneMenu id="tpays" value="#{daoController.paieCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			                      <f:selectItem  itemLabel="Choisir le pays..." itemValue="empty" />  
-			                      <f:selectItems value="#{daoController.listePays}" var="pa" itemLabel="#{pa.repLibelle}" itemValue="#{typ.repCode}" />			   				   
+			                      <f:selectItem  itemLabel="Choisir le pays..." />  
+			                      <f:selectItems value="#{daoController.listePays}" var="pa" itemLabel="#{pa.repLibelle}" itemValue="#{pa.repCode}" />			   				   
 				                <f:selectItems />				   				    				   
 		       	                 </p:selectOneMenu>
                                 </div>

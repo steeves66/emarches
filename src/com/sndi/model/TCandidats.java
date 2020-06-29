@@ -159,7 +159,7 @@ public class TCandidats implements java.io.Serializable {
 		this.canEmail = canEmail;
 	}
 	
-	@Column(name = "CAN_REP_CODE", length = 10)
+	@Column(name = "CAN_REP_CODE")
 	public String getCanRepCode() {
 		return this.canRepCode;
 	}

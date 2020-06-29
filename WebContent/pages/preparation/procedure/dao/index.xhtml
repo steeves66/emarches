@@ -519,7 +519,11 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsDaoController.slctdTd}" />
                              </p:commandLink>
                             
-                             
+                              <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
+                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication du DAO ?" icon="ui-icon-alert" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                             </p:commandLink>
 				         </p:column>   
 				    </p:dataTable>
 				   </h:panelGroup> 
