@@ -613,6 +613,7 @@ public class TableauBordController {
 							 pgpmDmDiff = ""+getNpDiffDmp("S3D","SDR"); 
 							 pgpmDmAttentePub = ""+getNpValideDmp("S3V");
 							 pgpmPub = ""+getNpValideDmp("PGU");
+							 ppmdjPub = ""+getPpmDejaPub();
 						 }
 					 }
 			     } 
@@ -638,6 +639,7 @@ public class TableauBordController {
 						 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
 						 pgspmDmValide = ""+getNpsValideDmp("S3V");
 						 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
+						 ppmdjPub = ""+getPpmDejaPub();
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 							 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
@@ -645,6 +647,7 @@ public class TableauBordController {
 							 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
 							 pgspmDmAttentePub = ""+getNpsValideDmp("S3V");
 							 pgspmPub = ""+getNpsValideDmp("PGU");
+							 ppmdjPub = ""+getPpmDejaPub();
 						 }
 					 }
 			     } 
