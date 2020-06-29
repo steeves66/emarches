@@ -31,6 +31,7 @@ public class TSoumissions implements java.io.Serializable {
 	private String souTel;
 	private String souAdresse;
 	private Date souDteSaisi;
+	private String souSigleDmp;
 	private Set<TAvisPresel> TAvisPresels = new HashSet<TAvisPresel>(0);
 
 	public TSoumissions() {
@@ -41,7 +42,7 @@ public class TSoumissions implements java.io.Serializable {
 	}
 
 	public TSoumissions(String souNcc, TOperateur TOperateur, Character souInter, String souSigleSte, String souNomCom,
-			String souStaCode, String souTel, String souAdresse, Date souDteSaisi, Set<TAvisPresel> TAvisPresels) {
+			String souStaCode, String souTel, String souAdresse, Date souDteSaisi,String souSigleDmp, Set<TAvisPresel> TAvisPresels) {
 		this.souNcc = souNcc;
 		this.TOperateur = TOperateur;
 		this.souInter = souInter;
@@ -51,6 +52,7 @@ public class TSoumissions implements java.io.Serializable {
 		this.souTel = souTel;
 		this.souAdresse = souAdresse;
 		this.souDteSaisi = souDteSaisi;
+		this.souSigleDmp = souSigleDmp;
 		this.TAvisPresels = TAvisPresels;
 	}
 
@@ -138,6 +140,16 @@ public class TSoumissions implements java.io.Serializable {
 	public void setSouDteSaisi(Date souDteSaisi) {
 		this.souDteSaisi = souDteSaisi;
 	}
+	
+	@Column(name = "SOU_SIGLE_DMP", length = 500)
+	public String getSouSigleDmp() {
+		return this.souSigleDmp;
+	}
+
+	public void setSouSigleDmp(String souSigleDmp) {
+		this.souSigleDmp = souSigleDmp;
+	}
+
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TSoumissions")
 	public Set<TAvisPresel> getTAvisPresels() {

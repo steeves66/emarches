@@ -306,6 +306,7 @@ public class DaoController {
 	 private TCorrectionDac correction = new TCorrectionDac();
 	 private TTiers tiers = new TTiers();
 	 private TSoumissions soumission = new TSoumissions();
+	 private TSoumissions newSoumission = new TSoumissions();
 	 private TSoumissions recupSoumission = new TSoumissions();
 	 private TTiers recupTiers = new TTiers();
 	 private VVenteLot nbreLot = new VVenteLot();
@@ -3248,7 +3249,7 @@ public class DaoController {
 										 //Methode de paiement
 											  @Transactional
 											  public void payer() {
-												  if(newCandidat.getCanSouNcc().equalsIgnoreCase("") ||newCandidat.getCanNom().equalsIgnoreCase("")) {
+												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || paieCode == null) {
 													//Message d'erreur
 														FacesContext.getCurrentInstance().addMessage(null,
 																new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat ou choisir votre option", ""));
@@ -3270,10 +3271,18 @@ public class DaoController {
 																    }
 															        
 															        String exo=chaine+String.valueOf(year)+mois;
+															        
+															        listSoumission =(List<TSoumissions>) iservice.getObjectsByColumn("TSoumissions", new ArrayList<String>(Arrays.asList("SOU_NCC")),
+																			new WhereClause("SOU_NCC",WhereClause.Comparateur.EQ,""+newSouncc));
+																			if (!listSoumission.isEmpty()) {
+																				soumission=listSoumission.get(0);
+																				soumission.setSouSigleDmp(newSoumission.getSouSigleDmp());
+																				iservice.updateObject(newSoumission);
+																			}
 													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
 													               newCandidat.setCanRepCode(paieCode);
 													               newCandidat.setCanSouNcc(newSouncc);
-													               newCandidat.setCanSouSigleSte(soumission.getSouNcc());
+													               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 													               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 													               iservice.addObject(newCandidat);
@@ -3284,7 +3293,8 @@ public class DaoController {
 													               newVente.setTOperateur(userController.getSlctd().getTOperateur());
 													               newVente.setTCandidats(newCandidat);
 													               iservice.addObject(newVente);
-													                    
+													               
+												
 													                //Recupération du DAO dans T_DAC_SPECS
 														            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 											     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
@@ -3324,7 +3334,7 @@ public class DaoController {
 											     							   userController.setSevrityMsg("success");	
 													         }else {
 													        	 
-													        	 String mois="";
+													        	    String mois="";
 											 				        Calendar c = Calendar.getInstance();
 											 				        int year = c.get(Calendar.YEAR);
 											 				        int month= c.get(Calendar.MONTH)+1;
@@ -3335,11 +3345,19 @@ public class DaoController {
 											 						mois=String.valueOf(month);
 											 					    }
 											 				        
+											 				       listSoumission =(List<TSoumissions>) iservice.getObjectsByColumn("TSoumissions", new ArrayList<String>(Arrays.asList("SOU_NCC")),
+																			new WhereClause("SOU_NCC",WhereClause.Comparateur.EQ,""+newSouncc));
+																			if (!listSoumission.isEmpty()) {
+																				soumission=listSoumission.get(0);
+																				soumission.setSouSigleDmp(newSoumission.getSouSigleDmp());
+																				iservice.updateObject(newSoumission);
+																			}
+											 				        
 											 				        String exo=chaine+String.valueOf(year)+mois;
 											 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
 											 		               newCandidat.setCanRepCode(paieCode);
 											 		               newCandidat.setCanSouNcc(newSouncc);
-											 		               newCandidat.setCanSouSigleSte(soumission.getSouNcc());
+											 		               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 											 		               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
@@ -5596,7 +5614,14 @@ public class DaoController {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-	
+
+	public TSoumissions getNewSoumission() {
+		return newSoumission;
+	}
+
+	public void setNewSoumission(TSoumissions newSoumission) {
+		this.newSoumission = newSoumission;
+	}
 	
 		
 }
