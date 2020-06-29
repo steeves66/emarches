@@ -1559,13 +1559,14 @@ public class ControleController {
 						    				btn_new =false;
 											panel1 =false;
 											panel2 =false;
-											panel3 = true;
+											panel3 = false;
+											panel4 = true;
 											panelPpmTableauBordSai = false;
 											panelPpmTableauBordVal = false;
 											panelPgpmTableauBordPpPub = false;
 											panelPgpmTableauBordPspPub = false;
-											panelPgpmTableauBordDpgPub = false;
-											panelPgpmTableauBordDpsgPub = true;
+											panelPgpmTableauBordDpgPub = true;
+											panelPgpmTableauBordDpsgPub = false;
 											panelPpm = true;
 											panelPspm = false;
 											fermerVal = true;

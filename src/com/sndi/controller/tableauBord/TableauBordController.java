@@ -639,7 +639,7 @@ public class TableauBordController {
 						 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
 						 pgspmDmValide = ""+getNpsValideDmp("S3V");
 						 pgspmDmDiff = ""+getNpsDiffDmp("S3D","PGD");
-						 ppmdjPub = ""+getPpmDejaPub();
+						 //ppmdjPub = ""+getPpmDejaPub();
 					 }else {
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 							 pgspmDmAttenteValide = ""+getNpsAttValideDmp("S2V","PGS");
