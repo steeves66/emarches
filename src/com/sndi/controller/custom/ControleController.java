@@ -163,6 +163,7 @@ public class ControleController {
 	private boolean pspmModePs = false;
 	private boolean ppmModePn = false;
 	private boolean btn_pub = false;
+	private boolean btn_imprimer_pg = false;
 	private boolean panelPub = false;
 	
 	
@@ -794,6 +795,7 @@ public class ControleController {
 									btn_trans_pgpm = false;
 									btn_trans_pgspm = false;
 									btn_trasmettre_pgspm=false;
+									btn_imprimer_pg = false;
 					    			}else
 						    			if(action.equalsIgnoreCase("APUPGPM")) {
 						    				type = "PGPM";
@@ -850,6 +852,7 @@ public class ControleController {
 												btn_trans_pgpm = false;
 												btn_trans_pgspm = false;
 												btn_trasmettre_pgspm=false;
+												btn_imprimer_pg = true;
 								    			}
 			 //PGSPM
 			 if(action.equalsIgnoreCase("ENGPGSPM")) {
@@ -1019,6 +1022,7 @@ public class ControleController {
 									btn_trans_pgpm = false;
 									btn_trans_pgspm = false;
 									btn_trasmettre_pgspm=false;
+									btn_imprimer = false;
 					    			}else
 						    			if(action.equalsIgnoreCase("APUPGSPM")) {
 						    				type = "PGSPM";
@@ -1070,12 +1074,14 @@ public class ControleController {
 												panelPgpmTableauBordVal =false;
 												panelPgpmTableauBordPgPub = false;
 												panelPgpmTableauBordDpgPub = false;
-												panelPgpmTableauBordDpsgPub = true;
+												panelPgpmTableauBordDpsgPub = false;
+												panelPgpmTableauBordDpgPub = true;
 												detailPg1 = true;
 												detailPg2 = false;
 												btn_trans_pgpm = false;
 												btn_trans_pgspm = false;
 												btn_trasmettre_pgspm=false;
+												btn_imprimer_pg = true;
 								    			}
 			 
 			 //PPM
@@ -9726,6 +9732,16 @@ public class ControleController {
 
 	public void setPanelPgpmTableauBordDjPub(boolean panelPgpmTableauBordDjPub) {
 		this.panelPgpmTableauBordDjPub = panelPgpmTableauBordDjPub;
+	}
+
+
+	public boolean isBtn_imprimer_pg() {
+		return btn_imprimer_pg;
+	}
+
+
+	public void setBtn_imprimer_pg(boolean btn_imprimer_pg) {
+		this.btn_imprimer_pg = btn_imprimer_pg;
 	}
 	
 }

@@ -456,15 +456,16 @@
        
          <!-- Panel pour les PGPM Publiés dans le Journal -->
        <h:panelGroup rendered="#{controleController.panelPgpmTableauBordDpsgPub}">
-                     <div id="collapseOne" class="panel-collapse collapse in">
+                       <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
                       <div class="row"> 
+ 
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBordDmp.pub}</h3>
+              <h3>#{tableauBordController.ppmdjPub}</h3>
 
               <p>Publié(s) dans le Journal</p>
             </div>
@@ -472,7 +473,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
           
-              <p:commandLink class="small-box-footer"  style="color:#fff;font-size:13px;">
+              <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink> 
           </div>

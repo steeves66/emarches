@@ -1721,7 +1721,7 @@
     </h:form> 
     
     
-    <h:form id="dlogdetMod">
+   <h:form id="dlogdetMod">
 	  <p:dialog  widgetVar="DetailDlgMod" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
 		<div class="box box-success box-solid">
             <div class="box-header with-border">
@@ -1760,7 +1760,7 @@
 	                   <p:selectOneMenu value="#{ppmController.updatefinance.fppBaiCode}" id="xbail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
-			       <f:selectItems value="#{agpmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+			       <f:selectItems value="#{ppmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -1775,7 +1775,7 @@
 	                    <p:selectOneMenu value="#{ppmController.updatefinance.fppSouCode}" id="source" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
-			       <f:selectItems value="#{agpmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+			       <f:selectItems value="#{ppmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -1787,7 +1787,7 @@
 	                  <div class="col-sm-9">
 	                      <p:selectOneMenu value="#{ppmController.updatefinance.fppDevCode}" id="xdev" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
-			       <f:selectItems value="#{agpmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+			       <f:selectItems value="#{ppmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -1839,7 +1839,7 @@
             </div>
           </div>
       </p:dialog>
-    </h:form>     
+    </h:form>          
       
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
