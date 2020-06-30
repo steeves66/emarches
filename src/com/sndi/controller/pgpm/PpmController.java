@@ -1801,8 +1801,8 @@ public class PpmController {
 		 
 		 //Filtre les marchés en fonction du code Marché
 		 public void filtreMarche() {
-			 listeTypeMarches.clear();
-			 listeTypeMarches = (List<TTypeMarche>) iservice.getObjectsByColumn("TTypeMarche", new ArrayList<String>(Arrays.asList("tymCode")),
+			 listeTypeMarchesFils.clear();
+			 listeTypeMarchesFils = (List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", new ArrayList<String>(Arrays.asList("tymCode")),
 						new WhereClause("TYM_LIBELLE_COURT",WhereClause.Comparateur.LIKE,"%"+filtreTypeMarche+"%"));
 		 }
 		 
@@ -2268,7 +2268,7 @@ public class PpmController {
 			 filtreModePassation="";
 			}
 		 
-		 //
+		 //Methode de sélection du mode de Passation
 		 public void onSelectModePassationPgspm() {
 			 detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
 			 detailPass.setDppTypePlan(modePassation.getMopTypPlan());

@@ -3443,7 +3443,7 @@ public class DaoController {
 								     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 								     			  		    if (!listDao.isEmpty()) {
 								     			  			  newDao= listDao.get(0);
-								     			  			newDao.setTStatut(new TStatut(""+statUpdate));
+								     			  			  newDao.setTStatut(new TStatut(statUpdate));
 										                      iservice.updateObject(newDao);
 								     			  			}
 													
