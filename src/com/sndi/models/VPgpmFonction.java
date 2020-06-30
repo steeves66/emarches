@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -51,6 +51,7 @@ public class VPgpmFonction implements java.io.Serializable {
 			@AttributeOverride(name = "tymLibelleCourt", column = @Column(name = "TYM_LIBELLE_COURT", nullable = false, length = 500)),
 			@AttributeOverride(name = "tymTymCode", column = @Column(name = "TYM_TYM_CODE", length = 3)),
 			@AttributeOverride(name = "mopLibelleLong", column = @Column(name = "MOP_LIBELLE_LONG", length = 1000)),
+			@AttributeOverride(name = "mopTypPlan", column = @Column(name = "MOP_TYP_PLAN", length = 10)),
 			@AttributeOverride(name = "plgFonCod", column = @Column(name = "PLG_FON_COD", nullable = false, length = 12)),
 			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)) })
 	public VPgpmFonctionId getId() {

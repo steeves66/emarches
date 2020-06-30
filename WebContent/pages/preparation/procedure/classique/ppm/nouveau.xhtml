@@ -56,8 +56,7 @@
         <!-- /.box-header -->
         <!-- /.box-header -->
         <p:wizard flowListener="#{ppmController.onFlowProcess}"  nextLabel="Suivant" backLabel="Précédent" >
-        
-        
+              
 	      <p:tab id="ope111" title="Saisie des Operations" titleStyle="background-color: #f88b2e;background-image: none">
 	      
 	        <div class="box box-success box-solid">
@@ -437,7 +436,7 @@
                  
         </div>
         
-              <div class="col-md-12">
+       <div class="col-md-12">
         <div class="form-group">
                   <label for="MontTot" class="col-sm-9 control-label">Cout total de l'operation</label>
                   <div class="col-sm-3">
@@ -454,6 +453,40 @@
 	<p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
 			         <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
+			     
+			      
+	<div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CHOIX DU DAO TYPE</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+           <div class="col-md-12">
+		    <div class="form-group">
+		   <label for="moldao27" class="col-sm-2 control-label">Dao Type</label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu id="moldao27" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+	         </div>
+		    </div> 
+
+             </div>
+                             
+		   </div>
+          </div>     
+         </div>
+         </div>		     
+			     
+			     
      <div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
@@ -461,17 +494,6 @@
             <div class="col-md-6"><div  style="color: #fff">
 	              <div class="col-sm-6"></div>
             </div></div>
-            
-            <div class="col-md-6">
-            <label for="moldao2" class="col-sm-6 control-label">Dao Type</label>
-            <div class="col-sm-6">
-		         <p:selectOneMenu id="moldao2" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
-				<f:selectItems />				   				    				   
-		       	</p:selectOneMenu>
-	         </div>
-            </div>
             
          </div>
           <div class="box-body">
@@ -481,9 +503,9 @@
              <h:panelGroup rendered="#{controleController.validDMP}"> 
 		    <div class="form-group">
 		       
-		                  <label for="valdao" class="col-sm-6 control-label">Validation DAO par DMP<span style="color:red;"> *</span></label>
+		                  <label for="valdao2" class="col-sm-6 control-label">Validation DAO par DMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valdao" value="#{ppmController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valdao2" value="#{ppmController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		    </div>
@@ -491,9 +513,9 @@
 		    
 		    <h:panelGroup rendered="#{controleController.validCPMP}">
 		    <div class="form-group">
-		                  <label for="valcp" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> *</span></label>
+		                  <label for="valcp2" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valcp" value="#{ppmController.geneDate.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valcp2" value="#{ppmController.geneDate.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
@@ -501,9 +523,9 @@
              </div>
              <div class="col-md-6">
                <div class="form-group">
-		                  <label for="baildao" class="col-sm-6 control-label">Validation DAO Bail</label>
+		                  <label for="baildao2" class="col-sm-6 control-label">Validation DAO Bail</label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="baildao" value="#{ppmController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="baildao2" value="#{ppmController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                </div>
 		                </div> 
@@ -512,18 +534,18 @@
              <h:panelGroup rendered="#{controleController.etatPsc}">
             <div class="col-md-6">
              <div class="form-group">
-             <label for="solEnt" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> *</span></label>
+             <label for="solEnt1" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="solEnt" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="solEnt1" value="#{ppmController.geneDate.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
              </div>
              
              
              <div class="form-group">
-              <label for="solFact" class="col-sm-6 control-label">Reception des Factures<span style="color:red;"> *</span></label>
+              <label for="solFact1" class="col-sm-6 control-label">Reception des Factures<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="solFact" value="#{ppmController.geneDate.dppDateRecepFact}"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="solFact1" value="#{ppmController.geneDate.dppDateRecepFact}"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
              </div>
@@ -534,18 +556,18 @@
              <h:panelGroup rendered="#{controleController.etatPsl}">
              <div class="col-md-6">
               <div class="form-group">
-		                  <label for="invAoo" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
+		                  <label for="invAoo1" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="invAoo" value="#{ppmController.geneDate.dppInvEntre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:calendar id="invAoo1" value="#{ppmController.geneDate.dppInvEntre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		        </div>
              
              
              <div class="form-group">
-              <label for="repFact" class="col-sm-6 control-label">Reception des Lettres d'Intention<span style="color:red;"> *</span></label>
+              <label for="repFact1" class="col-sm-6 control-label">Reception des Lettres d'Intention<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar value="#{ppmController.geneDate.dppDateRecepLettr}" id="repFact"   mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar value="#{ppmController.geneDate.dppDateRecepLettr}" id="repFact1"   mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
              </div>
@@ -1638,7 +1660,7 @@
 	                   <p:selectOneMenu value="#{ppmController.baiCode}" id="xbail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
-			       <f:selectItems value="#{pmpmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+			       <f:selectItems value="#{ppmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
        		        </p:selectOneMenu>
 
 	                  </div>

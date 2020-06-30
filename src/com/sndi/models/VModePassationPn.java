@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -29,7 +29,8 @@ public class VModePassationPn implements java.io.Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "mopCode", column = @Column(name = "MOP_CODE", nullable = false, length = 3)),
 			@AttributeOverride(name = "mopLibelleCourt", column = @Column(name = "MOP_LIBELLE_COURT", nullable = false, length = 500)),
-			@AttributeOverride(name = "mopLibelleLong", column = @Column(name = "MOP_LIBELLE_LONG", length = 1000)) })
+			@AttributeOverride(name = "mopLibelleLong", column = @Column(name = "MOP_LIBELLE_LONG", length = 1000)),
+			@AttributeOverride(name = "mopTypPlan", column = @Column(name = "MOP_TYP_PLAN", length = 10)) })
 	public VModePassationPnId getId() {
 		return this.id;
 	}

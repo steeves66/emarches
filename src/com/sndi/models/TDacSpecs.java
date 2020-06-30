@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -31,6 +31,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private TGestions TGestions;
 	private TFonction TFonctionByDacFonCodeCpmp;
 	private TFonction TFonctionByDacFonCodAc;
+	private TModeleDacType TModeleDacType;
 	private TModePassation TModePassation;
 	private String dacObjet;
 	private Date dacDteSaisi;
@@ -82,15 +83,15 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public TDacSpecs(String dacCode, TStatut TStatut, TStructure TStructure, TTypeDacSpecs TTypeDacSpecs,
 			TTypeMarche TTypeMarche, TGestions TGestions, TFonction TFonctionByDacFonCodeCpmp,
-			TFonction TFonctionByDacFonCodAc, TModePassation TModePassation, String dacObjet, Date dacDteSaisi,
-			BigDecimal dacNbrOuv, Date dacDteValCpmp, Date dacDteValDmp, Date dacDateReception, String dacStatutRetour,
-			String dacMention, Date dacDateValAc, String dacAvisBailleur, Date dacDateAvisBailleur, String dacBailleur,
-			Long dacCout, String dacTypePlan, String dacRecherche, String dacFonCodeDmp, String dacFonCodePf,
-			Date dacDteModif, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TCommissionSpecifique> TCommissionSpecifiques,
-			Set<TDetCritAnalyseDac> TDetCritAnalyseDacs, Set<TCritereAnalyseSpec> TCritereAnalyseSpecs,
-			Set<TDetailVente> TDetailVentes, Set<TOffres> TOffreses, Set<TAffichageDao> TAffichageDaos,
-			Set<TPiecesOffres> TPiecesOffreses, Set<TCorrectionDac> TCorrectionDacs, Set<TDetailAvis> TDetailAvises,
-			Set<TPublicationAvis> TPublicationAvises, Set<TAnalyseOffre> TAnalyseOffres,
+			TFonction TFonctionByDacFonCodAc, TModeleDacType TModeleDacType, TModePassation TModePassation,
+			String dacObjet, Date dacDteSaisi, BigDecimal dacNbrOuv, Date dacDteValCpmp, Date dacDteValDmp,
+			Date dacDateReception, String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
+			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
+			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, Set<TAvisAppelOffre> TAvisAppelOffres,
+			Set<TCommissionSpecifique> TCommissionSpecifiques, Set<TDetCritAnalyseDac> TDetCritAnalyseDacs,
+			Set<TCritereAnalyseSpec> TCritereAnalyseSpecs, Set<TDetailVente> TDetailVentes, Set<TOffres> TOffreses,
+			Set<TAffichageDao> TAffichageDaos, Set<TPiecesOffres> TPiecesOffreses, Set<TCorrectionDac> TCorrectionDacs,
+			Set<TDetailAvis> TDetailAvises, Set<TPublicationAvis> TPublicationAvises, Set<TAnalyseOffre> TAnalyseOffres,
 			Set<TOffrePieceDac> TOffrePieceDacs, Set<THistoDac> THistoDacs, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TDetailDemandes> TDetailDemandeses, Set<TLotAao> TLotAaos, Set<TPiecesDacs> TPiecesDacses,
@@ -103,6 +104,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.TGestions = TGestions;
 		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
 		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
+		this.TModeleDacType = TModeleDacType;
 		this.TModePassation = TModePassation;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -225,6 +227,16 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTFonctionByDacFonCodAc(TFonction TFonctionByDacFonCodAc) {
 		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_MOD_TYPE")
+	public TModeleDacType getTModeleDacType() {
+		return this.TModeleDacType;
+	}
+
+	public void setTModeleDacType(TModeleDacType TModeleDacType) {
+		this.TModeleDacType = TModeleDacType;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

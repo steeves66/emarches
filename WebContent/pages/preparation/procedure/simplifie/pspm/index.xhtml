@@ -1089,7 +1089,7 @@
     </h:panelGroup>
     
     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
-	<p:commandLink action="#{ppmController.validerPspmCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+	<p:commandLink action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
     <p:confirm header="Confirmation" message="Confirmez-vous la validation  ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
     </p:commandLink>

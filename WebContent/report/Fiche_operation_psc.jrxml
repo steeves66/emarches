@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-28T16:56:36 -->
+<!-- 2020-06-30T12:08:44 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_psc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e771a51-deef-488c-b7c0-9a03b76eebc6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -234,24 +234,24 @@ and dps.dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA[$F{DPP_MOP_CODE}+" : "+$F{MOP_LIBELLE_LONG}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="109" y="47" width="445" height="28" uuid="3e9d78f3-924e-4f38-ba8b-9ef3b1d54686"/>
+					<reportElement x="109" y="24" width="445" height="28" uuid="3e9d78f3-924e-4f38-ba8b-9ef3b1d54686"/>
 					<textElement verticalAlignment="Top">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{MIN_LIBELLE}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="2" y="47" width="108" height="21" uuid="5b117cae-db29-4b85-8eea-7cccccbf4999"/>
+					<reportElement x="2" y="24" width="108" height="21" uuid="5b117cae-db29-4b85-8eea-7cccccbf4999"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Ministère : ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="1" y="26" width="109" height="21" uuid="daa94f0b-1ce0-4d08-951f-f0ac0ef74ee2"/>
+					<reportElement x="1" y="52" width="109" height="21" uuid="daa94f0b-1ce0-4d08-951f-f0ac0ef74ee2"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Autorité Contractante : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="111" y="26" width="429" height="21" uuid="e1ee17b6-dd99-4279-801b-f74f2a7971fc"/>
+					<reportElement x="111" y="51" width="439" height="21" uuid="e1ee17b6-dd99-4279-801b-f74f2a7971fc"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>

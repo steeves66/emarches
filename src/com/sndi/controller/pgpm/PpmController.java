@@ -315,7 +315,7 @@ public class PpmController {
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
-		  				  ||pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null || ligne.getLbgCode() == null || detailPass.getDppDateAvisAoPublication() == null || detailPass.getDppDateDaoTrans() == null)
+		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -324,26 +324,47 @@ public class PpmController {
 		  			 
 		                 if(controleController.type == "PPM") {
 						        if(modePassation.getMopTypPlan() == null) {
-						        	creerDetailPassation(modePassation.getMopTypPlan());
+						        	 if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
+		                    			  FacesContext.getCurrentInstance().addMessage(null,
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		  }else {
+						        	        creerDetailPassation(pgpm.getMopTypPlan());
+		                    		  }
 						        }else {
-						        	creerDetailPassation(pgpm.getMopTypPlan());
+						        	if(marche.getTymCode() == null ||modePassation.getMopCode() == null) {
+	                    		    	  FacesContext.getCurrentInstance().addMessage(null,
+			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+	                    		      }else {
+	                    		    	  creerDetailPassation(modePassation.getMopTypPlan());
+	                    		      }
+						        	//creerDetailPassation(pgpm.getMopTypPlan());
+						        	//creerDetailPassation(modePassation.getMopTypPlan());
 						        }
-		                	 //creerDetailPassation("PN");
 		                	 recupModeleDao();
 		                 }else 
 		                      if(controleController.type == "PSPM"){
 		                    	  if(passationListe.getMopTypPlan() == null) {
-		                    		creerDetailPassation(passationListe.getMopTypPlan());
+		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
+		                    			  FacesContext.getCurrentInstance().addMessage(null,
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		  }else {
+		                    		         creerDetailPassation(pgpm.getMopTypPlan());
+		                    		  }
 		                    	  }else {
-		                    		 creerDetailPassation(pgpm.getMopTypPlan());  
+		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
+		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		      }else {
+		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
+		                    		      }
+		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
+		                    		    //creerDetailPassation(passationListe.getMopTypPlan());
 		                    	  }
-		                    	  //creerDetailPassation("PS");
 		                    	  recupModeleDao();
 		                    	  controlPanel();
 		                 }
 		  		
 				     }
-				    
 			            return event.getNewStep();
 		    }
 		 
@@ -1545,8 +1566,6 @@ public class PpmController {
 			 listeDevise=new ArrayList<>(constantService.getListeDevise());	
 			} 
 		 
-		
-		 
 		 
 		//Chargement des imputations ou lignes budgétaires pour le AC
 	  public void chargeImputation() {
@@ -2005,7 +2024,8 @@ public class PpmController {
 		 
 		 
 		 public void onSelectPgpm() {
-			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+			 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+			 detailPass.setDppGpgId(pgpm.getGpgId());
 			 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
 
 			 recupPgpm = new VPgpmFonction();
@@ -2013,8 +2033,8 @@ public class PpmController {
 			 recupPgpm.setGpgId(pgpm.getGpgId());
 			 recupPgpm.setGpgTypePlan(pgpm.getGpgTypePlan());
 			 recupPgpm.setGpgCommentaire(pgpm.getGpgCommentaire());
-			 recupPgpm.setGpgNumeroOrdre(pgpm.getGpgNumeroOrdre());
-			 recupPgpm.setGpgDateSaisie(pgpm.getGpgDateSaisie());
+			 //recupPgpm.setGpgNumeroOrdre(pgpm.getGpgNumeroOrdre());
+			 //recupPgpm.setGpgDateSaisie(pgpm.getGpgDateSaisie());
 			 recupPgpm.setGpgPartiePmePmi(pgpm.getGpgPartiePmePmi());
 			 recupPgpm.setMopLibelleLong(pgpm.getMopLibelleLong());
 			 recupPgpm.setTymLibelleCourt(pgpm.getTymLibelleCourt());
@@ -2114,8 +2134,9 @@ public class PpmController {
 		 
 		 //Methode OnSelect pour PGSPM
 		 public void onSelectPgspm() {
-			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId())); 
-
+			// detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId())); 
+			 detailPass.setDppGpgId(pgpm.getGpgId());
+			 
 			 recupPgspm = new VPgpmFonction();
 			 recupPgspm.setGpgObjet(pgpm.getGpgObjet());
 			 recupPgspm.setGpgId(pgpm.getGpgId());
@@ -2336,7 +2357,7 @@ public class PpmController {
 	 //Méthode de création d'un ppm par le AC
 		 public void creerDetailPassation(String typePlan)throws IOException{
 	  		 
-		  		if(fipPgpm.getFipId() > 0 ) {
+		  		/*if(fipPgpm.getFipId() > 0 ) {*/
 		  			
 			  		    	listPlan = (List<TPlanPassation>) iservice.getObjectsByColumn("TPlanPassation", new ArrayList<String>(Arrays.asList("PLP_ID")),
 			 	 			       new WhereClause("PLP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
@@ -2421,17 +2442,11 @@ public class PpmController {
 			 	  		    
 			 	  		    saveDetailPlan(planPass, ""+typePlan);
 			 		  		 
-			 	  		 String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
+			 	  		  String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 							String rechercheAll = search.replace("null","");
 							detailPass.setDppRecherche(rechercheAll);
 							iservice.updateObject(detailPass);
-			 		  		
-					      List<TDetailPlanPassation> DET =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-								new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-								  TDetailPlanPassation detP = new TDetailPlanPassation();
-									  if(!DET.isEmpty()) detP =DET.get(0); 
-									     detP.setDppRecherche(rechercheAll);
-										  iservice.updateObject(detP);	
+			 		  	
 										  
 										  
 			 		  		//Insertion dans T_Financement_PPM
@@ -2471,7 +2486,10 @@ public class PpmController {
 			 				userController.setSevrityMsg("success");
 			 	 	         }
 			 	 	  
-			  		  }
+			  		/*  }else {
+			  			FacesContext.getCurrentInstance().addMessage(null,
+		        	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre Plan général n'a pas de financement", "")); 
+			  		  }*/
 		  			
 		  	}
 		  		
@@ -2486,7 +2504,8 @@ public class PpmController {
  	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
  	  		 detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode()));
  	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
- 	  		 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+ 	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+ 	  		 detailPass.setDppGpgId(pgpm.getGpgId());
  	  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
  	  		 detailPass.setDppStructureConduc(strucCond);
  	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
@@ -2508,7 +2527,7 @@ public class PpmController {
 	  	@Transactional
 	  	 public void saveDetailPlan(TPlanPassation TPlanPassation,String typePlan) {
 	  		
-             if(controleController.type == "PPM") {
+             if(controleController.type == "PPM") { 
             	 
             	 if(marche.getTymCode() == null) {
             	  detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode())); 
@@ -2524,15 +2543,14 @@ public class PpmController {
         	  		detailPass.setDppTypePlan(modePassation.getMopTypPlan());
         	  		 }
     	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
-    	  		 detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
-    	  		 
-    	  		 if(pgpm == null ) {
-    	  			detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgmp));	 
-    	  		 }else {
-    	  			detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId())); 
-    	  		 }
-    	  		 
+    	 		 
+    	 		 if(pgpm.getGpgPartiePmePmi() == null) {
+    	 			detailPass.setDppPartiePmePmi("N"); 
+    	 		 }else {
+    	 			detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi()); 
+    	 		 }
     	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+    	 		 detailPass.setDppGpgId(pgpm.getGpgId());
     	  		 detailPass.setDppTypeStrConduc(strucCond);
     	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
     	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
@@ -2568,9 +2586,9 @@ public class PpmController {
                 		    detailPass.setDppTypePlan(passationListe.getMopTypPlan());
                 		  }
                 		  
-              		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
-              		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
-              		    //detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+              		    //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+                		detailPass.setDppGpgId(pgpm.getGpgId());
+              		    detailPass.setDppPartiePmePmi(pgpm.getGpgPartiePmePmi());
               		    detailPass.setDppTypeStrConduc(strucCond);
               		    detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
               		    detailPass.setTPlanPassation(planPass);
@@ -2588,7 +2606,8 @@ public class PpmController {
                 	    }else {
                 	    	detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
                 		    detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
-                		    detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+                		    //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+                		    detailPass.setDppGpgId(pgpm.getGpgId());
                 		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
                 		    detailPass.setTModeleDacType(new TModeleDacType(tydCode));
                 		    detailPass.setDppTypeStrConduc(strucCond);

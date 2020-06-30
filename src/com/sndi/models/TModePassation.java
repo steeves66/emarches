@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,6 +20,7 @@ public class TModePassation implements java.io.Serializable {
 	private String mopCode;
 	private String mopLibelleCourt;
 	private String mopLibelleLong;
+	private String mopTypPlan;
 	private Set<TAffichagePgpm> TAffichagePgpms = new HashSet<TAffichagePgpm>(0);
 	private Set<TDetailPlanGeneral> TDetailPlanGenerals = new HashSet<TDetailPlanGeneral>(0);
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
@@ -35,13 +36,14 @@ public class TModePassation implements java.io.Serializable {
 		this.mopLibelleCourt = mopLibelleCourt;
 	}
 
-	public TModePassation(String mopCode, String mopLibelleCourt, String mopLibelleLong,
+	public TModePassation(String mopCode, String mopLibelleCourt, String mopLibelleLong, String mopTypPlan,
 			Set<TAffichagePgpm> TAffichagePgpms, Set<TDetailPlanGeneral> TDetailPlanGenerals,
 			Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TPublicationAvis> TPublicationAvises, Set<TDacSpecs> TDacSpecses) {
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
+		this.mopTypPlan = mopTypPlan;
 		this.TAffichagePgpms = TAffichagePgpms;
 		this.TDetailPlanGenerals = TDetailPlanGenerals;
 		this.TAffichagePpms = TAffichagePpms;
@@ -77,6 +79,15 @@ public class TModePassation implements java.io.Serializable {
 
 	public void setMopLibelleLong(String mopLibelleLong) {
 		this.mopLibelleLong = mopLibelleLong;
+	}
+
+	@Column(name = "MOP_TYP_PLAN", length = 10)
+	public String getMopTypPlan() {
+		return this.mopTypPlan;
+	}
+
+	public void setMopTypPlan(String mopTypPlan) {
+		this.mopTypPlan = mopTypPlan;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModePassation")

@@ -60,6 +60,7 @@ import com.sndi.model.VPpmStatut;
 import com.sndi.model.VPpmliste;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VTypeStructConduc;
+import com.sndi.model.VUpdateFinancementPpm;
 import com.sndi.model.VUpdatePpm;
 
 import javax.annotation.PostConstruct;
@@ -131,11 +132,6 @@ public class PpmModificationController {
 		 //chargePpmTrans();
 		 //chargePspmTrans();
 		 //chargePpmValDmp();
-		 //chargePpmValCp();
-		 //chargePpmDifCp();
-		 //chargePpmDifDmp();
-		 //chargePspmDifCp();
-		 //chargePspmDifDmp();
 		 chargeSourceFinance();
 		 //chargeImputation();
 		 chargeFonction();
@@ -163,6 +159,7 @@ public class PpmModificationController {
 	     private List<VModeleDao> listeDao = new ArrayList<VModeleDao>();
 	     private List<VModeleAmi> listeAmi = new ArrayList<VModeleAmi>();
 	     private List<VTypeStructConduc> listeTypStruConduc = new ArrayList<VTypeStructConduc>();
+	     private List<VUpdateFinancementPpm> listeupdatefinance = new ArrayList<VUpdateFinancementPpm>();
 	     
 	     private List<TStructure> listeStructures = new ArrayList<TStructure>();
 	     private List<TCharge> listeCharges = new ArrayList<TCharge>();
@@ -241,6 +238,7 @@ public class PpmModificationController {
 		 private VDatePub pubDate = new VDatePub();
 		 private VModePassation recupModeListe = new VModePassation();
 		 private VModePassation passationListe = new VModePassation();
+		 private VUpdateFinancementPpm updatefinance =new VUpdateFinancementPpm();
 		
 	 
 		//Declaration des variables
@@ -274,6 +272,7 @@ public class PpmModificationController {
 		 private String nbrePspm ="";
 		 private String filtrePgspm ="";
 		 private String multiFiltre ="";
+		 private String sourfin ="";
 		 private Date dateApp;
 		 private Date datePub;
 		 private Date dateJugement;
@@ -285,6 +284,9 @@ public class PpmModificationController {
 		 private boolean modeleAmi =false;
 		 private boolean modeleDao =true;
 		 private boolean boutonEditUpdate = false;
+		 public boolean selectBailleur=false;
+		 public boolean selectTresor =false;
+		 public boolean selectPartBai =false;
 	 
 	 
 	 
@@ -326,6 +328,9 @@ public class PpmModificationController {
 			listeMode = ((List<VModePassation>)iservice.getObjectsByColumn("VModePassation",new ArrayList<String>(Arrays.asList("MOP_CODE"))));
 			filtreModePassation="";
 			} 
+		  
+		  
+	
 		 
 		 
 		 //Liste des Pspm transmis par l'acteur connecté
@@ -498,14 +503,34 @@ public class PpmModificationController {
 		 
 		//Début des méthodes pour les affichages 
 			//Combobox Gestions
-		 public void chargeGestions(){
+		/* public void chargeGestions(){
 			 listeGestion=(List<TGestion>) iservice.getObjectsByColumnDesc("TGestion", new ArrayList<String>(Arrays.asList("GES_CODE")));	
+		 }*/ 
+      	 
+     	//Combobox Gestions
+		 public void chargeGestions(){
+			 listeGestion=new ArrayList<>(constantService.getListeGestion());
 		 } 
+		 
 	   //Combobox Bailleur
-	   public void chargeBailleur() {
+	  /* public void chargeBailleur() {
 		 listeBailleurs.clear();
 		 listeBailleurs =(List<TBailleur>) iservice.getObjectsByColumn("TBailleur", new ArrayList<String>(Arrays.asList("baiCode")));
-		} 
+		} */
+		 
+		 //Combobox Bailleur
+		   public void chargeBailleur() {
+			   listeBailleurs=new ArrayList<>(constantService.getListeBailleurs());
+			} 
+		   
+		 //Combobox Source de finacement
+			 public void chargeSourceFinance() {
+				 listeSourceFinance=new ArrayList<>(constantService.getListeSourceFinance());
+				}
+			//Combobox Devises
+			 public void chargeDevise() {
+				 listeDevise=new ArrayList<>(constantService.getListeDevise());	
+				} 
 	   
 	 //Combobox type Charge
 	   public void chargeTypeCharges() {
@@ -539,7 +564,7 @@ public class PpmModificationController {
 		 }
 		 
 	    //Combobox Source de finacement
-		 public void chargeSourceFinance() {
+		/* public void chargeSourceFinance() {
 			 listeSourceFinance.clear();
 			 listeSourceFinance =(List<TSourceFinancement>) iservice.getObjectsByColumn("TSourceFinancement", new ArrayList<String>(Arrays.asList("souCode")));
 			}
@@ -547,7 +572,7 @@ public class PpmModificationController {
 		 public void chargeDevise() {
 			 listeDevise.clear();
 			 listeDevise =(List<TDevise>) iservice.getObjectsByColumn("TDevise", new ArrayList<String>(Arrays.asList("devCode")));
-			} 
+			} */
 		 
 		 
 		//Chargement des imputations ou lignes budgétaires pour le AC
@@ -592,7 +617,7 @@ public class PpmModificationController {
 	public void affichageModele() {
 		 //Affichage des modèles type de DAO
 		 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-				 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+updatePpm.getGpgId()))); 
+				 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppGpgId()))); 
 		//Affichage du coût total de l'opération
 		    coutOperation();
 	}
@@ -610,7 +635,7 @@ public class PpmModificationController {
 	//Récupération du modèle DAO type
 	 public void recupModeleDao() {
 	    			listeModele= (List<VModeleDac>) iservice.getObjectsByColumn("VModeleDac", new ArrayList<String>(Arrays.asList("DPP_ID")),
-	    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+	    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
 	    			/*if (!listeModele.isEmpty()) {
 	    				geneDate=listeModele.get(0); 
 	    			}*/
@@ -886,7 +911,8 @@ public class PpmModificationController {
 		 
 		 
 		 public void onSelectPgpm() {
-			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+			 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
+			 detailPass.setDppGpgId(pgpm.getGpgId());
 			 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
 
 			 recupPgpm = new VPgpmFonction();
@@ -912,14 +938,6 @@ public class PpmModificationController {
 				    }
 			 
 			 if(pgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
-                //Activation de la liste des Ami et désactivation de l'autre
-				/* modeleAmi = true;
-				 modeleDao = false;
-	             //Affichage des modèles type AMI
-				   listeAmi = ((List<VModeleAmi>)iservice.getObjectsByColumn("VModeleAmi",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-						 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId())));
-				   //Affichage du coût total de l'opération
-				    coutOperation();*/
 					//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
 				  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
 					  
@@ -935,11 +953,6 @@ public class PpmModificationController {
 					                  }
 			             }else {
 			        	//Activation de la liste des DAO type et désactivation de la liste des DAO 
-						/* modeleAmi = false;
-						 modeleDao = true;
-			    	      //Affichage des modèles type de DAO
-						 listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-								 new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); */
 						//Affichage du coût total de l'opération
 						    coutOperation();
 							//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
@@ -963,18 +976,19 @@ public class PpmModificationController {
 		 
 		 //Methode OnSelect pour PGSPM
 		 public void onSelectPgspm() {
-			 detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgspm.getGpgId())); 
+			 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgspm.getGpgId())); 
+			 detailPass.setDppGpgId(pgspm.getGpgId());
 
 			 recupPgspm = new VPgpmFonction();
 			 recupPgspm.setGpgObjet(pgspm.getGpgObjet());
 			 recupPgspm.setGpgId(pgspm.getGpgId());
 			 recupPgspm.setGpgTypePlan(pgspm.getGpgTypePlan());
 			 recupPgspm.setGpgCommentaire(pgspm.getGpgCommentaire());
-			 recupPgspm.setGpgNumeroOrdre(pgspm.getGpgNumeroOrdre());
-			 recupPgspm.setGpgDateSaisie(pgspm.getGpgDateSaisie());
+			 //recupPgspm.setGpgNumeroOrdre(pgspm.getGpgNumeroOrdre());
+			 //recupPgspm.setGpgDateSaisie(pgspm.getGpgDateSaisie());
 			 recupPgspm.setGpgPartiePmePmi(pgspm.getGpgPartiePmePmi());
-			 recupPgspm.setMopLibelleLong(pgspm.getMopLibelleLong());
-			 recupPgspm.setTymLibelleCourt(pgspm.getTymLibelleCourt());
+			 //recupPgspm.setMopLibelleLong(pgspm.getMopLibelleLong());
+			 //recupPgspm.setTymLibelleCourt(pgspm.getTymLibelleCourt());
 			 recupPgspm.setGpgTymCode(pgspm.getGpgTymCode());
 			 recupPgspm.setTymTymCode(pgspm.getTymTymCode());
 			 recupPgspm.setGpgMopCode(pgspm.getGpgMopCode());
@@ -990,21 +1004,33 @@ public class PpmModificationController {
 			 
 			             
 			             if(pgspm.getGpgMopCode().equalsIgnoreCase("AMI")) {
-			            	    /*modeleDao = false;
-			            	    modeleAmi = false;*/
+			   
 			                       }else {
-			            	    //Désactivation des listes 
-			            	/*    modeleDao = true;
-			            	    modeleAmi = false;
-			            	    //Affichage du modèle DAO type
-			   				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgspm.getGpgId())));*/ 
+			      
 			   			       //Affichage du montant total
 			   			       coutOperation();       
 			                 }
-				     } 
+				     }
 		 
 		 
+		 
+		//Methode de suppression de finanacemnt
+		 public void deleteFinanacement() {
+			iservice.deleteObject(selectFinance); 
+			chargeFinancement();
+			userController.setTexteMsg("Suppression éffectuée avec succès!");
+			userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
+		 }
+		 
+		 //Editer
+		 public void editFinancement() {
+			 listeupdatefinance= (List<VUpdateFinancementPpm>) iservice.getObjectsByColumn("VUpdateFinancementPpm", new ArrayList<String>(Arrays.asList("FPP_ID")),
+					 new WhereClause("FPP_ID",WhereClause.Comparateur.EQ,""+selectFinance.getFppId()));
+			if (!listeupdatefinance.isEmpty()) {
+				updatefinance=listeupdatefinance.get(0); 
+			}	 
+		 } 
 		  
 		 
 		 public void onSelectPpm() {
@@ -1170,6 +1196,36 @@ public class PpmModificationController {
 			 coutOperation();
 		 }
 		 
+		//Methode d'enregistrement des financements du ppm
+		 public void saveFinancementppm() {
+			//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
+			 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+			     TDetailPlanPassation pass = new TDetailPlanPassation();
+				 if(!PL.isEmpty()) {pass =PL.get(0);} 
+				     
+			 
+		  if(sourfin.equalsIgnoreCase("ETAT")) {
+			 baiCode ="ETAT";
+     	     newFinancement.setTBailleur(new TBailleur(baiCode)); 
+          }else
+     	  {
+         	newFinancement.setTBailleur(new TBailleur(baiCode));  
+     	  }
+			newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+		    newFinancement.setTDevise(new TDevise(devCode));
+		    newFinancement.setFppTypeFinance(sourfin);
+		    newFinancement.setTDetailPlanPassation(pass);
+			iservice.addObject(newFinancement);
+			
+			viderFinancement();
+			
+			//chargeFinancement();
+			chargeFinancementUpdate();
+			userController.setTexteMsg("Enregistrement éffectué avec succès!");
+			userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
+		 }
 		 
 		 
     	 //suppression de financement update
@@ -1188,6 +1244,81 @@ public class PpmModificationController {
 				 userController.setRenderMsg(true);
 				 userController.setSevrityMsg("danger");	 
 			 }
+		 }
+		 
+		 //Update le financement
+		 public void updateFinancement() {
+			 selectFinance.setFppTypeFinance(updatefinance.getFppTypeFinance());
+			 selectFinance.setTBailleur(new TBailleur(updatefinance.getFppBaiCode()));
+			 selectFinance.setTSourceFinancement(new TSourceFinancement(updatefinance.getFppSouCode())); 
+			 selectFinance.setTDevise(new TDevise(updatefinance.getFppDevCode()));
+			 selectFinance.setFppMontantCfa(updatefinance.getFppMontantCfa());   
+			 selectFinance.setFppMontantDevise(updatefinance.getFppMontantDevise());  
+			 selectFinance.setFppPartTresor(updatefinance.getFppPartTresor());
+			 iservice.updateObject(selectFinance);
+			 userController.setTexteMsg("Suppression éffectuée avec succès!");
+			 userController.setRenderMsg(true);
+			 userController.setSevrityMsg("success");  
+		 }
+		 
+		 
+		//Tri sur les types de financement  
+			public void chargeSourceCheck() { 
+		    listeSourceFinance.clear();
+			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
+			      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
+			newFinancement = new TFinancementPpm();
+				}
+		 
+		//Tri sur les types de financement  
+			public void chargeSourceEtat() { 
+		    listeSourceFinance.clear();
+			listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
+			      "SOU_CODE", new ArrayList<String>(Arrays.asList("TRE")));
+			newFinancement = new TFinancementPpm();
+				}
+			
+			//Methodes vider
+			 public void viderFinancement() {
+				 newFinancement = new TFinancementPpm();
+				 devCode ="";
+				 baiCode ="";
+				 souCode="";
+				 sourfin = "";
+			 }
+		 
+		 
+		 public void checkBailleur() {
+			 //sourfin="";
+			 if(sourfin.equalsIgnoreCase("Bailleur")) {
+				 selectBailleur = true;
+				 selectTresor = false;
+				 selectPartBai = true;
+				 chargeSourceCheck();
+				 //sourfin="";
+			 }else
+			      if(sourfin.equalsIgnoreCase("Cofinance")){
+				 selectBailleur = true; 
+				 selectTresor = true;
+				 selectPartBai = true;
+				 chargeSourceFinance();
+				 newFinancement = new TFinancementPpm();
+				// sourfin="";
+			 }else 
+				 if(sourfin.equalsIgnoreCase("ETAT")){
+				 selectBailleur = false;
+				 selectTresor = true;
+				 selectPartBai= false;
+				 souCode="TRE";
+				 devCode="CFA";
+				 chargeSourceEtat();
+			    }else 
+			         if(sourfin.equalsIgnoreCase("")){
+			    	  selectPartBai = false;
+			    	  selectBailleur = false;
+					  selectTresor = false;
+					  souCode="";
+			    }
 		 }
 		 	 
 	  	 
@@ -1242,15 +1373,7 @@ public class PpmModificationController {
 				 viderFinancement();
 			}
 		 
-	  	 
-		 //Methodes vider
-		 public void viderFinancement() {
-			 newFinancement = new TFinancementPpm();
-			 devCode ="";
-			 baiCode ="";
-			 souCode=""; 
-		 }
-		 
+	
 		 
 	     //Validation par le CPMP DMP
 	     @Transactional
@@ -1360,7 +1483,8 @@ public class PpmModificationController {
 					   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
 						     TDetailPlanPassation detail = new TDetailPlanPassation();
 									if(!PLG.isEmpty()) detail =PLG.get(0); 
-						             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+						             //detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+									 detail.setDppGpgId(updatePpm.getDppGpgId());
 						             if(marche.getTymCode() == null) {
 						             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));	 
 						             }else {
@@ -1380,7 +1504,7 @@ public class PpmModificationController {
 						             detail.setDppObjet(updatePpm.getDppObjet());
 						             detail.setDppPartiePmePmi(updatePpm.getDppPartiePmePmi());
 						             detail.setDppBailleur(updatePpm.getDppBailleur());
-						             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
+						             //detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
 						             detail.setDppDateAttApproBail(updatePpm.getDppDateAttApproBail());
 						             detail.setDppApprobAno(updatePpm.getDppApprobAno());
 						             detail.setDppDateAvisAoPublication(updatePpm.getDppDateAvisAoPublication());
@@ -1405,7 +1529,8 @@ public class PpmModificationController {
 						   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
 							            TDetailPlanPassation detail = new TDetailPlanPassation();
 										if(!PLG.isEmpty()) detail =PLG.get(0); 
-							             detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+							             //detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
+							             detail.setDppGpgId(updatePpm.getDppGpgId());
 							             if(marche.getTymCode() == null) {
 							             detail.setTTypeMarche(new TTypeMarche(updatePpm.getDppTymCode()));	 
 							             }else {
@@ -2957,4 +3082,63 @@ public class PpmModificationController {
 		this.pubDate = pubDate;
 	}
 
+
+
+	public List<VUpdateFinancementPpm> getListeupdatefinance() {
+		return listeupdatefinance;
+	}
+
+	public void setListeupdatefinance(List<VUpdateFinancementPpm> listeupdatefinance) {
+		this.listeupdatefinance = listeupdatefinance;
+	}
+
+
+
+	public VUpdateFinancementPpm getUpdatefinance() {
+		return updatefinance;
+	}
+
+	public void setUpdatefinance(VUpdateFinancementPpm updatefinance) {
+		this.updatefinance = updatefinance;
+	}
+
+
+
+	public boolean isSelectBailleur() {
+		return selectBailleur;
+	}
+	public void setSelectBailleur(boolean selectBailleur) {
+		this.selectBailleur = selectBailleur;
+	}
+
+
+
+	public boolean isSelectTresor() {
+		return selectTresor;
+	}
+
+	public void setSelectTresor(boolean selectTresor) {
+		this.selectTresor = selectTresor;
+	}
+
+
+
+	public boolean isSelectPartBai() {
+		return selectPartBai;
+	}
+
+	public void setSelectPartBai(boolean selectPartBai) {
+		this.selectPartBai = selectPartBai;
+	}
+
+
+
+	public String getSourfin() {
+		return sourfin;
+	}
+
+	public void setSourfin(String sourfin) {
+		this.sourfin = sourfin;
+	}
+	
 }

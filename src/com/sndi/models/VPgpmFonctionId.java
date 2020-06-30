@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -35,6 +35,7 @@ public class VPgpmFonctionId implements java.io.Serializable {
 	private String tymLibelleCourt;
 	private String tymTymCode;
 	private String mopLibelleLong;
+	private String mopTypPlan;
 	private String plgFonCod;
 	private String fonLibelle;
 
@@ -57,8 +58,8 @@ public class VPgpmFonctionId implements java.io.Serializable {
 			String gpgTymCode, String gpgMopCode, String gpgCode, String gpgObjet, Integer gpgNumeroOrdre,
 			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao, String gpgActeurSaisie,
 			String gpgFonCodPf, String gpgFonCodDmp, String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode,
-			String gpgLibFin, String tymLibelleCourt, String tymTymCode, String mopLibelleLong, String plgFonCod,
-			String fonLibelle) {
+			String gpgLibFin, String tymLibelleCourt, String tymTymCode, String mopLibelleLong, String mopTypPlan,
+			String plgFonCod, String fonLibelle) {
 		this.gpgId = gpgId;
 		this.gpgPlgId = gpgPlgId;
 		this.gpgAgpId = gpgAgpId;
@@ -83,6 +84,7 @@ public class VPgpmFonctionId implements java.io.Serializable {
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.tymTymCode = tymTymCode;
 		this.mopLibelleLong = mopLibelleLong;
+		this.mopTypPlan = mopTypPlan;
 		this.plgFonCod = plgFonCod;
 		this.fonLibelle = fonLibelle;
 	}
@@ -303,6 +305,15 @@ public class VPgpmFonctionId implements java.io.Serializable {
 		this.mopLibelleLong = mopLibelleLong;
 	}
 
+	@Column(name = "MOP_TYP_PLAN", length = 10)
+	public String getMopTypPlan() {
+		return this.mopTypPlan;
+	}
+
+	public void setMopTypPlan(String mopTypPlan) {
+		this.mopTypPlan = mopTypPlan;
+	}
+
 	@Column(name = "PLG_FON_COD", nullable = false, length = 12)
 	public String getPlgFonCod() {
 		return this.plgFonCod;
@@ -387,6 +398,8 @@ public class VPgpmFonctionId implements java.io.Serializable {
 				&& ((this.getMopLibelleLong() == castOther.getMopLibelleLong())
 						|| (this.getMopLibelleLong() != null && castOther.getMopLibelleLong() != null
 								&& this.getMopLibelleLong().equals(castOther.getMopLibelleLong())))
+				&& ((this.getMopTypPlan() == castOther.getMopTypPlan()) || (this.getMopTypPlan() != null
+						&& castOther.getMopTypPlan() != null && this.getMopTypPlan().equals(castOther.getMopTypPlan())))
 				&& ((this.getPlgFonCod() == castOther.getPlgFonCod()) || (this.getPlgFonCod() != null
 						&& castOther.getPlgFonCod() != null && this.getPlgFonCod().equals(castOther.getPlgFonCod())))
 				&& ((this.getFonLibelle() == castOther.getFonLibelle())
@@ -421,6 +434,7 @@ public class VPgpmFonctionId implements java.io.Serializable {
 		result = 37 * result + (getTymLibelleCourt() == null ? 0 : this.getTymLibelleCourt().hashCode());
 		result = 37 * result + (getTymTymCode() == null ? 0 : this.getTymTymCode().hashCode());
 		result = 37 * result + (getMopLibelleLong() == null ? 0 : this.getMopLibelleLong().hashCode());
+		result = 37 * result + (getMopTypPlan() == null ? 0 : this.getMopTypPlan().hashCode());
 		result = 37 * result + (getPlgFonCod() == null ? 0 : this.getPlgFonCod().hashCode());
 		result = 37 * result + (getFonLibelle() == null ? 0 : this.getFonLibelle().hashCode());
 		return result;

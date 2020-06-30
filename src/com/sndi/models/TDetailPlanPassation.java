@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -29,10 +29,10 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private TTypeMarche TTypeMarche;
 	private TTypeProcedure TTypeProcedure;
 	private TDacSpecs TDacSpecs;
-	private TDetailPlanGeneral TDetailPlanGeneral;
 	private TLBudgets TLBudgets;
 	private TModeleDacType TModeleDacType;
 	private TModePassation TModePassation;
+	private Long dppGpgId;
 	private String dppTypePlan;
 	private String dppCode;
 	private Integer dppNumeroOrdre;
@@ -101,22 +101,21 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	}
 
 	public TDetailPlanPassation(long dppId, TPlanPassation TPlanPassation, TStatut TStatut, TStructure TStructure,
-			TTypeMarche TTypeMarche, TTypeProcedure TTypeProcedure, TDacSpecs TDacSpecs,
-			TDetailPlanGeneral TDetailPlanGeneral, TLBudgets TLBudgets, TModeleDacType TModeleDacType,
-			TModePassation TModePassation, String dppTypePlan, String dppCode, Integer dppNumeroOrdre, Date dppDate,
-			String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
-			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
-			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail,
-			Date dppDateNegociation, Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob,
-			Date dppDateExecDebut, Date dppDateExecFin, String dppActeurSaisie, String dppStatutRetour,
-			Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,
-			String dppStatutDao, Date dppInvEntre, Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec,
-			Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp, String dppBailleur, String dppTypeFinance,
-			Date dppApprobAno, Date dppDteModif, String dppRecherche, String dppFonCodPf, String dppFonCodDmp,
-			Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno, Date dppDateSolFact,
-			Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,
-			Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges,
-			Set<TFinancementPpm> TFinancementPpms) {
+			TTypeMarche TTypeMarche, TTypeProcedure TTypeProcedure, TDacSpecs TDacSpecs, TLBudgets TLBudgets,
+			TModeleDacType TModeleDacType, TModePassation TModePassation, Long dppGpgId, String dppTypePlan,
+			String dppCode, Integer dppNumeroOrdre, Date dppDate, String dppObjet, String dppSourceFin,
+			Date dppDateDaoTrans, Date dppDateDaoApprobDmp, Date dppDateDaoApprobBail, Date dppDateAvisAoPublication,
+			Date dppDateOuvertOt, Date dppDateOuvertOf, Date dppDateElabRapport, Date dppDateJugementOffre,
+			Date dppDateAttApprobDmp, Date dppDateAttApproBail, Date dppDateNegociation, Date dppDateSignatAttrib,
+			Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, Date dppDateExecFin,
+			String dppActeurSaisie, String dppStatutRetour, Date dppDateSaisie, String dppStructureConduc,
+			String dppStructureBenefi, String dppPartiePmePmi, String dppStatutDao, Date dppInvEntre,
+			Date dppDateAttApprobCpmp, Date dppDateJugementOffreTec, Date dppDateValAc, Date dppDateValCpmp,
+			Date dppDateValDmp, String dppBailleur, String dppTypeFinance, Date dppApprobAno, Date dppDteModif,
+			String dppRecherche, String dppFonCodPf, String dppFonCodDmp, Long dppMontant, String dppNatInt,
+			String dppTypeStrConduc, String dppStatutAno, Date dppDateSolFact, Date dppDateRecepFact,
+			Date dppDateRecepLettr, Date dppDateNotAtt, Set<THistoPlanPassation> THistoPlanPassations,
+			Set<TCharge> TCharges, Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
@@ -124,10 +123,10 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.TTypeMarche = TTypeMarche;
 		this.TTypeProcedure = TTypeProcedure;
 		this.TDacSpecs = TDacSpecs;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TLBudgets = TLBudgets;
 		this.TModeleDacType = TModeleDacType;
 		this.TModePassation = TModePassation;
+		this.dppGpgId = dppGpgId;
 		this.dppTypePlan = dppTypePlan;
 		this.dppCode = dppCode;
 		this.dppNumeroOrdre = dppNumeroOrdre;
@@ -255,16 +254,6 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DPP_GPG_ID")
-	public TDetailPlanGeneral getTDetailPlanGeneral() {
-		return this.TDetailPlanGeneral;
-	}
-
-	public void setTDetailPlanGeneral(TDetailPlanGeneral TDetailPlanGeneral) {
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_LBG_CODE")
 	public TLBudgets getTLBudgets() {
 		return this.TLBudgets;
@@ -292,6 +281,15 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setTModePassation(TModePassation TModePassation) {
 		this.TModePassation = TModePassation;
+	}
+
+	@Column(name = "DPP_GPG_ID", precision = 10, scale = 0)
+	public Long getDppGpgId() {
+		return this.dppGpgId;
+	}
+
+	public void setDppGpgId(Long dppGpgId) {
+		this.dppGpgId = dppGpgId;
 	}
 
 	@Column(name = "DPP_TYPE_PLAN", nullable = false, length = 3)

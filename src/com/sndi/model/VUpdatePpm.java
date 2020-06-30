@@ -22,7 +22,7 @@ public class VUpdatePpm implements java.io.Serializable {
 	private long plpId;
 	private long dppId;
 	private long dppPlpId;
-	private long dppGpgId;
+	private Long dppGpgId;
 	private String dppStaCode;
 	private String dppTymCode;
 	private String dppMopCode;
@@ -143,18 +143,18 @@ public class VUpdatePpm implements java.io.Serializable {
 	private String tymLibelleCourt;
 	private String mopLibelleLong;
 	private String souLibelle;
-	private long gpgId;
+	//private long gpgId;
 	private String gpgObjet;
 	private String natLibelle;
 
 	public VUpdatePpm() {
 	}
 
-	public VUpdatePpm(long plpId, long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
+	public VUpdatePpm(long plpId, long dppId, long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode,
 			String dppMopCode, String dppTypePlan, String lbgCode, String lbgStrCode, short lbgGesCode,
 			BigDecimal lbgResDon, String lbgImputation, String lbgNatCode, BigDecimal lbgResTr, BigDecimal lbgAeTr,
 			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral, String mdtCode,
-			String tymLibelleCourt, long gpgId) {
+			String tymLibelleCourt/*, long gpgId*/) {
 		this.plpId = plpId;
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
@@ -177,10 +177,10 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.lbgAdmCentral = lbgAdmCentral;
 		this.mdtCode = mdtCode;
 		this.tymLibelleCourt = tymLibelleCourt;
-		this.gpgId = gpgId;
+		//this.gpgId = gpgId;
 	}
 
-	public VUpdatePpm(long plpId, long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
+	public VUpdatePpm(long plpId, long dppId, long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode,
 			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, Integer dppNumeroOrdre,
 			Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
@@ -206,7 +206,7 @@ public class VUpdatePpm implements java.io.Serializable {
 			BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2, BigDecimal lbgDotAnPlus0, String lbgTypBud,
 			Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou,
 			String mdtCode, String mdtLibelleLong, String mdtLibelleCourt, Date mdtDteSaisi, String mdtOpeMatricule,
-			String mdtTymCode, String tymLibelleCourt, String mopLibelleLong, String souLibelle, long gpgId,
+			String mdtTymCode, String tymLibelleCourt, String mopLibelleLong, String souLibelle, /*long gpgId,*/
 			String gpgObjet, String natLibelle) {
 		this.plpId = plpId;
 		this.dppId = dppId;
@@ -332,7 +332,7 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
 		this.souLibelle = souLibelle;
-		this.gpgId = gpgId;
+		//this.gpgId = gpgId;
 		this.gpgObjet = gpgObjet;
 		this.natLibelle = natLibelle;
 	}
@@ -367,11 +367,11 @@ public class VUpdatePpm implements java.io.Serializable {
 	}
 
 	@Column(name = "DPP_GPG_ID", nullable = false, precision = 10, scale = 0)
-	public long getDppGpgId() {
+	public Long getDppGpgId() {
 		return this.dppGpgId;
 	}
 
-	public void setDppGpgId(long dppGpgId) {
+	public void setDppGpgId(Long dppGpgId) {
 		this.dppGpgId = dppGpgId;
 	}
 
@@ -1455,7 +1455,7 @@ public class VUpdatePpm implements java.io.Serializable {
 		this.souLibelle = souLibelle;
 	}
 
-	@Column(name = "GPG_ID", nullable = false, precision = 10, scale = 0)
+/*	@Column(name = "GPG_ID", nullable = false, precision = 10, scale = 0)
 	public long getGpgId() {
 		return this.gpgId;
 	}
@@ -1463,7 +1463,7 @@ public class VUpdatePpm implements java.io.Serializable {
 	public void setGpgId(long gpgId) {
 		this.gpgId = gpgId;
 	}
-
+*/
 	@Column(name = "GPG_OBJET", length = 1000)
 	public String getGpgObjet() {
 		return this.gpgObjet;

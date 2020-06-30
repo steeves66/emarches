@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -28,7 +28,9 @@ public class TModeleDacType implements java.io.Serializable {
 	private String mdtLibelleLong;
 	private String mdtLibelleCourt;
 	private Date mdtDteSaisi;
+	private String mdtDacTypeChain;
 	private Set<TTypePiecesDac> TTypePiecesDacs = new HashSet<TTypePiecesDac>(0);
+	private Set<TDacSpecs> TDacSpecses = new HashSet<TDacSpecs>(0);
 	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 
 	public TModeleDacType() {
@@ -39,15 +41,17 @@ public class TModeleDacType implements java.io.Serializable {
 	}
 
 	public TModeleDacType(String mdtCode, TTypeMarche TTypeMarche, TOperateur TOperateur, String mdtLibelleLong,
-			String mdtLibelleCourt, Date mdtDteSaisi, Set<TTypePiecesDac> TTypePiecesDacs,
-			Set<TDetailPlanPassation> TDetailPlanPassations) {
+			String mdtLibelleCourt, Date mdtDteSaisi, String mdtDacTypeChain, Set<TTypePiecesDac> TTypePiecesDacs,
+			Set<TDacSpecs> TDacSpecses, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.mdtCode = mdtCode;
 		this.TTypeMarche = TTypeMarche;
 		this.TOperateur = TOperateur;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtLibelleCourt = mdtLibelleCourt;
 		this.mdtDteSaisi = mdtDteSaisi;
+		this.mdtDacTypeChain = mdtDacTypeChain;
 		this.TTypePiecesDacs = TTypePiecesDacs;
+		this.TDacSpecses = TDacSpecses;
 		this.TDetailPlanPassations = TDetailPlanPassations;
 	}
 
@@ -110,6 +114,15 @@ public class TModeleDacType implements java.io.Serializable {
 		this.mdtDteSaisi = mdtDteSaisi;
 	}
 
+	@Column(name = "MDT_DAC_TYPE_CHAIN", length = 100)
+	public String getMdtDacTypeChain() {
+		return this.mdtDacTypeChain;
+	}
+
+	public void setMdtDacTypeChain(String mdtDacTypeChain) {
+		this.mdtDacTypeChain = mdtDacTypeChain;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType")
 	public Set<TTypePiecesDac> getTTypePiecesDacs() {
 		return this.TTypePiecesDacs;
@@ -117,6 +130,15 @@ public class TModeleDacType implements java.io.Serializable {
 
 	public void setTTypePiecesDacs(Set<TTypePiecesDac> TTypePiecesDacs) {
 		this.TTypePiecesDacs = TTypePiecesDacs;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType")
+	public Set<TDacSpecs> getTDacSpecses() {
+		return this.TDacSpecses;
+	}
+
+	public void setTDacSpecses(Set<TDacSpecs> TDacSpecses) {
+		this.TDacSpecses = TDacSpecses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TModeleDacType")

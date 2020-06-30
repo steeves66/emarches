@@ -71,7 +71,7 @@
              <div class="form-group">
                   <label class="col-sm-3 control-label">PGPM<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-				  <p:inputText id="pgpm2" type="text" value="#{ppmModificationController.updatePpm.gpgId} : #{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" />
+				  <p:inputText id="pgpm2" type="text" value="#{ppmModificationController.updatePpm.dppGpgId} : #{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
@@ -385,27 +385,45 @@
 	<p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
 	 <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
+			     
+			     
+	<!-- <div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CHOIX DU DAO TYPE</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+           <div class="col-md-12">
+		    <div class="form-group">
+		   <label for="moldao27" class="col-sm-2 control-label">Dao Type</label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu id="moldao"  value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItems value="#{ppmModificationController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+	         </div>
+		    </div> 
+
+             </div>
+                             
+		   </div>
+          </div>     
+         </div>
+         </div>	 -->	     	     	     
+			     
      <div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
          </div>
           <div class="box-body">
-          <div class="row"> 
-          
-           <div class="col-md-6">
-            <div class="form-group">
-            <label for="moldao" class="col-sm-6 control-label">Modèle Dao<span style="color:red;"> *</span></label>
-            <div class="col-sm-6">
-                    <p:selectOneMenu id="moldao"  value="#{ppmModificationController.updatePpm.mdtCodetydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItems value="#{ppmModificationController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
-				<f:selectItems />				   				    				   
-		       	</p:selectOneMenu>
-                  </div>
-            </div>
-            </div>
-          
-          
+          <div class="row">       
              <div class="col-md-6">
                <h:panelGroup rendered="#{controleController.validDMP}"> 
 		    <div class="form-group">
@@ -677,8 +695,6 @@
 		<p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditPspm}" action="#{ppmModificationController.imprimModifPspm()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PSPM 
 		</p:commandLink>
-	   
-	 
 	  
           </div>
          
@@ -689,7 +705,93 @@
          
         
        </div>
-			        </p:tab>
+	</p:tab>
+	
+	
+	<p:tab   id="Financements" title="Modification des Financements du PPM"   titleStyle="background-color: #f88b2e;background-image: none">
+            <p:panel header="Financements du PPM">
+             
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-11"><div  style="color: #fff">FINANCEMENTS DU PPM</div></div> 
+                  <div class="col-md-1"> 
+			           <p:commandLink oncomplete="PF('DetailDlg').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+								</p:commandLink>
+			         </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+                  <p:dataTable id="financePpm1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmModificationController.listeFinancement}"
+                   editable="true" editMode="cell"  emptyMessage="Aucun financement enregistré">
+                        
+                        <p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fppTypeFinance}"/>
+				        </p:column>
+          
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Part bailleur" width="6%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppMontantCfa}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText  value="#{slctdTb.fppMontantCfa}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Part Trésor" width="5%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppPartTresor}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText  value="#{slctdTb.fppPartTresor}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				         <p:column headerText="Actions" styleClass="col-sm-1">
+				           <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('DetailDlgMod').show()" action="#{ppmController.editFinancement()}" title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.selectFinance}" />                             
+                            </p:commandLink>
+				              
+				              <p:commandLink class="btn btn-xs btn-danger" style="margin-left:5px;"
+				              action="#{ppmController.deleteFinanacement()}" title="Suprimer" update=":gnl">
+                                <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>  
+                                <p:confirm header="Confirmation" message="Confirmez vous la supression ?" icon="ui-icon-alert" />                           
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.selectFinance}" />
+                                </p:commandLink>
+				            <h:outputText  />
+				        </p:column>
+                 </p:dataTable> 
+                 
+	            </div>
+	           </div>
+            
+            </p:panel>
+            </p:tab>
+	
+	
+	
+	
+	
+	
 			        </p:wizard>
 			         
             
@@ -1395,6 +1497,252 @@
       </p:dialog>
     </h:form>
     
+    
+    
+    <h:form id="dlogdetMod">
+	  <p:dialog  widgetVar="DetailDlgMod" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+		<div class="box box-success box-solid">
+            <div class="box-header with-border">
+                      <div class="col-md-10 "><div  style="color: #fff">MODIFICATION DU FINANCEMENT</div></div> 
+			         <div class="col-md-2 ">
+			       
+			         </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+					 <div class="form-group ">
+	                  <label for="xbail" class="col-sm-3 control-label"><b>Source</b></label>
+	                  <div class="col-sm-9">
+
+       		        <p:selectOneRadio id="situation" value="#{ppmModificationController.updatefinance.fppTypeFinance}">
+       		         <p:ajax listener="#{ppmModificationController.checkBailleur()}" update="dlogdetMod:idBail, dlogdetMod:source, dlogdetMod:idTres, dlogdetMod:idPartB" />
+			            <div class="col-md-4">
+						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="ETAT" itemValue="ETAT" />
+			            </div>
+			           </p:selectOneRadio>
+		                <br/>
+	                  </div>
+	                </div>
+	                
+	                <h:panelGroup id="idBail"> 
+	                <h:panelGroup rendered="#{ppmModificationController.selectBailleur}"> 
+	               <div class="form-group ">
+	                  <label for="xbail" class="col-sm-3 control-label"><b>Bailleur</b></label>
+	                  <div class="col-sm-9">
+	                   <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppBaiCode}" id="xbail" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmModificationController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                
+	                <div class="form-group ">
+	                  <label for="source" class="col-sm-3 control-label"><b>Type</b></label>
+	                  <div class="col-sm-9">
+	                    <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppSouCode}" id="source" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
+			       <f:selectItems value="#{ppmModificationController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                
+	                
+	                <div class="form-group ">
+	                  <label for="xdev" class="col-sm-3 control-label"><b>Devise</b></label>
+	                  <div class="col-sm-9">
+	                      <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppDevCode}" id="xdev" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
+			       <f:selectItems value="#{ppmModificationController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmModification.updatefinance.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    
+	                    </p:inputText>
+	                  </div>
+	                </div> 
+	                
+	                  <h:panelGroup id="idTres"> 
+	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
+	                <div class="form-group ">
+	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmModificationController.updatefinance.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" update="partTresor" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                 <h:panelGroup id="idPartB"> 
+	                <h:panelGroup rendered="#{ppmModificationController.selectPartBai}">
+	                 <div class="form-group ">
+	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmModificationController.updatefinance.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                     <p:ajax event="blur" process="@this" update="xmont" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>              
+	           
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+             <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" 
+            oncomplete="PF('DetailDlgMod').hide()" action="#{ppmModificationController.updateFinancement()}"  update=":content">
+				             <i class="ace-icon fa fa-save"></i> Modifier
+				            </p:commandLink>
+            </div>
+          </div>
+      </p:dialog>
+    </h:form>  
+    
+    
+    
+    
+    <h:form id="dlogdet">
+	  <p:dialog  widgetVar="DetailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+		<div class="box box-success box-solid">
+            <div class="box-header with-border">
+                      <div class="col-md-10 "><div  style="color: #fff">AJOUTER UN NOUVEAU FINANCEMENT</div></div> 
+			         <div class="col-md-2 ">
+			       
+			         </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+					 <div class="form-group ">
+	                  <label for="xbail" class="col-sm-3 control-label"><b>Source</b></label>
+	                  <div class="col-sm-9">
+
+       		        <p:selectOneRadio id="situation" value="#{ppmModificationController.sourfin}">
+       		         <p:ajax listener="#{ppmModificationController.checkBailleur()}" update="dlogdet:idBail, dlogdet:idTres, dlogdet:idPartB, dlogdet:source" />
+			            <div class="col-md-4">
+						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="ETAT" itemValue="ETAT" />
+			            </div>
+			           </p:selectOneRadio>
+		                <br/>
+	                  </div>
+	                </div>
+	                
+	                <h:panelGroup id="idBail"> 
+	                <h:panelGroup rendered="#{ppmModificationController.selectBailleur}"> 
+	               <div class="form-group ">
+	                  <label for="xbail" class="col-sm-3 control-label"><b>Bailleur</b></label>
+	                  <div class="col-sm-9">
+	                   <p:selectOneMenu value="#{ppmModificationController.baiCode}" id="xbail" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmModificationController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                
+	                <div class="form-group ">
+	                  <label for="source" class="col-sm-3 control-label"><b>Type</b></label>
+	                  <div class="col-sm-9">
+	                    <p:selectOneMenu value="#{ppmModificationController.souCode}" id="source" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
+			       <f:selectItems value="#{ppmModificationController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                
+	                
+	                <div class="form-group ">
+	                  <label for="xdev" class="col-sm-3 control-label"><b>Devise</b></label>
+	                  <div class="col-sm-9">
+	                      <p:selectOneMenu value="#{ppmModificationController.devCode}" id="xdev" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
+			       <f:selectItems value="#{ppmModificationController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" global="false" process="@this" update="xmontDev" />
+	                    </p:inputText>
+	                  </div>
+	                </div> 
+	                
+	                  <h:panelGroup id="idTres"> 
+	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
+	                <div class="form-group ">
+	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" global="false" update="partTresor" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                 <h:panelGroup id="idPartB"> 
+	                <h:panelGroup rendered="#{ppmController.selectPartBai}">
+	                 <div class="form-group ">
+	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                     <p:ajax event="blur" process="@this" update="xmont" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>              
+	           
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+             <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" 
+            oncomplete="PF('DetailDlg').hide()" action="#{ppmModificationController.saveFinancementppm()}"  update=":content">
+				             <i class="ace-icon fa fa-save"></i> Ajouter
+				            </p:commandLink>
+            </div>
+          </div>
+      </p:dialog>
+    </h:form>         
+      
      
   
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

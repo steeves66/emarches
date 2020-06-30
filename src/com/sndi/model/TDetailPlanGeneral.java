@@ -52,7 +52,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	private String gpgFonCodDmp;
 	private String gpgRecherche;
 	private Set<TDossierPlanGeneral> TDossierPlanGenerals = new HashSet<TDossierPlanGeneral>(0);
-	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
+	//private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 	private Set<TFinancementPgpm> TFinancementPgpms = new HashSet<TFinancementPgpm>(0);
 	private Set<THistoPlanGeneral> THistoPlanGenerals = new HashSet<THistoPlanGeneral>(0);
 
@@ -77,7 +77,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 			TStatut TStatut, TTypeMarche TTypeMarche, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
 			Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao,
 			String gpgActeurSaisie, String gpgStatutRetour,Date gpgDateSaisie, String gpgStrCode,Date gpgDateValAc,String gpgLibFin, Date gpgDteModif,
-			String gpgFonCodPf,String gpgFonCodDmp,Date gpgDateValCpmp, Date gpgDateValDmp,String gpgRecherche,Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
+			String gpgFonCodPf,String gpgFonCodDmp,Date gpgDateValCpmp, Date gpgDateValDmp,String gpgRecherche,Set<TDossierPlanGeneral> TDossierPlanGenerals, /*Set<TDetailPlanPassation> TDetailPlanPassations,*/
 			Set<TFinancementPgpm> TFinancementPgpms, Set<THistoPlanGeneral> THistoPlanGenerals) {
 		this.gpgId = gpgId;
 		this.TModePassation = TModePassation;
@@ -106,7 +106,7 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgFonCodDmp = gpgFonCodDmp;
 		this.gpgRecherche = gpgRecherche;
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
-		this.TDetailPlanPassations = TDetailPlanPassations;
+		//this.TDetailPlanPassations = TDetailPlanPassations;
 		this.TFinancementPgpms = TFinancementPgpms;
 		this.THistoPlanGenerals = THistoPlanGenerals;
 	}
@@ -367,14 +367,14 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
+/*	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
 	public Set<TDetailPlanPassation> getTDetailPlanPassations() {
 		return this.TDetailPlanPassations;
 	}
 
 	public void setTDetailPlanPassations(Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.TDetailPlanPassations = TDetailPlanPassations;
-	}
+	}*/
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
 	public Set<TFinancementPgpm> getTFinancementPgpms() {

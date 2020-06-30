@@ -34,11 +34,12 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private TStructure TStructure;
 	private TDacSpecs TDacSpecs;
 	private TModePassation TModePassation;
-	private TDetailPlanGeneral TDetailPlanGeneral;
+	//private TDetailPlanGeneral TDetailPlanGeneral;
 	private TPlanPassation TPlanPassation;
 	private TStatut TStatut;
 	private TTypeMarche TTypeMarche;
 	private TModeleDacType TModeleDacType;
+	private Long dppGpgId;
 	private String dppTypePlan;
 	private String dppCode;
 	private Integer dppNumeroOrdre;
@@ -100,20 +101,20 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppId = dppId;
 	}
 
-	public TDetailPlanPassation(long dppId, TModePassation TModePassation, TDetailPlanGeneral TDetailPlanGeneral,
+	public TDetailPlanPassation(long dppId, TModePassation TModePassation, /*TDetailPlanGeneral TDetailPlanGeneral,*/
 			 TPlanPassation TPlanPassation, TStatut TStatut, TTypeMarche TTypeMarche,
 			String dppTypePlan) {
 		this.dppId = dppId;
 		this.TModePassation = TModePassation;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
+		//this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
 		this.dppTypePlan = dppTypePlan;
 	}
 
-	public TDetailPlanPassation(long dppId,TLBudgets TLBudgets,TTypeProcedure TTypeProcedure, TStructure TStructure,TDacSpecs TDacSpecs, TModePassation TModePassation, TDetailPlanGeneral TDetailPlanGeneral,
-			 TPlanPassation TPlanPassation, TStatut TStatut, TTypeMarche TTypeMarche, TModeleDacType TModeleDacType,
+	public TDetailPlanPassation(long dppId,TLBudgets TLBudgets,TTypeProcedure TTypeProcedure, TStructure TStructure,TDacSpecs TDacSpecs, TModePassation TModePassation, /*TDetailPlanGeneral TDetailPlanGeneral,*/
+			 TPlanPassation TPlanPassation, TStatut TStatut, TTypeMarche TTypeMarche, TModeleDacType TModeleDacType,Long dppGpgId,
 			String dppTypePlan, String dppCode, Integer dppNumeroOrdre, Date dppDate, String dppObjet,
 			String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp, Date dppDateDaoApprobBail,
 			Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf, Date dppDateElabRapport,
@@ -130,11 +131,12 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.TStructure = TStructure;
 		this.TDacSpecs = TDacSpecs;
 		this.TModePassation = TModePassation;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
+		//this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TPlanPassation = TPlanPassation;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
 		this.TModeleDacType = TModeleDacType;
+		this.dppGpgId = dppGpgId;
 		this.dppTypePlan = dppTypePlan;
 		this.dppCode = dppCode;
 		this.dppNumeroOrdre = dppNumeroOrdre;
@@ -252,7 +254,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	public void setTModePassation(TModePassation TModePassation) {
 		this.TModePassation = TModePassation;
 	}
-
+/*
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DPP_GPG_ID")
 	public TDetailPlanGeneral getTDetailPlanGeneral() {
@@ -261,7 +263,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setTDetailPlanGeneral(TDetailPlanGeneral TDetailPlanGeneral) {
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
-	}
+	}*/
 
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -304,6 +306,15 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setTModeleDacType(TModeleDacType TModeleDacType) {
 		this.TModeleDacType = TModeleDacType;
+	}
+	
+	@Column(name = "DPP_GPG_ID", precision = 10, scale = 0)
+	public Long getDppGpgId() {
+		return this.dppGpgId;
+	}
+
+	public void setDppGpgId(Long dppGpgId) {
+		this.dppGpgId = dppGpgId;
 	}
 	
 

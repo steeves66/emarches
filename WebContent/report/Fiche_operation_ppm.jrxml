@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-28T16:55:03 -->
+<!-- 2020-06-30T12:16:09 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_ppm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266b8536-66d8-494c-802e-76b24cc2afc4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -228,24 +228,24 @@ and dps.dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA[$F{DPP_MOP_CODE}+" : "+$F{MOP_LIBELLE_LONG}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement x="109" y="47" width="445" height="28" uuid="cd177b7a-1484-44c2-afbf-f17d160befaa"/>
+					<reportElement x="109" y="23" width="445" height="28" uuid="cd177b7a-1484-44c2-afbf-f17d160befaa"/>
 					<textElement verticalAlignment="Top">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{MIN_LIBELLE}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="2" y="47" width="108" height="21" uuid="4d3093e7-1544-43b2-844a-7b40da394a6f"/>
+					<reportElement x="1" y="23" width="108" height="21" uuid="4d3093e7-1544-43b2-844a-7b40da394a6f"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Ministère : ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="1" y="26" width="109" height="21" uuid="749df21e-dedd-48ba-ad39-08fa3ee2d274"/>
+					<reportElement x="1" y="46" width="237" height="21" uuid="749df21e-dedd-48ba-ad39-08fa3ee2d274"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Autorité Contractante : ]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="111" y="26" width="291" height="21" uuid="6cef25e3-c338-4956-84be-4252549a29ac"/>
+					<reportElement x="111" y="46" width="441" height="21" uuid="6cef25e3-c338-4956-84be-4252549a29ac"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -286,11 +286,11 @@ and dps.dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA[$F{NAT_LIBELLE}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="2" y="69" width="108" height="21" uuid="e4a2ccd3-3370-489a-9636-dd8955015b92"/>
+					<reportElement x="1" y="68" width="108" height="21" uuid="e4a2ccd3-3370-489a-9636-dd8955015b92"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Objet : ]]></text>
 				</staticText>
-				<textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement x="109" y="69" width="445" height="28" uuid="01b5185a-87b4-4c12-919d-9ed4a8a90c2e"/>
 					<textElement verticalAlignment="Top">
 						<font isBold="true"/>

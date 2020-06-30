@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,6 +27,7 @@ public class TTypePieceOffre implements java.io.Serializable {
 	private String tpoLibelle;
 	private Date tpoDteSaisi;
 	private String tpoEtapPiece;
+	private String tpoBaiEtat;
 	private Set<TOffrePieceDac> TOffrePieceDacs = new HashSet<TOffrePieceDac>(0);
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
@@ -38,12 +39,14 @@ public class TTypePieceOffre implements java.io.Serializable {
 	}
 
 	public TTypePieceOffre(String tpoCode, TOperateur TOperateur, String tpoLibelle, Date tpoDteSaisi,
-			String tpoEtapPiece, Set<TOffrePieceDac> TOffrePieceDacs, Set<TPiecesOffres> TPiecesOffreses) {
+			String tpoEtapPiece, String tpoBaiEtat, Set<TOffrePieceDac> TOffrePieceDacs,
+			Set<TPiecesOffres> TPiecesOffreses) {
 		this.tpoCode = tpoCode;
 		this.TOperateur = TOperateur;
 		this.tpoLibelle = tpoLibelle;
 		this.tpoDteSaisi = tpoDteSaisi;
 		this.tpoEtapPiece = tpoEtapPiece;
+		this.tpoBaiEtat = tpoBaiEtat;
 		this.TOffrePieceDacs = TOffrePieceDacs;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
@@ -95,6 +98,15 @@ public class TTypePieceOffre implements java.io.Serializable {
 
 	public void setTpoEtapPiece(String tpoEtapPiece) {
 		this.tpoEtapPiece = tpoEtapPiece;
+	}
+
+	@Column(name = "TPO_BAI_ETAT", length = 20)
+	public String getTpoBaiEtat() {
+		return this.tpoBaiEtat;
+	}
+
+	public void setTpoBaiEtat(String tpoBaiEtat) {
+		this.tpoBaiEtat = tpoBaiEtat;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TTypePieceOffre")

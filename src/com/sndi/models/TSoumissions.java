@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -31,6 +31,7 @@ public class TSoumissions implements java.io.Serializable {
 	private String souTel;
 	private String souAdresse;
 	private Date souDteSaisi;
+	private String souSigleDmp;
 	private Set<TAvisPresel> TAvisPresels = new HashSet<TAvisPresel>(0);
 	private Set<TOffres> TOffreses = new HashSet<TOffres>(0);
 
@@ -42,8 +43,8 @@ public class TSoumissions implements java.io.Serializable {
 	}
 
 	public TSoumissions(String souNcc, TOperateur TOperateur, Character souInter, String souSigleSte, String souNomCom,
-			String souStaCode, String souTel, String souAdresse, Date souDteSaisi, Set<TAvisPresel> TAvisPresels,
-			Set<TOffres> TOffreses) {
+			String souStaCode, String souTel, String souAdresse, Date souDteSaisi, String souSigleDmp,
+			Set<TAvisPresel> TAvisPresels, Set<TOffres> TOffreses) {
 		this.souNcc = souNcc;
 		this.TOperateur = TOperateur;
 		this.souInter = souInter;
@@ -53,6 +54,7 @@ public class TSoumissions implements java.io.Serializable {
 		this.souTel = souTel;
 		this.souAdresse = souAdresse;
 		this.souDteSaisi = souDteSaisi;
+		this.souSigleDmp = souSigleDmp;
 		this.TAvisPresels = TAvisPresels;
 		this.TOffreses = TOffreses;
 	}
@@ -140,6 +142,15 @@ public class TSoumissions implements java.io.Serializable {
 
 	public void setSouDteSaisi(Date souDteSaisi) {
 		this.souDteSaisi = souDteSaisi;
+	}
+
+	@Column(name = "SOU_SIGLE_DMP", length = 500)
+	public String getSouSigleDmp() {
+		return this.souSigleDmp;
+	}
+
+	public void setSouSigleDmp(String souSigleDmp) {
+		this.souSigleDmp = souSigleDmp;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TSoumissions")

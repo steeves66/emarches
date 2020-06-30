@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 25 juin 2020 13:53:46 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -50,7 +50,6 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	private String gpgRecherche;
 	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
 	private Set<TDossierPlanGeneral> TDossierPlanGenerals = new HashSet<TDossierPlanGeneral>(0);
-	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
 	private Set<TFinancementPgpm> TFinancementPgpms = new HashSet<TFinancementPgpm>(0);
 	private Set<THistoPlanGeneral> THistoPlanGenerals = new HashSet<THistoPlanGeneral>(0);
 
@@ -73,8 +72,8 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 			String gpgActeurSaisie, String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, Date gpgDateValAc,
 			Date gpgDateValCpmp, Date gpgDateValDmp, String gpgLibFin, Date gpgDteModif, String gpgFonCodPf,
 			String gpgFonCodDmp, String gpgRecherche, Set<TAffichagePpm> TAffichagePpms,
-			Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
-			Set<TFinancementPgpm> TFinancementPgpms, Set<THistoPlanGeneral> THistoPlanGenerals) {
+			Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TFinancementPgpm> TFinancementPgpms,
+			Set<THistoPlanGeneral> THistoPlanGenerals) {
 		this.gpgId = gpgId;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
@@ -103,7 +102,6 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 		this.gpgRecherche = gpgRecherche;
 		this.TAffichagePpms = TAffichagePpms;
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
-		this.TDetailPlanPassations = TDetailPlanPassations;
 		this.TFinancementPgpms = TFinancementPgpms;
 		this.THistoPlanGenerals = THistoPlanGenerals;
 	}
@@ -370,15 +368,6 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setTDossierPlanGenerals(Set<TDossierPlanGeneral> TDossierPlanGenerals) {
 		this.TDossierPlanGenerals = TDossierPlanGenerals;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
-	public Set<TDetailPlanPassation> getTDetailPlanPassations() {
-		return this.TDetailPlanPassations;
-	}
-
-	public void setTDetailPlanPassations(Set<TDetailPlanPassation> TDetailPlanPassations) {
-		this.TDetailPlanPassations = TDetailPlanPassations;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanGeneral")
