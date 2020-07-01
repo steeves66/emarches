@@ -6408,7 +6408,7 @@ public class ControleController {
 								    			if(action.equalsIgnoreCase("DETOUV")) {
 									    			type = "Commission";
 									    			opdPiece = "Ouverture";
-									    			libelle="DEAILS DE L'OFFRRE N°";
+									    			libelle="DETAILS DE L'OFFRRE N°";
 									    			btn_fermerOuverture =true;
 									    			btn_fermerAnalyse =false;
 									    			btn_fermerJugement =false;

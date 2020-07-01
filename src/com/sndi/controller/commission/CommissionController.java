@@ -136,10 +136,8 @@ public class CommissionController {
 	 private List<TDetOffres> listeAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TDetOffres> listeAffichageAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
-	 //Remplacer par la vue du diyen
 	 private List<VCritereAnalyseDac> listeCritereAnalyse = new ArrayList<VCritereAnalyseDac>(); 
 	 private List<VCritereAnalyseDac> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDac>();
-	 //Fin remplacer
 	private VCandidatDac candidat =new VCandidatDac();
 	private VCritereAnalyseDac sltCritere =new VCritereAnalyseDac();
 	
@@ -610,6 +608,7 @@ public class CommissionController {
 					  userController.setSevrityMsg("success");	
 					
 				}
+			 chargeMembre();
 		}
 		
 		public void chargeMention() {

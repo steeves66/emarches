@@ -232,7 +232,7 @@
 	                         <!-- /.box-header -->
 	                         <div class="box-body">
 	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
-		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" scrollable="true" scrollHeight="245">
+		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" scrollable="true" scrollHeight="200">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 		                               <p:column headerText="PIECES" styleClass="col-sm-11">
 		                                  <h:outputText value="#{slctdTb.tpoLibelle}"/>
@@ -310,7 +310,7 @@
 	            <!-- /.box-header -->
 	            <div class="box-body">
 	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" emptyMessage="Aucun critère trouvé" var="slctdTb" 
-					 editable="true" editMode="cell" rowKey="#{slctdTb.craCode}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="300">
+					 editable="true" editMode="cell" rowKey="#{slctdTb.craCode}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="391">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 	                <p:column headerText="CRITERES" styleClass="col-sm-8">
 	         				    <h:outputText value="#{slctdTb.craLibelle}" />
@@ -355,7 +355,7 @@
 		           </div>
 	            </div>
 	           </div>
-	           
+	           <h:panelGroup rendered="false">
 	                          <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">RESULTAT DE L'EVALUATION</div></div> 
@@ -388,6 +388,7 @@
 		             
 	            </div>
 	           </div>
+	           </h:panelGroup>
 	           </div>
               
              </div>
