@@ -1842,8 +1842,8 @@ public class DaoController {
 	        @Transactional
 	        public void saveAao(String typePlan ,String typeDac) {
 	        	
-	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || "".equals(newAvis.getAaoCoutDac()) || "".equals(newAvis.getAaoNbrLot())
-	        			|| "".equals(newAvis.getAaoDelaiVal()) ) { 
+	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || "".equals(newAvis.getAaoCoutDac()) || "".equals(newAvis.getAaoNbrLot()) || newAvis.getAaoAvisBai() == null
+	        			|| newAvis.getAaoDelaiVal() == 0 ) { 
 	        		
 	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez remplir tous les champs obligatoires! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
