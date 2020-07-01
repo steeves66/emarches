@@ -180,6 +180,12 @@
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
                             </p:commandLink>
+                            
+                              <p:commandLink rendered="#{slctdTb.dofStaut == '1' }" action="#{commissionController.editerFicheAnalyse()}" ajax="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px"
+				               title="Editer le rapport d'analyse" update=":content">
+                                <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
+                            </p:commandLink>
                             </p:column>
                         </p:dataTable>  
 		           
@@ -210,14 +216,14 @@
     
     
          <h:form id="lotlog" styleClass="form-horizontal">
-	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="Analyse de l'Offre N° #{commissionController.sltOffre.dofNum}">
+	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="95%" closable="true" header="Analyse de l'Offre N° #{commissionController.sltOffre.dofNum}">
 				<div class="contentpanel">
                  
                  <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
                  
                   <div class="row">
                   
-	                 <div class="col-md-6">
+	                 <div class="col-md-5">
 	                   <div class="box box-success box-solid">
 			               <div class="box-header with-border">
 			                  <div class="col-md-10 "><div  style="color: #fff">PIECES ADMINISTRATIVES</div></div> 
@@ -276,7 +282,7 @@
 	                    
 	                    
 	                    
-	        <div class="col-md-6">
+	        <div class="col-md-7">
 	         <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">EVALUATION</div></div> 
@@ -285,21 +291,35 @@
 	            <!-- /.box-header -->
 	            <div class="box-body">
 	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" emptyMessage="Aucun critère trouvé" var="slctdTb" 
-					 editable="true" editMode="cell" rowKey="#{slctdTb.dcadNum}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="300">
+					 editable="true" editMode="cell" rowKey="#{slctdTb.craCode}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="300">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-	                <p:column headerText="CRITERES" styleClass="col-sm-10">
-	         				    <h:outputText value="#{slctdTb.dcadLibAjust}" />
+	                <p:column headerText="CRITERES" styleClass="col-sm-8">
+	         				    <h:outputText value="#{slctdTb.craLibelle}" />
                      </p:column>
-                      <p:column headerText="CONFORMITE" styleClass="col-sm-2" >
+	                      <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.montant}">
+	                           <p:cellEditor>
+				                <f:facet name="output">
+				                <h:outputText styleClass="pull-right" id="val1" value="#{slctdTb.valRegQual}" >
+				                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				                </h:outputText>
+				                </f:facet>
+				                <f:facet name="input"> 
+				                <p:inputText id="val2" styleClass="form-control text-right" value="#{slctdTb.valRegQual}" style="width:100%; float :rigth">
+				                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				                 </p:inputText>
+				                 </f:facet>
+				               </p:cellEditor>
+					        </p:column>
+                      <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.conformite}" >
                           <p:cellEditor>
                           <f:facet name="output">
-         				  <h:outputText />
+         				  <h:outputText id="mandat1" value="#{slctdTb.aaoRegQual}" />
          				  </f:facet>
          				  <f:facet name="input">
-	         				   <h:selectOneMenu id="mandat"  style="width:100%; color:#0000">
+	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQual}" style="width:100%; color:#0000">
 				              <f:selectItem itemLabel="Choisir" itemValue="" />
-	                         <f:selectItem itemLabel="CONFORME" itemValue="O" />
-	                         <f:selectItem itemLabel="NON CONFORME" itemValue="N" />
+	                         <f:selectItem itemLabel="CONFORME" itemValue="CONFORME" />
+	                         <f:selectItem itemLabel="NON CONFORME" itemValue="NON CONFORME" />
 	                          </h:selectOneMenu>
          				  </f:facet>
          				  </p:cellEditor>

@@ -1,12 +1,15 @@
 package com.sndi.model;
-// Generated 22 juin 2020 12:41:37 by Hibernate Tools 4.3.5.Final
+// Generated 30 juin 2020 11:06:33 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
@@ -23,49 +26,53 @@ public class VbAnalyseOffre implements java.io.Serializable {
 	private BigDecimal anfDcadNum;
 	private String anfDanCode;
 	private String anfDacCode;
-	private Long anfLaaId;
+	private long anfLaaId;
 	private BigDecimal anfDofNum;
-	private String anfValeur;
+	private String anfValeurConf;
 	private String anfObser;
 	private String anfOpeMatricule;
 	private Date anfDteSaisi;
 	private String anfOpeModif;
 	private Date anfDteModif;
 	private String anfTypeActeur;
+	private long anfValeurScore;
 
 	public VbAnalyseOffre() {
 	}
 
 	public VbAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
-			Long anfLaaId, BigDecimal anfDofNum, String anfValeur) {
+			long anfLaaId, BigDecimal anfDofNum, String anfValeurConf) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
 		this.anfDacCode = anfDacCode;
 		this.anfLaaId = anfLaaId;
 		this.anfDofNum = anfDofNum;
-		this.anfValeur = anfValeur;
+		this.anfValeurConf = anfValeurConf;
 	}
 
 	public VbAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
-			Long anfLaaId, BigDecimal anfDofNum, String anfValeur, String anfObser, String anfOpeMatricule,
-			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur) {
+			long anfLaaId, BigDecimal anfDofNum, String anfValeurConf, String anfObser, String anfOpeMatricule,
+			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur, long anfValeurScore) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
 		this.anfDacCode = anfDacCode;
 		this.anfLaaId = anfLaaId;
 		this.anfDofNum = anfDofNum;
-		this.anfValeur = anfValeur;
+		this.anfValeurConf = anfValeurConf;
 		this.anfObser = anfObser;
 		this.anfOpeMatricule = anfOpeMatricule;
 		this.anfDteSaisi = anfDteSaisi;
 		this.anfOpeModif = anfOpeModif;
 		this.anfDteModif = anfDteModif;
 		this.anfTypeActeur = anfTypeActeur;
+		this.anfValeurScore = anfValeurScore;
 	}
 
 	@Id
+	@SequenceGenerator(name = "ANALYSE_OFFRE_Sequence", sequenceName = "SEQ_ANALYSE_OFFRE", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ANALYSE_OFFRE_Sequence")
 	@Column(name = "ANF_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getAnfNum() {
 		return this.anfNum;
@@ -103,11 +110,11 @@ public class VbAnalyseOffre implements java.io.Serializable {
 	}
 
 	@Column(name = "ANF_LAA_ID", nullable = false, precision = 22, scale = 0)
-	public Long getAnfLaaId() {
+	public long getAnfLaaId() {
 		return this.anfLaaId;
 	}
 
-	public void setAnfLaaId(Long anfLaaId) {
+	public void setAnfLaaId(long anfLaaId) {
 		this.anfLaaId = anfLaaId;
 	}
 
@@ -120,13 +127,13 @@ public class VbAnalyseOffre implements java.io.Serializable {
 		this.anfDofNum = anfDofNum;
 	}
 
-	@Column(name = "ANF_VALEUR", nullable = false, length = 100)
-	public String getAnfValeur() {
-		return this.anfValeur;
+	@Column(name = "ANF_VALEUR_CONF")
+	public String getAnfValeurConf() {
+		return this.anfValeurConf;
 	}
 
-	public void setAnfValeur(String anfValeur) {
-		this.anfValeur = anfValeur;
+	public void setAnfValeurConf(String anfValeurConf) {
+		this.anfValeurConf = anfValeurConf;
 	}
 
 	@Column(name = "ANF_OBSER", length = 500)
@@ -183,65 +190,12 @@ public class VbAnalyseOffre implements java.io.Serializable {
 		this.anfTypeActeur = anfTypeActeur;
 	}
 
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof VbAnalyseOffre))
-			return false;
-		VbAnalyseOffre castOther = (VbAnalyseOffre) other;
-
-		return ((this.getAnfNum() == castOther.getAnfNum()) || (this.getAnfNum() != null
-				&& castOther.getAnfNum() != null && this.getAnfNum().equals(castOther.getAnfNum())))
-				&& ((this.getAnfDcadNum() == castOther.getAnfDcadNum()) || (this.getAnfDcadNum() != null
-						&& castOther.getAnfDcadNum() != null && this.getAnfDcadNum().equals(castOther.getAnfDcadNum())))
-				&& ((this.getAnfDanCode() == castOther.getAnfDanCode()) || (this.getAnfDanCode() != null
-						&& castOther.getAnfDanCode() != null && this.getAnfDanCode().equals(castOther.getAnfDanCode())))
-				&& ((this.getAnfDacCode() == castOther.getAnfDacCode()) || (this.getAnfDacCode() != null
-						&& castOther.getAnfDacCode() != null && this.getAnfDacCode().equals(castOther.getAnfDacCode())))
-				&& ((this.getAnfLaaId() == castOther.getAnfLaaId()) || (this.getAnfLaaId() != null
-						&& castOther.getAnfLaaId() != null && this.getAnfLaaId().equals(castOther.getAnfLaaId())))
-				&& ((this.getAnfDofNum() == castOther.getAnfDofNum()) || (this.getAnfDofNum() != null
-						&& castOther.getAnfDofNum() != null && this.getAnfDofNum().equals(castOther.getAnfDofNum())))
-				&& ((this.getAnfValeur() == castOther.getAnfValeur()) || (this.getAnfValeur() != null
-						&& castOther.getAnfValeur() != null && this.getAnfValeur().equals(castOther.getAnfValeur())))
-				&& ((this.getAnfObser() == castOther.getAnfObser()) || (this.getAnfObser() != null
-						&& castOther.getAnfObser() != null && this.getAnfObser().equals(castOther.getAnfObser())))
-				&& ((this.getAnfOpeMatricule() == castOther.getAnfOpeMatricule())
-						|| (this.getAnfOpeMatricule() != null && castOther.getAnfOpeMatricule() != null
-								&& this.getAnfOpeMatricule().equals(castOther.getAnfOpeMatricule())))
-				&& ((this.getAnfDteSaisi() == castOther.getAnfDteSaisi())
-						|| (this.getAnfDteSaisi() != null && castOther.getAnfDteSaisi() != null
-								&& this.getAnfDteSaisi().equals(castOther.getAnfDteSaisi())))
-				&& ((this.getAnfOpeModif() == castOther.getAnfOpeModif())
-						|| (this.getAnfOpeModif() != null && castOther.getAnfOpeModif() != null
-								&& this.getAnfOpeModif().equals(castOther.getAnfOpeModif())))
-				&& ((this.getAnfDteModif() == castOther.getAnfDteModif())
-						|| (this.getAnfDteModif() != null && castOther.getAnfDteModif() != null
-								&& this.getAnfDteModif().equals(castOther.getAnfDteModif())))
-				&& ((this.getAnfTypeActeur() == castOther.getAnfTypeActeur())
-						|| (this.getAnfTypeActeur() != null && castOther.getAnfTypeActeur() != null
-								&& this.getAnfTypeActeur().equals(castOther.getAnfTypeActeur())));
+	@Column(name = "ANF_VALEUR_SCORE", precision = 10, scale = 0)
+	public long getAnfValeurScore() {
+		return this.anfValeurScore;
 	}
 
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (getAnfNum() == null ? 0 : this.getAnfNum().hashCode());
-		result = 37 * result + (getAnfDcadNum() == null ? 0 : this.getAnfDcadNum().hashCode());
-		result = 37 * result + (getAnfDanCode() == null ? 0 : this.getAnfDanCode().hashCode());
-		result = 37 * result + (getAnfDacCode() == null ? 0 : this.getAnfDacCode().hashCode());
-		result = 37 * result + (getAnfLaaId() == null ? 0 : this.getAnfLaaId().hashCode());
-		result = 37 * result + (getAnfDofNum() == null ? 0 : this.getAnfDofNum().hashCode());
-		result = 37 * result + (getAnfValeur() == null ? 0 : this.getAnfValeur().hashCode());
-		result = 37 * result + (getAnfObser() == null ? 0 : this.getAnfObser().hashCode());
-		result = 37 * result + (getAnfOpeMatricule() == null ? 0 : this.getAnfOpeMatricule().hashCode());
-		result = 37 * result + (getAnfDteSaisi() == null ? 0 : this.getAnfDteSaisi().hashCode());
-		result = 37 * result + (getAnfOpeModif() == null ? 0 : this.getAnfOpeModif().hashCode());
-		result = 37 * result + (getAnfDteModif() == null ? 0 : this.getAnfDteModif().hashCode());
-		result = 37 * result + (getAnfTypeActeur() == null ? 0 : this.getAnfTypeActeur().hashCode());
-		return result;
+	public void setAnfValeurScore(long anfValeurScore) {
+		this.anfValeurScore = anfValeurScore;
 	}
-
 }

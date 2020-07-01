@@ -27,6 +27,7 @@ import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TCandidats;
 import com.sndi.model.TCommissionSpecifique;
 import com.sndi.model.TCommissionType;
+import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetOffres;
@@ -48,6 +49,7 @@ import com.sndi.model.TVenteDac;
 import com.sndi.model.VCandidatDac;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCompoCommission;
+import com.sndi.model.VCritereAnalyseDac;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetailOffres;
@@ -135,10 +137,11 @@ public class CommissionController {
 	 private List<TDetOffres> listeAffichageAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
 	 //Remplacer par la vue du diyen
-	 private List<VbDetCritAnalyseDac> listeCritereAnalyse = new ArrayList<VbDetCritAnalyseDac>(); 
-	 private List<VbDetCritAnalyseDac> selectionCritereAnalyse = new ArrayList<VbDetCritAnalyseDac>();
+	 private List<VCritereAnalyseDac> listeCritereAnalyse = new ArrayList<VCritereAnalyseDac>(); 
+	 private List<VCritereAnalyseDac> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDac>();
 	 //Fin remplacer
 	private VCandidatDac candidat =new VCandidatDac();
+	private VCritereAnalyseDac sltCritere =new VCritereAnalyseDac();
 	
 	
 	
@@ -178,8 +181,13 @@ public class CommissionController {
 	 private String tcoCode;
 	 private String laaId;
 	 private String filtreNcc="";
+	 private long valRegQual=0;
+	 private String aaoRegQual="";
 	 private boolean infoOffre=false;
 	 private Boolean boutonEdit=false;
+	 
+	 private boolean conformite=false;
+	 private Boolean montant=false;
 	 
 	 private boolean saisie=false;
 	 private boolean affichage=false;
@@ -272,8 +280,7 @@ public class CommissionController {
 	 
 	 public void chargeCritereAnalyse() {
 		 listeCritereAnalyse.clear();
-		 listeCritereAnalyse = ((List<VbDetCritAnalyseDac>)iservice.getObjectsByColumn("VbDetCritAnalyseDac",new ArrayList<String>(Arrays.asList("DCAD_LIB_AJUST")),
-				new WhereClause("DCAD_OPE_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule())));
+		 listeCritereAnalyse = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac"));
 	 }
 	 
 	 
@@ -286,6 +293,7 @@ public class CommissionController {
 					 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 			 nbrLot =nonbreLot();
 			 chargeCritereAnalyse();
+			 chargeMention();
 		 }
 		 
 		 public void controleNbrLot() {
@@ -604,6 +612,32 @@ public class CommissionController {
 				}
 		}
 		
+		public void chargeMention() {
+			 listeCritereAnalyse = (List<VCritereAnalyseDac>) iservice.getObjectsByColumn("VCritereAnalyseDac", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+                     // new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+                      new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode()));
+                      if (!listeCritereAnalyse.isEmpty()) {
+                             sltCritere= listeCritereAnalyse.get(0);
+                             _logger.info("valeur: "+sltCritere.getAaoRegQual());
+                             
+                         	if(sltCritere.getAaoRegQual().equalsIgnoreCase("Conforme")) {
+                				conformite=true;
+                				montant =false;
+                			}else
+                				if(sltCritere.getAaoRegQual().equalsIgnoreCase("Score")) {
+                					montant =true;
+                					conformite=false;
+                				}else
+                						if(sltCritere.getAaoRegQual().equalsIgnoreCase("AUTRE")) {
+                							
+                						}
+                             
+                               }
+		
+		
+		}
+		
+		
 	
 		
 		 //Edition de fiche membres
@@ -678,16 +712,16 @@ public class CommissionController {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
 		 		else{
-			 		for(VbDetCritAnalyseDac ligne : selectionCritereAnalyse) {
+			 		for(VCritereAnalyseDac ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
-			 			newAnalyseOffre.setAnfDanCode(ligne.getDcadDanCode());
+			 			//newAnalyseOffre.setAnfDanCode(ligne.getDcadDanCode());
 			 			//newAnalyseOffre.setAnfDteModif(ligne.get);
 			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
-			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
+			 			//newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
 			 			//newAnalyseOffre.setAnfLaaId("1");
 			 			newAnalyseOffre.setAnfObser(sltOffre.getDofObsCom());
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-			 			newAnalyseOffre.setAnfValeur("0");
+			 			//newAnalyseOffre.setAnfValeur("0");
 			 			iservice.addObject(newAnalyseOffre);
 				     }	
 		 }
@@ -822,6 +856,28 @@ public class CommissionController {
 			 			updatePieceOffre.setPofConforme("O");
 			 			iservice.updateObject(updatePieceOffre);
 				     }	
+			 		}
+		         }
+				
+				//EVALUTATION
+				if (selectionCritereAnalyse.size()==0) {
+					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
+				}
+		 		else{
+			 		for(VCritereAnalyseDac ligne : selectionCritereAnalyse) {
+			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
+			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
+			 			newAnalyseOffre.setAnfDanCode(ligne.getCraCode());
+			 			//newAnalyseOffre.set
+			 			newAnalyseOffre.setAnfDofNum(sltOffre.getDofNum());
+			 			newAnalyseOffre.setAnfDteModif(Calendar.getInstance().getTime());
+			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
+			 			newAnalyseOffre.setAnfLaaId(sltOffre.getTLotAao().getLaaId());
+			 			newAnalyseOffre.setAnfValeurConf(ligne.getAaoRegQual());
+			 			newAnalyseOffre.setAnfValeurScore(ligne.getValRegQual());
+			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 			//newAnalyseOffre.set
+			 			iservice.addObject(newAnalyseOffre);
 			 		}
 		         }
 				
@@ -1511,14 +1567,6 @@ public class CommissionController {
 		this.mbrSup = mbrSup;
 	}
 
-	public List<VbDetCritAnalyseDac> getListeCritereAnalyse() {
-		return listeCritereAnalyse;
-	}
-
-	public void setListeCritereAnalyse(List<VbDetCritAnalyseDac> listeCritereAnalyse) {
-		this.listeCritereAnalyse = listeCritereAnalyse;
-	}
-
 	public String getFiltreCandidat() {
 		return filtreCandidat;
 	}
@@ -1535,14 +1583,61 @@ public class CommissionController {
 		this.newAnalyseOffre = newAnalyseOffre;
 	}
 
-	public List<VbDetCritAnalyseDac> getSelectionCritereAnalyse() {
+	public List<VCritereAnalyseDac> getListeCritereAnalyse() {
+		return listeCritereAnalyse;
+	}
+
+	public void setListeCritereAnalyse(List<VCritereAnalyseDac> listeCritereAnalyse) {
+		this.listeCritereAnalyse = listeCritereAnalyse;
+	}
+
+	public List<VCritereAnalyseDac> getSelectionCritereAnalyse() {
 		return selectionCritereAnalyse;
 	}
 
-	public void setSelectionCritereAnalyse(List<VbDetCritAnalyseDac> selectionCritereAnalyse) {
+	public void setSelectionCritereAnalyse(List<VCritereAnalyseDac> selectionCritereAnalyse) {
 		this.selectionCritereAnalyse = selectionCritereAnalyse;
 	}
 
 
+	public long getValRegQual() {
+		return valRegQual;
+	}
+
+	public void setValRegQual(long valRegQual) {
+		this.valRegQual = valRegQual;
+	}
+
+	public String getAaoRegQual() {
+		return aaoRegQual;
+	}
+
+	public void setAaoRegQual(String aaoRegQual) {
+		this.aaoRegQual = aaoRegQual;
+	}
+
+	public boolean isConformite() {
+		return conformite;
+	}
+
+	public void setConformite(boolean conformite) {
+		this.conformite = conformite;
+	}
+
+	public Boolean getMontant() {
+		return montant;
+	}
+
+	public void setMontant(Boolean montant) {
+		this.montant = montant;
+	}
+
+	public VCritereAnalyseDac getSltCritere() {
+		return sltCritere;
+	}
+
+	public void setSltCritere(VCritereAnalyseDac sltCritere) {
+		this.sltCritere = sltCritere;
+	}
 
 }
