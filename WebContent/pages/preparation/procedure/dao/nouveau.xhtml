@@ -303,9 +303,9 @@
                   <div class="col-sm-9"> 
                      <p:selectOneRadio id="consoless" value="#{daoController.newAvis.aaoRegQual}" unselectable="true">
                      <p:ajax  listener="#{daoController.checkSituation()}" global="false" update="gnl:qualif"></p:ajax>
-			            <f:selectItem itemLabel="Score" itemValue="Score" />
-			            <f:selectItem itemLabel="Conformité" itemValue="Conforme" />
-			            <f:selectItem itemLabel="Autre Mode" itemValue="Autre" />
+			            <f:selectItem itemLabel="Score" itemValue="SCORE" />
+			            <f:selectItem itemLabel="Conformité" itemValue="CONFORMITE" />
+			            <f:selectItem itemLabel="Autre Mode" itemValue="AUTRE" />
 			        </p:selectOneRadio>
                   </div>
               </div>
