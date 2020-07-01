@@ -78,6 +78,9 @@ import com.sndi.model.VDacMembre;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoBailleur;
 import com.sndi.model.VDaoStatut;
+import com.sndi.model.VDetTabBordDac;
+import com.sndi.model.VDetTabBordPgpm;
+import com.sndi.model.VDetTabBordPpm;
 import com.sndi.model.VDetailAdresse;
 import com.sndi.model.VDetailCorrection;
 import com.sndi.model.VDetailCorrectionCharge;
@@ -174,6 +177,7 @@ public class DaoController {
 	 private List<TAffichageDao> affectationListe = new ArrayList<TAffichageDao>();
 	 private List<TAffichageDao> validationListe = new ArrayList<TAffichageDao>();
 	 private List <VDaoStatut> daostatutList = new ArrayList<VDaoStatut>();
+	 private List<VDetTabBordDac> detailTBCpt = new ArrayList<VDetTabBordDac>();
 	//GESTION DES MEMBRES DE LA COMMISSION
 	private List<VbCommissionType> membresCommission = new ArrayList<VbCommissionType>();
 	private List<VbCommissionType> selectionMembres = new ArrayList<VbCommissionType>(); 
@@ -595,6 +599,68 @@ public class DaoController {
 				typeActionTb(); 
 		 }
 		//FIN AFFICHAGE LISTE DAC DMP
+		 
+		 //DEBUT DETAILS DES COMPTEURS
+		//Debut Charge detail Compteur de l'AC
+		 public void chargeDacAC1(String typePlan,String typeDac, String stat1){
+			 detailTBCpt =(List<VDetTabBordDac>) iservice.getObjectsByColumnIn("VDetTabBordDac", new ArrayList<String>(Arrays.asList("DAC_DETID")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTBCpt.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de l'AC
+		 public void chargeDacAC2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTBCpt =(List<VDetTabBordDac>) iservice.getObjectsByColumnIn("VDetTabBordDac", new ArrayList<String>(Arrays.asList("DAC_DETID")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTBCpt.size());	
+		}
+		 
+		//Debut Charge detail Compteur de la CPMP
+		 public void chargeDacCP1(String typePlan,String typeDac, String stat1){
+			 detailTBCpt =(List<VDetTabBordDac>) iservice.getObjectsByColumnIn("VDetTabBordDac", new ArrayList<String>(Arrays.asList("DAC_DETID")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTBCpt.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargeDacCP2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTBCpt =(List<VDetTabBordDac>) iservice.getObjectsByColumnIn("VDetTabBordDac", new ArrayList<String>(Arrays.asList("DAC_DETID")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTBCpt.size());	
+		}
+		 
+		//Debut Charge detail Compteur de la CPMP
+		 public void chargeDacDM1(String typePlan,String typeDac, String stat1){
+			 detailTBCpt =(List<VDetTabBordDac>) iservice.getObjectsByColumnIn("VDetTabBordDac", new ArrayList<String>(Arrays.asList("DAC_DETID")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+			             // new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTBCpt.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargeDacDM2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTBCpt =(List<VDetTabBordDac>) iservice.getObjectsByColumnIn("VDetTabBordDac", new ArrayList<String>(Arrays.asList("DAC_DETID")),
+					      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+			              //new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre DAC: "+detailTBCpt.size());	
+		}
+		 //FIN DETAILS DES COMPTEURS
 	 
 			//Methode d'affichage la liste des DAC en fonction du type plan et du type DAC passé en parametre
 		 public void chargeDataByAction(String typeDac,String typePlan){
@@ -5621,6 +5687,14 @@ public class DaoController {
 
 	public void setNewSoumission(TSoumissions newSoumission) {
 		this.newSoumission = newSoumission;
+	}
+
+	public List<VDetTabBordDac> getDetailTBCpt() {
+		return detailTBCpt;
+	}
+
+	public void setDetailTBCpt(List<VDetTabBordDac> detailTBCpt) {
+		this.detailTBCpt = detailTBCpt;
 	}
 	
 		

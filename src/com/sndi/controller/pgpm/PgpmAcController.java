@@ -54,6 +54,8 @@ import com.sndi.model.VAgpm;
 import com.sndi.model.VAgpmFonction;
 import com.sndi.model.VAgpmMinistere;
 import com.sndi.model.VAgpmliste;
+import com.sndi.model.VDetTabBordAgpm;
+import com.sndi.model.VDetTabBordPgpm;
 import com.sndi.model.VFinancementPgpm;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VModePassation;
@@ -231,6 +233,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private VFonctionMinistere fonction =new VFonctionMinistere();
 		 private TFinancementPgpm newFinancement = new TFinancementPgpm();
 		 private TFinancementPgpm selectFinance = new TFinancementPgpm();
+		 private List<VDetTabBordPgpm> detailTB = new ArrayList<VDetTabBordPgpm>();
 		 
 		 private VFinancementPgpm selectFinancePg = new VFinancementPgpm();
 		 //private TAgpm agpm = new TAgpm();
@@ -550,6 +553,68 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			}
 		}
 	//Fin de la Methode de Gestion des listes des publications
+		 
+		 //Debut Charge detail Compteur de l'AC
+		 public void chargeDetailAC1(String typePlan,String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordPgpm>) iservice.getObjectsByColumnIn("VDetTabBordPgpm", new ArrayList<String>(Arrays.asList("PGPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PGPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de l'AC
+		 public void chargeDetailAC2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordPgpm>) iservice.getObjectsByColumnIn("VDetTabBordPgpm", new ArrayList<String>(Arrays.asList("PGPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PGPM: "+detailTB.size());	
+		}
+		 
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargeDetailCP1(String typePlan,String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordPgpm>) iservice.getObjectsByColumnIn("VDetTabBordPgpm", new ArrayList<String>(Arrays.asList("PGPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				_logger.info("Nbre PGPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargeDetailCP2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordPgpm>) iservice.getObjectsByColumnIn("VDetTabBordPgpm", new ArrayList<String>(Arrays.asList("PGPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac), 
+			              new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				_logger.info("Nbre PGPM: "+detailTB.size());	
+		}
+		 
+		 
+		 //Debut Charge detail Compteur de la DMP
+		 public void chargeDetailDMP1(String typePlan,String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordPgpm>) iservice.getObjectsByColumnIn("VDetTabBordPgpm", new ArrayList<String>(Arrays.asList("PGPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac));
+			             // new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PGPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la DMP
+		 public void chargeDetailDMP2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordPgpm>) iservice.getObjectsByColumnIn("VDetTabBordPgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac));
+			             // new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PGPM: "+detailTB.size());	
+		}
 		 
 		//PGSPM : Nouvelle Methode
 		 public void chargeDataAvaliderPgspm() {
@@ -4616,6 +4681,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setPgpmPub(List<VPgpmPub> pgpmPub) {
 		this.pgpmPub = pgpmPub;
+	}
+
+	public List<VDetTabBordPgpm> getDetailTB() {
+		return detailTB;
+	}
+
+	public void setDetailTB(List<VDetTabBordPgpm> detailTB) {
+		this.detailTB = detailTB;
 	}
 
 }

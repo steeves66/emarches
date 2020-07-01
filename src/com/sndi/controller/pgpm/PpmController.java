@@ -48,6 +48,8 @@ import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeProcedure;
 import com.sndi.model.VDatePub;
 import com.sndi.model.VDetPlaning;
+import com.sndi.model.VDetTabBordPgpm;
+import com.sndi.model.VDetTabBordPpm;
 import com.sndi.model.VFinancementPgpm;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VGenerationDate;
@@ -206,6 +208,7 @@ public class PpmController {
 	     private List<VTypeMarcheFils> listeTypeMarchesFils = new ArrayList<VTypeMarcheFils>();
 	     private List<VModeleDac> listeModele = new ArrayList<VModeleDac>();
 	     private List<VPpmPub> ppmPub = new ArrayList<VPpmPub>();
+	     private List<VDetTabBordPpm> detailTB = new ArrayList<VDetTabBordPpm>();
 	     
 		//Declaration des objets
 		 private TPlanPassation planPass = new TPlanPassation();
@@ -409,6 +412,66 @@ public class PpmController {
 					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 						 new WhereClause("AFF_DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
 		 }*/
+		 //Debut Charge detail Compteur de l'AC
+		 public void chargePpmAC1(String typePlan,String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordPpm>) iservice.getObjectsByColumnIn("VDetTabBordPpm", new ArrayList<String>(Arrays.asList("PPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de l'AC
+		 public void chargePpmAC2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordPpm>) iservice.getObjectsByColumnIn("VDetTabBordPpm", new ArrayList<String>(Arrays.asList("PPM_DETID")),
+					      "GPG_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargePpmCP1(String typePlan,String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordPpm>) iservice.getObjectsByColumnIn("VDetTabBordPpm", new ArrayList<String>(Arrays.asList("PPM_DETID")),
+					      "DPP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargePpmCP2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordPpm>) iservice.getObjectsByColumnIn("VDetTabBordPpm", new ArrayList<String>(Arrays.asList("PPM_DETID")),
+					      "DPP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PPM: "+detailTB.size());	
+		}
+		 
+		 
+		 //Debut Charge detail Compteur de la DMP
+		 public void chargePpmDM1(String typePlan,String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordPpm>) iservice.getObjectsByColumnIn("VDetTabBordPpm", new ArrayList<String>(Arrays.asList("PPM_DETID")),
+					      "DPP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac));
+			              //new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la DMP
+		 public void chargePpmDM2(String typePlan,String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordPpm>) iservice.getObjectsByColumnIn("VDetTabBordPpm", new ArrayList<String>(Arrays.asList("PPM_DETID")),
+					      "DPP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typePlan),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac));
+			             // new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre PPM: "+detailTB.size());	
+		}
 		 
 		 public void chargePpmAC1(String typeplan, String stat1) {
 		   
@@ -5330,6 +5393,24 @@ public class PpmController {
 
 	public void setPgmp(long pgmp) {
 		this.pgmp = pgmp;
+	}
+
+
+
+
+
+
+	public List<VDetTabBordPpm> getDetailTB() {
+		return detailTB;
+	}
+
+
+
+
+
+
+	public void setDetailTB(List<VDetTabBordPpm> detailTB) {
+		this.detailTB = detailTB;
 	}
 	
 }

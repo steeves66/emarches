@@ -108,7 +108,10 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
+            <!-- <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a> -->
+            <p:commandLink  oncomplete="PF('detailDifDlg').show()" action="#{agpmController.chargeDetailAC1('AGPM','S2D')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -1010,6 +1013,63 @@
 				        
 				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
          				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" />
+         				</h:outputText>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" />
+         				</h:outputText>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+	                
+		            </div>
+		           
+	            </div>
+	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="apercuDiff">
+	        <p:dialog  widgetVar="detailDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.detailTB}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
+			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
+			            
+			           
+				        
+				        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.agpCommentaire}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
+         				  <h:outputText value="#{slctdTb.agpDecId}" />
 				        </p:column>
 				        
 				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >

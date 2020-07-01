@@ -52,6 +52,8 @@ import com.sndi.model.VAgpmDeclarant;
 import com.sndi.model.VAgpmDetails;
 import com.sndi.model.VAgpmStatut;
 import com.sndi.model.VAgpmliste;
+import com.sndi.model.VDacliste;
+import com.sndi.model.VDetTabBordAgpm;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VProjetAgpm;
 import com.sndi.model.VUpdateAgpm;
@@ -121,6 +123,8 @@ public class AgpmController {
 	 private List<TAffichageAgpm> affichageListe = new ArrayList<TAffichageAgpm>();
 	 private List<VUpdateAgpm> listUpdate = new ArrayList<VUpdateAgpm>();
 	 private List<VAgpm> objetListe = new ArrayList<VAgpm>();
+	 private List<VDetTabBordAgpm> detailTB = new ArrayList<VDetTabBordAgpm>();
+	 
 	 private List<TAgpm> listeAgpm = new ArrayList<TAgpm>();
 	 private List<TProjet> projetUpdate = new ArrayList<TProjet>();
 	 private List<THistoAgpm> listeHisto = new ArrayList<THistoAgpm>();
@@ -675,6 +679,69 @@ public class AgpmController {
 			          }
 
 	   
+		
+		 //Debut Charge detail Compteur de l'AC
+		 public void chargeDetailAC1(String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
+					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre AGPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de l'AC
+		 public void chargeDetailAC2(String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
+					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				_logger.info("Nbre AGPM: "+detailTB.size());	
+		}
+		 
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargeDetailCP1(String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
+					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				_logger.info("Nbre AGPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la CPMP
+		 public void chargeDetailCP2(String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
+					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac),
+			              new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				_logger.info("Nbre AGPM: "+detailTB.size());	
+		}
+		 
+		 
+		 
+		 //Debut Charge detail Compteur de la DMP1
+		 public void chargeDetailDMP1(String typeDac, String stat1){
+			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
+					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac));
+			             // new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				_logger.info("Nbre AGPM: "+detailTB.size());	
+		}
+		 
+		 //Debut Charge detail Compteur de la DMP
+		 public void chargeDetailDMP2(String typeDac, String stat1, String stat2){
+			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
+					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
+					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
+					      new WhereClause("TYP",WhereClause.Comparateur.EQ,""+typeDac));
+			             // new WhereClause("AGP_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+				_logger.info("Nbre AGPM: "+detailTB.size());	
+		}
 		
 	  	//Filtre multicritère
 			/*public void reinitialiserAgpm() {  	
@@ -3241,6 +3308,14 @@ public class AgpmController {
 
 	public void setDocumentlog(String documentlog) {
 		this.documentlog = documentlog;
+	}
+
+	public List<VDetTabBordAgpm> getDetailTB() {
+		return detailTB;
+	}
+
+	public void setDetailTB(List<VDetTabBordAgpm> detailTB) {
+		this.detailTB = detailTB;
 	}
     
 }
