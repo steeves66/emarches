@@ -86,6 +86,8 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofStaut;
 	private String dofSouNcc;
 	private String dofSigle;
+	private String dofErrFin;
+	private String dofObsFin;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -110,7 +112,7 @@ public class TDetOffres implements java.io.Serializable {
 			Short dofNotAdmBai, String dofNotTecBai, Short dofNotFinBai, Short dofNotFin2Bai, BigDecimal dofMtAttDmp,
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
-			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle,
+			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin,
 			Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
@@ -175,6 +177,8 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofStaut = dofStaut;
 		this.dofSouNcc = dofSouNcc;
 		this.dofSigle = dofSigle;
+		this.dofErrFin = dofErrFin;
+		this.dofObsFin = dofObsFin;
 		this.TPiecesOffreses = TPiecesOffreses;
 		
 		
@@ -420,7 +424,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofTotTec = dofTotTec;
 	}
 
-	@Column(name = "DOF_OBS_DMP", length = 200)
+	@Column(name = "DOF_OBS_DMP")
 	public String getDofObsDmp() {
 		return this.dofObsDmp;
 	}
@@ -429,7 +433,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsDmp = dofObsDmp;
 	}
 
-	@Column(name = "DOF_OBS_COM", length = 200)
+	@Column(name = "DOF_OBS_COM")
 	public String getDofObsCom() {
 		return this.dofObsCom;
 	}
@@ -438,7 +442,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsCom = dofObsCom;
 	}
 
-	@Column(name = "DOF_OBS_ADM", length = 200)
+	@Column(name = "DOF_OBS_ADM")
 	public String getDofObsAdm() {
 		return this.dofObsAdm;
 	}
@@ -447,7 +451,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsAdm = dofObsAdm;
 	}
 
-	@Column(name = "DOF_OBS_ADM_DMP", length = 200)
+	@Column(name = "DOF_OBS_ADM_DMP")
 	public String getDofObsAdmDmp() {
 		return this.dofObsAdmDmp;
 	}
@@ -456,7 +460,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsAdmDmp = dofObsAdmDmp;
 	}
 
-	@Column(name = "DOF_OBS_ADM_BAI", length = 200)
+	@Column(name = "DOF_OBS_ADM_BAI")
 	public String getDofObsAdmBai() {
 		return this.dofObsAdmBai;
 	}
@@ -465,7 +469,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsAdmBai = dofObsAdmBai;
 	}
 
-	@Column(name = "DOF_OBS_TEC", length = 200)
+	@Column(name = "DOF_OBS_TEC")
 	public String getDofObsTec() {
 		return this.dofObsTec;
 	}
@@ -474,7 +478,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsTec = dofObsTec;
 	}
 
-	@Column(name = "DOF_OBS_TEC_DMP", length = 200)
+	@Column(name = "DOF_OBS_TEC_DMP")
 	public String getDofObsTecDmp() {
 		return this.dofObsTecDmp;
 	}
@@ -483,7 +487,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsTecDmp = dofObsTecDmp;
 	}
 
-	@Column(name = "DOF_OBS_TEC_BAI", length = 200)
+	@Column(name = "DOF_OBS_TEC_BAI")
 	public String getDofObsTecBai() {
 		return this.dofObsTecBai;
 	}
@@ -763,5 +767,22 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofSigle = dofSigle;
 	}
 
+	@Column(name = "DOF_ERR_FIN", length = 500)
+	public String getDofErrFin() {
+		return this.dofErrFin;
+	}
 
+	public void setDofErrFin(String dofErrFin) {
+		this.dofErrFin = dofErrFin;
+	}
+
+	@Column(name = "DOF_OBS_FIN", length = 500)
+	public String getDofObsFin() {
+		return this.dofObsFin;
+	}
+
+	public void setDofObsFin(String dofObsFin) {
+		this.dofObsFin = dofObsFin;
+	}
+	
 }
