@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-04-08T17:29:05 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="membres_cojo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53fc7504-1b87-459d-b8ff-b4a2211a8f07">
+<!-- 2020-07-01T08:46:00 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="membres_cojo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53fc7504-1b87-459d-b8ff-b4a2211a8f07">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -168,9 +177,9 @@ and s.sea_num = $P{param_code}]]>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="238" splitType="Stretch">
+		<band height="246" splitType="Stretch">
 			<staticText>
-				<reportElement x="398" y="1" width="171" height="17" uuid="4d4b45d7-e363-4cf3-a469-f83aa806f306">
+				<reportElement x="629" y="1" width="171" height="17" uuid="4d4b45d7-e363-4cf3-a469-f83aa806f306">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -179,7 +188,7 @@ and s.sea_num = $P{param_code}]]>
 				<text><![CDATA[République de Côte d'Ivoire]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="403" y="19" width="166" height="17" uuid="0facb229-b3cf-4160-bad5-efba0130008e">
+				<reportElement x="629" y="19" width="171" height="17" uuid="0facb229-b3cf-4160-bad5-efba0130008e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -192,13 +201,13 @@ and s.sea_num = $P{param_code}]]>
 				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
 			</image>
 			<rectangle radius="8">
-				<reportElement mode="Opaque" x="80" y="109" width="400" height="21" backcolor="#FA9B3C" uuid="2a6ce97b-9200-47e6-be3b-428f3f09693d"/>
+				<reportElement mode="Opaque" x="80" y="92" width="600" height="21" backcolor="#FA9B3C" uuid="2a6ce97b-9200-47e6-be3b-428f3f09693d"/>
 				<graphicElement>
 					<pen lineWidth="4.0" lineStyle="Double"/>
 				</graphicElement>
 			</rectangle>
 			<textField>
-				<reportElement x="80" y="107" width="400" height="26" forecolor="#FFFFFF" uuid="fbf10e4d-d170-4a3b-8f4e-97eb69a6d9fd"/>
+				<reportElement x="80" y="89" width="600" height="26" forecolor="#FFFFFF" uuid="fbf10e4d-d170-4a3b-8f4e-97eb69a6d9fd"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="true"/>
 				</textElement>
@@ -233,7 +242,7 @@ and s.sea_num = $P{param_code}]]>
 				<textFieldExpression><![CDATA["Responsable  : "+$F{SEA_RES}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="338" y="160" width="179" height="15" uuid="50f66442-49b4-4205-b4e6-a97c39fcaa11">
+				<reportElement x="612" y="160" width="179" height="15" uuid="50f66442-49b4-4205-b4e6-a97c39fcaa11">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -242,7 +251,7 @@ and s.sea_num = $P{param_code}]]>
 				<textFieldExpression><![CDATA["Quorum ? : "+$F{SEA_QUORUM}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="1" y="196" width="555" height="40" uuid="76761c57-b869-4cb7-b5f5-d1b0a40c3325">
+				<reportElement x="1" y="204" width="799" height="40" uuid="76761c57-b869-4cb7-b5f5-d1b0a40c3325">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
@@ -255,13 +264,13 @@ and s.sea_num = $P{param_code}]]>
 						</datasetParameter>
 						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 					</datasetRun>
-					<jr:column width="50" uuid="e5c42504-fd3d-4fe0-9224-665d2a99c598">
+					<jr:column width="120" uuid="e5c42504-fd3d-4fe0-9224-665d2a99c598">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="50" height="20" forecolor="#FFFFFF" uuid="6c954957-de9c-49d7-8670-1f3eb5627908"/>
+								<reportElement x="0" y="0" width="120" height="20" forecolor="#FFFFFF" uuid="6c954957-de9c-49d7-8670-1f3eb5627908"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
@@ -271,20 +280,20 @@ and s.sea_num = $P{param_code}]]>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="50" height="20" uuid="9558c5c6-bb00-460d-93c0-af6d3b35b517"/>
+								<reportElement x="0" y="0" width="120" height="20" uuid="9558c5c6-bb00-460d-93c0-af6d3b35b517"/>
 								<box padding="3"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_OBSERVATION}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="172" uuid="c3dc9046-4eb7-417f-9ff0-a69291435960">
+					<jr:column width="160" uuid="c3dc9046-4eb7-417f-9ff0-a69291435960">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne2"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="172" height="20" forecolor="#FFFFFF" uuid="79290202-a776-4265-a36c-b9599f882389"/>
+								<reportElement x="0" y="0" width="160" height="20" forecolor="#FFFFFF" uuid="79290202-a776-4265-a36c-b9599f882389"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
@@ -294,18 +303,18 @@ and s.sea_num = $P{param_code}]]>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="172" height="20" uuid="bf7482a7-37f9-4049-95f9-dba72487e3fc"/>
+								<reportElement x="0" y="0" width="160" height="20" uuid="bf7482a7-37f9-4049-95f9-dba72487e3fc"/>
 								<box padding="3"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_FON_COD}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="60" uuid="9e4093a7-0236-42e3-a908-a0b996f864fc">
+					<jr:column width="160" uuid="9e4093a7-0236-42e3-a908-a0b996f864fc">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
 						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="60" height="20" forecolor="#FFFFFF" uuid="74dcbdfc-dd73-438c-8f29-fdee8f2de7de"/>
+								<reportElement x="0" y="0" width="160" height="20" forecolor="#FFFFFF" uuid="74dcbdfc-dd73-438c-8f29-fdee8f2de7de"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
@@ -315,18 +324,18 @@ and s.sea_num = $P{param_code}]]>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="60" height="20" uuid="d5454944-6582-4f6c-8183-f7e40c969190"/>
+								<reportElement x="0" y="0" width="160" height="20" uuid="d5454944-6582-4f6c-8183-f7e40c969190"/>
 								<box padding="3"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_NOM_MBM}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="66" uuid="07b9542f-02b1-4c55-94f5-9bb2e8b25144">
+					<jr:column width="150" uuid="07b9542f-02b1-4c55-94f5-9bb2e8b25144">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne4"/>
 						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="66" height="20" forecolor="#FFFFFF" uuid="719a78d1-8e40-46b4-b867-8986ad935793"/>
+								<reportElement x="0" y="0" width="150" height="20" forecolor="#FFFFFF" uuid="719a78d1-8e40-46b4-b867-8986ad935793"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
@@ -336,9 +345,9 @@ and s.sea_num = $P{param_code}]]>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement x="0" y="0" width="66" height="20" uuid="4e1b6c62-9344-4f68-a925-fba126583880"/>
+								<reportElement x="0" y="0" width="150" height="20" uuid="4e1b6c62-9344-4f68-a925-fba126583880"/>
 								<box padding="3"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_PRE_MBM}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -361,7 +370,7 @@ and s.sea_num = $P{param_code}]]>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="74" height="20" uuid="b07b384f-04b5-4c99-9d86-7366751c87da"/>
 								<box padding="3"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_TEL_MBM}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
@@ -382,16 +391,16 @@ and s.sea_num = $P{param_code}]]>
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement x="0" y="0" width="50" height="20" uuid="ea71e2c1-2fc5-4d72-970c-33c3865c71bf"/>
 								<box padding="3"/>
-								<textElement verticalAlignment="Middle"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_REP_MANDATE}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="83" uuid="9d475a44-d31b-4dbb-8c91-e930699e7dca">
+					<jr:column width="85" uuid="9d475a44-d31b-4dbb-8c91-e930699e7dca">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne7"/>
 						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="83" height="20" forecolor="#FFFFFF" uuid="088038c0-4183-4f7a-99c1-f1249ecef489"/>
+								<reportElement x="0" y="0" width="85" height="20" forecolor="#FFFFFF" uuid="088038c0-4183-4f7a-99c1-f1249ecef489"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
@@ -422,15 +431,15 @@ and s.sea_num = $P{param_code}]]>
 				<text><![CDATA[Par :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="438" y="1" width="39" height="14" uuid="aa2f3d12-507e-4f2a-9311-bc7367583e0c"/>
-				<textElement>
+				<reportElement x="642" y="2" width="39" height="14" uuid="aa2f3d12-507e-4f2a-9311-bc7367583e0c"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<text><![CDATA[Edité le :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="481" y="1" width="74" height="14" uuid="d8c45266-df8b-4a9f-946a-1d9c046d8542"/>
-				<textElement>
+				<reportElement x="685" y="2" width="115" height="14" uuid="d8c45266-df8b-4a9f-946a-1d9c046d8542"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
 				<textFieldExpression><![CDATA[TODAY( )]]></textFieldExpression>

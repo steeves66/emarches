@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-07-02T11:51:19 -->
+<!-- 2020-07-02T12:15:40 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pv_ana_offre" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd49f578-cc90-4b9c-947b-d6043e8f5e8c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="offre" class="java.lang.String">
 		<defaultValueExpression><![CDATA[$P{offre}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select a.laa_objet,a.laa_lbg_imputation,upper(a.laa_lieu_exe) as lieu,a.laa_lbg_imputation as imputation, 
@@ -215,7 +218,7 @@ order by a.laa_num,c.anf_dof_num]]>
 		<band height="52" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="2" width="150" height="38" uuid="4b48fde2-c391-45aa-a153-7ea680e90924"/>
-				<imageExpression><![CDATA["WebContent/report/images/logo_emarches.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement stretchType="ElementGroupHeight" x="360" y="2" width="188" height="39" uuid="25f9deec-1678-4770-9b29-2bd07797ec1d"/>
