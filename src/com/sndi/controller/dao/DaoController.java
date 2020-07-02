@@ -257,6 +257,7 @@ public class DaoController {
 	//GESTION DES CRITERES D'ANALYSE
 	 private VbCritereAnalyse sltCritere = new VbCritereAnalyse();
 	 private VbDetCritAnalyse newDetCritere = new VbDetCritAnalyse();
+	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	//VARIABLES
 	 private long adaNum;
 	 private String pidCod;
@@ -523,24 +524,22 @@ public class DaoController {
 		 
 	 }
 	 
+	//Entete critere 
+	 public void saveCritereEntete() {
+		 newEnteteCritere.setCraCode(craCode);
+		 iservice.addObject(newEnteteCritere);
+		 chargeCritereCombobox();
+	 }
+	 
 	 public void saveDetailCritere() {
-		/* newDetCritere.setDanCraCode((craCode));
-		 newDetCritere.setDanDteSaisie(Calendar.getInstance().getTime());
-		 newDetCritere.setDanFonCodeAc(userController.getSlctd().getTFonction().getFonCod());
-		 newDetCritere.setDanOpeSaisie(userController.getSlctd().getTOperateur().getOpeMatricule());
-		 newDetCritere.setDanStatut("1");
-		iservice.addObject(newDetCritere); */
-		 
-		 
 		 newCritereDac.setDcadDacCode(dao.getDacCode());
 		 newCritereDac.setDcadDanCraCode(craCode);
-		 //Code du detail
-		 newCritereDac.setDcadDanCode("AUTRE");
+		 newCritereDac.setDcadDanCode("AU000010001");
 		 newCritereDac.setDcadDteSaisie(Calendar.getInstance().getTime());
 		 newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 newCritereDac.setDcadStatut("0");
 		 iservice.addObject(newCritereDac);
-		chargeCritere();
+		 chargeCritereSaisie();
 	 }
 	 
 	 public void saveCritere() {
@@ -5713,6 +5712,14 @@ public class DaoController {
 
 	public void setDetailTBCpt(List<VDetTabBordDac> detailTBCpt) {
 		this.detailTBCpt = detailTBCpt;
+	}
+
+	public VbCritereAnalyse getNewEnteteCritere() {
+		return newEnteteCritere;
+	}
+
+	public void setNewEnteteCritere(VbCritereAnalyse newEnteteCritere) {
+		this.newEnteteCritere = newEnteteCritere;
 	}
 	
 		
