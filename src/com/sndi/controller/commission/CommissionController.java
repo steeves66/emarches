@@ -940,6 +940,11 @@ public class CommissionController {
 							
 		}
 		 
+		 //Edition de la fiche de l'Offre
+		 public void editerFicheOffre() {
+			 projetReport.longparam1(sltOffre.getDofNum().longValue(), "Rapport_ana", "Rapport_ana");
+		 }
+		 
 		 public void vider() {
 			 newOffre = new VbTempParamDetOffres();
 			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
