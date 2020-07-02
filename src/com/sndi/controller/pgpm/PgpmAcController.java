@@ -354,7 +354,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					//new WhereClause("PLG_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
 					new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("objetListe size: "+objetList.size());	
-				tableauBordController.ChargeTbProcedure("PN","PGPM");
+				//tableauBordController.ChargeTbProcedure("PN","PGPM");
+				tableauBordController.chargeDataPgpm();
 				nbrePgpm =""+getNbrePgpmTotal("S1S");
 		}
 		 
@@ -382,7 +383,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					//new WhereClause("PLG_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
 					new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("listPgspm size: "+listPgspm.size());	
-				tableauBordController.ChargeTbProcedure("PS","PGPM");
+				//tableauBordController.ChargeTbProcedure("PS","PGPM");
+				tableauBordController.chargeDataPgspm();
 				nbrePgspm =""+getNbrePgspmTotal();
 		}
 		 
@@ -435,7 +437,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 								new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 							_logger.info("validationListe size: "+validationListe.size());
-							tableauBordController.ChargeTbProcedure("PN","PGPM");
+							//tableauBordController.ChargeTbProcedure("PN","PGPM");
+							tableauBordController.chargeDataPgpm();
 				 }else 
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 getValidationListe().clear();
@@ -443,7 +446,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 										"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 										new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
 										//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-								tableauBordController.ChargeTbProcedure("PN","PGPM");
+								//tableauBordController.ChargeTbProcedure("PN","PGPM");
+								tableauBordController.chargeDataPgpm();
 								_logger.info("validationListe size: "+validationListe.size());	
 					 }else
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -452,7 +456,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 									"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
 									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
 									//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-							tableauBordController.ChargeTbProcedure("PN","PGPM");
+							//tableauBordController.ChargeTbProcedure("PN","PGPM");
+							tableauBordController.chargeDataPgpm();
 							_logger.info("validationListe size: "+validationListe.size());	
 				 }   
 			   
@@ -472,7 +477,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"));
-						 tableauBordController.ChargeTbProcedure("PN","PGPM");
+						 //tableauBordController.ChargeTbProcedure("PN","PGPM");
+						 tableauBordController.chargeDataPgpm();
 								_logger.info("publicationListe size: "+publicationListe.size());	
 					 }else
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -480,7 +486,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 publicationListe = (List<VPgpmliste>) iservice.getObjectsByColumnDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"));
-						 tableauBordController.ChargeTbProcedure("PN","PGPM");
+						 //tableauBordController.ChargeTbProcedure("PN","PGPM");
+						 tableauBordController.chargeDataPgpm();
 							_logger.info("publicationListe size: "+publicationListe.size());	
 				 }   
 			   
@@ -498,13 +505,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
 						 getPgpmPub().clear(); 
 						 pgpmPub = (List<VPgpmPub>) iservice.getObjectsByColumnDesc("VPgpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
-						 tableauBordController.ChargeTbProcedure("PN","PGPM");
+						 //tableauBordController.ChargeTbProcedure("PN","PGPM");
+						 tableauBordController.chargeDataPgpm();
 								_logger.info("pgpmPub size: "+pgpmPub.size());
 					 }else
 						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 							  getPgpmPub().clear(); 
 								 pgpmPub = (List<VPgpmPub>) iservice.getObjectsByColumnDesc("VPgpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
-								 tableauBordController.ChargeTbProcedure("PN","PGPM");
+								 //tableauBordController.ChargeTbProcedure("PN","PGPM");
+								 tableauBordController.chargeDataPgpm();
 										_logger.info("pgpmPub size: "+pgpmPub.size());
 				     }
 			     } 
@@ -627,7 +636,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
 								new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"),
 								new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-					 tableauBordController.ChargeTbProcedure("PS","PGPM");
+					 //tableauBordController.ChargeTbProcedure("PS","PGPM");
+					 tableauBordController.chargeDataPgspm();
 							_logger.info("validationListePgspm size: "+validationListePgspm.size());		 
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
@@ -636,7 +646,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								 "GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","PGS")),
 								new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
 								//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-						 tableauBordController.ChargeTbProcedure("PS","PGPM");
+						     //tableauBordController.ChargeTbProcedure("PS","PGPM");
+						   tableauBordController.chargeDataPgspm();
 								_logger.info("validationListePgspm size: "+validationListePgspm.size());	
 					 }else
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -645,7 +656,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 									 "GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","PGS")),
 									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PS"));
 									//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-							 tableauBordController.ChargeTbProcedure("PS","PGPM");
+							 //tableauBordController.ChargeTbProcedure("PS","PGPM");
+							 tableauBordController.chargeDataPgspm();
 									_logger.info("validationListePgspm size: "+validationListePgspm.size());	
 				 }
 					 
@@ -2597,11 +2609,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				     iservice.addObject(histoPlan);
 				     
 				     //chargeDataAvaliderPgpm();
-		 			    chargeDataAvaliderPgspm();
-		 			   tableauBordController.chargeDataPgspm();
+		 			 chargeDataAvaliderPgspm();
+		 			 tableauBordController.chargeDataPgspm();
 					
 					 
-					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre Agpm a été retourné!", "");
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre opération a été retournée!", "");
 				     FacesContext.getCurrentInstance().addMessage(null, msg);
 						}
 			 }
@@ -3087,7 +3099,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             public void saveFinancement(){
             	
             	if(detailPlan.getGpgObjet().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgObjet()) || detailPlan.getGpgPartiePmePmi().equalsIgnoreCase("") ||"".equals(detailPlan.getGpgPartiePmePmi()) 
-            			||souCode.equalsIgnoreCase("") ||"".equals(souCode) ||sourfin.equalsIgnoreCase("") || "".equals(sourfin) || detailPlan.getGpgLibFin().equalsIgnoreCase("") || "".equals(detailPlan.getGpgLibFin())) {
+            			||souCode == null  || sourfin == null || devCode == null || detailPlan.getGpgLibFin().equalsIgnoreCase("") || "".equals(detailPlan.getGpgLibFin())) {
 			        //Message d'erreur
 		    		  FacesContext.getCurrentInstance().addMessage(null,
 			          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, saisir votre opération!", ""));

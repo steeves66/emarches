@@ -811,7 +811,8 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.transAc}</h3>
+              <!-- <h3>#{tableauBordController.tableauBord.transAc}</h3> -->
+              <h3>#{tableauBordController.daoCpSaisie}</h3>
 
               <p>#{controleController.type} en attente de Validation </p>
             </div>
@@ -829,7 +830,8 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.valPf}</h3>
+              <!-- <h3>#{tableauBordController.tableauBord.valPf}</h3> -->
+              <h3>#{tableauBordController.daoCpValide}</h3>
 
               <p>#{controleController.type} transmi(s) par la CPMP</p>
             </div>
@@ -847,7 +849,8 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.difPf}</h3>
+              <!-- <h3>#{tableauBordController.tableauBord.difPf}</h3> -->
+              <h3>#{tableauBordController.daoAcDiffCpmp}</h3>
 
               <p>#{controleController.type} différé(s) par la CPMP</p>
             </div>
@@ -1000,7 +1003,60 @@
                   </div>
        </h:panelGroup>
        </h:panelGroup>
-         <!-- Fin Tableau de Bord Vente pour l'Autorité Contractante-->           
+         <!-- Fin Tableau de Bord Vente pour l'Autorité Contractante--> 
+         
+                <!-- Début Tableau de Bord pour l'AC pour la publication -->       
+        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">      
+          
+        <h:panelGroup rendered="#{controleController.panelDaoTableauBordPub}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+            
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvValide}</h3>
+
+              <p>#{controleController.type} en attente de Publication</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink   class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+         <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoDaoPub}</h3>
+
+              <p>#{controleController.type} publié(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink   class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+   
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup> 
+       </h:panelGroup> 
+        <!-- Fin Tableau de Bord Publication pour l'AC pour la publication -->           
                   
  
                 </div>

@@ -1403,31 +1403,37 @@ public class PpmController {
 			     }
 		 */
 			
-	     	 
-			
-			
+	
 			 //Methode d'enregistrement des financements du ppm
 			 public void saveFinancementppm() {
-			  if(sourfin.equalsIgnoreCase("ETAT")) {
-				 baiCode ="ETAT";
-	     	     newFinancement.setTBailleur(new TBailleur(baiCode)); 
-	          }else
-	     	  {
-	         	newFinancement.setTBailleur(new TBailleur(baiCode));  
-	     	  }
-				newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
-			    newFinancement.setTDevise(new TDevise(devCode));
-			    newFinancement.setFppTypeFinance(sourfin);
-			    newFinancement.setTDetailPlanPassation(detailPass);
-				iservice.addObject(newFinancement);
-				
-				viderFinancement();
-				
-				chargeFinancement();
-				userController.setTexteMsg("Enregistrement éffectué avec succès!");
-				userController.setRenderMsg(true);
-				userController.setSevrityMsg("success");
+				 
+				 if(souCode == null  || sourfin == null || devCode == null ) {
+				        //Message d'erreur
+			    		  FacesContext.getCurrentInstance().addMessage(null,
+				          new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez, renseigner tous les champs obligatoires", ""));
+	            	    }else {
+	            	    	  if(sourfin.equalsIgnoreCase("ETAT")) {
+	            					 baiCode ="ETAT";
+	            		     	     newFinancement.setTBailleur(new TBailleur(baiCode)); 
+	            		          }else
+	            		     	  {
+	            		         	newFinancement.setTBailleur(new TBailleur(baiCode));  
+	            		     	  }
+	            					newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+	            				    newFinancement.setTDevise(new TDevise(devCode));
+	            				    newFinancement.setFppTypeFinance(sourfin);
+	            				    newFinancement.setTDetailPlanPassation(detailPass);
+	            					iservice.addObject(newFinancement);
+	            					
+	            					viderFinancement();
+	            					
+	            					chargeFinancement();
+	            					userController.setTexteMsg("Enregistrement éffectué avec succès!");
+	            					userController.setRenderMsg(true);
+	            					userController.setSevrityMsg("success");
+	            	    }
 			 }
+			 //Fin de la saisie d'un financement ppm
 			 
 			 //Methode de suppression de finanacemnt
 			 public void deleteFinanacement() {
@@ -3203,7 +3209,8 @@ public class PpmController {
 				 			
 				 			    //Insertion de chaque ligne dans T_adep_log avec le statut correspondant
 								historiser(""+statutTrans,passDetail,"Opération transmise à la Cellule de Passation");
-								tableauBordController.ChargeTbProcedure("PN", "PPM");
+								//tableauBordController.ChargeTbProcedure("PN", "PPM");
+								tableauBordController.chargeDataPpm("PN");
 								tableauBordbAc();
 								if(controleController.type == "PPM") {
 								
@@ -3890,7 +3897,7 @@ public class PpmController {
 		     switch(value) {
 				case "ppm1":
 					chargeData("PN");
-					tableauBordController.ChargeTbProcedure("PN","PPM");
+					//tableauBordController.ChargeTbProcedure("PN","PPM");
 					 //chargeDataAvaliderPpm();
 					chargePpmPUB();
 					 vider();
