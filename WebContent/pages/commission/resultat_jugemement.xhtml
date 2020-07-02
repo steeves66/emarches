@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-        #{controleController.libelle} #{commissionController.slctdTd.aaoCode}
+        #{controleController.libelle} #{commissionController.recupLot.laaNum} : <strong>#{commissionController.recupLot.laaObjet}</strong> 
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
@@ -50,6 +50,105 @@
 				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
      <div class="box"></div>
+     <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-success">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Cliquez pour fermer les critères de seuil
+                      </a>
+                    </h4>
+                  </div>
+                 
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3> <h:outputText value="#{commissionController.infoSeuil.laaMtEst}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText></h3>
+
+              <p style="height: 39px">Estimation administrative (E)</p>
+              
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3> <h:outputText value="#{commissionController.infoSeuil.moyOffFinQualtech}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText></h3>
+
+              <p>Moyenne des Offres financières techniquement qualifiées (P)</p>
+            </div>
+
+          </div>
+        </div>
+        <!-- ./col -->
+        
+          <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3>  <h:outputText value="#{commissionController.infoSeuil.moyPonderee}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText></h3>
+
+              <p>Moyenne pondérée (M=40% * P + 60% * E)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3>  <h:outputText value="#{commissionController.infoSeuil.sf1}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText></h3>
+
+              <p>Seuil anormalement élevé (SF1 =110% * M)</p>
+            </div>
+          
+          </div>
+        </div>
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3> <h:outputText value="#{commissionController.infoSeuil.sf2}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+              
+              </h3>
+
+              <p  style="height: 39px">Seuil anormalement bas (SF2 =90% * M)</p>
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+      
+        
+      </div>
+                    </div>
+                  </div>
+       
+          
+            
+          
+      
+          <!-- Tableau de Bord pour l'acteur SPP -->
+          
+          <!--Fin du Tableau de Bord pour l'acteur SPP -->
+             
+                </div>
+              </div>
     <div class="box box-success">
             
               <div class="box-body">
@@ -59,28 +158,44 @@
             <div class="col-md-12">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">I-EVALUATION ET CORRECTION DES OFFRES FINANCIERES</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">I-EVALUATION ET CORRECTION DES OFFRES FINANCIERES DU LOT #{commissionController.slctdTd.aaoCode}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
 	              <div class="box-body">
-                <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable"  
+                <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.listeVerifCor}"
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
                          
-                          <p:column headerText="N°" styleClass="col-sm-1" >
-         				  <h:outputText />
+                          <p:column headerText="N°" style="width : 3%">
+         				  <h:outputText value="#{slctdTb.ordre}" />
 				        </p:column>	
-				        <p:column headerText="Soumissionnaire" styleClass="col-sm-5" >
-         				  <h:outputText />
+				        <p:column headerText="Soumissionnaire" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}"/>
 				        </p:column>
-				         <p:column headerText="Erreur constatée" styleClass="col-sm-2" >
-         				  <h:outputText />
-				        </p:column>	
+				        
+				         <p:column headerText="Montant estimatif" styleClass="col-sm-1" style="color: red" >
+         				  <h:outputText value="#{slctdTb.laaMtEst}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>
+				        
+				         <p:column headerText="Montant lu" styleClass="col-sm-1" >
+         				  <h:outputText value="#{slctdTb.dofMtOfr}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>
+	
 				         <p:column headerText="Montant corrigé" styleClass="col-sm-1" >
-         				  <h:outputText />
+         				  <h:outputText value="#{slctdTb.dofMtCor}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
 				        </p:column>		
+				        
+				          <p:column headerText="Erreur Constatée" styleClass="col-sm-1" >
+         				  <h:outputText value="#{slctdTb.dofErrFin}"/> 
+				        </p:column>
                         <p:column headerText="Commentaire" styleClass="col-sm-3" >
-         				  <h:outputText />
+         				  <h:outputText value="#{slctdTb.commentaireOffin}" />
 				        </p:column>			        
 				      
 				         </p:dataTable>
@@ -92,31 +207,38 @@
             
             
             
-            <div class="col-md-6">
+            <div class="col-md-12">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">II - LISTE DES SOUMISSIONS ANAORMALEMENT ELEVEES</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff"><strong>II - LISTE DES SOUMISSIONS ANAORMALEMENT ELEVEES</strong></div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
 	              <div class="box-body">
-                <p:dataTable var="slctdTb"  id="finance1" styleClass="table mb0 dt-on-steroids dataTable"  
+                <p:dataTable var="slctdTb"  id="finance1" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.listeSouOffEleve}"
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
                          
-                          <p:column headerText="N°" styleClass="col-sm-1" >
-         				  <h:outputText />
+                          <p:column headerText="N°" style="width : 3%">
+         				  <h:outputText value="#{slctdTb.ordre}" />
 				        </p:column>	
-				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-7" >
-         				  <h:outputText />
+				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-5" >
+         				   <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}"/>
 				        </p:column>
 				         <p:column headerText="SOUMMISSION CORRIGEE" styleClass="col-sm-2" >
-         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  <h:outputText value="#{slctdTb.dofMtCor}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
 				        </p:column>	
-				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-2" >
-         				  <h:outputText />
+				        <p:column headerText="SEUIL (SF1)" styleClass="col-sm-1" style="color: red">
+         				  <h:outputText value="#{slctdTb.sf1}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+         				  
+				        </p:column>	
+				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.commentaire}" />
 				        </p:column>		
-				         </p:dataTable>
+				 </p:dataTable>
 				         
                  
 	            </div>
@@ -125,7 +247,7 @@
             
             
             
-            <div class="col-md-6">
+            <div class="col-md-12">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">III - LISTE DES SOUMISSIONS ANAORMALEMENT BASSES</div></div> 
@@ -133,21 +255,27 @@
                </div>
 	            <!-- /.box-header -->
 	              <div class="box-body">
-                <p:dataTable var="slctdTb"  id="finance2" styleClass="table mb0 dt-on-steroids dataTable"  
+                <p:dataTable var="slctdTb"  id="finance2" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeSouOffBass}"  
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
                          
-                          <p:column headerText="N°" styleClass="col-sm-1" >
-         				  <h:outputText />
+                      <p:column headerText="N°" style="width : 3%">
+         				  <h:outputText value="#{slctdTb.ordre}" />
 				        </p:column>	
-				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-7" >
-         				  <h:outputText />
+				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-4" >
+         				   <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}"/>
 				        </p:column>
 				         <p:column headerText="SOUMMISSION CORRIGEE" styleClass="col-sm-2" >
-         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  <h:outputText value="#{slctdTb.dofMtCor}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
 				        </p:column>	
-				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-2" >
-         				  <h:outputText />
+				         <p:column headerText="SEUIL (SF2)" styleClass="col-sm-1" style="color: red">
+         				  <h:outputText value="#{slctdTb.sf2}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>	
+				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.commentaire}" />
 				        </p:column>		
 				         </p:dataTable>
 				         
@@ -168,20 +296,21 @@
 	              <div class="col-md-6 align justify-content-center">
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend><small>CLASSEMENT DES OFFRES PAR LOT</small></legend>
-                    <p:dataTable var="slctdTb"  id="finance3" styleClass="table mb0 dt-on-steroids dataTable"  
+                    <p:dataTable var="slctdTb"  id="finance3" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.resultatAttributaire}" 
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
-                          <p:column headerText="RANG" styleClass="col-sm-1" >
-         				  <h:outputText />
+                          <p:column headerText="RANG" style="width : 3%">
+         				  <h:outputText value="#{slctdTb.rang}" />
 				        </p:column>	
 				        <p:column headerText="ENTREPRISE" styleClass="col-sm-7" >
-         				  <h:outputText />
+         				  <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}" />
 				        </p:column>
 				         <p:column headerText="SOUMISSION CORRIGEE" styleClass="col-sm-2" >
-         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  <h:outputText value="#{slctdTb.dofMtCor}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
 				        </p:column>	
 				         <p:column headerText="DELAI D'EXECUTION" styleClass="col-sm-2" >
-         				  <h:outputText />
+         				  <h:outputText value="#{slctdTb.delai}" />
 				        </p:column>		
 				         </p:dataTable>
                    </fieldset>
@@ -191,22 +320,23 @@
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend><small>PROPOSITION D'ATTRIBUTION</small></legend>
                    
-                   <p:dataTable var="slctdTb"  id="finance4" styleClass="table mb0 dt-on-steroids dataTable"  
+                   <p:dataTable var="slctdTb"  id="finance4" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.resultatPropAttributaire}" 
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
                          
-                          <p:column headerText="RANG" styleClass="col-sm-1" >
-         				  <h:outputText />
+                          <p:column headerText="LOT" styleClass="col-sm-1" >
+         				  <h:outputText value="#{slctdTb.lot}" />
 				        </p:column>	
 				        <p:column headerText="ENTREPRISE" styleClass="col-sm-7" >
-         				  <h:outputText />
+         				  <h:outputText value="#{slctdTb.entreprise}" />
 				        </p:column>
-				         <p:column headerText="SOUMISSION CORRIGEE" styleClass="col-sm-2" >
-         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+				         <p:column headerText="MONTANT" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.montant}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
 				        </p:column>	
 				         <p:column headerText="DELAI D'EXECUTION" styleClass="col-sm-2" >
-         				  <h:outputText />
-				        </p:column>		
+         				  <h:outputText value="#{slctdTb.delai}" />
+				        </p:column>	
 				         </p:dataTable>
                    </fieldset>
                    </div>
@@ -227,7 +357,7 @@
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer
 				      </p:commandLink>
 				      
-      <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com4')}" style="background-color: #f88b2e;" update=":content">
+      <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISJUG')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		

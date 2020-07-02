@@ -55,16 +55,23 @@ import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetailOffres;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VListePieceOffre;
+import com.sndi.model.VListeSouOffBasse;
+import com.sndi.model.VListeSouOffEleve;
 import com.sndi.model.VLot;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
+import com.sndi.model.VRecapSeuilAnormal;
+import com.sndi.model.VResultEvalClassLot;
+import com.sndi.model.VResultPropAttribLot;
 import com.sndi.model.VTypeMarcheFils;
+import com.sndi.model.VVerifOffin;
 import com.sndi.model.VbAnalyseOffre;
 import com.sndi.model.VbCommissionSpecifique;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamDetOffres;
 import com.sndi.model.VbTempParametreCom;
+import com.sndi.model.VVerifcorOffin;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -141,15 +148,16 @@ public class CommissionController {
 	private VCandidatDac candidat =new VCandidatDac();
 	private VCritereAnalyseDac sltCritere =new VCritereAnalyseDac();
 	
+	//Resutat analyse
+	 private List<VVerifcorOffin> listeVerifCor = new ArrayList<VVerifcorOffin>();
+	 private List<VListeSouOffBasse> listeSouOffBass = new ArrayList<VListeSouOffBasse>();
+	 private List<VListeSouOffEleve> listeSouOffEleve  = new ArrayList<VListeSouOffEleve>();
+	 private List<VResultEvalClassLot> resultatAttributaire = new ArrayList<VResultEvalClassLot>();
+	 private List<VResultPropAttribLot> resultatPropAttributaire = new ArrayList<VResultPropAttribLot>();
+	 private List<VRecapSeuilAnormal> listeRecapSeuil = new ArrayList<VRecapSeuilAnormal>();
+	 private VRecapSeuilAnormal infoSeuil =new VRecapSeuilAnormal();
+	 private TLotAao recupLot =new TLotAao();
 	
-	
-	 
-	 
-	 
-	 
-	 
-	 
-	 
 	 
 	 
 	 
@@ -207,6 +215,48 @@ public class CommissionController {
 	 //private long rabais
 	 
 	 
+	 
+	 //Resultat analyse*
+	//Vérification et correction des offres financières
+	 public void verifCor() {
+		 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+	 }
+	 
+	//Liste des soumissions anormalement élévées 
+	 public void offreEleve() {
+		 listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+	 }
+	 
+	 //Liste des soumissions anorlement basses
+	 public void offreBasse() {
+		 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+	 }
+	//
+		 public void offreResulatatAttrib() {
+			 resultatAttributaire = ((List<VResultEvalClassLot>)iservice.getObjectsByColumn("VResultEvalClassLot",new ArrayList<String>(Arrays.asList("RANG")),
+					 new WhereClause("LAA_NUM",Comparateur.EQ,""+recupLot.getLaaNum()),
+					 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+recupLot.getTDacSpecs().getDacCode())));
+		 }
+		 
+		 public void offreResultPropAttrib() {
+			 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
+					 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+recupLot.getTDacSpecs().getDacCode())));
+		 }
+		 
+		 
+		 public void detailSeuil() {
+			 listeRecapSeuil =  ((List<VRecapSeuilAnormal>)iservice.getObjectsByColumn("VRecapSeuilAnormal",new ArrayList<String>(Arrays.asList("DOF_LAA_ID")),
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+		       if (!listeRecapSeuil.isEmpty()) {
+		    	   infoSeuil=listeRecapSeuil.get(0); 
+  			} 
+		 }
+		 
+		
+	 //fin resultat analyse
 		//Liste des membres du commite d'evaluation
 	 public void chargeMembreCommite() {
 		 membresCommite.clear();
@@ -1042,6 +1092,12 @@ public class CommissionController {
 					break;
 				
 				case "com9":
+					verifCor();
+					offreBasse();
+					offreEleve();
+					offreResulatatAttrib();
+					offreResultPropAttrib();
+					detailSeuil();
 					break;
 			    }
 		     
@@ -1647,6 +1703,81 @@ public class CommissionController {
 
 	public void setSltCritere(VCritereAnalyseDac sltCritere) {
 		this.sltCritere = sltCritere;
+	}
+
+
+/*	public List<VVerifOffin> getListeVerifCor() {
+		return listeVerifCor;
+	}
+
+	public void setListeVerifCor(List<VVerifOffin> listeVerifCor) {
+		this.listeVerifCor = listeVerifCor;
+	}*/
+	
+	
+	public List<VVerifcorOffin> getListeVerifCor() {
+		return listeVerifCor;
+	}
+
+	public void setListeVerifCor(List<VVerifcorOffin> listeVerifCor) {
+		this.listeVerifCor = listeVerifCor;
+	}
+	
+
+	public List<VListeSouOffBasse> getListeSouOffBass() {
+		return listeSouOffBass;
+	}
+
+	public void setListeSouOffBass(List<VListeSouOffBasse> listeSouOffBass) {
+		this.listeSouOffBass = listeSouOffBass;
+	}
+
+	public List<VListeSouOffEleve> getListeSouOffEleve() {
+		return listeSouOffEleve;
+	}
+
+	public void setListeSouOffEleve(List<VListeSouOffEleve> listeSouOffEleve) {
+		this.listeSouOffEleve = listeSouOffEleve;
+	}
+
+	public TLotAao getRecupLot() {
+		return recupLot;
+	}
+
+	public void setRecupLot(TLotAao recupLot) {
+		this.recupLot = recupLot;
+	}
+
+	public List<VResultEvalClassLot> getResultatAttributaire() {
+		return resultatAttributaire;
+	}
+
+	public void setResultatAttributaire(List<VResultEvalClassLot> resultatAttributaire) {
+		this.resultatAttributaire = resultatAttributaire;
+	}
+
+	public List<VResultPropAttribLot> getResultatPropAttributaire() {
+		return resultatPropAttributaire;
+	}
+
+	public void setResultatPropAttributaire(List<VResultPropAttribLot> resultatPropAttributaire) {
+		this.resultatPropAttributaire = resultatPropAttributaire;
+	}
+
+	public List<VRecapSeuilAnormal> getListeRecapSeuil() {
+		return listeRecapSeuil;
+	}
+
+	public void setListeRecapSeuil(List<VRecapSeuilAnormal> listeRecapSeuil) {
+		this.listeRecapSeuil = listeRecapSeuil;
+	}
+
+	public VRecapSeuilAnormal getInfoSeuil() {
+		return infoSeuil;
+	}
+
+	public void setInfoSeuil(VRecapSeuilAnormal infoSeuil) {
+		this.infoSeuil = infoSeuil;
 	}
 
 }
