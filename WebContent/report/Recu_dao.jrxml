@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-17T20:34:59 -->
+<!-- 2020-07-01T19:58:30 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Recu_dao" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dfc941c-9bce-456e-b151-0f0b4eefdd5f">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -11,7 +11,7 @@
 	<parameter name="param_nom" class="java.lang.String"/>
 	<parameter name="param_prenom" class="java.lang.String"/>
 	<queryString language="SQL">
-		<![CDATA[select distinct dc.dac_code,dc.dac_objet,v.ven_paie_code,dv.dve_cout,dv.dve_cout_lettre,can.can_nom ||' ' ||can.can_prenoms candidat,can.can_tel,f.fon_libelle||' '||op.ope_matricule fonlibelle,hd.hac_date
+		<![CDATA[select distinct dc.dac_code,dc.dac_objet,v.ven_paie_code,dv.dve_cout,dv.dve_cout_lettre,can.can_nom ||' ' ||can.can_prenoms candidat,can.can_sou_ncc,can.can_sou_sigle_ste,can.can_tel,f.fon_libelle||' '||op.ope_matricule fonlibelle,hd.hac_date
 from t_dac_specs dc, t_candidats can, t_vente_dac v, t_detail_vente dv, t_histo_dac hd,t_fonction f, t_assignation a, t_operateur op
 where dc.dac_code = hd.hac_dac_code
 and hd.hac_fon_cod = f.fon_cod
@@ -32,6 +32,8 @@ and can.can_prenoms = $P{param_prenom}]]>
 	<field name="DVE_COUT" class="java.math.BigDecimal"/>
 	<field name="DVE_COUT_LETTRE" class="java.lang.String"/>
 	<field name="CANDIDAT" class="java.lang.String"/>
+	<field name="CAN_SOU_NCC" class="java.lang.String"/>
+	<field name="CAN_SOU_SIGLE_STE" class="java.lang.String"/>
 	<field name="CAN_TEL" class="java.lang.String"/>
 	<field name="FONLIBELLE" class="java.lang.String"/>
 	<field name="HAC_DATE" class="java.sql.Timestamp"/>
@@ -109,9 +111,9 @@ and can.can_prenoms = $P{param_prenom}]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="409" splitType="Stretch">
+		<band height="432" splitType="Stretch">
 			<staticText>
-				<reportElement x="39" y="20" width="93" height="20" uuid="1b94e0c4-085c-405c-b77b-ab6ee944c7ca">
+				<reportElement x="39" y="31" width="93" height="20" uuid="1b94e0c4-085c-405c-b77b-ab6ee944c7ca">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -122,7 +124,7 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<text><![CDATA[M. \  Mme \ Mlle :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="134" y="20" width="295" height="20" uuid="d9f7e65a-1fd9-404d-bb87-249b6575a41f">
+				<reportElement x="133" y="31" width="346" height="20" uuid="d9f7e65a-1fd9-404d-bb87-249b6575a41f">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -133,7 +135,7 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<textFieldExpression><![CDATA[$F{CANDIDAT}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="39" y="43" width="68" height="18" uuid="0bd62ee2-3161-40d7-88cb-0ceeabb6ca45">
+				<reportElement x="39" y="73" width="68" height="18" uuid="0bd62ee2-3161-40d7-88cb-0ceeabb6ca45">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -142,7 +144,7 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<text><![CDATA[Téléphone :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="108" y="43" width="319" height="25" uuid="b90ac5c3-1618-4bcc-ae3b-d6cdb9c05e8c">
+				<reportElement x="108" y="73" width="372" height="25" uuid="b90ac5c3-1618-4bcc-ae3b-d6cdb9c05e8c">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -151,7 +153,7 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<textFieldExpression><![CDATA[$F{CAN_TEL}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="40" y="308" width="200" height="22" uuid="a4d4d97b-c046-4175-99c6-44fef42f81f8">
+				<reportElement x="33" y="334" width="200" height="22" uuid="a4d4d97b-c046-4175-99c6-44fef42f81f8">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textElement>
@@ -160,63 +162,63 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<text><![CDATA[Le présent état arreté à la somme de ]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="90" y="347" width="100" height="24" uuid="cbbde944-77a6-456b-8089-f266a8e50598"/>
+				<reportElement x="83" y="373" width="100" height="24" uuid="cbbde944-77a6-456b-8089-f266a8e50598"/>
 				<textFieldExpression><![CDATA[TODAY( )]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="38" y="345" width="109" height="14" uuid="2882bf68-b01d-41e5-bc92-1f785fdfda32"/>
+				<reportElement x="31" y="371" width="109" height="14" uuid="2882bf68-b01d-41e5-bc92-1f785fdfda32"/>
 				<text><![CDATA[Imprimé le]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="240" y="310" width="230" height="21" uuid="f135f642-341c-41a6-8692-2052d00a2c7a"/>
+				<reportElement x="233" y="336" width="230" height="21" uuid="f135f642-341c-41a6-8692-2052d00a2c7a"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DVE_COUT_LETTRE}+" Francs CFA ."]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="340" y="343" width="210" height="15" uuid="f2502bac-40ad-4080-9ded-90e44a3e0ba2">
+				<reportElement x="333" y="369" width="210" height="15" uuid="f2502bac-40ad-4080-9ded-90e44a3e0ba2">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 				<textFieldExpression><![CDATA["Abidjan, le "+new SimpleDateFormat("dd-MM-yyyy").format($F{HAC_DATE})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="310" y="371" width="246" height="22" uuid="0a8ebfeb-cadf-4bf4-8520-d45dcee780b4"/>
+				<reportElement x="303" y="397" width="246" height="22" uuid="0a8ebfeb-cadf-4bf4-8520-d45dcee780b4"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[Visa de l'Autorité Contractante]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="37" y="372" width="164" height="30" uuid="b216368a-0f62-4615-a450-88ae65dbda0b"/>
+				<reportElement x="30" y="398" width="164" height="30" uuid="b216368a-0f62-4615-a450-88ae65dbda0b"/>
 				<textFieldExpression><![CDATA["Par "+$F{FONLIBELLE}]]></textFieldExpression>
 			</textField>
 			<rectangle>
-				<reportElement x="20" y="87" width="491" height="161" uuid="2ddaeeb6-b7dd-41e6-882a-046f42283cea">
+				<reportElement x="20" y="128" width="491" height="161" uuid="2ddaeeb6-b7dd-41e6-882a-046f42283cea">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 				</reportElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="22" y="99" width="100" height="23" uuid="87c1960d-fd22-40e2-bbff-4c51ca696a7c"/>
+				<reportElement x="22" y="140" width="100" height="23" uuid="87c1960d-fd22-40e2-bbff-4c51ca696a7c"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Désignation]]></text>
 			</staticText>
 			<line>
-				<reportElement x="20" y="123" width="491" height="1" uuid="b97e3ddc-5033-4793-9ac6-c9313abbefe8"/>
+				<reportElement x="20" y="164" width="491" height="1" uuid="b97e3ddc-5033-4793-9ac6-c9313abbefe8"/>
 			</line>
 			<staticText>
-				<reportElement x="22" y="148" width="177" height="34" uuid="fea6848c-41c2-418e-8843-4c7dc5c92dd8"/>
+				<reportElement x="22" y="189" width="177" height="34" uuid="fea6848c-41c2-418e-8843-4c7dc5c92dd8"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Dossier d'Appel d'Offres N°]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="175" y="148" width="222" height="30" uuid="47df8447-382a-45ee-8943-6f08be6357c5">
+				<reportElement x="175" y="189" width="222" height="30" uuid="47df8447-382a-45ee-8943-6f08be6357c5">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -226,51 +228,51 @@ and can.can_prenoms = $P{param_prenom}]]>
 				<textFieldExpression><![CDATA[$F{DAC_CODE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="397" y="165" width="112" height="30" uuid="38dcdb7b-2f5b-404e-b06e-847299e32499"/>
+				<reportElement x="397" y="206" width="112" height="30" uuid="38dcdb7b-2f5b-404e-b06e-847299e32499"/>
 				<textElement textAlignment="Right">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DVE_COUT})]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="404" y="100" width="100" height="23" uuid="0fa9955d-a862-4ea6-aa74-c314485f2e2d"/>
+				<reportElement x="404" y="141" width="100" height="23" uuid="0fa9955d-a862-4ea6-aa74-c314485f2e2d"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Montant (FCFA)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="337" y="249" width="62" height="30" uuid="26f57a7e-a9a5-4809-b9e4-1094c8e0295a"/>
+				<reportElement x="337" y="290" width="62" height="30" uuid="26f57a7e-a9a5-4809-b9e4-1094c8e0295a"/>
 				<textElement>
 					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="398" y="250" width="112" height="30" uuid="8dd2d36d-81d8-4c0c-85f7-82285186ff52"/>
+				<reportElement x="398" y="291" width="112" height="30" uuid="8dd2d36d-81d8-4c0c-85f7-82285186ff52"/>
 				<textElement textAlignment="Right">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{DVE_COUT})]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="399" y="87" width="1" height="196" uuid="a56132e5-2f01-46a5-a77a-0e6d1afb861f"/>
+				<reportElement x="399" y="128" width="1" height="196" uuid="a56132e5-2f01-46a5-a77a-0e6d1afb861f"/>
 			</line>
 			<line>
-				<reportElement x="511" y="247" width="1" height="35" uuid="1220b36b-f636-4028-bc98-c888e424df2e"/>
+				<reportElement x="511" y="288" width="1" height="35" uuid="1220b36b-f636-4028-bc98-c888e424df2e"/>
 			</line>
 			<line>
-				<reportElement x="399" y="282" width="113" height="1" uuid="805804ca-2086-4c02-b314-237d6bc22056"/>
+				<reportElement x="399" y="323" width="113" height="1" uuid="805804ca-2086-4c02-b314-237d6bc22056"/>
 			</line>
 			<staticText>
-				<reportElement x="22" y="182" width="44" height="27" uuid="1d4f6983-1bc5-4bf0-81be-b27a8920123d"/>
+				<reportElement x="22" y="223" width="44" height="27" uuid="1d4f6983-1bc5-4bf0-81be-b27a8920123d"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<text><![CDATA[Objet :]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="65" y="182" width="332" height="48" uuid="031af476-41b6-4c3b-be38-2a386e831144">
+				<reportElement x="65" y="223" width="332" height="48" uuid="031af476-41b6-4c3b-be38-2a386e831144">
 					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
@@ -278,6 +280,50 @@ and can.can_prenoms = $P{param_prenom}]]>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{DAC_OBJET}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="134" y="10" width="345" height="20" uuid="bec069b0-78e3-4de4-b665-dc198abcfa9b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAN_SOU_NCC}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="10" width="93" height="20" uuid="7cceb07a-2778-4345-9ef6-9dbbe2630b83">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[NCC :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="52" width="93" height="20" uuid="c6ff797a-9641-4742-b4d2-4b301685ffe3">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Sigle :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="134" y="52" width="345" height="20" uuid="8a338cad-9727-4faf-a15c-aaf9135c042b">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CAN_SOU_SIGLE_STE}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

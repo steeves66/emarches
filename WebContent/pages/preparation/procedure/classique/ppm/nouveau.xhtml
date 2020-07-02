@@ -1580,15 +1580,7 @@
 					<div class="row">
 						 <div class="col-md-6">
 						 
-				    <!-- <div class="input-group input-group-sm col-md-12">
-					    <span class="input-group-btn">
-				        <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
-				        </span>
-                      <p:inputText  type="text" value="#{ppmController.filtreModePassation}" id="filtrePass"  placeholder="saisir la date de Publication" styleClass="gui-input" style="width: 100%"  /> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
-                         </span>
-					 </div> -->
+				    
 						 
 						</div>
 						</div>
@@ -1597,8 +1589,8 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleDateP" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeDatePub}"
-						 selectionMode="single" rowKey="#{slctdTb.datepub}"
-			               emptyMessage="Aucune date de Publication enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+						 selectionMode="single" rowKey="#{slctdTb.datepub}"  scrollable="true" scrollHeight="120"
+			               emptyMessage="Aucune date de Publication enregistrée" >
 			               
 							
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
