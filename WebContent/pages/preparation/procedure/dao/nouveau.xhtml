@@ -1450,18 +1450,23 @@
 		       <div class="row">
                    <div class="form-group">
                   <label  class="col-sm-1 control-label">Critère</label>
-				  <div class="col-sm-11">
+				  <div class="col-sm-10">
 				   <p:selectOneMenu id="cri" value="#{daoController.craCode}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
 			       <f:selectItems value="#{daoController.listeCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.craCode}" /> 
        		        </p:selectOneMenu> 
                   </div>
+                  <div class="col-sm-1">
+				                  <p:commandLink  oncomplete="PF('dlogCritereEntet').show()"  styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+											<span class="btn-label"><i class="fa fa-plus"></i></span>
+								  </p:commandLink>
+				                  </div>
                 </div>
                  <div class="form-group">
                   <label  class="col-sm-1 control-label">Detail</label>
 				  <div class="col-sm-11">
-                  <p:inputTextarea  value="#{daoController.newDetCritere.danLibelle}" rows="2" cols="5" styleClass="form-control" id="l6" style="width: 100%" />  
+                  <p:inputTextarea  value="#{daoController.newCritereDac.dcadLibAjust}" rows="2" cols="5" styleClass="form-control" id="l6" style="width: 100%" />  
                   </div>
                 </div>
                 </div>
@@ -1519,6 +1524,51 @@
 					
 					      <div class="pull-right ">
 			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveExpert()}" oncomplete="PF('dlogExp').hide()" update="gnl:tbMbr">
+			             <i class="ace-icon fa fa-save"></i> Ajouter
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+         
+		
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    
+     <h:form id="dlogCritereEntet" styleClass="form-horizontal">
+	  <p:dialog  widgetVar="dlogCritereEntet" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">AJOUITER UN NOUVEAU CRITERE</div>
+         </div>
+         <div class="box-body">
+              
+		       <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libellé</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.newCritereDac.dcadLibAjust}" rows="2" cols="5" styleClass="form-control" style="width: 100%" />  
+                  </div>
+                </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveExpert()}" oncomplete="PF('dlogCritereEntet').hide()" update="gnl:tbMbr">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
                      </div>

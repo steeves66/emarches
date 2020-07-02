@@ -524,12 +524,22 @@ public class DaoController {
 	 }
 	 
 	 public void saveDetailCritere() {
-		 newDetCritere.setDanCraCode((craCode));
+		/* newDetCritere.setDanCraCode((craCode));
 		 newDetCritere.setDanDteSaisie(Calendar.getInstance().getTime());
 		 newDetCritere.setDanFonCodeAc(userController.getSlctd().getTFonction().getFonCod());
 		 newDetCritere.setDanOpeSaisie(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 newDetCritere.setDanStatut("1");
-		iservice.addObject(newDetCritere); 
+		iservice.addObject(newDetCritere); */
+		 
+		 
+		 newCritereDac.setDcadDacCode(dao.getDacCode());
+		 newCritereDac.setDcadDanCraCode(craCode);
+		 //Code du detail
+		 newCritereDac.setDcadDanCode("AUTRE");
+		 newCritereDac.setDcadDteSaisie(Calendar.getInstance().getTime());
+		 newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
+		 newCritereDac.setDcadStatut("0");
+		 iservice.addObject(newCritereDac);
 		chargeCritere();
 	 }
 	 
