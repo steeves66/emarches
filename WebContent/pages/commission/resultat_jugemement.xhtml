@@ -1,0 +1,246 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{commissionController.slctdTd.aaoCode}
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>JUGEMENT | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>JUGEMENT  
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+    <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+     <div class="box"></div>
+    <div class="box box-success">
+            
+              <div class="box-body">
+              <div class="row">
+             
+            
+            <div class="col-md-12">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">I-EVALUATION ET CORRECTION DES OFFRES FINANCIERES</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	              <div class="box-body">
+                <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable"  
+                 scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
+                         
+                          <p:column headerText="N°" styleClass="col-sm-1" >
+         				  <h:outputText />
+				        </p:column>	
+				        <p:column headerText="Soumissionnaire" styleClass="col-sm-5" >
+         				  <h:outputText />
+				        </p:column>
+				         <p:column headerText="Erreur constatée" styleClass="col-sm-2" >
+         				  <h:outputText />
+				        </p:column>	
+				         <p:column headerText="Montant corrigé" styleClass="col-sm-1" >
+         				  <h:outputText />
+				        </p:column>		
+                        <p:column headerText="Commentaire" styleClass="col-sm-3" >
+         				  <h:outputText />
+				        </p:column>			        
+				      
+				         </p:dataTable>
+				         
+                 
+	            </div>
+	           </div>
+            </div>
+            
+            
+            
+            <div class="col-md-6">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">II - LISTE DES SOUMISSIONS ANAORMALEMENT ELEVEES</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	              <div class="box-body">
+                <p:dataTable var="slctdTb"  id="finance1" styleClass="table mb0 dt-on-steroids dataTable"  
+                 scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
+                         
+                          <p:column headerText="N°" styleClass="col-sm-1" >
+         				  <h:outputText />
+				        </p:column>	
+				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-7" >
+         				  <h:outputText />
+				        </p:column>
+				         <p:column headerText="SOUMMISSION CORRIGEE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  </h:outputText>
+				        </p:column>	
+				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-2" >
+         				  <h:outputText />
+				        </p:column>		
+				         </p:dataTable>
+				         
+                 
+	            </div>
+	           </div>
+            </div>
+            
+            
+            
+            <div class="col-md-6">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">III - LISTE DES SOUMISSIONS ANAORMALEMENT BASSES</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	              <div class="box-body">
+                <p:dataTable var="slctdTb"  id="finance2" styleClass="table mb0 dt-on-steroids dataTable"  
+                 scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
+                         
+                          <p:column headerText="N°" styleClass="col-sm-1" >
+         				  <h:outputText />
+				        </p:column>	
+				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-7" >
+         				  <h:outputText />
+				        </p:column>
+				         <p:column headerText="SOUMMISSION CORRIGEE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  </h:outputText>
+				        </p:column>	
+				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-2" >
+         				  <h:outputText />
+				        </p:column>		
+				         </p:dataTable>
+				         
+                 
+	            </div>
+	           </div>
+            </div>
+            
+                      <div class="col-md-12">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">IV - RESULTAT DE L'EVALUATION</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	              <div class="box-body">
+	              
+	              <div class="col-md-6 align justify-content-center">
+                   <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend><small>CLASSEMENT DES OFFRES PAR LOT</small></legend>
+                    <p:dataTable var="slctdTb"  id="finance3" styleClass="table mb0 dt-on-steroids dataTable"  
+                 scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
+                          <p:column headerText="RANG" styleClass="col-sm-1" >
+         				  <h:outputText />
+				        </p:column>	
+				        <p:column headerText="ENTREPRISE" styleClass="col-sm-7" >
+         				  <h:outputText />
+				        </p:column>
+				         <p:column headerText="SOUMISSION CORRIGEE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  </h:outputText>
+				        </p:column>	
+				         <p:column headerText="DELAI D'EXECUTION" styleClass="col-sm-2" >
+         				  <h:outputText />
+				        </p:column>		
+				         </p:dataTable>
+                   </fieldset>
+                   </div>
+                   
+                    <div class="col-md-6 align justify-content-center">
+                   <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend><small>PROPOSITION D'ATTRIBUTION</small></legend>
+                   
+                   <p:dataTable var="slctdTb"  id="finance4" styleClass="table mb0 dt-on-steroids dataTable"  
+                 scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
+                         
+                          <p:column headerText="RANG" styleClass="col-sm-1" >
+         				  <h:outputText />
+				        </p:column>	
+				        <p:column headerText="ENTREPRISE" styleClass="col-sm-7" >
+         				  <h:outputText />
+				        </p:column>
+				         <p:column headerText="SOUMISSION CORRIGEE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  </h:outputText>
+				        </p:column>	
+				         <p:column headerText="DELAI D'EXECUTION" styleClass="col-sm-2" >
+         				  <h:outputText />
+				        </p:column>		
+				         </p:dataTable>
+                   </fieldset>
+                   </div>
+                   
+                
+				         
+                 
+	            </div>
+	           </div>
+            </div>
+             </div>
+            
+            </div>
+            
+            <!-- /.box-body -->
+          </div>
+           <p:commandLink action="#{commissionController.validerJugement()}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer
+				      </p:commandLink>
+				      
+      <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com4')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+    </section>
+    </h:form>
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

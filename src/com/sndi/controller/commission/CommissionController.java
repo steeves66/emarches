@@ -1040,7 +1040,12 @@ public class CommissionController {
 					chargeMembreCommite();
 					chargeMembre();
 					break;
-			    }		    
+				
+				case "com9":
+					break;
+			    }
+		     
+		     
 		     
 		    return userController.renderPage(value);   
 		    

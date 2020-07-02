@@ -6481,6 +6481,10 @@ public class ControleController {
 											    			type = "Commission";
 											    			libelle="JUGEMENT DES OFFRES";	
 											    		}else
+											    			if(action.equalsIgnoreCase("RESJUG")) {
+												    			type = "Commission";
+												    			libelle="EVALUATION FINANCIERE DES OFFRES DU LOT N°";	
+												    		}else
 											    			
 											    			//DEBUT GESTION DES PROCEDURES DERROGATOIRES
 											    			if(action.equalsIgnoreCase("LISDEMSAI")) {

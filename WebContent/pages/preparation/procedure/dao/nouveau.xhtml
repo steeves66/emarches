@@ -659,7 +659,7 @@
                </div>
 	            <!-- /.box-header -->
 	                  <div class="box-body">    
-                 <p:dataTable var="slctdTb"   styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereAnalyse}" 
+                 <p:dataTable var="slctdTb" id="tbCritSelect" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereAnalyse}" 
                 selection="#{daoController.selectionlisteCritereAnalyse}" scrollable="true" scrollHeight="550" rowKey="#{slctdTb.craCode}" emptyMessage="Aucun critère trouvé">
                            <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 				         <p:column headerText="CRITERES" styleClass="col-sm-12">
@@ -1574,47 +1574,7 @@
     
     
     
-     <h:form id="dlogCritereEntet" styleClass="form-horizontal">
-	  <p:dialog  widgetVar="dlogCritereEntet" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
-	    <div class="row">    
-            <div class="col-md-12">
-                    <div class="box box-success box-solid">
-        <div class="box-header with-border">
-            <div  style="color: #fff">AJOUITER UN NOUVEAU CRITERE</div>
-         </div>
-         <div class="box-body">
-              
-		       <div class="form-group">
-                  <label  class="col-sm-1 control-label">Libellé</label>
-				  <div class="col-sm-11">
-                  <p:inputTextarea  value="#{daoController.newCritereDac.dcadLibAjust}" rows="2" cols="5" styleClass="form-control" style="width: 100%" />  
-                  </div>
-                </div>
-                
-                </div>
-                 <div class="row">    
-	             <div class="col-sm-8"></div>
-	              <div class="col-sm-4">  
-					
-					      <div class="pull-right ">
-			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveExpert()}" oncomplete="PF('dlogCritereEntet').hide()" update="gnl:tbMbr">
-			             <i class="ace-icon fa fa-save"></i> Ajouter
-			            </p:commandLink>
-                     </div>
-                     
-                     
-                   </div>
-              </div>
-         </div>
-         
-		          
-              
-         </div>
-         </div>
-         
-		
-      </p:dialog>
-    </h:form>
+     
     
     <h:form id="dlogCritereEntet" styleClass="form-horizontal">
 	  <p:dialog  widgetVar="dlogCritereEntet" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
