@@ -742,8 +742,8 @@ public class DaoController {
 		 public void typeActionTb() {
 			 if(controleController.type == "DAC" && controleController.typePlan == "PN") {
 				 tableauBordController.ChargeTableauBordDac("PN","DAO");
-				 //Enlever lorsque j'aurai le TB cpmp et DMP
-	    		 tableauBordController.ChargeTableauBordDac("PN","DAO");
+				//Enlever lorsque j'aurai le TB cpmp et DMP
+				 tableauBordController.chargeDataDao("PN","DAO");
 	    		 
 			 }else {
 				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {

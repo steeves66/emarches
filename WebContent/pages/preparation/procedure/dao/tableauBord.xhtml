@@ -28,7 +28,8 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.saisi}</h3>
+              <!-- <h3>#{tableauBordController.tableauBord.saisi}</h3> -->
+              <h3>#{tableauBordController.daoAcSaisie}</h3>
 
               <p>#{controleController.type} en attente de transmission</p>
             </div>
@@ -45,7 +46,8 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.transAc}</h3>
+              <!-- <h3>#{tableauBordController.tableauBord.transAc}</h3> -->
+              <h3>#{tableauBordController.daoAcTransmis}</h3>
 
               <p>#{controleController.type} Transmis</p>
             </div>
@@ -63,7 +65,8 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.tableauBord.difPf}</h3> 
+              <!-- <h3>#{tableauBordController.tableauBord.difPf}</h3>  -->
+              <h3>#{tableauBordController.daoCpDifCpmp}</h3> 
 
               <p>#{controleController.type} Differé(s)</p>
             </div>
@@ -378,6 +381,55 @@
             <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div> 
+        <!-- ./col -->
+      </div>
+                    </div>
+                  </div>
+       </h:panelGroup>
+       
+       
+     
+       <h:panelGroup rendered="#{controleController.panelDaoTableauBordPubCsv}">
+                     <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row"> 
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvAttPub}</h3>
+
+              <p>#{controleController.type} en attente de Publication</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
+					 <i class="fa fa-arrow-circle-right"></i>		
+						  </p:commandLink>
+          </div>
+        </div>
+        <!-- ./col -->
+        
+        
+        <!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>#{tableauBordController.daoCsvPub}</h3>
+
+              <p>#{controleController.type} publié(s)</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+             <p:commandLink  oncomplete="PF('detailDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
+          </div>
+        </div>
         <!-- ./col -->
       </div>
                     </div>
