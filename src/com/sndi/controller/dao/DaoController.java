@@ -73,6 +73,7 @@ import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAdresse;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCritereAnalyse;
+import com.sndi.model.VCritereAnalyseDac;
 import com.sndi.model.VCritereAnalyseModel;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDacliste;
@@ -211,7 +212,8 @@ public class DaoController {
 	private List<VCritereAnalyseModel> listeCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VCritereAnalyseModel> selectionlisteCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
-	private List<VbDetCritAnalyseDac > listeCritereSaisie = new ArrayList<VbDetCritAnalyseDac >();
+	//private List<VbDetCritAnalyseDac > listeCritereSaisie = new ArrayList<VbDetCritAnalyseDac >();
+	 private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
 	//private List<VbDetCritAnalyse> selectionDetCritere = new ArrayList<VbDetCritAnalyse>();
 
 	 
@@ -481,8 +483,12 @@ public class DaoController {
 	 
 	 //Liste des critères saisie
 	 public void chargeCritereSaisie() { 
-		 listeCritereSaisie= (List<VbDetCritAnalyseDac>) iservice.getObjectsByColumn("VbDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_DAN_CODE")),
-					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+	/*	 listeCritereSaisie= (List<VbDetCritAnalyseDac>) iservice.getObjectsByColumn("VbDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_DAN_CODE")),
+					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));*/
+		 
+		 listeCritereSaisie.clear();
+		 listeCritereSaisie = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac",
+				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode())));
 		 _logger.info("liste critere saisie: "+listeCritereSaisie.size());
 	 }
 	 
@@ -520,8 +526,8 @@ public class DaoController {
 	 public void saveDetailCritere() {
 		 newDetCritere.setDanCraCode((craCode));
 		 newDetCritere.setDanDteSaisie(Calendar.getInstance().getTime());
-		 newDetCritere.setDanFonCodeAc(userController.getSlctdTb().getTFonction().getFonCod());
-		 newDetCritere.setDanOpeSaisie(userController.getSlctdTb().getTOperateur().getOpeMatricule());
+		 newDetCritere.setDanFonCodeAc(userController.getSlctd().getTFonction().getFonCod());
+		 newDetCritere.setDanOpeSaisie(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 newDetCritere.setDanStatut("1");
 		iservice.addObject(newDetCritere); 
 		chargeCritere();
@@ -1495,7 +1501,8 @@ public class DaoController {
 					 public void chargeMembreCommission() {
 						 membresCommission = ((List<VbCommissionType>)iservice.getObjectsByColumn("VbCommissionType",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 								    new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
-								    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
+								    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ"),
+								    new WhereClause("TCT_TITRE",Comparateur.NEQ,"EXPERT")));
 								_logger.info("membre size: "+membresCommission.size());	
 								
 								
@@ -5657,11 +5664,12 @@ public class DaoController {
 		this.selectionlisteCritereAnalyse = selectionlisteCritereAnalyse;
 	}
 
-	public List<VbDetCritAnalyseDac > getListeCritereSaisie() {
+
+	public List<VCritereAnalyseDac> getListeCritereSaisie() {
 		return listeCritereSaisie;
 	}
 
-	public void setListeCritereSaisie(List<VbDetCritAnalyseDac > listeCritereSaisie) {
+	public void setListeCritereSaisie(List<VCritereAnalyseDac> listeCritereSaisie) {
 		this.listeCritereSaisie = listeCritereSaisie;
 	}
 

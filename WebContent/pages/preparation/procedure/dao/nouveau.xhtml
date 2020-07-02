@@ -670,7 +670,7 @@
                       <p:dataTable var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}"   
                 scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
                               <p:column headerText="CRITERES" styleClass="col-sm-12">
-		         				    <h:outputText value="#{slctdTb.dcadLibAjust}" />
+		         				    <h:outputText value="#{slctdTb.craLibelle}" />
                             </p:column>
                              <p:column headerText="Actions" width="4%">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLot}" title="Supprimer" update="gnl">
@@ -1437,7 +1437,7 @@
     </h:form>
     
     <h:form id="dlogCritere">
-	  <p:dialog  widgetVar="dlogCritere" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+	  <p:dialog  widgetVar="dlogCritere" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
 	    <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
