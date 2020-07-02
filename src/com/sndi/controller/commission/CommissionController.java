@@ -619,11 +619,11 @@ public class CommissionController {
                              sltCritere= listeCritereAnalyse.get(0);
                              _logger.info("valeur: "+sltCritere.getAaoRegQual());
                              
-                         	if(sltCritere.getAaoRegQual().equalsIgnoreCase("Conforme")) {
+                         	if(sltCritere.getAaoRegQual().equalsIgnoreCase("CONFORMITE")) {
                 				conformite=true;
                 				montant =false;
                 			}else
-                				if(sltCritere.getAaoRegQual().equalsIgnoreCase("Score")) {
+                				if(sltCritere.getAaoRegQual().equalsIgnoreCase("SCORE")) {
                 					montant =true;
                 					conformite=false;
                 				}else
