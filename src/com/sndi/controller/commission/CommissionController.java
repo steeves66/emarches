@@ -775,37 +775,40 @@ public class CommissionController {
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 			//newAnalyseOffre.setAnfValeur("0");
 			 			iservice.addObject(newAnalyseOffre);
-				     }	
-		 }
-				 
-				
-			  //enregister la liste des pièces du dao
-		    
-		    	if (listeSelectionPiecesOffres.size()==0) {
-						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
-					}
-			 		else{
-				 		for(VPiecesOffre ligne : listeSelectionPiecesOffres) {
-				 			newPieceOffre.setPofDteSaisi(Calendar.getInstance().getTime());
-				 			newPieceOffre.setPofPresent("O");
-				 			newPieceOffre.setPofTypeAct("COJO");  
-				 			newPieceOffre.setTDacSpecs(ligne.getOpdDacCode());
-				 			newPieceOffre.setTOperateur(userController.getSlctd().getTOperateur());
-				 			newPieceOffre.setTTypePieceOffre(ligne.getTpoCode());
-				 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
-				 			//A revoir
-				 			//newPieceOffre.setTDetOffres(newOffre.getDofNum());
-				 			newPieceOffre.setTLotAao(laaId);
-				 			iservice.addObject(newPieceOffre);
-					     }	
-			 }
-		     
-		    	vider();
-		    	chargeOffres();		    	
-		    	userController.setTexteMsg("Ouverture effectuée avec succès !");
-				userController.setRenderMsg(true);
-				userController.setSevrityMsg("success");	
+				     }
+			 		
+			 		
+			 		
+					  //enregister la liste des pièces du dao
+				    
+				    	if (listeSelectionPiecesOffres.size()==0) {
+								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+							}
+					 		else{
+						 		for(VPiecesOffre ligne : listeSelectionPiecesOffres) {
+						 			newPieceOffre.setPofDteSaisi(Calendar.getInstance().getTime());
+						 			newPieceOffre.setPofPresent("O");
+						 			newPieceOffre.setPofTypeAct("COJO");  
+						 			newPieceOffre.setTDacSpecs(ligne.getOpdDacCode());
+						 			newPieceOffre.setTOperateur(userController.getSlctd().getTOperateur());
+						 			newPieceOffre.setTTypePieceOffre(ligne.getTpoCode());
+						 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
+						 			//A revoir
+						 			//newPieceOffre.setTDetOffres(newOffre.getDofNum());
+						 			newPieceOffre.setTLotAao(laaId);
+						 			iservice.addObject(newPieceOffre);
+							     }	
+					 }
+				     
+				    	vider();
+				    	chargeOffres();		    	
+				    	userController.setTexteMsg("Ouverture effectuée avec succès !");
+						userController.setRenderMsg(true);
+						userController.setSevrityMsg("success");
+		    }	
 		}
+		
+		
 		
 		
 		public int nonbreLot(){
