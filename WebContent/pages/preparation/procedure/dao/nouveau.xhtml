@@ -1478,7 +1478,7 @@
 				   <p:selectOneMenu id="critereEntete" value="#{daoController.craCode}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
-			       <f:selectItems value="#{daoController.listeCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.craCode}" /> 
+			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.craCode}" /> 
        		        </p:selectOneMenu> 
                   </div>
                   <div class="col-sm-1">

@@ -72,6 +72,7 @@ import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAdresse;
 import com.sndi.model.VCommissionTypeExp;
+import com.sndi.model.VCritAnalDacEntete;
 import com.sndi.model.VCritereAnalyse;
 import com.sndi.model.VCritereAnalyseDac;
 import com.sndi.model.VCritereAnalyseModel;
@@ -212,7 +213,7 @@ public class DaoController {
 	private List<VCritereAnalyseModel> listeCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VCritereAnalyseModel> selectionlisteCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
-	//private List<VbDetCritAnalyseDac > listeCritereSaisie = new ArrayList<VbDetCritAnalyseDac >();
+	private List<VCritAnalDacEntete> listeEnteteCritere = new ArrayList<VCritAnalDacEntete >();
 	 private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
 	//private List<VbDetCritAnalyse> selectionDetCritere = new ArrayList<VbDetCritAnalyse>();
 
@@ -518,9 +519,8 @@ public class DaoController {
 		//Combo box critère
 	 
 	 public void chargeCritereCombobox() {
-		 listeCritere= (List<VbCritereAnalyse>) iservice.getObjectsByColumn("VbCritereAnalyse", new ArrayList<String>(Arrays.asList("CRA_LIBELLE"))//s,
-					/*new WhereClause("CRA_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTOperateur().getOpeMatricule()),
-					new WhereClause("CRA_STATUT",WhereClause.Comparateur.EQ,"1")*/);
+		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
+					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		 
 	 }
 	 
@@ -5720,6 +5720,14 @@ public class DaoController {
 
 	public void setNewEnteteCritere(VbCritereAnalyse newEnteteCritere) {
 		this.newEnteteCritere = newEnteteCritere;
+	}
+
+	public List<VCritAnalDacEntete> getListeEnteteCritere() {
+		return listeEnteteCritere;
+	}
+
+	public void setListeEnteteCritere(List<VCritAnalDacEntete> listeEnteteCritere) {
+		this.listeEnteteCritere = listeEnteteCritere;
 	}
 	
 		

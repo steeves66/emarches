@@ -19,6 +19,7 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_CRITERE_ANALYSE_DAC")
 public class VCritereAnalyseDac implements java.io.Serializable {
 
+	private BigDecimal RId;
 	private String craCode;
 	private String craLibelle;
 	private String codparent;
@@ -35,9 +36,10 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 	public VCritereAnalyseDac() {
 	}
 
-	public VCritereAnalyseDac(String craCode, String craLibelle, String codparent, String codep, String craTymCodex,
+	public VCritereAnalyseDac(BigDecimal RId,String craCode, String craLibelle, String codparent, String codep, String craTymCodex,
 			String craTypProc, String craTypDac, String craBailleurx, String dcadDacCode,String aaoRegQual,
 			long valRegQual, BigDecimal dcadNum) {
+		this.RId = RId;
 		this.craCode = craCode;
 		this.craLibelle = craLibelle;
 		this.codparent = codparent;
@@ -54,6 +56,15 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 	}
 
 	@Id
+	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}
+	
 	@Column(name = "CRA_CODE", length = 20)
 	public String getCraCode() {
 		return this.craCode;
