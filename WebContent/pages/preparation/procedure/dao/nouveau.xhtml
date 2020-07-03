@@ -534,7 +534,8 @@
          				<p:column headerText="N°Lot" styleClass="col-sm-1">
 				            <h:outputText value="#{slctdTb.laaNum}"/>
 				        </p:column>
-				        <p:column headerText="LIBELLE" styleClass="col-sm-6">
+				        
+				        <p:column headerText="LIBELLE" styleClass="col-sm-5">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText value="#{slctdTb.laaObjet}" >
@@ -561,7 +562,7 @@
 		               </p:cellEditor>
 				        </p:column>
 				        
-				         <p:column headerText="Montant Estimatif" styleClass="col-sm-3">
+				         <p:column headerText="Montant Estimatif" styleClass="col-sm-2">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText value="#{slctdTb.laaMtEst}" >
@@ -1124,7 +1125,7 @@
     
    
     <h:form id="dlogLign">
-	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la ligne Budgétaire">
+	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="Selectionnez la ligne Budgétaire">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
@@ -1146,42 +1147,36 @@
 						  selectionMode="single" rowKey="#{slctdTb.lbgCode}"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-			               <p:column headerText="Code" styleClass="col-sm-4" >
-                           <h:commandLink id="nature" title="Code Ligne" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
-         				   <h:outputText value="#{slctdTb.lbgCode}" />
-                           <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
-                           </h:commandLink>
-				         </p:column>
 				         
-				          <p:column headerText="Imputation" styleClass="col-sm-6" >
+				          <p:column headerText="Imputation" styleClass="col-sm-3" >
                           <h:commandLink id="imputation" title="Imputation" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.lbgImputation}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
                           </h:commandLink>
 				          </p:column>	
 				        
-				        <p:column headerText="Nature" styleClass="col-sm-6" >
+				        <p:column headerText="Nature" styleClass="col-sm-3" >
                         <h:commandLink id="Nature" title="Nature de la ligne" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
          				<h:outputText value="#{slctdTb.natLibelle}" />
                         <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
                         </h:commandLink>
 				        </p:column>
 				        
-				        <p:column headerText="Dotation" styleClass="col-sm-6" >
+				        <p:column headerText="Dotation" styleClass="col-sm-3" >
                         <h:commandLink id="dotation" title="Dotation Totale" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
-         				<h:outputText value="#{slctdTb.lbgTotDot}" />
-                        <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}">
-                        <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-                        </f:setPropertyActionListener>
+         				<h:outputText value="#{slctdTb.lbgTotDot}" >
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				</h:outputText>
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
                         </h:commandLink>
 				        </p:column>	
 				        
-				        <p:column headerText="Disponible" styleClass="col-sm-6" >
+				        <p:column headerText="Disponible" styleClass="col-sm-3" >
                         <h:commandLink id="disponible" title="Montant Disponible" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
-         				<h:outputText value="#{slctdTb.lbgDisTot}" />
-                        <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" >
-                        <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-                        </f:setPropertyActionListener>
+         				<h:outputText value="#{slctdTb.lbgDisTot}" >
+         				<f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				</h:outputText>
+                        <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
                         </h:commandLink>
 				        </p:column>		
 				        	

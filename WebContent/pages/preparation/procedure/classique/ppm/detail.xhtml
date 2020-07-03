@@ -146,7 +146,9 @@
 				            </h:outputText>
 				        </p:column>
 				        <p:column headerText="Part Trésor" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fppPartTresor}" />
+				            <h:outputText value="#{slctdTb.fppPartTresor}" >
+				            <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				            </h:outputText>
 				        </p:column>
 				        
                  </p:dataTable>     
