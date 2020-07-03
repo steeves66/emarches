@@ -743,24 +743,27 @@ public class CommissionController {
 		
 		//Ouverture des offres
 		public void saveOuverture() {
-				newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
-				newOffre.setDofLaaId(laaId);
-				newOffre.setTempType("OFF");
-				newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-				newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
-				newOffre.setDofTyp(dofTyp);
-				//convertir le montant net en qui est en long en string
-				String montantOffre =String.valueOf(montN);
-				String rabais =String.valueOf(pourcentRab);
-				newOffre.setDofMtOfr(montantOffre);
-				newOffre.setDofRab(rabais);
-				iservice.addObject(newOffre);
+			
 				
 				//enregister dans T_analyse_offre
 				if (selectionCritereAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
 		 		else{
+		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
+					   newOffre.setDofLaaId(laaId);
+					   newOffre.setTempType("OFF");
+					   newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+					   newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
+					   newOffre.setDofTyp(dofTyp);
+					   //convertir le montant net en qui est en long en string
+					   String montantOffre =String.valueOf(montN);
+					   String rabais =String.valueOf(pourcentRab);
+					   newOffre.setDofMtOfr(montantOffre);
+					   newOffre.setDofRab(rabais);
+					   iservice.addObject(newOffre);
+		 			
+		 			
 			 		for(VCritereAnalyseDac ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			//newAnalyseOffre.setAnfDanCode(ligne.getDcadDanCode());
