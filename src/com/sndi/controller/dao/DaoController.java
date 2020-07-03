@@ -2034,7 +2034,8 @@ public class DaoController {
 				  
 				  public void chargeAdresse() { 
 					  listAdresse.clear();
-					  listAdresse =(List<TAdresseAvis>) iservice.getObjectsByColumn("TAdresseAvis", new ArrayList<String>(Arrays.asList("ADA_NUM")));
+					  listAdresse =(List<TAdresseAvis>) iservice.getObjectsByColumn("TAdresseAvis", new ArrayList<String>(Arrays.asList("ADA_NUM")),
+							  new WhereClause("ADA_FON_COD",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				  }
 				  
 				  //Detail Adresse modification
