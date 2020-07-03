@@ -214,7 +214,7 @@
 		                  <label class="col-sm-2 control-label">Montant lu</label>
 						  <div class="col-sm-4">
 				          <p:inputText id="montLu" type="text" styleClass="form-control text-right" value="#{commissionController.montLu}" style="width: 100%" >
-				          <p:ajax listener="#{commissionController.calculMontNet()}" event="blur" process="@this" update="montNet" /> 
+				          <p:ajax listener="#{commissionController.calculMontNet()}" event="blur" process="@this" update="montNet,gnl:montLu" /> 
 		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         	        </p:inputText>
 		                  </div>

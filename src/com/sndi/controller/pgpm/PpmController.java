@@ -172,6 +172,7 @@ public class PpmController {
 	     private List<VModelePrq> listePrq = new ArrayList<VModelePrq>(); 
 	     private List<VDatePub> listeDatePub = new ArrayList<VDatePub>();
 	     private List<VUpdateFinancementPpm> listeupdatefinance = new ArrayList<VUpdateFinancementPpm>();
+	    
 	     
 	     private List<VTypeStructConduc> listeTypStruConduc = new ArrayList<VTypeStructConduc>();
 	     private List<TStructure> listeStructures = new ArrayList<TStructure>();
@@ -574,7 +575,9 @@ public class PpmController {
 		 
 		 //liste des dates de publication
 		 public void chargeDatepub() {
-			 listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
+			 //listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
+			 listeDatePub.clear();
+			 listeDatePub= ((List<VDatePub>)iservice.getObjectsByColumn("VDatePub",new ArrayList<String>(Arrays.asList("DATEPUB"))));
 		 }
 		 
 		 

@@ -251,20 +251,22 @@
 					           <div class="row">
 					           <div class="col-sm-6">
 					            <div class="form-group">
-				                  <label  class="col-sm-4 control-label"> Montant lu </label>
+				                  <label for="Mtlu" class="col-sm-4 control-label"> Montant lu </label>
 				                  <div class="col-sm-7">
-				                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtOfr}" readonly="true" styleClass="form-control" style="width: 100%" >
+				                    <p:inputText type="text" id="Mtlu" value="#{commissionController.sltOffre.dofMtOfr}" readonly="true" styleClass="form-control" style="width: 100%" >
 				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    <p:ajax event="blur" global="false" process="@this" update="Mtlu" /> 
 				                    </p:inputText>
 				                  </div>
 				                </div>
 					           </div>
 					           <div class="col-sm-6">
 					            <div class="form-group">
-				                  <label  class="col-sm-5 control-label"> Montant Corrigé</label>
+				                  <label for="MtCor" class="col-sm-5 control-label"> Montant Corrigé</label>
 				                  <div class="col-sm-7">
-				                    <p:inputText type="text" value="#{commissionController.sltOffre.dofMtCor}" styleClass="form-control" style="width: 100%">
+				                    <p:inputText type="text" id="MtCor" value="#{commissionController.sltOffre.dofMtCor}" styleClass="form-control" style="width: 100%">
 				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                     <p:ajax event="blur" global="false" process="@this" update="MtCor" /> 
 				                    </p:inputText>
 				                  </div>
 				                </div>
