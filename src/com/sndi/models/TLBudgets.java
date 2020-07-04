@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -26,11 +26,11 @@ import javax.persistence.UniqueConstraint;
 public class TLBudgets implements java.io.Serializable {
 
 	private String lbgCode;
-	private TStructure TStructure;
 	private TGestions TGestions;
 	private TDestinations TDestinations;
 	private TFonction TFonctionByLbgFonCode;
 	private TFonction TFonctionByLbgFonCodeAc;
+	private TStructure TStructure;
 	private TNatures TNatures;
 	private BigDecimal lbgResDon;
 	private String lbgImputation;
@@ -86,12 +86,12 @@ public class TLBudgets implements java.io.Serializable {
 	public TLBudgets() {
 	}
 
-	public TLBudgets(String lbgCode, TStructure TStructure, TGestions TGestions, TNatures TNatures,
+	public TLBudgets(String lbgCode, TGestions TGestions, TStructure TStructure, TNatures TNatures,
 			BigDecimal lbgResDon, String lbgImputation, BigDecimal lbgResTr, BigDecimal lbgAeTr, BigDecimal lbgAeDon,
 			BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral) {
 		this.lbgCode = lbgCode;
-		this.TStructure = TStructure;
 		this.TGestions = TGestions;
+		this.TStructure = TStructure;
 		this.TNatures = TNatures;
 		this.lbgResDon = lbgResDon;
 		this.lbgImputation = lbgImputation;
@@ -103,8 +103,8 @@ public class TLBudgets implements java.io.Serializable {
 		this.lbgAdmCentral = lbgAdmCentral;
 	}
 
-	public TLBudgets(String lbgCode, TStructure TStructure, TGestions TGestions, TDestinations TDestinations,
-			TFonction TFonctionByLbgFonCode, TFonction TFonctionByLbgFonCodeAc, TNatures TNatures, BigDecimal lbgResDon,
+	public TLBudgets(String lbgCode, TGestions TGestions, TDestinations TDestinations, TFonction TFonctionByLbgFonCode,
+			TFonction TFonctionByLbgFonCodeAc, TStructure TStructure, TNatures TNatures, BigDecimal lbgResDon,
 			String lbgImputation, Long lbgAnoCode, BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr,
 			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp, BigDecimal lbgTotDot,
 			String lbgUtilSaisi, Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot, String lbgUtilModif,
@@ -117,11 +117,11 @@ public class TLBudgets implements java.io.Serializable {
 			String lbgFonCodeVerou, Set<TLotAao> TLotAaos, Set<TDetailDemandes> TDetailDemandeses,
 			Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.lbgCode = lbgCode;
-		this.TStructure = TStructure;
 		this.TGestions = TGestions;
 		this.TDestinations = TDestinations;
 		this.TFonctionByLbgFonCode = TFonctionByLbgFonCode;
 		this.TFonctionByLbgFonCodeAc = TFonctionByLbgFonCodeAc;
+		this.TStructure = TStructure;
 		this.TNatures = TNatures;
 		this.lbgResDon = lbgResDon;
 		this.lbgImputation = lbgImputation;
@@ -187,16 +187,6 @@ public class TLBudgets implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LBG_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "LBG_GES_CODE", nullable = false)
 	public TGestions getTGestions() {
 		return this.TGestions;
@@ -234,6 +224,16 @@ public class TLBudgets implements java.io.Serializable {
 
 	public void setTFonctionByLbgFonCodeAc(TFonction TFonctionByLbgFonCodeAc) {
 		this.TFonctionByLbgFonCodeAc = TFonctionByLbgFonCodeAc;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LBG_STR_CODE", nullable = false)
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

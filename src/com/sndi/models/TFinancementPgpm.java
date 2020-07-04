@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,10 +18,10 @@ import javax.persistence.Table;
 public class TFinancementPgpm implements java.io.Serializable {
 
 	private long fipId;
-	private TSourceFinancement TSourceFinancement;
+	private TBailleur TBailleur;
 	private TDetailPlanGeneral TDetailPlanGeneral;
 	private TDevise TDevise;
-	private TBailleur TBailleur;
+	private TSourceFinancement TSourceFinancement;
 	private BigDecimal fipMontantCfa;
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
@@ -31,22 +31,22 @@ public class TFinancementPgpm implements java.io.Serializable {
 	public TFinancementPgpm() {
 	}
 
-	public TFinancementPgpm(long fipId, TSourceFinancement TSourceFinancement, TDetailPlanGeneral TDetailPlanGeneral,
-			TDevise TDevise) {
+	public TFinancementPgpm(long fipId, TDetailPlanGeneral TDetailPlanGeneral, TDevise TDevise,
+			TSourceFinancement TSourceFinancement) {
 		this.fipId = fipId;
-		this.TSourceFinancement = TSourceFinancement;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TDevise = TDevise;
+		this.TSourceFinancement = TSourceFinancement;
 	}
 
-	public TFinancementPgpm(long fipId, TSourceFinancement TSourceFinancement, TDetailPlanGeneral TDetailPlanGeneral,
-			TDevise TDevise, TBailleur TBailleur, BigDecimal fipMontantCfa, BigDecimal fipMontantDevise,
+	public TFinancementPgpm(long fipId, TBailleur TBailleur, TDetailPlanGeneral TDetailPlanGeneral, TDevise TDevise,
+			TSourceFinancement TSourceFinancement, BigDecimal fipMontantCfa, BigDecimal fipMontantDevise,
 			String fipCommentaire, String fipTypeFinance, BigDecimal fipTresor) {
 		this.fipId = fipId;
-		this.TSourceFinancement = TSourceFinancement;
+		this.TBailleur = TBailleur;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TDevise = TDevise;
-		this.TBailleur = TBailleur;
+		this.TSourceFinancement = TSourceFinancement;
 		this.fipMontantCfa = fipMontantCfa;
 		this.fipMontantDevise = fipMontantDevise;
 		this.fipCommentaire = fipCommentaire;
@@ -66,13 +66,13 @@ public class TFinancementPgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_SOU_CODE", nullable = false)
-	public TSourceFinancement getTSourceFinancement() {
-		return this.TSourceFinancement;
+	@JoinColumn(name = "FIP_BAI_CODE")
+	public TBailleur getTBailleur() {
+		return this.TBailleur;
 	}
 
-	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
-		this.TSourceFinancement = TSourceFinancement;
+	public void setTBailleur(TBailleur TBailleur) {
+		this.TBailleur = TBailleur;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -96,13 +96,13 @@ public class TFinancementPgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_BAI_CODE")
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
+	@JoinColumn(name = "FIP_SOU_CODE", nullable = false)
+	public TSourceFinancement getTSourceFinancement() {
+		return this.TSourceFinancement;
 	}
 
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
+	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
+		this.TSourceFinancement = TSourceFinancement;
 	}
 
 	@Column(name = "FIP_MONTANT_CFA", precision = 15)

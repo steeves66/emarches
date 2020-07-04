@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,7 +15,7 @@ public class VUpdatePpmId implements java.io.Serializable {
 	private long plpId;
 	private long dppId;
 	private long dppPlpId;
-	private Long dppGpgId;
+	private long dppGpgId;
 	private String dppStaCode;
 	private String dppTymCode;
 	private String dppMopCode;
@@ -143,14 +143,15 @@ public class VUpdatePpmId implements java.io.Serializable {
 	public VUpdatePpmId() {
 	}
 
-	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, String dppStaCode, String dppTymCode, String dppMopCode,
-			String dppTypePlan, String lbgCode, String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon,
-			String lbgImputation, String lbgNatCode, BigDecimal lbgResTr, BigDecimal lbgAeTr, BigDecimal lbgAeDon,
-			BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral, String mdtCode, String tymLibelleCourt,
-			long gpgId) {
+	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
+			String dppMopCode, String dppTypePlan, String lbgCode, String lbgStrCode, short lbgGesCode,
+			BigDecimal lbgResDon, String lbgImputation, String lbgNatCode, BigDecimal lbgResTr, BigDecimal lbgAeTr,
+			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral, String mdtCode,
+			String tymLibelleCourt, long gpgId) {
 		this.plpId = plpId;
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
+		this.dppGpgId = dppGpgId;
 		this.dppStaCode = dppStaCode;
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
@@ -172,7 +173,7 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.gpgId = gpgId;
 	}
 
-	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode,
+	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
 			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, Integer dppNumeroOrdre,
 			Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
@@ -355,12 +356,12 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.dppPlpId = dppPlpId;
 	}
 
-	@Column(name = "DPP_GPG_ID", precision = 10, scale = 0)
-	public Long getDppGpgId() {
+	@Column(name = "DPP_GPG_ID", nullable = false, precision = 10, scale = 0)
+	public long getDppGpgId() {
 		return this.dppGpgId;
 	}
 
-	public void setDppGpgId(Long dppGpgId) {
+	public void setDppGpgId(long dppGpgId) {
 		this.dppGpgId = dppGpgId;
 	}
 
@@ -1481,9 +1482,7 @@ public class VUpdatePpmId implements java.io.Serializable {
 		VUpdatePpmId castOther = (VUpdatePpmId) other;
 
 		return (this.getPlpId() == castOther.getPlpId()) && (this.getDppId() == castOther.getDppId())
-				&& (this.getDppPlpId() == castOther.getDppPlpId())
-				&& ((this.getDppGpgId() == castOther.getDppGpgId()) || (this.getDppGpgId() != null
-						&& castOther.getDppGpgId() != null && this.getDppGpgId().equals(castOther.getDppGpgId())))
+				&& (this.getDppPlpId() == castOther.getDppPlpId()) && (this.getDppGpgId() == castOther.getDppGpgId())
 				&& ((this.getDppStaCode() == castOther.getDppStaCode()) || (this.getDppStaCode() != null
 						&& castOther.getDppStaCode() != null && this.getDppStaCode().equals(castOther.getDppStaCode())))
 				&& ((this.getDppTymCode() == castOther.getDppTymCode()) || (this.getDppTymCode() != null
@@ -1812,7 +1811,7 @@ public class VUpdatePpmId implements java.io.Serializable {
 		result = 37 * result + (int) this.getPlpId();
 		result = 37 * result + (int) this.getDppId();
 		result = 37 * result + (int) this.getDppPlpId();
-		result = 37 * result + (getDppGpgId() == null ? 0 : this.getDppGpgId().hashCode());
+		result = 37 * result + (int) this.getDppGpgId();
 		result = 37 * result + (getDppStaCode() == null ? 0 : this.getDppStaCode().hashCode());
 		result = 37 * result + (getDppTymCode() == null ? 0 : this.getDppTymCode().hashCode());
 		result = 37 * result + (getDppMopCode() == null ? 0 : this.getDppMopCode().hashCode());

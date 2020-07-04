@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -44,7 +44,7 @@ public class VPgpmlisteId implements java.io.Serializable {
 	}
 
 	public VPgpmlisteId(long gpgId, String gpgStaCode, String gpgTypePlan, String tymCode, String tymLibelleCourt,
-			String mopCode, String mopLibelleCourt, long plgId, short plgGesCode) {
+			String mopCode, String mopLibelleCourt, String tstCode, long plgId, short plgGesCode) {
 		this.gpgId = gpgId;
 		this.gpgStaCode = gpgStaCode;
 		this.gpgTypePlan = gpgTypePlan;
@@ -52,6 +52,7 @@ public class VPgpmlisteId implements java.io.Serializable {
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
+		this.tstCode = tstCode;
 		this.plgId = plgId;
 		this.plgGesCode = plgGesCode;
 	}
@@ -317,7 +318,7 @@ public class VPgpmlisteId implements java.io.Serializable {
 		this.gpgStrCode = gpgStrCode;
 	}
 
-	@Column(name = "TST_CODE", length = 3)
+	@Column(name = "TST_CODE", nullable = false, length = 3)
 	public String getTstCode() {
 		return this.tstCode;
 	}

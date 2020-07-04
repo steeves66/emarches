@@ -1,7 +1,6 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -28,14 +27,6 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 	private String affAgpActif;
 	private String affAgpTypeDao;
 	private String affAgpCommentaire;
-	private String affAgpRecherche;
-	private Date affAgpDateValAc;
-	private Date affAgpDateValCpmp;
-	private Date affAgpDateValDmp;
-	private String affAgpCode;
-	private Date affAgpDteModif;
-	private String affFonCodPf;
-	private String affFonCodDmp;
 
 	public VbAffichageAgpmId() {
 	}
@@ -57,9 +48,7 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 	public VbAffichageAgpmId(long affId, long affProId, long affFinId, short affGesCode, Long affDecId,
 			String affAgpStaCode, long affAgpId, String affBaiCode, String affSouCode, String affDevCode,
 			String affStrCode, String affFonCod, String affAgpActeurSaisie, String affAgpStatutRetour,
-			String affAgpActif, String affAgpTypeDao, String affAgpCommentaire, String affAgpRecherche,
-			Date affAgpDateValAc, Date affAgpDateValCpmp, Date affAgpDateValDmp, String affAgpCode, Date affAgpDteModif,
-			String affFonCodPf, String affFonCodDmp) {
+			String affAgpActif, String affAgpTypeDao, String affAgpCommentaire) {
 		this.affId = affId;
 		this.affProId = affProId;
 		this.affFinId = affFinId;
@@ -77,14 +66,6 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 		this.affAgpActif = affAgpActif;
 		this.affAgpTypeDao = affAgpTypeDao;
 		this.affAgpCommentaire = affAgpCommentaire;
-		this.affAgpRecherche = affAgpRecherche;
-		this.affAgpDateValAc = affAgpDateValAc;
-		this.affAgpDateValCpmp = affAgpDateValCpmp;
-		this.affAgpDateValDmp = affAgpDateValDmp;
-		this.affAgpCode = affAgpCode;
-		this.affAgpDteModif = affAgpDteModif;
-		this.affFonCodPf = affFonCodPf;
-		this.affFonCodDmp = affFonCodDmp;
 	}
 
 	@Column(name = "AFF_ID", nullable = false, precision = 10, scale = 0)
@@ -240,78 +221,6 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 		this.affAgpCommentaire = affAgpCommentaire;
 	}
 
-	@Column(name = "AFF_AGP_RECHERCHE", length = 4000)
-	public String getAffAgpRecherche() {
-		return this.affAgpRecherche;
-	}
-
-	public void setAffAgpRecherche(String affAgpRecherche) {
-		this.affAgpRecherche = affAgpRecherche;
-	}
-
-	@Column(name = "AFF_AGP_DATE_VAL_AC", length = 7)
-	public Date getAffAgpDateValAc() {
-		return this.affAgpDateValAc;
-	}
-
-	public void setAffAgpDateValAc(Date affAgpDateValAc) {
-		this.affAgpDateValAc = affAgpDateValAc;
-	}
-
-	@Column(name = "AFF_AGP_DATE_VAL_CPMP", length = 7)
-	public Date getAffAgpDateValCpmp() {
-		return this.affAgpDateValCpmp;
-	}
-
-	public void setAffAgpDateValCpmp(Date affAgpDateValCpmp) {
-		this.affAgpDateValCpmp = affAgpDateValCpmp;
-	}
-
-	@Column(name = "AFF_AGP_DATE_VAL_DMP", length = 7)
-	public Date getAffAgpDateValDmp() {
-		return this.affAgpDateValDmp;
-	}
-
-	public void setAffAgpDateValDmp(Date affAgpDateValDmp) {
-		this.affAgpDateValDmp = affAgpDateValDmp;
-	}
-
-	@Column(name = "AFF_AGP_CODE", length = 50)
-	public String getAffAgpCode() {
-		return this.affAgpCode;
-	}
-
-	public void setAffAgpCode(String affAgpCode) {
-		this.affAgpCode = affAgpCode;
-	}
-
-	@Column(name = "AFF_AGP_DTE_MODIF", length = 7)
-	public Date getAffAgpDteModif() {
-		return this.affAgpDteModif;
-	}
-
-	public void setAffAgpDteModif(Date affAgpDteModif) {
-		this.affAgpDteModif = affAgpDteModif;
-	}
-
-	@Column(name = "AFF_FON_COD_PF", length = 20)
-	public String getAffFonCodPf() {
-		return this.affFonCodPf;
-	}
-
-	public void setAffFonCodPf(String affFonCodPf) {
-		this.affFonCodPf = affFonCodPf;
-	}
-
-	@Column(name = "AFF_FON_COD_DMP", length = 20)
-	public String getAffFonCodDmp() {
-		return this.affFonCodDmp;
-	}
-
-	public void setAffFonCodDmp(String affFonCodDmp) {
-		this.affFonCodDmp = affFonCodDmp;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -354,30 +263,7 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 								&& this.getAffAgpTypeDao().equals(castOther.getAffAgpTypeDao())))
 				&& ((this.getAffAgpCommentaire() == castOther.getAffAgpCommentaire())
 						|| (this.getAffAgpCommentaire() != null && castOther.getAffAgpCommentaire() != null
-								&& this.getAffAgpCommentaire().equals(castOther.getAffAgpCommentaire())))
-				&& ((this.getAffAgpRecherche() == castOther.getAffAgpRecherche())
-						|| (this.getAffAgpRecherche() != null && castOther.getAffAgpRecherche() != null
-								&& this.getAffAgpRecherche().equals(castOther.getAffAgpRecherche())))
-				&& ((this.getAffAgpDateValAc() == castOther.getAffAgpDateValAc())
-						|| (this.getAffAgpDateValAc() != null && castOther.getAffAgpDateValAc() != null
-								&& this.getAffAgpDateValAc().equals(castOther.getAffAgpDateValAc())))
-				&& ((this.getAffAgpDateValCpmp() == castOther.getAffAgpDateValCpmp())
-						|| (this.getAffAgpDateValCpmp() != null && castOther.getAffAgpDateValCpmp() != null
-								&& this.getAffAgpDateValCpmp().equals(castOther.getAffAgpDateValCpmp())))
-				&& ((this.getAffAgpDateValDmp() == castOther.getAffAgpDateValDmp())
-						|| (this.getAffAgpDateValDmp() != null && castOther.getAffAgpDateValDmp() != null
-								&& this.getAffAgpDateValDmp().equals(castOther.getAffAgpDateValDmp())))
-				&& ((this.getAffAgpCode() == castOther.getAffAgpCode()) || (this.getAffAgpCode() != null
-						&& castOther.getAffAgpCode() != null && this.getAffAgpCode().equals(castOther.getAffAgpCode())))
-				&& ((this.getAffAgpDteModif() == castOther.getAffAgpDteModif())
-						|| (this.getAffAgpDteModif() != null && castOther.getAffAgpDteModif() != null
-								&& this.getAffAgpDteModif().equals(castOther.getAffAgpDteModif())))
-				&& ((this.getAffFonCodPf() == castOther.getAffFonCodPf())
-						|| (this.getAffFonCodPf() != null && castOther.getAffFonCodPf() != null
-								&& this.getAffFonCodPf().equals(castOther.getAffFonCodPf())))
-				&& ((this.getAffFonCodDmp() == castOther.getAffFonCodDmp())
-						|| (this.getAffFonCodDmp() != null && castOther.getAffFonCodDmp() != null
-								&& this.getAffFonCodDmp().equals(castOther.getAffFonCodDmp())));
+								&& this.getAffAgpCommentaire().equals(castOther.getAffAgpCommentaire())));
 	}
 
 	public int hashCode() {
@@ -400,14 +286,6 @@ public class VbAffichageAgpmId implements java.io.Serializable {
 		result = 37 * result + (getAffAgpActif() == null ? 0 : this.getAffAgpActif().hashCode());
 		result = 37 * result + (getAffAgpTypeDao() == null ? 0 : this.getAffAgpTypeDao().hashCode());
 		result = 37 * result + (getAffAgpCommentaire() == null ? 0 : this.getAffAgpCommentaire().hashCode());
-		result = 37 * result + (getAffAgpRecherche() == null ? 0 : this.getAffAgpRecherche().hashCode());
-		result = 37 * result + (getAffAgpDateValAc() == null ? 0 : this.getAffAgpDateValAc().hashCode());
-		result = 37 * result + (getAffAgpDateValCpmp() == null ? 0 : this.getAffAgpDateValCpmp().hashCode());
-		result = 37 * result + (getAffAgpDateValDmp() == null ? 0 : this.getAffAgpDateValDmp().hashCode());
-		result = 37 * result + (getAffAgpCode() == null ? 0 : this.getAffAgpCode().hashCode());
-		result = 37 * result + (getAffAgpDteModif() == null ? 0 : this.getAffAgpDteModif().hashCode());
-		result = 37 * result + (getAffFonCodPf() == null ? 0 : this.getAffFonCodPf().hashCode());
-		result = 37 * result + (getAffFonCodDmp() == null ? 0 : this.getAffFonCodDmp().hashCode());
 		return result;
 	}
 

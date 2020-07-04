@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -36,6 +36,9 @@ public class VbDacSpecsId implements java.io.Serializable {
 	private Long dacCout;
 	private String dacTypePlan;
 	private String dacRecherche;
+	private String dacFonCodeDmp;
+	private String dacFonCodePf;
+	private Date dacDteModif;
 
 	public VbDacSpecsId() {
 	}
@@ -48,7 +51,8 @@ public class VbDacSpecsId implements java.io.Serializable {
 			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche) {
+			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
+			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -73,6 +77,9 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
 		this.dacRecherche = dacRecherche;
+		this.dacFonCodeDmp = dacFonCodeDmp;
+		this.dacFonCodePf = dacFonCodePf;
+		this.dacDteModif = dacDteModif;
 	}
 
 	@Column(name = "DAC_CODE", nullable = false, length = 20)
@@ -192,7 +199,7 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacDteValDmp = dacDteValDmp;
 	}
 
-	@Column(name = "DAC_TD_CODE", length = 3)
+	@Column(name = "DAC_TD_CODE", length = 12)
 	public String getDacTdCode() {
 		return this.dacTdCode;
 	}
@@ -291,6 +298,33 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacRecherche = dacRecherche;
 	}
 
+	@Column(name = "DAC_FON_CODE_DMP", length = 20)
+	public String getDacFonCodeDmp() {
+		return this.dacFonCodeDmp;
+	}
+
+	public void setDacFonCodeDmp(String dacFonCodeDmp) {
+		this.dacFonCodeDmp = dacFonCodeDmp;
+	}
+
+	@Column(name = "DAC_FON_CODE_PF", length = 20)
+	public String getDacFonCodePf() {
+		return this.dacFonCodePf;
+	}
+
+	public void setDacFonCodePf(String dacFonCodePf) {
+		this.dacFonCodePf = dacFonCodePf;
+	}
+
+	@Column(name = "DAC_DTE_MODIF", length = 7)
+	public Date getDacDteModif() {
+		return this.dacDteModif;
+	}
+
+	public void setDacDteModif(Date dacDteModif) {
+		this.dacDteModif = dacDteModif;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -360,7 +394,16 @@ public class VbDacSpecsId implements java.io.Serializable {
 								&& this.getDacTypePlan().equals(castOther.getDacTypePlan())))
 				&& ((this.getDacRecherche() == castOther.getDacRecherche())
 						|| (this.getDacRecherche() != null && castOther.getDacRecherche() != null
-								&& this.getDacRecherche().equals(castOther.getDacRecherche())));
+								&& this.getDacRecherche().equals(castOther.getDacRecherche())))
+				&& ((this.getDacFonCodeDmp() == castOther.getDacFonCodeDmp())
+						|| (this.getDacFonCodeDmp() != null && castOther.getDacFonCodeDmp() != null
+								&& this.getDacFonCodeDmp().equals(castOther.getDacFonCodeDmp())))
+				&& ((this.getDacFonCodePf() == castOther.getDacFonCodePf())
+						|| (this.getDacFonCodePf() != null && castOther.getDacFonCodePf() != null
+								&& this.getDacFonCodePf().equals(castOther.getDacFonCodePf())))
+				&& ((this.getDacDteModif() == castOther.getDacDteModif())
+						|| (this.getDacDteModif() != null && castOther.getDacDteModif() != null
+								&& this.getDacDteModif().equals(castOther.getDacDteModif())));
 	}
 
 	public int hashCode() {
@@ -390,6 +433,9 @@ public class VbDacSpecsId implements java.io.Serializable {
 		result = 37 * result + (getDacCout() == null ? 0 : this.getDacCout().hashCode());
 		result = 37 * result + (getDacTypePlan() == null ? 0 : this.getDacTypePlan().hashCode());
 		result = 37 * result + (getDacRecherche() == null ? 0 : this.getDacRecherche().hashCode());
+		result = 37 * result + (getDacFonCodeDmp() == null ? 0 : this.getDacFonCodeDmp().hashCode());
+		result = 37 * result + (getDacFonCodePf() == null ? 0 : this.getDacFonCodePf().hashCode());
+		result = 37 * result + (getDacDteModif() == null ? 0 : this.getDacDteModif().hashCode());
 		return result;
 	}
 

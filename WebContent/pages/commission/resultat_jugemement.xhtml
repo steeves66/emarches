@@ -81,11 +81,11 @@
           <!-- small box -->
           <div class="small-box bg-blue">
             <div class="inner">
-              <h3> <h:outputText value="#{commissionController.infoSeuil.laaMtEst}">
+               <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.laaMtEst}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-         				  </h:outputText></h3>
+         				  </h:outputText>
 
-              <p style="height: 39px">Estimation administrative (E)</p>
+              <p style="height: 39px">Valeur de l'estimation administrative (E)</p>
               
             </div>
           </div>
@@ -93,13 +93,13 @@
         <!-- ./col -->
         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-blue">
+          <div class="small-box bg-green">
             <div class="inner">
-              <h3> <h:outputText value="#{commissionController.infoSeuil.moyOffFinQualtech}">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.moyOffFinQualtech}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-         				  </h:outputText></h3>
+         				  </h:outputText>
 
-              <p>Moyenne des Offres financières techniquement qualifiées (P)</p>
+              <p style="height: 39px">Moyenne des Offres financières techniquement qualifiées (P)</p>
             </div>
 
           </div>
@@ -108,43 +108,45 @@
         
           <div class="col-lg-2 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-blue">
+          <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>  <h:outputText value="#{commissionController.infoSeuil.moyPonderee}">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.moyPonderee}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-         				  </h:outputText></h3>
+         				  </h:outputText>
 
-              <p>Moyenne pondérée (M=40% * P + 60% * E)</p>
+              <p style="height: 39px">Moyenne pondérée (M=40% * P + 60% * E)</p>
             </div>
           </div>
         </div>
-        <div class="col-lg-2 col-xs-6">
+        
+         <div class="col-lg-2 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-blue">
+          <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>  <h:outputText value="#{commissionController.infoSeuil.sf1}">
-         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-         				  </h:outputText></h3>
-
-              <p>Seuil anormalement élevé (SF1 =110% * M)</p>
-            </div>
-          
-          </div>
-        </div>
-        <div class="col-lg-2 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-blue">
-            <div class="inner">
-              <h3> <h:outputText value="#{commissionController.infoSeuil.sf2}">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.sf2}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
               
-              </h3>
+              
 
               <p  style="height: 39px">Seuil anormalement bas (SF2 =90% * M)</p>
             </div>
           </div>
         </div>
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.sf1}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+
+              <p style="height: 39px">Seuil anormalement élevé (SF1 =110% * M)</p>
+            </div>
+          
+          </div>
+        </div>
+       
         <!-- ./col -->
       
         
@@ -185,7 +187,7 @@
                           <p:column headerText="N°" style="width : 3%">
          				  <h:outputText value="#{slctdTb.ordre}" />
 				        </p:column>	
-				        <p:column headerText="Soumissionnaire" styleClass="col-sm-4" >
+				        <p:column headerText="Soumissionnaire" styleClass="col-sm-2" >
          				  <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}"/>
 				        </p:column>
 				        
@@ -207,7 +209,7 @@
          				  </h:outputText>
 				        </p:column>		
 				        
-				          <p:column headerText="Erreur Constatée" styleClass="col-sm-1" >
+				          <p:column headerText="Erreur Constatée" styleClass="col-sm-2" >
          				  <h:outputText value="#{slctdTb.dofErrFin}"/> 
 				        </p:column>
                         <p:column headerText="Commentaire" styleClass="col-sm-3" >
@@ -290,9 +292,23 @@
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
 				        </p:column>	
+				            
+				        <p:column headerText="REPECHE?" styleClass="col-sm-1">
+         				  <h:outputText value="#{slctdTb.dofRepeche == 'O'?'OUI':'NON' }">
+         				  </h:outputText>
+				        </p:column>	
+				        
 				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-4" >
-         				  <h:outputText value="#{slctdTb.commentaire}" />
-				        </p:column>		
+         				  <h:outputText value="#{slctdTb.commentaire}" /> <br/>	
+         				  <h:outputText value="#{slctdTb.commentaireAnormal}" />
+				        </p:column>	
+				        <p:column headerText="ACTION" style="width : 4%">
+				          <p:commandLink oncomplete="PF('examenDlg').show()" action="#{commissionController.offreBasse()}" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-right:3px"
+				               title="Examen" update=":content">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltRecharge}" />                             
+                            </p:commandLink>	
+                          </p:column>
 				         </p:dataTable>
 				         
                  
@@ -309,12 +325,12 @@
 	            <!-- /.box-header -->
 	              <div class="box-body">
 	              
-	              <div class="col-md-6 align justify-content-center">
+	              <div class="col-md-12 align justify-content-center">
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend><small>CLASSEMENT DES OFFRES PAR LOT</small></legend>
                     <p:dataTable var="slctdTb"  id="finance3" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.resultatAttributaire}" 
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
-                          <p:column headerText="RANG" style="width : 3%">
+                          <p:column headerText="RANG" style="width : 10%">
          				  <h:outputText value="#{slctdTb.rang}" />
 				        </p:column>	
 				        <p:column headerText="ENTREPRISE" styleClass="col-sm-7" >
@@ -332,7 +348,7 @@
                    </fieldset>
                    </div>
                    
-                    <div class="col-md-6 align justify-content-center">
+                    <div class="col-md-12 align justify-content-center">
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend><small>PROPOSITION D'ATTRIBUTION</small></legend>
                    
@@ -380,6 +396,76 @@
     </section>
     
     </h:form>
+    
+    
+      <h:form id="examenDlg">
+	  <p:dialog  widgetVar="examenDlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+                     
+        <div class="box-header with-border">
+            <div  style="color: #fff">EXAMEN</div>
+         </div>
+         <div class="box-body">
+         <p:dataTable var="slctdTb"  id="tabExamen" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeSouOffBass}"  
+                 scrollable="true" scrollHeight="200" emptyMessage="Aucun Lot enregistré">
+                         
+                      <p:column headerText="N°" style="width : 3%">
+         				  <h:outputText value="#{slctdTb.ordre}" />
+				        </p:column>	
+				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-4" >
+         				   <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}"/>
+				        </p:column>
+				         <p:column headerText="SOUMMISSION CORRIGEE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dofMtCor}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>	
+				         <p:column headerText="SEUIL (SF2)" styleClass="col-sm-1" style="color: red">
+         				  <h:outputText value="#{slctdTb.sf2}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>	  
+				        
+				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.commentaire}" />
+				        </p:column>	
+				      
+				         </p:dataTable>
+				         <br/>
+				         
+				          <div class="form-group ">
+	                  <label for="typeFonction" class="col-sm-1 control-label"><b>Décision</b></label>
+		                  <div class="col-sm-11">
+		                    <p:selectOneMenu value="#{commissionController.sltRecharge.dofRepeche}" style="width :100%">
+					            <f:selectItem itemLabel="Choisir la décision" />  
+					            <f:selectItem itemValue="O" itemLabel="Conforme (Répéché)" />  
+					            <f:selectItem itemValue="N" itemLabel="Non Conforme (Abandonné)" /> 
+		       		        </p:selectOneMenu> 
+		                  </div>
+		                </div>
+				         
+				          <div class="form-group">
+		                  <label for="l6" class="col-sm-1 control-label">Observation<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-11">
+		                    <p:inputTextarea value="#{commissionController.sltRecharge.commentaireAnormal}" rows="3" cols="8" styleClass="form-control" id="l6" style="width: 100%" >
+		                    </p:inputTextarea>
+		                  </div>
+                </div>
+         </div>
+         
+         <div class="box-footer">
+          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.saveRepechage()}"  update=":gnl">
+				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				             <i class="ace-icon fa fa-save"></i> Valider
+				            </p:commandLink>
+         </div>
+        </div>
+        </div>
+        </div>
+        </p:dialog>
+        </h:form>
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">

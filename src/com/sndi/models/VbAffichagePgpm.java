@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -47,16 +47,7 @@ public class VbAffichagePgpm implements java.io.Serializable {
 			@AttributeOverride(name = "affGpgFonCod", column = @Column(name = "AFF_GPG_FON_COD", length = 12)),
 			@AttributeOverride(name = "affId", column = @Column(name = "AFF_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "affGpgStrCode", column = @Column(name = "AFF_GPG_STR_CODE", length = 20)),
-			@AttributeOverride(name = "affGpgGesCode", column = @Column(name = "AFF_GPG_GES_CODE", precision = 4, scale = 0)),
-			@AttributeOverride(name = "affGpgRecherche", column = @Column(name = "AFF_GPG_RECHERCHE", length = 4000)),
-			@AttributeOverride(name = "affGpgDateValAc", column = @Column(name = "AFF_GPG_DATE_VAL_AC", length = 7)),
-			@AttributeOverride(name = "affGpgDateValCpmp", column = @Column(name = "AFF_GPG_DATE_VAL_CPMP", length = 7)),
-			@AttributeOverride(name = "affGpgDateValDmp", column = @Column(name = "AFF_GPG_DATE_VAL_DMP", length = 7)),
-			@AttributeOverride(name = "affGpgTypeFinance", column = @Column(name = "AFF_GPG_TYPE_FINANCE", length = 20)),
-			@AttributeOverride(name = "affGpgLibFin", column = @Column(name = "AFF_GPG_LIB_FIN", length = 200)),
-			@AttributeOverride(name = "affGpgDteModif", column = @Column(name = "AFF_GPG_DTE_MODIF", length = 7)),
-			@AttributeOverride(name = "affFonCodPf", column = @Column(name = "AFF_FON_COD_PF", length = 20)),
-			@AttributeOverride(name = "affFonCodDmp", column = @Column(name = "AFF_FON_COD_DMP", length = 20)) })
+			@AttributeOverride(name = "affGpgGesCode", column = @Column(name = "AFF_GPG_GES_CODE", precision = 4, scale = 0)) })
 	public VbAffichagePgpmId getId() {
 		return this.id;
 	}

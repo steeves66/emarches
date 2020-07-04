@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -37,7 +37,15 @@ public class VbFonction implements java.io.Serializable {
 			@AttributeOverride(name = "fonFonCod", column = @Column(name = "FON_FON_COD", length = 12)),
 			@AttributeOverride(name = "fonCourriel", column = @Column(name = "FON_COURRIEL", length = 100)),
 			@AttributeOverride(name = "fonMobil", column = @Column(name = "FON_MOBIL", length = 20)),
-			@AttributeOverride(name = "fonStrCode", column = @Column(name = "FON_STR_CODE", length = 20)) })
+			@AttributeOverride(name = "fonStrCode", column = @Column(name = "FON_STR_CODE", length = 20)),
+			@AttributeOverride(name = "fonOpeMatricule", column = @Column(name = "FON_OPE_MATRICULE", length = 25)),
+			@AttributeOverride(name = "fonDteSaisi", column = @Column(name = "FON_DTE_SAISI", length = 7)),
+			@AttributeOverride(name = "fonMinCode", column = @Column(name = "FON_MIN_CODE", length = 20)),
+			@AttributeOverride(name = "fonLibelleCrt", column = @Column(name = "FON_LIBELLE_CRT", length = 500)),
+			@AttributeOverride(name = "fonCodeDmp", column = @Column(name = "FON_CODE_DMP", length = 20)),
+			@AttributeOverride(name = "fonCodePf", column = @Column(name = "FON_CODE_PF", length = 20)),
+			@AttributeOverride(name = "fonLibelleLngDmp", column = @Column(name = "FON_LIBELLE_LNG_DMP", length = 500)),
+			@AttributeOverride(name = "fonSourceSigmap", column = @Column(name = "FON_SOURCE_SIGMAP", length = 1)) })
 	public VbFonctionId getId() {
 		return this.id;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,24 +18,25 @@ import javax.persistence.Table;
 public class TDossierDemande implements java.io.Serializable {
 
 	private BigDecimal dodId;
-	private TDemande TDemande;
 	private TPieceDemande TPieceDemande;
+	private TDemande TDemande;
 	private String dodLibelle;
 	private String dodReference;
 
 	public TDossierDemande() {
 	}
 
-	public TDossierDemande(BigDecimal dodId, TDemande TDemande) {
+	public TDossierDemande(BigDecimal dodId, TPieceDemande TPieceDemande, TDemande TDemande) {
 		this.dodId = dodId;
+		this.TPieceDemande = TPieceDemande;
 		this.TDemande = TDemande;
 	}
 
-	public TDossierDemande(BigDecimal dodId, TDemande TDemande, TPieceDemande TPieceDemande, String dodLibelle,
+	public TDossierDemande(BigDecimal dodId, TPieceDemande TPieceDemande, TDemande TDemande, String dodLibelle,
 			String dodReference) {
 		this.dodId = dodId;
-		this.TDemande = TDemande;
 		this.TPieceDemande = TPieceDemande;
+		this.TDemande = TDemande;
 		this.dodLibelle = dodLibelle;
 		this.dodReference = dodReference;
 	}
@@ -52,6 +53,16 @@ public class TDossierDemande implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DOD_PDM_NUM", nullable = false)
+	public TPieceDemande getTPieceDemande() {
+		return this.TPieceDemande;
+	}
+
+	public void setTPieceDemande(TPieceDemande TPieceDemande) {
+		this.TPieceDemande = TPieceDemande;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DOD_DEM_NUM", nullable = false)
 	public TDemande getTDemande() {
 		return this.TDemande;
@@ -59,16 +70,6 @@ public class TDossierDemande implements java.io.Serializable {
 
 	public void setTDemande(TDemande TDemande) {
 		this.TDemande = TDemande;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DOD_PDM_NUM")
-	public TPieceDemande getTPieceDemande() {
-		return this.TPieceDemande;
-	}
-
-	public void setTPieceDemande(TPieceDemande TPieceDemande) {
-		this.TPieceDemande = TPieceDemande;
 	}
 
 	@Column(name = "DOD_LIBELLE", length = 500)

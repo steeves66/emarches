@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -41,7 +41,6 @@ public class VAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "agpStrCode", column = @Column(name = "AGP_STR_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "agpActif", column = @Column(name = "AGP_ACTIF", length = 1)),
 			@AttributeOverride(name = "agpStatutRetour", column = @Column(name = "AGP_STATUT_RETOUR", length = 2)),
-			@AttributeOverride(name = "agpCode", column = @Column(name = "AGP_CODE", length = 50)),
 			@AttributeOverride(name = "decOrganExecLibelle", column = @Column(name = "DEC_ORGAN_EXEC_LIBELLE", length = 500)) })
 	public VAgpmId getId() {
 		return this.id;

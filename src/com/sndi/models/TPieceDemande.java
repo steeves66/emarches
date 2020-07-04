@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -21,8 +21,8 @@ import javax.persistence.Table;
 public class TPieceDemande implements java.io.Serializable {
 
 	private BigDecimal pdmNum;
-	private TDemande TDemande;
 	private TParamPieceDemande TParamPieceDemande;
+	private TDemande TDemande;
 	private String pdmLibeleCourt;
 	private String pdmLibeleLong;
 	private Set<TDossierDemande> TDossierDemandes = new HashSet<TDossierDemande>(0);
@@ -30,17 +30,17 @@ public class TPieceDemande implements java.io.Serializable {
 	public TPieceDemande() {
 	}
 
-	public TPieceDemande(BigDecimal pdmNum, TDemande TDemande, TParamPieceDemande TParamPieceDemande) {
+	public TPieceDemande(BigDecimal pdmNum, TParamPieceDemande TParamPieceDemande, TDemande TDemande) {
 		this.pdmNum = pdmNum;
-		this.TDemande = TDemande;
 		this.TParamPieceDemande = TParamPieceDemande;
+		this.TDemande = TDemande;
 	}
 
-	public TPieceDemande(BigDecimal pdmNum, TDemande TDemande, TParamPieceDemande TParamPieceDemande,
+	public TPieceDemande(BigDecimal pdmNum, TParamPieceDemande TParamPieceDemande, TDemande TDemande,
 			String pdmLibeleCourt, String pdmLibeleLong, Set<TDossierDemande> TDossierDemandes) {
 		this.pdmNum = pdmNum;
-		this.TDemande = TDemande;
 		this.TParamPieceDemande = TParamPieceDemande;
+		this.TDemande = TDemande;
 		this.pdmLibeleCourt = pdmLibeleCourt;
 		this.pdmLibeleLong = pdmLibeleLong;
 		this.TDossierDemandes = TDossierDemandes;
@@ -58,16 +58,6 @@ public class TPieceDemande implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PDM_DEM_NUM", nullable = false)
-	public TDemande getTDemande() {
-		return this.TDemande;
-	}
-
-	public void setTDemande(TDemande TDemande) {
-		this.TDemande = TDemande;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "PDM_PID_NUM", nullable = false)
 	public TParamPieceDemande getTParamPieceDemande() {
 		return this.TParamPieceDemande;
@@ -75,6 +65,16 @@ public class TPieceDemande implements java.io.Serializable {
 
 	public void setTParamPieceDemande(TParamPieceDemande TParamPieceDemande) {
 		this.TParamPieceDemande = TParamPieceDemande;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PDM_DEM_NUM", nullable = false)
+	public TDemande getTDemande() {
+		return this.TDemande;
+	}
+
+	public void setTDemande(TDemande TDemande) {
+		this.TDemande = TDemande;
 	}
 
 	@Column(name = "PDM_LIBELE_COURT", length = 100)

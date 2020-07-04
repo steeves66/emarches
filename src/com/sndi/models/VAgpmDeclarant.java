@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -32,7 +32,6 @@ public class VAgpmDeclarant implements java.io.Serializable {
 			@AttributeOverride(name = "agpStrCode", column = @Column(name = "AGP_STR_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "agpProId", column = @Column(name = "AGP_PRO_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "agpActeurSaisie", column = @Column(name = "AGP_ACTEUR_SAISIE", length = 12)),
-			@AttributeOverride(name = "agpCode", column = @Column(name = "AGP_CODE", length = 50)),
 			@AttributeOverride(name = "decPersNomPrenom", column = @Column(name = "DEC_PERS_NOM_PRENOM", length = 500)),
 			@AttributeOverride(name = "decOrganExecLibelle", column = @Column(name = "DEC_ORGAN_EXEC_LIBELLE", length = 500)),
 			@AttributeOverride(name = "decPersFonction", column = @Column(name = "DEC_PERS_FONCTION", length = 500)),

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,12 +23,12 @@ import javax.persistence.TemporalType;
 public class TAgpm implements java.io.Serializable {
 
 	private long agpId;
-	private TProjet TProjet;
-	private TStatut TStatut;
-	private TStructure TStructure;
 	private TGestions TGestions;
 	private TDeclarant TDeclarant;
 	private TFonction TFonction;
+	private TProjet TProjet;
+	private TStatut TStatut;
+	private TStructure TStructure;
 	private String agpCommentaire;
 	private String agpTypeDao;
 	private String agpModePassation;
@@ -51,29 +51,29 @@ public class TAgpm implements java.io.Serializable {
 	public TAgpm() {
 	}
 
-	public TAgpm(long agpId, TProjet TProjet, TStatut TStatut, TStructure TStructure, TGestions TGestions,
-			TFonction TFonction) {
+	public TAgpm(long agpId, TGestions TGestions, TFonction TFonction, TProjet TProjet, TStatut TStatut,
+			TStructure TStructure) {
 		this.agpId = agpId;
-		this.TProjet = TProjet;
-		this.TStatut = TStatut;
-		this.TStructure = TStructure;
 		this.TGestions = TGestions;
 		this.TFonction = TFonction;
-	}
-
-	public TAgpm(long agpId, TProjet TProjet, TStatut TStatut, TStructure TStructure, TGestions TGestions,
-			TDeclarant TDeclarant, TFonction TFonction, String agpCommentaire, String agpTypeDao,
-			String agpModePassation, String agpActif, String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc,
-			Date agpDateValCpmp, Date agpDateValDmp, String agpCode, Date agpDteModif, String agpFonCodPf,
-			String agpFonCodDmp, String agpRecherche, Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
-			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
-		this.agpId = agpId;
 		this.TProjet = TProjet;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
+	}
+
+	public TAgpm(long agpId, TGestions TGestions, TDeclarant TDeclarant, TFonction TFonction, TProjet TProjet,
+			TStatut TStatut, TStructure TStructure, String agpCommentaire, String agpTypeDao, String agpModePassation,
+			String agpActif, String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp,
+			Date agpDateValDmp, String agpCode, Date agpDteModif, String agpFonCodPf, String agpFonCodDmp,
+			String agpRecherche, Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
+			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
+		this.agpId = agpId;
 		this.TGestions = TGestions;
 		this.TDeclarant = TDeclarant;
 		this.TFonction = TFonction;
+		this.TProjet = TProjet;
+		this.TStatut = TStatut;
+		this.TStructure = TStructure;
 		this.agpCommentaire = agpCommentaire;
 		this.agpTypeDao = agpTypeDao;
 		this.agpModePassation = agpModePassation;
@@ -106,36 +106,6 @@ public class TAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_PRO_ID", nullable = false)
-	public TProjet getTProjet() {
-		return this.TProjet;
-	}
-
-	public void setTProjet(TProjet TProjet) {
-		this.TProjet = TProjet;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AGP_GES_CODE", nullable = false)
 	public TGestions getTGestions() {
 		return this.TGestions;
@@ -163,6 +133,36 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_PRO_ID", nullable = false)
+	public TProjet getTProjet() {
+		return this.TProjet;
+	}
+
+	public void setTProjet(TProjet TProjet) {
+		this.TProjet = TProjet;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_STR_CODE", nullable = false)
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@Column(name = "AGP_COMMENTAIRE", length = 1000)

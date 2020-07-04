@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,11 +24,11 @@ import javax.persistence.TemporalType;
 public class TDetCommissionSeance implements java.io.Serializable {
 
 	private BigDecimal dcsNum;
+	private TCommissionSpecifique TCommissionSpecifique;
+	private TDacSpecs TDacSpecs;
 	private TSeances TSeances;
 	private TStructure TStructure;
 	private TTypeCommission TTypeCommission;
-	private TCommissionSpecifique TCommissionSpecifique;
-	private TDacSpecs TDacSpecs;
 	private TOperateur TOperateur;
 	private String dcsFonCod;
 	private String dcsOpeMatricule;
@@ -50,17 +50,17 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsNum = dcsNum;
 	}
 
-	public TDetCommissionSeance(BigDecimal dcsNum, TSeances TSeances, TStructure TStructure,
-			TTypeCommission TTypeCommission, TCommissionSpecifique TCommissionSpecifique, TDacSpecs TDacSpecs,
-			TOperateur TOperateur, String dcsFonCod, String dcsOpeMatricule, Date dcsDteSaisi, String dcsFonCodSaisi,
-			String dcsObservation, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
-			String dcsMbmRespo, String dcsRepMandate, Set<TAffichageDao> TAffichageDaos) {
+	public TDetCommissionSeance(BigDecimal dcsNum, TCommissionSpecifique TCommissionSpecifique, TDacSpecs TDacSpecs,
+			TSeances TSeances, TStructure TStructure, TTypeCommission TTypeCommission, TOperateur TOperateur,
+			String dcsFonCod, String dcsOpeMatricule, Date dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation,
+			String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent, String dcsMbmRespo,
+			String dcsRepMandate, Set<TAffichageDao> TAffichageDaos) {
 		this.dcsNum = dcsNum;
+		this.TCommissionSpecifique = TCommissionSpecifique;
+		this.TDacSpecs = TDacSpecs;
 		this.TSeances = TSeances;
 		this.TStructure = TStructure;
 		this.TTypeCommission = TTypeCommission;
-		this.TCommissionSpecifique = TCommissionSpecifique;
-		this.TDacSpecs = TDacSpecs;
 		this.TOperateur = TOperateur;
 		this.dcsFonCod = dcsFonCod;
 		this.dcsOpeMatricule = dcsOpeMatricule;
@@ -85,6 +85,26 @@ public class TDetCommissionSeance implements java.io.Serializable {
 
 	public void setDcsNum(BigDecimal dcsNum) {
 		this.dcsNum = dcsNum;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DCS_COM_NUM")
+	public TCommissionSpecifique getTCommissionSpecifique() {
+		return this.TCommissionSpecifique;
+	}
+
+	public void setTCommissionSpecifique(TCommissionSpecifique TCommissionSpecifique) {
+		this.TCommissionSpecifique = TCommissionSpecifique;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DCS_DAC_CODE")
+	public TDacSpecs getTDacSpecs() {
+		return this.TDacSpecs;
+	}
+
+	public void setTDacSpecs(TDacSpecs TDacSpecs) {
+		this.TDacSpecs = TDacSpecs;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -115,26 +135,6 @@ public class TDetCommissionSeance implements java.io.Serializable {
 
 	public void setTTypeCommission(TTypeCommission TTypeCommission) {
 		this.TTypeCommission = TTypeCommission;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DCS_COM_NUM")
-	public TCommissionSpecifique getTCommissionSpecifique() {
-		return this.TCommissionSpecifique;
-	}
-
-	public void setTCommissionSpecifique(TCommissionSpecifique TCommissionSpecifique) {
-		this.TCommissionSpecifique = TCommissionSpecifique;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DCS_DAC_CODE")
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

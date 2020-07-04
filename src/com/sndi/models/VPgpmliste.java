@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -51,7 +51,7 @@ public class VPgpmliste implements java.io.Serializable {
 			@AttributeOverride(name = "gpgCommentaire", column = @Column(name = "GPG_COMMENTAIRE", length = 1000)),
 			@AttributeOverride(name = "gpgPartiePmePmi", column = @Column(name = "GPG_PARTIE_PME_PMI", length = 1)),
 			@AttributeOverride(name = "gpgStrCode", column = @Column(name = "GPG_STR_CODE", length = 20)),
-			@AttributeOverride(name = "tstCode", column = @Column(name = "TST_CODE", length = 3)),
+			@AttributeOverride(name = "tstCode", column = @Column(name = "TST_CODE", nullable = false, length = 3)),
 			@AttributeOverride(name = "plgId", column = @Column(name = "PLG_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "plgGesCode", column = @Column(name = "PLG_GES_CODE", nullable = false, precision = 4, scale = 0)) })
 	public VPgpmlisteId getId() {

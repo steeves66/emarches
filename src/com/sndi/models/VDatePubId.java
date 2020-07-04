@@ -1,6 +1,7 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -11,15 +12,26 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VDatePubId implements java.io.Serializable {
 
+	private BigDecimal id;
 	private Date datepub;
 	private String libelle;
 
 	public VDatePubId() {
 	}
 
-	public VDatePubId(Date datepub, String libelle) {
+	public VDatePubId(BigDecimal id, Date datepub, String libelle) {
+		this.id = id;
 		this.datepub = datepub;
 		this.libelle = libelle;
+	}
+
+	@Column(name = "ID", precision = 22, scale = 0)
+	public BigDecimal getId() {
+		return this.id;
+	}
+
+	public void setId(BigDecimal id) {
+		this.id = id;
 	}
 
 	@Column(name = "DATEPUB", length = 8)
@@ -49,8 +61,10 @@ public class VDatePubId implements java.io.Serializable {
 			return false;
 		VDatePubId castOther = (VDatePubId) other;
 
-		return ((this.getDatepub() == castOther.getDatepub()) || (this.getDatepub() != null
-				&& castOther.getDatepub() != null && this.getDatepub().equals(castOther.getDatepub())))
+		return ((this.getId() == castOther.getId())
+				|| (this.getId() != null && castOther.getId() != null && this.getId().equals(castOther.getId())))
+				&& ((this.getDatepub() == castOther.getDatepub()) || (this.getDatepub() != null
+						&& castOther.getDatepub() != null && this.getDatepub().equals(castOther.getDatepub())))
 				&& ((this.getLibelle() == castOther.getLibelle()) || (this.getLibelle() != null
 						&& castOther.getLibelle() != null && this.getLibelle().equals(castOther.getLibelle())));
 	}
@@ -58,6 +72,7 @@ public class VDatePubId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
+		result = 37 * result + (getId() == null ? 0 : this.getId().hashCode());
 		result = 37 * result + (getDatepub() == null ? 0 : this.getDatepub().hashCode());
 		result = 37 * result + (getLibelle() == null ? 0 : this.getLibelle().hashCode());
 		return result;

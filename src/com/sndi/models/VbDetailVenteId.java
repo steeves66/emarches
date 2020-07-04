@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -17,7 +17,6 @@ public class VbDetailVenteId implements java.io.Serializable {
 	private BigDecimal dveLaaNum;
 	private String dveQte;
 	private Long dveCout;
-	private String dveCoutLettre;
 
 	public VbDetailVenteId() {
 	}
@@ -29,14 +28,13 @@ public class VbDetailVenteId implements java.io.Serializable {
 	}
 
 	public VbDetailVenteId(long dveNum, String dveDacCode, long dveVenNum, BigDecimal dveLaaNum, String dveQte,
-			Long dveCout, String dveCoutLettre) {
+			Long dveCout) {
 		this.dveNum = dveNum;
 		this.dveDacCode = dveDacCode;
 		this.dveVenNum = dveVenNum;
 		this.dveLaaNum = dveLaaNum;
 		this.dveQte = dveQte;
 		this.dveCout = dveCout;
-		this.dveCoutLettre = dveCoutLettre;
 	}
 
 	@Column(name = "DVE_NUM", nullable = false, precision = 10, scale = 0)
@@ -93,15 +91,6 @@ public class VbDetailVenteId implements java.io.Serializable {
 		this.dveCout = dveCout;
 	}
 
-	@Column(name = "DVE_COUT_LETTRE", length = 500)
-	public String getDveCoutLettre() {
-		return this.dveCoutLettre;
-	}
-
-	public void setDveCoutLettre(String dveCoutLettre) {
-		this.dveCoutLettre = dveCoutLettre;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -120,10 +109,7 @@ public class VbDetailVenteId implements java.io.Serializable {
 				&& ((this.getDveQte() == castOther.getDveQte()) || (this.getDveQte() != null
 						&& castOther.getDveQte() != null && this.getDveQte().equals(castOther.getDveQte())))
 				&& ((this.getDveCout() == castOther.getDveCout()) || (this.getDveCout() != null
-						&& castOther.getDveCout() != null && this.getDveCout().equals(castOther.getDveCout())))
-				&& ((this.getDveCoutLettre() == castOther.getDveCoutLettre())
-						|| (this.getDveCoutLettre() != null && castOther.getDveCoutLettre() != null
-								&& this.getDveCoutLettre().equals(castOther.getDveCoutLettre())));
+						&& castOther.getDveCout() != null && this.getDveCout().equals(castOther.getDveCout())));
 	}
 
 	public int hashCode() {
@@ -135,7 +121,6 @@ public class VbDetailVenteId implements java.io.Serializable {
 		result = 37 * result + (getDveLaaNum() == null ? 0 : this.getDveLaaNum().hashCode());
 		result = 37 * result + (getDveQte() == null ? 0 : this.getDveQte().hashCode());
 		result = 37 * result + (getDveCout() == null ? 0 : this.getDveCout().hashCode());
-		result = 37 * result + (getDveCoutLettre() == null ? 0 : this.getDveCoutLettre().hashCode());
 		return result;
 	}
 

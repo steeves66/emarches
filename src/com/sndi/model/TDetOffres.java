@@ -88,6 +88,9 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofSigle;
 	private String dofErrFin;
 	private String dofObsFin;
+	private String dofRepeche;
+	private String dofObsRet;
+	private String dofObsAnormal;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -113,7 +116,7 @@ public class TDetOffres implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin,
-			Set<TPiecesOffres> TPiecesOffreses) {
+			String dofRepeche, String dofObsRet,String dofObsAnormal,Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
@@ -179,13 +182,15 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofSigle = dofSigle;
 		this.dofErrFin = dofErrFin;
 		this.dofObsFin = dofObsFin;
+		this.dofRepeche = dofRepeche;
+		this.dofObsRet = dofObsRet;
+		this.dofObsAnormal = dofObsAnormal;
 		this.TPiecesOffreses = TPiecesOffreses;
 		
 		
 	}
 
 	@Id
-
 	@Column(name = "DOF_NUM", unique = true, nullable = false, precision = 22, scale = 0)
 	public BigDecimal getDofNum() {
 		return this.dofNum;
@@ -783,6 +788,34 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setDofObsFin(String dofObsFin) {
 		this.dofObsFin = dofObsFin;
+	}
+	
+
+	@Column(name = "DOF_REPECHE", length = 1)
+	public String getDofRepeche() {
+		return this.dofRepeche;
+	}
+
+	public void setDofRepeche(String dofRepeche) {
+		this.dofRepeche = dofRepeche;
+	}
+
+	@Column(name = "DOF_OBS_RET", length = 500)
+	public String getDofObsRet() {
+		return this.dofObsRet;
+	}
+
+	public void setDofObsRet(String dofObsRet) {
+		this.dofObsRet = dofObsRet;
+	}
+
+	@Column(name = "DOF_OBS_ANORMAL", length = 500)
+	public String getDofObsAnormal() {
+		return this.dofObsAnormal;
+	}
+
+	public void setDofObsAnormal(String dofObsAnormal) {
+		this.dofObsAnormal = dofObsAnormal;
 	}
 	
 }

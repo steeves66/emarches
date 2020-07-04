@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -23,7 +23,6 @@ public class VbAgpmId implements java.io.Serializable {
 	private String agpActif;
 	private String agpStatutRetour;
 	private String agpActeurSaisie;
-	private String agpCode;
 
 	public VbAgpmId() {
 	}
@@ -40,7 +39,7 @@ public class VbAgpmId implements java.io.Serializable {
 
 	public VbAgpmId(long agpId, String agpStrCode, String agpFonCod, short agpGesCode, String agpStaCode, long agpProId,
 			Long agpDecId, String agpCommentaire, String agpTypeDao, String agpModePassation, String agpActif,
-			String agpStatutRetour, String agpActeurSaisie, String agpCode) {
+			String agpStatutRetour, String agpActeurSaisie) {
 		this.agpId = agpId;
 		this.agpStrCode = agpStrCode;
 		this.agpFonCod = agpFonCod;
@@ -54,7 +53,6 @@ public class VbAgpmId implements java.io.Serializable {
 		this.agpActif = agpActif;
 		this.agpStatutRetour = agpStatutRetour;
 		this.agpActeurSaisie = agpActeurSaisie;
-		this.agpCode = agpCode;
 	}
 
 	@Column(name = "AGP_ID", nullable = false, precision = 10, scale = 0)
@@ -174,15 +172,6 @@ public class VbAgpmId implements java.io.Serializable {
 		this.agpActeurSaisie = agpActeurSaisie;
 	}
 
-	@Column(name = "AGP_CODE", length = 50)
-	public String getAgpCode() {
-		return this.agpCode;
-	}
-
-	public void setAgpCode(String agpCode) {
-		this.agpCode = agpCode;
-	}
-
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -218,9 +207,7 @@ public class VbAgpmId implements java.io.Serializable {
 								&& this.getAgpStatutRetour().equals(castOther.getAgpStatutRetour())))
 				&& ((this.getAgpActeurSaisie() == castOther.getAgpActeurSaisie())
 						|| (this.getAgpActeurSaisie() != null && castOther.getAgpActeurSaisie() != null
-								&& this.getAgpActeurSaisie().equals(castOther.getAgpActeurSaisie())))
-				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
-						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())));
+								&& this.getAgpActeurSaisie().equals(castOther.getAgpActeurSaisie())));
 	}
 
 	public int hashCode() {
@@ -239,7 +226,6 @@ public class VbAgpmId implements java.io.Serializable {
 		result = 37 * result + (getAgpActif() == null ? 0 : this.getAgpActif().hashCode());
 		result = 37 * result + (getAgpStatutRetour() == null ? 0 : this.getAgpStatutRetour().hashCode());
 		result = 37 * result + (getAgpActeurSaisie() == null ? 0 : this.getAgpActeurSaisie().hashCode());
-		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
 		return result;
 	}
 

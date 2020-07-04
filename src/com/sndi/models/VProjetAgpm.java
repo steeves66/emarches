@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -42,7 +42,6 @@ public class VProjetAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "agpCommentaire", column = @Column(name = "AGP_COMMENTAIRE", length = 1000)),
 			@AttributeOverride(name = "agpStrCode", column = @Column(name = "AGP_STR_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "agpActeurSaisie", column = @Column(name = "AGP_ACTEUR_SAISIE", length = 12)),
-			@AttributeOverride(name = "agpCode", column = @Column(name = "AGP_CODE", length = 50)),
 			@AttributeOverride(name = "regId", column = @Column(name = "REG_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "regLibelleLong", column = @Column(name = "REG_LIBELLE_LONG", length = 1000)),
 			@AttributeOverride(name = "regLibelleCourt", column = @Column(name = "REG_LIBELLE_COURT", length = 500)),

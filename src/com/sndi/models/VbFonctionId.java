@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,6 +22,14 @@ public class VbFonctionId implements java.io.Serializable {
 	private String fonCourriel;
 	private String fonMobil;
 	private String fonStrCode;
+	private String fonOpeMatricule;
+	private Date fonDteSaisi;
+	private String fonMinCode;
+	private String fonLibelleCrt;
+	private String fonCodeDmp;
+	private String fonCodePf;
+	private String fonLibelleLngDmp;
+	private String fonSourceSigmap;
 
 	public VbFonctionId() {
 	}
@@ -31,7 +39,9 @@ public class VbFonctionId implements java.io.Serializable {
 	}
 
 	public VbFonctionId(String fonCod, String fonTyfCod, Date fonDatDeb, Date fonDatFin, String fonLibelle,
-			String fonAdr, String fonTel, String fonFonCod, String fonCourriel, String fonMobil, String fonStrCode) {
+			String fonAdr, String fonTel, String fonFonCod, String fonCourriel, String fonMobil, String fonStrCode,
+			String fonOpeMatricule, Date fonDteSaisi, String fonMinCode, String fonLibelleCrt, String fonCodeDmp,
+			String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap) {
 		this.fonCod = fonCod;
 		this.fonTyfCod = fonTyfCod;
 		this.fonDatDeb = fonDatDeb;
@@ -43,6 +53,14 @@ public class VbFonctionId implements java.io.Serializable {
 		this.fonCourriel = fonCourriel;
 		this.fonMobil = fonMobil;
 		this.fonStrCode = fonStrCode;
+		this.fonOpeMatricule = fonOpeMatricule;
+		this.fonDteSaisi = fonDteSaisi;
+		this.fonMinCode = fonMinCode;
+		this.fonLibelleCrt = fonLibelleCrt;
+		this.fonCodeDmp = fonCodeDmp;
+		this.fonCodePf = fonCodePf;
+		this.fonLibelleLngDmp = fonLibelleLngDmp;
+		this.fonSourceSigmap = fonSourceSigmap;
 	}
 
 	@Column(name = "FON_COD", nullable = false, length = 20)
@@ -144,6 +162,78 @@ public class VbFonctionId implements java.io.Serializable {
 		this.fonStrCode = fonStrCode;
 	}
 
+	@Column(name = "FON_OPE_MATRICULE", length = 25)
+	public String getFonOpeMatricule() {
+		return this.fonOpeMatricule;
+	}
+
+	public void setFonOpeMatricule(String fonOpeMatricule) {
+		this.fonOpeMatricule = fonOpeMatricule;
+	}
+
+	@Column(name = "FON_DTE_SAISI", length = 7)
+	public Date getFonDteSaisi() {
+		return this.fonDteSaisi;
+	}
+
+	public void setFonDteSaisi(Date fonDteSaisi) {
+		this.fonDteSaisi = fonDteSaisi;
+	}
+
+	@Column(name = "FON_MIN_CODE", length = 20)
+	public String getFonMinCode() {
+		return this.fonMinCode;
+	}
+
+	public void setFonMinCode(String fonMinCode) {
+		this.fonMinCode = fonMinCode;
+	}
+
+	@Column(name = "FON_LIBELLE_CRT", length = 500)
+	public String getFonLibelleCrt() {
+		return this.fonLibelleCrt;
+	}
+
+	public void setFonLibelleCrt(String fonLibelleCrt) {
+		this.fonLibelleCrt = fonLibelleCrt;
+	}
+
+	@Column(name = "FON_CODE_DMP", length = 20)
+	public String getFonCodeDmp() {
+		return this.fonCodeDmp;
+	}
+
+	public void setFonCodeDmp(String fonCodeDmp) {
+		this.fonCodeDmp = fonCodeDmp;
+	}
+
+	@Column(name = "FON_CODE_PF", length = 20)
+	public String getFonCodePf() {
+		return this.fonCodePf;
+	}
+
+	public void setFonCodePf(String fonCodePf) {
+		this.fonCodePf = fonCodePf;
+	}
+
+	@Column(name = "FON_LIBELLE_LNG_DMP", length = 500)
+	public String getFonLibelleLngDmp() {
+		return this.fonLibelleLngDmp;
+	}
+
+	public void setFonLibelleLngDmp(String fonLibelleLngDmp) {
+		this.fonLibelleLngDmp = fonLibelleLngDmp;
+	}
+
+	@Column(name = "FON_SOURCE_SIGMAP", length = 1)
+	public String getFonSourceSigmap() {
+		return this.fonSourceSigmap;
+	}
+
+	public void setFonSourceSigmap(String fonSourceSigmap) {
+		this.fonSourceSigmap = fonSourceSigmap;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -174,9 +264,29 @@ public class VbFonctionId implements java.io.Serializable {
 								&& this.getFonCourriel().equals(castOther.getFonCourriel())))
 				&& ((this.getFonMobil() == castOther.getFonMobil()) || (this.getFonMobil() != null
 						&& castOther.getFonMobil() != null && this.getFonMobil().equals(castOther.getFonMobil())))
-				&& ((this.getFonStrCode() == castOther.getFonStrCode())
-						|| (this.getFonStrCode() != null && castOther.getFonStrCode() != null
-								&& this.getFonStrCode().equals(castOther.getFonStrCode())));
+				&& ((this.getFonStrCode() == castOther.getFonStrCode()) || (this.getFonStrCode() != null
+						&& castOther.getFonStrCode() != null && this.getFonStrCode().equals(castOther.getFonStrCode())))
+				&& ((this.getFonOpeMatricule() == castOther.getFonOpeMatricule())
+						|| (this.getFonOpeMatricule() != null && castOther.getFonOpeMatricule() != null
+								&& this.getFonOpeMatricule().equals(castOther.getFonOpeMatricule())))
+				&& ((this.getFonDteSaisi() == castOther.getFonDteSaisi())
+						|| (this.getFonDteSaisi() != null && castOther.getFonDteSaisi() != null
+								&& this.getFonDteSaisi().equals(castOther.getFonDteSaisi())))
+				&& ((this.getFonMinCode() == castOther.getFonMinCode()) || (this.getFonMinCode() != null
+						&& castOther.getFonMinCode() != null && this.getFonMinCode().equals(castOther.getFonMinCode())))
+				&& ((this.getFonLibelleCrt() == castOther.getFonLibelleCrt())
+						|| (this.getFonLibelleCrt() != null && castOther.getFonLibelleCrt() != null
+								&& this.getFonLibelleCrt().equals(castOther.getFonLibelleCrt())))
+				&& ((this.getFonCodeDmp() == castOther.getFonCodeDmp()) || (this.getFonCodeDmp() != null
+						&& castOther.getFonCodeDmp() != null && this.getFonCodeDmp().equals(castOther.getFonCodeDmp())))
+				&& ((this.getFonCodePf() == castOther.getFonCodePf()) || (this.getFonCodePf() != null
+						&& castOther.getFonCodePf() != null && this.getFonCodePf().equals(castOther.getFonCodePf())))
+				&& ((this.getFonLibelleLngDmp() == castOther.getFonLibelleLngDmp())
+						|| (this.getFonLibelleLngDmp() != null && castOther.getFonLibelleLngDmp() != null
+								&& this.getFonLibelleLngDmp().equals(castOther.getFonLibelleLngDmp())))
+				&& ((this.getFonSourceSigmap() == castOther.getFonSourceSigmap())
+						|| (this.getFonSourceSigmap() != null && castOther.getFonSourceSigmap() != null
+								&& this.getFonSourceSigmap().equals(castOther.getFonSourceSigmap())));
 	}
 
 	public int hashCode() {
@@ -193,6 +303,14 @@ public class VbFonctionId implements java.io.Serializable {
 		result = 37 * result + (getFonCourriel() == null ? 0 : this.getFonCourriel().hashCode());
 		result = 37 * result + (getFonMobil() == null ? 0 : this.getFonMobil().hashCode());
 		result = 37 * result + (getFonStrCode() == null ? 0 : this.getFonStrCode().hashCode());
+		result = 37 * result + (getFonOpeMatricule() == null ? 0 : this.getFonOpeMatricule().hashCode());
+		result = 37 * result + (getFonDteSaisi() == null ? 0 : this.getFonDteSaisi().hashCode());
+		result = 37 * result + (getFonMinCode() == null ? 0 : this.getFonMinCode().hashCode());
+		result = 37 * result + (getFonLibelleCrt() == null ? 0 : this.getFonLibelleCrt().hashCode());
+		result = 37 * result + (getFonCodeDmp() == null ? 0 : this.getFonCodeDmp().hashCode());
+		result = 37 * result + (getFonCodePf() == null ? 0 : this.getFonCodePf().hashCode());
+		result = 37 * result + (getFonLibelleLngDmp() == null ? 0 : this.getFonLibelleLngDmp().hashCode());
+		result = 37 * result + (getFonSourceSigmap() == null ? 0 : this.getFonSourceSigmap().hashCode());
 		return result;
 	}
 

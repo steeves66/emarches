@@ -137,6 +137,11 @@
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
+                             <p:commandLink rendered="#{controleController.btn_apercuJug}" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-right:3px"  action="#{commissionController.renderPage('com9','RESJUG')}"
+				               title="test" update=":content">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.recupLot}" />                             
+                            </p:commandLink>
                             <!--FIN  BOUTONS COMMISSION -->
                             
                             

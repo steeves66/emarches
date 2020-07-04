@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -25,7 +25,6 @@ public class VAgpmId implements java.io.Serializable {
 	private String agpStrCode;
 	private String agpActif;
 	private String agpStatutRetour;
-	private String agpCode;
 	private String decOrganExecLibelle;
 
 	public VAgpmId() {
@@ -41,8 +40,7 @@ public class VAgpmId implements java.io.Serializable {
 
 	public VAgpmId(long agpId, short agpGesCode, String minLibelleCourt, String minLibelle, String fonCod, String ac,
 			String proLibelle, String agpTypeDao, String agpModePassation, BigDecimal proMontantTotCfa,
-			String agpStaCode, String agpStrCode, String agpActif, String agpStatutRetour, String agpCode,
-			String decOrganExecLibelle) {
+			String agpStaCode, String agpStrCode, String agpActif, String agpStatutRetour, String decOrganExecLibelle) {
 		this.agpId = agpId;
 		this.agpGesCode = agpGesCode;
 		this.minLibelleCourt = minLibelleCourt;
@@ -57,7 +55,6 @@ public class VAgpmId implements java.io.Serializable {
 		this.agpStrCode = agpStrCode;
 		this.agpActif = agpActif;
 		this.agpStatutRetour = agpStatutRetour;
-		this.agpCode = agpCode;
 		this.decOrganExecLibelle = decOrganExecLibelle;
 	}
 
@@ -187,15 +184,6 @@ public class VAgpmId implements java.io.Serializable {
 		this.agpStatutRetour = agpStatutRetour;
 	}
 
-	@Column(name = "AGP_CODE", length = 50)
-	public String getAgpCode() {
-		return this.agpCode;
-	}
-
-	public void setAgpCode(String agpCode) {
-		this.agpCode = agpCode;
-	}
-
 	@Column(name = "DEC_ORGAN_EXEC_LIBELLE", length = 500)
 	public String getDecOrganExecLibelle() {
 		return this.decOrganExecLibelle;
@@ -243,8 +231,6 @@ public class VAgpmId implements java.io.Serializable {
 				&& ((this.getAgpStatutRetour() == castOther.getAgpStatutRetour())
 						|| (this.getAgpStatutRetour() != null && castOther.getAgpStatutRetour() != null
 								&& this.getAgpStatutRetour().equals(castOther.getAgpStatutRetour())))
-				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
-						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())))
 				&& ((this.getDecOrganExecLibelle() == castOther.getDecOrganExecLibelle())
 						|| (this.getDecOrganExecLibelle() != null && castOther.getDecOrganExecLibelle() != null
 								&& this.getDecOrganExecLibelle().equals(castOther.getDecOrganExecLibelle())));
@@ -267,7 +253,6 @@ public class VAgpmId implements java.io.Serializable {
 		result = 37 * result + (getAgpStrCode() == null ? 0 : this.getAgpStrCode().hashCode());
 		result = 37 * result + (getAgpActif() == null ? 0 : this.getAgpActif().hashCode());
 		result = 37 * result + (getAgpStatutRetour() == null ? 0 : this.getAgpStatutRetour().hashCode());
-		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
 		result = 37 * result + (getDecOrganExecLibelle() == null ? 0 : this.getDecOrganExecLibelle().hashCode());
 		return result;
 	}

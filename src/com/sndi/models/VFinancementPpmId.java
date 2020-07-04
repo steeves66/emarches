@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -34,10 +34,10 @@ public class VFinancementPpmId implements java.io.Serializable {
 	public VFinancementPpmId() {
 	}
 
-	public VFinancementPpmId(long fppId, String fppDevCode, String fppSouCode, long fppDppId) {
+	public VFinancementPpmId(long fppId, String fppDevCode, String fppBaiCode, long fppDppId) {
 		this.fppId = fppId;
 		this.fppDevCode = fppDevCode;
-		this.fppSouCode = fppSouCode;
+		this.fppBaiCode = fppBaiCode;
 		this.fppDppId = fppDppId;
 	}
 
@@ -84,7 +84,7 @@ public class VFinancementPpmId implements java.io.Serializable {
 		this.fppDevCode = fppDevCode;
 	}
 
-	@Column(name = "FPP_BAI_CODE", length = 5)
+	@Column(name = "FPP_BAI_CODE", nullable = false, length = 5)
 	public String getFppBaiCode() {
 		return this.fppBaiCode;
 	}
@@ -93,7 +93,7 @@ public class VFinancementPpmId implements java.io.Serializable {
 		this.fppBaiCode = fppBaiCode;
 	}
 
-	@Column(name = "FPP_SOU_CODE", nullable = false, length = 5)
+	@Column(name = "FPP_SOU_CODE", length = 5)
 	public String getFppSouCode() {
 		return this.fppSouCode;
 	}
@@ -156,7 +156,7 @@ public class VFinancementPpmId implements java.io.Serializable {
 		this.fppPartTresor = fppPartTresor;
 	}
 
-	@Column(name = "BAI_CODE", length = 20)
+	@Column(name = "BAI_CODE", length = 5)
 	public String getBaiCode() {
 		return this.baiCode;
 	}

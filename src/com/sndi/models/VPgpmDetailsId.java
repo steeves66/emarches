@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -44,7 +44,8 @@ public class VPgpmDetailsId implements java.io.Serializable {
 	}
 
 	public VPgpmDetailsId(long gpgId, String gpgStaCode, String gpgTypePlan, String tymCode, String tymLibelleCourt,
-			String mopCode, String mopLibelleCourt, long plgId, short plgGesCode) {
+			String mopCode, String mopLibelleCourt, long plgId, short plgGesCode, String strCode,
+			String strLibelleCourt) {
 		this.gpgId = gpgId;
 		this.gpgStaCode = gpgStaCode;
 		this.gpgTypePlan = gpgTypePlan;
@@ -54,6 +55,8 @@ public class VPgpmDetailsId implements java.io.Serializable {
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.plgId = plgId;
 		this.plgGesCode = plgGesCode;
+		this.strCode = strCode;
+		this.strLibelleCourt = strLibelleCourt;
 	}
 
 	public VPgpmDetailsId(BigDecimal VId, String affStatut, long gpgId, String souLibelle, String gpgObjet,
@@ -307,7 +310,7 @@ public class VPgpmDetailsId implements java.io.Serializable {
 		this.minLibelleCourt = minLibelleCourt;
 	}
 
-	@Column(name = "STR_CODE", length = 20)
+	@Column(name = "STR_CODE", nullable = false, length = 20)
 	public String getStrCode() {
 		return this.strCode;
 	}
@@ -316,7 +319,7 @@ public class VPgpmDetailsId implements java.io.Serializable {
 		this.strCode = strCode;
 	}
 
-	@Column(name = "STR_LIBELLE_COURT", length = 500)
+	@Column(name = "STR_LIBELLE_COURT", nullable = false, length = 500)
 	public String getStrLibelleCourt() {
 		return this.strLibelleCourt;
 	}

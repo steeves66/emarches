@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,13 +24,13 @@ import javax.persistence.TemporalType;
 public class TDacSpecs implements java.io.Serializable {
 
 	private String dacCode;
+	private TGestions TGestions;
+	private TFonction TFonctionByDacFonCodeCpmp;
+	private TFonction TFonctionByDacFonCodAc;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TTypeDacSpecs TTypeDacSpecs;
 	private TTypeMarche TTypeMarche;
-	private TGestions TGestions;
-	private TFonction TFonctionByDacFonCodeCpmp;
-	private TFonction TFonctionByDacFonCodAc;
 	private TModeleDacType TModeleDacType;
 	private TModePassation TModePassation;
 	private String dacObjet;
@@ -81,11 +81,11 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacCode = dacCode;
 	}
 
-	public TDacSpecs(String dacCode, TStatut TStatut, TStructure TStructure, TTypeDacSpecs TTypeDacSpecs,
-			TTypeMarche TTypeMarche, TGestions TGestions, TFonction TFonctionByDacFonCodeCpmp,
-			TFonction TFonctionByDacFonCodAc, TModeleDacType TModeleDacType, TModePassation TModePassation,
-			String dacObjet, Date dacDteSaisi, BigDecimal dacNbrOuv, Date dacDteValCpmp, Date dacDteValDmp,
-			Date dacDateReception, String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
+	public TDacSpecs(String dacCode, TGestions TGestions, TFonction TFonctionByDacFonCodeCpmp,
+			TFonction TFonctionByDacFonCodAc, TStatut TStatut, TStructure TStructure, TTypeDacSpecs TTypeDacSpecs,
+			TTypeMarche TTypeMarche, TModeleDacType TModeleDacType, TModePassation TModePassation, String dacObjet,
+			Date dacDteSaisi, BigDecimal dacNbrOuv, Date dacDteValCpmp, Date dacDteValDmp, Date dacDateReception,
+			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
 			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, Set<TAvisAppelOffre> TAvisAppelOffres,
 			Set<TCommissionSpecifique> TCommissionSpecifiques, Set<TDetCritAnalyseDac> TDetCritAnalyseDacs,
@@ -97,13 +97,13 @@ public class TDacSpecs implements java.io.Serializable {
 			Set<TDetailDemandes> TDetailDemandeses, Set<TLotAao> TLotAaos, Set<TPiecesDacs> TPiecesDacses,
 			Set<TDetCommissionSeance> TDetCommissionSeances, Set<TRetrait> TRetraits) {
 		this.dacCode = dacCode;
+		this.TGestions = TGestions;
+		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
+		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TTypeDacSpecs = TTypeDacSpecs;
 		this.TTypeMarche = TTypeMarche;
-		this.TGestions = TGestions;
-		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
-		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
 		this.TModeleDacType = TModeleDacType;
 		this.TModePassation = TModePassation;
 		this.dacObjet = dacObjet;
@@ -160,6 +160,36 @@ public class TDacSpecs implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_GES_CODE")
+	public TGestions getTGestions() {
+		return this.TGestions;
+	}
+
+	public void setTGestions(TGestions TGestions) {
+		this.TGestions = TGestions;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_FON_CODE_CPMP")
+	public TFonction getTFonctionByDacFonCodeCpmp() {
+		return this.TFonctionByDacFonCodeCpmp;
+	}
+
+	public void setTFonctionByDacFonCodeCpmp(TFonction TFonctionByDacFonCodeCpmp) {
+		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_FON_COD_AC")
+	public TFonction getTFonctionByDacFonCodAc() {
+		return this.TFonctionByDacFonCodAc;
+	}
+
+	public void setTFonctionByDacFonCodAc(TFonction TFonctionByDacFonCodAc) {
+		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_STA_CODE")
 	public TStatut getTStatut() {
 		return this.TStatut;
@@ -197,36 +227,6 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTTypeMarche(TTypeMarche TTypeMarche) {
 		this.TTypeMarche = TTypeMarche;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_GES_CODE")
-	public TGestions getTGestions() {
-		return this.TGestions;
-	}
-
-	public void setTGestions(TGestions TGestions) {
-		this.TGestions = TGestions;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_FON_CODE_CPMP")
-	public TFonction getTFonctionByDacFonCodeCpmp() {
-		return this.TFonctionByDacFonCodeCpmp;
-	}
-
-	public void setTFonctionByDacFonCodeCpmp(TFonction TFonctionByDacFonCodeCpmp) {
-		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_FON_COD_AC")
-	public TFonction getTFonctionByDacFonCodAc() {
-		return this.TFonctionByDacFonCodAc;
-	}
-
-	public void setTFonctionByDacFonCodAc(TFonction TFonctionByDacFonCodAc) {
-		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

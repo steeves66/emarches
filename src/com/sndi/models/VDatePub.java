@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,7 +26,8 @@ public class VDatePub implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({ @AttributeOverride(name = "datepub", column = @Column(name = "DATEPUB", length = 8)),
+	@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "ID", precision = 22, scale = 0)),
+			@AttributeOverride(name = "datepub", column = @Column(name = "DATEPUB", length = 8)),
 			@AttributeOverride(name = "libelle", column = @Column(name = "LIBELLE", length = 120)) })
 	public VDatePubId getId() {
 		return this.id;

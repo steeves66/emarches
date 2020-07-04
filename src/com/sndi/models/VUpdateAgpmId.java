@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -629,7 +629,7 @@ public class VUpdateAgpmId implements java.io.Serializable {
 		this.finPartTresor = finPartTresor;
 	}
 
-	@Column(name = "BAI_CODE", nullable = false, length = 5)
+	@Column(name = "BAI_CODE", nullable = false, length = 20)
 	public String getBaiCode() {
 		return this.baiCode;
 	}

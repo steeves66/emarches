@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -115,8 +115,6 @@ public class VDetailCommissionId implements java.io.Serializable {
 	private String dofFonCodeAc;
 	private String dofOpeMatricule;
 	private String dofStatut;
-	private String dofSouNcc;
-	private String dofSigle;
 	private String dacCode;
 	private String dacObjet;
 	private Date dacDteSaisi;
@@ -179,13 +177,13 @@ public class VDetailCommissionId implements java.io.Serializable {
 			BigDecimal dofMtCorDmp, String dofRecevablDmp, Short dofScoreDmp, Long dofRangOfrBai,
 			BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai, String dofNomSign, String dofFonctSign,
 			String dofTelSign, Date dofDteSaisi, String dofFonCodeAc, String dofOpeMatricule, String dofStatut,
-			String dofSouNcc, String dofSigle, String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode,
-			String dacTymCode, String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc,
-			String dacStrCode, String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode,
-			Date dacDateReception, String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
-			String tymCode, String tymLibelleCourt, String tymLibelleLong, String tymTymCode, String tymGroupe,
-			String mopCode, String mopLibelleCourt, String mopLibelleLong) {
+			String dacCode, String dacObjet, Date dacDteSaisi, String dacStaCode, String dacTymCode, String dacMopCode,
+			BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode, String dacFonCodeCpmp,
+			Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Date dacDateReception, String dacStatutRetour,
+			String dacMention, Date dacDateValAc, String dacAvisBailleur, Date dacDateAvisBailleur, String dacBailleur,
+			Long dacCout, String dacTypePlan, String dacRecherche, String tymCode, String tymLibelleCourt,
+			String tymLibelleLong, String tymTymCode, String tymGroupe, String mopCode, String mopLibelleCourt,
+			String mopLibelleLong) {
 		this.aaoCode = aaoCode;
 		this.aaoLibelle = aaoLibelle;
 		this.aaoDacCode = aaoDacCode;
@@ -289,8 +287,6 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofFonCodeAc = dofFonCodeAc;
 		this.dofOpeMatricule = dofOpeMatricule;
 		this.dofStatut = dofStatut;
-		this.dofSouNcc = dofSouNcc;
-		this.dofSigle = dofSigle;
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -1252,24 +1248,6 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofStatut = dofStatut;
 	}
 
-	@Column(name = "DOF_SOU_NCC", length = 500)
-	public String getDofSouNcc() {
-		return this.dofSouNcc;
-	}
-
-	public void setDofSouNcc(String dofSouNcc) {
-		this.dofSouNcc = dofSouNcc;
-	}
-
-	@Column(name = "DOF_SIGLE", length = 500)
-	public String getDofSigle() {
-		return this.dofSigle;
-	}
-
-	public void setDofSigle(String dofSigle) {
-		this.dofSigle = dofSigle;
-	}
-
 	@Column(name = "DAC_CODE", nullable = false, length = 20)
 	public String getDacCode() {
 		return this.dacCode;
@@ -1824,10 +1802,6 @@ public class VDetailCommissionId implements java.io.Serializable {
 								&& this.getDofOpeMatricule().equals(castOther.getDofOpeMatricule())))
 				&& ((this.getDofStatut() == castOther.getDofStatut()) || (this.getDofStatut() != null
 						&& castOther.getDofStatut() != null && this.getDofStatut().equals(castOther.getDofStatut())))
-				&& ((this.getDofSouNcc() == castOther.getDofSouNcc()) || (this.getDofSouNcc() != null
-						&& castOther.getDofSouNcc() != null && this.getDofSouNcc().equals(castOther.getDofSouNcc())))
-				&& ((this.getDofSigle() == castOther.getDofSigle()) || (this.getDofSigle() != null
-						&& castOther.getDofSigle() != null && this.getDofSigle().equals(castOther.getDofSigle())))
 				&& ((this.getDacCode() == castOther.getDacCode()) || (this.getDacCode() != null
 						&& castOther.getDacCode() != null && this.getDacCode().equals(castOther.getDacCode())))
 				&& ((this.getDacObjet() == castOther.getDacObjet()) || (this.getDacObjet() != null
@@ -2017,8 +1991,6 @@ public class VDetailCommissionId implements java.io.Serializable {
 		result = 37 * result + (getDofFonCodeAc() == null ? 0 : this.getDofFonCodeAc().hashCode());
 		result = 37 * result + (getDofOpeMatricule() == null ? 0 : this.getDofOpeMatricule().hashCode());
 		result = 37 * result + (getDofStatut() == null ? 0 : this.getDofStatut().hashCode());
-		result = 37 * result + (getDofSouNcc() == null ? 0 : this.getDofSouNcc().hashCode());
-		result = 37 * result + (getDofSigle() == null ? 0 : this.getDofSigle().hashCode());
 		result = 37 * result + (getDacCode() == null ? 0 : this.getDacCode().hashCode());
 		result = 37 * result + (getDacObjet() == null ? 0 : this.getDacObjet().hashCode());
 		result = 37 * result + (getDacDteSaisi() == null ? 0 : this.getDacDteSaisi().hashCode());

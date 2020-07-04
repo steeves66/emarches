@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -130,8 +130,6 @@ public class VDetailCommission implements java.io.Serializable {
 			@AttributeOverride(name = "dofFonCodeAc", column = @Column(name = "DOF_FON_CODE_AC", length = 25)),
 			@AttributeOverride(name = "dofOpeMatricule", column = @Column(name = "DOF_OPE_MATRICULE", length = 25)),
 			@AttributeOverride(name = "dofStatut", column = @Column(name = "DOF_STATUT", length = 1)),
-			@AttributeOverride(name = "dofSouNcc", column = @Column(name = "DOF_SOU_NCC", length = 500)),
-			@AttributeOverride(name = "dofSigle", column = @Column(name = "DOF_SIGLE", length = 500)),
 			@AttributeOverride(name = "dacCode", column = @Column(name = "DAC_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "dacObjet", column = @Column(name = "DAC_OBJET", length = 1000)),
 			@AttributeOverride(name = "dacDteSaisi", column = @Column(name = "DAC_DTE_SAISI", length = 7)),

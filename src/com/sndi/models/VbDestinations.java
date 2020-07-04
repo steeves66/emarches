@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,15 +26,14 @@ public class VbDestinations implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({
-			@AttributeOverride(name = "desCode", column = @Column(name = "DES_CODE", nullable = false, length = 20)),
-			@AttributeOverride(name = "desAdr", column = @Column(name = "DES_ADR", length = 200)),
-			@AttributeOverride(name = "desLib", column = @Column(name = "DES_LIB", nullable = false, length = 500)),
-			@AttributeOverride(name = "desOpeMatricule", column = @Column(name = "DES_OPE_MATRICULE", length = 25)),
-			@AttributeOverride(name = "desOpeModif", column = @Column(name = "DES_OPE_MODIF", length = 25)),
-			@AttributeOverride(name = "desDteModif", column = @Column(name = "DES_DTE_MODIF", length = 7)),
-			@AttributeOverride(name = "desDteSaisi", column = @Column(name = "DES_DTE_SAISI", length = 7)),
-			@AttributeOverride(name = "desRegCode", column = @Column(name = "DES_REG_CODE", length = 2)) })
+	@AttributeOverrides({ @AttributeOverride(name = "desCode", column = @Column(name = "DES_CODE")),
+			@AttributeOverride(name = "desAdr", column = @Column(name = "DES_ADR")),
+			@AttributeOverride(name = "desLib", column = @Column(name = "DES_LIB")),
+			@AttributeOverride(name = "desUtilSaisi", column = @Column(name = "DES_UTIL_SAISI")),
+			@AttributeOverride(name = "desUtilModif", column = @Column(name = "DES_UTIL_MODIF")),
+			@AttributeOverride(name = "desDdteModif", column = @Column(name = "DES_DDTE_MODIF")),
+			@AttributeOverride(name = "desDteSaisi", column = @Column(name = "DES_DTE_SAISI")),
+			@AttributeOverride(name = "desRegCode", column = @Column(name = "DES_REG_CODE")) })
 	public VbDestinationsId getId() {
 		return this.id;
 	}

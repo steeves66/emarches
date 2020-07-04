@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,9 +24,9 @@ import javax.persistence.TemporalType;
 public class TOffres implements java.io.Serializable {
 
 	private BigDecimal offNum;
+	private TDacSpecs TDacSpecs;
 	private TSoumissions TSoumissions;
 	private TStatut TStatut;
-	private TDacSpecs TDacSpecs;
 	private TOperateur TOperateur;
 	private String offAaoCode;
 	private Date offDteSaisi;
@@ -42,21 +42,21 @@ public class TOffres implements java.io.Serializable {
 	public TOffres() {
 	}
 
-	public TOffres(BigDecimal offNum, TStatut TStatut, TDacSpecs TDacSpecs, String offAaoCode) {
+	public TOffres(BigDecimal offNum, TDacSpecs TDacSpecs, TStatut TStatut, String offAaoCode) {
 		this.offNum = offNum;
-		this.TStatut = TStatut;
 		this.TDacSpecs = TDacSpecs;
+		this.TStatut = TStatut;
 		this.offAaoCode = offAaoCode;
 	}
 
-	public TOffres(BigDecimal offNum, TSoumissions TSoumissions, TStatut TStatut, TDacSpecs TDacSpecs,
+	public TOffres(BigDecimal offNum, TDacSpecs TDacSpecs, TSoumissions TSoumissions, TStatut TStatut,
 			TOperateur TOperateur, String offAaoCode, Date offDteSaisi, Date offDteOuvFin, BigDecimal offMtTotOfr,
 			Date offDteJug, BigDecimal offMtTotCor, Date offDteOuvTec, Date offDteStaCour, String offSouSigleSte,
 			Set<TDetOffres> TDetOffreses) {
 		this.offNum = offNum;
+		this.TDacSpecs = TDacSpecs;
 		this.TSoumissions = TSoumissions;
 		this.TStatut = TStatut;
-		this.TDacSpecs = TDacSpecs;
 		this.TOperateur = TOperateur;
 		this.offAaoCode = offAaoCode;
 		this.offDteSaisi = offDteSaisi;
@@ -82,6 +82,16 @@ public class TOffres implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "OFF_DAC_CODE", nullable = false)
+	public TDacSpecs getTDacSpecs() {
+		return this.TDacSpecs;
+	}
+
+	public void setTDacSpecs(TDacSpecs TDacSpecs) {
+		this.TDacSpecs = TDacSpecs;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OFF_SOU_NCC")
 	public TSoumissions getTSoumissions() {
 		return this.TSoumissions;
@@ -99,16 +109,6 @@ public class TOffres implements java.io.Serializable {
 
 	public void setTStatut(TStatut TStatut) {
 		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OFF_DAC_CODE", nullable = false)
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

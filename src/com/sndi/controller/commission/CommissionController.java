@@ -181,6 +181,9 @@ public class CommissionController {
 	 private TDetCommissionSeance newDetailSeance = new TDetCommissionSeance();
 	 private VDetCommissionSeance sltMbr = new VDetCommissionSeance();
 	 private VbAnalyseOffre newAnalyseOffre =new VbAnalyseOffre();
+	 private VListeSouOffBasse sltRecharge =new VListeSouOffBasse();
+
+	 
 	 
 	 
 	 //Declaration des variables
@@ -276,6 +279,26 @@ public class CommissionController {
   			} 
 		 }
 		 
+		 public void saveRepechage() {
+			 listeOffres = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+					 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltRecharge.getDofNum())));
+					  if (!listeOffres.isEmpty()) {
+						  detailOffre=listeOffres.get(0); 
+						  
+						  detailOffre.setDofRepeche(sltRecharge.getDofRepeche());
+						  detailOffre.setDofObsAnormal(sltRecharge.getCommentaireAnormal());
+						  iservice.updateObject(detailOffre);
+						  
+						  offreBasse();
+						  
+						  userController.setTexteMsg("Modification effectuée avec succès!");
+						  userController.setRenderMsg(true);
+						  userController.setSevrityMsg("success");
+		 			} 
+				
+			
+					  
+		 }
 		
 	 //fin resultat analyse
 		//Liste des membres du commite d'evaluation
@@ -308,6 +331,7 @@ public class CommissionController {
 		 
 	 }
 	 
+	
 	 public void calculMontNet() {
 		 montRab= montLu * pourcentRab/100;
 		 montN = montLu - montRab;
@@ -1805,6 +1829,16 @@ public class CommissionController {
 
 	public void setInfoSeuil(VRecapSeuilAnormal infoSeuil) {
 		this.infoSeuil = infoSeuil;
+	}
+
+
+	public VListeSouOffBasse getSltRecharge() {
+		return sltRecharge;
+	}
+
+
+	public void setSltRecharge(VListeSouOffBasse sltRecharge) {
+		this.sltRecharge = sltRecharge;
 	}
 
 }

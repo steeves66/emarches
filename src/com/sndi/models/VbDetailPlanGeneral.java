@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -44,14 +44,7 @@ public class VbDetailPlanGeneral implements java.io.Serializable {
 			@AttributeOverride(name = "gpgActeurSaisie", column = @Column(name = "GPG_ACTEUR_SAISIE", length = 12)),
 			@AttributeOverride(name = "gpgStatutRetour", column = @Column(name = "GPG_STATUT_RETOUR", length = 4)),
 			@AttributeOverride(name = "gpgDateSaisie", column = @Column(name = "GPG_DATE_SAISIE", length = 7)),
-			@AttributeOverride(name = "gpgStrCode", column = @Column(name = "GPG_STR_CODE", length = 20)),
-			@AttributeOverride(name = "gpgDateValAc", column = @Column(name = "GPG_DATE_VAL_AC", length = 7)),
-			@AttributeOverride(name = "gpgDateValCpmp", column = @Column(name = "GPG_DATE_VAL_CPMP", length = 7)),
-			@AttributeOverride(name = "gpgDateValDmp", column = @Column(name = "GPG_DATE_VAL_DMP", length = 7)),
-			@AttributeOverride(name = "gpgLibFin", column = @Column(name = "GPG_LIB_FIN", length = 200)),
-			@AttributeOverride(name = "gpgDteModif", column = @Column(name = "GPG_DTE_MODIF", length = 7)),
-			@AttributeOverride(name = "gpgFonCodPf", column = @Column(name = "GPG_FON_COD_PF", length = 20)),
-			@AttributeOverride(name = "gpgFonCodDmp", column = @Column(name = "GPG_FON_COD_DMP", length = 20)) })
+			@AttributeOverride(name = "gpgStrCode", column = @Column(name = "GPG_STR_CODE", length = 20)) })
 	public VbDetailPlanGeneralId getId() {
 		return this.id;
 	}

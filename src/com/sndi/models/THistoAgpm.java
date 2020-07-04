@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 30 juin 2020 16:42:29 by Hibernate Tools 4.3.5.Final
+// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,29 +20,29 @@ import javax.persistence.TemporalType;
 public class THistoAgpm implements java.io.Serializable {
 
 	private long hagId;
-	private TStatut TStatut;
-	private TFonction TFonction;
-	private TOperateur TOperateur;
 	private TAgpm TAgpm;
+	private TFonction TFonction;
+	private TStatut TStatut;
+	private TOperateur TOperateur;
 	private Date hagDate;
 	private String hagMotif;
 
 	public THistoAgpm() {
 	}
 
-	public THistoAgpm(long hagId, TStatut TStatut, TAgpm TAgpm) {
+	public THistoAgpm(long hagId, TAgpm TAgpm, TStatut TStatut) {
 		this.hagId = hagId;
-		this.TStatut = TStatut;
 		this.TAgpm = TAgpm;
+		this.TStatut = TStatut;
 	}
 
-	public THistoAgpm(long hagId, TStatut TStatut, TFonction TFonction, TOperateur TOperateur, TAgpm TAgpm,
+	public THistoAgpm(long hagId, TAgpm TAgpm, TFonction TFonction, TStatut TStatut, TOperateur TOperateur,
 			Date hagDate, String hagMotif) {
 		this.hagId = hagId;
-		this.TStatut = TStatut;
-		this.TFonction = TFonction;
-		this.TOperateur = TOperateur;
 		this.TAgpm = TAgpm;
+		this.TFonction = TFonction;
+		this.TStatut = TStatut;
+		this.TOperateur = TOperateur;
 		this.hagDate = hagDate;
 		this.hagMotif = hagMotif;
 	}
@@ -59,13 +59,13 @@ public class THistoAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAG_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
+	@JoinColumn(name = "HAG_AGP_ID", nullable = false)
+	public TAgpm getTAgpm() {
+		return this.TAgpm;
 	}
 
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
+	public void setTAgpm(TAgpm TAgpm) {
+		this.TAgpm = TAgpm;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -79,6 +79,16 @@ public class THistoAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HAG_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HAG_OPE_MATRICULE")
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -86,16 +96,6 @@ public class THistoAgpm implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAG_AGP_ID", nullable = false)
-	public TAgpm getTAgpm() {
-		return this.TAgpm;
-	}
-
-	public void setTAgpm(TAgpm TAgpm) {
-		this.TAgpm = TAgpm;
 	}
 
 	@Temporal(TemporalType.DATE)
