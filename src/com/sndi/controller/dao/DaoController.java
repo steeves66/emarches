@@ -519,8 +519,9 @@ public class DaoController {
 		//Combo box critères
 	 
 	 public void chargeCritereCombobox() {
+		 multiFiltre=dao.getTTypeMarche().getTymCode();
 		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
-					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()));
 		 
 	 }
 	 
@@ -539,6 +540,8 @@ public class DaoController {
 		 newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 newCritereDac.setDcadStatut("0");
 		 iservice.addObject(newCritereDac);
+		 newCritereDac = new VbDetCritAnalyseDac();
+		 craCode ="";
 		 chargeCritereSaisie();
 	 }
 	 
@@ -558,6 +561,7 @@ public class DaoController {
 		 			newCritereDac.setDcadStatut("0");
 		 			iservice.addObject(newCritereDac);
 			     }
+		 		selectionlisteCritereAnalyse.clear();
 		 		chargeCritereSaisie();
 		 		pavet_commission = true;
 		 		userController.setTexteMsg("Critère(s) d'analyse enrégistré(s) avec succès!");

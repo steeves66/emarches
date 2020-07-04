@@ -311,7 +311,7 @@
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" emptyMessage="Aucun critère trouvé" var="slctdTb" 
+	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" sortBy="#{slctdTb.craCode}" expandableRowGroups="true" emptyMessage="Aucun critère trouvé" var="slctdTb" 
 					 editable="true" editMode="cell" rowKey="#{slctdTb.craCode}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="391">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 	                <p:column headerText="CRITERES" styleClass="col-sm-8">

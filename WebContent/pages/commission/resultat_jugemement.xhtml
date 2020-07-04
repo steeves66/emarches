@@ -50,6 +50,19 @@
 				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
      <div class="box"></div>
+     
+        <div class="form-group ">
+	                  <label for="typeFonction" class="col-sm-1 control-label"><b>Liste des lots</b></label>
+	                  <div class="col-sm-11">
+	                     <p:selectOneMenu id="typeFonction" value="#{commissionController.laaId}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir le type de la fonction.." itemValue="empty" />  
+			            <f:selectItems value="#{commissionController.listeLotsByAvis}" var="lot" itemLabel="#{lot.laaNum} : #{lot.laaObjet}" itemValue="#{lot.laaId}" />
+			           <p:ajax listener="#{commissionController.chargeResultaFilter()}" update=":gnl:resultat"/>
+       		        </p:selectOneMenu> 
+	                  </div>
+	                </div>
+	     <h:panelGroup id="resultat">
      <div class="box-group" id="accordion">
                 <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
                 <div class="panel box box-success">
@@ -158,7 +171,7 @@
             <div class="col-md-12">
              
 	           <div class="box box-success box-solid">
-	           
+	         
                <div class="box-header with-border">
                
                   <div class="col-md-10 "><div  style="color: #fff">I-EVALUATION ET CORRECTION DES OFFRES FINANCIERES DU LOT #{commissionController.slctdTd.aaoCode}</div></div> 
@@ -363,8 +376,9 @@
       <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISJUG')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
-		
+	</h:panelGroup>	
     </section>
+    
     </h:form>
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

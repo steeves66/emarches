@@ -217,6 +217,27 @@ public class CommissionController {
 	 
 	 
 	 //Resultat analyse*
+	 
+	 public void chargeResultaFilter() {
+		 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId))); 
+		 
+		 listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+		 
+		 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+		 
+		 listeRecapSeuil =  ((List<VRecapSeuilAnormal>)iservice.getObjectsByColumn("VRecapSeuilAnormal",new ArrayList<String>(Arrays.asList("DOF_LAA_ID")),
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+	       if (!listeRecapSeuil.isEmpty()) {
+	    	   infoSeuil=listeRecapSeuil.get(0); 
+	       }
+		 
+		
+	 }
+	 
+	 
 	//Vérification et correction des offres financières
 	 public void verifCor() {
 		 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
@@ -746,10 +767,10 @@ public class CommissionController {
 			
 				
 				//enregister dans T_analyse_offre
-				if (selectionCritereAnalyse.size()==0) {
+				/*if (selectionCritereAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
-		 		else{
+		 		else{*/
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 					   newOffre.setDofLaaId(laaId);
 					   newOffre.setTempType("OFF");
@@ -806,7 +827,7 @@ public class CommissionController {
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 		    }	
-		}
+		//}
 		
 		
 		
@@ -892,10 +913,10 @@ public class CommissionController {
 		public void analyser() {
 			
 			//Modification des pieces selectionnées a conforme
-			if(sltOffre.getDofRangOfr()> nbrLot) {
+			/*if(sltOffre.getDofRangOfr()> nbrLot) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
 			}else
-			{
+			{*/
 				sltOffre.setDofStaut("1");
 				iservice.updateObject(sltOffre);
 				
@@ -940,7 +961,7 @@ public class CommissionController {
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
 	    	
-			}
+			//}
 			onSelectLot();
 			
 		}
