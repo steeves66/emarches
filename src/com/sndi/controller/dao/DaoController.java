@@ -516,7 +516,7 @@ public class DaoController {
 		 _logger.info("type dac: "+controleController.getType());
 	 }*/
 	 
-		//Combo box critère
+		//Combo box critères
 	 
 	 public void chargeCritereCombobox() {
 		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),

@@ -129,7 +129,7 @@ public class ConstantService {
 		 chargePiecesOffresTable();
 		 chargeTypeStructureTable();
 		 chargePaysTable();
-		 chargeDatepubTable();
+		chargeDatepubTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
