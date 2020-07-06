@@ -191,6 +191,7 @@ public class CommissionController {
 	 private String laaId;
 	 private String filtreNcc="";
 	 private long valRegQual=0;
+	 private long verifCorNum = 0;
 	 private String aaoRegQual="";
 	 private boolean infoOffre=false;
 	 private Boolean boutonEdit=false;
@@ -213,6 +214,7 @@ public class CommissionController {
 	 private String ncc;
 	 private BigDecimal dofNum;
 	 private long laaNum;
+	 private long lotId;
 	 private int nbrLot;
 	 private String filtreCandidat="";
 	 //private long rabais
@@ -243,20 +245,37 @@ public class CommissionController {
 	 
 	//Vérification et correction des offres financières
 	 public void verifCor() {
+		  if(recupLot.getLaaId() == null) {
+			  verifCorNum = 0;
+		  }else {
+			  verifCorNum = recupLot.getLaaId();
+		  }
+		 
 		 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+verifCorNum)));
 	 }
 	 
 	//Liste des soumissions anormalement élévées 
 	 public void offreEleve() {
+		 if(recupLot.getLaaId() == null) {
+			 lotId = 0;
+		  }else {
+			  verifCorNum = recupLot.getLaaId();
+		  }
 		 listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotId)));
 	 }
 	 
 	 //Liste des soumissions anorlement basses
 	 public void offreBasse() {
+		 if(recupLot.getLaaId() == null) {
+			 lotId = 0;
+		  }else {
+			  verifCorNum = recupLot.getLaaId();
+		  }
+		 
 		 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotId)));
 	 }
 	//
 		 public void offreResulatatAttrib() {
@@ -272,8 +291,13 @@ public class CommissionController {
 		 
 		 
 		 public void detailSeuil() {
+			 if(recupLot.getLaaId() == null) {
+				 lotId = 0;
+			  }else {
+				  verifCorNum = recupLot.getLaaId();
+			  }
 			 listeRecapSeuil =  ((List<VRecapSeuilAnormal>)iservice.getObjectsByColumn("VRecapSeuilAnormal",new ArrayList<String>(Arrays.asList("DOF_LAA_ID")),
-					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+recupLot.getLaaId())));
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotId)));
 		       if (!listeRecapSeuil.isEmpty()) {
 		    	   infoSeuil=listeRecapSeuil.get(0); 
   			} 
@@ -1150,6 +1174,8 @@ public class CommissionController {
 					offreResultPropAttrib();
 					detailSeuil();
 					break;
+				case "com10":
+					break;
 			    }
 		     
 		     
@@ -1841,4 +1867,26 @@ public class CommissionController {
 		this.sltRecharge = sltRecharge;
 	}
 
+
+	public long getVerifCorNum() {
+		return verifCorNum;
+	}
+
+
+	public void setVerifCorNum(long verifCorNum) {
+		this.verifCorNum = verifCorNum;
+	}
+
+
+	public long getLotId() {
+		return lotId;
+	}
+
+
+	public void setLotId(long lotId) {
+		this.lotId = lotId;
+	}
+
+	
+	
 }

@@ -407,7 +407,7 @@ public class DaoController {
 		 controleController.fonctionaliteDynamic();
 		 chargeGestions();
 		 chargePays();
-		 chargeCritereCombobox();
+		 //chargeCritereCombobox();
 	 }
 	 
 	 public String onFlowProcess(FlowEvent event) {
@@ -519,7 +519,6 @@ public class DaoController {
 		//Combo box critères
 	 
 	 public void chargeCritereCombobox() {
-		 multiFiltre=dao.getTTypeMarche().getTymCode();
 		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
 					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()));
 		 
