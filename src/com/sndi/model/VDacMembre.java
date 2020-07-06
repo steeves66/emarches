@@ -37,6 +37,8 @@ public class VDacMembre implements java.io.Serializable {
 	private String comMarCode;
 	private String comAaoCode;
 	private String comTcoCode;
+	private String comStrCom;
+	private String comFonAdmin;
 
 	public VDacMembre() {
 	}
@@ -49,7 +51,7 @@ public class VDacMembre implements java.io.Serializable {
 			Date tctDteSaisi, String tctOpeMatricule, String tctGrpCode, String tctNomMbm, String tctPreMbm,
 			String tctTelMbm, String tctRepMandate, BigDecimal comNum, Date comDteSaisi, String comStrCode,
 			String comTctCode, String comOpeMatricule, String comDacCode, String comMarCode, String comAaoCode,
-			String comTcoCode) {
+			String comTcoCode,String comStrCom, String comFonAdmin) {
 		this.tctCode = tctCode;
 		this.tctLibelle = tctLibelle;
 		this.tctTitre = tctTitre;
@@ -71,6 +73,8 @@ public class VDacMembre implements java.io.Serializable {
 		this.comMarCode = comMarCode;
 		this.comAaoCode = comAaoCode;
 		this.comTcoCode = comTcoCode;
+		this.comStrCom = comStrCom;
+		this.comFonAdmin = comFonAdmin;
 	}
 
 	@Id
@@ -262,91 +266,25 @@ public class VDacMembre implements java.io.Serializable {
 	public void setComTcoCode(String comTcoCode) {
 		this.comTcoCode = comTcoCode;
 	}
+	
+	
 
-	public boolean equals(Object other) {
-		if ((this == other))
-			return true;
-		if ((other == null))
-			return false;
-		if (!(other instanceof VDacMembre))
-			return false;
-		VDacMembre castOther = (VDacMembre) other;
-
-		return ((this.getTctCode() == castOther.getTctCode()) || (this.getTctCode() != null
-				&& castOther.getTctCode() != null && this.getTctCode().equals(castOther.getTctCode())))
-				&& ((this.getTctLibelle() == castOther.getTctLibelle()) || (this.getTctLibelle() != null
-						&& castOther.getTctLibelle() != null && this.getTctLibelle().equals(castOther.getTctLibelle())))
-				&& ((this.getTctTitre() == castOther.getTctTitre()) || (this.getTctTitre() != null
-						&& castOther.getTctTitre() != null && this.getTctTitre().equals(castOther.getTctTitre())))
-				&& ((this.getTctTstCode() == castOther.getTctTstCode()) || (this.getTctTstCode() != null
-						&& castOther.getTctTstCode() != null && this.getTctTstCode().equals(castOther.getTctTstCode())))
-				&& ((this.getTctTcoCode() == castOther.getTctTcoCode()) || (this.getTctTcoCode() != null
-						&& castOther.getTctTcoCode() != null && this.getTctTcoCode().equals(castOther.getTctTcoCode())))
-				&& ((this.getTctDteSaisi() == castOther.getTctDteSaisi())
-						|| (this.getTctDteSaisi() != null && castOther.getTctDteSaisi() != null
-								&& this.getTctDteSaisi().equals(castOther.getTctDteSaisi())))
-				&& ((this.getTctOpeMatricule() == castOther.getTctOpeMatricule())
-						|| (this.getTctOpeMatricule() != null && castOther.getTctOpeMatricule() != null
-								&& this.getTctOpeMatricule().equals(castOther.getTctOpeMatricule())))
-				&& ((this.getTctGrpCode() == castOther.getTctGrpCode()) || (this.getTctGrpCode() != null
-						&& castOther.getTctGrpCode() != null && this.getTctGrpCode().equals(castOther.getTctGrpCode())))
-				&& ((this.getTctNomMbm() == castOther.getTctNomMbm()) || (this.getTctNomMbm() != null
-						&& castOther.getTctNomMbm() != null && this.getTctNomMbm().equals(castOther.getTctNomMbm())))
-				&& ((this.getTctPreMbm() == castOther.getTctPreMbm()) || (this.getTctPreMbm() != null
-						&& castOther.getTctPreMbm() != null && this.getTctPreMbm().equals(castOther.getTctPreMbm())))
-				&& ((this.getTctTelMbm() == castOther.getTctTelMbm()) || (this.getTctTelMbm() != null
-						&& castOther.getTctTelMbm() != null && this.getTctTelMbm().equals(castOther.getTctTelMbm())))
-				&& ((this.getTctRepMandate() == castOther.getTctRepMandate())
-						|| (this.getTctRepMandate() != null && castOther.getTctRepMandate() != null
-								&& this.getTctRepMandate().equals(castOther.getTctRepMandate())))
-				&& ((this.getComNum() == castOther.getComNum()) || (this.getComNum() != null
-						&& castOther.getComNum() != null && this.getComNum().equals(castOther.getComNum())))
-				&& ((this.getComDteSaisi() == castOther.getComDteSaisi())
-						|| (this.getComDteSaisi() != null && castOther.getComDteSaisi() != null
-								&& this.getComDteSaisi().equals(castOther.getComDteSaisi())))
-				&& ((this.getComStrCode() == castOther.getComStrCode()) || (this.getComStrCode() != null
-						&& castOther.getComStrCode() != null && this.getComStrCode().equals(castOther.getComStrCode())))
-				&& ((this.getComTctCode() == castOther.getComTctCode()) || (this.getComTctCode() != null
-						&& castOther.getComTctCode() != null && this.getComTctCode().equals(castOther.getComTctCode())))
-				&& ((this.getComOpeMatricule() == castOther.getComOpeMatricule())
-						|| (this.getComOpeMatricule() != null && castOther.getComOpeMatricule() != null
-								&& this.getComOpeMatricule().equals(castOther.getComOpeMatricule())))
-				&& ((this.getComDacCode() == castOther.getComDacCode()) || (this.getComDacCode() != null
-						&& castOther.getComDacCode() != null && this.getComDacCode().equals(castOther.getComDacCode())))
-				&& ((this.getComMarCode() == castOther.getComMarCode()) || (this.getComMarCode() != null
-						&& castOther.getComMarCode() != null && this.getComMarCode().equals(castOther.getComMarCode())))
-				&& ((this.getComAaoCode() == castOther.getComAaoCode()) || (this.getComAaoCode() != null
-						&& castOther.getComAaoCode() != null && this.getComAaoCode().equals(castOther.getComAaoCode())))
-				&& ((this.getComTcoCode() == castOther.getComTcoCode())
-						|| (this.getComTcoCode() != null && castOther.getComTcoCode() != null
-								&& this.getComTcoCode().equals(castOther.getComTcoCode())));
+	@Column(name = "COM_STR_COM", length = 500)
+	public String getComStrCom() {
+		return this.comStrCom;
 	}
 
-	public int hashCode() {
-		int result = 17;
-
-		result = 37 * result + (getTctCode() == null ? 0 : this.getTctCode().hashCode());
-		result = 37 * result + (getTctLibelle() == null ? 0 : this.getTctLibelle().hashCode());
-		result = 37 * result + (getTctTitre() == null ? 0 : this.getTctTitre().hashCode());
-		result = 37 * result + (getTctTstCode() == null ? 0 : this.getTctTstCode().hashCode());
-		result = 37 * result + (getTctTcoCode() == null ? 0 : this.getTctTcoCode().hashCode());
-		result = 37 * result + (getTctDteSaisi() == null ? 0 : this.getTctDteSaisi().hashCode());
-		result = 37 * result + (getTctOpeMatricule() == null ? 0 : this.getTctOpeMatricule().hashCode());
-		result = 37 * result + (getTctGrpCode() == null ? 0 : this.getTctGrpCode().hashCode());
-		result = 37 * result + (getTctNomMbm() == null ? 0 : this.getTctNomMbm().hashCode());
-		result = 37 * result + (getTctPreMbm() == null ? 0 : this.getTctPreMbm().hashCode());
-		result = 37 * result + (getTctTelMbm() == null ? 0 : this.getTctTelMbm().hashCode());
-		result = 37 * result + (getTctRepMandate() == null ? 0 : this.getTctRepMandate().hashCode());
-		result = 37 * result + (getComNum() == null ? 0 : this.getComNum().hashCode());
-		result = 37 * result + (getComDteSaisi() == null ? 0 : this.getComDteSaisi().hashCode());
-		result = 37 * result + (getComStrCode() == null ? 0 : this.getComStrCode().hashCode());
-		result = 37 * result + (getComTctCode() == null ? 0 : this.getComTctCode().hashCode());
-		result = 37 * result + (getComOpeMatricule() == null ? 0 : this.getComOpeMatricule().hashCode());
-		result = 37 * result + (getComDacCode() == null ? 0 : this.getComDacCode().hashCode());
-		result = 37 * result + (getComMarCode() == null ? 0 : this.getComMarCode().hashCode());
-		result = 37 * result + (getComAaoCode() == null ? 0 : this.getComAaoCode().hashCode());
-		result = 37 * result + (getComTcoCode() == null ? 0 : this.getComTcoCode().hashCode());
-		return result;
+	public void setComStrCom(String comStrCom) {
+		this.comStrCom = comStrCom;
 	}
+
+	@Column(name = "COM_FON_ADMIN", length = 500)
+	public String getComFonAdmin() {
+		return this.comFonAdmin;
+	}
+
+	public void setComFonAdmin(String comFonAdmin) {
+		this.comFonAdmin = comFonAdmin;
+	}	
 
 }

@@ -677,6 +677,8 @@ public class CommissionController {
 								newDetailSeance.setDcsRepMandate(mbr.getTctRepMandate());
 								newDetailSeance.setDcsFonCod(mbr.getTctLibelle());
 								newDetailSeance.setDcsObservation(mbr.getTctTitre());
+								newDetailSeance.setDcsStrCom(mbr.getComStrCom());
+								newDetailSeance.setDcsFonAdmin(mbr.getComFonAdmin());
 								newDetailSeance.setTSeances(newSeance);
 								newDetailSeance.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 								newDetailSeance.setTTypeCommission(new TTypeCommission("COJ"));

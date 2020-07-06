@@ -46,6 +46,8 @@ public class TDetCommissionSeance implements java.io.Serializable {
 	private String dcsPresent;
 	private String dcsMbmRespo;
 	private String dcsRepMandate;
+	private String dcsFonAdmin;
+	private String dcsStrCom;
 	private Set<TAffichageDao> TAffichageDaos = new HashSet<TAffichageDao>(0);
 
 	public TDetCommissionSeance() {
@@ -59,7 +61,7 @@ public class TDetCommissionSeance implements java.io.Serializable {
 			TCommissionSpecifique TCommissionSpecifique, TOperateur TOperateur, TDacSpecs TDacSpecs,
 			TStructure TStructure, TSeances TSeances, String dcsFonCod, String dcsOpeMatricule, Date dcsDteSaisi,
 			String dcsFonCodSaisi, String dcsObservation, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm,
-			String dcsPresent, String dcsMbmRespo, String dcsRepMandate, Set<TAffichageDao> TAffichageDaos) {
+			String dcsPresent, String dcsMbmRespo, String dcsRepMandate,String dcsFonAdmin, String dcsStrCom, Set<TAffichageDao> TAffichageDaos) {
 		this.dcsNum = dcsNum;
 		this.TTypeCommission = TTypeCommission;
 		this.TCommissionSpecifique = TCommissionSpecifique;
@@ -78,6 +80,8 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsPresent = dcsPresent;
 		this.dcsMbmRespo = dcsMbmRespo;
 		this.dcsRepMandate = dcsRepMandate;
+		this.dcsFonAdmin = dcsFonAdmin;
+		this.dcsStrCom = dcsStrCom;
 		this.TAffichageDaos = TAffichageDaos;
 	}
 
@@ -252,6 +256,26 @@ public class TDetCommissionSeance implements java.io.Serializable {
 	public void setDcsRepMandate(String dcsRepMandate) {
 		this.dcsRepMandate = dcsRepMandate;
 	}
+	
+	@Column(name = "DCS_FON_ADMIN", length = 500)
+	public String getDcsFonAdmin() {
+		return this.dcsFonAdmin;
+	}
+
+	public void setDcsFonAdmin(String dcsFonAdmin) {
+		this.dcsFonAdmin = dcsFonAdmin;
+	}
+
+	@Column(name = "DCS_STR_COM", length = 500)
+	public String getDcsStrCom() {
+		return this.dcsStrCom;
+	}
+
+	public void setDcsStrCom(String dcsStrCom) {
+		this.dcsStrCom = dcsStrCom;
+	}
+	
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetCommissionSeance")
 	public Set<TAffichageDao> getTAffichageDaos() {
 		return this.TAffichageDaos;

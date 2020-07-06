@@ -100,13 +100,35 @@
          				  </p:cellEditor>
 				        </p:column>
                          
-                          <p:column headerText="PRENOM(S)" styleClass="col-sm-2" >
+                        <p:column headerText="PRENOM(S)" styleClass="col-sm-2" >
                           <p:cellEditor>
                           <f:facet name="output">
          				  <h:outputText value="#{slctdTb.tctPreMbm}"/>
          				  </f:facet>
          				  <f:facet name="input">
          				  <p:inputText id="prenom" value="#{slctdTb.tctPreMbm}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="FONCTION ADMIN." styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.comFonAdmin}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="prenom" value="#{slctdTb.comFonAdmin}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="STRUCTURE" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.comStrCom}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="prenom" value="#{slctdTb.comStrCom}" style="width:100%" />
          				  </f:facet>
          				  </p:cellEditor>
 				        </p:column>
