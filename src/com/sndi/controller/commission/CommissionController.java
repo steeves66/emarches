@@ -156,6 +156,7 @@ public class CommissionController {
 	 private List<VResultPropAttribLot> resultatPropAttributaire = new ArrayList<VResultPropAttribLot>();
 	 private List<VRecapSeuilAnormal> listeRecapSeuil = new ArrayList<VRecapSeuilAnormal>();
 	 private VRecapSeuilAnormal infoSeuil =new VRecapSeuilAnormal();
+	 private VVerifcorOffin infoLot =new VVerifcorOffin();
 	 private TLotAao recupLot =new TLotAao();
 	
 	 
@@ -226,6 +227,9 @@ public class CommissionController {
 	 public void chargeResultaFilter() {
 		 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
 				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId))); 
+		  if (!listeVerifCor.isEmpty()) {
+			  infoLot=listeVerifCor.get(0); 
+	       }
 		 
 		 listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
 				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
@@ -239,6 +243,14 @@ public class CommissionController {
 	    	   infoSeuil=listeRecapSeuil.get(0); 
 	       }
 		 
+	       resultatAttributaire = ((List<VResultEvalClassLot>)iservice.getObjectsByColumn("VResultEvalClassLot",new ArrayList<String>(Arrays.asList("RANG")),
+					 new WhereClause("LAA_NUM",Comparateur.EQ,""+infoLot.getLaaNum()),
+					 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));
+	       
+
+				 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
+						 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));
+			 
 		
 	 }
 	 
@@ -1074,10 +1086,16 @@ public class CommissionController {
 		 
 		 public void vider() {
 			 newOffre = new VbTempParamDetOffres();
+			 infoLot =new VVerifcorOffin();
 			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
 			 listeSelectionPiecesOffresAnalyse.clear();
 			 listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();
 			 listeSelectionPiecesOffres.clear();
+			 listeSouOffBass.clear();
+			 listeSouOffEleve.clear();
+			 resultatAttributaire.clear();
+			 resultatPropAttributaire.clear();
+			 listeRecapSeuil.clear();
 			 //listeOffres = new ArrayList<TDetOffres>(); 
 			 //listeOffre = new ArrayList<VDetailOffres>();
 			 listeOffres.clear();
@@ -1169,15 +1187,14 @@ public class CommissionController {
 					break;
 				
 				case "com9":
-					verifCor();
+					chargeLotByAvis();
+					/*verifCor();
 					offreBasse();
 					offreEleve();
 					offreResulatatAttrib();
 					offreResultPropAttrib();
-					detailSeuil();
-					break;
-				case "com10":
-					break;
+					detailSeuil();*/
+					
 			    }
 		     
 		     
@@ -1887,6 +1904,16 @@ public class CommissionController {
 
 	public void setLotId(long lotId) {
 		this.lotId = lotId;
+	}
+
+
+	public VVerifcorOffin getInfoLot() {
+		return infoLot;
+	}
+
+
+	public void setInfoLot(VVerifcorOffin infoLot) {
+		this.infoLot = infoLot;
 	}
 
 	

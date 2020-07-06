@@ -1514,7 +1514,7 @@ public class DaoController {
 						 membresCommission = ((List<VbCommissionType>)iservice.getObjectsByColumn("VbCommissionType",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 								    new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
 								    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ"),
-								    new WhereClause("TCT_TITRE",Comparateur.NEQ,"EXPERT")));
+								    new WhereClause("TCT_GRP_CODE",Comparateur.NEQ,"AUT")));
 								_logger.info("membre size: "+membresCommission.size());	
 								
 								

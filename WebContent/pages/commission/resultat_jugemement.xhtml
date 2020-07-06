@@ -11,7 +11,9 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-        #{controleController.libelle} #{commissionController.recupLot.laaNum} : <strong>#{commissionController.recupLot.laaObjet}</strong> 
+       <h:panelGroup id="resultatEntete">
+        #{controleController.libelle} #{commissionController.infoLot.laaNum} : <strong>#{commissionController.infoLot.laaObjet}</strong>
+        </h:panelGroup> 
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
@@ -58,7 +60,7 @@
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItem  itemLabel="Choisir le type de la fonction.." itemValue="empty" />  
 			            <f:selectItems value="#{commissionController.listeLotsByAvis}" var="lot" itemLabel="#{lot.laaNum} : #{lot.laaObjet}" itemValue="#{lot.laaId}" />
-			           <p:ajax listener="#{commissionController.chargeResultaFilter()}" update=":gnl:resultat"/>
+			           <p:ajax listener="#{commissionController.chargeResultaFilter()}" update=":gnl"/>
        		        </p:selectOneMenu> 
 	                  </div>
 	                </div>
@@ -399,16 +401,66 @@
     
     
       <h:form id="examenDlg">
-	  <p:dialog  widgetVar="examenDlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="">
+	  <p:dialog  widgetVar="examenDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
 	    <div class="row">    
             <div class="col-md-12">
+             <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR #{commissionController.sltRecharge.offSouNcc} : #{commissionController.sltRecharge.offSouSigleSte}</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Soumissinnaire</label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText styleClass="text-muted" value="#{commissionController.sltRecharge.offSouSigleSte}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Soumissinnaire corrigée</label></div>
+                  <div class="col-sm-9">
+                   <label><h:outputText value="#{commissionController.sltRecharge.dofMtCor}" styleClass="text-muted" style="width: 100%" readonly="true">
+                   <f:convertNumber pattern="##,###.##" />
+                   </h:outputText>
+                   </label>
+                  </div>
+	             </div>
+	                 <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Seuil (SF2)</label></div>
+                  <div class="col-sm-9">
+                   <label>
+                   <h:outputText value="#{commissionController.sltRecharge.sf2}" styleClass="text-muted" style="width: 100%" readonly="true">
+                   <f:convertNumber pattern="##,###.##" />
+                   </h:outputText>
+                   </label>
+                  </div>
+	             </div>
+	                <div class="row">
+                  <div class="col-sm-3"><label class="pull-right">Commentaire</label></div>
+                  <div class="col-sm-9">
+                     <label>
+                   <h:outputText value="#{commissionController.sltRecharge.commentaire}" styleClass="text-muted" style="width: 100%" readonly="true">
+                   </h:outputText>
+                   </label>
+                  </div>
+	             </div>
+	             </div>
+	             </div>
+            
+            
                     <div class="box box-success box-solid">
                      
         <div class="box-header with-border">
             <div  style="color: #fff">EXAMEN</div>
          </div>
          <div class="box-body">
-         <p:dataTable var="slctdTb"  id="tabExamen" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeSouOffBass}"  
+         
+        
+	             
+<!--          <p:dataTable var="slctdTb"  id="tabExamen" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeSouOffBass}"  
                  scrollable="true" scrollHeight="200" emptyMessage="Aucun Lot enregistré">
                          
                       <p:column headerText="N°" style="width : 3%">
@@ -432,7 +484,7 @@
          				  <h:outputText value="#{slctdTb.commentaire}" />
 				        </p:column>	
 				      
-				         </p:dataTable>
+				         </p:dataTable> -->
 				         <br/>
 				         
 				          <div class="form-group ">
@@ -449,14 +501,14 @@
 				          <div class="form-group">
 		                  <label for="l6" class="col-sm-1 control-label">Observation<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-11">
-		                    <p:inputTextarea value="#{commissionController.sltRecharge.commentaireAnormal}" rows="3" cols="8" styleClass="form-control" id="l6" style="width: 100%" >
+		                    <p:inputTextarea value="#{commissionController.sltRecharge.commentaireAnormal}" rows="5" cols="8" styleClass="form-control" id="l6" style="width: 100%" >
 		                    </p:inputTextarea>
 		                  </div>
                 </div>
          </div>
          
          <div class="box-footer">
-          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.saveRepechage()}"  update=":gnl">
+          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.saveRepechage()}" oncomplete="PF('examenDlg').hide()"  update=":gnl">
 				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Valider
 				            </p:commandLink>
