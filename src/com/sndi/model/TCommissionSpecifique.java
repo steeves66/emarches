@@ -35,6 +35,9 @@ public class TCommissionSpecifique implements java.io.Serializable {
 	private Date comDteSaisi;
 	private String comOpeMatricule;
 	private String comMarCode;
+	private String comAaoCode;
+	private String comFonAdmin;
+	private String comStrCom;
 	private Set<TDetCommissionSeance> TDetCommissionSeances = new HashSet<TDetCommissionSeance>(0);
 
 	public TCommissionSpecifique() {
@@ -46,7 +49,7 @@ public class TCommissionSpecifique implements java.io.Serializable {
 
 	public TCommissionSpecifique(long  comNum, TTypeCommission TTypeCommission, TCommissionType TCommissionType,
 			TDacSpecs TDacSpecs, TAvisAppelOffre TAvisAppelOffre, TStructure TStructure, Date comDteSaisi,
-			String comOpeMatricule, String comMarCode, Set<TDetCommissionSeance> TDetCommissionSeances) {
+			String comOpeMatricule, String comMarCode,String comAaoCode, String comFonAdmin, String comStrCom, Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.comNum = comNum;
 		this.TTypeCommission = TTypeCommission;
 		this.TCommissionType = TCommissionType;
@@ -56,6 +59,9 @@ public class TCommissionSpecifique implements java.io.Serializable {
 		this.comDteSaisi = comDteSaisi;
 		this.comOpeMatricule = comOpeMatricule;
 		this.comMarCode = comMarCode;
+		this.comAaoCode = comAaoCode;
+		this.comFonAdmin = comFonAdmin;
+		this.comStrCom = comStrCom;
 		this.TDetCommissionSeances = TDetCommissionSeances;
 	}
 
@@ -147,6 +153,33 @@ public class TCommissionSpecifique implements java.io.Serializable {
 
 	public void setComMarCode(String comMarCode) {
 		this.comMarCode = comMarCode;
+	}
+	
+	@Column(name = "COM_AAO_CODE", length = 20)
+	public String getComAaoCode() {
+		return this.comAaoCode;
+	}
+
+	public void setComAaoCode(String comAaoCode) {
+		this.comAaoCode = comAaoCode;
+	}
+
+	@Column(name = "COM_FON_ADMIN", length = 500)
+	public String getComFonAdmin() {
+		return this.comFonAdmin;
+	}
+
+	public void setComFonAdmin(String comFonAdmin) {
+		this.comFonAdmin = comFonAdmin;
+	}
+
+	@Column(name = "COM_STR_COM", length = 500)
+	public String getComStrCom() {
+		return this.comStrCom;
+	}
+
+	public void setComStrCom(String comStrCom) {
+		this.comStrCom = comStrCom;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TCommissionSpecifique")

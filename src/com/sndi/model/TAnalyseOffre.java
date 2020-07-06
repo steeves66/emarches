@@ -29,6 +29,8 @@ public class TAnalyseOffre implements java.io.Serializable {
 	private String anfOpeModif;
 	private Date anfDteModif;
 	private String anfTypeActeur;
+	private Long anfValeurScore;
+	private String anfCommentaire;
 
 	public TAnalyseOffre() {
 	}
@@ -46,7 +48,8 @@ public class TAnalyseOffre implements java.io.Serializable {
 
 	public TAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
 			BigDecimal anfLaaId, BigDecimal anfDofNum, String anfValeur, String anfObser, String anfOpeMatricule,
-			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur) {
+			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur,Long anfValeurScore,
+			String anfCommentaire) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
@@ -60,6 +63,8 @@ public class TAnalyseOffre implements java.io.Serializable {
 		this.anfOpeModif = anfOpeModif;
 		this.anfDteModif = anfDteModif;
 		this.anfTypeActeur = anfTypeActeur;
+		this.anfValeurScore = anfValeurScore;
+		this.anfCommentaire = anfCommentaire;
 	}
 
 	@Id
@@ -178,5 +183,23 @@ public class TAnalyseOffre implements java.io.Serializable {
 
 	public void setAnfTypeActeur(String anfTypeActeur) {
 		this.anfTypeActeur = anfTypeActeur;
+	}
+	
+	@Column(name = "ANF_VALEUR_SCORE", precision = 10, scale = 0)
+	public Long getAnfValeurScore() {
+		return this.anfValeurScore;
+	}
+
+	public void setAnfValeurScore(Long anfValeurScore) {
+		this.anfValeurScore = anfValeurScore;
+	}
+
+	@Column(name = "ANF_COMMENTAIRE", length = 1000)
+	public String getAnfCommentaire() {
+		return this.anfCommentaire;
+	}
+
+	public void setAnfCommentaire(String anfCommentaire) {
+		this.anfCommentaire = anfCommentaire;
 	}
 }
