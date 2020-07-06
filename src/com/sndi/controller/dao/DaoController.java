@@ -3512,7 +3512,7 @@ public class DaoController {
 													}else {
 														//infoNcc=false;
 														soumission = new TSoumissions();
-														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero de vente n'existe pas! ", "")); 	 
+														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Votre NCC n'est pas inscrite dans la base des Marchés Publics, Prière prendre contact avec la CELLIOPE pour la prise en compte de votre NCC! ", "")); 	 
 													}
 												 }
 											  
