@@ -94,6 +94,7 @@ import com.sndi.model.VPieceDac;
 import com.sndi.model.VPieces;
 import com.sndi.model.VPiecesOffreDao;
 import com.sndi.model.VPpmDao;
+import com.sndi.model.VTypePieceOffreSg;
 import com.sndi.model.VUpdateDac;
 import com.sndi.model.VVenteLot;
 import com.sndi.model.VbCommissionSpecifique;
@@ -206,8 +207,12 @@ public class DaoController {
 	private List<VAvisAdresse> avisAdresse = new ArrayList<VAvisAdresse>();
 	private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
 	//GESTION PIECES OFFRES
-	private List<TTypePieceOffre> listePiecesOffres= new ArrayList<TTypePieceOffre>();
-	private List<TTypePieceOffre> listeSelectionPiecesOffres= new ArrayList<TTypePieceOffre>();
+	//private List<TTypePieceOffre> listePiecesOffres= new ArrayList<TTypePieceOffre>();
+	//private List<TTypePieceOffre> listeSelectionPiecesOffres= new ArrayList<TTypePieceOffre>();
+	
+	private List<VTypePieceOffreSg> listePiecesOffres= new ArrayList<VTypePieceOffreSg>();
+	private List<VTypePieceOffreSg> listeSelectionPiecesOffres= new ArrayList<VTypePieceOffreSg>();
+	
 	private List<VbPaysReference> listePays = new ArrayList<VbPaysReference>();
 	//GESTION DES CRITERES D'ANALYSE
 	private List<VCritereAnalyseModel> listeCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
@@ -949,12 +954,12 @@ public class DaoController {
 		 public void chargePiecesOffres() {
 			 listePiecesOffres.clear();
 			 if(dao.getDacBailleur().equalsIgnoreCase("N")) {
-				 listePiecesOffres= (List<TTypePieceOffre>) iservice.getObjectsByColumn("TTypePieceOffre", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
+				 listePiecesOffres= (List<VTypePieceOffreSg>) iservice.getObjectsByColumn("VTypePieceOffreSg", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
 						 new WhereClause("TPO_BAI_ETAT",WhereClause.Comparateur.EQ,"E")); 
 				
 			 }else
 			 {
-				 listePiecesOffres= (List<TTypePieceOffre>) iservice.getObjectsByColumn("TTypePieceOffre", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
+				 listePiecesOffres= (List<VTypePieceOffreSg>) iservice.getObjectsByColumn("VTypePieceOffreSg", new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
 						 new WhereClause("TPO_BAI_ETAT",WhereClause.Comparateur.EQ,"B"));  
 			 }
 			
@@ -2291,7 +2296,7 @@ public class DaoController {
 										new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 							}
 					 		else{
-						 		 for(TTypePieceOffre ligne : listeSelectionPiecesOffres) {
+						 		 for(VTypePieceOffreSg ligne : listeSelectionPiecesOffres) {
 						 			newPieceOffreDac.setOdpDteSaisi(Calendar.getInstance().getTime());
 						 			newPieceOffreDac.setOdpOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 						 			newPieceOffreDac.setOdpTpoEtapPiece("Ouverture");
@@ -4924,22 +4929,6 @@ public class DaoController {
 		this.natureDocListe = natureDocListe;
 	}
 
-	public List<TTypePieceOffre> getListePiecesOffres() {
-		return listePiecesOffres;
-	}
-
-	public void setListePiecesOffres(List<TTypePieceOffre> listePiecesOffres) {
-		this.listePiecesOffres = listePiecesOffres;
-	}
-
-	public List<TTypePieceOffre> getListeSelectionPiecesOffres() {
-		return listeSelectionPiecesOffres;
-	}
-
-	public void setListeSelectionPiecesOffres(List<TTypePieceOffre> listeSelectionPiecesOffres) {
-		this.listeSelectionPiecesOffres = listeSelectionPiecesOffres;
-	}
-
 
 	public boolean isEtatQualif() {
 		return etatQualif;
@@ -5752,6 +5741,20 @@ public class DaoController {
 		this.totalMontantEstimatif = totalMontantEstimatif;
 	}
 
+	public List<VTypePieceOffreSg> getListePiecesOffres() {
+		return listePiecesOffres;
+	}
 
+	public void setListePiecesOffres(List<VTypePieceOffreSg> listePiecesOffres) {
+		this.listePiecesOffres = listePiecesOffres;
+	}
+
+	public List<VTypePieceOffreSg> getListeSelectionPiecesOffres() {
+		return listeSelectionPiecesOffres;
+	}
+
+	public void setListeSelectionPiecesOffres(List<VTypePieceOffreSg> listeSelectionPiecesOffres) {
+		this.listeSelectionPiecesOffres = listeSelectionPiecesOffres;
+	}
 		
 }
