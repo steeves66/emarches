@@ -162,7 +162,7 @@ public class TPiecesOffres implements java.io.Serializable {
 		this.pofDteSaisi = pofDteSaisi;
 	}
 
-	@Column(name = "POF_OBS", length = 500)
+	@Column(name = "POF_OBS")
 	public String getPofObs() {
 		return this.pofObs;
 	}

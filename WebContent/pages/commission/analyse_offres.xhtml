@@ -226,7 +226,7 @@
 	                 <div class="col-md-5">
 	                   <div class="box box-success box-solid">
 			               <div class="box-header with-border">
-			                  <div class="col-md-10 "><div  style="color: #fff">PIECES ADMINISTRATIVES</div></div> 
+			                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE ADMINISTRATIVE (1)</div></div> 
 						         <div class="col-md-2 "> </div>
 			                </div>
 	                         <!-- /.box-header -->
@@ -237,13 +237,38 @@
 		                               <p:column headerText="PIECES" styleClass="col-sm-11">
 		                                  <h:outputText value="#{slctdTb.tpoLibelle}"/>
 		                                </p:column>
-		                        </p:dataTable>
+		                                  <p:column headerText="PRESENCE" styleClass="col-sm-2" rendered="#{commissionController.conformite}" >
+                                            <p:cellEditor>
+                                             <f:facet name="output">
+         				                        <h:outputText id="presence1" value="#{slctdTb.aaoRegQual}" />
+         				                         </f:facet>
+         				                             <f:facet name="input">
+	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
+				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
+	                                                    <f:selectItem itemLabel="O" itemValue="CONFORME" />
+	                                                   <f:selectItem itemLabel="N" itemValue="NON CONFORME" />
+	                                                   </h:selectOneMenu>
+         				                             </f:facet>
+         				                           </p:cellEditor>
+				                                    </p:column>
+				        
+				                                  <p:column headerText="OBSERVATION" styleClass="col-sm-2" >
+                                                   <p:cellEditor>
+                                                   <f:facet name="output">
+         				                           <h:outputText id="comment10" value="#{slctdTb.pofObs}" />
+         				                           </f:facet>
+         				                          <f:facet name="input">
+         				                          <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.pofObs}" id="comment11" style="width: 100%" />
+         				                          </f:facet>
+         				                        </p:cellEditor>
+				                                 </p:column>
+		                                        </p:dataTable>
 	                        </div>
 	                       </div>
 	                       
 	                                  <div class="box box-success box-solid">
 			               <div class="box-header with-border">
-			                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE FINANCIERE</div></div> 
+			                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE FINANCIERE (3)</div></div> 
 						         <div class="col-md-2 "> </div>
 			               </div>
 				            <!-- /.box-header -->
@@ -306,7 +331,7 @@
 	        <div class="col-md-7">
 	         <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE TECHNIQUE</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE TECHNIQUE (2)</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -342,6 +367,17 @@
 	                         <f:selectItem itemLabel="CONFORME" itemValue="CONFORME" />
 	                         <f:selectItem itemLabel="NON CONFORME" itemValue="NON CONFORME" />
 	                          </h:selectOneMenu>
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText id="comment2" value="#{slctdTb.dcadCommentaire}" />
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.dcadCommentaire}" id="comment2" style="width: 100%" />
          				  </f:facet>
          				  </p:cellEditor>
 				        </p:column>

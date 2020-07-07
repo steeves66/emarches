@@ -173,7 +173,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.dcadNum = dcadNum;
 	}
 	
-	@Column(name = "DCAD_COMMENTAIRE", length = 1000)
+	@Column(name = "DCAD_COMMENTAIRE")
 	public String getDcadCommentaire() {
 		return this.dcadCommentaire;
 	}

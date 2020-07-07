@@ -24,6 +24,7 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	private String pofLaaId;
 	private String tpoLibelle;
 	private String pofConforme;
+	private String pofObs;
 
 	public VPiecesOffreAnalyse() {
 	}
@@ -33,13 +34,14 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	}
 
 	public VPiecesOffreAnalyse(BigDecimal pofNum,BigDecimal pofDofNum, String tpoCode, String pofLaaId,
-			String tpoLibelle, String pofConforme) {
+			String tpoLibelle, String pofConforme, String pofObs) {
 		this.pofNum = pofNum;
 		this.tpoCode = tpoCode;
 		this.pofLaaId = pofLaaId;
 		this.tpoLibelle = tpoLibelle;
 		this.pofConforme = pofConforme;
 		this.pofDofNum = pofDofNum;
+		this.pofObs = pofObs;
 		
 	}
     @Id
@@ -95,6 +97,15 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setPofConforme(String pofConforme) {
 		this.pofConforme = pofConforme;
+	}
+	
+	@Column(name = "POF_OBS")
+	public String getPofObs() {
+		return this.pofObs;
+	}
+
+	public void setPofObs(String pofObs) {
+		this.pofObs = pofObs;
 	}
 
 }

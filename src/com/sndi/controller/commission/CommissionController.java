@@ -992,6 +992,7 @@ public class CommissionController {
 						if(!LS.isEmpty()) {
 						updatePieceOffre = LS.get(0);	
 			 			updatePieceOffre.setPofConforme("O");
+			 			updatePieceOffre.setPofObs(ligne.getPofObs());
 			 			iservice.updateObject(updatePieceOffre);
 				     }	
 			 		}

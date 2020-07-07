@@ -201,7 +201,7 @@ public class VbAnalyseOffre implements java.io.Serializable {
 		this.anfValeurScore = anfValeurScore;
 	}
 	
-	@Column(name = "ANF_COMMENTAIRE", length = 1000)
+	@Column(name = "ANF_COMMENTAIRE")
 	public String getAnfCommentaire() {
 		return this.anfCommentaire;
 	}
