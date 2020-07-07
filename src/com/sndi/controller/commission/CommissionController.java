@@ -1013,6 +1013,7 @@ public class CommissionController {
 			 			newAnalyseOffre.setAnfLaaId(sltOffre.getTLotAao().getLaaId());
 			 			newAnalyseOffre.setAnfValeurConf(ligne.getAaoRegQual());
 			 			newAnalyseOffre.setAnfValeurScore(ligne.getValRegQual());
+			 			newAnalyseOffre.setAnfCommentaire(ligne.getDcadCommentaire());
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 			//newAnalyseOffre.set
 			 			iservice.addObject(newAnalyseOffre);

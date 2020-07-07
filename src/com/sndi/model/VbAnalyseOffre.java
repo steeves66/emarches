@@ -36,6 +36,7 @@ public class VbAnalyseOffre implements java.io.Serializable {
 	private Date anfDteModif;
 	private String anfTypeActeur;
 	private long anfValeurScore;
+	private String anfCommentaire;
 
 	public VbAnalyseOffre() {
 	}
@@ -53,7 +54,7 @@ public class VbAnalyseOffre implements java.io.Serializable {
 
 	public VbAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
 			long anfLaaId, BigDecimal anfDofNum, String anfValeurConf, String anfObser, String anfOpeMatricule,
-			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur, long anfValeurScore) {
+			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur, long anfValeurScore,String anfCommentaire) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
@@ -68,6 +69,7 @@ public class VbAnalyseOffre implements java.io.Serializable {
 		this.anfDteModif = anfDteModif;
 		this.anfTypeActeur = anfTypeActeur;
 		this.anfValeurScore = anfValeurScore;
+		this.anfCommentaire = anfCommentaire;
 	}
 
 	@Id
@@ -197,5 +199,14 @@ public class VbAnalyseOffre implements java.io.Serializable {
 
 	public void setAnfValeurScore(long anfValeurScore) {
 		this.anfValeurScore = anfValeurScore;
+	}
+	
+	@Column(name = "ANF_COMMENTAIRE", length = 1000)
+	public String getAnfCommentaire() {
+		return this.anfCommentaire;
+	}
+
+	public void setAnfCommentaire(String anfCommentaire) {
+		this.anfCommentaire = anfCommentaire;
 	}
 }

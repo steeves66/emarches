@@ -184,7 +184,29 @@
          				  </p:cellEditor>
 				        </p:column>
 				        
-				          <p:column headerText="Telephone" styleClass="col-sm-1" >
+				        <p:column headerText="Fonction Admin." styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsFonAdmin}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="prenom" value="#{slctdTb.dcsFonAdmin}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Structure" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsStrCom}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="prenom" value="#{slctdTb.dcsStrCom}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				          <p:column headerText="Téléphone" styleClass="col-sm-1" >
                           <p:cellEditor>
                           <f:facet name="output">
          				  <h:outputText value="#{slctdTb.dcsTelMbm}"/>
