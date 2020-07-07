@@ -240,7 +240,7 @@
 		                                  <p:column headerText="PRESENCE" styleClass="col-sm-2" rendered="#{commissionController.conformite}" >
                                             <p:cellEditor>
                                              <f:facet name="output">
-         				                        <h:outputText id="presence1" value="#{slctdTb.aaoRegQual}" />
+         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme}" />
          				                         </f:facet>
          				                             <f:facet name="input">
 	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
@@ -374,7 +374,7 @@
 				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-2" >
                           <p:cellEditor>
                           <f:facet name="output">
-         				  <h:outputText id="comment2" value="#{slctdTb.dcadCommentaire}" />
+         				  <h:outputText id="comment12" value="#{slctdTb.dcadCommentaire}" />
          				  </f:facet>
          				  <f:facet name="input">
          				  <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.dcadCommentaire}" id="comment2" style="width: 100%" />
