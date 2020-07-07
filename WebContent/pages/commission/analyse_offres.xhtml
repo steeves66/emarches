@@ -232,7 +232,7 @@
 	                         <!-- /.box-header -->
 	                         <div class="box-body">
 	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
-		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" scrollable="true" scrollHeight="200">
+		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 		                               <p:column headerText="PIECES" styleClass="col-sm-11">
 		                                  <h:outputText value="#{slctdTb.tpoLibelle}"/>
