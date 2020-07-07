@@ -266,7 +266,7 @@ public class DaoController {
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	//VARIABLES
 	 private long adaNum;
-	 private Long totalMontantEstimatif;
+	 private long totalMontantEstimatif;
 	 private String pidCod;
 	 private String observation="";
 	 private String filtreNcc ="";
@@ -2115,6 +2115,7 @@ public class DaoController {
 						}
 					  //Cumul des montants estimatif
 					  public void montantTotalLot() {
+						  totalMontantEstimatif = 0;
 							 for(TLotAao n : listeLots) {
 								 totalMontantEstimatif = totalMontantEstimatif+ (totalMontantEstimatif + n.getLaaMtEst()); 
 							 }
@@ -2129,7 +2130,7 @@ public class DaoController {
 								 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 								 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
 							_logger.info("listeLots size: "+listeLots.size());	
-							//montantTotalLot();
+							montantTotalLot();
 							lotTotal = getNbreLotTotal();
 					}
 				   
@@ -5733,11 +5734,11 @@ public class DaoController {
 		this.listeEnteteCritere = listeEnteteCritere;
 	}
 
-	public Long getTotalMontantEstimatif() {
+	public long getTotalMontantEstimatif() {
 		return totalMontantEstimatif;
 	}
 
-	public void setTotalMontantEstimatif(Long totalMontantEstimatif) {
+	public void setTotalMontantEstimatif(long totalMontantEstimatif) {
 		this.totalMontantEstimatif = totalMontantEstimatif;
 	}
 

@@ -39,7 +39,7 @@ public class TLotAao implements java.io.Serializable {
 	private String laaObjet;
 	private String laaObservation;
 	private Long laaMtCaut;
-	private Long laaMtEst;
+	private long laaMtEst;
 	private Date laaDteSaisi;
 	private String laaStaCode;
 	private String laaOpeMatricule;
@@ -170,12 +170,12 @@ public class TLotAao implements java.io.Serializable {
 		this.laaMtCaut = laaMtCaut;
 	}
 
-	@Column(name = "LAA_MT_EST", precision = 22, scale = 0)
-	public Long getLaaMtEst() {
+	@Column(name = "LAA_MT_EST")
+	public long getLaaMtEst() {
 		return this.laaMtEst;
 	}
 
-	public void setLaaMtEst(Long laaMtEst) {
+	public void setLaaMtEst(long laaMtEst) {
 		this.laaMtEst = laaMtEst;
 	}
 
