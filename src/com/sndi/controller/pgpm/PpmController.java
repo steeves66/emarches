@@ -3129,9 +3129,9 @@ public class PpmController {
 			    newFinancement.setTDevise(new TDevise(devCode));
 			    newFinancement.setTBailleur(new TBailleur(baiCode));
 			    newFinancement.setTDetailPlanPassation(detailPass);;
-			    
 				iservice.addObject(newFinancement);
-				//newFinancement = new TFinancementPpm();
+				//methode qui charge les financements du projet crée
+				chargeFinancement();
 				
 				//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
 				 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
@@ -3140,11 +3140,13 @@ public class PpmController {
 					 if(!PL.isEmpty())  
 						 pass =PL.get(0); 
 					     pass.setDppSourceFin(newFinancement.getTSourceFinancement().getSouCode());
+					     pass.setDppMontant(totalMontantPpm);
 					     iservice.updateObject(pass);
 				
-			
+				//Initialiser la variable newFinancement
+			    newFinancement = new TFinancementPpm();	     
 				//methode qui charge les financements du projet crée
-				chargeFinancement();
+				//chargeFinancement();
 				//methode qui charge la liste des pgpm
 				//chargeData(typePlan);
 				
