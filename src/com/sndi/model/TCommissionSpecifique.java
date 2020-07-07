@@ -155,14 +155,14 @@ public class TCommissionSpecifique implements java.io.Serializable {
 		this.comMarCode = comMarCode;
 	}
 	
-	@Column(name = "COM_AAO_CODE", length = 20)
+/*	@Column(name = "COM_AAO_CODE", length = 20)
 	public String getComAaoCode() {
 		return this.comAaoCode;
 	}
 
 	public void setComAaoCode(String comAaoCode) {
 		this.comAaoCode = comAaoCode;
-	}
+	}*/
 
 	@Column(name = "COM_FON_ADMIN", length = 500)
 	public String getComFonAdmin() {

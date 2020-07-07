@@ -261,6 +261,7 @@ public class DaoController {
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	//VARIABLES
 	 private long adaNum;
+	 private Long totalMontantEstimatif;
 	 private String pidCod;
 	 private String observation="";
 	 private String filtreNcc ="";
@@ -2104,8 +2105,16 @@ public class DaoController {
 							 //getListeDAO().clear();
 							 listeLots = (List<TLotAao>) iservice.getObjectsByColumnDesc("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 			
 									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
-								_logger.info("objetListe size: "+listeLots.size());		
+								_logger.info("objetListe size: "+listeLots.size());	
+								//montantTotalLot();
 						}
+					  //Cumul des montants estimatif
+					  public void montantTotalLot() {
+							 for(TLotAao n : listeLots) {
+								 totalMontantEstimatif = totalMontantEstimatif+ (totalMontantEstimatif + n.getLaaMtEst()); 
+							 }
+						 }
+						 
 					  
 				//FIN GESTION DES MODIFICATIONS
 				  
@@ -2115,7 +2124,7 @@ public class DaoController {
 								 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 								 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
 							_logger.info("listeLots size: "+listeLots.size());	
-							
+							//montantTotalLot();
 							lotTotal = getNbreLotTotal();
 					}
 				   
@@ -2266,6 +2275,7 @@ public class DaoController {
 
 						 iservice.updateObject(getSelectLot());
 						 chargeLots();
+						 //montantTotalLot();
 						 
 							}
 				     
@@ -5733,6 +5743,15 @@ public class DaoController {
 	public void setListeEnteteCritere(List<VCritAnalDacEntete> listeEnteteCritere) {
 		this.listeEnteteCritere = listeEnteteCritere;
 	}
-	
+
+	public Long getTotalMontantEstimatif() {
+		return totalMontantEstimatif;
+	}
+
+	public void setTotalMontantEstimatif(Long totalMontantEstimatif) {
+		this.totalMontantEstimatif = totalMontantEstimatif;
+	}
+
+
 		
 }
