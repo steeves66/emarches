@@ -12,7 +12,7 @@
 <section class="content-header">
       <h3>
        #{controleController.libelleProcedure} 
-        <!-- <small>Nouveau AGPM </small> -->
+        <!-- <small>Nouveau PPM </small> -->
       </h3>
       <ol class="breadcrumb">
       <li>
@@ -878,6 +878,16 @@
                  </p:dataTable> 
                  
 	            </div>
+	       <div class="col-md-12">
+          <div class="form-group">
+                  <label for="MontPpm" class="col-sm-9 control-label">Montant total de l'operation</label>
+                  <div class="col-sm-3">
+                    <p:inputText  type="text" value="#{ppmController.totalMontantPpm}" styleClass="form-control" id="MontPpm"  readonly="true">
+                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                    </p:inputText>
+                  </div>
+                </div>
+           </div>
 	           </div>
             
             </p:panel>

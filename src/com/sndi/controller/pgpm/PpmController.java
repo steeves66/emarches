@@ -261,6 +261,7 @@ public class PpmController {
 		 private long gesCode;	
 		 private long  totalLigne;
 		 private long  totalMontant;
+		 private long  totalMontantPpm;
 		 private String filtreTypeMarche="";
 		 private String filtreModePassation="";
 		 private String observation="";
@@ -1771,7 +1772,8 @@ public class PpmController {
 		 public void chargeFinancement() {
 			 listeFinancement.clear();
 			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
-						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+detailPass.getDppId())));		 		 
+						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+detailPass.getDppId())));	
+			 coutTotal();
 		 }
 		 
 		 //Afficher les Pgpm : Ancienne Methode
@@ -2771,6 +2773,7 @@ public class PpmController {
 			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
 						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+slctdTd.getDppId())));
 			 coutOperation();
+			 coutTotal();
 		 }
 		 
 		 
@@ -3847,11 +3850,20 @@ public class PpmController {
 				}
 				
 											
-				//Le coût de l'opération
+				//Le coût prévisionnel de l'opération
 				 public void coutOperation() {
 					 totalMontant = 0;
 					 for(VFinancementPgpm n : listeFinancementPgpm) {
 						 totalMontant = totalMontant+ (n.getFipMontantCfa()+n.getFipTresor());
+					 }
+				 }
+				 
+				 
+				 //le coût total de l'opération PPM
+				  public void coutTotal() {
+					 totalMontantPpm = 0;
+					 for(TFinancementPpm l :listeFinancement ) {
+						 totalMontantPpm = totalMontantPpm+ (l.getFppMontantCfa()+l.getFppPartTresor());
 					 }
 				 }
 				 
@@ -3929,6 +3941,7 @@ public class PpmController {
 					chargeModePassation();
 					chargePgpm();
 					chargeSourceFinance();
+					
 					userController.initMessage();
 				break;
 				case "pspm1": 
@@ -5421,6 +5434,24 @@ public class PpmController {
 
 	public void setDetailTB(List<VDetTabBordPpm> detailTB) {
 		this.detailTB = detailTB;
+	}
+
+
+
+
+
+
+	public long getTotalMontantPpm() {
+		return totalMontantPpm;
+	}
+
+
+
+
+
+
+	public void setTotalMontantPpm(long totalMontantPpm) {
+		this.totalMontantPpm = totalMontantPpm;
 	}
 	
 }

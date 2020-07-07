@@ -15,7 +15,7 @@
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
-        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        <!-- <h2>Comité d'évaluation</h2> -->
         </small>
         
       </h3>
@@ -97,10 +97,18 @@
          				  <h:outputText value="#{slctdTb.dcsPreMbm}"/>
 				        </p:column>
 				        
-				          <p:column headerText="Telephone" styleClass="col-sm-1" >
+				         <p:column headerText="FONTION ADMIN." styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dcsFonAdmin}"/>
+				        </p:column>
+				        
+				        <p:column headerText="STRUCTURE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dcsStrCom}"/>
+				        </p:column>
+				        
+				          <p:column headerText="TELEPHONE" styleClass="col-sm-1" >
          				  <h:outputText value="#{slctdTb.dcsTelMbm}"/>
 				        </p:column>
-				         <p:column headerText="Mandat ?" styleClass="col-sm-1" >
+				         <p:column headerText="MANDAT ?" styleClass="col-sm-1" >
          				  <h:outputText value="#{slctdTb.dcsMbmRespo}"/>
 				        </p:column>
                        

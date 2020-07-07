@@ -37,6 +37,8 @@ public class VDetCommissionSeance implements java.io.Serializable {
 	private String dcsOpeMatSaisi;
 	private String dcsMbmRespo;
 	private String dcsRepMandate;
+	private String dcsFonAdmin;
+	private String dcsStrCom;
 
 	public VDetCommissionSeance() {
 	}
@@ -48,7 +50,8 @@ public class VDetCommissionSeance implements java.io.Serializable {
 	public VDetCommissionSeance(BigDecimal dcsNum, String dcsDacCode, String dcsFonCod, String dcsOpeMatricule,
 			BigDecimal dcsSeaNum, Date dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
 			BigDecimal dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
-			String dcsComStrCode, String dcsOpeMatSaisi, String dcsMbmRespo, String dcsRepMandate) {
+			String dcsComStrCode, String dcsOpeMatSaisi, String dcsMbmRespo, String dcsRepMandate,String dcsFonAdmin,
+			String dcsStrCom) {
 		this.dcsNum = dcsNum;
 		this.dcsDacCode = dcsDacCode;
 		this.dcsFonCod = dcsFonCod;
@@ -67,6 +70,8 @@ public class VDetCommissionSeance implements java.io.Serializable {
 		this.dcsOpeMatSaisi = dcsOpeMatSaisi;
 		this.dcsMbmRespo = dcsMbmRespo;
 		this.dcsRepMandate = dcsRepMandate;
+		this.dcsFonAdmin = dcsFonAdmin;
+		this.dcsStrCom = dcsStrCom;
 	}
 
 	@Id
@@ -230,6 +235,24 @@ public class VDetCommissionSeance implements java.io.Serializable {
 
 	public void setDcsRepMandate(String dcsRepMandate) {
 		this.dcsRepMandate = dcsRepMandate;
+	}
+	
+	@Column(name = "DCS_FON_ADMIN", length = 500)
+	public String getDcsFonAdmin() {
+		return this.dcsFonAdmin;
+	}
+
+	public void setDcsFonAdmin(String dcsFonAdmin) {
+		this.dcsFonAdmin = dcsFonAdmin;
+	}
+
+	@Column(name = "DCS_STR_COM", length = 500)
+	public String getDcsStrCom() {
+		return this.dcsStrCom;
+	}
+
+	public void setDcsStrCom(String dcsStrCom) {
+		this.dcsStrCom = dcsStrCom;
 	}
 
 }
