@@ -598,7 +598,15 @@
 				        
                  </p:dataTable> 
                  
-                  <br/>  
+                  <br/> 
+                  
+                   
+            <div class="col-md-2"> 	
+             <p:inputText styleClass="text-right" style="background : #036d3b ;color:#fff; width:100%"  id="montant"  value="#{daoController.totalMontantEstimatif}" readonly="true">
+		        <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		    </p:inputText> 
+		    </div>
+ 
          </div>
          
          
