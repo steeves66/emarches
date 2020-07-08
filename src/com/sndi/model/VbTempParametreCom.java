@@ -51,6 +51,8 @@ public class VbTempParametreCom implements java.io.Serializable {
 	private String dcsAaoNbrOffAccept;
 	private String dcsAaoNbrOffRej;
 	private String dcsAaoNbrOffHorDelai;
+	private String dcsFonAdmin;
+	private String dcsStrCom;
 
 	public VbTempParametreCom() {
 	}
@@ -65,7 +67,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 			String dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
 			String dcsComStrCode, String dcsOpeMatSaisi, String dcsNbrPli, String dcsComTctCode, String dcsRepMandate,
 			String dcsSeaTseNum, String dcsAaoNbrOff, String dcsAaoNbrOffAccept, String dcsAaoNbrOffRej,
-			String dcsAaoNbrOffHorDelai) {
+			String dcsAaoNbrOffHorDelai,String dcsFonAdmin, String dcsStrCom) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -95,6 +97,8 @@ public class VbTempParametreCom implements java.io.Serializable {
 		this.dcsAaoNbrOffAccept = dcsAaoNbrOffAccept;
 		this.dcsAaoNbrOffRej = dcsAaoNbrOffRej;
 		this.dcsAaoNbrOffHorDelai = dcsAaoNbrOffHorDelai;
+		this.dcsFonAdmin = dcsFonAdmin;
+		this.dcsStrCom = dcsStrCom;
 	}
 
 	@Id
@@ -359,5 +363,23 @@ public class VbTempParametreCom implements java.io.Serializable {
 
 	public void setDcsAaoNbrOffHorDelai(String dcsAaoNbrOffHorDelai) {
 		this.dcsAaoNbrOffHorDelai = dcsAaoNbrOffHorDelai;
+	}
+	
+	@Column(name = "DCS_FON_ADMIN", length = 500)
+	public String getDcsFonAdmin() {
+		return this.dcsFonAdmin;
+	}
+
+	public void setDcsFonAdmin(String dcsFonAdmin) {
+		this.dcsFonAdmin = dcsFonAdmin;
+	}
+
+	@Column(name = "DCS_STR_COM", length = 500)
+	public String getDcsStrCom() {
+		return this.dcsStrCom;
+	}
+
+	public void setDcsStrCom(String dcsStrCom) {
+		this.dcsStrCom = dcsStrCom;
 	}
 }

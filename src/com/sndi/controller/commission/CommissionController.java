@@ -726,6 +726,8 @@ public class CommissionController {
 						membre.setDcsTelMbm(mbr.getDcsTelMbm());
 						membre.setDcsRepMandate(mbr.getDcsRepMandate());
 						membre.setDcsObservation(mbr.getDcsObservation());
+						membre.setDcsFonAdmin(mbr.getDcsFonAdmin());
+						membre.setDcsStrCom(mbr.getDcsStrCom());
 						membre.setTempType("COM");
 						membre.setDcsFonCod(mbr.getDcsFonCod());
 						membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());

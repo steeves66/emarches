@@ -34,6 +34,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 	private String tempLaaAutre;
 	private String tempLaaAutre1;
 	private String tempLaaDacCode;
+	private String tempLaaDelaiExe;
 	
 
 	public VbTempParametreLot() {
@@ -46,7 +47,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 	public VbTempParametreLot(long tempNum, String tempType, String tempOpeMatricule, Date tempLaaDteSaisi,
 			String tempLaaNbrTotLot, String tempLaaNbrLotDebut, String tempLaaNbrLotFin, String tempLaaLibGenerique,
 			String tempLaaImputation, String tempLaaCautLot, String tempLaaMtLot, String tempLaaAaoCode,
-			String tempLaaAutre, String tempLaaAutre1,String tempLaaDacCode) {
+			String tempLaaAutre, String tempLaaAutre1,String tempLaaDacCode,String tempLaaDelaiExe) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -62,6 +63,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 		this.tempLaaAutre = tempLaaAutre;
 		this.tempLaaAutre1 = tempLaaAutre1;
 		this.tempLaaDacCode = tempLaaDacCode;
+		this.tempLaaDelaiExe = tempLaaDelaiExe;
 	}
 
 	
@@ -199,6 +201,15 @@ public class VbTempParametreLot implements java.io.Serializable {
 
 	public void setTempLaaDacCode(String tempLaaDacCode) {
 		this.tempLaaDacCode = tempLaaDacCode;
+	}
+	
+	@Column(name = "TEMP_LAA_DELAI_EXE", length = 500)
+	public String getTempLaaDelaiExe() {
+		return this.tempLaaDelaiExe;
+	}
+
+	public void setTempLaaDelaiExe(String tempLaaDelaiExe) {
+		this.tempLaaDelaiExe = tempLaaDelaiExe;
 	}
 
 }
