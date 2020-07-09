@@ -131,6 +131,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		chargePgpmTrans();
 		chargePgpmDifAc();
 		chargePgspmTrans();
+		chargePgpmDifDmpAc();
+		chargePgspmDifDmpAc();
 		chargePgpmValDmp();
 		 chargePgspmPubDmp();
 		 chargePgpmPubDmp();
@@ -167,6 +169,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	     //private List<VPgpmliste> pgpmTrans = new ArrayList<VPgpmliste>();
 	     //private List<TAffichagePgpm> pgspmTrans = new ArrayList<TAffichagePgpm>();
 	     private List<VPgpmliste> pgspmTrans = new ArrayList<VPgpmliste>();
+	     private List<VPgpmliste> pgpmDifAc = new ArrayList<VPgpmliste>();
 	     private List<TMinistere> listeMinistere = new ArrayList<TMinistere>();
 	     private List<VFonctionMinistere> listeFonctions = new ArrayList<VFonctionMinistere>();
 		 private List<VFonctionMinistere> listeFonctionsDmp = new ArrayList<VFonctionMinistere>();
@@ -1220,6 +1223,25 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							 new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 			 }
 			 
+			 //Liste des Pgpm retournés par l'acteur connecté
+			 public void chargePgpmDifDmpAc() {
+				 pgpmDifAc.clear();
+			     pgpmDifAc = ((List<VPgpmliste>)iservice.getObjectsByColumnIn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_ID")),
+						    "GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SDR")),
+						    new WhereClause("GPG_TYPE_PLAN",Comparateur.EQ,"PN"),
+							 new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+			 }
+			 
+			 
+			//Liste des Psgpm retournés par l'acteur connecté
+			 public void chargePgspmDifDmpAc() {
+				 pgpmDifAc.clear();
+			     pgpmDifAc = ((List<VPgpmliste>)iservice.getObjectsByColumnIn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_ID")),
+						    "GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SDR")),
+						    new WhereClause("GPG_TYPE_PLAN",Comparateur.EQ,"PS"),
+							 new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+			 }
+			 
 			 //Liste des Pgspm transmis par l'acteur connecté
 			 public void chargePgspmTrans() {
 				 pgspmTrans.clear();
@@ -1322,6 +1344,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 pgpmValDmp.clear();
 				 pgpmValDmp = ((List<VPgpmliste>)iservice.getObjectsByColumn("VPgpmliste",new ArrayList<String>(Arrays.asList("GPG_ID")),
 						    new WhereClause("GPG_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						    new WhereClause("GPG_TYPE_PLAN",Comparateur.EQ,"PN")));
 						    //new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
 			 }
@@ -4701,6 +4724,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setDetailTB(List<VDetTabBordPgpm> detailTB) {
 		this.detailTB = detailTB;
+	}
+
+	public List<VPgpmliste> getPgpmDifAc() {
+		return pgpmDifAc;
+	}
+
+	public void setPgpmDifAc(List<VPgpmliste> pgpmDifAc) {
+		this.pgpmDifAc = pgpmDifAc;
 	}
 
 }
