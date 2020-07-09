@@ -46,6 +46,7 @@ public class TTempParametre implements java.io.Serializable {
 	private String tempChamp20;
 	private String tempChamp26;
 	private String tempChamp27;
+	private String tempChamp28;
 
 	public TTempParametre() {
 	}
@@ -59,7 +60,7 @@ public class TTempParametre implements java.io.Serializable {
 			String tempChamp6, String tempChamp7, String tempChamp8, String tempChamp9, String tempChamp10,
 			String tempChamp11, String tempChamp12, String tempChamp13, String tempChamp14, String tempChamp15,
 			String tempChamp16, String tempChamp17, String tempChamp18, String tempChamp19, String tempChamp20
-			,String tempChamp26, String tempChamp27) {
+			,String tempChamp26, String tempChamp27, String tempChamp28) {
 		this.tempNum = tempNum;
 		this.TOperateur = TOperateur;
 		this.tempType = tempType;
@@ -86,6 +87,7 @@ public class TTempParametre implements java.io.Serializable {
 		this.tempChamp20 = tempChamp20;
 		this.tempChamp26 = tempChamp26;
 		this.tempChamp27 = tempChamp27;
+		this.tempChamp28 = tempChamp28;
 	}
 
 	@Id
@@ -324,6 +326,15 @@ public class TTempParametre implements java.io.Serializable {
 
 	public void setTempChamp27(String tempChamp27) {
 		this.tempChamp27 = tempChamp27;
+	}
+	
+	@Column(name = "TEMP_CHAMP_28", length = 500)
+	public String getTempChamp28() {
+		return this.tempChamp28;
+	}
+
+	public void setTempChamp28(String tempChamp28) {
+		this.tempChamp28 = tempChamp28;
 	}
 
 }
