@@ -412,7 +412,9 @@ public class AgpmController {
 			 agpmTrans = ((List<VAgpmliste>)iservice.getObjectsByColumnIn("VAgpmliste",new ArrayList<String>(Arrays.asList("AGP_ID")),
 					    "AGP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SDT")),
 					    new WhereClause("AGP_ACTIF",Comparateur.EQ,"1"),
-						 new WhereClause("AGP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+						 new WhereClause("AGP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				_logger.info("Nbre AGPM: "+agpmTrans.size());
+			 
 		 }
 		 
 		//Liste des Agpm validés par la CPMP : Nouvelle Methode
@@ -422,16 +424,18 @@ public class AgpmController {
 					    new WhereClause("AGP_STA_CODE",Comparateur.EQ,"S2V"),
 					    new WhereClause("AGP_ACTIF",Comparateur.EQ,"1"),
 					    new WhereClause("AGP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));
-					    //new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+					    //new WhereClause("AGP_FON_COD_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+			 _logger.info("Nbre AGPM: "+agpmValCp.size());
 		 }
 
-		//Liste des Pgpm validés par la DMP : Nouvelle Methode
+		//Liste des Agpm validés par la DMP : Nouvelle Methode
 		 public void chargeAgpmValDmp() {
 			 agpmValDmp.clear();
 			 agpmValDmp = ((List<VAgpmliste>)iservice.getObjectsByColumn("VAgpmliste",new ArrayList<String>(Arrays.asList("AGP_ID")),
 					    new WhereClause("AGP_STA_CODE",Comparateur.EQ,"S3V"),
 					    //new WhereClause("AGP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),	 		 
 					    new WhereClause("AGP_ACTIF",Comparateur.EQ,"1")));
+			 _logger.info("Nbre AGPM: "+agpmValDmp.size());
 		 }
 		 
 		 //Liste des Agpm différés par la CPMP : Nouvelle Methode
@@ -706,6 +710,7 @@ public class AgpmController {
 		
 		 //Debut Charge detail Compteur de l'AC
 		 public void chargeDetailAC1(String typeDac, String stat1){
+			 detailTB.clear();
 			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
 					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
 					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
@@ -716,6 +721,7 @@ public class AgpmController {
 		 
 		 //Debut Charge detail Compteur de l'AC
 		 public void chargeDetailAC2(String typeDac, String stat1, String stat2){
+			 detailTB.clear();
 			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
 					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
 					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
@@ -727,7 +733,7 @@ public class AgpmController {
 		 
 		 //Debut Charge detail Compteur de la CPMP
 		 public void chargeDetailCP1(String typeDac, String stat1){
-			 getDetailTB().clear();
+			 detailTB.clear();
 			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
 					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
 					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
@@ -738,7 +744,7 @@ public class AgpmController {
 		 
 		 //Debut Charge detail Compteur de la CPMP
 		 public void chargeDetailCP2(String typeDac, String stat1, String stat2){
-			 getDetailTB().clear();
+			 detailTB.clear();
 			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
 					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
 					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
@@ -751,6 +757,7 @@ public class AgpmController {
 		 
 		 //Debut Charge detail Compteur de la DMP1
 		 public void chargeDetailDMP1(String typeDac, String stat1){
+			 detailTB.clear();
 			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
 					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
 					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),
@@ -761,6 +768,7 @@ public class AgpmController {
 		 
 		 //Debut Charge detail Compteur de la DMP
 		 public void chargeDetailDMP2(String typeDac, String stat1, String stat2){
+			 detailTB.clear();
 			 detailTB =(List<VDetTabBordAgpm>) iservice.getObjectsByColumnIn("VDetTabBordAgpm", new ArrayList<String>(Arrays.asList("AGPM_DETID")),
 					      "AGP_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
 					      new WhereClause("AGP_ACTIF",WhereClause.Comparateur.EQ,"1"),

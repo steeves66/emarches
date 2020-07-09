@@ -90,11 +90,15 @@
               <i class="ion ion-stats-bars"></i>
             </div>
 
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeDetailAC1('AGPM','S1T')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <!-- <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeDetailAC1('AGPM','S1T')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> -->
+			
+			 <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{agpmController.chargeAgpmTrans()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
-        </div>
+        </div> 
         <!-- ./col -->
         
           <div class="col-lg-3 col-xs-6">
@@ -108,10 +112,13 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <!-- <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a> -->
-            <p:commandLink  oncomplete="PF('detailDifDlg').show()" action="#{agpmController.chargeDetailAC1('AGPM','S2D')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+           
+           <!--  <p:commandLink  oncomplete="PF('detailDifDlg').show()" action="#{agpmController.chargeDetailAC1('AGPM','S2D')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+			</p:commandLink> -->
+			<p:commandLink  oncomplete="PF('detailCpmDifDlg').show()" action="#{agpmController.chargeAgpmDifCp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> 
           </div>
         </div>
         <!-- ./col -->
@@ -154,9 +161,13 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             
-            <p:commandLink  oncomplete="PF('detailCpmDlg').show()" action="#{agpmController.chargeDetailCP1('AGPM','S2V')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+           <!--  <p:commandLink  oncomplete="PF('detailCpmDlg').show()" action="#{agpmController.chargeDetailCP1('AGPM','S2V')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> -->
+			<p:commandLink  oncomplete="PF('detailCpmDlg').show()" action="#{agpmController.chargeAgpmValCp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
+			
           </div>
         </div>
         <!-- ./col -->
@@ -171,10 +182,13 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <!-- <a href="#" class="small-box-footer">Detail <i class="fa fa-arrow-circle-right"></i></a> -->
-             <p:commandLink  oncomplete="PF('detailCpmDlg').show()" action="#{agpmController.chargeDetailCP1('AGPM','S2D')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+
+             <!-- <p:commandLink  oncomplete="PF('detailCpmDlg').show()" action="#{agpmController.chargeDetailCP1('AGPM','S2D')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+			</p:commandLink> -->
+			<p:commandLink  oncomplete="PF('detailCpmDifDlg').show()" action="#{agpmController.chargeAgpmDifCp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> 
           </div>
         </div>
         <!-- ./col -->
@@ -189,7 +203,10 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
+            <!-- <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a> -->
+            <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{agpmController.chargeAgpmDifDmp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -234,7 +251,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
 
-             <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{agpmController.chargeDetailDMP1('AGPM','S3V')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+             <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{agpmController.chargeAgpmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 				Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink> 
           </div>
@@ -255,11 +272,14 @@
               <i class="ion ion-pie-graph"></i>
             </div>
            
-            <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{agpmController.chargeDetailDMP2('AGPM','S3V','SDR')}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+           <!--  <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{agpmController.chargeDetailDMP2('AGPM','S3V','SDR')}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> -->
+			<p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{agpmController.chargeAgpmDifDmp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
-        </div>
+        </div> 
         <!-- ./col -->
       </div>
                     </div>
@@ -305,7 +325,10 @@
               <i class="ion ion-stats-bars"></i>
             </div>
 
-             <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{agpmController.chargeDetailDMP1('AGPM','S3V')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+             <!-- <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{agpmController.chargeDetailDMP1('AGPM','S3V')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+				Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> --> 
+			 <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{agpmController.chargeAgpmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 				Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink> 
           </div>
@@ -326,7 +349,10 @@
               <i class="ion ion-pie-graph"></i>
             </div>
            
-            <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{agpmController.chargeDetailDMP2('AGPM','S3V','SDR')}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <!-- <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{agpmController.chargeDetailDMP2('AGPM','S3V','SDR')}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+			Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink> -->
+			<p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{agpmController.chargeAgpmDifDmp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 			Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -701,7 +727,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.detailTB}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmTrans}"
 						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			            
@@ -850,7 +876,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.detailTB}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmValDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			             
@@ -903,7 +929,7 @@
       </p:dialog>
     </h:form>
     
-    <h:form id="apercuDifCp">
+    <h:form id="apercuDifCp"> 
 	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
@@ -972,6 +998,75 @@
       </p:dialog>
     </h:form>
     
+    <h:form id="apercuDifCpmp"> 
+	        <p:dialog  widgetVar="detailCpmDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL DIFFERES</div></div>
+			         <div class="col-md-3">
+			          AGPM 
+			         </div>
+			         
+			          <div class="col-md-3">
+			          
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifCp}"
+						 selectionMode="single" rowKey="#{slctdTb.agpId}"
+			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+					     <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
+         				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
+				        </p:column>
+				        
+						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
+         				  <h:outputText value="#{slctdTb.baiLibelle}" />
+				        </p:column>
+				       
+				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+         				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
+				        </p:column>
+				        
+				        <p:column headerText="AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" styleClass="col-sm-7" >	        
+         				  <h:outputText value="#{slctdTb.fonctionAc}" />
+				        </p:column>
+				        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
+         				  <h:outputText value="#{slctdTb.proTitre}" />
+				        </p:column>
+				        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
+         				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Transmission AC" styleClass="#{controleController.datevalac}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" >
+         				<h:outputText value="#{slctdTb.agpDateValAc}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" />
+         				</h:outputText>
+				        </p:column>
+				        
+			            <p:column headerText="Transmission CPMP" styleClass="#{controleController.datevalcpmp}" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >
+         				<h:outputText value="#{slctdTb.agpDateValCpmp}">
+         				<f:convertDateTime pattern="dd/MM/yyyy" />
+         				</h:outputText>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+	                
+		            </div>
+		           
+	            </div>
+	              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmDifDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
+    
     
     <h:form id="apercuDif">
 	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
@@ -990,19 +1085,19 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.detailTB}"
+						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="260" styleClass="table table-bordered table-hover" var="slctdTb" value="#{agpmController.agpmDifDmp}"
 						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			            
-			             <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
+			             <p:column headerText="N°Accord" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column>  
 					    
-						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
+						<p:column headerText="Bailleur" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+				        <p:column headerText="Ministère" styleClass="col-sm-5" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
          				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
@@ -1010,7 +1105,7 @@
          				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-5" >	        
          				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
@@ -1064,15 +1159,15 @@
 						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
 			            
-			             <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
+			             <p:column headerText="N°Accord" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column>  
 					    
-						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
+						<p:column headerText="Bailleur" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+				        <p:column headerText="Ministère" styleClass="col-sm-4" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
          				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
@@ -1080,11 +1175,11 @@
          				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-5" >	        
          				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
-				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
@@ -1134,15 +1229,15 @@
 						 selectionMode="single" rowKey="#{slctdTb.agpId}"
 			               emptyMessage="Aucun AGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-		                <p:column headerText="N°Accord" styleClass="col-sm-4" >	        
+		                <p:column headerText="N°Accord" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.finNumeroAccord}" />
 				        </p:column>
 		
-						<p:column headerText="Bailleur" styleClass="col-sm-7" >	        
+						<p:column headerText="Bailleur" styleClass="col-sm-2" >	        
          				  <h:outputText value="#{slctdTb.baiLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Ministère" styleClass="col-sm-9" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
+				        <p:column headerText="Ministère" styleClass="col-sm-3" style="overflow:auto;" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP'}" >	        
          				  <h:outputText value="#{slctdTb.minLibelleCourt}" />
 				        </p:column>
 				        
@@ -1150,11 +1245,11 @@
          				  <h:outputText value="#{slctdTb.fonctionAc}" />
 				        </p:column>
 				        
-				        <p:column headerText="Projet/Programme" styleClass="col-sm-9" >	        
+				        <p:column headerText="Projet/Programme" styleClass="col-sm-4" >	        
          				  <h:outputText value="#{slctdTb.proTitre}" />
 				        </p:column>
 				        
-				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-7" >	        
+				         <p:column headerText="Organe d'Exécution" styleClass="col-sm-3" >	        
          				  <h:outputText value="#{slctdTb.decOrganExecLibelle}" />
 				        </p:column>
 				        
