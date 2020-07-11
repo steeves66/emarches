@@ -156,6 +156,7 @@ public class PpmController {
 		 private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
 		 private List<VDetPlaning> affichPpm = new ArrayList<VDetPlaning>();
 	     private List<VPpmliste> listePpm = new ArrayList<VPpmliste>();
+	     private List<VPpmliste> listePpmTrans = new ArrayList<VPpmliste>();
 	     private List<VPpmliste> listePspm = new ArrayList<VPpmliste>();
 	     private List<VPpmliste> publicationListe = new ArrayList<VPpmliste>();
 	     private List<THistoPlanPassation> listeHisto = new ArrayList<THistoPlanPassation>();
@@ -388,14 +389,15 @@ public class PpmController {
 		      }
 		 
 		 //Liste des Ppm transmis par l'acteur connecté
-		 public void chargePpmTrans() { 
+		 /*public void chargePpmTrans() { 
 			 
 			 if(controleController.type == "PPM") {
-				 listePpm.clear();
-				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+				 listePpmTrans.clear(); 
+				 listePpmTrans = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
+				     _logger.info("Nbre PPM: "+listePpmTrans.size());
 			   }else
 			        if(controleController.type == "PSPM"){
 			        	listePpm.clear();
@@ -403,9 +405,21 @@ public class PpmController {
 							   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
 							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
 								new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
+			        	
+			        	_logger.info("Nbre PSPM: "+listePpm.size());
 			 }		 		 
-		 }
+		 }*/
 		 
+		 
+	 public void chargePpmTrans() { 
+			
+				 listePpmTrans.clear(); 
+				 listePpmTrans = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+						   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
+				     _logger.info("Nbre PPM: "+listePpmTrans.size());		 		 		 
+		}
 		 //Liste des Ppm validés par la CPMP : Ancienne Methode
 		 /*public void chargePpmValCp() {
 			 ppmValCp.clear();
@@ -493,13 +507,15 @@ public class PpmController {
 				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2V"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
-							 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+							 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				 _logger.info("Nbre PPM: "+listePpm.size());
 			   }else {
 				   listePpm.clear();
 					 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2V"),
 							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
-								 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+								 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
+					 _logger.info("Nbre PSPM: "+listePpm.size());
 			    }
 		 }
 		 
@@ -512,12 +528,14 @@ public class PpmController {
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
+				 _logger.info("Nbre PPM: "+listePpm.size());
 			 }else {
 				 listePpm.clear();
 				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
+				 _logger.info("Nbre PSPM: "+listePpm.size());
 			 } 
 		 }
 		 
@@ -535,12 +553,14 @@ public class PpmController {
 				 listePpm.clear();
 				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));		 		 
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));	
+				 _logger.info("Nbre PPM: "+listePpm.size());
 			     }else {
 			    	 listePpm.clear();
 					 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));	 
+					 _logger.info("Nbre PPM: "+listePpm.size());
 			 }
 		 }
 		 
@@ -552,12 +572,14 @@ public class PpmController {
 				 publicationListe = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
+				 _logger.info("Nbre PPM: "+publicationListe.size());
 			 }else 
 				 if(controleController.type == "PSPM"){
 					 publicationListe.clear();
 					 publicationListe = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
+					 _logger.info("Nbre PPM: "+publicationListe.size());
 			 }
 			 
 		 }
@@ -5421,39 +5443,31 @@ public class PpmController {
 	}
 
 
-
-
-
-
 	public List<VDetTabBordPpm> getDetailTB() {
 		return detailTB;
 	}
-
-
-
-
-
 
 	public void setDetailTB(List<VDetTabBordPpm> detailTB) {
 		this.detailTB = detailTB;
 	}
 
 
-
-
-
-
 	public long getTotalMontantPpm() {
 		return totalMontantPpm;
 	}
 
-
-
-
-
-
 	public void setTotalMontantPpm(long totalMontantPpm) {
 		this.totalMontantPpm = totalMontantPpm;
+	}
+
+
+
+	public List<VPpmliste> getListePpmTrans() {
+		return listePpmTrans;
+	}
+
+	public void setListePpmTrans(List<VPpmliste> listePpmTrans) {
+		this.listePpmTrans = listePpmTrans;
 	}
 	
 }

@@ -42,6 +42,7 @@ public class VDacliste implements java.io.Serializable {
 	private String dacBailleur;
 	private Long dacCout;
 	private String dacTypePlan;
+	private Long dacNbreAchat;
 	private String dacRecherche;
 	private String dacFonCodeDmp;
 	private String dacFonCodePf;
@@ -242,7 +243,7 @@ public class VDacliste implements java.io.Serializable {
 			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,Date dacDteModif,
-			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
+			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan,Long dacNbreAchat, String dacRecherche,
 			String dacFonCodeDmp, String dacFonCodePf, String mopCode, String mopLibelleCourt, String mopLibelleLong,
 			String tymCode, String tymLibelleCourt, String tymLibelleLong, String tymTymCode, String tymGroupe,
 			String strCode, String strLibelleCourt, String strLibelleLong, String strAdresse, String strEmail,
@@ -303,6 +304,7 @@ public class VDacliste implements java.io.Serializable {
 		this.dacBailleur = dacBailleur;
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
+		this.dacNbreAchat = dacNbreAchat;
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
@@ -690,6 +692,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setDacTypePlan(String dacTypePlan) {
 		this.dacTypePlan = dacTypePlan;
+	}
+	
+	@Column(name = "DAC_NBRE_ACHAT")
+	public Long getDacNbreAchat() {
+		return this.dacNbreAchat;
+	}
+
+	public void setDacNbreAchat(Long dacNbreAchat) {
+		this.dacNbreAchat = dacNbreAchat;
 	}
 
 	@Column(name = "DAC_RECHERCHE", length = 4000)

@@ -267,6 +267,7 @@ public class DaoController {
 	//VARIABLES
 	 private long adaNum;
 	 private long totalMontantEstimatif;
+	 private long totalNbreVente;
 	 private String pidCod;
 	 private String observation="";
 	 private String filtreNcc ="";
@@ -1095,7 +1096,7 @@ public class DaoController {
 							 chargeDetailAC1("PN", "DAO", "D1T");	
 						 }else {
 							 if(fonct.equalsIgnoreCase("listeDaoVentePn")) {
-								 chargeDetailAC1("PN", "DAO", "DEV");
+								 chargeDetailAC1("PN", "DAO", "DVE");
 							 }else {
 								
 							 }	 
@@ -3385,7 +3386,6 @@ public class DaoController {
 													               newCandidat.setCanRepCode(paieCode);
 													               newCandidat.setCanSouNcc(newSouncc);
 													               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
-													               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 													               iservice.addObject(newCandidat);
 													               
@@ -3407,35 +3407,22 @@ public class DaoController {
 													        	          venteDetail.setTDacSpecs(newDao);
 													                      iservice.addObject(venteDetail);
 											     			  				    }
-											     			  		    
-											     			  		      
-												                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
-												                            /*  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-														  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-														  				      if (!listDao.isEmpty()) {
-														  					     newDao= listDao.get(0);
-														  					     newDao.setTStatut(new TStatut("RET"));
-														  			             iservice.updateObject(newDao); 
-														  	   	                 }*/
-														  				      
-														  				    //Récupération du Statut
-												 						        TStatut statuts = constantService.getStatut("RET");
-												 							  	//Historisation du / des retraits
-												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
-														  				
-											    			  				 //Activation du bouton édition du récu
-												     			  				   confirmPaie = true; 
-												     			  				   etatRecu = false;
-											    			  				  //Actualisation du Tableau de Bord
-											    			 		          typeActionTb();
+											     			  		   
+														  				  //Récupération du Statut
+												 						  TStatut statuts = constantService.getStatut("RET");
+												 						  //Historisation du / des retraits
+												 						  historiser("RET",newDao.getDacCode(),"DAO retiré");
+											    			  			  //Activation du bouton édition du récu
+												     			  		  confirmPaie = true; 
+												     			  		  etatRecu = false;
+											    			  			  //Actualisation du Tableau de Bord
+											    			 		      typeActionTb();
 													                    	  
-											     			  				   //Message de Confirmation
-											     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
-											     					           userController.setTexteMsg("Retrait effectué avec succès");
-											     							   userController.setRenderMsg(true);
-											     							   userController.setSevrityMsg("success");	
+											     			  			  //Message de Confirmation
+											     					      userController.setTexteMsg("Retrait effectué avec succès");
+											     						  userController.setRenderMsg(true);
+											     						  userController.setSevrityMsg("success");	
 													         }else {
-													        	 
 													        	    String mois="";
 											 				        Calendar c = Calendar.getInstance();
 											 				        int year = c.get(Calendar.YEAR);
@@ -3460,7 +3447,6 @@ public class DaoController {
 											 		               newCandidat.setCanRepCode(paieCode);
 											 		               newCandidat.setCanSouNcc(newSouncc);
 											 		               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
-											 		               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
 											 		               
@@ -3481,40 +3467,41 @@ public class DaoController {
 											 		        	          venteDetail.setTDacSpecs(newDao);
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
-											      			  		    
-											 	                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
-											 	                             /* listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-											 			  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-											 			  				      if (!listDao.isEmpty()) {
-											 			  					     newDao= listDao.get(0);
-											 			  					     newDao.setTStatut(new TStatut("DVE"));
-											 			  					     iservice.updateObject(newDao);
-											 			  	   	                 }*/
 											 			  				      
-											 			  				 //Récupération du Statut
-												 						        TStatut statuts = constantService.getStatut("DVE");
-												 							  	//Historisation du / des retraits
+											 			  				       //Récupération du Statut
+												 						       TStatut statuts = constantService.getStatut("DVE");
+												 							   //Historisation du / des retraits
 												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
-											 			  				      
-											     			  				    
 											     			  				   //Activation du bouton édition du récu
 											     			  				   confirmPaie = true;
 											     			  				   etatRecu = true;
-											     			  				   
-											     			  				  //Actualisation du Tableau de Bord
-											     			 		          typeActionTb();
+											     			  				   //Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
+													 						   totalNbreVente = getDaoVenteTotal();
+													 						   newDao.setDacNbreAchat(totalNbreVente);
+													 						   iservice.updateObject(newDao);
+											     			  				   //Actualisation du Tableau de Bord
+											     			 		           typeActionTb();
 											      			  				   //Message de Confirmation
 											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
 											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
-													        	 
-													         }
-												    	  
-												    	  
+													                      }
 												                   }    
 											                }
 											  //Fin Methode de Paiement
+											  
+											  
+											  
+											//Nombre de vente pour un DAO x
+											  public int getDaoVenteTotal(){
+											  	int i = iservice.countTableByColumn("T_HISTO_DAC", "HAC_ID",
+											  			new WhereClause("HAC_STA_CODE", WhereClause.Comparateur.EQ,"DVE"),
+											  			new WhereClause("HAC_DAC_CODE", WhereClause.Comparateur.EQ,""+newDao.getDacCode()),
+											  			new WhereClause("HAC_FON_COD", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+											  	return	i;	
+											  }
+											  
 											  
 											  
 											  
@@ -5757,5 +5744,13 @@ public class DaoController {
 	public void setListeSelectionPiecesOffres(List<VTypePieceOffreSg> listeSelectionPiecesOffres) {
 		this.listeSelectionPiecesOffres = listeSelectionPiecesOffres;
 	}
-		
+
+	public long getTotalNbreVente() {
+		return totalNbreVente;
+	}
+
+	public void setTotalNbreVente(long totalNbreVente) {
+		this.totalNbreVente = totalNbreVente;
+	}
+
 }

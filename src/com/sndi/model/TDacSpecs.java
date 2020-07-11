@@ -51,6 +51,8 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacRecherche;
 	private String dacFonCodeDmp;
 	private String dacFonCodePf;
+	private Boolean dacFactoriseCrit;
+	private Long dacNbreAchat;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -72,7 +74,8 @@ public class TDacSpecs implements java.io.Serializable {
 			TGestion TGestion, TTypeMarche TTypeMarche, TModeleDacType TModeleDacType, TTypeDacSpecs TTypeDacSpecs, String dacObjet, Date dacDteSaisi, 
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan, Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
+			Boolean dacFactoriseCrit, Long dacNbreAchat,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -99,6 +102,8 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacBailleur = dacBailleur;
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
+		this.dacFactoriseCrit = dacFactoriseCrit;
+		this.dacNbreAchat = dacNbreAchat;
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
@@ -335,6 +340,24 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacTypePlan(String dacTypePlan) {
 		this.dacTypePlan = dacTypePlan;
+	}
+	
+	@Column(name = "DAC_FACTORISE_CRIT", precision = 1, scale = 0)
+	public Boolean getDacFactoriseCrit() {
+		return this.dacFactoriseCrit;
+	}
+
+	public void setDacFactoriseCrit(Boolean dacFactoriseCrit) {
+		this.dacFactoriseCrit = dacFactoriseCrit;
+	}
+	
+	@Column(name = "DAC_NBRE_ACHAT")
+	public Long getDacNbreAchat() {
+		return this.dacNbreAchat;
+	}
+
+	public void setDacNbreAchat(Long dacNbreAchat) {
+		this.dacNbreAchat = dacNbreAchat;
 	}
 	
 	@Column(name = "DAC_RECHERCHE", length = 4000)

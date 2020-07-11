@@ -116,7 +116,7 @@
               <i class="ion ion-pie-graph"></i>
             </div>
            <p:commandLink oncomplete="PF('detailDmpDlg').show()" action="#{pgpmAcController.chargePgpmValDmpAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-			 <i class="fa fa-arrow-circle-right"></i>		
+			 Détail <i class="fa fa-arrow-circle-right"></i>		
 						  </p:commandLink>
           </div>
         </div>
@@ -357,7 +357,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
           
-              <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{pgpmAcController.chargePgpmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{pgpmAcController.chargePgpmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink> 
           </div>
@@ -1648,14 +1648,14 @@
 		            </div>
 		           
 	            </div>
-	             <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailAcDifDlg').hide()"/>
+	             <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailAcDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
     
     
     <h:form id="apercuDif">
-	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -1724,7 +1724,7 @@
     
     
         <h:form id="apercuDifD">
-	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
