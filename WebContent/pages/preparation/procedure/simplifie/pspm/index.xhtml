@@ -7,8 +7,8 @@
       xmlns:p="http://primefaces.org/ui">
 
       <ui:composition template="/template/templatePage.xhtml">
-	<ui:define name="contents">
-<h:form id="gnl">	
+  <ui:define name="contents">
+<h:form id="gnl"> 
  <section class="content-header">
       <h3>
         #{controleController.libelleProcedure} 
@@ -56,7 +56,7 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <!-- <h3>#{tableauBordController.tableauBord.saisi}</h3> -->
-              <h3>#{tableauBordController.pspmAcAttenteValide}</h3>
+              <h3>#{tableauBordController.ppmAcAttenteValide}</h3>
 
               <p>En attente de transmission</p>
             </div>
@@ -64,8 +64,8 @@
               <i class="ion ion-bag"></i>
             </div>
             <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
-					 <i class="fa fa-arrow-circle-right"></i>		
-						  </p:commandLink>
+           <i class="fa fa-arrow-circle-right"></i>   
+              </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -82,9 +82,9 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             
-            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PS')}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-						  </p:commandLink>
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePspmTrans()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+              Detail <i class="fa fa-arrow-circle-right"></i>
+              </p:commandLink>
           </div>
         </div>
         
@@ -102,9 +102,9 @@
               <i class="ion ion-stats-bars"></i>
             </div>
 
-            <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePpmValDmpAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+            <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePspmValDmpAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+      Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -122,9 +122,9 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-           <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
-					 <i class="fa fa-arrow-circle-right"></i>		
-						  </p:commandLink>
+          <p:commandLink  oncomplete="PF('detailCpDifAcDlg').show()" action="#{ppmController.chargePspmDiffAc()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+          Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -157,8 +157,8 @@
               <i class="ion ion-bag"></i>
             </div>
             <p:commandLink  class="small-box-footer"  style="color:#fff;font-size:13px;">
-					 <i class="fa fa-arrow-circle-right"></i>		
-						  </p:commandLink>
+           <i class="fa fa-arrow-circle-right"></i>   
+              </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -174,8 +174,8 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{ppmController.chargePpmTrans('PS')}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+      Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -222,8 +222,8 @@
               <i class="ion ion-stats-bars"></i>
             </div>
             <p:commandLink  oncomplete="PF('detailCpmDlg').show()" action="#{ppmController.chargePspmValCp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
-							Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+              Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -241,8 +241,8 @@
               <i class="ion ion-person-add"></i>
             </div>
              <p:commandLink  oncomplete="PF('detailCpDifDlg').show()" action="#{ppmController.chargePspmDifCp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+      Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -299,8 +299,8 @@
             </div>
 
             <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePspmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+      Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -319,8 +319,8 @@
               <i class="ion ion-pie-graph"></i>
             </div>
              <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{ppmController.chargePspmDifDmp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+      Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -378,8 +378,8 @@
             </div>
 
             <p:commandLink  oncomplete="PF('detailDmpDlg').show()" action="#{ppmController.chargePspmValDmp()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+      Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -398,8 +398,8 @@
               <i class="ion ion-pie-graph"></i>
             </div>
              <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{ppmController.chargePspmDifDmp()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
-			Detail <i class="fa fa-arrow-circle-right"></i>
-			</p:commandLink>
+      Detail <i class="fa fa-arrow-circle-right"></i>
+      </p:commandLink>
           </div>
         </div>
         <!-- ./col -->
@@ -416,17 +416,17 @@
                   
                 </div>
               </div>
-		<h:panelGroup rendered="#{userController.renderMsg}">
-				<br/>
-				<div class="alert alert-success light alert-dismissable" >
-				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
-				  action="#{userController.initMessage()}"  update=":content">
-				<span class="hidden-xs"> x</span>
-				</p:commandLink>
-				<i class="fa fa-check pr10"></i>
-				<strong>Succès!</strong> #{userController.texteMsg}.</div>
-				</h:panelGroup>
-			
+    <h:panelGroup rendered="#{userController.renderMsg}">
+        <br/>
+        <div class="alert alert-success light alert-dismissable" >
+         <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+          action="#{userController.initMessage()}"  update=":content">
+        <span class="hidden-xs"> x</span>
+        </p:commandLink>
+        <i class="fa fa-check pr10"></i>
+        <strong>Succès!</strong> #{userController.texteMsg}.</div>
+        </h:panelGroup>
+      
              <div class="row">
             <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
             </div>
@@ -441,206 +441,206 @@
             <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
             <div class="col-md-2 "><div  style="color: #fff">
              <label for="gestion1" class="col-sm-5 control-label">GESTION</label>
-	              <div class="col-sm-6">
-		                    <p:selectOneMenu id="gestion1" value="#{ppmController.gesCode}"
-			                         effect="fade" style="width:100%">
-					       <f:selectItems value="#{ppmController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
-		       		        </p:selectOneMenu>
-	               </div>
+                <div class="col-sm-6">
+                        <p:selectOneMenu id="gestion1" value="#{ppmController.gesCode}"
+                               effect="fade" style="width:100%">
+                 <f:selectItems value="#{ppmController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />                                
+                      </p:selectOneMenu>
+                 </div>
             </div></div>
          </div>
          <div class="box-body">
           <div class="row">
           
            <div class="col-md-5">
-	           <div class="form-group">
-		                   <label for="mini3" class="col-sm-2 control-label">Autorité Contractante</label>
-		                  <h:panelGroup rendered="#{controleController.love_Ac}" > 
-		                  <div class="col-sm-10">
-		                   <p:inputTextarea  value="#{userController.fonction.fonLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{ppmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{ppmController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                  <h:panelGroup rendered="#{controleController.love_Dmp}" >
-		                  <div class="col-sm-8">
-		                   <p:inputText  type="text" value="#{ppmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-		                  </div>
-		                  <div class="col-sm-1">
-		                   <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{pgmAcController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                  </div>
-		                  </h:panelGroup>
-		                </div>
-	            </div> 
-	            
-	            
-	            <div class="col-md-7">
-	           <div class="form-group">
-		                  <label for="mini" class="col-sm-1 control-label">Ministère</label>
-		                  <div class="col-sm-11">
-		                    <p:inputTextarea  value="#{userController.fonction.TStructure.TMinistere.minLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
-		                  </div>
-		                </div>
-	            </div> 
+             <div class="form-group">
+                       <label for="mini3" class="col-sm-2 control-label">Autorité Contractante</label>
+                      <h:panelGroup rendered="#{controleController.love_Ac}" > 
+                      <div class="col-sm-10">
+                       <p:inputTextarea  value="#{userController.fonction.fonLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+                      </div>
+                      </h:panelGroup>
+                      <h:panelGroup rendered="#{controleController.love_Cpmp}" > 
+                      <div class="col-sm-8">
+                       <p:inputText  type="text" value="#{ppmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                      </div>
+                      <div class="col-sm-1">
+                       <p:commandLink  oncomplete="PF('autoriteDlg').show()" action="#{ppmController.chargeFonctionCpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+              <i class="fa fa-search-plus"></i>
+              </p:commandLink>
+                      </div>
+                      </h:panelGroup>
+                      <h:panelGroup rendered="#{controleController.love_Dmp}" >
+                      <div class="col-sm-8">
+                       <p:inputText  type="text" value="#{ppmController.recupFonction.fonLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                      </div>
+                      <div class="col-sm-1">
+                       <p:commandLink  oncomplete="PF('DMPDlog').show()" action="#{pgmAcController.chargeFonctionDmp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+              <i class="fa fa-search-plus"></i>
+              </p:commandLink>
+                      </div>
+                      </h:panelGroup>
+                    </div>
+              </div> 
+              
+              
+              <div class="col-md-7">
+             <div class="form-group">
+                      <label for="mini" class="col-sm-1 control-label">Ministère</label>
+                      <div class="col-sm-11">
+                        <p:inputTextarea  value="#{userController.fonction.TStructure.TMinistere.minLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+                      </div>
+                    </div>
+              </div> 
 
-	      </div>
-	      
-	      
-	   
-	      
+        </div>
+        
+        
+     
+        
          </div>
                </div>
                </h:panelGroup>
       </div>
 
-				<div class="col-md-12">
-					<div class="box box-success box-solid">
-						<div class="box-header with-border">
-							<div class="col-md-2 ">
-								<div style="color: #fff">LISTE DES OPERATIONS</div>
-							</div>
-					
-					 
-				
-						<div class="col-md-5 ">	
-					    <div class="input-group input-group-sm col-md-12">
-					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.reinitialiserPpm('PS')}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
+        <div class="col-md-12">
+          <div class="box box-success box-solid">
+            <div class="box-header with-border">
+              <div class="col-md-2 ">
+                <div style="color: #fff">LISTE DES OPERATIONS</div>
+              </div>
+          
+           
+        
+            <div class="col-md-5 "> 
+              <div class="input-group input-group-sm col-md-12">
+              <span class="input-group-btn">
+                        <p:commandLink action="#{ppmController.reinitialiserPpm('PS')}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+                </span>
                       <p:inputText styleClass="form-control" type="text" value="#{ppmController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
                        <span class="input-group-btn">
                       <p:commandLink action="#{ppmController.chargerPpmRecherche('PS')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
-					 </div>
-					 </div>
-					 
-					 
-					 <div class="col-md-4">
-					 </div>
-					 
-					 
-							
-							<div class="col-md-1 ">
-							<h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
-								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouvelle Opération" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{ppmController.renderPage('ppm2','ENGPSPM')}" update=":content">
-								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvelle Opération</span>
-								</p:commandLink>
-								</h:panelGroup>
-							</div>
-							
-						</div>
-						<div class="box-body">
-							
-							  
-					<p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listePpm}" 
-					rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun PSPM enregistré"
+           </div>
+           </div>
+           
+           
+           <div class="col-md-4">
+           </div>
+           
+           
+              
+              <div class="col-md-1 ">
+              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouvelle Opération" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{ppmController.renderPage('ppm2','ENGPSPM')}" update=":content">
+                <span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouvelle Opération</span>
+                </p:commandLink>
+                </h:panelGroup>
+              </div>
+              
+            </div>
+            <div class="box-body">
+              
+                
+          <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listePpm}" 
+          rowKey="#{slctdTb.dppId}" selection="#{ppmController.listSelectionTransmission}" emptyMessage="Aucun PSPM enregistré"
                        scrollable="true" scrollHeight="250" >
                          
                          <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
                          
                          <p:column headerText="Objet de l'Opération" styleClass="col-sm-4" >
-         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.dppObjet}" style="color:red; font-weight:bold " />
-         				</h:panelGroup>
-         				
-         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.dppObjet}" />
-         				</h:panelGroup>
-				        </p:column>
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppObjet}" style="color:red; font-weight:bold " />
+                </h:panelGroup>
+                
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppObjet}" />
+                </h:panelGroup>
+                </p:column>
 
                          <p:column headerText="Source Financement" styleClass="col-sm-2" >
-         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.dppSourceFin}" style="color:red; font-weight:bold "/>
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.dppSourceFin}" />
-         				</h:panelGroup>
-				        </p:column>
-				        
-				       <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
-         				  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.dppLbgCode}" style="color:red; font-weight:bold "/>
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.dppLbgCode}" />
-         				</h:panelGroup>
-				        </p:column>
-				        
-				         
-				        <p:column headerText="Type Marché" styleClass="col-sm-2" >
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
-         				</h:panelGroup>
-				        </p:column>
-				       
-         				 <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
-         				 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
-         				</h:panelGroup>
-         				
-         				 <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.dppStructureConduc}" />
-         				</h:panelGroup>
-				        </p:column> 
-				        
-				       
-         				<p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
-         				</h:panelGroup>
-         				
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.dppStructureBenefi}" />
-         				</h:panelGroup>
-				        </p:column> 
-				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
-				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.dppDateValAc}" style="color:red; font-weight:bold">
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-         				</h:panelGroup>
-         				<h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-         				</h:panelGroup>
-				        </p:column>
-				       </h:panelGroup> 
-				         
-				         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        </h:panelGroup>
-				         
-				       
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppSourceFin}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </h:panelGroup>
+                </p:column>
+                
+               <p:column headerText="Ligne Budgétaire" styleClass="col-sm-2" >
+                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppLbgCode}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </h:panelGroup>
+                </p:column>
+                
+                 
+                <p:column headerText="Type Marché" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.tymLibelleCourt}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </h:panelGroup>
+                </p:column>
+               
+                 <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
+                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
+                </h:panelGroup>
+                
+                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </h:panelGroup>
+                </p:column> 
+                
+               
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </h:panelGroup>
+                </p:column> 
+                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM' || userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.dppDateValAc}" style="color:red; font-weight:bold">
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </h:panelGroup>
+                </p:column>
+               </h:panelGroup> 
+                 
+                 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                </h:panelGroup>
+                 
+               
                       <p:column headerText="Actions" styleClass="col-sm-2">
                       
                       <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-	                  <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
-	                        <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
-	                   <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
-	                  </p:commandLink> 
-	         		 </h:panelGroup>
+                    <p:commandLink  oncomplete="PF('motif').show()" action="#{ppmController.chargerObservation}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+                          <i class="ace-icon fa fa-envelope bigger-130" style="color: white"></i>
+                     <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
+                    </p:commandLink> 
+               </h:panelGroup>
                                      
                         <h:panelGroup rendered="#{controleController.detailP1}">
                              <p:commandLink  action="#{etatsPpmController.renderPage('ppm3','APEPPM')}" styleClass="btn btn-xs btn-success"  title="Apercu PPM" style="background-color: #036d3b;margin-right:3px" update=":content">
@@ -657,25 +657,25 @@
                             </h:panelGroup>
                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod != 'ACR'}">
                              <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
-		                        <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
-		                          <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
-		                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
-		                        </p:commandLink>
-		                        </h:panelGroup>
-		                      </h:panelGroup>
-		                        
-		                        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+                            <p:commandLink  oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                              <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
+                            </p:commandLink>
+                            </h:panelGroup>
+                          </h:panelGroup>
+                            
+                            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                               <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
-	                                 <p:commandLink action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
-	                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
-	                             <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
-	                             <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.dppId} ?" icon="ui-icon-alert" />
-	                           </p:commandLink> 
-	         		          </h:panelGroup>
-	         		         </h:panelGroup>
+                                   <p:commandLink action="#{ppmController.reDifferer()}" styleClass="btn btn-xs btn-danger" style="background-color: red;margin-right:3px" update="motif" >
+                                  <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i>
+                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
+                               <p:confirm header="Confirmation" message="Voulez-vous confirmer le retour de #{controleController.type} N°#{slctdTb.dppId} ?" icon="ui-icon-alert" />
+                             </p:commandLink> 
+                        </h:panelGroup>
+                       </h:panelGroup>
                              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
                             <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{ppmModificationController.renderPage('ppm4','MODPSPM')}"
-				               title="Modifier pspm" update=":content">
+                       title="Modifier pspm" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.slctdTd}" />                             
                             </p:commandLink>
@@ -686,28 +686,28 @@
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.slctdTd}" />
                                </p:commandLink>     
                             
-				         </p:column>   
+                 </p:column>   
     </p:dataTable>
    
-							
-						</div>
-					</div>
-				</div>
+              
+            </div>
+          </div>
+        </div>
 
             </div>
             
             
              <h:form id="motif">
-	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
-					<div class="g12">
-						<div class="panel-heading">
-						Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.dppId}  
-						</div> 
-					<div class="panel-body panel-body-nopadding">
-	         
-	                  <p:inputTextarea value="#{ppmController.ppmstatut.hppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
-	                  </div>
-	                  <div class="par pull-right"> par:<strong>#{ppmController.ppmstatut.opeNom}</strong></div>
+          <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+          <div class="g12">
+            <div class="panel-heading">
+            Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.dppId}  
+            </div> 
+          <div class="panel-body panel-body-nopadding">
+           
+                    <p:inputTextarea value="#{ppmController.ppmstatut.hppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
+                    </div>
+                    <div class="par pull-right"> par:<strong>#{ppmController.ppmstatut.opeNom}</strong></div>
                      <div class="panel-footer">
                       <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()"/>
                      </div>
@@ -716,19 +716,19 @@
     </h:form>
     
     <h:form id="differe">
-	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
-					<div class="g12">
-						<div class="panel-heading">
-						Motif du retour du #{controleController.type} N° #{ppmController.slctdTd.dppId} de l'AC : #{ppmController.slctdTd.dppActeurSaisie}
-						
-						</div> 
-					<div class="panel-body panel-body-nopadding">
-	                 <div class="col-xs-12 col-sm-12">
-						   <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-						  <p:inputTextarea value="#{ppmController.observation}" rows="4" cols="33" style="width:100%;"/>
-						   </div>
-	                  </div>
-	                  
+          <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+          <div class="g12">
+            <div class="panel-heading">
+            Motif du retour du #{controleController.type} N° #{ppmController.slctdTd.dppId} de l'AC : #{ppmController.slctdTd.dppActeurSaisie}
+            
+            </div> 
+          <div class="panel-body panel-body-nopadding">
+                   <div class="col-xs-12 col-sm-12">
+               <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+              <p:inputTextarea value="#{ppmController.observation}" rows="4" cols="33" style="width:100%;"/>
+               </div>
+                    </div>
+                    
                      
                       <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('diff').hide()"/>
                        &nbsp; &nbsp;
@@ -739,126 +739,126 @@
     
     
        <h:form id="apercu">
-	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
-			         <div class="col-md-3">
-			         #{controleController.type} 
-			         </div>
-			         
-			          <div class="col-md-3">
-			          
+          <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
+               <div class="col-md-3">
+               #{controleController.type} 
+               </div>
+               
+                <div class="col-md-3">
+                
 
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
-	                  
-	                   
-	                </div>
-	                
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+             <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-6" >          
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-6" >          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+                    
+                     
+                  </div>
+                  
 
-		            </div>
-		           
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
+                </div>
+               
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
     
      <h:form id="apercuCp">
-	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type} 
-			         </div>
-			         
-			          <div class="col-md-3">
+          <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+               <div class="col-md-3">
+                #{controleController.type} 
+               </div>
+               
+                <div class="col-md-3">
 
-			         </div>
-			         
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-2" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         
-				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
+               </div>
+               
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+              <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-2" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 
+                <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
 
-	                </div>
+                  </div>
 
-		            </div>
-	            </div>
+                </div>
+              </div>
               <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmDlg').hide()"/>
             </div>
       </p:dialog>
@@ -867,132 +867,132 @@
     
     
     <h:form id="apercuDp">
-	        <p:dialog  widgetVar="detailDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type} 
-			         </div>
-			         
-			          <div class="col-md-3">
+          <p:dialog  widgetVar="detailDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+               <div class="col-md-3">
+                #{controleController.type} 
+               </div>
+               
+                <div class="col-md-3">
 
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+              <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
 
-	                </div>
-		            </div>
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
+                  </div>
+                </div>
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
     
     <h:form id="apercuDif">
-	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type}
-			         </div>
-			         
-			          <div class="col-md-3">
-			          
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					     <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
-	                </div>
-	                
-		            </div>
-		           
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
+          <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+               <div class="col-md-3">
+                #{controleController.type}
+               </div>
+               
+                <div class="col-md-3">
+                
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFoncCps" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeCpDiffPs}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+               <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3">          
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+                  </div>
+                  
+                </div>
+               
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1000,69 +1000,69 @@
     
     
     <h:form id="apercuDifDp">
-	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type}
-			         </div>
-			         
-			          <div class="col-md-3">
-			          
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
-			               
-					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode
-         				  
-         				  }" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiaire" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
-	                </div>
-	                
-		            </div>
-		           
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
+          <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+               <div class="col-md-3">
+                #{controleController.type}
+               </div>
+               
+                <div class="col-md-3">
+                
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PSPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
+                     
+             <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3">          
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode
+                  
+                  }" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiaire" styleClass="col-sm-3">          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+                  </div>
+                  
+                </div>
+               
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1070,12 +1070,12 @@
     
     
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
-		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
-		     </p:commandLink>
-		     
-		     
-		     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
-	<p:commandLink action="#{ppmController.transmettre()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+         </p:commandLink>
+         
+         
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}"> 
+  <p:commandLink action="#{ppmController.transmettre()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
    <p:confirm header="Confirmation" message="Confrmez-vous la transmission ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre 
             </p:commandLink>
@@ -1088,21 +1088,21 @@
             </h:panelGroup>
                     
         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}"> 
-	    <p:commandLink action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+      <p:commandLink action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
         <p:confirm header="Confirmation" message="Confirmez-vous la transmission ?" icon="ui-icon-alert" />
         <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre
          </p:commandLink>
          </h:panelGroup>
                     
     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}"> 
-	<p:commandLink action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+  <p:commandLink action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
     <p:confirm header="Confirmation" message="Confirmez-vous la validation  ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
     </p:commandLink>
     </h:panelGroup>
     
     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'SPP'}"> 
-	<p:commandLink action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
+  <p:commandLink action="#{ppmController.validerCPMPDMP()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
     <p:confirm header="Confirmation" message="Confirmez-vous la validation  ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
     </p:commandLink>
@@ -1115,16 +1115,16 @@
 </h:form>
 
  <h:form id="motif">
-	        <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
-					<div class="g12">
-						<div class="panel-heading">
-						Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.dppId}  
-						</div> 
-					<div class="panel-body panel-body-nopadding">
-	         
-	                  <p:inputTextarea value="#{ppmController.ppmstatut.hppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
-	                  </div>
-	                  <div class="par pull-right"> par:<strong>#{ppmController.ppmstatut.opeNom}</strong></div>
+          <p:dialog  widgetVar="motif" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+          <div class="g12">
+            <div class="panel-heading">
+            Motif du rejet du #{controleController.type} N° #{ppmController.slctdTd.dppId}  
+            </div> 
+          <div class="panel-body panel-body-nopadding">
+           
+                    <p:inputTextarea value="#{ppmController.ppmstatut.hppMotif}" rows="4" cols="100" style="width:100%;" readonly="true"/>
+                    </div>
+                    <div class="par pull-right"> par:<strong>#{ppmController.ppmstatut.opeNom}</strong></div>
                      <div class="panel-footer">
                       <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('motif').hide()"/>
                      </div>
@@ -1133,19 +1133,19 @@
     </h:form>
     
     <h:form id="differe">
-	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
-					<div class="g12">
-						<div class="panel-heading">
-						Motif du retour du #{controleController.type} N° #{ppmController.slctdTd.dppId} de l'AC : #{ppmController.slctdTd.dppActeurSaisie}
-						
-						</div> 
-					<div class="panel-body panel-body-nopadding">
-	                 <div class="col-xs-12 col-sm-12">
-						   <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
-						  <p:inputTextarea value="#{ppmController.observation}" rows="4" cols="33" style="width:100%;"/>
-						   </div>
-	                  </div>
-	                  
+          <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Motif">
+          <div class="g12">
+            <div class="panel-heading">
+            Motif du retour du #{controleController.type} N° #{ppmController.slctdTd.dppId} de l'AC : #{ppmController.slctdTd.dppActeurSaisie}
+            
+            </div> 
+          <div class="panel-body panel-body-nopadding">
+                   <div class="col-xs-12 col-sm-12">
+               <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+              <p:inputTextarea value="#{ppmController.observation}" rows="4" cols="33" style="width:100%;"/>
+               </div>
+                    </div>
+                    
                      
                       <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('diff').hide()"/>
                        &nbsp; &nbsp;
@@ -1156,126 +1156,126 @@
     
     
        <h:form id="apercu">
-	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
-			         <div class="col-md-3">
-			         #{controleController.type} 
-			         </div>
-			         
-			          <div class="col-md-3">
-			          
+          <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL TRANSMISSION</div></div>
+               <div class="col-md-3">
+               #{controleController.type} 
+               </div>
+               
+                <div class="col-md-3">
+                
 
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-6" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
-	                  
-	                   
-	                </div>
-	                
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+             <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-6" >          
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-6" >          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+                    
+                     
+                  </div>
+                  
 
-		            </div>
-		           
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
+                </div>
+               
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
     
      <h:form id="apercuCp">
-	        <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type} 
-			         </div>
-			         
-			          <div class="col-md-3">
+          <p:dialog  widgetVar="detailCpmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+               <div class="col-md-3">
+                #{controleController.type} 
+               </div>
+               
+                <div class="col-md-3">
 
-			         </div>
-			         
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-2" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         
-				        <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
+               </div>
+               
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PPM transmis" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+              <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-2" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 
+                <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
 
-	                </div>
+                  </div>
 
-		            </div>
-	            </div>
+                </div>
+              </div>
               <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmDlg').hide()"/>
             </div>
       </p:dialog>
@@ -1284,132 +1284,132 @@
     
     
     <h:form id="apercuDp">
-	        <p:dialog  widgetVar="detailDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type} 
-			         </div>
-			         
-			          <div class="col-md-3">
+          <p:dialog  widgetVar="detailDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL VALIDATION</div></div>
+               <div class="col-md-3">
+                #{controleController.type} 
+               </div>
+               
+                <div class="col-md-3">
 
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					    <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PPM validé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+              <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
 
-	                </div>
-		            </div>
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
+                  </div>
+                </div>
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
     
     <h:form id="apercuDif">
-	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type}
-			         </div>
-			         
-			          <div class="col-md-3">
-			          
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-					     <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode}" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
-	                </div>
-	                
-		            </div>
-		           
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
+          <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+               <div class="col-md-3">
+                #{controleController.type}
+               </div>
+               
+                <div class="col-md-3">
+                
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PGPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+                     
+               <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3">          
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+                  </div>
+                  
+                </div>
+               
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -1417,78 +1417,211 @@
     
     
     <h:form id="apercuDifDp">
-	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
-				<div class="col-md-12">
-	            <div class="box box-warning box-solid" >
-		            <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
-			         <div class="col-md-3">
-			          #{controleController.type}
-			         </div>
-			         
-			          <div class="col-md-3">
-			          
-			         </div>
-			        </div>
-		            <div class="box-body"> 
-		            <div class="form-group ">
-	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
-						 selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
-			               
-					   <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
-         				  <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-						<p:column headerText="Source Financement" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppSourceFin}" />
-				        </p:column>
-				        <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >	        
-         				  <h:outputText value="#{slctdTb.dppLbgCode
-         				  
-         				  }" />
-				        </p:column>
-				        <p:column headerText="Type Marché" styleClass="col-sm-3" >	        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
-				        </p:column>
-				        
-				        <p:column headerText="Structure Conductrice" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureConduc}" />
-				        </p:column>
-				        
-				        <p:column headerText="Structure Bénéficiaire" styleClass="col-sm-3">	        
-         				  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
-				        </p:column>
-				        
-				         <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValAc}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				        
-				         <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
-         				<h:outputText value="#{slctdTb.dppDateValCpmp}" >
-         				<f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-         				</h:outputText>
-				        </p:column>
-				      
-						</p:dataTable>
-						</h:panelGrid> 
-	                </div>
-	                
-		            </div>
-		           
-	            </div>
-	            <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
+          <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+               <div class="col-md-3">
+                #{controleController.type}
+               </div>
+               
+                <div class="col-md-3">
+                
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFonc" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PPM différé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15">
+                     
+             <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3">          
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-4" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode
+                  
+                  }" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiaire" styleClass="col-sm-3">          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+                  </div>
+                  
+                </div> 
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
     
     
     
+    <h:form id="apercuDifCpAc">
+          <p:dialog  widgetVar="detailCpDifAcDlg" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+               <div class="col-md-3">
+                #{controleController.type} 
+               </div>
+               
+                <div class="col-md-3">
+
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleCp" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePspmDiff}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PSPM différé">
+                     
+              <p:column headerText="Objet de l'Opération" styleClass="col-sm-9" >
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+
+                  </div>
+                </div>
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifAcDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    
+    <h:form id="apercuDifDmpCp">
+          <p:dialog  widgetVar="detailCpDifDmpCpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="75%" closable="true" header="">
+        <div class="col-md-12">
+              <div class="box box-warning box-solid" >
+                <div class="box-header" style="background-color: #f88b2e">
+                <div class="col-md-9 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+               <div class="col-md-3">
+                #{controleController.type}
+               </div>
+               
+                <div class="col-md-3">
+                
+               </div>
+              </div>
+                <div class="box-body"> 
+                <div class="form-group ">
+                   <h:panelGrid style="width:100%; vertical-align: top;">
+             <p:dataTable id="ndTbleFoncCp" scrollable="true" scrollHeight="300" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePsDiffDmpCp}"
+             selectionMode="single" rowKey="#{slctdTb.dppId}"
+                     emptyMessage="Aucun PGPM différé">
+                     
+               <p:column headerText="Objet de l'Opération" styleClass="col-sm-9">
+                  <h:outputText value="#{slctdTb.dppObjet}" />
+                </p:column>
+            <p:column headerText="Source Financement" styleClass="col-sm-3">          
+                  <h:outputText value="#{slctdTb.dppSourceFin}" />
+                </p:column>
+                <p:column headerText="Ligne Budgétaire" styleClass="col-sm-3" >         
+                  <h:outputText value="#{slctdTb.dppLbgCode}" />
+                </p:column>
+                <p:column headerText="Type Marché" styleClass="col-sm-3" >          
+                  <h:outputText value="#{slctdTb.tymLibelleCourt}"/>
+                </p:column>
+                
+                <p:column headerText="Structure Conductrice" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureConduc}" />
+                </p:column>
+                
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3">         
+                  <h:outputText value="#{slctdTb.dppStructureBenefi}" />
+                </p:column>
+                
+                 <p:column headerText="Transmission AC" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValAc}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+                
+                 <p:column headerText="Transmission CPMP" rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.dppDateValCpmp}" >
+                <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
+                </h:outputText>
+                </p:column>
+              
+            </p:dataTable>
+            </h:panelGrid> 
+                  </div>
+                  
+                </div>
+               
+              </div>
+              <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDmpCpDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
 
 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
- 		<div align="center">
+    <div align="center">
         <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
         <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
         </div>

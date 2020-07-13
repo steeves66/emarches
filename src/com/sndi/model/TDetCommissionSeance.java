@@ -48,6 +48,7 @@ public class TDetCommissionSeance implements java.io.Serializable {
 	private String dcsRepMandate;
 	private String dcsFonAdmin;
 	private String dcsStrCom;
+	private String dcsMailMbm;
 	private Set<TAffichageDao> TAffichageDaos = new HashSet<TAffichageDao>(0);
 
 	public TDetCommissionSeance() {
@@ -61,7 +62,7 @@ public class TDetCommissionSeance implements java.io.Serializable {
 			TCommissionSpecifique TCommissionSpecifique, TOperateur TOperateur, TDacSpecs TDacSpecs,
 			TStructure TStructure, TSeances TSeances, String dcsFonCod, String dcsOpeMatricule, Date dcsDteSaisi,
 			String dcsFonCodSaisi, String dcsObservation, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm,
-			String dcsPresent, String dcsMbmRespo, String dcsRepMandate,String dcsFonAdmin, String dcsStrCom, Set<TAffichageDao> TAffichageDaos) {
+			String dcsPresent, String dcsMbmRespo, String dcsRepMandate,String dcsFonAdmin, String dcsStrCom,String dcsMailMbm, Set<TAffichageDao> TAffichageDaos) {
 		this.dcsNum = dcsNum;
 		this.TTypeCommission = TTypeCommission;
 		this.TCommissionSpecifique = TCommissionSpecifique;
@@ -82,6 +83,7 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsRepMandate = dcsRepMandate;
 		this.dcsFonAdmin = dcsFonAdmin;
 		this.dcsStrCom = dcsStrCom;
+		this.dcsMailMbm = dcsMailMbm;
 		this.TAffichageDaos = TAffichageDaos;
 	}
 
@@ -275,6 +277,14 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsStrCom = dcsStrCom;
 	}
 	
+	@Column(name = "DCS_MAIL_MBM", length = 200)
+	public String getDcsMailMbm() {
+		return this.dcsMailMbm;
+	}
+
+	public void setDcsMailMbm(String dcsMailMbm) {
+		this.dcsMailMbm = dcsMailMbm;
+	}
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetCommissionSeance")
 	public Set<TAffichageDao> getTAffichageDaos() {

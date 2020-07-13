@@ -241,7 +241,6 @@ public class TableauBordController {
 					 private String daoAcDiffDmp ="";
 					 private String daoAcAttRetrait ="";
 					 private String daoAcAttVente ="";
-					 private String daoAcVenteTot ="";
 					 private String daoAcRetire="";
 				/*
 				Compteur pour la Cellule de Passation des Marchés
@@ -953,7 +952,6 @@ public class TableauBordController {
 				 daoAcAttVente = ""+getDaoAttenteRetrait(typePlan,typeDac,"DAP");
 				 daoAcAttRetrait = ""+getDaoAttenteVente(typePlan,typeDac,"DVE");
 				 daoAcRetire = ""+getDaoAcRetire(typePlan,typeDac,"RET");
-				 daoAcVenteTot = ""+getDaoVenteTotal();
 				 //Prise en compte des observations des DAO
 				 daoAcPs=""+getAcDaoSaisiePs(typePlan,"SBO","SRO");
 				 daoPriseTrait=""+getAcDaoSaisiePs(typePlan,"SB1","DOP");
@@ -1516,7 +1514,7 @@ public int getNpValideCmp(String src){
 public int getNpValideDmpAc(String src){
 	int i = iservice.countTableByColumn("V_PGPMLISTE", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PN"));
 	return	i;	
 }
@@ -1534,7 +1532,7 @@ public int getNpValideDmpAc(String src){
 public int getNpsValideDmpAc(String src){
 	int i = iservice.countTableByColumn("T_DETAIL_PLAN_GENERAL", "GPG_ID",
 			new WhereClause("GPG_STA_CODE", WhereClause.Comparateur.EQ, src),
-			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+			new WhereClause("GPG_FON_COD_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodeDmp()),
 			new WhereClause("GPG_TYPE_PLAN", WhereClause.Comparateur.EQ,"PS"));
 	return	i;	
 }
@@ -2598,14 +2596,6 @@ public int getDaoAttenteVente(String typePlan,String typeDac,String src){
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
 			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-	return	i;	
-}
-
-//DAO vendus par l'AC Connectée
-public int getDaoVenteTotal(){
-	int i = iservice.countTableByColumn("T_HISTO_DAC", "HAC_ID",
-			new WhereClause("HAC_STA_CODE", WhereClause.Comparateur.EQ,"DVE"),
-			new WhereClause("HAC_FON_COD", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 
@@ -5853,12 +5843,6 @@ public int getAmiTransmisDmpDossier(String src){
 	}
 	public void setPpmdjPub(String ppmdjPub) {
 		this.ppmdjPub = ppmdjPub;
-	}
-	public String getDaoAcVenteTot() {
-		return daoAcVenteTot;
-	}
-	public void setDaoAcVenteTot(String daoAcVenteTot) {
-		this.daoAcVenteTot = daoAcVenteTot;
 	}
 
 

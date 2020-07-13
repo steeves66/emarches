@@ -137,8 +137,12 @@ public class PpmController {
 		 chargePpmDifDmp();
 		 chargePspmDifCp();
 		 chargePspmDifDmp();
+		 chargePspmTrans();
+		 chargePspmDiffAc();
+		 chargePpmDiffAc();
+		 chargePpmDiffDmp();
+		 chargePspmDiffDmp();
 		 //chargeSourceFinance();
-		 chargePspmDifDmp();
 		 chargePspmValDmp();
 		 chargeModePassation();
 		 //chargeImputation();
@@ -156,7 +160,13 @@ public class PpmController {
 		 private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
 		 private List<VDetPlaning> affichPpm = new ArrayList<VDetPlaning>();
 	     private List<VPpmliste> listePpm = new ArrayList<VPpmliste>();
-	     private List<VPpmliste> listePpmTrans = new ArrayList<VPpmliste>();
+	     private List<VPpmliste> listePpmTrans = new ArrayList<VPpmliste>(); 
+	     private List<VPpmliste> listePpmDiff = new ArrayList<VPpmliste>(); 
+	     private List<VPpmliste> listePspmDiff = new ArrayList<VPpmliste>();
+	     private List<VPpmliste> listeCpDiff = new ArrayList<VPpmliste>(); 
+	     private List<VPpmliste> listeCpDiffPs = new ArrayList<VPpmliste>(); 
+	     private List<VPpmliste> listeDiffDmpCp = new ArrayList<VPpmliste>();
+	     private List<VPpmliste> listePsDiffDmpCp = new ArrayList<VPpmliste>();
 	     private List<VPpmliste> listePspm = new ArrayList<VPpmliste>();
 	     private List<VPpmliste> publicationListe = new ArrayList<VPpmliste>();
 	     private List<THistoPlanPassation> listeHisto = new ArrayList<THistoPlanPassation>();
@@ -412,7 +422,6 @@ public class PpmController {
 		 
 		 
 	 public void chargePpmTrans() { 
-			
 				 listePpmTrans.clear(); 
 				 listePpmTrans = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","SPT")),
@@ -420,6 +429,11 @@ public class PpmController {
 							new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
 				     _logger.info("Nbre PPM: "+listePpmTrans.size());		 		 		 
 		}
+	 
+	 
+	
+	 
+	 
 		 //Liste des Ppm validés par la CPMP : Ancienne Methode
 		 /*public void chargePpmValCp() {
 			 ppmValCp.clear();
@@ -522,23 +536,14 @@ public class PpmController {
 		 
 		//Liste des Ppm validés par la CPMP Côté AC
 		 public void chargePpmValDmpAc() {
-			 if(controleController.type == "PPM") {
 				 listePpm.clear();
 				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
 				 _logger.info("Nbre PPM: "+listePpm.size());
-			 }else {
-				 listePpm.clear();
-				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-						    new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
-						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
-				 _logger.info("Nbre PSPM: "+listePpm.size());
-			 } 
 		 }
-		 
+		 	 
 		//Liste des Ppm validés par la DMP : Ancienne Methode
 			/* public void chargePpmValDmp() {
 				 ppmValDmp.clear();
@@ -549,19 +554,19 @@ public class PpmController {
 		 
 		//Liste des Ppm validés par la DMP : Nouvelle Methode 
 		 public void chargePpmValDmp() {
-			 if(controleController.type =="PPM") {
 				 listePpm.clear();
 				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));	
-				 _logger.info("Nbre PPM: "+listePpm.size());
-			     }else {
-			    	 listePpm.clear();
-					 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-							    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-							    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));	 
-					 _logger.info("Nbre PPM: "+listePpm.size());
-			 }
+				 _logger.info("Nbre PPM: "+listePpm.size()); 
+		 }
+		 
+		//Liste des Ppm validés par la DMP : Nouvelle Methode
+		 public void chargePspmValDmp() {
+			 listePpm.clear();
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
 		 }
 		 
 		//Liste des Ppm publiés par la DMP : Nouvelle Methode 
@@ -621,6 +626,42 @@ public class PpmController {
 						 new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 		 
+		//Liste des Ppm différés par la CPMP chez l'AC
+		 public void chargePpmDiffAc() {
+			 listePpmDiff.clear();
+		     listePpmDiff = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					     new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2D"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+						 new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+		 }
+		 
+		//Liste des Pspm différés par la CPMP chez l'AC
+		 public void chargePspmDiffAc() {
+			 listePspmDiff.clear();
+			 listePspmDiff = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					     new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2D"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
+						 new WhereClause("LBG_FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+		 }
+		 
+		//Liste des Ppm différés par la DMP chez la Cellule
+		 public void chargePpmDiffDmp() {
+			 listeDiffDmpCp.clear();
+		     listeDiffDmpCp = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					     new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3D"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
+						 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+		 }
+		 
+		//Liste des Ppm différés par la DMP chez la Cellule
+		 public void chargePspmDiffDmp() {
+			 listePsDiffDmpCp.clear();
+		     listePsDiffDmpCp = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+					     new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3D"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
+						 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
+		 }
+		 
 		 
 		 //Liste totale des Pspm transmis par l'acteur connecté
 		 public void chargePspmTot() {
@@ -650,7 +691,7 @@ public class PpmController {
 		 }
 		  
 		 
-		//Liste des Ppm validés par la CPMP Côté AC
+		//Liste des Pspm validés par la CPMP Côté AC
 		 public void chargePspmValDmpAc() { 
 			 listePpm.clear();
 			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
@@ -668,14 +709,7 @@ public class PpmController {
 					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
 		 }*/ 
 		 
-		//Liste des Ppm validés par la DMP : Nouvelle Methode
-		 public void chargePspmValDmp() {
-			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
-					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
-					    //new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));
-		 }
+		
 		 
 		 //Liste des Ppm différés par le cpmp : Ancienne Methode
 		 /*public void chargePpmDifCp() {
@@ -688,19 +722,20 @@ public class PpmController {
 		 
 		 //Liste des Ppm différés par la CPMP : Nouvelle Methode
 		 public void chargePpmDifCp() {
-			 if(controleController.type == "PPM") {
-				 listePpm.clear();
-				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
+			 listeCpDiff.clear();
+			 listeCpDiff  = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2D"),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN"),
 							 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
-			 }else {
-				 listePpm.clear();
-				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2D"),
-						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
-							 new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
-			 }
+		 }
+		 
+		//Liste des Pspm différés par la CPMP
+		 public void chargePspmDifCp() {
+			 listeCpDiffPs.clear();
+			 listeCpDiffPs = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2D"),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
+					    new WhereClause("LBG_FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		 }
 		 
 		//Liste des Ppm différés par la DMP : Ancienne Methode
@@ -713,22 +748,20 @@ public class PpmController {
 		 
 		//Liste des Ppm différés par la DMP : Nouvelle Methode
 		 public void chargePpmDifDmp() {
-
-			 if(controleController.type == "PPM") {
 				 listePpm.clear();
 				 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
 						   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SPR")),
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PN")));
-						    //new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
-			 }else
-			      if(controleController.type == "PSPM"){
-			    	  listePpm.clear();
-						 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_DTE_MODIF")),
-								   "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SPR")),
-								    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
-								    //new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
-			       }
-			
+						    //new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+		      }
+		 
+		//Liste des Pspm différés par la DMP : Nouvelle Methode
+		 public void chargePspmDifDmp() { 
+			 listePpm.clear();
+			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
+					    "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SPD")),
+					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
+					   // new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
 		      }
 		 
 	 
@@ -744,17 +777,7 @@ public class PpmController {
 						new WhereClause("STR_CODE",WhereClause.Comparateur.LIKE,"%"+filtreStructure+"%"));
 			}
 			
-		 
-		 
-
-		 //Liste des Pspm différés par la CPMP
-		 public void chargePspmDifCp() {
-			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
-					    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S2D"),
-					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS"),
-						 new WhereClause("DPP_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())));		 		 
-		 }
+		 	 
 		 
 		//Liste des Pspm différés par la CPMP : Nouvelle Methode
 		 /*public void chargePspmDifCp() {
@@ -773,14 +796,7 @@ public class PpmController {
 					    new WhereClause("AFF_DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
 		      }*/
 		 
-		//Liste des Pspm différés par la DMP : Nouvelle Methode
-		 public void chargePspmDifDmp() { 
-			 listePpm.clear();
-			 listePpm = ((List<VPpmliste>)iservice.getObjectsByColumnIn("VPpmliste",new ArrayList<String>(Arrays.asList("DPP_ID")),
-					    "DPP_STA_CODE", new ArrayList<String>(Arrays.asList("S3D","SPD")),
-					    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,"PS")));
-					   // new WhereClause("DPP_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));		 		 
-		      }
+		
 		 
 	 
 		 //Methode Principale de Chargement des PPM
@@ -3769,6 +3785,7 @@ public class PpmController {
 						           //chargeDataAvaliderPspm();
 						           chargePspmDifCp();
 						           chargePspmDifDmp();
+						           chargePspmDiffDmp();
 						          //Actualisation du Tableau de Bord
 						          //tableauBordController.chargeDataPspm();
 						           if(controleController.type == "PPM") {
@@ -5469,5 +5486,60 @@ public class PpmController {
 	public void setListePpmTrans(List<VPpmliste> listePpmTrans) {
 		this.listePpmTrans = listePpmTrans;
 	}
+
+	public List<VPpmliste> getListePpmDiff() {
+		return listePpmDiff;
+	}
+
+	public void setListePpmDiff(List<VPpmliste> listePpmDiff) {
+		this.listePpmDiff = listePpmDiff;
+	}
+
+
+	public List<VPpmliste> getListePspmDiff() {
+		return listePspmDiff;
+	}
+
+	public void setListePspmDiff(List<VPpmliste> listePspmDiff) {
+		this.listePspmDiff = listePspmDiff;
+	}
+
+	public List<VPpmliste> getListeDiffDmpCp() {
+		return listeDiffDmpCp;
+	}
+
+	public void setListeDiffDmpCp(List<VPpmliste> listeDiffDmpCp) {
+		this.listeDiffDmpCp = listeDiffDmpCp;
+	}
+
+
+	public List<VPpmliste> getListePsDiffDmpCp() {
+		return listePsDiffDmpCp;
+	}
+
+	public void setListePsDiffDmpCp(List<VPpmliste> listePsDiffDmpCp) {
+		this.listePsDiffDmpCp = listePsDiffDmpCp;
+	}
+
+
+
+	public List<VPpmliste> getListeCpDiff() {
+		return listeCpDiff;
+	}
+
+
+	public void setListeCpDiff(List<VPpmliste> listeCpDiff) {
+		this.listeCpDiff = listeCpDiff;
+	}
+
+
+	public List<VPpmliste> getListeCpDiffPs() {
+		return listeCpDiffPs;
+	}
+
+	public void setListeCpDiffPs(List<VPpmliste> listeCpDiffPs) {
+		this.listeCpDiffPs = listeCpDiffPs;
+	}
+	
 	
 }

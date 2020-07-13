@@ -234,7 +234,7 @@
 	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
 		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-		                               <p:column headerText="PIECES" styleClass="col-sm-11">
+		                               <p:column headerText="PIECES" styleClass="col-sm-5">
 		                                  <h:outputText value="#{slctdTb.tpoLibelle}"/>
 		                                </p:column>
 		                                  <p:column headerText="PRESENCE" styleClass="col-sm-2" rendered="#{commissionController.conformite}" >
@@ -245,14 +245,14 @@
          				                             <f:facet name="input">
 	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
 				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
-	                                                    <f:selectItem itemLabel="O" itemValue="CONFORME" />
-	                                                   <f:selectItem itemLabel="N" itemValue="NON CONFORME" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="OUI" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="OUI" />
 	                                                   </h:selectOneMenu>
          				                             </f:facet>
          				                           </p:cellEditor>
 				                                    </p:column>
 				        
-				                                  <p:column headerText="OBSERVATION" styleClass="col-sm-2" >
+				                                  <p:column headerText="OBSERVATION" styleClass="col-sm-5" >
                                                    <p:cellEditor>
                                                    <f:facet name="output">
          				                           <h:outputText id="comment10" value="#{slctdTb.pofObs}" />
@@ -339,7 +339,7 @@
 	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}" sortBy="#{slctdTb.craCode}" expandableRowGroups="true" emptyMessage="Aucun critère trouvé" var="slctdTb" 
 					 editable="true" editMode="cell" rowKey="#{slctdTb.craCode}" selection="#{commissionController.selectionCritereAnalyse}" draggableColumns="true" scrollable="true" scrollHeight="391">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-	                <p:column headerText="CRITERES" styleClass="col-sm-8">
+	                <p:column headerText="CRITERES" styleClass="col-sm-5">
 	         				    <h:outputText value="#{slctdTb.craLibelle}" />
                      </p:column>
 	                      <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.montant}">
@@ -371,7 +371,7 @@
          				  </p:cellEditor>
 				        </p:column>
 				        
-				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-2" >
+				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-5" >
                           <p:cellEditor>
                           <f:facet name="output">
          				  <h:outputText id="comment12" value="#{slctdTb.dcadCommentaire}" />

@@ -70,6 +70,7 @@ public class VPpmDao implements java.io.Serializable {
 	private String lbgImputation;
 	private String natLibelle;
 	private String strTstCode;
+	private Long dppMontant;
 
 	public VPpmDao() {
 	}
@@ -101,7 +102,7 @@ public class VPpmDao implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			String dppBailleur,String dppRecherche ,String mdtCode, String mdtTymCode, String mdtLibelleCourt,
 			 String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleLong,
-			String lbgImputation, String natLibelle, String strTstCode) {
+			String lbgImputation, String natLibelle, String strTstCode,Long dppMontant) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -154,6 +155,7 @@ public class VPpmDao implements java.io.Serializable {
 		this.lbgImputation = lbgImputation;
 		this.natLibelle = natLibelle;
 		this.strTstCode = strTstCode;
+		this.dppMontant = dppMontant;
 	}
 
 	
@@ -625,5 +627,13 @@ public class VPpmDao implements java.io.Serializable {
 
 	public void setStrTstCode(String strTstCode) {
 		this.strTstCode = strTstCode;
+	}
+	@Column(name = "DPP_MONTANT", precision = 15, scale = 0)
+	public Long getDppMontant() {
+		return this.dppMontant;
+	}
+
+	public void setDppMontant(Long dppMontant) {
+		this.dppMontant = dppMontant;
 	}
 }

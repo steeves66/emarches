@@ -255,7 +255,12 @@
 				  <div class="col-sm-9">
 				     <table>
 				     <tr>
-				     <td style="width: 210px"> <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" styleClass="form-control"/></td>
+				     <td style="width: 210px"> 
+				     <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" styleClass="form-control">
+				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl" />
+				     </p:inputText>
+				     </td>
+				     
 				     <td style="width: 210px" >
 				    
 				     <!-- <div class="col-sm-9">  -->
@@ -324,7 +329,8 @@
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Nombre de lot<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%" />
+		          <p:inputText title="Le nombre de lot doit etre superieur à 0" type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%">
+		          </p:inputText>
                   </div>
                 </div>
                 
@@ -349,7 +355,7 @@
 			         
          </div>
          <div class="box-body">
-         <p:messages id="messages" showDetail="false" autoUpdate="true"  closable="true"/>   
+           
                   <div class="col-sm-12">
 		       	 </div>
 		       	  <div class="form-group">
@@ -535,50 +541,57 @@
 				            <h:outputText value="#{slctdTb.laaNum}"/>
 				        </p:column>
 				        
-				        <p:column headerText="LIBELLE" styleClass="col-sm-5">
+				        <p:column id="lib_Lot1" headerText="LIBELLE" styleClass="col-sm-5">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText value="#{slctdTb.laaObjet}" >
 		                </h:outputText>
 		                </f:facet>
 		                <f:facet name="input"> 
-		                <p:inputText id="LIBELLE" value="#{slctdTb.laaObjet}" style="width:100%">
+		                <p:inputText value="#{slctdTb.laaObjet}" style="width:100%">
+		                <p:ajax event="blur" listener="#{daoController.updateListeLotLibelle()}" global="false" process="@this" update=":content" /> 
 		                 </p:inputText>
 		                 </f:facet>
 		               </p:cellEditor>
 				        </p:column>
 				        
 				        
-				        <p:column headerText="Imputation" styleClass="col-sm-3">
-				          <p:cellEditor>
-		                <f:facet name="output">
+				        <p:column headerText="Imputation" styleClass="col-sm-2">
 		                <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
 		                </h:outputText>
-		                </f:facet>
-		                <f:facet name="input"> 
-		                <p:inputText id="IMPUTATION" value="#{slctdTb.TLBudgets.lbgImputation}" style="width:100%">
-		                 </p:inputText>
-		                 </f:facet>
-		               </p:cellEditor>
 				        </p:column>
-				        
-				         <p:column headerText="Montant Estimatif" styleClass="col-sm-2">
+				         
+				          <p:column headerText="Montant Estimatif" styleClass="col-sm-1">
 				          <p:cellEditor>
 		                <f:facet name="output">
-		                <h:outputText value="#{slctdTb.laaMtEst}" >
+		                <h:outputText  styleClass="pull-right" value="#{slctdTb.laaMtEst}" >
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		                </h:outputText>
 		                </f:facet>
 		                <f:facet name="input"> 
-		                <p:inputText id="MONTANTEST" value="#{slctdTb.laaMtEst}" style="width:100%">
+		                <p:inputText styleClass="text-right"  value="#{slctdTb.laaMtEst}" style="width:100%">
 		                 <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" global="false" process="@this" update="MONTANTEST" /> 
 		                 </p:inputText>
 		                 </f:facet>
 		               </p:cellEditor>
 				        </p:column>
 				        
-                          <p:column width="3%">
+				         <p:column headerText="Montant Caution" styleClass="col-sm-1">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText id="mont_caut1" styleClass="pull-right" value="#{slctdTb.laaMtCaut}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText styleClass="text-right" id="mont_caut2" value="#{slctdTb.laaMtCaut}" style="width:100%">
+		                 <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                 </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+                         <p:column width="3%">
 				              <p:commandLink action="#{daoController.chargeImputation()}" oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 				              <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
 							<i class="fa fa-plus"></i>
@@ -597,15 +610,28 @@
 				        </p:column>
 				        
                  </p:dataTable> 
+              
                  
-                  <br/> 
-                  
-                   
-            <div class="col-md-2"> 	
-             <p:inputText styleClass="text-right" style="background : #036d3b ;color:#fff; width:100%"  id="montant"  value="#{daoController.totalMontantEstimatif}" readonly="true">
+                <table>
+                <tr>
+                 <td style="width: 1120px"></td>
+                 <td><label>TOTAL MONTANT ESTIMATIF</label></td>
+                 <td>
+                  <p:inputText id="total_estim" styleClass="text-right" style="background : #036d3b ;color:#fff; width:165px"  value="#{daoController.totalMontantEstimatif}" readonly="true">
 		        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		    </p:inputText> 
-		    </div>
+                 </td>
+                 <td>
+                  <p:inputText rendered="false" styleClass="text-right" style="background : #036d3b ;color:#fff; width:165px"  value="#{daoController.totalMontantCaution}" readonly="true">
+		        <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		    </p:inputText> 
+                 </td>
+                </tr>
+                </table>
+                   
+             
+		    
+		  
  
          </div>
          
@@ -628,13 +654,28 @@
             <div class="col-md-9 "><div  style="color: #fff"> SAISIE DES PIECES DE RECEVABILITE DE L'OFFRE </div></div> 
          </div>
          <div class="box-body">
+      
+         <div class="col-md-12">
              <p:dataTable id="TPOffre" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listePiecesOffres}" 
              rowKey="#{slctdTb.tpoCode}" selection="#{daoController.listeSelectionPiecesOffres}" emptyMessage="Aucune Pièce trouvée">
                        <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
          				<p:column headerText="PIECES" styleClass="col-sm-12">
 				            <h:outputText value="#{slctdTb.tpoLibelle}"/>
 				        </p:column>
-                 </p:dataTable> 
+                 </p:dataTable>
+                 </div>
+                 
+                    <div class="col-md-12">
+          <div class="form-group ">
+			                 
+			                   
+			                     <p:selectOneRadio id="operations" value="#{daoController.pieceCode}">
+									<f:selectItem itemLabel="Garantie de soumission" itemValue="GSOU" /> <br/>
+									<f:selectItem itemLabel="Déclaration de garantie de soumission" itemValue="CAU" />
+								 </p:selectOneRadio>
+		                      
+			              </div>
+         </div> 
                   <br/> 
                  <div class="pull-right ">
 			            <p:commandLink action="#{daoController.savePieceOffres()}" styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_offre}" style="background-color: #036d3b; margin-right:5px;color:#fff"  update=":gnl">
@@ -694,14 +735,19 @@
 	                      <div class="box-body">     
                       <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}"   
                 scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
-                              <p:column headerText="CRITERES" styleClass="col-sm-12">
+                              <p:column headerText="CRITERES" styleClass="col-sm-10">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
                             </p:column>
-                             <p:column headerText="Actions" width="4%">
-				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLot}" title="Supprimer" update="gnl">
+                             <p:column headerText="Actions" styleClass="col-sm-2">
+                               <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />                             
+                            </p:commandLink>
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
 				        </p:column>
                         </p:dataTable>  
@@ -721,6 +767,69 @@
                </div>
                      
          </div>
+           
+         </p:tab> 
+         
+         <p:tab rendered="#{daoController.pavet_critere}" id="criterebyLot" title="Saisie des critères d'évalution par lot"  titleStyle="background-color: #f88b2e;background-image: none">  
+              <div class="row">
+            
+            <div class="col-md-12">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-2 "><div  style="color: #fff">LISTE DES CRITERES DU LOT : </div></div> 
+                  <div class="col-md-8 "><div  style="color: #fff">
+                     <div class="form-group ">
+	                     <p:selectOneMenu id="lotCrit" value="#{daoController.laaId}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir le lot.." />  
+			            <f:selectItems value="#{daoController.listeLots}" var="lot" itemLabel="#{lot.laaNum} : #{lot.laaObjet}" itemValue="#{lot.laaId}" />
+			           <p:ajax listener="#{daoController.chargeCritereByLot()}" update=":gnl:tbCritLot"/>
+       		        </p:selectOneMenu> 
+	                 
+	                </div>
+                  </div></div> 
+			          <div class="col-sm-2">
+				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
+								  </p:commandLink>
+				                  </div>
+               </div>
+	            <!-- /.box-header -->
+	                      <div class="box-body">     
+                      <p:dataTable id="tbCritLot" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}"   
+                scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
+                              <p:column headerText="CRITERES" styleClass="col-sm-6">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" />
+                            </p:column>
+                            
+                            <p:column headerText="COMMENTAIRE" styleClass="col-sm-6">
+		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" />
+                            </p:column>
+                             <p:column headerText="Actions" width="5%">
+				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('dlogdetModLot').show()"  title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />                             
+                            </p:commandLink>
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update="gnl">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
+			                </p:commandLink>
+				        </p:column>
+                        </p:dataTable>  
+	            </div>
+	            <div class="box-footer">
+	             <!--  <p:commandLink  styleClass="btn btn-success row pull-right"  style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Editer la liste
+	               </p:commandLink> -->
+	            </div>
+	           </div>
+            </div>
+            </div>
+                     
+         
            
          </p:tab> 
          
@@ -1238,6 +1347,14 @@
 	<h:form id="NewLotlog" styleClass="form-horizontal"> 
 	       <p:dialog  widgetVar="newLotdlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Saisie des lots">
 				<div class="contentpanel">
+				
+				  <div class="form-group ">
+	                  <label for="numLt" class="col-sm-2 control-label"><b>Numéro du Lot </b></label>
+	                  <div class="col-sm-10">
+	                  <p:inputText  type="text" styleClass="form-control" id="numLt" value="#{daoController.newLot.laaNum}" style="width: 100%" /> 
+	                  </div>
+	                </div>
+	                
 					 <div class="form-group ">
 	                  <label for="lib" class="col-sm-2 control-label"><b>Libellé</b></label>
 	                  <div class="col-sm-10">
@@ -1245,14 +1362,7 @@
 	                  </div>
 	                </div>
 	                
-	                <div class="form-group ">
-	                  <label for="numLt" class="col-sm-2 control-label"><b>Numéro du Lot </b></label>
-	                  <div class="col-sm-10">
-	                  <p:inputText  type="text" styleClass="form-control" id="numLt" value="#{daoController.newLot.laaNum}" style="width: 100%" /> 
-	                  </div>
-	                </div>
-	                
-	                 <div class="form-group ">
+	                  <div class="form-group ">
 	                  <label for="montEst" class="col-sm-2 control-label"><b>Montant Estimatif</b></label>
 	                  <div class="col-sm-10">
 	                  <p:inputText  type="text" styleClass="form-control" id="montEst" value="#{daoController.newLot.laaMtEst}" style="width: 100%" >
@@ -1261,6 +1371,25 @@
 	                  </p:inputText> 
 	                  </div>
 	                </div>
+	              
+	                <div class="form-group ">
+	                  <label for="montCaut" class="col-sm-2 control-label"><b>Montant Caution</b></label>
+	                  <div class="col-sm-10">
+	                  <p:inputText  type="text" styleClass="form-control" id="montCaut" value="#{daoController.newLot.laaMtCaut}" style="width: 100%" >
+	                   <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" global="false" process="@this" update="montCaut" /> 
+	                  </p:inputText> 
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="delaiEx" class="col-sm-2 control-label"><b>Délai d'execution</b></label>
+	                  <div class="col-sm-10">
+	                  <p:inputText  type="text" styleClass="form-control" id="delaiEx" value="#{daoController.newLot.laaDelaiExe}" style="width: 100%" >
+	                  </p:inputText> 
+	                  </div>
+	                </div>
+	                
 	                
 	                 <div class="form-group ">
 	                  <label for="lieu" class="col-sm-2 control-label"><b>Lieu d'exécution </b></label>
@@ -1621,6 +1750,102 @@
       </p:dialog>
     </h:form>
     
+    
+    
+     <h:form id="dlogdetMod">
+	  <p:dialog  widgetVar="DetailDlgMod" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
+		<div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">#{daoController.sltCritereDac.craLibelle}</div>
+         </div>
+         <div class="box-body">
+              
+		       <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libellé</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.sltCritereDac.craLibelle}" rows="3" cols="5" styleClass="form-control" style="width: 100%" />  
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libellé</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.sltCritereDac.dcadCommentaire}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
+                  </div>
+                </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.updateCritere()}" oncomplete="PF('DetailDlgMod').hide()" update="gnl">
+			             <i class="ace-icon fa fa-save"></i> Modifier
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
+    
+    
+     <h:form id="dlogdetModLot">
+	  <p:dialog  widgetVar="dlogdetModLot" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
+		<div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">#{daoController.sltCritereDac.craLibelle}</div>
+         </div>
+         <div class="box-body">
+              
+		       <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libellé</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.sltCritereDac.craLibelle}" rows="3" cols="5" styleClass="form-control" style="width: 100%" />  
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libellé</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.sltCritereDac.dcadCommentaire}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
+                  </div>
+                </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.updateCritereByLot()}" oncomplete="PF('dlogdetModLot').hide()" update="gnl">
+			             <i class="ace-icon fa fa-save"></i> Modifier
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
 
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
