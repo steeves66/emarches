@@ -378,7 +378,6 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			}
 		 
 		 public void chargeDataPgspm(){
-			 //getObjetList().clear();
 			 getListPgspm().clear();
 			 listPgspm = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")), 
 					"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1S","S2D","PGD")),
