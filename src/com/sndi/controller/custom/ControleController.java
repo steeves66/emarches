@@ -105,7 +105,7 @@ public class ControleController {
 	public boolean btn_maj_datePpm =false;
 	public boolean btn_maj_datePspm =false;
 	
-	//A
+	//Booléens
 	private boolean panelAmiTableauBordSai =false;
 	private boolean panelAmiTableauBordVal =false;
 	private boolean btn_valider_ami_cpmp =false; 

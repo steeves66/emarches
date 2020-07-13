@@ -754,7 +754,7 @@ public class DaoController {
 			              //new WhereClause("CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				_logger.info("Nbre DAC: "+detailTBCpt.size());	
 		}
-		 //FIN DETAILS DES COMPTEURS
+		 //FIN DES DETAILS DES COMPTEURS 
 	 
 			//Methode d'affichage la liste des DAC en fonction du type plan et du type DAC passé en parametre
 		 public void chargeDataByAction(String typeDac,String typePlan){
