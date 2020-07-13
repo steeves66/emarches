@@ -227,8 +227,8 @@ public class TableauBordController {
 			     private String pspmDmDiff="";
 			     
 			     
-			   //DAO
-				 private String daoTotal=""; 
+			        //DAO
+				      private String daoTotal=""; 
 				 /*
 				  Compteur pour l'autorité Contractante
 				   */
