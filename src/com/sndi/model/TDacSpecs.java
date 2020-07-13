@@ -51,7 +51,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacRecherche;
 	private String dacFonCodeDmp;
 	private String dacFonCodePf;
-	private Boolean dacFactoriseCrit;
+	private long dacFactoriseCrit;
 	private Long dacNbreAchat;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
@@ -75,7 +75,7 @@ public class TDacSpecs implements java.io.Serializable {
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
-			Boolean dacFactoriseCrit, Long dacNbreAchat,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			long dacFactoriseCrit, Long dacNbreAchat,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -343,11 +343,11 @@ public class TDacSpecs implements java.io.Serializable {
 	}
 	
 	@Column(name = "DAC_FACTORISE_CRIT", precision = 1, scale = 0)
-	public Boolean getDacFactoriseCrit() {
+	public long getDacFactoriseCrit() {
 		return this.dacFactoriseCrit;
 	}
 
-	public void setDacFactoriseCrit(Boolean dacFactoriseCrit) {
+	public void setDacFactoriseCrit(long dacFactoriseCrit) {
 		this.dacFactoriseCrit = dacFactoriseCrit;
 	}
 	
