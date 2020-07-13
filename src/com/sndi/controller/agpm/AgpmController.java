@@ -180,7 +180,6 @@ public class AgpmController {
 	 private VUpdateAgpm updateAgpm = new VUpdateAgpm(); 
 	 private VAgpmDeclarant rappelDec = new VAgpmDeclarant();
 	 private VProjetAgpm acte = new VProjetAgpm(); 
-	// private TAffichageAgpm slctdTd = new TAffichageAgpm();
 	 //private VAgpmliste slctdTdv= new VAgpmliste();
 	 private VAgpmliste slctdTd = new VAgpmliste();
 	 private TDeclarant dec = new TDeclarant();
