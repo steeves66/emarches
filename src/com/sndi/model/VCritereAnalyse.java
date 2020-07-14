@@ -33,7 +33,7 @@ public class VCritereAnalyse implements java.io.Serializable {
 	}
 
 	@Id
-	@Column(name = "CRA_CODE", length = 20)
+	@Column(name = "CRA_CODE")
 	public String getCraCode() {
 		return this.craCode;
 	}
@@ -42,7 +42,7 @@ public class VCritereAnalyse implements java.io.Serializable {
 		this.craCode = craCode;
 	}
 
-	@Column(name = "CRA_LIBELLE", length = 512)
+	@Column(name = "CRA_LIBELLE")
 	public String getCraLibelle() {
 		return this.craLibelle;
 	}
@@ -51,7 +51,7 @@ public class VCritereAnalyse implements java.io.Serializable {
 		this.craLibelle = craLibelle;
 	}
 
-	@Column(name = "CODPARENT", length = 20)
+	@Column(name = "CODPARENT")
 	public String getCodparent() {
 		return this.codparent;
 	}
@@ -60,7 +60,7 @@ public class VCritereAnalyse implements java.io.Serializable {
 		this.codparent = codparent;
 	}
 
-	@Column(name = "CRA_TYM_CODE", length = 10)
+	@Column(name = "CRA_TYM_CODE")
 	public String getCraTymCode() {
 		return this.craTymCode;
 	}

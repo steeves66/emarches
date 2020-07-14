@@ -108,7 +108,7 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 		this.TCritereAnalyse = TCritereAnalyse;
 	}
 
-	@Column(name = "DCAD_LIB_AJUST", length = 500)
+	@Column(name = "DCAD_LIB_AJUST")
 	public String getDcadLibAjust() {
 		return this.dcadLibAjust;
 	}
@@ -118,7 +118,7 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DCAD_DTE_SAISIE", length = 7)
+	@Column(name = "DCAD_DTE_SAISIE")
 	public Date getDcadDteSaisie() {
 		return this.dcadDteSaisie;
 	}
@@ -127,7 +127,7 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 		this.dcadDteSaisie = dcadDteSaisie;
 	}
 
-	@Column(name = "DCAD_OPE_CODE", length = 25)
+	@Column(name = "DCAD_OPE_CODE")
 	public String getDcadOpeCode() {
 		return this.dcadOpeCode;
 	}
@@ -136,7 +136,7 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 		this.dcadOpeCode = dcadOpeCode;
 	}
 
-	@Column(name = "DCAD_OBSER", length = 500)
+	@Column(name = "DCAD_OBSER")
 	public String getDcadObser() {
 		return this.dcadObser;
 	}
@@ -145,7 +145,7 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 		this.dcadObser = dcadObser;
 	}
 
-	@Column(name = "DCAD_STATUT", length = 1)
+	@Column(name = "DCAD_STATUT")
 	public String getDcadStatut() {
 		return this.dcadStatut;
 	}
@@ -155,7 +155,7 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 	}
 	
 
-	@Column(name = "DCAD_COMMENTAIRE", length = 1000)
+	@Column(name = "DCAD_COMMENTAIRE")
 	public String getDcadCommentaire() {
 		return this.dcadCommentaire;
 	}

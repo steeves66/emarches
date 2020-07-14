@@ -47,7 +47,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 	}
 
 	@Id
-	@Column(name = "CRA_CODE", length = 36)
+	@Column(name = "CRA_CODE")
 	public String getCraCode() {
 		return this.craCode;
 	}
@@ -56,7 +56,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.craCode = craCode;
 	}
 
-	@Column(name = "CRA_LIBELLE", length = 512)
+	@Column(name = "CRA_LIBELLE")
 	public String getCraLibelle() {
 		return this.craLibelle;
 	}
@@ -65,7 +65,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.craLibelle = craLibelle;
 	}
 
-	@Column(name = "MDT_CODE", length = 15)
+	@Column(name = "MDT_CODE")
 	public String getMdtCode() {
 		return this.mdtCode;
 	}
@@ -74,7 +74,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.mdtCode = mdtCode;
 	}
 
-	@Column(name = "CODEDETAIL", length = 10)
+	@Column(name = "CODEDETAIL")
 	public String getCodedetail() {
 		return this.codedetail;
 	}
@@ -83,7 +83,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.codedetail = codedetail;
 	}
 
-	@Column(name = "MDT_LIBELLE_LONG", length = 500)
+	@Column(name = "MDT_LIBELLE_LONG")
 	public String getMdtLibelleLong() {
 		return this.mdtLibelleLong;
 	}
@@ -92,7 +92,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.mdtLibelleLong = mdtLibelleLong;
 	}
 
-	@Column(name = "CRA_BAIL", length = 20)
+	@Column(name = "CRA_BAIL")
 	public String getCraBail() {
 		return this.craBail;
 	}
@@ -101,7 +101,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.craBail = craBail;
 	}
 
-	@Column(name = "CODPARENT", length = 36)
+	@Column(name = "CODPARENT")
 	public String getCodparent() {
 		return this.codparent;
 	}
@@ -110,7 +110,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.codparent = codparent;
 	}
 
-	@Column(name = "MDT_TYM_CODE", length = 10)
+	@Column(name = "MDT_TYM_CODE")
 	public String getMdtTymCode() {
 		return this.mdtTymCode;
 	}
@@ -119,7 +119,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.mdtTymCode = mdtTymCode;
 	}
 
-	@Column(name = "CRA_TYP_DAC", length = 3)
+	@Column(name = "CRA_TYP_DAC")
 	public String getCraTypDac() {
 		return this.craTypDac;
 	}
@@ -128,7 +128,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.craTypDac = craTypDac;
 	}
 
-	@Column(name = "MDT_DAC_TYPE_CHAIN", length = 100)
+	@Column(name = "MDT_DAC_TYPE_CHAIN")
 	public String getMdtDacTypeChain() {
 		return this.mdtDacTypeChain;
 	}

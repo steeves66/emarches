@@ -61,7 +61,7 @@ public class TDetCritAnalyse implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "DAN_CODE", unique = true, nullable = false, length = 10)
+	@Column(name = "DAN_CODE", unique = true, nullable = false)
 	public String getDanCode() {
 		return this.danCode;
 	}
@@ -110,7 +110,7 @@ public class TDetCritAnalyse implements java.io.Serializable {
 		this.TOperateurByDanOpeModif = TOperateurByDanOpeModif;
 	}
 
-	@Column(name = "DAN_LIBELLE", length = 500)
+	@Column(name = "DAN_LIBELLE")
 	public String getDanLibelle() {
 		return this.danLibelle;
 	}
@@ -120,7 +120,7 @@ public class TDetCritAnalyse implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DAN_DTE_SAISIE", length = 7)
+	@Column(name = "DAN_DTE_SAISIE")
 	public Date getDanDteSaisie() {
 		return this.danDteSaisie;
 	}
@@ -129,7 +129,7 @@ public class TDetCritAnalyse implements java.io.Serializable {
 		this.danDteSaisie = danDteSaisie;
 	}
 
-	@Column(name = "DAN_STATUT", length = 1)
+	@Column(name = "DAN_STATUT")
 	public String getDanStatut() {
 		return this.danStatut;
 	}
@@ -138,7 +138,7 @@ public class TDetCritAnalyse implements java.io.Serializable {
 		this.danStatut = danStatut;
 	}
 
-	@Column(name = "DAN_AUTRE", length = 200)
+	@Column(name = "DAN_AUTRE")
 	public String getDanAutre() {
 		return this.danAutre;
 	}
@@ -148,7 +148,7 @@ public class TDetCritAnalyse implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DAN_DTE_MODIF", length = 7)
+	@Column(name = "DAN_DTE_MODIF")
 	public Date getDanDteModif() {
 		return this.danDteModif;
 	}

@@ -61,7 +61,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 
 	@Id
 
-	@Column(name = "CRA_CODE", unique = true, nullable = false, length = 20)
+	@Column(name = "CRA_CODE", unique = true, nullable = false)
 	public String getCraCode() {
 		return this.craCode;
 	}
@@ -80,7 +80,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 		this.TTypeMarche = TTypeMarche;
 	}
 
-	@Column(name = "CRA_LIBELLE", length = 500)
+	@Column(name = "CRA_LIBELLE")
 	public String getCraLibelle() {
 		return this.craLibelle;
 	}
@@ -90,7 +90,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "CRA_DTE_SAISIE", length = 7)
+	@Column(name = "CRA_DTE_SAISIE")
 	public Date getCraDteSaisie() {
 		return this.craDteSaisie;
 	}
@@ -99,7 +99,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 		this.craDteSaisie = craDteSaisie;
 	}
 
-	@Column(name = "CRA_OPE_MATRICULE", length = 25)
+	@Column(name = "CRA_OPE_MATRICULE")
 	public String getCraOpeMatricule() {
 		return this.craOpeMatricule;
 	}
@@ -108,7 +108,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 		this.craOpeMatricule = craOpeMatricule;
 	}
 
-	@Column(name = "CRA_OPE_MODIF", length = 25)
+	@Column(name = "CRA_OPE_MODIF")
 	public String getCraOpeModif() {
 		return this.craOpeModif;
 	}
@@ -117,7 +117,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 		this.craOpeModif = craOpeModif;
 	}
 
-	@Column(name = "CRA_STATUT", length = 1)
+	@Column(name = "CRA_STATUT")
 	public String getCraStatut() {
 		return this.craStatut;
 	}
@@ -125,7 +125,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 	public void setCraStatut(String craStatut) {
 		this.craStatut = craStatut;
 	}
-	@Column(name = "CRA_TYP_PROC", length = 3)
+	@Column(name = "CRA_TYP_PROC")
 	public String getCraTypProc() {
 		return this.craTypProc;
 	}
@@ -134,7 +134,7 @@ public class TCritereAnalyse implements java.io.Serializable {
 		this.craTypProc = craTypProc;
 	}
 
-	@Column(name = "CRA_TYP_DAC", length = 3)
+	@Column(name = "CRA_TYP_DAC")
 	public String getCraTypDac() {
 		return this.craTypDac;
 	}

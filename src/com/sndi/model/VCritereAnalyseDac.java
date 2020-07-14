@@ -69,7 +69,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.RId = RId;
 	}
 	
-	@Column(name = "CRA_CODE", length = 20)
+	@Column(name = "CRA_CODE")
 	public String getCraCode() {
 		return this.craCode;
 	}
@@ -78,7 +78,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.craCode = craCode;
 	}
 
-	@Column(name = "CRA_LIBELLE", length = 512)
+	@Column(name = "CRA_LIBELLE")
 	public String getCraLibelle() {
 		return this.craLibelle;
 	}
@@ -87,7 +87,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.craLibelle = craLibelle;
 	}
 
-	@Column(name = "CODPARENT", length = 20)
+	@Column(name = "CODPARENT")
 	public String getCodparent() {
 		return this.codparent;
 	}
@@ -96,7 +96,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.codparent = codparent;
 	}
 
-	@Column(name = "CODEP", length = 10)
+	@Column(name = "CODEP")
 	public String getCodep() {
 		return this.codep;
 	}
@@ -105,7 +105,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.codep = codep;
 	}
 
-	@Column(name = "CRA_TYM_CODEX", length = 4)
+	@Column(name = "CRA_TYM_CODEX")
 	public String getCraTymCodex() {
 		return this.craTymCodex;
 	}
@@ -114,7 +114,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.craTymCodex = craTymCodex;
 	}
 
-	@Column(name = "CRA_TYP_PROC", length = 3)
+	@Column(name = "CRA_TYP_PROC")
 	public String getCraTypProc() {
 		return this.craTypProc;
 	}
@@ -123,7 +123,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.craTypProc = craTypProc;
 	}
 
-	@Column(name = "CRA_TYP_DAC", length = 3)
+	@Column(name = "CRA_TYP_DAC")
 	public String getCraTypDac() {
 		return this.craTypDac;
 	}
@@ -132,7 +132,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.craTypDac = craTypDac;
 	}
 
-	@Column(name = "CRA_BAILLEURX", length = 20)
+	@Column(name = "CRA_BAILLEURX")
 	public String getCraBailleurx() {
 		return this.craBailleurx;
 	}
@@ -141,7 +141,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.craBailleurx = craBailleurx;
 	}
 
-	@Column(name = "DCAD_DAC_CODE", length = 20)
+	@Column(name = "DCAD_DAC_CODE")
 	public String getDcadDacCode() {
 		return this.dcadDacCode;
 	}
@@ -149,7 +149,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 	public void setDcadDacCode(String dcadDacCode) {
 		this.dcadDacCode = dcadDacCode;
 	}
-	@Column(name = "AAO_REG_QUAL", length = 100)
+	@Column(name = "AAO_REG_QUAL")
 	public String getAaoRegQual() {
 		return this.aaoRegQual;
 	}
