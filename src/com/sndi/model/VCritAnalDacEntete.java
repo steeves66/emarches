@@ -18,7 +18,8 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_CRIT_ANAL_DAC_ENTETE")
 public class VCritAnalDacEntete implements java.io.Serializable {
 
-	private long dcadNum;
+	private BigDecimal RId;
+	private Long dcadNum;
 	private String craCode;
 	private String craLibelle;
 	private String mdtCode;
@@ -29,8 +30,9 @@ public class VCritAnalDacEntete implements java.io.Serializable {
 	public VCritAnalDacEntete() {
 	}
 
-	public VCritAnalDacEntete(long dcadNum, String craCode, String craLibelle, String mdtCode,
+	public VCritAnalDacEntete(BigDecimal RId,Long dcadNum, String craCode, String craLibelle, String mdtCode,
 			String mdtTymCode, String dcadDacCode, BigDecimal dcadLaaId) {
+		this.RId = RId;
 		this.dcadNum = dcadNum;
 		this.craCode = craCode;
 		this.craLibelle = craLibelle;
@@ -39,17 +41,27 @@ public class VCritAnalDacEntete implements java.io.Serializable {
 		this.dcadDacCode = dcadDacCode;
 		this.dcadLaaId = dcadLaaId;
 	}
+	
+    @Id
+	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}
 
 	@Column(name = "DCAD_NUM", precision = 22, scale = 0)
-	public long getDcadNum() {
+	public Long getDcadNum() {
 		return this.dcadNum;
 	}
 
-	public void setDcadNum(long dcadNum) {
+	public void setDcadNum(Long dcadNum) {
 		this.dcadNum = dcadNum;
 	}
 
-	@Id
+	
 	@Column(name = "CRA_CODE", length = 36)
 	public String getCraCode() {
 		return this.craCode;
