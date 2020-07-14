@@ -30,7 +30,7 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 	private String dcadStatut;
 	private long dcadLaaId;
 	private String dcadCommentaire;
-	private long dcadNumDcad;
+	private Long dcadNumDcad;
 
 	public VbDetCritAnalyseDac() {
 	}
@@ -42,7 +42,7 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 
 	public VbDetCritAnalyseDac(Long dcadNum, String dcadDanCode, String dcadDacCode, String dcadLibAjust,
 			String dcadDanCraCode, Date dcadDteSaisie, String dcadOpeCode, String dcadObser, String dcadStatut, long dcadLaaId,
-	String dcadCommentaire, long dcadNumDcad) {
+	String dcadCommentaire, Long dcadNumDcad) {
 		this.dcadNum = dcadNum;
 		this.dcadDanCode = dcadDanCode;
 		this.dcadDacCode = dcadDacCode;
@@ -160,11 +160,11 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 	}
 	
 	@Column(name = "DCAD_NUM_DCAD")
-	public long getDcadNumDcad() {
+	public Long getDcadNumDcad() {
 		return this.dcadNumDcad;
 	}
 
-	public void setDcadNumDcad(long dcadNumDcad) {
+	public void setDcadNumDcad(Long dcadNumDcad) {
 		this.dcadNumDcad = dcadNumDcad;
 	}
 }
