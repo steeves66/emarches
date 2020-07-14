@@ -61,6 +61,7 @@ import com.sndi.model.VLot;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VRecapSeuilAnormal;
+import com.sndi.model.VRepSoumissionnaire;
 import com.sndi.model.VResultEvalClassLot;
 import com.sndi.model.VResultPropAttribLot;
 import com.sndi.model.VTypeMarcheFils;
@@ -132,6 +133,7 @@ public class CommissionController {
 	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
 	 private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
+	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>();
 	 private List<TDetOffres> listeOffres = new ArrayList<TDetOffres>(); 
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
 	 private List<VPiecesOffreAnalyse> listePiecesOffresAnalyse = new ArrayList<VPiecesOffreAnalyse>();
@@ -158,6 +160,7 @@ public class CommissionController {
 	 private VRecapSeuilAnormal infoSeuil =new VRecapSeuilAnormal();
 	 private VVerifcorOffin infoLot =new VVerifcorOffin();
 	 private TLotAao recupLot =new TLotAao();
+	 private VRepSoumissionnaire recupNcc =new VRepSoumissionnaire();
 	
 	 
 	 
@@ -818,23 +821,44 @@ public class CommissionController {
 				 
 			 }
 		 */
-		//Love pour recuperer les candidats
+		 
+		//Love pour recupérer les candidats
 		 public void onSelectCandidat() {
 			 newOffre= new VbTempParamDetOffres();
 			 newOffre.setDofSigle(candidat.getCanSouSigleSte());
 			 newOffre.setDofSouNcc(candidat.getCanSouNcc());
-				}
-		
+			 
+		  recupSoumissionnaire = ((List<VRepSoumissionnaire>)iservice.getObjectsByColumn("VRepSoumissionnaire",new ArrayList<String>(Arrays.asList("DCS_SOU_NCC")),
+		    new WhereClause("DCS_SOU_NCC",Comparateur.EQ,""+candidat.getCanSouNcc())));
+			    if (!recupSoumissionnaire.isEmpty()) {
+				    recupNcc=recupSoumissionnaire.get(0); 
+				       
+				    newOffre.setDofNomRep(recupNcc.getDcsNom());
+				    newOffre.setDofPreRep(recupNcc.getDcsPrenoms());
+				    newOffre.setDofTelRep(recupNcc.getTel());
+				    newOffre.setDofMailRep(recupNcc.getDcsMail());
+		            }
+		   }
+		//Fin de la Methode OnSelectCandidat
 		
 		//Ouverture des offres
 		public void saveOuverture() {
-			
-				
 				//enregister dans T_analyse_offre
 				/*if (selectionCritereAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
 		 		else{*/
+			            if(recupNcc == null) {
+			             newOffre.setDofNomRep(newOffre.getDofNomRep());
+						 newOffre.setDofPreRep(newOffre.getDofPreRep());
+						 newOffre.setDofTelRep(newOffre.getDofTelRep());
+						 newOffre.setDofMailRep(newOffre.getDofMailRep());
+			            }else {
+			            newOffre.setDofNomRep(recupNcc.getDcsNom());
+						newOffre.setDofPreRep(recupNcc.getDcsPrenoms());
+						newOffre.setDofTelRep(recupNcc.getTel());
+						newOffre.setDofMailRep(recupNcc.getDcsMail());
+			            }
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 					   newOffre.setDofLaaId(laaId);
 					   newOffre.setTempType("OFF");
@@ -1918,6 +1942,26 @@ public class CommissionController {
 
 	public void setInfoLot(VVerifcorOffin infoLot) {
 		this.infoLot = infoLot;
+	}
+
+
+	public List<VRepSoumissionnaire> getRecupSoumissionnaire() {
+		return recupSoumissionnaire;
+	}
+
+
+	public void setRecupSoumissionnaire(List<VRepSoumissionnaire> recupSoumissionnaire) {
+		this.recupSoumissionnaire = recupSoumissionnaire;
+	}
+
+
+	public VRepSoumissionnaire getRecupNcc() {
+		return recupNcc;
+	}
+
+
+	public void setRecupNcc(VRepSoumissionnaire recupNcc) {
+		this.recupNcc = recupNcc;
 	}
 
 	

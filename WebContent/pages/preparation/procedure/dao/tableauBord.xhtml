@@ -55,7 +55,7 @@
               <i class="ion ion-stats-bars"></i>
             </div>
           
-            <p:commandLink  oncomplete="PF('detailDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailTrans()}"   class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>

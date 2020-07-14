@@ -25,12 +25,13 @@ public class VRepSoumissionnaire implements java.io.Serializable {
 	private String tel;
 	private String dcsMail;
 	private String dcsSouNcc;
+	private String souSigleSte;
 
 	public VRepSoumissionnaire() {
 	}
 
 	public VRepSoumissionnaire(BigDecimal dcsid, String dcsDacCode, String dcsNom, String dcsPrenoms, String tel,
-			String dcsMail, String dcsSouNcc) {
+			String dcsMail, String dcsSouNcc, String souSigleSte) {
 		this.dcsid = dcsid;
 		this.dcsDacCode = dcsDacCode;
 		this.dcsNom = dcsNom;
@@ -38,6 +39,7 @@ public class VRepSoumissionnaire implements java.io.Serializable {
 		this.tel = tel;
 		this.dcsMail = dcsMail;
 		this.dcsSouNcc = dcsSouNcc;
+		this.souSigleSte = souSigleSte;
 	}
 
 	
@@ -103,6 +105,15 @@ public class VRepSoumissionnaire implements java.io.Serializable {
 
 	public void setDcsSouNcc(String dcsSouNcc) {
 		this.dcsSouNcc = dcsSouNcc;
+	}
+	
+	@Column(name = "SOU_SIGLE_STE", length = 500)
+	public String getSouSigleSte() {
+		return this.souSigleSte;
+	}
+
+	public void setSouSigleSte(String souSigleSte) {
+		this.souSigleSte = souSigleSte;
 	}
 
 }
