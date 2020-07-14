@@ -823,12 +823,13 @@ public class CommissionController {
 		 */
 		 
 		//Love pour recupérer les candidats
-		 public void onSelectCandidat() {
+		 public void onSelectCandidat() { 
 			 newOffre= new VbTempParamDetOffres();
 			 newOffre.setDofSigle(candidat.getCanSouSigleSte());
 			 newOffre.setDofSouNcc(candidat.getCanSouNcc());
 			 
 		  recupSoumissionnaire = ((List<VRepSoumissionnaire>)iservice.getObjectsByColumn("VRepSoumissionnaire",new ArrayList<String>(Arrays.asList("DCS_SOU_NCC")),
+				  new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+candidat.getDveDacCode()),
 		    new WhereClause("DCS_SOU_NCC",Comparateur.EQ,""+candidat.getCanSouNcc())));
 			    if (!recupSoumissionnaire.isEmpty()) {
 				    recupNcc=recupSoumissionnaire.get(0); 
