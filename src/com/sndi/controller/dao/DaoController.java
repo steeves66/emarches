@@ -571,8 +571,6 @@ public class DaoController {
 		 
 		 if(!listeEnteteCritere.isEmpty()) { */
 			 //newEnteteCrit=listeEnteteCritere.get(0);
-			
-			 
 			 newCritereDac.setDcadDacCode(dao.getDacCode());
 			 newCritereDac.setDcadDanCraCode(craCode);
 			 newCritereDac.setDcadDanCode("99999999999");
