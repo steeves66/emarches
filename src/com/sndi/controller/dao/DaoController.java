@@ -227,7 +227,6 @@ public class DaoController {
 	 
 	//variables
 	private long gesCode;
-	private long dcadNum;
 	 private TFonction recupFonction= new TFonction();
 	 private TDetailPlanPassation demDetail = new TDetailPlanPassation();
 	 private List<TDacSpecs> listeDaoCsvValid = new ArrayList<TDacSpecs>();
@@ -270,7 +269,9 @@ public class DaoController {
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
 	//VARIABLES
 	 private long adaNum;
+	 private long rId;
 	 private long delai;
+	 private long dcadNum;
 	 private long totalMontantEstimatif;
 	 private long totalMontantCaution;
 	 private String pidCod;
@@ -282,7 +283,7 @@ public class DaoController {
 	 private short numDetailAdr;
 	 private String dtaLibelle;
 	 private String affichLog;
-	 private String craCode="";
+	 private String craCode;
 	 private String detCom="";
 	 private String pieceCode="";
 	 private String dacCode ="";
@@ -550,6 +551,8 @@ public class DaoController {
 		 {
 			 lot.getLaaId();
 		 }
+		 //vider le champs detail
+		  newCritereDac = new VbDetCritAnalyseDac(); 
 		 listeEnteteCritere.clear();
 		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
 				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+loId),
@@ -566,19 +569,24 @@ public class DaoController {
 	 }
 	 
 	 public void saveDetailCritere() {
-	/*	 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
-				 new WhereClause("CRA_CODE",WhereClause.Comparateur.EQ,""+craCode));
+		 //long dcadNum =0;
+		//VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
+		//VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
+		
+		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
+				 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rId));
 		 
-		 if(!listeEnteteCritere.isEmpty()) { */
-			 //newEnteteCrit=listeEnteteCritere.get(0);
+		 if(!listeEnteteCritere.isEmpty()) { 
+			 newEnteteCrit=listeEnteteCritere.get(0);
+			 
 			 newCritereDac.setDcadDacCode(dao.getDacCode());
-			 newCritereDac.setDcadDanCraCode(craCode);
+			 newCritereDac.setDcadDanCraCode(newEnteteCrit.getCraCode());
 			 newCritereDac.setDcadDanCode("99999999999");
-			 if(newCritereDac.getDcadNum()==null) {
+			 if(newEnteteCrit.getDcadNum()==null) {
 				dcadNum=0;
 			 }else
 			 {
-			  dcadNum = newCritereDac.getDcadNum();
+			  dcadNum = newEnteteCrit.getDcadNum();
 			 }
 			 newCritereDac.setDcadNumDcad(dcadNum);
 			 newCritereDac.setDcadDteSaisie(Calendar.getInstance().getTime());
@@ -588,7 +596,7 @@ public class DaoController {
 			 newCritereDac = new VbDetCritAnalyseDac();
 			 craCode ="";
 			 chargeCritereSaisie();
-		 //} 
+		 } 
 	 }
 	 
 	 public void saveCritere() {
@@ -661,7 +669,7 @@ public class DaoController {
 	 
 	 public void deleteCritere() {
 		 newCritereDac.setDcadDanCraCode(sltCritereDac.getCraCode());
-		 iservice.deleteObject(newCritereDac);
+		 iservice.deleteObject(newCritereDac); 
 			  chargeCritereSaisie();
 		
 		 
@@ -6000,6 +6008,14 @@ public class DaoController {
 
 	public void setDcadNum(long dcadNum) {
 		this.dcadNum = dcadNum;
+	}
+
+	public long getrId() {
+		return rId;
+	}
+
+	public void setrId(long rId) {
+		this.rId = rId;
 	}
 
 		

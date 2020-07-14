@@ -1612,10 +1612,10 @@
                    <div class="form-group">
                   <label  class="col-sm-1 control-label">Critère</label>
 				  <div class="col-sm-10">
-				   <p:selectOneMenu id="critereEntete" value="#{daoController.craCode}"
+				   <p:selectOneMenu id="critereEntete" value="#{daoController.rId}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
-			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.craCode}" /> 
+			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.RId}" /> 
        		        </p:selectOneMenu> 
                   </div>
                 
