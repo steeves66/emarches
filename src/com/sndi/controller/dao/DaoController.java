@@ -493,6 +493,7 @@ public class DaoController {
 		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
 	 }
 	 
+	 
 	 //Liste des critères saisie
 	 public void chargeCritereSaisie() { 
 	/*	 listeCritereSaisie= (List<VbDetCritAnalyseDac>) iservice.getObjectsByColumn("VbDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_DAN_CODE")),
@@ -696,6 +697,79 @@ public class DaoController {
 		  }
 		 
 	 }
+	 
+	 
+	 public void chargeDetailTransAC1(String typePlan,String typeDac, String stat1){
+		 detailTB.clear();
+		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+		              new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("Nbre DAC: "+detailTB.size());	
+	    }
+
+
+     public void chargeDacTransCP1(String typePlan,String typeDac, String stat1){
+	     detailTB.clear();
+		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+		              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("Nbre DAC: "+detailTB.size());	
+	}
+	 
+	 
+	 public void chargeDetailTrans() {
+		// String fonct = controleController.getFonctionalite();
+		 //DEBUT DAO PN
+		 if(controleController.type == "DAC" && controleController.typePlan == "PN") { 
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 //Affichage des differentes listes de l'AC en faction de l'action
+						 chargeDetailTransAC1("PN", "DAO", "D1T");	
+		       //Finaffichage ac
+			 }else {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 chargeDacTransCP1("PN", "DAO", "D2T"); 
+			   }
+		   }
+		}
+		//FIN DAO PN
+		 
+		//DEBUT DAO PS
+		 else {
+			 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+                 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						 chargeDetailTransAC1("PS", "DAO", "D1T");	
+		       //Finaffichage ac
+			     }else {
+				    if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+				    	chargeDacTransCP1("PS", "DAO", "D2T"); 
+			       }
+			    }
+			 }
+			//FIN DAO PS
+			 
+			//DEBUT DAO AMI 
+			 else {
+				 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+					 chargeDetailPF1("PN", "AMI", "D1T");
+				 }
+				//FIN AMI
+				 
+				//DEBUT PRQ
+				 else {
+					 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {
+						 chargeDetailTransAC1("PN", "PRQ", "D1T");
+					 }
+					 
+					//FIN PRQ
+				 }
+		     } 
+		   }
+	 } 
+	 
 	 
 	 
 	 
