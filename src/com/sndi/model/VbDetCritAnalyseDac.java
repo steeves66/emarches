@@ -19,7 +19,7 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "VB_DET_CRIT_ANALYSE_DAC")
 public class VbDetCritAnalyseDac implements java.io.Serializable {
 
-	private BigDecimal dcadNum;
+	private Long dcadNum;
 	private String dcadDanCode;
 	private String dcadDacCode;
 	private String dcadLibAjust;
@@ -30,18 +30,19 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 	private String dcadStatut;
 	private long dcadLaaId;
 	private String dcadCommentaire;
+	private long dcadNumDcad;
 
 	public VbDetCritAnalyseDac() {
 	}
 
-	public VbDetCritAnalyseDac(BigDecimal dcadNum, String dcadDanCode) {
+	public VbDetCritAnalyseDac(Long dcadNum, String dcadDanCode) {
 		this.dcadNum = dcadNum;
 		this.dcadDanCode = dcadDanCode;
 	}
 
-	public VbDetCritAnalyseDac(BigDecimal dcadNum, String dcadDanCode, String dcadDacCode, String dcadLibAjust,
+	public VbDetCritAnalyseDac(Long dcadNum, String dcadDanCode, String dcadDacCode, String dcadLibAjust,
 			String dcadDanCraCode, Date dcadDteSaisie, String dcadOpeCode, String dcadObser, String dcadStatut, long dcadLaaId,
-	String dcadCommentaire) {
+	String dcadCommentaire, long dcadNumDcad) {
 		this.dcadNum = dcadNum;
 		this.dcadDanCode = dcadDanCode;
 		this.dcadDacCode = dcadDacCode;
@@ -53,17 +54,18 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 		this.dcadStatut = dcadStatut;
 		this.dcadLaaId = dcadLaaId;
 		this.dcadCommentaire = dcadCommentaire;
+		this.dcadNumDcad = dcadNumDcad;
 	}
 
 	@Id
 	@SequenceGenerator(name = "SEQ_DET_CRIT_ANADAC_Sequence", sequenceName = "SEQ_DET_CRIT_ANADAC", allocationSize=1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_DET_CRIT_ANADAC_Sequence")
 	@Column(name = "DCAD_NUM", nullable = false, precision = 22, scale = 0)
-	public BigDecimal getDcadNum() {
+	public Long getDcadNum() {
 		return this.dcadNum;
 	}
 
-	public void setDcadNum(BigDecimal dcadNum) {
+	public void setDcadNum(Long dcadNum) {
 		this.dcadNum = dcadNum;
 	}
 
@@ -155,5 +157,14 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 
 	public void setDcadCommentaire(String dcadCommentaire) {
 		this.dcadCommentaire = dcadCommentaire;
+	}
+	
+	@Column(name = "DCAD_NUM_DCAD")
+	public long getDcadNumDcad() {
+		return this.dcadNumDcad;
+	}
+
+	public void setDcadNumDcad(long dcadNumDcad) {
+		this.dcadNumDcad = dcadNumDcad;
 	}
 }

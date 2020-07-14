@@ -603,9 +603,6 @@ public class DaoController {
 	 			/*selectionlisteCritereAnalyse = (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 	 					new WhereClause("CODPARENT",WhereClause.Comparateur.NEQ,"null"));*/
 		 		 for(VCritereAnalyseModel ligne : selectionlisteCritereAnalyse) {
-		 			 
-		 			
-		 			
 		 			newCritereDac.setDcadDacCode(dao.getDacCode());
 		 			newCritereDac.setDcadDanCode(ligne.getCodedetail());
 		 			//newCritereDac.setDcadDanCraCode(ligne.getCraCode());
