@@ -3606,6 +3606,7 @@ public class ControleController {
 				    								   }else
 				    									     if(action.equalsIgnoreCase("TRADAO")) {
 				    									    	 typePlan ="PN";
+				    									    	 fonctionalite = "listeDacValCellule";
 				    									    	 type = "DAC";
 				    									    	 libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 												    			 libelleDao3="TRANSMISSION DU DAC PAR LA CELLULE";

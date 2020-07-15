@@ -368,17 +368,18 @@
        
         <!-- ./col -->
          <div class="col-lg-3 col-xs-6">
-          small box
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.ppmCpDifDmp}</h3>
+              <h3>#{tableauBordController.daoCsvDiff}</h3>
 
               <p>#{controleController.type} différé(s) par la DMP</p>
             </div>
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">Detail<i class="fa fa-arrow-circle-right"></i></a>
+            <p:commandLink  oncomplete="PF('detailDlgCsv').show()" action="#{daoController.chargeDetailDiffere()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+			 Detail <i class="fa fa-arrow-circle-right"></i>
+			</p:commandLink>
           </div>
         </div> 
         <!-- ./col -->
@@ -387,8 +388,7 @@
                   </div>
        </h:panelGroup>
        
-       
-     
+    
        <h:panelGroup rendered="#{controleController.panelDaoTableauBordPubCsv}">
                      <div id="collapseOne" class="panel-collapse collapse in">
                     <div class="box-body">
@@ -500,7 +500,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-             <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+             <p:commandLink  oncomplete="PF('detailDmpDifDlg').show()" action="#{daoController.chargeDetailDiffere()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -557,7 +557,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-             <p:commandLink  class="small-box-footer" oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailTB()}" style="color:#fff;font-size:13px;">
+             <p:commandLink  class="small-box-footer" oncomplete="PF('detailDlg').show()" action="#{daoController.chargeDetailAffecte()}" style="color:#fff;font-size:13px;">
 			 Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink> 
           </div>
@@ -712,7 +712,7 @@
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-             <p:commandLink  oncomplete="PF('detailValCsvDlg').show()" action="#{daoController.chargeDataValCsv()}"  class="small-box-footer"  style="color:#fff;font-size:13px;">
+             <p:commandLink  oncomplete="PF('detailValCsvDlg').show()"  action="#{daoController.chargeDetailValide()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 			 Detail <i class="fa fa-arrow-circle-right"></i>
 			</p:commandLink>
           </div>
@@ -794,7 +794,7 @@
             <div class="icon">
               <i class="ion ion-person-add"></i>
             </div>
-            <p:commandLink  oncomplete="PF('detailCpDifDlg').show()" action="#{daoController.chargeDaoDiff()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
+            <p:commandLink  oncomplete="PF('detailCpDifDlg').show()" action="#{daoController.chargeDetailDiffere()}" class="small-box-footer"  style="color:#fff;font-size:13px;">
 							Detail <i class="fa fa-arrow-circle-right"></i>
 						  </p:commandLink>
           </div>

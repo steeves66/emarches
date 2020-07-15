@@ -708,10 +708,11 @@ public class DaoController {
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 		              new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("Nbre DAC: "+detailTB.size());	
+			typeActionTb();	
 	    }
 
 
-     public void chargeDacTransCP1(String typePlan,String typeDac, String stat1){
+     public void chargeDacTransCP1(String typePlan,String typeDac, String stat1){ 
 	     detailTB.clear();
 		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
@@ -719,9 +720,44 @@ public class DaoController {
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 		              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("Nbre DAC: "+detailTB.size());	
+			typeActionTb();	
 	}
+     
+     public void chargeDacAffecteCsv1(String typePlan,String typeDac, String stat1){ 
+	     detailTB.clear();
+		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac));
+		              //new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("Nbre DAC: "+detailTB.size());	
+			typeActionTb();	
+	}
+     
+     public void chargeDacDiffereCPMP(String typePlan,String typeDac, String stat1){ 
+	     detailTB.clear();
+		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+		              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("Nbre DAC: "+detailTB.size());	
+			typeActionTb();	
+	}    
+     
+     //Methode de chargement des détails différés pour le compte des chefs de service
+     public void chargeDacDiffereCSV(String typePlan,String typeDac, String stat1){ 
+	     detailTB.clear();
+		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac));
+		              //new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("Nbre DAC: "+detailTB.size());	
+			typeActionTb();	
+	} 
 	 
-	 
+	 //Détails des DAC transmis des compteurs
 	 public void chargeDetailTrans() {
 		// String fonct = controleController.getFonctionalite();
 		 //DEBUT DAO PN
@@ -770,9 +806,144 @@ public class DaoController {
 		     } 
 		   }
 	 } 
+	//Fin des détails des DAC Transmis des compteurs
 	 
 	 
+	 //Détails des DAC affectes des compteurs
+	 public void chargeDetailAffecte() {
+		// String fonct = controleController.getFonctionalite();
+		 //DEBUT DAO PN
+		 if(controleController.type == "DAC" && controleController.typePlan == "PN") { 
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+				 //Affichage des differentes listes de l'AC en faction de l'action
+						 chargeDacAffecteCsv1("PN", "DAO", "D3A");	
+			 }
+		}
+		//FIN DAO PN
+		//DEBUT DAO PS
+		 else {
+			 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+                 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+						 chargeDacAffecteCsv1("PS", "DAO", "D3A");	
+		       //Finaffichage ac
+			     }
+			 }
+			//FIN DAO PS
+			//DEBUT DAO AMI 
+			 else {
+				 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+                                      chargeDacAffecteCsv1("PN", "AMI", "D3A");
+				    }
+				//FIN AMI
+				//DEBUT PRQ
+				 else {
+					 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {                                                chargeDacAffecteCsv1("PN", "PRQ", "D3A");
+					                chargeDacAffecteCsv1("PN", "PRQ", "D3A");
+					 }
+					 
+					//FIN PRQ
+				 }
+		     } 
+		   }
+	 }  
+	//Fin de la Methode 
 	 
+	//Détails des DAC validés par le Chef de Service
+		 public void chargeDetailValide() {
+			// String fonct = controleController.getFonctionalite();
+			 //DEBUT DAO PN
+			 if(controleController.type == "DAC" && controleController.typePlan == "PN") { 
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+					 //Affichage des differentes listes de l'AC en faction de l'action
+							 chargeDacAffecteCsv1("PN", "DAO", "D5V");	
+				 }
+			}
+			//FIN DAO PN
+			//DEBUT DAO PS
+			 else {
+				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+	                 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+							 chargeDacAffecteCsv1("PS", "DAO", "D5V");	
+				     }
+				 }
+				//FIN DAO PS
+				//DEBUT DAO AMI 
+				 else {
+					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+	                                      chargeDacAffecteCsv1("PN", "AMI", "D5V");
+					    }
+					//FIN AMI
+					//DEBUT PRQ
+					 else {
+						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {                                                chargeDacAffecteCsv1("PN", "PRQ", "D3A");
+						                chargeDacAffecteCsv1("PN", "PRQ", "D5V");
+						 }
+						//FIN PRQ
+					 }
+			     } 
+			   }
+		 }  
+		//Fin de la Methode
+	 
+		//Détails des DAC différés par la Cellule et le Chef de Service
+		 public void chargeDetailDiffere() {
+			String fonct = controleController.getFonctionalite();
+			 //DEBUT DAO PN
+			 if(controleController.type == "DAC" && controleController.typePlan == "PN") { 
+					   if(fonct == "listeDacValCellule") {
+						   //Affichage des differentes listes de l'AC en faction de l'action
+						   chargeDacDiffereCPMP("PN", "DAO", "D1R");
+					   }else {
+						      if(fonct == "listeValidationCsv") {
+						    	  chargeDacDiffereCSV("PN", "DAO", "D1R");
+						      }
+					   }
+			}
+			//FIN DAO PN
+			//DEBUT DAO PS
+			 else {
+				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
+	                	       if(fonct == "listeDacValCellule") {
+	    						   //Affichage des differentes listes de l'AC en faction de l'action
+	                	    	   chargeDacDiffereCPMP("PS", "DAO", "D1R");
+	    					   }else {
+	    						      if(fonct == "listeValidationCsv") {
+	    						    	  chargeDacDiffereCSV("PS", "DAO", "D5R");
+	    						      }
+	    					   }
+				 }
+				//FIN DAO PS
+				//DEBUT DAO AMI 
+				 else {
+					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
+						    if(fonct == "listeDacValCellule") {
+	    						   //Affichage des differentes listes de l'AC en faction de l'action
+						    	 chargeDacDiffereCPMP("PN", "AMI", "D1R");
+	    					   }else {
+	    						      if(fonct == "listeValidationCsv") {
+	    						    	  chargeDacDiffereCSV("PN", "AMI", "D5R");
+	    						      }
+	    					   }
+					    }
+					//FIN AMI
+					//DEBUT PRQ
+					 else {
+						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {  
+						             if(fonct == "listeDacValCellule") {
+			    						   //Affichage des differentes listes de l'AC en faction de l'action
+								    	 chargeDacDiffereCPMP("PN", "PRQ", "D1R");
+			    					   }else {
+			    						      if(fonct == "listeValidationCsv") {
+			    						    	  chargeDacDiffereCSV("PN", "PRQ", "D5R");
+			    						      }
+						 }
+						//FIN PRQ
+					 }
+			     } 
+			   }
+			 }
+		 }  
+		//Fin de la Methode 
 	 
 	 
 	 public void deleteCritere() {

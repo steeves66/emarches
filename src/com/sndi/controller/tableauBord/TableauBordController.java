@@ -2502,8 +2502,8 @@ public int getDaoAttAffCsv(String typePlan,String typeDac,String src1, String sr
 	int i = iservice.countTableByColumnIn("V_DACLISTE", "DAC_CODE",new ArrayList<String>(Arrays.asList("DAC_CODE")),
 			"DAC_STA_CODE", new ArrayList<String>(Arrays.asList(src1,src2,src3)),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
-			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
-	        new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
+			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan));
+	        //new WhereClause("DAC_STR_CODE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getTStructure().getStrCode()));
 			//new WhereClause("DAC_FON_CODE_DMP", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }

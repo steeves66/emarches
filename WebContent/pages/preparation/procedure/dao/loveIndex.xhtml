@@ -99,6 +99,205 @@
       </p:dialog>
     </h:form>
     
+    
+    <h:form id="apercuDacVld">
+	        <p:dialog  widgetVar="detailValCsvDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-11 "><div  style="color: #fff"> DETAIL #{controleController.type} </div></div>
+			         <div class="col-md-1">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleDacVld" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailTB}"
+						  emptyMessage="Aucun #{controleController.type} tronvé" scrollable="true" scrollHeight="120px">
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+				        
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailValCsvDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>  
+    
+    
+        <h:form id="apercuDacDiff">
+	        <p:dialog  widgetVar="detailCpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-11 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+			         <div class="col-md-1">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleDacDiff" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailTB}"
+						  emptyMessage="Aucun #{controleController.type} tronvé" scrollable="true" scrollHeight="120px">
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+         				<p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+						</p:dataTable>
+						</h:panelGrid> 
+	                </div>
+		           </div>
+	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpDifDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="apercuDacDfr">
+	        <p:dialog  widgetVar="detailDmpDifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-11 "><div  style="color: #fff"> DETAIL #{controleController.type} </div></div>
+			         <div class="col-md-1">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleDacDiff" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailTB}"
+						  emptyMessage="Aucun #{controleController.type} tronvé" scrollable="true" scrollHeight="120px">
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+				        
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>  detailDlgCsv
+    
+    
+    <h:form id="apercuDacDffC">
+	        <p:dialog  widgetVar="detailDlgCsv" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-11 "><div  style="color: #fff"> DETAIL #{controleController.type} </div></div>
+			         <div class="col-md-1">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleDacDifcs" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailTB}"
+						  emptyMessage="Aucun #{controleController.type} tronvé" scrollable="true" scrollHeight="120px">
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+				        
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlgCsv').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>  
+    
     <h:form id="apercuDAOCharge">
 	        <p:dialog  widgetVar="transDaoChargeDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
 	         <div class="row">
