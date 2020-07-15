@@ -553,13 +553,13 @@ public class DaoController {
 			 loId=0;
 		 }else
 		 {
-			 lot.getLaaId();
+			 loId=lot.getLaaId();
 		 }
 		 //vider le champs detail
 		  newCritereDac = new VbDetCritAnalyseDac(); 
 		 listeEnteteCritere.clear(); 
 		 listeEnteteCritere = ((List<VCritAnalDacEntete>)iservice.getObjectsByColumn("VCritAnalDacEntete",
-				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+loId),
+				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
 				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
 		 
@@ -600,6 +600,7 @@ public class DaoController {
 			 newCritereDac = new VbDetCritAnalyseDac();
 			 craCode ="";
 			 chargeCritereSaisie(); 
+			 chargeCritereCombobox();
 		 } 
 	 }
 	 

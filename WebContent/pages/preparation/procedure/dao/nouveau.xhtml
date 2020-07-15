@@ -693,7 +693,7 @@
          </p:tab> 
           
           
-          <p:tab rendered="#{daoController.pavet_critere}" id="critere" title="Saisie des critères d'évalution"  titleStyle="background-color: #f88b2e;background-image: none">
+          <p:tab rendered="#{daoController.pavet_critere}" id="critere" title="Saisie des critères d'évaluation"  titleStyle="background-color: #f88b2e;background-image: none">
            <div class="row">   
             <div class="col-md-12">
               <div class="row">
@@ -798,14 +798,14 @@
 	                      <div class="box-body">     
                       <p:dataTable id="tbCritLot" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereByLot}"   
                 scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
-                              <p:column headerText="CRITERES" styleClass="col-sm-6">
+                              <p:column headerText="CRITERES" styleClass="col-sm-5">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
                             </p:column>
                             
-                            <p:column headerText="COMMENTAIRE" styleClass="col-sm-6">
+                            <p:column headerText="COMMENTAIRE" styleClass="col-sm-5">
 		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" />
                             </p:column>
-                             <p:column headerText="Actions" width="5%">
+                             <p:column headerText="Actions" styleClass="col-sm-1">
 				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('dlogdetModLot').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
