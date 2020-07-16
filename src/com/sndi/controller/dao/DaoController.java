@@ -75,6 +75,7 @@ import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCritAnalDacEntete;
 import com.sndi.model.VCritereAnalyse;
 import com.sndi.model.VCritereAnalyseDac;
+import com.sndi.model.VCritereAnalyseDacLot;
 import com.sndi.model.VCritereAnalyseModel;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDacliste;
@@ -154,6 +155,9 @@ public class DaoController {
 	 //listes
 	 private List<VDacliste> listeDAO = new ArrayList<VDacliste>();
 	 private List<VDacliste> detailTB = new ArrayList<VDacliste>();
+	 private List<VDacliste> detailTrans = new ArrayList<VDacliste>();
+	 private List<VDacliste> detailDac = new ArrayList<VDacliste>();
+	 private List<VDacliste> detailDacDiff = new ArrayList<VDacliste>();
 	 private List<TDacSpecs> listDao = new ArrayList<TDacSpecs>(); 
 	 private List<TGestion> listeGestion = new ArrayList<TGestion>();
 	 private List<TAvisAppelOffre> avisTab = new ArrayList<TAvisAppelOffre>(); 
@@ -222,7 +226,8 @@ public class DaoController {
 	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
 	private List<VCritAnalDacEntete> listeEnteteCritere = new ArrayList<VCritAnalDacEntete >();
 	private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
-	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
+	//private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
+	private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
 
 	 
@@ -517,7 +522,7 @@ public class DaoController {
 	 
 	 public void chargeCritereByLot() { 			 
 		 listeCritereByLot.clear();
-		 listeCritereByLot = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac",
+		 listeCritereByLot = ((List<VCritereAnalyseDacLot>)iservice.getObjectsByColumn("VCritereAnalyseDacLot",
 						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
 						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId)));
 				 _logger.info("liste critere du lot : "  +""+laaId+" " +listeCritereByLot.size());
@@ -701,14 +706,14 @@ public class DaoController {
 	 
 	 
 	 public void chargeDetailTransAC1(String typePlan,String typeDac, String stat1){
-		 detailTB.clear();
-		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+		 detailTrans.clear();
+		 detailTrans =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
 				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
-		              new WhereClause("DAC_FON_COD_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-			_logger.info("Nbre DAC: "+detailTB.size());	
-			typeActionTb();	
+		              new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("Nbre DAC: "+detailTrans.size());	
+			///typeActionTb();	
 	    }
 
 
@@ -720,7 +725,7 @@ public class DaoController {
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 		              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("Nbre DAC: "+detailTB.size());	
-			typeActionTb();	
+			//typeActionTb();	
 	}
      
      public void chargeDacAffecteCsv1(String typePlan,String typeDac, String stat1){ 
@@ -731,19 +736,30 @@ public class DaoController {
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac));
 		              //new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("Nbre DAC: "+detailTB.size());	
-			typeActionTb();	
+			//typeActionTb();	
 	}
      
      public void chargeDacDiffereCPMP(String typePlan,String typeDac, String stat1){ 
-	     detailTB.clear();
-		 detailTB =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+    	 detailDacDiff.clear();
+    	 detailDacDiff =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
 				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
 		              new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("Nbre DAC: "+detailTB.size());	
-			typeActionTb();	
-	}    
+			//typeActionTb();	
+	}   
+     
+     public void chargeDacDiffereCPAC(String typePlan,String typeDac, String stat1){ 
+    	 detailDac.clear(); 
+    	 detailDac =(List<VDacliste>) iservice.getObjectsByColumnIn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+				      "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1)),
+				      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac),
+		              new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("Nbre DAC: "+detailTB.size());	
+			//typeActionTb();	
+	}
      
      //Methode de chargement des détails différés pour le compte des chefs de service
      public void chargeDacDiffereCSV(String typePlan,String typeDac, String stat1){ 
@@ -754,7 +770,7 @@ public class DaoController {
 				      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+typeDac));
 		              //new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("Nbre DAC: "+detailTB.size());	
-			typeActionTb();	
+			//typeActionTb();	
 	} 
 	 
 	 //Détails des DAC transmis des compteurs
@@ -885,17 +901,26 @@ public class DaoController {
 		 }  
 		//Fin de la Methode
 	 
-		//Détails des DAC différés par la Cellule et le Chef de Service
+		//Détails des DAC différés par la Cellule / le Chef de Service et l'Autorité Contractante
 		 public void chargeDetailDiffere() {
 			String fonct = controleController.getFonctionalite();
 			 //DEBUT DAO PN
 			 if(controleController.type == "DAC" && controleController.typePlan == "PN") { 
 					   if(fonct == "listeDacValCellule") {
-						   //Affichage des differentes listes de l'AC en faction de l'action
+						   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 						   chargeDacDiffereCPMP("PN", "DAO", "D1R");
+						   }
 					   }else {
 						      if(fonct == "listeValidationCsv") {
-						    	  chargeDacDiffereCSV("PN", "DAO", "D1R");
+						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
+						    	  chargeDacDiffereCSV("PN", "DAO", "D5R");
+						    	 }
+						      }else {
+						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						    	      if(fonct == "listSaisieAc") {
+						    		       chargeDacDiffereCPAC("PN", "DAO", "D1R");
+						    	         }
+						    	  }
 						      }
 					   }
 			}
@@ -904,11 +929,20 @@ public class DaoController {
 			 else {
 				 if(controleController.type == "DAC" && controleController.typePlan == "PS") {
 	                	       if(fonct == "listeDacValCellule") {
-	    						   //Affichage des differentes listes de l'AC en faction de l'action
+	                	    	   if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 	                	    	   chargeDacDiffereCPMP("PS", "DAO", "D1R");
+	                	    	   }
 	    					   }else {
 	    						      if(fonct == "listeValidationCsv") {
+	    						    	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 	    						    	  chargeDacDiffereCSV("PS", "DAO", "D5R");
+	    						    	  }
+	    						      }else {
+	    						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+	    						    	      if(fonct == "listSaisieAc") {
+	    						    		     chargeDacDiffereCPAC("PS", "DAO", "D1R");
+	    						    	       }
+	    						    	    }
 	    						      }
 	    					   }
 				 }
@@ -917,11 +951,21 @@ public class DaoController {
 				 else {
 					 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
 						    if(fonct == "listeDacValCellule") {
+						    	if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) { 
 	    						   //Affichage des differentes listes de l'AC en faction de l'action
 						    	 chargeDacDiffereCPMP("PN", "AMI", "D1R");
+						          }
 	    					   }else {
 	    						      if(fonct == "listeValidationCsv") {
+	    						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 	    						    	  chargeDacDiffereCSV("PN", "AMI", "D5R");
+	    						    	  }
+	    						      }else {
+	    						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+	    						    	     if(fonct == "listSaisieAc") {
+	    						    		  chargeDacDiffereCPAC("PN", "AMI", "D1R");
+	    						    	      }
+	    						    	  }
 	    						      }
 	    					   }
 					    }
@@ -930,11 +974,21 @@ public class DaoController {
 					 else {
 						 if(controleController.type == "PRQ" && controleController.typePlan == "PN") {  
 						             if(fonct == "listeDacValCellule") {
+						            	 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 			    						   //Affichage des differentes listes de l'AC en faction de l'action
 								    	 chargeDacDiffereCPMP("PN", "PRQ", "D1R");
+						            	 }
 			    					   }else {
 			    						      if(fonct == "listeValidationCsv") {
+			    						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
 			    						    	  chargeDacDiffereCSV("PN", "PRQ", "D5R");
+			    						    	  }
+			    						      }else {
+			    						    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			    						    	     if(fonct == "listSaisieAc") {
+			    						    		    chargeDacDiffereCPAC("PN", "PRQ", "D1R");
+			    						    	      }
+			    						    	  }
 			    						      }
 						 }
 						//FIN PRQ
@@ -6297,11 +6351,43 @@ public class DaoController {
 		this.rId = rId;
 	}
 
-	public List<VCritereAnalyseDac> getListeCritereByLot() {
+	/*public List<VCritereAnalyseDac> getListeCritereByLot() {
 		return listeCritereByLot;
 	}
 
 	public void setListeCritereByLot(List<VCritereAnalyseDac> listeCritereByLot) {
+		this.listeCritereByLot = listeCritereByLot;
+	}*/
+
+	public List<VDacliste> getDetailDac() {
+		return detailDac;
+	}
+
+	public void setDetailDac(List<VDacliste> detailDac) {
+		this.detailDac = detailDac;
+	}
+
+	public List<VDacliste> getDetailTrans() {
+		return detailTrans;
+	}
+
+	public void setDetailTrans(List<VDacliste> detailTrans) {
+		this.detailTrans = detailTrans;
+	}
+
+	public List<VDacliste> getDetailDacDiff() {
+		return detailDacDiff;
+	}
+
+	public void setDetailDacDiff(List<VDacliste> detailDacDiff) {
+		this.detailDacDiff = detailDacDiff;
+	}
+
+	public List<VCritereAnalyseDacLot> getListeCritereByLot() {
+		return listeCritereByLot;
+	}
+
+	public void setListeCritereByLot(List<VCritereAnalyseDacLot> listeCritereByLot) {
 		this.listeCritereByLot = listeCritereByLot;
 	}
 

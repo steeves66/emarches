@@ -48,7 +48,7 @@
     
     
        <h:form id="apercu">
-	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	        <p:dialog  widgetVar="detailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
 				<div class="col-md-12">
 	            <div class="box box-warning box-solid" >
 		            <div class="box-header" style="background-color: #f88b2e">
@@ -95,6 +95,59 @@
 		           </div>
 	           </div>
 	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="apercuTrans">
+	        <p:dialog  widgetVar="detailTransDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-11 "><div  style="color: #fff"> DETAIL</div></div>
+			         <div class="col-md-1">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailTrans}"
+						  emptyMessage="Aucun #{controleController.type} tronvé" scrollable="true" scrollHeight="120px">
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+				        
+
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailTransDlg').hide()"/>
             </div>
       </p:dialog>
     </h:form>
@@ -168,7 +221,7 @@
 		            <div class="box-body"> 
 		            <div class="form-group ">
 	                 <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleDacDiff" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailTB}"
+						 <p:dataTable id="ndTbleDacDiff" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailDacDiff}"
 						  emptyMessage="Aucun #{controleController.type} tronvé" scrollable="true" scrollHeight="120px">
 
                         <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
@@ -245,7 +298,57 @@
 	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailDmpDifDlg').hide()"/>
             </div>
       </p:dialog>
-    </h:form>  detailDlgCsv
+    </h:form>  
+    
+    <h:form id="apercuDacDfCpr">
+	        <p:dialog  widgetVar="detailCpmpDifAcDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+				<div class="col-md-12">
+	            <div class="box box-warning box-solid" >
+		            <div class="box-header" style="background-color: #f88b2e">
+			          <div class="col-md-11 "><div  style="color: #fff"> DETAIL #{controleController.type} DIFFERES</div></div>
+			         <div class="col-md-1">
+			          #{controleController.type} 
+			         </div>
+			         
+			          <div class="col-md-3">
+			     
+			         </div>
+			        </div>
+		            <div class="box-body"> 
+		            <div class="form-group ">
+	                 <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleDacDifAc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{daoController.detailDac}"
+						  emptyMessage="Aucun #{controleController.type} trouvé" scrollable="true" scrollHeight="120px">
+
+                        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				        <p:column headerText="Objet" styleClass="col-sm-6" >
+         				<h:outputText value="#{slctdTb.dacObjet}" />
+				        </p:column>
+				        
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+				        </p:column>
+				       
+         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
+				        </p:column> 
+				       
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<h:outputText value="#{slctdTb.mopLibelleLong}" />
+				        </p:column> 
+				        
+						</p:dataTable>
+						</h:panelGrid> 
+	                   
+	                </div>
+		           </div>
+	           </div>
+	           <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('detailCpmpDifAcDlg').hide()"/>
+            </div>
+      </p:dialog>
+    </h:form>
     
     
     <h:form id="apercuDacDffC">
