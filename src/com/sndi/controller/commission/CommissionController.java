@@ -1113,6 +1113,14 @@ public class CommissionController {
 			 projetReport.longparam1(sltOffre.getDofNum().longValue(), "Rapport_ana", "Rapport_ana");
 		 }
 		 
+		 //Edition du PV d'analyse
+		 public void editerPvAnalyse() {
+			 projetReport.stringparam1(""+slctdTd.getAaoCode(), "page_garde_ouv", "page_garde_ouv");
+			 _logger.info("code avis : "  +""+slctdTd.getAaoCode());
+		 }
+		 
+		 
+		 
 		 public void vider() {
 			 newOffre = new VbTempParamDetOffres();
 			 infoLot =new VVerifcorOffin();
