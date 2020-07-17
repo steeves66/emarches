@@ -31,6 +31,8 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 	private long dcadLaaId;
 	private String dcadCommentaire;
 	private Long dcadNumDcad;
+	private String dcadCraAuCode;
+	private String dcadPetitCra;
 
 	public VbDetCritAnalyseDac() {
 	}
@@ -42,7 +44,8 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 
 	public VbDetCritAnalyseDac(Long dcadNum, String dcadDanCode, String dcadDacCode, String dcadLibAjust,
 			String dcadDanCraCode, Date dcadDteSaisie, String dcadOpeCode, String dcadObser, String dcadStatut, long dcadLaaId,
-	String dcadCommentaire, Long dcadNumDcad) {
+	String dcadCommentaire, Long dcadNumDcad, String dcadCraAuCode,
+	String dcadPetitCra) {
 		this.dcadNum = dcadNum;
 		this.dcadDanCode = dcadDanCode;
 		this.dcadDacCode = dcadDacCode;
@@ -55,6 +58,8 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 		this.dcadLaaId = dcadLaaId;
 		this.dcadCommentaire = dcadCommentaire;
 		this.dcadNumDcad = dcadNumDcad;
+		this.dcadCraAuCode = dcadCraAuCode;
+		this.dcadPetitCra = dcadPetitCra;
 	}
 
 	@Id
@@ -166,5 +171,23 @@ public class VbDetCritAnalyseDac implements java.io.Serializable {
 
 	public void setDcadNumDcad(Long dcadNumDcad) {
 		this.dcadNumDcad = dcadNumDcad;
+	}
+	
+	@Column(name = "DCAD_CRA_AU_CODE")
+	public String getDcadCraAuCode() {
+		return this.dcadCraAuCode;
+	}
+
+	public void setDcadCraAuCode(String dcadCraAuCode) {
+		this.dcadCraAuCode = dcadCraAuCode;
+	}
+
+	@Column(name = "DCAD_PETIT_CRA")
+	public String getDcadPetitCra() {
+		return this.dcadPetitCra;
+	}
+
+	public void setDcadPetitCra(String dcadPetitCra) {
+		this.dcadPetitCra = dcadPetitCra;
 	}
 }

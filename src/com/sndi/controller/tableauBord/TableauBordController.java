@@ -943,8 +943,8 @@ public class TableauBordController {
 				 //Saisie des DAO
 				 daoAcSaisie = ""+getAcDaoSaisieDossier(typePlan,typeDac,"D1S","D1R");
 				 daoAcTransmis = ""+getAcTransmisDossier(typePlan,typeDac,"D1T");
-				 daoCpDifCpmp = ""+getDaoDiffCpDossier(typePlan,typeDac,"D1R"); 
-				 daoAcDiffCpmp = ""+getDaoDiffCpAcDossier(typePlan,typeDac,"D1R"); 
+				 daoAcDiffCpmp = ""+getDaoDiffCpAcDossier(typePlan,typeDac,"D1R");
+				
 				 //Publication des DAO
 				 daoCsvValide = ""+getAcDaoValidCsvDossier(typePlan,typeDac,"D5V","DOP");
 				 daoDaoPub = ""+getAcDaoValidCsvPubDossier(typePlan,typeDac,"DPU");
@@ -960,6 +960,7 @@ public class TableauBordController {
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 //Prévalidation des DAC
 					 daoCpSaisie = ""+getDaoSaisieDossier(typePlan,typeDac,"D1T");
+					 daoCpDifCpmp = ""+getDaoDiffCpDossier(typePlan,typeDac,"D1R"); 
 					 daoCpValide = ""+getDaoValideCmp(typePlan,typeDac,"D2T");
 					 daoAcDiffDmp = ""+getDaoDiffCpmpACDossier(typePlan,typeDac,"S3D");
 				 }else {
@@ -2575,7 +2576,7 @@ public int getDaoDiffCpAcDossier(String typePlan,String typeDac,String src1){
 			new WhereClause("DAC_STA_CODE", WhereClause.Comparateur.EQ, src1),
 			new WhereClause("DAC_TD_CODE", WhereClause.Comparateur.EQ,""+typeDac),
 			new WhereClause("DAC_TYPE_PLAN", WhereClause.Comparateur.EQ,""+typePlan),
-			new WhereClause("LBG_FON_CODE_AC", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			new WhereClause("LBG_FON_CODE_PF", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
 

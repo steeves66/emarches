@@ -567,6 +567,27 @@ public class DaoController {
 				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
 				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
+	 }
+	 
+	 
+	 public void chargeCritereComboboxByLot() {
+		 dao.setDacFactoriseCrit(2);
+		 iservice.updateObject(dao);
+		 
+		 long loId=0;
+		 if(lot.getLaaId()==null) {
+			 loId=0;
+		 }else
+		 {
+			 loId=lot.getLaaId();
+		 }
+		 //vider le champs detail
+		  newCritereDac = new VbDetCritAnalyseDac(); 
+		 listeEnteteCritere.clear(); 
+		 listeEnteteCritere = ((List<VCritAnalDacEntete>)iservice.getObjectsByColumn("VCritAnalDacEntete",
+				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
+				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
+				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
 		 
 	 }
 	 
@@ -611,6 +632,7 @@ public class DaoController {
 	 
 	 //Enregistrement detail critere par lot
 	 public void saveDetailCritereByLot() {	
+
 		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
 				 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rId));
 		 
@@ -672,8 +694,16 @@ public class DaoController {
 	 		 }
 	 }
 	 
+	
 	 public void factoriserLot() {
 		 dao.setDacFactoriseCrit(1);
+		 iservice.updateObject(dao);
+	 }
+	 
+	 
+	 @Transactional
+	 public void factoriserAutoriz() {
+		 dao.setDacFactoriseCrit(2);
 		 iservice.updateObject(dao);
 	 }
 	 

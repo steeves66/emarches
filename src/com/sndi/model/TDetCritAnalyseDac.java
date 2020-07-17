@@ -33,6 +33,9 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 	private String dcadObser;
 	private String dcadStatut;
 	private String dcadCommentaire;
+	private BigDecimal dcadNumDcad;
+	private String dcadCraAuCode;
+	private String dcadPetitCra;
 	
 	public TDetCritAnalyseDac() {
 	}
@@ -44,7 +47,8 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 
 	public TDetCritAnalyseDac(BigDecimal dcadNum, TDacSpecs TDacSpecs, TDetCritAnalyse TDetCritAnalyse,
 			TCritereAnalyse TCritereAnalyse, TLotAao TLotAao, String dcadLibAjust, Date dcadDteSaisie, String dcadOpeCode,
-			String dcadObser, String dcadStatut,String dcadCommentaire) {
+			String dcadObser, String dcadStatut,String dcadCommentaire, BigDecimal dcadNumDcad,
+			String dcadCraAuCode, String dcadPetitCra) {
 		this.dcadNum = dcadNum;
 		this.TDacSpecs = TDacSpecs;
 		this.TDetCritAnalyse = TDetCritAnalyse;
@@ -55,6 +59,9 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 		this.dcadObser = dcadObser;
 		this.dcadStatut = dcadStatut;
 		this.dcadCommentaire = dcadCommentaire;
+		this.dcadNumDcad = dcadNumDcad;
+		this.dcadCraAuCode = dcadCraAuCode;
+		this.dcadPetitCra = dcadPetitCra;
 	}
 
 	@Id
@@ -162,6 +169,34 @@ public class TDetCritAnalyseDac implements java.io.Serializable {
 
 	public void setDcadCommentaire(String dcadCommentaire) {
 		this.dcadCommentaire = dcadCommentaire;
+	}
+	
+
+	@Column(name = "DCAD_NUM_DCAD")
+	public BigDecimal getDcadNumDcad() {
+		return this.dcadNumDcad;
+	}
+
+	public void setDcadNumDcad(BigDecimal dcadNumDcad) {
+		this.dcadNumDcad = dcadNumDcad;
+	}
+
+	@Column(name = "DCAD_CRA_AU_CODE")
+	public String getDcadCraAuCode() {
+		return this.dcadCraAuCode;
+	}
+
+	public void setDcadCraAuCode(String dcadCraAuCode) {
+		this.dcadCraAuCode = dcadCraAuCode;
+	}
+
+	@Column(name = "DCAD_PETIT_CRA")
+	public String getDcadPetitCra() {
+		return this.dcadPetitCra;
+	}
+
+	public void setDcadPetitCra(String dcadPetitCra) {
+		this.dcadPetitCra = dcadPetitCra;
 	}
 
 
