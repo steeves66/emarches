@@ -53,9 +53,6 @@
       
      <p:wizard flowListener="#{daoController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
      
-      
-         
-     
         <p:tab id="creation" title="Initiation du #{controleController.type}" titleStyle="background-color: #f88b2e;background-image: none">
        
            <div class="row">
@@ -537,11 +534,11 @@
          </div>
          <div class="box-body">
              <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeLots}"  editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
-         				<p:column headerText="N°Lot" styleClass="col-sm-1">
+         				<p:column headerText="N°Lot" width="5%">
 				            <h:outputText value="#{slctdTb.laaNum}"/>
 				        </p:column>
 				        
-				        <p:column id="lib_Lot1" headerText="LIBELLE" styleClass="col-sm-5">
+				        <p:column id="lib_Lot1" headerText="LIBELLE" styleClass="col-sm-4">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText value="#{slctdTb.laaObjet}" >
@@ -560,8 +557,34 @@
 		                <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
 		                </h:outputText>
 				        </p:column>
+				        
+				       <p:column headerText="Lieu Exécution" styleClass="col-sm-2">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText  styleClass="pull-right" value="#{slctdTb.laaLieuExe}" />
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText styleClass="text-right"  value="#{slctdTb.laaLieuExe}" style="width:100%">
+		                <p:ajax event="blur" listener="#{daoController.updateListeLotLieu()}" global="false" process="@this" update=":content" /> 
+		                </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				       </p:column>
+				        
+				        <p:column headerText="Délai(Jours)" styleClass="col-sm-1">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText  styleClass="pull-right" value="#{slctdTb.laaDelaiExe}" />
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText styleClass="text-right"  value="#{slctdTb.laaDelaiExe}" style="width:100%">
+		                <p:ajax event="blur" listener="#{daoController.updateListeLotDelai()}" global="false" process="@this" update=":content" /> 
+		                </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
 				         
-				          <p:column headerText="Montant Estimatif" styleClass="col-sm-1">
+				        <p:column headerText="Montant Estimatif" styleClass="col-sm-1">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText  styleClass="pull-right" value="#{slctdTb.laaMtEst}" >

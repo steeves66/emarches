@@ -2813,6 +2813,16 @@ public class DaoController {
 				   		iservice.updateObject(getSelectLot()); 
 				   	 }
 				   	 
+				   	 //Mise a jour des elements saisies dans la liste des lots
+				   	 public void updateListeLotLieu() {
+				   		iservice.updateObject(getSelectLot()); 
+				   	 }
+				   	 
+				   //Mise a jour des elements saisies dans la liste des lots
+				   	 public void updateListeLotDelai() {
+				   		iservice.updateObject(getSelectLot()); 
+				   	 }
+				   	 
 				   	 public void updateListeLotMontant() {
 				   		listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")),
 								new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
