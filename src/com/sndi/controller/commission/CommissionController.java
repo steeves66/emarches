@@ -850,6 +850,8 @@ public class CommissionController {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
 		 		else{*/
+			iservice.updateObject(slctdTd);
+		
 			            if(recupNcc == null) {
 			             newOffre.setDofNomRep(newOffre.getDofNomRep());
 						 newOffre.setDofPreRep(newOffre.getDofPreRep());
