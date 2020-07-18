@@ -70,7 +70,7 @@
             
              <div class="col-sm-1">
 				                  <p:commandLink oncomplete="PF('dlogExp').show()" action="#{commissionController.chargeExpert()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
-											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UN EXPERT OU UN OBSERVATEUR</span>
+											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UNE RESSOURCE</span>
 								  </p:commandLink>
 				                  </div> 
             </div>
@@ -333,12 +333,12 @@
 </h:form>
 
 <h:form id="dlogExp" styleClass="form-horizontal">
-	  <p:dialog  widgetVar="dlogExp" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+	  <p:dialog  widgetVar="dlogExp" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
 	    <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">AJOUTER UN EXPERT</div>
+            <div  style="color: #fff">AJOUTER UNE RESSOURCE</div>
          </div>
          <div class="box-body">
               
@@ -346,10 +346,10 @@
 					    rowKey="#{slctdTb.tctCode}" selection="#{commissionController.selectionlisteExpert}"   editable="true" editMode="cell"
                          draggableColumns="true" scrollable="true" scrollHeight="350">
                            <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
-                            <p:column headerText="TITRE" styleClass="col-sm-1" >
+                            <p:column headerText="TITRE" styleClass="col-sm-2" >
 	         				  <h:outputText value="#{slctdTb.tctTitre}"/>
 					        </p:column> 
-					         <p:column headerText="LIBELLE" styleClass="col-sm-10" >
+					         <p:column headerText="LIBELLE" styleClass="col-sm-9" >
 	         				  <h:outputText value="#{slctdTb.tctLibelle}"/>
 					        </p:column>  
 		        
