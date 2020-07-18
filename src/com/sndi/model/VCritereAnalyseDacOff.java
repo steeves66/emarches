@@ -29,7 +29,7 @@ public class VCritereAnalyseDacOff implements java.io.Serializable {
 	private String craBailleurx;
 	private String dcadDacCode;
 	private String aaoRegQual;
-	private BigDecimal valRegQual;
+	private long valRegQual;
 	private BigDecimal dcadNum;
 	private String dcadCommentaire;
 	private BigDecimal dcadLaaId;
@@ -42,7 +42,7 @@ public class VCritereAnalyseDacOff implements java.io.Serializable {
 
 	public VCritereAnalyseDacOff(BigDecimal RId, String craCode, String craLibelle, String codparent, String codep,
 			String craTymCodex, String craTypProc, String craTypDac, String craBailleurx, String dcadDacCode,
-			String aaoRegQual, BigDecimal valRegQual, BigDecimal dcadNum, String dcadCommentaire, BigDecimal dcadLaaId,
+			String aaoRegQual, long valRegQual, BigDecimal dcadNum, String dcadCommentaire, BigDecimal dcadLaaId,
 			BigDecimal dcadNumDcad, String dcadCraAuCode, String dcadPetitCra) {
 		this.RId = RId;
 		this.craCode = craCode;
@@ -165,11 +165,11 @@ public class VCritereAnalyseDacOff implements java.io.Serializable {
 	}
 
 	@Column(name = "VAL_REG_QUAL", precision = 22, scale = 0)
-	public BigDecimal getValRegQual() {
+	public long getValRegQual() {
 		return this.valRegQual;
 	}
 
-	public void setValRegQual(BigDecimal valRegQual) {
+	public void setValRegQual(long valRegQual) {
 		this.valRegQual = valRegQual;
 	}
 

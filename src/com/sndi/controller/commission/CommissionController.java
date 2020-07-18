@@ -50,6 +50,7 @@ import com.sndi.model.VCandidatDac;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCompoCommission;
 import com.sndi.model.VCritereAnalyseDac;
+import com.sndi.model.VCritereAnalyseDacOff;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetailOffres;
@@ -145,10 +146,10 @@ public class CommissionController {
 	 private List<TDetOffres> listeAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TDetOffres> listeAffichageAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
-	 private List<VCritereAnalyseDac> listeCritereAnalyse = new ArrayList<VCritereAnalyseDac>(); 
-	 private List<VCritereAnalyseDac> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDac>();
+	 private List<VCritereAnalyseDacOff> listeCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>(); 
+	 private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
 	private VCandidatDac candidat =new VCandidatDac();
-	private VCritereAnalyseDac sltCritere =new VCritereAnalyseDac();
+	private VCritereAnalyseDacOff sltCritere =new VCritereAnalyseDacOff();
 	
 	//Resutat analyse
 	 private List<VVerifcorOffin> listeVerifCor = new ArrayList<VVerifcorOffin>();
@@ -412,7 +413,7 @@ public class CommissionController {
 	 
 	 public void chargeCritereAnalyse() {
 		 listeCritereAnalyse.clear();
-		 listeCritereAnalyse = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac"));
+		 listeCritereAnalyse = ((List<VCritereAnalyseDacOff>)iservice.getObjectsByColumn("VCritereAnalyseDacOff"));
 	 }
 	 
 	 
@@ -751,7 +752,7 @@ public class CommissionController {
 		}
 		
 		public void chargeMention() {
-			 listeCritereAnalyse = (List<VCritereAnalyseDac>) iservice.getObjectsByColumn("VCritereAnalyseDac", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+			 listeCritereAnalyse = (List<VCritereAnalyseDacOff>) iservice.getObjectsByColumn("VCritereAnalyseDacOff", new ArrayList<String>(Arrays.asList("CRA_CODE")),
                      // new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
                       new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode()));
                       if (!listeCritereAnalyse.isEmpty()) {
@@ -877,7 +878,7 @@ public class CommissionController {
 					   iservice.addObject(newOffre);
 		 			
 		 			
-			 		for(VCritereAnalyseDac ligne : selectionCritereAnalyse) {
+			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			//newAnalyseOffre.setAnfDanCode(ligne.getDcadDanCode());
 			 			//newAnalyseOffre.setAnfDteModif(ligne.get);
@@ -1033,7 +1034,7 @@ public class CommissionController {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
 				}
 		 		else{
-			 		for(VCritereAnalyseDac ligne : selectionCritereAnalyse) {
+			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
 			 			newAnalyseOffre.setAnfDanCode(ligne.getCraCode());
@@ -1051,6 +1052,9 @@ public class CommissionController {
 			 		}
 		         }
 				
+				
+				listeSelectionPiecesOffresAnalyse.clear();
+				selectionCritereAnalyse.clear();
 				userController.setTexteMsg("Analyse effectuée avec succès !");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
@@ -1784,19 +1788,22 @@ public class CommissionController {
 		this.newAnalyseOffre = newAnalyseOffre;
 	}
 
-	public List<VCritereAnalyseDac> getListeCritereAnalyse() {
+	public List<VCritereAnalyseDacOff> getListeCritereAnalyse() {
 		return listeCritereAnalyse;
 	}
 
-	public void setListeCritereAnalyse(List<VCritereAnalyseDac> listeCritereAnalyse) {
+
+	public void setListeCritereAnalyse(List<VCritereAnalyseDacOff> listeCritereAnalyse) {
 		this.listeCritereAnalyse = listeCritereAnalyse;
 	}
 
-	public List<VCritereAnalyseDac> getSelectionCritereAnalyse() {
+
+	public List<VCritereAnalyseDacOff> getSelectionCritereAnalyse() {
 		return selectionCritereAnalyse;
 	}
 
-	public void setSelectionCritereAnalyse(List<VCritereAnalyseDac> selectionCritereAnalyse) {
+
+	public void setSelectionCritereAnalyse(List<VCritereAnalyseDacOff> selectionCritereAnalyse) {
 		this.selectionCritereAnalyse = selectionCritereAnalyse;
 	}
 
@@ -1833,15 +1840,6 @@ public class CommissionController {
 		this.montant = montant;
 	}
 
-	public VCritereAnalyseDac getSltCritere() {
-		return sltCritere;
-	}
-
-	public void setSltCritere(VCritereAnalyseDac sltCritere) {
-		this.sltCritere = sltCritere;
-	}
-
-
 /*	public List<VVerifOffin> getListeVerifCor() {
 		return listeVerifCor;
 	}
@@ -1851,6 +1849,16 @@ public class CommissionController {
 	}*/
 	
 	
+	public VCritereAnalyseDacOff getSltCritere() {
+		return sltCritere;
+	}
+
+
+	public void setSltCritere(VCritereAnalyseDacOff sltCritere) {
+		this.sltCritere = sltCritere;
+	}
+
+
 	public List<VVerifcorOffin> getListeVerifCor() {
 		return listeVerifCor;
 	}
