@@ -52,9 +52,10 @@ public class TableauBordController {
 	 DownloadFileServlet downloadFileServlet;
 	 
 	 
-/*	 @PostConstruct
+	 @PostConstruct
 	 public void postContr() {
-		 chargeDataAgpm();
+		 ChargeTbAgpm();
+		 //chargeDataAgpm();
 		 //chargeDataPgpmPgspm();
 		 //chargeDataPpmPspm();
 		 //chargeDataDao();
@@ -62,7 +63,7 @@ public class TableauBordController {
 		 //chargeDataPspm();
 		 //chargeDataPgpm();
 		 //chargeDataPgspm();
-	 }*/
+	 }
 	 
 	 
 	 //AGPM

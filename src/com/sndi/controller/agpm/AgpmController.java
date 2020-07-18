@@ -2018,10 +2018,21 @@ public class AgpmController {
 					chargeDetails();
 					chargeDossierDetail();
 					break;
+				
 			    }
 		     
 		    return userController.renderPage(value);
 		}
+	 
+	 //renderPage avec un seul parametre
+	 public String renderPage(String value) throws IOException{ 
+		     switch(value) {
+		     case "index":
+					tableauBordController.ChargeTbAgpm();
+					break;
+		     }
+		     return userController.renderPage(value);
+		     }
 	 
 	//Methode de récupération de t_agpm dans t_affichage
 	 public void editForm() {
