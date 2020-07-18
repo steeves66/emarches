@@ -253,8 +253,8 @@
 				     <table>
 				     <tr>
 				     <td style="width: 210px"> 
-				     <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" styleClass="form-control">
-				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl" />
+				     <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
+				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
 				     </p:inputText>
 				     </td>
 				     
@@ -690,13 +690,10 @@
                  
                     <div class="col-md-12">
           <div class="form-group ">
-			                 
-			                   
-			                     <p:selectOneRadio id="operations" value="#{daoController.pieceCode}">
-									<f:selectItem itemLabel="Garantie de soumission" itemValue="GSOU" /> <br/>
-									<f:selectItem itemLabel="Déclaration de garantie de soumission" itemValue="CAU" />
-								 </p:selectOneRadio>
-		                      
+			           <p:selectOneRadio id="operations" value="#{daoController.pieceCode}">
+						  <f:selectItem itemLabel="Garantie de soumission" itemValue="GSOU" /> <br/>
+						  <f:selectItem itemLabel="Déclaration de garantie de soumission" itemValue="CAU" />
+						</p:selectOneRadio>
 			              </div>
          </div> 
                   <br/> 

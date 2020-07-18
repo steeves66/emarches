@@ -4304,9 +4304,7 @@ public class DaoController {
 																 		  
 																	     }
 												     //Fin de la methode de Publication
-														  
-														  
-														 
+														  									 
 		     //Methode vider
 		     public void vider() { 
 		    	 listeCritereSaisie.clear();
@@ -4316,7 +4314,16 @@ public class DaoController {
 		    	 listSelectionTypePieces.clear();
 		    	 newAvis = new TAvisAppelOffre();
 		    	 newVbTemp = new VbTempParametreLot();
-		    	 setListeLots(new ArrayList<TLotAao>());
+		    	 listeLots = new ArrayList<TLotAao>();
+		    	 listAdresse = new ArrayList<TAdresseAvis>();
+		    	 listDetailAdresse = new ArrayList<VDetailAdresse>(); 
+		    	 listeSelectionPiecesOffres.clear();
+		    	 pieceCode = "";
+		    	 //listLibelleAdresse = new ArrayList<TLibelleAdresse>();
+		    	 newDtailAdresse = new TDetailAdresseAvis();
+		    	 newLot = new TLotAao();
+		    	 totalMontantEstimatif = 0;
+		    	 totalMontantCaution = 0;
 		     }
 		     
 		     
