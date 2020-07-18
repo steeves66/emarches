@@ -26,12 +26,15 @@ public class VCritAnalDacEntete implements java.io.Serializable {
 	private String mdtTymCode;
 	private String dcadDacCode;
 	private BigDecimal dcadLaaId;
+	private BigDecimal tri;
+	private String dcadCraAuCode;
 
 	public VCritAnalDacEntete() {
 	}
 
 	public VCritAnalDacEntete(BigDecimal RId,Long dcadNum, String craCode, String craLibelle, String mdtCode,
-			String mdtTymCode, String dcadDacCode, BigDecimal dcadLaaId) {
+			String mdtTymCode, String dcadDacCode, BigDecimal dcadLaaId,  BigDecimal tri,
+			String dcadCraAuCode) {
 		this.RId = RId;
 		this.dcadNum = dcadNum;
 		this.craCode = craCode;
@@ -40,6 +43,8 @@ public class VCritAnalDacEntete implements java.io.Serializable {
 		this.mdtTymCode = mdtTymCode;
 		this.dcadDacCode = dcadDacCode;
 		this.dcadLaaId = dcadLaaId;
+		this.tri = tri;
+		this.dcadCraAuCode = dcadCraAuCode;
 	}
 	
     @Id
@@ -114,6 +119,24 @@ public class VCritAnalDacEntete implements java.io.Serializable {
 
 	public void setDcadLaaId(BigDecimal dcadLaaId) {
 		this.dcadLaaId = dcadLaaId;
+	}
+	
+	@Column(name = "TRI", precision = 22, scale = 0)
+	public BigDecimal getTri() {
+		return this.tri;
+	}
+
+	public void setTri(BigDecimal tri) {
+		this.tri = tri;
+	}
+
+	@Column(name = "DCAD_CRA_AU_CODE", length = 50)
+	public String getDcadCraAuCode() {
+		return this.dcadCraAuCode;
+	}
+
+	public void setDcadCraAuCode(String dcadCraAuCode) {
+		this.dcadCraAuCode = dcadCraAuCode;
 	}
 
 }

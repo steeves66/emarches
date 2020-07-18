@@ -226,8 +226,8 @@ public class DaoController {
 	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
 	private List<VCritAnalDacEntete> listeEnteteCritere = new ArrayList<VCritAnalDacEntete >();
 	private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
-	//private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
-	private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();
+	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
+	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
 
 	 
@@ -522,7 +522,7 @@ public class DaoController {
 	 
 	 public void chargeCritereByLot() { 			 
 		 listeCritereByLot.clear();
-		 listeCritereByLot = ((List<VCritereAnalyseDacLot>)iservice.getObjectsByColumn("VCritereAnalyseDacLot",
+		 listeCritereByLot = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac",
 						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
 						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId)));
 				 _logger.info("liste critere du lot : "  +""+laaId+" " +listeCritereByLot.size());
@@ -611,6 +611,7 @@ public class DaoController {
 			 
 			 newCritereDac.setDcadDacCode(dao.getDacCode());
 			 newCritereDac.setDcadDanCraCode(newEnteteCrit.getCraCode());
+			 newCritereDac.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
 			 newCritereDac.setDcadDanCode("99999999999");
 			 if(newEnteteCrit.getDcadNum()==null) {
 				dcadNum=0;
@@ -640,6 +641,7 @@ public class DaoController {
 			 newEnteteCrit=listeEnteteCritere.get(0);
 			 newCritereDac.setDcadDacCode(dao.getDacCode());
 			 newCritereDac.setDcadDanCraCode(newEnteteCrit.getCraCode());
+			 newCritereDac.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
 			 newCritereDac.setDcadDanCode("99999999999");
 			 newCritereDac.setDcadLaaId(laaId);
 			 if(newEnteteCrit.getDcadNum()==null) {
@@ -6413,13 +6415,20 @@ public class DaoController {
 		this.detailDacDiff = detailDacDiff;
 	}
 
-	public List<VCritereAnalyseDacLot> getListeCritereByLot() {
+	public List<VCritereAnalyseDac> getListeCritereByLot() {
+		return listeCritereByLot;
+	}
+
+	public void setListeCritereByLot(List<VCritereAnalyseDac> listeCritereByLot) {
+		this.listeCritereByLot = listeCritereByLot;
+	}
+
+	/*public List<VCritereAnalyseDacLot> getListeCritereByLot() {
 		return listeCritereByLot;
 	}
 
 	public void setListeCritereByLot(List<VCritereAnalyseDacLot> listeCritereByLot) {
 		this.listeCritereByLot = listeCritereByLot;
-	}
-
+	}*/
 		
 }

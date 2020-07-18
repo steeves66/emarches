@@ -309,7 +309,7 @@
                      <p:selectOneRadio id="consoless" value="#{daoController.newAvis.aaoRegQual}" unselectable="true">
                      <p:ajax  listener="#{daoController.checkSituation()}" global="false" update="gnl:qualif"></p:ajax>
 			            <f:selectItem itemLabel="Score" itemValue="SCORE" />
-			            <f:selectItem itemLabel="Conformité" itemValue="CONFORMITE" />
+			            <f:selectItem itemLabel="Conformité" itemValue="CONFORME" />
 			            <f:selectItem itemLabel="Autre Mode" itemValue="AUTRE" />
 			        </p:selectOneRadio>
                   </div>
@@ -890,7 +890,7 @@
              </div>
               <div class="col-sm-4">
 				                  <p:commandLink rendered="#{daoController.btn_ad_expert}" oncomplete="PF('dlogExp').show()" action="#{daoController.chargeExpert()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
-											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UN EXPERT OU UN OBSERVATEUR</span>
+											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UNE RESSOURCE</span>
 								  </p:commandLink>
 				                  </div>
 				                  
@@ -1706,12 +1706,12 @@
     </h:form>
     	 
 		 <h:form id="dlogExp" styleClass="form-horizontal">
-	  <p:dialog  widgetVar="dlogExp" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+	  <p:dialog  widgetVar="dlogExp" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
 	    <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">AJOUITER UN EXPERT</div>
+            <div  style="color: #fff">AJOUTER UN EXPERT</div>
          </div>
          <div class="box-body">
               
@@ -1719,10 +1719,10 @@
 					    rowKey="#{slctdTb.tctCode}" selection="#{daoController.selectionlisteExpert}"   editable="true" editMode="cell"
                          draggableColumns="true" scrollable="true" scrollHeight="350">
                            <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
-                            <p:column headerText="TITRE" styleClass="col-sm-1" >
+                            <p:column headerText="TITRE" styleClass="col-sm-3" >
 	         				  <h:outputText value="#{slctdTb.tctTitre}"/>
 					        </p:column> 
-					         <p:column headerText="LIBELLE" styleClass="col-sm-10" >
+					         <p:column headerText="LIBELLE" styleClass="col-sm-9" >
 	         				  <h:outputText value="#{slctdTb.tctLibelle}"/>
 					        </p:column>  
 		        
