@@ -66,6 +66,10 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private Short aaoNbrOffAccpet;
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
+	private String aaoHeurFinOuv;
+	private String aaoLieuOuvPrecis;
+	private String aaoObsOuv;
+	private Date aaoDteFinOuv;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -84,6 +88,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot, String aaoAvisBail,
 			BigDecimal aaoMtCaut, String aaoModePaiement, long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,String aaoHeureRecep, String aaoNatPrix, String aaoRegQual,
 			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
+			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,
 			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,
 			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.aaoCode = aaoCode;
@@ -128,6 +133,10 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
 		this.aaoNbrOffRej = aaoNbrOffRej;
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+		this.aaoHeurFinOuv = aaoHeurFinOuv;
+		this.aaoLieuOuvPrecis = aaoLieuOuvPrecis;
+		this.aaoObsOuv = aaoObsOuv;
+		this.aaoDteFinOuv = aaoDteFinOuv;
 		this.TDetailAvises = TDetailAvises;
 		this.TLotAaos = TLotAaos;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
@@ -526,6 +535,43 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoNbrOffHorDelai(Short aaoNbrOffHorDelai) {
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+	}
+	
+	@Column(name = "AAO_HEUR_FIN_OUV", length = 20)
+	public String getAaoHeurFinOuv() {
+		return this.aaoHeurFinOuv;
+	}
+
+	public void setAaoHeurFinOuv(String aaoHeurFinOuv) {
+		this.aaoHeurFinOuv = aaoHeurFinOuv;
+	}
+
+	@Column(name = "AAO_LIEU_OUV_PRECIS", length = 500)
+	public String getAaoLieuOuvPrecis() {
+		return this.aaoLieuOuvPrecis;
+	}
+
+	public void setAaoLieuOuvPrecis(String aaoLieuOuvPrecis) {
+		this.aaoLieuOuvPrecis = aaoLieuOuvPrecis;
+	}
+
+	@Column(name = "AAO_OBS_OUV", length = 4000)
+	public String getAaoObsOuv() {
+		return this.aaoObsOuv;
+	}
+
+	public void setAaoObsOuv(String aaoObsOuv) {
+		this.aaoObsOuv = aaoObsOuv;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AAO_DTE_FIN_OUV", length = 7)
+	public Date getAaoDteFinOuv() {
+		return this.aaoDteFinOuv;
+	}
+
+	public void setAaoDteFinOuv(Date aaoDteFinOuv) {
+		this.aaoDteFinOuv = aaoDteFinOuv;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAvisAppelOffre")
