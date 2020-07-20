@@ -255,6 +255,7 @@ public class TableauBordController {
 					 private String daoPriseTrait="";
 					 private String daoaffecte ="";
 					 private String daoDaoPub = "";
+					 private String daoAcVenteTot ="";
 					 /*
 					  Compteur pour le Chargé d'Etudes
 					   */ 
@@ -945,6 +946,7 @@ public class TableauBordController {
 				 daoAcSaisie = ""+getAcDaoSaisieDossier(typePlan,typeDac,"D1S","D1R");
 				 daoAcTransmis = ""+getAcTransmisDossier(typePlan,typeDac,"D1T");
 				 daoAcDiffCpmp = ""+getDaoDiffCpAcDossier(typePlan,typeDac,"D1R");
+				 daoAcVenteTot = ""+getDaoVenteTotal();
 				
 				 //Publication des DAO
 				 daoCsvValide = ""+getAcDaoValidCsvDossier(typePlan,typeDac,"D5V","DOP");
@@ -1376,6 +1378,15 @@ public int getNpSaisieDossier(String src){
 			new WhereClause("GPG_ACTEUR_SAISIE", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	return	i;	
 }
+
+//DAO vendus par l'AC Connectée
+public int getDaoVenteTotal(){
+	int i = iservice.countTableByColumn("T_HISTO_DAC", "HAC_ID",
+			new WhereClause("HAC_STA_CODE", WhereClause.Comparateur.EQ,"DVE"),
+			new WhereClause("HAC_FON_COD", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+	return	i;	
+}
+
  //pgpm non transmis par le cpmp
 public int getNpSaisieDossierIn(String src1, String src2){
 	int i = iservice.countTableByColumnIn("T_DETAIL_PLAN_GENERAL", "GPG_ID",new ArrayList<String>(Arrays.asList("GPG_ID")),
@@ -5897,6 +5908,12 @@ public int getAmiTransmisDmpDossier(String src){
 	}
 	public void setPpmdjPub(String ppmdjPub) {
 		this.ppmdjPub = ppmdjPub;
+	}
+	public String getDaoAcVenteTot() {
+		return daoAcVenteTot;
+	}
+	public void setDaoAcVenteTot(String daoAcVenteTot) {
+		this.daoAcVenteTot = daoAcVenteTot;
 	}
 
 

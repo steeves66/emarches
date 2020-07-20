@@ -279,6 +279,7 @@ public class DaoController {
 	 private long delai;
 	 private long dcadNum;
 	 private long totalMontantEstimatif;
+	 private long totalNbreVente;
 	 private long totalMontantCaution;
 	 private String pidCod;
 	 private String observation="";
@@ -4064,6 +4065,11 @@ public class DaoController {
 											     			  				   confirmPaie = true;
 											     			  				   etatRecu = true;
 											     			  				   
+											     			  				//Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
+													 						   totalNbreVente = getDaoVenteTotal();
+													 						   newDao.setDacNbreAchat(totalNbreVente);
+													 						   iservice.updateObject(newDao);
+											     			  				   
 											     			  				  //Actualisation du Tableau de Bord
 											     			 		          typeActionTb();
 											      			  				   //Message de Confirmation
@@ -4079,6 +4085,14 @@ public class DaoController {
 											                }
 											  //Fin Methode de Paiement
 											  
+											//Nombre de vente pour un DAO x
+											  public int getDaoVenteTotal(){
+											  	int i = iservice.countTableByColumn("T_HISTO_DAC", "HAC_ID",
+											  			new WhereClause("HAC_STA_CODE", WhereClause.Comparateur.EQ,"DVE"),
+											  			new WhereClause("HAC_DAC_CODE", WhereClause.Comparateur.EQ,""+newDao.getDacCode()),
+											  			new WhereClause("HAC_FON_COD", WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+											  	return	i;	
+											  }
 											  
 											  
 											  //Verification du numero de vente
@@ -4152,8 +4166,8 @@ public class DaoController {
 													//Récupération du montant du DAO
 													  public void recupMontantDao() { 
 														  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-																      new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
-																      new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+																      //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+																      //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 																	  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 																      if (!listDao.isEmpty()) {
 																	         newDao= listDao.get(0); 
@@ -6448,4 +6462,11 @@ public class DaoController {
 		this.listeCritereByLot = listeCritereByLot;
 	}*/
 		
+	public long getTotalNbreVente() {
+		return totalNbreVente;
+	}
+
+	public void setTotalNbreVente(long totalNbreVente) {
+		this.totalNbreVente = totalNbreVente;
+	}
 }
