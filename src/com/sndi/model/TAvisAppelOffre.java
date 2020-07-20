@@ -70,6 +70,8 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private String aaoLieuOuvPrecis;
 	private String aaoObsOuv;
 	private Date aaoDteFinOuv;
+	private Date aaoDteOuv;
+	private String aooHeurOuv;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -89,7 +91,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			BigDecimal aaoMtCaut, String aaoModePaiement, long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,String aaoHeureRecep, String aaoNatPrix, String aaoRegQual,
 			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
 			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,
-			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,
+			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,
 			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.aaoCode = aaoCode;
 		this.fonCodAc = fonCodAc;
@@ -137,6 +139,8 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoLieuOuvPrecis = aaoLieuOuvPrecis;
 		this.aaoObsOuv = aaoObsOuv;
 		this.aaoDteFinOuv = aaoDteFinOuv;
+		this.aaoDteOuv = aaoDteOuv;
+		this.aooHeurOuv = aooHeurOuv;
 		this.TDetailAvises = TDetailAvises;
 		this.TLotAaos = TLotAaos;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
@@ -572,6 +576,25 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoDteFinOuv(Date aaoDteFinOuv) {
 		this.aaoDteFinOuv = aaoDteFinOuv;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AAO_DTE_OUV", length = 7)
+	public Date getAaoDteOuv() {
+		return this.aaoDteOuv;
+	}
+
+	public void setAaoDteOuv(Date aaoDteOuv) {
+		this.aaoDteOuv = aaoDteOuv;
+	}
+
+	@Column(name = "AOO_HEUR_OUV", length = 20)
+	public String getAooHeurOuv() {
+		return this.aooHeurOuv;
+	}
+
+	public void setAooHeurOuv(String aooHeurOuv) {
+		this.aooHeurOuv = aooHeurOuv;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAvisAppelOffre")

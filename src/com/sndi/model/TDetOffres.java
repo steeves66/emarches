@@ -210,7 +210,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.TFonction = TFonction;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DOF_LAA_ID", nullable = false)
 	public TLotAao getTLotAao() {
 		return this.TLotAao;

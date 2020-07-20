@@ -413,7 +413,13 @@ public class CommissionController {
 	 
 	 public void chargeCritereAnalyse() {
 		 listeCritereAnalyse.clear();
-		 listeCritereAnalyse = ((List<VCritereAnalyseDacOff>)iservice.getObjectsByColumn("VCritereAnalyseDacOff"));
+		 listeCritereAnalyse = ((List<VCritereAnalyseDacOff>)iservice.getObjectsByColumn("VCritereAnalyseDacOff",
+				 new WhereClause("DCAD_DAC_CODE",Comparateur.EQ,""+sltOffre.getTLotAao().getTDacSpecs().getDacCode()),
+				 new WhereClause("DCAD_LAA_ID",Comparateur.EQ,""+sltOffre.getTLotAao().getLaaId()),
+				 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
+		 _logger.info(" dof_number: "+sltOffre.getDofNum());
+		 _logger.info("dacCode dof_number: "+sltOffre.getTLotAao().getTDacSpecs().getDacCode());
+		 _logger.info("laaId : "+sltOffre.getTLotAao().getLaaId());
 	 }
 	 
 	 

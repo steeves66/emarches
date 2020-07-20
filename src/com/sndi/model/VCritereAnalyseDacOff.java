@@ -21,6 +21,9 @@ public class VCritereAnalyseDacOff implements java.io.Serializable {
 	private BigDecimal RId;
 	private String craCode;
 	private String craLibelle;
+	private BigDecimal RTri;
+	private BigDecimal offNum;
+	private BigDecimal dofNum;
 	private String codparent;
 	private String codep;
 	private String craTymCodex;
@@ -40,11 +43,14 @@ public class VCritereAnalyseDacOff implements java.io.Serializable {
 	public VCritereAnalyseDacOff() {
 	}
 
-	public VCritereAnalyseDacOff(BigDecimal RId, String craCode, String craLibelle, String codparent, String codep,
+	public VCritereAnalyseDacOff(BigDecimal RId,  BigDecimal RTri, BigDecimal offNum, BigDecimal dofNum, String craCode, String craLibelle, String codparent, String codep,
 			String craTymCodex, String craTypProc, String craTypDac, String craBailleurx, String dcadDacCode,
 			String aaoRegQual, long valRegQual, BigDecimal dcadNum, String dcadCommentaire, BigDecimal dcadLaaId,
 			BigDecimal dcadNumDcad, String dcadCraAuCode, String dcadPetitCra) {
 		this.RId = RId;
+		this.RTri = RTri;
+		this.offNum = offNum;
+		this.dofNum = dofNum;
 		this.craCode = craCode;
 		this.craLibelle = craLibelle;
 		this.codparent = codparent;
@@ -73,7 +79,34 @@ public class VCritereAnalyseDacOff implements java.io.Serializable {
 	public void setRId(BigDecimal RId) {
 		this.RId = RId;
 	}
+	
+	@Column(name = "R_TRI", precision = 22, scale = 0)
+	public BigDecimal getRTri() {
+		return this.RTri;
+	}
 
+	public void setRTri(BigDecimal RTri) {
+		this.RTri = RTri;
+	}
+
+	@Column(name = "OFF_NUM", nullable = false, precision = 22, scale = 0)
+	public BigDecimal getOffNum() {
+		return this.offNum;
+	}
+
+	public void setOffNum(BigDecimal offNum) {
+		this.offNum = offNum;
+	}
+
+	@Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)
+	public BigDecimal getDofNum() {
+		return this.dofNum;
+	}
+
+	public void setDofNum(BigDecimal dofNum) {
+		this.dofNum = dofNum;
+	}
+	
 	@Column(name = "CRA_CODE", length = 100)
 	public String getCraCode() {
 		return this.craCode;
