@@ -2344,7 +2344,7 @@ public class DaoController {
 	        @Transactional
 	        public void saveAao(String typePlan ,String typeDac) {
 	        	
-	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || "".equals(newAvis.getAaoCoutDac()) || "".equals(newAvis.getAaoNbrLot()) || 
+	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || newAvis.getAaoCoutDac() == 0 || newAvis.getAaoNbrLot() == 0 || 
 	        		 newAvis.getAaoDelaiVal() == 0 ) { 
 	        		
 	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez remplir tous les champs obligatoires! ","");
@@ -4072,6 +4072,8 @@ public class DaoController {
 											     			  				   
 											     			  				  //Actualisation du Tableau de Bord
 											     			 		          typeActionTb();
+											     			 		          
+											     			 		           chargeData();
 											      			  				   //Message de Confirmation
 											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
 											      					           userController.setTexteMsg("Paiement effectué avec succès");
