@@ -6374,7 +6374,7 @@ public class ControleController {
 						    		}else
 						    			if(action.equalsIgnoreCase("SAIDEP")) {
 							    			type = "Dépot des Offres";
-							    			libelle="SAISIE DES OFFRES DE L'AVIS D'APPEL D'OFFRE N°";
+							    			libelle="SAISIE DES OFFRES";
 											 panel1 =true;
 											 panel2 =false;
 									

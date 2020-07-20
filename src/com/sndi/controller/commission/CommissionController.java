@@ -765,7 +765,7 @@ public class CommissionController {
                              sltCritere= listeCritereAnalyse.get(0);
                              _logger.info("valeur: "+sltCritere.getAaoRegQual());
                              
-                         	if(sltCritere.getAaoRegQual().equalsIgnoreCase("CONFORMITE")) {
+                         	if(sltCritere.getAaoRegQual().equalsIgnoreCase("CONFORME") || sltCritere.getAaoRegQual().equalsIgnoreCase("null")) {
                 				conformite=true;
                 				montant =false;
                 			}else
@@ -778,7 +778,7 @@ public class CommissionController {
                 						}
                              
                                }
-		
+	
 		
 		}
 		

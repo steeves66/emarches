@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-07-17T11:48:06 -->
+<!-- 2020-07-20T18:36:04 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="page_garde_ouv" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="e2847c08-0292-4b44-9655-4416c3ece664">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -265,23 +265,27 @@ WHERE AAO_CODE=$P{param_code_1}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{AAO_LIBELLE}]]></textFieldExpression>
 				</textField>
+				<image>
+					<reportElement x="12" y="12" width="190" height="51" uuid="41e78547-09bf-4e6d-9bba-36a419698c88"/>
+					<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
+				</image>
 			</frame>
 			<textField>
-				<reportElement x="10" y="14" width="270" height="20" uuid="a077f57f-60d1-4a02-b93f-7435e1e30ff4"/>
+				<reportElement x="2" y="155" width="549" height="20" uuid="a077f57f-60d1-4a02-b93f-7435e1e30ff4"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{STR_LIBELLE_LONG}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="54" y="34" width="170" height="1" uuid="e6351431-f731-4a48-9726-7613efc6cf29"/>
+				<reportElement x="197" y="175" width="170" height="1" uuid="e6351431-f731-4a48-9726-7613efc6cf29"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Dashed"/>
 				</box>
 				<text><![CDATA[Texte Statique]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="10" y="36" width="270" height="20" uuid="b604145d-ad04-4f75-91e0-fa33878e82a6"/>
+				<reportElement x="2" y="177" width="549" height="20" uuid="b604145d-ad04-4f75-91e0-fa33878e82a6"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font isBold="true"/>
 				</textElement>

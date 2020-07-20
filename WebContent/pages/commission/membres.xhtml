@@ -163,38 +163,51 @@
 		        
     </p:dataTable> 
             </div>
-            <div class="box-footer">
-                <div class="row">
-     <div class="col-md-3">
-					<div class="form-group">
+            
+            </div>
+            </div>
+            
+            
+            
+             
+             <div class="col-md-12">
+           <div class="box box-success box-solid">
+            <div class="box-header with-border">
+             <div class="col-md-2 ">
+               <div  style="color: #fff">INFORMATIONS SUR L'OUVERTURE</div>
+             </div> 
+            </div>
+            <div class="box-body">
+              <div class="row">
+                <div class="col-md-2">
+                  <div class="form-group">
 						<label class="col-sm-4 control-label">Total de pli</label>
 						<div class="col-sm-8">
 							<p:inputText value="#{commissionController.newSeance.seaNbrPli}"
 								type="text" styleClass="form-control" style="width: 100%" />
 						</div>
 					</div>
-				</div>
-     <div class="col-md-3">
-				<div class="form-group">
-						<label class="col-sm-5 control-label"> Pli dans le delai</label>
-						<div class="col-sm-7">
-							<p:inputText value="#{commissionController.slctdTd.aaoNbrOff}" 
-								type="text" styleClass="form-control" style="width: 100%" />
+                </div>
+                <div class="col-md-2">
+	                <div class="form-group">
+							<label class="col-sm-4 control-label"> Pli dans le delai</label>
+							<div class="col-sm-8">
+								<p:inputText value="#{commissionController.slctdTd.aaoNbrOff}" 
+									type="text" styleClass="form-control" style="width: 100%" />
+						</div>
 					</div>
-				</div>
-			
-     </div>
-     <div class="col-md-2">
-       <div class="form-group">
-						<label class="col-sm-6 control-label">Pli hors delai</label>
-						<div class="col-sm-6">
+                </div>
+                <div class="col-md-2">
+                   <div class="form-group">
+						<label class="col-sm-5 control-label">Pli hors delai</label>
+						<div class="col-sm-7">
 							<p:inputText value="#{commissionController.slctdTd.aaoNbrOffHorDelai}" 
 								type="text" styleClass="form-control" style="width: 100%" />
 					</div>
 				</div>
-     </div>
-     <div class="col-md-3">
-        <div class="form-group">
+                </div>
+                <div class="col-md-2">
+                      <div class="form-group">
 						<label class="col-sm-5 control-label">Quorum atteint ?</label>
 						<div class="col-sm-7">
 						  <p:selectOneRadio value="#{commissionController.newSeance.seaQuorum}">
@@ -203,7 +216,32 @@
 						  </p:selectOneRadio>
 					</div>
 				</div>
-     </div>
+                </div>
+                <div class="col-md-2">
+                    
+		                <div class="form-group ">
+		                 <label for="delai" class="col-sm-7 control-label"><b>Délai d'exécution(Jours)<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-5">
+	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
+	                  </div>
+	                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group ">
+		                <label for="lieuOuv" class="col-sm-7 control-label"><b>Lieu d'ouverture</b></label>
+	                  <div class="col-sm-5">
+	                     <p:inputText id="lieuOuv" type="text" styleClass="form-control" value="#{commissionController.slctdTd.aaoLieuOuvPrecis}" style="width: 100%" />
+	                  </div>
+	                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <div class="box-footer">
+                <div class="row">
+
+
+
      <div class="col-md-1">
         <p:commandLink styleClass="btn btn-success pull-right" style=" background-color: #036d3b" action="#{commissionController.savePresence()}" update=":content">
 		       <i class="ace-icon fa fa-save bigger-130"></i> Enregistrer
@@ -215,6 +253,8 @@
             </div>
             </div>
             </div>
+            
+            
             
              <div class="col-md-12">
            <div class="box box-success box-solid">
