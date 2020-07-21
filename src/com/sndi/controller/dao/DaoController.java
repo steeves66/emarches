@@ -38,6 +38,7 @@ import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDaoAffectation;
 import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetCritAnalyse;
+import com.sndi.model.TDetCritAnalyseDac;
 import com.sndi.model.TDetOffres;
 import com.sndi.model.TDetailAdresseAvis;
 import com.sndi.model.TDetailCorrection;
@@ -194,6 +195,7 @@ public class DaoController {
 	private List<VCommissionTypeExp> selectionlisteExpert = new ArrayList<VCommissionTypeExp>(); 
 	private List<VbCommissionSpecifique> listeMbr = new ArrayList<VbCommissionSpecifique>(); 
 	private List<VDacMembre> listeMembre = new ArrayList<VDacMembre>(); 
+	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
 	private List<VPieces> listePices = new ArrayList<VPieces>();
@@ -273,6 +275,7 @@ public class DaoController {
 	 private VbDetCritAnalyse newDetCritere = new VbDetCritAnalyse();
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
+	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
 	//VARIABLES
 	 private long adaNum;
 	 private long rId;
@@ -1032,14 +1035,21 @@ public class DaoController {
 		 }  
 		//Fin de la Methode 
 	 
-	 
+	 //Suppression du critère du détail
 	 public void deleteCritere() {
-		 newCritereDac.setDcadDanCraCode(sltCritereDac.getCraCode());
-		 iservice.deleteObject(newCritereDac); 
-			  chargeCritereSaisie();
-		
-		 
+		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("TCT_CODE")),
+					new WhereClause("DCAD_DAN_CODE",WhereClause.Comparateur.EQ,""+sltCritereDac.getCraCode()));
+	       if (!listeDetCritere.isEmpty()) {
+	    	   detCritere = listeDetCritere.get(0);
+	       }
+		 //newCritereDac.setDcadDanCraCode(sltCritereDac.getCraCode());
+		 iservice.deleteObject(getDetCritere()); 
+		 chargeCritereSaisie();
+		 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
 	 }
+	 //Fin de la méthode de suppression du détail de critère
+	 
+	 
 	 //FIN GESTION DES CRITERES
 	 //Affichage des AC en lui passant en parametre les statuts concerné (2 statuts)
 	 public void chargeDataAc2(String typeDac,String typePlan,String stat1,String stat2){
@@ -2097,7 +2107,7 @@ public class DaoController {
 							}
 				 	}
 				
-				 	public void removeMembre() {		
+				 	public void removeMembre() {
 				 		listeMbr = (List<VbCommissionSpecifique>) iservice.getObjectsByColumn("VbCommissionSpecifique", new ArrayList<String>(Arrays.asList("TCT_CODE")),
 			    					new WhereClause("COM_TCT_CODE",WhereClause.Comparateur.EQ,""+selecMembre.getComTctCode()));
 			        	       if (!listeMbr.isEmpty()) {
@@ -6485,5 +6495,13 @@ public class DaoController {
 
 	public void setTotalNbreVente(long totalNbreVente) {
 		this.totalNbreVente = totalNbreVente;
+	}
+
+	public TDetCritAnalyseDac getDetCritere() {
+		return detCritere;
+	}
+
+	public void setDetCritere(TDetCritAnalyseDac detCritere) {
+		this.detCritere = detCritere;
 	}
 }

@@ -885,7 +885,7 @@ public class CommissionController {
 				}*/
 		 
 		  //Supprimer un dossier
-	       public void removeDossier(){
+	    public void removeDossier(){
 		downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDmbNom(), selectedDossier.getDmbNom());
 		//check si le dossier est OM
 			 iservice.deleteObject(selectedDossier);
