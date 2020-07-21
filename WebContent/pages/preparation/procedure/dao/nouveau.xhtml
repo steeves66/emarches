@@ -552,11 +552,7 @@
 		               </p:cellEditor>
 				        </p:column>
 				        
-				        
-				        <p:column headerText="Imputation" styleClass="col-sm-2">
-		                <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
-		                </h:outputText>
-				        </p:column>
+				       
 				        
 				       <p:column headerText="Lieu Exécution" styleClass="col-sm-2">
 				          <p:cellEditor>
@@ -612,6 +608,12 @@
 		                 </p:inputText>
 		                 </f:facet>
 		               </p:cellEditor>
+				        </p:column>
+				        
+				         
+				        <p:column headerText="Imputation" styleClass="col-sm-2">
+		                <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
+		                </h:outputText>
 				        </p:column>
 				        
                          <p:column width="3%">
@@ -717,10 +719,10 @@
            <div class="row">   
             <div class="col-md-12">
               <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-8 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
+                  <div class="col-md-8 "><div  style="color: #fff">LISTE DES CRITERES</div></div> 
 			          
                </div>
 	            <!-- /.box-header -->
@@ -741,11 +743,11 @@
 	            </div>
 	           </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-8 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
-			          <div class="col-sm-4">
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
+			          <div class="col-sm-2">
 				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
 								  </p:commandLink>
@@ -755,10 +757,14 @@
 	                      <div class="box-body">     
                       <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}"   
                 scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
-                              <p:column headerText="CRITERES" styleClass="col-sm-10">
+                              <p:column headerText="CRITERES" styleClass="col-sm-5">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
                             </p:column>
-                             <p:column headerText="Actions" styleClass="col-sm-2">
+                              <p:column headerText="COMMENTAIRE" styleClass="col-sm-6">
+		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" />
+                            </p:column>
+                             <p:column headerText="Actions" styleClass="col-sm-1">
+                           
                                <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
@@ -769,6 +775,7 @@
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
+			               
 				        </p:column>
                         </p:dataTable>  
 	            </div>
@@ -859,7 +866,7 @@
            <div class="row">
             <div class="col-md-12">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-5">
            <div class="box box-success box-solid">
             <div class="box-header with-border">
              <div class="col-md-8 ">
@@ -902,7 +909,7 @@
         </div>
         
         
-        <div class="col-md-6">
+        <div class="col-md-7">
            <div class="box box-success box-solid">
             <div class="box-header with-border">
              <div class="col-md-8 ">
@@ -917,15 +924,25 @@
 				                 
             </div>
                <p:dataTable  id="tbMbr" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeMembre}" emptyMessage="Aucun membre trouvé" 
-                         draggableColumns="true" scrollable="true" scrollHeight="405"
+                         draggableColumns="true" scrollable="true" scrollHeight="405" editable="true" editMode="cell"
                           >
                             <p:column headerText="TITRE" styleClass="col-sm-2" >
 	         				  <h:outputText value="#{slctdTb.tctTitre}"/>
 					        </p:column>
 					        
-					         <p:column headerText="LIBELLE" styleClass="col-sm-9" >
-	         				  <h:outputText value="#{slctdTb.tctLibelle}"/>
-					        </p:column>
+					        
+					         <p:column headerText="LIBELLE" styleClass="col-sm-9">
+						          <p:cellEditor>
+				                <f:facet name="output">
+				                <h:outputText value="#{slctdTb.tctLibelle}" >
+				                </h:outputText>
+				                </f:facet>
+				                <f:facet name="input"> 
+				                <p:inputText value="#{slctdTb.tctLibelle}" style="width:100%" />
+				                 </f:facet>
+				               </p:cellEditor>
+						        </p:column>
+					        
 					         <p:column headerText="" styleClass="col-sm-1">
 	         				    <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeMembre()}" title="Supprimer" update="gnl:tbMbr">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
@@ -942,6 +959,12 @@
     
 			           
             </div>
+              <div class="box-footer">
+			     <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{daoController.updatePresence()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+						             <i class="ace-icon fa fa-save"></i> Valider
+				      </p:commandLink>
+			    
+			    </div>
             </div>
                <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO

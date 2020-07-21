@@ -2052,6 +2052,21 @@ public class DaoController {
 				 	}
 				 	
 				 	
+				 	public void updatePresence() {          
+				 		listeMembre = ((List<VDacMembre>)iservice.getObjectsByColumn("VDacMembre",new ArrayList<String>(Arrays.asList("TCT_CODE")),
+							    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
+								for(VDacMembre mbr : listeMembre) {
+									iservice.updateObject(newcomSpec);
+									chargeMembres();
+									 //Message de confirmation
+				  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
+				  		            userController.setRenderMsg(true);
+				  		            userController.setSevrityMsg("success");
+								}
+								
+								
+							}
+				 	
 				 	public void saveExpert() {
 				 		//COMPOSITION DE LA SEANCE
 						 if (selectionlisteExpert.size()==0) {
