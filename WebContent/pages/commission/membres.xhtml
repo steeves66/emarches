@@ -343,12 +343,20 @@
 				        </p:column>
                        
 		          <p:column headerText="" width="3%">
-	         				    <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeMembre()}" title="Supprimer">
+	         				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{commissionController.removeMembre()}" title="Supprimer">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-			                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.newcomSpec}" />
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.newMembre}" />
 			                </p:commandLink>
+			       
+                               <p:commandLink  oncomplete="PF('uploaddlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="Joindre Mandat" update=":content">
+                                <i class="ace-icon fa fa-download bigger-120" style="color: white"></i>
+                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.newMembre}" />
+                               </p:commandLink>
+                               
 					        </p:column>
+					        
+					        
     </p:dataTable>   
             </div>
             </div>
@@ -410,13 +418,52 @@
                    </div>
               </div>
          </div>
-         
-		          
-              
+            
          </div>
          </div>
-         
-		
+      </p:dialog>
+    </h:form>
+    
+    
+     <h:form id="uplog" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="uploaddlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Joindre un document">
+				<div class="contentpanel">
+					
+	             <div class="row">
+              <p:messages id="message2" showDetail="false" autoUpdate="true"  closable="true"/>
+								<div class="col-xs-12 col-sm-12">
+								<p:fileUpload fileUploadListener="#{commissionController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le fichier" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                          update=":uplog:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|mov|pdf|xls?x)$/" />
+								</div>
+              </div>
+              <br/>
+	            <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES MANDATS N° #{pgpmAcController.slctdTd.gpgId}</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	             <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{commissionController.dossListe}" emptyMessage="Aucun Document enrégistré">
+	           <p:column headerText="Nom du document " styleClass="">
+	            <h:outputText value="#{doss.dpgCommentaire}" />
+	        </p:column>
+	        <p:column headerText="Actions" styleClass="no-sort" width="7%">
+	        
+				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{commissionController.removeDossier}" title="Supprimer" update="uplog:tabDossier">
+                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                   <f:setPropertyActionListener value="#{doss}" target="#{pgpmAcController.selectedDossier}" />
+                </p:commandLink>
+ 	        </p:column>
+	    </p:dataTable>    
+	            </div>
+	            </div>   
+	                
+	                
+	           </div>
       </p:dialog>
     </h:form>
 

@@ -10,8 +10,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.FileUploadEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -31,10 +33,15 @@ import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetOffres;
+import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailVente;
+import com.sndi.model.TDossierMbr;
+import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
 import com.sndi.model.TFonction;
 import com.sndi.model.TLotAao;
+import com.sndi.model.TNatureDocuments;
+import com.sndi.model.TNaturePiece;
 import com.sndi.model.TOperateur;
 import com.sndi.model.TPiecesOffres;
 import com.sndi.model.TPlanPassation;
@@ -79,6 +86,7 @@ import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
 import com.sndi.utilitaires.FileUploadController;
+import com.sndi.utilitaires.GRFProperties;
 import com.sndi.utilitaires.KeyGen;
 
 @Component
@@ -129,9 +137,11 @@ public class CommissionController {
 	 private List<VDetCommissionSeance> listeCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<VDetCommissionSeance> selectionMembresCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
+	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
+	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
 	 private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
 	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>();
@@ -150,6 +160,8 @@ public class CommissionController {
 	 private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
 	private VCandidatDac candidat =new VCandidatDac();
 	private VCritereAnalyseDacOff sltCritere =new VCritereAnalyseDacOff();
+	private TDetCommissionSeance detCom = new TDetCommissionSeance();
+	 private TDossierMbr selectedDossier = new TDossierMbr();
 	
 	//Resutat analyse
 	 private List<VVerifcorOffin> listeVerifCor = new ArrayList<VVerifcorOffin>();
@@ -163,11 +175,11 @@ public class CommissionController {
 	 private TLotAao recupLot =new TLotAao();
 	 private VRepSoumissionnaire recupNcc =new VRepSoumissionnaire();
 	
-	 
-	 
+ 
 	 
 	 //Declaration des objets
 	 private TCommissionSpecifique newcomSpec = new TCommissionSpecifique();
+	 private VDetCommissionSeance newMembre = new VDetCommissionSeance(); 
 	 private TDetCommissionSeance mbrSup = new TDetCommissionSeance();
 	 private VbCommissionSpecifique newcomSpecif = new VbCommissionSpecifique();
 	 private TCommissionType newCom = new TCommissionType();
@@ -188,8 +200,6 @@ public class CommissionController {
 	 private VbAnalyseOffre newAnalyseOffre =new VbAnalyseOffre();
 	 private VListeSouOffBasse sltRecharge =new VListeSouOffBasse();
 
-	 
-	 
 	 
 	 //Declaration des variables
 	 private String tcoCode;
@@ -222,6 +232,7 @@ public class CommissionController {
 	 private long lotId;
 	 private int nbrLot;
 	 private String filtreCandidat="";
+	 private String natdoc ="6";
 	 //private long rabais
 	 
 	 
@@ -778,11 +789,72 @@ public class CommissionController {
                 						}
                              
                                }
-	
-		
 		}
 		
+		//Methode de suppression d'un membre
+		 public void removeMembre() {
+			 System.out.print("+-------------+ "+getNewMembre().getDcsNomMbm());
+			 try {
+				 listeDetCom = (List<TDetCommissionSeance>) iservice.getObjectsByColumn("TDetCommissionSeance", new ArrayList<String>(Arrays.asList("DCS_NUM")),
+							new WhereClause("DCS_NUM",WhereClause.Comparateur.EQ,""+newMembre.getDcsNum()));
+			     if(!listeDetCom.isEmpty()) {
+			    	 detCom=listeDetCom.get(0);
+			     }
+				 
+				    iservice.deleteObject(getDetCom());
+				    chargeMembreCommite();
+					userController.setTexteMsg("Suppression effectuée avec succès !");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+
+			 } catch (org.hibernate.exception.ConstraintViolationException e) {
+				 userController.setTexteMsg("Impossible de supprimer le membre !");
+				 userController.setRenderMsg(true);
+				 userController.setSevrityMsg("danger");	 
+			 }
+		 }
+		 
 		
+		
+		//Methode Upload
+		 @Transactional
+		 public void upload(FileUploadEvent event) throws IOException{
+			  
+			 listeDetCom = (List<TDetCommissionSeance>) iservice.getObjectsByColumn("TDetCommissionSeance", new ArrayList<String>(Arrays.asList("DCS_NUM")),
+						new WhereClause("DCS_NUM",WhereClause.Comparateur.EQ,""+newMembre.getDcsNum()));
+		     if(!listeDetCom.isEmpty()) {
+		    	 detCom=listeDetCom.get(0);
+		     } 	
+		 	    
+				if(fileUploadController.handleFileUpload(event, ""+detCom.getDcsNum(), natdoc)) {
+					
+					//check le dossier s'il existe à faire
+					TDossierMbr dos = new TDossierMbr(); //TNatureDocument 
+					dos = new TDossierMbr() ;
+					
+					int nat = Integer.valueOf(natdoc);
+
+					dos.setTNatureDocuments(new TNatureDocuments((short)nat));
+					//dos.setDpgCode(keyGen.getCodeDossierPgpm(fileUploadController.getFileCode()+"-"));
+					dos.setTDetCommissionSeance(detCom);
+					dos.setDmbNom(fileUploadController.getFileName());
+					dos.setDmbCommentaire(fileUploadController.getDocNom());
+					dos.setDmbReference("");
+					dos.setDmbDteSaisi(Calendar.getInstance().getTime());
+					iservice.addObject(dos);
+					chargeDossier();
+					//Message de Confirmation
+					userController.setTexteMsg("Mandat enregistré!");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+				     }else {
+				    	//Message d'erreur
+						 userController.setTexteMsg("Document non enregistré, charger à nouveau un document!");
+						 userController.setRenderMsg(true);
+						 userController.setSevrityMsg("danger");
+							}
+				  }
+		 
 	
 		
 		 //Edition de fiche membres
@@ -792,7 +864,15 @@ public class CommissionController {
 		 
 		 //Love condidat
 		 
+		 public void chargeDossier() {
+			 dossListe.clear();
+				 dossListe = ((List<TDossierMbr>)iservice.getObjectsByColumnDesc("TDossierMbr",new ArrayList<String>(Arrays.asList("DMB_ID")),
+						 new WhereClause("DMB_DCS_NUM",Comparateur.EQ,""+detCom.getDcsNum())));
+		    }
 		 
+		 public void openDossier() throws IOException{
+       		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDmbNom(), selectedDossier.getDmbNom());
+       		   }
 		 //private TFonction recupFonction= new TFonction();
 		/* public void onSelectCandidat() {
 				
@@ -1990,6 +2070,63 @@ public class CommissionController {
 		this.recupNcc = recupNcc;
 	}
 
-	
+
+	public TDetCommissionSeance getDetCom() {
+		return detCom;
+	}
+
+
+	public void setDetCom(TDetCommissionSeance detCom) {
+		this.detCom = detCom;
+	}
+
+
+	public VDetCommissionSeance getNewMembre() {
+		return newMembre;
+	}
+
+	public void setNewMembre(VDetCommissionSeance newMembre) {
+		this.newMembre = newMembre;
+	}
+
+
+	public List<TDetCommissionSeance> getListeDetCom() {
+		return listeDetCom;
+	}
+
+	public void setListeDetCom(List<TDetCommissionSeance> listeDetCom) {
+		this.listeDetCom = listeDetCom;
+	}
+
+
+	public List<TDossierMbr> getDossListe() {
+		return dossListe;
+	}
+
+
+	public void setDossListe(List<TDossierMbr> dossListe) {
+		this.dossListe = dossListe;
+	}
+
+
+	public TDossierMbr getSelectedDossier() {
+		return selectedDossier;
+	}
+
+
+	public void setSelectedDossier(TDossierMbr selectedDossier) {
+		this.selectedDossier = selectedDossier;
+	}
+
+
+	public String getNatdoc() {
+		return natdoc;
+	}
+
+
+	public void setNatdoc(String natdoc) {
+		this.natdoc = natdoc;
+	}
+
 	
 }
