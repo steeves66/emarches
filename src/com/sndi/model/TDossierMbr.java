@@ -6,9 +6,12 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -50,7 +53,8 @@ public class TDossierMbr implements java.io.Serializable {
 	}
 
 	@Id
-
+	@SequenceGenerator(name = "SEQ_DOSSMBR_Sequence", sequenceName = "SEQ_DOSSMBR", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_DOSSMBR_Sequence")
 	@Column(name = "DMB_ID", unique = true, nullable = false, precision = 22, scale = 0)
 	public BigDecimal getDmbId() {
 		return this.dmbId;

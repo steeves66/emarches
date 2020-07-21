@@ -883,6 +883,17 @@ public class CommissionController {
 			 chargePgpmCpmpDmp();
 			 chargeImputationCpmpDmp();
 				}*/
+		 
+		  //Supprimer un dossier
+	       public void removeDossier(){
+		downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDmbNom(), selectedDossier.getDmbNom());
+		//check si le dossier est OM
+			 iservice.deleteObject(selectedDossier);
+			 chargeDossier();	 
+		 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDmbNom()+" supprimé!", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);	
+		}
+	        
 		 //Afficher la liste des candidats dans v_candidat_da(love)
 		 public void chargeCandidats() {
 			 listCandidats.clear();
