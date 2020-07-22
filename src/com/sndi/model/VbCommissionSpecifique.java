@@ -29,6 +29,7 @@ public class VbCommissionSpecifique implements java.io.Serializable {
 	private String comMarCode;
 	private String comAaoCode;
 	private String comTcoCode;
+	private String comTctLibelle;
 
 	public VbCommissionSpecifique() {
 	}
@@ -38,7 +39,7 @@ public class VbCommissionSpecifique implements java.io.Serializable {
 	}
 
 	public VbCommissionSpecifique(BigDecimal comNum, Date comDteSaisi, String comStrCode, String comTctCode,
-			String comOpeMatricule, String comDacCode, String comMarCode, String comAaoCode, String comTcoCode) {
+			String comOpeMatricule, String comDacCode, String comMarCode, String comAaoCode, String comTcoCode, String comTctLibelle) {
 		this.comNum = comNum;
 		this.comDteSaisi = comDteSaisi;
 		this.comStrCode = comStrCode;
@@ -48,6 +49,7 @@ public class VbCommissionSpecifique implements java.io.Serializable {
 		this.comMarCode = comMarCode;
 		this.comAaoCode = comAaoCode;
 		this.comTcoCode = comTcoCode;
+		this.comTctLibelle = comTctLibelle;
 	}
 
 	@Id
@@ -132,6 +134,15 @@ public class VbCommissionSpecifique implements java.io.Serializable {
 
 	public void setComTcoCode(String comTcoCode) {
 		this.comTcoCode = comTcoCode;
+	}
+	
+	@Column(name = "COM_TCT_LIBELLE", length = 500)
+	public String getComTctLibelle() {
+		return this.comTctLibelle;
+	}
+
+	public void setComTctLibelle(String comTctLibelle) {
+		this.comTctLibelle = comTctLibelle;
 	}
 
 }
