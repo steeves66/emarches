@@ -989,14 +989,14 @@
                <div  style="color: #fff">LISTE DES MEMBRES DE LA COMMISSION SPECIALE</div>
              </div>
               <div class="col-sm-4">
-				                  <p:commandLink  oncomplete="PF('dlogExp').show()" action="#{daoController.chargeMbrSpeciale()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+				                  <p:commandLink  oncomplete="PF('dlogMbrSpec').show()" action="#{daoController.chargeMbrSpeciale()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UNE RESSOURCE</span>
 								  </p:commandLink>
 				                  </div>
 				                  
 				                 
             </div>
-               <p:dataTable  id="tbMbrSpec" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeMembre}" emptyMessage="Aucun membre trouvé" 
+               <p:dataTable  id="tbMbrSpec" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeMembreComSpec}" emptyMessage="Aucun membre trouvé" 
                          draggableColumns="true" scrollable="true" scrollHeight="405">
                             <p:column headerText="TITRE" styleClass="col-sm-2" >
 	         				  <h:outputText value="#{slctdTb.comTctTitre}"/>
@@ -1028,6 +1028,32 @@
             </h:panelGroup>
             <!-- FIN PANEL COMMISSION SPECIALE -->
             </h:panelGroup>  
+           </div>
+            <div class="col-md-4">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-12 "><div  style="color: #fff">SAISIR LE NUMERO D'AUTORISATION</div></div> 
+                  </div>
+                  <div class="box-body">
+                    <div class="form-group ">
+	                  <label for="foncode" class="col-sm-5 control-label"><b> Numero d'autorisation <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-7">
+	                    <p:inputText  type="text"  styleClass="form-control" style="width: 100%"/>
+	                  </div>
+	                </div> 
+	                 <div class="form-group ">
+	                  <label for="foncode" class="col-sm-5 control-label"><b>Joindre l'autorisation <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-7">
+	                    	              <p:fileUpload fileUploadListener="#{daoController.upload}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                           sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+	                  </div>
+	                </div> 
+	                
+	             
+                  </div>
+                  </div>
            </div>
        <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
@@ -1834,6 +1860,54 @@
 					
 					      <div class="pull-right ">
 			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveExpert()}" oncomplete="PF('dlogExp').hide()" update="gnl:tbMbr">
+			             <i class="ace-icon fa fa-save"></i> Ajouter
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+         
+		
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogMbrSpec" styleClass="form-horizontal">
+	  <p:dialog  widgetVar="dlogMbrSpec" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">AJOUTER UNE RESSOURCE</div>
+         </div>
+         <div class="box-body">
+              
+		       <p:dataTable  id="TBDao" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeMbrCommissionSpeciale}" emptyMessage="Aucun membre trouvé" 
+					    rowKey="#{slctdTb.tctCode}" selection="#{daoController.selectionMbrCommissionSpeciale}"
+                         draggableColumns="true" scrollable="true" scrollHeight="350">
+                           <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
+                            <p:column headerText="TITRE" styleClass="col-sm-3" >
+	         				  <h:outputText value="#{slctdTb.tctTitre}"/>
+					        </p:column> 
+					         <p:column headerText="LIBELLE" styleClass="col-sm-9" >
+	         				  <h:outputText value="#{slctdTb.tctLibelle}"/>
+					        </p:column>  
+		        
+    </p:dataTable> 
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveMbrSpecial()}" oncomplete="PF('dlogMbrSpec').hide()" update="gnl:tbMbr">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
                      </div>

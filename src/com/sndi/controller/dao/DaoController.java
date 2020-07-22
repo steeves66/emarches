@@ -72,6 +72,7 @@ import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAdresse;
+import com.sndi.model.VCommissionSpeciale;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCritAnalDacEntete;
 import com.sndi.model.VCritereAnalyse;
@@ -193,9 +194,12 @@ public class DaoController {
 	private List<VbCommissionType> selectionMembres = new ArrayList<VbCommissionType>(); 
 	private List<VCommissionTypeExp> listeExpert = new ArrayList<VCommissionTypeExp>(); 
 	private List<VCommissionTypeExp> selectionlisteExpert = new ArrayList<VCommissionTypeExp>(); 
+	private List<VCommissionSpeciale> listeMbrCommissionSpeciale = new ArrayList<VCommissionSpeciale>(); 
+	private List<VCommissionSpeciale> selectionMbrCommissionSpeciale = new ArrayList<VCommissionSpeciale>(); 
 	private List<VbCommissionSpecifique> listeMbr = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TCommissionSpecifique> listeCom = new ArrayList<TCommissionSpecifique>(); 
-	private List<VbCommissionSpecifique> listeMembre = new ArrayList<VbCommissionSpecifique>(); 
+	private List<VbCommissionSpecifique> listeMembre = new ArrayList<VbCommissionSpecifique>();
+	private List<VbCommissionSpecifique> listeMembreComSpec = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
@@ -2038,16 +2042,14 @@ public class DaoController {
 									
 						 }
 						 
-						//Liste des membres de la commssions de la commssion speciale
+						//Liste des membres de la commssions de la commssion speciale dans la love
 						 public void chargeMbrSpeciale() {
-							 listeExpert.clear();
-							 selectionlisteExpert.clear();
-							 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE")),
-									 new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
-									    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
-									_logger.info("expert size: "+listeExpert.size());	
+								listeMbrCommissionSpeciale.clear();
+								selectionMbrCommissionSpeciale.clear();
+								listeMbrCommissionSpeciale = ((List<VCommissionSpeciale>)iservice.getObjectsByColumn("VCommissionSpeciale",new ArrayList<String>(Arrays.asList("TCT_CODE"))));
+									_logger.info("com special size: "+listeMbrCommissionSpeciale.size());	
 									
-									
+										
 						 }
 						 
 
@@ -2056,6 +2058,14 @@ public class DaoController {
 													 listeMembre = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
 															    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
 															_logger.info("listeMembre size: "+listeMembre.size());				
+												 }
+												 
+												// Liste des membres de la commssions de la comission spéciale
+												 public void chargeMembresComSpec() {
+													 listeMembreComSpec.clear();
+													 listeMembreComSpec = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
+															    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
+															_logger.info("listeMembre size: "+listeMembreComSpec.size());				
 												 }
 						 
 						 public void afficheExpert() {
@@ -2139,6 +2149,37 @@ public class DaoController {
 								//chargeExpert();
 								chargeMembres();
 								userController.setTexteMsg("Expert(s) enregistré(s) avec succès!");
+			  		            userController.setRenderMsg(true);
+			  		            userController.setSevrityMsg("success");
+								
+								btn_save_presence = false;
+								btn_save_expert = false;
+								panelMbr = false;
+								panelExpert = true;
+							}
+				 	}
+				 	
+				 	
+				 	public void saveMbrSpecial() {
+				 		//COMPOSITION DE LA SEANCE
+						 if (selectionMbrCommissionSpeciale.size()==0) {
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un expert ", "");
+								FacesContext.getCurrentInstance().addMessage(null, msg);
+							}else {
+								
+								for(VCommissionSpeciale mbr : selectionMbrCommissionSpeciale) {
+									//newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
+									newcomSpec.setComDteSaisi(Calendar.getInstance().getTime());
+									newcomSpec.setComTctCode(mbr.getTctCode());
+									newcomSpec.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+									newcomSpec.setComDacCode(dao.getDacCode());
+									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+									newcomSpec.setComTcoCode("COJ");
+									iservice.addObject(newcomSpec);
+								}
+								//chargeExpert();
+								chargeMembresComSpec();
+								userController.setTexteMsg("Ressource ajoutée avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
@@ -6594,5 +6635,29 @@ public class DaoController {
 
 	public void setComSpeciale(boolean comSpeciale) {
 		this.comSpeciale = comSpeciale;
+	}
+
+	public List<VCommissionSpeciale> getListeMbrCommissionSpeciale() {
+		return listeMbrCommissionSpeciale;
+	}
+
+	public void setListeMbrCommissionSpeciale(List<VCommissionSpeciale> listeMbrCommissionSpeciale) {
+		this.listeMbrCommissionSpeciale = listeMbrCommissionSpeciale;
+	}
+
+	public List<VCommissionSpeciale> getSelectionMbrCommissionSpeciale() {
+		return selectionMbrCommissionSpeciale;
+	}
+
+	public void setSelectionMbrCommissionSpeciale(List<VCommissionSpeciale> selectionMbrCommissionSpeciale) {
+		this.selectionMbrCommissionSpeciale = selectionMbrCommissionSpeciale;
+	}
+
+	public List<VbCommissionSpecifique> getListeMembreComSpec() {
+		return listeMembreComSpec;
+	}
+
+	public void setListeMembreComSpec(List<VbCommissionSpecifique> listeMembreComSpec) {
+		this.listeMembreComSpec = listeMembreComSpec;
 	}
 }
