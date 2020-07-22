@@ -357,6 +357,9 @@ public class DaoController {
 	 private boolean panelMbr = true;
 	 private boolean panelExpert = false;
 	 private long laaId;
+	 private boolean comNormale = true;
+	 private boolean comSpeciale = false;
+	 private String typeCommission ="N"; 
 	 
 	//Booléens
 	  private boolean skip;
@@ -456,6 +459,10 @@ public class DaoController {
 			 if(event.getOldStep().equals("critere") && event.getNewStep().equals("criterebyLot")) {
 				 factoriserLot();
 				 listeCritereByLot.clear();
+				 typeCommission ="N";
+				 comNormale = true;
+				 comSpeciale = false;
+				 checkTypeCommission();
 			     }
 			 
 			 //Pavet Lot
@@ -708,6 +715,20 @@ public class DaoController {
 		 iservice.updateObject(dao);
 	 }
 	 
+	 public void checkTypeCommission() { 
+		 if(typeCommission.equalsIgnoreCase("N")) {
+			  comNormale = true;
+			  comSpeciale = false;
+			 
+		 }else
+		 {
+			 comNormale = false;
+			 comSpeciale = true; 
+		 }
+				  
+			
+		 _logger.info("typeCommission: "+typeCommission);	
+	 }
 	 
 	 @Transactional
 	 public void factoriserAutoriz() {
@@ -2006,9 +2027,23 @@ public class DaoController {
 
 						//Liste des membres de la commssions
 						 public void chargeExpert() {
+							 listeExpert.clear();
+							 selectionlisteExpert.clear();
 							 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 									 new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
 									 new WhereClause("TCT_GRP_CODE",Comparateur.EQ,"AUT"),
+									    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
+									_logger.info("expert size: "+listeExpert.size());	
+									
+									
+						 }
+						 
+						//Liste des membres de la commssions de la commssion speciale
+						 public void chargeMbrSpeciale() {
+							 listeExpert.clear();
+							 selectionlisteExpert.clear();
+							 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE")),
+									 new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
 									    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
 									_logger.info("expert size: "+listeExpert.size());	
 									
@@ -2113,6 +2148,8 @@ public class DaoController {
 								panelExpert = true;
 							}
 				 	}
+				 	
+				 	
 				
 				 	public void removeMembre() { 
 				 		listeCom = (List<TCommissionSpecifique>) iservice.getObjectsByColumn("TCommissionSpecifique", new ArrayList<String>(Arrays.asList("TCT_CODE")),
@@ -6533,5 +6570,29 @@ public class DaoController {
 
 	public void setDetailCom(TCommissionSpecifique detailCom) {
 		this.detailCom = detailCom;
+	}
+
+	public String getTypeCommission() {
+		return typeCommission;
+	}
+
+	public void setTypeCommission(String typeCommission) {
+		this.typeCommission = typeCommission;
+	}
+
+	public boolean isComNormale() {
+		return comNormale;
+	}
+
+	public void setComNormale(boolean comNormale) {
+		this.comNormale = comNormale;
+	}
+
+	public boolean isComSpeciale() {
+		return comSpeciale;
+	}
+
+	public void setComSpeciale(boolean comSpeciale) {
+		this.comSpeciale = comSpeciale;
 	}
 }

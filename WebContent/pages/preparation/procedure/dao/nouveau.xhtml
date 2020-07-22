@@ -746,8 +746,8 @@
             <div class="col-md-8">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
-			          <div class="col-sm-2">
+                  <div class="col-md-9 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
+			          <div class="col-sm-3">
 				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
 								  </p:commandLink>
@@ -864,6 +864,22 @@
          <p:tab id="cojo" rendered="#{daoController.pavet_commission}" title="Saisie des membres de la commission" titleStyle="background-color: #f88b2e;background-image: none">
        
            <div class="row">
+           
+           <div class="col-md-8">
+	                <div class="form-group ">
+	                <label for="operations" class="col-sm-6 control-label"><b>type de commission <span style="color:red;"> *</span></b></label>
+	                 <div class="col-sm-4">
+                     <p:selectOneRadio  value="#{daoController.typeCommission}">
+						<f:selectItem itemLabel="Normale" itemValue="N" />
+						<f:selectItem itemLabel="Spéciale" itemValue="S" />
+						<p:ajax listener="#{daoController.checkTypeCommission()}" update=":gnl:comtyp"/>	
+					 </p:selectOneRadio>
+                  </div>
+	                </div>
+	              </div>
+          <!-- DEBBUT PANEL COMMISSION NORMALE -->
+           <h:panelGroup id="comtyp"> 
+          <h:panelGroup rendered="#{daoController.comNormale}">    
             <div class="col-md-12">
         <div class="row">
           <div class="col-md-5">
@@ -924,7 +940,7 @@
 				                 
             </div>
                <p:dataTable  id="tbMbr" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeMembre}" emptyMessage="Aucun membre trouvé" 
-                         draggableColumns="true" scrollable="true" scrollHeight="405" editable="true" editMode="cell"
+                         draggableColumns="true" scrollable="true" scrollHeight="405"
                           >
                             <p:column headerText="TITRE" styleClass="col-sm-2" >
 	         				  <h:outputText value="#{slctdTb.comTctTitre}"/>
@@ -932,15 +948,8 @@
 					        
 					        
 					         <p:column headerText="LIBELLE" styleClass="col-sm-9">
-						          <p:cellEditor>
-				                <f:facet name="output">
-				                <h:outputText value="#{slctdTb.comTctLibelle}" >
-				                </h:outputText>
-				                </f:facet>
-				                <f:facet name="input"> 
-				                <p:inputText value="#{slctdTb.comTctLibelle}" style="width:100%" />
-				                 </f:facet>
-				               </p:cellEditor>
+						          
+				                <h:outputText value="#{slctdTb.comTctLibelle}" />
 						        </p:column>
 					        
 					         <p:column headerText="" styleClass="col-sm-1">
@@ -962,16 +971,67 @@
             </div>
               
             </div>
-               <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
-				      </p:commandLink>
+               
        </div>
          
             </div>
-            
-            
+           </h:panelGroup> 
+           <!-- FIN PANEL COMMISSION NORMALE -->
+           
+           
+            <!-- DEBBUT PANEL COMMISSION SPECIALE -->
+          <h:panelGroup rendered="#{daoController.comSpeciale}">  
+            <div class="col-md-12">
+        <div class="row">
+          <div class="box box-success box-solid">
+            <div class="box-header with-border">
+             <div class="col-md-8 ">
+               <div  style="color: #fff">LISTE DES MEMBRES DE LA COMMISSION SPECIALE</div>
+             </div>
+              <div class="col-sm-4">
+				                  <p:commandLink  oncomplete="PF('dlogExp').show()" action="#{daoController.chargeMbrSpeciale()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UNE RESSOURCE</span>
+								  </p:commandLink>
+				                  </div>
+				                  
+				                 
+            </div>
+               <p:dataTable  id="tbMbrSpec" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeMembre}" emptyMessage="Aucun membre trouvé" 
+                         draggableColumns="true" scrollable="true" scrollHeight="405">
+                            <p:column headerText="TITRE" styleClass="col-sm-2" >
+	         				  <h:outputText value="#{slctdTb.comTctTitre}"/>
+					        </p:column>
+					        
+					         <p:column headerText="LIBELLE" styleClass="col-sm-9">
+				                <h:outputText value="#{slctdTb.comTctLibelle}" />
+						        </p:column>
+					        
+					         <p:column headerText="" styleClass="col-sm-1">
+					         
+					          <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('dlogMbrMod').show()"  title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />                             
+                            </p:commandLink>
+	                
+			                <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deletePresence()}" title="Supprimer" update=":content">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />
+			                </p:commandLink>
+					        </p:column>    
+		        
+    </p:dataTable>      
+            </div>
+            </div>
+            </div>
+            </h:panelGroup>
+            <!-- FIN PANEL COMMISSION SPECIALE -->
+            </h:panelGroup>  
            </div>
-       
+       <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
+				      </p:commandLink>
          </p:tab>  
               
     <p:tab id="confirmation" title="Confirmation" rendered="false" titleStyle="background-color: #f88b2e;background-image: none">
