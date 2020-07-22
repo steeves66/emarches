@@ -1039,7 +1039,7 @@ public class DaoController {
 	 
 	 //Suppression du critère du détail
 	 public void deleteCritere() {
-		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("TCT_CODE")),
+		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 					new WhereClause("DCAD_DAN_CODE",WhereClause.Comparateur.EQ,""+sltCritereDac.getCraCode()));
 	       if (!listeDetCritere.isEmpty()) {
 	    	   detCritere = listeDetCritere.get(0);
