@@ -3793,6 +3793,52 @@ public class DaoController {
 											}
 										  }
 										}
+									  
+									  /**
+									 * @param event
+									 * @throws java.io.FileNotFoundException
+									 */
+									@Transactional
+										public void uploadAtorisation(FileUploadEvent event) throws java.io.FileNotFoundException { 
+										 //condition de chargement d'un document : Nature sélectionnée 
+										 if((docNature == null || "".equals(docNature))){
+											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
+											FacesContext.getCurrentInstance().addMessage(null, msg);	
+											 
+											 }else {
+										
+										if(fileUploadController.handleFileUpload(event, ""+dao.getDacCode(), docNature)) {
+											
+											
+											int nat = Integer.valueOf(docNature);
+											nat =1;
+											//check le dossier s'il existe à faire
+											//TDossierDacs dos =new TDossierDacs(); //TNatureDocuments
+											dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+											dos.setTDacSpecs(dao);
+											List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+											TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+											if(!LS.isEmpty()) natureDoc = LS.get(0);
+											dos.setTNatureDocuments(natureDoc);
+											dos.setDdaNom(fileUploadController.getFileName());
+											dos.setDdaDteSaisi(Calendar.getInstance().getTime());
+											dos.setDdaReference(fileUploadController.getDocNom());
+											iservice.addObject(dos); 
+											
+											//chargeNatureDocTrans();
+											chargeDossierCharge();
+											
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succés!", "");
+											FacesContext.getCurrentInstance().addMessage(null, msg);
+											chargeDossierCharge();
+											}else {
+												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
+												FacesContext.getCurrentInstance().addMessage(null, msg);	
+												
+											}
+										  }
+										}
+				
 				
 									//Validation des corrections
 									  @Transactional 
