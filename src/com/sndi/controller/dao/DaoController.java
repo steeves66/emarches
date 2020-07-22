@@ -307,6 +307,7 @@ public class DaoController {
 	 private String sitDac ="";
 	 private String natPiece ="";
 	 private String commentaire="";
+	 private String pays="";
 	 private Date ouvTech;
 	 private Date ouvFin;
 	 private String libelleFournitures ="DAO_Fournitures_et_services_connexes.doc";
@@ -364,6 +365,7 @@ public class DaoController {
 	 private boolean comNormale = true;
 	 private boolean comSpeciale = false;
 	 private String typeCommission ="N"; 
+	 private boolean etatPays = true;
 	 
 	//Booléens
 	  private boolean skip;
@@ -4032,7 +4034,6 @@ public class DaoController {
 													  
 												      }else { 
 												    	  
-												    	  
 												    	  //Contrôle sur la vente ou le retrait
 													         if(newDao.getDacCout() == 0) {
 													        	 String mois="";
@@ -4055,11 +4056,15 @@ public class DaoController {
 																				soumission.setSouSigleDmp(newSoumission.getSouSigleDmp());
 																				iservice.updateObject(soumission);
 																			}
-													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-													               newCandidat.setCanRepCode(paieCode);
+																			
+													               if(pays == null) {
+												 		              newCandidat.setCanRepCode(paieCode);   
+												 		               }else {
+												 		                newCandidat.setCanRepCode(pays);  
+												 		            }
 													               newCandidat.setCanSouNcc(newSouncc);
+													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
 													               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
-													               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 													               iservice.addObject(newCandidat);
 													               
@@ -4131,10 +4136,14 @@ public class DaoController {
 											 				        
 											 				        String exo=chaine+String.valueOf(year)+mois;
 											 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-											 		               newCandidat.setCanRepCode(paieCode);
+											 		               if(pays == null) {
+											 		            	  newCandidat.setCanRepCode(paieCode);   
+											 		               }else {
+											 		            	  newCandidat.setCanRepCode(pays);  
+											 		               }
+											 		               //newCandidat.setCanRepCode(paieCode);
 											 		               newCandidat.setCanSouNcc(newSouncc);
 											 		               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
-											 		               //newCandidat.setCanTieNcc(recupSoumission.getSouNcc());
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
 											 		               
@@ -4156,16 +4165,9 @@ public class DaoController {
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
-											 	                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
-											 	                             /* listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-											 			  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-											 			  				      if (!listDao.isEmpty()) {
-											 			  					     newDao= listDao.get(0);
-											 			  					     newDao.setTStatut(new TStatut("DVE"));
-											 			  					     iservice.updateObject(newDao);
-											 			  	   	                 }*/
+											 	                             
 											 			  				      
-											 			  				 //Récupération du Statut
+											 			  				        //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
 												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
@@ -4176,6 +4178,7 @@ public class DaoController {
 											     			  				   etatRecu = true;
 											     			  				   
 											     			  				//Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
+											     			  				   getDaoVenteTotal();
 													 						   totalNbreVente = getDaoVenteTotal();
 													 						   newDao.setDacNbreAchat(totalNbreVente);
 													 						   iservice.updateObject(newDao);
@@ -4213,7 +4216,15 @@ public class DaoController {
 													new WhereClause("SOU_NCC",WhereClause.Comparateur.EQ,""+newSouncc));
 													if (!listSoumission.isEmpty()) {
 														soumission=listSoumission.get(0);
-														//infoNcc=true;
+														
+														 if(soumission.getSouNatInt().equalsIgnoreCase("N")) {
+															etatPays = false; 
+															pays = soumission.getSouPayCode();
+														 }else {
+															 etatPays = true; 
+															 pays="";
+														 }
+														  
 													}else {
 														//infoNcc=false;
 														soumission = new TSoumissions();
@@ -6660,4 +6671,21 @@ public class DaoController {
 	public void setListeMembreComSpec(List<VbCommissionSpecifique> listeMembreComSpec) {
 		this.listeMembreComSpec = listeMembreComSpec;
 	}
+	
+	public boolean isEtatPays() {
+		return etatPays;
+	}
+
+	public void setEtatPays(boolean etatPays) {
+		this.etatPays = etatPays;
+	}
+
+	public String getPays() {
+		return pays;
+	}
+
+	public void setPays(String pays) {
+		this.pays = pays;
+	}
+	
 }

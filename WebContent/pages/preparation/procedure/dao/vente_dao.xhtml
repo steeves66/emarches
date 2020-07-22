@@ -144,7 +144,7 @@
 					        <tr>
                             <td style="width: 250px"><p:inputText value="#{daoController.newSouncc}"  type="text" styleClass="form-control" style="width:100%" /></td>		                 
                             <td>
-							        <p:commandLink action="#{daoController.verifierNumNcc()}" title="Vérifier le NCC" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="gnl:idncc">
+							        <p:commandLink action="#{daoController.verifierNumNcc()}" title="Vérifier le NCC" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="gnl:idncc, gnl:idPays">
 								    	<i class="fa fa-plus"></i>
 								    </p:commandLink>
 						        </td>
@@ -186,15 +186,19 @@
 		                      <div class="col-sm-3">
 		                        <p:inputText  type="text"  styleClass="form-control" value="#{daoController.newCandidat.canNom}" id="delaival1" style="width: 100%" />
 		                      </div>
-		                      
-		                      <label for="pays1" class="col-sm-2 control-label text-right"><b>Pays :<span style="color:red;"> *</span></b></label>
+		                   
+		                <h:panelGroup id="idPays">   
+		                 <h:panelGroup rendered="#{daoController.etatPays}"> 
+		                  <label for="pays1" class="col-sm-2 control-label text-right"><b>Pays :<span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-5">
 		                         <p:selectOneMenu id="tpays" value="#{daoController.paieCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			                      <f:selectItem  itemLabel="Choisir le pays..." />  
 			                      <f:selectItems value="#{daoController.listePays}" var="pa" itemLabel="#{pa.repLibelle}" itemValue="#{pa.repCode}" />			   				   
 				                <f:selectItems />				   				    				   
 		       	                 </p:selectOneMenu>
-                                </div>
+                               </div>
+                           </h:panelGroup>
+                        </h:panelGroup> 
 		                  </div>
 		                  
 		                   <div class="form-group horizontal">

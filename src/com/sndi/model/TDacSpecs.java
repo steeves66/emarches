@@ -53,6 +53,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacFonCodePf;
 	private long dacFactoriseCrit;
 	private Long dacNbreAchat;
+	private String dacAutComSpec;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -75,7 +76,7 @@ public class TDacSpecs implements java.io.Serializable {
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
-			long dacFactoriseCrit, Long dacNbreAchat,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -104,6 +105,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacTypePlan = dacTypePlan;
 		this.dacFactoriseCrit = dacFactoriseCrit;
 		this.dacNbreAchat = dacNbreAchat;
+		this.dacAutComSpec = dacAutComSpec;
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
@@ -358,6 +360,15 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacNbreAchat(Long dacNbreAchat) {
 		this.dacNbreAchat = dacNbreAchat;
+	}
+	
+	@Column(name = "DAC_AUT_COM_SPEC", length = 200)
+	public String getDacAutComSpec() {
+		return this.dacAutComSpec;
+	}
+
+	public void setDacAutComSpec(String dacAutComSpec) {
+		this.dacAutComSpec = dacAutComSpec;
 	}
 	
 	@Column(name = "DAC_RECHERCHE", length = 4000)

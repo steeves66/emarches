@@ -32,6 +32,8 @@ public class TSoumissions implements java.io.Serializable {
 	private String souAdresse;
 	private Date souDteSaisi;
 	private String souSigleDmp;
+	private String souPayCode;
+	private String souNatInt;
 	private Set<TAvisPresel> TAvisPresels = new HashSet<TAvisPresel>(0);
 
 	public TSoumissions() {
@@ -42,7 +44,8 @@ public class TSoumissions implements java.io.Serializable {
 	}
 
 	public TSoumissions(String souNcc, TOperateur TOperateur, Character souInter, String souSigleSte, String souNomCom,
-			String souStaCode, String souTel, String souAdresse, Date souDteSaisi,String souSigleDmp, Set<TAvisPresel> TAvisPresels) {
+			String souStaCode, String souTel, String souAdresse, Date souDteSaisi,String souSigleDmp, 
+			String souPayCode, String souNatInt, Set<TAvisPresel> TAvisPresels) {
 		this.souNcc = souNcc;
 		this.TOperateur = TOperateur;
 		this.souInter = souInter;
@@ -53,6 +56,8 @@ public class TSoumissions implements java.io.Serializable {
 		this.souAdresse = souAdresse;
 		this.souDteSaisi = souDteSaisi;
 		this.souSigleDmp = souSigleDmp;
+		this.souPayCode = souPayCode;
+		this.souNatInt = souNatInt;
 		this.TAvisPresels = TAvisPresels;
 	}
 
@@ -150,6 +155,23 @@ public class TSoumissions implements java.io.Serializable {
 		this.souSigleDmp = souSigleDmp;
 	}
 
+	@Column(name = "SOU_PAY_CODE", length = 20)
+	public String getSouPayCode() {
+		return this.souPayCode;
+	}
+
+	public void setSouPayCode(String souPayCode) {
+		this.souPayCode = souPayCode;
+	}
+
+	@Column(name = "SOU_NAT_INT", length = 1)
+	public String getSouNatInt() {
+		return this.souNatInt;
+	}
+
+	public void setSouNatInt(String souNatInt) {
+		this.souNatInt = souNatInt;
+	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TSoumissions")
 	public Set<TAvisPresel> getTAvisPresels() {
