@@ -980,7 +980,7 @@
            
            
             <!-- DEBBUT PANEL COMMISSION SPECIALE -->
-          <h:panelGroup rendered="#{daoController.comSpeciale}">  
+          <h:panelGroup rendered="false">  
             <div class="col-md-12">
         <div class="row">
           <div class="box box-success box-solid">
@@ -1027,9 +1027,10 @@
             </div>
             </h:panelGroup>
             <!-- FIN PANEL COMMISSION SPECIALE -->
-            </h:panelGroup>  
-           </div>
-            <div class="col-md-4">
+            
+             
+             <h:panelGroup rendered="#{daoController.comSpeciale}"> 
+            <div class="col-md-4 col-md-offset-4">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-12 "><div  style="color: #fff">SAISIR LE NUMERO D'AUTORISATION</div></div> 
@@ -1055,6 +1056,12 @@
                   </div>
                   </div>
            </div>
+           </h:panelGroup> 
+            </h:panelGroup> 
+            
+           
+           </div>
+          
        <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
 				      </p:commandLink>
@@ -1907,7 +1914,7 @@
 	              <div class="col-sm-4">  
 					
 					      <div class="pull-right ">
-			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveMbrSpecial()}" oncomplete="PF('dlogMbrSpec').hide()" update="gnl:tbMbr">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveMbrSpecial()}" oncomplete="PF('dlogMbrSpec').hide()" update="gnl:tbMbrSpec">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
                      </div>

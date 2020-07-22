@@ -2055,21 +2055,21 @@ public class DaoController {
 						 }
 						 
 
-						//Liste des membres de la commssions
-												 public void chargeMembres() {
-													 listeMembre = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
-															    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
-															_logger.info("listeMembre size: "+listeMembre.size());				
-												 }
-												 
-												// Liste des membres de la commssions de la comission spéciale
-												 public void chargeMembresComSpec() {
-													 listeMembreComSpec.clear();
-													 listeMembreComSpec = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
-															    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
-															_logger.info("listeMembre size: "+listeMembreComSpec.size());				
-												 }
+						 //Liste des membres de la commssions
+						 public void chargeMembres() {
+							 listeMembreComSpec = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
+									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
+									_logger.info("listeMembre size: "+listeMembre.size());				
+						 }
 						 
+												 
+						// Liste des membres de la commssions de la comission spéciale
+						 public void chargeMembresComSpec() {
+							 listeMembreComSpec = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
+									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
+									_logger.info("listeMembre size: "+listeMembreComSpec.size());				
+						 }
+												 
 						 public void afficheExpert() {
 							 btn_save_presence = false;
 							 btn_save_expert = true;
@@ -2162,7 +2162,7 @@ public class DaoController {
 				 	}
 				 	
 				 	
-				 	public void saveMbrSpecial() {
+					public void saveMbrSpecial() {
 				 		//COMPOSITION DE LA SEANCE
 						 if (selectionMbrCommissionSpeciale.size()==0) {
 							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un expert ", "");
@@ -2191,9 +2191,7 @@ public class DaoController {
 								panelExpert = true;
 							}
 				 	}
-				 	
-				 	
-				
+					
 				 	public void removeMembre() { 
 				 		listeCom = (List<TCommissionSpecifique>) iservice.getObjectsByColumn("TCommissionSpecifique", new ArrayList<String>(Arrays.asList("TCT_CODE")),
 			    					new WhereClause("COM_NUM",WhereClause.Comparateur.EQ,""+selecMembre.getComNum()));
