@@ -2067,17 +2067,21 @@ public class DaoController {
 				 	
 				 	
 				 	public void updatePresence() {          
-				 		listeMembre = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCO_CODE")),
-							    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
-								for(VbCommissionSpecifique mbr : listeMembre) {
-									newcomSpec.setComTctLibelle(mbr.getComTctLibelle());
-									newcomSpec.setComTctTitre(mbr.getComTctTitre());
-									iservice.updateObject(newcomSpec);
-								}
+				 		iservice.updateObject(sltCompsec);
+				 		chargeMembres();	
 								 userController.setTexteMsg("Modification éffectuée avec succès!");
 				  		            userController.setRenderMsg(true);
 				  		            userController.setSevrityMsg("success");
-								chargeMembres();	
+								
+							}
+				 	
+				 	public void deletePresence() {   
+				 		iservice.deleteObject(sltCompsec);
+				 		chargeMembres();	
+						userController.setTexteMsg("Suppression éffectuée avec succès!");
+				  		userController.setRenderMsg(true);
+				  		userController.setSevrityMsg("success");
+								
 							}
 				 	
 				 	public void saveExpert() {

@@ -944,25 +944,23 @@
 						        </p:column>
 					        
 					         <p:column headerText="" styleClass="col-sm-1">
+					         
+					          <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('dlogMbrMod').show()"  title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />                             
+                            </p:commandLink>
 	                
-			                <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeMembre()}" title="Supprimer" update="gnl:tbMbr">
+			                <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deletePresence()}" title="Supprimer" update=":content">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selecMembre}" />
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />
 			                </p:commandLink>
 					        </p:column>    
 		        
-    </p:dataTable> 
-    
-    
-			           
+    </p:dataTable>      
             </div>
-              <div class="box-footer">
-			     <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{daoController.updatePresence()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-						             <i class="ace-icon fa fa-save"></i> Valider
-				      </p:commandLink>
-			    
-			    </div>
+              
             </div>
                <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
@@ -1922,6 +1920,45 @@
 					
 					      <div class="pull-right ">
 			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.updateCritereByLot()}" oncomplete="PF('dlogdetModLot').hide()" update="gnl">
+			             <i class="ace-icon fa fa-save"></i> Modifier
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogMbrMod">
+	  <p:dialog  widgetVar="dlogMbrMod" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
+		<div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">#{daoController.sltCompsec.comTctLibelle}</div>
+         </div>
+         <div class="box-body">
+                <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libelle</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.sltCompsec.comTctLibelle}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
+                  </div>
+                </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.updatePresence()}" oncomplete="PF('dlogMbrMod').hide()" update="gnl">
 			             <i class="ace-icon fa fa-save"></i> Modifier
 			            </p:commandLink>
                      </div>
