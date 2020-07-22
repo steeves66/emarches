@@ -1228,6 +1228,9 @@ public class CommissionController {
 		 public void vider() {
 			 newOffre = new VbTempParamDetOffres();
 			 infoLot =new VVerifcorOffin();
+			 newSeance = new TSeances();
+			 slctdTd = new TAvisAppelOffre();
+			 newOffre = new VbTempParamDetOffres();
 			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
 			 listeSelectionPiecesOffresAnalyse.clear();
 			 listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();

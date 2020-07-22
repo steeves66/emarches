@@ -146,7 +146,7 @@
 				         <p:column headerText="Mandat ?" styleClass="col-sm-1" >
                           <p:cellEditor>
                           <f:facet name="output">
-         				  <h:outputText value="#{slctdTb.tctRepMandate}"/>
+         				  <h:outputText value="#{slctdTb.tctRepMandate == 'O'?'OUI':'NON'}"/>
          				  </f:facet>
          				  <f:facet name="input">
          				     <h:selectOneMenu id="mandat" value="#{slctdTb.tctRepMandate}" style="width:100%; color:#0000">
@@ -332,10 +332,10 @@
 				         <p:column headerText="Mandat ?" styleClass="col-sm-1" >
                           <p:cellEditor>
                           <f:facet name="output">
-         				  <h:outputText value="#{slctdTb.dcsMbmRespo}"/>
+         				  <h:outputText value="#{slctdTb.dcsRepMandate == 'O'?'OUI':'NON'}"/>
          				  </f:facet>
          				  <f:facet name="input">
-	         				   <p:selectOneRadio id="mandat" value="#{slctdTb.dcsMbmRespo}">
+	         				   <p:selectOneRadio id="mandat" value="#{slctdTb.dcsRepMandate}">
 							  <f:selectItem itemLabel="Oui" itemValue="O" />
 						      </p:selectOneRadio>
          				  </f:facet>

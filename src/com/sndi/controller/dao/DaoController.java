@@ -194,6 +194,7 @@ public class DaoController {
 	private List<VCommissionTypeExp> listeExpert = new ArrayList<VCommissionTypeExp>(); 
 	private List<VCommissionTypeExp> selectionlisteExpert = new ArrayList<VCommissionTypeExp>(); 
 	private List<VbCommissionSpecifique> listeMbr = new ArrayList<VbCommissionSpecifique>(); 
+	private List<TCommissionSpecifique> listeCom = new ArrayList<TCommissionSpecifique>(); 
 	private List<VDacMembre> listeMembre = new ArrayList<VDacMembre>(); 
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
 	//Pieces a examiner
@@ -231,6 +232,7 @@ public class DaoController {
 	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
+	private TCommissionSpecifique detailCom = new TCommissionSpecifique(); 
 
 	 
 	//variables
@@ -2107,14 +2109,14 @@ public class DaoController {
 							}
 				 	}
 				
-				 	public void removeMembre() {
-				 		listeMbr = (List<VbCommissionSpecifique>) iservice.getObjectsByColumn("VbCommissionSpecifique", new ArrayList<String>(Arrays.asList("TCT_CODE")),
-			    					new WhereClause("COM_TCT_CODE",WhereClause.Comparateur.EQ,""+selecMembre.getComTctCode()));
-			        	       if (!listeMbr.isEmpty()) {
-			        	    	   newcomSpec = listeMbr.get(0);
+				 	public void removeMembre() { 
+				 		listeCom = (List<TCommissionSpecifique>) iservice.getObjectsByColumn("TCommissionSpecifique", new ArrayList<String>(Arrays.asList("TCT_CODE")),
+			    					new WhereClause("COM_NUM",WhereClause.Comparateur.EQ,""+selecMembre.getComNum()));
+			        	       if (!listeCom.isEmpty()) {
+			        	    	   detailCom = listeCom.get(0);
 			        	       }
 			        	       
-			        	       iservice.deleteObject(getNewcomSpec());
+			        	       iservice.deleteObject(getDetailCom());
 							   FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
 				 	}	 
 		 		 
@@ -6503,5 +6505,21 @@ public class DaoController {
 
 	public void setDetCritere(TDetCritAnalyseDac detCritere) {
 		this.detCritere = detCritere;
+	}
+
+	public List<TCommissionSpecifique> getListeCom() {
+		return listeCom;
+	}
+
+	public void setListeCom(List<TCommissionSpecifique> listeCom) {
+		this.listeCom = listeCom;
+	}
+
+	public TCommissionSpecifique getDetailCom() {
+		return detailCom;
+	}
+
+	public void setDetailCom(TCommissionSpecifique detailCom) {
+		this.detailCom = detailCom;
 	}
 }
