@@ -195,7 +195,7 @@ public class DaoController {
 	private List<VCommissionTypeExp> selectionlisteExpert = new ArrayList<VCommissionTypeExp>(); 
 	private List<VbCommissionSpecifique> listeMbr = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TCommissionSpecifique> listeCom = new ArrayList<TCommissionSpecifique>(); 
-	private List<VDacMembre> listeMembre = new ArrayList<VDacMembre>(); 
+	private List<VbCommissionSpecifique> listeMembre = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
@@ -2015,13 +2015,13 @@ public class DaoController {
 									
 						 }
 						 
+
 						//Liste des membres de la commssions
-						 public void chargeMembres() {
-							 listeMembre = ((List<VDacMembre>)iservice.getObjectsByColumn("VDacMembre",new ArrayList<String>(Arrays.asList("TCT_CODE")),
-									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
-									_logger.info("listeMembre size: "+listeMembre.size());				
-						 }
-					 
+												 public void chargeMembres() {
+													 listeMembre = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
+															    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
+															_logger.info("listeMembre size: "+listeMembre.size());				
+												 }
 						 
 						 public void afficheExpert() {
 							 btn_save_presence = false;
@@ -2045,6 +2045,8 @@ public class DaoController {
 									//newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
 									newcomSpec.setComDteSaisi(Calendar.getInstance().getTime());
 									newcomSpec.setComTctCode(mbr.getTctCode());
+									newcomSpec.setComTctLibelle(mbr.getTctLibelle());
+									newcomSpec.setComTctTitre(mbr.getTctTitre());
 									newcomSpec.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 									newcomSpec.setComDacCode(dao.getDacCode());
 									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
@@ -2065,18 +2067,17 @@ public class DaoController {
 				 	
 				 	
 				 	public void updatePresence() {          
-				 		listeMembre = ((List<VDacMembre>)iservice.getObjectsByColumn("VDacMembre",new ArrayList<String>(Arrays.asList("TCT_CODE")),
+				 		listeMembre = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCO_CODE")),
 							    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
-								for(VDacMembre mbr : listeMembre) {
+								for(VbCommissionSpecifique mbr : listeMembre) {
+									newcomSpec.setComTctLibelle(mbr.getComTctLibelle());
+									newcomSpec.setComTctTitre(mbr.getComTctTitre());
 									iservice.updateObject(newcomSpec);
-									chargeMembres();
-									 //Message de confirmation
-				  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
+								}
+								 userController.setTexteMsg("Modification éffectuée avec succès!");
 				  		            userController.setRenderMsg(true);
 				  		            userController.setSevrityMsg("success");
-								}
-								
-								
+								chargeMembres();	
 							}
 				 	
 				 	public void saveExpert() {
@@ -6104,15 +6105,22 @@ public class DaoController {
 		this.listeMbr = listeMbr;
 	}
 
-	public List<VDacMembre> getListeMembre() {
+
+	public List<VbCommissionSpecifique> getListeMembre() {
 		return listeMembre;
 	}
 
-	public void setListeMembre(List<VDacMembre> listeMembre) {
+	public void setListeMembre(List<VbCommissionSpecifique> listeMembre) {
 		this.listeMembre = listeMembre;
 	}
 
+	public List<TDetCritAnalyseDac> getListeDetCritere() {
+		return listeDetCritere;
+	}
 
+	public void setListeDetCritere(List<TDetCritAnalyseDac> listeDetCritere) {
+		this.listeDetCritere = listeDetCritere;
+	}
 
 	public VbCommissionSpecifique getSltCompsec() {
 		return sltCompsec;

@@ -39,6 +39,7 @@ public class TCommissionSpecifique implements java.io.Serializable {
 	private String comFonAdmin;
 	private String comStrCom;
 	private String comTctLibelle;
+	private String comTctTitre;
 	private Set<TDetCommissionSeance> TDetCommissionSeances = new HashSet<TDetCommissionSeance>(0);
 
 	public TCommissionSpecifique() {
@@ -51,6 +52,7 @@ public class TCommissionSpecifique implements java.io.Serializable {
 	public TCommissionSpecifique(long  comNum, TTypeCommission TTypeCommission, TCommissionType TCommissionType,
 			TDacSpecs TDacSpecs, TAvisAppelOffre TAvisAppelOffre, TStructure TStructure, Date comDteSaisi,
 			String comOpeMatricule, String comMarCode,String comAaoCode, String comFonAdmin, String comStrCom,String comTctLibelle,
+			String comTctTitre,
 			Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.comNum = comNum;
 		this.TTypeCommission = TTypeCommission;
@@ -65,6 +67,7 @@ public class TCommissionSpecifique implements java.io.Serializable {
 		this.comFonAdmin = comFonAdmin;
 		this.comStrCom = comStrCom;
 		this.comTctLibelle = comTctLibelle;
+		this.comTctTitre = comTctTitre;
 		this.TDetCommissionSeances = TDetCommissionSeances;
 	}
 
@@ -193,6 +196,16 @@ public class TCommissionSpecifique implements java.io.Serializable {
 	public void setComTctLibelle(String comTctLibelle) {
 		this.comTctLibelle = comTctLibelle;
 	}
+	
+	@Column(name = "COM_TCT_TITRE", length = 200)
+	public String getComTctTitre() {
+		return this.comTctTitre;
+	}
+
+	public void setComTctTitre(String comTctTitre) {
+		this.comTctTitre = comTctTitre;
+	}
+
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TCommissionSpecifique")
 	public Set<TDetCommissionSeance> getTDetCommissionSeances() {
