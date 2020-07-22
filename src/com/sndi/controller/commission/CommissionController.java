@@ -378,29 +378,38 @@ public class CommissionController {
 			 etatMontVar = false; 
 		 }else {
 			 etatMontVar = true;  
-		 }
-		 
+		 } 
 	 }
 	 
 	
+	 
 	 public void calculMontNet() {
 		 montRab= montLu * pourcentRab/100;
 		 montN = montLu - montRab;
 		 System.out.print("montant est : "+getMontN());
 	 }
 	 
-	 public void deleteMembre() {		 
-		 listMbrSup = ((List<TDetCommissionSeance>)iservice.getObjectsByColumn("TDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NUM")),
-				 new WhereClause("DCS_NUM",Comparateur.EQ,""+sltMbr.getDcsNum())));
-		       if (!listMbrSup.isEmpty()) {
-		    	   mbrSup=listMbrSup.get(0); 
-    			}
-		       iservice.deleteObject(getMbrSup());
-		  chargeMembre();
-		  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Membre supprimé avec succès! ", ""));	
-		}
 	 
-	 //liste des pièces de l'offres
+	 //Suppression du membre de comité d'évaluation
+	 public void deleteMembre() {	
+		  System.out.print("+-------------+MEMBRE: "+getSltMbr().getDcsNomMbm());
+		 try {
+		       listMbrSup = ((List<TDetCommissionSeance>)iservice.getObjectsByColumn("TDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NUM")),
+				    new WhereClause("DCS_NUM",Comparateur.EQ,""+sltMbr.getDcsNum())));
+		           if (!listMbrSup.isEmpty()) {
+		    	        mbrSup=listMbrSup.get(0); 
+    			        }
+		     iservice.deleteObject(getMbrSup());
+		     chargeMembre();
+		     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Membre supprimé avec succès! ", ""));
+		 }catch (org.hibernate.exception.ConstraintViolationException e) {
+   			 userController.setTexteMsg("Impossible de supprimer le membre !");
+   			 userController.setRenderMsg(true);
+   			 userController.setSevrityMsg("danger");	 
+   		 } 
+	}
+	 
+
 	 
 	//Liste des piecs de l'offre
 	 public void chargePieces() {
