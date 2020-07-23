@@ -73,26 +73,26 @@ public class FileUploadController {
 		
 		switch(docNature){
 		
-		case "1": name="ADM-";
+		case "1": name="DAO-";
 			
 			break;
 			
-		case "2": name="CAD-";
+		case "2": name="ANN-";
 			
 			break;
-		case "3": name="TEC-";
+		case "3": name="AUT-";
 		break;
 		
-		case "4": name="AUT-";
+		case "4": name="AMI-";
 		
 		break;
-         case "5": name="PJV-";
+         case "5": name="PRQ-";
 		
 		break;
-         case "6": name="PDI-";
+         case "6": name="MAN-";
  		break;
  	    
- 		case "7": name="ART-";
+ 		case "7": name="AUS-";
  		break;
 			
 		}
@@ -136,29 +136,27 @@ public class FileUploadController {
 		
 		switch(docNature){
 		
-		case "1": name="ADM-";
+		case "1": name="DAO-";
 		
 		break;
 		
-	    case "2": name="CAD-";
+	case "2": name="ANN-";
 		
 		break;
-	    case "3": name="TEC-";
-	    break;
+	case "3": name="AUT-";
+	break;
 	
-	    case "4": name="AUT-";
+	case "4": name="AMI-";
 	
-	    break;
+	break;
+     case "5": name="PRQ-";
+	
+	break;
+     case "6": name="MAN-";
+		break;
 	    
-        case "5": name="PJV-";
+		case "7": name="AUS-";
 		break;
-		
-        case "6": name="PDI-";
-		break;
-	    
-		case "7": name="ART-";
-		break;
-			
 		}
 		
 		
@@ -200,26 +198,26 @@ public class FileUploadController {
 		
 		switch(docNature){
 		
-		case "1": name="ADM-";
+		case "1": name="DAO-";
 		
 		break;
 		
-	    case "2": name="CAD-";
+	case "2": name="ANN-";
 		
 		break;
-	    case "3": name="TEC-";
-	    break;
+	case "3": name="AUT-";
+	break;
 	
-	    case "4": name="AUT-";
-		
+	case "4": name="AMI-";
+	
+	break;
+     case "5": name="PRQ-";
+	
+	break;
+     case "6": name="MAN-";
 		break;
-		
-	    case "5": name="PJV-";
-		break;
-		
-	    case "6": name="PDI-";
-		break;
-	    case "7": name="ART-";
+	    
+		case "7": name="AUS-";
 		break;
 			
 		}

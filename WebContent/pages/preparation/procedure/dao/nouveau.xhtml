@@ -864,8 +864,21 @@
          <p:tab id="cojo" rendered="#{daoController.pavet_commission}" title="Saisie des membres de la commission" titleStyle="background-color: #f88b2e;background-image: none">
        
            <div class="row">
-           
            <div class="col-md-8">
+            <h:panelGroup rendered="#{daoController.norm}">
+               <div class="col-sm-6"><label class="pull-right">type de commission : </label></div>
+                  <div class="col-sm-4">
+                    <label><h:outputText styleClass="text-muted" value="COMMISSION NORMALE" style="width: 100%" /></label>
+                  </div>
+            </h:panelGroup>
+            
+            <h:panelGroup rendered="#{daoController.spec}">
+               <div class="col-sm-6"><label class="pull-right">type de commission : </label></div>
+                  <div class="col-sm-4">
+                    <label><h:outputText styleClass="text-muted" value="COMMISSION SPECIALE" style="width: 100%" /></label>
+                  </div>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{daoController.comboboxCom}">
 	                <div class="form-group ">
 	                <label for="operations" class="col-sm-6 control-label"><b>type de commission <span style="color:red;"> *</span></b></label>
 	                 <div class="col-sm-4">
@@ -876,7 +889,10 @@
 					 </p:selectOneRadio>
                   </div>
 	                </div>
+	              </h:panelGroup>
+
 	              </div>
+	    
           <!-- DEBBUT PANEL COMMISSION NORMALE -->
            <h:panelGroup id="comtyp"> 
           <h:panelGroup rendered="#{daoController.comNormale}">    
@@ -913,7 +929,7 @@
     </p:dataTable> 
     </div>
     <div class="box-footer">
-     <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_presence}" action="#{daoController.savePresence()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+     <p:commandLink  styleClass="btn btn-success row pull-right" rendered="#{daoController.btn_save_presence}" action="#{daoController.savePresence()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":gnl:tbMbr, :content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer
 	      </p:commandLink>
@@ -980,7 +996,7 @@
            
            
             <!-- DEBBUT PANEL COMMISSION SPECIALE -->
-          <h:panelGroup rendered="false">  
+          <h:panelGroup rendered="#{daoController.comAutorise}">  
             <div class="col-md-12">
         <div class="row">
           <div class="box box-success box-solid">
@@ -1009,12 +1025,12 @@
 					         <p:column headerText="" styleClass="col-sm-1">
 					         
 					          <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
-				             oncomplete="PF('dlogMbrMod').show()"  title="Modifier" update=":content">
+				             oncomplete="PF('dlogMbrModComspec').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />                             
                             </p:commandLink>
 	                
-			                <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deletePresence()}" title="Supprimer" update=":content">
+			                <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deletePresenceComspec()}" title="Supprimer" update=":content">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />
@@ -1030,7 +1046,7 @@
             
              
              <h:panelGroup rendered="#{daoController.comSpeciale}"> 
-            <div class="col-md-4 col-md-offset-4">
+            <div class="col-md-5 col-md-offset-3">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-12 "><div  style="color: #fff">SAISIR LE NUMERO D'AUTORISATION</div></div> 
@@ -1039,22 +1055,48 @@
                     <div class="form-group ">
 	                  <label for="foncode" class="col-sm-5 control-label"><b> Numero d'autorisation <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-7">
-	                    <p:inputText  type="text"  styleClass="form-control" style="width: 100%"/>
+	                    <p:inputText id="autorisationCode" type="text" value="#{daoController.dao.dacAutComSpec}" styleClass="form-control" style="width: 100%">
+	                    </p:inputText>
 	                  </div>
 	                </div> 
 	                 <div class="form-group ">
 	                  <label for="foncode" class="col-sm-5 control-label"><b>Joindre l'autorisation <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-7">
 	                    	              <p:fileUpload fileUploadListener="#{daoController.uploadAtorisation}" multiple="true"
-			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
-			                      mode="advanced" dragDropSupport="true"
+			                      cancelLabel="Annuler" label="Choisir l'autorisation" uploadLabel="Charger l'autorisation" auto="true"
+			                      mode="advanced" dragDropSupport="true" update=":gnl:tabDossierCharge"
 			                           sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
 	                  </div>
 	                </div> 
+                        <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossDacListe}" emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-10">
+			            <h:outputText value="#{doss.ddaNom}" />
+			        </p:column>
+			        <p:column headerText="Actions" styleClass="col-md-2">
+                            <p:commandLink styleClass="btn btn-xs btn-success" style="background-color: #036d3b;" action="#{daoController.openDossier}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
+				            </p:commandLink>
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeAutorisation()}" title="Supprimer" update="gnl">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
+		                </p:commandLink>
+		 	        </p:column>
+			    </p:dataTable>  
+			        
+		            
+	           
 	                
 	             
                   </div>
+                   <div class="box-footer">
+                   <p:commandLink  styleClass="btn btn-success row pull-right" action="#{daoController.addCodeAutorisation()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":gnl:comtyp">
+			             <i class="ace-icon fa fa-save"></i> Valider
+	      </p:commandLink>
                   </div>
+                  </div>
+                 
            </div>
            </h:panelGroup> 
             </h:panelGroup> 
@@ -1914,7 +1956,7 @@
 	              <div class="col-sm-4">  
 					
 					      <div class="pull-right ">
-			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveMbrSpecial()}" oncomplete="PF('dlogMbrSpec').hide()" update="gnl:tbMbrSpec">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveMbrSpecial()}" oncomplete="PF('dlogMbrSpec').hide()" update="gnl:tbMbrSpec, :content">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
                      </div>
@@ -2100,6 +2142,45 @@
 					
 					      <div class="pull-right ">
 			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.updatePresence()}" oncomplete="PF('dlogMbrMod').hide()" update="gnl">
+			             <i class="ace-icon fa fa-save"></i> Modifier
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogMbrModComspec">
+	  <p:dialog  widgetVar="dlogMbrModComspec" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true">
+		<div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">#{daoController.sltCompsec.comTctLibelle}</div>
+         </div>
+         <div class="box-body">
+                <div class="form-group">
+                  <label  class="col-sm-1 control-label">Libelle</label>
+				  <div class="col-sm-11">
+                  <p:inputTextarea  value="#{daoController.sltCompsec.comTctLibelle}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
+                  </div>
+                </div>
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.updatePresenceComspec()}" oncomplete="PF('dlogMbrModComspec').hide()" update="gnl">
 			             <i class="ace-icon fa fa-save"></i> Modifier
 			            </p:commandLink>
                      </div>

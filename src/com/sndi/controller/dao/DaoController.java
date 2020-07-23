@@ -295,6 +295,7 @@ public class DaoController {
 	 private String filtreNcc ="";
 	 private String statutRetrait="";
 	 private String statutVente="";
+	 private String codeAutorisation ="";
 	 private short numLibAdr;
 	 private short numDetailAdr;
 	 private String dtaLibelle;
@@ -362,8 +363,12 @@ public class DaoController {
 	 private boolean panelMbr = true;
 	 private boolean panelExpert = false;
 	 private long laaId;
+	 private boolean comboboxCom = true;
+	 private boolean norm = false;
+	 private boolean spec = false;
 	 private boolean comNormale = true;
 	 private boolean comSpeciale = false;
+	 private boolean comAutorise = false;
 	 private String typeCommission ="N"; 
 	 private boolean etatPays = true;
 	 
@@ -465,10 +470,8 @@ public class DaoController {
 			 if(event.getOldStep().equals("critere") && event.getNewStep().equals("criterebyLot")) {
 				 factoriserLot();
 				 listeCritereByLot.clear();
-				 typeCommission ="N";
-				 comNormale = true;
-				 comSpeciale = false;
-				 checkTypeCommission();
+				 //checkCommission();
+				 //checkTypeCommission();
 			     }
 			 
 			 //Pavet Lot
@@ -721,18 +724,37 @@ public class DaoController {
 		 iservice.updateObject(dao);
 	 }
 	 
+	 //Controle pour s'assurer que l'utilsateur apres avoir choisir et saisir ne reviennen choisir une autre commissionpas 
+	/* public void checkCommission() {
+		 if(listeMembre.size()>0) {
+			 norm = true; 
+			 spec = false; 
+			 comboboxCom = false;
+		 }
+		 if(listeMembreComSpec.size()>0) {
+			 norm = false; 
+			 spec = true; 
+			 comboboxCom = false;
+		 }else {
+			 comboboxCom = true;
+			 norm = false;
+			 spec = false;  
+		 }	
+	 }*/
+	 
 	 public void checkTypeCommission() { 
 		 if(typeCommission.equalsIgnoreCase("N")) {
 			  comNormale = true;
 			  comSpeciale = false;
+			  comAutorise = false;
 			 
 		 }else
 		 {
 			 comNormale = false;
+			 comAutorise = false;
 			 comSpeciale = true; 
-		 }
-				  
-			
+			 
+		 }	
 		 _logger.info("typeCommission: "+typeCommission);	
 	 }
 	 
@@ -1923,8 +1945,18 @@ public class DaoController {
 		    public void removeDossier(){
 			downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaReference(), selectedDossier.getDdaReference());
 				 iservice.deleteObject(selectedDossier);
-				 
 				 chargeDossier();	
+				 
+			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDdaReference()+" supprimé!", "");
+				FacesContext.getCurrentInstance().addMessage(null, msg);	
+			}
+		    
+		    
+		    //Supprimer un dao joint
+		    public void removeAutorisation(){
+			downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaReference(), selectedDossier.getDdaReference());
+				 iservice.deleteObject(selectedDossier);
+				 chargeDossierAutorisation();	
 				 
 			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDdaReference()+" supprimé!", "");
 				FacesContext.getCurrentInstance().addMessage(null, msg);	
@@ -2057,7 +2089,7 @@ public class DaoController {
 
 						 //Liste des membres de la commssions
 						 public void chargeMembres() {
-							 listeMembreComSpec = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
+							 listeMembre = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
 									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
 									_logger.info("listeMembre size: "+listeMembre.size());				
 						 }
@@ -2099,9 +2131,14 @@ public class DaoController {
 									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 									newcomSpec.setComTcoCode("COJ");
 									iservice.addObject(newcomSpec);
+									norm = true; 
+									spec = false; 
+									comboboxCom = false;
 								}
 								//chargeExpert();
 								chargeMembres();
+								
+								//checkCommission();
 								btn_ad_expert = true;
 								btn_dao = true;
 								 //Message de confirmation
@@ -2122,9 +2159,27 @@ public class DaoController {
 								
 							}
 				 	
+				 	public void updatePresenceComspec() {          
+				 		iservice.updateObject(sltCompsec);
+				 		chargeMembresComSpec();	
+								 userController.setTexteMsg("Modification éffectuée avec succès!");
+				  		            userController.setRenderMsg(true);
+				  		            userController.setSevrityMsg("success");
+								
+							}
+				 	
 				 	public void deletePresence() {   
 				 		iservice.deleteObject(sltCompsec);
 				 		chargeMembres();	
+						userController.setTexteMsg("Suppression éffectuée avec succès!");
+				  		userController.setRenderMsg(true);
+				  		userController.setSevrityMsg("success");
+								
+							}
+				 	
+				 	public void deletePresenceComspec() {   
+				 		iservice.deleteObject(sltCompsec);
+				 		chargeMembresComSpec();		
 						userController.setTexteMsg("Suppression éffectuée avec succès!");
 				  		userController.setRenderMsg(true);
 				  		userController.setSevrityMsg("success");
@@ -2150,6 +2205,7 @@ public class DaoController {
 								}
 								//chargeExpert();
 								chargeMembres();
+								
 								userController.setTexteMsg("Expert(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
@@ -2173,11 +2229,16 @@ public class DaoController {
 									//newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
 									newcomSpec.setComDteSaisi(Calendar.getInstance().getTime());
 									newcomSpec.setComTctCode(mbr.getTctCode());
+									newcomSpec.setComTctTitre(mbr.getTctTitre());
+									newcomSpec.setComTctLibelle(mbr.getTctLibelle());
 									newcomSpec.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 									newcomSpec.setComDacCode(dao.getDacCode());
 									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 									newcomSpec.setComTcoCode("COJ");
 									iservice.addObject(newcomSpec);
+									norm = false; 
+									spec = true; 
+									comboboxCom = false;
 								}
 								//chargeExpert();
 								chargeMembresComSpec();
@@ -3801,20 +3862,19 @@ public class DaoController {
 									@Transactional
 										public void uploadAtorisation(FileUploadEvent event) throws java.io.FileNotFoundException { 
 										 //condition de chargement d'un document : Nature sélectionnée 
-										 if((docNature == null || "".equals(docNature))){
-											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
+									/*	 if((codeAutorisation == null || "".equals(codeAutorisation))){
+											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir le code d'autorisation SVP! ","");
 											FacesContext.getCurrentInstance().addMessage(null, msg);	
 											 
-											 }else {
-										
-										if(fileUploadController.handleFileUpload(event, ""+dao.getDacCode(), docNature)) {
-											
-											
-											int nat = Integer.valueOf(docNature);
-											nat =1;
+											 }else {*/
+												 
+												 
+													 
+										if(fileUploadController.handleFileUpload(event, ""+dao.getDacCode(), "AUS")) {
+											int nat = Integer.valueOf(7);
 											//check le dossier s'il existe à faire
 											//TDossierDacs dos =new TDossierDacs(); //TNatureDocuments
-											dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+											dos.setDdaCommentaire(keyGen.getCodeDossier("AUS"+"-"+fileUploadController.getFileCode()+"-"));
 											dos.setTDacSpecs(dao);
 											List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 											TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
@@ -3826,18 +3886,44 @@ public class DaoController {
 											iservice.addObject(dos); 
 											
 											//chargeNatureDocTrans();
-											chargeDossierCharge();
+											chargeDossierAutorisation();
 											
-											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succés!", "");
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Document enregistré!", "");
 											FacesContext.getCurrentInstance().addMessage(null, msg);
-											chargeDossierCharge();
+											//chargeDossierCharge();
 											}else {
 												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
 												FacesContext.getCurrentInstance().addMessage(null, msg);	
 												
 											}
-										  }
+										  //}
 										}
+									
+									 public void openDossier() throws IOException{
+							       		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
+							       		   }
+									
+									//Methode de Chargement des Dossiers chez le Chargé d'Etudes
+									  public void chargeDossierAutorisation() {
+									    	 dossDacListe.clear();
+									    	 dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+									 					 new WhereClause("DDA_DAC_CODE",Comparateur.EQ,dao.getDacCode())));			
+									 	 } 
+									
+									public void addCodeAutorisation() {
+										if((dao.getDacAutComSpec() == null || "".equals(dao.getDacAutComSpec()))){
+											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir le code d'autorisation SVP! ","");
+											FacesContext.getCurrentInstance().addMessage(null, msg);	
+											 
+											 }else {
+												 iservice.updateObject(dao); 
+												 comNormale = false;
+												 comSpeciale = false;
+												 comAutorise = true;
+													
+											 }
+										
+									}
 				
 				
 									//Validation des corrections
@@ -4499,6 +4585,8 @@ public class DaoController {
 		    	 listAdresse = new ArrayList<TAdresseAvis>();
 		    	 listDetailAdresse = new ArrayList<VDetailAdresse>(); 
 		    	 listeSelectionPiecesOffres.clear();
+		    	 listeMembreComSpec.clear();
+		    	 dossDacListe.clear();
 		    	 pieceCode = "";
 		    	 //listLibelleAdresse = new ArrayList<TLibelleAdresse>();
 		    	 newDtailAdresse = new TDetailAdresseAvis();
@@ -4608,6 +4696,13 @@ public class DaoController {
 					 pavet_lot = false;
 					 pavet_offre = false;
 					 pavet_commission = false;
+					 comboboxCom = true;
+					 norm = false;
+					 spec = false;
+					 typeCommission ="N";
+					 comNormale = true;
+					 comSpeciale = false;
+					 comAutorise = false;
 				break;
 				case "dao3":
 		 			_logger.info("value: "+value+" action: "+action);
@@ -6730,6 +6825,46 @@ public class DaoController {
 
 	public void setPays(String pays) {
 		this.pays = pays;
+	}
+
+	public boolean isComAutorise() {
+		return comAutorise;
+	}
+
+	public void setComAutorise(boolean comAutorise) {
+		this.comAutorise = comAutorise;
+	}
+
+	public String getCodeAutorisation() {
+		return codeAutorisation;
+	}
+
+	public void setCodeAutorisation(String codeAutorisation) {
+		this.codeAutorisation = codeAutorisation;
+	}
+
+	public boolean isComboboxCom() {
+		return comboboxCom;
+	}
+
+	public void setComboboxCom(boolean comboboxCom) {
+		this.comboboxCom = comboboxCom;
+	}
+
+	public boolean isNorm() {
+		return norm;
+	}
+
+	public void setNorm(boolean norm) {
+		this.norm = norm;
+	}
+
+	public boolean isSpec() {
+		return spec;
+	}
+
+	public void setSpec(boolean spec) {
+		this.spec = spec;
 	}
 	
 }
