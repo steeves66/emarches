@@ -2170,7 +2170,8 @@ public class DaoController {
 				 	
 				 	public void deletePresence() {   
 				 		iservice.deleteObject(sltCompsec);
-				 		chargeMembres();	
+				 		chargeMembres();
+				 		activieComboxAutoNorm();
 						userController.setTexteMsg("Suppression éffectuée avec succès!");
 				  		userController.setRenderMsg(true);
 				  		userController.setSevrityMsg("success");
@@ -2179,7 +2180,8 @@ public class DaoController {
 				 	
 				 	public void deletePresenceComspec() {   
 				 		iservice.deleteObject(sltCompsec);
-				 		chargeMembresComSpec();		
+				 		chargeMembresComSpec();	
+				 		activieComboxAutoSpec();
 						userController.setTexteMsg("Suppression éffectuée avec succès!");
 				  		userController.setRenderMsg(true);
 				  		userController.setSevrityMsg("success");
@@ -2246,8 +2248,8 @@ public class DaoController {
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
-								btn_save_presence = false;
-								btn_save_expert = false;
+								//btn_save_presence = false;
+								//btn_save_expert = false;
 								panelMbr = false;
 								panelExpert = true;
 							}
@@ -3923,6 +3925,22 @@ public class DaoController {
 													
 											 }
 										
+									}
+									
+									public void activieComboxAutoSpec() {
+										if(listeMembreComSpec.size()==0) {
+											comboboxCom =true;
+											spec = false;
+											norm=false;
+										}
+									}
+									
+									public void activieComboxAutoNorm() {
+										if(listeMembre.size()==0) {
+											comboboxCom =true;
+											spec = false;
+											norm=false;
+										}
 									}
 				
 				
