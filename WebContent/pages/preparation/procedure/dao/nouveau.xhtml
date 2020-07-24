@@ -262,15 +262,20 @@
 				    
 				     <!-- <div class="col-sm-9">  -->
                      <p:selectOneRadio value="#{daoController.choixTaux}" id="console12" unselectable="true">
-                        <p:ajax  listener="#{daoController.checkTaux()}" update="gnl:libtaux" />
+                        <p:ajax  listener="#{daoController.checkMargeMsg()}" update="gnl:margeP" />
 			            <f:selectItem itemLabel="Marge de Préférence" itemValue="marge" />
 			        </p:selectOneRadio>
                   <!-- </div> -->
 				     </td>
-				          
+				    <h:panelGroup  rendered="false">     
 				    <h:panelGroup  id="libtaux">
 				     <td><h:panelGroup rendered="#{daoController.libelleTaux}" id="taux">Taux :</h:panelGroup> </td>
 				     <td style="width: 80px"><h:panelGroup  rendered="#{daoController.etatTaux}"><p:inputText type="text" value="#{daoController.newAvis.aaoTaux}" styleClass="form-control"/></h:panelGroup> </td>
+				    </h:panelGroup>
+				    </h:panelGroup>
+				      <h:panelGroup  id="margeP">
+				     <td><h:panelGroup rendered="#{daoController.libelleTaux}" id="margeP">Message :</h:panelGroup> </td>
+				     <td style="width: 80px"><h:panelGroup  rendered="#{daoController.etatTaux}"><p:inputText type="text" value="#{daoController.marge.parVal}" styleClass="form-control"/></h:panelGroup> </td>
 				    </h:panelGroup>
 				     </tr>
 				     </table>

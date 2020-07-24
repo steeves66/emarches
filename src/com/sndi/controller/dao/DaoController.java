@@ -3144,6 +3144,13 @@ public class DaoController {
 							 libelleTaux = true;
 						 }
 					 }
+					 
+					 public void checkMargeMsg() {
+						 if(choixTaux.equalsIgnoreCase("marge")) { 
+							 etatTaux = true; 
+							 libelleTaux = true;
+						 }
+					 }
 				 
 					//Téléchargement des DAO type après la saisie du DAO					
 						public void opendaoType() throws IOException{
