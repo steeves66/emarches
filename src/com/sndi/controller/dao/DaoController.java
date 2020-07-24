@@ -299,6 +299,7 @@ public class DaoController {
 	 private long totalMontantCaution;
 	 private String pidCod;
 	 private String observation="";
+	 private String imputation="";
 	 private String filtreNcc ="";
 	 private String statutRetrait="";
 	 private String statutVente="";
@@ -2840,15 +2841,15 @@ public class DaoController {
 					  
 				//FIN GESTION DES MODIFICATIONS
 				  
-				  public void chargeLots(){
-						 //getListeDAO().clear();
-						 listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")), 
-								 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
-								 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
-							_logger.info("listeLots size: "+listeLots.size());	
-							//montantTotalLot();
-							lotTotal = getNbreLotTotal();
-					}
+					  public void chargeLots(){
+							 //getListeDAO().clear();
+							 listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")), 
+									 new WhereClause("LAA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+									 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+newAvis.getAaoCode()));
+								_logger.info("listeLots size: "+listeLots.size());	
+								//montantTotalLot();
+								lotTotal = getNbreLotTotal();
+						}
 				   
 				  
 				   //le nombre de lots pour cet avis en cours
@@ -2873,14 +2874,15 @@ public class DaoController {
 							_logger.info("objetListe size: "+listeLots.size());	
 					}
 				  
-				  //Methode de Génération des Lots   
+				   //Methode de Génération des Lots   
 				     public void genererLot() {  
 				    	 if(newAvis.getAaoNbrLot() > lotTotal) {
 				    		 newVbTemp.setTempLaaAaoCode(newAvis.getAaoCode());
 				        	 newVbTemp.setTempLaaDacCode(dao.getDacCode());
 				    		  newVbTemp.setTempLaaDteSaisi(Calendar.getInstance().getTime());
-				    		  newVbTemp.setTempLaaMtLot("0");
-				    		  newVbTemp.setTempLaaCautLot("0");
+				    		  //newVbTemp.setTempLaaMtLot("0");
+				    		  //newVbTemp.setTempLaaCautLot("0");
+				    		  newVbTemp.setTempLaaImputation(imputation);
 				    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(newAvis.getAaoNbrLot()));//Convertir un long en String
 				    		  newVbTemp.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 				    		  newVbTemp.setTempType("LOT");
@@ -7104,6 +7106,14 @@ public class DaoController {
 
 	public void setConfirmInter(boolean confirmInter) {
 		this.confirmInter = confirmInter;
+	}
+
+	public String getImputation() {
+		return imputation;
+	}
+
+	public void setImputation(String imputation) {
+		this.imputation = imputation;
 	}
 	
 }

@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 24 juil. 2020 11:10:04 by Hibernate Tools 4.3.5.Final
+// Generated 24 juil. 2020 12:35:37 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,45 +18,68 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_MARGE_DE_PREFERENCE")
 public class VMargeDePreference implements java.io.Serializable {
 
-	private BigDecimal parId;
-	private String parLibelle;
-	private String parVal;
+	private BigDecimal id;
+	private BigDecimal margePrefMin;
+	private BigDecimal margePefMax;
+	private String margePefText;
+	private BigDecimal tauxMargePref;
 
 	public VMargeDePreference() {
 	}
 
-	public VMargeDePreference(BigDecimal parId, String parLibelle, String parVal) {
-		this.parId = parId;
-		this.parLibelle = parLibelle;
-		this.parVal = parVal;
+	public VMargeDePreference(BigDecimal id, BigDecimal margePrefMin, BigDecimal margePefMax, String margePefText,
+			BigDecimal tauxMargePref) {
+		this.id = id;
+		this.margePrefMin = margePrefMin;
+		this.margePefMax = margePefMax;
+		this.margePefText = margePefText;
+		this.tauxMargePref = tauxMargePref;
 	}
 
 	@Id
-	@Column(name = "PAR_ID", precision = 22, scale = 0)
-	public BigDecimal getParId() {
-		return this.parId;
+	@Column(name = "ID", precision = 22, scale = 0)
+	public BigDecimal getId() {
+		return this.id;
 	}
 
-	public void setParId(BigDecimal parId) {
-		this.parId = parId;
+	public void setId(BigDecimal id) {
+		this.id = id;
 	}
 
-	@Column(name = "PAR_LIBELLE", length = 200)
-	public String getParLibelle() {
-		return this.parLibelle;
+	@Column(name = "MARGE_PREF_MIN", precision = 22, scale = 0)
+	public BigDecimal getMargePrefMin() {
+		return this.margePrefMin;
 	}
 
-	public void setParLibelle(String parLibelle) {
-		this.parLibelle = parLibelle;
+	public void setMargePrefMin(BigDecimal margePrefMin) {
+		this.margePrefMin = margePrefMin;
 	}
 
-	@Column(name = "PAR_VAL", length = 200)
-	public String getParVal() {
-		return this.parVal;
+	@Column(name = "MARGE_PEF_MAX", precision = 22, scale = 0)
+	public BigDecimal getMargePefMax() {
+		return this.margePefMax;
 	}
 
-	public void setParVal(String parVal) {
-		this.parVal = parVal;
+	public void setMargePefMax(BigDecimal margePefMax) {
+		this.margePefMax = margePefMax;
 	}
-	
+
+	@Column(name = "MARGE_PEF_TEXT", length = 4000)
+	public String getMargePefText() {
+		return this.margePefText;
+	}
+
+	public void setMargePefText(String margePefText) {
+		this.margePefText = margePefText;
+	}
+
+	@Column(name = "TAUX_MARGE_PREF", precision = 22, scale = 0)
+	public BigDecimal getTauxMargePref() {
+		return this.tauxMargePref;
+	}
+
+	public void setTauxMargePref(BigDecimal tauxMargePref) {
+		this.tauxMargePref = tauxMargePref;
+	}
+
 }
