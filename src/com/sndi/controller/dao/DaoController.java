@@ -4223,13 +4223,20 @@ public class DaoController {
 																			}
 																			
 													               if(pays == null) {
-												 		              newCandidat.setCanRepCode(paieCode);   
+												 		               newCandidat.setCanRepCode(paieCode);   
 												 		               }else {
 												 		                newCandidat.setCanRepCode(pays);  
-												 		            }
-													               newCandidat.setCanSouNcc(newSouncc);
+												 		                }
+													               if(soumission == null) {
+												 		            	 newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
+													 		             newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());  
+												 		               }else {
+												 		            	  newCandidat.setCanSouNcc(newSouncc);
+													 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
+												 		               }
+													               //newCandidat.setCanSouNcc(newSouncc);
+													               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-													               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 													               iservice.addObject(newCandidat);
 													               
@@ -4252,15 +4259,6 @@ public class DaoController {
 													                      iservice.addObject(venteDetail);
 											     			  				    }
 											     			  		    
-											     			  		      
-												                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
-												                            /*  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-														  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-														  				      if (!listDao.isEmpty()) {
-														  					     newDao= listDao.get(0);
-														  					     newDao.setTStatut(new TStatut("RET"));
-														  			             iservice.updateObject(newDao); 
-														  	   	                 }*/
 														  				      
 														  				    //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("RET");
@@ -4299,16 +4297,24 @@ public class DaoController {
 																				iservice.updateObject(soumission);
 																			}
 											 				        
-											 				        String exo=chaine+String.valueOf(year)+mois;
+											 				       String exo=chaine+String.valueOf(year)+mois;
 											 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
 											 		               if(pays == null) {
 											 		            	  newCandidat.setCanRepCode(paieCode);   
 											 		               }else {
 											 		            	  newCandidat.setCanRepCode(pays);  
 											 		               }
+											 		               
+											 		               if(soumission == null) {
+											 		            	  newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
+												 		              newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());  
+											 		               }else {
+											 		            	  newCandidat.setCanSouNcc(newSouncc);
+												 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
+											 		               }
 											 		               //newCandidat.setCanRepCode(paieCode);
-											 		               newCandidat.setCanSouNcc(newSouncc);
-											 		               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
+											 		               //newCandidat.setCanSouNcc(newSouncc);
+											 		               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
 											 		               
@@ -4330,26 +4336,23 @@ public class DaoController {
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
-											 	                             
-											 			  				      
 											 			  				        //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
 												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
-											 			  				      
 											     			  				    
 											     			  				   //Activation du bouton édition du récu
 											     			  				   confirmPaie = true;
 											     			  				   etatRecu = true;
 											     			  				   
-											     			  				//Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
+											     			  				   //Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
 											     			  				   getDaoVenteTotal();
 													 						   totalNbreVente = getDaoVenteTotal();
 													 						   newDao.setDacNbreAchat(totalNbreVente);
 													 						   iservice.updateObject(newDao);
 											     			  				   
-											     			  				  //Actualisation du Tableau de Bord
-											     			 		          typeActionTb();
+											     			  				   //Actualisation du Tableau de Bord
+											     			 		           typeActionTb();
 											     			 		          
 											     			 		           chargeData();
 											      			  				   //Message de Confirmation
@@ -4357,10 +4360,7 @@ public class DaoController {
 											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
-													        	 
-													         }
-												    	  
-												    	  
+													                 }
 												                   }    
 											                }
 											  //Fin Methode de Paiement
