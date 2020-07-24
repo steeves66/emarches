@@ -240,7 +240,7 @@
 		                                  <p:column headerText="PRESENCE" styleClass="col-sm-2"  >
                                             <p:cellEditor>
                                              <f:facet name="output">
-         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme}" />
+         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'O'?'OUI':'NON'}" />
          				                         </f:facet>
          				                             <f:facet name="input">
 	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
