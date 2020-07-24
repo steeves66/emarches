@@ -138,7 +138,7 @@
 		                  
 		                  
 		                   <div class="form-group horizontal">
-		                      <label for="ncc1" class="col-sm-6 control-label text-center"><b>Êtes-vous une entreprise : ?<span style="color:red;"> *</span></b></label>
+		                      <label for="ncc1" class="col-sm-6 control-label text-center"><b style="font-size: 16px">Êtes-vous une entreprise : <span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-6">
 		                         <p:selectOneRadio id="operation" value="#{daoController.sitDac}">
 		                            <p:ajax listener="#{daoController.checkVente()}" update="gnl:ncc1, gnl:ncc2, gnl:idPays"/>
@@ -193,9 +193,7 @@
 		                      
 		                     <label for="sigle1" class="col-sm-2 control-label text-right"><b>SIGLE :</b></label>
 		                      <div class="col-sm-5">
-		                        <p:inputText   type="text" readonly="true" styleClass="form-control" value="#{daoController.newCandidat.canSouSigleSte}" id="sigle1" style="width: 100%" >
-		                        <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-		                        </p:inputText>
+		                        <p:inputText   type="text" styleClass="form-control" value="#{daoController.newCandidat.canSouSigleSte}" id="sigle1" style="width: 100%" />
 		                      </div>
 		                  </div>  
 		                  
@@ -296,6 +294,11 @@
 	             <div class="box-footer">
 	             
 				   <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.confirmPaie}" action="#{daoController.payer()}" style="background-color: #036d3b; color:#fff" update=":content">
+				   <p:confirm header="Confirmation" message="Confirmez vous le paiement?" icon="ui-icon-alert" />
+				   <i class="ace-icon fa fa-save bigger-120"></i> Confirmer <h:panelGroup rendered="#{daoController.btn_titre_paie}">Paiement</h:panelGroup><h:panelGroup rendered="#{daoController.btn_titre_retrait}"> Retrait</h:panelGroup>										        	
+				   </p:commandLink>
+				   
+				   <p:commandLink styleClass="btn btn-success mr10 pull-right" rendered="#{daoController.confirmInter}" action="#{daoController.payerInt()}" style="background-color: #036d3b; color:#fff" update=":content">
 				   <p:confirm header="Confirmation" message="Confirmez vous le paiement?" icon="ui-icon-alert" />
 				   <i class="ace-icon fa fa-save bigger-120"></i> Confirmer <h:panelGroup rendered="#{daoController.btn_titre_paie}">Paiement</h:panelGroup><h:panelGroup rendered="#{daoController.btn_titre_retrait}"> Retrait</h:panelGroup>
 																        	

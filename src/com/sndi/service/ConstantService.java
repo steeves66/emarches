@@ -379,14 +379,16 @@ public class ConstantService {
 					//LISTE DES PAYS
 					public void chargePaysTable(){
 						listePays.clear();
-						listePays =(List<VbPaysReference>) iservice.getObjectsByColumn("VbPaysReference", new ArrayList<String>(Arrays.asList("REP_CODE")));
+						listePays=(List<VbPaysReference>) iservice.getObjectsNotIn("VbPaysReference", new ArrayList<String>(Arrays.asList("REP_CODE")),
+		        				"REP_CODE", new ArrayList<String>(Arrays.asList("CIV")));
 							HashMap<String, VbPaysReference> aMap = new HashMap<String, VbPaysReference>();
 							for (VbPaysReference pa: listePays) {
 								aMap.put(""+pa.getRepCode(), pa);
 							}
 							HM_LISTE_PAYS =  Collections.unmodifiableMap(aMap);	
-							_logger.info("HM_LISTE_PAYS.size :"+ HM_LISTE_PAYS.size());	
-						}
+							_logger.info("HM_LISTE_PAYS.size :"+ HM_LISTE_PAYS.size());
+					        	
+					        }
 						
 						public VbPaysReference getListePays(String REP_CODE){
 							return HM_LISTE_PAYS.get(REP_CODE);

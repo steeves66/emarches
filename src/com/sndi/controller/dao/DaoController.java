@@ -452,6 +452,7 @@ public class DaoController {
 	  private boolean infoNcc = false;
 	  private boolean panelNcc1 = false;
 	  private boolean panelNcc2 = false;
+	  private boolean confirmInter = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -4194,11 +4195,17 @@ public class DaoController {
 													 panelNcc1 = true;
 													 panelNcc2 = false;
 													 etatPays = false;
+													 confirmInter = false;
+													 confirmPaie = true;
 												 }else 
 												      if(sitDac.equalsIgnoreCase("Int")){
 												    	  panelNcc1 = false;
 														  panelNcc2 = true;
 														  etatPays = true;
+														  pays = "";
+														  newSouncc = "";
+														  confirmInter = true;
+														  confirmPaie = false;
 												 }
 											 }
 										   
@@ -4236,12 +4243,12 @@ public class DaoController {
 																				iservice.updateObject(soumission);
 																			}
 																			
-													               if(pays == null) {
+													               if(pays.equalsIgnoreCase("")) {
 												 		               newCandidat.setCanRepCode(paieCode);   
 												 		               }else {
 												 		                newCandidat.setCanRepCode(pays);  
 												 		                }
-													               if(soumission == null) {
+													               if(newSouncc.equalsIgnoreCase("")) {
 												 		            	 newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
 													 		             newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());  
 												 		               }else {
@@ -4280,7 +4287,8 @@ public class DaoController {
 												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
 														  				
 											    			  				 //Activation du bouton édition du récu
-												     			  				   confirmPaie = true; 
+												     			  				   confirmPaie = true;
+												     			  				  confirmInter = false;
 												     			  				   etatRecu = false;
 											    			  				  //Actualisation du Tableau de Bord
 											    			 		          typeActionTb();
@@ -4319,7 +4327,7 @@ public class DaoController {
 											 		            	  newCandidat.setCanRepCode(pays);  
 											 		               }
 											 		               
-											 		               if(soumission == null) {
+											 		               if(newSouncc == null) {
 											 		            	  newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
 												 		              newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());  
 											 		               }else {
@@ -4357,6 +4365,7 @@ public class DaoController {
 											     			  				    
 											     			  				   //Activation du bouton édition du récu
 											     			  				   confirmPaie = true;
+											     			  				   confirmInter = false;
 											     			  				   etatRecu = true;
 											     			  				   
 											     			  				   //Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
@@ -4378,6 +4387,147 @@ public class DaoController {
 												                   }    
 											                }
 											  //Fin Methode de Paiement
+											  
+											  
+											//Methode de paiement pour entreprise internationale
+											  @Transactional
+											  public void payerInt() {
+												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || sitDac == null) {
+													//Message d'erreur
+														FacesContext.getCurrentInstance().addMessage(null,
+																new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat ou choisir votre option", ""));
+													  
+												      }else { 
+												    	  
+												    	  //Contrôle sur la vente ou le retrait
+													         if(newDao.getDacCout() == 0) {
+													        	 String mois="";
+															        Calendar c = Calendar.getInstance();
+															        int year = c.get(Calendar.YEAR);
+															        int month= c.get(Calendar.MONTH)+1;
+															        String chaine="P";
+															        if(month<10) {
+															        mois="0"+String.valueOf(month);
+															        }else {
+																	mois=String.valueOf(month);
+																    }
+															        
+															       String exo=chaine+String.valueOf(year)+mois;
+												 		           newCandidat.setCanRepCode(paieCode);   
+												 		           newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
+													 		       newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());  
+													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
+													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+													               iservice.addObject(newCandidat);
+													               
+													               newVente.setVenPaieCode(keyGen.getNumVente(exo));
+													               newVente.setVenDteSaisi(Calendar.getInstance().getTime());
+													               newVente.setTModeReglement(new TModeReglement("ESP"));
+													               newVente.setTOperateur(userController.getSlctd().getTOperateur());
+													               newVente.setTCandidats(newCandidat);
+													               iservice.addObject(newVente);
+													               
+												
+													                //Recupération du DAO dans T_DAC_SPECS
+														            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+											     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+											     			  		    if (!listDao.isEmpty()) {
+											     			  			  newDao= listDao.get(0);
+											     			  			  venteDetail.setTVenteDac(newVente);
+											     			  			  venteDetail.setDveCout(montantRetrait);
+													        	          venteDetail.setTDacSpecs(newDao);
+													                      iservice.addObject(venteDetail);
+											     			  				    }
+											     			  		    
+														  				      
+														  				    //Récupération du Statut
+												 						        TStatut statuts = constantService.getStatut("RET");
+												 							  	//Historisation du / des retraits
+												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
+														  				
+											    			  				 //Activation du bouton édition du récu
+												 						      confirmPaie = false;
+											     			  				  confirmInter = true;
+											     			  				  etatRecu = false;
+											    			  				  //Actualisation du Tableau de Bord
+											    			 		          typeActionTb();
+													                    	  
+											     			  				   //Message de Confirmation
+											     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
+											     					           userController.setTexteMsg("Retrait effectué avec succès");
+											     							   userController.setRenderMsg(true);
+											     							   userController.setSevrityMsg("success");	
+													         }else {
+													        	 
+													        	    String mois="";
+											 				        Calendar c = Calendar.getInstance();
+											 				        int year = c.get(Calendar.YEAR);
+											 				        int month= c.get(Calendar.MONTH)+1;
+											 				        String chaine="P";
+											 				        if(month<10) {
+											 				        mois="0"+String.valueOf(month);
+											 				        }else {
+											 						mois=String.valueOf(month);
+											 					    }
+											 				        
+											 				     
+											 				       String exo=chaine+String.valueOf(year)+mois;
+											 		               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
+											 		               newCandidat.setCanRepCode(paieCode);  
+											 		               newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
+												 		           newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());  
+											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+											 		               iservice.addObject(newCandidat);
+											 		               
+											 		               newVente.setVenPaieCode(keyGen.getNumVente(exo));
+											 		               newVente.setVenDteSaisi(Calendar.getInstance().getTime());
+											 		               newVente.setTModeReglement(new TModeReglement("ESP"));
+											 		               newVente.setTOperateur(userController.getSlctd().getTOperateur());
+											 		               newVente.setTCandidats(newCandidat);
+											 		               iservice.addObject(newVente);
+											 		                    
+											 		                //Recupération du DAO dans T_DAC_SPECS
+											 			            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+											      			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+											      			  		    if (!listDao.isEmpty()) {
+											      			  			  newDao= listDao.get(0);
+											      			  			  venteDetail.setTVenteDac(newVente);
+											      			  			  venteDetail.setDveCout(newDao.getDacCout());
+											 		        	          venteDetail.setTDacSpecs(newDao);
+											 		                      iservice.addObject(venteDetail);
+											      			  				    }
+											      			  		    
+											 			  				        //Récupération du Statut
+												 						        TStatut statuts = constantService.getStatut("DVE");
+												 							  	//Historisation du / des retraits
+												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
+											     			  				 
+												 						       //Activation du bouton édition du récu
+													 						   confirmPaie = false;
+												     			  			   confirmInter = true;
+												     			  			   etatRecu = true;
+											     			  				   
+											     			  				   //Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
+											     			  				   getDaoVenteTotal();
+													 						   totalNbreVente = getDaoVenteTotal();
+													 						   newDao.setDacNbreAchat(totalNbreVente);
+													 						   iservice.updateObject(newDao);
+											     			  				   
+											     			  				   //Actualisation du Tableau de Bord
+											     			 		           typeActionTb();
+											     			 		          
+											     			 		           chargeData();
+											      			  				   //Message de Confirmation
+											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectué avec succès", ""));
+											      					           userController.setTexteMsg("Paiement effectué avec succès");
+											      							   userController.setRenderMsg(true);
+											      							   userController.setSevrityMsg("success");
+													                 }
+												                   }    
+											                }
+											  //Fin Methode de Paiement
+											  				  
+								
 											  
 											//Nombre de vente pour un DAO x
 											  public int getDaoVenteTotal(){
@@ -6946,6 +7096,14 @@ public class DaoController {
 
 	public void setPanelNcc2(boolean panelNcc2) {
 		this.panelNcc2 = panelNcc2;
+	}
+
+	public boolean isConfirmInter() {
+		return confirmInter;
+	}
+
+	public void setConfirmInter(boolean confirmInter) {
+		this.confirmInter = confirmInter;
 	}
 	
 }
