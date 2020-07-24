@@ -141,7 +141,7 @@
 		                      <label for="ncc1" class="col-sm-6 control-label text-center"><b>Êtes-vous une entreprise : ?<span style="color:red;"> *</span></b></label>
 		                      <div class="col-sm-6">
 		                         <p:selectOneRadio id="operation" value="#{daoController.sitDac}">
-		                            <p:ajax listener="#{daoController.checkVente()}" update="gnl:ncc1, gnl:ncc2, gnl:idPays" />
+		                            <p:ajax listener="#{daoController.checkVente()}" update="gnl:ncc1, gnl:ncc2, gnl:idPays"/>
 								      <f:selectItem itemLabel="INTERNATIONALE" itemValue="Int" />
 								       <f:selectItem itemLabel="NATIONALE" itemValue="Nat" />
 								   </p:selectOneRadio>

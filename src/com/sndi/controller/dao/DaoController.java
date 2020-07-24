@@ -450,6 +450,8 @@ public class DaoController {
 	  private boolean btn_titre_paie = false;
 	  private boolean btn_titre_retrait = false;
 	  private boolean infoNcc = false;
+	  private boolean panelNcc1 = false;
+	  private boolean panelNcc2 = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -4186,12 +4188,17 @@ public class DaoController {
 										  
 										  
 										  
+										   //Methode de vérification
 										   public void checkVente() {
-												 if(sitDac.equalsIgnoreCase("Retrait")) { 
-													 confirmVente = false;
+												 if(sitDac.equalsIgnoreCase("Nat")) { 
+													 panelNcc1 = true;
+													 panelNcc2 = false;
+													 etatPays = false;
 												 }else 
-												      if(sitDac.equalsIgnoreCase("Vente")){
-													 confirmVente = true; 
+												      if(sitDac.equalsIgnoreCase("Int")){
+												    	  panelNcc1 = false;
+														  panelNcc2 = true;
+														  etatPays = true;
 												 }
 											 }
 										   
@@ -4199,7 +4206,7 @@ public class DaoController {
 										 //Methode de paiement
 											  @Transactional
 											  public void payer() {
-												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || paieCode == null) {
+												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || sitDac == null) {
 													//Message d'erreur
 														FacesContext.getCurrentInstance().addMessage(null,
 																new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat ou choisir votre option", ""));
@@ -6923,6 +6930,22 @@ public class DaoController {
 
 	public void setMarge(VMargeDePreference marge) {
 		this.marge = marge;
+	}
+
+	public boolean isPanelNcc1() {
+		return panelNcc1;
+	}
+
+	public void setPanelNcc1(boolean panelNcc1) {
+		this.panelNcc1 = panelNcc1;
+	}
+
+	public boolean isPanelNcc2() {
+		return panelNcc2;
+	}
+
+	public void setPanelNcc2(boolean panelNcc2) {
+		this.panelNcc2 = panelNcc2;
 	}
 	
 }
