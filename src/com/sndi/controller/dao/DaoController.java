@@ -3162,6 +3162,7 @@ public class DaoController {
 					 }
 					 
 					 public void checkMargeMsg() {
+						 chargeMsgMarge();
 						 if(choixTaux.equalsIgnoreCase("marge")) { 
 							 etatTaux = true; 
 							 libelleTaux = true;
@@ -4453,7 +4454,7 @@ public class DaoController {
 											     			  				    }
 											     			  		    
 														  				      
-														  				    //Récupération du Statut
+														  				     //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("RET");
 												 							  	//Historisation du / des retraits
 												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
