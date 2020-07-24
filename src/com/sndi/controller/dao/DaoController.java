@@ -371,6 +371,8 @@ public class DaoController {
 	 private boolean comAutorise = false;
 	 private String typeCommission ="N"; 
 	 private boolean etatPays = true;
+	 private boolean panelNcc1 = false;
+	 private boolean panelNcc2 = false;
 	 
 	//Booléens
 	  private boolean skip;
@@ -4161,13 +4163,17 @@ public class DaoController {
 										  
 										  
 										  
-										  
+										  //Methode 
 										   public void checkVente() {
-												 if(sitDac.equalsIgnoreCase("Retrait")) { 
-													 confirmVente = false;
+												 if(sitDac.equalsIgnoreCase("Nat")) { 
+													 panelNcc1= true;
+													 panelNcc2= false;
+													 etatPays = false;
 												 }else 
-												      if(sitDac.equalsIgnoreCase("Vente")){
-													 confirmVente = true; 
+												      if(sitDac.equalsIgnoreCase("Int")){
+												    	  panelNcc1= false;
+														  panelNcc2= true;
+														  etatPays = true;
 												 }
 											 }
 										   
@@ -4175,7 +4181,7 @@ public class DaoController {
 										 //Methode de paiement
 											  @Transactional
 											  public void payer() {
-												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || paieCode == null) {
+												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || sitDac.equalsIgnoreCase("")) {
 													//Message d'erreur
 														FacesContext.getCurrentInstance().addMessage(null,
 																new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat ou choisir votre option", ""));
@@ -4280,6 +4286,9 @@ public class DaoController {
 																				soumission=listSoumission.get(0);
 																				soumission.setSouSigleDmp(newSoumission.getSouSigleDmp());
 																				iservice.updateObject(soumission);
+																			}else {
+																				
+																				soumission = new TSoumissions();	
 																			}
 											 				        
 											 				        String exo=chaine+String.valueOf(year)+mois;
@@ -4289,9 +4298,15 @@ public class DaoController {
 											 		               }else {
 											 		            	  newCandidat.setCanRepCode(pays);  
 											 		               }
-											 		               //newCandidat.setCanRepCode(paieCode);
-											 		               newCandidat.setCanSouNcc(newSouncc);
-											 		               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
+											 		               if(soumission == null) {
+											 		            	   newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
+												 		               newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());
+											 		               }else {
+											 		            	  newCandidat.setCanSouNcc(newSouncc);
+												 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
+											 		               }
+											 		               //newCandidat.setCanSouNcc(newSouncc);
+											 		               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
 											 		               
@@ -4340,10 +4355,7 @@ public class DaoController {
 											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
-													        	 
-													         }
-												    	  
-												    	  
+													                }
 												                   }    
 											                }
 											  //Fin Methode de Paiement
@@ -4366,15 +4378,14 @@ public class DaoController {
 														soumission=listSoumission.get(0);
 														
 														 if(soumission.getSouNatInt().equalsIgnoreCase("N")) {
-															etatPays = false; 
+															//etatPays = false; 
 															pays = soumission.getSouPayCode();
 														 }else {
-															 etatPays = true; 
+															 //etatPays = true; 
 															 pays="";
 														 }
 														  
 													}else {
-														//infoNcc=false;
 														soumission = new TSoumissions();
 														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Votre NCC n'est pas inscrite dans la base des Marchés Publics, Prière prendre contact avec la CELLIOPE pour la prise en compte de votre NCC! ", "")); 	 
 													}
@@ -6883,6 +6894,22 @@ public class DaoController {
 
 	public void setSpec(boolean spec) {
 		this.spec = spec;
+	}
+
+	public boolean isPanelNcc1() {
+		return panelNcc1;
+	}
+
+	public void setPanelNcc1(boolean panelNcc1) {
+		this.panelNcc1 = panelNcc1;
+	}
+
+	public boolean isPanelNcc2() {
+		return panelNcc2;
+	}
+
+	public void setPanelNcc2(boolean panelNcc2) {
+		this.panelNcc2 = panelNcc2;
 	}
 	
 }
