@@ -2888,6 +2888,7 @@ public class DaoController {
 				    		  newVbTemp.setTempType("LOT");
 				    		  iservice.addObject(newVbTemp);
 				    		  chargeLots();
+				    		  montantTotalLot();
 				    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
 				    		  userController.setRenderMsg(true);
 				    		  userController.setSevrityMsg("success");
@@ -3019,6 +3020,16 @@ public class DaoController {
 				   		iservice.updateObject(getSelectLot()); 
 				   	 }
 				   	 
+				   	 //Mise a jour des elements saisies dans la liste des lots
+				   	 public void updateMontantEst() {
+				   		iservice.updateObject(getSelectLot()); 
+				   	   montantTotalLot();
+				   	 }
+				   	 
+				   //Mise a jour des elements saisies dans la liste des lots
+				   	 public void updateMontantCaut() {
+				   		iservice.updateObject(getSelectLot()); 
+				   	 }
 				   	 public void updateListeLotMontant() {
 				   		listeLots = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_ID")),
 								new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));

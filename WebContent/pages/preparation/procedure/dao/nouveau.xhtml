@@ -562,10 +562,10 @@
 				       <p:column headerText="Lieu Exécution" styleClass="col-sm-2">
 				          <p:cellEditor>
 		                <f:facet name="output">
-		                <h:outputText  styleClass="pull-right" value="#{slctdTb.laaLieuExe}" />
+		                <h:outputText value="#{slctdTb.laaLieuExe}" />
 		                </f:facet>
 		                <f:facet name="input"> 
-		                <p:inputText styleClass="text-right"  value="#{slctdTb.laaLieuExe}" style="width:100%">
+		                <p:inputText value="#{slctdTb.laaLieuExe}" style="width:100%">
 		                <p:ajax event="blur" listener="#{daoController.updateListeLotLieu()}" global="false" process="@this" update=":content" /> 
 		                </p:inputText>
 		                 </f:facet>
@@ -585,16 +585,17 @@
 		               </p:cellEditor>
 				        </p:column>
 				         
-				        <p:column headerText="Montant Estimatif" styleClass="col-sm-1">
+				        <p:column headerText="Montant Estimatif" styleClass="col-sm-1"> 
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText  styleClass="pull-right" value="#{slctdTb.laaMtEst}" >
-		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 		                </h:outputText>
 		                </f:facet>
 		                <f:facet name="input"> 
 		                <p:inputText styleClass="text-right"  value="#{slctdTb.laaMtEst}" style="width:100%">
 		                 <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                 <p:ajax event="blur" listener="#{daoController.updateMontantEst()}" global="false" process="@this" update=":content" />
 		                 </p:inputText>
 		                 </f:facet>
 		               </p:cellEditor>
@@ -605,6 +606,7 @@
 		                <f:facet name="output">
 		                <h:outputText id="mont_caut1" styleClass="pull-right" value="#{slctdTb.laaMtCaut}" >
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                <p:ajax event="blur" listener="#{daoController.updateMontantCaut()}" global="false" process="@this" update=":content" />
 		                </h:outputText>
 		                </f:facet>
 		                <f:facet name="input"> 
