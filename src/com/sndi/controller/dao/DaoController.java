@@ -4216,9 +4216,17 @@ public class DaoController {
 												 		               }else {
 												 		                newCandidat.setCanRepCode(pays);  
 												 		            }
-													               newCandidat.setCanSouNcc(newSouncc);
+													               
+													               if(soumission == null) {
+											 		            	   newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
+												 		               newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());
+											 		               }else {
+											 		            	  newCandidat.setCanSouNcc(newSouncc);
+												 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
+											 		               }
+													               //newCandidat.setCanSouNcc(newSouncc);
+													               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
-													               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 													               iservice.addObject(newCandidat);
 													               
@@ -4241,16 +4249,6 @@ public class DaoController {
 													                      iservice.addObject(venteDetail);
 											     			  				    }
 											     			  		    
-											     			  		      
-												                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
-												                            /*  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-														  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-														  				      if (!listDao.isEmpty()) {
-														  					     newDao= listDao.get(0);
-														  					     newDao.setTStatut(new TStatut("RET"));
-														  			             iservice.updateObject(newDao); 
-														  	   	                 }*/
-														  				      
 														  				    //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("RET");
 												 							  	//Historisation du / des retraits
@@ -4328,8 +4326,6 @@ public class DaoController {
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
-											 	                             
-											 			  				      
 											 			  				        //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
