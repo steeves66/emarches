@@ -37,12 +37,13 @@ public class VbAnalyseOffre implements java.io.Serializable {
 	private String anfTypeActeur;
 	private long anfValeurScore;
 	private String anfCommentaire;
+	private String anfDcadCraCle;
 
 	public VbAnalyseOffre() {
 	}
 
 	public VbAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
-			long anfLaaId, BigDecimal anfDofNum, String anfValeurConf) {
+			long anfLaaId, BigDecimal anfDofNum, String anfValeurConf,String anfDcadCraCle) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
@@ -50,11 +51,12 @@ public class VbAnalyseOffre implements java.io.Serializable {
 		this.anfLaaId = anfLaaId;
 		this.anfDofNum = anfDofNum;
 		this.anfValeurConf = anfValeurConf;
+		this.anfDcadCraCle = anfDcadCraCle;
 	}
 
 	public VbAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
 			long anfLaaId, BigDecimal anfDofNum, String anfValeurConf, String anfObser, String anfOpeMatricule,
-			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur, long anfValeurScore,String anfCommentaire) {
+			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur, long anfValeurScore,String anfCommentaire,String anfDcadCraCle) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
@@ -70,6 +72,7 @@ public class VbAnalyseOffre implements java.io.Serializable {
 		this.anfTypeActeur = anfTypeActeur;
 		this.anfValeurScore = anfValeurScore;
 		this.anfCommentaire = anfCommentaire;
+		this.anfDcadCraCle =anfDcadCraCle;
 	}
 
 	@Id
@@ -208,5 +211,14 @@ public class VbAnalyseOffre implements java.io.Serializable {
 
 	public void setAnfCommentaire(String anfCommentaire) {
 		this.anfCommentaire = anfCommentaire;
+	}
+
+	@Column(name = "ANF_DCAD_CRA_CLE")
+	public String getAnfDcadCraCle() {
+		return anfDcadCraCle;
+	}
+
+	public void setAnfDcadCraCle(String anfDcadCraCle) {
+		this.anfDcadCraCle = anfDcadCraCle;
 	}
 }

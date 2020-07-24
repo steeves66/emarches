@@ -1143,7 +1143,7 @@ public class CommissionController {
 			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
-			 			newAnalyseOffre.setAnfDanCode(ligne.getCraCode());
+			 			newAnalyseOffre.setAnfDcadCraCle(ligne.getCraCode());
 			 			//newAnalyseOffre.set
 			 			newAnalyseOffre.setAnfDofNum(sltOffre.getDofNum());
 			 			newAnalyseOffre.setAnfDteModif(Calendar.getInstance().getTime());

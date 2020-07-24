@@ -249,36 +249,36 @@
               
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
-				     <table>
-				     <tr>
-				     <td style="width: 210px"> 
+				  <div class="col-sm-1">
+			
 				     <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
 				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
 				     </p:inputText>
-				     </td>
-				     
-				     <td style="width: 210px" >
+
+				    </div>
+				     <div class="form-group"> 
+
 				    
-				     <!-- <div class="col-sm-9">  -->
+				    
                      <p:selectOneRadio value="#{daoController.choixTaux}" id="console12" unselectable="true">
                         <p:ajax  listener="#{daoController.checkMargeMsg()}" update="gnl:margeP" />
 			            <f:selectItem itemLabel="Marge de Préférence" itemValue="marge" />
 			        </p:selectOneRadio>
                   <!-- </div> -->
-				     </td>
 				    <h:panelGroup  rendered="false">     
 				    <h:panelGroup  id="libtaux">
-				     <td><h:panelGroup rendered="#{daoController.libelleTaux}" id="taux">Taux :</h:panelGroup> </td>
+				     <h:panelGroup rendered="#{daoController.libelleTaux}" id="taux">Taux :</h:panelGroup> 
 				     <td style="width: 80px"><h:panelGroup  rendered="#{daoController.etatTaux}"><p:inputText type="text" value="#{daoController.newAvis.aaoTaux}" styleClass="form-control"/></h:panelGroup> </td>
 				    </h:panelGroup>
 				    </h:panelGroup>
 				      <h:panelGroup  id="margeP">
-				     <td><h:panelGroup rendered="#{daoController.libelleTaux}" id="margeMsg">Message :</h:panelGroup> </td>
-				     <td style="width: 80px"><h:panelGroup  rendered="#{daoController.etatTaux}"><p:inputText type="text" value="#{daoController.marge.margePefText}" styleClass="form-control"/></h:panelGroup> </td>
+				    <h:panelGroup rendered="#{daoController.libelleTaux}" id="margeMsg">Message :</h:panelGroup> 
+				     <h:panelGroup  rendered="#{daoController.etatTaux}">
+				     <p:inputTextarea value="#{daoController.marge.margePefText}"  rows="2" cols="33"   styleClass="form-control" id="l3" style="width: 100%" readonly="false"/>
+				     </h:panelGroup>
 				    </h:panelGroup>
-				     </tr>
-				     </table>
+				    
+				    
 				     
                   </div>
                 </div>
@@ -595,7 +595,7 @@
 		                <f:facet name="input"> 
 		                <p:inputText styleClass="text-right"  value="#{slctdTb.laaMtEst}" style="width:100%">
 		                 <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-		                 <p:ajax event="blur" listener="#{daoController.updateMontantEst()}" global="false" process="@this" update=":content" />
+
 		                 </p:inputText>
 		                 </f:facet>
 		               </p:cellEditor>
@@ -606,7 +606,7 @@
 		                <f:facet name="output">
 		                <h:outputText id="mont_caut1" styleClass="pull-right" value="#{slctdTb.laaMtCaut}" >
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
-		                <p:ajax event="blur" listener="#{daoController.updateMontantCaut()}" global="false" process="@this" update=":content" />
+		               
 		                </h:outputText>
 		                </f:facet>
 		                <f:facet name="input"> 

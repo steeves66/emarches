@@ -2393,7 +2393,7 @@ public class DaoController {
 			    //chargement du message de la marge de préference
 			    public void chargeMsgMarge() {
 			    	listeMarge.clear();
-			    	listeMarge =(List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference", new ArrayList<String>(Arrays.asList("PAR_ID")));
+			    	listeMarge =(List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference", new ArrayList<String>(Arrays.asList("ID")));
 					if (!listeMarge.isEmpty()) {
 						marge=listeMarge.get(0);
 					}	
