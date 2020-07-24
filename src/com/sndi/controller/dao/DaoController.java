@@ -93,6 +93,7 @@ import com.sndi.model.VFonctionImputation;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VLigneLot;
+import com.sndi.model.VMargeDePreference;
 import com.sndi.model.VPieceDac;
 import com.sndi.model.VPieces;
 import com.sndi.model.VPiecesOffre;
@@ -237,6 +238,8 @@ public class DaoController {
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
 	private TCommissionSpecifique detailCom = new TCommissionSpecifique(); 
+	//MAREGE DE PREFENCE
+	private List<VMargeDePreference> listeMarge = new ArrayList<VMargeDePreference>();
 
 	 
 	//variables
@@ -282,6 +285,10 @@ public class DaoController {
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
+	
+	//MARGE DE PREFERENCE
+	private VMargeDePreference marge = new VMargeDePreference();
+	
 	//VARIABLES
 	 private long adaNum;
 	 private long rId;
@@ -371,8 +378,6 @@ public class DaoController {
 	 private boolean comAutorise = false;
 	 private String typeCommission ="N"; 
 	 private boolean etatPays = true;
-	 private boolean panelNcc1 = false;
-	 private boolean panelNcc2 = false;
 	 
 	//Booléens
 	  private boolean skip;
@@ -2379,6 +2384,16 @@ public class DaoController {
 		                 	  saveDac("PN","AMI"); 
 		                   }*/
 			     }
+			    
+			    
+			    //chargement du message de la marge de préference
+			    public void chargeMsgMarge() {
+			    	listeMarge.clear();
+			    	listeMarge =(List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference", new ArrayList<String>(Arrays.asList("PAR_ID")));
+					if (!listeMarge.isEmpty()) {
+						marge=listeMarge.get(0);
+					}	
+			    }
 		    
 		//Initiation du DAO en procédure normale 
 	     @Transactional
@@ -4163,17 +4178,13 @@ public class DaoController {
 										  
 										  
 										  
-										  //Methode 
+										  
 										   public void checkVente() {
-												 if(sitDac.equalsIgnoreCase("Nat")) { 
-													 panelNcc1= true;
-													 panelNcc2= false;
-													 etatPays = false;
+												 if(sitDac.equalsIgnoreCase("Retrait")) { 
+													 confirmVente = false;
 												 }else 
-												      if(sitDac.equalsIgnoreCase("Int")){
-												    	  panelNcc1= false;
-														  panelNcc2= true;
-														  etatPays = true;
+												      if(sitDac.equalsIgnoreCase("Vente")){
+													 confirmVente = true; 
 												 }
 											 }
 										   
@@ -4181,7 +4192,7 @@ public class DaoController {
 										 //Methode de paiement
 											  @Transactional
 											  public void payer() {
-												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || sitDac.equalsIgnoreCase("")) {
+												  if(newCandidat.getCanNom().equalsIgnoreCase("") ||newCandidat.getCanPrenoms().equalsIgnoreCase("") || paieCode == null) {
 													//Message d'erreur
 														FacesContext.getCurrentInstance().addMessage(null,
 																new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez saisir le candidat ou choisir votre option", ""));
@@ -4216,17 +4227,9 @@ public class DaoController {
 												 		               }else {
 												 		                newCandidat.setCanRepCode(pays);  
 												 		            }
-													               
-													               if(soumission == null) {
-											 		            	   newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
-												 		               newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());
-											 		               }else {
-											 		            	  newCandidat.setCanSouNcc(newSouncc);
-												 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
-											 		               }
-													               //newCandidat.setCanSouNcc(newSouncc);
-													               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
+													               newCandidat.setCanSouNcc(newSouncc);
 													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
+													               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 													               iservice.addObject(newCandidat);
 													               
@@ -4249,6 +4252,16 @@ public class DaoController {
 													                      iservice.addObject(venteDetail);
 											     			  				    }
 											     			  		    
+											     			  		      
+												                              //Mis à Jour du DAO au statut de Retrait dans T_DAC_SPECS
+												                            /*  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+														  					  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+														  				      if (!listDao.isEmpty()) {
+														  					     newDao= listDao.get(0);
+														  					     newDao.setTStatut(new TStatut("RET"));
+														  			             iservice.updateObject(newDao); 
+														  	   	                 }*/
+														  				      
 														  				    //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("RET");
 												 							  	//Historisation du / des retraits
@@ -4284,9 +4297,6 @@ public class DaoController {
 																				soumission=listSoumission.get(0);
 																				soumission.setSouSigleDmp(newSoumission.getSouSigleDmp());
 																				iservice.updateObject(soumission);
-																			}else {
-																				
-																				soumission = new TSoumissions();	
 																			}
 											 				        
 											 				        String exo=chaine+String.valueOf(year)+mois;
@@ -4296,15 +4306,9 @@ public class DaoController {
 											 		               }else {
 											 		            	  newCandidat.setCanRepCode(pays);  
 											 		               }
-											 		               if(soumission == null) {
-											 		            	   newCandidat.setCanSouNcc(newCandidat.getCanSouNcc());
-												 		               newCandidat.setCanSouSigleSte(newCandidat.getCanSouSigleSte());
-											 		               }else {
-											 		            	  newCandidat.setCanSouNcc(newSouncc);
-												 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
-											 		               }
-											 		               //newCandidat.setCanSouNcc(newSouncc);
-											 		               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
+											 		               //newCandidat.setCanRepCode(paieCode);
+											 		               newCandidat.setCanSouNcc(newSouncc);
+											 		               newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
 											 		               
@@ -4326,6 +4330,8 @@ public class DaoController {
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
+											 	                             
+											 			  				      
 											 			  				        //Récupération du Statut
 												 						        TStatut statuts = constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
@@ -4351,7 +4357,10 @@ public class DaoController {
 											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
-													                }
+													        	 
+													         }
+												    	  
+												    	  
 												                   }    
 											                }
 											  //Fin Methode de Paiement
@@ -4374,14 +4383,15 @@ public class DaoController {
 														soumission=listSoumission.get(0);
 														
 														 if(soumission.getSouNatInt().equalsIgnoreCase("N")) {
-															//etatPays = false; 
+															etatPays = false; 
 															pays = soumission.getSouPayCode();
 														 }else {
-															 //etatPays = true; 
+															 etatPays = true; 
 															 pays="";
 														 }
 														  
 													}else {
+														//infoNcc=false;
 														soumission = new TSoumissions();
 														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Votre NCC n'est pas inscrite dans la base des Marchés Publics, Prière prendre contact avec la CELLIOPE pour la prise en compte de votre NCC! ", "")); 	 
 													}
@@ -6892,20 +6902,20 @@ public class DaoController {
 		this.spec = spec;
 	}
 
-	public boolean isPanelNcc1() {
-		return panelNcc1;
+	public List<VMargeDePreference> getListeMarge() {
+		return listeMarge;
 	}
 
-	public void setPanelNcc1(boolean panelNcc1) {
-		this.panelNcc1 = panelNcc1;
+	public void setListeMarge(List<VMargeDePreference> listeMarge) {
+		this.listeMarge = listeMarge;
 	}
 
-	public boolean isPanelNcc2() {
-		return panelNcc2;
+	public VMargeDePreference getMarge() {
+		return marge;
 	}
 
-	public void setPanelNcc2(boolean panelNcc2) {
-		this.panelNcc2 = panelNcc2;
+	public void setMarge(VMargeDePreference marge) {
+		this.marge = marge;
 	}
 	
 }
