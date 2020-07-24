@@ -433,27 +433,43 @@ public class CommissionController {
 	 
 	 public void chargeCritereAnalyse() {
 		 listeCritereAnalyse.clear();
-		 listeCritereAnalyse = ((List<VCritereAnalyseDacOff>)iservice.getObjectsByColumn("VCritereAnalyseDacOff",
-				 new WhereClause("DCAD_DAC_CODE",Comparateur.EQ,""+sltOffre.getTLotAao().getTDacSpecs().getDacCode()),
-				 new WhereClause("DCAD_LAA_ID",Comparateur.EQ,""+sltOffre.getTLotAao().getLaaId()),
+		 listeCritereAnalyse = ((List<VCritereAnalyseDacOff>)iservice.getObjectsByColumn("VCritereAnalyseDacOff",new ArrayList<String>(Arrays.asList("R_ID")),
 				 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 		 _logger.info(" dof_number: "+sltOffre.getDofNum());
 		 _logger.info("dacCode dof_number: "+sltOffre.getTLotAao().getTDacSpecs().getDacCode());
 		 _logger.info("laaId : "+sltOffre.getTLotAao().getLaaId());
+		 
+		 if (!listeCritereAnalyse.isEmpty()) {
+             sltCritere= listeCritereAnalyse.get(0);
+             _logger.info("valeur: "+sltCritere.getAaoRegQual());
+             
+         	if(sltCritere.getAaoRegQual().equalsIgnoreCase("CONFORME") || sltCritere.getAaoRegQual().equalsIgnoreCase("null")) {
+				conformite=true;
+				montant =false;
+			}else
+				if(sltCritere.getAaoRegQual().equalsIgnoreCase("SCORE")) {
+					montant =true;
+					conformite=false;
+				}else
+						if(sltCritere.getAaoRegQual().equalsIgnoreCase("AUTRE")) {
+							
+						}
+               }
 	 }
 	 
 	 
 	 
+	 
 	//Liste des piecs de l'offre a l'analyse
-		 public void chargePiecesAnalyse() {
-			 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
-					// new WhereClause("POF_LAA_ID",Comparateur.EQ,""+sltOffre.getDofLaaId())));
-					 //new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
-					 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
-			 nbrLot =nonbreLot();
-			 chargeCritereAnalyse();
-			 chargeMention();
-		 }
+	 public void chargePiecesAnalyse() {
+		 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
+				// new WhereClause("POF_LAA_ID",Comparateur.EQ,""+sltOffre.getDofLaaId())));
+				 //new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
+				 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
+		 nbrLot =nonbreLot();
+		 chargeCritereAnalyse();
+		 //chargeMention();
+	 }
 		 
 		 public void controleNbrLot() {
 			if(sltOffre.getDofRangOfr()> nbrLot) {

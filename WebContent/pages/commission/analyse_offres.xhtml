@@ -237,7 +237,7 @@
 		                               <p:column headerText="PIECES" styleClass="col-sm-5">
 		                                  <h:outputText value="#{slctdTb.tpoLibelle}"/>
 		                                </p:column>
-		                                  <p:column headerText="PRESENCE" styleClass="col-sm-2" rendered="#{commissionController.conformite}" >
+		                                  <p:column headerText="PRESENCE" styleClass="col-sm-2"  >
                                             <p:cellEditor>
                                              <f:facet name="output">
          				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme}" />
@@ -322,11 +322,7 @@
 	                    </div>
 	                    
 	                    
-	                    
-	                    
-	                    
-	                    
-	                    
+	                                
 	                    
 	        <div class="col-md-7">
 	         <div class="box box-success box-solid">
@@ -338,10 +334,12 @@
 	            <div class="box-body">
 	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}"  emptyMessage="Aucun critère trouvé" var="slctdTb" 
 					 editable="true" editMode="cell" rowKey="#{slctdTb.RId}" selection="#{commissionController.selectionCritereAnalyse}"  scrollable="true" scrollHeight="391">
+		                        	 
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-	                <p:column headerText="CRITERES" styleClass="col-sm-5">
-	         				    <h:outputText value="#{slctdTb.craLibelle}" />
-                     </p:column>
+	                                     <p:column headerText="CRITERES" styleClass="col-sm-5">
+	         				               <h:outputText value="#{slctdTb.craLibelle}" />
+                                    </p:column>
+                                    
 	                      <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.montant}">
 	                           <p:cellEditor>
 				                <f:facet name="output">
@@ -356,6 +354,7 @@
 				                 </f:facet>
 				               </p:cellEditor>
 					        </p:column>
+					        
                       <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.conformite}" >
                           <p:cellEditor>
                           <f:facet name="output">
