@@ -11,7 +11,7 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
        <h3>
-        #{controleController.libelle} #{commissionController.slctdTd.aaoCode}
+        #{controleController.libelle} #{commissionController.slctdTd.aaoCode} : <strong>#{commissionController.slctdTd.aaoLibelle}</strong>
         <small>
         <!-- #{controleController.libelle1} -->
        <!--  Liste des AGPM Saisis  -->
@@ -142,30 +142,30 @@
                scrollable="true" scrollHeight="465" emptyMessage="Aucune Offre trouvée">
                
                           <p:column headerText="N°Offre" styleClass="col-sm-2">
-                              <h:panelGroup rendered="#{slctdTb.dofStaut != '1'}">
+                              <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
 	         				    <h:outputText value="#{slctdTb.dofNum}" />
 	         				  </h:panelGroup>
-	         				   <h:panelGroup rendered="#{slctdTb.dofStaut == '1' }">
+	         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
 	         				    <h:outputText value="#{slctdTb.dofNum}" style="color:green; font-weight:bold " />
 	         				  </h:panelGroup>
                             </p:column>
 
                             <p:column headerText="Entreprise" styleClass="col-sm-6">
-	                              <h:panelGroup rendered="#{slctdTb.dofStaut != '1'}">
+	                              <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
 		         				    <h:outputText value="#{slctdTb.dofSigle}" />
 		         				  </h:panelGroup>
-		         				   <h:panelGroup rendered="#{slctdTb.dofStaut == '1' }">
+		         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
 		         				    <h:outputText value="#{slctdTb.dofSigle}" style="color:green; font-weight:bold " />
 		         				  </h:panelGroup>
                             </p:column>
                             
                             <p:column headerText="Montant" styleClass="col-sm-2">
-                             <h:panelGroup rendered="#{slctdTb.dofStaut != '1'}">
+                             <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
 		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
                                 <f:convertNumber pattern="##,###.##"></f:convertNumber>
                                 </h:outputText>
 		         				  </h:panelGroup>
-		         				   <h:panelGroup rendered="#{slctdTb.dofStaut == '1' }">
+		         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
 		         				    <h:outputText value="#{slctdTb.dofMtOfr}" style="color:green; font-weight:bold ">
 		         				    <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         				    </h:outputText>
@@ -181,7 +181,7 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
                             </p:commandLink>
                             
-                              <p:commandLink rendered="#{slctdTb.dofStaut == '1' }" action="#{commissionController.editerFicheOffre()}" ajax="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px"
+                              <p:commandLink rendered="#{slctdTb.dofStatut == '1' }" action="#{commissionController.editerFicheOffre()}" ajax="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px"
 				               title="Editer le rapport d'analyse" update=":content">
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
@@ -194,11 +194,7 @@
                </div>
               </div>
               
-              
-              
-              
-              
-              
+                
             </div>
             <!-- /.box-body -->
           </div>
@@ -237,7 +233,7 @@
 		                               <p:column headerText="PIECES" styleClass="col-sm-5">
 		                                  <h:outputText value="#{slctdTb.tpoLibelle}"/>
 		                                </p:column>
-		                                  <p:column headerText="PRESENCE" styleClass="col-sm-2"  >
+		                                  <p:column headerText="CONFORME" styleClass="col-sm-2"  >
                                             <p:cellEditor>
                                              <f:facet name="output">
          				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'O'?'OUI':'NON'}" />
