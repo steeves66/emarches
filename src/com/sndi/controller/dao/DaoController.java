@@ -285,6 +285,7 @@ public class DaoController {
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
+	private VDacliste caution = new VDacliste();
 	
 	//MARGE DE PREFERENCE
 	private VMargeDePreference marge = new VMargeDePreference();
@@ -297,6 +298,9 @@ public class DaoController {
 	 private long totalMontantEstimatif;
 	 private long totalNbreVente;
 	 private long totalMontantCaution;
+	 private double montantCaution =0; 
+	 private long cautionMinRound =0;
+	 private long cautionMaxRound =0;
 	 private String pidCod;
 	 private String observation="";
 	 private String imputation="";
@@ -380,11 +384,15 @@ public class DaoController {
 	 private String typeCommission ="N"; 
 	 private boolean etatPays = true;
 	 
+	 private boolean panelCaution = false;
+	 
 	//Booléens
 	  private boolean skip;
 	  private long natdoc= 7;
 	  private long totalMontantLot;
 	  private long montantRetrait = 0;
+	  private double cautionMin = 0;
+	  private double cautionMax = 0;
 	  private String filtreLigne ="";
 	  private String filtreFonction="";
 	  private String filterCode="";
@@ -454,6 +462,7 @@ public class DaoController {
 	  private boolean panelNcc1 = false;
 	  private boolean panelNcc2 = false;
 	  private boolean confirmInter = false;
+	  
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -2873,6 +2882,49 @@ public class DaoController {
 								 new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 							_logger.info("objetListe size: "+listeLots.size());	
 					}
+				   
+				   public void recupererCaution() {
+					   listeDAO.clear();
+					   listeDAO =(List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+							   new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+						if (!listeDAO.isEmpty()) {
+							caution=listeDAO.get(0);
+						}
+				   }
+				   public void calculCaution() {
+					        recupererCaution();
+                           // convertir string en long
+					        //cautionMax = caution.getCautValMax();//* montantCaution.valueOf(newVbTemp.getTempLaaCautLot());
+					        // convertir string en double
+					        String str = ""+newVbTemp.getLaaMtEst();
+					        Double  caut = Double.parseDouble(str);
+					        
+							cautionMin = caution.getCautValMin() * caut;
+							cautionMax = caution.getCautValMax() * caut;
+							
+							if(caut < cautionMin ||  caut > cautionMax) { 
+								panelCaution = true;
+								cautionMinRound = Math.round(cautionMin);
+								cautionMaxRound = Math.round(cautionMax);
+								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
+								 FacesContext.getCurrentInstance().addMessage(null, msg);
+							}
+							if(caut > cautionMin ||  caut < cautionMax) { 
+								panelCaution = false;
+							}
+							
+							_logger.info("Paramcaution min: "+caution.getCautValMin());	
+							_logger.info("Paramcaution max: "+caution.getCautValMax());	
+							_logger.info("montant saisie: "+caut);	
+							_logger.info("caution min: "+cautionMin);	
+							_logger.info("caution max: "+cautionMax);
+							
+							/*if(cautionMin > montantCaution.valueOf(newVbTemp.getTempLaaCautLot())){
+								
+							}*/
+							
+						}	
+				   
 				  
 				   //Methode de Génération des Lots   
 				     public void genererLot() {  
@@ -3323,7 +3375,7 @@ public class DaoController {
 								 listeImputations.clear();
 								 listeImputations =(List<VLigneLot>) iservice.getObjectsByColumn("VLigneLot", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 										 new WhereClause("DAC_CODE",Comparateur.EQ,""+dao.getDacCode())); 
-								 
+								 recupererCaution();
 								
 									} 
 							  
@@ -7131,5 +7183,62 @@ public class DaoController {
 	public void setImputation(String imputation) {
 		this.imputation = imputation;
 	}
-	
+
+	public VDacliste getCaution() {
+		return caution;
+	}
+
+	public void setCaution(VDacliste caution) {
+		this.caution = caution;
+	}
+
+	public double getCautionMin() {
+		return cautionMin;
+	}
+
+	public void setCautionMin(double cautionMin) {
+		this.cautionMin = cautionMin;
+	}
+
+	public double getCautionMax() {
+		return cautionMax;
+	}
+
+	public void setCautionMax(double cautionMax) {
+		this.cautionMax = cautionMax;
+	}
+
+	public double getMontantCaution() {
+		return montantCaution;
+	}
+
+	public void setMontantCaution(double montantCaution) {
+		this.montantCaution = montantCaution;
+	}
+
+	public long getCautionMinRound() {
+		return cautionMinRound;
+	}
+
+	public void setCautionMinRound(long cautionMinRound) {
+		this.cautionMinRound = cautionMinRound;
+	}
+
+	public long getCautionMaxRound() {
+		return cautionMaxRound;
+	}
+
+	public void setCautionMaxRound(long cautionMaxRound) {
+		this.cautionMaxRound = cautionMaxRound;
+	}
+
+	public boolean isPanelCaution() {
+		return panelCaution;
+	}
+
+	public void setPanelCaution(boolean panelCaution) {
+		this.panelCaution = panelCaution;
+	}
+
+
 }
