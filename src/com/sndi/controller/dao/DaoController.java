@@ -3166,6 +3166,10 @@ public class DaoController {
 						 if(choixTaux.equalsIgnoreCase("marge")) { 
 							 etatTaux = true; 
 							 libelleTaux = true;
+						 }else 
+						 {
+							 etatTaux = false; 
+							 libelleTaux = false; 
 						 }
 					 }
 				 

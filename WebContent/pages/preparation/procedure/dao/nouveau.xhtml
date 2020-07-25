@@ -53,6 +53,7 @@
       
      <p:wizard flowListener="#{daoController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
      
+     
         <p:tab id="creation" title="Initiation du #{controleController.type}" titleStyle="background-color: #f88b2e;background-image: none">
        
            <div class="row">
@@ -247,41 +248,38 @@
                   </div>
               </div>
               
-                <div class="form-group">
+            <div class="form-group">
                   <label  class="col-sm-3 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
-				  <div class="col-sm-1">
-			
-				     <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
+                  <div class="col-sm-2"> 
+                  <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
 				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
 				     </p:inputText>
-
-				    </div>
-				     <div class="form-group"> 
-
-				    
-				    
-                     <p:selectOneRadio value="#{daoController.choixTaux}" id="console12" unselectable="true">
-                        <p:ajax  listener="#{daoController.checkMargeMsg()}" update="gnl:margeP" />
-			            <f:selectItem itemLabel="Marge de Préférence" itemValue="marge" />
-			        </p:selectOneRadio>
-                  <!-- </div> -->
-				    <h:panelGroup  rendered="false">     
-				    <h:panelGroup  id="libtaux">
-				     <h:panelGroup rendered="#{daoController.libelleTaux}" id="taux">Taux :</h:panelGroup> 
-				     <td style="width: 80px"><h:panelGroup  rendered="#{daoController.etatTaux}"><p:inputText type="text" value="#{daoController.newAvis.aaoTaux}" styleClass="form-control"/></h:panelGroup> </td>
-				    </h:panelGroup>
-				    </h:panelGroup>
-				      <h:panelGroup  id="margeP">
-				    <h:panelGroup rendered="#{daoController.libelleTaux}" id="margeMsg">Message :</h:panelGroup> 
-				     <h:panelGroup  rendered="#{daoController.etatTaux}">
-				     <p:inputTextarea value="#{daoController.marge.margePefText}"  rows="2" cols="33"   styleClass="form-control" id="l3" style="width: 100%" readonly="false"/>
-				     </h:panelGroup>
-				    </h:panelGroup>
-				    
-				    
-				     
                   </div>
-                </div>
+                  
+                  <div class="col-sm-1"> 
+                  </div>
+                  <label  class="col-sm-3 control-label">Marge de Préférence ?</label>
+                  <div class="col-sm-3"> 
+                    <p:selectOneRadio value="#{daoController.choixTaux}"  unselectable="true">
+                        <p:ajax  listener="#{daoController.checkMargeMsg()}" update="gnl:margeP" />
+			            <f:selectItem itemLabel="OUI" itemValue="marge" />
+			            <f:selectItem itemLabel="NON" itemValue="N" />
+			        </p:selectOneRadio>
+                  </div>
+                  </div>
+                  
+                   <div class="form-group">
+                
+                  <div class="col-sm-12">
+                   <h:panelGroup  id="libtaux">
+                     <h:panelGroup  id="margeP">
+                     <h:panelGroup  rendered="#{daoController.etatTaux}">
+                       <p:inputTextarea value="#{daoController.marge.margePefText}"  rows="2" cols="33"   styleClass="form-control" id="l3" style="width: 100%" readonly="true"/>
+                     </h:panelGroup>
+                     </h:panelGroup>
+                   </h:panelGroup> 
+                  </div>
+                  </div>
                
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Avis de non objection du bailleur</label>
@@ -330,22 +328,19 @@
                 </h:panelGroup>
                 <div class="form-group">
                   <label class="col-sm-3 control-label">Nombre de lot<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
+				  <div class="col-sm-2">
 		          <p:inputText title="Le nombre de lot doit etre superieur à 0" type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%">
 		          </p:inputText>
                   </div>
-                </div>
-                
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">Coût du DAO<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
+                  
+                  <label class="col-sm-2 control-label">Coût du DAO<span style="color:red;"> *</span></label>
+				  <div class="col-sm-5">
 		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}" id="coutD"  style="width: 100%" >
 		          <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	              <p:ajax event="blur" global="false" process="@this" update="gnl:coutD" />
 	              </p:inputText>
                   </div>
-                </div>
-                
+                </div> 
          </div>
          </div>
          </div>
