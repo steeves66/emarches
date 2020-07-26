@@ -160,6 +160,7 @@ public class DaoController {
 	 private List<VDacliste> detailTB = new ArrayList<VDacliste>();
 	 private List<VDacliste> detailTrans = new ArrayList<VDacliste>();
 	 private List<VDacliste> detailDac = new ArrayList<VDacliste>();
+	 private List<VDacliste> dacVente = new ArrayList<VDacliste>();
 	 private List<VDacliste> detailDacDiff = new ArrayList<VDacliste>();
 	 private List<TDacSpecs> listDao = new ArrayList<TDacSpecs>(); 
 	 private List<TGestion> listeGestion = new ArrayList<TGestion>();
@@ -251,6 +252,7 @@ public class DaoController {
 	 private VDacMembre selecMembre = new VDacMembre();
 	 private TDacSpecs dao= new TDacSpecs();
 	 private VDacliste slctdTd = new VDacliste();
+	 private VDacliste recupCout = new VDacliste();
 	 private TDaoAffectation slctdTda = new TDaoAffectation();
 	 private TAvisAppelOffre newAvis = new TAvisAppelOffre();
 	 private TLotAao newLot = new TLotAao();
@@ -4291,7 +4293,7 @@ public class DaoController {
 												      }else { 
 												    	  
 												    	  //Contrôle sur la vente ou le retrait
-													         if(newDao.getDacCout() == 0) {
+													         if(recupCout.getAaoCoutDac() == 0) {
 													        	 String mois="";
 															        Calendar c = Calendar.getInstance();
 															        int year = c.get(Calendar.YEAR);
@@ -4404,9 +4406,7 @@ public class DaoController {
 											 		            	  newCandidat.setCanSouNcc(newSouncc);
 												 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
 											 		               }
-											 		               //newCandidat.setCanRepCode(paieCode);
-											 		               //newCandidat.setCanSouNcc(newSouncc);
-											 		               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
+											 		               
 											 		               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 											 		               iservice.addObject(newCandidat);
 											 		               
@@ -4423,7 +4423,7 @@ public class DaoController {
 											      			  		    if (!listDao.isEmpty()) {
 											      			  			  newDao= listDao.get(0);
 											      			  			  venteDetail.setTVenteDac(newVente);
-											      			  			  venteDetail.setDveCout(newDao.getDacCout());
+											      			  			  venteDetail.setDveCout(recupCout.getAaoCoutDac());
 											 		        	          venteDetail.setTDacSpecs(newDao);
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
@@ -4470,7 +4470,7 @@ public class DaoController {
 												      }else { 
 												    	  
 												    	  //Contrôle sur la vente ou le retrait
-													         if(newDao.getDacCout() == 0) {
+													         if(recupCout.getAaoCoutDac() == 0) {
 													        	 String mois="";
 															        Calendar c = Calendar.getInstance();
 															        int year = c.get(Calendar.YEAR);
@@ -4562,7 +4562,7 @@ public class DaoController {
 											      			  		    if (!listDao.isEmpty()) {
 											      			  			  newDao= listDao.get(0);
 											      			  			  venteDetail.setTVenteDac(newVente);
-											      			  			  venteDetail.setDveCout(newDao.getDacCout());
+											      			  			  venteDetail.setDveCout(recupCout.getAaoCoutDac());
 											 		        	          venteDetail.setTDacSpecs(newDao);
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
@@ -4687,16 +4687,16 @@ public class DaoController {
 													
 													//Récupération du montant du DAO
 													  public void recupMontantDao() { 
-														  listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+														  dacVente = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 																      //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 																      //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 																	  new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-																      if (!listDao.isEmpty()) {
-																	         newDao= listDao.get(0); 
+																      if (!dacVente.isEmpty()) {
+																    	  recupCout= dacVente.get(0); 
 													   	              }	
 																      
 																     //Contrôle sur la vente ou le retrait
-																         if(newDao.getDacCout() == 0) {
+																         if(recupCout.getAaoCoutDac() == 0) {
 																        	 confirmRetrait = true;
 																        	 confirmVente = false;
 																        	 titreRetrait = true;
@@ -7238,6 +7238,22 @@ public class DaoController {
 
 	public void setPanelCaution(boolean panelCaution) {
 		this.panelCaution = panelCaution;
+	}
+
+	public List<VDacliste> getDacVente() {
+		return dacVente;
+	}
+
+	public void setDacVente(List<VDacliste> dacVente) {
+		this.dacVente = dacVente;
+	}
+
+	public VDacliste getRecupCout() {
+		return recupCout;
+	}
+
+	public void setRecupCout(VDacliste recupCout) {
+		this.recupCout = recupCout;
 	}
 
 
