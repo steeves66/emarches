@@ -400,7 +400,7 @@ public class DacModifController {
 			avis.setAaoRegQual(slctdTd.getAaoRegQual());
 			avis.setAaoPrecisModEval(slctdTd.getAaoPrecisModEval());
 			avis.setAaoNbrLot(slctdTd.getAaoNbrLot().longValue());
-			avis.setAaoCoutDac(slctdTd.getAaoCoutDac().longValue());
+			avis.setAaoCoutDac(slctdTd.getAaoCoutDac());
 			avis.setAaoLieuRecep(slctdTd.getAaoLieuRecep());
 			avis.setAaoDateRecep(slctdTd.getAaoDateRecep());
 			avis.setAaoHeureRecep(slctdTd.getAaoHeureRecep());

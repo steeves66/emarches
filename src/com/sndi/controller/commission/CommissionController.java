@@ -187,6 +187,8 @@ public class CommissionController {
 	 private VbTempParametreCom membre = new VbTempParametreCom();
 	 //private TCandidats candidat = new TCandidats(); 
 	 private VbTempParamDetOffres newOffre = new VbTempParamDetOffres();
+	 
+	
 	 //private TDetOffres detailOffre = new TDetOffres();
 	 private VDetOffreRecevable detailOffre = new VDetOffreRecevable();
 	 private TDetOffres offre = new TDetOffres();
@@ -509,8 +511,7 @@ public class CommissionController {
 		 public void chargeOffres() {
 			 listeOffre.clear();
 			 listeOffre = ((List<VDetailOffres>)iservice.getObjectsByColumn("VDetailOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
-					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode())
-					 ));
+					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode())));
 				_logger.info("listeOffres size: "+listeOffre.size());	
 			 
 		 }
@@ -967,6 +968,11 @@ public class CommissionController {
 				    newOffre.setDofPreRep(recupNcc.getDcsPrenoms());
 				    newOffre.setDofTelRep(recupNcc.getTel());
 				    newOffre.setDofMailRep(recupNcc.getDcsMail());
+		            }else {
+		            	 newOffre.setDofNomRep(newOffre.getDofNomRep());
+						 newOffre.setDofPreRep(newOffre.getDofPreRep());
+						 newOffre.setDofTelRep(newOffre.getDofTelRep());
+						 newOffre.setDofMailRep(newOffre.getDofMailRep());
 		            }
 		   }
 		//Fin de la Methode OnSelectCandidat
@@ -978,9 +984,9 @@ public class CommissionController {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
 		 		else{*/
-			iservice.updateObject(slctdTd);
+			            iservice.updateObject(slctdTd);
 		
-			            if(recupNcc == null) {
+			            if(recupNcc.getDcsNom().equalsIgnoreCase("")) {
 			             newOffre.setDofNomRep(newOffre.getDofNomRep());
 						 newOffre.setDofPreRep(newOffre.getDofPreRep());
 						 newOffre.setDofTelRep(newOffre.getDofTelRep());
@@ -991,6 +997,8 @@ public class CommissionController {
 						newOffre.setDofTelRep(recupNcc.getTel());
 						newOffre.setDofMailRep(recupNcc.getDcsMail());
 			            }
+			            
+			            
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 					   newOffre.setDofLaaId(laaId);
 					   newOffre.setTempType("OFF");
@@ -1007,8 +1015,6 @@ public class CommissionController {
 		 			
 			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
-			 			//newAnalyseOffre.setAnfDanCode(ligne.getDcadDanCode());
-			 			//newAnalyseOffre.setAnfDteModif(ligne.get);
 			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
 			 			//newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
 			 			//newAnalyseOffre.setAnfLaaId("1");
@@ -1041,13 +1047,14 @@ public class CommissionController {
 							     }	
 					 }
 				     
+				    	viderPartiel();
+				    	chargeOffres();	
 				    	vider();
-				    	chargeOffres();		    	
 				    	userController.setTexteMsg("Ouverture effectuée avec succès !");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 		    }	
-		//}
+		
 		
 		
 		
@@ -1292,8 +1299,32 @@ public class CommissionController {
 			 pourcentRab=0;
 			 montN=0;
 			 dofTyp="";
-			 laaId="";
-			 
+			 laaId=""; 
+		 }
+		 
+		 public void viderPartiel() {
+			 newOffre = new VbTempParamDetOffres();
+			 infoLot =new VVerifcorOffin();
+			 newSeance = new TSeances();
+			 //slctdTd = new TAvisAppelOffre();
+			 newOffre = new VbTempParamDetOffres();
+			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
+			 listeSelectionPiecesOffresAnalyse.clear();
+			 listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();
+			 listeSelectionPiecesOffres.clear();
+			 listeSouOffBass.clear();
+			 listeSouOffEleve.clear();
+			 resultatAttributaire.clear();
+			 resultatPropAttributaire.clear();
+			 listeRecapSeuil.clear();
+			 //listeOffres = new ArrayList<TDetOffres>(); 
+			 //listeOffre = new ArrayList<VDetailOffres>();
+			 listeOffres.clear();
+			 montLu=0;
+			 pourcentRab=0;
+			 montN=0;
+			 dofTyp="";
+			 laaId=""; 
 		 }
 		 
 	 public String renderPage(String value ,String action) throws IOException{ 
