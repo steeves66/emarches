@@ -2899,25 +2899,28 @@ public class DaoController {
 					        //cautionMax = caution.getCautValMax();//* montantCaution.valueOf(newVbTemp.getTempLaaCautLot());
 					        // convertir string en double
 					        String str = ""+newVbTemp.getLaaMtEst();
-					        Double  caut = Double.parseDouble(str);
+					        Double  mtEstim = Double.parseDouble(str);
 					        
-							cautionMin = caution.getCautValMin() * caut;
-							cautionMax = caution.getCautValMax() * caut;
+					        String strMtCaut = ""+newVbTemp.getTempLaaCautLot();
+					        Double  montantCaut = Double.parseDouble(strMtCaut);
+					        
+							cautionMin = caution.getCautValMin() * mtEstim;
+							cautionMax = caution.getCautValMax() * mtEstim;
 							
-							if(caut < cautionMin ||  caut > cautionMax) { 
+							if(montantCaut < cautionMin &&  montantCaut > cautionMax) { 
 								panelCaution = true;
 								cautionMinRound = Math.round(cautionMin);
 								cautionMaxRound = Math.round(cautionMax);
 								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
 								 FacesContext.getCurrentInstance().addMessage(null, msg);
 							}
-							if(caut > cautionMin ||  caut < cautionMax) { 
+							if(montantCaut > cautionMin &&  montantCaut < cautionMax) { 
 								panelCaution = false;
 							}
 							
 							_logger.info("Paramcaution min: "+caution.getCautValMin());	
 							_logger.info("Paramcaution max: "+caution.getCautValMax());	
-							_logger.info("montant saisie: "+caut);	
+							_logger.info("montant caution  saisie: "+montantCaut);	
 							_logger.info("caution min: "+cautionMin);	
 							_logger.info("caution max: "+cautionMax);
 							
@@ -2930,36 +2933,54 @@ public class DaoController {
 				  
 				   //Methode de Génération des Lots   
 				     public void genererLot() {  
-				    	 if(newAvis.getAaoNbrLot() > lotTotal) {
-				    		 newVbTemp.setTempLaaAaoCode(newAvis.getAaoCode());
-				        	 newVbTemp.setTempLaaDacCode(dao.getDacCode());
-				    		  newVbTemp.setTempLaaDteSaisi(Calendar.getInstance().getTime());
-				    		  //newVbTemp.setTempLaaMtLot("0");
-				    		  //newVbTemp.setTempLaaCautLot("0");
-				    		  newVbTemp.setTempLaaImputation(imputation);
-				    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(newAvis.getAaoNbrLot()));//Convertir un long en String
-				    		  newVbTemp.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-				    		  newVbTemp.setTempType("LOT");
-				    		  iservice.addObject(newVbTemp);
-				    		  chargeLots();
-				    		  montantTotalLot();
-				    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
-				    		  userController.setRenderMsg(true);
-				    		  userController.setSevrityMsg("success");
-							  
-							  //Activation du pavet de saisie des pièces des offres 
-		                      pavet_offre = true;
-				    		
-				    	 }else {
-				    		 /*userController.setTexteMsg("Veuillez respecter le nombre de lots renseigné !");
+				       if(newAvis.getAaoNbrLot() > lotTotal) {
+				    	   String str = ""+newVbTemp.getLaaMtEst();
+					        Double  mtEstim = Double.parseDouble(str);
+					        
+					        String strMtCaut = ""+newVbTemp.getTempLaaCautLot();
+					        Double  montantCaut = Double.parseDouble(strMtCaut);
+					        
+							cautionMin = caution.getCautValMin() * mtEstim;
+							cautionMax = caution.getCautValMax() * mtEstim;
+				    	   if(montantCaut >= cautionMin &&  montantCaut <= cautionMax) {
+				    		   panelCaution = false;
+								 newVbTemp.setTempLaaAaoCode(newAvis.getAaoCode());
+					        	 newVbTemp.setTempLaaDacCode(dao.getDacCode());
+					    		  newVbTemp.setTempLaaDteSaisi(Calendar.getInstance().getTime());
+					    		  //newVbTemp.setTempLaaMtLot("0");
+					    		  //newVbTemp.setTempLaaCautLot("0");
+					    		  newVbTemp.setTempLaaImputation(imputation);
+					    		  newVbTemp.setTempLaaNbrTotLot(String.valueOf(newAvis.getAaoNbrLot()));//Convertir un long en String
+					    		  newVbTemp.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+					    		  newVbTemp.setTempType("LOT");
+					    		  iservice.addObject(newVbTemp);
+					    		  chargeLots();
+					    		  montantTotalLot();
+					    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
+					    		  userController.setRenderMsg(true);
+					    		  userController.setSevrityMsg("success");
+								  
+								  //Activation du pavet de saisie des pièces des offres 
+			                      pavet_offre = true; 
+				    	   }else {
+				    			cautionMinRound = Math.round(cautionMin);
+								cautionMaxRound = Math.round(cautionMax);
+								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
+								 FacesContext.getCurrentInstance().addMessage(null, msg);
+								 panelCaution = true;
+				    	   }
+				       }
+				       else
+				       {
+				    	   /*userController.setTexteMsg("Veuillez respecter le nombre de lots renseigné !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");*/
 							 
 							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
-				    	 }
+				       }
 				    	 
-					  }
+					 }
 				     
 				     //Ajouter manuellement un lot
 					 @Transactional

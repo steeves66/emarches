@@ -1494,7 +1494,7 @@
 	                  <div class="col-sm-10">
 	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
+			       <f:selectItem  itemLabel="Choisir l'imputation..." itemValue="empty" />  
 			       <f:selectItems value="#{daoController.listeImputations}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
        		        </p:selectOneMenu>
 	                  </div>
@@ -1521,9 +1521,9 @@
 	                <div class="form-group ">
 	                  <label for="montCaut" class="col-sm-2 control-label"><b></b></label>
 	                  <div class="col-sm-10">
-	                 
+	                  <p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/>
 	                   <h:panelGroup rendered="#{daoController.panelCaution}">
-	                   <div class="box box-success box-solid">
+	                   <div class="box box-danger box-solid">
 				        <div class="box-header">
 				        <div  style="color: #fff">Le montant du cautionnement doit etre compris entre #{daoController.cautionMinRound} et #{daoController.cautionMaxRound}</div>
 				        </div>
