@@ -1643,7 +1643,7 @@ public class DaoController {
 							 chargeDetailAC1("PN", "DAO", "D1T");	
 						 }else {
 							 if(fonct.equalsIgnoreCase("listeDaoVentePn")) {
-								 chargeDetailAC1("PN", "DAO", "DEV");
+								 chargeDetailAC1("PN", "DAO", "DAP");
 							 }else {
 								
 							 }	 
