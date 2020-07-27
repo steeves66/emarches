@@ -1009,11 +1009,6 @@ public class CommissionController {
 				    newOffre.setDofPreRep(recupNcc.getDcsPrenoms());
 				    newOffre.setDofTelRep(recupNcc.getTel());
 				    newOffre.setDofMailRep(recupNcc.getDcsMail());
-		            }else {
-		            	 newOffre.setDofNomRep(newOffre.getDofNomRep());
-						 newOffre.setDofPreRep(newOffre.getDofPreRep());
-						 newOffre.setDofTelRep(newOffre.getDofTelRep());
-						 newOffre.setDofMailRep(newOffre.getDofMailRep());
 		            }
 			    
 			    chargeLotsByCandidat();
@@ -1036,20 +1031,7 @@ public class CommissionController {
 				}
 		 		else{*/
 			            iservice.updateObject(slctdTd);
-		
-			            if(recupNcc.getDcsNom().equalsIgnoreCase("") || recupNcc.getDcsPrenoms().equalsIgnoreCase("")) {
-			             newOffre.setDofNomRep(newOffre.getDofNomRep());
-						 newOffre.setDofPreRep(newOffre.getDofPreRep());
-						 newOffre.setDofTelRep(newOffre.getDofTelRep());
-						 newOffre.setDofMailRep(newOffre.getDofMailRep());
-			            }else {
-			            newOffre.setDofNomRep(recupNcc.getDcsNom());
-						newOffre.setDofPreRep(recupNcc.getDcsPrenoms());
-						newOffre.setDofTelRep(recupNcc.getTel());
-						newOffre.setDofMailRep(recupNcc.getDcsMail());
-			            }
-			            
-			            
+		  
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 					   //newOffre.setDofLaaId(laaId);
 		 			   newOffre.setDofLaaId(tlot.getLaaId().toString());
@@ -1097,7 +1079,8 @@ public class CommissionController {
 					 }
 				     
 				    	viderPartiel();
-				    	chargeOffres();	
+				    	chargeOffres();
+				    	chargeCandidats();
 				    	vider();
 				    	userController.setTexteMsg("Ouverture effectuée avec succès !");
 						userController.setRenderMsg(true);
