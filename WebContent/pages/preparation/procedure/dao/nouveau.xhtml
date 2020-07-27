@@ -527,7 +527,7 @@
 		</div>
             
          <div class="col-md-1 ">
-			 <p:commandLink oncomplete="PF('newLotdlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+			 <p:commandLink action="#{daoController.recupererCaution()}" oncomplete="PF('newLotdlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>Saisie
 			</p:commandLink>
 		</div>
@@ -1612,16 +1612,37 @@
 	                  </p:inputText> 
 	                  </div>
 	                </div>
+	                
+	                
+	                   <h:panelGroup id="pcaution">
+	                <div class="form-group ">
+	                  <label for="montCaut" class="col-sm-2 control-label"><b></b></label>
+	                  <div class="col-sm-10">
+	                  <p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/>
+	                   <h:panelGroup rendered="#{daoController.panelCaution}">
+	                   <div class="box box-danger box-solid">
+				        <div class="box-header">
+				        <div  style="color: #fff">Le montant du cautionnement doit etre compris entre #{daoController.cautionMinRound} et #{daoController.cautionMaxRound}</div>
+				        </div>
+				        </div>
+				        </h:panelGroup>
+
+	                
+	                  </div>
+	                </div>
 	              
 	                <div class="form-group ">
 	                  <label for="montCaut" class="col-sm-2 control-label"><b>Montant Caution</b></label>
 	                  <div class="col-sm-10">
 	                  <p:inputText  type="text" styleClass="form-control" id="montCaut" value="#{daoController.newLot.laaMtCaut}" style="width: 100%" >
 	                   <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" global="false" process="@this" update="montCaut" /> 
-	                  </p:inputText> 
+	                    <p:ajax event="blur" listener="#{daoController.calculCaution()}" global="false" process="@this" update="NewLotlog:pcaution" /> 
+	                  </p:inputText>
 	                  </div>
 	                </div>
+	                  </h:panelGroup> 
+	              
+	              
 	                
 	                <div class="form-group ">
 	                  <label for="delaiEx" class="col-sm-2 control-label"><b>Délai d'execution</b></label>

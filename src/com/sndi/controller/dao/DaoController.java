@@ -2907,14 +2907,14 @@ public class DaoController {
 							cautionMin = caution.getCautValMin() * mtEstim;
 							cautionMax = caution.getCautValMax() * mtEstim;
 							
-							if(montantCaut < cautionMin &&  montantCaut > cautionMax) { 
+							if(montantCaut < cautionMin ||  montantCaut > cautionMax) { 
 								panelCaution = true;
 								cautionMinRound = Math.round(cautionMin);
 								cautionMaxRound = Math.round(cautionMax);
 								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
 								 FacesContext.getCurrentInstance().addMessage(null, msg);
 							}
-							if(montantCaut > cautionMin &&  montantCaut < cautionMax) { 
+							if(montantCaut > cautionMin ||  montantCaut < cautionMax) { 
 								panelCaution = false;
 							}
 							
@@ -2929,6 +2929,8 @@ public class DaoController {
 							}*/
 							
 						}	
+				   
+				   
 				   
 				  
 				   //Methode de Génération des Lots   
@@ -2982,11 +2984,60 @@ public class DaoController {
 				    	 
 					 }
 				     
+				     
+				     
+				     public void calculCautionSaisie() {
+					        recupererCaution();
+                        // convertir string en long
+					        //cautionMax = caution.getCautValMax();//* montantCaution.valueOf(newVbTemp.getTempLaaCautLot());
+					        // convertir string en double
+					        String str = ""+newLot.getLaaMtEst();
+					        Double  mtEstim = Double.parseDouble(str);
+					        
+					        String strMtCaut = ""+newLot.getLaaMtCaut();  
+					        Double  montantCaut = Double.parseDouble(strMtCaut);
+					        
+							cautionMin = caution.getCautValMin() * mtEstim;
+							cautionMax = caution.getCautValMax() * mtEstim;
+							
+							if(montantCaut < cautionMin ||  montantCaut > cautionMax) { 
+								panelCaution = true;
+								cautionMinRound = Math.round(cautionMin);
+								cautionMaxRound = Math.round(cautionMax);
+								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
+								 FacesContext.getCurrentInstance().addMessage(null, msg);
+							}
+							if(montantCaut > cautionMin ||  montantCaut < cautionMax) { 
+								panelCaution = false;
+							}
+							
+							_logger.info("Paramcaution min: "+caution.getCautValMin());	
+							_logger.info("Paramcaution max: "+caution.getCautValMax());	
+							_logger.info("montant caution  saisie: "+montantCaut);	
+							_logger.info("caution min: "+cautionMin);	
+							_logger.info("caution max: "+cautionMax);
+							
+							/*if(cautionMin > montantCaution.valueOf(newVbTemp.getTempLaaCautLot())){
+								
+							}*/
+							
+						}	
+				     
 				     //Ajouter manuellement un lot
 					 @Transactional
 				    public void saveLot(){
 				    	  //getNbreLotTotal();
 				    	 if(newAvis.getAaoNbrLot() > lotTotal) {
+				    		 String str = ""+newLot.getLaaMtEst();
+						        Double  mtEstim = Double.parseDouble(str);
+						        
+						        String strMtCaut = ""+newLot.getLaaMtCaut();  
+						        Double  montantCaut = Double.parseDouble(strMtCaut);
+						        
+								cautionMin = caution.getCautValMin() * mtEstim;
+								cautionMax = caution.getCautValMax() * mtEstim;
+								if(montantCaut >= cautionMin &&  montantCaut <= cautionMax) {
+						    		   panelCaution = false;
 				    		 newLot.setTDacSpecs(dao);
 				    		 newLot.setLaaOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 				    		 newLot.setLaaDteSaisi(Calendar.getInstance().getTime());
@@ -3001,7 +3052,15 @@ public class DaoController {
 				        	 userController.setTexteMsg("Lot enregistré avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
-				    		 
+								}
+								else
+								{
+									cautionMinRound = Math.round(cautionMin);
+									cautionMaxRound = Math.round(cautionMax);
+									 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
+									 FacesContext.getCurrentInstance().addMessage(null, msg);
+									 panelCaution = true;
+								}
 				    	 }else {
 				    		
 				    		/* userController.setTexteMsg("Veuillez respecter le nombre de lots renseigné !");
