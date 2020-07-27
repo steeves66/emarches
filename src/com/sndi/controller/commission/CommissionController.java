@@ -65,6 +65,7 @@ import com.sndi.model.VListeSouOffBasse;
 import com.sndi.model.VListeSouOffEleve;
 import com.sndi.model.VLot;
 import com.sndi.model.VLotCandidat;
+import com.sndi.model.VOffreCandidat;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VRecapSeuilAnormal;
@@ -143,7 +144,8 @@ public class CommissionController {
 	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
-	 private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
+	 //private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
+	 private List<VOffreCandidat> listCandidats = new ArrayList<VOffreCandidat>();
 	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>();
 	 //private List<TDetOffres> listeOffres = new ArrayList<TDetOffres>(); 
 	 private List<VDetOffreRecevable> listeOffres = new ArrayList<VDetOffreRecevable>(); 
@@ -160,7 +162,8 @@ public class CommissionController {
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
 	 private List<VCritereAnalyseDacOff> listeCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>(); 
 	 private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
-	private VCandidatDac candidat =new VCandidatDac();
+	//private VCandidatDac candidat =new VCandidatDac();
+	private VOffreCandidat candidat =new VOffreCandidat();
 	private VLotCandidat tlot =new VLotCandidat();
 	private VLotCandidat selectLot =new VLotCandidat();
 	private VCritereAnalyseDacOff sltCritere =new VCritereAnalyseDacOff();
@@ -557,7 +560,7 @@ public class CommissionController {
 			 lotByCandidat.clear();
 			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
 					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
-					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getCanSouNcc())));
+					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getSouNcc())));
 					_logger.info("lotByCandidat size: "+lotByCandidat.size());	
 		 }
 		 
@@ -936,20 +939,38 @@ public class CommissionController {
 			FacesContext.getCurrentInstance().addMessage(null, msg);	
 		}
 	        
-		 //Afficher la liste des candidats dans v_candidat_da(love)
+		/* //Afficher la liste des candidats dans v_candidat_da(love)
 		 public void chargeCandidats() {
 			 listCandidats.clear();
 			 listCandidats = ((List<VCandidatDac>)iservice.getObjectsByColumn("VCandidatDac",new ArrayList<String>(Arrays.asList("CAN_SOU_SIGLE_STE")),
 					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
 			 _logger.info("Nbr candidat: "+listCandidats.size());
+		 }*/
+		 
+		 
+		 //Afficher la liste des candidats dans v_candidat_da(love)
+		 public void chargeCandidats() {
+			 listCandidats.clear();
+			 listCandidats = ((List<VOffreCandidat>)iservice.getObjectsByColumn("VOffreCandidat",new ArrayList<String>(Arrays.asList("SOU_SIGLE_STE")),
+					 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode())));
+			 _logger.info("Nbre candidat: "+listCandidats.size());
 		 }
 		 
 
-		 public void chargeFilterCandidats(){
+		/* public void chargeFilterCandidats(){
 			 listCandidats.clear();
 			 listCandidats = ((List<VCandidatDac>)iservice.getObjectsByColumn("VCandidatDac",new ArrayList<String>(Arrays.asList("CAN_SOU_SIGLE_STE")),
 					 new WhereClause("CAN_SOU_NCC",WhereClause.Comparateur.LIKE,"%"+filtreCandidat+"%"),
 					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+			}*/
+		 
+		 
+		 
+		 public void chargeFilterCandidats(){
+			 listCandidats.clear();
+			 listCandidats = ((List<VOffreCandidat>)iservice.getObjectsByColumn("VOffreCandidat",new ArrayList<String>(Arrays.asList("SOU_SIGLE_STE")),
+					 new WhereClause("SOU_NCC",WhereClause.Comparateur.LIKE,"%"+filtreCandidat+"%"),
+					 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode())));
 			}
 		
 		 
@@ -960,7 +981,7 @@ public class CommissionController {
 			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
 					     new WhereClause("LAA_OBJET",WhereClause.Comparateur.LIKE,"%"+filtreLot+"%"),
 					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
-					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getCanSouNcc())));
+					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getSouNcc())));
 					_logger.info("lotByCandidat size: "+lotByCandidat.size());	
 		 }
 			//Filtre les marchés en fonction du code Marché
@@ -976,12 +997,11 @@ public class CommissionController {
 		//Love pour recupérer les candidats
 		 public void onSelectCandidat() { 
 			 newOffre= new VbTempParamDetOffres();
-			 newOffre.setDofSigle(candidat.getCanSouSigleSte());
-			 newOffre.setDofSouNcc(candidat.getCanSouNcc());
+			 newOffre.setDofSigle(candidat.getSouSigleSte());
+			 newOffre.setDofSouNcc(candidat.getSouNcc());
 			 
 		  recupSoumissionnaire = ((List<VRepSoumissionnaire>)iservice.getObjectsByColumn("VRepSoumissionnaire",new ArrayList<String>(Arrays.asList("DCS_SOU_NCC")),
-				  new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+candidat.getDveDacCode()),
-		    new WhereClause("DCS_SOU_NCC",Comparateur.EQ,""+candidat.getCanSouNcc())));
+		    new WhereClause("DCS_SOU_NCC",Comparateur.EQ,""+candidat.getSouNcc())));
 			    if (!recupSoumissionnaire.isEmpty()) {
 				    recupNcc=recupSoumissionnaire.get(0); 
 				       
@@ -1573,14 +1593,14 @@ public class CommissionController {
 	public void setLaaId(String laaId) {
 		this.laaId = laaId;
 	}
-
+/*
 	public List<VCandidatDac> getListCandidats() {
 		return listCandidats;
 	}
 
 	public void setListCandidats(List<VCandidatDac> listCandidats) {
 		this.listCandidats = listCandidats;
-	}
+	}*/
 
 	public String getFiltreNcc() {
 		return filtreNcc;
@@ -1591,13 +1611,13 @@ public class CommissionController {
 	}
 
 
-	public VCandidatDac getCandidat() {
+	/*public VCandidatDac getCandidat() {
 		return candidat;
 	}
 
 	public void setCandidat(VCandidatDac candidat) {
 		this.candidat = candidat;
-	}
+	}*/
 
 	public VbCommissionSpecifique getNewcomSpecif() {
 		return newcomSpecif;
@@ -2337,5 +2357,25 @@ public class CommissionController {
 	public void setFiltreLot(String filtreLot) {
 		this.filtreLot = filtreLot;
 	}
+
+
+	public List<VOffreCandidat> getListCandidats() {
+		return listCandidats;
+	}
+
+
+	public void setListCandidats(List<VOffreCandidat> listCandidats) {
+		this.listCandidats = listCandidats;
+	}
+
+
+	public VOffreCandidat getCandidat() {
+		return candidat;
+	}
+
+	public void setCandidat(VOffreCandidat candidat) {
+		this.candidat = candidat;
+	}
+
 	
 }

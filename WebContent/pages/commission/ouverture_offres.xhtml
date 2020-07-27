@@ -398,7 +398,7 @@
     
     
      <h:form id="candidatDlg">
-	        <p:dialog  widgetVar="candidatDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Selectionnez une entreprise">
+	        <p:dialog  widgetVar="candidatDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="SAISIE DES OFFRES : Selectionnez une entreprise">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
@@ -417,18 +417,40 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleCand" styleClass="table table-bordered table-hover" var="slctdTb" value="#{commissionController.listCandidats}"
-						 selectionMode="single" rowKey="#{slctdTb.canSouNcc}"
+						 selectionMode="single" rowKey="#{slctdTb.souNcc}"
 			               emptyMessage="Aucune entreprise trouvée" scrollable="true" scrollHeight="300">
 			               
-							<p:column headerText="NCC" styleClass="col-sm-3" >
+							<p:column headerText="NCC" styleClass="col-sm-2" >
                         <h:commandLink  title="Ncc" style="font-size:18px;"  action="#{commissionController.onSelectCandidat()}" update="gnl:auto">				        
-         				  <h:outputText value="#{slctdTb.canSouNcc}" />
+         				  <h:outputText value="#{slctdTb.souNcc}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.candidat}" />
                                 </h:commandLink>
 				        </p:column>
-						<p:column headerText="SIGLE" styleClass="col-sm-9" >
+						<p:column headerText="SIGLE" styleClass="col-sm-5" >
                         <h:commandLink  title="Sigle" style="font-size:18px;"  action="#{commissionController.onSelectCandidat()}">				        
-         				  <h:outputText value="#{slctdTb.canSouSigleSte}" />
+         				  <h:outputText value="#{slctdTb.souSigleSte}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.candidat}" />
+                                </h:commandLink>
+				        </p:column>
+				        
+				        <p:column headerText="NBRE DE LOTS CONCERNES" styleClass="col-sm-2" >
+                        <h:commandLink  title="Nombre de Saisies" style="font-size:18px;"  action="#{commissionController.onSelectCandidat()}">				        
+         				  <h:outputText  value="#{slctdTb.nblotsaisie}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.candidat}" />
+                                </h:commandLink>
+				        </p:column>
+				        
+				        <p:column headerText="OFFRE DE BASE" styleClass="col-sm-2" >
+                        <h:commandLink  title="offre de base" style="font-size:18px;"  action="#{commissionController.onSelectCandidat()}">				        
+         				  <h:outputText value="#{slctdTb.nboffrebase}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.candidat}" />
+                                </h:commandLink>
+				        </p:column>
+				        
+				        
+				        <p:column headerText="VARIANTE" styleClass="col-sm-1" >
+                        <h:commandLink  title="Variante" style="font-size:18px;"  action="#{commissionController.onSelectCandidat()}">				        
+         				  <h:outputText value="#{slctdTb.nbvariante}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.candidat}" />
                                 </h:commandLink>
 				        </p:column>
