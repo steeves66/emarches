@@ -161,6 +161,8 @@ public class CommissionController {
 	 private List<VCritereAnalyseDacOff> listeCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>(); 
 	 private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
 	private VCandidatDac candidat =new VCandidatDac();
+	private VLotCandidat tlot =new VLotCandidat();
+	private VLotCandidat selectLot =new VLotCandidat();
 	private VCritereAnalyseDacOff sltCritere =new VCritereAnalyseDacOff();
 	private TDetCommissionSeance detCom = new TDetCommissionSeance();
 	 private TDossierMbr selectedDossier = new TDossierMbr();
@@ -239,6 +241,7 @@ public class CommissionController {
 	 private long lotId;
 	 private int nbrLot;
 	 private String filtreCandidat="";
+	 private String filtreLot="";
 	 private String natdoc ="6";
 	 //private long rabais
 	 
@@ -948,8 +951,18 @@ public class CommissionController {
 					 new WhereClause("CAN_SOU_NCC",WhereClause.Comparateur.LIKE,"%"+filtreCandidat+"%"),
 					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
 			}
-			
+		
 		 
+		 
+		 
+		 public void chargeFilterLotsByCandidat() {
+			 lotByCandidat.clear();
+			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
+					     new WhereClause("LAA_OBJET",WhereClause.Comparateur.LIKE,"%"+filtreLot+"%"),
+					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getCanSouNcc())));
+					_logger.info("lotByCandidat size: "+lotByCandidat.size());	
+		 }
 			//Filtre les marchés en fonction du code Marché
 			/* public void filtrenNccCandidat() {
 				 listCandidats.clear();
@@ -986,6 +999,14 @@ public class CommissionController {
 			    chargeLotsByCandidat();
 		   }
 		//Fin de la Methode OnSelectCandidat
+		 
+		//Love pour recupérer les candidats
+		 public void onSelectLotCandidat() { 
+			 selectLot.setLaaObjet(tlot.getLaaObjet());
+			 newOffre.setDofLaaId(tlot.getLaaId().toString());
+			    //chargeLotsByCandidat();
+		   }
+		//Fin de la Methode OnSelectCandidat
 		
 		//Ouverture des offres
 		public void saveOuverture() {
@@ -1010,7 +1031,8 @@ public class CommissionController {
 			            
 			            
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
-					   newOffre.setDofLaaId(laaId);
+					   //newOffre.setDofLaaId(laaId);
+		 			   newOffre.setDofLaaId(tlot.getLaaId().toString());
 					   newOffre.setTempType("OFF");
 					   newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 					   newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
@@ -1049,7 +1071,7 @@ public class CommissionController {
 						 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
 						 			//A revoir
 						 			//newPieceOffre.setTDetOffres(newOffre.getDofNum());
-						 			newPieceOffre.setTLotAao(laaId);
+						 			newPieceOffre.setTLotAao(tlot.getLaaId().toString());
 						 			iservice.addObject(newPieceOffre);
 							     }	
 					 }
@@ -1287,6 +1309,7 @@ public class CommissionController {
 		 public void vider() {
 			 newOffre = new VbTempParamDetOffres();
 			 infoLot =new VVerifcorOffin();
+			 selectLot =new VLotCandidat();
 			 newSeance = new TSeances();
 			 slctdTd = new TAvisAppelOffre();
 			 newOffre = new VbTempParamDetOffres();
@@ -1312,6 +1335,7 @@ public class CommissionController {
 		 public void viderPartiel() {
 			 newOffre = new VbTempParamDetOffres();
 			 infoLot =new VVerifcorOffin();
+			 selectLot =new VLotCandidat();
 			 newSeance = new TSeances();
 			 //slctdTd = new TAvisAppelOffre();
 			 newOffre = new VbTempParamDetOffres();
@@ -2285,6 +2309,33 @@ public class CommissionController {
 	}
 
 
+	public VLotCandidat getTlot() {
+		return tlot;
+	}
 
+
+	public void setTlot(VLotCandidat tlot) {
+		this.tlot = tlot;
+	}
+
+
+	public VLotCandidat getSelectLot() {
+		return selectLot;
+	}
+
+
+	public void setSelectLot(VLotCandidat selectLot) {
+		this.selectLot = selectLot;
+	}
+
+
+	public String getFiltreLot() {
+		return filtreLot;
+	}
+
+
+	public void setFiltreLot(String filtreLot) {
+		this.filtreLot = filtreLot;
+	}
 	
 }

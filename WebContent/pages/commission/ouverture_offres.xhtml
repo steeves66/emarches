@@ -153,15 +153,34 @@
                     <div class="row">
 			            <div class="col-md-12 align justify-content-center">
 			                    <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
-			                    <legend><small>Lot (2)</small></legend>
-			                        <div class="col-md-10">
-			                   	           <p:selectOneMenu  id="lot" value="#{commissionController.laaId}"  converter="#{themeConverter}" panelStyle="width:"
-			                         effect="fade" style="width:120%" filter="true" filterMatchMode="startsWith">
-			                         <f:selectItem  itemLabel="Selectionnez le lot" itemValue="" />  
-			            			       <f:selectItems value="#{commissionController.lotByCandidat}" var="lo" itemLabel="#{lo.laaObjet}" itemValue="#{lo.laaId}" /> 
-			                               </p:selectOneMenu>
-			                        </div>
-			                        <br/> <br/> <br/>
+			                    <legend><small>Selectionnez le Lot (2) : </small>
+			                             
+			                    </legend>
+			                       
+			                        
+			                 <div class="form-group horizontal">
+
+		                      <div class="col-sm-12">
+				                <table>
+							        <tr>
+		                            <td style="width: 2300px">
+		                           <p:inputTextarea value="#{commissionController.selectLot.laaObjet}" readonly="true" rows="3" cols="33"   type="text"  styleClass="form-control"  style="width: 100%"/>
+		                            </td>		                 
+		                            <td>
+									        <p:commandLink oncomplete="PF('lotDlg').show()" action="#{commissionController.chargeLotsByCandidat()}"  title="Selectionnez l'entreprise" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+										    	<i class="fa fa-search"></i>
+										    </p:commandLink>
+								        </td>
+			                       <td style="width:100px">
+			                       <h:panelGroup id="idrt">
+			                      
+			                       </h:panelGroup>
+			                       </td>
+							        </tr>
+				                </table>
+			                </div>
+		                  </div>
+			                  
 			                    </fieldset>
 			            </div>
 			            </div>
@@ -204,8 +223,8 @@
                   <div class="col-sm-4">
 				           <p:selectOneMenu id="variante"  value="#{commissionController.dofTyp}" style="width:100%" >
 						    <f:selectItem  itemLabel="Selectionnez le type de l'offre..." itemValue=""/> 
-						    <f:selectItem  itemLabel="Variante" itemValue="V"/> 
 						    <f:selectItem  itemLabel="Offre de base" itemValue="B"/> 
+						    <f:selectItem  itemLabel="Variante" itemValue="V"/> 
 						     <p:ajax listener="#{commissionController.checkMontantVar()}"  update="gnl:montvar,gnl:cond"/>   
 				     </p:selectOneMenu> 
 		                  </div>
@@ -426,7 +445,66 @@
     </h:form>
     
     
-    
+   
+     <h:form id="lotDlg">
+	        <p:dialog  widgetVar="lotDlg" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Selectionnez un lot">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-3">
+						<label class="field append-icon">
+							<p:inputText type="text" value="#{commissionController.filtreLot}"  class="gui-input"  placeholder="Saisir le lot"  > 
+						     <p:ajax event="keyup" update=":lotDlg:ndTbleLot" listener="#{commissionController.chargeFilterLotsByCandidat()}" />
+							</p:inputText>
+						
+						</label>
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleLot" styleClass="table table-bordered table-hover" var="slctdTb" value="#{commissionController.lotByCandidat}"
+						 selectionMode="single" rowKey="#{slctdTb.laaId}"
+			               emptyMessage="Aucun lot trouvé" scrollable="true" scrollHeight="300">
+			               
+			               <p:column headerText="N° Lot" styleClass="col-sm-1" >
+                        <h:commandLink  title="Numéro Lot" style="font-size:18px;"  action="#{commissionController.onSelectLotCandidat()}">				        
+         				  <h:outputText value="#{slctdTb.laaNum}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.tlot}" />
+                                </h:commandLink>
+				        </p:column>
+							<p:column headerText="libelle" styleClass="col-sm-9" >
+                        <h:commandLink  title="Lot" style="font-size:18px;"  action="#{commissionController.onSelectLotCandidat()}">				        
+         				  <h:outputText value="#{slctdTb.laaObjet}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.tlot}" />
+                                </h:commandLink>
+				        </p:column>
+						<p:column headerText="Offre de Base" styleClass="col-sm-1" >
+                        <h:commandLink  title="Offre de Base" style="font-size:18px;"  action="#{commissionController.onSelectLotCandidat()}">				        
+         				  <h:outputText value="#{slctdTb.offBase}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.tlot}" />
+                                </h:commandLink>
+				        </p:column>
+				        
+				        <p:column headerText="Variante" styleClass="col-sm-1" >
+                        <h:commandLink  title="Variante" style="font-size:18px;"  action="#{commissionController.onSelectLotCandidat()}">				        
+         				  <h:outputText value="#{slctdTb.offVariante}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.tlot}" />
+                                </h:commandLink>
+				        </p:column>
+				      
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                      
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
      
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
