@@ -158,7 +158,7 @@
 			                   	           <p:selectOneMenu  id="lot" value="#{commissionController.laaId}"  converter="#{themeConverter}" panelStyle="width:"
 			                         effect="fade" style="width:120%" filter="true" filterMatchMode="startsWith">
 			                         <f:selectItem  itemLabel="Selectionnez le lot" itemValue="" />  
-			            			       <f:selectItems value="#{commissionController.listeLots}" var="lo" itemLabel="#{lo.laaObjet}" itemValue="#{lo.laaId}" /> 
+			            			       <f:selectItems value="#{commissionController.lotByCandidat}" var="lo" itemLabel="#{lo.laaObjet}" itemValue="#{lo.laaId}" /> 
 			                               </p:selectOneMenu>
 			                        </div>
 			                        <br/> <br/> <br/>

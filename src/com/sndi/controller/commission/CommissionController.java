@@ -64,6 +64,7 @@ import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VListeSouOffBasse;
 import com.sndi.model.VListeSouOffEleve;
 import com.sndi.model.VLot;
+import com.sndi.model.VLotCandidat;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VRecapSeuilAnormal;
@@ -138,6 +139,7 @@ public class CommissionController {
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
+	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
 	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
@@ -538,9 +540,6 @@ public class CommissionController {
 		 }
 		 
 		 
-		
-		 
-		 
 		//Liste des lot d'un avis d'avis d'appel d'offre
 		 public void chargeLots() {
 			 //listeLots.clear();
@@ -548,6 +547,15 @@ public class CommissionController {
 					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode())
 					    ));
 					_logger.info("listeLots size: "+listeLots.size());	
+		 }
+		 
+		//Liste des lot d'un avis d'avis d'appel d'offre en fonction du candidat
+		 public void chargeLotsByCandidat() {
+			 lotByCandidat.clear();
+			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
+					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getCanSouNcc())));
+					_logger.info("lotByCandidat size: "+lotByCandidat.size());	
 		 }
 		 
 		//Liste des lot d'un avis d'avis d'appel d'offre
@@ -974,6 +982,8 @@ public class CommissionController {
 						 newOffre.setDofTelRep(newOffre.getDofTelRep());
 						 newOffre.setDofMailRep(newOffre.getDofMailRep());
 		            }
+			    
+			    chargeLotsByCandidat();
 		   }
 		//Fin de la Methode OnSelectCandidat
 		
@@ -986,7 +996,7 @@ public class CommissionController {
 		 		else{*/
 			            iservice.updateObject(slctdTd);
 		
-			            if(recupNcc.getDcsNom().equalsIgnoreCase("")) {
+			            if(recupNcc.getDcsNom().equalsIgnoreCase("") || recupNcc.getDcsPrenoms().equalsIgnoreCase("")) {
 			             newOffre.setDofNomRep(newOffre.getDofNomRep());
 						 newOffre.setDofPreRep(newOffre.getDofPreRep());
 						 newOffre.setDofTelRep(newOffre.getDofTelRep());
@@ -1016,11 +1026,8 @@ public class CommissionController {
 			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
-			 			//newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
-			 			//newAnalyseOffre.setAnfLaaId("1");
 			 			newAnalyseOffre.setAnfObser(sltOffre.getDofObsCom());
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-			 			//newAnalyseOffre.setAnfValeur("0");
 			 			iservice.addObject(newAnalyseOffre);
 				     }
 			 		
@@ -2256,6 +2263,28 @@ public class CommissionController {
 	public void setOffre(TDetOffres offre) {
 		this.offre = offre;
 	}
+
+
+	public List<VLotCandidat> getLotByCandidat() {
+		return lotByCandidat;
+	}
+
+
+	public void setLotByCandidat(List<VLotCandidat> lotByCandidat) {
+		this.lotByCandidat = lotByCandidat;
+	}
+
+
+	public List<TDetOffres> getOffreListe() {
+		return offreListe;
+	}
+
+
+	public void setOffreListe(List<TDetOffres> offreListe) {
+		this.offreListe = offreListe;
+	}
+
+
 
 	
 }

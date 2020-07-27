@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 23 janv. 2020 16:00:05 by Hibernate Tools 4.3.5.Final
+
 
 import java.math.BigDecimal;
 import java.util.Date;
