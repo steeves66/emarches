@@ -73,6 +73,7 @@ import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAdresse;
 import com.sndi.model.VCommissionSpeciale;
+import com.sndi.model.VCommissionSpecifique;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCritAnalDacEntete;
 import com.sndi.model.VCritereAnalyse;
@@ -100,6 +101,7 @@ import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreDao;
 import com.sndi.model.VPpmDao;
 import com.sndi.model.VTypePieceOffreSg;
+import com.sndi.model.VUpdateAgpm;
 import com.sndi.model.VUpdateDac;
 import com.sndi.model.VVenteLot;
 import com.sndi.model.VbCommissionSpecifique;
@@ -200,8 +202,9 @@ public class DaoController {
 	private List<VCommissionSpeciale> selectionMbrCommissionSpeciale = new ArrayList<VCommissionSpeciale>(); 
 	private List<VbCommissionSpecifique> listeMbr = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TCommissionSpecifique> listeCom = new ArrayList<TCommissionSpecifique>(); 
-	private List<VbCommissionSpecifique> listeMembre = new ArrayList<VbCommissionSpecifique>();
-	private List<VbCommissionSpecifique> listeMembreComSpec = new ArrayList<VbCommissionSpecifique>(); 
+	private List<VCommissionSpecifique> listeMembre = new ArrayList<VCommissionSpecifique>();
+	private List<VCommissionSpecifique> listeMembreComSpec = new ArrayList<VCommissionSpecifique>(); 
+	private List<VbCommissionSpecifique> listeComSpecifique = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
@@ -367,7 +370,8 @@ public class DaoController {
 	 private VUpdateDac updateDac= new VUpdateDac();
 	//GESTION DES COMMISSIONS
 	 private VbCommissionSpecifique newcomSpec = new VbCommissionSpecifique();
-	 private VbCommissionSpecifique sltCompsec = new VbCommissionSpecifique();
+	 private VbCommissionSpecifique comSpec = new VbCommissionSpecifique();
+	 private VCommissionSpecifique sltCompsec = new VCommissionSpecifique();
 	//GESTION DES CRTIERE
 	 private VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
 	 private VCritereAnalyseDac sltCritereDac = new VCritereAnalyseDac();
@@ -597,12 +601,10 @@ public class DaoController {
 		//Combo box critères
 	 
 	 public void chargeCritereCombobox() {
-		 long loId=0;
 		 if(lot.getLaaId()==null) {
-			 loId=0;
 		 }else
 		 {
-			 loId=lot.getLaaId();
+			 lot.getLaaId();
 		 }
 		 //vider le champs detail
 		  newCritereDac = new VbDetCritAnalyseDac(); 
@@ -618,12 +620,10 @@ public class DaoController {
 		 dao.setDacFactoriseCrit(2);
 		 iservice.updateObject(dao);
 		 
-		 long loId=0;
 		 if(lot.getLaaId()==null) {
-			 loId=0;
 		 }else
 		 {
-			 loId=lot.getLaaId();
+			 lot.getLaaId();
 		 }
 		 //vider le champs detail
 		  newCritereDac = new VbDetCritAnalyseDac(); 
@@ -1118,7 +1118,7 @@ public class DaoController {
 		 //newCritereDac.setDcadDanCraCode(sltCritereDac.getCraCode());
 		 iservice.deleteObject(getDetCritere()); 
 		 chargeCritereSaisie();
-		 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+		 new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
 	 }
 	 //Fin de la méthode de suppression du détail de critère
 	 
@@ -1940,8 +1940,7 @@ public class DaoController {
 			       					                 newDao.setDacMention(slctdTd.getDacMention());
 			       			                         iservice.updateObject(newDao); 
 			       			                         
-			       			                      //Récupération du Statut
-						 						        TStatut statuts = constantService.getStatut("D1T");
+			       			                      constantService.getStatut("D1T");
 						 							  	//Historisation du / des retraits
 						 						       historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorité Contractante");
 						 							  
@@ -1997,8 +1996,7 @@ public class DaoController {
 				        iservice.updateObject(newDao); 
 		   	                 }
 			
-				    //Récupération du Statut
-	 				TStatut statuts = constantService.getStatut("D2T");
+				    constantService.getStatut("D2T");
 	 				//Historisation du DAC
 	 				historiser("D2T",slctdTd.getDacCode(),"DAO transmit par la Cellule de Passation");
 						
@@ -2042,8 +2040,7 @@ public class DaoController {
 		  					newDao.setDacStatutRetour("1");
 		  			        iservice.updateObject(newDao); 
 		  	   	                 }
-		  				//Historisation du DAO	 		  
-		 					 TStatut statuts = constantService.getStatut("D1T");
+		  				constantService.getStatut("D1T");
 							  	//Historisation du / des retraits
 						       historiser(""+statutUpdate,slctdTd.getDacCode(),""+getObservation());
 		 					//Message de confirmation
@@ -2089,10 +2086,7 @@ public class DaoController {
 						 public void chargeExpert() {
 							 listeExpert.clear();
 							 selectionlisteExpert.clear();
-							 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE")),
-									 new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
-									 new WhereClause("TCT_GRP_CODE",Comparateur.EQ,"AUT"),
-									    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
+							 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE"))));
 									_logger.info("expert size: "+listeExpert.size());	
 									
 									
@@ -2111,7 +2105,7 @@ public class DaoController {
 
 						 //Liste des membres de la commssions
 						 public void chargeMembres() {
-							 listeMembre = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
+							 listeMembre = ((List<VCommissionSpecifique>)iservice.getObjectsByColumn("VCommissionSpecifique",
 									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
 									_logger.info("listeMembre size: "+listeMembre.size());				
 						 }
@@ -2119,7 +2113,7 @@ public class DaoController {
 												 
 						// Liste des membres de la commssions de la comission spéciale
 						 public void chargeMembresComSpec() {
-							 listeMembreComSpec = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",new ArrayList<String>(Arrays.asList("COM_TCT_CODE")),
+							 listeMembreComSpec = ((List<VCommissionSpecifique>)iservice.getObjectsByColumn("VCommissionSpecifique",
 									    new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+dao.getDacCode())));
 									_logger.info("listeMembre size: "+listeMembreComSpec.size());				
 						 }
@@ -2171,15 +2165,30 @@ public class DaoController {
 							}
 				 	}
 				 	
+				 	 public void recupMembre() {
+				 		listeComSpecifique = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",
+							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
+			    			if (!listeComSpecifique.isEmpty()) {
+			    				comSpec=listeComSpecifique.get(0); 
+			    			}
+			           }
 				 	
-				 	public void updatePresence() {          
-				 		iservice.updateObject(sltCompsec);
-				 		chargeMembres();	
-								 userController.setTexteMsg("Modification éffectuée avec succès!");
-				  		            userController.setRenderMsg(true);
-				  		            userController.setSevrityMsg("success");
-								
-							}
+				 	public void updatePresence() { 
+				 		iservice.updateObject(comSpec);
+				 		listeComSpecifique = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",
+							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
+			    			if (!listeComSpecifique.isEmpty()) {
+			    				comSpec=listeComSpecifique.get(0); 
+			    				comSpec.setComTctLibelle(comSpec.getComTctLibelle());
+			    				iservice.updateObject(comSpec);
+					 			chargeMembres();
+					 			userController.setTexteMsg("Modification éffectuée avec succès!");
+			  		            userController.setRenderMsg(true);
+			  		            userController.setSevrityMsg("success");
+			    			}
+				 			
+				 		 
+				 	}
 				 	
 				 	public void updatePresenceComspec() {          
 				 		iservice.updateObject(sltCompsec);
@@ -2190,13 +2199,19 @@ public class DaoController {
 								
 							}
 				 	
-				 	public void deletePresence() {   
-				 		iservice.deleteObject(sltCompsec);
-				 		chargeMembres();
-				 		activieComboxAutoNorm();
-						userController.setTexteMsg("Suppression éffectuée avec succès!");
-				  		userController.setRenderMsg(true);
-				  		userController.setSevrityMsg("success");
+				 	public void deletePresence() {  
+                       listeComSpecifique = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",
+							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
+			    			if (!listeComSpecifique.isEmpty()) {
+			    				comSpec=listeComSpecifique.get(0); 
+			    				iservice.deleteObject(comSpec);
+						 		chargeMembres();
+						 		activieComboxAutoNorm();
+								userController.setTexteMsg("Suppression éffectuée avec succès!");
+						  		userController.setRenderMsg(true);
+						  		userController.setSevrityMsg("success");
+			    			}
+				 		
 								
 							}
 				 	
@@ -2221,6 +2236,8 @@ public class DaoController {
 									//newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
 									newcomSpec.setComDteSaisi(Calendar.getInstance().getTime());
 									newcomSpec.setComTctCode(mbr.getTctCode());
+									newcomSpec.setComTctLibelle(mbr.getTctLibelle());
+									newcomSpec.setComTctTitre(mbr.getTctTitre());
 									newcomSpec.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 									newcomSpec.setComDacCode(dao.getDacCode());
 									newcomSpec.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
@@ -2285,7 +2302,7 @@ public class DaoController {
 			        	       }
 			        	       
 			        	       iservice.deleteObject(getDetailCom());
-							   FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+							   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
 				 	}	 
 		 		 
 	//Statistiques pour le chargé d'Etudes
@@ -3045,6 +3062,7 @@ public class DaoController {
 				    		 newLot.setTAvisAppelOffre(newAvis);
 				        	 iservice.addObject(newLot);
 				        	 chargeLots();
+				        	 montantTotalLot();
 				        	 newLot = new TLotAao();
 							 
 							 //Activation du pavet de saisie des pièces des offres 
@@ -3541,8 +3559,7 @@ public class DaoController {
 										 iservice.addObject(detCor);
 									       }
 								  
-								  //Récupération du Statut
-	 						        TStatut statuts = constantService.getStatut("DC2");
+								  constantService.getStatut("DC2");
 	 							  	//Historisation du / des retraits
 	 						       historiser("DC2",newDao.getDacCode(),"DAO Corrigé par le responsable du binôme");
 										//Actualisation du Tableau de Bord
@@ -3602,8 +3619,7 @@ public class DaoController {
 												                                              iservice.updateObject(newDao); 
 										   	                                                 }
 													                           
-													                           //Récupération du Statut
-												 						        TStatut statuts = constantService.getStatut("DC2");
+													                           constantService.getStatut("DC2");
 												 							  	//Historisation du / des retraits
 												 						       historiser("D1T",newDao.getDacCode(),"DAO Corrigé par le responsable du binôme");	
 							 				                              //Actualisation du Tableau de Bord
@@ -3912,8 +3928,7 @@ public class DaoController {
 											dao.setDacStatutRetour(slctdTd.getDacStatutRetour());
 											iservice.updateObject(dao);
 								       
-											  //Récupération du Statut
-			 						        TStatut statuts = constantService.getStatut("D4V");
+											  constantService.getStatut("D4V");
 			 							  	//Historisation du / des retraits
 			 						       historiser("D4V",slctdTd.getDacCode()," ");
 													
@@ -3974,8 +3989,7 @@ public class DaoController {
 												                 iservice.updateObject(newDao); 
 										   	                        }
 
-													         //Récupération du Statut
-								 						        TStatut statuts = constantService.getStatut("D4V");
+													         constantService.getStatut("D4V");
 								 							  	//Historisation du / des retraits
 								 						       historiser("D4V",newDao.getDacCode(),"DAO Transmis par le responsable du binôme");
 												  
@@ -4266,8 +4280,7 @@ public class DaoController {
 									 			        iservice.updateObject(newDao); 
 									 	   	                 }
 									 				
-									 				  //Récupération du Statut
-					 						        TStatut statuts = constantService.getStatut(statutUpdate);
+									 				  constantService.getStatut(statutUpdate);
 					 							  	//Historisation du / des retraits
 					 						       historiser(""+statutUpdate,newDao.getDacCode()," ");
 
@@ -4433,8 +4446,7 @@ public class DaoController {
 											     			  				    }
 											     			  		    
 														  				      
-														  				    //Récupération du Statut
-												 						        TStatut statuts = constantService.getStatut("RET");
+														  				    constantService.getStatut("RET");
 												 							  	//Historisation du / des retraits
 												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
 														  				
@@ -4508,8 +4520,7 @@ public class DaoController {
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
-											 			  				        //Récupération du Statut
-												 						        TStatut statuts = constantService.getStatut("DVE");
+											 			  				        constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
 												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
 											     			  				    
@@ -4590,8 +4601,7 @@ public class DaoController {
 											     			  				    }
 											     			  		    
 														  				      
-														  				     //Récupération du Statut
-												 						        TStatut statuts = constantService.getStatut("RET");
+														  				     constantService.getStatut("RET");
 												 							  	//Historisation du / des retraits
 												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
 														  				
@@ -4647,8 +4657,7 @@ public class DaoController {
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
-											 			  				        //Récupération du Statut
-												 						        TStatut statuts = constantService.getStatut("DVE");
+											 			  				        constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
 												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
 											     			  				 
@@ -6687,13 +6696,7 @@ public class DaoController {
 	}
 
 
-	public List<VbCommissionSpecifique> getListeMembre() {
-		return listeMembre;
-	}
 
-	public void setListeMembre(List<VbCommissionSpecifique> listeMembre) {
-		this.listeMembre = listeMembre;
-	}
 
 	public List<TDetCritAnalyseDac> getListeDetCritere() {
 		return listeDetCritere;
@@ -6703,11 +6706,12 @@ public class DaoController {
 		this.listeDetCritere = listeDetCritere;
 	}
 
-	public VbCommissionSpecifique getSltCompsec() {
+
+	public VCommissionSpecifique getSltCompsec() {
 		return sltCompsec;
 	}
 
-	public void setSltCompsec(VbCommissionSpecifique sltCompsec) {
+	public void setSltCompsec(VCommissionSpecifique sltCompsec) {
 		this.sltCompsec = sltCompsec;
 	}
 
@@ -7152,14 +7156,23 @@ public class DaoController {
 		this.selectionMbrCommissionSpeciale = selectionMbrCommissionSpeciale;
 	}
 
-	public List<VbCommissionSpecifique> getListeMembreComSpec() {
+
+	public List<VCommissionSpecifique> getListeMembre() {
+		return listeMembre;
+	}
+
+	public void setListeMembre(List<VCommissionSpecifique> listeMembre) {
+		this.listeMembre = listeMembre;
+	}
+
+	public List<VCommissionSpecifique> getListeMembreComSpec() {
 		return listeMembreComSpec;
 	}
 
-	public void setListeMembreComSpec(List<VbCommissionSpecifique> listeMembreComSpec) {
+	public void setListeMembreComSpec(List<VCommissionSpecifique> listeMembreComSpec) {
 		this.listeMembreComSpec = listeMembreComSpec;
 	}
-	
+
 	public boolean isEtatPays() {
 		return etatPays;
 	}
@@ -7334,6 +7347,22 @@ public class DaoController {
 
 	public void setRecupCout(VDacliste recupCout) {
 		this.recupCout = recupCout;
+	}
+
+	public List<VbCommissionSpecifique> getListeComSpecifique() {
+		return listeComSpecifique;
+	}
+
+	public void setListeComSpecifique(List<VbCommissionSpecifique> listeComSpecifique) {
+		this.listeComSpecifique = listeComSpecifique;
+	}
+
+	public VbCommissionSpecifique getComSpec() {
+		return comSpec;
+	}
+
+	public void setComSpec(VbCommissionSpecifique comSpec) {
+		this.comSpec = comSpec;
 	}
 
 

@@ -972,7 +972,7 @@
 					        
 					         <p:column headerText="" styleClass="col-sm-1">
 					         
-					          <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+					          <p:commandLink action="#{daoController.recupMembre()}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('dlogMbrMod').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCompsec}" />                             
@@ -1636,7 +1636,7 @@
 	                  <div class="col-sm-10">
 	                  <p:inputText  type="text" styleClass="form-control" id="montCaut" value="#{daoController.newLot.laaMtCaut}" style="width: 100%" >
 	                   <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" listener="#{daoController.calculCaution()}" global="false" process="@this" update="NewLotlog:pcaution" /> 
+	                    <p:ajax event="blur" listener="#{daoController.calculCautionSaisie()}" global="false" process="@this" update="NewLotlog:pcaution" /> 
 	                  </p:inputText>
 	                  </div>
 	                </div>
@@ -2213,13 +2213,13 @@
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">#{daoController.sltCompsec.comTctLibelle}</div>
+            <div  style="color: #fff">#{daoController.comSpec.comTctLibelle}</div>
          </div>
          <div class="box-body">
                 <div class="form-group">
                   <label  class="col-sm-1 control-label">Libelle</label>
 				  <div class="col-sm-11">
-                  <p:inputTextarea  value="#{daoController.sltCompsec.comTctLibelle}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
+                  <p:inputTextarea  value="#{daoController.comSpec.comTctLibelle}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
                   </div>
                 </div>
                 
@@ -2229,7 +2229,7 @@
 	              <div class="col-sm-4">  
 					
 					      <div class="pull-right ">
-			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.updatePresence()}" oncomplete="PF('dlogMbrMod').hide()" update="gnl">
+			            <p:commandLink action="#{daoController.updatePresence()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" oncomplete="PF('dlogMbrMod').hide()" update="gnl">
 			             <i class="ace-icon fa fa-save"></i> Modifier
 			            </p:commandLink>
                      </div>
