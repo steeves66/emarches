@@ -59,6 +59,7 @@ import com.sndi.model.VDacMembre;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetOffreRecevable;
 import com.sndi.model.VDetailOffres;
+import com.sndi.model.VDofTyp;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VListeSouOffBasse;
@@ -143,6 +144,7 @@ public class CommissionController {
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
 	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
+	 private List<VDofTyp> listdoftyp = new ArrayList<VDofTyp>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
 	 //private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
 	 private List<VOffreCandidat> listCandidats = new ArrayList<VOffreCandidat>();
@@ -317,13 +319,25 @@ public class CommissionController {
 		 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
 				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotId)));
 	 }
-	//
+	
+	 //
 		 public void offreResulatatAttrib() {
 			 resultatAttributaire = ((List<VResultEvalClassLot>)iservice.getObjectsByColumn("VResultEvalClassLot",new ArrayList<String>(Arrays.asList("RANG")),
 					 new WhereClause("LAA_NUM",Comparateur.EQ,""+recupLot.getLaaNum()),
 					 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+recupLot.getTDacSpecs().getDacCode())));
 		 }
 		 
+	
+	//Afficher la variante ou l'offre de Base du lot
+	public void doftyp() {
+		listdoftyp.clear();
+		listdoftyp = ((List<VDofTyp>)iservice.getObjectsByColumn("VDofTyp",new ArrayList<String>(Arrays.asList("R_ID")),
+				 new WhereClause("LAA_ID",Comparateur.EQ,""+tlot.getLaaId()),
+				 new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+tlot.getCanSouNcc()),
+				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+tlot.getLaaAaoCode()))); 
+	  }
+		
+        
 		 public void offreResultPropAttrib() {
 			 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
 					 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+recupLot.getTDacSpecs().getDacCode())));
@@ -1019,6 +1033,8 @@ public class CommissionController {
 		 public void onSelectLotCandidat() { 
 			 selectLot.setLaaObjet(tlot.getLaaObjet());
 			 newOffre.setDofLaaId(tlot.getLaaId().toString());
+			 
+			 doftyp();
 			    //chargeLotsByCandidat();
 		   }
 		//Fin de la Methode OnSelectCandidat
@@ -1029,8 +1045,26 @@ public class CommissionController {
 				/*if (selectionCritereAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
-		 		else{*/
-			            iservice.updateObject(slctdTd);
+		 		e*/if(dofTyp.equalsIgnoreCase("")){
+		 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Choisir le type de l'Offre", ""));
+		 		         }else {
+		 		        	  iservice.updateObject(slctdTd);
+		 		 		  
+				 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
+							   //newOffre.setDofLaaId(laaId);
+				 			   newOffre.setDofLaaId(tlot.getLaaId().toString());
+							   newOffre.setTempType("OFF");
+							   newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+							   newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
+							   newOffre.setDofTyp(dofTyp);
+							   //convertir le montant net en qui est en long en string
+							   String montantOffre =String.valueOf(montN);
+							   String rabais =String.valueOf(pourcentRab);
+							   newOffre.setDofMtOfr(montantOffre);
+							   newOffre.setDofRab(rabais);
+							   iservice.addObject(newOffre);
+		 		         }
+			         /*   iservice.updateObject(slctdTd);
 		  
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 					   //newOffre.setDofLaaId(laaId);
@@ -1044,7 +1078,7 @@ public class CommissionController {
 					   String rabais =String.valueOf(pourcentRab);
 					   newOffre.setDofMtOfr(montantOffre);
 					   newOffre.setDofRab(rabais);
-					   iservice.addObject(newOffre);
+					   iservice.addObject(newOffre);*/
 		 			
 		 			
 			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
@@ -1056,9 +1090,7 @@ public class CommissionController {
 				     }
 			 		
 			 		
-			 		
 					  //enregister la liste des pièces du dao
-				    
 				    	if (listeSelectionPiecesOffres.size()==0) {
 								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 							}
@@ -1087,7 +1119,7 @@ public class CommissionController {
 						userController.setSevrityMsg("success");
 		    }	
 		
-		
+		//Fin de la methode SaveOuverture()
 		
 		
 		
@@ -1322,6 +1354,9 @@ public class CommissionController {
 			 listeSelectionPiecesOffres.clear();
 			 listeSouOffBass.clear();
 			 listeSouOffEleve.clear();
+			 listdoftyp.clear();
+			 candidat =new VOffreCandidat();
+			 tlot =new VLotCandidat();
 			 resultatAttributaire.clear();
 			 resultatPropAttributaire.clear();
 			 listeRecapSeuil.clear();
@@ -1342,6 +1377,8 @@ public class CommissionController {
 			 newSeance = new TSeances();
 			 //slctdTd = new TAvisAppelOffre();
 			 newOffre = new VbTempParamDetOffres();
+			 listdoftyp.clear();
+			 
 			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
 			 listeSelectionPiecesOffresAnalyse.clear();
 			 listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();
@@ -2358,6 +2395,16 @@ public class CommissionController {
 
 	public void setCandidat(VOffreCandidat candidat) {
 		this.candidat = candidat;
+	}
+
+
+	public List<VDofTyp> getListdoftyp() {
+		return listdoftyp;
+	}
+
+
+	public void setListdoftyp(List<VDofTyp> listdoftyp) {
+		this.listdoftyp = listdoftyp;
 	}
 
 	
