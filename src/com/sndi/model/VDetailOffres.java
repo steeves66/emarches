@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 9 mai 2020 22:05:43 by Hibernate Tools 4.3.5.Final
+// Generated 28 juil. 2020 17:10:33 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -18,6 +18,7 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_DETAIL_OFFRES")
 public class VDetailOffres implements java.io.Serializable {
 
+	private BigDecimal RId;
 	private BigDecimal dofNum;
 	private BigDecimal laaNum;
 	private String laaObjet;
@@ -26,19 +27,21 @@ public class VDetailOffres implements java.io.Serializable {
 	private String offSouSigleSte;
 	private BigDecimal dofMtOfr;
 	private String dofTyp;
-	private String dofStaut;
+	private String dofStatut;
 
 	public VDetailOffres() {
 	}
 
-	public VDetailOffres(BigDecimal dofNum, BigDecimal dofLaaId, String aaoCode) {
+	public VDetailOffres(BigDecimal dofNum, BigDecimal laaNum, BigDecimal dofLaaId, String aaoCode) {
 		this.dofNum = dofNum;
+		this.laaNum = laaNum;
 		this.dofLaaId = dofLaaId;
 		this.aaoCode = aaoCode;
 	}
 
-	public VDetailOffres(BigDecimal dofNum, BigDecimal laaNum, String laaObjet, BigDecimal dofLaaId, String aaoCode,
-			String offSouSigleSte, BigDecimal dofMtOfr, String dofTyp,String dofStaut) {
+	public VDetailOffres(BigDecimal RId, BigDecimal dofNum, BigDecimal laaNum, String laaObjet, BigDecimal dofLaaId,
+			String aaoCode, String offSouSigleSte, BigDecimal dofMtOfr, String dofTyp, String dofStatut) {
+		this.RId = RId;
 		this.dofNum = dofNum;
 		this.laaNum = laaNum;
 		this.laaObjet = laaObjet;
@@ -47,10 +50,19 @@ public class VDetailOffres implements java.io.Serializable {
 		this.offSouSigleSte = offSouSigleSte;
 		this.dofMtOfr = dofMtOfr;
 		this.dofTyp = dofTyp;
-		this.dofStaut= dofStaut;
+		this.dofStatut = dofStatut;
 	}
 
 	@Id
+	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}
+
 	@Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getDofNum() {
 		return this.dofNum;
@@ -60,7 +72,7 @@ public class VDetailOffres implements java.io.Serializable {
 		this.dofNum = dofNum;
 	}
 
-	@Column(name = "LAA_NUM", precision = 22, scale = 0)
+	@Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getLaaNum() {
 		return this.laaNum;
 	}
@@ -69,7 +81,7 @@ public class VDetailOffres implements java.io.Serializable {
 		this.laaNum = laaNum;
 	}
 
-	@Column(name = "LAA_OBJET", length = 1000)
+	@Column(name = "LAA_OBJET", length = 1047)
 	public String getLaaObjet() {
 		return this.laaObjet;
 	}
@@ -96,15 +108,15 @@ public class VDetailOffres implements java.io.Serializable {
 		this.aaoCode = aaoCode;
 	}
 
-	@Column(name = "OFF_SOU_SIGLE_STE", length = 500)
+	@Column(name = "OFF_SOU_SIGLE_STE", length = 523)
 	public String getOffSouSigleSte() {
-		return offSouSigleSte;
+		return this.offSouSigleSte;
 	}
 
 	public void setOffSouSigleSte(String offSouSigleSte) {
 		this.offSouSigleSte = offSouSigleSte;
 	}
-	
+
 	@Column(name = "DOF_MT_OFR", precision = 20, scale = 0)
 	public BigDecimal getDofMtOfr() {
 		return this.dofMtOfr;
@@ -122,15 +134,14 @@ public class VDetailOffres implements java.io.Serializable {
 	public void setDofTyp(String dofTyp) {
 		this.dofTyp = dofTyp;
 	}
-	
-	@Column(name = "DOF_STATUT")
-	public String getDofStaut() {
-		return dofStaut;
+
+	@Column(name = "DOF_STATUT", length = 1)
+	public String getDofStatut() {
+		return this.dofStatut;
 	}
 
-	public void setDofStaut(String dofStaut) {
-		this.dofStaut = dofStaut;
+	public void setDofStatut(String dofStatut) {
+		this.dofStatut = dofStatut;
 	}
 
-	
 }

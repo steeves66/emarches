@@ -532,7 +532,7 @@ public class CommissionController {
 		//Liste des offres VBdetaiOffre
 		 public void chargeOffres() {
 			 listeOffre.clear();
-			 listeOffre = ((List<VDetailOffres>)iservice.getObjectsByColumn("VDetailOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 listeOffre = ((List<VDetailOffres>)iservice.getObjectsByColumn("VDetailOffres",
 					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode())));
 				_logger.info("listeOffres size: "+listeOffre.size());	
 			 
@@ -1045,7 +1045,7 @@ public class CommissionController {
 				/*if (selectionCritereAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}
-		 		e*/if(dofTyp.equalsIgnoreCase("")){
+		 		e*//*if(dofTyp.equalsIgnoreCase("")){
 		 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Choisir le type de l'Offre", ""));
 		 		         }else {
 		 		        	  iservice.updateObject(slctdTd);
@@ -1063,8 +1063,8 @@ public class CommissionController {
 							   newOffre.setDofMtOfr(montantOffre);
 							   newOffre.setDofRab(rabais);
 							   iservice.addObject(newOffre);
-		 		         }
-			         /*   iservice.updateObject(slctdTd);
+		 		         }*/
+			           iservice.updateObject(slctdTd);
 		  
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 					   //newOffre.setDofLaaId(laaId);
@@ -1078,7 +1078,7 @@ public class CommissionController {
 					   String rabais =String.valueOf(pourcentRab);
 					   newOffre.setDofMtOfr(montantOffre);
 					   newOffre.setDofRab(rabais);
-					   iservice.addObject(newOffre);*/
+					   iservice.addObject(newOffre);
 		 			
 		 			
 			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
