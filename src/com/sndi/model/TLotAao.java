@@ -48,6 +48,7 @@ public class TLotAao implements java.io.Serializable {
 	private Long laaCoutLot;
 	private String laaAjoutPanier;
 	private Long laaDelaiExe;
+	private String laaVariante;
 	private Set<TPiecesOffres> TPiecesOffres = new HashSet<TPiecesOffres>(0);
 
 	public TLotAao() {
@@ -60,7 +61,7 @@ public class TLotAao implements java.io.Serializable {
 	public TLotAao(Long laaId, TLBudgets TLBudgets, TFonction TFonctionByLaaFonCodSaisi,
 			TFonction TFonctionByLaaFonCodCpmp, TAvisAppelOffre TAvisAppelOffre,TDacSpecs TDacSpecs, String laaObjet, String laaObservation,
 			Long laaMtCaut, long laaMtEst, Date laaDteSaisi, String laaStaCode, String laaOpeMatricule,
-			String laaLieuExe, Long laaNum, Long laaCoutLot,String laaAjoutPanier, Long laaDelaiExe,
+			String laaLieuExe, Long laaNum, Long laaCoutLot,String laaAjoutPanier, Long laaDelaiExe,String laaVariante,
 			Set<TPiecesOffres> TPiecesOffres) {
 		this.laaId = laaId;
 		this.TLBudgets = TLBudgets;
@@ -80,6 +81,7 @@ public class TLotAao implements java.io.Serializable {
 		this.laaCoutLot = laaCoutLot;
 		this.laaAjoutPanier = laaAjoutPanier;
 		this.laaDelaiExe = laaDelaiExe;
+		this.laaVariante = laaVariante;
 		this.TPiecesOffres = TPiecesOffres;
 	}
 
@@ -253,6 +255,16 @@ public class TLotAao implements java.io.Serializable {
 	public void setLaaDelaiExe(Long laaDelaiExe) {
 		this.laaDelaiExe = laaDelaiExe;
 	}
+
+	@Column(name = "LAA_VARIANTE", length = 1)
+	public String getLaaVariante() {
+		return this.laaVariante;
+	}
+
+	public void setLaaVariante(String laaVariante) {
+		this.laaVariante = laaVariante;
+	}
+
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLotAao")
 	public Set<TPiecesOffres> getTPiecesOffres() {

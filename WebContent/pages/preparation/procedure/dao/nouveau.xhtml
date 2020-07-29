@@ -612,6 +612,21 @@
 		               </p:cellEditor>
 				        </p:column>
 				        
+				         <p:column headerText="Variante ?" styleClass="col-sm-1">
+				            <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.laaVariante == 'O'?'OUI':'NON'}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				     <h:selectOneMenu id="variante" value="#{slctdTb.laaVariante}" style="width:100%; color:#0000">
+			              <f:selectItem itemLabel="Choisir" itemValue="" />
+                         <f:selectItem itemLabel="OUI" itemValue="O" />
+                         <f:selectItem itemLabel="NON" itemValue="N" />
+                        </h:selectOneMenu>
+	         				 
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
 				         
 				        <p:column headerText="Imputation" styleClass="col-sm-2">
 		                <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
@@ -1657,6 +1672,16 @@
 	                  <label for="lieu" class="col-sm-2 control-label"><b>Lieu d'exécution </b></label>
 	                  <div class="col-sm-10">
 	                  <p:inputText  type="text" styleClass="form-control" id="lieu" value="#{daoController.newLot.laaLieuExe}" style="width: 100%" /> 
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="lieu" class="col-sm-2 control-label"><b>Variante ?</b></label>
+	                  <div class="col-sm-10">
+	                   <p:selectOneRadio value="#{daoController.newLot.laaVariante}">
+							  <f:selectItem itemLabel="Oui" itemValue="O" />
+							  <f:selectItem itemLabel="Non" itemValue="N" />
+						  </p:selectOneRadio>
 	                  </div>
 	                </div>
 	                
