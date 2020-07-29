@@ -4147,35 +4147,18 @@ public class DaoController {
 											  
 										        }else 
 										            if(resultat.equalsIgnoreCase("Valide")){
-										        	  statutSanction ="";
-													  statutSanRetour ="";
+										        	  //statutSanction ="DPU";
+													  //statutSanRetour ="0";
 													  
 													  if(slctdTd.getDacMention().equalsIgnoreCase("Validé pour publication")) {
 														  statutSanction ="DPU";
 														  statutSanRetour ="0";
 														    if(slctdTd.getMopCode().equalsIgnoreCase("AOR") || slctdTd.getMopCode().equalsIgnoreCase("PSL"))
 														      {
-														    	  /*listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
-																			new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-																			if (!listAvis.isEmpty()) {
-																				                 //Mis à jour du statut
-																				                 majAvis= listAvis.get(0);
-																				                 majAvis.setTStatut(new TStatut(statutSanction));
-																				                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
-																				                 iservice.updateObject(majAvis);
-																			                       }*/
+														    	  
 														    	
 														         }else {
 														        	 
-														        	  /*listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
-																				new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
-																				if (!listAvis.isEmpty()) {
-																					                 //Mis à jour du statut
-																					                 majAvis= listAvis.get(0);
-																					                 majAvis.setTStatut(new TStatut("APU"));
-																					                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
-																					                 iservice.updateObject(majAvis);
-																				                       }*/
 														                  }
 														    	
 														
@@ -4219,8 +4202,6 @@ public class DaoController {
 													     
 													     //MAJ dans T_DAC_SPECS
 													     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-													    		    //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-													    		    //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 												 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 												 				if (!listDao.isEmpty()) {
 												 					newDao= listDao.get(0);
