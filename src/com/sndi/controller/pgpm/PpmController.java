@@ -2536,6 +2536,7 @@ public class PpmController {
 				 			boutonEdit =true; 
 				 			boutonEditPspm =false;
 				 			
+				 			controleController.btn_creerDetailPpm =true;
 				 			//Actualisation du Tableau de Bord
 				 			//tableauBordController.chargeDataPpm();
 				 			tableauBordbAc();
@@ -3928,11 +3929,10 @@ public class PpmController {
 		    		 listeDao = new ArrayList<VModeleDao>();
 		    		 listeAmi = new ArrayList<VModeleAmi>();
 		    		 listePrq = new ArrayList<VModelePrq>();
-		    		 //devCode ="";
-		    		 //baiCode ="";
-		    		// souCode=""; 
+		    		
 		    		 tydCode="";
 		    		 totalMontant=0;
+		    		 controleController.btn_creerDetailPpm = true;
 		    	 }
 				 
 				 
@@ -3955,6 +3955,7 @@ public class PpmController {
 					chargeData("PN");
 					//tableauBordController.ChargeTbProcedure("PN","PPM");
 					 //chargeDataAvaliderPpm();
+					
 					chargePpmPUB();
 					 vider();
 					 userController.initMessage();

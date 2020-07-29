@@ -1111,7 +1111,6 @@ public class CommissionController {
 				    	viderPartiel();
 				    	chargeOffres();
 				    	chargeCandidats();
-				    	//vider();
 				    	userController.setTexteMsg("Ouverture effectuée avec succès !");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
