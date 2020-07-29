@@ -4165,8 +4165,8 @@ public class DaoController {
 											  
 										        }else 
 										            if(resultat.equalsIgnoreCase("Valide")){
-										        	  statutSanction ="";
-													  statutSanRetour ="";
+										        	  //statutSanction ="";
+													  //statutSanRetour ="";
 													  
 													  if(slctdTd.getDacMention().equalsIgnoreCase("Validé pour publication")) {
 														  statutSanction ="DPU";
