@@ -205,6 +205,7 @@ public class DaoController {
 	private List<VCommissionSpecifique> listeMembre = new ArrayList<VCommissionSpecifique>();
 	private List<VCommissionSpecifique> listeMembreComSpec = new ArrayList<VCommissionSpecifique>(); 
 	private List<VbCommissionSpecifique> listeComSpecifique = new ArrayList<VbCommissionSpecifique>(); 
+	private List<TCommissionSpecifique> listeComSpecific = new ArrayList<TCommissionSpecifique>();
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
@@ -371,6 +372,7 @@ public class DaoController {
 	//GESTION DES COMMISSIONS
 	 private VbCommissionSpecifique newcomSpec = new VbCommissionSpecifique();
 	 private VbCommissionSpecifique comSpec = new VbCommissionSpecifique();
+	 private TCommissionSpecifique comSpecUpdate = new TCommissionSpecifique();
 	 private VCommissionSpecifique sltCompsec = new VCommissionSpecifique();
 	//GESTION DES CRTIERE
 	 private VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
@@ -793,6 +795,7 @@ public class DaoController {
 		  if(!listDetCritereDac.isEmpty()) { 
 			  updateCritere=listDetCritereDac.get(0);
 			  updateCritere.setDcadLibAjust(sltCritereDac.getCraLibelle());
+			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereSaisie();
 		  }
@@ -2166,21 +2169,20 @@ public class DaoController {
 				 	}
 				 	
 				 	 public void recupMembre() {
-				 		listeComSpecifique = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",
+				 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
 							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
-			    			if (!listeComSpecifique.isEmpty()) {
-			    				comSpec=listeComSpecifique.get(0); 
+			    			if (!listeComSpecific.isEmpty()) {
+			    				comSpecUpdate=listeComSpecific.get(0); 
 			    			}
 			           }
 				 	
 				 	public void updatePresence() { 
-				 		iservice.updateObject(comSpec);
-				 		listeComSpecifique = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",
+				 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
 							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
-			    			if (!listeComSpecifique.isEmpty()) {
-			    				comSpec=listeComSpecifique.get(0); 
-			    				comSpec.setComTctLibelle(comSpec.getComTctLibelle());
-			    				iservice.updateObject(comSpec);
+			    			if (!listeComSpecific.isEmpty()) {
+			    				comSpecUpdate=listeComSpecific.get(0); 
+			    				comSpecUpdate.setComTctLibelle(sltCompsec.getComTctLibelle());
+			    				iservice.updateObject(comSpecUpdate);
 					 			chargeMembres();
 					 			userController.setTexteMsg("Modification éffectuée avec succès!");
 			  		            userController.setRenderMsg(true);
@@ -3324,6 +3326,13 @@ public class DaoController {
 							 libelleTaux = false; 
 						 }
 					 }
+					 
+					 
+					 //Edition de l'AGPM
+					 public void imprimeSynthese() {
+							   projetReport.stringparam1(dao.getDacCode(), "synthèse_dac", "synthèse_dac"); 
+						}
+					 
 				 
 					//Téléchargement des DAO type après la saisie du DAO					
 						public void opendaoType() throws IOException{
@@ -4122,6 +4131,15 @@ public class DaoController {
 									
 									public void activieComboxAutoSpec() {
 										if(listeMembreComSpec.size()==0) {
+											dossDacListe = ((List<TDossierDacs>)iservice.getObjectsByColumn("TDossierDacs",new ArrayList<String>(Arrays.asList("DDA_ID")),
+											new WhereClause("DDA_DAC_CODE",Comparateur.EQ,dao.getDacCode())));
+											
+											for(TDossierDacs doss : dossDacListe) {	
+												iservice.deleteObject(doss);	
+											}
+											chargeDossierAutorisation();
+											dao.setDacAutComSpec("");
+											iservice.updateObject(dao);
 											comboboxCom =true;
 											spec = false;
 											norm=false;
@@ -4147,18 +4165,35 @@ public class DaoController {
 											  
 										        }else 
 										            if(resultat.equalsIgnoreCase("Valide")){
-										        	  //statutSanction ="DPU";
-													  //statutSanRetour ="0";
+										        	  statutSanction ="";
+													  statutSanRetour ="";
 													  
 													  if(slctdTd.getDacMention().equalsIgnoreCase("Validé pour publication")) {
 														  statutSanction ="DPU";
 														  statutSanRetour ="0";
 														    if(slctdTd.getMopCode().equalsIgnoreCase("AOR") || slctdTd.getMopCode().equalsIgnoreCase("PSL"))
 														      {
-														    	  
+														    	  /*listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+																			new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+																			if (!listAvis.isEmpty()) {
+																				                 //Mis à jour du statut
+																				                 majAvis= listAvis.get(0);
+																				                 majAvis.setTStatut(new TStatut(statutSanction));
+																				                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+																				                 iservice.updateObject(majAvis);
+																			                       }*/
 														    	
 														         }else {
 														        	 
+														        	  /*listAvis =(List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_CODE")),
+																				new WhereClause("AAO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
+																				if (!listAvis.isEmpty()) {
+																					                 //Mis à jour du statut
+																					                 majAvis= listAvis.get(0);
+																					                 majAvis.setTStatut(new TStatut("APU"));
+																					                 majAvis.setAaoDtePub(Calendar.getInstance().getTime());
+																					                 iservice.updateObject(majAvis);
+																				                       }*/
 														                  }
 														    	
 														
@@ -4202,6 +4237,8 @@ public class DaoController {
 													     
 													     //MAJ dans T_DAC_SPECS
 													     listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+													    		    //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
+													    		    //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
 												 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 												 				if (!listDao.isEmpty()) {
 												 					newDao= listDao.get(0);
@@ -7344,6 +7381,22 @@ public class DaoController {
 
 	public void setComSpec(VbCommissionSpecifique comSpec) {
 		this.comSpec = comSpec;
+	}
+
+	public List<TCommissionSpecifique> getListeComSpecific() {
+		return listeComSpecific;
+	}
+
+	public void setListeComSpecific(List<TCommissionSpecifique> listeComSpecific) {
+		this.listeComSpecific = listeComSpecific;
+	}
+
+	public TCommissionSpecifique getComSpecUpdate() {
+		return comSpecUpdate;
+	}
+
+	public void setComSpecUpdate(TCommissionSpecifique comSpecUpdate) {
+		this.comSpecUpdate = comSpecUpdate;
 	}
 
 

@@ -567,7 +567,7 @@
 		               </p:cellEditor>
 				       </p:column>
 				        
-				        <p:column headerText="Délai(Jours)" styleClass="col-sm-1">
+				        <p:column headerText="Délai (Jours)" width="10%">
 				          <p:cellEditor>
 		                <f:facet name="output">
 		                <h:outputText  styleClass="pull-right" value="#{slctdTb.laaDelaiExe}" />
@@ -907,7 +907,6 @@
                   </div>
 	                </div>
 	              </h:panelGroup>
-
 	              </div>
 	    
           <!-- DEBBUT PANEL COMMISSION NORMALE -->
@@ -1018,10 +1017,16 @@
         <div class="row">
           <div class="box box-success box-solid">
             <div class="box-header with-border">
-             <div class="col-md-8 ">
+             <div class="col-md-6 ">
                <div  style="color: #fff">LISTE DES MEMBRES DE LA COMMISSION SPECIALE</div>
              </div>
-              <div class="col-sm-4">
+             
+             <div class="col-md-4 ">
+               <div  style="color: #fff">AUTORISATION N° #{daoController.dao.dacAutComSpec}</div>
+             </div>
+             
+                  
+              <div class="col-sm-2">
 				                  <p:commandLink  oncomplete="PF('dlogMbrSpec').show()" action="#{daoController.chargeMbrSpeciale()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UNE RESSOURCE</span>
 								  </p:commandLink>
@@ -1120,6 +1125,10 @@
             
            
            </div>
+           
+             <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" action="#{daoController.imprimeSynthese}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger la fiche de synthèse
+				      </p:commandLink>
           
        <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
@@ -2238,13 +2247,13 @@
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">#{daoController.comSpec.comTctLibelle}</div>
+            <div  style="color: #fff">#{daoController.comSpecUpdate.comTctLibelle}</div>
          </div>
          <div class="box-body">
                 <div class="form-group">
                   <label  class="col-sm-1 control-label">Libelle</label>
 				  <div class="col-sm-11">
-                  <p:inputTextarea  value="#{daoController.comSpec.comTctLibelle}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
+                  <p:inputTextarea  value="#{daoController.comSpecUpdate.comTctLibelle}" rows="5" cols="5" styleClass="form-control" style="width: 100%" />  
                   </div>
                 </div>
                 
