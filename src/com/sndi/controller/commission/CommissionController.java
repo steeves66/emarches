@@ -571,7 +571,7 @@ public class CommissionController {
 		 
 		//Liste des lot d'un avis d'avis d'appel d'offre en fonction du candidat
 		 public void chargeLotsByCandidat() {
-			 lotByCandidat.clear();
+			 //lotByCandidat.clear();
 			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
 					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
 					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getSouNcc())));
@@ -1067,7 +1067,6 @@ public class CommissionController {
 			           iservice.updateObject(slctdTd);
 		  
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
-					   //newOffre.setDofLaaId(laaId);
 		 			   newOffre.setDofLaaId(tlot.getLaaId().toString());
 					   newOffre.setTempType("OFF");
 					   newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
@@ -1104,7 +1103,6 @@ public class CommissionController {
 						 			newPieceOffre.setTTypePieceOffre(ligne.getTpoCode());
 						 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
 						 			//A revoir
-						 			//newPieceOffre.setTDetOffres(newOffre.getDofNum());
 						 			newPieceOffre.setTLotAao(tlot.getLaaId().toString());
 						 			iservice.addObject(newPieceOffre);
 							     }	
@@ -1113,7 +1111,7 @@ public class CommissionController {
 				    	viderPartiel();
 				    	chargeOffres();
 				    	chargeCandidats();
-				    	vider();
+				    	//vider();
 				    	userController.setTexteMsg("Ouverture effectuée avec succès !");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
@@ -1375,19 +1373,13 @@ public class CommissionController {
 			 infoLot =new VVerifcorOffin();
 			 selectLot =new VLotCandidat();
 			 newSeance = new TSeances();
-			 //slctdTd = new TAvisAppelOffre();
-			 newOffre = new VbTempParamDetOffres();
 			 listdoftyp.clear();
-			 
+			 //candidat =new VOffreCandidat();
+			 tlot =new VLotCandidat();
 			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
 			 listeSelectionPiecesOffresAnalyse.clear();
 			 listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();
 			 listeSelectionPiecesOffres.clear();
-			 listeSouOffBass.clear();
-			 listeSouOffEleve.clear();
-			 resultatAttributaire.clear();
-			 resultatPropAttributaire.clear();
-			 listeRecapSeuil.clear();
 			 //listeOffres = new ArrayList<TDetOffres>(); 
 			 //listeOffre = new ArrayList<VDetailOffres>();
 			 listeOffres.clear();

@@ -91,6 +91,7 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofRepeche;
 	private String dofObsRet;
 	private String dofObsAnormal;
+	private String dofObsVariante;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -116,7 +117,7 @@ public class TDetOffres implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin,
-			String dofRepeche, String dofObsRet,String dofObsAnormal,Set<TPiecesOffres> TPiecesOffreses) {
+			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
@@ -185,9 +186,8 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofRepeche = dofRepeche;
 		this.dofObsRet = dofObsRet;
 		this.dofObsAnormal = dofObsAnormal;
+		this.dofObsVariante = dofObsVariante;
 		this.TPiecesOffreses = TPiecesOffreses;
-		
-		
 	}
 
 	@Id
@@ -816,6 +816,15 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setDofObsAnormal(String dofObsAnormal) {
 		this.dofObsAnormal = dofObsAnormal;
+	}
+	
+	@Column(name = "DOF_OBS_VARIANTE", length = 500)
+	public String getDofObsVariante() {
+		return this.dofObsVariante;
+	}
+
+	public void setDofObsVariante(String dofObsVariante) {
+		this.dofObsVariante = dofObsVariante;
 	}
 	
 }

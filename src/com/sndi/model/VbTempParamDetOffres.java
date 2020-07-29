@@ -46,6 +46,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 	private String dofMailRep;
 	private String dofSouNcc;
 	private String dofSigle;
+	private String dofObsVariante;
 
 
 	public VbTempParamDetOffres() {
@@ -59,7 +60,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 			String dofLaaAaoCode, String dofLaaId, String dofDelai, String dofOffCnps, String dofOffImpot,
 			String dofOffRc, String dofCaut, String dofTyp, String dofBanCode, String dofEstimRab, String dofRab,
 			String dofMtOfr, String dofOffNum, String dofNum, String dofNomRep, String dofPreRep, String dofTelRep,
-			String dofMailRep, String dofSouNcc, String dofSigle) {
+			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante) {
 		this.tempNum = tempNum;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofOpeMatricule = dofOpeMatricule;
@@ -84,6 +85,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 		this.dofMailRep = dofMailRep;
 		this.dofSouNcc = dofSouNcc;
 		this.dofSigle = dofSigle;
+		this.dofObsVariante = dofObsVariante;
 	}
 
 	@Id
@@ -303,6 +305,15 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 
 	public void setDofSigle(String dofSigle) {
 		this.dofSigle = dofSigle;
+	}
+	
+	@Column(name = "DOF_OBS_VARIANTE", length = 500)
+	public String getDofObsVariante() {
+		return this.dofObsVariante;
+	}
+
+	public void setDofObsVariante(String dofObsVariante) {
+		this.dofObsVariante = dofObsVariante;
 	}
 
 

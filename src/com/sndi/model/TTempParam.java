@@ -44,6 +44,7 @@ public class TTempParam implements java.io.Serializable {
 	private String tempChamp18;
 	private String tempChamp19;
 	private String tempChamp20;
+	private String tempChamp21;
 
 	public TTempParam() {
 	}
@@ -56,7 +57,7 @@ public class TTempParam implements java.io.Serializable {
 			String tempChamp01, String tempChamp02, String tempChamp03, String tempChamp04, String tempChamp05,
 			String tempChamp06, String tempChamp07, String tempChamp08, String tempChamp09, String tempChamp10,
 			String tempChamp11, String tempChamp12, String tempChamp13, String tempChamp14, String tempChamp15,
-			String tempChamp16, String tempChamp17, String tempChamp18, String tempChamp19, String tempChamp20) {
+			String tempChamp16, String tempChamp17, String tempChamp18, String tempChamp19, String tempChamp20,String tempChamp21) {
 		this.tempNum2 = tempNum2;
 		this.TOperateur = TOperateur;
 		this.tempType = tempType;
@@ -81,6 +82,7 @@ public class TTempParam implements java.io.Serializable {
 		this.tempChamp18 = tempChamp18;
 		this.tempChamp19 = tempChamp19;
 		this.tempChamp20 = tempChamp20;
+		this.tempChamp21 = tempChamp21;
 	}
 
 	@Id
@@ -301,6 +303,15 @@ public class TTempParam implements java.io.Serializable {
 
 	public void setTempChamp20(String tempChamp20) {
 		this.tempChamp20 = tempChamp20;
+	}
+	
+	@Column(name = "TEMP_CHAMP_21", length = 500)
+	public String getTempChamp21() {
+		return this.tempChamp21;
+	}
+
+	public void setTempChamp21(String tempChamp21) {
+		this.tempChamp21 = tempChamp21;
 	}
 
 }
