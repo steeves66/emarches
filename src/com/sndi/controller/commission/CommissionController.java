@@ -1027,6 +1027,7 @@ public class CommissionController {
 		            }
 			    
 			    chargeLotsByCandidat();
+				_logger.info("Numéro DAO: "+slctdTd.getTDacSpecs().getDacCode());
 		   }
 		//Fin de la Methode OnSelectCandidat
 		 
