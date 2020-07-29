@@ -37,6 +37,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 	private String tempLaaDelaiExe;
 	private String laaMtEst;
 	private String tempLaaLieuExe;
+	private String tempLaaVariante;
 	
 
 	public VbTempParametreLot() {
@@ -50,7 +51,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 			String tempLaaNbrTotLot, String tempLaaNbrLotDebut, String tempLaaNbrLotFin, String tempLaaLibGenerique,
 			String tempLaaImputation, String tempLaaCautLot, String tempLaaMtLot, String tempLaaAaoCode,
 			String tempLaaAutre, String tempLaaAutre1,String tempLaaDacCode,String tempLaaDelaiExe, String laaMtEst,
-			String tempLaaLieuExe) {
+			String tempLaaLieuExe, String tempLaaVariante) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -69,6 +70,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 		this.tempLaaDelaiExe = tempLaaDelaiExe;
 		this.laaMtEst = laaMtEst;
 		this.tempLaaLieuExe = tempLaaLieuExe;
+		this.tempLaaVariante = tempLaaVariante;
 	}
 
 	
@@ -234,5 +236,15 @@ public class VbTempParametreLot implements java.io.Serializable {
 	public void setTempLaaLieuExe(String tempLaaLieuExe) {
 		this.tempLaaLieuExe = tempLaaLieuExe;
 	}
+	
+	@Column(name = "TEMP_LAA_VARIANTE", length = 500)
+	public String getTempLaaVariante() {
+		return this.tempLaaVariante;
+	}
+
+	public void setTempLaaVariante(String tempLaaVariante) {
+		this.tempLaaVariante = tempLaaVariante;
+	}
+
 
 }
