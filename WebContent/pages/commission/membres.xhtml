@@ -8,7 +8,7 @@
 
       <ui:composition template="/template/templatePage.xhtml">
 	<ui:define name="contents">
-<h:form id="gnl">	
+<h:form id="gnl" styleClass="form-horizontal">	
  <section class="content-header">
       <h3>
         #{controleController.libelle}  
@@ -178,8 +178,9 @@
              </div> 
             </div>
             <div class="box-body">
-              <div class="row">
-                <div class="col-md-2">
+                <div class="row">
+	              <div class="col-md-6">
+	               <div class="col-md-6">
                   <div class="form-group">
 						<label class="col-sm-4 control-label">Total de pli</label>
 						<div class="col-sm-8">
@@ -188,27 +189,29 @@
 						</div>
 					</div>
                 </div>
-                <div class="col-md-2">
+	                <div class="col-md-6">
 	                <div class="form-group">
-							<label class="col-sm-4 control-label"> Pli dans le delai</label>
-							<div class="col-sm-8">
+							<label class="col-sm-5 control-label"> Pli dans le delai</label>
+							<div class="col-sm-7">
 								<p:inputText value="#{commissionController.slctdTd.aaoNbrOff}" 
 									type="text" styleClass="form-control" style="width: 100%" />
 						</div>
 					</div>
                 </div>
-                <div class="col-md-2">
+                
+                  <div class="col-md-6">
                    <div class="form-group">
-						<label class="col-sm-5 control-label">Pli hors delai</label>
-						<div class="col-sm-7">
+						<label class="col-sm-4 control-label">Pli hors delai</label>
+						<div class="col-sm-8">
 							<p:inputText value="#{commissionController.slctdTd.aaoNbrOffHorDelai}" 
 								type="text" styleClass="form-control" style="width: 100%" />
 					</div>
 				</div>
                 </div>
-                <div class="col-md-2">
+                
+                   <div class="col-md-6">
                       <div class="form-group">
-						<label class="col-sm-5 control-label">Quorum atteint ?</label>
+						<label class="col-sm-5 control-label">Quorum atteint?</label>
 						<div class="col-sm-7">
 						  <p:selectOneRadio value="#{commissionController.newSeance.seaQuorum}">
 							  <f:selectItem itemLabel="Oui" itemValue="O" />
@@ -217,63 +220,65 @@
 					</div>
 				</div>
                 </div>
-                <div class="col-md-2">
+               
+	              
+	              </div>
+	              <div class="col-md-6">
+	               <div class="row">
+                   <div class="col-md-5">
                     
-		                <div class="form-group ">
-		                 <label for="delai" class="col-sm-7 control-label"><b>Délai d'exécution(Jours)<span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-5">
-	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
-	                  </div>
-	                  </div>
+		     
                 </div>
-                <div class="col-md-2">
+	            
+	             <div class="col-md-7">
                   <div class="form-group ">
-		                <label for="lieuOuv" class="col-sm-7 control-label"><b>Lieu d'ouverture</b></label>
-	                  <div class="col-sm-5">
+		                <label for="lieuOuv" class="col-sm-4 control-label"><b>Lieu d'ouverture</b></label>
+	                  <div class="col-sm-8">
 	                     <p:inputText id="lieuOuv" type="text" styleClass="form-control" value="#{commissionController.slctdTd.aaoLieuOuvPrecis}" style="width: 100%" />
 	                  </div>
 	                  </div>
                 </div>
-                <div class="col-md-2">
+                </div>
+                <div class="row">
+                   <div class="col-md-6">
                 <div class="form-group ">
-	                  <label for="dateOuv" class="col-sm-7 control-label"><b>Date d'ouv</b></label>
-	                  <div class="col-sm-5">
+	                  <label for="dateOuv" class="col-sm-5 control-label"><b>Date d'ouv</b></label>
+	                  <div class="col-sm-6">
 	                      <p:calendar id="dateOuv" value="#{commissionController.slctdTd.aaoDteOuv}" mask="true" pattern="dd/MM/yyyy" /> 
 	                  </div>
 	             </div>
                 </div>
                 
-                <div class="col-md-2">
+                  <div class="col-md-6">
                 <div class="form-group ">
-	                  <label class="col-sm-7 control-label"><b>Date d'ouv Tech</b></label>
-	                  <div class="col-sm-5">
+	                  <label class="col-sm-4 control-label"><b>Date d'ouv Tech</b></label>
+	                  <div class="col-sm-6">
 	                      <p:calendar  value="#{commissionController.slctdTd.aaoDteOuvTec}" mask="true" pattern="dd/MM/yyyy" /> 
 	                  </div>
 	             </div>
                 </div>
-                
-                    
-                
+	            </div>
               </div>
+               </div>
             </div>
             <div class="box-footer">
                 <div class="row">
 
 
 
-     <div class="col-md-1">
+     
+    </div>
+    
+            
+            </div>
+            </div>
+            </div>
+            
+             <div class="box-footer">
         <p:commandLink styleClass="btn btn-success pull-right" style=" background-color: #036d3b" action="#{commissionController.savePresence()}" update=":content">
 		       <i class="ace-icon fa fa-save bigger-130"></i> Enregistrer
 		     </p:commandLink> 
      </div>
-    </div>
-    
-             
-            </div>
-            </div>
-            </div>
-            
-            
             
              <div class="col-md-12">
            <div class="box box-success box-solid">
