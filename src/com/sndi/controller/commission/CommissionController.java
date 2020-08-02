@@ -50,6 +50,7 @@ import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
+import com.sndi.model.VAvisAppelOffre;
 import com.sndi.model.VCandidatDac;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCompoCommission;
@@ -140,9 +141,11 @@ public class CommissionController {
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
+	 //private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
 	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
+	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
 	 private List<VDofTyp> listdoftyp = new ArrayList<VDofTyp>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
@@ -169,6 +172,7 @@ public class CommissionController {
 	private VLotCandidat tlot =new VLotCandidat();
 	private VLotCandidat selectLot =new VLotCandidat();
 	private VCritereAnalyseDacOff sltCritere =new VCritereAnalyseDacOff();
+	private TAvisAppelOffre sltAvis =new TAvisAppelOffre();
 	private TDetCommissionSeance detCom = new TDetCommissionSeance();
 	 private TDossierMbr selectedDossier = new TDossierMbr();
 	
@@ -313,11 +317,13 @@ public class CommissionController {
 		 if(recupLot.getLaaId() == null) {
 			 lotId = 0;
 		  }else {
-			  verifCorNum = recupLot.getLaaId();
+			  lotId = recupLot.getLaaId();
 		  }
 		 
 		 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotId)));
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+		 
+		 
 	 }
 	
 	 //
@@ -368,9 +374,10 @@ public class CommissionController {
 						  offre.setDofObsAnormal(sltRecharge.getCommentaireAnormal());
 						  iservice.updateObject(offre);
 						  
-						  offreBasse();
+						  //offreBasse();
+						  chargeResultaFilter();
 						  
-						  userController.setTexteMsg("Modification effectuée avec succès!");
+						  userController.setTexteMsg("Repechage effectué avec succès!");
 						  userController.setRenderMsg(true);
 						  userController.setSevrityMsg("success");
 		 			} 
@@ -471,6 +478,7 @@ public class CommissionController {
              sltCritere= listeCritereAnalyse.get(0);
              _logger.info("valeur: "+sltCritere.getAaoRegQual());
              
+/*
          	if(sltCritere.getAaoRegQual().equalsIgnoreCase("CONFORME") || sltCritere.getAaoRegQual().equalsIgnoreCase("null")) {
 				conformite=true;
 				montant =false;
@@ -481,12 +489,31 @@ public class CommissionController {
 				}else
 						if(sltCritere.getAaoRegQual().equalsIgnoreCase("AUTRE")) {
 							
-						}
+						}*/
                }
 	 }
 	 
 	 
-	 
+	 public void verifConformite() {
+	
+		  listeAvis = ((List<TAvisAppelOffre>)iservice.getObjectsByColumn("TAvisAppelOffre",new ArrayList<String>(Arrays.asList("AAO_CODE")),
+ 				 new WhereClause("AAO_CODE",Comparateur.EQ,""+sltOffre.getDofLaaAaoCode())));
+                  if (!listeAvis.isEmpty()) {
+                 	 sltAvis = listeAvis.get(0);
+                 	 
+                 		if(sltAvis.getAaoRegQual().equalsIgnoreCase("CONFORMITE") || sltCritere.getAaoRegQual().equalsIgnoreCase("null")) {
+             				conformite=true;
+             				montant =false;
+             			}else
+             				if(sltAvis.getAaoRegQual().equalsIgnoreCase("SCORE")) {
+             					montant =true;
+             					conformite=false;
+             				}else
+             						if(sltAvis.getAaoRegQual().equalsIgnoreCase("AUTRE")) {
+             							
+             						}
+                            }
+	 }
 	 
 	//Liste des piecs de l'offre a l'analyse
 	 public void chargePiecesAnalyse() {
@@ -495,7 +522,9 @@ public class CommissionController {
 				 //new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
 				 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 		 nbrLot =nonbreLot();
+		 
 		 chargeCritereAnalyse();
+		 verifConformite();
 		 //chargeMention();
 	 }
 		 
@@ -1139,7 +1168,16 @@ public class CommissionController {
 			_logger.info("listeAppelOffre size: "+listeAppelOffre.size());
 		}
 		
-		//Fin Ouverture
+		/*
+		public void chargeListe(String statut) {
+			 listeAppelOffre.clear();
+			 listeAppelOffre = (List<VAvisAppelOffre>) iservice.getObjectsByColumnDesc("VAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+			 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut),
+			 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			_logger.info("listeAppelOffre size: "+listeAppelOffre.size());
+		}*/
+		
+		//Fin Ouverture/Analyse/Jugement
 		public void finOuverture() {
 			String statUpdate = "";
 			String message = "";
@@ -1158,20 +1196,34 @@ public class CommissionController {
 						 statUpdate = "JUG";
 						 chargeListe("JUG");
 						 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
-					 }else {
-						 
-					 }	 
+					 }else {	 
+					}	 
 				 }
- 
 			 }
-			
 			slctdTd.setTStatut(new TStatut(statUpdate));	
 			iservice.updateObject(slctdTd);
+			chargementListe();
 			userController.setTexteMsg(message);
 			userController.setRenderMsg(true);
-			userController.setSevrityMsg("success");
-			  
+			userController.setSevrityMsg("success");  
 		}
+		
+		//Methode de chargement après avoir mis fin à l'ouverture/analyse/jugement
+		public void chargementListe() {
+			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
+				chargeListe("OUV");
+			 }else {
+				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+						chargeListe("ANA");
+				 }else {
+					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+						 chargeListe("JUG");
+					 }	
+				 }
+		    }	
+	     }
+		
+		
 		
 		public void validerAnalyse(){
 			slctdTd.setTStatut(new TStatut("ANA"));	
@@ -1212,6 +1264,10 @@ public class CommissionController {
 			        if (!listeOffres.isEmpty()) {
 			        	offre=offreListe.get(0);
 			        	offre.setDofStaut("1");
+			        	offre.setDofMtCor(sltOffre.getDofMtCor());
+			        	offre.setDofMtOfr(sltOffre.getDofMtOfr());
+			        	offre.setDofErrFin(sltOffre.getDofErrFin());
+			        	offre.setDofObsFin(sltOffre.getDofObsFin());
 			        	iservice.updateObject(offre);
 			          }
 				//sltOffre.setDofStatut("1");
@@ -1430,11 +1486,15 @@ public class CommissionController {
 					 }
 					
 					//Chargement de la liste des demandes
-					
 					 listeAppelOffre.clear();
 					 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
 					 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
-					_logger.info("listeAppelOffre size: "+listeAppelOffre.size());		
+					_logger.info("listeAppelOffre size: "+listeAppelOffre.size());	
+					
+					/* listeAppelOffre.clear();
+					 listeAppelOffre = (List<VAvisAppelOffre>) iservice.getObjectsByColumnDesc("VAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+					 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
+					_logger.info("listeAppelOffre size: "+listeAppelOffre.size());*/
 					
 					break;
 				case "com2":	
@@ -2400,5 +2460,33 @@ public class CommissionController {
 		this.listdoftyp = listdoftyp;
 	}
 
+
+	public List<TAvisAppelOffre> getListeAvis() {
+		return listeAvis;
+	}
+
+
+	public void setListeAvis(List<TAvisAppelOffre> listeAvis) {
+		this.listeAvis = listeAvis;
+	}
+
+
+	public TAvisAppelOffre getSltAvis() {
+		return sltAvis;
+	}
+
+
+	public void setSltAvis(TAvisAppelOffre sltAvis) {
+		this.sltAvis = sltAvis;
+	}
+
+
+/*	public List<VAvisAppelOffre> getListeAppelOffre() {
+		return listeAppelOffre;
+	}
+
+	public void setListeAppelOffre(List<VAvisAppelOffre> listeAppelOffre) {
+		this.listeAppelOffre = listeAppelOffre;
+	}*/
 	
 }

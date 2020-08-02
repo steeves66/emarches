@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-30T12:08:44 -->
+<!-- 2020-08-01T17:02:20 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_psc" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e771a51-deef-488c-b7c0-9a03b76eebc6">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -188,7 +188,7 @@ and dps.dpp_id= $P{param_code}]]>
 	<detail>
 		<band height="466" splitType="Stretch">
 			<frame>
-				<reportElement x="0" y="8" width="554" height="213" uuid="7dbb1213-e778-4f72-affc-f6562651c2a6">
+				<reportElement x="0" y="8" width="554" height="236" uuid="7dbb1213-e778-4f72-affc-f6562651c2a6">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<box>
@@ -198,36 +198,36 @@ and dps.dpp_id= $P{param_code}]]>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<staticText>
-					<reportElement x="2" y="146" width="152" height="21" uuid="2770077d-0b04-4f69-8950-4d5b0634cedc"/>
+					<reportElement x="2" y="166" width="152" height="21" uuid="2770077d-0b04-4f69-8950-4d5b0634cedc"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Part reservée aux PME ou PMI : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="153" y="146" width="250" height="21" uuid="623ee76d-1aec-4e0c-a71c-98310de6c68a"/>
+					<reportElement x="153" y="166" width="250" height="21" uuid="623ee76d-1aec-4e0c-a71c-98310de6c68a"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{DPP_PARTIE_PME_PMI}.equalsIgnoreCase("O")? "OUI " : "NON"]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="1" y="124" width="109" height="21" uuid="5b253cfb-0d76-4251-a46e-cd56eb98247b"/>
+					<reportElement x="1" y="143" width="109" height="21" uuid="5b253cfb-0d76-4251-a46e-cd56eb98247b"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Type de Marché : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="111" y="124" width="441" height="21" uuid="0ea63d17-8876-482a-856c-dd8376dbab9e"/>
+					<reportElement x="111" y="143" width="441" height="21" uuid="0ea63d17-8876-482a-856c-dd8376dbab9e"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{DPP_TYM_CODE}+" : "+$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="1" y="102" width="109" height="21" uuid="f2103aac-628b-47cc-bf5a-15260eda44eb"/>
+					<reportElement x="1" y="120" width="109" height="21" uuid="f2103aac-628b-47cc-bf5a-15260eda44eb"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Mode de Passation : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="110" y="102" width="442" height="21" uuid="a1d71886-da72-48f4-9519-8061f9812e0e"/>
+					<reportElement x="110" y="120" width="442" height="21" uuid="a1d71886-da72-48f4-9519-8061f9812e0e"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -268,24 +268,24 @@ and dps.dpp_id= $P{param_code}]]>
 					<text><![CDATA[INFORMATIONS GENERALES]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="168" width="112" height="21" uuid="a4a90fd6-18b5-4ab4-b9e1-8b64e4d1cb27"/>
+					<reportElement x="2" y="189" width="112" height="21" uuid="a4a90fd6-18b5-4ab4-b9e1-8b64e4d1cb27"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Imputation : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="114" y="167" width="366" height="23" uuid="b1ee16fa-18b4-4863-a2d1-5af75720e484"/>
+					<reportElement x="114" y="188" width="366" height="23" uuid="b1ee16fa-18b4-4863-a2d1-5af75720e484"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{LBG_IMPUTATION}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="2" y="190" width="112" height="21" uuid="e4dc989e-d0d6-4e3e-9b04-1ccdb060ada2"/>
+					<reportElement x="2" y="211" width="112" height="21" uuid="e4dc989e-d0d6-4e3e-9b04-1ccdb060ada2"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Nature : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="113" y="190" width="437" height="23" uuid="23cd5367-5baf-4731-94c3-c6b86fd48dea"/>
+					<reportElement x="113" y="211" width="437" height="23" uuid="23cd5367-5baf-4731-94c3-c6b86fd48dea"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -297,7 +297,7 @@ and dps.dpp_id= $P{param_code}]]>
 					<text><![CDATA[Objet : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="108" y="74" width="445" height="28" uuid="ef4ddc6c-90f2-430b-a765-f157c03e7a6d"/>
+					<reportElement x="108" y="74" width="445" height="46" uuid="ef4ddc6c-90f2-430b-a765-f157c03e7a6d"/>
 					<textElement verticalAlignment="Top">
 						<font isBold="true"/>
 					</textElement>
@@ -305,7 +305,7 @@ and dps.dpp_id= $P{param_code}]]>
 				</textField>
 			</frame>
 			<frame>
-				<reportElement x="1" y="224" width="554" height="89" uuid="f65743f4-2a14-4548-8fbc-8886c146e9bf"/>
+				<reportElement x="1" y="248" width="554" height="89" uuid="f65743f4-2a14-4548-8fbc-8886c146e9bf"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -374,10 +374,10 @@ and dps.dpp_id= $P{param_code}]]>
 				</textField>
 			</frame>
 			<line>
-				<reportElement x="2" y="245" width="553" height="1" uuid="089ecc9d-7896-49f0-9359-8a2e92a5e5b9"/>
+				<reportElement x="2" y="269" width="553" height="1" uuid="089ecc9d-7896-49f0-9359-8a2e92a5e5b9"/>
 			</line>
 			<frame>
-				<reportElement x="0" y="315" width="555" height="21" uuid="d4af95c7-a5c7-4e00-b54f-ce4e99bff855"/>
+				<reportElement x="0" y="339" width="555" height="21" uuid="d4af95c7-a5c7-4e00-b54f-ce4e99bff855"/>
 				<box>
 					<topPen lineWidth="1.0"/>
 					<leftPen lineWidth="1.0"/>
@@ -393,7 +393,7 @@ and dps.dpp_id= $P{param_code}]]>
 				</staticText>
 			</frame>
 			<componentElement>
-				<reportElement x="0" y="338" width="555" height="61" uuid="41a4a10f-e22c-4742-975c-106ee288ab56">
+				<reportElement x="0" y="362" width="555" height="61" uuid="41a4a10f-e22c-4742-975c-106ee288ab56">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>

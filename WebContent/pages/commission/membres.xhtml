@@ -182,7 +182,7 @@
 	              <div class="col-md-6">
 	               <div class="col-md-6">
                   <div class="form-group">
-						<label class="col-sm-4 control-label">Total de pli</label>
+						<label class="col-sm-4 control-label">Nbre offres réçues</label>
 						<div class="col-sm-8">
 							<p:inputText value="#{commissionController.newSeance.seaNbrPli}"
 								type="text" styleClass="form-control" style="width: 100%" />
@@ -191,7 +191,7 @@
                 </div>
 	                <div class="col-md-6">
 	                <div class="form-group">
-							<label class="col-sm-5 control-label"> Pli dans le delai</label>
+							<label class="col-sm-5 control-label">Offre(s) dans le delai</label>
 							<div class="col-sm-7">
 								<p:inputText value="#{commissionController.slctdTd.aaoNbrOff}" 
 									type="text" styleClass="form-control" style="width: 100%" />
@@ -201,7 +201,7 @@
                 
                   <div class="col-md-6">
                    <div class="form-group">
-						<label class="col-sm-4 control-label">Pli hors delai</label>
+						<label class="col-sm-4 control-label">Offre(s) hors delai</label>
 						<div class="col-sm-8">
 							<p:inputText value="#{commissionController.slctdTd.aaoNbrOffHorDelai}" 
 								type="text" styleClass="form-control" style="width: 100%" />
@@ -226,8 +226,11 @@
 	              <div class="col-md-6">
 	               <div class="row">
                    <div class="col-md-5">
-                    
-		     
+                    <label class="col-sm-4 control-label">Offres acceptées</label>
+						<div class="col-sm-8">
+							<p:inputText value="#{commissionController.slctdTd.aaoNbrOffAccpet}"
+								type="text" styleClass="form-control" style="width: 100%" />
+						</div>
                 </div>
 	            
 	             <div class="col-md-7">

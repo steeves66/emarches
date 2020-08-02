@@ -27,6 +27,7 @@ public class TDetailVente implements java.io.Serializable {
 	private String dveQte;
 	private long dveCout;
 	private String dveCoutLettre;
+	private String dveFonCod;
 
 	public TDetailVente() {
 	}
@@ -38,7 +39,7 @@ public class TDetailVente implements java.io.Serializable {
 	}
 
 	public TDetailVente(long dveNum, TDacSpecs TDacSpecs, TLotAao TLotAao, TVenteDac TVenteDac, String dveQte,
-			long dveCout, String dveCoutLettre) {
+			long dveCout, String dveCoutLettre, String dveFonCod) {
 		this.dveNum = dveNum;
 		this.TDacSpecs = TDacSpecs;
 		this.TLotAao = TLotAao;
@@ -46,6 +47,7 @@ public class TDetailVente implements java.io.Serializable {
 		this.dveQte = dveQte;
 		this.dveCout = dveCout;
 		this.dveCoutLettre = dveCoutLettre;
+		this.dveFonCod = dveFonCod;
 	}
 
 	@Id
@@ -115,6 +117,15 @@ public class TDetailVente implements java.io.Serializable {
 
 	public void setDveCoutLettre(String dveCoutLettre) {
 		this.dveCoutLettre = dveCoutLettre;
+	}
+	
+	@Column(name = "DVE_FON_COD", length = 12)
+	public String getDveFonCod() {
+		return this.dveFonCod;
+	}
+
+	public void setDveFonCod(String dveFonCod) {
+		this.dveFonCod = dveFonCod;
 	}
 
 }

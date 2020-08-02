@@ -323,9 +323,7 @@ public class UserController implements Serializable{
 		
 		}else{
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sélectionner une fonction dans la liste ! ", ""));
-			
-			
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sélectionner une fonction dans la liste ! ", ""));	
 		}		
 	}
 	

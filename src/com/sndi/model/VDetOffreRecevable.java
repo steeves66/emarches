@@ -81,6 +81,7 @@ public class VDetOffreRecevable implements java.io.Serializable {
 	private String dofOpeMatricule;
 	private String dofStatut;
 	private String dofSouNcc;
+	private String dofTitle;
 	private String dofSigle;
 	private String dofErrFin;
 	private String dofObsFin;
@@ -112,7 +113,7 @@ public class VDetOffreRecevable implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofFonCodeAc,
-			String dofOpeMatricule, String dofStatut, String dofSouNcc, String dofSigle, String dofErrFin,
+			String dofOpeMatricule, String dofStatut, String dofSouNcc,String dofTitle, String dofSigle, String dofErrFin,
 			String dofObsFin, String dofRepeche, String dofObsAnormal, String dofObsRet) {
 		this.dofNum = dofNum;
 		this.dofLaaId = dofLaaId;
@@ -176,6 +177,7 @@ public class VDetOffreRecevable implements java.io.Serializable {
 		this.dofOpeMatricule = dofOpeMatricule;
 		this.dofStatut = dofStatut;
 		this.dofSouNcc = dofSouNcc;
+		this.dofTitle = dofTitle;
 		this.dofSigle = dofSigle;
 		this.dofErrFin = dofErrFin;
 		this.dofObsFin = dofObsFin;
@@ -742,6 +744,15 @@ public class VDetOffreRecevable implements java.io.Serializable {
 
 	public void setDofSouNcc(String dofSouNcc) {
 		this.dofSouNcc = dofSouNcc;
+	}
+	
+	@Column(name = "DOF_TITLE", length = 560)
+	public String getDofTitle() {
+		return this.dofTitle;
+	}
+
+	public void setDofTitle(String dofTitle) {
+		this.dofTitle = dofTitle;
 	}
 
 	@Column(name = "DOF_SIGLE", length = 500)

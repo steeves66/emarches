@@ -3167,6 +3167,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             	} 
 			}
             
+            //Si la source de financement est Etat alors montant en devise = part Trésor
+            public void recupTresor() {
+            	if(sourfin.equalsIgnoreCase("ETAT")) {
+            		newFinancement.fipTresor = newFinancement.getFipMontantDevise().longValue();
+            	}
+            }
+            
             
                        //SaveFinancement de modification
                        public void saveFinancementUpdate(){

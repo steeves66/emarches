@@ -81,6 +81,7 @@ import com.sndi.model.VCritereAnalyseDac;
 import com.sndi.model.VCritereAnalyseDacLot;
 import com.sndi.model.VCritereAnalyseModel;
 import com.sndi.model.VDacMembre;
+import com.sndi.model.VDacVendu;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VDaoBailleur;
 import com.sndi.model.VDaoStatut;
@@ -193,6 +194,7 @@ public class DaoController {
 	 private List<TAffichageDao> validationListe = new ArrayList<TAffichageDao>();
 	 private List <VDaoStatut> daostatutList = new ArrayList<VDaoStatut>();
 	 private List<VDetTabBordDac> detailTBCpt = new ArrayList<VDetTabBordDac>();
+	 private List<VDacVendu> listeDetailVente= new ArrayList<VDacVendu>();
 	//GESTION DES MEMBRES DE LA COMMISSION
 	private List<VbCommissionType> membresCommission = new ArrayList<VbCommissionType>();
 	private List<VbCommissionType> selectionMembres = new ArrayList<VbCommissionType>(); 
@@ -228,7 +230,6 @@ public class DaoController {
 	//GESTION PIECES OFFRES
 	//private List<TTypePieceOffre> listePiecesOffres= new ArrayList<TTypePieceOffre>();
 	//private List<TTypePieceOffre> listeSelectionPiecesOffres= new ArrayList<TTypePieceOffre>();
-	
 	private List<VTypePieceOffreSg> listePiecesOffres= new ArrayList<VTypePieceOffreSg>();
 	private List<VTypePieceOffreSg> listeSelectionPiecesOffres= new ArrayList<VTypePieceOffreSg>();
 	
@@ -242,6 +243,7 @@ public class DaoController {
 	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
+	private List<TDetCritAnalyseDac> listDetcritere = new ArrayList<TDetCritAnalyseDac>();
 	private TCommissionSpecifique detailCom = new TCommissionSpecifique(); 
 	//MAREGE DE PREFENCE
 	private List<VMargeDePreference> listeMarge = new ArrayList<VMargeDePreference>();
@@ -275,6 +277,7 @@ public class DaoController {
 	 private VDetailCorrectionCharge detailCharge = new VDetailCorrectionCharge();
 	 private VDaoBailleur daoBailleur = new VDaoBailleur();
 	 private TDacSpecs newDao = new TDacSpecs();
+	 private VDacVendu detailVente = new VDacVendu();
 	 private TDaoAffectation daoAffec = new TDaoAffectation();
 	 private TTiers newEntre = new TTiers();
 	 private TCandidats newCandidat = new TCandidats();
@@ -800,6 +803,19 @@ public class DaoController {
 			  chargeCritereSaisie();
 		  }
 		 
+		/* listDetcritere = ((List<TDetCritAnalyseDac>)iservice.getObjectsByColumn("TDetCritAnalyseDac",
+				 new WhereClause("DCAD_DAN_CRA_CODE",WhereClause.Comparateur.EQ,""+sltCritereDac.getCraCode())));
+		 if(!listDetcritere.isEmpty()) {
+			 detCritere.setDcadLibAjust(sltCritereDac.getCraLibelle());
+			 detCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
+			 iservice.updateObject(detCritere);
+			 chargeCritereSaisie();
+		 }*/
+		 
+		   chargeCritereSaisie();
+		    userController.setTexteMsg("Modification effectuée avec succès!");
+			userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
 	 }
 	 
 	 
@@ -4438,8 +4454,7 @@ public class DaoController {
 												 		            	  newCandidat.setCanSouNcc(newSouncc);
 													 		              newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());  
 												 		               }
-													               //newCandidat.setCanSouNcc(newSouncc);
-													               //newCandidat.setCanSouSigleSte(soumission.getSouSigleSte());
+													  
 													               newCandidat.setCanDteSaisi(Calendar.getInstance().getTime());
 													               newCandidat.setCanOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 													               iservice.addObject(newCandidat);
@@ -4460,6 +4475,7 @@ public class DaoController {
 											     			  			  venteDetail.setTVenteDac(newVente);
 											     			  			  venteDetail.setDveCout(montantRetrait);
 													        	          venteDetail.setTDacSpecs(newDao);
+													        	          venteDetail.setDveFonCod(userController.getSlctd().getTFonction().getFonCod());
 													                      iservice.addObject(venteDetail);
 											     			  				    }
 											     			  		    
@@ -4535,6 +4551,7 @@ public class DaoController {
 											      			  			  venteDetail.setTVenteDac(newVente);
 											      			  			  venteDetail.setDveCout(recupCout.getAaoCoutDac());
 											 		        	          venteDetail.setTDacSpecs(newDao);
+											 		        	          venteDetail.setDveFonCod(userController.getSlctd().getTFonction().getFonCod());
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
@@ -4566,6 +4583,16 @@ public class DaoController {
 												                   }    
 											                }
 											  //Fin Methode de Paiement
+											  
+											  //Methode de récupération du nombre de vente 
+											  public void detailVente() {
+												listeDetailVente = (List<VDacVendu>) iservice.getObjectsByColumn("VDacVendu", new ArrayList<String>(Arrays.asList("DVE_DAC_CODE")),
+								      			  		 new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()),
+								      			  		 new WhereClause("DVE_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+					      			  		             if (!listeDetailVente.isEmpty()) {
+					      			  			            detailVente= listeDetailVente.get(0);
+					      			  				    }
+											  }
 											  
 											  
 											//Methode de paiement pour entreprise internationale
@@ -4615,6 +4642,7 @@ public class DaoController {
 											     			  			  venteDetail.setTVenteDac(newVente);
 											     			  			  venteDetail.setDveCout(montantRetrait);
 													        	          venteDetail.setTDacSpecs(newDao);
+													        	          venteDetail.setDveFonCod(userController.getSlctd().getTFonction().getFonCod());
 													                      iservice.addObject(venteDetail);
 											     			  				    }
 											     			  		    
@@ -4672,6 +4700,7 @@ public class DaoController {
 											      			  			  venteDetail.setTVenteDac(newVente);
 											      			  			  venteDetail.setDveCout(recupCout.getAaoCoutDac());
 											 		        	          venteDetail.setTDacSpecs(newDao);
+											 		        	          venteDetail.setDveFonCod(userController.getSlctd().getTFonction().getFonCod());
 											 		                      iservice.addObject(venteDetail);
 											      			  				    }
 											      			  		    
@@ -7397,6 +7426,22 @@ public class DaoController {
 
 	public void setComSpecUpdate(TCommissionSpecifique comSpecUpdate) {
 		this.comSpecUpdate = comSpecUpdate;
+	}
+
+	public List<VDacVendu> getListeDetailVente() {
+		return listeDetailVente;
+	}
+
+	public void setListeDetailVente(List<VDacVendu> listeDetailVente) {
+		this.listeDetailVente = listeDetailVente;
+	}
+
+	public VDacVendu getDetailVente() {
+		return detailVente;
+	}
+
+	public void setDetailVente(VDacVendu detailVente) {
+		this.detailVente = detailVente;
 	}
 
 

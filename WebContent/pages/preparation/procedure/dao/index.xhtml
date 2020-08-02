@@ -265,11 +265,6 @@
 	                    </h:panelGroup>
 				        </p:column> 
 
-				        <p:column headerText="Nbre Vente" styleClass="col-sm-1"  rendered="#{controleController.nbreAchat}">
-	                    <h:outputText value="#{slctdTb.dacNbreAchat}" />
-				        </p:column>
-				       
-				        
 
                       <p:column headerText="Actions" styleClass="col-sm-1">
                            
@@ -356,6 +351,12 @@
                                 title="Fin de la vente" update=":content">
                               <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente du DAC N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
+                          </p:commandLink>
+                          
+                          <p:commandLink oncomplete="PF('paiementDlg').show()"  class="btn btn-xs btn-sucess" style="background-color: #f88b2e;margin-right:3px"  action="#{daoController.detailVente()}"
+                                title="Nombre de Vente" update=":content">
+                              <i class="ace-icon fa fa-eye bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
                           </p:commandLink>
                           

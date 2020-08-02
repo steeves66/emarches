@@ -59,7 +59,7 @@
                  <div class="col-md-12">
                    <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES LOTS</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold;">LISTE DES LOTS</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -116,7 +116,7 @@
                <div class="col-md-6">
                <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">LISTE DES OFFRES DU LOT N° #{commissionController.sltOffre.dofNum}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight:bold;">LISTE DES OFFRES DU LOT N° #{commissionController.lot.laaNum}</div></div> 
 			        <div class="col-md-2 ">
 					
 				</div>
@@ -212,7 +212,7 @@
     
     
          <h:form id="lotlog" styleClass="form-horizontal">
-	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="95%" closable="true" header="Analyse de l'Offre N° #{commissionController.sltOffre.dofNum}">
+	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="95%" closable="true" header="Analyse de l'Offre N° #{commissionController.sltOffre.dofNum} : #{commissionController.sltOffre.dofTitle}">
 				<div class="contentpanel">
                  
                  <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
@@ -351,10 +351,10 @@
 				               </p:cellEditor>
 					        </p:column>
 					        
-                      <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.conformite}" >
+                      <p:column headerText="VALEUR" styleClass="col-sm-3" rendered="#{commissionController.conformite}" >
                           <p:cellEditor>
                           <f:facet name="output">
-         				  <h:outputText id="mandat1" value="#{slctdTb.aaoRegQual}" />
+         				  <h:outputText id="mandat1" styleClass="form-control text-center" value="#{slctdTb.aaoRegQual}" />
          				  </f:facet>
          				  <f:facet name="input">
 	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQual}" style="width:100%; color:#0000">

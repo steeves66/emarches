@@ -29,7 +29,7 @@ public class TFinancementPgpm implements java.io.Serializable {
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
 	private String fipTypeFinance;
-	private long fipTresor;
+	public long fipTresor;
 	
 
 	public TFinancementPgpm() {

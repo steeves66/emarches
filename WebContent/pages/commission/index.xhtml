@@ -157,12 +157,12 @@
                            
                             <!--FIN  FIN OUVERTURE -->
                             
-                            <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{commissionController.finOuverture()}"
+                             <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{commissionController.finOuverture()}"
 				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <p:confirm header="Confirmation" message="#{controleController.libelleConfirm} #{slctdTb.aaoCode} ?" icon="ui-icon-alert" /> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
-                            </p:commandLink>
+                            </p:commandLink> 
                            
 				        </p:column>
     </p:dataTable>
