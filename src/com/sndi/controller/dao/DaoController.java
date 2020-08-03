@@ -2712,7 +2712,7 @@ public class DaoController {
 						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
 						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
-				 multiFiltre=""; 
+				  multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
 				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
 			 }

@@ -270,14 +270,14 @@
         <div class="box-header with-border">
          <div class="col-md-10 "><div  style="color: #fff">SAISIE DES FINANCEMENTS (2)</div></div>
         
-        <h:panelGroup rendered="#{pgpmAcController.loveAgpmRappel}">  
+         <h:panelGroup rendered="#{pgpmAcController.loveAgpmRappel}">  
          <div class="col-md-2 ">
 			 <p:commandLink oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 				<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
 			</p:commandLink>
 		</div>
-		</h:panelGroup>
-		
+		 </h:panelGroup>
+		 
         </div>
         <div class="box-body">
         
@@ -738,7 +738,7 @@
 	                  <div class="col-sm-11">
 	                    <p:inputText type="text" value="#{pgpmAcController.newFinancement.fipMontantDevise}" id="montDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" global="false" process="@this" update="finlog:montDev" />
+	                    <p:ajax event="blur" listener="#{pgpmAcController.recupTresor()}" global="false" process="@this" update="finlog:montDev, finlog:tresor" />
 	                    </p:inputText>
 	                  </div>
 	                </div>

@@ -149,21 +149,12 @@
                             
                             <!--DEBUT  FIN OUVERTURE -->
                              <p:commandLink oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
-				               title="Fin de la seance d'ouverture">
+				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
-                            
-                           
                             <!--FIN  FIN OUVERTURE -->
-                            
-                             <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{commissionController.finOuverture()}"
-				               title="#{controleController.libelleFinCom}" update=":content">
-                                <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
-                                <p:confirm header="Confirmation" message="#{controleController.libelleConfirm} #{slctdTb.aaoCode} ?" icon="ui-icon-alert" /> 
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
-                            </p:commandLink> 
-                           
+                               
 				        </p:column>
     </p:dataTable>
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
@@ -213,7 +204,7 @@
          </div>
          
          <div class="box-footer">
-          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.finOuverture()}" oncomplete="PF('finOuvertureDlg').hide()"  update=":content">
+          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.finOuverture()}" oncomplete="PF('finOuvertureDlg').hide()"  update=":gnl">
 				            <p:confirm header="Confirmation" message="Confirmez vous la fin de la séance d'ouverture?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Valider
 				            </p:commandLink>

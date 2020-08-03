@@ -1162,7 +1162,12 @@ public class PpmModificationController {
 		 }
 	  	 
 	  	 
-	  
+		//Si la source de financement est Etat alors montant en devise = part Trésor
+         public void recupTresor() {
+         	if(sourfin.equalsIgnoreCase("ETAT")) {
+         		newFinancement.fppPartTresor = newFinancement.getFppMontantDevise().longValue();
+         	}
+         }
 	  	 
 	  	 public void majDate() {
 				     iservice.updateObject(datePpm);

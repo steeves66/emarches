@@ -223,6 +223,7 @@ public class CommissionController {
 	 private String tcoCode;
 	 private String laaId;
 	 private String filtreNcc="";
+	 private String nbreOffre ="";
 	 private long valRegQual=0;
 	 private long verifCorNum = 0;
 	 private String aaoRegQual="";
@@ -564,7 +565,7 @@ public class CommissionController {
 			 listeOffre = ((List<VDetailOffres>)iservice.getObjectsByColumn("VDetailOffres",
 					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode())));
 				_logger.info("listeOffres size: "+listeOffre.size());	
-			 
+				nbreOffre = ""+getNbreOffreTotal();
 		 }
 		 
 		//Liste des offres TdetaiOffre
@@ -598,12 +599,20 @@ public class CommissionController {
 					_logger.info("listeLots size: "+listeLots.size());	
 		 }
 		 
-		//Liste des lot d'un avis d'avis d'appel d'offre en fonction du candidat
+		//Liste des lots d'un avis d'avis d'appel d'offre en fonction du candidat
 		 public void chargeLotsByCandidat() {
 			 //lotByCandidat.clear();
 			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
 					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
 					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getSouNcc())));
+					_logger.info("lotByCandidat size: "+lotByCandidat.size());	
+		 }
+		 
+		//Liste des lots d'un avis de l'avis d'appel d'Offres
+		 public void chargeLotsCandidat() {
+			 lotByCandidat.clear();
+			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
+					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode())));
 					_logger.info("lotByCandidat size: "+lotByCandidat.size());	
 		 }
 		 
@@ -1012,12 +1021,19 @@ public class CommissionController {
 		 public void chargeFilterCandidats(){
 			 listCandidats.clear();
 			 listCandidats = ((List<VOffreCandidat>)iservice.getObjectsByColumn("VOffreCandidat",new ArrayList<String>(Arrays.asList("SOU_SIGLE_STE")),
-					 new WhereClause("SOU_NCC",WhereClause.Comparateur.LIKE,"%"+filtreCandidat+"%"),
+					 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreCandidat+"%"),
 					 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode())));
 			}
+		 
+		 
+		//Nombre total d'offres pour l'acteur connecté
+		 public int getNbreOffreTotal(){
+		 	int i = iservice.countTableByColumn("V_DETAIL_OFFRES", "R_ID",
+		 	new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
+			new WhereClause("DOF_OPE_MATRICULE", WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
+		 return	i;	
+		 	}
 		
-		 
-		 
 		 
 		 public void chargeFilterLotsByCandidat() {
 			 lotByCandidat.clear();
@@ -1150,7 +1166,7 @@ public class CommissionController {
 		//Fin de la methode SaveOuverture()
 		
 		
-		
+		//Le Nombre d'Offre pour un lot
 		public int nonbreLot(){
 			int i = iservice.countTableByColumn("T_DET_OFFRES", "DOF_NUM",
 					new WhereClause("DOF_LAA_ID", WhereClause.Comparateur.EQ,""+sltOffre.getDofLaaId()));
@@ -1184,17 +1200,17 @@ public class CommissionController {
 			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
 				statUpdate = "OUV";
 				message="Fin de l'ouverture des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
-				chargeListe("OUV");
+				//chargeListe("OUV");
 				
 			 }else {
 				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
 						statUpdate = "ANA";
-						chargeListe("ANA");
+						//chargeListe("ANA");
 						message="Fin de l'analyse des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 				 }else {
 					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
 						 statUpdate = "JUG";
-						 chargeListe("JUG");
+						 //chargeListe("JUG");
 						 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 					 }else {	 
 					}	 
@@ -1211,13 +1227,13 @@ public class CommissionController {
 		//Methode de chargement après avoir mis fin à l'ouverture/analyse/jugement
 		public void chargementListe() {
 			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
-				chargeListe("OUV");
+				chargeListe("APU"); //OUV
 			 }else {
 				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
-						chargeListe("ANA");
+						chargeListe("OUV"); //ANA
 				 }else {
 					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
-						 chargeListe("JUG");
+						 chargeListe("ANA"); //JUG
 					 }	
 				 }
 		    }	
@@ -1307,11 +1323,9 @@ public class CommissionController {
 			 			newAnalyseOffre.setAnfValeurScore(ligne.getValRegQual());
 			 			newAnalyseOffre.setAnfCommentaire(ligne.getDcadCommentaire());
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-			 			//newAnalyseOffre.set
 			 			iservice.addObject(newAnalyseOffre);
 			 		}
 		         }
-				
 				
 				listeSelectionPiecesOffresAnalyse.clear();
 				selectionCritereAnalyse.clear();
@@ -1321,8 +1335,8 @@ public class CommissionController {
 	    	
 			//}
 			onSelectLot();
-			
 		}
+		
 		//Ajouter attributaire
 		public void ajouterAttributaire() {
 			
@@ -1340,6 +1354,7 @@ public class CommissionController {
 			newSeance.setTTypeSeance(new TTypeSeance("JUG"));
 			newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
 			iservice.addObject(newSeance);
+			
 			//update dans t_detail offre
 			offreListe = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 					 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
@@ -1349,6 +1364,7 @@ public class CommissionController {
 			        	offre.setDofStaut("2");
 			        	iservice.updateObject(offre);
 			          }
+			        
 			//update dans t_detail offre
 			//sltOffre.setDofRet("O");
 			//sltOffre.setDofStatut("2");
@@ -1401,7 +1417,7 @@ public class CommissionController {
 			 infoLot =new VVerifcorOffin();
 			 selectLot =new VLotCandidat();
 			 newSeance = new TSeances();
-			 slctdTd = new TAvisAppelOffre();
+			 //slctdTd = new TAvisAppelOffre();
 			 newOffre = new VbTempParamDetOffres();
 			 listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
 			 listeSelectionPiecesOffresAnalyse.clear();
@@ -1427,7 +1443,7 @@ public class CommissionController {
 		 
 		 public void viderPartiel() {
 			 newOffre = new VbTempParamDetOffres();
-			 infoLot =new VVerifcorOffin();
+			 //infoLot =new VVerifcorOffin();
 			 selectLot =new VLotCandidat();
 			 newSeance = new TSeances();
 			 listdoftyp.clear();
@@ -1437,8 +1453,7 @@ public class CommissionController {
 			 listeSelectionPiecesOffresAnalyse.clear();
 			 listeSelectionPiecesOffres= new ArrayList<VPiecesOffre>();
 			 listeSelectionPiecesOffres.clear();
-			 //listeOffres = new ArrayList<TDetOffres>(); 
-			 //listeOffre = new ArrayList<VDetailOffres>();
+			
 			 listeOffres.clear();
 			 montLu=0;
 			 pourcentRab=0;
@@ -1488,12 +1503,14 @@ public class CommissionController {
 					//Chargement de la liste des demandes
 					 listeAppelOffre.clear();
 					 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
-					 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
+							 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					         new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
 					_logger.info("listeAppelOffre size: "+listeAppelOffre.size());	
 					
 					/* listeAppelOffre.clear();
 					 listeAppelOffre = (List<VAvisAppelOffre>) iservice.getObjectsByColumnDesc("VAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
-					 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
+					 				 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+					                 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
 					_logger.info("listeAppelOffre size: "+listeAppelOffre.size());*/
 					
 					break;
@@ -1517,10 +1534,11 @@ public class CommissionController {
 					 selectionlisteExpert.clear();
 					break;
 				case "com6":
-					chargeLots();
+					//chargeLots();
 					chargeOffres();
 					chargePieces();
 					chargeCandidats();
+					chargeLotsCandidat();
 					break;
 				case "com7":
 					chargeLots();
@@ -2478,6 +2496,16 @@ public class CommissionController {
 
 	public void setSltAvis(TAvisAppelOffre sltAvis) {
 		this.sltAvis = sltAvis;
+	}
+
+
+	public String getNbreOffre() {
+		return nbreOffre;
+	}
+
+
+	public void setNbreOffre(String nbreOffre) {
+		this.nbreOffre = nbreOffre;
 	}
 
 

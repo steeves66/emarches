@@ -73,6 +73,7 @@ public class VLigneImputation implements java.io.Serializable {
 	private String lbgFonCodePr;
 	private String lbgFonCodeVerou;
 	private String natLibelle;
+	private String critere;
 
 	public VLigneImputation() {
 	}
@@ -105,7 +106,7 @@ public class VLigneImputation implements java.io.Serializable {
 			String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct, String lbgActif, String lbgFonCodeCf,
 			long lbgDotAnPlus1, long lbgDotAnPlus2, Long lbgDotAnPlus0, String lbgTypBud,
 			Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou,
-			String natLibelle) {
+			String natLibelle, String critere) {
 		this.lbgCode = lbgCode;
 		this.lbgStrCode = lbgStrCode;
 		this.lbgGesCode = lbgGesCode;
@@ -160,6 +161,7 @@ public class VLigneImputation implements java.io.Serializable {
 		this.lbgFonCodePr = lbgFonCodePr;
 		this.lbgFonCodeVerou = lbgFonCodeVerou;
 		this.natLibelle = natLibelle;
+		this.critere = critere;
 	}
 
 	
@@ -648,6 +650,15 @@ public class VLigneImputation implements java.io.Serializable {
 
 	public void setNatLibelle(String natLibelle) {
 		this.natLibelle = natLibelle;
+	}
+	
+	@Column(name = "CRITERE", length = 250)
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 }

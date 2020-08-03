@@ -29,6 +29,7 @@ public class VDetailOffres implements java.io.Serializable {
 	private String dofTyp;
 	private String dofStatut;
 	private String dofObsVariante;
+	private String dofOpeMatricule;
 
 	public VDetailOffres() {
 	}
@@ -41,7 +42,8 @@ public class VDetailOffres implements java.io.Serializable {
 	}
 
 	public VDetailOffres(BigDecimal RId, BigDecimal dofNum, BigDecimal laaNum, String laaObjet, BigDecimal dofLaaId,
-			String aaoCode, String offSouSigleSte, BigDecimal dofMtOfr, String dofTyp, String dofStatut,String dofObsVariante) {
+			String aaoCode, String offSouSigleSte, BigDecimal dofMtOfr, String dofTyp, String dofStatut,String dofObsVariante
+			, String dofOpeMatricule) {
 		this.RId = RId;
 		this.dofNum = dofNum;
 		this.laaNum = laaNum;
@@ -53,6 +55,7 @@ public class VDetailOffres implements java.io.Serializable {
 		this.dofTyp = dofTyp;
 		this.dofStatut = dofStatut;
 		this.dofObsVariante = dofObsVariante;
+		this.dofOpeMatricule = dofOpeMatricule;
 	}
 
 	@Id
@@ -153,6 +156,15 @@ public class VDetailOffres implements java.io.Serializable {
 
 	public void setDofObsVariante(String dofObsVariante) {
 		this.dofObsVariante = dofObsVariante;
+	}
+	
+	@Column(name = "DOF_OPE_MATRICULE", length = 25)
+	public String getDofOpeMatricule() {
+		return this.dofOpeMatricule;
+	}
+
+	public void setDofOpeMatricule(String dofOpeMatricule) {
+		this.dofOpeMatricule = dofOpeMatricule;
 	}
 
 }

@@ -1750,7 +1750,7 @@ public class PpmController {
 				new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 				new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
 				 new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
-				new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+				new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 	}
 	
 	
@@ -1765,7 +1765,7 @@ public class PpmController {
 					 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
 					// new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
-					 new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+					 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 		  }else 
 			  if(pgspm.getGpgTypePlan().equalsIgnoreCase("PSL")) {
 				  
@@ -1775,7 +1775,7 @@ public class PpmController {
 							 new WhereClause("LBG_GES_CODE",Comparateur.EQ,""+gesCode),
 						  // new WhereClause("LBG_FON_CODE_PF",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCodePf()),
 							 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,"'"+userController.getSlctd().getTFonction().getFonCod()+"'"),
-							 new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));	
+							 new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));	
 			}		
 	}
 	
@@ -1785,7 +1785,7 @@ public class PpmController {
 		listeImputations.clear();
 		listeImputations = (List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
 				new WhereClause("LIAE_FON_COD",Comparateur.EQ,fonction.getFonCod()), 
-				new WhereClause("LBG_NAT_CODE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
+				new WhereClause("CRITERE",WhereClause.Comparateur.LIKE,"%"+filtreLigne+"%"));
 	}
 		 
 		//Chargement des Types de Marchés
@@ -2455,6 +2455,13 @@ public class PpmController {
 		    			}
 		 }
 		 
+		//Si la source de financement est Etat alors montant en devise = part Trésor
+         public void recupTresor() {
+         	if(sourfin.equalsIgnoreCase("ETAT")) {
+         		newFinancement.fppPartTresor = newFinancement.getFppMontantDevise().longValue();
+         	}
+         }
+		 
 		 
 		  	//Recupertation de la date genérée
 			 public void recupModeleDao() {
@@ -2882,6 +2889,7 @@ public class PpmController {
 			    	  selectBailleur = false;
 					  selectTresor = false;
 					  souCode="";
+					  devCode="";
 			    }
 		 }
 	  	 

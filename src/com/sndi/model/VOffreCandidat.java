@@ -25,6 +25,7 @@ public class VOffreCandidat implements java.io.Serializable {
 	private BigDecimal nboffrebase;
 	private BigDecimal nbvariante;
 	private String laaAaoCode;
+	private String critere;
 
 	public VOffreCandidat() {
 	}
@@ -34,13 +35,14 @@ public class VOffreCandidat implements java.io.Serializable {
 	}
 
 	public VOffreCandidat(String souNcc, String souSigleSte, BigDecimal nblotsaisie, BigDecimal nboffrebase,
-			BigDecimal nbvariante, String laaAaoCode) {
+			BigDecimal nbvariante, String laaAaoCode, String critere) {
 		this.souNcc = souNcc;
 		this.souSigleSte = souSigleSte;
 		this.nblotsaisie = nblotsaisie;
 		this.nboffrebase = nboffrebase;
 		this.nbvariante = nbvariante;
 		this.laaAaoCode = laaAaoCode;
+		this.critere = critere;
 	}
 
 	
@@ -97,6 +99,15 @@ public class VOffreCandidat implements java.io.Serializable {
 
 	public void setLaaAaoCode(String laaAaoCode) {
 		this.laaAaoCode = laaAaoCode;
+	}
+	
+	@Column(name = "CRITERE", length = 520)
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
 	}
 
 }

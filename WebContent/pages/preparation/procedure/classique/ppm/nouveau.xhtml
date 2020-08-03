@@ -1699,7 +1699,7 @@
 	                  <div class="col-sm-9">
 	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" global="false" process="@this" update="xmontDev" />
+	                    <p:ajax event="blur" listener="#{ppmController.recupTresor()}" global="false" process="@this" update="xmontDev, partTresor" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div> 

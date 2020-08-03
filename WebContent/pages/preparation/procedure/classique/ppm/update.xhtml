@@ -1574,7 +1574,8 @@
 	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
 	                  <div class="col-sm-9">
 	                    <p:inputText type="text" value="#{ppmModification.updatefinance.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
-	                    
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" listener="#{ppmModificationController.recupTresor()}" global="false" process="@this" update="xmontDev, partTresor" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div> 

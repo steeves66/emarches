@@ -61,7 +61,7 @@
                  
                <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">DETAILS DE L'OFFRE</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight: bold; font-size:18px">DETAILS DE L'OFFRE</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -73,7 +73,7 @@
                                 <div class="form-group">
    			<div class="col-md-12 align justify-content-center">
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
-                   <legend><small>Identification de l'entreprise (1)</small></legend>		                
+                   <legend style="font-weight: bold"><small>(1) - Identification de l'entreprise</small></legend>		                
 
 		                  <div class="form-group horizontal">
 		                      <label  class="col-sm-2 control-label text-right"><b>Ncc :<span style="color:red;"> *</span></b></label>
@@ -114,7 +114,7 @@
                    <div class="form-group">
    			<div class="col-md-12 align justify-content-center">
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
-                   <legend><small>Information sur le représentant</small></legend>		                
+                   <legend style="font-weight: bold"><small>Information sur le représentant</small></legend>		                
 
 		                  <div class="form-group horizontal">
 		                      <label for="delaival" class="col-sm-2 control-label text-right"><b>Nom :</b></label>
@@ -163,7 +163,7 @@
                     <div class="row">
 			            <div class="col-md-12 align justify-content-center">
 			                    <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
-			                    <legend><small>Selectionnez le Lot (2) : </small>
+			                    <legend style="font-weight: bold"><small>(2) - Selectionnez le Lot : </small>
 			                             
 			                    </legend>
 			                       
@@ -198,7 +198,7 @@
 			                       
 		           <div class="col-md-12 align justify-content-center">
 		                   <fieldset style="border: 1px solid #ffb380;padding: 3px;border-radius:4px" >
-		                   <legend><small>Pièces administratives (3)</small></legend>
+		                   <legend style="font-weight:bold"><small style="font-weight: bold">(3) - Pièces administratives </small></legend>
 		                   		<div class="box-body">
 		                   		
                                    <div class="row">
@@ -221,7 +221,7 @@
 	                     
 	                       <div class="col-md-12">
                    <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
-                   <legend><small>Offres financières (4)</small></legend>
+                   <legend style="font-weight: bold"><small>(4) - Offres financières </small></legend>
                    
                      <div class="form-group ">
 		                 
@@ -238,7 +238,7 @@
 		                  <label class="col-sm-2 control-label">Montant lu</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="montLu" type="text" styleClass="form-control text-right" value="#{commissionController.montLu}" style="width: 100%" >
-				          <p:ajax listener="#{commissionController.calculMontNet()}" event="blur" process="@this" update="montNet,gnl:montLu" /> 
+				          <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montNet,gnl:montLu" /> 
 		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         	        </p:inputText>
 		                  </div>
@@ -246,15 +246,12 @@
 		                  <label class="col-sm-2 control-label">Rabais %</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="rab" type="text" styleClass="form-control text-right" value="#{commissionController.pourcentRab}" style="width: 100%" >
-				           <p:ajax listener="#{commissionController.calculMontNet()}" event="blur" process="@this" update="montNet" /> 
+				           <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montNet" /> 
 		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
 		                  </div>
 		                  
-		                 
-		                  
-		                
-		                 
+		                     
 		                </div> 
 		                 <p:commandLink >
 				     
@@ -282,12 +279,12 @@
 	                   <h:panelGroup id="cond">  
 	                   <h:panelGroup rendered="#{commissionController.etatMontVar}"> 
 		                <div class="form-group">
-                  <label for="l6" class="col-sm-2 control-label">Condition</label> 
+                    <label for="l6" class="col-sm-2 control-label">Condition</label> 
 
-                  <div class="col-sm-10">
+                    <div class="col-sm-10">
                     <p:inputTextarea rows="3" cols="33" value="#{commissionController.newOffre.dofObsVariante}" styleClass="form-control" id="l6" style="width: 100%" />
                     
-                  </div>
+                     </div>
                 </div>
                 </h:panelGroup>
                 </h:panelGroup> 
@@ -320,12 +317,18 @@
                  <div class="col-md-12">
                      <div class="box box-success box-solid">
                    <div class="box-header with-border">
-                       <div class="col-md-10"><div  style="color: #fff">LISTE DES OFFRES</div></div>
-                       <div class="col-md-2"></div>  
+                       <div class="col-md-10"><div  style="color: #fff; font-weight: bold; font-size:18px">LISTE DES OFFRES ( #{commissionController.nbreOffre} Offres )</div></div>
+                       <div class="col-md-2">
+                       
+                       </div>  
                    </div>
                    <div class="box-body">
                     <p:dataTable var="slctdTb" value="#{commissionController.listeOffre}"  id="cc" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune Offre trouvée"
                      scrollable="true" scrollHeight="300">
+                           
+                           <p:column headerText="N°" style="width:4%">
+                                <h:outputText value="#{slctdTb.RId}" />
+                            </p:column>
                            
                             <p:column headerText="Entreprise" styleClass="col-sm-4">
                                 <h:outputText value="#{slctdTb.offSouSigleSte}" />
