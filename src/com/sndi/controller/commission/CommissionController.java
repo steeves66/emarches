@@ -22,6 +22,7 @@ import com.sndi.controller.custom.ControleController;
 import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
+import com.sndi.model.TAnalyseOffre;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TBanques;
 import com.sndi.model.TCandidats;
@@ -175,6 +176,7 @@ public class CommissionController {
 	 private List<TBanques> listBanque = new ArrayList<TBanques>();
 	 private List<TDetOffres> listDetOffre = new ArrayList<TDetOffres>();
 	 private List<TPiecesOffres> listePieceOffreDelete = new ArrayList<TPiecesOffres>();
+	 private List<TAnalyseOffre> listeAnalyseOffreDelete = new ArrayList<TAnalyseOffre>();
 	//private VCandidatDac candidat =new VCandidatDac();
 	private VOffreCandidat candidat =new VOffreCandidat();
 	private VLotCandidat tlot =new VLotCandidat();
@@ -1190,31 +1192,34 @@ public class CommissionController {
 		//Fin de la methode SaveOuverture()
 		
 		//debut suppression detail offre
-		public void removedetOffre() {
-			listDetOffre = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",
-				    new WhereClause("DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
-    			if (!listDetOffre.isEmpty()) {
-    				detOffre=listDetOffre.get(0); 
-    				iservice.deleteObject(detOffre);
-    				
-    				
-    				listePieceOffreDelete = ((List<TPiecesOffres>)iservice.getObjectsByColumn("TPiecesOffres",
-        				    new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
-            				for(TPiecesOffres ligne : listePieceOffreDelete) {	
-            				iservice.deleteObject(ligne);
-            				
-            			}
-            			
-            			chargeOffres();
-        				userController.setTexteMsg("Suppression éffectuée avec succès!");
-        		  		userController.setRenderMsg(true);
-        		  		userController.setSevrityMsg("success");
-    			}	
-    			
-    			
-        			
-    		
-		}
+				public void removedetOffre() {
+					listePieceOffreDelete = ((List<TPiecesOffres>)iservice.getObjectsByColumn("TPiecesOffres",
+						    new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
+		    				for(TPiecesOffres ligne : listePieceOffreDelete) {	
+		    				iservice.deleteObject(ligne);
+		    			}
+		    			
+		    				listeAnalyseOffreDelete = ((List<TAnalyseOffre>)iservice.getObjectsByColumn("TAnalyseOffre",
+		    					    new WhereClause("ANF_DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
+		    	    				for(TAnalyseOffre ligne : listeAnalyseOffreDelete) {	
+		    	    				iservice.deleteObject(ligne);
+		    	    			}
+		    				
+					listDetOffre = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",
+						    new WhereClause("DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
+		    			if (!listDetOffre.isEmpty()) {
+		    				detOffre=listDetOffre.get(0); 
+		    				iservice.deleteObject(detOffre);
+		            			chargeOffres();
+		        				userController.setTexteMsg("Suppression éffectuée avec succès!");
+		        		  		userController.setRenderMsg(true);
+		        		  		userController.setSevrityMsg("success");
+		    			}	
+		    			
+		    			
+		        			
+		    		
+				}
 		
 		
 	 /*	public void deletePresence() {  
@@ -2638,6 +2643,16 @@ public class CommissionController {
 
 	public void setListePieceOffreDelete(List<TPiecesOffres> listePieceOffreDelete) {
 		this.listePieceOffreDelete = listePieceOffreDelete;
+	}
+
+
+	public List<TAnalyseOffre> getListeAnalyseOffreDelete() {
+		return listeAnalyseOffreDelete;
+	}
+
+
+	public void setListeAnalyseOffreDelete(List<TAnalyseOffre> listeAnalyseOffreDelete) {
+		this.listeAnalyseOffreDelete = listeAnalyseOffreDelete;
 	}
 
 

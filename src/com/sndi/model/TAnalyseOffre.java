@@ -22,7 +22,7 @@ public class TAnalyseOffre implements java.io.Serializable {
 	private String anfDacCode;
 	private BigDecimal anfLaaId;
 	private BigDecimal anfDofNum;
-	private String anfValeur;
+	private String anfValeurConf;
 	private String anfObser;
 	private String anfOpeMatricule;
 	private Date anfDteSaisi;
@@ -36,18 +36,18 @@ public class TAnalyseOffre implements java.io.Serializable {
 	}
 
 	public TAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
-			BigDecimal anfLaaId, BigDecimal anfDofNum, String anfValeur) {
+			BigDecimal anfLaaId, BigDecimal anfDofNum, String anfValeurConf) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
 		this.anfDacCode = anfDacCode;
 		this.anfLaaId = anfLaaId;
 		this.anfDofNum = anfDofNum;
-		this.anfValeur = anfValeur;
+		this.anfValeurConf = anfValeurConf;
 	}
 
 	public TAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
-			BigDecimal anfLaaId, BigDecimal anfDofNum, String anfValeur, String anfObser, String anfOpeMatricule,
+			BigDecimal anfLaaId, BigDecimal anfDofNum, String anfValeurConf, String anfObser, String anfOpeMatricule,
 			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur,Long anfValeurScore,
 			String anfCommentaire) {
 		this.anfNum = anfNum;
@@ -56,7 +56,7 @@ public class TAnalyseOffre implements java.io.Serializable {
 		this.anfDacCode = anfDacCode;
 		this.anfLaaId = anfLaaId;
 		this.anfDofNum = anfDofNum;
-		this.anfValeur = anfValeur;
+		this.anfValeurConf = anfValeurConf;
 		this.anfObser = anfObser;
 		this.anfOpeMatricule = anfOpeMatricule;
 		this.anfDteSaisi = anfDteSaisi;
@@ -122,13 +122,13 @@ public class TAnalyseOffre implements java.io.Serializable {
 		this.anfDofNum = anfDofNum;
 	}
 
-	@Column(name = "ANF_VALEUR", nullable = false, length = 100)
-	public String getAnfValeur() {
-		return this.anfValeur;
+	@Column(name = "ANF_VALEUR_CONF", nullable = false, length = 100)
+	public String getAnfValeurConf() {
+		return this.anfValeurConf;
 	}
 
-	public void setAnfValeur(String anfValeur) {
-		this.anfValeur = anfValeur;
+	public void setAnfValeurConf(String anfValeurConf) {
+		this.anfValeurConf = anfValeurConf;
 	}
 
 	@Column(name = "ANF_OBSER", length = 500)
