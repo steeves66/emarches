@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sndi.model.TBailleur;
+import com.sndi.model.TBanques;
 import com.sndi.model.TContenuAgpm;
 import com.sndi.model.TDevise;
 import com.sndi.model.TGestion;
@@ -93,6 +94,9 @@ public class ConstantService {
 	private List<TSoumissions> listSoumission = new ArrayList<TSoumissions>(); 
 	private Map<String, TSoumissions> HM_LISTE_SOUMISSIONS= new HashMap<String, TSoumissions>();
 	
+	private List<TBanques> listBanque = new ArrayList<TBanques>(); 
+	private Map<String, TBanques> HM_LISTE_BANQUES= new HashMap<String, TBanques>();
+	
 	//chargePiecesOffres()
 	
 	
@@ -130,6 +134,7 @@ public class ConstantService {
 		 chargeTypeStructureTable();
 		 chargePaysTable();
 		chargeDatepubTable();
+		chargeDataBanqueTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
 	
@@ -430,6 +435,23 @@ public class ConstantService {
 								public TSoumissions geTSoumissions(String SOU_NCC){
 									return HM_LISTE_SOUMISSIONS.get(SOU_NCC);
 							}
+								
+							
+								//LISTE DES BANQUES
+								public void chargeDataBanqueTable(){
+									listBanque.clear();
+									listBanque =(List<TBanques>) iservice.getObjectsByColumn("TBanques", new ArrayList<String>(Arrays.asList("BAN_LIBELLE")));
+										HashMap<String, TBanques> aMap = new HashMap<String, TBanques>();
+										for (TBanques bm: listBanque) {
+											aMap.put(""+bm.getBanCode(), bm);
+										}
+										HM_LISTE_BANQUES =  Collections.unmodifiableMap(aMap);	
+										_logger.info("HM_LISTE_BANQUES.size :"+ HM_LISTE_BANQUES.size());	
+									}
+									
+									public TBanques geTBanques(String BAN_CODE){
+										return HM_LISTE_BANQUES.get(BAN_CODE);
+								}
 							
 				
 	public static Logger get_logger() {
@@ -648,6 +670,18 @@ public class ConstantService {
 	}
 	public void setHM_LISTE_SOUMISSIONS(Map<String, TSoumissions> hM_LISTE_SOUMISSIONS) {
 		HM_LISTE_SOUMISSIONS = hM_LISTE_SOUMISSIONS;
+	}
+	public List<TBanques> getListBanque() {
+		return listBanque;
+	}
+	public void setListBanque(List<TBanques> listBanque) {
+		this.listBanque = listBanque;
+	}
+	public Map<String, TBanques> getHM_LISTE_BANQUES() {
+		return HM_LISTE_BANQUES;
+	}
+	public void setHM_LISTE_BANQUES(Map<String, TBanques> hM_LISTE_BANQUES) {
+		HM_LISTE_BANQUES = hM_LISTE_BANQUES;
 	}
 	
 }

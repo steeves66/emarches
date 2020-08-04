@@ -23,6 +23,7 @@ import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAvisAppelOffre;
+import com.sndi.model.TBanques;
 import com.sndi.model.TCandidats;
 import com.sndi.model.TCommissionSpecifique;
 import com.sndi.model.TCommissionType;
@@ -85,6 +86,7 @@ import com.sndi.model.VbTempParametreCom;
 import com.sndi.model.VVerifcorOffin;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
+import com.sndi.service.ConstantService;
 import com.sndi.service.Iservice;
 import com.sndi.utilitaires.DownloadFileServlet;
 import com.sndi.utilitaires.FileUploadController;
@@ -115,6 +117,9 @@ public class CommissionController {
 	 
 	 @Autowired
 	 TableauBordController tableauBordController;
+	 
+	 @Autowired
+	 ConstantService constantService;
 
 	 
 	 @PostConstruct
@@ -124,7 +129,7 @@ public class CommissionController {
 		//chargeLotByAvis();	
 		//chargeOffres();
 		//chargeOffre();
-		
+		chargeBanque();
 	 }
 	 
 	 //Declaration des listes 
@@ -167,6 +172,7 @@ public class CommissionController {
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
 	 private List<VCritereAnalyseDacOff> listeCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>(); 
 	 private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
+	 private List<TBanques> listBanque = new ArrayList<TBanques>();
 	//private VCandidatDac candidat =new VCandidatDac();
 	private VOffreCandidat candidat =new VOffreCandidat();
 	private VLotCandidat tlot =new VLotCandidat();
@@ -222,6 +228,7 @@ public class CommissionController {
 	 //Declaration des variables
 	 private String tcoCode;
 	 private String laaId;
+	 private String banCode;
 	 private String filtreNcc="";
 	 private String nbreOffre ="";
 	 private long valRegQual=0;
@@ -586,9 +593,12 @@ public class CommissionController {
 				     new WhereClause("DOF_NUM",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")  
 					 ));
 				_logger.info("listeOffres size: "+listeOffres.size());	
-			 
 		 }
 		 
+		 //Liste des Banques
+		 public void chargeBanque() { 
+		     listBanque=new ArrayList<>(constantService.getListBanque());
+		 }
 		 
 		//Liste des lot d'un avis d'avis d'appel d'offre
 		 public void chargeLots() {
@@ -1124,6 +1134,7 @@ public class CommissionController {
 					   String rabais =String.valueOf(pourcentRab);
 					   newOffre.setDofMtOfr(montantOffre);
 					   newOffre.setDofRab(rabais);
+					   newOffre.setDofBanCode(banCode);
 					   iservice.addObject(newOffre);
 		 			
 		 			
@@ -2506,6 +2517,26 @@ public class CommissionController {
 
 	public void setNbreOffre(String nbreOffre) {
 		this.nbreOffre = nbreOffre;
+	}
+
+
+	public List<TBanques> getListBanque() {
+		return listBanque;
+	}
+
+
+	public void setListBanque(List<TBanques> listBanque) {
+		this.listBanque = listBanque;
+	}
+
+
+	public String getBanCode() {
+		return banCode;
+	}
+
+
+	public void setBanCode(String banCode) {
+		this.banCode = banCode;
 	}
 
 

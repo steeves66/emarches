@@ -45,6 +45,8 @@ public class TTempParam implements java.io.Serializable {
 	private String tempChamp19;
 	private String tempChamp20;
 	private String tempChamp21;
+	private BigDecimal tempChamp22;
+	private BigDecimal tempChamp23;
 
 	public TTempParam() {
 	}
@@ -57,7 +59,8 @@ public class TTempParam implements java.io.Serializable {
 			String tempChamp01, String tempChamp02, String tempChamp03, String tempChamp04, String tempChamp05,
 			String tempChamp06, String tempChamp07, String tempChamp08, String tempChamp09, String tempChamp10,
 			String tempChamp11, String tempChamp12, String tempChamp13, String tempChamp14, String tempChamp15,
-			String tempChamp16, String tempChamp17, String tempChamp18, String tempChamp19, String tempChamp20,String tempChamp21) {
+			String tempChamp16, String tempChamp17, String tempChamp18, String tempChamp19, String tempChamp20,
+			String tempChamp21,BigDecimal tempChamp22, BigDecimal tempChamp23) {
 		this.tempNum2 = tempNum2;
 		this.TOperateur = TOperateur;
 		this.tempType = tempType;
@@ -83,6 +86,8 @@ public class TTempParam implements java.io.Serializable {
 		this.tempChamp19 = tempChamp19;
 		this.tempChamp20 = tempChamp20;
 		this.tempChamp21 = tempChamp21;
+		this.tempChamp22 = tempChamp22;
+		this.tempChamp23 = tempChamp23;
 	}
 
 	@Id
@@ -312,6 +317,24 @@ public class TTempParam implements java.io.Serializable {
 
 	public void setTempChamp21(String tempChamp21) {
 		this.tempChamp21 = tempChamp21;
+	}
+	
+	@Column(name = "TEMP_CHAMP_22", precision = 22, scale = 0)
+	public BigDecimal getTempChamp22() {
+		return this.tempChamp22;
+	}
+
+	public void setTempChamp22(BigDecimal tempChamp22) {
+		this.tempChamp22 = tempChamp22;
+	}
+
+	@Column(name = "TEMP_CHAMP_23", precision = 22, scale = 0)
+	public BigDecimal getTempChamp23() {
+		return this.tempChamp23;
+	}
+
+	public void setTempChamp23(BigDecimal tempChamp23) {
+		this.tempChamp23 = tempChamp23;
 	}
 
 }
