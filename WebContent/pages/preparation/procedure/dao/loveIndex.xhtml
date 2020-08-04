@@ -607,30 +607,30 @@
             <div class="col-md-12">
              <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">DETAIL DE VENTE SUR LE DAC N° #{daoController.slctdTd.dacCode}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff">DETAIL DE VENTE POUR LE DAC N° #{daoController.slctdTd.dacCode}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
 	            
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">N° DAC</label></div>
+                  <div class="col-sm-3"><label class="pull-right">N° DAC  : </label></div>
                   <div class="col-sm-9">
                    <label><h:outputText styleClass="text-muted" value="#{daoController.detailVente.dveDacCode}"  style="width: 100%" readonly="true"/></label>
                   </div>
 	             </div>
 	             
 	              <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Montant du DAC (F CFA)</label></div>
+                  <div class="col-sm-3"><label class="pull-right">Montant du DAC (F CFA)  : </label></div>
                   <div class="col-sm-9">
-                   <label><h:outputText value="#{daoController.slctdTd.dacCout}" styleClass="text-muted" style="width: 100%" readonly="true">
+                   <label><h:outputText value="#{daoController.slctdTd.aaoCoutDac}" styleClass="text-muted" style="width: 100%" readonly="true">
                    <f:convertNumber pattern="##,###.##" />
                    </h:outputText>
                    </label>
                   </div>
 	             </div>
 	                 <div class="row">
-                  <div class="col-sm-3"><label class="pull-right">Nombre de Vente </label></div>
+                  <div class="col-sm-3"><label class="pull-right">Nombre de Vente  : </label></div>
                   <div class="col-sm-9">
                    <label>
                    <h:outputText value="#{daoController.detailVente.dacnbrvendu}" styleClass="text-muted" style="width: 100%" readonly="true">

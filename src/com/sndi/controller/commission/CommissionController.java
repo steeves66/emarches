@@ -1215,10 +1215,7 @@ public class CommissionController {
 		        		  		userController.setRenderMsg(true);
 		        		  		userController.setSevrityMsg("success");
 		    			}	
-		    			
-		    			
-		        			
-		    		
+		    				
 				}
 		
 		

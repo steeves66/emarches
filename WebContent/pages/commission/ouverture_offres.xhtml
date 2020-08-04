@@ -132,7 +132,7 @@
 		                  <div class="form-group horizontal">
 		                      <label for="telephone" class="col-sm-2 control-label text-right"><b>Téléphone :</b></label>
 		                      <div class="col-sm-10">
-		                        <p:inputText value="#{commissionController.newOffre.dofTelRep}"  type="text"  styleClass="form-control"  id="telephone" style="width: 100%" />
+		                        <p:inputMask mask="(+999) 99-99-99-99" value="#{commissionController.newOffre.dofTelRep}"  type="text"  styleClass="form-control"  id="telephone" style="width: 100%" />
 		                      </div>
 		                  </div>
 		                  
@@ -145,7 +145,7 @@
 		                  </div>
                 		
                 		
-                		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                		<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 		
                     </fieldset>
              </div>
@@ -248,20 +248,18 @@
 		                  <label class="col-sm-2 control-label">Montant lu</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="montLu" type="text" styleClass="form-control text-right" value="#{commissionController.montLu}" style="width: 100%" >
-				          <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montNet" /> 
+				          <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montLu" /> 
 		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         	        </p:inputText>
 		                  </div>
 		                  
-		                  <label class="col-sm-2 control-label">Rabais %</label>
+		                 <label class="col-sm-2 control-label">Montant Net</label>
 						  <div class="col-sm-3">
-				          <p:inputText id="rab" type="text" styleClass="form-control text-right" value="#{commissionController.pourcentRab}" style="width: 100%" >
-				           <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montNet, gnl:montRab" /> 
-		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				          <p:inputText id="montNet" type="text" styleClass="form-control text-right" value="#{commissionController.montN}" style="width: 100%" readonly="true">
+				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
-		                  </div>
-		                  
-		                     
+		                 </div>
+   
 		                </div> 
 		                 <p:commandLink >
 				     
@@ -269,16 +267,22 @@
 		                
 		                
 		                 <div class="form-group">
-		                     <label class="col-sm-2 control-label">Montant Net</label>
+		                 
+		                 <label class="col-sm-2 control-label">Rabais %</label>
 						  <div class="col-sm-3">
-				          <p:inputText id="montNet" type="text" styleClass="form-control text-right" value="#{commissionController.montN}" style="width: 100%" readonly="true">
-				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				          <p:inputText id="rab" type="text" styleClass="form-control text-right" value="#{commissionController.pourcentRab}" style="width: 100%" >
+				           <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montNet, montRab" /> 
+		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
-		                  </div>
+		                 </div>
+		                 
 		                  
 		                  <label class="col-sm-2 control-label">Montant Caution</label>
 						  <div class="col-sm-3">
-				          <p:inputText  type="text" styleClass="form-control text-right" value="#{commissionController.newOffre.dofMtCaut}" style="width: 100%" />
+				          <p:inputText  type="text" id="montCaut" styleClass="form-control text-right" value="#{commissionController.newOffre.dofMtCaut}" style="width: 100%">
+				           <p:ajax  global="false" event="blur" process="@this" update="montCaut" />
+				           <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				           </p:inputText>
 		                  </div>
 		                </div>  
 		                
