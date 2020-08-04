@@ -435,6 +435,7 @@ public class CommissionController {
 	 
 	 public void calculPourcent() {
 		 pourcentRab = montRab * 100/montLu;
+		 montN = montLu - montRab;
 		 System.out.print("le pourcentage est : "+getPourcentRab());
 	 }
 	 
@@ -1137,8 +1138,10 @@ public class CommissionController {
 					   //convertir le montant net en qui est en long en string
 					   String montantOffre =String.valueOf(montN);
 					   String rabais =String.valueOf(pourcentRab);
+					   String mtRabais = String.valueOf(montRab);
 					   newOffre.setDofMtOfr(montantOffre);
 					   newOffre.setDofRab(rabais);
+					   newOffre.setDofMtRab(mtRabais);
 					   newOffre.setDofBanCode(banCode);
 					   iservice.addObject(newOffre);
 		 			
@@ -1550,11 +1553,11 @@ public class CommissionController {
 					 selectionlisteExpert.clear();
 					break;
 				case "com6":
-					//chargeLots();
+					chargeLots();
 					chargeOffres();
 					chargePieces();
 					chargeCandidats();
-					chargeLotsCandidat();
+					//chargeLotsCandidat();
 					break;
 				case "com7":
 					chargeLots();

@@ -4566,9 +4566,9 @@ public class DaoController {
 											     			  				   
 											     			  				   //Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
 											     			  				   getDaoVenteTotal();
-													 						   totalNbreVente = getDaoVenteTotal();
-													 						   newDao.setDacNbreAchat(totalNbreVente);
-													 						   iservice.updateObject(newDao);
+													 						   //totalNbreVente = getDaoVenteTotal();
+													 						   //newDao.setDacNbreAchat(totalNbreVente);
+													 						   //iservice.updateObject(newDao);
 											     			  				   
 											     			  				   //Actualisation du Tableau de Bord
 											     			 		           typeActionTb();
@@ -4716,8 +4716,8 @@ public class DaoController {
 											     			  				   //Récupération du nombre d'achats du DAO et mis à jour dans T_DAC_SPECS
 											     			  				   getDaoVenteTotal();
 													 						   totalNbreVente = getDaoVenteTotal();
-													 						   newDao.setDacNbreAchat(totalNbreVente);
-													 						   iservice.updateObject(newDao);
+													 						   //newDao.setDacNbreAchat(totalNbreVente);
+													 						   //iservice.updateObject(newDao);
 											     			  				   
 											     			  				   //Actualisation du Tableau de Bord
 											     			 		           typeActionTb();

@@ -48,8 +48,8 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 	private String dofSigle;
 	private String dofObsVariante;
 	private BigDecimal dofMtCaut;
-	private BigDecimal dofMtRab;
-
+	//private BigDecimal dofMtRab;
+	private String dofMtRab;
 
 	public VbTempParamDetOffres() {
 	}
@@ -62,7 +62,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 			String dofLaaAaoCode, String dofLaaId, String dofDelai, String dofOffCnps, String dofOffImpot,
 			String dofOffRc, String dofCaut, String dofTyp, String dofBanCode, String dofEstimRab, String dofRab,
 			String dofMtOfr, String dofOffNum, String dofNum, String dofNomRep, String dofPreRep, String dofTelRep,
-			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,BigDecimal dofMtRab) {
+			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,String dofMtRab) {
 		this.tempNum = tempNum;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofOpeMatricule = dofOpeMatricule;
@@ -330,12 +330,21 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 		this.dofMtCaut = dofMtCaut;
 	}
 	
-	@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
+	/*@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
 	public BigDecimal getDofMtRab() {
-		return this.dofMtRab;
+		return this.dofMtRab; String
 	}
 
 	public void setDofMtRab(BigDecimal dofMtRab) {
+		this.dofMtRab = dofMtRab;
+	}*/
+	
+	@Column(name = "DOF_MT_RAB")
+	public String getDofMtRab() {
+		return this.dofMtRab; 
+	}
+
+	public void setDofMtRab(String dofMtRab) {
 		this.dofMtRab = dofMtRab;
 	}
 
