@@ -173,6 +173,7 @@ public class CommissionController {
 	 private List<VCritereAnalyseDacOff> listeCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>(); 
 	 private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
 	 private List<TBanques> listBanque = new ArrayList<TBanques>();
+	 private List<TDetOffres> listDetOffre = new ArrayList<TDetOffres>();
 	//private VCandidatDac candidat =new VCandidatDac();
 	private VOffreCandidat candidat =new VOffreCandidat();
 	private VLotCandidat tlot =new VLotCandidat();
@@ -211,6 +212,7 @@ public class CommissionController {
 	 //private TDetOffres detailOffre = new TDetOffres();
 	 private VDetOffreRecevable detailOffre = new VDetOffreRecevable();
 	 private TDetOffres offre = new TDetOffres();
+	 private TDetOffres detOffre = new TDetOffres();
 	 //private TDetOffres sltOffre = new TDetOffres();
 	 private VDetOffreRecevable sltOffre = new VDetOffreRecevable();
 	 private TSoumissions soumission = new TSoumissions();
@@ -223,6 +225,8 @@ public class CommissionController {
 	 private VDetCommissionSeance sltMbr = new VDetCommissionSeance();
 	 private VbAnalyseOffre newAnalyseOffre =new VbAnalyseOffre();
 	 private VListeSouOffBasse sltRecharge =new VListeSouOffBasse();
+	 
+	 private VDetailOffres selectdetOffre = new VDetailOffres();
 
 	 
 	 //Declaration des variables
@@ -1183,6 +1187,37 @@ public class CommissionController {
 		    }	
 		
 		//Fin de la methode SaveOuverture()
+		
+		//debut suppression detail offre
+		public void removedetOffre() {
+			listDetOffre = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",
+				    new WhereClause("DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
+    			if (!listDetOffre.isEmpty()) {
+    				detOffre=listDetOffre.get(0); 
+    				iservice.deleteObject(detOffre);
+    				chargeOffres();
+					userController.setTexteMsg("Suppression éffectuée avec succès!");
+			  		userController.setRenderMsg(true);
+			  		userController.setSevrityMsg("success");
+    			}		
+		}
+		
+		
+	 /*	public void deletePresence() {  
+            listeComSpecifique = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",
+					    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
+	    			if (!listeComSpecifique.isEmpty()) {
+	    				comSpec=listeComSpecifique.get(0); 
+	    				iservice.deleteObject(comSpec);
+				 		chargeMembres();
+				 		activieComboxAutoNorm();
+						userController.setTexteMsg("Suppression éffectuée avec succès!");
+				  		userController.setRenderMsg(true);
+				  		userController.setSevrityMsg("success");
+	    			}
+		 		
+						
+					}*/
 		
 		
 		//Le Nombre d'Offre pour un lot
@@ -2545,6 +2580,36 @@ public class CommissionController {
 
 	public void setBanCode(String banCode) {
 		this.banCode = banCode;
+	}
+
+
+	public VDetailOffres getSelectdetOffre() {
+		return selectdetOffre;
+	}
+
+
+	public void setSelectdetOffre(VDetailOffres selectdetOffre) {
+		this.selectdetOffre = selectdetOffre;
+	}
+
+
+	public List<TDetOffres> getListDetOffre() {
+		return listDetOffre;
+	}
+
+
+	public void setListDetOffre(List<TDetOffres> listDetOffre) {
+		this.listDetOffre = listDetOffre;
+	}
+
+
+	public TDetOffres getDetOffre() {
+		return detOffre;
+	}
+
+
+	public void setDetOffre(TDetOffres detOffre) {
+		this.detOffre = detOffre;
 	}
 
 
