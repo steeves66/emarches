@@ -286,8 +286,8 @@
 		                 <div class="form-group">
 		                     <label class="col-sm-2 control-label">Montant Rabais</label>
 						  <div class="col-sm-3">
-				          <p:inputText id="montRab" type="text" styleClass="form-control text-right" value="#{commissionController.newOffre.dofMtRab}" style="width: 100%">
-				          <p:ajax  global="false" event="blur" process="@this" update="montRab" /> 
+				          <p:inputText id="montRab" type="text" styleClass="form-control text-right" value="#{commissionController.montRab}" style="width: 100%">
+				           <p:ajax listener="#{commissionController.calculPourcent()}"  global="false" event="blur" process="@this" update="montRab" /> 
 				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
 		                  </div>

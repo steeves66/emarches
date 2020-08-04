@@ -433,6 +433,11 @@ public class CommissionController {
 	 }
 	 
 	 
+	 public void calculPourcent() {
+		 pourcentRab = montRab * 100/montLu;
+		 System.out.print("le pourcentage est : "+getPourcentRab());
+	 }
+	 
 	 //Suppression du membre de comité d'évaluation
 	 public void deleteMembre() {	
 		  System.out.print("+-------------+MEMBRE: "+getSltMbr().getDcsNomMbm());
