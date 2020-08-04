@@ -141,13 +141,4 @@ public class TBanques implements java.io.Serializable {
 		this.banDteSaisie = banDteSaisie;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TBanques")
-	public Set<TDetOffres> getTDetOffreses() {
-		return this.TDetOffreses;
-	}
-
-	public void setTDetOffreses(Set<TDetOffres> TDetOffreses) {
-		this.TDetOffreses = TDetOffreses;
-	}
-
 }

@@ -174,6 +174,7 @@ public class CommissionController {
 	 private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
 	 private List<TBanques> listBanque = new ArrayList<TBanques>();
 	 private List<TDetOffres> listDetOffre = new ArrayList<TDetOffres>();
+	 private List<TPiecesOffres> listePieceOffreDelete = new ArrayList<TPiecesOffres>();
 	//private VCandidatDac candidat =new VCandidatDac();
 	private VOffreCandidat candidat =new VOffreCandidat();
 	private VLotCandidat tlot =new VLotCandidat();
@@ -1195,11 +1196,24 @@ public class CommissionController {
     			if (!listDetOffre.isEmpty()) {
     				detOffre=listDetOffre.get(0); 
     				iservice.deleteObject(detOffre);
-    				chargeOffres();
-					userController.setTexteMsg("Suppression éffectuée avec succès!");
-			  		userController.setRenderMsg(true);
-			  		userController.setSevrityMsg("success");
-    			}		
+    				
+    				
+    				listePieceOffreDelete = ((List<TPiecesOffres>)iservice.getObjectsByColumn("TPiecesOffres",
+        				    new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+selectdetOffre.getDofNum())));
+            				for(TPiecesOffres ligne : listePieceOffreDelete) {	
+            				iservice.deleteObject(ligne);
+            				
+            			}
+            			
+            			chargeOffres();
+        				userController.setTexteMsg("Suppression éffectuée avec succès!");
+        		  		userController.setRenderMsg(true);
+        		  		userController.setSevrityMsg("success");
+    			}	
+    			
+    			
+        			
+    		
 		}
 		
 		
@@ -2610,6 +2624,16 @@ public class CommissionController {
 
 	public void setDetOffre(TDetOffres detOffre) {
 		this.detOffre = detOffre;
+	}
+
+
+	public List<TPiecesOffres> getListePieceOffreDelete() {
+		return listePieceOffreDelete;
+	}
+
+
+	public void setListePieceOffreDelete(List<TPiecesOffres> listePieceOffreDelete) {
+		this.listePieceOffreDelete = listePieceOffreDelete;
 	}
 
 

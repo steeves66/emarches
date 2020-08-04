@@ -29,7 +29,6 @@ public class TDetOffres implements java.io.Serializable {
 	private TLotAao TLotAao;
 	private TOffres TOffres;
 	private TOperateur TOperateur;
-	private TBanques TBanques;
 	private String dofLaaAaoCode;
 	private String dofTyp;
 	private BigDecimal dofDelai;
@@ -109,7 +108,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofDelai = dofDelai;
 	}
 
-	public TDetOffres(BigDecimal dofNum, TFonction TFonction, TLotAao TLotAao, TOffres TOffres, TOperateur TOperateur,TBanques TBanques,
+	public TDetOffres(BigDecimal dofNum, TFonction TFonction, TLotAao TLotAao, TOffres TOffres, TOperateur TOperateur,
 			String dofLaaAaoCode, String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2, Long dofRangOfr,
 			BigDecimal dofMtCor, BigDecimal dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut,
 			String dofBanCode, String dofSeuil, Short dofScore, String dofRecevabl, String dofRet, String dofRetBai,
@@ -127,7 +126,6 @@ public class TDetOffres implements java.io.Serializable {
 		this.TLotAao = TLotAao;
 		this.TOffres = TOffres;
 		this.TOperateur = TOperateur;
-		this.TBanques = TBanques;
 		this.dofLaaAaoCode = dofLaaAaoCode;
 		this.dofTyp = dofTyp;
 		this.dofDelai = dofDelai;
@@ -247,17 +245,6 @@ public class TDetOffres implements java.io.Serializable {
 		this.TOperateur = TOperateur;
 	}
 	
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DOF_BAN_CODE_CAUT")
-	public TBanques getTBanques() {
-		return this.TBanques;
-	}
-
-	public void setTBanques(TBanques TBanques) {
-		this.TBanques = TBanques;
-	}
-
 	@Column(name = "DOF_LAA_AAO_CODE", nullable = false, length = 20)
 	public String getDofLaaAaoCode() {
 		return this.dofLaaAaoCode;
