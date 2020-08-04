@@ -234,7 +234,7 @@
 		                  </div>
 		                  
 		                  <label class="col-sm-2 control-label">Banque <span style="color:red;"> *</span></label>	
-                           <div class="col-sm-3">
+                           <div class="col-sm-5">
 				           <p:selectOneMenu id="banque" filter="true" filterMatchMode = "startsWith"  effect = "fade" value="#{commissionController.banCode}" style="width:100%;" >
 						    <f:selectItem  itemLabel="Selectionnez la banque..." itemValue=""/>
 						     <f:selectItems value="#{commissionController.listBanque}" var="b" itemLabel="#{b.banLibelle}" itemValue="#{b.banCode}" />	    
@@ -292,15 +292,17 @@
 				          </p:inputText>
 		                  </div>
 		                  
-		                </div> 
-		                
-		             
-		             <div class="form-group ">
-		              
+		                   
 		              <label for="delai" class="col-sm-2 control-label"><b>Délai d'exécution(Jours)<span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-3">
 	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
 	                  </div>
+		                  
+		                </div> 
+		                
+		             
+		             <div class="form-group ">
+		             
 		                 
 	                   <h:panelGroup id="cond">  
 	                   <h:panelGroup rendered="#{commissionController.etatMontVar}"> 
