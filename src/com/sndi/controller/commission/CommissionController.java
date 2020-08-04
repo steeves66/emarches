@@ -1507,6 +1507,8 @@ public class CommissionController {
 			 montN=0;
 			 dofTyp="";
 			 laaId=""; 
+			 montRab =0; 
+			 banCode = "";
 		 }
 		 
 		 public void viderPartiel() {
@@ -1528,6 +1530,8 @@ public class CommissionController {
 			 montN=0;
 			 dofTyp="";
 			 laaId=""; 
+			 montRab =0; 
+			 banCode = "";
 		 }
 		 
 	 public String renderPage(String value ,String action) throws IOException{ 
