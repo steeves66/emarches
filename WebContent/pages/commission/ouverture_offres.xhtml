@@ -132,7 +132,7 @@
 		                  <div class="form-group horizontal">
 		                      <label for="telephone" class="col-sm-2 control-label text-right"><b>Téléphone :</b></label>
 		                      <div class="col-sm-10">
-		                        <p:inputMask mask="(+999) 99-99-99-99" value="#{commissionController.newOffre.dofTelRep}"  type="text"  styleClass="form-control"  id="telephone" style="width: 100%" />
+		                         <p:inputText value="#{commissionController.newOffre.dofTelRep}"  type="text"  styleClass="form-control"  id="telephone" style="width: 100%"/>
 		                      </div>
 		                  </div>
 		                  
@@ -272,7 +272,6 @@
 						  <div class="col-sm-3">
 				          <p:inputText id="rab" type="text" styleClass="form-control text-right" value="#{commissionController.pourcentRab}" style="width: 100%" >
 				           <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montNet, montRab" /> 
-		         	        <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
 		                 </div>
 		                 
@@ -291,7 +290,7 @@
 		                     <label class="col-sm-2 control-label">Montant Rabais</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="montRab" type="text" styleClass="form-control text-right" value="#{commissionController.montRab}" style="width: 100%">
-				           <p:ajax listener="#{commissionController.calculPourcent()}"  global="false" event="blur" process="@this" update="montRab, rab, montNet" /> 
+				           <p:ajax listener="#{commissionController.calculPourcent()}"  global="false" event="blur" process="@this" update="rab, montNet" /> 
 				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
 		                  </div>

@@ -254,7 +254,7 @@ public class CommissionController {
 	 
 	 private long montLu=0;
 	 private long montN=0;
-	 private long pourcentRab=0;
+	 private double pourcentRab=0;
 	 private long montRab=0;
 	 private long numSeance=0;
 	 private String numVente = "";
@@ -434,7 +434,10 @@ public class CommissionController {
 	
 	 
 	 public void calculMontNet() {
-		 montRab= montLu * pourcentRab/100;
+		 //Convertir un double en long
+		 double d = pourcentRab; 
+		 long pourcentageRabais = (new Double(d)).longValue(); 
+		 montRab= montLu * pourcentageRabais/100;
 		 montN = montLu - montRab;
 		 System.out.print("montant est : "+getMontN());
 	 }
@@ -1843,13 +1846,6 @@ public class CommissionController {
 		this.montRab = montRab;
 	}
 
-	public long getPourcentRab() {
-		return pourcentRab;
-	}
-
-	public void setPourcentRab(long pourcentRab) {
-		this.pourcentRab = pourcentRab;
-	}
 
 /*	public List<TLotAao> getListeLotsByAvis() {
 		return listeLotsByAvis;
@@ -1860,6 +1856,16 @@ public class CommissionController {
 	}*/
 	
 	
+
+	public double getPourcentRab() {
+		return pourcentRab;
+	}
+
+
+	public void setPourcentRab(double pourcentRab) {
+		this.pourcentRab = pourcentRab;
+	}
+
 
 	public boolean isInfoOffre() {
 		return infoOffre;
