@@ -50,6 +50,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 	private BigDecimal dofMtCaut;
 	//private BigDecimal dofMtRab;
 	private String dofMtRab;
+	private String dofDelai2;
 
 	public VbTempParamDetOffres() {
 	}
@@ -62,7 +63,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 			String dofLaaAaoCode, String dofLaaId, String dofDelai, String dofOffCnps, String dofOffImpot,
 			String dofOffRc, String dofCaut, String dofTyp, String dofBanCode, String dofEstimRab, String dofRab,
 			String dofMtOfr, String dofOffNum, String dofNum, String dofNomRep, String dofPreRep, String dofTelRep,
-			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,String dofMtRab) {
+			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,String dofMtRab, String dofDelai2) {
 		this.tempNum = tempNum;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofOpeMatricule = dofOpeMatricule;
@@ -90,6 +91,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 		this.dofObsVariante = dofObsVariante;
 		this.dofMtCaut = dofMtCaut;
 		this.dofMtRab = dofMtRab;
+		this.dofDelai2 = dofDelai2;
 	}
 
 	@Id
@@ -346,6 +348,15 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 
 	public void setDofMtRab(String dofMtRab) {
 		this.dofMtRab = dofMtRab;
+	}
+	
+	@Column(name = "DOF_DELAI2", length = 500)
+	public String getDofDelai2() {
+		return this.dofDelai2;
+	}
+
+	public void setDofDelai2(String dofDelai2) {
+		this.dofDelai2 = dofDelai2;
 	}
 
 }

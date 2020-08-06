@@ -1364,6 +1364,9 @@ public class CommissionController {
 				
 				if (listeSelectionPiecesOffresAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+				}else
+				if (listePiecesOffresAnalyse.size()<listeSelectionPiecesOffresAnalyse.size()) {
+					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
 				}
 		 		else{
 			 		for(VPiecesOffreAnalyse ligne : listeSelectionPiecesOffresAnalyse) {
@@ -1381,7 +1384,10 @@ public class CommissionController {
 				//EVALUTATION
 				if (selectionCritereAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
-				}
+				}else
+					if (listeCritereAnalyse.size()<selectionCritereAnalyse.size()) {
+						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
+					}
 		 		else{
 			 		for(VCritereAnalyseDacOff ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
