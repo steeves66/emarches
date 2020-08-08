@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -35,7 +35,8 @@ public class VbSoumissions implements java.io.Serializable {
 			@AttributeOverride(name = "souTel", column = @Column(name = "SOU_TEL", length = 200)),
 			@AttributeOverride(name = "souAdresse", column = @Column(name = "SOU_ADRESSE", length = 200)),
 			@AttributeOverride(name = "souDteSaisi", column = @Column(name = "SOU_DTE_SAISI", length = 7)),
-			@AttributeOverride(name = "souOpeMatricule", column = @Column(name = "SOU_OPE_MATRICULE", length = 25)) })
+			@AttributeOverride(name = "souOpeMatricule", column = @Column(name = "SOU_OPE_MATRICULE", length = 25)),
+			@AttributeOverride(name = "souSigleDmp", column = @Column(name = "SOU_SIGLE_DMP", length = 500)) })
 	public VbSoumissionsId getId() {
 		return this.id;
 	}

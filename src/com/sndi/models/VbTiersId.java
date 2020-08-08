@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,6 +20,7 @@ public class VbTiersId implements java.io.Serializable {
 	private String tieAdresse;
 	private Date tieDteSaisi;
 	private String tieOpeMatricule;
+	private String tieNcc;
 
 	public VbTiersId() {
 	}
@@ -29,7 +30,7 @@ public class VbTiersId implements java.io.Serializable {
 	}
 
 	public VbTiersId(String tieNum, String tieInter, String tieSigleSte, String tieNomCom, String tieStaCode,
-			String tieTel, String tieAdresse, Date tieDteSaisi, String tieOpeMatricule) {
+			String tieTel, String tieAdresse, Date tieDteSaisi, String tieOpeMatricule, String tieNcc) {
 		this.tieNum = tieNum;
 		this.tieInter = tieInter;
 		this.tieSigleSte = tieSigleSte;
@@ -39,6 +40,7 @@ public class VbTiersId implements java.io.Serializable {
 		this.tieAdresse = tieAdresse;
 		this.tieDteSaisi = tieDteSaisi;
 		this.tieOpeMatricule = tieOpeMatricule;
+		this.tieNcc = tieNcc;
 	}
 
 	@Column(name = "TIE_NUM", nullable = false, length = 20)
@@ -122,6 +124,15 @@ public class VbTiersId implements java.io.Serializable {
 		this.tieOpeMatricule = tieOpeMatricule;
 	}
 
+	@Column(name = "TIE_NCC", length = 15)
+	public String getTieNcc() {
+		return this.tieNcc;
+	}
+
+	public void setTieNcc(String tieNcc) {
+		this.tieNcc = tieNcc;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -151,7 +162,9 @@ public class VbTiersId implements java.io.Serializable {
 								&& this.getTieDteSaisi().equals(castOther.getTieDteSaisi())))
 				&& ((this.getTieOpeMatricule() == castOther.getTieOpeMatricule())
 						|| (this.getTieOpeMatricule() != null && castOther.getTieOpeMatricule() != null
-								&& this.getTieOpeMatricule().equals(castOther.getTieOpeMatricule())));
+								&& this.getTieOpeMatricule().equals(castOther.getTieOpeMatricule())))
+				&& ((this.getTieNcc() == castOther.getTieNcc()) || (this.getTieNcc() != null
+						&& castOther.getTieNcc() != null && this.getTieNcc().equals(castOther.getTieNcc())));
 	}
 
 	public int hashCode() {
@@ -166,6 +179,7 @@ public class VbTiersId implements java.io.Serializable {
 		result = 37 * result + (getTieAdresse() == null ? 0 : this.getTieAdresse().hashCode());
 		result = 37 * result + (getTieDteSaisi() == null ? 0 : this.getTieDteSaisi().hashCode());
 		result = 37 * result + (getTieOpeMatricule() == null ? 0 : this.getTieOpeMatricule().hashCode());
+		result = 37 * result + (getTieNcc() == null ? 0 : this.getTieNcc().hashCode());
 		return result;
 	}
 

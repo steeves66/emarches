@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -19,6 +19,8 @@ public class VbFinancementPgpmId implements java.io.Serializable {
 	private BigDecimal fipMontantCfa;
 	private BigDecimal fipMontantDevise;
 	private String fipCommentaire;
+	private String fipTypeFinance;
+	private BigDecimal fipTresor;
 
 	public VbFinancementPgpmId() {
 	}
@@ -31,7 +33,8 @@ public class VbFinancementPgpmId implements java.io.Serializable {
 	}
 
 	public VbFinancementPgpmId(long fipId, String fipDevCode, String fipBaiCode, String fipSouCode, long fipGpgId,
-			BigDecimal fipMontantCfa, BigDecimal fipMontantDevise, String fipCommentaire) {
+			BigDecimal fipMontantCfa, BigDecimal fipMontantDevise, String fipCommentaire, String fipTypeFinance,
+			BigDecimal fipTresor) {
 		this.fipId = fipId;
 		this.fipDevCode = fipDevCode;
 		this.fipBaiCode = fipBaiCode;
@@ -40,6 +43,8 @@ public class VbFinancementPgpmId implements java.io.Serializable {
 		this.fipMontantCfa = fipMontantCfa;
 		this.fipMontantDevise = fipMontantDevise;
 		this.fipCommentaire = fipCommentaire;
+		this.fipTypeFinance = fipTypeFinance;
+		this.fipTresor = fipTresor;
 	}
 
 	@Column(name = "FIP_ID", nullable = false, precision = 10, scale = 0)
@@ -114,6 +119,24 @@ public class VbFinancementPgpmId implements java.io.Serializable {
 		this.fipCommentaire = fipCommentaire;
 	}
 
+	@Column(name = "FIP_TYPE_FINANCE", length = 20)
+	public String getFipTypeFinance() {
+		return this.fipTypeFinance;
+	}
+
+	public void setFipTypeFinance(String fipTypeFinance) {
+		this.fipTypeFinance = fipTypeFinance;
+	}
+
+	@Column(name = "FIP_TRESOR", precision = 22, scale = 0)
+	public BigDecimal getFipTresor() {
+		return this.fipTresor;
+	}
+
+	public void setFipTresor(BigDecimal fipTresor) {
+		this.fipTresor = fipTresor;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -139,7 +162,12 @@ public class VbFinancementPgpmId implements java.io.Serializable {
 								&& this.getFipMontantDevise().equals(castOther.getFipMontantDevise())))
 				&& ((this.getFipCommentaire() == castOther.getFipCommentaire())
 						|| (this.getFipCommentaire() != null && castOther.getFipCommentaire() != null
-								&& this.getFipCommentaire().equals(castOther.getFipCommentaire())));
+								&& this.getFipCommentaire().equals(castOther.getFipCommentaire())))
+				&& ((this.getFipTypeFinance() == castOther.getFipTypeFinance())
+						|| (this.getFipTypeFinance() != null && castOther.getFipTypeFinance() != null
+								&& this.getFipTypeFinance().equals(castOther.getFipTypeFinance())))
+				&& ((this.getFipTresor() == castOther.getFipTresor()) || (this.getFipTresor() != null
+						&& castOther.getFipTresor() != null && this.getFipTresor().equals(castOther.getFipTresor())));
 	}
 
 	public int hashCode() {
@@ -153,6 +181,8 @@ public class VbFinancementPgpmId implements java.io.Serializable {
 		result = 37 * result + (getFipMontantCfa() == null ? 0 : this.getFipMontantCfa().hashCode());
 		result = 37 * result + (getFipMontantDevise() == null ? 0 : this.getFipMontantDevise().hashCode());
 		result = 37 * result + (getFipCommentaire() == null ? 0 : this.getFipCommentaire().hashCode());
+		result = 37 * result + (getFipTypeFinance() == null ? 0 : this.getFipTypeFinance().hashCode());
+		result = 37 * result + (getFipTresor() == null ? 0 : this.getFipTresor().hashCode());
 		return result;
 	}
 

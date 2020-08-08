@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -36,7 +36,10 @@ public class VbDetailCorrection implements java.io.Serializable {
 			@AttributeOverride(name = "dcoFonCodSaisi", column = @Column(name = "DCO_FON_COD_SAISI", length = 12)),
 			@AttributeOverride(name = "dcoOpeMatricule", column = @Column(name = "DCO_OPE_MATRICULE", length = 25)),
 			@AttributeOverride(name = "dcoObservation", column = @Column(name = "DCO_OBSERVATION", length = 4000)),
-			@AttributeOverride(name = "dcoCorNum", column = @Column(name = "DCO_COR_NUM", precision = 22, scale = 0)) })
+			@AttributeOverride(name = "dcoCorNum", column = @Column(name = "DCO_COR_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dcoConforme", column = @Column(name = "DCO_CONFORME", length = 3)),
+			@AttributeOverride(name = "dcoPresente", column = @Column(name = "DCO_PRESENTE", length = 3)),
+			@AttributeOverride(name = "dcoRespo", column = @Column(name = "DCO_RESPO", length = 1)) })
 	public VbDetailCorrectionId getId() {
 		return this.id;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -30,6 +30,8 @@ public class VbDetCommissionSeanceId implements java.io.Serializable {
 	private String dcsOpeMatSaisi;
 	private String dcsMbmRespo;
 	private String dcsRepMandate;
+	private String dcsFonAdmin;
+	private String dcsStrCom;
 
 	public VbDetCommissionSeanceId() {
 	}
@@ -41,7 +43,8 @@ public class VbDetCommissionSeanceId implements java.io.Serializable {
 	public VbDetCommissionSeanceId(BigDecimal dcsNum, String dcsDacCode, String dcsFonCod, String dcsOpeMatricule,
 			BigDecimal dcsSeaNum, Date dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
 			BigDecimal dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
-			String dcsComStrCode, String dcsOpeMatSaisi, String dcsMbmRespo, String dcsRepMandate) {
+			String dcsComStrCode, String dcsOpeMatSaisi, String dcsMbmRespo, String dcsRepMandate, String dcsFonAdmin,
+			String dcsStrCom) {
 		this.dcsNum = dcsNum;
 		this.dcsDacCode = dcsDacCode;
 		this.dcsFonCod = dcsFonCod;
@@ -60,6 +63,8 @@ public class VbDetCommissionSeanceId implements java.io.Serializable {
 		this.dcsOpeMatSaisi = dcsOpeMatSaisi;
 		this.dcsMbmRespo = dcsMbmRespo;
 		this.dcsRepMandate = dcsRepMandate;
+		this.dcsFonAdmin = dcsFonAdmin;
+		this.dcsStrCom = dcsStrCom;
 	}
 
 	@Column(name = "DCS_NUM", nullable = false, precision = 22, scale = 0)
@@ -224,6 +229,24 @@ public class VbDetCommissionSeanceId implements java.io.Serializable {
 		this.dcsRepMandate = dcsRepMandate;
 	}
 
+	@Column(name = "DCS_FON_ADMIN", length = 500)
+	public String getDcsFonAdmin() {
+		return this.dcsFonAdmin;
+	}
+
+	public void setDcsFonAdmin(String dcsFonAdmin) {
+		this.dcsFonAdmin = dcsFonAdmin;
+	}
+
+	@Column(name = "DCS_STR_COM", length = 500)
+	public String getDcsStrCom() {
+		return this.dcsStrCom;
+	}
+
+	public void setDcsStrCom(String dcsStrCom) {
+		this.dcsStrCom = dcsStrCom;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -277,7 +300,12 @@ public class VbDetCommissionSeanceId implements java.io.Serializable {
 								&& this.getDcsMbmRespo().equals(castOther.getDcsMbmRespo())))
 				&& ((this.getDcsRepMandate() == castOther.getDcsRepMandate())
 						|| (this.getDcsRepMandate() != null && castOther.getDcsRepMandate() != null
-								&& this.getDcsRepMandate().equals(castOther.getDcsRepMandate())));
+								&& this.getDcsRepMandate().equals(castOther.getDcsRepMandate())))
+				&& ((this.getDcsFonAdmin() == castOther.getDcsFonAdmin())
+						|| (this.getDcsFonAdmin() != null && castOther.getDcsFonAdmin() != null
+								&& this.getDcsFonAdmin().equals(castOther.getDcsFonAdmin())))
+				&& ((this.getDcsStrCom() == castOther.getDcsStrCom()) || (this.getDcsStrCom() != null
+						&& castOther.getDcsStrCom() != null && this.getDcsStrCom().equals(castOther.getDcsStrCom())));
 	}
 
 	public int hashCode() {
@@ -301,6 +329,8 @@ public class VbDetCommissionSeanceId implements java.io.Serializable {
 		result = 37 * result + (getDcsOpeMatSaisi() == null ? 0 : this.getDcsOpeMatSaisi().hashCode());
 		result = 37 * result + (getDcsMbmRespo() == null ? 0 : this.getDcsMbmRespo().hashCode());
 		result = 37 * result + (getDcsRepMandate() == null ? 0 : this.getDcsRepMandate().hashCode());
+		result = 37 * result + (getDcsFonAdmin() == null ? 0 : this.getDcsFonAdmin().hashCode());
+		result = 37 * result + (getDcsStrCom() == null ? 0 : this.getDcsStrCom().hashCode());
 		return result;
 	}
 

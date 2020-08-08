@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,31 +17,33 @@ import javax.persistence.Table;
 public class TDetailVente implements java.io.Serializable {
 
 	private long dveNum;
-	private TVenteDac TVenteDac;
 	private TDacSpecs TDacSpecs;
 	private TLotAao TLotAao;
+	private TVenteDac TVenteDac;
 	private String dveQte;
 	private Long dveCout;
 	private String dveCoutLettre;
+	private String dveFonCod;
 
 	public TDetailVente() {
 	}
 
-	public TDetailVente(long dveNum, TVenteDac TVenteDac, TDacSpecs TDacSpecs) {
+	public TDetailVente(long dveNum, TDacSpecs TDacSpecs, TVenteDac TVenteDac) {
 		this.dveNum = dveNum;
-		this.TVenteDac = TVenteDac;
 		this.TDacSpecs = TDacSpecs;
+		this.TVenteDac = TVenteDac;
 	}
 
-	public TDetailVente(long dveNum, TVenteDac TVenteDac, TDacSpecs TDacSpecs, TLotAao TLotAao, String dveQte,
-			Long dveCout, String dveCoutLettre) {
+	public TDetailVente(long dveNum, TDacSpecs TDacSpecs, TLotAao TLotAao, TVenteDac TVenteDac, String dveQte,
+			Long dveCout, String dveCoutLettre, String dveFonCod) {
 		this.dveNum = dveNum;
-		this.TVenteDac = TVenteDac;
 		this.TDacSpecs = TDacSpecs;
 		this.TLotAao = TLotAao;
+		this.TVenteDac = TVenteDac;
 		this.dveQte = dveQte;
 		this.dveCout = dveCout;
 		this.dveCoutLettre = dveCoutLettre;
+		this.dveFonCod = dveFonCod;
 	}
 
 	@Id
@@ -53,16 +55,6 @@ public class TDetailVente implements java.io.Serializable {
 
 	public void setDveNum(long dveNum) {
 		this.dveNum = dveNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DVE_VEN_NUM", nullable = false)
-	public TVenteDac getTVenteDac() {
-		return this.TVenteDac;
-	}
-
-	public void setTVenteDac(TVenteDac TVenteDac) {
-		this.TVenteDac = TVenteDac;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -83,6 +75,16 @@ public class TDetailVente implements java.io.Serializable {
 
 	public void setTLotAao(TLotAao TLotAao) {
 		this.TLotAao = TLotAao;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DVE_VEN_NUM", nullable = false)
+	public TVenteDac getTVenteDac() {
+		return this.TVenteDac;
+	}
+
+	public void setTVenteDac(TVenteDac TVenteDac) {
+		this.TVenteDac = TVenteDac;
 	}
 
 	@Column(name = "DVE_QTE", length = 3)
@@ -110,6 +112,15 @@ public class TDetailVente implements java.io.Serializable {
 
 	public void setDveCoutLettre(String dveCoutLettre) {
 		this.dveCoutLettre = dveCoutLettre;
+	}
+
+	@Column(name = "DVE_FON_COD", length = 12)
+	public String getDveFonCod() {
+		return this.dveFonCod;
+	}
+
+	public void setDveFonCod(String dveFonCod) {
+		this.dveFonCod = dveFonCod;
 	}
 
 }

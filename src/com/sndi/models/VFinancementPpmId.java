@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -156,7 +156,7 @@ public class VFinancementPpmId implements java.io.Serializable {
 		this.fppPartTresor = fppPartTresor;
 	}
 
-	@Column(name = "BAI_CODE", length = 5)
+	@Column(name = "BAI_CODE", length = 20)
 	public String getBaiCode() {
 		return this.baiCode;
 	}

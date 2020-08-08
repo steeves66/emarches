@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +18,9 @@ public class VbPiecesDacsId implements java.io.Serializable {
 	private String pidStaCode;
 	private Date pidDteSaisi;
 	private String pidDacCode;
+	private String pidObservation;
+	private String pidPresente;
+	private String pidConforme;
 
 	public VbPiecesDacsId() {
 	}
@@ -27,13 +30,16 @@ public class VbPiecesDacsId implements java.io.Serializable {
 	}
 
 	public VbPiecesDacsId(BigDecimal pidCode, String pidLibelle, String pidTpiCode, String pidStaCode, Date pidDteSaisi,
-			String pidDacCode) {
+			String pidDacCode, String pidObservation, String pidPresente, String pidConforme) {
 		this.pidCode = pidCode;
 		this.pidLibelle = pidLibelle;
 		this.pidTpiCode = pidTpiCode;
 		this.pidStaCode = pidStaCode;
 		this.pidDteSaisi = pidDteSaisi;
 		this.pidDacCode = pidDacCode;
+		this.pidObservation = pidObservation;
+		this.pidPresente = pidPresente;
+		this.pidConforme = pidConforme;
 	}
 
 	@Column(name = "PID_CODE", nullable = false, precision = 22, scale = 0)
@@ -90,6 +96,33 @@ public class VbPiecesDacsId implements java.io.Serializable {
 		this.pidDacCode = pidDacCode;
 	}
 
+	@Column(name = "PID_OBSERVATION", length = 2000)
+	public String getPidObservation() {
+		return this.pidObservation;
+	}
+
+	public void setPidObservation(String pidObservation) {
+		this.pidObservation = pidObservation;
+	}
+
+	@Column(name = "PID_PRESENTE", length = 3)
+	public String getPidPresente() {
+		return this.pidPresente;
+	}
+
+	public void setPidPresente(String pidPresente) {
+		this.pidPresente = pidPresente;
+	}
+
+	@Column(name = "PID_CONFORME", length = 3)
+	public String getPidConforme() {
+		return this.pidConforme;
+	}
+
+	public void setPidConforme(String pidConforme) {
+		this.pidConforme = pidConforme;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -110,9 +143,17 @@ public class VbPiecesDacsId implements java.io.Serializable {
 				&& ((this.getPidDteSaisi() == castOther.getPidDteSaisi())
 						|| (this.getPidDteSaisi() != null && castOther.getPidDteSaisi() != null
 								&& this.getPidDteSaisi().equals(castOther.getPidDteSaisi())))
-				&& ((this.getPidDacCode() == castOther.getPidDacCode())
-						|| (this.getPidDacCode() != null && castOther.getPidDacCode() != null
-								&& this.getPidDacCode().equals(castOther.getPidDacCode())));
+				&& ((this.getPidDacCode() == castOther.getPidDacCode()) || (this.getPidDacCode() != null
+						&& castOther.getPidDacCode() != null && this.getPidDacCode().equals(castOther.getPidDacCode())))
+				&& ((this.getPidObservation() == castOther.getPidObservation())
+						|| (this.getPidObservation() != null && castOther.getPidObservation() != null
+								&& this.getPidObservation().equals(castOther.getPidObservation())))
+				&& ((this.getPidPresente() == castOther.getPidPresente())
+						|| (this.getPidPresente() != null && castOther.getPidPresente() != null
+								&& this.getPidPresente().equals(castOther.getPidPresente())))
+				&& ((this.getPidConforme() == castOther.getPidConforme())
+						|| (this.getPidConforme() != null && castOther.getPidConforme() != null
+								&& this.getPidConforme().equals(castOther.getPidConforme())));
 	}
 
 	public int hashCode() {
@@ -124,6 +165,9 @@ public class VbPiecesDacsId implements java.io.Serializable {
 		result = 37 * result + (getPidStaCode() == null ? 0 : this.getPidStaCode().hashCode());
 		result = 37 * result + (getPidDteSaisi() == null ? 0 : this.getPidDteSaisi().hashCode());
 		result = 37 * result + (getPidDacCode() == null ? 0 : this.getPidDacCode().hashCode());
+		result = 37 * result + (getPidObservation() == null ? 0 : this.getPidObservation().hashCode());
+		result = 37 * result + (getPidPresente() == null ? 0 : this.getPidPresente().hashCode());
+		result = 37 * result + (getPidConforme() == null ? 0 : this.getPidConforme().hashCode());
 		return result;
 	}
 

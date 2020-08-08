@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +17,11 @@ public class VbCorrectionDacId implements java.io.Serializable {
 	private String corLieblle;
 	private Date corDteSaisi;
 	private String corOpeMatricule;
+	private String corResultat;
+	private String corObservation;
+	private String corResultatRespo;
+	private String corObservationRespo;
+	private String corFoncodValid;
 
 	public VbCorrectionDacId() {
 	}
@@ -26,12 +31,18 @@ public class VbCorrectionDacId implements java.io.Serializable {
 	}
 
 	public VbCorrectionDacId(BigDecimal corNum, String corDacCode, String corLieblle, Date corDteSaisi,
-			String corOpeMatricule) {
+			String corOpeMatricule, String corResultat, String corObservation, String corResultatRespo,
+			String corObservationRespo, String corFoncodValid) {
 		this.corNum = corNum;
 		this.corDacCode = corDacCode;
 		this.corLieblle = corLieblle;
 		this.corDteSaisi = corDteSaisi;
 		this.corOpeMatricule = corOpeMatricule;
+		this.corResultat = corResultat;
+		this.corObservation = corObservation;
+		this.corResultatRespo = corResultatRespo;
+		this.corObservationRespo = corObservationRespo;
+		this.corFoncodValid = corFoncodValid;
 	}
 
 	@Column(name = "COR_NUM", nullable = false, precision = 22, scale = 0)
@@ -79,6 +90,51 @@ public class VbCorrectionDacId implements java.io.Serializable {
 		this.corOpeMatricule = corOpeMatricule;
 	}
 
+	@Column(name = "COR_RESULTAT", length = 20)
+	public String getCorResultat() {
+		return this.corResultat;
+	}
+
+	public void setCorResultat(String corResultat) {
+		this.corResultat = corResultat;
+	}
+
+	@Column(name = "COR_OBSERVATION", length = 4000)
+	public String getCorObservation() {
+		return this.corObservation;
+	}
+
+	public void setCorObservation(String corObservation) {
+		this.corObservation = corObservation;
+	}
+
+	@Column(name = "COR_RESULTAT_RESPO", length = 20)
+	public String getCorResultatRespo() {
+		return this.corResultatRespo;
+	}
+
+	public void setCorResultatRespo(String corResultatRespo) {
+		this.corResultatRespo = corResultatRespo;
+	}
+
+	@Column(name = "COR_OBSERVATION_RESPO", length = 4000)
+	public String getCorObservationRespo() {
+		return this.corObservationRespo;
+	}
+
+	public void setCorObservationRespo(String corObservationRespo) {
+		this.corObservationRespo = corObservationRespo;
+	}
+
+	@Column(name = "COR_FONCOD_VALID", length = 1000)
+	public String getCorFoncodValid() {
+		return this.corFoncodValid;
+	}
+
+	public void setCorFoncodValid(String corFoncodValid) {
+		this.corFoncodValid = corFoncodValid;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -99,7 +155,22 @@ public class VbCorrectionDacId implements java.io.Serializable {
 								&& this.getCorDteSaisi().equals(castOther.getCorDteSaisi())))
 				&& ((this.getCorOpeMatricule() == castOther.getCorOpeMatricule())
 						|| (this.getCorOpeMatricule() != null && castOther.getCorOpeMatricule() != null
-								&& this.getCorOpeMatricule().equals(castOther.getCorOpeMatricule())));
+								&& this.getCorOpeMatricule().equals(castOther.getCorOpeMatricule())))
+				&& ((this.getCorResultat() == castOther.getCorResultat())
+						|| (this.getCorResultat() != null && castOther.getCorResultat() != null
+								&& this.getCorResultat().equals(castOther.getCorResultat())))
+				&& ((this.getCorObservation() == castOther.getCorObservation())
+						|| (this.getCorObservation() != null && castOther.getCorObservation() != null
+								&& this.getCorObservation().equals(castOther.getCorObservation())))
+				&& ((this.getCorResultatRespo() == castOther.getCorResultatRespo())
+						|| (this.getCorResultatRespo() != null && castOther.getCorResultatRespo() != null
+								&& this.getCorResultatRespo().equals(castOther.getCorResultatRespo())))
+				&& ((this.getCorObservationRespo() == castOther.getCorObservationRespo())
+						|| (this.getCorObservationRespo() != null && castOther.getCorObservationRespo() != null
+								&& this.getCorObservationRespo().equals(castOther.getCorObservationRespo())))
+				&& ((this.getCorFoncodValid() == castOther.getCorFoncodValid())
+						|| (this.getCorFoncodValid() != null && castOther.getCorFoncodValid() != null
+								&& this.getCorFoncodValid().equals(castOther.getCorFoncodValid())));
 	}
 
 	public int hashCode() {
@@ -110,6 +181,11 @@ public class VbCorrectionDacId implements java.io.Serializable {
 		result = 37 * result + (getCorLieblle() == null ? 0 : this.getCorLieblle().hashCode());
 		result = 37 * result + (getCorDteSaisi() == null ? 0 : this.getCorDteSaisi().hashCode());
 		result = 37 * result + (getCorOpeMatricule() == null ? 0 : this.getCorOpeMatricule().hashCode());
+		result = 37 * result + (getCorResultat() == null ? 0 : this.getCorResultat().hashCode());
+		result = 37 * result + (getCorObservation() == null ? 0 : this.getCorObservation().hashCode());
+		result = 37 * result + (getCorResultatRespo() == null ? 0 : this.getCorResultatRespo().hashCode());
+		result = 37 * result + (getCorObservationRespo() == null ? 0 : this.getCorObservationRespo().hashCode());
+		result = 37 * result + (getCorFoncodValid() == null ? 0 : this.getCorFoncodValid().hashCode());
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -39,7 +39,15 @@ public class VbAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "agpModePassation", column = @Column(name = "AGP_MODE_PASSATION", length = 1000)),
 			@AttributeOverride(name = "agpActif", column = @Column(name = "AGP_ACTIF", length = 1)),
 			@AttributeOverride(name = "agpStatutRetour", column = @Column(name = "AGP_STATUT_RETOUR", length = 2)),
-			@AttributeOverride(name = "agpActeurSaisie", column = @Column(name = "AGP_ACTEUR_SAISIE", length = 12)) })
+			@AttributeOverride(name = "agpActeurSaisie", column = @Column(name = "AGP_ACTEUR_SAISIE", length = 12)),
+			@AttributeOverride(name = "agpDateValAc", column = @Column(name = "AGP_DATE_VAL_AC", length = 7)),
+			@AttributeOverride(name = "agpDateValCpmp", column = @Column(name = "AGP_DATE_VAL_CPMP", length = 7)),
+			@AttributeOverride(name = "agpDateValDmp", column = @Column(name = "AGP_DATE_VAL_DMP", length = 7)),
+			@AttributeOverride(name = "agpCode", column = @Column(name = "AGP_CODE", length = 50)),
+			@AttributeOverride(name = "agpDteModif", column = @Column(name = "AGP_DTE_MODIF", length = 7)),
+			@AttributeOverride(name = "agpFonCodPf", column = @Column(name = "AGP_FON_COD_PF", length = 20)),
+			@AttributeOverride(name = "agpFonCodDmp", column = @Column(name = "AGP_FON_COD_DMP", length = 20)),
+			@AttributeOverride(name = "agpRecherche", column = @Column(name = "AGP_RECHERCHE", length = 4000)) })
 	public VbAgpmId getId() {
 		return this.id;
 	}

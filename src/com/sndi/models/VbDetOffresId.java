@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -72,6 +72,14 @@ public class VbDetOffresId implements java.io.Serializable {
 	private Date dofDteSaisi;
 	private String dofFonCodeAc;
 	private String dofOpeMatricule;
+	private String dofStatut;
+	private String dofSouNcc;
+	private String dofSigle;
+	private String dofErrFin;
+	private String dofObsFin;
+	private String dofRepeche;
+	private String dofObsRet;
+	private String dofObsAnormal;
 
 	public VbDetOffresId() {
 	}
@@ -97,7 +105,8 @@ public class VbDetOffresId implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofFonCodeAc,
-			String dofOpeMatricule) {
+			String dofOpeMatricule, String dofStatut, String dofSouNcc, String dofSigle, String dofErrFin,
+			String dofObsFin, String dofRepeche, String dofObsRet, String dofObsAnormal) {
 		this.dofNum = dofNum;
 		this.dofLaaId = dofLaaId;
 		this.dofLaaAaoCode = dofLaaAaoCode;
@@ -158,6 +167,14 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofFonCodeAc = dofFonCodeAc;
 		this.dofOpeMatricule = dofOpeMatricule;
+		this.dofStatut = dofStatut;
+		this.dofSouNcc = dofSouNcc;
+		this.dofSigle = dofSigle;
+		this.dofErrFin = dofErrFin;
+		this.dofObsFin = dofObsFin;
+		this.dofRepeche = dofRepeche;
+		this.dofObsRet = dofObsRet;
+		this.dofObsAnormal = dofObsAnormal;
 	}
 
 	@Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)
@@ -376,7 +393,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofTotTec = dofTotTec;
 	}
 
-	@Column(name = "DOF_OBS_DMP", length = 200)
+	@Column(name = "DOF_OBS_DMP", length = 500)
 	public String getDofObsDmp() {
 		return this.dofObsDmp;
 	}
@@ -385,7 +402,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsDmp = dofObsDmp;
 	}
 
-	@Column(name = "DOF_OBS_COM", length = 200)
+	@Column(name = "DOF_OBS_COM", length = 500)
 	public String getDofObsCom() {
 		return this.dofObsCom;
 	}
@@ -394,7 +411,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsCom = dofObsCom;
 	}
 
-	@Column(name = "DOF_OBS_ADM", length = 200)
+	@Column(name = "DOF_OBS_ADM", length = 500)
 	public String getDofObsAdm() {
 		return this.dofObsAdm;
 	}
@@ -403,7 +420,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsAdm = dofObsAdm;
 	}
 
-	@Column(name = "DOF_OBS_ADM_DMP", length = 200)
+	@Column(name = "DOF_OBS_ADM_DMP", length = 500)
 	public String getDofObsAdmDmp() {
 		return this.dofObsAdmDmp;
 	}
@@ -412,7 +429,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsAdmDmp = dofObsAdmDmp;
 	}
 
-	@Column(name = "DOF_OBS_ADM_BAI", length = 200)
+	@Column(name = "DOF_OBS_ADM_BAI", length = 500)
 	public String getDofObsAdmBai() {
 		return this.dofObsAdmBai;
 	}
@@ -421,7 +438,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsAdmBai = dofObsAdmBai;
 	}
 
-	@Column(name = "DOF_OBS_TEC", length = 200)
+	@Column(name = "DOF_OBS_TEC", length = 500)
 	public String getDofObsTec() {
 		return this.dofObsTec;
 	}
@@ -430,7 +447,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsTec = dofObsTec;
 	}
 
-	@Column(name = "DOF_OBS_TEC_DMP", length = 200)
+	@Column(name = "DOF_OBS_TEC_DMP", length = 500)
 	public String getDofObsTecDmp() {
 		return this.dofObsTecDmp;
 	}
@@ -439,7 +456,7 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsTecDmp = dofObsTecDmp;
 	}
 
-	@Column(name = "DOF_OBS_TEC_BAI", length = 200)
+	@Column(name = "DOF_OBS_TEC_BAI", length = 500)
 	public String getDofObsTecBai() {
 		return this.dofObsTecBai;
 	}
@@ -700,6 +717,78 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofOpeMatricule = dofOpeMatricule;
 	}
 
+	@Column(name = "DOF_STATUT", length = 1)
+	public String getDofStatut() {
+		return this.dofStatut;
+	}
+
+	public void setDofStatut(String dofStatut) {
+		this.dofStatut = dofStatut;
+	}
+
+	@Column(name = "DOF_SOU_NCC", length = 500)
+	public String getDofSouNcc() {
+		return this.dofSouNcc;
+	}
+
+	public void setDofSouNcc(String dofSouNcc) {
+		this.dofSouNcc = dofSouNcc;
+	}
+
+	@Column(name = "DOF_SIGLE", length = 500)
+	public String getDofSigle() {
+		return this.dofSigle;
+	}
+
+	public void setDofSigle(String dofSigle) {
+		this.dofSigle = dofSigle;
+	}
+
+	@Column(name = "DOF_ERR_FIN", length = 500)
+	public String getDofErrFin() {
+		return this.dofErrFin;
+	}
+
+	public void setDofErrFin(String dofErrFin) {
+		this.dofErrFin = dofErrFin;
+	}
+
+	@Column(name = "DOF_OBS_FIN", length = 500)
+	public String getDofObsFin() {
+		return this.dofObsFin;
+	}
+
+	public void setDofObsFin(String dofObsFin) {
+		this.dofObsFin = dofObsFin;
+	}
+
+	@Column(name = "DOF_REPECHE", length = 1)
+	public String getDofRepeche() {
+		return this.dofRepeche;
+	}
+
+	public void setDofRepeche(String dofRepeche) {
+		this.dofRepeche = dofRepeche;
+	}
+
+	@Column(name = "DOF_OBS_RET", length = 500)
+	public String getDofObsRet() {
+		return this.dofObsRet;
+	}
+
+	public void setDofObsRet(String dofObsRet) {
+		this.dofObsRet = dofObsRet;
+	}
+
+	@Column(name = "DOF_OBS_ANORMAL", length = 500)
+	public String getDofObsAnormal() {
+		return this.dofObsAnormal;
+	}
+
+	public void setDofObsAnormal(String dofObsAnormal) {
+		this.dofObsAnormal = dofObsAnormal;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -857,7 +946,24 @@ public class VbDetOffresId implements java.io.Serializable {
 								&& this.getDofFonCodeAc().equals(castOther.getDofFonCodeAc())))
 				&& ((this.getDofOpeMatricule() == castOther.getDofOpeMatricule())
 						|| (this.getDofOpeMatricule() != null && castOther.getDofOpeMatricule() != null
-								&& this.getDofOpeMatricule().equals(castOther.getDofOpeMatricule())));
+								&& this.getDofOpeMatricule().equals(castOther.getDofOpeMatricule())))
+				&& ((this.getDofStatut() == castOther.getDofStatut()) || (this.getDofStatut() != null
+						&& castOther.getDofStatut() != null && this.getDofStatut().equals(castOther.getDofStatut())))
+				&& ((this.getDofSouNcc() == castOther.getDofSouNcc()) || (this.getDofSouNcc() != null
+						&& castOther.getDofSouNcc() != null && this.getDofSouNcc().equals(castOther.getDofSouNcc())))
+				&& ((this.getDofSigle() == castOther.getDofSigle()) || (this.getDofSigle() != null
+						&& castOther.getDofSigle() != null && this.getDofSigle().equals(castOther.getDofSigle())))
+				&& ((this.getDofErrFin() == castOther.getDofErrFin()) || (this.getDofErrFin() != null
+						&& castOther.getDofErrFin() != null && this.getDofErrFin().equals(castOther.getDofErrFin())))
+				&& ((this.getDofObsFin() == castOther.getDofObsFin()) || (this.getDofObsFin() != null
+						&& castOther.getDofObsFin() != null && this.getDofObsFin().equals(castOther.getDofObsFin())))
+				&& ((this.getDofRepeche() == castOther.getDofRepeche()) || (this.getDofRepeche() != null
+						&& castOther.getDofRepeche() != null && this.getDofRepeche().equals(castOther.getDofRepeche())))
+				&& ((this.getDofObsRet() == castOther.getDofObsRet()) || (this.getDofObsRet() != null
+						&& castOther.getDofObsRet() != null && this.getDofObsRet().equals(castOther.getDofObsRet())))
+				&& ((this.getDofObsAnormal() == castOther.getDofObsAnormal())
+						|| (this.getDofObsAnormal() != null && castOther.getDofObsAnormal() != null
+								&& this.getDofObsAnormal().equals(castOther.getDofObsAnormal())));
 	}
 
 	public int hashCode() {
@@ -923,6 +1029,14 @@ public class VbDetOffresId implements java.io.Serializable {
 		result = 37 * result + (getDofDteSaisi() == null ? 0 : this.getDofDteSaisi().hashCode());
 		result = 37 * result + (getDofFonCodeAc() == null ? 0 : this.getDofFonCodeAc().hashCode());
 		result = 37 * result + (getDofOpeMatricule() == null ? 0 : this.getDofOpeMatricule().hashCode());
+		result = 37 * result + (getDofStatut() == null ? 0 : this.getDofStatut().hashCode());
+		result = 37 * result + (getDofSouNcc() == null ? 0 : this.getDofSouNcc().hashCode());
+		result = 37 * result + (getDofSigle() == null ? 0 : this.getDofSigle().hashCode());
+		result = 37 * result + (getDofErrFin() == null ? 0 : this.getDofErrFin().hashCode());
+		result = 37 * result + (getDofObsFin() == null ? 0 : this.getDofObsFin().hashCode());
+		result = 37 * result + (getDofRepeche() == null ? 0 : this.getDofRepeche().hashCode());
+		result = 37 * result + (getDofObsRet() == null ? 0 : this.getDofObsRet().hashCode());
+		result = 37 * result + (getDofObsAnormal() == null ? 0 : this.getDofObsAnormal().hashCode());
 		return result;
 	}
 

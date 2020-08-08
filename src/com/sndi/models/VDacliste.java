@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -50,6 +50,7 @@ public class VDacliste implements java.io.Serializable {
 			@AttributeOverride(name = "dacBailleur", column = @Column(name = "DAC_BAILLEUR", length = 1)),
 			@AttributeOverride(name = "dacCout", column = @Column(name = "DAC_COUT", precision = 11, scale = 0)),
 			@AttributeOverride(name = "dacTypePlan", column = @Column(name = "DAC_TYPE_PLAN", length = 4)),
+			@AttributeOverride(name = "dacNbreAchat", column = @Column(name = "DAC_NBRE_ACHAT", precision = 11, scale = 0)),
 			@AttributeOverride(name = "dacRecherche", column = @Column(name = "DAC_RECHERCHE", length = 4000)),
 			@AttributeOverride(name = "dacFonCodeDmp", column = @Column(name = "DAC_FON_CODE_DMP", length = 20)),
 			@AttributeOverride(name = "dacFonCodePf", column = @Column(name = "DAC_FON_CODE_PF", length = 20)),
@@ -228,7 +229,10 @@ public class VDacliste implements java.io.Serializable {
 			@AttributeOverride(name = "aaoNbrOffAccpet", column = @Column(name = "AAO_NBR_OFF_ACCPET", precision = 4, scale = 0)),
 			@AttributeOverride(name = "aaoNbrOffRej", column = @Column(name = "AAO_NBR_OFF_REJ", precision = 4, scale = 0)),
 			@AttributeOverride(name = "aaoNbrOffHorDelai", column = @Column(name = "AAO_NBR_OFF_HOR_DELAI", precision = 4, scale = 0)),
-			@AttributeOverride(name = "adaNum", column = @Column(name = "ADA_NUM", precision = 22, scale = 0)) })
+			@AttributeOverride(name = "adaNum", column = @Column(name = "ADA_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dacNbrCopieOff", column = @Column(name = "DAC_NBR_COPIE_OFF", precision = 22, scale = 0)),
+			@AttributeOverride(name = "cautValMin", column = @Column(name = "CAUT_VAL_MIN", precision = 22, scale = 0)),
+			@AttributeOverride(name = "cautValMax", column = @Column(name = "CAUT_VAL_MAX", precision = 22, scale = 0)) })
 	public VDaclisteId getId() {
 		return this.id;
 	}

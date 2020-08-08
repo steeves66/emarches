@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -18,6 +18,7 @@ public class VbHistoDemandeId implements java.io.Serializable {
 	private String hdmStaCode;
 	private String hdmFonCod;
 	private String hdmOpeCode;
+	private String hdmMotif;
 
 	public VbHistoDemandeId() {
 	}
@@ -28,13 +29,14 @@ public class VbHistoDemandeId implements java.io.Serializable {
 	}
 
 	public VbHistoDemandeId(short hdmNum, BigDecimal hdmDemNum, Date hdmDteSaisi, String hdmStaCode, String hdmFonCod,
-			String hdmOpeCode) {
+			String hdmOpeCode, String hdmMotif) {
 		this.hdmNum = hdmNum;
 		this.hdmDemNum = hdmDemNum;
 		this.hdmDteSaisi = hdmDteSaisi;
 		this.hdmStaCode = hdmStaCode;
 		this.hdmFonCod = hdmFonCod;
 		this.hdmOpeCode = hdmOpeCode;
+		this.hdmMotif = hdmMotif;
 	}
 
 	@Column(name = "HDM_NUM", nullable = false, precision = 4, scale = 0)
@@ -91,6 +93,15 @@ public class VbHistoDemandeId implements java.io.Serializable {
 		this.hdmOpeCode = hdmOpeCode;
 	}
 
+	@Column(name = "HDM_MOTIF", length = 500)
+	public String getHdmMotif() {
+		return this.hdmMotif;
+	}
+
+	public void setHdmMotif(String hdmMotif) {
+		this.hdmMotif = hdmMotif;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -110,9 +121,10 @@ public class VbHistoDemandeId implements java.io.Serializable {
 						&& castOther.getHdmStaCode() != null && this.getHdmStaCode().equals(castOther.getHdmStaCode())))
 				&& ((this.getHdmFonCod() == castOther.getHdmFonCod()) || (this.getHdmFonCod() != null
 						&& castOther.getHdmFonCod() != null && this.getHdmFonCod().equals(castOther.getHdmFonCod())))
-				&& ((this.getHdmOpeCode() == castOther.getHdmOpeCode())
-						|| (this.getHdmOpeCode() != null && castOther.getHdmOpeCode() != null
-								&& this.getHdmOpeCode().equals(castOther.getHdmOpeCode())));
+				&& ((this.getHdmOpeCode() == castOther.getHdmOpeCode()) || (this.getHdmOpeCode() != null
+						&& castOther.getHdmOpeCode() != null && this.getHdmOpeCode().equals(castOther.getHdmOpeCode())))
+				&& ((this.getHdmMotif() == castOther.getHdmMotif()) || (this.getHdmMotif() != null
+						&& castOther.getHdmMotif() != null && this.getHdmMotif().equals(castOther.getHdmMotif())));
 	}
 
 	public int hashCode() {
@@ -124,6 +136,7 @@ public class VbHistoDemandeId implements java.io.Serializable {
 		result = 37 * result + (getHdmStaCode() == null ? 0 : this.getHdmStaCode().hashCode());
 		result = 37 * result + (getHdmFonCod() == null ? 0 : this.getHdmFonCod().hashCode());
 		result = 37 * result + (getHdmOpeCode() == null ? 0 : this.getHdmOpeCode().hashCode());
+		result = 37 * result + (getHdmMotif() == null ? 0 : this.getHdmMotif().hashCode());
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -36,7 +36,9 @@ public class VbCandidats implements java.io.Serializable {
 			@AttributeOverride(name = "canTel", column = @Column(name = "CAN_TEL", length = 50)),
 			@AttributeOverride(name = "canDteSaisi", column = @Column(name = "CAN_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "canOpeMatricule", column = @Column(name = "CAN_OPE_MATRICULE", length = 25)),
-			@AttributeOverride(name = "canEmail", column = @Column(name = "CAN_EMAIL", length = 50)) })
+			@AttributeOverride(name = "canEmail", column = @Column(name = "CAN_EMAIL", length = 50)),
+			@AttributeOverride(name = "canRepCode", column = @Column(name = "CAN_REP_CODE", length = 10)),
+			@AttributeOverride(name = "canSouSigleSte", column = @Column(name = "CAN_SOU_SIGLE_STE", length = 500)) })
 	public VbCandidatsId getId() {
 		return this.id;
 	}

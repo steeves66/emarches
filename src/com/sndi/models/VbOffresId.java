@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,6 +25,7 @@ public class VbOffresId implements java.io.Serializable {
 	private Date offDteOuvTec;
 	private String offOpeMatricule;
 	private Date offDteStaCour;
+	private String offSouSigleSte;
 
 	public VbOffresId() {
 	}
@@ -38,7 +39,7 @@ public class VbOffresId implements java.io.Serializable {
 
 	public VbOffresId(BigDecimal offNum, String offSouNcc, String offAaoCode, String offDacCode, String offStaCode,
 			Date offDteSaisi, Date offDteOuvFin, BigDecimal offMtTotOfr, Date offDteJug, BigDecimal offMtTotCor,
-			Date offDteOuvTec, String offOpeMatricule, Date offDteStaCour) {
+			Date offDteOuvTec, String offOpeMatricule, Date offDteStaCour, String offSouSigleSte) {
 		this.offNum = offNum;
 		this.offSouNcc = offSouNcc;
 		this.offAaoCode = offAaoCode;
@@ -52,6 +53,7 @@ public class VbOffresId implements java.io.Serializable {
 		this.offDteOuvTec = offDteOuvTec;
 		this.offOpeMatricule = offOpeMatricule;
 		this.offDteStaCour = offDteStaCour;
+		this.offSouSigleSte = offSouSigleSte;
 	}
 
 	@Column(name = "OFF_NUM", nullable = false, precision = 22, scale = 0)
@@ -171,6 +173,15 @@ public class VbOffresId implements java.io.Serializable {
 		this.offDteStaCour = offDteStaCour;
 	}
 
+	@Column(name = "OFF_SOU_SIGLE_STE", length = 500)
+	public String getOffSouSigleSte() {
+		return this.offSouSigleSte;
+	}
+
+	public void setOffSouSigleSte(String offSouSigleSte) {
+		this.offSouSigleSte = offSouSigleSte;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -212,7 +223,10 @@ public class VbOffresId implements java.io.Serializable {
 								&& this.getOffOpeMatricule().equals(castOther.getOffOpeMatricule())))
 				&& ((this.getOffDteStaCour() == castOther.getOffDteStaCour())
 						|| (this.getOffDteStaCour() != null && castOther.getOffDteStaCour() != null
-								&& this.getOffDteStaCour().equals(castOther.getOffDteStaCour())));
+								&& this.getOffDteStaCour().equals(castOther.getOffDteStaCour())))
+				&& ((this.getOffSouSigleSte() == castOther.getOffSouSigleSte())
+						|| (this.getOffSouSigleSte() != null && castOther.getOffSouSigleSte() != null
+								&& this.getOffSouSigleSte().equals(castOther.getOffSouSigleSte())));
 	}
 
 	public int hashCode() {
@@ -231,6 +245,7 @@ public class VbOffresId implements java.io.Serializable {
 		result = 37 * result + (getOffDteOuvTec() == null ? 0 : this.getOffDteOuvTec().hashCode());
 		result = 37 * result + (getOffOpeMatricule() == null ? 0 : this.getOffOpeMatricule().hashCode());
 		result = 37 * result + (getOffDteStaCour() == null ? 0 : this.getOffDteStaCour().hashCode());
+		result = 37 * result + (getOffSouSigleSte() == null ? 0 : this.getOffSouSigleSte().hashCode());
 		return result;
 	}
 

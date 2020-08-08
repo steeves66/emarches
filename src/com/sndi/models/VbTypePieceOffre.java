@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -31,7 +31,8 @@ public class VbTypePieceOffre implements java.io.Serializable {
 			@AttributeOverride(name = "tpoLibelle", column = @Column(name = "TPO_LIBELLE", length = 200)),
 			@AttributeOverride(name = "tpoDteSaisi", column = @Column(name = "TPO_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "tpoOpeMatricule", column = @Column(name = "TPO_OPE_MATRICULE", length = 25)),
-			@AttributeOverride(name = "tpoEtapPiece", column = @Column(name = "TPO_ETAP_PIECE", length = 10)) })
+			@AttributeOverride(name = "tpoEtapPiece", column = @Column(name = "TPO_ETAP_PIECE", length = 10)),
+			@AttributeOverride(name = "tpoBaiEtat", column = @Column(name = "TPO_BAI_ETAT", length = 20)) })
 	public VbTypePieceOffreId getId() {
 		return this.id;
 	}

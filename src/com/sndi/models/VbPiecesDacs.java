@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -32,7 +32,10 @@ public class VbPiecesDacs implements java.io.Serializable {
 			@AttributeOverride(name = "pidTpiCode", column = @Column(name = "PID_TPI_CODE", length = 10)),
 			@AttributeOverride(name = "pidStaCode", column = @Column(name = "PID_STA_CODE", length = 3)),
 			@AttributeOverride(name = "pidDteSaisi", column = @Column(name = "PID_DTE_SAISI", length = 7)),
-			@AttributeOverride(name = "pidDacCode", column = @Column(name = "PID_DAC_CODE", length = 20)) })
+			@AttributeOverride(name = "pidDacCode", column = @Column(name = "PID_DAC_CODE", length = 20)),
+			@AttributeOverride(name = "pidObservation", column = @Column(name = "PID_OBSERVATION", length = 2000)),
+			@AttributeOverride(name = "pidPresente", column = @Column(name = "PID_PRESENTE", length = 3)),
+			@AttributeOverride(name = "pidConforme", column = @Column(name = "PID_CONFORME", length = 3)) })
 	public VbPiecesDacsId getId() {
 		return this.id;
 	}

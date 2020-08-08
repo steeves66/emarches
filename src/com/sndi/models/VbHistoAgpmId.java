@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -17,6 +17,7 @@ public class VbHistoAgpmId implements java.io.Serializable {
 	private Date hagDate;
 	private String hagMotif;
 	private String hagFonCod;
+	private String hagOpeMatricule;
 
 	public VbHistoAgpmId() {
 	}
@@ -27,14 +28,15 @@ public class VbHistoAgpmId implements java.io.Serializable {
 		this.hagStaCode = hagStaCode;
 	}
 
-	public VbHistoAgpmId(long hagId, long hagAgpId, String hagStaCode, Date hagDate, String hagMotif,
-			String hagFonCod) {
+	public VbHistoAgpmId(long hagId, long hagAgpId, String hagStaCode, Date hagDate, String hagMotif, String hagFonCod,
+			String hagOpeMatricule) {
 		this.hagId = hagId;
 		this.hagAgpId = hagAgpId;
 		this.hagStaCode = hagStaCode;
 		this.hagDate = hagDate;
 		this.hagMotif = hagMotif;
 		this.hagFonCod = hagFonCod;
+		this.hagOpeMatricule = hagOpeMatricule;
 	}
 
 	@Column(name = "HAG_ID", nullable = false, precision = 10, scale = 0)
@@ -91,6 +93,15 @@ public class VbHistoAgpmId implements java.io.Serializable {
 		this.hagFonCod = hagFonCod;
 	}
 
+	@Column(name = "HAG_OPE_MATRICULE", length = 25)
+	public String getHagOpeMatricule() {
+		return this.hagOpeMatricule;
+	}
+
+	public void setHagOpeMatricule(String hagOpeMatricule) {
+		this.hagOpeMatricule = hagOpeMatricule;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -108,7 +119,10 @@ public class VbHistoAgpmId implements java.io.Serializable {
 				&& ((this.getHagMotif() == castOther.getHagMotif()) || (this.getHagMotif() != null
 						&& castOther.getHagMotif() != null && this.getHagMotif().equals(castOther.getHagMotif())))
 				&& ((this.getHagFonCod() == castOther.getHagFonCod()) || (this.getHagFonCod() != null
-						&& castOther.getHagFonCod() != null && this.getHagFonCod().equals(castOther.getHagFonCod())));
+						&& castOther.getHagFonCod() != null && this.getHagFonCod().equals(castOther.getHagFonCod())))
+				&& ((this.getHagOpeMatricule() == castOther.getHagOpeMatricule())
+						|| (this.getHagOpeMatricule() != null && castOther.getHagOpeMatricule() != null
+								&& this.getHagOpeMatricule().equals(castOther.getHagOpeMatricule())));
 	}
 
 	public int hashCode() {
@@ -120,6 +134,7 @@ public class VbHistoAgpmId implements java.io.Serializable {
 		result = 37 * result + (getHagDate() == null ? 0 : this.getHagDate().hashCode());
 		result = 37 * result + (getHagMotif() == null ? 0 : this.getHagMotif().hashCode());
 		result = 37 * result + (getHagFonCod() == null ? 0 : this.getHagFonCod().hashCode());
+		result = 37 * result + (getHagOpeMatricule() == null ? 0 : this.getHagOpeMatricule().hashCode());
 		return result;
 	}
 

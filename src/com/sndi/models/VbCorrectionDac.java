@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -31,7 +31,12 @@ public class VbCorrectionDac implements java.io.Serializable {
 			@AttributeOverride(name = "corDacCode", column = @Column(name = "COR_DAC_CODE", length = 20)),
 			@AttributeOverride(name = "corLieblle", column = @Column(name = "COR_LIEBLLE", length = 200)),
 			@AttributeOverride(name = "corDteSaisi", column = @Column(name = "COR_DTE_SAISI", length = 7)),
-			@AttributeOverride(name = "corOpeMatricule", column = @Column(name = "COR_OPE_MATRICULE", length = 25)) })
+			@AttributeOverride(name = "corOpeMatricule", column = @Column(name = "COR_OPE_MATRICULE", length = 25)),
+			@AttributeOverride(name = "corResultat", column = @Column(name = "COR_RESULTAT", length = 20)),
+			@AttributeOverride(name = "corObservation", column = @Column(name = "COR_OBSERVATION", length = 4000)),
+			@AttributeOverride(name = "corResultatRespo", column = @Column(name = "COR_RESULTAT_RESPO", length = 20)),
+			@AttributeOverride(name = "corObservationRespo", column = @Column(name = "COR_OBSERVATION_RESPO", length = 4000)),
+			@AttributeOverride(name = "corFoncodValid", column = @Column(name = "COR_FONCOD_VALID", length = 1000)) })
 	public VbCorrectionDacId getId() {
 		return this.id;
 	}

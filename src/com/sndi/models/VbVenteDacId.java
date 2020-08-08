@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -17,6 +17,7 @@ public class VbVenteDacId implements java.io.Serializable {
 	private String venMrgCod;
 	private String venOpeMatricule;
 	private Date venDteSaisi;
+	private String venPaieCode;
 
 	public VbVenteDacId() {
 	}
@@ -28,13 +29,14 @@ public class VbVenteDacId implements java.io.Serializable {
 		this.venOpeMatricule = venOpeMatricule;
 	}
 
-	public VbVenteDacId(long venNum, BigDecimal venCanCode, String venMrgCod, String venOpeMatricule,
-			Date venDteSaisi) {
+	public VbVenteDacId(long venNum, BigDecimal venCanCode, String venMrgCod, String venOpeMatricule, Date venDteSaisi,
+			String venPaieCode) {
 		this.venNum = venNum;
 		this.venCanCode = venCanCode;
 		this.venMrgCod = venMrgCod;
 		this.venOpeMatricule = venOpeMatricule;
 		this.venDteSaisi = venDteSaisi;
+		this.venPaieCode = venPaieCode;
 	}
 
 	@Column(name = "VEN_NUM", nullable = false, precision = 10, scale = 0)
@@ -82,6 +84,15 @@ public class VbVenteDacId implements java.io.Serializable {
 		this.venDteSaisi = venDteSaisi;
 	}
 
+	@Column(name = "VEN_PAIE_CODE", length = 15)
+	public String getVenPaieCode() {
+		return this.venPaieCode;
+	}
+
+	public void setVenPaieCode(String venPaieCode) {
+		this.venPaieCode = venPaieCode;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -101,7 +112,10 @@ public class VbVenteDacId implements java.io.Serializable {
 								&& this.getVenOpeMatricule().equals(castOther.getVenOpeMatricule())))
 				&& ((this.getVenDteSaisi() == castOther.getVenDteSaisi())
 						|| (this.getVenDteSaisi() != null && castOther.getVenDteSaisi() != null
-								&& this.getVenDteSaisi().equals(castOther.getVenDteSaisi())));
+								&& this.getVenDteSaisi().equals(castOther.getVenDteSaisi())))
+				&& ((this.getVenPaieCode() == castOther.getVenPaieCode())
+						|| (this.getVenPaieCode() != null && castOther.getVenPaieCode() != null
+								&& this.getVenPaieCode().equals(castOther.getVenPaieCode())));
 	}
 
 	public int hashCode() {
@@ -112,6 +126,7 @@ public class VbVenteDacId implements java.io.Serializable {
 		result = 37 * result + (getVenMrgCod() == null ? 0 : this.getVenMrgCod().hashCode());
 		result = 37 * result + (getVenOpeMatricule() == null ? 0 : this.getVenOpeMatricule().hashCode());
 		result = 37 * result + (getVenDteSaisi() == null ? 0 : this.getVenDteSaisi().hashCode());
+		result = 37 * result + (getVenPaieCode() == null ? 0 : this.getVenPaieCode().hashCode());
 		return result;
 	}
 

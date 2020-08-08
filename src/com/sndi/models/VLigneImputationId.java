@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -66,6 +66,8 @@ public class VLigneImputationId implements java.io.Serializable {
 	private String lbgFonCodePr;
 	private String lbgFonCodeVerou;
 	private String natLibelle;
+	private String lbgMopCode;
+	private String critere;
 
 	public VLigneImputationId() {
 	}
@@ -98,7 +100,7 @@ public class VLigneImputationId implements java.io.Serializable {
 			String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct, String lbgActif, String lbgFonCodeCf,
 			BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2, BigDecimal lbgDotAnPlus0, String lbgTypBud,
 			Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou,
-			String natLibelle) {
+			String natLibelle, String lbgMopCode, String critere) {
 		this.lbgCode = lbgCode;
 		this.lbgStrCode = lbgStrCode;
 		this.lbgGesCode = lbgGesCode;
@@ -153,6 +155,8 @@ public class VLigneImputationId implements java.io.Serializable {
 		this.lbgFonCodePr = lbgFonCodePr;
 		this.lbgFonCodeVerou = lbgFonCodeVerou;
 		this.natLibelle = natLibelle;
+		this.lbgMopCode = lbgMopCode;
+		this.critere = critere;
 	}
 
 	@Column(name = "LBG_CODE", nullable = false, length = 50)
@@ -641,6 +645,24 @@ public class VLigneImputationId implements java.io.Serializable {
 		this.natLibelle = natLibelle;
 	}
 
+	@Column(name = "LBG_MOP_CODE", length = 3)
+	public String getLbgMopCode() {
+		return this.lbgMopCode;
+	}
+
+	public void setLbgMopCode(String lbgMopCode) {
+		this.lbgMopCode = lbgMopCode;
+	}
+
+	@Column(name = "CRITERE", length = 250)
+	public String getCritere() {
+		return this.critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -777,9 +799,12 @@ public class VLigneImputationId implements java.io.Serializable {
 				&& ((this.getLbgFonCodeVerou() == castOther.getLbgFonCodeVerou())
 						|| (this.getLbgFonCodeVerou() != null && castOther.getLbgFonCodeVerou() != null
 								&& this.getLbgFonCodeVerou().equals(castOther.getLbgFonCodeVerou())))
-				&& ((this.getNatLibelle() == castOther.getNatLibelle())
-						|| (this.getNatLibelle() != null && castOther.getNatLibelle() != null
-								&& this.getNatLibelle().equals(castOther.getNatLibelle())));
+				&& ((this.getNatLibelle() == castOther.getNatLibelle()) || (this.getNatLibelle() != null
+						&& castOther.getNatLibelle() != null && this.getNatLibelle().equals(castOther.getNatLibelle())))
+				&& ((this.getLbgMopCode() == castOther.getLbgMopCode()) || (this.getLbgMopCode() != null
+						&& castOther.getLbgMopCode() != null && this.getLbgMopCode().equals(castOther.getLbgMopCode())))
+				&& ((this.getCritere() == castOther.getCritere()) || (this.getCritere() != null
+						&& castOther.getCritere() != null && this.getCritere().equals(castOther.getCritere())));
 	}
 
 	public int hashCode() {
@@ -839,6 +864,8 @@ public class VLigneImputationId implements java.io.Serializable {
 		result = 37 * result + (getLbgFonCodePr() == null ? 0 : this.getLbgFonCodePr().hashCode());
 		result = 37 * result + (getLbgFonCodeVerou() == null ? 0 : this.getLbgFonCodeVerou().hashCode());
 		result = 37 * result + (getNatLibelle() == null ? 0 : this.getNatLibelle().hashCode());
+		result = 37 * result + (getLbgMopCode() == null ? 0 : this.getLbgMopCode().hashCode());
+		result = 37 * result + (getCritere() == null ? 0 : this.getCritere().hashCode());
 		return result;
 	}
 

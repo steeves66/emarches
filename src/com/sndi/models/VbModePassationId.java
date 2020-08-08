@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -13,6 +13,7 @@ public class VbModePassationId implements java.io.Serializable {
 	private String mopCode;
 	private String mopLibelleCourt;
 	private String mopLibelleLong;
+	private String mopTypPlan;
 
 	public VbModePassationId() {
 	}
@@ -22,10 +23,11 @@ public class VbModePassationId implements java.io.Serializable {
 		this.mopLibelleCourt = mopLibelleCourt;
 	}
 
-	public VbModePassationId(String mopCode, String mopLibelleCourt, String mopLibelleLong) {
+	public VbModePassationId(String mopCode, String mopLibelleCourt, String mopLibelleLong, String mopTypPlan) {
 		this.mopCode = mopCode;
 		this.mopLibelleCourt = mopLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
+		this.mopTypPlan = mopTypPlan;
 	}
 
 	@Column(name = "MOP_CODE", nullable = false, length = 3)
@@ -55,6 +57,15 @@ public class VbModePassationId implements java.io.Serializable {
 		this.mopLibelleLong = mopLibelleLong;
 	}
 
+	@Column(name = "MOP_TYP_PLAN", length = 10)
+	public String getMopTypPlan() {
+		return this.mopTypPlan;
+	}
+
+	public void setMopTypPlan(String mopTypPlan) {
+		this.mopTypPlan = mopTypPlan;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -71,7 +82,10 @@ public class VbModePassationId implements java.io.Serializable {
 								&& this.getMopLibelleCourt().equals(castOther.getMopLibelleCourt())))
 				&& ((this.getMopLibelleLong() == castOther.getMopLibelleLong())
 						|| (this.getMopLibelleLong() != null && castOther.getMopLibelleLong() != null
-								&& this.getMopLibelleLong().equals(castOther.getMopLibelleLong())));
+								&& this.getMopLibelleLong().equals(castOther.getMopLibelleLong())))
+				&& ((this.getMopTypPlan() == castOther.getMopTypPlan())
+						|| (this.getMopTypPlan() != null && castOther.getMopTypPlan() != null
+								&& this.getMopTypPlan().equals(castOther.getMopTypPlan())));
 	}
 
 	public int hashCode() {
@@ -80,6 +94,7 @@ public class VbModePassationId implements java.io.Serializable {
 		result = 37 * result + (getMopCode() == null ? 0 : this.getMopCode().hashCode());
 		result = 37 * result + (getMopLibelleCourt() == null ? 0 : this.getMopLibelleCourt().hashCode());
 		result = 37 * result + (getMopLibelleLong() == null ? 0 : this.getMopLibelleLong().hashCode());
+		result = 37 * result + (getMopTypPlan() == null ? 0 : this.getMopTypPlan().hashCode());
 		return result;
 	}
 

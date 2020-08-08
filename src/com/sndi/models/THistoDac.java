@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,29 +22,29 @@ public class THistoDac implements java.io.Serializable {
 	private long hacId;
 	private TDacSpecs TDacSpecs;
 	private TFonction TFonction;
-	private TStatut TStatut;
 	private TOperateur TOperateur;
+	private TStatut TStatut;
 	private Date hacDate;
 	private String hacCommentaire;
 
 	public THistoDac() {
 	}
 
-	public THistoDac(long hacId, TDacSpecs TDacSpecs, TFonction TFonction, TStatut TStatut, TOperateur TOperateur) {
+	public THistoDac(long hacId, TDacSpecs TDacSpecs, TFonction TFonction, TOperateur TOperateur, TStatut TStatut) {
 		this.hacId = hacId;
 		this.TDacSpecs = TDacSpecs;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
+		this.TStatut = TStatut;
 	}
 
-	public THistoDac(long hacId, TDacSpecs TDacSpecs, TFonction TFonction, TStatut TStatut, TOperateur TOperateur,
+	public THistoDac(long hacId, TDacSpecs TDacSpecs, TFonction TFonction, TOperateur TOperateur, TStatut TStatut,
 			Date hacDate, String hacCommentaire) {
 		this.hacId = hacId;
 		this.TDacSpecs = TDacSpecs;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
+		this.TStatut = TStatut;
 		this.hacDate = hacDate;
 		this.hacCommentaire = hacCommentaire;
 	}
@@ -81,16 +81,6 @@ public class THistoDac implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAC_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HAC_OPE_MAT", nullable = false)
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -98,6 +88,16 @@ public class THistoDac implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HAC_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@Temporal(TemporalType.DATE)

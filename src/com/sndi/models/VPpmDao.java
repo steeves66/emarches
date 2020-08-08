@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -78,7 +78,8 @@ public class VPpmDao implements java.io.Serializable {
 			@AttributeOverride(name = "mopLibelleLong", column = @Column(name = "MOP_LIBELLE_LONG", length = 1000)),
 			@AttributeOverride(name = "lbgImputation", column = @Column(name = "LBG_IMPUTATION", nullable = false, length = 50)),
 			@AttributeOverride(name = "natLibelle", column = @Column(name = "NAT_LIBELLE", length = 200)),
-			@AttributeOverride(name = "strTstCode", column = @Column(name = "STR_TST_CODE", length = 3)) })
+			@AttributeOverride(name = "strTstCode", column = @Column(name = "STR_TST_CODE", length = 3)),
+			@AttributeOverride(name = "dppMontant", column = @Column(name = "DPP_MONTANT", precision = 15, scale = 0)) })
 	public VPpmDaoId getId() {
 		return this.id;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -53,6 +53,21 @@ public class VbAffichagePpmId implements java.io.Serializable {
 	private String affDppStatutDao;
 	private String affDppPieceDao;
 	private Date affDppInvEntre;
+	private String affDppRecherche;
+	private Date affDppDateValAc;
+	private Date affDppDateValCpmp;
+	private Date affDppDateValDmp;
+	private String affDppBailleur;
+	private String affDppTypeFinance;
+	private Date affDppApprobAno;
+	private Date affDppDteModif;
+	private Date affDppDateAttApprobCmp;
+	private Date affDppDateJugementTech;
+	private String affFonCodPf;
+	private String affFonCodDmp;
+	private Long affDppMontant;
+	private String affDppNatInt;
+	private String affDppStatutAno;
 
 	public VbAffichagePpmId() {
 	}
@@ -79,7 +94,11 @@ public class VbAffichagePpmId implements java.io.Serializable {
 			Date affDppDateSignatAttrib, Date affDppDateSignatAc, Date affDppDateMarcheApprob, Date affDppDateExecDebut,
 			Date affDppDateExecFin, Long affDppId, String affDppStatutRetour, String affDppFonCod, String affDppStrCode,
 			String affDppStrConduc, String affDppStrBenefi, Date affDppDateSaisie, String affTypId,
-			String affDppPartiePmePmi, String affDppStatutDao, String affDppPieceDao, Date affDppInvEntre) {
+			String affDppPartiePmePmi, String affDppStatutDao, String affDppPieceDao, Date affDppInvEntre,
+			String affDppRecherche, Date affDppDateValAc, Date affDppDateValCpmp, Date affDppDateValDmp,
+			String affDppBailleur, String affDppTypeFinance, Date affDppApprobAno, Date affDppDteModif,
+			Date affDppDateAttApprobCmp, Date affDppDateJugementTech, String affFonCodPf, String affFonCodDmp,
+			Long affDppMontant, String affDppNatInt, String affDppStatutAno) {
 		this.affId = affId;
 		this.affDppPlpId = affDppPlpId;
 		this.affDppGpgId = affDppGpgId;
@@ -122,6 +141,21 @@ public class VbAffichagePpmId implements java.io.Serializable {
 		this.affDppStatutDao = affDppStatutDao;
 		this.affDppPieceDao = affDppPieceDao;
 		this.affDppInvEntre = affDppInvEntre;
+		this.affDppRecherche = affDppRecherche;
+		this.affDppDateValAc = affDppDateValAc;
+		this.affDppDateValCpmp = affDppDateValCpmp;
+		this.affDppDateValDmp = affDppDateValDmp;
+		this.affDppBailleur = affDppBailleur;
+		this.affDppTypeFinance = affDppTypeFinance;
+		this.affDppApprobAno = affDppApprobAno;
+		this.affDppDteModif = affDppDteModif;
+		this.affDppDateAttApprobCmp = affDppDateAttApprobCmp;
+		this.affDppDateJugementTech = affDppDateJugementTech;
+		this.affFonCodPf = affFonCodPf;
+		this.affFonCodDmp = affFonCodDmp;
+		this.affDppMontant = affDppMontant;
+		this.affDppNatInt = affDppNatInt;
+		this.affDppStatutAno = affDppStatutAno;
 	}
 
 	@Column(name = "AFF_ID", nullable = false, precision = 10, scale = 0)
@@ -502,6 +536,141 @@ public class VbAffichagePpmId implements java.io.Serializable {
 		this.affDppInvEntre = affDppInvEntre;
 	}
 
+	@Column(name = "AFF_DPP_RECHERCHE", length = 4000)
+	public String getAffDppRecherche() {
+		return this.affDppRecherche;
+	}
+
+	public void setAffDppRecherche(String affDppRecherche) {
+		this.affDppRecherche = affDppRecherche;
+	}
+
+	@Column(name = "AFF_DPP_DATE_VAL_AC", length = 7)
+	public Date getAffDppDateValAc() {
+		return this.affDppDateValAc;
+	}
+
+	public void setAffDppDateValAc(Date affDppDateValAc) {
+		this.affDppDateValAc = affDppDateValAc;
+	}
+
+	@Column(name = "AFF_DPP_DATE_VAL_CPMP", length = 7)
+	public Date getAffDppDateValCpmp() {
+		return this.affDppDateValCpmp;
+	}
+
+	public void setAffDppDateValCpmp(Date affDppDateValCpmp) {
+		this.affDppDateValCpmp = affDppDateValCpmp;
+	}
+
+	@Column(name = "AFF_DPP_DATE_VAL_DMP", length = 7)
+	public Date getAffDppDateValDmp() {
+		return this.affDppDateValDmp;
+	}
+
+	public void setAffDppDateValDmp(Date affDppDateValDmp) {
+		this.affDppDateValDmp = affDppDateValDmp;
+	}
+
+	@Column(name = "AFF_DPP_BAILLEUR", length = 1)
+	public String getAffDppBailleur() {
+		return this.affDppBailleur;
+	}
+
+	public void setAffDppBailleur(String affDppBailleur) {
+		this.affDppBailleur = affDppBailleur;
+	}
+
+	@Column(name = "AFF_DPP_TYPE_FINANCE", length = 20)
+	public String getAffDppTypeFinance() {
+		return this.affDppTypeFinance;
+	}
+
+	public void setAffDppTypeFinance(String affDppTypeFinance) {
+		this.affDppTypeFinance = affDppTypeFinance;
+	}
+
+	@Column(name = "AFF_DPP_APPROB_ANO", length = 7)
+	public Date getAffDppApprobAno() {
+		return this.affDppApprobAno;
+	}
+
+	public void setAffDppApprobAno(Date affDppApprobAno) {
+		this.affDppApprobAno = affDppApprobAno;
+	}
+
+	@Column(name = "AFF_DPP_DTE_MODIF", length = 7)
+	public Date getAffDppDteModif() {
+		return this.affDppDteModif;
+	}
+
+	public void setAffDppDteModif(Date affDppDteModif) {
+		this.affDppDteModif = affDppDteModif;
+	}
+
+	@Column(name = "AFF_DPP_DATE_ATT_APPROB_CMP", length = 7)
+	public Date getAffDppDateAttApprobCmp() {
+		return this.affDppDateAttApprobCmp;
+	}
+
+	public void setAffDppDateAttApprobCmp(Date affDppDateAttApprobCmp) {
+		this.affDppDateAttApprobCmp = affDppDateAttApprobCmp;
+	}
+
+	@Column(name = "AFF_DPP_DATE_JUGEMENT_TECH", length = 7)
+	public Date getAffDppDateJugementTech() {
+		return this.affDppDateJugementTech;
+	}
+
+	public void setAffDppDateJugementTech(Date affDppDateJugementTech) {
+		this.affDppDateJugementTech = affDppDateJugementTech;
+	}
+
+	@Column(name = "AFF_FON_COD_PF", length = 20)
+	public String getAffFonCodPf() {
+		return this.affFonCodPf;
+	}
+
+	public void setAffFonCodPf(String affFonCodPf) {
+		this.affFonCodPf = affFonCodPf;
+	}
+
+	@Column(name = "AFF_FON_COD_DMP", length = 20)
+	public String getAffFonCodDmp() {
+		return this.affFonCodDmp;
+	}
+
+	public void setAffFonCodDmp(String affFonCodDmp) {
+		this.affFonCodDmp = affFonCodDmp;
+	}
+
+	@Column(name = "AFF_DPP_MONTANT", precision = 15, scale = 0)
+	public Long getAffDppMontant() {
+		return this.affDppMontant;
+	}
+
+	public void setAffDppMontant(Long affDppMontant) {
+		this.affDppMontant = affDppMontant;
+	}
+
+	@Column(name = "AFF_DPP_NAT_INT", length = 3)
+	public String getAffDppNatInt() {
+		return this.affDppNatInt;
+	}
+
+	public void setAffDppNatInt(String affDppNatInt) {
+		this.affDppNatInt = affDppNatInt;
+	}
+
+	@Column(name = "AFF_DPP_STATUT_ANO", length = 3)
+	public String getAffDppStatutAno() {
+		return this.affDppStatutAno;
+	}
+
+	public void setAffDppStatutAno(String affDppStatutAno) {
+		this.affDppStatutAno = affDppStatutAno;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -626,7 +795,52 @@ public class VbAffichagePpmId implements java.io.Serializable {
 								&& this.getAffDppPieceDao().equals(castOther.getAffDppPieceDao())))
 				&& ((this.getAffDppInvEntre() == castOther.getAffDppInvEntre())
 						|| (this.getAffDppInvEntre() != null && castOther.getAffDppInvEntre() != null
-								&& this.getAffDppInvEntre().equals(castOther.getAffDppInvEntre())));
+								&& this.getAffDppInvEntre().equals(castOther.getAffDppInvEntre())))
+				&& ((this.getAffDppRecherche() == castOther.getAffDppRecherche())
+						|| (this.getAffDppRecherche() != null && castOther.getAffDppRecherche() != null
+								&& this.getAffDppRecherche().equals(castOther.getAffDppRecherche())))
+				&& ((this.getAffDppDateValAc() == castOther.getAffDppDateValAc())
+						|| (this.getAffDppDateValAc() != null && castOther.getAffDppDateValAc() != null
+								&& this.getAffDppDateValAc().equals(castOther.getAffDppDateValAc())))
+				&& ((this.getAffDppDateValCpmp() == castOther.getAffDppDateValCpmp())
+						|| (this.getAffDppDateValCpmp() != null && castOther.getAffDppDateValCpmp() != null
+								&& this.getAffDppDateValCpmp().equals(castOther.getAffDppDateValCpmp())))
+				&& ((this.getAffDppDateValDmp() == castOther.getAffDppDateValDmp())
+						|| (this.getAffDppDateValDmp() != null && castOther.getAffDppDateValDmp() != null
+								&& this.getAffDppDateValDmp().equals(castOther.getAffDppDateValDmp())))
+				&& ((this.getAffDppBailleur() == castOther.getAffDppBailleur())
+						|| (this.getAffDppBailleur() != null && castOther.getAffDppBailleur() != null
+								&& this.getAffDppBailleur().equals(castOther.getAffDppBailleur())))
+				&& ((this.getAffDppTypeFinance() == castOther.getAffDppTypeFinance())
+						|| (this.getAffDppTypeFinance() != null && castOther.getAffDppTypeFinance() != null
+								&& this.getAffDppTypeFinance().equals(castOther.getAffDppTypeFinance())))
+				&& ((this.getAffDppApprobAno() == castOther.getAffDppApprobAno())
+						|| (this.getAffDppApprobAno() != null && castOther.getAffDppApprobAno() != null
+								&& this.getAffDppApprobAno().equals(castOther.getAffDppApprobAno())))
+				&& ((this.getAffDppDteModif() == castOther.getAffDppDteModif())
+						|| (this.getAffDppDteModif() != null && castOther.getAffDppDteModif() != null
+								&& this.getAffDppDteModif().equals(castOther.getAffDppDteModif())))
+				&& ((this.getAffDppDateAttApprobCmp() == castOther.getAffDppDateAttApprobCmp())
+						|| (this.getAffDppDateAttApprobCmp() != null && castOther.getAffDppDateAttApprobCmp() != null
+								&& this.getAffDppDateAttApprobCmp().equals(castOther.getAffDppDateAttApprobCmp())))
+				&& ((this.getAffDppDateJugementTech() == castOther.getAffDppDateJugementTech())
+						|| (this.getAffDppDateJugementTech() != null && castOther.getAffDppDateJugementTech() != null
+								&& this.getAffDppDateJugementTech().equals(castOther.getAffDppDateJugementTech())))
+				&& ((this.getAffFonCodPf() == castOther.getAffFonCodPf())
+						|| (this.getAffFonCodPf() != null && castOther.getAffFonCodPf() != null
+								&& this.getAffFonCodPf().equals(castOther.getAffFonCodPf())))
+				&& ((this.getAffFonCodDmp() == castOther.getAffFonCodDmp())
+						|| (this.getAffFonCodDmp() != null && castOther.getAffFonCodDmp() != null
+								&& this.getAffFonCodDmp().equals(castOther.getAffFonCodDmp())))
+				&& ((this.getAffDppMontant() == castOther.getAffDppMontant())
+						|| (this.getAffDppMontant() != null && castOther.getAffDppMontant() != null
+								&& this.getAffDppMontant().equals(castOther.getAffDppMontant())))
+				&& ((this.getAffDppNatInt() == castOther.getAffDppNatInt())
+						|| (this.getAffDppNatInt() != null && castOther.getAffDppNatInt() != null
+								&& this.getAffDppNatInt().equals(castOther.getAffDppNatInt())))
+				&& ((this.getAffDppStatutAno() == castOther.getAffDppStatutAno())
+						|| (this.getAffDppStatutAno() != null && castOther.getAffDppStatutAno() != null
+								&& this.getAffDppStatutAno().equals(castOther.getAffDppStatutAno())));
 	}
 
 	public int hashCode() {
@@ -677,6 +891,21 @@ public class VbAffichagePpmId implements java.io.Serializable {
 		result = 37 * result + (getAffDppStatutDao() == null ? 0 : this.getAffDppStatutDao().hashCode());
 		result = 37 * result + (getAffDppPieceDao() == null ? 0 : this.getAffDppPieceDao().hashCode());
 		result = 37 * result + (getAffDppInvEntre() == null ? 0 : this.getAffDppInvEntre().hashCode());
+		result = 37 * result + (getAffDppRecherche() == null ? 0 : this.getAffDppRecherche().hashCode());
+		result = 37 * result + (getAffDppDateValAc() == null ? 0 : this.getAffDppDateValAc().hashCode());
+		result = 37 * result + (getAffDppDateValCpmp() == null ? 0 : this.getAffDppDateValCpmp().hashCode());
+		result = 37 * result + (getAffDppDateValDmp() == null ? 0 : this.getAffDppDateValDmp().hashCode());
+		result = 37 * result + (getAffDppBailleur() == null ? 0 : this.getAffDppBailleur().hashCode());
+		result = 37 * result + (getAffDppTypeFinance() == null ? 0 : this.getAffDppTypeFinance().hashCode());
+		result = 37 * result + (getAffDppApprobAno() == null ? 0 : this.getAffDppApprobAno().hashCode());
+		result = 37 * result + (getAffDppDteModif() == null ? 0 : this.getAffDppDteModif().hashCode());
+		result = 37 * result + (getAffDppDateAttApprobCmp() == null ? 0 : this.getAffDppDateAttApprobCmp().hashCode());
+		result = 37 * result + (getAffDppDateJugementTech() == null ? 0 : this.getAffDppDateJugementTech().hashCode());
+		result = 37 * result + (getAffFonCodPf() == null ? 0 : this.getAffFonCodPf().hashCode());
+		result = 37 * result + (getAffFonCodDmp() == null ? 0 : this.getAffFonCodDmp().hashCode());
+		result = 37 * result + (getAffDppMontant() == null ? 0 : this.getAffDppMontant().hashCode());
+		result = 37 * result + (getAffDppNatInt() == null ? 0 : this.getAffDppNatInt().hashCode());
+		result = 37 * result + (getAffDppStatutAno() == null ? 0 : this.getAffDppStatutAno().hashCode());
 		return result;
 	}
 

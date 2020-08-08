@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -49,6 +49,9 @@ public class TTempParametre implements java.io.Serializable {
 	private String tempChamp23;
 	private String tempChamp24;
 	private String tempChamp25;
+	private String tempChamp26;
+	private String tempChamp27;
+	private String tempChamp28;
 
 	public TTempParametre() {
 	}
@@ -62,7 +65,8 @@ public class TTempParametre implements java.io.Serializable {
 			String tempChamp06, String tempChamp07, String tempChamp08, String tempChamp09, String tempChamp10,
 			String tempChamp11, String tempChamp12, String tempChamp13, String tempChamp14, String tempChamp15,
 			String tempChamp16, String tempChamp17, String tempChamp18, String tempChamp19, String tempChamp20,
-			String tempChamp21, String tempChamp22, String tempChamp23, String tempChamp24, String tempChamp25) {
+			String tempChamp21, String tempChamp22, String tempChamp23, String tempChamp24, String tempChamp25,
+			String tempChamp26, String tempChamp27, String tempChamp28) {
 		this.tempNum = tempNum;
 		this.TOperateur = TOperateur;
 		this.tempType = tempType;
@@ -92,6 +96,9 @@ public class TTempParametre implements java.io.Serializable {
 		this.tempChamp23 = tempChamp23;
 		this.tempChamp24 = tempChamp24;
 		this.tempChamp25 = tempChamp25;
+		this.tempChamp26 = tempChamp26;
+		this.tempChamp27 = tempChamp27;
+		this.tempChamp28 = tempChamp28;
 	}
 
 	@Id
@@ -357,6 +364,33 @@ public class TTempParametre implements java.io.Serializable {
 
 	public void setTempChamp25(String tempChamp25) {
 		this.tempChamp25 = tempChamp25;
+	}
+
+	@Column(name = "TEMP_CHAMP_26", length = 500)
+	public String getTempChamp26() {
+		return this.tempChamp26;
+	}
+
+	public void setTempChamp26(String tempChamp26) {
+		this.tempChamp26 = tempChamp26;
+	}
+
+	@Column(name = "TEMP_CHAMP_27", length = 500)
+	public String getTempChamp27() {
+		return this.tempChamp27;
+	}
+
+	public void setTempChamp27(String tempChamp27) {
+		this.tempChamp27 = tempChamp27;
+	}
+
+	@Column(name = "TEMP_CHAMP_28", length = 500)
+	public String getTempChamp28() {
+		return this.tempChamp28;
+	}
+
+	public void setTempChamp28(String tempChamp28) {
+		this.tempChamp28 = tempChamp28;
 	}
 
 }

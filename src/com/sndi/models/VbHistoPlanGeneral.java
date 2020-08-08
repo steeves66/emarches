@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -32,7 +32,8 @@ public class VbHistoPlanGeneral implements java.io.Serializable {
 			@AttributeOverride(name = "hpgGpgId", column = @Column(name = "HPG_GPG_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "hpgStaCode", column = @Column(name = "HPG_STA_CODE", nullable = false, length = 3)),
 			@AttributeOverride(name = "hpgDate", column = @Column(name = "HPG_DATE", length = 7)),
-			@AttributeOverride(name = "hpgMotif", column = @Column(name = "HPG_MOTIF", length = 1000)) })
+			@AttributeOverride(name = "hpgMotif", column = @Column(name = "HPG_MOTIF", length = 1000)),
+			@AttributeOverride(name = "hpgOpeMatricule", column = @Column(name = "HPG_OPE_MATRICULE", length = 25)) })
 	public VbHistoPlanGeneralId getId() {
 		return this.id;
 	}

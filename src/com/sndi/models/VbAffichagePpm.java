@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -68,7 +68,22 @@ public class VbAffichagePpm implements java.io.Serializable {
 			@AttributeOverride(name = "affDppPartiePmePmi", column = @Column(name = "AFF_DPP_PARTIE_PME_PMI", length = 1)),
 			@AttributeOverride(name = "affDppStatutDao", column = @Column(name = "AFF_DPP_STATUT_DAO", length = 2)),
 			@AttributeOverride(name = "affDppPieceDao", column = @Column(name = "AFF_DPP_PIECE_DAO", length = 15)),
-			@AttributeOverride(name = "affDppInvEntre", column = @Column(name = "AFF_DPP_INV_ENTRE", length = 7)) })
+			@AttributeOverride(name = "affDppInvEntre", column = @Column(name = "AFF_DPP_INV_ENTRE", length = 7)),
+			@AttributeOverride(name = "affDppRecherche", column = @Column(name = "AFF_DPP_RECHERCHE", length = 4000)),
+			@AttributeOverride(name = "affDppDateValAc", column = @Column(name = "AFF_DPP_DATE_VAL_AC", length = 7)),
+			@AttributeOverride(name = "affDppDateValCpmp", column = @Column(name = "AFF_DPP_DATE_VAL_CPMP", length = 7)),
+			@AttributeOverride(name = "affDppDateValDmp", column = @Column(name = "AFF_DPP_DATE_VAL_DMP", length = 7)),
+			@AttributeOverride(name = "affDppBailleur", column = @Column(name = "AFF_DPP_BAILLEUR", length = 1)),
+			@AttributeOverride(name = "affDppTypeFinance", column = @Column(name = "AFF_DPP_TYPE_FINANCE", length = 20)),
+			@AttributeOverride(name = "affDppApprobAno", column = @Column(name = "AFF_DPP_APPROB_ANO", length = 7)),
+			@AttributeOverride(name = "affDppDteModif", column = @Column(name = "AFF_DPP_DTE_MODIF", length = 7)),
+			@AttributeOverride(name = "affDppDateAttApprobCmp", column = @Column(name = "AFF_DPP_DATE_ATT_APPROB_CMP", length = 7)),
+			@AttributeOverride(name = "affDppDateJugementTech", column = @Column(name = "AFF_DPP_DATE_JUGEMENT_TECH", length = 7)),
+			@AttributeOverride(name = "affFonCodPf", column = @Column(name = "AFF_FON_COD_PF", length = 20)),
+			@AttributeOverride(name = "affFonCodDmp", column = @Column(name = "AFF_FON_COD_DMP", length = 20)),
+			@AttributeOverride(name = "affDppMontant", column = @Column(name = "AFF_DPP_MONTANT", precision = 15, scale = 0)),
+			@AttributeOverride(name = "affDppNatInt", column = @Column(name = "AFF_DPP_NAT_INT", length = 3)),
+			@AttributeOverride(name = "affDppStatutAno", column = @Column(name = "AFF_DPP_STATUT_ANO", length = 3)) })
 	public VbAffichagePpmId getId() {
 		return this.id;
 	}

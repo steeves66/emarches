@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -32,7 +32,8 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 			@AttributeOverride(name = "tpoCode", column = @Column(name = "TPO_CODE", nullable = false, length = 10)),
 			@AttributeOverride(name = "pofLaaId", column = @Column(name = "POF_LAA_ID", precision = 22, scale = 0)),
 			@AttributeOverride(name = "tpoLibelle", column = @Column(name = "TPO_LIBELLE", length = 200)),
-			@AttributeOverride(name = "pofConforme", column = @Column(name = "POF_CONFORME", length = 1)) })
+			@AttributeOverride(name = "pofConforme", column = @Column(name = "POF_CONFORME", length = 1)),
+			@AttributeOverride(name = "pofObs", column = @Column(name = "POF_OBS", length = 500)) })
 	public VPiecesOffreAnalyseId getId() {
 		return this.id;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,9 +25,9 @@ public class TOffres implements java.io.Serializable {
 
 	private BigDecimal offNum;
 	private TDacSpecs TDacSpecs;
+	private TOperateur TOperateur;
 	private TSoumissions TSoumissions;
 	private TStatut TStatut;
-	private TOperateur TOperateur;
 	private String offAaoCode;
 	private Date offDteSaisi;
 	private Date offDteOuvFin;
@@ -49,15 +49,15 @@ public class TOffres implements java.io.Serializable {
 		this.offAaoCode = offAaoCode;
 	}
 
-	public TOffres(BigDecimal offNum, TDacSpecs TDacSpecs, TSoumissions TSoumissions, TStatut TStatut,
-			TOperateur TOperateur, String offAaoCode, Date offDteSaisi, Date offDteOuvFin, BigDecimal offMtTotOfr,
+	public TOffres(BigDecimal offNum, TDacSpecs TDacSpecs, TOperateur TOperateur, TSoumissions TSoumissions,
+			TStatut TStatut, String offAaoCode, Date offDteSaisi, Date offDteOuvFin, BigDecimal offMtTotOfr,
 			Date offDteJug, BigDecimal offMtTotCor, Date offDteOuvTec, Date offDteStaCour, String offSouSigleSte,
 			Set<TDetOffres> TDetOffreses) {
 		this.offNum = offNum;
 		this.TDacSpecs = TDacSpecs;
+		this.TOperateur = TOperateur;
 		this.TSoumissions = TSoumissions;
 		this.TStatut = TStatut;
-		this.TOperateur = TOperateur;
 		this.offAaoCode = offAaoCode;
 		this.offDteSaisi = offDteSaisi;
 		this.offDteOuvFin = offDteOuvFin;
@@ -92,6 +92,16 @@ public class TOffres implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "OFF_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "OFF_SOU_NCC")
 	public TSoumissions getTSoumissions() {
 		return this.TSoumissions;
@@ -109,16 +119,6 @@ public class TOffres implements java.io.Serializable {
 
 	public void setTStatut(TStatut TStatut) {
 		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "OFF_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
 	}
 
 	@Column(name = "OFF_AAO_CODE", nullable = false, length = 20)

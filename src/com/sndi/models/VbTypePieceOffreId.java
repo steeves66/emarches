@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -16,6 +16,7 @@ public class VbTypePieceOffreId implements java.io.Serializable {
 	private Date tpoDteSaisi;
 	private String tpoOpeMatricule;
 	private String tpoEtapPiece;
+	private String tpoBaiEtat;
 
 	public VbTypePieceOffreId() {
 	}
@@ -25,12 +26,13 @@ public class VbTypePieceOffreId implements java.io.Serializable {
 	}
 
 	public VbTypePieceOffreId(String tpoCode, String tpoLibelle, Date tpoDteSaisi, String tpoOpeMatricule,
-			String tpoEtapPiece) {
+			String tpoEtapPiece, String tpoBaiEtat) {
 		this.tpoCode = tpoCode;
 		this.tpoLibelle = tpoLibelle;
 		this.tpoDteSaisi = tpoDteSaisi;
 		this.tpoOpeMatricule = tpoOpeMatricule;
 		this.tpoEtapPiece = tpoEtapPiece;
+		this.tpoBaiEtat = tpoBaiEtat;
 	}
 
 	@Column(name = "TPO_CODE", nullable = false, length = 10)
@@ -78,6 +80,15 @@ public class VbTypePieceOffreId implements java.io.Serializable {
 		this.tpoEtapPiece = tpoEtapPiece;
 	}
 
+	@Column(name = "TPO_BAI_ETAT", length = 20)
+	public String getTpoBaiEtat() {
+		return this.tpoBaiEtat;
+	}
+
+	public void setTpoBaiEtat(String tpoBaiEtat) {
+		this.tpoBaiEtat = tpoBaiEtat;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -99,7 +110,10 @@ public class VbTypePieceOffreId implements java.io.Serializable {
 								&& this.getTpoOpeMatricule().equals(castOther.getTpoOpeMatricule())))
 				&& ((this.getTpoEtapPiece() == castOther.getTpoEtapPiece())
 						|| (this.getTpoEtapPiece() != null && castOther.getTpoEtapPiece() != null
-								&& this.getTpoEtapPiece().equals(castOther.getTpoEtapPiece())));
+								&& this.getTpoEtapPiece().equals(castOther.getTpoEtapPiece())))
+				&& ((this.getTpoBaiEtat() == castOther.getTpoBaiEtat())
+						|| (this.getTpoBaiEtat() != null && castOther.getTpoBaiEtat() != null
+								&& this.getTpoBaiEtat().equals(castOther.getTpoBaiEtat())));
 	}
 
 	public int hashCode() {
@@ -110,6 +124,7 @@ public class VbTypePieceOffreId implements java.io.Serializable {
 		result = 37 * result + (getTpoDteSaisi() == null ? 0 : this.getTpoDteSaisi().hashCode());
 		result = 37 * result + (getTpoOpeMatricule() == null ? 0 : this.getTpoOpeMatricule().hashCode());
 		result = 37 * result + (getTpoEtapPiece() == null ? 0 : this.getTpoEtapPiece().hashCode());
+		result = 37 * result + (getTpoBaiEtat() == null ? 0 : this.getTpoBaiEtat().hashCode());
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,8 +22,8 @@ public class THistoPlanPassation implements java.io.Serializable {
 	private long hppId;
 	private TDetailPlanPassation TDetailPlanPassation;
 	private TFonction TFonction;
-	private TStatut TStatut;
 	private TOperateur TOperateur;
+	private TStatut TStatut;
 	private Date hppDate;
 	private String hppMotif;
 
@@ -39,12 +39,12 @@ public class THistoPlanPassation implements java.io.Serializable {
 	}
 
 	public THistoPlanPassation(long hppId, TDetailPlanPassation TDetailPlanPassation, TFonction TFonction,
-			TStatut TStatut, TOperateur TOperateur, Date hppDate, String hppMotif) {
+			TOperateur TOperateur, TStatut TStatut, Date hppDate, String hppMotif) {
 		this.hppId = hppId;
 		this.TDetailPlanPassation = TDetailPlanPassation;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
+		this.TStatut = TStatut;
 		this.hppDate = hppDate;
 		this.hppMotif = hppMotif;
 	}
@@ -81,16 +81,6 @@ public class THistoPlanPassation implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPP_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HPP_OPE_MATRICULE")
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -98,6 +88,16 @@ public class THistoPlanPassation implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPP_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@Temporal(TemporalType.DATE)

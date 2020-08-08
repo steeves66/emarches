@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -53,7 +53,8 @@ public class VbDacSpecs implements java.io.Serializable {
 			@AttributeOverride(name = "dacRecherche", column = @Column(name = "DAC_RECHERCHE", length = 4000)),
 			@AttributeOverride(name = "dacFonCodeDmp", column = @Column(name = "DAC_FON_CODE_DMP", length = 20)),
 			@AttributeOverride(name = "dacFonCodePf", column = @Column(name = "DAC_FON_CODE_PF", length = 20)),
-			@AttributeOverride(name = "dacDteModif", column = @Column(name = "DAC_DTE_MODIF", length = 7)) })
+			@AttributeOverride(name = "dacDteModif", column = @Column(name = "DAC_DTE_MODIF", length = 7)),
+			@AttributeOverride(name = "dacModType", column = @Column(name = "DAC_MOD_TYPE", length = 10)) })
 	public VbDacSpecsId getId() {
 		return this.id;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,8 +22,8 @@ public class THistoAgpm implements java.io.Serializable {
 	private long hagId;
 	private TAgpm TAgpm;
 	private TFonction TFonction;
-	private TStatut TStatut;
 	private TOperateur TOperateur;
+	private TStatut TStatut;
 	private Date hagDate;
 	private String hagMotif;
 
@@ -36,13 +36,13 @@ public class THistoAgpm implements java.io.Serializable {
 		this.TStatut = TStatut;
 	}
 
-	public THistoAgpm(long hagId, TAgpm TAgpm, TFonction TFonction, TStatut TStatut, TOperateur TOperateur,
+	public THistoAgpm(long hagId, TAgpm TAgpm, TFonction TFonction, TOperateur TOperateur, TStatut TStatut,
 			Date hagDate, String hagMotif) {
 		this.hagId = hagId;
 		this.TAgpm = TAgpm;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
+		this.TStatut = TStatut;
 		this.hagDate = hagDate;
 		this.hagMotif = hagMotif;
 	}
@@ -79,16 +79,6 @@ public class THistoAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HAG_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HAG_OPE_MATRICULE")
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -96,6 +86,16 @@ public class THistoAgpm implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HAG_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@Temporal(TemporalType.DATE)

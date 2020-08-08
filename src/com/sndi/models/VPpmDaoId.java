@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -63,6 +63,7 @@ public class VPpmDaoId implements java.io.Serializable {
 	private String lbgImputation;
 	private String natLibelle;
 	private String strTstCode;
+	private Long dppMontant;
 
 	public VPpmDaoId() {
 	}
@@ -95,7 +96,7 @@ public class VPpmDaoId implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			String dppBailleur, String dppRecherche, String mdtCode, String mdtTymCode, String mdtLibelleCourt,
 			String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleLong, String lbgImputation,
-			String natLibelle, String strTstCode) {
+			String natLibelle, String strTstCode, Long dppMontant) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -148,6 +149,7 @@ public class VPpmDaoId implements java.io.Serializable {
 		this.lbgImputation = lbgImputation;
 		this.natLibelle = natLibelle;
 		this.strTstCode = strTstCode;
+		this.dppMontant = dppMontant;
 	}
 
 	@Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)
@@ -618,6 +620,15 @@ public class VPpmDaoId implements java.io.Serializable {
 		this.strTstCode = strTstCode;
 	}
 
+	@Column(name = "DPP_MONTANT", precision = 15, scale = 0)
+	public Long getDppMontant() {
+		return this.dppMontant;
+	}
+
+	public void setDppMontant(Long dppMontant) {
+		this.dppMontant = dppMontant;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -759,9 +770,11 @@ public class VPpmDaoId implements java.io.Serializable {
 								&& this.getLbgImputation().equals(castOther.getLbgImputation())))
 				&& ((this.getNatLibelle() == castOther.getNatLibelle()) || (this.getNatLibelle() != null
 						&& castOther.getNatLibelle() != null && this.getNatLibelle().equals(castOther.getNatLibelle())))
-				&& ((this.getStrTstCode() == castOther.getStrTstCode())
-						|| (this.getStrTstCode() != null && castOther.getStrTstCode() != null
-								&& this.getStrTstCode().equals(castOther.getStrTstCode())));
+				&& ((this.getStrTstCode() == castOther.getStrTstCode()) || (this.getStrTstCode() != null
+						&& castOther.getStrTstCode() != null && this.getStrTstCode().equals(castOther.getStrTstCode())))
+				&& ((this.getDppMontant() == castOther.getDppMontant())
+						|| (this.getDppMontant() != null && castOther.getDppMontant() != null
+								&& this.getDppMontant().equals(castOther.getDppMontant())));
 	}
 
 	public int hashCode() {
@@ -820,6 +833,7 @@ public class VPpmDaoId implements java.io.Serializable {
 		result = 37 * result + (getLbgImputation() == null ? 0 : this.getLbgImputation().hashCode());
 		result = 37 * result + (getNatLibelle() == null ? 0 : this.getNatLibelle().hashCode());
 		result = 37 * result + (getStrTstCode() == null ? 0 : this.getStrTstCode().hashCode());
+		result = 37 * result + (getDppMontant() == null ? 0 : this.getDppMontant().hashCode());
 		return result;
 	}
 

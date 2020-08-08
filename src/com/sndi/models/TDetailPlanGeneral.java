@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,10 +23,10 @@ import javax.persistence.TemporalType;
 public class TDetailPlanGeneral implements java.io.Serializable {
 
 	private long gpgId;
+	private TModePassation TModePassation;
 	private TPlanGeneral TPlanGeneral;
 	private TStatut TStatut;
 	private TTypeMarche TTypeMarche;
-	private TModePassation TModePassation;
 	private Long gpgAgpId;
 	private String gpgTypePlan;
 	private String gpgCode;
@@ -57,18 +57,18 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	public TDetailPlanGeneral() {
 	}
 
-	public TDetailPlanGeneral(long gpgId, TPlanGeneral TPlanGeneral, TStatut TStatut, TTypeMarche TTypeMarche,
-			TModePassation TModePassation, String gpgTypePlan) {
+	public TDetailPlanGeneral(long gpgId, TModePassation TModePassation, TPlanGeneral TPlanGeneral, TStatut TStatut,
+			TTypeMarche TTypeMarche, String gpgTypePlan) {
 		this.gpgId = gpgId;
+		this.TModePassation = TModePassation;
 		this.TPlanGeneral = TPlanGeneral;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
-		this.TModePassation = TModePassation;
 		this.gpgTypePlan = gpgTypePlan;
 	}
 
-	public TDetailPlanGeneral(long gpgId, TPlanGeneral TPlanGeneral, TStatut TStatut, TTypeMarche TTypeMarche,
-			TModePassation TModePassation, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
+	public TDetailPlanGeneral(long gpgId, TModePassation TModePassation, TPlanGeneral TPlanGeneral, TStatut TStatut,
+			TTypeMarche TTypeMarche, Long gpgAgpId, String gpgTypePlan, String gpgCode, String gpgObjet,
 			Integer gpgNumeroOrdre, String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao,
 			String gpgActeurSaisie, String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, Date gpgDateValAc,
 			Date gpgDateValCpmp, Date gpgDateValDmp, String gpgLibFin, Date gpgDteModif, String gpgFonCodPf,
@@ -76,10 +76,10 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 			Set<TDossierPlanGeneral> TDossierPlanGenerals, Set<TDetailPlanPassation> TDetailPlanPassations,
 			Set<TFinancementPgpm> TFinancementPgpms, Set<THistoPlanGeneral> THistoPlanGenerals) {
 		this.gpgId = gpgId;
+		this.TModePassation = TModePassation;
 		this.TPlanGeneral = TPlanGeneral;
 		this.TStatut = TStatut;
 		this.TTypeMarche = TTypeMarche;
-		this.TModePassation = TModePassation;
 		this.gpgAgpId = gpgAgpId;
 		this.gpgTypePlan = gpgTypePlan;
 		this.gpgCode = gpgCode;
@@ -120,6 +120,16 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "GPG_MOP_CODE", nullable = false)
+	public TModePassation getTModePassation() {
+		return this.TModePassation;
+	}
+
+	public void setTModePassation(TModePassation TModePassation) {
+		this.TModePassation = TModePassation;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "GPG_PLG_ID", nullable = false)
 	public TPlanGeneral getTPlanGeneral() {
 		return this.TPlanGeneral;
@@ -147,16 +157,6 @@ public class TDetailPlanGeneral implements java.io.Serializable {
 
 	public void setTTypeMarche(TTypeMarche TTypeMarche) {
 		this.TTypeMarche = TTypeMarche;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "GPG_MOP_CODE", nullable = false)
-	public TModePassation getTModePassation() {
-		return this.TModePassation;
-	}
-
-	public void setTModePassation(TModePassation TModePassation) {
-		this.TModePassation = TModePassation;
 	}
 
 	@Column(name = "GPG_AGP_ID", precision = 10, scale = 0)

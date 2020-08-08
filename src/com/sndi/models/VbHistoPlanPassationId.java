@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -17,6 +17,7 @@ public class VbHistoPlanPassationId implements java.io.Serializable {
 	private String hppStaCode;
 	private Date hppDate;
 	private String hppMotif;
+	private String hppOpeMatricule;
 
 	public VbHistoPlanPassationId() {
 	}
@@ -29,13 +30,14 @@ public class VbHistoPlanPassationId implements java.io.Serializable {
 	}
 
 	public VbHistoPlanPassationId(long hppId, String hppFonCod, long hppDppId, String hppStaCode, Date hppDate,
-			String hppMotif) {
+			String hppMotif, String hppOpeMatricule) {
 		this.hppId = hppId;
 		this.hppFonCod = hppFonCod;
 		this.hppDppId = hppDppId;
 		this.hppStaCode = hppStaCode;
 		this.hppDate = hppDate;
 		this.hppMotif = hppMotif;
+		this.hppOpeMatricule = hppOpeMatricule;
 	}
 
 	@Column(name = "HPP_ID", nullable = false, precision = 10, scale = 0)
@@ -92,6 +94,15 @@ public class VbHistoPlanPassationId implements java.io.Serializable {
 		this.hppMotif = hppMotif;
 	}
 
+	@Column(name = "HPP_OPE_MATRICULE", length = 25)
+	public String getHppOpeMatricule() {
+		return this.hppOpeMatricule;
+	}
+
+	public void setHppOpeMatricule(String hppOpeMatricule) {
+		this.hppOpeMatricule = hppOpeMatricule;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -110,7 +121,10 @@ public class VbHistoPlanPassationId implements java.io.Serializable {
 				&& ((this.getHppDate() == castOther.getHppDate()) || (this.getHppDate() != null
 						&& castOther.getHppDate() != null && this.getHppDate().equals(castOther.getHppDate())))
 				&& ((this.getHppMotif() == castOther.getHppMotif()) || (this.getHppMotif() != null
-						&& castOther.getHppMotif() != null && this.getHppMotif().equals(castOther.getHppMotif())));
+						&& castOther.getHppMotif() != null && this.getHppMotif().equals(castOther.getHppMotif())))
+				&& ((this.getHppOpeMatricule() == castOther.getHppOpeMatricule())
+						|| (this.getHppOpeMatricule() != null && castOther.getHppOpeMatricule() != null
+								&& this.getHppOpeMatricule().equals(castOther.getHppOpeMatricule())));
 	}
 
 	public int hashCode() {
@@ -122,6 +136,7 @@ public class VbHistoPlanPassationId implements java.io.Serializable {
 		result = 37 * result + (getHppStaCode() == null ? 0 : this.getHppStaCode().hashCode());
 		result = 37 * result + (getHppDate() == null ? 0 : this.getHppDate().hashCode());
 		result = 37 * result + (getHppMotif() == null ? 0 : this.getHppMotif().hashCode());
+		result = 37 * result + (getHppOpeMatricule() == null ? 0 : this.getHppOpeMatricule().hashCode());
 		return result;
 	}
 

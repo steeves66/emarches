@@ -1,6 +1,7 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -12,6 +13,9 @@ public class VbTypeFonctionId implements java.io.Serializable {
 
 	private String tyfCod;
 	private String tyfLibelle;
+	private Date tyfDteSaisi;
+	private String tyfOpeMatricule;
+	private String tyfLibelleCrt;
 
 	public VbTypeFonctionId() {
 	}
@@ -20,9 +24,13 @@ public class VbTypeFonctionId implements java.io.Serializable {
 		this.tyfCod = tyfCod;
 	}
 
-	public VbTypeFonctionId(String tyfCod, String tyfLibelle) {
+	public VbTypeFonctionId(String tyfCod, String tyfLibelle, Date tyfDteSaisi, String tyfOpeMatricule,
+			String tyfLibelleCrt) {
 		this.tyfCod = tyfCod;
 		this.tyfLibelle = tyfLibelle;
+		this.tyfDteSaisi = tyfDteSaisi;
+		this.tyfOpeMatricule = tyfOpeMatricule;
+		this.tyfLibelleCrt = tyfLibelleCrt;
 	}
 
 	@Column(name = "TYF_COD", nullable = false, length = 3)
@@ -43,6 +51,33 @@ public class VbTypeFonctionId implements java.io.Serializable {
 		this.tyfLibelle = tyfLibelle;
 	}
 
+	@Column(name = "TYF_DTE_SAISI", length = 7)
+	public Date getTyfDteSaisi() {
+		return this.tyfDteSaisi;
+	}
+
+	public void setTyfDteSaisi(Date tyfDteSaisi) {
+		this.tyfDteSaisi = tyfDteSaisi;
+	}
+
+	@Column(name = "TYF_OPE_MATRICULE", length = 25)
+	public String getTyfOpeMatricule() {
+		return this.tyfOpeMatricule;
+	}
+
+	public void setTyfOpeMatricule(String tyfOpeMatricule) {
+		this.tyfOpeMatricule = tyfOpeMatricule;
+	}
+
+	@Column(name = "TYF_LIBELLE_CRT", length = 300)
+	public String getTyfLibelleCrt() {
+		return this.tyfLibelleCrt;
+	}
+
+	public void setTyfLibelleCrt(String tyfLibelleCrt) {
+		this.tyfLibelleCrt = tyfLibelleCrt;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -54,9 +89,17 @@ public class VbTypeFonctionId implements java.io.Serializable {
 
 		return ((this.getTyfCod() == castOther.getTyfCod()) || (this.getTyfCod() != null
 				&& castOther.getTyfCod() != null && this.getTyfCod().equals(castOther.getTyfCod())))
-				&& ((this.getTyfLibelle() == castOther.getTyfLibelle())
-						|| (this.getTyfLibelle() != null && castOther.getTyfLibelle() != null
-								&& this.getTyfLibelle().equals(castOther.getTyfLibelle())));
+				&& ((this.getTyfLibelle() == castOther.getTyfLibelle()) || (this.getTyfLibelle() != null
+						&& castOther.getTyfLibelle() != null && this.getTyfLibelle().equals(castOther.getTyfLibelle())))
+				&& ((this.getTyfDteSaisi() == castOther.getTyfDteSaisi())
+						|| (this.getTyfDteSaisi() != null && castOther.getTyfDteSaisi() != null
+								&& this.getTyfDteSaisi().equals(castOther.getTyfDteSaisi())))
+				&& ((this.getTyfOpeMatricule() == castOther.getTyfOpeMatricule())
+						|| (this.getTyfOpeMatricule() != null && castOther.getTyfOpeMatricule() != null
+								&& this.getTyfOpeMatricule().equals(castOther.getTyfOpeMatricule())))
+				&& ((this.getTyfLibelleCrt() == castOther.getTyfLibelleCrt())
+						|| (this.getTyfLibelleCrt() != null && castOther.getTyfLibelleCrt() != null
+								&& this.getTyfLibelleCrt().equals(castOther.getTyfLibelleCrt())));
 	}
 
 	public int hashCode() {
@@ -64,6 +107,9 @@ public class VbTypeFonctionId implements java.io.Serializable {
 
 		result = 37 * result + (getTyfCod() == null ? 0 : this.getTyfCod().hashCode());
 		result = 37 * result + (getTyfLibelle() == null ? 0 : this.getTyfLibelle().hashCode());
+		result = 37 * result + (getTyfDteSaisi() == null ? 0 : this.getTyfDteSaisi().hashCode());
+		result = 37 * result + (getTyfOpeMatricule() == null ? 0 : this.getTyfOpeMatricule().hashCode());
+		result = 37 * result + (getTyfLibelleCrt() == null ? 0 : this.getTyfLibelleCrt().hashCode());
 		return result;
 	}
 

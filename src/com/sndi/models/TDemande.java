@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,10 +25,10 @@ public class TDemande implements java.io.Serializable {
 
 	private BigDecimal demNum;
 	private TFonction TFonction;
+	private TOperateur TOperateur;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TTypeDemande TTypeDemande;
-	private TOperateur TOperateur;
 	private String demObjet;
 	private String demMotif;
 	private Date demDteSaisi;
@@ -52,18 +52,18 @@ public class TDemande implements java.io.Serializable {
 		this.demNum = demNum;
 	}
 
-	public TDemande(BigDecimal demNum, TFonction TFonction, TStatut TStatut, TStructure TStructure,
-			TTypeDemande TTypeDemande, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,
+	public TDemande(BigDecimal demNum, TFonction TFonction, TOperateur TOperateur, TStatut TStatut,
+			TStructure TStructure, TTypeDemande TTypeDemande, String demObjet, String demMotif, Date demDteSaisi,
 			String demRefAvisMin, String demRef, Short demGesCode, String demRefActIni, String demStatutRetour,
 			String demFonCodePf, String demFonCodeDmp, Set<TPieceDemande> TPieceDemandes,
 			Set<THistoDemande> THistoDemandes, Set<TDetailDemandes> TDetailDemandeses,
 			Set<TDossierDemande> TDossierDemandes, Set<TAvisPresel> TAvisPresels) {
 		this.demNum = demNum;
 		this.TFonction = TFonction;
+		this.TOperateur = TOperateur;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TTypeDemande = TTypeDemande;
-		this.TOperateur = TOperateur;
 		this.demObjet = demObjet;
 		this.demMotif = demMotif;
 		this.demDteSaisi = demDteSaisi;
@@ -103,6 +103,16 @@ public class TDemande implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DEM_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DEM_STA_CODE")
 	public TStatut getTStatut() {
 		return this.TStatut;
@@ -130,16 +140,6 @@ public class TDemande implements java.io.Serializable {
 
 	public void setTTypeDemande(TTypeDemande TTypeDemande) {
 		this.TTypeDemande = TTypeDemande;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DEM_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
 	}
 
 	@Column(name = "DEM_OBJET", length = 1000)

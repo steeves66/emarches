@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -35,7 +35,10 @@ public class VbCommissionSpecifique implements java.io.Serializable {
 			@AttributeOverride(name = "comDacCode", column = @Column(name = "COM_DAC_CODE", length = 20)),
 			@AttributeOverride(name = "comMarCode", column = @Column(name = "COM_MAR_CODE", length = 20)),
 			@AttributeOverride(name = "comAaoCode", column = @Column(name = "COM_AAO_CODE", length = 20)),
-			@AttributeOverride(name = "comTcoCode", column = @Column(name = "COM_TCO_CODE", length = 3)) })
+			@AttributeOverride(name = "comTcoCode", column = @Column(name = "COM_TCO_CODE", length = 3)),
+			@AttributeOverride(name = "comFonAdmin", column = @Column(name = "COM_FON_ADMIN", length = 500)),
+			@AttributeOverride(name = "comStrCom", column = @Column(name = "COM_STR_COM", length = 500)),
+			@AttributeOverride(name = "comTctTitre", column = @Column(name = "COM_TCT_TITRE", length = 500)) })
 	public VbCommissionSpecifiqueId getId() {
 		return this.id;
 	}

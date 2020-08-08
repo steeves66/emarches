@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -22,8 +22,8 @@ public class THistoPlanGeneral implements java.io.Serializable {
 	private long hpgId;
 	private TDetailPlanGeneral TDetailPlanGeneral;
 	private TFonction TFonction;
-	private TStatut TStatut;
 	private TOperateur TOperateur;
+	private TStatut TStatut;
 	private Date hpgDate;
 	private String hpgMotif;
 
@@ -37,13 +37,13 @@ public class THistoPlanGeneral implements java.io.Serializable {
 		this.TStatut = TStatut;
 	}
 
-	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction, TStatut TStatut,
-			TOperateur TOperateur, Date hpgDate, String hpgMotif) {
+	public THistoPlanGeneral(long hpgId, TDetailPlanGeneral TDetailPlanGeneral, TFonction TFonction,
+			TOperateur TOperateur, TStatut TStatut, Date hpgDate, String hpgMotif) {
 		this.hpgId = hpgId;
 		this.TDetailPlanGeneral = TDetailPlanGeneral;
 		this.TFonction = TFonction;
-		this.TStatut = TStatut;
 		this.TOperateur = TOperateur;
+		this.TStatut = TStatut;
 		this.hpgDate = hpgDate;
 		this.hpgMotif = hpgMotif;
 	}
@@ -80,16 +80,6 @@ public class THistoPlanGeneral implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
-	public TStatut getTStatut() {
-		return this.TStatut;
-	}
-
-	public void setTStatut(TStatut TStatut) {
-		this.TStatut = TStatut;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "HPG_OPE_MATRICULE")
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -97,6 +87,16 @@ public class THistoPlanGeneral implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "HPG_STA_CODE", nullable = false)
+	public TStatut getTStatut() {
+		return this.TStatut;
+	}
+
+	public void setTStatut(TStatut TStatut) {
+		this.TStatut = TStatut;
 	}
 
 	@Temporal(TemporalType.DATE)

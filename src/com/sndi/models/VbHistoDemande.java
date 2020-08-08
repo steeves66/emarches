@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -32,7 +32,8 @@ public class VbHistoDemande implements java.io.Serializable {
 			@AttributeOverride(name = "hdmDteSaisi", column = @Column(name = "HDM_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "hdmStaCode", column = @Column(name = "HDM_STA_CODE", length = 3)),
 			@AttributeOverride(name = "hdmFonCod", column = @Column(name = "HDM_FON_COD", length = 20)),
-			@AttributeOverride(name = "hdmOpeCode", column = @Column(name = "HDM_OPE_CODE", length = 25)) })
+			@AttributeOverride(name = "hdmOpeCode", column = @Column(name = "HDM_OPE_CODE", length = 25)),
+			@AttributeOverride(name = "hdmMotif", column = @Column(name = "HDM_MOTIF", length = 500)) })
 	public VbHistoDemandeId getId() {
 		return this.id;
 	}

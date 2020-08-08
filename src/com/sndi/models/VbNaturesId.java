@@ -1,7 +1,7 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
-import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -11,88 +11,92 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VbNaturesId implements java.io.Serializable {
 
-	private Serializable natLibelle;
-	private Serializable natCode;
-	private Serializable natUtilSaisi;
-	private Serializable natUtilModif;
-	private Serializable natDteSaisi;
-	private Serializable natDteModif;
-	private Serializable natCClasse;
+	private String natLibelle;
+	private String natCode;
+	private String natOpeMatricule;
+	private String natOpeModif;
+	private Date natDteSaisi;
+	private Date natDteModif;
+	private String natCClasse;
 
 	public VbNaturesId() {
 	}
 
-	public VbNaturesId(Serializable natLibelle, Serializable natCode, Serializable natUtilSaisi,
-			Serializable natUtilModif, Serializable natDteSaisi, Serializable natDteModif, Serializable natCClasse) {
+	public VbNaturesId(String natCode) {
+		this.natCode = natCode;
+	}
+
+	public VbNaturesId(String natLibelle, String natCode, String natOpeMatricule, String natOpeModif, Date natDteSaisi,
+			Date natDteModif, String natCClasse) {
 		this.natLibelle = natLibelle;
 		this.natCode = natCode;
-		this.natUtilSaisi = natUtilSaisi;
-		this.natUtilModif = natUtilModif;
+		this.natOpeMatricule = natOpeMatricule;
+		this.natOpeModif = natOpeModif;
 		this.natDteSaisi = natDteSaisi;
 		this.natDteModif = natDteModif;
 		this.natCClasse = natCClasse;
 	}
 
-	@Column(name = "NAT_LIBELLE")
-	public Serializable getNatLibelle() {
+	@Column(name = "NAT_LIBELLE", length = 200)
+	public String getNatLibelle() {
 		return this.natLibelle;
 	}
 
-	public void setNatLibelle(Serializable natLibelle) {
+	public void setNatLibelle(String natLibelle) {
 		this.natLibelle = natLibelle;
 	}
 
-	@Column(name = "NAT_CODE")
-	public Serializable getNatCode() {
+	@Column(name = "NAT_CODE", nullable = false, length = 20)
+	public String getNatCode() {
 		return this.natCode;
 	}
 
-	public void setNatCode(Serializable natCode) {
+	public void setNatCode(String natCode) {
 		this.natCode = natCode;
 	}
 
-	@Column(name = "NAT_UTIL_SAISI")
-	public Serializable getNatUtilSaisi() {
-		return this.natUtilSaisi;
+	@Column(name = "NAT_OPE_MATRICULE", length = 25)
+	public String getNatOpeMatricule() {
+		return this.natOpeMatricule;
 	}
 
-	public void setNatUtilSaisi(Serializable natUtilSaisi) {
-		this.natUtilSaisi = natUtilSaisi;
+	public void setNatOpeMatricule(String natOpeMatricule) {
+		this.natOpeMatricule = natOpeMatricule;
 	}
 
-	@Column(name = "NAT_UTIL_MODIF")
-	public Serializable getNatUtilModif() {
-		return this.natUtilModif;
+	@Column(name = "NAT_OPE_MODIF", length = 25)
+	public String getNatOpeModif() {
+		return this.natOpeModif;
 	}
 
-	public void setNatUtilModif(Serializable natUtilModif) {
-		this.natUtilModif = natUtilModif;
+	public void setNatOpeModif(String natOpeModif) {
+		this.natOpeModif = natOpeModif;
 	}
 
-	@Column(name = "NAT_DTE_SAISI")
-	public Serializable getNatDteSaisi() {
+	@Column(name = "NAT_DTE_SAISI", length = 7)
+	public Date getNatDteSaisi() {
 		return this.natDteSaisi;
 	}
 
-	public void setNatDteSaisi(Serializable natDteSaisi) {
+	public void setNatDteSaisi(Date natDteSaisi) {
 		this.natDteSaisi = natDteSaisi;
 	}
 
-	@Column(name = "NAT_DTE_MODIF")
-	public Serializable getNatDteModif() {
+	@Column(name = "NAT_DTE_MODIF", length = 7)
+	public Date getNatDteModif() {
 		return this.natDteModif;
 	}
 
-	public void setNatDteModif(Serializable natDteModif) {
+	public void setNatDteModif(Date natDteModif) {
 		this.natDteModif = natDteModif;
 	}
 
-	@Column(name = "NAT_C_CLASSE")
-	public Serializable getNatCClasse() {
+	@Column(name = "NAT_C_CLASSE", length = 1)
+	public String getNatCClasse() {
 		return this.natCClasse;
 	}
 
-	public void setNatCClasse(Serializable natCClasse) {
+	public void setNatCClasse(String natCClasse) {
 		this.natCClasse = natCClasse;
 	}
 
@@ -109,12 +113,12 @@ public class VbNaturesId implements java.io.Serializable {
 				&& castOther.getNatLibelle() != null && this.getNatLibelle().equals(castOther.getNatLibelle())))
 				&& ((this.getNatCode() == castOther.getNatCode()) || (this.getNatCode() != null
 						&& castOther.getNatCode() != null && this.getNatCode().equals(castOther.getNatCode())))
-				&& ((this.getNatUtilSaisi() == castOther.getNatUtilSaisi())
-						|| (this.getNatUtilSaisi() != null && castOther.getNatUtilSaisi() != null
-								&& this.getNatUtilSaisi().equals(castOther.getNatUtilSaisi())))
-				&& ((this.getNatUtilModif() == castOther.getNatUtilModif())
-						|| (this.getNatUtilModif() != null && castOther.getNatUtilModif() != null
-								&& this.getNatUtilModif().equals(castOther.getNatUtilModif())))
+				&& ((this.getNatOpeMatricule() == castOther.getNatOpeMatricule())
+						|| (this.getNatOpeMatricule() != null && castOther.getNatOpeMatricule() != null
+								&& this.getNatOpeMatricule().equals(castOther.getNatOpeMatricule())))
+				&& ((this.getNatOpeModif() == castOther.getNatOpeModif())
+						|| (this.getNatOpeModif() != null && castOther.getNatOpeModif() != null
+								&& this.getNatOpeModif().equals(castOther.getNatOpeModif())))
 				&& ((this.getNatDteSaisi() == castOther.getNatDteSaisi())
 						|| (this.getNatDteSaisi() != null && castOther.getNatDteSaisi() != null
 								&& this.getNatDteSaisi().equals(castOther.getNatDteSaisi())))
@@ -131,8 +135,8 @@ public class VbNaturesId implements java.io.Serializable {
 
 		result = 37 * result + (getNatLibelle() == null ? 0 : this.getNatLibelle().hashCode());
 		result = 37 * result + (getNatCode() == null ? 0 : this.getNatCode().hashCode());
-		result = 37 * result + (getNatUtilSaisi() == null ? 0 : this.getNatUtilSaisi().hashCode());
-		result = 37 * result + (getNatUtilModif() == null ? 0 : this.getNatUtilModif().hashCode());
+		result = 37 * result + (getNatOpeMatricule() == null ? 0 : this.getNatOpeMatricule().hashCode());
+		result = 37 * result + (getNatOpeModif() == null ? 0 : this.getNatOpeModif().hashCode());
 		result = 37 * result + (getNatDteSaisi() == null ? 0 : this.getNatDteSaisi().hashCode());
 		result = 37 * result + (getNatDteModif() == null ? 0 : this.getNatDteModif().hashCode());
 		result = 37 * result + (getNatCClasse() == null ? 0 : this.getNatCClasse().hashCode());

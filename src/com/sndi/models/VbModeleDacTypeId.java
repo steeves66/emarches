@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -17,6 +17,7 @@ public class VbModeleDacTypeId implements java.io.Serializable {
 	private Date mdtDteSaisi;
 	private String mdtOpeMatricule;
 	private String mdtTymCode;
+	private String mdtDacTypeChain;
 
 	public VbModeleDacTypeId() {
 	}
@@ -26,13 +27,14 @@ public class VbModeleDacTypeId implements java.io.Serializable {
 	}
 
 	public VbModeleDacTypeId(String mdtCode, String mdtLibelleLong, String mdtLibelleCourt, Date mdtDteSaisi,
-			String mdtOpeMatricule, String mdtTymCode) {
+			String mdtOpeMatricule, String mdtTymCode, String mdtDacTypeChain) {
 		this.mdtCode = mdtCode;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtLibelleCourt = mdtLibelleCourt;
 		this.mdtDteSaisi = mdtDteSaisi;
 		this.mdtOpeMatricule = mdtOpeMatricule;
 		this.mdtTymCode = mdtTymCode;
+		this.mdtDacTypeChain = mdtDacTypeChain;
 	}
 
 	@Column(name = "MDT_CODE", nullable = false, length = 15)
@@ -89,6 +91,15 @@ public class VbModeleDacTypeId implements java.io.Serializable {
 		this.mdtTymCode = mdtTymCode;
 	}
 
+	@Column(name = "MDT_DAC_TYPE_CHAIN", length = 100)
+	public String getMdtDacTypeChain() {
+		return this.mdtDacTypeChain;
+	}
+
+	public void setMdtDacTypeChain(String mdtDacTypeChain) {
+		this.mdtDacTypeChain = mdtDacTypeChain;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -112,9 +123,11 @@ public class VbModeleDacTypeId implements java.io.Serializable {
 				&& ((this.getMdtOpeMatricule() == castOther.getMdtOpeMatricule())
 						|| (this.getMdtOpeMatricule() != null && castOther.getMdtOpeMatricule() != null
 								&& this.getMdtOpeMatricule().equals(castOther.getMdtOpeMatricule())))
-				&& ((this.getMdtTymCode() == castOther.getMdtTymCode())
-						|| (this.getMdtTymCode() != null && castOther.getMdtTymCode() != null
-								&& this.getMdtTymCode().equals(castOther.getMdtTymCode())));
+				&& ((this.getMdtTymCode() == castOther.getMdtTymCode()) || (this.getMdtTymCode() != null
+						&& castOther.getMdtTymCode() != null && this.getMdtTymCode().equals(castOther.getMdtTymCode())))
+				&& ((this.getMdtDacTypeChain() == castOther.getMdtDacTypeChain())
+						|| (this.getMdtDacTypeChain() != null && castOther.getMdtDacTypeChain() != null
+								&& this.getMdtDacTypeChain().equals(castOther.getMdtDacTypeChain())));
 	}
 
 	public int hashCode() {
@@ -126,6 +139,7 @@ public class VbModeleDacTypeId implements java.io.Serializable {
 		result = 37 * result + (getMdtDteSaisi() == null ? 0 : this.getMdtDteSaisi().hashCode());
 		result = 37 * result + (getMdtOpeMatricule() == null ? 0 : this.getMdtOpeMatricule().hashCode());
 		result = 37 * result + (getMdtTymCode() == null ? 0 : this.getMdtTymCode().hashCode());
+		result = 37 * result + (getMdtDacTypeChain() == null ? 0 : this.getMdtDacTypeChain().hashCode());
 		return result;
 	}
 

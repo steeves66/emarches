@@ -95,6 +95,7 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofObsVariante;
 	private BigDecimal dofMtCaut;
 	private BigDecimal dofMtRab;
+	private BigDecimal dofErrCalcul;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -120,7 +121,7 @@ public class TDetOffres implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin,
-			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,BigDecimal dofMtRab,Set<TPiecesOffres> TPiecesOffreses) {
+			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,BigDecimal dofMtRab,BigDecimal dofErrCalcul,Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
@@ -192,6 +193,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofObsVariante = dofObsVariante;
 		this.dofMtCaut = dofMtCaut;
 		this.dofMtRab = dofMtRab;
+		this.dofErrCalcul = dofErrCalcul;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
 
@@ -848,6 +850,15 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setDofMtRab(BigDecimal dofMtRab) {
 		this.dofMtRab = dofMtRab;
+	}
+	
+	@Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)
+	public BigDecimal getDofErrCalcul() {
+		return this.dofErrCalcul;
+	}
+
+	public void setDofErrCalcul(BigDecimal dofErrCalcul) {
+		this.dofErrCalcul = dofErrCalcul;
 	}
 	
 }

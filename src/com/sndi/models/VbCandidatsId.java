@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -21,6 +21,8 @@ public class VbCandidatsId implements java.io.Serializable {
 	private Date canDteSaisi;
 	private String canOpeMatricule;
 	private String canEmail;
+	private String canRepCode;
+	private String canSouSigleSte;
 
 	public VbCandidatsId() {
 	}
@@ -30,7 +32,8 @@ public class VbCandidatsId implements java.io.Serializable {
 	}
 
 	public VbCandidatsId(long canCode, String canTieNcc, String canSouNcc, String canNomResp, String canNom,
-			String canPrenoms, String canTel, Date canDteSaisi, String canOpeMatricule, String canEmail) {
+			String canPrenoms, String canTel, Date canDteSaisi, String canOpeMatricule, String canEmail,
+			String canRepCode, String canSouSigleSte) {
 		this.canCode = canCode;
 		this.canTieNcc = canTieNcc;
 		this.canSouNcc = canSouNcc;
@@ -41,6 +44,8 @@ public class VbCandidatsId implements java.io.Serializable {
 		this.canDteSaisi = canDteSaisi;
 		this.canOpeMatricule = canOpeMatricule;
 		this.canEmail = canEmail;
+		this.canRepCode = canRepCode;
+		this.canSouSigleSte = canSouSigleSte;
 	}
 
 	@Column(name = "CAN_CODE", nullable = false, precision = 10, scale = 0)
@@ -133,6 +138,24 @@ public class VbCandidatsId implements java.io.Serializable {
 		this.canEmail = canEmail;
 	}
 
+	@Column(name = "CAN_REP_CODE", length = 10)
+	public String getCanRepCode() {
+		return this.canRepCode;
+	}
+
+	public void setCanRepCode(String canRepCode) {
+		this.canRepCode = canRepCode;
+	}
+
+	@Column(name = "CAN_SOU_SIGLE_STE", length = 500)
+	public String getCanSouSigleSte() {
+		return this.canSouSigleSte;
+	}
+
+	public void setCanSouSigleSte(String canSouSigleSte) {
+		this.canSouSigleSte = canSouSigleSte;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -162,7 +185,12 @@ public class VbCandidatsId implements java.io.Serializable {
 						|| (this.getCanOpeMatricule() != null && castOther.getCanOpeMatricule() != null
 								&& this.getCanOpeMatricule().equals(castOther.getCanOpeMatricule())))
 				&& ((this.getCanEmail() == castOther.getCanEmail()) || (this.getCanEmail() != null
-						&& castOther.getCanEmail() != null && this.getCanEmail().equals(castOther.getCanEmail())));
+						&& castOther.getCanEmail() != null && this.getCanEmail().equals(castOther.getCanEmail())))
+				&& ((this.getCanRepCode() == castOther.getCanRepCode()) || (this.getCanRepCode() != null
+						&& castOther.getCanRepCode() != null && this.getCanRepCode().equals(castOther.getCanRepCode())))
+				&& ((this.getCanSouSigleSte() == castOther.getCanSouSigleSte())
+						|| (this.getCanSouSigleSte() != null && castOther.getCanSouSigleSte() != null
+								&& this.getCanSouSigleSte().equals(castOther.getCanSouSigleSte())));
 	}
 
 	public int hashCode() {
@@ -178,6 +206,8 @@ public class VbCandidatsId implements java.io.Serializable {
 		result = 37 * result + (getCanDteSaisi() == null ? 0 : this.getCanDteSaisi().hashCode());
 		result = 37 * result + (getCanOpeMatricule() == null ? 0 : this.getCanOpeMatricule().hashCode());
 		result = 37 * result + (getCanEmail() == null ? 0 : this.getCanEmail().hashCode());
+		result = 37 * result + (getCanRepCode() == null ? 0 : this.getCanRepCode().hashCode());
+		result = 37 * result + (getCanSouSigleSte() == null ? 0 : this.getCanSouSigleSte().hashCode());
 		return result;
 	}
 

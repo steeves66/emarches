@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,6 +25,9 @@ public class VbDemandeId implements java.io.Serializable {
 	private String demRef;
 	private Short demGesCode;
 	private String demRefActIni;
+	private String demStatutRetour;
+	private String demFonCodePf;
+	private String demFonCodeDmp;
 
 	public VbDemandeId() {
 	}
@@ -35,7 +38,8 @@ public class VbDemandeId implements java.io.Serializable {
 
 	public VbDemandeId(BigDecimal demNum, String demObjet, String demMotif, String demTdmCode, Date demDteSaisi,
 			String demOpeMatricule, String demStaCode, String demStrCode, String demFonCodeAc, String demRefAvisMin,
-			String demRef, Short demGesCode, String demRefActIni) {
+			String demRef, Short demGesCode, String demRefActIni, String demStatutRetour, String demFonCodePf,
+			String demFonCodeDmp) {
 		this.demNum = demNum;
 		this.demObjet = demObjet;
 		this.demMotif = demMotif;
@@ -49,6 +53,9 @@ public class VbDemandeId implements java.io.Serializable {
 		this.demRef = demRef;
 		this.demGesCode = demGesCode;
 		this.demRefActIni = demRefActIni;
+		this.demStatutRetour = demStatutRetour;
+		this.demFonCodePf = demFonCodePf;
+		this.demFonCodeDmp = demFonCodeDmp;
 	}
 
 	@Column(name = "DEM_NUM", nullable = false, precision = 22, scale = 0)
@@ -168,6 +175,33 @@ public class VbDemandeId implements java.io.Serializable {
 		this.demRefActIni = demRefActIni;
 	}
 
+	@Column(name = "DEM_STATUT_RETOUR", length = 1)
+	public String getDemStatutRetour() {
+		return this.demStatutRetour;
+	}
+
+	public void setDemStatutRetour(String demStatutRetour) {
+		this.demStatutRetour = demStatutRetour;
+	}
+
+	@Column(name = "DEM_FON_CODE_PF", length = 20)
+	public String getDemFonCodePf() {
+		return this.demFonCodePf;
+	}
+
+	public void setDemFonCodePf(String demFonCodePf) {
+		this.demFonCodePf = demFonCodePf;
+	}
+
+	@Column(name = "DEM_FON_CODE_DMP", length = 20)
+	public String getDemFonCodeDmp() {
+		return this.demFonCodeDmp;
+	}
+
+	public void setDemFonCodeDmp(String demFonCodeDmp) {
+		this.demFonCodeDmp = demFonCodeDmp;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -207,7 +241,16 @@ public class VbDemandeId implements java.io.Serializable {
 						&& castOther.getDemGesCode() != null && this.getDemGesCode().equals(castOther.getDemGesCode())))
 				&& ((this.getDemRefActIni() == castOther.getDemRefActIni())
 						|| (this.getDemRefActIni() != null && castOther.getDemRefActIni() != null
-								&& this.getDemRefActIni().equals(castOther.getDemRefActIni())));
+								&& this.getDemRefActIni().equals(castOther.getDemRefActIni())))
+				&& ((this.getDemStatutRetour() == castOther.getDemStatutRetour())
+						|| (this.getDemStatutRetour() != null && castOther.getDemStatutRetour() != null
+								&& this.getDemStatutRetour().equals(castOther.getDemStatutRetour())))
+				&& ((this.getDemFonCodePf() == castOther.getDemFonCodePf())
+						|| (this.getDemFonCodePf() != null && castOther.getDemFonCodePf() != null
+								&& this.getDemFonCodePf().equals(castOther.getDemFonCodePf())))
+				&& ((this.getDemFonCodeDmp() == castOther.getDemFonCodeDmp())
+						|| (this.getDemFonCodeDmp() != null && castOther.getDemFonCodeDmp() != null
+								&& this.getDemFonCodeDmp().equals(castOther.getDemFonCodeDmp())));
 	}
 
 	public int hashCode() {
@@ -226,6 +269,9 @@ public class VbDemandeId implements java.io.Serializable {
 		result = 37 * result + (getDemRef() == null ? 0 : this.getDemRef().hashCode());
 		result = 37 * result + (getDemGesCode() == null ? 0 : this.getDemGesCode().hashCode());
 		result = 37 * result + (getDemRefActIni() == null ? 0 : this.getDemRefActIni().hashCode());
+		result = 37 * result + (getDemStatutRetour() == null ? 0 : this.getDemStatutRetour().hashCode());
+		result = 37 * result + (getDemFonCodePf() == null ? 0 : this.getDemFonCodePf().hashCode());
+		result = 37 * result + (getDemFonCodeDmp() == null ? 0 : this.getDemFonCodeDmp().hashCode());
 		return result;
 	}
 

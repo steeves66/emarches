@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -69,7 +69,25 @@ public class VbDetailPlanPassation implements java.io.Serializable {
 			@AttributeOverride(name = "dppDacCode", column = @Column(name = "DPP_DAC_CODE", length = 20)),
 			@AttributeOverride(name = "dppInvEntre", column = @Column(name = "DPP_INV_ENTRE", length = 7)),
 			@AttributeOverride(name = "dppDateAttApprobCpmp", column = @Column(name = "DPP_DATE_ATT_APPROB_CPMP", length = 7)),
-			@AttributeOverride(name = "dppDateJugementOffreTec", column = @Column(name = "DPP_DATE_JUGEMENT_OFFRE_TEC", length = 7)) })
+			@AttributeOverride(name = "dppDateJugementOffreTec", column = @Column(name = "DPP_DATE_JUGEMENT_OFFRE_TEC", length = 7)),
+			@AttributeOverride(name = "dppDateValAc", column = @Column(name = "DPP_DATE_VAL_AC", length = 7)),
+			@AttributeOverride(name = "dppDateValCpmp", column = @Column(name = "DPP_DATE_VAL_CPMP", length = 7)),
+			@AttributeOverride(name = "dppDateValDmp", column = @Column(name = "DPP_DATE_VAL_DMP", length = 7)),
+			@AttributeOverride(name = "dppBailleur", column = @Column(name = "DPP_BAILLEUR", length = 1)),
+			@AttributeOverride(name = "dppTypeFinance", column = @Column(name = "DPP_TYPE_FINANCE", length = 20)),
+			@AttributeOverride(name = "dppApprobAno", column = @Column(name = "DPP_APPROB_ANO", length = 7)),
+			@AttributeOverride(name = "dppDteModif", column = @Column(name = "DPP_DTE_MODIF", length = 7)),
+			@AttributeOverride(name = "dppRecherche", column = @Column(name = "DPP_RECHERCHE", length = 4000)),
+			@AttributeOverride(name = "dppFonCodPf", column = @Column(name = "DPP_FON_COD_PF", length = 20)),
+			@AttributeOverride(name = "dppFonCodDmp", column = @Column(name = "DPP_FON_COD_DMP", length = 20)),
+			@AttributeOverride(name = "dppMontant", column = @Column(name = "DPP_MONTANT", precision = 15, scale = 0)),
+			@AttributeOverride(name = "dppNatInt", column = @Column(name = "DPP_NAT_INT", length = 3)),
+			@AttributeOverride(name = "dppTypeStrConduc", column = @Column(name = "DPP_TYPE_STR_CONDUC", length = 50)),
+			@AttributeOverride(name = "dppStatutAno", column = @Column(name = "DPP_STATUT_ANO", length = 3)),
+			@AttributeOverride(name = "dppDateSolFact", column = @Column(name = "DPP_DATE_SOL_FACT", length = 7)),
+			@AttributeOverride(name = "dppDateRecepFact", column = @Column(name = "DPP_DATE_RECEP_FACT", length = 7)),
+			@AttributeOverride(name = "dppDateRecepLettr", column = @Column(name = "DPP_DATE_RECEP_LETTR", length = 7)),
+			@AttributeOverride(name = "dppDateNotAtt", column = @Column(name = "DPP_DATE_NOT_ATT", length = 7)) })
 	public VbDetailPlanPassationId getId() {
 		return this.id;
 	}

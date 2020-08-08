@@ -222,6 +222,7 @@ public class VDacliste implements java.io.Serializable {
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
 	private BigDecimal adaNum;
+	private BigDecimal dacNbrCopieOff;
 	private double cautValMin;
 	private double cautValMax;
 
@@ -279,7 +280,7 @@ public class VDacliste implements java.io.Serializable {
 			BigDecimal aaoDelaiVal, String aaoFonCodAc, String aaoFonCodeCpmp, String aaoNatInt, String aaoTaux,
 			String aaoLieuExe, String aaoNomResp, String aaoInterPub, String aaoCautDefExig, String aaoBompPub,
 			String aaoVenteParLot, String aaoAvisBail, BigDecimal aaoMtCaut, String aaoModePaiement,
-			Long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,
+			Long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,BigDecimal dacNbrCopieOff,
 			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
 			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, BigDecimal adaNum,double cautValMin,
@@ -487,6 +488,7 @@ public class VDacliste implements java.io.Serializable {
 		this.aaoNbrOffRej = aaoNbrOffRej;
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
 		this.adaNum = adaNum;
+		this.dacNbrCopieOff = dacNbrCopieOff;
 		this.cautValMin= cautValMin;
 		this.cautValMax= cautValMax;
 	}
@@ -2317,6 +2319,15 @@ public class VDacliste implements java.io.Serializable {
 
 	public void setAdaNum(BigDecimal adaNum) {
 		this.adaNum = adaNum;
+	}
+	
+	@Column(name = "DAC_NBR_COPIE_OFF", precision = 22, scale = 0)
+	public BigDecimal getDacNbrCopieOff() {
+		return this.dacNbrCopieOff;
+	}
+
+	public void setDacNbrCopieOff(BigDecimal dacNbrCopieOff) {
+		this.dacNbrCopieOff = dacNbrCopieOff;
 	}
 
 	@Column(name = "CAUT_VAL_MIN")

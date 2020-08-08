@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -43,7 +43,15 @@ public class VbAffichageAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "affAgpStatutRetour", column = @Column(name = "AFF_AGP_STATUT_RETOUR", length = 2)),
 			@AttributeOverride(name = "affAgpActif", column = @Column(name = "AFF_AGP_ACTIF", length = 1)),
 			@AttributeOverride(name = "affAgpTypeDao", column = @Column(name = "AFF_AGP_TYPE_DAO", length = 1000)),
-			@AttributeOverride(name = "affAgpCommentaire", column = @Column(name = "AFF_AGP_COMMENTAIRE", length = 1000)) })
+			@AttributeOverride(name = "affAgpCommentaire", column = @Column(name = "AFF_AGP_COMMENTAIRE", length = 1000)),
+			@AttributeOverride(name = "affAgpRecherche", column = @Column(name = "AFF_AGP_RECHERCHE", length = 4000)),
+			@AttributeOverride(name = "affAgpDateValAc", column = @Column(name = "AFF_AGP_DATE_VAL_AC", length = 7)),
+			@AttributeOverride(name = "affAgpDateValCpmp", column = @Column(name = "AFF_AGP_DATE_VAL_CPMP", length = 7)),
+			@AttributeOverride(name = "affAgpDateValDmp", column = @Column(name = "AFF_AGP_DATE_VAL_DMP", length = 7)),
+			@AttributeOverride(name = "affAgpCode", column = @Column(name = "AFF_AGP_CODE", length = 50)),
+			@AttributeOverride(name = "affAgpDteModif", column = @Column(name = "AFF_AGP_DTE_MODIF", length = 7)),
+			@AttributeOverride(name = "affFonCodPf", column = @Column(name = "AFF_FON_COD_PF", length = 20)),
+			@AttributeOverride(name = "affFonCodDmp", column = @Column(name = "AFF_FON_COD_DMP", length = 20)) })
 	public VbAffichageAgpmId getId() {
 		return this.id;
 	}

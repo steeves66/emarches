@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,10 +23,10 @@ import javax.persistence.TemporalType;
 public class TFonction implements java.io.Serializable {
 
 	private String fonCod;
-	private TStructure TStructure;
-	private TTypeFonction TTypeFonction;
 	private TMinistere TMinistere;
 	private TOperateur TOperateur;
+	private TStructure TStructure;
+	private TTypeFonction TTypeFonction;
 	private Date fonDatDeb;
 	private Date fonDatFin;
 	private String fonLibelle;
@@ -77,10 +77,10 @@ public class TFonction implements java.io.Serializable {
 		this.fonCod = fonCod;
 	}
 
-	public TFonction(String fonCod, TStructure TStructure, TTypeFonction TTypeFonction, TMinistere TMinistere,
-			TOperateur TOperateur, Date fonDatDeb, Date fonDatFin, String fonLibelle, String fonAdr, String fonTel,
-			String fonFonCod, String fonCourriel, String fonMobil, Date fonDteSaisi, String fonLibelleCrt,
-			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap,
+	public TFonction(String fonCod, TMinistere TMinistere, TOperateur TOperateur, TStructure TStructure,
+			TTypeFonction TTypeFonction, Date fonDatDeb, Date fonDatFin, String fonLibelle, String fonAdr,
+			String fonTel, String fonFonCod, String fonCourriel, String fonMobil, Date fonDteSaisi,
+			String fonLibelleCrt, String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap,
 			Set<THistoAgpm> THistoAgpms, Set<TPublicationAvis> TPublicationAvises, Set<TAssignation> TAssignations,
 			Set<TLBudgets> TLBudgetsesForLbgFonCode, Set<TSeances> TSeanceses, Set<TAffichagePgpm> TAffichagePgpms,
 			Set<TAffichagePpm> TAffichagePpms, Set<TDetCritAnalyse> TDetCritAnalyses,
@@ -94,10 +94,10 @@ public class TFonction implements java.io.Serializable {
 			Set<TRetrait> TRetraits, Set<THistoDac> THistoDacs, Set<TDetOffres> TDetOffreses,
 			Set<TDacSpecs> TDacSpecsesForDacFonCodAc, Set<TPlanPassation> TPlanPassations) {
 		this.fonCod = fonCod;
-		this.TStructure = TStructure;
-		this.TTypeFonction = TTypeFonction;
 		this.TMinistere = TMinistere;
 		this.TOperateur = TOperateur;
+		this.TStructure = TStructure;
+		this.TTypeFonction = TTypeFonction;
 		this.fonDatDeb = fonDatDeb;
 		this.fonDatFin = fonDatFin;
 		this.fonLibelle = fonLibelle;
@@ -154,26 +154,6 @@ public class TFonction implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FON_STR_CODE")
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FON_TYF_COD")
-	public TTypeFonction getTTypeFonction() {
-		return this.TTypeFonction;
-	}
-
-	public void setTTypeFonction(TTypeFonction TTypeFonction) {
-		this.TTypeFonction = TTypeFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "FON_MIN_CODE")
 	public TMinistere getTMinistere() {
 		return this.TMinistere;
@@ -191,6 +171,26 @@ public class TFonction implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FON_STR_CODE")
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "FON_TYF_COD")
+	public TTypeFonction getTTypeFonction() {
+		return this.TTypeFonction;
+	}
+
+	public void setTTypeFonction(TTypeFonction TTypeFonction) {
+		this.TTypeFonction = TTypeFonction;
 	}
 
 	@Temporal(TemporalType.DATE)

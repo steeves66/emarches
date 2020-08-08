@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -44,7 +44,9 @@ public class VDetCommissionSeance implements java.io.Serializable {
 			@AttributeOverride(name = "dcsComStrCode", column = @Column(name = "DCS_COM_STR_CODE", length = 20)),
 			@AttributeOverride(name = "dcsOpeMatSaisi", column = @Column(name = "DCS_OPE_MAT_SAISI", length = 20)),
 			@AttributeOverride(name = "dcsMbmRespo", column = @Column(name = "DCS_MBM_RESPO", length = 1)),
-			@AttributeOverride(name = "dcsRepMandate", column = @Column(name = "DCS_REP_MANDATE", length = 1)) })
+			@AttributeOverride(name = "dcsRepMandate", column = @Column(name = "DCS_REP_MANDATE", length = 1)),
+			@AttributeOverride(name = "dcsFonAdmin", column = @Column(name = "DCS_FON_ADMIN", length = 500)),
+			@AttributeOverride(name = "dcsStrCom", column = @Column(name = "DCS_STR_COM", length = 500)) })
 	public VDetCommissionSeanceId getId() {
 		return this.id;
 	}

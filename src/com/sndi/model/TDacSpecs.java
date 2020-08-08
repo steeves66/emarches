@@ -2,6 +2,7 @@ package com.sndi.model;
 // Generated 23 janv. 2020 16:59:48 by Hibernate Tools 4.3.5.Final
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -54,6 +55,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private long dacFactoriseCrit;
 	private Long dacNbreAchat;
 	private String dacAutComSpec;
+	private BigDecimal dacNbrCopieOff;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -76,7 +78,7 @@ public class TDacSpecs implements java.io.Serializable {
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
-			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -106,6 +108,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacFactoriseCrit = dacFactoriseCrit;
 		this.dacNbreAchat = dacNbreAchat;
 		this.dacAutComSpec = dacAutComSpec;
+		this.dacNbrCopieOff = dacNbrCopieOff;
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
@@ -480,6 +483,15 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacCout(Long dacCout) {
 		this.dacCout = dacCout;
+	}
+	
+	@Column(name = "DAC_NBR_COPIE_OFF", precision = 22, scale = 0)
+	public BigDecimal getDacNbrCopieOff() {
+		return this.dacNbrCopieOff;
+	}
+
+	public void setDacNbrCopieOff(BigDecimal dacNbrCopieOff) {
+		this.dacNbrCopieOff = dacNbrCopieOff;
 	}
 
 }

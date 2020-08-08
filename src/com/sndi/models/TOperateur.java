@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -46,6 +46,7 @@ public class TOperateur implements java.io.Serializable {
 	private Set<TCritereAnalyseSpec> TCritereAnalyseSpecs = new HashSet<TCritereAnalyseSpec>(0);
 	private Set<TAnalyseOffre> TAnalyseOffres = new HashSet<TAnalyseOffre>(0);
 	private Set<TAssignation> TAssignations = new HashSet<TAssignation>(0);
+	private Set<TBanques> TBanqueses = new HashSet<TBanques>(0);
 	private Set<TSeances> TSeanceses = new HashSet<TSeances>(0);
 	private Set<TTypeDemande> TTypeDemandes = new HashSet<TTypeDemande>(0);
 	private Set<THistoPlanGeneral> THistoPlanGenerals = new HashSet<THistoPlanGeneral>(0);
@@ -82,8 +83,8 @@ public class TOperateur implements java.io.Serializable {
 			Set<TTiers> TTierses, Set<TFonction> TFonctions, Set<TModeleDacType> TModeleDacTypes,
 			Set<TNatures> TNatureses, Set<TDestinations> TDestinationses, Set<THistoPlanPassation> THistoPlanPassations,
 			Set<TMotdepasse> TMotdepasses, Set<TCritereAnalyseSpec> TCritereAnalyseSpecs,
-			Set<TAnalyseOffre> TAnalyseOffres, Set<TAssignation> TAssignations, Set<TSeances> TSeanceses,
-			Set<TTypeDemande> TTypeDemandes, Set<THistoPlanGeneral> THistoPlanGenerals,
+			Set<TAnalyseOffre> TAnalyseOffres, Set<TAssignation> TAssignations, Set<TBanques> TBanqueses,
+			Set<TSeances> TSeanceses, Set<TTypeDemande> TTypeDemandes, Set<THistoPlanGeneral> THistoPlanGenerals,
 			Set<TModeReglement> TModeReglements, Set<TTempParametre> TTempParametres, Set<TTypeSeance> TTypeSeances,
 			Set<TTypeFonction> TTypeFonctions, Set<THistoAgpm> THistoAgpms, Set<TTypeCommission> TTypeCommissions,
 			Set<TTypePieceOffre> TTypePieceOffres, Set<TAvisPresel> TAvisPreselsForAprOpeMatricule,
@@ -118,6 +119,7 @@ public class TOperateur implements java.io.Serializable {
 		this.TCritereAnalyseSpecs = TCritereAnalyseSpecs;
 		this.TAnalyseOffres = TAnalyseOffres;
 		this.TAssignations = TAssignations;
+		this.TBanqueses = TBanqueses;
 		this.TSeanceses = TSeanceses;
 		this.TTypeDemandes = TTypeDemandes;
 		this.THistoPlanGenerals = THistoPlanGenerals;
@@ -376,6 +378,15 @@ public class TOperateur implements java.io.Serializable {
 
 	public void setTAssignations(Set<TAssignation> TAssignations) {
 		this.TAssignations = TAssignations;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")
+	public Set<TBanques> getTBanqueses() {
+		return this.TBanqueses;
+	}
+
+	public void setTBanqueses(Set<TBanques> TBanqueses) {
+		this.TBanqueses = TBanqueses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOperateur")

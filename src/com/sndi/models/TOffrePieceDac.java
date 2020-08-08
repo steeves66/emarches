@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -29,6 +29,7 @@ public class TOffrePieceDac implements java.io.Serializable {
 	private String odpTpoEtapPiece;
 	private Date odpDteSaisi;
 	private String odpOpeMatricule;
+	private String odpLibelle;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TOffrePieceDac() {
@@ -39,13 +40,15 @@ public class TOffrePieceDac implements java.io.Serializable {
 	}
 
 	public TOffrePieceDac(BigDecimal opdNum, TDacSpecs TDacSpecs, TTypePieceOffre TTypePieceOffre,
-			String odpTpoEtapPiece, Date odpDteSaisi, String odpOpeMatricule, Set<TPiecesOffres> TPiecesOffreses) {
+			String odpTpoEtapPiece, Date odpDteSaisi, String odpOpeMatricule, String odpLibelle,
+			Set<TPiecesOffres> TPiecesOffreses) {
 		this.opdNum = opdNum;
 		this.TDacSpecs = TDacSpecs;
 		this.TTypePieceOffre = TTypePieceOffre;
 		this.odpTpoEtapPiece = odpTpoEtapPiece;
 		this.odpDteSaisi = odpDteSaisi;
 		this.odpOpeMatricule = odpOpeMatricule;
+		this.odpLibelle = odpLibelle;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
 
@@ -106,6 +109,15 @@ public class TOffrePieceDac implements java.io.Serializable {
 
 	public void setOdpOpeMatricule(String odpOpeMatricule) {
 		this.odpOpeMatricule = odpOpeMatricule;
+	}
+
+	@Column(name = "ODP_LIBELLE", length = 500)
+	public String getOdpLibelle() {
+		return this.odpLibelle;
+	}
+
+	public void setOdpLibelle(String odpLibelle) {
+		this.odpLibelle = odpLibelle;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TOffrePieceDac")

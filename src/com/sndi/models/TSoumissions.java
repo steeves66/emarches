@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -32,6 +32,8 @@ public class TSoumissions implements java.io.Serializable {
 	private String souAdresse;
 	private Date souDteSaisi;
 	private String souSigleDmp;
+	private String souPayCode;
+	private String souNatInt;
 	private Set<TAvisPresel> TAvisPresels = new HashSet<TAvisPresel>(0);
 	private Set<TOffres> TOffreses = new HashSet<TOffres>(0);
 
@@ -44,7 +46,7 @@ public class TSoumissions implements java.io.Serializable {
 
 	public TSoumissions(String souNcc, TOperateur TOperateur, Character souInter, String souSigleSte, String souNomCom,
 			String souStaCode, String souTel, String souAdresse, Date souDteSaisi, String souSigleDmp,
-			Set<TAvisPresel> TAvisPresels, Set<TOffres> TOffreses) {
+			String souPayCode, String souNatInt, Set<TAvisPresel> TAvisPresels, Set<TOffres> TOffreses) {
 		this.souNcc = souNcc;
 		this.TOperateur = TOperateur;
 		this.souInter = souInter;
@@ -55,6 +57,8 @@ public class TSoumissions implements java.io.Serializable {
 		this.souAdresse = souAdresse;
 		this.souDteSaisi = souDteSaisi;
 		this.souSigleDmp = souSigleDmp;
+		this.souPayCode = souPayCode;
+		this.souNatInt = souNatInt;
 		this.TAvisPresels = TAvisPresels;
 		this.TOffreses = TOffreses;
 	}
@@ -151,6 +155,24 @@ public class TSoumissions implements java.io.Serializable {
 
 	public void setSouSigleDmp(String souSigleDmp) {
 		this.souSigleDmp = souSigleDmp;
+	}
+
+	@Column(name = "SOU_PAY_CODE", length = 20)
+	public String getSouPayCode() {
+		return this.souPayCode;
+	}
+
+	public void setSouPayCode(String souPayCode) {
+		this.souPayCode = souPayCode;
+	}
+
+	@Column(name = "SOU_NAT_INT", length = 1)
+	public String getSouNatInt() {
+		return this.souNatInt;
+	}
+
+	public void setSouNatInt(String souNatInt) {
+		this.souNatInt = souNatInt;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TSoumissions")

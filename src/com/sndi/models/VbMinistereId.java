@@ -1,6 +1,7 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -14,6 +15,9 @@ public class VbMinistereId implements java.io.Serializable {
 	private String minLibelle;
 	private String minLibelleCourt;
 	private String minDescription;
+	private Date minDteSaisi;
+	private String minOpeMatricule;
+	private String minActif;
 
 	public VbMinistereId() {
 	}
@@ -22,11 +26,15 @@ public class VbMinistereId implements java.io.Serializable {
 		this.minCode = minCode;
 	}
 
-	public VbMinistereId(String minCode, String minLibelle, String minLibelleCourt, String minDescription) {
+	public VbMinistereId(String minCode, String minLibelle, String minLibelleCourt, String minDescription,
+			Date minDteSaisi, String minOpeMatricule, String minActif) {
 		this.minCode = minCode;
 		this.minLibelle = minLibelle;
 		this.minLibelleCourt = minLibelleCourt;
 		this.minDescription = minDescription;
+		this.minDteSaisi = minDteSaisi;
+		this.minOpeMatricule = minOpeMatricule;
+		this.minActif = minActif;
 	}
 
 	@Column(name = "MIN_CODE", nullable = false, length = 20)
@@ -65,6 +73,33 @@ public class VbMinistereId implements java.io.Serializable {
 		this.minDescription = minDescription;
 	}
 
+	@Column(name = "MIN_DTE_SAISI", length = 7)
+	public Date getMinDteSaisi() {
+		return this.minDteSaisi;
+	}
+
+	public void setMinDteSaisi(Date minDteSaisi) {
+		this.minDteSaisi = minDteSaisi;
+	}
+
+	@Column(name = "MIN_OPE_MATRICULE", length = 25)
+	public String getMinOpeMatricule() {
+		return this.minOpeMatricule;
+	}
+
+	public void setMinOpeMatricule(String minOpeMatricule) {
+		this.minOpeMatricule = minOpeMatricule;
+	}
+
+	@Column(name = "MIN_ACTIF", length = 1)
+	public String getMinActif() {
+		return this.minActif;
+	}
+
+	public void setMinActif(String minActif) {
+		this.minActif = minActif;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -83,7 +118,15 @@ public class VbMinistereId implements java.io.Serializable {
 								&& this.getMinLibelleCourt().equals(castOther.getMinLibelleCourt())))
 				&& ((this.getMinDescription() == castOther.getMinDescription())
 						|| (this.getMinDescription() != null && castOther.getMinDescription() != null
-								&& this.getMinDescription().equals(castOther.getMinDescription())));
+								&& this.getMinDescription().equals(castOther.getMinDescription())))
+				&& ((this.getMinDteSaisi() == castOther.getMinDteSaisi())
+						|| (this.getMinDteSaisi() != null && castOther.getMinDteSaisi() != null
+								&& this.getMinDteSaisi().equals(castOther.getMinDteSaisi())))
+				&& ((this.getMinOpeMatricule() == castOther.getMinOpeMatricule())
+						|| (this.getMinOpeMatricule() != null && castOther.getMinOpeMatricule() != null
+								&& this.getMinOpeMatricule().equals(castOther.getMinOpeMatricule())))
+				&& ((this.getMinActif() == castOther.getMinActif()) || (this.getMinActif() != null
+						&& castOther.getMinActif() != null && this.getMinActif().equals(castOther.getMinActif())));
 	}
 
 	public int hashCode() {
@@ -93,6 +136,9 @@ public class VbMinistereId implements java.io.Serializable {
 		result = 37 * result + (getMinLibelle() == null ? 0 : this.getMinLibelle().hashCode());
 		result = 37 * result + (getMinLibelleCourt() == null ? 0 : this.getMinLibelleCourt().hashCode());
 		result = 37 * result + (getMinDescription() == null ? 0 : this.getMinDescription().hashCode());
+		result = 37 * result + (getMinDteSaisi() == null ? 0 : this.getMinDteSaisi().hashCode());
+		result = 37 * result + (getMinOpeMatricule() == null ? 0 : this.getMinOpeMatricule().hashCode());
+		result = 37 * result + (getMinActif() == null ? 0 : this.getMinActif().hashCode());
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,6 +21,9 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 	private String comMarCode;
 	private String comAaoCode;
 	private String comTcoCode;
+	private String comFonAdmin;
+	private String comStrCom;
+	private String comTctTitre;
 
 	public VbCommissionSpecifiqueId() {
 	}
@@ -30,7 +33,8 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 	}
 
 	public VbCommissionSpecifiqueId(BigDecimal comNum, Date comDteSaisi, String comStrCode, String comTctCode,
-			String comOpeMatricule, String comDacCode, String comMarCode, String comAaoCode, String comTcoCode) {
+			String comOpeMatricule, String comDacCode, String comMarCode, String comAaoCode, String comTcoCode,
+			String comFonAdmin, String comStrCom, String comTctTitre) {
 		this.comNum = comNum;
 		this.comDteSaisi = comDteSaisi;
 		this.comStrCode = comStrCode;
@@ -40,6 +44,9 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 		this.comMarCode = comMarCode;
 		this.comAaoCode = comAaoCode;
 		this.comTcoCode = comTcoCode;
+		this.comFonAdmin = comFonAdmin;
+		this.comStrCom = comStrCom;
+		this.comTctTitre = comTctTitre;
 	}
 
 	@Column(name = "COM_NUM", nullable = false, precision = 22, scale = 0)
@@ -123,6 +130,33 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 		this.comTcoCode = comTcoCode;
 	}
 
+	@Column(name = "COM_FON_ADMIN", length = 500)
+	public String getComFonAdmin() {
+		return this.comFonAdmin;
+	}
+
+	public void setComFonAdmin(String comFonAdmin) {
+		this.comFonAdmin = comFonAdmin;
+	}
+
+	@Column(name = "COM_STR_COM", length = 500)
+	public String getComStrCom() {
+		return this.comStrCom;
+	}
+
+	public void setComStrCom(String comStrCom) {
+		this.comStrCom = comStrCom;
+	}
+
+	@Column(name = "COM_TCT_TITRE", length = 500)
+	public String getComTctTitre() {
+		return this.comTctTitre;
+	}
+
+	public void setComTctTitre(String comTctTitre) {
+		this.comTctTitre = comTctTitre;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -150,9 +184,16 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 						&& castOther.getComMarCode() != null && this.getComMarCode().equals(castOther.getComMarCode())))
 				&& ((this.getComAaoCode() == castOther.getComAaoCode()) || (this.getComAaoCode() != null
 						&& castOther.getComAaoCode() != null && this.getComAaoCode().equals(castOther.getComAaoCode())))
-				&& ((this.getComTcoCode() == castOther.getComTcoCode())
-						|| (this.getComTcoCode() != null && castOther.getComTcoCode() != null
-								&& this.getComTcoCode().equals(castOther.getComTcoCode())));
+				&& ((this.getComTcoCode() == castOther.getComTcoCode()) || (this.getComTcoCode() != null
+						&& castOther.getComTcoCode() != null && this.getComTcoCode().equals(castOther.getComTcoCode())))
+				&& ((this.getComFonAdmin() == castOther.getComFonAdmin())
+						|| (this.getComFonAdmin() != null && castOther.getComFonAdmin() != null
+								&& this.getComFonAdmin().equals(castOther.getComFonAdmin())))
+				&& ((this.getComStrCom() == castOther.getComStrCom()) || (this.getComStrCom() != null
+						&& castOther.getComStrCom() != null && this.getComStrCom().equals(castOther.getComStrCom())))
+				&& ((this.getComTctTitre() == castOther.getComTctTitre())
+						|| (this.getComTctTitre() != null && castOther.getComTctTitre() != null
+								&& this.getComTctTitre().equals(castOther.getComTctTitre())));
 	}
 
 	public int hashCode() {
@@ -167,6 +208,9 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 		result = 37 * result + (getComMarCode() == null ? 0 : this.getComMarCode().hashCode());
 		result = 37 * result + (getComAaoCode() == null ? 0 : this.getComAaoCode().hashCode());
 		result = 37 * result + (getComTcoCode() == null ? 0 : this.getComTcoCode().hashCode());
+		result = 37 * result + (getComFonAdmin() == null ? 0 : this.getComFonAdmin().hashCode());
+		result = 37 * result + (getComStrCom() == null ? 0 : this.getComStrCom().hashCode());
+		result = 37 * result + (getComTctTitre() == null ? 0 : this.getComTctTitre().hashCode());
 		return result;
 	}
 

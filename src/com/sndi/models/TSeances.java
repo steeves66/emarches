@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,9 +24,9 @@ import javax.persistence.TemporalType;
 public class TSeances implements java.io.Serializable {
 
 	private BigDecimal seaNum;
-	private TTypeSeance TTypeSeance;
 	private TFonction TFonction;
 	private TOperateur TOperateur;
+	private TTypeSeance TTypeSeance;
 	private String seaLibelle;
 	private String seaQuorum;
 	private BigDecimal seaNbrPli;
@@ -42,13 +42,13 @@ public class TSeances implements java.io.Serializable {
 		this.seaNum = seaNum;
 	}
 
-	public TSeances(BigDecimal seaNum, TTypeSeance TTypeSeance, TFonction TFonction, TOperateur TOperateur,
+	public TSeances(BigDecimal seaNum, TFonction TFonction, TOperateur TOperateur, TTypeSeance TTypeSeance,
 			String seaLibelle, String seaQuorum, BigDecimal seaNbrPli, String seaRes, Date seaSteSaisi,
 			String seaObservation, Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.seaNum = seaNum;
-		this.TTypeSeance = TTypeSeance;
 		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
+		this.TTypeSeance = TTypeSeance;
 		this.seaLibelle = seaLibelle;
 		this.seaQuorum = seaQuorum;
 		this.seaNbrPli = seaNbrPli;
@@ -70,16 +70,6 @@ public class TSeances implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "SEA_TSE_CODE")
-	public TTypeSeance getTTypeSeance() {
-		return this.TTypeSeance;
-	}
-
-	public void setTTypeSeance(TTypeSeance TTypeSeance) {
-		this.TTypeSeance = TTypeSeance;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "SEA_FON_CODE")
 	public TFonction getTFonction() {
 		return this.TFonction;
@@ -97,6 +87,16 @@ public class TSeances implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "SEA_TSE_CODE")
+	public TTypeSeance getTTypeSeance() {
+		return this.TTypeSeance;
+	}
+
+	public void setTTypeSeance(TTypeSeance TTypeSeance) {
+		this.TTypeSeance = TTypeSeance;
 	}
 
 	@Column(name = "SEA_LIBELLE", length = 500)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -21,6 +21,8 @@ public class VbFinancementId implements java.io.Serializable {
 	private String finNumeroAccord;
 	private String finStatut;
 	private Long finAgpId;
+	private String finTypeFinance;
+	private Long finPartTresor;
 
 	public VbFinancementId() {
 	}
@@ -34,7 +36,7 @@ public class VbFinancementId implements java.io.Serializable {
 
 	public VbFinancementId(long finId, String finDevCode, String finBaiCode, String finSouCode, long finProId,
 			BigDecimal finMontantCfa, BigDecimal finMontantDevise, String finNumeroAccord, String finStatut,
-			Long finAgpId) {
+			Long finAgpId, String finTypeFinance, Long finPartTresor) {
 		this.finId = finId;
 		this.finDevCode = finDevCode;
 		this.finBaiCode = finBaiCode;
@@ -45,6 +47,8 @@ public class VbFinancementId implements java.io.Serializable {
 		this.finNumeroAccord = finNumeroAccord;
 		this.finStatut = finStatut;
 		this.finAgpId = finAgpId;
+		this.finTypeFinance = finTypeFinance;
+		this.finPartTresor = finPartTresor;
 	}
 
 	@Column(name = "FIN_ID", nullable = false, precision = 10, scale = 0)
@@ -137,6 +141,24 @@ public class VbFinancementId implements java.io.Serializable {
 		this.finAgpId = finAgpId;
 	}
 
+	@Column(name = "FIN_TYPE_FINANCE", length = 20)
+	public String getFinTypeFinance() {
+		return this.finTypeFinance;
+	}
+
+	public void setFinTypeFinance(String finTypeFinance) {
+		this.finTypeFinance = finTypeFinance;
+	}
+
+	@Column(name = "FIN_PART_TRESOR", precision = 15, scale = 0)
+	public Long getFinPartTresor() {
+		return this.finPartTresor;
+	}
+
+	public void setFinPartTresor(Long finPartTresor) {
+		this.finPartTresor = finPartTresor;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -166,7 +188,13 @@ public class VbFinancementId implements java.io.Serializable {
 				&& ((this.getFinStatut() == castOther.getFinStatut()) || (this.getFinStatut() != null
 						&& castOther.getFinStatut() != null && this.getFinStatut().equals(castOther.getFinStatut())))
 				&& ((this.getFinAgpId() == castOther.getFinAgpId()) || (this.getFinAgpId() != null
-						&& castOther.getFinAgpId() != null && this.getFinAgpId().equals(castOther.getFinAgpId())));
+						&& castOther.getFinAgpId() != null && this.getFinAgpId().equals(castOther.getFinAgpId())))
+				&& ((this.getFinTypeFinance() == castOther.getFinTypeFinance())
+						|| (this.getFinTypeFinance() != null && castOther.getFinTypeFinance() != null
+								&& this.getFinTypeFinance().equals(castOther.getFinTypeFinance())))
+				&& ((this.getFinPartTresor() == castOther.getFinPartTresor())
+						|| (this.getFinPartTresor() != null && castOther.getFinPartTresor() != null
+								&& this.getFinPartTresor().equals(castOther.getFinPartTresor())));
 	}
 
 	public int hashCode() {
@@ -182,6 +210,8 @@ public class VbFinancementId implements java.io.Serializable {
 		result = 37 * result + (getFinNumeroAccord() == null ? 0 : this.getFinNumeroAccord().hashCode());
 		result = 37 * result + (getFinStatut() == null ? 0 : this.getFinStatut().hashCode());
 		result = 37 * result + (getFinAgpId() == null ? 0 : this.getFinAgpId().hashCode());
+		result = 37 * result + (getFinTypeFinance() == null ? 0 : this.getFinTypeFinance().hashCode());
+		result = 37 * result + (getFinPartTresor() == null ? 0 : this.getFinPartTresor().hashCode());
 		return result;
 	}
 

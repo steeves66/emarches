@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -26,10 +26,10 @@ public class TDetCommissionSeance implements java.io.Serializable {
 	private BigDecimal dcsNum;
 	private TCommissionSpecifique TCommissionSpecifique;
 	private TDacSpecs TDacSpecs;
+	private TOperateur TOperateur;
 	private TSeances TSeances;
 	private TStructure TStructure;
 	private TTypeCommission TTypeCommission;
-	private TOperateur TOperateur;
 	private String dcsFonCod;
 	private String dcsOpeMatricule;
 	private Date dcsDteSaisi;
@@ -41,7 +41,11 @@ public class TDetCommissionSeance implements java.io.Serializable {
 	private String dcsPresent;
 	private String dcsMbmRespo;
 	private String dcsRepMandate;
+	private String dcsFonAdmin;
+	private String dcsStrCom;
+	private String dcsMailMbm;
 	private Set<TAffichageDao> TAffichageDaos = new HashSet<TAffichageDao>(0);
+	private Set<TDossierMbr> TDossierMbrs = new HashSet<TDossierMbr>(0);
 
 	public TDetCommissionSeance() {
 	}
@@ -51,17 +55,18 @@ public class TDetCommissionSeance implements java.io.Serializable {
 	}
 
 	public TDetCommissionSeance(BigDecimal dcsNum, TCommissionSpecifique TCommissionSpecifique, TDacSpecs TDacSpecs,
-			TSeances TSeances, TStructure TStructure, TTypeCommission TTypeCommission, TOperateur TOperateur,
+			TOperateur TOperateur, TSeances TSeances, TStructure TStructure, TTypeCommission TTypeCommission,
 			String dcsFonCod, String dcsOpeMatricule, Date dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation,
 			String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent, String dcsMbmRespo,
-			String dcsRepMandate, Set<TAffichageDao> TAffichageDaos) {
+			String dcsRepMandate, String dcsFonAdmin, String dcsStrCom, String dcsMailMbm,
+			Set<TAffichageDao> TAffichageDaos, Set<TDossierMbr> TDossierMbrs) {
 		this.dcsNum = dcsNum;
 		this.TCommissionSpecifique = TCommissionSpecifique;
 		this.TDacSpecs = TDacSpecs;
+		this.TOperateur = TOperateur;
 		this.TSeances = TSeances;
 		this.TStructure = TStructure;
 		this.TTypeCommission = TTypeCommission;
-		this.TOperateur = TOperateur;
 		this.dcsFonCod = dcsFonCod;
 		this.dcsOpeMatricule = dcsOpeMatricule;
 		this.dcsDteSaisi = dcsDteSaisi;
@@ -73,7 +78,11 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsPresent = dcsPresent;
 		this.dcsMbmRespo = dcsMbmRespo;
 		this.dcsRepMandate = dcsRepMandate;
+		this.dcsFonAdmin = dcsFonAdmin;
+		this.dcsStrCom = dcsStrCom;
+		this.dcsMailMbm = dcsMailMbm;
 		this.TAffichageDaos = TAffichageDaos;
+		this.TDossierMbrs = TDossierMbrs;
 	}
 
 	@Id
@@ -108,6 +117,16 @@ public class TDetCommissionSeance implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DCS_OPE_MAT_SAISI")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
+	}
+
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DCS_SEA_NUM")
 	public TSeances getTSeances() {
 		return this.TSeances;
@@ -135,16 +154,6 @@ public class TDetCommissionSeance implements java.io.Serializable {
 
 	public void setTTypeCommission(TTypeCommission TTypeCommission) {
 		this.TTypeCommission = TTypeCommission;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DCS_OPE_MAT_SAISI")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
-	}
-
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
 	}
 
 	@Column(name = "DCS_FON_COD", length = 100)
@@ -247,6 +256,33 @@ public class TDetCommissionSeance implements java.io.Serializable {
 		this.dcsRepMandate = dcsRepMandate;
 	}
 
+	@Column(name = "DCS_FON_ADMIN", length = 500)
+	public String getDcsFonAdmin() {
+		return this.dcsFonAdmin;
+	}
+
+	public void setDcsFonAdmin(String dcsFonAdmin) {
+		this.dcsFonAdmin = dcsFonAdmin;
+	}
+
+	@Column(name = "DCS_STR_COM", length = 500)
+	public String getDcsStrCom() {
+		return this.dcsStrCom;
+	}
+
+	public void setDcsStrCom(String dcsStrCom) {
+		this.dcsStrCom = dcsStrCom;
+	}
+
+	@Column(name = "DCS_MAIL_MBM", length = 200)
+	public String getDcsMailMbm() {
+		return this.dcsMailMbm;
+	}
+
+	public void setDcsMailMbm(String dcsMailMbm) {
+		this.dcsMailMbm = dcsMailMbm;
+	}
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetCommissionSeance")
 	public Set<TAffichageDao> getTAffichageDaos() {
 		return this.TAffichageDaos;
@@ -254,6 +290,15 @@ public class TDetCommissionSeance implements java.io.Serializable {
 
 	public void setTAffichageDaos(Set<TAffichageDao> TAffichageDaos) {
 		this.TAffichageDaos = TAffichageDaos;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetCommissionSeance")
+	public Set<TDossierMbr> getTDossierMbrs() {
+		return this.TDossierMbrs;
+	}
+
+	public void setTDossierMbrs(Set<TDossierMbr> TDossierMbrs) {
+		this.TDossierMbrs = TDossierMbrs;
 	}
 
 }

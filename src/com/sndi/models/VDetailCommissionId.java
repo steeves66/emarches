@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -915,7 +915,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofTotTec = dofTotTec;
 	}
 
-	@Column(name = "DOF_OBS_DMP", length = 200)
+	@Column(name = "DOF_OBS_DMP", length = 500)
 	public String getDofObsDmp() {
 		return this.dofObsDmp;
 	}
@@ -924,7 +924,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofObsDmp = dofObsDmp;
 	}
 
-	@Column(name = "DOF_OBS_COM", length = 200)
+	@Column(name = "DOF_OBS_COM", length = 500)
 	public String getDofObsCom() {
 		return this.dofObsCom;
 	}
@@ -933,7 +933,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofObsCom = dofObsCom;
 	}
 
-	@Column(name = "DOF_OBS_ADM", length = 200)
+	@Column(name = "DOF_OBS_ADM", length = 500)
 	public String getDofObsAdm() {
 		return this.dofObsAdm;
 	}
@@ -942,7 +942,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofObsAdm = dofObsAdm;
 	}
 
-	@Column(name = "DOF_OBS_ADM_DMP", length = 200)
+	@Column(name = "DOF_OBS_ADM_DMP", length = 500)
 	public String getDofObsAdmDmp() {
 		return this.dofObsAdmDmp;
 	}
@@ -951,7 +951,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofObsAdmDmp = dofObsAdmDmp;
 	}
 
-	@Column(name = "DOF_OBS_ADM_BAI", length = 200)
+	@Column(name = "DOF_OBS_ADM_BAI", length = 500)
 	public String getDofObsAdmBai() {
 		return this.dofObsAdmBai;
 	}
@@ -960,7 +960,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofObsAdmBai = dofObsAdmBai;
 	}
 
-	@Column(name = "DOF_OBS_TEC", length = 200)
+	@Column(name = "DOF_OBS_TEC", length = 500)
 	public String getDofObsTec() {
 		return this.dofObsTec;
 	}
@@ -969,7 +969,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofObsTec = dofObsTec;
 	}
 
-	@Column(name = "DOF_OBS_TEC_DMP", length = 200)
+	@Column(name = "DOF_OBS_TEC_DMP", length = 500)
 	public String getDofObsTecDmp() {
 		return this.dofObsTecDmp;
 	}
@@ -978,7 +978,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dofObsTecDmp = dofObsTecDmp;
 	}
 
-	@Column(name = "DOF_OBS_TEC_BAI", length = 200)
+	@Column(name = "DOF_OBS_TEC_BAI", length = 500)
 	public String getDofObsTecBai() {
 		return this.dofObsTecBai;
 	}
@@ -1365,7 +1365,7 @@ public class VDetailCommissionId implements java.io.Serializable {
 		this.dacDteValDmp = dacDteValDmp;
 	}
 
-	@Column(name = "DAC_TD_CODE", length = 3)
+	@Column(name = "DAC_TD_CODE", length = 12)
 	public String getDacTdCode() {
 		return this.dacTdCode;
 	}

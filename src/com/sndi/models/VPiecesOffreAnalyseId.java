@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -17,6 +17,7 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 	private BigDecimal pofLaaId;
 	private String tpoLibelle;
 	private String pofConforme;
+	private String pofObs;
 
 	public VPiecesOffreAnalyseId() {
 	}
@@ -27,13 +28,14 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 	}
 
 	public VPiecesOffreAnalyseId(BigDecimal pofNum, BigDecimal pofDofNum, String tpoCode, BigDecimal pofLaaId,
-			String tpoLibelle, String pofConforme) {
+			String tpoLibelle, String pofConforme, String pofObs) {
 		this.pofNum = pofNum;
 		this.pofDofNum = pofDofNum;
 		this.tpoCode = tpoCode;
 		this.pofLaaId = pofLaaId;
 		this.tpoLibelle = tpoLibelle;
 		this.pofConforme = pofConforme;
+		this.pofObs = pofObs;
 	}
 
 	@Column(name = "POF_NUM", nullable = false, precision = 22, scale = 0)
@@ -90,6 +92,15 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 		this.pofConforme = pofConforme;
 	}
 
+	@Column(name = "POF_OBS", length = 500)
+	public String getPofObs() {
+		return this.pofObs;
+	}
+
+	public void setPofObs(String pofObs) {
+		this.pofObs = pofObs;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -111,7 +122,9 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 						&& castOther.getTpoLibelle() != null && this.getTpoLibelle().equals(castOther.getTpoLibelle())))
 				&& ((this.getPofConforme() == castOther.getPofConforme())
 						|| (this.getPofConforme() != null && castOther.getPofConforme() != null
-								&& this.getPofConforme().equals(castOther.getPofConforme())));
+								&& this.getPofConforme().equals(castOther.getPofConforme())))
+				&& ((this.getPofObs() == castOther.getPofObs()) || (this.getPofObs() != null
+						&& castOther.getPofObs() != null && this.getPofObs().equals(castOther.getPofObs())));
 	}
 
 	public int hashCode() {
@@ -123,6 +136,7 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 		result = 37 * result + (getPofLaaId() == null ? 0 : this.getPofLaaId().hashCode());
 		result = 37 * result + (getTpoLibelle() == null ? 0 : this.getTpoLibelle().hashCode());
 		result = 37 * result + (getPofConforme() == null ? 0 : this.getPofConforme().hashCode());
+		result = 37 * result + (getPofObs() == null ? 0 : this.getPofObs().hashCode());
 		return result;
 	}
 

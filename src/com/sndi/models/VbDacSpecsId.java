@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,6 +39,7 @@ public class VbDacSpecsId implements java.io.Serializable {
 	private String dacFonCodeDmp;
 	private String dacFonCodePf;
 	private Date dacDteModif;
+	private String dacModType;
 
 	public VbDacSpecsId() {
 	}
@@ -52,7 +53,7 @@ public class VbDacSpecsId implements java.io.Serializable {
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
-			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif) {
+			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, String dacModType) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -80,6 +81,7 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
 		this.dacDteModif = dacDteModif;
+		this.dacModType = dacModType;
 	}
 
 	@Column(name = "DAC_CODE", nullable = false, length = 20)
@@ -325,6 +327,15 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacDteModif = dacDteModif;
 	}
 
+	@Column(name = "DAC_MOD_TYPE", length = 10)
+	public String getDacModType() {
+		return this.dacModType;
+	}
+
+	public void setDacModType(String dacModType) {
+		this.dacModType = dacModType;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -403,7 +414,10 @@ public class VbDacSpecsId implements java.io.Serializable {
 								&& this.getDacFonCodePf().equals(castOther.getDacFonCodePf())))
 				&& ((this.getDacDteModif() == castOther.getDacDteModif())
 						|| (this.getDacDteModif() != null && castOther.getDacDteModif() != null
-								&& this.getDacDteModif().equals(castOther.getDacDteModif())));
+								&& this.getDacDteModif().equals(castOther.getDacDteModif())))
+				&& ((this.getDacModType() == castOther.getDacModType())
+						|| (this.getDacModType() != null && castOther.getDacModType() != null
+								&& this.getDacModType().equals(castOther.getDacModType())));
 	}
 
 	public int hashCode() {
@@ -436,6 +450,7 @@ public class VbDacSpecsId implements java.io.Serializable {
 		result = 37 * result + (getDacFonCodeDmp() == null ? 0 : this.getDacFonCodeDmp().hashCode());
 		result = 37 * result + (getDacFonCodePf() == null ? 0 : this.getDacFonCodePf().hashCode());
 		result = 37 * result + (getDacDteModif() == null ? 0 : this.getDacDteModif().hashCode());
+		result = 37 * result + (getDacModType() == null ? 0 : this.getDacModType().hashCode());
 		return result;
 	}
 

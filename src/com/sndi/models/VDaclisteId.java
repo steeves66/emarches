@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -35,6 +35,7 @@ public class VDaclisteId implements java.io.Serializable {
 	private String dacBailleur;
 	private Long dacCout;
 	private String dacTypePlan;
+	private Long dacNbreAchat;
 	private String dacRecherche;
 	private String dacFonCodeDmp;
 	private String dacFonCodePf;
@@ -214,6 +215,9 @@ public class VDaclisteId implements java.io.Serializable {
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
 	private BigDecimal adaNum;
+	private BigDecimal dacNbrCopieOff;
+	private BigDecimal cautValMin;
+	private BigDecimal cautValMax;
 
 	public VDaclisteId() {
 	}
@@ -235,20 +239,20 @@ public class VDaclisteId implements java.io.Serializable {
 			String dacMopCode, BigDecimal dacNbrOuv, BigDecimal dacGesCode, String dacFonCodAc, String dacStrCode,
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
-			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
-			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, String mopCode, String mopLibelleCourt,
-			String mopLibelleLong, String tymCode, String tymLibelleCourt, String tymLibelleLong, String tymTymCode,
-			String tymGroupe, String strCode, String strLibelleCourt, String strLibelleLong, String strAdresse,
-			String strEmail, String strMinCode, String strTstCode, String strRegCode, String strAdrPost,
-			String strAdrGeo, String strTel, String strFax, String strOpeMatricule, Date strDteSaisi,
-			String strOpeRespo, String tdcCode, String tdcLibelle, Long dppId, Long dppPlpId, Long dppGpgId,
-			String dppStaCode, String dppTymCode, String dppMopCode, String dppLbgCode, String dppTypePlan,
-			String dppCode, Integer dppNumeroOrdre, Date dppDate, String dppObjet, String dppSourceFin,
-			Date dppDateDaoTrans, Date dppDateDaoApprobDmp, Date dppDateDaoApprobBail, Date dppDateAvisAoPublication,
-			Date dppDateOuvertOt, Date dppDateOuvertOf, Date dppDateElabRapport, Date dppDateJugementOffre,
-			Date dppDateAttApprobDmp, Date dppDateAttApproBail, Date dppDateNegociation, Date dppDateSignatAttrib,
-			Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut, Date dppDateExecFin,
-			String dppActeurSaisie, String dppStrCode, String dppStatutRetour, Date dppDateSaisie,
+			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, Long dacNbreAchat,
+			String dacRecherche, String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, String mopCode,
+			String mopLibelleCourt, String mopLibelleLong, String tymCode, String tymLibelleCourt,
+			String tymLibelleLong, String tymTymCode, String tymGroupe, String strCode, String strLibelleCourt,
+			String strLibelleLong, String strAdresse, String strEmail, String strMinCode, String strTstCode,
+			String strRegCode, String strAdrPost, String strAdrGeo, String strTel, String strFax,
+			String strOpeMatricule, Date strDteSaisi, String strOpeRespo, String tdcCode, String tdcLibelle, Long dppId,
+			Long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode, String dppMopCode, String dppLbgCode,
+			String dppTypePlan, String dppCode, Integer dppNumeroOrdre, Date dppDate, String dppObjet,
+			String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp, Date dppDateDaoApprobBail,
+			Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf, Date dppDateElabRapport,
+			Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail, Date dppDateNegociation,
+			Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateMarcheApprob, Date dppDateExecDebut,
+			Date dppDateExecFin, String dppActeurSaisie, String dppStrCode, String dppStatutRetour, Date dppDateSaisie,
 			String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi, String dppTypId,
 			String dppStatutDao, String dppPieceDao, String dppDacCode, Date dppInvEntre, Date dppDateAttApprobCpmp,
 			Date dppDateJugementOffreTec, Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp,
@@ -272,7 +276,8 @@ public class VDaclisteId implements java.io.Serializable {
 			BigDecimal aaoMtCaut, String aaoModePaiement, BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,
 			String aaoHeureRecep, BigDecimal aaoAdaNum, String aaoNatPrix, String aaoRegQual, String aaoAvisBai,
 			String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp,
-			Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, BigDecimal adaNum) {
+			Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, BigDecimal adaNum,
+			BigDecimal dacNbrCopieOff, BigDecimal cautValMin, BigDecimal cautValMax) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -296,6 +301,7 @@ public class VDaclisteId implements java.io.Serializable {
 		this.dacBailleur = dacBailleur;
 		this.dacCout = dacCout;
 		this.dacTypePlan = dacTypePlan;
+		this.dacNbreAchat = dacNbreAchat;
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
@@ -475,6 +481,9 @@ public class VDaclisteId implements java.io.Serializable {
 		this.aaoNbrOffRej = aaoNbrOffRej;
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
 		this.adaNum = adaNum;
+		this.dacNbrCopieOff = dacNbrCopieOff;
+		this.cautValMin = cautValMin;
+		this.cautValMax = cautValMax;
 	}
 
 	@Column(name = "DAC_CODE", nullable = false, length = 20)
@@ -682,6 +691,15 @@ public class VDaclisteId implements java.io.Serializable {
 
 	public void setDacTypePlan(String dacTypePlan) {
 		this.dacTypePlan = dacTypePlan;
+	}
+
+	@Column(name = "DAC_NBRE_ACHAT", precision = 11, scale = 0)
+	public Long getDacNbreAchat() {
+		return this.dacNbreAchat;
+	}
+
+	public void setDacNbreAchat(Long dacNbreAchat) {
+		this.dacNbreAchat = dacNbreAchat;
 	}
 
 	@Column(name = "DAC_RECHERCHE", length = 4000)
@@ -2295,6 +2313,33 @@ public class VDaclisteId implements java.io.Serializable {
 		this.adaNum = adaNum;
 	}
 
+	@Column(name = "DAC_NBR_COPIE_OFF", precision = 22, scale = 0)
+	public BigDecimal getDacNbrCopieOff() {
+		return this.dacNbrCopieOff;
+	}
+
+	public void setDacNbrCopieOff(BigDecimal dacNbrCopieOff) {
+		this.dacNbrCopieOff = dacNbrCopieOff;
+	}
+
+	@Column(name = "CAUT_VAL_MIN", precision = 22, scale = 0)
+	public BigDecimal getCautValMin() {
+		return this.cautValMin;
+	}
+
+	public void setCautValMin(BigDecimal cautValMin) {
+		this.cautValMin = cautValMin;
+	}
+
+	@Column(name = "CAUT_VAL_MAX", precision = 22, scale = 0)
+	public BigDecimal getCautValMax() {
+		return this.cautValMax;
+	}
+
+	public void setCautValMax(BigDecimal cautValMax) {
+		this.cautValMax = cautValMax;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -2362,6 +2407,9 @@ public class VDaclisteId implements java.io.Serializable {
 				&& ((this.getDacTypePlan() == castOther.getDacTypePlan())
 						|| (this.getDacTypePlan() != null && castOther.getDacTypePlan() != null
 								&& this.getDacTypePlan().equals(castOther.getDacTypePlan())))
+				&& ((this.getDacNbreAchat() == castOther.getDacNbreAchat())
+						|| (this.getDacNbreAchat() != null && castOther.getDacNbreAchat() != null
+								&& this.getDacNbreAchat().equals(castOther.getDacNbreAchat())))
 				&& ((this.getDacRecherche() == castOther.getDacRecherche())
 						|| (this.getDacRecherche() != null && castOther.getDacRecherche() != null
 								&& this.getDacRecherche().equals(castOther.getDacRecherche())))
@@ -2817,7 +2865,15 @@ public class VDaclisteId implements java.io.Serializable {
 						|| (this.getAaoNbrOffHorDelai() != null && castOther.getAaoNbrOffHorDelai() != null
 								&& this.getAaoNbrOffHorDelai().equals(castOther.getAaoNbrOffHorDelai())))
 				&& ((this.getAdaNum() == castOther.getAdaNum()) || (this.getAdaNum() != null
-						&& castOther.getAdaNum() != null && this.getAdaNum().equals(castOther.getAdaNum())));
+						&& castOther.getAdaNum() != null && this.getAdaNum().equals(castOther.getAdaNum())))
+				&& ((this.getDacNbrCopieOff() == castOther.getDacNbrCopieOff())
+						|| (this.getDacNbrCopieOff() != null && castOther.getDacNbrCopieOff() != null
+								&& this.getDacNbrCopieOff().equals(castOther.getDacNbrCopieOff())))
+				&& ((this.getCautValMin() == castOther.getCautValMin()) || (this.getCautValMin() != null
+						&& castOther.getCautValMin() != null && this.getCautValMin().equals(castOther.getCautValMin())))
+				&& ((this.getCautValMax() == castOther.getCautValMax())
+						|| (this.getCautValMax() != null && castOther.getCautValMax() != null
+								&& this.getCautValMax().equals(castOther.getCautValMax())));
 	}
 
 	public int hashCode() {
@@ -2846,6 +2902,7 @@ public class VDaclisteId implements java.io.Serializable {
 		result = 37 * result + (getDacBailleur() == null ? 0 : this.getDacBailleur().hashCode());
 		result = 37 * result + (getDacCout() == null ? 0 : this.getDacCout().hashCode());
 		result = 37 * result + (getDacTypePlan() == null ? 0 : this.getDacTypePlan().hashCode());
+		result = 37 * result + (getDacNbreAchat() == null ? 0 : this.getDacNbreAchat().hashCode());
 		result = 37 * result + (getDacRecherche() == null ? 0 : this.getDacRecherche().hashCode());
 		result = 37 * result + (getDacFonCodeDmp() == null ? 0 : this.getDacFonCodeDmp().hashCode());
 		result = 37 * result + (getDacFonCodePf() == null ? 0 : this.getDacFonCodePf().hashCode());
@@ -3027,6 +3084,9 @@ public class VDaclisteId implements java.io.Serializable {
 		result = 37 * result + (getAaoNbrOffRej() == null ? 0 : this.getAaoNbrOffRej().hashCode());
 		result = 37 * result + (getAaoNbrOffHorDelai() == null ? 0 : this.getAaoNbrOffHorDelai().hashCode());
 		result = 37 * result + (getAdaNum() == null ? 0 : this.getAdaNum().hashCode());
+		result = 37 * result + (getDacNbrCopieOff() == null ? 0 : this.getDacNbrCopieOff().hashCode());
+		result = 37 * result + (getCautValMin() == null ? 0 : this.getCautValMin().hashCode());
+		result = 37 * result + (getCautValMax() == null ? 0 : this.getCautValMax().hashCode());
 		return result;
 	}
 

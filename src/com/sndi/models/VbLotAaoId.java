@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,18 +28,22 @@ public class VbLotAaoId implements java.io.Serializable {
 	private BigDecimal laaNum;
 	private BigDecimal laaCoutLot;
 	private String laaDacCode;
+	private String laaAjoutPanier;
+	private Long laaDelaiExe;
 
 	public VbLotAaoId() {
 	}
 
-	public VbLotAaoId(BigDecimal laaId) {
+	public VbLotAaoId(BigDecimal laaId, String laaObjet, BigDecimal laaNum) {
 		this.laaId = laaId;
+		this.laaObjet = laaObjet;
+		this.laaNum = laaNum;
 	}
 
 	public VbLotAaoId(BigDecimal laaId, String laaAaoCode, String laaObjet, String laaObservation, BigDecimal laaMtCaut,
 			BigDecimal laaMtEst, Date laaDteSaisi, String laaStaCode, String laaFonCodSaisi, String laaFonCodCpmp,
 			String laaOpeMatricule, String laaLieuExe, String laaLbgImputation, BigDecimal laaNum,
-			BigDecimal laaCoutLot, String laaDacCode) {
+			BigDecimal laaCoutLot, String laaDacCode, String laaAjoutPanier, Long laaDelaiExe) {
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
@@ -56,6 +60,8 @@ public class VbLotAaoId implements java.io.Serializable {
 		this.laaNum = laaNum;
 		this.laaCoutLot = laaCoutLot;
 		this.laaDacCode = laaDacCode;
+		this.laaAjoutPanier = laaAjoutPanier;
+		this.laaDelaiExe = laaDelaiExe;
 	}
 
 	@Column(name = "LAA_ID", nullable = false, precision = 22, scale = 0)
@@ -76,7 +82,7 @@ public class VbLotAaoId implements java.io.Serializable {
 		this.laaAaoCode = laaAaoCode;
 	}
 
-	@Column(name = "LAA_OBJET", length = 1000)
+	@Column(name = "LAA_OBJET", nullable = false, length = 1000)
 	public String getLaaObjet() {
 		return this.laaObjet;
 	}
@@ -175,7 +181,7 @@ public class VbLotAaoId implements java.io.Serializable {
 		this.laaLbgImputation = laaLbgImputation;
 	}
 
-	@Column(name = "LAA_NUM", precision = 22, scale = 0)
+	@Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getLaaNum() {
 		return this.laaNum;
 	}
@@ -200,6 +206,24 @@ public class VbLotAaoId implements java.io.Serializable {
 
 	public void setLaaDacCode(String laaDacCode) {
 		this.laaDacCode = laaDacCode;
+	}
+
+	@Column(name = "LAA_AJOUT_PANIER", length = 1)
+	public String getLaaAjoutPanier() {
+		return this.laaAjoutPanier;
+	}
+
+	public void setLaaAjoutPanier(String laaAjoutPanier) {
+		this.laaAjoutPanier = laaAjoutPanier;
+	}
+
+	@Column(name = "LAA_DELAI_EXE", precision = 10, scale = 0)
+	public Long getLaaDelaiExe() {
+		return this.laaDelaiExe;
+	}
+
+	public void setLaaDelaiExe(Long laaDelaiExe) {
+		this.laaDelaiExe = laaDelaiExe;
 	}
 
 	public boolean equals(Object other) {
@@ -247,9 +271,14 @@ public class VbLotAaoId implements java.io.Serializable {
 						&& castOther.getLaaNum() != null && this.getLaaNum().equals(castOther.getLaaNum())))
 				&& ((this.getLaaCoutLot() == castOther.getLaaCoutLot()) || (this.getLaaCoutLot() != null
 						&& castOther.getLaaCoutLot() != null && this.getLaaCoutLot().equals(castOther.getLaaCoutLot())))
-				&& ((this.getLaaDacCode() == castOther.getLaaDacCode())
-						|| (this.getLaaDacCode() != null && castOther.getLaaDacCode() != null
-								&& this.getLaaDacCode().equals(castOther.getLaaDacCode())));
+				&& ((this.getLaaDacCode() == castOther.getLaaDacCode()) || (this.getLaaDacCode() != null
+						&& castOther.getLaaDacCode() != null && this.getLaaDacCode().equals(castOther.getLaaDacCode())))
+				&& ((this.getLaaAjoutPanier() == castOther.getLaaAjoutPanier())
+						|| (this.getLaaAjoutPanier() != null && castOther.getLaaAjoutPanier() != null
+								&& this.getLaaAjoutPanier().equals(castOther.getLaaAjoutPanier())))
+				&& ((this.getLaaDelaiExe() == castOther.getLaaDelaiExe())
+						|| (this.getLaaDelaiExe() != null && castOther.getLaaDelaiExe() != null
+								&& this.getLaaDelaiExe().equals(castOther.getLaaDelaiExe())));
 	}
 
 	public int hashCode() {
@@ -271,6 +300,8 @@ public class VbLotAaoId implements java.io.Serializable {
 		result = 37 * result + (getLaaNum() == null ? 0 : this.getLaaNum().hashCode());
 		result = 37 * result + (getLaaCoutLot() == null ? 0 : this.getLaaCoutLot().hashCode());
 		result = 37 * result + (getLaaDacCode() == null ? 0 : this.getLaaDacCode().hashCode());
+		result = 37 * result + (getLaaAjoutPanier() == null ? 0 : this.getLaaAjoutPanier().hashCode());
+		result = 37 * result + (getLaaDelaiExe() == null ? 0 : this.getLaaDelaiExe().hashCode());
 		return result;
 	}
 

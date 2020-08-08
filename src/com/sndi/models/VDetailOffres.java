@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,16 +26,18 @@ public class VDetailOffres implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({
+	@AttributeOverrides({ @AttributeOverride(name = "RId", column = @Column(name = "R_ID", precision = 22, scale = 0)),
 			@AttributeOverride(name = "dofNum", column = @Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)),
-			@AttributeOverride(name = "laaNum", column = @Column(name = "LAA_NUM", precision = 22, scale = 0)),
-			@AttributeOverride(name = "laaObjet", column = @Column(name = "LAA_OBJET", length = 1000)),
+			@AttributeOverride(name = "laaNum", column = @Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)),
+			@AttributeOverride(name = "laaObjet", column = @Column(name = "LAA_OBJET", length = 1047)),
 			@AttributeOverride(name = "dofLaaId", column = @Column(name = "DOF_LAA_ID", nullable = false, precision = 22, scale = 0)),
 			@AttributeOverride(name = "aaoCode", column = @Column(name = "AAO_CODE", nullable = false, length = 20)),
-			@AttributeOverride(name = "offSouSigleSte", column = @Column(name = "OFF_SOU_SIGLE_STE", length = 500)),
+			@AttributeOverride(name = "offSouSigleSte", column = @Column(name = "OFF_SOU_SIGLE_STE", length = 523)),
 			@AttributeOverride(name = "dofMtOfr", column = @Column(name = "DOF_MT_OFR", precision = 20, scale = 0)),
 			@AttributeOverride(name = "dofTyp", column = @Column(name = "DOF_TYP", length = 1)),
-			@AttributeOverride(name = "dofStatut", column = @Column(name = "DOF_STATUT", length = 1)) })
+			@AttributeOverride(name = "dofStatut", column = @Column(name = "DOF_STATUT", length = 1)),
+			@AttributeOverride(name = "dofObsVariante", column = @Column(name = "DOF_OBS_VARIANTE", length = 500)),
+			@AttributeOverride(name = "dofOpeMatricule", column = @Column(name = "DOF_OPE_MATRICULE", length = 25)) })
 	public VDetailOffresId getId() {
 		return this.id;
 	}

@@ -1,7 +1,7 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
-import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -11,99 +11,104 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VbDestinationsId implements java.io.Serializable {
 
-	private Serializable desCode;
-	private Serializable desAdr;
-	private Serializable desLib;
-	private Serializable desUtilSaisi;
-	private Serializable desUtilModif;
-	private Serializable desDdteModif;
-	private Serializable desDteSaisi;
-	private Serializable desRegCode;
+	private String desCode;
+	private String desAdr;
+	private String desLib;
+	private String desOpeMatricule;
+	private String desOpeModif;
+	private Date desDteModif;
+	private Date desDteSaisi;
+	private String desRegCode;
 
 	public VbDestinationsId() {
 	}
 
-	public VbDestinationsId(Serializable desCode, Serializable desAdr, Serializable desLib, Serializable desUtilSaisi,
-			Serializable desUtilModif, Serializable desDdteModif, Serializable desDteSaisi, Serializable desRegCode) {
+	public VbDestinationsId(String desCode, String desLib) {
+		this.desCode = desCode;
+		this.desLib = desLib;
+	}
+
+	public VbDestinationsId(String desCode, String desAdr, String desLib, String desOpeMatricule, String desOpeModif,
+			Date desDteModif, Date desDteSaisi, String desRegCode) {
 		this.desCode = desCode;
 		this.desAdr = desAdr;
 		this.desLib = desLib;
-		this.desUtilSaisi = desUtilSaisi;
-		this.desUtilModif = desUtilModif;
-		this.desDdteModif = desDdteModif;
+		this.desOpeMatricule = desOpeMatricule;
+		this.desOpeModif = desOpeModif;
+		this.desDteModif = desDteModif;
 		this.desDteSaisi = desDteSaisi;
 		this.desRegCode = desRegCode;
 	}
 
-	@Column(name = "DES_CODE")
-	public Serializable getDesCode() {
+	@Column(name = "DES_CODE", nullable = false, length = 20)
+	public String getDesCode() {
 		return this.desCode;
 	}
 
-	public void setDesCode(Serializable desCode) {
+	public void setDesCode(String desCode) {
 		this.desCode = desCode;
 	}
 
-	@Column(name = "DES_ADR")
-	public Serializable getDesAdr() {
+	@Column(name = "DES_ADR", length = 200)
+	public String getDesAdr() {
 		return this.desAdr;
 	}
 
-	public void setDesAdr(Serializable desAdr) {
+	public void setDesAdr(String desAdr) {
 		this.desAdr = desAdr;
 	}
 
-	@Column(name = "DES_LIB")
-	public Serializable getDesLib() {
+	@Column(name = "DES_LIB", nullable = false, length = 500)
+	public String getDesLib() {
 		return this.desLib;
 	}
 
-	public void setDesLib(Serializable desLib) {
+	public void setDesLib(String desLib) {
 		this.desLib = desLib;
 	}
 
-	@Column(name = "DES_UTIL_SAISI")
-	public Serializable getDesUtilSaisi() {
-		return this.desUtilSaisi;
+	@Column(name = "DES_OPE_MATRICULE", length = 25)
+	public String getDesOpeMatricule() {
+		return this.desOpeMatricule;
 	}
 
-	public void setDesUtilSaisi(Serializable desUtilSaisi) {
-		this.desUtilSaisi = desUtilSaisi;
+	public void setDesOpeMatricule(String desOpeMatricule) {
+		this.desOpeMatricule = desOpeMatricule;
 	}
 
-	@Column(name = "DES_UTIL_MODIF")
-	public Serializable getDesUtilModif() {
-		return this.desUtilModif;
+	@Column(name = "DES_OPE_MODIF", length = 25)
+	public String getDesOpeModif() {
+		return this.desOpeModif;
 	}
 
-	public void setDesUtilModif(Serializable desUtilModif) {
-		this.desUtilModif = desUtilModif;
+	public void setDesOpeModif(String desOpeModif) {
+		this.desOpeModif = desOpeModif;
 	}
 
-	@Column(name = "DES_DDTE_MODIF")
-	public Serializable getDesDdteModif() {
-		return this.desDdteModif;
+	@Column(name = "DES_DTE_MODIF", length = 7)
+	public Date getDesDteModif() {
+		return this.desDteModif;
 	}
 
-	public void setDesDdteModif(Serializable desDdteModif) {
-		this.desDdteModif = desDdteModif;
+	public void setDesDteModif(Date desDteModif) {
+		this.desDteModif = desDteModif;
 	}
 
-	@Column(name = "DES_DTE_SAISI")
-	public Serializable getDesDteSaisi() {
+	@Column(name = "DES_DTE_SAISI", length = 7)
+	public Date getDesDteSaisi() {
 		return this.desDteSaisi;
 	}
 
-	public void setDesDteSaisi(Serializable desDteSaisi) {
+	public void setDesDteSaisi(Date desDteSaisi) {
 		this.desDteSaisi = desDteSaisi;
 	}
 
-	@Column(name = "DES_REG_CODE")
-	public Serializable getDesRegCode() {
+	@Column(name = "DES_REG_CODE", length = 2)
+	public String getDesRegCode() {
 		return this.desRegCode;
 	}
 
-	public void setDesRegCode(Serializable desRegCode) {
+	public void setDesRegCode(String desRegCode) {
 		this.desRegCode = desRegCode;
 	}
 
@@ -122,15 +127,15 @@ public class VbDestinationsId implements java.io.Serializable {
 						&& castOther.getDesAdr() != null && this.getDesAdr().equals(castOther.getDesAdr())))
 				&& ((this.getDesLib() == castOther.getDesLib()) || (this.getDesLib() != null
 						&& castOther.getDesLib() != null && this.getDesLib().equals(castOther.getDesLib())))
-				&& ((this.getDesUtilSaisi() == castOther.getDesUtilSaisi())
-						|| (this.getDesUtilSaisi() != null && castOther.getDesUtilSaisi() != null
-								&& this.getDesUtilSaisi().equals(castOther.getDesUtilSaisi())))
-				&& ((this.getDesUtilModif() == castOther.getDesUtilModif())
-						|| (this.getDesUtilModif() != null && castOther.getDesUtilModif() != null
-								&& this.getDesUtilModif().equals(castOther.getDesUtilModif())))
-				&& ((this.getDesDdteModif() == castOther.getDesDdteModif())
-						|| (this.getDesDdteModif() != null && castOther.getDesDdteModif() != null
-								&& this.getDesDdteModif().equals(castOther.getDesDdteModif())))
+				&& ((this.getDesOpeMatricule() == castOther.getDesOpeMatricule())
+						|| (this.getDesOpeMatricule() != null && castOther.getDesOpeMatricule() != null
+								&& this.getDesOpeMatricule().equals(castOther.getDesOpeMatricule())))
+				&& ((this.getDesOpeModif() == castOther.getDesOpeModif())
+						|| (this.getDesOpeModif() != null && castOther.getDesOpeModif() != null
+								&& this.getDesOpeModif().equals(castOther.getDesOpeModif())))
+				&& ((this.getDesDteModif() == castOther.getDesDteModif())
+						|| (this.getDesDteModif() != null && castOther.getDesDteModif() != null
+								&& this.getDesDteModif().equals(castOther.getDesDteModif())))
 				&& ((this.getDesDteSaisi() == castOther.getDesDteSaisi())
 						|| (this.getDesDteSaisi() != null && castOther.getDesDteSaisi() != null
 								&& this.getDesDteSaisi().equals(castOther.getDesDteSaisi())))
@@ -145,9 +150,9 @@ public class VbDestinationsId implements java.io.Serializable {
 		result = 37 * result + (getDesCode() == null ? 0 : this.getDesCode().hashCode());
 		result = 37 * result + (getDesAdr() == null ? 0 : this.getDesAdr().hashCode());
 		result = 37 * result + (getDesLib() == null ? 0 : this.getDesLib().hashCode());
-		result = 37 * result + (getDesUtilSaisi() == null ? 0 : this.getDesUtilSaisi().hashCode());
-		result = 37 * result + (getDesUtilModif() == null ? 0 : this.getDesUtilModif().hashCode());
-		result = 37 * result + (getDesDdteModif() == null ? 0 : this.getDesDdteModif().hashCode());
+		result = 37 * result + (getDesOpeMatricule() == null ? 0 : this.getDesOpeMatricule().hashCode());
+		result = 37 * result + (getDesOpeModif() == null ? 0 : this.getDesOpeModif().hashCode());
+		result = 37 * result + (getDesDteModif() == null ? 0 : this.getDesDteModif().hashCode());
 		result = 37 * result + (getDesDteSaisi() == null ? 0 : this.getDesDteSaisi().hashCode());
 		result = 37 * result + (getDesRegCode() == null ? 0 : this.getDesRegCode().hashCode());
 		return result;

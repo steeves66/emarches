@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -80,7 +80,9 @@ public class VLigneImputation implements java.io.Serializable {
 			@AttributeOverride(name = "lbgSigfip", column = @Column(name = "LBG_SIGFIP", length = 1)),
 			@AttributeOverride(name = "lbgFonCodePr", column = @Column(name = "LBG_FON_CODE_PR", length = 30)),
 			@AttributeOverride(name = "lbgFonCodeVerou", column = @Column(name = "LBG_FON_CODE_VEROU", length = 30)),
-			@AttributeOverride(name = "natLibelle", column = @Column(name = "NAT_LIBELLE", length = 200)) })
+			@AttributeOverride(name = "natLibelle", column = @Column(name = "NAT_LIBELLE", length = 200)),
+			@AttributeOverride(name = "lbgMopCode", column = @Column(name = "LBG_MOP_CODE", length = 3)),
+			@AttributeOverride(name = "critere", column = @Column(name = "CRITERE", length = 250)) })
 	public VLigneImputationId getId() {
 		return this.id;
 	}

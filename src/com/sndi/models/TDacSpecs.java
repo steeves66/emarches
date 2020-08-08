@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,15 +24,15 @@ import javax.persistence.TemporalType;
 public class TDacSpecs implements java.io.Serializable {
 
 	private String dacCode;
-	private TGestions TGestions;
 	private TFonction TFonctionByDacFonCodeCpmp;
 	private TFonction TFonctionByDacFonCodAc;
+	private TGestions TGestions;
+	private TModeleDacType TModeleDacType;
+	private TModePassation TModePassation;
 	private TStatut TStatut;
 	private TStructure TStructure;
 	private TTypeDacSpecs TTypeDacSpecs;
 	private TTypeMarche TTypeMarche;
-	private TModeleDacType TModeleDacType;
-	private TModePassation TModePassation;
 	private String dacObjet;
 	private Date dacDteSaisi;
 	private BigDecimal dacNbrOuv;
@@ -51,6 +51,10 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacFonCodeDmp;
 	private String dacFonCodePf;
 	private Date dacDteModif;
+	private Boolean dacFactoriseCrit;
+	private Long dacNbreAchat;
+	private String dacAutComSpec;
+	private BigDecimal dacNbrCopieOff;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
 	private Set<TDetCritAnalyseDac> TDetCritAnalyseDacs = new HashSet<TDetCritAnalyseDac>(0);
@@ -81,13 +85,14 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacCode = dacCode;
 	}
 
-	public TDacSpecs(String dacCode, TGestions TGestions, TFonction TFonctionByDacFonCodeCpmp,
-			TFonction TFonctionByDacFonCodAc, TStatut TStatut, TStructure TStructure, TTypeDacSpecs TTypeDacSpecs,
-			TTypeMarche TTypeMarche, TModeleDacType TModeleDacType, TModePassation TModePassation, String dacObjet,
+	public TDacSpecs(String dacCode, TFonction TFonctionByDacFonCodeCpmp, TFonction TFonctionByDacFonCodAc,
+			TGestions TGestions, TModeleDacType TModeleDacType, TModePassation TModePassation, TStatut TStatut,
+			TStructure TStructure, TTypeDacSpecs TTypeDacSpecs, TTypeMarche TTypeMarche, String dacObjet,
 			Date dacDteSaisi, BigDecimal dacNbrOuv, Date dacDteValCpmp, Date dacDteValDmp, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
-			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, Set<TAvisAppelOffre> TAvisAppelOffres,
+			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, Boolean dacFactoriseCrit, Long dacNbreAchat,
+			String dacAutComSpec, BigDecimal dacNbrCopieOff, Set<TAvisAppelOffre> TAvisAppelOffres,
 			Set<TCommissionSpecifique> TCommissionSpecifiques, Set<TDetCritAnalyseDac> TDetCritAnalyseDacs,
 			Set<TCritereAnalyseSpec> TCritereAnalyseSpecs, Set<TDetailVente> TDetailVentes, Set<TOffres> TOffreses,
 			Set<TAffichageDao> TAffichageDaos, Set<TPiecesOffres> TPiecesOffreses, Set<TCorrectionDac> TCorrectionDacs,
@@ -97,15 +102,15 @@ public class TDacSpecs implements java.io.Serializable {
 			Set<TDetailDemandes> TDetailDemandeses, Set<TLotAao> TLotAaos, Set<TPiecesDacs> TPiecesDacses,
 			Set<TDetCommissionSeance> TDetCommissionSeances, Set<TRetrait> TRetraits) {
 		this.dacCode = dacCode;
-		this.TGestions = TGestions;
 		this.TFonctionByDacFonCodeCpmp = TFonctionByDacFonCodeCpmp;
 		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
+		this.TGestions = TGestions;
+		this.TModeleDacType = TModeleDacType;
+		this.TModePassation = TModePassation;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 		this.TTypeDacSpecs = TTypeDacSpecs;
 		this.TTypeMarche = TTypeMarche;
-		this.TModeleDacType = TModeleDacType;
-		this.TModePassation = TModePassation;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
 		this.dacNbrOuv = dacNbrOuv;
@@ -124,6 +129,10 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
 		this.dacDteModif = dacDteModif;
+		this.dacFactoriseCrit = dacFactoriseCrit;
+		this.dacNbreAchat = dacNbreAchat;
+		this.dacAutComSpec = dacAutComSpec;
+		this.dacNbrCopieOff = dacNbrCopieOff;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
 		this.TDetCritAnalyseDacs = TDetCritAnalyseDacs;
@@ -160,16 +169,6 @@ public class TDacSpecs implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_GES_CODE")
-	public TGestions getTGestions() {
-		return this.TGestions;
-	}
-
-	public void setTGestions(TGestions TGestions) {
-		this.TGestions = TGestions;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DAC_FON_CODE_CPMP")
 	public TFonction getTFonctionByDacFonCodeCpmp() {
 		return this.TFonctionByDacFonCodeCpmp;
@@ -187,6 +186,36 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTFonctionByDacFonCodAc(TFonction TFonctionByDacFonCodAc) {
 		this.TFonctionByDacFonCodAc = TFonctionByDacFonCodAc;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_GES_CODE")
+	public TGestions getTGestions() {
+		return this.TGestions;
+	}
+
+	public void setTGestions(TGestions TGestions) {
+		this.TGestions = TGestions;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_MOD_TYPE")
+	public TModeleDacType getTModeleDacType() {
+		return this.TModeleDacType;
+	}
+
+	public void setTModeleDacType(TModeleDacType TModeleDacType) {
+		this.TModeleDacType = TModeleDacType;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DAC_MOP_CODE")
+	public TModePassation getTModePassation() {
+		return this.TModePassation;
+	}
+
+	public void setTModePassation(TModePassation TModePassation) {
+		this.TModePassation = TModePassation;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -227,26 +256,6 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setTTypeMarche(TTypeMarche TTypeMarche) {
 		this.TTypeMarche = TTypeMarche;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_MOD_TYPE")
-	public TModeleDacType getTModeleDacType() {
-		return this.TModeleDacType;
-	}
-
-	public void setTModeleDacType(TModeleDacType TModeleDacType) {
-		this.TModeleDacType = TModeleDacType;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAC_MOP_CODE")
-	public TModePassation getTModePassation() {
-		return this.TModePassation;
-	}
-
-	public void setTModePassation(TModePassation TModePassation) {
-		this.TModePassation = TModePassation;
 	}
 
 	@Column(name = "DAC_OBJET", length = 1000)
@@ -416,6 +425,42 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacDteModif(Date dacDteModif) {
 		this.dacDteModif = dacDteModif;
+	}
+
+	@Column(name = "DAC_FACTORISE_CRIT", precision = 1, scale = 0)
+	public Boolean getDacFactoriseCrit() {
+		return this.dacFactoriseCrit;
+	}
+
+	public void setDacFactoriseCrit(Boolean dacFactoriseCrit) {
+		this.dacFactoriseCrit = dacFactoriseCrit;
+	}
+
+	@Column(name = "DAC_NBRE_ACHAT", precision = 11, scale = 0)
+	public Long getDacNbreAchat() {
+		return this.dacNbreAchat;
+	}
+
+	public void setDacNbreAchat(Long dacNbreAchat) {
+		this.dacNbreAchat = dacNbreAchat;
+	}
+
+	@Column(name = "DAC_AUT_COM_SPEC", length = 200)
+	public String getDacAutComSpec() {
+		return this.dacAutComSpec;
+	}
+
+	public void setDacAutComSpec(String dacAutComSpec) {
+		this.dacAutComSpec = dacAutComSpec;
+	}
+
+	@Column(name = "DAC_NBR_COPIE_OFF", precision = 22, scale = 0)
+	public BigDecimal getDacNbrCopieOff() {
+		return this.dacNbrCopieOff;
+	}
+
+	public void setDacNbrCopieOff(BigDecimal dacNbrCopieOff) {
+		this.dacNbrCopieOff = dacNbrCopieOff;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDacSpecs")

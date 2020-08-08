@@ -1,6 +1,7 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -23,6 +24,14 @@ public class VbAgpmId implements java.io.Serializable {
 	private String agpActif;
 	private String agpStatutRetour;
 	private String agpActeurSaisie;
+	private Date agpDateValAc;
+	private Date agpDateValCpmp;
+	private Date agpDateValDmp;
+	private String agpCode;
+	private Date agpDteModif;
+	private String agpFonCodPf;
+	private String agpFonCodDmp;
+	private String agpRecherche;
 
 	public VbAgpmId() {
 	}
@@ -39,7 +48,8 @@ public class VbAgpmId implements java.io.Serializable {
 
 	public VbAgpmId(long agpId, String agpStrCode, String agpFonCod, short agpGesCode, String agpStaCode, long agpProId,
 			Long agpDecId, String agpCommentaire, String agpTypeDao, String agpModePassation, String agpActif,
-			String agpStatutRetour, String agpActeurSaisie) {
+			String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp, Date agpDateValDmp,
+			String agpCode, Date agpDteModif, String agpFonCodPf, String agpFonCodDmp, String agpRecherche) {
 		this.agpId = agpId;
 		this.agpStrCode = agpStrCode;
 		this.agpFonCod = agpFonCod;
@@ -53,6 +63,14 @@ public class VbAgpmId implements java.io.Serializable {
 		this.agpActif = agpActif;
 		this.agpStatutRetour = agpStatutRetour;
 		this.agpActeurSaisie = agpActeurSaisie;
+		this.agpDateValAc = agpDateValAc;
+		this.agpDateValCpmp = agpDateValCpmp;
+		this.agpDateValDmp = agpDateValDmp;
+		this.agpCode = agpCode;
+		this.agpDteModif = agpDteModif;
+		this.agpFonCodPf = agpFonCodPf;
+		this.agpFonCodDmp = agpFonCodDmp;
+		this.agpRecherche = agpRecherche;
 	}
 
 	@Column(name = "AGP_ID", nullable = false, precision = 10, scale = 0)
@@ -172,6 +190,78 @@ public class VbAgpmId implements java.io.Serializable {
 		this.agpActeurSaisie = agpActeurSaisie;
 	}
 
+	@Column(name = "AGP_DATE_VAL_AC", length = 7)
+	public Date getAgpDateValAc() {
+		return this.agpDateValAc;
+	}
+
+	public void setAgpDateValAc(Date agpDateValAc) {
+		this.agpDateValAc = agpDateValAc;
+	}
+
+	@Column(name = "AGP_DATE_VAL_CPMP", length = 7)
+	public Date getAgpDateValCpmp() {
+		return this.agpDateValCpmp;
+	}
+
+	public void setAgpDateValCpmp(Date agpDateValCpmp) {
+		this.agpDateValCpmp = agpDateValCpmp;
+	}
+
+	@Column(name = "AGP_DATE_VAL_DMP", length = 7)
+	public Date getAgpDateValDmp() {
+		return this.agpDateValDmp;
+	}
+
+	public void setAgpDateValDmp(Date agpDateValDmp) {
+		this.agpDateValDmp = agpDateValDmp;
+	}
+
+	@Column(name = "AGP_CODE", length = 50)
+	public String getAgpCode() {
+		return this.agpCode;
+	}
+
+	public void setAgpCode(String agpCode) {
+		this.agpCode = agpCode;
+	}
+
+	@Column(name = "AGP_DTE_MODIF", length = 7)
+	public Date getAgpDteModif() {
+		return this.agpDteModif;
+	}
+
+	public void setAgpDteModif(Date agpDteModif) {
+		this.agpDteModif = agpDteModif;
+	}
+
+	@Column(name = "AGP_FON_COD_PF", length = 20)
+	public String getAgpFonCodPf() {
+		return this.agpFonCodPf;
+	}
+
+	public void setAgpFonCodPf(String agpFonCodPf) {
+		this.agpFonCodPf = agpFonCodPf;
+	}
+
+	@Column(name = "AGP_FON_COD_DMP", length = 20)
+	public String getAgpFonCodDmp() {
+		return this.agpFonCodDmp;
+	}
+
+	public void setAgpFonCodDmp(String agpFonCodDmp) {
+		this.agpFonCodDmp = agpFonCodDmp;
+	}
+
+	@Column(name = "AGP_RECHERCHE", length = 4000)
+	public String getAgpRecherche() {
+		return this.agpRecherche;
+	}
+
+	public void setAgpRecherche(String agpRecherche) {
+		this.agpRecherche = agpRecherche;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -207,7 +297,30 @@ public class VbAgpmId implements java.io.Serializable {
 								&& this.getAgpStatutRetour().equals(castOther.getAgpStatutRetour())))
 				&& ((this.getAgpActeurSaisie() == castOther.getAgpActeurSaisie())
 						|| (this.getAgpActeurSaisie() != null && castOther.getAgpActeurSaisie() != null
-								&& this.getAgpActeurSaisie().equals(castOther.getAgpActeurSaisie())));
+								&& this.getAgpActeurSaisie().equals(castOther.getAgpActeurSaisie())))
+				&& ((this.getAgpDateValAc() == castOther.getAgpDateValAc())
+						|| (this.getAgpDateValAc() != null && castOther.getAgpDateValAc() != null
+								&& this.getAgpDateValAc().equals(castOther.getAgpDateValAc())))
+				&& ((this.getAgpDateValCpmp() == castOther.getAgpDateValCpmp())
+						|| (this.getAgpDateValCpmp() != null && castOther.getAgpDateValCpmp() != null
+								&& this.getAgpDateValCpmp().equals(castOther.getAgpDateValCpmp())))
+				&& ((this.getAgpDateValDmp() == castOther.getAgpDateValDmp())
+						|| (this.getAgpDateValDmp() != null && castOther.getAgpDateValDmp() != null
+								&& this.getAgpDateValDmp().equals(castOther.getAgpDateValDmp())))
+				&& ((this.getAgpCode() == castOther.getAgpCode()) || (this.getAgpCode() != null
+						&& castOther.getAgpCode() != null && this.getAgpCode().equals(castOther.getAgpCode())))
+				&& ((this.getAgpDteModif() == castOther.getAgpDteModif())
+						|| (this.getAgpDteModif() != null && castOther.getAgpDteModif() != null
+								&& this.getAgpDteModif().equals(castOther.getAgpDteModif())))
+				&& ((this.getAgpFonCodPf() == castOther.getAgpFonCodPf())
+						|| (this.getAgpFonCodPf() != null && castOther.getAgpFonCodPf() != null
+								&& this.getAgpFonCodPf().equals(castOther.getAgpFonCodPf())))
+				&& ((this.getAgpFonCodDmp() == castOther.getAgpFonCodDmp())
+						|| (this.getAgpFonCodDmp() != null && castOther.getAgpFonCodDmp() != null
+								&& this.getAgpFonCodDmp().equals(castOther.getAgpFonCodDmp())))
+				&& ((this.getAgpRecherche() == castOther.getAgpRecherche())
+						|| (this.getAgpRecherche() != null && castOther.getAgpRecherche() != null
+								&& this.getAgpRecherche().equals(castOther.getAgpRecherche())));
 	}
 
 	public int hashCode() {
@@ -226,6 +339,14 @@ public class VbAgpmId implements java.io.Serializable {
 		result = 37 * result + (getAgpActif() == null ? 0 : this.getAgpActif().hashCode());
 		result = 37 * result + (getAgpStatutRetour() == null ? 0 : this.getAgpStatutRetour().hashCode());
 		result = 37 * result + (getAgpActeurSaisie() == null ? 0 : this.getAgpActeurSaisie().hashCode());
+		result = 37 * result + (getAgpDateValAc() == null ? 0 : this.getAgpDateValAc().hashCode());
+		result = 37 * result + (getAgpDateValCpmp() == null ? 0 : this.getAgpDateValCpmp().hashCode());
+		result = 37 * result + (getAgpDateValDmp() == null ? 0 : this.getAgpDateValDmp().hashCode());
+		result = 37 * result + (getAgpCode() == null ? 0 : this.getAgpCode().hashCode());
+		result = 37 * result + (getAgpDteModif() == null ? 0 : this.getAgpDteModif().hashCode());
+		result = 37 * result + (getAgpFonCodPf() == null ? 0 : this.getAgpFonCodPf().hashCode());
+		result = 37 * result + (getAgpFonCodDmp() == null ? 0 : this.getAgpFonCodDmp().hashCode());
+		result = 37 * result + (getAgpRecherche() == null ? 0 : this.getAgpRecherche().hashCode());
 		return result;
 	}
 

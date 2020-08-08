@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -32,6 +32,15 @@ public class VbAffichagePgpmId implements java.io.Serializable {
 	private long affId;
 	private String affGpgStrCode;
 	private Short affGpgGesCode;
+	private String affGpgRecherche;
+	private Date affGpgDateValAc;
+	private Date affGpgDateValCpmp;
+	private Date affGpgDateValDmp;
+	private String affGpgTypeFinance;
+	private String affGpgLibFin;
+	private Date affGpgDteModif;
+	private String affFonCodPf;
+	private String affFonCodDmp;
 
 	public VbAffichagePgpmId() {
 	}
@@ -50,7 +59,9 @@ public class VbAffichagePgpmId implements java.io.Serializable {
 			String affGpgStaCode, String affGpgTymCode, String affGpgMopCode, String affGpgCode, String affGpgObjet,
 			Integer affGpgNumeroOrdre, String affGpgPartiePmePmi, String affGpgCommentaire, String affGpgSourceFin,
 			Date affGpgDateDao, String affGpgActeurSaisie, String affGpgStatutRetour, Date affGpgDateSaisie,
-			String affGpgFonCod, long affId, String affGpgStrCode, Short affGpgGesCode) {
+			String affGpgFonCod, long affId, String affGpgStrCode, Short affGpgGesCode, String affGpgRecherche,
+			Date affGpgDateValAc, Date affGpgDateValCpmp, Date affGpgDateValDmp, String affGpgTypeFinance,
+			String affGpgLibFin, Date affGpgDteModif, String affFonCodPf, String affFonCodDmp) {
 		this.affGpgId = affGpgId;
 		this.affGpgPlgId = affGpgPlgId;
 		this.affGpgAgpId = affGpgAgpId;
@@ -72,6 +83,15 @@ public class VbAffichagePgpmId implements java.io.Serializable {
 		this.affId = affId;
 		this.affGpgStrCode = affGpgStrCode;
 		this.affGpgGesCode = affGpgGesCode;
+		this.affGpgRecherche = affGpgRecherche;
+		this.affGpgDateValAc = affGpgDateValAc;
+		this.affGpgDateValCpmp = affGpgDateValCpmp;
+		this.affGpgDateValDmp = affGpgDateValDmp;
+		this.affGpgTypeFinance = affGpgTypeFinance;
+		this.affGpgLibFin = affGpgLibFin;
+		this.affGpgDteModif = affGpgDteModif;
+		this.affFonCodPf = affFonCodPf;
+		this.affFonCodDmp = affFonCodDmp;
 	}
 
 	@Column(name = "AFF_GPG_ID", precision = 10, scale = 0)
@@ -263,6 +283,87 @@ public class VbAffichagePgpmId implements java.io.Serializable {
 		this.affGpgGesCode = affGpgGesCode;
 	}
 
+	@Column(name = "AFF_GPG_RECHERCHE", length = 4000)
+	public String getAffGpgRecherche() {
+		return this.affGpgRecherche;
+	}
+
+	public void setAffGpgRecherche(String affGpgRecherche) {
+		this.affGpgRecherche = affGpgRecherche;
+	}
+
+	@Column(name = "AFF_GPG_DATE_VAL_AC", length = 7)
+	public Date getAffGpgDateValAc() {
+		return this.affGpgDateValAc;
+	}
+
+	public void setAffGpgDateValAc(Date affGpgDateValAc) {
+		this.affGpgDateValAc = affGpgDateValAc;
+	}
+
+	@Column(name = "AFF_GPG_DATE_VAL_CPMP", length = 7)
+	public Date getAffGpgDateValCpmp() {
+		return this.affGpgDateValCpmp;
+	}
+
+	public void setAffGpgDateValCpmp(Date affGpgDateValCpmp) {
+		this.affGpgDateValCpmp = affGpgDateValCpmp;
+	}
+
+	@Column(name = "AFF_GPG_DATE_VAL_DMP", length = 7)
+	public Date getAffGpgDateValDmp() {
+		return this.affGpgDateValDmp;
+	}
+
+	public void setAffGpgDateValDmp(Date affGpgDateValDmp) {
+		this.affGpgDateValDmp = affGpgDateValDmp;
+	}
+
+	@Column(name = "AFF_GPG_TYPE_FINANCE", length = 20)
+	public String getAffGpgTypeFinance() {
+		return this.affGpgTypeFinance;
+	}
+
+	public void setAffGpgTypeFinance(String affGpgTypeFinance) {
+		this.affGpgTypeFinance = affGpgTypeFinance;
+	}
+
+	@Column(name = "AFF_GPG_LIB_FIN", length = 200)
+	public String getAffGpgLibFin() {
+		return this.affGpgLibFin;
+	}
+
+	public void setAffGpgLibFin(String affGpgLibFin) {
+		this.affGpgLibFin = affGpgLibFin;
+	}
+
+	@Column(name = "AFF_GPG_DTE_MODIF", length = 7)
+	public Date getAffGpgDteModif() {
+		return this.affGpgDteModif;
+	}
+
+	public void setAffGpgDteModif(Date affGpgDteModif) {
+		this.affGpgDteModif = affGpgDteModif;
+	}
+
+	@Column(name = "AFF_FON_COD_PF", length = 20)
+	public String getAffFonCodPf() {
+		return this.affFonCodPf;
+	}
+
+	public void setAffFonCodPf(String affFonCodPf) {
+		this.affFonCodPf = affFonCodPf;
+	}
+
+	@Column(name = "AFF_FON_COD_DMP", length = 20)
+	public String getAffFonCodDmp() {
+		return this.affFonCodDmp;
+	}
+
+	public void setAffFonCodDmp(String affFonCodDmp) {
+		this.affFonCodDmp = affFonCodDmp;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -328,7 +429,34 @@ public class VbAffichagePgpmId implements java.io.Serializable {
 								&& this.getAffGpgStrCode().equals(castOther.getAffGpgStrCode())))
 				&& ((this.getAffGpgGesCode() == castOther.getAffGpgGesCode())
 						|| (this.getAffGpgGesCode() != null && castOther.getAffGpgGesCode() != null
-								&& this.getAffGpgGesCode().equals(castOther.getAffGpgGesCode())));
+								&& this.getAffGpgGesCode().equals(castOther.getAffGpgGesCode())))
+				&& ((this.getAffGpgRecherche() == castOther.getAffGpgRecherche())
+						|| (this.getAffGpgRecherche() != null && castOther.getAffGpgRecherche() != null
+								&& this.getAffGpgRecherche().equals(castOther.getAffGpgRecherche())))
+				&& ((this.getAffGpgDateValAc() == castOther.getAffGpgDateValAc())
+						|| (this.getAffGpgDateValAc() != null && castOther.getAffGpgDateValAc() != null
+								&& this.getAffGpgDateValAc().equals(castOther.getAffGpgDateValAc())))
+				&& ((this.getAffGpgDateValCpmp() == castOther.getAffGpgDateValCpmp())
+						|| (this.getAffGpgDateValCpmp() != null && castOther.getAffGpgDateValCpmp() != null
+								&& this.getAffGpgDateValCpmp().equals(castOther.getAffGpgDateValCpmp())))
+				&& ((this.getAffGpgDateValDmp() == castOther.getAffGpgDateValDmp())
+						|| (this.getAffGpgDateValDmp() != null && castOther.getAffGpgDateValDmp() != null
+								&& this.getAffGpgDateValDmp().equals(castOther.getAffGpgDateValDmp())))
+				&& ((this.getAffGpgTypeFinance() == castOther.getAffGpgTypeFinance())
+						|| (this.getAffGpgTypeFinance() != null && castOther.getAffGpgTypeFinance() != null
+								&& this.getAffGpgTypeFinance().equals(castOther.getAffGpgTypeFinance())))
+				&& ((this.getAffGpgLibFin() == castOther.getAffGpgLibFin())
+						|| (this.getAffGpgLibFin() != null && castOther.getAffGpgLibFin() != null
+								&& this.getAffGpgLibFin().equals(castOther.getAffGpgLibFin())))
+				&& ((this.getAffGpgDteModif() == castOther.getAffGpgDteModif())
+						|| (this.getAffGpgDteModif() != null && castOther.getAffGpgDteModif() != null
+								&& this.getAffGpgDteModif().equals(castOther.getAffGpgDteModif())))
+				&& ((this.getAffFonCodPf() == castOther.getAffFonCodPf())
+						|| (this.getAffFonCodPf() != null && castOther.getAffFonCodPf() != null
+								&& this.getAffFonCodPf().equals(castOther.getAffFonCodPf())))
+				&& ((this.getAffFonCodDmp() == castOther.getAffFonCodDmp())
+						|| (this.getAffFonCodDmp() != null && castOther.getAffFonCodDmp() != null
+								&& this.getAffFonCodDmp().equals(castOther.getAffFonCodDmp())));
 	}
 
 	public int hashCode() {
@@ -355,6 +483,15 @@ public class VbAffichagePgpmId implements java.io.Serializable {
 		result = 37 * result + (int) this.getAffId();
 		result = 37 * result + (getAffGpgStrCode() == null ? 0 : this.getAffGpgStrCode().hashCode());
 		result = 37 * result + (getAffGpgGesCode() == null ? 0 : this.getAffGpgGesCode().hashCode());
+		result = 37 * result + (getAffGpgRecherche() == null ? 0 : this.getAffGpgRecherche().hashCode());
+		result = 37 * result + (getAffGpgDateValAc() == null ? 0 : this.getAffGpgDateValAc().hashCode());
+		result = 37 * result + (getAffGpgDateValCpmp() == null ? 0 : this.getAffGpgDateValCpmp().hashCode());
+		result = 37 * result + (getAffGpgDateValDmp() == null ? 0 : this.getAffGpgDateValDmp().hashCode());
+		result = 37 * result + (getAffGpgTypeFinance() == null ? 0 : this.getAffGpgTypeFinance().hashCode());
+		result = 37 * result + (getAffGpgLibFin() == null ? 0 : this.getAffGpgLibFin().hashCode());
+		result = 37 * result + (getAffGpgDteModif() == null ? 0 : this.getAffGpgDteModif().hashCode());
+		result = 37 * result + (getAffFonCodPf() == null ? 0 : this.getAffFonCodPf().hashCode());
+		result = 37 * result + (getAffFonCodDmp() == null ? 0 : this.getAffFonCodDmp().hashCode());
 		return result;
 	}
 

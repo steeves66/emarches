@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -41,7 +41,8 @@ public class VbTempParametreLot implements java.io.Serializable {
 			@AttributeOverride(name = "tempLaaAaoCode", column = @Column(name = "TEMP_LAA_AAO_CODE", length = 500)),
 			@AttributeOverride(name = "tempLaaAutre", column = @Column(name = "TEMP_LAA_AUTRE", length = 500)),
 			@AttributeOverride(name = "tempLaaAutre1", column = @Column(name = "TEMP_LAA_AUTRE_1", length = 500)),
-			@AttributeOverride(name = "tempLaaDacCode", column = @Column(name = "TEMP_LAA_DAC_CODE", length = 500)) })
+			@AttributeOverride(name = "tempLaaDacCode", column = @Column(name = "TEMP_LAA_DAC_CODE", length = 500)),
+			@AttributeOverride(name = "tempLaaDelaiExe", column = @Column(name = "TEMP_LAA_DELAI_EXE", length = 500)) })
 	public VbTempParametreLotId getId() {
 		return this.id;
 	}

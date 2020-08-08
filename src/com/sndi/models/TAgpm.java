@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,9 +23,9 @@ import javax.persistence.TemporalType;
 public class TAgpm implements java.io.Serializable {
 
 	private long agpId;
-	private TGestions TGestions;
 	private TDeclarant TDeclarant;
 	private TFonction TFonction;
+	private TGestions TGestions;
 	private TProjet TProjet;
 	private TStatut TStatut;
 	private TStructure TStructure;
@@ -51,26 +51,26 @@ public class TAgpm implements java.io.Serializable {
 	public TAgpm() {
 	}
 
-	public TAgpm(long agpId, TGestions TGestions, TFonction TFonction, TProjet TProjet, TStatut TStatut,
+	public TAgpm(long agpId, TFonction TFonction, TGestions TGestions, TProjet TProjet, TStatut TStatut,
 			TStructure TStructure) {
 		this.agpId = agpId;
-		this.TGestions = TGestions;
 		this.TFonction = TFonction;
+		this.TGestions = TGestions;
 		this.TProjet = TProjet;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
 	}
 
-	public TAgpm(long agpId, TGestions TGestions, TDeclarant TDeclarant, TFonction TFonction, TProjet TProjet,
+	public TAgpm(long agpId, TDeclarant TDeclarant, TFonction TFonction, TGestions TGestions, TProjet TProjet,
 			TStatut TStatut, TStructure TStructure, String agpCommentaire, String agpTypeDao, String agpModePassation,
 			String agpActif, String agpStatutRetour, String agpActeurSaisie, Date agpDateValAc, Date agpDateValCpmp,
 			Date agpDateValDmp, String agpCode, Date agpDteModif, String agpFonCodPf, String agpFonCodDmp,
 			String agpRecherche, Set<TFinancement> TFinancements, Set<TDetailAgpm> TDetailAgpms,
 			Set<THistoAgpm> THistoAgpms, Set<TDossierAgpm> TDossierAgpms) {
 		this.agpId = agpId;
-		this.TGestions = TGestions;
 		this.TDeclarant = TDeclarant;
 		this.TFonction = TFonction;
+		this.TGestions = TGestions;
 		this.TProjet = TProjet;
 		this.TStatut = TStatut;
 		this.TStructure = TStructure;
@@ -106,16 +106,6 @@ public class TAgpm implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "AGP_GES_CODE", nullable = false)
-	public TGestions getTGestions() {
-		return this.TGestions;
-	}
-
-	public void setTGestions(TGestions TGestions) {
-		this.TGestions = TGestions;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "AGP_DEC_ID")
 	public TDeclarant getTDeclarant() {
 		return this.TDeclarant;
@@ -133,6 +123,16 @@ public class TAgpm implements java.io.Serializable {
 
 	public void setTFonction(TFonction TFonction) {
 		this.TFonction = TFonction;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "AGP_GES_CODE", nullable = false)
+	public TGestions getTGestions() {
+		return this.TGestions;
+	}
+
+	public void setTGestions(TGestions TGestions) {
+		this.TGestions = TGestions;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

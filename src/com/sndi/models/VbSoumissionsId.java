@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -20,6 +20,7 @@ public class VbSoumissionsId implements java.io.Serializable {
 	private String souAdresse;
 	private Date souDteSaisi;
 	private String souOpeMatricule;
+	private String souSigleDmp;
 
 	public VbSoumissionsId() {
 	}
@@ -29,7 +30,7 @@ public class VbSoumissionsId implements java.io.Serializable {
 	}
 
 	public VbSoumissionsId(String souNcc, Character souInter, String souSigleSte, String souNomCom, String souStaCode,
-			String souTel, String souAdresse, Date souDteSaisi, String souOpeMatricule) {
+			String souTel, String souAdresse, Date souDteSaisi, String souOpeMatricule, String souSigleDmp) {
 		this.souNcc = souNcc;
 		this.souInter = souInter;
 		this.souSigleSte = souSigleSte;
@@ -39,6 +40,7 @@ public class VbSoumissionsId implements java.io.Serializable {
 		this.souAdresse = souAdresse;
 		this.souDteSaisi = souDteSaisi;
 		this.souOpeMatricule = souOpeMatricule;
+		this.souSigleDmp = souSigleDmp;
 	}
 
 	@Column(name = "SOU_NCC", nullable = false, length = 20)
@@ -122,6 +124,15 @@ public class VbSoumissionsId implements java.io.Serializable {
 		this.souOpeMatricule = souOpeMatricule;
 	}
 
+	@Column(name = "SOU_SIGLE_DMP", length = 500)
+	public String getSouSigleDmp() {
+		return this.souSigleDmp;
+	}
+
+	public void setSouSigleDmp(String souSigleDmp) {
+		this.souSigleDmp = souSigleDmp;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -151,7 +162,10 @@ public class VbSoumissionsId implements java.io.Serializable {
 								&& this.getSouDteSaisi().equals(castOther.getSouDteSaisi())))
 				&& ((this.getSouOpeMatricule() == castOther.getSouOpeMatricule())
 						|| (this.getSouOpeMatricule() != null && castOther.getSouOpeMatricule() != null
-								&& this.getSouOpeMatricule().equals(castOther.getSouOpeMatricule())));
+								&& this.getSouOpeMatricule().equals(castOther.getSouOpeMatricule())))
+				&& ((this.getSouSigleDmp() == castOther.getSouSigleDmp())
+						|| (this.getSouSigleDmp() != null && castOther.getSouSigleDmp() != null
+								&& this.getSouSigleDmp().equals(castOther.getSouSigleDmp())));
 	}
 
 	public int hashCode() {
@@ -166,6 +180,7 @@ public class VbSoumissionsId implements java.io.Serializable {
 		result = 37 * result + (getSouAdresse() == null ? 0 : this.getSouAdresse().hashCode());
 		result = 37 * result + (getSouDteSaisi() == null ? 0 : this.getSouDteSaisi().hashCode());
 		result = 37 * result + (getSouOpeMatricule() == null ? 0 : this.getSouOpeMatricule().hashCode());
+		result = 37 * result + (getSouSigleDmp() == null ? 0 : this.getSouSigleDmp().hashCode());
 		return result;
 	}
 

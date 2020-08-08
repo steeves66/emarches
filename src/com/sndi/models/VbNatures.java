@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,13 +26,13 @@ public class VbNatures implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({ @AttributeOverride(name = "natLibelle", column = @Column(name = "NAT_LIBELLE")),
-			@AttributeOverride(name = "natCode", column = @Column(name = "NAT_CODE")),
-			@AttributeOverride(name = "natUtilSaisi", column = @Column(name = "NAT_UTIL_SAISI")),
-			@AttributeOverride(name = "natUtilModif", column = @Column(name = "NAT_UTIL_MODIF")),
-			@AttributeOverride(name = "natDteSaisi", column = @Column(name = "NAT_DTE_SAISI")),
-			@AttributeOverride(name = "natDteModif", column = @Column(name = "NAT_DTE_MODIF")),
-			@AttributeOverride(name = "natCClasse", column = @Column(name = "NAT_C_CLASSE")) })
+	@AttributeOverrides({ @AttributeOverride(name = "natLibelle", column = @Column(name = "NAT_LIBELLE", length = 200)),
+			@AttributeOverride(name = "natCode", column = @Column(name = "NAT_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "natOpeMatricule", column = @Column(name = "NAT_OPE_MATRICULE", length = 25)),
+			@AttributeOverride(name = "natOpeModif", column = @Column(name = "NAT_OPE_MODIF", length = 25)),
+			@AttributeOverride(name = "natDteSaisi", column = @Column(name = "NAT_DTE_SAISI", length = 7)),
+			@AttributeOverride(name = "natDteModif", column = @Column(name = "NAT_DTE_MODIF", length = 7)),
+			@AttributeOverride(name = "natCClasse", column = @Column(name = "NAT_C_CLASSE", length = 1)) })
 	public VbNaturesId getId() {
 		return this.id;
 	}

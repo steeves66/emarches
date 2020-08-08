@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -36,6 +36,9 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 	private String dofMailRep;
 	private String dofSouNcc;
 	private String dofSigle;
+	private String dofObsVariante;
+	private BigDecimal dofMtCaut;
+	private BigDecimal dofMtRab;
 
 	public VbTempParamDetOffresId() {
 	}
@@ -48,7 +51,8 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 			String dofLaaAaoCode, String dofLaaId, String dofDelai, String dofOffCnps, String dofOffImpot,
 			String dofOffRc, String dofCaut, String dofTyp, String dofBanCode, String dofEstimRab, String dofRab,
 			String dofMtOfr, String dofOffNum, String dofNum, String dofNomRep, String dofPreRep, String dofTelRep,
-			String dofMailRep, String dofSouNcc, String dofSigle) {
+			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,
+			BigDecimal dofMtRab) {
 		this.tempNum = tempNum;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofOpeMatricule = dofOpeMatricule;
@@ -73,6 +77,9 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 		this.dofMailRep = dofMailRep;
 		this.dofSouNcc = dofSouNcc;
 		this.dofSigle = dofSigle;
+		this.dofObsVariante = dofObsVariante;
+		this.dofMtCaut = dofMtCaut;
+		this.dofMtRab = dofMtRab;
 	}
 
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
@@ -291,6 +298,33 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 		this.dofSigle = dofSigle;
 	}
 
+	@Column(name = "DOF_OBS_VARIANTE", length = 500)
+	public String getDofObsVariante() {
+		return this.dofObsVariante;
+	}
+
+	public void setDofObsVariante(String dofObsVariante) {
+		this.dofObsVariante = dofObsVariante;
+	}
+
+	@Column(name = "DOF_MT_CAUT", precision = 22, scale = 0)
+	public BigDecimal getDofMtCaut() {
+		return this.dofMtCaut;
+	}
+
+	public void setDofMtCaut(BigDecimal dofMtCaut) {
+		this.dofMtCaut = dofMtCaut;
+	}
+
+	@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
+	public BigDecimal getDofMtRab() {
+		return this.dofMtRab;
+	}
+
+	public void setDofMtRab(BigDecimal dofMtRab) {
+		this.dofMtRab = dofMtRab;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -352,7 +386,14 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 				&& ((this.getDofSouNcc() == castOther.getDofSouNcc()) || (this.getDofSouNcc() != null
 						&& castOther.getDofSouNcc() != null && this.getDofSouNcc().equals(castOther.getDofSouNcc())))
 				&& ((this.getDofSigle() == castOther.getDofSigle()) || (this.getDofSigle() != null
-						&& castOther.getDofSigle() != null && this.getDofSigle().equals(castOther.getDofSigle())));
+						&& castOther.getDofSigle() != null && this.getDofSigle().equals(castOther.getDofSigle())))
+				&& ((this.getDofObsVariante() == castOther.getDofObsVariante())
+						|| (this.getDofObsVariante() != null && castOther.getDofObsVariante() != null
+								&& this.getDofObsVariante().equals(castOther.getDofObsVariante())))
+				&& ((this.getDofMtCaut() == castOther.getDofMtCaut()) || (this.getDofMtCaut() != null
+						&& castOther.getDofMtCaut() != null && this.getDofMtCaut().equals(castOther.getDofMtCaut())))
+				&& ((this.getDofMtRab() == castOther.getDofMtRab()) || (this.getDofMtRab() != null
+						&& castOther.getDofMtRab() != null && this.getDofMtRab().equals(castOther.getDofMtRab())));
 	}
 
 	public int hashCode() {
@@ -382,6 +423,9 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 		result = 37 * result + (getDofMailRep() == null ? 0 : this.getDofMailRep().hashCode());
 		result = 37 * result + (getDofSouNcc() == null ? 0 : this.getDofSouNcc().hashCode());
 		result = 37 * result + (getDofSigle() == null ? 0 : this.getDofSigle().hashCode());
+		result = 37 * result + (getDofObsVariante() == null ? 0 : this.getDofObsVariante().hashCode());
+		result = 37 * result + (getDofMtCaut() == null ? 0 : this.getDofMtCaut().hashCode());
+		result = 37 * result + (getDofMtRab() == null ? 0 : this.getDofMtRab().hashCode());
 		return result;
 	}
 

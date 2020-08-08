@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,6 +27,7 @@ public class VbTempParametreLotId implements java.io.Serializable {
 	private String tempLaaAutre;
 	private String tempLaaAutre1;
 	private String tempLaaDacCode;
+	private String tempLaaDelaiExe;
 
 	public VbTempParametreLotId() {
 	}
@@ -38,7 +39,7 @@ public class VbTempParametreLotId implements java.io.Serializable {
 	public VbTempParametreLotId(BigDecimal tempNum, String tempType, String tempOpeMatricule, Date tempLaaDteSaisi,
 			String tempLaaNbrTotLot, String tempLaaNbrLotDebut, String tempLaaNbrLotFin, String tempLaaLibGenerique,
 			String tempLaaImputation, String tempLaaCautLot, String tempLaaMtLot, String tempLaaAaoCode,
-			String tempLaaAutre, String tempLaaAutre1, String tempLaaDacCode) {
+			String tempLaaAutre, String tempLaaAutre1, String tempLaaDacCode, String tempLaaDelaiExe) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -54,6 +55,7 @@ public class VbTempParametreLotId implements java.io.Serializable {
 		this.tempLaaAutre = tempLaaAutre;
 		this.tempLaaAutre1 = tempLaaAutre1;
 		this.tempLaaDacCode = tempLaaDacCode;
+		this.tempLaaDelaiExe = tempLaaDelaiExe;
 	}
 
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
@@ -191,6 +193,15 @@ public class VbTempParametreLotId implements java.io.Serializable {
 		this.tempLaaDacCode = tempLaaDacCode;
 	}
 
+	@Column(name = "TEMP_LAA_DELAI_EXE", length = 500)
+	public String getTempLaaDelaiExe() {
+		return this.tempLaaDelaiExe;
+	}
+
+	public void setTempLaaDelaiExe(String tempLaaDelaiExe) {
+		this.tempLaaDelaiExe = tempLaaDelaiExe;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -242,7 +253,10 @@ public class VbTempParametreLotId implements java.io.Serializable {
 								&& this.getTempLaaAutre1().equals(castOther.getTempLaaAutre1())))
 				&& ((this.getTempLaaDacCode() == castOther.getTempLaaDacCode())
 						|| (this.getTempLaaDacCode() != null && castOther.getTempLaaDacCode() != null
-								&& this.getTempLaaDacCode().equals(castOther.getTempLaaDacCode())));
+								&& this.getTempLaaDacCode().equals(castOther.getTempLaaDacCode())))
+				&& ((this.getTempLaaDelaiExe() == castOther.getTempLaaDelaiExe())
+						|| (this.getTempLaaDelaiExe() != null && castOther.getTempLaaDelaiExe() != null
+								&& this.getTempLaaDelaiExe().equals(castOther.getTempLaaDelaiExe())));
 	}
 
 	public int hashCode() {
@@ -263,6 +277,7 @@ public class VbTempParametreLotId implements java.io.Serializable {
 		result = 37 * result + (getTempLaaAutre() == null ? 0 : this.getTempLaaAutre().hashCode());
 		result = 37 * result + (getTempLaaAutre1() == null ? 0 : this.getTempLaaAutre1().hashCode());
 		result = 37 * result + (getTempLaaDacCode() == null ? 0 : this.getTempLaaDacCode().hashCode());
+		result = 37 * result + (getTempLaaDelaiExe() == null ? 0 : this.getTempLaaDelaiExe().hashCode());
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,9 +23,9 @@ import javax.persistence.TemporalType;
 public class TCommissionType implements java.io.Serializable {
 
 	private String tctCode;
-	private TTypeStructure TTypeStructure;
-	private TTypeCommission TTypeCommission;
 	private TOperateur TOperateur;
+	private TTypeCommission TTypeCommission;
+	private TTypeStructure TTypeStructure;
 	private String tctLibelle;
 	private String tctTitre;
 	private Date tctDteSaisi;
@@ -43,14 +43,14 @@ public class TCommissionType implements java.io.Serializable {
 		this.tctCode = tctCode;
 	}
 
-	public TCommissionType(String tctCode, TTypeStructure TTypeStructure, TTypeCommission TTypeCommission,
-			TOperateur TOperateur, String tctLibelle, String tctTitre, Date tctDteSaisi, String tctGrpCode,
+	public TCommissionType(String tctCode, TOperateur TOperateur, TTypeCommission TTypeCommission,
+			TTypeStructure TTypeStructure, String tctLibelle, String tctTitre, Date tctDteSaisi, String tctGrpCode,
 			String tctNomMbm, String tctPreMbm, String tctTelMbm, String tctRepMandate,
 			Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.tctCode = tctCode;
-		this.TTypeStructure = TTypeStructure;
-		this.TTypeCommission = TTypeCommission;
 		this.TOperateur = TOperateur;
+		this.TTypeCommission = TTypeCommission;
+		this.TTypeStructure = TTypeStructure;
 		this.tctLibelle = tctLibelle;
 		this.tctTitre = tctTitre;
 		this.tctDteSaisi = tctDteSaisi;
@@ -74,13 +74,13 @@ public class TCommissionType implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TCT_TST_CODE")
-	public TTypeStructure getTTypeStructure() {
-		return this.TTypeStructure;
+	@JoinColumn(name = "TCT_OPE_MATRICULE")
+	public TOperateur getTOperateur() {
+		return this.TOperateur;
 	}
 
-	public void setTTypeStructure(TTypeStructure TTypeStructure) {
-		this.TTypeStructure = TTypeStructure;
+	public void setTOperateur(TOperateur TOperateur) {
+		this.TOperateur = TOperateur;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -94,13 +94,13 @@ public class TCommissionType implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TCT_OPE_MATRICULE")
-	public TOperateur getTOperateur() {
-		return this.TOperateur;
+	@JoinColumn(name = "TCT_TST_CODE")
+	public TTypeStructure getTTypeStructure() {
+		return this.TTypeStructure;
 	}
 
-	public void setTOperateur(TOperateur TOperateur) {
-		this.TOperateur = TOperateur;
+	public void setTTypeStructure(TTypeStructure TTypeStructure) {
+		this.TTypeStructure = TTypeStructure;
 	}
 
 	@Column(name = "TCT_LIBELLE", length = 500)

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -13,10 +13,10 @@ public class VbDetailAgpmId implements java.io.Serializable {
 
 	private BigDecimal tdaId;
 	private long tdaAgpId;
-	private String tdaCommentaire;
 	private String tdaTcaCode;
 	private String tdaNumOrdre;
 	private String tdaTitre;
+	private String tdaCommentaire;
 
 	public VbDetailAgpmId() {
 	}
@@ -26,14 +26,14 @@ public class VbDetailAgpmId implements java.io.Serializable {
 		this.tdaAgpId = tdaAgpId;
 	}
 
-	public VbDetailAgpmId(BigDecimal tdaId, long tdaAgpId, String tdaCommentaire, String tdaTcaCode, String tdaNumOrdre,
-			String tdaTitre) {
+	public VbDetailAgpmId(BigDecimal tdaId, long tdaAgpId, String tdaTcaCode, String tdaNumOrdre, String tdaTitre,
+			String tdaCommentaire) {
 		this.tdaId = tdaId;
 		this.tdaAgpId = tdaAgpId;
-		this.tdaCommentaire = tdaCommentaire;
 		this.tdaTcaCode = tdaTcaCode;
 		this.tdaNumOrdre = tdaNumOrdre;
 		this.tdaTitre = tdaTitre;
+		this.tdaCommentaire = tdaCommentaire;
 	}
 
 	@Column(name = "TDA_ID", nullable = false, precision = 22, scale = 0)
@@ -52,15 +52,6 @@ public class VbDetailAgpmId implements java.io.Serializable {
 
 	public void setTdaAgpId(long tdaAgpId) {
 		this.tdaAgpId = tdaAgpId;
-	}
-
-	@Column(name = "TDA_COMMENTAIRE", length = 4000)
-	public String getTdaCommentaire() {
-		return this.tdaCommentaire;
-	}
-
-	public void setTdaCommentaire(String tdaCommentaire) {
-		this.tdaCommentaire = tdaCommentaire;
 	}
 
 	@Column(name = "TDA_TCA_CODE", length = 4)
@@ -90,6 +81,15 @@ public class VbDetailAgpmId implements java.io.Serializable {
 		this.tdaTitre = tdaTitre;
 	}
 
+	@Column(name = "TDA_COMMENTAIRE", length = 4000)
+	public String getTdaCommentaire() {
+		return this.tdaCommentaire;
+	}
+
+	public void setTdaCommentaire(String tdaCommentaire) {
+		this.tdaCommentaire = tdaCommentaire;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -102,16 +102,16 @@ public class VbDetailAgpmId implements java.io.Serializable {
 		return ((this.getTdaId() == castOther.getTdaId()) || (this.getTdaId() != null && castOther.getTdaId() != null
 				&& this.getTdaId().equals(castOther.getTdaId())))
 				&& (this.getTdaAgpId() == castOther.getTdaAgpId())
-				&& ((this.getTdaCommentaire() == castOther.getTdaCommentaire())
-						|| (this.getTdaCommentaire() != null && castOther.getTdaCommentaire() != null
-								&& this.getTdaCommentaire().equals(castOther.getTdaCommentaire())))
 				&& ((this.getTdaTcaCode() == castOther.getTdaTcaCode()) || (this.getTdaTcaCode() != null
 						&& castOther.getTdaTcaCode() != null && this.getTdaTcaCode().equals(castOther.getTdaTcaCode())))
 				&& ((this.getTdaNumOrdre() == castOther.getTdaNumOrdre())
 						|| (this.getTdaNumOrdre() != null && castOther.getTdaNumOrdre() != null
 								&& this.getTdaNumOrdre().equals(castOther.getTdaNumOrdre())))
 				&& ((this.getTdaTitre() == castOther.getTdaTitre()) || (this.getTdaTitre() != null
-						&& castOther.getTdaTitre() != null && this.getTdaTitre().equals(castOther.getTdaTitre())));
+						&& castOther.getTdaTitre() != null && this.getTdaTitre().equals(castOther.getTdaTitre())))
+				&& ((this.getTdaCommentaire() == castOther.getTdaCommentaire())
+						|| (this.getTdaCommentaire() != null && castOther.getTdaCommentaire() != null
+								&& this.getTdaCommentaire().equals(castOther.getTdaCommentaire())));
 	}
 
 	public int hashCode() {
@@ -119,10 +119,10 @@ public class VbDetailAgpmId implements java.io.Serializable {
 
 		result = 37 * result + (getTdaId() == null ? 0 : this.getTdaId().hashCode());
 		result = 37 * result + (int) this.getTdaAgpId();
-		result = 37 * result + (getTdaCommentaire() == null ? 0 : this.getTdaCommentaire().hashCode());
 		result = 37 * result + (getTdaTcaCode() == null ? 0 : this.getTdaTcaCode().hashCode());
 		result = 37 * result + (getTdaNumOrdre() == null ? 0 : this.getTdaNumOrdre().hashCode());
 		result = 37 * result + (getTdaTitre() == null ? 0 : this.getTdaTitre().hashCode());
+		result = 37 * result + (getTdaCommentaire() == null ? 0 : this.getTdaCommentaire().hashCode());
 		return result;
 	}
 

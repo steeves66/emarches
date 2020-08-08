@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -26,12 +26,12 @@ import javax.persistence.UniqueConstraint;
 public class TLBudgets implements java.io.Serializable {
 
 	private String lbgCode;
-	private TGestions TGestions;
 	private TDestinations TDestinations;
 	private TFonction TFonctionByLbgFonCode;
 	private TFonction TFonctionByLbgFonCodeAc;
-	private TStructure TStructure;
+	private TGestions TGestions;
 	private TNatures TNatures;
+	private TStructure TStructure;
 	private BigDecimal lbgResDon;
 	private String lbgImputation;
 	private Long lbgAnoCode;
@@ -86,13 +86,13 @@ public class TLBudgets implements java.io.Serializable {
 	public TLBudgets() {
 	}
 
-	public TLBudgets(String lbgCode, TGestions TGestions, TStructure TStructure, TNatures TNatures,
+	public TLBudgets(String lbgCode, TGestions TGestions, TNatures TNatures, TStructure TStructure,
 			BigDecimal lbgResDon, String lbgImputation, BigDecimal lbgResTr, BigDecimal lbgAeTr, BigDecimal lbgAeDon,
 			BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral) {
 		this.lbgCode = lbgCode;
 		this.TGestions = TGestions;
-		this.TStructure = TStructure;
 		this.TNatures = TNatures;
+		this.TStructure = TStructure;
 		this.lbgResDon = lbgResDon;
 		this.lbgImputation = lbgImputation;
 		this.lbgResTr = lbgResTr;
@@ -103,26 +103,26 @@ public class TLBudgets implements java.io.Serializable {
 		this.lbgAdmCentral = lbgAdmCentral;
 	}
 
-	public TLBudgets(String lbgCode, TGestions TGestions, TDestinations TDestinations, TFonction TFonctionByLbgFonCode,
-			TFonction TFonctionByLbgFonCodeAc, TStructure TStructure, TNatures TNatures, BigDecimal lbgResDon,
-			String lbgImputation, Long lbgAnoCode, BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr,
-			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp, BigDecimal lbgTotDot,
-			String lbgUtilSaisi, Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot, String lbgUtilModif,
-			BigDecimal lbgDisTre, BigDecimal lbgDisDon, BigDecimal lbgDisEmp, BigDecimal lbgDisTot, String lbgStaCode,
-			String lbgActNumModif, Date lbgDteVal, String lbgFonCodeVal, String lbgTraitmt, String lbgTraitmtNotif,
-			Date lbgDteStaCour, String lbgTitre, String lbgCor, String lbgAdmCentral, String lbgMotifCor,
-			Date lbgDteCor, String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct, String lbgActif,
-			String lbgFonCodeCf, BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2, BigDecimal lbgDotAnPlus0,
-			String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip, String lbgFonCodePr,
-			String lbgFonCodeVerou, Set<TLotAao> TLotAaos, Set<TDetailDemandes> TDetailDemandeses,
+	public TLBudgets(String lbgCode, TDestinations TDestinations, TFonction TFonctionByLbgFonCode,
+			TFonction TFonctionByLbgFonCodeAc, TGestions TGestions, TNatures TNatures, TStructure TStructure,
+			BigDecimal lbgResDon, String lbgImputation, Long lbgAnoCode, BigDecimal lbgResTr, Date lbgDteSaisi,
+			BigDecimal lbgAeTr, BigDecimal lbgAeDon, BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp,
+			BigDecimal lbgTotDot, String lbgUtilSaisi, Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot,
+			String lbgUtilModif, BigDecimal lbgDisTre, BigDecimal lbgDisDon, BigDecimal lbgDisEmp, BigDecimal lbgDisTot,
+			String lbgStaCode, String lbgActNumModif, Date lbgDteVal, String lbgFonCodeVal, String lbgTraitmt,
+			String lbgTraitmtNotif, Date lbgDteStaCour, String lbgTitre, String lbgCor, String lbgAdmCentral,
+			String lbgMotifCor, Date lbgDteCor, String lbgFonCodeCor, String lbgFonCodePf, String lbgFonCodeValAct,
+			String lbgActif, String lbgFonCodeCf, BigDecimal lbgDotAnPlus1, BigDecimal lbgDotAnPlus2,
+			BigDecimal lbgDotAnPlus0, String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip,
+			String lbgFonCodePr, String lbgFonCodeVerou, Set<TLotAao> TLotAaos, Set<TDetailDemandes> TDetailDemandeses,
 			Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.lbgCode = lbgCode;
-		this.TGestions = TGestions;
 		this.TDestinations = TDestinations;
 		this.TFonctionByLbgFonCode = TFonctionByLbgFonCode;
 		this.TFonctionByLbgFonCodeAc = TFonctionByLbgFonCodeAc;
-		this.TStructure = TStructure;
+		this.TGestions = TGestions;
 		this.TNatures = TNatures;
+		this.TStructure = TStructure;
 		this.lbgResDon = lbgResDon;
 		this.lbgImputation = lbgImputation;
 		this.lbgAnoCode = lbgAnoCode;
@@ -187,16 +187,6 @@ public class TLBudgets implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LBG_GES_CODE", nullable = false)
-	public TGestions getTGestions() {
-		return this.TGestions;
-	}
-
-	public void setTGestions(TGestions TGestions) {
-		this.TGestions = TGestions;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "LBG_DES_CODE")
 	public TDestinations getTDestinations() {
 		return this.TDestinations;
@@ -227,13 +217,13 @@ public class TLBudgets implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "LBG_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
+	@JoinColumn(name = "LBG_GES_CODE", nullable = false)
+	public TGestions getTGestions() {
+		return this.TGestions;
 	}
 
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
+	public void setTGestions(TGestions TGestions) {
+		this.TGestions = TGestions;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -244,6 +234,16 @@ public class TLBudgets implements java.io.Serializable {
 
 	public void setTNatures(TNatures TNatures) {
 		this.TNatures = TNatures;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "LBG_STR_CODE", nullable = false)
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@Column(name = "LBG_RES_DON", nullable = false, precision = 20, scale = 0)

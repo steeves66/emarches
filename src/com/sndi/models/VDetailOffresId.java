@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -11,6 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VDetailOffresId implements java.io.Serializable {
 
+	private BigDecimal RId;
 	private BigDecimal dofNum;
 	private BigDecimal laaNum;
 	private String laaObjet;
@@ -20,18 +21,23 @@ public class VDetailOffresId implements java.io.Serializable {
 	private BigDecimal dofMtOfr;
 	private String dofTyp;
 	private String dofStatut;
+	private String dofObsVariante;
+	private String dofOpeMatricule;
 
 	public VDetailOffresId() {
 	}
 
-	public VDetailOffresId(BigDecimal dofNum, BigDecimal dofLaaId, String aaoCode) {
+	public VDetailOffresId(BigDecimal dofNum, BigDecimal laaNum, BigDecimal dofLaaId, String aaoCode) {
 		this.dofNum = dofNum;
+		this.laaNum = laaNum;
 		this.dofLaaId = dofLaaId;
 		this.aaoCode = aaoCode;
 	}
 
-	public VDetailOffresId(BigDecimal dofNum, BigDecimal laaNum, String laaObjet, BigDecimal dofLaaId, String aaoCode,
-			String offSouSigleSte, BigDecimal dofMtOfr, String dofTyp, String dofStatut) {
+	public VDetailOffresId(BigDecimal RId, BigDecimal dofNum, BigDecimal laaNum, String laaObjet, BigDecimal dofLaaId,
+			String aaoCode, String offSouSigleSte, BigDecimal dofMtOfr, String dofTyp, String dofStatut,
+			String dofObsVariante, String dofOpeMatricule) {
+		this.RId = RId;
 		this.dofNum = dofNum;
 		this.laaNum = laaNum;
 		this.laaObjet = laaObjet;
@@ -41,6 +47,17 @@ public class VDetailOffresId implements java.io.Serializable {
 		this.dofMtOfr = dofMtOfr;
 		this.dofTyp = dofTyp;
 		this.dofStatut = dofStatut;
+		this.dofObsVariante = dofObsVariante;
+		this.dofOpeMatricule = dofOpeMatricule;
+	}
+
+	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
 	}
 
 	@Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)
@@ -52,7 +69,7 @@ public class VDetailOffresId implements java.io.Serializable {
 		this.dofNum = dofNum;
 	}
 
-	@Column(name = "LAA_NUM", precision = 22, scale = 0)
+	@Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getLaaNum() {
 		return this.laaNum;
 	}
@@ -61,7 +78,7 @@ public class VDetailOffresId implements java.io.Serializable {
 		this.laaNum = laaNum;
 	}
 
-	@Column(name = "LAA_OBJET", length = 1000)
+	@Column(name = "LAA_OBJET", length = 1047)
 	public String getLaaObjet() {
 		return this.laaObjet;
 	}
@@ -88,7 +105,7 @@ public class VDetailOffresId implements java.io.Serializable {
 		this.aaoCode = aaoCode;
 	}
 
-	@Column(name = "OFF_SOU_SIGLE_STE", length = 500)
+	@Column(name = "OFF_SOU_SIGLE_STE", length = 523)
 	public String getOffSouSigleSte() {
 		return this.offSouSigleSte;
 	}
@@ -124,6 +141,24 @@ public class VDetailOffresId implements java.io.Serializable {
 		this.dofStatut = dofStatut;
 	}
 
+	@Column(name = "DOF_OBS_VARIANTE", length = 500)
+	public String getDofObsVariante() {
+		return this.dofObsVariante;
+	}
+
+	public void setDofObsVariante(String dofObsVariante) {
+		this.dofObsVariante = dofObsVariante;
+	}
+
+	@Column(name = "DOF_OPE_MATRICULE", length = 25)
+	public String getDofOpeMatricule() {
+		return this.dofOpeMatricule;
+	}
+
+	public void setDofOpeMatricule(String dofOpeMatricule) {
+		this.dofOpeMatricule = dofOpeMatricule;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -133,8 +168,10 @@ public class VDetailOffresId implements java.io.Serializable {
 			return false;
 		VDetailOffresId castOther = (VDetailOffresId) other;
 
-		return ((this.getDofNum() == castOther.getDofNum()) || (this.getDofNum() != null
-				&& castOther.getDofNum() != null && this.getDofNum().equals(castOther.getDofNum())))
+		return ((this.getRId() == castOther.getRId())
+				|| (this.getRId() != null && castOther.getRId() != null && this.getRId().equals(castOther.getRId())))
+				&& ((this.getDofNum() == castOther.getDofNum()) || (this.getDofNum() != null
+						&& castOther.getDofNum() != null && this.getDofNum().equals(castOther.getDofNum())))
 				&& ((this.getLaaNum() == castOther.getLaaNum()) || (this.getLaaNum() != null
 						&& castOther.getLaaNum() != null && this.getLaaNum().equals(castOther.getLaaNum())))
 				&& ((this.getLaaObjet() == castOther.getLaaObjet()) || (this.getLaaObjet() != null
@@ -151,12 +188,19 @@ public class VDetailOffresId implements java.io.Serializable {
 				&& ((this.getDofTyp() == castOther.getDofTyp()) || (this.getDofTyp() != null
 						&& castOther.getDofTyp() != null && this.getDofTyp().equals(castOther.getDofTyp())))
 				&& ((this.getDofStatut() == castOther.getDofStatut()) || (this.getDofStatut() != null
-						&& castOther.getDofStatut() != null && this.getDofStatut().equals(castOther.getDofStatut())));
+						&& castOther.getDofStatut() != null && this.getDofStatut().equals(castOther.getDofStatut())))
+				&& ((this.getDofObsVariante() == castOther.getDofObsVariante())
+						|| (this.getDofObsVariante() != null && castOther.getDofObsVariante() != null
+								&& this.getDofObsVariante().equals(castOther.getDofObsVariante())))
+				&& ((this.getDofOpeMatricule() == castOther.getDofOpeMatricule())
+						|| (this.getDofOpeMatricule() != null && castOther.getDofOpeMatricule() != null
+								&& this.getDofOpeMatricule().equals(castOther.getDofOpeMatricule())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
+		result = 37 * result + (getRId() == null ? 0 : this.getRId().hashCode());
 		result = 37 * result + (getDofNum() == null ? 0 : this.getDofNum().hashCode());
 		result = 37 * result + (getLaaNum() == null ? 0 : this.getLaaNum().hashCode());
 		result = 37 * result + (getLaaObjet() == null ? 0 : this.getLaaObjet().hashCode());
@@ -166,6 +210,8 @@ public class VDetailOffresId implements java.io.Serializable {
 		result = 37 * result + (getDofMtOfr() == null ? 0 : this.getDofMtOfr().hashCode());
 		result = 37 * result + (getDofTyp() == null ? 0 : this.getDofTyp().hashCode());
 		result = 37 * result + (getDofStatut() == null ? 0 : this.getDofStatut().hashCode());
+		result = 37 * result + (getDofObsVariante() == null ? 0 : this.getDofObsVariante().hashCode());
+		result = 37 * result + (getDofOpeMatricule() == null ? 0 : this.getDofOpeMatricule().hashCode());
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -20,9 +20,9 @@ public class TDetailDemandes implements java.io.Serializable {
 	private BigDecimal ddeNum;
 	private TDacSpecs TDacSpecs;
 	private TDemande TDemande;
-	private TStructure TStructure;
 	private TLBudgets TLBudgets;
 	private TLotAao TLotAao;
+	private TStructure TStructure;
 	private String ddeMarCode;
 	private String ddeActNum;
 	private String ddeActNumIni;
@@ -34,14 +34,14 @@ public class TDetailDemandes implements java.io.Serializable {
 		this.ddeNum = ddeNum;
 	}
 
-	public TDetailDemandes(BigDecimal ddeNum, TDacSpecs TDacSpecs, TDemande TDemande, TStructure TStructure,
-			TLBudgets TLBudgets, TLotAao TLotAao, String ddeMarCode, String ddeActNum, String ddeActNumIni) {
+	public TDetailDemandes(BigDecimal ddeNum, TDacSpecs TDacSpecs, TDemande TDemande, TLBudgets TLBudgets,
+			TLotAao TLotAao, TStructure TStructure, String ddeMarCode, String ddeActNum, String ddeActNumIni) {
 		this.ddeNum = ddeNum;
 		this.TDacSpecs = TDacSpecs;
 		this.TDemande = TDemande;
-		this.TStructure = TStructure;
 		this.TLBudgets = TLBudgets;
 		this.TLotAao = TLotAao;
+		this.TStructure = TStructure;
 		this.ddeMarCode = ddeMarCode;
 		this.ddeActNum = ddeActNum;
 		this.ddeActNumIni = ddeActNumIni;
@@ -79,16 +79,6 @@ public class TDetailDemandes implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_STR_CODE")
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "DDE_LBG_CODE")
 	public TLBudgets getTLBudgets() {
 		return this.TLBudgets;
@@ -106,6 +96,16 @@ public class TDetailDemandes implements java.io.Serializable {
 
 	public void setTLotAao(TLotAao TLotAao) {
 		this.TLotAao = TLotAao;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DDE_STR_CODE")
+	public TStructure getTStructure() {
+		return this.TStructure;
+	}
+
+	public void setTStructure(TStructure TStructure) {
+		this.TStructure = TStructure;
 	}
 
 	@Column(name = "DDE_MAR_CODE", length = 20)

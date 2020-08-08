@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,8 +23,8 @@ import javax.persistence.TemporalType;
 public class TModeleDacType implements java.io.Serializable {
 
 	private String mdtCode;
-	private TTypeMarche TTypeMarche;
 	private TOperateur TOperateur;
+	private TTypeMarche TTypeMarche;
 	private String mdtLibelleLong;
 	private String mdtLibelleCourt;
 	private Date mdtDteSaisi;
@@ -40,12 +40,12 @@ public class TModeleDacType implements java.io.Serializable {
 		this.mdtCode = mdtCode;
 	}
 
-	public TModeleDacType(String mdtCode, TTypeMarche TTypeMarche, TOperateur TOperateur, String mdtLibelleLong,
+	public TModeleDacType(String mdtCode, TOperateur TOperateur, TTypeMarche TTypeMarche, String mdtLibelleLong,
 			String mdtLibelleCourt, Date mdtDteSaisi, String mdtDacTypeChain, Set<TTypePiecesDac> TTypePiecesDacs,
 			Set<TDacSpecs> TDacSpecses, Set<TDetailPlanPassation> TDetailPlanPassations) {
 		this.mdtCode = mdtCode;
-		this.TTypeMarche = TTypeMarche;
 		this.TOperateur = TOperateur;
+		this.TTypeMarche = TTypeMarche;
 		this.mdtLibelleLong = mdtLibelleLong;
 		this.mdtLibelleCourt = mdtLibelleCourt;
 		this.mdtDteSaisi = mdtDteSaisi;
@@ -67,16 +67,6 @@ public class TModeleDacType implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "MDT_TYM_CODE")
-	public TTypeMarche getTTypeMarche() {
-		return this.TTypeMarche;
-	}
-
-	public void setTTypeMarche(TTypeMarche TTypeMarche) {
-		this.TTypeMarche = TTypeMarche;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "MDT_OPE_MATRICULE")
 	public TOperateur getTOperateur() {
 		return this.TOperateur;
@@ -84,6 +74,16 @@ public class TModeleDacType implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "MDT_TYM_CODE")
+	public TTypeMarche getTTypeMarche() {
+		return this.TTypeMarche;
+	}
+
+	public void setTTypeMarche(TTypeMarche TTypeMarche) {
+		this.TTypeMarche = TTypeMarche;
 	}
 
 	@Column(name = "MDT_LIBELLE_LONG", length = 500)

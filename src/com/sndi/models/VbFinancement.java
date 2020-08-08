@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -36,7 +36,9 @@ public class VbFinancement implements java.io.Serializable {
 			@AttributeOverride(name = "finMontantDevise", column = @Column(name = "FIN_MONTANT_DEVISE", precision = 15)),
 			@AttributeOverride(name = "finNumeroAccord", column = @Column(name = "FIN_NUMERO_ACCORD", length = 500)),
 			@AttributeOverride(name = "finStatut", column = @Column(name = "FIN_STATUT", length = 10)),
-			@AttributeOverride(name = "finAgpId", column = @Column(name = "FIN_AGP_ID", precision = 10, scale = 0)) })
+			@AttributeOverride(name = "finAgpId", column = @Column(name = "FIN_AGP_ID", precision = 10, scale = 0)),
+			@AttributeOverride(name = "finTypeFinance", column = @Column(name = "FIN_TYPE_FINANCE", length = 20)),
+			@AttributeOverride(name = "finPartTresor", column = @Column(name = "FIN_PART_TRESOR", precision = 15, scale = 0)) })
 	public VbFinancementId getId() {
 		return this.id;
 	}

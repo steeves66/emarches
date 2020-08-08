@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -29,6 +29,14 @@ public class VbDetailPlanGeneralId implements java.io.Serializable {
 	private String gpgStatutRetour;
 	private Date gpgDateSaisie;
 	private String gpgStrCode;
+	private Date gpgDateValAc;
+	private Date gpgDateValCpmp;
+	private Date gpgDateValDmp;
+	private String gpgLibFin;
+	private Date gpgDteModif;
+	private String gpgFonCodPf;
+	private String gpgFonCodDmp;
+	private String gpgRecherche;
 
 	public VbDetailPlanGeneralId() {
 	}
@@ -46,7 +54,9 @@ public class VbDetailPlanGeneralId implements java.io.Serializable {
 	public VbDetailPlanGeneralId(long gpgId, long gpgPlgId, Long gpgAgpId, String gpgTypePlan, String gpgStaCode,
 			String gpgTymCode, String gpgMopCode, String gpgCode, String gpgObjet, Integer gpgNumeroOrdre,
 			String gpgPartiePmePmi, String gpgCommentaire, String gpgSourceFin, Date gpgDateDao, String gpgActeurSaisie,
-			String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode) {
+			String gpgStatutRetour, Date gpgDateSaisie, String gpgStrCode, Date gpgDateValAc, Date gpgDateValCpmp,
+			Date gpgDateValDmp, String gpgLibFin, Date gpgDteModif, String gpgFonCodPf, String gpgFonCodDmp,
+			String gpgRecherche) {
 		this.gpgId = gpgId;
 		this.gpgPlgId = gpgPlgId;
 		this.gpgAgpId = gpgAgpId;
@@ -65,6 +75,14 @@ public class VbDetailPlanGeneralId implements java.io.Serializable {
 		this.gpgStatutRetour = gpgStatutRetour;
 		this.gpgDateSaisie = gpgDateSaisie;
 		this.gpgStrCode = gpgStrCode;
+		this.gpgDateValAc = gpgDateValAc;
+		this.gpgDateValCpmp = gpgDateValCpmp;
+		this.gpgDateValDmp = gpgDateValDmp;
+		this.gpgLibFin = gpgLibFin;
+		this.gpgDteModif = gpgDteModif;
+		this.gpgFonCodPf = gpgFonCodPf;
+		this.gpgFonCodDmp = gpgFonCodDmp;
+		this.gpgRecherche = gpgRecherche;
 	}
 
 	@Column(name = "GPG_ID", nullable = false, precision = 10, scale = 0)
@@ -229,6 +247,78 @@ public class VbDetailPlanGeneralId implements java.io.Serializable {
 		this.gpgStrCode = gpgStrCode;
 	}
 
+	@Column(name = "GPG_DATE_VAL_AC", length = 7)
+	public Date getGpgDateValAc() {
+		return this.gpgDateValAc;
+	}
+
+	public void setGpgDateValAc(Date gpgDateValAc) {
+		this.gpgDateValAc = gpgDateValAc;
+	}
+
+	@Column(name = "GPG_DATE_VAL_CPMP", length = 7)
+	public Date getGpgDateValCpmp() {
+		return this.gpgDateValCpmp;
+	}
+
+	public void setGpgDateValCpmp(Date gpgDateValCpmp) {
+		this.gpgDateValCpmp = gpgDateValCpmp;
+	}
+
+	@Column(name = "GPG_DATE_VAL_DMP", length = 7)
+	public Date getGpgDateValDmp() {
+		return this.gpgDateValDmp;
+	}
+
+	public void setGpgDateValDmp(Date gpgDateValDmp) {
+		this.gpgDateValDmp = gpgDateValDmp;
+	}
+
+	@Column(name = "GPG_LIB_FIN", length = 200)
+	public String getGpgLibFin() {
+		return this.gpgLibFin;
+	}
+
+	public void setGpgLibFin(String gpgLibFin) {
+		this.gpgLibFin = gpgLibFin;
+	}
+
+	@Column(name = "GPG_DTE_MODIF", length = 7)
+	public Date getGpgDteModif() {
+		return this.gpgDteModif;
+	}
+
+	public void setGpgDteModif(Date gpgDteModif) {
+		this.gpgDteModif = gpgDteModif;
+	}
+
+	@Column(name = "GPG_FON_COD_PF", length = 20)
+	public String getGpgFonCodPf() {
+		return this.gpgFonCodPf;
+	}
+
+	public void setGpgFonCodPf(String gpgFonCodPf) {
+		this.gpgFonCodPf = gpgFonCodPf;
+	}
+
+	@Column(name = "GPG_FON_COD_DMP", length = 20)
+	public String getGpgFonCodDmp() {
+		return this.gpgFonCodDmp;
+	}
+
+	public void setGpgFonCodDmp(String gpgFonCodDmp) {
+		this.gpgFonCodDmp = gpgFonCodDmp;
+	}
+
+	@Column(name = "GPG_RECHERCHE", length = 4000)
+	public String getGpgRecherche() {
+		return this.gpgRecherche;
+	}
+
+	public void setGpgRecherche(String gpgRecherche) {
+		this.gpgRecherche = gpgRecherche;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -277,9 +367,31 @@ public class VbDetailPlanGeneralId implements java.io.Serializable {
 				&& ((this.getGpgDateSaisie() == castOther.getGpgDateSaisie())
 						|| (this.getGpgDateSaisie() != null && castOther.getGpgDateSaisie() != null
 								&& this.getGpgDateSaisie().equals(castOther.getGpgDateSaisie())))
-				&& ((this.getGpgStrCode() == castOther.getGpgStrCode())
-						|| (this.getGpgStrCode() != null && castOther.getGpgStrCode() != null
-								&& this.getGpgStrCode().equals(castOther.getGpgStrCode())));
+				&& ((this.getGpgStrCode() == castOther.getGpgStrCode()) || (this.getGpgStrCode() != null
+						&& castOther.getGpgStrCode() != null && this.getGpgStrCode().equals(castOther.getGpgStrCode())))
+				&& ((this.getGpgDateValAc() == castOther.getGpgDateValAc())
+						|| (this.getGpgDateValAc() != null && castOther.getGpgDateValAc() != null
+								&& this.getGpgDateValAc().equals(castOther.getGpgDateValAc())))
+				&& ((this.getGpgDateValCpmp() == castOther.getGpgDateValCpmp())
+						|| (this.getGpgDateValCpmp() != null && castOther.getGpgDateValCpmp() != null
+								&& this.getGpgDateValCpmp().equals(castOther.getGpgDateValCpmp())))
+				&& ((this.getGpgDateValDmp() == castOther.getGpgDateValDmp())
+						|| (this.getGpgDateValDmp() != null && castOther.getGpgDateValDmp() != null
+								&& this.getGpgDateValDmp().equals(castOther.getGpgDateValDmp())))
+				&& ((this.getGpgLibFin() == castOther.getGpgLibFin()) || (this.getGpgLibFin() != null
+						&& castOther.getGpgLibFin() != null && this.getGpgLibFin().equals(castOther.getGpgLibFin())))
+				&& ((this.getGpgDteModif() == castOther.getGpgDteModif())
+						|| (this.getGpgDteModif() != null && castOther.getGpgDteModif() != null
+								&& this.getGpgDteModif().equals(castOther.getGpgDteModif())))
+				&& ((this.getGpgFonCodPf() == castOther.getGpgFonCodPf())
+						|| (this.getGpgFonCodPf() != null && castOther.getGpgFonCodPf() != null
+								&& this.getGpgFonCodPf().equals(castOther.getGpgFonCodPf())))
+				&& ((this.getGpgFonCodDmp() == castOther.getGpgFonCodDmp())
+						|| (this.getGpgFonCodDmp() != null && castOther.getGpgFonCodDmp() != null
+								&& this.getGpgFonCodDmp().equals(castOther.getGpgFonCodDmp())))
+				&& ((this.getGpgRecherche() == castOther.getGpgRecherche())
+						|| (this.getGpgRecherche() != null && castOther.getGpgRecherche() != null
+								&& this.getGpgRecherche().equals(castOther.getGpgRecherche())));
 	}
 
 	public int hashCode() {
@@ -303,6 +415,14 @@ public class VbDetailPlanGeneralId implements java.io.Serializable {
 		result = 37 * result + (getGpgStatutRetour() == null ? 0 : this.getGpgStatutRetour().hashCode());
 		result = 37 * result + (getGpgDateSaisie() == null ? 0 : this.getGpgDateSaisie().hashCode());
 		result = 37 * result + (getGpgStrCode() == null ? 0 : this.getGpgStrCode().hashCode());
+		result = 37 * result + (getGpgDateValAc() == null ? 0 : this.getGpgDateValAc().hashCode());
+		result = 37 * result + (getGpgDateValCpmp() == null ? 0 : this.getGpgDateValCpmp().hashCode());
+		result = 37 * result + (getGpgDateValDmp() == null ? 0 : this.getGpgDateValDmp().hashCode());
+		result = 37 * result + (getGpgLibFin() == null ? 0 : this.getGpgLibFin().hashCode());
+		result = 37 * result + (getGpgDteModif() == null ? 0 : this.getGpgDteModif().hashCode());
+		result = 37 * result + (getGpgFonCodPf() == null ? 0 : this.getGpgFonCodPf().hashCode());
+		result = 37 * result + (getGpgFonCodDmp() == null ? 0 : this.getGpgFonCodDmp().hashCode());
+		result = 37 * result + (getGpgRecherche() == null ? 0 : this.getGpgRecherche().hashCode());
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -67,7 +67,7 @@ public class VAgpmBailleurId implements java.io.Serializable {
 		this.proTitre = proTitre;
 	}
 
-	@Column(name = "BAI_CODE", nullable = false, length = 5)
+	@Column(name = "BAI_CODE", nullable = false, length = 20)
 	public String getBaiCode() {
 		return this.baiCode;
 	}

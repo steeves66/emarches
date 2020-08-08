@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -65,6 +65,12 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private Short aaoNbrOffAccpet;
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
+	private Date aaoDteOuv;
+	private String aooHeurOuv;
+	private String aaoHeurFinOuv;
+	private String aaoLieuOuvPrecis;
+	private String aaoObsOuv;
+	private Date aaoDteFinOuv;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 
@@ -84,7 +90,8 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, String aaoNatPrix,
 			String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc,
 			Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej,
-			Short aaoNbrOffHorDelai, Set<TDetailAvis> TDetailAvises, Set<TLotAao> TLotAaos) {
+			Short aaoNbrOffHorDelai, Date aaoDteOuv, String aooHeurOuv, String aaoHeurFinOuv, String aaoLieuOuvPrecis,
+			String aaoObsOuv, Date aaoDteFinOuv, Set<TDetailAvis> TDetailAvises, Set<TLotAao> TLotAaos) {
 		this.aaoCode = aaoCode;
 		this.TAdresseAvis = TAdresseAvis;
 		this.TDacSpecs = TDacSpecs;
@@ -127,6 +134,12 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
 		this.aaoNbrOffRej = aaoNbrOffRej;
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+		this.aaoDteOuv = aaoDteOuv;
+		this.aooHeurOuv = aooHeurOuv;
+		this.aaoHeurFinOuv = aaoHeurFinOuv;
+		this.aaoLieuOuvPrecis = aaoLieuOuvPrecis;
+		this.aaoObsOuv = aaoObsOuv;
+		this.aaoDteFinOuv = aaoDteFinOuv;
 		this.TDetailAvises = TDetailAvises;
 		this.TLotAaos = TLotAaos;
 	}
@@ -522,6 +535,62 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoNbrOffHorDelai(Short aaoNbrOffHorDelai) {
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AAO_DTE_OUV", length = 7)
+	public Date getAaoDteOuv() {
+		return this.aaoDteOuv;
+	}
+
+	public void setAaoDteOuv(Date aaoDteOuv) {
+		this.aaoDteOuv = aaoDteOuv;
+	}
+
+	@Column(name = "AOO_HEUR_OUV", length = 20)
+	public String getAooHeurOuv() {
+		return this.aooHeurOuv;
+	}
+
+	public void setAooHeurOuv(String aooHeurOuv) {
+		this.aooHeurOuv = aooHeurOuv;
+	}
+
+	@Column(name = "AAO_HEUR_FIN_OUV", length = 20)
+	public String getAaoHeurFinOuv() {
+		return this.aaoHeurFinOuv;
+	}
+
+	public void setAaoHeurFinOuv(String aaoHeurFinOuv) {
+		this.aaoHeurFinOuv = aaoHeurFinOuv;
+	}
+
+	@Column(name = "AAO_LIEU_OUV_PRECIS", length = 500)
+	public String getAaoLieuOuvPrecis() {
+		return this.aaoLieuOuvPrecis;
+	}
+
+	public void setAaoLieuOuvPrecis(String aaoLieuOuvPrecis) {
+		this.aaoLieuOuvPrecis = aaoLieuOuvPrecis;
+	}
+
+	@Column(name = "AAO_OBS_OUV", length = 4000)
+	public String getAaoObsOuv() {
+		return this.aaoObsOuv;
+	}
+
+	public void setAaoObsOuv(String aaoObsOuv) {
+		this.aaoObsOuv = aaoObsOuv;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "AAO_DTE_FIN_OUV", length = 7)
+	public Date getAaoDteFinOuv() {
+		return this.aaoDteFinOuv;
+	}
+
+	public void setAaoDteFinOuv(Date aaoDteFinOuv) {
+		this.aaoDteFinOuv = aaoDteFinOuv;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAvisAppelOffre")

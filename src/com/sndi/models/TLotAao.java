@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -40,25 +40,30 @@ public class TLotAao implements java.io.Serializable {
 	private BigDecimal laaNum;
 	private BigDecimal laaCoutLot;
 	private String laaAjoutPanier;
+	private Long laaDelaiExe;
 	private Set<TAnalyseOffre> TAnalyseOffres = new HashSet<TAnalyseOffre>(0);
 	private Set<TDetailVente> TDetailVentes = new HashSet<TDetailVente>(0);
 	private Set<TDetailDemandes> TDetailDemandeses = new HashSet<TDetailDemandes>(0);
+	private Set<TDetCritAnalyseDac> TDetCritAnalyseDacs = new HashSet<TDetCritAnalyseDac>(0);
 	private Set<TDetOffres> TDetOffreses = new HashSet<TDetOffres>(0);
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TLotAao() {
 	}
 
-	public TLotAao(BigDecimal laaId) {
+	public TLotAao(BigDecimal laaId, String laaObjet, BigDecimal laaNum) {
 		this.laaId = laaId;
+		this.laaObjet = laaObjet;
+		this.laaNum = laaNum;
 	}
 
 	public TLotAao(BigDecimal laaId, TAvisAppelOffre TAvisAppelOffre, TDacSpecs TDacSpecs,
 			TFonction TFonctionByLaaFonCodCpmp, TFonction TFonctionByLaaFonCodSaisi, TLBudgets TLBudgets,
 			String laaObjet, String laaObservation, BigDecimal laaMtCaut, BigDecimal laaMtEst, Date laaDteSaisi,
 			String laaStaCode, String laaOpeMatricule, String laaLieuExe, BigDecimal laaNum, BigDecimal laaCoutLot,
-			String laaAjoutPanier, Set<TAnalyseOffre> TAnalyseOffres, Set<TDetailVente> TDetailVentes,
-			Set<TDetailDemandes> TDetailDemandeses, Set<TDetOffres> TDetOffreses, Set<TPiecesOffres> TPiecesOffreses) {
+			String laaAjoutPanier, Long laaDelaiExe, Set<TAnalyseOffre> TAnalyseOffres, Set<TDetailVente> TDetailVentes,
+			Set<TDetailDemandes> TDetailDemandeses, Set<TDetCritAnalyseDac> TDetCritAnalyseDacs,
+			Set<TDetOffres> TDetOffreses, Set<TPiecesOffres> TPiecesOffreses) {
 		this.laaId = laaId;
 		this.TAvisAppelOffre = TAvisAppelOffre;
 		this.TDacSpecs = TDacSpecs;
@@ -76,9 +81,11 @@ public class TLotAao implements java.io.Serializable {
 		this.laaNum = laaNum;
 		this.laaCoutLot = laaCoutLot;
 		this.laaAjoutPanier = laaAjoutPanier;
+		this.laaDelaiExe = laaDelaiExe;
 		this.TAnalyseOffres = TAnalyseOffres;
 		this.TDetailVentes = TDetailVentes;
 		this.TDetailDemandeses = TDetailDemandeses;
+		this.TDetCritAnalyseDacs = TDetCritAnalyseDacs;
 		this.TDetOffreses = TDetOffreses;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
@@ -144,7 +151,7 @@ public class TLotAao implements java.io.Serializable {
 		this.TLBudgets = TLBudgets;
 	}
 
-	@Column(name = "LAA_OBJET", length = 1000)
+	@Column(name = "LAA_OBJET", nullable = false, length = 1000)
 	public String getLaaObjet() {
 		return this.laaObjet;
 	}
@@ -217,7 +224,7 @@ public class TLotAao implements java.io.Serializable {
 		this.laaLieuExe = laaLieuExe;
 	}
 
-	@Column(name = "LAA_NUM", precision = 22, scale = 0)
+	@Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getLaaNum() {
 		return this.laaNum;
 	}
@@ -242,6 +249,15 @@ public class TLotAao implements java.io.Serializable {
 
 	public void setLaaAjoutPanier(String laaAjoutPanier) {
 		this.laaAjoutPanier = laaAjoutPanier;
+	}
+
+	@Column(name = "LAA_DELAI_EXE", precision = 10, scale = 0)
+	public Long getLaaDelaiExe() {
+		return this.laaDelaiExe;
+	}
+
+	public void setLaaDelaiExe(Long laaDelaiExe) {
+		this.laaDelaiExe = laaDelaiExe;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLotAao")
@@ -269,6 +285,15 @@ public class TLotAao implements java.io.Serializable {
 
 	public void setTDetailDemandeses(Set<TDetailDemandes> TDetailDemandeses) {
 		this.TDetailDemandeses = TDetailDemandeses;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLotAao")
+	public Set<TDetCritAnalyseDac> getTDetCritAnalyseDacs() {
+		return this.TDetCritAnalyseDacs;
+	}
+
+	public void setTDetCritAnalyseDacs(Set<TDetCritAnalyseDac> TDetCritAnalyseDacs) {
+		this.TDetCritAnalyseDacs = TDetCritAnalyseDacs;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLotAao")

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,6 +28,7 @@ public class TDetOffres implements java.io.Serializable {
 	private TLotAao TLotAao;
 	private TOffres TOffres;
 	private TOperateur TOperateur;
+	private TBanques TBanques;
 	private String dofLaaAaoCode;
 	private String dofTyp;
 	private BigDecimal dofDelai;
@@ -91,6 +92,10 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofRepeche;
 	private String dofObsRet;
 	private String dofObsAnormal;
+	private String dofObsVariante;
+	private BigDecimal dofMtCaut;
+	private BigDecimal dofMtRab;
+	private BigDecimal dofErrCalcul;
 	private Set<TAnalyseOffre> TAnalyseOffres = new HashSet<TAnalyseOffre>(0);
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
@@ -106,24 +111,26 @@ public class TDetOffres implements java.io.Serializable {
 	}
 
 	public TDetOffres(BigDecimal dofNum, TFonction TFonction, TLotAao TLotAao, TOffres TOffres, TOperateur TOperateur,
-			String dofLaaAaoCode, String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2, Long dofRangOfr,
-			BigDecimal dofMtCor, BigDecimal dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut,
-			String dofBanCode, String dofSeuil, Short dofScore, String dofRecevabl, String dofRet, String dofRetBai,
-			String dofRetDmp, BigDecimal dofMtAtt, String dofTot, String dofTotAdm, String dofTotTec, String dofObsDmp,
-			String dofObsCom, String dofObsAdm, String dofObsAdmDmp, String dofObsAdmBai, String dofObsTec,
-			String dofObsTecDmp, String dofObsTecBai, Short dofNotAdm, Short dofNotTec, Short dofNotFin,
-			Short dofNotFin2, Short dofNotAdmDmp, Short dofNotTecDmp, Short dofNotFinDmp, Short dofNotFin2Dmp,
-			Short dofNotAdmBai, String dofNotTecBai, Short dofNotFinBai, Short dofNotFin2Bai, BigDecimal dofMtAttDmp,
-			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
-			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
-			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofStatut,
-			String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin, String dofRepeche, String dofObsRet,
-			String dofObsAnormal, Set<TAnalyseOffre> TAnalyseOffres, Set<TPiecesOffres> TPiecesOffreses) {
+			TBanques TBanques, String dofLaaAaoCode, String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2,
+			Long dofRangOfr, BigDecimal dofMtCor, BigDecimal dofMtOfr, String dofRab, BigDecimal dofEstimRab,
+			String dofCaut, String dofBanCode, String dofSeuil, Short dofScore, String dofRecevabl, String dofRet,
+			String dofRetBai, String dofRetDmp, BigDecimal dofMtAtt, String dofTot, String dofTotAdm, String dofTotTec,
+			String dofObsDmp, String dofObsCom, String dofObsAdm, String dofObsAdmDmp, String dofObsAdmBai,
+			String dofObsTec, String dofObsTecDmp, String dofObsTecBai, Short dofNotAdm, Short dofNotTec,
+			Short dofNotFin, Short dofNotFin2, Short dofNotAdmDmp, Short dofNotTecDmp, Short dofNotFinDmp,
+			Short dofNotFin2Dmp, Short dofNotAdmBai, String dofNotTecBai, Short dofNotFinBai, Short dofNotFin2Bai,
+			BigDecimal dofMtAttDmp, BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp,
+			String dofRecevablDmp, Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai,
+			Short dofScoreBai, String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,
+			String dofStatut, String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin, String dofRepeche,
+			String dofObsRet, String dofObsAnormal, String dofObsVariante, BigDecimal dofMtCaut, BigDecimal dofMtRab,
+			BigDecimal dofErrCalcul, Set<TAnalyseOffre> TAnalyseOffres, Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
 		this.TOffres = TOffres;
 		this.TOperateur = TOperateur;
+		this.TBanques = TBanques;
 		this.dofLaaAaoCode = dofLaaAaoCode;
 		this.dofTyp = dofTyp;
 		this.dofDelai = dofDelai;
@@ -187,6 +194,10 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofRepeche = dofRepeche;
 		this.dofObsRet = dofObsRet;
 		this.dofObsAnormal = dofObsAnormal;
+		this.dofObsVariante = dofObsVariante;
+		this.dofMtCaut = dofMtCaut;
+		this.dofMtRab = dofMtRab;
+		this.dofErrCalcul = dofErrCalcul;
 		this.TAnalyseOffres = TAnalyseOffres;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
@@ -240,6 +251,16 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setTOperateur(TOperateur TOperateur) {
 		this.TOperateur = TOperateur;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "DOF_BAN_CODE_CAUT")
+	public TBanques getTBanques() {
+		return this.TBanques;
+	}
+
+	public void setTBanques(TBanques TBanques) {
+		this.TBanques = TBanques;
 	}
 
 	@Column(name = "DOF_LAA_AAO_CODE", nullable = false, length = 20)
@@ -808,6 +829,42 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setDofObsAnormal(String dofObsAnormal) {
 		this.dofObsAnormal = dofObsAnormal;
+	}
+
+	@Column(name = "DOF_OBS_VARIANTE", length = 500)
+	public String getDofObsVariante() {
+		return this.dofObsVariante;
+	}
+
+	public void setDofObsVariante(String dofObsVariante) {
+		this.dofObsVariante = dofObsVariante;
+	}
+
+	@Column(name = "DOF_MT_CAUT", precision = 22, scale = 0)
+	public BigDecimal getDofMtCaut() {
+		return this.dofMtCaut;
+	}
+
+	public void setDofMtCaut(BigDecimal dofMtCaut) {
+		this.dofMtCaut = dofMtCaut;
+	}
+
+	@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
+	public BigDecimal getDofMtRab() {
+		return this.dofMtRab;
+	}
+
+	public void setDofMtRab(BigDecimal dofMtRab) {
+		this.dofMtRab = dofMtRab;
+	}
+
+	@Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)
+	public BigDecimal getDofErrCalcul() {
+		return this.dofErrCalcul;
+	}
+
+	public void setDofErrCalcul(BigDecimal dofErrCalcul) {
+		this.dofErrCalcul = dofErrCalcul;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetOffres")

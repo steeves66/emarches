@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -30,7 +30,10 @@ public class VbMinistere implements java.io.Serializable {
 			@AttributeOverride(name = "minCode", column = @Column(name = "MIN_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "minLibelle", column = @Column(name = "MIN_LIBELLE", length = 1000)),
 			@AttributeOverride(name = "minLibelleCourt", column = @Column(name = "MIN_LIBELLE_COURT", length = 500)),
-			@AttributeOverride(name = "minDescription", column = @Column(name = "MIN_DESCRIPTION", length = 1000)) })
+			@AttributeOverride(name = "minDescription", column = @Column(name = "MIN_DESCRIPTION", length = 1000)),
+			@AttributeOverride(name = "minDteSaisi", column = @Column(name = "MIN_DTE_SAISI", length = 7)),
+			@AttributeOverride(name = "minOpeMatricule", column = @Column(name = "MIN_OPE_MATRICULE", length = 25)),
+			@AttributeOverride(name = "minActif", column = @Column(name = "MIN_ACTIF", length = 1)) })
 	public VbMinistereId getId() {
 		return this.id;
 	}

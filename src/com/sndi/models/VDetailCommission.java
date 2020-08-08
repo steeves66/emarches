@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -93,14 +93,14 @@ public class VDetailCommission implements java.io.Serializable {
 			@AttributeOverride(name = "dofTot", column = @Column(name = "DOF_TOT", length = 2)),
 			@AttributeOverride(name = "dofTotAdm", column = @Column(name = "DOF_TOT_ADM", length = 2)),
 			@AttributeOverride(name = "dofTotTec", column = @Column(name = "DOF_TOT_TEC", length = 2)),
-			@AttributeOverride(name = "dofObsDmp", column = @Column(name = "DOF_OBS_DMP", length = 200)),
-			@AttributeOverride(name = "dofObsCom", column = @Column(name = "DOF_OBS_COM", length = 200)),
-			@AttributeOverride(name = "dofObsAdm", column = @Column(name = "DOF_OBS_ADM", length = 200)),
-			@AttributeOverride(name = "dofObsAdmDmp", column = @Column(name = "DOF_OBS_ADM_DMP", length = 200)),
-			@AttributeOverride(name = "dofObsAdmBai", column = @Column(name = "DOF_OBS_ADM_BAI", length = 200)),
-			@AttributeOverride(name = "dofObsTec", column = @Column(name = "DOF_OBS_TEC", length = 200)),
-			@AttributeOverride(name = "dofObsTecDmp", column = @Column(name = "DOF_OBS_TEC_DMP", length = 200)),
-			@AttributeOverride(name = "dofObsTecBai", column = @Column(name = "DOF_OBS_TEC_BAI", length = 200)),
+			@AttributeOverride(name = "dofObsDmp", column = @Column(name = "DOF_OBS_DMP", length = 500)),
+			@AttributeOverride(name = "dofObsCom", column = @Column(name = "DOF_OBS_COM", length = 500)),
+			@AttributeOverride(name = "dofObsAdm", column = @Column(name = "DOF_OBS_ADM", length = 500)),
+			@AttributeOverride(name = "dofObsAdmDmp", column = @Column(name = "DOF_OBS_ADM_DMP", length = 500)),
+			@AttributeOverride(name = "dofObsAdmBai", column = @Column(name = "DOF_OBS_ADM_BAI", length = 500)),
+			@AttributeOverride(name = "dofObsTec", column = @Column(name = "DOF_OBS_TEC", length = 500)),
+			@AttributeOverride(name = "dofObsTecDmp", column = @Column(name = "DOF_OBS_TEC_DMP", length = 500)),
+			@AttributeOverride(name = "dofObsTecBai", column = @Column(name = "DOF_OBS_TEC_BAI", length = 500)),
 			@AttributeOverride(name = "dofNotAdm", column = @Column(name = "DOF_NOT_ADM", precision = 3, scale = 0)),
 			@AttributeOverride(name = "dofNotTec", column = @Column(name = "DOF_NOT_TEC", precision = 3, scale = 0)),
 			@AttributeOverride(name = "dofNotFin", column = @Column(name = "DOF_NOT_FIN", precision = 3, scale = 0)),
@@ -143,7 +143,7 @@ public class VDetailCommission implements java.io.Serializable {
 			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 12)),
 			@AttributeOverride(name = "dacDteValCpmp", column = @Column(name = "DAC_DTE_VAL_CPMP", length = 7)),
 			@AttributeOverride(name = "dacDteValDmp", column = @Column(name = "DAC_DTE_VAL_DMP", length = 7)),
-			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE", length = 3)),
+			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE", length = 12)),
 			@AttributeOverride(name = "dacDateReception", column = @Column(name = "DAC_DATE_RECEPTION", length = 7)),
 			@AttributeOverride(name = "dacStatutRetour", column = @Column(name = "DAC_STATUT_RETOUR", length = 2)),
 			@AttributeOverride(name = "dacMention", column = @Column(name = "DAC_MENTION", length = 100)),

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -35,7 +35,8 @@ public class VbTiers implements java.io.Serializable {
 			@AttributeOverride(name = "tieTel", column = @Column(name = "TIE_TEL", length = 30)),
 			@AttributeOverride(name = "tieAdresse", column = @Column(name = "TIE_ADRESSE", length = 200)),
 			@AttributeOverride(name = "tieDteSaisi", column = @Column(name = "TIE_DTE_SAISI", length = 7)),
-			@AttributeOverride(name = "tieOpeMatricule", column = @Column(name = "TIE_OPE_MATRICULE", length = 25)) })
+			@AttributeOverride(name = "tieOpeMatricule", column = @Column(name = "TIE_OPE_MATRICULE", length = 25)),
+			@AttributeOverride(name = "tieNcc", column = @Column(name = "TIE_NCC", length = 15)) })
 	public VbTiersId getId() {
 		return this.id;
 	}

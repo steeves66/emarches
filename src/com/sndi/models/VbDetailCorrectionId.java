@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,6 +22,9 @@ public class VbDetailCorrectionId implements java.io.Serializable {
 	private String dcoOpeMatricule;
 	private String dcoObservation;
 	private BigDecimal dcoCorNum;
+	private String dcoConforme;
+	private String dcoPresente;
+	private String dcoRespo;
 
 	public VbDetailCorrectionId() {
 	}
@@ -32,7 +35,7 @@ public class VbDetailCorrectionId implements java.io.Serializable {
 
 	public VbDetailCorrectionId(BigDecimal dcoNum, String dcoTitre, String dcoLibelle, Date dcoDteSaisi,
 			BigDecimal dcoPidCode, String dcoDacCode, String dcoFonCodSaisi, String dcoOpeMatricule,
-			String dcoObservation, BigDecimal dcoCorNum) {
+			String dcoObservation, BigDecimal dcoCorNum, String dcoConforme, String dcoPresente, String dcoRespo) {
 		this.dcoNum = dcoNum;
 		this.dcoTitre = dcoTitre;
 		this.dcoLibelle = dcoLibelle;
@@ -43,6 +46,9 @@ public class VbDetailCorrectionId implements java.io.Serializable {
 		this.dcoOpeMatricule = dcoOpeMatricule;
 		this.dcoObservation = dcoObservation;
 		this.dcoCorNum = dcoCorNum;
+		this.dcoConforme = dcoConforme;
+		this.dcoPresente = dcoPresente;
+		this.dcoRespo = dcoRespo;
 	}
 
 	@Column(name = "DCO_NUM", nullable = false, precision = 22, scale = 0)
@@ -135,6 +141,33 @@ public class VbDetailCorrectionId implements java.io.Serializable {
 		this.dcoCorNum = dcoCorNum;
 	}
 
+	@Column(name = "DCO_CONFORME", length = 3)
+	public String getDcoConforme() {
+		return this.dcoConforme;
+	}
+
+	public void setDcoConforme(String dcoConforme) {
+		this.dcoConforme = dcoConforme;
+	}
+
+	@Column(name = "DCO_PRESENTE", length = 3)
+	public String getDcoPresente() {
+		return this.dcoPresente;
+	}
+
+	public void setDcoPresente(String dcoPresente) {
+		this.dcoPresente = dcoPresente;
+	}
+
+	@Column(name = "DCO_RESPO", length = 1)
+	public String getDcoRespo() {
+		return this.dcoRespo;
+	}
+
+	public void setDcoRespo(String dcoRespo) {
+		this.dcoRespo = dcoRespo;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -167,7 +200,15 @@ public class VbDetailCorrectionId implements java.io.Serializable {
 						|| (this.getDcoObservation() != null && castOther.getDcoObservation() != null
 								&& this.getDcoObservation().equals(castOther.getDcoObservation())))
 				&& ((this.getDcoCorNum() == castOther.getDcoCorNum()) || (this.getDcoCorNum() != null
-						&& castOther.getDcoCorNum() != null && this.getDcoCorNum().equals(castOther.getDcoCorNum())));
+						&& castOther.getDcoCorNum() != null && this.getDcoCorNum().equals(castOther.getDcoCorNum())))
+				&& ((this.getDcoConforme() == castOther.getDcoConforme())
+						|| (this.getDcoConforme() != null && castOther.getDcoConforme() != null
+								&& this.getDcoConforme().equals(castOther.getDcoConforme())))
+				&& ((this.getDcoPresente() == castOther.getDcoPresente())
+						|| (this.getDcoPresente() != null && castOther.getDcoPresente() != null
+								&& this.getDcoPresente().equals(castOther.getDcoPresente())))
+				&& ((this.getDcoRespo() == castOther.getDcoRespo()) || (this.getDcoRespo() != null
+						&& castOther.getDcoRespo() != null && this.getDcoRespo().equals(castOther.getDcoRespo())));
 	}
 
 	public int hashCode() {
@@ -183,6 +224,9 @@ public class VbDetailCorrectionId implements java.io.Serializable {
 		result = 37 * result + (getDcoOpeMatricule() == null ? 0 : this.getDcoOpeMatricule().hashCode());
 		result = 37 * result + (getDcoObservation() == null ? 0 : this.getDcoObservation().hashCode());
 		result = 37 * result + (getDcoCorNum() == null ? 0 : this.getDcoCorNum().hashCode());
+		result = 37 * result + (getDcoConforme() == null ? 0 : this.getDcoConforme().hashCode());
+		result = 37 * result + (getDcoPresente() == null ? 0 : this.getDcoPresente().hashCode());
+		result = 37 * result + (getDcoRespo() == null ? 0 : this.getDcoRespo().hashCode());
 		return result;
 	}
 

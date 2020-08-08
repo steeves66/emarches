@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 4 juil. 2020 18:05:44 by Hibernate Tools 4.3.5.Final
+// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -19,6 +19,8 @@ public class VbFinancementPpmId implements java.io.Serializable {
 	private BigDecimal fppMontantCfa;
 	private BigDecimal fppMontantDevise;
 	private String fppCommentaire;
+	private String fppTypeFinance;
+	private Long fppPartTresor;
 
 	public VbFinancementPpmId() {
 	}
@@ -31,7 +33,8 @@ public class VbFinancementPpmId implements java.io.Serializable {
 	}
 
 	public VbFinancementPpmId(long fppId, String fppDevCode, String fppBaiCode, String fppSouCode, long fppDppId,
-			BigDecimal fppMontantCfa, BigDecimal fppMontantDevise, String fppCommentaire) {
+			BigDecimal fppMontantCfa, BigDecimal fppMontantDevise, String fppCommentaire, String fppTypeFinance,
+			Long fppPartTresor) {
 		this.fppId = fppId;
 		this.fppDevCode = fppDevCode;
 		this.fppBaiCode = fppBaiCode;
@@ -40,6 +43,8 @@ public class VbFinancementPpmId implements java.io.Serializable {
 		this.fppMontantCfa = fppMontantCfa;
 		this.fppMontantDevise = fppMontantDevise;
 		this.fppCommentaire = fppCommentaire;
+		this.fppTypeFinance = fppTypeFinance;
+		this.fppPartTresor = fppPartTresor;
 	}
 
 	@Column(name = "FPP_ID", nullable = false, precision = 10, scale = 0)
@@ -114,6 +119,24 @@ public class VbFinancementPpmId implements java.io.Serializable {
 		this.fppCommentaire = fppCommentaire;
 	}
 
+	@Column(name = "FPP_TYPE_FINANCE", length = 20)
+	public String getFppTypeFinance() {
+		return this.fppTypeFinance;
+	}
+
+	public void setFppTypeFinance(String fppTypeFinance) {
+		this.fppTypeFinance = fppTypeFinance;
+	}
+
+	@Column(name = "FPP_PART_TRESOR", precision = 15, scale = 0)
+	public Long getFppPartTresor() {
+		return this.fppPartTresor;
+	}
+
+	public void setFppPartTresor(Long fppPartTresor) {
+		this.fppPartTresor = fppPartTresor;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -139,7 +162,13 @@ public class VbFinancementPpmId implements java.io.Serializable {
 								&& this.getFppMontantDevise().equals(castOther.getFppMontantDevise())))
 				&& ((this.getFppCommentaire() == castOther.getFppCommentaire())
 						|| (this.getFppCommentaire() != null && castOther.getFppCommentaire() != null
-								&& this.getFppCommentaire().equals(castOther.getFppCommentaire())));
+								&& this.getFppCommentaire().equals(castOther.getFppCommentaire())))
+				&& ((this.getFppTypeFinance() == castOther.getFppTypeFinance())
+						|| (this.getFppTypeFinance() != null && castOther.getFppTypeFinance() != null
+								&& this.getFppTypeFinance().equals(castOther.getFppTypeFinance())))
+				&& ((this.getFppPartTresor() == castOther.getFppPartTresor())
+						|| (this.getFppPartTresor() != null && castOther.getFppPartTresor() != null
+								&& this.getFppPartTresor().equals(castOther.getFppPartTresor())));
 	}
 
 	public int hashCode() {
@@ -153,6 +182,8 @@ public class VbFinancementPpmId implements java.io.Serializable {
 		result = 37 * result + (getFppMontantCfa() == null ? 0 : this.getFppMontantCfa().hashCode());
 		result = 37 * result + (getFppMontantDevise() == null ? 0 : this.getFppMontantDevise().hashCode());
 		result = 37 * result + (getFppCommentaire() == null ? 0 : this.getFppCommentaire().hashCode());
+		result = 37 * result + (getFppTypeFinance() == null ? 0 : this.getFppTypeFinance().hashCode());
+		result = 37 * result + (getFppPartTresor() == null ? 0 : this.getFppPartTresor().hashCode());
 		return result;
 	}
 
