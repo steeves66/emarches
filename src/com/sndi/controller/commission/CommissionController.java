@@ -267,6 +267,8 @@ public class CommissionController {
 	 private String filtreCandidat="";
 	 private String filtreLot="";
 	 private String natdoc ="6";
+	 private long dofMtCor=0;
+	 private long dofErrCalcul=0;
 	 //private long rabais
 	 
 	 
@@ -546,7 +548,8 @@ public class CommissionController {
 				 //new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
 				 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 		 nbrLot =nonbreLot();
-		 
+		 dofErrCalcul=0;
+		 dofMtCor=0;
 		 chargeCritereAnalyse();
 		 verifConformite();
 		 //chargeMention();
@@ -1340,6 +1343,22 @@ public class CommissionController {
 			userController.setSevrityMsg("success");
 		}
 		
+		public void calculMontantCorrige() {
+			dofMtCor = sltOffre.getDofMtOfr() - sltOffre.getDofMtRab()+ dofErrCalcul;
+			_logger.info("montant lu : "  +""+sltOffre.getDofMtOfr());
+			_logger.info("montant rabais : "  +""+sltOffre.getDofMtRab());
+			_logger.info("montant erreur calcule : "  +""+dofErrCalcul);
+			_logger.info("montant corrigé : "  +""+dofMtCor);
+		}
+		
+		public void calculMontantErreur() {
+			dofErrCalcul = dofMtCor - sltOffre.getDofMtOfr() + sltOffre.getDofMtRab();
+			_logger.info("montant lu : "  +""+sltOffre.getDofMtOfr());
+			_logger.info("montant rabais : "  +""+sltOffre.getDofMtRab());
+			_logger.info("montant erreur calcule : "  +""+dofErrCalcul);
+			_logger.info("montant corrigé : "  +""+dofMtCor);
+		}
+		
 		//Analyser une offre
 		public void analyser() {
 			
@@ -1353,10 +1372,12 @@ public class CommissionController {
 			        if (!listeOffres.isEmpty()) {
 			        	offre=offreListe.get(0);
 			        	offre.setDofStaut("1");
-			        	offre.setDofMtCor(sltOffre.getDofMtCor());
+			        	//offre.setDofMtCor(sltOffre.getDofMtCor());
 			        	offre.setDofMtOfr(sltOffre.getDofMtOfr());
 			        	offre.setDofErrFin(sltOffre.getDofErrFin());
 			        	offre.setDofObsFin(sltOffre.getDofObsFin());
+			        	offre.setDofErrCalcul(dofErrCalcul);
+			        	offre.setDofMtCor(dofMtCor);
 			        	iservice.updateObject(offre);
 			          }
 				//sltOffre.setDofStatut("1");
@@ -2663,6 +2684,27 @@ public class CommissionController {
 	public void setListeAnalyseOffreDelete(List<TAnalyseOffre> listeAnalyseOffreDelete) {
 		this.listeAnalyseOffreDelete = listeAnalyseOffreDelete;
 	}
+
+
+	public long getDofMtCor() {
+		return dofMtCor;
+	}
+
+
+	public void setDofMtCor(long dofMtCor) {
+		this.dofMtCor = dofMtCor;
+	}
+
+
+	public long getDofErrCalcul() {
+		return dofErrCalcul;
+	}
+
+
+	public void setDofErrCalcul(long dofErrCalcul) {
+		this.dofErrCalcul = dofErrCalcul;
+	}
+
 
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {

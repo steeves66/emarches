@@ -295,9 +295,10 @@
 					         <div class="row">
 					           <div class="col-sm-6">
 					            <div class="form-group">
-				                  <label class="col-sm-4 control-label"> Erreur de calcule</label>
+				                  <label class="col-sm-4 control-label"> Erreur de calcul</label>
 				                  <div class="col-sm-7">
-				                    <p:inputText type="text"  value="#{commissionController.sltOffre.dofErrCalcul}" styleClass="form-control" style="width: 100%" >
+				                    <p:inputText type="text" id="mtErreur"  value="#{commissionController.dofErrCalcul}" styleClass="form-control" style="width: 100%" >
+				                    <p:ajax listener="#{commissionController.calculMontantCorrige()}"  global="false" event="blur" process="@this" update="MtCor" />
 				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 				                    </p:inputText>
 				                  </div>
@@ -307,9 +308,9 @@
 					             <div class="form-group">
 				                  <label for="MtCor" class="col-sm-5 control-label"> Montant Corrigé</label>
 				                  <div class="col-sm-7">
-				                    <p:inputText type="text" id="MtCor" value="#{commissionController.sltOffre.dofMtCor}" styleClass="form-control" style="width: 100%">
+				                    <p:inputText type="text" id="MtCor" value="#{commissionController.dofMtCor}" styleClass="form-control" style="width: 100%"> 
+				                    <p:ajax listener="#{commissionController.calculMontantErreur()}"  global="false" event="blur" process="@this" update="mtErreur" />
 				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-				                     <p:ajax event="blur" global="false" process="@this" update="MtCor" /> 
 				                    </p:inputText>
 				                  </div>
 				                </div>

@@ -34,8 +34,8 @@ public class TDetOffres implements java.io.Serializable {
 	private BigDecimal dofDelai;
 	private BigDecimal dofDelai2;
 	private Long dofRangOfr;
-	private BigDecimal dofMtCor;
-	private BigDecimal dofMtOfr;
+	private Long dofMtCor;
+	private long dofMtOfr;
 	private String dofRab;
 	private BigDecimal dofEstimRab;
 	private String dofCaut;
@@ -94,8 +94,8 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofObsAnormal;
 	private String dofObsVariante;
 	private BigDecimal dofMtCaut;
-	private BigDecimal dofMtRab;
-	private BigDecimal dofErrCalcul;
+	private long dofMtRab;
+	private long dofErrCalcul;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -111,7 +111,7 @@ public class TDetOffres implements java.io.Serializable {
 
 	public TDetOffres(BigDecimal dofNum, TFonction TFonction, TLotAao TLotAao, TOffres TOffres, TOperateur TOperateur,
 			String dofLaaAaoCode, String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2, Long dofRangOfr,
-			BigDecimal dofMtCor, BigDecimal dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut,
+			Long dofMtCor, long dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut,
 			String dofBanCode, String dofSeuil, Short dofScore, String dofRecevabl, String dofRet, String dofRetBai,
 			String dofRetDmp, BigDecimal dofMtAtt, String dofTot, String dofTotAdm, String dofTotTec, String dofObsDmp,
 			String dofObsCom, String dofObsAdm, String dofObsAdmDmp, String dofObsAdmBai, String dofObsTec,
@@ -121,7 +121,7 @@ public class TDetOffres implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin,
-			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,BigDecimal dofMtRab,BigDecimal dofErrCalcul,Set<TPiecesOffres> TPiecesOffreses) {
+			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,long dofMtRab,long dofErrCalcul,Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
@@ -293,20 +293,20 @@ public class TDetOffres implements java.io.Serializable {
 	}
 
 	@Column(name = "DOF_MT_COR", precision = 20, scale = 0)
-	public BigDecimal getDofMtCor() {
+	public Long getDofMtCor() {
 		return this.dofMtCor;
 	}
 
-	public void setDofMtCor(BigDecimal dofMtCor) {
+	public void setDofMtCor(Long dofMtCor) {
 		this.dofMtCor = dofMtCor;
 	}
 
 	@Column(name = "DOF_MT_OFR", precision = 20, scale = 0)
-	public BigDecimal getDofMtOfr() {
+	public long getDofMtOfr() {
 		return this.dofMtOfr;
 	}
 
-	public void setDofMtOfr(BigDecimal dofMtOfr) {
+	public void setDofMtOfr(long dofMtOfr) {
 		this.dofMtOfr = dofMtOfr;
 	}
 
@@ -844,20 +844,20 @@ public class TDetOffres implements java.io.Serializable {
 	}
 	
 	@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
-	public BigDecimal getDofMtRab() {
+	public long getDofMtRab() {
 		return this.dofMtRab;
 	}
 
-	public void setDofMtRab(BigDecimal dofMtRab) {
+	public void setDofMtRab(long dofMtRab) {
 		this.dofMtRab = dofMtRab;
 	}
 	
 	@Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)
-	public BigDecimal getDofErrCalcul() {
+	public long getDofErrCalcul() {
 		return this.dofErrCalcul;
 	}
 
-	public void setDofErrCalcul(BigDecimal dofErrCalcul) {
+	public void setDofErrCalcul(long dofErrCalcul) {
 		this.dofErrCalcul = dofErrCalcul;
 	}
 	

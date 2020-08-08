@@ -27,8 +27,8 @@ public class VDetOffreRecevable implements java.io.Serializable {
 	private BigDecimal dofDelai;
 	private BigDecimal dofDelai2;
 	private Long dofRangOfr;
-	private BigDecimal dofMtCor;
-	private BigDecimal dofMtOfr;
+	private long dofMtCor;
+	private long dofMtOfr;
 	private String dofRab;
 	private BigDecimal dofEstimRab;
 	private String dofCaut;
@@ -76,14 +76,14 @@ public class VDetOffreRecevable implements java.io.Serializable {
 	private String dofNomSign;
 	private String dofFonctSign;
 	private String dofTelSign;
-	private BigDecimal dofMtRab;
+	private long dofMtRab;
 	private Date dofDteSaisi;
 	private String dofFonCodeAc;
 	private String dofOpeMatricule;
 	private String dofStatut;
 	private String dofSouNcc;
 	private String dofTitle;
-	private BigDecimal dofErrCalcul;
+	private Long dofErrCalcul;
 	private String dofSigle;
 	private String dofErrFin;
 	private String dofObsFin;
@@ -104,8 +104,8 @@ public class VDetOffreRecevable implements java.io.Serializable {
 	}
 
 	public VDetOffreRecevable(BigDecimal dofNum, BigDecimal dofLaaId, String dofLaaAaoCode, BigDecimal dofOffNum,
-			String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2, Long dofRangOfr, BigDecimal dofMtCor,
-			BigDecimal dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut, String dofBanCode,
+			String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2, Long dofRangOfr, long dofMtCor,
+			long dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut, String dofBanCode,
 			String dofSeuil, Short dofScore, String dofRecevabl, String dofRet, String dofRetBai, String dofRetDmp,
 			BigDecimal dofMtAtt, String dofTot, String dofTotAdm, String dofTotTec, String dofObsDmp, String dofObsCom,
 			String dofObsAdm, String dofObsAdmDmp, String dofObsAdmBai, String dofObsTec, String dofObsTecDmp,
@@ -115,8 +115,8 @@ public class VDetOffreRecevable implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofFonCodeAc,
-			String dofOpeMatricule, String dofStatut, String dofSouNcc,String dofTitle,BigDecimal dofErrCalcul,String dofSigle, String dofErrFin,
-			BigDecimal dofMtRab,String dofObsFin, String dofRepeche, String dofObsAnormal, String dofObsRet) {
+			String dofOpeMatricule, String dofStatut, String dofSouNcc,String dofTitle,Long dofErrCalcul,String dofSigle, String dofErrFin,
+			long dofMtRab,String dofObsFin, String dofRepeche, String dofObsAnormal, String dofObsRet) {
 		this.dofNum = dofNum;
 		this.dofLaaId = dofLaaId;
 		this.dofLaaAaoCode = dofLaaAaoCode;
@@ -265,20 +265,20 @@ public class VDetOffreRecevable implements java.io.Serializable {
 	}
 
 	@Column(name = "DOF_MT_COR", precision = 20, scale = 0)
-	public BigDecimal getDofMtCor() {
+	public long getDofMtCor() {
 		return this.dofMtCor;
 	}
 
-	public void setDofMtCor(BigDecimal dofMtCor) {
+	public void setDofMtCor(long dofMtCor) {
 		this.dofMtCor = dofMtCor;
 	}
 
 	@Column(name = "DOF_MT_OFR", precision = 20, scale = 0)
-	public BigDecimal getDofMtOfr() {
+	public long getDofMtOfr() {
 		return this.dofMtOfr;
 	}
 
-	public void setDofMtOfr(BigDecimal dofMtOfr) {
+	public void setDofMtOfr(long dofMtOfr) {
 		this.dofMtOfr = dofMtOfr;
 	}
 
@@ -760,19 +760,19 @@ public class VDetOffreRecevable implements java.io.Serializable {
 	}
 	
 	@Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)
-	public BigDecimal getDofErrCalcul() {
+	public Long getDofErrCalcul() {
 		return this.dofErrCalcul;
 	}
 
-	public void setDofErrCalcul(BigDecimal dofErrCalcul) {
+	public void setDofErrCalcul(Long dofErrCalcul) {
 		this.dofErrCalcul = dofErrCalcul;
 	}
 	@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
-	public BigDecimal getDofMtRab() {
+	public long getDofMtRab() {
 		return this.dofMtRab;
 	}
 
-	public void setDofMtRab(BigDecimal dofMtRab) {
+	public void setDofMtRab(long dofMtRab) {
 		this.dofMtRab = dofMtRab;
 	}
 
