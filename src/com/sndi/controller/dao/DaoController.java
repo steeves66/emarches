@@ -2636,6 +2636,7 @@ public class DaoController {
 				            	     				   if (!listDao.isEmpty()) {
 				            	     					    newDao= listDao.get(0);
 				            	     					    newDao.setDacCout(newAvis.getAaoCoutDac());
+				            	     					    newDao.setDacNbrCopieOff(dao.getDacNbrCopieOff());
 				            	     			            iservice.updateObject(newDao); 
 				            	     	   	                 }
 			                                             //Charger la liste des pieces de l'offre
