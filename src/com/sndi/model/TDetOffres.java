@@ -94,8 +94,8 @@ public class TDetOffres implements java.io.Serializable {
 	private String dofObsAnormal;
 	private String dofObsVariante;
 	private BigDecimal dofMtCaut;
-	private long dofMtRab;
-	private long dofErrCalcul;
+	private Long dofMtRab;
+	private Long dofErrCalcul;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -121,7 +121,7 @@ public class TDetOffres implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin,
-			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,long dofMtRab,long dofErrCalcul,Set<TPiecesOffres> TPiecesOffreses) {
+			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,Long dofMtRab,Long dofErrCalcul,Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
@@ -844,20 +844,20 @@ public class TDetOffres implements java.io.Serializable {
 	}
 	
 	@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
-	public long getDofMtRab() {
+	public Long getDofMtRab() {
 		return this.dofMtRab;
 	}
 
-	public void setDofMtRab(long dofMtRab) {
+	public void setDofMtRab(Long dofMtRab) {
 		this.dofMtRab = dofMtRab;
 	}
 	
 	@Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)
-	public long getDofErrCalcul() {
+	public Long getDofErrCalcul() {
 		return this.dofErrCalcul;
 	}
 
-	public void setDofErrCalcul(long dofErrCalcul) {
+	public void setDofErrCalcul(Long dofErrCalcul) {
 		this.dofErrCalcul = dofErrCalcul;
 	}
 	
