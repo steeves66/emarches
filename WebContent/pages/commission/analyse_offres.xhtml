@@ -282,7 +282,29 @@
 				                </div>
 					           </div>
 					           <div class="col-sm-6">
+					           <div class="form-group">
+				                  <label class="col-sm-5 control-label">Rabais</label>
+				                  <div class="col-sm-7">
+				                    <p:inputText type="text"  value="#{commissionController.sltOffre.dofMtRab}" readonly="true" styleClass="form-control" style="width: 100%" >
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           </div>
+					         <div class="row">
+					           <div class="col-sm-6">
 					            <div class="form-group">
+				                  <label class="col-sm-4 control-label"> Erreur de calcule</label>
+				                  <div class="col-sm-7">
+				                    <p:inputText type="text"  value="#{commissionController.sltOffre.dofErrCalcul}" styleClass="form-control" style="width: 100%" >
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           <div class="col-sm-6">
+					             <div class="form-group">
 				                  <label for="MtCor" class="col-sm-5 control-label"> Montant Corrigé</label>
 				                  <div class="col-sm-7">
 				                    <p:inputText type="text" id="MtCor" value="#{commissionController.sltOffre.dofMtCor}" styleClass="form-control" style="width: 100%">
