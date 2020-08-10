@@ -1547,7 +1547,7 @@
 	                  <div class="col-sm-10">
 	                  <p:inputText  type="text" styleClass="form-control" id="montEst" value="#{daoController.newVbTemp.laaMtEst}" style="width: 100%" >
 	                   <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" global="false" process="@this" update="montEst" /> 
+	                    <p:ajax event="blur" global="false" process="@this" update="lotlog:montEst" /> 
 	                  </p:inputText> 
 	                  </div>
 	                </div>
@@ -1574,7 +1574,7 @@
 	                  <div class="col-sm-10">
 	                  <p:inputText  type="text" styleClass="form-control" id="montCaut" value="#{daoController.newVbTemp.tempLaaCautLot}" style="width: 100%" >
 	                   <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" listener="#{daoController.calculCaution()}" global="false" process="@this" update="lotlog:pcaution" /> 
+	                    <p:ajax event="blur" listener="#{daoController.calculCaution()}" global="false" process="@this" update="lotlog:montCaut, lotlog:pcaution" /> 
 	                  </p:inputText>
 	                  </div>
 	                </div>
