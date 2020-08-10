@@ -792,44 +792,36 @@ public class DaoController {
 	 }
 	 
 	 public void updateCritere() {
-		 VbDetCritAnalyseDac updateCritere = new VbDetCritAnalyseDac();
-		 listDetCritereDac = ((List<VbDetCritAnalyseDac>)iservice.getObjectsByColumn("VbDetCritAnalyseDac",
-				 new WhereClause("DCAD_DAN_CRA_CODE",WhereClause.Comparateur.EQ,""+sltCritereDac.getCraCode())));
-		  if(!listDetCritereDac.isEmpty()) { 
-			  updateCritere=listDetCritereDac.get(0);
+		 TDetCritAnalyseDac updateCritere = new TDetCritAnalyseDac();
+		 listDetcritere = ((List<TDetCritAnalyseDac>)iservice.getObjectsByColumn("TDetCritAnalyseDac",
+				 new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum())));
+		  if(!listDetcritere.isEmpty()) { 
+			  updateCritere=listDetcritere.get(0);
 			  updateCritere.setDcadLibAjust(sltCritereDac.getCraLibelle());
 			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereSaisie();
-		  }
-		 
-		/* listDetcritere = ((List<TDetCritAnalyseDac>)iservice.getObjectsByColumn("TDetCritAnalyseDac",
-				 new WhereClause("DCAD_DAN_CRA_CODE",WhereClause.Comparateur.EQ,""+sltCritereDac.getCraCode())));
-		 if(!listDetcritere.isEmpty()) {
-			 detCritere.setDcadLibAjust(sltCritereDac.getCraLibelle());
-			 detCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
-			 iservice.updateObject(detCritere);
-			 chargeCritereSaisie();
-		 }*/
-		 
-		   chargeCritereSaisie();
 		    userController.setTexteMsg("Modification effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
+		  }
 	 }
 	 
 	 
 	 public void updateCritereByLot() {
-		 VbDetCritAnalyseDac updateCritere = new VbDetCritAnalyseDac();
-		 listDetCritereDac = ((List<VbDetCritAnalyseDac>)iservice.getObjectsByColumn("VbDetCritAnalyseDac",
-				 new WhereClause("DCAD_DAN_CRA_CODE",WhereClause.Comparateur.EQ,""+sltCritereDac.getCraCode())));
-		  if(!listDetCritereDac.isEmpty()) { 
-			  updateCritere=listDetCritereDac.get(0);
+		 TDetCritAnalyseDac updateCritere = new TDetCritAnalyseDac();
+		 listDetcritere = ((List<TDetCritAnalyseDac>)iservice.getObjectsByColumn("TDetCritAnalyseDac",
+				 new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum())));
+		  if(!listDetcritere.isEmpty()) { 
+			  updateCritere=listDetcritere.get(0);
 			  updateCritere.setDcadLibAjust(sltCritereDac.getCraLibelle());
+			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereByLot();
+		    userController.setTexteMsg("Modification effectuée avec succès!");
+			userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
 		  }
-		 
 	 }
 	 
 	 
@@ -7443,6 +7435,14 @@ public class DaoController {
 
 	public void setDetailVente(VDacVendu detailVente) {
 		this.detailVente = detailVente;
+	}
+
+	public List<TDetCritAnalyseDac> getListDetcritere() {
+		return listDetcritere;
+	}
+
+	public void setListDetcritere(List<TDetCritAnalyseDac> listDetcritere) {
+		this.listDetcritere = listDetcritere;
 	}
 
 

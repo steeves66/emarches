@@ -521,7 +521,6 @@ public class CommissionController {
 	 
 	 
 	 public void verifConformite() {
-	
 		  listeAvis = ((List<TAvisAppelOffre>)iservice.getObjectsByColumn("TAvisAppelOffre",new ArrayList<String>(Arrays.asList("AAO_CODE")),
  				 new WhereClause("AAO_CODE",Comparateur.EQ,""+sltOffre.getDofLaaAaoCode())));
                   if (!listeAvis.isEmpty()) {
