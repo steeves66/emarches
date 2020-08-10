@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Date;
@@ -2939,7 +2941,15 @@ public class DaoController {
 								panelCaution = true;
 								cautionMinRound = Math.round(cautionMin);
 								cautionMaxRound = Math.round(cautionMax);
-								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
+								
+								DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
+								symbols.setGroupingSeparator(' ');
+
+								DecimalFormat formatter = new DecimalFormat("###,###.##", symbols);
+								System.out.println(formatter.format(cautionMin));
+								System.out.println(formatter.format(cautionMaxRound));
+								
+								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+formatter.format(cautionMin)+" et "+formatter.format(cautionMax),"");
 								 FacesContext.getCurrentInstance().addMessage(null, msg);
 							}
 							if(montantCaut > cautionMin ||  montantCaut < cautionMax) { 
@@ -2995,7 +3005,16 @@ public class DaoController {
 				    	   }else {
 				    			cautionMinRound = Math.round(cautionMin);
 								cautionMaxRound = Math.round(cautionMax);
-								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+cautionMinRound+" et "+cautionMaxRound,"");
+								
+								DecimalFormatSymbols symbols = DecimalFormatSymbols.getInstance();
+								symbols.setGroupingSeparator(' ');
+
+								DecimalFormat formatter = new DecimalFormat("###,###.##", symbols);
+								System.out.println(formatter.format(cautionMin));
+								System.out.println(formatter.format(cautionMaxRound));
+								
+								
+								 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le montant du cautionnement doit etre compris entre "+formatter.format(cautionMin)+" et "+formatter.format(cautionMax),"");
 								 FacesContext.getCurrentInstance().addMessage(null, msg);
 								 panelCaution = true;
 				    	   }
