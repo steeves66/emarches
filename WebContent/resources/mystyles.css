@@ -591,6 +591,11 @@ fieldset[disabled] a.btn {
   margin-left: 12px;
   margin-right: -13px;
   border-radius: 0px 3px 3px 0px; }
+  
+  .old {
+        background-color: #fca752 !important;
+        background-image: none !important;
+        color: #fff !important;
 
 html {
   font-size: 14px;

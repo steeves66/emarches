@@ -103,6 +103,7 @@ import com.sndi.model.VPieces;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreDao;
 import com.sndi.model.VPpmDao;
+import com.sndi.model.VTempCitere;
 import com.sndi.model.VTypePieceOffreSg;
 import com.sndi.model.VUpdateAgpm;
 import com.sndi.model.VUpdateDac;
@@ -381,6 +382,7 @@ public class DaoController {
 	 private VCommissionSpecifique sltCompsec = new VCommissionSpecifique();
 	//GESTION DES CRTIERE
 	 private VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
+	 private VTempCitere newTempCritereDac = new VTempCitere();
 	 private VCritereAnalyseDac sltCritereDac = new VCritereAnalyseDac();
 	 private boolean btn_save_presence = true;
 	 private boolean btn_save_expert = false;
@@ -733,9 +735,15 @@ public class DaoController {
 		 			newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 			newCritereDac.setDcadStatut("1");
 		 			iservice.addObject(newCritereDac);
+		 			
 			     }
 		 		 
-		 		
+		 		newTempCritereDac.setCraDacCode(dao.getDacCode());
+	 			newTempCritereDac.setCraDteSaisi(Calendar.getInstance().getTime());
+	 			newTempCritereDac.setCraOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+	 			newTempCritereDac.setCraType("CRI");
+	 			iservice.addObject(newTempCritereDac);
+	 			
 		 		selectionlisteCritereAnalyse.clear();
 		 		chargeCritereSaisie();
 		 		chargeLotCritere();
@@ -7464,6 +7472,14 @@ public class DaoController {
 
 	public void setListDetcritere(List<TDetCritAnalyseDac> listDetcritere) {
 		this.listDetcritere = listDetcritere;
+	}
+
+	public VTempCitere getNewTempCritereDac() {
+		return newTempCritereDac;
+	}
+
+	public void setNewTempCritereDac(VTempCitere newTempCritereDac) {
+		this.newTempCritereDac = newTempCritereDac;
 	}
 
 

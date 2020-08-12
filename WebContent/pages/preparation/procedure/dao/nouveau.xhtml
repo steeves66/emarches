@@ -9,6 +9,13 @@
 	
 	<ui:define name="contents">
 	<h:form id="gnl" styleClass="form-horizontal">
+	  <style type="text/css">
+    .old {
+        background-color: #EEE8DF !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
 <section class="content-header">
       <h1>
         <!-- #{controleController.libelle} -->
@@ -744,6 +751,7 @@
           </h:panelGroup>
           
           <p:tab rendered="#{daoController.pavet_critere}" id="critere" title="Saisie des critères d'évaluation"  titleStyle="background-color: #f88b2e;background-image: none">
+        
            <div class="row">   
             <div class="col-md-12">
               <div class="row">
@@ -755,11 +763,16 @@
                </div>
 	            <!-- /.box-header -->
 	                  <div class="box-body">    
-                 <p:dataTable var="slctdTb"  styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereAnalyse}" 
+                 <p:dataTable var="slctdTb"  styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereAnalyse}" rowStyleClass="#{slctdTb.modelStatut == '1' ? 'old' : 0}"
                 selection="#{daoController.selectionlisteCritereAnalyse}" scrollable="true" scrollHeight="550" rowKey="#{slctdTb.craCode}" emptyMessage="Aucun critère trouvé">
                            <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 				         <p:column headerText="CRITERES" styleClass="col-sm-12">
+				               <h:panelGroup rendered="#{slctdTb.modelStatut == '1'}">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
+		         		      </h:panelGroup>
+		         		      <h:panelGroup rendered="#{slctdTb.modelStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
+		         		      </h:panelGroup>
                             </p:column>
                         </p:dataTable>  
 	            </div>
@@ -783,27 +796,44 @@
                </div>
 	            <!-- /.box-header -->
 	                      <div class="box-body">     
-                      <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}"   
+                      <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}"
                 scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
                               <p:column headerText="CRITERES" styleClass="col-sm-5">
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
+		         			  </h:panelGroup>
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
-                              <p:column headerText="COMMENTAIRE" styleClass="col-sm-6">
+                            
+                            
+                            <p:column headerText="COMMENTAIRE" styleClass="col-sm-6">
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" />
+		         			  </h:panelGroup>
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
+
                              <p:column headerText="Actions" styleClass="col-sm-1">
-                           
+                             <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
                                <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />                             
                             </p:commandLink>
+                            
+                            
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
-			               
+			               </h:panelGroup>
+			               <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+			               </h:panelGroup>
 				        </p:column>
                         </p:dataTable>  
 	            </div>
@@ -851,16 +881,29 @@
                </div>
 	            <!-- /.box-header -->
 	                      <div class="box-body">     
-                      <p:dataTable id="tbCritLot" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereByLot}"   
+                      <p:dataTable id="tbCritLot" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereByLot}" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}"
                 scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
-                              <p:column headerText="CRITERES" styleClass="col-sm-5">
+                            
+                               <p:column headerText="CRITERES" styleClass="col-sm-5">
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
+		         			  </h:panelGroup>
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
                             
-                            <p:column headerText="COMMENTAIRE" styleClass="col-sm-5">
+                              <p:column headerText="COMMENTAIRE" styleClass="col-sm-5">
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" />
+		         			  </h:panelGroup>
+                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
+                            
                              <p:column headerText="Actions" styleClass="col-sm-1">
+                             <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
 				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('dlogdetModLot').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
@@ -871,6 +914,9 @@
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
 			                </p:commandLink>
+			                </h:panelGroup>
+			                <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+			               </h:panelGroup>
 				        </p:column>
                         </p:dataTable>  
 	            </div>

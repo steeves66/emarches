@@ -80,18 +80,33 @@
                  <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeLotsByAvis}" 
                  scrollable="true" scrollHeight="465" rowKey="#{slctdTb.laaId}" emptyMessage="Aucun Lot enregistré">
                  <p:column selectionMode="single" style="width:26px;text-align:center"/>
+                     
                            <p:column headerText="N°Lot" styleClass="col-sm-1">
 				            <h:commandLink  title="N°Lot" styleClass="col-sm-1"
          				 action="#{commissionController.onSelectLot()}">
-                                #{slctdTb.laaNum}
+         				 <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
+                                <span>#{slctdTb.laaNum}</span>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{slctdTb.lotStatut == '1'}">
+                               <span style="color:green; font-weight:bold" > #{slctdTb.laaNum} </span>
+                                </h:panelGroup>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
                          </h:commandLink>
 	
 				        </p:column>
+				      
+				        
 				         <p:column headerText="Objet" styleClass="col-sm-11">
 				           <h:commandLink  title="Objet" styleClass="col-sm-10"
          				 action="#{commissionController.onSelectLot()}">
-                                #{slctdTb.laaObjet}
+         				  <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
+                                <span>#{slctdTb.laaObjet}</span>
+                           </h:panelGroup>
+                           
+                           <h:panelGroup rendered="#{slctdTb.lotStatut == '1'}">
+                               <span style="color:green; font-weight:bold" > #{slctdTb.laaObjet} </span>
+                                </h:panelGroup>
+                                
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
                          </h:commandLink>
 	

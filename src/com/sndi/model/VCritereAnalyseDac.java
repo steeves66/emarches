@@ -34,6 +34,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 	private BigDecimal dcadNum;
 	private String dcadCommentaire;
 	private BigDecimal dcadLaaId;
+	private Character analyseStatut;
 
 	public VCritereAnalyseDac() {
 	}
@@ -41,7 +42,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 	public VCritereAnalyseDac(BigDecimal RId,String craCode, String craLibelle, String codparent, String codep, String craTymCodex,
 			String craTypProc, String craTypDac, String craBailleurx, String dcadDacCode,String aaoRegQual,
 			long valRegQual, BigDecimal dcadNum, String dcadCommentaire,
-			BigDecimal dcadLaaId) {
+			BigDecimal dcadLaaId,Character analyseStatut) {
 		this.RId = RId;
 		this.craCode = craCode;
 		this.craLibelle = craLibelle;
@@ -57,6 +58,7 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 		this.dcadNum = dcadNum;
 		this.dcadCommentaire = dcadCommentaire;
 		this.dcadLaaId = dcadLaaId;
+		this.analyseStatut = analyseStatut;
 	}
 
 	@Id
@@ -193,5 +195,15 @@ public class VCritereAnalyseDac implements java.io.Serializable {
 	public void setDcadLaaId(BigDecimal dcadLaaId) {
 		this.dcadLaaId = dcadLaaId;
 	}
+	
+	@Column(name = "ANALYSE_STATUT", length = 1)
+	public Character getAnalyseStatut() {
+		return this.analyseStatut;
+	}
+
+	public void setAnalyseStatut(Character analyseStatut) {
+		this.analyseStatut = analyseStatut;
+	}
+
 
 }
