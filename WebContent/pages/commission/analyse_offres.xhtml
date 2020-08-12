@@ -405,7 +405,7 @@
 		               <div class="form-group">
 			                  <label  class="col-sm-1 control-label"> Observation </label>
 			                  <div class="col-sm-11">
-			                    <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{commissionController.sltOffre.dofObsCom}" style="width: 100%" />
+			                    <p:inputTextarea  rows="6" cols="33" styleClass="form-control" value="#{commissionController.sltOffre.dofObsCom}" style="width: 100%" />
 			                  </div>
 			                </div>
 		           </div>
@@ -456,11 +456,21 @@
    
                  </div>
               </div>
+                
+			           
               
               
 	                 <div class="row">
+	              
+	               <p:commandLink styleClass="btn btn-warning" style="background-color: #f88b2e;color:#fff;margin-left:15px;" oncomplete="PF('financedlg').hide()" update=":gnl">
+			             <i class="ace-icon fa fa-close bigger-130"></i> Fermer			           
+			        </p:commandLink>
+			             
+			             
+			            
+	              
                 <div class="pull-right ">
-			            <p:commandLink action="#{commissionController.analyser()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
+			            <p:commandLink action="#{commissionController.analyser()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:15px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'analyse?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Enregistrer			            </p:commandLink>
               </div>

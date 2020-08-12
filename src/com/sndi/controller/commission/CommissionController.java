@@ -68,6 +68,7 @@ import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VListeSouOffBasse;
 import com.sndi.model.VListeSouOffEleve;
 import com.sndi.model.VLot;
+import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VOffreCandidat;
 import com.sndi.model.VPiecesOffre;
@@ -150,7 +151,7 @@ public class CommissionController {
 	 //private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
-	 private List<TLotAao> listeLotsByAvis = new ArrayList<TLotAao>();
+	 private List<VLotAnalyse> listeLotsByAvis = new ArrayList<VLotAnalyse>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
 	 private List<VDofTyp> listdoftyp = new ArrayList<VDofTyp>();
@@ -219,7 +220,7 @@ public class CommissionController {
 	 //private TDetOffres sltOffre = new TDetOffres();
 	 private VDetOffreRecevable sltOffre = new VDetOffreRecevable();
 	 private TSoumissions soumission = new TSoumissions();
-	 private TLotAao lot = new TLotAao();
+	 private VLotAnalyse lot = new VLotAnalyse();
 	 private VLot sltLot = new VLot();
 	 private TDetailVente vente = new TDetailVente();
 	 private TPiecesOffres newPieceOffre = new TPiecesOffres();
@@ -647,7 +648,7 @@ public class CommissionController {
 		//Liste des lot d'un avis d'avis d'appel d'offre
 		 public void chargeLotByAvis() {
 			 listeLots.clear();
-			listeLotsByAvis=(List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+			listeLotsByAvis=(List<VLotAnalyse>) iservice.getObjectsByColumn("VLotAnalyse", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 			_logger.info("listeLotsByAvis size: "+listeLotsByAvis.size());
 		 }
@@ -655,7 +656,7 @@ public class CommissionController {
 		//filtre lot
 		 public void chargeLotFilterLot() {
 			 listeLots.clear();
-			listeLotsByAvis=(List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+			listeLotsByAvis=(List<VLotAnalyse>) iservice.getObjectsByColumn("VLotAnalyse", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
 					new WhereClause("LAA_NUM",WhereClause.Comparateur.LIKE,"%"+laaNum+"%")); 
 			_logger.info("listeLotsByAvis size: "+listeLotsByAvis.size());
@@ -667,7 +668,7 @@ public class CommissionController {
 			 listeOffres.clear();
 			 listeOffres = ((List<VDetOffreRecevable>)iservice.getObjectsByColumn("VDetOffreRecevable",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())));
-				_logger.info("listeOffres size: "+listeOffre.size());	
+				_logger.info("listeOffres size: "+listeOffres.size());	
 				
 				//pour jugelment
 				 saisie=false;
@@ -1771,11 +1772,12 @@ public class CommissionController {
 		this.listeLots = listeLots;
 	}
 
-	public TLotAao getLot() {
+	public VLotAnalyse getLot() {
 		return lot;
 	}
 
-	public void setLot(TLotAao lot) {
+
+	public void setLot(VLotAnalyse lot) {
 		this.lot = lot;
 	}
 
@@ -1898,13 +1900,15 @@ public class CommissionController {
 	}
 
 
-	public List<TLotAao> getListeLotsByAvis() {
+	public List<VLotAnalyse> getListeLotsByAvis() {
 		return listeLotsByAvis;
 	}
 
-	public void setListeLotsByAvis(List<TLotAao> listeLotsByAvis) {
+
+	public void setListeLotsByAvis(List<VLotAnalyse> listeLotsByAvis) {
 		this.listeLotsByAvis = listeLotsByAvis;
 	}
+
 
 	public void setInfoOffre(boolean infoOffre) {
 		this.infoOffre = infoOffre;

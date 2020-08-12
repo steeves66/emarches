@@ -3002,6 +3002,7 @@ public class DaoController {
 								  
 								  //Activation du pavet de saisie des pièces des offres 
 			                      pavet_offre = true; 
+			                      pavet_critere= true;
 				    	   }else {
 				    			cautionMinRound = Math.round(cautionMin);
 								cautionMaxRound = Math.round(cautionMax);
@@ -3097,6 +3098,7 @@ public class DaoController {
 							 
 							 //Activation du pavet de saisie des pièces des offres 
 			                 pavet_offre = true;
+			                 pavet_critere= true;
 				        	 userController.setTexteMsg("Lot enregistré avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
