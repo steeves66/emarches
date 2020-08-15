@@ -115,6 +115,7 @@ import com.sndi.model.VbDetCritAnalyse;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbPaysReference;
 import com.sndi.model.VbTempParamDetCri;
+import com.sndi.model.VbTempParamEnteteCri;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
 import com.sndi.model.VbTempParametreLot;
@@ -297,6 +298,7 @@ public class DaoController {
 	 private VbDetCritAnalyse newDetCritere = new VbDetCritAnalyse();
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
+	 private VbTempParamEnteteCri newTempEnteteCrit = new VbTempParamEnteteCri();
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
 	private VDacliste caution = new VDacliste();
 	
@@ -683,6 +685,19 @@ public class DaoController {
 			 craCode ="";
 			 chargeCritereSaisie(); 
 			 chargeCritereCombobox();
+			 
+			 
+			 //Avec temp param
+			/* newTempEnteteCrit.setDcadDacCode(dao.getDacCode());
+			 newTempEnteteCrit.setDcadDanCraCode(newEnteteCrit.getCraCode());
+			 newTempEnteteCrit.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
+			 newTempEnteteCrit.setDcadDanCode("99999999999");
+			 newTempEnteteCrit.setTempType("CRE");
+			 newTempEnteteCrit.setCriDteSaisi(Calendar.getInstance().getTime());
+			 newTempEnteteCrit.setCriOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 newTempEnteteCrit.setCriDcadStatut("1");
+			 iservice.addObject(newTempEnteteCrit);
+			 newTempEnteteCrit = new VbTempParamEnteteCri();*/
 		 } 
 	 }
 	 
@@ -754,11 +769,11 @@ public class DaoController {
 		 			
 			     }
 		 		 
-		 		newTempCritereDac.setCraDacCode(dao.getDacCode());
+		 	/*	newTempCritereDac.setCraDacCode(dao.getDacCode());
 	 			newTempCritereDac.setCraDteSaisi(Calendar.getInstance().getTime());
 	 			newTempCritereDac.setCraOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 	 			newTempCritereDac.setCraType("CRI");
-	 			iservice.addObject(newTempCritereDac);
+	 			iservice.addObject(newTempCritereDac);*/
 	 			
 		 		selectionlisteCritereAnalyse.clear();
 		 		chargeCritereSaisie();
