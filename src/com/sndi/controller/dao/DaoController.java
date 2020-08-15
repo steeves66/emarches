@@ -550,8 +550,8 @@ public class DaoController {
 	//Parametrage des criteres en fonction du type plan et du type dac
 	 public void chargeCritere() { 
 		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
-					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()));
-		 /*new WhereClause("CRA_TYM_CODE",WhereClause.Comparateur.EQ,"2"));*/
+					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
+		            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
 	 }
 	 
@@ -746,6 +746,7 @@ public class DaoController {
 	 			
 		 		selectionlisteCritereAnalyse.clear();
 		 		chargeCritereSaisie();
+		 		chargeCritere();
 		 		chargeLotCritere();
 		 		pavet_commission = true;
 		 		userController.setTexteMsg("Critère(s) d'analyse enrégistré(s) avec succès!");
@@ -1132,14 +1133,17 @@ public class DaoController {
 	 //Suppression du critère du détail
 	 public void deleteCritere() {
 		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
-					new WhereClause("DCAD_DAN_CODE",WhereClause.Comparateur.EQ,""+sltCritereDac.getCraCode()));
+					new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum()));
 	       if (!listeDetCritere.isEmpty()) {
 	    	   detCritere = listeDetCritere.get(0);
+	  		 iservice.deleteObject(detCritere); 
+	  		 chargeCritereSaisie();
+	  		 chargeCritere();
+	  		userController.setTexteMsg("Suppression éffectuée avec succès!");
+			userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
 	       }
-		 //newCritereDac.setDcadDanCraCode(sltCritereDac.getCraCode());
-		 iservice.deleteObject(getDetCritere()); 
-		 chargeCritereSaisie();
-		 new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
+		
 	 }
 	 //Fin de la méthode de suppression du détail de critère
 	 

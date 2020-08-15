@@ -28,13 +28,14 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 	private String craTypDac;
 	private String mdtDacTypeChain;
 	private Character modelStatut;
+	private String dacCode;
 
 	public VCritereAnalyseModel() {
 	}
 
 	public VCritereAnalyseModel(String craCode, String craLibelle, String mdtCode, String codedetail,
 			String mdtLibelleLong, String craBail, String codparent, String mdtTymCode, String craTypDac,
-			String mdtDacTypeChain, Character modelStatut) {
+			String mdtDacTypeChain, Character modelStatut,String dacCode) {
 		this.craCode = craCode;
 		this.craLibelle = craLibelle;
 		this.mdtCode = mdtCode;
@@ -46,6 +47,7 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.craTypDac = craTypDac;
 		this.mdtDacTypeChain = mdtDacTypeChain;
 		this.modelStatut = modelStatut;
+		this.dacCode = dacCode;
 	}
 
 	@Id
@@ -148,4 +150,12 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 		this.modelStatut = modelStatut;
 	}
 
+	@Column(name = "DAC_CODE", nullable = false, length = 20)
+	public String getDacCode() {
+		return this.dacCode;
+	}
+
+	public void setDacCode(String dacCode) {
+		this.dacCode = dacCode;
+	}
 }
