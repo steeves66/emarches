@@ -114,6 +114,7 @@ import com.sndi.model.VbCritereAnalyse;
 import com.sndi.model.VbDetCritAnalyse;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbPaysReference;
+import com.sndi.model.VbTempParamDetCri;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
 import com.sndi.model.VbTempParametreLot;
@@ -383,6 +384,7 @@ public class DaoController {
 	//GESTION DES CRTIERE
 	 private VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
 	 private VTempCitere newTempCritereDac = new VTempCitere();
+	 private VbTempParamDetCri newTempCritere = new VbTempParamDetCri();
 	 private VCritereAnalyseDac sltCritereDac = new VCritereAnalyseDac();
 	 private boolean btn_save_presence = true;
 	 private boolean btn_save_expert = false;
@@ -726,7 +728,8 @@ public class DaoController {
 	 			/*selectionlisteCritereAnalyse = (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 	 					new WhereClause("CODPARENT",WhereClause.Comparateur.NEQ,"null"));*/
 		 		 for(VCritereAnalyseModel ligne : selectionlisteCritereAnalyse) {
-		 			newCritereDac.setDcadDacCode(dao.getDacCode());
+		 			 //Insertion directemenet dans la trable sans passer par temp
+		 			/*newCritereDac.setDcadDacCode(dao.getDacCode());
 		 			newCritereDac.setDcadDanCode(ligne.getCodedetail());
 		 			//newCritereDac.setDcadDanCraCode(ligne.getCraCode());
 		 			newCritereDac.setDcadLaaId(0);
@@ -734,7 +737,20 @@ public class DaoController {
 		 			newCritereDac.setDcadLibAjust(ligne.getCraLibelle());
 		 			newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
 		 			newCritereDac.setDcadStatut("1");
-		 			iservice.addObject(newCritereDac);
+		 			iservice.addObject(newCritereDac);*/
+		 			
+		 			//Insertion en passant par le temp param(trigger)
+		 			 
+		 			newTempCritere.setCriDacCode(dao.getDacCode());
+		 			newTempCritere.setCriDcadDanCode(ligne.getCodedetail());
+		 			newTempCritere.setCriDcadLaaId("0");
+		 			newTempCritere.setCriDteSaisi(Calendar.getInstance().getTime());
+		 			newTempCritere.setCriLibelle(ligne.getCraLibelle());
+		 			newTempCritere.setCriOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+		 			newTempCritere.setCriDcadStatut("1");
+		 			newTempCritere.setTempType("CRI");
+		 			iservice.addObject(newTempCritere);
+		 			  
 		 			
 			     }
 		 		 
@@ -7484,6 +7500,14 @@ public class DaoController {
 
 	public void setNewTempCritereDac(VTempCitere newTempCritereDac) {
 		this.newTempCritereDac = newTempCritereDac;
+	}
+
+	public VbTempParamDetCri getNewTempCritere() {
+		return newTempCritere;
+	}
+
+	public void setNewTempCritere(VbTempParamDetCri newTempCritere) {
+		this.newTempCritere = newTempCritere;
 	}
 
 
