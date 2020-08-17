@@ -78,6 +78,7 @@ import com.sndi.model.VCommissionSpeciale;
 import com.sndi.model.VCommissionSpecifique;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCritAnalDacEntete;
+import com.sndi.model.VCritAnalDacSousentete;
 import com.sndi.model.VCritereAnalyse;
 import com.sndi.model.VCritereAnalyseDac;
 import com.sndi.model.VCritereAnalyseDacLot;
@@ -245,6 +246,7 @@ public class DaoController {
 	private List<VCritereAnalyseModel> selectionlisteCritereAnalyse = new ArrayList<VCritereAnalyseModel>();
 	private List<VbCritereAnalyse> listeCritere = new ArrayList<VbCritereAnalyse>();
 	private List<VCritAnalDacEntete> listeEnteteCritere = new ArrayList<VCritAnalDacEntete >();
+	private List<VCritAnalDacSousentete> listeSousEnteteCritere = new ArrayList<VCritAnalDacSousentete >();
 	private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
 	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
@@ -299,6 +301,7 @@ public class DaoController {
 	 private VbDetCritAnalyse newDetCritere = new VbDetCritAnalyse();
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
+	 private VCritAnalDacSousentete newSousEnteteCrit = new VCritAnalDacSousentete();
 	 private VbTempCritere newTempEnteteCrit = new VbTempCritere();
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
 	private VDacliste caution = new VDacliste();
@@ -309,6 +312,7 @@ public class DaoController {
 	//VARIABLES
 	 private long adaNum;
 	 private long rId;
+	 private long rIdSous;
 	 private long delai;
 	 private long dcadNum;
 	 private long totalMontantEstimatif;
@@ -633,6 +637,31 @@ public class DaoController {
 	 }
 	 
 	 
+	//Combo box critères
+	 
+	 public void chargeSousEnteteCombobox() {
+			 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
+					 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rId));
+			 if(!listeEnteteCritere.isEmpty()) { 
+				 newEnteteCrit=listeEnteteCritere.get(0);
+			 
+				 if(lot.getLaaId()==null) {
+				 }else
+				 {
+					 lot.getLaaId();
+				 }
+				 //vider le champs detail
+				  newCritereDac = new VbDetCritAnalyseDac(); 
+				  listeSousEnteteCritere .clear(); 
+				  listeSousEnteteCritere  = ((List<VCritAnalDacSousentete>)iservice.getObjectsByColumn("VCritAnalDacSousentete",
+						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
+						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
+						 new WhereClause("CRA_PARENT",WhereClause.Comparateur.EQ,""+newEnteteCrit.getCraCode()),
+						 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
+			 }
+	 
+	 }
+	 
 	 public void chargeCritereComboboxByLot() {
 		 dao.setDacFactoriseCrit(2);
 		 iservice.updateObject(dao);
@@ -698,6 +727,44 @@ public class DaoController {
 			 craCode ="";
 			 chargeCritereSaisie(); 
 			 chargeCritereCombobox();
+		 } 
+	 }
+	 
+	 public void saveSousCritere() {
+		 //long dcadNum =0;
+		//VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
+		//VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
+		
+		 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
+				 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rId));
+		 
+		 if(!listeEnteteCritere.isEmpty()) { 
+			 newEnteteCrit=listeEnteteCritere.get(0);
+			 
+			 listeSousEnteteCritere= (List<VCritAnalDacSousentete>) iservice.getObjectsByColumn("VCritAnalDacSousentete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
+					 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rIdSous));
+			 if(!listeSousEnteteCritere.isEmpty()) { 
+				 newSousEnteteCrit =listeSousEnteteCritere.get(0);
+				 newCritereDac.setDcadDacCode(dao.getDacCode());
+				 newCritereDac.setDcadDanCraCode(newEnteteCrit.getCraCode());
+				 newCritereDac.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
+				 newCritereDac.setDcadDanCode(newSousEnteteCrit.getCraCode());
+				 if(newEnteteCrit.getDcadNum()==null) {
+					dcadNum=0;
+				 }else
+				 {
+				  dcadNum = newEnteteCrit.getDcadNum();
+				 }
+				 newCritereDac.setDcadNumDcad(dcadNum);
+				 newCritereDac.setDcadDteSaisie(Calendar.getInstance().getTime());
+				 newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
+				 newCritereDac.setDcadStatut("1");
+				 iservice.addObject(newCritereDac);
+				 newCritereDac = new VbDetCritAnalyseDac();
+				 craCode ="";
+				 chargeCritereSaisie(); 
+				 chargeCritereCombobox();
+	          }
 		 } 
 	 }
 	 
@@ -7571,6 +7638,30 @@ public class DaoController {
 
 	public void setPanelExixstent(boolean panelExixstent) {
 		this.panelExixstent = panelExixstent;
+	}
+
+	public List<VCritAnalDacSousentete> getListeSousEnteteCritere() {
+		return listeSousEnteteCritere;
+	}
+
+	public void setListeSousEnteteCritere(List<VCritAnalDacSousentete> listeSousEnteteCritere) {
+		this.listeSousEnteteCritere = listeSousEnteteCritere;
+	}
+
+	public long getrIdSous() {
+		return rIdSous;
+	}
+
+	public void setrIdSous(long rIdSous) {
+		this.rIdSous = rIdSous;
+	}
+
+	public VCritAnalDacSousentete getNewSousEnteteCrit() {
+		return newSousEnteteCrit;
+	}
+
+	public void setNewSousEnteteCrit(VCritAnalDacSousentete newSousEnteteCrit) {
+		this.newSousEnteteCrit = newSousEnteteCrit;
 	}
 
 

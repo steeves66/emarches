@@ -2016,19 +2016,21 @@
          <div class="box-body">
               
 		     <div class="form-group">
-                  <label  class="col-sm-2 control-label">Critère</label>
-				  <div class="col-sm-10">
+                  <label  class="col-sm-3 control-label">Sélectionnez le critère</label>
+				  <div class="col-sm-9">
 				   <p:selectOneMenu id="critereEntete" value="#{daoController.rId}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
 			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.RId}" /> 
+			       <p:ajax  listener="#{daoController.chargeSousEnteteCombobox()}" update="dlogCritereLot:sousCritereCombobox" />
        		        </p:selectOneMenu> 
                   </div>
               </div>
-              
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">A partir d'un critere</label>
-				  <div class="col-sm-10">
+            <div class="row">
+            <div class="col-sm-12">
+             <div class="form-group">
+                  <label  class="col-sm-3 control-label">A partir d'un critere</label>
+				  <div class="col-sm-9">
 				  <p:selectOneRadio value="#{daoController.choixCritere}">
                         <p:ajax  listener="#{daoController.checkCritere()}" update="dlogCritereLot:critBox" />
 			            <f:selectItem itemLabel="Existant" itemValue="existant" />
@@ -2036,24 +2038,25 @@
 			        </p:selectOneRadio>
                   </div>
                </div>
-               
+               </div>
+               </div>
                <h:panelGroup id="critBox">
                <h:panelGroup  rendered="#{daoController.panelExixstent}">
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Critère</label>
-				  <div class="col-sm-10">
-				 <p:selectOneMenu value="#{daoController.rId}"
+                  <label  class="col-sm-3 control-label">Selectionnez le sous critère</label>
+				  <div class="col-sm-9">
+				 <p:selectOneMenu id="sousCritereCombobox" value="#{daoController.rIdSous}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
-			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.RId}" /> 
+			       <f:selectItems value="#{daoController.listeSousEnteteCritere}" var="crs" itemLabel="#{crs.craLibelle}" itemValue="#{crs.RId}" /> 
        		        </p:selectOneMenu>
                   </div>
                </div>
                </h:panelGroup>
                <h:panelGroup rendered="#{daoController.panelNouveau}">
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Detail</label>
-				  <div class="col-sm-10">
+                  <label  class="col-sm-3 control-label">Saisir le détail</label>
+				  <div class="col-sm-9">
 				   <p:inputTextarea  value="#{daoController.newCritereDac.dcadLibAjust}" rows="2" cols="5" styleClass="form-control" id="l6" style="width: 100%" />  
                   </div>
                </div>
@@ -2063,7 +2066,7 @@
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
 			            
-			            <p:commandLink rendered="#{daoController.panelNouveau}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritereByLot()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
+			            <p:commandLink rendered="#{daoController.panelNouveau}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveSousCritere()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
                </div> 
