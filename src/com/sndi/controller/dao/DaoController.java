@@ -747,6 +747,7 @@ public class DaoController {
 				 newSousEnteteCrit =listeSousEnteteCritere.get(0);
 				 newCritereDac.setDcadDacCode(dao.getDacCode());
 				 newCritereDac.setDcadDanCraCode(newEnteteCrit.getCraCode());
+				 newCritereDac.setDcadLibAjust(newSousEnteteCrit.getCraLibelle());
 				 newCritereDac.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
 				 newCritereDac.setDcadDanCode(newSousEnteteCrit.getCraCode());
 				 if(newEnteteCrit.getDcadNum()==null) {
