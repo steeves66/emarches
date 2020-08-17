@@ -2006,7 +2006,7 @@
     
      <h:form id="dlogCritereLot">
 	  <p:dialog  widgetVar="dlogCritereLot" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
-	    <div class="row">    
+	     
             <div class="col-md-12">
                     <div class="box box-success box-solid">
                      
@@ -2015,9 +2015,8 @@
          </div>
          <div class="box-body">
               
-		       <div class="row">
-                   <div class="form-group">
-                  <label  class="col-sm-1 control-label">Critère</label>
+		     <div class="form-group">
+                  <label  class="col-sm-2 control-label">Critère</label>
 				  <div class="col-sm-10">
 				   <p:selectOneMenu id="critereEntete" value="#{daoController.rId}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
@@ -2025,32 +2024,50 @@
 			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.RId}" /> 
        		        </p:selectOneMenu> 
                   </div>
-                
-                </div>
-                 <div class="form-group">
-                  <label  class="col-sm-1 control-label">Detail</label>
-				  <div class="col-sm-11">
-                  <p:inputTextarea  value="#{daoController.newCritereDac.dcadLibAjust}" rows="2" cols="5" styleClass="form-control" id="l6" style="width: 100%" />  
+              </div>
+              
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">A partir d'un critere</label>
+				  <div class="col-sm-10">
+				  <p:selectOneRadio value="#{daoController.choixCritere}">
+                        <p:ajax  listener="#{daoController.checkCritere()}" update="dlogCritereLot:critBox" />
+			            <f:selectItem itemLabel="Existant" itemValue="existant" />
+			            <f:selectItem itemLabel="Nouveau" itemValue="nouveau" />
+			        </p:selectOneRadio>
                   </div>
-                </div>
-                </div>
-                 <div class="row">    
-	             <div class="col-sm-8"></div>
-	              <div class="col-sm-4">  
-					
-					      <div class="pull-right ">
-			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritereByLot()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
+               </div>
+               
+               <h:panelGroup id="critBox">
+               <h:panelGroup  rendered="#{daoController.panelExixstent}">
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">Critère</label>
+				  <div class="col-sm-10">
+				 <p:selectOneMenu value="#{daoController.rId}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
+			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.RId}" /> 
+       		        </p:selectOneMenu>
+                  </div>
+               </div>
+               </h:panelGroup>
+               <h:panelGroup rendered="#{daoController.panelNouveau}">
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">Detail</label>
+				  <div class="col-sm-10">
+				   <p:inputTextarea  value="#{daoController.newCritereDac.dcadLibAjust}" rows="2" cols="5" styleClass="form-control" id="l6" style="width: 100%" />  
+                  </div>
+               </div>
+               </h:panelGroup>
+               <div class="box-footer pull-right">
+                   <p:commandLink rendered="#{daoController.panelExixstent}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritereByLot()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
-                     </div>
-                     
-                     
-                   </div>
-              </div>
-         </div>
-         
-		          
-              
+			            
+			            <p:commandLink rendered="#{daoController.panelNouveau}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritereByLot()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
+			             <i class="ace-icon fa fa-save"></i> Ajouter
+			            </p:commandLink>
+               </div> 
+              </h:panelGroup>
          </div>
          </div>
          </div>

@@ -114,6 +114,7 @@ import com.sndi.model.VbCritereAnalyse;
 import com.sndi.model.VbDetCritAnalyse;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbPaysReference;
+import com.sndi.model.VbTempCritere;
 import com.sndi.model.VbTempParamDetCri;
 import com.sndi.model.VbTempParamEnteteCri;
 import com.sndi.model.VbTempParamVente;
@@ -298,7 +299,7 @@ public class DaoController {
 	 private VbDetCritAnalyse newDetCritere = new VbDetCritAnalyse();
 	 private VbCritereAnalyse newEnteteCritere = new VbCritereAnalyse();
 	 private VCritAnalDacEntete newEnteteCrit = new VCritAnalDacEntete();
-	 private VbTempParamEnteteCri newTempEnteteCrit = new VbTempParamEnteteCri();
+	 private VbTempCritere newTempEnteteCrit = new VbTempCritere();
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
 	private VDacliste caution = new VDacliste();
 	
@@ -385,7 +386,7 @@ public class DaoController {
 	 private VCommissionSpecifique sltCompsec = new VCommissionSpecifique();
 	//GESTION DES CRTIERE
 	 private VbDetCritAnalyseDac newCritereDac = new VbDetCritAnalyseDac();
-	 private VTempCitere newTempCritereDac = new VTempCitere();
+	 private VbTempCritere newTempCritereDac = new VbTempCritere();
 	 private VbTempParamDetCri newTempCritere = new VbTempParamDetCri();
 	 private VCritereAnalyseDac sltCritereDac = new VCritereAnalyseDac();
 	 private boolean btn_save_presence = true;
@@ -425,6 +426,7 @@ public class DaoController {
 	  private String observationCor ="";
 	  private String statutUpdate="";
 	  private String choixTaux = "";
+	  private String choixCritere = "";
 	  private String multiFiltre="";
 	  private String paieCode ="";
 	  private String statutPub ="";
@@ -443,6 +445,8 @@ public class DaoController {
 	  private boolean etatBtnValid = false;
 	  private boolean etatBtnValidCharge = true;
 	  private boolean etatTaux = false;
+	  private boolean panelExixstent = false;
+	  private boolean panelNouveau = false;
 	  private boolean qualifLabel1 = false;
 	  private boolean qualifLabel2 = false;
 	  private boolean libelleTaux = false;
@@ -681,25 +685,36 @@ public class DaoController {
 			 newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 newCritereDac.setDcadStatut("1");
 			 iservice.addObject(newCritereDac);
+			 
+			 //Insertion dans temp param
+			 newTempCritereDac.setCraDacCode(dao.getDacCode());
+	 		 newTempCritereDac.setCraDteSaisi(Calendar.getInstance().getTime());
+	 		 newTempCritereDac.setCraOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+	 		 newTempCritereDac.setCraType("CRA");
+	 		 iservice.addObject(newTempCritereDac);
+	 		 
 			 newCritereDac = new VbDetCritAnalyseDac();
+			 newTempCritereDac = new VbTempCritere();
 			 craCode ="";
 			 chargeCritereSaisie(); 
 			 chargeCritereCombobox();
-			 
-			 
-			 //Avec temp param
-			/* newTempEnteteCrit.setDcadDacCode(dao.getDacCode());
-			 newTempEnteteCrit.setDcadDanCraCode(newEnteteCrit.getCraCode());
-			 newTempEnteteCrit.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
-			 newTempEnteteCrit.setDcadDanCode("99999999999");
-			 newTempEnteteCrit.setTempType("CRE");
-			 newTempEnteteCrit.setCriDteSaisi(Calendar.getInstance().getTime());
-			 newTempEnteteCrit.setCriOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-			 newTempEnteteCrit.setCriDcadStatut("1");
-			 iservice.addObject(newTempEnteteCrit);
-			 newTempEnteteCrit = new VbTempParamEnteteCri();*/
 		 } 
 	 }
+	 
+	 //verification de la combox critere existent ou pas
+	  public void checkCritere() {
+			 //chargeMsgMarge();
+			 if(choixCritere.equalsIgnoreCase("existant")) { 
+				 panelExixstent = true; 
+				 panelNouveau = false;
+			 }else 
+			 {
+				 panelExixstent = false; 
+				 panelNouveau = true; 
+			 }
+			 _logger.info("panelExixstent: "+panelExixstent);	
+			 _logger.info("panelNouveau: "+panelNouveau);
+		 }
 	 
 	 //Enregistrement detail critere par lot
 	 public void saveDetailCritereByLot() {	
@@ -725,6 +740,12 @@ public class DaoController {
 			 newCritereDac.setDcadOpeCode(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 newCritereDac.setDcadStatut("1");
 			 iservice.addObject(newCritereDac);
+			 //Insertion dans temp param
+			 newTempCritereDac.setCraDacCode(dao.getDacCode());
+	 		 newTempCritereDac.setCraDteSaisi(Calendar.getInstance().getTime());
+	 		 newTempCritereDac.setCraOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+	 		 newTempCritereDac.setCraType("CRA");
+	 		 iservice.addObject(newTempCritereDac);
 			 newCritereDac = new VbDetCritAnalyseDac();
 			 craCode ="";
 			 chargeCritereByLot();
@@ -768,12 +789,6 @@ public class DaoController {
 		 			  
 		 			
 			     }
-		 		 
-		 	/*	newTempCritereDac.setCraDacCode(dao.getDacCode());
-	 			newTempCritereDac.setCraDteSaisi(Calendar.getInstance().getTime());
-	 			newTempCritereDac.setCraOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-	 			newTempCritereDac.setCraType("CRI");
-	 			iservice.addObject(newTempCritereDac);*/
 	 			
 		 		selectionlisteCritereAnalyse.clear();
 		 		chargeCritereSaisie();
@@ -7509,11 +7524,12 @@ public class DaoController {
 		this.listDetcritere = listDetcritere;
 	}
 
-	public VTempCitere getNewTempCritereDac() {
+
+	public VbTempCritere getNewTempCritereDac() {
 		return newTempCritereDac;
 	}
 
-	public void setNewTempCritereDac(VTempCitere newTempCritereDac) {
+	public void setNewTempCritereDac(VbTempCritere newTempCritereDac) {
 		this.newTempCritereDac = newTempCritereDac;
 	}
 
@@ -7523,6 +7539,38 @@ public class DaoController {
 
 	public void setNewTempCritere(VbTempParamDetCri newTempCritere) {
 		this.newTempCritere = newTempCritere;
+	}
+
+	public VbTempCritere getNewTempEnteteCrit() {
+		return newTempEnteteCrit;
+	}
+
+	public void setNewTempEnteteCrit(VbTempCritere newTempEnteteCrit) {
+		this.newTempEnteteCrit = newTempEnteteCrit;
+	}
+
+	public String getChoixCritere() {
+		return choixCritere;
+	}
+
+	public void setChoixCritere(String choixCritere) {
+		this.choixCritere = choixCritere;
+	}
+
+	public boolean isPanelNouveau() {
+		return panelNouveau;
+	}
+
+	public void setPanelNouveau(boolean panelNouveau) {
+		this.panelNouveau = panelNouveau;
+	}
+
+	public boolean isPanelExixstent() {
+		return panelExixstent;
+	}
+
+	public void setPanelExixstent(boolean panelExixstent) {
+		this.panelExixstent = panelExixstent;
 	}
 
 
