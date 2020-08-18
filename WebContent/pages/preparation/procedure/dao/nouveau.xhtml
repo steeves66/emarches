@@ -770,6 +770,9 @@
 				               <h:panelGroup rendered="#{slctdTb.modelStatut == '1'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
 		         		      </h:panelGroup>
+		         		       <h:panelGroup rendered="#{slctdTb.modelStatut == '2'}">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
+		         		      </h:panelGroup>
 		         		      <h:panelGroup rendered="#{slctdTb.modelStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
 		         		      </h:panelGroup>
@@ -805,6 +808,9 @@
                               <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
 		         			  </h:panelGroup>
+		         			      <h:panelGroup rendered="#{slctdTb.analyseStatut == '2'}">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
                             
                             
@@ -815,10 +821,27 @@
                               <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
 		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" style="font-weight:bold " />
 		         			  </h:panelGroup>
+		         			     <h:panelGroup rendered="#{slctdTb.analyseStatut == '2'}">
+		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
 
                              <p:column headerText="Actions" styleClass="col-sm-1">
                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
+                               <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />                             
+                            </p:commandLink>
+                            
+                            
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update=":content">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
+			                </p:commandLink>
+			               </h:panelGroup>
+			                <h:panelGroup rendered="#{slctdTb.analyseStatut == '2'}">
                                <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('DetailDlgMod').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
