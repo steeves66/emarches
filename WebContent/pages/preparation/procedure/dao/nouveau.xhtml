@@ -914,6 +914,10 @@
                               <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
 		         			  </h:panelGroup>
+		         			  
+		         			  <h:panelGroup rendered="#{slctdTb.analyseStatut == '2'}">
+		         				    <h:outputText value="#{slctdTb.craLibelle}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
                             
                               <p:column headerText="COMMENTAIRE" styleClass="col-sm-5">
@@ -923,10 +927,26 @@
                               <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
 		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" style="font-weight:bold " />
 		         			  </h:panelGroup>
+		         			  <h:panelGroup rendered="#{slctdTb.analyseStatut == '2'}">
+		         				    <h:outputText value="#{slctdTb.dcadCommentaire}" style="font-weight:bold " />
+		         			  </h:panelGroup>
                             </p:column>
                             
                              <p:column headerText="Actions" styleClass="col-sm-1">
                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
+				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				             oncomplete="PF('dlogdetModLot').show()"  title="Modifier" update=":content">
+                                <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />                             
+                            </p:commandLink>
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update="gnl">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
+			                </p:commandLink>
+			                </h:panelGroup>
+			                
+			                <h:panelGroup rendered="#{slctdTb.analyseStatut == '2'}">
 				            <p:commandLink  class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
 				             oncomplete="PF('dlogdetModLot').show()"  title="Modifier" update=":content">
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
@@ -2038,24 +2058,13 @@
          </div>
          <div class="box-body">
               
-		     <div class="form-group">
-                  <label  class="col-sm-3 control-label">Sélectionnez le critère</label>
-				  <div class="col-sm-9">
-				   <p:selectOneMenu id="critereEntete" value="#{daoController.rId}"
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
-			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.RId}" /> 
-			       <p:ajax  listener="#{daoController.chargeSousEnteteCombobox()}" update="dlogCritereLot:sousCritereCombobox" />
-       		        </p:selectOneMenu> 
-                  </div>
-              </div>
-            <div class="row">
+                <div class="row">
             <div class="col-sm-12">
              <div class="form-group">
                   <label  class="col-sm-3 control-label">A partir d'un critere</label>
 				  <div class="col-sm-9">
 				  <p:selectOneRadio value="#{daoController.choixCritere}">
-                        <p:ajax  listener="#{daoController.checkCritere()}" update="dlogCritereLot:critBox" />
+                        <p:ajax global="false" listener="#{daoController.checkCritere()}" update="dlogCritereLot:critBox" />
 			            <f:selectItem itemLabel="Existant" itemValue="existant" />
 			            <f:selectItem itemLabel="Nouveau" itemValue="nouveau" />
 			        </p:selectOneRadio>
@@ -2063,6 +2072,18 @@
                </div>
                </div>
                </div>
+		     <div class="form-group">
+                  <label  class="col-sm-3 control-label">Sélectionnez le critère</label>
+				  <div class="col-sm-9">
+				   <p:selectOneMenu id="critereEntete" value="#{daoController.rId}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le critère.." />  
+			       <f:selectItems value="#{daoController.listeEnteteCritere}" var="cri" itemLabel="#{cri.craLibelle}" itemValue="#{cri.RId}" /> 
+			       <p:ajax global="false" listener="#{daoController.chargeSousEnteteCombobox()}" update="sousCritereCombobox" />
+       		        </p:selectOneMenu> 
+                  </div>
+              </div>
+          
                <h:panelGroup id="critBox">
                <h:panelGroup  rendered="#{daoController.panelExixstent}">
                 <div class="form-group">
@@ -2070,7 +2091,7 @@
 				  <div class="col-sm-9">
 				 <p:selectOneMenu id="sousCritereCombobox" value="#{daoController.rIdSous}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir le critère.." itemValue="empty" />  
+			       <f:selectItem  itemLabel="Choisir le critère.." />  
 			       <f:selectItems value="#{daoController.listeSousEnteteCritere}" var="crs" itemLabel="#{crs.craLibelle}" itemValue="#{crs.RId}" /> 
        		        </p:selectOneMenu>
                   </div>
@@ -2085,11 +2106,11 @@
                </div>
                </h:panelGroup>
                <div class="box-footer pull-right">
-                   <p:commandLink rendered="#{daoController.panelExixstent}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritereByLot()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
+                   <p:commandLink rendered="#{daoController.panelNouveau}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveDetailCritereByLot()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
 			            
-			            <p:commandLink rendered="#{daoController.panelNouveau}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveSousCritere()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
+			            <p:commandLink rendered="#{daoController.panelExixstent}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{daoController.saveSousCritere()}" oncomplete="PF('dlogCritereLot').hide()" update=":gnl:tbCritLot">
 			             <i class="ace-icon fa fa-save"></i> Ajouter
 			            </p:commandLink>
                </div> 

@@ -648,7 +648,7 @@ public class DaoController {
 				 if(lot.getLaaId()==null) {
 				 }else
 				 {
-					 lot.getLaaId();
+					 laaId=lot.getLaaId();
 				 }
 				 //vider le champs detail
 				  newCritereDac = new VbDetCritAnalyseDac(); 
@@ -658,8 +658,13 @@ public class DaoController {
 						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
 						 new WhereClause("CRA_PARENT",WhereClause.Comparateur.EQ,""+newEnteteCrit.getCraCode()),
 						 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
+				  
+				  _logger.info("lot: "+laaId);
+				  _logger.info("Dao: "+dao.getDacCode());
+				  _logger.info("cracode: "+newEnteteCrit.getCraCode());
+				  _logger.info("mdt: "+dao.getTModeleDacType().getMdtCode());
 			 }
-	 
+			 
 	 }
 	 
 	 public void chargeCritereComboboxByLot() {
@@ -669,7 +674,7 @@ public class DaoController {
 		 if(lot.getLaaId()==null) {
 		 }else
 		 {
-			 lot.getLaaId();
+			 laaId=lot.getLaaId();
 		 }
 		 //vider le champs detail
 		  newCritereDac = new VbDetCritAnalyseDac(); 
@@ -746,7 +751,7 @@ public class DaoController {
 			 if(!listeSousEnteteCritere.isEmpty()) { 
 				 newSousEnteteCrit =listeSousEnteteCritere.get(0);
 				 newCritereDac.setDcadDacCode(dao.getDacCode());
-				 newCritereDac.setDcadDanCraCode(newEnteteCrit.getCraCode());
+				 newCritereDac.setDcadDanCraCode("null");
 				 newCritereDac.setDcadLibAjust(newSousEnteteCrit.getCraLibelle());
 				 newCritereDac.setDcadCraAuCode(newEnteteCrit.getDcadCraAuCode());
 				 newCritereDac.setDcadDanCode(newSousEnteteCrit.getCraCode());
