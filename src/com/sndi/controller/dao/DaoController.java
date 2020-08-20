@@ -787,7 +787,8 @@ public class DaoController {
 				 iservice.addObject(newCritereDac);
 				 newCritereDac = new VbDetCritAnalyseDac();
 				 craCode ="";
-				 chargeCritereSaisie(); 
+				 chargeCritereByLot();
+				 //chargeCritereSaisie(); 
 				 chargeCritereCombobox();
 	          }
 		 } 
