@@ -120,6 +120,7 @@ import com.sndi.model.VbTempParamDetCri;
 import com.sndi.model.VbTempParamEnteteCri;
 import com.sndi.model.VbTempParamVente;
 import com.sndi.model.VbTempParametreCorrection;
+import com.sndi.model.VbTempParametreFact;
 import com.sndi.model.VbTempParametreLot;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
@@ -393,6 +394,7 @@ public class DaoController {
 	 private VbTempCritere newTempCritereDac = new VbTempCritere();
 	 private VbTempParamDetCri newTempCritere = new VbTempParamDetCri();
 	 private VCritereAnalyseDac sltCritereDac = new VCritereAnalyseDac();
+	 private VbTempParametreFact newTempFactorise = new VbTempParametreFact(); 
 	 private boolean btn_save_presence = true;
 	 private boolean btn_save_expert = false;
 	 private boolean btn_ad_expert = false;
@@ -521,6 +523,11 @@ public class DaoController {
 				 //checkTypeCommission();
 			     }
 			 
+			 if(event.getOldStep().equals("criterebyLot") && event.getNewStep().equals("critere")) {
+				 newTempFactorise = new VbTempParametreFact(); 
+			     }
+			 
+			 
 			 //Pavet Lot
 			 if(event.getOldStep().equals("tabLot") && event.getNewStep().equals("Poffre")) {
 				 controlLotDao();
@@ -637,6 +644,17 @@ public class DaoController {
 				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
 	 }
 	 
+	//Combo box critères Pou l'ecran de factorisation
+	 public void chargeCritereFactCombobox() {
+		 //vider le champ detail
+		  newCritereDac = new VbDetCritAnalyseDac(); 
+		 listeEnteteCritere.clear(); 
+		 listeEnteteCritere = ((List<VCritAnalDacEntete>)iservice.getObjectsByColumn("VCritAnalDacEntete",
+				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
+				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
+				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
+	 }
+	 
 	 public void chargeCritereCombobox1() {
 		/* if(lot.getLaaId()==null) {
 			 laaId = 0;
@@ -661,12 +679,6 @@ public class DaoController {
 					 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rId));
 			 if(!listeEnteteCritere.isEmpty()) { 
 				 newEnteteCrit=listeEnteteCritere.get(0);
-			 
-				 if(lot.getLaaId()==null) {
-				 }else
-				 {
-					 laaId=lot.getLaaId();
-				 }
 				 //vider le champs detail
 				  newCritereDac = new VbDetCritAnalyseDac(); 
 				  listeSousEnteteCritere .clear(); 
@@ -898,28 +910,12 @@ public class DaoController {
 	 }
 	 
 	
-	 public void factoriserLot() {
-		 dao.setDacFactoriseCrit(1);
-		 iservice.updateObject(dao);
+	 public void factoriserLot() { 
+		 newTempFactorise.setTempCritDac(dao.getDacCode());
+		 newTempFactorise.setTempNbrLot(newAvis.getAaoNbrLot());
+		 newTempFactorise.setTempType("DISP");
+		 iservice.addObject(newTempFactorise); 
 	 }
-	 
-	 //Controle pour s'assurer que l'utilsateur apres avoir choisir et saisir ne reviennen choisir une autre commissionpas 
-	/* public void checkCommission() {
-		 if(listeMembre.size()>0) {
-			 norm = true; 
-			 spec = false; 
-			 comboboxCom = false;
-		 }
-		 if(listeMembreComSpec.size()>0) {
-			 norm = false; 
-			 spec = true; 
-			 comboboxCom = false;
-		 }else {
-			 comboboxCom = true;
-			 norm = false;
-			 spec = false;  
-		 }	
-	 }*/
 	 
 	 public void checkTypeCommission() { 
 		 if(typeCommission.equalsIgnoreCase("N")) {
@@ -5275,6 +5271,7 @@ public class DaoController {
 					 comNormale = true;
 					 comSpeciale = false;
 					 comAutorise = false;
+					 newTempFactorise = new VbTempParametreFact(); 
 				break;
 				case "dao3":
 		 			_logger.info("value: "+value+" action: "+action);
@@ -7690,6 +7687,14 @@ public class DaoController {
 
 	public void setNewSousEnteteCrit(VCritAnalDacSousentete newSousEnteteCrit) {
 		this.newSousEnteteCrit = newSousEnteteCrit;
+	}
+
+	public VbTempParametreFact getNewTempFactorise() {
+		return newTempFactorise;
+	}
+
+	public void setNewTempFactorise(VbTempParametreFact newTempFactorise) {
+		this.newTempFactorise = newTempFactorise;
 	}
 
 

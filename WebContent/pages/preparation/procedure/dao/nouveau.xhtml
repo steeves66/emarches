@@ -758,7 +758,7 @@
             <div class="col-md-4">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-8 "><div  style="color: #fff">LISTE DES CRITERES</div></div> 
+                  <div class="col-md-8 "><div  style="color: #fff">SELECTION DES CRITERES</div></div> 
 			          
                </div>
 	            <!-- /.box-header -->
@@ -800,7 +800,7 @@
 	            <!-- /.box-header -->
 	                      <div class="box-body">     
                       <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}"
-                scrollable="true" scrollHeight="585" emptyMessage="Aucun critère selectionné">
+                scrollable="true" scrollHeight="530" emptyMessage="Aucun critère selectionné">
                               <p:column headerText="CRITERES" styleClass="col-sm-5">
                               <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
@@ -858,13 +858,22 @@
 			               <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
 			               </h:panelGroup>
 				        </p:column>
-                        </p:dataTable>  
+                        </p:dataTable> 
+                        
+                     
 	            </div>
 	            <div class="box-footer">
-	             <!--  <p:commandLink  styleClass="btn btn-success row pull-right"  style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Editer la liste
-	               </p:commandLink> -->
+	                  <div class="form-group ">
+	                  <label for="montCau" class="col-sm-5 control-label"><b>Appliquer sur l'intervalle de lot </b></label>
+	                  <div class="col-sm-1">
+	                    <p:inputText type="text" id="montCau" styleClass="form-control" value="#{daoController.newTempFactorise.tempLotDebut}" style="width: 100%" />
+	                  </div>
+	                  
+	                  <label for="mont" class="col-sm-1 control-label"><b>à</b></label>
+	                  <div class="col-sm-1">
+	                    <p:inputText type="text" id="mont" styleClass="form-control" value="#{daoController.newTempFactorise.tempLotFin}" style="width: 100%" />
+	                  </div>
+	                </div>
 	            </div>
 	           </div>
             </div>
@@ -897,7 +906,7 @@
 	                </div>
                   </div></div> 
 			          <div class="col-sm-2">
-				                  <p:commandLink oncomplete="PF('dlogCritereLot').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+				                  <p:commandLink oncomplete="PF('dlogCritereLot').show()" action="#{daoController.chargeCritereFactCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
 								  </p:commandLink>
 				                  </div>
