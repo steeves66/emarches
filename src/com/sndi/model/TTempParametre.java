@@ -47,6 +47,9 @@ public class TTempParametre implements java.io.Serializable {
 	private String tempChamp26;
 	private String tempChamp27;
 	private String tempChamp28;
+	private BigDecimal tempChamp32;
+	private BigDecimal tempChamp30;
+	private BigDecimal tempChamp31;
 
 	public TTempParametre() {
 	}
@@ -60,7 +63,8 @@ public class TTempParametre implements java.io.Serializable {
 			String tempChamp6, String tempChamp7, String tempChamp8, String tempChamp9, String tempChamp10,
 			String tempChamp11, String tempChamp12, String tempChamp13, String tempChamp14, String tempChamp15,
 			String tempChamp16, String tempChamp17, String tempChamp18, String tempChamp19, String tempChamp20
-			,String tempChamp26, String tempChamp27, String tempChamp28) {
+			,String tempChamp26, String tempChamp27, String tempChamp28,BigDecimal tempChamp32, BigDecimal tempChamp30,
+			BigDecimal tempChamp31) {
 		this.tempNum = tempNum;
 		this.TOperateur = TOperateur;
 		this.tempType = tempType;
@@ -88,6 +92,9 @@ public class TTempParametre implements java.io.Serializable {
 		this.tempChamp26 = tempChamp26;
 		this.tempChamp27 = tempChamp27;
 		this.tempChamp28 = tempChamp28;
+		this.tempChamp32 = tempChamp32;
+		this.tempChamp30 = tempChamp30;
+		this.tempChamp31 = tempChamp31;
 	}
 
 	@Id
@@ -335,6 +342,33 @@ public class TTempParametre implements java.io.Serializable {
 
 	public void setTempChamp28(String tempChamp28) {
 		this.tempChamp28 = tempChamp28;
+	}
+	
+	@Column(name = "TEMP_CHAMP_32", precision = 22, scale = 0)
+	public BigDecimal getTempChamp32() {
+		return this.tempChamp32;
+	}
+
+	public void setTempChamp32(BigDecimal tempChamp32) {
+		this.tempChamp32 = tempChamp32;
+	}
+
+	@Column(name = "TEMP_CHAMP_30", precision = 22, scale = 0)
+	public BigDecimal getTempChamp30() {
+		return this.tempChamp30;
+	}
+
+	public void setTempChamp30(BigDecimal tempChamp30) {
+		this.tempChamp30 = tempChamp30;
+	}
+
+	@Column(name = "TEMP_CHAMP_31", precision = 22, scale = 0)
+	public BigDecimal getTempChamp31() {
+		return this.tempChamp31;
+	}
+
+	public void setTempChamp31(BigDecimal tempChamp31) {
+		this.tempChamp31 = tempChamp31;
 	}
 
 }

@@ -58,7 +58,7 @@
 				</h:panelGroup>
       <p:messages id="message1" showDetail="false" autoUpdate="true"  closable="true"/>
       
-     <p:wizard flowListener="#{daoController.onFlowProcess}" id="pwz" nextLabel="Suivant" backLabel="Précédent" >
+     <p:wizard flowListener="#{daoController.onFlowProcess}"  id="pwz" nextLabel="Suivant" backLabel="Précédent" >
      
      
         <p:tab id="creation" title="Initiation du #{controleController.type}" titleStyle="background-color: #f88b2e;background-image: none">
@@ -782,7 +782,7 @@
 	              <div class="box-footer">
 	              <p:commandLink  styleClass="btn btn-success row pull-right" action="#{daoController.saveCritere()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Valider
+			             <i class="ace-icon fa fa-save"></i> Factoriser
 	               </p:commandLink>
 	            </div>
 	           </div>
@@ -864,7 +864,7 @@
 	            </div>
 	            <div class="box-footer">
 	                  <div class="form-group ">
-	                  <label for="montCau" class="col-sm-5 control-label"><b>Appliquer sur l'intervalle de lot </b></label>
+	                  <label for="montCau" class="col-sm-4 control-label"><b>Appliquer sur l'intervalle de(s) lot(s) </b></label>
 	                  <div class="col-sm-1">
 	                    <p:inputText type="text" id="montCau" styleClass="form-control" value="#{daoController.newTempFactorise.tempLotDebut}" style="width: 100%" />
 	                  </div>
@@ -872,6 +872,11 @@
 	                  <label for="mont" class="col-sm-1 control-label"><b>à</b></label>
 	                  <div class="col-sm-1">
 	                    <p:inputText type="text" id="mont" styleClass="form-control" value="#{daoController.newTempFactorise.tempLotFin}" style="width: 100%" />
+	                  </div>
+	                  
+	                  <label for="page" class="col-sm-1 control-label"><b>Plage</b></label>
+	                  <div class="col-sm-4">
+	                    <p:inputText type="text" id="page" placeholder="Exemple: 1-4 ; 12-17 ; n-p ; n ; p ; ..." styleClass="form-control" value="#{daoController.newTempFactorise.tempLotPlage}" style="width: 100%" />
 	                  </div>
 	                </div>
 	            </div>
