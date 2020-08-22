@@ -790,9 +790,15 @@
             <div class="col-md-8">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-9 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
+                  <div class="col-md-7 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
+			          <div class="col-sm-2">
+				                  <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des lots traités" action="#{daoController.chargeLotConsultation()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+											<span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">CONSULTER</span>
+								  </p:commandLink>
+				    </div>
+			          
 			          <div class="col-sm-3">
-				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox1()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
 								  </p:commandLink>
 				                  </div>
@@ -875,10 +881,11 @@
 	                  </div>
 	                  
 	                  <label for="page" class="col-sm-1 control-label"><b>Plage</b></label>
-	                  <div class="col-sm-4">
+	                  <div class="col-sm-3">
 	                    <p:inputText type="text" id="page" placeholder="Exemple: 1-4 ; 12-17 ; n-p ; n ; p ; ..." styleClass="form-control" value="#{daoController.newTempFactorise.tempLotPlage}" style="width: 100%" />
 	                  </div>
 	                </div>
+	                
 	            </div>
 	           </div>
             </div>
@@ -904,7 +911,7 @@
 	                     <p:selectOneMenu id="lotCrit" value="#{daoController.laaId}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItem  itemLabel="Choisir le lot.." />  
-			            <f:selectItems value="#{daoController.listeLots}" var="lot" itemLabel="#{lot.laaNum} : #{lot.laaObjet}" itemValue="#{lot.laaId}" />
+			            <f:selectItems value="#{daoController.listeLotCritere}" var="lot" itemLabel="#{lot.laaObjet}" itemValue="#{lot.laaId}" />
 			           <p:ajax listener="#{daoController.chargeCritereByLot()}" update=":gnl:tbCritLot"/>
        		        </p:selectOneMenu> 
 	                 
@@ -2129,6 +2136,31 @@
 			            </p:commandLink>
                </div> 
               </h:panelGroup>
+         </div>
+         </div>
+         </div>
+		
+      </p:dialog>
+    </h:form>
+    
+    
+    <h:form id="dlogConsultation">
+	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	     
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+                     
+        <div class="box-header with-border">
+            <div  style="color: #fff; font-weight: bold;">LISTE DES LOTS</div>
+         </div>
+         <div class="box-body">
+         <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeLotConsultation}"
+          scrollable="true" scrollHeight="530" emptyMessage="Aucun lot selectionné">
+                              <p:column headerText="LOT" styleClass="col-sm-5">
+		         		     <h:outputText value="#{slctdTb.laaObjet}" />
+                            </p:column>     
+         </p:dataTable>   
+         <strong>(*) : Lot(s) avec des critères d'Analyse </strong>
          </div>
          </div>
          </div>
