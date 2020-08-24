@@ -790,19 +790,28 @@
             <div class="col-md-8">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-7 "><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
-			          <div class="col-sm-2">
-				                  <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des lots traités" action="#{daoController.chargeLotConsultation()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
-											<span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">CONSULTER</span>
-								  </p:commandLink>
-				    </div>
+                  <div class="col-md-4"><div  style="color: #fff">LISTE DES CRITERES SELECTIONNES</div></div> 
 			          
-			          <div class="col-sm-3">
-				                  <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
-											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
-								  </p:commandLink>
-				                  </div>
-               </div>
+			           <div class="col-sm-3">
+				       <p:commandLink oncomplete="PF('dlogCritere').show()" action="#{daoController.chargeCritereCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+					   <span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
+					   </p:commandLink>
+				       </div>
+			          
+			          <div class="col-sm-2">
+				      <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des lots traités" action="#{daoController.chargeLotConsultation()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+					  <span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">CONSULTER</span>
+					  </p:commandLink>
+				      </div>
+			          
+			           <div class="col-sm-2">
+				       <p:commandLink  title="Vider la liste des critères sélectionnés" action="#{daoController.viderCritereLot0()}" styleClass="btn btn-danger btn-rounded waves-effect waves-light" style="color:#fff;background-color: red; margin-left:20px" update=":content" >
+					   <span class="btn-label"><i class="fa fa-trash"></i></span><span class="hidden-xs">VIDER LISTE</span>
+					   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer la liste ?" icon="ui-icon-alert" />                              
+					   </p:commandLink>
+				       </div>
+			   
+                    </div>
 	            <!-- /.box-header -->
 	                      <div class="box-body">     
                       <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}"
@@ -865,8 +874,7 @@
 			               </h:panelGroup>
 				        </p:column>
                         </p:dataTable> 
-                        
-                     
+                    
 	            </div>
 	            <div class="box-footer">
 	                  <div class="form-group ">
@@ -906,7 +914,7 @@
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-2 "><div  style="color: #fff">LISTE DES CRITERES DU LOT : </div></div> 
-                  <div class="col-md-8 "><div  style="color: #fff">
+                  <div class="col-md-6 "><div  style="color: #fff">
                      <div class="form-group ">
 	                     <p:selectOneMenu id="lotCrit" value="#{daoController.laaId}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
@@ -922,6 +930,13 @@
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
 								  </p:commandLink>
 				                  </div>
+				                  
+				    <div class="col-sm-2">
+				       <p:commandLink  title="Vider la liste des critères sélectionnés" action="#{daoController.viderCritereByLot()}" styleClass="btn btn-danger btn-rounded waves-effect waves-light" style="color:#fff;background-color: red; margin-left:20px" update=":content" >
+					   <span class="btn-label"><i class="fa fa-trash"></i></span><span class="hidden-xs">VIDER LISTE</span>
+					   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer la liste ?" icon="ui-icon-alert" />                              
+					   </p:commandLink>
+				       </div>
                </div>
 	            <!-- /.box-header -->
 	                      <div class="box-body">     
