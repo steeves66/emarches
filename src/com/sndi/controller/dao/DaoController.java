@@ -959,7 +959,7 @@ public class DaoController {
 			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereSaisie();
-		    userController.setTexteMsg("Modification effectu�e avec succ�s!");
+		    userController.setTexteMsg("Modification effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 		  }
@@ -976,7 +976,7 @@ public class DaoController {
 			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereByLot();
-		    userController.setTexteMsg("Modification effectu�e avec succ�s!");
+		    userController.setTexteMsg("Modification effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 		  }
@@ -2038,11 +2038,11 @@ public class DaoController {
 			               //Chargement des dossiers du DAO
 							chargeDossier(); 
 							//Message de confirmation
-							FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectu� avec succ�s!", "");
+							FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succès!", "");
 							FacesContext.getCurrentInstance().addMessage(null, msg);
 						     chargeDossier();
 							}else {
-								FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistr�, charger � nouveau un document ! ","");
+								FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
 								FacesContext.getCurrentInstance().addMessage(null, msg);	
 								
 							}
@@ -2053,7 +2053,7 @@ public class DaoController {
 				public void upload(FileUploadEvent event) throws java.io.FileNotFoundException { 
 				 //condition de chargement d'un document : Nature s�lectionn�e 
 				 if((docNature == null || "".equals(docNature))){
-					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non s�lectionn�e pour le chargement! ","");
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);	
 					 
 					 }else {
@@ -2083,11 +2083,11 @@ public class DaoController {
 					//chargeNatureDocTrans();
 					chargeDossier();
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectu� avec succ�s!", "");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succ�s!", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				   chargeDossier();
 					}else {
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistr�, charger � nouveau un document ! ","");
+						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
 						FacesContext.getCurrentInstance().addMessage(null, msg);	
 						
 					}
@@ -2115,7 +2115,7 @@ public class DaoController {
 			       			                         
 			       			                      constantService.getStatut("D1T");
 						 							  	//Historisation du / des retraits
-						 						       historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorit� Contractante");
+						 						       historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorité Contractante");
 						 							  
 			       	   	                           } 
 			       				
@@ -2127,7 +2127,7 @@ public class DaoController {
 			       					//Actualisation du tableau de bord
 			       					typeActionTb();
 			       					//Message de confirmation
-			       					userController.setTexteMsg("Transmission effectu�e avec succ�s!");
+			       					userController.setTexteMsg("Transmission effectuée avec succès!");
 			   						userController.setRenderMsg(true);
 			   						userController.setSevrityMsg("success");
 			        	         }
@@ -2171,7 +2171,7 @@ public class DaoController {
 			
 				    constantService.getStatut("D2T");
 	 				//Historisation du DAC
-	 				historiser("D2T",slctdTd.getDacCode(),"DAO transmit par la Cellule de Passation");
+	 				historiser("D2T",slctdTd.getDacCode(),"DAO transmis par la Cellule de Passation");
 						
 						//chargeDataAExaminer();
 						
@@ -2179,7 +2179,7 @@ public class DaoController {
 						//Actualisation du tableau de bord
 						typeActionTb();
 						//Message de confirmation
-						userController.setTexteMsg("Transmission effectu�e avec succ�s!");
+						userController.setTexteMsg("Transmission effectuée avec succès!");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");		
 	     }
@@ -2217,7 +2217,7 @@ public class DaoController {
 							  	//Historisation du / des retraits
 						       historiser(""+statutUpdate,slctdTd.getDacCode(),""+getObservation());
 		 					//Message de confirmation
-		 					 userController.setTexteMsg("DAO retourn� !");
+		 					 userController.setTexteMsg("DAO retourné !");
 		 					 userController.setRenderMsg(true);
 		 					 userController.setSevrityMsg("success");
 		 					 //return	null;
@@ -2226,7 +2226,7 @@ public class DaoController {
 		 		          //Actualisation du Tableau de Bord
 		 		          typeActionTb();
 		 			
-		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"D�sol�, votre DAO a �t� retourn�!", "");
+		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
 		 			 FacesContext.getCurrentInstance().addMessage(null, msg);
 		 	 }
 		 	 
@@ -2331,7 +2331,7 @@ public class DaoController {
 								btn_ad_expert = true;
 								btn_dao = true;
 								 //Message de confirmation
-			  		            userController.setTexteMsg("Membre(s) enregistr�(s) avec succ�s!");
+			  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
@@ -2354,7 +2354,7 @@ public class DaoController {
 			    				comSpecUpdate.setComTctLibelle(sltCompsec.getComTctLibelle());
 			    				iservice.updateObject(comSpecUpdate);
 					 			chargeMembres();
-					 			userController.setTexteMsg("Modification �ffectu�e avec succ�s!");
+					 			userController.setTexteMsg("Modification éffectuée avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 			    			}
@@ -2365,7 +2365,7 @@ public class DaoController {
 				 	public void updatePresenceComspec() {          
 				 		iservice.updateObject(sltCompsec);
 				 		chargeMembresComSpec();	
-								 userController.setTexteMsg("Modification �ffectu�e avec succ�s!");
+								 userController.setTexteMsg("Modification éffectuée avec succès!");
 				  		            userController.setRenderMsg(true);
 				  		            userController.setSevrityMsg("success");
 								
@@ -2379,7 +2379,7 @@ public class DaoController {
 			    				iservice.deleteObject(comSpec);
 						 		chargeMembres();
 						 		activieComboxAutoNorm();
-								userController.setTexteMsg("Suppression �ffectu�e avec succ�s!");
+								userController.setTexteMsg("Suppression éffectuée avec succès!");
 						  		userController.setRenderMsg(true);
 						  		userController.setSevrityMsg("success");
 			    			}
@@ -2391,7 +2391,7 @@ public class DaoController {
 				 		iservice.deleteObject(sltCompsec);
 				 		chargeMembresComSpec();	
 				 		activieComboxAutoSpec();
-						userController.setTexteMsg("Suppression �ffectu�e avec succ�s!");
+						userController.setTexteMsg("Suppression éffectuée avec succès!");
 				  		userController.setRenderMsg(true);
 				  		userController.setSevrityMsg("success");
 								
@@ -2419,7 +2419,7 @@ public class DaoController {
 								//chargeExpert();
 								chargeMembres();
 								
-								userController.setTexteMsg("Expert(s) enregistr�(s) avec succ�s!");
+								userController.setTexteMsg("Expert(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
@@ -2455,7 +2455,7 @@ public class DaoController {
 								}
 								//chargeExpert();
 								chargeMembresComSpec();
-								userController.setTexteMsg("Ressource ajout�e avec succ�s!");
+								userController.setTexteMsg("Ressource ajoutée avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
@@ -2474,7 +2474,7 @@ public class DaoController {
 			        	       }
 			        	       
 			        	       iservice.deleteObject(getDetailCom());
-							   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression �ffectu�e avec succ�s", "");
+							   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
 				 	}	 
 		 		 
 	//Statistiques pour le charg� d'Etudes
@@ -3518,13 +3518,13 @@ public class DaoController {
 					 }
 					 
 					 
-					 //Edition de l'AGPM
+					 //Edition de la fiche de synthèse du DAO
 					 public void imprimeSynthese() {
-							   projetReport.stringparam1(dao.getDacCode(), "synth�se_dac", "synth�se_dac"); 
+							   projetReport.stringparam1(dao.getDacCode(), "synthese_dac", "synthese_dac"); 
 						}
 					 
 				 
-					//T�l�chargement des DAO type apr�s la saisie du DAO					
+					//Téléchargement des DAO type après la saisie du DAO					
 						public void opendaoType() throws IOException{
 							
 						  if(controleController.type == "DAC" && controleController.typePlan == "PN"){
