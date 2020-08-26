@@ -1117,29 +1117,7 @@ public class CommissionController {
 		
 		//Ouverture des offres
 		public void saveOuverture() {
-				//enregister dans T_analyse_offre
-				/*if (selectionCritereAnalyse.size()==0) {
-					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
-				}
-		 		e*//*if(dofTyp.equalsIgnoreCase("")){
-		 			FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Choisir le type de l'Offre", ""));
-		 		         }else {
-		 		        	  iservice.updateObject(slctdTd);
-		 		 		  
-				 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
-							   //newOffre.setDofLaaId(laaId);
-				 			   newOffre.setDofLaaId(tlot.getLaaId().toString());
-							   newOffre.setTempType("OFF");
-							   newOffre.setDofOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-							   newOffre.setDofDteSaisi(Calendar.getInstance().getTime());
-							   newOffre.setDofTyp(dofTyp);
-							   //convertir le montant net en qui est en long en string
-							   String montantOffre =String.valueOf(montN);
-							   String rabais =String.valueOf(pourcentRab);
-							   newOffre.setDofMtOfr(montantOffre);
-							   newOffre.setDofRab(rabais);
-							   iservice.addObject(newOffre);
-		 		         }*/
+				
 			           iservice.updateObject(slctdTd);
 		  
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
@@ -1166,10 +1144,8 @@ public class CommissionController {
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 			iservice.addObject(newAnalyseOffre);
 				     }
-			 		
-			 		
 					  //enregister la liste des pièces du dao
-				    	if (listeSelectionPiecesOffres.size()==0) {
+				    /*	if (listeSelectionPiecesOffres.size()==0) {  
 								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 							}
 					 		else{
@@ -1185,7 +1161,7 @@ public class CommissionController {
 						 			newPieceOffre.setTLotAao(tlot.getLaaId().toString());
 						 			iservice.addObject(newPieceOffre);
 							     }	
-					 }
+					 }*/
 				     
 				    	viderPartiel();
 				    	chargeOffres();

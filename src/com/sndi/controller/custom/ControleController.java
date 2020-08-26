@@ -6429,7 +6429,7 @@ public class ControleController {
 							    			if(action.equalsIgnoreCase("LISOUV")) {
 								    			type = "Commission";
 								    			fonctionalite = "listOuvertureAc";
-								    			libelle="SEANCE D'OUVERTURE : SAISIE DES OFFRES";
+								    			libelle="SEANCE D'OUVERTURE / SAISIE DES OFFRES";
 								    			libelleFinCom = "Fin de la séance d'ouverture";
 								    			libelleConfirm = "Confirmez-vous la fin de la séance d'ouverture de l'avis d'appel d'Offre N°";
 												 panel1 =false;
