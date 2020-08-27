@@ -244,6 +244,8 @@ public class CommissionController {
 	 private String aaoRegQual="";
 	 private boolean infoOffre=false;
 	 private Boolean boutonEdit=false;
+	 private boolean finOuv = true;
+	 private boolean editerPv = false;
 	 
 	 private boolean conformite=false;
 	 private Boolean montant=false;
@@ -543,10 +545,8 @@ public class CommissionController {
 	 
 	//Liste des piecs de l'offre a l'analyse
 	 public void chargePiecesAnalyse() {
-		 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
-				// new WhereClause("POF_LAA_ID",Comparateur.EQ,""+sltOffre.getDofLaaId())));
-				 //new WhereClause("ODP_TPO_ETAP_PIECE",Comparateur.EQ,"Ouverture"),
-				 new WhereClause("POF_DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
+		 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",new ArrayList<String>(Arrays.asList("POF_LIBELLE")),
+				 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 		 nbrLot =nonbreLot();
 		 dofErrCalcul=0;
 		 dofMtCor=0;
@@ -764,9 +764,7 @@ public class CommissionController {
 					 new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
 					 new WhereClause("TCT_GRP_CODE",Comparateur.EQ,"AUT"),
 					 new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
-					_logger.info("expert size: "+listeExpert.size());	
-					
-					
+					_logger.info("expert size: "+listeExpert.size());		
 		 }
 		 
 		 
@@ -1145,23 +1143,6 @@ public class CommissionController {
 			 			iservice.addObject(newAnalyseOffre);
 				     }
 					  //enregister la liste des pièces du dao
-				    /*	if (listeSelectionPiecesOffres.size()==0) {  
-								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
-							}
-					 		else{
-						 		for(VPiecesOffre ligne : listeSelectionPiecesOffres) {
-						 			newPieceOffre.setPofDteSaisi(Calendar.getInstance().getTime());
-						 			newPieceOffre.setPofPresent("O");
-						 			newPieceOffre.setPofTypeAct("COJO");  
-						 			newPieceOffre.setTDacSpecs(ligne.getOpdDacCode());
-						 			newPieceOffre.setTOperateur(userController.getSlctd().getTOperateur());
-						 			newPieceOffre.setTTypePieceOffre(ligne.getTpoCode());
-						 			newPieceOffre.setTOffrePieceDac(ligne.getOpdNum());
-						 			//A revoir
-						 			newPieceOffre.setTLotAao(tlot.getLaaId().toString());
-						 			iservice.addObject(newPieceOffre);
-							     }	
-					 }*/
 				     
 				    	viderPartiel();
 				    	chargeOffres();
@@ -1246,7 +1227,7 @@ public class CommissionController {
 		}*/
 		
 		//Fin Ouverture/Analyse/Jugement
-		public void finOuverture() {
+		public void finOuverture() { 
 			String statUpdate = "";
 			String message = "";
 			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
@@ -1268,12 +1249,18 @@ public class CommissionController {
 					}	 
 				 }
 			 }
+			
 			slctdTd.setTStatut(new TStatut(statUpdate));	
 			iservice.updateObject(slctdTd);
 			chargementListe();
 			userController.setTexteMsg(message);
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");  
+		}
+		
+		public void reinitialise() {
+			finOuv = true;
+			editerPv = false;
 		}
 		
 		//Methode de chargement après avoir mis fin à l'ouverture/analyse/jugement
@@ -2685,6 +2672,26 @@ public class CommissionController {
 	}
 
 
+	public boolean isFinOuv() {
+		return finOuv;
+	}
+
+
+	public void setFinOuv(boolean finOuv) {
+		this.finOuv = finOuv;
+	}
+
+
+	public boolean isEditerPv() {
+		return editerPv;
+	}
+
+
+	public void setEditerPv(boolean editerPv) {
+		this.editerPv = editerPv;
+	}
+
+
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;
@@ -2693,5 +2700,6 @@ public class CommissionController {
 	public void setListeAppelOffre(List<VAvisAppelOffre> listeAppelOffre) {
 		this.listeAppelOffre = listeAppelOffre;
 	}*/
+	
 	
 }
