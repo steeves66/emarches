@@ -85,6 +85,7 @@ import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamDetOffres;
 import com.sndi.model.VbTempParametreCom;
+import com.sndi.model.VbTempParametreFactAn;
 import com.sndi.model.VVerifcorOffin;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
@@ -211,7 +212,7 @@ public class CommissionController {
 	 private VbTempParametreCom membre = new VbTempParametreCom();
 	 //private TCandidats candidat = new TCandidats(); 
 	 private VbTempParamDetOffres newOffre = new VbTempParamDetOffres();
-	 
+	 private VbTempParametreFactAn newfactorise = new VbTempParametreFactAn();
 	
 	 //private TDetOffres detailOffre = new TDetOffres();
 	 private VDetOffreRecevable detailOffre = new VDetOffreRecevable();
@@ -1473,6 +1474,18 @@ public class CommissionController {
 			 _logger.info("code avis : "  +""+slctdTd.getAaoCode());
 		 }
 		 
+		 //Factorisation des Lots
+		 public void factoriseLot() {
+			 newfactorise.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 newfactorise.setTempDacCode(slctdTd.getTDacSpecs().getDacCode());
+			 newfactorise.setTempType("FAN");
+			 newfactorise.setTempNbrLot(slctdTd.getAaoNbrLot());
+			 iservice.addObject(newfactorise);
+			 _logger.info("DAO : "  +""+slctdTd.getTDacSpecs().getDacCode());
+			 _logger.info("Nbre Lot : "  +""+slctdTd.getAaoNbrLot());
+			 _logger.info("Type : "  +""+newfactorise.getTempType());
+			 }
+		 
 		 
 		 
 		 public void vider() {
@@ -1588,6 +1601,7 @@ public class CommissionController {
 					chargeOffres();
 				break;
 				case "com4":
+					factoriseLot();
 					chargeLots();
 					chargeLotByAvis();
 					//chargeOffres();
@@ -2692,6 +2706,14 @@ public class CommissionController {
 	}
 
 
+	public VbTempParametreFactAn getNewfactorise() {
+		return newfactorise;
+	}
+
+
+	public void setNewfactorise(VbTempParametreFactAn newfactorise) {
+		this.newfactorise = newfactorise;
+	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;
