@@ -78,8 +78,7 @@
 		                 </div>
                       </div>         
                  <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeLotsByAvis}" 
-                 scrollable="true" scrollHeight="465" rowKey="#{slctdTb.laaId}" emptyMessage="Aucun Lot enregistré">
-                 <p:column selectionMode="single" style="width:26px;text-align:center"/>
+                selection="#{commissionController.lot}" selectionMode="single" scrollable="true" scrollHeight="465" rowKey="#{slctdTb.laaId}" emptyMessage="Aucun Lot enregistré">
                      
                            <p:column headerText="N°Lot" styleClass="col-sm-1">
 				            <h:commandLink  title="N°Lot" styleClass="col-sm-1"
@@ -131,7 +130,7 @@
                <div class="col-md-6">
                <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff; font-weight:bold;">LISTE DES OFFRES DU LOT N° #{commissionController.lot.laaNum}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight:bold;"><span style="font-weight: bold;font-size: 20">LOT N° #{commissionController.lot.laaNum}</span> : Liste des Offres</div></div> 
 			        <div class="col-md-2 ">
 					
 				</div>

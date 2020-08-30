@@ -176,7 +176,7 @@
                     <div class="box box-success box-solid">
                      
         <div class="box-header with-border">
-            <div  style="color: #fff">FIN DE LA SEANCE D'OUVERTURE DE L'AVIS N°#{commissionController.slctdTd.aaoCode} : #{commissionController.slctdTd.aaoLibelle}</div>
+            <div  style="color: #fff"><span style="font-weight: bold; font-size: 20px">FIN DE L'ANALYSE DE L'AVIS N°#{commissionController.slctdTd.aaoCode} </span>: #{commissionController.slctdTd.aaoLibelle}</div>
          </div>
          <div class="box-body">
          
@@ -205,7 +205,7 @@
          
          <div class="box-footer">
           <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.finOuverture()}" oncomplete="PF('finOuvertureDlg').hide()"  update=":gnl">
-				            <p:confirm header="Confirmation" message="Confirmez vous la fin de la séance d'ouverture?" icon="ui-icon-alert" />
+				            <p:confirm header="Confirmation" message="Confirmez vous la fin de l'analyse?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Valider
 				            </p:commandLink>
          </div>
