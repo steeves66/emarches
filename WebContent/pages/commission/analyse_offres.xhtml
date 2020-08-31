@@ -95,7 +95,7 @@
 				        </p:column>
 				      
 				        
-				         <p:column headerText="Objet" styleClass="col-sm-11">
+				         <p:column headerText="Objet" styleClass="col-sm-10">
 				           <h:commandLink  title="Objet" styleClass="col-sm-10"
          				 action="#{commissionController.onSelectLot()}">
          				  <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
@@ -111,13 +111,25 @@
 	
 				        </p:column>
 				        
-				     
+				        <p:column headerText="Obs" styleClass="col-sm-1">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10"
+         				 action="#{commissionController.onSelectLot()}">
+         				  <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
+                               
+                           </h:panelGroup>
+                           
+                           <h:panelGroup rendered="#{slctdTb.lotStatut == '1'}">
+                               
+                                </h:panelGroup>
+                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				         
 				         
                         </p:dataTable>  
-                        
-                        
-                        
-                 
 	            </div>
 	           </div>
                  </div>
