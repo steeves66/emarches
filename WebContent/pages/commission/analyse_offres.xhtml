@@ -142,10 +142,12 @@
                <div class="col-md-6">
                <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff; font-weight:bold;"><span style="font-weight: bold;font-size: 20">LOT N° #{commissionController.lot.laaNum}</span> : Liste des Offres</div></div> 
-			        <div class="col-md-2 ">
-					
-				</div>
+                  <div class="col-md-7"><div  style="color: #fff; font-weight:bold;"><span style="font-weight: bold;font-size: 20">LOT N° #{commissionController.lot.laaNum}</span> : Liste des Offres</div></div> 
+			        <div class="col-md-3">
+					  <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des offres recevables / non recevables" action="#{commissionController.natureOffre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+					  <span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">Recevables / Non recevables</span>
+					  </p:commandLink>
+				   </div>
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
@@ -497,10 +499,7 @@
    
                  </div>
               </div>
-                
-			           
-              
-              
+
 	                 <div class="row">
 	              
 	               <p:commandLink styleClass="btn btn-warning" style="background-color: #f88b2e;color:#fff;margin-left:15px;" oncomplete="PF('financedlg').hide()" update=":gnl">
@@ -513,13 +512,128 @@
                 <div class="pull-right ">
 			            <p:commandLink action="#{commissionController.analyser()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:15px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'analyse?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer			            </p:commandLink>
+			             <i class="ace-icon fa fa-save"></i> Enregistrer			            
+			             </p:commandLink>
               </div>
                 </div>
 	           </div>
       </p:dialog>
     </h:form>
-	
+    
+    
+   <h:form id="dlogConsultation">
+	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="Offres recevables / non recevables">
+	     
+        <div class="box-body">
+        
+        <div class="row">
+        <div class="col-md-12">
+                     <div class="form-group ">
+	                     <p:selectOneMenu id="lotCrit" value="#{commissionController.laaIdRecev}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir le lot.." />  
+			            <f:selectItems value="#{commissionController.listeLotsByAvis}" var="lot" itemLabel="#{lot.laaObjet}" itemValue="#{lot.laaId}" />
+			           <p:ajax listener="#{commissionController.natureOffreByLot()}" update=":dlogConsultation:recevable, :dlogConsultation:nonrecevable"/>
+       		        </p:selectOneMenu> 
+	                </div>
+        </div>
+        </div>
+        
+              <div class="row">
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES OFFRES RECEVABLES</div></div> 
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		     
+                   </div>  
+                          
+           <p:dataTable var="slctdTb"  id="recevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreRecevable}" 
+               scrollable="true" scrollHeight="300" emptyMessage="Aucune Offre recevable trouvée">
+               
+                          <p:column headerText="N°Offre" styleClass="col-sm-2">
+	         			  <h:outputText value="#{slctdTb.dofNum}" />
+                           </p:column>
+
+                            <p:column headerText="Entreprise" styleClass="col-sm-6">
+		         			<h:outputText value="#{slctdTb.dofSigle}" />
+                            </p:column>
+                            
+                            <p:column headerText="Montant" styleClass="col-sm-2">
+		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
+                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                                </h:outputText>
+                            </p:column>
+
+               </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+                
+               </div>
+               
+               
+               
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES OFFRES NON RECEVABLES</div></div> 
+			          
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		     
+                   </div>  
+                          
+           <p:dataTable var="slctdTb"  id="nonrecevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreNonRecevable}" 
+               scrollable="true" scrollHeight="300" emptyMessage="Aucune Offre recevable trouvée">
+               
+                          <p:column headerText="N°Offre" styleClass="col-sm-2">
+	         				<h:outputText value="#{slctdTb.dofNum}" />
+                            </p:column>
+
+                            <p:column headerText="Entreprise" styleClass="col-sm-6">
+		         		    <h:outputText value="#{slctdTb.dofSigle}" />
+                            </p:column>
+                            
+                            <p:column headerText="Montant" styleClass="col-sm-2">
+		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
+                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                                </h:outputText>
+                            </p:column>
+
+               </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+               </div>
+               
+               </div>
+              </div>
+              
+              <div class="row">
+	         </div>
+	  
+	  <div class="row">
+      <p:commandLink styleClass="btn btn-warning" style="background-color: #f88b2e;color:#fff;margin-left:15px;" oncomplete="PF('dlogConsultationC').hide()" update=":gnl">
+	   <i class="ace-icon fa fa-close bigger-130"></i> Fermer			           
+	  </p:commandLink>
+	  </div>
+          
+      </p:dialog> 
+    </h:form>
+    	 
+		 
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
