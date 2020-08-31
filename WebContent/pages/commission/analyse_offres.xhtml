@@ -169,12 +169,12 @@
                <p:dataTable var="slctdTb"  id="Toffre" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeOffres}" 
                scrollable="true" scrollHeight="465" emptyMessage="Aucune Offre trouvée">
                
-                          <p:column headerText="N°Offre" styleClass="col-sm-2">
+                          <p:column headerText="N°" styleClass="col-sm-1">
                               <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
-	         				    <h:outputText value="#{slctdTb.dofNum}" />
+	         				    <h:outputText value="#{slctdTb.cpt}" />
 	         				  </h:panelGroup>
 	         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
-	         				    <h:outputText value="#{slctdTb.dofNum}" style="color:green; font-weight:bold " />
+	         				    <h:outputText value="#{slctdTb.cpt}" style="color:green; font-weight:bold " />
 	         				  </h:panelGroup>
                             </p:column>
 

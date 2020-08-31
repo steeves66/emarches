@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 31 août 2020 12:05:22 by Hibernate Tools 4.3.5.Final
+// Generated 31 août 2020 20:00:55 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,6 +19,8 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_DET_OFFRE_ANALYSE")
 public class VDetOffreAnalyse implements java.io.Serializable {
 
+	private BigDecimal RId;
+	private BigDecimal cpt;
 	private BigDecimal dofNum;
 	private BigDecimal dofLaaId;
 	private String dofLaaAaoCode;
@@ -27,7 +29,7 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 	private BigDecimal dofDelai;
 	private BigDecimal dofDelai2;
 	private Long dofRangOfr;
-	private BigDecimal dofMtCor; 
+	private BigDecimal dofMtCor;
 	private long dofMtOfr;
 	private String dofRab;
 	private BigDecimal dofEstimRab;
@@ -82,6 +84,7 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 	private String dofStatut;
 	private String dofSouNcc;
 	private String souSigleSte;
+	private String laaDacCode;
 	private String dofTitle;
 	private BigDecimal dofErrCalcul;
 	private long dofMtRab;
@@ -104,21 +107,23 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 		this.dofDelai = dofDelai;
 	}
 
-	public VDetOffreAnalyse(BigDecimal dofNum, BigDecimal dofLaaId, String dofLaaAaoCode, BigDecimal dofOffNum,
-			String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2, Long dofRangOfr, BigDecimal dofMtCor,
-			long dofMtOfr, String dofRab, BigDecimal dofEstimRab, String dofCaut, String dofBanCode,
-			String dofSeuil, Short dofScore, String dofRecevabl, String dofRet, String dofRetBai, String dofRetDmp,
-			BigDecimal dofMtAtt, String dofTot, String dofTotAdm, String dofTotTec, String dofObsDmp, String dofObsCom,
-			String dofObsAdm, String dofObsAdmDmp, String dofObsAdmBai, String dofObsTec, String dofObsTecDmp,
-			String dofObsTecBai, Short dofNotAdm, Short dofNotTec, Short dofNotFin, Short dofNotFin2,
-			Short dofNotAdmDmp, Short dofNotTecDmp, Short dofNotFinDmp, Short dofNotFin2Dmp, Short dofNotAdmBai,
-			String dofNotTecBai, Short dofNotFinBai, Short dofNotFin2Bai, BigDecimal dofMtAttDmp,
-			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
-			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
-			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofFonCodeAc,
-			String dofOpeMatricule, String dofStatut, String dofSouNcc, String souSigleSte, String dofTitle,
-			BigDecimal dofErrCalcul, long dofMtRab, String dofSigle, String dofErrFin, String dofObsFin,
-			String dofRepeche, String dofObsAnormal, String dofObsRet) {
+	public VDetOffreAnalyse(BigDecimal RId, BigDecimal cpt, BigDecimal dofNum, BigDecimal dofLaaId,
+			String dofLaaAaoCode, BigDecimal dofOffNum, String dofTyp, BigDecimal dofDelai, BigDecimal dofDelai2,
+			Long dofRangOfr, BigDecimal dofMtCor, long dofMtOfr, String dofRab, BigDecimal dofEstimRab,
+			String dofCaut, String dofBanCode, String dofSeuil, Short dofScore, String dofRecevabl, String dofRet,
+			String dofRetBai, String dofRetDmp, BigDecimal dofMtAtt, String dofTot, String dofTotAdm, String dofTotTec,
+			String dofObsDmp, String dofObsCom, String dofObsAdm, String dofObsAdmDmp, String dofObsAdmBai,
+			String dofObsTec, String dofObsTecDmp, String dofObsTecBai, Short dofNotAdm, Short dofNotTec,
+			Short dofNotFin, Short dofNotFin2, Short dofNotAdmDmp, Short dofNotTecDmp, Short dofNotFinDmp,
+			Short dofNotFin2Dmp, Short dofNotAdmBai, String dofNotTecBai, Short dofNotFinBai, Short dofNotFin2Bai,
+			BigDecimal dofMtAttDmp, BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp,
+			String dofRecevablDmp, Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai,
+			Short dofScoreBai, String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,
+			String dofFonCodeAc, String dofOpeMatricule, String dofStatut, String dofSouNcc, String souSigleSte,
+			String laaDacCode, String dofTitle, BigDecimal dofErrCalcul, long dofMtRab, String dofSigle,
+			String dofErrFin, String dofObsFin, String dofRepeche, String dofObsAnormal, String dofObsRet) {
+		this.RId = RId;
+		this.cpt = cpt;
 		this.dofNum = dofNum;
 		this.dofLaaId = dofLaaId;
 		this.dofLaaAaoCode = dofLaaAaoCode;
@@ -182,6 +187,7 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 		this.dofStatut = dofStatut;
 		this.dofSouNcc = dofSouNcc;
 		this.souSigleSte = souSigleSte;
+		this.laaDacCode = laaDacCode;
 		this.dofTitle = dofTitle;
 		this.dofErrCalcul = dofErrCalcul;
 		this.dofMtRab = dofMtRab;
@@ -193,8 +199,25 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 		this.dofObsRet = dofObsRet;
 	}
 
-	
 	@Id
+	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}
+
+	@Column(name = "CPT", precision = 22, scale = 0)
+	public BigDecimal getCpt() {
+		return this.cpt;
+	}
+
+	public void setCpt(BigDecimal cpt) {
+		this.cpt = cpt;
+	}
+
 	@Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getDofNum() {
 		return this.dofNum;
@@ -277,11 +300,11 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 	}
 
 	@Column(name = "DOF_MT_OFR", precision = 20, scale = 0)
-	public long  getDofMtOfr() {
+	public long getDofMtOfr() {
 		return this.dofMtOfr;
 	}
 
-	public void setDofMtOfr(long  dofMtOfr) {
+	public void setDofMtOfr(long dofMtOfr) {
 		this.dofMtOfr = dofMtOfr;
 	}
 
@@ -760,6 +783,15 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 
 	public void setSouSigleSte(String souSigleSte) {
 		this.souSigleSte = souSigleSte;
+	}
+
+	@Column(name = "LAA_DAC_CODE", length = 20)
+	public String getLaaDacCode() {
+		return this.laaDacCode;
+	}
+
+	public void setLaaDacCode(String laaDacCode) {
+		this.laaDacCode = laaDacCode;
 	}
 
 	@Column(name = "DOF_TITLE", length = 560)

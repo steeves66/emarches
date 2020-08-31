@@ -610,7 +610,7 @@ public class CommissionController {
 		//Liste des offres TdetaiOffre
 		 public void chargeOffre() {
 			 listeOffres.clear();
-			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("DOF_NUM"))//,
+			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("R_ID"))//,
 					 ));
 				_logger.info("listeOffres size: "+listeOffres.size());	
 			 
@@ -721,7 +721,7 @@ public class CommissionController {
 		 public void onSelectLot() {
 			 listeAttibutaire.clear();
 			 listeOffres.clear();
-			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("R_ID")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())));
 				_logger.info("listeOffres size: "+listeOffres.size());	
 				
@@ -734,7 +734,7 @@ public class CommissionController {
 		 public void chargeFilterOffres() {
 			 listeAttibutaire.clear();
 			 listeOffre.clear();
-			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("R_ID")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId()),
 					  new WhereClause("DOF_NUM",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")));
 				_logger.info("listeOffres size: "+listeOffres.size());	
