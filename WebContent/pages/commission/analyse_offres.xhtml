@@ -187,7 +187,7 @@
 		         				  </h:panelGroup>
                             </p:column>
                             
-                            <p:column headerText="Montant" styleClass="col-sm-2">
+                            <p:column headerText="Montant Lu" styleClass="col-sm-2">
                              <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
 		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
                                 <f:convertNumber pattern="##,###.##"></f:convertNumber>
@@ -522,7 +522,7 @@
     
     
    <h:form id="dlogConsultation">
-	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="80%" closable="true" header="Offres recevables / non recevables">
+	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="80%" height="100%" closable="true" header="Offres recevables / non recevables">
 	     
         <div class="box-body">
         
@@ -531,7 +531,8 @@
                      <div class="form-group ">
 	                     <p:selectOneMenu id="lotCrit" value="#{commissionController.laaIdRecev}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			            <f:selectItem  itemLabel="Choisir le lot.." />  
+	                    <f:selectItem  itemLabel="Choisir un ou tous les lots..." /> 
+			            <f:selectItem  itemLabel="(Tous les lots)" />  
 			            <f:selectItems value="#{commissionController.listeLotsByAvis}" var="lot" itemLabel="#{lot.laaObjet}" itemValue="#{lot.laaId}" />
 			           <p:ajax listener="#{commissionController.natureOffreByLot()}" update=":dlogConsultation:recevable, :dlogConsultation:nonrecevable"/>
        		        </p:selectOneMenu> 
@@ -554,22 +555,18 @@
                    </div>  
                           
            <p:dataTable var="slctdTb"  id="recevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreRecevable}" 
-               scrollable="true" scrollHeight="300" emptyMessage="Aucune Offre recevable trouvée">
-               
-                          <p:column headerText="N°Offre" styleClass="col-sm-2">
-	         			  <h:outputText value="#{slctdTb.dofNum}" />
-                           </p:column>
-
-                            <p:column headerText="Entreprise" styleClass="col-sm-6">
-		         			<h:outputText value="#{slctdTb.dofSigle}" />
+               scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre recevable trouvée">
+                            <p:column headerText="Offre" styleClass="col-sm-11">
+                            <h:panelGroup rendered="#{slctdTb.tri != '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" />
+		         			</h:panelGroup>
+		         			
+		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			</h:panelGroup>
                             </p:column>
                             
-                            <p:column headerText="Montant" styleClass="col-sm-2">
-		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
-                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
-                                </h:outputText>
-                            </p:column>
-
+                            
                </p:dataTable>  
 	            </div>
 	           </div>
@@ -595,22 +592,16 @@
                    </div>  
                           
            <p:dataTable var="slctdTb"  id="nonrecevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreNonRecevable}" 
-               scrollable="true" scrollHeight="300" emptyMessage="Aucune Offre recevable trouvée">
-               
-                          <p:column headerText="N°Offre" styleClass="col-sm-2">
-	         				<h:outputText value="#{slctdTb.dofNum}" />
+               scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre non recevable trouvée">
+                            <p:column headerText="Offre" styleClass="col-sm-11">
+		         		    <h:panelGroup rendered="#{slctdTb.tri != '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" />
+		         			</h:panelGroup>
+		         			
+		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			</h:panelGroup>
                             </p:column>
-
-                            <p:column headerText="Entreprise" styleClass="col-sm-6">
-		         		    <h:outputText value="#{slctdTb.dofSigle}" />
-                            </p:column>
-                            
-                            <p:column headerText="Montant" styleClass="col-sm-2">
-		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
-                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
-                                </h:outputText>
-                            </p:column>
-
                </p:dataTable>  
 	            </div>
 	           </div>

@@ -74,6 +74,8 @@ import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VOffreCandidat;
+import com.sndi.model.VOffreNonRecevableLot;
+import com.sndi.model.VOffreRecevableLot;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VRecapSeuilAnormal;
@@ -167,8 +169,10 @@ public class CommissionController {
 	 //private List<VDetOffreRecevable> listeOffres = new ArrayList<VDetOffreRecevable>(); 
 	 private List<VDetOffreAnalyse> listeOffres = new ArrayList<VDetOffreAnalyse>();
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
-	 private List<VDetOffreRecevable> offreRecevable = new ArrayList<VDetOffreRecevable>();
-	 private List<VDetOffreNonRecevable> offreNonRecevable = new ArrayList<VDetOffreNonRecevable>();
+	 //private List<VDetOffreRecevable> offreRecevable = new ArrayList<VDetOffreRecevable>();
+	 //private List<VDetOffreNonRecevable> offreNonRecevable = new ArrayList<VDetOffreNonRecevable>();
+	 private List<VOffreRecevableLot> offreRecevable = new ArrayList<VOffreRecevableLot>();
+	 private List<VOffreNonRecevableLot> offreNonRecevable = new ArrayList<VOffreNonRecevableLot>();
 	 private List<VPiecesOffreAnalyse> listePiecesOffresAnalyse = new ArrayList<VPiecesOffreAnalyse>();
 	 private List<VPiecesOffreAnalyse> listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
 	 private List<VDetailOffres> listeOffre = new ArrayList<VDetailOffres>();
@@ -244,7 +248,7 @@ public class CommissionController {
 	 //Declaration des variables
 	 private String tcoCode;
 	 private String laaId;
-	 private long laaIdRecev;
+	 private long laaIdRecev=0;
 	 private String banCode;
 	 private String filtreNcc="";
 	 private String nbreOffre ="";
@@ -672,9 +676,10 @@ public class CommissionController {
 		 
 		 //Affichage des offres recevables et non recevables
 		 public void natureOffre() {
+			 laaIdRecev = 0;
 			 chargeLotByAvis();
 			 offreRecevable.clear();
-			 offreRecevable = ((List<VDetOffreRecevable>)iservice.getObjectsByColumn("VDetOffreRecevable",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 offreRecevable = ((List<VOffreRecevableLot>)iservice.getObjectsByColumn("VOffreRecevableLot",new ArrayList<String>(Arrays.asList("R_ID")),
 					  new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
 			 nonRecevOffre();
 			    _logger.info("Numéro DAC: "+slctdTd.getTDacSpecs().getDacCode());
@@ -684,16 +689,22 @@ public class CommissionController {
 		 
 		//Affichage des offres recevables et non recevables
 		 public void natureOffreByLot() {
-			 offreRecevable.clear();
-			 offreRecevable = ((List<VDetOffreRecevable>)iservice.getObjectsByColumn("VDetOffreRecevable",new ArrayList<String>(Arrays.asList("DOF_NUM")),
-					 new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+laaIdRecev)));
-			 nonRecevOffreByLot();	
+			 
+			 if(laaIdRecev == 0) {
+				 natureOffre();
+			 }else {
+				 offreRecevable.clear();
+				 offreRecevable = ((List<VOffreRecevableLot>)iservice.getObjectsByColumn("VOffreRecevableLot",new ArrayList<String>(Arrays.asList("R_ID")),
+						 new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+laaIdRecev)));
+				 nonRecevOffreByLot();	
+			 }
+			 
 		 }
 		 
 		 //Affichage des offres non recevables
 		 public void nonRecevOffre() {
 			 offreNonRecevable.clear();
-			 offreNonRecevable = ((List<VDetOffreNonRecevable>)iservice.getObjectsByColumn("VDetOffreNonRecevable",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 offreNonRecevable = ((List<VOffreNonRecevableLot>)iservice.getObjectsByColumn("VOffreNonRecevableLot",new ArrayList<String>(Arrays.asList("R_ID")),
 					  new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
 			    _logger.info("Numéro DAC: "+slctdTd.getTDacSpecs().getDacCode());
 				_logger.info("offre Non recevable size: "+offreNonRecevable.size());	
@@ -702,7 +713,7 @@ public class CommissionController {
 		 //Affichage des offres non recevables par Lot
 		 public void nonRecevOffreByLot() {
 			 offreNonRecevable.clear();
-			 offreNonRecevable = ((List<VDetOffreNonRecevable>)iservice.getObjectsByColumn("VDetOffreNonRecevable",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 offreNonRecevable = ((List<VOffreNonRecevableLot>)iservice.getObjectsByColumn("VOffreNonRecevableLot",new ArrayList<String>(Arrays.asList("R_ID")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+laaIdRecev)));	
 		 }
 		 
@@ -2773,24 +2784,26 @@ public class CommissionController {
 		this.newfactorise = newfactorise;
 	}
 
+	
 
-	public List<VDetOffreNonRecevable> getOffreNonRecevable() {
-		return offreNonRecevable;
-	}
-
-
-	public void setOffreNonRecevable(List<VDetOffreNonRecevable> offreNonRecevable) {
-		this.offreNonRecevable = offreNonRecevable;
-	}
-
-
-	public List<VDetOffreRecevable> getOffreRecevable() {
+	public List<VOffreRecevableLot> getOffreRecevable() {
 		return offreRecevable;
 	}
 
 
-	public void setOffreRecevable(List<VDetOffreRecevable> offreRecevable) {
+	public void setOffreRecevable(List<VOffreRecevableLot> offreRecevable) {
 		this.offreRecevable = offreRecevable;
+	}
+
+
+
+	public List<VOffreNonRecevableLot> getOffreNonRecevable() {
+		return offreNonRecevable;
+	}
+
+
+	public void setOffreNonRecevable(List<VOffreNonRecevableLot> offreNonRecevable) {
+		this.offreNonRecevable = offreNonRecevable;
 	}
 
 
