@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 27 août 2020 18:00:44 by Hibernate Tools 4.3.5.Final
+// Generated 31 août 2020 11:28:48 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -24,7 +24,9 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	private BigDecimal dcadLaaId;
 	private String pofLibelle;
 	private String pofConforme;
+	private Long pofScore;
 	private String pofObs;
+	private String anfPresence;
 
 	public VPiecesOffreAnalyse() {
 	}
@@ -34,14 +36,16 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	}
 
 	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum, BigDecimal dcadLaaId,
-			String pofLibelle, String pofConforme, String pofObs) {
+			String pofLibelle, String pofConforme, Long pofScore, String pofObs, String anfPresence) {
 		this.pofNum = pofNum;
 		this.craCode = craCode;
 		this.dofNum = dofNum;
 		this.dcadLaaId = dcadLaaId;
 		this.pofLibelle = pofLibelle;
 		this.pofConforme = pofConforme;
+		this.pofScore = pofScore;
 		this.pofObs = pofObs;
+		this.anfPresence = anfPresence;
 	}
 
 	
@@ -100,6 +104,15 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.pofConforme = pofConforme;
 	}
 
+	@Column(name = "POF_SCORE", precision = 10, scale = 0)
+	public Long getPofScore() {
+		return this.pofScore;
+	}
+
+	public void setPofScore(Long pofScore) {
+		this.pofScore = pofScore;
+	}
+
 	@Column(name = "POF_OBS", length = 1000)
 	public String getPofObs() {
 		return this.pofObs;
@@ -107,6 +120,15 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setPofObs(String pofObs) {
 		this.pofObs = pofObs;
+	}
+
+	@Column(name = "ANF_PRESENCE", length = 1)
+	public String getAnfPresence() {
+		return this.anfPresence;
+	}
+
+	public void setAnfPresence(String anfPresence) {
+		this.anfPresence = anfPresence;
 	}
 
 }

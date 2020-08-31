@@ -60,6 +60,7 @@ import com.sndi.model.VCritereAnalyseDac;
 import com.sndi.model.VCritereAnalyseDacOff;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDetCommissionSeance;
+import com.sndi.model.VDetOffreAnalyse;
 import com.sndi.model.VDetOffreRecevable;
 import com.sndi.model.VDetailOffres;
 import com.sndi.model.VDofTyp;
@@ -68,6 +69,7 @@ import com.sndi.model.VListePieceOffre;
 import com.sndi.model.VListeSouOffBasse;
 import com.sndi.model.VListeSouOffEleve;
 import com.sndi.model.VLot;
+import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VOffreCandidat;
@@ -161,7 +163,8 @@ public class CommissionController {
 	 private List<VOffreCandidat> listCandidats = new ArrayList<VOffreCandidat>();
 	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>();
 	 //private List<TDetOffres> listeOffres = new ArrayList<TDetOffres>(); 
-	 private List<VDetOffreRecevable> listeOffres = new ArrayList<VDetOffreRecevable>(); 
+	 //private List<VDetOffreRecevable> listeOffres = new ArrayList<VDetOffreRecevable>(); 
+	 private List<VDetOffreAnalyse> listeOffres = new ArrayList<VDetOffreAnalyse>();
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
 	 private List<VPiecesOffreAnalyse> listePiecesOffresAnalyse = new ArrayList<VPiecesOffreAnalyse>();
 	 private List<VPiecesOffreAnalyse> listeSelectionPiecesOffresAnalyse= new ArrayList<VPiecesOffreAnalyse>();
@@ -218,8 +221,9 @@ public class CommissionController {
 	 private VDetOffreRecevable detailOffre = new VDetOffreRecevable();
 	 private TDetOffres offre = new TDetOffres();
 	 private TDetOffres detOffre = new TDetOffres();
-	 //private TDetOffres sltOffre = new TDetOffres();
-	 private VDetOffreRecevable sltOffre = new VDetOffreRecevable();
+	 //private TDetOffres sltOffre = new TDetOffres(); sltOffre
+	 //private VDetOffreRecevable sltOffre = new VDetOffreRecevable();
+	 private VDetOffreAnalyse sltOffre = new VDetOffreAnalyse();
 	 private TSoumissions soumission = new TSoumissions();
 	 private VLotAnalyse lot = new VLotAnalyse();
 	 private VLot sltLot = new VLot();
@@ -598,18 +602,16 @@ public class CommissionController {
 		//Liste des offres TdetaiOffre
 		 public void chargeOffre() {
 			 listeOffres.clear();
-			 listeOffres = ((List<VDetOffreRecevable>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM"))//,
-					// new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())
+			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("DOF_NUM"))//,
 					 ));
 				_logger.info("listeOffres size: "+listeOffres.size());	
 			 
 		 }
 		 
-		//Filte 
+		//Filtre 
 		 public void chargeOffreFilterOffre() {
 			 listeOffres.clear();
-			 listeOffres = ((List<VDetOffreRecevable>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
-					// new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())
+			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 				     new WhereClause("DOF_NUM",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")  
 					 ));
 				_logger.info("listeOffres size: "+listeOffres.size());	
@@ -667,7 +669,7 @@ public class CommissionController {
 		 public void onSelectLot() {
 			 listeAttibutaire.clear();
 			 listeOffres.clear();
-			 listeOffres = ((List<VDetOffreRecevable>)iservice.getObjectsByColumn("VDetOffreRecevable",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())));
 				_logger.info("listeOffres size: "+listeOffres.size());	
 				
@@ -680,7 +682,7 @@ public class CommissionController {
 		 public void chargeFilterOffres() {
 			 listeAttibutaire.clear();
 			 listeOffre.clear();
-			 listeOffres = ((List<VDetOffreRecevable>)iservice.getObjectsByColumn("VDetOffreRecevable",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId()),
 					  new WhereClause("DOF_NUM",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")));
 				_logger.info("listeOffres size: "+listeOffres.size());	
@@ -1311,7 +1313,7 @@ public class CommissionController {
 			dofMtCor = sltOffre.getDofMtOfr() - sltOffre.getDofMtRab()+ dofErrCalcul;
 			_logger.info("montant lu : "  +""+sltOffre.getDofMtOfr());
 			_logger.info("montant rabais : "  +""+sltOffre.getDofMtRab());
-			_logger.info("montant erreur calcule : "  +""+dofErrCalcul);
+			_logger.info("montant erreur calculé : "  +""+dofErrCalcul);
 			_logger.info("montant corrigé : "  +""+dofMtCor);
 		}
 		
@@ -1319,13 +1321,12 @@ public class CommissionController {
 			dofErrCalcul = dofMtCor - sltOffre.getDofMtOfr() + sltOffre.getDofMtRab();
 			_logger.info("montant lu : "  +""+sltOffre.getDofMtOfr());
 			_logger.info("montant rabais : "  +""+sltOffre.getDofMtRab());
-			_logger.info("montant erreur calcule : "  +""+dofErrCalcul);
+			_logger.info("montant erreur calculé : "  +""+dofErrCalcul);
 			_logger.info("montant corrigé : "  +""+dofMtCor);
 		}
 		
 		//Analyser une offre
 		public void analyser() {
-			
 			//Modification des pieces selectionnées a conforme
 			/*if(sltOffre.getDofRangOfr()> nbrLot) {
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
@@ -1336,7 +1337,6 @@ public class CommissionController {
 			        if (!listeOffres.isEmpty()) {
 			        	offre=offreListe.get(0);
 			        	offre.setDofStaut("1");
-			        	//offre.setDofMtCor(sltOffre.getDofMtCor());
 			        	offre.setDofMtOfr(sltOffre.getDofMtOfr());
 			        	offre.setDofErrFin(sltOffre.getDofErrFin());
 			        	offre.setDofObsFin(sltOffre.getDofObsFin());
@@ -1359,7 +1359,8 @@ public class CommissionController {
 			 			TPiecesOffres updatePieceOffre = new TPiecesOffres();
 						if(!LS.isEmpty()) {
 						updatePieceOffre = LS.get(0);	
-			 			updatePieceOffre.setPofConforme("O");
+			 			updatePieceOffre.setPofConforme(ligne.getPofConforme());
+			 			updatePieceOffre.setPofPresent(ligne.getAnfPresence());
 			 			updatePieceOffre.setPofObs(ligne.getPofObs());
 			 			iservice.updateObject(updatePieceOffre);
 				     }	
@@ -1378,7 +1379,6 @@ public class CommissionController {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
 			 			newAnalyseOffre.setAnfDcadCraCle(ligne.getCraCode());
-			 			//newAnalyseOffre.set
 			 			newAnalyseOffre.setAnfDofNum(sltOffre.getDofNum());
 			 			newAnalyseOffre.setAnfDteModif(Calendar.getInstance().getTime());
 			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
@@ -1390,13 +1390,12 @@ public class CommissionController {
 			 			iservice.addObject(newAnalyseOffre);
 			 		}
 		         }
-				
+				chargeLotByAvis();
 				listeSelectionPiecesOffresAnalyse.clear();
 				selectionCritereAnalyse.clear();
 				userController.setTexteMsg("Analyse effectuée avec succès !");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
-	    	
 			//}
 			onSelectLot();
 		}
@@ -2448,31 +2447,50 @@ public class CommissionController {
 	}
 
 
-	public List<VDetOffreRecevable> getListeOffres() {
+	/*public List<VDetOffreRecevable> getListeOffres() {
 		return listeOffres;
 	}
 
 
 	public void setListeOffres(List<VDetOffreRecevable> listeOffres) {
 		this.listeOffres = listeOffres;
+	}*/
+
+
+	public List<VDetOffreAnalyse> getListeOffres() {
+		return listeOffres;
 	}
 
+
+	public void setListeOffres(List<VDetOffreAnalyse> listeOffres) {
+		this.listeOffres = listeOffres;
+	}
 
 	public VDetOffreRecevable getDetailOffre() {
 		return detailOffre;
 	}
-
 
 	public void setDetailOffre(VDetOffreRecevable detailOffre) {
 		this.detailOffre = detailOffre;
 	}
 
 
-	public VDetOffreRecevable getSltOffre() {
+/*	public VDetOffreRecevable getSltOffre() {
 		return sltOffre;
 	}
 
 	public void setSltOffre(VDetOffreRecevable sltOffre) {
+		this.sltOffre = sltOffre;
+	}*/
+	
+
+
+	public VDetOffreAnalyse getSltOffre() {
+		return sltOffre;
+	}
+
+
+	public void setSltOffre(VDetOffreAnalyse sltOffre) {
 		this.sltOffre = sltOffre;
 	}
 
@@ -2480,7 +2498,6 @@ public class CommissionController {
 	public TDetOffres getOffre() {
 		return offre;
 	}
-
 
 	public void setOffre(TDetOffres offre) {
 		this.offre = offre;

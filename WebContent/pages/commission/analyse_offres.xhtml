@@ -95,7 +95,7 @@
 				        </p:column>
 				      
 				        
-				         <p:column headerText="Objet" styleClass="col-sm-10">
+				         <p:column headerText="Objet" styleClass="col-sm-9">
 				           <h:commandLink  title="Objet" styleClass="col-sm-10"
          				 action="#{commissionController.onSelectLot()}">
          				  <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
@@ -111,15 +111,15 @@
 	
 				        </p:column>
 				        
-				        <p:column headerText="Obs" styleClass="col-sm-1">
+				        <p:column headerText="Obs" styleClass="col-sm-2">
 				           <h:commandLink  title="Objet" styleClass="col-sm-10"
          				 action="#{commissionController.onSelectLot()}">
          				  <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
-                               
+                             <span>#{slctdTb.nbtrt}</span>  
                            </h:panelGroup>
                            
                            <h:panelGroup rendered="#{slctdTb.lotStatut == '1'}">
-                               
+                            <span style="color:green; font-weight:bold" > #{slctdTb.nbtrt} </span>
                                 </h:panelGroup>
                                 
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
@@ -256,7 +256,7 @@
 	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
 		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-		                               <p:column headerText="PIECES" styleClass="col-sm-5">
+		                               <p:column headerText="PIECES" styleClass="col-sm-4">
 		                                  <h:outputText value="#{slctdTb.pofLibelle}"/>
 		                                </p:column>
 		                                  <p:column headerText="CONFORME" styleClass="col-sm-2"  >
@@ -272,9 +272,24 @@
 	                                                   </h:selectOneMenu>
          				                             </f:facet>
          				                           </p:cellEditor>
+				                               </p:column>
+				                               
+				                               <p:column headerText="PRESENCE" styleClass="col-sm-2">
+                                            <p:cellEditor>
+                                             <f:facet name="output">
+         				                        <h:outputText id="presence3" value="#{slctdTb.anfPresence == 'O'?'OUI':'NON'}" />
+         				                         </f:facet>
+         				                             <f:facet name="input">
+	         				                           <h:selectOneMenu id="presence4" value="#{slctdTb.anfPresence}" style="width:100%; color:#0000">
+				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
+	                                                   </h:selectOneMenu>
+         				                             </f:facet>
+         				                           </p:cellEditor>
 				                                    </p:column>
 				        
-				                                  <p:column headerText="OBSERVATION" styleClass="col-sm-5" >
+				                                  <p:column headerText="OBSERVATION" styleClass="col-sm-4" >
                                                    <p:cellEditor>
                                                    <f:facet name="output">
          				                           <h:outputText id="comment10" value="#{slctdTb.pofObs}" />
