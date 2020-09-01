@@ -66,7 +66,7 @@
                  <div class="col-md-12">
                    <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold;">LISTE DES LOTS</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -149,7 +149,7 @@
                <div class="col-md-6">
                <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-7"><div  style="color: #fff; font-weight:bold;"><span style="font-weight: bold;font-size: 20">LOT N° #{commissionController.lot.laaNum}</span> : Liste des Offres</div></div> 
+                  <div class="col-md-7"><div  style="color: #fff; font-weight:bold; font-size: 17px;"><span style="font-weight: bold;">LOT N° #{commissionController.lot.laaNum}</span> : Liste des Offres</div></div> 
 			        <div class="col-md-3">
 					  <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des offres recevables / non recevables" action="#{commissionController.natureOffre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
 					  <span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">Recevables / Non recevables</span>
@@ -217,7 +217,7 @@
                             </p:commandLink>
                             
                               <p:commandLink rendered="#{slctdTb.dofStatut == '1' }" action="#{commissionController.editerFicheOffre()}" ajax="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px"
-				               title="Editer le rapport d'analyse" update=":content">
+				               title="Editer le rapport d'analyse individuel" update=":content">
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
                             </p:commandLink>
@@ -229,6 +229,11 @@
                </div>
               </div>
               
+              <div class="row">
+              <p:commandLink  styleClass="btn btn-warning row pull-right" rendered="#{commissionController.editerAna}" action="#{commissionController.editerRpAnalyse()}" style="background-color: #f88b2e; margin-right:5px;color:#fff" ajax="false"  update=":content">
+			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le rapport d'Analyse
+	          </p:commandLink>
+	          </div>
                 
             </div>
             <!-- /.box-body -->
@@ -263,9 +268,8 @@
 	                         <!-- /.box-header -->
 	                         <div class="box-body">
 	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
-		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
+		                        	 rowKey="#{slctdTb.pofNum}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
 		                        	 
-		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 		                               <p:column headerText="PIECES" styleClass="col-sm-4">
 		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 		                                  <h:outputText value="#{slctdTb.pofLibelle}"/>
@@ -422,9 +426,8 @@
 	            <!-- /.box-header -->
 	            <div class="box-body">
 	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}"  emptyMessage="Aucun critère trouvé" var="slctdTb" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
-					 editable="true" editMode="cell" rowKey="#{slctdTb.RId}" selection="#{commissionController.selectionCritereAnalyse}"  scrollable="true" scrollHeight="391">
+					 editable="true" editMode="cell" rowKey="#{slctdTb.RId}"  scrollable="true" scrollHeight="391">
 		                        	 
-		                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/> 
 		                        	 
 	                               <p:column headerText="CRITERES" styleClass="col-sm-5">
 	                                 <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">

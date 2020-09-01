@@ -263,6 +263,7 @@ public class CommissionController {
 	 private Boolean boutonEdit=false;
 	 private boolean finOuv = true;
 	 private boolean editerPv = false;
+	 private boolean editerAna = false;
 	 
 	 private boolean conformite=false;
 	 private Boolean montant=false;
@@ -670,7 +671,7 @@ public class CommissionController {
 		 
 		//filtre lot
 		 public void chargeLotFilterLot() {
-			 listeLots.clear();
+			listeLots.clear();
 			listeLotsByAvis=(List<VLotAnalyse>) iservice.getObjectsByColumn("VLotAnalyse", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
 					new WhereClause("LAA_NUM",WhereClause.Comparateur.LIKE,"%"+laaNum+"%")); 
@@ -735,12 +736,13 @@ public class CommissionController {
 				 chargeAffAttributaire();
 		 }
 		 
+		 
 		 public void chargeFilterOffres() {
 			 listeAttibutaire.clear();
 			 listeOffre.clear();
 			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("R_ID")),
 					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId()),
-					  new WhereClause("DOF_NUM",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")));
+					  new WhereClause("CPT",WhereClause.Comparateur.LIKE,"%"+dofNum+"%")));
 				_logger.info("listeOffres size: "+listeOffres.size());	
 				
 				//pour jugelment
@@ -1193,14 +1195,14 @@ public class CommissionController {
 					   newOffre.setDofBanCode(banCode);
 					   iservice.addObject(newOffre);
 		 			
-		 			
-			 		for(VCritereAnalyseDacOfftec ligne : selectionCritereAnalyse) {
+		 			/*
+			 		for(VCritereAnalyseDac ligne : selectionCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
 			 			newAnalyseOffre.setAnfObser(sltOffre.getDofObsCom());
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 			iservice.addObject(newAnalyseOffre);
-				     }
+				     }*/
 					  //enregister la liste des pièces du dao
 				     
 				    	viderPartiel();
@@ -1400,17 +1402,15 @@ public class CommissionController {
 			        	offre.setDofMtCor(dofMtCor);
 			        	iservice.updateObject(offre);
 			          }
-				//sltOffre.setDofStatut("1");
-				//iservice.updateObject(sltOffre);
 				
-				if (listeSelectionPiecesOffresAnalyse.size()==0) {
+				/*if (listeSelectionPiecesOffresAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 				}else
 				if (listePiecesOffresAnalyse.size()<listeSelectionPiecesOffresAnalyse.size()) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
 				}
-		 		else{
-			 		for(VPiecesOffreAnalyse ligne : listeSelectionPiecesOffresAnalyse) {
+		 		else{*/
+			 		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
 			 			List<TPiecesOffres> LS  = iservice.getObjectsByColumn("TPiecesOffres",  new WhereClause("POF_NUM",Comparateur.EQ,""+ligne.getPofNum()));
 			 			TPiecesOffres updatePieceOffre = new TPiecesOffres();
 						if(!LS.isEmpty()) {
@@ -1421,17 +1421,17 @@ public class CommissionController {
 			 			iservice.updateObject(updatePieceOffre);
 				     }	
 			 		}
-		         }
+		         //}
 				
 				//EVALUTATION
-				if (selectionCritereAnalyse.size()==0) {
+				/*if (selectionCritereAnalyse.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
 				}else
 					if (listeCritereAnalyse.size()<selectionCritereAnalyse.size()) {
 						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
-					}
-		 		else{
-			 		for(VCritereAnalyseDacOfftec ligne : selectionCritereAnalyse) {
+					}*/
+		 		//else{
+			 		for(VCritereAnalyseDacOfftec ligne : listeCritereAnalyse) {
 			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
 			 			newAnalyseOffre.setAnfDcadCraCle(ligne.getCraCode());
@@ -1445,8 +1445,9 @@ public class CommissionController {
 			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 			iservice.addObject(newAnalyseOffre);
 			 		}
-		         }
+		         //}
 				chargeLotByAvis();
+				editerAna = true;
 				listeSelectionPiecesOffresAnalyse.clear();
 				selectionCritereAnalyse.clear();
 				userController.setTexteMsg("Analyse effectuée avec succès !");
@@ -1523,10 +1524,16 @@ public class CommissionController {
 			 projetReport.longparam1(sltOffre.getDofNum().longValue(), "Rapport_ana", "Rapport_ana");
 		 }
 		 
-		 //Edition du PV d'analyse
+		 //Edition du Rapport Analyse 1
 		 public void editerPvAnalyse() {
 			 projetReport.stringparam1(""+slctdTd.getAaoCode(), "page_garde_ouv", "page_garde_ouv");
 			 _logger.info("code avis : "  +""+slctdTd.getAaoCode());
+		 }
+		 
+		//Edition du Rapport d'analyse
+		 public void editerRpAnalyse() {
+			 projetReport.stringparam1(""+slctdTd.getAaoCode(), "rapport_analyse", "rapport_analyse");
+			 _logger.info("aaoCode : "  +""+slctdTd.getAaoCode());
 		 }
 		 
 		 //Factorisation des Lots
@@ -2845,6 +2852,16 @@ public class CommissionController {
 
 	public void setLaaIdRecev(long laaIdRecev) {
 		this.laaIdRecev = laaIdRecev;
+	}
+
+
+	public boolean isEditerAna() {
+		return editerAna;
+	}
+
+
+	public void setEditerAna(boolean editerAna) {
+		this.editerAna = editerAna;
 	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
