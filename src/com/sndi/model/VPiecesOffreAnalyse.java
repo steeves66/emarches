@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 31 août 2020 11:28:48 by Hibernate Tools 4.3.5.Final
+// Generated 1 sept. 2020 10:30:17 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -21,6 +21,7 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	private BigDecimal pofNum;
 	private String craCode;
 	private BigDecimal dofNum;
+	private String analyseStatut;
 	private BigDecimal dcadLaaId;
 	private String pofLibelle;
 	private String pofConforme;
@@ -35,11 +36,13 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.dofNum = dofNum;
 	}
 
-	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum, BigDecimal dcadLaaId,
-			String pofLibelle, String pofConforme, Long pofScore, String pofObs, String anfPresence) {
+	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum, String analyseStatut,
+			BigDecimal dcadLaaId, String pofLibelle, String pofConforme, Long pofScore, String pofObs,
+			String anfPresence) {
 		this.pofNum = pofNum;
 		this.craCode = craCode;
 		this.dofNum = dofNum;
+		this.analyseStatut = analyseStatut;
 		this.dcadLaaId = dcadLaaId;
 		this.pofLibelle = pofLibelle;
 		this.pofConforme = pofConforme;
@@ -48,7 +51,6 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.anfPresence = anfPresence;
 	}
 
-	
 	@Id
 	@Column(name = "POF_NUM", precision = 22, scale = 0)
 	public BigDecimal getPofNum() {
@@ -75,6 +77,15 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setDofNum(BigDecimal dofNum) {
 		this.dofNum = dofNum;
+	}
+
+	@Column(name = "ANALYSE_STATUT", length = 1)
+	public String getAnalyseStatut() {
+		return this.analyseStatut;
+	}
+
+	public void setAnalyseStatut(String analyseStatut) {
+		this.analyseStatut = analyseStatut;
 	}
 
 	@Column(name = "DCAD_LAA_ID", precision = 22, scale = 0)

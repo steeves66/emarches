@@ -9,6 +9,13 @@
 	
 	<ui:define name="contents">
 	<h:form id="gnl" styleClass="form-horizontal">
+	  <style type="text/css">
+    .old {
+        background-color: #EEE8DF !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
 <section class="content-header">
        <h3>
         #{controleController.libelle} #{commissionController.slctdTd.aaoCode} : <strong>#{commissionController.slctdTd.aaoLibelle}</strong>
@@ -247,57 +254,77 @@
                  
                   <div class="row">
                   
-	                 <div class="col-md-5">
+	                 <div class="col-md-6">
 	                   <div class="box box-success box-solid">
 			               <div class="box-header with-border">
-			                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE ADMINISTRATIVE (1)</div></div> 
+			                  <div class="col-md-10 "><div  style="color: #fff; font-size:16px; font-weight:bold;">ANALYSE ADMINISTRATIVE (1)</div></div> 
 						         <div class="col-md-2 "> </div>
 			                </div>
 	                         <!-- /.box-header -->
 	                         <div class="box-body">
-	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" 
+	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
 		                        	 rowKey="#{slctdTb.pofNum}" selection="#{commissionController.listeSelectionPiecesOffresAnalyse}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
+		                        	 
 		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 		                               <p:column headerText="PIECES" styleClass="col-sm-4">
+		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 		                                  <h:outputText value="#{slctdTb.pofLibelle}"/>
+		                                  </h:panelGroup>
+		                                   <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+		                                  <h:outputText value="#{slctdTb.pofLibelle}" style="color:black ;font-weight:bold "/>
+		                                  </h:panelGroup>
 		                                </p:column>
+		                                
 		                                  <p:column headerText="CONFORME" styleClass="col-sm-2"  >
                                             <p:cellEditor>
                                              <f:facet name="output">
+                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'O'?'OUI':'NON'}" />
+         				                        </h:panelGroup>
          				                         </f:facet>
          				                             <f:facet name="input">
+         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
 				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
 	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
 	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
 	                                                   </h:selectOneMenu>
+	                                                   </h:panelGroup>
          				                             </f:facet>
          				                           </p:cellEditor>
+         				                      
 				                               </p:column>
 				                               
-				                               <p:column headerText="PRESENCE" styleClass="col-sm-2">
+				                        <p:column headerText="PRESENCE" styleClass="col-sm-2">
                                             <p:cellEditor>
                                              <f:facet name="output">
+                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                        <h:outputText id="presence3" value="#{slctdTb.anfPresence == 'O'?'OUI':'NON'}" />
+         				                        </h:panelGroup>
          				                         </f:facet>
          				                             <f:facet name="input">
+         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 	         				                           <h:selectOneMenu id="presence4" value="#{slctdTb.anfPresence}" style="width:100%; color:#0000">
 				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
 	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
 	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
 	                                                   </h:selectOneMenu>
+	                                                   </h:panelGroup>
          				                             </f:facet>
          				                           </p:cellEditor>
-				                                    </p:column>
+				                           </p:column>
 				        
-				                                  <p:column headerText="OBSERVATION" styleClass="col-sm-4" >
-                                                   <p:cellEditor>
+				                             <p:column headerText="OBSERVATION" styleClass="col-sm-4" >
+                                                <p:cellEditor>
                                                    <f:facet name="output">
-         				                           <h:outputText id="comment10" value="#{slctdTb.pofObs}" />
+                                                    <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                               <h:outputText id="comment10" value="#{slctdTb.pofObs}" />
+         				                           </h:panelGroup>
          				                           </f:facet>
          				                          <f:facet name="input">
-         				                          <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.pofObs}" id="comment11" style="width: 100%" />
+         				                            <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                              <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.pofObs}" id="comment11" style="width: 100%" />
+         				                            </h:panelGroup>
          				                          </f:facet>
          				                        </p:cellEditor>
 				                                 </p:column>
@@ -305,9 +332,9 @@
 	                        </div>
 	                       </div>
 	                       
-	                                  <div class="box box-success box-solid">
+	                      <div class="box box-success box-solid">
 			               <div class="box-header with-border">
-			                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE FINANCIERE (3)</div></div> 
+			                  <div class="col-md-10 "><div  style="color: #fff; font-size:16px; font-weight:bold;">ANALYSE FINANCIERE (3)</div></div> 
 						         <div class="col-md-2 "> </div>
 			               </div>
 				            <!-- /.box-header -->
@@ -386,48 +413,66 @@
 	                    
 	                                
 	                    
-	        <div class="col-md-7">
+	        <div class="col-md-6">
 	         <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">ANALYSE TECHNIQUE (2)</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-size:16px; font-weight:bold;">ANALYSE TECHNIQUE (2)</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
-	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}"  emptyMessage="Aucun critère trouvé" var="slctdTb" 
+	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}"  emptyMessage="Aucun critère trouvé" var="slctdTb" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
 					 editable="true" editMode="cell" rowKey="#{slctdTb.RId}" selection="#{commissionController.selectionCritereAnalyse}"  scrollable="true" scrollHeight="391">
 		                        	 
-		                        	 <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
-	                                     <p:column headerText="CRITERES" styleClass="col-sm-5">
-	         				               <h:outputText value="#{slctdTb.craLibelle}" />
+		                       <p:column selectionMode="multiple" style="width:40px;text-align:center"/> 
+		                        	 
+	                               <p:column headerText="CRITERES" styleClass="col-sm-5">
+	                                 <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+		                              <h:outputText value="#{slctdTb.craLibelle}"/>
+		                              </h:panelGroup>
+		                              
+		                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+	         				          <h:outputText value="#{slctdTb.craLibelle}" style="color:black ;font-weight:bold "/>
+	         				          </h:panelGroup>
                                     </p:column>
                                     
+                                    
 	                      <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.montant}">
+	                      
 	                           <p:cellEditor>
 				                <f:facet name="output">
+				                <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 				                <h:outputText styleClass="pull-right" id="val1" value="#{slctdTb.valRegQual}" >
 				                <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				                </h:outputText>
+				                </h:panelGroup>
 				                </f:facet>
-				                <f:facet name="input"> 
+				                <f:facet name="input">
+				                <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}"> 
 				                <p:inputText id="val2" styleClass="form-control text-right" value="#{slctdTb.valRegQual}" style="width:100%; float :rigth">
 				                <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				                 </p:inputText>
+				                 </h:panelGroup>
 				                 </f:facet>
 				               </p:cellEditor>
+				            
 					        </p:column>
 					        
                       <p:column headerText="VALEUR" styleClass="col-sm-3" rendered="#{commissionController.conformite}" >
                           <p:cellEditor>
                           <f:facet name="output">
+                          <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				  <h:outputText id="mandat1" styleClass="form-control text-center" value="#{slctdTb.aaoRegQual}" />
+         				  </h:panelGroup>
          				  </f:facet>
          				  <f:facet name="input">
+         				  <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQual}" style="width:100%; color:#0000">
 				              <f:selectItem itemLabel="Choisir" itemValue="" />
 	                         <f:selectItem itemLabel="CONFORME" itemValue="CONFORME" />
 	                         <f:selectItem itemLabel="NON CONFORME" itemValue="NON CONFORME" />
 	                          </h:selectOneMenu>
+	                      </h:panelGroup>
          				  </f:facet>
          				  </p:cellEditor>
 				        </p:column>
@@ -435,10 +480,14 @@
 				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-5" >
                           <p:cellEditor>
                           <f:facet name="output">
+                          <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				  <h:outputText id="comment12" value="#{slctdTb.dcadCommentaire}" />
+         				  </h:panelGroup>
          				  </f:facet>
          				  <f:facet name="input">
-         				  <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.dcadCommentaire}" id="comment2" style="width: 100%" />
+         				    <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				    <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.dcadCommentaire}" id="comment2" style="width: 100%" />
+         				    </h:panelGroup>
          				  </f:facet>
          				  </p:cellEditor>
 				        </p:column>
@@ -554,7 +603,7 @@
 		     
                    </div>  
                           
-           <p:dataTable var="slctdTb"  id="recevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreRecevable}" 
+           <p:dataTable var="slctdTb"  id="recevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
                scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre recevable trouvée">
                             <p:column headerText="Offre" styleClass="col-sm-11">
                             <h:panelGroup rendered="#{slctdTb.tri != '1' }">
@@ -591,7 +640,7 @@
 		     
                    </div>  
                           
-           <p:dataTable var="slctdTb"  id="nonrecevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreNonRecevable}" 
+           <p:dataTable var="slctdTb"  id="nonrecevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreNonRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
                scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre non recevable trouvée">
                             <p:column headerText="Offre" styleClass="col-sm-11">
 		         		    <h:panelGroup rendered="#{slctdTb.tri != '1' }">
