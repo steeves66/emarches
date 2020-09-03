@@ -2778,6 +2778,7 @@ public class DaoController {
 				                	          		  newAvis.setAaoDteOuvTec(ouvTech);
 				            	            		  }
 				            	          		      newAvis.setTStatut(new TStatut("D1S"));
+				            	          		      newAvis.setAvisRetour("0");
 													  newAvis.setAaoNatInt(value1);
 				            	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
 				            	          		      iservice.addObject(newAvis); 

@@ -71,22 +71,56 @@
                          rowsPerPageTemplate="5,10,15" >
                          
                           <p:column headerText="CODE" styleClass="col-sm-1" >
-         				  <h:outputText value="#{slctdTb.aaoCode}"/>
+                            <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				      <h:outputText value="#{slctdTb.aaoCode}"/>
+         				   </h:panelGroup>
+         				  <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				      <h:outputText value="#{slctdTb.aaoCode}" style="color:red; font-weight:bold"/>
+         				   </h:panelGroup>
 				        </p:column>	
+				        
 				        <p:column headerText="LIBELLE" styleClass="col-sm-7" >
-         				  <h:outputText value="#{slctdTb.aaoLibelle}"/>
+				        <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				     <h:outputText value="#{slctdTb.aaoLibelle}"/>
+         				   </h:panelGroup>
+         				   <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				     <h:outputText value="#{slctdTb.aaoLibelle}" style="color:red; font-weight:bold"  />
+         				   </h:panelGroup>
 				        </p:column>
+				        
 				         <p:column headerText="DATE DE PUB" styleClass="col-sm-1" >
-         				  <h:outputText value="#{slctdTb.aaoDtePub}">
+				           <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				     <h:outputText value="#{slctdTb.aaoDtePub}">
          				  <f:convertDateTime pattern="dd/MM/yyyy" />
          				  </h:outputText>
+         				   </h:panelGroup>
+         				   
+         				   <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				     <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  <f:convertDateTime pattern="dd/MM/yyyy" style="color:red; font-weight:bold"/>
+         				  </h:outputText>
+         				   </h:panelGroup>
 				        </p:column>	
+				        
 				         <p:column headerText="NBRE LOT" styleClass="col-sm-1" >
+				          <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
          				  <h:outputText value="#{slctdTb.aaoNbrLot}"/>
-				        </p:column>		
+         				  </h:panelGroup>
+         				 <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				  <h:outputText value="#{slctdTb.aaoNbrLot}" style="color:red; font-weight:bold "/>
+         				 </h:panelGroup>
+				        </p:column>	
+				        	
                         <p:column headerText="NBRE OUV" styleClass="col-sm-1" >
+                        <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
          				  <h:outputText value="#{slctdTb.aaoNbrOuv}"/>
-				        </p:column>			        
+         				  </h:panelGroup>
+         				 <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				 <h:outputText value="#{slctdTb.aaoNbrOuv}"  style="color:red; font-weight:bold "/>
+         				 </h:panelGroup>
+         				  
+				        </p:column>	
+				        		        
 				         <p:column headerText="ACTIONS" styleClass="col-sm-2" >
 				           <!-- BOUTONS APERCU -->
          				   <p:commandLink rendered="#{controleController.btn_apercuOuv}" action="#{etatsCommissionController.renderPage('detc1','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
@@ -146,7 +180,7 @@
                             </p:commandLink>
                             
                             <!--BOUTON DE RETOUR -->
-                            <p:commandLink rendered="#{controleController.btn_retourJug}" oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                            <p:commandLink rendered="#{controleController.btn_retourJug}" action="#{commissionController.reanalyser()}" styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />
                               </p:commandLink>
@@ -228,7 +262,7 @@
 	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Motif de Retour">
 					<div class="g12">
 						<div class="panel-heading">
-						MOTIF DE RETOUR
+						MOTIF DE RETOUR DE L'AVIS N°#{commissionController.slctdTd.aaoCode} : #{commissionController.slctdTd.aaoLibelle}
 						
 						</div> 
 					<div class="panel-body panel-body-nopadding">

@@ -606,9 +606,20 @@ public class CommissionController {
 		 }*/
 		 
 		 
-		 //Differer
-		 public void differer() {
-		
+		 
+		 
+		 
+		 //Differer un avis d'appel d'Offres au niveau du Jugement
+		 public void reanalyser() {
+			 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+			    if (! listeAppelOffre.isEmpty()) {
+			    	TAvisAppelOffre avis = new TAvisAppelOffre();
+				     avis= listeAppelOffre.get(0);
+				     avis.setAvisRetour("1");
+				     iservice.updateObject(avis);
+				     chargeListe("ANA");
+			    }
 		 }
 		 
 

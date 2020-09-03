@@ -72,6 +72,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private Date aaoDteFinOuv;
 	private Date aaoDteOuv;
 	private String aooHeurOuv;
+	private String avisRetour;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -91,7 +92,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			BigDecimal aaoMtCaut, String aaoModePaiement, long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,String aaoHeureRecep, String aaoNatPrix, String aaoRegQual,
 			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
 			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,
-			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,
+			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,String avisRetour,
 			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.aaoCode = aaoCode;
 		this.fonCodAc = fonCodAc;
@@ -141,6 +142,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoDteFinOuv = aaoDteFinOuv;
 		this.aaoDteOuv = aaoDteOuv;
 		this.aooHeurOuv = aooHeurOuv;
+		this.avisRetour = avisRetour;
 		this.TDetailAvises = TDetailAvises;
 		this.TLotAaos = TLotAaos;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
@@ -595,6 +597,15 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setAooHeurOuv(String aooHeurOuv) {
 		this.aooHeurOuv = aooHeurOuv;
+	}
+	
+	@Column(name = "AVIS_RETOUR", length = 1)
+	public String getAvisRetour() {
+		return this.avisRetour;
+	}
+
+	public void setAvisRetour(String avisRetour) {
+		this.avisRetour = avisRetour;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAvisAppelOffre")
