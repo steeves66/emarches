@@ -1,0 +1,690 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+	  <style type="text/css">
+    .old {
+        background-color: #EEE8DF !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{commissionController.slctdTd.aaoCode} : <strong>#{commissionController.slctdTd.aaoLibelle}</strong>
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>OUVERTURE | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>OUVERTURE  
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+    <div class="box box-success">
+     
+              <div class="box-body">
+              <div class="row">
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-12">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{commissionController.chargeLotByAvis()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:finance" />
+				                </span>
+			                      <p:inputText value="#{commissionController.laaNum}" styleClass="form-control" type="text"  placeholder="saisir le numero du lot"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeLotFilterLot()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:finance" />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>         
+                 <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeLotsByAvis}" 
+                selection="#{commissionController.lot}" selectionMode="single" scrollable="true" scrollHeight="465" rowKey="#{slctdTb.laaId}" emptyMessage="Aucun Lot enregistré">
+                     
+                           <p:column headerText="N°Lot" styleClass="col-sm-1">
+				            <h:commandLink  title="N°Lot" styleClass="col-sm-1"
+         				 action="#{commissionController.onSelectLot()}">
+         				 <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
+                                <span>#{slctdTb.laaNum}</span>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{slctdTb.lotStatut == '1'}">
+                               <span style="color:green; font-weight:bold" > #{slctdTb.laaNum} </span>
+                                </h:panelGroup>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				      
+				        
+				         <p:column headerText="Objet" styleClass="col-sm-9">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10"
+         				 action="#{commissionController.onSelectLot()}">
+         				  <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
+                                <span>#{slctdTb.laaObjet}</span>
+                           </h:panelGroup>
+                           
+                           <h:panelGroup rendered="#{slctdTb.lotStatut == '1'}">
+                               <span style="color:green; font-weight:bold" > #{slctdTb.laaObjet} </span>
+                                </h:panelGroup>
+                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				        <p:column headerText="Obs" styleClass="col-sm-2">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10"
+         				 action="#{commissionController.onSelectLot()}">
+         				  <h:panelGroup rendered="#{slctdTb.lotStatut == '0'}">
+                             <span>#{slctdTb.nbtrt}</span>  
+                           </h:panelGroup>
+                           
+                           <h:panelGroup rendered="#{slctdTb.lotStatut == '1'}">
+                            <span style="color:green; font-weight:bold" > #{slctdTb.nbtrt} </span>
+                                </h:panelGroup>
+                                
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				         
+				         
+                        </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+                
+               </div>
+               
+               
+               
+               <div class="col-md-6">
+               <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-7"><div  style="color: #fff; font-weight:bold; font-size: 17px;"><span style="font-weight: bold;">LOT N° #{commissionController.lot.laaNum}</span> : Liste des Offres</div></div> 
+			        <div class="col-md-3">
+					  <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des offres recevables / non recevables" action="#{commissionController.natureOffre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+					  <span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">Recevables / Non recevables</span>
+					  </p:commandLink>
+				   </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	             <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-12">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{commissionController.onSelectLot()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:Toffre" />
+				                </span>
+			                      <p:inputText value="#{commissionController.dofNum}" styleClass="form-control" type="text"  placeholder="saisir le numero de l'offre"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeFilterOffres()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:Toffre" />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>      
+	            
+               <p:dataTable var="slctdTb"  id="Toffre" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeOffres}" 
+               scrollable="true" scrollHeight="465" emptyMessage="Aucune Offre trouvée">
+               
+                          <p:column headerText="N°" styleClass="col-sm-1">
+                              <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
+	         				    <h:outputText value="#{slctdTb.cpt}" />
+	         				  </h:panelGroup>
+	         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
+	         				    <h:outputText value="#{slctdTb.cpt}" style="color:green; font-weight:bold " />
+	         				  </h:panelGroup>
+                            </p:column>
+
+                            <p:column headerText="Entreprise" styleClass="col-sm-6">
+	                              <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
+		         				    <h:outputText value="#{slctdTb.dofSigle}" />
+		         				  </h:panelGroup>
+		         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
+		         				    <h:outputText value="#{slctdTb.dofSigle}" style="color:green; font-weight:bold " />
+		         				  </h:panelGroup>
+                            </p:column>
+                            
+                            <p:column headerText="Montant Lu" styleClass="col-sm-2">
+                             <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
+		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
+                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                                </h:outputText>
+		         				  </h:panelGroup>
+		         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
+		         				    <h:outputText value="#{slctdTb.dofMtOfr}" style="color:green; font-weight:bold ">
+		         				    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		         				    </h:outputText>
+		         			     </h:panelGroup>
+                                
+                            </p:column>
+
+                            <p:column headerText="Action" styleClass="col-sm-2">
+								 
+                              <p:commandLink action="#{commissionController.chargePiecesAnalyse()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-left:3px"
+				               title="Analyser l'offre" update=":content">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
+                            </p:commandLink>
+                            
+                              <p:commandLink rendered="#{slctdTb.dofStatut == '1' }" action="#{commissionController.editerFicheOffre()}" ajax="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px"
+				               title="Editer le rapport d'analyse individuel" update=":content">
+                                <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
+                            </p:commandLink>
+                            </p:column>
+                        </p:dataTable>  
+		           
+	            </div>
+	           </div>
+               </div>
+              </div>
+              
+              <div class="row">
+              <p:commandLink  styleClass="btn btn-warning row pull-right" rendered="#{commissionController.editerAna}" action="#{commissionController.editerRpAnalyse()}" style="background-color: #f88b2e; margin-right:5px;color:#fff" ajax="false"  update=":content">
+			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le rapport d'Analyse
+	          </p:commandLink>
+	          </div>
+                
+            </div>
+            <!-- /.box-body -->
+          </div>
+           <p:commandLink rendered="false" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
+				     <i class="ace-icon fa fa-save bigger-120"></i> Valider
+				      </p:commandLink>
+				      
+      <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISANA')}" style="background-color: #f88b2e;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+		
+    </section>
+    </h:form>
+    
+    
+    
+         <h:form id="lotlog" styleClass="form-horizontal">
+	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="95%" closable="true" header="Analyse de l'Offre N° #{commissionController.sltOffre.dofNum} : #{commissionController.sltOffre.dofTitle}">
+				<div class="contentpanel">
+                 
+                 <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+                 
+                  <div class="row">
+                  
+	                 <div class="col-md-6">
+	                   <div class="box box-success box-solid">
+			               <div class="box-header with-border">
+			                  <div class="col-md-10 "><div  style="color: #fff; font-size:16px; font-weight:bold;">(1) - ANALYSE ADMINISTRATIVE</div></div> 
+						         <div class="col-md-2 "> </div>
+			                </div>
+	                         <!-- /.box-header -->
+	                         <div class="box-body">
+	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
+		                        	 rowKey="#{slctdTb.pofNum}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
+		                        	 
+		                               <p:column headerText="PIECES" styleClass="col-sm-4">
+		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+		                                  <h:outputText value="#{slctdTb.pofLibelle}"/>
+		                                  </h:panelGroup>
+		                                   <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+		                                  <h:outputText value="#{slctdTb.pofLibelle}" style="color:black ;font-weight:bold "/>
+		                                  </h:panelGroup>
+		                                </p:column>
+		                                
+		                                  <p:column headerText="CONFORME" styleClass="col-sm-2"  >
+                                            <p:cellEditor>
+                                             <f:facet name="output">
+                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'O'?'OUI':'NON'}" />
+         				                        </h:panelGroup>
+         				                         </f:facet>
+         				                             <f:facet name="input">
+         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
+				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
+	                                                   </h:selectOneMenu>
+	                                                   </h:panelGroup>
+         				                             </f:facet>
+         				                           </p:cellEditor>
+         				                      
+				                               </p:column>
+				                               
+				                        <p:column headerText="PRESENCE" styleClass="col-sm-2">
+                                            <p:cellEditor>
+                                             <f:facet name="output">
+                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                        <h:outputText id="presence3" value="#{slctdTb.anfPresence == 'O'?'OUI':'NON'}" />
+         				                        </h:panelGroup>
+         				                         </f:facet>
+         				                             <f:facet name="input">
+         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+	         				                           <h:selectOneMenu id="presence4" value="#{slctdTb.anfPresence}" style="width:100%; color:#0000">
+				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
+	                                                   </h:selectOneMenu>
+	                                                   </h:panelGroup>
+         				                             </f:facet>
+         				                           </p:cellEditor>
+				                           </p:column>
+				        
+				                             <p:column headerText="OBSERVATION" styleClass="col-sm-4" >
+                                                <p:cellEditor>
+                                                   <f:facet name="output">
+                                                    <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                               <h:outputText id="comment10" value="#{slctdTb.pofObs}" />
+         				                           </h:panelGroup>
+         				                           </f:facet>
+         				                          <f:facet name="input">
+         				                            <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                              <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.pofObs}" id="comment11" style="width: 100%" />
+         				                            </h:panelGroup>
+         				                          </f:facet>
+         				                        </p:cellEditor>
+				                                 </p:column>
+		                                        </p:dataTable>
+	                        </div>
+	                       </div>
+	                       
+	                      <div class="box box-success box-solid">
+			               <div class="box-header with-border">
+			                  <div class="col-md-10 "><div  style="color: #fff; font-size:16px; font-weight:bold;">(3) - ANALYSE FINANCIERE</div></div> 
+						         <div class="col-md-2 "> </div>
+			               </div>
+				            <!-- /.box-header -->
+				            <div class="box-body">
+					           <div class="row">
+					           <div class="col-sm-6">
+					            <div class="form-group">
+				                  <label for="Mtlu" class="col-sm-4 control-label"> Montant lu </label>
+				                  <div class="col-sm-7">
+				                    <p:inputText type="text" id="Mtlu" value="#{commissionController.sltOffre.dofMtOfr}" readonly="true" styleClass="form-control" style="width: 100%" >
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    <p:ajax event="blur" global="false" process="@this" update="Mtlu" /> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           <div class="col-sm-6">
+					           <div class="form-group">
+				                  <label class="col-sm-5 control-label">Rabais</label>
+				                  <div class="col-sm-7">
+				                    <p:inputText type="text"  value="#{commissionController.sltOffre.dofMtRab}" readonly="true" styleClass="form-control" style="width: 100%" >
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           </div>
+					         <div class="row">
+					           <div class="col-sm-6">
+					            <div class="form-group">
+				                  <label class="col-sm-4 control-label"> Erreur de calcul</label>
+				                  <div class="col-sm-7">
+				                    <p:inputText type="text" id="mtErreur"  value="#{commissionController.dofErrCalcul}" styleClass="form-control" style="width: 100%" >
+				                    <p:ajax listener="#{commissionController.calculMontantCorrige()}"  global="false" event="blur" process="@this" update="MtCor" />
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           <div class="col-sm-6">
+					             <div class="form-group">
+				                  <label for="MtCor" class="col-sm-5 control-label"> Montant Corrigé</label>
+				                  <div class="col-sm-7">
+				                    <p:inputText type="text" id="MtCor" value="#{commissionController.dofMtCor}" styleClass="form-control" style="width: 100%"> 
+				                    <p:ajax listener="#{commissionController.calculMontantErreur()}"  global="false" event="blur" process="@this" update="mtErreur" />
+				                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				                    </p:inputText>
+				                  </div>
+				                </div>
+					           </div>
+					           </div>
+					             <div class="form-group">
+				                  <label class="col-sm-2 control-label">Erreurs constatées</label>
+				
+				                  <div class="col-sm-10">
+				                    <p:inputTextarea value="#{commissionController.sltOffre.dofErrFin}" rows="3" cols="5" styleClass="form-control" style="width: 100%" >
+				                    </p:inputTextarea>
+				                    
+				                  </div>
+				                </div>
+				                
+				                 <div class="form-group">
+				                  <label class="col-sm-2 control-label">Commentaire</label>
+				
+				                  <div class="col-sm-10">
+				                    <p:inputTextarea value="#{commissionController.sltOffre.dofObsFin}" rows="3" cols="5" styleClass="form-control" style="width: 100%" >
+				                    </p:inputTextarea>
+				                    
+				                  </div>
+				                </div>
+		           
+	            </div>
+	           </div>
+	                    </div>
+	                    
+	                    
+	                                
+	                    
+	        <div class="col-md-6">
+	         <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff; font-size:16px; font-weight:bold;">(2) - ANALYSE TECHNIQUE : <span  style="color: #fff; font-size:19px; font-weight:bold;"> #{commissionController.sltCritere.aaoRegQualx} </span> </div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            <p:dataTable id="confdetail" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeCritereAnalyse}"  emptyMessage="Aucun critère trouvé" var="slctdTb" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
+					 editable="true" editMode="cell" rowKey="#{slctdTb.RId}"  scrollable="true" scrollHeight="391">
+		                        	 
+		                        	 
+	                               <p:column headerText="CRITERES" styleClass="col-sm-5">
+	                                 <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+		                              <h:outputText value="#{slctdTb.craLibelle}"/>
+		                              </h:panelGroup>
+		                              
+		                              <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+	         				          <h:outputText value="#{slctdTb.craLibelle}" style="color:black ;font-weight:bold "/>
+	         				          </h:panelGroup>
+                                    </p:column>
+                                    
+                                    
+	                      <p:column headerText="VALEUR" styleClass="col-sm-2" rendered="#{commissionController.montant}">
+	                      
+	                           <p:cellEditor>
+				                <f:facet name="output">
+				                <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+				                <h:outputText styleClass="pull-right" id="val1" value="#{slctdTb.valRegQual}" >
+				                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				                </h:outputText>
+				                </h:panelGroup>
+				                </f:facet>
+				                <f:facet name="input">
+				                <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}"> 
+				                <p:inputText id="val2" styleClass="form-control text-right" value="#{slctdTb.valRegQual}" style="width:100%; float :rigth">
+				                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				                 </p:inputText>
+				                 </h:panelGroup>
+				                 </f:facet>
+				               </p:cellEditor>
+				            
+					        </p:column>
+					        
+                      <p:column headerText="VALEUR" styleClass="col-sm-3" rendered="#{commissionController.conformite}" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+                          <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				  <h:outputText id="mandat1" styleClass="form-control text-center" value="#{slctdTb.aaoRegQual}" />
+         				  </h:panelGroup>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQual}" style="width:100%; color:#0000">
+				              <f:selectItem itemLabel="Choisir" itemValue="" />
+	                         <f:selectItem itemLabel="CONFORME" itemValue="CONFORME" />
+	                         <f:selectItem itemLabel="NON CONFORME" itemValue="NON CONFORME" />
+	                          </h:selectOneMenu>
+	                      </h:panelGroup>
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-5" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+                          <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				  <h:outputText id="comment12" value="#{slctdTb.dcadCommentaire}" />
+         				  </h:panelGroup>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				    <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				    <p:inputTextarea  rows="3" cols="33" styleClass="form-control" value="#{slctdTb.dcadCommentaire}" id="comment2" style="width: 100%" />
+         				    </h:panelGroup>
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+			    </p:dataTable> 
+			    <br/>
+			       <div class="col-sm-12">
+		               <div class="form-group">
+			                  <label  class="col-sm-2 control-label"> Observation </label>
+			                  <div class="col-sm-10">
+			                    <p:inputTextarea  rows="6" cols="33" styleClass="form-control" value="#{commissionController.sltOffre.dofObsCom}" style="width: 100%" />
+			                  </div>
+			                </div>
+		           </div>
+	            </div>
+	           </div>
+	           <h:panelGroup rendered="false">
+	                          <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">RESULTAT DE L'EVALUATION</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	             <div class="row">
+		           <div class="col-sm-6">
+		            <div class="form-group">
+	                  <label  class="col-sm-4 control-label"> Rang </label>
+	                  <div class="col-sm-3">
+	                    <p:inputText id="rang" type="text" value="#{commissionController.sltOffre.dofRangOfr}" styleClass="form-control" style="width: 100%" >	                    
+	                     <p:ajax listener="#{commissionController.controleNbrLot()}" event="blur" update="rang" />
+	                    </p:inputText>
+	                  </div>
+	                  <div class="col-sm-1">
+	                  <label  class="control-label"> / </label>
+	                  </div>
+	                  <div class="col-sm-3">
+	                    <p:inputText type="text" value="#{commissionController.nbrLot}" readonly="true" styleClass="form-control" style="width: 100%" />
+	                  </div>
+	                </div>
+		           </div>
+		           
+		        
+		           
+		           </div>
+		             
+	            </div>
+	           </div>
+	           </h:panelGroup>
+	           </div>
+              
+             </div>
+             
+             
+             
+             <div class="row">
+                <div class="col-md-6">
+   
+                 </div>
+              </div>
+
+	                 <div class="row">
+	              
+	               <p:commandLink styleClass="btn btn-warning" style="background-color: #f88b2e;color:#fff;margin-left:15px;" oncomplete="PF('financedlg').hide()" update=":gnl">
+			             <i class="ace-icon fa fa-close bigger-130"></i> Fermer			           
+			        </p:commandLink>
+			             
+			             
+			            
+	              
+                <div class="pull-right ">
+			            <p:commandLink action="#{commissionController.analyser()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:15px;color:#fff" oncomplete="PF('financedlg').hide()" update=":gnl">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'analyse?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer			            
+			             </p:commandLink>
+              </div>
+                </div>
+	           </div>
+      </p:dialog>
+    </h:form>
+    
+    
+   <h:form id="dlogConsultation">
+	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="80%" height="100%" closable="true" header="Offres recevables / non recevables">
+	     
+        <div class="box-body">
+        
+        <div class="row">
+        <div class="col-md-12">
+                     <div class="form-group ">
+	                     <p:selectOneMenu id="lotCrit" value="#{commissionController.laaIdRecev}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+	                    <f:selectItem  itemLabel="Choisir un ou tous les lots..." /> 
+			            <f:selectItem  itemLabel="(Tous les lots)" />  
+			            <f:selectItems value="#{commissionController.listeLotsByAvis}" var="lot" itemLabel="#{lot.laaObjet}" itemValue="#{lot.laaId}" />
+			           <p:ajax listener="#{commissionController.natureOffreByLot()}" update=":dlogConsultation:recevable, :dlogConsultation:nonrecevable"/>
+       		        </p:selectOneMenu> 
+	                </div>
+        </div>
+        </div>
+        
+              <div class="row">
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES OFFRES RECEVABLES</div></div> 
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		     
+                   </div>  
+                          
+           <p:dataTable var="slctdTb"  id="recevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
+               scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre recevable trouvée">
+                            <p:column headerText="Offre" styleClass="col-sm-11">
+                            <h:panelGroup rendered="#{slctdTb.tri != '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" />
+		         			</h:panelGroup>
+		         			
+		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			</h:panelGroup>
+                            </p:column>
+                            
+                            
+               </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+                
+               </div>
+               
+               
+               
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES OFFRES NON RECEVABLES</div></div> 
+			          
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		     
+                   </div>  
+                          
+           <p:dataTable var="slctdTb"  id="nonrecevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreNonRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
+               scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre non recevable trouvée">
+                            <p:column headerText="Offre" styleClass="col-sm-11">
+		         		    <h:panelGroup rendered="#{slctdTb.tri != '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" />
+		         			</h:panelGroup>
+		         			
+		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			</h:panelGroup>
+                            </p:column>
+               </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+               </div>
+               
+               </div>
+              </div>
+              
+              <div class="row">
+	         </div>
+	  
+	  <div class="row">
+      <p:commandLink styleClass="btn btn-warning" style="background-color: #f88b2e;color:#fff;margin-left:15px;" oncomplete="PF('dlogConsultationC').hide()" update=":gnl">
+	   <i class="ace-icon fa fa-close bigger-130"></i> Fermer			           
+	  </p:commandLink>
+	  </div>
+          
+      </p:dialog> 
+    </h:form>
+    	 
+		 
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

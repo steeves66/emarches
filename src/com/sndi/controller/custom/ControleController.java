@@ -6520,6 +6520,13 @@ public class ControleController {
 												    			type = "Commission";
 												    			libelle="EVALUATION FINANCIERE DES OFFRES DU LOT N°";	
 												    		}else
+												    			//REEDITION DES ETATS
+												    			if(action.equalsIgnoreCase("REDCOJ")) {
+													    			type = "Commission";
+													    			libelle="REEDITION";	
+													    		}
+											    			else
+												    			
 											    			
 											    			//DEBUT GESTION DES PROCEDURES DERROGATOIRES
 											    			if(action.equalsIgnoreCase("LISDEMSAI")) {

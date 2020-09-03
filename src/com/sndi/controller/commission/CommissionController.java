@@ -1702,6 +1702,9 @@ public class CommissionController {
 					offreResulatatAttrib();
 					offreResultPropAttrib();
 					detailSeuil();*/
+					break;
+				case "com10":
+					break;
 					
 			    }
 		     
