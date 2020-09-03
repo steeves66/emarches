@@ -292,6 +292,8 @@ public class CommissionController {
 	 private long dofMtCor=0;
 	 private long dofErrCalcul=0;
 	 private Date dateSeance;
+	 private String heureDeb;
+	 private String heureFin;
 	 //private long rabais
 	 
 	 
@@ -944,6 +946,8 @@ public class CommissionController {
 						membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 						membre.setDcsSeaTseNum("EVA");
 						membre.setDcsDteSea(dateSeance);
+						membre.setDcsHeureDeb(heureDeb);
+						membre.setDcsHeureFin(heureFin);
 						membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
 					   iservice.addObject(membre);	
 					}
@@ -2878,6 +2882,26 @@ public class CommissionController {
 
 	public void setDateSeance(Date dateSeance) {
 		this.dateSeance = dateSeance;
+	}
+
+
+	public String getHeureDeb() {
+		return heureDeb;
+	}
+
+
+	public void setHeureDeb(String heureDeb) {
+		this.heureDeb = heureDeb;
+	}
+
+
+	public String getHeureFin() {
+		return heureFin;
+	}
+
+
+	public void setHeureFin(String heureFin) {
+		this.heureFin = heureFin;
 	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {

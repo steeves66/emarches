@@ -34,6 +34,8 @@ public class VbTempParametreCom implements java.io.Serializable {
 	private String dcsSeaNum;
 	private String dcsDteSaisi;
 	private Date dcsDteSea;
+	private String dcsHeureDeb;
+	private String dcsHeureFin;
 	private String dcsFonCodSaisi;
 	private String dcsObservation;
 	private String dcsComTcoCode;
@@ -64,7 +66,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 
 	public VbTempParametreCom(BigDecimal tempNum, String tempType, String tempOpeMatricule, Date tempDteSaisi,
 			String dcsMbmRespo, String dcsNum, String dcsDacCode, String dcsFonCod, String dcsSeaQuorum,
-			String dcsSeaNum, String dcsDteSaisi, Date dcsDteSea, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
+			String dcsSeaNum, String dcsDteSaisi, Date dcsDteSea,String dcsHeureDeb, String dcsHeureFin, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
 			String dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
 			String dcsComStrCode, String dcsOpeMatSaisi, String dcsNbrPli, String dcsComTctCode, String dcsRepMandate,
 			String dcsSeaTseNum, String dcsAaoNbrOff, String dcsAaoNbrOffAccept, String dcsAaoNbrOffRej,
@@ -81,6 +83,8 @@ public class VbTempParametreCom implements java.io.Serializable {
 		this.dcsSeaNum = dcsSeaNum;
 		this.dcsDteSaisi = dcsDteSaisi;
 		this.dcsDteSea = dcsDteSea;
+		this.dcsHeureDeb = dcsHeureDeb;
+		this.dcsHeureFin = dcsHeureFin;
 		this.dcsFonCodSaisi = dcsFonCodSaisi;
 		this.dcsObservation = dcsObservation;
 		this.dcsComTcoCode = dcsComTcoCode;
@@ -212,6 +216,24 @@ public class VbTempParametreCom implements java.io.Serializable {
 
 	public void setDcsDteSea(Date dcsDteSea) {
 		this.dcsDteSea = dcsDteSea;
+	}
+	
+	@Column(name = "DCS_HEURE_DEB")
+	public String getDcsHeureDeb() {
+		return this.dcsHeureDeb;
+	}
+
+	public void setDcsHeureDeb(String dcsHeureDeb) {
+		this.dcsHeureDeb = dcsHeureDeb;
+	}
+
+	@Column(name = "DCS_HEURE_FIN")
+	public String getDcsHeureFin() {
+		return this.dcsHeureFin;
+	}
+
+	public void setDcsHeureFin(String dcsHeureFin) {
+		this.dcsHeureFin = dcsHeureFin;
 	}
 
 	@Column(name = "DCS_FON_COD_SAISI", length = 500)
