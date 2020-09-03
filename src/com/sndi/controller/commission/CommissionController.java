@@ -226,6 +226,7 @@ public class CommissionController {
 	 private VbCommissionSpecifique newcomSpecif = new VbCommissionSpecifique();
 	 private TCommissionType newCom = new TCommissionType();
 	 private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
+	 private TAvisAppelOffre reeditAvis = new TAvisAppelOffre();
 	 private VbTempParametreCom membre = new VbTempParametreCom();
 	 //private TCandidats candidat = new TCandidats(); 
 	 private VbTempParamDetOffres newOffre = new VbTempParamDetOffres();
@@ -1560,20 +1561,54 @@ public class CommissionController {
 			 _logger.info("aaoCode : "  +""+slctdTd.getAaoCode());
 		 }
 		 
-		   //Reédition
+		//Reédition
 		 
-		//Edition du Rapport d'analyse
-		 public void reediterFicheOffre() {
-			 projetReport.stringparam1(""+numAvis, "Rapport_ana", "Rapport_ana");
-			 _logger.info("aaoCode : "  +""+numAvis);
-		 }
-		 
-		
-		//Edition du Rapport d'analyse
-		 public void reediterRpAnalyse() {
-			 projetReport.stringparam1(""+numAvis, "rapport_analyse", "rapport_analyse");
-			 _logger.info("aaoCode : "  +""+numAvis);
-		 }
+			//Edition du Rapport d'analyse
+			 public void reediterFicheOffre() {
+				 
+				 if(numAvis.equalsIgnoreCase("")) {
+					 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez Saisir le numéro de l'avis d'appel d'offre SVP", ""));
+				 }else {
+					   
+					 listeAppelOffre.clear();
+					 listeAppelOffre =(List<TAvisAppelOffre>) iservice.getObjectsByColumnIn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+								"AAO_STA_CODE", new ArrayList<String>(Arrays.asList("OUV","ANA","JUG")),
+								new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+numAvis));
+								if (!listeAppelOffre.isEmpty()) {
+									reeditAvis=listeAppelOffre.get(0);
+									 projetReport.stringparam1(""+reeditAvis.getAaoCode(), "Rapport_ana", "Rapport_ana");
+									 _logger.info("aaoCode : "  +""+reeditAvis.getAaoCode()); 
+								}else {
+									FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero d'avis d'appel d'offre n'existe pas! ", "")); 	 
+								}
+				 }
+				
+			 }
+			 
+			
+			//Edition du Rapport d'analyse
+			 public void reediterRpAnalyse() {
+				 if(numAvis.equalsIgnoreCase("")) {
+					 FacesContext.getCurrentInstance().addMessage(null,
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez Saisir le numéro de l'avis d'appel d'offre SVP", ""));
+				 }else {
+					   
+					 listeAppelOffre.clear();
+					 listeAppelOffre =(List<TAvisAppelOffre>) iservice.getObjectsByColumnIn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+								"AAO_STA_CODE", new ArrayList<String>(Arrays.asList("OUV","ANA","JUG")),
+								new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+numAvis));
+								if (!listeAppelOffre.isEmpty()) {
+									reeditAvis=listeAppelOffre.get(0);
+									 projetReport.stringparam1(""+reeditAvis.getAaoCode(), "rapport_analyse", "rapport_analyse");
+									 _logger.info("aaoCode : "  +""+reeditAvis.getAaoCode());
+								}else {
+									FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero d'avis d'appel d'offre n'existe pas! ", "")); 	 
+								}
+				 }
+				
+				
+			 }
 		 
 		 
 		 //Factorisation des Lots
@@ -2965,6 +3000,16 @@ public class CommissionController {
 
 	public void setStatutUpdate(String statutUpdate) {
 		this.statutUpdate = statutUpdate;
+	}
+
+
+	public TAvisAppelOffre getReeditAvis() {
+		return reeditAvis;
+	}
+
+
+	public void setReeditAvis(TAvisAppelOffre reeditAvis) {
+		this.reeditAvis = reeditAvis;
 	}
 	
 
