@@ -23,6 +23,7 @@ import com.sndi.controller.custom.ControleController;
 import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
+import com.sndi.model.TAgpm;
 import com.sndi.model.TAnalyseOffre;
 import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TBanques;
@@ -39,6 +40,7 @@ import com.sndi.model.TDossierMbr;
 import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
 import com.sndi.model.TFonction;
+import com.sndi.model.THistoAgpm;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TNatureDocuments;
 import com.sndi.model.TNaturePiece;
@@ -257,6 +259,8 @@ public class CommissionController {
 	 private String banCode;
 	 private String filtreNcc="";
 	 private String nbreOffre ="";
+	 private String observation="";
+	 private String statutUpdate="";
 	 private long valRegQual=0;
 	 private long verifCorNum = 0;
 	 private String aaoRegQual="";
@@ -423,10 +427,7 @@ public class CommissionController {
 						  userController.setTexteMsg("Repechage effectué avec succès!");
 						  userController.setRenderMsg(true);
 						  userController.setSevrityMsg("success");
-		 			} 
-				
-			
-					  
+		 			} 		  
 		 }
 		
 	 //fin resultat analyse
@@ -593,9 +594,7 @@ public class CommissionController {
 			 listeMembre = ((List<VDacMembre>)iservice.getObjectsByColumn("VDacMembre",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 					 new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ"),
 					 new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
-					_logger.info("listeMembre size: "+listeMembre.size());	
-					
-					
+					_logger.info("listeMembre size: "+listeMembre.size());				
 		 }
 		 
 		 
@@ -603,10 +602,14 @@ public class CommissionController {
 			 membresCommission = ((List<VCompoCommission>)iservice.getObjectsByColumn("VCompoCommission",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 					    new WhereClause("STR_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 					    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
-					_logger.info("membre size: "+membresCommission.size());	
-					
-					
+					_logger.info("membre size: "+membresCommission.size());		
 		 }*/
+		 
+		 
+		 //Differer
+		 public void differer() {
+		
+		 }
 		 
 
 		 
@@ -2932,6 +2935,27 @@ public class CommissionController {
 	public void setNumAvis(String numAvis) {
 		this.numAvis = numAvis;
 	}
+
+
+	public String getObservation() {
+		return observation;
+	}
+
+
+	public void setObservation(String observation) {
+		this.observation = observation;
+	}
+
+
+	public String getStatutUpdate() {
+		return statutUpdate;
+	}
+
+
+	public void setStatutUpdate(String statutUpdate) {
+		this.statutUpdate = statutUpdate;
+	}
+	
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;
