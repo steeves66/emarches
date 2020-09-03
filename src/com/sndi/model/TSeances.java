@@ -36,6 +36,7 @@ public class TSeances implements java.io.Serializable {
 	private String seaRes;
 	private Date seaSteSaisi;
 	private String seaObservation;
+	private Date seaDteSea;
 	private Set<TDetCommissionSeance> TDetCommissionSeances = new HashSet<TDetCommissionSeance>(0);
 
 	public TSeances() {
@@ -47,7 +48,7 @@ public class TSeances implements java.io.Serializable {
 
 	public TSeances(long seaNum, TFonction TFonction, TOperateur TOperateur, TTypeSeance TTypeSeance,
 			String seaLibelle, String seaQuorum, long seaNbrPli, String seaRes, Date seaSteSaisi,
-			String seaObservation, Set<TDetCommissionSeance> TDetCommissionSeances) {
+			String seaObservation, Date seaDteSea, Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.seaNum = seaNum;
 		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
@@ -58,6 +59,7 @@ public class TSeances implements java.io.Serializable {
 		this.seaRes = seaRes;
 		this.seaSteSaisi = seaSteSaisi;
 		this.seaObservation = seaObservation;
+		this.seaDteSea = seaDteSea;
 		this.TDetCommissionSeances = TDetCommissionSeances;
 	}
 
@@ -156,6 +158,16 @@ public class TSeances implements java.io.Serializable {
 
 	public void setSeaObservation(String seaObservation) {
 		this.seaObservation = seaObservation;
+	}
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "SEA_DTE_SEA", length = 7)
+	public Date getSeaDteSea() {
+		return this.seaDteSea;
+	}
+
+	public void setSeaDteSea(Date seaDteSea) {
+		this.seaDteSea = seaDteSea;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TSeances")

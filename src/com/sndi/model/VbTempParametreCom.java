@@ -33,6 +33,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 	private String dcsSeaQuorum;
 	private String dcsSeaNum;
 	private String dcsDteSaisi;
+	private Date dcsDteSea;
 	private String dcsFonCodSaisi;
 	private String dcsObservation;
 	private String dcsComTcoCode;
@@ -63,7 +64,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 
 	public VbTempParametreCom(BigDecimal tempNum, String tempType, String tempOpeMatricule, Date tempDteSaisi,
 			String dcsMbmRespo, String dcsNum, String dcsDacCode, String dcsFonCod, String dcsSeaQuorum,
-			String dcsSeaNum, String dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
+			String dcsSeaNum, String dcsDteSaisi, Date dcsDteSea, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
 			String dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
 			String dcsComStrCode, String dcsOpeMatSaisi, String dcsNbrPli, String dcsComTctCode, String dcsRepMandate,
 			String dcsSeaTseNum, String dcsAaoNbrOff, String dcsAaoNbrOffAccept, String dcsAaoNbrOffRej,
@@ -79,6 +80,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 		this.dcsSeaQuorum = dcsSeaQuorum;
 		this.dcsSeaNum = dcsSeaNum;
 		this.dcsDteSaisi = dcsDteSaisi;
+		this.dcsDteSea = dcsDteSea;
 		this.dcsFonCodSaisi = dcsFonCodSaisi;
 		this.dcsObservation = dcsObservation;
 		this.dcsComTcoCode = dcsComTcoCode;
@@ -201,6 +203,15 @@ public class VbTempParametreCom implements java.io.Serializable {
 
 	public void setDcsDteSaisi(String dcsDteSaisi) {
 		this.dcsDteSaisi = dcsDteSaisi;
+	}
+	
+	@Column(name = "DCS_DTE_SEA", length = 7)
+	public Date getDcsDteSea() {
+		return this.dcsDteSea;
+	}
+
+	public void setDcsDteSea(Date dcsDteSea) {
+		this.dcsDteSea = dcsDteSea;
 	}
 
 	@Column(name = "DCS_FON_COD_SAISI", length = 500)

@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -290,6 +291,7 @@ public class CommissionController {
 	 private String natdoc ="6";
 	 private long dofMtCor=0;
 	 private long dofErrCalcul=0;
+	 private Date dateSeance;
 	 //private long rabais
 	 
 	 
@@ -941,6 +943,7 @@ public class CommissionController {
 						membre.setDcsDacCode(slctdTd.getTDacSpecs().getDacCode());
 						membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 						membre.setDcsSeaTseNum("EVA");
+						membre.setDcsDteSea(dateSeance);
 						membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
 					   iservice.addObject(membre);	
 					}
@@ -2862,6 +2865,16 @@ public class CommissionController {
 
 	public void setEditerAna(boolean editerAna) {
 		this.editerAna = editerAna;
+	}
+
+
+	public Date getDateSeance() {
+		return dateSeance;
+	}
+
+
+	public void setDateSeance(Date dateSeance) {
+		this.dateSeance = dateSeance;
 	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {

@@ -139,14 +139,26 @@
 
 
 <h:form id="dlogMemebre" styleClass="form-horizontal">
-	  <p:dialog  widgetVar="dlogMemebre" modal="true"  showEffect="fade" hideEffect="fade" height="60%" width="85%" closable="true" header="">
+	  <p:dialog  widgetVar="dlogMemebre" modal="true"  showEffect="fade" hideEffect="fade" height="70%" width="85%" closable="true" header="">
 	    <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">SAISIE DES MEMBRES DU COMITE D'EVALUATION</div>
+          <div class="col-md-7">  <div  style="color: #fff">SAISIE DES MEMBRES DU COMITE D'EVALUATION</div></div>
          </div>
+
          <div class="box-body">
+         <div class="row"> 
+         <div class="col-md-7 pull-right"> 
+          <div class="form-group">
+                  <label  class="col-sm-5 control-label">Date de séance</label>
+				  <div class="col-sm-3">
+                     <p:calendar value="#{commissionController.dateSeance}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
+                  </p:calendar>   
+                  </div>
+                </div>
+              </div>
+         </div>
               
 		      <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.membresCommite}" emptyMessage="Aucun membre trouvé" rows="10"
 					    rowKey="#{slctdTb.dcsNum}" selection="#{commissionController.selectionMembresCommite}"   editable="true" editMode="cell"
