@@ -436,7 +436,9 @@ public class CommissionController {
 		 membresCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
 				 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"COJ"),
 				    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
-				// );
+				// ); 
+		      heureDeb = "";
+			  heureFin = "";
 				_logger.info("membreCommite size: "+membresCommite.size());	
 	 }
 	 

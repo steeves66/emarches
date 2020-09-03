@@ -340,6 +340,7 @@ public class ControleController {
 	private boolean btn_apercuOuv =false;
 	private boolean btn_apercuAna =false;
 	private boolean btn_apercuJug =false;
+	private boolean btn_retourJug =false;
 	public boolean etatLoveAgpm = false;
 	private boolean etatLoveAgpmPs = false;
 	
@@ -6437,6 +6438,7 @@ public class ControleController {
 												 btn_apercuOuv =true;
 												 btn_apercuAna =false;
 												 btn_apercuJug =false;
+												 btn_retourJug = false;
 										
 								    		}else
 								    			//DETAIL OUVERTURE
@@ -6468,6 +6470,7 @@ public class ControleController {
 									    			 btn_apercuOuv =false;
 													 btn_apercuAna =true;
 													 btn_apercuJug =false;
+													 btn_retourJug = false;
 									    			btn_membre = false;
 													 panel1 =false;
 									    		}else
@@ -6499,6 +6502,7 @@ public class ControleController {
 										    			btn_apercuOuv =false;
 														btn_apercuAna =false;
 														btn_apercuJug =true;
+														btn_retourJug = true;
 										    			btn_membre = false;
 														 panel1 =false;
 										    		}else
@@ -9799,6 +9803,16 @@ public class ControleController {
 
 	public void setNbreAchat(boolean nbreAchat) {
 		this.nbreAchat = nbreAchat;
+	}
+
+
+	public boolean isBtn_retourJug() {
+		return btn_retourJug;
+	}
+
+
+	public void setBtn_retourJug(boolean btn_retourJug) {
+		this.btn_retourJug = btn_retourJug;
 	}
 	
 }

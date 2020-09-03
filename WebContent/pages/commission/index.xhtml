@@ -144,6 +144,13 @@
 				               <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" /> 
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>                               
                             </p:commandLink>
+                            
+                            <!--BOUTON DE RETOUR -->
+                            <p:commandLink rendered="#{controleController.btn_retourJug}" oncomplete="PF('diff').show()"  styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                                <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />
+                              </p:commandLink>
+                            <!--BOUTON DE RETOUR -->
                          
                             <!--FIN  BOUTONS COMMISSION -->
                             
@@ -214,6 +221,30 @@
         </div>
         </p:dialog>
         </h:form>
+        
+        
+        
+        <h:form id="differe">
+	        <p:dialog  widgetVar="diff" modal="true"   showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Motif de Retour">
+					<div class="g12">
+						<div class="panel-heading">
+						MOTIF DE RETOUR
+						
+						</div> 
+					<div class="panel-body panel-body-nopadding">
+	                 <div class="col-xs-12 col-sm-12">
+						   <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+						   <p:inputTextarea  rows="4" cols="33" style="width:100%;"/>
+						   </div>
+	                  </div>
+	                  
+                     
+                      <p:commandLink styleClass="btn btn-warning" value="Fermer" oncomplete="PF('diff').hide()"/>
+                       &nbsp; &nbsp;
+                      <p:commandLink styleClass="btn btn-success"  value="Valider" oncomplete="PF('diff').hide()" update=":gnl"/>
+                    </div>
+      </p:dialog>
+    </h:form>
 
 
 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
