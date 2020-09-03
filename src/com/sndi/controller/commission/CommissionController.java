@@ -280,6 +280,7 @@ public class CommissionController {
 	 private long montRab=0;
 	 private long numSeance=0;
 	 private String numVente = "";
+	 private String numAvis ="";
 	 private String dofTyp;
 	 private String ncc;
 	 private BigDecimal dofNum;
@@ -1542,6 +1543,22 @@ public class CommissionController {
 			 projetReport.stringparam1(""+slctdTd.getAaoCode(), "rapport_analyse", "rapport_analyse");
 			 _logger.info("aaoCode : "  +""+slctdTd.getAaoCode());
 		 }
+		 
+		   //Reédition
+		 
+		//Edition du Rapport d'analyse
+		 public void reediterFicheOffre() {
+			 projetReport.stringparam1(""+numAvis, "Rapport_ana", "Rapport_ana");
+			 _logger.info("aaoCode : "  +""+numAvis);
+		 }
+		 
+		
+		//Edition du Rapport d'analyse
+		 public void reediterRpAnalyse() {
+			 projetReport.stringparam1(""+numAvis, "rapport_analyse", "rapport_analyse");
+			 _logger.info("aaoCode : "  +""+numAvis);
+		 }
+		 
 		 
 		 //Factorisation des Lots
 		 public void factoriseLot() {
@@ -2902,6 +2919,16 @@ public class CommissionController {
 
 	public void setHeureFin(String heureFin) {
 		this.heureFin = heureFin;
+	}
+
+
+	public String getNumAvis() {
+		return numAvis;
+	}
+
+
+	public void setNumAvis(String numAvis) {
+		this.numAvis = numAvis;
 	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
