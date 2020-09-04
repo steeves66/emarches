@@ -286,6 +286,7 @@ public class CommissionController {
 	 private long numSeance=0;
 	 private String numVente = "";
 	 private String numAvis ="";
+	 private String dacCode ="";
 	 private String dofTyp;
 	 private String ncc;
 	 private BigDecimal dofNum;
@@ -1566,51 +1567,58 @@ public class CommissionController {
 		//Reédition
 		 
 			//Edition du Rapport d'analyse
-			 public void reediterFicheOffre() {
-				 
-				 if(numAvis.equalsIgnoreCase("")) {
+			 public void reediterFicheOffre() { 
+				 if(numAvis.equalsIgnoreCase("") && dacCode.equalsIgnoreCase("")) {
 					 FacesContext.getCurrentInstance().addMessage(null,
-							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez Saisir le numéro de l'avis d'appel d'offre SVP", ""));
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Saisir l'un des champs SVP", ""));
 				 }else {
-					   
-					 listeAppelOffre.clear();
-					 listeAppelOffre =(List<TAvisAppelOffre>) iservice.getObjectsByColumnIn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
-								"AAO_STA_CODE", new ArrayList<String>(Arrays.asList("OUV","ANA","JUG")),
-								new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+numAvis));
-								if (!listeAppelOffre.isEmpty()) {
-									reeditAvis=listeAppelOffre.get(0);
-									 projetReport.stringparam1(""+reeditAvis.getAaoCode(), "Rapport_ana", "Rapport_ana");
-									 _logger.info("aaoCode : "  +""+reeditAvis.getAaoCode()); 
-								}else {
-									FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero d'avis d'appel d'offre n'existe pas! ", "")); 	 
-								}
+					 if (dacCode.equalsIgnoreCase("")) {
+						 editPv("AAO_CODE",numAvis,"Rapport_ana","Rapport_ana"); 
+					 }else
+						 if (numAvis.equalsIgnoreCase("")) {
+							 editPv("AAO_DAC_CODE",dacCode,"Rapport_ana","Rapport_ana"); 
+							 
+						 } 
+					 
 				 }
 				
 			 }
 			 
+			 
 			
 			//Edition du Rapport d'analyse
 			 public void reediterRpAnalyse() {
-				 if(numAvis.equalsIgnoreCase("")) {
+				 if(numAvis.equalsIgnoreCase("") && dacCode.equalsIgnoreCase("")) {
 					 FacesContext.getCurrentInstance().addMessage(null,
-							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez Saisir le numéro de l'avis d'appel d'offre SVP", ""));
+							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Saisir l'un des champs SVP", ""));
 				 }else {
-					   
-					 listeAppelOffre.clear();
-					 listeAppelOffre =(List<TAvisAppelOffre>) iservice.getObjectsByColumnIn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
-								"AAO_STA_CODE", new ArrayList<String>(Arrays.asList("OUV","ANA","JUG")),
-								new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+numAvis));
-								if (!listeAppelOffre.isEmpty()) {
-									reeditAvis=listeAppelOffre.get(0);
-									 projetReport.stringparam1(""+reeditAvis.getAaoCode(), "rapport_analyse", "rapport_analyse");
-									 _logger.info("aaoCode : "  +""+reeditAvis.getAaoCode());
-								}else {
-									FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero d'avis d'appel d'offre n'existe pas! ", "")); 	 
-								}
+					 
+					 if (dacCode.equalsIgnoreCase("")) {
+						 editPv("AAO_CODE",numAvis,"rapport_analyse","rapport_analyse"); 
+					 }else
+						 if (numAvis.equalsIgnoreCase("")) {
+							 editPv("AAO_DAC_CODE",dacCode,"rapport_analyse","rapport_analyse"); 
+							 
+						 } 
 				 }
-				
-				
 			 }
+			 
+			 
+			 //Methode a appeller pour editer les pv 
+			 public void editPv(String colonne,String code, String jrxName , String jasperName) {
+				 listeAppelOffre.clear();
+				 listeAppelOffre =(List<TAvisAppelOffre>) iservice.getObjectsByColumnIn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+							"AAO_STA_CODE", new ArrayList<String>(Arrays.asList("OUV","ANA","JUG")),
+							new WhereClause(""+colonne,WhereClause.Comparateur.EQ,""+code));
+							if (!listeAppelOffre.isEmpty()) {
+								reeditAvis=listeAppelOffre.get(0);
+								 projetReport.stringparam1(""+reeditAvis.getAaoCode(), ""+jrxName, ""+jasperName);
+								 _logger.info("aaoCode : "  +""+reeditAvis.getAaoCode()); 
+							}else {
+								FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero d'avis d'appel d'offre n'existe pas! ", "")); 	 
+							} 
+			 }
+		 
 		 
 		 
 		 //Factorisation des Lots
@@ -3012,6 +3020,16 @@ public class CommissionController {
 
 	public void setReeditAvis(TAvisAppelOffre reeditAvis) {
 		this.reeditAvis = reeditAvis;
+	}
+
+
+	public String getDacCode() {
+		return dacCode;
+	}
+
+
+	public void setDacCode(String dacCode) {
+		this.dacCode = dacCode;
 	}
 	
 
