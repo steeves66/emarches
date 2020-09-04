@@ -598,7 +598,6 @@ public class CommissionController {
 					_logger.info("listeMembre size: "+listeMembre.size());				
 		 }
 		 
-		 
 		/* public void chargeMembreCommission() {
 			 membresCommission = ((List<VCompoCommission>)iservice.getObjectsByColumn("VCompoCommission",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 					    new WhereClause("STR_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()),
@@ -606,18 +605,21 @@ public class CommissionController {
 					_logger.info("membre size: "+membresCommission.size());		
 		 }*/
 		 
-		 
-		 
-		 
-		 
 		 //Differer un avis d'appel d'Offres au niveau du Jugement
 		 public void reanalyser() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 statutUpdate ="OUV";
+			      }else {
+				    statutUpdate ="";
+			       }
+			 
 			 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
 					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 			    if (! listeAppelOffre.isEmpty()) {
 			    	TAvisAppelOffre avis = new TAvisAppelOffre();
 				     avis= listeAppelOffre.get(0);
 				     avis.setAvisRetour("1");
+				     avis.setTStatut(new TStatut(statutUpdate));
 				     iservice.updateObject(avis);
 				     chargeListe("ANA");
 			    }
