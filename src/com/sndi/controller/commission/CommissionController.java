@@ -83,6 +83,7 @@ import com.sndi.model.VOffreRecevableLot;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
 import com.sndi.model.VRecapSeuilAnormal;
+import com.sndi.model.VReeditCojo;
 import com.sndi.model.VRepSoumissionnaire;
 import com.sndi.model.VResultEvalClassLot;
 import com.sndi.model.VResultPropAttribLot;
@@ -158,6 +159,7 @@ public class CommissionController {
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
+	 private List<VReeditCojo> listeReeditCojo = new ArrayList<VReeditCojo>();
 	 //private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
@@ -226,7 +228,7 @@ public class CommissionController {
 	 private VbCommissionSpecifique newcomSpecif = new VbCommissionSpecifique();
 	 private TCommissionType newCom = new TCommissionType();
 	 private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
-	 private TAvisAppelOffre reeditAvis = new TAvisAppelOffre();
+	 private VReeditCojo reeditAvis = new VReeditCojo();
 	 private VbTempParametreCom membre = new VbTempParametreCom();
 	 //private TCandidats candidat = new TCandidats(); 
 	 private VbTempParamDetOffres newOffre = new VbTempParamDetOffres();
@@ -1606,12 +1608,11 @@ public class CommissionController {
 			 
 			 //Methode a appeller pour editer les pv 
 			 public void editPv(String colonne,String code, String jrxName , String jasperName) {
-				 listeAppelOffre.clear();
-				 listeAppelOffre =(List<TAvisAppelOffre>) iservice.getObjectsByColumnIn("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
-							"AAO_STA_CODE", new ArrayList<String>(Arrays.asList("OUV","ANA","JUG")),
-							new WhereClause(""+colonne,WhereClause.Comparateur.EQ,""+code));
-							if (!listeAppelOffre.isEmpty()) {
-								reeditAvis=listeAppelOffre.get(0);
+				 listeReeditCojo.clear();
+				 listeReeditCojo = ((List<VReeditCojo>)iservice.getObjectsByColumn("VReeditCojo",
+						 new WhereClause(""+colonne,WhereClause.Comparateur.EQ,""+code)));
+							if (!listeReeditCojo.isEmpty()) {
+								reeditAvis=listeReeditCojo.get(0);
 								 projetReport.stringparam1(""+reeditAvis.getAaoCode(), ""+jrxName, ""+jasperName);
 								 _logger.info("aaoCode : "  +""+reeditAvis.getAaoCode()); 
 							}else {
@@ -3013,12 +3014,13 @@ public class CommissionController {
 	}
 
 
-	public TAvisAppelOffre getReeditAvis() {
+
+	public VReeditCojo getReeditAvis() {
 		return reeditAvis;
 	}
 
 
-	public void setReeditAvis(TAvisAppelOffre reeditAvis) {
+	public void setReeditAvis(VReeditCojo reeditAvis) {
 		this.reeditAvis = reeditAvis;
 	}
 
@@ -3030,6 +3032,16 @@ public class CommissionController {
 
 	public void setDacCode(String dacCode) {
 		this.dacCode = dacCode;
+	}
+
+
+	public List<VReeditCojo> getListeReeditCojo() {
+		return listeReeditCojo;
+	}
+
+
+	public void setListeReeditCojo(List<VReeditCojo> listeReeditCojo) {
+		this.listeReeditCojo = listeReeditCojo;
 	}
 	
 

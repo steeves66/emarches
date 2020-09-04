@@ -31,13 +31,13 @@ public class VReeditCojo implements java.io.Serializable {
 		this.aaoDacCode = aaoDacCode;
 		this.aaoCode = aaoCode;
 	}
-
+	@Id
 	@Column(name = "AAO_DAC_CODE", length = 20)
 	public String getAaoDacCode() {
 		return this.aaoDacCode;
 	}
 
-	@Id
+	
 	public void setAaoDacCode(String aaoDacCode) {
 		this.aaoDacCode = aaoDacCode;
 	}
