@@ -159,7 +159,6 @@ public class CommissionController {
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
-	 private List<VReeditCojo> listeReeditCojo = new ArrayList<VReeditCojo>();
 	 //private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
@@ -228,7 +227,6 @@ public class CommissionController {
 	 private VbCommissionSpecifique newcomSpecif = new VbCommissionSpecifique();
 	 private TCommissionType newCom = new TCommissionType();
 	 private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
-	 private VReeditCojo reeditAvis = new VReeditCojo();
 	 private VbTempParametreCom membre = new VbTempParametreCom();
 	 //private TCandidats candidat = new TCandidats(); 
 	 private VbTempParamDetOffres newOffre = new VbTempParamDetOffres();
@@ -287,8 +285,6 @@ public class CommissionController {
 	 private long montRab=0;
 	 private long numSeance=0;
 	 private String numVente = "";
-	 private String numAvis ="";
-	 private String dacCode ="";
 	 private String dofTyp;
 	 private String ncc;
 	 private BigDecimal dofNum;
@@ -1565,61 +1561,6 @@ public class CommissionController {
 			 projetReport.stringparam1(""+slctdTd.getAaoCode(), "rapport_analyse", "rapport_analyse");
 			 _logger.info("aaoCode : "  +""+slctdTd.getAaoCode());
 		 }
-		 
-		//Reédition
-		 
-			//Edition du Rapport d'analyse
-			 public void reediterFicheOffre() { 
-				 if(numAvis.equalsIgnoreCase("") && dacCode.equalsIgnoreCase("")) {
-					 FacesContext.getCurrentInstance().addMessage(null,
-							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Saisir l'un des champs SVP", ""));
-				 }else {
-					 if (dacCode.equalsIgnoreCase("")) {
-						 editPv("AAO_CODE",numAvis,"Rapport_ana","Rapport_ana"); 
-					 }else
-						 if (numAvis.equalsIgnoreCase("")) {
-							 editPv("AAO_DAC_CODE",dacCode,"Rapport_ana","Rapport_ana"); 
-							 
-						 } 
-					 
-				 }
-				
-			 }
-			 
-			 
-			
-			//Edition du Rapport d'analyse
-			 public void reediterRpAnalyse() {
-				 if(numAvis.equalsIgnoreCase("") && dacCode.equalsIgnoreCase("")) {
-					 FacesContext.getCurrentInstance().addMessage(null,
-							 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Saisir l'un des champs SVP", ""));
-				 }else {
-					 
-					 if (dacCode.equalsIgnoreCase("")) {
-						 editPv("AAO_CODE",numAvis,"rapport_analyse","rapport_analyse"); 
-					 }else
-						 if (numAvis.equalsIgnoreCase("")) {
-							 editPv("AAO_DAC_CODE",dacCode,"rapport_analyse","rapport_analyse"); 
-							 
-						 } 
-				 }
-			 }
-			 
-			 
-			 //Methode a appeller pour editer les pv 
-			 public void editPv(String colonne,String code, String jrxName , String jasperName) {
-				 listeReeditCojo.clear();
-				 listeReeditCojo = ((List<VReeditCojo>)iservice.getObjectsByColumn("VReeditCojo",
-						 new WhereClause(""+colonne,WhereClause.Comparateur.EQ,""+code)));
-							if (!listeReeditCojo.isEmpty()) {
-								reeditAvis=listeReeditCojo.get(0);
-								 projetReport.stringparam1(""+reeditAvis.getAaoCode(), ""+jrxName, ""+jasperName);
-								 _logger.info("aaoCode : "  +""+reeditAvis.getAaoCode()); 
-							}else {
-								FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Ce numero d'avis d'appel d'offre n'existe pas! ", "")); 	 
-							} 
-			 }
-		 
 		 
 		 
 		 //Factorisation des Lots
@@ -2983,17 +2924,6 @@ public class CommissionController {
 		this.heureFin = heureFin;
 	}
 
-
-	public String getNumAvis() {
-		return numAvis;
-	}
-
-
-	public void setNumAvis(String numAvis) {
-		this.numAvis = numAvis;
-	}
-
-
 	public String getObservation() {
 		return observation;
 	}
@@ -3012,38 +2942,6 @@ public class CommissionController {
 	public void setStatutUpdate(String statutUpdate) {
 		this.statutUpdate = statutUpdate;
 	}
-
-
-
-	public VReeditCojo getReeditAvis() {
-		return reeditAvis;
-	}
-
-
-	public void setReeditAvis(VReeditCojo reeditAvis) {
-		this.reeditAvis = reeditAvis;
-	}
-
-
-	public String getDacCode() {
-		return dacCode;
-	}
-
-
-	public void setDacCode(String dacCode) {
-		this.dacCode = dacCode;
-	}
-
-
-	public List<VReeditCojo> getListeReeditCojo() {
-		return listeReeditCojo;
-	}
-
-
-	public void setListeReeditCojo(List<VReeditCojo> listeReeditCojo) {
-		this.listeReeditCojo = listeReeditCojo;
-	}
-	
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;

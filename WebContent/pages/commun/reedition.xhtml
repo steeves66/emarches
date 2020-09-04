@@ -100,12 +100,12 @@
 		                  <div class="form-group ">
 	                  <label for="fon" class="col-sm-2 control-label"><b> Numero de l'avis  <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-3">
-	                    <p:inputText value="#{reeditionController.numAvis}"  type="text"  styleClass="form-control" id="fon" style="width: 100%"/> 
+	                    <p:inputText value="#{commissionController.numAvis}"  type="text"  styleClass="form-control" id="fon" style="width: 100%"/> 
 	                  </div>
 	                  <label for="fon" class="col-sm-1 control-label"><span style="font: 40px;"> OU </span></label>
 	                  <label  class="col-sm-2 control-label"><b> Numero DAO  <span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-4">
-	                    <p:inputText value="#{reeditionController.dacCode}"  type="text"  styleClass="form-control" style="width: 100%"/> 
+	                    <p:inputText value="#{commissionController.dacCode}"  type="text"  styleClass="form-control" style="width: 100%"/> 
 	                  </div>
 	                 
 	                </div>      
@@ -115,13 +115,13 @@
                    
                 
                 <div class="col-md-4">
-                   <p:commandLink action="#{reeditionController.reediterFicheOffre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Editer le procès verbal d'ouverture"  ajax="false">
+                   <p:commandLink action="#{commissionController.reediterFicheOffre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Editer le procès verbal d'ouverture"  ajax="false">
 								<span class="btn-label"><i class="fa fa-file-pdf-o"></i></span><span class="hidden-xs">Procès verbal d'ouverture</span>
 								</p:commandLink>
                 </div>
                 
                  <div class="col-md-4">
-                   <p:commandLink action="#{reeditionController.reediterRpAnalyse()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Editer le procès verbal d'analyse" ajax="false">
+                   <p:commandLink action="#{commissionController.reediterRpAnalyse()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Editer le procès verbal d'analyse" ajax="false">
 								<span class="btn-label"><i class="fa fa-file-pdf-o"></i></span><span class="hidden-xs">Procès verbal d'analyse</span>
 								</p:commandLink>
                 </div>
