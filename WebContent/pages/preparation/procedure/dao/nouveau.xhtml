@@ -162,18 +162,17 @@
                   </div>
                 </div> 
                 
-               
                  <div class="form-group">
-                  <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
+                  <label for="modeP2" class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
                   <p:inputText id="modeP2" type="text" value="#{daoController.daoDetail.mopCode} : #{daoController.daoDetail.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" />    
                   </div>
                 </div> 
                 
                   <div class="form-group">
-                  <label class="col-sm-3 control-label">Financement<span style="color:red;"> *</span></label>
+                  <label for="financement" class="col-sm-3 control-label">Financement<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-		         <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.dacFinancement}" id="financement" style="width: 100%" />
+		         <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.dao.dacFinancement}" id="financement" style="width: 100%" />
                   </div>
                 </div> 
             
