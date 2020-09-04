@@ -180,7 +180,7 @@
                             </p:commandLink>
                             
                             <!--BOUTON DE RETOUR -->
-                            <p:commandLink rendered="#{controleController.btn_retourJug}" action="#{commissionController.reanalyser()}" styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer" update=":content">
+                            <p:commandLink rendered="#{controleController.btn_retourJug}" action="#{commissionController.reanalyser()}" styleClass="btn btn-xs btn-warning" style="background-color: #f88b2e; border: #f88b2e; margin-left: 3px" title="Différer pour réanalyse" update=":content">
                                 <i class="ace-icon fa fa-mail-reply bigger-130" style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />
                               <p:confirm header="Confirmation" message="Voulez-vous retourner l'Avis N°#{slctdTb.aaoCode} ?" icon="ui-icon-alert" />

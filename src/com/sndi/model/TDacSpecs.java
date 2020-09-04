@@ -56,6 +56,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private Long dacNbreAchat;
 	private String dacAutComSpec;
 	private BigDecimal dacNbrCopieOff;
+	private String dacFinancement;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -78,7 +79,7 @@ public class TDacSpecs implements java.io.Serializable {
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
-			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,String dacFinancement,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -109,6 +110,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacNbreAchat = dacNbreAchat;
 		this.dacAutComSpec = dacAutComSpec;
 		this.dacNbrCopieOff = dacNbrCopieOff;
+		this.dacFinancement = dacFinancement;
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
@@ -494,4 +496,12 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacNbrCopieOff = dacNbrCopieOff;
 	}
 
+	@Column(name = "DAC_FINANCEMENT", length = 4000)
+	public String getDacFinancement() {
+		return this.dacFinancement;
+	}
+
+	public void setDacFinancement(String dacFinancement) {
+		this.dacFinancement = dacFinancement;
+	}
 }
