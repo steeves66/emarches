@@ -147,8 +147,25 @@ public class ReeditionController {
 	 private VReeditCojo reeditAvis = new VReeditCojo();
 	 
 	 //Déclaration des variables
+	 private long agpId =0;
 	 private String numAvis ="";
 	 private String dacCode ="";
+	 
+///////////////////////////////////////////////DEBUT AGPM /////////////////////////////////////////////////
+	 public void reeditionAgpm() {
+		 if(agpId==0) {
+			 FacesContext.getCurrentInstance().addMessage(null, 
+					 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Saisir le numero de l'AGPM SVP", "")); 
+		 }else
+		 {
+			 projetReport.longparam1(agpId, "Agpm", "Agpm"); 
+			 _logger.info("agpId : "  +""+agpId);	 
+		 }
+		  
+	 }
+	 
+	 
+/////////////////////////////////////////////// FIN AGPM /////////////////////////////////////////////////
 	 
 /////////////////////////////////////////////// DEBUT TRAVAUX EN COMMISSION /////////////////////////////////////////////////
 	 
@@ -259,6 +276,14 @@ public class ReeditionController {
 
 		public void setDacCode(String dacCode) {
 			this.dacCode = dacCode;
+		}
+
+		public long getAgpId() {
+			return agpId;
+		}
+
+		public void setAgpId(long agpId) {
+			this.agpId = agpId;
 		}
 		 
 		 
