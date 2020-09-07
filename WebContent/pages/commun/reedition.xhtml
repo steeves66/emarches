@@ -51,6 +51,9 @@
 
 				<div class="row">
 					<div class="col-md-12">
+
+							  <p:messages id="message" showDetail="false" autoUpdate="true" closable="true" />
+						
 						<!-- Custom Tabs -->
 						<div class="nav-tabs-custom">
 							<ul class="nav nav-tabs">
@@ -63,6 +66,7 @@
 								<li class=""><a href="#cojo" data-toggle="tab"
 									aria-expanded="false">COJO</a></li>
 							</ul>
+							
 							<div class="tab-content">
 								<div class="tab-pane" id="agpm">
 									<div class="row">
@@ -80,19 +84,19 @@
 												<div class="box-body">
 													<div class="row">
 														<div class="col-md-12">
-															<p:messages id="message1" showDetail="false"
-																autoUpdate="true" closable="true" />
+												
 															<div class="input-group input-group-sm col-md-12">
 
 																<div class="form-group ">
 																	<label class="col-sm-2 control-label"><b>
-																			Numero de l'avis <span style="color: red;"> *</span>
+																			Numero de l'Agpm <span style="color: red;"> *</span>
 																	</b></label>
 																	<div class="col-sm-3">
-																		<p:inputText value="#{reeditionController.numAvis}"
+																		<p:inputText value="#{reeditionController.agpId}" placeholder="EX:306"
 																			type="text" styleClass="form-control"
 																			style="width: 100%" />
 																	</div>
+																	<h:panelGroup rendered="false">
 																	<label class="col-sm-1 control-label"><span
 																		style="font: 40px;"> OU </span></label> <label
 																		class="col-sm-2 control-label"><b> Numero
@@ -103,7 +107,7 @@
 																			type="text" styleClass="form-control"
 																			style="width: 100%" />
 																	</div>
-
+                                                                   </h:panelGroup>
 																</div>
 															</div>
 														</div>
@@ -112,7 +116,7 @@
 
 													<div class="col-md-4">
 														<p:commandLink
-															action="#{reeditionController.reediterFicheOffre()}"
+															action="#{reeditionController.reeditionAgpm()}"
 															styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"
 															style=" background-color: #f88b2e"
 															data-original-title="Editer le procès verbal d'ouverture"
@@ -194,8 +198,7 @@
 												<div class="box-body">
 													<div class="row">
 														<div class="col-md-12">
-															<p:messages id="message2" showDetail="false"
-																autoUpdate="true" closable="true" />
+														
 															<div class="input-group input-group-sm col-md-12">
 
 																<div class="form-group ">
@@ -282,8 +285,7 @@
 												<div class="box-body">
 													<div class="row">
 														<div class="col-md-12">
-															<p:messages id="message3" showDetail="false"
-																autoUpdate="true" closable="true" />
+														
 															<div class="input-group input-group-sm col-md-12">
 
 																<div class="form-group ">
@@ -374,8 +376,7 @@
 												<div class="box-body">
 													<div class="row">
 														<div class="col-md-12">
-															<p:messages id="message4" showDetail="false"
-																autoUpdate="true" closable="true" />
+														
 															<div class="input-group input-group-sm col-md-12">
 
 																<div class="form-group ">
@@ -489,8 +490,7 @@
 												<div class="box-body">
 													<div class="row">
 														<div class="col-md-12">
-															<p:messages id="message" showDetail="false"
-																autoUpdate="true" closable="true" />
+															
 															<div class="input-group input-group-sm col-md-12">
 
 																<div class="form-group ">
@@ -498,7 +498,7 @@
 																			Numero de l'avis <span style="color: red;"> *</span>
 																	</b></label>
 																	<div class="col-sm-3">
-																		<p:inputText value="#{reeditionController.numAvis}"
+																		<p:inputText value="#{reeditionController.numAvis}" placeholder="EX : AAO-000085"
 																			type="text" styleClass="form-control"
 																			style="width: 100%" />
 																	</div>
@@ -508,7 +508,7 @@
 																			DAO <span style="color: red;"> *</span>
 																	</b></label>
 																	<div class="col-sm-4">
-																		<p:inputText value="#{reeditionController.dacCode}"
+																		<p:inputText value="#{reeditionController.dacCode}" placeholder="EX : 200220AOO0014"
 																			type="text" styleClass="form-control"
 																			style="width: 100%" />
 																	</div>
