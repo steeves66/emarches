@@ -57,6 +57,11 @@
 				<i class="fa fa-check pr10"></i>
 				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
+				 
+<p:wizard flowListener="#{commissionController.onFlowProcess}" id="pwz" nextLabel="Offres anormalement élevées / basses" backLabel="Retour a l'analyse" >
+        <p:tab id="analyse" title="Analyse" titleStyle="background-color: #f88b2e;background-image: none">
+           <div class="row">
+          
     <div class="box box-success">
      
               <div class="box-body">
@@ -224,11 +229,7 @@
                </div>
               </div>
               
-              <div class="row">
-              <p:commandLink  styleClass="btn btn-warning row pull-right" rendered="#{commissionController.editerAna}" action="#{commissionController.editerRpAnalyse()}" style="background-color: #f88b2e; margin-right:5px;color:#fff" ajax="false"  update=":content">
-			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le rapport d'Analyse
-	          </p:commandLink>
-	          </div>
+             
                 
             </div>
             <!-- /.box-body -->
@@ -237,9 +238,172 @@
 				     <i class="ace-icon fa fa-save bigger-120"></i> Valider
 				      </p:commandLink>
 				      
-      <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISANA')}" style="background-color: #f88b2e;" update=":content">
+     
+		</div>
+
+		</p:tab>
+		<p:tab id="repechage" title="Offres anormalement élevées / basses" titleStyle="background-color: #f88b2e;background-image: none">
+	              <ui:include src="inclusions/statistique.xhtml"  /> 
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-3">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{commissionController.chargeSoumissionByLot()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:lotRepech" />
+				                </span>
+			                      <p:inputText value="#{commissionController.laaNumRepech}" styleClass="form-control" type="text"  placeholder="saisir le numero du lot"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeFilterLotByLotNum()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:lotRepech" />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>         
+                 <p:dataTable var="slctdTb"  id="lotRepech" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeSoumissionByLot}" 
+                selection="#{commissionController.lot}" selectionMode="single" scrollable="true" scrollHeight="150" rowKey="#{slctdTb.laaId}" emptyMessage="Aucun Lot enregistré">
+                     
+                           <p:column headerText="N°Lot" styleClass="col-sm-1">
+				            <h:commandLink  title="N°Lot" styleClass="col-sm-1"
+         				 action="#{commissionController.onSelectLotFin}">
+                                <h:outputText value="#{slctdTb.laaNum}"/>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotFin}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				      
+				        
+				         <p:column headerText="Objet" styleClass="col-sm-9">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10"
+         				 action="#{commissionController.onSelectLotFin}">
+                                <h:outputText value="#{slctdTb.laaObjet}"/>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotFin}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				        <p:column headerText="Montant estimé" styleClass="col-sm-2">
+				           <h:commandLink  title="Montant estimé" styleClass="col-sm-10"
+         				 action="#{commissionController.onSelectLotFin}">
+                                <h:outputText value="#{slctdTb.laaMtEst}">
+                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                                </h:outputText>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotFin}" />
+                         </h:commandLink>
+				           
+				        </p:column>
+
+                        </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 
+         
+               
+		  <div class="col-md-12">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight:bold;font-size:18px"><strong>I - LISTE DES SOUMISSIONS ANAORMALEMENT ELEVEES</strong></div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	              <div class="box-body">
+                <p:dataTable var="slctdTb"  id="finance1" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.listeSouOffEleve}"
+                 scrollable="true" scrollHeight="200" emptyMessage="Aucun Lot enregistré">
+                         
+                          <p:column headerText="N°" style="width : 3%">
+         				  <h:outputText value="#{slctdTb.ordre}" />
+				        </p:column>	
+				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-5" >
+         				   <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}"/>
+				        </p:column>
+				         <p:column headerText="SOUMMISSION CORRIGEE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dofMtCor}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>	
+				        <p:column headerText="SEUIL (SF1)" styleClass="col-sm-1" style="color: red">
+         				  <h:outputText value="#{slctdTb.sf1}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+         				  
+				        </p:column>	
+				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.commentaire}" />
+				        </p:column>		
+				 </p:dataTable>
+				         
+                 
+	            </div>
+	           </div>
+            </div>
+             <div class="col-md-12">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight:bold;font-size:18px">II - LISTE DES SOUMISSIONS ANAORMALEMENT BASSES</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	              <div class="box-body">
+                <p:dataTable var="slctdTb"  id="finance2" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeSouOffBass}"  
+                 scrollable="true" scrollHeight="200" emptyMessage="Aucun Lot enregistré">
+                         
+                      <p:column headerText="N°" style="width : 3%">
+         				  <h:outputText value="#{slctdTb.ordre}" />
+				        </p:column>	
+				        <p:column headerText="SOUMISSIONNAIRES" styleClass="col-sm-4" >
+         				   <h:outputText value="#{slctdTb.offSouNcc} : #{slctdTb.offSouSigleSte}"/>
+				        </p:column>
+				         <p:column headerText="SOUMMISSION CORRIGEE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dofMtCor}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>	
+				         <p:column headerText="SEUIL (SF2)" styleClass="col-sm-1" style="color: red">
+         				  <h:outputText value="#{slctdTb.sf2}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+				        </p:column>	
+				            
+				        <p:column headerText="REPECHE?" styleClass="col-sm-1">
+         				  <h:outputText value="#{slctdTb.dofRepeche == 'O'?'OUI':'NON' }">
+         				  </h:outputText>
+				        </p:column>	
+				        
+				         <p:column headerText="COMMENTAIRE" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.commentaire}" /> <br/>	
+         				  <h:outputText value="#{slctdTb.commentaireAnormal}" />
+				        </p:column>	
+				        <p:column headerText="ACTION" style="width : 4%">
+				          <p:commandLink oncomplete="PF('examenDlg').show()" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-right:3px"
+				               title="Examen" update=":content">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltRecharge}" />                             
+                            </p:commandLink>	
+                          </p:column>
+				         </p:dataTable>
+				         
+                 
+	            </div>
+	           </div>
+            </div>
+		</p:tab>
+		 
+		</p:wizard>
+		 <div class="row">
+		 <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISANA')}" style="background-color: #f88b2e;margin-top:10px;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
+		
+              <p:commandLink  styleClass="btn btn-warning row pull-right" rendered="#{commissionController.editerAna}" action="#{commissionController.editerRpAnalyse()}" style="background-color: #f88b2e; margin-top:10px; margin-right:5px;color:#fff" ajax="false"  update=":content">
+			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le rapport d'Analyse
+	          </p:commandLink>
+	          </div>
 		
     </section>
     </h:form>
@@ -567,7 +731,7 @@
       </p:dialog>
     </h:form>
     
-    
+    <ui:include src="inclusions/repechage.xhtml"  /> 
    <h:form id="dlogConsultation">
 	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="80%" height="100%" closable="true" header="Offres recevables / non recevables">
 	     

@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,7 @@ import com.sndi.model.TCommissionType;
 import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetCommissionSeance;
+import com.sndi.model.TDetCritAnalyseDac;
 import com.sndi.model.TDetOffres;
 import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailVente;
@@ -75,6 +77,7 @@ import com.sndi.model.VListeSouOffBasse;
 import com.sndi.model.VListeSouOffEleve;
 import com.sndi.model.VLot;
 import com.sndi.model.VLotAnalyse;
+import com.sndi.model.VLotAnalyseFin;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VOffreCandidat;
@@ -144,7 +147,16 @@ public class CommissionController {
 		//chargeOffre();
 		chargeBanque();
 	 }
-	 
+	 private boolean skip;
+	 public String onFlowProcess(FlowEvent event) {
+		 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
+		 if(event.getOldStep().equals("analyse") && event.getNewStep().equals("repechage")) {
+			 chargeSoumissionByLot();
+			 laaNumRepech = 0;
+			 userController.initMessage();
+		     }
+	      return event.getNewStep();
+	    }
 	 //Declaration des listes 
 	 private List<VCompoCommission> membresCommission = new ArrayList<VCompoCommission>();
 	 private List<VDacMembre> listeMembre = new ArrayList<VDacMembre>(); 
@@ -163,6 +175,7 @@ public class CommissionController {
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
 	 private List<VLotAnalyse> listeLotsByAvis = new ArrayList<VLotAnalyse>();
+	 private List<VLotAnalyseFin> listeSoumissionByLot = new ArrayList<VLotAnalyseFin>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
 	 private List<VDofTyp> listdoftyp = new ArrayList<VDofTyp>();
@@ -241,6 +254,7 @@ public class CommissionController {
 	 private VDetOffreAnalyse sltOffre = new VDetOffreAnalyse();
 	 private TSoumissions soumission = new TSoumissions();
 	 private VLotAnalyse lot = new VLotAnalyse();
+	 private VLotAnalyseFin lotFin = new VLotAnalyseFin();
 	 private VLot sltLot = new VLot();
 	 private TDetailVente vente = new TDetailVente();
 	 private TPiecesOffres newPieceOffre = new TPiecesOffres();
@@ -289,6 +303,7 @@ public class CommissionController {
 	 private String ncc;
 	 private BigDecimal dofNum;
 	 private long laaNum;
+	 private long laaNumRepech;
 	 private long lotId;
 	 private int nbrLot;
 	 private String filtreCandidat="";
@@ -305,36 +320,68 @@ public class CommissionController {
 	 
 	 //Resultat analyse*
 	 
-	 public void chargeResultaFilter() {
-		 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
+	 public void onSelectLotFin() {
+		/* listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
 				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId))); 
 		  if (!listeVerifCor.isEmpty()) {
 			  infoLot=listeVerifCor.get(0); 
-	       }
+	       }*/
 		 
-		 listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
-		 
-		 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+		  listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotFin.getLaaId())));
+			 
+			 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotFin.getLaaId())));
 		 
 		 listeRecapSeuil =  ((List<VRecapSeuilAnormal>)iservice.getObjectsByColumn("VRecapSeuilAnormal",new ArrayList<String>(Arrays.asList("DOF_LAA_ID")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotFin.getLaaId())));
 	       if (!listeRecapSeuil.isEmpty()) {
 	    	   infoSeuil=listeRecapSeuil.get(0); 
 	       }
-		 
+	       /*
 	       resultatAttributaire = ((List<VResultEvalClassLot>)iservice.getObjectsByColumn("VResultEvalClassLot",new ArrayList<String>(Arrays.asList("RANG")),
 					 new WhereClause("LAA_NUM",Comparateur.EQ,""+infoLot.getLaaNum()),
 					 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));
 	       
 
 				 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
-						 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));
+						 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));*/
 			 
 		
 	 }
 	 
+	//Selection d'un lot dans le tableau*
+	 
+		 public void chargeResultaFilter() {
+			 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId))); 
+			  if (!listeVerifCor.isEmpty()) {
+				  infoLot=listeVerifCor.get(0); 
+		       }
+			 
+			 listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+			 
+			 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+			 
+			 listeRecapSeuil =  ((List<VRecapSeuilAnormal>)iservice.getObjectsByColumn("VRecapSeuilAnormal",new ArrayList<String>(Arrays.asList("DOF_LAA_ID")),
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+		       if (!listeRecapSeuil.isEmpty()) {
+		    	   infoSeuil=listeRecapSeuil.get(0); 
+		       }
+			 
+		       resultatAttributaire = ((List<VResultEvalClassLot>)iservice.getObjectsByColumn("VResultEvalClassLot",new ArrayList<String>(Arrays.asList("RANG")),
+						 new WhereClause("LAA_NUM",Comparateur.EQ,""+infoLot.getLaaNum()),
+						 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));
+		       
+
+					 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
+							 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));
+				 
+			
+		 }
+		 
 	 
 	//Vérification et correction des offres financières
 	 public void verifCor() {
@@ -412,22 +459,27 @@ public class CommissionController {
 		 
 		 //Methode de Repechage
 		 public void saveRepechage() {
-			 
-			 offreListe = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+			 TDetOffres offreRep = new TDetOffres();
+			 offreListe = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",
 					 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltRecharge.getDofNum())));
-					  if (!listeOffres.isEmpty()) {
-						  offre=offreListe.get(0); 
-						  offre.setDofRepeche(sltRecharge.getDofRepeche());
-						  offre.setDofObsAnormal(sltRecharge.getCommentaireAnormal());
-						  iservice.updateObject(offre);
+					  if (!offreListe.isEmpty()) {
+						  offreRep=offreListe.get(0); 
+						  offreRep.setDofRepeche(sltRecharge.getDofRepeche());
+						  offreRep.setDofObsAnormal(sltRecharge.getCommentaireAnormal());
+						  iservice.updateObject(offreRep);
 						  
-						  //offreBasse();
-						  chargeResultaFilter();
-						  
+						  if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+							  onSelectLotFin();
+						  }else
+							  if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+								  chargeResultaFilter(); 
+							  } 
 						  userController.setTexteMsg("Repechage effectué avec succès!");
 						  userController.setRenderMsg(true);
 						  userController.setSevrityMsg("success");
-		 			} 		  
+		 			} 	
+					  
+					
 		 }
 		
 	 //fin resultat analyse
@@ -690,8 +742,19 @@ public class CommissionController {
 			listeLotsByAvis=(List<VLotAnalyse>) iservice.getObjectsByColumn("VLotAnalyse", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 			_logger.info("listeLotsByAvis size: "+listeLotsByAvis.size());
+			laaNumRepech = 0;
 		 }
 		 
+		 public void chargeSoumissionByLot() {
+			 listeSouOffEleve.clear();
+			 listeSouOffBass.clear();
+			 listeRecapSeuil.clear();
+			 listeSoumissionByLot.clear();
+			 infoSeuil =new VRecapSeuilAnormal();
+			 listeSoumissionByLot=(List<VLotAnalyseFin>) iservice.getObjectsByColumn("VLotAnalyseFin", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+			_logger.info("listeSoumissionByLot size: "+listeSoumissionByLot.size());
+		 }
 		//filtre lot
 		 public void chargeLotFilterLot() {
 			listeLots.clear();
@@ -699,6 +762,15 @@ public class CommissionController {
 					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
 					new WhereClause("LAA_NUM",WhereClause.Comparateur.LIKE,"%"+laaNum+"%")); 
 			_logger.info("listeLotsByAvis size: "+listeLotsByAvis.size());
+		 }
+		 
+		//filtre lot par le numero de lot
+		 public void chargeFilterLotByLotNum() {
+			 listeSoumissionByLot.clear();
+			 listeSoumissionByLot=(List<VLotAnalyseFin>) iservice.getObjectsByColumn("VLotAnalyseFin", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
+					new WhereClause("LAA_NUM",WhereClause.Comparateur.LIKE,"%"+laaNumRepech+"%")); 
+			_logger.info("listeSoumissionByLot size: "+listeSoumissionByLot.size());
 		 }
 		 
 		 
@@ -2942,6 +3014,45 @@ public class CommissionController {
 	public void setStatutUpdate(String statutUpdate) {
 		this.statutUpdate = statutUpdate;
 	}
+
+
+	public boolean isSkip() {
+		return skip;
+	}
+
+
+	public void setSkip(boolean skip) {
+		this.skip = skip;
+	}
+
+
+	public List<VLotAnalyseFin> getListeSoumissionByLot() {
+		return listeSoumissionByLot;
+	}
+
+
+	public void setListeSoumissionByLot(List<VLotAnalyseFin> listeSoumissionByLot) {
+		this.listeSoumissionByLot = listeSoumissionByLot;
+	}
+
+
+	public long getLaaNumRepech() {
+		return laaNumRepech;
+	}
+
+
+	public void setLaaNumRepech(long laaNumRepech) {
+		this.laaNumRepech = laaNumRepech;
+	}
+
+	public VLotAnalyseFin getLotFin() {
+		return lotFin;
+	}
+
+	public void setLotFin(VLotAnalyseFin lotFin) {
+		this.lotFin = lotFin;
+	}
+
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;

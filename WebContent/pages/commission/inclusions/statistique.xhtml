@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="statistique" >  
+     <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box box-success">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Cliquez pour fermer les critères de seuil
+                      </a>
+                    </h4>
+                  </div>
+                 
+                  <div id="collapseOne" class="panel-collapse collapse in">
+                    <div class="box-body">
+                      <div class="row">
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+               <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.laaMtEst}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+
+              <p style="height: 39px">Valeur de l'estimation administrative (E)</p>
+              
+            </div>
+          </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.moyOffFinQualtech}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+
+              <p style="height: 39px">Moyenne des Offres financières techniquement qualifiées (P)</p>
+            </div>
+
+          </div>
+        </div>
+        <!-- ./col -->
+        
+          <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-aqua">
+            <div class="inner">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.moyPonderee}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+
+              <p style="height: 39px">Moyenne pondérée (M=40% * P + 60% * E)</p>
+            </div>
+          </div>
+        </div>
+        
+         <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.sf2}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+              
+              
+
+              <p  style="height: 39px">Seuil anormalement bas (SF2 =90% * M)</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-red">
+            <div class="inner">
+              <h:outputText style="font-size :27px; font-weight:bold" value="#{commissionController.infoSeuil.sf1}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+
+              <p style="height: 39px">Seuil anormalement élevé (SF1 =110% * M)</p>
+            </div>
+          
+          </div>
+        </div>
+       
+        <!-- ./col -->
+      
+        
+      </div>
+                    </div>
+                  </div>
+       
+          
+            
+          
+      
+          <!-- Tableau de Bord pour l'acteur SPP -->
+          
+          <!--Fin du Tableau de Bord pour l'acteur SPP -->
+             
+                </div>
+              </div>
+     </h:panelGroup>     
+</html>

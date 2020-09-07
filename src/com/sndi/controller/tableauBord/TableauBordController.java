@@ -454,6 +454,8 @@ public class TableauBordController {
 				 listeTableauBord.clear();
 					listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 							new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
+							new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,"PN"),
+							new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,"AGP"),
 							new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
 					if (!listeTableauBord.isEmpty()) {
 						tableauBord=listeTableauBord.get(0);
@@ -461,12 +463,14 @@ public class TableauBordController {
 			 }else {
 				 //CPMP
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-					 listeTableauBord.clear();
-						listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
+					 listeTableauBordPf.clear();
+					 listeTableauBordPf =(List<VTabBordPf>) iservice.getObjectsByColumn("VTabBordPf", new ArrayList<String>(Arrays.asList("CODE_ID")),
 								new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
+								new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,"AGP"),
 								new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()));
-						if (!listeTableauBord.isEmpty()) {
-							tableauBord=listeTableauBord.get(0);
+						if (!listeTableauBordPf.isEmpty()) {
+							tableauBordPf=listeTableauBordPf.get(0);
 						}
 				 }else {
 					 //DMP ET SPP
@@ -474,6 +478,8 @@ public class TableauBordController {
 							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 						 listeTableauBordDmp.clear();
 						 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+								 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,"PN"),
+									new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,"AGP"),
 									new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"));
 							if (!listeTableauBordDmp.isEmpty()) {
 								tableauBordDmp=listeTableauBordDmp.get(0);
