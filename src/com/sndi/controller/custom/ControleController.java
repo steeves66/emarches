@@ -1348,6 +1348,7 @@ public class ControleController {
 			 //PSPM
 			 if(action.equalsIgnoreCase("ENGPSPM")) {
 				 type = "PSPM";
+				 typePlan = "PS";
 				 libelleProcedure="SAISIE D'UN NOUVEAU PLAN SIMPLIFIE DE PASSATION DE MARCHES";
 			       libelle1="Liste des PSPM Saisie par l'autorité Contractante";
 			       panelDetail=false;
@@ -1360,6 +1361,7 @@ public class ControleController {
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPSPM")) {
 			    		type = "PSPM";
+			    		typePlan = "PS";
 			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PSPM N°";
 			    		libelle="Modification du";
@@ -1464,6 +1466,7 @@ public class ControleController {
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPSPM")) {
 			    				type = "PSPM";
+			    				typePlan = "PS";
 			    				libelleProcedure="VALIDATION DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";	
 			    				libelle1="TRANSMISSION DES PLANS SIMPLIFIES DE PASSATION DE MARCHES";
 			    				panelDetail=false;
@@ -1494,6 +1497,7 @@ public class ControleController {
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPSPM")) {
 				    				type = "PSPM";
+				    				typePlan = "PS";
 				    				panelDetail=true;
 				    				panelForm=false;
 				   				    panelTraitement=false;

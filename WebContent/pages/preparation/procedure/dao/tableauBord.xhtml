@@ -28,8 +28,8 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <!-- <h3>#{tableauBordController.tableauBord.saisi}</h3> -->
-              <h3>#{tableauBordController.daoAcSaisie}</h3>
+              <h3>#{tableauBordController.tableauBord.saisi}</h3>
+              <!-- <h3>#{tableauBordController.daoAcSaisie}</h3> -->
 
               <p>#{controleController.type} en attente de transmission</p>
             </div>
@@ -46,8 +46,8 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <!-- <h3>#{tableauBordController.tableauBord.transAc}</h3> -->
-              <h3>#{tableauBordController.daoAcTransmis}</h3>
+               <h3>#{tableauBordController.tableauBord.transAc}</h3> 
+             <!--  <h3>#{tableauBordController.daoAcTransmis}</h3> -->
 
               <p>#{controleController.type} Transmis</p>
             </div>
@@ -65,8 +65,8 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <!-- <h3>#{tableauBordController.tableauBord.difPf}</h3>  -->
-              <h3>#{tableauBordController.daoAcDiffCpmp}</h3> 
+               <h3>#{tableauBordController.tableauBord.difPf}</h3>  
+              <!-- <h3>#{tableauBordController.daoAcDiffCpmp}</h3>  -->
 
               <p>#{controleController.type} Differé(s)</p>
             </div>
@@ -351,7 +351,8 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvValidation}</h3>
+            <h3>#{tableauBordController.tableauBordDmp.valDmp}</h3>
+             <!--  <h3>#{tableauBordController.daoCsvValidation}</h3> -->
 
               <p>#{controleController.type} validé(s)</p>
             </div>
@@ -370,7 +371,9 @@
          <div class="col-lg-3 col-xs-6">
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvDiff}</h3>
+            
+            <h3>#{tableauBordController.tableauBordDmp.difDmp}</h3>
+              <!-- <h3>#{tableauBordController.daoCsvDiff}</h3> -->
 
               <p>#{controleController.type} différé(s) par la DMP</p>
             </div>
@@ -398,7 +401,7 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvAttPub}</h3>
+               <h3>#{tableauBordController.daoCsvAttPub}</h3> 
 
               <p>#{controleController.type} en attente de Publication</p>
             </div>
@@ -418,7 +421,8 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>#{tableauBordController.daoCsvPub}</h3>
+            <h3>#{tableauBordController.tableauBordDmp.pub}</h3>
+              <!-- <h3>#{tableauBordController.daoCsvPub}</h3> -->
 
               <p>#{controleController.type} publié(s)</p>
             </div>
@@ -528,8 +532,8 @@
           
           <div class="small-box bg-yellow">
             <div class="inner">
-             <!--  <h3>#{tableauBordController.tableauBordDmp.valPf}</h3> -->
-             <h3>#{tableauBordController.daoCsvAttAff}</h3>
+              <h3>#{tableauBordController.tableauBordDmp.valPf}</h3>
+             <!-- <h3>#{tableauBordController.daoCsvAttAff}</h3> -->
 
               <p>#{controleController.type} en attente d'Affectation</p>
             </div>
@@ -814,8 +818,8 @@
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-              <!-- <h3>#{tableauBordController.tableauBord.transAc}</h3> -->
-              <h3>#{tableauBordController.daoCpSaisie}</h3>
+               <h3>#{tableauBordController.tableauBordPf.transAc}</h3> 
+              <!-- <h3>#{tableauBordController.daoCpSaisie}</h3> -->
 
               <p>#{controleController.type} en attente de Validation </p>
             </div>
@@ -833,8 +837,8 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <!-- <h3>#{tableauBordController.tableauBord.valPf}</h3> -->
-              <h3>#{tableauBordController.daoCpValide}</h3>
+               <h3>#{tableauBordController.tableauBordPf.valPf}</h3> 
+              <!-- <h3>#{tableauBordController.daoCpValide}</h3> -->
 
               <p>#{controleController.type} transmi(s) par la CPMP</p>
             </div>
@@ -852,8 +856,8 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-       
-              <h3>#{tableauBordController.daoAcDiffCpmp}</h3>
+              <h3>#{tableauBordController.tableauBordPf.difPf}</h3> 
+              <!-- <h3>#{tableauBordController.daoAcDiffCpmp}</h3> -->
 
               <p>#{controleController.type} différé(s) par la CPMP</p>
             </div>

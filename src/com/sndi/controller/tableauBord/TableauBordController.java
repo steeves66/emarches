@@ -19,7 +19,9 @@ import com.sndi.model.VAgpmliste;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VPgpm;
 import com.sndi.model.VTabBord;
+import com.sndi.model.VTabBordAc;
 import com.sndi.model.VTabBordDmp;
+import com.sndi.model.VTabBordPf;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -436,9 +438,13 @@ public class TableauBordController {
 							     private String condition1="";
 							     private String valeur1="";
 		//Test tableau de bord
-		private List<VTabBord> listeTableauBord = new ArrayList<VTabBord>();
+		//private List<VTabBord> listeTableauBord = new ArrayList<VTabBord>();
+		private List<VTabBordAc> listeTableauBord = new ArrayList<VTabBordAc>();
+		private List<VTabBordPf> listeTableauBordPf = new ArrayList<VTabBordPf>();
 		private List<VTabBordDmp> listeTableauBordDmp = new ArrayList<VTabBordDmp>();
-		private VTabBord tableauBord = new VTabBord();
+		//private VTabBord tableauBord = new VTabBord();
+		private VTabBordAc tableauBord = new VTabBordAc();
+		private VTabBordPf tableauBordPf = new VTabBordPf();
 		private VTabBordDmp tableauBordDmp = new VTabBordDmp();
 
 		//TABLEAU DE BORD AGPM
@@ -446,7 +452,7 @@ public class TableauBordController {
 			//AC
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 listeTableauBord.clear();
-					listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+					listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 							new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
 							new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
 					if (!listeTableauBord.isEmpty()) {
@@ -456,7 +462,7 @@ public class TableauBordController {
 				 //CPMP
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 listeTableauBord.clear();
-						listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+						listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 								new WhereClause("TYP",WhereClause.Comparateur.EQ,"AGPM"),
 								new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 						if (!listeTableauBord.isEmpty()) {
@@ -483,7 +489,7 @@ public class TableauBordController {
 			//AC
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 listeTableauBord.clear();
-					listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+					listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 							new WhereClause("TYP",WhereClause.Comparateur.EQ,""+type),
 							new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 					        new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
@@ -494,7 +500,7 @@ public class TableauBordController {
 				 //CPMP
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 listeTableauBord.clear();
-						listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+						listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 								new WhereClause("TYP",WhereClause.Comparateur.EQ,""+type),
 								new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 						        new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
@@ -517,34 +523,43 @@ public class TableauBordController {
 			   }
 		}
 		
-		
-		//Tableau de bord AC CPMP en pgpm,pgspm,ppm,pspm,DAO(PN,PS),AMI(PN,PS),PRQ(PN,PS)
-		public void ChargeTableauBordDac(String typeProc, String typeDac) {
+		//Tableau de bord AC,CPMP et DMP PPM(PN,PS)
+		public void ChargeTableauBordPgp(String typeProc, String typeDac) {
 			//AC
 			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 				 listeTableauBord.clear();
-					listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+					listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 							new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 							new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
 							new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
-					if (!listeTableauBord.isEmpty()) {
-						tableauBord=listeTableauBord.get(0);
-					}
+					     if (!listeTableauBord.isEmpty()) {
+						      tableauBord=listeTableauBord.get(0);
+					          }
+					     
+					_logger.info("TYP_PROC: "+typeProc);
+					_logger.info("TYP_DAC: "+typeDac);
+					_logger.info("CODE_AC: "+userController.getSlctd().getTFonction().getFonCod());
 			 }else {
 				 //CPMP
 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
-					 listeTableauBord.clear();
-						listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+						listeTableauBordPf.clear();
+						listeTableauBordPf =(List<VTabBordPf>) iservice.getObjectsByColumn("VTabBordPf", new ArrayList<String>(Arrays.asList("CODE_ID")),
 								new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
 								new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
 								new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
-						if (!listeTableauBord.isEmpty()) {
-							tableauBord=listeTableauBord.get(0);
+						if (!listeTableauBordPf.isEmpty()) {
+							tableauBordPf=listeTableauBordPf.get(0);
 						}
+						
+						_logger.info("TYP_PROC: "+typeProc);
+						_logger.info("TYP_DAC: "+typeDac);
+						_logger.info("CODE_PF: "+userController.getSlctd().getTFonction().getFonCod());
 				 }else {
-					 //DMP ET SPP
+					 //DMP, CSV, SPD ET SPP (Acteurs DMP)
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") 
-							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP") 
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPD")) {
 						 listeTableauBordDmp.clear();
 						 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
 								 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
@@ -552,10 +567,127 @@ public class TableauBordController {
 							if (!listeTableauBordDmp.isEmpty()) {
 								tableauBordDmp=listeTableauBordDmp.get(0);
 							}
+							_logger.info("TYP_PROC: "+typeProc);
+							_logger.info("TYP_DAC: "+typeDac);
+							_logger.info("CODE_DMP: "+userController.getSlctd().getTFonction().getFonCod());
 					 }
 				 }
 			   }
-			
+		}
+
+		
+		    //Tableau de bord AC,CPMP et DMP PPM(PN,PS)
+				public void ChargeTableauBordPpm(String typeProc, String typeDac) {
+					//AC
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+						 listeTableauBord.clear();
+							listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
+									new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+									new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+									new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+							     if (!listeTableauBord.isEmpty()) {
+								      tableauBord=listeTableauBord.get(0);
+							          }
+							     
+							_logger.info("TYP_PROC: "+typeProc);
+							_logger.info("TYP_DAC: "+typeDac);
+							_logger.info("CODE_AC: "+userController.getSlctd().getTFonction().getFonCod());
+					 }else {
+						 //CPMP
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+								listeTableauBordPf.clear();
+								listeTableauBordPf =(List<VTabBordPf>) iservice.getObjectsByColumn("VTabBordPf", new ArrayList<String>(Arrays.asList("CODE_ID")),
+										new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+										new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+										new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+								if (!listeTableauBordPf.isEmpty()) {
+									tableauBordPf=listeTableauBordPf.get(0);
+								}
+								
+								_logger.info("TYP_PROC: "+typeProc);
+								_logger.info("TYP_DAC: "+typeDac);
+								_logger.info("CODE_PF: "+userController.getSlctd().getTFonction().getFonCod());
+						 }else {
+							 //DMP, CSV, SPD ET SPP (Acteurs DMP)
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") 
+									 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP") 
+									 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")
+									 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPD")) {
+								 listeTableauBordDmp.clear();
+								 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+										 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+										 new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+									if (!listeTableauBordDmp.isEmpty()) {
+										tableauBordDmp=listeTableauBordDmp.get(0);
+									}
+									_logger.info("TYP_PROC: "+typeProc);
+									_logger.info("TYP_DAC: "+typeDac);
+									_logger.info("CODE_DMP: "+userController.getSlctd().getTFonction().getFonCod());
+							 }
+						 }
+					   }
+				}
+		
+		
+		//Tableau de bord CPMP pour ,DAO(PN,PS),AMI(PN,PS),PRQ(PN,PS)
+		public void ChargeTableauBordDac(String typeProc, String typeDac) {
+			//AC
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				 listeTableauBord.clear();
+					listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
+							new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+							new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+							new WhereClause("CODE_AC",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+					     if (!listeTableauBord.isEmpty()) {
+						      tableauBord=listeTableauBord.get(0);
+					          }
+					     
+					_logger.info("TYP_PROC: "+typeProc);
+					_logger.info("TYP_DAC: "+typeDac);
+					_logger.info("CODE_AC: "+userController.getSlctd().getTFonction().getFonCod());
+			 }else {
+				 //CPMP
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					/* listeTableauBord.clear();
+						listeTableauBord =(List<VTabBord>) iservice.getObjectsByColumn("VTabBord", new ArrayList<String>(Arrays.asList("CODE_ID")),
+								new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+								new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+								new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+						if (!listeTableauBord.isEmpty()) {
+							tableauBord=listeTableauBord.get(0);
+						}*/
+						
+						listeTableauBordPf.clear();
+						listeTableauBordPf =(List<VTabBordPf>) iservice.getObjectsByColumn("VTabBordPf", new ArrayList<String>(Arrays.asList("CODE_ID")),
+								new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+								new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac),
+								new WhereClause("CODE_PF",WhereClause.Comparateur.EQ,""+userController.getSlctd().getTFonction().getFonCod()));
+						if (!listeTableauBordPf.isEmpty()) {
+							tableauBordPf=listeTableauBordPf.get(0);
+						}
+						
+						_logger.info("TYP_PROC: "+typeProc);
+						_logger.info("TYP_DAC: "+typeDac);
+						_logger.info("CODE_PF: "+userController.getSlctd().getTFonction().getFonCod());
+				 }else {
+					 //DMP, CSV, SPD ET SPP (Acteurs DMP)
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") 
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP") 
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")
+							 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPD")) {
+						 listeTableauBordDmp.clear();
+						 listeTableauBordDmp =(List<VTabBordDmp>) iservice.getObjectsByColumn("VTabBordDmp", new ArrayList<String>(Arrays.asList("NUMERO")),
+								 new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),
+								 new WhereClause("TYP_DAC",WhereClause.Comparateur.EQ,""+typeDac));
+							if (!listeTableauBordDmp.isEmpty()) {
+								tableauBordDmp=listeTableauBordDmp.get(0);
+							}
+							_logger.info("TYP_PROC: "+typeProc);
+							_logger.info("TYP_DAC: "+typeDac);
+							_logger.info("CODE_DMP: "+userController.getSlctd().getTFonction().getFonCod());
+					 }
+				 }
+			   }
 		}
 		//Fin Test tableau de bord
 				     
@@ -693,7 +825,7 @@ public class TableauBordController {
 									 ppmDmAttentePub = ""+getPpmValideDmp("S3V",typePlan);
 									 ppmPub = ""+getPpmValideDmp("PPU",typePlan);
 									 ppmdjPub = ""+getPpmDejaPub();
-								 }
+							    }
 							 }
 					     } 
 					   }
@@ -5838,8 +5970,12 @@ public int getAmiTransmisDmpDossier(String src){
 	public void setDaoCsvPub(String daoCsvPub) {
 		this.daoCsvPub = daoCsvPub;
 	}
+	
+	
+	
+	
 
-
+/*
 	public List<VTabBord> getListeTableauBord() {
 		return listeTableauBord;
 	}
@@ -5854,8 +5990,20 @@ public int getAmiTransmisDmpDossier(String src){
 
 	public void setTableauBord(VTabBord tableauBord) {
 		this.tableauBord = tableauBord;
-	}
+	}*/
 
+	public List<VTabBordAc> getListeTableauBord() {
+		return listeTableauBord;
+	}
+	public void setListeTableauBord(List<VTabBordAc> listeTableauBord) {
+		this.listeTableauBord = listeTableauBord;
+	}
+	public VTabBordAc getTableauBord() {
+		return tableauBord;
+	}
+	public void setTableauBord(VTabBordAc tableauBord) {
+		this.tableauBord = tableauBord;
+	}
 	public String getCondition() {
 		return condition;
 	}
@@ -5914,6 +6062,18 @@ public int getAmiTransmisDmpDossier(String src){
 	}
 	public void setDaoAcVenteTot(String daoAcVenteTot) {
 		this.daoAcVenteTot = daoAcVenteTot;
+	}
+	public List<VTabBordPf> getListeTableauBordPf() {
+		return listeTableauBordPf;
+	}
+	public void setListeTableauBordPf(List<VTabBordPf> listeTableauBordPf) {
+		this.listeTableauBordPf = listeTableauBordPf;
+	}
+	public VTabBordPf getTableauBordPf() {
+		return tableauBordPf;
+	}
+	public void setTableauBordPf(VTabBordPf tableauBordPf) {
+		this.tableauBordPf = tableauBordPf;
 	}
 
 

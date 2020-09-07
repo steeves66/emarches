@@ -1730,7 +1730,7 @@ public class DaoController {
 				   }
 			}
 		 
-		 //Liste des Dao affect�es aux charg�s d'etude
+		 //Liste des Dao affectés aux chargés d'etude
 		 public void chargeDaoChargeEtudeByType(String typePlan, String typeDac, String stat1,String stat2){
 			 daoExamen.clear();
 			  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
@@ -2222,7 +2222,7 @@ public class DaoController {
 		 					 userController.setSevrityMsg("success");
 		 					 //return	null;
 		 					 
-		 					 chargeData();
+		 				  chargeData();
 		 		          //Actualisation du Tableau de Bord
 		 		          typeActionTb();
 		 			
@@ -4011,7 +4011,7 @@ public class DaoController {
 									         }		
 									    }
 								  
-								//Examen des pi�ces du DAO par le Chargé d'Etudes du binôme
+								    //Examen des pièces du DAO par le Chargé d'Etudes du binôme
 									@Transactional
 								    public void examinerChar() {
 										  
@@ -4118,7 +4118,7 @@ public class DaoController {
 									  }
 
 									  
-								     ////Validation charg� d'Etudes
+								     ////Validation chargé d'Etudes
 									  @Transactional
 									  public void valider() throws IOException {
 								       	List<TDacSpecs> DA  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()));
@@ -4189,13 +4189,13 @@ public class DaoController {
 												                 iservice.updateObject(newDao); 
 										   	                        }
 
-													         constantService.getStatut("D4V");
-								 							  	//Historisation du / des retraits
-								 						       historiser("D4V",newDao.getDacCode(),"DAO Transmis par le responsable du binôme");
+												  constantService.getStatut("D4V");
+								 				  //Historisation du / des retraits
+								 				  historiser("D4V",newDao.getDacCode(),"DAO Transmis par le responsable du binôme");
 												  
 												  chargeData();
 												  
-												//Actualisation du tableau de bord
+												   //Actualisation du tableau de bord
 								 					typeActionTb();
 								 					//Message de confirmation
 								 					userController.setTexteMsg("Transmission effectuée avec succès!");

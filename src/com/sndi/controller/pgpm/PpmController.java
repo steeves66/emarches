@@ -856,12 +856,24 @@ public class PpmController {
 				
 				 if(controleController.type == "PPM") {
 						tableauBordController.chargeDataPpm("PN");
+						typeActionTb();
                 }else 
                      if(controleController.type == "PSPM"){
                     	 tableauBordController.chargeDataPpm("PS");
+                    	 typeActionTb();
                 }
-			
 		}
+		 
+		 //Chargement du Tableau de Bord des PPM/PSPM
+		 public void typeActionTb() {
+			 if(controleController.type == "PPM" && controleController.typePlan == "PN") {
+				 tableauBordController.ChargeTableauBordPpm("PN","PPM"); 
+			 }else {
+				 if(controleController.type == "PSPM" && controleController.typePlan == "PS") {
+					 tableauBordController.ChargeTableauBordPpm("PS","PPM");
+				 }
+			   }
+		 }
 	 
 	 
 	     //Methode de validation des PPM
