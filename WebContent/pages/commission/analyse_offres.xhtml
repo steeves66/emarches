@@ -442,15 +442,15 @@
                                             <p:cellEditor>
                                              <f:facet name="output">
                                              <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'O'?'OUI':'NON'}" />
+         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}" />
          				                        </h:panelGroup>
          				                         </f:facet>
          				                             <f:facet name="input">
          				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
 				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
-	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
-	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="CONFORME" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="NON CONFORME" />
 	                                                   </h:selectOneMenu>
 	                                                   </h:panelGroup>
          				                             </f:facet>
@@ -624,12 +624,12 @@
                           <p:cellEditor>
                           <f:facet name="output">
                           <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-         				  <h:outputText id="mandat1" styleClass="form-control text-center" value="#{slctdTb.aaoRegQual}" />
+         				  <h:outputText id="mandat1" styleClass="form-control text-center" value="#{slctdTb.aaoRegQualx =='CONFORMITE'?'CONFORME':'NON CONFORME'}" />
          				  </h:panelGroup>
          				  </f:facet>
          				  <f:facet name="input">
          				  <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQual}" style="width:100%; color:#0000">
+	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQualx}" style="width:100%; color:#0000">
 				              <f:selectItem itemLabel="Choisir" itemValue="" />
 	                         <f:selectItem itemLabel="CONFORME" itemValue="CONFORME" />
 	                         <f:selectItem itemLabel="NON CONFORME" itemValue="NON CONFORME" />

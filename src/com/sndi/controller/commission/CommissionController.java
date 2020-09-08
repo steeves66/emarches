@@ -674,6 +674,10 @@ public class CommissionController {
 				     avis.setTStatut(new TStatut(statutUpdate));
 				     iservice.updateObject(avis);
 				     chargeListe("ANA");
+				     
+				     userController.setTexteMsg(" Désolé, votre avis a été retourné pour réanalyse!");
+					 userController.setRenderMsg(true);
+					 userController.setSevrityMsg("success");
 			    }
 		 }
 		 
