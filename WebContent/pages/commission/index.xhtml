@@ -168,11 +168,7 @@
                             </p:commandLink>
                             
                             <!--DEBU  BOUTONS PV -->
-                             <p:commandLink rendered="#{controleController.btn_apercuOuv}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.editerPvAnalyse()}" ajax="false"
-				               title="Editer le procès verbal d'ouverture">
-                                <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white ;margin-left:3px"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
-                            </p:commandLink>
+                            
                             <!--FIN  BOUTONS PV -->
 				            <p:commandLink rendered="#{controleController.btn_apercuJug}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com9','RESJUG')}"
 				               title="Jugement des offres" update=":content">

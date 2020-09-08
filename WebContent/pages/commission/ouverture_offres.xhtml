@@ -62,7 +62,14 @@
                <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff; font-weight: bold; font-size:18px">DETAILS DE L'OFFRE</div></div> 
-			         <div class="col-md-2 "> </div>
+			       
+			         <div class="col-md-2">
+					  <p:commandLink oncomplete="PF('chargeDocDlg').show()" title="Joindre le PV d'analyse" action="#{commissionController.chargeNatureDocTrans()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e">
+					  <span class="btn-label"><i class="fa fa-download"></i></span><span class="hidden-xs">Joindre le PV d'ouverture</span>
+					  </p:commandLink>
+				   </div>
+			         
+			         
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
@@ -397,7 +404,9 @@
       <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISOUV')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
-		
+		<p:commandLink title="Editer le PV d'ouverture" styleClass="btn btn-warning row pull-right"  action="#{commissionController.editerPvAnalyse()}" style="background-color: #f88b2e; margin-right:5px;color:#fff" ajax="false">
+			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PV d'ouverture
+	          </p:commandLink>
     </section>
     </h:form>
     
@@ -533,7 +542,7 @@
       </p:dialog>
     </h:form>
      
-    
+    <ui:include src="inclusions/joindreDocument.xhtml"  />
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
         <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
