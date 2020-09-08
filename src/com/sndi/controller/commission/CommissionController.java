@@ -1807,7 +1807,6 @@ public class CommissionController {
 				
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succès!", "");
 				FacesContext.getCurrentInstance().addMessage(null, msg);
-			   chargeDossier();
 				}else {
 					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à  nouveau un document ! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);	
@@ -1879,6 +1878,7 @@ public class CommissionController {
 					factoriseLot();
 					chargeLots();
 					chargeLotByAvis();
+					chargeDossierRapport();
 					//chargeOffres();
 					//chargeOffre();
 					break;
@@ -1894,6 +1894,7 @@ public class CommissionController {
 					chargeOffres();
 					chargePieces();
 					chargeCandidats();
+					chargeDossierRapport();
 					//chargeLotsCandidat();
 					break;
 				case "com7":
@@ -1906,6 +1907,7 @@ public class CommissionController {
 				
 				case "com9":
 					chargeLotByAvis();
+					chargeDossierRapport();
 					/*verifCor();
 					offreBasse();
 					offreEleve();
