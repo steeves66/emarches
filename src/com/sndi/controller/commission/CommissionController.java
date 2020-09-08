@@ -38,6 +38,7 @@ import com.sndi.model.TDetCritAnalyseDac;
 import com.sndi.model.TDetOffres;
 import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailVente;
+import com.sndi.model.TDossierAao;
 import com.sndi.model.TDossierMbr;
 import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
@@ -168,6 +169,8 @@ public class CommissionController {
 	 private List<TDetCommissionSeance> listMbrSup = new ArrayList<TDetCommissionSeance>();
 	 private List<VDetCommissionSeance> listeCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<VDetCommissionSeance> selectionMembresCommite = new ArrayList<VDetCommissionSeance>(); 
+	 private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
+	 private List<TNatureDocuments> natureDocListeRapport = new ArrayList<TNatureDocuments>();
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
@@ -179,6 +182,7 @@ public class CommissionController {
 	 private List<VLotAnalyseFin> listeSoumissionByLot = new ArrayList<VLotAnalyseFin>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
+	 private List<TDossierAao> dossListeRapport = new ArrayList<TDossierAao>();
 	 private List<VDofTyp> listdoftyp = new ArrayList<VDofTyp>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
 	 //private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
@@ -219,6 +223,7 @@ public class CommissionController {
 	private TAvisAppelOffre sltAvis =new TAvisAppelOffre();
 	private TDetCommissionSeance detCom = new TDetCommissionSeance();
 	 private TDossierMbr selectedDossier = new TDossierMbr();
+	 private TDossierAao selectedDossierAao = new TDossierAao();
 	
 	//Resutat analyse
 	 private List<VVerifcorOffin> listeVerifCor = new ArrayList<VVerifcorOffin>();
@@ -315,6 +320,8 @@ public class CommissionController {
 	 private Date dateSeance;
 	 private String heureDeb;
 	 private String heureFin;
+	 private String docNature ="";
+	 //private short nadCode;
 	 //private long rabais
 	 
 	 
@@ -1119,6 +1126,28 @@ public class CommissionController {
 			 }
 		 }
 		 
+		  //Appel de la methode de retour de nature document en lui passant en parametre le type dac
+		  public void chargeNatureDocTrans() {
+			  if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
+				  natureDoc("OUV");
+				 }else {
+					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+						 natureDoc("ANA");
+					 }else {
+						 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+							 natureDoc("JUG");
+						 }
+				     } 
+				  }	
+			}
+		     
+		  //Methode pour Retourner la liste des natures de documents en fonction du type DAC passï¿½ en parametre
+		  public void natureDoc(String typeNat) {
+			  natureDocListeRapport.clear();
+			  natureDocListeRapport = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadCode")),
+					    new WhereClause("NAD_TYPE",Comparateur.EQ,""+typeNat)));
+			 }
+		 
 		
 		
 		//Methode Upload
@@ -1175,9 +1204,26 @@ public class CommissionController {
 						 new WhereClause("DMB_DCS_NUM",Comparateur.EQ,""+detCom.getDcsNum())));
 		    }
 		 
+		 
+		 public void chargeDossierRapport() {
+			 dossListeRapport.clear();
+			 dossListeRapport = ((List<TDossierAao>)iservice.getObjectsByColumnDesc("TDossierAao",new ArrayList<String>(Arrays.asList("DAA_ID")),
+						 new WhereClause("DAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode())));
+		    }
+		 
 		 public void openDossier() throws IOException{
        		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDmbNom(), selectedDossier.getDmbNom());
        		   }
+		 
+		  //Supprimer un dao joint
+		    public void removeDossierRapport(){
+			downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossierAao.getDaaReference(), selectedDossierAao.getDaaReference());
+				 iservice.deleteObject(selectedDossierAao);
+				 chargeDossierRapport();	
+				 
+			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossierAao.getDaaReference()+" supprimé!", "");
+				FacesContext.getCurrentInstance().addMessage(null, msg);	
+			}
 		 //private TFonction recupFonction= new TFonction();
 		/* public void onSelectCandidat() {
 				
@@ -1530,7 +1576,7 @@ public class CommissionController {
 					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
 				}
 		 		else{*/
-			 		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
+			 /*		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
 			 			List<TPiecesOffres> LS  = iservice.getObjectsByColumn("TPiecesOffres",  new WhereClause("POF_NUM",Comparateur.EQ,""+ligne.getPofNum()));
 			 			TPiecesOffres updatePieceOffre = new TPiecesOffres();
 						if(!LS.isEmpty()) {
@@ -1540,7 +1586,7 @@ public class CommissionController {
 			 			updatePieceOffre.setPofObs(ligne.getPofObs());
 			 			iservice.updateObject(updatePieceOffre);
 				     }	
-			 		}
+			 		}*/
 		         //}
 				
 				//EVALUTATION
@@ -1726,6 +1772,50 @@ public class CommissionController {
 			 montRab =0; 
 			 banCode = "";
 		 }
+		 
+		 @Transactional
+			public void uploadRapport(FileUploadEvent event) throws java.io.FileNotFoundException { 
+		
+			
+			if(fileUploadController.handleFileUpload(event, ""+slctdTd.getAaoCode(), docNature)) {
+				
+				if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")){
+					docNature = "8";
+					}else
+						if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+							docNature = "10";
+						}else
+							if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+								docNature = "11";
+							}
+				int nat = Integer.valueOf(docNature);
+				//check le dossier s'il existe Ã  faire
+				TDossierAao dos =new TDossierAao(); //TDossiersDacs
+				//dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
+				dos.setDaaAaoCode(slctdTd.getAaoCode());
+				List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+				TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+				if(!LS.isEmpty()) natureDoc = LS.get(0);
+				dos.setTNatureDocuments(natureDoc);
+				dos.setDaaNom(fileUploadController.getFileName());
+				dos.setDaaDteSaisi(Calendar.getInstance().getTime());
+				dos.setDaaReference(fileUploadController.getDocNom());
+				iservice.addObject(dos);
+				
+				//chargeNatureDocTrans();
+				chargeDossierRapport();
+				
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succès!", "");
+				FacesContext.getCurrentInstance().addMessage(null, msg);
+			   chargeDossier();
+				}else {
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à  nouveau un document ! ","");
+					FacesContext.getCurrentInstance().addMessage(null, msg);	
+					
+				}
+			  
+			}
+	       //Fin Upload
 		 
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);
@@ -3084,6 +3174,47 @@ public class CommissionController {
 	public void setListeLotsActiveBtnAna(List<VLotAnalyse> listeLotsActiveBtnAna) {
 		this.listeLotsActiveBtnAna = listeLotsActiveBtnAna;
 	}
+
+	public String getDocNature() {
+		return docNature;
+	}
+
+	public void setDocNature(String docNature) {
+		this.docNature = docNature;
+	}
+
+	public List<TDossierAao> getDossListeRapport() {
+		return dossListeRapport;
+	}
+
+	public void setDossListeRapport(List<TDossierAao> dossListeRapport) {
+		this.dossListeRapport = dossListeRapport;
+	}
+
+	public List<TNatureDocuments> getNatureDocListe() {
+		return natureDocListe;
+	}
+
+	public void setNatureDocListe(List<TNatureDocuments> natureDocListe) {
+		this.natureDocListe = natureDocListe;
+	}
+
+	public List<TNatureDocuments> getNatureDocListeRapport() {
+		return natureDocListeRapport;
+	}
+
+	public void setNatureDocListeRapport(List<TNatureDocuments> natureDocListeRapport) {
+		this.natureDocListeRapport = natureDocListeRapport;
+	}
+
+	public TDossierAao getSelectedDossierAao() {
+		return selectedDossierAao;
+	}
+
+	public void setSelectedDossierAao(TDossierAao selectedDossierAao) {
+		this.selectedDossierAao = selectedDossierAao;
+	}
+
 
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {

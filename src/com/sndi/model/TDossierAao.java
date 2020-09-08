@@ -61,7 +61,7 @@ public class TDossierAao implements java.io.Serializable {
 		this.daaId = daaId;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DAA_NAD_CODE")
 	public TNatureDocuments getTNatureDocuments() {
 		return this.TNatureDocuments;

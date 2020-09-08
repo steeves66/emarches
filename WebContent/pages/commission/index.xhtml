@@ -132,8 +132,8 @@
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
                              </p:commandLink>
-                              <p:commandLink rendered="#{controleController.btn_apercuAna}" action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('chargeDocDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
-				               title="Télécharger le DAO type">
+                              <p:commandLink action="#{commissionController.chargeNatureDocTrans()}" oncomplete="PF('chargeDocDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				               title="joindre le rapport d'analyse">
                                 <i class="ace-icon fa fa-download bigger-120"  style="color: white"></i> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                      
                             </p:commandLink>
@@ -291,34 +291,9 @@
 	         <div class="row">
                    <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
              </div>
-				<div class="col-md-12">
-		            <div class="box box-warning box-solid" >
-		              <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-12 "><div  style="color: #fff"> JOINDRE LES DOSSIER DE L'AVIS : <strong>#{commissionController.slctdTd.aaoLibelle}</strong></div></div>
-			         </div>
-			          <div class="box-body">
-				  
-		             
-		            
-            
-			          </div>
-		            </div>
-	            </div>
-	            
 	            <div class="col-md-12">
-	           
-	            <div class="col-xs-6 col-sm-4"><label class="control-label" style="margin-top:20px"><b>Nature du document</b></label></div>
-								<div class="col-xs-6 col-sm-8">
-								<p:selectOneMenu  value="#{daoController.docNature}" style="width:100%; margin-top:20px;">
-							        <f:selectItem  itemLabel="Selectionnez la nature du document..." itemValue=""/>  
-								    <f:selectItems value="#{daoController.natureDocListe}" var="v" itemLabel="#{v.nadLibelle}" itemValue="#{v.nadCode}"/> 
-								    <p:ajax process="@this" update="@this"></p:ajax>
-				       			    </p:selectOneMenu>
-								</div>
-				</div>
-	            <div class="col-md-12">
-	              <p:fileUpload fileUploadListener="#{daoController.upload}" multiple="true"
-			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
+	              <p:fileUpload fileUploadListener="#{commissionController.uploadRapport}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le document" auto="true"
 			                      mode="advanced" dragDropSupport="true"
 			                          update=":chargeDocDlg:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
 	            </div>
@@ -326,13 +301,13 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff"> LISTE DES #{controleController.type}</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff"> DOSSIERS DE L'AVIS : <strong>#{commissionController.slctdTd.aaoLibelle}</strong></div></div>
 			         </div>
 			          <div class="box-body">
 			          
-                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{daoController.dossListe}" emptyMessage="Aucun Document enrégistré">
+                        <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="doss" value="#{commissionController.dossListeRapport}" emptyMessage="Aucun Document enrégistré">
 			           <p:column headerText="Nom du document " styleClass="col-md-10">
-			            <h:outputText value="#{doss.ddaNom}" />
+			            <h:outputText value="#{doss.daaReference}" />
 			        </p:column>
 			        <p:column headerText="Nature Document" styleClass="col-md-10">
 			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}"/>
@@ -340,10 +315,10 @@
 			        
 			        <p:column headerText="Actions" styleClass="col-md-2">
 			        
-						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeDossier}" title="Supprimer" update="apercuDAO:tabDossier">
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{commissionController.removeDossierRapport()}" title="Supprimer" update="chargeDocDlg:tabDossier">
 		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
-		                   <f:setPropertyActionListener value="#{doss}" target="#{daoController.selectedDossier}" />
+		                   <f:setPropertyActionListener value="#{doss}" target="#{commissionController.selectedDossierAao}" />
 		                </p:commandLink>
 		 	        </p:column>
 			    </p:dataTable>  
@@ -353,7 +328,7 @@
 	            
 	            
 	             <div class="pull-right ">
-			            <p:commandLink action="#{daoController.transmettre()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update="gnl">
+			            <p:commandLink rendered="false" action="#{daoController.transmettre()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update="gnl">
 			            <p:confirm header="Confirmation" message="Confirmez vous la trasmission ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-exchange"></i> Transmettre  
 			            </p:commandLink>
