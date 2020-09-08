@@ -153,7 +153,7 @@
                             </p:commandLink>
                             
                              <p:commandLink rendered="#{controleController.btn_apercuAna}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com8','LISCOM')}"
-				               title="Commité d'évaluation" update=":content">
+				               title="Comité d'évaluation" update=":content">
                                 <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                           
                             </p:commandLink>
@@ -237,7 +237,7 @@
 	                  
 	                    <label class="col-sm-2 control-label"><b>Heure d'ouverture</b></label>
 	                  <div class="col-sm-4">
-	                      <p:inputText type="text" value="#{commissionController.slctdTd.aaoHeurFinOuv}" styleClass="form-control" style="width: 100%" />
+	                      <p:inputMask mask=" 99:99 " value="#{commissionController.slctdTd.aaoHeurFinOuv}" styleClass="form-control" style="width: 100%" />
 	                  </div>        
 	                </div> 
 				         
