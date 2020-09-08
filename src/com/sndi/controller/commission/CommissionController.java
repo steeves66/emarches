@@ -175,6 +175,7 @@ public class CommissionController {
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
 	 private List<VLotAnalyse> listeLotsByAvis = new ArrayList<VLotAnalyse>();
+	 private List<VLotAnalyse> listeLotsActiveBtnAna = new ArrayList<VLotAnalyse>();
 	 private List<VLotAnalyseFin> listeSoumissionByLot = new ArrayList<VLotAnalyseFin>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
@@ -743,7 +744,24 @@ public class CommissionController {
 					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 			_logger.info("listeLotsByAvis size: "+listeLotsByAvis.size());
 			laaNumRepech = 0;
+			activeBntEditAnalyse();
 		 }
+		 
+		//Control d'activation du bouton d'édition
+		 public void activeBntEditAnalyse() {
+			 listeLotsActiveBtnAna.clear();
+			 listeLotsActiveBtnAna=(List<VLotAnalyse>) iservice.getObjectsByColumn("VLotAnalyse",
+					new WhereClause("LOT_STATUT",WhereClause.Comparateur.EQ,"1"),
+					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+			_logger.info("Nbre lot saisie: "+listeLotsActiveBtnAna.size());
+			
+			if(listeLotsActiveBtnAna.size()==0) {
+				editerAna = false;
+			}else
+			{
+				editerAna = true;	
+			}
+		   }
 		 
 		 public void chargeSoumissionByLot() {
 			 listeSouOffEleve.clear();
@@ -1545,7 +1563,7 @@ public class CommissionController {
 			 		}
 		         //}
 				chargeLotByAvis();
-				editerAna = true;
+				//editerAna = true;
 				listeSelectionPiecesOffresAnalyse.clear();
 				selectionCritereAnalyse.clear();
 				userController.setTexteMsg("Analyse effectuée avec succès !");
@@ -1554,6 +1572,8 @@ public class CommissionController {
 			//}
 			onSelectLot();
 		}
+		
+		
 		
 		//Ajouter attributaire
 		public void ajouterAttributaire() {
@@ -3051,6 +3071,14 @@ public class CommissionController {
 
 	public void setLotFin(VLotAnalyseFin lotFin) {
 		this.lotFin = lotFin;
+	}
+
+	public List<VLotAnalyse> getListeLotsActiveBtnAna() {
+		return listeLotsActiveBtnAna;
+	}
+
+	public void setListeLotsActiveBtnAna(List<VLotAnalyse> listeLotsActiveBtnAna) {
+		this.listeLotsActiveBtnAna = listeLotsActiveBtnAna;
 	}
 
 
