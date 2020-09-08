@@ -132,10 +132,10 @@
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
                              </p:commandLink>
-                              <p:commandLink rendered="#{controleController.btn_apercuAna}" action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('transDaoDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
-				               title="Télécharger le DAO type" ajax="false">
+                              <p:commandLink rendered="#{controleController.btn_apercuAna}" action="#{daoController.chargeNatureDocTrans()}" oncomplete="PF('chargeDocDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" 
+				               title="Télécharger le DAO type">
                                 <i class="ace-icon fa fa-download bigger-120"  style="color: white"></i> 
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                      
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                      
                             </p:commandLink>
                               <p:commandLink rendered="#{controleController.btn_apercuJug}" action="#{etatsCommissionController.renderPage('detc1','DETJUG')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
@@ -294,43 +294,19 @@
 				<div class="col-md-12">
 		            <div class="box box-warning box-solid" >
 		              <div class="box-header" style="background-color: #f88b2e">
-			          <div class="col-md-12 "><div  style="color: #fff"> JOINDRE LES DOSSIER DU #{controleController.type} N°#{daoController.slctdTd.dacCode}</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff"> JOINDRE LES DOSSIER DE L'AVIS : <strong>#{commissionController.slctdTd.aaoLibelle}</strong></div></div>
 			         </div>
 			          <div class="box-body">
-				      <div class="row">
-		                  <div class="col-sm-3"><label class="pull-right">Type de Marché</label></div>
-			                  <div class="col-sm-9">
-			                   <label><h:outputText value="#{daoController.slctdTd.tymCode} : #{daoController.slctdTd.tymLibelleCourt}" styleClass="text-muted" style="width: 100%"/></label> 
-		                  </div>
-		             </div>
+				  
 		             
-		              <div class="row">
-		                  <div class="col-sm-3"><label class="pull-right">Mode de Passation</label></div>
-			                  <div class="col-sm-9">
-			                   <label><h:outputText value="#{daoController.slctdTd.mopCode} : #{daoController.slctdTd.mopLibelleCourt}" styleClass="text-muted" style="width: 100%"/></label> 
-		                  </div>
-		             </div>
-                
-                 <div class="row">
-		                  <div class="col-sm-3"><label class="pull-right">Objet</label></div>
-			                  <div class="col-sm-9">
-			                   <label><h:outputText value="#{daoController.slctdTd.dacObjet}" styleClass="text-muted" style="width: 100%"/></label> 
-		                  </div>
-		             </div>
+		            
+            
 			          </div>
 		            </div>
 	            </div>
 	            
 	            <div class="col-md-12">
-	             <div class="form-group ">
-	                <label for="mention" class="col-xs-6 col-sm-4 control-label"><b>Mention<span style="color:red;"> *</span></b></label>
-	                 <div class="col-xs-6 col-sm-8">
-                     <p:selectOneRadio required="true" requiredMessage="Veuillez indiquer la mention" id="mention" value="#{daoController.slctdTd.dacMention}">
-						<f:selectItem itemLabel="Validé pour publication" itemValue="Validé pour publication" />
-						<f:selectItem itemLabel="Validé et retour à l'AC" itemValue="Validé et retour à l'AC" />
-					 </p:selectOneRadio>
-                  </div>
-	                </div>
+	           
 	            <div class="col-xs-6 col-sm-4"><label class="control-label" style="margin-top:20px"><b>Nature du document</b></label></div>
 								<div class="col-xs-6 col-sm-8">
 								<p:selectOneMenu  value="#{daoController.docNature}" style="width:100%; margin-top:20px;">
@@ -344,7 +320,7 @@
 	              <p:fileUpload fileUploadListener="#{daoController.upload}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
 			                      mode="advanced" dragDropSupport="true"
-			                          update=":apercuDAO:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+			                          update=":chargeDocDlg:tabDossier" sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
 	            </div>
 	            
 	            <div class="col-md-12">
