@@ -1683,23 +1683,31 @@ public class CommissionController {
 		 public void editerFicheCommission() {
 							
 		}
+	
 		 
-		 //Edition de la fiche de l'Offre
-		 public void editerFicheOffre() {
-			 projetReport.longparam1(sltOffre.getDofNum().longValue(), "Rapport_ana", "Rapport_ana");
+		//Edition des PV d'ouverture,jugement et rapport d'analyse
+		 public void editerPv() {
+			 String jrmx="";
+			 String jasper="";
+			 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")){
+				 jrmx="page_garde_ouv";
+				 jasper="page_garde_ouv"; 
+			 }else
+				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+					 jrmx="rapport_analyse";
+					 jasper="rapport_analyse";  
+				 }else
+					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+						 jrmx="PV_jugement";
+						 jasper="PV_jugement";  
+					 }
+			 
+			 projetReport.stringparam1(""+slctdTd.getAaoCode(), ""+jrmx, ""+jasper);
+			 _logger.info("aaoCode : "  +""+slctdTd.getAaoCode()); 
 		 }
 		 
-		 //Edition du Rapport Analyse 1
-		 public void editerPvAnalyse() {
-			 projetReport.stringparam1(""+slctdTd.getAaoCode(), "page_garde_ouv", "page_garde_ouv");
-			 _logger.info("code avis : "  +""+slctdTd.getAaoCode());
-		 }
+
 		 
-		//Edition du Rapport d'analyse
-		 public void editerRpAnalyse() {
-			 projetReport.stringparam1(""+slctdTd.getAaoCode(), "rapport_analyse", "rapport_analyse");
-			 _logger.info("aaoCode : "  +""+slctdTd.getAaoCode());
-		 }
 		 
 		 
 		 //Factorisation des Lots
@@ -1875,7 +1883,6 @@ public class CommissionController {
 					factoriseLot();
 					chargeLots();
 					chargeLotByAvis();
-					chargeDossierRapport();
 					//chargeOffres();
 					//chargeOffre();
 					break;
@@ -1891,7 +1898,6 @@ public class CommissionController {
 					chargeOffres();
 					chargePieces();
 					chargeCandidats();
-					chargeDossierRapport();
 					//chargeLotsCandidat();
 					break;
 				case "com7":
@@ -1904,7 +1910,6 @@ public class CommissionController {
 				
 				case "com9":
 					chargeLotByAvis();
-					chargeDossierRapport();
 					/*verifCor();
 					offreBasse();
 					offreEleve();
