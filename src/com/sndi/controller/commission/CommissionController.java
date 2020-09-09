@@ -1460,24 +1460,21 @@ public class CommissionController {
 			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
 				statUpdate = "OUV";
 				message="Fin de l'ouverture des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
-				//chargeListe("OUV");
-				
 			 }else {
 				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
 						statUpdate = "ANA";
-						//chargeListe("ANA");
 						message="Fin de l'analyse des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 				 }else {
 					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
 						 statUpdate = "JUG";
-						 //chargeListe("JUG");
 						 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 					 }else {	 
 					}	 
 				 }
 			 }
 			
-			slctdTd.setTStatut(new TStatut(statUpdate));	
+			slctdTd.setTStatut(new TStatut(statUpdate));
+			slctdTd.setAvisRetour("0");
 			iservice.updateObject(slctdTd);
 			chargementListe();
 			userController.setTexteMsg(message);
