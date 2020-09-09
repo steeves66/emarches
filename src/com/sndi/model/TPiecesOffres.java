@@ -125,7 +125,7 @@ public class TPiecesOffres implements java.io.Serializable {
 		this.TDetOffres = TDetOffres;
 	}
 
-	@Column(name = "POF_PRESENT", length = 1)
+	@Column(name = "POF_PRESENT")
 	public String getPofPresent() {
 		return this.pofPresent;
 	}
@@ -134,7 +134,7 @@ public class TPiecesOffres implements java.io.Serializable {
 		this.pofPresent = pofPresent;
 	}
 
-	@Column(name = "POF_CONFORME", length = 1)
+	@Column(name = "POF_CONFORME")
 	public String getPofConforme() {
 		return this.pofConforme;
 	}
