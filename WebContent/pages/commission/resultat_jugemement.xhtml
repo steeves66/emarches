@@ -287,9 +287,9 @@
             
             <!-- /.box-body -->
           </div>
-           <p:commandLink action="#{commissionController.validerJugement()}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
-				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer
-				      </p:commandLink>
+            <p:commandLink  styleClass="btn btn-warning row pull-right" action="#{commissionController.editerPvJugement()}" style="background-color: #f88b2e; margin-right:5px;color:#fff" ajax="false"  update=":content">
+			             <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PV de jugement
+	          </p:commandLink>
 				      
       <p:commandLink styleClass="btn btn-warning" action="#{commissionController.renderPage('com1','LISJUG')}" style="background-color: #f88b2e;" update=":content">
            <i class="ace-icon fa fa-close bigger-130"></i> Fermer
