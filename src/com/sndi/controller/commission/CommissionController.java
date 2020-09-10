@@ -261,6 +261,7 @@ public class CommissionController {
 	 private VDetOffreAnalyse sltOffre = new VDetOffreAnalyse();
 	 private TSoumissions soumission = new TSoumissions();
 	 private VLotAnalyse lot = new VLotAnalyse();
+	 private VLotAnalyseFin lots = new VLotAnalyseFin();
 	 private VLotAnalyseFin lotFin = new VLotAnalyseFin();
 	 private VLot sltLot = new VLot();
 	 private TDetailVente vente = new TDetailVente();
@@ -3266,6 +3267,14 @@ public class CommissionController {
 
 	public void setListeMembreCojo(List<VDetCommissionSeance> listeMembreCojo) {
 		this.listeMembreCojo = listeMembreCojo;
+	}
+
+	public VLotAnalyseFin getLots() {
+		return lots;
+	}
+
+	public void setLots(VLotAnalyseFin lots) {
+		this.lots = lots;
 	}
 
 
