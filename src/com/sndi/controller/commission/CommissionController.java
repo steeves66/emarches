@@ -1067,17 +1067,17 @@ public class CommissionController {
 					
 				}else
 					if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
-						saveMembre("CEV");
+						saveMembre("CEV","EVA");
 						chargeMembre();
 					}
 					else
 						if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
-							saveMembre("JUG");  
+							saveMembre("JUG","JUG");  
 							chargeMembreCojo();
 						}
 				
 			    }
-		public void saveMembre(String typeComm) {
+		public void saveMembre(String typeComm, String typeSeance) {
 			 if (selectionMembresCommite.size()==0) {
 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1099,7 +1099,7 @@ public class CommissionController {
 						membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
 						membre.setDcsDacCode(slctdTd.getTDacSpecs().getDacCode());
 						membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
-						membre.setDcsSeaTseNum("EVA"); 
+						membre.setDcsSeaTseNum(""+typeSeance); 
 						membre.setDcsDteSea(dateSeance);
 						membre.setDcsHeureDeb(heureDeb);
 						membre.setDcsHeureFin(heureFin);
