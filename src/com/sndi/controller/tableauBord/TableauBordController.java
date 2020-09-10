@@ -3,6 +3,7 @@ package com.sndi.controller.tableauBord;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 import com.sndi.controller.custom.ControleController;
 import com.sndi.dao.WhereClause;
 import com.sndi.model.TOffrePieceDac;
+import com.sndi.model.TOperateur;
+import com.sndi.model.TTempParam;
 import com.sndi.model.VAgpmliste;
 import com.sndi.model.VDacliste;
 import com.sndi.model.VPgpm;
@@ -22,6 +25,7 @@ import com.sndi.model.VTabBord;
 import com.sndi.model.VTabBordAc;
 import com.sndi.model.VTabBordDmp;
 import com.sndi.model.VTabBordPf;
+import com.sndi.model.VbTempParamTabBord;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -446,7 +450,39 @@ public class TableauBordController {
 		private VTabBordAc tableauBord = new VTabBordAc();
 		private VTabBordPf tableauBordPf = new VTabBordPf();
 		private VTabBordDmp tableauBordDmp = new VTabBordDmp();
+		 //TABLEAU DE BORD
+		private VbTempParamTabBord tempBord = new VbTempParamTabBord();
+		
+		
+		
+		 //Création du Tableau de Bord 
+		 public void saveTempTabord(String statut, String ope, String acteur, String plan, String matricule, String dacCode) {
+			 VbTempParamTabBord tempTabBord = new VbTempParamTabBord();
+			    if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+			    	tempTabBord.setTabFonCodeAc(acteur);
+			    }else 
+			        {
+			    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+			    		  tempTabBord.setTabFonCodePf(acteur);
+			    	  }else {
+			    		      if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") || userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")
+			    		    		|| userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")  ) {
+			    		    	  tempTabBord.setTabCh1(acteur);
+			    		      }
+			    	      }
+			    }
+			    tempTabBord.setTempType("TAB");
+			    tempTabBord.setTabOpeStaCode(statut);
+			    tempTabBord.setTabTypOpe(ope);
+			    tempTabBord.setTabTypeProc(plan);
+			    tempTabBord.setTabOpeMatricule(matricule);
+			    tempTabBord.setTabDateSaisi(Calendar.getInstance().getTime());
+			    tempTabBord.setTabCodeOperation(dacCode);
+                iservice.addObject(tempTabBord);
+		 }
+		 
 
+		
 		//TABLEAU DE BORD AGPM
 		public void ChargeTbAgpm() {
 			//AC
@@ -6082,5 +6118,11 @@ public int getAmiTransmisDmpDossier(String src){
 		this.tableauBordPf = tableauBordPf;
 	}
 
+	public VbTempParamTabBord getTempBord() {
+		return tempBord;
+	}
 
+	public void setTempBord(VbTempParamTabBord tempBord) {
+		this.tempBord = tempBord;
+	}
 }
