@@ -2252,9 +2252,7 @@ public class DaoController {
 								    new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
 								    new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ"),
 								    new WhereClause("TCT_GRP_CODE",Comparateur.EQ,"MBR")));
-								_logger.info("membre size: "+membresCommission.size());	
-								
-								
+								_logger.info("membre size: "+membresCommission.size());			
 					 }
 					 
 
@@ -2263,9 +2261,7 @@ public class DaoController {
 							 listeExpert.clear();
 							 selectionlisteExpert.clear();
 							 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE"))));
-									_logger.info("expert size: "+listeExpert.size());	
-									
-									
+									_logger.info("expert size: "+listeExpert.size());			
 						 }
 						 
 						//Liste des membres de la commssions de la commssion speciale dans la love

@@ -856,11 +856,11 @@ public class PpmController {
 				
 				 if(controleController.type == "PPM") {
 						tableauBordController.chargeDataPpm("PN");
-						typeActionTb();
+						//typeActionTb();
                 }else 
                      if(controleController.type == "PSPM"){
                     	 tableauBordController.chargeDataPpm("PS");
-                    	 typeActionTb();
+                    	 //typeActionTb();
                 }
 		}
 		 

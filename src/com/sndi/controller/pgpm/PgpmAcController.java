@@ -359,7 +359,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				_logger.info("objetListe size: "+objetList.size());	
 				//tableauBordController.ChargeTbProcedure("PN","PGPM");
 				tableauBordController.chargeDataPgpm();
-				typeActionTb();
+				//typeActionTb();
 				nbrePgpm =""+getNbrePgpmTotal("S1S");
 		}
 		 
@@ -388,7 +388,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				_logger.info("listPgspm size: "+listPgspm.size());	
 				//tableauBordController.ChargeTbProcedure("PS","PGPM");
 				tableauBordController.chargeDataPgspm();
-				typeActionTb();
+				//typeActionTb();
 				nbrePgspm =""+getNbrePgspmTotal();
 		}
 		 
@@ -483,7 +483,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"));
 						 //tableauBordController.ChargeTbProcedure("PN","PGPM");
 						 tableauBordController.chargeDataPgpm();
-						 typeActionTb();
+						 //typeActionTb();
 								_logger.info("publicationListe size: "+publicationListe.size());	
 					 }else
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -493,7 +493,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							        new WhereClause("GPG_STA_CODE",WhereClause.Comparateur.EQ,"S3V"));
 						 //tableauBordController.ChargeTbProcedure("PN","PGPM");
 						 tableauBordController.chargeDataPgpm();
-						 typeActionTb();
+						 //typeActionTb();
 							_logger.info("publicationListe size: "+publicationListe.size());	
 				 }   
 			   
@@ -513,7 +513,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 pgpmPub = (List<VPgpmPub>) iservice.getObjectsByColumnDesc("VPgpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
 						 //tableauBordController.ChargeTbProcedure("PN","PGPM");
 						 tableauBordController.chargeDataPgpm();
-						 typeActionTb();
+						 //typeActionTb();
 						 _logger.info("pgpmPub size: "+pgpmPub.size());
 					 }else
 						  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -521,7 +521,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								 pgpmPub = (List<VPgpmPub>) iservice.getObjectsByColumnDesc("VPgpmPub", new ArrayList<String>(Arrays.asList("NUMERO")));
 								 //tableauBordController.ChargeTbProcedure("PN","PGPM");
 								 tableauBordController.chargeDataPgpm();
-								 typeActionTb();
+								 //typeActionTb();
 								_logger.info("pgpmPub size: "+pgpmPub.size());
 				     }
 			     } 
@@ -646,7 +646,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
 					 //tableauBordController.ChargeTbProcedure("PS","PGPM");
 					 tableauBordController.chargeDataPgspm();
-					 typeActionTb();
+					 //typeActionTb();
 					_logger.info("validationListePgspm size: "+validationListePgspm.size());		 
 				 }else {
 					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
@@ -657,7 +657,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 						     //tableauBordController.ChargeTbProcedure("PS","PGPM");
 						   tableauBordController.chargeDataPgspm();
-						   typeActionTb();
+						   //typeActionTb();
 								_logger.info("validationListePgspm size: "+validationListePgspm.size());	
 					 }else
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -668,7 +668,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 									//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 							 //tableauBordController.ChargeTbProcedure("PS","PGPM");
 							 tableauBordController.chargeDataPgspm();
-							 typeActionTb();
+							 //typeActionTb();
 									_logger.info("validationListePgspm size: "+validationListePgspm.size());	
 				 }
 					 
@@ -708,7 +708,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 										        //new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 												new WhereClause("GPG_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"));
 										tableauBordController.chargeDataPgpm();
-										typeActionTb();
+										//typeActionTb();
 										_logger.info("affichageListe size: "+validationListe.size());
 						    	  }else 
 							    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
@@ -1765,7 +1765,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			      			historiser(""+statutTrans,demDetail,"Opération Transmise à la CPMP");
 			 		   }
 		 		      tableauBordController.ChargeTbProcedure("PN", "PGPM");
-		 		     typeActionTb();
+		 		     //typeActionTb();
 				     }
         	
 	 		        chargeData(); 	
@@ -2527,7 +2527,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					     chargePgpmDifDmp();
 			 			 //Chargement du Tableau de Bord
 					     tableauBordController.chargeDataPgpm(); 	
-					     typeActionTb();
+					     //typeActionTb();
 						
 					      userController.setTexteMsg(" Désolé, votre PGPM a été rejeté!");
 						  userController.setRenderMsg(true);
@@ -2584,7 +2584,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				     chargePgpmDifDmp();
 				     //Chargement du Tableau de Bord
 				     tableauBordController.chargeDataPgpm(); 
-				     typeActionTb();
+				     //typeActionTb();
 				     //Message de confirmation
 				      userController.setTexteMsg("Désolé, votre PGPM a été rejeté!");
 					  userController.setRenderMsg(true);
@@ -2658,7 +2658,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 			 chargeDataAvaliderPgspm();
 		 			 //Chargement du Tableau de Bord
 		 			 tableauBordController.chargeDataPgspm();
-		 			 typeActionTb();
+		 			 //typeActionTb();
 					 //Message de Confirmation
 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre opération a été retournée!", "");
 				     FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -2715,7 +2715,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 chargePgspmDifDmp();
 				     //Chargement du Tableau de Bord
 					 tableauBordController.chargeDataPgspm();
-					 typeActionTb();
+					 //typeActionTb();
 					 //Message de Confirmation
 					 userController.setTexteMsg("Désolé, votre PGSPM a été rejeté!");
 					 userController.setRenderMsg(true);
