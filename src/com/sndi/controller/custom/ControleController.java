@@ -6462,7 +6462,11 @@ public class ControleController {
 									    			if(action.equalsIgnoreCase("LISCOM")) {
 										    			type = "Commission";
 										    			libelle="SAISIE DU COMITE D'EVALUATION";
-										    		}
+										    		}else
+										    			if(action.equalsIgnoreCase("MBRJUG")) {
+											    			type = "Commission";
+											    			libelle="SAISIE DES MEMBRES DE LA COJO";
+											    		}
 								    			else
 								    			//ANALYSE DES OFFRES
 								    			if(action.equalsIgnoreCase("LISANA")) {

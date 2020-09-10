@@ -168,6 +168,7 @@ public class CommissionController {
 	 private List<VDetCommissionSeance> membresCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<TDetCommissionSeance> listMbrSup = new ArrayList<TDetCommissionSeance>();
 	 private List<VDetCommissionSeance> listeCommite = new ArrayList<VDetCommissionSeance>(); 
+	 private List<VDetCommissionSeance> listeMembreCojo = new ArrayList<VDetCommissionSeance>(); 
 	 private List<VDetCommissionSeance> selectionMembresCommite = new ArrayList<VDetCommissionSeance>(); 
 	 private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
 	 private List<TNatureDocuments> natureDocListeRapport = new ArrayList<TNatureDocuments>();
@@ -513,6 +514,17 @@ public class CommissionController {
 					// );
 					_logger.info("membreCommite size: "+listeCommite.size());	
 		 }
+		 
+		//Liste des membres du commite d'evaluation
+		 public void chargeMembreCojo() {
+			 selectionMembresCommite.clear();
+			 listeMembreCojo.clear();
+			 listeMembreCojo = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
+					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"JUG"),
+					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+					// );
+					_logger.info("listeMembreCojo size: "+listeMembreCojo.size());	
+		 }
 	 
 	 public void checkMontantVar() {
 		 if(dofTyp.equalsIgnoreCase("B")) {
@@ -550,7 +562,13 @@ public class CommissionController {
 		    	        mbrSup=listMbrSup.get(0); 
     			        }
 		     iservice.deleteObject(getMbrSup());
-		     chargeMembre();
+		     if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+		    	 chargeMembre(); 
+		     }else
+		    	 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+			    	 chargeMembreCojo(); 
+			     }
+		     
 		     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Membre supprimé avec succès! ", ""));
 		 }catch (org.hibernate.exception.ConstraintViolationException e) {
    			 userController.setTexteMsg("Impossible de supprimer le membre !");
@@ -1042,7 +1060,24 @@ public class CommissionController {
 			}
 		
 		//Enregistrement des membres du commité technique 
-		public void saveCommiteEvaluation() {
+			
+			
+			public void saveCommiteEvaluation() {
+				if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
+					
+				}else
+					if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+						saveMembre("CEV");
+						chargeMembre();
+					}
+					else
+						if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+							saveMembre("JUG");  
+							chargeMembreCojo();
+						}
+				
+			    }
+		public void saveMembre(String typeComm) {
 			 if (selectionMembresCommite.size()==0) {
 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1050,7 +1085,7 @@ public class CommissionController {
 					for(VDetCommissionSeance mbr : selectionMembresCommite) {
 						membre.setDcsDteSaisi(Calendar.getInstance().getTime().toString());
 						membre.setTempDteSaisi(Calendar.getInstance().getTime());
-						membre.setDcsComTcoCode("CEV");
+						membre.setDcsComTcoCode(""+typeComm);
 						//newmbrCommite.setDcsComTctCode(mbr.getTctCode());
 						membre.setDcsNomMbm(mbr.getDcsNomMbm());
 						membre.setDcsPreMbm(mbr.getDcsPreMbm());
@@ -1064,14 +1099,14 @@ public class CommissionController {
 						membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
 						membre.setDcsDacCode(slctdTd.getTDacSpecs().getDacCode());
 						membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
-						membre.setDcsSeaTseNum("EVA");
+						membre.setDcsSeaTseNum("EVA"); 
 						membre.setDcsDteSea(dateSeance);
 						membre.setDcsHeureDeb(heureDeb);
 						membre.setDcsHeureFin(heureFin);
 						membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
 					   iservice.addObject(membre);	
 					}
-					chargeMembre();
+					
 					  userController.setTexteMsg("Enregistrement effectué avec succès !");
 					  userController.setRenderMsg(true);
 					  userController.setSevrityMsg("success");	
@@ -1918,6 +1953,12 @@ public class CommissionController {
 					detailSeuil();*/
 					break;
 				case "com10":
+					//chargeMembreCommite();
+					chargeMembreCojo();
+					break;
+					
+				case "com11":
+					
 					break;
 					
 			    }
@@ -3217,6 +3258,14 @@ public class CommissionController {
 
 	public void setSelectedDossierAao(TDossierAao selectedDossierAao) {
 		this.selectedDossierAao = selectedDossierAao;
+	}
+
+	public List<VDetCommissionSeance> getListeMembreCojo() {
+		return listeMembreCojo;
+	}
+
+	public void setListeMembreCojo(List<VDetCommissionSeance> listeMembreCojo) {
+		this.listeMembreCojo = listeMembreCojo;
 	}
 
 

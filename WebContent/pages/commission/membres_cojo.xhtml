@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+      <ui:composition template="/template/templatePage.xhtml">
+	<ui:define name="contents">
+<h:form id="gnl">	
+ <section class="content-header">
+      <h3>
+        #{controleController.libelle} <!-- #{commissionController.slctdTd.aaoCode}  -->  
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Comité d'évaluation</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+        <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('com1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Liste
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+  
+    <section class="content">
+     <div class="box"></div>
+		<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+			
+             <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+           <div class="box box-success box-solid">
+            <div class="box-header with-border">
+             <div class="col-md-3 ">
+               <div  style="color: #fff">LISTE DES MEMBRES DE LA COJO</div>
+             </div>  
+             
+                <div class="col-md-4">
+                <div class="input-group input-group-sm col-md-12">
+                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero"></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
+                    </span>
+					 </div> 
+            </div>
+           
+            
+            <div class="col-sm-3">
+            </div>
+              <div class="col-sm-1">
+				                  <p:commandLink oncomplete="PF('dlogMemebre').show()" action="#{commissionController.chargeMembre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER MEMBRE</span>
+								  </p:commandLink>
+			</div> 
+             
+            </div>
+            <div class="box-body">
+               <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeMembreCojo}" emptyMessage="Aucun membre trouvé" 
+                         draggableColumns="true" scrollable="true" scrollHeight="600">
+                           
+                         <p:column headerText="TITRE" styleClass="col-sm-1" >
+	         				  <h:outputText value="#{slctdTb.dcsObservation}"/>
+					        </p:column>
+					        
+                            <p:column headerText="FONCTION" styleClass="col-sm-3" >
+         				  <h:outputText value="#{slctdTb.dcsFonCod}"/>
+					        </p:column>			        
+					        
+                          <p:column headerText="NOM" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dcsNomMbm}"/>
+				         </p:column>
+                         
+                          <p:column headerText="PRENOM(S)" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dcsPreMbm}"/>
+				        </p:column>
+				        
+				         <p:column headerText="FONTION ADMIN." styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dcsFonAdmin}"/>
+				        </p:column>
+				        
+				        <p:column headerText="STRUCTURE" styleClass="col-sm-2" >
+         				  <h:outputText value="#{slctdTb.dcsStrCom}"/>
+				        </p:column>
+				        
+				          <p:column headerText="TELEPHONE" styleClass="col-sm-1" >
+         				  <h:outputText value="#{slctdTb.dcsTelMbm}"/>
+				        </p:column>
+				         <p:column headerText="MANDAT ?" styleClass="col-sm-1" >
+         				  <h:outputText value="#{slctdTb.dcsRepMandate == 'O'?'OUI':'NON'}"/>
+				        </p:column>
+                       
+		          <p:column headerText="Actions" width="5%">
+	         				    <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{commissionController.deleteMembre()}" title="Supprimer" update=":gnl:ndTble1">
+			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltMbr}" />
+			                </p:commandLink>
+					        </p:column>
+    </p:dataTable>   
+            </div>
+            </div>
+            </div>
+            </div>
+            
+            
+            
+            
+ <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{commissionController.renderPage('com1','LISJUG')}"   update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink>
+  
+       </section>
+         
+
+</h:form>
+
+
+<h:form id="dlogMemebre" styleClass="form-horizontal">
+	  <p:dialog  widgetVar="dlogMemebre" modal="true"  showEffect="fade" hideEffect="fade" height="70%" width="85%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid">
+        <div class="box-header with-border">
+          <div class="col-md-7">  <div  style="color: #fff">SAISIE DES MEMBRES DE LA COJO</div></div>
+         </div>
+
+         <div class="box-body">
+         <div class="row">
+         <div class="col-md-12">  
+         <div class="col-md-4"> 
+          <div class="form-group">
+                  <label  class="col-md-3 control-label">Date de séance</label>
+				  <div class="col-sm-2">
+                     <p:calendar value="#{commissionController.dateSeance}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
+                  </p:calendar>   
+                  </div>
+                </div>
+           </div>
+              
+         <div class="col-md-4"> 
+          <div class="form-group">
+                  <label  class="col-md-2 control-label">Début</label>
+				  <div class="col-sm-5">
+                     <p:inputMask mask=" 99:99 " id="HeureDebut" value="#{commissionController.heureDeb}"  styleClass="form-control" style="width: 100%"/>
+	                  
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4">
+                   
+                 <div class="form-group">
+                  <label  class="col-md-2 control-label">Fin</label>
+				  <div class="col-sm-5">
+                      <p:inputMask mask=" 99:99 " id="HeureFin" value="#{commissionController.heureFin}"  styleClass="form-control" style="width: 100%"/>  
+                  </div>
+                  
+                </div> 
+              </div>
+              </div>
+         </div>
+              
+		      <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeCommite}" emptyMessage="Aucun membre trouvé" rows="10"
+					    rowKey="#{slctdTb.dcsNum}" selection="#{commissionController.selectionMembresCommite}"   editable="true" editMode="cell"
+                         draggableColumns="true" scrollable="true" scrollHeight="250"
+                          >
+                           <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
+                           
+                         <p:column headerText="TITRE" styleClass="col-sm-1" >
+	         				  <h:outputText value="#{slctdTb.dcsObservation}"/>
+					        </p:column>
+					        
+                            <p:column headerText="FONCTION" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.dcsFonCod}"/>
+					        </p:column>			        
+					        
+                          <p:column headerText="NOM" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsNomMbm}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="nom" value="#{slctdTb.dcsNomMbm}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+                         
+                          <p:column headerText="PRENOM(S)" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsPreMbm}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="prenom" value="#{slctdTb.dcsPreMbm}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Fonction Admin." styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsFonAdmin}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="foncAdn" value="#{slctdTb.dcsFonAdmin}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Structure" styleClass="col-sm-2" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsStrCom}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="structure" value="#{slctdTb.dcsStrCom}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				        
+				          <p:column headerText="Téléphone" styleClass="col-sm-1" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsTelMbm}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				  <p:inputText id="tel" value="#{slctdTb.dcsTelMbm}" style="width:100%" />
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+				         <p:column headerText="Mandat ?" styleClass="col-sm-1" >
+                          <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.dcsRepMandate == 'O'?'OUI':'NON'}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+							  <h:selectOneMenu id="mandat" value="#{slctdTb.dcsRepMandate}" style="width:100%; color:#0000">
+			              <f:selectItem itemLabel="Choisir" itemValue="" />
+                         <f:selectItem itemLabel="OUI" itemValue="OUI" />
+                         <f:selectItem itemLabel="NON" itemValue="NON" />
+                        </h:selectOneMenu>
+         				  </f:facet>
+         				  </p:cellEditor>
+				        </p:column>
+                       
+		        
+    </p:dataTable>   
+                
+                </div>
+                 <div class="row">    
+	             <div class="col-sm-8"></div>
+	              <div class="col-sm-4">  
+					
+					      <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{commissionController.saveCommiteEvaluation}" oncomplete="PF('dlogMemebre').hide()" update=":gnl:ndTble1" >
+			             <i class="ace-icon fa fa-save"></i> Ajouter
+			            </p:commandLink>
+                     </div>
+                     
+                     
+                   </div>
+              </div>
+         </div>
+         
+		          
+              
+         </div>
+         </div>
+         
+		
+      </p:dialog>
+    </h:form>
+
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    </ui:define>
+</ui:composition>
+</html>
