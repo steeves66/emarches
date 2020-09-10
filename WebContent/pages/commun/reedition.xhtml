@@ -541,16 +541,17 @@
 															ajax="false">
 															<span class="btn-label"><i
 																class="fa fa-file-pdf-o"></i></span>
-															<span class="hidden-xs">Procès verbal d'analyse</span>
+															<span class="hidden-xs">Rapport d'analyse</span>
 														</p:commandLink>
 													</div>
 
 													<div class="col-md-4">
 														<p:commandLink
+														   action="#{reeditionController.reediterPVjugement()}"
 															styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right"
 															style=" background-color: #f88b2e"
 															data-original-title="Editer le procès verbal de jugement"
-															data-toggle="tooltip" update=":content">
+															ajax="false">
 															<span class="btn-label"><i
 																class="fa fa-file-pdf-o"></i></span>
 															<span class="hidden-xs">Procès verbal de jugement</span>

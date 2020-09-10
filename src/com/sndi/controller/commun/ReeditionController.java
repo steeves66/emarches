@@ -200,7 +200,24 @@ public class ReeditionController {
 					 if (numAvis.equalsIgnoreCase("")) {
 						 editPv("AAO_DAC_CODE",dacCode,"rapport_analyse","rapport_analyse"); 
 						 
-					 } 
+					 }
+			 }
+		 }
+		 
+		//Edition du PV de jugement
+		 public void reediterPVjugement() {
+			 if(numAvis.equalsIgnoreCase("") && dacCode.equalsIgnoreCase("")) {
+				 FacesContext.getCurrentInstance().addMessage(null,
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Saisir l'un des champs SVP", ""));
+			 }else {
+				 
+				 if (dacCode.equalsIgnoreCase("")) {
+					 editPv("AAO_CODE",numAvis,"PV_jugement","PV_jugement"); 
+				 }else
+					 if (numAvis.equalsIgnoreCase("")) {
+						 editPv("AAO_DAC_CODE",dacCode,"PV_jugement","PV_jugement"); 
+						 
+					 }
 			 }
 		 }
 		 
