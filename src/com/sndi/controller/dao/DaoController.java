@@ -3637,59 +3637,59 @@ public class DaoController {
 					    	              
 					    	              if(controleController.type == "DAC" && controleController.typePlan == "PN"){
 					    	      			if(slctdTd.getTymTymCode().equalsIgnoreCase("0")) {
-					    	      				//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
-					    	      			    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      				downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+					    	      				// downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
 					    	      					}else
 					    	      					  if(slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
-					    	      						//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
-					    	      						downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
+					    	      						downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+libelleTravaux, libelleTravaux); 
+					    	      						//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+libelleTravaux, libelleTravaux);
 					    	      						  }else
 					    	      							 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
-					    	      								//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
-					    	      								downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
+					    	      								downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+libellePrestations, libellePrestations); 
+					    	      								//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libellePrestations, libellePrestations);
 					    	      								 }
 					    	      				}else
 					    	      					 if(controleController.type == "DAC" && controleController.typePlan == "PS"){
 
 					    	      					       if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
-					    	      					    	   //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSL, fourniture_PSL); 
-					    	      							    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      					    	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSL, fourniture_PSL); 
+					    	      					    	 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
 					    	      					           }else
 					    	      					               if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("1")){
-					    	      					            	   //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSL, prestations_PSL); 
-					    	      									    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libelleFournitures, libelleFournitures);    
+					    	      					            	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSL, prestations_PSL); 
+					    	      					            	 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+libelleFournitures, libelleFournitures);    
 					    	      					              }else
 					    	      					                   if(slctdTd.getDacMopCode().equalsIgnoreCase("PSL") && slctdTd.getTymTymCode().equalsIgnoreCase("2")){
-					    	      					                	   //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSL, travaux_PSL); 
-					    	      										    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSL, travaux_PSL);
+					    	      					                	   downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSL, travaux_PSL); 
+					    	      					                	 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSL, travaux_PSL);
 					    	      					                }else
 					    	      					                    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
-					    	      					                    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSO, fourniture_PSO); 
-					    	      										    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      					                    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+fourniture_PSO, fourniture_PSO); 
+					    	      					                    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
 					    	      					                    }else 
 					    	      					                    	if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("1")){
-					    	      					                    		//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSO, prestations_PSO); 
-					    	      											    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSO, prestations_PSO);
+					    	      					                    		downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSO, prestations_PSO); 
+					    	      					                    		//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSO, prestations_PSO);
 					    	      					                    	}else 
 					    	      					                    		if(slctdTd.getDacMopCode().equalsIgnoreCase("PSO") && slctdTd.getTymTymCode().equalsIgnoreCase("2")){
-					    	      					                    			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSO, travaux_PSO); 
-					    	      												    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSO, travaux_PSO);
+					    	      					                    			downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSO, travaux_PSO); 
+					    	      					                    			//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSO, travaux_PSO);
 					    	      					                    	    }else 
 					    	      					                    		    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("0")){
-					    	      					                    		    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+fourniture_PSC, fourniture_PSC); 
-					    	      					    							    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
+					    	      					                    		    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+fourniture_PSC, fourniture_PSC); 
+					    	      					                    		    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures);
 					    	      					                    		       }else
 					    	      					                    		    	    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
-					    	      					                    		    	    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSC, prestations_PSC); 
-					    	      					            							    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSC, prestations_PSC);
+					    	      					                    		    	    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATION+prestations_PSC, prestations_PSC); 
+					    	      					                    		    	    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX+prestations_PSC, prestations_PSC);
 					    	      					                    		    	     }else
 					    	      					                    		    	    	 if(slctdTd.getDacMopCode().equalsIgnoreCase("PSC") && slctdTd.getTymTymCode().equalsIgnoreCase("2")) {
-					    	      					                    		    	    		 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSC, travaux_PSC); 
-					    	      					                 							    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSC, travaux_PSC);
+					    	      					                    		    	    		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX+travaux_PSC, travaux_PSC); 
+					    	      					                    		    	    		//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX+travaux_PSC, travaux_PSC);
 					    	      					                    		    	    	    }else
 					    	      					                    		    	    		    if(slctdTd.getDacMopCode().equalsIgnoreCase("PSI")) {
-					    	      					                    		    	    		    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
-					    	      					                    								    downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures); 
+					    	      					                    		    	    		    	downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES+libelleFournitures, libelleFournitures); 
+					    	      					                    		    	    		    	//downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX+libelleFournitures, libelleFournitures); 
 					    	      					                    		    	    		  }
 
 					    	      					                                                }	
