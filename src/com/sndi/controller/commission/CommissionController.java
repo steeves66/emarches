@@ -360,7 +360,6 @@ public class CommissionController {
 	 }
 	 
 	//Selection d'un lot dans le tableau*
-	 
 		 public void chargeResultaFilter() {
 			 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
 					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId))); 
@@ -386,9 +385,10 @@ public class CommissionController {
 		       
 
 					 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
-							 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));
-				 
-			
+							 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+infoLot.getLaaDacCode())));	
+					 
+					 _logger.info("LAA_NUM: "+infoLot.getLaaNum());	
+					 _logger.info("LAA_DAC_CODE: "+infoLot.getLaaDacCode());	
 		 }
 		 
 	 
