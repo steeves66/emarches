@@ -327,6 +327,8 @@ public class CommissionController {
 	 private Date dateSeance;
 	 private String heureDeb;
 	 private String heureFin;
+	 private String lieuSeance;
+	 
 	 //Séance d'ouverture
 	 private Date dateCom;
 	 private String heureComD;
@@ -1103,7 +1105,7 @@ public class CommissionController {
 						}
 				
 			    }
-			public void saveMembre(String typeComm, String typeSeance) {
+			 public void saveMembre(String typeComm, String typeSeance) {
 				 if (selectionMembresCommite.size()==0) {
 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
 						FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -1134,6 +1136,7 @@ public class CommissionController {
 									membre.setDcsDteSea(dateSeance);
 									membre.setDcsHeureDeb(heureDeb);
 									membre.setDcsHeureFin(heureFin);
+									membre.setDcsSeaLieu(lieuSeance);
 									membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
 								   iservice.addObject(membre);		
 							}
