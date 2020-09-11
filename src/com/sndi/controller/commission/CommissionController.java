@@ -1098,44 +1098,50 @@ public class CommissionController {
 						}
 				
 			    }
-		public void saveMembre(String typeComm, String typeSeance) {
-			 if (selectionMembresCommite.size()==0) {
-				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
-					FacesContext.getCurrentInstance().addMessage(null, msg);
-				}else {
-					for(VDetCommissionSeance mbr : selectionMembresCommite) {
-						membre.setDcsDteSaisi(Calendar.getInstance().getTime().toString());
-						membre.setTempDteSaisi(Calendar.getInstance().getTime());
-						membre.setDcsComTcoCode(""+typeComm);
-						//newmbrCommite.setDcsComTctCode(mbr.getTctCode());
-						membre.setDcsNomMbm(mbr.getDcsNomMbm());
-						membre.setDcsPreMbm(mbr.getDcsPreMbm());
-						membre.setDcsTelMbm(mbr.getDcsTelMbm());
-						membre.setDcsRepMandate(mbr.getDcsRepMandate());
-						membre.setDcsObservation(mbr.getDcsObservation());
-						membre.setDcsFonAdmin(mbr.getDcsFonAdmin());
-						membre.setDcsStrCom(mbr.getDcsStrCom());
-						membre.setTempType("COM");
-						membre.setDcsFonCod(mbr.getDcsFonCod());
-						membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
-						membre.setDcsDacCode(slctdTd.getTDacSpecs().getDacCode());
-						membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
-						membre.setDcsSeaTseNum(""+typeSeance); 
-						membre.setDcsDteSea(dateSeance);
-						membre.setDcsHeureDeb(heureDeb);
-						membre.setDcsHeureFin(heureFin);
-						membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
-					   iservice.addObject(membre);	
+			public void saveMembre(String typeComm, String typeSeance) {
+				 if (selectionMembresCommite.size()==0) {
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Selectionnez un membre ", "");
+						FacesContext.getCurrentInstance().addMessage(null, msg);
+					}else {
+						if(dateSeance==null) {
+							FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir la date de la séance !", "");
+							FacesContext.getCurrentInstance().addMessage(null, msg);		
+						}else {
+						for(VDetCommissionSeance mbr : selectionMembresCommite) {
+						
+									membre.setDcsDteSaisi(Calendar.getInstance().getTime().toString());
+									membre.setTempDteSaisi(Calendar.getInstance().getTime());
+									membre.setDcsComTcoCode(""+typeComm);
+									//newmbrCommite.setDcsComTctCode(mbr.getTctCode());
+									membre.setDcsNomMbm(mbr.getDcsNomMbm());
+									membre.setDcsPreMbm(mbr.getDcsPreMbm());
+									membre.setDcsTelMbm(mbr.getDcsTelMbm());
+									membre.setDcsRepMandate(mbr.getDcsRepMandate());
+									membre.setDcsObservation(mbr.getDcsObservation());
+									membre.setDcsFonAdmin(mbr.getDcsFonAdmin());
+									membre.setDcsStrCom(mbr.getDcsStrCom());
+									membre.setTempType("COM");
+									membre.setDcsFonCod(mbr.getDcsFonCod());
+									membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
+									membre.setDcsDacCode(slctdTd.getTDacSpecs().getDacCode());
+									membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
+									membre.setDcsSeaTseNum(""+typeSeance); 
+									membre.setDcsDteSea(dateSeance);
+									membre.setDcsHeureDeb(heureDeb);
+									membre.setDcsHeureFin(heureFin);
+									membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+								   iservice.addObject(membre);		
+							}
+							
+						}
+						
+						  userController.setTexteMsg("Enregistrement effectué avec succès !");
+						  userController.setRenderMsg(true);
+						  userController.setSevrityMsg("success");	
+						
 					}
-					
-					  userController.setTexteMsg("Enregistrement effectué avec succès !");
-					  userController.setRenderMsg(true);
-					  userController.setSevrityMsg("success");	
-					
-				}
-			 chargeMembre();
-		}
-		
+				 chargeMembre();
+			}
 		public void chargeMention() {
 			 listeCritereAnalyse = (List<VCritereAnalyseDacOfftec>) iservice.getObjectsByColumn("VCritereAnalyseDacOfftec", new ArrayList<String>(Arrays.asList("CRA_CODE")),
                      // new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
