@@ -23,7 +23,7 @@ public class VLotCritere implements java.io.Serializable {
 	private String laaAaoCode;
 	private BigDecimal laaNum;
 	private String laaDacCode;
-	private BigDecimal critOk;
+	private long critOk;
 
 	public VLotCritere() {
 	}
@@ -34,7 +34,7 @@ public class VLotCritere implements java.io.Serializable {
 	}
 
 	public VLotCritere(String laaObjet, BigDecimal laaId, String laaAaoCode, BigDecimal laaNum, String laaDacCode,
-			BigDecimal critOk) {
+			long critOk) {
 		this.laaObjet = laaObjet;
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
@@ -90,11 +90,11 @@ public class VLotCritere implements java.io.Serializable {
 	}
 	
 	@Column(name = "CRIT_OK", precision = 22, scale = 0)
-	public BigDecimal getCritOk() {
+	public long getCritOk() {
 		return this.critOk;
 	}
 
-	public void setCritOk(BigDecimal critOk) {
+	public void setCritOk(long critOk) {
 		this.critOk = critOk;
 	}
 

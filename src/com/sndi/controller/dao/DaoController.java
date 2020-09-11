@@ -318,7 +318,7 @@ public class DaoController {
 	 private VbTempCritere newTempEnteteCrit = new VbTempCritere();
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
 	private VDacliste caution = new VDacliste();
-	
+	private VLotCritere lotCrit = new VLotCritere();
 	//MARGE DE PREFERENCE
 	private VMargeDePreference marge = new VMargeDePreference();
 	
@@ -534,8 +534,18 @@ public class DaoController {
 			 
 			//Controle totalité des lots factorisés
 			 if(event.getOldStep().equals("criterebyLot") && event.getNewStep().equals("cojo")) {
-				 
+				 listeLotCritere.clear();
+				 listeLotCritere=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+						new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+				 if(!listeLotCritere.isEmpty()) { 
+					 lotCrit=listeLotCritere.get(0);
+					 if(lotCrit.getCritOk() != 0) {
+						 FacesContext.getCurrentInstance().addMessage(null,
+								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "les lots ("+lotCrit.getCritOk()+") n'ont pas de critères", ""));
+						 return "criterebyLot";
+					 }
 			     }
+			 }
 			 
 			 if(event.getOldStep().equals("criterebyLot") && event.getNewStep().equals("critere")) {
 				 //newTempFactorise = new VbTempParametreFact(); 
@@ -7816,5 +7826,13 @@ public class DaoController {
 
 	public void setTempBord(VbTempParamTabBord tempBord) {
 		this.tempBord = tempBord;
+	}
+
+	public VLotCritere getLotCrit() {
+		return lotCrit;
+	}
+
+	public void setLotCrit(VLotCritere lotCrit) {
+		this.lotCrit = lotCrit;
 	}
 }
