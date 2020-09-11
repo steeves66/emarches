@@ -221,19 +221,19 @@
                     <div class="box box-success box-solid">
                      
         <div class="box-header with-border">
-            <div  style="color: #fff"><span style="font-weight: bold; font-size: 20px">FIN DE L'ANALYSE DE L'AVIS N°#{commissionController.slctdTd.aaoCode} </span>: #{commissionController.slctdTd.aaoLibelle}</div>
+            <div  style="color: #fff"><span style="font-weight: bold; font-size: 20px">FIN DE #{controleController.typePlan} DE L'AVIS N°#{commissionController.slctdTd.aaoCode} </span>: #{commissionController.slctdTd.aaoLibelle}</div>
          </div>
          <div class="box-body">
          
 				         <br/>
 				         
 				        <div class="form-group ">
-	                  <label for="dateOuv" class="col-sm-2 control-label"><b>Date d'ouverture</b></label>
+	                  <label for="dateOuv" class="col-sm-2 control-label"><b>#{controleController.libelle2}</b></label>
 	                  <div class="col-sm-4">
 	                      <p:calendar id="dateOuv" value="#{commissionController.slctdTd.aaoDteFinOuv}" mask="true" pattern="dd/MM/yyyy" /> 
 	                  </div>
 	                  
-	                    <label class="col-sm-2 control-label"><b>Heure d'ouverture</b></label>
+	                    <label class="col-sm-2 control-label"><b>#{controleController.libelle1}</b></label>
 	                  <div class="col-sm-4">
 	                      <p:inputMask mask=" 99:99 " value="#{commissionController.slctdTd.aaoHeurFinOuv}" styleClass="form-control" style="width: 100%" />
 	                  </div>        

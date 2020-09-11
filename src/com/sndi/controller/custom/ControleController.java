@@ -6435,6 +6435,9 @@ public class ControleController {
 								    			type = "Commission";
 								    			fonctionalite = "listOuvertureAc";
 								    			libelle="SEANCE D'OUVERTURE / SAISIE DES OFFRES";
+								    			libelle2 = "Date Fin Ouverture";
+								    			typePlan = "L'OUVERTURE";
+								    			libelle1 = "Heure d'Ouverture";
 								    			libelleFinCom = "Fin de la séance d'ouverture";
 								    			libelleConfirm = "Confirmez-vous la fin de la séance d'ouverture de l'avis d'appel d'Offre N°";
 												 panel1 =false;
@@ -6471,7 +6474,10 @@ public class ControleController {
 								    			//ANALYSE DES OFFRES
 								    			if(action.equalsIgnoreCase("LISANA")) {
 									    			type = "Commission";
+									    			typePlan = "L'ANALYSE";
 									    			fonctionalite = "listAnalyseAc";
+									    			libelle2 = "Date Fin Analyse";
+									    			libelle1 = "Heure d'Analyse";
 									    			libelleFinCom = "Fin de l'analyse";
 									    			libelleConfirm = "Confirmez-vous la fin de l'analyse des Offres de l'avis d'appel d'Offre N°";
 									    			libelle="ANALYSE DES OFFRES";

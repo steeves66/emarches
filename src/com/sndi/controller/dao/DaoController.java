@@ -526,10 +526,15 @@ public class DaoController {
 	              userController.initMessage(); 
 			     }
 			 
-			//Controle Pavï¿½ crï¿½ation
+			//Controle Pavé création
 			 if(event.getOldStep().equals("critere") && event.getNewStep().equals("criterebyLot")) {
 				 factoriserLot();
 				 listeCritereByLot.clear();
+			     }
+			 
+			//Controle totalité des lots factorisés
+			 if(event.getOldStep().equals("criterebyLot") && event.getNewStep().equals("cojo")) {
+				 
 			     }
 			 
 			 if(event.getOldStep().equals("criterebyLot") && event.getNewStep().equals("critere")) {
@@ -4604,7 +4609,7 @@ public class DaoController {
 										  
 										  
 										  
-										   //Methode de vï¿½rification
+										   //Methode de vérification
 										   public void checkVente() {
 												 if(sitDac.equalsIgnoreCase("Nat")) { 
 													 panelNcc1 = true;
@@ -4612,6 +4617,8 @@ public class DaoController {
 													 etatPays = false;
 													 confirmInter = false;
 													 confirmPaie = true;
+													 //newSoumission = new TSoumissions();
+													 newCandidat = new TCandidats();
 												 }else 
 												      if(sitDac.equalsIgnoreCase("Int")){
 												    	  panelNcc1 = false;
@@ -4621,6 +4628,8 @@ public class DaoController {
 														  newSouncc = "";
 														  confirmInter = true;
 														  confirmPaie = false;
+														  //newSoumission = new TSoumissions();
+														  newCandidat = new TCandidats();
 												 }
 											 }
 										   
@@ -4969,7 +4978,7 @@ public class DaoController {
 													}else {
 														//infoNcc=false;
 														soumission = new TSoumissions();
-														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Votre NCC n'est pas inscrite dans la base des MarchÃ©s Publics, PriÃ¨re prendre contact avec la CELLIOPE pour la prise en compte de votre NCC! ", "")); 	 
+														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le NCC n'est pas inscrit dans la base des Marchés Publics! ", "")); 	 
 													}
 												 }
 											  
@@ -4979,7 +4988,7 @@ public class DaoController {
 														String message = "";
 														if(slctdTd.getDacStaCode().equalsIgnoreCase("DAP")) {
 															statUpdate = "DVE";
-															message="Fin de la vente du Dossier d'Appel Ã  Concurrence NÂ°"+slctdTd.getDacCode();
+															message="Fin de la vente du Dossier d'Appel à  Concurrence N°"+slctdTd.getDacCode();
 														 }
 														//Recupï¿½ration du DAO dans T_DAC_SPECS
 											            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -5006,7 +5015,7 @@ public class DaoController {
 														String message = "";
 														if(slctdTd.getDacStaCode().equalsIgnoreCase("DAP")) {
 															statRetrait = "RET";
-															message="Fin de retrait du Dossier d'Appel Ã  Concurrence NÂ°"+slctdTd.getDacCode();
+															message="Fin de retrait du Dossier d'Appel à Concurrence N°"+slctdTd.getDacCode();
 														 }
 														
 														 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -5027,7 +5036,7 @@ public class DaoController {
 											//Fin de retrait du DAO
 													
 													
-													//Rï¿½cupï¿½ration du montant du DAO
+													//Récupération du montant du DAO
 													  public void recupMontantDao() { 
 														  dacVente = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 																      //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
@@ -5222,7 +5231,7 @@ public class DaoController {
 				  iservice.deleteObject(crit); 
 		  		  chargeCritereSaisie();
 		  		  chargeCritere();
-			  	  userController.setTexteMsg("Liste des critÃ¨res vidÃ©e avec succÃ¨s!");
+			  	  userController.setTexteMsg("Liste des critères vidée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
 			    } 
