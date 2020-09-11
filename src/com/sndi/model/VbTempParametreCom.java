@@ -1,6 +1,7 @@
 package com.sndi.model;
 // Generated 12 mars 2020 15:51:36 by Hibernate Tools 4.3.5.Final
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
@@ -56,6 +57,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 	private String dcsAaoNbrOffHorDelai;
 	private String dcsFonAdmin;
 	private String dcsStrCom;
+	private String dcsSeaLieu;
 
 	public VbTempParametreCom() {
 	}
@@ -70,7 +72,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 			String dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
 			String dcsComStrCode, String dcsOpeMatSaisi, String dcsNbrPli, String dcsComTctCode, String dcsRepMandate,
 			String dcsSeaTseNum, String dcsAaoNbrOff, String dcsAaoNbrOffAccept, String dcsAaoNbrOffRej,
-			String dcsAaoNbrOffHorDelai,String dcsFonAdmin, String dcsStrCom) {
+			String dcsAaoNbrOffHorDelai,String dcsFonAdmin, String dcsStrCom,String dcsSeaLieu) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -105,6 +107,7 @@ public class VbTempParametreCom implements java.io.Serializable {
 		this.dcsAaoNbrOffHorDelai = dcsAaoNbrOffHorDelai;
 		this.dcsFonAdmin = dcsFonAdmin;
 		this.dcsStrCom = dcsStrCom;
+		this.dcsSeaLieu = dcsSeaLieu;
 	}
 
 	@Id
@@ -415,4 +418,14 @@ public class VbTempParametreCom implements java.io.Serializable {
 	public void setDcsStrCom(String dcsStrCom) {
 		this.dcsStrCom = dcsStrCom;
 	}
+
+	@Column(name = "DCS_SEA_LIEU")
+	public String getDcsSeaLieu() {
+		return dcsSeaLieu;
+	}
+
+	public void setDcsSeaLieu(String dcsSeaLieu) {
+		this.dcsSeaLieu = dcsSeaLieu;
+	}
+	
 }
