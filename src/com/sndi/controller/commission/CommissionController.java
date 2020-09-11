@@ -1023,26 +1023,31 @@ public class CommissionController {
 					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Le nombre d'offres recu ne doit pas etre supérieur au nombre de pli", "");
 						FacesContext.getCurrentInstance().addMessage(null, msg);	
 				}else {
-					iservice.updateObject(slctdTd);
+					    if(newSeance.getSeaDteSea() ==null) {
+						   FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir la date de la séance !", "");
+						   FacesContext.getCurrentInstance().addMessage(null, msg);		
+					    }else {
 					
-					//Creation de la séance
-					newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getTDacSpecs().getDacCode());
-					newSeance.setTTypeSeance(new TTypeSeance("OUV"));
-					newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
-					newSeance.setTFonction(userController.getSlctd().getTFonction());
-					newSeance.setTOperateur(userController.getSlctd().getTOperateur());
-					iservice.addObject(newSeance);
+					          iservice.updateObject(slctdTd);
 					
-					//CREATION DE LA COMMISSION SPECIFIQUE
-					newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
-					newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
-					newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-					newcomSpec.setComMarCode(slctdTd.getTDacSpecs().getTTypeMarche().getTymCode());
-					newcomSpec.setTAvisAppelOffre(slctdTd);
-					newcomSpec.setTDacSpecs(slctdTd.getTDacSpecs());
-	/*				newcomSpec.setTCommissionType(new TCommissionType(""));*/
-					newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
-					iservice.addObject(newcomSpec);
+					          //Creation de la séance
+					          newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getTDacSpecs().getDacCode());
+					          newSeance.setTTypeSeance(new TTypeSeance("OUV"));
+					          newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
+					          newSeance.setTFonction(userController.getSlctd().getTFonction());
+					          newSeance.setTOperateur(userController.getSlctd().getTOperateur());
+					          iservice.addObject(newSeance);
+					
+					          //CREATION DE LA COMMISSION SPECIFIQUE
+					          newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
+					          newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
+					          newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+					          newcomSpec.setComMarCode(slctdTd.getTDacSpecs().getTTypeMarche().getTymCode());
+					          newcomSpec.setTAvisAppelOffre(slctdTd);
+					          newcomSpec.setTDacSpecs(slctdTd.getTDacSpecs());
+	                 /*				newcomSpec.setTCommissionType(new TCommissionType(""));*/
+					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
+					          iservice.addObject(newcomSpec);
 					
 					//COMPOSITION DE LA SEANCE
 					 if (selectionMembres.size()==0) {
@@ -1077,8 +1082,8 @@ public class CommissionController {
 					  userController.setRenderMsg(true);
 					  userController.setSevrityMsg("success");
 				}
-				
-			}
+			}	
+		}
 		
 		//Enregistrement des membres du commité technique 
 			

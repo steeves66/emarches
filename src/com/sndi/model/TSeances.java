@@ -39,6 +39,7 @@ public class TSeances implements java.io.Serializable {
 	private Date seaDteSea;
 	private String seaHeureDeb;
 	private String seaHeureFin;
+	private String seaLieu;
 	private Set<TDetCommissionSeance> TDetCommissionSeances = new HashSet<TDetCommissionSeance>(0);
 
 	public TSeances() {
@@ -50,7 +51,8 @@ public class TSeances implements java.io.Serializable {
 
 	public TSeances(long seaNum, TFonction TFonction, TOperateur TOperateur, TTypeSeance TTypeSeance,
 			String seaLibelle, String seaQuorum, long seaNbrPli, String seaRes, Date seaSteSaisi,
-			String seaObservation, Date seaDteSea, String seaHeureDeb, String seaHeureFin, Set<TDetCommissionSeance> TDetCommissionSeances) {
+			String seaObservation, Date seaDteSea, String seaHeureDeb, String seaHeureFin,String seaLieu, 
+			Set<TDetCommissionSeance> TDetCommissionSeances) {
 		this.seaNum = seaNum;
 		this.TFonction = TFonction;
 		this.TOperateur = TOperateur;
@@ -64,6 +66,7 @@ public class TSeances implements java.io.Serializable {
 		this.seaDteSea = seaDteSea;
 		this.seaHeureDeb = seaHeureDeb;
 		this.seaHeureFin = seaHeureFin;
+		this.seaLieu = seaLieu;
 		this.TDetCommissionSeances = TDetCommissionSeances;
 	}
 
@@ -190,6 +193,15 @@ public class TSeances implements java.io.Serializable {
 
 	public void setSeaHeureFin(String seaHeureFin) {
 		this.seaHeureFin = seaHeureFin;
+	}
+	
+	@Column(name = "SEA_LIEU", length = 500)
+	public String getSeaLieu() {
+		return this.seaLieu;
+	}
+
+	public void setSeaLieu(String seaLieu) {
+		this.seaLieu = seaLieu;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TSeances")
