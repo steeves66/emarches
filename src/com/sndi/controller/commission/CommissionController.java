@@ -81,6 +81,7 @@ import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotAnalyseFin;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
+import com.sndi.model.VLotJugement;
 import com.sndi.model.VOffreCandidat;
 import com.sndi.model.VOffreNonRecevableLot;
 import com.sndi.model.VOffreRecevableLot;
@@ -179,6 +180,7 @@ public class CommissionController {
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
 	 private List<VLotAnalyse> listeLotsByAvis = new ArrayList<VLotAnalyse>();
+	 private List<VLotJugement> listeLotsByJug = new ArrayList<VLotJugement>();
 	 private List<VLotAnalyse> listeLotsActiveBtnAna = new ArrayList<VLotAnalyse>();
 	 private List<VLotAnalyseFin> listeSoumissionByLot = new ArrayList<VLotAnalyseFin>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
@@ -261,6 +263,7 @@ public class CommissionController {
 	 private VDetOffreAnalyse sltOffre = new VDetOffreAnalyse();
 	 private TSoumissions soumission = new TSoumissions();
 	 private VLotAnalyse lot = new VLotAnalyse();
+	 private VLotJugement lotJug = new VLotJugement();
 	 private VLotAnalyseFin lots = new VLotAnalyseFin();
 	 private VLotAnalyseFin lotFin = new VLotAnalyseFin();
 	 private VLot sltLot = new VLot();
@@ -777,6 +780,16 @@ public class CommissionController {
 			activeBntEditAnalyse();
 		 }
 		 
+		 //Liste des lots d'un avis d'appel d'offres
+		 public void chargeLotByJug() {
+			 listeLots.clear();
+			listeLotsByJug=(List<VLotJugement>) iservice.getObjectsByColumn("VLotJugement", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+			_logger.info("listeLotsByJug size: "+listeLotsByJug.size());
+			laaNumRepech = 0;
+			//activeBntEditAnalyse();
+		 }
+		 
 		//Control d'activation du bouton d'édition
 		 public void activeBntEditAnalyse() {
 			 listeLotsActiveBtnAna.clear();
@@ -792,6 +805,8 @@ public class CommissionController {
 				editerAna = true;	
 			}
 		   }
+		 
+		 
 		 
 		 public void chargeSoumissionByLot() {
 			 listeSouOffEleve.clear();
@@ -870,7 +885,7 @@ public class CommissionController {
 			 listeAttibutaire.clear();
 			 listeOffres.clear();
 			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("R_ID")),
-					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())));
+					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lotJug.getLaaId())));
 				_logger.info("listeOffres size: "+listeOffres.size());	
 				
 				//pour jugelment
@@ -1945,7 +1960,8 @@ public class CommissionController {
 					break;
 				
 				case "com9":
-					chargeLotByAvis();
+					chargeLotByJug();
+					//chargeLotByAvis();
 					/*verifCor();
 					offreBasse();
 					offreEleve();
@@ -3275,6 +3291,22 @@ public class CommissionController {
 
 	public void setLots(VLotAnalyseFin lots) {
 		this.lots = lots;
+	}
+
+	public List<VLotJugement> getListeLotsByJug() {
+		return listeLotsByJug;
+	}
+
+	public void setListeLotsByJug(List<VLotJugement> listeLotsByJug) {
+		this.listeLotsByJug = listeLotsByJug;
+	}
+
+	public VLotJugement getLotJug() {
+		return lotJug;
+	}
+
+	public void setLotJug(VLotJugement lotJug) {
+		this.lotJug = lotJug;
 	}
 
 

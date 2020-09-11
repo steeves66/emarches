@@ -47,6 +47,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 	private long anfValeurScore;
 	private String anfCommentaire;
 	private String anfPresence;
+	private BigDecimal anfNum;
 
 	public VCritereAnalyseDacOfftec() {
 	}
@@ -65,7 +66,8 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 			String codep, String craTymCodex, String craTypProc, String craTypDac, String craBailleurx,
 			String analyseStatut, String dcadDacCode, String aaoRegQual, String aaoRegQualx, long valRegQual,
 			String dcadCommentaire, BigDecimal dcadNumDcad, String dcadCraAuCode, String dcadPetitCra,
-			String anfValeurConf, String anfObser, long anfValeurScore, String anfCommentaire, String anfPresence) {
+			String anfValeurConf, String anfObser, long anfValeurScore, String anfCommentaire, String anfPresence
+			,BigDecimal anfNum) {
 		this.RId = RId;
 		this.dcadLaaId = dcadLaaId;
 		this.offSouNcc = offSouNcc;
@@ -95,6 +97,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 		this.anfValeurScore = anfValeurScore;
 		this.anfCommentaire = anfCommentaire;
 		this.anfPresence = anfPresence;
+		this.anfNum = anfNum;
 	}
 
 	@Id
@@ -357,6 +360,15 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 
 	public void setAnfPresence(String anfPresence) {
 		this.anfPresence = anfPresence;
+	}
+	
+	@Column(name = "ANF_NUM", precision = 22, scale = 0)
+	public BigDecimal getAnfNum() {
+		return this.anfNum;
+	}
+
+	public void setAnfNum(BigDecimal anfNum) {
+		this.anfNum = anfNum;
 	}
 
 }

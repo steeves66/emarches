@@ -59,7 +59,7 @@
 	                     <p:selectOneMenu id="typeFonction" value="#{commissionController.laaId}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			            <f:selectItem  itemLabel="Choisir le lot.." itemValue="empty" />  
-			            <f:selectItems value="#{commissionController.listeLotsByAvis}" var="lot" itemLabel="#{lot.laaNum} : #{lot.laaObjet}" itemValue="#{lot.laaId}" />
+			            <f:selectItems value="#{commissionController.listeLotsByJug}" var="lot" itemLabel="#{lot.laaNum} : #{lot.laaObjet}" itemValue="#{lot.laaId}" />
 			           <p:ajax listener="#{commissionController.chargeResultaFilter()}" update=":gnl"/>
        		        </p:selectOneMenu> 
 	                  </div>

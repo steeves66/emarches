@@ -77,13 +77,13 @@
 						  </div> 
 		                 </div>
                       </div>         
-                 <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeLotsByAvis}" 
+                 <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeLotsByJug}" 
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
                            <p:column headerText="N°Lot" styleClass="col-sm-1">
 				            <h:commandLink  title="N°Lot" styleClass="col-sm-1"
          				 action="#{commissionController.onSelectLot()}">
                                 #{slctdTb.laaNum}
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotJug}" />
                          </h:commandLink>
 	
 				        </p:column>
@@ -91,7 +91,7 @@
 				           <h:commandLink  title="Objet" styleClass="col-sm-10"
          				 action="#{commissionController.onSelectLot()}">
                                 #{slctdTb.laaObjet}
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lot}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotJug}" />
                          </h:commandLink>
 	
 				        </p:column>

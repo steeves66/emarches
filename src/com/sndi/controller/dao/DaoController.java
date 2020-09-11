@@ -5228,7 +5228,7 @@ public class DaoController {
 		     
 		     
 		     
-		     //Methode pour vider la liste des critÃ¨res du lot 0
+		     //Methode pour vider la liste des critères du lot 0
 		     public void viderCritereLot0() {
 		    	 
 		    	 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
