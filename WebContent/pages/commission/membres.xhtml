@@ -75,6 +75,44 @@
 				                  </div> 
             </div>
             <div class="box-body">
+            
+             <div class="row">
+         <div class="col-md-12">  
+         <div class="col-md-4"> 
+          <div class="form-group">
+                  <label  class="col-md-3 control-label">Date de séance</label>
+				  <div class="col-sm-2">
+                     <p:calendar value="#{commissionController.newSeance.seaDteSea}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
+                  </p:calendar>   
+                  </div>
+                </div>
+           </div>
+              
+         <div class="col-md-4"> 
+          <div class="form-group">
+                  <label  class="col-md-2 control-label">Début</label>
+				  <div class="col-sm-5">
+                     <p:inputMask mask=" 99:99 " id="HeureDebut" value="#{commissionController.newSeance.seaHeureDeb}"  styleClass="form-control" style="width: 100%"/>
+	                  
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-md-4">
+                   
+                 <div class="form-group">
+                  <label  class="col-md-2 control-label">Fin</label>
+				  <div class="col-sm-5">
+                      <p:inputMask mask=" 99:99 " id="HeureFin" value="#{commissionController.newSeance.seaHeureFin}"  styleClass="form-control" style="width: 100%"/>  
+                  </div>
+                  
+                </div> 
+              </div>
+              </div>
+         </div>
+            
+            
+            
                <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeMembre}" emptyMessage="Aucun membre trouvé" 
 					    rowKey="#{slctdTb.tctCode}" selection="#{commissionController.selectionMembres}"   editable="true" editMode="cell"
                          draggableColumns="true" scrollable="true" scrollHeight="250"

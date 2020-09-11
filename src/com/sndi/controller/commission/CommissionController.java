@@ -327,6 +327,10 @@ public class CommissionController {
 	 private Date dateSeance;
 	 private String heureDeb;
 	 private String heureFin;
+	 //Séance d'ouverture
+	 private Date dateCom;
+	 private String heureComD;
+	 private String heureComF;
 	 private String docNature ="";
 	 //private short nadCode;
 	 //private long rabais
@@ -1010,7 +1014,6 @@ public class CommissionController {
 						userController.setTexteMsg("Expert(s) enregistré(s) avec succès!");
 	  		            userController.setRenderMsg(true);
 	  		            userController.setSevrityMsg("success");
-
 					}
 		 	}
 		 
