@@ -822,7 +822,7 @@
 	            <!-- /.box-header -->
 	                      <div class="box-body">     
                       <p:dataTable id="tbCritSelect" var="slctdTb" styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereSaisie}" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}"
-                scrollable="true" scrollHeight="530" emptyMessage="Aucun critère selectionné">
+                            scrollable="true" scrollHeight="530" emptyMessage="Aucun critère selectionné">
                               <p:column headerText="CRITERES" styleClass="col-sm-5">
                               <h:panelGroup rendered="#{slctdTb.analyseStatut == '0'}">
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />

@@ -28,7 +28,9 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	private Long pofScore;
 	private String pofObs;
 	private String anfPresence;
-
+	private BigDecimal anfNum;
+	private String dcadDacCode;
+	
 	public VPiecesOffreAnalyse() {
 	}
 
@@ -38,7 +40,7 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum, String analyseStatut,
 			BigDecimal dcadLaaId, String pofLibelle, String pofConforme, Long pofScore, String pofObs,
-			String anfPresence) {
+			String anfPresence, BigDecimal anfNum, String dcadDacCode) {
 		this.pofNum = pofNum;
 		this.craCode = craCode;
 		this.dofNum = dofNum;
@@ -49,6 +51,8 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.pofScore = pofScore;
 		this.pofObs = pofObs;
 		this.anfPresence = anfPresence;
+		this.anfNum = anfNum;
+		this.dcadDacCode = dcadDacCode;
 	}
 
 	@Id
@@ -140,6 +144,24 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setAnfPresence(String anfPresence) {
 		this.anfPresence = anfPresence;
+	}
+	
+	@Column(name = "ANF_NUM", precision = 22, scale = 0)
+	public BigDecimal getAnfNum() {
+		return this.anfNum;
+	}
+
+	public void setAnfNum(BigDecimal anfNum) {
+		this.anfNum = anfNum;
+	}
+
+	@Column(name = "DCAD_DAC_CODE", length = 50)
+	public String getDcadDacCode() {
+		return this.dcadDacCode;
+	}
+
+	public void setDcadDacCode(String dcadDacCode) {
+		this.dcadDacCode = dcadDacCode;
 	}
 
 }

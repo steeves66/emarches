@@ -98,6 +98,7 @@ import com.sndi.model.VbAnalyseOffre;
 import com.sndi.model.VbCommissionSpecifique;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
+import com.sndi.model.VbTempParamAnalyseOff;
 import com.sndi.model.VbTempParamDetOffres;
 import com.sndi.model.VbTempParametreCom;
 import com.sndi.model.VbTempParametreFactAn;
@@ -273,8 +274,9 @@ public class CommissionController {
 	 private TDetCommissionSeance newDetailSeance = new TDetCommissionSeance();
 	 private VDetCommissionSeance sltMbr = new VDetCommissionSeance();
 	 private VbAnalyseOffre newAnalyseOffre =new VbAnalyseOffre();
+	 private VbTempParamAnalyseOff newTempParamAnalyseOff =new VbTempParamAnalyseOff();
 	 private VListeSouOffBasse sltRecharge =new VListeSouOffBasse();
-	 
+	 private VbAnalyseOffre sltAnalyse =new VbAnalyseOffre();
 	 private VDetailOffres selectdetOffre = new VDetailOffres();
 
 	 
@@ -885,7 +887,7 @@ public class CommissionController {
 			 listeAttibutaire.clear();
 			 listeOffres.clear();
 			 listeOffres = ((List<VDetOffreAnalyse>)iservice.getObjectsByColumn("VDetOffreAnalyse",new ArrayList<String>(Arrays.asList("R_ID")),
-					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lotJug.getLaaId())));
+					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())));
 				_logger.info("listeOffres size: "+listeOffres.size());	
 				
 				//pour jugelment
@@ -1598,79 +1600,96 @@ public class CommissionController {
 		}
 		
 		//Analyser une offre
-		public void analyser() {
-			//Modification des pieces selectionnées a conforme
-			/*if(sltOffre.getDofRangOfr()> nbrLot) {
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
-			}else
-			{*/
-			offreListe = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
-					 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
-			        if (!listeOffres.isEmpty()) {
-			        	offre=offreListe.get(0);
-			        	offre.setDofStaut("1");
-			        	offre.setDofMtOfr(sltOffre.getDofMtOfr());
-			        	offre.setDofErrFin(sltOffre.getDofErrFin());
-			        	offre.setDofObsFin(sltOffre.getDofObsFin());
-			        	offre.setDofErrCalcul(dofErrCalcul);
-			        	offre.setDofMtCor(dofMtCor);
-			        	iservice.updateObject(offre);
-			          }
-				
-				/*if (listeSelectionPiecesOffresAnalyse.size()==0) {
-					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
-				}else
-				if (listePiecesOffresAnalyse.size()<listeSelectionPiecesOffresAnalyse.size()) {
-					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
+				public void analyser() {
+					//Modification des pieces selectionnées a conforme
+					/*if(sltOffre.getDofRangOfr()> nbrLot) {
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
+					}else
+					{*/
+					offreListe = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+							 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
+					        if (!listeOffres.isEmpty()) {
+					        	offre=offreListe.get(0);
+					        	offre.setDofStaut("1");
+					        	offre.setDofMtOfr(sltOffre.getDofMtOfr());
+					        	offre.setDofErrFin(sltOffre.getDofErrFin());
+					        	offre.setDofObsFin(sltOffre.getDofObsFin());
+					        	offre.setDofErrCalcul(dofErrCalcul);
+					        	offre.setDofMtCor(dofMtCor);
+					        	iservice.updateObject(offre);
+					          }
+						
+						/*if (listeSelectionPiecesOffresAnalyse.size()==0) {
+							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+						}else
+						if (listePiecesOffresAnalyse.size()<listeSelectionPiecesOffresAnalyse.size()) {
+							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
+						}
+				 		else{*/
+					 /*		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
+					 			List<TPiecesOffres> LS  = iservice.getObjectsByColumn("TPiecesOffres",  new WhereClause("POF_NUM",Comparateur.EQ,""+ligne.getPofNum()));
+					 			TPiecesOffres updatePieceOffre = new TPiecesOffres();
+								if(!LS.isEmpty()) {
+								updatePieceOffre = LS.get(0);	
+					 			updatePieceOffre.setPofConforme(ligne.getPofConforme());
+					 			updatePieceOffre.setPofPresent(ligne.getAnfPresence());
+					 			updatePieceOffre.setPofObs(ligne.getPofObs());
+					 			iservice.updateObject(updatePieceOffre);
+						     }	
+					 		}*/
+				         //}
+						
+						//EVALUTATION
+						/*if (selectionCritereAnalyse.size()==0) {
+							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
+						}else
+							if (listeCritereAnalyse.size()<selectionCritereAnalyse.size()) {
+								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
+							}*/
+				 		//else{
+					               
+					 		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
+					 			//newTempParamAnalyseOff.setAnfDacCode(ligne.get);
+					 			//newTempParamAnalyseOff.setAnfNum(ligne.get);
+					 			//newTempParamAnalyseOff.setAnfValeurConf(ligne.getAaoRegQual());
+					 			newTempParamAnalyseOff.setAnfDacCode(ligne.getDcadDacCode());
+					 			newTempParamAnalyseOff.setAnfNum(ligne.getAnfNum());
+					 			newTempParamAnalyseOff.setAnfCommentaire(ligne.getPofObs());
+					 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
+					 			newTempParamAnalyseOff.setTempType("ANOFF");
+					 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+					 			newTempParamAnalyseOff.setAnfPresence(ligne.getAnfPresence());
+					 			newTempParamAnalyseOff.setAnfValeurConf(ligne.getPofConforme());
+					 			//newTempParamAnalyseOff.setAnfValeurScore(String.valueOf(ligne.getAnfValeurScore()));
+					 			
+					 			iservice.addObject(newTempParamAnalyseOff);
+					 		}
+					 		
+					 		for(VCritereAnalyseDacOfftec lignes : listeCritereAnalyse) {
+					 			newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
+					 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());
+					 			newTempParamAnalyseOff.setAnfValeurConf(lignes.getAaoRegQual());
+					 			newTempParamAnalyseOff.setAnfValeurScore(lignes.getValRegQual());
+					 			newTempParamAnalyseOff.setAnfCommentaire(lignes.getDcadCommentaire());
+					 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
+					 			newTempParamAnalyseOff.setTempType("ANOFF");
+					 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+					 			//newTempParamAnalyseOff.setAnfValeurConf(ligne.getAnfPresence());
+					 			//newTempParamAnalyseOff.setAnfValeurScore(String.valueOf(ligne.getAnfValeurScore()));
+					 			iservice.addObject(newTempParamAnalyseOff);
+					 		}
+
+				         //}
+						chargeLotByAvis();
+						//editerAna = true;
+						listeSelectionPiecesOffresAnalyse.clear();
+						selectionCritereAnalyse.clear();
+						userController.setTexteMsg("Analyse effectuée avec succès !");
+						userController.setRenderMsg(true);
+						userController.setSevrityMsg("success");
+					//}
+					onSelectLot();
 				}
-		 		else{*/
-			 /*		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
-			 			List<TPiecesOffres> LS  = iservice.getObjectsByColumn("TPiecesOffres",  new WhereClause("POF_NUM",Comparateur.EQ,""+ligne.getPofNum()));
-			 			TPiecesOffres updatePieceOffre = new TPiecesOffres();
-						if(!LS.isEmpty()) {
-						updatePieceOffre = LS.get(0);	
-			 			updatePieceOffre.setPofConforme(ligne.getPofConforme());
-			 			updatePieceOffre.setPofPresent(ligne.getAnfPresence());
-			 			updatePieceOffre.setPofObs(ligne.getPofObs());
-			 			iservice.updateObject(updatePieceOffre);
-				     }	
-			 		}*/
-		         //}
-				
-				//EVALUTATION
-				/*if (selectionCritereAnalyse.size()==0) {
-					FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
-				}else
-					if (listeCritereAnalyse.size()<selectionCritereAnalyse.size()) {
-						FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
-					}*/
-		 		//else{
-			 		for(VCritereAnalyseDacOfftec ligne : listeCritereAnalyse) {
-			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
-			 			newAnalyseOffre.setAnfDcadNum(ligne.getDcadNum());
-			 			newAnalyseOffre.setAnfDcadCraCle(ligne.getCraCode());
-			 			newAnalyseOffre.setAnfDofNum(sltOffre.getDofNum());
-			 			newAnalyseOffre.setAnfDteModif(Calendar.getInstance().getTime());
-			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
-			 			newAnalyseOffre.setAnfLaaId(sltOffre.getDofLaaId().longValue());
-			 			newAnalyseOffre.setAnfValeurConf(ligne.getAaoRegQual());
-			 			newAnalyseOffre.setAnfValeurScore(ligne.getValRegQual());
-			 			newAnalyseOffre.setAnfCommentaire(ligne.getDcadCommentaire());
-			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-			 			iservice.addObject(newAnalyseOffre);
-			 		}
-		         //}
-				chargeLotByAvis();
-				//editerAna = true;
-				listeSelectionPiecesOffresAnalyse.clear();
-				selectionCritereAnalyse.clear();
-				userController.setTexteMsg("Analyse effectuée avec succès !");
-				userController.setRenderMsg(true);
-				userController.setSevrityMsg("success");
-			//}
-			onSelectLot();
-		}
-		
 		
 		
 		//Ajouter attributaire
@@ -3309,7 +3328,21 @@ public class CommissionController {
 		this.lotJug = lotJug;
 	}
 
+	public VbAnalyseOffre getSltAnalyse() {
+		return sltAnalyse;
+	}
 
+	public void setSltAnalyse(VbAnalyseOffre sltAnalyse) {
+		this.sltAnalyse = sltAnalyse;
+	}
+
+	public VbTempParamAnalyseOff getNewTempParamAnalyseOff() {
+		return newTempParamAnalyseOff;
+	}
+
+	public void setNewTempParamAnalyseOff(VbTempParamAnalyseOff newTempParamAnalyseOff) {
+		this.newTempParamAnalyseOff = newTempParamAnalyseOff;
+	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;

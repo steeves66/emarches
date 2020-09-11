@@ -219,7 +219,7 @@
                               <p:commandLink action="#{commissionController.chargePiecesAnalyse()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-left:3px"
 				               title="Analyser l'offre" update=":content">
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                        
                             </p:commandLink>
                             
                               <p:commandLink rendered="#{slctdTb.dofStatut == '1' }" action="#{commissionController.editerFicheOffre()}" ajax="false" class="btn btn-xs btn-warning" style="background-color: #f88b2e; margin-left:3px"
@@ -472,6 +472,7 @@
          				                        </h:panelGroup>
          				                         </f:facet>
          				                             <f:facet name="input">
+         				     
          				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
 	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
 				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
@@ -635,7 +636,7 @@
          				  </f:facet>
          				  <f:facet name="input">
          				  <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQualx}" style="width:100%; color:#0000">
+	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQual}" style="width:100%; color:#0000">
 				              <f:selectItem itemLabel="Choisir" itemValue="" />
 	                         <f:selectItem itemLabel="CONFORME" itemValue="CONFORME" />
 	                         <f:selectItem itemLabel="NON CONFORME" itemValue="NON CONFORME" />
