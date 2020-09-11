@@ -541,7 +541,7 @@ public class DaoController {
 					 lotCrit=listeLotCritere.get(0);
 					 if(lotCrit.getCritOk() != 0) {
 						 FacesContext.getCurrentInstance().addMessage(null,
-								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore ("+lotCrit.getCritOk()+") lots qui n'ont pas de critères", ""));
+								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critères", ""));
 						 return "criterebyLot";
 					 }
 			     }
@@ -5261,7 +5261,7 @@ public class DaoController {
 			      chargeCritereByLot();
 			      chargeCritereFactCombobox();
 			      chargeLotCritere();
-			  	  userController.setTexteMsg("Liste des critÃ¨res vidÃ©e avec succÃ¨s!");
+			  	  userController.setTexteMsg("Liste des critères vidée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
 			    } 
