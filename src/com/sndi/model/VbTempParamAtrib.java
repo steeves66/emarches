@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 14 sept. 2020 14:04:06 by Hibernate Tools 4.3.5.Final
+// Generated 14 sept. 2020 14:48:17 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -32,10 +32,10 @@ public class VbTempParamAtrib implements java.io.Serializable {
 	private String attDacCode;
 	private BigDecimal attDofLaaNum;
 	private String attFonCode;
-	private String attMtAttr;
+	private BigDecimal attMtAttr;
 	private String attDofRet;
 	private String attSouNcc;
-	private String attLaaId;
+	private BigDecimal attLaaId;
 	private BigDecimal attDofNum;
 
 	public VbTempParamAtrib() {
@@ -47,8 +47,8 @@ public class VbTempParamAtrib implements java.io.Serializable {
 
 	public VbTempParamAtrib(BigDecimal tempNum, String tempType, String attOpeMatricile, Date attDteAttrib,
 			String attDofAaoCode, String attDofStatut, BigDecimal attDofOffNum, String attDacCode,
-			BigDecimal attDofLaaNum, String attFonCode, String attMtAttr, String attDofRet, String attSouNcc,
-			String attLaaId, BigDecimal attDofNum) {
+			BigDecimal attDofLaaNum, String attFonCode, BigDecimal attMtAttr, String attDofRet, String attSouNcc,
+			BigDecimal attLaaId, BigDecimal attDofNum) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.attOpeMatricile = attOpeMatricile;
@@ -160,12 +160,12 @@ public class VbTempParamAtrib implements java.io.Serializable {
 		this.attFonCode = attFonCode;
 	}
 
-	@Column(name = "ATT_MT_ATTR", length = 500)
-	public String getAttMtAttr() {
+	@Column(name = "ATT_MT_ATTR", precision = 22, scale = 0)
+	public BigDecimal getAttMtAttr() {
 		return this.attMtAttr;
 	}
 
-	public void setAttMtAttr(String attMtAttr) {
+	public void setAttMtAttr(BigDecimal attMtAttr) {
 		this.attMtAttr = attMtAttr;
 	}
 
@@ -187,12 +187,12 @@ public class VbTempParamAtrib implements java.io.Serializable {
 		this.attSouNcc = attSouNcc;
 	}
 
-	@Column(name = "ATT_LAA_ID", length = 500)
-	public String getAttLaaId() {
+	@Column(name = "ATT_LAA_ID", precision = 22, scale = 0)
+	public BigDecimal getAttLaaId() {
 		return this.attLaaId;
 	}
 
-	public void setAttLaaId(String attLaaId) {
+	public void setAttLaaId(BigDecimal attLaaId) {
 		this.attLaaId = attLaaId;
 	}
 
