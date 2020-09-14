@@ -44,6 +44,7 @@ import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
 import com.sndi.model.TFonction;
 import com.sndi.model.THistoAgpm;
+import com.sndi.model.THistoPlanGeneral;
 import com.sndi.model.TLotAao;
 import com.sndi.model.TNatureDocuments;
 import com.sndi.model.TNaturePiece;
@@ -99,6 +100,7 @@ import com.sndi.model.VbCommissionSpecifique;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamAnalyseOff;
+import com.sndi.model.VbTempParamAtrib;
 import com.sndi.model.VbTempParamDetOffres;
 import com.sndi.model.VbTempParametreCom;
 import com.sndi.model.VbTempParametreFactAn;
@@ -226,6 +228,7 @@ public class CommissionController {
 	private VCritereAnalyseDacOfftec sltCritere =new VCritereAnalyseDacOfftec();
 	private TAvisAppelOffre sltAvis =new TAvisAppelOffre();
 	private TDetCommissionSeance detCom = new TDetCommissionSeance();
+	private VbTempParamAtrib newAttrib = new VbTempParamAtrib();
 	 private TDossierMbr selectedDossier = new TDossierMbr();
 	 private TDossierAao selectedDossierAao = new TDossierAao();
 	
@@ -235,6 +238,7 @@ public class CommissionController {
 	 private List<VListeSouOffEleve> listeSouOffEleve  = new ArrayList<VListeSouOffEleve>();
 	 private List<VResultEvalClassLot> resultatAttributaire = new ArrayList<VResultEvalClassLot>();
 	 private List<VResultPropAttribLot> resultatPropAttributaire = new ArrayList<VResultPropAttribLot>();
+	 private List<VResultPropAttribLot> selectionAttributaire = new ArrayList<VResultPropAttribLot>();
 	 private List<VRecapSeuilAnormal> listeRecapSeuil = new ArrayList<VRecapSeuilAnormal>();
 	 private VRecapSeuilAnormal infoSeuil =new VRecapSeuilAnormal();
 	 private VVerifcorOffin infoLot =new VVerifcorOffin();
@@ -267,6 +271,7 @@ public class CommissionController {
 	 private VLotJugement lotJug = new VLotJugement();
 	 private VLotAnalyseFin lots = new VLotAnalyseFin();
 	 private VLotAnalyseFin lotFin = new VLotAnalyseFin();
+	 //private VLotJugement lotAttr = new VLotJugement();
 	 private VLot sltLot = new VLot();
 	 private TDetailVente vente = new TDetailVente();
 	 private TPiecesOffres newPieceOffre = new TPiecesOffres();
@@ -297,6 +302,7 @@ public class CommissionController {
 	 private boolean finOuv = true;
 	 private boolean editerPv = false;
 	 private boolean editerAna = false;
+	 private Date dofAttribDte; 
 	 
 	 private boolean conformite=false;
 	 private Boolean montant=false;
@@ -317,6 +323,7 @@ public class CommissionController {
 	 private BigDecimal dofNum;
 	 private long laaNum;
 	 private long laaNumRepech;
+	 private long laaNumJug;
 	 private long lotId;
 	 private int nbrLot;
 	 private String filtreCandidat="";
@@ -374,19 +381,19 @@ public class CommissionController {
 	//Selection d'un lot dans le tableau*
 		 public void chargeResultaFilter() {
 			 listeVerifCor = ((List<VVerifcorOffin>)iservice.getObjectsByColumn("VVerifcorOffin",new ArrayList<String>(Arrays.asList("RId")),
-					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId))); 
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotJug.getLaaId()))); 
 			  if (!listeVerifCor.isEmpty()) {
 				  infoLot=listeVerifCor.get(0); 
 		       }
 			 
 			 listeSouOffEleve = ((List<VListeSouOffEleve>)iservice.getObjectsByColumn("VListeSouOffEleve",new ArrayList<String>(Arrays.asList("RId")),
-					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotJug.getLaaId())));
 			 
 			 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
-					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotJug.getLaaId())));
 			 
 			 listeRecapSeuil =  ((List<VRecapSeuilAnormal>)iservice.getObjectsByColumn("VRecapSeuilAnormal",new ArrayList<String>(Arrays.asList("DOF_LAA_ID")),
-					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+					 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+lotJug.getLaaId())));
 		       if (!listeRecapSeuil.isEmpty()) {
 		    	   infoSeuil=listeRecapSeuil.get(0); 
 		       }
@@ -844,6 +851,15 @@ public class CommissionController {
 			_logger.info("listeSoumissionByLot size: "+listeSoumissionByLot.size());
 		 }
 		 
+		//filtre lot par le numero de lot au jugement
+		 public void chargeFilterLotByLotNumJug() {
+			 listeLotsByJug.clear();
+			 listeLotsByJug=(List<VLotJugement>) iservice.getObjectsByColumn("VLotJugement", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+					new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()),
+					new WhereClause("LAA_NUM",WhereClause.Comparateur.LIKE,"%"+laaNumJug+"%")); 
+			_logger.info("listeLotsByJug size: "+listeLotsByJug.size());
+		 }
+			
 		 
 		 //Affichage des offres recevables et non recevables
 		 public void natureOffre() {
@@ -1710,14 +1726,41 @@ public class CommissionController {
 		
 		
 		//Ajouter attributaire
-		public void ajouterAttributaire() {
+				public void ajouterAttributaire() {
+					
+					for(VResultPropAttribLot ligne : selectionAttributaire) {
+						newAttrib.setAttDacCode(slctdTd.getTDacSpecs().getDacCode());
+						newAttrib.setAttDofAaoCode(slctdTd.getAaoCode());
+						newAttrib.setAttDofLaaNum(lotJug.getLaaNum());
+						//newAttrib.setAttDofOffNum(slctdTd.gett));
+						newAttrib.setAttDofNum(ligne.getDofNum());
+						newAttrib.setAttDofRet("O");
+						newAttrib.setAttDofStatut("2");
+						newAttrib.setAttDteAttrib(ligne.getDofAttribDte());
+						newAttrib.setAttDteAttrib(ligne.getDofAttribDte());
+						newAttrib.setAttFonCode(userController.getSlctd().getTFonction().getFonCod());
+						newAttrib.setAttLaaId(lotJug.getLaaId());
+						newAttrib.setAttMtAttr(ligne.getDofMtAtt());
+						newAttrib.setAttSouNcc(ligne.getOffSouNcc()); 
+						newAttrib.setAttOpeMatricile(userController.getSlctd().getTOperateur().getOpeMatricule());
+						newAttrib.setTempType("ATT");
+			 			iservice.addObject(newAttrib);
+			 		}
+					chargeResultaFilter();
+					userController.setTexteMsg("Attributaire(s) validé(s) avec succès !");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+				}
+						
+		
+		/*public void ajouterAttributaire() {
 			
-			/*listeSeance = (List<TSeances>) iservice.getObjectsByColumn("TSeances", new ArrayList<String>(Arrays.asList("SEA_NUM")),
+			listeSeance = (List<TSeances>) iservice.getObjectsByColumn("TSeances", new ArrayList<String>(Arrays.asList("SEA_NUM")),
 	 			       new WhereClause("SEA_TSE_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()),
 	 			       new WhereClause("PLP_GES_CODE",WhereClause.Comparateur.EQ,""+gesCode),
 					   new WhereClause("PLP_FON_COD",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	 	  if (!listPlan.isEmpty()) {
-	 		  planPass= listPlan.get(0);*/
+	 		  planPass= listPlan.get(0);
 			//Création de la séance
 			//newSeance.setSeaLibelle("Séance de jugement des offres du DAO N° "+slctdTd.getTDacSpecs());
 			newSeance.setSeaLibelle("Séance de jugement des offres du DAO N°");
@@ -1745,21 +1788,21 @@ public class CommissionController {
 			affichage=false;
 			
 			
-			/*//Création de details seance
+			//Création de details seance
 			newDetailSeance.setDcsDteSaisi(Calendar.getInstance().getTime());
 			newDetailSeance.setTDacSpecs(slctdTd.getTDacSpecs());
 			newDetailSeance.setTSeances(newSeance);
 			newDetailSeance.setTTypeCommission(new TTypeCommission("COJ"));
 			newDetailSeance.setTCommissionSpecifique(new TCommissionSpecifique(8));
 			//newDetailSeance.set
-			iservice.addObject(newDetailSeance);*/
+			iservice.addObject(newDetailSeance);
 			
 			chargeAttributaire();
 			chargeAffAttributaire();
 			userController.setTexteMsg("Seance crééé avec succès !");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
-		}
+		}*/
 		
 		//Fin Analyse
 		 public void finJugement() {
@@ -3359,6 +3402,70 @@ public class CommissionController {
 
 	public void setNewTempParamAnalyseOff(VbTempParamAnalyseOff newTempParamAnalyseOff) {
 		this.newTempParamAnalyseOff = newTempParamAnalyseOff;
+	}
+
+	public List<VResultPropAttribLot> getSelectionAttributaire() {
+		return selectionAttributaire;
+	}
+
+	public void setSelectionAttributaire(List<VResultPropAttribLot> selectionAttributaire) {
+		this.selectionAttributaire = selectionAttributaire;
+	}
+
+	public long getLaaNumJug() {
+		return laaNumJug;
+	}
+
+	public void setLaaNumJug(long laaNumJug) {
+		this.laaNumJug = laaNumJug;
+	}
+
+	public VbTempParamAtrib getNewAttrib() {
+		return newAttrib;
+	}
+
+	public void setNewAttrib(VbTempParamAtrib newAttrib) {
+		this.newAttrib = newAttrib;
+	}
+
+	public Date getDofAttribDte() {
+		return dofAttribDte;
+	}
+
+	public void setDofAttribDte(Date dofAttribDte) {
+		this.dofAttribDte = dofAttribDte;
+	}
+
+	public String getLieuSeance() {
+		return lieuSeance;
+	}
+
+	public void setLieuSeance(String lieuSeance) {
+		this.lieuSeance = lieuSeance;
+	}
+
+	public Date getDateCom() {
+		return dateCom;
+	}
+
+	public void setDateCom(Date dateCom) {
+		this.dateCom = dateCom;
+	}
+
+	public String getHeureComD() {
+		return heureComD;
+	}
+
+	public void setHeureComD(String heureComD) {
+		this.heureComD = heureComD;
+	}
+
+	public String getHeureComF() {
+		return heureComF;
+	}
+
+	public void setHeureComF(String heureComF) {
+		this.heureComF = heureComF;
 	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {

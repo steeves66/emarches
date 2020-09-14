@@ -2,6 +2,8 @@ package com.sndi.model;
 // Generated 2 juil. 2020 19:52:59 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -20,21 +22,26 @@ public class VResultPropAttribLot implements java.io.Serializable {
 
 	private BigDecimal RId;
 	private BigDecimal ordre;
+	private BigDecimal dofNum;
 	private String rang;
 	private String laaDacCode;
 	private BigDecimal lot;
 	private String entreprise;
 	private BigDecimal montant;
+	private BigDecimal dofMtAtt;
 	private BigDecimal noteCombinee;
 	private BigDecimal delai;
 	private String offSouNcc;
 	private String offSouSigleSte;
+	private Date dofAttribDte;
 
 	public VResultPropAttribLot() {
 	}
 
 
-	public VResultPropAttribLot(BigDecimal RId, BigDecimal ordre, String rang, String laaDacCode, BigDecimal lot, String entreprise, BigDecimal montant, BigDecimal noteCombinee, BigDecimal delai, String offSouNcc, String offSouSigleSte) {
+	public VResultPropAttribLot(BigDecimal RId, BigDecimal ordre, BigDecimal dofNum,String rang, String laaDacCode,
+			BigDecimal lot, String entreprise, BigDecimal montant,BigDecimal dofMtAtt, BigDecimal noteCombinee, BigDecimal delai, 
+			String offSouNcc, String offSouSigleSte,Date dofAttribDte) {
        this.RId = RId;
        this.ordre = ordre;
        this.rang = rang;
@@ -46,6 +53,9 @@ public class VResultPropAttribLot implements java.io.Serializable {
        this.delai = delai;
        this.offSouNcc = offSouNcc;
        this.offSouSigleSte = offSouSigleSte;
+       this.dofNum = dofNum;
+       this.dofMtAtt = dofMtAtt;
+       this.dofAttribDte = dofAttribDte;
     }
 
 	
@@ -66,6 +76,15 @@ public class VResultPropAttribLot implements java.io.Serializable {
 
 	public void setOrdre(BigDecimal ordre) {
 		this.ordre = ordre;
+	}
+	
+	@Column(name = "DOF_NUM")
+	public BigDecimal getDofNum() {
+		return this.dofNum;
+	}
+
+	public void setDofNum(BigDecimal dofNum) {
+		this.dofNum = dofNum;
 	}
 
 	@Column(name = "RANG", length = 42)
@@ -112,6 +131,15 @@ public class VResultPropAttribLot implements java.io.Serializable {
 	public void setMontant(BigDecimal montant) {
 		this.montant = montant;
 	}
+	
+	@Column(name = "DOF_MT_ATT")
+	public BigDecimal getDofMtAtt() {
+		return this.dofMtAtt;
+	}
+
+	public void setDofMtAtt(BigDecimal dofMtAtt) {
+		this.dofMtAtt = dofMtAtt;
+	}
 
 	@Column(name = "NOTE_COMBINEE", precision = 22, scale = 0)
 	public BigDecimal getNoteCombinee() {
@@ -148,5 +176,18 @@ public class VResultPropAttribLot implements java.io.Serializable {
 	public void setOffSouSigleSte(String offSouSigleSte) {
 		this.offSouSigleSte = offSouSigleSte;
 	}
+
+
+	@Column(name = "DOF_ATTRIB_DTE")
+	public Date getDofAttribDte() {
+		return dofAttribDte;
+	}
+
+
+	public void setDofAttribDte(Date dofAttribDte) {
+		this.dofAttribDte = dofAttribDte;
+	}
+	
+	
 
 }

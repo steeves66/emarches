@@ -52,18 +52,6 @@
 				<strong>Succès!</strong> #{userController.texteMsg}.</div>
 				</h:panelGroup>
      <div class="box"></div>
-     
-        <div class="form-group ">
-	                  <label for="typeFonction" class="col-sm-1 control-label"><b>Liste des lots</b></label>
-	                  <div class="col-sm-11">
-	                     <p:selectOneMenu id="typeFonction" value="#{commissionController.laaId}"
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			            <f:selectItem  itemLabel="Choisir le lot.." itemValue="empty" />  
-			            <f:selectItems value="#{commissionController.listeLotsByJug}" var="lot" itemLabel="#{lot.laaNum} : #{lot.laaObjet}" itemValue="#{lot.laaId}" />
-			           <p:ajax listener="#{commissionController.chargeResultaFilter()}" update=":gnl"/>
-       		        </p:selectOneMenu> 
-	                  </div>
-	                </div>
 	     <h:panelGroup id="resultat">
         <ui:include src="inclusions/statistique.xhtml"  /> 
     <div class="box box-success">
@@ -71,7 +59,64 @@
               <div class="box-body">
               <div class="row">
              
-            
+            <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-3">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{commissionController.chargeLotByJug()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:lotRepech" />
+				                </span>
+			                      <p:inputText value="#{commissionController.laaNumJug}" styleClass="form-control" type="text"  placeholder="saisir le numero du lot"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{commissionController.chargeFilterLotByLotNumJug()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:lotRepech" />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>         
+                 <p:dataTable var="slctdTb"  id="lotRepech" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeLotsByJug}" 
+                selection="#{commissionController.lotJug}" selectionMode="single" scrollable="true" scrollHeight="150" rowKey="#{slctdTb.laaId}" emptyMessage="Aucun Lot enregistré">
+                     
+                           <p:column headerText="N°Lot" styleClass="col-sm-1">
+				            <h:commandLink  title="N°Lot" styleClass="col-sm-1"
+         				 action="#{commissionController.chargeResultaFilter()}">
+                                <h:outputText value="#{slctdTb.laaNum}"/>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotJug}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				      
+				        
+				         <p:column headerText="Objet" styleClass="col-sm-9">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10"
+         				 action="#{commissionController.chargeResultaFilter()}">
+                                <h:outputText value="#{slctdTb.laaObjet}"/>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotJug}" />
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				        <p:column headerText="Montant estimé" styleClass="col-sm-2">
+				           <h:commandLink  title="Montant estimé" styleClass="col-sm-10"
+         				 action="#{commissionController.chargeResultaFilter()}">
+                                <h:outputText value="#{slctdTb.laaMtEst}">
+                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                                </h:outputText>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.lotJug}" />
+                         </h:commandLink>
+				           
+				        </p:column>
+
+                        </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
             <div class="col-md-12">
              
 	           <div class="box box-success box-solid">
@@ -255,23 +300,53 @@
                    <legend><small style="font-weight: bold;">PROPOSITION D'ATTRIBUTION</small></legend>
                    
                    <p:dataTable var="slctdTb"  id="finance4" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.resultatPropAttributaire}" 
+                    rowKey="#{slctdTb.dofNum}" selection="#{commissionController.selectionAttributaire}"   editable="true" editMode="cell"
                  scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
-                         
+                         <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
                           <p:column headerText="LOT" styleClass="col-sm-1" >
          				  <h:outputText value="#{slctdTb.lot}" />
 				        </p:column>	
 				        <p:column headerText="ENTREPRISE" styleClass="col-sm-7" >
          				  <h:outputText value="#{slctdTb.entreprise}" />
 				        </p:column>
-				         <p:column headerText="MONTANT" styleClass="col-sm-2" >
-         				  <h:outputText styleClass="pull-right" value="#{slctdTb.montant}">
+				         <p:column headerText="MONTANT ATTRIBUE" styleClass="col-sm-2">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.dofMtAtt}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
-				        </p:column>	
+		                </f:facet>
+		                <f:facet name="input"> 
+		                <p:inputText value="#{slctdTb.dofMtAtt}" style="width:100%"> 
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                 </p:inputText>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				          <p:column headerText="DATE D'ATTRIBUTION" styleClass="col-sm-2">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.dofAttribDte}">
+		                <f:convertDateTime pattern="dd/MM/yyyy" />
+         				  </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> 
+		                 <p:calendar value="#{commissionController.dofAttribDte}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
+                         </p:calendar>
+		                 </f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				       
 				         <p:column headerText="DELAI D'EXECUTION(Jours)" styleClass="col-sm-2" >
          				  <h:outputText styleClass="pull-right" value="#{slctdTb.delai}" />
 				        </p:column>	
 				         </p:dataTable>
+				            
+						        <p:commandLink styleClass="btn btn-success pull-right" style=" background-color: #036d3b" action="#{commissionController.ajouterAttributaire()}" update=":content">
+								       <i class="ace-icon fa fa-save bigger-130"></i> Valider
+								     </p:commandLink> 
+						     
                    </fieldset>
                    </div>
                    
