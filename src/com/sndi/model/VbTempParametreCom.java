@@ -20,7 +20,7 @@ import org.hibernate.annotations.Immutable;
  */
 @Entity
 @Immutable
-@Table(name = "VB_TEMP_PARAMETRE_COM")
+@Table(name = "VB_TEMP_PARAMETRE_COM")  
 public class VbTempParametreCom implements java.io.Serializable {
 
 	private BigDecimal tempNum;

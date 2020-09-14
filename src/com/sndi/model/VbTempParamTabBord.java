@@ -63,8 +63,8 @@ public class VbTempParamTabBord implements java.io.Serializable {
 	}
 
 	@Id
-	@SequenceGenerator(name = "SEQ_VB_TAB_BORD_Sequence", sequenceName = "SEQ_VB_TAB_BORD", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_VB_TAB_BORD_Sequence")
+	@SequenceGenerator(name = "SEQ_TEM_PAR2_NUM_Sequence", sequenceName = "SEQ_TEM_PAR2_NUM", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_TEM_PAR2_NUM_Sequence")
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getTempNum() {
 		return this.tempNum;
