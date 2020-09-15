@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-09-10T15:52:15 -->
+<!-- 2020-09-15T16:04:08 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SYNT_DAC" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="12638759-8bdf-4052-99e0-726c9f1ce120">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP_TEST.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -115,13 +115,13 @@
 	<subDataset name="list_lot" uuid="18f628e2-2c3d-4b5f-a4a8-6287c2285a9c">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select lot.laa_id,lot.laa_num,lot.laa_objet,lot.laa_delai_exe,lot.laa_lbg_imputation,lbg.lbg_imputation,lot.laa_lieu_exe,lot.laa_mt_est,lot.laa_mt_caut
 from vb_lot_aao lot, vb_avis_appel_offre aoo, v_l_budgets lbg
 where lot.laa_aao_code=aoo.aao_code
 and lot.laa_lbg_imputation=lbg.lbg_code
-and aoo.aao_dac_code=$P{dac_code}
+and aoo.aao_dac_code=$P{param_code_1}
 order by lot.laa_num]]>
 		</queryString>
 		<field name="LAA_ID" class="java.math.BigDecimal"/>
@@ -136,54 +136,50 @@ order by lot.laa_num]]>
 	</subDataset>
 	<subDataset name="list_pc" uuid="04aaea1c-7723-49c5-a15a-3cb5b7682601">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
-			<![CDATA[select distinct cag.cra_code,cag.cra_libelle
-from v_synthese_dac2 cag
-where cag.dac_code=$P{dac_code}
-and cag.cra_code like 'AA%'
-order by cag.cra_code]]>
+			<![CDATA[select cag.lib_critere,cag.commentaire
+from v_critere_analyse_dac_glob cag
+where cag.dcad_dac_code=$P{param_code_1}
+and cag.repcode like 'AA%']]>
 		</queryString>
-		<field name="CRA_CODE" class="java.lang.String"/>
-		<field name="CRA_LIBELLE" class="java.lang.String"/>
+		<field name="LIB_CRITERE" class="java.lang.String"/>
+		<field name="COMMENTAIRE" class="java.lang.String"/>
 	</subDataset>
 	<subDataset name="crit_list" uuid="81f3e92e-e356-46cb-a3ed-ef8178126197">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<parameter name="param_code_1" class="java.lang.String">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+		</parameter>
 		<queryString language="SQL">
-			<![CDATA[select distinct *
+			<![CDATA[select *
 from v_critere_analyse_dac_glob cag
-where cag.dcad_dac_code=$P{dac_code}
-and cag.repcode like 'CT%'
-order by cag.repcode]]>
+where cag.dcad_dac_code=$P{param_code_1}
+and cag.repcode not like 'AA%'
+--order by cag.dcad_dac_code,cag.repcode]]>
 		</queryString>
 		<field name="DCAD_DAC_CODE" class="java.lang.String"/>
 		<field name="REPCODE" class="java.lang.String"/>
 		<field name="LIB_CRITERE" class="java.lang.String"/>
+		<field name="TXT" class="java.lang.String"/>
 		<field name="COMMENTAIRE" class="java.lang.String"/>
-		<field name="DCAD_COMMENTAIRE" class="java.lang.String"/>
 	</subDataset>
 	<subDataset name="com_list" uuid="6f20ca54-c3c6-4a11-a291-b6e20b55e643">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select distinct sd.com_tct_titre,sd.com_tct_libelle
 from v_synthese_dac2 sd
-where sd.dac_code=$P{dac_code}
+where sd.dac_code=$P{param_code_1}
 order by sd.com_tct_titre desc]]>
 		</queryString>
 		<field name="COM_TCT_TITRE" class="java.lang.String"/>
 		<field name="COM_TCT_LIBELLE" class="java.lang.String"/>
 	</subDataset>
-	<parameter name="param_code_1" class="java.lang.String">
-		<parameterDescription><![CDATA[]]></parameterDescription>
-	</parameter>
-	<parameter name="param_image" class="java.lang.String">
-		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="param_code_1" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT distinct *
 FROM v_synthese_dac2 sd
@@ -212,10 +208,6 @@ where sd.dac_code=$P{param_code_1}]]>
 	<field name="AAO_NBR_LOT" class="java.math.BigDecimal"/>
 	<field name="AAO_COUT_DAC" class="java.math.BigDecimal"/>
 	<field name="AAO_REG_QUAL" class="java.lang.String"/>
-	<field name="DCAD_DAC_CODE" class="java.lang.String"/>
-	<field name="CRA_CODE" class="java.lang.String"/>
-	<field name="CRA_LIBELLE" class="java.lang.String"/>
-	<field name="DCAD_COMMENTAIRE" class="java.lang.String"/>
 	<field name="COM_DAC_CODE" class="java.lang.String"/>
 	<field name="COM_TCT_TITRE" class="java.lang.String"/>
 	<field name="COM_TCT_LIBELLE" class="java.lang.String"/>
@@ -229,7 +221,7 @@ where sd.dac_code=$P{param_code_1}]]>
 					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
-					<text><![CDATA[DAC n° :]]></text>
+					<text><![CDATA[DAC N° :]]></text>
 				</staticText>
 				<textField>
 					<reportElement isPrintRepeatedValues="false" x="106" y="34" width="364" height="20" uuid="18cb7e65-0543-4f12-8d42-87b6c371e0a2"/>
@@ -261,36 +253,36 @@ where sd.dac_code=$P{param_code_1}]]>
 			</band>
 			<band height="69">
 				<staticText>
-					<reportElement x="7" y="0" width="96" height="20" uuid="8fecfad4-5ea9-443c-b1e6-1ed80d7cdcb7"/>
+					<reportElement x="10" y="0" width="96" height="20" uuid="8fecfad4-5ea9-443c-b1e6-1ed80d7cdcb7"/>
 					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Type de marché :]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement isPrintRepeatedValues="false" x="103" y="0" width="364" height="20" uuid="22d5df0b-b69d-45d9-8d9f-72ac75389da3"/>
+					<reportElement isPrintRepeatedValues="false" x="106" y="0" width="364" height="20" uuid="22d5df0b-b69d-45d9-8d9f-72ac75389da3"/>
 					<box leftPadding="4"/>
 					<textFieldExpression><![CDATA[$F{TYM_LIBELLE_LONG}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement isPrintRepeatedValues="false" x="103" y="20" width="364" height="20" uuid="ee2a01bc-073d-4d43-b092-ebeaf3d085d0"/>
+					<reportElement isPrintRepeatedValues="false" x="106" y="20" width="364" height="20" uuid="ee2a01bc-073d-4d43-b092-ebeaf3d085d0"/>
 					<box leftPadding="4"/>
 					<textFieldExpression><![CDATA[$F{MOP_LIBELLE_LONG}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement isPrintRepeatedValues="false" x="103" y="40" width="364" height="20" uuid="8ad1c949-f3d1-4ce1-afc1-ee408d30d8a7"/>
+					<reportElement isPrintRepeatedValues="false" x="106" y="40" width="364" height="20" uuid="8ad1c949-f3d1-4ce1-afc1-ee408d30d8a7"/>
 					<box leftPadding="4"/>
 					<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{AAO_COUT_DAC})+" F CFA"]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="7" y="40" width="96" height="20" uuid="cb92658c-34ae-4887-b915-802d9a52e244"/>
+					<reportElement x="10" y="40" width="96" height="20" uuid="cb92658c-34ae-4887-b915-802d9a52e244"/>
 					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
 					<text><![CDATA[Coût de retrait :]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="7" y="20" width="96" height="20" uuid="500faf11-8f7a-4c73-a75d-751651ca18d9"/>
+					<reportElement x="1" y="20" width="105" height="20" uuid="500faf11-8f7a-4c73-a75d-751651ca18d9"/>
 					<textElement textAlignment="Right">
 						<font isBold="true"/>
 					</textElement>
@@ -359,15 +351,15 @@ where sd.dac_code=$P{param_code_1}]]>
 					<text><![CDATA[LOT(S) DE L'AVIS]]></text>
 				</staticText>
 				<componentElement>
-					<reportElement x="0" y="39" width="551" height="41" uuid="a9522fe2-00ae-4568-b1fe-5ac459b02dea">
+					<reportElement x="2" y="39" width="551" height="41" uuid="a9522fe2-00ae-4568-b1fe-5ac459b02dea">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="list_lot" uuid="13119501-4dd7-4c3d-bdb5-ccdd0eb5af34">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="list_lot" uuid="8fe7d256-3b7b-4717-8964-8bf34c5c3e6f">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -384,8 +376,10 @@ where sd.dac_code=$P{param_code_1}]]>
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="20">
 								<textField>
-									<reportElement x="0" y="0" width="20" height="20" uuid="bde4b443-7a03-45a4-b2fb-991c1866d041"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="20" height="20" uuid="bde4b443-7a03-45a4-b2fb-991c1866d041"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
 									<textFieldExpression><![CDATA[$F{LAA_NUM}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -404,7 +398,9 @@ where sd.dac_code=$P{param_code_1}]]>
 								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 									<reportElement stretchType="ContainerHeight" x="0" y="0" width="240" height="20" uuid="4d96bad8-5b03-4b5a-a0fa-dcabfe68a172"/>
 									<box leftPadding="4"/>
-									<textElement verticalAlignment="Middle"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
 									<textFieldExpression><![CDATA[$F{LAA_OBJET}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -421,8 +417,10 @@ where sd.dac_code=$P{param_code_1}]]>
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="20">
 								<textField>
-									<reportElement x="0" y="0" width="130" height="20" uuid="a9461ec8-52cf-401d-afba-8f640874b972"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="130" height="20" uuid="a9461ec8-52cf-401d-afba-8f640874b972"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
 									<textFieldExpression><![CDATA[$F{LBG_IMPUTATION}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -439,8 +437,10 @@ where sd.dac_code=$P{param_code_1}]]>
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="20">
 								<textField>
-									<reportElement x="0" y="0" width="40" height="20" uuid="cc66e71f-5621-4b18-b083-478191a93f05"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="40" height="20" uuid="cc66e71f-5621-4b18-b083-478191a93f05"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
 									<textFieldExpression><![CDATA[$F{LAA_DELAI_EXE}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -457,8 +457,10 @@ where sd.dac_code=$P{param_code_1}]]>
 							</jr:columnHeader>
 							<jr:detailCell style="Table_TD" height="20">
 								<textField>
-									<reportElement x="0" y="0" width="120" height="20" uuid="9931d4d9-4def-4280-a689-40011731d7b3"/>
-									<textElement textAlignment="Center" verticalAlignment="Middle"/>
+									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="120" height="20" uuid="9931d4d9-4def-4280-a689-40011731d7b3"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="SansSerif" size="10"/>
+									</textElement>
 									<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{LAA_MT_CAUT})+" F CFA"]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
@@ -487,14 +489,15 @@ where sd.dac_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 3_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="list_pc" uuid="290766cf-42ac-43ef-85ec-05fbf3fcc3a8">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="list_pc" uuid="f4d043ed-f91b-40cf-ae00-cd45066f7a7a">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
 						<jr:column width="554" uuid="fb9db2f9-eddb-4ef2-b078-fb069af7446f">
-							<jr:columnHeader style="Table 3_CH" height="20">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
+							<jr:columnHeader style="Table 3_CH" height="20" rowSpan="1">
 								<staticText>
 									<reportElement x="0" y="0" width="554" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="44702946-6a22-4e03-bedd-c56f4f731376"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -508,7 +511,7 @@ where sd.dac_code=$P{param_code_1}]]>
 									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="554" height="20" uuid="e0713231-ce24-4c46-9143-3ee88203411b"/>
 									<box rightPadding="3"/>
 									<textElement verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{CRA_LIBELLE}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{LIB_CRITERE}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
@@ -534,17 +537,17 @@ where sd.dac_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="crit_list" uuid="3b0dfd3b-687a-4659-bd9b-92476fb9bca8">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="crit_list" uuid="97524403-01e2-4745-a65d-bbca5d32300f">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
-						<jr:column width="320" uuid="df758b9b-25b7-4bcd-bda4-a602ff071fb2">
+						<jr:column width="340" uuid="df758b9b-25b7-4bcd-bda4-a602ff071fb2">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
 							<jr:columnHeader style="Table 1_CH" height="20" rowSpan="1">
 								<staticText>
-									<reportElement mode="Opaque" x="0" y="0" width="320" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="378bf34d-46d8-439f-93e6-95cebfc473c6"/>
+									<reportElement mode="Opaque" x="0" y="0" width="340" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="378bf34d-46d8-439f-93e6-95cebfc473c6"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="12" isBold="true"/>
 									</textElement>
@@ -553,18 +556,18 @@ where sd.dac_code=$P{param_code_1}]]>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="11">
 								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="320" height="11" isRemoveLineWhenBlank="true" uuid="fef1af8e-121e-4e15-aa1e-3a16b2f7818e"/>
+									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="340" height="11" isRemoveLineWhenBlank="true" uuid="fef1af8e-121e-4e15-aa1e-3a16b2f7818e"/>
 									<box leftPadding="4"/>
 									<textElement verticalAlignment="Middle"/>
 									<textFieldExpression><![CDATA[$F{LIB_CRITERE}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
-						<jr:column width="226" uuid="5e49de14-fa4f-4e40-ba67-6541a7db3270">
+						<jr:column width="206" uuid="5e49de14-fa4f-4e40-ba67-6541a7db3270">
 							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne2"/>
 							<jr:columnHeader style="Table 1_CH" height="20" rowSpan="1">
 								<staticText>
-									<reportElement mode="Opaque" x="0" y="0" width="226" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="04eb6844-de3d-45e0-97da-b79f35b04e98"/>
+									<reportElement mode="Opaque" x="0" y="0" width="206" height="20" forecolor="#FFFFFF" backcolor="#2DB539" uuid="04eb6844-de3d-45e0-97da-b79f35b04e98"/>
 									<textElement textAlignment="Center" verticalAlignment="Middle">
 										<font size="12" isBold="true"/>
 									</textElement>
@@ -573,10 +576,10 @@ where sd.dac_code=$P{param_code_1}]]>
 							</jr:columnHeader>
 							<jr:detailCell style="Table 1_TD" height="11">
 								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="226" height="11" isRemoveLineWhenBlank="true" uuid="f731cc95-b757-4cea-8341-bab6152dbda6"/>
+									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="206" height="11" isRemoveLineWhenBlank="true" uuid="f731cc95-b757-4cea-8341-bab6152dbda6"/>
 									<box leftPadding="4"/>
 									<textElement verticalAlignment="Middle"/>
-									<textFieldExpression><![CDATA[$F{DCAD_COMMENTAIRE}]]></textFieldExpression>
+									<textFieldExpression><![CDATA[$F{COMMENTAIRE}]]></textFieldExpression>
 								</textField>
 							</jr:detailCell>
 						</jr:column>
@@ -602,8 +605,8 @@ where sd.dac_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="com_list" uuid="2814bd04-f1dd-4aa9-9c69-2903abac5372">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="com_list" uuid="16ecc4dc-fbd7-4c39-a768-90a1b67c3a7e">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -740,10 +743,6 @@ where sd.dac_code=$P{param_code_1}]]>
 					</textElement>
 					<textFieldExpression><![CDATA[new SimpleDateFormat("MMMM yyyy").format(TODAY( ))]]></textFieldExpression>
 				</textField>
-				<image>
-					<reportElement x="6" y="14" width="188" height="51" uuid="aaa51802-2b47-4f5e-a9c2-a6935b33530f"/>
-					<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
-				</image>
 			</frame>
 			<staticText>
 				<reportElement stretchType="ElementGroupHeight" x="350" y="14" width="204" height="80" uuid="f37ba40e-799e-4578-ac8b-371d7444ad2c"/>
