@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-09-10T15:45:22 -->
+<!-- 2020-09-14T19:32:22 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_jugement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="29839d62-7702-40c1-8de1-369c254b0177">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP_TEST.xml"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -251,12 +251,13 @@ and com.dcs_com_tco_code='CEV']]>
 	</subDataset>
 	<subDataset name="list_lot_det" uuid="469aa6f3-26c0-41ab-b4a3-cf1709c419fb">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP_TEST.xml"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select distinct lot.laa_num,lot.laa_objet,lbg.lbg_imputation,lot.laa_mt_caut,lot.laa_mt_est,lot.laa_delai_exe
 from vb_lot_aao lot, v_l_budgets lbg
 where lot.laa_lbg_imputation = lbg.lbg_code
-and lot.laa_aao_code='AAO-000002'
+and lot.laa_aao_code=$P{param_code_1}
 order by lot.laa_num]]>
 		</queryString>
 		<field name="LAA_NUM" class="java.math.BigDecimal"/>
@@ -632,7 +633,10 @@ and aao.aao_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="list_lot_det" uuid="e87d7813-7634-4cbc-b661-88e88da2bd31">
+						<datasetRun subDataset="list_lot_det" uuid="ae499763-6747-4f7f-ba56-bae52526262c">
+							<datasetParameter name="param_code_1">
+								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
+							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
 						<jr:column width="20" uuid="e1e88094-38d5-4f65-952f-09c768086b7b">

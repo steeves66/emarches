@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-09-10T15:43:37 -->
+<!-- 2020-09-14T18:50:26 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rapport_analyse" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="4b224d21-1f03-4cc6-a934-e8c1708e4915">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP_TEST.xml"/>
@@ -829,7 +829,6 @@ and aao.aao_code=$P{param_code_1}]]>
 	<field name="LBG_TOT_DOT" class="java.lang.String"/>
 	<field name="LAA_ID" class="java.math.BigDecimal"/>
 	<field name="LAA_AAO_CODE" class="java.lang.String"/>
-	<field name="COLUMN_23" class="java.lang.String"/>
 	<field name="LAA_OBSERVATION" class="java.lang.String"/>
 	<field name="LAA_MT_CAUT" class="java.math.BigDecimal"/>
 	<field name="LAA_MT_EST" class="java.math.BigDecimal"/>
@@ -840,12 +839,10 @@ and aao.aao_code=$P{param_code_1}]]>
 	<field name="LAA_OPE_MATRICULE" class="java.lang.String"/>
 	<field name="LAA_LIEU_EXE" class="java.lang.String"/>
 	<field name="LAA_LBG_IMPUTATION" class="java.lang.String"/>
-	<field name="COLUMN_34" class="java.math.BigDecimal"/>
 	<field name="LAA_COUT_LOT" class="java.math.BigDecimal"/>
 	<field name="LAA_DAC_CODE" class="java.lang.String"/>
 	<field name="LAA_AJOUT_PANIER" class="java.lang.String"/>
 	<field name="LAA_DELAI_EXE" class="java.math.BigDecimal"/>
-	<field name="COLUMN_39" class="java.lang.String"/>
 	<field name="AAO_LIBELLE" class="java.lang.String"/>
 	<field name="AAO_DAC_CODE" class="java.lang.String"/>
 	<field name="AAO_DTE_SAISI" class="java.sql.Timestamp"/>
@@ -875,7 +872,6 @@ and aao.aao_code=$P{param_code_1}]]>
 	<field name="AAO_DATE_RECEP" class="java.sql.Timestamp"/>
 	<field name="AAO_HEURE_RECEP" class="java.lang.String"/>
 	<field name="AAO_ADA_NUM" class="java.math.BigDecimal"/>
-	<field name="COLUMN_69" class="java.lang.String"/>
 	<field name="AAO_REG_QUAL" class="java.lang.String"/>
 	<field name="AAO_AVIS_BAI" class="java.lang.String"/>
 	<field name="AAO_RESP_BAI" class="java.lang.String"/>
