@@ -262,6 +262,8 @@ public class CommissionController {
 	 //private TDetOffres detailOffre = new TDetOffres();
 	 private VDetOffreRecevable detailOffre = new VDetOffreRecevable();
 	 private TDetOffres offre = new TDetOffres();
+	 private VResultPropAttribLot sltRsult = new VResultPropAttribLot();
+	 
 	 private TDetOffres detOffre = new TDetOffres();
 	 //private TDetOffres sltOffre = new TDetOffres(); sltOffre
 	 //private VDetOffreRecevable sltOffre = new VDetOffreRecevable();
@@ -298,6 +300,9 @@ public class CommissionController {
 	 private long verifCorNum = 0;
 	 private String aaoRegQual="";
 	 private boolean infoOffre=false;
+	 private boolean reserveOui=false;
+	 private boolean reserveNon=false;
+	 private String reserve="NON";
 	 private Boolean boutonEdit=false;
 	 private boolean finOuv = true;
 	 private boolean editerPv = false;
@@ -409,7 +414,22 @@ public class CommissionController {
 					 _logger.info("LAA_NUM: "+infoLot.getLaaNum());	
 					 _logger.info("LAA_DAC_CODE: "+infoLot.getLaaDacCode());	
 		 }
+	
 		 
+		 
+		 public void reserve() {
+			 if(newAttrib.getAttReserve().equalsIgnoreCase("OUI")) {
+				 reserveOui=true;
+			 }else {
+				 reserveOui=false;
+			 }
+			 _logger.info("Reserve: "+newAttrib.getAttReserve());
+		 }
+		 
+		 
+		 public void actionAttri() {
+			 reserveOui=false;
+		 }
 	 
 	//Vérification et correction des offres financières
 	 public void verifCor() {
@@ -469,6 +489,15 @@ public class CommissionController {
 		 public void offreResultPropAttrib() {
 			 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
 					 new WhereClause("LAA_DAC_CODE",Comparateur.EQ,""+recupLot.getTDacSpecs().getDacCode())));
+		 }
+		 
+		 
+		 public void reserveAttrib() {
+			 resultatPropAttributaire = ((List<VResultPropAttribLot>)iservice.getObjectsByColumn("VResultPropAttribLot",new ArrayList<String>(Arrays.asList("LOT")),
+					 new WhereClause("R_ID",Comparateur.EQ,""+sltRsult.getRId())));
+					  if (!resultatPropAttributaire.isEmpty()) {
+						  sltRsult=resultatPropAttributaire.get(0); 
+		  			} 
 		 }
 		 
 		 
@@ -1728,7 +1757,7 @@ public class CommissionController {
 		//Ajouter attributaire
 				public void ajouterAttributaire() {
 					
-					for(VResultPropAttribLot ligne : selectionAttributaire) {
+					/*for(VResultPropAttribLot ligne : selectionAttributaire) {
 						newAttrib.setAttDacCode(slctdTd.getTDacSpecs().getDacCode());
 						newAttrib.setAttDofAaoCode(slctdTd.getAaoCode());
 						newAttrib.setAttDofLaaNum(lotJug.getLaaNum());
@@ -1745,13 +1774,34 @@ public class CommissionController {
 						newAttrib.setAttOpeMatricile(userController.getSlctd().getTOperateur().getOpeMatricule());
 						newAttrib.setTempType("ATT");
 			 			iservice.addObject(newAttrib);
-			 		}
+			 		}*/
+					newAttrib.setAttDacCode(slctdTd.getTDacSpecs().getDacCode());
+					newAttrib.setAttDofAaoCode(slctdTd.getAaoCode());
+					newAttrib.setAttDofLaaNum(sltRsult.getLot());
+					//newAttrib.setAttDofOffNum(slctdTd.gett));
+					newAttrib.setAttDofNum(sltRsult.getDofNum());
+					newAttrib.setAttDofRet("O");
+					newAttrib.setAttDofStatut("2");
+					newAttrib.setAttDteAttrib(sltRsult.getDofAttribDte());
+					newAttrib.setAttFonCode(userController.getSlctd().getTFonction().getFonCod());
+					newAttrib.setAttLaaId(sltRsult.getDofLaaId());
+					//newAttrib.setAttMtAttr(ligne.getDofMtAtt());
+					newAttrib.setAttSouNcc(sltRsult.getOffSouNcc()); 
+					newAttrib.setAttOpeMatricile(userController.getSlctd().getTOperateur().getOpeMatricule());
+					newAttrib.setTempType("ATT");
+		 			iservice.addObject(newAttrib);
+		 			newAttrib = new VbTempParamAtrib();
 					chargeResultaFilter();
 					userController.setTexteMsg("Attributaire(s) validé(s) avec succès !");
 					userController.setRenderMsg(true);
 					userController.setSevrityMsg("success");
 				}
 						
+				
+			//Ajout d'une reserve
+				public void addReserve() {
+					
+				}
 		
 		/*public void ajouterAttributaire() {
 			
@@ -3466,6 +3516,39 @@ public class CommissionController {
 
 	public void setHeureComF(String heureComF) {
 		this.heureComF = heureComF;
+	}
+
+	public VResultPropAttribLot getSltRsult() {
+		return sltRsult;
+	}
+
+	public void setSltRsult(VResultPropAttribLot sltRsult) {
+		this.sltRsult = sltRsult;
+	}
+
+
+	public boolean isReserveOui() {
+		return reserveOui;
+	}
+
+	public void setReserveOui(boolean reserveOui) {
+		this.reserveOui = reserveOui;
+	}
+
+	public boolean isReserveNon() {
+		return reserveNon;
+	}
+
+	public void setReserveNon(boolean reserveNon) {
+		this.reserveNon = reserveNon;
+	}
+
+	public String getReserve() {
+		return reserve;
+	}
+
+	public void setReserve(String reserve) {
+		this.reserve = reserve;
 	}
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {

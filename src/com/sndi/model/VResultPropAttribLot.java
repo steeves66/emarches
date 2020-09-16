@@ -26,12 +26,14 @@ public class VResultPropAttribLot implements java.io.Serializable {
 	private String rang;
 	private String laaDacCode;
 	private BigDecimal lot;
+	private BigDecimal dofLaaId;
 	private String entreprise;
 	private BigDecimal montant;
 	private BigDecimal dofMtAtt;
 	private BigDecimal noteCombinee;
 	private BigDecimal delai;
 	private String offSouNcc;
+	private String dofStatut;
 	private String offSouSigleSte;
 	private Date dofAttribDte;
 
@@ -40,13 +42,14 @@ public class VResultPropAttribLot implements java.io.Serializable {
 
 
 	public VResultPropAttribLot(BigDecimal RId, BigDecimal ordre, BigDecimal dofNum,String rang, String laaDacCode,
-			BigDecimal lot, String entreprise, BigDecimal montant,BigDecimal dofMtAtt, BigDecimal noteCombinee, BigDecimal delai, 
-			String offSouNcc, String offSouSigleSte,Date dofAttribDte) {
+			BigDecimal lot,BigDecimal dofLaaId ,String entreprise, BigDecimal montant,BigDecimal dofMtAtt, BigDecimal noteCombinee, BigDecimal delai, 
+			String offSouNcc, String offSouSigleSte,Date dofAttribDte,String dofStatut) {
        this.RId = RId;
        this.ordre = ordre;
        this.rang = rang;
        this.laaDacCode = laaDacCode;
        this.lot = lot;
+       this.setDofLaaId(dofLaaId);
        this.entreprise = entreprise;
        this.montant = montant;
        this.noteCombinee = noteCombinee;
@@ -56,6 +59,7 @@ public class VResultPropAttribLot implements java.io.Serializable {
        this.dofNum = dofNum;
        this.dofMtAtt = dofMtAtt;
        this.dofAttribDte = dofAttribDte;
+       this.dofStatut = dofStatut;
     }
 
 	
@@ -112,6 +116,15 @@ public class VResultPropAttribLot implements java.io.Serializable {
 
 	public void setLot(BigDecimal lot) {
 		this.lot = lot;
+	}
+	
+	@Column(name = "DOF_LAA_ID")
+	public BigDecimal getDofLaaId() {
+		return dofLaaId;
+	}
+
+	public void setDofLaaId(BigDecimal dofLaaId) {
+		this.dofLaaId = dofLaaId;
 	}
 
 	@Column(name = "ENTREPRISE", length = 523)
@@ -187,7 +200,16 @@ public class VResultPropAttribLot implements java.io.Serializable {
 	public void setDofAttribDte(Date dofAttribDte) {
 		this.dofAttribDte = dofAttribDte;
 	}
-	
+
+	@Column(name = "DOF_STATUT")
+	public String getDofStatut() {
+		return dofStatut;
+	}
+
+
+	public void setDofStatut(String dofStatut) {
+		this.dofStatut = dofStatut;
+	}
 	
 
 }

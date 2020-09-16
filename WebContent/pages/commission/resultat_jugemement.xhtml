@@ -300,53 +300,73 @@
                    <legend><small style="font-weight: bold;">PROPOSITION D'ATTRIBUTION</small></legend>
                    
                    <p:dataTable var="slctdTb"  id="finance4" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.resultatPropAttributaire}" 
-                    rowKey="#{slctdTb.dofNum}" selection="#{commissionController.selectionAttributaire}"   editable="true" editMode="cell"
-                 scrollable="true" scrollHeight="300" emptyMessage="Aucun Lot enregistré">
-                         <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
+                 scrollable="true" rowKey="#{slctdTb.RId}" scrollHeight="100" emptyMessage="Aucun Lot enregistré">
                           <p:column headerText="LOT" styleClass="col-sm-1" >
+                          <h:panelGroup rendered="#{slctdTb.dofStatut != '2'}">
          				  <h:outputText value="#{slctdTb.lot}" />
+         				  </h:panelGroup>
+         				  <h:panelGroup rendered="#{slctdTb.dofStatut == '2' }">
+         				  <h:outputText value="#{slctdTb.lot}" style="color:green; font-weight:bold "/>
+         				  </h:panelGroup>
 				        </p:column>	
+
 				        <p:column headerText="ENTREPRISE" styleClass="col-sm-7" >
+				          <h:panelGroup rendered="#{slctdTb.dofStatut != '2'}">
          				  <h:outputText value="#{slctdTb.entreprise}" />
+         				  </h:panelGroup>
+         				  <h:panelGroup rendered="#{slctdTb.dofStatut == '2' }">
+         				  <h:outputText value="#{slctdTb.entreprise}" style="color:green; font-weight:bold "/>
+         				  </h:panelGroup>
 				        </p:column>
 				         <p:column headerText="MONTANT ATTRIBUE" styleClass="col-sm-2">
-				          <p:cellEditor>
-		                <f:facet name="output">
-		                <h:outputText styleClass="pull-right" value="#{slctdTb.dofMtAtt}">
+                          <h:panelGroup rendered="#{slctdTb.dofStatut != '2'}">
+         				  <h:outputText value="#{slctdTb.dofMtAtt}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
-		                </f:facet>
-		                <f:facet name="input"> 
-		                <p:inputText value="#{slctdTb.dofMtAtt}" style="width:100%"> 
-		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-		                 </p:inputText>
-		                 </f:facet>
-		               </p:cellEditor>
+         				  </h:panelGroup>
+         				  <h:panelGroup rendered="#{slctdTb.dofStatut == '2' }">
+         				  <h:outputText value="#{slctdTb.dofMtAtt}" style="color:green; font-weight:bold ">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+         				  </h:outputText>
+         				  </h:panelGroup>
 				        </p:column>
 				        
 				          <p:column headerText="DATE D'ATTRIBUTION" styleClass="col-sm-2">
-				          <p:cellEditor>
-		                <f:facet name="output">
-		                <h:outputText styleClass="pull-right" value="#{slctdTb.dofAttribDte}">
-		                <f:convertDateTime pattern="dd/MM/yyyy" />
+                         <h:panelGroup rendered="#{slctdTb.dofStatut != '2'}">
+         				  <h:outputText value="#{slctdTb.dofAttribDte}">
+         				   <f:convertDateTime pattern="dd/MM/yyyy" />
          				  </h:outputText>
-		                </f:facet>
-		                <f:facet name="input"> 
-		                 <p:calendar value="#{commissionController.dofAttribDte}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
-                         </p:calendar>
-		                 </f:facet>
-		               </p:cellEditor>
+         				  </h:panelGroup>
+         				  <h:panelGroup rendered="#{slctdTb.dofStatut == '2' }">
+         				  <h:outputText value="#{slctdTb.dofAttribDte}" style="color:green; font-weight:bold ">
+         				   <f:convertDateTime pattern="dd/MM/yyyy" />
+         				  </h:outputText>
+         				  </h:panelGroup>
 				        </p:column>
 				       
 				         <p:column headerText="DELAI D'EXECUTION(Jours)" styleClass="col-sm-2" >
-         				  <h:outputText styleClass="pull-right" value="#{slctdTb.delai}" />
+				         <h:panelGroup rendered="#{slctdTb.dofStatut != '2'}">
+         				  <h:outputText value="#{slctdTb.delai}" />
+         				  </h:panelGroup>
+         				  <h:panelGroup rendered="#{slctdTb.dofStatut == '2' }">
+         				  <h:outputText value="#{slctdTb.delai}" style="color:green; font-weight:bold "/>
+         				  </h:panelGroup>
 				        </p:column>	
+				        
+				            <p:column width="5%">
+				              <p:commandLink oncomplete="PF('commentaireDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+				              <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltRsult}" />
+							<i class="fa fa-plus"></i>
+						  </p:commandLink>
+				        </p:column>
 				         </p:dataTable>
-				            
+				         
+				         
+				            <h:panelGroup rendered="false">
 						        <p:commandLink styleClass="btn btn-success pull-right" style=" background-color: #036d3b" action="#{commissionController.ajouterAttributaire()}" update=":content">
 								       <i class="ace-icon fa fa-save bigger-130"></i> Valider
 								     </p:commandLink> 
-						     
+						     </h:panelGroup>
                    </fieldset>
                    </div>
                    
@@ -376,6 +396,98 @@
     
     
       <ui:include src="inclusions/repechage.xhtml"  /> 
+      
+       <h:form id="commentaireDlg" styleClass="form-horizontal">
+	  <p:dialog  widgetVar="commentaireDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	    <div class="row">    
+            <div class="col-md-12">
+                    <div class="box box-success box-solid"> 
+        <div class="box-header with-border">
+            <div  style="color: #fff">ATTRIBUTION DU LOT #{commissionController.infoLot.laaNum} : <strong>#{commissionController.infoLot.laaObjet} DE #{commissionController.infoLot.laaAaoCode}</strong> </div>
+         </div>
+         <div class="box-body">
+         <div class="row">
+                  
+	             </div>
+	                <div class="row">
+	                  <div class="col-sm-12">
+                  <div class="form-group">
+                 
+	                <label class="col-sm-2 control-label"><b><h:outputText value="Attribué à :"  style="width: 100%"/></b></label>
+	                
+	                 <div class="col-sm-10">
+	                 <label><h:outputText styleClass="text-muted" value="#{commissionController.sltRsult.entreprise}"  style="width: 100%"/></label>
+	                 </div>   
+		            </div>
+                   <div class="form-group">
+	                <label for="reserve" class="col-sm-4 control-label"><b>Réserves ?</b></label>
+	                 <div class="col-sm-5">
+	                   <p:selectOneRadio id="reserve" value="#{commissionController.newAttrib.attReserve}">
+	                   <p:ajax listener="#{commissionController.reserve()}" update="commentaireDlg:res" /> 
+						<f:selectItem itemLabel="OUI" itemValue="OUI" />
+					    <f:selectItem itemLabel="NON" itemValue="NON" />
+					 </p:selectOneRadio>
+	                 </div>   
+		            </div>
+                  </div>
+                  <div class="col-sm-6">
+                  <div class="form-group">
+	                <label for="montant" class="col-sm-4 control-label"><b>Montant attribué</b></label>
+	                 <div class="col-sm-5">
+	                 <p:inputText id="montant" value="#{commissionController.newAttrib.attMtAttr}" type="text" styleClass="form-control" style="width: 100%">
+	                 <p:ajax event="blur" global="false" process="@this" update="montant" />
+	                 <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                 </p:inputText>
+	                 </div>   
+		            </div>
+		            </div>
+		            <div class="col-sm-6">
+		            <div class="form-group">
+	                <label class="col-sm-4 control-label"><b>Date d'attibution</b></label>
+	                 <div class="col-sm-8">
+	                 <p:calendar value="#{commissionController.newAttrib.attDteAttrib}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
+                         </p:calendar>
+	                 </div>   
+		            </div>
+                  </div>
+                  <h:panelGroup id="res">
+                  <h:panelGroup value="#{commissionController.reserveOui}">
+                  <div class="col-sm-12">
+                  <div class="form-group">
+	                <label class="col-sm-2 control-label"><b>Membres ayant émis des réserves</b></label>
+	                 <div class="col-sm-10">
+	                 <p:inputTextarea value="#{commissionController.newAttrib.attCommentaire}" placeholder="Noms des membres de la commission ayant formulé des réserves" rows="5" cols="33"   type="text"  styleClass="form-control"  style="width: 100%"/>
+	                 </div>   
+		            </div>
+                   
+                  </div>
+                  </h:panelGroup>
+                  </h:panelGroup>
+                  
+                   <div class="col-sm-12">
+                  <div class="form-group">
+	                <label class="col-sm-2 control-label"><b>Réserves</b></label>
+	                 <div class="col-sm-10">
+	                 <p:inputTextarea value="#{commissionController.newAttrib.attReserveComment}" placeholder="La réserve formulée par ... est la suivante : " rows="20" cols="33"   type="text"  styleClass="form-control"  style="width: 100%"/>
+	                 </div>   
+		            </div>
+                   
+                  </div>
+	             </div>
+         </div>
+         <h:panelGroup>
+         <div class="box-footer">
+          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.ajouterAttributaire()}" oncomplete="PF('commentaireDlg').hide()"  update=":content">
+				            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+				             <i class="ace-icon fa fa-save"></i> Valider
+				            </p:commandLink>
+         </div>
+         </h:panelGroup>
+        </div>
+        </div>
+        </div>
+        </p:dialog>
+        </h:form>
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">

@@ -37,6 +37,9 @@ public class VbTempParamAtrib implements java.io.Serializable {
 	private String attSouNcc;
 	private BigDecimal attLaaId;
 	private BigDecimal attDofNum;
+	private String attCommentaire;
+	private String attReserveComment;
+	private String attReserve;
 
 	public VbTempParamAtrib() {
 	}
@@ -48,7 +51,7 @@ public class VbTempParamAtrib implements java.io.Serializable {
 	public VbTempParamAtrib(BigDecimal tempNum, String tempType, String attOpeMatricile, Date attDteAttrib,
 			String attDofAaoCode, String attDofStatut, BigDecimal attDofOffNum, String attDacCode,
 			BigDecimal attDofLaaNum, String attFonCode, BigDecimal attMtAttr, String attDofRet, String attSouNcc,
-			BigDecimal attLaaId, BigDecimal attDofNum) {
+			BigDecimal attLaaId, BigDecimal attDofNum,String attCommentaire,String attReserve,String attReserveComment) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.attOpeMatricile = attOpeMatricile;
@@ -64,6 +67,10 @@ public class VbTempParamAtrib implements java.io.Serializable {
 		this.attSouNcc = attSouNcc;
 		this.attLaaId = attLaaId;
 		this.attDofNum = attDofNum;
+		this.attCommentaire = attCommentaire;
+		this.setAttReserveComment(attReserveComment);
+		this.attReserve = attReserve;
+		
 	}
 
 	
@@ -204,5 +211,30 @@ public class VbTempParamAtrib implements java.io.Serializable {
 	public void setAttDofNum(BigDecimal attDofNum) {
 		this.attDofNum = attDofNum;
 	}
+	
+	@Column(name = "ATT_COMMENTAIRE")
+	public String getAttCommentaire() {
+		return attCommentaire;
+	}
 
+	public void setAttCommentaire(String attCommentaire) {
+		this.attCommentaire = attCommentaire;
+	}
+	@Column(name = "ATT_RESERVE")
+	public String getAttReserve() {
+		return attReserve;
+	}
+
+	public void setAttReserve(String attReserve) {
+		this.attReserve = attReserve;
+	}
+
+	@Column(name = "ATT_RESERVE_COMMENT")
+	public String getAttReserveComment() {
+		return attReserveComment;
+	}
+
+	public void setAttReserveComment(String attReserveComment) {
+		this.attReserveComment = attReserveComment;
+	}
 }
