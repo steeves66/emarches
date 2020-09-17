@@ -208,9 +208,18 @@
 	                     
 	                       <div class="col-md-12">
                    <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
-                   <legend style="font-weight: bold"><small>(4) - Offres financières </small></legend>
+                   <legend style="font-weight: bold"><small>(4) - Données de l'ouverture des offres </small></legend>
                    
                        <div class="form-group ">
+                       
+                          <label class="col-sm-2 control-label">Banque <span style="color:red;"> *</span></label>	
+                           <div class="col-sm-5">
+				           <p:selectOneMenu id="banque" filter="true" filterMatchMode = "startsWith"  effect = "fade" value="#{commissionController.banCode}" style="width:100%;" >
+						    <f:selectItem  itemLabel="Selectionnez la banque..." itemValue=""/>
+						     <f:selectItems value="#{commissionController.listBanque}" var="b" itemLabel="#{b.banLibelle}" itemValue="#{b.banCode}" />	    
+				            </p:selectOneMenu> 
+		                  </div>
+                       
 		                 <label class="col-sm-2 control-label">type de l'offre <span style="color:red;"> *</span></label>	
                            <div class="col-sm-3">
 				           <p:selectOneMenu id="variante"  value="#{commissionController.dofTyp}" style="width:100%; align:center" >
@@ -220,18 +229,22 @@
 				            </p:selectOneMenu> 
 		                  </div>
 		                  
-		                  <label class="col-sm-2 control-label">Banque <span style="color:red;"> *</span></label>	
-                           <div class="col-sm-5">
-				           <p:selectOneMenu id="banque" filter="true" filterMatchMode = "startsWith"  effect = "fade" value="#{commissionController.banCode}" style="width:100%;" >
-						    <f:selectItem  itemLabel="Selectionnez la banque..." itemValue=""/>
-						     <f:selectItems value="#{commissionController.listBanque}" var="b" itemLabel="#{b.banLibelle}" itemValue="#{b.banCode}" />	    
-				            </p:selectOneMenu> 
-		                  </div>
+		               
 		                </div>
 		                
 		                
 		                  
                         <div class="form-group">
+                        
+                        <label class="col-sm-2 control-label">Montant Net</label>
+						  <div class="col-sm-3">
+				          <p:inputText id="montNet" type="text" styleClass="form-control text-right" value="#{commissionController.montN}" style="width: 100%" readonly="true">
+				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				          </p:inputText>
+		                 </div>
+		                 <div class="col-sm-2">
+		                 </div>
+   
 		                  <label class="col-sm-2 control-label">Montant lu</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="montLu" type="text" styleClass="form-control text-right" value="#{commissionController.montLu}" style="width: 100%" >
@@ -240,13 +253,7 @@
 		         	        </p:inputText>
 		                  </div>
 		                  
-		                 <label class="col-sm-2 control-label">Montant Net</label>
-						  <div class="col-sm-3">
-				          <p:inputText id="montNet" type="text" styleClass="form-control text-right" value="#{commissionController.montN}" style="width: 100%" readonly="true">
-				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
-				          </p:inputText>
-		                 </div>
-   
+		                 
 		                </div> 
 		                 <p:commandLink >
 				     
@@ -255,6 +262,15 @@
 		                
 		                 <div class="form-group">
 		                 
+		                 <label class="col-sm-2 control-label">Montant Caution</label>
+						  <div class="col-sm-3">
+				          <p:inputText  type="text" id="montCaut" styleClass="form-control text-right" value="#{commissionController.newOffre.dofMtCaut}" style="width: 100%">
+				           <p:ajax  global="false" event="blur" process="@this" update="montCaut" />
+				           <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				           </p:inputText>
+		                  </div>
+		                  <div class="col-sm-2">
+		                 </div>
 		                 <label class="col-sm-2 control-label">Rabais %</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="rab" type="text" styleClass="form-control text-right" value="#{commissionController.pourcentRab}" style="width: 100%" >
@@ -263,17 +279,18 @@
 		                 </div>
 		                 
 		                  
-		                  <label class="col-sm-2 control-label">Montant Caution</label>
-						  <div class="col-sm-3">
-				          <p:inputText  type="text" id="montCaut" styleClass="form-control text-right" value="#{commissionController.newOffre.dofMtCaut}" style="width: 100%">
-				           <p:ajax  global="false" event="blur" process="@this" update="montCaut" />
-				           <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-				           </p:inputText>
-		                  </div>
+		                  
 		                </div>  
 		                
 		                
 		             <div class="form-group">
+		             
+		             <label for="delai" class="col-sm-2 control-label"><b>Délai de validité(Jours)<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-3">
+	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
+	                  </div>  
+		              <div class="col-sm-2">
+		                 </div>
 		                     <label class="col-sm-2 control-label">Montant Rabais</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="montRab" type="text" styleClass="form-control text-right" value="#{commissionController.montRab}" style="width: 100%">
@@ -283,10 +300,7 @@
 		                  </div>
 		                  
 		                   
-		              <label for="delai" class="col-sm-2 control-label"><b>Délai de validité(Jours)<span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-3">
-	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
-	                  </div>  
+		              
 		             </div> 
 		             
 		             
