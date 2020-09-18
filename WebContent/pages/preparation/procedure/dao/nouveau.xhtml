@@ -357,7 +357,7 @@
                 </div> 
                 
                   <div class="form-group">
-                  <label class="col-sm-3 control-label">Nbre de Copies</label>
+                  <label class="col-sm-3 control-label">Nbre de Copies de l'offre</label>
 				  <div class="col-sm-2">
 		          <p:inputText title="Le nombre de copies" type="text" styleClass="form-control" value="#{daoController.dao.dacNbrCopieOff}"  style="width: 100%">
 		          </p:inputText>
@@ -483,6 +483,7 @@
             <div class="col-md-12 "><div  style="color: #fff">OUVERTURE</div></div>
          </div>
          <div class="box-body">
+          <h:panelGroup rendered="false">
                  <div class="form-group">
                   <label  class="col-sm-2 control-label">Lieu</label>
 				  <div class="col-sm-7">
@@ -494,7 +495,7 @@
                   <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                 </div>
-                 
+               </h:panelGroup>  
                 <h:panelGroup rendered="#{daoController.ouverture}">
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Nbre Ouverture</label>
@@ -1218,15 +1219,26 @@
                   </div>
                   <div class="box-body">
                     <div class="form-group ">
-	                  <label for="foncode" class="col-sm-5 control-label"><b> Numero d'autorisation <span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-7">
+	                  <label for="foncode" class="col-sm-4 control-label"><b> Numero d'autorisation <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-8">
 	                    <p:inputText id="autorisationCode" type="text" value="#{daoController.dao.dacAutComSpec}" styleClass="form-control" style="width: 100%">
 	                    </p:inputText>
 	                  </div>
 	                </div> 
+	                <div class="form-group ">
+	                  <label for="typeFonction" class="col-sm-4 control-label"><b>Article <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-8">
+	                     <p:selectOneMenu id="typeFonction" value="#{daoController.newAvis.aaoArtComSpec}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			            <f:selectItem  itemLabel="Choisir l'article.." itemValue="empty" />  
+			            <f:selectItems value="#{daoController.listeArticle}" var="art" itemLabel="#{art.libart}" itemValue="#{art.codeart}" /> 
+       		        </p:selectOneMenu> 
+	                  </div>
+	                </div> 
+	                 
 	                 <div class="form-group ">
-	                  <label for="foncode" class="col-sm-5 control-label"><b>Joindre l'autorisation <span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-7">
+	                  <label for="foncode" class="col-sm-4 control-label"><b>Joindre l'autorisation <span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-8">
 	                    	              <p:fileUpload fileUploadListener="#{daoController.uploadAtorisation}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir l'autorisation" uploadLabel="Charger l'autorisation" auto="true"
 			                      mode="advanced" dragDropSupport="true" update=":gnl:tabDossierCharge"
@@ -2436,7 +2448,7 @@
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">#{daoController.comSpecUpdate.comTctLibelle}</div>
+            <div  style="color: #fff">rr</div>
          </div>
          <div class="box-body">
                 <div class="form-group">

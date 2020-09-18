@@ -73,6 +73,7 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
+import com.sndi.model.VArticlesCom;
 import com.sndi.model.VAvisAdresse;
 import com.sndi.model.VCommissionSpeciale;
 import com.sndi.model.VCommissionSpecifique;
@@ -262,6 +263,7 @@ public class DaoController {
 	private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
 	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
+	private List<VArticlesCom> listeArticle = new ArrayList<VArticlesCom>();
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
 	private List<TDetCritAnalyseDac> listDetcritere = new ArrayList<TDetCritAnalyseDac>();
 	private TCommissionSpecifique detailCom = new TCommissionSpecifique(); 
@@ -534,6 +536,7 @@ public class DaoController {
 			 
 			//Controle totalité des lots factorisés
 			 if(event.getOldStep().equals("criterebyLot") && event.getNewStep().equals("cojo")) {
+				 chargeArticle();
 				 listeLotCritere.clear();
 				 listeLotCritere=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 						new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
@@ -2362,11 +2365,14 @@ public class DaoController {
 				 	
 				 	public void updatePresence() { 
 				 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
-							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
+							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum()))); 
+				 		_logger.info("comNum: "+sltCompsec.getComNum());
 			    			if (!listeComSpecific.isEmpty()) {
 			    				comSpecUpdate=listeComSpecific.get(0); 
-			    				comSpecUpdate.setComTctLibelle(sltCompsec.getComTctLibelle());
+			    				//comSpecUpdate.setComTctLibelle(comSpecUpdate.getComTctLibelle());
+			    				_logger.info("comNum: "+comSpecUpdate.getComTctLibelle());
 			    				iservice.updateObject(comSpecUpdate);
+			    				
 					 			chargeMembres();
 					 			userController.setTexteMsg("Modification éffectuée avec succès!");
 			  		            userController.setRenderMsg(true);
@@ -4351,7 +4357,11 @@ public class DaoController {
 									 public void openDossier() throws IOException{
 							       		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDdaNom(), selectedDossier.getDdaNom());
 							       		   }
-									
+									//Methode de Chargement des Artcles
+									  public void chargeArticle() {
+										  listeArticle.clear();
+										  listeArticle = ((List<VArticlesCom>)iservice.getObjectsByColumn("VArticlesCom"));		
+									 	 } 
 									//Methode de Chargement des Dossiers chez le Chargï¿½ d'Etudes
 									  public void chargeDossierAutorisation() {
 									    	 dossDacListe.clear();
@@ -4366,6 +4376,7 @@ public class DaoController {
 											 
 											 }else {
 												 iservice.updateObject(dao); 
+												 iservice.updateObject(newAvis);
 												 comNormale = false;
 												 comSpeciale = false;
 												 comAutorise = true;
@@ -7834,5 +7845,13 @@ public class DaoController {
 
 	public void setLotCrit(VLotCritere lotCrit) {
 		this.lotCrit = lotCrit;
+	}
+
+	public List<VArticlesCom> getListeArticle() {
+		return listeArticle;
+	}
+
+	public void setListeArticle(List<VArticlesCom> listeArticle) {
+		this.listeArticle = listeArticle;
 	}
 }

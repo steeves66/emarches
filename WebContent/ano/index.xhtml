@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+      <ui:composition template="/template/templatePage.xhtml">
+	<ui:define name="contents">
+<h:form id="gnl">	
+ <section class="content-header">
+      <h3>
+        #{controleController.libelle}  
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Travaux en Commission</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+        <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('com1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | Liste
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+  
+    <section class="content">
+     <div class="box"></div>
+
+		<h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+			
+             <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+            
+            <div class="row">  
+                  
+            <div class="col-md-4">
+                <div class="input-group input-group-sm col-md-12">
+                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero de l'avis"></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
+                    </span>
+					 </div>
+					 
+            </div>
+            
+            
+            </div>
+            
+					<p:dataTable id="TbleOuv" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeAppelOffre}" emptyMessage="Aucun Avis d'Appel d'Offre trouvé" rows="10"
+                         paginator="true" draggableColumns="true"
+                         rowsPerPageTemplate="5,10,15" >
+                         
+                          <p:column headerText="CODE" styleClass="col-sm-1" >
+                            <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				      <h:outputText value="#{slctdTb.aaoCode}"/>
+         				   </h:panelGroup>
+         				  <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				      <h:outputText value="#{slctdTb.aaoCode}" style="color:red; font-weight:bold"/>
+         				   </h:panelGroup>
+				        </p:column>	
+				        
+				        <p:column headerText="LIBELLE" styleClass="col-sm-7" >
+				        <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				     <h:outputText value="#{slctdTb.aaoLibelle}"/>
+         				   </h:panelGroup>
+         				   <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				     <h:outputText value="#{slctdTb.aaoLibelle}" style="color:red; font-weight:bold"  />
+         				   </h:panelGroup>
+				        </p:column>
+				        
+				         <p:column headerText="DATE DE PUB" styleClass="col-sm-1" >
+				           <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				     <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  <f:convertDateTime pattern="dd/MM/yyyy" />
+         				  </h:outputText>
+         				   </h:panelGroup>
+         				   
+         				   <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				     <h:outputText value="#{slctdTb.aaoDtePub}">
+         				  <f:convertDateTime pattern="dd/MM/yyyy" style="color:red; font-weight:bold"/>
+         				  </h:outputText>
+         				   </h:panelGroup>
+				        </p:column>	
+				        
+				         <p:column headerText="NBRE LOT" styleClass="col-sm-1" >
+				          <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				  <h:outputText value="#{slctdTb.aaoNbrLot}"/>
+         				  </h:panelGroup>
+         				 <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				  <h:outputText value="#{slctdTb.aaoNbrLot}" style="color:red; font-weight:bold "/>
+         				 </h:panelGroup>
+				        </p:column>	
+				        	
+                        <p:column headerText="NBRE OUV" styleClass="col-sm-1" >
+                        <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
+         				  <h:outputText value="#{slctdTb.aaoNbrOuv}"/>
+         				  </h:panelGroup>
+         				 <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
+         				 <h:outputText value="#{slctdTb.aaoNbrOuv}"  style="color:red; font-weight:bold "/>
+         				 </h:panelGroup>
+         				  
+				        </p:column>	
+				        		        
+				         <p:column headerText="ACTIONS" styleClass="col-sm-2" >
+				           <!-- BOUTONS APERCU -->
+         				   <p:commandLink  action="#{etatsCommissionController.renderPage('detc1','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsCommissionController.slctdTd}" />  
+                             </p:commandLink>
+                             
+                            
+                             <!--FIN BOUTONS APERCU -->
+                             
+                           <!-- BOUTONS COMMISSION -->
+                           
+                       
+                              
+                             <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com6','SAIDEP')}"
+				               title="Séance d'Ouverture" update=":content">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
+                            </p:commandLink>
+                                
+				        </p:column>
+    </p:dataTable>
+ <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		     </p:commandLink> 
+       </section>
+         
+
+</h:form>
+
+   
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    </ui:define>
+</ui:composition>
+</html>

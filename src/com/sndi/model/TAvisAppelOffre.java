@@ -73,6 +73,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private Date aaoDteOuv;
 	private String aooHeurOuv;
 	private String avisRetour;
+	private String aaoArtComSpec;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -91,7 +92,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			String aaoInterPub, String aaoCautDefExig, String aaoBompPub, String aaoVenteParLot, String aaoAvisBail,
 			BigDecimal aaoMtCaut, String aaoModePaiement, long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,String aaoHeureRecep, String aaoNatPrix, String aaoRegQual,
 			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
-			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,
+			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,String aaoArtComSpec,
 			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,String avisRetour,
 			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.aaoCode = aaoCode;
@@ -141,6 +142,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoObsOuv = aaoObsOuv;
 		this.aaoDteFinOuv = aaoDteFinOuv;
 		this.aaoDteOuv = aaoDteOuv;
+		this.aaoArtComSpec = aaoArtComSpec;
 		this.aooHeurOuv = aooHeurOuv;
 		this.avisRetour = avisRetour;
 		this.TDetailAvises = TDetailAvises;
@@ -607,6 +609,16 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	public void setAvisRetour(String avisRetour) {
 		this.avisRetour = avisRetour;
 	}
+	
+	@Column(name = "AAO_ART_COM_SPEC")
+	public String getAaoArtComSpec() {
+		return aaoArtComSpec;
+	}
+
+	public void setAaoArtComSpec(String aaoArtComSpec) {
+		this.aaoArtComSpec = aaoArtComSpec;
+	}
+
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TAvisAppelOffre")
 	public Set<TDetailAvis> getTDetailAvises() {
@@ -634,5 +646,6 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	public void setTCommissionSpecifiques(Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
 	}
+
 
 }

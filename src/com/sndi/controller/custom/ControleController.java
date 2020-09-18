@@ -6544,7 +6544,21 @@ public class ControleController {
 													    			libelle="REEDITION";	
 													    		}
 											    			else
-												    			
+											    				//DEMANDE D'ANO
+											    				if(action.equalsIgnoreCase("LISANO")) {
+													    			type = "Commission";
+													    			libelle="LISTE DES AVIS D'APPEL D'OFFRE";	
+													    		}else
+													    			if(action.equalsIgnoreCase("DEMANO")) {
+														    			type = "Commission";
+														    			libelle="DEMANDE D'AVIS DE NON OBJECTION DU BAILLEUR";	
+														    		}else
+														    			//REEDITION DES ETATS
+														    			if(action.equalsIgnoreCase("TRAIANO")) {
+															    			type = "Commission";
+															    			libelle="TRAITEME DES ANO";	
+															    		}
+													    			else
 											    			
 											    			//DEBUT GESTION DES PROCEDURES DERROGATOIRES
 											    			if(action.equalsIgnoreCase("LISDEMSAI")) {
