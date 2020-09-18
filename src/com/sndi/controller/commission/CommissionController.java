@@ -1092,7 +1092,7 @@ public class CommissionController {
 					          newcomSpec.setComMarCode(slctdTd.getTDacSpecs().getTTypeMarche().getTymCode());
 					          newcomSpec.setTAvisAppelOffre(slctdTd);
 					          newcomSpec.setTDacSpecs(slctdTd.getTDacSpecs());
-	                 /*				newcomSpec.setTCommissionType(new TCommissionType(""));*/
+	                 /*		  newcomSpec.setTCommissionType(new TCommissionType(""));*/
 					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
 					          iservice.addObject(newcomSpec);
 					
@@ -1180,7 +1180,7 @@ public class CommissionController {
 									membre.setDcsSeaTseNum(""+typeSeance); 
 									membre.setDcsDteSea(dateSeance);
 									membre.setDcsHeureDeb(heureDeb);
-									membre.setDcsHeureFin(heureFin);
+									//membre.setDcsHeureFin(heureFin);
 									membre.setDcsSeaLieu(lieuSeance);
 									membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
 								   iservice.addObject(membre);		
@@ -1701,19 +1701,12 @@ public class CommissionController {
 					 		}*/
 				         //}
 						
-						//EVALUTATION
-						/*if (selectionCritereAnalyse.size()==0) {
-							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
-						}else
-							if (listeCritereAnalyse.size()<selectionCritereAnalyse.size()) {
-								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
-							}*/
-				 		//else{
-					               
+						//EVALUTATION         
 					 		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
-					 			//newTempParamAnalyseOff.setAnfDacCode(ligne.get);
-					 			//newTempParamAnalyseOff.setAnfNum(ligne.get);
-					 			//newTempParamAnalyseOff.setAnfValeurConf(ligne.getAaoRegQual());
+					 			if(ligne.getPofObs() == null) {
+					 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
+									FacesContext.getCurrentInstance().addMessage(null, msg);
+					 			}else {
 					 			newTempParamAnalyseOff.setAnfDacCode(ligne.getDcadDacCode());
 					 			newTempParamAnalyseOff.setAnfNum(ligne.getAnfNum());
 					 			newTempParamAnalyseOff.setAnfCommentaire(ligne.getPofObs());
@@ -1722,25 +1715,29 @@ public class CommissionController {
 					 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 					 			newTempParamAnalyseOff.setAnfPresence(ligne.getAnfPresence());
 					 			newTempParamAnalyseOff.setAnfValeurConf(ligne.getPofConforme());
-					 			//newTempParamAnalyseOff.setAnfValeurScore(String.valueOf(ligne.getAnfValeurScore()));
-					 			
 					 			iservice.addObject(newTempParamAnalyseOff);
 					 		}
+					 	  }
+					 		
+					 		
 					 		
 					 		for(VCritereAnalyseDacOfftec lignes : listeCritereAnalyse) {
-					 			newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
-					 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());
-					 			newTempParamAnalyseOff.setAnfValeurConf(lignes.getAaoRegQual());
-					 			newTempParamAnalyseOff.setAnfValeurScore(lignes.getValRegQual());
-					 			newTempParamAnalyseOff.setAnfCommentaire(lignes.getDcadCommentaire());
-					 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
-					 			newTempParamAnalyseOff.setTempType("ANOFF");
-					 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-					 			//newTempParamAnalyseOff.setAnfValeurConf(ligne.getAnfPresence());
-					 			//newTempParamAnalyseOff.setAnfValeurScore(String.valueOf(ligne.getAnfValeurScore()));
-					 			iservice.addObject(newTempParamAnalyseOff);
+					 			
+					 			if(lignes.getDcadCommentaire() == null) {
+					 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
+									FacesContext.getCurrentInstance().addMessage(null, msg);
+					 			}else {
+					 				newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
+						 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());
+						 			newTempParamAnalyseOff.setAnfValeurConf(lignes.getAaoRegQual());
+						 			newTempParamAnalyseOff.setAnfValeurScore(lignes.getValRegQual());
+						 			newTempParamAnalyseOff.setAnfCommentaire(lignes.getDcadCommentaire());
+						 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
+						 			newTempParamAnalyseOff.setTempType("ANOFF");
+						 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+						 			iservice.addObject(newTempParamAnalyseOff);
+					 			}	
 					 		}
-
 				         //}
 						chargeLotByAvis();
 						//editerAna = true;
