@@ -60,6 +60,7 @@ import com.sndi.model.TTypePieceOffre;
 import com.sndi.model.TTypeSeance;
 import com.sndi.model.TVenteDac;
 import com.sndi.model.VAvisAppelOffre;
+import com.sndi.model.VAvisAppelOffreAno;
 import com.sndi.model.VCandidatDac;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCompoCommission;
@@ -143,17 +144,35 @@ public class AnoController {
 	 ConstantService constantService;
 
 	 
+	 //liste
+	 private List<VAvisAppelOffreAno> listeAvisAppelOffre = new ArrayList<VAvisAppelOffreAno>();
+	 
+	 //Objet
+	 private VAvisAppelOffreAno slctdTd = new VAvisAppelOffreAno();
+	 
 	 @PostConstruct
 	 public void postContr() {
 		controleController.fonctionaliteDynamic();
+		//chargeData();
 	 }		
+	
+	 
+	//Chargement de la liste des avis d'appel d'offres en attente d'ano
+	 public void chargeData() {
+		 listeAvisAppelOffre.clear();
+		 listeAvisAppelOffre = (List<VAvisAppelOffreAno>) iservice.getObjectsByColumnDesc("VAvisAppelOffreAno", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+				 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
+		         new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,"JUG"),
+		         new WhereClause("AAO_ANO",WhereClause.Comparateur.EQ,"O"));
+		_logger.info("listeAppelOffre size: "+listeAvisAppelOffre.size());	 
+	 }
 	
 		 
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);
 		     switch(value) {
 				case "ano1":
-					
+					chargeData();
 					break;
 				case "ano2":	
 				break;
@@ -180,6 +199,26 @@ public class AnoController {
 		    return userController.renderPage(value);   
 		    
 		}
+
+
+	public List<VAvisAppelOffreAno> getListeAvisAppelOffre() {
+		return listeAvisAppelOffre;
+	}
+
+
+	public void setListeAvisAppelOffre(List<VAvisAppelOffreAno> listeAvisAppelOffre) {
+		this.listeAvisAppelOffre = listeAvisAppelOffre;
+	}
+
+
+	public VAvisAppelOffreAno getSlctdTd() {
+		return slctdTd;
+	}
+
+
+	public void setSlctdTd(VAvisAppelOffreAno slctdTd) {
+		this.slctdTd = slctdTd;
+	}
 	 
 
 	

@@ -6547,7 +6547,7 @@ public class ControleController {
 											    				//DEMANDE D'ANO
 											    				if(action.equalsIgnoreCase("LISANO")) {
 													    			type = "Commission";
-													    			libelle="LISTE DES AVIS D'APPEL D'OFFRE";	
+													    			libelle="LISTE DES AVIS D'APPEL D'OFFRE EN ATTENTE D'ANO";	
 													    		}else
 													    			if(action.equalsIgnoreCase("DEMANO")) {
 														    			type = "Commission";
