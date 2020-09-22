@@ -45,6 +45,8 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 	private String anfValeurConf;
 	private String anfObser;
 	private long anfValeurScore;
+	private BigDecimal nbfich;
+	private BigDecimal fichStatut;
 	private String anfCommentaire;
 	private String anfPresence;
 	private BigDecimal anfNum;
@@ -66,7 +68,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 			String codep, String craTymCodex, String craTypProc, String craTypDac, String craBailleurx,
 			String analyseStatut, String dcadDacCode, String aaoRegQual, String aaoRegQualx, long valRegQual,
 			String dcadCommentaire, BigDecimal dcadNumDcad, String dcadCraAuCode, String dcadPetitCra,
-			String anfValeurConf, String anfObser, long anfValeurScore, String anfCommentaire, String anfPresence
+			String anfValeurConf, String anfObser, long anfValeurScore,  BigDecimal nbfich, BigDecimal fichStatut,String anfCommentaire, String anfPresence
 			,BigDecimal anfNum) {
 		this.RId = RId;
 		this.dcadLaaId = dcadLaaId;
@@ -95,6 +97,8 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 		this.anfValeurConf = anfValeurConf;
 		this.anfObser = anfObser;
 		this.anfValeurScore = anfValeurScore;
+		this.nbfich = nbfich;
+		this.fichStatut = fichStatut;
 		this.anfCommentaire = anfCommentaire;
 		this.anfPresence = anfPresence;
 		this.anfNum = anfNum;
@@ -342,6 +346,24 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 
 	public void setAnfValeurScore(long anfValeurScore) {
 		this.anfValeurScore = anfValeurScore;
+	}
+	
+	@Column(name = "NBFICH", precision = 22, scale = 0)
+	public BigDecimal getNbfich() {
+		return this.nbfich;
+	}
+
+	public void setNbfich(BigDecimal nbfich) {
+		this.nbfich = nbfich;
+	}
+
+	@Column(name = "FICH_STATUT", precision = 22, scale = 0)
+	public BigDecimal getFichStatut() {
+		return this.fichStatut;
+	}
+
+	public void setFichStatut(BigDecimal fichStatut) {
+		this.fichStatut = fichStatut;
 	}
 
 	@Column(name = "ANF_COMMENTAIRE", length = 1000)

@@ -241,6 +241,7 @@ public class DaoController {
 	private List<TAvisAppelOffre> listAvis = new ArrayList<TAvisAppelOffre>();
 	private List<TAffichageDao> examenListe = new ArrayList<TAffichageDao>(); 
 	private List<TAffichageDao> listeDao = new ArrayList<TAffichageDao>();
+	private TAvisAppelOffre sltAvis =new TAvisAppelOffre();
 	//GESTION DES ADRESSES
 	private List<TLibelleAdresse> listLibelleAdresse = new ArrayList<TLibelleAdresse>();
 	private List<TAdresseAvis> listAdresse = new ArrayList<TAdresseAvis>();
@@ -261,7 +262,8 @@ public class DaoController {
 	private List<VCritAnalDacEntete> listeEnteteCritere = new ArrayList<VCritAnalDacEntete >();
 	private List<VCritAnalDacSousentete> listeSousEnteteCritere = new ArrayList<VCritAnalDacSousentete >();
 	private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
-	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>(); 
+	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>();
+	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
 	private List<VArticlesCom> listeArticle = new ArrayList<VArticlesCom>();
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
@@ -505,6 +507,8 @@ public class DaoController {
 	  private boolean panelNcc1 = false;
 	  private boolean panelNcc2 = false;
 	  private boolean confirmInter = false;
+	  private boolean panelMessage = true;
+	  private boolean panelCritereLot = false;
 	 
 	 @PostConstruct
 	 public void postContr() {
@@ -530,7 +534,8 @@ public class DaoController {
 			 
 			//Controle Pavé création
 			 if(event.getOldStep().equals("critere") && event.getNewStep().equals("criterebyLot")) {
-				 factoriserLot();
+				 //factoriserLot();
+				 factoriserNext();
 				 listeCritereByLot.clear();
 			     }
 			 
@@ -565,6 +570,10 @@ public class DaoController {
 		      
 	    }
 	 
+	 //Methode pour retourner
+	 public void retour() {
+		 
+	 }
 	 
 	 //Appel de la methode d'affichage de la liste dac en lui passant en parametre letype plan et le type DAC
 	 public void chargeData() {
@@ -931,20 +940,34 @@ public class DaoController {
 		 		chargeCritere();
 		 		chargeLotCritere();
 		 		pavet_commission = true;
-		 		userController.setTexteMsg("Critï¿½re(s) d'analyse enregistrï¿½(s) avec succï¿½s!");
+		 		userController.setTexteMsg("Critère(s) d'analyse enregistré(s) avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
 				
 	 		 }
 	 }
 	 
-	
+	//Factorisation des Lots
 	 public void factoriserLot() { 
 		 newTempFactorise.setTempCritDac(dao.getDacCode());
 		 newTempFactorise.setTempNbrLot(newAvis.getAaoNbrLot());
 		 newTempFactorise.setTempType("DISP");
 		 iservice.addObject(newTempFactorise); 
 		 chargeLotCritere();
+		 panelMessage = false;
+		 panelCritereLot = true;
+	 }
+	 
+	 //Récupération du message
+	 public void factoriserNext() { 
+		 newTempFactorise.setTempCritDac(dao.getDacCode());
+		 newTempFactorise.setTempNbrLot(newAvis.getAaoNbrLot());
+		 newTempFactorise.setTempType("TEST");
+		 iservice.addObject(newTempFactorise); 
+		 chargeLotCritere();
+		 recupMessage();
+		 panelMessage = true;
+		 panelCritereLot = false;
 	 }
 	 
 	 public void checkTypeCommission() { 
@@ -1552,6 +1575,15 @@ public class DaoController {
 						 }
 				     } 
 				 }
+		 }
+		 
+		 //Récupération du message
+		 public void recupMessage () {
+			 listeAvis = listeAvis = ((List<TAvisAppelOffre>)iservice.getObjectsByColumn("TAvisAppelOffre",new ArrayList<String>(Arrays.asList("AAO_CODE")),
+	 				 new WhereClause("AAO_CODE",Comparateur.EQ,""+newAvis.getAaoCode())));
+             if (!listeAvis.isEmpty()) {
+            	 sltAvis = listeAvis.get(0);
+             }
 		 }
 		 
 		 public void chercher(String typeDac,String typePlan){
@@ -7853,5 +7885,37 @@ public class DaoController {
 
 	public void setListeArticle(List<VArticlesCom> listeArticle) {
 		this.listeArticle = listeArticle;
+	}
+
+	public TAvisAppelOffre getSltAvis() {
+		return sltAvis;
+	}
+
+	public void setSltAvis(TAvisAppelOffre sltAvis) {
+		this.sltAvis = sltAvis;
+	}
+
+	public List<TAvisAppelOffre> getListeAvis() {
+		return listeAvis;
+	}
+
+	public void setListeAvis(List<TAvisAppelOffre> listeAvis) {
+		this.listeAvis = listeAvis;
+	}
+
+	public boolean isPanelCritereLot() {
+		return panelCritereLot;
+	}
+
+	public void setPanelCritereLot(boolean panelCritereLot) {
+		this.panelCritereLot = panelCritereLot;
+	}
+
+	public boolean isPanelMessage() {
+		return panelMessage;
+	}
+
+	public void setPanelMessage(boolean panelMessage) {
+		this.panelMessage = panelMessage;
 	}
 }

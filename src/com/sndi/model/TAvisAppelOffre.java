@@ -74,6 +74,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private String aooHeurOuv;
 	private String avisRetour;
 	private String aaoArtComSpec;
+	private String aaoMessCritLotExist;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -93,7 +94,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			BigDecimal aaoMtCaut, String aaoModePaiement, long aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep,String aaoHeureRecep, String aaoNatPrix, String aaoRegQual,
 			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
 			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,String aaoArtComSpec,
-			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,String avisRetour,
+			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,String avisRetour, String aaoMessCritLotExist,
 			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.aaoCode = aaoCode;
 		this.fonCodAc = fonCodAc;
@@ -145,6 +146,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.aaoArtComSpec = aaoArtComSpec;
 		this.aooHeurOuv = aooHeurOuv;
 		this.avisRetour = avisRetour;
+		this.aaoMessCritLotExist = aaoMessCritLotExist;
 		this.TDetailAvises = TDetailAvises;
 		this.TLotAaos = TLotAaos;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
@@ -617,6 +619,16 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoArtComSpec(String aaoArtComSpec) {
 		this.aaoArtComSpec = aaoArtComSpec;
+	}
+	
+	
+	@Column(name = "AAO_MESS_CRIT_LOT_EXIST", length = 500)
+	public String getAaoMessCritLotExist() {
+		return this.aaoMessCritLotExist;
+	}
+
+	public void setAaoMessCritLotExist(String aaoMessCritLotExist) {
+		this.aaoMessCritLotExist = aaoMessCritLotExist;
 	}
 
 

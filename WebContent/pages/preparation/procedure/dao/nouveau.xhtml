@@ -696,14 +696,8 @@
                  </td>
                 </tr>
                 </table>
-                   
-             
-		    
-		  
- 
          </div>
-         
-         
+             
          </div>
          </div>
            </div>
@@ -882,7 +876,6 @@
 			               </h:panelGroup>
 				        </p:column>
                         </p:dataTable> 
-                    
 	            </div>
 	            <div class="box-footer">
 	                  <div class="form-group ">
@@ -903,13 +896,11 @@
 	                </div>
 	                
 	            </div>
+				       
 	           </div>
             </div>
-            </div>
-            
-      
-               
-               </div>
+            </div>  
+         </div>
                      
          </div>
            
@@ -918,6 +909,60 @@
          <p:tab rendered="#{daoController.pavet_critere}" id="criterebyLot" title="Saisie des critères d'évalution par lot"  titleStyle="background-color: #f88b2e;background-image: none">  
               <div class="row">
             
+          <h:panelGroup rendered="#{daoController.panelMessage}"> 
+          
+           
+          <div class="col-md-5 col-md-offset-3">
+	           
+                  <div class="col-md-12 "><div></div></div> 
+                  </div>
+                  <div class="box-body">
+	               
+                  </div>
+                   <div class="box-footer">
+                  </div>
+
+           
+            <div class="col-md-5 col-md-offset-3">
+	           <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-12 "><div  style="color: #fff">AFFECTATION DES CRITERES AUX LOTS</div></div> 
+                  </div>
+                  <div class="box-body">
+                  
+                   <div class="form-group ">
+	                  <label for="confirmLove1" class="col-sm-1 control-label"><b></b></label>
+	                  <div class="col-sm-10">
+	                  </div>
+	                </div>
+                  
+                  
+	                <div class="form-group ">
+	                  <label for="confirmLove" class="col-sm-1 control-label"><b></b></label>
+	                  <div class="col-sm-10">
+	                   <div style="">
+				        <div class="box-header">
+				        <div  style="color: red; font-weight:bold">#{daoController.sltAvis.aaoMessCritLotExist}"</div>
+				        </div>
+				        </div>
+	                  </div>
+	                </div>
+	                  
+                  </div>
+                   <div class="box-footer">
+                   <p:commandLink  styleClass="btn btn-warning row pull-left" style="margin-left:5px;color:#fff"   update=":gnl">
+			             <i class="ace-icon fa fa-save"></i>Retour
+	             </p:commandLink>
+                   <p:commandLink  styleClass="btn btn-success row pull-right" action="#{daoController.factoriserLot()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":gnl">
+			             <i class="ace-icon fa fa-save"></i>Confirmer
+	             </p:commandLink>
+                  </div>
+                  </div>
+           </div>
+           </h:panelGroup>   
+            
+            
+          <h:panelGroup rendered="#{daoController.panelCritereLot}">
             <div class="col-md-12">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
@@ -933,11 +978,13 @@
 	                 
 	                </div>
                   </div></div> 
+                     
+                  
 			          <div class="col-sm-2">
-				                  <p:commandLink oncomplete="PF('dlogCritereLot').show()" action="#{daoController.chargeCritereFactCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
-											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
-								  </p:commandLink>
-				                  </div>
+				        <p:commandLink oncomplete="PF('dlogCritereLot').show()" action="#{daoController.chargeCritereFactCombobox()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+						<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">NOUVEAU CRITERE</span>
+					   </p:commandLink>
+				       </div>
 				                  
 				    <div class="col-sm-2">
 				       <p:commandLink  title="Vider la liste des critères sélectionnés" action="#{daoController.viderCritereByLot()}" styleClass="btn btn-danger btn-rounded waves-effect waves-light" style="color:#fff;background-color: red; margin-left:20px" update=":content" >
@@ -1005,20 +1052,25 @@
 			                <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
 			               </h:panelGroup>
 				        </p:column>
-                        </p:dataTable>  
+                        </p:dataTable> 
+
 	            </div>
+	            
 	            <div class="box-footer">
-	             <!--  <p:commandLink  styleClass="btn btn-success row pull-right"  style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Editer la liste
-	               </p:commandLink> -->
+	               <!-- <div class="col-sm-2">
+				       <p:commandLink  title="" action="#{daoController.factoriserLot()}" styleClass="btn btn-danger btn-rounded waves-effect waves-light" style="color:#fff;background-color: red; margin-left:20px" update=":content" >
+					   <span class="btn-label"><i class="fa fa-trash"></i></span><span class="hidden-xs">Test</span>
+					   <p:confirm header="Confirmation" message="#{daoController.sltAvis.aaoMessCritLotExist}" icon="ui-icon-alert" />                              
+					   </p:commandLink>
+	                 </div> -->
+	           </div>
 	            </div>
 	           </div>
-            </div>
-            </div>
-                     
-         
-           
+	           </h:panelGroup>
+	           
+	           
+	           
+            </div>  
          </p:tab> 
          
          
@@ -1175,8 +1227,7 @@
 											<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">AJOUTER UNE RESSOURCE</span>
 								  </p:commandLink>
 				                  </div>
-				                  
-				                 
+       
             </div>
                <p:dataTable  id="tbMbrSpec" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeMembreComSpec}" emptyMessage="Aucun membre trouvé" 
                          draggableColumns="true" scrollable="true" scrollHeight="405">
@@ -1727,7 +1778,7 @@
 	                <div class="form-group ">
 	                  <label for="delaiEx" class="col-sm-2 control-label"><b>Délai d'execution</b></label>
 	                  <div class="col-sm-10">
-	                  <p:inputText  type="text" styleClass="form-control" id="delaiEx" value="#{daoController.newVbTemp.tempLaaDelaiExe}" style="width: 100%" >
+	                  <p:inputText  type="text" placeholder="(en Jours)" styleClass="form-control" id="delaiEx" value="#{daoController.newVbTemp.tempLaaDelaiExe}" style="width: 100%" >
 	                  </p:inputText> 
 	                  </div>
 	                </div>
@@ -1793,7 +1844,7 @@
 	                </div>
 	                
 	                
-	                   <h:panelGroup id="pcaution">
+	              <h:panelGroup id="pcaution">
 	                <div class="form-group ">
 	                  <label for="montCaut" class="col-sm-2 control-label"><b></b></label>
 	                  <div class="col-sm-10">

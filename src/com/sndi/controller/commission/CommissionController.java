@@ -39,6 +39,7 @@ import com.sndi.model.TDetOffres;
 import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailVente;
 import com.sndi.model.TDossierAao;
+import com.sndi.model.TDossierAnalyse;
 import com.sndi.model.TDossierMbr;
 import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
@@ -188,6 +189,7 @@ public class CommissionController {
 	 private List<VLotAnalyseFin> listeSoumissionByLot = new ArrayList<VLotAnalyseFin>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
+	 private List<TDossierAnalyse> justifListe = new ArrayList<TDossierAnalyse>();
 	 private List<TDossierAao> dossListeRapport = new ArrayList<TDossierAao>();
 	 private List<VDofTyp> listdoftyp = new ArrayList<VDofTyp>();
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
@@ -220,6 +222,7 @@ public class CommissionController {
 	 private List<TDetOffres> listDetOffre = new ArrayList<TDetOffres>();
 	 private List<TPiecesOffres> listePieceOffreDelete = new ArrayList<TPiecesOffres>();
 	 private List<TAnalyseOffre> listeAnalyseOffreDelete = new ArrayList<TAnalyseOffre>();
+	 private List<TAnalyseOffre> listeAnalyse = new ArrayList<TAnalyseOffre>();
 	//private VCandidatDac candidat =new VCandidatDac();
 	private VOffreCandidat candidat =new VOffreCandidat();
 	private VLotCandidat tlot =new VLotCandidat();
@@ -231,6 +234,10 @@ public class CommissionController {
 	private VbTempParamAtrib newAttrib = new VbTempParamAtrib();
 	 private TDossierMbr selectedDossier = new TDossierMbr();
 	 private TDossierAao selectedDossierAao = new TDossierAao();
+	 //private TAnalyseOffre selectedAnalyse = new TAnalyseOffre();
+	 private VCritereAnalyseDacOfftec selectedAnalyse = new VCritereAnalyseDacOfftec();
+	 private TAnalyseOffre analyseCom = new TAnalyseOffre();
+	 private TDossierAnalyse selectedDossierJus = new TDossierAnalyse();
 	
 	//Resutat analyse
 	 private List<VVerifcorOffin> listeVerifCor = new ArrayList<VVerifcorOffin>();
@@ -334,6 +341,7 @@ public class CommissionController {
 	 private String filtreCandidat="";
 	 private String filtreLot="";
 	 private String natdoc ="6";
+	 private String natjus ="13";
 	 private long dofMtCor=0;
 	 private long dofErrCalcul=0;
 	 private Date dateSeance;
@@ -1303,6 +1311,45 @@ public class CommissionController {
 						 userController.setSevrityMsg("danger");
 							}
 				  }
+		 	 
+		 
+		//Methode Upload
+		 @Transactional
+		 public void uploadJustif(FileUploadEvent event) throws IOException{
+			
+		     listeAnalyse = (List<TAnalyseOffre>) iservice.getObjectsByColumn("TAnalyseOffre", new ArrayList<String>(Arrays.asList("ANF_NUM")),
+						new WhereClause("ANF_NUM",WhereClause.Comparateur.EQ,""+selectedAnalyse.getAnfNum())); 
+		     if(!listeAnalyse.isEmpty()) {
+		    	 analyseCom=listeAnalyse.get(0);
+		     } 	
+		 	    
+				if(fileUploadController.handleFileUpload(event, ""+analyseCom.getAnfNum(), natjus)) {
+					
+					//check le dossier s'il existe à faire
+					TDossierAnalyse dos = new TDossierAnalyse(); //TNatureDocument 
+					dos = new TDossierAnalyse() ;
+					
+					int nat = Integer.valueOf(natjus);
+
+					dos.setTNatureDocuments(new TNatureDocuments((short)nat));
+					dos.setTAnalyseOffre(analyseCom);
+					dos.setDanaNom(fileUploadController.getFileName());
+					dos.setDanaReference("");
+					dos.setDanaCommentaire(fileUploadController.getDocNom());
+					dos.setDanaDteSaisi(Calendar.getInstance().getTime());
+					iservice.addObject(dos);
+					chargeDossierJus();
+					//Message de Confirmation
+					userController.setTexteMsg("Pièce enregistrée!");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+				     }else {
+				    	//Message d'erreur
+						 userController.setTexteMsg("Document non enregistré, charger à nouveau un document!");
+						 userController.setRenderMsg(true);
+						 userController.setSevrityMsg("danger");
+							}
+				  }
 		 
 	
 		
@@ -1319,6 +1366,15 @@ public class CommissionController {
 						 new WhereClause("DMB_DCS_NUM",Comparateur.EQ,""+detCom.getDcsNum())));
 		    }
 		 
+		 public void chargeDossierJus() {
+			 justifListe.clear();
+			 justifListe = ((List<TDossierAnalyse>)iservice.getObjectsByColumnDesc("TDossierAnalyse",new ArrayList<String>(Arrays.asList("DANA_ID")),
+						 new WhereClause("DANA_ANF_NUM",Comparateur.EQ,""+analyseCom.getAnfNum())));
+		    }
+		 
+		 public void openDossierJus() throws IOException{
+       		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossierJus.getDanaNom(), selectedDossierJus.getDanaNom());
+       		   }
 		 
 		 public void chargeDossierRapport() {
 			 dossListeRapport.clear();
@@ -1337,6 +1393,16 @@ public class CommissionController {
 				 chargeDossierRapport();	
 				 
 			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossierAao.getDaaReference()+" supprimé!", "");
+				FacesContext.getCurrentInstance().addMessage(null, msg);	
+			}
+		    
+		  //Supprimer justificatif du critère
+		    public void removeJustif(){
+			downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossierJus.getDanaReference(), selectedDossierJus.getDanaReference());
+				 iservice.deleteObject(selectedDossierJus);
+				 chargeDossierJus();	
+				 
+			    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossierJus.getDanaReference()+" supprimé!", "");
 				FacesContext.getCurrentInstance().addMessage(null, msg);	
 			}
 		 //private TFonction recupFonction= new TFonction();
@@ -1899,7 +1965,7 @@ public class CommissionController {
 			 _logger.info("Type : "  +""+newfactorise.getTempType());
 			 }
 		 
-		 
+		
 		 
 		 public void vider() {
 			 newOffre = new VbTempParamDetOffres();
@@ -3547,6 +3613,63 @@ public class CommissionController {
 	public void setReserve(String reserve) {
 		this.reserve = reserve;
 	}
+
+	public List<TAnalyseOffre> getListeAnalyse() {
+		return listeAnalyse;
+	}
+
+	public void setListeAnalyse(List<TAnalyseOffre> listeAnalyse) {
+		this.listeAnalyse = listeAnalyse;
+	}
+
+/*	public TAnalyseOffre getSelectedAnalyse() {
+		return selectedAnalyse;
+	}
+
+	public void setSelectedAnalyse(TAnalyseOffre selectedAnalyse) {
+		this.selectedAnalyse = selectedAnalyse;
+	}*/
+
+	public TAnalyseOffre getAnalyseCom() {
+		return analyseCom;
+	}
+
+	public void setAnalyseCom(TAnalyseOffre analyseCom) {
+		this.analyseCom = analyseCom;
+	}
+
+	public List<TDossierAnalyse> getJustifListe() {
+		return justifListe;
+	}
+
+	public void setJustifListe(List<TDossierAnalyse> justifListe) {
+		this.justifListe = justifListe;
+	}
+
+	public TDossierAnalyse getSelectedDossierJus() {
+		return selectedDossierJus;
+	}
+
+	public void setSelectedDossierJus(TDossierAnalyse selectedDossierJus) {
+		this.selectedDossierJus = selectedDossierJus;
+	}
+
+	public VCritereAnalyseDacOfftec getSelectedAnalyse() {
+		return selectedAnalyse;
+	}
+
+	public void setSelectedAnalyse(VCritereAnalyseDacOfftec selectedAnalyse) {
+		this.selectedAnalyse = selectedAnalyse;
+	}
+
+	public String getNatjus() {
+		return natjus;
+	}
+
+	public void setNatjus(String natjus) {
+		this.natjus = natjus;
+	}
+
 
 /*	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;
