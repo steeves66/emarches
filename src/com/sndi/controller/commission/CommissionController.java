@@ -1729,91 +1729,96 @@ public class CommissionController {
 		
 		//Analyser une offre
 				public void analyser() {
-					//Modification des pieces selectionnées a conforme
-					/*if(sltOffre.getDofRangOfr()> nbrLot) {
-						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
-					}else
-					{*/
-					offreListe = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
-							 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
-					        if (!listeOffres.isEmpty()) {
-					        	offre=offreListe.get(0);
-					        	offre.setDofStaut("1");
-					        	offre.setDofMtOfr(sltOffre.getDofMtOfr());
-					        	offre.setDofErrFin(sltOffre.getDofErrFin());
-					        	offre.setDofObsFin(sltOffre.getDofObsFin());
-					        	offre.setDofErrCalcul(dofErrCalcul);
-					        	offre.setDofMtCor(dofMtCor);
-					        	iservice.updateObject(offre);
-					          }
-						
-						/*if (listeSelectionPiecesOffresAnalyse.size()==0) {
-							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+					
+					if(sltOffre.getDofErrFin().equalsIgnoreCase("")) {
+						FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuilllez renseignez tous les champs obligatoires (Commentaires,Observations,Erreurs Constatées! ", "")); 	 		
+					}else {
+						//Modification des pieces selectionnées a conforme
+						/*if(sltOffre.getDofRangOfr()> nbrLot) {
+							FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le rang ne doit pas etre superieur au nombre total de lot! ", "")); 	 	
 						}else
-						if (listePiecesOffresAnalyse.size()<listeSelectionPiecesOffresAnalyse.size()) {
-							FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
-						}
-				 		else{*/
-					 /*		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
-					 			List<TPiecesOffres> LS  = iservice.getObjectsByColumn("TPiecesOffres",  new WhereClause("POF_NUM",Comparateur.EQ,""+ligne.getPofNum()));
-					 			TPiecesOffres updatePieceOffre = new TPiecesOffres();
-								if(!LS.isEmpty()) {
-								updatePieceOffre = LS.get(0);	
-					 			updatePieceOffre.setPofConforme(ligne.getPofConforme());
-					 			updatePieceOffre.setPofPresent(ligne.getAnfPresence());
-					 			updatePieceOffre.setPofObs(ligne.getPofObs());
-					 			iservice.updateObject(updatePieceOffre);
-						     }	
-					 		}*/
-				         //}
-						
-						//EVALUTATION         
-					 		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
-					 			if(ligne.getPofObs() == null) {
-					 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
-									FacesContext.getCurrentInstance().addMessage(null, msg);
-					 			}else {
-					 			newTempParamAnalyseOff.setAnfDacCode(ligne.getDcadDacCode());
-					 			newTempParamAnalyseOff.setAnfNum(ligne.getAnfNum());
-					 			newTempParamAnalyseOff.setAnfCommentaire(ligne.getPofObs());
-					 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
-					 			newTempParamAnalyseOff.setTempType("ANOFF");
-					 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-					 			newTempParamAnalyseOff.setAnfPresence(ligne.getAnfPresence());
-					 			newTempParamAnalyseOff.setAnfValeurConf(ligne.getPofConforme());
-					 			iservice.addObject(newTempParamAnalyseOff);
-					 		}
-					 	  }
-					 		
-					 		
-					 		
-					 		for(VCritereAnalyseDacOfftec lignes : listeCritereAnalyse) {
-					 			
-					 			if(lignes.getDcadCommentaire() == null) {
-					 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
-									FacesContext.getCurrentInstance().addMessage(null, msg);
-					 			}else {
-					 				newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
-						 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());
-						 			newTempParamAnalyseOff.setAnfValeurConf(lignes.getAaoRegQual());
-						 			newTempParamAnalyseOff.setAnfValeurScore(lignes.getValRegQual());
-						 			newTempParamAnalyseOff.setAnfCommentaire(lignes.getDcadCommentaire());
+						{*/
+						offreListe = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
+								 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
+						        if (!listeOffres.isEmpty()) {
+						        	offre=offreListe.get(0);
+						        	offre.setDofStaut("1");
+						        	offre.setDofMtOfr(sltOffre.getDofMtOfr());
+						        	offre.setDofErrFin(sltOffre.getDofErrFin());
+						        	offre.setDofObsFin(sltOffre.getDofObsFin());
+						        	offre.setDofErrCalcul(dofErrCalcul);
+						        	offre.setDofMtCor(dofMtCor);
+						        	iservice.updateObject(offre);
+						          }
+							
+							/*if (listeSelectionPiecesOffresAnalyse.size()==0) {
+								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
+							}else
+							if (listePiecesOffresAnalyse.size()<listeSelectionPiecesOffresAnalyse.size()) {
+								FacesContext.getCurrentInstance().addMessage(null,new FacesMessage(FacesMessage.SEVERITY_ERROR, "Selectionnez toutes les pièces", ""));
+							}
+					 		else{*/
+						 /*		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
+						 			List<TPiecesOffres> LS  = iservice.getObjectsByColumn("TPiecesOffres",  new WhereClause("POF_NUM",Comparateur.EQ,""+ligne.getPofNum()));
+						 			TPiecesOffres updatePieceOffre = new TPiecesOffres();
+									if(!LS.isEmpty()) {
+									updatePieceOffre = LS.get(0);	
+						 			updatePieceOffre.setPofConforme(ligne.getPofConforme());
+						 			updatePieceOffre.setPofPresent(ligne.getAnfPresence());
+						 			updatePieceOffre.setPofObs(ligne.getPofObs());
+						 			iservice.updateObject(updatePieceOffre);
+							     }	
+						 		}*/
+					         //}
+							
+							//EVALUTATION         
+						 		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
+						 			if(ligne.getPofObs() == null) {
+						 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
+										FacesContext.getCurrentInstance().addMessage(null, msg);
+						 			}else {
+						 			newTempParamAnalyseOff.setAnfDacCode(ligne.getDcadDacCode());
+						 			newTempParamAnalyseOff.setAnfNum(ligne.getAnfNum());
+						 			newTempParamAnalyseOff.setAnfCommentaire(ligne.getPofObs());
 						 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
 						 			newTempParamAnalyseOff.setTempType("ANOFF");
 						 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+						 			newTempParamAnalyseOff.setAnfPresence(ligne.getAnfPresence());
+						 			newTempParamAnalyseOff.setAnfValeurConf(ligne.getPofConforme());
 						 			iservice.addObject(newTempParamAnalyseOff);
-					 			}	
-					 		}
-				         //}
-						chargeLotByAvis();
-						//editerAna = true;
-						listeSelectionPiecesOffresAnalyse.clear();
-						selectionCritereAnalyse.clear();
-						userController.setTexteMsg("Analyse effectuée avec succès !");
-						userController.setRenderMsg(true);
-						userController.setSevrityMsg("success");
-					//}
-					onSelectLot();
+						 		}
+						 	  }
+						 		
+						 		
+						 		
+						 		for(VCritereAnalyseDacOfftec lignes : listeCritereAnalyse) {
+						 			
+						 			if(lignes.getDcadCommentaire() == null) {
+						 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
+										FacesContext.getCurrentInstance().addMessage(null, msg);
+						 			}else {
+						 				newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
+							 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());
+							 			newTempParamAnalyseOff.setAnfValeurConf(lignes.getAaoRegQual());
+							 			newTempParamAnalyseOff.setAnfValeurScore(lignes.getValRegQual());
+							 			newTempParamAnalyseOff.setAnfCommentaire(lignes.getDcadCommentaire());
+							 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
+							 			newTempParamAnalyseOff.setTempType("ANOFF");
+							 			newTempParamAnalyseOff.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+							 			iservice.addObject(newTempParamAnalyseOff);
+						 			}	
+						 		}
+					         //}
+							chargeLotByAvis();
+							//editerAna = true;
+							listeSelectionPiecesOffresAnalyse.clear();
+							selectionCritereAnalyse.clear();
+							userController.setTexteMsg("Analyse effectuée avec succès !");
+							userController.setRenderMsg(true);
+							userController.setSevrityMsg("success");
+						//}
+						onSelectLot();
+					}
 				}
 		
 		
@@ -1860,11 +1865,7 @@ public class CommissionController {
 					userController.setSevrityMsg("success");
 				}
 						
-				
-			//Ajout d'une reserve
-				public void addReserve() {
-					
-				}
+			
 		
 		/*public void ajouterAttributaire() {
 			

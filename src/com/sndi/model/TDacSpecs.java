@@ -57,6 +57,7 @@ public class TDacSpecs implements java.io.Serializable {
 	private String dacAutComSpec;
 	private BigDecimal dacNbrCopieOff;
 	private String dacFinancement;
+	private String dacCraCodeExclus;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -79,7 +80,8 @@ public class TDacSpecs implements java.io.Serializable {
 			long dacNbrOuv,  Date dacDteValCpmp, Date dacDteValDmp,  Date dacDateReception,
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
-			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,String dacFinancement,Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
+			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,String dacFinancement,String dacCraCodeExclus,
+			Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
 		this.dacCode = dacCode;
@@ -111,6 +113,7 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacAutComSpec = dacAutComSpec;
 		this.dacNbrCopieOff = dacNbrCopieOff;
 		this.dacFinancement = dacFinancement;
+		this.dacCraCodeExclus = dacCraCodeExclus;
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
@@ -503,5 +506,15 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacFinancement(String dacFinancement) {
 		this.dacFinancement = dacFinancement;
+	}
+	
+
+	@Column(name = "DAC_CRA_CODE_EXCLUS", length = 50)
+	public String getDacCraCodeExclus() {
+		return this.dacCraCodeExclus;
+	}
+
+	public void setDacCraCodeExclus(String dacCraCodeExclus) {
+		this.dacCraCodeExclus = dacCraCodeExclus;
 	}
 }

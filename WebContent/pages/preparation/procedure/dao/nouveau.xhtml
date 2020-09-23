@@ -257,7 +257,7 @@
                   <div class="col-sm-9"> 
                      <p:selectOneRadio value="#{daoController.newAvis.aaoNatPrix}" id="console" >
 			            <f:selectItem itemLabel="Unitaire" itemValue="Unitaire" />
-			            <f:selectItem itemLabel="Global et forfetaire" itemValue="Global et forfetaire" />
+			            <f:selectItem itemLabel="Global et forfaitaire" itemValue="Global et forfaitaire" />
 			        </p:selectOneRadio>
                   </div>
               </div>
@@ -764,9 +764,11 @@
 			          
                </div>
 	            <!-- /.box-header -->
-	                  <div class="box-body">    
+	                  <div class="box-body"> 
+	             
+	            <div class="col-md-12">       
                  <p:dataTable var="slctdTb"  styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listeCritereAnalyse}" rowStyleClass="#{slctdTb.modelStatut == '1' ? 'old' : 0}"
-                selection="#{daoController.selectionlisteCritereAnalyse}" scrollable="true" scrollHeight="550" rowKey="#{slctdTb.craCode}" emptyMessage="Aucun critère trouvé">
+                  selection="#{daoController.selectionlisteCritereAnalyse}" scrollable="true" scrollHeight="550" rowKey="#{slctdTb.craCode}" emptyMessage="Aucun critère trouvé">
                            <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 				         <p:column headerText="CRITERES" styleClass="col-sm-12">
 				               <h:panelGroup rendered="#{slctdTb.modelStatut == '1'}">
@@ -779,10 +781,23 @@
 		         				    <h:outputText value="#{slctdTb.craLibelle}" />
 		         		      </h:panelGroup>
                             </p:column>
-                        </p:dataTable>  
+                        </p:dataTable>
+                     </div>
+                      
+                     <h:panelGroup id="critereTest"> 
+                     <h:panelGroup rendered="#{daoController.daoCritere}">   
+                     <div class="col-md-12">
+			           <p:selectOneRadio id="criteres" value="#{daoController.critere}">
+			           <p:ajax listener="#{daoController.savePiece()}" update=":content" />
+						  <f:selectItem itemLabel="Garantie de soumission" itemValue="CAU" /> 
+						  <f:selectItem itemLabel="Déclaration de garantie de soumission" itemValue="GSOU" />
+						</p:selectOneRadio>
+                    </div> 
+                    </h:panelGroup> 
+                    </h:panelGroup>
 	            </div>
 	              <div class="box-footer">
-	              <p:commandLink  styleClass="btn btn-success row pull-right" action="#{daoController.saveCritere()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+	              <p:commandLink  styleClass="btn btn-success row pull-right" action="#{daoController.saveCritere()}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content, :gnl:critereTest">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Ajouter >>>
 	               </p:commandLink>
@@ -1043,7 +1058,7 @@
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />                             
                             </p:commandLink>
-				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update="gnl">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritereLot()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
@@ -1724,7 +1739,7 @@
 	                  <div class="col-sm-10">
 	                   <p:selectOneMenu value="#{daoController.imputation}" id="bail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir l'imputation..." itemValue="empty" />  
+			       <f:selectItem  itemLabel="Choisir l'imputation budgétaire..." itemValue="empty" />  
 			       <f:selectItems value="#{daoController.listeImputations}" var="imp" itemLabel="#{imp.lbgImputation}" itemValue="#{imp.lbgCode}" />				   				   
        		        </p:selectOneMenu>
 	                  </div>

@@ -350,6 +350,7 @@ public class DaoController {
 	 private String dtaLibelle;
 	 private String affichLog;
 	 private String craCode;
+	 private String critere;
 	 private String detCom="";
 	 private String pieceCode="";
 	 private String dacCode ="";
@@ -400,6 +401,7 @@ public class DaoController {
 	 private TTiers recupTiers = new TTiers();
 	 private VVenteLot nbreLot = new VVenteLot();
 	 private VUpdateDac updateDac= new VUpdateDac();
+	 private VCritereAnalyseModel critereObject= new VCritereAnalyseModel();
 	//GESTION DES COMMISSIONS
 	 private VbCommissionSpecifique newcomSpec = new VbCommissionSpecifique();
 	 private VbCommissionSpecifique comSpec = new VbCommissionSpecifique();
@@ -425,7 +427,7 @@ public class DaoController {
 	 private boolean comAutorise = false;
 	 private String typeCommission ="N"; 
 	 private boolean etatPays = true;
-	 
+	 private boolean daoCritere = true;
 	 private boolean panelCaution = false;
 	 
 	//Boolï¿½ens
@@ -607,20 +609,34 @@ public class DaoController {
 		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
 					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
 		            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		 _logger.info("liste affichï¿½e: "+listeCritereAnalyse.size());
+		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
 	 }
 	 
+   //Insertion du critère après le choix 
+	public void savePiece() {
+		listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+				 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+			     if (!listDao.isEmpty()) {
+				       newDao= listDao.get(0);
+				       newDao.setDacCraCodeExclus(critere);
+		               iservice.updateObject(newDao); 
+		               //Chargement des pièces
+		               chargeCritere();   
+   	           }
+	}
 	 
-	 //Liste des critï¿½res saisie
+	 
+	 //Liste des critères saisies
 	 public void chargeCritereSaisie() { 
 	/*	 listeCritereSaisie= (List<VbDetCritAnalyseDac>) iservice.getObjectsByColumn("VbDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_DAN_CODE")),
-					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));*/
-		 
+					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));*/ 
 		 listeCritereSaisie.clear(); 
 		 listeCritereSaisie = ((List<VCritereAnalyseDac>)iservice.getObjectsByColumn("VCritereAnalyseDac",
 				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
 				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode())));
 		 _logger.info("liste critere saisie: "+listeCritereSaisie.size());
+
+		 afficheOption();
 	 }
 	 
 	 
@@ -896,14 +912,32 @@ public class DaoController {
 			 chargeCritereCombobox();
 		 } 
 	 }
+	
 	 
+	//Contôle sur les options "Garantie de Soumission et Déclaration de Garantie de Soumission"
+	public void afficheOption() {
+		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
+					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
+		            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+		if(!listeCritereAnalyse.isEmpty()) { 
+			critereObject=listeCritereAnalyse.get(0);
+			
+			if(critereObject.getFlag().equalsIgnoreCase("1")) {
+				daoCritere = false;
+				 _logger.info("valeur Flag : "+critereObject.getFlag());
+			}else {
+				daoCritere = true;
+				 _logger.info("valeur Flag : "+critereObject.getFlag());
+			}
+	    }
+	}
 	 
-	 
+	 //Enregistrement des critères
 	 public void saveCritere() {
 		 
 		 if (selectionlisteCritereAnalyse.size()==0) {
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critï¿½re selectionnï¿½", ""));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
 			}
 	 		else{
 	 			/*selectionlisteCritereAnalyse = (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -931,21 +965,20 @@ public class DaoController {
 		 			newTempCritere.setCriDcadStatut("1");
 		 			newTempCritere.setTempType("CRI");
 		 			iservice.addObject(newTempCritere);
-		 			  
-		 			
 			     }
 	 			
 		 		selectionlisteCritereAnalyse.clear();
 		 		chargeCritereSaisie();
 		 		chargeCritere();
 		 		chargeLotCritere();
+		 		///afficheOption();
 		 		pavet_commission = true;
 		 		userController.setTexteMsg("Critère(s) d'analyse enregistré(s) avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
-				
 	 		 }
 	 }
+	 
 	 
 	//Factorisation des Lots
 	 public void factoriserLot() { 
@@ -1321,7 +1354,7 @@ public class DaoController {
 		 }  
 		//Fin de la Methode 
 	 
-	 //Suppression du critï¿½re du dï¿½tail
+	 //Suppression du critère du détail
 	 public void deleteCritere() {
 		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 					new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum()));
@@ -1330,12 +1363,31 @@ public class DaoController {
 	  		 iservice.deleteObject(detCritere); 
 	  		 chargeCritereSaisie();
 	  		 chargeCritere();
-	  		userController.setTexteMsg("Suppression effectuï¿½e avec succï¿½s!");
+	  		userController.setTexteMsg("Suppression effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 	       }
-		
 	 }
+	 
+	 //Fin de la méthode de suppression du détail de critère
+	 
+	 //Suppression du critère du détail
+	 public void deleteCritereLot() {
+		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
+				     new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
+					 new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum()));
+	       if (!listeDetCritere.isEmpty()) {
+	    	   detCritere = listeDetCritere.get(0);
+	  		   iservice.deleteObject(detCritere); 
+	  		   chargeCritereSaisie();
+	  		    chargeCritere();
+	  		   chargeCritereByLot();
+	  		userController.setTexteMsg("Suppression effectuée avec succès!");
+			userController.setRenderMsg(true);
+			userController.setSevrityMsg("success");
+	       }
+	 }
+	 
 	 //Fin de la mï¿½thode de suppression du dï¿½tail de critï¿½re
 	 
 	 
@@ -3247,7 +3299,7 @@ public class DaoController {
 					    		  iservice.addObject(newVbTemp);
 					    		  chargeLots();
 					    		  montantTotalLot();
-					    		  userController.setTexteMsg("Lot(s) gÃ©nÃ©rÃ©(s) avec succÃ¨s!");
+					    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
 					    		  userController.setRenderMsg(true);
 					    		  userController.setSevrityMsg("success");
 								  
@@ -5280,14 +5332,14 @@ public class DaoController {
 		    	 
 		     //Parcourir la liste VPpmListe et faire une mise a jour des different statut
 			  for(TDetCritAnalyseDac crit : listeDetCritere) { 
-				  
 				  iservice.deleteObject(crit); 
 		  		  chargeCritereSaisie();
 		  		  chargeCritere();
 			  	  userController.setTexteMsg("Liste des critères vidée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
-			    } 
+			    } 	         
+			  critere="";
 		     }
 		     
 		     
@@ -7917,5 +7969,29 @@ public class DaoController {
 
 	public void setPanelMessage(boolean panelMessage) {
 		this.panelMessage = panelMessage;
+	}
+
+	public String getCritere() {
+		return critere;
+	}
+
+	public void setCritere(String critere) {
+		this.critere = critere;
+	}
+
+	public boolean isDaoCritere() {
+		return daoCritere;
+	}
+
+	public void setDaoCritere(boolean daoCritere) {
+		this.daoCritere = daoCritere;
+	}
+
+	public VCritereAnalyseModel getCritereObject() {
+		return critereObject;
+	}
+
+	public void setCritereObject(VCritereAnalyseModel critereObject) {
+		this.critereObject = critereObject;
 	}
 }

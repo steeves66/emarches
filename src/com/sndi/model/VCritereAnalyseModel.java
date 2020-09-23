@@ -1,6 +1,8 @@
 package com.sndi.model;
 // Generated 28 juin 2020 16:41:11 by Hibernate Tools 4.3.5.Final
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -18,6 +20,7 @@ import org.hibernate.annotations.Immutable;
 public class VCritereAnalyseModel implements java.io.Serializable {
 
 	private String craCode;
+	private String flag;
 	private String craLibelle;
 	private String mdtCode;
 	private String codedetail;
@@ -33,10 +36,11 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 	public VCritereAnalyseModel() {
 	}
 
-	public VCritereAnalyseModel(String craCode, String craLibelle, String mdtCode, String codedetail,
+	public VCritereAnalyseModel(String craCode,String flag, String craLibelle, String mdtCode, String codedetail,
 			String mdtLibelleLong, String craBail, String codparent, String mdtTymCode, String craTypDac,
 			String mdtDacTypeChain, Character modelStatut,String dacCode) {
 		this.craCode = craCode;
+		this.flag = flag;
 		this.craLibelle = craLibelle;
 		this.mdtCode = mdtCode;
 		this.codedetail = codedetail;
@@ -58,6 +62,15 @@ public class VCritereAnalyseModel implements java.io.Serializable {
 
 	public void setCraCode(String craCode) {
 		this.craCode = craCode;
+	}
+	
+	@Column(name = "FLAG")
+	public String getFlag() {
+		return this.flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 
 	@Column(name = "CRA_LIBELLE")
