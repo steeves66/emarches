@@ -6547,16 +6547,28 @@ public class ControleController {
 											    				//DEMANDE D'ANO
 											    				if(action.equalsIgnoreCase("LISANO")) {
 													    			type = "Commission";
+													    			fonctionalite = "listDemAnoAc";
+													    			//libelleFinCom = "Validation éffectuée avec succès !";
+													    			//libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
+													    			//libelleTitle = "Prévalidation";
 													    			libelle="LISTE DES AVIS D'APPEL D'OFFRE EN ATTENTE D'ANO";	
 													    		}else
+													    			if(action.equalsIgnoreCase("LISANODMP")) {
+														    			type = "Commission";
+														    			fonctionalite = "listDemAnoDmp";
+														    			//libelleFinCom = "Validation éffectuée avec succès !";
+														    			//libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
+														    			//libelleTitle = "Prévalidation";
+														    			libelle="LISTE DES AVIS D'APPEL D'OFFRE EN ATTENTE D'ANO";	
+														    		}else
 													    			if(action.equalsIgnoreCase("DEMANO")) {
 														    			type = "Commission";
-														    			libelle="DEMANDE D'AVIS DE NON OBJECTION DU BAILLEUR";	
+														    			libelle="DEMANDE DE NON OBJECTION SUR L'AVIS";	
 														    		}else
 														    			//REEDITION DES ETATS
 														    			if(action.equalsIgnoreCase("TRAIANO")) {
 															    			type = "Commission";
-															    			libelle="TRAITEME DES ANO";	
+															    			libelle="TRAITEMENT DES ANO DE L'AVIS";	
 															    		}
 													    			else
 											    			

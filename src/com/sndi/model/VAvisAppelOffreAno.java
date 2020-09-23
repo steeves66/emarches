@@ -40,6 +40,7 @@ public class VAvisAppelOffreAno implements java.io.Serializable {
 	private Short aaoNbrOffHorDelai;
 	private Character aaoStatut;
 	private Character aaoAno;
+	private Short dacGesCode;
 
 	public VAvisAppelOffreAno() {
 	}
@@ -52,7 +53,7 @@ public class VAvisAppelOffreAno implements java.io.Serializable {
 			BigDecimal aaoNbrOuv, Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv,
 			Date aaoDteOuvTec, String aaoObsOuv, String aaoLieuOuvPrecis, String aaoHeurFinOuv, Date aaoDteSaisi,
 			Date aaoDteFinOuv, String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
-			Character aaoStatut, Character aaoAno) {
+			Character aaoStatut, Character aaoAno,Short dacGesCode) {
 		this.aaoCode = aaoCode;
 		this.aaoDacCode = aaoDacCode;
 		this.aaoLibelle = aaoLibelle;
@@ -74,6 +75,7 @@ public class VAvisAppelOffreAno implements java.io.Serializable {
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
 		this.aaoStatut = aaoStatut;
 		this.aaoAno = aaoAno;
+		this.dacGesCode = dacGesCode;
 	}
 
 	@Id
@@ -264,6 +266,15 @@ public class VAvisAppelOffreAno implements java.io.Serializable {
 
 	public void setAaoAno(Character aaoAno) {
 		this.aaoAno = aaoAno;
+	}
+
+	@Column(name = "DAC_GES_CODE")
+	public Short getDacGesCode() {
+		return dacGesCode;
+	}
+
+	public void setDacGesCode(Short dacGesCode) {
+		this.dacGesCode = dacGesCode;
 	}
 
 

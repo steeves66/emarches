@@ -35,7 +35,7 @@ public class VLot implements java.io.Serializable {
 	private BigDecimal laaNum;
 	private BigDecimal laaCoutLot;
 	private String laaDacCode;
-
+	private String laaAno;
 	public VLot() {
 	}
 
@@ -46,7 +46,7 @@ public class VLot implements java.io.Serializable {
 	public VLot(String laaId, String laaAaoCode, String laaObjet, String laaObservation, BigDecimal laaMtCaut,
 			BigDecimal laaMtEst, Date laaDteSaisi, String laaStaCode, String laaFonCodSaisi, String laaFonCodCpmp,
 			String laaOpeMatricule, String laaLieuExe, String laaLbgImputation, BigDecimal laaNum,
-			BigDecimal laaCoutLot, String laaDacCode) {
+			BigDecimal laaCoutLot, String laaDacCode,String laaAno) {
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
@@ -63,6 +63,7 @@ public class VLot implements java.io.Serializable {
 		this.laaNum = laaNum;
 		this.laaCoutLot = laaCoutLot;
 		this.laaDacCode = laaDacCode;
+		this.laaAno = laaAno;
 	}
 	
 	@Id
@@ -209,4 +210,14 @@ public class VLot implements java.io.Serializable {
 	public void setLaaDacCode(String laaDacCode) {
 		this.laaDacCode = laaDacCode;
 	}
+	
+	@Column(name = "LAA_ANO")
+	public String getLaaAno() {
+		return laaAno;
+	}
+
+	public void setLaaAno(String laaAno) {
+		this.laaAno = laaAno;
+	}
+	
 }

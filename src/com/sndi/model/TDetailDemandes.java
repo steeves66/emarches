@@ -29,6 +29,7 @@ public class TDetailDemandes implements java.io.Serializable {
 	private String ddeMarCode;
 	private String ddeActNum;
 	private String ddeActNumIni;
+	private String ddeAaoCode;
 
 	public TDetailDemandes() {
 	}
@@ -38,7 +39,8 @@ public class TDetailDemandes implements java.io.Serializable {
 	}
 
 	public TDetailDemandes(BigDecimal ddeNum, TDemande TDemande, TStructure TStructure, String TLBudgets,
-			TLotAao TLotAao, String TDacSpecs, String ddeMarCode, String ddeActNum, String ddeActNumIni) {
+			TLotAao TLotAao, String TDacSpecs, String ddeMarCode, String ddeActNum, String ddeActNumIni,
+			String ddeAaoCode) {
 		this.ddeNum = ddeNum;
 		this.TDemande = TDemande;
 		this.TStructure = TStructure;
@@ -48,6 +50,7 @@ public class TDetailDemandes implements java.io.Serializable {
 		this.ddeMarCode = ddeMarCode;
 		this.ddeActNum = ddeActNum;
 		this.ddeActNumIni = ddeActNumIni;
+		this.ddeAaoCode = ddeAaoCode;
 	}
 
 	@Id
@@ -135,6 +138,15 @@ public class TDetailDemandes implements java.io.Serializable {
 
 	public void setDdeActNumIni(String ddeActNumIni) {
 		this.ddeActNumIni = ddeActNumIni;
+	}
+	
+	@Column(name = "DDE_AAO_CODE", length = 25)
+	public String getDdeAaoCode() {
+		return this.ddeAaoCode;
+	}
+
+	public void setDdeAaoCode(String ddeAaoCode) {
+		this.ddeAaoCode = ddeAaoCode;
 	}
 
 }

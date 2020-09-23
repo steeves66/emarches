@@ -45,6 +45,9 @@ public class TDemande implements java.io.Serializable {
 	private String demFonCodePf;
 	private String demFonCodeDmp;
 	private String demStatutRetour;
+	private String demAaoCode;
+	private String demDacCode;
+	private String demMarCode;
 	private Set<TPieceDemande> TPieceDemandes = new HashSet<TPieceDemande>(0);
 	private Set<THistoDemande> THistoDemandes = new HashSet<THistoDemande>(0);
 	private Set<TDetailDemandes> TDetailDemandeses = new HashSet<TDetailDemandes>(0);
@@ -59,7 +62,7 @@ public class TDemande implements java.io.Serializable {
 	}
 
 	public TDemande(BigDecimal demNum, TTypeDemande TTypeDemande, TStatut TStatut, TStructure TStructure,
-			TFonction TFonction, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,String demFonCodePf,
+			TFonction TFonction, TOperateur TOperateur, String demObjet, String demMotif, Date demDteSaisi,String demFonCodePf, String demAaoCode, String demDacCode, String demMarCode,
             String demFonCodeDmp,String demRefAvisMin, String demRef, Short demGesCode, String demRefActIni,String demStatutRetour,Set<TPieceDemande> TPieceDemandes,
 			Set<THistoDemande> THistoDemandes, Set<TDetailDemandes> TDetailDemandeses,Set<TDossierDemande> TDossierDemandes, Set<TAvisPresel> TAvisPresels) {
 		this.demNum = demNum;
@@ -83,6 +86,9 @@ public class TDemande implements java.io.Serializable {
 		this.TAvisPresels = TAvisPresels;
 		this.demFonCodePf =demFonCodePf;
 		this.demFonCodeDmp = demFonCodeDmp;
+		this.demAaoCode = demAaoCode;
+		this.demDacCode =demDacCode;
+		this.demMarCode = demMarCode;
 	}
 
 	@Id
@@ -218,6 +224,32 @@ public class TDemande implements java.io.Serializable {
 
 	public void setDemStatutRetour(String demStatutRetour) {
 		this.demStatutRetour = demStatutRetour;
+	}
+	@Column(name = "DEM_AAO_CODE", length = 25)
+	public String getDemAaoCode() {
+		return this.demAaoCode;
+	}
+
+	public void setDemAaoCode(String demAaoCode) {
+		this.demAaoCode = demAaoCode;
+	}
+
+	@Column(name = "DEM_DAC_CODE", length = 25)
+	public String getDemDacCode() {
+		return this.demDacCode;
+	}
+
+	public void setDemDacCode(String demDacCode) {
+		this.demDacCode = demDacCode;
+	}
+
+	@Column(name = "DEM_MAR_CODE", length = 25)
+	public String getDemMarCode() {
+		return this.demMarCode;
+	}
+
+	public void setDemMarCode(String demMarCode) {
+		this.demMarCode = demMarCode;
 	}
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDemande")

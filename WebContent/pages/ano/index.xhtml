@@ -109,12 +109,20 @@
                            <!-- BOUTONS COMMISSION -->
                            
                        
-                              
-                             <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{anoController.renderPage('com6','SAIDEP')}"
-				               title="Séance d'Ouverture" update=":content">
+                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">  
+                             <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{anoController.renderPage('ano2','DEMANO')}"
+				               title="Démande d'ANO" update=":content">
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.slctdTd}" />                             
                             </p:commandLink>
+                            </h:panelGroup>
+                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">  
+                             <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{anoController.renderPage('ano3','TRAIANO')}"
+				               title="Traitement des ANO" update=":content">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.slctdTd}" />                             
+                            </p:commandLink>
+                            </h:panelGroup>
                                 
 				        </p:column>
     </p:dataTable>

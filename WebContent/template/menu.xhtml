@@ -1487,7 +1487,31 @@
             <i class="fa fa-circle-o"></i>Validation des Jugements <br/> des Offres
              </p:commandLink>
             </li>
-           
+                      <!-- DEBUT M4 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Avis de non objection</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{anoController.renderPage('ano1','LISANODMP')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Demande
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('ano2','DEMANO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Consultation
+             </p:commandLink>
+            </li>
+          
+
+        
+          </ul>
+        </li>   
+         <!-- FIN M4 -->
           </ul>
         </li>   
          <!-- FIN M4 -->
@@ -2110,7 +2134,32 @@
           
              
          </li>
-          </ul>   
+          </ul> 
+                     <!-- DEBUT M4 :  -->
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Avis de non objection</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>        
+          <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{anoController.renderPage('ano1','LISANO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Demande
+             </p:commandLink>
+            </li>
+            <li>
+            <p:commandLink action="#{commissionController.renderPage('ano2','DEMANO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Consultation
+             </p:commandLink>
+            </li>
+          
+
+        
+          </ul>
+        </li>   
+         <!-- FIN M4 -->  
         </li>
          <!-- FIN M2 -->
          

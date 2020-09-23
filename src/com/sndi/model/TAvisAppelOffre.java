@@ -75,6 +75,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private String avisRetour;
 	private String aaoArtComSpec;
 	private String aaoMessCritLotExist;
+	private long aaoStatut;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -95,7 +96,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
 			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,String aaoArtComSpec,
 			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,String avisRetour, String aaoMessCritLotExist,
-			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques) {
+			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques,long aaoStatut) {
 		this.aaoCode = aaoCode;
 		this.fonCodAc = fonCodAc;
 		this.fonCodCpmp = fonCodCpmp;
@@ -150,6 +151,8 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.TDetailAvises = TDetailAvises;
 		this.TLotAaos = TLotAaos;
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
+		this.aaoStatut = aaoStatut;
+		
 	}
 
 	@Id
@@ -657,6 +660,15 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setTCommissionSpecifiques(Set<TCommissionSpecifique> TCommissionSpecifiques) {
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
+	}
+
+	@Column(name = "AAO_STATUT")
+	public long getAaoStatut() {
+		return aaoStatut;
+	}
+
+	public void setAaoStatut(long aaoStatut) {
+		this.aaoStatut = aaoStatut;
 	}
 
 

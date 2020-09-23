@@ -49,6 +49,8 @@ public class TLotAao implements java.io.Serializable {
 	private String laaAjoutPanier;
 	private Long laaDelaiExe;
 	private String laaVariante;
+	private String laaAno;
+	private String laaObservationDmp;
 	private Set<TPiecesOffres> TPiecesOffres = new HashSet<TPiecesOffres>(0);
 
 	public TLotAao() {
@@ -60,8 +62,8 @@ public class TLotAao implements java.io.Serializable {
 
 	public TLotAao(Long laaId, TLBudgets TLBudgets, TFonction TFonctionByLaaFonCodSaisi,
 			TFonction TFonctionByLaaFonCodCpmp, TAvisAppelOffre TAvisAppelOffre,TDacSpecs TDacSpecs, String laaObjet, String laaObservation,
-			Long laaMtCaut, long laaMtEst, Date laaDteSaisi, String laaStaCode, String laaOpeMatricule,
-			String laaLieuExe, Long laaNum, Long laaCoutLot,String laaAjoutPanier, Long laaDelaiExe,String laaVariante,
+			Long laaMtCaut, long laaMtEst, Date laaDteSaisi, String laaStaCode, String laaOpeMatricule,String laaObservationDmp,
+			String laaLieuExe, Long laaNum, Long laaCoutLot,String laaAjoutPanier, Long laaDelaiExe,String laaVariante,String laaAno,
 			Set<TPiecesOffres> TPiecesOffres) {
 		this.laaId = laaId;
 		this.TLBudgets = TLBudgets;
@@ -83,6 +85,8 @@ public class TLotAao implements java.io.Serializable {
 		this.laaDelaiExe = laaDelaiExe;
 		this.laaVariante = laaVariante;
 		this.TPiecesOffres = TPiecesOffres;
+		this.laaAno = laaAno;
+		this.laaObservationDmp = laaObservationDmp;
 	}
 
 	@Id
@@ -274,7 +278,23 @@ public class TLotAao implements java.io.Serializable {
 	public void setTPiecesOffres(Set<TPiecesOffres> tPiecesOffres) {
 		TPiecesOffres = tPiecesOffres;
 	}
+
+	@Column(name = "LAA_ANO")
+	public String getLaaAno() {
+		return laaAno;
+	}
+
+	public void setLaaAno(String laaAno) {
+		this.laaAno = laaAno;
+	}
 	
-	
+	@Column(name = "LAA_OBSERVATION_DMP", length = 100)
+	public String getLaaObservationDmp() {
+		return this.laaObservationDmp;
+	}
+
+	public void setLaaObservationDmp(String laaObservationDmp) {
+		this.laaObservationDmp = laaObservationDmp;
+	}
 
 }
