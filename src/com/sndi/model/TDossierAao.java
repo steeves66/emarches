@@ -24,6 +24,7 @@ import javax.persistence.TemporalType;
 public class TDossierAao implements java.io.Serializable {
 
 	private BigDecimal daaId;
+	private String daaCode;
 	private TNatureDocuments TNatureDocuments;
 	private String daaNom;
 	private Date daaDteSaisi;
@@ -38,9 +39,10 @@ public class TDossierAao implements java.io.Serializable {
 		this.daaId = daaId;
 	}
 
-	public TDossierAao(BigDecimal daaId, TNatureDocuments TNatureDocuments, String daaNom, Date daaDteSaisi,
+	public TDossierAao(BigDecimal daaId, String daaCode,TNatureDocuments TNatureDocuments, String daaNom, Date daaDteSaisi,
 			String daaAaoCode, String daaLibelle, String daaReference) {
 		this.daaId = daaId;
+		this.daaCode = daaCode;
 		this.TNatureDocuments = TNatureDocuments;
 		this.daaNom = daaNom;
 		this.daaDteSaisi = daaDteSaisi;
@@ -59,6 +61,15 @@ public class TDossierAao implements java.io.Serializable {
 
 	public void setDaaId(BigDecimal daaId) {
 		this.daaId = daaId;
+	}
+
+	@Column(name = "DAA_CODE")
+	public String getDaaCode() {
+		return daaCode;
+	}
+
+	public void setDaaCode(String daaCode) {
+		this.daaCode = daaCode;
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -116,5 +127,4 @@ public class TDossierAao implements java.io.Serializable {
 	public void setDaaReference(String daaReference) {
 		this.daaReference = daaReference;
 	}
-
 }

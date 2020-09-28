@@ -255,6 +255,13 @@ public String getCodeDossier(String chaine) {
 	return idDoss;
 }
 
+public String getCodeDossierAAO(String chaine) {
+	String pseudo=chaine;
+	String idDoss=iservice.getCodeTable(pseudo, 16, 20,
+			"T_DOSSIER_AAO", "DAA_CODE");
+	return idDoss;
+}
+
 public String getCodeDossierArchi(String chaine) {
 	String pseudo=chaine;
 	String idDoss=iservice.getCodeTable(pseudo, 25, 27,

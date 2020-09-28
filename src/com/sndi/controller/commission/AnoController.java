@@ -40,6 +40,7 @@ import com.sndi.model.TDetailDemandes;
 import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailVente;
 import com.sndi.model.TDossierAao;
+import com.sndi.model.TDossierDacs;
 import com.sndi.model.TDossierMbr;
 import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
@@ -105,6 +106,7 @@ import com.sndi.model.VUpdatePgpm;
 import com.sndi.model.VVerifOffin;
 import com.sndi.model.VbAnalyseOffre;
 import com.sndi.model.VbCommissionSpecifique;
+import com.sndi.model.VbCommissionType;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamAnalyseOff;
@@ -154,17 +156,23 @@ public class AnoController {
 	 private String docNature ="";
 	 
 	 
+	 
 	 //liste
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffre = new ArrayList<VAvisAppelOffreAno>();
-	 private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
+	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
+	 private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
 	 private List<VLotAvisdmp> listeLots = new ArrayList<VLotAvisdmp>();
 	 private List<VHistoDemandeAno> listeHistoDemandeAno = new ArrayList<VHistoDemandeAno>();
+	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
+	 private List<TDossierAao> dossListe = new ArrayList<TDossierAao>();
 	 
 	 //Objet
 	 private VAvisAppelOffreAno slctdTd = new VAvisAppelOffreAno();
 	 private VbTempParamAvis newTempAvis = new VbTempParamAvis();
 	 private TDemande newDem = new TDemande();
+	 private TAvisAppelOffre newAvis = new TAvisAppelOffre();
 	 private VLotAvisdmp sltLot = new VLotAvisdmp();
+	 private TDossierAao selectedDossier = new TDossierAao();
 	 private VHistoDemandeAno sltHistoDem = new VHistoDemandeAno();
 	 private boolean btn_Oui;
 	 private boolean btn_non;
@@ -221,8 +229,6 @@ public class AnoController {
 	 }
 	 
 	 public void validationAnoDMP() throws IOException {
-	
-		  
 			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
 			TAvisAppelOffre avis = new TAvisAppelOffre();
 			if(!LS.isEmpty()) avis = LS.get(0);
@@ -276,12 +282,19 @@ public class AnoController {
 		_logger.info("listeLots size: "+listeLots.size());
 	 }
 	 
-	 public void chargeNatureDocData() {
+	/* public void chargeNatureDocData() {
 		 natureDocListe.clear();
 			natureDocListe=(List<VNatureDocAno>) iservice.getObjectsByColumn("VNatureDocAno");
 		}
+	 */
 	 
-	 public void saveAno() {
+	 public void chargeNatureDocData() {
+		  natureDocListe.clear();
+			natureDocListe = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadLibelle")),
+				    new WhereClause("NAD_TYPE",Comparateur.EQ,"ANO")));
+		 }
+	 //Avec boite de dialogue
+	/* public void saveAno() {
 		List<TLotAao> LS  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
 		TLotAao lot = new TLotAao();
 		if(!LS.isEmpty()) lot = LS.get(0);
@@ -294,6 +307,36 @@ public class AnoController {
         userController.setSevrityMsg("success");
 	   // btnAction();
 	 }
+	 */
+
+	 
+	 public void saveAno(String avis) {
+			List<TLotAao> LS  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
+				TLotAao lot = new TLotAao();
+				if(!LS.isEmpty()) lot = LS.get(0);
+				lot.setLaaAno(""+avis);
+				lot.setLaaObservationDmp(sltLot.getLaaObservationDmp());
+			    iservice.updateObject(lot);
+			    chargeLot();
+			    /*userController.setTexteMsg("ANO du lot "+sltLot.getLaaObjet()+" validé avec succès !");
+		        userController.setRenderMsg(true);
+		        userController.setSevrityMsg("success");*/
+			   // btnAction();
+			 }
+	 
+	 public void saveAno() {
+			List<TLotAao> LS  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
+				TLotAao lot = new TLotAao();
+				if(!LS.isEmpty()) lot = LS.get(0);
+				lot.setLaaAno(" ");
+				lot.setLaaObservationDmp(sltLot.getLaaObservationDmp());
+			    iservice.updateObject(lot);
+			    chargeLot();
+			    userController.setTexteMsg("ANO du lot "+sltLot.getLaaObjet()+" validé avec succès !");
+		        userController.setRenderMsg(true);
+		        userController.setSevrityMsg("success");
+			   // btnAction();
+			 }
 	 public void btnAction() {
 		 
 		 List<VLotAvisdmp> LS  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
@@ -330,6 +373,72 @@ public class AnoController {
 	 }
 	 
 	 @Transactional
+		public void upload(FileUploadEvent event) throws java.io.FileNotFoundException { 
+		 //condition de chargement d'un document : Nature sï¿½lectionnï¿½e 
+		 if((docNature == null || "".equals(docNature))){
+			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non séléctionnéé pour le chargement! ","");
+			FacesContext.getCurrentInstance().addMessage(null, msg);	
+			 
+			 }else {
+		
+		if(fileUploadController.handleFileUpload(event, ""+slctdTd.getAaoCode(), docNature)) {
+			TDossierAao dos =new TDossierAao();
+			listeAvis = (List<TAvisAppelOffre>) iservice.getObjectsByColumn("TAvisAppelOffre",
+					new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+				if (!listeAvis.isEmpty()) {
+					newAvis= listeAvis.get(0);
+	   	                 }
+			
+			int nat = Integer.valueOf(docNature);
+			//check le dossier s'il existe Ã  faire
+			//TDossierDacs dos =new TDossierDacs(); //TDossiersDacs
+			//dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
+			//dos.setDaaReference(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
+			
+			dos.setDaaAaoCode(newAvis.getAaoCode());
+			dos.setDaaNom(fileUploadController.getFileName());
+			dos.setDaaDteSaisi(Calendar.getInstance().getTime());
+			dos.setDaaReference(fileUploadController.getDocNom());
+			List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+			TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+			if(!LS.isEmpty()) natureDoc = LS.get(0);
+			dos.setTNatureDocuments(natureDoc);
+			dos.setDaaCode(keyGen.getCodeDossierAAO(fileUploadController.getFileCode()+"-"+natureDoc.getNadAbrege()+"-"));
+			iservice.addObject(dos);
+			chargeDossier();
+			
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectuée avec succès!", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		   chargeDossier();
+			}else {
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã  nouveau un document ! ","");
+				FacesContext.getCurrentInstance().addMessage(null, msg);	
+				
+			}
+		  }
+		}
+    //Fin Upload
+	  public void chargeDossier() {
+	 		 dossListe.clear();
+	 			 dossListe = ((List<TDossierAao>)iservice.getObjectsByColumn("TDossierAao",new ArrayList<String>(Arrays.asList("DAA_ID")),
+	 					 new WhereClause("DAA_AAO_CODE",Comparateur.EQ,slctdTd.getAaoCode())));			
+	 	 } 
+	 
+	  
+	  public void openDossier() throws IOException{
+    		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDaaNom(), selectedDossier.getDaaNom());
+    		   }
+	  
+	    //Supprimer un dao joint
+	    public void removeDossier(){
+		downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossier.getDaaNom(), selectedDossier.getDaaNom());
+			 iservice.deleteObject(selectedDossier);
+			 chargeDossier();	
+			 
+		    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDaaNom()+" supprimé avec succès", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);	
+		}
+	/* @Transactional
 	 public void upload(FileUploadEvent event) throws java.io.FileNotFoundException{
 	      
 		 if((docNature == null || "".equals(docNature))){
@@ -347,9 +456,9 @@ public class AnoController {
 						TDossierAao dos =new TDossierAao(); //TNatureDocuments
 						//dos.setDosCode(keyGen.getCodeDossierArchi(fileUploadController.getFileCode()+"-"));
 						dos.setDaaAaoCode(slctdTd.getAaoCode());
-					/*	List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+						List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
 						TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
-						if(!LS.isEmpty()) natureDoc = LS.get(0);*/
+						if(!LS.isEmpty()) natureDoc = LS.get(0);
 						dos.setTNatureDocuments(new TNatureDocuments(natureDoc));
 						dos.setDaaDteSaisi(Calendar.getInstance().getTime());
 						dos.setDaaNom(fileUploadController.getFileName());
@@ -357,7 +466,7 @@ public class AnoController {
 						 iservice.addObject(dos);
 						 
 						 
-					/*		int nat = Integer.valueOf(docNature);
+							int nat = Integer.valueOf(docNature);
 							//check le dossier s'il existe Ã  faire
 							TDossierAao dos =new TDossierAao(); //TDossiersDacs
 							//dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
@@ -370,7 +479,7 @@ public class AnoController {
 							dos.setDaaDteSaisi(Calendar.getInstance().getTime());
 							dos.setDaaReference(fileUploadController.getDocNom());
 							iservice.addObject(dos);
-							*/
+							
 						 chargeNatureDocData();
 						
 						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Document enregistré!", "");
@@ -385,7 +494,7 @@ public class AnoController {
 					}
 				}
 	 			
-	 }
+	 }*/
 	
 	 
 	//Methode de récupération de t_pgpm dans t_affichage
@@ -441,10 +550,13 @@ public class AnoController {
 					chargeNatureDocData();
 				break;
 				case "ano3":
+					docNature ="12";
 					chargeLot();
 					recupInfosDemande();
 					btnAction();
 					chargeDemande();
+					chargeNatureDocData();
+					chargeDossier();
 				break;
 				case "ano4":
 	
@@ -511,12 +623,13 @@ public class AnoController {
 	}
 
 
-	public List<VNatureDocAno> getNatureDocListe() {
+
+	public List<TNatureDocuments> getNatureDocListe() {
 		return natureDocListe;
 	}
 
 
-	public void setNatureDocListe(List<VNatureDocAno> natureDocListe) {
+	public void setNatureDocListe(List<TNatureDocuments> natureDocListe) {
 		this.natureDocListe = natureDocListe;
 	}
 
@@ -620,6 +733,45 @@ public class AnoController {
 		this.sltHistoDem = sltHistoDem;
 	}
 
+
+	public List<TAvisAppelOffre> getListeAvis() {
+		return listeAvis;
+	}
+
+
+	public void setListeAvis(List<TAvisAppelOffre> listeAvis) {
+		this.listeAvis = listeAvis;
+	}
+
+
+	public TAvisAppelOffre getNewAvis() {
+		return newAvis;
+	}
+
+
+	public void setNewAvis(TAvisAppelOffre newAvis) {
+		this.newAvis = newAvis;
+	}
+
+
+	public List<TDossierAao> getDossListe() {
+		return dossListe;
+	}
+
+
+	public void setDossListe(List<TDossierAao> dossListe) {
+		this.dossListe = dossListe;
+	}
+
+
+	public TDossierAao getSelectedDossier() {
+		return selectedDossier;
+	}
+
+
+	public void setSelectedDossier(TDossierAao selectedDossier) {
+		this.selectedDossier = selectedDossier;
+	}
 
 	
 }
