@@ -58,6 +58,13 @@ public class TDacSpecs implements java.io.Serializable {
 	private BigDecimal dacNbrCopieOff;
 	private String dacFinancement;
 	private String dacCraCodeExclus;
+	private String dacMargePrefCom;
+	private String dacMargePrefSou;
+	private String dacMargePrefArt;
+	private BigDecimal dacMargePrefComVal;
+	private BigDecimal dacMargePrefSouVal;
+	private BigDecimal dacMargePrefArtVal;
+	private String dacMargePref;
 	private Set<TAvisAppelOffre> TAvisAppelOffres = new HashSet<TAvisAppelOffre>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
@@ -81,6 +88,8 @@ public class TDacSpecs implements java.io.Serializable {
 			String dacStatutRetour,String dacMention,Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur,String dacBailleur,String dacRecherche,String dacFonCodeDmp, String dacFonCodePf, Long dacCout,String dacTypePlan,
 			long dacFactoriseCrit, Long dacNbreAchat,String dacAutComSpec,BigDecimal dacNbrCopieOff,String dacFinancement,String dacCraCodeExclus,
+			String dacMargePrefCom, String dacMargePrefSou, String dacMargePrefArt, BigDecimal dacMargePrefComVal,
+			BigDecimal dacMargePrefSouVal, BigDecimal dacMargePrefArtVal, String dacMargePref,
 			Set<TAvisAppelOffre> TAvisAppelOffres, Set<TDossierDacs> TDossierDacses,
 			Set<TDetailCorrection> TDetailCorrections, Set<TPiecesOffres> TPiecesOffres, Set<TCorrectionDac> TCorrectionDacs,
 			Set<TDetailAvis> TDetailAvises, Set<TDetCommissionSeance> TDetCommissionSeances,Set<THistoDac> THistoDacs) {
@@ -117,6 +126,13 @@ public class TDacSpecs implements java.io.Serializable {
 		this.dacRecherche = dacRecherche;
 		this.dacFonCodeDmp = dacFonCodeDmp;
 		this.dacFonCodePf = dacFonCodePf;
+		this.dacMargePrefCom = dacMargePrefCom;
+		this.dacMargePrefSou = dacMargePrefSou;
+		this.dacMargePrefArt = dacMargePrefArt;
+		this.dacMargePrefComVal = dacMargePrefComVal;
+		this.dacMargePrefSouVal = dacMargePrefSouVal;
+		this.dacMargePrefArtVal = dacMargePrefArtVal;
+		this.dacMargePref = dacMargePref;
 		this.TAvisAppelOffres = TAvisAppelOffres;
 		this.TDossierDacses = TDossierDacses;
 		this.TDetailCorrections = TDetailCorrections;
@@ -516,5 +532,69 @@ public class TDacSpecs implements java.io.Serializable {
 
 	public void setDacCraCodeExclus(String dacCraCodeExclus) {
 		this.dacCraCodeExclus = dacCraCodeExclus;
+	}
+	
+
+	@Column(name = "DAC_MARGE_PREF_COM", length = 1)
+	public String getDacMargePrefCom() {
+		return this.dacMargePrefCom;
+	}
+
+	public void setDacMargePrefCom(String dacMargePrefCom) {
+		this.dacMargePrefCom = dacMargePrefCom;
+	}
+
+	@Column(name = "DAC_MARGE_PREF_SOU", length = 1)
+	public String getDacMargePrefSou() {
+		return this.dacMargePrefSou;
+	}
+
+	public void setDacMargePrefSou(String dacMargePrefSou) {
+		this.dacMargePrefSou = dacMargePrefSou;
+	}
+
+	@Column(name = "DAC_MARGE_PREF_ART", length = 1)
+	public String getDacMargePrefArt() {
+		return this.dacMargePrefArt;
+	}
+
+	public void setDacMargePrefArt(String dacMargePrefArt) {
+		this.dacMargePrefArt = dacMargePrefArt;
+	}
+
+	@Column(name = "DAC_MARGE_PREF_COM_VAL", precision = 22, scale = 0)
+	public BigDecimal getDacMargePrefComVal() {
+		return this.dacMargePrefComVal;
+	}
+
+	public void setDacMargePrefComVal(BigDecimal dacMargePrefComVal) {
+		this.dacMargePrefComVal = dacMargePrefComVal;
+	}
+
+	@Column(name = "DAC_MARGE_PREF_SOU_VAL", precision = 22, scale = 0)
+	public BigDecimal getDacMargePrefSouVal() {
+		return this.dacMargePrefSouVal;
+	}
+
+	public void setDacMargePrefSouVal(BigDecimal dacMargePrefSouVal) {
+		this.dacMargePrefSouVal = dacMargePrefSouVal;
+	}
+
+	@Column(name = "DAC_MARGE_PREF_ART_VAL", precision = 22, scale = 0)
+	public BigDecimal getDacMargePrefArtVal() {
+		return this.dacMargePrefArtVal;
+	}
+
+	public void setDacMargePrefArtVal(BigDecimal dacMargePrefArtVal) {
+		this.dacMargePrefArtVal = dacMargePrefArtVal;
+	}
+
+	@Column(name = "DAC_MARGE_PREF", length = 1)
+	public String getDacMargePref() {
+		return this.dacMargePref;
+	}
+
+	public void setDacMargePref(String dacMargePref) {
+		this.dacMargePref = dacMargePref;
 	}
 }

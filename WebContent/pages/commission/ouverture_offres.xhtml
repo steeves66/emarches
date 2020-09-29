@@ -9,6 +9,14 @@
 	
 	<ui:define name="contents">
 	<h:form id="gnl" styleClass="form-horizontal">
+
+<style type="text/css">
+    .old {
+        background-color: #EEE8DF !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
 <section class="content-header">
        <h3>
         #{controleController.libelle} : <strong> #{commissionController.slctdTd.aaoCode} : #{commissionController.slctdTd.aaoLibelle} ( #{commissionController.slctdTd.aaoNbrLot} Lots)</strong>
@@ -77,7 +85,7 @@
                    <div class="col-md-5 ">
                    <div class="col-md-12 ">
                    
-                                <div class="form-group">
+            <div class="form-group">
    			<div class="col-md-12 align justify-content-center">
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend style="font-weight: bold"><small>(1) - Identification de l'entreprise</small></legend>		                
@@ -110,142 +118,233 @@
 		                        <p:inputText value="#{commissionController.newOffre.dofSigle}" readonly="true" type="text" styleClass="form-control"  style="width: 100%"/>
 		                      </div>
 		                  </div>
-                		
-		                  
-		                  
-                		
-                    </fieldset>
-             </div>
-                    </div>
-                   
-                   <div class="form-group">
-   			<div class="col-md-12 align justify-content-center">
-                   <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
-                   <legend style="font-weight: bold"><small>(2) - Information sur le représentant</small></legend>		                
 
-		                  <div class="form-group horizontal">
-		                      <label for="delaival" class="col-sm-2 control-label text-right"><b>Nom :</b></label>
-		                      <div class="col-sm-10">
-		                        <p:inputText value="#{commissionController.newOffre.dofNomRep}" type="text"  styleClass="form-control"  id="delaival" style="width: 100%" />
-		                      </div>
-		                  </div>
-		                   <div class="form-group horizontal">
-		                      <label for="delaiexec" class="col-sm-2 control-label text-right"><b> Prénoms :</b></label>
-		                      <div class="col-sm-10">
-		                        <p:inputText value="#{commissionController.newOffre.dofPreRep}"  type="text"  styleClass="form-control"  id="delaiexec" style="width: 100%"/>
-		                      </div>
-		                  </div>
-                		
-		                  <div class="form-group horizontal">
-		                      <label for="telephone" class="col-sm-2 control-label text-right"><b>Téléphone :</b></label>
-		                      <div class="col-sm-10">
-		                         <p:inputMask mask="(+999) 99-99-99-99" value="#{commissionController.newOffre.dofTelRep}"  type="text"  styleClass="form-control"  id="telephone" style="width: 100%"/>
-		                      </div>
-		                  </div>
-		                  
-		                    <div class="form-group horizontal">
-		
-		                      <label for="email" class="col-sm-2 control-label text-right"><b> Email :</b></label>
-		                      <div class="col-sm-10">
-		                        <p:inputText value="#{commissionController.newOffre.dofMailRep}"  type="text"  styleClass="form-control"  id="email" style="width: 100%"/>
-		                      </div>
-		                  </div>
-                		
-                		
-                		<br/><br/><br/><br/><br/>
-                		
+		                
                     </fieldset>
-             </div>
+                  </div>
                     </div>
-       
+
+                    </div>  
                     </div>
-                 
-                         
-                       
-                    </div>
-                    <div class="col-md-7">
-	                     <div class="row">
-	                     
-	                       <div class="col-md-12">
+                    
+                    
+                    <div class="col-md-7">   
+	                <div class="col-md-12">
                     <div class="row">
 			            <div class="col-md-12 align justify-content-center">
-			                    <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
-			                    <legend style="font-weight: bold"><small>(3) - Sélectionnez le Lot : </small>
+			                    <fieldset style="border: 1px solid #ffb380;padding: 5px;border-radius:4px">
+			                    <legend style="font-weight: bold"><small>(2) - Informations sur le représentant : </small>
 			                             
 			                    </legend>
 			                       
-			                        
-			                 <div class="form-group horizontal">
+			                  <div class="form-group horizontal">
+		                      <label for="delaival1" class="col-sm-2 control-label text-right"><b>Nom :</b></label>
+		                      <div class="col-sm-3">
+		                        <p:inputText value="#{commissionController.newOffre.dofNomRep}" type="text"  styleClass="form-control"  id="delaival1" style="width: 100%" />
+		                      </div>
+		                      
+		                      <label for="delaiexec1" class="col-sm-2 control-label text-right"><b> Prénoms :</b></label>
+		                      <div class="col-sm-4">
+		                        <p:inputText value="#{commissionController.newOffre.dofPreRep}"  type="text"  styleClass="form-control"  id="delaiexec1" style="width: 100%"/>
+		                      </div>
+		                  </div>
+		                   
+                		
+		                  <div class="form-group horizontal">
+		                      <label for="telephone1" class="col-sm-2 control-label text-right"><b>Téléphone :</b></label>
+		                      <div class="col-sm-3">
+		                         <p:inputMask mask="(+999) 99-99-99-99" value="#{commissionController.newOffre.dofTelRep}"  type="text"  styleClass="form-control"  id="telephone1" style="width: 100%"/>
+		                      </div>
+		                      
+		                      <label for="email1" class="col-sm-2 control-label text-right"><b> Email :</b></label>
+		                      <div class="col-sm-4">
+		                        <p:inputText value="#{commissionController.newOffre.dofMailRep}"  type="text"  styleClass="form-control"  id="email1" style="width: 100%"/>
+		                      </div>
+		                  </div>
+		                  
+			                   </fieldset>
+			            </div>
+			            </div>
+                    </div> 
+                </div>
+            </div>
+            
+                   <div class="col-md-12">
+                   <div class="row">
+			            <div class="col-md-12 align justify-content-center">
+			              <fieldset style="border: 1px solid #ffb380;padding: 5px;border-radius:4px">
+			                    <legend style="font-weight: bold"><small>(3) - Lot : </small>
+			                     </legend>
+			                              
+			                    <div class="form-group horizontal">
 
 		                      <div class="col-sm-12">
 				                <table>
 							        <tr>
-		                            <td style="width: 2300px">
-		                           <p:inputTextarea value="#{commissionController.selectLot.laaObjet}" readonly="true" rows="3" cols="33"   type="text"  styleClass="form-control"  style="width: 100%"/>
+		                            <td style="width: 2299px">
+		                           <p:inputTextarea value="#{commissionController.selectLot.laaObjet}" readonly="true" rows="1" cols="31"   type="text"  styleClass="form-control"  style="width: 100%"/>
 		                            </td>		                 
 		                            <td>
-									        <p:commandLink oncomplete="PF('lotDlg').show()" action="#{commissionController.chargeLotsByCandidat()}"  title="Selectionnez l'entreprise" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+									        <p:commandLink oncomplete="PF('lotDlg').show()" action="#{commissionController.chargeLotsByCandidat()}"  title="Selectionnez le lot" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 										    	<i class="fa fa-search"></i>
 										    </p:commandLink>
 								        </td>
-			                       <td style="width:100px">
-			                       <h:panelGroup id="idrt">
-			                      
-			                       </h:panelGroup>
-			                       </td>
+			                       
 							        </tr>
 				                </table>
 			                </div>
 		                  </div>
-			                  
-			                    </fieldset>
-			            </div>
-			            </div>
-                    </div> 
-			                       
-		         
-                 
-	                     
-	                       <div class="col-md-12">
-                   <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
-                   <legend style="font-weight: bold"><small>(4) - Données de l'ouverture des offres </small></legend>
+			             </fieldset>   
+                   </div>
+                   </div>
                    
-                       <div class="form-group ">
-                       
-                          <label class="col-sm-2 control-label">Banque <span style="color:red;"> *</span></label>	
-                           <div class="col-sm-5">
-				           <p:selectOneMenu id="banque" filter="true" filterMatchMode = "startsWith"  effect = "fade" value="#{commissionController.banCode}" style="width:100%;" >
+                   </div>
+                  
+                  <div class="row">
+                  </div>
+                  <br/>
+                    
+                  <div class="row">
+                   <div class="col-md-7">
+                   <div class="col-md-12 ">
+                   <div class="row">
+			            <div class="col-md-12 align justify-content-center">
+			              <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
+			                    <legend style="font-weight: bold"><small>(4.1) - Pièces de recevabilité : </small>
+			                     </legend>
+			                         <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listPiecesOuv}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
+		                        	 rowKey="#{slctdTb.RId}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
+		                        	 
+		                               <p:column headerText="PIECES" styleClass="col-sm-4">
+		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+		                                  <h:outputText value="#{slctdTb.craLibelle}"/>
+		                                  </h:panelGroup>
+		                                   <h:panelGroup rendered="#{slctdTb.analyseStatut == '1'}">
+		                                  <h:outputText value="#{slctdTb.craLibelle}" style="color:black ;font-weight:bold "/>
+		                                  </h:panelGroup>
+		                                </p:column>
+		                                
+		                                
+		                                <p:column headerText="PRESENCE" styleClass="col-sm-2">
+                                            <p:cellEditor>
+                                             <f:facet name="output">
+                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                        <h:outputText id="presence3" value="#{slctdTb.dcadPresence == 'O'?'OUI':'NON'}" />
+         				                        </h:panelGroup>
+         				                         </f:facet>
+         				                             <f:facet name="input">
+         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+	         				                           <h:selectOneMenu id="presence4" value="#{slctdTb.dcadPresence}" style="width:100%; color:#0000">
+				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
+	                                                   </h:selectOneMenu>
+	                                                   </h:panelGroup>
+         				                             </f:facet>
+         				                           </p:cellEditor>
+				                           </p:column>
+		                                
+		                                        </p:dataTable>   
+			             </fieldset>   
+                   </div>
+                   </div>
+                   </div>
+                   </div>
+                   
+                   
+                   <div class="col-md-5">
+                   <div class="col-md-12 ">
+                   <div class="row">
+			            <div class="col-md-12 align justify-content-center">
+			              <fieldset style="border: 1px solid #ffb380;padding: 5px;border-radius:4px">
+			                    <legend style="font-weight: bold"><small>(4.2) ...  </small>
+			                     </legend>
+			                     
+			             
+			             
+		                
+		                 <div class="form-group">
+		                 <label class="col-sm-4 control-label">Montant Caution</label>
+						  <div class="col-sm-7">
+				          <p:inputText  type="text" id="montCaut1" styleClass="form-control text-right" value="#{commissionController.newOffre.dofMtCaut}" style="width: 100%">
+				           <p:ajax  global="false" event="blur" process="@this" update="montCaut1" />
+				           <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+				           </p:inputText>
+		                  </div>
+		                </div>
+			                     
+			              <div class="form-group ">
+                          <label class="col-sm-4 control-label">Banque <span style="color:red;"> *</span></label>	
+                           <div class="col-sm-7">
+				           <p:selectOneMenu id="banque1" filter="true" filterMatchMode = "startsWith"  effect = "fade" value="#{commissionController.banCode}" style="width:100%;" >
 						    <f:selectItem  itemLabel="Selectionnez la banque..." itemValue=""/>
 						     <f:selectItems value="#{commissionController.listBanque}" var="b" itemLabel="#{b.banLibelle}" itemValue="#{b.banCode}" />	    
 				            </p:selectOneMenu> 
 		                  </div>
-                       
-		                 <label class="col-sm-2 control-label">type de l'offre <span style="color:red;"> *</span></label>	
-                           <div class="col-sm-3">
-				           <p:selectOneMenu id="variante"  value="#{commissionController.dofTyp}" style="width:100%; align:center" >
+		                </div>
+		                
+		                 <hr/>
+		                
+		             <div class="form-group">
+		             <label for="delai11" class="col-sm-4 control-label"><b>Délai de validité de l'offre (Jours)<span style="color:red;"> *</span></b></label>
+	                  <div class="col-sm-7">
+	                     <p:inputText id="delai11" type="text" styleClass="form-control"  value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
+	                  </div>  
+		             </div> 
+		             
+		             
+		            <div class="form-group">
+	                <label for="delai21" class="col-sm-4 control-label"><b>Délai d'exécution / Livraison (Jours)<span style="color:red;"> *</span></b></label>
+	                 <div class="col-sm-7">
+	                 <p:inputText id="delai21" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai2}" style="width: 100%" />
+	                 </div>   
+		            </div>         
+			          
+			          <br/>
+			             </fieldset>   
+                   </div>
+                   </div>
+                   </div>
+                   </div>
+                  </div>
+                  
+                  <br/><br/>
+                  
+                  <div class="row">
+                  <div class="col-md-12 ">
+                  <div class="col-md-2">
+                  </div>
+                  
+                  <div class="col-md-8">
+                   <div class="form-group">
+                  <label style="font-size:18px;" class="col-sm-2 control-label">Type de l'offre <span style="color:red;"> *</span></label>	
+                           <div class="col-sm-6">
+				           <p:selectOneMenu id="variante1"  value="#{commissionController.dofTyp}" style="width:100%; align:center; font-size:18px" >
 						    <f:selectItem  itemLabel="Selectionnez le type de l'offre..." itemValue=""/>
 						     <f:selectItems value="#{commissionController.listdoftyp}" var="l" itemLabel="#{l.dofTyplib}" itemValue="#{l.dofTyp}" />	  
 						     <p:ajax listener="#{commissionController.checkMontantVar()}"  update="gnl:cond"/>   
 				            </p:selectOneMenu> 
 		                  </div>
-		                  
-		               
-		                </div>
+		               </div>
+                  </div>
+                  
+                  <div class="col-md-2">
+                  </div>
+                  
+                  </div>
+                  </div>
+                  
+
+                   <div class="col-md-12">
+                   <div class="row">
+			            <div class="col-md-12 align justify-content-center">
+			              <fieldset style="border: 1px solid #ffb380;padding: 10px;border-radius:4px">
+			                    <legend style="font-weight: bold"><small>(5) - Offre Financière : </small>  
+			                     </legend>
+
 		                
-		                
-		                  
-                        <div class="form-group">
-                        
-                        <label class="col-sm-2 control-label">Montant Net</label>
-						  <div class="col-sm-3">
-				          <p:inputText id="montNet" type="text" styleClass="form-control text-right" value="#{commissionController.montN}" style="width: 100%" readonly="true">
-				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
-				          </p:inputText>
-		                 </div>
-		                 <div class="col-sm-2">
-		                 </div>
-   
-		                  <label class="col-sm-2 control-label">Montant lu</label>
+		                <div class="form-group">
+		                 <label class="col-sm-2 control-label">Montant lu</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="montLu" type="text" styleClass="form-control text-right" value="#{commissionController.montLu}" style="width: 100%" >
 				          <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montLu, montNet" /> 
@@ -253,68 +352,37 @@
 		         	        </p:inputText>
 		                  </div>
 		                  
-		                 
-		                </div> 
-		                 <p:commandLink >
-				     
-				      </p:commandLink>  
-		                
-		                
-		                 <div class="form-group">
-		                 
-		                 <label class="col-sm-2 control-label">Montant Caution</label>
-						  <div class="col-sm-3">
-				          <p:inputText  type="text" id="montCaut" styleClass="form-control text-right" value="#{commissionController.newOffre.dofMtCaut}" style="width: 100%">
-				           <p:ajax  global="false" event="blur" process="@this" update="montCaut" />
-				           <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-				           </p:inputText>
-		                  </div>
-		                  <div class="col-sm-2">
-		                 </div>
-		                 <label class="col-sm-2 control-label">Rabais %</label>
+		                    <label class="col-sm-2 control-label">Rabais %</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="rab" type="text" styleClass="form-control text-right" value="#{commissionController.pourcentRab}" style="width: 100%" >
 				           <p:ajax listener="#{commissionController.calculMontNet()}"  global="false" event="blur" process="@this" update="montNet, montRab" /> 
 				          </p:inputText>
 		                 </div>
-		                 
 		                  
-		                  
-		                </div>  
+		                </div>
 		                
+    
+		              <div class="form-group">
 		                
-		             <div class="form-group">
-		             
-		             <label for="delai" class="col-sm-2 control-label"><b>Délai de validité(Jours)<span style="color:red;"> *</span></b></label>
-	                  <div class="col-sm-3">
-	                     <p:inputText id="delai" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
-	                  </div>  
-		              <div class="col-sm-2">
+		                 <label class="col-sm-2 control-label">Montant Net</label>
+						  <div class="col-sm-3">
+				          <p:inputText id="montNet" type="text" styleClass="form-control text-right" value="#{commissionController.montN}" style="width: 100%" readonly="true">
+				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				          </p:inputText>
 		                 </div>
-		                     <label class="col-sm-2 control-label">Montant Rabais</label>
+		                 
+		                 <label class="col-sm-2 control-label">Montant Rabais</label>
 						  <div class="col-sm-3">
 				          <p:inputText id="montRab" type="text" styleClass="form-control text-right" value="#{commissionController.montRab}" style="width: 100%">
 				           <p:ajax listener="#{commissionController.calculPourcent()}"  global="false" event="blur" process="@this" update="rab, montNet, montRab" /> 
 				          <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				          </p:inputText>
 		                  </div>
-		                  
-		                   
+		              </div>  
 		              
-		             </div> 
 		             
-		             
-		            <div class="form-group">
-	                <label for="delai2" class="col-sm-2 control-label"><b>Délai d'exécution(Jours)<span style="color:red;"> *</span></b></label>
-	                 <div class="col-sm-3">
-	                 <p:inputText id="delai2" type="text" styleClass="form-control" value="#{commissionController.newOffre.dofDelai2}" style="width: 100%" />
-	                 </div>   
-		            </div>
-		                
-		             
+
 		             <div class="form-group ">
-		             
-		                 
 	                   <h:panelGroup id="cond">  
 	                   <h:panelGroup rendered="#{commissionController.etatMontVar}"> 
 		                <div class="form-group">
@@ -326,26 +394,23 @@
                       </div>
                      </h:panelGroup>
                      </h:panelGroup> 
-	                </div>      
-	                
-	                                				        						
-
-                   </fieldset>
-                </div>
-	                     </div>
-                    </div>
-                    </div>
-                    <div class="row ">
+	                </div>
+	                   
+			             </fieldset>   
+                   </div>
+                   </div>
                    
-                  </div>
-		            
-		             
+                   </div>
+  
+		                      
 	            </div>
 	            <div class="box-footer">
 	               <p:commandLink styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" action="#{commissionController.saveOuverture()}"  update="gnl, :candidatDlg:ndTbleCand">
 	               <p:confirm header="Confirmation" message="Confirmez vous la saisie de l'offre ?" icon="ui-icon-alert" />
 				     <i class="ace-icon fa fa-save bigger-120"></i> Ajouter
 				      </p:commandLink>
+				      
+				      
 	            </div>
 	           </div>
                  </div>       

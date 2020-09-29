@@ -96,6 +96,7 @@ public class TDetOffres implements java.io.Serializable {
 	private BigDecimal dofMtCaut;
 	private Long dofMtRab;
 	private Long dofErrCalcul;
+	private BigDecimal dofTempNum;
 	private Set<TPiecesOffres> TPiecesOffreses = new HashSet<TPiecesOffres>(0);
 
 	public TDetOffres() {
@@ -121,7 +122,7 @@ public class TDetOffres implements java.io.Serializable {
 			BigDecimal dofMtAttBai, Long dofRangOfrDmp, BigDecimal dofMtCorDmp, String dofRecevablDmp,
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,String dofStaut,String dofSouNcc, String dofSigle, String dofErrFin, String dofObsFin,
-			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,Long dofMtRab,Long dofErrCalcul,Set<TPiecesOffres> TPiecesOffreses) {
+			String dofRepeche, String dofObsRet,String dofObsAnormal,String dofObsVariante,BigDecimal dofMtCaut,Long dofMtRab,Long dofErrCalcul,BigDecimal dofTempNum,Set<TPiecesOffres> TPiecesOffreses) {
 		this.dofNum = dofNum;
 		this.TFonction = TFonction;
 		this.TLotAao = TLotAao;
@@ -194,6 +195,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofMtCaut = dofMtCaut;
 		this.dofMtRab = dofMtRab;
 		this.dofErrCalcul = dofErrCalcul;
+		this.dofTempNum = dofTempNum;
 		this.TPiecesOffreses = TPiecesOffreses;
 	}
 
@@ -852,6 +854,7 @@ public class TDetOffres implements java.io.Serializable {
 		this.dofMtRab = dofMtRab;
 	}
 	
+	
 	@Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)
 	public Long getDofErrCalcul() {
 		return this.dofErrCalcul;
@@ -859,6 +862,15 @@ public class TDetOffres implements java.io.Serializable {
 
 	public void setDofErrCalcul(Long dofErrCalcul) {
 		this.dofErrCalcul = dofErrCalcul;
+	}
+	
+	@Column(name = "DOF_TEMP_NUM", precision = 22, scale = 0)
+	public BigDecimal getDofTempNum() {
+		return this.dofTempNum;
+	}
+
+	public void setDofTempNum(BigDecimal dofTempNum) {
+		this.dofTempNum = dofTempNum;
 	}
 	
 }

@@ -230,29 +230,32 @@
        <p:tab id="avis" title="Informations Générales" titleStyle="background-color: #f88b2e;background-image: none">
          <p:panel>
             <div class="row">    
-            <div class="col-md-6">
+            <div class="col-md-12">
             <div class="box box-success box-solid">
              <div class="box-header with-border">
             <div class="col-md-12 "><div  style="color: #fff">INFORMATIONS A SAISIR SUR L'AVIS</div></div>
          </div>
          <div class="box-body">
           <div class="form-group">
-                  <label for="objet" class="col-sm-3 control-label">Objet</label>
-                  <div class="col-sm-9">
+                  <label for="objet" class="col-sm-1 control-label">Objet</label>
+                  <div class="col-sm-11">
                     <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{daoController.newAvis.aaoLibelle}"  id="objet" style="width: 100%" />
                   </div>
-              </div>
-              
-              <div class="form-group">
-                  <label for="nat" class="col-sm-3 control-label"></label> 
+          </div>
+          
+          <div class="col-md-6">
+          
+          <div class="form-group">
+                  <label for="objet" class="col-sm-3 control-label"></label>
                   <div class="col-sm-9"> 
-                    <p:selectOneRadio value="#{daoController.value1}" id="natInter">
+                    <p:selectOneRadio value="#{daoController.value1}" id="natInter1">
 			            <f:selectItem itemLabel="NATIONAL" itemValue="N" />
 			            <f:selectItem itemLabel="INTERNATIONAL" itemValue="I" />
 			        </p:selectOneRadio>
-                  </div>
+			        </div>
               </div>
-              <div class="form-group">
+              
+               <div class="form-group">
                   <label for="Prix" class="col-sm-3 control-label">Nature des Prix</label>
                   <div class="col-sm-9"> 
                      <p:selectOneRadio value="#{daoController.newAvis.aaoNatPrix}" id="console" >
@@ -262,65 +265,10 @@
                   </div>
               </div>
               
-            <div class="form-group">
-                  <label  class="col-sm-3 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
-                  <div class="col-sm-2"> 
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
-				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
-				     </p:inputText>
-                  </div>
-                  
-                  <div class="col-sm-1"> 
-                  </div>
-                  <label  class="col-sm-3 control-label">Marge de Préférence ?</label>
-                  <div class="col-sm-3"> 
-                    <p:selectOneRadio value="#{daoController.choixTaux}"  unselectable="true">
-                        <p:ajax  listener="#{daoController.checkMargeMsg()}" update="gnl:margeP" />
-			            <f:selectItem itemLabel="OUI" itemValue="marge" />
-			            <f:selectItem itemLabel="NON" itemValue="N" />
-			        </p:selectOneRadio>
-                  </div>
-                  </div>
-                  
-                   <div class="form-group">
-                
-                  <div class="col-sm-12">
-                   <h:panelGroup  id="libtaux">
-                     <h:panelGroup  id="margeP">
-                     <h:panelGroup  rendered="#{daoController.etatTaux}">
-                       <p:inputTextarea value="#{daoController.marge.margePefText}"  rows="2" cols="33"   styleClass="form-control" id="l3" style="width: 100%" readonly="true"/>
-                     </h:panelGroup>
-                     </h:panelGroup>
-                   </h:panelGroup> 
-                  </div>
-                  </div>
-               
-                <div class="form-group">
-                  <label  class="col-sm-3 control-label">Avis de non objection du bailleur</label>
-                  <div class="col-sm-9"> 
-                   <table>
-				     <tr>
-				     <td style="width: 50px"> 
-				     <p:selectOneRadio value="#{daoController.newAvis.aaoAvisBai}" id="console22" unselectable="true">
-			            <f:selectItem itemLabel="" itemValue="O" />
-			        </p:selectOneRadio>
-				     </td>
-				     <td style="width: 220px">
-				     <label  class="control-label">Responsable des bailleurs</label>
-				     </td>
-				     <td style="width: 320px">
-				     <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoRespBai}"   style="width: 100%" />
-				     </td>
-				     </tr>
-				     </table>
-                    
-                  </div>
-              </div>
-                  
-              <div class="form-group">
+               <div class="form-group">
                   <label for="Prix" class="col-sm-3 control-label">Mode de qualification</label>
                   <div class="col-sm-9"> 
-                     <p:selectOneRadio id="consoless" value="#{daoController.newAvis.aaoRegQual}" unselectable="true">
+                     <p:selectOneRadio id="consoless" value="#{daoController.newAvis.aaoRegQual}" >
                      <p:ajax  listener="#{daoController.checkSituation()}" global="false" update="gnl:qualif"></p:ajax>
 			            <f:selectItem itemLabel="Score" itemValue="SCORE" />
 			            <f:selectItem itemLabel="Conformité" itemValue="CONFORMITE" />
@@ -328,57 +276,280 @@
 			        </p:selectOneRadio>
                   </div>
               </div>
-               
+              
+              <div class="form-group">
+                  <label  class="col-sm-3 control-label">Avis de non objection du bailleur</label>
+                  <div class="col-sm-9"> 
+                  <p:selectOneRadio value="#{daoController.newAvis.aaoAvisBai}" id="console23">
+			            <f:selectItem itemLabel="" itemValue="O" />
+			        </p:selectOneRadio>  
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  <label for="Anorm" class="col-sm-9 control-label">Attribution du/des marché(s) en tenant compte des seuils anormalement bas ou élévés</label>
+                  <div class="col-sm-3"> 
+                     <p:selectOneRadio id="Anorm" value="#{daoController.newAvis.aaoOffAnormal}">
+			            <f:selectItem itemLabel="Oui" itemValue="O" />
+			            <f:selectItem itemLabel="Non" itemValue="N" />
+			        </p:selectOneRadio>
+                  </div>
+              </div>
+          
+          </div>
+          
+       <div class="col-md-6">
+          <div class="form-group">
+                  <label  class="col-sm-3 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
+                  <div class="col-sm-5"> 
+                  <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
+				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
+				     </p:inputText>
+                  </div>
+           </div>
+           
+           <div class="form-group">
+                <label class="col-sm-3 control-label">Nbre de Copies de l'offre</label>
+				  <div class="col-sm-5">
+		          <p:inputText title="Le nombre de copies" type="text" styleClass="form-control" value="#{daoController.dao.dacNbrCopieOff}"  style="width: 100%">
+		          </p:inputText>
+                  </div>
+            </div>
+            
+            <div class="form-group">
+                  <label  class="col-sm-3 control-label">Avis de non objection du bailleur</label>
+                  <div class="col-sm-5"> 
+                  <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoRespBai}"   style="width: 100%" />    
+                  </div>
+              </div>
+              
                <h:panelGroup  id="qualif">
                <h:panelGroup  rendered="#{daoController.etatQualif}">
                 <div class="form-group">
                 <h:panelGroup  rendered="#{daoController.qualifLabel1}">  <label class="col-sm-3 control-label">Seuil de qualification<span style="color:red;"> *</span></label></h:panelGroup>
                 <h:panelGroup  rendered="#{daoController.qualifLabel2}">  <label class="col-sm-3 control-label">Précisez le mode<span style="color:red;"> *</span></label></h:panelGroup>
-				  <div class="col-sm-9">
+				  <div class="col-sm-5">
 		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoPrecisModEval}"   style="width: 100%" />
                   </div>
                 </div>
                 </h:panelGroup>
                 </h:panelGroup>
-                <div class="form-group">
+            
+               <div class="form-group">
                   <label class="col-sm-3 control-label">Nombre de lot<span style="color:red;"> *</span></label>
-				  <div class="col-sm-2">
+				  <div class="col-sm-5">
 		          <p:inputText title="Le nombre de lot doit etre superieur à 0" type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%">
 		          </p:inputText>
                   </div>
+                </div>
                   
-                  <label class="col-sm-2 control-label">Coût du DAO<span style="color:red;"> *</span></label>
+                <div class="form-group">
+                 <label class="col-sm-3 control-label">Coût du DAO<span style="color:red;"> *</span></label>
 				  <div class="col-sm-5">
 		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}" id="coutD"  style="width: 100%" >
 		          <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	              <p:ajax event="blur" global="false" process="@this" update="gnl:coutD" />
 	              </p:inputText>
                   </div>
-                </div> 
-                
-                  <div class="form-group">
-                  <label class="col-sm-3 control-label">Nbre de Copies de l'offre</label>
-				  <div class="col-sm-2">
-		          <p:inputText title="Le nombre de copies" type="text" styleClass="form-control" value="#{daoController.dao.dacNbrCopieOff}"  style="width: 100%">
-		          </p:inputText>
-                  </div>
-                  
-                 
-                </div> 
-                
+                </div>
+          </div>      
+      
          </div>
          </div>
          </div>
+         
+         
+         
          <div class="row">
+         <div class="col-md-12">
+            <div class="box box-success box-solid">
+             <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">MARGE DE PREFERENCE</div></div>
+         </div>
+         <div class="box-body">
+           
+           <div class="col-md-12">  
+           <div class="form-group">
+                  <label  class="col-sm-5 control-label">Marge de Préférence ?</label>
+                  <div class="col-sm-3"> 
+                    <p:selectOneRadio value="#{daoController.choixTaux}"  unselectable="true">
+                        <p:ajax  listener="#{daoController.checkMargePref()}" update="gnl:libMarge" />
+			            <f:selectItem itemLabel="OUI" itemValue="O" />
+			            <f:selectItem itemLabel="NON" itemValue="N" />
+			        </p:selectOneRadio>
+                  </div>
+             </div> 
+             
+            <h:panelGroup  id="libMarge">
+           <h:panelGroup  rendered="#{daoController.etatMargePreference}"> 
+              
+                 <p:dataTable id="margePreference"   styleClass="table mb0 dt-on-steroids dataTable" value="#{daoController.listMarge}" var="slctdTb"
+                    rowKey="#{slctdTb.RId}" editable="true" editMode="cell" emptyMessage="Aucune marge de préférence trouvée">
+				          
+				                      <p:column headerText="libellé" styleClass="col-sm-1">
+		                              <h:outputText value="#{slctdTb.marge}"/> 
+		                              </p:column>
+		                                
+		                               <p:column headerText="Texte" styleClass="col-sm-8">
+		                               <p:inputTextarea styleClass="form-control" value="#{slctdTb.margePrefText}"  readonly="true" rows="2" cols="33"  id="relalisation" style="width: 100%" />
+		                                </p:column>
+		                                
+		                                <p:column headerText="Taux" styleClass="col-sm-1" >
+                                                <p:cellEditor>
+                                                   <f:facet name="output">
+         				                               <h:outputText class="pull-center" id="comment10" value="#{slctdTb.tauxMargePref}" />
+         				                           </f:facet>
+         				                          <f:facet name="input">
+         				                            <h:panelGroup rendered="#{slctdTb.flag != '1'}">
+         				                              <p:inputText type="text" value="#{slctdTb.tauxMargePref}" id="comment11" styleClass="form-control" style="width: 100%" />
+         				                            </h:panelGroup>
+         				                          </f:facet>
+         				                        </p:cellEditor>
+				                           </p:column>
+                            
+                              <p:column headerText="Oui/Non" styleClass="col-sm-2">
+                                                            
+         				    <h:panelGroup rendered="#{slctdTb.flag == '1'}">
+         				     <h:panelGroup rendered="#{slctdTb.margePrefSou == 'O'}">
+         				        <p:commandLink action="#{daoController.saveMarge('N')}" class="btn btn-xs btn-warning btn-block" style="background-color: #036d3b; border-color:#036d3b;" update="gnl"
+				               title="Choix de la marge">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.margePrefSou =='O'?'OUI':'NON'}</span> 
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltMarge}" />                              
+                               </p:commandLink>
+                               </h:panelGroup>
+                               
+                              <h:panelGroup rendered="#{slctdTb.margePrefSou == 'N'}">  
+                                 <p:commandLink action="#{daoController.saveMarge('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl"
+				                title="Choix de la marge">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.margePrefSou =='O'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltMarge}" />                             
+                            </p:commandLink>
+                            </h:panelGroup>
+                               
+         				     </h:panelGroup>                   
+         				      
+         				   <h:panelGroup rendered="#{slctdTb.flag != '1'}">                     
+         				      
+                          <h:panelGroup rendered="#{slctdTb.margePrefSou == 'O'}">  
+                            <p:commandLink action="#{daoController.saveMarge('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl"
+				               title="Choix de la marge">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.margePrefSou =='O'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltMarge}" />                              
+                            </p:commandLink>
+                           </h:panelGroup>
+                            
+                           <h:panelGroup rendered="#{slctdTb.margePrefSou == 'N'}">  
+                            <p:commandLink action="#{daoController.saveMarge('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl"
+				               title="Choix de la marge">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.margePrefSou =='O'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltMarge}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                            
+                            </h:panelGroup>
+				              </p:column>
+                        </p:dataTable>
+                </h:panelGroup>
+                </h:panelGroup>
+                     </div>
+         </div>
+         </div>
+         </div>
+         </div>
+         
+         
+         <div class="row">
+      
+          <div class="col-md-12">
+          
+          <div class="col-md-6">
+            <div class="box box-success box-solid">
+             <div class="box-header with-border">
+            <div class="col-md-12 "><div  style="color: #fff">RECEPTION DES OFFRES</div></div>
+         </div>
+         <div class="box-body">
+           <div class="form-group">
+                  <label  class="col-sm-1 control-label">Lieu</label>
+				  <div class="col-sm-4">
+                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuRecep}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                  <label  class="col-sm-1 control-label">Date</label>
+				  <div class="col-sm-3">   
+                  <p:calendar  value="#{daoController.newAvis.aaoDateRecep}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" /> 
+                  </div>
+                  <label  class="col-sm-1 control-label">Heure</label>
+				  <div class="col-sm-2">
+                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoHeureRecep}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                </div>
+                 
+         </div>
+         </div>
+         </div>
+         
+         
          <div class="col-md-6">
             <div class="box box-success box-solid">
              <div class="box-header with-border">
-             <div class="col-md-12 "><div  style="color: #fff">RETRAIT DES #{controleController.type} CHEZ LE REPRESENTANT</div></div> 
+            <div class="col-md-12 "><div  style="color: #fff">OUVERTURE</div></div>
+         </div>
+         <div class="box-body">
+          <h:panelGroup rendered="false">
+                 <div class="form-group">
+                  <label  class="col-sm-2 control-label">Lieu</label>
+				  <div class="col-sm-7">
+                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                  
+                   <label  class="col-sm-1 control-label">Heure</label>
+				  <div class="col-sm-2">
+                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
+                  </div>
+                </div>
+               </h:panelGroup>  
+                <h:panelGroup rendered="#{daoController.ouverture}">
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">Nbre Ouverture</label>
+				  <div class="col-sm-2"> 
+                  <p:selectOneMenu value="#{daoController.newAvis.aaoNbrOuv}"  effect="fade" style="width:100%">   
+			            <f:selectItem itemLabel="1" itemValue="1" /> 
+                        <f:selectItem itemLabel="2" itemValue="2" />
+                        <p:ajax listener="#{daoController.verifOuverture()}" global="false" update="gnl:idOuv"/>				   	   				    				   
+			       </p:selectOneMenu>
+                     
+                  </div>
+                  <label  class="col-sm-2 control-label">Ouv Technique</label>
+				  <div class="col-sm-2">    
+                  <p:calendar value="#{daoController.ouvTech}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
+                  </p:calendar>
+                  </div>
+                  
+                  <h:panelGroup id="idOuv">
+                  <h:panelGroup rendered="#{daoController.ouvTechnique}">
+                  <label  class="col-sm-2 control-label">Ouv Financière</label> 
+				  <div class="col-sm-2">
+                  <p:calendar value="#{daoController.ouvFin}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" />   
+                  </div>
+                  </h:panelGroup>
+                  </h:panelGroup>
+                </div>
+                </h:panelGroup>
+         </div>
+         </div>
+         </div>
+         </div>     
+         </div>
+         
+         <div class="row">
+                <div class="col-md-12">
+            <div class="box box-success box-solid">
+             <div class="box-header with-border">
+             <div class="col-md-10"><div  style="color: #fff">RETRAIT DES #{controleController.type} CHEZ LE REPRESENTANT</div></div> 
 			         
          </div>
          <div class="box-body">
            
-                  <div class="col-sm-12">
+                <div class="col-md-12">
 		       	 </div>
 		       	  <div class="form-group">
                   <label class="col-sm-1 control-label">Adresse</label>
@@ -453,79 +624,6 @@
          </div>
          </div>
          
-          <div class="col-md-6">
-            <div class="box box-success box-solid">
-             <div class="box-header with-border">
-            <div class="col-md-12 "><div  style="color: #fff">RECEPTION DES OFFRES</div></div>
-         </div>
-         <div class="box-body">
-           <div class="form-group">
-                  <label  class="col-sm-1 control-label">Lieu</label>
-				  <div class="col-sm-4">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuRecep}" styleClass="form-control"  style="width: 100%" />    
-                  </div>
-                  <label  class="col-sm-1 control-label">Date</label>
-				  <div class="col-sm-3">   
-                  <p:calendar  value="#{daoController.newAvis.aaoDateRecep}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" /> 
-                  </div>
-                  <label  class="col-sm-1 control-label">Heure</label>
-				  <div class="col-sm-2">
-                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoHeureRecep}" styleClass="form-control"  style="width: 100%" />    
-                  </div>
-                </div>
-                 
-         </div>
-         </div>
-         </div>
-          <div class="col-md-6">
-            <div class="box box-success box-solid">
-             <div class="box-header with-border">
-            <div class="col-md-12 "><div  style="color: #fff">OUVERTURE</div></div>
-         </div>
-         <div class="box-body">
-          <h:panelGroup rendered="false">
-                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Lieu</label>
-				  <div class="col-sm-7">
-                  <p:inputText type="text" value="#{daoController.newAvis.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
-                  </div>
-                  
-                   <label  class="col-sm-1 control-label">Heure</label>
-				  <div class="col-sm-2">
-                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
-                  </div>
-                </div>
-               </h:panelGroup>  
-                <h:panelGroup rendered="#{daoController.ouverture}">
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Nbre Ouverture</label>
-				  <div class="col-sm-2"> 
-                  <p:selectOneMenu value="#{daoController.newAvis.aaoNbrOuv}"  effect="fade" style="width:100%">   
-			            <f:selectItem itemLabel="1" itemValue="1" /> 
-                        <f:selectItem itemLabel="2" itemValue="2" />
-                        <p:ajax listener="#{daoController.verifOuverture()}" global="false" update="gnl:idOuv"/>				   	   				    				   
-			       </p:selectOneMenu>
-                     
-                  </div>
-                  <label  class="col-sm-2 control-label">Ouv Technique</label>
-				  <div class="col-sm-2">    
-                  <p:calendar value="#{daoController.ouvTech}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
-                  </p:calendar>
-                  </div>
-                  
-                  <h:panelGroup id="idOuv">
-                  <h:panelGroup rendered="#{daoController.ouvTechnique}">
-                  <label  class="col-sm-2 control-label">Ouv Financière</label> 
-				  <div class="col-sm-2">
-                  <p:calendar value="#{daoController.ouvFin}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" />   
-                  </div>
-                  </h:panelGroup>
-                  </h:panelGroup>
-                </div>
-                </h:panelGroup>
-         </div>
-         </div>
-         </div>
          </div>
          
            </div>
@@ -1045,7 +1143,7 @@
                                 <i class="ace-icon fa fa-pencil bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />                             
                             </p:commandLink>
-				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritere()}" title="Supprimer" update="gnl">
+				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.deleteCritereLot()}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
 			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltCritereDac}" />
@@ -1150,9 +1248,6 @@
 	         				  <h:outputText value="#{slctdTb.tctLibelle}"/>
 					        </p:column>
 					        
-                         
-                       
-		        
     </p:dataTable> 
     </div>
     <div class="box-footer">

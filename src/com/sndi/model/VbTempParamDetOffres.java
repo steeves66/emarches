@@ -51,6 +51,7 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 	//private BigDecimal dofMtRab;
 	private String dofMtRab;
 	private String dofDelai2;
+	private BigDecimal dofTempNum;
 
 	public VbTempParamDetOffres() {
 	}
@@ -63,7 +64,8 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 			String dofLaaAaoCode, String dofLaaId, String dofDelai, String dofOffCnps, String dofOffImpot,
 			String dofOffRc, String dofCaut, String dofTyp, String dofBanCode, String dofEstimRab, String dofRab,
 			String dofMtOfr, String dofOffNum, String dofNum, String dofNomRep, String dofPreRep, String dofTelRep,
-			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,String dofMtRab, String dofDelai2) {
+			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,
+			String dofMtRab, String dofDelai2,BigDecimal dofTempNum) {
 		this.tempNum = tempNum;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofOpeMatricule = dofOpeMatricule;
@@ -92,11 +94,14 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 		this.dofMtCaut = dofMtCaut;
 		this.dofMtRab = dofMtRab;
 		this.dofDelai2 = dofDelai2;
+		this.dofTempNum = dofTempNum;
 	}
 
 	@Id
-	@SequenceGenerator(name = "SEQ_TEM_OFFRE_Sequence", sequenceName = "SEQ_TEM_OFFRE", allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_TEM_OFFRE_Sequence")
+	//@SequenceGenerator(name = "SEQ_TEM_OFFRE_Sequence", sequenceName = "SEQ_TEM_OFFRE", allocationSize=1)
+	//@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_TEM_OFFRE_Sequence")
+	@SequenceGenerator(name = "SEQ_TEM_PAR2_NUM_Sequence", sequenceName = "SEQ_TEM_PAR2_NUM", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_TEM_PAR2_NUM_Sequence")
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getTempNum() {
 		return this.tempNum;
@@ -358,5 +363,15 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 	public void setDofDelai2(String dofDelai2) {
 		this.dofDelai2 = dofDelai2;
 	}
+	
+	@Column(name = "DOF_TEMP_NUM", precision = 22, scale = 0)
+	public BigDecimal getDofTempNum() {
+		return this.dofTempNum;
+	}
+
+	public void setDofTempNum(BigDecimal dofTempNum) {
+		this.dofTempNum = dofTempNum;
+	}
+
 
 }

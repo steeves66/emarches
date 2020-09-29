@@ -28,103 +28,7 @@ import com.sndi.controller.custom.ControleController;
 import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
-import com.sndi.model.TAdresseAvis;
-import com.sndi.model.TAffichageDao;
-import com.sndi.model.TAgpm;
-import com.sndi.model.TAvisAppelOffre;
-import com.sndi.model.TCandidats;
-import com.sndi.model.TCommissionSpecifique;
-import com.sndi.model.TCorrectionDac;
-import com.sndi.model.TCritereAnalyse;
-import com.sndi.model.TDacSpecs;
-import com.sndi.model.TDaoAffectation;
-import com.sndi.model.TDetCommissionSeance;
-import com.sndi.model.TDetCritAnalyse;
-import com.sndi.model.TDetCritAnalyseDac;
-import com.sndi.model.TDetOffres;
-import com.sndi.model.TDetailAdresseAvis;
-import com.sndi.model.TDetailCorrection;
-import com.sndi.model.TDetailPlanPassation;
-import com.sndi.model.TDetailVente;
-import com.sndi.model.TDossierDacs;
-import com.sndi.model.TFonction;
-import com.sndi.model.TGestion;
-import com.sndi.model.THistoDac;
-import com.sndi.model.TLBudgets;
-import com.sndi.model.TLibelleAdresse;
-import com.sndi.model.TLotAao;
-import com.sndi.model.TModePassation;
-import com.sndi.model.TModeReglement;
-import com.sndi.model.TModeleDacType;
-import com.sndi.model.TNatureDocuments;
-import com.sndi.model.TOffrePieceDac;
-import com.sndi.model.TPiecesDacs;
-import com.sndi.model.TRetrait;
-import com.sndi.model.TSeances;
-import com.sndi.model.TSoumissions;
-import com.sndi.model.TStatut;
-import com.sndi.model.TStructure;
-import com.sndi.model.TTempParametre;
-import com.sndi.model.TTiers;
-import com.sndi.model.TTypeCommission;
-import com.sndi.model.TTypeDacSpecs;
-import com.sndi.model.TTypeMarche;
-import com.sndi.model.TTypePieceOffre;
-import com.sndi.model.TTypePiecesDac;
-import com.sndi.model.TTypeSeance;
-import com.sndi.model.TVenteDac;
-import com.sndi.model.VArticlesCom;
-import com.sndi.model.VAvisAdresse;
-import com.sndi.model.VCommissionSpeciale;
-import com.sndi.model.VCommissionSpecifique;
-import com.sndi.model.VCommissionTypeExp;
-import com.sndi.model.VCritAnalDacEntete;
-import com.sndi.model.VCritAnalDacSousentete;
-import com.sndi.model.VCritereAnalyse;
-import com.sndi.model.VCritereAnalyseDac;
-import com.sndi.model.VCritereAnalyseDacLot;
-import com.sndi.model.VCritereAnalyseModel;
-import com.sndi.model.VDacMembre;
-import com.sndi.model.VDacVendu;
-import com.sndi.model.VDacliste;
-import com.sndi.model.VDaoBailleur;
-import com.sndi.model.VDaoStatut;
-import com.sndi.model.VDetTabBordDac;
-import com.sndi.model.VDetTabBordPgpm;
-import com.sndi.model.VDetTabBordPpm;
-import com.sndi.model.VDetailAdresse;
-import com.sndi.model.VDetailCorrection;
-import com.sndi.model.VDetailCorrectionCharge;
-import com.sndi.model.VFonctionImputation;
-import com.sndi.model.VFonctionMinistere;
-import com.sndi.model.VLigneImputation;
-import com.sndi.model.VLigneLot;
-import com.sndi.model.VLotCritere;
-import com.sndi.model.VMargeDePreference;
-import com.sndi.model.VPieceDac;
-import com.sndi.model.VPieces;
-import com.sndi.model.VPiecesOffre;
-import com.sndi.model.VPiecesOffreDao;
-import com.sndi.model.VPpmDao;
-import com.sndi.model.VTempCitere;
-import com.sndi.model.VTypePieceOffreSg;
-import com.sndi.model.VUpdateAgpm;
-import com.sndi.model.VUpdateDac;
-import com.sndi.model.VVenteLot;
-import com.sndi.model.VbCommissionSpecifique;
-import com.sndi.model.VbCommissionType;
-import com.sndi.model.VbCritereAnalyse;
-import com.sndi.model.VbDetCritAnalyse;
-import com.sndi.model.VbDetCritAnalyseDac;
-import com.sndi.model.VbPaysReference;
-import com.sndi.model.VbTempCritere;
-import com.sndi.model.VbTempParamDetCri;
-import com.sndi.model.VbTempParamEnteteCri;
-import com.sndi.model.VbTempParamTabBord;
-import com.sndi.model.VbTempParamVente;
-import com.sndi.model.VbTempParametreCorrection;
-import com.sndi.model.VbTempParametreFact;
-import com.sndi.model.VbTempParametreLot;
+import com.sndi.model.*;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
@@ -263,6 +167,7 @@ public class DaoController {
 	private List<VCritAnalDacSousentete> listeSousEnteteCritere = new ArrayList<VCritAnalDacSousentete >();
 	private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
 	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>();
+	private List<TLotAao> listeLot = new ArrayList<TLotAao>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
 	private List<VArticlesCom> listeArticle = new ArrayList<VArticlesCom>();
@@ -271,6 +176,9 @@ public class DaoController {
 	private TCommissionSpecifique detailCom = new TCommissionSpecifique(); 
 	//MAREGE DE PREFENCE
 	private List<VMargeDePreference> listeMarge = new ArrayList<VMargeDePreference>();
+	private List<VMargeDePreferenceSou> listeMargeSou = new ArrayList<VMargeDePreferenceSou>();
+	private List<VMargeDePreferenceCom> listeMargeCom = new ArrayList<VMargeDePreferenceCom>();
+	private List<VMargeDePreferenceArt> listeMargeArt = new ArrayList<VMargeDePreferenceArt>();
     //TABLEAU DE BORD
 	private VbTempParamTabBord tempBord = new VbTempParamTabBord(); 
 	 
@@ -323,9 +231,12 @@ public class DaoController {
 	private TDetCritAnalyseDac detCritere = new TDetCritAnalyseDac();
 	private VDacliste caution = new VDacliste();
 	private VLotCritere lotCrit = new VLotCritere();
+	private TLotAao lots = new TLotAao();
 	//MARGE DE PREFERENCE
 	private VMargeDePreference marge = new VMargeDePreference();
-	
+	private VMargeDePreferenceSou margeSou = new VMargeDePreferenceSou();
+	private VMargeDePreferenceCom margeCom = new VMargeDePreferenceCom();
+	private VMargeDePreferenceArt margeArt = new VMargeDePreferenceArt();
 	//VARIABLES
 	 private long adaNum;
 	 private long rId;
@@ -381,7 +292,7 @@ public class DaoController {
 	 
 	 private VLigneLot ligne = new VLigneLot();
 	 private VLigneLot recupLigne = new VLigneLot();
-	 
+	 private List<VMargeDePreference> listMarge = new ArrayList<VMargeDePreference>();
 	 private VFonctionMinistere fonction =new VFonctionMinistere();
 	 private TAdresseAvis newAdresse = new TAdresseAvis(); 
 	 private TDetailAdresseAvis newDtailAdresse = new TDetailAdresseAvis(); 
@@ -413,6 +324,8 @@ public class DaoController {
 	 private VbTempParamDetCri newTempCritere = new VbTempParamDetCri();
 	 private VCritereAnalyseDac sltCritereDac = new VCritereAnalyseDac();
 	 private VbTempParametreFact newTempFactorise = new VbTempParametreFact(); 
+	 private VbTempParametreFactSup newTempFactSup = new VbTempParametreFactSup();
+	 private VMargeDePreference sltMarge = new VMargeDePreference();
 	 private boolean btn_save_presence = true;
 	 private boolean btn_save_expert = false;
 	 private boolean btn_ad_expert = false;
@@ -445,6 +358,7 @@ public class DaoController {
 	  private String sit = "";
 	  private String resultat = "";
 	  private String value1 ="N";
+	  private String margePref ;
 	  private String statutSanction = "";
 	  private String statutSanRetour="";
 	  private String observationCor ="";
@@ -469,6 +383,10 @@ public class DaoController {
 	  private boolean etatBtnValid = false;
 	  private boolean etatBtnValidCharge = true;
 	  private boolean etatTaux = false;
+	  private boolean etatMargeA = false;
+	  private boolean etatMargeC = false;
+	  private boolean etatMargeS = false;
+	  private boolean etatMargePreference = false;
 	  private boolean panelExixstent = false;
 	  private boolean panelNouveau = false;
 	  private boolean qualifLabel1 = false;
@@ -532,6 +450,7 @@ public class DaoController {
 			          return "creation";
 					} 
 	              userController.initMessage(); 
+	              //listeMarge();
 			     }
 			 
 			//Controle Pavé création
@@ -645,13 +564,49 @@ public class DaoController {
 		 listeLotCritere=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 				new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		_logger.info("listeLotCritere size: "+listeLotCritere.size());
-	 }
+	 } 
 	 
 	 public void chargeLotConsultation() {
 		 listeLotConsultation.clear();
 	     listeLotConsultation=(List<VLotCritere>) iservice.getObjectsByColumn("VLotCritere", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 				new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		_logger.info("listeLotConsultation size: "+listeLotConsultation.size());
+	 }
+	 //Affichage des marges de préférence de l'avis en cours
+	 public void listeMargePref() {
+		 listMarge.clear();
+		 listMarge = (List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference",
+					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+	 }
+	 
+	 public void saveMarge (String marge) {
+		 List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+sltMarge.getDacCode()));
+		 TDacSpecs dac = new TDacSpecs(); 
+		 if(!LS.isEmpty()) dac = LS.get(0);
+		    if(sltMarge.getOrdre().equalsIgnoreCase("1")) {
+		    	  dac.setDacMargePrefSou(""+marge);
+		    	  dac.setDacMargePrefCom("N");
+		    	  dac.setDacMargePrefArt("N");
+		    	  dac.setDacMargePrefSouVal(sltMarge.getTauxMargePref());
+				  iservice.updateObject(dac);
+				  listeMargePref();
+		    }else {
+		    	if(sltMarge.getOrdre().equalsIgnoreCase("2")) {
+		    		dac.setDacMargePrefCom(""+marge);
+		  		    dac.setDacMargePrefComVal(sltMarge.getTauxMargePref());
+		  		    dac.setDacMargePrefSou("N");
+		  		    iservice.updateObject(dac);
+		  		    listeMargePref();
+			    }else {
+			    	   if(sltMarge.getOrdre().equalsIgnoreCase("3")) {
+			    		   dac.setDacMargePrefArt(""+marge);
+					       dac.setDacMargePrefArtVal(sltMarge.getTauxMargePref());
+					       dac.setDacMargePrefSou("N");
+						   iservice.updateObject(dac);
+						   listeMargePref();
+				      }
+			    }
+		    }
 	 }
 	 
 	 
@@ -664,7 +619,7 @@ public class DaoController {
 			 }
 	 
 	 
-	 //Afficahe de la liste des critï¿½res en fonction des types passï¿½ en parametre
+	 //Afficahe de la liste des critï¿½res en fonction des types passé en parametre
 	/* public void chargeCritere() {
 		 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
 			 chargeCritereByType("PN","DAO");
@@ -698,7 +653,7 @@ public class DaoController {
 				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
 	 }
 	 
-	//Combo box critï¿½res Pou l'ecran de factorisation
+	//Combo box critères Pou l'ecran de factorisation
 	 public void chargeCritereFactCombobox() {
 		 //vider le champ detail
 		  newCritereDac = new VbDetCritAnalyseDac(); 
@@ -726,7 +681,7 @@ public class DaoController {
 	 }
 	 
 	 
-	//Combo box critï¿½res
+	//Combo box critères
 	 
 	 public void chargeSousEnteteCombobox() {
 			 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
@@ -1356,7 +1311,7 @@ public class DaoController {
 	 
 	 //Suppression du critère du détail
 	 public void deleteCritere() {
-		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
+		 /*listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 					new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum()));
 	       if (!listeDetCritere.isEmpty()) {
 	    	   detCritere = listeDetCritere.get(0);
@@ -1366,14 +1321,36 @@ public class DaoController {
 	  		userController.setTexteMsg("Suppression effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
-	       }
+	       }*/
+	       
+	        /* newTempFactorise.setTempCritDac(dao.getDacCode());
+			 newTempFactorise.setTempNbrLot(newAvis.getAaoNbrLot());
+			 newTempFactorise.setTempDcadNum(sltCritereDac.getDcadNum().toString());
+			 newTempFactorise.setTempType("SUP");
+			 iservice.addObject(newTempFactorise);*/
+			 newTempFactSup.setTempCritDac(dao.getDacCode());
+			 newTempFactSup.setTempDcadNum(sltCritereDac.getDcadNum().toString());
+		  	 newTempFactSup.setTempNbrLot(newAvis.getAaoNbrLot());
+		  	 newTempFactSup.setTempLotPlage("");
+		     newTempFactSup.setTempType("SUP");
+			 iservice.addObject(newTempFactSup);
+			 chargeCritereSaisie();
+	  		 chargeCritere();
+			 userController.setTexteMsg("Suppression effectuée avec succès!");
+			 userController.setRenderMsg(true);
+			 userController.setSevrityMsg("success");
+			 
+			 _logger.info("DAC: "+dao.getDacCode());
+			 _logger.info("DCAD NUM: "+sltCritereDac.getDcadNum().toString());
+			 _logger.info("Nbre Lot: "+newAvis.getAaoNbrLot());
+			 _logger.info("TYPE : "+newTempFactSup.getTempType());
 	 }
 	 
 	 //Fin de la méthode de suppression du détail de critère
 	 
 	 //Suppression du critère du détail
 	 public void deleteCritereLot() {
-		 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
+		/* listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 				     new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 					 new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum()));
 	       if (!listeDetCritere.isEmpty()) {
@@ -1385,14 +1362,46 @@ public class DaoController {
 	  		userController.setTexteMsg("Suppression effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
-	       }
+	       }*/
+	       
+		 listeLot = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+			     new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()), 
+				 new WhereClause("LAA_ID",WhereClause.Comparateur.EQ,""+laaId));
+       if (! listeLot.isEmpty()) {
+    	   lots = listeLot.get(0);
+       }
+	         /*newTempFactorise.setTempCritDac(dao.getDacCode());
+			 newTempFactorise.setTempNbrLot(newAvis.getAaoNbrLot());
+			 newTempFactorise.setTempLotPlage(""+laaId);
+			 newTempFactorise.setTempDcadNum(sltCritereDac.getDcadNum().toString());
+			 newTempFactorise.setTempType("SUP");
+			 iservice.addObject(newTempFactorise);*/
+		     newTempFactSup.setTempCritDac(dao.getDacCode());
+		     //newTempFactSup.setTempLotPlage(lots.getLaaNum().toString());
+		     newTempFactSup.setTempLotPlage("");
+		     newTempFactSup.setTempDcadNum(sltCritereDac.getDcadNum().toString());
+	  	     newTempFactSup.setTempNbrLot(newAvis.getAaoNbrLot());
+	         newTempFactSup.setTempType("SUP");
+		     iservice.addObject(newTempFactSup);
+			 chargeCritereSaisie();
+	  		 chargeCritere();
+	  		 chargeCritereByLot();
+			 userController.setTexteMsg("Suppression effectuée avec succès!");
+			 userController.setRenderMsg(true);
+			 userController.setSevrityMsg("success");
+			 
+			 _logger.info("DAC: "+dao.getDacCode());
+			 _logger.info("Numero Lot: "+lots.getLaaNum().toString());
+			 _logger.info("DCAD NUM: "+sltCritereDac.getDcadNum().toString());
+			 _logger.info("Nbre Lot: "+newAvis.getAaoNbrLot());
+			 _logger.info("TYPE : "+newTempFactSup.getTempType());
 	 }
 	 
-	 //Fin de la mï¿½thode de suppression du dï¿½tail de critï¿½re
+	 //Fin de la méthode de suppression du détail de critère
 	 
 	 
 	 //FIN GESTION DES CRITERES
-	 //Affichage des AC en lui passant en parametre les statuts concernï¿½ (2 statuts)
+	 //Affichage des AC en lui passant en parametre les statuts concerné (2 statuts)
 	 public void chargeDataAc2(String typeDac,String typePlan,String stat1,String stat2){
 		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 				 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
@@ -2487,9 +2496,8 @@ public class DaoController {
 						  		userController.setRenderMsg(true);
 						  		userController.setSevrityMsg("success");
 			    			}
-				 		
-								
-							}
+				 				
+						}
 				 	
 				 	public void deletePresenceComspec() {   
 				 		iservice.deleteObject(sltCompsec);
@@ -2694,16 +2702,43 @@ public class DaoController {
 			     }
 			    
 			    
-			    //chargement du message de la marge de prï¿½ference
-			    public void chargeMsgMarge() {
+			    //chargement du message de la marge de préférence sous-traitance
+			   /* public void chargeMsgMarge() {
 			    	listeMarge.clear();
 			    	listeMarge =(List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference", new ArrayList<String>(Arrays.asList("ID")));
 					if (!listeMarge.isEmpty()) {
 						marge=listeMarge.get(0);
 					}	
+			    }*/
+			    
+			  //chargement du message de la marge de préférence sous-traitance
+			    public void chargeMsgMarge() {
+			    	//listeMargeSou.clear();
+			    	listeMargeSou =(List<VMargeDePreferenceSou>) iservice.getObjectsByColumn("VMargeDePreferenceSou", new ArrayList<String>(Arrays.asList("ID")));
+					if (!listeMargeSou.isEmpty()) {
+						margeSou=listeMargeSou.get(0);
+					}	
+			    }
+			    
+			  //chargement du message de la marge de préférence communautaire
+			    public void chargeMsgMargeCom() {
+			    	//listeMargeCom.clear();
+			    	listeMargeCom =(List<VMargeDePreferenceCom>) iservice.getObjectsByColumn("VMargeDePreferenceCom", new ArrayList<String>(Arrays.asList("ID")));
+					if (!listeMargeCom.isEmpty()) {
+						margeCom=listeMargeCom.get(0);
+					}	
+			    }
+			    
+			  //chargement du message de la marge de préférence artisan
+			    public void chargeMsgMargeArt() {
+			    	listeMargeArt.clear();
+			    	listeMargeArt =(List<VMargeDePreferenceArt>) iservice.getObjectsByColumn("VMargeDePreferenceArt", new ArrayList<String>(Arrays.asList("ID")));
+					if (!listeMargeArt.isEmpty()) {
+						margeArt=listeMargeArt.get(0);
+					}	
 			    }
 		    
-		//Initiation du DAO en procÃ©dure normale 
+		//Initiation du DAO en procédure normale 
 	     @Transactional
 	     public void saveDac(String typeDac) {
 	    	 if(daoDetail.getTymCode().equalsIgnoreCase("") || "".equals(daoDetail.getTymCode()) || daoDetail.getMopCode().equalsIgnoreCase("") || "".equalsIgnoreCase(daoDetail.getMopCode()) 
@@ -2787,6 +2822,8 @@ public class DaoController {
 		 							  btn_save_avis = true;
 		 							  verifOuverture();
 		 							  chargeImputation();
+		 							  choixTaux = "N";
+		 							  //listeMarge();
 		 			      }
 			    					//Insertion des piï¿½ces
 			          }
@@ -2919,11 +2956,40 @@ public class DaoController {
 				            	            		  newAvis.setAaoDteOuvFin(ouvFin);
 				                	          		  newAvis.setAaoDteOuvTec(ouvTech);
 				            	            		  }
+				        
 				            	          		      newAvis.setTStatut(new TStatut("D1S"));
 				            	          		      newAvis.setAvisRetour("0");
 													  newAvis.setAaoNatInt(value1);
 				            	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
 				            	          		      iservice.addObject(newAvis); 
+				            	          		      
+				            	          		      //Prise en compte des marges de préférences
+				            	          		      for(VMargeDePreference ligne : listeMarge) {
+				            	          		    	listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+						            	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+						            	     				       if (!listDao.isEmpty()) {
+						            	     					    newDao= listDao.get(0);
+						            	     				       if(ligne.getOrdre().equalsIgnoreCase("1")) {
+							            	     				    	 newDao.setDacMargePrefSou(ligne.getMargePrefSou());
+							            	     				    	 newDao.setDacMargePrefSouVal(ligne.getTauxMargePref());
+							            	     				    	 iservice.updateObject(newDao);
+							            	     				       }else {
+							            	     				    	   if(ligne.getOrdre().equalsIgnoreCase("2")) {
+							            	     				    		  newDao.setDacMargePrefCom(ligne.getMargePrefSou());
+							            	     				    		  newDao.setDacMargePrefComVal(ligne.getTauxMargePref());
+							            	     				    		  iservice.updateObject(newDao);
+							            	     				    	   }else {
+							            	     
+							            	     				    		  if(ligne.getOrdre().equalsIgnoreCase("3")) {
+								            	     				    		  newDao.setDacMargePrefArt(ligne.getMargePrefSou());
+								            	     				    		  newDao.setDacMargePrefArtVal(ligne.getTauxMargePref());
+								            	     				    		  iservice.updateObject(newDao);
+								            	     				    	   }
+							            	     				    	   }
+							            	     				       }
+						            	     			            //iservice.updateObject(newDao); 
+						            	     	   	                 }
+						            			 		    }
 				            	          		   
 				            	          		   
 				            	          		   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -2939,11 +3005,11 @@ public class DaoController {
 			                                             //Charger la liste des pieces de l'offre
 				            	     				     chargePiecesOffres();
 				                	     				    //Message de confirmation
-				            	          		            userController.setTexteMsg("Avis d'Appel d'Offre crÃ©e avec succÃ¨s!");
+				            	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
 				            	          		            userController.setRenderMsg(true);
 				            	          		            userController.setSevrityMsg("success");
 				            	          		            
-				            	          		        //Dï¿½sactivation du bouton enregistrerAvis
+				            	          		        //Désactivation du bouton enregistrerAvis
 				                	     				    btn_save_avis =false;
 				                	     				//Activation du bouton d'enregistrement des offres
 				                	     				    btn_save_offre = true;
@@ -2952,7 +3018,6 @@ public class DaoController {
 				            	 				 }
 				            	 				 
 				            	 			 }
-	            	            	     
 	            	                  }
 	        	                   } 
 	                     }
@@ -3650,7 +3715,7 @@ public class DaoController {
 					 
 					 public void checkMargeMsg() {
 						 chargeMsgMarge();
-						 if(choixTaux.equalsIgnoreCase("marge")) { 
+						 if(choixTaux.equalsIgnoreCase("O")) { 
 							 etatTaux = true; 
 							 libelleTaux = true;
 						 }else 
@@ -3660,14 +3725,79 @@ public class DaoController {
 						 }
 					 }
 					 
+					 //Affichage des messages de marge de préférence
+					 public void checkMargeMsgPref() {
+							 if(margePref.equalsIgnoreCase("com")) { 
+								 chargeMsgMargeCom();
+								 etatMargeC = true; 
+								 etatMargeA = false;
+							 }else {
+								 if(margePref.equalsIgnoreCase("art")) { 
+									 chargeMsgMargeArt();
+									 etatMargeA = true;
+									 etatMargeC = false; 
+									 //etatTaux = false;
+								 }
+							 }
+						 
+					 }
 					 
-					 //Edition de la fiche de synthÃ¨se du DAO
+					 public void checkMargeMsgSou() {
+						 if(margePref.equalsIgnoreCase("sous")) { 
+							 chargeMsgMarge();
+							 etatTaux = true;
+							 etatMargeC = false;
+							 etatMargeA = false;
+						 }
+					 }
+					 
+					 //Mis à Jour dans le T_DAC_SPECS
+					 public void majPreference() {
+						 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+    	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+    	     				       if (!listDao.isEmpty()) {
+    	     					    newDao= listDao.get(0);
+    	     				        newDao.setDacMargePref(choixTaux);
+    	     				        newDao.setDacMargePrefSou(choixTaux);
+    	     				        iservice.updateObject(newDao);
+        	     				       }
+					         }
+					 
+					 
+					 public void réiniPreference() {
+						 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+    	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
+    	     				       if (!listDao.isEmpty()) {
+    	     					    newDao= listDao.get(0);
+    	     				        newDao.setDacMargePref(choixTaux);
+    	     				        newDao.setDacMargePrefSou(choixTaux);
+    	     				        newDao.setDacMargePrefArt(choixTaux);
+    	     				        newDao.setDacMargePrefCom(choixTaux);
+    	     				        iservice.updateObject(newDao);
+        	     				       }
+					         }
+					 
+					 
+					 public void checkMargePref() {
+						 if(choixTaux.equalsIgnoreCase("O")) { 
+							 majPreference();
+							 etatMargePreference = true;
+							 listeMargePref();
+						 }else 
+						 {
+							 réiniPreference();
+							 etatMargePreference = false; 
+						 }
+					 }
+					 
+					 
+					 //Edition de la fiche de synthèse du DAO
 					 public void imprimeSynthese() {
 							   projetReport.stringparam1(dao.getDacCode(), "synthese_dac", "synthese_dac"); 
 						}
 					 
 				 
-					//TÃ©lÃ©chargement des DAO type aprÃ¨s la saisie du DAO					
+					//Téléchargement des DAO type après la saisie du DAO					
 						public void opendaoType() throws IOException{
 							
 						  if(controleController.type == "DAC" && controleController.typePlan == "PN"){
@@ -5325,8 +5455,7 @@ public class DaoController {
 		     
 		     //Methode pour vider la liste des critères du lot 0
 		     public void viderCritereLot0() {
-		    	 
-		    	 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
+		    	 /*listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 						    new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
 						    new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		    	 
@@ -5339,14 +5468,36 @@ public class DaoController {
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
 			    } 	         
-			  critere="";
+			  critere="";*/
+
+			   /*  newTempFactorise.setTempCritDac(dao.getDacCode());
+				 newTempFactorise.setTempNbrLot(newAvis.getAaoNbrLot());
+				 newTempFactorise.setTempLotPlage("0");
+				 newTempFactorise.setTempType("SUP");
+				 iservice.addObject(newTempFactorise); 
+				 chargeCritereSaisie();
+		  		 chargeCritere();*/
+		  		 
+		  		newTempFactSup.setTempCritDac(dao.getDacCode());
+		  		newTempFactSup.setTempDcadNum("");
+		  		newTempFactSup.setTempNbrLot(newAvis.getAaoNbrLot());
+		  		newTempFactSup.setTempLotPlage("0");
+		  		newTempFactSup.setTempType("SUP");
+				 iservice.addObject(newTempFactSup);
+				 chargeCritereSaisie();
+		  		 chargeCritere();
+		  		 //critere="";
+		  		 //newTempFactorise.getTempLotPlage().equalsIgnoreCase("");
+		  		 userController.setTexteMsg("Liste des critères vidée avec succès!");
+				 userController.setRenderMsg(true);
+				 userController.setSevrityMsg("success");
 		     }
 		     
 		     
-		     //Methode pour vider la liste des critÃ¨res (lot par lot)
+		     //Methode pour vider la liste des critères (lot par lot)
 		     public void viderCritereByLot() {
 		    	 
-		    	 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
+		    /*	 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 						    new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 						    new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		    	 
@@ -5359,7 +5510,33 @@ public class DaoController {
 			  	  userController.setTexteMsg("Liste des critères vidée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
-			    } 
+			    } */
+			  
+			  listeLot = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+					     new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()), 
+						 new WhereClause("LAA_ID",WhereClause.Comparateur.EQ,""+laaId));
+		       if (! listeLot.isEmpty()) {
+		    	   lots = listeLot.get(0);
+		       }
+			  
+			     newTempFactSup.setTempCritDac(dao.getDacCode());
+		  		 newTempFactSup.setTempNbrLot(newAvis.getAaoNbrLot());
+		  		 newTempFactSup.setTempDcadNum("");
+		  		 newTempFactSup.setTempLotPlage(lots.getLaaNum().toString());
+		  		 newTempFactSup.setTempType("SUP");
+				 iservice.addObject(newTempFactSup);
+			     chargeCritereFactCombobox();
+			     chargeLotCritere();
+			     chargeCritereByLot();
+			  	 userController.setTexteMsg("Liste des critères vidée avec succès!");
+				 userController.setRenderMsg(true);
+				 userController.setSevrityMsg("success");
+				 
+				 _logger.info("DAC: "+dao.getDacCode());
+				 _logger.info("ID Lot: "+laaId);
+				 _logger.info("Number Lot: "+lots.getLaaNum().toString());
+				 _logger.info("Nbre Lot: "+newAvis.getAaoNbrLot());
+				 _logger.info("TYPE : "+newTempFactSup.getTempType());
 		     }
 		     
 		     
@@ -7994,4 +8171,133 @@ public class DaoController {
 	public void setCritereObject(VCritereAnalyseModel critereObject) {
 		this.critereObject = critereObject;
 	}
+
+	public List<TLotAao> getListeLot() {
+		return listeLot;
+	}
+
+	public void setListeLot(List<TLotAao> listeLot) {
+		this.listeLot = listeLot;
+	}
+
+	public TLotAao getLots() {
+		return lots;
+	}
+
+	public void setLots(TLotAao lots) {
+		this.lots = lots;
+	}
+
+	public VbTempParametreFactSup getNewTempFactSup() {
+		return newTempFactSup;
+	}
+
+	public void setNewTempFactSup(VbTempParametreFactSup newTempFactSup) {
+		this.newTempFactSup = newTempFactSup;
+	}
+
+	public List<VMargeDePreferenceSou> getListeMargeSou() {
+		return listeMargeSou;
+	}
+
+	public void setListeMargeSou(List<VMargeDePreferenceSou> listeMargeSou) {
+		this.listeMargeSou = listeMargeSou;
+	}
+
+	public List<VMargeDePreferenceCom> getListeMargeCom() {
+		return listeMargeCom;
+	}
+
+	public void setListeMargeCom(List<VMargeDePreferenceCom> listeMargeCom) {
+		this.listeMargeCom = listeMargeCom;
+	}
+
+	public List<VMargeDePreferenceArt> getListeMargeArt() {
+		return listeMargeArt;
+	}
+
+	public void setListeMargeArt(List<VMargeDePreferenceArt> listeMargeArt) {
+		this.listeMargeArt = listeMargeArt;
+	}
+
+	public VMargeDePreferenceSou getMargeSou() {
+		return margeSou;
+	}
+
+	public void setMargeSou(VMargeDePreferenceSou margeSou) {
+		this.margeSou = margeSou;
+	}
+
+	public VMargeDePreferenceCom getMargeCom() {
+		return margeCom;
+	}
+
+	public void setMargeCom(VMargeDePreferenceCom margeCom) {
+		this.margeCom = margeCom;
+	}
+
+	public VMargeDePreferenceArt getMargeArt() {
+		return margeArt;
+	}
+
+	public void setMargeArt(VMargeDePreferenceArt margeArt) {
+		this.margeArt = margeArt;
+	}
+
+	public boolean isEtatMargeA() {
+		return etatMargeA;
+	}
+
+	public void setEtatMargeA(boolean etatMargeA) {
+		this.etatMargeA = etatMargeA;
+	}
+
+	public boolean isEtatMargeC() {
+		return etatMargeC;
+	}
+
+	public void setEtatMargeC(boolean etatMargeC) {
+		this.etatMargeC = etatMargeC;
+	}
+
+	public boolean isEtatMargeS() {
+		return etatMargeS;
+	}
+
+	public void setEtatMargeS(boolean etatMargeS) {
+		this.etatMargeS = etatMargeS;
+	}
+
+	public boolean isEtatMargePreference() {
+		return etatMargePreference;
+	}
+
+	public void setEtatMargePreference(boolean etatMargePreference) {
+		this.etatMargePreference = etatMargePreference;
+	}
+
+	public String getMargePref() {
+		return margePref;
+	}
+
+	public void setMargePref(String margePref) {
+		this.margePref = margePref;
+	}
+
+	public List<VMargeDePreference> getListMarge() {
+		return listMarge;
+	}
+
+	public void setListMarge(List<VMargeDePreference> listMarge) {
+		this.listMarge = listMarge;
+	}
+
+	public VMargeDePreference getSltMarge() {
+		return sltMarge;
+	}
+
+	public void setSltMarge(VMargeDePreference sltMarge) {
+		this.sltMarge = sltMarge;
+	}
+	
 }

@@ -6,7 +6,10 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +34,9 @@ public class TAnalyseOffre implements java.io.Serializable {
 	private String anfTypeActeur;
 	private Long anfValeurScore;
 	private String anfCommentaire;
+	private String anfDcadCraCle;
+	private String anfPresence;
+	private BigDecimal anfNumTrav;
 
 	public TAnalyseOffre() {
 	}
@@ -49,7 +55,7 @@ public class TAnalyseOffre implements java.io.Serializable {
 	public TAnalyseOffre(BigDecimal anfNum, BigDecimal anfDcadNum, String anfDanCode, String anfDacCode,
 			BigDecimal anfLaaId, BigDecimal anfDofNum, String anfValeurConf, String anfObser, String anfOpeMatricule,
 			Date anfDteSaisi, String anfOpeModif, Date anfDteModif, String anfTypeActeur,Long anfValeurScore,
-			String anfCommentaire) {
+			String anfCommentaire,String anfDcadCraCle, String anfPresence,BigDecimal anfNumTrav) {
 		this.anfNum = anfNum;
 		this.anfDcadNum = anfDcadNum;
 		this.anfDanCode = anfDanCode;
@@ -65,9 +71,14 @@ public class TAnalyseOffre implements java.io.Serializable {
 		this.anfTypeActeur = anfTypeActeur;
 		this.anfValeurScore = anfValeurScore;
 		this.anfCommentaire = anfCommentaire;
+		this.anfDcadCraCle = anfDcadCraCle;
+		this.anfPresence = anfPresence;
+		this.anfNumTrav = anfNumTrav;
 	}
 
 	@Id
+	@SequenceGenerator(name = "SEQ_ANALYSE_OFFRE_Sequence", sequenceName = "SEQ_ANALYSE_OFFRE", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SEQ_ANALYSE_OFFRE_Sequence")
 	@Column(name = "ANF_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getAnfNum() {
 		return this.anfNum;
@@ -201,5 +212,33 @@ public class TAnalyseOffre implements java.io.Serializable {
 
 	public void setAnfCommentaire(String anfCommentaire) {
 		this.anfCommentaire = anfCommentaire;
+	}
+	
+	@Column(name = "ANF_DCAD_CRA_CLE", length = 50)
+	public String getAnfDcadCraCle() {
+		return this.anfDcadCraCle;
+	}
+
+	public void setAnfDcadCraCle(String anfDcadCraCle) {
+		this.anfDcadCraCle = anfDcadCraCle;
+	}
+
+	@Column(name = "ANF_PRESENCE", length = 1)
+	public String getAnfPresence() {
+		return this.anfPresence;
+	}
+
+	public void setAnfPresence(String anfPresence) {
+		this.anfPresence = anfPresence;
+	}
+	
+
+	@Column(name = "ANF_NUM_TRAV", precision = 22, scale = 0)
+	public BigDecimal getAnfNumTrav() {
+		return this.anfNumTrav;
+	}
+
+	public void setAnfNumTrav(BigDecimal anfNumTrav) {
+		this.anfNumTrav = anfNumTrav;
 	}
 }

@@ -67,6 +67,7 @@ import com.sndi.model.VCompoCommission;
 import com.sndi.model.VCritereAnalyseDac;
 import com.sndi.model.VCritereAnalyseDacOff;
 import com.sndi.model.VCritereAnalyseDacOfftec;
+import com.sndi.model.VCritereAnalyseDacOuv;
 import com.sndi.model.VDacMembre;
 import com.sndi.model.VDetCommissionSeance;
 import com.sndi.model.VDetOffreAnalyse;
@@ -94,6 +95,7 @@ import com.sndi.model.VReeditCojo;
 import com.sndi.model.VRepSoumissionnaire;
 import com.sndi.model.VResultEvalClassLot;
 import com.sndi.model.VResultPropAttribLot;
+import com.sndi.model.VSeqTravail;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VVerifOffin;
 import com.sndi.model.VbAnalyseOffre;
@@ -180,6 +182,7 @@ public class CommissionController {
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
 	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
+	 private List<TDetOffres> listeDetOff = new ArrayList<TDetOffres>();
 	 //private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
@@ -195,6 +198,7 @@ public class CommissionController {
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
 	 //private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
 	 private List<VOffreCandidat> listCandidats = new ArrayList<VOffreCandidat>();
+	 private List<VCritereAnalyseDacOuv> listPiecesOuv = new ArrayList<VCritereAnalyseDacOuv>();
 	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>();
 	 //private List<TDetOffres> listeOffres = new ArrayList<TDetOffres>(); 
 	 //private List<VDetOffreRecevable> listeOffres = new ArrayList<VDetOffreRecevable>(); 
@@ -270,6 +274,7 @@ public class CommissionController {
 	 private VDetOffreRecevable detailOffre = new VDetOffreRecevable();
 	 private TDetOffres offre = new TDetOffres();
 	 private VResultPropAttribLot sltRsult = new VResultPropAttribLot();
+	 private List<VSeqTravail> seqParam = new ArrayList<VSeqTravail>(); 
 	 
 	 private TDetOffres detOffre = new TDetOffres();
 	 //private TDetOffres sltOffre = new TDetOffres(); sltOffre
@@ -288,10 +293,12 @@ public class CommissionController {
 	 private TDetCommissionSeance newDetailSeance = new TDetCommissionSeance();
 	 private VDetCommissionSeance sltMbr = new VDetCommissionSeance();
 	 private VbAnalyseOffre newAnalyseOffre =new VbAnalyseOffre();
+	 private TAnalyseOffre analyseOffre =new TAnalyseOffre();
 	 private VbTempParamAnalyseOff newTempParamAnalyseOff =new VbTempParamAnalyseOff();
 	 private VListeSouOffBasse sltRecharge =new VListeSouOffBasse();
 	 private VbAnalyseOffre sltAnalyse =new VbAnalyseOffre();
 	 private VDetailOffres selectdetOffre = new VDetailOffres();
+	 private VSeqTravail seq = new VSeqTravail();
 
 	 
 	 //Declaration des variables
@@ -635,10 +642,14 @@ public class CommissionController {
 	 
 
 	 
-	//Liste des piecs de l'offre
+	//Liste des pièces de l'offre
 	 public void chargePieces() {
-		 listePiecesOffres = ((List<VPiecesOffre>)iservice.getObjectsByColumn("VPiecesOffre",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
-				 new WhereClause("OPD_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));	
+		 //listePiecesOffres = ((List<VPiecesOffre>)iservice.getObjectsByColumn("VPiecesOffre",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
+				// new WhereClause("OPD_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+		 
+		 listPiecesOuv = ((List<VCritereAnalyseDacOuv>)iservice.getObjectsByColumn("VCritereAnalyseDacOuv",
+				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
 	 }
 	 
 	 //liste des attributaire en affichage
@@ -1517,6 +1528,7 @@ public class CommissionController {
 			 newOffre.setDofLaaId(tlot.getLaaId().toString());
 			 
 			 doftyp();
+			 chargePieces();
 			    //chargeLotsByCandidat();
 		   }
 		//Fin de la Methode OnSelectCandidat
@@ -1525,7 +1537,11 @@ public class CommissionController {
 		public void saveOuverture() {
 				
 			           iservice.updateObject(slctdTd);
-		  
+		
+				    			seqParam = ((List<VSeqTravail>)iservice.getObjectsByColumn("VSeqTravail"));
+					    			if (!seqParam.isEmpty()) {
+					    				seq=seqParam.get(0); 
+					    			  }
 		 			   newOffre.setDofLaaAaoCode(slctdTd.getAaoCode());
 		 			   newOffre.setDofLaaId(tlot.getLaaId().toString());
 					   newOffre.setTempType("OFF");
@@ -1540,26 +1556,41 @@ public class CommissionController {
 					   newOffre.setDofRab(rabais);
 					   newOffre.setDofMtRab(mtRabais);
 					   newOffre.setDofBanCode(banCode);
+					   newOffre.setDofTempNum(seq.getFoSeqTravail());
 					   iservice.addObject(newOffre);
-		 			
-		 			/*
-			 		for(VCritereAnalyseDac ligne : selectionCritereAnalyse) {
-			 			newAnalyseOffre.setAnfDacCode(ligne.getDcadDacCode());
-			 			newAnalyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
-			 			newAnalyseOffre.setAnfObser(sltOffre.getDofObsCom());
-			 			newAnalyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-			 			iservice.addObject(newAnalyseOffre);
-				     }*/
+					   //Récupération du DofNum
+					   listeDetOff = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",
+							    new WhereClause("DOF_TEMP_NUM",Comparateur.EQ,""+newOffre.getTempNum())));
+			    			if (!listDetOffre.isEmpty()) {
+			    				detOffre=listeDetOff.get(0); 
+			    			  }
+			    			_logger.info("listeDetOff size: "+listeDetOff.size());
+			    			_logger.info("dof Num: "+detOffre.getDofNum());
+		 			    
+			    			
+			 		for(VCritereAnalyseDacOuv ligne : listPiecesOuv) {
+			 			analyseOffre.setAnfDacCode(ligne.getDcadDacCode());
+			 			analyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 			analyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
+			 			analyseOffre.setAnfPresence(ligne.getDcadPresence());
+			 			analyseOffre.setAnfDcadCraCle(ligne.getCraCode());
+			 			analyseOffre.setAnfLaaId(ligne.getDcadLaaId());
+			 			analyseOffre.setAnfTypeActeur("AC");
+			 			analyseOffre.setAnfDofNum(detOffre.getDofNum());
+			 			analyseOffre.setAnfDcadNum(ligne.getDcadNum());
+			 			analyseOffre.setAnfValeurConf(ligne.getAnfValeurConf());
+			 			analyseOffre.setAnfNumTrav(seq.getFoSeqTravail());
+			 			iservice.addObject(analyseOffre);
+				     }
 					  //enregister la liste des pièces du dao
-				     
 				    	viderPartiel();
 				    	chargeOffres();
 				    	chargeCandidats();
+				    	listPiecesOuv.clear();
 				    	userController.setTexteMsg("Ouverture effectuée avec succès !");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 		    }	
-		
 		//Fin de la methode SaveOuverture()
 		
 		//debut suppression detail offre
@@ -2140,9 +2171,10 @@ public class CommissionController {
 				case "com6":
 					chargeLots();
 					chargeOffres();
-					chargePieces();
+					//chargePieces();
 					chargeCandidats();
 					//chargeLotsCandidat();
+					listPiecesOuv.clear();
 					break;
 				case "com7":
 					chargeLots();
@@ -3669,6 +3701,46 @@ public class CommissionController {
 
 	public void setNatjus(String natjus) {
 		this.natjus = natjus;
+	}
+
+	public List<TDetOffres> getListeDetOff() {
+		return listeDetOff;
+	}
+
+	public void setListeDetOff(List<TDetOffres> listeDetOff) {
+		this.listeDetOff = listeDetOff;
+	}
+
+	public List<VCritereAnalyseDacOuv> getListPiecesOuv() {
+		return listPiecesOuv;
+	}
+
+	public void setListPiecesOuv(List<VCritereAnalyseDacOuv> listPiecesOuv) {
+		this.listPiecesOuv = listPiecesOuv;
+	}
+
+	public TAnalyseOffre getAnalyseOffre() {
+		return analyseOffre;
+	}
+
+	public void setAnalyseOffre(TAnalyseOffre analyseOffre) {
+		this.analyseOffre = analyseOffre;
+	}
+
+	public List<VSeqTravail> getSeqParam() {
+		return seqParam;
+	}
+
+	public void setSeqParam(List<VSeqTravail> seqParam) {
+		this.seqParam = seqParam;
+	}
+
+	public VSeqTravail getSeq() {
+		return seq;
+	}
+
+	public void setSeq(VSeqTravail seq) {
+		this.seq = seq;
 	}
 
 
