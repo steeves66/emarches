@@ -300,8 +300,8 @@
           
        <div class="col-md-6">
           <div class="form-group">
-                  <label  class="col-sm-3 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
-                  <div class="col-sm-5"> 
+                  <label  class="col-sm-4 control-label">Délai de validité des offres<span style="color:red;"> *</span></label>
+                  <div class="col-sm-4"> 
                   <p:inputText type="text" value="#{daoController.newAvis.aaoDelaiVal}" id= "aaodl" styleClass="form-control">
 				     <p:ajax global="false" listener="#{daoController.controlDealai()}" update="gnl:aaodl" />
 				     </p:inputText>
@@ -309,8 +309,8 @@
            </div>
            
            <div class="form-group">
-                <label class="col-sm-3 control-label">Nbre de Copies de l'offre</label>
-				  <div class="col-sm-5">
+                <label class="col-sm-4 control-label">Nbre de Copies de l'offre</label>
+				  <div class="col-sm-4">
 		          <p:inputText title="Le nombre de copies" type="text" styleClass="form-control" value="#{daoController.dao.dacNbrCopieOff}"  style="width: 100%">
 		          </p:inputText>
                   </div>
@@ -326,9 +326,9 @@
                <h:panelGroup  id="qualif">
                <h:panelGroup  rendered="#{daoController.etatQualif}">
                 <div class="form-group">
-                <h:panelGroup  rendered="#{daoController.qualifLabel1}">  <label class="col-sm-3 control-label">Seuil de qualification<span style="color:red;"> *</span></label></h:panelGroup>
-                <h:panelGroup  rendered="#{daoController.qualifLabel2}">  <label class="col-sm-3 control-label">Précisez le mode<span style="color:red;"> *</span></label></h:panelGroup>
-				  <div class="col-sm-5">
+                <h:panelGroup  rendered="#{daoController.qualifLabel1}">  <label class="col-sm-4 control-label">Seuil de qualification<span style="color:red;"> *</span></label></h:panelGroup>
+                <h:panelGroup  rendered="#{daoController.qualifLabel2}">  <label class="col-sm-4 control-label">Précisez le mode<span style="color:red;"> *</span></label></h:panelGroup>
+				  <div class="col-sm-4">
 		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoPrecisModEval}"   style="width: 100%" />
                   </div>
                 </div>
@@ -336,16 +336,16 @@
                 </h:panelGroup>
             
                <div class="form-group">
-                  <label class="col-sm-3 control-label">Nombre de lot<span style="color:red;"> *</span></label>
-				  <div class="col-sm-5">
+                  <label class="col-sm-4 control-label">Nombre de lot<span style="color:red;"> *</span></label>
+				  <div class="col-sm-4">
 		          <p:inputText title="Le nombre de lot doit etre superieur à 0" type="text" styleClass="form-control" value="#{daoController.newAvis.aaoNbrLot}"  style="width: 100%">
 		          </p:inputText>
                   </div>
                 </div>
                   
                 <div class="form-group">
-                 <label class="col-sm-3 control-label">Coût du DAO<span style="color:red;"> *</span></label>
-				  <div class="col-sm-5">
+                 <label class="col-sm-4 control-label">Coût du DAO<span style="color:red;"> *</span></label>
+				  <div class="col-sm-4">
 		          <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoCoutDac}" id="coutD"  style="width: 100%" >
 		          <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	              <p:ajax event="blur" global="false" process="@this" update="gnl:coutD" />
