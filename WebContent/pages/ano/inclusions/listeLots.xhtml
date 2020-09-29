@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="listeLots" >  
+      <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{anoController.listeLots}" rowKey="#{slctdTb.laaId}"
+               scrollable="true" scrollHeight="400" editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
+                     
+                           <p:column headerText="N°Lot" styleClass="col-sm-1">
+				            <h:commandLink  title="N°Lot" styleClass="col-sm-1">
+                                <span>#{slctdTb.laaNum}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+				      
+				        
+				         <p:column headerText="Objet" styleClass="col-sm-6">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10">
+                            <span>#{slctdTb.laaObjet}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				        <p:column rendered="false" headerText="Avis de la DMP" styleClass="col-sm-1">
+				        <p:cellEditor>
+				         <f:facet name="output">
+                            <h:outputText value="#{slctdTb.laaAno == 'O'?'OUI':'NON'}"/> 
+                            </f:facet>
+                             <f:facet name="input">
+         				       <h:selectOneMenu id="avis" value="#{slctdTb.laaAno}" style="width:100%; color:#0000">
+				                 <f:selectItem itemLabel="Choisir" itemValue="" />
+	                             <f:selectItem itemLabel="OUI" itemValue="O" />
+	                             <f:selectItem itemLabel="NON" itemValue="N" />
+	                           </h:selectOneMenu>
+	                          </f:facet>
+                         </p:cellEditor>
+				        </p:column>			        
+				        
+				        <p:column headerText="Observations DMP" styleClass="col-sm-3">
+				        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' ||userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+				         <p:cellEditor>
+                           <f:facet name="output">
+                           <h:outputText value="#{slctdTb.laaObservationDmp}"/> 
+                           </f:facet>
+                           <f:facet name="input">
+         				      <p:inputTextarea id="obs" rows="3" cols="33" styleClass="form-control" value="#{slctdTb.laaObservationDmp}" style="width: 100%">
+         				      </p:inputTextarea>
+         				     </f:facet>
+                          </p:cellEditor>
+                          </h:panelGroup>
+				          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+				          <h:outputText value="#{slctdTb.laaObservationDmp}"/>
+				          </h:panelGroup>
+	
+				        </p:column>
+			
+				        
+				         <p:column  headerText="Avis DMP" styleClass="col-md-2">
+				         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP'}">
+				         <h:panelGroup rendered="#{slctdTb.laaAno == ' '}">
+                            <p:commandLink action="#{anoController.saveAno('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl:finance"
+				               title="Traitement de l'ANO">  
+                                <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                          
+                           
+                            <p:commandLink action="#{anoController.saveAno('N')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="gnl:finance"
+				               title="Traitement de l'ANO">
+                                <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">NON</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{slctdTb.laaAno == 'OUI'}">  
+                            <p:commandLink action="#{anoController.saveAno(' ')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:finance"
+				               title="Traitement de l'ANO">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                             <h:panelGroup rendered="#{slctdTb.laaAno == 'NON'}">  
+                            <p:commandLink action="#{anoController.saveAno(' ')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:finance"
+				               title="Traitement de l'ANO">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                         </h:panelGroup>
+                         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                          <h:panelGroup rendered="#{slctdTb.laaAno == 'OUI'}">  
+                            <p:commandLink class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" 
+				               title="Avis de la DMP sur le lot">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                             <h:panelGroup rendered="#{slctdTb.laaAno == 'NON'}">  
+                            <p:commandLink class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" title="Avis de la DMP sur le lot">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                         </h:panelGroup>
+		 	        </p:column>
+				        
+				            <p:column rendered="false" headerText="Actions" styleClass="col-md-1">
+                            <p:commandLink oncomplete="PF('anoDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"
+				               title="Traitement de l'ANO">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+		 	        </p:column>
+				        
+
+                        </p:dataTable>  
+    </h:panelGroup>     
+</html>

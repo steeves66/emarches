@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="dialogHisto" >  
+     <h:form id="anoHistoDlg" styleClass="form-horizontal">
+	        <p:dialog  widgetVar="anoHistoDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="">
+	         <div class="row">
+                   <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+             </div>
+	       
+	            
+	            <div class="col-md-12">
+		      
+		             
+			          <div class="box-body">
+			          
+                        <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-8"><div  style="color: #fff; font-weight:bold; font-size: 17px;"><span style="font-weight: bold;">INFORMATIONS SUR LA DEMANDE</span></div></div> 
+			    
+				   <div class="col-md-2">
+					  <p:commandLink rendered="false" oncomplete="PF('chargeDocDlg').show()" title="Joindre le PV d'analyse" action="#{anoController.chargeDossierRapport()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e">
+					  <span class="btn-label"><i class="fa fa-download"></i></span><span class="hidden-xs">Joindre le rapport d'analyse</span>
+					  </p:commandLink>
+				   </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	             <div class="row">                   
+		       
+		  
+                
+                <div class="col-md-12">
+                   <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Informations de la demande</small></legend>	
+                      <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Référence du courrier</b></label>
+	                  <div class="col-sm-5">
+                        <p:inputText type="text" value="#{anoController.sltHistoDem.demRef}" styleClass="form-control" style="width: 100%" readonly="true"/>
+	                  </div>
+	                </div>
+	                
+	                    <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Objet de la demande</b></label>
+	                  <div class="col-sm-9">
+                        <p:inputTextarea value="#{anoController.sltHistoDem.demObjet}" rows="7" cols="33" styleClass="form-control" style="width: 100%" readonly="true">
+                    </p:inputTextarea>
+	                  </div>
+	                </div>
+	                  
+                     <div class="col-sm-12">
+                    
+                    
+                  </div>
+                   </fieldset>
+                   </div>
+                   
+                <div class="col-md-12 align justify-content-center">
+	                <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Liste des documents joints</small></legend>
+	                    <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemande}"
+	                   scrollable="true" scrollHeight="100" emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-8">
+			            <h:outputText value="#{doss.dodLibelle}" />
+			        </p:column>
+			        
+			        <p:column headerText="Nature" styleClass="col-md-3">
+			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}" />
+			        </p:column>
+			        <p:column headerText="Actions" styleClass="col-md-1">
+                            <p:commandLink styleClass="btn btn-xs btn-success" style="background-color: #036d3b;" action="#{anoController.openDossierDem}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+				            </p:commandLink>
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{anoController.removeDossierDem()}" title="Supprimer" update="gnl">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+		                </p:commandLink>
+		 	        </p:column>
+			    </p:dataTable>
+			    </fieldset>
+             
+                   </div>
+                   
+		               
+		                 
+                      </div>   
+                      
+                         
+  
+	            </div>
+	           </div> 
+			          </div>
+		           
+	            </div>
+	            
+	            
+	             <div class="pull-right ">
+			            <p:commandLink rendered="false" action="#{daoController.transmettre()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('anoHistoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update="gnl">
+			            <p:confirm header="Confirmation" message="Confirmez vous la validation ?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-exchange"></i> Valider  
+			            </p:commandLink>
+              </div>
+	        
+      </p:dialog>
+    </h:form> 
+    
+     </h:panelGroup>     
+</html>

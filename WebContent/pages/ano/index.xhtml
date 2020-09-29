@@ -50,7 +50,7 @@
              <div class="row">
             <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
             </div>
-            
+            <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
             <div class="row">  
                   
             <div class="col-md-4">
@@ -98,7 +98,7 @@
 				        		        
 				         <p:column headerText="ACTIONS" styleClass="col-sm-2" >
 				           <!-- BOUTONS APERCU -->
-         				   <p:commandLink  action="#{etatsanoController.renderPage('detc1','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
+         				   <p:commandLink rendered="false" action="#{etatsanoController.renderPage('detc1','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsanoController.slctdTd}" />  
                              </p:commandLink>
@@ -126,6 +126,68 @@
                                 
 				        </p:column>
     </p:dataTable>
+    </h:panelGroup>
+    
+    
+     <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'DMP' || userController.fonction.TTypeFonction.tyfCod == 'SPP'}">
+            <div class="row">  
+                  
+            <div class="col-md-4">
+                <div class="input-group input-group-sm col-md-12">
+                      <p:inputText styleClass="form-control" type="text"  placeholder="saisir le numero de l'avis"></p:inputText> 
+                       <span class="input-group-btn">
+                      <p:commandLink styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":content" />
+                    </span>
+					 </div>
+					 
+            </div>
+            
+            
+            </div>
+            
+					<p:dataTable id="Dem" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{anoController.listeDemande}" emptyMessage="Aucune Demande trouvée" rows="15"
+                         paginator="true" draggableColumns="true"
+                         rowsPerPageTemplate="5,10,15" >
+                         
+                          <p:column headerText="REFERENCE" styleClass="col-sm-1" >
+         				      <h:outputText value="#{slctdTb.demRef}" />
+				        </p:column>	
+				        
+				        <p:column headerText="OBJET" styleClass="col-sm-9" >
+         				     <h:outputText value="#{slctdTb.demObjet}"  />
+				        </p:column>
+				        
+				         <p:column headerText="DATE" styleClass="col-sm-1" >
+         				     <h:outputText value="#{slctdTb.demDteSaisi}">
+         				  <f:convertDateTime pattern="dd/MM/yyyy" />
+         				  </h:outputText>
+
+				        </p:column>	
+				           
+				         <p:column headerText="ACTIONS" styleClass="col-sm-1" >
+				           <!-- BOUTONS APERCU -->
+         				   <p:commandLink rendered="false" action="#{etatsanoController.renderPage('detc1','DETOUV')}" styleClass="btn btn-xs btn-success"  title="Detail" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{etatsanoController.slctdTd}" />  
+                             </p:commandLink>
+                             
+                            
+                             <!--FIN BOUTONS APERCU -->
+                             
+                           <!-- BOUTONS COMMISSION -->
+                           
+
+                             <p:commandLink class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{anoController.renderPage('ano3','TRAIANO')}"
+				               title="Traitement des ANO" update=":content">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.slctdTdDem}" />                             
+                            </p:commandLink>
+                    
+                                
+				        </p:column>
+    </p:dataTable>
+    </h:panelGroup>
+    
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{userController.renderPage('accueil')}"   update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		     </p:commandLink> 

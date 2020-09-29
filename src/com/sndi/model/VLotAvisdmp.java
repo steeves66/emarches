@@ -37,7 +37,9 @@ public class VLotAvisdmp implements java.io.Serializable {
 	private BigDecimal laaNum;
 	private BigDecimal laaCoutLot;
 	private String laaDacCode;
-
+	private String libAno;
+	private String libAo;
+	private String libLotNara;
 	public VLotAvisdmp() {
 	}
 
@@ -50,7 +52,7 @@ public class VLotAvisdmp implements java.io.Serializable {
 	public VLotAvisdmp(BigDecimal laaId, String laaAaoCode, String laaObjet, String laaObservation,
 			BigDecimal laaMtCaut, BigDecimal laaMtEst, String laaAno, String laaObservationDmp, Date laaDteSaisi,
 			String laaStaCode, String laaFonCodSaisi, String laaFonCodCpmp, String laaOpeMatricule, String laaLieuExe,
-			String laaLbgImputation, BigDecimal laaNum, BigDecimal laaCoutLot, String laaDacCode) {
+			String laaLbgImputation, BigDecimal laaNum, BigDecimal laaCoutLot, String laaDacCode,String libAno,String libAo,String libLotNara) {
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
@@ -69,6 +71,9 @@ public class VLotAvisdmp implements java.io.Serializable {
 		this.laaNum = laaNum;
 		this.laaCoutLot = laaCoutLot;
 		this.laaDacCode = laaDacCode;
+		this.libAno = libAno;
+		this.libAo = libAo;
+		this.libLotNara = libLotNara;
 	}
 
 	@Id
@@ -232,6 +237,33 @@ public class VLotAvisdmp implements java.io.Serializable {
 
 	public void setLaaDacCode(String laaDacCode) {
 		this.laaDacCode = laaDacCode;
+	}
+
+	@Column(name = "LIB_ANO")
+	public String getLibAno() {
+		return libAno;
+	}
+
+	public void setLibAno(String libAno) {
+		this.libAno = libAno;
+	}
+
+	@Column(name = "LIB_AO")
+	public String getLibAo() {
+		return libAo;
+	}
+
+	public void setLibAo(String libAo) {
+		this.libAo = libAo;
+	}
+
+	@Column(name = "LIBLOTNARA")
+	public String getLibLotNara() {
+		return libLotNara;
+	}
+
+	public void setLibLotNara(String libLotNara) {
+		this.libLotNara = libLotNara;
 	}
 
 }

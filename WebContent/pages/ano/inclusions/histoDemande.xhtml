@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="histoDemande" >  
+     <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">HISTORIQUE DES DEMANDES D'ANO</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                    
+                 <p:dataTable var="slctdTb"  id="historique" styleClass="table mb0 dt-on-steroids dataTable" value="#{anoController.listeHistoDemandeAno}" 
+               scrollable="true" scrollHeight="180"  emptyMessage="Aucun Lot enregistré">
+                     
+                           <p:column headerText="REFERENCE" styleClass="col-sm-2">
+				            <h:commandLink  title="Références de la demande" styleClass="col-sm-1">
+                                <span>#{slctdTb.demRef}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+				      
+				        
+				         <p:column headerText="OBJET" styleClass="col-sm-7">
+				           <h:commandLink  title="Objet de la demande" styleClass="col-sm-10">
+                            <span>#{slctdTb.demObjet}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				        <p:column headerText="DATE" styleClass="col-sm-2">
+                            <h:outputText value="#{slctdTb.demDteSaisi}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+			                  </h:outputText>
+				        </p:column>
+				          <p:column headerText="Actions" styleClass="col-md-1">				            
+				            <p:commandLink action="#{anoController.chargeDossierHistoDem()}" oncomplete="PF('anoHistoDlg').show()" class="btn btn-xs btn-success" style="background-color: #036d3b;" update=":anoHistoDlg"
+				               title="Traitement de l'ANO">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>  
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltHistoDem}" />                              
+                            </p:commandLink>
+		 	        </p:column>
+				        
+				        
+
+                        </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 
+                 
+                 
+    
+     </h:panelGroup>     
+</html>

@@ -41,6 +41,7 @@ import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailVente;
 import com.sndi.model.TDossierAao;
 import com.sndi.model.TDossierDacs;
+import com.sndi.model.TDossierDemande;
 import com.sndi.model.TDossierMbr;
 import com.sndi.model.TDossierPlanGeneral;
 import com.sndi.model.TFinancementPgpm;
@@ -65,6 +66,7 @@ import com.sndi.model.TVenteDac;
 import com.sndi.model.VAgpmliste;
 import com.sndi.model.VAvisAppelOffre;
 import com.sndi.model.VAvisAppelOffreAno;
+import com.sndi.model.VAvisAppelOffreAnodmp;
 import com.sndi.model.VCandidatDac;
 import com.sndi.model.VCommissionTypeExp;
 import com.sndi.model.VCompoCommission;
@@ -154,25 +156,37 @@ public class AnoController {
 	 ConstantService constantService;
 	 private long laaNum;
 	 private String docNature ="";
-	 
+	 private long demNum;
+	 private String docNatureDem ="";
+	 private String docNatureDemDmp ="";
 	 
 	 
 	 //liste
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffre = new ArrayList<VAvisAppelOffreAno>();
+	 private List<VAvisAppelOffreAnodmp> listeDemande = new ArrayList<VAvisAppelOffreAnodmp>();
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
 	 private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
 	 private List<VLotAvisdmp> listeLots = new ArrayList<VLotAvisdmp>();
 	 private List<VHistoDemandeAno> listeHistoDemandeAno = new ArrayList<VHistoDemandeAno>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierAao> dossListe = new ArrayList<TDossierAao>();
+	 private List<TDossierDemande> dossListeDemande = new ArrayList<TDossierDemande>();
+	 private List<TDossierDemande> dossListeDemandeDmp = new ArrayList<TDossierDemande>();
+	 private List<TDossierDemande> dossListeDemandeAc = new ArrayList<TDossierDemande>();
+	 //private List<TDemande> listeDemande = new ArrayList<TDemande>();
 	 
 	 //Objet
 	 private VAvisAppelOffreAno slctdTd = new VAvisAppelOffreAno();
+	 private VAvisAppelOffreAnodmp slctdTdDem = new VAvisAppelOffreAnodmp();
 	 private VbTempParamAvis newTempAvis = new VbTempParamAvis();
 	 private TDemande newDem = new TDemande();
+	 private VLotAvisdmp infolot = new VLotAvisdmp();
+
+	 private TDemande demande = new TDemande();
 	 private TAvisAppelOffre newAvis = new TAvisAppelOffre();
 	 private VLotAvisdmp sltLot = new VLotAvisdmp();
 	 private TDossierAao selectedDossier = new TDossierAao();
+	 private TDossierDemande selectedDossierDem = new TDossierDemande();
 	 private VHistoDemandeAno sltHistoDem = new VHistoDemandeAno();
 	 private boolean btn_Oui;
 	 private boolean btn_non;
@@ -184,6 +198,17 @@ public class AnoController {
 	 }		
 	
 	 
+	 public void saveDemande() {
+		 newDem.setDemAaoCode(slctdTd.getAaoCode());
+		 iservice.addObject(newDem);
+		 
+	 }
+	 
+	 public void chargeDemandeDmp() {
+		 listeDemande = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp");
+		_logger.info("listeDemande size: "+listeDemande.size()
+		);	
+	 }
 	 public void envoiDemande() throws IOException {
 		 newTempAvis.setAaoDacCode(slctdTd.getAaoDacCode());
 		 newTempAvis.setAaoStatut(slctdTd.getAaoStatut());
@@ -204,7 +229,7 @@ public class AnoController {
 		 newDem.setDemFonCodePf(userController.getSlctd().getTFonction().getFonCodePf());
 		 newDem.setDemFonCodeDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
 		 newDem.setTTypeDemande(new TTypeDemande("ANO"));
-		 iservice.addObject(newDem);
+		 iservice.updateObject(newDem);
 		 
 		 TDetailDemandes demDet = new TDetailDemandes();
 			demDet.setTDemande(newDem);
@@ -229,7 +254,7 @@ public class AnoController {
 	 }
 	 
 	 public void validationAnoDMP() throws IOException {
-			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
 			TAvisAppelOffre avis = new TAvisAppelOffre();
 			if(!LS.isEmpty()) avis = LS.get(0);
 			avis.setTStatut(new TStatut("JUG"));
@@ -266,11 +291,7 @@ public class AnoController {
 					      }else 
 					    	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") || 
 					    			  userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
-					    		  
-					    		  listeAvisAppelOffre = (List<VAvisAppelOffreAno>) iservice.getObjectsByColumnDesc("VAvisAppelOffreAno", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
-									         new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut),
-									         new WhereClause(""+colonneAno,WhereClause.Comparateur.EQ,"O"));
-									_logger.info("listeAppelOffre size: "+listeAvisAppelOffre.size());	
+					    		  chargeDemandeDmp();
 					      }
 	      }
 	 
@@ -282,17 +303,35 @@ public class AnoController {
 		_logger.info("listeLots size: "+listeLots.size());
 	 }
 	 
+	 public void chargeLotDmp() {
+		 listeLots.clear();
+		 listeLots=(List<VLotAvisdmp>) iservice.getObjectsByColumn("VLotAvisdmp", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+				new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTdDem.getAaoCode()));
+		_logger.info("listeLots size: "+listeLots.size());
+	 }
+	 
 	/* public void chargeNatureDocData() {
 		 natureDocListe.clear();
 			natureDocListe=(List<VNatureDocAno>) iservice.getObjectsByColumn("VNatureDocAno");
 		}
 	 */
 	 
+	 //Pour Traiement ANO DPM
 	 public void chargeNatureDocData() {
 		  natureDocListe.clear();
-			natureDocListe = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadLibelle")),
-				    new WhereClause("NAD_TYPE",Comparateur.EQ,"ANO")));
+			natureDocListe = (List<TNatureDocuments>) iservice.getObjectsByColumnIn("TNatureDocuments", new ArrayList<String>(Arrays.asList("nadLibelle")),
+					"NAD_CODE", new ArrayList<String>(Arrays.asList("18","16")),
+					new WhereClause("NAD_TYPE",Comparateur.EQ,"ANO"));
 		 }
+	 
+	 //Pour demade d'ANO AC
+	 public void chargeNatureDocDem() {
+		 natureDocListe.clear();
+			natureDocListe = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadCode")),
+					new WhereClause("NAD_CODE",Comparateur.NEQ,"18"),
+					new WhereClause("NAD_TYPE",Comparateur.EQ,"ANO")));
+		 }
+	 
 	 //Avec boite de dialogue
 	/* public void saveAno() {
 		List<TLotAao> LS  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
@@ -317,7 +356,8 @@ public class AnoController {
 				lot.setLaaAno(""+avis);
 				lot.setLaaObservationDmp(sltLot.getLaaObservationDmp());
 			    iservice.updateObject(lot);
-			    chargeLot();
+			    chargeLotDmp();
+			    recupResultatLot();
 			    /*userController.setTexteMsg("ANO du lot "+sltLot.getLaaObjet()+" validé avec succès !");
 		        userController.setRenderMsg(true);
 		        userController.setSevrityMsg("success");*/
@@ -391,10 +431,7 @@ public class AnoController {
 			
 			int nat = Integer.valueOf(docNature);
 			//check le dossier s'il existe Ã  faire
-			//TDossierDacs dos =new TDossierDacs(); //TDossiersDacs
-			//dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
-			//dos.setDaaReference(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-"));
-			
+
 			dos.setDaaAaoCode(newAvis.getAaoCode());
 			dos.setDaaNom(fileUploadController.getFileName());
 			dos.setDaaDteSaisi(Calendar.getInstance().getTime());
@@ -438,70 +475,171 @@ public class AnoController {
 		    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDaaNom()+" supprimé avec succès", "");
 			FacesContext.getCurrentInstance().addMessage(null, msg);	
 		}
-	/* @Transactional
-	 public void upload(FileUploadEvent event) throws java.io.FileNotFoundException{
-	      
-		 if((docNature == null || "".equals(docNature))){
-			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
- 			FacesContext.getCurrentInstance().addMessage(null, msg);	
+	    
+	    //Pour la demande
+	    @Transactional
+		public void uploadDossDem(FileUploadEvent event) throws java.io.FileNotFoundException { 
+	    	_logger.info("dem num: "+newDem.getDemNum());
+		 //condition de chargement d'un document : Nature sï¿½lectionnï¿½e 
+		 if((docNatureDem == null || "".equals(docNatureDem))){
+			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non séléctionnéé pour le chargement! ","");
+			FacesContext.getCurrentInstance().addMessage(null, msg);	
 			 
 			 }else {
 		
-				 if(fileUploadController.handleFileUpload(event,slctdTd.getAaoCode(), docNature)) {
+		if(fileUploadController.handleFileUpload(event, ""+newDem.getDemNum(), docNatureDem)) {
+			TDossierDemande dos =new TDossierDemande();
+		/*	listeDemande = (List<TDemande>) iservice.getObjectsByColumn("TDemande",
+					new WhereClause("DEM_NUM",WhereClause.Comparateur.EQ,""+newDem.getDemNum()));
+				if (!listeDemande.isEmpty()) {
+					demande= listeDemande.get(0);
+	   	                 }*/
+			
+			int nat = Integer.valueOf(docNatureDem);
+			//check le dossier s'il existe Ã  faire
 
-						//int nat = Integer.valueOf(docNature);
-						
-						Short natureDoc = Short.valueOf(docNature);
-						//check le dossier s'il existe à faire
-						TDossierAao dos =new TDossierAao(); //TNatureDocuments
-						//dos.setDosCode(keyGen.getCodeDossierArchi(fileUploadController.getFileCode()+"-"));
-						dos.setDaaAaoCode(slctdTd.getAaoCode());
-						List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
-						TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
-						if(!LS.isEmpty()) natureDoc = LS.get(0);
-						dos.setTNatureDocuments(new TNatureDocuments(natureDoc));
-						dos.setDaaDteSaisi(Calendar.getInstance().getTime());
-						dos.setDaaNom(fileUploadController.getFileName());
-						dos.setDaaLibelle(fileUploadController.getDocNom());
-						 iservice.addObject(dos);
-						 
-						 
-							int nat = Integer.valueOf(docNature);
-							//check le dossier s'il existe Ã  faire
-							TDossierAao dos =new TDossierAao(); //TDossiersDacs
-							//dos.setDdaCommentaire(keyGen.getCodeDossier(fileUploadController.getFileCode()+"-")); 
-							dos.setDaaAaoCode(slctdTd.getAaoCode());
-							List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
-							TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
-							if(!LS.isEmpty()) natureDoc = LS.get(0);
-							dos.setTNatureDocuments(natureDoc);
-							dos.setDaaNom(fileUploadController.getFileName());
-							dos.setDaaDteSaisi(Calendar.getInstance().getTime());
-							dos.setDaaReference(fileUploadController.getDocNom());
-							iservice.addObject(dos);
-							
-						 chargeNatureDocData();
-						
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Document enregistré!", "");
-						FacesContext.getCurrentInstance().addMessage(null, msg);
-					  // chargeDossier();
+			dos.setTDemande(new TDemande(newDem.getDemNum()));
+			dos.setDodLibelle(fileUploadController.getDocNom());
+			dos.setDodReference(fileUploadController.getFileName());
+			dos.setDodDteSaisi(Calendar.getInstance().getTime());
+			dos.setDodType("DEM");
+			List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+			TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+			if(!LS.isEmpty()) natureDoc = LS.get(0);
+			dos.setTNatureDocuments(natureDoc);
+			dos.setDodCode(keyGen.getCodeDossierDem(fileUploadController.getFileCode()+"-"+natureDoc.getNadAbrege()+"-"));
+			iservice.addObject(dos);
+			chargeDossierDemande();
+
+			
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectuée avec succès!", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			chargeDossierDemande();
+			}else {
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã  nouveau un document ! ","");
+				FacesContext.getCurrentInstance().addMessage(null, msg);	
 				
-					   
-					}//fin de la copie et de l'enregistrement
-					else {
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à nouveau un document ! ","");
-						FacesContext.getCurrentInstance().addMessage(null, msg);	
-					}
-				}
-	 			
-	 }*/
+			}
+		  }
+		}
+    //Fin Upload
+	    
+	  //Pour la demande DMP
+	    @Transactional
+		public void uploadDossDemDmp(FileUploadEvent event) throws java.io.FileNotFoundException { 
+		 //condition de chargement d'un document : Nature sï¿½lectionnï¿½e 
+		 if((docNatureDemDmp == null || "".equals(docNatureDemDmp))){
+			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non séléctionnéé pour le chargement! ","");
+			FacesContext.getCurrentInstance().addMessage(null, msg);	
+			 
+			 }else {
+		
+		if(fileUploadController.handleFileUpload(event, ""+slctdTdDem.getDemNum(), docNatureDemDmp)) {
+			TDossierDemande dos =new TDossierDemande();
+		/*	listeDemande = (List<TDemande>) iservice.getObjectsByColumn("TDemande",
+					new WhereClause("DEM_NUM",WhereClause.Comparateur.EQ,""+newDem.getDemNum()));
+				if (!listeDemande.isEmpty()) {
+					demande= listeDemande.get(0);
+	   	                 }*/
+			
+			int nat = Integer.valueOf(docNatureDemDmp);
+			//check le dossier s'il existe Ã  faire
+
+			dos.setTDemande(new TDemande(slctdTdDem.getDemNum()));
+			dos.setDodLibelle(fileUploadController.getDocNom());
+			dos.setDodReference(fileUploadController.getFileName());
+			dos.setDodDteSaisi(Calendar.getInstance().getTime());
+			dos.setDodType("REP");
+			List<TNatureDocuments> LS  = iservice.getObjectsByColumn("TNatureDocuments", new WhereClause("NAD_CODE",Comparateur.EQ,""+nat));
+			TNatureDocuments natureDoc = new TNatureDocuments((short)nat);
+			if(!LS.isEmpty()) natureDoc = LS.get(0);
+			dos.setTNatureDocuments(natureDoc);
+			dos.setDodCode(keyGen.getCodeDossierDem(fileUploadController.getFileCode()+"-"+natureDoc.getNadAbrege()+"-"));
+			iservice.addObject(dos);
+			chargeDossierDemandeDmp();
+			
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectuée avec succès!", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			chargeDossierDemandeDmp();
+			}else {
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã  nouveau un document ! ","");
+				FacesContext.getCurrentInstance().addMessage(null, msg);	
+				
+			}
+		  }
+		}
+    //Fin Upload
 	
+	    
+	    public void chargeDossierDemande() {
+	    	/*if(newDem.getDemNum()==null) {
+	    		demNum = 0;
+	    	}else {
+	    		demNum=newDem.getDemNum().longValue();
+	    	}
+	    	*/
+	    	dossListeDemande.clear();
+	    	dossListeDemande = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
+	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+newDem.getDemNum())));			
+	 	 } 
+	    
+	    public void chargeDossierDemandeDmp() {
+	    	dossListeDemandeDmp.clear();
+	    	dossListeDemandeDmp = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
+	    			     new WhereClause("DOD_TYPE",Comparateur.EQ,"REP"),
+	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum())));			
+	 	 } 
+	    public void chargeDossierDemandeDmpAc() {
+	    	dossListeDemandeAc.clear();
+	    	dossListeDemandeAc = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
+	    			     new WhereClause("DOD_TYPE",Comparateur.EQ,"DEM"),
+	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum())));			
+	 	 } 
+	    
+	    
+	    public void chargeDossierHistoDem() {
+	    	dossListeDemande.clear();
+	    	dossListeDemande = ((List<TDossierDemande>)iservice.getObjectsByColumn("TDossierDemande",new ArrayList<String>(Arrays.asList("DOD_ID")),
+	 					 new WhereClause("DOD_DEM_NUM",Comparateur.EQ,""+sltHistoDem.getDemNum())));			
+	 	 } 
+	 
+	    public void openDossierDem() throws IOException{
+   		 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossierDem.getDodReference(), selectedDossierDem.getDodReference());
+   		   }
+	  
+	    //Supprimer un dao joint
+	    public void removeDossierDem(){
+		downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossierDem.getDodReference(), selectedDossierDem.getDodReference());
+			 iservice.deleteObject(selectedDossierDem);
+			 chargeDossierHistoDem();	
+			 
+		    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDaaNom()+" supprimé avec succès", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);	
+		}
+	    
+	    //Supprimer un dao joint
+	    public void removeDossierDemDmp(){
+		downloadFileServlet.deleteFileOnFolder(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DESTINATION+selectedDossierDem.getDodReference(), selectedDossierDem.getDodReference());
+			 iservice.deleteObject(selectedDossierDem);
+			 chargeDossierDemandeDmp();	
+			 
+		    FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,"Document "+selectedDossier.getDaaNom()+" supprimé avec succès", "");
+			FacesContext.getCurrentInstance().addMessage(null, msg);	
+		}
 	 
 	//Methode de récupération de t_pgpm dans t_affichage
 	 public void recupInfosDemande() {
 	    			List<TDemande> LS  = iservice.getObjectsByColumn("TDemande", new WhereClause("DEM_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
 	    			if(!LS.isEmpty()) newDem = LS.get(0);
-	    			//demande.getDemObjet();
+	    			
+	 }
+	 
+		//Methode de récupération de t_pgpm dans t_affichage
+	 public void recupResultatLot() {
+		 _logger.info("AAO: "+slctdTdDem.getAaoCode());
+	    			List<VLotAvisdmp> LS  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
+	    			if(!LS.isEmpty()) infolot = LS.get(0);
+	    			
 	 }
 	 
 		 
@@ -547,16 +685,22 @@ public class AnoController {
 					break;
 				case "ano2":
 					chargeLot();
-					chargeNatureDocData();
+					chargeNatureDocDem();
+					chargeDemande();
+					saveDemande();
+					docNatureDem ="12";
+					
 				break;
 				case "ano3":
-					docNature ="12";
-					chargeLot();
-					recupInfosDemande();
-					btnAction();
+					docNatureDemDmp ="18";
+					chargeLotDmp();
+					//recupInfosDemande();
+					//btnAction();
 					chargeDemande();
 					chargeNatureDocData();
-					chargeDossier();
+					chargeDossierDemandeDmp();
+					chargeDossierDemandeDmpAc();
+					recupResultatLot();
 				break;
 				case "ano4":
 	
@@ -771,6 +915,116 @@ public class AnoController {
 
 	public void setSelectedDossier(TDossierAao selectedDossier) {
 		this.selectedDossier = selectedDossier;
+	}
+
+
+	public String getDocNatureDem() {
+		return docNatureDem;
+	}
+
+
+	public void setDocNatureDem(String docNatureDem) {
+		this.docNatureDem = docNatureDem;
+	}
+
+
+	public List<VAvisAppelOffreAnodmp> getListeDemande() {
+		return listeDemande;
+	}
+
+
+	public void setListeDemande(List<VAvisAppelOffreAnodmp> listeDemande) {
+		this.listeDemande = listeDemande;
+	}
+
+
+	public TDemande getDemande() {
+		return demande;
+	}
+
+
+	public void setDemande(TDemande demande) {
+		this.demande = demande;
+	}
+
+
+	public List<TDossierDemande> getDossListeDemande() {
+		return dossListeDemande;
+	}
+
+
+	public void setDossListeDemande(List<TDossierDemande> dossListeDemande) {
+		this.dossListeDemande = dossListeDemande;
+	}
+
+
+	public TDossierDemande getSelectedDossierDem() {
+		return selectedDossierDem;
+	}
+
+
+	public void setSelectedDossierDem(TDossierDemande selectedDossierDem) {
+		this.selectedDossierDem = selectedDossierDem;
+	}
+
+
+	public long getDemNum() {
+		return demNum;
+	}
+
+
+	public void setDemNum(long demNum) {
+		this.demNum = demNum;
+	}
+
+
+	public VAvisAppelOffreAnodmp getSlctdTdDem() {
+		return slctdTdDem;
+	}
+
+
+	public void setSlctdTdDem(VAvisAppelOffreAnodmp slctdTdDem) {
+		this.slctdTdDem = slctdTdDem;
+	}
+
+
+	public String getDocNatureDemDmp() {
+		return docNatureDemDmp;
+	}
+
+
+	public void setDocNatureDemDmp(String docNatureDemDmp) {
+		this.docNatureDemDmp = docNatureDemDmp;
+	}
+
+
+	public List<TDossierDemande> getDossListeDemandeDmp() {
+		return dossListeDemandeDmp;
+	}
+
+
+	public void setDossListeDemandeDmp(List<TDossierDemande> dossListeDemandeDmp) {
+		this.dossListeDemandeDmp = dossListeDemandeDmp;
+	}
+
+
+	public List<TDossierDemande> getDossListeDemandeAc() {
+		return dossListeDemandeAc;
+	}
+
+
+	public void setDossListeDemandeAc(List<TDossierDemande> dossListeDemandeAc) {
+		this.dossListeDemandeAc = dossListeDemandeAc;
+	}
+
+
+	public VLotAvisdmp getInfolot() {
+		return infolot;
+	}
+
+
+	public void setInfolot(VLotAvisdmp infolot) {
+		this.infolot = infolot;
 	}
 
 	
