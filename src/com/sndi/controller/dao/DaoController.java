@@ -2963,33 +2963,7 @@ public class DaoController {
 				            	          		      newAvis.setFonCodAc(userController.getSlctd().getTFonction().getFonCod());
 				            	          		      iservice.addObject(newAvis); 
 				            	          		      
-				            	          		      //Prise en compte des marges de préférences
-				            	          		      for(VMargeDePreference ligne : listeMarge) {
-				            	          		    	listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
-						            	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-						            	     				       if (!listDao.isEmpty()) {
-						            	     					    newDao= listDao.get(0);
-						            	     				       if(ligne.getOrdre().equalsIgnoreCase("1")) {
-							            	     				    	 newDao.setDacMargePrefSou(ligne.getMargePrefSou());
-							            	     				    	 newDao.setDacMargePrefSouVal(ligne.getTauxMargePref());
-							            	     				    	 iservice.updateObject(newDao);
-							            	     				       }else {
-							            	     				    	   if(ligne.getOrdre().equalsIgnoreCase("2")) {
-							            	     				    		  newDao.setDacMargePrefCom(ligne.getMargePrefSou());
-							            	     				    		  newDao.setDacMargePrefComVal(ligne.getTauxMargePref());
-							            	     				    		  iservice.updateObject(newDao);
-							            	     				    	   }else {
-							            	     
-							            	     				    		  if(ligne.getOrdre().equalsIgnoreCase("3")) {
-								            	     				    		  newDao.setDacMargePrefArt(ligne.getMargePrefSou());
-								            	     				    		  newDao.setDacMargePrefArtVal(ligne.getTauxMargePref());
-								            	     				    		  iservice.updateObject(newDao);
-								            	     				    	   }
-							            	     				    	   }
-							            	     				       }
-						            	     			            //iservice.updateObject(newDao); 
-						            	     	   	                 }
-						            			 		    }
+				            	          		     
 				            	          		   
 				            	          		   
 				            	          		   listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),

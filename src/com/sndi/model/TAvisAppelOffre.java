@@ -75,14 +75,8 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private String avisRetour;
 	private String aaoArtComSpec;
 	private String aaoMessCritLotExist;
-	private Long aaoStatut;
+	private String aaoStatut;
 	private String aaoOffAnormal;
-	private String aaoMargePrefCom;
-	private String aaoMargePrefSou;
-	private String aaoMargePrefArt;
-	private BigDecimal aaoMargePrefComVal;
-	private BigDecimal aaoMargePrefSouVal;
-	private BigDecimal aaoMargePrefArtVal;
 	private Set<TDetailAvis> TDetailAvises = new HashSet<TDetailAvis>(0);
 	private Set<TLotAao> TLotAaos = new HashSet<TLotAao>(0);
 	private Set<TCommissionSpecifique> TCommissionSpecifiques = new HashSet<TCommissionSpecifique>(0);
@@ -103,8 +97,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 			String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval, Date aaoDteValAc, Date aaoDteValCpmp, Short aaoNbrOff, Short aaoNbrOffAccpet, Short aaoNbrOffRej, Short aaoNbrOffHorDelai,
 			String aaoHeurFinOuv, String aaoLieuOuvPrecis, String aaoObsOuv, Date aaoDteFinOuv,String aaoArtComSpec,
 			Date aaoDteValDmp, Set<TDetailAvis> TDetailAvises,Date aaoDteOuv, String aooHeurOuv,String avisRetour, String aaoMessCritLotExist,
-			String aaoMargePrefCom, String aaoMargePrefSou, String aaoMargePrefArt, BigDecimal aaoMargePrefComVal,
-			BigDecimal aaoMargePrefSouVal, BigDecimal aaoMargePrefArtVal,Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques, Long aaoStatut, String aaoOffAnormal) {
+			Set<TLotAao> TLotAaos,Set<TCommissionSpecifique> TCommissionSpecifiques, String aaoStatut, String aaoOffAnormal) {
 		this.aaoCode = aaoCode;
 		this.fonCodAc = fonCodAc;
 		this.fonCodCpmp = fonCodCpmp;
@@ -161,12 +154,6 @@ public class TAvisAppelOffre implements java.io.Serializable {
 		this.TCommissionSpecifiques = TCommissionSpecifiques;
 		this.aaoStatut = aaoStatut;
 		this.aaoOffAnormal = aaoOffAnormal;
-		this.aaoMargePrefCom = aaoMargePrefCom;
-		this.aaoMargePrefSou = aaoMargePrefSou;
-		this.aaoMargePrefArt = aaoMargePrefArt;
-		this.aaoMargePrefComVal = aaoMargePrefComVal;
-		this.aaoMargePrefSouVal = aaoMargePrefSouVal;
-		this.aaoMargePrefArtVal = aaoMargePrefArtVal;
 	}
 
 	@Id
@@ -677,11 +664,11 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	}
 
 	@Column(name = "AAO_STATUT")
-	public  Long getAaoStatut() {
+	public  String getAaoStatut() {
 		return aaoStatut;
 	}
 
-	public void setAaoStatut( Long aaoStatut) {
+	public void setAaoStatut( String aaoStatut) {
 		this.aaoStatut = aaoStatut;
 	}
 
@@ -692,60 +679,6 @@ public class TAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoOffAnormal(String aaoOffAnormal) {
 		this.aaoOffAnormal = aaoOffAnormal;
-	}
-	
-	@Column(name = "AAO_MARGE_PREF_COM", length = 1)
-	public String getAaoMargePrefCom() {
-		return this.aaoMargePrefCom;
-	}
-
-	public void setAaoMargePrefCom(String aaoMargePrefCom) {
-		this.aaoMargePrefCom = aaoMargePrefCom;
-	}
-
-	@Column(name = "AAO_MARGE_PREF_SOU", length = 1)
-	public String getAaoMargePrefSou() {
-		return this.aaoMargePrefSou;
-	}
-
-	public void setAaoMargePrefSou(String aaoMargePrefSou) {
-		this.aaoMargePrefSou = aaoMargePrefSou;
-	}
-
-	@Column(name = "AAO_MARGE_PREF_ART", length = 1)
-	public String getAaoMargePrefArt() {
-		return this.aaoMargePrefArt;
-	}
-
-	public void setAaoMargePrefArt(String aaoMargePrefArt) {
-		this.aaoMargePrefArt = aaoMargePrefArt;
-	}
-
-	@Column(name = "AAO_MARGE_PREF_COM_VAL", precision = 22, scale = 0)
-	public BigDecimal getAaoMargePrefComVal() {
-		return this.aaoMargePrefComVal;
-	}
-
-	public void setAaoMargePrefComVal(BigDecimal aaoMargePrefComVal) {
-		this.aaoMargePrefComVal = aaoMargePrefComVal;
-	}
-
-	@Column(name = "AAO_MARGE_PREF_SOU_VAL", precision = 22, scale = 0)
-	public BigDecimal getAaoMargePrefSouVal() {
-		return this.aaoMargePrefSouVal;
-	}
-
-	public void setAaoMargePrefSouVal(BigDecimal aaoMargePrefSouVal) {
-		this.aaoMargePrefSouVal = aaoMargePrefSouVal;
-	}
-
-	@Column(name = "AAO_MARGE_PREF_ART_VAL", precision = 22, scale = 0)
-	public BigDecimal getAaoMargePrefArtVal() {
-		return this.aaoMargePrefArtVal;
-	}
-
-	public void setAaoMargePrefArtVal(BigDecimal aaoMargePrefArtVal) {
-		this.aaoMargePrefArtVal = aaoMargePrefArtVal;
 	}
 
 }
