@@ -414,7 +414,7 @@
 		                </f:facet>
 		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fipMontantCfa}" style="width:100%">
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
-		               <p:ajax event="blur" update=":gnl:MontTot" listener="#{ppmController.coutOperation()}" />
+		               <p:ajax event="blur" process="@this" global="false" update="modelInput" /> 
 		                 </p:inputText></f:facet>
 		               </p:cellEditor>
 				        </p:column>
@@ -428,7 +428,7 @@
 		                </f:facet>
 		                <f:facet name="input"> <p:inputText id="modelInput1" value="#{slctdTb.fipTresor}" style="width:100%">
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
-		               <p:ajax event="blur" update=":gnl:MontTot" listener="#{ppmController.coutOperation()}" />
+		                <p:ajax event="blur" process="@this" global="false" update="modelInput1" /> 
 		                 </p:inputText></f:facet>
 		               </p:cellEditor>
 				        </p:column>
@@ -436,16 +436,7 @@
                  
         </div>
         
-      <!--  <div class="col-md-12">
-        <div class="form-group">
-                  <label for="MontTot" class="col-sm-9 control-label">Montant prévisionnel de l'operation</label>
-                  <div class="col-sm-3">
-                    <p:inputText  type="text" value="#{ppmController.totalMontant}" styleClass="form-control" id="MontTot"  readonly="true">
-                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
-                    </p:inputText>
-                  </div>
-                </div>
-           </div> -->
+   
              </div>
              </div>
 	</p:tab>

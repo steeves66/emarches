@@ -2550,6 +2550,9 @@ public class PpmController {
 
 				 	  		 //Historisation
 				    		 historiser("S1S",detailPass,"PPM enregistré par le AC");
+				    		//Préparation du Tableau de Bord
+  	 		      			 tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
+
 				 		     recupDateGenere();
 				 			chargeData(typePlan);
 				 			boutonEdit =true; 
@@ -2596,6 +2599,9 @@ public class PpmController {
 					    				    }	
 					      	//Historisation
 					    	historiser("S1S",detailPass,"PPM enregistré par le AC");
+					    	//Préparation du Tableau de Bord
+	 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPass.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPass.getDppId());
+                            
 			 			   recupDateGenere();
 			 				chargeData(typePlan);
 			 				boutonEdit =true;
@@ -3276,6 +3282,9 @@ public class PpmController {
 				 			
 				 			    //Insertion de chaque ligne dans T_adep_log avec le statut correspondant
 								historiser(""+statutTrans,passDetail,"Opération transmise à la Cellule de Passation");
+								//Préparation du Tableau de Bord
+	  	 		      			tableauBordController.saveTempTabord(""+statutTrans, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+
 								//tableauBordController.ChargeTbProcedure("PN", "PPM");
 								tableauBordController.chargeDataPpm("PN");
 								tableauBordbAc();
@@ -3444,7 +3453,9 @@ public class PpmController {
 
 				//Insertion de chaque ligne dans T_adep_log avec le statut correspondant
 			     historiser(""+statutUpdate,passDetail,"Opération validée par la DMP");
-			     
+			    //Préparation du Tableau de Bord
+	      		tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+
 			 	if(controleController.type == "PPM") {
 					
 					tableauBordController.chargeDataPpm("PN");
@@ -3507,7 +3518,9 @@ public class PpmController {
 						     }
 					//Historisation de l'opération
 				     historiser(""+statutPub,passDetail,"Opération publiée par la DMP");
-				     
+				     //Préparation du Tableau de Bord
+			      	 tableauBordController.saveTempTabord(""+statutPub, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+
 				 	if(controleController.type == "PPM") {
 						tableauBordController.chargeDataPpm("PN");
 						//chargeData("PN");
@@ -3636,7 +3649,10 @@ public class PpmController {
 						       iservice.updateObject(passDetail);
 			
 							  //Historisation des Plans Généraux
-							     historiser(""+statutUpdate,passDetail,""+getObservation());
+							   historiser(""+statutUpdate,passDetail,""+getObservation());
+							  //Préparation du Tableau de Bord
+						      tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+
 							     tableauBordbAc();
 							     userController.setTexteMsg("Opération retournée avec succès !");
 								 userController.setRenderMsg(true);
@@ -3714,7 +3730,9 @@ public class PpmController {
 								     iservice.addObject(histoPass);*/
 								     
 								     historiser(""+statutUpdate,passDetail,""+histoPpm.getHppMotif());
-								     
+								     //Préparation du Tableau de Bord
+							      	tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+
 								     userController.setTexteMsg("Opération retournée avec succès !");
 									 userController.setRenderMsg(true);
 									 userController.setSevrityMsg("success");
@@ -3785,22 +3803,10 @@ public class PpmController {
 									passDetail.setDppStatutRetour("1");
 							       iservice.updateObject(passDetail);
 
-									 //Insertion de chaque ligne dans T_histo_detail_plan_passation avec le statut correspondant
-										/*List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
-									    TStatut statuts = new TStatut();
-									      if(!LS.isEmpty()) statuts = LS.get(0);
-									  //Historisation des Plans Généraux
-									     THistoPlanPassation histoPass = new THistoPlanPassation();
-									     histoPass.setHppDate(Calendar.getInstance().getTime());
-									     histoPass.setHppMotif(getObservation());
-									     histoPass.setTStatut(statuts);
-									     histoPass.setTDetailPlanPassation(passDetail);
-									     histoPass.setTFonction(userController.getSlctd().getTFonction());
-									     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
-									     iservice.addObject(histoPass);*/
-									     historiser(""+statutUpdate,passDetail,""+getObservation());
-									     
-			                      
+									historiser(""+statutUpdate,passDetail,""+getObservation());
+									//Préparation du Tableau de Bord
+								    tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+  
 				                   //Chargement des listes 
 						           //chargeDataAvaliderPpm();
 						           //chargeDataAvaliderPspm();
@@ -3821,9 +3827,6 @@ public class PpmController {
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
 									 
-									  
-							// FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PSPM a été retourné!", "");
-							// FacesContext.getCurrentInstance().addMessage(null, msg);
 							    }					  	
 				     }
 				 
@@ -3848,7 +3851,6 @@ public class PpmController {
 									passDetail.setDppStatutRetour("1");
 							       iservice.updateObject(passDetail);
 					
-
 			                      listeHisto =(List<THistoPlanPassation>) iservice.getObjectsByColumn("THistoPlanPassation", new ArrayList<String>(Arrays.asList("HPP_ID")),
 											new WhereClause("HPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()),
 											new WhereClause("HPP_STA_CODE",WhereClause.Comparateur.EQ,"S3D"));
@@ -3856,22 +3858,22 @@ public class PpmController {
 									   histoPpm= listeHisto.get(0); 
 								   }
 			                    
-			                      
-
 									 //Insertion de chaque ligne dans T_histo_detail_plan_passation avec le statut correspondant
 										List<TStatut> LS  = iservice.getObjectsByColumn("TStatut", new WhereClause("STA_CODE",Comparateur.EQ,statutUpdate));
 									    TStatut statuts = new TStatut();
 									      if(!LS.isEmpty()) statuts = LS.get(0);
-									  //Historisation des Plans Généraux
-									     THistoPlanPassation histoPass = new THistoPlanPassation();
-									     histoPass.setHppDate(Calendar.getInstance().getTime());
-									     histoPass.setHppMotif(histoPpm.getHppMotif());
-									     histoPass.setTStatut(statuts);
-									     histoPass.setTDetailPlanPassation(passDetail);
-									     histoPass.setTFonction(userController.getSlctd().getTFonction());
-									     histoPass.setTOperateur(userController.getSlctd().getTOperateur());
-									     iservice.addObject(histoPass);
-			                      
+									//Historisation des Plans Généraux
+									THistoPlanPassation histoPass = new THistoPlanPassation();
+									histoPass.setHppDate(Calendar.getInstance().getTime());
+									histoPass.setHppMotif(histoPpm.getHppMotif());
+									histoPass.setTStatut(statuts);
+									histoPass.setTDetailPlanPassation(passDetail);
+									histoPass.setTFonction(userController.getSlctd().getTFonction());
+									histoPass.setTOperateur(userController.getSlctd().getTOperateur());
+									iservice.addObject(histoPass);
+									//Préparation du Tableau de Bord
+								    tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), passDetail.getDppTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+passDetail.getDppId());
+
 				                   //Chargement des listes 
 						           //chargeDataAvaliderPpm();
 						           //chargeDataAvaliderPspm();
@@ -3890,10 +3892,7 @@ public class PpmController {
 			                 userController.setTexteMsg("Opération retournée avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
-									 
-									  
-							 //FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre PSPM a été retourné!", "");
-							 //FacesContext.getCurrentInstance().addMessage(null, msg);
+	
 							    }					  	
 				     }
 			 
@@ -3973,8 +3972,6 @@ public class PpmController {
 		     switch(value) {
 				case "ppm1":
 					chargeData("PN");
-					//tableauBordController.ChargeTbProcedure("PN","PPM");
-					 //chargeDataAvaliderPpm();
 					
 					chargePpmPUB();
 					 vider();
@@ -3983,8 +3980,6 @@ public class PpmController {
 					break;
 				case "ppm2":
 					chargeGestions();
-					//chargeBailleur();
-					//chargeDevise();
 					chargeMarches();
 					chargeModePassation();
 					chargePgpm();

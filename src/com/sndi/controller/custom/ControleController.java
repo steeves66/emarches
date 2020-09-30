@@ -859,6 +859,7 @@ public class ControleController {
 			 //PGSPM
 			 if(action.equalsIgnoreCase("ENGPGSPM")) {
 				   type = "PGSPM";
+				   typePlan ="PS";
 			       libelle1="SAISIE D'UN NOUVEAU PLAN GENERAL SIMPLIFIE DE PASSATION DE MARCHES";
 			       libelleSmall="Procédure Simplifiée";
 			       panelDetail=false;
@@ -878,6 +879,7 @@ public class ControleController {
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPGSPM")) {
 			    		type = "PGSPM";
+			    		typePlan ="PS";
 			    		libelleProcedure="Modification de l'AGPM N°";
 			    		libelle1="Modification";
 			    		panelDetail=false;
@@ -893,6 +895,7 @@ public class ControleController {
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPGSPM")) {
 			    			type = "PGSPM";
+			    			typePlan ="PS";
 			    			libelleProcedure="Index";
 			    			libelle="SAISIE DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";	
 			    			libelle1="PLAN GENERAL SIMPLIFIE DE PASSATIONS DES MARCHES";
@@ -938,6 +941,7 @@ public class ControleController {
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPGSPM")) {
 			    				type = "PGSPM";
+			    				typePlan ="PS";
 			    				libelle="VALIDATION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
 			    				libelle1="TRANSMISSION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
 			    				libelleSmall="Procédure Simplifiée";
@@ -974,6 +978,7 @@ public class ControleController {
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPGSPM")) {
 				    				type = "PGSPM";
+				    				typePlan ="PS";
 				    				libelle="DETAILS DU PLAN GENERAL SIMPLIFIE DE PASSATION DE MARCHES N°";
 				    				panelDetail=true;
 				    				panelForm=false;
@@ -1028,6 +1033,7 @@ public class ControleController {
 					    			}else
 						    			if(action.equalsIgnoreCase("APUPGSPM")) {
 						    				type = "PGSPM";
+						    				typePlan ="PS";
 						    				libelle="DETAILS DU PLAN GENERAL  SIMPLIFIE DE PASSATION DE MARCHES N°";
 						    				libellePgpm ="PUBLICATION DES PLANS GENERAUX SIMPLIFIES DE PASSATION DE MARCHES";
 						    				panelDetail=true;
@@ -1089,11 +1095,13 @@ public class ControleController {
 			 //PPM
 			 if(action.equalsIgnoreCase("ENGPPM")) {
 				 type = "PPM";
+				 typePlan ="PN";
 				 libelleProcedure="SAISIE D'UN NOUVEAU PLAN DE PASSATION DE MARCHES";
-			       libelle1="Liste des AGPM Saisie par l'autorité Contractante";
+			     libelle1="Liste des AGPM Saisie par l'autorité Contractante";
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPPM")) {
 			    		type = "PPM";
+			    		typePlan ="PN";
 			    		libelleSmall="Index";
 			    		libelleProcedure="Modification du PPM N°";
 			    		libelle="Modification du";
@@ -1242,6 +1250,7 @@ public class ControleController {
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPPM")) {
 				    				type = "PPM";
+				    				typePlan ="PN";
 				    				panelDetail=true;
 				    				panelForm=false;
 				   				    panelTraitement=false;
@@ -1598,8 +1607,6 @@ public class ControleController {
 											searchCpmp = true;
 											searchDmp = true;
 							    			}
-			 
-			
 				    			//AMI
 				   			 if(action.equalsIgnoreCase("ENGAMI")) {
 				   				  type = "AMI";
@@ -1618,9 +1625,9 @@ public class ControleController {
 				   			       btn_fermer_saisie_prq = false;                     
 				   			    }else 
 				   			    	if(action.equalsIgnoreCase("MODAMI")) {
-				   			    		type = "AMI";
+				   			    		 type = "AMI";
 										 typePlan ="PN";
-				   			    		libelleDao1="MODIFICATION DE L'AVIS A MANIFESTATION D'INTERET° ";
+				   			    		 libelleDao1="MODIFICATION DE L'AVIS A MANIFESTATION D'INTERET° ";
 				   			    		 libelle1="Saisie d'un nouvel AMI";
 				   			    		 update_fermer_dao=false;
 							    		 update_fermer_ami=true;
@@ -1723,14 +1730,14 @@ public class ControleController {
 				   							 
 				   			    		}else
 				   				    		if(action.equalsIgnoreCase("AMIPS")) {
-				   				    			type = "AMI";
+				   				    			 type = "AMI";
 												 typePlan ="PN";
 												 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   				    			 libelleDao3="SAISIE DES AVIS A MANIFESTATION D'INTERET";
 				   				    			 libellesmall ="";
 				   				    			 btn_new =true;
 				   				    			 btn_affec = false;
-				   				    			panel1 =true;
+				   				    			 panel1 =true;
 												 panel2 =false;
 												 panel3 = false;
 												 panel4 = false;
@@ -1796,9 +1803,9 @@ public class ControleController {
 				   								 
 				   				    		}else
 				   			    			    if(action.equalsIgnoreCase("VALAMI")) {
-				   			    			    	type = "AMI";
-				   								 typePlan ="PN";
-				   								 libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
+				   			    			    type = "AMI";
+				   								typePlan ="PN";
+				   								libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   			    				libelleDao3="VALIDATION DES AVIS A MANIFESTATION D'INTERET";
 				   			    				libelleDao1="TRANSMISSION DES AVIS A MANIFESTATION D'INTERET";
 				   			    				panelDetail=false;
@@ -1809,9 +1816,9 @@ public class ControleController {
 				   			    				btn_retrait = false;
 				   			    				btn_valid = true;
 				   			    				panel1 =true;
-												 panel2 =false;
-												 panel3 = false;
-												 panel4 = false;
+												panel2 =false;
+												panel3 = false;
+												panel4 = false;
 												/* panel4 = false;
 												 panel5 = false;
 												 panel6 = false;
@@ -1868,7 +1875,7 @@ public class ControleController {
 				   			    			}else
 				   				    			if(action.equalsIgnoreCase("APEAMI")) {
 				   				    				type = "AMI";
-				   								 typePlan ="PN";
+				   								    typePlan ="PN";
 				   				    				libelleDao3="DETAILS DE L'";
 				   				    				etat_dao =false;
 								    				etat_prq =false;
@@ -1892,7 +1899,7 @@ public class ControleController {
 				   									fermerApercuPrq = false;
 				   				    			}else 
 				    								   if(action.equalsIgnoreCase("AMICSV")) {
-				    									    typePlan ="PN";
+				    									     typePlan ="PN";
 				    									     type = "AMI";
 				    									     fonctionalite="listeAmiCsv";
 				    									     btn_pub =false;

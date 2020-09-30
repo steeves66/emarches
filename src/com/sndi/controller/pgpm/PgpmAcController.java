@@ -1763,6 +1763,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		             	    TStatut statuts = constantService.getStatut(statutTrans);
 			  				//Historisation des Pgpm
 			      			historiser(""+statutTrans,demDetail,"Opération Transmise à la CPMP");
+			      		    //Préparation du Tableau de Bord
+			      			tableauBordController.saveTempTabord(""+statutTrans, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
 			 		   }
 		 		      tableauBordController.ChargeTbProcedure("PN", "PGPM");
 		 		     //typeActionTb();
@@ -1819,7 +1821,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							 //Récupération du Statut
 		             	    TStatut statuts = constantService.getStatut(statutTrans);
 			  				//Historisation des Pgpm
-			      			historiser(""+statutTrans,demDetail,"Opération Transmise à la CPMP");		  
+			      			historiser(""+statutTrans,demDetail,"Opération Transmise à la CPMP");	
+			      		    //Préparation du Tableau de Bord
+			      		   tableauBordController.saveTempTabord(""+statutTrans, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
 			 		   }	
 				     }	
 	 		       chargeDataPgspm();
@@ -1880,6 +1884,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			             	    TStatut statuts = constantService.getStatut(statutUpdate);
 				  				//Historisation des Pgpm
 				      			historiser(""+statutUpdate,demDetail,"Opération Validée");
+				      		//Préparation du Tableau de Bord
+				      			tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
 		 		           }	   
 			 		      }	
 				         }
@@ -1932,6 +1938,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			             	    TStatut statuts = constantService.getStatut(statutPub);
 				  				//Historisation des Pgpm
 				      			historiser(""+statutPub,demDetail,"Opération Publiée");
+				      		   //Préparation du Tableau de Bord
+				      		  tableauBordController.saveTempTabord(""+statutPub, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
 		 		           }	   
 			 		      }	
 				         }
@@ -2052,10 +2060,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
              	     detailPlan.setGpgStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
              	     iservice.addObject(detailPlan);
           
-             	     //Récupération du Statut
+             	    //Récupération du Statut
              	    TStatut statuts = constantService.getStatut("S1S");
 	  				//Historisation des Pgpm
 	      			historiser("S1S",detailPlan,"PGPM crée par l'Autorité Contractante");
+	      			//Préparation du Tableau de Bord
+	      			tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPlan.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPlan.getGpgId());
 
 	      			pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
 		  						new WhereClause("GPG_ID", WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
@@ -2102,7 +2112,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
            	           TStatut statuts = constantService.getStatut("S1S");
 	  				   //Historisation des Pgpm
 	      			   historiser("S1S",detailPlan,"PGPM crée par l'Autorité Contractante");
-                       //
+	      			   //Préparation du Tableau de Bord
+		      		   tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPlan.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPlan.getGpgId());
+
 	      			   pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
 		  						new WhereClause("GPG_ID", WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
 		  					if (!pgpmListe.isEmpty())  
@@ -2215,6 +2227,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                	                          TStatut statuts = constantService.getStatut("S1S");
                	 	  				       //Historisation des Pgpm
                	 	      			      historiser("S1S",detailPlan,"PGPM crée par l'Autorité Contractante");
+               	 	      			      //Préparation du Tableau de Bord
+               	 		      			  tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPlan.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPlan.getGpgId());
+
 
                	 	      			      pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),
                	 		  						new WhereClause("GPG_ID", WhereClause.Comparateur.EQ,""+detailPlan.getGpgId()));
@@ -2520,7 +2535,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 			     iservice.addObject(histoPlan); 
 			     
-			    
+			   //Préparation du Tableau de Bord
+	      		tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
 				        
 					     chargeDataAvaliderPgpm();
 					     chargePgpmDifCp();
@@ -2577,7 +2593,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			     histoPlan.setTFonction(userController.getSlctd().getTFonction());
 			     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 			     iservice.addObject(histoPlan); 
-			     
+			   //Préparation du Tableau de Bord
+		      	tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
+					   
 					}	
 				     chargeDataAvaliderPgpm();
 				     chargePgpmDifCp();
@@ -2653,7 +2671,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				     histoPlan.setTFonction(userController.getSlctd().getTFonction());
 				     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 				     iservice.addObject(histoPlan);
-				     
+				     //Préparation du Tableau de Bord
+			      	tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
+						   
 				     //chargeDataAvaliderPgpm();
 		 			 chargeDataAvaliderPgspm();
 		 			 //Chargement du Tableau de Bord
@@ -2708,7 +2728,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				     histoPlan.setTFonction(userController.getSlctd().getTFonction());
 				     histoPlan.setTOperateur(userController.getSlctd().getTOperateur());
 				     iservice.addObject(histoPlan); 
-				     
+				     //Préparation du Tableau de Bord
+			      	tableauBordController.saveTempTabord(""+statutUpdate, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), demDetail.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+demDetail.getGpgId());	
+						    
 				    
 					 chargeDataAvaliderPgspm();
 					 chargePgspmDifCp();
@@ -2752,9 +2774,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void checkSituationPs() {
 			 if(sit.equalsIgnoreCase("O")) {
 				 etatAgpm = true;
-				 //etatFinancement1 = false;
 				 etatFinancement1 = true;
-				 //etatFinancement2 = true;
 				 etatFinancement2 = false;
 				 loveAgpmRappel = false;
 				 btnAgpmRappel = false;  
@@ -2895,7 +2915,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
             	    TStatut statuts = constantService.getStatut("S1S");
 	  				//Historisation des Pgpm
 	      			historiser("S1S",detailPlan,"PGSPM crée par l'Autorité Contractante");
-            			
+	      		    //Préparation du Tableau de Bord
+	      			tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), detailPlan.getGpgTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+detailPlan.getGpgId());	
             		chargeDataPgspm();
             			 
             	  pgpmListe =(List<VPgpmliste>) iservice.getObjectsByColumn("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_ID")),

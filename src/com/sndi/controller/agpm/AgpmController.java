@@ -874,6 +874,9 @@ public class AgpmController {
 	    	 				     		      			   TStatut statuts = constantService.getStatut("S1S");
 	    	 				     		  					//Historisation des Agpm
 	    	 				     		      			    historiser("S1S",agpm,"Création de l'agpm par l'Autorité Contractante");
+	    	 				     		      			  //Préparation du Tableau de Bord
+	    	 				     		  	      		   tableauBordController.saveTempTabord("S1S", ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), "PN", ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+agpm.getAgpId());	
+	    	 				     		  				   
 	    	 				     		      			    
 	    	 				     		      			    agpmListe =(List<VAgpmliste>) iservice.getObjectsByColumn("VAgpmliste", new ArrayList<String>(Arrays.asList("AGP_ID")),
 	    	 				     		  						new WhereClause("AGP_ID", WhereClause.Comparateur.EQ,""+agpm.getAgpId()));
@@ -1697,6 +1700,9 @@ public class AgpmController {
 							  TStatut statuts = constantService.getStatut(statutTrans);
 								  //Historisation des Agpm
 							  historiser(""+statutTrans,agpp,"Demande Transmise à la CPMP");
+							//Préparation du Tableau de Bord
+     		  	      		   tableauBordController.saveTempTabord(""+statutTrans, ""+controleController.type, ""+userController.getSlctd().getTFonction().getFonCod(), "PN", ""+userController.getSlctd().getTOperateur().getOpeMatricule(), ""+agpp.getAgpId());	
+     		  				   
 									  chargeData();  
 									 // rappelProjet();
 									  chargeAgpmTrans();
