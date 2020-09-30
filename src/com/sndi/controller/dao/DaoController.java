@@ -5469,7 +5469,7 @@ public class DaoController {
 		     //Methode pour vider la liste des critères (lot par lot)
 		     public void viderCritereByLot() {
 		    	 
-		    /*	 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
+		    	 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 						    new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 						    new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		    	 
@@ -5482,9 +5482,9 @@ public class DaoController {
 			  	  userController.setTexteMsg("Liste des critères vidée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
-			    } */
+			    }
 			  
-			  listeLot = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")),
+			 /* listeLot = (List<TLotAao>) iservice.getObjectsByColumn("TLotAao", new ArrayList<String>(Arrays.asList("LAA_NUM")),
 					     new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()), 
 						 new WhereClause("LAA_ID",WhereClause.Comparateur.EQ,""+laaId));
 		       if (! listeLot.isEmpty()) {
@@ -5509,10 +5509,10 @@ public class DaoController {
 				 _logger.info("Number Lot: "+lots.getLaaNum().toString());
 				 _logger.info("Nbre Lot: "+newAvis.getAaoNbrLot());
 				 _logger.info("TYPE : "+newTempFactSup.getTempType());
+		     }*/
+		     
+		     
 		     }
-		     
-		     
-		     
 		     
 		     
 		     
