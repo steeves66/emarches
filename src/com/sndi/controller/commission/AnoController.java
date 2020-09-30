@@ -258,7 +258,7 @@ public class AnoController {
 			TAvisAppelOffre avis = new TAvisAppelOffre();
 			if(!LS.isEmpty()) avis = LS.get(0);
 			avis.setTStatut(new TStatut("JUG"));
-			avis.setAaoStatut(4);
+			avis.setAaoStatut("4");
 		    iservice.updateObject(avis);
 		    //chargeData();
 		   // renderPage("LISANO" ,"ano1");
