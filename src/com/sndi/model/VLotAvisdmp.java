@@ -40,6 +40,7 @@ public class VLotAvisdmp implements java.io.Serializable {
 	private String libAno;
 	private String libAo;
 	private String libLotNara;
+	private long checkTrt;
 	public VLotAvisdmp() {
 	}
 
@@ -52,7 +53,7 @@ public class VLotAvisdmp implements java.io.Serializable {
 	public VLotAvisdmp(BigDecimal laaId, String laaAaoCode, String laaObjet, String laaObservation,
 			BigDecimal laaMtCaut, BigDecimal laaMtEst, String laaAno, String laaObservationDmp, Date laaDteSaisi,
 			String laaStaCode, String laaFonCodSaisi, String laaFonCodCpmp, String laaOpeMatricule, String laaLieuExe,
-			String laaLbgImputation, BigDecimal laaNum, BigDecimal laaCoutLot, String laaDacCode,String libAno,String libAo,String libLotNara) {
+			String laaLbgImputation, BigDecimal laaNum, BigDecimal laaCoutLot, String laaDacCode,String libAno,String libAo,String libLotNara,long checkTrt) {
 		this.laaId = laaId;
 		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
@@ -74,6 +75,7 @@ public class VLotAvisdmp implements java.io.Serializable {
 		this.libAno = libAno;
 		this.libAo = libAo;
 		this.libLotNara = libLotNara;
+		this.checkTrt = checkTrt;
 	}
 
 	@Id
@@ -264,6 +266,15 @@ public class VLotAvisdmp implements java.io.Serializable {
 
 	public void setLibLotNara(String libLotNara) {
 		this.libLotNara = libLotNara;
+	}
+
+	@Column(name = "CHECKTRT")
+	public long getCheckTrt() {
+		return checkTrt;
+	}
+
+	public void setCheckTrt(long checkTrt) {
+		this.checkTrt = checkTrt;
 	}
 
 }

@@ -367,6 +367,12 @@ public class ControleController {
 	private boolean btn_publier_ppm = false;
 	private boolean btn_publier_pspm = false;
 	private boolean btn_imprimer = false;
+	
+	//ANO
+	private boolean panelAnoDemdeDmp = false;
+	private boolean panelAnoAvisDmp = false;
+	private boolean panelAnoTraiDmp = false;
+	private boolean panelAnoTraiAc = false;
 	//statuts
 	private String statutAffiche="";
 	private String statutUpdate="";
@@ -6563,21 +6569,40 @@ public class ControleController {
 													    			if(action.equalsIgnoreCase("LISANODMP")) {
 														    			type = "Commission";
 														    			fonctionalite = "listDemAnoDmp";
+														    			panelAnoDemdeDmp = true;
+														    			panelAnoAvisDmp = false;
 														    			//libelleFinCom = "Validation éffectuée avec succès !";
 														    			//libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
 														    			//libelleTitle = "Prévalidation";
 														    			libelle="LISTE DES AVIS D'APPEL D'OFFRE EN ATTENTE D'ANO";	
 														    		}else
+														    			if(action.equalsIgnoreCase("LISAUTODMP")) {
+															    			type = "Commission";
+															    			fonctionalite = "listAutoSaiDmp";
+															    			panelAnoDemdeDmp = false;
+															    			panelAnoAvisDmp = true;
+															    			//libelleFinCom = "Validation éffectuée avec succès !";
+															    			//libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
+															    			//libelleTitle = "Prévalidation";
+															    			libelle="LISTE DES AVIS D'APPEL D'OFFRE EN ATTENTE D'ANO";	
+															    		}else
 													    			if(action.equalsIgnoreCase("DEMANO")) {
 														    			type = "Commission";
 														    			libelle="DEMANDE DE NON OBJECTION SUR L'AVIS";	
 														    		}else
-														    			//REEDITION DES ETATS
+														    			//TRAITEMENT ANO DMP
 														    			if(action.equalsIgnoreCase("TRAIANO")) {
 															    			type = "Commission";
 															    			libelle="TRAITEMENT DES ANO DE L'AVIS";	
 															    		}
+														    			else
+															    			//TRAITEMENT ANO DMP
+															    			if(action.equalsIgnoreCase("TRAIDMP")) {
+																    			type = "Commission";
+																    			libelle="TRAITEMENT DES ANO DE L'AVIS";	
+																    		}
 													    			else
+													    				
 											    			
 											    			//DEBUT GESTION DES PROCEDURES DERROGATOIRES
 											    			if(action.equalsIgnoreCase("LISDEMSAI")) {
@@ -9860,6 +9885,46 @@ public class ControleController {
 
 	public void setBtn_retourJug(boolean btn_retourJug) {
 		this.btn_retourJug = btn_retourJug;
+	}
+
+
+	public boolean isPanelAnoDemdeDmp() {
+		return panelAnoDemdeDmp;
+	}
+
+
+	public void setPanelAnoDemdeDmp(boolean panelAnoDemdeDmp) {
+		this.panelAnoDemdeDmp = panelAnoDemdeDmp;
+	}
+
+
+	public boolean isPanelAnoAvisDmp() {
+		return panelAnoAvisDmp;
+	}
+
+
+	public void setPanelAnoAvisDmp(boolean panelAnoAvisDmp) {
+		this.panelAnoAvisDmp = panelAnoAvisDmp;
+	}
+
+
+	public boolean isPanelAnoTraiDmp() {
+		return panelAnoTraiDmp;
+	}
+
+
+	public void setPanelAnoTraiDmp(boolean panelAnoTraiDmp) {
+		this.panelAnoTraiDmp = panelAnoTraiDmp;
+	}
+
+
+	public boolean isPanelAnoTraiAc() {
+		return panelAnoTraiAc;
+	}
+
+
+	public void setPanelAnoTraiAc(boolean panelAnoTraiAc) {
+		this.panelAnoTraiAc = panelAnoTraiAc;
 	}
 	
 }

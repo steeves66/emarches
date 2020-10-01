@@ -1,0 +1,372 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+     <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+
+	
+	<ui:define name="contents">
+	<h:form id="gnl" styleClass="form-horizontal">
+	  <style type="text/css">
+    .old {
+        background-color: #EEE8DF !important;
+        background-image: none !important;
+        color: #000000 !important;
+    }
+</style>
+<section class="content-header">
+       <h3>
+        #{controleController.libelle} #{anoController.slctdTd.aaoCode} : <strong>#{anoController.slctdTd.aaoLibelle}</strong>
+        <small>
+        <!-- #{controleController.libelle1} -->
+       <!--  Liste des AGPM Saisis  -->
+        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
+        </small>
+        
+      </h3>
+      <ol class="breadcrumb">
+      <li>
+        <p:commandLink action="#{userController.renderPage('accueil')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>Accueil
+             </p:commandLink>
+            </li>
+        <li>
+        <p:commandLink action="#{agpmController.renderPage('agpm1')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>ANO | Index
+             </p:commandLink>
+            </li>
+        <li class="active">
+         <p:commandLink action="#{agpmController.renderPage('agpm2')}" update=":content" > 
+            <i class="fa fa-dashboard"></i>ANO 
+             </p:commandLink>
+        </li>
+      </ol>
+    </section>
+    
+    <section class="content">
+     <div class="box"></div>
+     <h:panelGroup rendered="#{userController.renderMsg}">
+				<br/>
+				<div class="alert alert-success light alert-dismissable" >
+				 <p:commandLink  styleClass="close" data-dismiss="alert" aria-hidden="true" 
+				  action="#{userController.initMessage()}"  update=":content">
+				<span class="hidden-xs"> x</span>
+				</p:commandLink>
+				<i class="fa fa-check pr10"></i>
+				<strong>Succès!</strong> #{userController.texteMsg}.</div>
+				</h:panelGroup>
+				 <div class="row">
+            <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+            </div>
+				 <div class="row">
+          
+    <div class="box box-success">
+     
+              <div class="box-body">
+              <div class="row">
+               <div class="col-md-12">
+                <div class="row">
+                
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-8"><div  style="color: #fff; font-weight:bold; font-size: 17px;"><span style="font-weight: bold;">INFORMATIONS SUR LA DEMANDE #{anoController.slctdTdDem.demRef} : #{anoController.slctdTdDem.demObjet} </span></div></div> 
+			    
+				   <div class="col-md-2">
+					  <p:commandLink rendered="false" oncomplete="PF('chargeDocDlg').show()" title="Joindre le PV d'analyse" action="#{anoController.chargeDossierRapport()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e">
+					  <span class="btn-label"><i class="fa fa-download"></i></span><span class="hidden-xs">Joindre le rapport d'analyse</span>
+					  </p:commandLink>
+				   </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	             <div class="row">                   
+                   
+                <div class="col-md-6 align justify-content-center">
+                <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Joindre documents</small></legend>
+                      <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Nature du document </b></label>
+	                  <div class="col-sm-9">
+	                    <p:selectOneMenu value="#{anoController.docNatureDemDmp}"
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Sélectionnez la nature de la demande" itemValue="empty" />
+			         <f:selectItems value="#{anoController.natureDocListe}" var="v" itemLabel="#{v.nadLibelle}" itemValue="#{v.nadCode}"/>   		   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                  <div class="form-group ">
+	                  <label for="foncode" class="col-sm-3 control-label"><b>Joindre le document </b></label>
+	                  <div class="col-sm-9">
+	                  
+	                  <p:fileUpload fileUploadListener="#{anoController.uploadDossDemAut}" multiple="true"
+			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
+			                      mode="advanced" dragDropSupport="true"
+			                        update=":content"   sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+			                          
+	                    	            
+	                  </div>
+	                </div>
+                   </fieldset>
+                   
+	                <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Liste des documents joints</small></legend>
+	                    <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemandeDmp}"
+	                   scrollable="true" scrollHeight="100" emptyMessage="Aucun Document enrégistré">
+			           <p:column headerText="Nom du document " styleClass="col-md-6">
+			            <h:outputText value="#{doss.dodLibelle}" />
+			        </p:column>
+			        
+			        <p:column headerText="Nature" styleClass="col-md-4">
+			            <h:outputText value="#{doss.TNatureDocuments.nadLibelle}" />
+			        </p:column>
+			        <p:column headerText="Actions" styleClass="col-md-2">
+                            <p:commandLink styleClass="btn btn-xs btn-success" style="background-color: #036d3b;" action="#{anoController.openDossierDem}"  title="ouvrir"  ajax="false">
+			 	             <i class="ace-icon fa fa-folder-open bigger-120"  style="color: white"></i> 
+				                <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+				            </p:commandLink>
+				            
+						<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{anoController.removeDossierDemDmpAut()}" title="Supprimer" update="gnl">
+		                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+		                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+		                   <f:setPropertyActionListener value="#{doss}" target="#{anoController.selectedDossierDem}" />
+		                </p:commandLink>
+		               
+		 	        </p:column>
+			    </p:dataTable>
+			    </fieldset>
+             
+                   </div>
+                   
+                    <div class="col-md-6 align justify-content-center">
+	                <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px ; height:413px">
+                   <legend style="font-weight: bold"><small>Informations sur la demande</small></legend>
+	                         <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Référence du courrier</b></label>
+	                  <div class="col-sm-5">
+                        <p:inputText type="text" value="#{anoController.newDem.demRef}" styleClass="form-control" style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Objet de la demande</b></label>
+	                  <div class="col-sm-9">
+                        <p:inputTextarea value="#{anoController.newDem.demObjet}" rows="3" cols="33" styleClass="form-control" style="width: 100%" >
+                    </p:inputTextarea>
+	                  </div>
+	                </div>
+	                
+			    </fieldset>
+             
+                   </div>
+
+		                 
+                      </div>   
+
+	            </div>
+	           </div>
+                 </div>
+                 
+                 <div class="col-md-12">
+                 <h:panelGroup id="info">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">RESULTAT </div></div> 
+			         <div class="col-md-2 "> <div  style="color: #fff;font-weight:bold; font-size: 20px;">#{anoController.infolot.libLotNara}</div> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+	            
+	            <div class="col-md-6"> 
+	            
+	             <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>AVIS DE NON OBJECTION (ANO)</small></legend>	
+                   <div class="form-group ">
+	                  <div class="col-sm-12">
+                        <p:inputTextarea value="#{anoController.infolot.libAno}" readonly="true" rows="3" cols="33" styleClass="form-control" style="width: 100%" >
+                    </p:inputTextarea>
+	                  </div>
+	                </div>
+                   </fieldset>
+                   </div>
+                   <div class="col-md-6"> 
+	             <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>AVIS D'OBJECTION (AO)</small></legend>	
+                   <div class="form-group ">
+	                  <div class="col-sm-12">
+                        <p:inputTextarea value="#{anoController.infolot.libAo}" readonly="true" rows="3" cols="33" styleClass="form-control" style="width: 100%" >
+                    </p:inputTextarea>
+	                  </div>
+	                </div>
+                   </fieldset>
+                   </div>
+                   
+	          
+	            </div>
+	           </div>
+	           </h:panelGroup>
+                 </div>
+                
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">LISTE DES LOTS</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		            <div class="col-md-12">
+		                <div class="input-group input-group-sm col-md-12">
+				                <span class="input-group-btn">
+				                <p:commandLink action="#{anoController.chargeLotByAvis()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl:finance" />
+				                </span>
+			                      <p:inputText value="#{anoController.laaNum}" styleClass="form-control" type="text"  placeholder="saisir le numero du lot"></p:inputText> 
+			                       <span class="input-group-btn">
+			                      <p:commandLink action="#{anoController.chargeLotFilterLot()}" styleClass="btn btn-success btn-flat" value="Rechercher" style=" background-color: #036d3b" update=":gnl:finance" />
+			                    </span>
+						  </div> 
+		                 </div>
+                      </div>         
+                 <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{anoController.listeLots}" rowKey="#{slctdTb.laaId}"
+               scrollable="true" scrollHeight="400" editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
+                     
+                           <p:column headerText="N°Lot" styleClass="col-sm-1">
+				            <h:commandLink  title="N°Lot" styleClass="col-sm-1">
+                                <span>#{slctdTb.laaNum}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+				      
+				        
+				         <p:column headerText="Objet" styleClass="col-sm-6">
+				           <h:commandLink  title="Objet" styleClass="col-sm-10">
+                            <span>#{slctdTb.laaObjet}</span>
+                         </h:commandLink>
+	
+				        </p:column>
+				        
+				        <p:column rendered="false" headerText="Avis de la DMP" styleClass="col-sm-1">
+				        <p:cellEditor>
+				         <f:facet name="output">
+                            <h:outputText value="#{slctdTb.laaAno == 'O'?'OUI':'NON'}"/> 
+                            </f:facet>
+                             <f:facet name="input">
+         				       <h:selectOneMenu id="avis" value="#{slctdTb.laaAno}" style="width:100%; color:#0000">
+				                 <f:selectItem itemLabel="Choisir" itemValue="" />
+	                             <f:selectItem itemLabel="OUI" itemValue="O" />
+	                             <f:selectItem itemLabel="NON" itemValue="N" />
+	                           </h:selectOneMenu>
+	                          </f:facet>
+                         </p:cellEditor>
+				        </p:column>			        
+				        
+				        <p:column headerText="Observations DMP" styleClass="col-sm-3">
+				         <p:cellEditor>
+                           <f:facet name="output">
+                           <h:outputText value="#{slctdTb.laaObservationDmp}"/> 
+                           </f:facet>
+                           <f:facet name="input">
+         				      <p:inputTextarea id="obs" rows="3" cols="33" styleClass="form-control" value="#{slctdTb.laaObservationDmp}" style="width: 100%">
+         				      </p:inputTextarea>
+         				     </f:facet>
+                          </p:cellEditor>
+				    
+	
+				        </p:column>
+				        
+				         <p:column  headerText="Avis de la DMP" styleClass="col-md-2">
+				         <h:panelGroup rendered="#{slctdTb.laaAno == ' '}">
+                            <p:commandLink action="#{anoController.saveAnoAut('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
+				               title="Traitement de l'ANO">  
+                                <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                          
+                           
+                            <p:commandLink action="#{anoController.saveAnoAut('N')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="gnl:finance, gnl:info"
+				               title="Traitement de l'ANO">
+                                <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">NON</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{slctdTb.laaAno == 'OUI'}">  
+                            <p:commandLink action="#{anoController.saveAnoAut(' ')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
+				               title="Traitement de l'ANO">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                             <h:panelGroup rendered="#{slctdTb.laaAno == 'NON'}">  
+                            <p:commandLink action="#{anoController.saveAnoAut(' ')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:finance, gnl:info"
+				               title="Traitement de l'ANO">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.laaAno}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+		 	        </p:column>
+				        
+				            <p:column rendered="false" headerText="Actions" styleClass="col-md-1">
+                            <p:commandLink oncomplete="PF('anoDlg').show()" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"
+				               title="Traitement de l'ANO">
+                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />                              
+                            </p:commandLink>
+		 	        </p:column>
+				        
+
+                        </p:dataTable>  
+                        
+                        
+		
+	          
+	            </div>
+	           </div>
+                 </div>
+<!--                  <ui:include src="inclusions/histoDemande.xhtml"  />  -->
+                 </div>
+               </div>
+
+              </div>
+                
+            </div>
+            <!-- /.box-body -->
+          </div>
+         
+				      
+     
+		</div> 
+    
+		 <div class="row">
+		     <p:commandLink  action="#{anoController.validationAnoDMPAut()}"  styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
+		     <p:confirm header="Confirmation" message="Confirmez-vous la validation ?" icon="ui-icon-alert" />  
+				     <i class="ace-icon fa fa-save bigger-120"></i> Valider
+				      </p:commandLink>
+		 <p:commandLink styleClass="btn btn-warning" action="#{anoController.renderPage('ano1','LISAUTODMP')}" style="background-color: #f88b2e;margin-top:10px;" update=":content">
+           <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		</p:commandLink>
+	          </div>
+		
+    </section>
+    </h:form>
+   
+    
+     <!--  <ui:include src="inclusions/dialogHisto.xhtml"  />  -->
+
+   
+
+		 
+    
+    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>
