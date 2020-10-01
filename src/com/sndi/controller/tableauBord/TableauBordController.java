@@ -540,7 +540,7 @@ public class TableauBordController {
 					}
 			 }else {
 				 //CPMP
-				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+				/* if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 					 listeTableauBord.clear();
 						listeTableauBord =(List<VTabBordAc>) iservice.getObjectsByColumn("VTabBordAc", new ArrayList<String>(Arrays.asList("CODE_ID")),
 								new WhereClause("TYP",WhereClause.Comparateur.EQ,""+type),
@@ -561,7 +561,7 @@ public class TableauBordController {
 								tableauBordDmp=listeTableauBordDmp.get(0);
 							}
 					 }
-				 }
+				 }*/
 			   }
 		}
 		

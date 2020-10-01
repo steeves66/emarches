@@ -191,6 +191,11 @@ public class AnoController {
 	 private boolean btn_Oui;
 	 private boolean btn_non;
 	 private boolean resultat;
+	 
+	 private boolean panelNewDem =false;
+	 private boolean panelAncienDem =false;
+	 private boolean panelChoixDem =true;
+	 private boolean panelCodeAvis =false;
 	 @PostConstruct
 	 public void postContr() {
 		controleController.fonctionaliteDynamic();
@@ -205,7 +210,8 @@ public class AnoController {
 	 }
 	 
 	 public void chargeDemandeDmp() {
-		 listeDemande = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp");
+		 listeDemande = (List<VAvisAppelOffreAnodmp>) iservice.getObjectsByColumn("VAvisAppelOffreAnodmp",
+				  new WhereClause("DEM_STA_CODE",Comparateur.EQ,"E1S"));
 		_logger.info("listeDemande size: "+listeDemande.size()
 		);	
 	 }
@@ -253,6 +259,8 @@ public class AnoController {
 		 
 	 }
 	 
+	 
+	 
 	 public void validationAnoDMP() throws IOException {
 			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
 			TAvisAppelOffre avis = new TAvisAppelOffre();
@@ -260,6 +268,12 @@ public class AnoController {
 			avis.setTStatut(new TStatut("JUG"));
 			avis.setAaoStatut("4");
 		    iservice.updateObject(avis);
+		    
+		    List<TDemande> DS  = iservice.getObjectsByColumn("TDemande", new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
+		    TDemande dem = new TDemande();
+			if(!LS.isEmpty()) dem = DS.get(0);
+			dem.setTStatut(new TStatut("ARC"));
+		    iservice.updateObject(dem);
 		    //chargeData();
 		   // renderPage("LISANO" ,"ano1");
 		 userController.setTexteMsg("Validé avec succès !");
@@ -410,6 +424,20 @@ public class AnoController {
 						 }
 			}
 
+	 }
+	 
+	 public void nouvelleDemande() {
+		 panelNewDem =true;
+		 panelAncienDem =false;
+		 panelChoixDem =false;
+		 panelCodeAvis = false;
+	 }
+	 
+	 public void ancienneDemande() {
+		 panelNewDem =false;
+		 panelAncienDem =false;
+		 panelChoixDem =false;
+		 panelCodeAvis=true;
 	 }
 	 
 	 @Transactional
@@ -692,6 +720,10 @@ public class AnoController {
 					
 				break;
 				case "ano3":
+					 panelNewDem =false;
+					 panelAncienDem =false;
+					 panelChoixDem =true;
+					 panelCodeAvis=false;
 					docNatureDemDmp ="18";
 					chargeLotDmp();
 					//recupInfosDemande();
@@ -1025,6 +1057,46 @@ public class AnoController {
 
 	public void setInfolot(VLotAvisdmp infolot) {
 		this.infolot = infolot;
+	}
+
+
+	public boolean isPanelNewDem() {
+		return panelNewDem;
+	}
+
+
+	public void setPanelNewDem(boolean panelNewDem) {
+		this.panelNewDem = panelNewDem;
+	}
+
+
+	public boolean isPanelAncienDem() {
+		return panelAncienDem;
+	}
+
+
+	public void setPanelAncienDem(boolean panelAncienDem) {
+		this.panelAncienDem = panelAncienDem;
+	}
+
+
+	public boolean isPanelChoixDem() {
+		return panelChoixDem;
+	}
+
+
+	public void setPanelChoixDem(boolean panelChoixDem) {
+		this.panelChoixDem = panelChoixDem;
+	}
+
+
+	public boolean isPanelCodeAvis() {
+		return panelCodeAvis;
+	}
+
+
+	public void setPanelCodeAvis(boolean panelCodeAvis) {
+		this.panelCodeAvis = panelCodeAvis;
 	}
 
 	

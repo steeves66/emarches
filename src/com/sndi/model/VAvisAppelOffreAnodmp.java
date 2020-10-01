@@ -41,6 +41,7 @@ public class VAvisAppelOffreAnodmp implements java.io.Serializable {
 	private Date aaoDteFinOuv;
 	private String aaoFonCodAc;
 	private String aaoStaCode;
+	private String demStaCode;
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
 	private String aaoStatut;
@@ -57,7 +58,7 @@ public class VAvisAppelOffreAnodmp implements java.io.Serializable {
 
 	public VAvisAppelOffreAnodmp(String aaoCode, String aaoDacCode, String aaoLibelle, BigDecimal aaoNbrLot,
 			BigDecimal demNum, String demObjet, String demMotif, String demRef, Date demDteSaisi, BigDecimal aaoNbrOuv,
-			Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv, Date aaoDteOuvTec, String aaoObsOuv,
+			Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv, Date aaoDteOuvTec, String aaoObsOuv,String demStaCode,
 			String aaoLieuOuvPrecis, String aaoHeurFinOuv, Date aaoDteSaisi, Date aaoDteFinOuv, String aaoFonCodAc,
 			String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut, Character aaoAno,
 			BigDecimal dacGesCode) {
@@ -88,6 +89,7 @@ public class VAvisAppelOffreAnodmp implements java.io.Serializable {
 		this.aaoStatut = aaoStatut;
 		this.aaoAno = aaoAno;
 		this.dacGesCode = dacGesCode;
+		this.demStaCode = demStaCode;
 	}
 
 	@Column(name = "AAO_CODE", nullable = false, length = 20)
@@ -332,6 +334,15 @@ public class VAvisAppelOffreAnodmp implements java.io.Serializable {
 
 	public void setDacGesCode(BigDecimal dacGesCode) {
 		this.dacGesCode = dacGesCode;
+	}
+
+	@Column(name = "DEM_STA_CODE")
+	public String getDemStaCode() {
+		return demStaCode;
+	}
+
+	public void setDemStaCode(String demStaCode) {
+		this.demStaCode = demStaCode;
 	}
 
 }
