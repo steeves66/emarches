@@ -40,6 +40,7 @@ public class TFonction implements java.io.Serializable {
 	private String fonCodePf;
 	private String fonLibelleLngDmp;
 	private String fonSourceSigmap;
+	private String fonRespo;
 	private Set<THistoAgpm> THistoAgpms = new HashSet<THistoAgpm>(0);
 	private Set<TPlanGeneral> TPlanGenerals = new HashSet<TPlanGeneral>(0);
 	private Set<TAgpm> TAgpms = new HashSet<TAgpm>(0);
@@ -58,7 +59,7 @@ public class TFonction implements java.io.Serializable {
 
 	public TFonction(String fonCod, TStructure TStructure, TTypeFonction TTypeFonction, Date fonDatDeb, Date fonDatFin,
 			String fonLibelle, String fonAdr, String fonTel, String fonFonCod, String fonCourriel, String fonMobil,Date fonDteSaisi, String fonLibelleCrt,
-			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap,
+			String fonCodeDmp, String fonCodePf, String fonLibelleLngDmp, String fonSourceSigmap, String fonRespo,
 			Set<THistoAgpm> THistoAgpms, Set<TPlanGeneral> TPlanGenerals, Set<TAgpm> TAgpms,
 			Set<THistoPlanGeneral> THistoPlanGenerals, Set<TAssignation> TAssignations,
 			Set<THistoPlanPassation> THistoPlanPassations, Set<TAffichageAgpm> TAffichageAgpms,
@@ -80,6 +81,7 @@ public class TFonction implements java.io.Serializable {
 		this.fonCodePf = fonCodePf;
 		this.fonLibelleLngDmp = fonLibelleLngDmp;
 		this.fonSourceSigmap = fonSourceSigmap;
+		this.fonRespo = fonRespo;
 		this.THistoAgpms = THistoAgpms;
 		this.TPlanGenerals = TPlanGenerals;
 		this.TAgpms = TAgpms;
@@ -248,6 +250,15 @@ public class TFonction implements java.io.Serializable {
 	public void setFonSourceSigmap(String fonSourceSigmap) {
 		this.fonSourceSigmap = fonSourceSigmap;
 	}
+	
+	@Column(name="FON_RESPO", length=3)
+	public String getFonRespo() {
+	    return this.fonRespo;
+	}
+	    
+	public void setFonRespo(String fonRespo) {
+	    this.fonRespo = fonRespo;
+	  }
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TFonction")
 	public Set<THistoAgpm> getTHistoAgpms() {

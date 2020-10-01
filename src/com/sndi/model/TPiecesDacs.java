@@ -32,6 +32,9 @@ public class TPiecesDacs implements java.io.Serializable {
 	private String pidLibelle;
 	private String pidStaCode;
 	private Date pidDteSaisi;
+	private String pidObservation;
+	private String pidPresente;
+	private String pidConforme;
 	private Set<TDetailCorrection> TDetailCorrections = new HashSet<TDetailCorrection>(0);
 	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 
@@ -43,8 +46,8 @@ public class TPiecesDacs implements java.io.Serializable {
 	}
 
 	public TPiecesDacs(long pidCode, TDacSpecs TDacSpecs, TTypePiecesDac TTypePiecesDac, String pidLibelle,
-			String pidStaCode, Date pidDteSaisi, Set<TDetailCorrection> TDetailCorrections,
-			Set<TDossierDacs> TDossierDacses) {
+			String pidStaCode, Date pidDteSaisi,String pidObservation, String pidPresente, String pidConforme,
+			Set<TDetailCorrection> TDetailCorrections,Set<TDossierDacs> TDossierDacses) {
 		this.pidCode = pidCode;
 		this.TDacSpecs = TDacSpecs;
 		this.TTypePiecesDac = TTypePiecesDac;
@@ -113,6 +116,33 @@ public class TPiecesDacs implements java.io.Serializable {
 
 	public void setPidDteSaisi(Date pidDteSaisi) {
 		this.pidDteSaisi = pidDteSaisi;
+	}
+	
+	@Column(name = "PID_OBSERVATION", length = 2000)
+	public String getPidObservation() {
+		return this.pidObservation;
+	}
+
+	public void setPidObservation(String pidObservation) {
+		this.pidObservation = pidObservation;
+	}
+
+	@Column(name = "PID_PRESENTE", length = 3)
+	public String getPidPresente() {
+		return this.pidPresente;
+	}
+
+	public void setPidPresente(String pidPresente) {
+		this.pidPresente = pidPresente;
+	}
+
+	@Column(name = "PID_CONFORME", length = 3)
+	public String getPidConforme() {
+		return this.pidConforme;
+	}
+
+	public void setPidConforme(String pidConforme) {
+		this.pidConforme = pidConforme;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TPiecesDacs")

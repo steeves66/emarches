@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-09-22T16:11:32 -->
+<!-- 2020-10-01T12:52:19 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_jugement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="29839d62-7702-40c1-8de1-369c254b0177">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -258,7 +258,7 @@
 	</style>
 	<subDataset name="list_com" uuid="b89cdd2c-6cc6-4101-b353-c6927f8d0673">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select *
@@ -266,19 +266,23 @@ from v_membre_commission com
 where  com.aao_code=$P{param_code_1}
 and com.dcs_com_tco_code='CEV']]>
 		</queryString>
-		<field name="ORDRE" class="java.math.BigDecimal"/>
+		<field name="CPT" class="java.math.BigDecimal"/>
 		<field name="NOMPRENOMS" class="java.lang.String"/>
 		<field name="DCS_OBSERVATION" class="java.lang.String"/>
 		<field name="DCS_STR_COM" class="java.lang.String"/>
 		<field name="DCS_TEL_MBM" class="java.lang.String"/>
 		<field name="DCS_FON_ADMIN" class="java.lang.String"/>
+		<field name="DCS_REP_MANDATE" class="java.lang.String"/>
 		<field name="DCS_COM_TCO_CODE" class="java.lang.String"/>
+		<field name="DCS_SEA_NUM" class="java.math.BigDecimal"/>
+		<field name="DCS_FON_COD" class="java.lang.String"/>
 		<field name="AAO_CODE" class="java.lang.String"/>
 		<field name="TRI" class="java.math.BigDecimal"/>
+		<field name="ORDRE" class="java.math.BigDecimal"/>
 	</subDataset>
 	<subDataset name="list_lot_det" uuid="469aa6f3-26c0-41ab-b4a3-cf1709c419fb">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select distinct lot.laa_num,lot.laa_objet,lbg.lbg_imputation,lot.laa_mt_caut,lot.laa_mt_est,lot.laa_delai_exe
@@ -296,7 +300,7 @@ order by lot.laa_num]]>
 	</subDataset>
 	<subDataset name="class_sou" uuid="5e32ee80-f478-45ea-b130-2e4c95ea77aa">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select distinct vx.ordre,vx.off_sou_ncc,vx.off_sou_sigle_ste,vx.dof_mt_ofr,vx.dof_mt_cor,vx.laa_num,vx.rang,lot.laa_objet
@@ -319,7 +323,7 @@ order by vx.laa_num,vx.ordre]]>
 	</subDataset>
 	<subDataset name="prop_att" uuid="62a100cc-b1b3-47f7-a4c9-8dce6a74bd2a">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[SELECT rs.lot,rs.laa_objet,rs.montant,rs.entreprise,rs."Délai d'exécution",rs.ordre
@@ -338,7 +342,7 @@ where rs.laa_aao_code=$P{param_code_1}]]>
 	</subDataset>
 	<subDataset name="com_jug" uuid="7c9750d5-3648-4c02-a49a-9b160aba7787">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select *
@@ -346,29 +350,7 @@ from v_membre_commission com
 where  com.aao_code=$P{param_code_1}
 and com.dcs_com_tco_code='JUG']]>
 		</queryString>
-		<field name="ORDRE" class="java.math.BigDecimal"/>
-		<field name="NOMPRENOMS" class="java.lang.String"/>
-		<field name="DCS_OBSERVATION" class="java.lang.String"/>
-		<field name="DCS_STR_COM" class="java.lang.String"/>
-		<field name="DCS_TEL_MBM" class="java.lang.String"/>
-		<field name="DCS_FON_ADMIN" class="java.lang.String"/>
-		<field name="DCS_COM_TCO_CODE" class="java.lang.String"/>
-		<field name="AAO_CODE" class="java.lang.String"/>
-		<field name="TRI" class="java.math.BigDecimal"/>
-	</subDataset>
-	<subDataset name="com_ouv" uuid="61672062-cf8d-41c3-b9e6-5f2b8d1129da">
-		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
-		<parameter name="param_code_1" class="java.lang.String">
-			<defaultValueExpression><![CDATA[$P{param_code_1}]]></defaultValueExpression>
-		</parameter>
-		<queryString language="SQL">
-			<![CDATA[select *
-from v_membre_commission com
-where  com.aao_code=$P{param_code_1}
-and com.dcs_com_tco_code='COJ']]>
-		</queryString>
-		<field name="ORDRE" class="java.math.BigDecimal"/>
+		<field name="CPT" class="java.math.BigDecimal"/>
 		<field name="NOMPRENOMS" class="java.lang.String"/>
 		<field name="DCS_OBSERVATION" class="java.lang.String"/>
 		<field name="DCS_STR_COM" class="java.lang.String"/>
@@ -380,6 +362,33 @@ and com.dcs_com_tco_code='COJ']]>
 		<field name="DCS_FON_COD" class="java.lang.String"/>
 		<field name="AAO_CODE" class="java.lang.String"/>
 		<field name="TRI" class="java.math.BigDecimal"/>
+		<field name="ORDRE" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="com_ouv" uuid="61672062-cf8d-41c3-b9e6-5f2b8d1129da">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code_1" class="java.lang.String">
+			<defaultValueExpression><![CDATA[$P{param_code_1}]]></defaultValueExpression>
+		</parameter>
+		<queryString language="SQL">
+			<![CDATA[select *
+from v_membre_commission com
+where  com.aao_code=$P{param_code_1}
+and com.dcs_com_tco_code='COJ']]>
+		</queryString>
+		<field name="CPT" class="java.math.BigDecimal"/>
+		<field name="NOMPRENOMS" class="java.lang.String"/>
+		<field name="DCS_OBSERVATION" class="java.lang.String"/>
+		<field name="DCS_STR_COM" class="java.lang.String"/>
+		<field name="DCS_TEL_MBM" class="java.lang.String"/>
+		<field name="DCS_FON_ADMIN" class="java.lang.String"/>
+		<field name="DCS_REP_MANDATE" class="java.lang.String"/>
+		<field name="DCS_COM_TCO_CODE" class="java.lang.String"/>
+		<field name="DCS_SEA_NUM" class="java.math.BigDecimal"/>
+		<field name="DCS_FON_COD" class="java.lang.String"/>
+		<field name="AAO_CODE" class="java.lang.String"/>
+		<field name="TRI" class="java.math.BigDecimal"/>
+		<field name="ORDRE" class="java.math.BigDecimal"/>
 	</subDataset>
 	<subDataset name="reserve1" uuid="0a8b3a22-244b-45af-bfe8-5a8a81e4003f">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
