@@ -119,9 +119,7 @@
           <p:dataTable id="ndTble" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeFonctionsImput}" editable="true" editMode="cell" emptyMessage="Aucune fonction enregistrée" rows="10" 
                        rowKey="#{slctdTb.fonCod}" selection="#{daoController.listSelectionFonctImput}"   paginator="true"
                          rowsPerPageTemplate="5,10,15" >
-                         
-                         
-                         <p:column selectionMode="multiple" style="width:15px;text-align:center"/>
+                          
 
          				<p:column headerText="Fonction" styleClass="col-sm-1" >
          				<h:outputText value="#{slctdTb.fonCod} : #{slctdTb.fonLibelle}"/>
@@ -144,11 +142,39 @@
          				<h:outputText value="#{slctdTb.nbrValide}"/>
 				        </p:column>
 				        
-                      <p:column headerText=" Re" width="2%">  
-                                <p:selectOneRadio id="operation" value="#{slctdTb.strOpeRespo}">
-                                <p:ajax  listener="#{daoController.openAffectation()}" update="gnl:btn_aff"></p:ajax>
-									      <f:selectItem itemValue="O" />
-							    </p:selectOneRadio>
+                      <p:column headerText="Responsable" width="7%">  
+                                
+						<h:panelGroup rendered="#{slctdTb.typbinome == '3'}">
+                            <p:commandLink action="#{daoController.saveAffectation('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl"
+				               title="Désigner le responsable">  
+                                <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltImput}" />                              
+                            </p:commandLink>
+                          
+                           
+                            <p:commandLink action="#{daoController.saveAffectation('N')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="gnl"
+				               title="Désigner le binome">
+                                <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">NON</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltImput}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{slctdTb.typbinome == '1'}">  
+                            <p:commandLink action="#{daoController.saveAffectation('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl"
+				               title="Désigner le binome">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.typbinome =='1'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltImput}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                             <h:panelGroup rendered="#{slctdTb.typbinome == '2'}">  
+                            <p:commandLink action="#{daoController.saveAffectation('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl"
+				               title="Désigner le responsable">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.typbinome =='1'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltImput}" />                              
+                            </p:commandLink>
+                            </h:panelGroup> 
+							    
+							    
+							    
 				         </p:column>   
           </p:dataTable>
                        

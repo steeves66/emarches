@@ -96,6 +96,7 @@ public class DaoController {
 	 private List<VFonctionImputation> listeFonctionsImput = new ArrayList<VFonctionImputation>();
 	 private List<TTypePiecesDac>listSelectionTypePieces =new ArrayList<TTypePiecesDac>();
 	 private List<TDetailPlanPassation> listeDetail = new ArrayList<TDetailPlanPassation>();
+	 private List<TSeances> listSeances  = new ArrayList<TSeances>();
 	 //private List<VLigneImputation> listeImputations = new ArrayList<VLigneImputation>();
 	//private List<VDelaiValiditeOffre> delaiValidite = new ArrayList<VDelaiValiditeOffre>();
 	 private List<VLigneLot> listeImputations = new ArrayList<VLigneLot>();
@@ -133,6 +134,7 @@ public class DaoController {
 	private List<VbCommissionSpecifique> listeComSpecifique = new ArrayList<VbCommissionSpecifique>(); 
 	private List<TCommissionSpecifique> listeComSpecific = new ArrayList<TCommissionSpecifique>();
 	private List<TDetCritAnalyseDac> listeDetCritere = new ArrayList<TDetCritAnalyseDac>();
+	private VFonctionImputation sltImput = new VFonctionImputation();
 	//Pieces a examiner
 	private List<TDetailCorrection> listeCorrection = new ArrayList<TDetailCorrection>();
 	private List<VPieces> listePices = new ArrayList<VPieces>();
@@ -180,7 +182,9 @@ public class DaoController {
 	private List<VMargeDePreferenceCom> listeMargeCom = new ArrayList<VMargeDePreferenceCom>();
 	private List<VMargeDePreferenceArt> listeMargeArt = new ArrayList<VMargeDePreferenceArt>();
     //TABLEAU DE BORD
-	private VbTempParamTabBord tempBord = new VbTempParamTabBord(); 
+	private VbTempParamTabBord tempBord = new VbTempParamTabBord();
+	private VPieces sltPiece = new VPieces();
+	private TSeances sltSeances  = new TSeances();
 	 
 	//variables
 	private long gesCode;
@@ -608,6 +612,109 @@ public class DaoController {
 			    }
 		    }
 	 }
+	 
+	 public void updateDao() {
+			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
+					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
+						if (!listDao.isEmpty()) {
+							 newDao= listDao.get(0);
+							 newDao.setTStatut(new TStatut("D3A"));
+							 newDao.setDacStatutRetour("0");
+						     iservice.updateObject(newDao); 
+				   	               }
+	 }
+	 
+	 
+	 //Affectation d'une fonction
+	 public void saveAffectation (String respo) {            
+		 
+		 listSeances =  (List<TSeances>) iservice.getObjectsByColumn("TSeances", new ArrayList<String>(Arrays.asList("SEA_NUM")),
+					new WhereClause("SEA_TSE_CODE",WhereClause.Comparateur.EQ,"CIA"), 
+					new WhereClause("SEA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
+		            new WhereClause("SEA_FON_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+		       if(!listSeances.isEmpty()) { 
+		    	   sltSeances=listSeances.get(0);
+		    	   
+		    	     updateDao();
+		    	    
+		    	     TCommissionSpecifique com = new TCommissionSpecifique();
+			  	     com.setTStructure(new TStructure(sltImput.getStrCode()));
+			  	     com.setTDacSpecs(newDao);
+			  	     com.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			  	     com.setTTypeCommission(new TTypeCommission("CIA"));
+			  	     com.setComDteSaisi(Calendar.getInstance().getTime());
+			  	     com.setComMarCode(slctdTd.getTymCode());
+			  	     iservice.addObject(com);
+			  	 	 
+		    	     TDetCommissionSeance det = new TDetCommissionSeance();
+			   		 det.setDcsDteSaisi(Calendar.getInstance().getTime());
+			   		 det.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+			   		 det.setTDacSpecs(newDao);
+			   		 det.setTSeances(sltSeances);
+			   		 det.setDcsFonCod(sltImput.getFonCod());
+			   		 det.setDcsOpeMatricule(sltImput.getOpeMatricule());
+			   		 det.setTStructure(new TStructure(sltImput.getStrCode()));
+			   		 det.setTCommissionSpecifique(com);
+			   		 det.setTOperateur(userController.getSlctd().getTOperateur());
+			   		 det.setTTypeCommission(new TTypeCommission(com.getTTypeCommission().getTcoCode()));
+			   		 det.setDcsPresent("O");
+			   		 det.setDcsNomMbm(sltImput.getOpeNom());
+			   		 det.setDcsTelMbm(sltImput.getOpeContact());
+			   		 det.setDcsMbmRespo(""+respo);
+			   		 iservice.addObject(det);  
+			   		//Chargement des fonctions à imputer 
+			   		 chargeFonctionImput();
+			   		//Message de Confirmation 
+			   		userController.setTexteMsg("Responsabilité Attribuée avec succès!");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+		       }else {
+		    	   
+		    	   updateDao();
+		    	   
+		    	   String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DU DAO N°";
+		  		   String exo=chaine+newDao.getDacCode();
+		  		   newSeance.setTFonction(userController.getSlctd().getTFonction());
+		  		   newSeance.setTOperateur(userController.getSlctd().getTOperateur());
+		  		   newSeance.setTTypeSeance(new TTypeSeance("CIA"));
+		  		   newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
+		  		   newSeance.setSeaLibelle(exo);
+		  		   iservice.addObject(newSeance);		
+		  	    		 
+		  	       TCommissionSpecifique com = new TCommissionSpecifique();
+		  	       com.setTStructure(new TStructure(sltImput.getStrCode()));
+		  	       com.setTDacSpecs(newDao);
+		  	       com.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+		  	       com.setTTypeCommission(new TTypeCommission("CIA"));
+		  	       com.setComDteSaisi(Calendar.getInstance().getTime());
+		  	       com.setComMarCode(slctdTd.getTymCode());
+		  	       iservice.addObject(com);
+		  	 	
+		  		   TDetCommissionSeance det = new TDetCommissionSeance();
+		   		   det.setDcsDteSaisi(Calendar.getInstance().getTime());
+		   		   det.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
+		   		   det.setTDacSpecs(newDao);
+		   		   det.setTSeances(newSeance);
+		   		   det.setDcsFonCod(sltImput.getFonCod());
+		   		   det.setDcsOpeMatricule(sltImput.getOpeMatricule());
+		   		   det.setTStructure(new TStructure(sltImput.getStrCode()));
+		   		   det.setTCommissionSpecifique(com);
+		   		   det.setTOperateur(userController.getSlctd().getTOperateur());
+		   		   det.setTTypeCommission(new TTypeCommission(com.getTTypeCommission().getTcoCode()));
+		   		   det.setDcsPresent("O");
+		   		   det.setDcsNomMbm(sltImput.getOpeNom());
+		   		   det.setDcsTelMbm(sltImput.getOpeContact());
+		   		   det.setDcsMbmRespo(""+respo);
+		   		   iservice.addObject(det); 
+		   		   //Chargement des fonctions à imputer
+		   		   chargeFonctionImput();
+		   		  //Message de Confirmation
+		   		  userController.setTexteMsg("Responsabilité Attribuée avec succès!");
+				  userController.setRenderMsg(true);
+				  userController.setSevrityMsg("success");
+		       }
+	        }
+	 
 	 
 	 
 	 public void chargeCritereByLot() { 			 
@@ -2151,11 +2258,11 @@ public class DaoController {
 			               //Chargement des dossiers du DAO
 							chargeDossier(); 
 							//Message de confirmation
-							FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succès!", "");
+							FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 							FacesContext.getCurrentInstance().addMessage(null, msg);
 						     chargeDossier();
 							}else {
-								FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã  nouveau un document ! ","");
+								FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à  nouveau un document ! ","");
 								FacesContext.getCurrentInstance().addMessage(null, msg);	
 								
 							}
@@ -2196,11 +2303,11 @@ public class DaoController {
 					//chargeNatureDocTrans();
 					chargeDossier();
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succï¿½s!", "");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				   chargeDossier();
 					}else {
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã  nouveau un document ! ","");
+						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à  nouveau un document ! ","");
 						FacesContext.getCurrentInstance().addMessage(null, msg);	
 						
 					}
@@ -3247,6 +3354,24 @@ public class DaoController {
 							_logger.info("objetListe size: "+listeLots.size());		
 					}
 				   
+				 //Mis à jour de présence (O/N)
+				   public void majPresence (String presence) {
+						 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
+						 TPiecesDacs piece = new TPiecesDacs(); 
+						 if(!LS.isEmpty()) piece = LS.get(0);
+						 piece.setPidPresente(""+presence);
+						 iservice.updateObject(piece);
+					 }
+				   
+				   //Mis à jour de conformité (Conforme/Non Conforme)
+				   public void majConforme (String conformite) {
+						 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
+						 TPiecesDacs piece = new TPiecesDacs(); 
+						 if(!LS.isEmpty()) piece = LS.get(0);
+						 piece.setPidConforme(""+conformite);
+						 iservice.updateObject(piece);
+					 }
+				   
 				   
 				   public void chargeLotsRappel(){
 						 getListeLots().clear();
@@ -3362,9 +3487,6 @@ public class DaoController {
 				       }
 				       else
 				       {
-				    	   /*userController.setTexteMsg("Veuillez respecter le nombre de lots renseignï¿½ !");
-							 userController.setRenderMsg(true);
-							 userController.setSevrityMsg("success");*/
 							 
 							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -3924,10 +4046,11 @@ public class DaoController {
 									} 
 							  
 							  
-							//Chargement des imputations ou lignes budgï¿½taires pour le AC
+							//Chargement des fonctions à imputer pour le Chef de Service
 							  public void chargeFonctionImput() { 
 								  listeFonctionsImput.clear();
 								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
+										  new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getDacCode()),
 										 new WhereClause("STR_CODE",Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode())); 
 									_logger.info("listeFonctionsImput size: "+listeFonctionsImput.size());	
 									typeActionTb();
@@ -3935,7 +4058,7 @@ public class DaoController {
 							  
 							  
 							   
-							  //Filtre sur la liste des chargï¿½s d'Etudes
+							  //Filtre sur la liste des chargés d'Etudes
 							  public void filtrefonction() { 
 								  listeFonctionsImput.clear();
 								  listeFonctionsImput =(List<VFonctionImputation>) iservice.getObjectsByColumn("VFonctionImputation", new ArrayList<String>(Arrays.asList("FON_COD")),
@@ -4023,7 +4146,7 @@ public class DaoController {
 								        		   //new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
 											       new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
 										               if (!listDao.isEmpty()) { newDao= listDao.get(0);}
-								                             String chaine="CORRECTION DU DOSSIER D''APPEL D''OFFRES NÂ°";
+								                             String chaine="CORRECTION DU DOSSIER D''APPEL D''OFFRES N°";
 								                             String exo=chaine+newDao.getDacCode();
 								                             correction.setCorLieblle(exo); 
 								                             correction.setCorOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
@@ -4107,7 +4230,7 @@ public class DaoController {
 									 			   	                 }
 									 				  			 				  
 									 				  //String exo="";
-									 				  String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DU DAO NÂ°";
+									 				  String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DU DAO N°";
 									 				  String exo=chaine+newDao.getDacCode();
 									 				  newSeance.setTFonction(userController.getSlctd().getTFonction());
 									 				  newSeance.setTOperateur(userController.getSlctd().getTOperateur());
@@ -4485,11 +4608,11 @@ public class DaoController {
 											//chargeNatureDocTrans();
 											chargeDossierCharge();
 											
-											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succès!", "");
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 											FacesContext.getCurrentInstance().addMessage(null, msg);
 											chargeDossierCharge();
 											}else {
-												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã  nouveau un document ! ","");
+												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger à  nouveau un document ! ","");
 												FacesContext.getCurrentInstance().addMessage(null, msg);	
 												
 											}
@@ -8255,5 +8378,38 @@ public class DaoController {
 	public void setSltMarge(VMargeDePreference sltMarge) {
 		this.sltMarge = sltMarge;
 	}
+
+	public VPieces getSltPiece() {
+		return sltPiece;
+	}
+
+	public void setSltPiece(VPieces sltPiece) {
+		this.sltPiece = sltPiece;
+	}
+
+	public VFonctionImputation getSltImput() {
+		return sltImput;
+	}
+
+	public void setSltImput(VFonctionImputation sltImput) {
+		this.sltImput = sltImput;
+	}
+
+	public List<TSeances> getListSeances() {
+		return listSeances;
+	}
+
+	public void setListSeances(List<TSeances> listSeances) {
+		this.listSeances = listSeances;
+	}
+
+	public TSeances getSltSeances() {
+		return sltSeances;
+	}
+
+	public void setSltSeances(TSeances sltSeances) {
+		this.sltSeances = sltSeances;
+	}
+	
 	
 }
