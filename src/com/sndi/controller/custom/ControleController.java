@@ -6593,13 +6593,13 @@ public class ControleController {
 														    			//TRAITEMENT ANO DMP
 														    			if(action.equalsIgnoreCase("TRAIANO")) {
 															    			type = "Commission";
-															    			libelle="TRAITEMENT DES ANO DE L'AVIS";	
+															    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	
 															    		}
 														    			else
 															    			//TRAITEMENT ANO DMP
 															    			if(action.equalsIgnoreCase("TRAIDMP")) {
 																    			type = "Commission";
-																    			libelle="TRAITEMENT DES ANO DE L'AVIS";	
+																    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	
 																    		}
 													    			else
 													    				
