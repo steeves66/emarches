@@ -662,6 +662,25 @@ public class DaoController {
 			   		 det.setDcsTelMbm(sltImput.getOpeContact());
 			   		 det.setDcsMbmRespo(""+respo);
 			   		 iservice.addObject(det);  
+			   		 
+			      	//Enregistrement dans TDaoAffectation
+		 	    	 TDaoAffectation newAff = new TDaoAffectation(); 
+		 			 newAff.setDafDacCode(newDao.getDacCode());
+		 			 newAff.setDafOpeMatricule(sltImput.getOpeMatricule());
+		 			 newAff.setDafStaCode(newDao.getTStatut().getStaCode());
+		 			 newAff.setDafStatutRetour(newDao.getDacStatutRetour());
+		 			 newAff.setDafDacObjet(newDao.getDacObjet());
+		 			 newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
+		 			 newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
+		 			 newAff.setDafTypePlan(newDao.getDacTypePlan());
+		 			 newAff.setDafDacStr(newDao.getTStructure().getStrCode());
+		 			 newAff.setDafDacRecherche(newDao.getDacRecherche());
+		 			 newAff.setDafDcsMbmRespo(det.getDcsMbmRespo());
+		 			 newAff.setTDetCommissionSeance(det);
+		 			 newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
+		 			 newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
+		 			 newAff.setDafMention(newDao.getDacMention());
+		 			 iservice.addObject(newAff);
 			   		//Chargement des fonctions à imputer 
 			   		 chargeFonctionImput();
 			   		//Message de Confirmation 
@@ -706,6 +725,25 @@ public class DaoController {
 		   		   det.setDcsTelMbm(sltImput.getOpeContact());
 		   		   det.setDcsMbmRespo(""+respo);
 		   		   iservice.addObject(det); 
+		   		   
+		   		   //Enregistrement dans TDaoAffectation
+		 	       TDaoAffectation newAff = new TDaoAffectation(); 
+		 		   newAff.setDafDacCode(newDao.getDacCode());
+		 		   newAff.setDafOpeMatricule(sltImput.getOpeMatricule());
+		 		   newAff.setDafStaCode(newDao.getTStatut().getStaCode());
+		 		   newAff.setDafStatutRetour(newDao.getDacStatutRetour());
+		 		   newAff.setDafDacObjet(newDao.getDacObjet());
+		 		   newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
+		 		   newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
+		 		   newAff.setDafTypePlan(newDao.getDacTypePlan());
+		 		   newAff.setDafDacStr(newDao.getTStructure().getStrCode());
+		 		   newAff.setDafDacRecherche(newDao.getDacRecherche());
+		 		   newAff.setDafDcsMbmRespo(det.getDcsMbmRespo());
+		 		   newAff.setTDetCommissionSeance(det);
+		 		   newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
+		 		   newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
+		 		   newAff.setDafMention(newDao.getDacMention());
+		 		   iservice.addObject(newAff);
 		   		   //Chargement des fonctions à imputer
 		   		   chargeFonctionImput();
 		   		  //Message de Confirmation
@@ -4733,7 +4771,7 @@ public class DaoController {
 										        	  //statutSanction ="";
 													  //statutSanRetour ="";
 													  
-													  if(slctdTd.getDacMention().equalsIgnoreCase("Validé pour publication")) {
+													  if(slctdTd.getDacMention().equalsIgnoreCase("A Valider pour publication")) {
 														  statutSanction ="DPU";
 														  statutSanRetour ="0";
 														    if(slctdTd.getMopCode().equalsIgnoreCase("AOR") || slctdTd.getMopCode().equalsIgnoreCase("PSL"))
