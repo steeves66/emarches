@@ -21,6 +21,7 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	private BigDecimal pofNum;
 	private String craCode;
 	private BigDecimal dofNum;
+	private BigDecimal dcadNum;
 	private String analyseStatut;
 	private BigDecimal dcadLaaId;
 	private String pofLibelle;
@@ -38,12 +39,13 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.dofNum = dofNum;
 	}
 
-	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum, String analyseStatut,
+	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum,BigDecimal dcadNum, String analyseStatut,
 			BigDecimal dcadLaaId, String pofLibelle, String pofConforme, Long pofScore, String pofObs,
 			String anfPresence, BigDecimal anfNum, String dcadDacCode) {
 		this.pofNum = pofNum;
 		this.craCode = craCode;
 		this.dofNum = dofNum;
+		this.dcadNum = dcadNum;
 		this.analyseStatut = analyseStatut;
 		this.dcadLaaId = dcadLaaId;
 		this.pofLibelle = pofLibelle;
@@ -81,6 +83,15 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setDofNum(BigDecimal dofNum) {
 		this.dofNum = dofNum;
+	}
+	
+	@Column(name = "DCAD_NUM", precision = 22, scale = 0)
+	public BigDecimal getDcadNum() {
+		return this.dcadNum;
+	}
+
+	public void setDcadNum(BigDecimal dcadNum) {
+		this.dcadNum = dcadNum;
 	}
 
 	@Column(name = "ANALYSE_STATUT", length = 1)

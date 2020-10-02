@@ -6450,7 +6450,7 @@ public class ControleController {
 								    			libelle="SEANCE D'OUVERTURE / SAISIE DES OFFRES";
 								    			libelle2 = "Date Fin Ouverture";
 								    			typePlan = "L'OUVERTURE";
-								    			libelle1 = "Heure d'Ouverture";
+								    			libelle1 = "Heure de Fin";
 								    			libelleFinCom = "Fin de la séance d'ouverture";
 								    			libelleConfirm = "Confirmez-vous la fin de la séance d'ouverture de l'avis d'appel d'Offre N°";
 												 panel1 =false;
@@ -6490,7 +6490,7 @@ public class ControleController {
 									    			typePlan = "L'ANALYSE";
 									    			fonctionalite = "listAnalyseAc";
 									    			libelle2 = "Date Fin Analyse";
-									    			libelle1 = "Heure d'Analyse";
+									    			libelle1 = "Heure de Fin";
 									    			libelleFinCom = "Fin de l'analyse";
 									    			libelleConfirm = "Confirmez-vous la fin de l'analyse des Offres de l'avis d'appel d'Offre N°";
 									    			libelle="ANALYSE DES OFFRES";
@@ -6523,6 +6523,8 @@ public class ControleController {
 									    			if(action.equalsIgnoreCase("LISJUG")) {
 										    			type = "Commission";
 										    			fonctionalite = "listJugementAc";
+										    			libelle2 = "Fin Jugement";
+										    			libelle1 = "Heure de Fin";
 										    			libelle="JUGEMENT DES OFFRES";
 										    			libelleFinCom = "Fin du jugement de l'appel d'offre";
 										    			libelleConfirm = "Confirmez-vous la fin du jugement de l'avis d'appel d'Offre N°";

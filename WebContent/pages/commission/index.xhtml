@@ -230,7 +230,7 @@
 				        <div class="form-group ">
 	                  <label for="dateOuv" class="col-sm-2 control-label"><b>#{controleController.libelle2}</b></label>
 	                  <div class="col-sm-4">
-	                      <p:calendar id="dateOuv" value="#{commissionController.slctdTd.aaoDteFinOuv}" mask="true" pattern="dd/MM/yyyy" /> 
+	                      <p:calendar id="dateOuv" showOn="false" value="#{commissionController.slctdTd.aaoDteFinOuv}" mask="true" pattern="dd/MM/yyyy" /> 
 	                  </div>
 	                  
 	                    <label class="col-sm-2 control-label"><b>#{controleController.libelle1}</b></label>
@@ -249,7 +249,7 @@
          </div>
          
          <div class="box-footer">
-          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.finOuverture()}" oncomplete="PF('finOuvertureDlg').hide()"  update=":gnl">
+          <p:commandLink styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" action="#{commissionController.finOuverture()}" oncomplete="PF('finOuvertureDlg').hide()"  update="gnl">
 				            <p:confirm header="Confirmation" message="Confirmez vous la fin de l'analyse?" icon="ui-icon-alert" />
 				             <i class="ace-icon fa fa-save"></i> Valider
 				            </p:commandLink>
