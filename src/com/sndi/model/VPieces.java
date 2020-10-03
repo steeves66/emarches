@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 21 févr. 2020 15:20:05 by Hibernate Tools 4.3.5.Final
+// Generated 2 oct. 2020 19:54:19 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,26 +19,29 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_PIECES")
 public class VPieces implements java.io.Serializable {
 
-	private Long VPi;
-	private Long pidCode;
+	private BigDecimal VPi;
+	private long pidCode;
 	private String pidLibelle;
 	private String pidTpiCode;
 	private String pidStaCode;
 	private Date pidDteSaisi;
 	private String pidDacCode;
-	private String pidConforme;
 	private String pidObservation;
+	private String pidConforme;
 	private String pidPresente;
+	private String btnPidConforme;
+	private String btnPidPresente;
 
 	public VPieces() {
 	}
 
-	public VPieces(Long pidCode) {
+	public VPieces(long pidCode) {
 		this.pidCode = pidCode;
 	}
 
-	public VPieces(Long VPi,Long pidCode, String pidLibelle, String pidTpiCode, String pidStaCode, Date pidDteSaisi,
-			String pidDacCode, String pidConforme, String pidObservation,String pidPresente) {
+	public VPieces(BigDecimal VPi, long pidCode, String pidLibelle, String pidTpiCode, String pidStaCode,
+			Date pidDteSaisi, String pidDacCode, String pidObservation, String pidConforme, String pidPresente,
+			String btnPidConforme, String btnPidPresente) {
 		this.VPi = VPi;
 		this.pidCode = pidCode;
 		this.pidLibelle = pidLibelle;
@@ -46,28 +49,30 @@ public class VPieces implements java.io.Serializable {
 		this.pidStaCode = pidStaCode;
 		this.pidDteSaisi = pidDteSaisi;
 		this.pidDacCode = pidDacCode;
-		this.pidConforme = pidConforme;
 		this.pidObservation = pidObservation;
+		this.pidConforme = pidConforme;
 		this.pidPresente = pidPresente;
+		this.btnPidConforme = btnPidConforme;
+		this.btnPidPresente = btnPidPresente;
 	}
 
+	
 	@Id
 	@Column(name = "V_PI", precision = 22, scale = 0)
-	public Long getVPi() {
+	public BigDecimal getVPi() {
 		return this.VPi;
 	}
 
-	public void setVPi(Long VPi) {
+	public void setVPi(BigDecimal VPi) {
 		this.VPi = VPi;
 	}
-	
-	
+
 	@Column(name = "PID_CODE", nullable = false, precision = 22, scale = 0)
-	public Long getPidCode() {
+	public long getPidCode() {
 		return this.pidCode;
 	}
 
-	public void setPidCode(Long pidCode) {
+	public void setPidCode(long pidCode) {
 		this.pidCode = pidCode;
 	}
 
@@ -116,15 +121,6 @@ public class VPieces implements java.io.Serializable {
 		this.pidDacCode = pidDacCode;
 	}
 
-	@Column(name = "PID_CONFORME", length = 1)
-	public String getPidConforme() {
-		return this.pidConforme;
-	}
-
-	public void setPidConforme(String pidConforme) {
-		this.pidConforme = pidConforme;
-	}
-
 	@Column(name = "PID_OBSERVATION", length = 2000)
 	public String getPidObservation() {
 		return this.pidObservation;
@@ -133,7 +129,15 @@ public class VPieces implements java.io.Serializable {
 	public void setPidObservation(String pidObservation) {
 		this.pidObservation = pidObservation;
 	}
-	
+
+	@Column(name = "PID_CONFORME", length = 3)
+	public String getPidConforme() {
+		return this.pidConforme;
+	}
+
+	public void setPidConforme(String pidConforme) {
+		this.pidConforme = pidConforme;
+	}
 
 	@Column(name = "PID_PRESENTE", length = 3)
 	public String getPidPresente() {
@@ -142,6 +146,24 @@ public class VPieces implements java.io.Serializable {
 
 	public void setPidPresente(String pidPresente) {
 		this.pidPresente = pidPresente;
+	}
+
+	@Column(name = "BTN_PID_CONFORME", precision = 22, scale = 0)
+	public String getBtnPidConforme() {
+		return this.btnPidConforme;
+	}
+
+	public void setBtnPidConforme(String btnPidConforme) {
+		this.btnPidConforme = btnPidConforme;
+	}
+
+	@Column(name = "BTN_PID_PRESENTE", precision = 22, scale = 0)
+	public String getBtnPidPresente() {
+		return this.btnPidPresente;
+	}
+
+	public void setBtnPidPresente(String btnPidPresente) {
+		this.btnPidPresente = btnPidPresente;
 	}
 
 }
