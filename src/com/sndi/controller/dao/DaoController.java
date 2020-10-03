@@ -1944,7 +1944,7 @@ public class DaoController {
 			
 		 }
 		 
-		  //Charger la liste des piï¿½ces a examiner par le charge d'etude
+		  //Charger la liste des pièces a examiner par le charge d'etude
 			 public void chargePiecesByDao() {
 				 listePices= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
 							new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));			
@@ -1957,7 +1957,7 @@ public class DaoController {
 			 }
 			 
 			 
-			//Charger la liste des piï¿½ces a examiner par les chargï¿½s d'etude
+			//Charger la liste des pièces a examiner par les chargï¿½s d'etude
 			 public void chargePiecesByCharges() {
 				 listePices= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
 							new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
@@ -3399,6 +3399,8 @@ public class DaoController {
 						 if(!LS.isEmpty()) piece = LS.get(0);
 						 piece.setPidPresente(""+presence);
 						 iservice.updateObject(piece);
+						 //Rechargement de la liste des pièces à corriger
+						 chargePiecesByCharges();
 					 }
 				   
 				   //Mis à jour de conformité (Conforme/Non Conforme)
@@ -3408,6 +3410,8 @@ public class DaoController {
 						 if(!LS.isEmpty()) piece = LS.get(0);
 						 piece.setPidConforme(""+conformite);
 						 iservice.updateObject(piece);
+						 //Rechargement de la liste des pièces à corriger
+						 chargePiecesByCharges();
 					 }
 				   
 				   

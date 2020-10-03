@@ -180,16 +180,7 @@
 		</h:panelGroup>
         </div>
         
-      <!--   <div class="box-body">
-              <p:dataTable id="corrige" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{daoController.listeCorrection}" emptyMessage="Aucune pièce corrigée">
-         				<p:column headerText="LIBELLE PIECE" styleClass="col-sm-9">
-         				<h:outputText value="#{slctdTb.TPiecesDacs.pidLibelle}" />
-				        </p:column>
-				         <p:column headerText="ACTION" styleClass="col-sm-1">
-				        </p:column>  
-                 </p:dataTable>   
-                       
-        </div> -->
+    
         
         <div class="box-body">
         
@@ -200,36 +191,78 @@
 				        </p:column>
 				        
 				        <p:column headerText="Présente ?" styleClass="col-sm-1" >
-         				<p:cellEditor>
-         				  <f:facet name="output">
-		                  <h:outputText styleClass="pull-right" value="#{slctdTb.pidPresente}" />
-		                </f:facet>
-		                <br/>
-		                 <f:facet name="input"> 
-			            <h:selectOneMenu value="#{slctdTb.pidPresente}" style="width:100%; color:#0000">
-			              <f:selectItem itemLabel="Choisir" itemValue="" />
-                         <f:selectItem itemLabel="OUI" itemValue="OUI" />
-                         <f:selectItem itemLabel="NON" itemValue="NON" />
-                        </h:selectOneMenu>
-		                 </f:facet>
-         				</p:cellEditor>
+				        
+				        <h:panelGroup rendered="#{slctdTb.btnPidPresente == '3'}">
+				        
+                            <p:commandLink action="#{daoController.majPresence('OUI')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" update="gnl"
+				               title="Présence">
+                                <span class="hidden-xs" style="color: white">OUI</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                            </p:commandLink>
+                            
+                                
+                            <p:commandLink action="#{daoController.majPresence('NON')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl"
+				               title="Présence">
+                                <span class="hidden-xs" style="color: white">NON</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                            </p:commandLink>
+                       
+                        </h:panelGroup>
+		        
+         				<h:panelGroup rendered="#{slctdTb.pidPresente == 'OUI'}">  
+                        <p:commandLink action="#{daoController.majPresence('NON')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl"
+				               title="Présence">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.pidPresente =='OUI'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                         </p:commandLink>
+                       </h:panelGroup>
+                            
+                           <h:panelGroup rendered="#{slctdTb.pidPresente == 'NON'}">  
+                            <p:commandLink action="#{daoController.majPresence('OUI')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl"
+				               title="Présence">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.pidPresente =='OUI'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
 				        </p:column>
 				        
-				         <p:column headerText="Conforme ?" styleClass="col-sm-1" >
-         				<p:cellEditor>
-         				  <f:facet name="output">
-		                  <h:outputText styleClass="pull-right" value="#{slctdTb.pidConforme}" />
-		                </f:facet>
-		                <br/>
-		                 <f:facet name="input"> 
-			            <h:selectOneMenu value="#{slctdTb.pidConforme}" style="width:100%; color:#0000">
-			              <f:selectItem itemLabel="Choisir" itemValue="" />
-                         <f:selectItem itemLabel="OUI" itemValue="OUI" />
-                         <f:selectItem itemLabel="NON" itemValue="NON" />
-                        </h:selectOneMenu>
-		                 </f:facet>
-         				</p:cellEditor>
+				     <p:column headerText="Conforme ?" styleClass="col-sm-1" >
+				         
+				         <h:panelGroup rendered="#{slctdTb.btnPidConforme == '3'}">
+
+                          <p:commandLink action="#{daoController.majConforme('OUI')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" update="gnl"
+				            title="Conformité">
+                            <span class="hidden-xs" style="color: white">OUI</span>
+                         <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                        </p:commandLink>
+                          
+                        <p:commandLink action="#{daoController.majConforme('NON')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl"
+				               title="Conformité">
+                                <span class="hidden-xs" style="color: white">NON</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                         </p:commandLink>
+                      
+                        </h:panelGroup>
+				         
+				         
+         				<h:panelGroup rendered="#{slctdTb.pidConforme == 'OUI'}">  
+                        <p:commandLink action="#{daoController.majConforme('NON')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl"
+				               title="Conformité">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.pidConforme =='OUI'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                         </p:commandLink>
+                       </h:panelGroup>
+                            
+                           <h:panelGroup rendered="#{slctdTb.pidConforme == 'NON'}">  
+                            <p:commandLink action="#{daoController.majConforme('OUI')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl"
+				               title="Conformité">
+                                <span class="hidden-xs" style="color: white">#{slctdTb.pidConforme =='OUI'?'OUI':'NON'}</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+         				
 				        </p:column>
+				        
 				          <p:column headerText="Observation" styleClass="col-sm-6" >
          				<p:cellEditor>
          				  <f:facet name="output">
@@ -412,13 +445,10 @@
         </div>
         </h:panelGroup>
         
-        
-        
-        
+ 
         </div>
         
-        
-        
+    
         </div>
                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CET'}"> 
 		         <p:commandLink styleClass="btn btn-warning" action="#{daoController.renderPage('dao1','CHADAO')}" style="background-color: #f88b2e;" update=":content">
@@ -445,13 +475,6 @@
     
     
     
-    
-
-    
-    
-    
-    
-     
     
     <h:form id="finlog" styleClass="form-horizontal">
 	       <p:dialog  widgetVar="financedlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Correction de la Pièce N°...">
