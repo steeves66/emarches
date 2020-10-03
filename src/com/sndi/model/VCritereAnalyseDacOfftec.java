@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 1 sept. 2020 10:50:24 by Hibernate Tools 4.3.5.Final
+// Generated 2 oct. 2020 20:58:51 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -50,6 +50,8 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 	private String anfCommentaire;
 	private String anfPresence;
 	private BigDecimal anfNum;
+	private String btnAnfValeurConf;
+	private String btnAnfPresence;
 
 	public VCritereAnalyseDacOfftec() {
 	}
@@ -68,8 +70,9 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 			String codep, String craTymCodex, String craTypProc, String craTypDac, String craBailleurx,
 			String analyseStatut, String dcadDacCode, String aaoRegQual, String aaoRegQualx, long valRegQual,
 			String dcadCommentaire, BigDecimal dcadNumDcad, String dcadCraAuCode, String dcadPetitCra,
-			String anfValeurConf, String anfObser, long anfValeurScore,  BigDecimal nbfich, BigDecimal fichStatut,String anfCommentaire, String anfPresence
-			,BigDecimal anfNum) {
+			String anfValeurConf, String anfObser, Long anfValeurScore, BigDecimal nbfich, BigDecimal fichStatut,
+			String anfCommentaire, String anfPresence, BigDecimal anfNum, String btnAnfValeurConf,
+			String btnAnfPresence) {
 		this.RId = RId;
 		this.dcadLaaId = dcadLaaId;
 		this.offSouNcc = offSouNcc;
@@ -102,6 +105,8 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 		this.anfCommentaire = anfCommentaire;
 		this.anfPresence = anfPresence;
 		this.anfNum = anfNum;
+		this.btnAnfValeurConf = btnAnfValeurConf;
+		this.btnAnfPresence = btnAnfPresence;
 	}
 
 	@Id
@@ -276,7 +281,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 		this.aaoRegQualx = aaoRegQualx;
 	}
 
-	@Column(name = "VAL_REG_QUAL")
+	@Column(name = "VAL_REG_QUAL", precision = 22, scale = 0)
 	public long getValRegQual() {
 		return this.valRegQual;
 	}
@@ -339,7 +344,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 		this.anfObser = anfObser;
 	}
 
-	@Column(name = "ANF_VALEUR_SCORE")
+	@Column(name = "ANF_VALEUR_SCORE", precision = 10, scale = 0)
 	public long getAnfValeurScore() {
 		return this.anfValeurScore;
 	}
@@ -347,7 +352,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 	public void setAnfValeurScore(long anfValeurScore) {
 		this.anfValeurScore = anfValeurScore;
 	}
-	
+
 	@Column(name = "NBFICH", precision = 22, scale = 0)
 	public BigDecimal getNbfich() {
 		return this.nbfich;
@@ -383,7 +388,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 	public void setAnfPresence(String anfPresence) {
 		this.anfPresence = anfPresence;
 	}
-	
+
 	@Column(name = "ANF_NUM", precision = 22, scale = 0)
 	public BigDecimal getAnfNum() {
 		return this.anfNum;
@@ -392,5 +397,23 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 	public void setAnfNum(BigDecimal anfNum) {
 		this.anfNum = anfNum;
 	}
+
+	@Column(name = "BTN_ANF_VALEUR_CONF", precision = 22, scale = 0)
+	public String getBtnAnfValeurConf() {
+		return this.btnAnfValeurConf;
+	}
+
+	public void setBtnAnfValeurConf(String btnAnfValeurConf) {
+		this.btnAnfValeurConf = btnAnfValeurConf;
+	}
+
+	@Column(name = "BTN_ANF_PRESENCE", precision = 22, scale = 0)
+	public String getBtnAnfPresence() {
+		return this.btnAnfPresence;
+	}
+
+	public void setBtnAnfPresence(String btnAnfPresence) {
+		this.btnAnfPresence = btnAnfPresence;
+	}	
 
 }

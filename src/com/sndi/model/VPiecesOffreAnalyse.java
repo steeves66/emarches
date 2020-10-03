@@ -1,5 +1,5 @@
 package com.sndi.model;
-// Generated 1 sept. 2020 10:30:17 by Hibernate Tools 4.3.5.Final
+// Generated 2 oct. 2020 20:58:51 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -31,7 +31,9 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	private String anfPresence;
 	private BigDecimal anfNum;
 	private String dcadDacCode;
-	
+	private String btnAnfValeurConf;
+	private String btnAnfPresence;
+
 	public VPiecesOffreAnalyse() {
 	}
 
@@ -39,9 +41,10 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.dofNum = dofNum;
 	}
 
-	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum,BigDecimal dcadNum, String analyseStatut,
-			BigDecimal dcadLaaId, String pofLibelle, String pofConforme, Long pofScore, String pofObs,
-			String anfPresence, BigDecimal anfNum, String dcadDacCode) {
+	public VPiecesOffreAnalyse(BigDecimal pofNum, String craCode, BigDecimal dofNum, BigDecimal dcadNum,
+			String analyseStatut, BigDecimal dcadLaaId, String pofLibelle, String pofConforme, Long pofScore,
+			String pofObs, String anfPresence, BigDecimal anfNum, String dcadDacCode, String btnAnfValeurConf,
+			String btnAnfPresence) {
 		this.pofNum = pofNum;
 		this.craCode = craCode;
 		this.dofNum = dofNum;
@@ -55,8 +58,11 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 		this.anfPresence = anfPresence;
 		this.anfNum = anfNum;
 		this.dcadDacCode = dcadDacCode;
+		this.btnAnfValeurConf = btnAnfValeurConf;
+		this.btnAnfPresence = btnAnfPresence;
 	}
 
+	
 	@Id
 	@Column(name = "POF_NUM", precision = 22, scale = 0)
 	public BigDecimal getPofNum() {
@@ -84,7 +90,7 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	public void setDofNum(BigDecimal dofNum) {
 		this.dofNum = dofNum;
 	}
-	
+
 	@Column(name = "DCAD_NUM", precision = 22, scale = 0)
 	public BigDecimal getDcadNum() {
 		return this.dcadNum;
@@ -156,7 +162,7 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	public void setAnfPresence(String anfPresence) {
 		this.anfPresence = anfPresence;
 	}
-	
+
 	@Column(name = "ANF_NUM", precision = 22, scale = 0)
 	public BigDecimal getAnfNum() {
 		return this.anfNum;
@@ -173,6 +179,24 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 
 	public void setDcadDacCode(String dcadDacCode) {
 		this.dcadDacCode = dcadDacCode;
+	}
+
+	@Column(name = "BTN_ANF_VALEUR_CONF", precision = 22, scale = 0)
+	public String getBtnAnfValeurConf() {
+		return this.btnAnfValeurConf;
+	}
+
+	public void setBtnAnfValeurConf(String btnAnfValeurConf) {
+		this.btnAnfValeurConf = btnAnfValeurConf;
+	}
+
+	@Column(name = "BTN_ANF_PRESENCE", precision = 22, scale = 0)
+	public String getBtnAnfPresence() {
+		return this.btnAnfPresence;
+	}
+
+	public void setBtnAnfPresence(String btnAnfPresence) {
+		this.btnAnfPresence = btnAnfPresence;
 	}
 
 }
