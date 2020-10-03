@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-03T13:17:48 -->
+<!-- 2020-10-01T12:58:36 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pv_ana_offre" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd49f578-cc90-4b9c-947b-d6043e8f5e8c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<parameter name="param_code" class="java.lang.Long">
-		<defaultValueExpression><![CDATA[$P{param_code}]]></defaultValueExpression>
+	<parameter name="offre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$P{offre}]]></defaultValueExpression>
 	</parameter>
 	<parameter name="param_image" class="java.lang.String">
 		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
@@ -19,7 +19,7 @@ sou.sou_sigle_ste
 from v_critere_analyse_offre c, vb_lot_aao a, vb_avis_appel_offre aa,vb_soumissions sou
 where c.laa_id = a.laa_id
 and a.laa_aao_code = aa.aao_code
-and c.anf_dof_num = nvl($P{param_code},c.anf_dof_num)
+and c.anf_dof_num = nvl($P{offre},c.anf_dof_num)
 and c.off_sou_ncc = sou.sou_ncc
 --order by a.laa_num,c.anf_dof_num]]>
 	</queryString>
@@ -43,55 +43,6 @@ and c.off_sou_ncc = sou.sou_ncc
 	<group name="OFFRE">
 		<groupExpression><![CDATA[$F{ANF_DOF_NUM}]]></groupExpression>
 		<groupHeader>
-			<band height="50">
-				<textField>
-					<reportElement x="90" y="6" width="270" height="15" uuid="1867be87-3b78-45a0-b03c-b833469d1e99">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Ouvert le "+new SimpleDateFormat("dd/MM/yyYY").format($F{AAO_DTE_OUV_TEC})+" à "+$F{AAO_DTE_HEUR_OUV}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="398" y="6" width="100" height="15" uuid="63aa66c3-ac9c-4ce6-9621-6ed9d90ff413">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<textElement textAlignment="Right" verticalAlignment="Middle">
-						<font size="9" isBold="true"/>
-					</textElement>
-					<text><![CDATA[Nombre d'ouverture :]]></text>
-				</staticText>
-				<textField>
-					<reportElement x="135" y="25" width="280" height="15" uuid="1845414c-5e50-4481-9b67-d45a0b567f99">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<textElement textAlignment="Center" verticalAlignment="Middle">
-						<font size="9" isBold="true" isItalic="true"/>
-					</textElement>
-					<textFieldExpression><![CDATA["Mode d'évaluation : "+$F{AAO_REG_QUAL}]]></textFieldExpression>
-				</textField>
-				<staticText>
-					<reportElement x="0" y="0" width="550" height="50" uuid="6f51316e-766a-4f41-8026-78cb08d9f528"/>
-					<box>
-						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
-					</box>
-					<text><![CDATA[]]></text>
-				</staticText>
-				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="500" y="6" width="34" height="15" uuid="1cbf00a9-ca69-471e-8733-f459caff64da">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					</reportElement>
-					<box leftPadding="3"/>
-					<textElement textAlignment="Left" verticalAlignment="Middle">
-						<font size="9"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{AAO_NBR_OUV}]]></textFieldExpression>
-				</textField>
-			</band>
 			<band height="31">
 				<staticText>
 					<reportElement x="10" y="1" width="80" height="15" uuid="4b40e836-015f-446c-9789-14c6c010db2a">
@@ -154,10 +105,7 @@ and c.off_sou_ncc = sou.sou_ncc
 		<groupHeader>
 			<band height="75">
 				<staticText>
-					<reportElement x="0" y="0" width="550" height="49" uuid="d0b62841-f6a2-467f-ba92-16fc1552da98">
-						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					</reportElement>
+					<reportElement x="0" y="0" width="550" height="49" uuid="d0b62841-f6a2-467f-ba92-16fc1552da98"/>
 					<box>
 						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -285,9 +233,9 @@ Union – Discipline – Travail
 		</band>
 	</pageHeader>
 	<columnHeader>
-		<band height="130" splitType="Stretch">
+		<band height="163" splitType="Stretch">
 			<staticText>
-				<reportElement stretchType="ContainerHeight" x="0" y="78" width="550" height="52" uuid="534de35b-c14b-420c-a6c0-60ee62504df7"/>
+				<reportElement x="0" y="78" width="550" height="85" uuid="534de35b-c14b-420c-a6c0-60ee62504df7"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -349,6 +297,43 @@ Union – Discipline – Travail
 				<text><![CDATA[Objet :]]></text>
 			</staticText>
 			<staticText>
+				<reportElement x="398" y="121" width="100" height="15" uuid="63aa66c3-ac9c-4ce6-9621-6ed9d90ff413">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre d'ouverture :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="499" y="121" width="34" height="15" uuid="1cbf00a9-ca69-471e-8733-f459caff64da">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box leftPadding="3"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AAO_NBR_OUV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="90" y="121" width="270" height="15" uuid="1867be87-3b78-45a0-b03c-b833469d1e99">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Ouvert le "+new SimpleDateFormat("dd/MM/yyYY").format($F{AAO_DTE_OUV_TEC})+" à "+$F{AAO_DTE_HEUR_OUV}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="135" y="140" width="280" height="15" uuid="1845414c-5e50-4481-9b67-d45a0b567f99">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Mode d'évaluation : "+$F{AAO_REG_QUAL}]]></textFieldExpression>
+			</textField>
+			<staticText>
 				<reportElement mode="Opaque" x="0" y="63" width="550" height="15" forecolor="#FFFFFF" backcolor="#32C72A" uuid="e29fcf12-fe0b-41fe-8555-b9ddce83cd66">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
@@ -395,6 +380,17 @@ Union – Discipline – Travail
 			</textField>
 		</band>
 	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="110" y="35" width="340" height="10" uuid="858d243d-3a87-439e-9973-35cd88d2f81b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Edité le "+new SimpleDateFormat("dd/MM/yyyy").format(TODAY( ))]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
 			<textField>

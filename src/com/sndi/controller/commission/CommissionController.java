@@ -85,6 +85,7 @@ import com.sndi.model.VLotAnalyseFin;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VLotJugement;
+import com.sndi.model.VMargeDePreference;
 import com.sndi.model.VOffreCandidat;
 import com.sndi.model.VOffreNonRecevableLot;
 import com.sndi.model.VOffreRecevableLot;
@@ -199,13 +200,9 @@ public class CommissionController {
 	 //private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
 	 private List<VOffreCandidat> listCandidats = new ArrayList<VOffreCandidat>();
 	 private List<VCritereAnalyseDacOuv> listPiecesOuv = new ArrayList<VCritereAnalyseDacOuv>();
-	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>();
-	 //private List<TDetOffres> listeOffres = new ArrayList<TDetOffres>(); 
-	 //private List<VDetOffreRecevable> listeOffres = new ArrayList<VDetOffreRecevable>(); 
+	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>(); 
 	 private List<VDetOffreAnalyse> listeOffres = new ArrayList<VDetOffreAnalyse>();
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
-	 //private List<VDetOffreRecevable> offreRecevable = new ArrayList<VDetOffreRecevable>();
-	 //private List<VDetOffreNonRecevable> offreNonRecevable = new ArrayList<VDetOffreNonRecevable>();
 	 private List<VOffreRecevableLot> offreRecevable = new ArrayList<VOffreRecevableLot>();
 	 private List<VOffreNonRecevableLot> offreNonRecevable = new ArrayList<VOffreNonRecevableLot>();
 	 private List<VPiecesOffreAnalyse> listePiecesOffresAnalyse = new ArrayList<VPiecesOffreAnalyse>();
@@ -218,8 +215,6 @@ public class CommissionController {
 	 private List<TDetOffres> offreListe = new ArrayList<TDetOffres>();
 	 private List<TDetOffres> listeAffichageAttibutaire = new ArrayList<TDetOffres>(); 
 	 private List<TSeances> listeSeance = new ArrayList<TSeances>(); 
-	// private List<VCritereAnalyseDacOff> listeCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>(); 
-	 //private List<VCritereAnalyseDacOff> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOff>();
 	 private List<VCritereAnalyseDacOfftec> listeCritereAnalyse = new ArrayList<VCritereAnalyseDacOfftec>(); 
 	 private List<VCritereAnalyseDacOfftec> selectionCritereAnalyse = new ArrayList<VCritereAnalyseDacOfftec>();
 	 private List<TBanques> listBanque = new ArrayList<TBanques>();
@@ -255,8 +250,9 @@ public class CommissionController {
 	 private VVerifcorOffin infoLot =new VVerifcorOffin();
 	 private TLotAao recupLot =new TLotAao();
 	 private VRepSoumissionnaire recupNcc =new VRepSoumissionnaire();
-	
- 
+	 private VCritereAnalyseDacOfftec posCritere = new VCritereAnalyseDacOfftec();
+	 private VPiecesOffreAnalyse posPiece = new VPiecesOffreAnalyse();
+	 private VCritereAnalyseDacOuv pieceOuv = new VCritereAnalyseDacOuv();
 	 
 	 //Declaration des objets
 	 private TCommissionSpecifique newcomSpec = new TCommissionSpecifique();
@@ -277,15 +273,12 @@ public class CommissionController {
 	 private List<VSeqTravail> seqParam = new ArrayList<VSeqTravail>(); 
 	 
 	 private TDetOffres detOffre = new TDetOffres();
-	 //private TDetOffres sltOffre = new TDetOffres(); sltOffre
-	 //private VDetOffreRecevable sltOffre = new VDetOffreRecevable();
 	 private VDetOffreAnalyse sltOffre = new VDetOffreAnalyse();
 	 private TSoumissions soumission = new TSoumissions();
 	 private VLotAnalyse lot = new VLotAnalyse();
 	 private VLotJugement lotJug = new VLotJugement();
 	 private VLotAnalyseFin lots = new VLotAnalyseFin();
 	 private VLotAnalyseFin lotFin = new VLotAnalyseFin();
-	 //private VLotJugement lotAttr = new VLotJugement();
 	 private VLot sltLot = new VLot();
 	 private TDetailVente vente = new TDetailVente();
 	 private TPiecesOffres newPieceOffre = new TPiecesOffres();
@@ -299,6 +292,7 @@ public class CommissionController {
 	 private VbAnalyseOffre sltAnalyse =new VbAnalyseOffre();
 	 private VDetailOffres selectdetOffre = new VDetailOffres();
 	 private VSeqTravail seq = new VSeqTravail();
+	 private VCritereAnalyseDacOuv sltPiece = new VCritereAnalyseDacOuv();
 
 	 
 	 //Declaration des variables
@@ -640,6 +634,14 @@ public class CommissionController {
    		 } 
 	}
 	 
+	 
+	 public void majPresence (String marge) {
+		 List<TDetCritAnalyseDac> LS  = iservice.getObjectsByColumn("TDetCritAnalyseDac", new WhereClause("DCAD_NUM",Comparateur.EQ,""+sltPiece.getDcadNum()));
+		 TDetCritAnalyseDac piece = new TDetCritAnalyseDac(); 
+		 if(!LS.isEmpty()) piece = LS.get(0);
+		 //piece.set
+	 }
+	 
 
 	 
 	//Liste des pièces de l'offre
@@ -665,6 +667,49 @@ public class CommissionController {
 				 new WhereClause("DOF_RET",Comparateur.EQ,"O"),
 				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+sltOffre.getDofLaaId())));
 	 }
+	 
+	//Conformité (CONFORME/NON CONFORME)
+	 public void majCritere (String conforme) {
+		 List<TAnalyseOffre> AN  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posCritere.getDcadNum()));
+		 TAnalyseOffre crit = new TAnalyseOffre(); 
+		 if(!AN.isEmpty()) crit = AN.get(0);
+          crit.setAnfValeurConf(""+conforme);
+		 iservice.updateObject(crit);	
+		 //Actualisation des critères
+		 chargeCritereAnalyse();
+	 }
+	 
+	//Présence (O/N)
+	 public void majPiecesOuv (String presence) {
+		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+pieceOuv.getDcadNum()));
+		 TAnalyseOffre offre = new TAnalyseOffre(); 
+		 if(!ANA.isEmpty()) offre = ANA.get(0);
+		 offre.setAnfPresence(""+presence);
+		 iservice.updateObject(offre);	
+	 }
+	 
+	 //Présence (O/N)
+	 public void majPiecePresence (String presence) {
+		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posPiece.getDcadNum()));
+		 TAnalyseOffre anal = new TAnalyseOffre(); 
+		 if(!ANA.isEmpty()) anal = ANA.get(0);
+          anal.setAnfPresence(""+presence);
+		 iservice.updateObject(anal);	
+		 //Actualisation des pièces
+		 chargePiecesAnalyse();
+	 }
+	 
+	 //Conformité (CONFORME/NON CONFORME)
+	 public void majPieceConforme (String conforme) {
+		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posPiece.getDcadNum()));
+		 TAnalyseOffre anal = new TAnalyseOffre(); 
+		 if(!ANA.isEmpty()) anal = ANA.get(0);
+          anal.setAnfValeurConf(""+conforme);
+		 iservice.updateObject(anal);	
+		 //Actualisation des pièces
+		 chargePiecesAnalyse();
+	 }
+	 
 	 
 	 public void chargeCritereAnalyse() {
 		 listeCritereAnalyse.clear();
@@ -1979,6 +2024,11 @@ public class CommissionController {
 			 
 			 projetReport.stringparam1(""+slctdTd.getAaoCode(), ""+jrmx, ""+jasper);
 			 _logger.info("aaoCode : "  +""+slctdTd.getAaoCode()); 
+		 }
+		 
+		 //Edition de la fiche individuelle d'Analyse
+		 public void editerFicheOffre() {
+			 projetReport.longparam1(sltOffre.getDofNum().longValue(), "Rapport_ana", "Rapport_ana");
 		 }
 		 
 
@@ -3741,6 +3791,38 @@ public class CommissionController {
 
 	public void setSeq(VSeqTravail seq) {
 		this.seq = seq;
+	}
+
+	public VCritereAnalyseDacOuv getSltPiece() {
+		return sltPiece;
+	}
+
+	public void setSltPiece(VCritereAnalyseDacOuv sltPiece) {
+		this.sltPiece = sltPiece;
+	}
+
+	public VCritereAnalyseDacOfftec getPosCritere() {
+		return posCritere;
+	}
+
+	public void setPosCritere(VCritereAnalyseDacOfftec posCritere) {
+		this.posCritere = posCritere;
+	}
+
+	public VPiecesOffreAnalyse getPosPiece() {
+		return posPiece;
+	}
+
+	public void setPosPiece(VPiecesOffreAnalyse posPiece) {
+		this.posPiece = posPiece;
+	}
+
+	public VCritereAnalyseDacOuv getPieceOuv() {
+		return pieceOuv;
+	}
+
+	public void setPieceOuv(VCritereAnalyseDacOuv pieceOuv) {
+		this.pieceOuv = pieceOuv;
 	}
 
 
