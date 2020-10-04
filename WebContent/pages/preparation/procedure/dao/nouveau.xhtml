@@ -737,21 +737,19 @@
 				        
 				     <p:column headerText="Variante ?" styleClass="col-sm-1">
 				         
-         			<h:panelGroup rendered="#{slctdTb.laaVariante == 'O'}">  
-                        <p:commandLink action="#{daoController.majVariante('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:finance"
-				               title="Variante(Oui/Non)">
-                                <span class="hidden-xs" style="color: white">OUI</span>
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltLot}" />                              
-                         </p:commandLink>
-                       </h:panelGroup>
-                            
-                           <h:panelGroup rendered="#{slctdTb.laaVariante == 'N'}">  
-                            <p:commandLink action="#{daoController.majVariante('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:finance"
-				               title="Variante(Oui/Non)">
-                                <span class="hidden-xs" style="color: white">NON</span>
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltLot}" />                              
-                            </p:commandLink>
-                            </h:panelGroup>
+         			 <p:cellEditor>
+                          <f:facet name="output">
+         				  <h:outputText value="#{slctdTb.laaVariante == 'O'?'OUI':'NON'}"/>
+         				  </f:facet>
+         				  <f:facet name="input">
+         				     <h:selectOneMenu id="variante" value="#{slctdTb.laaVariante}" style="width:100%; color:#0000">
+			              <f:selectItem itemLabel="Choisir" itemValue="" />
+                         <f:selectItem itemLabel="OUI" itemValue="O" />
+                         <f:selectItem itemLabel="NON" itemValue="N" />
+                        </h:selectOneMenu>
+	         				 
+         				  </f:facet>
+         				  </p:cellEditor>
 				        </p:column>
 				         
 				        <p:column headerText="Imputation" styleClass="col-sm-2">
