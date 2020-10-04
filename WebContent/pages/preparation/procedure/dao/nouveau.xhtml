@@ -735,20 +735,23 @@
 		               </p:cellEditor>
 				        </p:column>
 				        
-				         <p:column headerText="Variante ?" styleClass="col-sm-1">
-				            <p:cellEditor>
-                          <f:facet name="output">
-         				  <h:outputText value="#{slctdTb.laaVariante == 'O'?'OUI':'NON'}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-         				     <h:selectOneMenu id="variante" value="#{slctdTb.laaVariante}" style="width:100%; color:#0000">
-			              <f:selectItem itemLabel="Choisir" itemValue="" />
-                         <f:selectItem itemLabel="OUI" itemValue="O" />
-                         <f:selectItem itemLabel="NON" itemValue="N" />
-                        </h:selectOneMenu>
-	         				 
-         				  </f:facet>
-         				  </p:cellEditor>
+				     <p:column headerText="Variante ?" styleClass="col-sm-1">
+				         
+         			<h:panelGroup rendered="#{slctdTb.laaVariante == 'O'}">  
+                        <p:commandLink action="#{daoController.majVariante('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:finance"
+				               title="Variante(Oui/Non)">
+                                <span class="hidden-xs" style="color: white">OUI</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltLot}" />                              
+                         </p:commandLink>
+                       </h:panelGroup>
+                            
+                           <h:panelGroup rendered="#{slctdTb.laaVariante == 'N'}">  
+                            <p:commandLink action="#{daoController.majVariante('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:finance"
+				               title="Variante(Oui/Non)">
+                                <span class="hidden-xs" style="color: white">NON</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltLot}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
 				        </p:column>
 				         
 				        <p:column headerText="Imputation" styleClass="col-sm-2">
@@ -1781,21 +1784,21 @@
 			               
 				         
 				          <p:column headerText="Imputation" styleClass="col-sm-3" >
-                          <h:commandLink id="imputation" title="Imputation" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
+                          <h:commandLink id="imputation" title="Imputation" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.lbgImputation}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
                           </h:commandLink>
 				          </p:column>	
 				        
 				        <p:column headerText="Nature" styleClass="col-sm-3" >
-                        <h:commandLink id="Nature" title="Nature de la ligne" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
+                        <h:commandLink id="Nature" title="Nature de la ligne" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" update="gnl">				        
          				<h:outputText value="#{slctdTb.natLibelle}" />
                         <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.ligne}" />
                         </h:commandLink>
 				        </p:column>
 				        
 				        <p:column headerText="Dotation" styleClass="col-sm-3" >
-                        <h:commandLink id="dotation" title="Dotation Totale" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
+                        <h:commandLink id="dotation" title="Dotation Totale" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" update="gnl">				        
          				<h:outputText value="#{slctdTb.lbgTotDot}" >
          				<f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				</h:outputText>
@@ -1804,7 +1807,7 @@
 				        </p:column>	
 				        
 				        <p:column headerText="Disponible" styleClass="col-sm-3" >
-                        <h:commandLink id="disponible" title="Montant Disponible" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" >				        
+                        <h:commandLink id="disponible" title="Montant Disponible" style="font-size:18px;"  action="#{daoController.onSelectLigneBudgetaire()}" update="gnl" >				        
          				<h:outputText value="#{slctdTb.lbgDisTot}" >
          				<f:convertNumber pattern="##,###.##"></f:convertNumber>
          				</h:outputText>

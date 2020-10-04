@@ -360,7 +360,7 @@
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
                           </p:commandLink>
                           
-                          <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #f88b2e;margin-right:3px"  action="#{daoController.finRetrait()}"
+                          <p:commandLink rendered="false" class="btn btn-xs btn-sucess" style="background-color: #f88b2e;margin-right:3px"  action="#{daoController.finRetrait()}"
                                 title="Fin de retrait" update=":content">
                               <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <p:confirm header="Confirmation" message="Voulez-vous mettre fin au retrait du DAC N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 

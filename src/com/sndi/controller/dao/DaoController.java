@@ -170,7 +170,7 @@ public class DaoController {
 	private List<VCritereAnalyseDac> listeCritereSaisie = new ArrayList<VCritereAnalyseDac>(); 
 	private List<VCritereAnalyseDac> listeCritereByLot = new ArrayList<VCritereAnalyseDac>();
 	private List<TLotAao> listeLot = new ArrayList<TLotAao>();
-	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
+	private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	/*private List<VCritereAnalyseDacLot> listeCritereByLot = new ArrayList<VCritereAnalyseDacLot>();*/
 	private List<VArticlesCom> listeArticle = new ArrayList<VArticlesCom>();
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
@@ -185,6 +185,7 @@ public class DaoController {
 	private VbTempParamTabBord tempBord = new VbTempParamTabBord();
 	private VPieces sltPiece = new VPieces();
 	private TSeances sltSeances  = new TSeances();
+	private TLotAao sltLot = new TLotAao();
 	 
 	//variables
 	private long gesCode;
@@ -3924,6 +3925,17 @@ public class DaoController {
 							 réiniPreference();
 							 etatMargePreference = false; 
 						 }
+					 }
+					 
+					//Variante (OUI/NON)
+					 public void majVariante (String variante) {
+						 List<TLotAao> LOT  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
+						 TLotAao lo = new TLotAao(); 
+						 if(!LOT.isEmpty()) lo = LOT.get(0);
+						 lo.setLaaVariante(""+variante);
+						 iservice.updateObject(lo);	
+						 //Actualisation des critères
+						 chargeLots();
 					 }
 					 
 					 
@@ -8451,6 +8463,14 @@ public class DaoController {
 
 	public void setSltSeances(TSeances sltSeances) {
 		this.sltSeances = sltSeances;
+	}
+
+	public TLotAao getSltLot() {
+		return sltLot;
+	}
+
+	public void setSltLot(TLotAao sltLot) {
+		this.sltLot = sltLot;
 	}
 	
 	
