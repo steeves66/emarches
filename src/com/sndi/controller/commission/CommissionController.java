@@ -670,7 +670,8 @@ public class CommissionController {
 	 
 	//Conformité (CONFORME/NON CONFORME)
 	 public void majCritere (String conforme) {
-		 List<TAnalyseOffre> AN  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posCritere.getDcadNum()));
+		 List<TAnalyseOffre> AN  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posCritere.getDcadNum()),
+				 new WhereClause("ANF_DOF_NUM",Comparateur.EQ,""+posCritere.getDofNum()));
 		 TAnalyseOffre crit = new TAnalyseOffre(); 
 		 if(!AN.isEmpty()) crit = AN.get(0);
           crit.setAnfValeurConf(""+conforme);
@@ -690,7 +691,8 @@ public class CommissionController {
 	 
 	 //Présence (O/N)
 	 public void majPiecePresence (String presence) {
-		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posPiece.getDcadNum()));
+		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posPiece.getDcadNum()),
+				 new WhereClause("ANF_DOF_NUM",Comparateur.EQ,""+posPiece.getDofNum()));
 		 TAnalyseOffre anal = new TAnalyseOffre(); 
 		 if(!ANA.isEmpty()) anal = ANA.get(0);
           anal.setAnfPresence(""+presence);
@@ -701,10 +703,11 @@ public class CommissionController {
 	 
 	 //Conformité (CONFORME/NON CONFORME)
 	 public void majPieceConforme (String conforme) {
-		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posPiece.getDcadNum()));
-		 TAnalyseOffre anal = new TAnalyseOffre(); 
-		 if(!ANA.isEmpty()) anal = ANA.get(0);
-          anal.setAnfValeurConf(""+conforme);
+		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+posPiece.getDcadNum()),
+				 new WhereClause("ANF_DOF_NUM",Comparateur.EQ,""+posPiece.getDofNum()));
+		         TAnalyseOffre anal = new TAnalyseOffre(); 
+		          if(!ANA.isEmpty()) anal = ANA.get(0);
+                  anal.setAnfValeurConf(""+conforme);
 		 iservice.updateObject(anal);	
 		 //Actualisation des pièces
 		 chargePiecesAnalyse();
@@ -713,7 +716,7 @@ public class CommissionController {
 	 
 	 public void chargeCritereAnalyse() {
 		 listeCritereAnalyse.clear();
-		 listeCritereAnalyse = ((List<VCritereAnalyseDacOfftec>)iservice.getObjectsByColumn("VCritereAnalyseDacOfftec",new ArrayList<String>(Arrays.asList("R_ID")),
+		 listeCritereAnalyse = ((List<VCritereAnalyseDacOfftec>)iservice.getObjectsByColumn("VCritereAnalyseDacOfftec",
 				 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 		 _logger.info(" dof_number: "+sltOffre.getDofNum());
 		// _logger.info("dacCode dof_number: "+sltOffre.getTLotAao().getTDacSpecs().getDacCode());
@@ -761,7 +764,7 @@ public class CommissionController {
 	 
 	//Liste des piecs de l'offre a l'analyse
 	 public void chargePiecesAnalyse() {
-		 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",new ArrayList<String>(Arrays.asList("POF_LIBELLE")),
+		 listePiecesOffresAnalyse = ((List<VPiecesOffreAnalyse>)iservice.getObjectsByColumn("VPiecesOffreAnalyse",
 				 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum())));
 		 nbrLot =nonbreLot();
 		 dofErrCalcul=0;

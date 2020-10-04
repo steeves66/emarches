@@ -433,7 +433,8 @@
 			                </div>
 	                         <!-- /.box-header -->
 	                         <div class="box-body">
-	                            <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listePiecesOffresAnalyse}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
+	                            <p:dataTable 
+	                              value="#{commissionController.listePiecesOffresAnalyse}" var="slctdTb" id="pieces" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
 		                        	 rowKey="#{slctdTb.pofNum}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
 		                        	 
 		                               <p:column headerText="PIECES" styleClass="col-sm-4">
@@ -447,43 +448,78 @@
 		                                
 		                                
 		                                <p:column headerText="PRESENCE" styleClass="col-sm-2">
-                                            <p:cellEditor>
-                                             <f:facet name="output">
-                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-         				                        <h:outputText id="presence3" value="#{slctdTb.anfPresence == 'O'?'OUI':'NON'}" />
-         				                        </h:panelGroup>
-         				                         </f:facet>
-         				                             <f:facet name="input">
-         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-	         				                           <h:selectOneMenu id="presence4" value="#{slctdTb.anfPresence}" style="width:100%; color:#0000">
-				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
-	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
-	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
-	                                                   </h:selectOneMenu>
-	                                                   </h:panelGroup>
-         				                             </f:facet>
-         				                           </p:cellEditor>
+		                                 
+         				                        <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                        
+         				                        <h:panelGroup rendered="#{slctdTb.btnAnfPresence == '3'}">
+                                                       <p:commandLink action="#{commissionController.majPiecePresence('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="lotlog:pieces"
+				                                         title="Présente">  
+                                                          <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
+                                                           <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                                       </p:commandLink>
+                          
+                                                        <p:commandLink action="#{commissionController.majPiecePresence('N')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="lotlog:pieces"
+				                                           title="Absente">
+                                                            <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">NON</span>
+                                                              <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                                        </p:commandLink>
+                                                  </h:panelGroup>
+                                                  
+         				                          <h:panelGroup rendered="#{slctdTb.anfPresence == 'O'}">  
+                                                      <p:commandLink action="#{commissionController.majPiecePresence('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="lotlog:pieces"
+				                                        title="Absent">
+                                                      <span class="hidden-xs" style="color: white">OUI</span>
+                                                       <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                                      </p:commandLink>
+                                                  </h:panelGroup>
+                                                  
+                                                  <h:panelGroup rendered="#{slctdTb.anfPresence == 'N'}">  
+                                                      <p:commandLink action="#{commissionController.majPiecePresence('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="lotlog:pieces"
+				                                      title="Présent">
+                                                       <span class="hidden-xs" style="color: white">NON</span>
+                                                     <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                                      </p:commandLink>
+                                                    </h:panelGroup>
+                                                </h:panelGroup>
 				                           </p:column>
 		                                
-		                                  <p:column headerText="CONFORME" styleClass="col-sm-2"  >
-                                            <p:cellEditor>
-                                             <f:facet name="output">
-                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}" />
-         				                        </h:panelGroup>
-         				                         </f:facet>
-         				                             <f:facet name="input">
-         				     
-         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
-				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
-	                                                    <f:selectItem itemLabel="OUI" itemValue="CONFORME" />
-	                                                   <f:selectItem itemLabel="NON" itemValue="NON CONFORME" />
-	                                                   </h:selectOneMenu>
-	                                                   </h:panelGroup>
-         				                             </f:facet>
-         				                           </p:cellEditor>
-				                               </p:column>
+		                               <p:column headerText="CONFORME" styleClass="col-sm-2" >
+		                                        
+         				                <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                    
+         				                 <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '3'}">
+                                          <p:commandLink action="#{commissionController.majPieceConforme('CONFORME')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="lotlog:pieces"
+				                             title="Conforme">  
+                                             <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
+                                              <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                             </p:commandLink>
+                          
+                           
+                                              <p:commandLink action="#{commissionController.majPieceConforme('NON CONFORME')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="lotlog:pieces"
+				                                title="Non Conforme">
+                                                <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">NON</span>
+                                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                               </p:commandLink>
+                                            </h:panelGroup>
+                                            
+         				                    <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '1'}">  
+                                               <p:commandLink action="#{commissionController.majPieceConforme('NON CONFORME')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="lotlog:pieces"
+				                                 title="Non Conforme">
+                                                  <span class="hidden-xs" style="color: white">#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}</span>
+                                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                                 </p:commandLink>
+                                              </h:panelGroup>
+                                              <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '2'}">  
+                                                 <p:commandLink action="#{commissionController.majPieceConforme('CONFORME')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="lotlog:pieces"
+				                                   title="Conforme">
+                                                   <span class="hidden-xs" style="color: white">#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}</span>
+                                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
+                                                   </p:commandLink>
+                                               </h:panelGroup>
+                                               
+                                             </h:panelGroup>    
+   
+				                          </p:column>
 				                               
 				                             <p:column headerText="OBSERVATION" styleClass="col-sm-4" >
                                                 <p:cellEditor>
@@ -628,23 +664,42 @@
 				            
 					        </p:column>
 					        
-                      <p:column headerText="VALEUR" styleClass="col-sm-3" rendered="#{commissionController.conformite}" >
-                          <p:cellEditor>
-                          <f:facet name="output">
-                          <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-         				  <h:outputText id="mandat1" styleClass="form-control text-center" value="#{slctdTb.aaoRegQual =='CONFORME'?'CONFORME':'NON CONFORME'}" />
-         				  </h:panelGroup>
-         				  </f:facet>
-         				  <f:facet name="input">
+                      <p:column headerText="VALEUR" styleClass="col-sm-3" rendered="#{commissionController.conformite}" >                
+         				  
          				  <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-	         				   <h:selectOneMenu id="mandat2" value="#{slctdTb.aaoRegQual}" style="width:100%; color:#0000">
-				              <f:selectItem itemLabel="Choisir" itemValue="" />
-	                         <f:selectItem itemLabel="CONFORME" itemValue="CONFORME" />
-	                         <f:selectItem itemLabel="NON CONFORME" itemValue="NON CONFORME" />
-	                          </h:selectOneMenu>
-	                      </h:panelGroup>
-         				  </f:facet>
-         				  </p:cellEditor>
+         				  
+         				   <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '3'}">
+                                 <p:commandLink action="#{commissionController.majCritere('CONFORME')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="lotlog:confdetail"
+				                     title="Conforme">  
+                                     <span class="btn-label" style="color: white"><i class="fa fa-thumbs-up bigger-120"></i></span><span class="hidden-xs" style="color: white">OUI</span>
+                                     <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posCritere}" />                              
+                                 </p:commandLink>
+                          
+                                 <p:commandLink action="#{commissionController.majCritere('NON CONFORME')}"  class="btn btn-xs btn-warning" style="background-color: #f88b2e;margin-left:5px;" update="lotlog:confdetail"
+				                   title="Non Conforme">
+                                    <span class="btn-label" style="color: white"><i class="fa fa-thumbs-down bigger-120"></i></span><span class="hidden-xs" style="color: white">NON</span>
+                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posCritere}" />                              
+                                 </p:commandLink>
+                            </h:panelGroup>
+         				  
+         				   <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '1'}">  
+                            <p:commandLink action="#{commissionController.majCritere('NON CONFORME')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="lotlog:confdetail"
+				               title="Non conforme">
+                                <span class="hidden-xs" style="color: white">CONFORME</span>
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posCritere}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                            
+                             <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '2'}">  
+                            <p:commandLink action="#{commissionController.majCritere('CONFORME')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="lotlog:confdetail"
+				              title="Conforme">
+                              <span class="hidden-xs" style="color: white">NON CONFORME</span>
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posCritere}" />                              
+                            </p:commandLink>
+                            </h:panelGroup>
+                            
+                            </h:panelGroup>
+                            
 				        </p:column>
 				        
 				        <p:column headerText="COMMENTAIRE" styleClass="col-sm-5" >

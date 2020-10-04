@@ -398,7 +398,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 		this.anfNum = anfNum;
 	}
 
-	@Column(name = "BTN_ANF_VALEUR_CONF", precision = 22, scale = 0)
+	@Column(name = "BTN_ANF_VALEUR_CONF")
 	public String getBtnAnfValeurConf() {
 		return this.btnAnfValeurConf;
 	}
@@ -407,7 +407,7 @@ public class VCritereAnalyseDacOfftec implements java.io.Serializable {
 		this.btnAnfValeurConf = btnAnfValeurConf;
 	}
 
-	@Column(name = "BTN_ANF_PRESENCE", precision = 22, scale = 0)
+	@Column(name = "BTN_ANF_PRESENCE")
 	public String getBtnAnfPresence() {
 		return this.btnAnfPresence;
 	}
