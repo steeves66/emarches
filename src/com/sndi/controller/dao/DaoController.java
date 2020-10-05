@@ -432,6 +432,7 @@ public class DaoController {
 	  private boolean panelNcc1 = false;
 	  private boolean panelNcc2 = false;
 	  private boolean confirmInter = false;
+	  private boolean clean = false;
 	  private boolean panelMessage = true;
 	  private boolean panelCritereLot = false;
 	 
@@ -2888,7 +2889,7 @@ public class DaoController {
 	     @Transactional
 	     public void saveDac(String typeDac) {
 	    	 if(daoDetail.getTymCode().equalsIgnoreCase("") || "".equals(daoDetail.getTymCode()) || daoDetail.getMopCode().equalsIgnoreCase("") || "".equalsIgnoreCase(daoDetail.getMopCode()) 
-	    			 || daoDetail.getDppObjet().equalsIgnoreCase("") || "".equals(daoDetail.getDppObjet()) ) {
+	    			 || daoDetail.getDppObjet().equalsIgnoreCase("") || "".equals(daoDetail.getDppObjet()) || dao.getDacFinancement().equalsIgnoreCase("") ) {
 	    		 //Message d'Erreur
 	    		 FacesContext.getCurrentInstance().addMessage(null,
 		         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez sélectionnez votre PPM, puis faites OK!", ""));
@@ -3064,9 +3065,9 @@ public class DaoController {
 	        public void saveAao(String typePlan ,String typeDac) {
 	        	
 	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || newAvis.getAaoCoutDac() == 0 || newAvis.getAaoNbrLot() == 0 || 
-	        		 newAvis.getAaoDelaiVal() == 0 ) { 
+	        		 newAvis.getAaoDelaiVal() == 0 || choixTaux.equalsIgnoreCase("") ) { 
 	        		
-	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez remplir tous les champs obligatoires! ","");
+	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir tous les champs obligatoires! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 	        		
 	        	    }else {
@@ -5001,6 +5002,7 @@ public class DaoController {
 													 etatPays = false;
 													 confirmInter = false;
 													 confirmPaie = true;
+													 clean = false;
 													 //newSoumission = new TSoumissions();
 													 newCandidat = new TCandidats();
 												 }else 
@@ -5012,6 +5014,7 @@ public class DaoController {
 														  newSouncc = "";
 														  confirmInter = true;
 														  confirmPaie = false;
+														  clean = false;
 														  //newSoumission = new TSoumissions();
 														  newCandidat = new TCandidats();
 												 }
@@ -5093,10 +5096,11 @@ public class DaoController {
 												 							  	//Historisation du / des retraits
 												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
 														  				
-											    			  				 //Activation du bouton ï¿½dition du rï¿½cu
-												     			  				   confirmPaie = true;
+											    			  				    //Activation du bouton ï¿½dition du rï¿½cu
+												     			  				  confirmPaie = true;
 												     			  				  confirmInter = false;
-												     			  				   etatRecu = false;
+												     			  				  etatRecu = false;
+												     			  				  clean = true;
 											    			  				  //Actualisation du Tableau de Bord
 											    			 		          typeActionTb();
 													                    	  
@@ -5172,7 +5176,7 @@ public class DaoController {
 											     			  				   confirmPaie = true;
 											     			  				   confirmInter = false;
 											     			  				   etatRecu = true;
-											     			  				   
+											     			  				   clean = true;
 											     			  				   
 											     			  				   //Actualisation du Tableau de Bord
 											     			 		           typeActionTb();
@@ -5187,6 +5191,19 @@ public class DaoController {
 												                   }    
 											                }
 											  //Fin Methode de Paiement
+											  
+											  //vider les champs après un paiement
+											  public void cleanPaiement() {
+												  newCandidat = new TCandidats();
+												  soumission = new TSoumissions();
+												  paieCode ="";
+												  pays="";
+												  sitDac="";
+												  newSouncc ="";
+												  etatRecu = false;
+												  confirmInter = false;
+												  confirmPaie = false;
+											  }
 											  
 											  //Methode de rï¿½cupï¿½ration du nombre de vente 
 											  public void detailVente() {
@@ -5259,9 +5276,11 @@ public class DaoController {
 												 						      confirmPaie = false;
 											     			  				  confirmInter = true;
 											     			  				  etatRecu = false;
+											     			  				  clean = true;
 											    			  				  //Actualisation du Tableau de Bord
 											    			 		          typeActionTb();
 													                    	  
+											    			 		          
 											     			  				   //Message de Confirmation
 											     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuï¿½ avec succï¿½s", ""));
 											     					           userController.setTexteMsg("Retrait effectué avec succès");
@@ -5316,8 +5335,7 @@ public class DaoController {
 													 						   confirmPaie = false;
 												     			  			   confirmInter = true;
 												     			  			   etatRecu = true;
-											     			  				
-											     			  				   
+												     			  			   clean = true;
 											     			  				   //Actualisation du Tableau de Bord
 											     			 		           typeActionTb();
 											     			 		          
@@ -8471,6 +8489,14 @@ public class DaoController {
 
 	public void setSltLot(TLotAao sltLot) {
 		this.sltLot = sltLot;
+	}
+
+	public boolean isClean() {
+		return clean;
+	}
+
+	public void setClean(boolean clean) {
+		this.clean = clean;
 	}
 	
 	
