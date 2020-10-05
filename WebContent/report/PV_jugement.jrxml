@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-05T16:01:01 -->
+<!-- 2020-10-05T17:06:13 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PV_jugement" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="29839d62-7702-40c1-8de1-369c254b0177">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -983,7 +983,7 @@ AND aao.AAO_CODE=$P{param_code_1}]]>
 										<reportElement stretchType="ContainerHeight" x="0" y="0" width="555" height="10" isRemoveLineWhenBlank="true" uuid="3af40525-fb2b-4f13-b41e-b4a57d75cce9"/>
 										<box leftPadding="0"/>
 										<textElement verticalAlignment="Middle">
-											<font fontName="Times New Roman" size="11" isBold="true"/>
+											<font fontName="SansSerif" size="11" isBold="true"/>
 										</textElement>
 										<textFieldExpression><![CDATA["LOT "+$F{LAA_NUM}+" - "+$F{LAA_OBJET}+"\n"]]></textFieldExpression>
 									</textField>
@@ -1261,7 +1261,7 @@ AND aao.AAO_CODE=$P{param_code_1}]]>
 								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 									<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="130" height="30" isRemoveLineWhenBlank="true" uuid="5414a14e-90ce-427b-be92-1441003be11b"/>
 									<textElement>
-										<font fontName="Times New Roman" size="10"/>
+										<font fontName="SansSerif" size="10"/>
 									</textElement>
 								</textField>
 							</jr:detailCell>
