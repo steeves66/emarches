@@ -3065,7 +3065,7 @@ public class DaoController {
 	        public void saveAao(String typePlan ,String typeDac) {
 	        	
 	        	if(newAvis.getAaoLibelle().equalsIgnoreCase("") || newAvis.getAaoCoutDac() == 0 || newAvis.getAaoNbrLot() == 0 || 
-	        		 newAvis.getAaoDelaiVal() == 0 || choixTaux.equalsIgnoreCase("") ) { 
+	        		 newAvis.getAaoDelaiVal() == 0 ) { 
 	        		
 	        		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez saisir tous les champs obligatoires! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
