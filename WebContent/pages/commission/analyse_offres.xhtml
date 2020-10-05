@@ -433,8 +433,7 @@
 			                </div>
 	                         <!-- /.box-header -->
 	                         <div class="box-body">
-	                            <p:dataTable 
-	                              value="#{commissionController.listePiecesOffresAnalyse}" var="slctdTb" id="pieces" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
+	              <p:dataTable value="#{commissionController.listePiecesOffresAnalyse}" var="slctdTb" id="pieces" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
 		                        	 rowKey="#{slctdTb.pofNum}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
 		                        	 
 		                               <p:column headerText="PIECES" styleClass="col-sm-4">
@@ -448,7 +447,24 @@
 		                                
 		                                
 		                                <p:column headerText="PRESENCE" styleClass="col-sm-2">
+		                                 <p:cellEditor>
+                                             <f:facet name="output">
+                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                        <h:outputText id="presence3" value="#{slctdTb.anfPresence == 'O'?'OUI':'NON'}" />
+         				                        </h:panelGroup>
+         				                         </f:facet>
+         				                             <f:facet name="input">
+         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+	         				                           <h:selectOneMenu id="presence4" value="#{slctdTb.anfPresence}" style="width:100%; color:#0000">
+				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
+	                                                   </h:selectOneMenu>
+	                                                   </h:panelGroup>
+         				                             </f:facet>
+         				                           </p:cellEditor>
 		                                 
+		                                        <h:panelGroup rendered="false">
          				                        <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                        
          				                        <h:panelGroup rendered="#{slctdTb.btnAnfPresence == '3'}">
@@ -481,11 +497,32 @@
                                                       </p:commandLink>
                                                     </h:panelGroup>
                                                 </h:panelGroup>
+                                                </h:panelGroup>
+                                                
 				                           </p:column>
 		                                
 		                               <p:column headerText="CONFORME" styleClass="col-sm-2" >
-		                                        
-         				                <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+		                               
+		                               <p:cellEditor>
+                                             <f:facet name="output">
+                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}" />
+         				                        </h:panelGroup>
+         				                         </f:facet>
+         				                             <f:facet name="input">
+         				     
+         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
+	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
+				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
+	                                                    <f:selectItem itemLabel="OUI" itemValue="CONFORME" />
+	                                                   <f:selectItem itemLabel="NON" itemValue="NON CONFORME" />
+	                                                   </h:selectOneMenu>
+	                                                   </h:panelGroup>
+         				                             </f:facet>
+         				                 </p:cellEditor>
+		                               
+		                               <h:panelGroup rendered="false">
+		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                    
          				                 <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '3'}">
                                           <p:commandLink action="#{commissionController.majPieceConforme('CONFORME')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="lotlog:pieces"
@@ -517,9 +554,10 @@
                                                    </p:commandLink>
                                                </h:panelGroup>
                                                
-                                             </h:panelGroup>    
-   
-				                          </p:column>
+                                             </h:panelGroup>  
+		                               </h:panelGroup>
+		                               
+			                          </p:column>
 				                               
 				                             <p:column headerText="OBSERVATION" styleClass="col-sm-4" >
                                                 <p:cellEditor>
