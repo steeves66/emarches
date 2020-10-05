@@ -272,7 +272,7 @@ public class AnoController {
 	 
 	 
 	 public void validationAnoDMP() throws IOException {
-		 List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+		 List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
 			if(!Lot.isEmpty()) infolot = Lot.get(0);
 		 if(infolot.getCheckTrt()==0) {
 			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
@@ -320,7 +320,7 @@ public class AnoController {
 			 newDem.setDemStatutRetour("0");
 			 newDem.setTFonction(userController.getSlctd().getTFonction());
 			 newDem.setTOperateur(userController.getSlctd().getTOperateur());
-			 newDem.setTStatut(new TStatut("E1S"));
+			 newDem.setTStatut(new TStatut("ARC"));
 			 newDem.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			 newDem.setDemFonCodePf(userController.getSlctd().getTFonction().getFonCodePf());
 			 newDem.setDemFonCodeDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
@@ -335,18 +335,12 @@ public class AnoController {
 				demDet.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 				iservice.addObject(demDet);
 			  
-				List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
+				List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
 				TAvisAppelOffre avis = new TAvisAppelOffre();
 				if(!LS.isEmpty()) avis = LS.get(0);
 				avis.setTStatut(new TStatut("JUG"));
 				avis.setAaoStatut("4");
 			    iservice.updateObject(avis);
-			    
-			    List<TDemande> DS  = iservice.getObjectsByColumn("TDemande", new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
-			    TDemande dem = new TDemande();
-				if(!LS.isEmpty()) dem = DS.get(0);
-				dem.setTStatut(new TStatut("ARC"));
-			    iservice.updateObject(dem);
 			    //chargeData();
 			   // renderPage("LISANO" ,"ano1");
 			 userController.setTexteMsg("Validé avec succès !");
@@ -409,6 +403,14 @@ public class AnoController {
 					new WhereClause("NAD_TYPE",Comparateur.EQ,"ANO"));
 		 }
 	 
+	 //Pour Traiement ANO DPM Autosaisine
+	 public void chargeNatureDocDataAut() {
+		  natureDocListe.clear();
+			natureDocListe = (List<TNatureDocuments>) iservice.getObjectsByColumnIn("TNatureDocuments", new ArrayList<String>(Arrays.asList("nadLibelle")),
+					"NAD_CODE", new ArrayList<String>(Arrays.asList("19","16")),
+					new WhereClause("NAD_TYPE",Comparateur.EQ,"ANO"));
+		 }
+	 
 	 //Pour demade d'ANO AC
 	 public void chargeNatureDocDem() {
 		 natureDocListe.clear();
@@ -435,7 +437,6 @@ public class AnoController {
 
 	 
 	 public void saveAno(String avis) {
-		 if(infolot.getCheckTrt()==0) {
 			List<TLotAao> LS  = iservice.getObjectsByColumn("TLotAao", new WhereClause("LAA_ID",Comparateur.EQ,""+sltLot.getLaaId()));
 				TLotAao lot = new TLotAao();
 				if(!LS.isEmpty()) lot = LS.get(0);
@@ -444,11 +445,6 @@ public class AnoController {
 			    iservice.updateObject(lot);
 			    chargeLotDmp();
 			    recupResultatLot();
-		 }else
-		 {
-			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Vous devez absolument traiter tout les lots! ","");
-				FacesContext.getCurrentInstance().addMessage(null, msg);	 
-		 }
 	  }
 	 
 	 
@@ -883,12 +879,12 @@ public class AnoController {
 					recupResultatLot();
 				break;
 				case "ano4":
-					docNatureDemDmp ="18";
+					docNatureDemDmp ="19";
 					chargeLot();
 					//recupInfosDemande();
 					//btnAction();
 					//chargeDemande();
-					chargeNatureDocData();
+					chargeNatureDocDataAut();
 					//chargeDossierDemandeDmp();
 					//chargeDossierDemandeDmpAc();
 					recupResultatLotAut();

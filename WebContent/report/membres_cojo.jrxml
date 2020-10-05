@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-01T12:49:28 -->
+<!-- 2020-10-02T10:39:18 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="membres_cojo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53fc7504-1b87-459d-b8ff-b4a2211a8f07">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP.xml"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -133,6 +133,7 @@ and s.sea_num = $P{param_code}]]>
 	<field name="SEA_DTE_SEA" class="java.sql.Timestamp"/>
 	<field name="SEA_HEURE_DEB" class="java.lang.String"/>
 	<field name="SEA_HEURE_FIN" class="java.lang.String"/>
+	<field name="SEA_LIEU" class="java.lang.String"/>
 	<field name="OPE_MATRICULE" class="java.lang.String"/>
 	<field name="OPE_NOM" class="java.lang.String"/>
 	<field name="OPE_CONTACT" class="java.lang.String"/>
@@ -168,7 +169,8 @@ and s.sea_num = $P{param_code}]]>
 	<field name="FON_CODE_PF" class="java.lang.String"/>
 	<field name="FON_LIBELLE_LNG_DMP" class="java.lang.String"/>
 	<field name="FON_SOURCE_SIGMAP" class="java.lang.String"/>
-	<field name="ORDRE" class="java.math.BigDecimal"/>
+	<field name="FON_RESPO" class="java.lang.String"/>
+	<field name="CPT" class="java.math.BigDecimal"/>
 	<field name="NOMPRENOMS" class="java.lang.String"/>
 	<field name="DCS_OBSERVATION" class="java.lang.String"/>
 	<field name="DCS_STR_COM" class="java.lang.String"/>
@@ -180,6 +182,7 @@ and s.sea_num = $P{param_code}]]>
 	<field name="DCS_FON_COD" class="java.lang.String"/>
 	<field name="AAO_CODE" class="java.lang.String"/>
 	<field name="TRI" class="java.math.BigDecimal"/>
+	<field name="ORDRE" class="java.math.BigDecimal"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>

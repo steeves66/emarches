@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-01T12:40:14 -->
+<!-- 2020-10-02T10:38:29 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rapport_analyse" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="4b224d21-1f03-4cc6-a934-e8c1708e4915">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP.xml"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -865,6 +865,7 @@ and aao.aao_code=$P{param_code_1}]]>
 	<field name="LBG_TOT_DOT" class="java.lang.String"/>
 	<field name="LAA_ID" class="java.math.BigDecimal"/>
 	<field name="LAA_AAO_CODE" class="java.lang.String"/>
+	<field name="COLUMN_25" class="java.lang.String"/>
 	<field name="LAA_OBSERVATION" class="java.lang.String"/>
 	<field name="LAA_MT_CAUT" class="java.math.BigDecimal"/>
 	<field name="LAA_MT_EST" class="java.math.BigDecimal"/>
@@ -875,10 +876,12 @@ and aao.aao_code=$P{param_code_1}]]>
 	<field name="LAA_OPE_MATRICULE" class="java.lang.String"/>
 	<field name="LAA_LIEU_EXE" class="java.lang.String"/>
 	<field name="LAA_LBG_IMPUTATION" class="java.lang.String"/>
+	<field name="COLUMN_36" class="java.math.BigDecimal"/>
 	<field name="LAA_COUT_LOT" class="java.math.BigDecimal"/>
 	<field name="LAA_DAC_CODE" class="java.lang.String"/>
 	<field name="LAA_AJOUT_PANIER" class="java.lang.String"/>
 	<field name="LAA_DELAI_EXE" class="java.math.BigDecimal"/>
+	<field name="COLUMN_41" class="java.lang.String"/>
 	<field name="AAO_LIBELLE" class="java.lang.String"/>
 	<field name="AAO_DAC_CODE" class="java.lang.String"/>
 	<field name="AAO_DTE_SAISI" class="java.sql.Timestamp"/>
@@ -908,6 +911,7 @@ and aao.aao_code=$P{param_code_1}]]>
 	<field name="AAO_DATE_RECEP" class="java.sql.Timestamp"/>
 	<field name="AAO_HEURE_RECEP" class="java.lang.String"/>
 	<field name="AAO_ADA_NUM" class="java.math.BigDecimal"/>
+	<field name="COLUMN_71" class="java.lang.String"/>
 	<field name="AAO_REG_QUAL" class="java.lang.String"/>
 	<field name="AAO_AVIS_BAI" class="java.lang.String"/>
 	<field name="AAO_RESP_BAI" class="java.lang.String"/>
@@ -919,6 +923,17 @@ and aao.aao_code=$P{param_code_1}]]>
 	<field name="AAO_NBR_OFF_ACCPET" class="java.math.BigDecimal"/>
 	<field name="AAO_NBR_OFF_REJ" class="java.math.BigDecimal"/>
 	<field name="AAO_NBR_OFF_HOR_DELAI" class="java.math.BigDecimal"/>
+	<field name="AAO_HEUR_FIN_OUV" class="java.lang.String"/>
+	<field name="AAO_LIEU_OUV_PRECIS" class="java.lang.String"/>
+	<field name="AAO_OBS_OUV" class="java.lang.String"/>
+	<field name="AAO_DTE_FIN_OUV" class="java.sql.Timestamp"/>
+	<field name="AAO_DTE_OUV" class="java.sql.Timestamp"/>
+	<field name="AOO_HEUR_OUV" class="java.lang.String"/>
+	<field name="AVIS_RETOUR" class="java.lang.String"/>
+	<field name="AAO_NUM_SEQ" class="java.lang.String"/>
+	<field name="AAO_NUM_BOMP_PUB" class="java.lang.String"/>
+	<field name="AAO_DTE_BOMP_PUB" class="java.sql.Timestamp"/>
+	<field name="AAO_ART_COM_SPEC" class="java.lang.String"/>
 	<group name="Groupe1" isStartNewColumn="true" isStartNewPage="true" keepTogether="true">
 		<groupHeader>
 			<band/>
