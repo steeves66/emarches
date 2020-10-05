@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-02T10:38:07 -->
+<!-- 2020-10-05T15:48:37 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="page_garde_ouv" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="e2847c08-0292-4b44-9655-4416c3ece664">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP.xml"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -370,7 +370,7 @@ Union – Discipline – Travail
 			<staticText>
 				<reportElement x="1" y="1" width="551" height="21" uuid="900920a1-6051-4042-82f5-cd67cb53ea43"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="16" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="14" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[PROCES VERBAL D'OUVERTURE DES PLIS]]></text>
 			</staticText>
@@ -393,7 +393,7 @@ Union – Discipline – Travail
 							<textField isStretchWithOverflow="true" isBlankWhenNull="false">
 								<reportElement stretchType="ContainerHeight" x="0" y="0" width="552" height="20" uuid="e8d393dd-87c7-4394-87f5-80e29cad0a94"/>
 								<textElement verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11"/>
+									<font fontName="SansSerif" size="10"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{LIBELLE_1}+". "+"\n"+"\n"+$F{LIBELLE_2}]]></textFieldExpression>
 							</textField>
@@ -407,7 +407,7 @@ Union – Discipline – Travail
 			<staticText>
 				<reportElement mode="Transparent" x="2" y="0" width="551" height="21" uuid="6285b517-0472-4ddf-95f8-922d7e95d0b1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[COMPOSITION DE LA COMMISSION]]></text>
 			</staticText>
@@ -438,7 +438,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[N°]]></text>
 							</staticText>
@@ -453,7 +453,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9" isBold="true"/>
+									<font fontName="SansSerif" size="9" isBold="true"/>
 									<paragraph lineSpacingSize="0.0"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
@@ -473,7 +473,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Nom et prénom(s)]]></text>
 							</staticText>
@@ -488,7 +488,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="9"/>
 									<paragraph lineSpacingSize="0.0"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{NOMMEMBRECOJO}]]></textFieldExpression>
@@ -508,7 +508,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Structure]]></text>
 							</staticText>
@@ -523,7 +523,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="9"/>
 									<paragraph lineSpacingSize="0.0"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{DCS_STR_COM}]]></textFieldExpression>
@@ -543,7 +543,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Qualité]]></text>
 							</staticText>
@@ -558,7 +558,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="9"/>
 									<paragraph lineSpacingSize="0.0"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{DCS_QUALITE}]]></textFieldExpression>
@@ -578,7 +578,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Contacts]]></text>
 							</staticText>
@@ -595,7 +595,7 @@ Union – Discipline – Travail
 									<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 								</box>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="9"/>
 									<paragraph lineSpacingSize="0.0"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{DCS_TEL_MBM}]]></textFieldExpression>
@@ -609,7 +609,7 @@ Union – Discipline – Travail
 			<textField>
 				<reportElement positionType="Float" x="2" y="9" width="554" height="16" uuid="e3601d33-3ed3-4235-9475-ce0644d5d501"/>
 				<textElement>
-					<font fontName="Times New Roman" size="12"/>
+					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{LIBELLE_3}]]></textFieldExpression>
 			</textField>
@@ -618,7 +618,7 @@ Union – Discipline – Travail
 			<staticText>
 				<reportElement positionType="Float" mode="Transparent" x="80" y="1" width="399" height="21" uuid="1ae89d4e-c7be-40c2-8c90-483d9bff68f3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[REPRESENTANT DE SOUMISSIONNAIRES]]></text>
 			</staticText>
@@ -641,7 +641,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="30" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="7d582ec5-64a3-4699-9066-9e1c2cdddfff"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[N°]]></text>
 							</staticText>
@@ -650,7 +650,7 @@ Union – Discipline – Travail
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="30" height="10" uuid="3ed4b1a8-b78c-4908-8083-35316cb75ce9"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9" isBold="true"/>
+									<font fontName="SansSerif" size="9" isBold="true"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
 							</textField>
@@ -661,7 +661,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="200" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="91daf56a-6ea1-4fa3-af7c-f4ab745d69cb"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Nom et prénom(s)]]></text>
 							</staticText>
@@ -671,7 +671,7 @@ Union – Discipline – Travail
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="200" height="10" uuid="2244a938-3aea-4567-b226-77a61eae49c3"/>
 								<box padding="3"/>
 								<textElement verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="9"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{NOMREP}]]></textFieldExpression>
 							</textField>
@@ -682,7 +682,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="200" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="ab7a4658-3c53-4519-a5da-24fe004c9164"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Structure représentée]]></text>
 							</staticText>
@@ -692,7 +692,7 @@ Union – Discipline – Travail
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="200" height="10" uuid="4fc3084f-a2a1-4831-a43f-aa0f9c2ca6b5"/>
 								<box leftPadding="3"/>
 								<textElement verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="9"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{SOU_SIGLE_STE}]]></textFieldExpression>
 							</textField>
@@ -703,7 +703,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="120" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="ed53dd6f-652d-4752-8bae-b10c47bbe2ee"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Contacts]]></text>
 							</staticText>
@@ -713,7 +713,7 @@ Union – Discipline – Travail
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="120" height="10" uuid="16735f95-b75c-41c8-94c6-d5b34b7bb32f"/>
 								<box leftPadding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="9"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{TELREP}]]></textFieldExpression>
 							</textField>
@@ -727,7 +727,7 @@ Union – Discipline – Travail
 				<reportElement positionType="Float" mode="Transparent" x="0" y="0" width="551" height="21" uuid="9f6e2a72-7c76-41f8-9f88-cd1d6f469173"/>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[I)	GENERALITES RELATIVES A L’APPEL D’OFFRES]]></text>
 			</staticText>
@@ -735,7 +735,7 @@ Union – Discipline – Travail
 				<reportElement x="0" y="25" width="547" height="18" uuid="211b5074-577b-4b82-b13b-4aca3b14411f"/>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11" isItalic="false"/>
+					<font fontName="SansSerif" size="11" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Source de financement : "+"</b>"+$F{P_SOURCE_FIN}]]></textFieldExpression>
 			</textField>
@@ -744,7 +744,7 @@ Union – Discipline – Travail
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="11" isBold="true"/>
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Allotissement :]]></text>
 			</staticText>
@@ -782,7 +782,7 @@ Union – Discipline – Travail
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="19" height="25" uuid="475a98bc-7d33-4722-934a-667d52b043a9"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{LAA_NUM}]]></textFieldExpression>
 							</textField>
@@ -802,7 +802,7 @@ Union – Discipline – Travail
 								<reportElement stretchType="ContainerHeight" x="0" y="0" width="151" height="25" uuid="bd491913-7ba5-4471-86d1-76c05f97db13"/>
 								<box topPadding="2" leftPadding="3" bottomPadding="2"/>
 								<textElement verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{LAA_OBJET}]]></textFieldExpression>
 							</textField>
@@ -823,7 +823,7 @@ Union – Discipline – Travail
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="92" height="25" uuid="e061820f-5e2d-4ae4-98c4-85ec54c2a18e"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{LBG_IMPUTATION}]]></textFieldExpression>
 							</textField>
@@ -844,7 +844,7 @@ Union – Discipline – Travail
 							<textField>
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="98" height="25" uuid="83aec6fe-5da3-4a00-90ad-2a2479aef0a3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{LBG_TOT_DOT})+" F CFA"]]></textFieldExpression>
 							</textField>
@@ -865,7 +865,7 @@ Union – Discipline – Travail
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="86" height="25" uuid="b6f9b147-be52-4846-81be-2b89014b267d"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{LAA_MT_EST})+" F CFA"]]></textFieldExpression>
 							</textField>
@@ -886,7 +886,7 @@ Union – Discipline – Travail
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="32" height="25" uuid="cc75ae0a-1146-4252-9223-54d64a5001ef"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[$F{LAA_DELAI_EXE}+" jrs"]]></textFieldExpression>
 							</textField>
@@ -909,7 +909,7 @@ Union – Discipline – Travail
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="75" height="25" uuid="752f79d7-6b7f-4276-b2fe-ac665a54060f"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="9"/>
+									<font fontName="SansSerif" size="8"/>
 								</textElement>
 								<textFieldExpression><![CDATA[new java.text.DecimalFormat("#,##0").format($F{LAA_MT_CAUT})+" F CFA"]]></textFieldExpression>
 							</textField>
@@ -925,7 +925,7 @@ Union – Discipline – Travail
 				</reportElement>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11" isItalic="false"/>
+					<font fontName="SansSerif" size="10" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Date et heure limites de réception des plis : "+"</b>"+new SimpleDateFormat("EEEE dd MMMMM yyyy").format($F{AAO_DATE_RECEP})+" à "+$F{AAO_HEURE_RECEP}]]></textFieldExpression>
 			</textField>
@@ -935,7 +935,7 @@ Union – Discipline – Travail
 				</reportElement>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11" isItalic="false"/>
+					<font fontName="SansSerif" size="10" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Nombre d’entreprises ayant retiré le dossier de consultation : "+"</b>"+$F{DACNBRVENDU}]]></textFieldExpression>
 			</textField>
@@ -945,7 +945,7 @@ Union – Discipline – Travail
 				</reportElement>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11" isItalic="false"/>
+					<font fontName="SansSerif" size="10" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Nombre d’entreprises ayant déposé une offre dans les délais requis : "+"</b>"+$F{AAO_NBR_OFF_ACCPET}]]></textFieldExpression>
 			</textField>
@@ -955,7 +955,7 @@ Union – Discipline – Travail
 				</reportElement>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11" isItalic="false"/>
+					<font fontName="SansSerif" size="10" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Nombre d’entreprises ayant déposé une offre hors délais : "+"</b>"+$F{AAO_NBR_OFF_HOR_DELAI}]]></textFieldExpression>
 			</textField>
@@ -965,7 +965,7 @@ Union – Discipline – Travail
 				</reportElement>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11" isItalic="false"/>
+					<font fontName="SansSerif" size="10" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Date et heure de l'ouverure des plis : "+"</b>"+new SimpleDateFormat("EEEE dd MMMM yyyy").format($F{AAO_DTE_OUV_TEC})+" à "+$F{AAO_DTE_HEUR_OUV}]]></textFieldExpression>
 			</textField>
@@ -975,7 +975,7 @@ Union – Discipline – Travail
 				</reportElement>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11" isItalic="false"/>
+					<font fontName="SansSerif" size="10" isItalic="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Nature des prix :"+"</b>"+$F{AAO_NAT_PRIX}]]></textFieldExpression>
 			</textField>
@@ -983,7 +983,7 @@ Union – Discipline – Travail
 				<reportElement positionType="Float" mode="Transparent" x="1" y="126" width="551" height="21" uuid="bc8ddce7-48f7-4acd-9c9e-f691e1fc19ce"/>
 				<box leftPadding="3"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[II)	DEROULEMENT DE LA SEANCE D’OUVERTURE DES PLIS]]></text>
 			</staticText>
@@ -992,7 +992,7 @@ Union – Discipline – Travail
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement key="" stretchType="ContainerHeight" isPrintRepeatedValues="false" x="0" y="8" width="552" height="20" isPrintWhenDetailOverflows="true" uuid="5b4438fe-2bbf-4b41-8852-b47be1cd5648"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{P_DEROULEMENT_1}+" \n"+$F{P_DÉROULEMENT_2}+" \n"+$F{P_DÉROULEMENT_3}]]></textFieldExpression>
 			</textField>
@@ -1001,7 +1001,7 @@ Union – Discipline – Travail
 			<staticText>
 				<reportElement positionType="Float" mode="Transparent" x="80" y="3" width="399" height="21" uuid="0d22b857-098c-45b8-bbed-79ea3d6bdbc9"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+					<font fontName="SansSerif" size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[TABLEAU D'OUVERTURE DES PLIS]]></text>
 			</staticText>
@@ -1228,7 +1228,7 @@ Union – Discipline – Travail
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="0" y="10" width="554" height="30" uuid="1bab497d-5aef-4131-b4e7-04ba13688055"/>
 				<textElement textAlignment="Justified">
-					<font fontName="Times New Roman" size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["A la fin de la séance d’ouverture des plis, le Président a donné la parole aux soumissionnaires pour d’éventuelles observations et a levé la séance le "+new SimpleDateFormat("EEEE dd MMMMM yyyy").format($F{AAO_DTE_FIN_OUV})+" à "+$F{HEUREFINOUV}+" ."]]></textFieldExpression>
 			</textField>
@@ -1237,7 +1237,7 @@ Union – Discipline – Travail
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement stretchType="ContainerHeight" x="0" y="0" width="556" height="20" uuid="d7c5d345-1cb2-4b9e-a7d5-e469e4c9f048"/>
 				<textElement>
-					<font fontName="Times New Roman" size="11"/>
+					<font fontName="SansSerif" size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA["La date de la tenue de la séance d’analyse des offres et de jugement des offres est fixée au "+$V{test}+" ."]]></textFieldExpression>
 			</textField>
@@ -1246,7 +1246,7 @@ Union – Discipline – Travail
 			<staticText>
 				<reportElement x="81" y="0" width="401" height="21" uuid="a630176f-9ec5-4ecc-ac11-ef5795124f51"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="Times New Roman" size="12" isBold="true"/>
+					<font fontName="SansSerif" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Ont signé : ]]></text>
 			</staticText>
@@ -1287,7 +1287,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="140" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="7c575be1-cfe4-4a7a-ba8f-2a53b0cd2523"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Nom et prénom(s)]]></text>
 							</staticText>
@@ -1307,7 +1307,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="100" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="be6757be-a073-4ab8-9974-33253ef11398"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Structure]]></text>
 							</staticText>
@@ -1326,7 +1326,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="20e3fc44-b0fd-4825-b0f8-545be7160536"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Qualité]]></text>
 							</staticText>
@@ -1345,7 +1345,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="80" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="74e1edc7-7649-4ed0-9a40-986f49985a73"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Contact]]></text>
 							</staticText>
@@ -1364,7 +1364,7 @@ Union – Discipline – Travail
 							<staticText>
 								<reportElement mode="Opaque" x="0" y="0" width="116" height="20" forecolor="#FFFFFF" backcolor="#2DA62B" uuid="cf2d11f0-9817-468e-9e7c-0ed17c76f8fc"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font fontName="Times New Roman" size="11" isBold="true"/>
+									<font fontName="SansSerif" size="10" isBold="true"/>
 								</textElement>
 								<text><![CDATA[Signature]]></text>
 							</staticText>
