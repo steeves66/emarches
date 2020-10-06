@@ -1458,12 +1458,16 @@
            
            </div>
            
-             <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" action="#{daoController.imprimeSynthese}" ajax="false">
+              <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" action="#{daoController.imprimeSynthese}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer la fiche de synthèse
 				      </p:commandLink>
-          
+       <h:panelGroup rendered="false">
        <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.opendaoNew()}" ajax="false">
 				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Télécharger le DAO
+				      </p:commandLink>
+			</h:panelGroup>   	      
+				       <p:commandLink rendered="#{daoController.btn_dao}" styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff" action="#{daoController.createDaoFile()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Générer le DAO
 				      </p:commandLink>
          </p:tab>  
               

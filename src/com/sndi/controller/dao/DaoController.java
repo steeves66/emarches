@@ -1,5 +1,9 @@
 package com.sndi.controller.dao;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,20 +13,34 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Date;
-
+import java.util.Iterator;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import org.apache.log4j.Logger;
+import org.apache.poi.poifs.crypt.HashAlgorithm;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.event.FlowEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.w3c.dom.Node;
+
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.XWPFTable;
+import org.apache.poi.xwpf.usermodel.XWPFTableCell;
+import org.apache.poi.xwpf.usermodel.XWPFTableRow;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBookmark;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPerm;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTPermStart;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.STEdGrp;
 
 import com.sndi.controller.custom.ControleController;
 import com.sndi.controller.tableauBord.TableauBordController;
@@ -8498,6 +8516,1790 @@ public class DaoController {
 	public void setClean(boolean clean) {
 		this.clean = clean;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	 /*******  document  *************/
+	 private XWPFDocument document = null;
+	 private String DAO_CARBURANT_LEGER = "DAO Carburant allege.docx";
+	 private String DAO_RESTAURATION = "DAO RESTAURATION.docx";
+	 private String DAO_ENTRETIEN_LOCAUX_ESPACE_VERT = "dao_ entretien_ des_locaux.docx";
+	 private String DAO_GESTION_MAIN_OEUVRE_OCCASIONNELLE = "dao_ gestion_de_main_doeuvre_occasionnelle.docx";
+	 private String DAO_LOCATION_MAIN_OEUVRE = "dao_location_main_doeuvre.docx";
+	 private String DAO_SECURITE_PRIVEE = "dao_securite_privee.docx";
+	 private String DAO_FOURNITURES_SERVICES_CONNEXES = "DAO_Fournitures_et_services_connexes.docx";
+	 private String DAO_TRAVAUX = "dtao_travaux.docx";
+	 private String DAO_PRESTATIONS = "dtao_prestation.docx";
+	 private String PATHNAME = "C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/";
+	 
+	 private String DOWNLOAD_PATHNAME = "";
+	 private String DOWNLOAD_FILENAME ="";
+	 
+	 
+	 // methode pour charger le document du disque dur
+	 public XWPFDocument getDocument() {
+		return document;
+	}
+
+	 public void setDocument(XWPFDocument document) {
+		this.document = document;
+	 }
+
+	 public void chargeDaoFichier() throws FileNotFoundException, IOException {
+		 switch(daoIter.getTymCode()) {
+			 case "0": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_FOURNITURES_SERVICES_CONNEXES))));
+			 break;
+			 
+			 case "00": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_FOURNITURES_SERVICES_CONNEXES))));
+			 break;
+			 
+			 case "1": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_PRESTATIONS))));
+			 break;
+			 
+			 case "10": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_PRESTATIONS))));
+			 break;
+			 
+			 case "2": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_TRAVAUX))));
+			 break;
+			 
+			 case "20": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_TRAVAUX))));
+			 break;
+			 
+			 case "05": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_CARBURANT_LEGER ))));
+			 break;
+			 
+			 case "16": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_RESTAURATION))));
+			 break;
+			 
+			 case "15": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_LOCATION_MAIN_OEUVRE))));
+			 break;
+			 
+			 case "19": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_GESTION_MAIN_OEUVRE_OCCASIONNELLE))));
+			 break;
+			 
+			 case "14": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_SECURITE_PRIVEE))));
+			 break;
+			 
+			 case "13": setDocument(new XWPFDocument(new FileInputStream(new File(PATHNAME + DAO_ENTRETIEN_LOCAUX_ESPACE_VERT))));
+			 break;
+		}
+	 }
+
+	 public void chargeDaoFile() throws IOException {		 
+		 switch(daoIter.getTymCode()) {
+			 // FOURNITURE	
+			 case "0": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Fournitures_et_services_connexes.docx"))));
+			 _logger.info("DAO FOURNITURE chargé");
+			 break;
+			 
+			 // FOURNITURE	
+			 case "00": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Fournitures_et_services_connexes.docx"))));
+			 _logger.info("DAO FOURNITURE chargé");
+			 break;
+			 
+			// PRESTATIONS	
+			 case "1": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_prestation.docx"))));
+			 _logger.info("DAO PRESTATIONS chargé");
+			 break;
+			 
+			// PRESTATIONS	
+			 case "10": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_prestation.docx"))));
+			 _logger.info("DAO PRESTATIONS chargé");
+			 break;
+			 
+			// TRAVAUX	
+			 case "2": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_travaux.docx"))));
+			 _logger.info("DAO TRAVAUX chargé");
+			 break;
+			 
+			// TRAVAUX	
+			 case "20": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_travaux.docx"))));
+			 _logger.info("DAO TRAVAUX chargé");
+			 break;
+			 
+			 // FOURNITURE DE CARBURANT LEGER
+			 case "05": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Carburant_allege.docx"))));
+			 _logger.info("DAO FOURNITURE DE CARBURANT chargé");
+			 break;
+			 
+			 // DAO RESTAURATION
+			 case "16" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_RESTAURATION.docx"))));
+			 _logger.info("DAO RESTAURATION chargé");
+			 break;
+			 
+			 // DAO LOCATION DE MAIN D'OEUVRE - (Services courants)
+			 case "15" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dao_location_main_doeuvre.docx"))));
+			 _logger.info("DAO LOCATION DE MAIN D'OEUVRE chargé");
+			 break;
+			 
+			// DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+			 case "19" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dao_gestion_de_main_doeuvre_occasionnelle.docx"))));
+			 _logger.info("DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE chargé");
+			 break;
+			 
+			// DAO SECURITE PRIVEE ou GARDIENNAGE - (Services courants)
+			 case "14" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Fournitures_et_services_connexes.docx"))));
+			 _logger.info("DAO SECURITE PRIVEE ou GARDIENNAGE chargé");
+			 break;
+			 
+			// DAO ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+			 case "13" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dao_entretien_des_locaux.docx"))));
+			 _logger.info("DAO ENTRETIENS ESPACES VERTS ET LOCAUX chargé");
+			 break;
+		 }
+	 }
+	
+	 // methode pour enregistrer le document apres avoir insérer les bookmarks
+	 
+	 //WINDOWS
+	 public void saveDaoFile() throws IOException {
+		 switch(daoIter.getTymCode()) {		 
+			// TRAVAUX				
+			 case "2": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
+			 break;			 
+			 case "20": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
+			 break;
+			 
+			// PRESTATIONS
+			 case "1": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;  
+			 break;
+			 case "10": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;
+			 break;
+			 
+			 
+			// FOURNITURE
+			 case "0": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
+			 break;
+			 case "00": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
+			 break;
+			
+			// FOURNITURE DE CARBURANT LEGER
+			 case "05": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER;   
+			 break;
+			 
+			// DAO RESTAURATION
+			 case "16": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATIONS;   
+			 break;
+			 
+			// LOCATION DE MAIN D'OEUVRE - (Services courants)
+			 case "15": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES;
+			 break;
+			 
+			// GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+			 case "19": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SERVICES_COURANT;
+			 break;
+			 
+			// SECURITE PRIVEE ou GARDIENNAGE
+			 case "14": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE;
+			 break;
+			 
+			// // ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+			 case "13": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX;
+			 break;
+		 }
+		 _logger.info("path: "+DOWNLOAD_PATHNAME);
+		 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
+		 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
+	 }
+	 
+	//LINUX
+		/* public void saveDaoFile() throws IOException {
+			 switch(daoIter.getTymCode()) {		 
+				// TRAVAUX				
+				 case "2": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
+				 break;			 
+				 case "20": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
+				 break;
+				 
+				// PRESTATIONS
+				 case "1": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;  
+				 break;
+				 case "10": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;
+				 break;
+				 
+				 
+				// FOURNITURE
+				 case "0": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
+				 break;
+				 case "00": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
+				 break;
+				
+				// FOURNITURE DE CARBURANT LEGER
+				 case "05": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;   
+				 break;
+				 
+				// DAO RESTAURATION
+				 case "16": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX;   
+				 break;
+				 
+				// LOCATION DE MAIN D'OEUVRE - (Services courants)
+				 case "15": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_LINUX;
+				 break;
+				 
+				// GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+				 case "19": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX;
+				 break;
+				 
+				// SECURITE PRIVEE ou GARDIENNAGE
+				 case "14": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX;
+				 break;
+				 
+				// // ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+				 case "13": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX;
+				 break;
+			 }
+			 _logger.info("path: "+DOWNLOAD_PATHNAME);
+			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
+			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
+		 }
+	*/
+	 private List<XWPFParagraph> collectParagraphs() {
+		 List<XWPFParagraph> paragraphs = new ArrayList<>();
+		 paragraphs.addAll(getDocument().getParagraphs());
+		
+		 for(XWPFTable table:getDocument().getTables()) {
+			 for(XWPFTableRow row:table.getRows()) {
+				for(XWPFTableCell cell:row.getTableCells()) {
+					paragraphs.addAll(cell.getParagraphs());
+				}
+			 }
+		 }
+		 return paragraphs;		
+	 }
+	
+	 public List<String> getBookmarkNames(){
+		List<String> bookmarkNames = new ArrayList<>();
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		
+		paraIter = collectParagraphs().iterator();
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				bookmarkNames.add(bookmark.getName());
+			}
+		}
+		return bookmarkNames;
+	}
+	
+	public Node getBookmarkNode(String bookmarkName) {
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		Node node = null;
+		
+		paraIter = collectParagraphs().iterator();
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(bookmarkName)) {
+					node = bookmark.getDomNode();
+				}
+			}
+		}
+		
+		return node;
+	}
+	
+	public Node getBookmarkParentNode(String bookmarkName) {
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		Node node = null;
+		
+		paraIter = collectParagraphs().iterator();
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(bookmarkName)) {
+					node = para.getCTP().getDomNode();
+				}
+			}
+		}
+		return node;
+	}
+
+	private void procParaList(List<XWPFParagraph> paraList, String bookmarkName,
+			String bookmarkValue) {
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		XWPFRun run = null;
+		Node nextNode = null;
+		
+		paraIter = paraList.iterator();
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(bookmarkName)) {
+					run = para.createRun();
+					run.setBold(true);
+					run.setColor("0000FF");
+					run.setText(bookmarkValue);
+					nextNode = bookmark.getDomNode().getNextSibling();
+					while(!(nextNode.getNodeName().contains("bookmarkEnd"))) {
+						para.getCTP().getDomNode().removeChild(nextNode);
+						nextNode = bookmark.getDomNode().getNextSibling();
+					}
+					para.getCTP().getDomNode().insertBefore(
+							run.getCTR().getDomNode(), nextNode);
+				}
+			}
+		}
+	}
+	
+	private void replaceBookmarkByValue(String bookmarkName, String bookmarkValue) {
+		List<XWPFTable> tableList = null;
+		Iterator<XWPFTable> tableIter = null;
+		List<XWPFTableRow> rowList = null;
+		Iterator<XWPFTableRow> rowIter = null;
+		List<XWPFTableCell> cellList = null;
+		Iterator<XWPFTableCell> cellIter = null;
+		XWPFTable table = null;
+		XWPFTableRow row = null;
+		XWPFTableCell cell = null;
+		
+		this.procParaList(getDocument().getParagraphs(), bookmarkName, bookmarkValue);
+
+		tableList = this.document.getTables();
+		tableIter = tableList.iterator();
+		while(tableIter.hasNext()) {
+			table = tableIter.next();
+			rowList = table.getRows();
+			rowIter = rowList.iterator();
+			while(rowIter.hasNext()) {
+				row = rowIter.next();
+				cellList = row.getTableCells();
+				cellIter = cellList.iterator();
+				while(cellIter.hasNext()) {
+					cell = cellIter.next();
+					this.procParaList(cell.getParagraphs(), 
+							bookmarkName, bookmarkValue);
+				}
+			}
+		}
+	}
+	
+	public XWPFTable enteteTableLots(String bookmarkName) {
+		XWPFTable table = getDocument().createTable(1, 4);
+		table.getRow(0).getCell(0).setText("N°");
+		table.getRow(0).getCell(1).setText("LIBELLE");
+		table.getRow(0).getCell(2).setText("DELAI D'EXECUTION");
+		table.getRow(0).getCell(3).setText("CAUTIONNEMENT PROVISOIRE");
+		return table;
+	}
+	
+	public void getInfoDao() {
+		infoDao = (ArrayList<VdDao>) iservice.getObjectsByColumn("VdDao", new WhereClause("DAC_CODE", WhereClause.Comparateur.EQ, "" + dao.getDacCode()));
+		if (!infoDao.isEmpty()) {
+			daoIter = infoDao.get(0);
+			_logger.info("Infos DAO chargées");
+			_logger.info(daoIter.getDacObjet());
+			_logger.info(daoIter.getTymCode());
+		}
+	}
+	
+	public void getInfoAao() {
+		infoAao = (ArrayList<VdAao>) iservice.getObjectsByColumn("VdAao", new WhereClause("DAC_CODE", WhereClause.Comparateur.EQ, "" + dao.getDacCode()));
+		if (!infoDao.isEmpty()) {
+			aaoIter = infoAao.get(0);
+			_logger.info("Infos AAO chargées");
+			_logger.info(aaoIter.getDacCode());
+			_logger.info(aaoIter.getLaaObjet());
+		}
+	}
+
+	public void getInfoAdresse() {
+		infoAdresse = (ArrayList<VxAdresse>) iservice.getObjectsByColumn("VxAdresse", new WhereClause("DAC_CODE", WhereClause.Comparateur.EQ, "" + dao.getDacCode()));
+		if (!infoAdresse.isEmpty()) {
+			adresseIter = infoAdresse.get(0);
+			_logger.info("Infos sur l'adresse chargées");
+			_logger.info(adresseIter.getDacCode());
+			_logger.info(adresseIter.getLibdetail());
+		}
+	}
+	
+	public void getInfoLots() {
+		infoLots = (ArrayList<VbLotAao>) iservice.getObjectsByColumn("VbLotAao", new WhereClause("LAA_DAC_CODE", WhereClause.Comparateur.EQ, "" + dao.getDacCode()));
+		if (!infoLots.isEmpty()) {
+			lotsIter = infoLots.get(0);
+			_logger.info("Infos sur les lots chargées");
+			_logger.info(lotsIter.getLaaDacCode() );
+			_logger.info(lotsIter.getLaaObjet());
+			
+			for(int x = 0; x < infoLots.size(); x++) {				
+				_logger.info(infoLots.get(x).getLaaObjet());
+				//_logger.info(x.getLots());
+			}
+		}
+	}
+	
+	public void getInfoCojo() {
+		infoCojo = (ArrayList<VbCommissionSpecifique>) iservice.getObjectsByColumn("VbCommissionSpecifique", new WhereClause("com_dac_code", WhereClause.Comparateur.EQ, "" + dao.getDacCode()));
+		if (!infoCojo.isEmpty()) {
+			cojoIter = infoCojo.get(0);
+			_logger.info("Infos sur les lots chargées");
+			_logger.info(cojoIter.getComTctLibelle());
+			_logger.info(cojoIter);
+			
+			for(int y = 0; y < infoCojo.size(); y++) {
+				_logger.info(infoCojo.get(y).getComTctLibelle());
+			}
+		}
+		
+		
+	}
+	
+	public void replaceBookmarks(List<String> bookmarkNames, VdDao daoIter, VxAdresse adresseIter, VdAao aaoIter, VbLotAao lotsIter, VbCommissionSpecifique cojoIter) {				
+		//switch(String.valueOf(daoIter.getTymCode().charAt(0))) {
+		switch(daoIter.getTymCode()) {
+		// TRAVAUX
+		
+		
+		case "2": {
+			_logger.info("DAO de travaux");
+			
+			// PAGE DE GARDE
+			if(bookmarkNames.contains("PG_min_20")) replaceBookmarkByValue("PG_min_20", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac_20")) replaceBookmarkByValue("PG_ac_20", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_anGestion01_20")) replaceBookmarkByValue("PG_anGestion01_20", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_objet_20")) replaceBookmarkByValue("PG_objet_20", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_moisAnGestion_20")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion_20", mg);
+				}
+
+			// PAGE DE TITRE
+			if(bookmarkNames.contains("PT_objet_20")) replaceBookmarkByValue("PT_objet_20", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PT_ac_20")) replaceBookmarkByValue("PT_ac_20", daoIter.getStrLibelleLong());
+			
+			// DONNEES PARTICULIERES DE L'APPEL D'OFFRE (DPAO)
+			if(bookmarkNames.contains("DPAO_IC_1_1_ac_20")) replaceBookmarkByValue("DPAO_IC_1_1_ac_20", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_IC_1_1_table_lots_20"))
+				{
+					String m = "";
+					for(VbLotAao i:infoLots) {
+						m = m + i.getLaaObjet()+ "\n";
+					}
+					replaceBookmarkByValue("DPAO_IC_1_1_table_lots_20", m);
+					_logger.info(m);
+				}
+			
+/*			if(bookmarkNames.contains("DPAO_IC_2_source_financement_20")) 
+				{
+					String financement = daoIter.getStrLibelleLong() + ": ligne budgetaire " + daoIter.getLaaLbgImputation();
+					//financement = financement.toString();
+					_logger.info(financement);
+					replaceBookmarkByValue("DPAO_IC_2_source_financement_20", financement);
+				}*/
+			
+			if (bookmarkNames.contains("DPAO_IC_7_1_adresse_clarification_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_clarification_20", adresseIter.getLibdetail());
+			_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacé");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_20", ""); // clarification début
+			//if(bookmarkNames.contains("DPAO_IC_7_1_boite_postale_20")) replaceBookmarkByValue("DPAO_IC_7_1_boite_postale_20", "");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_numero_telephone_20")) replaceBookmarkByValue("DPAO_IC_7_1_numero_telephone_20", "");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_electronique_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_electronique_20", ""); // clarification fin 
+			
+			/*if(bookmarkNames.contains("DPAO_IC_7_4_lieu_20")) replaceBookmarkByValue("DPAO_IC_7_4_lieu_20", ""); // pour les visites sur site debut
+			if(bookmarkNames.contains("DPAO_IC_7_4_date_20")) replaceBookmarkByValue("DPAO_IC_7_4_date_20", ""); 
+			if(bookmarkNames.contains("DPAO_IC_7_4_heure_20")) replaceBookmarkByValue("DPAO_IC_7_4_heure_20", ""); // pour les visites sur site fin
+*/			
+			//if(bookmarkNames.contains("DPAO_IC_17_2_delai_execution_20")) replaceBookmarkByValue("DPAO_IC_17_2_delai_execution_20", String.valueOf(daoIter.getLaaDelaiExe()));
+			
+			if(bookmarkNames.contains("DPAO_IC_17_2_delai_execution_20")) replaceBookmarkByValue("DPAO_IC_17_2_delai_execution_20", daoIter.getLaaDelaiExe().toString());
+			
+			_logger.info("DPAO_IC_17_2_delai_execution_20 remplacé");
+			if(bookmarkNames.contains("DPAO_IC_19_1_delai_validite_20")) replaceBookmarkByValue("DPAO_IC_19_1_delai_validite_20", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_IC_20_2_cautionnemant_provisoire_20")) replaceBookmarkByValue("DPAO_IC_20_2_cautionnemant_provisoire_20", aaoIter.getLaaMtCaut().toString());
+			if(bookmarkNames.contains("DPAO_IC_21_1_nombre_copie_20")) replaceBookmarkByValue("DPAO_IC_21_1_nombre_copie_20", daoIter.getDacNbrCopieOff().toString());
+			
+			if (bookmarkNames.contains("DPAO_IC_23_1_adresse_remise_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_remise_20", adresseIter.getLibdetail());
+			_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacé");
+			
+			//if(bookmarkNames.contains("DPAO_IC_23_1_personne_20")) replaceBookmarkByValue("DPAO_IC_23_1_personne_20", ""); /* remise des offres debut */
+			
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_adresse_remise")) replaceBookmarkByValue("adresse", adresseIter.getLibdetail());*/
+			
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_20", "");
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_adresse_electronique_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_electronique_20", "");
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_boite_postale_20")) replaceBookmarkByValue("DPAO_IC_23_1_boite_postale_20", "");*/
+			if(bookmarkNames.contains("DPAO_IC_23_1_date_20")) 
+				{ 	
+					SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+					replaceBookmarkByValue("DPAO_IC_23_1_date_20", date.format(daoIter.getAaoDateRecep()));
+				}
+			if(bookmarkNames.contains("DPAO_IC_23_1_heure_20")) replaceBookmarkByValue("DPAO_IC_23_1_heure_20", daoIter.getAaoHeureRecep()); // remise des offres fin
+			_logger.info("DPAO_IC_23_1_heure_20 remplacé");
+			
+			if(bookmarkNames.contains("DPAO_IC_26_1_lieu_ouverture_20")) replaceBookmarkByValue("DPAO_IC_26_1_lieu_ouverture_20", daoIter.getAaoLieuRecep()); // ouverture des offres debut 
+			if(bookmarkNames.contains("DPAO_IC_26_1_date_20")) 
+				{	
+					SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+					replaceBookmarkByValue("DPAO_IC_26_1_date_20", date.format(daoIter.getAaoDteOuvTec()));
+				}
+			if(bookmarkNames.contains("DPAO_IC_26_1_heure_20")) replaceBookmarkByValue("DPAO_IC_26_1_heure_20", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("DPAO_IC_26_1_cojo_20")) {
+					String cojo = "";
+					for(VbCommissionSpecifique i:infoCojo) {
+						cojo = cojo + i.getComTctLibelle()+ System.getProperty("line.separator");
+					}
+					replaceBookmarkByValue("DPAO_IC_26_1_cojo_20", cojo);
+					_logger.info(cojo);
+				} // ouverture des offres fin 
+		
+			// FORMULAIRES DE SOUMISSION - AVIS D'APPEL D'OFFRES
+			if(bookmarkNames.contains("FS_AAO_1_ac_20")) replaceBookmarkByValue("FS_AAO_1_ac_20", "");
+			if(bookmarkNames.contains("FS_AAO_1_source_financement_20")) replaceBookmarkByValue("FS_AAO_1_source_financement_20", "");
+			if(bookmarkNames.contains("FS_AAO_1_objet_20")) replaceBookmarkByValue("FS_AAO_1_objet_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_2_ac_20")) replaceBookmarkByValue("FS_AAO_2_ac_20", "");
+			if(bookmarkNames.contains("FS_AAO_2_objet_20")) replaceBookmarkByValue("FS_AAO_2_objet_20", "");
+			if(bookmarkNames.contains("FS_AAO_4_personne_contact_20")) replaceBookmarkByValue("FS_AAO_4_personne_contact_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_4_adresse_20")) replaceBookmarkByValue("FS_AAO_4_adresse_20", "");
+			if(bookmarkNames.contains("FS_AAO_6_adresse_20")) replaceBookmarkByValue("FS_AAO_6_adresse_20", "");
+			if(bookmarkNames.contains("FS_AAO_6_prix_DAO_20")) replaceBookmarkByValue("FS_AAO_6_prix_DAO_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_6_mode_paiement_20")) replaceBookmarkByValue("FS_AAO_6_mode_paiement_20", "");
+			if(bookmarkNames.contains("FS_AAO_6_mode_acheminement_20")) replaceBookmarkByValue("FS_AAO_6_mode_acheminement_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_adresse_depot_offre_20")) replaceBookmarkByValue("FS_AAO_7_adresse_depot_offre_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_7_date_limite_20")) replaceBookmarkByValue("FS_AAO_7_date_limite_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_heure_limite_20")) replaceBookmarkByValue("FS_AAO_7_heure_limite_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_adresse_ouverture_offre_20")) replaceBookmarkByValue("FS_AAO_7_adresse_ouverture_offre_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_7_date_ouverture_offre_20")) replaceBookmarkByValue("FS_AAO_7_date_ouverture_offre_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_heure_ouverture_offre_20")) replaceBookmarkByValue("FS_AAO_7_heure_ouverture_offre_20", "");
+			if(bookmarkNames.contains("FS_AAO_8_cautionnemant_provisoire_20")) replaceBookmarkByValue("FS_AAO_8_cautionnemant_provisoire_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_8_delai_validite_20")) replaceBookmarkByValue("FS_AAO_8_delai_validite_20", "");
+			if(bookmarkNames.contains("FS_AAO_9_adresse_resultat_20")) replaceBookmarkByValue("FS_AAO_9_adresse_resultat_20", "");
+		}
+		break;
+		
+		case "20": {
+			_logger.info("DAO de travaux");
+			
+			// PAGE DE GARDE
+			if(bookmarkNames.contains("PG_min_20")) replaceBookmarkByValue("PG_min_20", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac_20")) replaceBookmarkByValue("PG_ac_20", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_anGestion01_20")) replaceBookmarkByValue("PG_anGestion01_20", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_objet_20")) replaceBookmarkByValue("PG_objet_20", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_moisAnGestion_20")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion_20", mg);
+				}
+
+			// PAGE DE TITRE
+			if(bookmarkNames.contains("PT_objet_20")) replaceBookmarkByValue("PT_objet_20", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PT_ac_20")) replaceBookmarkByValue("PT_ac_20", daoIter.getStrLibelleLong());
+			
+			// DONNEES PARTICULIERES DE L'APPEL D'OFFRE (DPAO)
+			if(bookmarkNames.contains("DPAO_IC_1_1_ac_20")) replaceBookmarkByValue("DPAO_IC_1_1_ac_20", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_IC_1_1_table_lots_20"))
+				{
+					String m = "";
+					for(VbLotAao i:infoLots) {
+						m = m + i.getLaaObjet()+ "\n";
+					}
+					replaceBookmarkByValue("DPAO_IC_1_1_table_lots_20", m);
+					_logger.info(m);
+				}
+			
+/*			if(bookmarkNames.contains("DPAO_IC_2_source_financement_20")) 
+				{
+					String financement = daoIter.getStrLibelleLong() + ": ligne budgetaire " + daoIter.getLaaLbgImputation();
+					//financement = financement.toString();
+					_logger.info(financement);
+					replaceBookmarkByValue("DPAO_IC_2_source_financement_20", financement);
+				}*/
+			
+			if (bookmarkNames.contains("DPAO_IC_7_1_adresse_clarification_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_clarification_20", adresseIter.getLibdetail());
+			_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacé");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_20", ""); // clarification début
+			//if(bookmarkNames.contains("DPAO_IC_7_1_boite_postale_20")) replaceBookmarkByValue("DPAO_IC_7_1_boite_postale_20", "");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_numero_telephone_20")) replaceBookmarkByValue("DPAO_IC_7_1_numero_telephone_20", "");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_electronique_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_electronique_20", ""); // clarification fin 
+			
+			/*if(bookmarkNames.contains("DPAO_IC_7_4_lieu_20")) replaceBookmarkByValue("DPAO_IC_7_4_lieu_20", ""); // pour les visites sur site debut
+			if(bookmarkNames.contains("DPAO_IC_7_4_date_20")) replaceBookmarkByValue("DPAO_IC_7_4_date_20", ""); 
+			if(bookmarkNames.contains("DPAO_IC_7_4_heure_20")) replaceBookmarkByValue("DPAO_IC_7_4_heure_20", ""); // pour les visites sur site fin
+*/			
+			//if(bookmarkNames.contains("DPAO_IC_17_2_delai_execution_20")) replaceBookmarkByValue("DPAO_IC_17_2_delai_execution_20", String.valueOf(daoIter.getLaaDelaiExe()));
+			
+			if(bookmarkNames.contains("DPAO_IC_17_2_delai_execution_20")) replaceBookmarkByValue("DPAO_IC_17_2_delai_execution_20", daoIter.getLaaDelaiExe().toString());
+			
+			_logger.info("DPAO_IC_17_2_delai_execution_20 remplacé");
+			if(bookmarkNames.contains("DPAO_IC_19_1_delai_validite_20")) replaceBookmarkByValue("DPAO_IC_19_1_delai_validite_20", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_IC_20_2_cautionnemant_provisoire_20")) replaceBookmarkByValue("DPAO_IC_20_2_cautionnemant_provisoire_20", aaoIter.getLaaMtCaut().toString());
+			if(bookmarkNames.contains("DPAO_IC_21_1_nombre_copie_20")) replaceBookmarkByValue("DPAO_IC_21_1_nombre_copie_20", daoIter.getDacNbrCopieOff().toString());
+			
+			if (bookmarkNames.contains("DPAO_IC_23_1_adresse_remise_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_remise_20", adresseIter.getLibdetail());
+			_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacé");
+			
+			//if(bookmarkNames.contains("DPAO_IC_23_1_personne_20")) replaceBookmarkByValue("DPAO_IC_23_1_personne_20", ""); /* remise des offres debut */
+			
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_adresse_remise")) replaceBookmarkByValue("adresse", adresseIter.getLibdetail());*/
+			
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_20", "");
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_adresse_electronique_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_electronique_20", "");
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_boite_postale_20")) replaceBookmarkByValue("DPAO_IC_23_1_boite_postale_20", "");*/
+			if(bookmarkNames.contains("DPAO_IC_23_1_date_20")) 
+				{ 	
+					SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+					replaceBookmarkByValue("DPAO_IC_23_1_date_20", date.format(daoIter.getAaoDateRecep()));
+				}
+			if(bookmarkNames.contains("DPAO_IC_23_1_heure_20")) replaceBookmarkByValue("DPAO_IC_23_1_heure_20", daoIter.getAaoHeureRecep()); // remise des offres fin
+			_logger.info("DPAO_IC_23_1_heure_20 remplacé");
+			
+			if(bookmarkNames.contains("DPAO_IC_26_1_lieu_ouverture_20")) replaceBookmarkByValue("DPAO_IC_26_1_lieu_ouverture_20", daoIter.getAaoLieuRecep()); // ouverture des offres debut 
+			if(bookmarkNames.contains("DPAO_IC_26_1_date_20")) 
+				{	
+					SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+					replaceBookmarkByValue("DPAO_IC_26_1_date_20", date.format(daoIter.getAaoDteOuvTec()));
+				}
+			if(bookmarkNames.contains("DPAO_IC_26_1_heure_20")) replaceBookmarkByValue("DPAO_IC_26_1_heure_20", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("DPAO_IC_26_1_cojo_20")) {
+					String cojo = "";
+					for(VbCommissionSpecifique i:infoCojo) {
+						cojo = cojo + i.getComTctLibelle()+ System.getProperty("line.separator");
+					}
+					replaceBookmarkByValue("DPAO_IC_26_1_cojo_20", cojo);
+					_logger.info(cojo);
+				} // ouverture des offres fin 
+		
+			// FORMULAIRES DE SOUMISSION - AVIS D'APPEL D'OFFRES
+			if(bookmarkNames.contains("FS_AAO_1_ac_20")) replaceBookmarkByValue("FS_AAO_1_ac_20", "");
+			if(bookmarkNames.contains("FS_AAO_1_source_financement_20")) replaceBookmarkByValue("FS_AAO_1_source_financement_20", "");
+			if(bookmarkNames.contains("FS_AAO_1_objet_20")) replaceBookmarkByValue("FS_AAO_1_objet_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_2_ac_20")) replaceBookmarkByValue("FS_AAO_2_ac_20", "");
+			if(bookmarkNames.contains("FS_AAO_2_objet_20")) replaceBookmarkByValue("FS_AAO_2_objet_20", "");
+			if(bookmarkNames.contains("FS_AAO_4_personne_contact_20")) replaceBookmarkByValue("FS_AAO_4_personne_contact_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_4_adresse_20")) replaceBookmarkByValue("FS_AAO_4_adresse_20", "");
+			if(bookmarkNames.contains("FS_AAO_6_adresse_20")) replaceBookmarkByValue("FS_AAO_6_adresse_20", "");
+			if(bookmarkNames.contains("FS_AAO_6_prix_DAO_20")) replaceBookmarkByValue("FS_AAO_6_prix_DAO_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_6_mode_paiement_20")) replaceBookmarkByValue("FS_AAO_6_mode_paiement_20", "");
+			if(bookmarkNames.contains("FS_AAO_6_mode_acheminement_20")) replaceBookmarkByValue("FS_AAO_6_mode_acheminement_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_adresse_depot_offre_20")) replaceBookmarkByValue("FS_AAO_7_adresse_depot_offre_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_7_date_limite_20")) replaceBookmarkByValue("FS_AAO_7_date_limite_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_heure_limite_20")) replaceBookmarkByValue("FS_AAO_7_heure_limite_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_adresse_ouverture_offre_20")) replaceBookmarkByValue("FS_AAO_7_adresse_ouverture_offre_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_7_date_ouverture_offre_20")) replaceBookmarkByValue("FS_AAO_7_date_ouverture_offre_20", "");
+			if(bookmarkNames.contains("FS_AAO_7_heure_ouverture_offre_20")) replaceBookmarkByValue("FS_AAO_7_heure_ouverture_offre_20", "");
+			if(bookmarkNames.contains("FS_AAO_8_cautionnemant_provisoire_20")) replaceBookmarkByValue("FS_AAO_8_cautionnemant_provisoire_20", "");
+			
+			if(bookmarkNames.contains("FS_AAO_8_delai_validite_20")) replaceBookmarkByValue("FS_AAO_8_delai_validite_20", "");
+			if(bookmarkNames.contains("FS_AAO_9_adresse_resultat_20")) replaceBookmarkByValue("FS_AAO_9_adresse_resultat_20", "");
+		}
+		break;
+		
+		// FOURNITURE
+		case "0" : {
+			_logger.info("DAO de fourniture");
+			
+			// PAGE DE GARDE
+			if(bookmarkNames.contains("PG_min_00")) replaceBookmarkByValue("PG_min_00", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac_00")) replaceBookmarkByValue("PG_ac_00", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_anGestion01_00")) replaceBookmarkByValue("PG_anGestion01_00", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_objet_00")) replaceBookmarkByValue("PG_objet_00", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_moisAnGestion_00")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion_00", mg);
+				}
+			
+			// PAGE DE TITRE
+			if(bookmarkNames.contains("PT_objet_00")) {
+				_logger.info("le probleme est se trouve ici & le probleme est se trouve ici le probleme est se trouve ici");
+			} // replaceBookmarkByValue("PT_objet_00", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PT_ac_00")) replaceBookmarkByValue("PT_ac_00", daoIter.getStrLibelleLong());
+			
+			// DPAO
+			if(bookmarkNames.contains("DPAO_IC_1_1_ac_00")) replaceBookmarkByValue("DPAO_IC_1_1_ac_00", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_IC_1_1_table_lots_00")) {
+					String m = "";
+					for(VbLotAao i:infoLots) {
+						m = m + i.getLaaObjet()+ "\n";
+					}
+					replaceBookmarkByValue("DPAO_IC_1_1_table_lots_00", m);
+					_logger.info(m);
+				}
+			//if(bookmarkNames.contains("DPAO_IC_1_2_source_financement_00")) replaceBookmarkByValue("DPAO_IC_1_2_source_financement_00", "");
+			if (bookmarkNames.contains("DPAO_IC_7_1_adresse_clarification_00")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_clarification_00", adresseIter.getLibdetail());
+			/*if(bookmarkNames.contains("DPAO_IC_7_1_clarification_responsable_00")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_responsable_00", "");
+			if(bookmarkNames.contains("DPAO_IC_7_1_clarification_adresse_00")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_adresse_00", "");
+			if(bookmarkNames.contains("DPAO_IC_7_1_clarification_boite_postale")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_boite_postale", "");
+			if(bookmarkNames.contains("DPAO_IC_7_1_clarification_num_telephone")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_num_telephone", "");
+			if(bookmarkNames.contains("DPAO_IC_7_1_clarification_num_telecopie")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_num_telecopie", "");
+*/
+			if(bookmarkNames.contains("DPAO_IC_14_6_lieu_destination_00")) replaceBookmarkByValue("DPAO_IC_14_6_lieu_destination_00", "");
+			
+			if(bookmarkNames.contains("DPAO_IC_19_1_delai_validite_00")) replaceBookmarkByValue("DPAO_IC_19_1_delai_validite_00", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_IC_20_1_garantie_soumission_00")) replaceBookmarkByValue("DPAO_IC_20_1_garantie_soumission_00", "");
+			if(bookmarkNames.contains("DPAO_IC_21_1_nombre_copie_00")) replaceBookmarkByValue("DPAO_IC_21_1_nombre_copie_00", daoIter.getDacNbrCopieOff().toString());
+			
+			if (bookmarkNames.contains("DPAO_IC_23_1_adresse_remise_00")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_remise_00", adresseIter.getLibdetail());
+			/*if(bookmarkNames.contains("DPAO_IC_23_1_remise_personne_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_personne_00", "");
+			if(bookmarkNames.contains("DPAO_IC_23_1_remise_adresse_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_adresse_00", "");
+			
+			if(bookmarkNames.contains("DPAO_IC_23_1_remise_email_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_email_00", "");
+			if(bookmarkNames.contains("DPAO_IC_23_1_remise_boite_postale_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_boite_postale_00", "");*/
+			if(bookmarkNames.contains("DPAO_IC_23_1_remise_date_00")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_IC_23_1_remise_date_00", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("DPAO_IC_23_1_remise_heure_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_heure_00", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_adresse_00")) replaceBookmarkByValue("DPAO_IC_26_1_ouverture_adresse_00", daoIter.getAaoLieuRecep());
+			
+			if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_date_00")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_IC_26_1_ouverture_date_00", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_heure_00")) replaceBookmarkByValue("DPAO_IC_26_1_ouverture_heure_00", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_commission_00")) {
+				String cojo = "";
+				for(VbCommissionSpecifique i:infoCojo) {
+					cojo = cojo + i.getComTctLibelle()+ System.getProperty("line.separator");
+				}
+				replaceBookmarkByValue("DPAO_IC_26_1_ouverture_commission_00", cojo);
+				_logger.info(cojo);
+			}
+			if(bookmarkNames.contains("DPAO_IC_39_1_quantite_augmente_00")) replaceBookmarkByValue("DPAO_IC_39_1_quantite_augmente_00", "");
+			if(bookmarkNames.contains("DPAO_IC_39_1_quantite_reduite_00")) replaceBookmarkByValue("DPAO_IC_39_1_quantite_reduite_00", "");
+			
+		}break;
+		
+		// FOURNITURE
+				case "00" : {
+					_logger.info("DAO de fourniture");
+					
+					// PAGE DE GARDE
+					if(bookmarkNames.contains("PG_min_00")) replaceBookmarkByValue("PG_min_00", daoIter.getMinLibelle().toUpperCase());
+					if(bookmarkNames.contains("PG_ac_00")) replaceBookmarkByValue("PG_ac_00", daoIter.getStrLibelleLong().toUpperCase());
+					if(bookmarkNames.contains("PG_anGestion01_00")) replaceBookmarkByValue("PG_anGestion01_00", String.valueOf(daoIter.getGesCode()));
+					if(bookmarkNames.contains("PG_objet_00")) replaceBookmarkByValue("PG_objet_00", daoIter.getDacObjet());
+					if(bookmarkNames.contains("PG_moisAnGestion_00")) {
+						Calendar c = Calendar.getInstance();
+						String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+						String mg = mois + "/" + daoIter.getGesCode();
+						replaceBookmarkByValue("PG_moisAnGestion_00", mg);
+						}
+					
+					// PAGE DE TITRE
+					if(bookmarkNames.contains("PT_objet_00")) {
+						_logger.info("le probleme est se trouve ici & le probleme est se trouve ici le probleme est se trouve ici");
+					} // replaceBookmarkByValue("PT_objet_00", daoIter.getDacObjet());
+					if(bookmarkNames.contains("PT_ac_00")) replaceBookmarkByValue("PT_ac_00", daoIter.getStrLibelleLong());
+					
+					// DPAO
+					if(bookmarkNames.contains("DPAO_IC_1_1_ac_00")) replaceBookmarkByValue("DPAO_IC_1_1_ac_00", daoIter.getStrLibelleLong().toUpperCase());
+					if(bookmarkNames.contains("DPAO_IC_1_1_table_lots_00")) {
+							String m = "";
+							for(VbLotAao i:infoLots) {
+								m = m + i.getLaaObjet()+ "\n";
+							}
+							replaceBookmarkByValue("DPAO_IC_1_1_table_lots_00", m);
+							_logger.info(m);
+						}
+					//if(bookmarkNames.contains("DPAO_IC_1_2_source_financement_00")) replaceBookmarkByValue("DPAO_IC_1_2_source_financement_00", "");
+					if (bookmarkNames.contains("DPAO_IC_7_1_adresse_clarification_00")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_clarification_00", adresseIter.getLibdetail());
+					/*if(bookmarkNames.contains("DPAO_IC_7_1_clarification_responsable_00")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_responsable_00", "");
+					if(bookmarkNames.contains("DPAO_IC_7_1_clarification_adresse_00")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_adresse_00", "");
+					if(bookmarkNames.contains("DPAO_IC_7_1_clarification_boite_postale")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_boite_postale", "");
+					if(bookmarkNames.contains("DPAO_IC_7_1_clarification_num_telephone")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_num_telephone", "");
+					if(bookmarkNames.contains("DPAO_IC_7_1_clarification_num_telecopie")) replaceBookmarkByValue("DPAO_IC_7_1_clarification_num_telecopie", "");
+		*/
+					if(bookmarkNames.contains("DPAO_IC_14_6_lieu_destination_00")) replaceBookmarkByValue("DPAO_IC_14_6_lieu_destination_00", "");
+					
+					if(bookmarkNames.contains("DPAO_IC_19_1_delai_validite_00")) replaceBookmarkByValue("DPAO_IC_19_1_delai_validite_00", daoIter.getAaoDelaiVal().toString());
+					if(bookmarkNames.contains("DPAO_IC_20_1_garantie_soumission_00")) replaceBookmarkByValue("DPAO_IC_20_1_garantie_soumission_00", "");
+					if(bookmarkNames.contains("DPAO_IC_21_1_nombre_copie_00")) replaceBookmarkByValue("DPAO_IC_21_1_nombre_copie_00", daoIter.getDacNbrCopieOff().toString());
+					
+					if (bookmarkNames.contains("DPAO_IC_23_1_adresse_remise_00")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_remise_00", adresseIter.getLibdetail());
+					/*if(bookmarkNames.contains("DPAO_IC_23_1_remise_personne_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_personne_00", "");
+					if(bookmarkNames.contains("DPAO_IC_23_1_remise_adresse_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_adresse_00", "");
+					
+					if(bookmarkNames.contains("DPAO_IC_23_1_remise_email_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_email_00", "");
+					if(bookmarkNames.contains("DPAO_IC_23_1_remise_boite_postale_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_boite_postale_00", "");*/
+					if(bookmarkNames.contains("DPAO_IC_23_1_remise_date_00")) { 	
+						SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+						replaceBookmarkByValue("DPAO_IC_23_1_remise_date_00", date.format(daoIter.getAaoDateRecep()));
+					}
+					if(bookmarkNames.contains("DPAO_IC_23_1_remise_heure_00")) replaceBookmarkByValue("DPAO_IC_23_1_remise_heure_00", daoIter.getAaoHeureRecep());
+					if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_adresse_00")) replaceBookmarkByValue("DPAO_IC_26_1_ouverture_adresse_00", daoIter.getAaoLieuRecep());
+					
+					if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_date_00")) {	
+						SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+						replaceBookmarkByValue("DPAO_IC_26_1_ouverture_date_00", date.format(daoIter.getAaoDteOuvTec()));
+					}
+					if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_heure_00")) replaceBookmarkByValue("DPAO_IC_26_1_ouverture_heure_00", daoIter.getAaoDteHeurOuv());
+					if(bookmarkNames.contains("DPAO_IC_26_1_ouverture_commission_00")) {
+						String cojo = "";
+						for(VbCommissionSpecifique i:infoCojo) {
+							cojo = cojo + i.getComTctLibelle()+ System.getProperty("line.separator");
+						}
+						replaceBookmarkByValue("DPAO_IC_26_1_ouverture_commission_00", cojo);
+						_logger.info(cojo);
+					}
+					if(bookmarkNames.contains("DPAO_IC_39_1_quantite_augmente_00")) replaceBookmarkByValue("DPAO_IC_39_1_quantite_augmente_00", "");
+					if(bookmarkNames.contains("DPAO_IC_39_1_quantite_reduite_00")) replaceBookmarkByValue("DPAO_IC_39_1_quantite_reduite_00", "");
+					
+				}break;
+		
+		
+		// PRESTATIONS
+		case "1" : {
+			_logger.info("DAO de prestations");
+			// PAGE DE GARDE
+			if(bookmarkNames.contains("PG_min_01")) replaceBookmarkByValue("PG_min_01", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac_01")) replaceBookmarkByValue("PG_ac_01",  daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_anGestion01_01")) replaceBookmarkByValue("PG_anGestion01_01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_objet_01")) replaceBookmarkByValue("PG_objet_01", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_moisAnGestion_01")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion_00", mg);
+				}
+			
+			// PAGE DE TITRE
+			if(bookmarkNames.contains("PT_nom_projet_01")) replaceBookmarkByValue("PT_nom_projet_01", "");
+			if(bookmarkNames.contains("PT_objet_01")) replaceBookmarkByValue("PT_objet_01", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PT_ac_01")) replaceBookmarkByValue("PT_ac_01", daoIter.getStrLibelleLong());
+			
+			// LETTRE D'INVITATION
+			if(bookmarkNames.contains("LI_1_ac_01")) replaceBookmarkByValue("LI_1_ac_01", daoIter.getStrLibelleLong()); 
+			if(bookmarkNames.contains("LI_1_ac02_01")) replaceBookmarkByValue("LI_1_ac02_01", daoIter.getStrLibelleLong());
+			if(bookmarkNames.contains("LI_1_source_financement_01")) replaceBookmarkByValue("LI_1_source_financement_01", ""); /* il est reste à trouver la solution */ 
+			if(bookmarkNames.contains("LI_1_objet_01")) replaceBookmarkByValue("LI_1_objet_01", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("LI_1_depot_adresse_01")) replaceBookmarkByValue("LI_1_depot_adresse_01", adresseIter.getLibdetail());
+			
+			// DEMANDE DE PROPOSITION
+			if(bookmarkNames.contains("DP_IC_1_1_ac_01")) replaceBookmarkByValue("DP_IC_1_1_ac_01", daoIter.getStrLibelleLong());
+			if(bookmarkNames.contains("DP_IC_1_3_rep_AC_01")) replaceBookmarkByValue("DP_IC_1_3_rep_AC_01", adresseIter.getLibdetail());			
+			/*if(bookmarkNames.contains("DP_IC_1_3_rep_adresse_01")) replaceBookmarkByValue("DP_IC_1_3_rep_adresse_01", "");
+			if(bookmarkNames.contains("DP_IC_1_3_rep_telephone_01")) replaceBookmarkByValue("DP_IC_1_3_rep_telephone_01", "");
+			if(bookmarkNames.contains("DP_IC_1_3_rep_telecopie_01")) replaceBookmarkByValue("DP_IC_1_3_rep_telecopie_01", "");
+			if(bookmarkNames.contains("DP_IC_1_3_rep_email_01")) replaceBookmarkByValue("DP_IC_1_3_rep_email_01", "");*/			
+			if(bookmarkNames.contains("DP_IC_6_delai_validite_01")) replaceBookmarkByValue("DP_IC_6_delai_validite_01", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DP_IC_8_1_eclair_adresse_01")) replaceBookmarkByValue("DP_IC_8_1_eclair_adresse_01", "");
+			
+			if(bookmarkNames.contains("DP_IC_8_1_eclair_telecopie_01")) replaceBookmarkByValue("DP_IC_8_1_eclair_telecopie_01", "");
+			if(bookmarkNames.contains("DP_IC_8_1_eclair_couriel_01")) replaceBookmarkByValue("DP_IC_8_1_eclair_couriel_01", "");			
+			if(bookmarkNames.contains("DP_IC_13_3_nombre_copie01_01")) replaceBookmarkByValue("DP_IC_13_3_nombre_copie01_01", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DP_IC_13_3_nombre_copie02_01")) replaceBookmarkByValue("DP_IC_13_3_nombre_copie02_01", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DP_IC_13_5_proposition_depot_adresse_01")) replaceBookmarkByValue("DP_IC_13_5_proposition_depot_adresse_01", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("DP_IC_13_5_proposition_depot_date_01")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_IC_23_1_date_20", date.format(daoIter.getAaoDateRecep()));
+			}			
+			if(bookmarkNames.contains("DP_IC_13_5_proposition_depot_heure_01")) replaceBookmarkByValue("DP_IC_13_5_proposition_depot_heure_01", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("DP_IC_13_5_lieu_negociation_01")) replaceBookmarkByValue("DP_IC_13_5_lieu_negociation_01", "");
+			if(bookmarkNames.contains("DP_IC_13_5_commission_01")) {
+				String cojo = "";
+				for(VbCommissionSpecifique i:infoCojo) {
+					cojo = cojo + i.getComTctLibelle()+ System.getProperty("line.separator");
+				}
+				replaceBookmarkByValue("DP_IC_13_5_commission_01", cojo);
+				_logger.info(cojo);
+			} // cojo
+		}
+		break;
+		
+		case "10" : {
+			_logger.info("DAO de prestations");
+			// PAGE DE GARDE
+			if(bookmarkNames.contains("PG_min_01")) replaceBookmarkByValue("PG_min_01", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac_01")) replaceBookmarkByValue("PG_ac_01",  daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_anGestion01_01")) replaceBookmarkByValue("PG_anGestion01_01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_objet_01")) replaceBookmarkByValue("PG_objet_01", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_moisAnGestion_01")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion_00", mg);
+				}
+			
+			// PAGE DE TITRE
+			if(bookmarkNames.contains("PT_nom_projet_01")) replaceBookmarkByValue("PT_nom_projet_01", "");
+			if(bookmarkNames.contains("PT_objet_01")) replaceBookmarkByValue("PT_objet_01", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PT_ac_01")) replaceBookmarkByValue("PT_ac_01", daoIter.getStrLibelleLong());
+			
+			// LETTRE D'INVITATION
+			if(bookmarkNames.contains("LI_1_ac_01")) replaceBookmarkByValue("LI_1_ac_01", daoIter.getStrLibelleLong()); 
+			if(bookmarkNames.contains("LI_1_ac02_01")) replaceBookmarkByValue("LI_1_ac02_01", daoIter.getStrLibelleLong());
+			if(bookmarkNames.contains("LI_1_source_financement_01")) replaceBookmarkByValue("LI_1_source_financement_01", ""); /* il est reste à trouver la solution */ 
+			if(bookmarkNames.contains("LI_1_objet_01")) replaceBookmarkByValue("LI_1_objet_01", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("LI_1_depot_adresse_01")) replaceBookmarkByValue("LI_1_depot_adresse_01", adresseIter.getLibdetail());
+			
+			// DEMANDE DE PROPOSITION
+			if(bookmarkNames.contains("DP_IC_1_1_ac_01")) replaceBookmarkByValue("DP_IC_1_1_ac_01", daoIter.getStrLibelleLong());
+			if(bookmarkNames.contains("DP_IC_1_3_rep_AC_01")) replaceBookmarkByValue("DP_IC_1_3_rep_AC_01", adresseIter.getLibdetail());			
+			/*if(bookmarkNames.contains("DP_IC_1_3_rep_adresse_01")) replaceBookmarkByValue("DP_IC_1_3_rep_adresse_01", "");
+			if(bookmarkNames.contains("DP_IC_1_3_rep_telephone_01")) replaceBookmarkByValue("DP_IC_1_3_rep_telephone_01", "");
+			if(bookmarkNames.contains("DP_IC_1_3_rep_telecopie_01")) replaceBookmarkByValue("DP_IC_1_3_rep_telecopie_01", "");
+			if(bookmarkNames.contains("DP_IC_1_3_rep_email_01")) replaceBookmarkByValue("DP_IC_1_3_rep_email_01", "");*/			
+			if(bookmarkNames.contains("DP_IC_6_delai_validite_01")) replaceBookmarkByValue("DP_IC_6_delai_validite_01", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DP_IC_8_1_eclair_adresse_01")) replaceBookmarkByValue("DP_IC_8_1_eclair_adresse_01", "");
+			
+			if(bookmarkNames.contains("DP_IC_8_1_eclair_telecopie_01")) replaceBookmarkByValue("DP_IC_8_1_eclair_telecopie_01", "");
+			if(bookmarkNames.contains("DP_IC_8_1_eclair_couriel_01")) replaceBookmarkByValue("DP_IC_8_1_eclair_couriel_01", "");			
+			if(bookmarkNames.contains("DP_IC_13_3_nombre_copie01_01")) replaceBookmarkByValue("DP_IC_13_3_nombre_copie01_01", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DP_IC_13_3_nombre_copie02_01")) replaceBookmarkByValue("DP_IC_13_3_nombre_copie02_01", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DP_IC_13_5_proposition_depot_adresse_01")) replaceBookmarkByValue("DP_IC_13_5_proposition_depot_adresse_01", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("DP_IC_13_5_proposition_depot_date_01")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_IC_23_1_date_20", date.format(daoIter.getAaoDateRecep()));
+			}			
+			if(bookmarkNames.contains("DP_IC_13_5_proposition_depot_heure_01")) replaceBookmarkByValue("DP_IC_13_5_proposition_depot_heure_01", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("DP_IC_13_5_lieu_negociation_01")) replaceBookmarkByValue("DP_IC_13_5_lieu_negociation_01", "");
+			if(bookmarkNames.contains("DP_IC_13_5_commission_01")) {
+				String cojo = "";
+				for(VbCommissionSpecifique i:infoCojo) {
+					cojo = cojo + i.getComTctLibelle()+ System.getProperty("line.separator");
+				}
+				replaceBookmarkByValue("DP_IC_13_5_commission_01", cojo);
+				_logger.info(cojo);
+			} // cojo
+		}
+		break;
+		
+		case "05" : // FOURNITURE DE CARBURANT LEGER
+		{
+			//Page de garde
+			if(bookmarkNames.contains("PG_min")) replaceBookmarkByValue("PG_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac")) replaceBookmarkByValue("PG_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_objet")) replaceBookmarkByValue("PG_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_anGestion")) replaceBookmarkByValue("PG_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_moisAnGestion")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion", mg);
+				}
+				
+			if(bookmarkNames.contains("IP_min")) replaceBookmarkByValue("IP_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("IP_ac")) replaceBookmarkByValue("IP_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("IP_objet")) replaceBookmarkByValue("IP_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("IP_anGestion")) replaceBookmarkByValue("IP_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("IP_imputation")) replaceBookmarkByValue("IP_imputation", daoIter.getLaaLbgImputation());
+			
+			// Lettre d'invitation
+			if(bookmarkNames.contains("LI_anGestion")) replaceBookmarkByValue("LI_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac")) replaceBookmarkByValue("LI_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_anGestion01")) replaceBookmarkByValue("LI_anGestion01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac01")) replaceBookmarkByValue("LI_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_adresse")) replaceBookmarkByValue("LI_adresse", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("LI_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("LI_reception_heure")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("LI_reception_lieu")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("LI_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("LI_ouverture_heure")) replaceBookmarkByValue("LI_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("LI_ouverture_lieu")) replaceBookmarkByValue("LI_ouverture_lieu", daoIter.getAaoLieuRecep());
+			
+			//Avis d'appel d'offre
+			if(bookmarkNames.contains("AAO_ac")) replaceBookmarkByValue("AAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_min")) replaceBookmarkByValue("AAO_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("AAO_objet")) replaceBookmarkByValue("AAO_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("AAO_nb_lot")) replaceBookmarkByValue("AAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("AAO_fin_ac")) replaceBookmarkByValue("AAO_fin_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_fin_imputation")) replaceBookmarkByValue("AAO_fin_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("AAO_fin_anGestion")) replaceBookmarkByValue("AAO_fin_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("AAO_cout_dao")) replaceBookmarkByValue("AAO_cout_dao", String.valueOf(daoIter.getAaoCoutDac()));
+			if(bookmarkNames.contains("AAO_adr_retrait_dao")) replaceBookmarkByValue("AAO_adr_retrait_dao", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("AAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("AAO_reception_heure")) replaceBookmarkByValue("AAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("AAO_reception_lieu")) replaceBookmarkByValue("AAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("AAO_delai_validite")) replaceBookmarkByValue("AAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("AAO_ouvertue_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_ouvertue_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("AAO_ouvertue_heure")) replaceBookmarkByValue("AAO_ouvertue_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("AAO_ouvertue_lieu")) replaceBookmarkByValue("AAO_ouvertue_lieu", daoIter.getAaoLieuRecep());
+				
+			// Reglement particulier de l'appel d'offre
+			if(bookmarkNames.contains("RPAO_AC")) replaceBookmarkByValue("RPAO_AC", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("RPAO_objet")) replaceBookmarkByValue("RPAO_objet", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("RPAO_nb_lot")) replaceBookmarkByValue("RPAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_nb_lot01")) replaceBookmarkByValue("RPAO_nb_lot01", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("RPAO_reception_heure")) replaceBookmarkByValue("RPAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("RPAO_reception_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("RPAO_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("RPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_ouverture_lieu", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_delai_validite")) replaceBookmarkByValue("RPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+				
+			// Données particulier de l'appel d'offre
+			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("DPAO_dotation")) // à faire
+			if(bookmarkNames.contains("DPAO_lieu_livraison")) // à faire
+			if(bookmarkNames.contains("DPAO_delai_validite")) replaceBookmarkByValue("DPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_nb_copie")) replaceBookmarkByValue("DPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DPAO_remise_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_remise_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("DPAO_remise_heure")) replaceBookmarkByValue("DPAO_remise_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("DPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+		}
+		break;
+		
+		case "16" : // DAO RESTAURATION
+		{
+			//Page de garde
+			if(bookmarkNames.contains("PG_min")) replaceBookmarkByValue("PG_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac")) replaceBookmarkByValue("PG_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_objet")) replaceBookmarkByValue("PG_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_anGestion")) replaceBookmarkByValue("PG_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_moisAnGestion")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion", mg);
+				}
+				
+			if(bookmarkNames.contains("IP_min")) replaceBookmarkByValue("IP_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("IP_ac")) replaceBookmarkByValue("IP_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("IP_objet")) replaceBookmarkByValue("IP_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("IP_anGestion")) replaceBookmarkByValue("IP_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("IP_imputation")) replaceBookmarkByValue("IP_imputation", daoIter.getLaaLbgImputation());
+			
+			// Lettre d'invitation
+			if(bookmarkNames.contains("LI_anGestion")) replaceBookmarkByValue("LI_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac")) replaceBookmarkByValue("LI_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_anGestion01")) replaceBookmarkByValue("LI_anGestion01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac01")) replaceBookmarkByValue("LI_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_adresse")) replaceBookmarkByValue("LI_adresse", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("LI_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("LI_reception_heure")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("LI_reception_lieu")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("LI_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("LI_ouverture_heure")) replaceBookmarkByValue("LI_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("LI_ouverture_lieu")) replaceBookmarkByValue("LI_ouverture_lieu", daoIter.getAaoLieuRecep());
+			
+			//Avis d'appel d'offre
+			if(bookmarkNames.contains("AAO_ac")) replaceBookmarkByValue("AAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_min")) replaceBookmarkByValue("AAO_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("AAO_objet")) replaceBookmarkByValue("AAO_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("AAO_nb_lot")) replaceBookmarkByValue("AAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("AAO_fin_ac")) replaceBookmarkByValue("AAO_fin_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_fin_imputation")) replaceBookmarkByValue("AAO_fin_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("AAO_fin_anGestion")) replaceBookmarkByValue("AAO_fin_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("AAO_cout_dao")) replaceBookmarkByValue("AAO_cout_dao", String.valueOf(daoIter.getAaoCoutDac()));
+			if(bookmarkNames.contains("AAO_adr_retrait_dao")) replaceBookmarkByValue("AAO_adr_retrait_dao", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("AAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("AAO_reception_heure")) replaceBookmarkByValue("AAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("AAO_reception_lieu")) replaceBookmarkByValue("AAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("AAO_delai_validite")) replaceBookmarkByValue("AAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("AAO_ouvertue_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_ouvertue_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("AAO_ouvertue_heure")) replaceBookmarkByValue("AAO_ouvertue_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("AAO_ouvertue_lieu")) replaceBookmarkByValue("AAO_ouvertue_lieu", daoIter.getAaoLieuRecep());
+				
+			// Reglement particulier de l'appel d'offre
+			if(bookmarkNames.contains("RPAO_AC")) replaceBookmarkByValue("RPAO_AC", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("RPAO_objet")) replaceBookmarkByValue("RPAO_objet", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("RPAO_nb_lot")) replaceBookmarkByValue("RPAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_nb_lot01")) replaceBookmarkByValue("RPAO_nb_lot01", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("RPAO_reception_heure")) replaceBookmarkByValue("RPAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("RPAO_reception_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("RPAO_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("RPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_ouverture_lieu", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_delai_validite")) replaceBookmarkByValue("RPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+				
+			// Données particulier de l'appel d'offre
+			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("DPAO_dotation")) // à faire
+			if(bookmarkNames.contains("DPAO_lieu_livraison")) // à faire
+			if(bookmarkNames.contains("DPAO_delai_validite")) replaceBookmarkByValue("DPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_nb_copie")) replaceBookmarkByValue("DPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DPAO_remise_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_remise_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("DPAO_remise_heure")) replaceBookmarkByValue("DPAO_remise_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("DPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+		}
+		break;
+		
+		case "15" : // LOCATION DE MAIN D'OEUVRE - (Services courants)
+		{
+			//Page de garde
+			if(bookmarkNames.contains("PG_min")) replaceBookmarkByValue("PG_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac")) replaceBookmarkByValue("PG_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_objet")) replaceBookmarkByValue("PG_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_anGestion")) replaceBookmarkByValue("PG_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_moisAnGestion")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion", mg);
+				}
+				
+			if(bookmarkNames.contains("IP_min")) replaceBookmarkByValue("IP_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("IP_ac")) replaceBookmarkByValue("IP_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("IP_objet")) replaceBookmarkByValue("IP_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("IP_anGestion")) replaceBookmarkByValue("IP_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("IP_imputation")) replaceBookmarkByValue("IP_imputation", daoIter.getLaaLbgImputation());
+			
+			// Lettre d'invitation
+			if(bookmarkNames.contains("LI_anGestion")) replaceBookmarkByValue("LI_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac")) replaceBookmarkByValue("LI_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_anGestion01")) replaceBookmarkByValue("LI_anGestion01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac01")) replaceBookmarkByValue("LI_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_adresse")) replaceBookmarkByValue("LI_adresse", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("LI_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("LI_reception_heure")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("LI_reception_lieu")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("LI_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("LI_ouverture_heure")) replaceBookmarkByValue("LI_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("LI_ouverture_lieu")) replaceBookmarkByValue("LI_ouverture_lieu", daoIter.getAaoLieuRecep());
+			
+			//Avis d'appel d'offre
+			if(bookmarkNames.contains("AAO_ac")) replaceBookmarkByValue("AAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_min")) replaceBookmarkByValue("AAO_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("AAO_objet")) replaceBookmarkByValue("AAO_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("AAO_nb_lot")) replaceBookmarkByValue("AAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("AAO_fin_ac")) replaceBookmarkByValue("AAO_fin_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_fin_imputation")) replaceBookmarkByValue("AAO_fin_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("AAO_fin_anGestion")) replaceBookmarkByValue("AAO_fin_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("AAO_cout_dao")) replaceBookmarkByValue("AAO_cout_dao", String.valueOf(daoIter.getAaoCoutDac()));
+			if(bookmarkNames.contains("AAO_adr_retrait_dao")) replaceBookmarkByValue("AAO_adr_retrait_dao", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("AAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("AAO_reception_heure")) replaceBookmarkByValue("AAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("AAO_reception_lieu")) replaceBookmarkByValue("AAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("AAO_delai_validite")) replaceBookmarkByValue("AAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("AAO_ouvertue_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_ouvertue_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("AAO_ouvertue_heure")) replaceBookmarkByValue("AAO_ouvertue_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("AAO_ouvertue_lieu")) replaceBookmarkByValue("AAO_ouvertue_lieu", daoIter.getAaoLieuRecep());
+				
+			// Reglement particulier de l'appel d'offre
+			if(bookmarkNames.contains("RPAO_AC")) replaceBookmarkByValue("RPAO_AC", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("RPAO_objet")) replaceBookmarkByValue("RPAO_objet", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("RPAO_nb_lot")) replaceBookmarkByValue("RPAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_nb_lot01")) replaceBookmarkByValue("RPAO_nb_lot01", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("RPAO_reception_heure")) replaceBookmarkByValue("RPAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("RPAO_reception_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("RPAO_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("RPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_ouverture_lieu", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_delai_validite")) replaceBookmarkByValue("RPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+				
+			// Données particulier de l'appel d'offre
+			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("DPAO_dotation")) // à faire
+			if(bookmarkNames.contains("DPAO_lieu_livraison")) // à faire
+			if(bookmarkNames.contains("DPAO_delai_validite")) replaceBookmarkByValue("DPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_nb_copie")) replaceBookmarkByValue("DPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DPAO_remise_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_remise_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("DPAO_remise_heure")) replaceBookmarkByValue("DPAO_remise_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("DPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+		}
+		break;
+		
+		case "19" :	// GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+		{
+			//Page de garde
+			if(bookmarkNames.contains("PG_min")) replaceBookmarkByValue("PG_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac")) replaceBookmarkByValue("PG_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_objet")) replaceBookmarkByValue("PG_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_anGestion")) replaceBookmarkByValue("PG_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_moisAnGestion")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion", mg);
+				}
+				
+			if(bookmarkNames.contains("IP_min")) replaceBookmarkByValue("IP_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("IP_ac")) replaceBookmarkByValue("IP_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("IP_objet")) replaceBookmarkByValue("IP_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("IP_anGestion")) replaceBookmarkByValue("IP_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("IP_imputation")) replaceBookmarkByValue("IP_imputation", daoIter.getLaaLbgImputation());
+			
+			// Lettre d'invitation
+			if(bookmarkNames.contains("LI_anGestion")) replaceBookmarkByValue("LI_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac")) replaceBookmarkByValue("LI_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_anGestion01")) replaceBookmarkByValue("LI_anGestion01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac01")) replaceBookmarkByValue("LI_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_adresse")) replaceBookmarkByValue("LI_adresse", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("LI_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("LI_reception_heure")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("LI_reception_lieu")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("LI_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("LI_ouverture_heure")) replaceBookmarkByValue("LI_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("LI_ouverture_lieu")) replaceBookmarkByValue("LI_ouverture_lieu", daoIter.getAaoLieuRecep());
+			
+			//Avis d'appel d'offre
+			if(bookmarkNames.contains("AAO_ac")) replaceBookmarkByValue("AAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_min")) replaceBookmarkByValue("AAO_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("AAO_objet")) replaceBookmarkByValue("AAO_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("AAO_nb_lot")) replaceBookmarkByValue("AAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("AAO_fin_ac")) replaceBookmarkByValue("AAO_fin_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_fin_imputation")) replaceBookmarkByValue("AAO_fin_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("AAO_fin_anGestion")) replaceBookmarkByValue("AAO_fin_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("AAO_cout_dao")) replaceBookmarkByValue("AAO_cout_dao", String.valueOf(daoIter.getAaoCoutDac()));
+			if(bookmarkNames.contains("AAO_adr_retrait_dao")) replaceBookmarkByValue("AAO_adr_retrait_dao", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("AAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("AAO_reception_heure")) replaceBookmarkByValue("AAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("AAO_reception_lieu")) replaceBookmarkByValue("AAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("AAO_delai_validite")) replaceBookmarkByValue("AAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("AAO_ouvertue_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_ouvertue_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("AAO_ouvertue_heure")) replaceBookmarkByValue("AAO_ouvertue_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("AAO_ouvertue_lieu")) replaceBookmarkByValue("AAO_ouvertue_lieu", daoIter.getAaoLieuRecep());
+				
+			// Reglement particulier de l'appel d'offre
+			if(bookmarkNames.contains("RPAO_AC")) replaceBookmarkByValue("RPAO_AC", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("RPAO_objet")) replaceBookmarkByValue("RPAO_objet", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("RPAO_nb_lot")) replaceBookmarkByValue("RPAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_nb_lot01")) replaceBookmarkByValue("RPAO_nb_lot01", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("RPAO_reception_heure")) replaceBookmarkByValue("RPAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("RPAO_reception_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("RPAO_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("RPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_ouverture_lieu", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_delai_validite")) replaceBookmarkByValue("RPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+				
+			// Données particulier de l'appel d'offre
+			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("DPAO_dotation")) // à faire
+			if(bookmarkNames.contains("DPAO_lieu_livraison")) // à faire
+			if(bookmarkNames.contains("DPAO_delai_validite")) replaceBookmarkByValue("DPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_nb_copie")) replaceBookmarkByValue("DPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DPAO_remise_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_remise_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("DPAO_remise_heure")) replaceBookmarkByValue("DPAO_remise_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("DPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+		}
+		break;
+		
+		case "14" : // SECURITE PRIVEE ou GARDIENNAGE
+		{
+			//Page de garde
+			if(bookmarkNames.contains("PG_min")) replaceBookmarkByValue("PG_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac")) replaceBookmarkByValue("PG_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_objet")) replaceBookmarkByValue("PG_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_anGestion")) replaceBookmarkByValue("PG_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_moisAnGestion")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion", mg);
+				}
+				
+			if(bookmarkNames.contains("IP_min")) replaceBookmarkByValue("IP_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("IP_ac")) replaceBookmarkByValue("IP_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("IP_objet")) replaceBookmarkByValue("IP_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("IP_anGestion")) replaceBookmarkByValue("IP_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("IP_imputation")) replaceBookmarkByValue("IP_imputation", daoIter.getLaaLbgImputation());
+			
+			// Lettre d'invitation
+			if(bookmarkNames.contains("LI_anGestion")) replaceBookmarkByValue("LI_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac")) replaceBookmarkByValue("LI_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_anGestion01")) replaceBookmarkByValue("LI_anGestion01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac01")) replaceBookmarkByValue("LI_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_adresse")) replaceBookmarkByValue("LI_adresse", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("LI_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("LI_reception_heure")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("LI_reception_lieu")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("LI_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("LI_ouverture_heure")) replaceBookmarkByValue("LI_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("LI_ouverture_lieu")) replaceBookmarkByValue("LI_ouverture_lieu", daoIter.getAaoLieuRecep());
+			
+			//Avis d'appel d'offre
+			if(bookmarkNames.contains("AAO_ac")) replaceBookmarkByValue("AAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_min")) replaceBookmarkByValue("AAO_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("AAO_objet")) replaceBookmarkByValue("AAO_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("AAO_nb_lot")) replaceBookmarkByValue("AAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("AAO_fin_ac")) replaceBookmarkByValue("AAO_fin_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_fin_imputation")) replaceBookmarkByValue("AAO_fin_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("AAO_fin_anGestion")) replaceBookmarkByValue("AAO_fin_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("AAO_cout_dao")) replaceBookmarkByValue("AAO_cout_dao", String.valueOf(daoIter.getAaoCoutDac()));
+			if(bookmarkNames.contains("AAO_adr_retrait_dao")) replaceBookmarkByValue("AAO_adr_retrait_dao", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("AAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("AAO_reception_heure")) replaceBookmarkByValue("AAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("AAO_reception_lieu")) replaceBookmarkByValue("AAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("AAO_delai_validite")) replaceBookmarkByValue("AAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("AAO_ouvertue_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_ouvertue_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("AAO_ouvertue_heure")) replaceBookmarkByValue("AAO_ouvertue_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("AAO_ouvertue_lieu")) replaceBookmarkByValue("AAO_ouvertue_lieu", daoIter.getAaoLieuRecep());
+				
+			// Reglement particulier de l'appel d'offre
+			if(bookmarkNames.contains("RPAO_AC")) replaceBookmarkByValue("RPAO_AC", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("RPAO_objet")) replaceBookmarkByValue("RPAO_objet", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("RPAO_nb_lot")) replaceBookmarkByValue("RPAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_nb_lot01")) replaceBookmarkByValue("RPAO_nb_lot01", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("RPAO_reception_heure")) replaceBookmarkByValue("RPAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("RPAO_reception_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("RPAO_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("RPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_ouverture_lieu", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_delai_validite")) replaceBookmarkByValue("RPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+				
+			// Données particulier de l'appel d'offre
+			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("DPAO_dotation")) // à faire
+			if(bookmarkNames.contains("DPAO_lieu_livraison")) // à faire
+			if(bookmarkNames.contains("DPAO_delai_validite")) replaceBookmarkByValue("DPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_nb_copie")) replaceBookmarkByValue("DPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DPAO_remise_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_remise_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("DPAO_remise_heure")) replaceBookmarkByValue("DPAO_remise_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("DPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+		}
+		break;
+		
+		case "13" : // ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+		{
+			//Page de garde
+			if(bookmarkNames.contains("PG_min")) replaceBookmarkByValue("PG_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("PG_ac")) replaceBookmarkByValue("PG_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("PG_objet")) replaceBookmarkByValue("PG_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("PG_anGestion")) replaceBookmarkByValue("PG_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("PG_moisAnGestion")) {
+				Calendar c = Calendar.getInstance();
+				String mois = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.FRANCE ).toUpperCase();
+				String mg = mois + "/" + daoIter.getGesCode();
+				replaceBookmarkByValue("PG_moisAnGestion", mg);
+				}
+				
+			if(bookmarkNames.contains("IP_min")) replaceBookmarkByValue("IP_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("IP_ac")) replaceBookmarkByValue("IP_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("IP_objet")) replaceBookmarkByValue("IP_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("IP_anGestion")) replaceBookmarkByValue("IP_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("IP_imputation")) replaceBookmarkByValue("IP_imputation", daoIter.getLaaLbgImputation());
+			
+			// Lettre d'invitation
+			if(bookmarkNames.contains("LI_anGestion")) replaceBookmarkByValue("LI_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac")) replaceBookmarkByValue("LI_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_anGestion01")) replaceBookmarkByValue("LI_anGestion01", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("LI_ac01")) replaceBookmarkByValue("LI_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("LI_adresse")) replaceBookmarkByValue("LI_adresse", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("LI_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("LI_reception_heure")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("LI_reception_lieu")) replaceBookmarkByValue("LI_reception_heure", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("LI_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("LI_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("LI_ouverture_heure")) replaceBookmarkByValue("LI_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("LI_ouverture_lieu")) replaceBookmarkByValue("LI_ouverture_lieu", daoIter.getAaoLieuRecep());
+			
+			//Avis d'appel d'offre
+			if(bookmarkNames.contains("AAO_ac")) replaceBookmarkByValue("AAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_min")) replaceBookmarkByValue("AAO_min", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("AAO_objet")) replaceBookmarkByValue("AAO_objet", daoIter.getDacObjet());
+			if(bookmarkNames.contains("AAO_nb_lot")) replaceBookmarkByValue("AAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("AAO_fin_ac")) replaceBookmarkByValue("AAO_fin_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("AAO_fin_imputation")) replaceBookmarkByValue("AAO_fin_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("AAO_fin_anGestion")) replaceBookmarkByValue("AAO_fin_anGestion", String.valueOf(daoIter.getGesCode()));
+			if(bookmarkNames.contains("AAO_cout_dao")) replaceBookmarkByValue("AAO_cout_dao", String.valueOf(daoIter.getAaoCoutDac()));
+			if(bookmarkNames.contains("AAO_adr_retrait_dao")) replaceBookmarkByValue("AAO_adr_retrait_dao", adresseIter.getLibdetail());
+			if(bookmarkNames.contains("AAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("AAO_reception_heure")) replaceBookmarkByValue("AAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("AAO_reception_lieu")) replaceBookmarkByValue("AAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("AAO_delai_validite")) replaceBookmarkByValue("AAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("AAO_ouvertue_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("AAO_ouvertue_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("AAO_ouvertue_heure")) replaceBookmarkByValue("AAO_ouvertue_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("AAO_ouvertue_lieu")) replaceBookmarkByValue("AAO_ouvertue_lieu", daoIter.getAaoLieuRecep());
+				
+			// Reglement particulier de l'appel d'offre
+			if(bookmarkNames.contains("RPAO_AC")) replaceBookmarkByValue("RPAO_AC", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("RPAO_objet")) replaceBookmarkByValue("RPAO_objet", daoIter.getMinLibelle().toUpperCase());
+			if(bookmarkNames.contains("RPAO_nb_lot")) replaceBookmarkByValue("RPAO_nb_lot", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_nb_lot01")) replaceBookmarkByValue("RPAO_nb_lot01", String.valueOf(daoIter.getAaoNbrLot()));
+			if(bookmarkNames.contains("RPAO_reception_date")) { 	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_reception_date", date.format(daoIter.getAaoDateRecep()));
+			}
+			if(bookmarkNames.contains("RPAO_reception_heure")) replaceBookmarkByValue("RPAO_reception_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("RPAO_reception_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+			if(bookmarkNames.contains("RPAO_ouverture_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("RPAO_ouverture_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("RPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_ouverture_lieu", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_delai_validite")) replaceBookmarkByValue("RPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
+			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+				
+			// Données particulier de l'appel d'offre
+			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
+			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
+			if(bookmarkNames.contains("DPAO_dotation")) // à faire
+			if(bookmarkNames.contains("DPAO_lieu_livraison")) // à faire
+			if(bookmarkNames.contains("DPAO_delai_validite")) replaceBookmarkByValue("DPAO_delai_validite", daoIter.getAaoDelaiVal().toString());
+			if(bookmarkNames.contains("DPAO_nb_copie")) replaceBookmarkByValue("DPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
+			if(bookmarkNames.contains("DPAO_remise_date")) {	
+				SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
+				replaceBookmarkByValue("DPAO_remise_date", date.format(daoIter.getAaoDteOuvTec()));
+			}
+			if(bookmarkNames.contains("DPAO_remise_heure")) replaceBookmarkByValue("DPAO_remise_heure", daoIter.getAaoHeureRecep());
+			if(bookmarkNames.contains("DPAO_ouverture_lieu")) replaceBookmarkByValue("RPAO_reception_lieu", daoIter.getAaoLieuExe());
+		}
+		break;	
+		// FOURNITURE DE CARBURANT LEGER
+		/*case "05" : {
+			
+		}
+		break;*/
+		
+		// DAO RESTAURATION
+		/*case "16" : {
+					
+		}
+		break;*/
+		
+		// LOCATION DE MAIN D'OEUVRE - (Services courants)
+		/*case "15" : {
+			
+		}
+		break;*/
+		
+		// GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+/*		case "19" : {
+					
+		}
+		break;*/
+		
+		// SECURITE PRIVEE ou GARDIENNAGE
+/*		case "14" : {
+			
+		}
+		break;
+		*/
+		// ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+/*		case "13" : {
+					
+		}
+		break;*/
+		}
+		_logger.info("Bookmarks remplacés");
+	}
+	
+	
+	// methode pour telecharger le dao
+	public void telechargerDao() throws IOException {
+		downloadFileServlet.downloadFile(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME, DOWNLOAD_FILENAME); 
+	}
+		
+		
+	public void insertPermStart(String start, String id) {
+		List<XWPFParagraph> paralist = null;
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		
+		paralist = getDocument().getParagraphs();
+		paraIter = paralist.iterator();
+		
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(start)) {
+					CTPermStart ctpermstart = document.getDocument().getBody().addNewPermStart();
+					ctpermstart.setEdGrp(STEdGrp.EVERYONE);
+					ctpermstart.setId(id);
+					Node node = ctpermstart.getDomNode();
+					System.out.println(node.getNodeName());
+					System.out.println(ctpermstart.getEdGrp());
+					System.out.println("");
+					
+					para.getCTP().getDomNode().insertBefore(ctpermstart.getDomNode(), bookmark.getDomNode());
+				}
+			}
+		}
+	}
+
+	
+	public void insertPermEnd(String end, String id) {
+		List<XWPFParagraph> paralist = null;
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		
+		paralist = getDocument().getParagraphs();
+		paraIter = paralist.iterator();
+		
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(end)) {
+					CTPerm ctpermend = document.getDocument().getBody().addNewPermEnd();
+					ctpermend.setId(id);
+					Node node = ctpermend.getDomNode();
+					String str = ctpermend.getId();
+					System.out.println(node.getNodeName());
+					System.out.println(str);
+					System.out.println("______________________");
+					
+					para.getCTP().getDomNode().insertBefore(ctpermend.getDomNode(), bookmark.getDomNode());
+				}
+			}
+		}
+	}
+
+	
+	public void setProtect() {		
+		getDocument().enforceReadonlyProtection("emap31032020", none);
+		System.out.println("protégé");
+	}
+	
+	public void verrouillage() {
+		switch(String.valueOf(daoIter.getTymCode().charAt(0))) {		 
+		// TRAVAUX	
+		case "2": 
+			insertPermStart("deverouillage_debut_01", "12");
+			insertPermEnd("deverouillage_fin_01", "12");
+			
+			insertPermStart("deverouillage_debut_02", "34");
+			insertPermEnd("deverouillage_fin_02", "34");
+			
+			insertPermStart("deverouillage_debut_03", "56");
+			insertPermEnd("deverouillage_fin_03", "56");
+			break;
+		
+		// PRESTATION
+		case "1":
+			insertPermStart("deverouillage_debut_01", "12");
+			insertPermEnd("deverouillage_fin_01", "12");
+			
+			insertPermStart("deverouillage_debut_02", "34");
+			insertPermEnd("deverouillage_fin_02", "34");
+			break;
+		
+		// FOURNITURE	
+		case "0":
+			insertPermStart("deverouillage_debut_01", "12");
+			insertPermEnd("deverouillage_fin_01", "12");
+			
+			insertPermStart("deverouillage_debut_02", "34");
+			insertPermEnd("deverouillage_fin_02", "34");
+			
+			insertPermStart("deverouillage_debut_03", "56");
+			insertPermEnd("deverouillage_fin_03", "56");
+			break;
+		}
+	}
+	
+	public static HashAlgorithm none ;
+	
+	ArrayList<VdDao> infoDao = new ArrayList<VdDao>();
+	ArrayList<VdAao> infoAao = new ArrayList<VdAao>();
+	ArrayList<VxAdresse> infoAdresse = new ArrayList<VxAdresse>();
+	ArrayList<VbLotAao> infoLots = new ArrayList<VbLotAao>();
+	ArrayList<VbCommissionSpecifique> infoCojo = new ArrayList<VbCommissionSpecifique>();
+
+	List<String> bookmarkNames = new ArrayList<String>();
+	VdDao daoIter = new VdDao();
+	VdAao aaoIter = new VdAao();
+	VxAdresse adresseIter = new VxAdresse();
+	VbLotAao lotsIter = new VbLotAao();
+	VbCommissionSpecifique cojoIter = new VbCommissionSpecifique();
+	
+	public void createDaoFile() throws IOException {
+		infoDao.clear();
+		infoAao.clear();
+		infoAdresse.clear();
+		infoLots.clear();
+		infoCojo.clear();
+		getInfoDao();
+		getInfoAao();
+		getInfoAdresse();
+		getInfoLots();
+		getInfoCojo();
+		
+		chargeDaoFile();
+		bookmarkNames = getBookmarkNames();
+		System.out.println(bookmarkNames);
+		replaceBookmarks(bookmarkNames, daoIter, adresseIter, aaoIter, lotsIter, cojoIter);
+		
+		verrouillage();
+		setProtect();
+		
+		saveDaoFile();
+		//downloadDao();
+		telechargerDao();
+	}
+	
+	/*******  Fin document  *************/
 	
 	
 }

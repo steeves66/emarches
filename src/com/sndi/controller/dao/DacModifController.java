@@ -2485,7 +2485,7 @@ public class DacModifController {
 		  }else
 			 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
 				 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre); 
-			 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
+			 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
 		    }else
 				 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
 					 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
@@ -2530,7 +2530,7 @@ public class DacModifController {
 					  }else
 						 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
 							 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre); 
-						 downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
+						 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES_LINUX+libelleLocationMainDoeuvre, libelleLocationMainDoeuvre);
 					    }else
 							 if(slctdTd.getTymTymCode().equalsIgnoreCase("1")) {
 								 //downloadFileServlet.downloadFile(userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION+libelleRestauration, libelleRestauration); 
