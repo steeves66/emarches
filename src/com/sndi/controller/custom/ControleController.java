@@ -1213,9 +1213,9 @@ public class ControleController {
 							 selectOneMenuPassation =true;
 							 btn_creerDetailPpm = true;
 							 btn_creerDetailPspm = false;
-							 btn_creerDetailPpmCmp = true;
+							 btn_creerDetailPpmCmp = false;
 							 btn_creerDetailPspmCmp = false;
-							 btn_creerDetailPpmDmp = true;
+							 btn_creerDetailPpmDmp = false;
 							 btn_creerDetailPspmDmp = false;
 							 //btn_maj_datePpm = false;
 							 detailP1 = true;
@@ -1463,9 +1463,9 @@ public class ControleController {
 							 btn_creerDetailPpm = false;
 							 btn_creerDetailPspm = true;
 							 btn_creerDetailPpmCmp = false;
-							 btn_creerDetailPspmCmp = true;
+							 btn_creerDetailPspmCmp = false;
 							 btn_creerDetailPpmDmp = false;
-							 btn_creerDetailPspmDmp = true;
+							 btn_creerDetailPspmDmp = false;
 							// btn_maj_datePspm = false;
 							 fermerValPspm = false;
 							 fermerSaiPspm = true;

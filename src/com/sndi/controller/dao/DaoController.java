@@ -4243,7 +4243,7 @@ public class DaoController {
 													                           
 													                           constantService.getStatut("DC2");
 												 							  	//Historisation du / des retraits
-												 						       historiser("D1T",newDao.getDacCode(),"DAO Corrigé par le responsable du binÃ´me");	
+												 						       historiser("DC2",newDao.getDacCode(),"DAO Corrigé par le responsable du binome");	
 							 				                              //Actualisation du Tableau de Bord
 											                              typeActionTb();
 											                              //Activation et dï¿½sactivation des boutons valider

@@ -1490,13 +1490,13 @@
 			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gn">				        
          				  <h:outputText value="#{slctdTb.tymCode}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
                                 </h:commandLink>

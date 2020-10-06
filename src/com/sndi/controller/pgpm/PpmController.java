@@ -349,7 +349,7 @@ public class PpmController {
 						        }else {
 						        	if(marche.getTymCode() == null ||modePassation.getMopCode() == null) {
 	                    		    	  FacesContext.getCurrentInstance().addMessage(null,
-			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 	                    		      }else {
 	                    		    	  creerDetailPassation(modePassation.getMopTypPlan());
 	                    		      }
@@ -362,24 +362,31 @@ public class PpmController {
 		                    	  if(passationListe.getMopTypPlan() == null) {
 		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
 		                    			  FacesContext.getCurrentInstance().addMessage(null,
-		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		  }else {
 		                    		         creerDetailPassation(pgpm.getMopTypPlan());
 		                    		  }
 		                    	  }else {
 		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
 		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
-				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
 		                    		      }else {
 		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
 		                    		      }
 		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
 		                    		    //creerDetailPassation(passationListe.getMopTypPlan());
 		                    	  }
+		                    	  
 		                    	  recupModeleDao();
-		                    	  controlPanel();
+		                    	  if(controleController.type == "PPM") {
+		                    		  controlPanel();
+		                    	  }else 
+		                    	  {
+		                    		 if(controleController.type == "PSPM") {
+		                    		      controlPanelPs();
+		                    		     }
+		                    	  }
 		                 }
-		  		
 				     }
 			            return event.getNewStep();
 		    }
@@ -2233,24 +2240,52 @@ public class PpmController {
 		                            }
 		 
 		 
-		 //Gestion des Panels
+		 //Gestion des Panels PPM
 		 public void controlPanel() {
-			 if(pgpm.getGpgMopCode().equalsIgnoreCase("PSC")) {
+			 if(pgpm.getGpgMopCode().equalsIgnoreCase("PSC") || passationListe.getMopCode().equalsIgnoreCase("PSC") ) {
 				 controleController.etatPsc = true;
 				 controleController.etatPsl = false;
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
 			 }else {
-				   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
+				   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO") || passationListe.getMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
 				   }else {
-					   controleController.etatPsc = false;
-						 controleController.etatPsl = true;
-						 controleController.etatPso = false;
+					   
+					   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL") || passationListe.getMopCode().equalsIgnoreCase("PSL")) {
+						     controleController.etatPsc = false;
+							 controleController.etatPsl = true;
+							 controleController.etatPso = false;
+							 controleController.etatPsl_Pso = true;
+					   }
+				   }
+			 }
+		 }
+		 
+		//Gestion des Panels PPM
+		 public void controlPanelPs() {
+			 if(passationListe.getMopCode().equalsIgnoreCase("PSC") ) {
+				 controleController.etatPsc = true;
+				 controleController.etatPsl = false;
+				 controleController.etatPso = false;
+				 controleController.etatPsl_Pso = false;
+			 }else {
+				   if(passationListe.getMopCode().equalsIgnoreCase("PSO")) {
+					    controleController.etatPsc = false;
+						 controleController.etatPsl = false;
+						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
+				   }else {
+					   
+					   if(passationListe.getMopCode().equalsIgnoreCase("PSL")) {
+						     controleController.etatPsc = false;
+							 controleController.etatPsl = true;
+							 controleController.etatPso = false;
+							 controleController.etatPsl_Pso = true;
+					   }
 				   }
 			 }
 		 }
@@ -2424,7 +2459,7 @@ public class PpmController {
 		    
 		    recupPgspm.setGpgMopCode(passationListe.getMopCode());
 		    recupPgspm.setMopLibelleLong(passationListe.getMopLibelleLong());
-		    chargeMode();
+		    //chargeMode();
 				}
 		 
 		//Fin Méthode Love 
@@ -2742,8 +2777,23 @@ public class PpmController {
               		    detailPass.setDppStatutDao("N");
               		    iservice.addObject(detailPass); 
                 	    }else {
-                	    	detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
-                		    detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
+                	    	
+                	    	  if(marche.getTymCode() == null) {
+                          		 detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode())); 
+                          	   }else {
+                          		 detailPass.setTTypeMarche(new TTypeMarche(marche.getTymCode())); 
+                          	   }
+                     		
+                     		  if(passationListe.getMopCode() == null) {
+                     			detailPass.setTModePassation(new TModePassation(pgpm.getGpgMopCode())); 
+                     			detailPass.setDppTypePlan(typePlan);
+                     		  }else {
+                     		    detailPass.setTModePassation(new TModePassation(passationListe.getMopCode())); 
+                     		    detailPass.setDppTypePlan(passationListe.getMopTypPlan());
+                     		  }
+                	    	
+                	    	//detailPass.setTTypeMarche(new TTypeMarche(pgpm.getGpgTymCode()));
+                		    //detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
                 		    //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
                 		    detailPass.setDppGpgId(pgpm.getGpgId());
                 		    detailPass.setDppPartiePmePmi(pgspm.getGpgPartiePmePmi());
@@ -2751,7 +2801,7 @@ public class PpmController {
                 		    detailPass.setDppTypeStrConduc(strucCond);
                 		    detailPass.setTPlanPassation(planPass);
                 		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-                		    detailPass.setDppTypePlan(typePlan);
+                		    //detailPass.setDppTypePlan(typePlan);
                 		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
                 		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
                 		    detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
