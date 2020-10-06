@@ -225,6 +225,7 @@ public class PpmController {
 		//Declaration des objets
 		 private TPlanPassation planPass = new TPlanPassation();
 		 private TDetailPlanPassation detailPass = new TDetailPlanPassation();
+		 private TDetailPlanPassation detPass = new TDetailPlanPassation();
 		 private VPgpmFonction pgpm = new VPgpmFonction();
 		 private VPgpmFonction pgspm = new VPgpmFonction();
 		 private TDetailPlanPassation ppm = new TDetailPlanPassation();
@@ -1485,6 +1486,14 @@ public class PpmController {
 	            				    newFinancement.setFppTypeFinance(sourfin);
 	            				    newFinancement.setTDetailPlanPassation(detailPass);
 	            					iservice.addObject(newFinancement);
+	            					
+	            					listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+	    									new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+	            					if (!listeTsPpm.isEmpty()) {
+	            						detPass= listeTsPpm.get(0);
+	            						detPass.setDppSourceFin(newFinancement.getFppTypeFinance());
+	            						iservice.updateObject(detPass);
+	            					}
 	            					
 	            					viderFinancement();
 	            					
@@ -5605,6 +5614,24 @@ public class PpmController {
 
 	public void setListeCpDiffPs(List<VPpmliste> listeCpDiffPs) {
 		this.listeCpDiffPs = listeCpDiffPs;
+	}
+
+
+
+
+
+
+	public TDetailPlanPassation getDetPass() {
+		return detPass;
+	}
+
+
+
+
+
+
+	public void setDetPass(TDetailPlanPassation detPass) {
+		this.detPass = detPass;
 	}
 	
 	
