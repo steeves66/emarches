@@ -26,6 +26,7 @@ public class ControleController {
 	//Libellés
 	private String libelle="";
 	private String libelleSmall="";
+	private String libelleDmp="DGMP";
 	private String libelle1="";
 	private String libelleProcedure="";
 	private String libellesmall="";
@@ -536,6 +537,7 @@ public class ControleController {
 	//Redirection en fonction du traitement a éffectuer
 	 public String redirectionDynamic(String action) {
 		 if(action.equalsIgnoreCase("ENG")) {
+			   libelleDmp="DGMP";
 		       libelle="SAISIE D'UN NOUVEL AVIS GENERAL DE PASSATION DE MARCHES";
 		       libelle1="Liste des AGPM Saisie par l'autorité Contractante";
 		       panelDetail=false;
@@ -547,6 +549,7 @@ public class ControleController {
 			   panelAgpmTableauBordVal = false;
 		    }else 
 		    	if(action.equalsIgnoreCase("MOD")) {
+		    		libelleDmp="DGMP";
 		    		libelle="Modification de l'AGPM N°";
 		    		libelle1="Modification";
 		    		panelDetail=false;
@@ -557,6 +560,7 @@ public class ControleController {
 		    		panelRegister=false;
 		    	}else
 		    		if(action.equalsIgnoreCase("LIS")) {
+		    			libelleDmp="DGMP";
 		    			libelle1="Index";
 		    			libelle="SAISIE DES AVIS GENERAUX DE PASSATION DE MARCHES";	
 		    			 btn_new =true;
@@ -571,6 +575,7 @@ public class ControleController {
 							
 		    		}else
 		    			if(action.equalsIgnoreCase("VAL")) {
+		    				libelleDmp="DGMP";
 		    				libelle="VALIDATION DES AVIS GENERAUX DE PASSATION DE MARCHES";
 		    				libelle1="TRANSMISSION DES AVIS GENERAUX DE PASSATION DE MARCHES";
 		    				panelDetail=false;
@@ -588,6 +593,7 @@ public class ControleController {
 							 
 		    			}else
 			    			if(action.equalsIgnoreCase("APE")) {
+			    				libelleDmp="DGMP";
 			    				libelle="DETAILS DE L'AVIS GENERAL DE PASSATION DE MARCHES N°";
 			    				panelDetail=true;
 			    				panelForm=false;
@@ -622,6 +628,8 @@ public class ControleController {
 			 //PGPM
 			 if(action.equalsIgnoreCase("ENGPGPM")) {
 				 type = "PGPM";
+				 typePlan = "PN";
+				 libelleDmp="DGMP";
 				 libelleProcedure="SAISIE D'UN NOUVEAU  PLAN GENERAL DE PASSATION DE MARCHES";
 			       libelle1="PLAN GENERAL DE PASSATIONS DES MARCHES";
 			       libelleSmall="Procédure Normale";
@@ -644,6 +652,8 @@ public class ControleController {
 			    }else 
 			    	if(action.equalsIgnoreCase("MODPGPM")) {
 			    		type = "PGPM";
+			    		typePlan ="PN";
+			    		libelleDmp="DGMP";
 		    			libelleProcedure="Index";
 		    			libelle="MODIFICATION DU PLAN GENERAL DE PASSATION DE MARCHES N°";	
 		    			btn_new_pgpm =true;
@@ -679,6 +689,8 @@ public class ControleController {
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPGPM")) {
 			    			type = "PGPM";
+			    			typePlan ="PN";
+			    			libelleDmp="DGMP";
 			    			libelleProcedure="Index";
 			    			libelle="SAISIE DES PLANS GENERAUX DE PASSATION DE MARCHES";
 			    			libelle1="PLAN GENERAL DE PASSATIONS DES MARCHES";
@@ -722,6 +734,8 @@ public class ControleController {
 			    		}else
 			    			if(action.equalsIgnoreCase("VALPGPM")) {
 			    				type = "PGPM";
+			    				typePlan ="PN";
+			    				libelleDmp="DGMP";
 			    				libelle="VALIDATION DES PLANS GENERAUX DE PASSATION DE MARCHES";	
 			    				libelle1="TRANSMISSION DES PLANS GENERAUX DE PASSATION DE MARCHES";
 			    				libelleSmall="Procédure Normale";
@@ -754,6 +768,7 @@ public class ControleController {
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPGPM")) {
 				    				type = "PGPM";
+				    				typePlan = "PN";
 				    				libelle="DETAILS DU PLAN GENERAL DE PASSATION DE MARCHES N°";
 				    				libellePgpm ="SAISIE DES PLANS GENERAUX DE PASSATION DE MARCHES";
 				    				panelDetail=true;
@@ -6447,6 +6462,7 @@ public class ControleController {
 							    			if(action.equalsIgnoreCase("LISOUV")) {
 								    			type = "Commission";
 								    			fonctionalite = "listOuvertureAc";
+								    			libelleDmp="DGMP";
 								    			libelle="SEANCE D'OUVERTURE / SAISIE DES OFFRES";
 								    			libelle2 = "Date Fin Ouverture";
 								    			typePlan = "L'OUVERTURE";
@@ -6464,6 +6480,7 @@ public class ControleController {
 								    			//DETAIL OUVERTURE
 								    			if(action.equalsIgnoreCase("DETOUV")) {
 									    			type = "Commission";
+									    			libelleDmp="DGMP";
 									    			opdPiece = "Ouverture";
 									    			libelle="DETAILS DE L'AVIS N°";
 									    			btn_fermerOuverture =true;
@@ -6473,14 +6490,17 @@ public class ControleController {
 							    			else
 								    			if(action.equalsIgnoreCase("LISMBR")) {
 									    			type = "Commission";
+									    			libelleDmp="DGMP";
 									    			libelle="SEANCE D'OUVERTURE : Composition de la commssion";
 									    		}else
 									    			if(action.equalsIgnoreCase("LISCOM")) {
 										    			type = "Commission";
+										    			libelleDmp="DGMP";
 										    			libelle="SAISIE DU COMITE D'EVALUATION";
 										    		}else
 										    			if(action.equalsIgnoreCase("MBRJUG")) {
 											    			type = "Commission";
+											    			libelleDmp="DGMP";
 											    			libelle="SAISIE DES MEMBRES DE LA COJO";
 											    		}
 								    			else
@@ -6488,6 +6508,7 @@ public class ControleController {
 								    			if(action.equalsIgnoreCase("LISANA")) {
 									    			type = "Commission";
 									    			typePlan = "L'ANALYSE";
+									    			libelleDmp="DGMP";
 									    			fonctionalite = "listAnalyseAc";
 									    			libelle2 = "Date Fin Analyse";
 									    			libelle1 = "Heure de Fin";
@@ -6504,6 +6525,7 @@ public class ControleController {
 									    			//DETAIL ANALYSE DES OFFRES
 									    			if(action.equalsIgnoreCase("DETANA")) {
 										    			type = "Commission";
+										    			libelleDmp="DGMP";
 										    			opdPiece = "Analyse";
 										    			libelle="DEAILS DE L'OFFRRE N°";
 										    			btn_fermerOuverture =false;
@@ -6513,6 +6535,7 @@ public class ControleController {
 								    			else
 									    			if(action.equalsIgnoreCase("SAIANA")) {
 										    			type = "Commission";
+										    			libelleDmp="DGMP";
 										    			libelle="ANALYSE DES OFFRES DE L'AVIS N°";
 										    			btn_fermerOuverture =false;
 										    			btn_fermerAnalyse =true;
@@ -6523,6 +6546,7 @@ public class ControleController {
 									    			if(action.equalsIgnoreCase("LISJUG")) {
 										    			type = "Commission";
 										    			fonctionalite = "listJugementAc";
+										    			libelleDmp="DGMP";
 										    			libelle2 = "Fin Jugement";
 										    			libelle1 = "Heure de Fin";
 										    			libelle="JUGEMENT DES OFFRES";
@@ -6538,6 +6562,7 @@ public class ControleController {
 										    			//DETAIL JUGEMENT
 										    			if(action.equalsIgnoreCase("DETJUG")) {
 											    			type = "Commission";
+											    			libelleDmp="DGMP";
 											    			opdPiece = "Jugement";
 											    			libelle="DEAILS DE L'OFFRRE N°";
 											    			btn_fermerOuverture =false;
@@ -6547,15 +6572,18 @@ public class ControleController {
 									    			else
 										    			if(action.equalsIgnoreCase("SAIJUG")) {
 											    			type = "Commission";
+											    			libelleDmp="DGMP";
 											    			libelle="JUGEMENT DES OFFRES";	
 											    		}else
 											    			if(action.equalsIgnoreCase("RESJUG")) {
 												    			type = "Commission";
+												    			libelleDmp="DGMP";
 												    			libelle="EVALUATION FINANCIERE DES OFFRES DU LOT N°";	
 												    		}else
 												    			//REEDITION DES ETATS
 												    			if(action.equalsIgnoreCase("REDCOJ")) {
 													    			type = "Commission";
+													    			libelleDmp="DGMP";
 													    			libelle="REEDITION";	
 													    		}
 											    			else
@@ -6563,6 +6591,7 @@ public class ControleController {
 											    				if(action.equalsIgnoreCase("LISANO")) {
 													    			type = "Commission";
 													    			fonctionalite = "listDemAnoAc";
+													    			libelleDmp="DGMP";
 													    			//libelleFinCom = "Validation éffectuée avec succès !";
 													    			//libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
 													    			//libelleTitle = "Prévalidation";
@@ -6576,11 +6605,13 @@ public class ControleController {
 														    			//libelleFinCom = "Validation éffectuée avec succès !";
 														    			//libelleConfirm = "Confirmez-vous la prévalidation de la demande N°";
 														    			//libelleTitle = "Prévalidation";
+														    			libelleDmp="DGMP";
 														    			libelle="LISTE DES AVIS D'APPEL D'OFFRE EN ATTENTE D'ANO";	
 														    		}else
 														    			if(action.equalsIgnoreCase("LISAUTODMP")) {
 															    			type = "Commission";
 															    			fonctionalite = "listAutoSaiDmp";
+															    			libelleDmp="DGMP";
 															    			panelAnoDemdeDmp = false;
 															    			panelAnoAvisDmp = true;
 															    			//libelleFinCom = "Validation éffectuée avec succès !";
@@ -6590,10 +6621,12 @@ public class ControleController {
 															    		}else
 													    			if(action.equalsIgnoreCase("DEMANO")) {
 														    			type = "Commission";
-														    			libelle="DEMANDE DE NON OBJECTION SUR L'AVIS";	
+														    			libelle="DEMANDE DE NON OBJECTION SUR L'AVIS";
+														    			libelleDmp="DGMP";
 														    		}else
 														    			//TRAITEMENT ANO DMP
 														    			if(action.equalsIgnoreCase("TRAIANO")) {
+														    				libelleDmp="DGMP";
 															    			type = "Commission";
 															    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	
 															    		}
@@ -6601,6 +6634,7 @@ public class ControleController {
 															    			//TRAITEMENT ANO DMP
 															    			if(action.equalsIgnoreCase("TRAIDMP")) {
 																    			type = "Commission";
+																    			libelleDmp="DGMP";
 																    			libelle="TRAITEMENT DES ANO DE L'AVIS D'APPEL D'OFFRE";	
 																    		}
 													    			else
@@ -6610,6 +6644,7 @@ public class ControleController {
 											    			if(action.equalsIgnoreCase("LISDEMSAI")) {
 												    			type = "Demandes";
 												    			fonctionalite = "listSaisieAc";
+												    			libelleDmp="DGMP";
 												    			libelle="LISTE DES DEMANDE SAISIES";	
 												    			libelleTitle = "Transmettre";
 												    			libelleConfirm = "Confirmez-vous la transmission de la demande N°";
@@ -9927,6 +9962,16 @@ public class ControleController {
 
 	public void setPanelAnoTraiAc(boolean panelAnoTraiAc) {
 		this.panelAnoTraiAc = panelAnoTraiAc;
+	}
+
+
+	public String getLibelleDmp() {
+		return libelleDmp;
+	}
+
+
+	public void setLibelleDmp(String libelleDmp) {
+		this.libelleDmp = libelleDmp;
 	}
 	
 }
