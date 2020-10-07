@@ -2602,7 +2602,7 @@ public class PpmController {
 				 			boutonEdit =true; 
 				 			boutonEditPspm =false;
 				 			
-				 			controleController.btn_creerDetailPpm =true;
+				 			//controleController.btn_creerDetailPpm =true;
 				 			//Actualisation du Tableau de Bord
 				 			//tableauBordController.chargeDataPpm();
 				 			tableauBordbAc();
@@ -2650,7 +2650,7 @@ public class PpmController {
 			 				chargeData(typePlan);
 			 				boutonEdit =true;
 			 				boutonEditPspm =false;
-			 				controleController.btn_creerDetailPpm =true;
+			 				//controleController.btn_creerDetailPpm =true;
 			 				//controleController.btn_maj_datePpm = true;
 				 			//controleController.btn_creerDetailPspmDmp=false;
 			 				
@@ -2667,11 +2667,6 @@ public class PpmController {
 			 				userController.setRenderMsg(true);
 			 				userController.setSevrityMsg("success");
 			 	 	         }
-			 	 	  
-			  		/*  }else {
-			  			FacesContext.getCurrentInstance().addMessage(null,
-		        	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Votre Plan général n'a pas de financement", "")); 
-			  		  }*/
 		  			
 		  	}
 		  		
