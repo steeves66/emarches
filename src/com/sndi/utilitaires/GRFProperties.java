@@ -101,19 +101,19 @@ public class GRFProperties {
 	public static final String PARAM_LOG4J ="LOG4J";
 	public static final String PARAM_LOG4J_LIBELLE = "C:/LOG4J/";
 	//public static final String PARAM_UPLOAD_DESTINATION = getProperty("destination", "\\standalone\\Dossiers\\");
-	public static final String PARAM_UPLOAD_DESTINATION = "/standalone/Dossiers/";
+	public static final String PARAM_UPLOAD_DESTINATION = "/wildfly8/standalone/Dossiers/";
 	
-	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/standalone/Dossiers/DAO/Travaux/";
-	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/standalone/Dossiers/DAO/Fournitures/";
-	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/standalone/Dossiers/DAO/Prestations_Services/";	
-	public static final String PARAM_UPLOAD_DAO_PRESTATIONS = "/standalone/Dossiers/DAO/Prestations/";//Pour Laurent
-	public static final String PARAM_UPLOAD_DAO_CARBURANT_LEGER = "/standalone/Dossiers/DAO/Carburants/";//Pour Laurent
-	public static final String PARAM_UPLOAD_DAO_RESTAURATIONS = "/standalone/Dossiers/DAO/Restauration/";//Pour Laurent
-	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES = "/standalone/Dossiers/DAO/Location_main_doeuvre/";//Pour Laurent
-	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRES = "/standalone/Dossiers/DAO/Gestion_de_main_doeuvre_occasionnelle/";//Pour Laurent
-	public static final String PARAM_UPLOAD_DAO_SERVICES_COURANT = "/standalone/Dossiers/DAO/Gestion_de_main_doeuvre_occasionnelle/";//Pour Laurent
-	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE = "/standalone/Dossiers/DAO/Securite_privee/";//Pour Laurent
-	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX = "/standalone/Dossiers/DAO/Entretien_des_locaux/";
+	public static final String PARAM_UPLOAD_DAO_TRAVAUX = "/wildfly8/standalone/Dossiers/DAO/Travaux/";
+	public static final String PARAM_UPLOAD_DAO_FOURNITURES = "/wildfly8/standalone/Dossiers/DAO/Fournitures/";
+	public static final String PARAM_UPLOAD_DAO_PRESTATION = "/wildfly8/standalone/Dossiers/DAO/Prestations_Services/";	
+	public static final String PARAM_UPLOAD_DAO_PRESTATIONS = "/wildfly8/standalone/Dossiers/DAO/Prestations/";//Pour Laurent
+	public static final String PARAM_UPLOAD_DAO_CARBURANT_LEGER = "/wildfly8/standalone/Dossiers/DAO/Carburants/";//Pour Laurent
+	public static final String PARAM_UPLOAD_DAO_RESTAURATIONS = "/wildfly8/standalone/Dossiers/DAO/Restauration/";//Pour Laurent
+	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES = "/wildfly8/standalone/Dossiers/DAO/Location_main_doeuvre/";//Pour Laurent
+	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRES = "/wildfly8/standalone/Dossiers/DAO/Gestion_de_main_doeuvre_occasionnelle/";//Pour Laurent
+	public static final String PARAM_UPLOAD_DAO_SERVICES_COURANT = "/wildfly8/standalone/Dossiers/DAO/Gestion_de_main_doeuvre_occasionnelle/";//Pour Laurent
+	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE = "/wildfly8/standalone/Dossiers/DAO/Securite_privee/";//Pour Laurent
+	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX = "/wildfly8/standalone/Dossiers/DAO/Entretien_des_locaux/";
 
 	//LINUX
 	public static final String PARAM_UPLOAD_DESTINATION_DAO_LINUX = getProperty("destinationDao", "\\standalone\\Dossiers\\DAO\\");
@@ -130,19 +130,31 @@ public class GRFProperties {
 	
 
 	
-	/*public static final String PARAM_UPLOAD_DESTINATION_DAO_LINUX = getProperty("destinationDao", "\\standalone\\Dossiers\\DAO\\");
-	//public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux", "\\wildfly8\\standalone\\Dossiers\\DAO\\Travaux\\");
-	//public static final String PARAM_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationFournitures", "\\wildfly8\\standalone\\Dossiers\\DAO\\Fournitures\\");
-	//public static final String PARAM_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationPrestations", "\\wildfly8\\standalone\\Dossiers\\DAO\\Prestations_Services\\");
-	public static final String PARAM_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Dossiers/DAO/Travaux/");
-	public static final String PARAM_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationFournitures","opt/wildfly8/standalone/Dossiers/DAO/Fournitures/");
-	public static final String PARAM_UPLOAD_DAO_SERVICES_LINUX = getProperty("destinationServices","opt/wildfly8/standalone/Dossiers/DAO/Services/");
-	public static final String PARAM_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Prestations_Services/");	
-	public static final String PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Dossiers/DAO/Entretien_ des_locaux/");
-	public static final String PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX = getProperty("destinationFournitures","opt/wildfly8/standalone/Dossiers/DAO/dao_ gestion_de_main_doeuvre_occasionnelle_2016/");
-	public static final String PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRE_LINUX = getProperty("destinationServices","opt/wildfly8/standalone/Dossiers/DAO/Location_main_doeuvre_ 2016/");
-	public static final String PARAM_UPLOAD_DAO_RESTAURATION_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Dao_Restauration/");
-	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Securite_privee_ 2016/");*/
+	//FICHIER DE BASE DAO TYPE
+	//WINDOWS
+	public static final String FICHIER_UPLOAD_DAO_TRAVAUX = "/wildfly8/standalone/Fichiers/dtao_travaux.docx";
+	public static final String FICHIER_UPLOAD_DAO_FOURNITURES = "/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx";
+	public static final String FICHIER_UPLOAD_DAO_PRESTATION = "/wildfly8/standalone/Fichiers/dtao_prestation.docx";	
+	public static final String FICHIER_UPLOAD_DAO_PRESTATIONS = "/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx";//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_CARBURANT_LEGER = "/wildfly8/standalone/Fichiers/DAO_Carburant_allege.docx";//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_RESTAURATIONS = "/wildfly8/standalone/Fichiers/DAO_RESTAURATION.docx";//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES = "/wildfly8/standalone/Fichiers/dao_location_main_doeuvre.docx";//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES = "/wildfly8/standalone/Fichiers/dao_gestion_de_main_doeuvre_occasionnelle.docx";//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_SERVICES_COURANT = "/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx";//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_SECURITE_PRIVEE = "/wildfly8/standalone/Fichiers/dao_securite_privee.docx";//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX = "/wildfly8/standalone/Fichiers/dao_entretien_des_locaux.docx";
+	
+	//LINUX
+	public static final String FICHIER_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dtao_travaux.docx");
+	public static final String FICHIER_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx"); 	
+	public static final String FICHIER_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dtao_prestation.docx"); //Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_CARBURANT_LEGER_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/DAO_Carburant_allege.docx"); //Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_RESTAURATIONS_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/DAO_RESTAURATION.docx"); //Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dao_location_main_doeuvre.docx"); //Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dao_gestion_de_main_doeuvre_occasionnelle.docx"); //Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_SERVICES_COURANT_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx");//Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dao_securite_privee.docx"); //Pour Laurent
+	public static final String FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dao_entretien_des_locaux.docx");
 	
 	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC = getProperty("destinationTrue", "\\standalone\\Dossiers\\trueDoc\\");
 	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "/opt/wildfly8/standalone/Dossiers/");

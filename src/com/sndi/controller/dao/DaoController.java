@@ -8590,70 +8590,141 @@ public class DaoController {
 		}
 	 }
 
+	 
+	 //POUR WINDOWS
 	 public void chargeDaoFile() throws IOException {		 
 		 switch(daoIter.getTymCode()) {
-			 // FOURNITURE	
-			 case "0": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Fournitures_et_services_connexes.docx"))));
+			 // FOURNITURE	;
+		 case "0": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES))));
 			 _logger.info("DAO FOURNITURE chargé");
+			 _logger.info(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES);
 			 break;
 			 
 			 // FOURNITURE	
-			 case "00": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Fournitures_et_services_connexes.docx"))));
+			 case "00": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES))));
 			 _logger.info("DAO FOURNITURE chargé");
 			 break;
 			 
 			// PRESTATIONS	
-			 case "1": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_prestation.docx"))));
+			 case "1": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATION))));
 			 _logger.info("DAO PRESTATIONS chargé");
 			 break;
 			 
 			// PRESTATIONS	
-			 case "10": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_prestation.docx"))));
+			 case "10": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATION))));
 			 _logger.info("DAO PRESTATIONS chargé");
 			 break;
 			 
 			// TRAVAUX	
-			 case "2": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_travaux.docx"))));
+			 case "2": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX))));
 			 _logger.info("DAO TRAVAUX chargé");
 			 break;
 			 
 			// TRAVAUX	
-			 case "20": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dtao_travaux.docx"))));
+			 case "20": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX))));
 			 _logger.info("DAO TRAVAUX chargé");
 			 break;
 			 
 			 // FOURNITURE DE CARBURANT LEGER
-			 case "05": setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Carburant_allege.docx"))));
+			 case "05": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_CARBURANT_LEGER))));
 			 _logger.info("DAO FOURNITURE DE CARBURANT chargé");
 			 break;
 			 
 			 // DAO RESTAURATION
-			 case "16" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_RESTAURATION.docx"))));
+			 case "16" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_RESTAURATIONS))));
 			 _logger.info("DAO RESTAURATION chargé");
 			 break;
 			 
 			 // DAO LOCATION DE MAIN D'OEUVRE - (Services courants)
-			 case "15" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dao_location_main_doeuvre.docx"))));
+			 case "15" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES))));
 			 _logger.info("DAO LOCATION DE MAIN D'OEUVRE chargé");
 			 break;
 			 
 			// DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
-			 case "19" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dao_gestion_de_main_doeuvre_occasionnelle.docx"))));
+			 case "19" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES))));
 			 _logger.info("DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE chargé");
 			 break;
 			 
 			// DAO SECURITE PRIVEE ou GARDIENNAGE - (Services courants)
-			 case "14" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/DAO_Fournitures_et_services_connexes.docx"))));
+			 case "14" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_SECURITE_PRIVEE))));
 			 _logger.info("DAO SECURITE PRIVEE ou GARDIENNAGE chargé");
 			 break;
 			 
 			// DAO ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
-			 case "13" : setDocument(new XWPFDocument(new FileInputStream(new File("C:/wildfly-8.2.1.Final/standalone/Dossiers/Fichiers/dao_entretien_des_locaux.docx"))));
+			 case "13" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX))));
 			 _logger.info("DAO ENTRETIENS ESPACES VERTS ET LOCAUX chargé");
 			 break;
 		 }
 	 }
-	
+	 
+	 
+	 
+	 //POUR LINUX
+	 /*public void chargeDaoFile() throws IOException {		 
+		 switch(daoIter.getTymCode()) {
+			 // FOURNITURE	;
+		 case "0": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES_LINUX))));
+			 _logger.info("DAO FOURNITURE chargé");
+			 _logger.info(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES);
+			 break;
+			 
+			 // FOURNITURE	
+			 case "00": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES_LINUX))));
+			 _logger.info("DAO FOURNITURE chargé");
+			 break;
+			 
+			// PRESTATIONS	
+			 case "1": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATIONS_LINUX))));
+			 _logger.info("DAO PRESTATIONS chargé");
+			 break;
+			 
+			// PRESTATIONS	
+			 case "10": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATIONS_LINUX))));
+			 _logger.info("DAO PRESTATIONS chargé");
+			 break;
+			 
+			// TRAVAUX	
+			 case "2": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX_LINUX))));
+			 _logger.info("DAO TRAVAUX chargé");
+			 break;
+			 
+			// TRAVAUX	
+			 case "20": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX_LINUX))));
+			 _logger.info("DAO TRAVAUX chargé");
+			 break;
+			 
+			 // FOURNITURE DE CARBURANT LEGER
+			 case "05": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_CARBURANT_LEGER_LINUX))));
+			 _logger.info("DAO FOURNITURE DE CARBURANT chargé");
+			 break;
+			 
+			 // DAO RESTAURATION
+			 case "16" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_RESTAURATIONS_LINUX))));
+			 _logger.info("DAO RESTAURATION chargé");
+			 break;
+			 
+			 // DAO LOCATION DE MAIN D'OEUVRE - (Services courants)
+			 case "15" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES))));
+			 _logger.info("DAO LOCATION DE MAIN D'OEUVRE chargé");
+			 break;
+			 
+			// DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
+			 case "19" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES_LINUX))));
+			 _logger.info("DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE chargé");
+			 break;
+			 
+			// DAO SECURITE PRIVEE ou GARDIENNAGE - (Services courants)
+			 case "14" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_SECURITE_PRIVEE_LINUX))));
+			 _logger.info("DAO SECURITE PRIVEE ou GARDIENNAGE chargé");
+			 break;
+			 
+			// DAO ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
+			 case "13" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX))));
+			 _logger.info("DAO ENTRETIENS ESPACES VERTS ET LOCAUX chargé");
+			 break;
+		 }
+	 }
+	*/
 	 // methode pour enregistrer le document apres avoir insérer les bookmarks
 	 
 	 //WINDOWS
