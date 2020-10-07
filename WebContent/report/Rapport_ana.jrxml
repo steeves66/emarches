@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-03T14:39:17 -->
+<!-- 2020-10-07T17:37:43 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Rapport_ana" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bd49f578-cc90-4b9c-947b-d6043e8f5e8c">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
@@ -62,7 +62,7 @@ and c.off_sou_ncc = sou.sou_ncc
 					</textElement>
 					<text><![CDATA[Nombre d'ouverture :]]></text>
 				</staticText>
-				<textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement x="135" y="25" width="280" height="15" uuid="1845414c-5e50-4481-9b67-d45a0b567f99">
 						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					</reportElement>
@@ -367,7 +367,7 @@ Union – Discipline – Travail
 	</columnHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
-			<textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="0" y="0" width="442" height="20" uuid="9dc3db25-a1e6-4833-8556-fc6b2584e1cb"/>
 				<box leftPadding="3">
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -397,21 +397,21 @@ Union – Discipline – Travail
 	</detail>
 	<pageFooter>
 		<band height="54" splitType="Stretch">
-			<textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="460" y="40" width="50" height="14" uuid="a6ac7d71-18f5-4a4a-b4c9-4eb4573cbb17"/>
 				<textElement textAlignment="Right" verticalAlignment="Bottom">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField evaluationTime="Report">
+			<textField isStretchWithOverflow="true" evaluationTime="Report" isBlankWhenNull="true">
 				<reportElement x="511" y="40" width="40" height="14" uuid="84b61642-14c7-4947-9516-149b8174f54e"/>
 				<textElement textAlignment="Left" verticalAlignment="Bottom">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
-			<textField pattern="MMMMM dd, yyyy">
+			<textField isStretchWithOverflow="true" pattern="MMMMM dd, yyyy" isBlankWhenNull="true">
 				<reportElement x="150" y="40" width="266" height="14" uuid="5ad89295-3649-4d4f-9161-800528f64486"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
