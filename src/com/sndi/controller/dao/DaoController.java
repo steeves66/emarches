@@ -5049,7 +5049,7 @@ public class DaoController {
 													  
 												      }else { 
 												    	  
-												    	  //ContrÃ´le sur la vente ou le retrait
+												    	  //Contrôle sur la vente ou le retrait
 													         if(recupCout.getAaoCoutDac() == 0) {
 													        	 String mois="";
 															        Calendar c = Calendar.getInstance();
@@ -5096,8 +5096,7 @@ public class DaoController {
 													               newVente.setTCandidats(newCandidat);
 													               iservice.addObject(newVente);
 													               
-												
-													                //Recupï¿½ration du DAO dans T_DAC_SPECS
+													                //Recupération du DAO dans T_DAC_SPECS
 														            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 											     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 											     			  		    if (!listDao.isEmpty()) {
@@ -5109,16 +5108,15 @@ public class DaoController {
 													                      iservice.addObject(venteDetail);
 											     			  				    }
 											     			  		    
-														  				      
-														  				    constantService.getStatut("RET");
-												 							  	//Historisation du / des retraits
-												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
+														  				      constantService.getStatut("RET");
+												 							  //Historisation du / des retraits
+												 						      historiser("RET",newDao.getDacCode(),"DAO retiré");
 														  				
-											    			  				    //Activation du bouton ï¿½dition du rï¿½cu
-												     			  				  confirmPaie = true;
-												     			  				  confirmInter = false;
-												     			  				  etatRecu = false;
-												     			  				  clean = true;
+											    			  				  //Activation du bouton ï¿½dition du rï¿½cu
+												     			  			  confirmPaie = true;
+												     			  			  confirmInter = false;
+												     			  			  etatRecu = false;
+												     			  			  clean = true;
 											    			  				  //Actualisation du Tableau de Bord
 											    			 		          typeActionTb();
 													                    	  
@@ -5214,13 +5212,15 @@ public class DaoController {
 											  public void cleanPaiement() {
 												  newCandidat = new TCandidats();
 												  soumission = new TSoumissions();
+												  newSoumission = new TSoumissions();
 												  paieCode ="";
 												  pays="";
 												  sitDac="";
 												  newSouncc ="";
 												  etatRecu = false;
-												  confirmInter = false;
-												  confirmPaie = false;
+												  clean = false;
+												  //confirmInter = false;
+												  //confirmPaie = false;
 											  }
 											  
 											  //Methode de rï¿½cupï¿½ration du nombre de vente 
