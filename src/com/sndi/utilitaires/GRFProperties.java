@@ -132,6 +132,7 @@ public class GRFProperties {
 	
 	//FICHIER DE BASE DAO TYPE
 	//WINDOWS
+	public static final String PATHNAME = "/wildfly8/standalone/Fichiers/";
 	public static final String FICHIER_UPLOAD_DAO_TRAVAUX = "/wildfly8/standalone/Fichiers/dtao_travaux.docx";
 	public static final String FICHIER_UPLOAD_DAO_FOURNITURES = "/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx";
 	public static final String FICHIER_UPLOAD_DAO_PRESTATION = "/wildfly8/standalone/Fichiers/dtao_prestation.docx";	
@@ -145,6 +146,7 @@ public class GRFProperties {
 	public static final String FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX = "/wildfly8/standalone/Fichiers/dao_entretien_des_locaux.docx";
 	
 	//LINUX
+	public static final String PATHNAME_LINUX = getProperty("pathName","opt/wildfly8/standalone/Fichiers/");
 	public static final String FICHIER_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dtao_travaux.docx");
 	public static final String FICHIER_UPLOAD_DAO_FOURNITURES_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx"); 	
 	public static final String FICHIER_UPLOAD_DAO_PRESTATIONS_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dtao_prestation.docx"); //Pour Laurent

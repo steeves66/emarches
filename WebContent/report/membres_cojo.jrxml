@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-02T10:39:18 -->
+<!-- 2020-10-07T17:23:14 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="membres_cojo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53fc7504-1b87-459d-b8ff-b4a2211a8f07">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP.xml"/>
@@ -229,7 +229,7 @@ and s.sea_num = $P{param_code}]]>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11"/>
+					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Séance : "+"</b>"+$F{SEA_LIBELLE}]]></textFieldExpression>
 			</textField>
@@ -238,7 +238,7 @@ and s.sea_num = $P{param_code}]]>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11"/>
+					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Nombre de pli : "+"</b>"+$F{SEA_NBR_PLI}]]></textFieldExpression>
 			</textField>
@@ -247,7 +247,7 @@ and s.sea_num = $P{param_code}]]>
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle" markup="html">
-					<font fontName="Times New Roman" size="11"/>
+					<font fontName="SansSerif" size="11"/>
 				</textElement>
 				<textFieldExpression><![CDATA["<b>"+"Quorum ? : "+"</b>"+$F{SEA_QUORUM}]]></textFieldExpression>
 			</textField>
