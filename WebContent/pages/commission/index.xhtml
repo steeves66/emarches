@@ -200,18 +200,16 @@
                             <!--FIN  BOUTONS COMMISSION -->
                             
                             <!--DEBUT  FIN OUVERTURE -->
-                            <h:panelGroup rendered="#{slctdTb.chechquorum == '1'}">
-			         				 <p:commandLink oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
+                            <p:commandLink rendered="#{controleController.btn_apercuOuv}" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:5px;"  action="#{commissionController.renderPage('com8','LISCOM')}"
+				               title="#{controleController.libelleFinCom}" update=":content">
+                                <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>   
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                           
+                            </p:commandLink>
+                             <p:commandLink oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
 				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
-		         				</h:panelGroup>
-		                        
-		                        <h:panelGroup rendered="#{slctdTb.chechquorum == '0'}">
-		         				
-		         				</h:panelGroup> 
-                            
                             <!--FIN  FIN OUVERTURE -->
                                
 				        </p:column>

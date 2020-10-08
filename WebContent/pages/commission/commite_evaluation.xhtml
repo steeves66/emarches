@@ -78,8 +78,11 @@
              
             </div>
             <div class="box-body">
+           
+	                
+	                
                <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeCommite}" emptyMessage="Aucun membre trouvé" 
-                         draggableColumns="true" scrollable="true" scrollHeight="600">
+                         draggableColumns="true" scrollable="true" scrollHeight="400">
                            
                          <p:column headerText="TITRE" styleClass="col-sm-1" >
 	         				  <h:outputText value="#{slctdTb.dcsObservation}"/>
@@ -123,6 +126,50 @@
             </div>
             </div>
             </div>
+            
+            
+          <div class="col-md-12">
+           <div class="box box-success box-solid">
+            <div class="box-header with-border">
+             <div class="col-md-12 ">
+               <div  style="color: #fff"><span style="font-weight: bold; font-size: 20px">FIN DE #{controleController.typePlan} DE L'AVIS N°#{commissionController.slctdTd.aaoCode} </span>: #{commissionController.slctdTd.aaoLibelle}</div>
+             </div>  
+            </div>
+            <div class="box-body">
+                    
+				      <div class="row">
+            <div class="col-sm-6">
+            <div class="form-group ">
+	                  <label for="dateOuv" class="col-sm-2 control-label"><b>Date Fin Ouverture</b></label>
+	                  <div class="col-sm-3">
+	                      <p:calendar id="dateOuv" showOn="false" value="#{commissionController.slctdTd.aaoDteFinOuv}" mask="true" pattern="dd/MM/yyyy" /> 
+	                  </div>
+	                  
+	                    <label class="col-sm-2 control-label"><b>#{controleController.libelle1}</b></label>
+	                  <div class="col-sm-2">
+	                      <p:inputMask mask=" 99:99 " value="#{commissionController.slctdTd.aaoHeurFinOuv}" styleClass="form-control" style="width: 100%" />
+	                  </div>        
+	                </div> 
+	                </div>
+	                <div class="col-sm-6">
+	                 
+				          <div class="form-group">
+				          <label class="col-sm-2 control-label">Observation</label>
+		                  <div class="col-sm-10">
+		                    <p:inputTextarea value="#{commissionController.slctdTd.aaoObsOuv}" rows="3" cols="3" styleClass="form-control" style="width: 100%" >
+		                    </p:inputTextarea>
+		                  </div>
+                </div>
+	                </div>
+	                
+	           </div>
+            </div>
+            </div>
+            </div>
+            
+            
+            
+            
             </div>
             
             
@@ -131,6 +178,10 @@
  <p:commandLink styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{commissionController.renderPage('com1','LISANA')}"   update=":content">
 		       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		     </p:commandLink>
+		     
+		      <p:commandLink styleClass="btn btn-success pull-right" style=" background-color: #036d3b" action="#{commissionController.savePresence()}" update=":content">
+		       <i class="ace-icon fa fa-close bigger-130"></i> Fin de l'ouverture
+		     </p:commandLink> 
   
        </section>
          
