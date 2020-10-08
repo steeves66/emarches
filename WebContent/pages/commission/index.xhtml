@@ -161,11 +161,18 @@
                             </p:commandLink>
                               <!--FIN BOUTONS PRESENCE -->
                               
-                             <p:commandLink rendered="#{controleController.btn_apercuOuv}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com6','SAIDEP')}"
-				               title="Séance d'Ouverture" update=":content">
-                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
-                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
-                            </p:commandLink>
+                              <h:panelGroup rendered="#{slctdTb.chechquorum == '1'}">
+			         				<p:commandLink rendered="#{controleController.btn_apercuOuv}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com6','SAIDEP')}"
+					               title="Séance d'Ouverture" update=":content">
+	                                <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
+	                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
+	                            </p:commandLink>
+		         				</h:panelGroup>
+		                        
+		                        <h:panelGroup rendered="#{slctdTb.chechquorum == '0'}">
+		         				
+		         				</h:panelGroup> 
+                             
                             
                              <p:commandLink rendered="#{controleController.btn_apercuAna}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com4','SAIANA')}"
 				               title="Analyse des offres" update=":content">
@@ -193,11 +200,18 @@
                             <!--FIN  BOUTONS COMMISSION -->
                             
                             <!--DEBUT  FIN OUVERTURE -->
-                             <p:commandLink oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
+                            <h:panelGroup rendered="#{slctdTb.chechquorum == '1'}">
+			         				 <p:commandLink oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
 				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
+		         				</h:panelGroup>
+		                        
+		                        <h:panelGroup rendered="#{slctdTb.chechquorum == '0'}">
+		         				
+		         				</h:panelGroup> 
+                            
                             <!--FIN  FIN OUVERTURE -->
                                
 				        </p:column>

@@ -182,9 +182,9 @@ public class CommissionController {
 	 private List<TNatureDocuments> natureDocListeRapport = new ArrayList<TNatureDocuments>();
 	 private List<TTypeCommission> listeTypeCommission = new ArrayList<TTypeCommission>();
 	 private List<TDetCommissionSeance> listeDetCom = new ArrayList<TDetCommissionSeance>();
-	 private List<TAvisAppelOffre> listeAppelOffre = new ArrayList<TAvisAppelOffre>();
+	 private List<TAvisAppelOffre> listeAvisAppelOffre = new ArrayList<TAvisAppelOffre>();
 	 private List<TDetOffres> listeDetOff = new ArrayList<TDetOffres>();
-	 //private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
+	 private List<VAvisAppelOffre> listeAppelOffre = new ArrayList<VAvisAppelOffre>();
 	 private List<TLotAao> listeLots = new ArrayList<TLotAao>();
 	 private List<VLotCandidat> lotByCandidat = new ArrayList<VLotCandidat>();
 	 private List<VLotAnalyse> listeLotsByAvis = new ArrayList<VLotAnalyse>();
@@ -260,7 +260,7 @@ public class CommissionController {
 	 private TDetCommissionSeance mbrSup = new TDetCommissionSeance();
 	 private VbCommissionSpecifique newcomSpecif = new VbCommissionSpecifique();
 	 private TCommissionType newCom = new TCommissionType();
-	 private TAvisAppelOffre slctdTd = new TAvisAppelOffre();
+	 private VAvisAppelOffre slctdTd = new VAvisAppelOffre();
 	 private VbTempParametreCom membre = new VbTempParametreCom();
 	 //private TCandidats candidat = new TCandidats(); 
 	 private VbTempParamDetOffres newOffre = new VbTempParamDetOffres();
@@ -324,6 +324,8 @@ public class CommissionController {
 	 private boolean affichage=false;
 	 
 	 private boolean etatMontVar=false;
+	 
+	 private boolean btn_ouv = false;
 	 
 	 private long montLu=0;
 	 private long montN=0;
@@ -534,10 +536,10 @@ public class CommissionController {
 						  offreRep.setDofObsAnormal(sltRecharge.getCommentaireAnormal());
 						  iservice.updateObject(offreRep);
 						  
-						  if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+						  if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 							  onSelectLotFin();
 						  }else
-							  if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+							  if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 								  chargeResultaFilter(); 
 							  } 
 						  userController.setTexteMsg("Repechage effectué avec succès!");
@@ -551,14 +553,18 @@ public class CommissionController {
 	 //fin resultat analyse
 		//Liste des membres du commite d'evaluation
 	 public void chargeMembreCommite() {
-		 membresCommite.clear();
+		 membresCommite.clear(); 
 		 membresCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
 				 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"COJ"),
-				    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+				    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 				// ); 
 		      heureDeb = "";
 			  heureFin = "";
 				_logger.info("membreCommite size: "+membresCommite.size());	
+	 }
+	 
+	 public void activeBtnOuv() {
+		//if(membreCommite.) 
 	 }
 	 
 	//Liste des membres du commite d'evaluation
@@ -567,7 +573,7 @@ public class CommissionController {
 			 listeCommite.clear();
 			 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
 					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"CEV"),
-					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					// );
 					_logger.info("membreCommite size: "+listeCommite.size());	
 		 }
@@ -578,7 +584,7 @@ public class CommissionController {
 			 listeMembreCojo.clear();
 			 listeMembreCojo = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
 					 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"JUG"),
-					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+					    new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					// );
 					_logger.info("listeMembreCojo size: "+listeMembreCojo.size());	
 		 }
@@ -619,10 +625,10 @@ public class CommissionController {
 		    	        mbrSup=listMbrSup.get(0); 
     			        }
 		     iservice.deleteObject(getMbrSup());
-		     if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+		     if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 		    	 chargeMembre(); 
 		     }else
-		    	 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+		    	 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 			    	 chargeMembreCojo(); 
 			     }
 		     
@@ -647,7 +653,7 @@ public class CommissionController {
 	//Liste des pièces de l'offre
 	 public void chargePieces() {
 		 //listePiecesOffres = ((List<VPiecesOffre>)iservice.getObjectsByColumn("VPiecesOffre",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
-				// new WhereClause("OPD_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+				// new WhereClause("OPD_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 		 
 		 listPiecesOuv = ((List<VCritereAnalyseDacOuv>)iservice.getObjectsByColumn("VCritereAnalyseDacOuv",
 				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
@@ -786,7 +792,7 @@ public class CommissionController {
 		 public void chargeMembres() {
 			 listeMembre = ((List<VDacMembre>)iservice.getObjectsByColumn("VDacMembre",new ArrayList<String>(Arrays.asList("TCT_CODE")),
 					 new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ"),
-					 new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+					 new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					_logger.info("listeMembre size: "+listeMembre.size());				
 		 }
 		 
@@ -805,11 +811,11 @@ public class CommissionController {
 				    statutUpdate ="";
 			       }
 			 
-			 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+			 listeAvisAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
 					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
 			    if (! listeAppelOffre.isEmpty()) {
 			    	TAvisAppelOffre avis = new TAvisAppelOffre();
-				     avis= listeAppelOffre.get(0);
+				     avis= listeAvisAppelOffre.get(0);
 				     avis.setAvisRetour("1");
 				     avis.setTStatut(new TStatut(statutUpdate));
 				     iservice.updateObject(avis);
@@ -963,9 +969,9 @@ public class CommissionController {
 			 chargeLotByAvis();
 			 offreRecevable.clear();
 			 offreRecevable = ((List<VOffreRecevableLot>)iservice.getObjectsByColumn("VOffreRecevableLot",new ArrayList<String>(Arrays.asList("R_ID")),
-					  new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+					  new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 			 nonRecevOffre();
-			    _logger.info("Numéro DAC: "+slctdTd.getTDacSpecs().getDacCode());
+			    _logger.info("Numéro DAC: "+slctdTd.getAaoDacCode());
 				_logger.info("offre Recevable size: "+offreRecevable.size());	
 		 }
 		 
@@ -988,8 +994,8 @@ public class CommissionController {
 		 public void nonRecevOffre() {
 			 offreNonRecevable.clear();
 			 offreNonRecevable = ((List<VOffreNonRecevableLot>)iservice.getObjectsByColumn("VOffreNonRecevableLot",new ArrayList<String>(Arrays.asList("R_ID")),
-					  new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
-			    _logger.info("Numéro DAC: "+slctdTd.getTDacSpecs().getDacCode());
+					  new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoDacCode())));
+			    _logger.info("Numéro DAC: "+slctdTd.getAaoDacCode());
 				_logger.info("offre Non recevable size: "+offreNonRecevable.size());	
 		 }
 		 
@@ -1035,7 +1041,7 @@ public class CommissionController {
 		 public void verifierNumVente() {
 			 infoOffre=false;
 			 listeVentes =(List<TDetailVente>) iservice.getObjectsByColumn("TDetailVente", new ArrayList<String>(Arrays.asList("DVE_VEN_NUM")),
-			new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode()),
+			new WhereClause("DVE_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoDacCode()),
 			new WhereClause("DVE_VEN_NUM",WhereClause.Comparateur.EQ,""+numVente));
 			if (!listeVentes.isEmpty()) {
 				vente=listeVentes.get(0);
@@ -1083,7 +1089,7 @@ public class CommissionController {
 						membre.setTempType("COM");
 						membre.setDcsFonCod(mbr.getTctLibelle());
 						membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
-						membre.setDcsDacCode(slctdTd.getTDacSpecs().getDacCode());
+						membre.setDcsDacCode(slctdTd.getAaoDacCode());
 						membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 						membre.setDcsSeaTseNum("OUV");
 						membre.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
@@ -1118,7 +1124,7 @@ public class CommissionController {
 							newcomSpecif.setComDteSaisi(Calendar.getInstance().getTime());
 							newcomSpecif.setComTctCode(mbr.getTctCode());
 							newcomSpecif.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-							newcomSpecif.setComDacCode(slctdTd.getTDacSpecs().getDacCode());
+							newcomSpecif.setComDacCode(slctdTd.getAaoDacCode());
 							newcomSpecif.setComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 							newcomSpecif.setComTcoCode("COJ");
 							iservice.addObject(newcomSpecif);
@@ -1143,9 +1149,19 @@ public class CommissionController {
 					    }else {
 					
 					          iservice.updateObject(slctdTd);
-					
+					          List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+					          TAvisAppelOffre avis = new TAvisAppelOffre();
+								if (!LS.isEmpty()) {
+									avis= LS.get(0);
+								}
+							     
+						          List<TDacSpecs> DS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode()));
+									TDacSpecs dao = new TDacSpecs();
+									if (!LS.isEmpty()) {
+										dao= DS.get(0);
+									}
 					          //Creation de la séance
-					          newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getTDacSpecs().getDacCode());
+					          newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getAaoDacCode());
 					          newSeance.setTTypeSeance(new TTypeSeance("OUV"));
 					          newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
 					          newSeance.setTFonction(userController.getSlctd().getTFonction());
@@ -1156,9 +1172,9 @@ public class CommissionController {
 					          newcomSpec.setComDteSaisi(newSeance.getSeaSteSaisi());
 					          newcomSpec.setComOpeMatricule(newSeance.getTOperateur().getOpeMatricule());
 					          newcomSpec.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-					          newcomSpec.setComMarCode(slctdTd.getTDacSpecs().getTTypeMarche().getTymCode());
-					          newcomSpec.setTAvisAppelOffre(slctdTd);
-					          newcomSpec.setTDacSpecs(slctdTd.getTDacSpecs());
+					          newcomSpec.setComMarCode(slctdTd.getDacTymCode());
+					          newcomSpec.setTAvisAppelOffre(avis);
+					          newcomSpec.setTDacSpecs(dao);
 	                 /*		  newcomSpec.setTCommissionType(new TCommissionType(""));*/
 					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
 					          iservice.addObject(newcomSpec);
@@ -1183,7 +1199,7 @@ public class CommissionController {
 								newDetailSeance.setTSeances(newSeance);
 								newDetailSeance.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 								newDetailSeance.setTTypeCommission(new TTypeCommission("COJ"));
-								newDetailSeance.setTDacSpecs(slctdTd.getTDacSpecs());
+								newDetailSeance.setTDacSpecs(dao);
 								newDetailSeance.setTCommissionSpecifique(newcomSpec);
 								newDetailSeance.setTOperateur(userController.getSlctd().getTOperateur());
 								iservice.addObject(newDetailSeance);
@@ -1203,15 +1219,15 @@ public class CommissionController {
 			
 			
 			public void saveCommiteEvaluation() {
-				if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
+				if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
 					
 				}else
-					if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+					if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 						saveMembre("CEV","EVA");
 						chargeMembre();
 					}
 					else
-						if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+						if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 							saveMembre("JUG","JUG");  
 							chargeMembreCojo();
 						}
@@ -1242,7 +1258,7 @@ public class CommissionController {
 									membre.setTempType("COM");
 									membre.setDcsFonCod(mbr.getDcsFonCod());
 									membre.setDcsOpeMatSaisi(userController.getSlctd().getTOperateur().getOpeMatricule());
-									membre.setDcsDacCode(slctdTd.getTDacSpecs().getDacCode());
+									membre.setDcsDacCode(slctdTd.getAaoDacCode());
 									membre.setDcsComStrCode(userController.getSlctd().getTFonction().getTStructure().getStrCode());
 									membre.setDcsSeaTseNum(""+typeSeance); 
 									membre.setDcsDteSea(dateSeance);
@@ -1265,7 +1281,7 @@ public class CommissionController {
 		public void chargeMention() {
 			 listeCritereAnalyse = (List<VCritereAnalyseDacOfftec>) iservice.getObjectsByColumn("VCritereAnalyseDacOfftec", new ArrayList<String>(Arrays.asList("CRA_CODE")),
                      // new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),
-                      new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode()));
+                      new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoDacCode()));
                       if (!listeCritereAnalyse.isEmpty()) {
                              sltCritere= listeCritereAnalyse.get(0);
                              _logger.info("valeur: "+sltCritere.getAaoRegQual());
@@ -1310,13 +1326,13 @@ public class CommissionController {
 		 
 		  //Appel de la methode de retour de nature document en lui passant en parametre le type dac
 		  public void chargeNatureDocTrans() {
-			  if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
+			  if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
 				  natureDoc("OUV");
 				 }else {
-					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+					 if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 						 natureDoc("ANA");
 					 }else {
-						 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+						 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 							 natureDoc("JUG");
 						 }
 				     } 
@@ -1489,7 +1505,7 @@ public class CommissionController {
 		 public void chargeCandidats() {
 			 listCandidats.clear();
 			 listCandidats = ((List<VCandidatDac>)iservice.getObjectsByColumn("VCandidatDac",new ArrayList<String>(Arrays.asList("CAN_SOU_SIGLE_STE")),
-					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 			 _logger.info("Nbr candidat: "+listCandidats.size());
 		 }*/
 		 
@@ -1507,7 +1523,7 @@ public class CommissionController {
 			 listCandidats.clear();
 			 listCandidats = ((List<VCandidatDac>)iservice.getObjectsByColumn("VCandidatDac",new ArrayList<String>(Arrays.asList("CAN_SOU_SIGLE_STE")),
 					 new WhereClause("CAN_SOU_NCC",WhereClause.Comparateur.LIKE,"%"+filtreCandidat+"%"),
-					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode())));
+					 new WhereClause("DVE_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 			}*/
 		 
 		 
@@ -1554,7 +1570,7 @@ public class CommissionController {
 			 newOffre.setDofSouNcc(candidat.getSouNcc());
 			 
 		  recupSoumissionnaire = ((List<VRepSoumissionnaire>)iservice.getObjectsByColumn("VRepSoumissionnaire",new ArrayList<String>(Arrays.asList("DCS_SOU_NCC")),
-				  new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getTDacSpecs().getDacCode()),
+				  new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode()),
 		         new WhereClause("DCS_SOU_NCC",Comparateur.EQ,""+candidat.getSouNcc())));
 			    if (!recupSoumissionnaire.isEmpty()) {
 				    recupNcc=recupSoumissionnaire.get(0); 
@@ -1566,7 +1582,7 @@ public class CommissionController {
 		            }
 			    
 			    chargeLotsByCandidat();
-				_logger.info("Numéro DAO: "+slctdTd.getTDacSpecs().getDacCode());
+				_logger.info("Numéro DAO: "+slctdTd.getAaoDacCode());
 		   }
 		//Fin de la Methode OnSelectCandidat
 		 
@@ -1698,7 +1714,7 @@ public class CommissionController {
 		
 		public void chargeListe(String statut) {
 			 listeAppelOffre.clear();
-			 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+			 listeAppelOffre = (List<VAvisAppelOffre>) iservice.getObjectsByColumnDesc("VAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
 			 new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statut),
 			 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			_logger.info("listeAppelOffre size: "+listeAppelOffre.size());
@@ -1717,15 +1733,15 @@ public class CommissionController {
 		public void finOuverture() { 
 			String statUpdate = "";
 			String message = "";
-			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
+			if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
 				statUpdate = "OUV";
 				message="Fin de l'ouverture des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 			 }else {
-				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+				 if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 						statUpdate = "ANA";
 						message="Fin de l'analyse des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 				 }else {
-					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+					 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 						 statUpdate = "JUG";
 						 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
 					 }else {	 
@@ -1733,9 +1749,12 @@ public class CommissionController {
 				 }
 			 }
 			
-			slctdTd.setTStatut(new TStatut(statUpdate));
-			slctdTd.setAvisRetour("0");
-			iservice.updateObject(slctdTd);
+			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+			TAvisAppelOffre avis = new TAvisAppelOffre();
+			avis.setTStatut(new TStatut(statUpdate));
+			avis.setAvisRetour("0");
+			iservice.updateObject(avis);
+			
 			chargementListe();
 			userController.setTexteMsg(message);
 			userController.setRenderMsg(true);
@@ -1749,13 +1768,13 @@ public class CommissionController {
 		
 		//Methode de chargement après avoir mis fin à l'ouverture/analyse/jugement
 		public void chargementListe() {
-			if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")) {
+			if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
 				chargeListe("APU"); //OUV
 			 }else {
-				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+				 if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 						chargeListe("OUV"); //ANA
 				 }else {
-					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+					 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 						 chargeListe("ANA"); //JUG
 					 }	
 				 }
@@ -1765,25 +1784,20 @@ public class CommissionController {
 		
 		
 		public void validerAnalyse(){
-			slctdTd.setTStatut(new TStatut("ANA"));	
-			iservice.updateObject(slctdTd);
+			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+			TAvisAppelOffre avis = new TAvisAppelOffre();
+			avis.setTStatut(new TStatut("ANA"));	
+			iservice.updateObject(avis);
 			userController.setTexteMsg("Analyse validée avec succès");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
-			 /*listeOffres = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
-					  new WhereClause("DOF_LAA_ID",WhereClause.Comparateur.EQ,""+lot.getLaaId())));
-			 
-			 if(listeOffres.size()==0){
-				 
-			 }
-			 TDetOffres offre = new TDetOffres();
-			 if(!listeOffres.isEmpty()) {
-				 offre = listeOffres.get(0);
-			 }*/
 		}
 		
 		public void validerJugement(){
-			slctdTd.setTStatut(new TStatut("JUG"));	
+			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+			TAvisAppelOffre avis = new TAvisAppelOffre();
+			avis.setTStatut(new TStatut("JUG"));	
+			iservice.updateObject(avis);
 			iservice.updateObject(slctdTd);
 			userController.setTexteMsg("Jugement validé avec succès");
 			userController.setRenderMsg(true);
@@ -1905,7 +1919,7 @@ public class CommissionController {
 				public void ajouterAttributaire() {
 					
 					/*for(VResultPropAttribLot ligne : selectionAttributaire) {
-						newAttrib.setAttDacCode(slctdTd.getTDacSpecs().getDacCode());
+						newAttrib.setAttDacCode(slctdTd.getAaoDacCode());
 						newAttrib.setAttDofAaoCode(slctdTd.getAaoCode());
 						newAttrib.setAttDofLaaNum(lotJug.getLaaNum());
 						//newAttrib.setAttDofOffNum(slctdTd.gett));
@@ -1922,7 +1936,7 @@ public class CommissionController {
 						newAttrib.setTempType("ATT");
 			 			iservice.addObject(newAttrib);
 			 		}*/
-					newAttrib.setAttDacCode(slctdTd.getTDacSpecs().getDacCode());
+					newAttrib.setAttDacCode(slctdTd.getAaoDacCode());
 					newAttrib.setAttDofAaoCode(slctdTd.getAaoCode());
 					newAttrib.setAttDofLaaNum(sltRsult.getLot());
 					//newAttrib.setAttDofOffNum(slctdTd.gett));
@@ -2012,15 +2026,15 @@ public class CommissionController {
 		 public void editerPv() {
 			 String jrmx="";
 			 String jasper="";
-			 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")){
+			 if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")){
 				 jrmx="page_garde_ouv";
 				 jasper="page_garde_ouv"; 
 			 }else
-				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+				 if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 					 jrmx="rapport_analyse";
 					 jasper="rapport_analyse";  
 				 }else
-					 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+					 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 						 jrmx="PV_jugement";
 						 jasper="PV_jugement";  
 					 }
@@ -2041,11 +2055,11 @@ public class CommissionController {
 		 //Factorisation des Lots
 		 public void factoriseLot() {
 			 newfactorise.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-			 newfactorise.setTempDacCode(slctdTd.getTDacSpecs().getDacCode());
+			 newfactorise.setTempDacCode(slctdTd.getAaoDacCode());
 			 newfactorise.setTempType("FAN");
 			 newfactorise.setTempNbrLot(slctdTd.getAaoNbrLot());
 			 iservice.addObject(newfactorise);
-			 _logger.info("DAO : "  +""+slctdTd.getTDacSpecs().getDacCode());
+			 _logger.info("DAO : "  +""+slctdTd.getAaoDacCode());
 			 _logger.info("Nbre Lot : "  +""+slctdTd.getAaoNbrLot());
 			 _logger.info("Type : "  +""+newfactorise.getTempType());
 			 }
@@ -2112,13 +2126,13 @@ public class CommissionController {
 			
 			if(fileUploadController.handleFileUpload(event, ""+slctdTd.getAaoCode(), docNature)) {
 				
-				if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("APU")){
+				if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")){
 					docNature = "8";
 					}else
-						if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("OUV")) {
+						if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 							docNature = "10";
 						}else
-							if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("ANA")) {
+							if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 								docNature = "11";
 							}
 				int nat = Integer.valueOf(docNature);
@@ -2160,6 +2174,7 @@ public class CommissionController {
 					//Ramener le statut en fonction de l'utilisateur connecté et de l'action a mener
 					if(fonct.equalsIgnoreCase("listOuvertureAc")) {
 						statutAffiche = "APU";
+						activeBtnOuv();
 						_logger.info("staut: "+statutAffiche);	
 						_logger.info("fonctionalité: "+fonct);	
 						_logger.info("value: "+value+" action: "+action);
@@ -2189,7 +2204,7 @@ public class CommissionController {
 					
 					//Chargement de la liste des demandes
 					 listeAppelOffre.clear();
-					 listeAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("TAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+					 listeAppelOffre = (List<VAvisAppelOffre>) iservice.getObjectsByColumnDesc("VAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
 							 new WhereClause("AAO_FON_COD_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()),
 					         new WhereClause("AAO_STA_CODE",WhereClause.Comparateur.EQ,""+statutAffiche));
 					_logger.info("listeAppelOffre size: "+listeAppelOffre.size());	
@@ -2217,6 +2232,7 @@ public class CommissionController {
 				case "com5":
 					//chargeTypeCommission();
 					chargeMembres();
+					chargeMembreCommite();
 					boutonEdit = false;
 					 selectionMembres.clear();
 					 selectionlisteExpert.clear();
@@ -2304,25 +2320,26 @@ public class CommissionController {
 		this.tcoCode = tcoCode;
 	}
 
-	public List<TAvisAppelOffre> getListeAppelOffre() {
+/*	public List<TAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;
 	}
 
 	public void setListeAppelOffre(List<TAvisAppelOffre> listeAppelOffre) {
 		this.listeAppelOffre = listeAppelOffre;
 	}
-
-	public TAvisAppelOffre getSlctdTd() {
-		return slctdTd;
-	}
-
-	public void setSlctdTd(TAvisAppelOffre slctdTd) {
-		this.slctdTd = slctdTd;
-	}
+*/
 
 
 	public VbTempParametreCom getMembre() {
 		return membre;
+	}
+
+	public VAvisAppelOffre getSlctdTd() {
+		return slctdTd;
+	}
+
+	public void setSlctdTd(VAvisAppelOffre slctdTd) {
+		this.slctdTd = slctdTd;
 	}
 
 	public void setMembre(VbTempParametreCom membre) {
@@ -3828,14 +3845,30 @@ public class CommissionController {
 		this.pieceOuv = pieceOuv;
 	}
 
+	public boolean isBtn_ouv() {
+		return btn_ouv;
+	}
 
-/*	public List<VAvisAppelOffre> getListeAppelOffre() {
+	public void setBtn_ouv(boolean btn_ouv) {
+		this.btn_ouv = btn_ouv;
+	}
+
+
+	public List<VAvisAppelOffre> getListeAppelOffre() {
 		return listeAppelOffre;
 	}
 
 	public void setListeAppelOffre(List<VAvisAppelOffre> listeAppelOffre) {
 		this.listeAppelOffre = listeAppelOffre;
-	}*/
+	}
+
+	public List<TAvisAppelOffre> getListeAvisAppelOffre() {
+		return listeAvisAppelOffre;
+	}
+
+	public void setListeAvisAppelOffre(List<TAvisAppelOffre> listeAvisAppelOffre) {
+		this.listeAvisAppelOffre = listeAvisAppelOffre;
+	}
 	
 	
 }

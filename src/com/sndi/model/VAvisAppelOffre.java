@@ -22,7 +22,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	private String aaoCode;
 	private String aaoDacCode;
 	private String aaoLibelle;
-	private BigDecimal aaoNbrLot;
+	private long aaoNbrLot;
 	private BigDecimal aaoNbrOuv;
 	private Date aaoDtePub;
 	private Short aaoNbrOff;
@@ -39,6 +39,9 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
 	private String aaoStatut;
+	private String avisRetour;
+	private long chechquorum;
+	private String dacTymCode;
 
 	public VAvisAppelOffre() {
 	}
@@ -47,10 +50,10 @@ public class VAvisAppelOffre implements java.io.Serializable {
 		this.aaoCode = aaoCode;
 	}
 
-	public VAvisAppelOffre(String aaoCode, String aaoDacCode, String aaoLibelle, BigDecimal aaoNbrLot,
+	public VAvisAppelOffre(String aaoCode, String aaoDacCode, String aaoLibelle, long aaoNbrLot,
 			BigDecimal aaoNbrOuv, Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv,
 			Date aaoDteOuvTec, String aaoObsOuv, String aaoLieuOuvPrecis, String aaoHeurFinOuv,Date aaoDteSaisi, Date aaoDteFinOuv,
-			String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut) {
+			String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut,String avisRetour,long chechquorum,String dacTymCode) {
 		this.aaoCode = aaoCode;
 		this.aaoDacCode = aaoDacCode;
 		this.aaoLibelle = aaoLibelle;
@@ -71,6 +74,9 @@ public class VAvisAppelOffre implements java.io.Serializable {
 		this.aaoNbrOffRej = aaoNbrOffRej;
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
 		this.aaoStatut = aaoStatut;
+		this.avisRetour = avisRetour;
+		this.chechquorum = chechquorum;
+		this.dacTymCode = dacTymCode;
 	}
 
 	@Id
@@ -102,11 +108,11 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	}
 
 	@Column(name = "AAO_NBR_LOT", precision = 22, scale = 0)
-	public BigDecimal getAaoNbrLot() {
+	public long getAaoNbrLot() {
 		return this.aaoNbrLot;
 	}
 
-	public void setAaoNbrLot(BigDecimal aaoNbrLot) {
+	public void setAaoNbrLot(long aaoNbrLot) {
 		this.aaoNbrLot = aaoNbrLot;
 	}
 
@@ -252,6 +258,33 @@ public class VAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoStatut(String aaoStatut) {
 		this.aaoStatut = aaoStatut;
+	}
+
+	@Column(name = "AVIS_RETOUR")
+	public String getAvisRetour() {
+		return avisRetour;
+	}
+
+	public void setAvisRetour(String avisRetour) {
+		this.avisRetour = avisRetour;
+	}
+
+	@Column(name = "CHECK_QUORUM")
+	public long getChechquorum() {
+		return chechquorum;
+	}
+
+	public void setChechquorum(long chechquorum) {
+		this.chechquorum = chechquorum;
+	}
+
+	@Column(name = "DAC_TYM_CODE")
+	public String getDacTymCode() {
+		return dacTymCode;
+	}
+
+	public void setDacTymCode(String dacTymCode) {
+		this.dacTymCode = dacTymCode;
 	}
 
 }
