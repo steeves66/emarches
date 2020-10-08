@@ -1878,7 +1878,7 @@ public class CommissionController {
 						 			}else {
 						 				newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
 							 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());
-							 			newTempParamAnalyseOff.setAnfValeurConf(lignes.getAaoRegQual());
+							 			newTempParamAnalyseOff.setAnfValeurConf(lignes.getAnfValeurConf());
 							 			newTempParamAnalyseOff.setAnfValeurScore(lignes.getValRegQual());
 							 			newTempParamAnalyseOff.setAnfCommentaire(lignes.getDcadCommentaire());
 							 			newTempParamAnalyseOff.setTempDteSaisi(Calendar.getInstance().getTime());
