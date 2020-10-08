@@ -5219,6 +5219,7 @@ public class DaoController {
 												  newSouncc ="";
 												  etatRecu = false;
 												  clean = false;
+												  panelNcc1 = false;
 												  //confirmInter = false;
 												  //confirmPaie = false;
 											  }
