@@ -3920,7 +3920,7 @@ public class DaoController {
 					         }
 					 
 					 
-					 public void réiniPreference() {
+					 public void reiniPreference() {
 						 listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
     	     					 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
     	     				       if (!listDao.isEmpty()) {
@@ -3941,7 +3941,7 @@ public class DaoController {
 							 listeMargePref();
 						 }else 
 						 {
-							 réiniPreference();
+							 reiniPreference();
 							 etatMargePreference = false; 
 						 }
 					 }
