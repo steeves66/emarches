@@ -205,7 +205,12 @@
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                           
                             </p:commandLink>
-                             <p:commandLink oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
+                             <p:commandLink rendered="#{controleController.btn_apercuAna}" oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
+				               title="#{controleController.libelleFinCom}" update=":content">
+                                <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
+                                <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
+                            </p:commandLink>
+                            <p:commandLink rendered="#{controleController.btn_apercuJug}" oncomplete="PF('finOuvertureDlg').show()" class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"
 				               title="#{controleController.libelleFinCom}" update=":content">
                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             

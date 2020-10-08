@@ -630,7 +630,10 @@ public class CommissionController {
 		     }else
 		    	 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
 			    	 chargeMembreCojo(); 
-			     }
+			     }else
+			    	 if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
+			    		 chargeMembre(); 
+				     }
 		     
 		     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO," Membre supprimé avec succès! ", ""));
 		 }catch (org.hibernate.exception.ConstraintViolationException e) {
@@ -1220,11 +1223,11 @@ public class CommissionController {
 			
 			public void saveCommiteEvaluation() {
 				if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
-					
+					saveMembre("CEV","EVA");
+					chargeMembre();
 				}else
 					if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
-						saveMembre("CEV","EVA");
-						chargeMembre();
+						
 					}
 					else
 						if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
@@ -1736,6 +1739,7 @@ public class CommissionController {
 			if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
 				statUpdate = "OUV";
 				message="Fin de l'ouverture des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
+				 
 			 }else {
 				 if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
 						statUpdate = "ANA";
@@ -1751,15 +1755,78 @@ public class CommissionController {
 			
 			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
 			TAvisAppelOffre avis = new TAvisAppelOffre();
+			if (!LS.isEmpty()) {
+				avis= LS.get(0);
+			}
+			
 			avis.setTStatut(new TStatut(statUpdate));
 			avis.setAvisRetour("0");
+			avis.setAaoHeurFinOuv(slctdTd.getAaoHeurFinOuv());
+			avis.setAaoDteFinOuv(slctdTd.getAaoDteFinOuv());
+			avis.setAaoObsOuv(slctdTd.getAaoObsOuv());
 			iservice.updateObject(avis);
-			
-			chargementListe();
 			userController.setTexteMsg(message);
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");  
+			chargementListe();
+			
 		}
+		
+		
+		//Fin Ouverture/Analyse/Jugement
+				public void finOuvert() { 
+					String statUpdate = "";
+					String message = "";
+					if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
+						statUpdate = "OUV";
+						message="Fin de l'ouverture des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
+						 
+					 }else {
+						 if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
+								statUpdate = "ANA";
+								message="Fin de l'analyse des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
+						 }else {
+							 if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
+								 statUpdate = "JUG";
+								 message="Fin du jugement des Offres de l'avis d'Appel d'offre N°"+slctdTd.getAaoCode();
+							 }else {	 
+							}	 
+						 }
+					 }
+					
+					
+					List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+					TAvisAppelOffre avis = new TAvisAppelOffre();
+					if (!LS.isEmpty()) {
+						avis= LS.get(0);
+					}
+					
+					 listeCommite.clear();
+					 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
+							 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"CEV"),
+							  new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
+							_logger.info("listeCommite size: "+listeCommite.size());	
+							
+					if(listeCommite.size()==0 || listeCommite.size()<3) {
+						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le comité doit comporter au moin trois(3) membres! ","");
+							FacesContext.getCurrentInstance().addMessage(null, msg);
+					}else
+						 {
+						avis.setTStatut(new TStatut(statUpdate));
+						avis.setAvisRetour("0");
+						avis.setAaoHeurFinOuv(slctdTd.getAaoHeurFinOuv());
+						avis.setAaoDteFinOuv(slctdTd.getAaoDteFinOuv());
+						avis.setAaoObsOuv(slctdTd.getAaoObsOuv());
+						iservice.updateObject(avis);
+						userController.setTexteMsg(message);
+						userController.setRenderMsg(true);
+						userController.setSevrityMsg("success");
+						}
+					chargementListe();
+					
+				}
+		
+
 		
 		public void reinitialise() {
 			finOuv = true;

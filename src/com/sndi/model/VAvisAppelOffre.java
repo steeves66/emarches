@@ -41,6 +41,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	private String aaoStatut;
 	private String avisRetour;
 	private long chechquorum;
+	private long checkEval;
 	private String dacTymCode;
 
 	public VAvisAppelOffre() {
@@ -53,7 +54,8 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	public VAvisAppelOffre(String aaoCode, String aaoDacCode, String aaoLibelle, long aaoNbrLot,
 			BigDecimal aaoNbrOuv, Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv,
 			Date aaoDteOuvTec, String aaoObsOuv, String aaoLieuOuvPrecis, String aaoHeurFinOuv,Date aaoDteSaisi, Date aaoDteFinOuv,
-			String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut,String avisRetour,long chechquorum,String dacTymCode) {
+			String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut,String avisRetour,long chechquorum,
+			long checkEval,String dacTymCode) {
 		this.aaoCode = aaoCode;
 		this.aaoDacCode = aaoDacCode;
 		this.aaoLibelle = aaoLibelle;
@@ -76,6 +78,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 		this.aaoStatut = aaoStatut;
 		this.avisRetour = avisRetour;
 		this.chechquorum = chechquorum;
+		this.checkEval = checkEval;
 		this.dacTymCode = dacTymCode;
 	}
 
@@ -285,6 +288,15 @@ public class VAvisAppelOffre implements java.io.Serializable {
 
 	public void setDacTymCode(String dacTymCode) {
 		this.dacTymCode = dacTymCode;
+	}
+
+	@Column(name = "CHECK_EVAL")
+	public long getCheckEval() {
+		return checkEval;
+	}
+
+	public void setCheckEval(long checkEval) {
+		this.checkEval = checkEval;
 	}
 
 }
