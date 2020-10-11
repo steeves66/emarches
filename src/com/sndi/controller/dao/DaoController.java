@@ -3194,17 +3194,33 @@ public class DaoController {
 		//Chargement des PPM n'ayant pas fait l'objet d'un DAO
 			 public void chargePPM() {
 				 if(controleController.typePlan == "PN") {	
-					 chargeOperation("PN");
+					 
+					 if(controleController.type == "AMI") {
+						 chargeOperationAmi("PN");
+					 }else {
+						 if(controleController.type == "PRQ") {
+							 chargeOperationPrq("PN"); 
+						 }else {
+							 chargeOperation("PN");
+						 }
+					 }
+					 
 				 }else {
 					 if(controleController.typePlan == "PS") {
-						 chargeOperation("PS");
-					 }else {
-						 
-				     } 
+						 if(controleController.type == "AMI") {
+							 chargeOperationAmi("PS");
+						 }else {
+							 if(controleController.type == "PRQ") {
+								 chargeOperationPrq("PS"); 
+							 }else {
+								 chargeOperation("PS");
+							 }
+						 }
+					 }
 				   } 
 			 }
 			 
-			 //Parametrage des PPM ramenÃ¯Â¿Â½ a la saisie
+			 //Parametrage des PPM ramené a la saisie
 			 public void chargeOperation(String typePlan) {
 				 ppmDao.clear();
 				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
@@ -3214,22 +3230,67 @@ public class DaoController {
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
 				  multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
-				 _logger.info("Operateur connectÃ¯Â¿Â½ : "+userController.getSlctd().getTFonction().getFonCod());	
+				 _logger.info("mode de passation : "+typePlan);	
+				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
+			 }
+			 
+			 
+			 //Parametrage des AMI
+			 public void chargeOperationAmi(String typePlan) {
+				 ppmDao.clear();
+				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"AMI"),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				  multiFiltre=""; 
+				 _logger.info("type plan : "+typePlan);	
+				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
+			 }
+			 
+			 //Parametrage des PRQ
+			 public void chargeOperationPrq(String typePlan) {
+				 ppmDao.clear();
+				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"PRQ"),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				  multiFiltre=""; 
+				 _logger.info("type plan : "+typePlan);	
+				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
 			 }
 			 
 			 public void chargeRecherchePPM() {
 				 if(controleController.typePlan == "PN") {	
-					 chargeOperationRecherche("PN");
+					 if(controleController.type == "AMI") {
+						 chargeOperationRechercheAmi("PN");
+					 }else {
+						 if(controleController.type == "PRQ") {
+							 chargeOperationRecherchePrq("PN");
+						 }else {
+							 chargeOperationRecherche("PN");
+						 }
+					 }
+					 
 				 }else {
 					 if(controleController.typePlan == "PS") {
-						 chargeOperationRecherche("PS");
-					 }else {
-						 
-				     } 
+						 if(controleController.type == "AMI") {
+							 chargeOperationRechercheAmi("PS");
+						 }else {
+							 if(controleController.type == "PRQ") {
+								 chargeOperationRecherchePrq("PS");
+							 }else {
+								 chargeOperationRecherche("PS");
+							 }
+						 }
+					 }
 				   } 	 		 
 			 }
 			 
-			 //Parametrage des PPM ramenÃ© a la saisie
+			 //Parametrage des PPM ramené a la saisie
 			 public void chargeOperationRecherche(String typePlan) {
 				 ppmDao.clear();
 				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
@@ -3240,8 +3301,39 @@ public class DaoController {
 							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
 				 multiFiltre=""; 
 				 _logger.info("type plan : "+typePlan);	
-				 _logger.info("Operateur connectÃ© : "+userController.getSlctd().getTFonction().getFonCod());	
+				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
 			 }
+			 
+			//Recherche des PPM pour les AMI
+			 public void chargeOperationRechercheAmi(String typePlan) {
+				 ppmDao.clear();
+				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"AMI"),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+						    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				 multiFiltre=""; 
+				 _logger.info("type plan : "+typePlan);	
+				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
+			 }
+			 
+			//Recherche des PPM pour les AMI
+			 public void chargeOperationRecherchePrq(String typePlan) {
+				 ppmDao.clear();
+				 ppmDao= ((List<VPpmDao>)iservice.getObjectsByColumn("VPpmDao",new ArrayList<String>(Arrays.asList("DPP_ID")),
+						    new WhereClause("DPP_STA_CODE",Comparateur.EQ,"S3V"),
+						    new WhereClause("DPP_MOP_CODE",Comparateur.EQ,"PRQ"),
+						    new WhereClause("DPP_TYPE_PLAN",Comparateur.EQ,""+typePlan),
+						    new WhereClause("DPP_STATUT_DAO",Comparateur.EQ,"N"),
+						    new WhereClause("DPP_RECHERCHE",WhereClause.Comparateur.LIKE,"%"+multiFiltre+"%"),
+							new WhereClause("DPP_ACTEUR_SAISIE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod())));	
+				 multiFiltre=""; 
+				 _logger.info("type plan : "+typePlan);	
+				 _logger.info("Operateur connecté : "+userController.getSlctd().getTFonction().getFonCod());	
+			 }
+			 
 			  //Rappel des informations du PPM
 		     public void renseignerDao() throws IOException{
 		                 	if (listSelectionPpmDao.size()==0) {
@@ -5456,7 +5548,7 @@ public class DaoController {
 											//Fin de retrait du DAO
 													
 													
-													//RÃ©cupÃ©ration du montant du DAO
+													//Récupération du montant du DAO
 													  public void recupMontantDao() { 
 														  dacVente = (List<VDacliste>) iservice.getObjectsByColumn("VDacliste", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 																      //new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
