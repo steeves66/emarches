@@ -698,7 +698,6 @@ public class TableauBordController {
 						if (!listeTableauBord.isEmpty()) {
 							tableauBord=listeTableauBord.get(0);
 						}*/
-						
 						listeTableauBordPf.clear();
 						listeTableauBordPf =(List<VTabBordPf>) iservice.getObjectsByColumn("VTabBordPf", new ArrayList<String>(Arrays.asList("CODE_ID")),
 								new WhereClause("TYP_PROC",WhereClause.Comparateur.EQ,""+typeProc),

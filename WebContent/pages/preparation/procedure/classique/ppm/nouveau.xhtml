@@ -61,7 +61,7 @@
 	      
 	        <div class="box box-success box-solid">
               <div class="box-header with-border">
-               <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN PPM</div></div>
+               <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN #{controleController.type}</div></div>
              </div>
              
              <div class="box-body">
@@ -795,12 +795,12 @@
        </div>
 	</p:tab>
 	
-         <p:tab   id="Financements" title="Ajout des Financements du PPM"   titleStyle="background-color: #f88b2e;background-image: none">
+         <p:tab   id="Financements" title="Ajout des Financements du #{controleController.type}"   titleStyle="background-color: #f88b2e;background-image: none">
             <p:panel header="Financements du #{controleController.type} ">
              
              <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-11"><div  style="color: #fff">FINANCEMENTS DU PPM</div></div> 
+                  <div class="col-md-11"><div  style="color: #fff">FINANCEMENTS DU #{controleController.type}</div></div> 
                   <div class="col-md-1"> 
 			           <p:commandLink oncomplete="PF('DetailDlg').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>

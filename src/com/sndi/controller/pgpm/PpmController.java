@@ -2274,22 +2274,22 @@ public class PpmController {
 			 }
 		 }
 		 
-		//Gestion des Panels PPM
+		//Gestion des Panels PSPM
 		 public void controlPanelPs() {
-			 if(passationListe.getMopCode().equalsIgnoreCase("PSC") ) {
+			 if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSC") ) {
 				 controleController.etatPsc = true;
 				 controleController.etatPsl = false;
 				 controleController.etatPso = false;
 				 controleController.etatPsl_Pso = false;
 			 }else {
-				   if(passationListe.getMopCode().equalsIgnoreCase("PSO")) {
+				   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSO")) {
 					    controleController.etatPsc = false;
 						 controleController.etatPsl = false;
 						 controleController.etatPso = true;
 						 controleController.etatPsl_Pso = true;
 				   }else {
 					   
-					   if(passationListe.getMopCode().equalsIgnoreCase("PSL")) {
+					   if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("PSL")) {
 						     controleController.etatPsc = false;
 							 controleController.etatPsl = true;
 							 controleController.etatPso = false;
@@ -4005,6 +4005,8 @@ public class PpmController {
 		    		
 		    		 tydCode="";
 		    		 totalMontant=0;
+		    		 totalMontantPpm =0;
+		    		 strucCond = "";
 		    		 controleController.btn_creerDetailPpm = true;
 		    	 }
 				 
