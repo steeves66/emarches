@@ -583,21 +583,15 @@
 						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-							<p:column headerText="Code" styleClass="col-sm-1" >
+							<p:column headerText="Code" styleClass="col-sm-2" >
                         <h:commandLink  title="Code" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>
-						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
+						<p:column headerText="Libellé Long" styleClass="col-sm-10" >
                         <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
-                                </h:commandLink>
-				        </p:column>
-				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{pgpmAcController.onSelectModePassation()}" update="gnl:modeP1, gnl:modeP2">				        
-         				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
                           <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.modePassation}" />
                                 </h:commandLink>
 				        </p:column>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-06-30T10:01:19 -->
+<!-- 2020-10-12T16:04:47 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_pgspm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a22ba92c-c76b-47cd-bc9e-f3d7309148ed">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -193,12 +193,12 @@ and dpg.gpg_id=  $P{param_code}]]>
 					<rightPen lineWidth="1.0"/>
 				</box>
 				<staticText>
-					<reportElement x="2" y="149" width="152" height="21" uuid="1fe33574-8584-430b-9715-eff0b717972e"/>
+					<reportElement x="2" y="149" width="177" height="21" uuid="1fe33574-8584-430b-9715-eff0b717972e"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Part reservée aux PME ou PMI : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="153" y="149" width="397" height="21" uuid="d19bf62e-278d-4696-8221-c8680b627532"/>
+					<reportElement x="160" y="149" width="390" height="21" uuid="d19bf62e-278d-4696-8221-c8680b627532"/>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
@@ -214,7 +214,7 @@ and dpg.gpg_id=  $P{param_code}]]>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{GPG_TYM_CODE}+" : "+$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="1" y="105" width="109" height="21" uuid="12e8d021-79ae-41c4-af63-f2a8fa8a1fe8"/>
@@ -226,7 +226,7 @@ and dpg.gpg_id=  $P{param_code}]]>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{GPG_MOP_CODE}+" : "+$F{MOP_LIBELLE_LONG}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{MOP_LIBELLE_LONG}+"  ("+$F{GPG_MOP_CODE}+")"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 					<reportElement x="109" y="23" width="445" height="28" uuid="71cd40a8-66fa-43ab-a4d5-032cafe1e43a"/>
@@ -263,12 +263,12 @@ and dpg.gpg_id=  $P{param_code}]]>
 					<text><![CDATA[INFORMATIONS GENERALES]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="2" y="75" width="108" height="21" uuid="df5480f4-f096-4e66-8fd4-712ee09e9446"/>
+					<reportElement x="2" y="81" width="108" height="21" uuid="df5480f4-f096-4e66-8fd4-712ee09e9446"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Objet : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="109" y="75" width="445" height="28" uuid="5923b7b9-590a-4456-8172-0f661e79949d"/>
+					<reportElement x="109" y="81" width="445" height="28" uuid="5923b7b9-590a-4456-8172-0f661e79949d"/>
 					<textElement verticalAlignment="Top">
 						<font isBold="true"/>
 					</textElement>

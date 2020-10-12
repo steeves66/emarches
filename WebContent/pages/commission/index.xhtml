@@ -147,13 +147,13 @@
                                 <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                             
                             </p:commandLink>
-                            
+                            <h:panelGroup rendered="false">
                              <p:commandLink rendered="#{controleController.btn_apercuAna}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com8','LISCOM')}"
 				               title="Comité d'évaluation" update=":content">
                                 <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.slctdTd}" />                           
                             </p:commandLink>
-                            
+                            </h:panelGroup>
                              <p:commandLink rendered="#{controleController.btn_apercuJug}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;"  action="#{commissionController.renderPage('com10','MBRJUG')}"
 				               title="Comité d'évaluation" update=":content">
                                 <i class="ace-icon fa fa-users bigger-120"  style="color: white"></i>   

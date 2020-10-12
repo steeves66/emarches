@@ -2680,7 +2680,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 			 tableauBordController.chargeDataPgspm();
 		 			 //typeActionTb();
 					 //Message de Confirmation
-					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre opération a été retournée!", "");
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Opération retournée avec succès!", "");
 				     FacesContext.getCurrentInstance().addMessage(null, msg);
 						}
 			 }

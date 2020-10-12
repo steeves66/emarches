@@ -1805,7 +1805,7 @@ public class CommissionController {
 					 listeCommite = ((List<VDetCommissionSeance>)iservice.getObjectsByColumn("VDetCommissionSeance",new ArrayList<String>(Arrays.asList("DCS_NOM_MBM")),
 							 new WhereClause("DCS_COM_TCO_CODE",Comparateur.EQ,"CEV"),
 							  new WhereClause("DCS_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
-							_logger.info("listeCommite size: "+listeCommite.size());	
+							_logger.info("listeCommite size: "+listeCommite.size());
 							
 					if(listeCommite.size()==0 || listeCommite.size()<3) {
 						 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le comité doit comporter au moin trois(3) membres! ","");

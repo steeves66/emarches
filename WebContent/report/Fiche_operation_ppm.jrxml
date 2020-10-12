@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-08-01T16:56:32 -->
+<!-- 2020-10-12T16:41:24 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Fiche_operation_ppm" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="266b8536-66d8-494c-802e-76b24cc2afc4">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -213,7 +213,7 @@ and dps.dpp_id= $P{param_code}]]>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{DPP_TYM_CODE}+" : "+$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{TYM_LIBELLE_COURT}]]></textFieldExpression>
 				</textField>
 				<staticText>
 					<reportElement x="1" y="111" width="109" height="21" uuid="3fa9974b-9d71-430c-b768-cde6a9912e7a"/>
@@ -225,7 +225,7 @@ and dps.dpp_id= $P{param_code}]]>
 					<textElement verticalAlignment="Middle">
 						<font isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{DPP_MOP_CODE}+" : "+$F{MOP_LIBELLE_LONG}]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{MOP_LIBELLE_LONG}+"  ("+$F{DPP_MOP_CODE}+")"]]></textFieldExpression>
 				</textField>
 				<textField>
 					<reportElement x="109" y="23" width="445" height="28" uuid="cd177b7a-1484-44c2-afbf-f17d160befaa"/>
@@ -286,12 +286,12 @@ and dps.dpp_id= $P{param_code}]]>
 					<textFieldExpression><![CDATA[$F{NAT_LIBELLE}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement x="1" y="68" width="108" height="21" uuid="e4a2ccd3-3370-489a-9636-dd8955015b92"/>
+					<reportElement x="1" y="80" width="108" height="21" uuid="e4a2ccd3-3370-489a-9636-dd8955015b92"/>
 					<textElement verticalAlignment="Middle"/>
 					<text><![CDATA[Objet : ]]></text>
 				</staticText>
 				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-					<reportElement x="109" y="69" width="445" height="42" uuid="01b5185a-87b4-4c12-919d-9ed4a8a90c2e"/>
+					<reportElement x="109" y="81" width="445" height="42" uuid="01b5185a-87b4-4c12-919d-9ed4a8a90c2e"/>
 					<textElement verticalAlignment="Top">
 						<font isBold="true"/>
 					</textElement>

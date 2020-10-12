@@ -1396,7 +1396,7 @@ public class AgpmController {
 		public void chargeSourceCheck() { 
 			listeSourceFinance.clear();
 		    listeSourceFinance=(List<TSourceFinancement>) iservice.getObjectsIn("TSourceFinancement", new ArrayList<String>(Arrays.asList("SOU_CODE")),
-		      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON")));
+		      "SOU_CODE", new ArrayList<String>(Arrays.asList("EMP","DON","DEP")));
 		    
 		    newFinancement = new TFinancement();
 			}
