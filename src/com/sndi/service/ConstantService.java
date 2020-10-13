@@ -133,7 +133,7 @@ public class ConstantService {
 		 chargePiecesOffresTable();
 		 chargeTypeStructureTable();
 		 chargePaysTable();
-		chargeDatepubTable();
+		//chargeDatepubTable();
 		chargeDataBanqueTable();
 		_logger.info("----------------- Fin Chargement des tables parametre--------------");
 	}
@@ -402,7 +402,7 @@ public class ConstantService {
 						
 						
 						//LISTE DES DATES DE PUBLICATION
-						public void chargeDatepubTable(){
+				/*		public void chargeDatepubTable(){
 							listeDatePub.clear();
 							listeDatePub =(List<VDatePub>) iservice.getObjectsByColumn("VDatePub", new ArrayList<String>(Arrays.asList("DATEPUB")));
 								HashMap<String, VDatePub> aMap = new HashMap<String, VDatePub>();
@@ -416,7 +416,7 @@ public class ConstantService {
 							public VDatePub getListeDatePub(String DATE_PUB){
 								return HM_LISTE_DATE_PUB.get(DATE_PUB);
 							}
-							
+							*/
 							
 							
 

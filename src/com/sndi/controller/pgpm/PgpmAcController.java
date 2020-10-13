@@ -50,6 +50,7 @@ import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeMarche;
+import com.sndi.model.VAcPlanGeneral;
 import com.sndi.model.VAgpm;
 import com.sndi.model.VAgpmFonction;
 import com.sndi.model.VAgpmMinistere;
@@ -220,6 +221,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	     private List<TPlanGeneral> listPlan = new ArrayList<TPlanGeneral>();
 		 private List<TStructure> listeStructure = new ArrayList<TStructure>();
 		 private List<VModePassation> listeMode = new ArrayList<VModePassation>();
+		 private List<VAcPlanGeneral> listeAc = new ArrayList<VAcPlanGeneral>();
 
 	 
 	//Declaration des objets
@@ -278,6 +280,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public boolean selectBailleur=false;
 		 private String sourfin;
 		 private String dateToday;
+		 private String plgFonCod="";
+		 
 		 //Boolean
 		 private boolean etatAgpm =false;
 		 private boolean etatDossier = false;
@@ -427,6 +431,54 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 }   
 			   
 			 }*/
+		 
+		 public void chargeAcByCpmp(String typePlan) {
+			 listeAc=(List<VAcPlanGeneral>) iservice.getObjectsByColumn("VAcPlanGeneral",
+					 new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+					 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 _logger.info("listeAc size: "+listeAc.size());
+		 }
+		 
+		//PGPM : Filtre Autorité contractante CPMP ET DMP
+		 public void chargeOperateurByAcPgpm() {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+				
+			 }else 
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 getValidationListe().clear();
+					 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+								"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+								new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"),
+								new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+							_logger.info("validationListe size: "+validationListe.size());
+							//tableauBordController.ChargeTbProcedure("PN","PGPM");
+							tableauBordController.chargeDataPgpm();
+				 }else 
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 getValidationListe().clear();
+								validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+										"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
+										//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+								//tableauBordController.ChargeTbProcedure("PN","PGPM");
+								tableauBordController.chargeDataPgpm();
+								_logger.info("validationListe size: "+validationListe.size());	
+					 }else
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+						 getValidationListe().clear();
+							validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+									"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,"PN"));
+									//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+							//tableauBordController.ChargeTbProcedure("PN","PGPM");
+							tableauBordController.chargeDataPgpm();
+							_logger.info("validationListe size: "+validationListe.size());	
+				 }   
+			   
+			 }
+		 
+		 
+		 
 		 
 		 
 		//PGPM : Nouvelle Methode
@@ -3523,11 +3575,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					listeFinancementAgpm.clear();
 					listeFinancementPgpm.clear();
 					newFinancement = new TFinancementPgpm();
+					plgFonCod="";
+					chargeAcByCpmp("PN");
 					vider();
 					userController.initMessage();
 					_logger.info("value: "+value+" action: "+action);
 					break;
 				case "pgpm2":
+					
 					chargeBailleur();
 					chargeDevise();
 					chargeGestions();
@@ -4777,6 +4832,22 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setPgpmDifAc(List<VPgpmliste> pgpmDifAc) {
 		this.pgpmDifAc = pgpmDifAc;
+	}
+
+	public List<VAcPlanGeneral> getListeAc() {
+		return listeAc;
+	}
+
+	public void setListeAc(List<VAcPlanGeneral> listeAc) {
+		this.listeAc = listeAc;
+	}
+
+	public String getPlgFonCod() {
+		return plgFonCod;
+	}
+
+	public void setPlgFonCod(String plgFonCod) {
+		this.plgFonCod = plgFonCod;
 	}
 
 }
