@@ -775,9 +775,9 @@
 	                  <div class="col-sm-10">
 	                    <p:selectOneMenu id="ac" value="#{pgpmAcController.plgFonCod}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir l'autorité contractante.." />  
-			       <f:selectItems value="#{pgpmAcController.listeAc}" var="ac" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 
-			       <f:selectItems /> 			   
+			       <f:selectItem  itemValue="tout" itemLabel="Afficher toute la liste" />  
+			       <f:selectItems value="#{pgpmAcController.listeAc}" var="ac" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 	
+		           <p:ajax listener="#{pgpmAcController.chargeDataFilter('PN')}" update=":gnl:ndTble1"/>
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -799,6 +799,7 @@
                     </span>
 					 </div>
 					 </div>
+					 
 					 
 					 </h:panelGroup>
   <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{pgpmAcController.validationListe}" 

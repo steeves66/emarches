@@ -433,16 +433,64 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }*/
 		 
 		 public void chargeAcByCpmp(String typePlan) {
-			 if(plgFonCod.equals("")) {
-				 
-			 }else {
+			 listeAc.clear();
 				 listeAc=(List<VAcPlanGeneral>) iservice.getObjectsByColumn("VAcPlanGeneral",
 						 new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
 						 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 				 _logger.info("listeAc size: "+listeAc.size()); 
-			 }
-			
 		 }
+		 
+		//Filtrer la liste des PGPM et pgspm en fonction de l'AC selectionné
+		public void chargeDataFilter(String typePlan) {
+			 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					
+			 }else 
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+					 
+					 if(plgFonCod.equalsIgnoreCase("tout")) {
+						 validationListe.clear();
+						 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+									"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+									new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+								_logger.info("validationListe size: "+validationListe.size());
+								//tableauBordController.ChargeTbProcedure("PN","PGPM");
+								//tableauBordController.chargeDataPgpm(); 
+					 }else {
+						 validationListe.clear();
+						 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+									"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+									new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.LIKE,"%"+plgFonCod+"%"),
+									new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getTStructure().getStrCode()));
+								_logger.info("validationListe size: "+validationListe.size());
+								//tableauBordController.ChargeTbProcedure("PN","PGPM");
+								//tableauBordController.chargeDataPgpm(); 
+					 }
+					 
+				 }else 
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+						 validationListe.clear();
+								validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+										"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+										//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+								//tableauBordController.ChargeTbProcedure("PN","PGPM");
+								//tableauBordController.chargeDataPgpm();
+								_logger.info("validationListe size: "+validationListe.size());	
+					 }else
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 validationListe.clear();
+							validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+									"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+									new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+									//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+							//tableauBordController.ChargeTbProcedure("PN","PGPM");
+							//tableauBordController.chargeDataPgpm();
+							_logger.info("validationListe size: "+validationListe.size());	
+				 }   
+		}
+		
 		 
 		//PGPM : Filtre Autorité contractante CPMP ET DMP
 		 public void chargeOperateurByAcPgpm() {
