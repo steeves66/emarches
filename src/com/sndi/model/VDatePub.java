@@ -8,6 +8,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Immutable;
 
@@ -18,19 +20,31 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 @Table(name = "V_DATE_PUB")
 public class VDatePub implements java.io.Serializable {
+	//private BigDecimal RId;
 	private Date datepub;
 	private String libelle;
 
 	public VDatePub() {
 	}
 
-	public VDatePub(Date datepub, String libelle) {
+	public VDatePub(/*BigDecimal RId,*/Date datepub, String libelle) {
+		//this.RId = RId;
 		this.datepub = datepub;
 		this.libelle = libelle;
 	}
 	
 
 	@Id
+/*	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}
+	*/
+	@Temporal(TemporalType.DATE)
 	@Column(name = "DATEPUB", length = 8)
 	public Date getDatepub() {
 		return this.datepub;

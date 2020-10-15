@@ -596,6 +596,7 @@ public class DemandeController {
 		listeDemandes.clear();	
 		listeDemandes = (List<TDemande>) iservice.getObjectsByColumnInDesc("TDemande", new ArrayList<String>(Arrays.asList("DEM_DTE_SAISI")),
 				"DEM_STA_CODE", new ArrayList<String>(Arrays.asList(""+statutAffiche,""+statutDiffere)),
+				new WhereClause("DEM_TDM_CODE",WhereClause.Comparateur.EQ,"DER"));
 				new WhereClause(""+colonneFonction,WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	}
 	

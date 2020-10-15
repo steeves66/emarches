@@ -433,10 +433,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }*/
 		 
 		 public void chargeAcByCpmp(String typePlan) {
-			 listeAc=(List<VAcPlanGeneral>) iservice.getObjectsByColumn("VAcPlanGeneral",
-					 new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-					 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-			 _logger.info("listeAc size: "+listeAc.size());
+			 if(plgFonCod.equals("")) {
+				 
+			 }else {
+				 listeAc=(List<VAcPlanGeneral>) iservice.getObjectsByColumn("VAcPlanGeneral",
+						 new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
+						 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+				 _logger.info("listeAc size: "+listeAc.size()); 
+			 }
+			
 		 }
 		 
 		//PGPM : Filtre Autorité contractante CPMP ET DMP

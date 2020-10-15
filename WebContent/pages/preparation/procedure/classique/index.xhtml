@@ -776,7 +776,7 @@
 	                    <p:selectOneMenu id="ac" value="#{pgpmAcController.plgFonCod}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir l'autorité contractante.." />  
-			       <f:selectItems value="#{pgpmAcController.listeAc}" var="str" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 
+			       <f:selectItems value="#{pgpmAcController.listeAc}" var="ac" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 
 			       <f:selectItems /> 			   
        		        </p:selectOneMenu>
 	                  </div>
