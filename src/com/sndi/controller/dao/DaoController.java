@@ -399,6 +399,8 @@ public class DaoController {
 	//BoolÃ¯Â¿Â½en
 	  //private boolean value1 =true;
 	  private boolean etatQualif =false;
+	  private boolean libBailleur =false;
+	  private boolean inputBailleur =false;
 	  private boolean etatPV =false;
 	  private boolean etatValiderCsv =true;
 	  private boolean etatSanction = false;
@@ -477,14 +479,14 @@ public class DaoController {
 	              //listeMarge();
 			     }
 			 
-			//Controle PavÃ© crÃ©ation
+			//Controle Pavé création
 			 if(event.getOldStep().equals("critere") && event.getNewStep().equals("criterebyLot")) {
 				 //factoriserLot();
 				 factoriserNext();
 				 listeCritereByLot.clear();
 			     }
 			 
-			//Controle totalitÃ© des lots factorisÃ©s
+			//Controle totalité des lots factorisés
 			 if(event.getOldStep().equals("criterebyLot") && event.getNewStep().equals("cojo")) {
 				 chargeArticle();
 				 listeLotCritere.clear();
@@ -494,7 +496,7 @@ public class DaoController {
 					 lotCrit=listeLotCritere.get(0);
 					 if(lotCrit.getCritOk() != 0) {
 						 FacesContext.getCurrentInstance().addMessage(null,
-								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critÃ¨res", ""));
+								 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Il y a encore "+lotCrit.getCritOk()+" lot(s) sans critères", ""));
 						 return "criterebyLot";
 					 }
 			     }
@@ -552,10 +554,10 @@ public class DaoController {
 		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
 					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
 		            new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
-		 _logger.info("liste affichÃ©e: "+listeCritereAnalyse.size());
+		 _logger.info("liste affichée: "+listeCritereAnalyse.size());
 	 }
 	 
-   //Insertion du critÃ¨re aprÃ¨s le choix 
+   //Insertion du critère après le choix 
 	public void savePiece() {
 		listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 				 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
@@ -563,13 +565,13 @@ public class DaoController {
 				       newDao= listDao.get(0);
 				       newDao.setDacCraCodeExclus(critere);
 		               iservice.updateObject(newDao); 
-		               //Chargement des piÃ¨ces
+		               //Chargement des pièces
 		               chargeCritere();   
    	           }
 	}
 	 
 	 
-	 //Liste des critÃ¨res saisies
+	 //Liste des critères saisies
 	 public void chargeCritereSaisie() { 
 	/*	 listeCritereSaisie= (List<VbDetCritAnalyseDac>) iservice.getObjectsByColumn("VbDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_DAN_CODE")),
 					new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));*/ 
@@ -596,7 +598,7 @@ public class DaoController {
 				new WhereClause("LAA_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 		_logger.info("listeLotConsultation size: "+listeLotConsultation.size());
 	 }
-	 //Affichage des marges de prÃ©fÃ©rence de l'avis en cours
+	 //Affichage des marges de préférence de l'avis en cours
 	 public void listeMargePref() {
 		 listMarge.clear();
 		 listMarge = (List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference",
@@ -704,7 +706,7 @@ public class DaoController {
 			   		//Chargement des fonctions Ã  imputer 
 			   		 chargeFonctionImput();
 			   		//Message de Confirmation 
-			   		userController.setTexteMsg("ResponsabilitÃ© AttribuÃ©e avec succÃ¨s!");
+			   		userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 					userController.setRenderMsg(true);
 					userController.setSevrityMsg("success");
 		       }else {
@@ -767,7 +769,7 @@ public class DaoController {
 		   		   //Chargement des fonctions Ã  imputer
 		   		   chargeFonctionImput();
 		   		  //Message de Confirmation
-		   		  userController.setTexteMsg("ResponsabilitÃ© AttribuÃ©e avec succÃ¨s!");
+		   		  userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
 		       }
@@ -784,7 +786,7 @@ public class DaoController {
 			 }
 	 
 	 
-	 //Afficahe de la liste des critÃ¯Â¿Â½res en fonction des types passÃ© en parametre
+	 //Afficahe de la liste des critÃ¯Â¿Â½res en fonction des types passé en parametre
 	/* public void chargeCritere() {
 		 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
 			 chargeCritereByType("PN","DAO");
@@ -801,7 +803,7 @@ public class DaoController {
 					 }
 			     } 
 			 }
-		 _logger.info("procÃ¯Â¿Â½dure: "+controleController.getTypePlan());
+		 _logger.info("procédure: "+controleController.getTypePlan());
 		 _logger.info("type dac: "+controleController.getType());
 	 }*/
 	 
@@ -818,7 +820,7 @@ public class DaoController {
 				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
 	 }
 	 
-	//Combo box critÃ¨res Pou l'ecran de factorisation
+	//Combo box critères Pou l'ecran de factorisation
 	 public void chargeCritereFactCombobox() {
 		 //vider le champ detail
 		  newCritereDac = new VbDetCritAnalyseDac(); 
@@ -846,7 +848,7 @@ public class DaoController {
 	 }
 	 
 	 
-	//Combo box critÃ¨res
+	//Combo box critères
 	 
 	 public void chargeSousEnteteCombobox() {
 			 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
@@ -1034,7 +1036,7 @@ public class DaoController {
 	 }
 	
 	 
-	//ContÃ´le sur les options "Garantie de Soumission et DÃ©claration de Garantie de Soumission"
+	//ContÃ´le sur les options "Garantie de Soumission et Déclaration de Garantie de Soumission"
 	public void afficheOption() {
 		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
 					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
@@ -1052,12 +1054,12 @@ public class DaoController {
 	    }
 	}
 	 
-	 //Enregistrement des critÃ¨res
+	 //Enregistrement des critères
 	 public void saveCritere() {
 		 
 		 if (selectionlisteCritereAnalyse.size()==0) {
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critÃ¨re selectionnÃ©", ""));
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun critère selectionné", ""));
 			}
 	 		else{
 	 			/*selectionlisteCritereAnalyse = (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("DAC_CODE")),
@@ -1093,7 +1095,7 @@ public class DaoController {
 		 		chargeLotCritere();
 		 		///afficheOption();
 		 		pavet_commission = true;
-		 		userController.setTexteMsg("CritÃ¨re(s) d'analyse enregistrÃ©(s) avec succÃ¨s!");
+		 		userController.setTexteMsg("Critère(s) d'analyse enregistré(s) avec succès!");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
 	 		 }
@@ -1111,7 +1113,7 @@ public class DaoController {
 		 panelCritereLot = true;
 	 }
 	 
-	 //RÃ©cupÃ©ration du message
+	 //Récupération du message
 	 public void factoriserNext() { 
 		 newTempFactorise.setTempCritDac(dao.getDacCode());
 		 newTempFactorise.setTempNbrLot(newAvis.getAaoNbrLot());
@@ -1155,7 +1157,7 @@ public class DaoController {
 			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereSaisie();
-		    userController.setTexteMsg("Modification effectuÃ©e avec succÃ¨s!");
+		    userController.setTexteMsg("Modification effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 		  }
@@ -1172,7 +1174,7 @@ public class DaoController {
 			  updateCritere.setDcadCommentaire(sltCritereDac.getDcadCommentaire());
 			  iservice.updateObject(updateCritere);
 			  chargeCritereByLot();
-		    userController.setTexteMsg("Modification effectuÃ©e avec succÃ¨s!");
+		    userController.setTexteMsg("Modification effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 		  }
@@ -1474,7 +1476,7 @@ public class DaoController {
 		 }  
 		//Fin de la Methode 
 	 
-	 //Suppression du critÃ¨re du dÃ©tail
+	 //Suppression du critère du détail
 	 public void deleteCritere() {
 		 /*listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 					new WhereClause("DCAD_NUM",WhereClause.Comparateur.EQ,""+sltCritereDac.getDcadNum()));
@@ -1483,7 +1485,7 @@ public class DaoController {
 	  		 iservice.deleteObject(detCritere); 
 	  		 chargeCritereSaisie();
 	  		 chargeCritere();
-	  		userController.setTexteMsg("Suppression effectuÃ©e avec succÃ¨s!");
+	  		userController.setTexteMsg("Suppression effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 	       }*/
@@ -1501,7 +1503,7 @@ public class DaoController {
 			 iservice.addObject(newTempFactSup);
 			 chargeCritereSaisie();
 	  		 chargeCritere();
-			 userController.setTexteMsg("Suppression effectuÃ©e avec succÃ¨s!");
+			 userController.setTexteMsg("Suppression effectuée avec succès!");
 			 userController.setRenderMsg(true);
 			 userController.setSevrityMsg("success");
 			 
@@ -1511,9 +1513,9 @@ public class DaoController {
 			 _logger.info("TYPE : "+newTempFactSup.getTempType());
 	 }
 	 
-	 //Fin de la mÃ©thode de suppression du dÃ©tail de critÃ¨re
+	 //Fin de la méthode de suppression du détail de critère
 	 
-	 //Suppression du critÃ¨re du dÃ©tail
+	 //Suppression du critère du détail
 	 public void deleteCritereLot() {
 		/* listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 				     new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
@@ -1524,7 +1526,7 @@ public class DaoController {
 	  		   chargeCritereSaisie();
 	  		    chargeCritere();
 	  		   chargeCritereByLot();
-	  		userController.setTexteMsg("Suppression effectuÃ©e avec succÃ¨s!");
+	  		userController.setTexteMsg("Suppression effectuée avec succès!");
 			userController.setRenderMsg(true);
 			userController.setSevrityMsg("success");
 	       }*/
@@ -1551,7 +1553,7 @@ public class DaoController {
 			 chargeCritereSaisie();
 	  		 chargeCritere();
 	  		 chargeCritereByLot();
-			 userController.setTexteMsg("Suppression effectuÃ©e avec succÃ¨s!");
+			 userController.setTexteMsg("Suppression effectuée avec succès!");
 			 userController.setRenderMsg(true);
 			 userController.setSevrityMsg("success");
 			 
@@ -1562,11 +1564,11 @@ public class DaoController {
 			 _logger.info("TYPE : "+newTempFactSup.getTempType());
 	 }
 	 
-	 //Fin de la mÃ©thode de suppression du dÃ©tail de critÃ¨re
+	 //Fin de la méthode de suppression du détail de critère
 	 
 	 
 	 //FIN GESTION DES CRITERES
-	 //Affichage des AC en lui passant en parametre les statuts concernÃ© (2 statuts)
+	 //Affichage des AC en lui passant en parametre les statuts concerné (2 statuts)
 	 public void chargeDataAc2(String typeDac,String typePlan,String stat1,String stat2){
 		 listeDAO =(List<VDacliste>) iservice.getObjectsByColumnInDesc("VDacliste", new ArrayList<String>(Arrays.asList("DAC_DTE_MODIF")),
 				 "DAC_STA_CODE", new ArrayList<String>(Arrays.asList(""+stat1,""+stat2)),
@@ -1803,7 +1805,7 @@ public class DaoController {
 				 }
 		 }
 		 
-		 //RÃ©cupÃ©ration du message
+		 //Récupération du message
 		 public void recupMessage () {
 			 listeAvis = listeAvis = ((List<TAvisAppelOffre>)iservice.getObjectsByColumn("TAvisAppelOffre",new ArrayList<String>(Arrays.asList("AAO_CODE")),
 	 				 new WhereClause("AAO_CODE",Comparateur.EQ,""+newAvis.getAaoCode())));
@@ -1964,7 +1966,7 @@ public class DaoController {
 			
 		 }
 		 
-		  //Charger la liste des piÃ¨ces a examiner par le charge d'etude
+		  //Charger la liste des pièces a examiner par le charge d'etude
 			 public void chargePiecesByDao() {
 				 listePices= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
 							new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));			
@@ -1977,7 +1979,7 @@ public class DaoController {
 			 }
 			 
 			 
-			//Charger la liste des piÃ¨ces a examiner par les chargÃ¯Â¿Â½s d'etude
+			//Charger la liste des pièces a examiner par les chargÃ¯Â¿Â½s d'etude
 			 public void chargePiecesByCharges() {
 				 listePices= (List<VPieces>) iservice.getObjectsByColumn("VPieces", new ArrayList<String>(Arrays.asList("V_PI")),
 							new WhereClause("PID_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
@@ -2008,7 +2010,7 @@ public class DaoController {
 				   }
 			}
 		 
-		 //Liste des Dao affectÃ©s aux chargés d'etude
+		 //Liste des Dao affectés aux chargés d'etude
 		 public void chargeDaoChargeEtudeByType(String typePlan, String typeDac, String stat1,String stat2){
 			 daoExamen.clear();
 			  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumnIn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
@@ -2316,11 +2318,11 @@ public class DaoController {
 			               //Chargement des dossiers du DAO
 							chargeDossier(); 
 							//Message de confirmation
-							FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectuÃ©!", "");
+							FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 							FacesContext.getCurrentInstance().addMessage(null, msg);
 						     chargeDossier();
 							}else {
-								FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistrÃ©, charger Ã Â  nouveau un document ! ","");
+								FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã Â  nouveau un document ! ","");
 								FacesContext.getCurrentInstance().addMessage(null, msg);	
 								
 							}
@@ -2331,7 +2333,7 @@ public class DaoController {
 				public void upload(FileUploadEvent event) throws java.io.FileNotFoundException { 
 				 //condition de chargement d'un document : Nature sÃ¯Â¿Â½lectionnÃ¯Â¿Â½e 
 				 if((docNature == null || "".equals(docNature))){
-					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sÃ©lectionnÃ©e pour le chargement! ","");
+					 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);	
 					 
 					 }else {
@@ -2361,11 +2363,11 @@ public class DaoController {
 					//chargeNatureDocTrans();
 					chargeDossier();
 					
-					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectuÃ©!", "");
+					FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				   chargeDossier();
 					}else {
-						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistrÃ©, charger Ã Â  nouveau un document ! ","");
+						FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã Â  nouveau un document ! ","");
 						FacesContext.getCurrentInstance().addMessage(null, msg);	
 						
 					}
@@ -2393,7 +2395,7 @@ public class DaoController {
 			       			                         
 			       			                        constantService.getStatut("D1T");
 						 							//Historisation du / des retraits
-						 						    historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'AutoritÃ© Contractante");
+						 						    historiser("D1T",slctdTd.getDacCode(),"DAO transmis par l'Autorité Contractante");
 						 						    //Tableau de Bord
 			       			                        tableauBordController.saveTempTabord("D1T", slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 			       			                         
@@ -2404,7 +2406,7 @@ public class DaoController {
 			       					//Actualisation du tableau de bord
 			       					typeActionTb();
 			       					//Message de confirmation
-			       					userController.setTexteMsg("Transmission effectuÃ©e avec succÃ¨s!");
+			       					userController.setTexteMsg("Transmission effectuée avec succès!");
 			   						userController.setRenderMsg(true);
 			   						userController.setSevrityMsg("success");
 			        	         }
@@ -2456,7 +2458,7 @@ public class DaoController {
 						//Actualisation du tableau de bord
 						typeActionTb();
 						//Message de confirmation
-						userController.setTexteMsg("Transmission effectuÃ©e avec succÃ¨s!");
+						userController.setTexteMsg("Transmission effectuée avec succès!");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");		
 	     }
@@ -2496,7 +2498,7 @@ public class DaoController {
 						       
 						     tableauBordController.saveTempTabord(""+statutUpdate, slctdTd.getDacTdCode(), ""+userController.getSlctd().getTFonction().getFonCod(), slctdTd.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), slctdTd.getDacCode());
 		 					//Message de confirmation
-		 					 userController.setTexteMsg("DAO retournÃ© !");
+		 					 userController.setTexteMsg("DAO retourné !");
 		 					 userController.setRenderMsg(true);
 		 					 userController.setSevrityMsg("success");
 		 					 //return	null;
@@ -2505,7 +2507,7 @@ public class DaoController {
 		 		          //Actualisation du Tableau de Bord
 		 		          typeActionTb();
 		 			
-		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"DÃ©solÃ©, votre DAO a Ã©tÃ© retournÃ©!", "");
+		 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Désolé, votre DAO a été retourné!", "");
 		 			 FacesContext.getCurrentInstance().addMessage(null, msg);
 		 	 }
 		 	 
@@ -2606,7 +2608,7 @@ public class DaoController {
 								btn_ad_expert = true;
 								btn_dao = true;
 								 //Message de confirmation
-			  		            userController.setTexteMsg("Membre(s) enregistrÃ©(s) avec succÃ¨s!");
+			  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
@@ -2632,7 +2634,7 @@ public class DaoController {
 			    				iservice.updateObject(comSpecUpdate);
 			    				
 					 			chargeMembres();
-					 			userController.setTexteMsg("Modification Ã©ffectuÃ©e avec succÃ¨s!");
+					 			userController.setTexteMsg("Modification éffectuée avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 			    			}
@@ -2643,7 +2645,7 @@ public class DaoController {
 				 	public void updatePresenceComspec() {          
 				 		iservice.updateObject(sltCompsec);
 				 		chargeMembresComSpec();	
-								 userController.setTexteMsg("Modification Ã©ffectuÃ©e avec succÃ¨s!");
+								 userController.setTexteMsg("Modification éffectuée avec succès!");
 				  		            userController.setRenderMsg(true);
 				  		            userController.setSevrityMsg("success");
 								
@@ -2657,7 +2659,7 @@ public class DaoController {
 			    				iservice.deleteObject(comSpec);
 						 		chargeMembres();
 						 		activieComboxAutoNorm();
-								userController.setTexteMsg("Suppression Ã©ffectuÃ©e avec succÃ¨s!");
+								userController.setTexteMsg("Suppression éffectuée avec succès!");
 						  		userController.setRenderMsg(true);
 						  		userController.setSevrityMsg("success");
 			    			}
@@ -2668,7 +2670,7 @@ public class DaoController {
 				 		iservice.deleteObject(sltCompsec);
 				 		chargeMembresComSpec();	
 				 		activieComboxAutoSpec();
-						userController.setTexteMsg("Suppression Ã©ffectuÃ©e avec succÃ¨s!");
+						userController.setTexteMsg("Suppression éffectuée avec succès!");
 				  		userController.setRenderMsg(true);
 				  		userController.setSevrityMsg("success");
 								
@@ -2696,7 +2698,7 @@ public class DaoController {
 								//chargeExpert();
 								chargeMembres();
 								
-								userController.setTexteMsg("Expert(s) enregistrÃ©(s) avec succÃ¨s!");
+								userController.setTexteMsg("Expert(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
@@ -2732,7 +2734,7 @@ public class DaoController {
 								}
 								//chargeExpert();
 								chargeMembresComSpec();
-								userController.setTexteMsg("Ressource ajoutÃ©e avec succÃ¨s!");
+								userController.setTexteMsg("Ressource ajoutée avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 								
@@ -2751,7 +2753,7 @@ public class DaoController {
 			        	       }
 			        	       
 			        	       iservice.deleteObject(getDetailCom());
-							   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression Ã©ffectuÃ©e avec succÃ¨s", "");
+							   new FacesMessage(FacesMessage.SEVERITY_WARN,"Suppression éffectuée avec succès", "");
 				 	}	 
 		 		 
 	//Statistiques pour le chargÃ¯Â¿Â½ d'Etudes
@@ -2867,7 +2869,7 @@ public class DaoController {
 			     }
 			    
 			    
-			    //chargement du message de la marge de prÃ©fÃ©rence sous-traitance
+			    //chargement du message de la marge de préférence sous-traitance
 			   /* public void chargeMsgMarge() {
 			    	listeMarge.clear();
 			    	listeMarge =(List<VMargeDePreference>) iservice.getObjectsByColumn("VMargeDePreference", new ArrayList<String>(Arrays.asList("ID")));
@@ -2876,7 +2878,7 @@ public class DaoController {
 					}	
 			    }*/
 			    
-			  //chargement du message de la marge de prÃ©fÃ©rence sous-traitance
+			  //chargement du message de la marge de préférence sous-traitance
 			    public void chargeMsgMarge() {
 			    	//listeMargeSou.clear();
 			    	listeMargeSou =(List<VMargeDePreferenceSou>) iservice.getObjectsByColumn("VMargeDePreferenceSou", new ArrayList<String>(Arrays.asList("ID")));
@@ -2885,7 +2887,7 @@ public class DaoController {
 					}	
 			    }
 			    
-			  //chargement du message de la marge de prÃ©fÃ©rence communautaire
+			  //chargement du message de la marge de préférence communautaire
 			    public void chargeMsgMargeCom() {
 			    	//listeMargeCom.clear();
 			    	listeMargeCom =(List<VMargeDePreferenceCom>) iservice.getObjectsByColumn("VMargeDePreferenceCom", new ArrayList<String>(Arrays.asList("ID")));
@@ -2894,7 +2896,7 @@ public class DaoController {
 					}	
 			    }
 			    
-			  //chargement du message de la marge de prÃ©fÃ©rence artisan
+			  //chargement du message de la marge de préférence artisan
 			    public void chargeMsgMargeArt() {
 			    	listeMargeArt.clear();
 			    	listeMargeArt =(List<VMargeDePreferenceArt>) iservice.getObjectsByColumn("VMargeDePreferenceArt", new ArrayList<String>(Arrays.asList("ID")));
@@ -2903,19 +2905,19 @@ public class DaoController {
 					}	
 			    }
 		    
-		//Initiation du DAO en procÃ©dure normale 
+		//Initiation du DAO en procédure normale 
 	     @Transactional
 	     public void saveDac(String typeDac) {
 	    	 if(daoDetail.getTymCode().equalsIgnoreCase("") || "".equals(daoDetail.getTymCode()) || daoDetail.getMopCode().equalsIgnoreCase("") || "".equalsIgnoreCase(daoDetail.getMopCode()) 
 	    			 || daoDetail.getDppObjet().equalsIgnoreCase("") || "".equals(daoDetail.getDppObjet()) || dao.getDacFinancement().equalsIgnoreCase("") ) {
 	    		 //Message d'Erreur
 	    		 FacesContext.getCurrentInstance().addMessage(null,
-		         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez sÃ©lectionnez votre PPM, puis faites OK!", ""));
+		         new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez sélectionnez votre PPM, puis faites OK!", ""));
 	    	 }else 
-		 			    //Insertion des piÃ¨ces constitutives du DAO 
+		 			    //Insertion des pièces constitutives du DAO 
 		 			     if(listSelectionTypePieces.size()==0) {
 		 						FacesContext.getCurrentInstance().addMessage(null,
-		 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune piÃ¨ce selectionnÃ©e", ""));
+		 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 		 					}
 		 			 		else{
 		 			 			String gestion =String.valueOf(gesCode).substring(2,4);
@@ -2964,7 +2966,7 @@ public class DaoController {
 		 			 	    	       }
 		 			 			   
 		 			 			    //Historisation   
-		 			 			   historiser("D1S",dao.getDacCode(),"Initiation du "+typeDac+" par une AutoritÃ© Contractante");
+		 			 			   historiser("D1S",dao.getDacCode(),"Initiation du "+typeDac+" par une Autorité Contractante");
 		 			 			   
 		 			 			   tableauBordController.saveTempTabord("D1S", dao.getTTypeDacSpecs().getTdcCode(), ""+userController.getSlctd().getTFonction().getFonCod(), dao.getDacTypePlan(), ""+userController.getSlctd().getTOperateur().getOpeMatricule(), dao.getDacCode());
 		 			 			
@@ -2976,12 +2978,12 @@ public class DaoController {
 		 						     //tableauBordController.chargeDataDao();
 		 			 			    //typeActionTb();
 		 						     
-		 						     userController.setTexteMsg(typeDac+" NÂ° "+dao.getDacCode()+" InitiÃ© avec succÃ¨s!");
+		 						     userController.setTexteMsg(typeDac+" NÂ° "+dao.getDacCode()+" Initié avec succès!");
 		 							 userController.setRenderMsg(true);
 		 							 userController.setSevrityMsg("success");
 		 							 
 		 							 newAvis.aaoLibelle = dao.getDacObjet();
-		 							 //DÃ©sactivation du bouton d'enregistrement du DAO
+		 							 //Désactivation du bouton d'enregistrement du DAO
 		 							 controleController.btn_dao_pn = false;
 		 							 //Activation du Bouton d'enregistrement d'un Avis d'Appel d'Offres
 		 							  btn_save_avis = true;
@@ -3009,7 +3011,7 @@ public class DaoController {
 		     iservice.addObject(dacStatut);
 	 }
 	 
-		 //CrÃ©ation du Tableau de Bord AC
+		 //Création du Tableau de Bord AC
 		 public void tableauAc(String statut, String dac, String ac, String plan, String matricule, String dacCode) {
 			   VbTempParamTabBord tempTabBord = new VbTempParamTabBord();
 			   tempTabBord.setTabOpeStaCode(statut);
@@ -3022,7 +3024,7 @@ public class DaoController {
                iservice.addObject(tempTabBord);
 		 }
 		 
-		 //CrÃ©ation du Tableau de Bord 
+		 //Création du Tableau de Bord 
 		 public void tableauCp(String statut, String dac, String acteur, String plan, String matricule, String dacCode) {
 			 
 			    if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -3049,7 +3051,7 @@ public class DaoController {
 		 
 		 
 		//Avis
-	   	 //CrÃ©ation de l'Avis
+	   	 //Création de l'Avis
 		 
 		 public void saveAvis() { 
 	    	 if(controleController.type == "DAC" && controleController.typePlan == "PN") {	
@@ -3072,7 +3074,7 @@ public class DaoController {
 		 public void controlDealai() {
 			 if(newAvis.getAaoDelaiVal() < 30 || newAvis.getAaoDelaiVal() > 180) {
 				 _logger.info(""+newAvis.getAaoDelaiVal());
-				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le dÃ©lai de validitÃ© doit etre compris entre 30 et 180 jours ","");
+				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit etre compris entre 30 et 180 jours ","");
 					FacesContext.getCurrentInstance().addMessage(null, msg);
 			 }else
 			 {
@@ -3094,7 +3096,7 @@ public class DaoController {
 	            	       if (!avisTab.isEmpty()) {
 	            	    	      newAvis = avisTab.get(0);
 	            	    	      if(newAvis.getAaoDelaiVal() < 30 || newAvis.getAaoDelaiVal() > 180) {
-	            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le dÃ©lai de validitÃ© doit etre compris entre 30 et 180 jours ","");
+	            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit etre compris entre 30 et 180 jours ","");
 	            	 					FacesContext.getCurrentInstance().addMessage(null, msg);
 	            	 			 }else {
 	            	 				iservice.updateObject(newAvis); 
@@ -3103,7 +3105,7 @@ public class DaoController {
 	            	            }else { 
 	            	            	      //S'assurer que la delai saisie est compris entre 30 et 180 jours
 			            	            	if(newAvis.getAaoDelaiVal() < 30 || newAvis.getAaoDelaiVal() > 180) {
-				            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le dÃ©lai de validitÃ© doit etre compris entre 30 et 180 jours ","");
+				            	 				 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le délai de validité doit etre compris entre 30 et 180 jours ","");
 				            	 					FacesContext.getCurrentInstance().addMessage(null, msg);
 				            	 			 }else {
 				            	 				 if(newAvis.getAaoNbrLot()==0) {
@@ -3142,11 +3144,11 @@ public class DaoController {
 			                                             //Charger la liste des pieces de l'offre
 				            	     				     chargePiecesOffres();
 				                	     				    //Message de confirmation
-				            	          		            userController.setTexteMsg("Avis d'Appel d'Offre crÃ©e avec succÃ¨s!");
+				            	          		            userController.setTexteMsg("Avis d'Appel d'Offre crée avec succès!");
 				            	          		            userController.setRenderMsg(true);
 				            	          		            userController.setSevrityMsg("success");
 				            	          		            
-				            	          		        //DÃ©sactivation du bouton enregistrerAvis
+				            	          		        //Désactivation du bouton enregistrerAvis
 				                	     				    btn_save_avis =false;
 				                	     				//Activation du bouton d'enregistrement des offres
 				                	     				    btn_save_offre = true;
@@ -3171,10 +3173,8 @@ public class DaoController {
 	 	public void verifOuverture() {
 	 		if(newAvis.aaoNbrOuv == 2) {
 	 			ouvTechnique = true;
-	 			
 	 		  }else {
 	 			  ouvTechnique = false;
-	 			  
 	 		}
 	 	}
 	
@@ -3338,7 +3338,7 @@ public class DaoController {
 		     public void renseignerDao() throws IOException{
 		                 	if (listSelectionPpmDao.size()==0) {
 		            				FacesContext.getCurrentInstance().addMessage(null,
-		            						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun PPM selectionnÃ©", ""));
+		            						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun PPM selectionné", ""));
 		            			}
 		            	 		else{
 		            	 			//Parcourir la liste de sÃ¯Â¿Â½lection listSelectionPpmDao
@@ -3405,7 +3405,7 @@ public class DaoController {
 					newAdresse.setTFonction(userController.getSlctd().getTFonction());
 					iservice.addObject(newAdresse); 
 					chargeAdresse();
-					userController.setTexteMsg("Enregistrement effectuÃ© avec succÃ¨s!");
+					userController.setTexteMsg("Enregistrement effectué avec succès!");
 				    userController.setRenderMsg(true);
 					userController.setSevrityMsg("success");
 				  }
@@ -3419,7 +3419,7 @@ public class DaoController {
 							 iservice.addObject(newDtailAdresse); 
 							 chargeDetailAdresse();
 						  }else {
-							  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, "SÃ©lectionnez le type d'adresse!", ""));
+							  FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sélectionnez le type d'adresse!", ""));
 						  }
 						
 					  }
@@ -3468,7 +3468,7 @@ public class DaoController {
 					  public void updateMTEstim() {
 						if(daoDetail.getDppMontant() > totalMontantEstimatif) {
                             	 FacesContext.getCurrentInstance().addMessage(null,
-               	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Le cumul montant Estimatif ne doit pas etre supÃ©rieur au montant de l'operation", ""));	
+               	    	      		  new FacesMessage(FacesMessage.SEVERITY_ERROR, "Le cumul montant Estimatif ne doit pas etre supérieur au montant de l'operation", ""));	
                             
 						}else
 						{
@@ -3504,25 +3504,25 @@ public class DaoController {
 							_logger.info("objetListe size: "+listeLots.size());		
 					}
 				   
-				 //Mis Ã  jour de prÃ©sence (O/N)
+				 //Mis Ã  jour de présence (O/N)
 				   public void majPresence (String presence) {
 						 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
 						 TPiecesDacs piece = new TPiecesDacs(); 
 						 if(!LS.isEmpty()) piece = LS.get(0);
 						 piece.setPidPresente(""+presence);
 						 iservice.updateObject(piece);
-						 //Rechargement de la liste des piÃ¨ces Ã  corriger
+						 //Rechargement de la liste des pièces Ã  corriger
 						 chargePiecesByCharges();
 					 }
 				   
-				   //Mis Ã  jour de conformitÃ© (Conforme/Non Conforme)
+				   //Mis Ã  jour de conformité (Conforme/Non Conforme)
 				   public void majConforme (String conformite) {
 						 List<TPiecesDacs> LS  = iservice.getObjectsByColumn("TPiecesDacs", new WhereClause("PID_CODE",Comparateur.EQ,""+sltPiece.getPidCode()));
 						 TPiecesDacs piece = new TPiecesDacs(); 
 						 if(!LS.isEmpty()) piece = LS.get(0);
 						 piece.setPidConforme(""+conformite);
 						 iservice.updateObject(piece);
-						 //Rechargement de la liste des piÃ¨ces Ã  corriger
+						 //Rechargement de la liste des pièces Ã  corriger
 						 chargePiecesByCharges();
 					 }
 				   
@@ -3615,7 +3615,7 @@ public class DaoController {
 					    		  iservice.addObject(newVbTemp);
 					    		  chargeLots();
 					    		  montantTotalLot();
-					    		  userController.setTexteMsg("Lot(s) gÃ©nÃ©rÃ©(s) avec succÃ¨s!");
+					    		  userController.setTexteMsg("Lot(s) généré(s) avec succès!");
 					    		  userController.setRenderMsg(true);
 					    		  userController.setSevrityMsg("success");
 								  
@@ -3642,7 +3642,7 @@ public class DaoController {
 				       else
 				       {
 							 
-							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseignÃ© ! ","");
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
 				       }
 				    	 
@@ -3715,7 +3715,7 @@ public class DaoController {
 							 //Activation du pavet de saisie des piÃ¯Â¿Â½ces des offres 
 			                 pavet_offre = true;
 			                 pavet_critere= true;
-				        	 userController.setTexteMsg("Lot enregistrÃ© avec succÃ¨s !");
+				        	 userController.setTexteMsg("Lot enregistré avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
 								}
@@ -3733,7 +3733,7 @@ public class DaoController {
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");*/
 							 
-							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseignÃ© ! ","");
+							 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez respecter le nombre de lots renseigné ! ","");
 							 FacesContext.getCurrentInstance().addMessage(null, msg);
 				    	 }
 					}
@@ -3765,7 +3765,7 @@ public class DaoController {
 				   		 try {
 				   			 iservice.deleteObject(getSelectLot());
 				   				chargeLots();
-				   				userController.setTexteMsg("Suppression effectuÃ©e avec succÃ¨s !");
+				   				userController.setTexteMsg("Suppression effectuée avec succès !");
 				   				userController.setRenderMsg(true);
 				   				userController.setSevrityMsg("success");
 
@@ -3854,7 +3854,7 @@ public class DaoController {
 				     public void savePieceOffres() {
 				    		if (listeSelectionPiecesOffres.size()==0) {
 								FacesContext.getCurrentInstance().addMessage(null,
-										new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune piÃ¨ce selectionnÃ©e", ""));
+										new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune pièce selectionnée", ""));
 							}
 					 		else{
 					 			
@@ -3873,7 +3873,7 @@ public class DaoController {
 						 			newPieceOffreDac.setTTypePieceOffre(ligne.getTpoCode());
 						 			iservice.addObject(newPieceOffreDac);
 							     }
-						 		userController.setTexteMsg("PiÃ¨ces enregistrÃ©e(s) avec succÃ¨s!");
+						 		userController.setTexteMsg("Pièces enregistrée(s) avec succès!");
 								userController.setRenderMsg(true);
 								userController.setSevrityMsg("success");
 								//DÃ¯Â¿Â½sactivation du Bouton d'Enregistrement
@@ -3906,7 +3906,7 @@ public class DaoController {
 					 iservice.updateObject(newAvis); 
 					 
 					 //Message de confirmation
-					 userController.setTexteMsg("Avis d'Appel d'offres mis ÃƒÂ  jour avec succÃ¨s!");
+					 userController.setTexteMsg("Avis d'Appel d'offres mis ÃƒÂ  jour avec succès!");
 				     userController.setRenderMsg(true);
 					 userController.setSevrityMsg("success");
 				  }
@@ -3925,7 +3925,7 @@ public class DaoController {
 					  
 					    //Chargement des compteurs du tableau de bord	
 						//Message de confirmation
-						userController.setTexteMsg("DAO mis ÃƒÂ  jour avec succÃ¨s!");
+						userController.setTexteMsg("DAO mis ÃƒÂ  jour avec succès!");
 						userController.setRenderMsg(true);
 						userController.setSevrityMsg("success");
 				    }
@@ -3934,6 +3934,17 @@ public class DaoController {
 				  public void saveLibelleAdresse() {
 					  iservice.addObject(newLibelleAdresse);
 					  chargeLibelleAdresse();
+				  }
+				  
+				  //
+				  public void avisBailleur() {
+					  if(newAvis.getAaoAvisBai().equalsIgnoreCase("O")) {
+						  libBailleur = true;
+						  inputBailleur = true;
+					  }else {
+						  libBailleur = false;
+						  inputBailleur = false;
+					  }
 				  }
 				  
 				  public void checkSituation() {
@@ -3973,7 +3984,7 @@ public class DaoController {
 						 }
 					 }
 					 
-					 //Affichage des messages de marge de prÃ©fÃ©rence
+					 //Affichage des messages de marge de préférence
 					 public void checkMargeMsgPref() {
 							 if(margePref.equalsIgnoreCase("com")) { 
 								 chargeMsgMargeCom();
@@ -4045,18 +4056,18 @@ public class DaoController {
 						 if(!LOT.isEmpty()) lo = LOT.get(0);
 						 lo.setLaaVariante(""+variante);
 						 iservice.updateObject(lo);	
-						 //Actualisation des critÃ¨res
+						 //Actualisation des critères
 						 chargeLots();
 					 }
 					 
 					 
-					 //Edition de la fiche de synthÃ¨se du DAO
+					 //Edition de la fiche de synthèse du DAO
 					 public void imprimeSynthese() {
 							   projetReport.stringparam1(dao.getDacCode(), "synthese_dac", "synthese_dac"); 
 						}
 					 
 				 
-					//TÃ©lÃ©chargement des DAO type aprÃ¨s la saisie du DAO					
+					//Téléchargement des DAO type après la saisie du DAO					
 						public void opendaoType() throws IOException{
 							
 						  if(controleController.type == "DAC" && controleController.typePlan == "PN"){
@@ -4293,7 +4304,7 @@ public class DaoController {
 								  
 								  constantService.getStatut("DC2");
 	 							  	//Historisation du / des retraits
-	 						       historiser("DC2",newDao.getDacCode(),"DAO CorrigÃ© par le responsable du binÃ´me");
+	 						       historiser("DC2",newDao.getDacCode(),"DAO Corrigé par le responsable du binÃ´me");
 										//Actualisation du Tableau de Bord
 										typeActionTb();
 										//Activation et dÃ¯Â¿Â½sactivation des boutons valider
@@ -4301,7 +4312,7 @@ public class DaoController {
 										validCorrection = true;
 										etatDaoCorrige = true;
 										 //Message de confirmation
-										 userController.setTexteMsg("Correction(s) Ã©ffectuÃ©e(s) avec succÃ¨s!");
+										 userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 										 userController.setRenderMsg(true);
 										 userController.setSevrityMsg("success");
 								
@@ -4353,7 +4364,7 @@ public class DaoController {
 													                           
 													                           constantService.getStatut("DC2");
 												 							  	//Historisation du / des retraits
-												 						       historiser("DC2",newDao.getDacCode(),"DAO CorrigÃ© par le responsable du binome");	
+												 						       historiser("DC2",newDao.getDacCode(),"DAO Corrigé par le responsable du binome");	
 							 				                              //Actualisation du Tableau de Bord
 											                              typeActionTb();
 											                              //Activation et dÃ¯Â¿Â½sactivation des boutons valider
@@ -4361,7 +4372,7 @@ public class DaoController {
 											              				  validCorrection = true;
 											              				  etatDaoCorrige = true;
 							 				                              //Message de confirmation
-							 				                              userController.setTexteMsg("Correction(s) Ã©ffectuÃ©e(s) avec succÃ¨s!");
+							 				                              userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 							 				                              userController.setRenderMsg(true);
 							 				                              userController.setSevrityMsg("success");
 							                                   }
@@ -4379,7 +4390,7 @@ public class DaoController {
 								//Insertion des chargÃ¯Â¿Â½s d'Ã¯Â¿Â½tudes choisis 
 									if (listSelectionFonctImput.size()==0) {
 												FacesContext.getCurrentInstance().addMessage(null,
-												new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun chargé d'Ã©tudes selectionnÃ©", ""));
+												new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun chargé d'études selectionné", ""));
 											}
 									 		else{
 									 			    
@@ -4457,14 +4468,14 @@ public class DaoController {
 										 			//Chargement des compteurs du tableau de bord
 										 			typeActionTb();	
 										 			//Message de confirmation
-							    					userController.setTexteMsg("Affectation(s) effectuÃ©e(s) avec succÃ¨s!");
+							    					userController.setTexteMsg("Affectation(s) effectuée(s) avec succès!");
 													userController.setRenderMsg(true);
 													userController.setSevrityMsg("success");
 
 									 			    }else {
 									 			    	     FacesContext.getCurrentInstance().addMessage(null,
 									 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez Choisir un binÃƒÂ´me !", ""));
-									 			    	     //RÃ©initialiser la liste de selection
+									 			    	     //Réinitialiser la liste de selection
 									 			    	      listSelectionFonctImput.clear();
 									 			          }	
 									 		 }
@@ -4543,7 +4554,7 @@ public class DaoController {
 									         }		
 									    }
 								  
-								    //Examen des piÃ¨ces du DAO par le chargé d'Etudes du binÃƒÂ´me
+								    //Examen des pièces du DAO par le chargé d'Etudes du binÃƒÂ´me
 									@Transactional
 								    public void examinerChar() {
 										  
@@ -4581,7 +4592,7 @@ public class DaoController {
 												                     //Actualisation du Tableau de Bord
 												                     typeActionTb();
 												                     //Message de confirmation
-												                     userController.setTexteMsg("Correction(s) Ã©ffectuÃ©e(s) avec succÃ¨s!");
+												                     userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 												                     userController.setRenderMsg(true);
 												                     userController.setSevrityMsg("success");
 												                     
@@ -4623,7 +4634,7 @@ public class DaoController {
 									 				                                //Actualisation du Tableau de Bord
 													                                 typeActionTb();
 									 				                                //Message de confirmation
-									 				                                userController.setTexteMsg("Correction(s) Ã©ffectuÃ©e(s) avec succÃ¨s!");
+									 				                                userController.setTexteMsg("Correction(s) éffectuée(s) avec succès!");
 									 				                                userController.setRenderMsg(true);
 									 				                                userController.setSevrityMsg("success");
 									                                         }
@@ -4644,7 +4655,7 @@ public class DaoController {
 										   //chargePiecesByDao();
 										
 											 //Message de confirmation
-											 userController.setTexteMsg("Correction(s)  Ã©ffectuÃ©e(s) avec succÃ¨s!");
+											 userController.setTexteMsg("Correction(s)  éffectuée(s) avec succès!");
 											 userController.setRenderMsg(true);
 											 userController.setSevrityMsg("success");	
 									  }
@@ -4670,7 +4681,7 @@ public class DaoController {
 										  //Actualisation du tableau de bord
 										  typeActionTb();
 										  //Message de confirmation
-										  userController.setTexteMsg("Validation effectuÃ©e avec succÃ¨s!");
+										  userController.setTexteMsg("Validation effectuée avec succès!");
 										  userController.setRenderMsg(true);
 										  userController.setSevrityMsg("success");		
 								    }
@@ -4689,7 +4700,7 @@ public class DaoController {
 												     iservice.updateObject(daoCorr);
 												 
 												     //Message de confirmation
-													 userController.setTexteMsg("Validation Ã©ffectuÃ©e avec succÃ¨s!");
+													 userController.setTexteMsg("Validation éffectuée avec succès!");
 													 userController.setRenderMsg(true);
 													 userController.setSevrityMsg("success");
 										          }	                     
@@ -4732,7 +4743,7 @@ public class DaoController {
 												   //Actualisation du tableau de bord
 								 					typeActionTb();
 								 					//Message de confirmation
-								 					userController.setTexteMsg("Transmission effectuÃ©e avec succÃ¨s!");
+								 					userController.setTexteMsg("Transmission effectuée avec succès!");
 													userController.setRenderMsg(true);
 													userController.setSevrityMsg("success");
 										        }
@@ -4743,7 +4754,7 @@ public class DaoController {
 										public void uploadCharge(FileUploadEvent event) throws java.io.FileNotFoundException { 
 										 //condition de chargement d'un document : Nature sÃ¯Â¿Â½lectionnÃ¯Â¿Â½e 
 										 if((docNature == null || "".equals(docNature))){
-											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sÃ©lectionnÃ©e pour le chargement! ","");
+											 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Nature non sélectionnée pour le chargement! ","");
 											FacesContext.getCurrentInstance().addMessage(null, msg);	
 											 
 											 }else {
@@ -4773,11 +4784,11 @@ public class DaoController {
 											//chargeNatureDocTrans();
 											chargeDossierCharge();
 											
-											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectuÃ©!", "");
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers bien effectué!", "");
 											FacesContext.getCurrentInstance().addMessage(null, msg);
 											chargeDossierCharge();
 											}else {
-												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistrÃ©, charger Ã Â  nouveau un document ! ","");
+												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger Ã Â  nouveau un document ! ","");
 												FacesContext.getCurrentInstance().addMessage(null, msg);	
 												
 											}
@@ -4817,11 +4828,11 @@ public class DaoController {
 											//chargeNatureDocTrans();
 											chargeDossierAutorisation();
 											
-											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Document enregistrÃ©!", "");
+											FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Document enregistré!", "");
 											FacesContext.getCurrentInstance().addMessage(null, msg);
 											//chargeDossierCharge();
 											}else {
-												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistrÃ©, charger ÃƒÂ  nouveau un document ! ","");
+												FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Document non enregistré, charger ÃƒÂ  nouveau un document ! ","");
 												FacesContext.getCurrentInstance().addMessage(null, msg);	
 												
 											}
@@ -4928,13 +4939,13 @@ public class DaoController {
 														    	
 														
 													                  }else 
-													                     if(slctdTd.getDacMention().equalsIgnoreCase("ValidÃ© et retour Ã Â  l'AC")){
+													                     if(slctdTd.getDacMention().equalsIgnoreCase("Validé et retour Ã Â  l'AC")){
 													    	                statutSanction ="D5V";
 															                statutSanRetour ="0";
 													                         }
 											  
 										                                }else 
-										                	                if(resultat.equalsIgnoreCase("RejetÃ©")) {
+										                	                if(resultat.equalsIgnoreCase("Rejeté")) {
 												                                  statutSanction ="SRO";
 												                                  statutSanRetour ="1";
 											                                    }else 
@@ -4980,7 +4991,7 @@ public class DaoController {
 												 		 etatPV = true;
 										     			 etatValiderCsv = false;
 										     				     
-														 userController.setTexteMsg("Votre sanction a Ã©tÃ© apportÃ©e avec succÃ¨s!");
+														 userController.setTexteMsg("Votre sanction a été apportée avec succès!");
 														 userController.setRenderMsg(true);
 														 userController.setSevrityMsg("success");
 									     }   
@@ -5040,7 +5051,7 @@ public class DaoController {
 														//Actualisation du tableau de bord
 														typeActionTb();
 														//Message de confirmation
-														userController.setTexteMsg("DAO PubliÃ©!");
+														userController.setTexteMsg("DAO Publié!");
 														userController.setRenderMsg(true);
 														userController.setSevrityMsg("success");		
 									   }
@@ -5104,7 +5115,7 @@ public class DaoController {
 										  
 										  
 										  
-										   //Methode de vÃ©rification
+										   //Methode de vérification
 										   public void checkVente() {
 												 if(sitDac.equalsIgnoreCase("Nat")) { 
 													 panelNcc1 = true;
@@ -5188,7 +5199,7 @@ public class DaoController {
 													               newVente.setTCandidats(newCandidat);
 													               iservice.addObject(newVente);
 													               
-													                //RecupÃ©ration du DAO dans T_DAC_SPECS
+													                //Recupération du DAO dans T_DAC_SPECS
 														            listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 											     			  		 new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 											     			  		    if (!listDao.isEmpty()) {
@@ -5202,7 +5213,7 @@ public class DaoController {
 											     			  		    
 														  				      constantService.getStatut("RET");
 												 							  //Historisation du / des retraits
-												 						      historiser("RET",newDao.getDacCode(),"DAO retirÃ©");
+												 						      historiser("RET",newDao.getDacCode(),"DAO retiré");
 														  				
 											    			  				  //Activation du bouton Ã¯Â¿Â½dition du rÃ¯Â¿Â½cu
 												     			  			  confirmPaie = true;
@@ -5214,7 +5225,7 @@ public class DaoController {
 													                    	  
 											     			  				   //Message de Confirmation
 											     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											     					           userController.setTexteMsg("Retrait effectuÃ© avec succÃ¨s");
+											     					           userController.setTexteMsg("Retrait effectué avec succès");
 											     							   userController.setRenderMsg(true);
 											     							   userController.setSevrityMsg("success");	
 													         }else {
@@ -5278,9 +5289,9 @@ public class DaoController {
 											      			  		    
 											 			  				        constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
-												 						       historiser("DVE",newDao.getDacCode(),"DAO payÃ©");
+												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
 											     			  				    
-											     			  				   //Activation du bouton Ã©dition du rÃ©cu
+											     			  				   //Activation du bouton édition du récu
 											     			  				   confirmPaie = true;
 											     			  				   confirmInter = false;
 											     			  				   etatRecu = true;
@@ -5292,7 +5303,7 @@ public class DaoController {
 											     			 		           chargeData();
 											      			  				   //Message de Confirmation
 											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											      					           userController.setTexteMsg("Paiement effectuÃ© avec succÃ¨s");
+											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
 													                 }
@@ -5300,7 +5311,7 @@ public class DaoController {
 											                }
 											  //Fin Methode de Paiement
 											  
-											  //vider les champs aprÃ¨s un paiement
+											  //vider les champs après un paiement
 											  public void cleanPaiement() {
 												  newCandidat = new TCandidats();
 												  soumission = new TSoumissions();
@@ -5380,7 +5391,7 @@ public class DaoController {
 														  				      
 														  				     constantService.getStatut("RET");
 												 							  	//Historisation du / des retraits
-												 						       historiser("RET",newDao.getDacCode(),"DAO retirÃ©");
+												 						       historiser("RET",newDao.getDacCode(),"DAO retiré");
 														  				
 											    			  				 //Activation du bouton Ã¯Â¿Â½dition du rÃ¯Â¿Â½cu
 												 						      confirmPaie = false;
@@ -5393,7 +5404,7 @@ public class DaoController {
 											    			 		          
 											     			  				   //Message de Confirmation
 											     					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											     					           userController.setTexteMsg("Retrait effectuÃ© avec succÃ¨s");
+											     					           userController.setTexteMsg("Retrait effectué avec succès");
 											     							   userController.setRenderMsg(true);
 											     							   userController.setSevrityMsg("success");	
 													         }else {
@@ -5439,7 +5450,7 @@ public class DaoController {
 											      			  		    
 											 			  				        constantService.getStatut("DVE");
 												 							  	//Historisation du / des retraits
-												 						       historiser("DVE",newDao.getDacCode(),"DAO payÃ©");
+												 						       historiser("DVE",newDao.getDacCode(),"DAO payé");
 											     			  				 
 												 						       //Activation du bouton Ã¯Â¿Â½dition du rÃ¯Â¿Â½cu
 													 						   confirmPaie = false;
@@ -5452,7 +5463,7 @@ public class DaoController {
 											     			 		           chargeData();
 											      			  				   //Message de Confirmation
 											      					           //FacesContext.getCurrentInstance().addMessage("",new FacesMessage(FacesMessage.SEVERITY_INFO, "Paiement effectuÃ¯Â¿Â½ avec succÃ¯Â¿Â½s", ""));
-											      					           userController.setTexteMsg("Paiement effectuÃ© avec succÃ¨s");
+											      					           userController.setTexteMsg("Paiement effectué avec succès");
 											      							   userController.setRenderMsg(true);
 											      							   userController.setSevrityMsg("success");
 													                 }
@@ -5490,7 +5501,7 @@ public class DaoController {
 													}else {
 														//infoNcc=false;
 														soumission = new TSoumissions();
-														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le NCC n'est pas inscrit dans la base des MarchÃ©s Publics! ", "")); 	 
+														FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Le NCC n'est pas inscrit dans la base des Marchés Publics! ", "")); 	 
 													}
 												 }
 											  
@@ -5730,7 +5741,7 @@ public class DaoController {
 		     
 		     
 		     
-		     //Methode pour vider la liste des critÃ¨res du lot 0
+		     //Methode pour vider la liste des critères du lot 0
 		     public void viderCritereLot0() {
 		    	 /*listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
 						    new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,"0"),
@@ -5741,7 +5752,7 @@ public class DaoController {
 				  iservice.deleteObject(crit); 
 		  		  chargeCritereSaisie();
 		  		  chargeCritere();
-			  	  userController.setTexteMsg("Liste des critÃ¨res vidÃ©e avec succÃ¨s!");
+			  	  userController.setTexteMsg("Liste des critères vidée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
 			    } 	         
@@ -5765,13 +5776,13 @@ public class DaoController {
 		  		 chargeCritere();
 		  		 //critere="";
 		  		 //newTempFactorise.getTempLotPlage().equalsIgnoreCase("");
-		  		 userController.setTexteMsg("Liste des critÃ¨res vidÃ©e avec succÃ¨s!");
+		  		 userController.setTexteMsg("Liste des critères vidée avec succès!");
 				 userController.setRenderMsg(true);
 				 userController.setSevrityMsg("success");
 		     }
 		     
 		     
-		     //Methode pour vider la liste des critÃ¨res (lot par lot)
+		     //Methode pour vider la liste des critères (lot par lot)
 		     public void viderCritereByLot() {
 		    	 
 		    	 listeDetCritere = (List<TDetCritAnalyseDac>) iservice.getObjectsByColumn("TDetCritAnalyseDac", new ArrayList<String>(Arrays.asList("DCAD_NUM")),
@@ -5784,7 +5795,7 @@ public class DaoController {
 			      chargeCritereByLot();
 			      chargeCritereFactCombobox();
 			      chargeLotCritere();
-			  	  userController.setTexteMsg("Liste des critÃ¨res vidÃ©e avec succÃ¨s!");
+			  	  userController.setTexteMsg("Liste des critères vidée avec succès!");
 				  userController.setRenderMsg(true);
 				  userController.setSevrityMsg("success");
 			    }
@@ -5805,7 +5816,7 @@ public class DaoController {
 			     chargeCritereFactCombobox();
 			     chargeLotCritere();
 			     chargeCritereByLot();
-			  	 userController.setTexteMsg("Liste des critÃ¨res vidÃ©e avec succÃ¨s!");
+			  	 userController.setTexteMsg("Liste des critères vidée avec succès!");
 				 userController.setRenderMsg(true);
 				 userController.setSevrityMsg("success");
 				 
@@ -5825,7 +5836,7 @@ public class DaoController {
 			  public void publierDao() throws IOException{ 
 			 		if (publicationSelection.size()==0) {
 						FacesContext.getCurrentInstance().addMessage(null,
-								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun DAC selectionnÃ©", ""));
+								new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun DAC selectionné", ""));
 					}
 			 		else{
 			 				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
@@ -5855,14 +5866,14 @@ public class DaoController {
 									}
 				 		
 				 		//Historisation de l'opÃ¯Â¿Â½ration
-					     historiser(""+statutPub, newDao.getDacCode(),"OpÃ©ration publiÃ©e par la DMP");
+					     historiser(""+statutPub, newDao.getDacCode(),"Opération publiée par la DMP");
 					     
                         //Actualisation du Tableau de Bord
 					     typeActionTb();
 					    //Rafraichissement de la liste
 						 chargeDaoPUB();
 						//Message de confirmation		  
-						 userController.setTexteMsg(" Publication effectuÃ©e avec succÃ¨s !");
+						 userController.setTexteMsg(" Publication effectuée avec succès !");
 						 userController.setRenderMsg(true);
 						 userController.setSevrityMsg("success");
 						//return null;
@@ -8831,7 +8842,7 @@ public class DaoController {
 		 }
 	 }
 	*/
-	 // methode pour enregistrer le document apres avoir insÃ©rer les bookmarks
+	 // methode pour enregistrer le document apres avoir insérer les bookmarks
 	 
 	 //WINDOWS
 	 public void saveDaoFile() throws IOException {
@@ -9362,7 +9373,7 @@ public class DaoController {
 								}*/
 							
 							if (bookmarkNames.contains("DPAO_IC_7_1_adresse_clarification_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_clarification_20", adresseIter.getLibdetail());
-							_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacÃ©e");
+							_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacée");
 							//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_20", ""); // clarification dé¢µt
 							//if(bookmarkNames.contains("DPAO_IC_7_1_boite_postale_20")) replaceBookmarkByValue("DPAO_IC_7_1_boite_postale_20", "");
 							//if(bookmarkNames.contains("DPAO_IC_7_1_numero_telephone_20")) replaceBookmarkByValue("DPAO_IC_7_1_numero_telephone_20", "");
@@ -9376,13 +9387,13 @@ public class DaoController {
 							
 							if(bookmarkNames.contains("DPAO_IC_17_2_delai_execution_20")) replaceBookmarkByValue("DPAO_IC_17_2_delai_execution_20", daoIter.getLaaDelaiExe().toString());
 							
-							_logger.info("DPAO_IC_17_2_delai_execution_20 remplacÃ©e");
+							_logger.info("DPAO_IC_17_2_delai_execution_20 remplacée");
 							if(bookmarkNames.contains("DPAO_IC_19_1_delai_validite_20")) replaceBookmarkByValue("DPAO_IC_19_1_delai_validite_20", daoIter.getAaoDelaiVal().toString());
 							if(bookmarkNames.contains("DPAO_IC_20_2_cautionnemant_provisoire_20")) replaceBookmarkByValue("DPAO_IC_20_2_cautionnemant_provisoire_20", aaoIter.getLaaMtCaut().toString());
 							if(bookmarkNames.contains("DPAO_IC_21_1_nombre_copie_20")) replaceBookmarkByValue("DPAO_IC_21_1_nombre_copie_20", daoIter.getDacNbrCopieOff().toString());
 							
 							if (bookmarkNames.contains("DPAO_IC_23_1_adresse_remise_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_remise_20", adresseIter.getLibdetail());
-							_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacÃ©e");
+							_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacée");
 							
 							//if(bookmarkNames.contains("DPAO_IC_23_1_personne_20")) replaceBookmarkByValue("DPAO_IC_23_1_personne_20", ""); /* remise des offres debut */
 							
@@ -9397,7 +9408,7 @@ public class DaoController {
 									replaceBookmarkByValue("DPAO_IC_23_1_date_20", date.format(daoIter.getAaoDateRecep()));
 								}
 							if(bookmarkNames.contains("DPAO_IC_23_1_heure_20")) replaceBookmarkByValue("DPAO_IC_23_1_heure_20", daoIter.getAaoHeureRecep()); // remise des offres fin
-							_logger.info("DPAO_IC_23_1_heure_20 remplacÃ©e");
+							_logger.info("DPAO_IC_23_1_heure_20 remplacée");
 							
 							if(bookmarkNames.contains("DPAO_IC_26_1_lieu_ouverture_20")) replaceBookmarkByValue("DPAO_IC_26_1_lieu_ouverture_20", daoIter.getAaoLieuRecep()); // ouverture des offres debut 
 							if(bookmarkNames.contains("DPAO_IC_26_1_date_20")) 
@@ -9486,8 +9497,8 @@ public class DaoController {
 				}*/
 			
 			if (bookmarkNames.contains("DPAO_IC_7_1_adresse_clarification_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_clarification_20", adresseIter.getLibdetail());
-			_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacÃ©");
-			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_20", ""); // clarification dÃ©but
+			_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacé");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_20", ""); // clarification début
 			//if(bookmarkNames.contains("DPAO_IC_7_1_boite_postale_20")) replaceBookmarkByValue("DPAO_IC_7_1_boite_postale_20", "");
 			//if(bookmarkNames.contains("DPAO_IC_7_1_numero_telephone_20")) replaceBookmarkByValue("DPAO_IC_7_1_numero_telephone_20", "");
 			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_electronique_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_electronique_20", ""); // clarification fin 
@@ -9500,13 +9511,13 @@ public class DaoController {
 			
 			if(bookmarkNames.contains("DPAO_IC_17_2_delai_execution_20")) replaceBookmarkByValue("DPAO_IC_17_2_delai_execution_20", daoIter.getLaaDelaiExe().toString());
 			
-			_logger.info("DPAO_IC_17_2_delai_execution_20 remplacÃ©");
+			_logger.info("DPAO_IC_17_2_delai_execution_20 remplacé");
 			if(bookmarkNames.contains("DPAO_IC_19_1_delai_validite_20")) replaceBookmarkByValue("DPAO_IC_19_1_delai_validite_20", daoIter.getAaoDelaiVal().toString());
 			if(bookmarkNames.contains("DPAO_IC_20_2_cautionnemant_provisoire_20")) replaceBookmarkByValue("DPAO_IC_20_2_cautionnemant_provisoire_20", aaoIter.getLaaMtCaut().toString());
 			if(bookmarkNames.contains("DPAO_IC_21_1_nombre_copie_20")) replaceBookmarkByValue("DPAO_IC_21_1_nombre_copie_20", daoIter.getDacNbrCopieOff().toString());
 			
 			if (bookmarkNames.contains("DPAO_IC_23_1_adresse_remise_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_remise_20", adresseIter.getLibdetail());
-			_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacÃ©");
+			_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacé");
 			
 			//if(bookmarkNames.contains("DPAO_IC_23_1_personne_20")) replaceBookmarkByValue("DPAO_IC_23_1_personne_20", ""); /* remise des offres debut */
 			
@@ -9521,7 +9532,7 @@ public class DaoController {
 					replaceBookmarkByValue("DPAO_IC_23_1_date_20", date.format(daoIter.getAaoDateRecep()));
 				}
 			if(bookmarkNames.contains("DPAO_IC_23_1_heure_20")) replaceBookmarkByValue("DPAO_IC_23_1_heure_20", daoIter.getAaoHeureRecep()); // remise des offres fin
-			_logger.info("DPAO_IC_23_1_heure_20 remplacÃ©");
+			_logger.info("DPAO_IC_23_1_heure_20 remplacé");
 			
 			if(bookmarkNames.contains("DPAO_IC_26_1_lieu_ouverture_20")) replaceBookmarkByValue("DPAO_IC_26_1_lieu_ouverture_20", daoIter.getAaoLieuRecep()); // ouverture des offres debut 
 			if(bookmarkNames.contains("DPAO_IC_26_1_date_20")) 
@@ -9609,8 +9620,8 @@ public class DaoController {
 				}*/
 			
 			if (bookmarkNames.contains("DPAO_IC_7_1_adresse_clarification_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_clarification_20", adresseIter.getLibdetail());
-			_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacÃ©");
-			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_20", ""); // clarification dÃ©but
+			_logger.info("DPAO_IC_7_1_adresse_clarification_20 remplacé");
+			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_20", ""); // clarification début
 			//if(bookmarkNames.contains("DPAO_IC_7_1_boite_postale_20")) replaceBookmarkByValue("DPAO_IC_7_1_boite_postale_20", "");
 			//if(bookmarkNames.contains("DPAO_IC_7_1_numero_telephone_20")) replaceBookmarkByValue("DPAO_IC_7_1_numero_telephone_20", "");
 			//if(bookmarkNames.contains("DPAO_IC_7_1_adresse_electronique_20")) replaceBookmarkByValue("DPAO_IC_7_1_adresse_electronique_20", ""); // clarification fin 
@@ -9623,13 +9634,13 @@ public class DaoController {
 			
 			if(bookmarkNames.contains("DPAO_IC_17_2_delai_execution_20")) replaceBookmarkByValue("DPAO_IC_17_2_delai_execution_20", daoIter.getLaaDelaiExe().toString());
 			
-			_logger.info("DPAO_IC_17_2_delai_execution_20 remplacÃ©");
+			_logger.info("DPAO_IC_17_2_delai_execution_20 remplacé");
 			if(bookmarkNames.contains("DPAO_IC_19_1_delai_validite_20")) replaceBookmarkByValue("DPAO_IC_19_1_delai_validite_20", daoIter.getAaoDelaiVal().toString());
 			if(bookmarkNames.contains("DPAO_IC_20_2_cautionnemant_provisoire_20")) replaceBookmarkByValue("DPAO_IC_20_2_cautionnemant_provisoire_20", aaoIter.getLaaMtCaut().toString());
 			if(bookmarkNames.contains("DPAO_IC_21_1_nombre_copie_20")) replaceBookmarkByValue("DPAO_IC_21_1_nombre_copie_20", daoIter.getDacNbrCopieOff().toString());
 			
 			if (bookmarkNames.contains("DPAO_IC_23_1_adresse_remise_20")) replaceBookmarkByValue("DPAO_IC_23_1_adresse_remise_20", adresseIter.getLibdetail());
-			_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacÃ©");
+			_logger.info("DPAO_IC_23_1_adresse_remise_20 remplacé");
 			
 			//if(bookmarkNames.contains("DPAO_IC_23_1_personne_20")) replaceBookmarkByValue("DPAO_IC_23_1_personne_20", ""); /* remise des offres debut */
 			
@@ -9644,7 +9655,7 @@ public class DaoController {
 					replaceBookmarkByValue("DPAO_IC_23_1_date_20", date.format(daoIter.getAaoDateRecep()));
 				}
 			if(bookmarkNames.contains("DPAO_IC_23_1_heure_20")) replaceBookmarkByValue("DPAO_IC_23_1_heure_20", daoIter.getAaoHeureRecep()); // remise des offres fin
-			_logger.info("DPAO_IC_23_1_heure_20 remplacÃ©");
+			_logger.info("DPAO_IC_23_1_heure_20 remplacé");
 			
 			if(bookmarkNames.contains("DPAO_IC_26_1_lieu_ouverture_20")) replaceBookmarkByValue("DPAO_IC_26_1_lieu_ouverture_20", daoIter.getAaoLieuRecep()); // ouverture des offres debut 
 			if(bookmarkNames.contains("DPAO_IC_26_1_date_20")) 
@@ -10047,7 +10058,7 @@ public class DaoController {
 			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
 			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
 				
-			// DonnÃ©es particulier de l'appel d'offre
+			// Données particulier de l'appel d'offre
 			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
@@ -10147,7 +10158,7 @@ public class DaoController {
 			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
 			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
 				
-			// DonnÃ©es particulier de l'appel d'offre
+			// Données particulier de l'appel d'offre
 			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
@@ -10247,7 +10258,7 @@ public class DaoController {
 			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
 			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
 				
-			// DonnÃ©es particulier de l'appel d'offre
+			// Données particulier de l'appel d'offre
 			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
@@ -10347,7 +10358,7 @@ public class DaoController {
 			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
 			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
 				
-			// DonnÃ©es particulier de l'appel d'offre
+			// Données particulier de l'appel d'offre
 			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
@@ -10447,7 +10458,7 @@ public class DaoController {
 			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
 			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
 				
-			// DonnÃ©es particulier de l'appel d'offre
+			// Données particulier de l'appel d'offre
 			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
@@ -10547,7 +10558,7 @@ public class DaoController {
 			if(bookmarkNames.contains("RPAO_ouverture_heure")) replaceBookmarkByValue("RPAO_ouverture_heure", daoIter.getAaoDteHeurOuv());
 			if(bookmarkNames.contains("RPAO_nb_copie")) replaceBookmarkByValue("RPAO_nb_copie", daoIter.getDacNbrCopieOff().toString());
 				
-			// DonnÃ©es particulier de l'appel d'offre
+			// Données particulier de l'appel d'offre
 			if(bookmarkNames.contains("DPAO_ac")) replaceBookmarkByValue("DPAO_ac", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_ac01")) replaceBookmarkByValue("DPAO_ac01", daoIter.getStrLibelleLong().toUpperCase());
 			if(bookmarkNames.contains("DPAO_imputation")) replaceBookmarkByValue("DPAO_imputation", daoIter.getLaaLbgImputation());
@@ -10599,7 +10610,7 @@ public class DaoController {
 		}
 		break;*/
 		}
-		_logger.info("Bookmarks remplacÃ©s");
+		_logger.info("Bookmarks remplacés");
 	}
 	
 	
@@ -10681,7 +10692,7 @@ public class DaoController {
 	
 	public void setProtect() {		
 		getDocument().enforceReadonlyProtection("emap31032020", none);
-		System.out.println("protÃ©gÃ©");
+		System.out.println("protégé");
 	}
 	
 	public void verrouillage() {
@@ -10759,6 +10770,22 @@ public class DaoController {
 		saveDaoFile();
 		//downloadDao();
 		telechargerDao();
+	}
+
+	public boolean isLibBailleur() {
+		return libBailleur;
+	}
+
+	public void setLibBailleur(boolean libBailleur) {
+		this.libBailleur = libBailleur;
+	}
+
+	public boolean isInputBailleur() {
+		return inputBailleur;
+	}
+
+	public void setInputBailleur(boolean inputBailleur) {
+		this.inputBailleur = inputBailleur;
 	}
 	
 	/*******  Fin document  *************/
