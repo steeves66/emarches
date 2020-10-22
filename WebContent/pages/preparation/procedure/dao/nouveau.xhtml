@@ -277,21 +277,22 @@
                   <div class="col-sm-9"> 
                    <table>
 				     <tr>
-				     <td style="width: 50px"> 
+				     <td style="width: 60px"> 
 				     <p:selectOneRadio value="#{daoController.newAvis.aaoAvisBai}" id="console22">
 				     <p:ajax  listener="#{daoController.avisBailleur()}" global="false" update="gnl:baill"></p:ajax>
-			            <f:selectItem itemLabel="" itemValue="O" />
+			            <f:selectItem itemLabel="Oui" itemValue="O" />
+			            <f:selectItem itemLabel="Non" itemValue="N" />
 			        </p:selectOneRadio>
 				     </td>
 				    
 				    <h:panelGroup  id="baill">
-				    <td style="width: 220px">
+				    <td style="width: 210px">
 				     <h:panelGroup  rendered="#{daoController.libBailleur}">
 				     <label  class="control-label">Responsable des bailleurs</label>
 				     </h:panelGroup>
 				    </td>
 				     
-				    <td style="width:310px">
+				    <td style="width:320px">
 				     <h:panelGroup  rendered="#{daoController.inputBailleur}">
 				     <p:inputText  type="text" styleClass="form-control" value="#{daoController.newAvis.aaoRespBai}"   style="width: 100%" />
 				     </h:panelGroup>
@@ -756,23 +757,14 @@
 		                 </f:facet>
 		               </p:cellEditor>
 				        </p:column>
-				        
+				        	         
+				     <p:column headerText="Imputation" styleClass="col-sm-2">
+		             <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
+		             </h:outputText>
+				     </p:column>
+				          
 				     <p:column headerText="Variante ?" styleClass="col-sm-1">
-				         
-         			 <p:cellEditor>
-                          <f:facet name="output">
-         				  <h:outputText value="#{slctdTb.laaVariante == 'O'?'OUI':'NON'}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-         				     <h:selectOneMenu id="variante" value="#{slctdTb.laaVariante}" style="width:100%; color:#0000">
-			              <f:selectItem itemLabel="Choisir" itemValue="" />
-                         <f:selectItem itemLabel="OUI" itemValue="O" />
-                         <f:selectItem itemLabel="NON" itemValue="N" />
-                        </h:selectOneMenu>
-         				  </f:facet>
-         		    </p:cellEditor>
-         		    
-         		     <h:panelGroup rendered="false">
+         		     <h:panelGroup rendered="true">
          		     <h:panelGroup rendered="#{slctdTb.laaVariante == 'O'}">  
                         <p:commandLink action="#{daoController.majVariante('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:finance"
 				               title="Variante(Oui/Non)">
@@ -789,13 +781,7 @@
                           </p:commandLink>
                         </h:panelGroup>
          		     </h:panelGroup>
-         		     
 				      </p:column>
-				      			         
-				        <p:column headerText="Imputation" styleClass="col-sm-2">
-		                <h:outputText value="#{slctdTb.TLBudgets.lbgImputation}" >
-		                </h:outputText>
-				        </p:column>
 				        
                          <p:column width="3%">
 				              <p:commandLink action="#{daoController.chargeImputation()}" oncomplete="PF('imputationDlg').show()" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
@@ -804,9 +790,7 @@
 						  </p:commandLink>
 				        </p:column>
                          
-                
-				        
-				        
+
 				         <p:column headerText="Actions" width="5%">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLot}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  

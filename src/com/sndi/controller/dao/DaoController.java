@@ -3947,6 +3947,7 @@ public class DaoController {
 					  }
 				  }
 				  
+				  //
 				  public void checkSituation() {
 						 if(newAvis.getAaoRegQual().equalsIgnoreCase("Unitaire")) { 
 							 etatQualif = true;
