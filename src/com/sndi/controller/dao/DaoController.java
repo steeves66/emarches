@@ -612,6 +612,7 @@ public class DaoController {
 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()));
 	 }
 	 
+	 //Gestion des marges de préférence
 	 public void saveMarge (String marge) {
 		 List<TDacSpecs> LS  = iservice.getObjectsByColumn("TDacSpecs", new WhereClause("DAC_CODE",Comparateur.EQ,""+sltMarge.getDacCode()));
 		 TDacSpecs dac = new TDacSpecs(); 
@@ -642,6 +643,7 @@ public class DaoController {
 		    }
 	 }
 	 
+	 //Matérialisation du DAO en statut d'Affectation
 	 public void updateDao() {
 			listDao = (List<TDacSpecs>) iservice.getObjectsByColumn("TDacSpecs", new ArrayList<String>(Arrays.asList("DAC_CODE")),
 					new WhereClause("DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
@@ -655,20 +657,14 @@ public class DaoController {
 	 
 	//Affectation Normale d'une fonction
 	 public void saveAffectationRespo(String respo) {            
-		 
 		 listSeances =  (List<TSeances>) iservice.getObjectsByColumn("TSeances", new ArrayList<String>(Arrays.asList("SEA_NUM")),
 					new WhereClause("SEA_TSE_CODE",WhereClause.Comparateur.EQ,"CIA"), 
+					new WhereClause("SEA_OBSERVATION",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()),
 					new WhereClause("SEA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 		            new WhereClause("SEA_FON_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 		       if(!listSeances.isEmpty()) { 
 		    	   sltSeances=listSeances.get(0);
-		    	   
-		    	   /*listSeances =  (List<TSeances>) iservice.getObjectsByColumn("TSeances", new ArrayList<String>(Arrays.asList("SEA_NUM")),
-							new WhereClause("SEA_TSE_CODE",WhereClause.Comparateur.EQ,"CIA"), 
-							new WhereClause("SEA_LIBELLE",WhereClause.Comparateur.EQ,""+sltSeances.getSeaLibelle().contains(sltImput.getDacCode())),
-							new WhereClause("SEA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
-				            new WhereClause("SEA_FON_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-				       if(!listSeances.isEmpty()) { */
+		    	
 				    	   updateDao();
 				    	    
 				    	     TCommissionSpecifique com = new TCommissionSpecifique();
@@ -731,80 +727,6 @@ public class DaoController {
 					   		userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 							userController.setRenderMsg(true);
 							userController.setSevrityMsg("success");
-				      /*//}else {
-				    	   updateDao();
-				    	   
-				    	   String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DU DAO N°";
-				  		   String exo=chaine+newDao.getDacCode();
-				  		   newSeance.setTFonction(userController.getSlctd().getTFonction());
-				  		   newSeance.setTOperateur(userController.getSlctd().getTOperateur());
-				  		   newSeance.setTTypeSeance(new TTypeSeance("CIA"));
-				  		   newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
-				  		   newSeance.setSeaLibelle(exo);
-				  		   iservice.addObject(newSeance);		
-				  	    		 
-				  	       TCommissionSpecifique com = new TCommissionSpecifique();
-				  	       com.setTStructure(new TStructure(sltImput.getStrCode()));
-				  	       com.setTDacSpecs(newDao);
-				  	       com.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-				  	       com.setTTypeCommission(new TTypeCommission("CIA"));
-				  	       com.setComDteSaisi(Calendar.getInstance().getTime());
-				  	       com.setComMarCode(slctdTd.getTymCode());
-				  	       iservice.addObject(com);
-				  	 	
-				  		   TDetCommissionSeance det = new TDetCommissionSeance();
-				   		   det.setDcsDteSaisi(Calendar.getInstance().getTime());
-				   		   det.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
-				   		   det.setTDacSpecs(newDao);
-				   		   det.setTSeances(newSeance);
-				   		   det.setDcsFonCod(sltImput.getFonCod());
-				   		   det.setDcsOpeMatricule(sltImput.getOpeMatricule());
-				   		   det.setTStructure(new TStructure(sltImput.getStrCode()));
-				   		   det.setTCommissionSpecifique(com);
-				   		   det.setTOperateur(userController.getSlctd().getTOperateur());
-				   		   det.setTTypeCommission(new TTypeCommission(com.getTTypeCommission().getTcoCode()));
-				   		   det.setDcsPresent("O");
-				   		   det.setDcsNomMbm(sltImput.getOpeNom());
-				   		   det.setDcsTelMbm(sltImput.getOpeContact());
-				   		   det.setDcsMbmRespo(""+respo);
-				   		   iservice.addObject(det); 
-				   		   
-				   		   //Enregistrement dans TDaoAffectation
-				   		listeDaoAff = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
-								new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+sltImput.getOpeMatricule()), 
-								new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
-			    	              if(!listeDaoAff.isEmpty()) { 
-			    		              supDaoAff=listeDaoAff.get(0);
-			    		              supDaoAff.setDafDcsMbmRespo(""+respo);
-			    		              iservice.updateObject(supDaoAff);
-			    		              }else {
-			    		            	//Enregistrement dans TDaoAffectation
-			    				 	       TDaoAffectation newAff = new TDaoAffectation(); 
-			    				 		   newAff.setDafDacCode(newDao.getDacCode());
-			    				 		   newAff.setDafOpeMatricule(sltImput.getOpeMatricule());
-			    				 		   newAff.setDafStaCode(newDao.getTStatut().getStaCode());
-			    				 		   newAff.setDafStatutRetour(newDao.getDacStatutRetour());
-			    				 		   newAff.setDafDacObjet(newDao.getDacObjet());
-			    				 		   newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
-			    				 		   newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
-			    				 		   newAff.setDafTypePlan(newDao.getDacTypePlan());
-			    				 		   newAff.setDafDacStr(newDao.getTStructure().getStrCode());
-			    				 		   newAff.setDafDacRecherche(newDao.getDacRecherche());
-			    				 		   newAff.setDafDcsMbmRespo(det.getDcsMbmRespo());
-			    				 		   newAff.setTDetCommissionSeance(det);
-			    				 		   newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
-			    				 		   newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
-			    				 		   newAff.setDafMention(newDao.getDacMention());
-			    				 		   iservice.addObject(newAff);
-			    		              }
-				   		   //Chargement des fonctions à imputer
-				   		   chargeFonctionImput();
-				   		  //Message de Confirmation
-				   		  userController.setTexteMsg("Responsabilité Attribuée avec succès!");
-						  userController.setRenderMsg(true);
-						  userController.setSevrityMsg("success");
-				      // }
-            */		    	   
 		       }else {
 		    	   
 		    	   updateDao();
@@ -815,6 +737,7 @@ public class DaoController {
 		  		   newSeance.setTOperateur(userController.getSlctd().getTOperateur());
 		  		   newSeance.setTTypeSeance(new TTypeSeance("CIA"));
 		  		   newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
+		  		   newSeance.setSeaObservation(newDao.getDacCode());
 		  		   newSeance.setSeaLibelle(exo);
 		  		   iservice.addObject(newSeance);		
 		  	    		 
@@ -886,17 +809,11 @@ public class DaoController {
 		 public void saveAffectation() {            
 			 listSeances =  (List<TSeances>) iservice.getObjectsByColumn("TSeances", new ArrayList<String>(Arrays.asList("SEA_NUM")),
 						new WhereClause("SEA_TSE_CODE",WhereClause.Comparateur.EQ,"CIA"), 
+						new WhereClause("SEA_OBSERVATION",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()),
 						new WhereClause("SEA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
 			            new WhereClause("SEA_FON_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			       if(!listSeances.isEmpty()) { 
 			    	   sltSeances=listSeances.get(0);
-			    	   
-			    	   listSeances =  (List<TSeances>) iservice.getObjectsByColumn("TSeances", new ArrayList<String>(Arrays.asList("SEA_NUM")),
-								new WhereClause("SEA_TSE_CODE",WhereClause.Comparateur.EQ,"CIA"), 
-								new WhereClause("SEA_LIBELLE",WhereClause.Comparateur.EQ,""+sltSeances.getSeaLibelle().contains(sltImput.getDacCode())),
-								new WhereClause("SEA_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()),
-					            new WhereClause("SEA_FON_CODE",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-					       if(!listSeances.isEmpty()) { 
 					    	   updateDao();
 					    	    
 					    	     TCommissionSpecifique com = new TCommissionSpecifique();
@@ -959,80 +876,6 @@ public class DaoController {
 						   		userController.setTexteMsg("Responsabilité Attribuée avec succès!");
 								userController.setRenderMsg(true);
 								userController.setSevrityMsg("success");
-					       }else {
-					    	   updateDao();
-					    	   
-					    	   String chaine="SEANCE DE COMMISSION INTERNE D'ANALYSE DU DAO N°";
-					  		   String exo=chaine+newDao.getDacCode();
-					  		   newSeance.setTFonction(userController.getSlctd().getTFonction());
-					  		   newSeance.setTOperateur(userController.getSlctd().getTOperateur());
-					  		   newSeance.setTTypeSeance(new TTypeSeance("CIA"));
-					  		   newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
-					  		   newSeance.setSeaLibelle(exo);
-					  		   iservice.addObject(newSeance);		
-					  	    		 
-					  	       TCommissionSpecifique com = new TCommissionSpecifique();
-					  	       com.setTStructure(new TStructure(sltImput.getStrCode()));
-					  	       com.setTDacSpecs(newDao);
-					  	       com.setComOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
-					  	       com.setTTypeCommission(new TTypeCommission("CIA"));
-					  	       com.setComDteSaisi(Calendar.getInstance().getTime());
-					  	       com.setComMarCode(slctdTd.getTymCode());
-					  	       iservice.addObject(com);
-					  	 	
-					  		   TDetCommissionSeance det = new TDetCommissionSeance();
-					   		   det.setDcsDteSaisi(Calendar.getInstance().getTime());
-					   		   det.setDcsFonCodSaisi(userController.getSlctd().getTFonction().getFonCod());
-					   		   det.setTDacSpecs(newDao);
-					   		   det.setTSeances(newSeance);
-					   		   det.setDcsFonCod(sltImput.getFonCod());
-					   		   det.setDcsOpeMatricule(sltImput.getOpeMatricule());
-					   		   det.setTStructure(new TStructure(sltImput.getStrCode()));
-					   		   det.setTCommissionSpecifique(com);
-					   		   det.setTOperateur(userController.getSlctd().getTOperateur());
-					   		   det.setTTypeCommission(new TTypeCommission(com.getTTypeCommission().getTcoCode()));
-					   		   det.setDcsPresent("O");
-					   		   det.setDcsNomMbm(sltImput.getOpeNom());
-					   		   det.setDcsTelMbm(sltImput.getOpeContact());
-					   		   det.setDcsMbmRespo("N");
-					   		   iservice.addObject(det); 
-					   		   
-					   		   //Enregistrement dans TDaoAffectation
-					   		listeDaoAff = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
-									new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+sltImput.getOpeMatricule()), 
-									new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
-				    	              if(!listeDaoAff.isEmpty()) { 
-				    		              supDaoAff=listeDaoAff.get(0);
-				    		              supDaoAff.setDafDcsMbmRespo("N");
-				    		              iservice.updateObject(supDaoAff);
-				    		              }else {
-				    		            	//Enregistrement dans TDaoAffectation
-				    				 	       TDaoAffectation newAff = new TDaoAffectation(); 
-				    				 		   newAff.setDafDacCode(newDao.getDacCode());
-				    				 		   newAff.setDafOpeMatricule(sltImput.getOpeMatricule());
-				    				 		   newAff.setDafStaCode(newDao.getTStatut().getStaCode());
-				    				 		   newAff.setDafStatutRetour(newDao.getDacStatutRetour());
-				    				 		   newAff.setDafDacObjet(newDao.getDacObjet());
-				    				 		   newAff.setDafTypeDac(newDao.getTTypeDacSpecs().getTdcCode());
-				    				 		   newAff.setDafDacGestion(newDao.getTGestion().getGesCode());
-				    				 		   newAff.setDafTypePlan(newDao.getDacTypePlan());
-				    				 		   newAff.setDafDacStr(newDao.getTStructure().getStrCode());
-				    				 		   newAff.setDafDacRecherche(newDao.getDacRecherche());
-				    				 		   newAff.setDafDcsMbmRespo(det.getDcsMbmRespo());
-				    				 		   newAff.setTDetCommissionSeance(det);
-				    				 		   newAff.setTModePassation(new TModePassation(newDao.getTModePassation().getMopCode()));
-				    				 		   newAff.setTTypeMarche(new TTypeMarche(newDao.getTTypeMarche().getTymCode()));
-				    				 		   newAff.setDafMention(newDao.getDacMention());
-				    				 		   iservice.addObject(newAff);
-				    		              }
-					   		   //Chargement des fonctions Ã  imputer
-					   		   chargeFonctionImput();
-					   		  //Message de Confirmation
-					   		  userController.setTexteMsg("Responsabilité Attribuée avec succès!");
-							  userController.setRenderMsg(true);
-							  userController.setSevrityMsg("success");
-					       }
-			    	   
 			       }else {
 			    	   
 			    	   updateDao();
@@ -1044,6 +887,7 @@ public class DaoController {
 			  		   newSeance.setTTypeSeance(new TTypeSeance("CIA"));
 			  		   newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
 			  		   newSeance.setSeaLibelle(exo);
+			  		   newSeance.setSeaObservation(newDao.getDacCode());
 			  		   iservice.addObject(newSeance);		
 			  	    		 
 			  	       TCommissionSpecifique com = new TCommissionSpecifique();
@@ -1072,7 +916,7 @@ public class DaoController {
 			   		   det.setDcsMbmRespo("N");
 			   		   iservice.addObject(det); 
 			   		   
-			   		listeDaoAff = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
+			   		   listeDaoAff = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
 							new WhereClause("DAF_OPE_MATRICULE",WhereClause.Comparateur.EQ,""+sltImput.getOpeMatricule()), 
 							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+sltImput.getDacCode()));
 		    	              if(!listeDaoAff.isEmpty()) { 
@@ -1139,7 +983,7 @@ public class DaoController {
 				userController.setSevrityMsg("success");
 		     }else {
 		    	 FacesContext.getCurrentInstance().addMessage(null,
-							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette fonction n'a encore fait objet d'une affectation", ""));
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Cette fonction n'a pas encore fait objet d'une affectation", ""));
 		     }	
 		 }
 	 
