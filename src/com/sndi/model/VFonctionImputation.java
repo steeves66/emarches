@@ -1,6 +1,5 @@
 package com.sndi.model;
-// Generated 1 oct. 2020 16:51:58 by Hibernate Tools 4.3.5.Final
-
+// Generated 23 oct. 2020 11:23:02 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -17,180 +16,199 @@ import org.hibernate.annotations.Immutable;
 @Entity
 @Immutable
 @Table(name = "V_FONCTION_IMPUTATION")
-public class VFonctionImputation  implements java.io.Serializable {
+public class VFonctionImputation implements java.io.Serializable {
 
+	private String dacCode;
+	private BigDecimal nb;
+	private BigDecimal dcsNum;
+	private String opeMatricule;
+	private String opeNom;
+	private String opeContact;
+	private String fonCod;
+	private String fonLibelle;
+	private String fonRespo;
+	private String strCode;
+	private String strOpeRespo;
+	private BigDecimal nbrTraite;
+	private BigDecimal nbrEnCours;
+	private BigDecimal nbrValide;
+	private String typbinome;
+	private String typresp;
 
-     private String dacCode;
-     private String opeMatricule;
-     private String opeNom;
-     private String opeContact;
-     private String fonCod;
-     private String fonLibelle;
-     private String fonRespo;
-     private String strCode;
-     private String strOpeRespo;
-     private BigDecimal nbrTraite;
-     private BigDecimal nbrEnCours;
-     private BigDecimal nbrValide;
-     private String typbinome;
+	public VFonctionImputation() {
+	}
 
-    public VFonctionImputation() {
-    }
+	public VFonctionImputation(String dacCode, String opeMatricule, String fonCod, String strCode) {
+		this.dacCode = dacCode;
+		this.opeMatricule = opeMatricule;
+		this.fonCod = fonCod;
+		this.strCode = strCode;
+	}
 
+	public VFonctionImputation(String dacCode, BigDecimal nb,BigDecimal dcsNum, String opeMatricule, String opeNom, String opeContact,
+			String fonCod, String fonLibelle, String fonRespo, String strCode, String strOpeRespo, BigDecimal nbrTraite,
+			BigDecimal nbrEnCours, BigDecimal nbrValide, String typbinome, String typresp) {
+		this.dacCode = dacCode;
+		this.nb = nb;
+		this.dcsNum = dcsNum;
+		this.opeMatricule = opeMatricule;
+		this.opeNom = opeNom;
+		this.opeContact = opeContact;
+		this.fonCod = fonCod;
+		this.fonLibelle = fonLibelle;
+		this.fonRespo = fonRespo;
+		this.strCode = strCode;
+		this.strOpeRespo = strOpeRespo;
+		this.nbrTraite = nbrTraite;
+		this.nbrEnCours = nbrEnCours;
+		this.nbrValide = nbrValide;
+		this.typbinome = typbinome;
+		this.typresp = typresp;
+	}
+
+	@Column(name = "DAC_CODE", nullable = false, length = 20)
+	public String getDacCode() {
+		return this.dacCode;
+	}
+
+	public void setDacCode(String dacCode) {
+		this.dacCode = dacCode;
+	}
+
+	@Column(name = "NB", precision = 22, scale = 0)
+	public BigDecimal getNb() {
+		return this.nb;
+	}
+
+	public void setNb(BigDecimal nb) {
+		this.nb = nb;
+	}
 	
-    public VFonctionImputation(String dacCode, String opeMatricule, String fonCod, String strCode) {
-        this.dacCode = dacCode;
-        this.opeMatricule = opeMatricule;
-        this.fonCod = fonCod;
-        this.strCode = strCode;
-    }
-    public VFonctionImputation(String dacCode, String opeMatricule, String opeNom, String opeContact, String fonCod, String fonLibelle, String fonRespo, String strCode, String strOpeRespo, BigDecimal nbrTraite, BigDecimal nbrEnCours, BigDecimal nbrValide, String typbinome) {
-       this.dacCode = dacCode;
-       this.opeMatricule = opeMatricule;
-       this.opeNom = opeNom;
-       this.opeContact = opeContact;
-       this.fonCod = fonCod;
-       this.fonLibelle = fonLibelle;
-       this.fonRespo = fonRespo;
-       this.strCode = strCode;
-       this.strOpeRespo = strOpeRespo;
-       this.nbrTraite = nbrTraite;
-       this.nbrEnCours = nbrEnCours;
-       this.nbrValide = nbrValide;
-       this.typbinome = typbinome;
-    }
-   
+	@Column(name = "DCS_NUM", precision = 22, scale = 0)
+	public BigDecimal getDcsNum() {
+		return this.dcsNum;
+	}
 
-    @Id
-    @Column(name="OPE_MATRICULE", nullable=false, length=25)
-    public String getOpeMatricule() {
-        return this.opeMatricule;
-    }
-    
-    public void setOpeMatricule(String opeMatricule) {
-        this.opeMatricule = opeMatricule;
-    }
-    
+	public void setDcsNum(BigDecimal dcsNum) {
+		this.dcsNum = dcsNum;
+	}
 
-    @Column(name="DAC_CODE", nullable=false, length=20)
-    public String getDacCode() {
-        return this.dacCode;
-    }
-    
-    public void setDacCode(String dacCode) {
-        this.dacCode = dacCode;
-    }
+	@Column(name = "OPE_MATRICULE", nullable = false, length = 25)
+	public String getOpeMatricule() {
+		return this.opeMatricule;
+	}
 
+	public void setOpeMatricule(String opeMatricule) {
+		this.opeMatricule = opeMatricule;
+	}
 
-    @Column(name="OPE_NOM")
-    public String getOpeNom() {
-        return this.opeNom;
-    }
-    
-    public void setOpeNom(String opeNom) {
-        this.opeNom = opeNom;
-    }
+	@Column(name = "OPE_NOM")
+	public String getOpeNom() {
+		return this.opeNom;
+	}
 
+	public void setOpeNom(String opeNom) {
+		this.opeNom = opeNom;
+	}
 
-    @Column(name="OPE_CONTACT", length=250)
-    public String getOpeContact() {
-        return this.opeContact;
-    }
-    
-    public void setOpeContact(String opeContact) {
-        this.opeContact = opeContact;
-    }
+	@Column(name = "OPE_CONTACT", length = 250)
+	public String getOpeContact() {
+		return this.opeContact;
+	}
 
+	public void setOpeContact(String opeContact) {
+		this.opeContact = opeContact;
+	}
 
-    @Column(name="FON_COD", nullable=false, length=20)
-    public String getFonCod() {
-        return this.fonCod;
-    }
-    
-    public void setFonCod(String fonCod) {
-        this.fonCod = fonCod;
-    }
+	@Id
+	@Column(name = "FON_COD", nullable = false, length = 20)
+	public String getFonCod() {
+		return this.fonCod;
+	}
 
+	public void setFonCod(String fonCod) {
+		this.fonCod = fonCod;
+	}
 
-    @Column(name="FON_LIBELLE", length=500)
-    public String getFonLibelle() {
-        return this.fonLibelle;
-    }
-    
-    public void setFonLibelle(String fonLibelle) {
-        this.fonLibelle = fonLibelle;
-    }
+	@Column(name = "FON_LIBELLE", length = 500)
+	public String getFonLibelle() {
+		return this.fonLibelle;
+	}
 
+	public void setFonLibelle(String fonLibelle) {
+		this.fonLibelle = fonLibelle;
+	}
 
-    @Column(name="FON_RESPO", length=3)
-    public String getFonRespo() {
-        return this.fonRespo;
-    }
-    
-    public void setFonRespo(String fonRespo) {
-        this.fonRespo = fonRespo;
-    }
+	@Column(name = "FON_RESPO", length = 3)
+	public String getFonRespo() {
+		return this.fonRespo;
+	}
 
+	public void setFonRespo(String fonRespo) {
+		this.fonRespo = fonRespo;
+	}
 
-    @Column(name="STR_CODE", nullable=false, length=20)
-    public String getStrCode() {
-        return this.strCode;
-    }
-    
-    public void setStrCode(String strCode) {
-        this.strCode = strCode;
-    }
+	@Column(name = "STR_CODE", nullable = false, length = 20)
+	public String getStrCode() {
+		return this.strCode;
+	}
 
+	public void setStrCode(String strCode) {
+		this.strCode = strCode;
+	}
 
-    @Column(name="STR_OPE_RESPO", length=1)
-    public String getStrOpeRespo() {
-        return this.strOpeRespo;
-    }
-    
-    public void setStrOpeRespo(String strOpeRespo) {
-        this.strOpeRespo = strOpeRespo;
-    }
+	@Column(name = "STR_OPE_RESPO", length = 1)
+	public String getStrOpeRespo() {
+		return this.strOpeRespo;
+	}
 
+	public void setStrOpeRespo(String strOpeRespo) {
+		this.strOpeRespo = strOpeRespo;
+	}
 
-    @Column(name="NBR_TRAITE", precision=22, scale=0)
-    public BigDecimal getNbrTraite() {
-        return this.nbrTraite;
-    }
-    
-    public void setNbrTraite(BigDecimal nbrTraite) {
-        this.nbrTraite = nbrTraite;
-    }
+	@Column(name = "NBR_TRAITE", precision = 22, scale = 0)
+	public BigDecimal getNbrTraite() {
+		return this.nbrTraite;
+	}
 
+	public void setNbrTraite(BigDecimal nbrTraite) {
+		this.nbrTraite = nbrTraite;
+	}
 
-    @Column(name="NBR_EN_COURS", precision=22, scale=0)
-    public BigDecimal getNbrEnCours() {
-        return this.nbrEnCours;
-    }
-    
-    public void setNbrEnCours(BigDecimal nbrEnCours) {
-        this.nbrEnCours = nbrEnCours;
-    }
+	@Column(name = "NBR_EN_COURS", precision = 22, scale = 0)
+	public BigDecimal getNbrEnCours() {
+		return this.nbrEnCours;
+	}
 
+	public void setNbrEnCours(BigDecimal nbrEnCours) {
+		this.nbrEnCours = nbrEnCours;
+	}
 
-    @Column(name="NBR_VALIDE", precision=22, scale=0)
-    public BigDecimal getNbrValide() {
-        return this.nbrValide;
-    }
-    
-    public void setNbrValide(BigDecimal nbrValide) {
-        this.nbrValide = nbrValide;
-    }
+	@Column(name = "NBR_VALIDE", precision = 22, scale = 0)
+	public BigDecimal getNbrValide() {
+		return this.nbrValide;
+	}
 
+	public void setNbrValide(BigDecimal nbrValide) {
+		this.nbrValide = nbrValide;
+	}
 
-    @Column(name="TYPBINOME")
-    public String getTypbinome() {
-        return this.typbinome;
-    }
-    
-    public void setTypbinome(String typbinome) {
-        this.typbinome = typbinome;
-    }
+	@Column(name = "TYPBINOME")
+	public String getTypbinome() {
+		return this.typbinome;
+	}
+
+	public void setTypbinome(String typbinome) {
+		this.typbinome = typbinome;
+	}
+
+	@Column(name = "TYPRESP")
+	public String getTypresp() {
+		return this.typresp;
+	}
+
+	public void setTypresp(String typresp) {
+		this.typresp = typresp;
+	}
 
 }
-
-
