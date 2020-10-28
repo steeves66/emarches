@@ -166,11 +166,11 @@
 
                          <p:column headerText="Type" styleClass="col-sm-3" >
                          <h:panelGroup rendered="#{slctdTb.demStatutRetour == '1'}">
-         				<h:outputText value="#{slctdTb.demTdmCode}" style="color:red; font-weight:bold " />
+         				<h:outputText value="#{slctdTb.tdmLibelle}" style="color:red; font-weight:bold " />
          				</h:panelGroup>
                         
                         <h:panelGroup rendered="#{slctdTb.demStatutRetour != '1'}">
-         				<h:outputText value="#{slctdTb.demTdmCode}" />
+         				<h:outputText value="#{slctdTb.tdmLibelle}" />
          				</h:panelGroup> 
          				</p:column>
          				

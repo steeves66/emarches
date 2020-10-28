@@ -38,6 +38,7 @@ public class VDemande implements java.io.Serializable {
 	private String demAaoCode;
 	private String demDacCode;
 	private String demMarCode;
+	private String tdmLibelle;
 
 	public VDemande() {
 	}
@@ -49,7 +50,7 @@ public class VDemande implements java.io.Serializable {
 	public VDemande(BigDecimal demNum, String demObjet, String demMotif, String demTdmCode, Date demDteSaisi,
 			String demOpeMatricule, String demStaCode, String demStrCode, String demFonCodeAc, String demRefAvisMin,
 			String demRef, Short demGesCode, String demRefActIni, String demStatutRetour, String demFonCodePf,
-			String demFonCodeDmp, String demAaoCode, String demDacCode, String demMarCode) {
+			String demFonCodeDmp, String demAaoCode, String demDacCode, String demMarCode,String tdmLibelle) {
 		this.demNum = demNum;
 		this.demObjet = demObjet;
 		this.demMotif = demMotif;
@@ -69,6 +70,7 @@ public class VDemande implements java.io.Serializable {
 		this.demAaoCode = demAaoCode;
 		this.demDacCode = demDacCode;
 		this.demMarCode = demMarCode;
+		this.tdmLibelle = tdmLibelle;
 	}
 
 	@Id
@@ -241,6 +243,15 @@ public class VDemande implements java.io.Serializable {
 
 	public void setDemMarCode(String demMarCode) {
 		this.demMarCode = demMarCode;
+	}
+	
+	@Column(name = "TDM_LIBELLE", length = 500)
+	public String getTdmLibelle() {
+		return this.tdmLibelle;
+	}
+
+	public void setTdmLibelle(String tdmLibelle) {
+		this.tdmLibelle = tdmLibelle;
 	}
 
 }
