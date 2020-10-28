@@ -1281,6 +1281,7 @@ public class CommissionController {
 					}
 				 chargeMembre();
 			}
+			 
 		public void chargeMention() {
 			 listeCritereAnalyse = (List<VCritereAnalyseDacOfftec>) iservice.getObjectsByColumn("VCritereAnalyseDacOfftec", new ArrayList<String>(Arrays.asList("CRA_CODE")),
                      // new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,"DAO"),

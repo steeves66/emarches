@@ -24,6 +24,7 @@ import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAgpm;
 import com.sndi.model.TAvisPresel;
 import com.sndi.model.TDemande;
+import com.sndi.model.TDetCommissionSeance;
 import com.sndi.model.TDetailDemandes;
 import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDossierAgpm;
@@ -39,10 +40,14 @@ import com.sndi.model.TStatut;
 import com.sndi.model.TTypeDemande;
 import com.sndi.model.VAgpmStatut;
 import com.sndi.model.VDaoDemande;
+import com.sndi.model.VDemande;
+import com.sndi.model.VDetCommissionSeance;
+import com.sndi.model.VDetOffreAnalyse;
 import com.sndi.model.VDetailDemande;
 import com.sndi.model.VLigneImputation;
 import com.sndi.model.VMotifRetourDemande;
 import com.sndi.model.VPpmDao;
+import com.sndi.model.VTypeDemande;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.Iservice;
@@ -78,8 +83,11 @@ public class DemandeController {
 	 }
 	 
 	 //Déclaration des listes
-	 private List<TDemande> listeDemandes = new ArrayList<TDemande>();
-	 private List<TTypeDemande> listeTypeDemandes = new ArrayList<TTypeDemande>();
+	 //private List<TDemande> listeDemandes = new ArrayList<TDemande>();
+	 private List<VDemande> listeDemandes = new ArrayList<VDemande>();
+	 private List<TDemande> listeDemande = new ArrayList<TDemande>();
+	 //private List<TTypeDemande> listeTypeDemandes = new ArrayList<TTypeDemande>();
+	 private List<VTypeDemande> listeTypeDemandes = new ArrayList<VTypeDemande>();
 	 private List<VDaoDemande> listeDao = new ArrayList<VDaoDemande>();
 	 private List<VDaoDemande> selectionligneDao = new ArrayList<VDaoDemande>();
 	 private List<VPpmDao> listePPM = new ArrayList<VPpmDao>();
@@ -96,17 +104,18 @@ public class DemandeController {
 	 
 	 private List<TPieceDemande> listePiecesDemande= new ArrayList<TPieceDemande>();
 	 private List<TPieceDemande> listePiecesDem= new ArrayList<TPieceDemande>();
-	 
-	 
-	 
+	 private List<TAvisPresel> listeSoumi= new ArrayList<TAvisPresel>();
 	 
 	 //Déclaration des Objets
 	 private TDemande newDem = new TDemande();
-	 private TDemande slctdTd = new TDemande();
+	 private TDemande sendDem = new TDemande();
+	 //private TDemande slctdTd = new TDemande();
+	 private VDemande slctdTd = new VDemande();
 	 private TSoumissions newSoum = new TSoumissions();
 	 private VMotifRetourDemande motif = new VMotifRetourDemande();
 	 private TParamPieceDemande newPiece = new TParamPieceDemande();
-	 
+	 private TAvisPresel sltEnt = new TAvisPresel();
+	 private TAvisPresel supEnt = new TAvisPresel();
 	
 	//Déclaration des Variables
 	 private String tdmCode ="";
@@ -120,6 +129,10 @@ public class DemandeController {
 	 private boolean panelLigneBudgetaire =false;
 	 private boolean panelEntreprise =false;
 	 private boolean panelAutre =false;
+	 private boolean panelDao =false;
+	 private boolean panelPpm =false;
+	 private String daoPpm;
+	 private String numbScc;
 	 private String observation="";
 	 private Long numPiece;
 	 private long pdmNum;
@@ -144,7 +157,7 @@ public class DemandeController {
 									new FacesMessage(FacesMessage.SEVERITY_ERROR, "Vous pouvez selectionner q'un seul DAO", ""));
 						 return "demande";
 					 }*/
-
+			// saveDemande();
 			 userController.initMessage();
 		     }
 		 
@@ -169,11 +182,23 @@ public class DemandeController {
 		/* listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")));
 		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());*/
 		
-		listeTypeDemandes = (List<TTypeDemande>) iservice.getObjectsByColumnIn("TTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
+		listeTypeDemandes = (List<VTypeDemande>) iservice.getObjectsByColumnIn("VTypeDemande", new ArrayList<String>(Arrays.asList("TDM_LIBELLE")),
 				"TDM_CODE", new ArrayList<String>(Arrays.asList("AOR","GAG")),
                new WhereClause("TDM_CODE",WhereClause.Comparateur.NEQ,"PSL"));
 		_logger.info("listeTypeDemandes size: "+listeTypeDemandes.size());
 		
+	 }
+	 
+	 //Choix du DAO OU PPM
+	 public void choixDaoPpm() {
+		 if(daoPpm.equalsIgnoreCase("dao")) {
+			 panelDao = true;
+			 panelPpm = false;
+		 }else
+			 if(daoPpm.equalsIgnoreCase("ppm")) {
+				  panelDao = false;
+				  panelPpm = true;
+			  }
 	 }
 	 
 	 //Liste des entreprises
@@ -181,8 +206,17 @@ public class DemandeController {
 		 listeEntreprises.clear();
 		 listeEntreprises = (List<TSoumissions>) iservice.getObjectsByColumn("TSoumissions", new ArrayList<String>(Arrays.asList("SOU_NOM_COM")));
 		_logger.info("listeEntreprises size: "+listeEntreprises.size());
-		 
 	 }
+	 
+	 //Filtre sur les entreprises
+	 public void chargeEntreprsesFilter() {
+		 listeEntreprises.clear();
+		 listeEntreprises = ((List<TSoumissions>)iservice.getObjectsByColumn("TSoumissions",new ArrayList<String>(Arrays.asList("SOU_NOM_COM")),
+			     new WhereClause("SOU_NCC",WhereClause.Comparateur.LIKE,"%"+numbScc+"%")  
+				 ));
+			_logger.info("listeEntreprises size: "+listeEntreprises.size());	
+	 }
+	 
 	 //Methode de chargement 
 	 public void chargeListBytype() {
 		 if(tdmCode.equalsIgnoreCase("AOR")) {
@@ -195,6 +229,7 @@ public class DemandeController {
 			 panelLigneBudgetaire =false;
 			 panelEntreprise = true;
 			 chargeDao();
+			 chargePPM();
 			 chargeEntreprses();
 		 }else
 			 if(tdmCode.equalsIgnoreCase("GAG")) {
@@ -258,38 +293,77 @@ public class DemandeController {
 		 chargePieces();
 	 }
 	 
+	 
+	 //Enregistrement de la Demande
 	 public void saveDemande() {
-		 newDem.setDemDteSaisi(Calendar.getInstance().getTime());
-		 newDem.setDemGesCode(demGesCode);
-		 newDem.setDemStatutRetour("0");
-		 newDem.setTFonction(userController.getSlctd().getTFonction());
-		 newDem.setTOperateur(userController.getSlctd().getTOperateur());
-		 newDem.setTStatut(new TStatut("E1S"));
-		 newDem.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-		 newDem.setDemFonCodePf(userController.getSlctd().getTFonction().getFonCodePf());
-		 newDem.setDemFonCodeDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
-		 newDem.setTTypeDemande(new TTypeDemande(tdmCode));
-		 iservice.addObject(newDem);
 		 
-		 //Enregistrement des details demande en fonction du type demande selctionnée
-		 if(tdmCode.equalsIgnoreCase("AOR")) {
-			 saveDao(); 
-		 }else
-			 if(tdmCode.equalsIgnoreCase("GAG")) {
-				 savePPM();
-			 }else
-				 if(tdmCode.equalsIgnoreCase("AVE")) {
-					 saveLigneBugetaire(); 
-				 }
-		//Enregistrement des pièces de la demande		 
-		 savePieces();
-		 //Historisation de la demande dans THistoDemande
-		 historiser(""+newDem.getTStatut().getStaCode(),newDem);
-		 vider();	
-		 userController.setTexteMsg("Enregistrement effectué avec succès!");
-		 userController.setRenderMsg(true);
-		 userController.setSevrityMsg("success");
+		 listeDemande=(List<TDemande>) iservice.getObjectsByColumn("TDemande", new ArrayList<String>(Arrays.asList("DEM_NUM")),
+				 new WhereClause("DEM_STA_CODE",WhereClause.Comparateur.EQ,"E1S"), 
+				 new WhereClause("DEM_GES_CODE",WhereClause.Comparateur.EQ,""+demGesCode), 
+				 new WhereClause("DEM_TDM_CODE",WhereClause.Comparateur.EQ,""+tdmCode),
+				 new WhereClause("DEM_OPE_MATRICULE",WhereClause.Comparateur.EQ,userController.getSlctd().getTOperateur().getOpeMatricule()));
+			if(!listeDemande.isEmpty()) {
+				TDemande demUpdate = new TDemande();
+				demUpdate.setDemObjet(newDem.getDemObjet());
+				demUpdate.setDemMotif(newDem.getDemMotif());
+				demUpdate.setDemRef(newDem.getDemRef());
+				demUpdate.setTTypeDemande(new TTypeDemande(tdmCode));
+				iservice.updateObject(demUpdate);
+			}else {
+				   newDem.setDemDteSaisi(Calendar.getInstance().getTime());
+				   newDem.setDemGesCode(demGesCode);
+				   newDem.setDemStatutRetour("0");
+				   newDem.setTFonction(userController.getSlctd().getTFonction());
+				   newDem.setTOperateur(userController.getSlctd().getTOperateur());
+				   newDem.setTStatut(new TStatut("E1S"));
+				   newDem.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+				   newDem.setDemFonCodePf(userController.getSlctd().getTFonction().getFonCodePf());
+				   newDem.setDemFonCodeDmp(userController.getSlctd().getTFonction().getFonCodeDmp());
+				   newDem.setTTypeDemande(new TTypeDemande(tdmCode));
+				   iservice.addObject(newDem);
+				 
+				 //Enregistrement des details demande en fonction du type demande selctionnée
+				 if(tdmCode.equalsIgnoreCase("AOR")) {
+					 saveDao(); 
+				 }else
+					 if(tdmCode.equalsIgnoreCase("GAG")) {
+						 savePPM();
+					 }else
+						 if(tdmCode.equalsIgnoreCase("AVE")) {
+							 saveLigneBugetaire(); 
+						 }
+				//Enregistrement des pièces de la demande		 
+				 //savePieces();
+				 //Historisation de la demande dans THistoDemande
+				 historiser(""+newDem.getTStatut().getStaCode(),newDem);
+				 vider();	
+				 userController.setTexteMsg("Enregistrement effectué avec succès!");
+				 userController.setRenderMsg(true);
+				 userController.setSevrityMsg("success");
+			}
 	 }
+	 
+	 //Suppression d'une entreprise
+	 public void deleteEntreprise() {	
+		  System.out.print("+-------------+ENTREPRISE: "+getSltEnt().getTSoumissions().getSouNomCom());
+		 try {
+			 listeSoumi.clear();
+				listeSoumi = (List<TAvisPresel>) iservice.getObjectsByColumn("TAvisPresel", new ArrayList<String>(Arrays.asList("APR_NUM")),
+						 new WhereClause("APR_DEM_NUM",WhereClause.Comparateur.EQ,""+sltEnt.getAprNum()));
+		           if (!listeSoumi.isEmpty()) {
+		        	   supEnt=listeSoumi.get(0); 
+    			        }
+		 //Suppression de l'entreprise          
+		 iservice.deleteObject(getSupEnt());
+		 //Chargement des entreprises soumissionnaires
+		 chargeSoumission();
+		 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Entreprise supprimée avec succès! ", ""));
+		 }catch (org.hibernate.exception.ConstraintViolationException e) {
+   			 userController.setTexteMsg("Impossible de supprimer le membre !");
+   			 userController.setRenderMsg(true);
+   			 userController.setSevrityMsg("danger");	 
+   		 } 
+	}
 	 
 	 //Methode d'historisation
 	 public void historiser(String statut,TDemande demande) {
@@ -347,22 +421,43 @@ public class DemandeController {
 	 
 	 // Methode d'enregistrement des DAO selectopnné
 	 public void saveDao() {
-		 if (selectionligneDao.size()==0) {
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune opération selectionnée", ""));
-			}else {
-				for(VDaoDemande ligneDao : selectionligneDao) {
-					TDetailDemandes demDet = new TDetailDemandes();
-					demDet.setTDemande(newDem);
-					demDet.setTDacSpecs(ligneDao.getDacCode());
-					demDet.setDdeActNumIni(ligneDao.getDacFonCodAc());
-					demDet.setDdeActNum(userController.getSlctd().getTFonction().getFonCod());
-					demDet.setTStructure(userController.getSlctd().getTFonction().getTStructure());
-					iservice.addObject(demDet);
+		 
+		 if(daoPpm.equalsIgnoreCase("dao")) {
+			 
+			 if (selectionligneDao.size()==0) {
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune opération selectionnée", ""));
+				}else {
+					for(VDaoDemande ligneDao : selectionligneDao) {
+						TDetailDemandes demDet = new TDetailDemandes();
+						demDet.setTDemande(newDem);
+						demDet.setTDacSpecs(ligneDao.getDacCode());
+						demDet.setDdeActNumIni(ligneDao.getDacFonCodAc());
+						demDet.setDdeActNum(userController.getSlctd().getTFonction().getFonCod());
+						demDet.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+						iservice.addObject(demDet);
+					}
 				}
-			}
-		//Entreprise
-		 saveEntrepsise();
+			  //Entreprise
+			 //saveEntrepsise();
+		 }else {
+			     if (selectionlignePPM.size()==0) {
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucun planning selectionné", ""));
+				}else {
+					for(VPpmDao lignePpm : selectionlignePPM) {
+						TDetailDemandes demDet = new TDetailDemandes();
+						demDet.setTDemande(newDem);
+						//demDet.setDdeMarCode(lignePpm.getDppId());
+						demDet.setDdeActNumIni(lignePpm.getDppActeurSaisie());
+						demDet.setDdeActNum(userController.getSlctd().getTFonction().getFonCod());
+						demDet.setTStructure(userController.getSlctd().getTFonction().getTStructure());
+						iservice.addObject(demDet);
+					}
+				}
+			  }
+		  //Entreprise
+		 //saveEntrepsise();
 	 }
 	 
 	// Methode d'enregistrement des PPM selectopnné
@@ -403,13 +498,17 @@ public class DemandeController {
 						}
 				 }
 	 
-				 
+		
+		//Création des soumissionnaires
 		public void saveEntrepsise() {
 			 //Enregistement des Entreprises dans t_soumission
 			 if (selectionEntreprises.size()==0) {
 					FacesContext.getCurrentInstance().addMessage(null,
 							new FacesMessage(FacesMessage.SEVERITY_ERROR, "Aucune entreprise selectionnée", ""));
 				}else {
+					
+					saveDemande();
+					
 					for(TSoumissions entreprise : selectionEntreprises) {
 						TAvisPresel newPresel = new TAvisPresel();
 						newPresel.setTDemande(newDem);
@@ -418,6 +517,8 @@ public class DemandeController {
 						//newPresel.setAprDetailInvit(entreprise.getSouTel()+" "+entreprise.getSouAdresse());
 						newPresel.setTOperateurByAprOpeMatricule(userController.getSlctd().getTOperateur());
 						iservice.addObject(newPresel);
+						//Chargement des soumissionnaires pour cette demande
+						chargeSoumission();
 					}
 				}
 		}
@@ -431,8 +532,7 @@ public class DemandeController {
 		}
 		
 		
-		
-		
+		//
 				 public void vider() {
 					newDem = new TDemande();
                     selectionligneDao = new ArrayList<VDaoDemande>();
@@ -475,11 +575,18 @@ public class DemandeController {
 				//Methode Upload
 				 @Transactional
 				 public void upload(FileUploadEvent event) throws IOException{
+					 
+				listeDemande=(List<TDemande>) iservice.getObjectsByColumn("TDemande", new ArrayList<String>(Arrays.asList("DEM_NUM")),
+							 new WhereClause("DEM_NUM",WhereClause.Comparateur.EQ,""+slctdTd.getDemNum()));
+						if(!listeDemande.isEmpty()) {
+							newDem=listeDemande.get(0); 
+						}
+					 
 						if(fileUploadController.handleFileUpload(event, slctdTd.getDemNum()+"", pdmNum)) {
 								TDossierDemande dos = new TDossierDemande(); //TNatureDocument 
 								//dos = new TDossierDemande() ;
 								dos.setDodLibelle(fileUploadController.getFileName());
-								dos.setTDemande(slctdTd);
+								dos.setTDemande(newDem);
 					            dos.setDodReference(fileUploadController.getDocNom());
 					            dos.setTPieceDemande(new TPieceDemande(pdmNum));
 								iservice.addObject(dos);
@@ -527,8 +634,8 @@ public class DemandeController {
 						statutAffiche = "E1S";
 						statutDiffere = "E2D";
 						colonneFonction ="DEM_FON_CODE_AC";
-						_logger.info("staut: "+statutAffiche);	
-						_logger.info("staut: "+statutDiffere);
+						_logger.info("statut1: "+statutAffiche);	
+						_logger.info("statut2: "+statutDiffere);
 						_logger.info("fonctionalité: "+fonct);	
 						_logger.info("value: "+value+" action: "+action);
 					 }else {
@@ -594,27 +701,42 @@ public class DemandeController {
 	//methode Chargement de la liste des demandes
 	public void chargeData(String statutAffiche, String statutDiffere,String colonneFonction) {
 		listeDemandes.clear();	
-		listeDemandes = (List<TDemande>) iservice.getObjectsByColumnInDesc("TDemande", new ArrayList<String>(Arrays.asList("DEM_DTE_SAISI")),
+		listeDemandes = (List<VDemande>) iservice.getObjectsByColumnInDesc("VDemande", new ArrayList<String>(Arrays.asList("DEM_DTE_SAISI")),
 				"DEM_STA_CODE", new ArrayList<String>(Arrays.asList(""+statutAffiche,""+statutDiffere)),
-				new WhereClause("DEM_TDM_CODE",WhereClause.Comparateur.EQ,"DER"));
-				new WhereClause(""+colonneFonction,WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod());
+				//new WhereClause("DEM_TDM_CODE",WhereClause.Comparateur.EQ,"DER")),
+				new WhereClause(""+colonneFonction,WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 	}
 	
+	   //methode Chargement de la liste des soumissionnaires
+		public void chargeSoumission() {
+			listeSoumi.clear();
+			listeSoumi = (List<TAvisPresel>) iservice.getObjectsByColumn("TAvisPresel", new ArrayList<String>(Arrays.asList("APR_NUM")),
+					 new WhereClause("APR_DEM_NUM",WhereClause.Comparateur.EQ,""+newDem));
+				_logger.info("liste des soumisionnaires: "+listeSoumi.size());
+		}
+		
 	
 	public void valider() {
 		String statUpdate = "";
 		String message = "";
-		if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1S")) {
+		
+		listeDemande=(List<TDemande>) iservice.getObjectsByColumn("TDemande", new ArrayList<String>(Arrays.asList("DEM_NUM")),
+				 new WhereClause("DEM_NUM",WhereClause.Comparateur.EQ,""+slctdTd.getDemNum()));
+			if(!listeDemande.isEmpty()) {
+				sendDem=listeDemande.get(0); 
+			}
+		
+		if(slctdTd.getDemStaCode().equalsIgnoreCase("E1S")) {
 			statUpdate = "E1T";
 			message="Transmission de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
 			
 		 }else {
-			 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1T")) {
+			 if(slctdTd.getDemStaCode().equalsIgnoreCase("E1T")) {
 					statUpdate = "E2V";
 					//chargeData("E1T","E3D","DEM_FON_CODE_PF");
 					message="Prévalidation de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
 			 }else {
-				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E2V")) {
+				 if(slctdTd.getDemStaCode().equalsIgnoreCase("E2V")) {
 					 statUpdate = "E3V";
 					 //chargeData("E2V","E3V","DEM_FON_CODE_DMP");
 					 message="Validation de la démande N°"+slctdTd.getDemNum()+"éffectuée avec succès";
@@ -625,9 +747,9 @@ public class DemandeController {
 
 		 }
 		
-		slctdTd.setTStatut(new TStatut(statUpdate));	
-		iservice.updateObject(slctdTd);
-		historiser(statUpdate,slctdTd);
+		sendDem.setTStatut(new TStatut(statUpdate));	
+		iservice.updateObject(sendDem);
+		historiser(statUpdate,sendDem);
 		
 		if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
 			chargeData("E1S","E2D","DEM_FON_CODE_AC");
@@ -650,22 +772,30 @@ public class DemandeController {
 	public void differe() {
 		String statUpdate = "";
 		String message = "";
-		if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E1T")) {
+		
+
+		listeDemande=(List<TDemande>) iservice.getObjectsByColumn("TDemande", new ArrayList<String>(Arrays.asList("DEM_NUM")),
+				 new WhereClause("DEM_NUM",WhereClause.Comparateur.EQ,""+slctdTd.getDemNum()));
+			if(!listeDemande.isEmpty()) {
+				sendDem=listeDemande.get(0); 
+			}
+			
+		if(slctdTd.getDemStaCode().equalsIgnoreCase("E1T")) {
 					statUpdate = "E2D";
 					chargeData("E1T","E3D","DEM_FON_CODE_PF");
 					message="Démande N°"+slctdTd.getDemNum()+"différée avec succès";
 			 }else {
-				 if(slctdTd.getTStatut().getStaCode().equalsIgnoreCase("E2V")) {
+				 if(slctdTd.getDemStaCode().equalsIgnoreCase("E2V")) {
 					 statUpdate = "E3D";
 					 chargeData("E2V","E3V","DEM_FON_CODE_DMP");
 					 message="Démande N°"+slctdTd.getDemNum()+"différée avec succès";
 				 } 
 			 }
 
-		slctdTd.setTStatut(new TStatut(statUpdate));
+		sendDem.setTStatut(new TStatut(statUpdate));
 		slctdTd.setDemStatutRetour("1");
-		iservice.updateObject(slctdTd);
-		historiser(statUpdate,slctdTd);
+		iservice.updateObject(sendDem);
+		historiser(statUpdate,sendDem);
 		userController.setTexteMsg(message);
 		userController.setRenderMsg(true);
 		userController.setSevrityMsg("success");
@@ -683,27 +813,36 @@ public class DemandeController {
 				}	
 			}	
 
-	public List<TDemande> getListeDemandes() {
+	/*public List<TDemande> getListeDemandes() {
 		return listeDemandes;
 	}
 
 	public void setListeDemandes(List<TDemande> listeDemandes) {
 		this.listeDemandes = listeDemandes;
+	}*/
+	
+	public List<VDemande> getListeDemandes() {
+		return listeDemandes;
 	}
-	public TDemande getSlctdTd() {
+
+	public void setListeDemandes(List<VDemande> listeDemandes) {
+		this.listeDemandes = listeDemandes;
+	}
+	
+	/*public TDemande getSlctdTd() {
 		return slctdTd;
 	}
 	public void setSlctdTd(TDemande slctdTd) {
 		this.slctdTd = slctdTd;
-	}
+	}*/
 
-	public List<TTypeDemande> getListeTypeDemandes() {
+	/*public List<TTypeDemande> getListeTypeDemandes() {
 		return listeTypeDemandes;
 	}
 
 	public void setListeTypeDemandes(List<TTypeDemande> listeTypeDemandes) {
 		this.listeTypeDemandes = listeTypeDemandes;
-	}
+	}*/
 
 	public String getTdmCode() {
 		return tdmCode;
@@ -1104,6 +1243,92 @@ public class DemandeController {
 		this.pdmNum = pdmNum;
 	}
 
+	public boolean isPanelDao() {
+		return panelDao;
+	}
 
+	public void setPanelDao(boolean panelDao) {
+		this.panelDao = panelDao;
+	}
+
+	public boolean isPanelPpm() {
+		return panelPpm;
+	}
+
+	public void setPanelPpm(boolean panelPpm) {
+		this.panelPpm = panelPpm;
+	}
+
+	public String getDaoPpm() {
+		return daoPpm;
+	}
+
+	public void setDaoPpm(String daoPpm) {
+		this.daoPpm = daoPpm;
+	}
+
+	public String getNumbScc() {
+		return numbScc;
+	}
+
+	public void setNumbScc(String numbScc) {
+		this.numbScc = numbScc;
+	}
+
+	public List<TAvisPresel> getListeSoumi() {
+		return listeSoumi;
+	}
+
+	public void setListeSoumi(List<TAvisPresel> listeSoumi) {
+		this.listeSoumi = listeSoumi;
+	}
+
+	public TAvisPresel getSltEnt() {
+		return sltEnt;
+	}
+
+	public void setSltEnt(TAvisPresel sltEnt) {
+		this.sltEnt = sltEnt;
+	}
+
+	public TAvisPresel getSupEnt() {
+		return supEnt;
+	}
+
+	public void setSupEnt(TAvisPresel supEnt) {
+		this.supEnt = supEnt;
+	}
+
+	public List<TDemande> getListeDemande() {
+		return listeDemande;
+	}
+
+	public void setListeDemande(List<TDemande> listeDemande) {
+		this.listeDemande = listeDemande;
+	}
+
+	public VDemande getSlctdTd() {
+		return slctdTd;
+	}
+
+	public void setSlctdTd(VDemande slctdTd) {
+		this.slctdTd = slctdTd;
+	}
+
+	public TDemande getSendDem() {
+		return sendDem;
+	}
+
+	public void setSendDem(TDemande sendDem) {
+		this.sendDem = sendDem;
+	}
+
+	public List<VTypeDemande> getListeTypeDemandes() {
+		return listeTypeDemandes;
+	}
+
+	public void setListeTypeDemandes(List<VTypeDemande> listeTypeDemandes) {
+		this.listeTypeDemandes = listeTypeDemandes;
+	}
 
 }

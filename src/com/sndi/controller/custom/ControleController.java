@@ -6669,7 +6669,7 @@ public class ControleController {
 													    			if(action.equalsIgnoreCase("SAIDEMAC")) {
 														    			type = "Demandes";
 														    			//fonctionalite = "listAvenantAc";
-														    			libelle="NOUVELLE DEMANDE";	
+														    			libelle="PROCEDURES DEROGATOIRES : DEMANDE D'AUTORISATION";	
 																	    fermerSai=true;
 																		fermerVal=false;
 														    		}else
