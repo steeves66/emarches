@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-10-20T11:18:39 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PPM_2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="90736549-4b17-4cb5-aabf-3873447e543c">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="list_ppm" uuid="8f48ed0a-8c2d-4f50-88ff-1759e8cfa063">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code" class="java.lang.String"/>
+		<parameter name="param_op" class="java.lang.String"/>
+		<parameter name="param_min" class="java.lang.String"/>
+		<parameter name="typePlan" class="java.lang.String"/>
+		<parameter name="param_statut" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[select *
+from v_etat_ppm ve
+where ve.plp_ges_code=nvl($P{param_code}, ve.plp_ges_code)
+and ve.fon_cod=nvl($P{param_op}, ve.fon_cod)
+and ve.dpp_type_plan=nvl($P{typePlan},ve.dpp_type_plan)
+and ve.min_code=nvl($P{param_min},ve.min_code)
+and instr($P{param_statut},ve.dpp_sta_code)>0]]>
+		</queryString>
+		<field name="PLP_GES_CODE" class="java.math.BigDecimal"/>
+		<field name="MIN_CODE" class="java.lang.String"/>
+		<field name="MIN_LIBELLE" class="java.lang.String"/>
+		<field name="FON_COD" class="java.lang.String"/>
+		<field name="FON_LIBELLE" class="java.lang.String"/>
+		<field name="DPP_OBJET" class="java.lang.String"/>
+		<field name="DPP_DATE_DAO_TRANS" class="java.sql.Timestamp"/>
+		<field name="DPP_TYM_CODE" class="java.lang.String"/>
+		<field name="DPP_MOP_CODE" class="java.lang.String"/>
+		<field name="DPP_SOURCE_FIN" class="java.lang.String"/>
+		<field name="DPP_LBG_CODE" class="java.lang.String"/>
+		<field name="DPP_DATE_DAO_APPROB_DMP" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_DAO_APPROB_BAIL" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_AVIS_AO_PUBLICATION" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_OUVERT_OT" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_OUVERT_OF" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_JUGEMENT_OFFRE" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_MARCHE_APPROB" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_SIGNAT_AC" class="java.sql.Timestamp"/>
+		<field name="DPP_DATE_SIGNAT_ATTRIB" class="java.sql.Timestamp"/>
+		<field name="DPP_TYPE_PLAN" class="java.lang.String"/>
+		<field name="DPP_DATE_SAISIE" class="java.sql.Timestamp"/>
+		<field name="DPP_STA_CODE" class="java.lang.String"/>
+		<group name="MIN_CODE">
+			<groupExpression><![CDATA[$F{MIN_CODE}]]></groupExpression>
+		</group>
+		<group name="FON_COD">
+			<groupExpression><![CDATA[$F{FON_COD}]]></groupExpression>
+		</group>
+	</subDataset>
+	<parameter name="param_op" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="typePlan" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="param_code" class="java.lang.String"/>
+	<parameter name="param_min" class="java.lang.String"/>
+	<parameter name="param_statut" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select *
+from v_etat_ppm ve
+where ve.plp_ges_code=nvl($P{param_code}, ve.plp_ges_code)
+and ve.fon_cod=nvl($P{param_op}, ve.fon_cod)
+and ve.dpp_type_plan=nvl($P{typePlan},ve.dpp_type_plan)
+and ve.min_code=nvl($P{param_min},ve.min_code)
+and instr($P{param_statut},ve.dpp_sta_code)>0]]>
+	</queryString>
+	<field name="PLP_GES_CODE" class="java.math.BigDecimal"/>
+	<field name="MIN_CODE" class="java.lang.String"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="FON_COD" class="java.lang.String"/>
+	<field name="FON_LIBELLE" class="java.lang.String"/>
+	<field name="DPP_OBJET" class="java.lang.String"/>
+	<field name="DPP_DATE_DAO_TRANS" class="java.sql.Timestamp"/>
+	<field name="DPP_TYM_CODE" class="java.lang.String"/>
+	<field name="DPP_MOP_CODE" class="java.lang.String"/>
+	<field name="DPP_SOURCE_FIN" class="java.lang.String"/>
+	<field name="DPP_LBG_CODE" class="java.lang.String"/>
+	<field name="DPP_DATE_DAO_APPROB_DMP" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_DAO_APPROB_BAIL" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_AVIS_AO_PUBLICATION" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_OUVERT_OT" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_OUVERT_OF" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_JUGEMENT_OFFRE" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_MARCHE_APPROB" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_SIGNAT_AC" class="java.sql.Timestamp"/>
+	<field name="DPP_DATE_SIGNAT_ATTRIB" class="java.sql.Timestamp"/>
+	<field name="DPP_TYPE_PLAN" class="java.lang.String"/>
+	<field name="DPP_DATE_SAISIE" class="java.sql.Timestamp"/>
+	<field name="DPP_STA_CODE" class="java.lang.String"/>
+	<group name="FON_COD">
+		<groupExpression><![CDATA[$F{FON_COD}]]></groupExpression>
+	</group>
+	<group name="AC">
+		<groupExpression><![CDATA[$F{FON_COD}]]></groupExpression>
+	</group>
+	<group name="entête1">
+		<groupHeader>
+			<band height="90">
+				<componentElement>
+					<reportElement x="0" y="0" width="800" height="90" uuid="c12481ef-bb2d-4189-a025-a4bb7e786b79">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="list_ppm" uuid="cbad0e44-e587-48c0-bdcf-e724a88dc910">
+							<datasetParameter name="param_code">
+								<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="param_min">
+								<datasetParameterExpression><![CDATA[$P{param_min}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="param_op">
+								<datasetParameterExpression><![CDATA[$P{param_op}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="typePlan">
+								<datasetParameterExpression><![CDATA[$P{typePlan}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="param_statut">
+								<datasetParameterExpression><![CDATA[$P{param_statut}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:columnGroup width="800" uuid="5bcb5f2c-9820-4e44-a95e-c7bef1ff15ec">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonnes [14]"/>
+							<jr:groupHeader groupName="FON_COD">
+								<jr:cell style="Table_CH" height="20" rowSpan="1">
+									<textField isStretchWithOverflow="true">
+										<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="800" height="20" isPrintWhenDetailOverflows="true" forecolor="#FFFFFF" backcolor="#F5A65D" uuid="09b72e41-e428-4143-8c34-0ae00e454bfd"/>
+										<box leftPadding="3"/>
+										<textElement verticalAlignment="Middle">
+											<font isBold="true"/>
+										</textElement>
+										<textFieldExpression><![CDATA["Autorité contractante : "+$F{FON_LIBELLE}]]></textFieldExpression>
+									</textField>
+								</jr:cell>
+							</jr:groupHeader>
+							<jr:columnGroup width="800" uuid="1b0040a6-0e68-47cc-8ae6-30ddebcfbab8">
+								<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonnes [14]"/>
+								<jr:groupHeader groupName="MIN_CODE">
+									<jr:cell style="Table_CH" height="20" rowSpan="1">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="800" height="20" isPrintWhenDetailOverflows="true" uuid="81feb94b-eb2c-472c-a93d-74599efc6c25"/>
+											<box leftPadding="3"/>
+											<textElement verticalAlignment="Middle">
+												<font isBold="true"/>
+											</textElement>
+											<textFieldExpression><![CDATA["Ministère : "+$F{MIN_LIBELLE}]]></textFieldExpression>
+										</textField>
+									</jr:cell>
+								</jr:groupHeader>
+								<jr:column width="20" uuid="9ac957c9-0686-4a8d-ad9e-2c7821850e2e">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne1"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="20" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="4d985746-6170-4bba-9c2d-3266fc110f74"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[N°]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="20" height="18" uuid="88f8f438-05a6-4e3e-9bf8-30c97cb48e8e"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="191" uuid="4783b731-e3b1-4e31-b54a-79367a6eab63">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne2"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="191" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="62b61df2-20f3-493b-afe1-1226efb152ea"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Objet]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="191" height="18" uuid="fb17874e-c9d7-4617-a9aa-56a066afef8f"/>
+											<box leftPadding="3"/>
+											<textElement verticalAlignment="Middle">
+												<font size="8" isBold="false"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{DPP_OBJET}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="69" uuid="359d83fc-a8c9-4891-a75b-6aa38f47b8e8">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="69" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="a6f23e06-9ab6-4764-a197-260e107ed326"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Source fin.]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="69" height="18" uuid="133acdd8-dfee-4715-85b0-2bb11267b095"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{DPP_SOURCE_FIN}==null?" ":$F{DPP_SOURCE_FIN}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="80" uuid="dccb9b6b-40e2-40cc-bbb2-cd55112cc3de">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne4"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="3c716b6d-6c65-4395-982e-b9d8aabdead5"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Imputation]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="80" height="18" uuid="b7b64504-ed61-407c-b8b3-1b9f9403989b"/>
+											<box padding="2"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{DPP_LBG_CODE}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="49" uuid="5356feaf-cbb3-4d25-a66c-603829048d61">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne5"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="49" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="4a25ad88-389b-463d-a99c-d131aa07d901"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Type marché]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="49" height="18" uuid="5e33fb2b-f936-478a-b053-ee907f533c14"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{DPP_TYM_CODE}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="42" uuid="635598fe-4ced-4232-991d-ebbb5b300af1">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne6"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="42" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="09ac9aa1-dd36-4389-8b12-5fa186810d5c"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Mode de passation]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="42" height="18" uuid="71ec1640-316f-4717-8585-97f469815396"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{DPP_MOP_CODE}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="44" uuid="492762d6-0b11-4737-85ca-1ae9a8606f6d">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne7"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="44" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="96811621-47fd-4b18-800b-b7b0c6403d9b"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Trans. dossier]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="44" height="18" uuid="bb6cf48f-98b8-4132-b42b-26273c9c7c7e"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_DAO_TRANS})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="43" uuid="3e2235bd-a4dd-4547-b6e6-8525daa77251">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne8"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="43" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="5a304184-bc99-4380-82d9-ac29f004c200"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Pub.]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="43" height="18" uuid="08e9a664-f45b-4f7b-a7ae-8638c644aaf5"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_AVIS_AO_PUBLICATION})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="45" uuid="418fb6ce-6a17-4d06-a549-e259d86c3aba">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne9"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="45" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="fe2d0e72-1e4c-4d4f-925e-f7c4479913f9"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Ouvert. tech.]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="45" height="18" uuid="5b35416b-895e-4676-a09d-0e436edeb919"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_OUVERT_OT})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="43" uuid="acf989d9-cd26-4395-af11-c624972324b6">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne10"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="43" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="cce67581-2dcf-4c6a-80f7-f4df9e3a3274"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Ouvert. fin.]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="43" height="18" uuid="a1c4bf37-8fe0-4076-b026-8f17bfe50e9c"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_OUVERT_OF})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="43" uuid="d9fd58a6-e9eb-452b-a75e-9b040791c1ca">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne11"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="43" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="53dc9f36-f5b4-4a28-acb6-1ab6ca9055c4"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Juge.]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="43" height="18" uuid="df22d8c2-38cd-4db4-97f9-cc50ca5f594c"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_JUGEMENT_OFFRE})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="43" uuid="03dbbf66-51c5-49a7-a9bb-1977fd249c94">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne12"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="43" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="6c27f4d0-1e38-4b4e-ad94-ee75b1d0018c"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Sign. Attrib.]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="43" height="18" uuid="0b6bae63-5bbc-44c5-9bac-cd5e04f01e55"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_AC})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="45" uuid="ae415b0e-8711-4330-983c-d782fe027a42">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne13"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="45" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="2b5bf638-442e-4b6a-b404-b76b476ae20e"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Sign. AC]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="45" height="18" uuid="29157435-0305-493c-9caf-38a74525153a"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_SIGNAT_ATTRIB})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="43" uuid="3f39bfa3-fd0b-406f-9575-a8999aef5f3f">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne14"/>
+									<jr:groupHeader groupName="FON_COD">
+										<jr:cell style="Table_CH" height="2" rowSpan="1"/>
+									</jr:groupHeader>
+									<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="43" height="30" forecolor="#FFFFFF" backcolor="#368F45" uuid="c2575a1e-634b-44bf-9ab7-e6c80b2357f5"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="9" isBold="true"/>
+											</textElement>
+											<text><![CDATA[Approb.]]></text>
+										</staticText>
+									</jr:columnHeader>
+									<jr:detailCell style="Table_TD" height="18">
+										<textField isStretchWithOverflow="true">
+											<reportElement stretchType="ContainerHeight" x="0" y="0" width="43" height="18" uuid="ea5b7b37-5643-4878-a20a-ea34cde93e6f"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font size="8"/>
+											</textElement>
+											<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DPP_DATE_MARCHE_APPROB})]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+							</jr:columnGroup>
+						</jr:columnGroup>
+					</jr:table>
+				</componentElement>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="43" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="2" width="200" height="38" uuid="c3c9950b-fafd-40e9-b1c8-903b307a7b9f"/>
+				<imageExpression><![CDATA["WebContent/report/images/logo_emarches.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement stretchType="ElementGroupHeight" x="620" y="1" width="180" height="39" uuid="6fcb6314-088f-4d9c-89e0-4e0e722b5e83"/>
+				<textElement textAlignment="Center">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DE COTE D’IVOIRE
+Union – Discipline – Travail
+ ------------------
+]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="106" splitType="Stretch">
+			<rectangle radius="8">
+				<reportElement mode="Opaque" x="70" y="20" width="626" height="31" backcolor="#FA9B3C" uuid="1c7380ca-7a04-4d7a-ae2c-c48c95b9ed50"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="70" y="22" width="626" height="26" forecolor="#FFFFFF" uuid="1f451d3a-a3ba-4ebf-9a24-43e0df5d60a4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DPP_TYPE_PLAN}.equalsIgnoreCase("PN")?"PLAN DE PASSATION DES MARCHES GESTION "+$F{PLP_GES_CODE}:"PLAN SIMPLIFIE DE PASSATION DES MARCHES GESTION "+$F{PLP_GES_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="85" width="642" height="21" uuid="aab2f2a7-2b96-4a00-9693-6bef310abfdf"/>
+				<box leftPadding="5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" markup="html">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<b>"+"Gestion : "+"</b>"+" "+$F{PLP_GES_CODE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="259" y="2" width="393" height="20" uuid="0b2d9079-6bc4-4ba3-9458-b20c8ae752c3"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom"/>
+				<textFieldExpression><![CDATA["Edité le "+new SimpleDateFormat("dd/MM/yyyy").format(TODAY( ))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="665" y="2" width="95" height="21" uuid="c921bcee-4d7e-40a7-968b-941325033b88"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="760" y="2" width="40" height="21" uuid="6a57492d-373d-4b12-b831-155c334baedb"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" / " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -79,6 +79,7 @@ public interface Iservice {
 	public List getObjectsIn(String object, List<String> columnList, String inCondition,  List<String> inList);
 	
 	public List getObjectsByColumn(String object, WhereClause ... conditions );
+	public List getObjectsByColumnIn(String object,String inCondition,  List<String> inList, WhereClause ... conditions);
 
 	public List getObjectsByColumnNotQuote(String object, List<String> columnList, WhereClause ... conditions);
 	public List getObjectsByColumn(String object, List<String> columnList, WhereClause ... conditions);

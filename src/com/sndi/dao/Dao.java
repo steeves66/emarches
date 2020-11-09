@@ -547,5 +547,23 @@ public class Dao implements IDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	@Override
+	public List getObjectsByColumnIn(String object, String inCondition, List<String> inList,
+			WhereClause... conditions) {
+		// TODO Auto-generated method stub
+		String query = "FROM "+object ;
+		if(!inList.isEmpty()){
+			query += " WHERE "+inCondition+" IN ('"+inList.get(0)+"'";
+			for(int i=1; i<inList.size(); i++){
+				query += " , '"+inList.get(i)+"'";
+			}
+			query +=")";
+		}
+	
+		List list = getSessionFactory().getCurrentSession().createQuery(query).list();
+		return list;
+	}
+	
+
 	
 }

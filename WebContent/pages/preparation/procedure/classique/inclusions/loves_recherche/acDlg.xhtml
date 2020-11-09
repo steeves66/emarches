@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="acDlg" >  
+     <h:form id="acDialogue" styleClass="form-horizontal">
+	        <p:dialog  widgetVar="acDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="Liste des autorités contractante">
+	         <div class="row">
+                   <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
+             </div>
+	       
+	        <p:dataTable id="tabAc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{pgpmAcController.listeAc}"
+						 selectionMode="single" rowKey="#{slctdTb.plgFonCod}"
+			               emptyMessage="Aucune autorité contractante trouvée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+							<p:column headerText="Autorités contractante" styleClass="col-sm-12" >
+                        <h:commandLink  title="Autorités contractante" style="font-size:18px;"  action="#{pgpmAcController.onSelectAc()}">				        
+         				  <h:outputText value="#{slctdTb.libac}" />
+         				  <f:setPropertyActionListener value="#{slctdTb}" target="#{pgpmAcController.recupAc}" />
+                                </h:commandLink>
+				        </p:column>
+						</p:dataTable>
+	            
+	            
+	            
+	            
+	             <div class="pull-right ">
+			            <p:commandLink  styleClass="btn btn-danger row pull-right" oncomplete="PF('acDlg').hide()" style="margin-right:5px;color:#fff" update="gnl">
+			             <i class="ace-icon fa fa-close"></i> Fermer  
+			            </p:commandLink>
+              </div>
+	        
+      </p:dialog>
+    </h:form> 
+    
+     </h:panelGroup>     
+</html>

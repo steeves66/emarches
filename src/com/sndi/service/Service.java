@@ -200,6 +200,14 @@ public class Service implements Iservice {
 			return getDao().getObjectsByColumnDesc(object, Arrays.asList(conditions), columnList);
 		}
 
+		@Override
+		public List getObjectsByColumnIn(String object, String inCondition, List<String> inList,
+				WhereClause... conditions) {
+			// TODO Auto-generated method stub
+			return getDao().getObjectsByColumnIn(object, inCondition, inList, conditions);
+				
+		}
+
 	
 
 		

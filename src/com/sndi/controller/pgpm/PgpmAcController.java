@@ -50,6 +50,10 @@ import com.sndi.model.TSourceFinancement;
 import com.sndi.model.TStatut;
 import com.sndi.model.TStructure;
 import com.sndi.model.TTypeMarche;
+import com.sndi.model.VAcAc;
+import com.sndi.model.VAcDmp;
+import com.sndi.model.VAcMin;
+import com.sndi.model.VAcPf;
 import com.sndi.model.VAcPlanGeneral;
 import com.sndi.model.VAgpm;
 import com.sndi.model.VAgpmFonction;
@@ -221,10 +225,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	     private List<TPlanGeneral> listPlan = new ArrayList<TPlanGeneral>();
 		 private List<TStructure> listeStructure = new ArrayList<TStructure>();
 		 private List<VModePassation> listeMode = new ArrayList<VModePassation>();
-		 private List<VAcPlanGeneral> listeAc = new ArrayList<VAcPlanGeneral>();
+		 private List<VAcAc> listeAc = new ArrayList<VAcAc>();
+		 private List<VAcDmp> listeAcDmp = new ArrayList<VAcDmp>();
+		 private List<VAcMin> listeMinDmp = new ArrayList<VAcMin>();
+		 private List<VAcPf> listeCellDmp = new ArrayList<VAcPf>();
 
 	 
 	//Declaration des objets
+		 private VAcAc recupAc = new VAcAc();
+		 private VAcMin recupMin = new VAcMin();
+		 private VAcPf recupCell = new VAcPf();
 		 private TPlanGeneral plan = new TPlanGeneral();
 		 private VPgpmStatut pgpmstatut= new VPgpmStatut();
 		 private TDetailPlanGeneral detailPlan = new TDetailPlanGeneral();
@@ -281,6 +291,8 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private String sourfin;
 		 private String dateToday;
 		 private String plgFonCod="";
+		 private String minCode="";
+		 private String fonCodePf="";
 		 
 		 //Boolean
 		 private boolean etatAgpm =false;
@@ -432,12 +444,175 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			   
 			 }*/
 		 
-		 public void chargeAcByCpmp(String typePlan) {
+		 public void onSelectAc() {
+			 recupAc.setPlgFonCod(plgFonCod);
+			 recupAc.setLibac(recupAc.getLibac());
+			 chargeFilterAcDmp("PN");
+			}
+		 
+		 public void onSelectMin() {
+			 recupMin.setMinCode(minCode);
+			 recupMin.setLibmin(recupMin.getLibmin());
+			 chargeFilterMinistereDmp("PN",""+recupMin.getMinCode());
+			 _logger.info("code Min: "+minCode);  
+			}
+		 
+		 public void onSelectCell() {
+			 recupCell.setFonCodePf(fonCodePf);
+			 recupCell.setLibpf(recupCell.getLibpf());
+			 chargeFilterCelluleDmp("PN");
+			}
+		 
+		 public void chargeAcCombobox() {
+				 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+					 chargecomboboxAcAc();	
+				 }else 
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+						 chargecomboboxAcPf();
+					 }else 
+						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
+								 ||userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+							 //minCode="tout";
+							 //fonCodePf ="tout";
+							 chargecomboboxAcDmp();
+							 chargecomboboxMinDmp();
+							 chargecomboboxCellDmp();
+						 }
+						 
+				
+		 }
+		 
+		 public void chargecomboboxAcAc() {
 			 listeAc.clear();
-				 listeAc=(List<VAcPlanGeneral>) iservice.getObjectsByColumn("VAcPlanGeneral",
-						 new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan),
-						 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
+					 new WhereClause("FON_TYF_CODAC",WhereClause.Comparateur.EQ,"ACR"),
+					 new WhereClause("FON_CODE_AC",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 _logger.info("listeAc size: "+listeAc.size());  
+			 _logger.info("fonCodeAc: "+userController.getSlctd().getTFonction().getFonCod()); 	 
+		 }
+		 
+		 public void chargecomboboxAcPf() {
+			 listeAc.clear();
+			 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
+					 new WhereClause("FON_TYF_CODPF",WhereClause.Comparateur.EQ,"CPM"),
+					 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
+			 _logger.info("listeAc size: "+listeAc.size());  
+			 _logger.info("fonCodePf: "+userController.getSlctd().getTFonction().getFonCod()); 	 
+		 }
+		 
+		 public void chargecomboboxAcDmp() {
+			 listeAc.clear();
+			 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
+					 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
+			 _logger.info("listeAcDmp size: "+listeAcDmp.size());  	 
+		 }
+		 
+		 //Filtre combobox ministere
+		 public void chargecomboboxMinDmp() {
+			 if(minCode.equalsIgnoreCase("tout")) {
+				 chargeAllMinDmp();
+			 }else
+			 {
+			   chargecomboboxMinByCellDmp();
+			 }  	 
+		 }
+		 
+		 //Filtre combobox cellule de passation
+		 public void chargecomboboxCellDmp() {
+			 if(plgFonCod.equalsIgnoreCase("tout")) {
+				 chargeAllCellDmp();
+				 chargeAllMinDmp();
+			 }else
+			 {
+			  chargecomboboxCellByMinDmp();
+			 }  	 
+		 }
+		 
+		 public void chargecomboboxAcByMin() {  
+			 listeAc.clear();
+			 if(minCode.equalsIgnoreCase("tout")) {
+				 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
+						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
+				//new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
 				 _logger.info("listeAc size: "+listeAc.size()); 
+				 _logger.info("ministere: "+minCode);  
+			 }else
+			 {
+				 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
+						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"),
+				 new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
+				 _logger.info("listeAc size: "+listeAc.size()); 
+				 _logger.info("ministere: "+minCode);  
+			 }
+			  
+		 }
+		 
+		 
+		 //Afficher tout les ministeres
+		 public void chargeAllMinDmp() {
+			 //listeMinDmp.clear();
+			 listeMinDmp=(List<VAcMin>) iservice.getObjectsByColumn("VAcMin",
+					 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
+			 _logger.info("listeMinDmp size: "+listeMinDmp.size());  
+		 }
+		 
+		 //Filtrer les points focaux par ministere dans la combobox cellule de passation
+		 public void chargecomboboxMinByCellDmp() {
+			 listeMinDmp.clear();
+			 listeMinDmp=(List<VAcMin>) iservice.getObjectsByColumn("VAcMin",
+					 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"),
+					 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.LIKE,"%"+plgFonCod+"%"));
+			 _logger.info("listeMinDmp size: "+listeMinDmp.size());	
+			 _logger.info("codePf: "+plgFonCod);	
+		 }
+		 
+		 
+		 //Filtrer les points focaux par ministere dans la combobox cellule de passation
+		 public void chargecomboboxCellByMinDmp() {
+			 listeCellDmp.clear();
+				 listeCellDmp.clear();
+				 listeCellDmp=(List<VAcPf>) iservice.getObjectsByColumn("VAcPf",
+						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"),
+						 new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
+				 _logger.info("listeCellDmp size: "+listeCellDmp.size());	  
+		 }
+		 
+		 
+		 //Afficher tout les points focaux dans la combobox cellule de passation
+		 public void chargeAllCellDmp() {
+			 listeCellDmp.clear();
+			 listeCellDmp=(List<VAcPf>) iservice.getObjectsByColumn("VAcPf",
+					 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
+			 _logger.info("listeCellDmp size: "+listeCellDmp.size());
+		 }
+		 
+		 
+		 
+		 //Filtre love Ministere
+		 public void chargeFilterMinistereDmp(String typePlan, String minCode) {
+					 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+								"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+								new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"),
+								new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+						_logger.info("validationListe size: "+validationListe.size()); 
+		 }
+		 
+		 //Filtre love Céllulle de passation
+		 public void chargeFilterCelluleDmp(String typePlan) {
+					 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+								"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+								new WhereClause("GPG_FON_COD_PF",WhereClause.Comparateur.LIKE,"%"+fonCodePf+"%"),
+								new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+						_logger.info("validationListe size: "+validationListe.size());  
+		 }
+		 
+		 //Filtre love Céllulle de passation
+		 public void chargeFilterAcDmp(String typePlan) {
+					 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+								"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+								new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.LIKE,"%"+plgFonCod+"%"),
+								new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+						_logger.info("validationListe size: "+validationListe.size());  
 		 }
 		 
 		//Filtrer la liste des PGPM et pgspm en fonction de l'AC selectionné
@@ -469,16 +644,50 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 }
 					 
 				 }else 
-					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")) {
+					 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP") 
+							 || userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 						 validationListe.clear();
-								validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+						 
+						 if(minCode.equalsIgnoreCase("tout")) {
+							 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 										"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										//new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"),
 										new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
-										//new WhereClause("GPG_FON_COD_DMP",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
-								//tableauBordController.ChargeTbProcedure("PN","PGPM");
-								//tableauBordController.chargeDataPgpm();
-								_logger.info("validationListe size: "+validationListe.size());	
-					 }else
+								_logger.info("validationListe size: "+validationListe.size());
+							 
+						 }else
+						 {
+							 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+										"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"),
+										new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+								_logger.info("validationListe size: "+validationListe.size()); 
+						 }
+						 
+						 
+						 
+						 if(plgFonCod.equalsIgnoreCase("tout")) {
+							 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+										"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										//new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"),
+										new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+								_logger.info("validationListe size: "+validationListe.size());
+								chargeAllMinDmp();
+							 
+						 }else
+						 {
+							 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+										"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+										new WhereClause("GPG_FON_COD_PF",WhereClause.Comparateur.LIKE,"%"+plgFonCod+"%"),
+										new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+								_logger.info("validationListe size: "+validationListe.size()); 
+						 }
+								
+						 chargecomboboxAcByMin();	
+						 chargecomboboxCellDmp();
+						 chargecomboboxMinDmp();
+		
+					 }/*else
 						 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 							 validationListe.clear();
 							validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
@@ -488,9 +697,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							//tableauBordController.ChargeTbProcedure("PN","PGPM");
 							//tableauBordController.chargeDataPgpm();
 							_logger.info("validationListe size: "+validationListe.size());	
-				 }   
+				 }   */
 		}
 		
+		
+		public void chargeAllPlg(String typePlan) {
+			
+		}
 		 
 		//PGPM : Filtre Autorité contractante CPMP ET DMP
 		 public void chargeOperateurByAcPgpm() {
@@ -2183,6 +2396,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				   iservice.updateObject(detailPlan);
 				
        			  chargeData();
+       			chargeAcCombobox();
        			
        			  userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
        			  userController.setRenderMsg(true);
@@ -2231,7 +2445,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				      iservice.updateObject(detailPlan);
      			
      			      chargeData();
-     			
+     			     chargeAcCombobox();
      			      userController.setTexteMsg("Opération créée avec succès! veuillez cliquer sur + pour ajouter un financement!");
      			      userController.setRenderMsg(true);
      			      userController.setSevrityMsg("success");
@@ -2296,6 +2510,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          				   iservice.updateObject(detailPlan);
            			       //Chargement de la liste
            			                chargeData();
+           			             chargeAcCombobox();
            			       //Message de confirmation
            			                userController.setTexteMsg("Détail enregistré avec succès!");
            			                userController.setRenderMsg(true);
@@ -2348,7 +2563,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
          			      
          			
          			                       chargeData();
-         			
+         			                      chargeAcCombobox();
          			                        userController.setTexteMsg("Détail enregistré avec succès!");
          			                        userController.setRenderMsg(true);
          			                        userController.setSevrityMsg("success");
@@ -2571,7 +2786,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 			 chargeDataAvaliderPgspm();
 				 			 chargePgspmValCp();
 				 		     chargePgspmValDmp();
-									  
+				 		    chargeAcCombobox();		  
 							 userController.setTexteMsg("Validation effectuée avec succès !");
 							 userController.setRenderMsg(true);
 							 userController.setSevrityMsg("success");
@@ -2646,6 +2861,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					     chargeDataAvaliderPgpm();
 					     chargePgpmDifCp();
 					     chargePgpmDifDmp();
+					     chargeAcCombobox();
 			 			 //Chargement du Tableau de Bord
 					     tableauBordController.chargeDataPgpm(); 	
 					     //typeActionTb();
@@ -2705,6 +2921,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				     chargeDataAvaliderPgpm();
 				     chargePgpmDifCp();
 				     chargePgpmDifDmp();
+				     chargeAcCombobox();
 				     //Chargement du Tableau de Bord
 				     tableauBordController.chargeDataPgpm(); 
 				     //typeActionTb();
@@ -2781,6 +2998,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						   
 				     //chargeDataAvaliderPgpm();
 		 			 chargeDataAvaliderPgspm();
+		 			chargeAcCombobox();
 		 			 //Chargement du Tableau de Bord
 		 			 tableauBordController.chargeDataPgspm();
 		 			 //typeActionTb();
@@ -2840,6 +3058,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					 chargeDataAvaliderPgspm();
 					 chargePgspmDifCp();
 					 chargePgspmDifDmp();
+					 chargeAcCombobox();
 				     //Chargement du Tableau de Bord
 					 tableauBordController.chargeDataPgspm();
 					 //typeActionTb();
@@ -3581,11 +3800,38 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 }
 				  
 				 //Edition de l'état PGPM
-				 public void imprimerPgpm() {
-					 String operateur = userController.getSlctd().getTFonction().getFonCod();
-						projetReport.longStringparam2(gesCode, operateur, "Pgpm", "Pgpm");
+				 public void imprimerPgpm(String typelan) {
+					 /*String operateur = userController.getSlctd().getTFonction().getFonCod();
+						projetReport.longStringparam2(gesCode, operateur, "Pgpm", "Pgpm");*/
+					 editPlan(typelan);
 					}
 				 
+				 
+                  public void editPlan(String typlan) {
+                	  String statut="";
+                	  if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("ACR")) {
+                		  statut="S1S S1D";
+							 String operateur = userController.getSlctd().getTFonction().getFonCod();
+							 String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
+							 projetReport.longStringparam5(gesCode, operateur,statut, typlan,ministere,"pgpm", "pgpm");
+						 }else
+							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
+								 statut="S1T S2D";
+								 String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
+								 projetReport.longStringparam5(gesCode, plgFonCod,statut, typlan,ministere,"pgpm", "pgpm");
+								 /*_logger.info("statut: "+statut);
+								 _logger.info("plgFonCod: "+plgFonCod);
+								 _logger.info("gesCode: "+gesCode);
+								 _logger.info("typlan: "+typlan);
+								 _logger.info("ministere: "+ministere);*/
+							 }else
+								 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("DMP")
+								    || userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
+									 statut="S2V S3D";
+									 //String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
+									 projetReport.longStringparam5(gesCode, plgFonCod,statut, typlan,minCode,"pgpm", "pgpm");
+								 }
+				   }
 				 
 				
 				 //Edition de l'état PGSPM
@@ -3629,7 +3875,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					listeFinancementPgpm.clear();
 					newFinancement = new TFinancementPgpm();
 					plgFonCod="";
-					chargeAcByCpmp("PN");
+					chargeAcCombobox();
 					vider();
 					userController.initMessage();
 					_logger.info("value: "+value+" action: "+action);
@@ -4887,11 +5133,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		this.pgpmDifAc = pgpmDifAc;
 	}
 
-	public List<VAcPlanGeneral> getListeAc() {
+	
+	public List<VAcAc> getListeAc() {
 		return listeAc;
 	}
 
-	public void setListeAc(List<VAcPlanGeneral> listeAc) {
+	public void setListeAc(List<VAcAc> listeAc) {
 		this.listeAc = listeAc;
 	}
 
@@ -4901,6 +5148,70 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setPlgFonCod(String plgFonCod) {
 		this.plgFonCod = plgFonCod;
+	}
+
+	public List<VAcDmp> getListeAcDmp() {
+		return listeAcDmp;
+	}
+
+	public void setListeAcDmp(List<VAcDmp> listeAcDmp) {
+		this.listeAcDmp = listeAcDmp;
+	}
+
+	public List<VAcMin> getListeMinDmp() {
+		return listeMinDmp;
+	}
+
+	public void setListeMinDmp(List<VAcMin> listeMinDmp) {
+		this.listeMinDmp = listeMinDmp;
+	}
+
+	public String getMinCode() {
+		return minCode;
+	}
+
+	public void setMinCode(String minCode) {
+		this.minCode = minCode;
+	}
+
+	public VAcAc getRecupAc() {
+		return recupAc;
+	}
+
+	public void setRecupAc(VAcAc recupAc) {
+		this.recupAc = recupAc;
+	}
+
+	public VAcMin getRecupMin() {
+		return recupMin;
+	}
+
+	public void setRecupMin(VAcMin recupMin) {
+		this.recupMin = recupMin;
+	}
+
+	public List<VAcPf> getListeCellDmp() {
+		return listeCellDmp;
+	}
+
+	public void setListeCellDmp(List<VAcPf> listeCellDmp) {
+		this.listeCellDmp = listeCellDmp;
+	}
+
+	public String getFonCodePf() {
+		return fonCodePf;
+	}
+
+	public void setFonCodePf(String fonCodePf) {
+		this.fonCodePf = fonCodePf;
+	}
+
+	public VAcPf getRecupCell() {
+		return recupCell;
+	}
+
+	public void setRecupCell(VAcPf recupCell) {
+		this.recupCell = recupCell;
 	}
 
 }

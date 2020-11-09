@@ -216,6 +216,50 @@ public class ProjetReport {
 				//Fin Print Fiche avec 2 parametre de type long
 				
 				
+				
+				//Print Fiche avec 2 parametres de type long et 4 String
+				public void longStringparam5(long numero1,String code,String statut,String typePlan,String param_min, String reportName, String jrxmlName ){
+					
+					String pathdir ="";
+					 
+					 pathdir = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/report/images/");
+						pathdir += "/";
+						
+						Map<String, Object> param = new HashMap<String, Object>();
+						param.put("param_code", numero1);
+						param.put("param_op", code);
+						param.put("param_statut", statut);
+						param.put("typePlan", typePlan);
+						param.put("param_min", param_min);
+						param.put("param_image", pathdir);
+						try {
+						Connection conn = connectionUtils.getConnection();
+						String jrxmlFile = FacesContext.getCurrentInstance().getExternalContext()
+								.getRealPath("/report/" + jrxmlName + ".jrxml");
+						InputStream input = new FileInputStream(new File(jrxmlFile));
+						JasperReport jasperReport = JasperCompileManager.compileReport(input);
+						JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, param, conn);
+						
+						HttpServletResponse httpServletResponse = (HttpServletResponse) FacesContext.getCurrentInstance()
+								.getExternalContext().getResponse();
+						httpServletResponse.addHeader("contentType", "application/pdf");
+						httpServletResponse.addHeader("Content-disposition",
+								"attachment; filename=" + reportName + "-" + numero1+ code + ".pdf");
+
+						ServletOutputStream servletOutputStream = httpServletResponse.getOutputStream();
+						JasperExportManager.exportReportToPdfStream(jasperPrint, servletOutputStream);
+						servletOutputStream.flush();
+						servletOutputStream.close();
+						FacesContext.getCurrentInstance().responseComplete();
+						 
+						} catch (Exception e) {
+							System.out.println(e);
+						}
+
+				}
+				//Fin Print Fiche 2 parametres de type long et 3 String
+				
+				
 				//Print Fiche avec 1 parametre de type String
 				public void stringparam1(String code,String reportName, String jrxmlName ){
 					
