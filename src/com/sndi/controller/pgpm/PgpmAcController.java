@@ -247,14 +247,16 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private VModePassation recupModeListe = new VModePassation();
 		 private VFonctionMinistere fonction =new VFonctionMinistere();
 		 private TFinancementPgpm newFinancement = new TFinancementPgpm();
-		 private TFinancementPgpm selectFinance = new TFinancementPgpm();
+		 //private TFinancementPgpm selectFinance = new TFinancementPgpm();
+		 private VFinancementPgpm selectFinance = new VFinancementPgpm();
 		 private List<VDetTabBordPgpm> detailTB = new ArrayList<VDetTabBordPgpm>();
 		 
 		 private VFinancementPgpm selectFinancePg = new VFinancementPgpm();
 		 //private TAgpm agpm = new TAgpm();
 		 private VAgpmFonction agpm = new VAgpmFonction();
 		 private THistoPlanGeneral histoPgpm = new THistoPlanGeneral();
-		 private TAgpm recupAgpm = new TAgpm();
+		 //private TAgpm recupAgpm = new TAgpm();
+		 private VAgpmliste recupAgpm = new VAgpmliste();
 		 private TDetailPlanGeneral demDetail = new TDetailPlanGeneral();
 		 //private TAffichagePgpm slctdTd = new TAffichagePgpm();
 		 private VPgpmliste slctdTd = new VPgpmliste();
@@ -2006,8 +2008,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 public void onSelectAgpm() {
 			 detailPlan.setGpgAgpId(agpm.getAgpId());
 
-			 recupAgpm = new TAgpm();
-			 recupAgpm.setAgpCommentaire(agpm.getAgpCommentaire());
+			 recupAgpm = new VAgpmliste();
+			 //recupAgpm.setAgpCommentaire(agpm.getAgpCommentaire());
+			 recupAgpm.setProTitre(agpm.getProTitre());
 			 //chargeAgpm();
 	
 			 listeFinancementAgpm =(List<TFinancement>) iservice.getObjectsByColumn("TFinancement", new ArrayList<String>(Arrays.asList("FIN_ID")),
@@ -3568,25 +3571,37 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     				    //vider();	
 			}
             
-            public void recupererFinancement() {
+            /*public void recupererFinancement() {
             	selectFinance.setTBailleur(new TBailleur(baiCode));
             	selectFinance.setTSourceFinancement(new TSourceFinancement(souCode));
             	selectFinance.setTDevise(new TDevise(devCode));  
             	selectFinance.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getGpgId()));
             	selectFinance.setFipTypeFinance(sourfin);
-            }
+            }*/
             
             public void updateFinance() {
-            	selectFinance.setTBailleur(new TBailleur(baiCode));
+            	listeFinancement = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
+						 new WhereClause("FIP_ID",Comparateur.EQ,""+selectFinance.getFipId())));
+				       if (!listeFinancement.isEmpty()) {
+		    				newFinancement=listeFinancement.get(0); 
+		    			}
+            	/*selectFinance.setTBailleur(new TBailleur(baiCode));
             	selectFinance.setTSourceFinancement(new TSourceFinancement(souCode));
             	selectFinance.setTDevise(new TDevise(devCode));  
             	selectFinance.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getGpgId()));
             	selectFinance.setFipTypeFinance(sourfin);
 			    iservice.updateObject(selectFinance);
+			    */
+			    newFinancement.setTBailleur(new TBailleur(baiCode));
+			    newFinancement.setTSourceFinancement(new TSourceFinancement(souCode));
+			    newFinancement.setTDevise(new TDevise(devCode));  
+			    newFinancement.setTDetailPlanGeneral(new TDetailPlanGeneral(slctdTd.getGpgId()));
+			    newFinancement.setFipTypeFinance(sourfin);
+			    iservice.updateObject(newFinancement);
+			    
 			    userController.setTexteMsg("Modification éffectuée avec succès !");
 				userController.setRenderMsg(true);
 				userController.setSevrityMsg("success");
-
             }
             
       	 
@@ -3605,7 +3620,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
     		 detailPlan = new TDetailPlanGeneral();
     		 recupFonction = new TFonction();
     		 reucpMarche = new TTypeMarche();
-    		 recupAgpm = new TAgpm();
+    		 recupAgpm = new VAgpmliste();
     		 recupModePassation = new VModePassationPn();
     		 newFinancement = new TFinancementPgpm();
     		 listeFinancement = new ArrayList<TFinancementPgpm>();
@@ -3633,7 +3648,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		    				newFinancement=listeFinancement.get(0); 
 		    			}
 				 
-				 iservice.deleteObject(getNewFinancement());
+				    iservice.deleteObject(getNewFinancement());
 					chargeFinancementUpdate();
 					userController.setTexteMsg("Suppression effectuée avec succès !");
 					userController.setRenderMsg(true);
@@ -3648,11 +3663,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 //sppression de financement
 		 public void removeFinancement() {
-			 System.out.print("+-------------+ "+getSelectFinancePg().getFipId());
+			 System.out.print("+-------------+ "+getSelectFinance().getFipId());
 			 try {
 				 
 				 listeFinancement = ((List<TFinancementPgpm>)iservice.getObjectsByColumn("TFinancementPgpm",new ArrayList<String>(Arrays.asList("FIP_ID")),
-						 new WhereClause("FIP_ID",Comparateur.EQ,""+selectFinancePg.getFipId())));
+						 new WhereClause("FIP_ID",Comparateur.EQ,""+selectFinance.getFipId())));
 				       if (!listeFinancement.isEmpty()) {
 		    				newFinancement=listeFinancement.get(0); 
 		    			}
@@ -4149,14 +4164,13 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	}
 
 
-	public TFinancementPgpm getSelectFinance() {
+	/*public TFinancementPgpm getSelectFinance() {
 		return selectFinance;
 	}
 
-
 	public void setSelectFinance(TFinancementPgpm selectFinance) {
 		this.selectFinance = selectFinance;
-	}
+	}*/
 
 
 	public List<VAgpmMinistere> getListeAgpm() {
@@ -4265,12 +4279,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 	}
 
 
-	public TAgpm getRecupAgpm() {
+	/*public TAgpm getRecupAgpm() {
 		return recupAgpm;
 	}
 	public void setRecupAgpm(TAgpm recupAgpm) {
 		this.recupAgpm = recupAgpm;
-	}
+	}*/
 
 
 	public String getSit() {
@@ -5212,6 +5226,22 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setRecupCell(VAcPf recupCell) {
 		this.recupCell = recupCell;
+	}
+
+	public VAgpmliste getRecupAgpm() {
+		return recupAgpm;
+	}
+
+	public void setRecupAgpm(VAgpmliste recupAgpm) {
+		this.recupAgpm = recupAgpm;
+	}
+
+	public VFinancementPgpm getSelectFinance() {
+		return selectFinance;
+	}
+
+	public void setSelectFinance(VFinancementPgpm selectFinance) {
+		this.selectFinance = selectFinance;
 	}
 
 }
