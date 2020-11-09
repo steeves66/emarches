@@ -1103,8 +1103,8 @@ public class DaoController {
 			 if(!listeEnteteCritere.isEmpty()) { 
 				 newEnteteCrit=listeEnteteCritere.get(0);
 				 //vider le champs detail
-				  newCritereDac = new VbDetCritAnalyseDac(); 
-				  listeSousEnteteCritere .clear(); 
+				  newCritereDac = new VbDetCritAnalyseDac();
+				  listeSousEnteteCritere.clear(); 
 				  listeSousEnteteCritere  = ((List<VCritAnalDacSousentete>)iservice.getObjectsByColumn("VCritAnalDacSousentete",
 						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
@@ -9093,7 +9093,7 @@ public class DaoController {
 	 // methode pour enregistrer le document apres avoir insérer les bookmarks
 	 
 	 //WINDOWS
-	 public void saveDaoFile() throws IOException {
+/*	 public void saveDaoFile() throws IOException {
 		 
 		 if (daoIter.getTymCode().equals("26") || daoIter.getTymCode().equals("21") ||
 			daoIter.getTymCode().equals("22") || daoIter.getTymCode().equals("23")|| daoIter.getTymCode().equals("25")) {
@@ -9152,10 +9152,10 @@ public class DaoController {
 		 _logger.info("path: "+DOWNLOAD_PATHNAME);
 		 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
 		 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-	 }
+	 }*/
 	 
 	//LINUX
-		/* public void saveDaoFile() throws IOException {
+		 public void saveDaoFile() throws IOException {
 			 switch(daoIter.getTymCode()) {		 
 				// TRAVAUX				
 				 case "2": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
@@ -9204,7 +9204,7 @@ public class DaoController {
 			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
 		 }
-	*/
+	
 	 private List<XWPFParagraph> collectParagraphs() {
 		 List<XWPFParagraph> paragraphs = new ArrayList<>();
 		 paragraphs.addAll(getDocument().getParagraphs());

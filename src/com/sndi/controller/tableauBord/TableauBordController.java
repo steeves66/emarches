@@ -452,8 +452,21 @@ public class TableauBordController {
 		private VTabBordDmp tableauBordDmp = new VTabBordDmp();
 		 //TABLEAU DE BORD
 		private VbTempParamTabBord tempBord = new VbTempParamTabBord();
-		
-		
+		//ACCUEIL AC
+		private VTabBordAc accueilBordAgp = new VTabBordAc();
+		private VTabBordAc accueilBordPgp = new VTabBordAc();
+		private VTabBordAc accueilBordPpm = new VTabBordAc();
+		private VTabBordAc accueilBordDac = new VTabBordAc();
+		//ACCUEIL PF
+		private VTabBordPf accueilBordPfAgp = new VTabBordPf();
+		private VTabBordPf accueilBordPfPgp = new VTabBordPf();
+		private VTabBordPf accueilBordPfPpm = new VTabBordPf();
+		private VTabBordPf accueilBordPfDac = new VTabBordPf();
+		//ACCUEIL DMP
+		private VTabBordDmp tableauBordDmpAgp = new VTabBordDmp();
+		private VTabBordDmp tableauBordDmpPgpm = new VTabBordDmp();
+		private VTabBordDmp tableauBordDmpPpm = new VTabBordDmp();
+		private VTabBordDmp tableauBordDmpDac = new VTabBordDmp();
 		
 		 //Création du Tableau de Bord 
 		 public void saveTempTabord(String statut, String ope, String acteur, String plan, String matricule, String dacCode) {
@@ -671,6 +684,13 @@ public class TableauBordController {
 				}
 		
 		
+		//		
+		public void chargeTableauBordDefaut() {
+			//Chargement des Tableaux de Bord pour la page d'Accueil
+		}
+				
+				
+				
 		//Tableau de bord CPMP pour ,DAO(PN,PS),AMI(PN,PS),PRQ(PN,PS)
 		public void ChargeTableauBordDac(String typeProc, String typeDac) {
 			//AC
@@ -6124,4 +6144,141 @@ public int getAmiTransmisDmpDossier(String src){
 	public void setTempBord(VbTempParamTabBord tempBord) {
 		this.tempBord = tempBord;
 	}
+
+
+
+	public VTabBordAc getAccueilBordAgp() {
+		return accueilBordAgp;
+	}
+
+
+
+	public void setAccueilBordAgp(VTabBordAc accueilBordAgp) {
+		this.accueilBordAgp = accueilBordAgp;
+	}
+
+
+
+	public VTabBordAc getAccueilBordPgp() {
+		return accueilBordPgp;
+	}
+
+
+
+	public void setAccueilBordPgp(VTabBordAc accueilBordPgp) {
+		this.accueilBordPgp = accueilBordPgp;
+	}
+
+
+
+	public VTabBordAc getAccueilBordPpm() {
+		return accueilBordPpm;
+	}
+
+
+
+	public void setAccueilBordPpm(VTabBordAc accueilBordPpm) {
+		this.accueilBordPpm = accueilBordPpm;
+	}
+
+
+
+	public VTabBordAc getAccueilBordDac() {
+		return accueilBordDac;
+	}
+
+
+
+	public void setAccueilBordDac(VTabBordAc accueilBordDac) {
+		this.accueilBordDac = accueilBordDac;
+	}
+
+
+
+	public VTabBordPf getAccueilBordPfAgp() {
+		return accueilBordPfAgp;
+	}
+
+
+
+	public void setAccueilBordPfAgp(VTabBordPf accueilBordPfAgp) {
+		this.accueilBordPfAgp = accueilBordPfAgp;
+	}
+
+
+
+	public VTabBordPf getAccueilBordPfPgp() {
+		return accueilBordPfPgp;
+	}
+
+
+
+	public void setAccueilBordPfPgp(VTabBordPf accueilBordPfPgp) {
+		this.accueilBordPfPgp = accueilBordPfPgp;
+	}
+
+
+
+	public VTabBordPf getAccueilBordPfPpm() {
+		return accueilBordPfPpm;
+	}
+
+
+
+	public void setAccueilBordPfPpm(VTabBordPf accueilBordPfPpm) {
+		this.accueilBordPfPpm = accueilBordPfPpm;
+	}
+
+
+
+	public VTabBordPf getAccueilBordPfDac() {
+		return accueilBordPfDac;
+	}
+
+
+
+	public void setAccueilBordPfDac(VTabBordPf accueilBordPfDac) {
+		this.accueilBordPfDac = accueilBordPfDac;
+	}
+
+
+
+	public VTabBordDmp getTableauBordDmpAgp() {
+		return tableauBordDmpAgp;
+	}
+
+	public void setTableauBordDmpAgp(VTabBordDmp tableauBordDmpAgp) {
+		this.tableauBordDmpAgp = tableauBordDmpAgp;
+	}
+
+
+
+	public VTabBordDmp getTableauBordDmpPgpm() {
+		return tableauBordDmpPgpm;
+	}
+
+	public void setTableauBordDmpPgpm(VTabBordDmp tableauBordDmpPgpm) {
+		this.tableauBordDmpPgpm = tableauBordDmpPgpm;
+	}
+
+
+
+	public VTabBordDmp getTableauBordDmpPpm() {
+		return tableauBordDmpPpm;
+	}
+
+	public void setTableauBordDmpPpm(VTabBordDmp tableauBordDmpPpm) {
+		this.tableauBordDmpPpm = tableauBordDmpPpm;
+	}
+
+
+
+	public VTabBordDmp getTableauBordDmpDac() {
+		return tableauBordDmpDac;
+	}
+
+	public void setTableauBordDmpDac(VTabBordDmp tableauBordDmpDac) {
+		this.tableauBordDmpDac = tableauBordDmpDac;
+	}
+
 }

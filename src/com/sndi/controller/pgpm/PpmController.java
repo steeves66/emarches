@@ -1534,10 +1534,12 @@ public class PpmController {
 				 selectFinance.setFppMontantDevise(updatefinance.getFppMontantDevise());  
 				 selectFinance.setFppPartTresor(updatefinance.getFppPartTresor());
 				 iservice.updateObject(selectFinance);
+				 //Chargement du montant du total
+				 coutTotal();
+				 //Confirmation
 				 userController.setTexteMsg("Suppression éffectuée avec succès!");
 				 userController.setRenderMsg(true);
 				 userController.setSevrityMsg("success");
-				  
 			 }
 			
 		
@@ -2516,6 +2518,13 @@ public class PpmController {
          	if(sourfin.equalsIgnoreCase("ETAT")) {
          		newFinancement.fppPartTresor = newFinancement.getFppMontantDevise().longValue();
          	}
+         }
+         
+         //
+         public void recupUpdate() {
+        	 if(sourfin.equalsIgnoreCase("ETAT")) {
+        		 updatefinance.fppPartTresor = updatefinance.getFppMontantDevise().longValue();
+        	 }
          }
 		 
 		 
