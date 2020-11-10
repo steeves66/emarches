@@ -8943,7 +8943,7 @@ public class DaoController {
 
 	 
 	 //POUR WINDOWS
-	 public void chargeDaoFile() throws IOException {		 
+	 /*public void chargeDaoFile() throws IOException {		 
 		 
 		 if(daoIter.getTymCode().equals("23") ||  daoIter.getTymCode().equals("21") || daoIter.getTymCode().equals("22") ||
 					daoIter.getTymCode().equals("26") || daoIter.getTymCode().equals("25") ) {
@@ -9021,11 +9021,11 @@ public class DaoController {
 			 break;
 		 }
 	 }
-	 
+	 */
 	 
 	 
 	 //POUR LINUX
-	 /*public void chargeDaoFile() throws IOException {		 
+	 public void chargeDaoFile() throws IOException {		 
 		 switch(daoIter.getTymCode()) {
 			 // FOURNITURE	;
 		 case "0": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES_LINUX))));
@@ -9089,11 +9089,11 @@ public class DaoController {
 			 break;
 		 }
 	 }
-	*/
+	
 	 // methode pour enregistrer le document apres avoir insérer les bookmarks
 	 
 	 //WINDOWS
-/*	 public void saveDaoFile() throws IOException {
+	 /* public void saveDaoFile() throws IOException {
 		 
 		 if (daoIter.getTymCode().equals("26") || daoIter.getTymCode().equals("21") ||
 			daoIter.getTymCode().equals("22") || daoIter.getTymCode().equals("23")|| daoIter.getTymCode().equals("25")) {

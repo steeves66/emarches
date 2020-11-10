@@ -27,7 +27,7 @@ public class VUpdateFinancementPpm implements java.io.Serializable {
 	private BigDecimal fppMontantDevise;
 	private String fppCommentaire;
 	private String fppTypeFinance;
-	private Long fppPartTresor;
+	public Long fppPartTresor;
 	private String baiCode;
 	private String baiLibelle;
 	private String baiAdresse;
