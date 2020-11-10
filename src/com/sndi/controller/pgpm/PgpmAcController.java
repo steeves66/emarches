@@ -511,7 +511,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 //Filtre combobox ministere
 		 public void chargecomboboxMinDmp() {
-			 if(minCode.equalsIgnoreCase("")) {
+			 if(minCode.equalsIgnoreCase("tout")) {
 				 chargeAllMinDmp();
 			 }else
 			 {
@@ -521,7 +521,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 //Filtre combobox cellule de passation
 		 public void chargecomboboxCellDmp() {
-			 if(plgFonCod.equalsIgnoreCase("")) {
+			 if(plgFonCod.equalsIgnoreCase("tout")) {
 				 chargeAllCellDmp();
 				 chargeAllMinDmp();
 			 }else
@@ -530,16 +530,24 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 }  	 
 		 }
 		 
-		 public void chargecomboboxAcByMin(){  
+		 public void chargecomboboxAcByMin() {  
 			 listeAc.clear();
+			 if(minCode.equalsIgnoreCase("tout")) {
+				 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
+						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
+				//new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
+				 _logger.info("listeAc size: "+listeAc.size()); 
+				 _logger.info("ministere: "+minCode);  
+			 }else
+			 {
 				 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
 						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"),
 				 new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
 				 _logger.info("listeAc size: "+listeAc.size()); 
 				 _logger.info("ministere: "+minCode);  
+			 }
 			  
 		 }
-		 
 		 
 		 
 		 //Afficher tout les ministeres

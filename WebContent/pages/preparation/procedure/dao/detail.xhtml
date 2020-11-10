@@ -45,7 +45,7 @@
             
               <div class="box-body">
               <div class="row">
-             <div class="col-md-6">
+             <div class="col-md-12">
              
                  <div class="box box-success box-solid">
                <div class="box-header with-border">
@@ -55,30 +55,18 @@
                 <!-- /.box-header -->
 	             <div class="box-body">
                <p:dataTable id="ppm" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.ppmListe}"  emptyMessage="Aucun PPM enregistré">
-         				<p:column headerText="N°" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.dppId}"/>
-				        </p:column>
 				        
-				        <p:column headerText="Objet de l'opération" styleClass="col-sm-1">
+				        <p:column styleClass="col-sm-12">
 				            <h:outputText value="#{slctdTb.dppObjet}" />
-				        </p:column>
-				        
-				        <p:column headerText="N° #{controleController.type}" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TDacSpecs.dacCode}" />
-				        </p:column>
-				         
+				        </p:column>  
 				        
                  </p:dataTable>     
             </div>
 	            <!-- /.box-header -->
-	             <div class="box-body">
-                
-            </div>
-	            <div class="box-body">
-         				 
-	            </div>
+	       
 	           </div>
-
+              </div>
+              <div class="col-md-6">
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type}</div></div> 
@@ -138,12 +126,9 @@
 	            
 	              <fieldset>
 		               <legend style="font-weight: bold">Liste des pièces</legend>
-		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="170" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
-	        <p:column headerText="Code" styleClass="col-sm-2">
-	            <h:outputText value="#{slctdTb.pidCode}" />
-	        </p:column>
+		               <p:dataTable id="basicDT" scrollable="true" scrollHeight="450" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{etatsDaoController.piecesListe}" emptyMessage="Aucune pièce trouvée">
 	        
-	         <p:column headerText="Libelle " styleClass="col-sm-8">
+	         <p:column headerText="Libelle " styleClass="col-sm-12">
 	            <h:outputText value="#{slctdTb.pidLibelle}" />
 	        </p:column>
 
@@ -157,11 +142,11 @@
 		               <legend style="font-weight: bold">#{controleController.type} joint(s)</legend>
 		              <p:dataTable id="DaoDT" scrollable="true" scrollHeight="100" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{etatsDaoController.dossListe}"  emptyMessage="Aucun #{controleController.type} enregistré">
 
-				        <p:column headerText="Reférence" styleClass="col-sm-1">
+				        <p:column headerText="Reférence" styleClass="col-sm-6">
 				            <h:outputText value="#{slctdTb.ddaReference}" />
 				        </p:column>
 				        
-				        <p:column headerText="Type de Document" styleClass="col-sm-1">
+				        <p:column headerText="Type de Document" styleClass="col-sm-4">
 				            <h:outputText value="#{slctdTb.TNatureDocuments.nadLibelle}" />
 				        </p:column>
 				        
@@ -283,10 +268,11 @@
 		             <div class="row">
 		             
 		           <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-3">
+                  <div class="col-sm-11">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.detail.aaoLieuRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
                   </div>
-                  
+                  </div>
+                  <div class="row">
                   <div class="col-sm-1"><label class="pull-right">Date</label></div>
                     <div class="col-sm-2">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDateRecep}"  style="width: 100%"> <f:convertDateTime pattern="MM/dd/yyyy" type="date" />  </h:outputText></label>
@@ -303,11 +289,11 @@
 		          <fieldset>
 		               <legend style="font-weight: bold">Ouverture</legend>
 		                <div class="row">
-		           <div class="col-sm-2"><label class="pull-right">Lieu</label></div>
-                  <div class="col-sm-3">
+		           <div class="col-sm-1"><label class="pull-right">Lieu</label></div>
+                  <div class="col-sm-9">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoNbrOuv}"  style="width: 100%" />   </label>
                   </div>
-                   <div class="col-sm-2"><label class="pull-right">Heure</label></div>
+                   <div class="col-sm-1"><label class="pull-right">Heure</label></div>
                     <div class="col-sm-1">
                     <label><h:outputText styleClass="text-muted"  value="#{etatsDaoController.avis.aaoDteHeurOuv}" style="width: 100%" /> </label>
                   </div>
@@ -336,7 +322,7 @@
             </div>
             
             
-             <div class="col-md-6">
+             <div class="col-md-12">
       
                  <div class="box box-success box-solid">
                <div class="box-header with-border">

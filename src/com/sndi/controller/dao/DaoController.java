@@ -2978,6 +2978,7 @@ public class DaoController {
 									norm = false; 
 									spec = true; 
 									comboboxCom = false;
+									btn_dao = true;
 								}
 								//chargeExpert();
 								chargeMembresComSpec();
@@ -2989,6 +2990,7 @@ public class DaoController {
 								//btn_save_expert = false;
 								panelMbr = false;
 								panelExpert = true;
+								btn_dao = true;
 							}
 				 	}
 					
