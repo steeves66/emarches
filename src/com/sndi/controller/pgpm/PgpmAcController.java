@@ -479,6 +479,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 							 chargecomboboxAcDmp();
 							 chargecomboboxMinDmp();
 							 chargecomboboxCellDmp();
+							 chargeAllCellDmp();
 						 }
 						 
 				
@@ -503,10 +504,15 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 }
 		 
 		 public void chargecomboboxAcDmp() {
+			chargeAllAcDmp();	 	 
+		 }
+		 
+		 //Charger tout les Ac de la DMP
+		 public void chargeAllAcDmp() {
 			 listeAc.clear();
 			 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
 					 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
-			 _logger.info("listeAcDmp size: "+listeAcDmp.size());  	 
+			 _logger.info("listeAcDmp size: "+listeAcDmp.size()); 	 
 		 }
 		 
 		 //Filtre combobox ministere
@@ -515,22 +521,36 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 chargeAllMinDmp();
 			 }else
 			 {
-			   chargecomboboxMinByCellDmp();
+			   chargecomboboxMinByCellDmp(""+plgFonCod);
 			 }  	 
 		 }
 		 
 		 //Filtre combobox cellule de passation
 		 public void chargecomboboxCellDmp() {
+			 chargeAllCellDmp();
 			 if(plgFonCod.equalsIgnoreCase(" ")) {
 				 chargeAllPlg("PN");
 				 chargecomboboxAcDmp();
 				 chargeAllMinDmp();
+				 chargeAllCellDmp();
 			 }else
 			 {
-			  //chargecomboboxCellByMinDmp();
+				 chargecomboboxMinByCellDmp(""+plgFonCod); 
+				 chargePgpmByMinistere("PN",""+minCode);
+				 chargecomboboxPgByCellDmp("PN",""+plgFonCod);
+				 chargecomboboxAcByCell(""+plgFonCod);
 			 }  	 
 		 }
 		 
+		 
+		 
+		 //Filtre la combobox Ac par cellule passé en parametre
+		 public void chargecomboboxAcByCell(String plgFonCod) { 
+			 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
+					 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.LIKE,"%"+plgFonCod+"%"),
+					 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
+			 _logger.info("listeAcDmp size: "+listeAcDmp.size()); 
+		 }
 		 public void chargecomboboxAcByMin() {  
 			 listeAc.clear();
 				 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
@@ -572,7 +592,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 }
 		 
 		 //Filtrer les points focaux par ministere dans la combobox cellule de passation
-		 public void chargecomboboxMinByCellDmp() {
+		 public void chargecomboboxMinByCellDmp(String plgFonCod) {
 			 listeMinDmp.clear();
 			 listeMinDmp=(List<VAcMin>) iservice.getObjectsByColumn("VAcMin",
 					 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"),
@@ -590,6 +610,17 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"),
 						 new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
 				 _logger.info("listeCellDmp size: "+listeCellDmp.size());	  
+		 }
+		 
+		//Filtrer les plan generau en fonction du point focal passé en parametre
+		 public void chargecomboboxPgByCellDmp(String typePlan,String plgFonCod) {
+			 validationListe.clear();
+			 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+						"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+						new WhereClause("GPG_FON_COD_PF",WhereClause.Comparateur.LIKE,"%"+plgFonCod+"%"),
+						new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				_logger.info("validationListe size: "+validationListe.size()); 
+				  
 		 }
 		 
 		 
@@ -3908,6 +3939,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 					newFinancement = new TFinancementPgpm();
 					plgFonCod="";
 					chargeAcCombobox();
+					chargeAllCellDmp();
 					vider();
 					userController.initMessage();
 					_logger.info("value: "+value+" action: "+action);

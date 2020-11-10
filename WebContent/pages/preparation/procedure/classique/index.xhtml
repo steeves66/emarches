@@ -798,7 +798,7 @@
 		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 					       <f:selectItem  itemValue=" " itemLabel="selectionnez la céllule de passation" />  
 					       <f:selectItems value="#{pgpmAcController.listeCellDmp}" var="cel" itemLabel="#{cel.libpf}" itemValue="#{cel.fonCodePf}" /> 	
-				           <p:ajax listener="#{pgpmAcController.chargeDataFilter('PN')}" update=":gnl"/>
+				           <p:ajax listener="#{pgpmAcController.chargecomboboxCellDmp()}" update=":gnl"/>
 		       		        </p:selectOneMenu>
 			                  </div>
 		                </div>
@@ -814,7 +814,7 @@
 		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 					       <f:selectItem  itemValue="" itemLabel="selectionnez l'autorité contractante" />  
 					       <f:selectItems value="#{pgpmAcController.listeAc}" var="ac" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 	
-				           <p:ajax listener="#{pgpmAcController.chargeDataFilter('PN')}" update=":gnl"/>
+				           <p:ajax listener="#{pgpmAcController.chargecomboboxAcDmp()}" update=":gnl"/>
 		       		        </p:selectOneMenu>
 			                  </div>
 			                 <div class="col-sm-1">
