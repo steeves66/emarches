@@ -126,19 +126,19 @@
 				        </p:column>
 
                          
-         				<p:column headerText="Nom et Prenom(s)" styleClass="col-sm-1" >
+         				<p:column headerText="Nom et Prenom(s)" width="12%" >
          				<h:outputText value="#{slctdTb.opeMatricule} : #{slctdTb.opeNom}"/>
 				        </p:column>
 				        
-				        <p:column headerText="DAO traité(s)" styleClass="col-sm-1" >
+				        <p:column headerText="DAO traité(s)" width="4%" >
          				<h:outputText value="#{slctdTb.nbrTraite}"/>
 				        </p:column>
 				        
-				        <p:column headerText="DAO en cours" styleClass="col-sm-1" >
+				        <p:column headerText="DAO en cours" width="4%" >
          				<h:outputText value="#{slctdTb.nbrEnCours}"/>
 				        </p:column>
 				        
-				        <p:column headerText="DAO validé(s)" styleClass="col-sm-1" >
+				        <p:column headerText="DAO validé(s)" width="4%" >
          				<h:outputText value="#{slctdTb.nbrValide}"/>
 				        </p:column>
 				        
@@ -221,13 +221,6 @@
     
     
   
-    
-     
-  
-
-    
-        
-     
     
     <h:form id="apercuDAOAff">
 	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
