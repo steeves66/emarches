@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
 /*import com.sndi.model.Statut;
@@ -78,6 +79,9 @@ public class UserController implements Serializable{
 	
 	@Autowired
 	Iservice iservice;
+	
+	//@Autowired
+	//TableauBordController tableauBordController;
 	
 	@PostConstruct
 	public void postConstru() throws IOException {
