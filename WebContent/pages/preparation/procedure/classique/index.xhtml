@@ -782,7 +782,7 @@
 		                  <div class="col-sm-10">
 		                    <p:selectOneMenu value="#{pgpmAcController.minCode}"
 		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-					       <f:selectItem  itemValue="" itemLabel="selectionnez le ministère" /> 
+					       <f:selectItem  itemValue=" " itemLabel="selectionnez le ministère" /> 
 					       <f:selectItems value="#{pgpmAcController.listeMinDmp}" var="ac" itemLabel="#{ac.libmin}" itemValue="#{ac.minCode}" /> 
 					       <p:ajax listener="#{pgpmAcController.chargecomboboxAcByMin()}" update=":gnl"/>	 
 		       		        </p:selectOneMenu>
@@ -796,7 +796,7 @@
 		                  <div class="col-sm-10">
 		                    <p:selectOneMenu value="#{pgpmAcController.plgFonCod}"
 		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-					       <f:selectItem  itemValue="" itemLabel="selectionnez la céllule de passation" />  
+					       <f:selectItem  itemValue=" " itemLabel="selectionnez la céllule de passation" />  
 					       <f:selectItems value="#{pgpmAcController.listeCellDmp}" var="cel" itemLabel="#{cel.libpf}" itemValue="#{cel.fonCodePf}" /> 	
 				           <p:ajax listener="#{pgpmAcController.chargeDataFilter('PN')}" update=":gnl"/>
 		       		        </p:selectOneMenu>

@@ -521,32 +521,45 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 //Filtre combobox cellule de passation
 		 public void chargecomboboxCellDmp() {
-			 if(plgFonCod.equalsIgnoreCase("tout")) {
-				 chargeAllCellDmp();
+			 if(plgFonCod.equalsIgnoreCase(" ")) {
+				 chargeAllPlg("PN");
+				 chargecomboboxAcDmp();
 				 chargeAllMinDmp();
 			 }else
 			 {
-			  chargecomboboxCellByMinDmp();
+			  //chargecomboboxCellByMinDmp();
 			 }  	 
 		 }
 		 
 		 public void chargecomboboxAcByMin() {  
 			 listeAc.clear();
-			 if(minCode.equalsIgnoreCase("tout")) {
-				 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
-						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"));
-				//new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
-				 _logger.info("listeAc size: "+listeAc.size()); 
-				 _logger.info("ministere: "+minCode);  
-			 }else
-			 {
 				 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
 						 new WhereClause("FON_TYF_CODDMP",WhereClause.Comparateur.EQ,"DMP"),
 				 new WhereClause("MIN_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"));
 				 _logger.info("listeAc size: "+listeAc.size()); 
-				 _logger.info("ministere: "+minCode);  
-			 }
-			  
+				 _logger.info("ministere: "+minCode);
+				 if(minCode.equalsIgnoreCase(" ")) {
+					 chargeAllPlg("PN");
+					 chargecomboboxAcDmp();
+					 chargeAllCellDmp();
+				 }else
+				 {
+					chargePgpmByMinistere("PN",""+minCode);
+					chargecomboboxCellByMinDmp(""+minCode);
+				 }  
+		 }
+		 
+		 
+		 
+		 
+		 //Filtrer les pgpm par ministere
+		 public void chargePgpmByMinistere(String typePlan, String minCode) {
+			 validationListe.clear();
+			 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+						"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+						new WhereClause("GPG_STR_CODE",WhereClause.Comparateur.LIKE,"%"+minCode+"%"),
+						new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				_logger.info("validationListe size: "+validationListe.size()); 
 		 }
 		 
 		 
@@ -570,7 +583,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 
 		 
 		 //Filtrer les points focaux par ministere dans la combobox cellule de passation
-		 public void chargecomboboxCellByMinDmp() {
+		 public void chargecomboboxCellByMinDmp(String minCode) {
 			 listeCellDmp.clear();
 				 listeCellDmp.clear();
 				 listeCellDmp=(List<VAcPf>) iservice.getObjectsByColumn("VAcPf",
@@ -704,7 +717,11 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		
 		
 		public void chargeAllPlg(String typePlan) {
-			
+			 validationListe.clear();
+			 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+						"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+						new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				_logger.info("validationListe size: "+validationListe.size()); 	
 		}
 		 
 		//PGPM : Filtre Autorité contractante CPMP ET DMP
