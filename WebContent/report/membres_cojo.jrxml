@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-07T17:23:14 -->
+<!-- 2020-11-11T11:08:21 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="membres_cojo" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="53fc7504-1b87-459d-b8ff-b4a2211a8f07">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP.xml"/>
@@ -189,7 +189,7 @@ and s.sea_num = $P{param_code}]]>
 	<pageHeader>
 		<band height="231" splitType="Stretch">
 			<staticText>
-				<reportElement x="629" y="1" width="171" height="17" uuid="4d4b45d7-e363-4cf3-a469-f83aa806f306">
+				<reportElement x="580" y="1" width="220" height="17" uuid="4d4b45d7-e363-4cf3-a469-f83aa806f306">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -198,7 +198,7 @@ and s.sea_num = $P{param_code}]]>
 				<text><![CDATA[République de Côte d'Ivoire]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="629" y="19" width="171" height="17" uuid="0facb229-b3cf-4160-bad5-efba0130008e">
+				<reportElement x="580" y="19" width="220" height="17" uuid="0facb229-b3cf-4160-bad5-efba0130008e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Top">
@@ -240,7 +240,7 @@ and s.sea_num = $P{param_code}]]>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<b>"+"Nombre de pli : "+"</b>"+$F{SEA_NBR_PLI}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<b>"+"Nombre de plis : "+"</b>"+$F{SEA_NBR_PLI}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement x="612" y="160" width="179" height="15" uuid="50f66442-49b4-4205-b4e6-a97c39fcaa11">
@@ -249,7 +249,7 @@ and s.sea_num = $P{param_code}]]>
 				<textElement verticalAlignment="Middle" markup="html">
 					<font fontName="SansSerif" size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA["<b>"+"Quorum ? : "+"</b>"+$F{SEA_QUORUM}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["<b>"+"Quorum  : "+"</b>"+$F{SEA_QUORUM}]]></textFieldExpression>
 			</textField>
 			<componentElement>
 				<reportElement x="1" y="191" width="799" height="40" uuid="76761c57-b869-4cb7-b5f5-d1b0a40c3325">
@@ -276,7 +276,7 @@ and s.sea_num = $P{param_code}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
 								</textElement>
-								<text><![CDATA[TITRE]]></text>
+								<text><![CDATA[QUALITE]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
@@ -301,46 +301,46 @@ and s.sea_num = $P{param_code}]]>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
 								</textElement>
-								<text><![CDATA[FONCTION]]></text>
+								<text><![CDATA[NOM]]></text>
 							</staticText>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="224" height="20" isRemoveLineWhenBlank="true" uuid="bf7482a7-37f9-4049-95f9-dba72487e3fc"/>
 								<box padding="3"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle"/>
-								<textFieldExpression><![CDATA[$F{DCS_FON_COD}]]></textFieldExpression>
-							</textField>
-						</jr:detailCell>
-					</jr:column>
-					<jr:column width="240" uuid="9e4093a7-0236-42e3-a908-a0b996f864fc">
-						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
-						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
-							<staticText>
-								<reportElement x="0" y="0" width="240" height="20" forecolor="#FFFFFF" uuid="74dcbdfc-dd73-438c-8f29-fdee8f2de7de"/>
-								<box padding="3"/>
-								<textElement textAlignment="Center" verticalAlignment="Middle">
-									<font size="10" isBold="true"/>
-								</textElement>
-								<text><![CDATA[NOM]]></text>
-							</staticText>
-						</jr:tableHeader>
-						<jr:detailCell style="Table 1_TD" height="20">
-							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="240" height="20" isRemoveLineWhenBlank="true" uuid="d5454944-6582-4f6c-8183-f7e40c969190"/>
-								<box padding="3"/>
 								<textElement textAlignment="Left" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{NOMPRENOMS}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="74" uuid="478d874f-f8db-47d1-8af2-c513554730de">
+					<jr:column width="226" uuid="9e4093a7-0236-42e3-a908-a0b996f864fc">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne3"/>
+						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="226" height="20" forecolor="#FFFFFF" uuid="74dcbdfc-dd73-438c-8f29-fdee8f2de7de"/>
+								<box padding="3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[STATUT]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="226" height="20" isRemoveLineWhenBlank="true" uuid="d5454944-6582-4f6c-8183-f7e40c969190"/>
+								<box padding="3"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DCS_FON_COD}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="478d874f-f8db-47d1-8af2-c513554730de">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne4"/>
 						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
 							<staticText>
-								<reportElement x="0" y="0" width="74" height="20" forecolor="#FFFFFF" uuid="286880fa-b889-43f5-b709-54b49ec3f8ca"/>
+								<reportElement x="0" y="0" width="80" height="20" forecolor="#FFFFFF" uuid="286880fa-b889-43f5-b709-54b49ec3f8ca"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
@@ -350,18 +350,18 @@ and s.sea_num = $P{param_code}]]>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="74" height="20" isRemoveLineWhenBlank="true" uuid="b07b384f-04b5-4c99-9d86-7366751c87da"/>
+								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="80" height="20" isRemoveLineWhenBlank="true" uuid="b07b384f-04b5-4c99-9d86-7366751c87da"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_TEL_MBM}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="50" uuid="cecfdb0c-88f4-42ea-8fc4-d68eb0f475d5">
+					<jr:column width="58" uuid="cecfdb0c-88f4-42ea-8fc4-d68eb0f475d5">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Colonne5"/>
 						<jr:tableHeader style="Table 1_TH" height="20" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="50" height="20" forecolor="#FFFFFF" uuid="39f59066-c69a-4a2e-977b-dff611552298"/>
+								<reportElement x="0" y="0" width="58" height="20" forecolor="#FFFFFF" uuid="39f59066-c69a-4a2e-977b-dff611552298"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle">
 									<font size="10" isBold="true"/>
@@ -371,7 +371,7 @@ and s.sea_num = $P{param_code}]]>
 						</jr:tableHeader>
 						<jr:detailCell style="Table 1_TD" height="20">
 							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="50" height="20" isRemoveLineWhenBlank="true" uuid="ea71e2c1-2fc5-4d72-970c-33c3865c71bf"/>
+								<reportElement positionType="Float" stretchType="ContainerHeight" x="0" y="0" width="58" height="20" isRemoveLineWhenBlank="true" uuid="ea71e2c1-2fc5-4d72-970c-33c3865c71bf"/>
 								<box padding="3"/>
 								<textElement textAlignment="Center" verticalAlignment="Middle"/>
 								<textFieldExpression><![CDATA[$F{DCS_REP_MANDATE}]]></textFieldExpression>

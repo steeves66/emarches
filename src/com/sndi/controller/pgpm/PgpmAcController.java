@@ -295,6 +295,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		 private String plgFonCod="";
 		 private String minCode="";
 		 private String fonCodePf="";
+		 private String plgFonCodAc="";
 		 
 		 //Boolean
 		 private boolean etatAgpm =false;
@@ -485,6 +486,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				
 		 }
 		 
+		 
 		 public void chargecomboboxAcAc() {
 			 listeAc.clear();
 			 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
@@ -494,17 +496,88 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 			 _logger.info("fonCodeAc: "+userController.getSlctd().getTFonction().getFonCod()); 	 
 		 }
 		 
+		
 		 public void chargecomboboxAcPf() {
+			 //plgFonCod=" ";
+			 chargeAllAcBypf();	
+			 if(plgFonCod.equalsIgnoreCase(" ")) {
+				 chargeAllplgbyCell("PN"); 
+				 chargeAllAcBypf();	
+			 }else
+			 {
+				 chargePlgByAcCpmp("PN",""+plgFonCod);
+			 }
+			 
+		 }
+		 
+		 //Afficher les PGPM et PGSPM en fonction de de l'AC selectionné
+		public void chargePlgByAcCpmp(String typePlan,String plgFonCod) {
+				 validationListe.clear();
+				 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+							"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+							new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.LIKE,"%"+plgFonCod+"%"),
+							new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+					_logger.info("validationListe size: "+validationListe.size()); 	
+					_logger.info("fonCodeAc: "+plgFonCod); 
+					
+		}
+		 
+		 
+		 
+		 
+		 //Afficher les PGPM ET PGSPM en fonction du point focal connecté
+		 public void chargeAllplgbyCell(String typePlan) {
+			 plgFonCod=" ";
+			 minCode=" ";
+				 validationListe.clear();
+				 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+							"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+							new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+					_logger.info("validationListe size: "+validationListe.size()); 		 
+		 }
+		 
+		 //Afficher les PGPM ET PGSPM en fonction de l'AC passé en selectionné
+		 public void chargePlgbyAc(String typePlan, String plgFonCod) {
+			 plgFonCod=" ";
+				 validationListe.clear();
+				 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+							"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S1T","S3D")),
+							new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+					_logger.info("validationListe size: "+validationListe.size()); 		 
+		 }
+		 
+		 
+		//Afficher les AC du point focal connecté
+		 public void chargeAllAcBypf() {
 			 listeAc.clear();
 			 listeAc=(List<VAcAc>) iservice.getObjectsByColumn("VAcAc",
 					 new WhereClause("FON_TYF_CODPF",WhereClause.Comparateur.EQ,"CPM"),
 					 new WhereClause("FON_CODE_PF",WhereClause.Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));
 			 _logger.info("listeAc size: "+listeAc.size());  
-			 _logger.info("fonCodePf: "+userController.getSlctd().getTFonction().getFonCod()); 	 
+			 _logger.info("fonCodePf: "+userController.getSlctd().getTFonction().getFonCod()); 
 		 }
 		 
 		 public void chargecomboboxAcDmp() {
-			chargeAllAcDmp();	 	 
+			 chargeAllAcDmp();	
+			 if(plgFonCodAc.equalsIgnoreCase(" ")) {
+				 chargeAllAcDmp();	
+				 chargeAllCellDmp();
+				 chargeAllMinDmp();
+				 chargeAllPlg("PN");
+			 }else
+		      {
+				 chargePgByAc("PN",""+plgFonCodAc);
+				 } 	 
+		 }
+		 
+		 
+		 //Filtrer les PGPM et PGSPM en fonction de l'AC selectiooné
+		 public void chargePgByAc(String typePlan,String plgFonCodAc) {
+			 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
+						"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
+						new WhereClause("GPG_ACTEUR_SAISIE",WhereClause.Comparateur.LIKE,"%"+plgFonCodAc+"%"),
+						new WhereClause("GPG_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typePlan));
+				_logger.info("validationListe size: "+validationListe.size());  
 		 }
 		 
 		 //Charger tout les Ac de la DMP
@@ -748,6 +821,9 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 		
 		
 		public void chargeAllPlg(String typePlan) {
+			plgFonCod=" ";
+			plgFonCodAc=" ";
+			minCode=" ";
 			 validationListe.clear();
 			 validationListe = (List<VPgpmliste>) iservice.getObjectsByColumnInDesc("VPgpmliste", new ArrayList<String>(Arrays.asList("GPG_DTE_MODIF")),
 						"GPG_STA_CODE", new ArrayList<String>(Arrays.asList("S2V","SDT")),
@@ -3876,12 +3952,12 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 		  statut="S1S S1D";
 							 String operateur = userController.getSlctd().getTFonction().getFonCod();
 							 String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
-							 projetReport.longStringparam5(gesCode, operateur,statut, typlan,ministere,"pgpm", "pgpm");
+							 projetReport.longStringparam6(gesCode, plgFonCodAc,statut, typlan,minCode,plgFonCod,"pgpm", "pgpm");
 						 }else
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 								 statut="S1T S2D";
 								 String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
-								 projetReport.longStringparam5(gesCode, plgFonCod,statut, typlan,ministere,"pgpm", "pgpm");
+								 projetReport.longStringparam6(gesCode, plgFonCodAc,statut, typlan,minCode,plgFonCod,"pgpm", "pgpm");
 								 /*_logger.info("statut: "+statut);
 								 _logger.info("plgFonCod: "+plgFonCod);
 								 _logger.info("gesCode: "+gesCode);
@@ -3892,7 +3968,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 								    || userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("SPP")) {
 									 statut="S2V S3D";
 									 //String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
-									 projetReport.longStringparam5(gesCode, plgFonCod,statut, typlan,minCode,"pgpm", "pgpm");
+									 projetReport.longStringparam6(gesCode, plgFonCodAc,statut, typlan,minCode,plgFonCod,"pgpm", "pgpm");
 								 }
 				   }
 				 
@@ -5291,6 +5367,14 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 
 	public void setSelectFinance(VFinancementPgpm selectFinance) {
 		this.selectFinance = selectFinance;
+	}
+
+	public String getPlgFonCodAc() {
+		return plgFonCodAc;
+	}
+
+	public void setPlgFonCodAc(String plgFonCodAc) {
+		this.plgFonCodAc = plgFonCodAc;
 	}
 
 }

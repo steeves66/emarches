@@ -218,7 +218,7 @@ public class ProjetReport {
 				
 				
 				//Print Fiche avec 2 parametres de type long et 4 String
-				public void longStringparam5(long numero1,String code,String statut,String typePlan,String param_min, String reportName, String jrxmlName ){
+				public void longStringparam6(long numero1,String code,String statut,String typePlan,String param_min,String param_pf, String reportName, String jrxmlName ){
 					
 					String pathdir ="";
 					 
@@ -231,6 +231,7 @@ public class ProjetReport {
 						param.put("param_statut", statut);
 						param.put("typePlan", typePlan);
 						param.put("param_min", param_min);
+						param.put("param_pf", param_pf);
 						param.put("param_image", pathdir);
 						try {
 						Connection conn = connectionUtils.getConnection();

@@ -782,7 +782,7 @@
 		                  <div class="col-sm-10">
 		                    <p:selectOneMenu value="#{pgpmAcController.minCode}"
 		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-					       <f:selectItem  itemValue=" " itemLabel="selectionnez le ministère" /> 
+					       <f:selectItem  itemValue=" " itemLabel="Afficher toute la liste" /> 
 					       <f:selectItems value="#{pgpmAcController.listeMinDmp}" var="ac" itemLabel="#{ac.libmin}" itemValue="#{ac.minCode}" /> 
 					       <p:ajax listener="#{pgpmAcController.chargecomboboxAcByMin()}" update=":gnl"/>	 
 		       		        </p:selectOneMenu>
@@ -796,7 +796,7 @@
 		                  <div class="col-sm-10">
 		                    <p:selectOneMenu value="#{pgpmAcController.plgFonCod}"
 		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-					       <f:selectItem  itemValue=" " itemLabel="selectionnez la céllule de passation" />  
+					       <f:selectItem  itemValue=" " itemLabel="Afficher toute la liste" />  
 					       <f:selectItems value="#{pgpmAcController.listeCellDmp}" var="cel" itemLabel="#{cel.libpf}" itemValue="#{cel.fonCodePf}" /> 	
 				           <p:ajax listener="#{pgpmAcController.chargecomboboxCellDmp()}" update=":gnl"/>
 		       		        </p:selectOneMenu>
@@ -809,23 +809,56 @@
 	             
 							<div class="form-group ">
 		                  <label class="col-sm-1 control-label"><b>Autorite contractante</b></label>
-		                  <div class="col-sm-10">
-		                    <p:selectOneMenu value="#{pgpmAcController.plgFonCod}"
+		                  <div class="col-sm-11">
+		                    <p:selectOneMenu value="#{pgpmAcController.plgFonCodAc}"
 		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-					       <f:selectItem  itemValue="" itemLabel="selectionnez l'autorité contractante" />  
+					       <f:selectItem  itemValue=" " itemLabel="Afficher toute la liste" />  
 					       <f:selectItems value="#{pgpmAcController.listeAc}" var="ac" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 	
 				           <p:ajax listener="#{pgpmAcController.chargecomboboxAcDmp()}" update=":gnl"/>
 		       		        </p:selectOneMenu>
 			                  </div>
-			                 <div class="col-sm-1">
-			                    <p:commandLink  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{pgpmAcController.refresh()}" update=":gnl">
-							       Réinitialiser tout
-							     </p:commandLink>
-			                 </div> 
+			                 
 			                 
 		                </div>
 							
 	            </div>
+          </h:panelGroup>
+          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+          
+          <div class="col-md-6">
+		           <div class="form-group">
+		                  <label for="mini" class="col-sm-1 control-label">Ministère</label>
+		                  <div class="col-sm-11">
+		                    <p:inputTextarea  value="#{userController.fonction.TStructure.TMinistere.minLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+		                  </div>
+		                </div>
+		          </div>
+		          <div class="col-md-6">
+		          <div class="form-group">
+		                  <label for="cel" class="col-sm-2 control-label">Cellule de passation</label>
+		                  <div class="col-sm-10">
+		                    <p:inputTextarea  value="#{userController.fonction.TStructure.TMinistere.minLibelle}" rows="2" cols="33" styleClass="form-control" readonly="true"  style="width: 100%" />
+		                  </div>
+		                </div>
+		          </div>
+          
+            <div class="col-md-12">
+							<div class="form-group ">
+		                  <label class="col-sm-1 control-label"><b>Autorite contractante</b></label>
+		                  <div class="col-sm-11">
+		                    <p:selectOneMenu value="#{pgpmAcController.plgFonCod}"
+		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+					       <f:selectItem  itemValue=" " itemLabel="Afficher toute la liste" />  
+					       <f:selectItems value="#{pgpmAcController.listeAc}" var="ac" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 	
+				           <p:ajax listener="#{pgpmAcController.chargecomboboxAcPf()}" update=":gnl"/>
+		       		        </p:selectOneMenu>
+			                  </div>
+			                 
+			                 
+		                </div>
+							
+	            </div>
+	           
           </h:panelGroup>
 	      </div>
 	      
@@ -837,53 +870,6 @@
       </div>
       </div>
                <h:panelGroup rendered="#{controleController.searchPgpm}">
-               <div class="row">
-               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-						<div class="col-md-3">	
-					  <div class="input-group input-group-sm col-md-12">
-					   <span class="input-group-btn">
-				                <p:commandLink action="#{pgpmAcController.reinitialiserPgpm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
-				        </span>
-                      <p:inputText styleClass="form-control" type="text" value="#{pgpmAcController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{pgpmAcController.chargerPgpmRecherche('PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
-                    </span>
-					 </div>
-					 </div>
-					 </h:panelGroup>
-					 
-					 <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
-					 	<div class="col-md-6">	
-						  <div class="col-md-12">
-							<div class="form-group ">
-		                  <label for="ac" class="col-sm-2 control-label"><b>Autorite contractante </b></label>
-		                  <div class="col-sm-10">
-		                    <p:selectOneMenu id="ac" value="#{pgpmAcController.plgFonCod}"
-		                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-					       <f:selectItem  itemValue="tout" itemLabel="Afficher toute la liste" />  
-					       <f:selectItems value="#{pgpmAcController.listeAc}" var="ac" itemLabel="#{ac.libac}" itemValue="#{ac.plgFonCod}" /> 	
-				           <p:ajax listener="#{pgpmAcController.chargeDataFilter('PN')}" update=":gnl:ndTble1"/>
-		       		        </p:selectOneMenu>
-			                  </div>
-		                </div>
-							 </div>
-					 </div>
-
-					 
-					    <div class="col-md-2">
-							<div class="form-group ">
-		                  <label for="ac" class="col-sm-6 control-label"><b>Gestion</b></label>
-		                  <div class="col-sm-6">
-		                      <p:selectOneMenu value="#{pgpmAcController.gesCode}"
-			                         effect="fade" style="width:100%">
-					       <f:selectItems value="#{pgpmAcController.listeGestion}" var="gs" itemLabel="#{gs.gesCode}" itemValue="#{gs.gesCode}" />				   				    				   
-		       		        </p:selectOneMenu>
-			                  </div>
-		                </div>
-							 </div>
-					</h:panelGroup>
-
-					 </div>
 					 </h:panelGroup>
 					 
 					   <div class="row">         
