@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-10-20T11:59:53 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pgpm_v2" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dfd10b17-c92b-459b-8cef-c34a58010bc0">
+<!-- 2020-11-12T16:38:03 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pgpm" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="dfd10b17-c92b-459b-8cef-c34a58010bc0">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="WebContent\report\EMAP.xml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="267"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="725"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -34,19 +36,22 @@
 	<subDataset name="pgpm_list" uuid="4af00713-770a-4f91-a3ce-12ffa95964b4">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="252"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="748"/>
 		<parameter name="param_statut" class="java.lang.String"/>
 		<parameter name="param_code" class="java.lang.String"/>
 		<parameter name="param_op" class="java.lang.String"/>
 		<parameter name="typePlan" class="java.lang.String"/>
 		<parameter name="param_min" class="java.lang.String"/>
+		<parameter name="param_pf" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select *
 from v_etat_liste_pgpm vp
-where vp.gpg_type_plan =nvl(vp.gpg_type_plan,$P{typePlan})
-and instr($P{param_statut},vp.gpg_sta_code)>0
-and vp.plg_ges_code = nvl(vp.plg_ges_code,$P{param_code})
-and vp.gpg_acteur_saisie = nvl(vp.gpg_acteur_saisie,$P{param_op})
-and vp.min_code = nvl(vp.min_code,$P{param_min})
+where vp.gpg_type_plan = case nvl($P{typePlan},' ') when ' ' then  vp.gpg_type_plan else $P{typePlan} end
+and to_char( vp.plg_ges_code) = case nvl(to_char($P{param_code}),' ') when ' ' then  to_char(vp.plg_ges_code) else to_char($P{param_code}) end
+and vp.gpg_acteur_saisie = case nvl($P{param_op},' ') when ' ' then  vp.gpg_acteur_saisie else $P{param_op} end
+and to_char(vp.min_code) = case nvl(to_char($P{param_min}),' ') when ' ' then  to_char(vp.min_code) else to_char($P{param_min}) end
+and to_char(vp.pf_code) = case nvl(to_char($P{param_pf}),' ') when ' ' then  to_char(vp.pf_code) else to_char($P{param_pf}) end
 order by vp.min_libelle,vp.fon_libelle]]>
 		</queryString>
 		<field name="V_ID" class="java.math.BigDecimal"/>
@@ -81,13 +86,15 @@ order by vp.min_libelle,vp.fon_libelle]]>
 	</parameter>
 	<parameter name="typePlan" class="java.lang.String"/>
 	<parameter name="param_min" class="java.lang.String"/>
+	<parameter name="param_pf" class="java.lang.String"/>
 	<queryString language="SQL">
 		<![CDATA[select *
 from v_etat_liste_pgpm vp
-where vp.gpg_type_plan =nvl(vp.gpg_type_plan,$P{typePlan})
-and vp.plg_ges_code = $P{param_code}
-and vp.gpg_acteur_saisie = nvl(vp.gpg_acteur_saisie,$P{param_op})
-and vp.min_code = nvl(vp.min_code,$P{param_min})
+where vp.gpg_type_plan = case nvl($P{typePlan},' ') when ' ' then  vp.gpg_type_plan else $P{typePlan} end
+and to_char( vp.plg_ges_code) = case nvl(to_char($P{param_code}),' ') when ' ' then  to_char(vp.plg_ges_code) else to_char($P{param_code}) end
+and vp.gpg_acteur_saisie = case nvl($P{param_op},' ') when ' ' then  vp.gpg_acteur_saisie else $P{param_op} end
+and to_char(vp.min_code) = case nvl(to_char($P{param_min}),' ') when ' ' then  to_char(vp.min_code) else to_char($P{param_min}) end
+and to_char(vp.pf_code) = case nvl(to_char($P{param_pf}),' ') when ' ' then  to_char(vp.pf_code) else to_char($P{param_pf}) end
 order by vp.min_libelle,vp.fon_libelle]]>
 	</queryString>
 	<field name="V_ID" class="java.math.BigDecimal"/>
@@ -113,14 +120,14 @@ order by vp.min_libelle,vp.fon_libelle]]>
 		<groupFooter>
 			<band height="100">
 				<componentElement>
-					<reportElement stretchType="ElementGroupBottom" x="0" y="0" width="803" height="100" printWhenGroupChanges="Groupe1" uuid="d5d0ea9c-bfa7-4acd-bd34-257dc8aee480">
+					<reportElement stretchType="ContainerHeight" x="0" y="0" width="803" height="100" printWhenGroupChanges="Groupe1" uuid="d5d0ea9c-bfa7-4acd-bd34-257dc8aee480">
 						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="pgpm_list" uuid="af2a54b4-d17f-4af2-896f-e2976e6eff73">
+						<datasetRun subDataset="pgpm_list" uuid="e248dbcf-769f-4d9c-87e1-594e01eb4085">
 							<datasetParameter name="param_statut">
 								<datasetParameterExpression><![CDATA[$P{param_statut}]]></datasetParameterExpression>
 							</datasetParameter>
@@ -135,6 +142,9 @@ order by vp.min_libelle,vp.fon_libelle]]>
 							</datasetParameter>
 							<datasetParameter name="param_min">
 								<datasetParameterExpression><![CDATA[$P{param_min}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="param_pf">
+								<datasetParameterExpression><![CDATA[$P{param_pf}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 						</datasetRun>
@@ -411,8 +421,10 @@ order by vp.min_libelle,vp.fon_libelle]]>
 				<textFieldExpression><![CDATA[$F{GPG_TYPE_PLAN}.equalsIgnoreCase("PN")?"PLAN GENERAL DE PASSATION DES MARCHES GESTION "+$F{PLG_GES_CODE}:"PLAN GENERAL SIMPLIFIE DE PASSATION DES MARCHES GESTION "+$F{PLG_GES_CODE}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="10" y="142" width="793" height="21" uuid="c2d95160-22da-4951-acc3-a59d716ec090"/>
-				<textElement verticalAlignment="Middle"/>
+				<reportElement x="0" y="142" width="803" height="21" uuid="c2d95160-22da-4951-acc3-a59d716ec090"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
 				<textFieldExpression><![CDATA["Année  : "+$F{PLG_GES_CODE}]]></textFieldExpression>
 			</textField>
 			<image>
@@ -424,18 +436,21 @@ order by vp.min_libelle,vp.fon_libelle]]>
 	<pageFooter>
 		<band height="15" splitType="Stretch">
 			<textField>
-				<reportElement x="385" y="2" width="49" height="13" uuid="cd0190c7-60b8-40ce-9eeb-745d0ae58c3c"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="SansSerif" size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}+" / "+$V{MASTER_TOTAL_PAGES}]]></textFieldExpression>
-			</textField>
-			<textField>
 				<reportElement x="580" y="1" width="234" height="14" uuid="c5923923-2772-4571-932c-ee960f0eef42"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="SansSerif"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Edité le "+new SimpleDateFormat("EEEE dd MMMMM yyyy").format(TODAY( ))]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="15" uuid="6b22e721-58e3-442a-b575-126e229b7812"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="400" y="0" width="100" height="15" uuid="8a13575c-641d-4fba-b98e-fab85a581856"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["/ " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
