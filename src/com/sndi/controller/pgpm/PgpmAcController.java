@@ -3952,12 +3952,18 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
                 		  statut="S1S S1D";
 							 String operateur = userController.getSlctd().getTFonction().getFonCod();
 							 String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
-							 projetReport.longStringparam6(gesCode, plgFonCodAc,statut, typlan,minCode,plgFonCod,"pgpm", "pgpm");
+							 projetReport.longStringparam6(gesCode, operateur,statut, typlan,ministere,plgFonCodAc,"pgpm", "pgpm");
+							 _logger.info("statut: "+statut);
+							 _logger.info("operateur: "+operateur);
+							 _logger.info("gesCode: "+gesCode);
+							 _logger.info("typlan: "+typlan);
+							 _logger.info("ministere: "+ministere);
+							 _logger.info("plgFonCodAc: "+plgFonCodAc);
 						 }else
 							 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CPM")) {
 								 statut="S1T S2D";
 								 String ministere = userController.getSlctd().getTFonction().getTStructure().getTMinistere().getMinCode();
-								 projetReport.longStringparam6(gesCode, plgFonCodAc,statut, typlan,minCode,plgFonCod,"pgpm", "pgpm");
+								 projetReport.longStringparam6(gesCode, plgFonCodAc,statut, typlan,ministere,plgFonCod,"pgpm", "pgpm");
 								 _logger.info("statut: "+statut);
 								 _logger.info("plgFonCod: "+plgFonCod);
 								 _logger.info("gesCode: "+gesCode);
