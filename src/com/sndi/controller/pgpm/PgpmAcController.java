@@ -3939,7 +3939,7 @@ Logger _logger = Logger.getLogger(PgpmAcController.class);
 				 }
 				  
 				 //Edition de l'état PGPM
-				 public void imprimerPgpm(String typelan) {
+				 public void imprimerPg(String typelan) {
 					 /*String operateur = userController.getSlctd().getTFonction().getFonCod();
 						projetReport.longStringparam2(gesCode, operateur, "Pgpm", "Pgpm");*/
 					 editPlan(typelan);

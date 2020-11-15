@@ -498,7 +498,7 @@
                  <div class="col-md-12">
       <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div class="col-md-10 "><div  style="color: #fff">#{controleController.libelle1}</div></div>
+            <div class="col-md-10 "><div  style="color: #fff">CRITERES DE RECHERCHE</div></div>
             <div class="col-md-2 "><div  style="color: #fff">
              <label for="gestion1" class="col-sm-5 control-label">GESTION</label>
 	              <div class="col-sm-6">
@@ -1267,14 +1267,16 @@
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre
     </p:commandLink>
     
-    <p:commandLink rendered="#{controleController.btn_trasmettre}" action="#{pgpmAcController.imprimerPgpm('PN')}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
-    <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer
-    </p:commandLink>
-    
     <p:commandLink rendered="#{controleController.btn_trasmettre_pgspm}" action="#{pgpmAcController.transmettrePgspm()}" style="margin-top:10px;background-color: #036d3b;" styleClass="btn btn-success btn-next pull-right" update=":gnl">
    <p:confirm header="Confirmation" message="Confrmez-vous la transmission ?" icon="ui-icon-alert" />
     <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre
     </p:commandLink>
+    
+    <p:commandLink rendered="#{controleController.btn_trasmettre}" action="#{pgpmAcController.imprimerPg('PN')}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
+    <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer la liste
+    </p:commandLink>
+    
+    
     
     
     
@@ -1293,7 +1295,7 @@
          <i class="ace-icon fa fa-exchange bigger-130"></i> Transmettre
      </p:commandLink>  
      
-      <p:commandLink action="#{pgpmAcController.imprimerPgpm('PN')}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
+      <p:commandLink action="#{pgpmAcController.imprimerPg('PN')}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
     <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer la liste
     </p:commandLink>
     
@@ -1305,7 +1307,7 @@
     <i class="ace-icon fa fa-exchange bigger-130"></i> Valider
    </p:commandLink>
    
-      <p:commandLink rendered="#{controleController.btn_valider_dmp}" action="#{pgpmAcController.imprimerPgpm('PN')}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
+      <p:commandLink rendered="#{controleController.btn_valider_dmp}" action="#{pgpmAcController.imprimerPg('PN')}" style="margin-top:10px;background-color: #f88b2e;margin-right:5px" styleClass="btn btn-warning btn-next pull-right" ajax="false">
     <i class="ace-icon fa fa-file-pdf-o bigger-130"></i> Imprimer la liste
     </p:commandLink>
    
