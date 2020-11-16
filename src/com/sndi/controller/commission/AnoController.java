@@ -165,6 +165,7 @@ public class AnoController {
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffre = new ArrayList<VAvisAppelOffreAno>();
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffreDmp = new ArrayList<VAvisAppelOffreAno>();
 	 private List<VAvisAppelOffreAnodmp> listeDemande = new ArrayList<VAvisAppelOffreAnodmp>();
+	 private List<TDemande> demandeListe = new ArrayList<TDemande>();
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
 	 private List<TNatureDocuments> natureDocListe = new ArrayList<TNatureDocuments>();
 	 private List<VLotAvisdmp> listeLots = new ArrayList<VLotAvisdmp>();
@@ -266,10 +267,32 @@ public class AnoController {
          userController.setRenderMsg(true);
          userController.setSevrityMsg("success");
 		 
-		 
 	 }
 	 
-	 
+	//Fin de validation de l'ANO par la DMP
+			public void finAno() {
+				String statUpdate = "";
+				String message = "";
+				if(slctdTdDem.getDemStaCode().equalsIgnoreCase("E1S")) {
+					statUpdate = "ARC";
+					message="Fin de la validation de la demande N°"+slctdTdDem.getDemNum();
+				 }
+	    
+				demandeListe = (List<TDemande>) iservice.getObjectsByColumn("TDemande", new ArrayList<String>(Arrays.asList("DEM_NUM")),
+						  new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
+		  		if (!demandeListe.isEmpty()) {
+		  			newDem = demandeListe.get(0);
+		  			newDem.setTStatut(new TStatut(statUpdate));
+	                iservice.updateObject(newDem);
+	  			}
+				//Chargement de la liste des avis 
+		  		chargeDemandeDmp();
+		        //Message de Confirmation
+				userController.setTexteMsg(message);
+				userController.setRenderMsg(true);
+				userController.setSevrityMsg("success");  
+			}
+	     //Fin de la validation de l'ANO par la DMP
 	 
 	 public void validationAnoDMP() throws IOException {
 		 List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
@@ -282,11 +305,11 @@ public class AnoController {
 			avis.setAaoStatut("4");
 		    iservice.updateObject(avis);
 		    
-		    List<TDemande> DS  = iservice.getObjectsByColumn("TDemande", new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
+		  /*  List<TDemande> DS  = iservice.getObjectsByColumn("TDemande", new WhereClause("DEM_NUM",Comparateur.EQ,""+slctdTdDem.getDemNum()));
 		    TDemande dem = new TDemande();
 			if(!LS.isEmpty()) dem = DS.get(0);
 			dem.setTStatut(new TStatut("ARC"));
-		    iservice.updateObject(dem);
+		    iservice.updateObject(dem);*/
 		    //chargeData();
 		   // renderPage("LISANO" ,"ano1");
 		 userController.setTexteMsg("Validé avec succès !");
@@ -297,8 +320,7 @@ public class AnoController {
 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Vous devez absolument traiter tout les lots! ","");
 				FacesContext.getCurrentInstance().addMessage(null, msg);	
 		 }
-		 
-		 
+	 
 	 }
 	 
 	 
@@ -1260,6 +1282,15 @@ public class AnoController {
 
 	public void setListeAvisAppelOffreDmp(List<VAvisAppelOffreAno> listeAvisAppelOffreDmp) {
 		this.listeAvisAppelOffreDmp = listeAvisAppelOffreDmp;
+	}
+	
+	public List<TDemande> getDemandeListe() {
+		return demandeListe;
+	}
+
+
+	public void setDemandeListe(List<TDemande> demandeListe) {
+		this.demandeListe = demandeListe;
 	}
 
 	

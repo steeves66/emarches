@@ -13,7 +13,7 @@
       <h3>
        <!-- #{controleController.libelle}  -->
        EXAMEN DU DOSSIER D'APPEL A CONCURRENCE
-        <!-- <small>Nouveau AGPM </small> -->
+       <!-- #{controleController.smallLibelle}  -->
       </h3>
       <ol class="breadcrumb">
       <li>
@@ -194,14 +194,14 @@
 				        
 				        <h:panelGroup rendered="#{slctdTb.btnPidPresente == '3'}">
 				        
-                            <p:commandLink action="#{daoController.majPresence('OUI')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" update="gnl"
+                            <p:commandLink action="#{daoController.majPresence('OUI')}" class="btn btn-xs btn-warning" style="background-color: #036d3b;" update="gnl"
 				               title="Présence">
                                 <span class="hidden-xs" style="color: white">OUI</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
                             </p:commandLink>
                             
                                 
-                            <p:commandLink action="#{daoController.majPresence('NON')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl"
+                            <p:commandLink action="#{daoController.majPresence('NON')}" class="btn btn-xs btn-success" style="background-color:#f88b2e;" update="gnl"
 				               title="Présence">
                                 <span class="hidden-xs" style="color: white">NON</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
@@ -230,13 +230,13 @@
 				         
 				         <h:panelGroup rendered="#{slctdTb.btnPidConforme == '3'}">
 
-                          <p:commandLink action="#{daoController.majConforme('OUI')}" class="btn btn-xs btn-warning" style="background-color: #f88b2e;" update="gnl"
+                          <p:commandLink action="#{daoController.majConforme('OUI')}" class="btn btn-xs btn-warning" style="background-color:#036d3b;" update="gnl"
 				            title="Conformité">
                             <span class="hidden-xs" style="color: white">OUI</span>
                          <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
                         </p:commandLink>
                           
-                        <p:commandLink action="#{daoController.majConforme('NON')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl"
+                        <p:commandLink action="#{daoController.majConforme('NON')}" class="btn btn-xs btn-success" style="background-color:#f88b2e;" update="gnl"
 				               title="Conformité">
                                 <span class="hidden-xs" style="color: white">NON</span>
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.sltPiece}" />                              
@@ -380,9 +380,9 @@
 	                 <div class="col-sm-10">
                       <p:selectOneMenu value="#{daoController.resultat}" id="bail12" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-						       <f:selectItem  itemLabel="Choisir le resultat" itemValue="empty" />  
+						       <f:selectItem  itemLabel="Choisir le resultat" />  
 						       <f:selectItem  itemLabel="Validé" itemValue="Valide" />    
-						       <f:selectItem  itemLabel="Rejeté" itemValue="Rejeté" />  
+						       <f:selectItem  itemLabel="Rejeté" itemValue="Rejete" />  
 						       <f:selectItem  itemLabel="Retour au binome" itemValue="Retour au binome" />  
 			       	</p:selectOneMenu>
                   </div>
@@ -397,7 +397,7 @@
 	          
 	           <div class="pull-right ">
 			            <p:commandLink  action="#{daoController.resultatCorrection()}" styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous la sanction ?" icon="ui-icon-alert" />
+			            <p:confirm header="Confirmation" message="Confirmez-vous la sanction ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
               </div>

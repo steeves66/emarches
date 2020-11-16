@@ -120,11 +120,11 @@
                           >
                            <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
                            
-                            <p:column headerText="TITRE" styleClass="col-sm-1" >
+                            <p:column headerText="QUALITE" styleClass="col-sm-1" >
 	         				  <h:outputText value="#{slctdTb.tctTitre}"/>
 					        </p:column>
 					        
-                            <p:column headerText="FONCTION" styleClass="col-sm-4" >
+                            <p:column headerText="STATUT" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.tctLibelle}"/>
 					        </p:column>			        
 					        
@@ -329,11 +329,11 @@
                <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.membresCommite}" emptyMessage="Aucun membre trouvé" 
                          draggableColumns="true" scrollable="true" scrollHeight="250">
                            
-                         <p:column headerText="TITRE" styleClass="col-sm-1" >
+                         <p:column headerText="QUALITE" styleClass="col-sm-1" >
 	         				  <h:outputText value="#{slctdTb.dcsObservation}"/>
 					        </p:column>
 					        
-                            <p:column headerText="FONCTION" styleClass="col-sm-4" >
+                            <p:column headerText="STATUT" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.dcsFonCod}"/>
 					        </p:column>			        
 					        
@@ -454,7 +454,7 @@
 					    rowKey="#{slctdTb.tctCode}" selection="#{commissionController.selectionlisteExpert}"   editable="true" editMode="cell"
                          draggableColumns="true" scrollable="true" scrollHeight="350">
                            <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
-                            <p:column headerText="TITRE" styleClass="col-sm-2" >
+                            <p:column headerText="QUALITE" styleClass="col-sm-2" >
 	         				  <h:outputText value="#{slctdTb.tctTitre}"/>
 					        </p:column> 
 					         <p:column headerText="LIBELLE" styleClass="col-sm-9" >

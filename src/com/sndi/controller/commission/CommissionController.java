@@ -1935,8 +1935,8 @@ public class CommissionController {
 							//EVALUTATION         
 						 		for(VPiecesOffreAnalyse ligne : listePiecesOffresAnalyse) {
 						 			if(ligne.getPofObs() == null) {
-						 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
-										FacesContext.getCurrentInstance().addMessage(null, msg);
+						 				//FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
+										//FacesContext.getCurrentInstance().addMessage(null, msg);
 						 			}else {
 						 			newTempParamAnalyseOff.setAnfDacCode(ligne.getDcadDacCode());
 						 			newTempParamAnalyseOff.setAnfNum(ligne.getAnfNum());
@@ -1955,8 +1955,8 @@ public class CommissionController {
 						 		for(VCritereAnalyseDacOfftec lignes : listeCritereAnalyse) {
 						 			
 						 			if(lignes.getDcadCommentaire() == null) {
-						 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
-										FacesContext.getCurrentInstance().addMessage(null, msg);
+						 				//FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Veuillez commenter les critères et les pièces! ","");
+										//FacesContext.getCurrentInstance().addMessage(null, msg);
 						 			}else {
 						 				newTempParamAnalyseOff.setAnfDacCode(lignes.getDcadDacCode());
 							 			newTempParamAnalyseOff.setAnfNum(lignes.getAnfNum());

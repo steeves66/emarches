@@ -234,7 +234,7 @@
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
 				        </p:column>	
-				         <p:column headerText="SEUIL (SF2)" styleClass="col-sm-1" style="color: red">
+				         <p:column headerText="SEUIL (SF2)" styleClass="col-sm-1" style="color:orange">
          				  <h:outputText value="#{slctdTb.sf2}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
@@ -258,7 +258,6 @@
                           </p:column>
 				         </p:dataTable>
 				         
-                 
 	            </div>
 	           </div>
             </div>
@@ -361,7 +360,6 @@
 				        </p:column>
 				         </p:dataTable>
 				         
-				         
 				            <h:panelGroup rendered="false">
 						        <p:commandLink styleClass="btn btn-success pull-right" style=" background-color: #036d3b" action="#{commissionController.ajouterAttributaire()}" update=":content">
 								       <i class="ace-icon fa fa-save bigger-130"></i> Valider
@@ -369,10 +367,7 @@
 						     </h:panelGroup>
                    </fieldset>
                    </div>
-                   
-                
-				         
-                 
+                              
 	            </div>
 	           </div>
             </div>

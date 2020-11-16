@@ -81,11 +81,11 @@
                <p:dataTable id="ndTble1" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{commissionController.listeMembreCojo}" emptyMessage="Aucun membre trouvé" 
                          draggableColumns="true" scrollable="true" scrollHeight="600">
                            
-                         <p:column headerText="TITRE" styleClass="col-sm-1" >
+                         <p:column headerText="QUALITE" styleClass="col-sm-1" >
 	         				  <h:outputText value="#{slctdTb.dcsObservation}"/>
 					        </p:column>
 					        
-                            <p:column headerText="FONCTION" styleClass="col-sm-3" >
+                            <p:column headerText="STATUT" styleClass="col-sm-3" >
          				  <h:outputText value="#{slctdTb.dcsFonCod}"/>
 					        </p:column>			        
 					        
@@ -199,11 +199,11 @@
                           >
                            <p:column selectionMode="multiple" style="width:30px;text-align:center"/>
                            
-                         <p:column headerText="TITRE" styleClass="col-sm-1" >
+                         <p:column headerText="QUALITE" styleClass="col-sm-1" >
 	         				  <h:outputText value="#{slctdTb.dcsObservation}"/>
 					        </p:column>
 					        
-                            <p:column headerText="FONCTION" styleClass="col-sm-4" >
+                            <p:column headerText="STATUT" styleClass="col-sm-4" >
          				  <h:outputText value="#{slctdTb.dcsFonCod}"/>
 					        </p:column>			        
 					        

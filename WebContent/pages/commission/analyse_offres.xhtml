@@ -152,8 +152,8 @@
                <div class="box-header with-border">
                   <div class="col-md-4"><div  style="color: #fff; font-weight:bold; font-size: 17px;"><span style="font-weight: bold;">LOT N° #{commissionController.lot.laaNum}</span> : Liste des Offres</div></div> 
 			        <div class="col-md-4">
-					  <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des offres recevables / non recevables" action="#{commissionController.natureOffre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
-					  <span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">Recevables / Non recevables</span>
+					  <p:commandLink oncomplete="PF('dlogConsultationC').show()" title="Consultez la liste des offres conformes / non conformes" action="#{commissionController.natureOffre()}" styleClass="btn btn-warning btn-rounded waves-effect waves-light" style="color:#fff;background-color: #f88b2e" update=":content" >
+					  <span class="btn-label"><i class="fa fa-search"></i></span><span class="hidden-xs">Conformes / Non conformes</span>
 					  </p:commandLink>
 				   </div>
 				   
@@ -244,8 +244,6 @@
            <p:commandLink rendered="false" styleClass="btn btn-success mr10 pull-right" style="background-color: #036d3b; color:#fff" update=":content">
 				     <i class="ace-icon fa fa-save bigger-120"></i> Valider
 				      </p:commandLink>
-				      
-     
 		</div>
 
 		</p:tab>
@@ -371,7 +369,7 @@
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
 				        </p:column>	
-				         <p:column headerText="SEUIL (SF2)" styleClass="col-sm-1" style="color: red">
+				         <p:column headerText="SEUIL (SF2)" styleClass="col-sm-1" style="color: orange">
          				  <h:outputText value="#{slctdTb.sf2}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber> 
          				  </h:outputText>
