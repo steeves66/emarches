@@ -1108,10 +1108,10 @@ public class CommissionController {
 		 public void chargeExpert() {
 			 selectionlisteExpert.clear();
 			 listeExpert.clear();
-			 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE")),
-					 new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
-					 new WhereClause("TCT_GRP_CODE",Comparateur.EQ,"AUT"),
-					 new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
+			 listeExpert = ((List<VCommissionTypeExp>)iservice.getObjectsByColumn("VCommissionTypeExp",new ArrayList<String>(Arrays.asList("TCT_CODE"))));
+					// new WhereClause("TCT_TST_CODE",Comparateur.EQ,""+userController.getSlctd().getTFonction().getTStructure().getTTypeStructure().getTstCode()),
+					 //new WhereClause("TCT_GRP_CODE",Comparateur.EQ,"AUT"),
+					 //new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ")));
 					_logger.info("expert size: "+listeExpert.size());		
 		 }
 		 

@@ -465,6 +465,12 @@
                                 <f:convertNumber pattern="##,###.##"></f:convertNumber>
                                 </h:outputText>
                             </p:column>
+                            
+                             <p:column headerText="Montant Rabais" styleClass="col-sm-1">
+                                <h:outputText styleClass="pull-right" value="#{slctdTb.dofEstimRab}" >
+                                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+                                </h:outputText>
+                            </p:column>
 
                             <p:column headerText="type Offre" styleClass="col-sm-1">
 								<h:outputText value="#{slctdTb.dofTyp == 'V'?'Variante':'Offre de base'}"/>

@@ -337,71 +337,25 @@
          				  <h:outputText value="#{slctdTb.dcsFonCod}"/>
 					        </p:column>			        
 					        
-                          <p:column headerText="NOM" styleClass="col-sm-2" >
-                          <p:cellEditor>
-                          <f:facet name="output">
-         				  <h:outputText value="#{slctdTb.dcsNomMbm}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-         				  <p:inputText id="nom" value="#{slctdTb.dcsNomMbm}" style="width:100%" />
-         				  </f:facet>
-         				  </p:cellEditor>
+                          <p:column headerText="NOM" styleClass="col-sm-4" >
+         				  <h:outputText value="#{slctdTb.dcsNomMbm}  #{slctdTb.dcsPreMbm}"/>
 				        </p:column>
                          
-                          <p:column headerText="PRENOM(S)" styleClass="col-sm-2" >
-                          <p:cellEditor>
-                          <f:facet name="output">
-         				  <h:outputText value="#{slctdTb.dcsPreMbm}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-         				  <p:inputText id="prenom" value="#{slctdTb.dcsPreMbm}" style="width:100%" />
-         				  </f:facet>
-         				  </p:cellEditor>
-				        </p:column>
 				        
 				         <p:column headerText="FONCTION ADMIN." styleClass="col-sm-2" >
-                          <p:cellEditor>
-                          <f:facet name="output">
-         				  <h:outputText value="#{slctdTb.dcsFonAdmin}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-         				  <p:inputText id="fonction" value="#{slctdTb.dcsFonAdmin}" style="width:100%" />
-         				  </f:facet>
-         				  </p:cellEditor>
+         				  <h:outputText value="#{slctdTb.dcsFonAdmin}"/>  
 				        </p:column>
 				        
 				        <p:column headerText="STRUCTURE" styleClass="col-sm-2" >
-                          <p:cellEditor>
-                          <f:facet name="output">
          				  <h:outputText value="#{slctdTb.dcsStrCom}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-         				  <p:inputText id="structure" value="#{slctdTb.dcsStrCom}" style="width:100%" />
-         				  </f:facet>
-         				  </p:cellEditor>
 				        </p:column>
 				        
-				          <p:column headerText="Téléphone" styleClass="col-sm-1" >
-                          <p:cellEditor>
-                          <f:facet name="output">
+				          <p:column headerText="TELEPHONE" styleClass="col-sm-1" >
          				  <h:outputText value="#{slctdTb.dcsTelMbm}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-         				  <p:inputText id="tel" value="#{slctdTb.dcsTelMbm}" style="width:100%" />
-         				  </f:facet>
-         				  </p:cellEditor>
-				        </p:column>
-				         <p:column headerText="Mandat ?" styleClass="col-sm-1" >
-                          <p:cellEditor>
-                          <f:facet name="output">
+				         </p:column>
+				         
+				         <p:column headerText="MANDAT ?" styleClass="col-sm-1" >
          				  <h:outputText value="#{slctdTb.dcsRepMandate == 'O'?'OUI':'NON'}"/>
-         				  </f:facet>
-         				  <f:facet name="input">
-	         				   <p:selectOneRadio id="mandat" value="#{slctdTb.dcsRepMandate}">
-							  <f:selectItem itemLabel="Oui" itemValue="O" />
-						      </p:selectOneRadio>
-         				  </f:facet>
-         				  </p:cellEditor>
 				        </p:column>
                        
 		          <p:column headerText="Actions" width="6%">
@@ -411,7 +365,7 @@
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.newMembre}" />
 			                </p:commandLink>
 			       
-                               <p:commandLink  oncomplete="PF('uploaddlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="Joindre Mandat" update=":content">
+                               <p:commandLink  oncomplete="PF('uploaddlg').show()" styleClass="btn btn-xs btn-primary" style="background-color: #f88b2e; border: #f88b2e; margin-left: 5px" title="Joindre le Mandat" update=":content">
                                 <i class="ace-icon fa fa-download bigger-120" style="color: white"></i>
                                   <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.newMembre}" />
                                </p:commandLink>
