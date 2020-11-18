@@ -10092,7 +10092,7 @@ public class DaoController {
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
 				}*/
 	
-	 private List<XWPFParagraph> collectParagraphs() {
+	/* private List<XWPFParagraph> collectParagraphs() {
 		 List<XWPFParagraph> paragraphs = new ArrayList<>();
 		 paragraphs.addAll(getDocument().getParagraphs());
 		
@@ -10104,9 +10104,23 @@ public class DaoController {
 			 }
 		 }
 		 return paragraphs;		
-	 }
+	 }*/
+		 
+		 private List<XWPFParagraph> collectParagraphs() {
+			 List<XWPFParagraph> paragraphs = new ArrayList<>();
+			 paragraphs.addAll(getDocument().getParagraphs());
+			
+			 for(XWPFTable table:getDocument().getTables()) {
+				 for(XWPFTableRow row:table.getRows()) {
+					for(XWPFTableCell cell:row.getTableCells()) {
+						paragraphs.addAll(cell.getParagraphs());
+					}
+				 }
+			 }
+			 return paragraphs;		
+		 }
 	
-	 public List<String> getBookmarkNames(){
+	/* public List<String> getBookmarkNames(){
 		List<String> bookmarkNames = new ArrayList<>();
 		Iterator<XWPFParagraph> paraIter = null;
 		XWPFParagraph para = null;
@@ -10125,7 +10139,28 @@ public class DaoController {
 			}
 		}
 		return bookmarkNames;
-	}
+	}*/
+	 
+	    public List<String> getBookmarkNames() {
+			List<String> bookmarkNames = new ArrayList<>();
+			Iterator<XWPFParagraph> paraIter = null;
+			XWPFParagraph para = null;
+			List<CTBookmark> bookmarkList = null;
+			Iterator<CTBookmark> bookmarkIter = null;
+			CTBookmark bookmark = null;
+				
+			paraIter = collectParagraphs().iterator();
+			while(paraIter.hasNext()) {
+					para = paraIter.next();
+					bookmarkList = para.getCTP().getBookmarkStartList();
+					bookmarkIter = bookmarkList.iterator();
+					while(bookmarkIter.hasNext()) {
+						bookmark = bookmarkIter.next();
+						bookmarkNames.add(bookmark.getName());
+					}
+			}
+			return bookmarkNames;
+			}
 	 
 	 
 	 public void printBmk() {
@@ -10151,6 +10186,9 @@ public class DaoController {
 				_logger.info(i);
 			}
 	 }
+	 
+	 
+	 
 	
 	public Node getBookmarkNode(String bookmarkName) {
 		Iterator<XWPFParagraph> paraIter = null;
@@ -10199,6 +10237,41 @@ public class DaoController {
 		return node;
 	}
 
+/*	private void procParaList(List<XWPFParagraph> paraList, String bookmarkName,
+			String bookmarkValue) {
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		XWPFRun run = null;
+		Node nextNode = null;
+		
+		paraIter = paraList.iterator();
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(bookmarkName)) {
+					run = para.createRun();
+					run.setBold(true);
+					run.setColor("0000FF");
+					run.setText(bookmarkValue);
+					nextNode = bookmark.getDomNode().getNextSibling();
+					while(!(nextNode.getNodeName().contains("bookmarkEnd"))) {
+						para.getCTP().getDomNode().removeChild(nextNode);
+						nextNode = bookmark.getDomNode().getNextSibling();
+					}
+					para.getCTP().getDomNode().insertBefore(
+							run.getCTR().getDomNode(), nextNode);
+				}
+			}
+		}
+	}*/
+	
 	private void procParaList(List<XWPFParagraph> paraList, String bookmarkName,
 			String bookmarkValue) {
 		Iterator<XWPFParagraph> paraIter = null;
@@ -11778,8 +11851,9 @@ public class DaoController {
 	public void telechargerDao() throws IOException {
 		downloadFileServlet.downloadFile(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME, DOWNLOAD_FILENAME); 
 	}
-		
-		
+	
+	
+	
 	public void insertPermStart(String start, String id) {
 		List<XWPFParagraph> paralist = null;
 		Iterator<XWPFParagraph> paraIter = null;
@@ -11813,8 +11887,41 @@ public class DaoController {
 			}
 		}
 	}
+		
+	/*public void insertPermStart(String start, String id) {
+		List<XWPFParagraph> paralist = null;
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		
+		paralist = getDocument().getParagraphs();
+		paraIter = paralist.iterator();
+		
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(start)) {
+					CTPermStart ctpermstart = document.getDocument().getBody().addNewPermStart();
+					ctpermstart.setEdGrp(STEdGrp.EVERYONE);
+					ctpermstart.setId(id);
+					Node node = ctpermstart.getDomNode();
+					System.out.println(node.getNodeName());
+					System.out.println(ctpermstart.getEdGrp());
+					System.out.println("");
+					
+					para.getCTP().getDomNode().insertBefore(ctpermstart.getDomNode(), bookmark.getDomNode());
+				}
+			}
+		}
+	}*/
 
-	
 	public void insertPermEnd(String end, String id) {
 		List<XWPFParagraph> paralist = null;
 		Iterator<XWPFParagraph> paraIter = null;
@@ -11848,15 +11955,79 @@ public class DaoController {
 			}
 		}
 	}
+	
+	/*public void insertPermEnd(String end, String id) {
+		List<XWPFParagraph> paralist = null;
+		Iterator<XWPFParagraph> paraIter = null;
+		XWPFParagraph para = null;
+		
+		List<CTBookmark> bookmarkList = null;
+		Iterator<CTBookmark> bookmarkIter = null;
+		CTBookmark bookmark = null;
+		
+		paralist = getDocument().getParagraphs();
+		paraIter = paralist.iterator();
+		
+		while(paraIter.hasNext()) {
+			para = paraIter.next();
+			bookmarkList = para.getCTP().getBookmarkStartList();
+			bookmarkIter = bookmarkList.iterator();
+			
+			while(bookmarkIter.hasNext()) {
+				bookmark = bookmarkIter.next();
+				if(bookmark.getName().equals(end)) {
+					CTPerm ctpermend = document.getDocument().getBody().addNewPermEnd();
+					ctpermend.setId(id);
+					Node node = ctpermend.getDomNode();
+					String str = ctpermend.getId();
+					System.out.println(node.getNodeName());
+					System.out.println(str);
+					System.out.println("______________________");
+					
+					para.getCTP().getDomNode().insertBefore(ctpermend.getDomNode(), bookmark.getDomNode());
+				}
+			}
+		}
+	}*/
 
 	
-	public void setProtect() {		
+	/*public void setProtect() {		
 		getDocument().enforceReadonlyProtection("emap31032020", none);
 		System.out.println("protégé");
+	}*/
+	
+	public void setProtect() {
+		if(	(daoAao.getTymCode().equals("2")  && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("20") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("21") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("22") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("23") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("25") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("26") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("00") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("0A") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("01") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("02") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("03") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("04") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("06") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("07") && daoAao.getDacMopCode().equals("AOO")) || 
+				(daoAao.getTymCode().equals("08") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("09") && daoAao.getDacMopCode().equals("AOO")) ||
+				(daoAao.getTymCode().equals("10") && daoAao.getDacMopCode().equals("AOO")) || // PRESTATION
+				(daoAao.getTymCode().equals("18") && daoAao.getDacMopCode().equals("AOO")) || // ORDURES MENAGERES
+				(daoAao.getTymCode().equals("17") && daoAao.getDacMopCode().equals("AOO")) || // ASSURANCES 17
+				(daoAao.getTymCode().equals("12") && daoAao.getDacMopCode().equals("AOO"))
+					) {
+		getDocument().enforceReadonlyProtection("emap31032020", none);
+		System.out.println("protégé");
+		}
 	}
 	
+	
 	public void verrouillage() {
-		switch(String.valueOf(daoIter.getTymCode().charAt(0))) {		 
+		switch(String.valueOf(daoAao.getTymCode().charAt(0))) {		 
 		// TRAVAUX	
 		case "2": 
 			insertPermStart("deverouillage_debut_01", "12");

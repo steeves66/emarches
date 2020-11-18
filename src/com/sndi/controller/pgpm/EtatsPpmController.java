@@ -96,10 +96,9 @@ public class EtatsPpmController {
 		 public void chargeDetailFinancement(){
 			 financementListe =(List<VFinancementPpm>) iservice.getObjectsByColumn("VFinancementPpm", new ArrayList<String>(Arrays.asList("FPP_ID")),
 						new WhereClause("FPP_DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
-				
 			}
 		 
-		 
+
 		 
 		 //Ouverture d'un dossier chargé
 	     public void openDossier() throws IOException{

@@ -151,7 +151,39 @@
 				            </h:outputText>
 				        </p:column>
 				        
-                 </p:dataTable>     
+                 </p:dataTable> 
+                 
+                 <br/>
+                 
+                 
+                  <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">LIGNE BUDGETAIRE</div></div> 
+			         <div class="col-md-2 "> </div>
+			            <div class="box-body">
+	            
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Imputation : </label></div>
+                  <div class="col-sm-8">
+                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.plpGesCode}"  style="width: 100%" readonly="true"/></label>
+                  </div>
+	             </div>
+	             
+	              <div class="row">
+                  <div class="col-sm-4"><label class="pull-right">Dotation : </label></div>
+                  <div class="col-sm-8">
+                   <label>
+                   <h:outputText value="#{etatsPpmController.slctdTd.lbgTotDot}" >
+				   <f:convertNumber pattern="##,###.##"></f:convertNumber>
+				   </h:outputText>
+                   </label> </div>
+	             </div>
+	             
+	                   
+	            </div>
+			         
+               </div>
+               
+                 
             </div>
 	            <!-- /.box-header -->
 	             <div class="box-body">
