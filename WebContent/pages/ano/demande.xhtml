@@ -172,7 +172,32 @@
 	            <!-- /.box-header -->
 	            <div class="box-body">
 	            
-	             <div class="row">                   
+	             <div class="row"> 
+	             
+	                   <div class="col-md-12">
+                   <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Informations sur la demande</small></legend>	
+                    <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Référence du courrier</b></label>
+	                  <div class="col-sm-5">
+                        <p:inputText type="text" value="#{anoController.newDem.demRef}" styleClass="form-control" style="width: 100%" />
+	                  </div>
+	                </div>
+	                
+	                 <div class="form-group ">
+	                  <label for="min" class="col-sm-3 control-label"><b>Objet de la demande</b></label>
+	                  <div class="col-sm-9">
+                        <p:inputTextarea value="#{anoController.newDem.demObjet}" rows="3" cols="33" styleClass="form-control" style="width: 100%" >
+                    </p:inputTextarea>
+	                  </div>
+	                </div>
+	                
+                     <div class="col-sm-12">
+                   
+                  </div>
+                   </fieldset>
+                   </div>
+                                     
 		       
 		         <div class="col-md-12 align justify-content-center">
                    <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
@@ -198,7 +223,7 @@
 	                  <p:fileUpload fileUploadListener="#{anoController.uploadDossDem}" multiple="true"
 			                      cancelLabel="Annuler" label="Choisir le(s) document(s)" uploadLabel="Charger le dao" auto="true"
 			                      mode="advanced" dragDropSupport="true"
-			                        update=":content"   sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
+			                        update=":gnl:tabDossierCharge"   sizeLimit="50000000" allowTypes="/(\.|\/)(gif|jpe?g|png|mp4|vob|mpeg|avi|mpg|mp3|mkv|flv|m4v|doc?x|doc|mov|pdf|xls?x)$/" />
 	                  </div>
 	                </div> 
 	                 </fieldset>
@@ -228,35 +253,7 @@
 			    </fieldset>
              
                    </div>
-                
-                <div class="col-md-12">
-                   <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
-                   <legend style="font-weight: bold"><small>Informations sur la demande</small></legend>	
-                    <div class="form-group ">
-	                  <label for="min" class="col-sm-3 control-label"><b>Référence du courrier</b></label>
-	                  <div class="col-sm-5">
-                        <p:inputText type="text" value="#{anoController.newDem.demRef}" styleClass="form-control" style="width: 100%" />
-	                  </div>
-	                </div>
-	                
-	                 <div class="form-group ">
-	                  <label for="min" class="col-sm-3 control-label"><b>Objet de la demande</b></label>
-	                  <div class="col-sm-9">
-                        <p:inputTextarea value="#{anoController.newDem.demObjet}" rows="3" cols="33" styleClass="form-control" style="width: 100%" >
-                    </p:inputTextarea>
-	                  </div>
-	                </div>
-	                
-                     <div class="col-sm-12">
-                   
-                  </div>
-                   </fieldset>
-                   </div>
-                   
-               
-                   
-		               
-		                 
+ 
                       </div>   
                       
                          

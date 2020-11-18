@@ -84,9 +84,10 @@
 	            <div class="box-body">
 	            
 	             <div class="row">                   
-		       
-		             <div class="col-md-5">
-		               <div class="form-group ">
+		         <div class="col-md-6 align justify-content-center">
+		          <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+                   <legend style="font-weight: bold"><small>Joindre le(s) document(s)</small></legend>
+                     <div class="form-group ">
 	                  <label for="min" class="col-sm-3 control-label"><b>Nature du document </b></label>
 	                  <div class="col-sm-9">
 	                    <p:selectOneMenu value="#{anoController.docNatureDemDmp}"
@@ -96,9 +97,7 @@
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
-		             </div>
-		             <div class="col-md-7">
-		                <div class="form-group ">
+	                 <div class="form-group ">
 	                  <label for="foncode" class="col-sm-3 control-label"><b>Joindre le document </b></label>
 	                  <div class="col-sm-9">
 	                  
@@ -109,18 +108,12 @@
 			                          
 	                    	            
 	                  </div>
-	                </div>
-		             </div>
-                      
-	                
-                     
-           
-                   
-                <div class="col-md-6 align justify-content-center">
-	                <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+	                  </div>
+                   </fieldset>
+                     <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend style="font-weight: bold"><small>Liste des documents joints</small></legend>
 	                    <p:dataTable id="tabDossierCharge" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemandeDmp}"
-	                   scrollable="true" scrollHeight="200" emptyMessage="Aucun Document enrégistré">
+	                   scrollable="true" scrollHeight="100" emptyMessage="Aucun Document enrégistré">
 			           <p:column headerText="Nom du document " styleClass="col-md-6">
 			            <h:outputText value="#{doss.dodLibelle}" />
 			        </p:column>
@@ -143,14 +136,12 @@
 		 	        </p:column>
 			    </p:dataTable>
 			    </fieldset>
-             
-                   </div>
-                   
-                    <div class="col-md-6 align justify-content-center">
-	                <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
+		         </div>
+		         <div class="col-md-6 align justify-content-center">
+		            <fieldset style="border: 1px solid #ffb380 ;padding: 5px;border-radius:4px">
                    <legend style="font-weight: bold"><small>Liste des documents joints par l'AC</small></legend>
 	                    <p:dataTable id="tabDossierChargeAc" styleClass="table dt-on-steroids mb0" var="doss" value="#{anoController.dossListeDemandeAc}"
-	                   scrollable="true" scrollHeight="200" emptyMessage="Aucun Document enrégistré">
+	                   scrollable="true" scrollHeight="291" emptyMessage="Aucun Document enrégistré">
 			           <p:column headerText="Nom du document " styleClass="col-md-6">
 			            <h:outputText value="#{doss.dodLibelle}" />
 			        </p:column>
@@ -173,12 +164,8 @@
 		 	        </p:column>
 			    </p:dataTable>
 			    </fieldset>
-             
-                   </div>
-
-		                 
-                      </div>   
-
+		         </div>
+                 </div>   
 	            </div>
 	           </div>
                  </div>
