@@ -128,7 +128,23 @@ public class GRFProperties {
 	public static final String PARAM_UPLOAD_DAO_RESTAURATION_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Restauration/"); //Pour Laurent
 	public static final String PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationPrestations","opt/wildfly8/standalone/Dossiers/DAO/Securite_privee/");
 	
-
+	
+	public static final String PARAM_UPLOAD_FOURNITURES_PSL = "/wildfly8/standalone/Dossiers/DAO/Fournitures_PSL/";
+	public static final String PARAM_UPLOAD_TRAVAUX_PSL = "/wildfly8/standalone/Dossiers/DAO/Travaux_PSL/";
+	public static final String PARAM_UPLOAD_SERVICES_COURANTS_PSL = "/wildfly8/standalone/Dossiers/DAO/Services_Courants_PSL/";
+	public static final String PARAM_UPLOAD_FOURNITURES_PSO = "/wildfly8/standalone/Dossiers/DAO/Fournitures_PSO/";
+	public static final String PARAM_UPLOAD_TRAVAUX_PSO = "/wildfly8/standalone/Dossiers/DAO/Travaux_PSO/";
+	public static final String PARAM_UPLOAD_SERVICES_COURANTS_PSO = "/wildfly8/standalone/Dossiers/DAO/Services_Courants_PSO/";
+	public static final String PARAM_UPLOAD_PRESTATIONS_INTELLECTUELLES = "/wildfly8/standalone/Dossiers/DAO/Prestations_intellectuelles_PS/";
+	
+	/* Procedures simplifiées */    /* A créer*/
+	public static final String PARAM_UPLOAD_FOURNITURES_PSL_LINUX = "opt/wildfly8/standalone/Dossiers/DAO/Fournitures_PSL/";
+	public static final String PARAM_UPLOAD_TRAVAUX_PSL_LINUX = "opt/wildfly8/standalone/Dossiers/DAO/Travaux_PSL/";
+	public static final String PARAM_UPLOAD_SERVICES_COURANTS_PSL_LINUX = "opt/wildfly8/standalone/Dossiers/DAO/Services_Courants_PSL/";
+	public static final String PARAM_UPLOAD_FOURNITURES_PSO_LINUX = "opt/wildfly8/standalone/Dossiers/DAO/Fournitures_PSO/";
+	public static final String PARAM_UPLOAD_TRAVAUX_PSO_LINUX = "opt/wildfly8/standalone/Dossiers/DAO/Travaux_PSO/";
+	public static final String PARAM_UPLOAD_SERVICES_COURANTS_PSO_LINUX = "opt/wildfly8/standalone/Dossiers/DAO/Services_Courants_PSO/";
+	public static final String PARAM_UPLOAD_PRESTATIONS_INTELLECTUELLES_LINUX = "opt/wildfly8/standalone/Dossiers/DAO/Prestations_intellectuelles_PS/";
 	
 	//FICHIER DE BASE DAO TYPE
 	//WINDOWS
@@ -145,6 +161,15 @@ public class GRFProperties {
 	public static final String FICHIER_UPLOAD_DAO_SECURITE_PRIVEE = "/wildfly8/standalone/Fichiers/dao_securite_privee.docx";//Pour Laurent
 	public static final String FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX = "/wildfly8/standalone/Fichiers/dao_entretien_des_locaux.docx";
 	
+	/* Procedures simplifiées */
+	public static final String FICHIER_UPLOAD_SERVICES_COURANTS_PSL = "/wildfly8/standalone/Fichiers/dossier_de_consultation_de services_courants_en_PSL_FINAL.docx";
+	public static final String FICHIER_UPLOAD_SERVICES_COURANTS_PSO = "/wildfly8/standalone/Fichiers/dossier_de_consultation_de services_courants_en_PSO.docx"; 
+	public static final String FICHIER_UPLOAD_FOURNITURES_PSL = "/wildfly8/standalone/Fichiers/dossier_de_consultation_de_fourniture_en_PSL.docx"; 
+	public static final String FICHIER_UPLOAD_FOURNITURES_PSO = "/wildfly8/standalone/Fichiers/dossier_de_consultation_de_fourniture_en_PSO_final.docx";
+	public static final String FICHIER_UPLOAD_PRESTATION_INTELLECTUEL_PS = "/wildfly8/standalone/Fichiers/dossier_de_consultation_service_de_type_intelectuel.docx";
+	public static final String FICHIER_UPLOAD_TRAVAUX_PSL = "/wildfly8/standalone/Fichiers/dossier_de_consultation_travaux_en_PSL_final.docx";
+	public static final String FICHIER_UPLOAD_TRAVAUX_PSO = "/wildfly8/standalone/Fichiers/dossier_de_consultation_travaux_en_PSO_final.docx";
+	
 	//LINUX
 	public static final String PATHNAME_LINUX = getProperty("pathName","opt/wildfly8/standalone/Fichiers/");
 	public static final String FICHIER_UPLOAD_DAO_TRAVAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dtao_travaux.docx");
@@ -157,6 +182,15 @@ public class GRFProperties {
 	public static final String FICHIER_UPLOAD_DAO_SERVICES_COURANT_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/DAO_Fournitures_et_services_connexes.docx");//Pour Laurent
 	public static final String FICHIER_UPLOAD_DAO_SECURITE_PRIVEE_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dao_securite_privee.docx"); //Pour Laurent
 	public static final String FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dao_entretien_des_locaux.docx");
+	
+	/* Procedures simplifiées */    /* A créer*/
+	public static final String FICHIER_UPLOAD_SERVICES_COURANTS_PSL_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dossier_de_consultation_de services_courants_en_PSL_FINAL.docx");
+	public static final String FICHIER_UPLOAD_SERVICES_COURANTS_PSO_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dossier_de_consultation_de services_courants_en_PSO.docx"); 
+	public static final String FICHIER_UPLOAD_FOURNITURES_PSL_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dossier_de_consultation_de_fourniture_en_PSL.docx"); 
+	public static final String FICHIER_UPLOAD_FOURNITURES_PSO_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dossier_de_consultation_de_fourniture_en_PSO_final.docx");
+	public static final String FICHIER_UPLOAD_PRESTATION_INTELLECTUEL_PS_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dossier_de_consultation_service_de_type_intelectuel.docx");
+	public static final String FICHIER_UPLOAD_TRAVAUX_PSL_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dossier_de_consultation_travaux_en_PSL_final.docx");
+	public static final String FICHIER_UPLOAD_TRAVAUX_PSO_LINUX = getProperty("destinationTravaux","opt/wildfly8/standalone/Fichiers/dossier_de_consultation_travaux_en_PSO_final.docx");
 	
 	public static final String PARAM_UPLOAD_DESTINATION_TRUE_DOC = getProperty("destinationTrue", "\\standalone\\Dossiers\\trueDoc\\");
 	public static final String PARAM_UPLOAD_DESTINATION_LINUX = getProperty("destinationLinux", "/opt/wildfly8/standalone/Dossiers/");
