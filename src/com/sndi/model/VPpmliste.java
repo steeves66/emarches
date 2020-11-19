@@ -35,6 +35,7 @@ public class VPpmliste implements java.io.Serializable {
 	private String lbgFonCodeAc;
 	private String lbgFonCodeCf;
 	private String lbgFonCodeCor;
+	private String lbgImputation;
 	private BigDecimal lbgTotDot;
 	private BigDecimal lbgAeTr;
 	private BigDecimal lbgDisTot;
@@ -74,7 +75,7 @@ public class VPpmliste implements java.io.Serializable {
 	public VPpmliste(long dppId, Date dppDteModif, String dppObjet, String dppSourceFin, String dppLbgCode,
 			String dppStaCode, String dppMopCode, String mopLibelleCourt, String mopLibelleLong, String dppStrCode,
 			String strLibelleCourt, String strLibelleLong,String lbgFonCodePf, String lbgFonCodeAc,
-			String lbgFonCodeCf, String lbgFonCodeCor,BigDecimal lbgTotDot, BigDecimal lbgAeTr, BigDecimal lbgDisTot, String lbgFonCodeVal, Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp,
+			String lbgFonCodeCf, String lbgFonCodeCor,String lbgImputation,BigDecimal lbgTotDot, BigDecimal lbgAeTr, BigDecimal lbgDisTot, String lbgFonCodeVal, Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp,
 			String dppPartiePmePmi, Date dppDateSaisie, String dppTypePlan, String tymLibelleCourt,
 			String dppStatutRetour, String dppStructureConduc, String dppStructureBenefi, String dppRecherche,
 			String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie, long plpId, long plpGesCode) {
@@ -94,6 +95,7 @@ public class VPpmliste implements java.io.Serializable {
 		this.lbgFonCodeAc = lbgFonCodeAc;
 		this.lbgFonCodeCf = lbgFonCodeCf;
 		this.lbgFonCodeCor = lbgFonCodeCor;
+		this.lbgImputation = lbgImputation;
 		this.lbgTotDot = lbgTotDot;
 		this.lbgAeTr = lbgAeTr;
 		this.lbgDisTot = lbgDisTot;
@@ -259,6 +261,15 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setLbgFonCodeCor(String lbgFonCodeCor) {
 		this.lbgFonCodeCor = lbgFonCodeCor;
+	}
+	
+	@Column(name = "LBG_IMPUTATION", length = 50)
+	public String getLbgImputation() {
+		return this.lbgImputation;
+	}
+
+	public void setLbgImputation(String lbgImputation) {
+		this.lbgImputation = lbgImputation;
 	}
 	
 	@Column(name = "LBG_TOT_DOT", precision = 20, scale = 0)

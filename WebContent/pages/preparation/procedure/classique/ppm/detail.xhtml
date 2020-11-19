@@ -156,34 +156,38 @@
                  <br/>
                  
                  
-                  <div class="box-header with-border">
+               <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff">LIGNE BUDGETAIRE</div></div> 
 			         <div class="col-md-2 "> </div>
 			            <div class="box-body">
 	            
 	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Imputation : </label></div>
-                  <div class="col-sm-8">
-                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.plpGesCode}"  style="width: 100%" readonly="true"/></label>
+	              <div class="col-md-6 "> 
+	               <div class="col-sm-5"><label class="pull-right">Imputation : </label></div>
+                  <div class="col-sm-7">
+                   <label><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.lbgImputation}"  style="width: 100%" readonly="true"/></label>
                   </div>
-	             </div>
-	             
-	              <div class="row">
-                  <div class="col-sm-4"><label class="pull-right">Dotation : </label></div>
+	              </div>
+	              
+	              <div class="col-md-6 "> 
+	              <div class="col-sm-4"><label class="pull-right">Dotation : </label></div>
                   <div class="col-sm-8">
                    <label>
                    <h:outputText value="#{etatsPpmController.slctdTd.lbgTotDot}" >
 				   <f:convertNumber pattern="##,###.##"></f:convertNumber>
 				   </h:outputText>
-                   </label> </div>
+                   </label> 
+                   </div>
+	              </div>
+	              
 	             </div>
-	             
-	                   
+	                  
 	            </div>
 			         
                </div>
                
-                 
+   <br/>
+   
             </div>
 	            <!-- /.box-header -->
 	             <div class="box-body">
@@ -194,11 +198,44 @@
 	            </div>
 	           </div>
 	           
-	  
-	           
-	           
-	           
+	          
             </div>
+            </div>
+            
+            
+            <div class="row">
+            <div class="col-md-12">
+             
+            
+	        <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-10 "><div  style="color: #fff">DATES PREVISIONNELLES</div></div> 
+			         <div class="col-md-2 "> </div>
+               </div>
+               
+                <div class="box-body">
+			          
+			          <div class="row">
+			          
+			          <div class="col-md-6">
+			          11111
+			          </div>
+			          
+			          
+			          <div class="col-md-6">
+			          222222
+			          </div>
+			          
+			          </div>
+         				 
+	                  </div> 
+	                  
+	                  
+            
+            </div>
+            
+            </div>
+            
             </div>
             </div>
             <!-- /.box-body -->
