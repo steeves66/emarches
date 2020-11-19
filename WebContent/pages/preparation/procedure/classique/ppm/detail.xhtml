@@ -50,7 +50,7 @@
             
 	           <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">INFORMATIONS SUR LE #{controleController.type}</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight: bold; font-size: 15px">INFORMATIONS SUR LE #{controleController.type}</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
 	            <!-- /.box-header -->
@@ -119,7 +119,7 @@
             <div class="col-md-7">
 	          <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">FINANCEMENTS</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight: bold; font-size: 15px">FINANCEMENTS ET LIGNE BUDGETAIRE</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
                 <!-- /.box-header -->
@@ -209,7 +209,7 @@
             
 	        <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-10 "><div  style="color: #fff">DATES PREVISIONNELLES</div></div> 
+                  <div class="col-md-10 "><div  style="color: #fff; font-weight: bold; font-size: 15px">DATES PREVISIONNELLES</div></div> 
 			         <div class="col-md-2 "> </div>
                </div>
                
@@ -218,23 +218,21 @@
       
              <div class="col-md-6">
              <h:panelGroup rendered="#{controleController.validDMP}"> 
-       
-             
-		    <div class="form-group">
-		       
-		          <label for="valdao2" class="col-sm-6 control-label">Validation DAO par DMP : </label>
-		                <div class="col-sm-6">
-		                     <h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateDaoApprobDmp}" >
-                              <f:convertDateTime pattern="dd/MM/yyyy" type="date" />
-                              </h:outputText>
-		          </div>
-		    </div>
-		    </h:panelGroup> 
-		    
-		    <h:panelGroup rendered="#{controleController.validCPMP}">
+           
 		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO par DMP : </label></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateDaoApprobDmp}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+			
+		    </h:panelGroup> 
+		    
+		    <h:panelGroup rendered="#{controleController.validCPMP}">
+		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Validation DAO par CPMP : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateAttApprobCpmp}"> 
 			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
 			     </h:outputText> 
 			     </b>
@@ -256,44 +254,45 @@
              
              <h:panelGroup rendered="#{controleController.etatPsc}">
             <div class="col-md-6">
-             <div class="form-group">
-             <label for="solEnt1" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> *</span></label>
-		                  <div class="col-sm-6">
-		                   <p:calendar id="solEnt1" value="#{etatsPpmController.slctdTd.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   </p:calendar> 
-		                  </div>
-             </div>
+                       
+             <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Sollicitation des Factures : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateSolFact}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+			
+			<div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Reception des Factures : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppDateRecepFact}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
              
-             
-             <div class="form-group">
-              <label for="solFact1" class="col-sm-6 control-label">Reception des Factures<span style="color:red;"> *</span></label>
-		                  <div class="col-sm-6">
-		                   <p:calendar id="solFact1" value="#{etatsPpmController.slctdTd.dppDateRecepFact}"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   </p:calendar> 
-		                  </div>
-             </div>
-              </div>
+            </div>
               </h:panelGroup>
              
              
              <h:panelGroup rendered="#{controleController.etatPsl}">
-             <div class="col-md-6">
-              <div class="form-group">
-		                  <label for="invAoo1" class="col-sm-6 control-label">Invitation des Entreprises : <span style="color:red;"></span></label>
-		                  <div class="col-sm-6">
-		                   <p:calendar id="invAoo1" value="#{etatsPpmController.slctdTd.dppInvEntre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
-		                   </p:calendar> 
-		                  </div>
-		        </div>
+             <div class="col-md-6">   
+		     <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Invitation des Entreprises : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppInvEntre}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
+			
+			<div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Reception des Lettres d'Intention : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted"  value="#{etatsPpmController.slctdTd.dppInvEntre}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div>
              
-             
-             <div class="form-group">
-              <label for="repFact1" class="col-sm-6 control-label">Reception des Lettres d'Intention : <span style="color:red;"> *</span></label>
-		                  <div class="col-sm-6">
-		                   <p:calendar value="#{etatsPpmController.slctdTd.dppDateRecepLettr}" id="repFact1"   mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   </p:calendar> 
-		                  </div>
-             </div>
              </div>
              </h:panelGroup>
 		  
@@ -447,10 +446,7 @@
 	                  
       <div class="row">  
       
-       
-          
-       
-     	         
+       	         
  </div>
          				 
 	            </div> 
