@@ -234,7 +234,7 @@
                  <p:dataTable var="slctdTb"  id="finance" styleClass="table mb0 dt-on-steroids dataTable" value="#{anoController.listeLots}" rowKey="#{slctdTb.laaId}"
                scrollable="true" scrollHeight="400" editable="true" editMode="cell" emptyMessage="Aucun Lot enregistré">
                      
-                           <p:column headerText="N°Lot" styleClass="col-sm-1">
+                           <p:column headerText="N°Lot" width="3%">
 				            <h:commandLink  title="N°Lot" styleClass="col-sm-1">
                                 <span>#{slctdTb.laaNum}</span>
                          </h:commandLink>
@@ -242,7 +242,7 @@
 				        </p:column>
 				      
 				        
-				         <p:column headerText="Objet" styleClass="col-sm-6">
+				         <p:column headerText="Objet" styleClass="col-sm-5">
 				           <h:commandLink  title="Objet" styleClass="col-sm-10">
                             <span>#{slctdTb.laaObjet}</span>
                          </h:commandLink>
@@ -263,8 +263,13 @@
 	                          </f:facet>
                          </p:cellEditor>
 				        </p:column>			        
-				        
-				        <p:column headerText="Observations DMP" styleClass="col-sm-3">
+				        <p:column width="3%">
+				              <p:commandLink action="#{anoController.chargeDialogueMotif()}" oncomplete="PF('motifDlg').show()" styleClass="btn btn-warning" title="Ajouter un motif" style="color:#fff;background-color: #f88b2e" update=":motifDlg">
+				              <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />
+							<i class="fa fa-plus"></i>
+						  </p:commandLink>
+				        </p:column>
+				        <p:column headerText="Observations DMP" styleClass="col-sm-4">
 				         <p:cellEditor>
                            <f:facet name="output">
                            <h:outputText value="#{slctdTb.laaObservationDmp}"/> 
@@ -277,8 +282,7 @@
 				    
 	
 				        </p:column>
-				        
-				         <p:column  headerText="Avis de la DMP" styleClass="col-md-2">
+				         <p:column  headerText="Avis de la DMP" width="13%">
 				         <h:panelGroup rendered="#{slctdTb.laaAno == ' '}">
                             <p:commandLink action="#{anoController.saveAno('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
 				               title="Traitement de l'ANO">  
@@ -356,8 +360,7 @@
     
      <!--  <ui:include src="inclusions/dialogHisto.xhtml"  />  -->
 
-   
-
+        <ui:include src="inclusions/dialogMotif.xhtml"  /> 
 		 
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

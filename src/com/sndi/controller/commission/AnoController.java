@@ -92,6 +92,7 @@ import com.sndi.model.VLotAvisdmp;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VLotJugement;
+import com.sndi.model.VMotifAno;
 import com.sndi.model.VNatureDocAno;
 import com.sndi.model.VOffreCandidat;
 import com.sndi.model.VOffreNonRecevableLot;
@@ -164,6 +165,7 @@ public class AnoController {
 	 //liste
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffre = new ArrayList<VAvisAppelOffreAno>();
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffreDmp = new ArrayList<VAvisAppelOffreAno>();
+	 private List<VMotifAno> listeMotifs = new ArrayList<VMotifAno>();
 	 private List<VAvisAppelOffreAnodmp> listeDemande = new ArrayList<VAvisAppelOffreAnodmp>();
 	 private List<TDemande> demandeListe = new ArrayList<TDemande>();
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
@@ -198,6 +200,7 @@ public class AnoController {
 	 private boolean panelAncienDem =false;
 	 private boolean panelChoixDem =true;
 	 private boolean panelCodeAvis =false;
+	 private long mtfNum;
 	 @PostConstruct
 	 public void postContr() {
 		controleController.fonctionaliteDynamic();
@@ -377,6 +380,16 @@ public class AnoController {
 		 } 
 	 }
 	 
+	 //Charger la combobox des motifs
+	 public void chargeComboboxMotif() {
+		 listeMotifs.clear();
+		 listeMotifs=(List<VMotifAno>) iservice.getObjectsByColumn("VMotifAno");
+			_logger.info("listeMotifs size: "+listeMotifs.size());	 
+	 }
+	 
+	 public void chargeDialogueMotif() {
+		 chargeComboboxMotif(); 
+	 }
 	 public void chargeDemande() {
 		 listeHistoDemandeAno.clear();
 		 listeHistoDemandeAno=(List<VHistoDemandeAno>) iservice.getObjectsByColumn("VHistoDemandeAno",
@@ -1291,6 +1304,26 @@ public class AnoController {
 
 	public void setDemandeListe(List<TDemande> demandeListe) {
 		this.demandeListe = demandeListe;
+	}
+
+
+	public List<VMotifAno> getListeMotifs() {
+		return listeMotifs;
+	}
+
+
+	public void setListeMotifs(List<VMotifAno> listeMotifs) {
+		this.listeMotifs = listeMotifs;
+	}
+
+
+	public long getMtfNum() {
+		return mtfNum;
+	}
+
+
+	public void setMtfNum(long mtfNum) {
+		this.mtfNum = mtfNum;
 	}
 
 	
