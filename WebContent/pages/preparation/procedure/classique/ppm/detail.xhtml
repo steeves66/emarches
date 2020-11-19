@@ -344,6 +344,16 @@
 	</div>
 	
 	<div class="col-md-6">
+		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">ANO de la DMP : </label></div>
+			    <div class="col-xs-6 col-sm-6">
+			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppApprobAno}"> 
+			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
+			     </h:outputText> 
+			     </b>
+			</div> 
+	</div>
+	
+	<div class="col-md-6">
 		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">Notification de l'Attribution : </label></div>
 			    <div class="col-xs-6 col-sm-6">
 			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppDateNotAtt}"> 
@@ -353,15 +363,6 @@
 			</div> 
 	</div>
 		
-	<div class="col-md-6">
-		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">ANO de la DMP : </label></div>
-			    <div class="col-xs-6 col-sm-6">
-			    <b><h:outputText styleClass="text-muted" value="#{etatsPpmController.slctdTd.dppApprobAno}"> 
-			       <f:convertDateTime pattern="MM/dd/yyyy" type="date" /> 
-			     </h:outputText> 
-			     </b>
-			</div> 
-	</div>
 	
 	<div class="col-md-6">
 		  <div class="col-xs-6 col-sm-6"><label class="control-label pull-right">ANO du Bailleur : </label></div>
