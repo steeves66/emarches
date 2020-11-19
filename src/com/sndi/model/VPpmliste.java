@@ -73,6 +73,10 @@ public class VPpmliste implements java.io.Serializable {
 	private Date dppDateExecFin;
 	private Date dppDateSignatAc;
 	private Date dppDateSignatAttrib;
+	private Date dppApprobAno;
+	private Date dppDateNegociation;
+	private Date dppDateMarcheApprob;
+	private Date dppDateAttApproBail;
 	private long plpId;
 	private long plpGesCode;
 
@@ -102,7 +106,7 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateJugementOffreTec, Date dppDateNotAtt,
 			Date dppDateOuvertOf, Date dppDateOuvertOt, Date dppDateRecepFact, Date dppDateRecepLettr,
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
-			Date dppDateSignatAttrib,  long plpId, long plpGesCode) {
+			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail, long plpId, long plpGesCode) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -157,6 +161,10 @@ public class VPpmliste implements java.io.Serializable {
 		this.dppDateExecFin = dppDateExecFin;
 		this.dppDateSignatAc = dppDateSignatAc;
 		this.dppDateSignatAttrib = dppDateSignatAttrib;
+		this.dppApprobAno = dppApprobAno;
+		this.dppDateNegociation = dppDateNegociation;
+		this.dppDateMarcheApprob = dppDateMarcheApprob;
+		this.dppDateAttApproBail = dppDateAttApproBail;
 		this.plpId = plpId;
 		this.plpGesCode = plpGesCode;
 	}
@@ -648,6 +656,43 @@ public class VPpmliste implements java.io.Serializable {
 	public void setDppDateSignatAttrib(Date dppDateSignatAttrib) {
 		this.dppDateSignatAttrib = dppDateSignatAttrib;
 	}
+	
+	@Column(name = "DPP_APPROB_ANO", length = 7)
+	public Date getDppApprobAno() {
+		return this.dppApprobAno;
+	}
+
+	public void setDppApprobAno(Date dppApprobAno) {
+		this.dppApprobAno = dppApprobAno;
+	}
+
+	@Column(name = "DPP_DATE_NEGOCIATION", length = 7)
+	public Date getDppDateNegociation() {
+		return this.dppDateNegociation;
+	}
+
+	public void setDppDateNegociation(Date dppDateNegociation) {
+		this.dppDateNegociation = dppDateNegociation;
+	}
+
+	@Column(name = "DPP_DATE_MARCHE_APPROB", length = 7)
+	public Date getDppDateMarcheApprob() {
+		return this.dppDateMarcheApprob;
+	}
+
+	public void setDppDateMarcheApprob(Date dppDateMarcheApprob) {
+		this.dppDateMarcheApprob = dppDateMarcheApprob;
+	}
+	
+	@Column(name = "DPP_DATE_ATT_APPRO_BAIL", length = 7)
+	public Date getDppDateAttApproBail() {
+		return this.dppDateAttApproBail;
+	}
+
+	public void setDppDateAttApproBail(Date dppDateAttApproBail) {
+		this.dppDateAttApproBail = dppDateAttApproBail;
+	}
+
 
 	@Column(name = "PLP_ID", nullable = false, precision = 10, scale = 0)
 	public long getPlpId() {

@@ -1285,6 +1285,14 @@ public class ControleController {
 				    				fermerValPspm = false;
 				    				detailP1 = true;
 									detailP2 = false;
+									validCPMP = true;
+									 validDMP = false;
+									 //etatPso = false;
+									 //etatPsl = false;
+									 etatPso = false;
+									 etatPsl = false;
+									 etatPsc = false;
+									 etatPsl_Pso = false;
 				    			}else
 					    			if(action.equalsIgnoreCase("PUBPPM")) {
 					    			type = "PPM";
@@ -1542,6 +1550,15 @@ public class ControleController {
 				    				//fermerValPspm = false;
 				    				detailP1 = false;
 									detailP2 = true;
+									 validCPMP = false;
+									 validDMP = true;
+									 /*etatPsl = false;
+									 etatPso = false;
+									 //validDMP = false;*/
+									 etatPso = false;
+									 etatPsl = false;
+									 etatPsc = false;
+									 etatPsl_Pso = false;
 				    			}else
 					    			if(action.equalsIgnoreCase("PUBPSPM")) {
 					    			type = "PSPM";
