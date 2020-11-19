@@ -91,6 +91,7 @@ import com.sndi.model.VLotAnalyseFin;
 import com.sndi.model.VLotAvisdmp;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
+import com.sndi.model.VLotCandidatAno;
 import com.sndi.model.VLotJugement;
 import com.sndi.model.VMotifAno;
 import com.sndi.model.VNatureDocAno;
@@ -160,12 +161,14 @@ public class AnoController {
 	 private long demNum;
 	 private String docNatureDem ="";
 	 private String docNatureDemDmp ="";
+	 private String souNcc="";
 	 
 	 
 	 //liste
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffre = new ArrayList<VAvisAppelOffreAno>();
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffreDmp = new ArrayList<VAvisAppelOffreAno>();
 	 private List<VMotifAno> listeMotifs = new ArrayList<VMotifAno>();
+	 private List<VLotCandidatAno> listeEntreprise = new ArrayList<VLotCandidatAno>();
 	 private List<VAvisAppelOffreAnodmp> listeDemande = new ArrayList<VAvisAppelOffreAnodmp>();
 	 private List<TDemande> demandeListe = new ArrayList<TDemande>();
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
@@ -387,8 +390,20 @@ public class AnoController {
 			_logger.info("listeMotifs size: "+listeMotifs.size());	 
 	 }
 	 
+	 //Charger la combobox des entreprises
+	 public void chargeComboboxEntreprise() {
+		 listeEntreprise.clear();
+		 listeEntreprise=(List<VLotCandidatAno>) iservice.getObjectsByColumn("VLotCandidatAno");
+			_logger.info("listeEntreprise size: "+listeEntreprise.size());	 
+	 }
+	 
+	 //Enregister les motifs
+	 public void saveMotif() {
+		 chargeLot();	 
+	 }
 	 public void chargeDialogueMotif() {
-		 chargeComboboxMotif(); 
+		 chargeComboboxMotif();
+		 chargeComboboxEntreprise();
 	 }
 	 public void chargeDemande() {
 		 listeHistoDemandeAno.clear();
@@ -1324,6 +1339,26 @@ public class AnoController {
 
 	public void setMtfNum(long mtfNum) {
 		this.mtfNum = mtfNum;
+	}
+
+
+	public List<VLotCandidatAno> getListeEntreprise() {
+		return listeEntreprise;
+	}
+
+
+	public void setListeEntreprise(List<VLotCandidatAno> listeEntreprise) {
+		this.listeEntreprise = listeEntreprise;
+	}
+
+
+	public String getSouNcc() {
+		return souNcc;
+	}
+
+
+	public void setSouNcc(String souNcc) {
+		this.souNcc = souNcc;
 	}
 
 	
