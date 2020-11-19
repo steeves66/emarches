@@ -516,10 +516,10 @@
                   <p:inputText type="text" value="#{daoController.newAvis.aaoLieuExe}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                   
-                   <label  class="col-sm-1 control-label">Heure</label>
+                  <!--  <label  class="col-sm-1 control-label">Heure</label>
 				  <div class="col-sm-2">
                   <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
-                  </div>
+                  </div> -->
                 </div>
                </h:panelGroup>  
                 <h:panelGroup rendered="#{daoController.ouverture}">
@@ -551,6 +551,11 @@
 				  <div class="col-sm-2">    
                   <p:calendar value="#{daoController.ouvTech}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" > 
                   </p:calendar>
+                  </div>
+                  
+                  <label  class="col-sm-1 control-label">Heure</label>
+				  <div class="col-sm-2">
+                  <p:inputMask mask=" 99:99 " value="#{daoController.newAvis.aaoDteHeurOuv}" styleClass="form-control"  style="width: 100%" />    
                   </div>
                 
                 </div>

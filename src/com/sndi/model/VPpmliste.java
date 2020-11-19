@@ -54,6 +54,25 @@ public class VPpmliste implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private String dppActeurSaisie;
+	private Date dppDateAttApprobCpmp;
+	private Date dppDateAvisAoPublication;
+	private Date dppDateDaoApprobBail;
+	private Date dppDateDaoApprobDmp;
+	private Date dppDateDaoTrans;
+	private Date dppDateElabRapport;
+	private Date dppDateJugementOffre;
+	private Date dppDateJugementOffreTec;
+	private Date dppDateNotAtt;
+	private Date dppDateOuvertOf;
+	private Date dppDateOuvertOt;
+	private Date dppDateRecepFact;
+	private Date dppDateRecepLettr;
+	private Date dppDateSolFact;
+	private Date dppInvEntre;
+	private Date dppDateExecDebut;
+	private Date dppDateExecFin;
+	private Date dppDateSignatAc;
+	private Date dppDateSignatAttrib;
 	private long plpId;
 	private long plpGesCode;
 
@@ -78,7 +97,12 @@ public class VPpmliste implements java.io.Serializable {
 			String lbgFonCodeCf, String lbgFonCodeCor,String lbgImputation,BigDecimal lbgTotDot, BigDecimal lbgAeTr, BigDecimal lbgDisTot, String lbgFonCodeVal, Date dppDateValAc, Date dppDateValCpmp, Date dppDateValDmp,
 			String dppPartiePmePmi, Date dppDateSaisie, String dppTypePlan, String tymLibelleCourt,
 			String dppStatutRetour, String dppStructureConduc, String dppStructureBenefi, String dppRecherche,
-			String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie, long plpId, long plpGesCode) {
+			String dppFonCodPf, String dppFonCodDmp, String dppActeurSaisie,Date dppDateAttApprobCpmp,
+			Date dppDateAvisAoPublication, Date dppDateDaoApprobBail, Date dppDateDaoApprobDmp, Date dppDateDaoTrans,
+			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateJugementOffreTec, Date dppDateNotAtt,
+			Date dppDateOuvertOf, Date dppDateOuvertOt, Date dppDateRecepFact, Date dppDateRecepLettr,
+			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
+			Date dppDateSignatAttrib,  long plpId, long plpGesCode) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -114,6 +138,25 @@ public class VPpmliste implements java.io.Serializable {
 		this.dppFonCodPf = dppFonCodPf;
 		this.dppFonCodDmp = dppFonCodDmp;
 		this.dppActeurSaisie = dppActeurSaisie;
+		this.dppDateAttApprobCpmp = dppDateAttApprobCpmp;
+		this.dppDateAvisAoPublication = dppDateAvisAoPublication;
+		this.dppDateDaoApprobBail = dppDateDaoApprobBail;
+		this.dppDateDaoApprobDmp = dppDateDaoApprobDmp;
+		this.dppDateDaoTrans = dppDateDaoTrans;
+		this.dppDateElabRapport = dppDateElabRapport;
+		this.dppDateJugementOffre = dppDateJugementOffre;
+		this.dppDateJugementOffreTec = dppDateJugementOffreTec;
+		this.dppDateNotAtt = dppDateNotAtt;
+		this.dppDateOuvertOf = dppDateOuvertOf;
+		this.dppDateOuvertOt = dppDateOuvertOt;
+		this.dppDateRecepFact = dppDateRecepFact;
+		this.dppDateRecepLettr = dppDateRecepLettr;
+		this.dppDateSolFact = dppDateSolFact;
+		this.dppInvEntre = dppInvEntre;
+		this.dppDateExecDebut = dppDateExecDebut;
+		this.dppDateExecFin = dppDateExecFin;
+		this.dppDateSignatAc = dppDateSignatAc;
+		this.dppDateSignatAttrib = dppDateSignatAttrib;
 		this.plpId = plpId;
 		this.plpGesCode = plpGesCode;
 	}
@@ -433,6 +476,177 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setDppActeurSaisie(String dppActeurSaisie) {
 		this.dppActeurSaisie = dppActeurSaisie;
+	}
+	
+	@Column(name = "DPP_DATE_ATT_APPROB_CPMP", length = 7)
+	public Date getDppDateAttApprobCpmp() {
+		return this.dppDateAttApprobCpmp;
+	}
+
+	public void setDppDateAttApprobCpmp(Date dppDateAttApprobCpmp) {
+		this.dppDateAttApprobCpmp = dppDateAttApprobCpmp;
+	}
+
+	@Column(name = "DPP_DATE_AVIS_AO_PUBLICATION", length = 7)
+	public Date getDppDateAvisAoPublication() {
+		return this.dppDateAvisAoPublication;
+	}
+
+	public void setDppDateAvisAoPublication(Date dppDateAvisAoPublication) {
+		this.dppDateAvisAoPublication = dppDateAvisAoPublication;
+	}
+
+	@Column(name = "DPP_DATE_DAO_APPROB_BAIL", length = 7)
+	public Date getDppDateDaoApprobBail() {
+		return this.dppDateDaoApprobBail;
+	}
+
+	public void setDppDateDaoApprobBail(Date dppDateDaoApprobBail) {
+		this.dppDateDaoApprobBail = dppDateDaoApprobBail;
+	}
+
+	@Column(name = "DPP_DATE_DAO_APPROB_DMP", length = 7)
+	public Date getDppDateDaoApprobDmp() {
+		return this.dppDateDaoApprobDmp;
+	}
+
+	public void setDppDateDaoApprobDmp(Date dppDateDaoApprobDmp) {
+		this.dppDateDaoApprobDmp = dppDateDaoApprobDmp;
+	}
+
+	@Column(name = "DPP_DATE_DAO_TRANS", length = 7)
+	public Date getDppDateDaoTrans() {
+		return this.dppDateDaoTrans;
+	}
+
+	public void setDppDateDaoTrans(Date dppDateDaoTrans) {
+		this.dppDateDaoTrans = dppDateDaoTrans;
+	}
+
+	@Column(name = "DPP_DATE_ELAB_RAPPORT", length = 7)
+	public Date getDppDateElabRapport() {
+		return this.dppDateElabRapport;
+	}
+
+	public void setDppDateElabRapport(Date dppDateElabRapport) {
+		this.dppDateElabRapport = dppDateElabRapport;
+	}
+
+	@Column(name = "DPP_DATE_JUGEMENT_OFFRE", length = 7)
+	public Date getDppDateJugementOffre() {
+		return this.dppDateJugementOffre;
+	}
+
+	public void setDppDateJugementOffre(Date dppDateJugementOffre) {
+		this.dppDateJugementOffre = dppDateJugementOffre;
+	}
+
+	@Column(name = "DPP_DATE_JUGEMENT_OFFRE_TEC", length = 7)
+	public Date getDppDateJugementOffreTec() {
+		return this.dppDateJugementOffreTec;
+	}
+
+	public void setDppDateJugementOffreTec(Date dppDateJugementOffreTec) {
+		this.dppDateJugementOffreTec = dppDateJugementOffreTec;
+	}
+
+	@Column(name = "DPP_DATE_NOT_ATT", length = 7)
+	public Date getDppDateNotAtt() {
+		return this.dppDateNotAtt;
+	}
+
+	public void setDppDateNotAtt(Date dppDateNotAtt) {
+		this.dppDateNotAtt = dppDateNotAtt;
+	}
+
+	@Column(name = "DPP_DATE_OUVERT_OF", length = 7)
+	public Date getDppDateOuvertOf() {
+		return this.dppDateOuvertOf;
+	}
+
+	public void setDppDateOuvertOf(Date dppDateOuvertOf) {
+		this.dppDateOuvertOf = dppDateOuvertOf;
+	}
+
+	@Column(name = "DPP_DATE_OUVERT_OT", length = 7)
+	public Date getDppDateOuvertOt() {
+		return this.dppDateOuvertOt;
+	}
+
+	public void setDppDateOuvertOt(Date dppDateOuvertOt) {
+		this.dppDateOuvertOt = dppDateOuvertOt;
+	}
+
+	@Column(name = "DPP_DATE_RECEP_FACT", length = 7)
+	public Date getDppDateRecepFact() {
+		return this.dppDateRecepFact;
+	}
+
+	public void setDppDateRecepFact(Date dppDateRecepFact) {
+		this.dppDateRecepFact = dppDateRecepFact;
+	}
+
+	@Column(name = "DPP_DATE_RECEP_LETTR", length = 7)
+	public Date getDppDateRecepLettr() {
+		return this.dppDateRecepLettr;
+	}
+
+	public void setDppDateRecepLettr(Date dppDateRecepLettr) {
+		this.dppDateRecepLettr = dppDateRecepLettr;
+	}
+
+	@Column(name = "DPP_DATE_SOL_FACT", length = 7)
+	public Date getDppDateSolFact() {
+		return this.dppDateSolFact;
+	}
+
+	public void setDppDateSolFact(Date dppDateSolFact) {
+		this.dppDateSolFact = dppDateSolFact;
+	}
+
+	@Column(name = "DPP_INV_ENTRE", length = 7)
+	public Date getDppInvEntre() {
+		return this.dppInvEntre;
+	}
+
+	public void setDppInvEntre(Date dppInvEntre) {
+		this.dppInvEntre = dppInvEntre;
+	}
+
+	@Column(name = "DPP_DATE_EXEC_DEBUT", length = 7)
+	public Date getDppDateExecDebut() {
+		return this.dppDateExecDebut;
+	}
+
+	public void setDppDateExecDebut(Date dppDateExecDebut) {
+		this.dppDateExecDebut = dppDateExecDebut;
+	}
+
+	@Column(name = "DPP_DATE_EXEC_FIN", length = 7)
+	public Date getDppDateExecFin() {
+		return this.dppDateExecFin;
+	}
+
+	public void setDppDateExecFin(Date dppDateExecFin) {
+		this.dppDateExecFin = dppDateExecFin;
+	}
+
+	@Column(name = "DPP_DATE_SIGNAT_AC", length = 7)
+	public Date getDppDateSignatAc() {
+		return this.dppDateSignatAc;
+	}
+
+	public void setDppDateSignatAc(Date dppDateSignatAc) {
+		this.dppDateSignatAc = dppDateSignatAc;
+	}
+
+	@Column(name = "DPP_DATE_SIGNAT_ATTRIB", length = 7)
+	public Date getDppDateSignatAttrib() {
+		return this.dppDateSignatAttrib;
+	}
+
+	public void setDppDateSignatAttrib(Date dppDateSignatAttrib) {
+		this.dppDateSignatAttrib = dppDateSignatAttrib;
 	}
 
 	@Column(name = "PLP_ID", nullable = false, precision = 10, scale = 0)
