@@ -249,7 +249,7 @@
 	
 				        </p:column>
 				        
-				        <p:column rendered="false" headerText="Avis de la DMP" styleClass="col-sm-1">
+				        <p:column rendered="false" styleClass="col-sm-1">
 				        <p:cellEditor>
 				         <f:facet name="output">
                             <h:outputText value="#{slctdTb.laaAno == 'O'?'OUI':'NON'}"/> 
@@ -269,7 +269,7 @@
 							<i class="fa fa-plus"></i>
 						  </p:commandLink>
 				        </p:column>
-				        <p:column headerText="Observations DMP" styleClass="col-sm-4">
+				        <p:column headerText="Observations #{controleController.structureLibAbrege}"  styleClass="col-sm-4">
 				         <p:cellEditor>
                            <f:facet name="output">
                            <h:outputText value="#{slctdTb.laaObservationDmp}"/> 
@@ -282,7 +282,7 @@
 				    
 	
 				        </p:column>
-				         <p:column  headerText="Avis de la DMP" width="13%">
+				         <p:column  headerText="Avis de la #{controleController.structureLibAbrege}" width="13%">
 				         <h:panelGroup rendered="#{slctdTb.laaAno == ' '}">
                             <p:commandLink action="#{anoController.saveAno('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl:finance, gnl:info"
 				               title="Traitement de l'ANO">  

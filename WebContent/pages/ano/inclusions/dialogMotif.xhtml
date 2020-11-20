@@ -7,12 +7,12 @@
       xmlns:p="http://primefaces.org/ui">
     <h:panelGroup  layout="block" id="dialogMotif" >  
     <h:form id="motifDlg" styleClass="form-horizontal">
-	        <p:dialog  widgetVar="motifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="SAISIR LE(S) MOTIF(S) DE l'AVIS">
+	        <p:dialog  widgetVar="motifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="SAISIR LE(S) MOTIF(S) DE l'AVIS DE LA #{controleController.structureLibAbrege}">
 		 <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">#{anoController.sltLot.laaObjet} : <strong></strong></div>
+            <div  style="color: #fff">LOT N°#{anoController.sltLot.laaNum} :<strong> #{anoController.sltLot.laaObjet}</strong></div>
          </div>
          <div class="box-body">
               
@@ -44,7 +44,7 @@
                  <div class="form-group">
                   <label  class="col-sm-1 control-label">Observation</label>
 				  <div class="col-sm-11">
-                   <p:inputTextarea id="obs" rows="3" cols="33" styleClass="form-control"  style="width: 100%">
+                   <p:inputTextarea value="#{anoController.newObs.obsLibelle}" id="obs" rows="3" cols="33" styleClass="form-control"  style="width: 100%">
          				      </p:inputTextarea>
          		 </div>
                 </div>

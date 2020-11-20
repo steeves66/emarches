@@ -113,6 +113,7 @@ import com.sndi.model.VbCommissionSpecifique;
 import com.sndi.model.VbCommissionType;
 import com.sndi.model.VbDetCritAnalyseDac;
 import com.sndi.model.VbDetOffresSaisi;
+import com.sndi.model.VbObservations;
 import com.sndi.model.VbTempParamAnalyseOff;
 import com.sndi.model.VbTempParamAtrib;
 import com.sndi.model.VbTempParamAvis;
@@ -187,6 +188,7 @@ public class AnoController {
 	 private VAvisAppelOffreAnodmp slctdTdDem = new VAvisAppelOffreAnodmp();
 	 private VbTempParamAvis newTempAvis = new VbTempParamAvis();
 	 private TDemande newDem = new TDemande();
+	 private VbObservations newObs = new VbObservations();
 	 private VLotAvisdmp infolot = new VLotAvisdmp();
 
 	 private TDemande demande = new TDemande();
@@ -385,6 +387,7 @@ public class AnoController {
 	 
 	 //Charger la combobox des motifs
 	 public void chargeComboboxMotif() {
+		 mtfNum=0;
 		 listeMotifs.clear();
 		 listeMotifs=(List<VMotifAno>) iservice.getObjectsByColumn("VMotifAno");
 			_logger.info("listeMotifs size: "+listeMotifs.size());	 
@@ -392,6 +395,7 @@ public class AnoController {
 	 
 	 //Charger la combobox des entreprises
 	 public void chargeComboboxEntreprise() {
+		 souNcc="";
 		 listeEntreprise.clear();
 		 listeEntreprise=(List<VLotCandidatAno>) iservice.getObjectsByColumn("VLotCandidatAno");
 			_logger.info("listeEntreprise size: "+listeEntreprise.size());	 
@@ -399,9 +403,22 @@ public class AnoController {
 	 
 	 //Enregister les motifs
 	 public void saveMotif() {
-		 chargeLot();	 
+		 newObs.setObsDate(Calendar.getInstance().getTime());
+		 newObs.setObsOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+		 newObs.setObsLaaNum(sltLot.getLaaNum());
+		 newObs.setObsAaoCode(slctdTdDem.getAaoCode());
+		 newObs.setObsDacCode(slctdTdDem.getAaoDacCode());
+		 newObs.setObsMtfNum(mtfNum);
+		 newObs.setObsSouNcc(souNcc);
+		 newObs.setObsType("ANO");
+		 iservice.addObject(newObs);
+		 chargeLotDmp();	
+		 userController.setTexteMsg("Motif enrégisté avec succès!");
+		 userController.setRenderMsg(true);
+		 userController.setSevrityMsg("success");
 	 }
 	 public void chargeDialogueMotif() {
+		 newObs = new VbObservations();
 		 chargeComboboxMotif();
 		 chargeComboboxEntreprise();
 	 }
@@ -1359,6 +1376,16 @@ public class AnoController {
 
 	public void setSouNcc(String souNcc) {
 		this.souNcc = souNcc;
+	}
+
+
+	public VbObservations getNewObs() {
+		return newObs;
+	}
+
+
+	public void setNewObs(VbObservations newObs) {
+		this.newObs = newObs;
 	}
 
 	

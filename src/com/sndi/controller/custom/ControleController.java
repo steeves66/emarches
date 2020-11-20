@@ -23,6 +23,8 @@ public class ControleController {
 	
 	
 	
+	private String structureLibAbrege="DGMP";
+	private String structureLibLong="Direction Générale des Marchés Publics";
 	//Libellés
 	private String libelle="";
 	private String libelleSmall="";
@@ -9990,6 +9992,26 @@ public class ControleController {
 
 	public void setLibelleDmp(String libelleDmp) {
 		this.libelleDmp = libelleDmp;
+	}
+
+
+	public String getStructureLibAbrege() {
+		return structureLibAbrege;
+	}
+
+
+	public void setStructureLibAbrege(String structureLibAbrege) {
+		this.structureLibAbrege = structureLibAbrege;
+	}
+
+
+	public String getStructureLibLong() {
+		return structureLibLong;
+	}
+
+
+	public void setStructureLibLong(String structureLibLong) {
+		this.structureLibLong = structureLibLong;
 	}
 	
 }
