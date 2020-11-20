@@ -29,7 +29,7 @@
                          <br/><br/><br/><br/><br/>
                             <li>
                                 <a href="http://www.marchespublics.ci/">
-                                    <br>  ALLER SUR LE PORTAIL DE LA DMP </a>
+                                    <br>  ALLER SUR LE PORTAIL DE LA DGMP </a>
                             </li>
                             <li>
                                 <a href="http://www.gouv.ci/Main.php">
