@@ -23,7 +23,7 @@
 				  <p:selectOneMenu id="ent" value="#{anoController.souNcc}"
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir l'entreprise.." />   
-       		         <f:selectItems value="#{anoController.listeEntreprise}" var="ent" itemLabel="#{ent.souSigleSte}" itemValue="#{ent.souNcc}" />
+       		         <f:selectItems value="#{anoController.listeEntreprise}" var="ent" itemLabel="#{ent.dofSouNcc} : #{ent.dofSigle}" itemValue="#{ent.dofSouNcc}" />
 			       </p:selectOneMenu> 
                 
                   </div>

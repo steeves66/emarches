@@ -92,6 +92,7 @@ import com.sndi.model.VLotAvisdmp;
 import com.sndi.model.VLotAnalyse;
 import com.sndi.model.VLotCandidat;
 import com.sndi.model.VLotCandidatAno;
+import com.sndi.model.VLotCandidatAnoPrequalif;
 import com.sndi.model.VLotJugement;
 import com.sndi.model.VMotifAno;
 import com.sndi.model.VNatureDocAno;
@@ -169,7 +170,8 @@ public class AnoController {
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffre = new ArrayList<VAvisAppelOffreAno>();
 	 private List<VAvisAppelOffreAno> listeAvisAppelOffreDmp = new ArrayList<VAvisAppelOffreAno>();
 	 private List<VMotifAno> listeMotifs = new ArrayList<VMotifAno>();
-	 private List<VLotCandidatAno> listeEntreprise = new ArrayList<VLotCandidatAno>();
+	 private List<VLotCandidatAnoPrequalif> listeEntreprise = new ArrayList<VLotCandidatAnoPrequalif>();
+	 //private List<VLotCandidatAno> listeEntreprise = new ArrayList<VLotCandidatAno>();
 	 private List<VAvisAppelOffreAnodmp> listeDemande = new ArrayList<VAvisAppelOffreAnodmp>();
 	 private List<TDemande> demandeListe = new ArrayList<TDemande>();
 	 //private List<VNatureDocAno> natureDocListe = new ArrayList<VNatureDocAno>();
@@ -397,8 +399,12 @@ public class AnoController {
 	 public void chargeComboboxEntreprise() {
 		 souNcc="";
 		 listeEntreprise.clear();
-		 listeEntreprise=(List<VLotCandidatAno>) iservice.getObjectsByColumn("VLotCandidatAno");
+		 listeEntreprise=(List<VLotCandidatAnoPrequalif>) iservice.getObjectsByColumn("VLotCandidatAnoPrequalif",
+				   new WhereClause("LAA_AAO_CODE",WhereClause.Comparateur.EQ,""+sltLot.getLaaAaoCode()),
+			       new WhereClause("LAA_NUM",WhereClause.Comparateur.EQ,""+sltLot.getLaaNum()));
 			_logger.info("listeEntreprise size: "+listeEntreprise.size());	 
+			_logger.info("LAA_AAO_CODE: "+sltLot.getLaaAaoCode());
+			_logger.info("LAA_NUM: "+sltLot.getLaaNum());
 	 }
 	 
 	 //Enregister les motifs
@@ -1359,12 +1365,12 @@ public class AnoController {
 	}
 
 
-	public List<VLotCandidatAno> getListeEntreprise() {
+	public List<VLotCandidatAnoPrequalif> getListeEntreprise() {
 		return listeEntreprise;
 	}
 
 
-	public void setListeEntreprise(List<VLotCandidatAno> listeEntreprise) {
+	public void setListeEntreprise(List<VLotCandidatAnoPrequalif> listeEntreprise) {
 		this.listeEntreprise = listeEntreprise;
 	}
 
