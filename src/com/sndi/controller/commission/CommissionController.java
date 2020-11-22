@@ -193,6 +193,7 @@ public class CommissionController {
 	 private List<VLotAnalyseFin> listeSoumissionByLot = new ArrayList<VLotAnalyseFin>();
 	 private List<TAvisAppelOffre> listeAvis = new ArrayList<TAvisAppelOffre>();
 	 private List<TDossierMbr> dossListe = new ArrayList<TDossierMbr>();
+	 //private List<VDossierPv> pvListe = new ArrayList<VDossierPv>();
 	 private List<TDossierAnalyse> justifListe = new ArrayList<TDossierAnalyse>();
 	 private List<TDossierAao> dossListeRapport = new ArrayList<TDossierAao>();
 	 private List<VDofTyp> listdoftyp = new ArrayList<VDofTyp>();
@@ -345,6 +346,7 @@ public class CommissionController {
 	 private String filtreLot="";
 	 private String natdoc ="6";
 	 private String natjus ="13";
+	 private String natpv ="";
 	 private long dofMtCor=0;
 	 private long dofErrCalcul=0;
 	 private Date dateSeance;
@@ -1430,7 +1432,59 @@ public class CommissionController {
 							}
 				  }
 		 
-	
+		
+		 //Methode Upload des Procès Verbaux
+		/* @Transactional
+		 public void uploadPv(FileUploadEvent event) throws IOException{
+			 
+		     if(slctdTd.getAaoStaCode().equalsIgnoreCase("APU")) {
+		    	 natpv ="8";
+		     }else {
+		    	 if(slctdTd.getAaoStaCode().equalsIgnoreCase("OUV")) {
+		    		 natpv ="9";
+		    	 }else {
+		    		     if(slctdTd.getAaoStaCode().equalsIgnoreCase("ANA")) {
+		    		    	 natpv ="15";
+		    		     }
+		    	 }
+		     }
+		 	   
+		     listeAvisAppelOffre = (List<TAvisAppelOffre>) iservice.getObjectsByColumnDesc("VAvisAppelOffre", new ArrayList<String>(Arrays.asList("AAO_DTE_SAISI")),
+					 new WhereClause("AAO_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getAaoCode()));
+		     if(!listeAppelOffre.isEmpty()) {
+		    	 sltAvis=listeAvisAppelOffre.get(0);
+		     }	
+		     
+		  
+				if(fileUploadController.handleFileUpload(event, sltAvis.getAaoCode(), natpv)) {
+					
+					//check le dossier s'il existe à faire
+					TPv dos = new TPv(); //TNatureDocument 
+					dos = new TPv() ;
+					int nat = Integer.valueOf(natpv);
+                   
+					dos.setTNatureDocuments(new TNatureDocuments((short)nat));
+					//dos.setDpgCode(keyGen.getCodeDossierPgpm(fileUploadController.getFileCode()+"-"));
+					dos.setTAvisAppelOffre(sltAvis);
+					dos.setPvDacCode(slctdTd.getAaoDacCode());
+					dos.setPvLibelle(fileUploadController.getFileName());
+					dos.setPvCommentaire(fileUploadController.getDocNom());
+					dos.setPvReference("");
+					dos.setPvDteSaisi(Calendar.getInstance().getTime());
+					iservice.addObject(dos);
+					
+					chargePv(natpv);
+					//Message de Confirmation
+					userController.setTexteMsg("Procès Verbal enregistré!");
+					userController.setRenderMsg(true);
+					userController.setSevrityMsg("success");
+				     }else {
+				    	//Message d'erreur
+						 userController.setTexteMsg("Document non enregistré, charger à nouveau un document!");
+						 userController.setRenderMsg(true);
+						 userController.setSevrityMsg("danger");
+							}
+				  }*/
 		
 		 //Edition de fiche membres
 		 public void imprimerFicheMbr() {
@@ -1445,6 +1499,13 @@ public class CommissionController {
 						 new WhereClause("DMB_DCS_NUM",Comparateur.EQ,""+detCom.getDcsNum())));
 		    }
 		 
+		 /*public void chargePv(String natpv) {
+			 pvListe.clear();
+		     pvListe = ((List<VDossierPv>)iservice.getObjectsByColumnDesc("VDossierPv",new ArrayList<String>(Arrays.asList("PV_ID")),
+						 new WhereClause("PV_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+						 new WhereClause("PV_NAD_CODE",Comparateur.EQ,""+natpv)));
+		    }
+		 */
 		 public void chargeDossierJus() {
 			 justifListe.clear();
 			 justifListe = ((List<TDossierAnalyse>)iservice.getObjectsByColumnDesc("TDossierAnalyse",new ArrayList<String>(Arrays.asList("DANA_ID")),
@@ -1459,6 +1520,13 @@ public class CommissionController {
 			 dossListeRapport.clear();
 			 dossListeRapport = ((List<TDossierAao>)iservice.getObjectsByColumnDesc("TDossierAao",new ArrayList<String>(Arrays.asList("DAA_ID")),
 						 new WhereClause("DAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode())));
+		    }
+		 
+		 public void chargeDossierPv(String docNature) { 
+			 dossListeRapport.clear();
+			 dossListeRapport = ((List<TDossierAao>)iservice.getObjectsByColumnDesc("TDossierAao",new ArrayList<String>(Arrays.asList("DAA_ID")),
+						 new WhereClause("DAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+						 new WhereClause("DAA_NAD_CODE",Comparateur.EQ,""+docNature)));
 		    }
 		 
 		 public void openDossier() throws IOException{
@@ -2218,7 +2286,8 @@ public class CommissionController {
 				iservice.addObject(dos);
 				
 				//chargeNatureDocTrans();
-				chargeDossierRapport();
+				//chargeDossierRapport();
+				chargeDossierPv(docNature);
 				
 				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,"Chargement de fichiers effectué avec succès!", "");
 				FacesContext.getCurrentInstance().addMessage(null, msg);
@@ -3937,6 +4006,13 @@ public class CommissionController {
 	public void setListeAvisAppelOffre(List<TAvisAppelOffre> listeAvisAppelOffre) {
 		this.listeAvisAppelOffre = listeAvisAppelOffre;
 	}
-	
+
+	public String getNatpv() {
+		return natpv;
+	}
+
+	public void setNatpv(String natpv) {
+		this.natpv = natpv;
+	}
 	
 }

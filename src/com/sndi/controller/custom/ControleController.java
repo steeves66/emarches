@@ -27,6 +27,7 @@ public class ControleController {
 	private String structureLibLong="Direction Générale des Marchés Publics";
 	//Libellés
 	private String libelle="";
+	private String libelleTravaux="";
 	private String libelleSmall="";
 	private String libelleDmp="DGMP";
 	private String libelle1="";
@@ -6484,6 +6485,7 @@ public class ControleController {
 								    			fonctionalite = "listOuvertureAc";
 								    			libelleDmp="DGMP";
 								    			libelle="SEANCE D'OUVERTURE / SAISIE DES OFFRES";
+								    			libelleTravaux="Joindre le PV d'ouverture";
 								    			libelle2 = "Date Fin Ouverture";
 								    			typePlan = "L'OUVERTURE";
 								    			libelle1 = "Heure de Fin";
@@ -6506,6 +6508,7 @@ public class ControleController {
 									    			btn_fermerOuverture =true;
 									    			btn_fermerAnalyse =false;
 									    			btn_fermerJugement =false;
+									    			libelleTravaux="Joindre le PV d'ouverture";
 									    		}
 							    			else
 								    			if(action.equalsIgnoreCase("LISMBR")) {
@@ -6533,6 +6536,7 @@ public class ControleController {
 									    			libelle2 = "Date Fin Analyse";
 									    			libelle1 = "Heure de Fin";
 									    			libelleFinCom = "Fin de l'analyse";
+									    			libelleTravaux="Joindre le PV d'Analyse";
 									    			libelleConfirm = "Confirmez-vous la fin de l'analyse des Offres de l'avis d'appel d'Offre N°";
 									    			libelle="ANALYSE DES OFFRES";
 									    			 btn_apercuOuv =false;
@@ -6547,16 +6551,18 @@ public class ControleController {
 										    			type = "Commission";
 										    			libelleDmp="DGMP";
 										    			opdPiece = "Analyse";
-										    			libelle="DEAILS DE L'OFFRRE N°";
+										    			libelle="DETAILS DE L'OFFRRE N°";
 										    			btn_fermerOuverture =false;
 										    			btn_fermerAnalyse =true;
 										    			btn_fermerJugement =false;
+										    			libelleTravaux="Joindre le PV d'Analyse";
 										    		}
 								    			else
 									    			if(action.equalsIgnoreCase("SAIANA")) {
 										    			type = "Commission";
 										    			libelleDmp="DGMP";
 										    			libelle="ANALYSE DES OFFRES DE L'AVIS N°";
+										    			libelleTravaux="Joindre le PV d'Analyse";
 										    			btn_fermerOuverture =false;
 										    			btn_fermerAnalyse =true;
 										    			btn_fermerJugement =false;
@@ -6570,6 +6576,7 @@ public class ControleController {
 										    			libelle2 = "Fin Jugement";
 										    			libelle1 = "Heure de Fin";
 										    			libelle="JUGEMENT DES OFFRES";
+										    			libelleTravaux="Joindre le PV de Jugement";
 										    			libelleFinCom = "Fin du jugement de l'appel d'offre";
 										    			libelleConfirm = "Confirmez-vous la fin du jugement de l'avis d'appel d'Offre N°";
 										    			btn_apercuOuv =false;
@@ -6584,16 +6591,18 @@ public class ControleController {
 											    			type = "Commission";
 											    			libelleDmp="DGMP";
 											    			opdPiece = "Jugement";
-											    			libelle="DEAILS DE L'OFFRRE N°";
+											    			libelle="DETAILS DE L'OFFRRE N°";
 											    			btn_fermerOuverture =false;
 											    			btn_fermerAnalyse =false;
 											    			btn_fermerJugement =true;
+											    			libelleTravaux="Joindre le PV de Jugement";
 											    		}
 									    			else
 										    			if(action.equalsIgnoreCase("SAIJUG")) {
 											    			type = "Commission";
 											    			libelleDmp="DGMP";
 											    			libelle="JUGEMENT DES OFFRES";	
+											    			libelleTravaux="Joindre le rapport de Jugement";
 											    		}else
 											    			if(action.equalsIgnoreCase("RESJUG")) {
 												    			type = "Commission";
@@ -10012,6 +10021,16 @@ public class ControleController {
 
 	public void setStructureLibLong(String structureLibLong) {
 		this.structureLibLong = structureLibLong;
+	}
+
+
+	public String getLibelleTravaux() {
+		return libelleTravaux;
+	}
+
+
+	public void setLibelleTravaux(String libelleTravaux) {
+		this.libelleTravaux = libelleTravaux;
 	}
 	
 }
