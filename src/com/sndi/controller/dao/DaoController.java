@@ -3864,8 +3864,8 @@ public class DaoController {
 										cautionMax = caution.getCautValMax() * mtEstim;
 							    	   if(montantCaut >= cautionMin &&  montantCaut <= cautionMax) {
 							    		   panelCaution = false;
-											 newVbTemp.setTempLaaAaoCode(newAvis.getAaoCode());
-								        	 newVbTemp.setTempLaaDacCode(dao.getDacCode());
+											  newVbTemp.setTempLaaAaoCode(newAvis.getAaoCode());
+								        	  newVbTemp.setTempLaaDacCode(dao.getDacCode());
 								    		  newVbTemp.setTempLaaDteSaisi(Calendar.getInstance().getTime());
 								    		  //newVbTemp.setTempLaaMtLot("0");
 								    		  //newVbTemp.setTempLaaCautLot("0");
@@ -3880,7 +3880,7 @@ public class DaoController {
 								    		  userController.setRenderMsg(true);
 								    		  userController.setSevrityMsg("success");
 											  
-											  //Activation du pavet de saisie des piï¿½ces des offres 
+											  //Activation du pavet de saisie des pi�ces des offres 
 						                      pavet_offre = true; 
 						                      pavet_critere= true;
 							    	   }else {
@@ -3913,7 +3913,7 @@ public class DaoController {
 				     
 				     public void calculCautionSaisie() {
 					        recupererCaution();
-                        // convertir string en long
+                            // convertir string en long
 					        //cautionMax = caution.getCautValMax();//* montantCaution.valueOf(newVbTemp.getTempLaaCautLot());
 					        // convertir string en double
 					        String str = ""+newLot.getLaaMtEst();
@@ -3945,7 +3945,6 @@ public class DaoController {
 							/*if(cautionMin > montantCaution.valueOf(newVbTemp.getTempLaaCautLot())){
 								
 							}*/
-							
 						}	
 				     
 				     //Ajouter manuellement un lot

@@ -37,6 +37,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 	private String tempLaaDelaiExe;
 	private String laaMtEst;
 	private String tempLaaLieuExe;
+	private String tempPlage;
 	private String tempLaaVariante;
 	
 
@@ -51,7 +52,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 			String tempLaaNbrTotLot, String tempLaaNbrLotDebut, String tempLaaNbrLotFin, String tempLaaLibGenerique,
 			String tempLaaImputation, String tempLaaCautLot, String tempLaaMtLot, String tempLaaAaoCode,
 			String tempLaaAutre, String tempLaaAutre1,String tempLaaDacCode,String tempLaaDelaiExe, String laaMtEst,
-			String tempLaaLieuExe, String tempLaaVariante) {
+			String tempLaaLieuExe, String tempPlage ,String tempLaaVariante) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -70,6 +71,7 @@ public class VbTempParametreLot implements java.io.Serializable {
 		this.tempLaaDelaiExe = tempLaaDelaiExe;
 		this.laaMtEst = laaMtEst;
 		this.tempLaaLieuExe = tempLaaLieuExe;
+		this.tempPlage = tempPlage;
 		this.tempLaaVariante = tempLaaVariante;
 	}
 
@@ -235,6 +237,15 @@ public class VbTempParametreLot implements java.io.Serializable {
 
 	public void setTempLaaLieuExe(String tempLaaLieuExe) {
 		this.tempLaaLieuExe = tempLaaLieuExe;
+	}
+	
+	@Column(name = "TEMP_PLAGE", length = 500)
+	public String getTempPlage() {
+		return this.tempPlage;
+	}
+
+	public void setTempPlage(String tempPlage) {
+		this.tempPlage = tempPlage;
 	}
 	
 	@Column(name = "TEMP_LAA_VARIANTE", length = 500)
