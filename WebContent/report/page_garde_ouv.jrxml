@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-23T13:55:37 -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Procès Verbal d&apos;Ouverture" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" whenResourceMissingType="Empty" uuid="e2847c08-0292-4b44-9655-4416c3ece664">
+<!-- 2020-11-23T15:23:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="page_garde_ouv" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" whenResourceMissingType="Empty" uuid="e2847c08-0292-4b44-9655-4416c3ece664">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
@@ -181,12 +181,6 @@ order by r.sou_sigle_ste,r.dcs_nom]]>
 		<field name="SOU_SIGLE_STE" class="java.lang.String"/>
 		<field name="TEL" class="java.lang.String"/>
 	</subDataset>
-	<subDataset name="LIST_IMP" uuid="07a27ea7-3bea-494e-8b1c-1c7de9fba230">
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
-		<queryString>
-			<![CDATA[]]>
-		</queryString>
-	</subDataset>
 	<subDataset name="LIST_LOT" uuid="d5ae0241-8023-4d50-8631-7d669d69ce3e">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -211,7 +205,7 @@ order by l.laa_aao_code, l.laa_num]]>
 	<subDataset name="LIST_OFF" uuid="4d46ca06-8c94-4bff-978e-54afe7bfcaca">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
-		<parameter name="code_avis" class="java.lang.String"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select distinct a.aao_delai_val,l.laa_num,l.laa_objet,(o.dof_sou_ncc||' - '||o.dof_sigle) sigle,l.laa_mt_caut, o.dof_delai,o.dof_num,
 (o.dof_mt_ofr*(0.18)+o.dof_mt_ofr) dof_Mt_Ttc,o.dof_mt_ofr,
@@ -219,7 +213,7 @@ o.dof_rab,o.dof_sou_ncc,(case when o.dof_typ='V' then 'Variante' else 'Offre de 
 from vb_avis_appel_offre a, vb_lot_aao l, vb_det_offres o
 where a.aao_code=l.laa_aao_code
 and l.laa_id=o.dof_laa_id
-and l.laa_aao_code=$P{code_avis}
+and l.laa_aao_code=$P{param_code_1}
 order by l.laa_num,o.dof_sou_ncc]]>
 		</queryString>
 		<field name="AAO_DELAI_VAL" class="java.math.BigDecimal"/>
@@ -335,7 +329,7 @@ and pv.aao_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 4_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="lib_intro" uuid="8e747a5e-53ce-427e-9178-61b98fb32613">
+						<datasetRun subDataset="lib_intro" uuid="5c6ac406-3a73-47ef-ab56-8f3454f33aa7">
 							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
@@ -364,7 +358,7 @@ and pv.aao_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="LIST_COM" uuid="9f6be9e7-9468-473f-a693-9de4a9597c28">
+						<datasetRun subDataset="LIST_COM" uuid="beaced72-4f00-4f39-bce7-47086dd560d6">
 							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
@@ -580,7 +574,7 @@ and pv.aao_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="rep_sou" uuid="c7c8295a-d9fb-4e34-ba32-2422b1773d51">
+						<datasetRun subDataset="rep_sou" uuid="f3ef748e-dcb2-4cc2-8b4f-b347b691942f">
 							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
@@ -705,7 +699,7 @@ and pv.aao_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="LIST_LOT" uuid="af9b6bd9-d702-4b71-badc-73c9a60e09cc">
+						<datasetRun subDataset="LIST_LOT" uuid="dbb3bc09-276d-4c09-95dd-ed7914c0f6de">
 							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
@@ -962,8 +956,8 @@ and pv.aao_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="LIST_OFF" uuid="5545f761-388a-4cd3-9923-9496d648eae7">
-							<datasetParameter name="code_avis">
+						<datasetRun subDataset="LIST_OFF" uuid="3d8dbd47-578e-4a9e-b77d-0eb9d13ecd74">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
