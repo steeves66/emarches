@@ -21,8 +21,6 @@
         #{controleController.libelle} #{anoController.slctdTdDem.aaoCode} : <strong>#{anoController.slctdTdDem.aaoLibelle}</strong>
         <small>
         <!-- #{controleController.libelle1} -->
-       <!--  Liste des AGPM Saisis  -->
-        <!-- <h2>Avis Géneraux de Passation des Marchés</h2> -->
         </small>
         
       </h3>
@@ -175,7 +173,7 @@
                    <div class="box box-success box-solid">
                <div class="box-header with-border">
                   <div class="col-md-10 "><div  style="color: #fff;font-weight:bold; font-size: 17px;">RESULTAT </div></div> 
-			         <div class="col-md-2 "> <div  style="color: #fff;font-weight:bold; font-size: 20px;">#{anoController.infolot.libLotNara}</div> </div>
+			         <div class="col-md-2 "> <div  style="color: #fff;font-weight:bold; font-size: 20px;">#{anoController.infolot.liblotnara}</div> </div>
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
@@ -270,18 +268,9 @@
 						  </p:commandLink>
 				        </p:column>
 				        <p:column headerText="Observations #{controleController.structureLibAbrege}"  styleClass="col-sm-4">
-				         <p:cellEditor>
-                           <f:facet name="output">
                            <h:outputText value="#{slctdTb.laaObservationDmp}"/> 
-                           </f:facet>
-                           <f:facet name="input">
-         				      <p:inputTextarea id="obs" rows="3" cols="33" styleClass="form-control" value="#{slctdTb.laaObservationDmp}" style="width: 100%">
-         				      </p:inputTextarea>
-         				     </f:facet>
-                          </p:cellEditor>
-				    
-	
 				        </p:column>
+				        
 				         <p:column  headerText="Avis de la #{controleController.structureLibAbrege}" width="13%">
 				         <h:panelGroup rendered="#{slctdTb.laaAno == ' '}">
                             <p:commandLink action="#{anoController.saveAno('O')}" class="btn btn-xs btn-success" style="background-color: #036d3b;" update="gnl:finance, gnl:info"

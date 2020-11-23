@@ -307,7 +307,7 @@ public class AnoController {
 	 public void validationAnoDMP() throws IOException {
 		 List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
 			if(!Lot.isEmpty()) infolot = Lot.get(0);
-		 if(infolot.getCheckTrt()==0) {
+		 if(infolot.getChecktrt()==0) {
 			List<TAvisAppelOffre> LS  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTdDem.getAaoCode()));
 			TAvisAppelOffre avis = new TAvisAppelOffre();
 			if(!LS.isEmpty()) avis = LS.get(0);
@@ -337,7 +337,7 @@ public class AnoController {
 	 public void validationAnoDMPAut() throws IOException {
 		 List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
 			if(!Lot.isEmpty()) infolot = Lot.get(0);
-		 if(infolot.getCheckTrt()==0) {
+		 if(infolot.getChecktrt()==0) {
 			 newTempAvis.setAaoDacCode(slctdTd.getAaoDacCode());
 			 newTempAvis.setAaoStatut(slctdTd.getAaoStatut());
 			 newTempAvis.setTempDteSaisi(Calendar.getInstance().getTime());
