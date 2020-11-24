@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-24T17:55:24 -->
+<!-- 2020-11-24T17:59:06 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="synthese_dac" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="12638759-8bdf-4052-99e0-726c9f1ce120">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -772,7 +772,7 @@ where sd.dac_code=$P{param_code_1}]]>
 					<textFieldExpression><![CDATA[new SimpleDateFormat("MMMM yyyy").format(TODAY( ))]]></textFieldExpression>
 				</textField>
 				<image scaleImage="FillFrame">
-					<reportElement x="13" y="14" width="247" height="38" uuid="06b23c1c-24d9-4726-b688-0de8ff00009e">
+					<reportElement x="13" y="14" width="237" height="56" uuid="06b23c1c-24d9-4726-b688-0de8ff00009e">
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
 					<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
