@@ -1192,7 +1192,7 @@ public class CommissionController {
 					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
 					          iservice.addObject(newcomSpec);
 					          
-					          //MIS A JOUR DES DATES D'OUVERTURE FINANCIERE ET OUVERTURE TECHNIQUE 
+					          //MIS A JOUR DES DATES D'OUVERTURE FINANCIERE ET OUVERTURE TECHNIQUE DE L'AVIS D'APPEL D'OFFRES
 					          List<TAvisAppelOffre> AV  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
 					          TAvisAppelOffre offre = new TAvisAppelOffre();
 								if (!AV.isEmpty()) {
