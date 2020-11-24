@@ -3157,7 +3157,23 @@ public class DaoController {
 						margeArt=listeMargeArt.get(0);
 					}	
 			    }
-		    
+		   
+			    
+			    //Récupération de la mention Ano Bailleur depuis le PPM sélectionné
+			    public void recupDetail() {
+				     if(daoDetail.getDppStatutAno().equalsIgnoreCase("O") && daoDetail.getDppBailleur().equalsIgnoreCase("O")) {
+				    	 newAvis.aaoAvisBai = "O";
+				     }
+				     else 
+				     {
+				    	 newAvis.aaoAvisBai = "N";   
+				     }	
+				     
+				     _logger.info("Ano Bailleur ou National : "+newAvis.aaoAvisBai);
+			    }
+			   //Fin de Récupération de la mention Ano Bailleur depuis le PPM sélectionné 
+			    
+			    
 		//Initiation du DAO en procédure normale 
 	     @Transactional
 	     public void saveDac(String typeDac) {
@@ -3231,7 +3247,7 @@ public class DaoController {
 		 						     //tableauBordController.chargeDataDao();
 		 			 			    //typeActionTb();
 		 						     
-		 						     userController.setTexteMsg(typeDac+" NÂ° "+dao.getDacCode()+" Initié avec succès!");
+		 						     userController.setTexteMsg(typeDac+" N° "+dao.getDacCode()+" Initié avec succès!");
 		 							 userController.setRenderMsg(true);
 		 							 userController.setSevrityMsg("success");
 		 							 
@@ -3242,16 +3258,18 @@ public class DaoController {
 		 							  btn_save_avis = true;
 		 							  verifOuverture();
 		 							  chargeImputation();
+		 							  recupDetail();
 		 							  choixTaux = "N";
 		 							  //listeMarge();
 		 			      }
-			    					//Insertion des piÃ¯Â¿Â½ces
+			    					//Insertion des pices
 			          }
 	    	        
-	          
+	     
+	     
+	     
 	     
 	 	//Methode d'historisation
-		 
 		 public void historiser(String statut,String dacCode, String motif) {
 		     TStatut statuts = constantService.getStatut(statut);
 		     THistoDac dacStatut = new THistoDac();
@@ -3431,7 +3449,7 @@ public class DaoController {
 	 		}
 	 	}
 	
-	 	//Affichage des DAO validÃ¯Â¿Â½s par le C.E
+	 	//Affichage des DAO validés par le C.E
 		 public void chargeDataChargeValid(){
 			 //listeDaoChargeValid.clear();
 			 listeDaoChargeValid = (List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")), 

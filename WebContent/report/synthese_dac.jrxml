@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-23T15:23:17 -->
+<!-- 2020-11-24T10:30:31 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="synthese_dac" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="12638759-8bdf-4052-99e0-726c9f1ce120">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
@@ -189,6 +189,10 @@ where s.aao_dac_code=$P{param_code_1}]]>
 		<field name="LBG_TOT_DOT" class="java.math.BigDecimal"/>
 	</subDataset>
 	<parameter name="param_code_1" class="java.lang.String"/>
+	<parameter name="param_image" class="java.lang.String">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT distinct *
 FROM v_synthese_dac2 sd
@@ -771,7 +775,7 @@ where sd.dac_code=$P{param_code_1}]]>
 					<reportElement x="13" y="14" width="247" height="38" uuid="06b23c1c-24d9-4726-b688-0de8ff00009e">
 						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 					</reportElement>
-					<imageExpression><![CDATA["WebContent/report/images/logo_emarches.png"]]></imageExpression>
+					<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
 				</image>
 			</frame>
 			<staticText>
