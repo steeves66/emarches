@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2020-11-10T15:26:03 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Agpm_v2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" isSummaryNewPage="true" uuid="a8392a23-3a60-4eb6-9215-7f2da4749537">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="Liste" uuid="08d9254c-d9aa-4012-b219-b0566cf83997">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code" class="java.lang.String"/>
+		<queryString language="SQL">
+			<![CDATA[SELECT * FROM v_detail_etat e
+where e.agp_id = $P{param_code}
+ order by tda_num_ordre]]>
+		</queryString>
+		<field name="AGP_ID" class="java.math.BigDecimal"/>
+		<field name="TCA_LIBELLE" class="java.lang.String"/>
+		<field name="TDA_TITRE" class="java.lang.String"/>
+		<field name="TDA_COMMENTAIRE" class="java.lang.String"/>
+		<field name="TCA_CODE" class="java.lang.String"/>
+		<field name="TDA_NUM_ORDRE" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="param_image" class="java.lang.String">
+		<defaultValueExpression><![CDATA["WebContent/report/images/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="param_code" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select a.agp_id,a.agp_pro_id,a.agp_mode_passation,m.min_libelle,st.str_libelle_long, p.pro_id,p.pro_titre,f.fon_libelle,a.agp_ges_code,p.pro_libelle,fi.fin_numero_accord,b.bai_libelle,sf.sou_libelle,fi.fin_montant_cfa
+,p.pro_description,p.pro_type_projet
+, de.dec_organ_exec_libelle,de.dec_organ_exec_adresse,de.dec_pers_nom_prenom,de.dec_pers_fonction,de.dec_localisation,de.dec_numero_porte,de.dec_bp,de.dec_telephone,de.dec_email
+from t_agpm a, t_ministere m, t_structure st, t_projet p, t_fonction f, t_financement fi, t_bailleur b, t_source_financement sf, t_declarant de
+where a.agp_str_code = st.str_code
+and st.str_min_code = m.min_code
+and a.agp_pro_id = p.pro_id
+and a.agp_fon_cod = f.fon_cod
+and p.pro_id = fi.fin_pro_id
+and a.agp_id = fi.fin_agp_id
+and b.bai_code = fi.fin_bai_code 
+and sf.sou_code = fi.fin_sou_code 
+and a.agp_dec_id = de.dec_id
+and a.agp_id  = $P{param_code}]]>
+	</queryString>
+	<field name="AGP_ID" class="java.math.BigDecimal"/>
+	<field name="AGP_PRO_ID" class="java.math.BigDecimal"/>
+	<field name="AGP_MODE_PASSATION" class="java.lang.String"/>
+	<field name="MIN_LIBELLE" class="java.lang.String"/>
+	<field name="STR_LIBELLE_LONG" class="java.lang.String"/>
+	<field name="PRO_ID" class="java.math.BigDecimal"/>
+	<field name="PRO_TITRE" class="java.lang.String"/>
+	<field name="FON_LIBELLE" class="java.lang.String"/>
+	<field name="AGP_GES_CODE" class="java.math.BigDecimal"/>
+	<field name="PRO_LIBELLE" class="java.lang.String"/>
+	<field name="FIN_NUMERO_ACCORD" class="java.lang.String"/>
+	<field name="BAI_LIBELLE" class="java.lang.String"/>
+	<field name="SOU_LIBELLE" class="java.lang.String"/>
+	<field name="FIN_MONTANT_CFA" class="java.math.BigDecimal"/>
+	<field name="PRO_DESCRIPTION" class="java.lang.String"/>
+	<field name="PRO_TYPE_PROJET" class="java.lang.String"/>
+	<field name="DEC_ORGAN_EXEC_LIBELLE" class="java.lang.String"/>
+	<field name="DEC_ORGAN_EXEC_ADRESSE" class="java.lang.String"/>
+	<field name="DEC_PERS_NOM_PRENOM" class="java.lang.String"/>
+	<field name="DEC_PERS_FONCTION" class="java.lang.String"/>
+	<field name="DEC_LOCALISATION" class="java.lang.String"/>
+	<field name="DEC_NUMERO_PORTE" class="java.lang.String"/>
+	<field name="DEC_BP" class="java.lang.String"/>
+	<field name="DEC_TELEPHONE" class="java.lang.String"/>
+	<field name="DEC_EMAIL" class="java.lang.String"/>
+	<group name="AGP_ID">
+		<groupExpression><![CDATA[$F{AGP_ID}]]></groupExpression>
+		<groupHeader>
+			<band height="75">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" x="19" y="39" width="509" height="36" uuid="a6b0470e-ac18-43a4-853b-d72ce0880a27"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{PRO_TITRE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="19" y="6" width="511" height="30" uuid="cd1a104f-0ceb-4574-a585-bfbc23058539"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="18" isBold="true"/>
+					</textElement>
+					<text><![CDATA[AVIS GENERAL DE PASSATION DES MARCHES]]></text>
+				</staticText>
+			</band>
+			<band height="24">
+				<textField>
+					<reportElement x="49" y="3" width="459" height="21" uuid="686b4651-6290-490d-aeaa-6026daa3f124"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="SansSerif" size="13"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FIN_NUMERO_ACCORD}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="802" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="552" height="802" uuid="d1b529d2-4f6f-497f-92a2-6255795a0fb7"/>
+				<graphicElement>
+					<pen lineWidth="4.0" lineStyle="Double" lineColor="#F88B2E"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="30" y="489" width="490" height="81" uuid="91049d5e-d263-4890-bdf5-85c60a410731"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRO_TITRE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="30" y="361" width="490" height="120" uuid="ccfa16ab-eb0d-4ac0-a283-2556397774c1"/>
+				<box>
+					<pen lineWidth="5.0" lineStyle="Double" lineColor="#F88B2E"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[AVIS GENERAL DE PASSATION DES MARCHES (AGPM)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="50" y="257" width="450" height="63" uuid="5cd46e5a-c7dd-4467-8c7d-5c23bccf895e"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FON_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="30" y="178" width="490" height="69" uuid="1c536374-030d-4f0b-82d3-d7db2f78b408"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MIN_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="115" y="253" width="327" height="1" uuid="a2c7954f-d2a2-4a5b-9933-c148a083f8f3"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="20" y="26" width="210" height="51" uuid="b555c308-929b-493c-986e-739dba02d0ac"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="346" y="45" width="206" height="21" uuid="61fbeed1-b38c-4a03-8e01-a97559ca8c01">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="13" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Union-Discipline-Travail]]></text>
+			</staticText>
+			<image>
+				<reportElement x="425" y="67" width="52" height="55" uuid="f9522999-4640-4922-88f3-01012455cd06"/>
+				<imageExpression><![CDATA[$P{param_image}+"armoiries.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="342" y="26" width="206" height="21" uuid="97c4b579-b1ae-4bca-ab9e-c39b15c44f06">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="SansSerif" size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[REPUBLIQUE DE COTE D'IVOIRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="760" width="93" height="17" uuid="5cd5bf8e-2de5-43fe-940a-0846a73a2ac5"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="SansSerif" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[GESTION]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="50">
+			<image scaleImage="FillFrame">
+				<reportElement x="4" y="4" width="180" height="30" uuid="58d34934-21f0-4f27-89d9-b3ad3ebbd7fc"/>
+				<imageExpression><![CDATA[$P{param_image}+"logo_emarches.png"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="70" splitType="Stretch">
+			<componentElement>
+				<reportElement x="4" y="10" width="548" height="60" uuid="d7b92919-082e-47ba-8bcb-69c9acc69769"/>
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
+					<datasetRun subDataset="Liste" uuid="abe6e10b-5f05-481c-9507-27ab3baa4fd2">
+						<datasetParameter name="param_code">
+							<datasetParameterExpression><![CDATA[$P{param_code}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:listContents height="60" width="548">
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement x="0" y="0" width="548" height="20" isRemoveLineWhenBlank="true" uuid="b3c79b23-c0c1-4b03-b2b9-6c8b788b5f2e"/>
+							<textElement verticalAlignment="Middle">
+								<font size="12" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TDA_TITRE}]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement stretchType="ContainerHeight" x="0" y="23" width="548" height="20" isRemoveLineWhenBlank="true" uuid="34197210-09f1-479c-acff-593efe54bae6"/>
+							<textElement>
+								<font size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{TCA_LIBELLE}]]></textFieldExpression>
+						</textField>
+					</jr:listContents>
+				</jr:list>
+			</componentElement>
+		</band>
+	</detail>
+	<summary>
+		<band height="244" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="10" width="549" height="23" uuid="6da50dca-dfc2-48e3-b3d9-86812a977a78">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["-"+"<b>"+" Nom de l’organe d’exécution      : "+"</b>"+""+$F{DEC_ORGAN_EXEC_LIBELLE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="38" width="549" height="24" uuid="ced6187c-a6bc-430b-9079-fe3531772716">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- "+"<b>"+"Adresse de l’organe d’exécution :  "+"</b>"+""+$F{DEC_ORGAN_EXEC_ADRESSE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="63" width="549" height="23" uuid="d0d104ff-4539-42cd-813c-44f1df36aaf8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- "+"<b>"+"Personne à contacter M/Mme     : "+"</b>"+""+$F{DEC_PERS_NOM_PRENOM}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="88" width="549" height="23" uuid="517755b0-cba2-4b77-a640-6d731d67dd07">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- " +"<b>"+"Fonction                                       : "+"</b>"+""+$F{DEC_PERS_FONCTION}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="113" width="549" height="23" uuid="501659f5-5b98-40c6-8ef8-192aba3aab22">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- "+"<b>"+" Localisation précise du bureau    : "+"</b>"+""+$F{DEC_LOCALISATION}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="138" width="549" height="23" uuid="0d830a1c-fe56-4705-9b11-b292c08c29af">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- "+"<b>"+"Numéro de porte                          : "+"</b>"+""+$F{DEC_NUMERO_PORTE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="163" width="549" height="23" uuid="39fb8a5f-359b-4880-ad44-a6aad466387b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- "+"<b>"+"Boîte postale                                : "+"</b>"+""+$F{DEC_BP}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="188" width="549" height="23" uuid="921f00b6-51eb-47e5-8cf4-c1fb9dab04a0">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- "+"<b>"+"Numéro de téléphone                  : "+"</b>"+""+$F{DEC_TELEPHONE}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="3" y="213" width="549" height="23" uuid="14ea5897-0b89-401a-8005-b131e15458b3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle" markup="html">
+					<font fontName="SansSerif" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["- "+"<b>"+"Adresse Email                             : "+"</b>"+""+$F{DEC_EMAIL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
