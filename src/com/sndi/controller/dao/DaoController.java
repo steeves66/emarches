@@ -3440,7 +3440,7 @@ public class DaoController {
 	        	}
 	        }
 	     
-	 	//ContÃƒÂ´le sur le nombre d'ouverture
+	 	//Contrôle sur le nombre d'ouverture
 	 	public void verifOuverture() {
 	 		if(newAvis.aaoNbrOuv == 2) {
 	 			ouvTechnique = true;
@@ -3448,6 +3448,7 @@ public class DaoController {
 	 			  ouvTechnique = false;
 	 		}
 	 	}
+	 	
 	
 	 	//Affichage des DAO validés par le C.E
 		 public void chargeDataChargeValid(){

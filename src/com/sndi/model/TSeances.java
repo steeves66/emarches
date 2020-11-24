@@ -36,7 +36,7 @@ public class TSeances implements java.io.Serializable {
 	private String seaRes;
 	private Date seaSteSaisi;
 	private String seaObservation;
-	private Date seaDteSea;
+	public Date seaDteSea;
 	private String seaHeureDeb;
 	private String seaHeureFin;
 	private String seaLieu;

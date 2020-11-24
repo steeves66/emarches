@@ -52,7 +52,7 @@ public class TAvisAppelOffre implements java.io.Serializable {
 	private String aaoModePaiement;
 	private long aaoCoutDac;
 	private String aaoLieuRecep;
-	private Date aaoDateRecep;
+	public Date aaoDateRecep;
 	private String aaoHeureRecep;
 	private String aaoNatPrix;
 	private String aaoRegQual;

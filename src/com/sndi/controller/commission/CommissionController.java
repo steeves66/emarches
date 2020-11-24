@@ -548,8 +548,6 @@ public class CommissionController {
 						  userController.setRenderMsg(true);
 						  userController.setSevrityMsg("success");
 		 			} 	
-					  
-					
 		 }
 		
 	 //fin resultat analyse
@@ -799,6 +797,16 @@ public class CommissionController {
 					 new WhereClause("TCT_TCO_CODE",Comparateur.EQ,"COJ"),
 					 new WhereClause("COM_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 					_logger.info("listeMembre size: "+listeMembre.size());				
+		 }
+		 
+		 
+		 //Contrôle sur la Date de séance
+		 public void controleDateSeance() {
+			 if(slctdTd.getAaoNbrOuv() == 1) {
+				 newSeance.seaDteSea = slctdTd.getAaoDteOuvFin();
+			 }else {
+				 newSeance.seaDteSea =  slctdTd.getAaoDteOuvTec();
+			 }
 		 }
 		 
 		/* public void chargeMembreCommission() {
@@ -1166,7 +1174,7 @@ public class CommissionController {
 										dao= DS.get(0);
 									}
 					          //Creation de la séance
-					          newSeance.setSeaLibelle("SEANCE D'OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getAaoDacCode());
+					          newSeance.setSeaLibelle("OUVERTURE DES OFFRES DU DAO N° "+slctdTd.getAaoDacCode());
 					          newSeance.setTTypeSeance(new TTypeSeance("OUV"));
 					          newSeance.setSeaSteSaisi(Calendar.getInstance().getTime());
 					          newSeance.setTFonction(userController.getSlctd().getTFonction());
@@ -1180,9 +1188,26 @@ public class CommissionController {
 					          newcomSpec.setComMarCode(slctdTd.getDacTymCode());
 					          newcomSpec.setTAvisAppelOffre(avis);
 					          newcomSpec.setTDacSpecs(dao);
-	                 /*		  newcomSpec.setTCommissionType(new TCommissionType(""));*/
+	                          //newcomSpec.setTCommissionType(new TCommissionType(""));
 					          newcomSpec.setTTypeCommission(new TTypeCommission("COJ"));
 					          iservice.addObject(newcomSpec);
+					          
+					          //MIS A JOUR DES DATES D'OUVERTURE FINANCIERE ET OUVERTURE TECHNIQUE 
+					          List<TAvisAppelOffre> AV  = iservice.getObjectsByColumn("TAvisAppelOffre", new WhereClause("AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
+					          TAvisAppelOffre offre = new TAvisAppelOffre();
+								if (!AV.isEmpty()) {
+									offre= AV.get(0);
+									
+									if(slctdTd.getAaoNbrOuv() == 1) {
+										offre.setAaoDteOuvTec(newSeance.getSeaDteSea());
+										offre.setAaoDteOuvFin(newSeance.getSeaDteSea());
+										iservice.updateObject(offre);
+									}else {
+										offre.setAaoDteOuvTec(newSeance.getSeaDteSea());
+										offre.setAaoDteOuvFin(null);
+										iservice.updateObject(offre);
+									}
+								}
 					
 					//COMPOSITION DE LA SEANCE
 					 if (selectionMembres.size()==0) {
@@ -2370,6 +2395,7 @@ public class CommissionController {
 					//chargeTypeCommission();
 					chargeMembres();
 					chargeMembreCommite();
+					//controleDateSeance();
 					boutonEdit = false;
 					 selectionMembres.clear();
 					 selectionlisteExpert.clear();

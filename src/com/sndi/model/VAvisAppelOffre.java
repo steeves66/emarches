@@ -23,7 +23,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	private String aaoDacCode;
 	private String aaoLibelle;
 	private long aaoNbrLot;
-	private BigDecimal aaoNbrOuv;
+	private long aaoNbrOuv;
 	private Date aaoDtePub;
 	private Short aaoNbrOff;
 	private Short aaoNbrOffAccpet;
@@ -32,6 +32,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	private String aaoObsOuv;
 	private String aaoLieuOuvPrecis;
 	private String aaoHeurFinOuv;
+	private Date aaoDteOuvFin;
 	private Date aaoDteSaisi;
 	private Date aaoDteFinOuv;
 	private String aaoFonCodAc;
@@ -52,8 +53,8 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	}
 
 	public VAvisAppelOffre(String aaoCode, String aaoDacCode, String aaoLibelle, long aaoNbrLot,
-			BigDecimal aaoNbrOuv, Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv,
-			Date aaoDteOuvTec, String aaoObsOuv, String aaoLieuOuvPrecis, String aaoHeurFinOuv,Date aaoDteSaisi, Date aaoDteFinOuv,
+			long aaoNbrOuv, Date aaoDtePub, Short aaoNbrOff, Short aaoNbrOffAccpet, Date aaoDteOuv,
+			Date aaoDteOuvTec, String aaoObsOuv, String aaoLieuOuvPrecis, String aaoHeurFinOuv,Date aaoDteSaisi, Date aaoDteFinOuv, Date aaoDteOuvFin,
 			String aaoFonCodAc, String aaoStaCode, Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoStatut,String avisRetour,long chechquorum,
 			long checkEval,String dacTymCode) {
 		this.aaoCode = aaoCode;
@@ -71,6 +72,7 @@ public class VAvisAppelOffre implements java.io.Serializable {
 		this.aaoHeurFinOuv = aaoHeurFinOuv;
 		this.aaoDteSaisi = aaoDteSaisi;
 		this.aaoDteFinOuv = aaoDteFinOuv;
+		this.aaoDteOuvFin = aaoDteOuvFin;
 		this.aaoFonCodAc = aaoFonCodAc;
 		this.aaoStaCode = aaoStaCode;
 		this.aaoNbrOffRej = aaoNbrOffRej;
@@ -120,11 +122,11 @@ public class VAvisAppelOffre implements java.io.Serializable {
 	}
 
 	@Column(name = "AAO_NBR_OUV", precision = 22, scale = 0)
-	public BigDecimal getAaoNbrOuv() {
+	public long getAaoNbrOuv() {
 		return this.aaoNbrOuv;
 	}
 
-	public void setAaoNbrOuv(BigDecimal aaoNbrOuv) {
+	public void setAaoNbrOuv(long aaoNbrOuv) {
 		this.aaoNbrOuv = aaoNbrOuv;
 	}
 
@@ -198,6 +200,15 @@ public class VAvisAppelOffre implements java.io.Serializable {
 
 	public void setAaoHeurFinOuv(String aaoHeurFinOuv) {
 		this.aaoHeurFinOuv = aaoHeurFinOuv;
+	}
+	
+	@Column(name = "AAO_DTE_OUV_FIN", length = 7)
+	public Date getAaoDteOuvFin() {
+		return this.aaoDteOuvFin;
+	}
+
+	public void setAaoDteOuvFin(Date aaoDteOuvFin) {
+		this.aaoDteOuvFin = aaoDteOuvFin;
 	}
 	
 	@Column(name = "AAO_DTE_SAISI", length = 7)
