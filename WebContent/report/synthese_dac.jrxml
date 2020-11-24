@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-24T10:30:31 -->
+<!-- 2020-11-24T17:55:24 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="synthese_dac" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="12638759-8bdf-4052-99e0-726c9f1ce120">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
 		<box>
 			<pen lineWidth="0.5" lineColor="#000000"/>
@@ -114,14 +114,14 @@
 	</style>
 	<subDataset name="list_lot" uuid="18f628e2-2c3d-4b5f-a4a8-6287c2285a9c">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="emapdev"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select lot.laa_id,lot.laa_num,lot.laa_objet,lot.laa_delai_exe,lbg.lbg_imputation,lot.laa_lieu_exe,lot.laa_mt_est,lot.laa_mt_caut
 from vb_lot_aao lot, vb_avis_appel_offre aoo, v_l_budgets lbg
 where lot.laa_aao_code=aoo.aao_code
 and lot.laa_lbg_imputation=lbg.lbg_code
-and aoo.aao_dac_code=$P{dac_code}
+and aoo.aao_dac_code=$P{param_code_1}
 order by lot.laa_num]]>
 		</queryString>
 		<field name="LAA_ID" class="java.math.BigDecimal"/>
@@ -135,12 +135,12 @@ order by lot.laa_num]]>
 	</subDataset>
 	<subDataset name="list_pc" uuid="04aaea1c-7723-49c5-a15a-3cb5b7682601">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select cag.lib_critere,cag.commentaire
 from v_critere_analyse_dac_glob cag
-where cag.dcad_dac_code=$P{dac_code}
+where cag.dcad_dac_code=$P{param_code_1}
 and cag.repcode like 'AA%']]>
 		</queryString>
 		<field name="LIB_CRITERE" class="java.lang.String"/>
@@ -148,12 +148,12 @@ and cag.repcode like 'AA%']]>
 	</subDataset>
 	<subDataset name="crit_list" uuid="81f3e92e-e356-46cb-a3ed-ef8178126197">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select *
 from v_critere_analyse_dac_glob cag
-where cag.dcad_dac_code=$P{dac_code}
+where cag.dcad_dac_code=$P{param_code_1}
 and cag.repcode not like 'AA%'
 --order by cag.dcad_dac_code,cag.repcode]]>
 		</queryString>
@@ -165,12 +165,12 @@ and cag.repcode not like 'AA%'
 	</subDataset>
 	<subDataset name="com_list" uuid="6f20ca54-c3c6-4a11-a291-b6e20b55e643">
 		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP_TEST"/>
-		<parameter name="dac_code" class="java.lang.String"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
+		<parameter name="param_code_1" class="java.lang.String"/>
 		<queryString language="SQL">
 			<![CDATA[select distinct sd.com_tct_titre,sd.com_tct_libelle
 from v_synthese_dac2 sd
-where sd.dac_code=$P{dac_code}
+where sd.dac_code=$P{param_code_1}
 order by sd.com_tct_titre desc]]>
 		</queryString>
 		<field name="COM_TCT_TITRE" class="java.lang.String"/>
@@ -384,8 +384,8 @@ where sd.dac_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="list_lot" uuid="13119501-4dd7-4c3d-bdb5-ccdd0eb5af34">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="list_lot" uuid="19531ed5-b59b-4b1c-811a-2a94789ca8d5">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -515,8 +515,8 @@ where sd.dac_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 3_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="list_pc" uuid="290766cf-42ac-43ef-85ec-05fbf3fcc3a8">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="list_pc" uuid="3f8fe798-d874-42d0-843e-104707e8f33a">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -565,8 +565,8 @@ where sd.dac_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="crit_list" uuid="3b0dfd3b-687a-4659-bd9b-92476fb9bca8">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="crit_list" uuid="708d9b39-9c3d-4869-8540-1f2f1ba0803d">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
@@ -633,8 +633,8 @@ where sd.dac_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="com_list" uuid="2814bd04-f1dd-4aa9-9c69-2903abac5372">
-							<datasetParameter name="dac_code">
+						<datasetRun subDataset="com_list" uuid="2ee4c794-7c72-42f9-9c16-838ab2ad0bf2">
+							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>
 							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
