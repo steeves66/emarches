@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -12,33 +12,50 @@ import javax.persistence.Embeddable;
 public class VPiecesOffreAnalyseId implements java.io.Serializable {
 
 	private BigDecimal pofNum;
-	private BigDecimal pofDofNum;
-	private String tpoCode;
-	private BigDecimal pofLaaId;
-	private String tpoLibelle;
+	private String craCode;
+	private BigDecimal dofNum;
+	private BigDecimal dcadNum;
+	private String analyseStatut;
+	private BigDecimal dcadLaaId;
+	private String pofLibelle;
 	private String pofConforme;
+	private Long pofScore;
 	private String pofObs;
+	private String anfPresence;
+	private BigDecimal anfNum;
+	private String dcadDacCode;
+	private BigDecimal btnAnfValeurConf;
+	private BigDecimal btnAnfPresence;
 
 	public VPiecesOffreAnalyseId() {
 	}
 
-	public VPiecesOffreAnalyseId(BigDecimal pofNum, String tpoCode) {
-		this.pofNum = pofNum;
-		this.tpoCode = tpoCode;
+	public VPiecesOffreAnalyseId(BigDecimal dofNum) {
+		this.dofNum = dofNum;
 	}
 
-	public VPiecesOffreAnalyseId(BigDecimal pofNum, BigDecimal pofDofNum, String tpoCode, BigDecimal pofLaaId,
-			String tpoLibelle, String pofConforme, String pofObs) {
+	public VPiecesOffreAnalyseId(BigDecimal pofNum, String craCode, BigDecimal dofNum, BigDecimal dcadNum,
+			String analyseStatut, BigDecimal dcadLaaId, String pofLibelle, String pofConforme, Long pofScore,
+			String pofObs, String anfPresence, BigDecimal anfNum, String dcadDacCode, BigDecimal btnAnfValeurConf,
+			BigDecimal btnAnfPresence) {
 		this.pofNum = pofNum;
-		this.pofDofNum = pofDofNum;
-		this.tpoCode = tpoCode;
-		this.pofLaaId = pofLaaId;
-		this.tpoLibelle = tpoLibelle;
+		this.craCode = craCode;
+		this.dofNum = dofNum;
+		this.dcadNum = dcadNum;
+		this.analyseStatut = analyseStatut;
+		this.dcadLaaId = dcadLaaId;
+		this.pofLibelle = pofLibelle;
 		this.pofConforme = pofConforme;
+		this.pofScore = pofScore;
 		this.pofObs = pofObs;
+		this.anfPresence = anfPresence;
+		this.anfNum = anfNum;
+		this.dcadDacCode = dcadDacCode;
+		this.btnAnfValeurConf = btnAnfValeurConf;
+		this.btnAnfPresence = btnAnfPresence;
 	}
 
-	@Column(name = "POF_NUM", nullable = false, precision = 22, scale = 0)
+	@Column(name = "POF_NUM", precision = 22, scale = 0)
 	public BigDecimal getPofNum() {
 		return this.pofNum;
 	}
@@ -47,43 +64,61 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 		this.pofNum = pofNum;
 	}
 
-	@Column(name = "POF_DOF_NUM", precision = 22, scale = 0)
-	public BigDecimal getPofDofNum() {
-		return this.pofDofNum;
+	@Column(name = "CRA_CODE", length = 50)
+	public String getCraCode() {
+		return this.craCode;
 	}
 
-	public void setPofDofNum(BigDecimal pofDofNum) {
-		this.pofDofNum = pofDofNum;
+	public void setCraCode(String craCode) {
+		this.craCode = craCode;
 	}
 
-	@Column(name = "TPO_CODE", nullable = false, length = 10)
-	public String getTpoCode() {
-		return this.tpoCode;
+	@Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)
+	public BigDecimal getDofNum() {
+		return this.dofNum;
 	}
 
-	public void setTpoCode(String tpoCode) {
-		this.tpoCode = tpoCode;
+	public void setDofNum(BigDecimal dofNum) {
+		this.dofNum = dofNum;
 	}
 
-	@Column(name = "POF_LAA_ID", precision = 22, scale = 0)
-	public BigDecimal getPofLaaId() {
-		return this.pofLaaId;
+	@Column(name = "DCAD_NUM", precision = 22, scale = 0)
+	public BigDecimal getDcadNum() {
+		return this.dcadNum;
 	}
 
-	public void setPofLaaId(BigDecimal pofLaaId) {
-		this.pofLaaId = pofLaaId;
+	public void setDcadNum(BigDecimal dcadNum) {
+		this.dcadNum = dcadNum;
 	}
 
-	@Column(name = "TPO_LIBELLE", length = 200)
-	public String getTpoLibelle() {
-		return this.tpoLibelle;
+	@Column(name = "ANALYSE_STATUT", length = 1)
+	public String getAnalyseStatut() {
+		return this.analyseStatut;
 	}
 
-	public void setTpoLibelle(String tpoLibelle) {
-		this.tpoLibelle = tpoLibelle;
+	public void setAnalyseStatut(String analyseStatut) {
+		this.analyseStatut = analyseStatut;
 	}
 
-	@Column(name = "POF_CONFORME", length = 1)
+	@Column(name = "DCAD_LAA_ID", precision = 22, scale = 0)
+	public BigDecimal getDcadLaaId() {
+		return this.dcadLaaId;
+	}
+
+	public void setDcadLaaId(BigDecimal dcadLaaId) {
+		this.dcadLaaId = dcadLaaId;
+	}
+
+	@Column(name = "POF_LIBELLE", length = 4000)
+	public String getPofLibelle() {
+		return this.pofLibelle;
+	}
+
+	public void setPofLibelle(String pofLibelle) {
+		this.pofLibelle = pofLibelle;
+	}
+
+	@Column(name = "POF_CONFORME", length = 100)
 	public String getPofConforme() {
 		return this.pofConforme;
 	}
@@ -92,13 +127,67 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 		this.pofConforme = pofConforme;
 	}
 
-	@Column(name = "POF_OBS", length = 500)
+	@Column(name = "POF_SCORE", precision = 10, scale = 0)
+	public Long getPofScore() {
+		return this.pofScore;
+	}
+
+	public void setPofScore(Long pofScore) {
+		this.pofScore = pofScore;
+	}
+
+	@Column(name = "POF_OBS", length = 1000)
 	public String getPofObs() {
 		return this.pofObs;
 	}
 
 	public void setPofObs(String pofObs) {
 		this.pofObs = pofObs;
+	}
+
+	@Column(name = "ANF_PRESENCE", length = 1)
+	public String getAnfPresence() {
+		return this.anfPresence;
+	}
+
+	public void setAnfPresence(String anfPresence) {
+		this.anfPresence = anfPresence;
+	}
+
+	@Column(name = "ANF_NUM", precision = 22, scale = 0)
+	public BigDecimal getAnfNum() {
+		return this.anfNum;
+	}
+
+	public void setAnfNum(BigDecimal anfNum) {
+		this.anfNum = anfNum;
+	}
+
+	@Column(name = "DCAD_DAC_CODE", length = 50)
+	public String getDcadDacCode() {
+		return this.dcadDacCode;
+	}
+
+	public void setDcadDacCode(String dcadDacCode) {
+		this.dcadDacCode = dcadDacCode;
+	}
+
+	@Column(name = "BTN_ANF_VALEUR_CONF", precision = 22, scale = 0)
+	public BigDecimal getBtnAnfValeurConf() {
+		return this.btnAnfValeurConf;
+	}
+
+	public void setBtnAnfValeurConf(BigDecimal btnAnfValeurConf) {
+		this.btnAnfValeurConf = btnAnfValeurConf;
+	}
+
+	@Column(name = "BTN_ANF_PRESENCE", precision = 22, scale = 0)
+	public BigDecimal getBtnAnfPresence() {
+		return this.btnAnfPresence;
+	}
+
+	public void setBtnAnfPresence(BigDecimal btnAnfPresence) {
+		this.btnAnfPresence = btnAnfPresence;
 	}
 
 	public boolean equals(Object other) {
@@ -112,31 +201,60 @@ public class VPiecesOffreAnalyseId implements java.io.Serializable {
 
 		return ((this.getPofNum() == castOther.getPofNum()) || (this.getPofNum() != null
 				&& castOther.getPofNum() != null && this.getPofNum().equals(castOther.getPofNum())))
-				&& ((this.getPofDofNum() == castOther.getPofDofNum()) || (this.getPofDofNum() != null
-						&& castOther.getPofDofNum() != null && this.getPofDofNum().equals(castOther.getPofDofNum())))
-				&& ((this.getTpoCode() == castOther.getTpoCode()) || (this.getTpoCode() != null
-						&& castOther.getTpoCode() != null && this.getTpoCode().equals(castOther.getTpoCode())))
-				&& ((this.getPofLaaId() == castOther.getPofLaaId()) || (this.getPofLaaId() != null
-						&& castOther.getPofLaaId() != null && this.getPofLaaId().equals(castOther.getPofLaaId())))
-				&& ((this.getTpoLibelle() == castOther.getTpoLibelle()) || (this.getTpoLibelle() != null
-						&& castOther.getTpoLibelle() != null && this.getTpoLibelle().equals(castOther.getTpoLibelle())))
+				&& ((this.getCraCode() == castOther.getCraCode()) || (this.getCraCode() != null
+						&& castOther.getCraCode() != null && this.getCraCode().equals(castOther.getCraCode())))
+				&& ((this.getDofNum() == castOther.getDofNum()) || (this.getDofNum() != null
+						&& castOther.getDofNum() != null && this.getDofNum().equals(castOther.getDofNum())))
+				&& ((this.getDcadNum() == castOther.getDcadNum()) || (this.getDcadNum() != null
+						&& castOther.getDcadNum() != null && this.getDcadNum().equals(castOther.getDcadNum())))
+				&& ((this.getAnalyseStatut() == castOther.getAnalyseStatut())
+						|| (this.getAnalyseStatut() != null && castOther.getAnalyseStatut() != null
+								&& this.getAnalyseStatut().equals(castOther.getAnalyseStatut())))
+				&& ((this.getDcadLaaId() == castOther.getDcadLaaId()) || (this.getDcadLaaId() != null
+						&& castOther.getDcadLaaId() != null && this.getDcadLaaId().equals(castOther.getDcadLaaId())))
+				&& ((this.getPofLibelle() == castOther.getPofLibelle()) || (this.getPofLibelle() != null
+						&& castOther.getPofLibelle() != null && this.getPofLibelle().equals(castOther.getPofLibelle())))
 				&& ((this.getPofConforme() == castOther.getPofConforme())
 						|| (this.getPofConforme() != null && castOther.getPofConforme() != null
 								&& this.getPofConforme().equals(castOther.getPofConforme())))
+				&& ((this.getPofScore() == castOther.getPofScore()) || (this.getPofScore() != null
+						&& castOther.getPofScore() != null && this.getPofScore().equals(castOther.getPofScore())))
 				&& ((this.getPofObs() == castOther.getPofObs()) || (this.getPofObs() != null
-						&& castOther.getPofObs() != null && this.getPofObs().equals(castOther.getPofObs())));
+						&& castOther.getPofObs() != null && this.getPofObs().equals(castOther.getPofObs())))
+				&& ((this.getAnfPresence() == castOther.getAnfPresence())
+						|| (this.getAnfPresence() != null && castOther.getAnfPresence() != null
+								&& this.getAnfPresence().equals(castOther.getAnfPresence())))
+				&& ((this.getAnfNum() == castOther.getAnfNum()) || (this.getAnfNum() != null
+						&& castOther.getAnfNum() != null && this.getAnfNum().equals(castOther.getAnfNum())))
+				&& ((this.getDcadDacCode() == castOther.getDcadDacCode())
+						|| (this.getDcadDacCode() != null && castOther.getDcadDacCode() != null
+								&& this.getDcadDacCode().equals(castOther.getDcadDacCode())))
+				&& ((this.getBtnAnfValeurConf() == castOther.getBtnAnfValeurConf())
+						|| (this.getBtnAnfValeurConf() != null && castOther.getBtnAnfValeurConf() != null
+								&& this.getBtnAnfValeurConf().equals(castOther.getBtnAnfValeurConf())))
+				&& ((this.getBtnAnfPresence() == castOther.getBtnAnfPresence())
+						|| (this.getBtnAnfPresence() != null && castOther.getBtnAnfPresence() != null
+								&& this.getBtnAnfPresence().equals(castOther.getBtnAnfPresence())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
 		result = 37 * result + (getPofNum() == null ? 0 : this.getPofNum().hashCode());
-		result = 37 * result + (getPofDofNum() == null ? 0 : this.getPofDofNum().hashCode());
-		result = 37 * result + (getTpoCode() == null ? 0 : this.getTpoCode().hashCode());
-		result = 37 * result + (getPofLaaId() == null ? 0 : this.getPofLaaId().hashCode());
-		result = 37 * result + (getTpoLibelle() == null ? 0 : this.getTpoLibelle().hashCode());
+		result = 37 * result + (getCraCode() == null ? 0 : this.getCraCode().hashCode());
+		result = 37 * result + (getDofNum() == null ? 0 : this.getDofNum().hashCode());
+		result = 37 * result + (getDcadNum() == null ? 0 : this.getDcadNum().hashCode());
+		result = 37 * result + (getAnalyseStatut() == null ? 0 : this.getAnalyseStatut().hashCode());
+		result = 37 * result + (getDcadLaaId() == null ? 0 : this.getDcadLaaId().hashCode());
+		result = 37 * result + (getPofLibelle() == null ? 0 : this.getPofLibelle().hashCode());
 		result = 37 * result + (getPofConforme() == null ? 0 : this.getPofConforme().hashCode());
+		result = 37 * result + (getPofScore() == null ? 0 : this.getPofScore().hashCode());
 		result = 37 * result + (getPofObs() == null ? 0 : this.getPofObs().hashCode());
+		result = 37 * result + (getAnfPresence() == null ? 0 : this.getAnfPresence().hashCode());
+		result = 37 * result + (getAnfNum() == null ? 0 : this.getAnfNum().hashCode());
+		result = 37 * result + (getDcadDacCode() == null ? 0 : this.getDcadDacCode().hashCode());
+		result = 37 * result + (getBtnAnfValeurConf() == null ? 0 : this.getBtnAnfValeurConf().hashCode());
+		result = 37 * result + (getBtnAnfPresence() == null ? 0 : this.getBtnAnfPresence().hashCode());
 		return result;
 	}
 

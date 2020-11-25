@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -37,7 +37,7 @@ public class VDetailDemande implements java.io.Serializable {
 			@AttributeOverride(name = "dacGesCode", column = @Column(name = "DAC_GES_CODE", precision = 22, scale = 0)),
 			@AttributeOverride(name = "dacFonCodAc", column = @Column(name = "DAC_FON_COD_AC", length = 12)),
 			@AttributeOverride(name = "dacStrCode", column = @Column(name = "DAC_STR_CODE", length = 20)),
-			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 12)),
+			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 10)),
 			@AttributeOverride(name = "dacDteValCpmp", column = @Column(name = "DAC_DTE_VAL_CPMP", length = 7)),
 			@AttributeOverride(name = "dacDteValDmp", column = @Column(name = "DAC_DTE_VAL_DMP", length = 7)),
 			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE", length = 12)),
@@ -56,13 +56,13 @@ public class VDetailDemande implements java.io.Serializable {
 			@AttributeOverride(name = "tymLibelleLong", column = @Column(name = "TYM_LIBELLE_LONG", length = 1000)),
 			@AttributeOverride(name = "tymTymCode", column = @Column(name = "TYM_TYM_CODE", length = 3)),
 			@AttributeOverride(name = "tymGroupe", column = @Column(name = "TYM_GROUPE", length = 2)),
-			@AttributeOverride(name = "mopCode", column = @Column(name = "MOP_CODE", nullable = false, length = 3)),
+			@AttributeOverride(name = "mopCode", column = @Column(name = "MOP_CODE", nullable = false, length = 10)),
 			@AttributeOverride(name = "mopLibelleCourt", column = @Column(name = "MOP_LIBELLE_COURT", nullable = false, length = 500)),
 			@AttributeOverride(name = "mopLibelleLong", column = @Column(name = "MOP_LIBELLE_LONG", length = 1000)),
 			@AttributeOverride(name = "ddeNum", column = @Column(name = "DDE_NUM", nullable = false, precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddeDemNum", column = @Column(name = "DDE_DEM_NUM", precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddeDacCode", column = @Column(name = "DDE_DAC_CODE", length = 20)),
-			@AttributeOverride(name = "ddeLaaId", column = @Column(name = "DDE_LAA_ID", precision = 4, scale = 0)),
+			@AttributeOverride(name = "ddeLaaId", column = @Column(name = "DDE_LAA_ID", precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddeLbgCode", column = @Column(name = "DDE_LBG_CODE", length = 50)),
 			@AttributeOverride(name = "ddeMarCode", column = @Column(name = "DDE_MAR_CODE", length = 20)),
 			@AttributeOverride(name = "ddeStrCode", column = @Column(name = "DDE_STR_CODE", length = 20)),

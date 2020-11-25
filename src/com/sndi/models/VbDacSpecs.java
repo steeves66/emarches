@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -37,7 +37,7 @@ public class VbDacSpecs implements java.io.Serializable {
 			@AttributeOverride(name = "dacGesCode", column = @Column(name = "DAC_GES_CODE", precision = 22, scale = 0)),
 			@AttributeOverride(name = "dacFonCodAc", column = @Column(name = "DAC_FON_COD_AC", length = 12)),
 			@AttributeOverride(name = "dacStrCode", column = @Column(name = "DAC_STR_CODE", length = 20)),
-			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 12)),
+			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 10)),
 			@AttributeOverride(name = "dacDteValCpmp", column = @Column(name = "DAC_DTE_VAL_CPMP", length = 7)),
 			@AttributeOverride(name = "dacDteValDmp", column = @Column(name = "DAC_DTE_VAL_DMP", length = 7)),
 			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE", length = 12)),
@@ -54,7 +54,12 @@ public class VbDacSpecs implements java.io.Serializable {
 			@AttributeOverride(name = "dacFonCodeDmp", column = @Column(name = "DAC_FON_CODE_DMP", length = 20)),
 			@AttributeOverride(name = "dacFonCodePf", column = @Column(name = "DAC_FON_CODE_PF", length = 20)),
 			@AttributeOverride(name = "dacDteModif", column = @Column(name = "DAC_DTE_MODIF", length = 7)),
-			@AttributeOverride(name = "dacModType", column = @Column(name = "DAC_MOD_TYPE", length = 10)) })
+			@AttributeOverride(name = "dacModType", column = @Column(name = "DAC_MOD_TYPE", length = 10)),
+			@AttributeOverride(name = "dacFactoriseCrit", column = @Column(name = "DAC_FACTORISE_CRIT", precision = 1, scale = 0)),
+			@AttributeOverride(name = "dacNbreAchat", column = @Column(name = "DAC_NBRE_ACHAT", precision = 11, scale = 0)),
+			@AttributeOverride(name = "dacAutComSpec", column = @Column(name = "DAC_AUT_COM_SPEC", length = 200)),
+			@AttributeOverride(name = "dacNbrCopieOff", column = @Column(name = "DAC_NBR_COPIE_OFF", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dacFinancement", column = @Column(name = "DAC_FINANCEMENT", length = 4000)) })
 	public VbDacSpecsId getId() {
 		return this.id;
 	}

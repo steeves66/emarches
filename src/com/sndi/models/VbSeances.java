@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -36,7 +36,8 @@ public class VbSeances implements java.io.Serializable {
 			@AttributeOverride(name = "seaSteSaisi", column = @Column(name = "SEA_STE_SAISI", length = 7)),
 			@AttributeOverride(name = "seaFonCode", column = @Column(name = "SEA_FON_CODE", length = 30)),
 			@AttributeOverride(name = "seaOpeMatricule", column = @Column(name = "SEA_OPE_MATRICULE", length = 25)),
-			@AttributeOverride(name = "seaObservation", column = @Column(name = "SEA_OBSERVATION", length = 500)) })
+			@AttributeOverride(name = "seaObservation", column = @Column(name = "SEA_OBSERVATION", length = 500)),
+			@AttributeOverride(name = "seaDteSea", column = @Column(name = "SEA_DTE_SEA", length = 7)) })
 	public VbSeancesId getId() {
 		return this.id;
 	}

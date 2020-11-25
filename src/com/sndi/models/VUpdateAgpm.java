@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -47,7 +47,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "agpDteModif", column = @Column(name = "AGP_DTE_MODIF", length = 7)),
 			@AttributeOverride(name = "agpFonCodPf", column = @Column(name = "AGP_FON_COD_PF", length = 20)),
 			@AttributeOverride(name = "agpFonCodDmp", column = @Column(name = "AGP_FON_COD_DMP", length = 20)),
-			@AttributeOverride(name = "agpRecherche", column = @Column(name = "AGP_RECHERCHE", length = 4000)),
+			@AttributeOverride(name = "agpRecherche", column = @Column(name = "AGP_RECHERCHE", length = 400)),
 			@AttributeOverride(name = "decId", column = @Column(name = "DEC_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "decOrganExecLibelle", column = @Column(name = "DEC_ORGAN_EXEC_LIBELLE", length = 500)),
 			@AttributeOverride(name = "decOrganExecAdresse", column = @Column(name = "DEC_ORGAN_EXEC_ADRESSE", length = 500)),
@@ -69,7 +69,7 @@ public class VUpdateAgpm implements java.io.Serializable {
 			@AttributeOverride(name = "proTypeProjet", column = @Column(name = "PRO_TYPE_PROJET", length = 10)),
 			@AttributeOverride(name = "finId", column = @Column(name = "FIN_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "finDevCode", column = @Column(name = "FIN_DEV_CODE", nullable = false, length = 8)),
-			@AttributeOverride(name = "finBaiCode", column = @Column(name = "FIN_BAI_CODE", length = 5)),
+			@AttributeOverride(name = "finBaiCode", column = @Column(name = "FIN_BAI_CODE", length = 20)),
 			@AttributeOverride(name = "finSouCode", column = @Column(name = "FIN_SOU_CODE", nullable = false, length = 5)),
 			@AttributeOverride(name = "finProId", column = @Column(name = "FIN_PRO_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "finMontantCfa", column = @Column(name = "FIN_MONTANT_CFA", precision = 15)),

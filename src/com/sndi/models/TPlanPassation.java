@@ -1,15 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -19,112 +15,30 @@ import javax.persistence.Table;
 @Table(name = "T_PLAN_PASSATION", schema = "EMAP")
 public class TPlanPassation implements java.io.Serializable {
 
-	private long plpId;
-	private TFonction TFonction;
-	private TGestions TGestions;
-	private TStructure TStructure;
-	private String plpCode;
-	private String plpLibelle;
-	private Set<TAffichagePpm> TAffichagePpms = new HashSet<TAffichagePpm>(0);
-	private Set<TDetailPlanPassation> TDetailPlanPassations = new HashSet<TDetailPlanPassation>(0);
+	private TPlanPassationId id;
 
 	public TPlanPassation() {
 	}
 
-	public TPlanPassation(long plpId, TFonction TFonction, TGestions TGestions, TStructure TStructure) {
-		this.plpId = plpId;
-		this.TFonction = TFonction;
-		this.TGestions = TGestions;
-		this.TStructure = TStructure;
+	public TPlanPassation(TPlanPassationId id) {
+		this.id = id;
 	}
 
-	public TPlanPassation(long plpId, TFonction TFonction, TGestions TGestions, TStructure TStructure, String plpCode,
-			String plpLibelle, Set<TAffichagePpm> TAffichagePpms, Set<TDetailPlanPassation> TDetailPlanPassations) {
-		this.plpId = plpId;
-		this.TFonction = TFonction;
-		this.TGestions = TGestions;
-		this.TStructure = TStructure;
-		this.plpCode = plpCode;
-		this.plpLibelle = plpLibelle;
-		this.TAffichagePpms = TAffichagePpms;
-		this.TDetailPlanPassations = TDetailPlanPassations;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "plpId", column = @Column(name = "PLP_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "plpStrCode", column = @Column(name = "PLP_STR_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "plpFonCod", column = @Column(name = "PLP_FON_COD", nullable = false, length = 12)),
+			@AttributeOverride(name = "plpGesCode", column = @Column(name = "PLP_GES_CODE", nullable = false, precision = 4, scale = 0)),
+			@AttributeOverride(name = "plpCode", column = @Column(name = "PLP_CODE", length = 50)),
+			@AttributeOverride(name = "plpLibelle", column = @Column(name = "PLP_LIBELLE", length = 1000)) })
+	public TPlanPassationId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "PLP_ID", unique = true, nullable = false, precision = 10, scale = 0)
-	public long getPlpId() {
-		return this.plpId;
-	}
-
-	public void setPlpId(long plpId) {
-		this.plpId = plpId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLP_FON_COD", nullable = false)
-	public TFonction getTFonction() {
-		return this.TFonction;
-	}
-
-	public void setTFonction(TFonction TFonction) {
-		this.TFonction = TFonction;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLP_GES_CODE", nullable = false)
-	public TGestions getTGestions() {
-		return this.TGestions;
-	}
-
-	public void setTGestions(TGestions TGestions) {
-		this.TGestions = TGestions;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PLP_STR_CODE", nullable = false)
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@Column(name = "PLP_CODE", length = 50)
-	public String getPlpCode() {
-		return this.plpCode;
-	}
-
-	public void setPlpCode(String plpCode) {
-		this.plpCode = plpCode;
-	}
-
-	@Column(name = "PLP_LIBELLE", length = 1000)
-	public String getPlpLibelle() {
-		return this.plpLibelle;
-	}
-
-	public void setPlpLibelle(String plpLibelle) {
-		this.plpLibelle = plpLibelle;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TPlanPassation")
-	public Set<TAffichagePpm> getTAffichagePpms() {
-		return this.TAffichagePpms;
-	}
-
-	public void setTAffichagePpms(Set<TAffichagePpm> TAffichagePpms) {
-		this.TAffichagePpms = TAffichagePpms;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TPlanPassation")
-	public Set<TDetailPlanPassation> getTDetailPlanPassations() {
-		return this.TDetailPlanPassations;
-	}
-
-	public void setTDetailPlanPassations(Set<TDetailPlanPassation> TDetailPlanPassations) {
-		this.TDetailPlanPassations = TDetailPlanPassations;
+	public void setId(TPlanPassationId id) {
+		this.id = id;
 	}
 
 }

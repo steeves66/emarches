@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -78,8 +78,11 @@ public class VbDetOffresId implements java.io.Serializable {
 	private String dofErrFin;
 	private String dofObsFin;
 	private String dofRepeche;
-	private String dofObsRet;
 	private String dofObsAnormal;
+	private String dofObsRet;
+	private String dofObsVariante;
+	private BigDecimal dofMtCaut;
+	private BigDecimal dofMtRab;
 
 	public VbDetOffresId() {
 	}
@@ -106,7 +109,8 @@ public class VbDetOffresId implements java.io.Serializable {
 			Short dofScoreDmp, Long dofRangOfrBai, BigDecimal dofMtCorBai, String dofRecevablBai, Short dofScoreBai,
 			String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi, String dofFonCodeAc,
 			String dofOpeMatricule, String dofStatut, String dofSouNcc, String dofSigle, String dofErrFin,
-			String dofObsFin, String dofRepeche, String dofObsRet, String dofObsAnormal) {
+			String dofObsFin, String dofRepeche, String dofObsAnormal, String dofObsRet, String dofObsVariante,
+			BigDecimal dofMtCaut, BigDecimal dofMtRab) {
 		this.dofNum = dofNum;
 		this.dofLaaId = dofLaaId;
 		this.dofLaaAaoCode = dofLaaAaoCode;
@@ -173,8 +177,11 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofErrFin = dofErrFin;
 		this.dofObsFin = dofObsFin;
 		this.dofRepeche = dofRepeche;
-		this.dofObsRet = dofObsRet;
 		this.dofObsAnormal = dofObsAnormal;
+		this.dofObsRet = dofObsRet;
+		this.dofObsVariante = dofObsVariante;
+		this.dofMtCaut = dofMtCaut;
+		this.dofMtRab = dofMtRab;
 	}
 
 	@Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)
@@ -771,6 +778,15 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofRepeche = dofRepeche;
 	}
 
+	@Column(name = "DOF_OBS_ANORMAL", length = 500)
+	public String getDofObsAnormal() {
+		return this.dofObsAnormal;
+	}
+
+	public void setDofObsAnormal(String dofObsAnormal) {
+		this.dofObsAnormal = dofObsAnormal;
+	}
+
 	@Column(name = "DOF_OBS_RET", length = 500)
 	public String getDofObsRet() {
 		return this.dofObsRet;
@@ -780,13 +796,31 @@ public class VbDetOffresId implements java.io.Serializable {
 		this.dofObsRet = dofObsRet;
 	}
 
-	@Column(name = "DOF_OBS_ANORMAL", length = 500)
-	public String getDofObsAnormal() {
-		return this.dofObsAnormal;
+	@Column(name = "DOF_OBS_VARIANTE", length = 500)
+	public String getDofObsVariante() {
+		return this.dofObsVariante;
 	}
 
-	public void setDofObsAnormal(String dofObsAnormal) {
-		this.dofObsAnormal = dofObsAnormal;
+	public void setDofObsVariante(String dofObsVariante) {
+		this.dofObsVariante = dofObsVariante;
+	}
+
+	@Column(name = "DOF_MT_CAUT", precision = 22, scale = 0)
+	public BigDecimal getDofMtCaut() {
+		return this.dofMtCaut;
+	}
+
+	public void setDofMtCaut(BigDecimal dofMtCaut) {
+		this.dofMtCaut = dofMtCaut;
+	}
+
+	@Column(name = "DOF_MT_RAB", precision = 22, scale = 0)
+	public BigDecimal getDofMtRab() {
+		return this.dofMtRab;
+	}
+
+	public void setDofMtRab(BigDecimal dofMtRab) {
+		this.dofMtRab = dofMtRab;
 	}
 
 	public boolean equals(Object other) {
@@ -959,11 +993,18 @@ public class VbDetOffresId implements java.io.Serializable {
 						&& castOther.getDofObsFin() != null && this.getDofObsFin().equals(castOther.getDofObsFin())))
 				&& ((this.getDofRepeche() == castOther.getDofRepeche()) || (this.getDofRepeche() != null
 						&& castOther.getDofRepeche() != null && this.getDofRepeche().equals(castOther.getDofRepeche())))
-				&& ((this.getDofObsRet() == castOther.getDofObsRet()) || (this.getDofObsRet() != null
-						&& castOther.getDofObsRet() != null && this.getDofObsRet().equals(castOther.getDofObsRet())))
 				&& ((this.getDofObsAnormal() == castOther.getDofObsAnormal())
 						|| (this.getDofObsAnormal() != null && castOther.getDofObsAnormal() != null
-								&& this.getDofObsAnormal().equals(castOther.getDofObsAnormal())));
+								&& this.getDofObsAnormal().equals(castOther.getDofObsAnormal())))
+				&& ((this.getDofObsRet() == castOther.getDofObsRet()) || (this.getDofObsRet() != null
+						&& castOther.getDofObsRet() != null && this.getDofObsRet().equals(castOther.getDofObsRet())))
+				&& ((this.getDofObsVariante() == castOther.getDofObsVariante())
+						|| (this.getDofObsVariante() != null && castOther.getDofObsVariante() != null
+								&& this.getDofObsVariante().equals(castOther.getDofObsVariante())))
+				&& ((this.getDofMtCaut() == castOther.getDofMtCaut()) || (this.getDofMtCaut() != null
+						&& castOther.getDofMtCaut() != null && this.getDofMtCaut().equals(castOther.getDofMtCaut())))
+				&& ((this.getDofMtRab() == castOther.getDofMtRab()) || (this.getDofMtRab() != null
+						&& castOther.getDofMtRab() != null && this.getDofMtRab().equals(castOther.getDofMtRab())));
 	}
 
 	public int hashCode() {
@@ -1035,8 +1076,11 @@ public class VbDetOffresId implements java.io.Serializable {
 		result = 37 * result + (getDofErrFin() == null ? 0 : this.getDofErrFin().hashCode());
 		result = 37 * result + (getDofObsFin() == null ? 0 : this.getDofObsFin().hashCode());
 		result = 37 * result + (getDofRepeche() == null ? 0 : this.getDofRepeche().hashCode());
-		result = 37 * result + (getDofObsRet() == null ? 0 : this.getDofObsRet().hashCode());
 		result = 37 * result + (getDofObsAnormal() == null ? 0 : this.getDofObsAnormal().hashCode());
+		result = 37 * result + (getDofObsRet() == null ? 0 : this.getDofObsRet().hashCode());
+		result = 37 * result + (getDofObsVariante() == null ? 0 : this.getDofObsVariante().hashCode());
+		result = 37 * result + (getDofMtCaut() == null ? 0 : this.getDofMtCaut().hashCode());
+		result = 37 * result + (getDofMtRab() == null ? 0 : this.getDofMtRab().hashCode());
 		return result;
 	}
 

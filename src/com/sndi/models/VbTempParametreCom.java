@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -38,6 +38,9 @@ public class VbTempParametreCom implements java.io.Serializable {
 			@AttributeOverride(name = "dcsSeaQuorum", column = @Column(name = "DCS_SEA_QUORUM", length = 500)),
 			@AttributeOverride(name = "dcsSeaNum", column = @Column(name = "DCS_SEA_NUM", length = 500)),
 			@AttributeOverride(name = "dcsDteSaisi", column = @Column(name = "DCS_DTE_SAISI", length = 500)),
+			@AttributeOverride(name = "dcsDteSea", column = @Column(name = "DCS_DTE_SEA", length = 7)),
+			@AttributeOverride(name = "dcsHeureDeb", column = @Column(name = "DCS_HEURE_DEB", length = 500)),
+			@AttributeOverride(name = "dcsHeureFin", column = @Column(name = "DCS_HEURE_FIN", length = 500)),
 			@AttributeOverride(name = "dcsFonCodSaisi", column = @Column(name = "DCS_FON_COD_SAISI", length = 500)),
 			@AttributeOverride(name = "dcsObservation", column = @Column(name = "DCS_OBSERVATION", length = 500)),
 			@AttributeOverride(name = "dcsComTcoCode", column = @Column(name = "DCS_COM_TCO_CODE", length = 500)),
@@ -57,7 +60,8 @@ public class VbTempParametreCom implements java.io.Serializable {
 			@AttributeOverride(name = "dcsAaoNbrOffRej", column = @Column(name = "DCS_AAO_NBR_OFF_REJ", length = 500)),
 			@AttributeOverride(name = "dcsAaoNbrOffHorDelai", column = @Column(name = "DCS_AAO_NBR_OFF_HOR_DELAI", length = 500)),
 			@AttributeOverride(name = "dcsFonAdmin", column = @Column(name = "DCS_FON_ADMIN", length = 500)),
-			@AttributeOverride(name = "dcsStrCom", column = @Column(name = "DCS_STR_COM", length = 500)) })
+			@AttributeOverride(name = "dcsStrCom", column = @Column(name = "DCS_STR_COM", length = 500)),
+			@AttributeOverride(name = "dcsSeaLieu", column = @Column(name = "DCS_SEA_LIEU", length = 500)) })
 	public VbTempParametreComId getId() {
 		return this.id;
 	}

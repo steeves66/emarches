@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -93,8 +93,11 @@ public class VbDetOffres implements java.io.Serializable {
 			@AttributeOverride(name = "dofErrFin", column = @Column(name = "DOF_ERR_FIN", length = 500)),
 			@AttributeOverride(name = "dofObsFin", column = @Column(name = "DOF_OBS_FIN", length = 500)),
 			@AttributeOverride(name = "dofRepeche", column = @Column(name = "DOF_REPECHE", length = 1)),
+			@AttributeOverride(name = "dofObsAnormal", column = @Column(name = "DOF_OBS_ANORMAL", length = 500)),
 			@AttributeOverride(name = "dofObsRet", column = @Column(name = "DOF_OBS_RET", length = 500)),
-			@AttributeOverride(name = "dofObsAnormal", column = @Column(name = "DOF_OBS_ANORMAL", length = 500)) })
+			@AttributeOverride(name = "dofObsVariante", column = @Column(name = "DOF_OBS_VARIANTE", length = 500)),
+			@AttributeOverride(name = "dofMtCaut", column = @Column(name = "DOF_MT_CAUT", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dofMtRab", column = @Column(name = "DOF_MT_RAB", precision = 22, scale = 0)) })
 	public VbDetOffresId getId() {
 		return this.id;
 	}

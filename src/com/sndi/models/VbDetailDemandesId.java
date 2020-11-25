@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -14,7 +14,7 @@ public class VbDetailDemandesId implements java.io.Serializable {
 	private BigDecimal ddeNum;
 	private BigDecimal ddeDemNum;
 	private String ddeDacCode;
-	private Short ddeLaaId;
+	private BigDecimal ddeLaaId;
 	private String ddeLbgCode;
 	private String ddeMarCode;
 	private String ddeStrCode;
@@ -28,7 +28,7 @@ public class VbDetailDemandesId implements java.io.Serializable {
 		this.ddeNum = ddeNum;
 	}
 
-	public VbDetailDemandesId(BigDecimal ddeNum, BigDecimal ddeDemNum, String ddeDacCode, Short ddeLaaId,
+	public VbDetailDemandesId(BigDecimal ddeNum, BigDecimal ddeDemNum, String ddeDacCode, BigDecimal ddeLaaId,
 			String ddeLbgCode, String ddeMarCode, String ddeStrCode, String ddeActNum, String ddeActNumIni) {
 		this.ddeNum = ddeNum;
 		this.ddeDemNum = ddeDemNum;
@@ -68,12 +68,12 @@ public class VbDetailDemandesId implements java.io.Serializable {
 		this.ddeDacCode = ddeDacCode;
 	}
 
-	@Column(name = "DDE_LAA_ID", precision = 4, scale = 0)
-	public Short getDdeLaaId() {
+	@Column(name = "DDE_LAA_ID", precision = 22, scale = 0)
+	public BigDecimal getDdeLaaId() {
 		return this.ddeLaaId;
 	}
 
-	public void setDdeLaaId(Short ddeLaaId) {
+	public void setDdeLaaId(BigDecimal ddeLaaId) {
 		this.ddeLaaId = ddeLaaId;
 	}
 

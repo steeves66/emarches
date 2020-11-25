@@ -541,14 +541,14 @@
          				                    <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '1'}">  
                                                <p:commandLink action="#{commissionController.majPieceConforme('NON CONFORME')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="lotlog:pieces"
 				                                 title="Non Conforme">
-                                                  <span class="hidden-xs" style="color: white">#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}</span>
+                                                  <span class="hidden-xs" style="color: white">OUI</span>
                                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
                                                  </p:commandLink>
                                               </h:panelGroup>
                                               <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '2'}">  
                                                  <p:commandLink action="#{commissionController.majPieceConforme('CONFORME')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="lotlog:pieces"
 				                                   title="Conforme">
-                                                   <span class="hidden-xs" style="color: white">#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}</span>
+                                                   <span class="hidden-xs" style="color: white">NON</span>
                                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.posPiece}" />                              
                                                    </p:commandLink>
                                                </h:panelGroup>

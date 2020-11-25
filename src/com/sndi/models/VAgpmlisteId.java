@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -290,7 +290,7 @@ public class VAgpmlisteId implements java.io.Serializable {
 		this.decId = decId;
 	}
 
-	@Column(name = "AGP_RECHERCHE", length = 4000)
+	@Column(name = "AGP_RECHERCHE", length = 400)
 	public String getAgpRecherche() {
 		return this.agpRecherche;
 	}

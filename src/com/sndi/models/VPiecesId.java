@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -19,9 +19,11 @@ public class VPiecesId implements java.io.Serializable {
 	private String pidStaCode;
 	private Date pidDteSaisi;
 	private String pidDacCode;
-	private String pidConforme;
 	private String pidObservation;
+	private String pidConforme;
 	private String pidPresente;
+	private BigDecimal btnPidConforme;
+	private BigDecimal btnPidPresente;
 
 	public VPiecesId() {
 	}
@@ -31,7 +33,8 @@ public class VPiecesId implements java.io.Serializable {
 	}
 
 	public VPiecesId(BigDecimal VPi, BigDecimal pidCode, String pidLibelle, String pidTpiCode, String pidStaCode,
-			Date pidDteSaisi, String pidDacCode, String pidConforme, String pidObservation, String pidPresente) {
+			Date pidDteSaisi, String pidDacCode, String pidObservation, String pidConforme, String pidPresente,
+			BigDecimal btnPidConforme, BigDecimal btnPidPresente) {
 		this.VPi = VPi;
 		this.pidCode = pidCode;
 		this.pidLibelle = pidLibelle;
@@ -39,9 +42,11 @@ public class VPiecesId implements java.io.Serializable {
 		this.pidStaCode = pidStaCode;
 		this.pidDteSaisi = pidDteSaisi;
 		this.pidDacCode = pidDacCode;
-		this.pidConforme = pidConforme;
 		this.pidObservation = pidObservation;
+		this.pidConforme = pidConforme;
 		this.pidPresente = pidPresente;
+		this.btnPidConforme = btnPidConforme;
+		this.btnPidPresente = btnPidPresente;
 	}
 
 	@Column(name = "V_PI", precision = 22, scale = 0)
@@ -107,15 +112,6 @@ public class VPiecesId implements java.io.Serializable {
 		this.pidDacCode = pidDacCode;
 	}
 
-	@Column(name = "PID_CONFORME", length = 3)
-	public String getPidConforme() {
-		return this.pidConforme;
-	}
-
-	public void setPidConforme(String pidConforme) {
-		this.pidConforme = pidConforme;
-	}
-
 	@Column(name = "PID_OBSERVATION", length = 2000)
 	public String getPidObservation() {
 		return this.pidObservation;
@@ -125,6 +121,15 @@ public class VPiecesId implements java.io.Serializable {
 		this.pidObservation = pidObservation;
 	}
 
+	@Column(name = "PID_CONFORME", length = 3)
+	public String getPidConforme() {
+		return this.pidConforme;
+	}
+
+	public void setPidConforme(String pidConforme) {
+		this.pidConforme = pidConforme;
+	}
+
 	@Column(name = "PID_PRESENTE", length = 3)
 	public String getPidPresente() {
 		return this.pidPresente;
@@ -132,6 +137,24 @@ public class VPiecesId implements java.io.Serializable {
 
 	public void setPidPresente(String pidPresente) {
 		this.pidPresente = pidPresente;
+	}
+
+	@Column(name = "BTN_PID_CONFORME", precision = 22, scale = 0)
+	public BigDecimal getBtnPidConforme() {
+		return this.btnPidConforme;
+	}
+
+	public void setBtnPidConforme(BigDecimal btnPidConforme) {
+		this.btnPidConforme = btnPidConforme;
+	}
+
+	@Column(name = "BTN_PID_PRESENTE", precision = 22, scale = 0)
+	public BigDecimal getBtnPidPresente() {
+		return this.btnPidPresente;
+	}
+
+	public void setBtnPidPresente(BigDecimal btnPidPresente) {
+		this.btnPidPresente = btnPidPresente;
 	}
 
 	public boolean equals(Object other) {
@@ -158,15 +181,21 @@ public class VPiecesId implements java.io.Serializable {
 								&& this.getPidDteSaisi().equals(castOther.getPidDteSaisi())))
 				&& ((this.getPidDacCode() == castOther.getPidDacCode()) || (this.getPidDacCode() != null
 						&& castOther.getPidDacCode() != null && this.getPidDacCode().equals(castOther.getPidDacCode())))
-				&& ((this.getPidConforme() == castOther.getPidConforme())
-						|| (this.getPidConforme() != null && castOther.getPidConforme() != null
-								&& this.getPidConforme().equals(castOther.getPidConforme())))
 				&& ((this.getPidObservation() == castOther.getPidObservation())
 						|| (this.getPidObservation() != null && castOther.getPidObservation() != null
 								&& this.getPidObservation().equals(castOther.getPidObservation())))
+				&& ((this.getPidConforme() == castOther.getPidConforme())
+						|| (this.getPidConforme() != null && castOther.getPidConforme() != null
+								&& this.getPidConforme().equals(castOther.getPidConforme())))
 				&& ((this.getPidPresente() == castOther.getPidPresente())
 						|| (this.getPidPresente() != null && castOther.getPidPresente() != null
-								&& this.getPidPresente().equals(castOther.getPidPresente())));
+								&& this.getPidPresente().equals(castOther.getPidPresente())))
+				&& ((this.getBtnPidConforme() == castOther.getBtnPidConforme())
+						|| (this.getBtnPidConforme() != null && castOther.getBtnPidConforme() != null
+								&& this.getBtnPidConforme().equals(castOther.getBtnPidConforme())))
+				&& ((this.getBtnPidPresente() == castOther.getBtnPidPresente())
+						|| (this.getBtnPidPresente() != null && castOther.getBtnPidPresente() != null
+								&& this.getBtnPidPresente().equals(castOther.getBtnPidPresente())));
 	}
 
 	public int hashCode() {
@@ -179,9 +208,11 @@ public class VPiecesId implements java.io.Serializable {
 		result = 37 * result + (getPidStaCode() == null ? 0 : this.getPidStaCode().hashCode());
 		result = 37 * result + (getPidDteSaisi() == null ? 0 : this.getPidDteSaisi().hashCode());
 		result = 37 * result + (getPidDacCode() == null ? 0 : this.getPidDacCode().hashCode());
-		result = 37 * result + (getPidConforme() == null ? 0 : this.getPidConforme().hashCode());
 		result = 37 * result + (getPidObservation() == null ? 0 : this.getPidObservation().hashCode());
+		result = 37 * result + (getPidConforme() == null ? 0 : this.getPidConforme().hashCode());
 		result = 37 * result + (getPidPresente() == null ? 0 : this.getPidPresente().hashCode());
+		result = 37 * result + (getBtnPidConforme() == null ? 0 : this.getBtnPidConforme().hashCode());
+		result = 37 * result + (getBtnPidPresente() == null ? 0 : this.getBtnPidPresente().hashCode());
 		return result;
 	}
 

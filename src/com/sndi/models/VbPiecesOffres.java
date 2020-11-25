@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,7 +27,7 @@ public class VbPiecesOffres implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "pofNum", column = @Column(name = "POF_NUM", nullable = false, precision = 22, scale = 0)),
+			@AttributeOverride(name = "pofNum", column = @Column(name = "POF_NUM", precision = 22, scale = 0)),
 			@AttributeOverride(name = "pofDacCode", column = @Column(name = "POF_DAC_CODE", length = 25)),
 			@AttributeOverride(name = "pofLaaId", column = @Column(name = "POF_LAA_ID", precision = 22, scale = 0)),
 			@AttributeOverride(name = "pofOpdNum", column = @Column(name = "POF_OPD_NUM", precision = 22, scale = 0)),

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,104 +13,111 @@ import javax.persistence.Embeddable;
 public class VPpmEtatId implements java.io.Serializable {
 
 	private BigDecimal VId;
-	private long affId;
-	private Long affDppId;
+	private long dppId;
 	private String fonLibelle;
-	private String affDppObjet;
-	private String affDppSourceFin;
+	private String dppObjet;
+	private String dppSourceFin;
 	private String lbgCode;
 	private String lbgImputation;
+	private String lbgFonCodeAc;
 	private String natCode;
 	private String natLibelle;
 	private String tymLibelleCourt;
 	private String mopLibelleLong;
-	private Date affDppDateAvisAoPublicat;
-	private Date affDppDateOuvertOt;
-	private Date affDppDateOuvertOf;
-	private Date affDppDateJugementOffre;
-	private Date affDppDateAttApprobDmp;
-	private Date affDppDateAttApproBail;
-	private long affDppPlpId;
-	private String affDppStrBenefi;
-	private String affDppStrConduc;
-	private String affDppTypePlan;
-	private Date affDppDateNegociation;
-	private Date affDppDateElabRapport;
-	private Date affDppDateSignatAttrib;
-	private Date affDppDateSignatAc;
-	private Date affDppDateExecDebut;
-	private Date affDppDateExecFin;
-	private Date affDppDateDaoTrans;
-	private Date affDppDateDaoApprobDmp;
-	private Date affDppDateDaoApprobBail;
-	private Date affDppInvEntre;
-	private Date affDppApprobAno;
-	private String affDppTypeFinance;
-	private String affDppActeurSaisie;
-	private String affDppStaCode;
+	private Date dppDateAvisAoPublication;
+	private String dppStatutAno;
+	private String dppNatInt;
+	private String dppTypeStrConduc;
+	private Date dppDateOuvertOt;
+	private Date dppDateOuvertOf;
+	private Date dppDateJugementOffre;
+	private Date dppDateAttApprobDmp;
+	private Date dppDateAttApproBail;
+	private long dppPlpId;
+	private String dppStructureBenefi;
+	private String dppStructureConduc;
+	private String dppTypePlan;
+	private Date dppDateNegociation;
+	private Date dppDateElabRapport;
+	private Date dppDateSignatAttrib;
+	private Date dppDateSignatAc;
+	private Date dppDateExecDebut;
+	private Date dppDateExecFin;
+	private Date dppDateDaoTrans;
+	private Date dppDateDaoApprobDmp;
+	private Date dppDateDaoApprobBail;
+	private Date dppInvEntre;
+	private Date dppApprobAno;
+	private String dppTypeFinance;
+	private String dppActeurSaisie;
+	private String dppStaCode;
 	private short plpGesCode;
 
 	public VPpmEtatId() {
 	}
 
-	public VPpmEtatId(long affId, String lbgCode, String lbgImputation, String natCode, String tymLibelleCourt,
-			long affDppPlpId, String affDppTypePlan, String affDppStaCode, short plpGesCode) {
-		this.affId = affId;
+	public VPpmEtatId(long dppId, String lbgCode, String lbgImputation, String natCode, String tymLibelleCourt,
+			long dppPlpId, String dppTypePlan, String dppStaCode, short plpGesCode) {
+		this.dppId = dppId;
 		this.lbgCode = lbgCode;
 		this.lbgImputation = lbgImputation;
 		this.natCode = natCode;
 		this.tymLibelleCourt = tymLibelleCourt;
-		this.affDppPlpId = affDppPlpId;
-		this.affDppTypePlan = affDppTypePlan;
-		this.affDppStaCode = affDppStaCode;
+		this.dppPlpId = dppPlpId;
+		this.dppTypePlan = dppTypePlan;
+		this.dppStaCode = dppStaCode;
 		this.plpGesCode = plpGesCode;
 	}
 
-	public VPpmEtatId(BigDecimal VId, long affId, Long affDppId, String fonLibelle, String affDppObjet,
-			String affDppSourceFin, String lbgCode, String lbgImputation, String natCode, String natLibelle,
-			String tymLibelleCourt, String mopLibelleLong, Date affDppDateAvisAoPublicat, Date affDppDateOuvertOt,
-			Date affDppDateOuvertOf, Date affDppDateJugementOffre, Date affDppDateAttApprobDmp,
-			Date affDppDateAttApproBail, long affDppPlpId, String affDppStrBenefi, String affDppStrConduc,
-			String affDppTypePlan, Date affDppDateNegociation, Date affDppDateElabRapport, Date affDppDateSignatAttrib,
-			Date affDppDateSignatAc, Date affDppDateExecDebut, Date affDppDateExecFin, Date affDppDateDaoTrans,
-			Date affDppDateDaoApprobDmp, Date affDppDateDaoApprobBail, Date affDppInvEntre, Date affDppApprobAno,
-			String affDppTypeFinance, String affDppActeurSaisie, String affDppStaCode, short plpGesCode) {
+	public VPpmEtatId(BigDecimal VId, long dppId, String fonLibelle, String dppObjet, String dppSourceFin,
+			String lbgCode, String lbgImputation, String lbgFonCodeAc, String natCode, String natLibelle,
+			String tymLibelleCourt, String mopLibelleLong, Date dppDateAvisAoPublication, String dppStatutAno,
+			String dppNatInt, String dppTypeStrConduc, Date dppDateOuvertOt, Date dppDateOuvertOf,
+			Date dppDateJugementOffre, Date dppDateAttApprobDmp, Date dppDateAttApproBail, long dppPlpId,
+			String dppStructureBenefi, String dppStructureConduc, String dppTypePlan, Date dppDateNegociation,
+			Date dppDateElabRapport, Date dppDateSignatAttrib, Date dppDateSignatAc, Date dppDateExecDebut,
+			Date dppDateExecFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp, Date dppDateDaoApprobBail,
+			Date dppInvEntre, Date dppApprobAno, String dppTypeFinance, String dppActeurSaisie, String dppStaCode,
+			short plpGesCode) {
 		this.VId = VId;
-		this.affId = affId;
-		this.affDppId = affDppId;
+		this.dppId = dppId;
 		this.fonLibelle = fonLibelle;
-		this.affDppObjet = affDppObjet;
-		this.affDppSourceFin = affDppSourceFin;
+		this.dppObjet = dppObjet;
+		this.dppSourceFin = dppSourceFin;
 		this.lbgCode = lbgCode;
 		this.lbgImputation = lbgImputation;
+		this.lbgFonCodeAc = lbgFonCodeAc;
 		this.natCode = natCode;
 		this.natLibelle = natLibelle;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
-		this.affDppDateAvisAoPublicat = affDppDateAvisAoPublicat;
-		this.affDppDateOuvertOt = affDppDateOuvertOt;
-		this.affDppDateOuvertOf = affDppDateOuvertOf;
-		this.affDppDateJugementOffre = affDppDateJugementOffre;
-		this.affDppDateAttApprobDmp = affDppDateAttApprobDmp;
-		this.affDppDateAttApproBail = affDppDateAttApproBail;
-		this.affDppPlpId = affDppPlpId;
-		this.affDppStrBenefi = affDppStrBenefi;
-		this.affDppStrConduc = affDppStrConduc;
-		this.affDppTypePlan = affDppTypePlan;
-		this.affDppDateNegociation = affDppDateNegociation;
-		this.affDppDateElabRapport = affDppDateElabRapport;
-		this.affDppDateSignatAttrib = affDppDateSignatAttrib;
-		this.affDppDateSignatAc = affDppDateSignatAc;
-		this.affDppDateExecDebut = affDppDateExecDebut;
-		this.affDppDateExecFin = affDppDateExecFin;
-		this.affDppDateDaoTrans = affDppDateDaoTrans;
-		this.affDppDateDaoApprobDmp = affDppDateDaoApprobDmp;
-		this.affDppDateDaoApprobBail = affDppDateDaoApprobBail;
-		this.affDppInvEntre = affDppInvEntre;
-		this.affDppApprobAno = affDppApprobAno;
-		this.affDppTypeFinance = affDppTypeFinance;
-		this.affDppActeurSaisie = affDppActeurSaisie;
-		this.affDppStaCode = affDppStaCode;
+		this.dppDateAvisAoPublication = dppDateAvisAoPublication;
+		this.dppStatutAno = dppStatutAno;
+		this.dppNatInt = dppNatInt;
+		this.dppTypeStrConduc = dppTypeStrConduc;
+		this.dppDateOuvertOt = dppDateOuvertOt;
+		this.dppDateOuvertOf = dppDateOuvertOf;
+		this.dppDateJugementOffre = dppDateJugementOffre;
+		this.dppDateAttApprobDmp = dppDateAttApprobDmp;
+		this.dppDateAttApproBail = dppDateAttApproBail;
+		this.dppPlpId = dppPlpId;
+		this.dppStructureBenefi = dppStructureBenefi;
+		this.dppStructureConduc = dppStructureConduc;
+		this.dppTypePlan = dppTypePlan;
+		this.dppDateNegociation = dppDateNegociation;
+		this.dppDateElabRapport = dppDateElabRapport;
+		this.dppDateSignatAttrib = dppDateSignatAttrib;
+		this.dppDateSignatAc = dppDateSignatAc;
+		this.dppDateExecDebut = dppDateExecDebut;
+		this.dppDateExecFin = dppDateExecFin;
+		this.dppDateDaoTrans = dppDateDaoTrans;
+		this.dppDateDaoApprobDmp = dppDateDaoApprobDmp;
+		this.dppDateDaoApprobBail = dppDateDaoApprobBail;
+		this.dppInvEntre = dppInvEntre;
+		this.dppApprobAno = dppApprobAno;
+		this.dppTypeFinance = dppTypeFinance;
+		this.dppActeurSaisie = dppActeurSaisie;
+		this.dppStaCode = dppStaCode;
 		this.plpGesCode = plpGesCode;
 	}
 
@@ -123,22 +130,13 @@ public class VPpmEtatId implements java.io.Serializable {
 		this.VId = VId;
 	}
 
-	@Column(name = "AFF_ID", nullable = false, precision = 10, scale = 0)
-	public long getAffId() {
-		return this.affId;
+	@Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)
+	public long getDppId() {
+		return this.dppId;
 	}
 
-	public void setAffId(long affId) {
-		this.affId = affId;
-	}
-
-	@Column(name = "AFF_DPP_ID", precision = 10, scale = 0)
-	public Long getAffDppId() {
-		return this.affDppId;
-	}
-
-	public void setAffDppId(Long affDppId) {
-		this.affDppId = affDppId;
+	public void setDppId(long dppId) {
+		this.dppId = dppId;
 	}
 
 	@Column(name = "FON_LIBELLE", length = 500)
@@ -150,22 +148,22 @@ public class VPpmEtatId implements java.io.Serializable {
 		this.fonLibelle = fonLibelle;
 	}
 
-	@Column(name = "AFF_DPP_OBJET", length = 1000)
-	public String getAffDppObjet() {
-		return this.affDppObjet;
+	@Column(name = "DPP_OBJET", length = 1000)
+	public String getDppObjet() {
+		return this.dppObjet;
 	}
 
-	public void setAffDppObjet(String affDppObjet) {
-		this.affDppObjet = affDppObjet;
+	public void setDppObjet(String dppObjet) {
+		this.dppObjet = dppObjet;
 	}
 
-	@Column(name = "AFF_DPP_SOURCE_FIN", length = 1000)
-	public String getAffDppSourceFin() {
-		return this.affDppSourceFin;
+	@Column(name = "DPP_SOURCE_FIN", length = 1000)
+	public String getDppSourceFin() {
+		return this.dppSourceFin;
 	}
 
-	public void setAffDppSourceFin(String affDppSourceFin) {
-		this.affDppSourceFin = affDppSourceFin;
+	public void setDppSourceFin(String dppSourceFin) {
+		this.dppSourceFin = dppSourceFin;
 	}
 
 	@Column(name = "LBG_CODE", nullable = false, length = 50)
@@ -184,6 +182,15 @@ public class VPpmEtatId implements java.io.Serializable {
 
 	public void setLbgImputation(String lbgImputation) {
 		this.lbgImputation = lbgImputation;
+	}
+
+	@Column(name = "LBG_FON_CODE_AC", length = 30)
+	public String getLbgFonCodeAc() {
+		return this.lbgFonCodeAc;
+	}
+
+	public void setLbgFonCodeAc(String lbgFonCodeAc) {
+		this.lbgFonCodeAc = lbgFonCodeAc;
 	}
 
 	@Column(name = "NAT_CODE", nullable = false, length = 20)
@@ -222,220 +229,247 @@ public class VPpmEtatId implements java.io.Serializable {
 		this.mopLibelleLong = mopLibelleLong;
 	}
 
-	@Column(name = "AFF_DPP_DATE_AVIS_AO_PUBLICAT", length = 7)
-	public Date getAffDppDateAvisAoPublicat() {
-		return this.affDppDateAvisAoPublicat;
+	@Column(name = "DPP_DATE_AVIS_AO_PUBLICATION", length = 7)
+	public Date getDppDateAvisAoPublication() {
+		return this.dppDateAvisAoPublication;
 	}
 
-	public void setAffDppDateAvisAoPublicat(Date affDppDateAvisAoPublicat) {
-		this.affDppDateAvisAoPublicat = affDppDateAvisAoPublicat;
+	public void setDppDateAvisAoPublication(Date dppDateAvisAoPublication) {
+		this.dppDateAvisAoPublication = dppDateAvisAoPublication;
 	}
 
-	@Column(name = "AFF_DPP_DATE_OUVERT_OT", length = 7)
-	public Date getAffDppDateOuvertOt() {
-		return this.affDppDateOuvertOt;
+	@Column(name = "DPP_STATUT_ANO", length = 3)
+	public String getDppStatutAno() {
+		return this.dppStatutAno;
 	}
 
-	public void setAffDppDateOuvertOt(Date affDppDateOuvertOt) {
-		this.affDppDateOuvertOt = affDppDateOuvertOt;
+	public void setDppStatutAno(String dppStatutAno) {
+		this.dppStatutAno = dppStatutAno;
 	}
 
-	@Column(name = "AFF_DPP_DATE_OUVERT_OF", length = 7)
-	public Date getAffDppDateOuvertOf() {
-		return this.affDppDateOuvertOf;
+	@Column(name = "DPP_NAT_INT", length = 3)
+	public String getDppNatInt() {
+		return this.dppNatInt;
 	}
 
-	public void setAffDppDateOuvertOf(Date affDppDateOuvertOf) {
-		this.affDppDateOuvertOf = affDppDateOuvertOf;
+	public void setDppNatInt(String dppNatInt) {
+		this.dppNatInt = dppNatInt;
 	}
 
-	@Column(name = "AFF_DPP_DATE_JUGEMENT_OFFRE", length = 7)
-	public Date getAffDppDateJugementOffre() {
-		return this.affDppDateJugementOffre;
+	@Column(name = "DPP_TYPE_STR_CONDUC", length = 50)
+	public String getDppTypeStrConduc() {
+		return this.dppTypeStrConduc;
 	}
 
-	public void setAffDppDateJugementOffre(Date affDppDateJugementOffre) {
-		this.affDppDateJugementOffre = affDppDateJugementOffre;
+	public void setDppTypeStrConduc(String dppTypeStrConduc) {
+		this.dppTypeStrConduc = dppTypeStrConduc;
 	}
 
-	@Column(name = "AFF_DPP_DATE_ATT_APPROB_DMP", length = 7)
-	public Date getAffDppDateAttApprobDmp() {
-		return this.affDppDateAttApprobDmp;
+	@Column(name = "DPP_DATE_OUVERT_OT", length = 7)
+	public Date getDppDateOuvertOt() {
+		return this.dppDateOuvertOt;
 	}
 
-	public void setAffDppDateAttApprobDmp(Date affDppDateAttApprobDmp) {
-		this.affDppDateAttApprobDmp = affDppDateAttApprobDmp;
+	public void setDppDateOuvertOt(Date dppDateOuvertOt) {
+		this.dppDateOuvertOt = dppDateOuvertOt;
 	}
 
-	@Column(name = "AFF_DPP_DATE_ATT_APPRO_BAIL", length = 7)
-	public Date getAffDppDateAttApproBail() {
-		return this.affDppDateAttApproBail;
+	@Column(name = "DPP_DATE_OUVERT_OF", length = 7)
+	public Date getDppDateOuvertOf() {
+		return this.dppDateOuvertOf;
 	}
 
-	public void setAffDppDateAttApproBail(Date affDppDateAttApproBail) {
-		this.affDppDateAttApproBail = affDppDateAttApproBail;
+	public void setDppDateOuvertOf(Date dppDateOuvertOf) {
+		this.dppDateOuvertOf = dppDateOuvertOf;
 	}
 
-	@Column(name = "AFF_DPP_PLP_ID", nullable = false, precision = 10, scale = 0)
-	public long getAffDppPlpId() {
-		return this.affDppPlpId;
+	@Column(name = "DPP_DATE_JUGEMENT_OFFRE", length = 7)
+	public Date getDppDateJugementOffre() {
+		return this.dppDateJugementOffre;
 	}
 
-	public void setAffDppPlpId(long affDppPlpId) {
-		this.affDppPlpId = affDppPlpId;
+	public void setDppDateJugementOffre(Date dppDateJugementOffre) {
+		this.dppDateJugementOffre = dppDateJugementOffre;
 	}
 
-	@Column(name = "AFF_DPP_STR_BENEFI", length = 1000)
-	public String getAffDppStrBenefi() {
-		return this.affDppStrBenefi;
+	@Column(name = "DPP_DATE_ATT_APPROB_DMP", length = 7)
+	public Date getDppDateAttApprobDmp() {
+		return this.dppDateAttApprobDmp;
 	}
 
-	public void setAffDppStrBenefi(String affDppStrBenefi) {
-		this.affDppStrBenefi = affDppStrBenefi;
+	public void setDppDateAttApprobDmp(Date dppDateAttApprobDmp) {
+		this.dppDateAttApprobDmp = dppDateAttApprobDmp;
 	}
 
-	@Column(name = "AFF_DPP_STR_CONDUC", length = 1000)
-	public String getAffDppStrConduc() {
-		return this.affDppStrConduc;
+	@Column(name = "DPP_DATE_ATT_APPRO_BAIL", length = 7)
+	public Date getDppDateAttApproBail() {
+		return this.dppDateAttApproBail;
 	}
 
-	public void setAffDppStrConduc(String affDppStrConduc) {
-		this.affDppStrConduc = affDppStrConduc;
+	public void setDppDateAttApproBail(Date dppDateAttApproBail) {
+		this.dppDateAttApproBail = dppDateAttApproBail;
 	}
 
-	@Column(name = "AFF_DPP_TYPE_PLAN", nullable = false, length = 3)
-	public String getAffDppTypePlan() {
-		return this.affDppTypePlan;
+	@Column(name = "DPP_PLP_ID", nullable = false, precision = 10, scale = 0)
+	public long getDppPlpId() {
+		return this.dppPlpId;
 	}
 
-	public void setAffDppTypePlan(String affDppTypePlan) {
-		this.affDppTypePlan = affDppTypePlan;
+	public void setDppPlpId(long dppPlpId) {
+		this.dppPlpId = dppPlpId;
 	}
 
-	@Column(name = "AFF_DPP_DATE_NEGOCIATION", length = 7)
-	public Date getAffDppDateNegociation() {
-		return this.affDppDateNegociation;
+	@Column(name = "DPP_STRUCTURE_BENEFI", length = 500)
+	public String getDppStructureBenefi() {
+		return this.dppStructureBenefi;
 	}
 
-	public void setAffDppDateNegociation(Date affDppDateNegociation) {
-		this.affDppDateNegociation = affDppDateNegociation;
+	public void setDppStructureBenefi(String dppStructureBenefi) {
+		this.dppStructureBenefi = dppStructureBenefi;
 	}
 
-	@Column(name = "AFF_DPP_DATE_ELAB_RAPPORT", length = 7)
-	public Date getAffDppDateElabRapport() {
-		return this.affDppDateElabRapport;
+	@Column(name = "DPP_STRUCTURE_CONDUC", length = 500)
+	public String getDppStructureConduc() {
+		return this.dppStructureConduc;
 	}
 
-	public void setAffDppDateElabRapport(Date affDppDateElabRapport) {
-		this.affDppDateElabRapport = affDppDateElabRapport;
+	public void setDppStructureConduc(String dppStructureConduc) {
+		this.dppStructureConduc = dppStructureConduc;
 	}
 
-	@Column(name = "AFF_DPP_DATE_SIGNAT_ATTRIB", length = 7)
-	public Date getAffDppDateSignatAttrib() {
-		return this.affDppDateSignatAttrib;
+	@Column(name = "DPP_TYPE_PLAN", nullable = false, length = 3)
+	public String getDppTypePlan() {
+		return this.dppTypePlan;
 	}
 
-	public void setAffDppDateSignatAttrib(Date affDppDateSignatAttrib) {
-		this.affDppDateSignatAttrib = affDppDateSignatAttrib;
+	public void setDppTypePlan(String dppTypePlan) {
+		this.dppTypePlan = dppTypePlan;
 	}
 
-	@Column(name = "AFF_DPP_DATE_SIGNAT_AC", length = 7)
-	public Date getAffDppDateSignatAc() {
-		return this.affDppDateSignatAc;
+	@Column(name = "DPP_DATE_NEGOCIATION", length = 7)
+	public Date getDppDateNegociation() {
+		return this.dppDateNegociation;
 	}
 
-	public void setAffDppDateSignatAc(Date affDppDateSignatAc) {
-		this.affDppDateSignatAc = affDppDateSignatAc;
+	public void setDppDateNegociation(Date dppDateNegociation) {
+		this.dppDateNegociation = dppDateNegociation;
 	}
 
-	@Column(name = "AFF_DPP_DATE_EXEC_DEBUT", length = 7)
-	public Date getAffDppDateExecDebut() {
-		return this.affDppDateExecDebut;
+	@Column(name = "DPP_DATE_ELAB_RAPPORT", length = 7)
+	public Date getDppDateElabRapport() {
+		return this.dppDateElabRapport;
 	}
 
-	public void setAffDppDateExecDebut(Date affDppDateExecDebut) {
-		this.affDppDateExecDebut = affDppDateExecDebut;
+	public void setDppDateElabRapport(Date dppDateElabRapport) {
+		this.dppDateElabRapport = dppDateElabRapport;
 	}
 
-	@Column(name = "AFF_DPP_DATE_EXEC_FIN", length = 7)
-	public Date getAffDppDateExecFin() {
-		return this.affDppDateExecFin;
+	@Column(name = "DPP_DATE_SIGNAT_ATTRIB", length = 7)
+	public Date getDppDateSignatAttrib() {
+		return this.dppDateSignatAttrib;
 	}
 
-	public void setAffDppDateExecFin(Date affDppDateExecFin) {
-		this.affDppDateExecFin = affDppDateExecFin;
+	public void setDppDateSignatAttrib(Date dppDateSignatAttrib) {
+		this.dppDateSignatAttrib = dppDateSignatAttrib;
 	}
 
-	@Column(name = "AFF_DPP_DATE_DAO_TRANS", length = 7)
-	public Date getAffDppDateDaoTrans() {
-		return this.affDppDateDaoTrans;
+	@Column(name = "DPP_DATE_SIGNAT_AC", length = 7)
+	public Date getDppDateSignatAc() {
+		return this.dppDateSignatAc;
 	}
 
-	public void setAffDppDateDaoTrans(Date affDppDateDaoTrans) {
-		this.affDppDateDaoTrans = affDppDateDaoTrans;
+	public void setDppDateSignatAc(Date dppDateSignatAc) {
+		this.dppDateSignatAc = dppDateSignatAc;
 	}
 
-	@Column(name = "AFF_DPP_DATE_DAO_APPROB_DMP", length = 7)
-	public Date getAffDppDateDaoApprobDmp() {
-		return this.affDppDateDaoApprobDmp;
+	@Column(name = "DPP_DATE_EXEC_DEBUT", length = 7)
+	public Date getDppDateExecDebut() {
+		return this.dppDateExecDebut;
 	}
 
-	public void setAffDppDateDaoApprobDmp(Date affDppDateDaoApprobDmp) {
-		this.affDppDateDaoApprobDmp = affDppDateDaoApprobDmp;
+	public void setDppDateExecDebut(Date dppDateExecDebut) {
+		this.dppDateExecDebut = dppDateExecDebut;
 	}
 
-	@Column(name = "AFF_DPP_DATE_DAO_APPROB_BAIL", length = 7)
-	public Date getAffDppDateDaoApprobBail() {
-		return this.affDppDateDaoApprobBail;
+	@Column(name = "DPP_DATE_EXEC_FIN", length = 7)
+	public Date getDppDateExecFin() {
+		return this.dppDateExecFin;
 	}
 
-	public void setAffDppDateDaoApprobBail(Date affDppDateDaoApprobBail) {
-		this.affDppDateDaoApprobBail = affDppDateDaoApprobBail;
+	public void setDppDateExecFin(Date dppDateExecFin) {
+		this.dppDateExecFin = dppDateExecFin;
 	}
 
-	@Column(name = "AFF_DPP_INV_ENTRE", length = 7)
-	public Date getAffDppInvEntre() {
-		return this.affDppInvEntre;
+	@Column(name = "DPP_DATE_DAO_TRANS", length = 7)
+	public Date getDppDateDaoTrans() {
+		return this.dppDateDaoTrans;
 	}
 
-	public void setAffDppInvEntre(Date affDppInvEntre) {
-		this.affDppInvEntre = affDppInvEntre;
+	public void setDppDateDaoTrans(Date dppDateDaoTrans) {
+		this.dppDateDaoTrans = dppDateDaoTrans;
 	}
 
-	@Column(name = "AFF_DPP_APPROB_ANO", length = 7)
-	public Date getAffDppApprobAno() {
-		return this.affDppApprobAno;
+	@Column(name = "DPP_DATE_DAO_APPROB_DMP", length = 7)
+	public Date getDppDateDaoApprobDmp() {
+		return this.dppDateDaoApprobDmp;
 	}
 
-	public void setAffDppApprobAno(Date affDppApprobAno) {
-		this.affDppApprobAno = affDppApprobAno;
+	public void setDppDateDaoApprobDmp(Date dppDateDaoApprobDmp) {
+		this.dppDateDaoApprobDmp = dppDateDaoApprobDmp;
 	}
 
-	@Column(name = "AFF_DPP_TYPE_FINANCE", length = 20)
-	public String getAffDppTypeFinance() {
-		return this.affDppTypeFinance;
+	@Column(name = "DPP_DATE_DAO_APPROB_BAIL", length = 7)
+	public Date getDppDateDaoApprobBail() {
+		return this.dppDateDaoApprobBail;
 	}
 
-	public void setAffDppTypeFinance(String affDppTypeFinance) {
-		this.affDppTypeFinance = affDppTypeFinance;
+	public void setDppDateDaoApprobBail(Date dppDateDaoApprobBail) {
+		this.dppDateDaoApprobBail = dppDateDaoApprobBail;
 	}
 
-	@Column(name = "AFF_DPP_ACTEUR_SAISIE", length = 12)
-	public String getAffDppActeurSaisie() {
-		return this.affDppActeurSaisie;
+	@Column(name = "DPP_INV_ENTRE", length = 7)
+	public Date getDppInvEntre() {
+		return this.dppInvEntre;
 	}
 
-	public void setAffDppActeurSaisie(String affDppActeurSaisie) {
-		this.affDppActeurSaisie = affDppActeurSaisie;
+	public void setDppInvEntre(Date dppInvEntre) {
+		this.dppInvEntre = dppInvEntre;
 	}
 
-	@Column(name = "AFF_DPP_STA_CODE", nullable = false, length = 3)
-	public String getAffDppStaCode() {
-		return this.affDppStaCode;
+	@Column(name = "DPP_APPROB_ANO", length = 7)
+	public Date getDppApprobAno() {
+		return this.dppApprobAno;
 	}
 
-	public void setAffDppStaCode(String affDppStaCode) {
-		this.affDppStaCode = affDppStaCode;
+	public void setDppApprobAno(Date dppApprobAno) {
+		this.dppApprobAno = dppApprobAno;
+	}
+
+	@Column(name = "DPP_TYPE_FINANCE", length = 20)
+	public String getDppTypeFinance() {
+		return this.dppTypeFinance;
+	}
+
+	public void setDppTypeFinance(String dppTypeFinance) {
+		this.dppTypeFinance = dppTypeFinance;
+	}
+
+	@Column(name = "DPP_ACTEUR_SAISIE", length = 12)
+	public String getDppActeurSaisie() {
+		return this.dppActeurSaisie;
+	}
+
+	public void setDppActeurSaisie(String dppActeurSaisie) {
+		this.dppActeurSaisie = dppActeurSaisie;
+	}
+
+	@Column(name = "DPP_STA_CODE", nullable = false, length = 3)
+	public String getDppStaCode() {
+		return this.dppStaCode;
+	}
+
+	public void setDppStaCode(String dppStaCode) {
+		this.dppStaCode = dppStaCode;
 	}
 
 	@Column(name = "PLP_GES_CODE", nullable = false, precision = 4, scale = 0)
@@ -458,22 +492,22 @@ public class VPpmEtatId implements java.io.Serializable {
 
 		return ((this.getVId() == castOther.getVId())
 				|| (this.getVId() != null && castOther.getVId() != null && this.getVId().equals(castOther.getVId())))
-				&& (this.getAffId() == castOther.getAffId())
-				&& ((this.getAffDppId() == castOther.getAffDppId()) || (this.getAffDppId() != null
-						&& castOther.getAffDppId() != null && this.getAffDppId().equals(castOther.getAffDppId())))
+				&& (this.getDppId() == castOther.getDppId())
 				&& ((this.getFonLibelle() == castOther.getFonLibelle()) || (this.getFonLibelle() != null
 						&& castOther.getFonLibelle() != null && this.getFonLibelle().equals(castOther.getFonLibelle())))
-				&& ((this.getAffDppObjet() == castOther.getAffDppObjet())
-						|| (this.getAffDppObjet() != null && castOther.getAffDppObjet() != null
-								&& this.getAffDppObjet().equals(castOther.getAffDppObjet())))
-				&& ((this.getAffDppSourceFin() == castOther.getAffDppSourceFin())
-						|| (this.getAffDppSourceFin() != null && castOther.getAffDppSourceFin() != null
-								&& this.getAffDppSourceFin().equals(castOther.getAffDppSourceFin())))
+				&& ((this.getDppObjet() == castOther.getDppObjet()) || (this.getDppObjet() != null
+						&& castOther.getDppObjet() != null && this.getDppObjet().equals(castOther.getDppObjet())))
+				&& ((this.getDppSourceFin() == castOther.getDppSourceFin())
+						|| (this.getDppSourceFin() != null && castOther.getDppSourceFin() != null
+								&& this.getDppSourceFin().equals(castOther.getDppSourceFin())))
 				&& ((this.getLbgCode() == castOther.getLbgCode()) || (this.getLbgCode() != null
 						&& castOther.getLbgCode() != null && this.getLbgCode().equals(castOther.getLbgCode())))
 				&& ((this.getLbgImputation() == castOther.getLbgImputation())
 						|| (this.getLbgImputation() != null && castOther.getLbgImputation() != null
 								&& this.getLbgImputation().equals(castOther.getLbgImputation())))
+				&& ((this.getLbgFonCodeAc() == castOther.getLbgFonCodeAc())
+						|| (this.getLbgFonCodeAc() != null && castOther.getLbgFonCodeAc() != null
+								&& this.getLbgFonCodeAc().equals(castOther.getLbgFonCodeAc())))
 				&& ((this.getNatCode() == castOther.getNatCode()) || (this.getNatCode() != null
 						&& castOther.getNatCode() != null && this.getNatCode().equals(castOther.getNatCode())))
 				&& ((this.getNatLibelle() == castOther.getNatLibelle()) || (this.getNatLibelle() != null
@@ -484,77 +518,84 @@ public class VPpmEtatId implements java.io.Serializable {
 				&& ((this.getMopLibelleLong() == castOther.getMopLibelleLong())
 						|| (this.getMopLibelleLong() != null && castOther.getMopLibelleLong() != null
 								&& this.getMopLibelleLong().equals(castOther.getMopLibelleLong())))
-				&& ((this.getAffDppDateAvisAoPublicat() == castOther.getAffDppDateAvisAoPublicat())
-						|| (this.getAffDppDateAvisAoPublicat() != null
-								&& castOther.getAffDppDateAvisAoPublicat() != null
-								&& this.getAffDppDateAvisAoPublicat().equals(castOther.getAffDppDateAvisAoPublicat())))
-				&& ((this.getAffDppDateOuvertOt() == castOther.getAffDppDateOuvertOt())
-						|| (this.getAffDppDateOuvertOt() != null && castOther.getAffDppDateOuvertOt() != null
-								&& this.getAffDppDateOuvertOt().equals(castOther.getAffDppDateOuvertOt())))
-				&& ((this.getAffDppDateOuvertOf() == castOther.getAffDppDateOuvertOf())
-						|| (this.getAffDppDateOuvertOf() != null && castOther.getAffDppDateOuvertOf() != null
-								&& this.getAffDppDateOuvertOf().equals(castOther.getAffDppDateOuvertOf())))
-				&& ((this.getAffDppDateJugementOffre() == castOther.getAffDppDateJugementOffre())
-						|| (this.getAffDppDateJugementOffre() != null && castOther.getAffDppDateJugementOffre() != null
-								&& this.getAffDppDateJugementOffre().equals(castOther.getAffDppDateJugementOffre())))
-				&& ((this.getAffDppDateAttApprobDmp() == castOther.getAffDppDateAttApprobDmp())
-						|| (this.getAffDppDateAttApprobDmp() != null && castOther.getAffDppDateAttApprobDmp() != null
-								&& this.getAffDppDateAttApprobDmp().equals(castOther.getAffDppDateAttApprobDmp())))
-				&& ((this.getAffDppDateAttApproBail() == castOther.getAffDppDateAttApproBail())
-						|| (this.getAffDppDateAttApproBail() != null && castOther.getAffDppDateAttApproBail() != null
-								&& this.getAffDppDateAttApproBail().equals(castOther.getAffDppDateAttApproBail())))
-				&& (this.getAffDppPlpId() == castOther.getAffDppPlpId())
-				&& ((this.getAffDppStrBenefi() == castOther.getAffDppStrBenefi())
-						|| (this.getAffDppStrBenefi() != null && castOther.getAffDppStrBenefi() != null
-								&& this.getAffDppStrBenefi().equals(castOther.getAffDppStrBenefi())))
-				&& ((this.getAffDppStrConduc() == castOther.getAffDppStrConduc())
-						|| (this.getAffDppStrConduc() != null && castOther.getAffDppStrConduc() != null
-								&& this.getAffDppStrConduc().equals(castOther.getAffDppStrConduc())))
-				&& ((this.getAffDppTypePlan() == castOther.getAffDppTypePlan())
-						|| (this.getAffDppTypePlan() != null && castOther.getAffDppTypePlan() != null
-								&& this.getAffDppTypePlan().equals(castOther.getAffDppTypePlan())))
-				&& ((this.getAffDppDateNegociation() == castOther.getAffDppDateNegociation())
-						|| (this.getAffDppDateNegociation() != null && castOther.getAffDppDateNegociation() != null
-								&& this.getAffDppDateNegociation().equals(castOther.getAffDppDateNegociation())))
-				&& ((this.getAffDppDateElabRapport() == castOther.getAffDppDateElabRapport())
-						|| (this.getAffDppDateElabRapport() != null && castOther.getAffDppDateElabRapport() != null
-								&& this.getAffDppDateElabRapport().equals(castOther.getAffDppDateElabRapport())))
-				&& ((this.getAffDppDateSignatAttrib() == castOther.getAffDppDateSignatAttrib())
-						|| (this.getAffDppDateSignatAttrib() != null && castOther.getAffDppDateSignatAttrib() != null
-								&& this.getAffDppDateSignatAttrib().equals(castOther.getAffDppDateSignatAttrib())))
-				&& ((this.getAffDppDateSignatAc() == castOther.getAffDppDateSignatAc())
-						|| (this.getAffDppDateSignatAc() != null && castOther.getAffDppDateSignatAc() != null
-								&& this.getAffDppDateSignatAc().equals(castOther.getAffDppDateSignatAc())))
-				&& ((this.getAffDppDateExecDebut() == castOther.getAffDppDateExecDebut())
-						|| (this.getAffDppDateExecDebut() != null && castOther.getAffDppDateExecDebut() != null
-								&& this.getAffDppDateExecDebut().equals(castOther.getAffDppDateExecDebut())))
-				&& ((this.getAffDppDateExecFin() == castOther.getAffDppDateExecFin())
-						|| (this.getAffDppDateExecFin() != null && castOther.getAffDppDateExecFin() != null
-								&& this.getAffDppDateExecFin().equals(castOther.getAffDppDateExecFin())))
-				&& ((this.getAffDppDateDaoTrans() == castOther.getAffDppDateDaoTrans())
-						|| (this.getAffDppDateDaoTrans() != null && castOther.getAffDppDateDaoTrans() != null
-								&& this.getAffDppDateDaoTrans().equals(castOther.getAffDppDateDaoTrans())))
-				&& ((this.getAffDppDateDaoApprobDmp() == castOther.getAffDppDateDaoApprobDmp())
-						|| (this.getAffDppDateDaoApprobDmp() != null && castOther.getAffDppDateDaoApprobDmp() != null
-								&& this.getAffDppDateDaoApprobDmp().equals(castOther.getAffDppDateDaoApprobDmp())))
-				&& ((this.getAffDppDateDaoApprobBail() == castOther.getAffDppDateDaoApprobBail())
-						|| (this.getAffDppDateDaoApprobBail() != null && castOther.getAffDppDateDaoApprobBail() != null
-								&& this.getAffDppDateDaoApprobBail().equals(castOther.getAffDppDateDaoApprobBail())))
-				&& ((this.getAffDppInvEntre() == castOther.getAffDppInvEntre())
-						|| (this.getAffDppInvEntre() != null && castOther.getAffDppInvEntre() != null
-								&& this.getAffDppInvEntre().equals(castOther.getAffDppInvEntre())))
-				&& ((this.getAffDppApprobAno() == castOther.getAffDppApprobAno())
-						|| (this.getAffDppApprobAno() != null && castOther.getAffDppApprobAno() != null
-								&& this.getAffDppApprobAno().equals(castOther.getAffDppApprobAno())))
-				&& ((this.getAffDppTypeFinance() == castOther.getAffDppTypeFinance())
-						|| (this.getAffDppTypeFinance() != null && castOther.getAffDppTypeFinance() != null
-								&& this.getAffDppTypeFinance().equals(castOther.getAffDppTypeFinance())))
-				&& ((this.getAffDppActeurSaisie() == castOther.getAffDppActeurSaisie())
-						|| (this.getAffDppActeurSaisie() != null && castOther.getAffDppActeurSaisie() != null
-								&& this.getAffDppActeurSaisie().equals(castOther.getAffDppActeurSaisie())))
-				&& ((this.getAffDppStaCode() == castOther.getAffDppStaCode())
-						|| (this.getAffDppStaCode() != null && castOther.getAffDppStaCode() != null
-								&& this.getAffDppStaCode().equals(castOther.getAffDppStaCode())))
+				&& ((this.getDppDateAvisAoPublication() == castOther.getDppDateAvisAoPublication())
+						|| (this.getDppDateAvisAoPublication() != null
+								&& castOther.getDppDateAvisAoPublication() != null
+								&& this.getDppDateAvisAoPublication().equals(castOther.getDppDateAvisAoPublication())))
+				&& ((this.getDppStatutAno() == castOther.getDppStatutAno())
+						|| (this.getDppStatutAno() != null && castOther.getDppStatutAno() != null
+								&& this.getDppStatutAno().equals(castOther.getDppStatutAno())))
+				&& ((this.getDppNatInt() == castOther.getDppNatInt()) || (this.getDppNatInt() != null
+						&& castOther.getDppNatInt() != null && this.getDppNatInt().equals(castOther.getDppNatInt())))
+				&& ((this.getDppTypeStrConduc() == castOther.getDppTypeStrConduc())
+						|| (this.getDppTypeStrConduc() != null && castOther.getDppTypeStrConduc() != null
+								&& this.getDppTypeStrConduc().equals(castOther.getDppTypeStrConduc())))
+				&& ((this.getDppDateOuvertOt() == castOther.getDppDateOuvertOt())
+						|| (this.getDppDateOuvertOt() != null && castOther.getDppDateOuvertOt() != null
+								&& this.getDppDateOuvertOt().equals(castOther.getDppDateOuvertOt())))
+				&& ((this.getDppDateOuvertOf() == castOther.getDppDateOuvertOf())
+						|| (this.getDppDateOuvertOf() != null && castOther.getDppDateOuvertOf() != null
+								&& this.getDppDateOuvertOf().equals(castOther.getDppDateOuvertOf())))
+				&& ((this.getDppDateJugementOffre() == castOther.getDppDateJugementOffre())
+						|| (this.getDppDateJugementOffre() != null && castOther.getDppDateJugementOffre() != null
+								&& this.getDppDateJugementOffre().equals(castOther.getDppDateJugementOffre())))
+				&& ((this.getDppDateAttApprobDmp() == castOther.getDppDateAttApprobDmp())
+						|| (this.getDppDateAttApprobDmp() != null && castOther.getDppDateAttApprobDmp() != null
+								&& this.getDppDateAttApprobDmp().equals(castOther.getDppDateAttApprobDmp())))
+				&& ((this.getDppDateAttApproBail() == castOther.getDppDateAttApproBail())
+						|| (this.getDppDateAttApproBail() != null && castOther.getDppDateAttApproBail() != null
+								&& this.getDppDateAttApproBail().equals(castOther.getDppDateAttApproBail())))
+				&& (this.getDppPlpId() == castOther.getDppPlpId())
+				&& ((this.getDppStructureBenefi() == castOther.getDppStructureBenefi())
+						|| (this.getDppStructureBenefi() != null && castOther.getDppStructureBenefi() != null
+								&& this.getDppStructureBenefi().equals(castOther.getDppStructureBenefi())))
+				&& ((this.getDppStructureConduc() == castOther.getDppStructureConduc())
+						|| (this.getDppStructureConduc() != null && castOther.getDppStructureConduc() != null
+								&& this.getDppStructureConduc().equals(castOther.getDppStructureConduc())))
+				&& ((this.getDppTypePlan() == castOther.getDppTypePlan())
+						|| (this.getDppTypePlan() != null && castOther.getDppTypePlan() != null
+								&& this.getDppTypePlan().equals(castOther.getDppTypePlan())))
+				&& ((this.getDppDateNegociation() == castOther.getDppDateNegociation())
+						|| (this.getDppDateNegociation() != null && castOther.getDppDateNegociation() != null
+								&& this.getDppDateNegociation().equals(castOther.getDppDateNegociation())))
+				&& ((this.getDppDateElabRapport() == castOther.getDppDateElabRapport())
+						|| (this.getDppDateElabRapport() != null && castOther.getDppDateElabRapport() != null
+								&& this.getDppDateElabRapport().equals(castOther.getDppDateElabRapport())))
+				&& ((this.getDppDateSignatAttrib() == castOther.getDppDateSignatAttrib())
+						|| (this.getDppDateSignatAttrib() != null && castOther.getDppDateSignatAttrib() != null
+								&& this.getDppDateSignatAttrib().equals(castOther.getDppDateSignatAttrib())))
+				&& ((this.getDppDateSignatAc() == castOther.getDppDateSignatAc())
+						|| (this.getDppDateSignatAc() != null && castOther.getDppDateSignatAc() != null
+								&& this.getDppDateSignatAc().equals(castOther.getDppDateSignatAc())))
+				&& ((this.getDppDateExecDebut() == castOther.getDppDateExecDebut())
+						|| (this.getDppDateExecDebut() != null && castOther.getDppDateExecDebut() != null
+								&& this.getDppDateExecDebut().equals(castOther.getDppDateExecDebut())))
+				&& ((this.getDppDateExecFin() == castOther.getDppDateExecFin())
+						|| (this.getDppDateExecFin() != null && castOther.getDppDateExecFin() != null
+								&& this.getDppDateExecFin().equals(castOther.getDppDateExecFin())))
+				&& ((this.getDppDateDaoTrans() == castOther.getDppDateDaoTrans())
+						|| (this.getDppDateDaoTrans() != null && castOther.getDppDateDaoTrans() != null
+								&& this.getDppDateDaoTrans().equals(castOther.getDppDateDaoTrans())))
+				&& ((this.getDppDateDaoApprobDmp() == castOther.getDppDateDaoApprobDmp())
+						|| (this.getDppDateDaoApprobDmp() != null && castOther.getDppDateDaoApprobDmp() != null
+								&& this.getDppDateDaoApprobDmp().equals(castOther.getDppDateDaoApprobDmp())))
+				&& ((this.getDppDateDaoApprobBail() == castOther.getDppDateDaoApprobBail())
+						|| (this.getDppDateDaoApprobBail() != null && castOther.getDppDateDaoApprobBail() != null
+								&& this.getDppDateDaoApprobBail().equals(castOther.getDppDateDaoApprobBail())))
+				&& ((this.getDppInvEntre() == castOther.getDppInvEntre())
+						|| (this.getDppInvEntre() != null && castOther.getDppInvEntre() != null
+								&& this.getDppInvEntre().equals(castOther.getDppInvEntre())))
+				&& ((this.getDppApprobAno() == castOther.getDppApprobAno())
+						|| (this.getDppApprobAno() != null && castOther.getDppApprobAno() != null
+								&& this.getDppApprobAno().equals(castOther.getDppApprobAno())))
+				&& ((this.getDppTypeFinance() == castOther.getDppTypeFinance())
+						|| (this.getDppTypeFinance() != null && castOther.getDppTypeFinance() != null
+								&& this.getDppTypeFinance().equals(castOther.getDppTypeFinance())))
+				&& ((this.getDppActeurSaisie() == castOther.getDppActeurSaisie())
+						|| (this.getDppActeurSaisie() != null && castOther.getDppActeurSaisie() != null
+								&& this.getDppActeurSaisie().equals(castOther.getDppActeurSaisie())))
+				&& ((this.getDppStaCode() == castOther.getDppStaCode()) || (this.getDppStaCode() != null
+						&& castOther.getDppStaCode() != null && this.getDppStaCode().equals(castOther.getDppStaCode())))
 				&& (this.getPlpGesCode() == castOther.getPlpGesCode());
 	}
 
@@ -562,44 +603,45 @@ public class VPpmEtatId implements java.io.Serializable {
 		int result = 17;
 
 		result = 37 * result + (getVId() == null ? 0 : this.getVId().hashCode());
-		result = 37 * result + (int) this.getAffId();
-		result = 37 * result + (getAffDppId() == null ? 0 : this.getAffDppId().hashCode());
+		result = 37 * result + (int) this.getDppId();
 		result = 37 * result + (getFonLibelle() == null ? 0 : this.getFonLibelle().hashCode());
-		result = 37 * result + (getAffDppObjet() == null ? 0 : this.getAffDppObjet().hashCode());
-		result = 37 * result + (getAffDppSourceFin() == null ? 0 : this.getAffDppSourceFin().hashCode());
+		result = 37 * result + (getDppObjet() == null ? 0 : this.getDppObjet().hashCode());
+		result = 37 * result + (getDppSourceFin() == null ? 0 : this.getDppSourceFin().hashCode());
 		result = 37 * result + (getLbgCode() == null ? 0 : this.getLbgCode().hashCode());
 		result = 37 * result + (getLbgImputation() == null ? 0 : this.getLbgImputation().hashCode());
+		result = 37 * result + (getLbgFonCodeAc() == null ? 0 : this.getLbgFonCodeAc().hashCode());
 		result = 37 * result + (getNatCode() == null ? 0 : this.getNatCode().hashCode());
 		result = 37 * result + (getNatLibelle() == null ? 0 : this.getNatLibelle().hashCode());
 		result = 37 * result + (getTymLibelleCourt() == null ? 0 : this.getTymLibelleCourt().hashCode());
 		result = 37 * result + (getMopLibelleLong() == null ? 0 : this.getMopLibelleLong().hashCode());
 		result = 37 * result
-				+ (getAffDppDateAvisAoPublicat() == null ? 0 : this.getAffDppDateAvisAoPublicat().hashCode());
-		result = 37 * result + (getAffDppDateOuvertOt() == null ? 0 : this.getAffDppDateOuvertOt().hashCode());
-		result = 37 * result + (getAffDppDateOuvertOf() == null ? 0 : this.getAffDppDateOuvertOf().hashCode());
-		result = 37 * result
-				+ (getAffDppDateJugementOffre() == null ? 0 : this.getAffDppDateJugementOffre().hashCode());
-		result = 37 * result + (getAffDppDateAttApprobDmp() == null ? 0 : this.getAffDppDateAttApprobDmp().hashCode());
-		result = 37 * result + (getAffDppDateAttApproBail() == null ? 0 : this.getAffDppDateAttApproBail().hashCode());
-		result = 37 * result + (int) this.getAffDppPlpId();
-		result = 37 * result + (getAffDppStrBenefi() == null ? 0 : this.getAffDppStrBenefi().hashCode());
-		result = 37 * result + (getAffDppStrConduc() == null ? 0 : this.getAffDppStrConduc().hashCode());
-		result = 37 * result + (getAffDppTypePlan() == null ? 0 : this.getAffDppTypePlan().hashCode());
-		result = 37 * result + (getAffDppDateNegociation() == null ? 0 : this.getAffDppDateNegociation().hashCode());
-		result = 37 * result + (getAffDppDateElabRapport() == null ? 0 : this.getAffDppDateElabRapport().hashCode());
-		result = 37 * result + (getAffDppDateSignatAttrib() == null ? 0 : this.getAffDppDateSignatAttrib().hashCode());
-		result = 37 * result + (getAffDppDateSignatAc() == null ? 0 : this.getAffDppDateSignatAc().hashCode());
-		result = 37 * result + (getAffDppDateExecDebut() == null ? 0 : this.getAffDppDateExecDebut().hashCode());
-		result = 37 * result + (getAffDppDateExecFin() == null ? 0 : this.getAffDppDateExecFin().hashCode());
-		result = 37 * result + (getAffDppDateDaoTrans() == null ? 0 : this.getAffDppDateDaoTrans().hashCode());
-		result = 37 * result + (getAffDppDateDaoApprobDmp() == null ? 0 : this.getAffDppDateDaoApprobDmp().hashCode());
-		result = 37 * result
-				+ (getAffDppDateDaoApprobBail() == null ? 0 : this.getAffDppDateDaoApprobBail().hashCode());
-		result = 37 * result + (getAffDppInvEntre() == null ? 0 : this.getAffDppInvEntre().hashCode());
-		result = 37 * result + (getAffDppApprobAno() == null ? 0 : this.getAffDppApprobAno().hashCode());
-		result = 37 * result + (getAffDppTypeFinance() == null ? 0 : this.getAffDppTypeFinance().hashCode());
-		result = 37 * result + (getAffDppActeurSaisie() == null ? 0 : this.getAffDppActeurSaisie().hashCode());
-		result = 37 * result + (getAffDppStaCode() == null ? 0 : this.getAffDppStaCode().hashCode());
+				+ (getDppDateAvisAoPublication() == null ? 0 : this.getDppDateAvisAoPublication().hashCode());
+		result = 37 * result + (getDppStatutAno() == null ? 0 : this.getDppStatutAno().hashCode());
+		result = 37 * result + (getDppNatInt() == null ? 0 : this.getDppNatInt().hashCode());
+		result = 37 * result + (getDppTypeStrConduc() == null ? 0 : this.getDppTypeStrConduc().hashCode());
+		result = 37 * result + (getDppDateOuvertOt() == null ? 0 : this.getDppDateOuvertOt().hashCode());
+		result = 37 * result + (getDppDateOuvertOf() == null ? 0 : this.getDppDateOuvertOf().hashCode());
+		result = 37 * result + (getDppDateJugementOffre() == null ? 0 : this.getDppDateJugementOffre().hashCode());
+		result = 37 * result + (getDppDateAttApprobDmp() == null ? 0 : this.getDppDateAttApprobDmp().hashCode());
+		result = 37 * result + (getDppDateAttApproBail() == null ? 0 : this.getDppDateAttApproBail().hashCode());
+		result = 37 * result + (int) this.getDppPlpId();
+		result = 37 * result + (getDppStructureBenefi() == null ? 0 : this.getDppStructureBenefi().hashCode());
+		result = 37 * result + (getDppStructureConduc() == null ? 0 : this.getDppStructureConduc().hashCode());
+		result = 37 * result + (getDppTypePlan() == null ? 0 : this.getDppTypePlan().hashCode());
+		result = 37 * result + (getDppDateNegociation() == null ? 0 : this.getDppDateNegociation().hashCode());
+		result = 37 * result + (getDppDateElabRapport() == null ? 0 : this.getDppDateElabRapport().hashCode());
+		result = 37 * result + (getDppDateSignatAttrib() == null ? 0 : this.getDppDateSignatAttrib().hashCode());
+		result = 37 * result + (getDppDateSignatAc() == null ? 0 : this.getDppDateSignatAc().hashCode());
+		result = 37 * result + (getDppDateExecDebut() == null ? 0 : this.getDppDateExecDebut().hashCode());
+		result = 37 * result + (getDppDateExecFin() == null ? 0 : this.getDppDateExecFin().hashCode());
+		result = 37 * result + (getDppDateDaoTrans() == null ? 0 : this.getDppDateDaoTrans().hashCode());
+		result = 37 * result + (getDppDateDaoApprobDmp() == null ? 0 : this.getDppDateDaoApprobDmp().hashCode());
+		result = 37 * result + (getDppDateDaoApprobBail() == null ? 0 : this.getDppDateDaoApprobBail().hashCode());
+		result = 37 * result + (getDppInvEntre() == null ? 0 : this.getDppInvEntre().hashCode());
+		result = 37 * result + (getDppApprobAno() == null ? 0 : this.getDppApprobAno().hashCode());
+		result = 37 * result + (getDppTypeFinance() == null ? 0 : this.getDppTypeFinance().hashCode());
+		result = 37 * result + (getDppActeurSaisie() == null ? 0 : this.getDppActeurSaisie().hashCode());
+		result = 37 * result + (getDppStaCode() == null ? 0 : this.getDppStaCode().hashCode());
 		result = 37 * result + this.getPlpGesCode();
 		return result;
 	}

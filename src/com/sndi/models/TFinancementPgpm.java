@@ -1,13 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.math.BigDecimal;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,137 +15,34 @@ import javax.persistence.Table;
 @Table(name = "T_FINANCEMENT_PGPM", schema = "EMAP")
 public class TFinancementPgpm implements java.io.Serializable {
 
-	private long fipId;
-	private TBailleur TBailleur;
-	private TDetailPlanGeneral TDetailPlanGeneral;
-	private TDevise TDevise;
-	private TSourceFinancement TSourceFinancement;
-	private BigDecimal fipMontantCfa;
-	private BigDecimal fipMontantDevise;
-	private String fipCommentaire;
-	private String fipTypeFinance;
-	private BigDecimal fipTresor;
+	private TFinancementPgpmId id;
 
 	public TFinancementPgpm() {
 	}
 
-	public TFinancementPgpm(long fipId, TDetailPlanGeneral TDetailPlanGeneral, TDevise TDevise,
-			TSourceFinancement TSourceFinancement) {
-		this.fipId = fipId;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-		this.TDevise = TDevise;
-		this.TSourceFinancement = TSourceFinancement;
+	public TFinancementPgpm(TFinancementPgpmId id) {
+		this.id = id;
 	}
 
-	public TFinancementPgpm(long fipId, TBailleur TBailleur, TDetailPlanGeneral TDetailPlanGeneral, TDevise TDevise,
-			TSourceFinancement TSourceFinancement, BigDecimal fipMontantCfa, BigDecimal fipMontantDevise,
-			String fipCommentaire, String fipTypeFinance, BigDecimal fipTresor) {
-		this.fipId = fipId;
-		this.TBailleur = TBailleur;
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-		this.TDevise = TDevise;
-		this.TSourceFinancement = TSourceFinancement;
-		this.fipMontantCfa = fipMontantCfa;
-		this.fipMontantDevise = fipMontantDevise;
-		this.fipCommentaire = fipCommentaire;
-		this.fipTypeFinance = fipTypeFinance;
-		this.fipTresor = fipTresor;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "fipId", column = @Column(name = "FIP_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "fipDevCode", column = @Column(name = "FIP_DEV_CODE", nullable = false, length = 8)),
+			@AttributeOverride(name = "fipBaiCode", column = @Column(name = "FIP_BAI_CODE", length = 20)),
+			@AttributeOverride(name = "fipSouCode", column = @Column(name = "FIP_SOU_CODE", nullable = false, length = 5)),
+			@AttributeOverride(name = "fipGpgId", column = @Column(name = "FIP_GPG_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "fipMontantCfa", column = @Column(name = "FIP_MONTANT_CFA", precision = 15)),
+			@AttributeOverride(name = "fipMontantDevise", column = @Column(name = "FIP_MONTANT_DEVISE", precision = 15)),
+			@AttributeOverride(name = "fipCommentaire", column = @Column(name = "FIP_COMMENTAIRE", length = 500)),
+			@AttributeOverride(name = "fipTypeFinance", column = @Column(name = "FIP_TYPE_FINANCE", length = 20)),
+			@AttributeOverride(name = "fipTresor", column = @Column(name = "FIP_TRESOR", precision = 22, scale = 0)) })
+	public TFinancementPgpmId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "FIP_ID", unique = true, nullable = false, precision = 10, scale = 0)
-	public long getFipId() {
-		return this.fipId;
-	}
-
-	public void setFipId(long fipId) {
-		this.fipId = fipId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_BAI_CODE")
-	public TBailleur getTBailleur() {
-		return this.TBailleur;
-	}
-
-	public void setTBailleur(TBailleur TBailleur) {
-		this.TBailleur = TBailleur;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_GPG_ID", nullable = false)
-	public TDetailPlanGeneral getTDetailPlanGeneral() {
-		return this.TDetailPlanGeneral;
-	}
-
-	public void setTDetailPlanGeneral(TDetailPlanGeneral TDetailPlanGeneral) {
-		this.TDetailPlanGeneral = TDetailPlanGeneral;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_DEV_CODE", nullable = false)
-	public TDevise getTDevise() {
-		return this.TDevise;
-	}
-
-	public void setTDevise(TDevise TDevise) {
-		this.TDevise = TDevise;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FIP_SOU_CODE", nullable = false)
-	public TSourceFinancement getTSourceFinancement() {
-		return this.TSourceFinancement;
-	}
-
-	public void setTSourceFinancement(TSourceFinancement TSourceFinancement) {
-		this.TSourceFinancement = TSourceFinancement;
-	}
-
-	@Column(name = "FIP_MONTANT_CFA", precision = 15)
-	public BigDecimal getFipMontantCfa() {
-		return this.fipMontantCfa;
-	}
-
-	public void setFipMontantCfa(BigDecimal fipMontantCfa) {
-		this.fipMontantCfa = fipMontantCfa;
-	}
-
-	@Column(name = "FIP_MONTANT_DEVISE", precision = 15)
-	public BigDecimal getFipMontantDevise() {
-		return this.fipMontantDevise;
-	}
-
-	public void setFipMontantDevise(BigDecimal fipMontantDevise) {
-		this.fipMontantDevise = fipMontantDevise;
-	}
-
-	@Column(name = "FIP_COMMENTAIRE", length = 500)
-	public String getFipCommentaire() {
-		return this.fipCommentaire;
-	}
-
-	public void setFipCommentaire(String fipCommentaire) {
-		this.fipCommentaire = fipCommentaire;
-	}
-
-	@Column(name = "FIP_TYPE_FINANCE", length = 20)
-	public String getFipTypeFinance() {
-		return this.fipTypeFinance;
-	}
-
-	public void setFipTypeFinance(String fipTypeFinance) {
-		this.fipTypeFinance = fipTypeFinance;
-	}
-
-	@Column(name = "FIP_TRESOR", precision = 22, scale = 0)
-	public BigDecimal getFipTresor() {
-		return this.fipTresor;
-	}
-
-	public void setFipTresor(BigDecimal fipTresor) {
-		this.fipTresor = fipTresor;
+	public void setId(TFinancementPgpmId id) {
+		this.id = id;
 	}
 
 }

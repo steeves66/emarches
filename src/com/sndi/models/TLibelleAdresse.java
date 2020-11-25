@@ -1,13 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,50 +15,26 @@ import javax.persistence.Table;
 @Table(name = "T_LIBELLE_ADRESSE", schema = "EMAP")
 public class TLibelleAdresse implements java.io.Serializable {
 
-	private short liaNum;
-	private String liaLibelle;
-	private Set<TDetailAdresseAvis> TDetailAdresseAvises = new HashSet<TDetailAdresseAvis>(0);
+	private TLibelleAdresseId id;
 
 	public TLibelleAdresse() {
 	}
 
-	public TLibelleAdresse(short liaNum) {
-		this.liaNum = liaNum;
+	public TLibelleAdresse(TLibelleAdresseId id) {
+		this.id = id;
 	}
 
-	public TLibelleAdresse(short liaNum, String liaLibelle, Set<TDetailAdresseAvis> TDetailAdresseAvises) {
-		this.liaNum = liaNum;
-		this.liaLibelle = liaLibelle;
-		this.TDetailAdresseAvises = TDetailAdresseAvises;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "liaNum", column = @Column(name = "LIA_NUM", nullable = false, precision = 3, scale = 0)),
+			@AttributeOverride(name = "liaLibelle", column = @Column(name = "LIA_LIBELLE", length = 500)) })
+	public TLibelleAdresseId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "LIA_NUM", unique = true, nullable = false, precision = 3, scale = 0)
-	public short getLiaNum() {
-		return this.liaNum;
-	}
-
-	public void setLiaNum(short liaNum) {
-		this.liaNum = liaNum;
-	}
-
-	@Column(name = "LIA_LIBELLE", length = 500)
-	public String getLiaLibelle() {
-		return this.liaLibelle;
-	}
-
-	public void setLiaLibelle(String liaLibelle) {
-		this.liaLibelle = liaLibelle;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TLibelleAdresse")
-	public Set<TDetailAdresseAvis> getTDetailAdresseAvises() {
-		return this.TDetailAdresseAvises;
-	}
-
-	public void setTDetailAdresseAvises(Set<TDetailAdresseAvis> TDetailAdresseAvises) {
-		this.TDetailAdresseAvises = TDetailAdresseAvises;
+	public void setId(TLibelleAdresseId id) {
+		this.id = id;
 	}
 
 }

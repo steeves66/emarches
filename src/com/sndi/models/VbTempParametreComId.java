@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,6 +23,9 @@ public class VbTempParametreComId implements java.io.Serializable {
 	private String dcsSeaQuorum;
 	private String dcsSeaNum;
 	private String dcsDteSaisi;
+	private Date dcsDteSea;
+	private String dcsHeureDeb;
+	private String dcsHeureFin;
 	private String dcsFonCodSaisi;
 	private String dcsObservation;
 	private String dcsComTcoCode;
@@ -43,6 +46,7 @@ public class VbTempParametreComId implements java.io.Serializable {
 	private String dcsAaoNbrOffHorDelai;
 	private String dcsFonAdmin;
 	private String dcsStrCom;
+	private String dcsSeaLieu;
 
 	public VbTempParametreComId() {
 	}
@@ -53,11 +57,12 @@ public class VbTempParametreComId implements java.io.Serializable {
 
 	public VbTempParametreComId(BigDecimal tempNum, String tempType, String tempOpeMatricule, Date tempDteSaisi,
 			String dcsMbmRespo, String dcsNum, String dcsDacCode, String dcsFonCod, String dcsSeaQuorum,
-			String dcsSeaNum, String dcsDteSaisi, String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode,
-			String dcsComNum, String dcsNomMbm, String dcsPreMbm, String dcsTelMbm, String dcsPresent,
-			String dcsComStrCode, String dcsOpeMatSaisi, String dcsNbrPli, String dcsComTctCode, String dcsRepMandate,
-			String dcsSeaTseNum, String dcsAaoNbrOff, String dcsAaoNbrOffAccept, String dcsAaoNbrOffRej,
-			String dcsAaoNbrOffHorDelai, String dcsFonAdmin, String dcsStrCom) {
+			String dcsSeaNum, String dcsDteSaisi, Date dcsDteSea, String dcsHeureDeb, String dcsHeureFin,
+			String dcsFonCodSaisi, String dcsObservation, String dcsComTcoCode, String dcsComNum, String dcsNomMbm,
+			String dcsPreMbm, String dcsTelMbm, String dcsPresent, String dcsComStrCode, String dcsOpeMatSaisi,
+			String dcsNbrPli, String dcsComTctCode, String dcsRepMandate, String dcsSeaTseNum, String dcsAaoNbrOff,
+			String dcsAaoNbrOffAccept, String dcsAaoNbrOffRej, String dcsAaoNbrOffHorDelai, String dcsFonAdmin,
+			String dcsStrCom, String dcsSeaLieu) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -69,6 +74,9 @@ public class VbTempParametreComId implements java.io.Serializable {
 		this.dcsSeaQuorum = dcsSeaQuorum;
 		this.dcsSeaNum = dcsSeaNum;
 		this.dcsDteSaisi = dcsDteSaisi;
+		this.dcsDteSea = dcsDteSea;
+		this.dcsHeureDeb = dcsHeureDeb;
+		this.dcsHeureFin = dcsHeureFin;
 		this.dcsFonCodSaisi = dcsFonCodSaisi;
 		this.dcsObservation = dcsObservation;
 		this.dcsComTcoCode = dcsComTcoCode;
@@ -89,6 +97,7 @@ public class VbTempParametreComId implements java.io.Serializable {
 		this.dcsAaoNbrOffHorDelai = dcsAaoNbrOffHorDelai;
 		this.dcsFonAdmin = dcsFonAdmin;
 		this.dcsStrCom = dcsStrCom;
+		this.dcsSeaLieu = dcsSeaLieu;
 	}
 
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
@@ -188,6 +197,33 @@ public class VbTempParametreComId implements java.io.Serializable {
 
 	public void setDcsDteSaisi(String dcsDteSaisi) {
 		this.dcsDteSaisi = dcsDteSaisi;
+	}
+
+	@Column(name = "DCS_DTE_SEA", length = 7)
+	public Date getDcsDteSea() {
+		return this.dcsDteSea;
+	}
+
+	public void setDcsDteSea(Date dcsDteSea) {
+		this.dcsDteSea = dcsDteSea;
+	}
+
+	@Column(name = "DCS_HEURE_DEB", length = 500)
+	public String getDcsHeureDeb() {
+		return this.dcsHeureDeb;
+	}
+
+	public void setDcsHeureDeb(String dcsHeureDeb) {
+		this.dcsHeureDeb = dcsHeureDeb;
+	}
+
+	@Column(name = "DCS_HEURE_FIN", length = 500)
+	public String getDcsHeureFin() {
+		return this.dcsHeureFin;
+	}
+
+	public void setDcsHeureFin(String dcsHeureFin) {
+		this.dcsHeureFin = dcsHeureFin;
 	}
 
 	@Column(name = "DCS_FON_COD_SAISI", length = 500)
@@ -370,6 +406,15 @@ public class VbTempParametreComId implements java.io.Serializable {
 		this.dcsStrCom = dcsStrCom;
 	}
 
+	@Column(name = "DCS_SEA_LIEU", length = 500)
+	public String getDcsSeaLieu() {
+		return this.dcsSeaLieu;
+	}
+
+	public void setDcsSeaLieu(String dcsSeaLieu) {
+		this.dcsSeaLieu = dcsSeaLieu;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -406,6 +451,14 @@ public class VbTempParametreComId implements java.io.Serializable {
 				&& ((this.getDcsDteSaisi() == castOther.getDcsDteSaisi())
 						|| (this.getDcsDteSaisi() != null && castOther.getDcsDteSaisi() != null
 								&& this.getDcsDteSaisi().equals(castOther.getDcsDteSaisi())))
+				&& ((this.getDcsDteSea() == castOther.getDcsDteSea()) || (this.getDcsDteSea() != null
+						&& castOther.getDcsDteSea() != null && this.getDcsDteSea().equals(castOther.getDcsDteSea())))
+				&& ((this.getDcsHeureDeb() == castOther.getDcsHeureDeb())
+						|| (this.getDcsHeureDeb() != null && castOther.getDcsHeureDeb() != null
+								&& this.getDcsHeureDeb().equals(castOther.getDcsHeureDeb())))
+				&& ((this.getDcsHeureFin() == castOther.getDcsHeureFin())
+						|| (this.getDcsHeureFin() != null && castOther.getDcsHeureFin() != null
+								&& this.getDcsHeureFin().equals(castOther.getDcsHeureFin())))
 				&& ((this.getDcsFonCodSaisi() == castOther.getDcsFonCodSaisi())
 						|| (this.getDcsFonCodSaisi() != null && castOther.getDcsFonCodSaisi() != null
 								&& this.getDcsFonCodSaisi().equals(castOther.getDcsFonCodSaisi())))
@@ -458,7 +511,10 @@ public class VbTempParametreComId implements java.io.Serializable {
 						|| (this.getDcsFonAdmin() != null && castOther.getDcsFonAdmin() != null
 								&& this.getDcsFonAdmin().equals(castOther.getDcsFonAdmin())))
 				&& ((this.getDcsStrCom() == castOther.getDcsStrCom()) || (this.getDcsStrCom() != null
-						&& castOther.getDcsStrCom() != null && this.getDcsStrCom().equals(castOther.getDcsStrCom())));
+						&& castOther.getDcsStrCom() != null && this.getDcsStrCom().equals(castOther.getDcsStrCom())))
+				&& ((this.getDcsSeaLieu() == castOther.getDcsSeaLieu())
+						|| (this.getDcsSeaLieu() != null && castOther.getDcsSeaLieu() != null
+								&& this.getDcsSeaLieu().equals(castOther.getDcsSeaLieu())));
 	}
 
 	public int hashCode() {
@@ -475,6 +531,9 @@ public class VbTempParametreComId implements java.io.Serializable {
 		result = 37 * result + (getDcsSeaQuorum() == null ? 0 : this.getDcsSeaQuorum().hashCode());
 		result = 37 * result + (getDcsSeaNum() == null ? 0 : this.getDcsSeaNum().hashCode());
 		result = 37 * result + (getDcsDteSaisi() == null ? 0 : this.getDcsDteSaisi().hashCode());
+		result = 37 * result + (getDcsDteSea() == null ? 0 : this.getDcsDteSea().hashCode());
+		result = 37 * result + (getDcsHeureDeb() == null ? 0 : this.getDcsHeureDeb().hashCode());
+		result = 37 * result + (getDcsHeureFin() == null ? 0 : this.getDcsHeureFin().hashCode());
 		result = 37 * result + (getDcsFonCodSaisi() == null ? 0 : this.getDcsFonCodSaisi().hashCode());
 		result = 37 * result + (getDcsObservation() == null ? 0 : this.getDcsObservation().hashCode());
 		result = 37 * result + (getDcsComTcoCode() == null ? 0 : this.getDcsComTcoCode().hashCode());
@@ -495,6 +554,7 @@ public class VbTempParametreComId implements java.io.Serializable {
 		result = 37 * result + (getDcsAaoNbrOffHorDelai() == null ? 0 : this.getDcsAaoNbrOffHorDelai().hashCode());
 		result = 37 * result + (getDcsFonAdmin() == null ? 0 : this.getDcsFonAdmin().hashCode());
 		result = 37 * result + (getDcsStrCom() == null ? 0 : this.getDcsStrCom().hashCode());
+		result = 37 * result + (getDcsSeaLieu() == null ? 0 : this.getDcsSeaLieu().hashCode());
 		return result;
 	}
 

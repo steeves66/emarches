@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,13 +27,21 @@ public class VPiecesOffreAnalyse implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "pofNum", column = @Column(name = "POF_NUM", nullable = false, precision = 22, scale = 0)),
-			@AttributeOverride(name = "pofDofNum", column = @Column(name = "POF_DOF_NUM", precision = 22, scale = 0)),
-			@AttributeOverride(name = "tpoCode", column = @Column(name = "TPO_CODE", nullable = false, length = 10)),
-			@AttributeOverride(name = "pofLaaId", column = @Column(name = "POF_LAA_ID", precision = 22, scale = 0)),
-			@AttributeOverride(name = "tpoLibelle", column = @Column(name = "TPO_LIBELLE", length = 200)),
-			@AttributeOverride(name = "pofConforme", column = @Column(name = "POF_CONFORME", length = 1)),
-			@AttributeOverride(name = "pofObs", column = @Column(name = "POF_OBS", length = 500)) })
+			@AttributeOverride(name = "pofNum", column = @Column(name = "POF_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "craCode", column = @Column(name = "CRA_CODE", length = 50)),
+			@AttributeOverride(name = "dofNum", column = @Column(name = "DOF_NUM", nullable = false, precision = 22, scale = 0)),
+			@AttributeOverride(name = "dcadNum", column = @Column(name = "DCAD_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "analyseStatut", column = @Column(name = "ANALYSE_STATUT", length = 1)),
+			@AttributeOverride(name = "dcadLaaId", column = @Column(name = "DCAD_LAA_ID", precision = 22, scale = 0)),
+			@AttributeOverride(name = "pofLibelle", column = @Column(name = "POF_LIBELLE", length = 4000)),
+			@AttributeOverride(name = "pofConforme", column = @Column(name = "POF_CONFORME", length = 100)),
+			@AttributeOverride(name = "pofScore", column = @Column(name = "POF_SCORE", precision = 10, scale = 0)),
+			@AttributeOverride(name = "pofObs", column = @Column(name = "POF_OBS", length = 1000)),
+			@AttributeOverride(name = "anfPresence", column = @Column(name = "ANF_PRESENCE", length = 1)),
+			@AttributeOverride(name = "anfNum", column = @Column(name = "ANF_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dcadDacCode", column = @Column(name = "DCAD_DAC_CODE", length = 50)),
+			@AttributeOverride(name = "btnAnfValeurConf", column = @Column(name = "BTN_ANF_VALEUR_CONF", precision = 22, scale = 0)),
+			@AttributeOverride(name = "btnAnfPresence", column = @Column(name = "BTN_ANF_PRESENCE", precision = 22, scale = 0)) })
 	public VPiecesOffreAnalyseId getId() {
 		return this.id;
 	}

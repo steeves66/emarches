@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -34,8 +34,9 @@ public class VbLotAaoId implements java.io.Serializable {
 	public VbLotAaoId() {
 	}
 
-	public VbLotAaoId(BigDecimal laaId, String laaObjet, BigDecimal laaNum) {
+	public VbLotAaoId(BigDecimal laaId, String laaAaoCode, String laaObjet, BigDecimal laaNum) {
 		this.laaId = laaId;
+		this.laaAaoCode = laaAaoCode;
 		this.laaObjet = laaObjet;
 		this.laaNum = laaNum;
 	}
@@ -73,7 +74,7 @@ public class VbLotAaoId implements java.io.Serializable {
 		this.laaId = laaId;
 	}
 
-	@Column(name = "LAA_AAO_CODE", length = 20)
+	@Column(name = "LAA_AAO_CODE", nullable = false, length = 20)
 	public String getLaaAaoCode() {
 		return this.laaAaoCode;
 	}

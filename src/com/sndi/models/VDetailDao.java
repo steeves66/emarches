@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -37,20 +37,20 @@ public class VDetailDao implements java.io.Serializable {
 			@AttributeOverride(name = "dacGesCode", column = @Column(name = "DAC_GES_CODE", precision = 22, scale = 0)),
 			@AttributeOverride(name = "dacFonCodAc", column = @Column(name = "DAC_FON_COD_AC", length = 12)),
 			@AttributeOverride(name = "dacStrCode", column = @Column(name = "DAC_STR_CODE", length = 20)),
-			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 12)),
+			@AttributeOverride(name = "dacFonCodeCpmp", column = @Column(name = "DAC_FON_CODE_CPMP", length = 10)),
 			@AttributeOverride(name = "dacDteValCpmp", column = @Column(name = "DAC_DTE_VAL_CPMP", length = 7)),
 			@AttributeOverride(name = "dacDteValDmp", column = @Column(name = "DAC_DTE_VAL_DMP", length = 7)),
 			@AttributeOverride(name = "dacTdCode", column = @Column(name = "DAC_TD_CODE", length = 12)),
 			@AttributeOverride(name = "dacDateReception", column = @Column(name = "DAC_DATE_RECEPTION", length = 7)),
 			@AttributeOverride(name = "dacStatutRetour", column = @Column(name = "DAC_STATUT_RETOUR", length = 2)),
-			@AttributeOverride(name = "aaoCode", column = @Column(name = "AAO_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "aaoCode", column = @Column(name = "AAO_CODE", nullable = false, length = 22)),
 			@AttributeOverride(name = "aaoLibelle", column = @Column(name = "AAO_LIBELLE", length = 1000)),
 			@AttributeOverride(name = "aaoDacCode", column = @Column(name = "AAO_DAC_CODE", length = 20)),
 			@AttributeOverride(name = "aaoDteSaisi", column = @Column(name = "AAO_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "aaoStaCode", column = @Column(name = "AAO_STA_CODE", length = 3)),
 			@AttributeOverride(name = "aaoDtePub", column = @Column(name = "AAO_DTE_PUB", length = 7)),
 			@AttributeOverride(name = "aaoDteOuvTec", column = @Column(name = "AAO_DTE_OUV_TEC", length = 7)),
-			@AttributeOverride(name = "aaoDteHeurOuv", column = @Column(name = "AAO_DTE_HEUR_OUV", length = 20)),
+			@AttributeOverride(name = "aaoDteHeurOuv", column = @Column(name = "AAO_DTE_HEUR_OUV", length = 50)),
 			@AttributeOverride(name = "aaoDteOuvFin", column = @Column(name = "AAO_DTE_OUV_FIN", length = 7)),
 			@AttributeOverride(name = "aaoNbrLot", column = @Column(name = "AAO_NBR_LOT", precision = 22, scale = 0)),
 			@AttributeOverride(name = "aaoNbrOuv", column = @Column(name = "AAO_NBR_OUV", precision = 22, scale = 0)),
@@ -73,8 +73,8 @@ public class VDetailDao implements java.io.Serializable {
 			@AttributeOverride(name = "aaoDateRecep", column = @Column(name = "AAO_DATE_RECEP", length = 7)),
 			@AttributeOverride(name = "aaoHeureRecep", column = @Column(name = "AAO_HEURE_RECEP", length = 20)),
 			@AttributeOverride(name = "laaId", column = @Column(name = "LAA_ID", nullable = false, precision = 22, scale = 0)),
-			@AttributeOverride(name = "laaAaoCode", column = @Column(name = "LAA_AAO_CODE", length = 20)),
-			@AttributeOverride(name = "laaObjet", column = @Column(name = "LAA_OBJET", length = 1000)),
+			@AttributeOverride(name = "laaAaoCode", column = @Column(name = "LAA_AAO_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "laaObjet", column = @Column(name = "LAA_OBJET", nullable = false, length = 1000)),
 			@AttributeOverride(name = "laaObservation", column = @Column(name = "LAA_OBSERVATION", length = 200)),
 			@AttributeOverride(name = "laaMtCaut", column = @Column(name = "LAA_MT_CAUT", precision = 22, scale = 0)),
 			@AttributeOverride(name = "laaMtEst", column = @Column(name = "LAA_MT_EST", precision = 22, scale = 0)),
@@ -84,7 +84,7 @@ public class VDetailDao implements java.io.Serializable {
 			@AttributeOverride(name = "laaFonCodCpmp", column = @Column(name = "LAA_FON_COD_CPMP", length = 20)),
 			@AttributeOverride(name = "laaLieuExe", column = @Column(name = "LAA_LIEU_EXE", length = 1000)),
 			@AttributeOverride(name = "laaLbgImputation", column = @Column(name = "LAA_LBG_IMPUTATION", length = 50)),
-			@AttributeOverride(name = "laaNum", column = @Column(name = "LAA_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "laaNum", column = @Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)),
 			@AttributeOverride(name = "laaCoutLot", column = @Column(name = "LAA_COUT_LOT", precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddaId", column = @Column(name = "DDA_ID", nullable = false, precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddaNom", column = @Column(name = "DDA_NOM", length = 200)),

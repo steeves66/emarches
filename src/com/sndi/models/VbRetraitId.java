@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VbRetraitId implements java.io.Serializable {
 
-	private long retId;
+	private Long retId;
 	private String retDacCode;
 	private String retNom;
 	private String retAdresse;
@@ -26,11 +26,7 @@ public class VbRetraitId implements java.io.Serializable {
 	public VbRetraitId() {
 	}
 
-	public VbRetraitId(long retId) {
-		this.retId = retId;
-	}
-
-	public VbRetraitId(long retId, String retDacCode, String retNom, String retAdresse, String retMail, String retTel,
+	public VbRetraitId(Long retId, String retDacCode, String retNom, String retAdresse, String retMail, String retTel,
 			String retPieceNumero, Date retDate, String retTypePiece, String retFonCod, String retOpeMatricule) {
 		this.retId = retId;
 		this.retDacCode = retDacCode;
@@ -45,12 +41,12 @@ public class VbRetraitId implements java.io.Serializable {
 		this.retOpeMatricule = retOpeMatricule;
 	}
 
-	@Column(name = "RET_ID", nullable = false, precision = 10, scale = 0)
-	public long getRetId() {
+	@Column(name = "RET_ID", precision = 10, scale = 0)
+	public Long getRetId() {
 		return this.retId;
 	}
 
-	public void setRetId(long retId) {
+	public void setRetId(Long retId) {
 		this.retId = retId;
 	}
 
@@ -153,7 +149,8 @@ public class VbRetraitId implements java.io.Serializable {
 			return false;
 		VbRetraitId castOther = (VbRetraitId) other;
 
-		return (this.getRetId() == castOther.getRetId())
+		return ((this.getRetId() == castOther.getRetId()) || (this.getRetId() != null && castOther.getRetId() != null
+				&& this.getRetId().equals(castOther.getRetId())))
 				&& ((this.getRetDacCode() == castOther.getRetDacCode()) || (this.getRetDacCode() != null
 						&& castOther.getRetDacCode() != null && this.getRetDacCode().equals(castOther.getRetDacCode())))
 				&& ((this.getRetNom() == castOther.getRetNom()) || (this.getRetNom() != null
@@ -182,7 +179,7 @@ public class VbRetraitId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (int) this.getRetId();
+		result = 37 * result + (getRetId() == null ? 0 : this.getRetId().hashCode());
 		result = 37 * result + (getRetDacCode() == null ? 0 : this.getRetDacCode().hashCode());
 		result = 37 * result + (getRetNom() == null ? 0 : this.getRetNom().hashCode());
 		result = 37 * result + (getRetAdresse() == null ? 0 : this.getRetAdresse().hashCode());

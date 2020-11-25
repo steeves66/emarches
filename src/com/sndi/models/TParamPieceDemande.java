@@ -1,16 +1,10 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,26 +15,23 @@ import javax.persistence.Table;
 public class TParamPieceDemande implements java.io.Serializable {
 
 	private BigDecimal pidNum;
-	private TTypeDemande TTypeDemande;
 	private String pidLibeleCourt;
 	private String pidLibeleLong;
-	private Set<TPieceDemande> TPieceDemandes = new HashSet<TPieceDemande>(0);
+	private String pidTdmCode;
 
 	public TParamPieceDemande() {
 	}
 
-	public TParamPieceDemande(BigDecimal pidNum, TTypeDemande TTypeDemande) {
+	public TParamPieceDemande(BigDecimal pidNum, String pidTdmCode) {
 		this.pidNum = pidNum;
-		this.TTypeDemande = TTypeDemande;
+		this.pidTdmCode = pidTdmCode;
 	}
 
-	public TParamPieceDemande(BigDecimal pidNum, TTypeDemande TTypeDemande, String pidLibeleCourt, String pidLibeleLong,
-			Set<TPieceDemande> TPieceDemandes) {
+	public TParamPieceDemande(BigDecimal pidNum, String pidLibeleCourt, String pidLibeleLong, String pidTdmCode) {
 		this.pidNum = pidNum;
-		this.TTypeDemande = TTypeDemande;
 		this.pidLibeleCourt = pidLibeleCourt;
 		this.pidLibeleLong = pidLibeleLong;
-		this.TPieceDemandes = TPieceDemandes;
+		this.pidTdmCode = pidTdmCode;
 	}
 
 	@Id
@@ -52,16 +43,6 @@ public class TParamPieceDemande implements java.io.Serializable {
 
 	public void setPidNum(BigDecimal pidNum) {
 		this.pidNum = pidNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PID_TDM_CODE", nullable = false)
-	public TTypeDemande getTTypeDemande() {
-		return this.TTypeDemande;
-	}
-
-	public void setTTypeDemande(TTypeDemande TTypeDemande) {
-		this.TTypeDemande = TTypeDemande;
 	}
 
 	@Column(name = "PID_LIBELE_COURT", length = 100)
@@ -82,13 +63,13 @@ public class TParamPieceDemande implements java.io.Serializable {
 		this.pidLibeleLong = pidLibeleLong;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TParamPieceDemande")
-	public Set<TPieceDemande> getTPieceDemandes() {
-		return this.TPieceDemandes;
+	@Column(name = "PID_TDM_CODE", nullable = false, length = 10)
+	public String getPidTdmCode() {
+		return this.pidTdmCode;
 	}
 
-	public void setTPieceDemandes(Set<TPieceDemande> TPieceDemandes) {
-		this.TPieceDemandes = TPieceDemandes;
+	public void setPidTdmCode(String pidTdmCode) {
+		this.pidTdmCode = pidTdmCode;
 	}
 
 }

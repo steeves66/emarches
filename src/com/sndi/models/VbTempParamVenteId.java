@@ -1,7 +1,6 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -11,37 +10,25 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VbTempParamVenteId implements java.io.Serializable {
 
-	private Serializable tempNum;
-	private Serializable dofDteSaisi;
-	private Serializable dofOpeMatricule;
-	private Serializable tempType;
-	private Serializable canCode;
-	private Serializable canNom;
-	private Serializable canNomResp;
-	private Serializable canSouNcc;
-	private Serializable canTel;
-	private Serializable canTieNcc;
-	private Serializable dveCout;
-	private Serializable dveDacCode;
-	private Serializable dveLaaNum;
-	private Serializable dveQte;
-	private Serializable venNum;
-	private Serializable venMrgCod;
-	private Serializable canPrenoms;
+	private String canNom;
+	private String canNomResp;
+	private String canSouNcc;
+	private String canTel;
+	private String canTieNcc;
+	private String dveCout;
+	private String dveDacCode;
+	private String dveLaaNum;
+	private String dveQte;
+	private String venNum;
+	private String venMrgCod;
+	private String canPrenoms;
 
 	public VbTempParamVenteId() {
 	}
 
-	public VbTempParamVenteId(Serializable tempNum, Serializable dofDteSaisi, Serializable dofOpeMatricule,
-			Serializable tempType, Serializable canCode, Serializable canNom, Serializable canNomResp,
-			Serializable canSouNcc, Serializable canTel, Serializable canTieNcc, Serializable dveCout,
-			Serializable dveDacCode, Serializable dveLaaNum, Serializable dveQte, Serializable venNum,
-			Serializable venMrgCod, Serializable canPrenoms) {
-		this.tempNum = tempNum;
-		this.dofDteSaisi = dofDteSaisi;
-		this.dofOpeMatricule = dofOpeMatricule;
-		this.tempType = tempType;
-		this.canCode = canCode;
+	public VbTempParamVenteId(String canNom, String canNomResp, String canSouNcc, String canTel, String canTieNcc,
+			String dveCout, String dveDacCode, String dveLaaNum, String dveQte, String venNum, String venMrgCod,
+			String canPrenoms) {
 		this.canNom = canNom;
 		this.canNomResp = canNomResp;
 		this.canSouNcc = canSouNcc;
@@ -56,156 +43,111 @@ public class VbTempParamVenteId implements java.io.Serializable {
 		this.canPrenoms = canPrenoms;
 	}
 
-	@Column(name = "TEMP_NUM")
-	public Serializable getTempNum() {
-		return this.tempNum;
-	}
-
-	public void setTempNum(Serializable tempNum) {
-		this.tempNum = tempNum;
-	}
-
-	@Column(name = "DOF_DTE_SAISI")
-	public Serializable getDofDteSaisi() {
-		return this.dofDteSaisi;
-	}
-
-	public void setDofDteSaisi(Serializable dofDteSaisi) {
-		this.dofDteSaisi = dofDteSaisi;
-	}
-
-	@Column(name = "DOF_OPE_MATRICULE")
-	public Serializable getDofOpeMatricule() {
-		return this.dofOpeMatricule;
-	}
-
-	public void setDofOpeMatricule(Serializable dofOpeMatricule) {
-		this.dofOpeMatricule = dofOpeMatricule;
-	}
-
-	@Column(name = "TEMP_TYPE")
-	public Serializable getTempType() {
-		return this.tempType;
-	}
-
-	public void setTempType(Serializable tempType) {
-		this.tempType = tempType;
-	}
-
-	@Column(name = "CAN_CODE")
-	public Serializable getCanCode() {
-		return this.canCode;
-	}
-
-	public void setCanCode(Serializable canCode) {
-		this.canCode = canCode;
-	}
-
-	@Column(name = "CAN_NOM")
-	public Serializable getCanNom() {
+	@Column(name = "CAN_NOM", length = 500)
+	public String getCanNom() {
 		return this.canNom;
 	}
 
-	public void setCanNom(Serializable canNom) {
+	public void setCanNom(String canNom) {
 		this.canNom = canNom;
 	}
 
-	@Column(name = "CAN_NOM_RESP")
-	public Serializable getCanNomResp() {
+	@Column(name = "CAN_NOM_RESP", length = 500)
+	public String getCanNomResp() {
 		return this.canNomResp;
 	}
 
-	public void setCanNomResp(Serializable canNomResp) {
+	public void setCanNomResp(String canNomResp) {
 		this.canNomResp = canNomResp;
 	}
 
-	@Column(name = "CAN_SOU_NCC")
-	public Serializable getCanSouNcc() {
+	@Column(name = "CAN_SOU_NCC", length = 500)
+	public String getCanSouNcc() {
 		return this.canSouNcc;
 	}
 
-	public void setCanSouNcc(Serializable canSouNcc) {
+	public void setCanSouNcc(String canSouNcc) {
 		this.canSouNcc = canSouNcc;
 	}
 
-	@Column(name = "CAN_TEL")
-	public Serializable getCanTel() {
+	@Column(name = "CAN_TEL", length = 500)
+	public String getCanTel() {
 		return this.canTel;
 	}
 
-	public void setCanTel(Serializable canTel) {
+	public void setCanTel(String canTel) {
 		this.canTel = canTel;
 	}
 
-	@Column(name = "CAN_TIE_NCC")
-	public Serializable getCanTieNcc() {
+	@Column(name = "CAN_TIE_NCC", length = 500)
+	public String getCanTieNcc() {
 		return this.canTieNcc;
 	}
 
-	public void setCanTieNcc(Serializable canTieNcc) {
+	public void setCanTieNcc(String canTieNcc) {
 		this.canTieNcc = canTieNcc;
 	}
 
-	@Column(name = "DVE_COUT")
-	public Serializable getDveCout() {
+	@Column(name = "DVE_COUT", length = 500)
+	public String getDveCout() {
 		return this.dveCout;
 	}
 
-	public void setDveCout(Serializable dveCout) {
+	public void setDveCout(String dveCout) {
 		this.dveCout = dveCout;
 	}
 
-	@Column(name = "DVE_DAC_CODE")
-	public Serializable getDveDacCode() {
+	@Column(name = "DVE_DAC_CODE", length = 500)
+	public String getDveDacCode() {
 		return this.dveDacCode;
 	}
 
-	public void setDveDacCode(Serializable dveDacCode) {
+	public void setDveDacCode(String dveDacCode) {
 		this.dveDacCode = dveDacCode;
 	}
 
-	@Column(name = "DVE_LAA_NUM")
-	public Serializable getDveLaaNum() {
+	@Column(name = "DVE_LAA_NUM", length = 500)
+	public String getDveLaaNum() {
 		return this.dveLaaNum;
 	}
 
-	public void setDveLaaNum(Serializable dveLaaNum) {
+	public void setDveLaaNum(String dveLaaNum) {
 		this.dveLaaNum = dveLaaNum;
 	}
 
-	@Column(name = "DVE_QTE")
-	public Serializable getDveQte() {
+	@Column(name = "DVE_QTE", length = 500)
+	public String getDveQte() {
 		return this.dveQte;
 	}
 
-	public void setDveQte(Serializable dveQte) {
+	public void setDveQte(String dveQte) {
 		this.dveQte = dveQte;
 	}
 
-	@Column(name = "VEN_NUM")
-	public Serializable getVenNum() {
+	@Column(name = "VEN_NUM", length = 500)
+	public String getVenNum() {
 		return this.venNum;
 	}
 
-	public void setVenNum(Serializable venNum) {
+	public void setVenNum(String venNum) {
 		this.venNum = venNum;
 	}
 
-	@Column(name = "VEN_MRG_COD")
-	public Serializable getVenMrgCod() {
+	@Column(name = "VEN_MRG_COD", length = 500)
+	public String getVenMrgCod() {
 		return this.venMrgCod;
 	}
 
-	public void setVenMrgCod(Serializable venMrgCod) {
+	public void setVenMrgCod(String venMrgCod) {
 		this.venMrgCod = venMrgCod;
 	}
 
-	@Column(name = "CAN_PRENOMS")
-	public Serializable getCanPrenoms() {
+	@Column(name = "CAN_PRENOMS", length = 500)
+	public String getCanPrenoms() {
 		return this.canPrenoms;
 	}
 
-	public void setCanPrenoms(Serializable canPrenoms) {
+	public void setCanPrenoms(String canPrenoms) {
 		this.canPrenoms = canPrenoms;
 	}
 
@@ -218,20 +160,8 @@ public class VbTempParamVenteId implements java.io.Serializable {
 			return false;
 		VbTempParamVenteId castOther = (VbTempParamVenteId) other;
 
-		return ((this.getTempNum() == castOther.getTempNum()) || (this.getTempNum() != null
-				&& castOther.getTempNum() != null && this.getTempNum().equals(castOther.getTempNum())))
-				&& ((this.getDofDteSaisi() == castOther.getDofDteSaisi())
-						|| (this.getDofDteSaisi() != null && castOther.getDofDteSaisi() != null
-								&& this.getDofDteSaisi().equals(castOther.getDofDteSaisi())))
-				&& ((this.getDofOpeMatricule() == castOther.getDofOpeMatricule())
-						|| (this.getDofOpeMatricule() != null && castOther.getDofOpeMatricule() != null
-								&& this.getDofOpeMatricule().equals(castOther.getDofOpeMatricule())))
-				&& ((this.getTempType() == castOther.getTempType()) || (this.getTempType() != null
-						&& castOther.getTempType() != null && this.getTempType().equals(castOther.getTempType())))
-				&& ((this.getCanCode() == castOther.getCanCode()) || (this.getCanCode() != null
-						&& castOther.getCanCode() != null && this.getCanCode().equals(castOther.getCanCode())))
-				&& ((this.getCanNom() == castOther.getCanNom()) || (this.getCanNom() != null
-						&& castOther.getCanNom() != null && this.getCanNom().equals(castOther.getCanNom())))
+		return ((this.getCanNom() == castOther.getCanNom()) || (this.getCanNom() != null
+				&& castOther.getCanNom() != null && this.getCanNom().equals(castOther.getCanNom())))
 				&& ((this.getCanNomResp() == castOther.getCanNomResp()) || (this.getCanNomResp() != null
 						&& castOther.getCanNomResp() != null && this.getCanNomResp().equals(castOther.getCanNomResp())))
 				&& ((this.getCanSouNcc() == castOther.getCanSouNcc()) || (this.getCanSouNcc() != null
@@ -260,11 +190,6 @@ public class VbTempParamVenteId implements java.io.Serializable {
 	public int hashCode() {
 		int result = 17;
 
-		result = 37 * result + (getTempNum() == null ? 0 : this.getTempNum().hashCode());
-		result = 37 * result + (getDofDteSaisi() == null ? 0 : this.getDofDteSaisi().hashCode());
-		result = 37 * result + (getDofOpeMatricule() == null ? 0 : this.getDofOpeMatricule().hashCode());
-		result = 37 * result + (getTempType() == null ? 0 : this.getTempType().hashCode());
-		result = 37 * result + (getCanCode() == null ? 0 : this.getCanCode().hashCode());
 		result = 37 * result + (getCanNom() == null ? 0 : this.getCanNom().hashCode());
 		result = 37 * result + (getCanNomResp() == null ? 0 : this.getCanNomResp().hashCode());
 		result = 37 * result + (getCanSouNcc() == null ? 0 : this.getCanSouNcc().hashCode());

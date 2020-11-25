@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -53,7 +53,10 @@ public class VbTempParamDetOffres implements java.io.Serializable {
 			@AttributeOverride(name = "dofSigle", column = @Column(name = "DOF_SIGLE", length = 500)),
 			@AttributeOverride(name = "dofObsVariante", column = @Column(name = "DOF_OBS_VARIANTE", length = 500)),
 			@AttributeOverride(name = "dofMtCaut", column = @Column(name = "DOF_MT_CAUT", precision = 22, scale = 0)),
-			@AttributeOverride(name = "dofMtRab", column = @Column(name = "DOF_MT_RAB", precision = 22, scale = 0)) })
+			@AttributeOverride(name = "dofMtRab", column = @Column(name = "DOF_MT_RAB", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dofDelai2", column = @Column(name = "DOF_DELAI2", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dofErrCalcul", column = @Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dofTempNum", column = @Column(name = "DOF_TEMP_NUM", precision = 22, scale = 0)) })
 	public VbTempParamDetOffresId getId() {
 		return this.id;
 	}

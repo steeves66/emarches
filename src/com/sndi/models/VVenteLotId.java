@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -35,9 +35,12 @@ public class VVenteLotId implements java.io.Serializable {
 	public VVenteLotId() {
 	}
 
-	public VVenteLotId(String aaoCode, BigDecimal laaId) {
+	public VVenteLotId(String aaoCode, BigDecimal laaId, String laaAaoCode, String laaObjet, BigDecimal laaNum) {
 		this.aaoCode = aaoCode;
 		this.laaId = laaId;
+		this.laaAaoCode = laaAaoCode;
+		this.laaObjet = laaObjet;
+		this.laaNum = laaNum;
 	}
 
 	public VVenteLotId(String aaoCode, String aaoVenteParLot, String aaoDacCode, BigDecimal laaId, String laaAaoCode,
@@ -65,7 +68,7 @@ public class VVenteLotId implements java.io.Serializable {
 		this.laaDacCode = laaDacCode;
 	}
 
-	@Column(name = "AAO_CODE", nullable = false, length = 20)
+	@Column(name = "AAO_CODE", nullable = false, length = 22)
 	public String getAaoCode() {
 		return this.aaoCode;
 	}
@@ -101,7 +104,7 @@ public class VVenteLotId implements java.io.Serializable {
 		this.laaId = laaId;
 	}
 
-	@Column(name = "LAA_AAO_CODE", length = 20)
+	@Column(name = "LAA_AAO_CODE", nullable = false, length = 20)
 	public String getLaaAaoCode() {
 		return this.laaAaoCode;
 	}
@@ -110,7 +113,7 @@ public class VVenteLotId implements java.io.Serializable {
 		this.laaAaoCode = laaAaoCode;
 	}
 
-	@Column(name = "LAA_OBJET", length = 1000)
+	@Column(name = "LAA_OBJET", nullable = false, length = 1000)
 	public String getLaaObjet() {
 		return this.laaObjet;
 	}
@@ -209,7 +212,7 @@ public class VVenteLotId implements java.io.Serializable {
 		this.laaLbgImputation = laaLbgImputation;
 	}
 
-	@Column(name = "LAA_NUM", precision = 22, scale = 0)
+	@Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getLaaNum() {
 		return this.laaNum;
 	}

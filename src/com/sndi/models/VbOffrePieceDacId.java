@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,10 +22,6 @@ public class VbOffrePieceDacId implements java.io.Serializable {
 	public VbOffrePieceDacId() {
 	}
 
-	public VbOffrePieceDacId(BigDecimal opdNum) {
-		this.opdNum = opdNum;
-	}
-
 	public VbOffrePieceDacId(BigDecimal opdNum, String opdDacCode, String opdTpoCode, String odpTpoEtapPiece,
 			Date odpDteSaisi, String odpOpeMatricule) {
 		this.opdNum = opdNum;
@@ -36,7 +32,7 @@ public class VbOffrePieceDacId implements java.io.Serializable {
 		this.odpOpeMatricule = odpOpeMatricule;
 	}
 
-	@Column(name = "OPD_NUM", nullable = false, precision = 22, scale = 0)
+	@Column(name = "OPD_NUM", precision = 22, scale = 0)
 	public BigDecimal getOpdNum() {
 		return this.opdNum;
 	}

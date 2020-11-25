@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.HashSet;
@@ -8,8 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,28 +19,28 @@ import javax.persistence.Table;
 public class TPieceDemande implements java.io.Serializable {
 
 	private BigDecimal pdmNum;
-	private TDemande TDemande;
-	private TParamPieceDemande TParamPieceDemande;
 	private String pdmLibeleCourt;
 	private String pdmLibeleLong;
+	private BigDecimal pdmDemNum;
+	private BigDecimal pdmPidNum;
 	private Set<TDossierDemande> TDossierDemandes = new HashSet<TDossierDemande>(0);
 
 	public TPieceDemande() {
 	}
 
-	public TPieceDemande(BigDecimal pdmNum, TDemande TDemande, TParamPieceDemande TParamPieceDemande) {
+	public TPieceDemande(BigDecimal pdmNum, BigDecimal pdmDemNum, BigDecimal pdmPidNum) {
 		this.pdmNum = pdmNum;
-		this.TDemande = TDemande;
-		this.TParamPieceDemande = TParamPieceDemande;
+		this.pdmDemNum = pdmDemNum;
+		this.pdmPidNum = pdmPidNum;
 	}
 
-	public TPieceDemande(BigDecimal pdmNum, TDemande TDemande, TParamPieceDemande TParamPieceDemande,
-			String pdmLibeleCourt, String pdmLibeleLong, Set<TDossierDemande> TDossierDemandes) {
+	public TPieceDemande(BigDecimal pdmNum, String pdmLibeleCourt, String pdmLibeleLong, BigDecimal pdmDemNum,
+			BigDecimal pdmPidNum, Set<TDossierDemande> TDossierDemandes) {
 		this.pdmNum = pdmNum;
-		this.TDemande = TDemande;
-		this.TParamPieceDemande = TParamPieceDemande;
 		this.pdmLibeleCourt = pdmLibeleCourt;
 		this.pdmLibeleLong = pdmLibeleLong;
+		this.pdmDemNum = pdmDemNum;
+		this.pdmPidNum = pdmPidNum;
 		this.TDossierDemandes = TDossierDemandes;
 	}
 
@@ -55,26 +53,6 @@ public class TPieceDemande implements java.io.Serializable {
 
 	public void setPdmNum(BigDecimal pdmNum) {
 		this.pdmNum = pdmNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PDM_DEM_NUM", nullable = false)
-	public TDemande getTDemande() {
-		return this.TDemande;
-	}
-
-	public void setTDemande(TDemande TDemande) {
-		this.TDemande = TDemande;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PDM_PID_NUM", nullable = false)
-	public TParamPieceDemande getTParamPieceDemande() {
-		return this.TParamPieceDemande;
-	}
-
-	public void setTParamPieceDemande(TParamPieceDemande TParamPieceDemande) {
-		this.TParamPieceDemande = TParamPieceDemande;
 	}
 
 	@Column(name = "PDM_LIBELE_COURT", length = 100)
@@ -93,6 +71,24 @@ public class TPieceDemande implements java.io.Serializable {
 
 	public void setPdmLibeleLong(String pdmLibeleLong) {
 		this.pdmLibeleLong = pdmLibeleLong;
+	}
+
+	@Column(name = "PDM_DEM_NUM", nullable = false, precision = 22, scale = 0)
+	public BigDecimal getPdmDemNum() {
+		return this.pdmDemNum;
+	}
+
+	public void setPdmDemNum(BigDecimal pdmDemNum) {
+		this.pdmDemNum = pdmDemNum;
+	}
+
+	@Column(name = "PDM_PID_NUM", nullable = false, precision = 22, scale = 0)
+	public BigDecimal getPdmPidNum() {
+		return this.pdmPidNum;
+	}
+
+	public void setPdmPidNum(BigDecimal pdmPidNum) {
+		this.pdmPidNum = pdmPidNum;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TPieceDemande")

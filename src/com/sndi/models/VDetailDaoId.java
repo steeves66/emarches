@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -90,11 +90,15 @@ public class VDetailDaoId implements java.io.Serializable {
 	public VDetailDaoId() {
 	}
 
-	public VDetailDaoId(String dacCode, String aaoCode, BigDecimal laaId, BigDecimal ddaId, String tymLibelleCourt,
-			String strCode, String strLibelleCourt, short plpGesCode) {
+	public VDetailDaoId(String dacCode, String aaoCode, BigDecimal laaId, String laaAaoCode, String laaObjet,
+			BigDecimal laaNum, BigDecimal ddaId, String tymLibelleCourt, String strCode, String strLibelleCourt,
+			short plpGesCode) {
 		this.dacCode = dacCode;
 		this.aaoCode = aaoCode;
 		this.laaId = laaId;
+		this.laaAaoCode = laaAaoCode;
+		this.laaObjet = laaObjet;
+		this.laaNum = laaNum;
 		this.ddaId = ddaId;
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.strCode = strCode;
@@ -284,7 +288,7 @@ public class VDetailDaoId implements java.io.Serializable {
 		this.dacStrCode = dacStrCode;
 	}
 
-	@Column(name = "DAC_FON_CODE_CPMP", length = 12)
+	@Column(name = "DAC_FON_CODE_CPMP", length = 10)
 	public String getDacFonCodeCpmp() {
 		return this.dacFonCodeCpmp;
 	}
@@ -338,7 +342,7 @@ public class VDetailDaoId implements java.io.Serializable {
 		this.dacStatutRetour = dacStatutRetour;
 	}
 
-	@Column(name = "AAO_CODE", nullable = false, length = 20)
+	@Column(name = "AAO_CODE", nullable = false, length = 22)
 	public String getAaoCode() {
 		return this.aaoCode;
 	}
@@ -401,7 +405,7 @@ public class VDetailDaoId implements java.io.Serializable {
 		this.aaoDteOuvTec = aaoDteOuvTec;
 	}
 
-	@Column(name = "AAO_DTE_HEUR_OUV", length = 20)
+	@Column(name = "AAO_DTE_HEUR_OUV", length = 50)
 	public String getAaoDteHeurOuv() {
 		return this.aaoDteHeurOuv;
 	}
@@ -608,7 +612,7 @@ public class VDetailDaoId implements java.io.Serializable {
 		this.laaId = laaId;
 	}
 
-	@Column(name = "LAA_AAO_CODE", length = 20)
+	@Column(name = "LAA_AAO_CODE", nullable = false, length = 20)
 	public String getLaaAaoCode() {
 		return this.laaAaoCode;
 	}
@@ -617,7 +621,7 @@ public class VDetailDaoId implements java.io.Serializable {
 		this.laaAaoCode = laaAaoCode;
 	}
 
-	@Column(name = "LAA_OBJET", length = 1000)
+	@Column(name = "LAA_OBJET", nullable = false, length = 1000)
 	public String getLaaObjet() {
 		return this.laaObjet;
 	}
@@ -707,7 +711,7 @@ public class VDetailDaoId implements java.io.Serializable {
 		this.laaLbgImputation = laaLbgImputation;
 	}
 
-	@Column(name = "LAA_NUM", precision = 22, scale = 0)
+	@Column(name = "LAA_NUM", nullable = false, precision = 22, scale = 0)
 	public BigDecimal getLaaNum() {
 		return this.laaNum;
 	}

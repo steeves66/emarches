@@ -1,12 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,99 +15,31 @@ import javax.persistence.Table;
 @Table(name = "T_DOSSIER_AGPM", schema = "EMAP")
 public class TDossierAgpm implements java.io.Serializable {
 
-	private long dagId;
-	private TAgpm TAgpm;
-	private TNaturePiece TNaturePiece;
-	private String dagCode;
-	private String dagLibelle;
-	private String dagCommentaire;
-	private String dagReference;
+	private TDossierAgpmId id;
 
 	public TDossierAgpm() {
 	}
 
-	public TDossierAgpm(long dagId, TAgpm TAgpm, TNaturePiece TNaturePiece) {
-		this.dagId = dagId;
-		this.TAgpm = TAgpm;
-		this.TNaturePiece = TNaturePiece;
+	public TDossierAgpm(TDossierAgpmId id) {
+		this.id = id;
 	}
 
-	public TDossierAgpm(long dagId, TAgpm TAgpm, TNaturePiece TNaturePiece, String dagCode, String dagLibelle,
-			String dagCommentaire, String dagReference) {
-		this.dagId = dagId;
-		this.TAgpm = TAgpm;
-		this.TNaturePiece = TNaturePiece;
-		this.dagCode = dagCode;
-		this.dagLibelle = dagLibelle;
-		this.dagCommentaire = dagCommentaire;
-		this.dagReference = dagReference;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "dagId", column = @Column(name = "DAG_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "dagNapCode", column = @Column(name = "DAG_NAP_CODE", nullable = false, length = 5)),
+			@AttributeOverride(name = "dagAgpId", column = @Column(name = "DAG_AGP_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "dagCode", column = @Column(name = "DAG_CODE", length = 500)),
+			@AttributeOverride(name = "dagLibelle", column = @Column(name = "DAG_LIBELLE", length = 500)),
+			@AttributeOverride(name = "dagCommentaire", column = @Column(name = "DAG_COMMENTAIRE", length = 500)),
+			@AttributeOverride(name = "dagReference", column = @Column(name = "DAG_REFERENCE", length = 500)) })
+	public TDossierAgpmId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "DAG_ID", unique = true, nullable = false, precision = 10, scale = 0)
-	public long getDagId() {
-		return this.dagId;
-	}
-
-	public void setDagId(long dagId) {
-		this.dagId = dagId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAG_AGP_ID", nullable = false)
-	public TAgpm getTAgpm() {
-		return this.TAgpm;
-	}
-
-	public void setTAgpm(TAgpm TAgpm) {
-		this.TAgpm = TAgpm;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DAG_NAP_CODE", nullable = false)
-	public TNaturePiece getTNaturePiece() {
-		return this.TNaturePiece;
-	}
-
-	public void setTNaturePiece(TNaturePiece TNaturePiece) {
-		this.TNaturePiece = TNaturePiece;
-	}
-
-	@Column(name = "DAG_CODE", length = 500)
-	public String getDagCode() {
-		return this.dagCode;
-	}
-
-	public void setDagCode(String dagCode) {
-		this.dagCode = dagCode;
-	}
-
-	@Column(name = "DAG_LIBELLE", length = 500)
-	public String getDagLibelle() {
-		return this.dagLibelle;
-	}
-
-	public void setDagLibelle(String dagLibelle) {
-		this.dagLibelle = dagLibelle;
-	}
-
-	@Column(name = "DAG_COMMENTAIRE", length = 500)
-	public String getDagCommentaire() {
-		return this.dagCommentaire;
-	}
-
-	public void setDagCommentaire(String dagCommentaire) {
-		this.dagCommentaire = dagCommentaire;
-	}
-
-	@Column(name = "DAG_REFERENCE", length = 500)
-	public String getDagReference() {
-		return this.dagReference;
-	}
-
-	public void setDagReference(String dagReference) {
-		this.dagReference = dagReference;
+	public void setId(TDossierAgpmId id) {
+		this.id = id;
 	}
 
 }

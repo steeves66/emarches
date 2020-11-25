@@ -1,13 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.math.BigDecimal;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -17,122 +15,34 @@ import javax.persistence.Table;
 @Table(name = "T_DETAIL_DEMANDES", schema = "EMAP")
 public class TDetailDemandes implements java.io.Serializable {
 
-	private BigDecimal ddeNum;
-	private TDacSpecs TDacSpecs;
-	private TDemande TDemande;
-	private TLBudgets TLBudgets;
-	private TLotAao TLotAao;
-	private TStructure TStructure;
-	private String ddeMarCode;
-	private String ddeActNum;
-	private String ddeActNumIni;
+	private TDetailDemandesId id;
 
 	public TDetailDemandes() {
 	}
 
-	public TDetailDemandes(BigDecimal ddeNum) {
-		this.ddeNum = ddeNum;
+	public TDetailDemandes(TDetailDemandesId id) {
+		this.id = id;
 	}
 
-	public TDetailDemandes(BigDecimal ddeNum, TDacSpecs TDacSpecs, TDemande TDemande, TLBudgets TLBudgets,
-			TLotAao TLotAao, TStructure TStructure, String ddeMarCode, String ddeActNum, String ddeActNumIni) {
-		this.ddeNum = ddeNum;
-		this.TDacSpecs = TDacSpecs;
-		this.TDemande = TDemande;
-		this.TLBudgets = TLBudgets;
-		this.TLotAao = TLotAao;
-		this.TStructure = TStructure;
-		this.ddeMarCode = ddeMarCode;
-		this.ddeActNum = ddeActNum;
-		this.ddeActNumIni = ddeActNumIni;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "ddeNum", column = @Column(name = "DDE_NUM", nullable = false, precision = 22, scale = 0)),
+			@AttributeOverride(name = "ddeDemNum", column = @Column(name = "DDE_DEM_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "ddeDacCode", column = @Column(name = "DDE_DAC_CODE", length = 20)),
+			@AttributeOverride(name = "ddeLaaId", column = @Column(name = "DDE_LAA_ID", precision = 22, scale = 0)),
+			@AttributeOverride(name = "ddeLbgCode", column = @Column(name = "DDE_LBG_CODE", length = 50)),
+			@AttributeOverride(name = "ddeMarCode", column = @Column(name = "DDE_MAR_CODE", length = 20)),
+			@AttributeOverride(name = "ddeStrCode", column = @Column(name = "DDE_STR_CODE", length = 20)),
+			@AttributeOverride(name = "ddeActNum", column = @Column(name = "DDE_ACT_NUM", length = 200)),
+			@AttributeOverride(name = "ddeActNumIni", column = @Column(name = "DDE_ACT_NUM_INI", length = 200)),
+			@AttributeOverride(name = "ddeAaoCode", column = @Column(name = "DDE_AAO_CODE", length = 25)) })
+	public TDetailDemandesId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "DDE_NUM", unique = true, nullable = false, precision = 22, scale = 0)
-	public BigDecimal getDdeNum() {
-		return this.ddeNum;
-	}
-
-	public void setDdeNum(BigDecimal ddeNum) {
-		this.ddeNum = ddeNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_DAC_CODE")
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_DEM_NUM")
-	public TDemande getTDemande() {
-		return this.TDemande;
-	}
-
-	public void setTDemande(TDemande TDemande) {
-		this.TDemande = TDemande;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_LBG_CODE")
-	public TLBudgets getTLBudgets() {
-		return this.TLBudgets;
-	}
-
-	public void setTLBudgets(TLBudgets TLBudgets) {
-		this.TLBudgets = TLBudgets;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_LAA_ID")
-	public TLotAao getTLotAao() {
-		return this.TLotAao;
-	}
-
-	public void setTLotAao(TLotAao TLotAao) {
-		this.TLotAao = TLotAao;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DDE_STR_CODE")
-	public TStructure getTStructure() {
-		return this.TStructure;
-	}
-
-	public void setTStructure(TStructure TStructure) {
-		this.TStructure = TStructure;
-	}
-
-	@Column(name = "DDE_MAR_CODE", length = 20)
-	public String getDdeMarCode() {
-		return this.ddeMarCode;
-	}
-
-	public void setDdeMarCode(String ddeMarCode) {
-		this.ddeMarCode = ddeMarCode;
-	}
-
-	@Column(name = "DDE_ACT_NUM", length = 200)
-	public String getDdeActNum() {
-		return this.ddeActNum;
-	}
-
-	public void setDdeActNum(String ddeActNum) {
-		this.ddeActNum = ddeActNum;
-	}
-
-	@Column(name = "DDE_ACT_NUM_INI", length = 200)
-	public String getDdeActNumIni() {
-		return this.ddeActNumIni;
-	}
-
-	public void setDdeActNumIni(String ddeActNumIni) {
-		this.ddeActNumIni = ddeActNumIni;
+	public void setId(TDetailDemandesId id) {
+		this.id = id;
 	}
 
 }

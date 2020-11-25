@@ -1,12 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,76 +15,29 @@ import javax.persistence.Table;
 @Table(name = "T_BESOIN", schema = "EMAP")
 public class TBesoin implements java.io.Serializable {
 
-	private long besId;
-	private TProjet TProjet;
-	private TReglementation TReglementation;
-	private String besLibelle;
-	private String besStatut;
+	private TBesoinId id;
 
 	public TBesoin() {
 	}
 
-	public TBesoin(long besId, TProjet TProjet, TReglementation TReglementation) {
-		this.besId = besId;
-		this.TProjet = TProjet;
-		this.TReglementation = TReglementation;
+	public TBesoin(TBesoinId id) {
+		this.id = id;
 	}
 
-	public TBesoin(long besId, TProjet TProjet, TReglementation TReglementation, String besLibelle, String besStatut) {
-		this.besId = besId;
-		this.TProjet = TProjet;
-		this.TReglementation = TReglementation;
-		this.besLibelle = besLibelle;
-		this.besStatut = besStatut;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "besId", column = @Column(name = "BES_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "besRegId", column = @Column(name = "BES_REG_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "besProId", column = @Column(name = "BES_PRO_ID", nullable = false, precision = 5, scale = 0)),
+			@AttributeOverride(name = "besLibelle", column = @Column(name = "BES_LIBELLE", length = 1000)),
+			@AttributeOverride(name = "besStatut", column = @Column(name = "BES_STATUT", length = 1)) })
+	public TBesoinId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "BES_ID", unique = true, nullable = false, precision = 10, scale = 0)
-	public long getBesId() {
-		return this.besId;
-	}
-
-	public void setBesId(long besId) {
-		this.besId = besId;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BES_PRO_ID", nullable = false)
-	public TProjet getTProjet() {
-		return this.TProjet;
-	}
-
-	public void setTProjet(TProjet TProjet) {
-		this.TProjet = TProjet;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "BES_REG_ID", nullable = false)
-	public TReglementation getTReglementation() {
-		return this.TReglementation;
-	}
-
-	public void setTReglementation(TReglementation TReglementation) {
-		this.TReglementation = TReglementation;
-	}
-
-	@Column(name = "BES_LIBELLE", length = 1000)
-	public String getBesLibelle() {
-		return this.besLibelle;
-	}
-
-	public void setBesLibelle(String besLibelle) {
-		this.besLibelle = besLibelle;
-	}
-
-	@Column(name = "BES_STATUT", length = 1)
-	public String getBesStatut() {
-		return this.besStatut;
-	}
-
-	public void setBesStatut(String besStatut) {
-		this.besStatut = besStatut;
+	public void setId(TBesoinId id) {
+		this.id = id;
 	}
 
 }

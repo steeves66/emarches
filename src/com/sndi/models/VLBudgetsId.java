@@ -1,7 +1,8 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
@@ -11,77 +12,90 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VLBudgetsId implements java.io.Serializable {
 
-	private Serializable lbgStrCode;
-	private Serializable lbgGesCode;
-	private Serializable lbgResDon;
-	private Serializable lbgImputation;
-	private Serializable lbgAnoCode;
-	private Serializable lbgNatCode;
-	private Serializable lbgResTr;
-	private Serializable lbgDteSaisi;
-	private Serializable lbgAeTr;
-	private Serializable lbgAeDon;
-	private Serializable lbgAeEmp;
-	private Serializable lbgMp;
-	private Serializable lbgReglMp;
-	private Serializable lbgTotDot;
-	private Serializable lbgUtilSaisi;
-	private Serializable lbgDesCode;
-	private Serializable lbgDteModif;
-	private Serializable lbgResEmp;
-	private Serializable lbgResTot;
-	private Serializable lbgUtilModif;
-	private Serializable lbgFonCode;
-	private Serializable lbgDisTre;
-	private Serializable lbgDisDon;
-	private Serializable lbgDisEmp;
-	private Serializable lbgDisTot;
-	private Serializable lbgFonCodeAc;
-	private Serializable lbgStaCode;
-	private Serializable lbgActNumModif;
-	private Serializable lbgDteVal;
-	private Serializable lbgFonCodeVal;
-	private Serializable lbgTraitmt;
-	private Serializable lbgTraitmtNotif;
-	private Serializable lbgDteStaCour;
-	private Serializable lbgTitre;
-	private Serializable lbgCor;
-	private Serializable lbgAdmCentral;
-	private Serializable lbgMotifCor;
-	private Serializable lbgDteCor;
-	private Serializable lbgFonCodeCor;
-	private Serializable lbgFonCodePf;
-	private Serializable lbgFonCodeValAct;
-	private Serializable lbgActif;
-	private Serializable lbgFonCodeCf;
-	private Serializable lbgDotAnPlus1;
-	private Serializable lbgDotAnPlus2;
-	private Serializable lbgDotAnPlus0;
-	private Serializable lbgTypBud;
-	private Serializable lbgDteMp;
-	private Serializable lbgUtilSaisiAct;
-	private Serializable lbgSigfip;
-	private Serializable lbgFonCodePr;
-	private Serializable lbgFonCodeVerou;
-	private Serializable lbgCode;
+	private String lbgStrCode;
+	private short lbgGesCode;
+	private BigDecimal lbgResDon;
+	private String lbgImputation;
+	private Long lbgAnoCode;
+	private String lbgNatCode;
+	private BigDecimal lbgResTr;
+	private Date lbgDteSaisi;
+	private BigDecimal lbgAeTr;
+	private BigDecimal lbgAeDon;
+	private BigDecimal lbgAeEmp;
+	private String lbgMp;
+	private String lbgReglMp;
+	private BigDecimal lbgTotDot;
+	private String lbgUtilSaisi;
+	private String lbgDesCode;
+	private Date lbgDteModif;
+	private BigDecimal lbgResEmp;
+	private BigDecimal lbgResTot;
+	private String lbgUtilModif;
+	private String lbgFonCode;
+	private BigDecimal lbgDisTre;
+	private BigDecimal lbgDisDon;
+	private BigDecimal lbgDisEmp;
+	private BigDecimal lbgDisTot;
+	private String lbgFonCodeAc;
+	private String lbgStaCode;
+	private String lbgActNumModif;
+	private Date lbgDteVal;
+	private String lbgFonCodeVal;
+	private String lbgTraitmt;
+	private String lbgTraitmtNotif;
+	private Date lbgDteStaCour;
+	private String lbgTitre;
+	private String lbgCor;
+	private String lbgAdmCentral;
+	private String lbgMotifCor;
+	private Date lbgDteCor;
+	private String lbgFonCodeCor;
+	private String lbgFonCodePf;
+	private String lbgFonCodeValAct;
+	private String lbgActif;
+	private String lbgFonCodeCf;
+	private BigDecimal lbgDotAnPlus1;
+	private BigDecimal lbgDotAnPlus2;
+	private BigDecimal lbgDotAnPlus0;
+	private String lbgTypBud;
+	private Date lbgDteMp;
+	private String lbgUtilSaisiAct;
+	private String lbgSigfip;
+	private String lbgFonCodePr;
+	private String lbgFonCodeVerou;
+	private String lbgCode;
 
 	public VLBudgetsId() {
 	}
 
-	public VLBudgetsId(Serializable lbgStrCode, Serializable lbgGesCode, Serializable lbgResDon,
-			Serializable lbgImputation, Serializable lbgAnoCode, Serializable lbgNatCode, Serializable lbgResTr,
-			Serializable lbgDteSaisi, Serializable lbgAeTr, Serializable lbgAeDon, Serializable lbgAeEmp,
-			Serializable lbgMp, Serializable lbgReglMp, Serializable lbgTotDot, Serializable lbgUtilSaisi,
-			Serializable lbgDesCode, Serializable lbgDteModif, Serializable lbgResEmp, Serializable lbgResTot,
-			Serializable lbgUtilModif, Serializable lbgFonCode, Serializable lbgDisTre, Serializable lbgDisDon,
-			Serializable lbgDisEmp, Serializable lbgDisTot, Serializable lbgFonCodeAc, Serializable lbgStaCode,
-			Serializable lbgActNumModif, Serializable lbgDteVal, Serializable lbgFonCodeVal, Serializable lbgTraitmt,
-			Serializable lbgTraitmtNotif, Serializable lbgDteStaCour, Serializable lbgTitre, Serializable lbgCor,
-			Serializable lbgAdmCentral, Serializable lbgMotifCor, Serializable lbgDteCor, Serializable lbgFonCodeCor,
-			Serializable lbgFonCodePf, Serializable lbgFonCodeValAct, Serializable lbgActif, Serializable lbgFonCodeCf,
-			Serializable lbgDotAnPlus1, Serializable lbgDotAnPlus2, Serializable lbgDotAnPlus0, Serializable lbgTypBud,
-			Serializable lbgDteMp, Serializable lbgUtilSaisiAct, Serializable lbgSigfip, Serializable lbgFonCodePr,
-			Serializable lbgFonCodeVerou, Serializable lbgCode) {
+	public VLBudgetsId(String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon, String lbgImputation,
+			String lbgNatCode, BigDecimal lbgResTr, BigDecimal lbgAeTr, BigDecimal lbgAeDon, BigDecimal lbgAeEmp,
+			BigDecimal lbgTotDot, String lbgAdmCentral) {
+		this.lbgStrCode = lbgStrCode;
+		this.lbgGesCode = lbgGesCode;
+		this.lbgResDon = lbgResDon;
+		this.lbgImputation = lbgImputation;
+		this.lbgNatCode = lbgNatCode;
+		this.lbgResTr = lbgResTr;
+		this.lbgAeTr = lbgAeTr;
+		this.lbgAeDon = lbgAeDon;
+		this.lbgAeEmp = lbgAeEmp;
+		this.lbgTotDot = lbgTotDot;
+		this.lbgAdmCentral = lbgAdmCentral;
+	}
+
+	public VLBudgetsId(String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon, String lbgImputation, Long lbgAnoCode,
+			String lbgNatCode, BigDecimal lbgResTr, Date lbgDteSaisi, BigDecimal lbgAeTr, BigDecimal lbgAeDon,
+			BigDecimal lbgAeEmp, String lbgMp, String lbgReglMp, BigDecimal lbgTotDot, String lbgUtilSaisi,
+			String lbgDesCode, Date lbgDteModif, BigDecimal lbgResEmp, BigDecimal lbgResTot, String lbgUtilModif,
+			String lbgFonCode, BigDecimal lbgDisTre, BigDecimal lbgDisDon, BigDecimal lbgDisEmp, BigDecimal lbgDisTot,
+			String lbgFonCodeAc, String lbgStaCode, String lbgActNumModif, Date lbgDteVal, String lbgFonCodeVal,
+			String lbgTraitmt, String lbgTraitmtNotif, Date lbgDteStaCour, String lbgTitre, String lbgCor,
+			String lbgAdmCentral, String lbgMotifCor, Date lbgDteCor, String lbgFonCodeCor, String lbgFonCodePf,
+			String lbgFonCodeValAct, String lbgActif, String lbgFonCodeCf, BigDecimal lbgDotAnPlus1,
+			BigDecimal lbgDotAnPlus2, BigDecimal lbgDotAnPlus0, String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct,
+			String lbgSigfip, String lbgFonCodePr, String lbgFonCodeVerou, String lbgCode) {
 		this.lbgStrCode = lbgStrCode;
 		this.lbgGesCode = lbgGesCode;
 		this.lbgResDon = lbgResDon;
@@ -137,480 +151,480 @@ public class VLBudgetsId implements java.io.Serializable {
 		this.lbgCode = lbgCode;
 	}
 
-	@Column(name = "LBG_STR_CODE")
-	public Serializable getLbgStrCode() {
+	@Column(name = "LBG_STR_CODE", nullable = false, length = 30)
+	public String getLbgStrCode() {
 		return this.lbgStrCode;
 	}
 
-	public void setLbgStrCode(Serializable lbgStrCode) {
+	public void setLbgStrCode(String lbgStrCode) {
 		this.lbgStrCode = lbgStrCode;
 	}
 
-	@Column(name = "LBG_GES_CODE")
-	public Serializable getLbgGesCode() {
+	@Column(name = "LBG_GES_CODE", nullable = false, precision = 4, scale = 0)
+	public short getLbgGesCode() {
 		return this.lbgGesCode;
 	}
 
-	public void setLbgGesCode(Serializable lbgGesCode) {
+	public void setLbgGesCode(short lbgGesCode) {
 		this.lbgGesCode = lbgGesCode;
 	}
 
-	@Column(name = "LBG_RES_DON")
-	public Serializable getLbgResDon() {
+	@Column(name = "LBG_RES_DON", nullable = false, precision = 20, scale = 0)
+	public BigDecimal getLbgResDon() {
 		return this.lbgResDon;
 	}
 
-	public void setLbgResDon(Serializable lbgResDon) {
+	public void setLbgResDon(BigDecimal lbgResDon) {
 		this.lbgResDon = lbgResDon;
 	}
 
-	@Column(name = "LBG_IMPUTATION")
-	public Serializable getLbgImputation() {
+	@Column(name = "LBG_IMPUTATION", nullable = false, length = 50)
+	public String getLbgImputation() {
 		return this.lbgImputation;
 	}
 
-	public void setLbgImputation(Serializable lbgImputation) {
+	public void setLbgImputation(String lbgImputation) {
 		this.lbgImputation = lbgImputation;
 	}
 
-	@Column(name = "LBG_ANO_CODE")
-	public Serializable getLbgAnoCode() {
+	@Column(name = "LBG_ANO_CODE", precision = 10, scale = 0)
+	public Long getLbgAnoCode() {
 		return this.lbgAnoCode;
 	}
 
-	public void setLbgAnoCode(Serializable lbgAnoCode) {
+	public void setLbgAnoCode(Long lbgAnoCode) {
 		this.lbgAnoCode = lbgAnoCode;
 	}
 
-	@Column(name = "LBG_NAT_CODE")
-	public Serializable getLbgNatCode() {
+	@Column(name = "LBG_NAT_CODE", nullable = false, length = 20)
+	public String getLbgNatCode() {
 		return this.lbgNatCode;
 	}
 
-	public void setLbgNatCode(Serializable lbgNatCode) {
+	public void setLbgNatCode(String lbgNatCode) {
 		this.lbgNatCode = lbgNatCode;
 	}
 
-	@Column(name = "LBG_RES_TR")
-	public Serializable getLbgResTr() {
+	@Column(name = "LBG_RES_TR", nullable = false, precision = 20, scale = 0)
+	public BigDecimal getLbgResTr() {
 		return this.lbgResTr;
 	}
 
-	public void setLbgResTr(Serializable lbgResTr) {
+	public void setLbgResTr(BigDecimal lbgResTr) {
 		this.lbgResTr = lbgResTr;
 	}
 
-	@Column(name = "LBG_DTE_SAISI")
-	public Serializable getLbgDteSaisi() {
+	@Column(name = "LBG_DTE_SAISI", length = 7)
+	public Date getLbgDteSaisi() {
 		return this.lbgDteSaisi;
 	}
 
-	public void setLbgDteSaisi(Serializable lbgDteSaisi) {
+	public void setLbgDteSaisi(Date lbgDteSaisi) {
 		this.lbgDteSaisi = lbgDteSaisi;
 	}
 
-	@Column(name = "LBG_AE_TR")
-	public Serializable getLbgAeTr() {
+	@Column(name = "LBG_AE_TR", nullable = false, precision = 20, scale = 0)
+	public BigDecimal getLbgAeTr() {
 		return this.lbgAeTr;
 	}
 
-	public void setLbgAeTr(Serializable lbgAeTr) {
+	public void setLbgAeTr(BigDecimal lbgAeTr) {
 		this.lbgAeTr = lbgAeTr;
 	}
 
-	@Column(name = "LBG_AE_DON")
-	public Serializable getLbgAeDon() {
+	@Column(name = "LBG_AE_DON", nullable = false, precision = 20, scale = 0)
+	public BigDecimal getLbgAeDon() {
 		return this.lbgAeDon;
 	}
 
-	public void setLbgAeDon(Serializable lbgAeDon) {
+	public void setLbgAeDon(BigDecimal lbgAeDon) {
 		this.lbgAeDon = lbgAeDon;
 	}
 
-	@Column(name = "LBG_AE_EMP")
-	public Serializable getLbgAeEmp() {
+	@Column(name = "LBG_AE_EMP", nullable = false, precision = 20, scale = 0)
+	public BigDecimal getLbgAeEmp() {
 		return this.lbgAeEmp;
 	}
 
-	public void setLbgAeEmp(Serializable lbgAeEmp) {
+	public void setLbgAeEmp(BigDecimal lbgAeEmp) {
 		this.lbgAeEmp = lbgAeEmp;
 	}
 
-	@Column(name = "LBG_MP")
-	public Serializable getLbgMp() {
+	@Column(name = "LBG_MP", length = 1)
+	public String getLbgMp() {
 		return this.lbgMp;
 	}
 
-	public void setLbgMp(Serializable lbgMp) {
+	public void setLbgMp(String lbgMp) {
 		this.lbgMp = lbgMp;
 	}
 
-	@Column(name = "LBG_REGL_MP")
-	public Serializable getLbgReglMp() {
+	@Column(name = "LBG_REGL_MP", length = 1)
+	public String getLbgReglMp() {
 		return this.lbgReglMp;
 	}
 
-	public void setLbgReglMp(Serializable lbgReglMp) {
+	public void setLbgReglMp(String lbgReglMp) {
 		this.lbgReglMp = lbgReglMp;
 	}
 
-	@Column(name = "LBG_TOT_DOT")
-	public Serializable getLbgTotDot() {
+	@Column(name = "LBG_TOT_DOT", nullable = false, precision = 20, scale = 0)
+	public BigDecimal getLbgTotDot() {
 		return this.lbgTotDot;
 	}
 
-	public void setLbgTotDot(Serializable lbgTotDot) {
+	public void setLbgTotDot(BigDecimal lbgTotDot) {
 		this.lbgTotDot = lbgTotDot;
 	}
 
-	@Column(name = "LBG_UTIL_SAISI")
-	public Serializable getLbgUtilSaisi() {
+	@Column(name = "LBG_UTIL_SAISI", length = 10)
+	public String getLbgUtilSaisi() {
 		return this.lbgUtilSaisi;
 	}
 
-	public void setLbgUtilSaisi(Serializable lbgUtilSaisi) {
+	public void setLbgUtilSaisi(String lbgUtilSaisi) {
 		this.lbgUtilSaisi = lbgUtilSaisi;
 	}
 
-	@Column(name = "LBG_DES_CODE")
-	public Serializable getLbgDesCode() {
+	@Column(name = "LBG_DES_CODE", length = 30)
+	public String getLbgDesCode() {
 		return this.lbgDesCode;
 	}
 
-	public void setLbgDesCode(Serializable lbgDesCode) {
+	public void setLbgDesCode(String lbgDesCode) {
 		this.lbgDesCode = lbgDesCode;
 	}
 
-	@Column(name = "LBG_DTE_MODIF")
-	public Serializable getLbgDteModif() {
+	@Column(name = "LBG_DTE_MODIF", length = 7)
+	public Date getLbgDteModif() {
 		return this.lbgDteModif;
 	}
 
-	public void setLbgDteModif(Serializable lbgDteModif) {
+	public void setLbgDteModif(Date lbgDteModif) {
 		this.lbgDteModif = lbgDteModif;
 	}
 
-	@Column(name = "LBG_RES_EMP")
-	public Serializable getLbgResEmp() {
+	@Column(name = "LBG_RES_EMP", precision = 20, scale = 0)
+	public BigDecimal getLbgResEmp() {
 		return this.lbgResEmp;
 	}
 
-	public void setLbgResEmp(Serializable lbgResEmp) {
+	public void setLbgResEmp(BigDecimal lbgResEmp) {
 		this.lbgResEmp = lbgResEmp;
 	}
 
-	@Column(name = "LBG_RES_TOT")
-	public Serializable getLbgResTot() {
+	@Column(name = "LBG_RES_TOT", precision = 20, scale = 0)
+	public BigDecimal getLbgResTot() {
 		return this.lbgResTot;
 	}
 
-	public void setLbgResTot(Serializable lbgResTot) {
+	public void setLbgResTot(BigDecimal lbgResTot) {
 		this.lbgResTot = lbgResTot;
 	}
 
-	@Column(name = "LBG_UTIL_MODIF")
-	public Serializable getLbgUtilModif() {
+	@Column(name = "LBG_UTIL_MODIF", length = 20)
+	public String getLbgUtilModif() {
 		return this.lbgUtilModif;
 	}
 
-	public void setLbgUtilModif(Serializable lbgUtilModif) {
+	public void setLbgUtilModif(String lbgUtilModif) {
 		this.lbgUtilModif = lbgUtilModif;
 	}
 
-	@Column(name = "LBG_FON_CODE")
-	public Serializable getLbgFonCode() {
+	@Column(name = "LBG_FON_CODE", length = 20)
+	public String getLbgFonCode() {
 		return this.lbgFonCode;
 	}
 
-	public void setLbgFonCode(Serializable lbgFonCode) {
+	public void setLbgFonCode(String lbgFonCode) {
 		this.lbgFonCode = lbgFonCode;
 	}
 
-	@Column(name = "LBG_DIS_TRE")
-	public Serializable getLbgDisTre() {
+	@Column(name = "LBG_DIS_TRE", precision = 20, scale = 0)
+	public BigDecimal getLbgDisTre() {
 		return this.lbgDisTre;
 	}
 
-	public void setLbgDisTre(Serializable lbgDisTre) {
+	public void setLbgDisTre(BigDecimal lbgDisTre) {
 		this.lbgDisTre = lbgDisTre;
 	}
 
-	@Column(name = "LBG_DIS_DON")
-	public Serializable getLbgDisDon() {
+	@Column(name = "LBG_DIS_DON", precision = 20, scale = 0)
+	public BigDecimal getLbgDisDon() {
 		return this.lbgDisDon;
 	}
 
-	public void setLbgDisDon(Serializable lbgDisDon) {
+	public void setLbgDisDon(BigDecimal lbgDisDon) {
 		this.lbgDisDon = lbgDisDon;
 	}
 
-	@Column(name = "LBG_DIS_EMP")
-	public Serializable getLbgDisEmp() {
+	@Column(name = "LBG_DIS_EMP", precision = 20, scale = 0)
+	public BigDecimal getLbgDisEmp() {
 		return this.lbgDisEmp;
 	}
 
-	public void setLbgDisEmp(Serializable lbgDisEmp) {
+	public void setLbgDisEmp(BigDecimal lbgDisEmp) {
 		this.lbgDisEmp = lbgDisEmp;
 	}
 
-	@Column(name = "LBG_DIS_TOT")
-	public Serializable getLbgDisTot() {
+	@Column(name = "LBG_DIS_TOT", precision = 20, scale = 0)
+	public BigDecimal getLbgDisTot() {
 		return this.lbgDisTot;
 	}
 
-	public void setLbgDisTot(Serializable lbgDisTot) {
+	public void setLbgDisTot(BigDecimal lbgDisTot) {
 		this.lbgDisTot = lbgDisTot;
 	}
 
-	@Column(name = "LBG_FON_CODE_AC")
-	public Serializable getLbgFonCodeAc() {
+	@Column(name = "LBG_FON_CODE_AC", length = 30)
+	public String getLbgFonCodeAc() {
 		return this.lbgFonCodeAc;
 	}
 
-	public void setLbgFonCodeAc(Serializable lbgFonCodeAc) {
+	public void setLbgFonCodeAc(String lbgFonCodeAc) {
 		this.lbgFonCodeAc = lbgFonCodeAc;
 	}
 
-	@Column(name = "LBG_STA_CODE")
-	public Serializable getLbgStaCode() {
+	@Column(name = "LBG_STA_CODE", length = 10)
+	public String getLbgStaCode() {
 		return this.lbgStaCode;
 	}
 
-	public void setLbgStaCode(Serializable lbgStaCode) {
+	public void setLbgStaCode(String lbgStaCode) {
 		this.lbgStaCode = lbgStaCode;
 	}
 
-	@Column(name = "LBG_ACT_NUM_MODIF")
-	public Serializable getLbgActNumModif() {
+	@Column(name = "LBG_ACT_NUM_MODIF", length = 100)
+	public String getLbgActNumModif() {
 		return this.lbgActNumModif;
 	}
 
-	public void setLbgActNumModif(Serializable lbgActNumModif) {
+	public void setLbgActNumModif(String lbgActNumModif) {
 		this.lbgActNumModif = lbgActNumModif;
 	}
 
-	@Column(name = "LBG_DTE_VAL")
-	public Serializable getLbgDteVal() {
+	@Column(name = "LBG_DTE_VAL", length = 7)
+	public Date getLbgDteVal() {
 		return this.lbgDteVal;
 	}
 
-	public void setLbgDteVal(Serializable lbgDteVal) {
+	public void setLbgDteVal(Date lbgDteVal) {
 		this.lbgDteVal = lbgDteVal;
 	}
 
-	@Column(name = "LBG_FON_CODE_VAL")
-	public Serializable getLbgFonCodeVal() {
+	@Column(name = "LBG_FON_CODE_VAL", length = 10)
+	public String getLbgFonCodeVal() {
 		return this.lbgFonCodeVal;
 	}
 
-	public void setLbgFonCodeVal(Serializable lbgFonCodeVal) {
+	public void setLbgFonCodeVal(String lbgFonCodeVal) {
 		this.lbgFonCodeVal = lbgFonCodeVal;
 	}
 
-	@Column(name = "LBG_TRAITMT")
-	public Serializable getLbgTraitmt() {
+	@Column(name = "LBG_TRAITMT", length = 1)
+	public String getLbgTraitmt() {
 		return this.lbgTraitmt;
 	}
 
-	public void setLbgTraitmt(Serializable lbgTraitmt) {
+	public void setLbgTraitmt(String lbgTraitmt) {
 		this.lbgTraitmt = lbgTraitmt;
 	}
 
-	@Column(name = "LBG_TRAITMT_NOTIF")
-	public Serializable getLbgTraitmtNotif() {
+	@Column(name = "LBG_TRAITMT_NOTIF", length = 1)
+	public String getLbgTraitmtNotif() {
 		return this.lbgTraitmtNotif;
 	}
 
-	public void setLbgTraitmtNotif(Serializable lbgTraitmtNotif) {
+	public void setLbgTraitmtNotif(String lbgTraitmtNotif) {
 		this.lbgTraitmtNotif = lbgTraitmtNotif;
 	}
 
-	@Column(name = "LBG_DTE_STA_COUR")
-	public Serializable getLbgDteStaCour() {
+	@Column(name = "LBG_DTE_STA_COUR", length = 7)
+	public Date getLbgDteStaCour() {
 		return this.lbgDteStaCour;
 	}
 
-	public void setLbgDteStaCour(Serializable lbgDteStaCour) {
+	public void setLbgDteStaCour(Date lbgDteStaCour) {
 		this.lbgDteStaCour = lbgDteStaCour;
 	}
 
-	@Column(name = "LBG_TITRE")
-	public Serializable getLbgTitre() {
+	@Column(name = "LBG_TITRE", length = 20)
+	public String getLbgTitre() {
 		return this.lbgTitre;
 	}
 
-	public void setLbgTitre(Serializable lbgTitre) {
+	public void setLbgTitre(String lbgTitre) {
 		this.lbgTitre = lbgTitre;
 	}
 
-	@Column(name = "LBG_COR")
-	public Serializable getLbgCor() {
+	@Column(name = "LBG_COR", length = 1)
+	public String getLbgCor() {
 		return this.lbgCor;
 	}
 
-	public void setLbgCor(Serializable lbgCor) {
+	public void setLbgCor(String lbgCor) {
 		this.lbgCor = lbgCor;
 	}
 
-	@Column(name = "LBG_ADM_CENTRAL")
-	public Serializable getLbgAdmCentral() {
+	@Column(name = "LBG_ADM_CENTRAL", nullable = false, length = 1)
+	public String getLbgAdmCentral() {
 		return this.lbgAdmCentral;
 	}
 
-	public void setLbgAdmCentral(Serializable lbgAdmCentral) {
+	public void setLbgAdmCentral(String lbgAdmCentral) {
 		this.lbgAdmCentral = lbgAdmCentral;
 	}
 
-	@Column(name = "LBG_MOTIF_COR")
-	public Serializable getLbgMotifCor() {
+	@Column(name = "LBG_MOTIF_COR", length = 200)
+	public String getLbgMotifCor() {
 		return this.lbgMotifCor;
 	}
 
-	public void setLbgMotifCor(Serializable lbgMotifCor) {
+	public void setLbgMotifCor(String lbgMotifCor) {
 		this.lbgMotifCor = lbgMotifCor;
 	}
 
-	@Column(name = "LBG_DTE_COR")
-	public Serializable getLbgDteCor() {
+	@Column(name = "LBG_DTE_COR", length = 7)
+	public Date getLbgDteCor() {
 		return this.lbgDteCor;
 	}
 
-	public void setLbgDteCor(Serializable lbgDteCor) {
+	public void setLbgDteCor(Date lbgDteCor) {
 		this.lbgDteCor = lbgDteCor;
 	}
 
-	@Column(name = "LBG_FON_CODE_COR")
-	public Serializable getLbgFonCodeCor() {
+	@Column(name = "LBG_FON_CODE_COR", length = 30)
+	public String getLbgFonCodeCor() {
 		return this.lbgFonCodeCor;
 	}
 
-	public void setLbgFonCodeCor(Serializable lbgFonCodeCor) {
+	public void setLbgFonCodeCor(String lbgFonCodeCor) {
 		this.lbgFonCodeCor = lbgFonCodeCor;
 	}
 
-	@Column(name = "LBG_FON_CODE_PF")
-	public Serializable getLbgFonCodePf() {
+	@Column(name = "LBG_FON_CODE_PF", length = 30)
+	public String getLbgFonCodePf() {
 		return this.lbgFonCodePf;
 	}
 
-	public void setLbgFonCodePf(Serializable lbgFonCodePf) {
+	public void setLbgFonCodePf(String lbgFonCodePf) {
 		this.lbgFonCodePf = lbgFonCodePf;
 	}
 
-	@Column(name = "LBG_FON_CODE_VAL_ACT")
-	public Serializable getLbgFonCodeValAct() {
+	@Column(name = "LBG_FON_CODE_VAL_ACT", length = 30)
+	public String getLbgFonCodeValAct() {
 		return this.lbgFonCodeValAct;
 	}
 
-	public void setLbgFonCodeValAct(Serializable lbgFonCodeValAct) {
+	public void setLbgFonCodeValAct(String lbgFonCodeValAct) {
 		this.lbgFonCodeValAct = lbgFonCodeValAct;
 	}
 
-	@Column(name = "LBG_ACTIF")
-	public Serializable getLbgActif() {
+	@Column(name = "LBG_ACTIF", length = 1)
+	public String getLbgActif() {
 		return this.lbgActif;
 	}
 
-	public void setLbgActif(Serializable lbgActif) {
+	public void setLbgActif(String lbgActif) {
 		this.lbgActif = lbgActif;
 	}
 
-	@Column(name = "LBG_FON_CODE_CF")
-	public Serializable getLbgFonCodeCf() {
+	@Column(name = "LBG_FON_CODE_CF", length = 30)
+	public String getLbgFonCodeCf() {
 		return this.lbgFonCodeCf;
 	}
 
-	public void setLbgFonCodeCf(Serializable lbgFonCodeCf) {
+	public void setLbgFonCodeCf(String lbgFonCodeCf) {
 		this.lbgFonCodeCf = lbgFonCodeCf;
 	}
 
-	@Column(name = "LBG_DOT_AN_PLUS1")
-	public Serializable getLbgDotAnPlus1() {
+	@Column(name = "LBG_DOT_AN_PLUS1", precision = 20, scale = 0)
+	public BigDecimal getLbgDotAnPlus1() {
 		return this.lbgDotAnPlus1;
 	}
 
-	public void setLbgDotAnPlus1(Serializable lbgDotAnPlus1) {
+	public void setLbgDotAnPlus1(BigDecimal lbgDotAnPlus1) {
 		this.lbgDotAnPlus1 = lbgDotAnPlus1;
 	}
 
-	@Column(name = "LBG_DOT_AN_PLUS2")
-	public Serializable getLbgDotAnPlus2() {
+	@Column(name = "LBG_DOT_AN_PLUS2", precision = 20, scale = 0)
+	public BigDecimal getLbgDotAnPlus2() {
 		return this.lbgDotAnPlus2;
 	}
 
-	public void setLbgDotAnPlus2(Serializable lbgDotAnPlus2) {
+	public void setLbgDotAnPlus2(BigDecimal lbgDotAnPlus2) {
 		this.lbgDotAnPlus2 = lbgDotAnPlus2;
 	}
 
-	@Column(name = "LBG_DOT_AN_PLUS0")
-	public Serializable getLbgDotAnPlus0() {
+	@Column(name = "LBG_DOT_AN_PLUS0", precision = 20, scale = 0)
+	public BigDecimal getLbgDotAnPlus0() {
 		return this.lbgDotAnPlus0;
 	}
 
-	public void setLbgDotAnPlus0(Serializable lbgDotAnPlus0) {
+	public void setLbgDotAnPlus0(BigDecimal lbgDotAnPlus0) {
 		this.lbgDotAnPlus0 = lbgDotAnPlus0;
 	}
 
-	@Column(name = "LBG_TYP_BUD")
-	public Serializable getLbgTypBud() {
+	@Column(name = "LBG_TYP_BUD", length = 10)
+	public String getLbgTypBud() {
 		return this.lbgTypBud;
 	}
 
-	public void setLbgTypBud(Serializable lbgTypBud) {
+	public void setLbgTypBud(String lbgTypBud) {
 		this.lbgTypBud = lbgTypBud;
 	}
 
-	@Column(name = "LBG_DTE_MP")
-	public Serializable getLbgDteMp() {
+	@Column(name = "LBG_DTE_MP", length = 7)
+	public Date getLbgDteMp() {
 		return this.lbgDteMp;
 	}
 
-	public void setLbgDteMp(Serializable lbgDteMp) {
+	public void setLbgDteMp(Date lbgDteMp) {
 		this.lbgDteMp = lbgDteMp;
 	}
 
-	@Column(name = "LBG_UTIL_SAISI_ACT")
-	public Serializable getLbgUtilSaisiAct() {
+	@Column(name = "LBG_UTIL_SAISI_ACT", length = 30)
+	public String getLbgUtilSaisiAct() {
 		return this.lbgUtilSaisiAct;
 	}
 
-	public void setLbgUtilSaisiAct(Serializable lbgUtilSaisiAct) {
+	public void setLbgUtilSaisiAct(String lbgUtilSaisiAct) {
 		this.lbgUtilSaisiAct = lbgUtilSaisiAct;
 	}
 
-	@Column(name = "LBG_SIGFIP")
-	public Serializable getLbgSigfip() {
+	@Column(name = "LBG_SIGFIP", length = 1)
+	public String getLbgSigfip() {
 		return this.lbgSigfip;
 	}
 
-	public void setLbgSigfip(Serializable lbgSigfip) {
+	public void setLbgSigfip(String lbgSigfip) {
 		this.lbgSigfip = lbgSigfip;
 	}
 
-	@Column(name = "LBG_FON_CODE_PR")
-	public Serializable getLbgFonCodePr() {
+	@Column(name = "LBG_FON_CODE_PR", length = 30)
+	public String getLbgFonCodePr() {
 		return this.lbgFonCodePr;
 	}
 
-	public void setLbgFonCodePr(Serializable lbgFonCodePr) {
+	public void setLbgFonCodePr(String lbgFonCodePr) {
 		this.lbgFonCodePr = lbgFonCodePr;
 	}
 
-	@Column(name = "LBG_FON_CODE_VEROU")
-	public Serializable getLbgFonCodeVerou() {
+	@Column(name = "LBG_FON_CODE_VEROU", length = 30)
+	public String getLbgFonCodeVerou() {
 		return this.lbgFonCodeVerou;
 	}
 
-	public void setLbgFonCodeVerou(Serializable lbgFonCodeVerou) {
+	public void setLbgFonCodeVerou(String lbgFonCodeVerou) {
 		this.lbgFonCodeVerou = lbgFonCodeVerou;
 	}
 
-	@Column(name = "LBG_CODE")
-	public Serializable getLbgCode() {
+	@Column(name = "LBG_CODE", length = 120)
+	public String getLbgCode() {
 		return this.lbgCode;
 	}
 
-	public void setLbgCode(Serializable lbgCode) {
+	public void setLbgCode(String lbgCode) {
 		this.lbgCode = lbgCode;
 	}
 
@@ -625,8 +639,7 @@ public class VLBudgetsId implements java.io.Serializable {
 
 		return ((this.getLbgStrCode() == castOther.getLbgStrCode()) || (this.getLbgStrCode() != null
 				&& castOther.getLbgStrCode() != null && this.getLbgStrCode().equals(castOther.getLbgStrCode())))
-				&& ((this.getLbgGesCode() == castOther.getLbgGesCode()) || (this.getLbgGesCode() != null
-						&& castOther.getLbgGesCode() != null && this.getLbgGesCode().equals(castOther.getLbgGesCode())))
+				&& (this.getLbgGesCode() == castOther.getLbgGesCode())
 				&& ((this.getLbgResDon() == castOther.getLbgResDon()) || (this.getLbgResDon() != null
 						&& castOther.getLbgResDon() != null && this.getLbgResDon().equals(castOther.getLbgResDon())))
 				&& ((this.getLbgImputation() == castOther.getLbgImputation())
@@ -757,7 +770,7 @@ public class VLBudgetsId implements java.io.Serializable {
 		int result = 17;
 
 		result = 37 * result + (getLbgStrCode() == null ? 0 : this.getLbgStrCode().hashCode());
-		result = 37 * result + (getLbgGesCode() == null ? 0 : this.getLbgGesCode().hashCode());
+		result = 37 * result + this.getLbgGesCode();
 		result = 37 * result + (getLbgResDon() == null ? 0 : this.getLbgResDon().hashCode());
 		result = 37 * result + (getLbgImputation() == null ? 0 : this.getLbgImputation().hashCode());
 		result = 37 * result + (getLbgAnoCode() == null ? 0 : this.getLbgAnoCode().hashCode());

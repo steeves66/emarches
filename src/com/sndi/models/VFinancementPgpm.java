@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -29,7 +29,7 @@ public class VFinancementPgpm implements java.io.Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "fipId", column = @Column(name = "FIP_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "fipDevCode", column = @Column(name = "FIP_DEV_CODE", nullable = false, length = 8)),
-			@AttributeOverride(name = "fipBaiCode", column = @Column(name = "FIP_BAI_CODE", length = 5)),
+			@AttributeOverride(name = "fipBaiCode", column = @Column(name = "FIP_BAI_CODE", length = 20)),
 			@AttributeOverride(name = "fipSouCode", column = @Column(name = "FIP_SOU_CODE", nullable = false, length = 5)),
 			@AttributeOverride(name = "fipGpgId", column = @Column(name = "FIP_GPG_ID", nullable = false, precision = 10, scale = 0)),
 			@AttributeOverride(name = "fipMontantCfa", column = @Column(name = "FIP_MONTANT_CFA", precision = 15)),

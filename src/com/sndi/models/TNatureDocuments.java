@@ -1,13 +1,9 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -21,8 +17,6 @@ public class TNatureDocuments implements java.io.Serializable {
 	private String nadLibelle;
 	private String nadAbrege;
 	private String nadType;
-	private Set<TDossierMbr> TDossierMbrs = new HashSet<TDossierMbr>(0);
-	private Set<TDossierDacs> TDossierDacses = new HashSet<TDossierDacs>(0);
 
 	public TNatureDocuments() {
 	}
@@ -31,14 +25,11 @@ public class TNatureDocuments implements java.io.Serializable {
 		this.nadCode = nadCode;
 	}
 
-	public TNatureDocuments(String nadCode, String nadLibelle, String nadAbrege, String nadType,
-			Set<TDossierMbr> TDossierMbrs, Set<TDossierDacs> TDossierDacses) {
+	public TNatureDocuments(String nadCode, String nadLibelle, String nadAbrege, String nadType) {
 		this.nadCode = nadCode;
 		this.nadLibelle = nadLibelle;
 		this.nadAbrege = nadAbrege;
 		this.nadType = nadType;
-		this.TDossierMbrs = TDossierMbrs;
-		this.TDossierDacses = TDossierDacses;
 	}
 
 	@Id
@@ -77,24 +68,6 @@ public class TNatureDocuments implements java.io.Serializable {
 
 	public void setNadType(String nadType) {
 		this.nadType = nadType;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TNatureDocuments")
-	public Set<TDossierMbr> getTDossierMbrs() {
-		return this.TDossierMbrs;
-	}
-
-	public void setTDossierMbrs(Set<TDossierMbr> TDossierMbrs) {
-		this.TDossierMbrs = TDossierMbrs;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TNatureDocuments")
-	public Set<TDossierDacs> getTDossierDacses() {
-		return this.TDossierDacses;
-	}
-
-	public void setTDossierDacses(Set<TDossierDacs> TDossierDacses) {
-		this.TDossierDacses = TDossierDacses;
 	}
 
 }

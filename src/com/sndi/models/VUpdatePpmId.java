@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,7 +15,7 @@ public class VUpdatePpmId implements java.io.Serializable {
 	private long plpId;
 	private long dppId;
 	private long dppPlpId;
-	private long dppGpgId;
+	private Long dppGpgId;
 	private String dppStaCode;
 	private String dppTymCode;
 	private String dppMopCode;
@@ -136,22 +136,19 @@ public class VUpdatePpmId implements java.io.Serializable {
 	private String tymLibelleCourt;
 	private String mopLibelleLong;
 	private String souLibelle;
-	private long gpgId;
 	private String gpgObjet;
 	private String natLibelle;
 
 	public VUpdatePpmId() {
 	}
 
-	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
-			String dppMopCode, String dppTypePlan, String lbgCode, String lbgStrCode, short lbgGesCode,
-			BigDecimal lbgResDon, String lbgImputation, String lbgNatCode, BigDecimal lbgResTr, BigDecimal lbgAeTr,
-			BigDecimal lbgAeDon, BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral, String mdtCode,
-			String tymLibelleCourt, long gpgId) {
+	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, String dppStaCode, String dppTymCode, String dppMopCode,
+			String dppTypePlan, String lbgCode, String lbgStrCode, short lbgGesCode, BigDecimal lbgResDon,
+			String lbgImputation, String lbgNatCode, BigDecimal lbgResTr, BigDecimal lbgAeTr, BigDecimal lbgAeDon,
+			BigDecimal lbgAeEmp, BigDecimal lbgTotDot, String lbgAdmCentral, String mdtCode, String tymLibelleCourt) {
 		this.plpId = plpId;
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
-		this.dppGpgId = dppGpgId;
 		this.dppStaCode = dppStaCode;
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
@@ -170,10 +167,9 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.lbgAdmCentral = lbgAdmCentral;
 		this.mdtCode = mdtCode;
 		this.tymLibelleCourt = tymLibelleCourt;
-		this.gpgId = gpgId;
 	}
 
-	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
+	public VUpdatePpmId(long plpId, long dppId, long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode,
 			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, Integer dppNumeroOrdre,
 			Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
@@ -199,7 +195,7 @@ public class VUpdatePpmId implements java.io.Serializable {
 			BigDecimal lbgDotAnPlus0, String lbgTypBud, Date lbgDteMp, String lbgUtilSaisiAct, String lbgSigfip,
 			String lbgFonCodePr, String lbgFonCodeVerou, String mdtCode, String mdtLibelleLong, String mdtLibelleCourt,
 			Date mdtDteSaisi, String mdtOpeMatricule, String mdtTymCode, String tymLibelleCourt, String mopLibelleLong,
-			String souLibelle, long gpgId, String gpgObjet, String natLibelle) {
+			String souLibelle, String gpgObjet, String natLibelle) {
 		this.plpId = plpId;
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
@@ -324,7 +320,6 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.tymLibelleCourt = tymLibelleCourt;
 		this.mopLibelleLong = mopLibelleLong;
 		this.souLibelle = souLibelle;
-		this.gpgId = gpgId;
 		this.gpgObjet = gpgObjet;
 		this.natLibelle = natLibelle;
 	}
@@ -356,12 +351,12 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.dppPlpId = dppPlpId;
 	}
 
-	@Column(name = "DPP_GPG_ID", nullable = false, precision = 10, scale = 0)
-	public long getDppGpgId() {
+	@Column(name = "DPP_GPG_ID", precision = 10, scale = 0)
+	public Long getDppGpgId() {
 		return this.dppGpgId;
 	}
 
-	public void setDppGpgId(long dppGpgId) {
+	public void setDppGpgId(Long dppGpgId) {
 		this.dppGpgId = dppGpgId;
 	}
 
@@ -1445,15 +1440,6 @@ public class VUpdatePpmId implements java.io.Serializable {
 		this.souLibelle = souLibelle;
 	}
 
-	@Column(name = "GPG_ID", nullable = false, precision = 10, scale = 0)
-	public long getGpgId() {
-		return this.gpgId;
-	}
-
-	public void setGpgId(long gpgId) {
-		this.gpgId = gpgId;
-	}
-
 	@Column(name = "GPG_OBJET", length = 1000)
 	public String getGpgObjet() {
 		return this.gpgObjet;
@@ -1482,7 +1468,9 @@ public class VUpdatePpmId implements java.io.Serializable {
 		VUpdatePpmId castOther = (VUpdatePpmId) other;
 
 		return (this.getPlpId() == castOther.getPlpId()) && (this.getDppId() == castOther.getDppId())
-				&& (this.getDppPlpId() == castOther.getDppPlpId()) && (this.getDppGpgId() == castOther.getDppGpgId())
+				&& (this.getDppPlpId() == castOther.getDppPlpId())
+				&& ((this.getDppGpgId() == castOther.getDppGpgId()) || (this.getDppGpgId() != null
+						&& castOther.getDppGpgId() != null && this.getDppGpgId().equals(castOther.getDppGpgId())))
 				&& ((this.getDppStaCode() == castOther.getDppStaCode()) || (this.getDppStaCode() != null
 						&& castOther.getDppStaCode() != null && this.getDppStaCode().equals(castOther.getDppStaCode())))
 				&& ((this.getDppTymCode() == castOther.getDppTymCode()) || (this.getDppTymCode() != null
@@ -1797,7 +1785,6 @@ public class VUpdatePpmId implements java.io.Serializable {
 								&& this.getMopLibelleLong().equals(castOther.getMopLibelleLong())))
 				&& ((this.getSouLibelle() == castOther.getSouLibelle()) || (this.getSouLibelle() != null
 						&& castOther.getSouLibelle() != null && this.getSouLibelle().equals(castOther.getSouLibelle())))
-				&& (this.getGpgId() == castOther.getGpgId())
 				&& ((this.getGpgObjet() == castOther.getGpgObjet()) || (this.getGpgObjet() != null
 						&& castOther.getGpgObjet() != null && this.getGpgObjet().equals(castOther.getGpgObjet())))
 				&& ((this.getNatLibelle() == castOther.getNatLibelle())
@@ -1811,7 +1798,7 @@ public class VUpdatePpmId implements java.io.Serializable {
 		result = 37 * result + (int) this.getPlpId();
 		result = 37 * result + (int) this.getDppId();
 		result = 37 * result + (int) this.getDppPlpId();
-		result = 37 * result + (int) this.getDppGpgId();
+		result = 37 * result + (getDppGpgId() == null ? 0 : this.getDppGpgId().hashCode());
 		result = 37 * result + (getDppStaCode() == null ? 0 : this.getDppStaCode().hashCode());
 		result = 37 * result + (getDppTymCode() == null ? 0 : this.getDppTymCode().hashCode());
 		result = 37 * result + (getDppMopCode() == null ? 0 : this.getDppMopCode().hashCode());
@@ -1934,7 +1921,6 @@ public class VUpdatePpmId implements java.io.Serializable {
 		result = 37 * result + (getTymLibelleCourt() == null ? 0 : this.getTymLibelleCourt().hashCode());
 		result = 37 * result + (getMopLibelleLong() == null ? 0 : this.getMopLibelleLong().hashCode());
 		result = 37 * result + (getSouLibelle() == null ? 0 : this.getSouLibelle().hashCode());
-		result = 37 * result + (int) this.getGpgId();
 		result = 37 * result + (getGpgObjet() == null ? 0 : this.getGpgObjet().hashCode());
 		result = 37 * result + (getNatLibelle() == null ? 0 : this.getNatLibelle().hashCode());
 		return result;

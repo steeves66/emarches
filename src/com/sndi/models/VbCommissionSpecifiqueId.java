@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -23,6 +23,7 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 	private String comTcoCode;
 	private String comFonAdmin;
 	private String comStrCom;
+	private String comTctLibelle;
 	private String comTctTitre;
 
 	public VbCommissionSpecifiqueId() {
@@ -34,7 +35,7 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 
 	public VbCommissionSpecifiqueId(BigDecimal comNum, Date comDteSaisi, String comStrCode, String comTctCode,
 			String comOpeMatricule, String comDacCode, String comMarCode, String comAaoCode, String comTcoCode,
-			String comFonAdmin, String comStrCom, String comTctTitre) {
+			String comFonAdmin, String comStrCom, String comTctLibelle, String comTctTitre) {
 		this.comNum = comNum;
 		this.comDteSaisi = comDteSaisi;
 		this.comStrCode = comStrCode;
@@ -46,6 +47,7 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 		this.comTcoCode = comTcoCode;
 		this.comFonAdmin = comFonAdmin;
 		this.comStrCom = comStrCom;
+		this.comTctLibelle = comTctLibelle;
 		this.comTctTitre = comTctTitre;
 	}
 
@@ -148,7 +150,16 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 		this.comStrCom = comStrCom;
 	}
 
-	@Column(name = "COM_TCT_TITRE", length = 500)
+	@Column(name = "COM_TCT_LIBELLE", length = 500)
+	public String getComTctLibelle() {
+		return this.comTctLibelle;
+	}
+
+	public void setComTctLibelle(String comTctLibelle) {
+		this.comTctLibelle = comTctLibelle;
+	}
+
+	@Column(name = "COM_TCT_TITRE", length = 200)
 	public String getComTctTitre() {
 		return this.comTctTitre;
 	}
@@ -191,6 +202,9 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 								&& this.getComFonAdmin().equals(castOther.getComFonAdmin())))
 				&& ((this.getComStrCom() == castOther.getComStrCom()) || (this.getComStrCom() != null
 						&& castOther.getComStrCom() != null && this.getComStrCom().equals(castOther.getComStrCom())))
+				&& ((this.getComTctLibelle() == castOther.getComTctLibelle())
+						|| (this.getComTctLibelle() != null && castOther.getComTctLibelle() != null
+								&& this.getComTctLibelle().equals(castOther.getComTctLibelle())))
 				&& ((this.getComTctTitre() == castOther.getComTctTitre())
 						|| (this.getComTctTitre() != null && castOther.getComTctTitre() != null
 								&& this.getComTctTitre().equals(castOther.getComTctTitre())));
@@ -210,6 +224,7 @@ public class VbCommissionSpecifiqueId implements java.io.Serializable {
 		result = 37 * result + (getComTcoCode() == null ? 0 : this.getComTcoCode().hashCode());
 		result = 37 * result + (getComFonAdmin() == null ? 0 : this.getComFonAdmin().hashCode());
 		result = 37 * result + (getComStrCom() == null ? 0 : this.getComStrCom().hashCode());
+		result = 37 * result + (getComTctLibelle() == null ? 0 : this.getComTctLibelle().hashCode());
 		result = 37 * result + (getComTctTitre() == null ? 0 : this.getComTctTitre().hashCode());
 		return result;
 	}

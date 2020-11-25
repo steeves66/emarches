@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -28,6 +28,9 @@ public class VbTempParametreLotId implements java.io.Serializable {
 	private String tempLaaAutre1;
 	private String tempLaaDacCode;
 	private String tempLaaDelaiExe;
+	private String laaMtEst;
+	private String tempLaaLieuExe;
+	private String tempLaaVariante;
 
 	public VbTempParametreLotId() {
 	}
@@ -39,7 +42,8 @@ public class VbTempParametreLotId implements java.io.Serializable {
 	public VbTempParametreLotId(BigDecimal tempNum, String tempType, String tempOpeMatricule, Date tempLaaDteSaisi,
 			String tempLaaNbrTotLot, String tempLaaNbrLotDebut, String tempLaaNbrLotFin, String tempLaaLibGenerique,
 			String tempLaaImputation, String tempLaaCautLot, String tempLaaMtLot, String tempLaaAaoCode,
-			String tempLaaAutre, String tempLaaAutre1, String tempLaaDacCode, String tempLaaDelaiExe) {
+			String tempLaaAutre, String tempLaaAutre1, String tempLaaDacCode, String tempLaaDelaiExe, String laaMtEst,
+			String tempLaaLieuExe, String tempLaaVariante) {
 		this.tempNum = tempNum;
 		this.tempType = tempType;
 		this.tempOpeMatricule = tempOpeMatricule;
@@ -56,6 +60,9 @@ public class VbTempParametreLotId implements java.io.Serializable {
 		this.tempLaaAutre1 = tempLaaAutre1;
 		this.tempLaaDacCode = tempLaaDacCode;
 		this.tempLaaDelaiExe = tempLaaDelaiExe;
+		this.laaMtEst = laaMtEst;
+		this.tempLaaLieuExe = tempLaaLieuExe;
+		this.tempLaaVariante = tempLaaVariante;
 	}
 
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
@@ -202,6 +209,33 @@ public class VbTempParametreLotId implements java.io.Serializable {
 		this.tempLaaDelaiExe = tempLaaDelaiExe;
 	}
 
+	@Column(name = "LAA_MT_EST", length = 500)
+	public String getLaaMtEst() {
+		return this.laaMtEst;
+	}
+
+	public void setLaaMtEst(String laaMtEst) {
+		this.laaMtEst = laaMtEst;
+	}
+
+	@Column(name = "TEMP_LAA_LIEU_EXE", length = 500)
+	public String getTempLaaLieuExe() {
+		return this.tempLaaLieuExe;
+	}
+
+	public void setTempLaaLieuExe(String tempLaaLieuExe) {
+		this.tempLaaLieuExe = tempLaaLieuExe;
+	}
+
+	@Column(name = "TEMP_LAA_VARIANTE", length = 1)
+	public String getTempLaaVariante() {
+		return this.tempLaaVariante;
+	}
+
+	public void setTempLaaVariante(String tempLaaVariante) {
+		this.tempLaaVariante = tempLaaVariante;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -256,7 +290,15 @@ public class VbTempParametreLotId implements java.io.Serializable {
 								&& this.getTempLaaDacCode().equals(castOther.getTempLaaDacCode())))
 				&& ((this.getTempLaaDelaiExe() == castOther.getTempLaaDelaiExe())
 						|| (this.getTempLaaDelaiExe() != null && castOther.getTempLaaDelaiExe() != null
-								&& this.getTempLaaDelaiExe().equals(castOther.getTempLaaDelaiExe())));
+								&& this.getTempLaaDelaiExe().equals(castOther.getTempLaaDelaiExe())))
+				&& ((this.getLaaMtEst() == castOther.getLaaMtEst()) || (this.getLaaMtEst() != null
+						&& castOther.getLaaMtEst() != null && this.getLaaMtEst().equals(castOther.getLaaMtEst())))
+				&& ((this.getTempLaaLieuExe() == castOther.getTempLaaLieuExe())
+						|| (this.getTempLaaLieuExe() != null && castOther.getTempLaaLieuExe() != null
+								&& this.getTempLaaLieuExe().equals(castOther.getTempLaaLieuExe())))
+				&& ((this.getTempLaaVariante() == castOther.getTempLaaVariante())
+						|| (this.getTempLaaVariante() != null && castOther.getTempLaaVariante() != null
+								&& this.getTempLaaVariante().equals(castOther.getTempLaaVariante())));
 	}
 
 	public int hashCode() {
@@ -278,6 +320,9 @@ public class VbTempParametreLotId implements java.io.Serializable {
 		result = 37 * result + (getTempLaaAutre1() == null ? 0 : this.getTempLaaAutre1().hashCode());
 		result = 37 * result + (getTempLaaDacCode() == null ? 0 : this.getTempLaaDacCode().hashCode());
 		result = 37 * result + (getTempLaaDelaiExe() == null ? 0 : this.getTempLaaDelaiExe().hashCode());
+		result = 37 * result + (getLaaMtEst() == null ? 0 : this.getLaaMtEst().hashCode());
+		result = 37 * result + (getTempLaaLieuExe() == null ? 0 : this.getTempLaaLieuExe().hashCode());
+		result = 37 * result + (getTempLaaVariante() == null ? 0 : this.getTempLaaVariante().hashCode());
 		return result;
 	}
 

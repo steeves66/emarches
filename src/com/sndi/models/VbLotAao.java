@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -28,7 +28,7 @@ public class VbLotAao implements java.io.Serializable {
 
 	@AttributeOverrides({
 			@AttributeOverride(name = "laaId", column = @Column(name = "LAA_ID", nullable = false, precision = 22, scale = 0)),
-			@AttributeOverride(name = "laaAaoCode", column = @Column(name = "LAA_AAO_CODE", length = 20)),
+			@AttributeOverride(name = "laaAaoCode", column = @Column(name = "LAA_AAO_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "laaObjet", column = @Column(name = "LAA_OBJET", nullable = false, length = 1000)),
 			@AttributeOverride(name = "laaObservation", column = @Column(name = "LAA_OBSERVATION", length = 200)),
 			@AttributeOverride(name = "laaMtCaut", column = @Column(name = "LAA_MT_CAUT", precision = 22, scale = 0)),

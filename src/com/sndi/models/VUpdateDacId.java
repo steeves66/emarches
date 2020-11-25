@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -446,7 +446,7 @@ public class VUpdateDacId implements java.io.Serializable {
 		this.dacStrCode = dacStrCode;
 	}
 
-	@Column(name = "DAC_FON_CODE_CPMP", length = 12)
+	@Column(name = "DAC_FON_CODE_CPMP", length = 10)
 	public String getDacFonCodeCpmp() {
 		return this.dacFonCodeCpmp;
 	}
@@ -959,7 +959,7 @@ public class VUpdateDacId implements java.io.Serializable {
 		this.tymGroupe = tymGroupe;
 	}
 
-	@Column(name = "MOP_CODE", length = 3)
+	@Column(name = "MOP_CODE", length = 10)
 	public String getMopCode() {
 		return this.mopCode;
 	}
@@ -1175,7 +1175,7 @@ public class VUpdateDacId implements java.io.Serializable {
 		this.adaFonCod = adaFonCod;
 	}
 
-	@Column(name = "AAO_CODE", length = 20)
+	@Column(name = "AAO_CODE", length = 22)
 	public String getAaoCode() {
 		return this.aaoCode;
 	}
@@ -1238,7 +1238,7 @@ public class VUpdateDacId implements java.io.Serializable {
 		this.aaoDteOuvTec = aaoDteOuvTec;
 	}
 
-	@Column(name = "AAO_DTE_HEUR_OUV", length = 20)
+	@Column(name = "AAO_DTE_HEUR_OUV", length = 50)
 	public String getAaoDteHeurOuv() {
 		return this.aaoDteHeurOuv;
 	}
@@ -1445,7 +1445,7 @@ public class VUpdateDacId implements java.io.Serializable {
 		this.aaoAdaNum = aaoAdaNum;
 	}
 
-	@Column(name = "AAO_NAT_PRIX", length = 20)
+	@Column(name = "AAO_NAT_PRIX", length = 50)
 	public String getAaoNatPrix() {
 		return this.aaoNatPrix;
 	}

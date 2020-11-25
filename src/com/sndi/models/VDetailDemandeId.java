@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -47,7 +47,7 @@ public class VDetailDemandeId implements java.io.Serializable {
 	private BigDecimal ddeNum;
 	private BigDecimal ddeDemNum;
 	private String ddeDacCode;
-	private Short ddeLaaId;
+	private BigDecimal ddeLaaId;
 	private String ddeLbgCode;
 	private String ddeMarCode;
 	private String ddeStrCode;
@@ -74,7 +74,7 @@ public class VDetailDemandeId implements java.io.Serializable {
 			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
 			String tymCode, String tymLibelleCourt, String tymLibelleLong, String tymTymCode, String tymGroupe,
 			String mopCode, String mopLibelleCourt, String mopLibelleLong, BigDecimal ddeNum, BigDecimal ddeDemNum,
-			String ddeDacCode, Short ddeLaaId, String ddeLbgCode, String ddeMarCode, String ddeStrCode,
+			String ddeDacCode, BigDecimal ddeLaaId, String ddeLbgCode, String ddeMarCode, String ddeStrCode,
 			String ddeActNum, String ddeActNumIni) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
@@ -209,7 +209,7 @@ public class VDetailDemandeId implements java.io.Serializable {
 		this.dacStrCode = dacStrCode;
 	}
 
-	@Column(name = "DAC_FON_CODE_CPMP", length = 12)
+	@Column(name = "DAC_FON_CODE_CPMP", length = 10)
 	public String getDacFonCodeCpmp() {
 		return this.dacFonCodeCpmp;
 	}
@@ -380,7 +380,7 @@ public class VDetailDemandeId implements java.io.Serializable {
 		this.tymGroupe = tymGroupe;
 	}
 
-	@Column(name = "MOP_CODE", nullable = false, length = 3)
+	@Column(name = "MOP_CODE", nullable = false, length = 10)
 	public String getMopCode() {
 		return this.mopCode;
 	}
@@ -434,12 +434,12 @@ public class VDetailDemandeId implements java.io.Serializable {
 		this.ddeDacCode = ddeDacCode;
 	}
 
-	@Column(name = "DDE_LAA_ID", precision = 4, scale = 0)
-	public Short getDdeLaaId() {
+	@Column(name = "DDE_LAA_ID", precision = 22, scale = 0)
+	public BigDecimal getDdeLaaId() {
 		return this.ddeLaaId;
 	}
 
-	public void setDdeLaaId(Short ddeLaaId) {
+	public void setDdeLaaId(BigDecimal ddeLaaId) {
 		this.ddeLaaId = ddeLaaId;
 	}
 

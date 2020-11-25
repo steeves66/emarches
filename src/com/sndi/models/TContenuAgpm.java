@@ -1,13 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -17,50 +15,26 @@ import javax.persistence.Table;
 @Table(name = "T_CONTENU_AGPM", schema = "EMAP")
 public class TContenuAgpm implements java.io.Serializable {
 
-	private String tcaCode;
-	private String tcaLibelle;
-	private Set<TDetailAgpm> TDetailAgpms = new HashSet<TDetailAgpm>(0);
+	private TContenuAgpmId id;
 
 	public TContenuAgpm() {
 	}
 
-	public TContenuAgpm(String tcaCode) {
-		this.tcaCode = tcaCode;
+	public TContenuAgpm(TContenuAgpmId id) {
+		this.id = id;
 	}
 
-	public TContenuAgpm(String tcaCode, String tcaLibelle, Set<TDetailAgpm> TDetailAgpms) {
-		this.tcaCode = tcaCode;
-		this.tcaLibelle = tcaLibelle;
-		this.TDetailAgpms = TDetailAgpms;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "tcaCode", column = @Column(name = "TCA_CODE", nullable = false, length = 4)),
+			@AttributeOverride(name = "tcaLibelle", column = @Column(name = "TCA_LIBELLE", length = 200)) })
+	public TContenuAgpmId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "TCA_CODE", unique = true, nullable = false, length = 4)
-	public String getTcaCode() {
-		return this.tcaCode;
-	}
-
-	public void setTcaCode(String tcaCode) {
-		this.tcaCode = tcaCode;
-	}
-
-	@Column(name = "TCA_LIBELLE", length = 200)
-	public String getTcaLibelle() {
-		return this.tcaLibelle;
-	}
-
-	public void setTcaLibelle(String tcaLibelle) {
-		this.tcaLibelle = tcaLibelle;
-	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TContenuAgpm")
-	public Set<TDetailAgpm> getTDetailAgpms() {
-		return this.TDetailAgpms;
-	}
-
-	public void setTDetailAgpms(Set<TDetailAgpm> TDetailAgpms) {
-		this.TDetailAgpms = TDetailAgpms;
+	public void setId(TContenuAgpmId id) {
+		this.id = id;
 	}
 
 }

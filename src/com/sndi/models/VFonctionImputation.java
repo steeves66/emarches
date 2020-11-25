@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,16 +27,22 @@ public class VFonctionImputation implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
+			@AttributeOverride(name = "dacCode", column = @Column(name = "DAC_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "nb", column = @Column(name = "NB", precision = 22, scale = 0)),
+			@AttributeOverride(name = "dcsNum", column = @Column(name = "DCS_NUM", precision = 22, scale = 0)),
 			@AttributeOverride(name = "opeMatricule", column = @Column(name = "OPE_MATRICULE", nullable = false, length = 25)),
 			@AttributeOverride(name = "opeNom", column = @Column(name = "OPE_NOM")),
 			@AttributeOverride(name = "opeContact", column = @Column(name = "OPE_CONTACT", length = 250)),
 			@AttributeOverride(name = "fonCod", column = @Column(name = "FON_COD", nullable = false, length = 20)),
 			@AttributeOverride(name = "fonLibelle", column = @Column(name = "FON_LIBELLE", length = 500)),
+			@AttributeOverride(name = "fonRespo", column = @Column(name = "FON_RESPO", length = 3)),
 			@AttributeOverride(name = "strCode", column = @Column(name = "STR_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "strOpeRespo", column = @Column(name = "STR_OPE_RESPO", length = 1)),
 			@AttributeOverride(name = "nbrTraite", column = @Column(name = "NBR_TRAITE", precision = 22, scale = 0)),
 			@AttributeOverride(name = "nbrEnCours", column = @Column(name = "NBR_EN_COURS", precision = 22, scale = 0)),
-			@AttributeOverride(name = "nbrValide", column = @Column(name = "NBR_VALIDE", precision = 22, scale = 0)) })
+			@AttributeOverride(name = "nbrValide", column = @Column(name = "NBR_VALIDE", precision = 22, scale = 0)),
+			@AttributeOverride(name = "typbinome", column = @Column(name = "TYPBINOME", precision = 22, scale = 0)),
+			@AttributeOverride(name = "typresp", column = @Column(name = "TYPRESP", precision = 22, scale = 0)) })
 	public VFonctionImputationId getId() {
 		return this.id;
 	}

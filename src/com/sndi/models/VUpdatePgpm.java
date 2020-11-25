@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -55,7 +55,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 			@AttributeOverride(name = "gpgRecherche", column = @Column(name = "GPG_RECHERCHE", length = 4000)),
 			@AttributeOverride(name = "fipId", column = @Column(name = "FIP_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "fipDevCode", column = @Column(name = "FIP_DEV_CODE", length = 8)),
-			@AttributeOverride(name = "fipBaiCode", column = @Column(name = "FIP_BAI_CODE", length = 5)),
+			@AttributeOverride(name = "fipBaiCode", column = @Column(name = "FIP_BAI_CODE", length = 20)),
 			@AttributeOverride(name = "fipSouCode", column = @Column(name = "FIP_SOU_CODE", length = 5)),
 			@AttributeOverride(name = "fipGpgId", column = @Column(name = "FIP_GPG_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "fipMontantCfa", column = @Column(name = "FIP_MONTANT_CFA", precision = 15)),
@@ -63,7 +63,7 @@ public class VUpdatePgpm implements java.io.Serializable {
 			@AttributeOverride(name = "fipCommentaire", column = @Column(name = "FIP_COMMENTAIRE", length = 500)),
 			@AttributeOverride(name = "fipTypeFinance", column = @Column(name = "FIP_TYPE_FINANCE", length = 20)),
 			@AttributeOverride(name = "fipTresor", column = @Column(name = "FIP_TRESOR", precision = 22, scale = 0)),
-			@AttributeOverride(name = "mopCode", column = @Column(name = "MOP_CODE", nullable = false, length = 3)),
+			@AttributeOverride(name = "mopCode", column = @Column(name = "MOP_CODE", nullable = false, length = 10)),
 			@AttributeOverride(name = "mopLibelleCourt", column = @Column(name = "MOP_LIBELLE_COURT", nullable = false, length = 500)),
 			@AttributeOverride(name = "mopLibelleLong", column = @Column(name = "MOP_LIBELLE_LONG", length = 1000)),
 			@AttributeOverride(name = "tymCode", column = @Column(name = "TYM_CODE", nullable = false, length = 3)),

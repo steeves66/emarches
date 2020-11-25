@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -13,7 +13,7 @@ public class VGenerationDateId implements java.io.Serializable {
 
 	private long dppId;
 	private long dppPlpId;
-	private long dppGpgId;
+	private Long dppGpgId;
 	private String dppStaCode;
 	private String dppTymCode;
 	private String dppMopCode;
@@ -76,18 +76,17 @@ public class VGenerationDateId implements java.io.Serializable {
 	public VGenerationDateId() {
 	}
 
-	public VGenerationDateId(long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
-			String dppMopCode, String dppTypePlan) {
+	public VGenerationDateId(long dppId, long dppPlpId, String dppStaCode, String dppTymCode, String dppMopCode,
+			String dppTypePlan) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
-		this.dppGpgId = dppGpgId;
 		this.dppStaCode = dppStaCode;
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
 		this.dppTypePlan = dppTypePlan;
 	}
 
-	public VGenerationDateId(long dppId, long dppPlpId, long dppGpgId, String dppStaCode, String dppTymCode,
+	public VGenerationDateId(long dppId, long dppPlpId, Long dppGpgId, String dppStaCode, String dppTymCode,
 			String dppMopCode, String dppLbgCode, String dppTypePlan, String dppCode, Integer dppNumeroOrdre,
 			Date dppDate, String dppObjet, String dppSourceFin, Date dppDateDaoTrans, Date dppDateDaoApprobDmp,
 			Date dppDateDaoApprobBail, Date dppDateAvisAoPublication, Date dppDateOuvertOt, Date dppDateOuvertOf,
@@ -182,12 +181,12 @@ public class VGenerationDateId implements java.io.Serializable {
 		this.dppPlpId = dppPlpId;
 	}
 
-	@Column(name = "DPP_GPG_ID", nullable = false, precision = 10, scale = 0)
-	public long getDppGpgId() {
+	@Column(name = "DPP_GPG_ID", precision = 10, scale = 0)
+	public Long getDppGpgId() {
 		return this.dppGpgId;
 	}
 
-	public void setDppGpgId(long dppGpgId) {
+	public void setDppGpgId(Long dppGpgId) {
 		this.dppGpgId = dppGpgId;
 	}
 
@@ -723,7 +722,8 @@ public class VGenerationDateId implements java.io.Serializable {
 		VGenerationDateId castOther = (VGenerationDateId) other;
 
 		return (this.getDppId() == castOther.getDppId()) && (this.getDppPlpId() == castOther.getDppPlpId())
-				&& (this.getDppGpgId() == castOther.getDppGpgId())
+				&& ((this.getDppGpgId() == castOther.getDppGpgId()) || (this.getDppGpgId() != null
+						&& castOther.getDppGpgId() != null && this.getDppGpgId().equals(castOther.getDppGpgId())))
 				&& ((this.getDppStaCode() == castOther.getDppStaCode()) || (this.getDppStaCode() != null
 						&& castOther.getDppStaCode() != null && this.getDppStaCode().equals(castOther.getDppStaCode())))
 				&& ((this.getDppTymCode() == castOther.getDppTymCode()) || (this.getDppTymCode() != null
@@ -894,7 +894,7 @@ public class VGenerationDateId implements java.io.Serializable {
 
 		result = 37 * result + (int) this.getDppId();
 		result = 37 * result + (int) this.getDppPlpId();
-		result = 37 * result + (int) this.getDppGpgId();
+		result = 37 * result + (getDppGpgId() == null ? 0 : this.getDppGpgId().hashCode());
 		result = 37 * result + (getDppStaCode() == null ? 0 : this.getDppStaCode().hashCode());
 		result = 37 * result + (getDppTymCode() == null ? 0 : this.getDppTymCode().hashCode());
 		result = 37 * result + (getDppMopCode() == null ? 0 : this.getDppMopCode().hashCode());

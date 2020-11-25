@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -30,7 +30,7 @@ public class VModePassationId implements java.io.Serializable {
 		this.mopTypPlan = mopTypPlan;
 	}
 
-	@Column(name = "MOP_CODE", nullable = false, length = 3)
+	@Column(name = "MOP_CODE", nullable = false, length = 10)
 	public String getMopCode() {
 		return this.mopCode;
 	}

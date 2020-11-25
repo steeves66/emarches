@@ -1,9 +1,13 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -18,6 +22,7 @@ public class TPaysReference implements java.io.Serializable {
 	private String repLibelleCourt;
 	private String repStatut;
 	private String repIndicatif;
+	private Set<TSoumissions> TSoumissionses = new HashSet<TSoumissions>(0);
 
 	public TPaysReference() {
 	}
@@ -27,12 +32,13 @@ public class TPaysReference implements java.io.Serializable {
 	}
 
 	public TPaysReference(String repCode, String repLibelle, String repLibelleCourt, String repStatut,
-			String repIndicatif) {
+			String repIndicatif, Set<TSoumissions> TSoumissionses) {
 		this.repCode = repCode;
 		this.repLibelle = repLibelle;
 		this.repLibelleCourt = repLibelleCourt;
 		this.repStatut = repStatut;
 		this.repIndicatif = repIndicatif;
+		this.TSoumissionses = TSoumissionses;
 	}
 
 	@Id
@@ -80,6 +86,15 @@ public class TPaysReference implements java.io.Serializable {
 
 	public void setRepIndicatif(String repIndicatif) {
 		this.repIndicatif = repIndicatif;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TPaysReference")
+	public Set<TSoumissions> getTSoumissionses() {
+		return this.TSoumissionses;
+	}
+
+	public void setTSoumissionses(Set<TSoumissions> TSoumissionses) {
+		this.TSoumissionses = TSoumissionses;
 	}
 
 }

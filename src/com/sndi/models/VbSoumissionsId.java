@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -12,7 +12,7 @@ import javax.persistence.Embeddable;
 public class VbSoumissionsId implements java.io.Serializable {
 
 	private String souNcc;
-	private Character souInter;
+	private String souInter;
 	private String souSigleSte;
 	private String souNomCom;
 	private String souStaCode;
@@ -29,7 +29,7 @@ public class VbSoumissionsId implements java.io.Serializable {
 		this.souNcc = souNcc;
 	}
 
-	public VbSoumissionsId(String souNcc, Character souInter, String souSigleSte, String souNomCom, String souStaCode,
+	public VbSoumissionsId(String souNcc, String souInter, String souSigleSte, String souNomCom, String souStaCode,
 			String souTel, String souAdresse, Date souDteSaisi, String souOpeMatricule, String souSigleDmp) {
 		this.souNcc = souNcc;
 		this.souInter = souInter;
@@ -53,11 +53,11 @@ public class VbSoumissionsId implements java.io.Serializable {
 	}
 
 	@Column(name = "SOU_INTER", length = 1)
-	public Character getSouInter() {
+	public String getSouInter() {
 		return this.souInter;
 	}
 
-	public void setSouInter(Character souInter) {
+	public void setSouInter(String souInter) {
 		this.souInter = souInter;
 	}
 

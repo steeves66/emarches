@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -26,23 +26,18 @@ public class VbTempParamVente implements java.io.Serializable {
 
 	@EmbeddedId
 
-	@AttributeOverrides({ @AttributeOverride(name = "tempNum", column = @Column(name = "TEMP_NUM")),
-			@AttributeOverride(name = "dofDteSaisi", column = @Column(name = "DOF_DTE_SAISI")),
-			@AttributeOverride(name = "dofOpeMatricule", column = @Column(name = "DOF_OPE_MATRICULE")),
-			@AttributeOverride(name = "tempType", column = @Column(name = "TEMP_TYPE")),
-			@AttributeOverride(name = "canCode", column = @Column(name = "CAN_CODE")),
-			@AttributeOverride(name = "canNom", column = @Column(name = "CAN_NOM")),
-			@AttributeOverride(name = "canNomResp", column = @Column(name = "CAN_NOM_RESP")),
-			@AttributeOverride(name = "canSouNcc", column = @Column(name = "CAN_SOU_NCC")),
-			@AttributeOverride(name = "canTel", column = @Column(name = "CAN_TEL")),
-			@AttributeOverride(name = "canTieNcc", column = @Column(name = "CAN_TIE_NCC")),
-			@AttributeOverride(name = "dveCout", column = @Column(name = "DVE_COUT")),
-			@AttributeOverride(name = "dveDacCode", column = @Column(name = "DVE_DAC_CODE")),
-			@AttributeOverride(name = "dveLaaNum", column = @Column(name = "DVE_LAA_NUM")),
-			@AttributeOverride(name = "dveQte", column = @Column(name = "DVE_QTE")),
-			@AttributeOverride(name = "venNum", column = @Column(name = "VEN_NUM")),
-			@AttributeOverride(name = "venMrgCod", column = @Column(name = "VEN_MRG_COD")),
-			@AttributeOverride(name = "canPrenoms", column = @Column(name = "CAN_PRENOMS")) })
+	@AttributeOverrides({ @AttributeOverride(name = "canNom", column = @Column(name = "CAN_NOM", length = 500)),
+			@AttributeOverride(name = "canNomResp", column = @Column(name = "CAN_NOM_RESP", length = 500)),
+			@AttributeOverride(name = "canSouNcc", column = @Column(name = "CAN_SOU_NCC", length = 500)),
+			@AttributeOverride(name = "canTel", column = @Column(name = "CAN_TEL", length = 500)),
+			@AttributeOverride(name = "canTieNcc", column = @Column(name = "CAN_TIE_NCC", length = 500)),
+			@AttributeOverride(name = "dveCout", column = @Column(name = "DVE_COUT", length = 500)),
+			@AttributeOverride(name = "dveDacCode", column = @Column(name = "DVE_DAC_CODE", length = 500)),
+			@AttributeOverride(name = "dveLaaNum", column = @Column(name = "DVE_LAA_NUM", length = 500)),
+			@AttributeOverride(name = "dveQte", column = @Column(name = "DVE_QTE", length = 500)),
+			@AttributeOverride(name = "venNum", column = @Column(name = "VEN_NUM", length = 500)),
+			@AttributeOverride(name = "venMrgCod", column = @Column(name = "VEN_MRG_COD", length = 500)),
+			@AttributeOverride(name = "canPrenoms", column = @Column(name = "CAN_PRENOMS", length = 500)) })
 	public VbTempParamVenteId getId() {
 		return this.id;
 	}

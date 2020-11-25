@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -54,6 +54,17 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 	private Short aaoNbrOffAccpet;
 	private Short aaoNbrOffRej;
 	private Short aaoNbrOffHorDelai;
+	private String aaoHeurFinOuv;
+	private String aaoLieuOuvPrecis;
+	private String aaoObsOuv;
+	private Date aaoDteFinOuv;
+	private Date aaoDteOuv;
+	private String aooHeurOuv;
+	private String avisRetour;
+	private String aaoNumSeq;
+	private String aaoNumBompPub;
+	private Date aaoDteBompPub;
+	private String aaoArtComSpec;
 
 	public VbAvisAppelOffreId() {
 	}
@@ -70,7 +81,9 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 			BigDecimal aaoCoutDac, String aaoLieuRecep, Date aaoDateRecep, String aaoHeureRecep, BigDecimal aaoAdaNum,
 			String aaoNatPrix, String aaoRegQual, String aaoAvisBai, String aaoRespBai, String aaoPrecisModEval,
 			Date aaoDteValAc, Date aaoDteValCpmp, Date aaoDteValDmp, Short aaoNbrOff, Short aaoNbrOffAccpet,
-			Short aaoNbrOffRej, Short aaoNbrOffHorDelai) {
+			Short aaoNbrOffRej, Short aaoNbrOffHorDelai, String aaoHeurFinOuv, String aaoLieuOuvPrecis,
+			String aaoObsOuv, Date aaoDteFinOuv, Date aaoDteOuv, String aooHeurOuv, String avisRetour, String aaoNumSeq,
+			String aaoNumBompPub, Date aaoDteBompPub, String aaoArtComSpec) {
 		this.aaoCode = aaoCode;
 		this.aaoLibelle = aaoLibelle;
 		this.aaoDacCode = aaoDacCode;
@@ -113,9 +126,20 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 		this.aaoNbrOffAccpet = aaoNbrOffAccpet;
 		this.aaoNbrOffRej = aaoNbrOffRej;
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+		this.aaoHeurFinOuv = aaoHeurFinOuv;
+		this.aaoLieuOuvPrecis = aaoLieuOuvPrecis;
+		this.aaoObsOuv = aaoObsOuv;
+		this.aaoDteFinOuv = aaoDteFinOuv;
+		this.aaoDteOuv = aaoDteOuv;
+		this.aooHeurOuv = aooHeurOuv;
+		this.avisRetour = avisRetour;
+		this.aaoNumSeq = aaoNumSeq;
+		this.aaoNumBompPub = aaoNumBompPub;
+		this.aaoDteBompPub = aaoDteBompPub;
+		this.aaoArtComSpec = aaoArtComSpec;
 	}
 
-	@Column(name = "AAO_CODE", nullable = false, length = 20)
+	@Column(name = "AAO_CODE", nullable = false, length = 22)
 	public String getAaoCode() {
 		return this.aaoCode;
 	}
@@ -178,7 +202,7 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 		this.aaoDteOuvTec = aaoDteOuvTec;
 	}
 
-	@Column(name = "AAO_DTE_HEUR_OUV", length = 20)
+	@Column(name = "AAO_DTE_HEUR_OUV", length = 50)
 	public String getAaoDteHeurOuv() {
 		return this.aaoDteHeurOuv;
 	}
@@ -385,7 +409,7 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 		this.aaoAdaNum = aaoAdaNum;
 	}
 
-	@Column(name = "AAO_NAT_PRIX", length = 20)
+	@Column(name = "AAO_NAT_PRIX", length = 50)
 	public String getAaoNatPrix() {
 		return this.aaoNatPrix;
 	}
@@ -491,6 +515,105 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 
 	public void setAaoNbrOffHorDelai(Short aaoNbrOffHorDelai) {
 		this.aaoNbrOffHorDelai = aaoNbrOffHorDelai;
+	}
+
+	@Column(name = "AAO_HEUR_FIN_OUV", length = 20)
+	public String getAaoHeurFinOuv() {
+		return this.aaoHeurFinOuv;
+	}
+
+	public void setAaoHeurFinOuv(String aaoHeurFinOuv) {
+		this.aaoHeurFinOuv = aaoHeurFinOuv;
+	}
+
+	@Column(name = "AAO_LIEU_OUV_PRECIS", length = 500)
+	public String getAaoLieuOuvPrecis() {
+		return this.aaoLieuOuvPrecis;
+	}
+
+	public void setAaoLieuOuvPrecis(String aaoLieuOuvPrecis) {
+		this.aaoLieuOuvPrecis = aaoLieuOuvPrecis;
+	}
+
+	@Column(name = "AAO_OBS_OUV", length = 4000)
+	public String getAaoObsOuv() {
+		return this.aaoObsOuv;
+	}
+
+	public void setAaoObsOuv(String aaoObsOuv) {
+		this.aaoObsOuv = aaoObsOuv;
+	}
+
+	@Column(name = "AAO_DTE_FIN_OUV", length = 7)
+	public Date getAaoDteFinOuv() {
+		return this.aaoDteFinOuv;
+	}
+
+	public void setAaoDteFinOuv(Date aaoDteFinOuv) {
+		this.aaoDteFinOuv = aaoDteFinOuv;
+	}
+
+	@Column(name = "AAO_DTE_OUV", length = 7)
+	public Date getAaoDteOuv() {
+		return this.aaoDteOuv;
+	}
+
+	public void setAaoDteOuv(Date aaoDteOuv) {
+		this.aaoDteOuv = aaoDteOuv;
+	}
+
+	@Column(name = "AOO_HEUR_OUV", length = 20)
+	public String getAooHeurOuv() {
+		return this.aooHeurOuv;
+	}
+
+	public void setAooHeurOuv(String aooHeurOuv) {
+		this.aooHeurOuv = aooHeurOuv;
+	}
+
+	@Column(name = "AVIS_RETOUR", length = 1)
+	public String getAvisRetour() {
+		return this.avisRetour;
+	}
+
+	public void setAvisRetour(String avisRetour) {
+		this.avisRetour = avisRetour;
+	}
+
+	@Column(name = "AAO_NUM_SEQ", length = 22)
+	public String getAaoNumSeq() {
+		return this.aaoNumSeq;
+	}
+
+	public void setAaoNumSeq(String aaoNumSeq) {
+		this.aaoNumSeq = aaoNumSeq;
+	}
+
+	@Column(name = "AAO_NUM_BOMP_PUB", length = 25)
+	public String getAaoNumBompPub() {
+		return this.aaoNumBompPub;
+	}
+
+	public void setAaoNumBompPub(String aaoNumBompPub) {
+		this.aaoNumBompPub = aaoNumBompPub;
+	}
+
+	@Column(name = "AAO_DTE_BOMP_PUB", length = 7)
+	public Date getAaoDteBompPub() {
+		return this.aaoDteBompPub;
+	}
+
+	public void setAaoDteBompPub(Date aaoDteBompPub) {
+		this.aaoDteBompPub = aaoDteBompPub;
+	}
+
+	@Column(name = "AAO_ART_COM_SPEC", length = 20)
+	public String getAaoArtComSpec() {
+		return this.aaoArtComSpec;
+	}
+
+	public void setAaoArtComSpec(String aaoArtComSpec) {
+		this.aaoArtComSpec = aaoArtComSpec;
 	}
 
 	public boolean equals(Object other) {
@@ -607,7 +730,35 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 								&& this.getAaoNbrOffRej().equals(castOther.getAaoNbrOffRej())))
 				&& ((this.getAaoNbrOffHorDelai() == castOther.getAaoNbrOffHorDelai())
 						|| (this.getAaoNbrOffHorDelai() != null && castOther.getAaoNbrOffHorDelai() != null
-								&& this.getAaoNbrOffHorDelai().equals(castOther.getAaoNbrOffHorDelai())));
+								&& this.getAaoNbrOffHorDelai().equals(castOther.getAaoNbrOffHorDelai())))
+				&& ((this.getAaoHeurFinOuv() == castOther.getAaoHeurFinOuv())
+						|| (this.getAaoHeurFinOuv() != null && castOther.getAaoHeurFinOuv() != null
+								&& this.getAaoHeurFinOuv().equals(castOther.getAaoHeurFinOuv())))
+				&& ((this.getAaoLieuOuvPrecis() == castOther.getAaoLieuOuvPrecis())
+						|| (this.getAaoLieuOuvPrecis() != null && castOther.getAaoLieuOuvPrecis() != null
+								&& this.getAaoLieuOuvPrecis().equals(castOther.getAaoLieuOuvPrecis())))
+				&& ((this.getAaoObsOuv() == castOther.getAaoObsOuv()) || (this.getAaoObsOuv() != null
+						&& castOther.getAaoObsOuv() != null && this.getAaoObsOuv().equals(castOther.getAaoObsOuv())))
+				&& ((this.getAaoDteFinOuv() == castOther.getAaoDteFinOuv())
+						|| (this.getAaoDteFinOuv() != null && castOther.getAaoDteFinOuv() != null
+								&& this.getAaoDteFinOuv().equals(castOther.getAaoDteFinOuv())))
+				&& ((this.getAaoDteOuv() == castOther.getAaoDteOuv()) || (this.getAaoDteOuv() != null
+						&& castOther.getAaoDteOuv() != null && this.getAaoDteOuv().equals(castOther.getAaoDteOuv())))
+				&& ((this.getAooHeurOuv() == castOther.getAooHeurOuv()) || (this.getAooHeurOuv() != null
+						&& castOther.getAooHeurOuv() != null && this.getAooHeurOuv().equals(castOther.getAooHeurOuv())))
+				&& ((this.getAvisRetour() == castOther.getAvisRetour()) || (this.getAvisRetour() != null
+						&& castOther.getAvisRetour() != null && this.getAvisRetour().equals(castOther.getAvisRetour())))
+				&& ((this.getAaoNumSeq() == castOther.getAaoNumSeq()) || (this.getAaoNumSeq() != null
+						&& castOther.getAaoNumSeq() != null && this.getAaoNumSeq().equals(castOther.getAaoNumSeq())))
+				&& ((this.getAaoNumBompPub() == castOther.getAaoNumBompPub())
+						|| (this.getAaoNumBompPub() != null && castOther.getAaoNumBompPub() != null
+								&& this.getAaoNumBompPub().equals(castOther.getAaoNumBompPub())))
+				&& ((this.getAaoDteBompPub() == castOther.getAaoDteBompPub())
+						|| (this.getAaoDteBompPub() != null && castOther.getAaoDteBompPub() != null
+								&& this.getAaoDteBompPub().equals(castOther.getAaoDteBompPub())))
+				&& ((this.getAaoArtComSpec() == castOther.getAaoArtComSpec())
+						|| (this.getAaoArtComSpec() != null && castOther.getAaoArtComSpec() != null
+								&& this.getAaoArtComSpec().equals(castOther.getAaoArtComSpec())));
 	}
 
 	public int hashCode() {
@@ -655,6 +806,17 @@ public class VbAvisAppelOffreId implements java.io.Serializable {
 		result = 37 * result + (getAaoNbrOffAccpet() == null ? 0 : this.getAaoNbrOffAccpet().hashCode());
 		result = 37 * result + (getAaoNbrOffRej() == null ? 0 : this.getAaoNbrOffRej().hashCode());
 		result = 37 * result + (getAaoNbrOffHorDelai() == null ? 0 : this.getAaoNbrOffHorDelai().hashCode());
+		result = 37 * result + (getAaoHeurFinOuv() == null ? 0 : this.getAaoHeurFinOuv().hashCode());
+		result = 37 * result + (getAaoLieuOuvPrecis() == null ? 0 : this.getAaoLieuOuvPrecis().hashCode());
+		result = 37 * result + (getAaoObsOuv() == null ? 0 : this.getAaoObsOuv().hashCode());
+		result = 37 * result + (getAaoDteFinOuv() == null ? 0 : this.getAaoDteFinOuv().hashCode());
+		result = 37 * result + (getAaoDteOuv() == null ? 0 : this.getAaoDteOuv().hashCode());
+		result = 37 * result + (getAooHeurOuv() == null ? 0 : this.getAooHeurOuv().hashCode());
+		result = 37 * result + (getAvisRetour() == null ? 0 : this.getAvisRetour().hashCode());
+		result = 37 * result + (getAaoNumSeq() == null ? 0 : this.getAaoNumSeq().hashCode());
+		result = 37 * result + (getAaoNumBompPub() == null ? 0 : this.getAaoNumBompPub().hashCode());
+		result = 37 * result + (getAaoDteBompPub() == null ? 0 : this.getAaoDteBompPub().hashCode());
+		result = 37 * result + (getAaoArtComSpec() == null ? 0 : this.getAaoArtComSpec().hashCode());
 		return result;
 	}
 

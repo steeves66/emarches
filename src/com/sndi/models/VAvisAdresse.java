@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,7 +27,7 @@ public class VAvisAdresse implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "aaoCode", column = @Column(name = "AAO_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "aaoCode", column = @Column(name = "AAO_CODE", nullable = false, length = 22)),
 			@AttributeOverride(name = "VId", column = @Column(name = "V_ID", precision = 22, scale = 0)),
 			@AttributeOverride(name = "adaFonCod", column = @Column(name = "ADA_FON_COD", length = 12)),
 			@AttributeOverride(name = "adaNum", column = @Column(name = "ADA_NUM", nullable = false, precision = 22, scale = 0)),

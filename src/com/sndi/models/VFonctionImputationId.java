@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -11,39 +11,80 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class VFonctionImputationId implements java.io.Serializable {
 
+	private String dacCode;
+	private BigDecimal nb;
+	private BigDecimal dcsNum;
 	private String opeMatricule;
 	private String opeNom;
 	private String opeContact;
 	private String fonCod;
 	private String fonLibelle;
+	private String fonRespo;
 	private String strCode;
 	private String strOpeRespo;
 	private BigDecimal nbrTraite;
 	private BigDecimal nbrEnCours;
 	private BigDecimal nbrValide;
+	private BigDecimal typbinome;
+	private BigDecimal typresp;
 
 	public VFonctionImputationId() {
 	}
 
-	public VFonctionImputationId(String opeMatricule, String fonCod, String strCode) {
+	public VFonctionImputationId(String dacCode, String opeMatricule, String fonCod, String strCode) {
+		this.dacCode = dacCode;
 		this.opeMatricule = opeMatricule;
 		this.fonCod = fonCod;
 		this.strCode = strCode;
 	}
 
-	public VFonctionImputationId(String opeMatricule, String opeNom, String opeContact, String fonCod,
-			String fonLibelle, String strCode, String strOpeRespo, BigDecimal nbrTraite, BigDecimal nbrEnCours,
-			BigDecimal nbrValide) {
+	public VFonctionImputationId(String dacCode, BigDecimal nb, BigDecimal dcsNum, String opeMatricule, String opeNom,
+			String opeContact, String fonCod, String fonLibelle, String fonRespo, String strCode, String strOpeRespo,
+			BigDecimal nbrTraite, BigDecimal nbrEnCours, BigDecimal nbrValide, BigDecimal typbinome,
+			BigDecimal typresp) {
+		this.dacCode = dacCode;
+		this.nb = nb;
+		this.dcsNum = dcsNum;
 		this.opeMatricule = opeMatricule;
 		this.opeNom = opeNom;
 		this.opeContact = opeContact;
 		this.fonCod = fonCod;
 		this.fonLibelle = fonLibelle;
+		this.fonRespo = fonRespo;
 		this.strCode = strCode;
 		this.strOpeRespo = strOpeRespo;
 		this.nbrTraite = nbrTraite;
 		this.nbrEnCours = nbrEnCours;
 		this.nbrValide = nbrValide;
+		this.typbinome = typbinome;
+		this.typresp = typresp;
+	}
+
+	@Column(name = "DAC_CODE", nullable = false, length = 20)
+	public String getDacCode() {
+		return this.dacCode;
+	}
+
+	public void setDacCode(String dacCode) {
+		this.dacCode = dacCode;
+	}
+
+	@Column(name = "NB", precision = 22, scale = 0)
+	public BigDecimal getNb() {
+		return this.nb;
+	}
+
+	public void setNb(BigDecimal nb) {
+		this.nb = nb;
+	}
+
+	@Column(name = "DCS_NUM", precision = 22, scale = 0)
+	public BigDecimal getDcsNum() {
+		return this.dcsNum;
+	}
+
+	public void setDcsNum(BigDecimal dcsNum) {
+		this.dcsNum = dcsNum;
 	}
 
 	@Column(name = "OPE_MATRICULE", nullable = false, length = 25)
@@ -91,6 +132,15 @@ public class VFonctionImputationId implements java.io.Serializable {
 		this.fonLibelle = fonLibelle;
 	}
 
+	@Column(name = "FON_RESPO", length = 3)
+	public String getFonRespo() {
+		return this.fonRespo;
+	}
+
+	public void setFonRespo(String fonRespo) {
+		this.fonRespo = fonRespo;
+	}
+
 	@Column(name = "STR_CODE", nullable = false, length = 20)
 	public String getStrCode() {
 		return this.strCode;
@@ -136,6 +186,24 @@ public class VFonctionImputationId implements java.io.Serializable {
 		this.nbrValide = nbrValide;
 	}
 
+	@Column(name = "TYPBINOME", precision = 22, scale = 0)
+	public BigDecimal getTypbinome() {
+		return this.typbinome;
+	}
+
+	public void setTypbinome(BigDecimal typbinome) {
+		this.typbinome = typbinome;
+	}
+
+	@Column(name = "TYPRESP", precision = 22, scale = 0)
+	public BigDecimal getTypresp() {
+		return this.typresp;
+	}
+
+	public void setTypresp(BigDecimal typresp) {
+		this.typresp = typresp;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -145,8 +213,15 @@ public class VFonctionImputationId implements java.io.Serializable {
 			return false;
 		VFonctionImputationId castOther = (VFonctionImputationId) other;
 
-		return ((this.getOpeMatricule() == castOther.getOpeMatricule()) || (this.getOpeMatricule() != null
-				&& castOther.getOpeMatricule() != null && this.getOpeMatricule().equals(castOther.getOpeMatricule())))
+		return ((this.getDacCode() == castOther.getDacCode()) || (this.getDacCode() != null
+				&& castOther.getDacCode() != null && this.getDacCode().equals(castOther.getDacCode())))
+				&& ((this.getNb() == castOther.getNb()) || (this.getNb() != null && castOther.getNb() != null
+						&& this.getNb().equals(castOther.getNb())))
+				&& ((this.getDcsNum() == castOther.getDcsNum()) || (this.getDcsNum() != null
+						&& castOther.getDcsNum() != null && this.getDcsNum().equals(castOther.getDcsNum())))
+				&& ((this.getOpeMatricule() == castOther.getOpeMatricule())
+						|| (this.getOpeMatricule() != null && castOther.getOpeMatricule() != null
+								&& this.getOpeMatricule().equals(castOther.getOpeMatricule())))
 				&& ((this.getOpeNom() == castOther.getOpeNom()) || (this.getOpeNom() != null
 						&& castOther.getOpeNom() != null && this.getOpeNom().equals(castOther.getOpeNom())))
 				&& ((this.getOpeContact() == castOther.getOpeContact()) || (this.getOpeContact() != null
@@ -155,6 +230,8 @@ public class VFonctionImputationId implements java.io.Serializable {
 						&& castOther.getFonCod() != null && this.getFonCod().equals(castOther.getFonCod())))
 				&& ((this.getFonLibelle() == castOther.getFonLibelle()) || (this.getFonLibelle() != null
 						&& castOther.getFonLibelle() != null && this.getFonLibelle().equals(castOther.getFonLibelle())))
+				&& ((this.getFonRespo() == castOther.getFonRespo()) || (this.getFonRespo() != null
+						&& castOther.getFonRespo() != null && this.getFonRespo().equals(castOther.getFonRespo())))
 				&& ((this.getStrCode() == castOther.getStrCode()) || (this.getStrCode() != null
 						&& castOther.getStrCode() != null && this.getStrCode().equals(castOther.getStrCode())))
 				&& ((this.getStrOpeRespo() == castOther.getStrOpeRespo())
@@ -165,22 +242,32 @@ public class VFonctionImputationId implements java.io.Serializable {
 				&& ((this.getNbrEnCours() == castOther.getNbrEnCours()) || (this.getNbrEnCours() != null
 						&& castOther.getNbrEnCours() != null && this.getNbrEnCours().equals(castOther.getNbrEnCours())))
 				&& ((this.getNbrValide() == castOther.getNbrValide()) || (this.getNbrValide() != null
-						&& castOther.getNbrValide() != null && this.getNbrValide().equals(castOther.getNbrValide())));
+						&& castOther.getNbrValide() != null && this.getNbrValide().equals(castOther.getNbrValide())))
+				&& ((this.getTypbinome() == castOther.getTypbinome()) || (this.getTypbinome() != null
+						&& castOther.getTypbinome() != null && this.getTypbinome().equals(castOther.getTypbinome())))
+				&& ((this.getTypresp() == castOther.getTypresp()) || (this.getTypresp() != null
+						&& castOther.getTypresp() != null && this.getTypresp().equals(castOther.getTypresp())));
 	}
 
 	public int hashCode() {
 		int result = 17;
 
+		result = 37 * result + (getDacCode() == null ? 0 : this.getDacCode().hashCode());
+		result = 37 * result + (getNb() == null ? 0 : this.getNb().hashCode());
+		result = 37 * result + (getDcsNum() == null ? 0 : this.getDcsNum().hashCode());
 		result = 37 * result + (getOpeMatricule() == null ? 0 : this.getOpeMatricule().hashCode());
 		result = 37 * result + (getOpeNom() == null ? 0 : this.getOpeNom().hashCode());
 		result = 37 * result + (getOpeContact() == null ? 0 : this.getOpeContact().hashCode());
 		result = 37 * result + (getFonCod() == null ? 0 : this.getFonCod().hashCode());
 		result = 37 * result + (getFonLibelle() == null ? 0 : this.getFonLibelle().hashCode());
+		result = 37 * result + (getFonRespo() == null ? 0 : this.getFonRespo().hashCode());
 		result = 37 * result + (getStrCode() == null ? 0 : this.getStrCode().hashCode());
 		result = 37 * result + (getStrOpeRespo() == null ? 0 : this.getStrOpeRespo().hashCode());
 		result = 37 * result + (getNbrTraite() == null ? 0 : this.getNbrTraite().hashCode());
 		result = 37 * result + (getNbrEnCours() == null ? 0 : this.getNbrEnCours().hashCode());
 		result = 37 * result + (getNbrValide() == null ? 0 : this.getNbrValide().hashCode());
+		result = 37 * result + (getTypbinome() == null ? 0 : this.getTypbinome().hashCode());
+		result = 37 * result + (getTypresp() == null ? 0 : this.getTypresp().hashCode());
 		return result;
 	}
 

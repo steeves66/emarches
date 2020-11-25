@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -30,7 +30,7 @@ public class VbDetailDemandes implements java.io.Serializable {
 			@AttributeOverride(name = "ddeNum", column = @Column(name = "DDE_NUM", nullable = false, precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddeDemNum", column = @Column(name = "DDE_DEM_NUM", precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddeDacCode", column = @Column(name = "DDE_DAC_CODE", length = 20)),
-			@AttributeOverride(name = "ddeLaaId", column = @Column(name = "DDE_LAA_ID", precision = 4, scale = 0)),
+			@AttributeOverride(name = "ddeLaaId", column = @Column(name = "DDE_LAA_ID", precision = 22, scale = 0)),
 			@AttributeOverride(name = "ddeLbgCode", column = @Column(name = "DDE_LBG_CODE", length = 50)),
 			@AttributeOverride(name = "ddeMarCode", column = @Column(name = "DDE_MAR_CODE", length = 20)),
 			@AttributeOverride(name = "ddeStrCode", column = @Column(name = "DDE_STR_CODE", length = 20)),

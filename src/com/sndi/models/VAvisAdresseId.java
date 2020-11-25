@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -36,7 +36,7 @@ public class VAvisAdresseId implements java.io.Serializable {
 		this.dtaLibelle = dtaLibelle;
 	}
 
-	@Column(name = "AAO_CODE", nullable = false, length = 20)
+	@Column(name = "AAO_CODE", nullable = false, length = 22)
 	public String getAaoCode() {
 		return this.aaoCode;
 	}

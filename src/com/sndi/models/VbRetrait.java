@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,7 +27,7 @@ public class VbRetrait implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "retId", column = @Column(name = "RET_ID", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "retId", column = @Column(name = "RET_ID", precision = 10, scale = 0)),
 			@AttributeOverride(name = "retDacCode", column = @Column(name = "RET_DAC_CODE", length = 20)),
 			@AttributeOverride(name = "retNom", column = @Column(name = "RET_NOM", length = 1000)),
 			@AttributeOverride(name = "retAdresse", column = @Column(name = "RET_ADRESSE", length = 500)),

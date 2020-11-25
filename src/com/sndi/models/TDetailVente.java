@@ -1,12 +1,11 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -16,111 +15,32 @@ import javax.persistence.Table;
 @Table(name = "T_DETAIL_VENTE", schema = "EMAP")
 public class TDetailVente implements java.io.Serializable {
 
-	private long dveNum;
-	private TDacSpecs TDacSpecs;
-	private TLotAao TLotAao;
-	private TVenteDac TVenteDac;
-	private String dveQte;
-	private Long dveCout;
-	private String dveCoutLettre;
-	private String dveFonCod;
+	private TDetailVenteId id;
 
 	public TDetailVente() {
 	}
 
-	public TDetailVente(long dveNum, TDacSpecs TDacSpecs, TVenteDac TVenteDac) {
-		this.dveNum = dveNum;
-		this.TDacSpecs = TDacSpecs;
-		this.TVenteDac = TVenteDac;
+	public TDetailVente(TDetailVenteId id) {
+		this.id = id;
 	}
 
-	public TDetailVente(long dveNum, TDacSpecs TDacSpecs, TLotAao TLotAao, TVenteDac TVenteDac, String dveQte,
-			Long dveCout, String dveCoutLettre, String dveFonCod) {
-		this.dveNum = dveNum;
-		this.TDacSpecs = TDacSpecs;
-		this.TLotAao = TLotAao;
-		this.TVenteDac = TVenteDac;
-		this.dveQte = dveQte;
-		this.dveCout = dveCout;
-		this.dveCoutLettre = dveCoutLettre;
-		this.dveFonCod = dveFonCod;
+	@EmbeddedId
+
+	@AttributeOverrides({
+			@AttributeOverride(name = "dveNum", column = @Column(name = "DVE_NUM", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "dveDacCode", column = @Column(name = "DVE_DAC_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "dveVenNum", column = @Column(name = "DVE_VEN_NUM", nullable = false, precision = 10, scale = 0)),
+			@AttributeOverride(name = "dveLaaNum", column = @Column(name = "DVE_LAA_NUM", precision = 20, scale = 0)),
+			@AttributeOverride(name = "dveQte", column = @Column(name = "DVE_QTE", length = 3)),
+			@AttributeOverride(name = "dveCout", column = @Column(name = "DVE_COUT", precision = 11, scale = 0)),
+			@AttributeOverride(name = "dveCoutLettre", column = @Column(name = "DVE_COUT_LETTRE", length = 500)),
+			@AttributeOverride(name = "dveFonCod", column = @Column(name = "DVE_FON_COD", length = 12)) })
+	public TDetailVenteId getId() {
+		return this.id;
 	}
 
-	@Id
-
-	@Column(name = "DVE_NUM", unique = true, nullable = false, precision = 10, scale = 0)
-	public long getDveNum() {
-		return this.dveNum;
-	}
-
-	public void setDveNum(long dveNum) {
-		this.dveNum = dveNum;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DVE_DAC_CODE", nullable = false)
-	public TDacSpecs getTDacSpecs() {
-		return this.TDacSpecs;
-	}
-
-	public void setTDacSpecs(TDacSpecs TDacSpecs) {
-		this.TDacSpecs = TDacSpecs;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DVE_LAA_NUM")
-	public TLotAao getTLotAao() {
-		return this.TLotAao;
-	}
-
-	public void setTLotAao(TLotAao TLotAao) {
-		this.TLotAao = TLotAao;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "DVE_VEN_NUM", nullable = false)
-	public TVenteDac getTVenteDac() {
-		return this.TVenteDac;
-	}
-
-	public void setTVenteDac(TVenteDac TVenteDac) {
-		this.TVenteDac = TVenteDac;
-	}
-
-	@Column(name = "DVE_QTE", length = 3)
-	public String getDveQte() {
-		return this.dveQte;
-	}
-
-	public void setDveQte(String dveQte) {
-		this.dveQte = dveQte;
-	}
-
-	@Column(name = "DVE_COUT", precision = 11, scale = 0)
-	public Long getDveCout() {
-		return this.dveCout;
-	}
-
-	public void setDveCout(Long dveCout) {
-		this.dveCout = dveCout;
-	}
-
-	@Column(name = "DVE_COUT_LETTRE", length = 500)
-	public String getDveCoutLettre() {
-		return this.dveCoutLettre;
-	}
-
-	public void setDveCoutLettre(String dveCoutLettre) {
-		this.dveCoutLettre = dveCoutLettre;
-	}
-
-	@Column(name = "DVE_FON_COD", length = 12)
-	public String getDveFonCod() {
-		return this.dveFonCod;
-	}
-
-	public void setDveFonCod(String dveFonCod) {
-		this.dveFonCod = dveFonCod;
+	public void setId(TDetailVenteId id) {
+		this.id = id;
 	}
 
 }

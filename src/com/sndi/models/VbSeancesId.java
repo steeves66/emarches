@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -22,6 +22,7 @@ public class VbSeancesId implements java.io.Serializable {
 	private String seaFonCode;
 	private String seaOpeMatricule;
 	private String seaObservation;
+	private Date seaDteSea;
 
 	public VbSeancesId() {
 	}
@@ -31,7 +32,8 @@ public class VbSeancesId implements java.io.Serializable {
 	}
 
 	public VbSeancesId(BigDecimal seaNum, String seaLibelle, String seaTseCode, String seaQuorum, BigDecimal seaNbrPli,
-			String seaRes, Date seaSteSaisi, String seaFonCode, String seaOpeMatricule, String seaObservation) {
+			String seaRes, Date seaSteSaisi, String seaFonCode, String seaOpeMatricule, String seaObservation,
+			Date seaDteSea) {
 		this.seaNum = seaNum;
 		this.seaLibelle = seaLibelle;
 		this.seaTseCode = seaTseCode;
@@ -42,6 +44,7 @@ public class VbSeancesId implements java.io.Serializable {
 		this.seaFonCode = seaFonCode;
 		this.seaOpeMatricule = seaOpeMatricule;
 		this.seaObservation = seaObservation;
+		this.seaDteSea = seaDteSea;
 	}
 
 	@Column(name = "SEA_NUM", nullable = false, precision = 22, scale = 0)
@@ -134,6 +137,15 @@ public class VbSeancesId implements java.io.Serializable {
 		this.seaObservation = seaObservation;
 	}
 
+	@Column(name = "SEA_DTE_SEA", length = 7)
+	public Date getSeaDteSea() {
+		return this.seaDteSea;
+	}
+
+	public void setSeaDteSea(Date seaDteSea) {
+		this.seaDteSea = seaDteSea;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -165,7 +177,9 @@ public class VbSeancesId implements java.io.Serializable {
 								&& this.getSeaOpeMatricule().equals(castOther.getSeaOpeMatricule())))
 				&& ((this.getSeaObservation() == castOther.getSeaObservation())
 						|| (this.getSeaObservation() != null && castOther.getSeaObservation() != null
-								&& this.getSeaObservation().equals(castOther.getSeaObservation())));
+								&& this.getSeaObservation().equals(castOther.getSeaObservation())))
+				&& ((this.getSeaDteSea() == castOther.getSeaDteSea()) || (this.getSeaDteSea() != null
+						&& castOther.getSeaDteSea() != null && this.getSeaDteSea().equals(castOther.getSeaDteSea())));
 	}
 
 	public int hashCode() {
@@ -181,6 +195,7 @@ public class VbSeancesId implements java.io.Serializable {
 		result = 37 * result + (getSeaFonCode() == null ? 0 : this.getSeaFonCode().hashCode());
 		result = 37 * result + (getSeaOpeMatricule() == null ? 0 : this.getSeaOpeMatricule().hashCode());
 		result = 37 * result + (getSeaObservation() == null ? 0 : this.getSeaObservation().hashCode());
+		result = 37 * result + (getSeaDteSea() == null ? 0 : this.getSeaDteSea().hashCode());
 		return result;
 	}
 

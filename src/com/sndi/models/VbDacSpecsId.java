@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -40,6 +40,11 @@ public class VbDacSpecsId implements java.io.Serializable {
 	private String dacFonCodePf;
 	private Date dacDteModif;
 	private String dacModType;
+	private Boolean dacFactoriseCrit;
+	private Long dacNbreAchat;
+	private String dacAutComSpec;
+	private BigDecimal dacNbrCopieOff;
+	private String dacFinancement;
 
 	public VbDacSpecsId() {
 	}
@@ -53,7 +58,8 @@ public class VbDacSpecsId implements java.io.Serializable {
 			String dacFonCodeCpmp, Date dacDteValCpmp, Date dacDteValDmp, String dacTdCode, Date dacDateReception,
 			String dacStatutRetour, String dacMention, Date dacDateValAc, String dacAvisBailleur,
 			Date dacDateAvisBailleur, String dacBailleur, Long dacCout, String dacTypePlan, String dacRecherche,
-			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, String dacModType) {
+			String dacFonCodeDmp, String dacFonCodePf, Date dacDteModif, String dacModType, Boolean dacFactoriseCrit,
+			Long dacNbreAchat, String dacAutComSpec, BigDecimal dacNbrCopieOff, String dacFinancement) {
 		this.dacCode = dacCode;
 		this.dacObjet = dacObjet;
 		this.dacDteSaisi = dacDteSaisi;
@@ -82,6 +88,11 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacFonCodePf = dacFonCodePf;
 		this.dacDteModif = dacDteModif;
 		this.dacModType = dacModType;
+		this.dacFactoriseCrit = dacFactoriseCrit;
+		this.dacNbreAchat = dacNbreAchat;
+		this.dacAutComSpec = dacAutComSpec;
+		this.dacNbrCopieOff = dacNbrCopieOff;
+		this.dacFinancement = dacFinancement;
 	}
 
 	@Column(name = "DAC_CODE", nullable = false, length = 20)
@@ -174,7 +185,7 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacStrCode = dacStrCode;
 	}
 
-	@Column(name = "DAC_FON_CODE_CPMP", length = 12)
+	@Column(name = "DAC_FON_CODE_CPMP", length = 10)
 	public String getDacFonCodeCpmp() {
 		return this.dacFonCodeCpmp;
 	}
@@ -336,6 +347,51 @@ public class VbDacSpecsId implements java.io.Serializable {
 		this.dacModType = dacModType;
 	}
 
+	@Column(name = "DAC_FACTORISE_CRIT", precision = 1, scale = 0)
+	public Boolean getDacFactoriseCrit() {
+		return this.dacFactoriseCrit;
+	}
+
+	public void setDacFactoriseCrit(Boolean dacFactoriseCrit) {
+		this.dacFactoriseCrit = dacFactoriseCrit;
+	}
+
+	@Column(name = "DAC_NBRE_ACHAT", precision = 11, scale = 0)
+	public Long getDacNbreAchat() {
+		return this.dacNbreAchat;
+	}
+
+	public void setDacNbreAchat(Long dacNbreAchat) {
+		this.dacNbreAchat = dacNbreAchat;
+	}
+
+	@Column(name = "DAC_AUT_COM_SPEC", length = 200)
+	public String getDacAutComSpec() {
+		return this.dacAutComSpec;
+	}
+
+	public void setDacAutComSpec(String dacAutComSpec) {
+		this.dacAutComSpec = dacAutComSpec;
+	}
+
+	@Column(name = "DAC_NBR_COPIE_OFF", precision = 22, scale = 0)
+	public BigDecimal getDacNbrCopieOff() {
+		return this.dacNbrCopieOff;
+	}
+
+	public void setDacNbrCopieOff(BigDecimal dacNbrCopieOff) {
+		this.dacNbrCopieOff = dacNbrCopieOff;
+	}
+
+	@Column(name = "DAC_FINANCEMENT", length = 4000)
+	public String getDacFinancement() {
+		return this.dacFinancement;
+	}
+
+	public void setDacFinancement(String dacFinancement) {
+		this.dacFinancement = dacFinancement;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -415,9 +471,23 @@ public class VbDacSpecsId implements java.io.Serializable {
 				&& ((this.getDacDteModif() == castOther.getDacDteModif())
 						|| (this.getDacDteModif() != null && castOther.getDacDteModif() != null
 								&& this.getDacDteModif().equals(castOther.getDacDteModif())))
-				&& ((this.getDacModType() == castOther.getDacModType())
-						|| (this.getDacModType() != null && castOther.getDacModType() != null
-								&& this.getDacModType().equals(castOther.getDacModType())));
+				&& ((this.getDacModType() == castOther.getDacModType()) || (this.getDacModType() != null
+						&& castOther.getDacModType() != null && this.getDacModType().equals(castOther.getDacModType())))
+				&& ((this.getDacFactoriseCrit() == castOther.getDacFactoriseCrit())
+						|| (this.getDacFactoriseCrit() != null && castOther.getDacFactoriseCrit() != null
+								&& this.getDacFactoriseCrit().equals(castOther.getDacFactoriseCrit())))
+				&& ((this.getDacNbreAchat() == castOther.getDacNbreAchat())
+						|| (this.getDacNbreAchat() != null && castOther.getDacNbreAchat() != null
+								&& this.getDacNbreAchat().equals(castOther.getDacNbreAchat())))
+				&& ((this.getDacAutComSpec() == castOther.getDacAutComSpec())
+						|| (this.getDacAutComSpec() != null && castOther.getDacAutComSpec() != null
+								&& this.getDacAutComSpec().equals(castOther.getDacAutComSpec())))
+				&& ((this.getDacNbrCopieOff() == castOther.getDacNbrCopieOff())
+						|| (this.getDacNbrCopieOff() != null && castOther.getDacNbrCopieOff() != null
+								&& this.getDacNbrCopieOff().equals(castOther.getDacNbrCopieOff())))
+				&& ((this.getDacFinancement() == castOther.getDacFinancement())
+						|| (this.getDacFinancement() != null && castOther.getDacFinancement() != null
+								&& this.getDacFinancement().equals(castOther.getDacFinancement())));
 	}
 
 	public int hashCode() {
@@ -451,6 +521,11 @@ public class VbDacSpecsId implements java.io.Serializable {
 		result = 37 * result + (getDacFonCodePf() == null ? 0 : this.getDacFonCodePf().hashCode());
 		result = 37 * result + (getDacDteModif() == null ? 0 : this.getDacDteModif().hashCode());
 		result = 37 * result + (getDacModType() == null ? 0 : this.getDacModType().hashCode());
+		result = 37 * result + (getDacFactoriseCrit() == null ? 0 : this.getDacFactoriseCrit().hashCode());
+		result = 37 * result + (getDacNbreAchat() == null ? 0 : this.getDacNbreAchat().hashCode());
+		result = 37 * result + (getDacAutComSpec() == null ? 0 : this.getDacAutComSpec().hashCode());
+		result = 37 * result + (getDacNbrCopieOff() == null ? 0 : this.getDacNbrCopieOff().hashCode());
+		result = 37 * result + (getDacFinancement() == null ? 0 : this.getDacFinancement().hashCode());
 		return result;
 	}
 

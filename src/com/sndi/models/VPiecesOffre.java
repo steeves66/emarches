@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,8 +27,8 @@ public class VPiecesOffre implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "opdNum", column = @Column(name = "OPD_NUM", nullable = false, precision = 22, scale = 0)),
-			@AttributeOverride(name = "tpoCode", column = @Column(name = "TPO_CODE", nullable = false, length = 10)),
+			@AttributeOverride(name = "opdNum", column = @Column(name = "OPD_NUM", precision = 22, scale = 0)),
+			@AttributeOverride(name = "tpoCode", column = @Column(name = "TPO_CODE", length = 10)),
 			@AttributeOverride(name = "opdDacCode", column = @Column(name = "OPD_DAC_CODE", length = 25)),
 			@AttributeOverride(name = "tpoLibelle", column = @Column(name = "TPO_LIBELLE", length = 200)),
 			@AttributeOverride(name = "odpTpoEtapPiece", column = @Column(name = "ODP_TPO_ETAP_PIECE", length = 20)) })

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -33,9 +33,11 @@ public class VPieces implements java.io.Serializable {
 			@AttributeOverride(name = "pidStaCode", column = @Column(name = "PID_STA_CODE", length = 3)),
 			@AttributeOverride(name = "pidDteSaisi", column = @Column(name = "PID_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "pidDacCode", column = @Column(name = "PID_DAC_CODE", length = 20)),
-			@AttributeOverride(name = "pidConforme", column = @Column(name = "PID_CONFORME", length = 3)),
 			@AttributeOverride(name = "pidObservation", column = @Column(name = "PID_OBSERVATION", length = 2000)),
-			@AttributeOverride(name = "pidPresente", column = @Column(name = "PID_PRESENTE", length = 3)) })
+			@AttributeOverride(name = "pidConforme", column = @Column(name = "PID_CONFORME", length = 3)),
+			@AttributeOverride(name = "pidPresente", column = @Column(name = "PID_PRESENTE", length = 3)),
+			@AttributeOverride(name = "btnPidConforme", column = @Column(name = "BTN_PID_CONFORME", precision = 22, scale = 0)),
+			@AttributeOverride(name = "btnPidPresente", column = @Column(name = "BTN_PID_PRESENTE", precision = 22, scale = 0)) })
 	public VPiecesId getId() {
 		return this.id;
 	}

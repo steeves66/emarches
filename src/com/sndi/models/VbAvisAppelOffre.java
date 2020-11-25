@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -27,14 +27,14 @@ public class VbAvisAppelOffre implements java.io.Serializable {
 	@EmbeddedId
 
 	@AttributeOverrides({
-			@AttributeOverride(name = "aaoCode", column = @Column(name = "AAO_CODE", nullable = false, length = 20)),
+			@AttributeOverride(name = "aaoCode", column = @Column(name = "AAO_CODE", nullable = false, length = 22)),
 			@AttributeOverride(name = "aaoLibelle", column = @Column(name = "AAO_LIBELLE", length = 1000)),
 			@AttributeOverride(name = "aaoDacCode", column = @Column(name = "AAO_DAC_CODE", length = 20)),
 			@AttributeOverride(name = "aaoDteSaisi", column = @Column(name = "AAO_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "aaoStaCode", column = @Column(name = "AAO_STA_CODE", length = 3)),
 			@AttributeOverride(name = "aaoDtePub", column = @Column(name = "AAO_DTE_PUB", length = 7)),
 			@AttributeOverride(name = "aaoDteOuvTec", column = @Column(name = "AAO_DTE_OUV_TEC", length = 7)),
-			@AttributeOverride(name = "aaoDteHeurOuv", column = @Column(name = "AAO_DTE_HEUR_OUV", length = 20)),
+			@AttributeOverride(name = "aaoDteHeurOuv", column = @Column(name = "AAO_DTE_HEUR_OUV", length = 50)),
 			@AttributeOverride(name = "aaoDteOuvFin", column = @Column(name = "AAO_DTE_OUV_FIN", length = 7)),
 			@AttributeOverride(name = "aaoNbrLot", column = @Column(name = "AAO_NBR_LOT", precision = 22, scale = 0)),
 			@AttributeOverride(name = "aaoNbrOuv", column = @Column(name = "AAO_NBR_OUV", precision = 22, scale = 0)),
@@ -57,7 +57,7 @@ public class VbAvisAppelOffre implements java.io.Serializable {
 			@AttributeOverride(name = "aaoDateRecep", column = @Column(name = "AAO_DATE_RECEP", length = 7)),
 			@AttributeOverride(name = "aaoHeureRecep", column = @Column(name = "AAO_HEURE_RECEP", length = 20)),
 			@AttributeOverride(name = "aaoAdaNum", column = @Column(name = "AAO_ADA_NUM", precision = 22, scale = 0)),
-			@AttributeOverride(name = "aaoNatPrix", column = @Column(name = "AAO_NAT_PRIX", length = 20)),
+			@AttributeOverride(name = "aaoNatPrix", column = @Column(name = "AAO_NAT_PRIX", length = 50)),
 			@AttributeOverride(name = "aaoRegQual", column = @Column(name = "AAO_REG_QUAL", length = 100)),
 			@AttributeOverride(name = "aaoAvisBai", column = @Column(name = "AAO_AVIS_BAI", length = 1)),
 			@AttributeOverride(name = "aaoRespBai", column = @Column(name = "AAO_RESP_BAI", length = 200)),
@@ -68,7 +68,18 @@ public class VbAvisAppelOffre implements java.io.Serializable {
 			@AttributeOverride(name = "aaoNbrOff", column = @Column(name = "AAO_NBR_OFF", precision = 4, scale = 0)),
 			@AttributeOverride(name = "aaoNbrOffAccpet", column = @Column(name = "AAO_NBR_OFF_ACCPET", precision = 4, scale = 0)),
 			@AttributeOverride(name = "aaoNbrOffRej", column = @Column(name = "AAO_NBR_OFF_REJ", precision = 4, scale = 0)),
-			@AttributeOverride(name = "aaoNbrOffHorDelai", column = @Column(name = "AAO_NBR_OFF_HOR_DELAI", precision = 4, scale = 0)) })
+			@AttributeOverride(name = "aaoNbrOffHorDelai", column = @Column(name = "AAO_NBR_OFF_HOR_DELAI", precision = 4, scale = 0)),
+			@AttributeOverride(name = "aaoHeurFinOuv", column = @Column(name = "AAO_HEUR_FIN_OUV", length = 20)),
+			@AttributeOverride(name = "aaoLieuOuvPrecis", column = @Column(name = "AAO_LIEU_OUV_PRECIS", length = 500)),
+			@AttributeOverride(name = "aaoObsOuv", column = @Column(name = "AAO_OBS_OUV", length = 4000)),
+			@AttributeOverride(name = "aaoDteFinOuv", column = @Column(name = "AAO_DTE_FIN_OUV", length = 7)),
+			@AttributeOverride(name = "aaoDteOuv", column = @Column(name = "AAO_DTE_OUV", length = 7)),
+			@AttributeOverride(name = "aooHeurOuv", column = @Column(name = "AOO_HEUR_OUV", length = 20)),
+			@AttributeOverride(name = "avisRetour", column = @Column(name = "AVIS_RETOUR", length = 1)),
+			@AttributeOverride(name = "aaoNumSeq", column = @Column(name = "AAO_NUM_SEQ", length = 22)),
+			@AttributeOverride(name = "aaoNumBompPub", column = @Column(name = "AAO_NUM_BOMP_PUB", length = 25)),
+			@AttributeOverride(name = "aaoDteBompPub", column = @Column(name = "AAO_DTE_BOMP_PUB", length = 7)),
+			@AttributeOverride(name = "aaoArtComSpec", column = @Column(name = "AAO_ART_COM_SPEC", length = 20)) })
 	public VbAvisAppelOffreId getId() {
 		return this.id;
 	}

@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,6 +39,9 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 	private String dofObsVariante;
 	private BigDecimal dofMtCaut;
 	private BigDecimal dofMtRab;
+	private BigDecimal dofDelai2;
+	private BigDecimal dofErrCalcul;
+	private BigDecimal dofTempNum;
 
 	public VbTempParamDetOffresId() {
 	}
@@ -52,7 +55,7 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 			String dofOffRc, String dofCaut, String dofTyp, String dofBanCode, String dofEstimRab, String dofRab,
 			String dofMtOfr, String dofOffNum, String dofNum, String dofNomRep, String dofPreRep, String dofTelRep,
 			String dofMailRep, String dofSouNcc, String dofSigle, String dofObsVariante, BigDecimal dofMtCaut,
-			BigDecimal dofMtRab) {
+			BigDecimal dofMtRab, BigDecimal dofDelai2, BigDecimal dofErrCalcul, BigDecimal dofTempNum) {
 		this.tempNum = tempNum;
 		this.dofDteSaisi = dofDteSaisi;
 		this.dofOpeMatricule = dofOpeMatricule;
@@ -80,6 +83,9 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 		this.dofObsVariante = dofObsVariante;
 		this.dofMtCaut = dofMtCaut;
 		this.dofMtRab = dofMtRab;
+		this.dofDelai2 = dofDelai2;
+		this.dofErrCalcul = dofErrCalcul;
+		this.dofTempNum = dofTempNum;
 	}
 
 	@Column(name = "TEMP_NUM", nullable = false, precision = 22, scale = 0)
@@ -325,6 +331,33 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 		this.dofMtRab = dofMtRab;
 	}
 
+	@Column(name = "DOF_DELAI2", precision = 22, scale = 0)
+	public BigDecimal getDofDelai2() {
+		return this.dofDelai2;
+	}
+
+	public void setDofDelai2(BigDecimal dofDelai2) {
+		this.dofDelai2 = dofDelai2;
+	}
+
+	@Column(name = "DOF_ERR_CALCUL", precision = 22, scale = 0)
+	public BigDecimal getDofErrCalcul() {
+		return this.dofErrCalcul;
+	}
+
+	public void setDofErrCalcul(BigDecimal dofErrCalcul) {
+		this.dofErrCalcul = dofErrCalcul;
+	}
+
+	@Column(name = "DOF_TEMP_NUM", precision = 22, scale = 0)
+	public BigDecimal getDofTempNum() {
+		return this.dofTempNum;
+	}
+
+	public void setDofTempNum(BigDecimal dofTempNum) {
+		this.dofTempNum = dofTempNum;
+	}
+
 	public boolean equals(Object other) {
 		if ((this == other))
 			return true;
@@ -393,7 +426,15 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 				&& ((this.getDofMtCaut() == castOther.getDofMtCaut()) || (this.getDofMtCaut() != null
 						&& castOther.getDofMtCaut() != null && this.getDofMtCaut().equals(castOther.getDofMtCaut())))
 				&& ((this.getDofMtRab() == castOther.getDofMtRab()) || (this.getDofMtRab() != null
-						&& castOther.getDofMtRab() != null && this.getDofMtRab().equals(castOther.getDofMtRab())));
+						&& castOther.getDofMtRab() != null && this.getDofMtRab().equals(castOther.getDofMtRab())))
+				&& ((this.getDofDelai2() == castOther.getDofDelai2()) || (this.getDofDelai2() != null
+						&& castOther.getDofDelai2() != null && this.getDofDelai2().equals(castOther.getDofDelai2())))
+				&& ((this.getDofErrCalcul() == castOther.getDofErrCalcul())
+						|| (this.getDofErrCalcul() != null && castOther.getDofErrCalcul() != null
+								&& this.getDofErrCalcul().equals(castOther.getDofErrCalcul())))
+				&& ((this.getDofTempNum() == castOther.getDofTempNum())
+						|| (this.getDofTempNum() != null && castOther.getDofTempNum() != null
+								&& this.getDofTempNum().equals(castOther.getDofTempNum())));
 	}
 
 	public int hashCode() {
@@ -426,6 +467,9 @@ public class VbTempParamDetOffresId implements java.io.Serializable {
 		result = 37 * result + (getDofObsVariante() == null ? 0 : this.getDofObsVariante().hashCode());
 		result = 37 * result + (getDofMtCaut() == null ? 0 : this.getDofMtCaut().hashCode());
 		result = 37 * result + (getDofMtRab() == null ? 0 : this.getDofMtRab().hashCode());
+		result = 37 * result + (getDofDelai2() == null ? 0 : this.getDofDelai2().hashCode());
+		result = 37 * result + (getDofErrCalcul() == null ? 0 : this.getDofErrCalcul().hashCode());
+		result = 37 * result + (getDofTempNum() == null ? 0 : this.getDofTempNum().hashCode());
 		return result;
 	}
 

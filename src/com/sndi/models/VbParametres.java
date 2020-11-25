@@ -1,5 +1,5 @@
 package com.sndi.models;
-// Generated 8 août 2020 14:11:26 by Hibernate Tools 4.3.5.Final
+// Generated 23 nov. 2020 12:59:43 by Hibernate Tools 4.3.5.Final
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -29,7 +29,7 @@ public class VbParametres implements java.io.Serializable {
 	@AttributeOverrides({
 			@AttributeOverride(name = "parCode", column = @Column(name = "PAR_CODE", nullable = false, length = 20)),
 			@AttributeOverride(name = "parLibelle", column = @Column(name = "PAR_LIBELLE", length = 200)),
-			@AttributeOverride(name = "parVal", column = @Column(name = "PAR_VAL", length = 200)),
+			@AttributeOverride(name = "parVal", column = @Column(name = "PAR_VAL", length = 4000)),
 			@AttributeOverride(name = "parOpeMatricule", column = @Column(name = "PAR_OPE_MATRICULE", length = 25)),
 			@AttributeOverride(name = "parDteSaisi", column = @Column(name = "PAR_DTE_SAISI", length = 7)),
 			@AttributeOverride(name = "parActif", column = @Column(name = "PAR_ACTIF", length = 2)) })
