@@ -31,6 +31,7 @@ import com.sndi.model.TBanques;
 import com.sndi.model.TCandidats;
 import com.sndi.model.TCommissionSpecifique;
 import com.sndi.model.TCommissionType;
+import com.sndi.model.TCritereAnalyseDacOuv;
 import com.sndi.model.TDacSpecs;
 import com.sndi.model.TDemande;
 import com.sndi.model.TDetCommissionSeance;
@@ -106,6 +107,7 @@ import com.sndi.model.VbDetOffresSaisi;
 import com.sndi.model.VbTempParamAnalyseOff;
 import com.sndi.model.VbTempParamAtrib;
 import com.sndi.model.VbTempParamDetOffres;
+import com.sndi.model.VbTempParamOuv;
 import com.sndi.model.VbTempParametreCom;
 import com.sndi.model.VbTempParametreFactAn;
 import com.sndi.model.VVerifcorOffin;
@@ -200,7 +202,8 @@ public class CommissionController {
 	 //private List<VLot> listeLotsByAvis = new ArrayList<VLot>();
 	 //private List<VCandidatDac> listCandidats = new ArrayList<VCandidatDac>();
 	 private List<VOffreCandidat> listCandidats = new ArrayList<VOffreCandidat>();
-	 private List<VCritereAnalyseDacOuv> listPiecesOuv = new ArrayList<VCritereAnalyseDacOuv>();
+	 //private List<VCritereAnalyseDacOuv> listPiecesOuv = new ArrayList<VCritereAnalyseDacOuv>();
+	 private List<TCritereAnalyseDacOuv> listPiecesOuv = new ArrayList<TCritereAnalyseDacOuv>();
 	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>(); 
 	 private List<VDetOffreAnalyse> listeOffres = new ArrayList<VDetOffreAnalyse>();
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
@@ -253,7 +256,8 @@ public class CommissionController {
 	 private VRepSoumissionnaire recupNcc =new VRepSoumissionnaire();
 	 private VCritereAnalyseDacOfftec posCritere = new VCritereAnalyseDacOfftec();
 	 private VPiecesOffreAnalyse posPiece = new VPiecesOffreAnalyse();
-	 private VCritereAnalyseDacOuv pieceOuv = new VCritereAnalyseDacOuv();
+	// private VCritereAnalyseDacOuv pieceOuv = new VCritereAnalyseDacOuv();
+	 private TCritereAnalyseDacOuv pieceOuv = new TCritereAnalyseDacOuv();
 	 
 	 //Declaration des objets
 	 private TCommissionSpecifique newcomSpec = new TCommissionSpecifique();
@@ -294,7 +298,7 @@ public class CommissionController {
 	 private VDetailOffres selectdetOffre = new VDetailOffres();
 	 private VSeqTravail seq = new VSeqTravail();
 	 private VCritereAnalyseDacOuv sltPiece = new VCritereAnalyseDacOuv();
-
+	 private VbTempParamOuv genPiece = new VbTempParamOuv();
 	 
 	 //Declaration des variables
 	 private String tcoCode;
@@ -589,11 +593,16 @@ public class CommissionController {
 					_logger.info("listeMembreCojo size: "+listeMembreCojo.size());	
 		 }
 	 
+		 
+		 
 	 public void checkMontantVar() {
 		 if(dofTyp.equalsIgnoreCase("B")) {
 			 etatMontVar = false; 
+			 genererPieces();
+			 
 		 }else {
 			 etatMontVar = true;  
+			 genererPieces();
 		 } 
 	 }
 	 
@@ -653,12 +662,20 @@ public class CommissionController {
 	 
 
 	 
-	//Liste des pièces de l'offre
+	/*//Liste des pièces de l'offre
 	 public void chargePieces() {
 		 //listePiecesOffres = ((List<VPiecesOffre>)iservice.getObjectsByColumn("VPiecesOffre",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
 				// new WhereClause("OPD_DAC_CODE",Comparateur.EQ,""+slctdTd.getAaoDacCode())));
 		 
 		 listPiecesOuv = ((List<VCritereAnalyseDacOuv>)iservice.getObjectsByColumn("VCritereAnalyseDacOuv",
+				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
+				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
+	 }*/
+	 
+	 
+	//Liste des pièces de l'offre
+	 public void chargePieces() {
+		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
 				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
 	 }
@@ -691,11 +708,13 @@ public class CommissionController {
 	 
 	//Présence (O/N)
 	 public void majPiecesOuv (String presence) {
-		 List<TAnalyseOffre> ANA  = iservice.getObjectsByColumn("TAnalyseOffre", new WhereClause("ANF_DCAD_NUM",Comparateur.EQ,""+pieceOuv.getDcadNum()));
-		 TAnalyseOffre offre = new TAnalyseOffre(); 
+		 List<TCritereAnalyseDacOuv> ANA  = iservice.getObjectsByColumn("TCritereAnalyseDacOuv", new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId()));
+		 TCritereAnalyseDacOuv offre = new TCritereAnalyseDacOuv(); 
 		 if(!ANA.isEmpty()) offre = ANA.get(0);
-		 offre.setAnfPresence(""+presence);
+		 offre.setDcadPresence(""+presence);
 		 iservice.updateObject(offre);	
+		 
+		 chargePieces();
 	 }
 	 
 	 //Présence (O/N)
@@ -1693,6 +1712,21 @@ public class CommissionController {
 			    //chargeLotsByCandidat();
 		   }
 		//Fin de la Methode OnSelectCandidat
+		 
+		 
+		 //Générer le pièces de recevabilité
+		 public void genererPieces() {
+			 genPiece.setDofNcc(candidat.getSouNcc());
+			 genPiece.setTempOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
+			 genPiece.setDofLaaNum(tlot.getLaaNum());
+			 genPiece.setDofLaaAaoCode(slctdTd.getAaoCode());
+			 genPiece.setDofTyp(dofTyp);
+			 genPiece.setTempType("REC");
+			 
+			 iservice.addObject(genPiece);
+			 //Chargement des pièces
+			 chargePieces();
+		 }
 		
 		//Ouverture des offres
 		public void saveOuverture() {
@@ -1729,7 +1763,7 @@ public class CommissionController {
 			    			_logger.info("dof Num: "+detOffre.getDofNum());
 		 			    
 			    			
-			 		for(VCritereAnalyseDacOuv ligne : listPiecesOuv) {
+			 		for(TCritereAnalyseDacOuv ligne : listPiecesOuv) {
 			 			analyseOffre.setAnfDacCode(ligne.getDcadDacCode());
 			 			analyseOffre.setAnfOpeMatricule(userController.getSlctd().getTOperateur().getOpeMatricule());
 			 			analyseOffre.setAnfDteSaisi(Calendar.getInstance().getTime());
@@ -3944,13 +3978,13 @@ public class CommissionController {
 		this.listeDetOff = listeDetOff;
 	}
 
-	public List<VCritereAnalyseDacOuv> getListPiecesOuv() {
+/*	public List<VCritereAnalyseDacOuv> getListPiecesOuv() {
 		return listPiecesOuv;
 	}
 
 	public void setListPiecesOuv(List<VCritereAnalyseDacOuv> listPiecesOuv) {
 		this.listPiecesOuv = listPiecesOuv;
-	}
+	}*/
 
 	public TAnalyseOffre getAnalyseOffre() {
 		return analyseOffre;
@@ -4000,13 +4034,13 @@ public class CommissionController {
 		this.posPiece = posPiece;
 	}
 
-	public VCritereAnalyseDacOuv getPieceOuv() {
+	/*public VCritereAnalyseDacOuv getPieceOuv() {
 		return pieceOuv;
 	}
 
 	public void setPieceOuv(VCritereAnalyseDacOuv pieceOuv) {
 		this.pieceOuv = pieceOuv;
-	}
+	}*/
 
 	public boolean isBtn_ouv() {
 		return btn_ouv;
@@ -4039,6 +4073,30 @@ public class CommissionController {
 
 	public void setNatpv(String natpv) {
 		this.natpv = natpv;
+	}
+
+	public VbTempParamOuv getGenPiece() {
+		return genPiece;
+	}
+
+	public void setGenPiece(VbTempParamOuv genPiece) {
+		this.genPiece = genPiece;
+	}
+
+	public List<TCritereAnalyseDacOuv> getListPiecesOuv() {
+		return listPiecesOuv;
+	}
+
+	public void setListPiecesOuv(List<TCritereAnalyseDacOuv> listPiecesOuv) {
+		this.listPiecesOuv = listPiecesOuv;
+	}
+
+	public TCritereAnalyseDacOuv getPieceOuv() {
+		return pieceOuv;
+	}
+
+	public void setPieceOuv(TCritereAnalyseDacOuv pieceOuv) {
+		this.pieceOuv = pieceOuv;
 	}
 	
 }

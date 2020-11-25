@@ -197,8 +197,35 @@
 			             </fieldset>   
                    </div>
                    </div>
-                   
+                   <br/><br/>
                    </div>
+                   
+           
+                  <div class="row">
+                  <div class="col-md-12 ">
+                  <div class="col-md-2">
+                  </div>
+                  
+                  <div class="col-md-8">
+                   <div class="form-group">
+                  <label style="font-size:18px;" class="col-sm-2 control-label">Type de l'offre <span style="color:red;"> *</span></label>	
+                           <div class="col-sm-6">
+				           <p:selectOneMenu id="variante12"  value="#{commissionController.dofTyp}" style="width:100%; align:center; font-size:18px" >
+						    <f:selectItem  itemLabel="Selectionnez le type de l'offre..." itemValue=""/>
+						     <f:selectItems value="#{commissionController.listdoftyp}" var="l" itemLabel="#{l.dofTyplib}" itemValue="#{l.dofTyp}" />	  
+						     <p:ajax listener="#{commissionController.checkMontantVar()}"  update="gnl:cond, gnl:pieces"/>   
+				            </p:selectOneMenu> 
+		                  </div>
+		               </div>
+                  </div>
+                  
+                  <div class="col-md-2">
+                  </div>
+                  
+                  </div>
+                  </div>
+                  
+                   
                   
                   <div class="row">
                   </div>
@@ -213,7 +240,7 @@
 			                    <legend style="font-weight: bold"><small>(4.1) - Pièces et éléments de recevabilité </small>
 			                     </legend>
 			                         <p:dataTable rendered="true" var="slctdTb" id="pieces" value="#{commissionController.listPiecesOuv}" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucune pièce trouvée" rows="10" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
-		                        	 rowKey="#{slctdTb.RId}" editable="true" editMode="cell" scrollable="true" scrollHeight="200">
+		                        	 rowKey="#{slctdTb.RId}" editable="true" editMode="cell" scrollable="true" scrollHeight="278">
 		                        	 
 		                               <p:column headerText="PIECES" styleClass="col-sm-4">
 		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
@@ -226,6 +253,7 @@
 		                                
 		                                
 		                                <p:column headerText="PRESENCE" styleClass="col-sm-2">
+                                             <h:panelGroup rendered="false">
                                              <p:cellEditor>
                                              <f:facet name="output">
                                              <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
@@ -242,8 +270,9 @@
 	                                                   </h:panelGroup>
          				                             </f:facet>
          				                           </p:cellEditor> 
+         				                           </h:panelGroup>
          				                           
-         				                           <h:panelGroup rendered="false">
+         				                           <h:panelGroup rendered="true">
          				                           <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                             <h:panelGroup rendered="#{slctdTb.dcadPresence == 'O'}">  
                                                       <p:commandLink action="#{commissionController.majPiecesOuv('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:pieces"
@@ -301,9 +330,9 @@
 				            </p:selectOneMenu> 
 		                  </div>
 		                </div>
-		                
+		                <br/>
 		                 <hr/>
-		                
+		                <br/>
 		             <div class="form-group">
 		             <label for="delai11" class="col-sm-4 control-label"><b>Délai de validité de l'offre (Jours)<span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-7">
@@ -319,39 +348,17 @@
 	                 </div>   
 		            </div>         
 			          
-			          <br/>
+			          <br/><br/>
 			             </fieldset>   
+			             
                    </div>
                    </div>
+                   <br/><br/>
                    </div>
                    </div>
                   </div>
                   
-                  <br/><br/>
-                  
-                  <div class="row">
-                  <div class="col-md-12 ">
-                  <div class="col-md-2">
-                  </div>
-                  
-                  <div class="col-md-8">
-                   <div class="form-group">
-                  <label style="font-size:18px;" class="col-sm-2 control-label">Type de l'offre <span style="color:red;"> *</span></label>	
-                           <div class="col-sm-6">
-				           <p:selectOneMenu id="variante1"  value="#{commissionController.dofTyp}" style="width:100%; align:center; font-size:18px" >
-						    <f:selectItem  itemLabel="Selectionnez le type de l'offre..." itemValue=""/>
-						     <f:selectItems value="#{commissionController.listdoftyp}" var="l" itemLabel="#{l.dofTyplib}" itemValue="#{l.dofTyp}" />	  
-						     <p:ajax listener="#{commissionController.checkMontantVar()}"  update="gnl:cond"/>   
-				            </p:selectOneMenu> 
-		                  </div>
-		               </div>
-                  </div>
-                  
-                  <div class="col-md-2">
-                  </div>
-                  
-                  </div>
-                  </div>
+                
                   
 
                    <div class="col-md-12">
