@@ -444,7 +444,7 @@
 		                                </p:column>
 		                                
 		                                
-		                                <p:column headerText="PRESENCE" styleClass="col-sm-2">
+		                  <!--               <p:column headerText="PRESENCE" styleClass="col-sm-2">
 		                                 <p:cellEditor>
                                              <f:facet name="output">
                                              <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
@@ -497,10 +497,10 @@
                                                 </h:panelGroup>
                                                 </h:panelGroup>
                                                 
-				                           </p:column>
+				                           </p:column> -->
 		                                
 		                               <p:column headerText="CONFORME" styleClass="col-sm-2" >
-		                               
+		                               <h:panelGroup rendered="false">
 		                               <p:cellEditor>
                                              <f:facet name="output">
                                              <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
@@ -518,8 +518,9 @@
 	                                                   </h:panelGroup>
          				                             </f:facet>
          				                 </p:cellEditor>
+         				                 </h:panelGroup>
 		                               
-		                               <h:panelGroup rendered="false">
+		                               <h:panelGroup rendered="true">
 		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                    
          				                 <h:panelGroup rendered="#{slctdTb.btnAnfValeurConf == '3'}">
