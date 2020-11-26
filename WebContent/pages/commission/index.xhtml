@@ -104,19 +104,19 @@
 				        
 				       <p:column headerText="NBRE LOT" styleClass="col-sm-1" >
 				          <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
-         				  <h:outputText value="#{slctdTb.aaoNbrLot}"/>
+         				  <h:outputText value="#{slctdTb.aaoNbrLot}"  styleClass="pull-right" />
          				  </h:panelGroup>
          				 <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
-         				  <h:outputText value="#{slctdTb.aaoNbrLot}" style="color:red; font-weight:bold "/>
+         				  <h:outputText value="#{slctdTb.aaoNbrLot}" styleClass="pull-right" style="color:red; font-weight:bold "/>
          				 </h:panelGroup>
 				       </p:column>	
 				        	
                         <p:column headerText="NBRE OUV" styleClass="col-sm-1" >
                         <h:panelGroup rendered="#{slctdTb.avisRetour != '1'}">
-         				  <h:outputText value="#{slctdTb.aaoNbrOuv}"/>
+         				  <h:outputText value="#{slctdTb.aaoNbrOuv}" styleClass="pull-right" />
          				  </h:panelGroup>
          				 <h:panelGroup rendered="#{slctdTb.avisRetour == '1'}">
-         				 <h:outputText value="#{slctdTb.aaoNbrOuv}"  style="color:red; font-weight:bold "/>
+         				 <h:outputText value="#{slctdTb.aaoNbrOuv}" styleClass="pull-right"  style="color:red; font-weight:bold "/>
          				 </h:panelGroup>
          				  
 				        </p:column>	
