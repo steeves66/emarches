@@ -253,42 +253,21 @@
 		                                
 		                                
 		                                <p:column headerText="PRESENCE" styleClass="col-sm-2">
-                                             <h:panelGroup rendered="false">
-                                             <p:cellEditor>
-                                             <f:facet name="output">
-                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-         				                        <h:outputText id="presence3" value="#{slctdTb.dcadPresence == 'O'?'OUI':'NON'}" />
-         				                        </h:panelGroup>
-         				                         </f:facet>
-         				                             <f:facet name="input">
-         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-	         				                           <h:selectOneMenu id="presence4" value="#{slctdTb.dcadPresence}" style="width:100%; color:#0000">
-				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
-	                                                    <f:selectItem itemLabel="OUI" itemValue="O" />
-	                                                   <f:selectItem itemLabel="NON" itemValue="N" />
-	                                                   </h:selectOneMenu>
-	                                                   </h:panelGroup>
-         				                             </f:facet>
-         				                           </p:cellEditor> 
-         				                           </h:panelGroup>
-         				                           
-         				                           <h:panelGroup rendered="true">
          				                           <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
          				                             <h:panelGroup rendered="#{slctdTb.dcadPresence == 'O'}">  
-                                                      <p:commandLink action="#{commissionController.majPiecesOuv('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:pieces"
+                                                      <p:commandLink action="#{commissionController.majPiecesByGarantie('N')}" class="btn btn-xs btn-success btn-block" style="background-color: #036d3b;" update="gnl:pieces, gnl:garant_pos"
 				                                        title="Absent">
                                                       <span class="hidden-xs" style="color: white">#{slctdTb.dcadPresence == 'O'?'OUI':'NON'}</span>
                                                        <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.pieceOuv}" />                              
                                                       </p:commandLink>
                                                       </h:panelGroup>
                                                      <h:panelGroup rendered="#{slctdTb.dcadPresence == 'N'}">  
-                                                      <p:commandLink action="#{commissionController.majPiecesOuv('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:pieces"
+                                                      <p:commandLink action="#{commissionController.majPiecesByGarantie('O')}" class="btn btn-xs btn-warning btn-block" style="background-color: #f88b2e;" update="gnl:pieces, gnl:garant_pos"
 				                                      title="Présent">
                                                        <span class="hidden-xs" style="color: white">#{slctdTb.dcadPresence == 'O'?'OUI':'NON'}</span>
                                                      <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.pieceOuv}" />                              
                                                       </p:commandLink>
                                                      </h:panelGroup>
-                                                </h:panelGroup>
                                                 </h:panelGroup>
 				                           </p:column>
 		                                
@@ -309,8 +288,8 @@
 			                     </legend>
 			                     
 			             
-			             
-		                
+			            <h:panelGroup id="garant_pos">
+		                <h:panelGroup rendered="#{commissionController.panelGarant}">
 		                 <div class="form-group">
 		                 <label class="col-sm-4 control-label">Montant de la garantie</label>
 						  <div class="col-sm-7">
@@ -330,16 +309,23 @@
 				            </p:selectOneMenu> 
 		                  </div>
 		                </div>
-		                <br/>
+		                
+		                 <br/>
+		                 
 		                 <hr/>
+		                </h:panelGroup>
+		                </h:panelGroup>
+		                
+		               
+		                 
 		                <br/>
+		                
 		             <div class="form-group">
 		             <label for="delai11" class="col-sm-4 control-label"><b>Délai de validité de l'offre (Jours)<span style="color:red;"> *</span></b></label>
 	                  <div class="col-sm-7">
 	                     <p:inputText id="delai11" type="text" styleClass="form-control"  value="#{commissionController.newOffre.dofDelai}" style="width: 100%" />
 	                  </div>  
 		             </div> 
-		             
 		             
 		            <div class="form-group">
 	                <label for="delai21" class="col-sm-4 control-label"><b>Délai d'exécution / Livraison (Jours)<span style="color:red;"> *</span></b></label>

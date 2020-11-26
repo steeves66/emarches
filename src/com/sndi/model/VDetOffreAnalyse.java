@@ -94,6 +94,8 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 	private String dofRepeche;
 	private String dofObsAnormal;
 	private String dofObsRet;
+	private String statutNonRecevable;
+	private String recevabilite;
 
 	public VDetOffreAnalyse() {
 	}
@@ -121,7 +123,7 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 			Short dofScoreBai, String dofNomSign, String dofFonctSign, String dofTelSign, Date dofDteSaisi,
 			String dofFonCodeAc, String dofOpeMatricule, String dofStatut, String dofSouNcc, String souSigleSte,
 			String laaDacCode, String dofTitle, BigDecimal dofErrCalcul, long dofMtRab, String dofSigle,
-			String dofErrFin, String dofObsFin, String dofRepeche, String dofObsAnormal, String dofObsRet) {
+			String dofErrFin, String dofObsFin, String dofRepeche, String dofObsAnormal, String dofObsRet,String statutNonRecevable, String recevabilite) {
 		this.RId = RId;
 		this.cpt = cpt;
 		this.dofNum = dofNum;
@@ -197,6 +199,8 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 		this.dofRepeche = dofRepeche;
 		this.dofObsAnormal = dofObsAnormal;
 		this.dofObsRet = dofObsRet;
+		this.statutNonRecevable = statutNonRecevable;
+		this.recevabilite = recevabilite;
 	}
 
 	@Id
@@ -873,6 +877,24 @@ public class VDetOffreAnalyse implements java.io.Serializable {
 
 	public void setDofObsRet(String dofObsRet) {
 		this.dofObsRet = dofObsRet;
+	}
+	
+	@Column(name = "STATUT_NON_RECEVABLE")
+	public String getStatutNonRecevable() {
+		return this.statutNonRecevable;
+	}
+
+	public void setStatutNonRecevable(String statutNonRecevable) {
+		this.statutNonRecevable = statutNonRecevable;
+	}
+
+	@Column(name = "RECEVABILITE", length = 13)
+	public String getRecevabilite() {
+		return this.recevabilite;
+	}
+
+	public void setRecevabilite(String recevabilite) {
+		this.recevabilite = recevabilite;
 	}
 
 }

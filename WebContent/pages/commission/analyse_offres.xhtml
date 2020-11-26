@@ -183,41 +183,68 @@
                <p:dataTable var="slctdTb"  id="Toffre" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeOffres}" 
                scrollable="true" scrollHeight="465" emptyMessage="Aucune Offre trouvée">
                
-                          <p:column headerText="N°" styleClass="col-sm-1">
-                              <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
+                          <p:column headerText="N°" style="width : 4%">
+                              
+                              <h:panelGroup rendered="#{slctdTb.dofStatut == '2'}">
 	         				    <h:outputText value="#{slctdTb.cpt}" />
 	         				  </h:panelGroup>
+	         				  
 	         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
 	         				    <h:outputText value="#{slctdTb.cpt}" style="color:green; font-weight:bold " />
 	         				  </h:panelGroup>
+	         				  
+	         				  <h:panelGroup rendered="#{slctdTb.dofStatut == '0' }">
+	         				    <h:outputText value="#{slctdTb.cpt}" style="color:red; font-weight:bold " />
+	         				  </h:panelGroup>
+	         				  
                             </p:column>
 
                             <p:column headerText="Entreprise" styleClass="col-sm-6">
-	                              <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
+	                              <h:panelGroup rendered="#{slctdTb.dofStatut == '2'}">
 		         				    <h:outputText value="#{slctdTb.dofSigle}" />
 		         				  </h:panelGroup>
+		         				  
 		         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
 		         				    <h:outputText value="#{slctdTb.dofSigle}" style="color:green; font-weight:bold " />
 		         				  </h:panelGroup>
+		         				  
+		         				  <h:panelGroup rendered="#{slctdTb.dofStatut == '0' }">
+		         				    <h:outputText value="#{slctdTb.dofSigle}" style="color:red; font-weight:bold " />
+		         				  </h:panelGroup>
+		         				  
                             </p:column>
                             
                             <p:column headerText="Montant Lu" styleClass="col-sm-2">
-                             <h:panelGroup rendered="#{slctdTb.dofStatut != '1'}">
+                             <h:panelGroup rendered="#{slctdTb.dofStatut == '2'}">
 		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
                                 <f:convertNumber pattern="##,###.##"></f:convertNumber>
                                 </h:outputText>
-		         				  </h:panelGroup>
-		         				   <h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
+		         		    </h:panelGroup>
+		         		    
+		         			<h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
 		         				    <h:outputText value="#{slctdTb.dofMtOfr}" style="color:green; font-weight:bold ">
 		         				    <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         				    </h:outputText>
-		         			     </h:panelGroup>
-                                
+		         			 </h:panelGroup>
+		         			 
+		         			 <h:panelGroup rendered="#{slctdTb.dofStatut == '0' }">
+		         				    <h:outputText value="#{slctdTb.dofMtOfr}" style="color:red; font-weight:bold ">
+		         				    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		         				    </h:outputText>
+		         			 </h:panelGroup>
+		       
                             </p:column>
+                            
+                            
+                            <p:column headerText="Mention" styleClass="col-sm-2">
+		         				    <h:outputText value="#{slctdTb.recevabilite}"/>
+                            </p:column>
+                            
+                            
 
-                            <p:column headerText="Action" styleClass="col-sm-2">
+                            <p:column headerText="Actions" styleClass="col-sm-2">
 								 
-                              <p:commandLink action="#{commissionController.chargePiecesAnalyse()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-left:3px"
+                              <p:commandLink rendered="#{slctdTb.dofStatut == '2' || slctdTb.dofStatut == '1' }" action="#{commissionController.chargePiecesAnalyse()}" oncomplete="PF('financedlg').show()"  data-toggle="modal" data-target="#modal-reglement" class="btn btn-xs btn-success" style="background-color: #036d3b; margin-right:3px"
 				               title="Analyser l'offre" update=":content">
                                 <i class="ace-icon fa fa-plus bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                        
@@ -228,6 +255,14 @@
                                 <i class="ace-icon fa fa-file-pdf-o bigger-120"  style="color: white"></i>   
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" />                             
                             </p:commandLink>
+                            
+                           
+                            <p:commandLink rendered="#{slctdTb.dofStatut == '0' }" oncomplete="PF('dlogConsultPiece').show()" title="Consultez la liste des pièces éliminatoires"  action="#{commissionController.chargePieceElimine()}" styleClass="btn btn-xs btn-success"  
+                               style="background-color: #036d3b;margin-leftt:3px" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                               <f:setPropertyActionListener value="#{slctdTb}" target="#{commissionController.sltOffre}" /> 
+                             </p:commandLink>
+
                             </p:column>
                         </p:dataTable>  
 		           
@@ -500,25 +535,7 @@
 				                           </p:column> -->
 		                                
 		                               <p:column headerText="CONFORME" styleClass="col-sm-2" >
-		                               <h:panelGroup rendered="false">
-		                               <p:cellEditor>
-                                             <f:facet name="output">
-                                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-         				                        <h:outputText id="presence1" value="#{slctdTb.pofConforme == 'CONFORME'?'OUI':'NON'}" />
-         				                        </h:panelGroup>
-         				                         </f:facet>
-         				                             <f:facet name="input">
-         				     
-         				                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
-	         				                           <h:selectOneMenu id="presence2" value="#{slctdTb.pofConforme}" style="width:100%; color:#0000">
-				                                        <f:selectItem itemLabel="Choisir" itemValue="" />
-	                                                    <f:selectItem itemLabel="OUI" itemValue="CONFORME" />
-	                                                   <f:selectItem itemLabel="NON" itemValue="NON CONFORME" />
-	                                                   </h:selectOneMenu>
-	                                                   </h:panelGroup>
-         				                             </f:facet>
-         				                 </p:cellEditor>
-         				                 </h:panelGroup>
+		                          
 		                               
 		                               <h:panelGroup rendered="true">
 		                               <h:panelGroup rendered="#{slctdTb.analyseStatut != '1'}">
@@ -842,7 +859,7 @@
     
     <ui:include src="inclusions/repechage.xhtml"  /> 
    <h:form id="dlogConsultation">
-	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="80%" height="100%" closable="true" header="Offres recevables / non recevables">
+	  <p:dialog  widgetVar="dlogConsultationC" modal="true"  showEffect="fade" hideEffect="fade" width="80%" height="100%" closable="true" header="Offres conformes / non conformes">
 	     
         <div class="box-body">
         
@@ -991,8 +1008,99 @@
       </p:dialog>
     </h:form>
     
+    
+   <h:form id="dlogConsulPiece">
+	  <p:dialog  widgetVar="dlogConsultPiece" modal="true"  showEffect="fade" hideEffect="fade" width="60%" height="100%" closable="true" header="Pièces éliminatoires">
+	     
+        <div class="box-body">
+      
+        
+              <div class="row">
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES PIECES ELIMINATOIRES</div></div> 
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		     
+                   </div>  
+                          
+           <p:dataTable var="slctdTb"  id="elimine" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
+               scrollable="true" scrollHeight="500" emptyMessage="Aucune pièce trouvée">
+                            <p:column headerText="Offre" styleClass="col-sm-11">
+                            <h:panelGroup rendered="#{slctdTb.tri != '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" />
+		         			</h:panelGroup>
+		         			
+		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			</h:panelGroup>
+                            </p:column>
+                            
+                            
+               </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+                
+               </div>
+               
+               
+               
+               <div class="col-md-6">
+                <div class="row">
+                 <div class="col-md-12">
+                   <div class="box box-success box-solid">
+               <div class="box-header with-border">
+                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES OFFRES NON CONFORMES</div></div> 
+			          
+               </div>
+	            <!-- /.box-header -->
+	            <div class="box-body">
+                   <div class="row">                   
+		     
+                   </div>  
+                          
+           <p:dataTable var="slctdTb"  id="nonrecevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreNonRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
+               scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre non recevable trouvée">
+                            <p:column headerText="Offre" styleClass="col-sm-11">
+		         		    <h:panelGroup rendered="#{slctdTb.tri != '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" />
+		         			</h:panelGroup>
+		         			
+		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
+		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			</h:panelGroup>
+                            </p:column>
+               </p:dataTable>  
+	            </div>
+	           </div>
+                 </div>
+                 </div>
+               </div>
+               
+               </div>
+              </div>
+              
+              <div class="row">
+	         </div>
+	  
+	  <div class="row">
+      <p:commandLink styleClass="btn btn-warning" style="background-color: #f88b2e;color:#fff;margin-left:15px;" oncomplete="PF('dlogConsultPiece').hide()" update=":gnl">
+	   <i class="ace-icon fa fa-close bigger-130"></i> Fermer			           
+	  </p:commandLink>
+	  </div>
+          
+      </p:dialog> 
+    </h:form>
+    
     	 
-		 <ui:include src="inclusions/joindreDocument.xhtml"  />
+  <ui:include src="inclusions/joindreDocument.xhtml"  />
 		 
     
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >

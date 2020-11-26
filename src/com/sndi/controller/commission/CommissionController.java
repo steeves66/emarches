@@ -258,6 +258,7 @@ public class CommissionController {
 	 private VPiecesOffreAnalyse posPiece = new VPiecesOffreAnalyse();
 	// private VCritereAnalyseDacOuv pieceOuv = new VCritereAnalyseDacOuv();
 	 private TCritereAnalyseDacOuv pieceOuv = new TCritereAnalyseDacOuv();
+	 private TCritereAnalyseDacOuv majPiece = new TCritereAnalyseDacOuv();
 	 
 	 //Declaration des objets
 	 private TCommissionSpecifique newcomSpec = new TCommissionSpecifique();
@@ -331,6 +332,7 @@ public class CommissionController {
 	 private boolean etatMontVar=false;
 	 
 	 private boolean btn_ouv = false;
+	 private boolean panelGarant = false;
 	 
 	 private long montLu=0;
 	 private long montN=0;
@@ -363,6 +365,7 @@ public class CommissionController {
 	 private String heureComD;
 	 private String heureComF;
 	 private String docNature ="";
+	 private String craLibelle="Garantie";
 	 //private short nadCode;
 	 //private long rabais
 	 
@@ -480,8 +483,12 @@ public class CommissionController {
 		  }
 		 
 		 listeSouOffBass = ((List<VListeSouOffBasse>)iservice.getObjectsByColumn("VListeSouOffBasse",new ArrayList<String>(Arrays.asList("RId")),
-				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId)));
+				 new WhereClause("DOF_LAA_ID",Comparateur.EQ,""+laaId))); 
 		 
+	 }
+	 
+	 //Chargement des pièces éliminatoires de l'offre ou du candidat
+	 public void chargePieceElimine() {
 		 
 	 }
 	
@@ -659,9 +666,7 @@ public class CommissionController {
 		 if(!LS.isEmpty()) piece = LS.get(0);
 		 //piece.set
 	 }
-	 
-
-	 
+	  
 	/*//Liste des pièces de l'offre
 	 public void chargePieces() {
 		 //listePiecesOffres = ((List<VPiecesOffre>)iservice.getObjectsByColumn("VPiecesOffre",new ArrayList<String>(Arrays.asList("TPO_LIBELLE")),
@@ -713,9 +718,57 @@ public class CommissionController {
 		 if(!ANA.isEmpty()) offre = ANA.get(0);
 		 offre.setDcadPresence(""+presence);
 		 iservice.updateObject(offre);	
-		 
+		 //Chargement des pièces
 		 chargePieces();
 	 }
+	 
+	 
+	 //Contrôle sur le choix de Garantie de soumission
+	 public void majPiecesByGarantie(String presence) {
+		 
+		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
+				 new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId()),
+				 new WhereClause("CRA_LIBELLE",WhereClause.Comparateur.LIKE,"%"+craLibelle+"%")));
+		   if (!listPiecesOuv.isEmpty()) {
+			   majPiece = listPiecesOuv.get(0);
+			   
+			   if(majPiece.getDcadPresence().equalsIgnoreCase("N")) {
+				   majPiece.setDcadPresence(""+presence);
+				   iservice.updateObject(majPiece);
+				   //Chargement des pièces de recevabilité
+	    	       chargePieces();
+	    	       panelGarant =true;
+			          }else {
+				         majPiece.setDcadPresence(""+presence);
+				         iservice.updateObject(majPiece);
+				         //Chargement des pièces de recevabilité
+	    	             chargePieces();
+	    	             panelGarant =false;
+			             }
+			   _logger.info(" présence (O/N) : "+majPiece.getDcadPresence());
+			   _logger.info(" craLibelle: "+majPiece.getCraLibelle());
+			   _logger.info(" garant / montant garantie: "+panelGarant);
+			   
+                 }else {
+                	 
+                	 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
+            				 new WhereClause("R_ID",Comparateur.EQ,""+pieceOuv.getRId())));
+            		   if (!listPiecesOuv.isEmpty()) {
+            			   majPiece = listPiecesOuv.get(0);
+            			   majPiece.setDcadPresence(""+presence);
+        				   iservice.updateObject(majPiece);
+        				 //Chargement des pièces de recevabilité
+  	    	             chargePieces();
+  	    	             panelGarant =false;
+            			   }
+                    		 
+            		 _logger.info(" présence (O/N) : "+majPiece.getDcadPresence());
+            		 _logger.info(" craLibelle: "+majPiece.getCraLibelle());
+            		 _logger.info(" garant / montant garantie: "+panelGarant);
+                  } 
+	 }
+	 
+	 
 	 
 	 //Présence (O/N)
 	 public void majPiecePresence (String presence) {
@@ -1698,6 +1751,8 @@ public class CommissionController {
 		            }
 			    
 			    chargeLotsByCandidat();
+			    selectLot =new VLotCandidat();
+			    dofTyp = "";
 				_logger.info("Numéro DAO: "+slctdTd.getAaoDacCode());
 		   }
 		//Fin de la Methode OnSelectCandidat
@@ -1709,7 +1764,7 @@ public class CommissionController {
 			 
 			 doftyp();
 			 chargePieces();
-			    //chargeLotsByCandidat();
+			 //chargeLotsByCandidat();
 		   }
 		//Fin de la Methode OnSelectCandidat
 		 
@@ -4098,5 +4153,29 @@ public class CommissionController {
 	public void setPieceOuv(TCritereAnalyseDacOuv pieceOuv) {
 		this.pieceOuv = pieceOuv;
 	}
-	
+
+	public String getCraLibelle() {
+		return craLibelle;
+	}
+
+	public void setCraLibelle(String craLibelle) {
+		this.craLibelle = craLibelle;
+	}
+
+	public TCritereAnalyseDacOuv getMajPiece() {
+		return majPiece;
+	}
+
+	public void setMajPiece(TCritereAnalyseDacOuv majPiece) {
+		this.majPiece = majPiece;
+	}
+
+	public boolean isPanelGarant() {
+		return panelGarant;
+	}
+
+	public void setPanelGarant(boolean panelGarant) {
+		this.panelGarant = panelGarant;
+	}
+
 }
