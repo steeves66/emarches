@@ -24,104 +24,7 @@ import com.sndi.controller.custom.ControleController;
 import com.sndi.controller.tableauBord.TableauBordController;
 import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
-import com.sndi.model.TAgpm;
-import com.sndi.model.TAnalyseOffre;
-import com.sndi.model.TAvisAppelOffre;
-import com.sndi.model.TBanques;
-import com.sndi.model.TCandidats;
-import com.sndi.model.TCommissionSpecifique;
-import com.sndi.model.TCommissionType;
-import com.sndi.model.TDacSpecs;
-import com.sndi.model.TDemande;
-import com.sndi.model.TDetCommissionSeance;
-import com.sndi.model.TDetCritAnalyseDac;
-import com.sndi.model.TDetOffres;
-import com.sndi.model.TDetailDemandes;
-import com.sndi.model.TDetailPlanGeneral;
-import com.sndi.model.TDetailVente;
-import com.sndi.model.TDossierAao;
-import com.sndi.model.TDossierDacs;
-import com.sndi.model.TDossierDemande;
-import com.sndi.model.TDossierMbr;
-import com.sndi.model.TDossierPlanGeneral;
-import com.sndi.model.TFinancementPgpm;
-import com.sndi.model.TFonction;
-import com.sndi.model.THistoAgpm;
-import com.sndi.model.THistoPlanGeneral;
-import com.sndi.model.TLotAao;
-import com.sndi.model.TNatureDocuments;
-import com.sndi.model.TNaturePiece;
-import com.sndi.model.TOperateur;
-import com.sndi.model.TPiecesOffres;
-import com.sndi.model.TPlanPassation;
-import com.sndi.model.TSeances;
-import com.sndi.model.TSoumissions;
-import com.sndi.model.TStatut;
-import com.sndi.model.TTypeCommission;
-import com.sndi.model.TTypeDemande;
-import com.sndi.model.TTypeMarche;
-import com.sndi.model.TTypePieceOffre;
-import com.sndi.model.TTypeSeance;
-import com.sndi.model.TVenteDac;
-import com.sndi.model.VAgpmliste;
-import com.sndi.model.VAvisAppelOffre;
-import com.sndi.model.VAvisAppelOffreAno;
-import com.sndi.model.VAvisAppelOffreAnodmp;
-import com.sndi.model.VCandidatDac;
-import com.sndi.model.VCommissionTypeExp;
-import com.sndi.model.VCompoCommission;
-import com.sndi.model.VCritereAnalyseDac;
-import com.sndi.model.VCritereAnalyseDacOff;
-import com.sndi.model.VCritereAnalyseDacOfftec;
-import com.sndi.model.VDacMembre;
-import com.sndi.model.VDetCommissionSeance;
-import com.sndi.model.VDetOffreAnalyse;
-import com.sndi.model.VDetOffreNonRecevable;
-import com.sndi.model.VDetOffreRecevable;
-import com.sndi.model.VDetailOffres;
-import com.sndi.model.VDofTyp;
-import com.sndi.model.VFonctionMinistere;
-import com.sndi.model.VHistoDemandeAno;
-import com.sndi.model.VListePieceOffre;
-import com.sndi.model.VListeSouOffBasse;
-import com.sndi.model.VListeSouOffEleve;
-import com.sndi.model.VLot;
-import com.sndi.model.VLotAnalyse;
-import com.sndi.model.VLotAnalyseFin;
-import com.sndi.model.VLotAvisdmp;
-import com.sndi.model.VLotAnalyse;
-import com.sndi.model.VLotCandidat;
-import com.sndi.model.VLotCandidatAno;
-import com.sndi.model.VLotCandidatAnoPrequalif;
-import com.sndi.model.VLotJugement;
-import com.sndi.model.VMotifAno;
-import com.sndi.model.VNatureDocAno;
-import com.sndi.model.VOffreCandidat;
-import com.sndi.model.VOffreNonRecevableLot;
-import com.sndi.model.VOffreRecevableLot;
-import com.sndi.model.VPiecesOffre;
-import com.sndi.model.VPiecesOffreAnalyse;
-import com.sndi.model.VRecapSeuilAnormal;
-import com.sndi.model.VReeditCojo;
-import com.sndi.model.VRepSoumissionnaire;
-import com.sndi.model.VResultEvalClassLot;
-import com.sndi.model.VResultPropAttribLot;
-import com.sndi.model.VTypeMarcheFils;
-import com.sndi.model.VUpdatePgpm;
-import com.sndi.model.VVerifOffin;
-import com.sndi.model.VbAnalyseOffre;
-import com.sndi.model.VbCommissionSpecifique;
-import com.sndi.model.VbCommissionType;
-import com.sndi.model.VbDetCritAnalyseDac;
-import com.sndi.model.VbDetOffresSaisi;
-import com.sndi.model.VbObservations;
-import com.sndi.model.VbTempParamAnalyseOff;
-import com.sndi.model.VbTempParamAtrib;
-import com.sndi.model.VbTempParamAvis;
-import com.sndi.model.VbTempParamDetOffres;
-import com.sndi.model.VbTempParametreCom;
-import com.sndi.model.VbTempParametreFactAn;
-import com.sndi.model.VVerifcorOffin;
+import com.sndi.model.*;
 import com.sndi.report.ProjetReport;
 import com.sndi.security.UserController;
 import com.sndi.service.ConstantService;
@@ -183,6 +86,9 @@ public class AnoController {
 	 private List<TDossierDemande> dossListeDemande = new ArrayList<TDossierDemande>();
 	 private List<TDossierDemande> dossListeDemandeDmp = new ArrayList<TDossierDemande>();
 	 private List<TDossierDemande> dossListeDemandeAc = new ArrayList<TDossierDemande>();
+	// private List<VObservationAno> listeObservation = new ArrayList<VObservationAno>(); 
+	 private List<TObservations> listeObservation = new ArrayList<TObservations>(); 
+	 private List<VObservationAno> observations = new ArrayList<VObservationAno>(); 
 	 //private List<TDemande> listeDemande = new ArrayList<TDemande>();
 	 
 	 //Objet
@@ -192,6 +98,8 @@ public class AnoController {
 	 private TDemande newDem = new TDemande();
 	 private VbObservations newObs = new VbObservations();
 	 private VLotAvisdmp infolot = new VLotAvisdmp();
+	 private VObservationAno sltObservation = new VObservationAno();
+	 private TObservations supObs = new TObservations();
 
 	 private TDemande demande = new TDemande();
 	 private TAvisAppelOffre newAvis = new TAvisAppelOffre();
@@ -330,9 +238,30 @@ public class AnoController {
 			 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR,"Vous devez absolument traiter tout les lots! ","");
 				FacesContext.getCurrentInstance().addMessage(null, msg);	
 		 }
-	 
 	 }
 	 
+	 
+	 //Chargement des observations
+	 public void chargeObservations() {
+		 observations.clear();
+		 observations =  ((List<VObservationAno>)iservice.getObjectsByColumn("VObservationAno",new ArrayList<String>(Arrays.asList("OBS_NUM")),
+				    new WhereClause("OBS_LAA_NUM",Comparateur.EQ,""+sltLot.getLaaNum()),
+				    new WhereClause("OBS_SOU_NCC",Comparateur.EQ,""+souNcc)));
+	 }
+	
+	 //Suppression d'une observation
+	 public void deleteObservation() {  
+		 listeObservation = ((List<TObservations>)iservice.getObjectsByColumn("TObservations",
+				    new WhereClause("OBS_NUM",Comparateur.EQ,""+sltObservation.getObsNum())));
+  			if (!listeObservation.isEmpty()) {
+  				supObs=listeObservation.get(0); 
+  				iservice.deleteObject(getSupObs());
+			 		chargeObservations();
+					userController.setTexteMsg("Suppression éffectuée avec succès!");
+			  		userController.setRenderMsg(true);
+			  		userController.setSevrityMsg("success");
+  			   }	
+			}
 	 
 	 public void validationAnoDMPAut() throws IOException {
 		 List<VLotAvisdmp> Lot  = iservice.getObjectsByColumn("VLotAvisdmp", new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()));
@@ -407,6 +336,7 @@ public class AnoController {
 			_logger.info("LAA_NUM: "+sltLot.getLaaNum());
 	 }
 	 
+	 
 	 //Enregister les motifs
 	 public void saveMotif() {
 		 newObs.setObsDate(Calendar.getInstance().getTime());
@@ -418,10 +348,18 @@ public class AnoController {
 		 newObs.setObsSouNcc(souNcc);
 		 newObs.setObsType("ANO");
 		 iservice.addObject(newObs);
-		 chargeLotDmp();	
+		 chargeObservations();
+		 vider();
+		 //chargeLotDmp();	
 		 userController.setTexteMsg("Motif enrégisté avec succès!");
 		 userController.setRenderMsg(true);
 		 userController.setSevrityMsg("success");
+	 }
+	 
+	 public void vider() {
+		 newObs = new VbObservations();
+		 souNcc ="";
+		 mtfNum = 0;
 	 }
 	 public void chargeDialogueMotif() {
 		 newObs = new VbObservations();
@@ -1392,6 +1330,45 @@ public class AnoController {
 
 	public void setNewObs(VbObservations newObs) {
 		this.newObs = newObs;
+	}
+
+	public VObservationAno getSltObservation() {
+		return sltObservation;
+	}
+
+
+	public void setSltObservation(VObservationAno sltObservation) {
+		this.sltObservation = sltObservation;
+	}
+
+
+	public List<TObservations> getListeObservation() {
+		return listeObservation;
+	}
+
+
+	public void setListeObservation(List<TObservations> listeObservation) {
+		this.listeObservation = listeObservation;
+	}
+
+
+	public TObservations getSupObs() {
+		return supObs;
+	}
+
+
+	public void setSupObs(TObservations supObs) {
+		this.supObs = supObs;
+	}
+
+
+	public List<VObservationAno> getObservations() {
+		return observations;
+	}
+
+
+	public void setObservations(List<VObservationAno> observations) {
+		this.observations = observations;
 	}
 
 	

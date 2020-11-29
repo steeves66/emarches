@@ -247,20 +247,7 @@
 	
 				        </p:column>
 				        
-				        <p:column rendered="false" styleClass="col-sm-1">
-				        <p:cellEditor>
-				         <f:facet name="output">
-                            <h:outputText value="#{slctdTb.laaAno == 'O'?'OUI':'NON'}"/> 
-                            </f:facet>
-                             <f:facet name="input">
-         				       <h:selectOneMenu id="avis" value="#{slctdTb.laaAno}" style="width:100%; color:#0000">
-				                 <f:selectItem itemLabel="Choisir" itemValue="" />
-	                             <f:selectItem itemLabel="OUI" itemValue="O" />
-	                             <f:selectItem itemLabel="NON" itemValue="N" />
-	                           </h:selectOneMenu>
-	                          </f:facet>
-                         </p:cellEditor>
-				        </p:column>			        
+				       		        
 				        <p:column width="3%">
 				              <p:commandLink action="#{anoController.chargeDialogueMotif()}" oncomplete="PF('motifDlg').show()" styleClass="btn btn-warning" title="Ajouter un motif" style="color:#fff;background-color: #f88b2e" update=":motifDlg">
 				              <f:setPropertyActionListener value="#{slctdTb}" target="#{anoController.sltLot}" />

@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
     <h:panelGroup  layout="block" id="dialogMotif" >  
     <h:form id="motifDlg" styleClass="form-horizontal">
-	        <p:dialog  widgetVar="motifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="true" header="SAISIR LE(S) MOTIF(S) DE l'AVIS DE LA #{controleController.structureLibAbrege}">
+	        <p:dialog  widgetVar="motifDlg" modal="true"  showEffect="fade" hideEffect="fade" width="50%" closable="false" header="SAISIR LE(S) MOTIF(S) DE l'AVIS DE LA #{controleController.structureLibAbrege}">
 		 <div class="row">    
             <div class="col-md-12">
                     <div class="box box-success box-solid">
@@ -17,7 +17,7 @@
          <div class="box-body">
               
 		      
-                   <div class="form-group">
+                <div class="form-group">
                   <label  class="col-sm-1 control-label">Entreprise</label>
 				  <div class="col-sm-11">
 				  <p:selectOneMenu id="ent" value="#{anoController.souNcc}"
@@ -41,7 +41,7 @@
                   </div>
                 </div>
                
-                 <div class="form-group">
+               <div class="form-group">
                   <label  class="col-sm-1 control-label">Observation</label>
 				  <div class="col-sm-11">
                    <p:inputTextarea value="#{anoController.newObs.obsLibelle}" id="obs" rows="3" cols="33" styleClass="form-control"  style="width: 100%">
@@ -49,27 +49,48 @@
          		 </div>
                 </div>
                 
-                
-                 <div class="row">    
-	             <div class="col-sm-8"></div>
-	              <div class="col-sm-4">  
-					
-					      <div class="pull-right ">
-			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{anoController.saveMotif()}" oncomplete="PF('motifDlg').hide()" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+                <br/>
+            <!-- /.box-header -->
+	         
+	         <p:dataTable id="tabMotif" styleClass="table dt-on-steroids mb0" var="ano" value="#{anoController.observations}" 
+	             emptyMessage="Aucune observation enrégistrée">
+	             
+	              <p:column headerText="Observation" styleClass="col-sm-10">
+	                <h:outputText value="#{ano.mtfLibelle}" />
+	               </p:column>
+	               
+	              <p:column headerText="Action" styleClass="no-sort" width="5%">
+				    <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{anoController.deleteObservation()}" title="Supprimer" update="motifDlg:tabMotif">
+                      <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
+                      <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                      <f:setPropertyActionListener value="#{ano}" target="#{anoController.sltObservation}" />
+                    </p:commandLink>
+ 	             </p:column>
+	          </p:dataTable> 
+	          
+	          <div class="col-sm-4"></div>
+	          <div class="col-sm-8">  
+           
+			            <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff;margin-top:15px" action="#{anoController.saveMotif()}" 
+			             update="motifDlg:tabMotif">
+			            <p:confirm header="Confirmation" message="Confirmez-vous l'enregistrement?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-save"></i> Valider
 			            </p:commandLink>
-                     </div>
-                     
-                     
-                   </div>
-              </div>
+
+              </div>   
+	        
+         </div>
+                       
+         </div>
+         </div>
          </div>
          
-		            
-         </div>
-         </div>
-         </div>
+          <div class="row">  
+			           <p:commandLink styleClass="btn btn-warning row pull-left" style="background-color: #f88b2e;color:#fff;margin-left:7px;"
+			            oncomplete="PF('motifDlg').hide()" action="#{anoController.chargeLotDmp()}" update=":gnl">
+	                   <i class="ace-icon fa fa-close bigger-130"></i> Fermer			           
+	                   </p:commandLink>
+          </div>
 		
       </p:dialog>
     </h:form>
