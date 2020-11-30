@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2020-11-24T18:14:57 -->
+<!-- 2020-11-26T18:55:01 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rapport_analyse" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isTitleNewPage="true" uuid="4b224d21-1f03-4cc6-a934-e8c1708e4915">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EMAP"/>
@@ -1074,7 +1074,7 @@ and aao.aao_code=$P{param_code_1}]]>
 						<property name="com.jaspersoft.studio.table.style.detail" value="Table 5_TD"/>
 					</reportElement>
 					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-						<datasetRun subDataset="list_lot_det" uuid="3a941402-166b-4a1c-b049-a963dc151699">
+						<datasetRun subDataset="list_lot_det" uuid="e1032421-239b-4bc2-b41a-f4387ff932c6">
 							<datasetParameter name="param_code_1">
 								<datasetParameterExpression><![CDATA[$P{param_code_1}]]></datasetParameterExpression>
 							</datasetParameter>

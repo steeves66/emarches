@@ -92,6 +92,7 @@ import com.sndi.model.VOffreNonRecevableLot;
 import com.sndi.model.VOffreRecevableLot;
 import com.sndi.model.VPiecesOffre;
 import com.sndi.model.VPiecesOffreAnalyse;
+import com.sndi.model.VPiecesOffreNonRecev;
 import com.sndi.model.VRecapSeuilAnormal;
 import com.sndi.model.VReeditCojo;
 import com.sndi.model.VRepSoumissionnaire;
@@ -204,6 +205,7 @@ public class CommissionController {
 	 private List<VOffreCandidat> listCandidats = new ArrayList<VOffreCandidat>();
 	 //private List<VCritereAnalyseDacOuv> listPiecesOuv = new ArrayList<VCritereAnalyseDacOuv>();
 	 private List<TCritereAnalyseDacOuv> listPiecesOuv = new ArrayList<TCritereAnalyseDacOuv>();
+	 private List<VPiecesOffreNonRecev> listPiecesNonRecv = new ArrayList<VPiecesOffreNonRecev>();
 	 private List<VRepSoumissionnaire> recupSoumissionnaire = new ArrayList<VRepSoumissionnaire>(); 
 	 private List<VDetOffreAnalyse> listeOffres = new ArrayList<VDetOffreAnalyse>();
 	 private List<VPiecesOffre> listePiecesOffres = new ArrayList<VPiecesOffre>(); 
@@ -489,7 +491,9 @@ public class CommissionController {
 	 
 	 //Chargement des pièces éliminatoires de l'offre ou du candidat
 	 public void chargePieceElimine() {
-		 
+		 listPiecesNonRecv.clear();
+		 listPiecesNonRecv = ((List<VPiecesOffreNonRecev>)iservice.getObjectsByColumn("VPiecesOffreNonRecev",
+				 new WhereClause("DOF_NUM",Comparateur.EQ,""+sltOffre.getDofNum()))); 
 	 }
 	
 	 //
@@ -4176,6 +4180,14 @@ public class CommissionController {
 
 	public void setPanelGarant(boolean panelGarant) {
 		this.panelGarant = panelGarant;
+	}
+
+	public List<VPiecesOffreNonRecev> getListPiecesNonRecv() {
+		return listPiecesNonRecv;
+	}
+
+	public void setListPiecesNonRecv(List<VPiecesOffreNonRecev> listPiecesNonRecv) {
+		this.listPiecesNonRecv = listPiecesNonRecv;
 	}
 
 }

@@ -202,6 +202,7 @@ public class DaoController {
 	private List<VbDetCritAnalyseDac> listDetCritereDac = new ArrayList<VbDetCritAnalyseDac>();
 	private List<TDetCritAnalyseDac> listDetcritere = new ArrayList<TDetCritAnalyseDac>();
 	private TCommissionSpecifique detailCom = new TCommissionSpecifique(); 
+	private TCommissionSpecifique comUpdate = new TCommissionSpecifique();
 	//MAREGE DE PREFENCE
 	private List<VMargeDePreference> listeMarge = new ArrayList<VMargeDePreference>();
 	private List<VMargeDePreferenceSou> listeMargeSou = new ArrayList<VMargeDePreferenceSou>();
@@ -1102,13 +1103,14 @@ public class DaoController {
 	 
 	//Combo box critères
 	 public void chargeSousEnteteCombobox() {
+		     listeEnteteCritere.clear();
 			 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
 					 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rId));
 			 if(!listeEnteteCritere.isEmpty()) { 
 				 newEnteteCrit=listeEnteteCritere.get(0);
 				 //vider le champs detail
 				  newCritereDac = new VbDetCritAnalyseDac();
-				  listeSousEnteteCritere.clear(); 
+				  //listeSousEnteteCritere.clear(); 
 				  listeSousEnteteCritere  = ((List<VCritAnalDacSousentete>)iservice.getObjectsByColumn("VCritAnalDacSousentete",
 						 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 						 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
@@ -2862,9 +2864,9 @@ public class DaoController {
 			  		            userController.setTexteMsg("Membre(s) enregistré(s) avec succès!");
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
-								
 							}
 				 	}
+				 	
 				 	
 				 	 public void recupMembre() {
 				 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
@@ -2873,8 +2875,17 @@ public class DaoController {
 			    				comSpecUpdate=listeComSpecific.get(0); 
 			    			}
 			           }
+				 	 
+				 	 
+				 	  public void recupMembreSpec() {
+					 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
+								    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum())));
+				    			if (!listeComSpecific.isEmpty()) {
+				    				comSpecUpdate=listeComSpecific.get(0); 
+				    			}
+				           }
 				 	
-				 	public void updatePresence() { 
+				 /*	public void updatePresence() { 
 				 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
 							    new WhereClause("COM_NUM",Comparateur.EQ,""+sltCompsec.getComNum()))); 
 				 		_logger.info("comNum: "+sltCompsec.getComNum());
@@ -2889,18 +2900,51 @@ public class DaoController {
 			  		            userController.setRenderMsg(true);
 			  		            userController.setSevrityMsg("success");
 			    			}
-				 			
-				 		 
+				 	}*/
+				 	 
+				 	public void updatePresence() { 
+				 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
+							    new WhereClause("COM_NUM",Comparateur.EQ,""+comSpecUpdate.getComNum()))); 
+				 		_logger.info("comNum: "+sltCompsec.getComNum());
+			    			if (!listeComSpecific.isEmpty()) {
+			    				comUpdate=listeComSpecific.get(0); 
+			    				comUpdate.setComTctLibelle(comSpecUpdate.getComTctLibelle());
+			    				iservice.updateObject(comUpdate);
+			    				
+					 			chargeMembres();
+					 			userController.setTexteMsg("Modification éffectuée avec succès!");
+			  		            userController.setRenderMsg(true);
+			  		            userController.setSevrityMsg("success");
+			  		            
+			  		      	_logger.info("comNum: "+comSpecUpdate.getComTctLibelle());
+			    			} 
 				 	}
 				 	
-				 	public void updatePresenceComspec() {          
+				 	/*public void updatePresenceComspec() {          
 				 		iservice.updateObject(sltCompsec);
 				 		chargeMembresComSpec();	
 								 userController.setTexteMsg("Modification éffectuée avec succès!");
 				  		            userController.setRenderMsg(true);
 				  		            userController.setSevrityMsg("success");
-								
-							}
+							}*/
+				 	
+				 	public void updatePresenceComspec() { 
+				 		listeComSpecific = ((List<TCommissionSpecifique>)iservice.getObjectsByColumn("TCommissionSpecifique",
+							    new WhereClause("COM_NUM",Comparateur.EQ,""+comSpecUpdate.getComNum()))); 
+				 		_logger.info("comNum: "+sltCompsec.getComNum());
+			    			if (!listeComSpecific.isEmpty()) {
+			    				comUpdate=listeComSpecific.get(0); 
+			    				comUpdate.setComTctLibelle(comSpecUpdate.getComTctLibelle());
+			    				iservice.updateObject(comUpdate);
+					 			//chargeMembres();
+			    				chargeMembresComSpec();
+					 			userController.setTexteMsg("Modification éffectuée avec succès!");
+			  		            userController.setRenderMsg(true);
+			  		            userController.setSevrityMsg("success");
+			  		            
+			  		      	_logger.info("comNum: "+comSpecUpdate.getComTctLibelle());
+			    			} 
+				 	}
 				 	
 				 	public void deletePresence() {  
                        listeComSpecifique = ((List<VbCommissionSpecifique>)iservice.getObjectsByColumn("VbCommissionSpecifique",
@@ -13038,6 +13082,15 @@ public void rplBmkByVal(List<String> lBmkNm, List<VbxDocLot> lLts, List<VbxDocAd
 
 	public void setDaoAao(VbxDocDaoAao daoAao) {
 		this.daoAao = daoAao;
+	}
+	
+
+   public TCommissionSpecifique getComUpdate() {
+		return comUpdate;
+	}
+
+	public void setComUpdate(TCommissionSpecifique comUpdate) {
+		this.comUpdate = comUpdate;
 	}
 	
 	/*******  Fin document  *************/

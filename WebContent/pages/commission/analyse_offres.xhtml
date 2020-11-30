@@ -183,7 +183,7 @@
                <p:dataTable var="slctdTb"  id="Toffre" styleClass="table mb0 dt-on-steroids dataTable" value="#{commissionController.listeOffres}" 
                scrollable="true" scrollHeight="465" emptyMessage="Aucune Offre trouvée">
                
-                          <p:column headerText="N°" style="width : 4%">
+                          <p:column headerText="N°" style="width : 5%">
                               
                               <h:panelGroup rendered="#{slctdTb.dofStatut == '2'}">
 	         				    <h:outputText value="#{slctdTb.cpt}" />
@@ -216,19 +216,19 @@
                             
                             <p:column headerText="Montant Lu" styleClass="col-sm-2">
                              <h:panelGroup rendered="#{slctdTb.dofStatut == '2'}">
-		         			   <h:outputText value="#{slctdTb.dofMtOfr}" >
+		         			   <h:outputText value="#{slctdTb.dofMtOfr}" styleClass="pull-right">
                                 <f:convertNumber pattern="##,###.##"></f:convertNumber>
                                 </h:outputText>
 		         		    </h:panelGroup>
 		         		    
 		         			<h:panelGroup rendered="#{slctdTb.dofStatut == '1' }">
-		         				    <h:outputText value="#{slctdTb.dofMtOfr}" style="color:green; font-weight:bold ">
+		         				    <h:outputText value="#{slctdTb.dofMtOfr}" styleClass="pull-right" style="color:green; font-weight:bold ">
 		         				    <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         				    </h:outputText>
 		         			 </h:panelGroup>
 		         			 
 		         			 <h:panelGroup rendered="#{slctdTb.dofStatut == '0' }">
-		         				    <h:outputText value="#{slctdTb.dofMtOfr}" style="color:red; font-weight:bold ">
+		         				    <h:outputText value="#{slctdTb.dofMtOfr}" styleClass="pull-right" style="color:red; font-weight:bold ">
 		         				    <f:convertNumber pattern="##,###.##"></f:convertNumber>
 		         				    </h:outputText>
 		         			 </h:panelGroup>
@@ -995,7 +995,7 @@
 	        
 				<p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{commissionController.removeJustif()}" title="Supprimer" update="uplogJus:tabJustificatif">
                    <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
                    <f:setPropertyActionListener value="#{doss}" target="#{commissionController.selectedDossierJus}" />
                 </p:commandLink>
  	        </p:column>
@@ -1010,18 +1010,18 @@
     
     
    <h:form id="dlogConsulPiece">
-	  <p:dialog  widgetVar="dlogConsultPiece" modal="true"  showEffect="fade" hideEffect="fade" width="60%" height="100%" closable="true" header="Pièces éliminatoires">
+	  <p:dialog  widgetVar="dlogConsultPiece" modal="true"  showEffect="fade" hideEffect="fade" width="60%" height="100%" closable="true" header="Pièces non recevables">
 	     
         <div class="box-body">
       
         
               <div class="row">
-               <div class="col-md-6">
+               <div class="col-md-12">
                 <div class="row">
                  <div class="col-md-12">
                    <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES PIECES ELIMINATOIRES</div></div> 
+                  <div class="col-md-12 "><div  style="color: #fff;font-weight:bold;">LISTE DES PIECES NON RECEVABLES DU CANDIDAT #{commissionController.sltOffre.dofSouNcc} : #{commissionController.sltOffre.souSigleSte} </div></div> 
                </div>
 	            <!-- /.box-header -->
 	            <div class="box-body">
@@ -1029,15 +1029,26 @@
 		     
                    </div>  
                           
-           <p:dataTable var="slctdTb"  id="elimine" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
-               scrollable="true" scrollHeight="500" emptyMessage="Aucune pièce trouvée">
-                            <p:column headerText="Offre" styleClass="col-sm-11">
-                            <h:panelGroup rendered="#{slctdTb.tri != '1' }">
-		         			<h:outputText value="#{slctdTb.laaObjet}" />
+           <p:dataTable var="slctdTb"  id="elimine" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.listPiecesNonRecv}" rowStyleClass="#{slctdTb.analyseStatut == '1' ? 'old' : 0}" 
+               scrollable="true" scrollHeight="400" emptyMessage="Aucune pièce trouvée">
+                            <p:column headerText="Pièces" styleClass="col-sm-9">
+                            <h:panelGroup rendered="#{slctdTb.analyseStatut != '1' }">
+		         			<h:outputText value="#{slctdTb.pofLibelle}" />
 		         			</h:panelGroup>
 		         			
-		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
-		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			 <h:panelGroup rendered="#{slctdTb.analyseStatut == '1' }">
+		         			<h:outputText value="#{slctdTb.pofLibelle}" style="color:black; font-size:16px; font-weight:bold"/>
+		         			</h:panelGroup>
+                            </p:column>
+                            
+                            
+                            <p:column headerText="Présence" styleClass="col-sm-3">
+                            <h:panelGroup rendered="#{slctdTb.analyseStatut != '1' }">
+		         			<h:outputText value="#{slctdTb.anfPresence == 'O'?'OUI':'NON' }" />
+		         			</h:panelGroup>
+		         			
+		         			 <h:panelGroup rendered="#{slctdTb.analyseStatut == '1' }">
+		         			<h:outputText value="#{slctdTb.anfPresence == 'O'?'OUI':'NON'}" style="color:black; font-size:16px; font-weight:bold"/>
 		         			</h:panelGroup>
                             </p:column>
                             
@@ -1049,40 +1060,7 @@
                  </div>
                 
                </div>
-               
-               
-               
-               <div class="col-md-6">
-                <div class="row">
-                 <div class="col-md-12">
-                   <div class="box box-success box-solid">
-               <div class="box-header with-border">
-                  <div class="col-md-6 "><div  style="color: #fff;font-weight:bold;">LISTE DES OFFRES NON CONFORMES</div></div> 
-			          
-               </div>
-	            <!-- /.box-header -->
-	            <div class="box-body">
-                   <div class="row">                   
-		     
-                   </div>  
-                          
-           <p:dataTable var="slctdTb"  id="nonrecevable" styleClass="table mb0 dt-on-steroids dataTable"  value="#{commissionController.offreNonRecevable}" rowStyleClass="#{slctdTb.tri == '1' ? 'old' : 0}" 
-               scrollable="true" scrollHeight="500" emptyMessage="Aucune Offre non recevable trouvée">
-                            <p:column headerText="Offre" styleClass="col-sm-11">
-		         		    <h:panelGroup rendered="#{slctdTb.tri != '1' }">
-		         			<h:outputText value="#{slctdTb.laaObjet}" />
-		         			</h:panelGroup>
-		         			
-		         			 <h:panelGroup rendered="#{slctdTb.tri == '1' }">
-		         			<h:outputText value="#{slctdTb.laaObjet}" style="color:black; font-size:16px; font-weight:bold"/>
-		         			</h:panelGroup>
-                            </p:column>
-               </p:dataTable>  
-	            </div>
-	           </div>
-                 </div>
-                 </div>
-               </div>
+                      
                
                </div>
               </div>
