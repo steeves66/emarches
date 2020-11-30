@@ -1042,17 +1042,12 @@
                             </p:column>
                             
                             
-                            <p:column headerText="Présence" styleClass="col-sm-3">
+                           <p:column headerText="Présence" styleClass="col-sm-3">
                             <h:panelGroup rendered="#{slctdTb.analyseStatut != '1' }">
 		         			<h:outputText value="#{slctdTb.anfPresence == 'O'?'OUI':'NON' }" />
 		         			</h:panelGroup>
-		         			
-		         			 <h:panelGroup rendered="#{slctdTb.analyseStatut == '1' }">
-		         			<h:outputText value="#{slctdTb.anfPresence == 'O'?'OUI':'NON'}" style="color:black; font-size:16px; font-weight:bold"/>
-		         			</h:panelGroup>
                             </p:column>
-                            
-                            
+                               
                </p:dataTable>  
 	            </div>
 	           </div>
