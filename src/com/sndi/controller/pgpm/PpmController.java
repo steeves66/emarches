@@ -2900,7 +2900,8 @@ public class PpmController {
  	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
  	  		 detailPass.setDppGpgId(pgpm.getGpgId());
  	  		 detailPass.setTModeleDacType(new TModeleDacType(tydCode));
- 	  		 detailPass.setDppStructureConduc(strucCond);
+ 	  		 //detailPass.setDppStructureConduc(strucCond);
+ 	  		 detailPass.setDppTypeStrConduc(strucCond);
  	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
  	  		 detailPass.setTPlanPassation(TPlanPassation);
  	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
