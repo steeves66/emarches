@@ -1,6 +1,7 @@
 package com.sndi.model;
 // Generated 30 nov. 2019 13:40:49 by Hibernate Tools 4.3.5.Final
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -67,7 +68,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppDateSaisie;
 	private String dppStructureConduc;
 	private String dppStructureBenefi;
-	private String dppPartiePmePmi;
+	public String dppPartiePmePmi;
 	private String dppStatutDao;
 	private Date dppInvEntre;
 	private Date dppDateAttApprobCpmp;
@@ -90,6 +91,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppDateRecepFact;
 	private Date dppDateRecepLettr;
 	private Date dppDateNotAtt;
+	private long dppNbOuv;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -123,7 +125,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
 			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno,
-			 Date dppDateSolFact,Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
+			 Date dppDateSolFact,Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,long dppNbOuv,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TLBudgets = TLBudgets;
@@ -187,6 +189,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppDateRecepFact = dppDateRecepFact;
 		this.dppDateRecepLettr = dppDateRecepLettr;
 		this.dppDateNotAtt = dppDateNotAtt;
+		this.dppNbOuv = dppNbOuv;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -798,6 +801,16 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppDateNotAtt(Date dppDateNotAtt) {
 		this.dppDateNotAtt = dppDateNotAtt;
+	}
+	
+	
+	@Column(name = "DPP_NB_OUV")
+	public long getDppNbOuv() {
+		return this.dppNbOuv;
+	}
+
+	public void setDppNbOuv(long dppNbOuv) {
+		this.dppNbOuv = dppNbOuv;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

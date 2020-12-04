@@ -79,6 +79,7 @@ public class VPpmliste implements java.io.Serializable {
 	private Date dppDateAttApproBail;
 	private long plpId;
 	private long plpGesCode;
+	private Long dppNbOuv;
 
 	public VPpmliste() {
 	}
@@ -106,7 +107,8 @@ public class VPpmliste implements java.io.Serializable {
 			Date dppDateElabRapport, Date dppDateJugementOffre, Date dppDateJugementOffreTec, Date dppDateNotAtt,
 			Date dppDateOuvertOf, Date dppDateOuvertOt, Date dppDateRecepFact, Date dppDateRecepLettr,
 			Date dppDateSolFact, Date dppInvEntre, Date dppDateExecDebut, Date dppDateExecFin, Date dppDateSignatAc,
-			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail, long plpId, long plpGesCode) {
+			Date dppDateSignatAttrib, Date dppApprobAno, Date dppDateNegociation, Date dppDateMarcheApprob,Date dppDateAttApproBail,
+			long plpId, long plpGesCode, Long dppNbOuv) {
 		this.dppId = dppId;
 		this.dppDteModif = dppDteModif;
 		this.dppObjet = dppObjet;
@@ -167,6 +169,7 @@ public class VPpmliste implements java.io.Serializable {
 		this.dppDateAttApproBail = dppDateAttApproBail;
 		this.plpId = plpId;
 		this.plpGesCode = plpGesCode;
+		this.dppNbOuv = dppNbOuv;
 	}
 
 	@Id
@@ -710,6 +713,15 @@ public class VPpmliste implements java.io.Serializable {
 
 	public void setPlpGesCode(long plpGesCode) {
 		this.plpGesCode = plpGesCode;
+	}
+	
+	@Column(name = "DPP_NB_OUV")
+	public Long getDppNbOuv() {
+		return this.dppNbOuv;
+	}
+
+	public void setDppNbOuv(Long dppNbOuv) {
+		this.dppNbOuv = dppNbOuv;
 	}
 
 }

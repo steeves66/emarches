@@ -1,6 +1,7 @@
 package com.sndi.model;
 // Generated 4 févr. 2020 21:00:13 by Hibernate Tools 4.3.5.Final
 
+import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -72,6 +73,7 @@ public class VPpmDao implements java.io.Serializable {
 	private String strTstCode;
 	private Long dppMontant;
 	private String dppStatutAno;
+	private Long dppNbOuv;
 
 	public VPpmDao() {
 	}
@@ -103,7 +105,7 @@ public class VPpmDao implements java.io.Serializable {
 			String dppPartiePmePmi, String dppTypId, String dppStatutDao, String dppPieceDao, String dppDacCode,
 			String dppBailleur,String dppRecherche ,String mdtCode, String mdtTymCode, String mdtLibelleCourt,
 			 String tymCode, String tymLibelleCourt, String mopCode, String mopLibelleLong,
-			String lbgImputation, String natLibelle, String strTstCode,Long dppMontant, String dppStatutAno) {
+			String lbgImputation, String natLibelle, String strTstCode,Long dppMontant, String dppStatutAno,Long dppNbOuv) {
 		this.dppId = dppId;
 		this.dppPlpId = dppPlpId;
 		this.dppGpgId = dppGpgId;
@@ -158,6 +160,7 @@ public class VPpmDao implements java.io.Serializable {
 		this.strTstCode = strTstCode;
 		this.dppMontant = dppMontant;
 		this.dppStatutAno = dppStatutAno;
+		this.dppNbOuv = dppNbOuv;
 	}
 
 	
@@ -646,5 +649,14 @@ public class VPpmDao implements java.io.Serializable {
 
 	public void setDppStatutAno(String dppStatutAno) {
 		this.dppStatutAno = dppStatutAno;
+	}
+	
+	@Column(name = "DPP_NB_OUV")
+	public Long getDppNbOuv() {
+		return this.dppNbOuv;
+	}
+
+	public void setDppNbOuv(Long dppNbOuv) {
+		this.dppNbOuv = dppNbOuv;
 	}
 }

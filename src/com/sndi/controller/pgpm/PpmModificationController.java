@@ -198,6 +198,7 @@ public class PpmModificationController {
 		//Declaration des objets
 		 private TPlanPassation planPass = new TPlanPassation();
 		 private TDetailPlanPassation detailPass = new TDetailPlanPassation();
+		 private TDetailPlanPassation detPass = new TDetailPlanPassation();
 		 private VPgpmFonction pgpm = new VPgpmFonction();
 		 private VPgpmFonction pgspm = new VPgpmFonction();
 		 private TDetailPlanPassation ppm = new TDetailPlanPassation();
@@ -245,6 +246,7 @@ public class PpmModificationController {
 		 private long gesCode;	
 		 private long  totalLigne;
 		 private long  totalMontant;
+		 private long  totalMontantPpm;
 		 private String filtreTypeMarche="";
 		 private String filtreModePassation="";
 		 private String observation="";
@@ -1222,6 +1224,17 @@ public class PpmModificationController {
 		    newFinancement.setFppTypeFinance(sourfin);
 		    newFinancement.setTDetailPlanPassation(pass);
 			iservice.addObject(newFinancement);
+			//Actualisation du coût prévisionnel de l'opération
+			coutTotal();
+			
+			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
+					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+			if (!listeTsPpm.isEmpty()) {
+				detPass= listeTsPpm.get(0);
+				detPass.setDppSourceFin(newFinancement.getFppTypeFinance());
+				detPass.setDppMontant(totalMontantPpm);
+				iservice.updateObject(detPass);
+			}
 			
 			viderFinancement();
 			
@@ -1476,6 +1489,15 @@ public class PpmModificationController {
 						ppmstatut=ppmstatutList.get(baoule);
 					}	
 				}
+				
+				
+				//le coût total de l'opération PPM
+				  public void coutTotal() {
+					 totalMontantPpm = 0;
+					 for(TFinancementPpm l : listeFinancement ) {
+						 totalMontantPpm = totalMontantPpm+ (l.getFppMontantCfa()+l.getFppPartTresor());
+					 }
+				 }
 				
 				
 				 //Methode de modification des PPM/PSPM
@@ -3145,5 +3167,26 @@ public class PpmModificationController {
 	public void setSourfin(String sourfin) {
 		this.sourfin = sourfin;
 	}
+
+
+
+	public long getTotalMontantPpm() {
+		return totalMontantPpm;
+	}
+
+	public void setTotalMontantPpm(long totalMontantPpm) {
+		this.totalMontantPpm = totalMontantPpm;
+	}
+
+
+
+	public TDetailPlanPassation getDetPass() {
+		return detPass;
+	}
+
+	public void setDetPass(TDetailPlanPassation detPass) {
+		this.detPass = detPass;
+	}
+
 	
 }

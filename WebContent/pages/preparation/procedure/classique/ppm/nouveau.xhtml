@@ -237,37 +237,76 @@
                   </div>
                 </div>	
                 
-                   <h:panelGroup rendered="#{controleController.selectPartPgpm}" >
+                <h:panelGroup rendered="#{controleController.selectPartPgpm}" >
+                <h:panelGroup rendered="#{ppmController.partPpm}" >
                 <div class="form-group">
                   <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
 
                   <div class="col-sm-9">
-       
-				<p:inputText id="modeP78" type="text" value="#{ppmController.recupPgpm.gpgPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
-                  </div>
+                     <p:selectOneRadio  value="#{ppmController.detailPass.dppPartiePmePmi}" id="part78">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+				</div>
                 </div>
                 </h:panelGroup>
                 
-                <h:panelGroup rendered="#{controleController.selectPartPgspm}" >
+                <h:panelGroup rendered="#{ppmController.partPgpm}" >
                 <div class="form-group">
-                  <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
+                  <label for="modeP78" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
+                <div class="col-sm-9">
+				<p:selectOneRadio  value="#{ppmController.detailPass.dppPartiePmePmi}" id="modeP78">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+				</p:selectOneRadio>
+					 
+                </div>
+                </div>
+                </h:panelGroup>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{controleController.selectPartPgspm}" >
+                 <h:panelGroup rendered="#{ppmController.partPspm}" >
+                <div class="form-group">
+                  <label for="relalisation78" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
 
                   <div class="col-sm-9">
-       
-				<p:inputText id="modeP781" type="text" value="#{ppmController.recupPgspm.gpgPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                     <p:selectOneRadio  value="#{ppmController.detailPass.dppPartiePmePmi}" id="realisation78">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+				</div>
+                </div>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{ppmController.partPgspm}" >
+                <div class="form-group">
+                  <label for="modeP781" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
+                  <div class="col-sm-9">
+				  <p:inputText id="modeP781" type="text" value="#{ppmController.recupPgspm.gpgPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
                   </div>
                 </div>
+                </h:panelGroup>
                 </h:panelGroup>
                 
                  <div class="form-group">
  
                   <label for="ano1" class="col-sm-3 control-label">ANO<span style="color:red;"> *</span></label>
-                  <div class="col-sm-9">
+                  <div class="col-sm-3">
                      <p:selectOneRadio value="#{ppmController.detailPass.dppStatutAno}" id="ano1">
 						<f:selectItem itemLabel="OUI" itemValue="O" />
 						<f:selectItem itemLabel="NON" itemValue="N" />
 					 </p:selectOneRadio>
                   </div>
+                  
+                  <label for="ano2" class="col-sm-3 control-label">Nbre Ouverture<span style="color:red;"> *</span></label>
+                  <div class="col-sm-3">
+					 <p:selectOneMenu value="#{ppmController.nbreOuv}" effect="fade" style="width:100%">   
+			            <f:selectItem itemLabel="1" itemValue="1" /> 
+                        <f:selectItem itemLabel="2" itemValue="2" />				   	   				    				   
+			       </p:selectOneMenu>
+                  </div>
+                  
                 </div> 
                 
            <div class="form-group">
@@ -317,9 +356,22 @@
 		                 <tr>
 		                 <td style="width: 25%"><p:inputText id="Imput13" type="text" value="#{ppmController.recupLigne.lbgImputation}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
-		                  <p:commandLink  oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+		                  <p:commandLink rendered="#{controleController.lignedefaut}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
+						  
+						  <p:commandLink rendered="#{ppmController.ligneftpgpm}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPg()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+						  
+						   <p:commandLink rendered="#{ppmController.lignepn}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPn()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+						  
+						   <p:commandLink rendered="#{ppmController.ligneps}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputationPros()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign" >
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+						  
 		                 </td>
 		                 <td style="width: 75%"><p:inputText id="Imput23" type="text" value="#{ppmController.recupLigne.natLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 </tr>
@@ -1081,7 +1133,7 @@
 						
 						
 						</div>
-						</div>
+						</div> 
 						
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
@@ -1424,6 +1476,7 @@
 						
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
+                        
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeMode}"
 						 selectionMode="single" rowKey="#{slctdTb.mopCode}"

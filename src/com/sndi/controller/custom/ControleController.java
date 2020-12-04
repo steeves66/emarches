@@ -125,6 +125,8 @@ public class ControleController {
 	private boolean detailA = false;
 	public boolean btn_trans_ami =false;
 	public boolean btn_imprimpgspm = false;
+	public boolean partPspm = false;
+	public boolean partPgspm =  false;
 	//PUBLICATION
 	public boolean btn_pub_csv = false;
 	public boolean btn_pub_dps = false;
@@ -395,6 +397,7 @@ public class ControleController {
 	private String datevalcpmp="";
 	private String actions="";
 	private String actionPage="";
+	public boolean lignedefaut = false;
 	//String actionPrivilèges ="";
 	
 	
@@ -1182,6 +1185,7 @@ public class ControleController {
 			    			 typePlan = "PN";
 			    			 libelleProcedure="SAISIE DES PLANS DE PASSATION DE MARCHES";	
 			    			 btn_new =true;
+			    			 lignedefaut = true;
 							 panel1 =true;
 							 panel2 =false;
 							 panelPpmTableauBordSai = true;
@@ -1457,6 +1461,7 @@ public class ControleController {
 			    			 btn_new =true;
 							 panel1 =true;
 							 panel2 =false;
+							 lignedefaut =true;
 							 panelPspmTableauBordSai = true;
 							 panelPspmTableauBordVal = false;
 							 selectLovePgpm = false;
@@ -10032,5 +10037,37 @@ public class ControleController {
 	public void setLibelleTravaux(String libelleTravaux) {
 		this.libelleTravaux = libelleTravaux;
 	}
+
+
+	public boolean isPartPspm() {
+		return partPspm;
+	}
+
+
+	public void setPartPspm(boolean partPspm) {
+		this.partPspm = partPspm;
+	}
+
+
+	public boolean isPartPgspm() {
+		return partPgspm;
+	}
+
+
+	public void setPartPgspm(boolean partPgspm) {
+		this.partPgspm = partPgspm;
+	}
+
+
+	public boolean isLignedefaut() {
+		return lignedefaut;
+	}
+
+
+	public void setLignedefaut(boolean lignedefaut) {
+		this.lignedefaut = lignedefaut;
+	}
+	
+	
 	
 }

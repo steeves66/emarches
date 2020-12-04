@@ -272,6 +272,7 @@ public class DaoController {
 	//VARIABLES
 	 private long adaNum;
 	 private long rId;
+	 private long crit;
 	 private long rIdSous;
 	 private long delai;
 	 private long dcadNum;
@@ -425,7 +426,9 @@ public class DaoController {
 	  private boolean etatMargeS = false;
 	  private boolean etatMargePreference = false;
 	  private boolean panelExixstent = false;
+	  private boolean panelExixstent1 = false;
 	  private boolean panelNouveau = false;
+	  private boolean panelNouveau1 = false;
 	  private boolean qualifLabel1 = false;
 	  private boolean qualifLabel2 = false;
 	  private boolean libelleTaux = false;
@@ -1103,9 +1106,11 @@ public class DaoController {
 	 
 	//Combo box critères
 	 public void chargeSousEnteteCombobox() {
-		     listeEnteteCritere.clear();
+		
+		 if(panelExixstent == true && panelExixstent1 == true) {
+			 listeEnteteCritere.clear();
 			 listeEnteteCritere= (List<VCritAnalDacEntete>) iservice.getObjectsByColumn("VCritAnalDacEntete", new ArrayList<String>(Arrays.asList("CRA_LIBELLE")),
-					 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+rId));
+					 new WhereClause("R_ID",WhereClause.Comparateur.EQ,""+crit));
 			 if(!listeEnteteCritere.isEmpty()) { 
 				 newEnteteCrit=listeEnteteCritere.get(0);
 				 //vider le champs detail
@@ -1117,12 +1122,18 @@ public class DaoController {
 						 new WhereClause("CRA_PARENT",WhereClause.Comparateur.EQ,""+newEnteteCrit.getCraCode()),
 						 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
 				  
+				  panelExixstent = true;
+				  panelExixstent1 = true;
+				  panelNouveau = false;
+				  panelNouveau1 = false;
+				  
 				  _logger.info("lot: "+laaId);
+				  _logger.info("valeur R_ID: "+crit);
 				  _logger.info("Dao: "+dao.getDacCode());
 				  _logger.info("cracode: "+newEnteteCrit.getCraCode());
 				  _logger.info("mdt: "+dao.getTModeleDacType().getMdtCode());
 			 }
-			 
+		 }    
 	 }
 	 
 	 public void chargeCritereComboboxByLot() {
@@ -1236,7 +1247,7 @@ public class DaoController {
 	 }
 	 
 	 //verification de la combox critere existent ou pas
-	  public void checkCritere() {
+	/*  public void checkCritere() {
 			 //chargeMsgMarge();
 			 if(choixCritere.equalsIgnoreCase("existant")) { 
 				 panelExixstent = true; 
@@ -1248,7 +1259,27 @@ public class DaoController {
 			 }
 			 _logger.info("panelExixstent: "+panelExixstent);	
 			 _logger.info("panelNouveau: "+panelNouveau);
+		 }*/
+	  
+	 //verification de la combox critere existent ou pas
+	  public void checkCritere() {
+			 //chargeMsgMarge();
+			 if(choixCritere.equalsIgnoreCase("existant")) { 
+				 panelExixstent = true; 
+				 panelExixstent1 = true; 
+				 panelNouveau = false;
+				 panelNouveau1 = false;
+			 }else 
+			 {
+				 panelExixstent = false;
+				 panelExixstent1 = false; 
+				 panelNouveau = true; 
+				 panelNouveau1 = true;
+			 }
+			 _logger.info("panelExixstent: "+panelExixstent);	
+			 _logger.info("panelNouveau: "+panelNouveau);
 		 }
+	  
 	 
 	 //Enregistrement detail critere par lot
 	 public void saveDetailCritereByLot() {	
@@ -3296,10 +3327,12 @@ public class DaoController {
 		 							 userController.setSevrityMsg("success");
 		 							 
 		 							 newAvis.aaoLibelle = dao.getDacObjet();
+		 							newAvis.aaoNbrOuv = daoDetail.getDppNbOuv();
 		 							 //Désactivation du bouton d'enregistrement du DAO
 		 							 controleController.btn_dao_pn = false;
 		 							 //Activation du Bouton d'enregistrement d'un Avis d'Appel d'Offres
 		 							  btn_save_avis = true;
+		 							  
 		 							  verifOuverture();
 		 							  chargeImputation();
 		 							  recupDetail();
@@ -3309,9 +3342,7 @@ public class DaoController {
 			    					//Insertion des pices
 			          }
 	    	        
-	     
-	     
-	     
+	      
 	     
 	 	//Methode d'historisation
 		 public void historiser(String statut,String dacCode, String motif) {
@@ -3681,7 +3712,7 @@ public class DaoController {
 				}
 		     
 		   //GESTION DES ADRESSES
-				//Liste des libellÃ¯Â¿Â½
+				//Liste des libellés
 				  public void chargeLibelleAdresse() { 
 					  listLibelleAdresse.clear();
 					  listLibelleAdresse =(List<TLibelleAdresse>) iservice.getObjectsByColumn("TLibelleAdresse", new ArrayList<String>(Arrays.asList("LIA_NUM")));
@@ -13092,6 +13123,31 @@ public void rplBmkByVal(List<String> lBmkNm, List<VbxDocLot> lLts, List<VbxDocAd
 	public void setComUpdate(TCommissionSpecifique comUpdate) {
 		this.comUpdate = comUpdate;
 	}
+
+	public boolean isPanelExixstent1() {
+		return panelExixstent1;
+	}
+
+	public void setPanelExixstent1(boolean panelExixstent1) {
+		this.panelExixstent1 = panelExixstent1;
+	}
+
+	public boolean isPanelNouveau1() {
+		return panelNouveau1;
+	}
+
+	public void setPanelNouveau1(boolean panelNouveau1) {
+		this.panelNouveau1 = panelNouveau1;
+	}
+
+	public long getCrit() {
+		return crit;
+	}
+
+	public void setCrit(long crit) {
+		this.crit = crit;
+	}
+	
 	
 	/*******  Fin document  *************/
 }
