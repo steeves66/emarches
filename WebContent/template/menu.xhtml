@@ -37,8 +37,7 @@
       <ul class="sidebar-menu" data-widget="tree">
       
       
-          
-         
+      
          <!-- DEBUT TRAITEMENT AUTORITE CONTRACTANTE -->
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
          
@@ -191,7 +190,7 @@
          
           <li class="treeview">
           <a href="#">
-            <i class="fa fa-list"></i> <span>Pré qualification</span>
+            <i class="fa fa-list"></i> <span>Préqualification</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -482,8 +481,9 @@
          </ul>     
          </li>
          <!-- FIN M3 -->
+         </h:panelGroup>
          
-           <!-- DEBUT M3 :  -->
+           <!-- DEBUT M4 :  -->
          <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>M4-Préparation des Offres</span>
@@ -509,15 +509,18 @@
              </p:commandLink>
             </li>
             
-              <li>
+            <h:panelGroup rendered="false">
+            <li>
               <p:commandLink  update=":content" > 
             <i class="fa fa-circle-o"></i>Demande de clarification
              </p:commandLink>
             </li>
+            </h:panelGroup>
+            
          </ul>     
          </li>
          <!-- FIN M3 -->
-         </h:panelGroup>
+         
            <!-- DEBUT M4 :  -->
           <li class="treeview">
           <a href="#">
