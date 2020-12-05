@@ -2980,7 +2980,7 @@ public class ControleController {
 			    			fonctionalite = "listSaisieAc";
 			    			libelle="INFORMATIONS SUR L'AUTORITE CONTRACTANTE";
 			    			libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
+			    			libelleDao3="SAISIE DES DOSSIERS D'APPEL D'OFFRES";
 			    			btn_daoPn =true;
 			    			btn_daoPs =false;
 			    			btn_ami =false;
@@ -3144,8 +3144,8 @@ public class ControleController {
 			    				type = "DAC";
 			    				fonctionalite ="listeValidationCsv";
 			    				libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-			    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
-			    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL A CONCURRENCE";
+			    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL D'OFFRES";
+			    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL D'OFFRES";
 			    				panelDetail=false;
 			    				panelForm=false;
 			   				    panelTraitement=true;
@@ -3225,7 +3225,7 @@ public class ControleController {
 				    				panelForm=false;
 				   				    panelTraitement=false;
 				    				libelle1="Detail";
-				    				libelle2 = "Synthèse du DAC N°";
+				    				libelle2 = "Synthèse du DAO N°";
 				    				fermerSaiPrq = false; 
 				    				fermerValPrq = false;
 				    				fermerSaiAmi = false;
@@ -3326,7 +3326,7 @@ public class ControleController {
 				    						     typePlan ="PN";
 				    						     type = "DAC";
 				    						     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL D'OFFRES";
 								    			 btn_new =false;
 								    			 btn_affec = false;
 								    			 saisie=false;
@@ -3407,9 +3407,9 @@ public class ControleController {
 				    						   if(action.equalsIgnoreCase("VETDAO")) {
 				    							     typePlan ="PN";
 				    							     type = "DAC";
-				    							     libelle="VENTE / RETRAIT DU DAC N°";
+				    							     libelle="VENTE / RETRAIT DU DAO N°";
 				    							     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-									    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A CONCURRENCE";
+									    			 libelleDao3="VENTE DES DOSSIERS D'APPEL D'OFFRES";
 									    			 fonctionalite="listeDaoVentePn";
 									    			 btn_new =false;
 									    			 btn_affec = false;
@@ -3495,7 +3495,7 @@ public class ControleController {
 				    								     typePlan ="PN";
 				    								     type = "DAC";
 				    								     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-										    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+										    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL D'OFFRES";
 										    			 btn_new =false;
 										    			 btn_affec = false;
 										    			 btn_exam = false;
@@ -3582,7 +3582,7 @@ public class ControleController {
 				    									     fonctionalite="ListePubDacPn";
 				    									     btn_pub =true;
 				    									     libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-											    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+											    			 libelleDao3="DOSSIER D'APPEL D'OFFRES EN ATTENTE DE PUBLICATION";
 											    			 btn_new =false;
 											    			 btn_affec = false;
 											    			 btn_exam = false;
@@ -3668,8 +3668,8 @@ public class ControleController {
 				    									    	 fonctionalite = "listeDacValCellule";
 				    									    	 type = "DAC";
 				    									    	 libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
-												    			 libelleDao3="TRANSMISSION DU DAC PAR LA CELLULE";
-												    			 libelleDao1 ="TRANSMISSION DU DAC PAR LA CELLULE";
+												    			 libelleDao3="TRANSMISSION DU DAO PAR LA CELLULE";
+												    			 libelleDao1 ="TRANSMISSION DU DAO PAR LA CELLULE";
 												    			 btn_new =false;
 												    			 btn_affec = false;
 												    			 btn_exam = false;
@@ -3914,7 +3914,7 @@ public class ControleController {
 								    									     btn_ami_csv = false;
 								    									     btn_prq_dps = false;
 								    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
-															    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+															    			 libelleDao3="DOSSIER D'APPEL D'OFFRES EN ATTENTE DE PUBLICATION";
 															    			 btn_new =false;
 															    			 btn_affec = false;
 															    			 btn_exam = false;
@@ -4006,7 +4006,7 @@ public class ControleController {
 									    									     btn_prq_dps = false;
 									    									     btn_prq_dps = false;
 									    									     libelle1="LISTE DES DAC EN PROCEDURE NORMALE";
-																    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE PUBLIES";
+																    			 libelleDao3="DOSSIER D'APPEL D'OFFRES PUBLIES";
 																    			 btn_new =false;
 																    			 btn_affec = false;
 																    			 btn_exam = false;
@@ -4090,7 +4090,7 @@ public class ControleController {
 				                                                             if(action.equalsIgnoreCase("ENGDPS")) {
 				                                                        	  typePlan ="PS";
 				                                                        	  type = "DAC";
-				                                            				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
+				                                            				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL D'OFFRES (DAO)";
 				                                            				  libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 				                                            			       libellesmall ="Procédure Simplifiée";
 				                                            			       panelDetail=false;
@@ -4107,7 +4107,7 @@ public class ControleController {
 										    							    	if(action.equalsIgnoreCase("MODDPS")) {
 										    							    		typePlan ="PS";
 										    							    		type = "DAC";
-										    							    		libelleProcedure="Modification du DAC N°";
+										    							    		libelleProcedure="Modification du DAO N°";
 										    							    		libelleDao2 = "Modification";
 										    							    		update_fermer_dao=false;
 										   							    		    update_fermer_ami=false;
@@ -4124,7 +4124,7 @@ public class ControleController {
 							    									    	        	typePlan ="PS";
 							    									    	        	type = "DAC";
 							    									    	        	libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-							    										    			libelleDao3="SAISIE DES DOSSIERS D'APPEL A CONCURRENCE";
+							    										    			libelleDao3="SAISIE DES DOSSIERS D'APPEL D'OFFRES";
 							    										    			libelleSmall="Procédure Simplifiée";
 							    										    			btn_daoPn =false;
 							    										    			btn_daoPs =true;
@@ -4214,8 +4214,8 @@ public class ControleController {
 								    									    		   typePlan ="PS";
 								    									    		   type = "DAC";
 								    									    		   libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL A CONCURRENCE";
-								    								    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL A CONCURRENCE";
+								    								    				libelleDao3="VALIDATION DES DOSSIERS D'APPEL D'OFFRES";
+								    								    				libelleDao1="TRANSMISSION DES DOSSIERS D'APPEL D'OFFRES";
 								    								    				libelleSmall="Procédure Simplifiée";
 								    								    				panelDetail=false;
 								    								    				panelForm=false;
@@ -4292,7 +4292,7 @@ public class ControleController {
 									    							    				panelForm=false;
 									    							   				    panelTraitement=false;
 									    							    				libelle1="Detail";
-									    							    				libelle2 = "Synthèse du DAC N°";
+									    							    				libelle2 = "Synthèse du DAO N°";
 									    							    				fermerSaiPrq = false; 
 									    							    				fermerValPrq = false;
 									    							    				fermerSaiAmi = false;
@@ -4311,7 +4311,7 @@ public class ControleController {
 									    									    		  typePlan ="PS";
 									    									    		  type = "DAC";
 									    									    		  libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+																			    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL D'OFFRES";
 																			    			 libelleSmall="Procédure Simplifiée";
 																			    			 btn_new =false;
 																			    			 btn_affec = false;
@@ -4393,7 +4393,7 @@ public class ControleController {
 										    									    		 typePlan ="PS";
 										    									    		 type = "DAC";
 										    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-										    								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL A CONCURRENCE";
+										    								    			 libelleDao3="EXAMEN DES DOSSIERS D'APPEL D'OFFRES";
 										    								    			 libelleSmall="Procédure Simplifiée";
 										    								    			 btn_new =false;
 										    								    			 btn_affec = false;
@@ -4554,7 +4554,7 @@ public class ControleController {
 												    									    		 typePlan ="PS";
 												    									    		 type = "DAC";
 												    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																					    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+																					    			 libelleDao3="DOSSIER D'APPEL D'OFFRES EN ATTENTE DE PUBLICATION";
 																					    			 libelleSmall="Procédure Simplifiée";
 																					    			 fonctionalite =" ListePubDacPn";
 																					    			 btn_new =false;
@@ -4639,8 +4639,8 @@ public class ControleController {
 													    									    		 type = "DAC";
 													    									    		 fonctionalite="listeDaoVentePn";
 													    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																	    							     libelle="VENTE / RETRAIT DU DAC N°";
-																						    			 libelleDao3="VENTE DES DOSSIERS D'APPEL A CONCURRENCE";
+																	    							     libelle="VENTE / RETRAIT DU DAO N°";
+																						    			 libelleDao3="VENTE DES DOSSIERS D'APPEL D'OFFRES";
 																						    			 libelleSmall="Procédure Simplifiée";
 																						    			 btn_new =false;
 																						    			 btn_affec = false;
@@ -4722,8 +4722,8 @@ public class ControleController {
 														    									    		 typePlan ="PS";
 														    									    		 type = "DAC";
 														    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																							    			 libelleDao3="TRANSMISSION DU DAC PAR LA CELLULE";
-																							    			 libelleDao1 ="TRANSMISSION DU DAC PAR LA CELLULE";
+																							    			 libelleDao3="TRANSMISSION DU DAO PAR LA CELLULE";
+																							    			 libelleDao1 ="TRANSMISSION DU DAO PAR LA CELLULE";
 																							    			 libelleSmall="Procédure Simplifiée";
 																							    			 btn_new =false;
 																							    			 btn_affec = false;
@@ -4796,7 +4796,7 @@ public class ControleController {
 																    									    	  typePlan ="PS";
 																    									    		 type = "DAC";
 																    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
-																									    			 libelleDao3="RETRAIT DES DOSSIERS D'APPEL A CONCURRENCE";
+																									    			 libelleDao3="RETRAIT DES DOSSIERS D'APPEL D'OFFRES";
 																									    			 libelleSmall ="Procédure Simplifiée";
 																									    			 btn_new =false;
 																									    			 btn_affec = false;
@@ -4960,8 +4960,8 @@ public class ControleController {
 																			    									     btn_ami_csv = false;
 																			    									     btn_prq_dps = false;
 																			    									     btn_prq_dps = false;
-																			    									     libelle1="LISTE DES DAC EN PROCEDURE SIMPLIFIEE";
-																										    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE EN ATTENTE DE PUBLICATION";
+																			    									     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
+																										    			 libelleDao3="DOSSIER D'APPEL D'OFFRES EN ATTENTE DE PUBLICATION";
 																										    			 btn_new =false;
 																										    			 btn_affec = false;
 																										    			 btn_exam = false;
@@ -5048,8 +5048,8 @@ public class ControleController {
 																				    									     btn_pub_dps = false;
 																				    									     btn_ami_csv = false;
 																				    									     btn_prq_dps = false;
-																				    									     libelle1="LISTE DES DAC EN PROCEDURE SIMPLIFIEE";
-																											    			 libelleDao3="DOSSIER D'APPEL A CONCURRENCE PUBLIES";
+																				    									     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
+																											    			 libelleDao3="DOSSIER D'APPEL D'OFFRES PUBLIES";
 																											    			 btn_new =false;
 																											    			 btn_affec = false;
 																											    			 btn_exam = false;
