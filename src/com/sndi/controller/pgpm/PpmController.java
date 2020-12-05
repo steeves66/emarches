@@ -2342,70 +2342,9 @@ public class PpmController {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
-			 //Controle sur les lignes budgétaires
-			/* if(pgpm.getGpgMopCode().equalsIgnoreCase("")) {
-				 chargementLigne(""+controleController.type);
-			   }else {
-				 chargementLigne(pgpm.getGpgTypePlan());
-			 }*/
-			 
-			 
-			/* if(pgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
-				   //Affichage du coût total de l'opération
-				    //coutOperation();
-					//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
-				  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
-					  
-					   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
-							 chargeImputationPsl();
-						   }else
-						      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
-								  chargeImputationPso();
-							   }
-				                 }else
-					                 if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
-						                    chargeImputation();
-					                  }
-			             }else
-	                    	  if(pgpm.getGpgMopCode().equalsIgnoreCase("PRQ")){
-	      						//Affichage du coût total de l'opération
-	      						    //coutOperation();
-	      						    
-	      						//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
-	      						  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
-	      							  
-	      							   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
-	      									 chargeImputationPsl();
-	      								   }else
-	      								      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
-	      										  chargeImputationPso();
-	      									   }
-	      						                 }else
-	      							                 if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
-	      								                    chargeImputation();
-	      							                  }
-	                    		   
-	                    	   }else {
-			        	
-						//Affichage du coût total de l'opération
-						    coutOperation();
-							//Récupération des lignes biudgétaires en fonction du mode de passation, par défaut charge les lignes du AC 
-						  if(pgpm.getGpgTypePlan().equalsIgnoreCase("PS")) {
-							  
-							   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
-									 chargeImputationPsl();
-								   }else
-								      if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
-										  chargeImputationPso();
-									   }
-						                 }else
-							                 if(pgpm.getGpgTypePlan().equalsIgnoreCase("PN")) {
-								                    chargeImputation();
-							                  }
-			                              } */
 			 //Control de la part reservée aux PME
 			 controlePart();
-		                            }
+		     }
 		 
 		 //Controler la part reservée aux PME à partir du PGPM
 		 public void controlePart() {
@@ -2506,61 +2445,13 @@ public class PpmController {
 			 if (!listeFinancementPgpm.isEmpty()) {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
-			 
-			 
 			  //Controle sur les lignes budgétaires
 			/*	if(pgpm == null) {
 					 chargementLigne(passationListe.getMopCode());
 				   }else {
 					 chargementLigne(pgpm.getGpgMopCode());
 				 }*/
-			 
-			 
-			 
-			  /*if(pgpm.getGpgMopCode().equalsIgnoreCase("PSO")) {
-				  chargeImputationPso();
-				  
-				//modeleDao = true;
-          	   // modeleAmi = false;
-          	    //modelePrq = false;
-          	    //Affichage du modèle DAO type
- 				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
- 				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
- 			       //Affichage du montant total
- 			      // coutOperation(); 
-			    }else
-				   if(pgpm.getGpgMopCode().equalsIgnoreCase("PSL")) {
-					   chargeImputationPsl();
-					   
-					   //modeleDao = true;
-	            	    //modeleAmi = false;
-	            	   // modelePrq = false;
-	            	    //Affichage du modèle DAO type
-	   				   listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-	   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
-	   			       //Affichage du montant total
-	   			       //coutOperation(); 
-				    }else
-			             if(pgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
-			            	   // modeleDao = false;
-			            	    //modeleAmi = true;
-			            	   // modelePrq = false;
-			                       }else
-			  			             if(pgpm.getGpgMopCode().equalsIgnoreCase("PRQ")) {
-						            	    modeleDao = false;
-						            	    modeleAmi = false;
-						            	    modelePrq = true;
-						                       }else {
-			            	    //Désactivation des listes 
-			            	   // modeleDao = true;
-			            	    //modeleAmi = false;
-			            	    //Affichage du modèle DAO type
-			   				  listeDao = ((List<VModeleDao>)iservice.getObjectsByColumn("VModeleDao",new ArrayList<String>(Arrays.asList("MDT_CODE")),
-			   				   new WhereClause("GPG_ID",WhereClause.Comparateur.EQ,""+pgpm.getGpgId()))); 
-			   			       //Affichage du montant total
-			   			       ///coutOperation();       
-			                 }*/
-				
+	
 			     //Control de la part reservée aux PME
 				 controlePart();
 				     } 

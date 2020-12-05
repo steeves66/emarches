@@ -5186,15 +5186,7 @@ public class ControleController {
 																    											    			 panel1 =true;
 																																 panel2 =false;
 																																 panel3 = false;
-																																/* panel4 = false;
-																																 panel5 = false;
-																																 panel6 = false;
-																																 panel7 = false;
-																																 panel8 = true;
-																																 panel9 = false;
-																																 panel10 = false;
-																																 panel11 = false;
-																																 panel12 = false;*/
+																																
 																    															 venteRecherche = false; 
 																    															 affectationRecherche = false;
 																    															 examenRecherche = false;
