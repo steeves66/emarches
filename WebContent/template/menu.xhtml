@@ -1202,8 +1202,7 @@
 
           </ul>     
          </li>   
-             
-           
+              
           </ul>     
          </li>
          
@@ -1255,7 +1254,6 @@
           </ul>     
          </li>
          
-          
           </ul>     
          </li>
 		 
@@ -1583,6 +1581,42 @@
           </ul>
         </li>
          <!-- FIN M6 -->
+         
+         
+         <!-- FIN M7 -->
+          <h:panelGroup rendered="false">
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Reporting</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation DAO
+             </p:commandLink>
+            </li>
+            
+            <li>
+            <p:commandLink action="#{situationController.renderPage('sit2')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation de l'Avis
+             </p:commandLink>
+            </li>
+            
+             <li>
+            <p:commandLink action="#{situationController.renderPage('sit3','SIT')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Avis de Non Objection (ANO)
+             </p:commandLink>
+            </li>
+           
+          </ul>     
+         </li>
+          
+         </h:panelGroup>
+        <!-- FIN M7 -->
+         
          </h:panelGroup>
           <!-- DEBUT TRAITEMENT DMP-->
           

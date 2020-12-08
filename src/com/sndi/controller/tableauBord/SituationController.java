@@ -17,10 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.sndi.controller.custom.ControleController;
 import com.sndi.dao.WhereClause;
 import com.sndi.model.TAgpm;
 import com.sndi.model.TDacSpecs;
-import com.sndi.model.TDetailPlanGeneral;
 import com.sndi.model.TDetailPlanPassation;
 import com.sndi.model.TDossierDacs;
 import com.sndi.model.THistoDac;
@@ -47,6 +47,12 @@ public class SituationController {
 	KeyGen keyGen;
 	 @Autowired
 	ProjetReport projetReport;
+	 
+	 @Autowired
+	ControleController controleController;
+	 
+	 
+	 
 	 
 	 
 	 @PostConstruct
@@ -184,10 +190,18 @@ public class SituationController {
 	
 	
 	
-	 public void renderPage(String value) throws IOException{
-			
-			switch(value) {
+	 public String renderPage(String value ,String action) throws IOException{ 
+		 controleController.redirectionDynamicProcedures(action);
+			switch(value) { 
 			case "sit1":
+				userController.renderPage(value);
+				break;
+			
+			case "sit2":
+				userController.renderPage(value);
+				break;
+				
+			case "sit3":
 				userController.renderPage(value);
 				break;
 				
@@ -195,7 +209,8 @@ public class SituationController {
 				userController.renderPage(value);
 				break;
 			}
-			userController.renderPage(value);
+		    
+		    return userController.renderPage(value);   
 	}
 	
 	

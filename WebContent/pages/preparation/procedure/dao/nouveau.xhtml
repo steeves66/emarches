@@ -1130,7 +1130,7 @@
 				    <div class="col-sm-2">
 				       <p:commandLink  title="Vider la liste des critères sélectionnés" action="#{daoController.viderCritereByLot()}" styleClass="btn btn-danger btn-rounded waves-effect waves-light" style="color:#fff;background-color: red; margin-left:20px" update=":content" >
 					   <span class="btn-label"><i class="fa fa-trash"></i></span><span class="hidden-xs">VIDER LISTE</span>
-					   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer la liste ?" icon="ui-icon-alert" />                              
+					   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer la liste ?" icon="ui-icon-alert" />                              
 					   </p:commandLink>
 				       </div>
                </div>
@@ -2328,6 +2328,8 @@
                </div>
                </div>
                </div>
+               
+              <h:panelGroup id="critBox">
 		     <div class="form-group">
                   <label  class="col-sm-3 control-label">Sélectionnez le critère</label>
 				  <div class="col-sm-9">
@@ -2340,7 +2342,7 @@
                   </div>
               </div>
           
-               <h:panelGroup id="critBox">
+               
                <h:panelGroup  rendered="#{daoController.panelExixstent}">
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Selectionnez le sous critère</label>

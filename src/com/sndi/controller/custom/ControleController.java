@@ -2687,14 +2687,7 @@ public class ControleController {
 																						 panel2 =false;
 																						 panel3 = false;
 																						 panel4 = false;
-																						 /*panel5 = false;
-																						 panel6 = false;
-																						 panel7 = false;
-																						 panel8 = true;
-																						 panel9 = false;
-																						 panel10 = false;
-																						 panel11 = false;
-																						 panel12 = false;*/
+																						 
 				   																		 venteRecherche = false; 
 				   																		 affectationRecherche = false;
 				   																		 examenRecherche = false;
@@ -2943,7 +2936,7 @@ public class ControleController {
 				if(action.equalsIgnoreCase("ENGDAO")) {
 				 typePlan ="PN";
 				  type = "DAC";
-				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL A CONCURRENCE (DAC)";
+				  libelleDao1="SAISIE D'UN NOUVEAU DOSSIER D'APPEL D'OFFRES (DAO)";
 				  libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 			       libellesmall ="Saisie d'un nouveau DAC";
 			       panelDetail=false;
@@ -2959,7 +2952,7 @@ public class ControleController {
 			    	if(action.equalsIgnoreCase("MODDAO")) {
 			    		typePlan ="PN";
 			    		type = "DAC";
-			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL A CONCURRENCE N° ";
+			    		libelleDao1="MODIFICATION DU DOSSIER D'APPEL D'OFFRES N° ";
 			    		libelle1="Saisie d'un nouveau DAC";
 			    		 update_fermer_dao=true;
 			    		 update_fermer_ami=false;
@@ -6723,7 +6716,12 @@ public class ControleController {
 																	    			type = "Demandes";
 																	    			//fonctionalite = "listAvenantAc";
 																	    			libelle="TRANSMISSION DE LA DU DEMANDE N°";	
-																	    		}
+																	    		}else
+																	    			if(action.equalsIgnoreCase("SIT")) {
+																		    			type = "Commission";
+																		    			libelle="DEMANDE DE NON OBJECTION SUR L'AVIS";
+																		    			libelleDmp="DGMP";
+																		    		}
 							    		
 							    		                       //FIN GESTION DES PROCEDURES DERROGATOIRES
 			 	    			

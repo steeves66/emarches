@@ -689,7 +689,7 @@ public class CommissionController {
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
 	 }
 	 
-	 //liste des attributaire en affichage
+	 //liste des attributaires en affichage
 	 public void chargeAffAttributaire() {
 		 listeAttibutaire = ((List<TDetOffres>)iservice.getObjectsByColumn("TDetOffres",new ArrayList<String>(Arrays.asList("DOF_NUM")),
 				 new WhereClause("DOF_RET",Comparateur.EQ,"O"),

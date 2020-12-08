@@ -272,8 +272,10 @@ public class DaoController {
 	//VARIABLES
 	 private long adaNum;
 	 private long rId;
-	 private long crit;
-	 private long rIdSous;
+	 /*private long crit;
+	 private long rIdSous;*/
+	 private String crit;
+	 private String rIdSous;
 	 private long delai;
 	 private long dcadNum;
 	 private long totalMontantEstimatif;
@@ -1085,6 +1087,10 @@ public class DaoController {
 				 new WhereClause("DCAD_LAA_ID",WhereClause.Comparateur.EQ,""+laaId),
 				 new WhereClause("DCAD_DAC_CODE",WhereClause.Comparateur.EQ,""+dao.getDacCode()),
 				 new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode())));
+		  choixCritere = "";
+		  rIdSous = "";
+		  panelExixstent = false;
+		  panelNouveau = false;
 	 }
 	 
 	 public void chargeCritereCombobox1() {
@@ -1261,7 +1267,7 @@ public class DaoController {
 			 _logger.info("panelNouveau: "+panelNouveau);
 		 }*/
 	  
-	 //verification de la combox critere existent ou pas
+	 //verification de la combox critere existant ou pas
 	  public void checkCritere() {
 			 //chargeMsgMarge();
 			 if(choixCritere.equalsIgnoreCase("existant")) { 
@@ -1320,7 +1326,7 @@ public class DaoController {
 	 }
 	
 	 
-	//ContÃ´le sur les options "Garantie de Soumission et Déclaration de Garantie de Soumission"
+	//Contrôle sur les options "Garantie de Soumission et Déclaration de Garantie de Soumission"
 	public void afficheOption() {
 		 listeCritereAnalyse= (List<VCritereAnalyseModel>) iservice.getObjectsByColumn("VCritereAnalyseModel", new ArrayList<String>(Arrays.asList("CRA_CODE")),
 					new WhereClause("MDT_CODE",WhereClause.Comparateur.EQ,""+dao.getTModeleDacType().getMdtCode()),
@@ -1361,7 +1367,6 @@ public class DaoController {
 		 			iservice.addObject(newCritereDac);*/
 		 			
 		 			//Insertion en passant par le temp param(trigger)
-		 			 
 		 			newTempCritere.setCriDacCode(dao.getDacCode());
 		 			newTempCritere.setCriDcadDanCode(ligne.getCodedetail());
 		 			newTempCritere.setCriDcadLaaId("0");
@@ -8679,11 +8684,19 @@ public class DaoController {
 		this.listeSousEnteteCritere = listeSousEnteteCritere;
 	}
 
-	public long getrIdSous() {
+/*	public long getrIdSous() {
 		return rIdSous;
 	}
 
 	public void setrIdSous(long rIdSous) {
+		this.rIdSous = rIdSous;
+	}*/
+	
+	public String getrIdSous() {
+		return rIdSous;
+	}
+
+	public void setrIdSous(String rIdSous) {
 		this.rIdSous = rIdSous;
 	}
 
@@ -13140,11 +13153,19 @@ public void rplBmkByVal(List<String> lBmkNm, List<VbxDocLot> lLts, List<VbxDocAd
 		this.panelNouveau1 = panelNouveau1;
 	}
 
-	public long getCrit() {
+/*	public long getCrit() {
 		return crit;
 	}
 
 	public void setCrit(long crit) {
+		this.crit = crit;
+	}*/
+	
+	public String getCrit() {
+		return crit;
+	}
+
+	public void setCrit(String crit) {
 		this.crit = crit;
 	}
 	

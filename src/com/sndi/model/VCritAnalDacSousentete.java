@@ -18,7 +18,8 @@ import org.hibernate.annotations.Immutable;
 @Table(name = "V_CRIT_ANAL_DAC_SOUSENTETE")
 public class VCritAnalDacSousentete implements java.io.Serializable {
 
-	private BigDecimal RId;
+	//private BigDecimal RId;
+	private String RId;
 	private BigDecimal dcadNum;
 	private String craCode;
 	private String craParent;
@@ -38,7 +39,7 @@ public class VCritAnalDacSousentete implements java.io.Serializable {
 		this.dcadDacCode = dcadDacCode;
 	}
 
-	public VCritAnalDacSousentete(BigDecimal RId, BigDecimal dcadNum, String craCode, String craParent, String craLibelle,
+	public VCritAnalDacSousentete(/*BigDecimal RId,*/String RId, BigDecimal dcadNum, String craCode, String craParent, String craLibelle,
 			String mdtCode, String mdtTymCode, String dcadDacCode, BigDecimal dcadLaaId, BigDecimal dcadNumDcad,
 			BigDecimal tri, Character dcadCraAuCode) {
 		this.RId = RId;
@@ -55,13 +56,24 @@ public class VCritAnalDacSousentete implements java.io.Serializable {
 		this.dcadCraAuCode = dcadCraAuCode;
 	}
 
-	@Id
+/*	@Id
 	@Column(name = "R_ID", precision = 22, scale = 0)
 	public BigDecimal getRId() {
 		return this.RId;
 	}
 
 	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}*/
+	
+	
+	@Id
+	@Column(name = "R_ID")
+	public String getRId() {
+		return this.RId;
+	}
+
+	public void setRId(String RId) {
 		this.RId = RId;
 	}
 
