@@ -1,0 +1,222 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+         <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+  <ui:define name="contents">  
+	
+<section class="content-header">
+      <h1>
+       Avis de Non Objection (ANO)
+        <small>Situation</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active">Apercu des details</li>
+      </ol>
+    </section>
+    
+    
+   <section class="content">
+   <h:form id="gnl">
+<div class="box box-default">
+<div class="panel-primary">
+           <div class="panel-heading" style="background-color: #f88b2e">Situation du Dossier
+          
+           </div>
+          </div>
+          
+          <div class="box-body">
+           <div class="widget-box">
+           
+                  <div class="widget-body">
+                 
+                    <div class="widget-main">
+                     
+                       <div id="fuelux-wizard-container">
+                       <div class="form-inline">
+                       <div class="form-group has-feedback">
+   						  <p:commandLink styleClass="btn btn-primary m-r-5" style="background-color: #036d3b; border: #036d3b" value="Initialiser"   update=":gnl"> </p:commandLink>		
+				   </div>
+                       <div class="form-group has-feedback">
+   						    <p:inputText type="text" class="form-control"  placeholder="Code de l'Avis"  > 
+							</p:inputText>
+    						<i class="glyphicon glyphicon-search form-control-feedback"></i>		
+				   </div>
+                       
+				    <div class="form-group has-feedback">
+   						  <p:commandLink styleClass="btn btn-primary m-r-5" style="background-color: #f88b2e; border: #f88b2e" value="Rechercher" update=":gnl"> </p:commandLink>	
+				   </div>
+				   
+				  
+				
+		         </div>
+		         <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
+                    </div>
+                          <fieldset style="border: 1px solid;padding: 10px;">
+					   				 <legend>Statut de l'Avis N° </legend>
+					   				 <div align="center"><strong>Situation de l'Avis : </strong> <span style="color: red;font-weight:bold;"> </span> </div><br/>
+				   		
+					   		<!-- Form pour demande -->
+					   	 </fieldset>  
+					   	 
+
+					   	 <fieldset style="border: 1px solid; padding: 10px;">
+					   	   <legend>Informations sur l'Avis d'Appel D'offres</legend>
+					   		  <div class="row">
+					   			<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Code</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Objet</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+							</div>
+							
+							<div class="row">	
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Nombre de Lots</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Coût du DAO</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+							</div>
+							
+							<div class="row">	
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Lieu de Reception des Offres</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Date de Reception des Offres</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+							</div>
+							
+							<div class="row">	
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Nombre d'Ouverture</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Ouverture Technique</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+							</div>	
+
+					   		
+					   		<div class="row">
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Ouverture Financière</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+					   		</div>
+						             
+					   	 </fieldset>
+					   
+			     <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
+   				 <legend>PPM</legend>
+   				 <p:dataTable id="filia" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun PPM trouvé">
+				         <p:column headerText="Objet" styleClass="col-sm-4">
+				            <h:outputText />
+				        </p:column>
+				        <p:column headerText="Type Marché" styleClass="col-sm-2">
+				                <h:outputText >
+		              			 </h:outputText>
+				        </p:column>
+				        <p:column headerText="Mode de Passation" styleClass="col-sm-4">
+		              			 <h:outputText >
+								</h:outputText>
+				        </p:column>
+				    </p:dataTable>
+   				 </fieldset>	 
+					   	 
+					   	 
+			<fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
+   				 <legend>Lots</legend>
+   				 <p:dataTable id="filots" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun lot trouvé">
+				        <p:column headerText="Ordre" styleClass="col-sm-6">
+				            <h:outputText  />
+				        </p:column>
+				       
+				         <p:column headerText="Libelle" styleClass="col-sm-4">
+				            <h:outputText  />
+				        </p:column>
+				        <p:column headerText="Imputation" styleClass="col-sm-2">
+				                <h:outputText  />
+				        </p:column>
+				    </p:dataTable>
+   			 </fieldset>
+   						   	 
+					   	 
+			<fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
+   				 <legend>Historique des Traitements</legend>
+   				 <p:dataTable id="sttbl" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun traitement trouvé">
+				        <p:column headerText="Statut" styleClass="col-sm-6">
+				            <h:outputText  />
+				        </p:column>
+				       
+				         <p:column headerText="Acteur" styleClass="col-sm-4">
+				            <h:outputText  />
+				        </p:column>
+				       
+				        <p:column headerText="Date d'exécution" styleClass="col-sm-2">
+				              <h:outputText>
+							  </h:outputText>
+				        </p:column>
+				       
+				        <p:column headerText="Observation" styleClass="col-sm-4">
+				             <h:outputText >
+		              			 </h:outputText>
+				        </p:column>
+				        
+				    </p:dataTable>
+				    
+				    
+				    <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
+   				 <legend>Dossiers</legend>
+   				 <p:dataTable id="stretrait" styleClass="table mb0 dt-on-steroids dataTable"   emptyMessage="Aucun dossier trouvé">
+				        <p:column headerText="Titulaire" styleClass="col-sm-6">
+				            <h:outputText  />
+				        </p:column>
+				       
+				       
+				        <p:column headerText="Reference" styleClass="col-sm-4">
+				             <h:outputText >
+		              			 </h:outputText>
+				        </p:column>
+				        
+				    </p:dataTable>
+				    
+				    
+   				 </fieldset>
+				    
+				    
+				    
+				    
+				    
+   				 </fieldset>
+					   	 
+		               
+		               <div class="col-xs-6 col-sm-2"><label class="control-label"></label></div>
+								<div class="col-xs-6 col-sm-4"><label class="control-label"></label></div>
+								<div class="col-xs-6 col-sm-2"><label class="control-label pull-right">Source :</label></div>
+								<div class="col-xs-6 col-sm-4"><label class="control-label"></label></div>
+
+                        </div>
+                                                <p:commandLink styleClass="btn btn-danger mr10" style="margin-top:60px;margin-left:18px" value="Fermer"   update=":content"/>
+                                               
+                      </div><!-- /.widget-main -->
+                        
+                     </div><!-- /.widget-body -->
+                     
+                   </div>
+                     
+                 </div>
+                 
+             
+             </h:form>
+               </section>
+
+    
+      <!--
+    <script src="../resources/assets/js/ace-elements.min.js"></script>
+    <script src="../resources/assets/js/ace.min.js"></script> -->
+    
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

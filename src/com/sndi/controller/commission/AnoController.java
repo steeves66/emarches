@@ -425,7 +425,7 @@ public class AnoController {
 	 //Pour demade d'ANO AC
 	 public void chargeNatureDocDem() {
 		 natureDocListe.clear();
-			natureDocListe = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadCode")),
+			natureDocListe = ((List<TNatureDocuments>)iservice.getObjectsByColumn("TNatureDocuments",new ArrayList<String>(Arrays.asList("nadLibelle")),
 					new WhereClause("NAD_CODE",Comparateur.NEQ,"18"),
 					new WhereClause("NAD_TYPE",Comparateur.EQ,"ANO")));
 		 }
