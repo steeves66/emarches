@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+  <link rel="stylesheet" href="../resources/assets/css/ace.min.css"/>
+<ui:composition template="/template/templatePage.xhtml">
+  <ui:define name="contents">  
+      
+<h:form id="gnl">	
+ <section class="content-header">
+      <h1>
+       #{controleController.libelle}
+        <small>#{controleController.libelle1}</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
+        <li class="active"> #{controleController.libelleTitle} </li>
+      </ol>
+    </section>
+  
+    <section class="content">
+<div class="box box-default">
+<div class="panel-primary">
+           <div class="panel-heading" style="background-color: #f88b2e">Liste des #{controleController.libelleTitle}
+           </div>
+          </div>
+          <div class="box-body">
+            <div class="col-xs-12">
+              <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/> 
+
+					</div>
+					Liste des #{controleController.libelleTitle} du 
+					<p:calendar  value="#{situationController.dateDeb}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr">
+					</p:calendar>
+					au
+					<p:calendar  value="#{situationController.dateFin}" navigator="true"  pattern="dd/MM/yyyy" mask="true" locale="fr">
+					</p:calendar>
+					<p:commandLink styleClass="btn btn-success" value="Rechercher" style="margin-left:10px;"  update=":content"/>
+					
+					 <p:dataTable id="ndTble" var="slctdTb"  emptyMessage="Aucun #{controleController.libelleTitle} trouvé" rows="10" 
+                         paginator="true"
+                         rowsPerPageTemplate="5,10,15">
+             
+         				
+                          <p:column headerText="#{controleController.colonne1}" styleClass="#{controleController.numero}">
+				            <h:outputText />
+				        </p:column>
+				        
+				         <p:column headerText="#{controleController.colonne2}" styleClass="col-sm-3">
+				            <h:outputText />
+				        </p:column>  
+
+				        <p:column headerText="#{controleController.colonne3}" styleClass="col-sm-2">
+				            <h:outputText />
+				        </p:column>
+				        
+				         <p:column headerText="#{controleController.colonne4}" styleClass="col-sm-2">
+				            <h:outputText />
+				        </p:column>
+				        
+				         <p:column headerText="#{controleController.colonne5}" styleClass="col-sm-1">
+				            <h:outputText styleClass="pull-right" >
+				            
+				            </h:outputText>
+				        </p:column>
+				        
+				      
+				         <p:column headerText="Actions" width="4%">
+                              <button type="button" class="btn btn-xs btn-success" style="background-color: #036d3b">
+                              <p:commandLink  title="Apercu" update=":content">
+                                <i class="ace-icon fa fa-search-plus bigger-130"  style="color: white"></i>
+                                </p:commandLink>
+                              </button>
+                              <!-- <i class="fa fa-exchange"></i> -->
+
+				         </p:column>    
+        <f:facet name="paginatorTopLeft">
+            <p:commandButton type="button" icon="fa fa-sync" />
+        </f:facet>
+ 
+        <f:facet name="paginatorBottomRight">
+            <p:commandButton type="button" icon="fa fa-cloud-upload" />
+        </f:facet>
+    </p:dataTable>
+
+ <p:commandLink styleClass="btn btn-danger mr10" value="Fermer" style="margin-top:10px;"   update=":content"/>
+ 
+  <p:commandLink styleClass="btn btn-warning pull-right"  style="margin:5px ; background-color: #f88b2e"   ajax="false">
+                        <i class="ace-icon fa fa-file-text"></i>  
+                               Editer par période
+  </p:commandLink>
+  
+    <p:commandLink styleClass="btn btn-warning pull-right"  style="margin:5px ; background-color: #f88b2e"   ajax="false">
+                        <i class="ace-icon fa fa-file-text"></i>  
+                               Edition globale
+   </p:commandLink>
+ 
+          </div>
+          
+          </div>
+          
+       </section>
+         
+
+</h:form>
+
+<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
+ 		<div align="center">
+        <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+        <p:commandButton value="Annuler" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </div>
+    </p:confirmDialog>
+    
+</ui:define>
+</ui:composition>
+</html>

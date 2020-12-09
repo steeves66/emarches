@@ -193,6 +193,11 @@ public class SituationController {
 	 public String renderPage(String value ,String action) throws IOException{ 
 		 controleController.redirectionDynamicProcedures(action);
 			switch(value) { 
+			
+			case "accueil":
+				userController.renderPage(value);
+				break;
+				
 			case "sit1":
 				userController.renderPage(value);
 				break;
@@ -208,7 +213,7 @@ public class SituationController {
 			case "per1":
 				userController.renderPage(value);
 				break;
-			}
+			}  
 		    
 		    return userController.renderPage(value);   
 	}

@@ -5299,7 +5299,7 @@ public class DaoController {
 														    	
 														
 													                  }else 
-													                     if(slctdTd.getDacMention().equalsIgnoreCase("Validé et retour Ã Â  l'AC")){
+													                     if(slctdTd.getDacMention().equalsIgnoreCase("A Valider et retour à l'AC")){
 													    	                statutSanction ="D5V";
 															                statutSanRetour ="0";
 													                         }
@@ -5316,7 +5316,7 @@ public class DaoController {
 												                                        daoBinome =(List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_DAC_CODE")),
 												                    							new WhereClause("DAF_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTd.getDacCode()));
 												                    							if (!daoBinome.isEmpty()) {
-												                    								//Mis ÃƒÂ   jour de tous les DAO dans T_DAO_AFFECTATION
+												                    								//Mis à  jour de tous les DAO dans T_DAO_AFFECTATION
 												                    								for(TDaoAffectation dao : daoBinome) {
 												                    									 dao.setDafStaCode(statutSanction);
 												                    									 dao.setDafStatutRetour(statutSanRetour);

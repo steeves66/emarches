@@ -400,6 +400,13 @@ public class ControleController {
 	public boolean lignedefaut = false;
 	//String actionPrivilèges ="";
 	
+	//Colonnes pour les consultations
+	private String colonne1;
+	private String colonne2;
+	private String colonne3;
+	private String colonne4;
+	private String colonne5;
+	private String colonne6;
 	
 	@PostConstruct
 	public void postContr() {
@@ -542,7 +549,20 @@ public class ControleController {
 	 
 	//Redirection en fonction du traitement a éffectuer
 	 public String redirectionDynamic(String action) {
-		 if(action.equalsIgnoreCase("ENG")) {
+		 
+		 if(action.equalsIgnoreCase("ACC")) {
+			   libelleDmp="DGMP";
+		       libelle="SAISIE D'UN NOUVEL AVIS GENERAL DE PASSATION DE MARCHES";
+		       libelle1="Liste des AGPM Saisie par l'autorité Contractante";
+		       panelDetail=false;
+			   panelForm=true;
+			   panelTraitement=false;
+		       panelRegister=true;
+		       panelUpdate=false;
+		       panelAgpmTableauBordSai = true;
+			   panelAgpmTableauBordVal = false;
+		    }else
+		    	if(action.equalsIgnoreCase("ENG")) {
 			   libelleDmp="DGMP";
 		       libelle="SAISIE D'UN NOUVEL AVIS GENERAL DE PASSATION DE MARCHES";
 		       libelle1="Liste des AGPM Saisie par l'autorité Contractante";
@@ -6717,11 +6737,93 @@ public class ControleController {
 																	    			//fonctionalite = "listAvenantAc";
 																	    			libelle="TRANSMISSION DE LA DU DEMANDE N°";	
 																	    		}else
-																	    			if(action.equalsIgnoreCase("SIT")) {
-																		    			type = "Commission";
+																	    			if(action.equalsIgnoreCase("SITANO")) {
+																		    			type = "ANO";
 																		    			libelle="DEMANDE DE NON OBJECTION SUR L'AVIS";
-																		    			libelleDmp="DGMP";
-																		    		}
+																		    			typePlan = "PN";
+																		    			libelleTitle=" de l'Avis";
+																		    			libelle1="Situation par période";
+																		    			libelleSmall="Avis d'Appel d'Offres";
+																		    			panel1 = true;
+																		    			panel2 = true;
+																		    			panel3 = true;
+																		    			panel4 = false;
+																		    			panel5 = false;
+																		    			panel6 = false;
+																		    		}else
+																			    			if(action.equalsIgnoreCase("PERAVS")) {
+																				    			type = "DAC";
+																				    			typePlan ="PN";
+																				    			libelle="AVIS D'APPEL D'OFFRES";
+																				    			libelleSmall="Avis d'Appel d'Offres";
+																				    			libelleTitle="de l'Avis";
+																				    			libelle1="Situation par période";
+																				    			colonne1 = "N° AVIS";
+																				    			colonne2 = "Objet";
+																				    			colonne3 = "Type Marché";
+																				    			colonne4 = "Mode de Passation";
+																				    			colonne5 = "Date de Saisie";
+																				    			colonne6 = "";
+																				    			numero="5%";
+																				   			    bailleur="col-sm-2";
+																				   			    accord="col-sm-1";
+																				   			    projet="col-sm-6";
+																				   			    organe="col-sm-2";
+																				   			    actions="10%";
+																				    		}else
+																				    			if(action.equalsIgnoreCase("SITDAO")) {
+																					    			type = "DAC";
+																					    			typePlan = "PN";
+																					    			libelle="DOSSIER D'APPEL D'OFFRES (DAO)";
+																					    			libelleSmall="Dossier d'Appel d'Offres";
+																					    			libelleTitle="du DAO";
+																					    			libelle1="Situation par période";
+																					    			panel1 = true;
+																					    			panel2 = true;
+																					    			panel3 = false;
+																					    			panel4 = true;
+																					    			panel5 = true;
+																					    			panel6 = false;
+																					    			numero="5%";
+																					   			    bailleur="col-sm-2";
+																					   			    accord="col-sm-1";
+																					   			    projet="col-sm-6";
+																					   			    organe="col-sm-2";
+																					   			    actions="10%";
+																					    		}else
+																					    			if(action.equalsIgnoreCase("PERDAO")) {
+																						    			type = "DAC";
+																						    			typePlan ="PN";
+																						    			libelle="DOSSIER D'APPEL D'OFFRES (DAO)";
+																						    			libelleSmall="Dossier d'Appel d'Offres";
+																						    			libelle1="Situation par période";
+																						    			libelleTitle="DAO";
+																						    			colonne1 = "N° DAO";
+																						    			colonne2 = "Objet";
+																						    			colonne3 = "Type Marché";
+																						    			colonne4 = "Mode de Passation";
+																						    			colonne5 = "Date de Saisie";
+																						    			colonne6 = "";
+																						    			numero="col-sm-1";
+																						   			    bailleur="col-sm-2";
+																						   			    accord="col-sm-1";
+																						   			    projet="col-sm-6";
+																						   			    organe="col-sm-2";
+																						   			    actions="10%";
+																						    		}else
+																						    			if(action.equalsIgnoreCase("PERANO")) {
+																							    			type = "ANO";
+																							    			typePlan ="PN";
+																							    			libelle="AVIS DE NON OBJECTION (ANO)";
+																							    			libelle1="Situation par période";
+																							    			libelleTitle="ANO";
+																							    			colonne1 = "N° AVIS";
+																							    			colonne2 = "Objet";
+																							    			colonne3 = "Type Marché";
+																							    			colonne4 = "Mode de Passation";
+																							    			colonne5 = "Date de Saisie";
+																							    			colonne6 = "";
+																							    		}
 							    		
 							    		                       //FIN GESTION DES PROCEDURES DERROGATOIRES
 			 	    			
@@ -10057,7 +10159,66 @@ public class ControleController {
 	public void setLignedefaut(boolean lignedefaut) {
 		this.lignedefaut = lignedefaut;
 	}
-	
+
+
+	public String getColonne1() {
+		return colonne1;
+	}
+
+
+	public void setColonne1(String colonne1) {
+		this.colonne1 = colonne1;
+	}
+
+
+	public String getColonne2() {
+		return colonne2;
+	}
+
+
+	public void setColonne2(String colonne2) {
+		this.colonne2 = colonne2;
+	}
+
+
+	public String getColonne3() {
+		return colonne3;
+	}
+
+
+	public void setColonne3(String colonne3) {
+		this.colonne3 = colonne3;
+	}
+
+
+	public String getColonne4() {
+		return colonne4;
+	}
+
+
+	public void setColonne4(String colonne4) {
+		this.colonne4 = colonne4;
+	}
+
+
+	public String getColonne5() {
+		return colonne5;
+	}
+
+
+	public void setColonne5(String colonne5) {
+		this.colonne5 = colonne5;
+	}
+
+
+	public String getColonne6() {
+		return colonne6;
+	}
+
+
+	public void setColonne6(String colonne6) {
+		this.colonne6 = colonne6;
+	}
 	
 	
 }

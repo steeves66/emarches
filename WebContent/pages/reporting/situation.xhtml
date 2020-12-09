@@ -9,8 +9,8 @@
 	
 <section class="content-header">
       <h1>
-       Avis de Non Objection (ANO)
-        <small>Situation</small>
+       #{controleController.libelle}
+        <small>#{controleController.libelle1}</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
@@ -41,7 +41,7 @@
    						  <p:commandLink styleClass="btn btn-primary m-r-5" style="background-color: #036d3b; border: #036d3b" value="Initialiser"   update=":gnl"> </p:commandLink>		
 				   </div>
                        <div class="form-group has-feedback">
-   						    <p:inputText type="text" class="form-control"  placeholder="Code de l'Avis"  > 
+   						    <p:inputText type="text" class="form-control"  placeholder="Code #{controleController.libelleTitle}"  > 
 							</p:inputText>
     						<i class="glyphicon glyphicon-search form-control-feedback"></i>		
 				   </div>
@@ -55,16 +55,20 @@
 		         </div>
 		         <p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/>
                     </div>
+                    
+                    <h:panelGroup rendered="#{controleController.panel1}">	
                           <fieldset style="border: 1px solid;padding: 10px;">
-					   				 <legend>Statut de l'Avis N° </legend>
-					   				 <div align="center"><strong>Situation de l'Avis : </strong> <span style="color: red;font-weight:bold;"> </span> </div><br/>
-				   		
+					   				 <legend>Statut #{controleController.libelleTitle} N° </legend>
+					   				 <div align="center"><strong>Situation #{controleController.libelleTitle} : </strong> <span style="color: red;font-weight:bold;"> </span> </div><br/>
 					   		<!-- Form pour demande -->
 					   	 </fieldset>  
-					   	 
+					</h:panelGroup>	 
 
-					   	 <fieldset style="border: 1px solid; padding: 10px;">
-					   	   <legend>Informations sur l'Avis d'Appel D'offres</legend>
+
+
+                   <h:panelGroup rendered="#{controleController.panel2}">
+					   <fieldset style="border: 1px solid; padding: 10px;">
+					   	   <legend>Informations sur #{controleController.libelleSmall} </legend>
 					   		  <div class="row">
 					   			<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Code</label></div>
 								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
@@ -97,11 +101,41 @@
 					   		<div class="row">
 								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Ouverture Financière</label></div>
 								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
-					   		</div>
-						             
+					   		</div>       
 					   	 </fieldset>
-					   
-			     <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
+					</h:panelGroup>
+					
+					     <h:panelGroup rendered="#{controleController.panel4}">
+					   <fieldset style="border: 1px solid; padding: 10px;">
+					   	   <legend>Informations sur #{controleController.libelleSmall} </legend>
+					   		  <div class="row">
+					   			<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">N° #{controleController.libelleTitle} </label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Objet</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+							</div>
+							
+							<div class="row">	
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Type de Marché</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Mode de Passation</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+							</div> 
+							
+							  
+							
+							<div class="row">	
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Financement</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+								<div class="col-xs-6 col-sm-3"><label class="control-label pull-right">Coût du DAO</label></div>
+								<div class="col-xs-6 col-sm-3"><h:outputText  /></div>
+							</div> 
+							    
+					   	 </fieldset>
+					</h:panelGroup>
+					
+			<h:panelGroup rendered="#{controleController.panel5}">		   
+			   <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
    				 <legend>PPM</legend>
    				 <p:dataTable id="filia" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun PPM trouvé">
 				         <p:column headerText="Objet" styleClass="col-sm-4">
@@ -117,24 +151,34 @@
 				        </p:column>
 				    </p:dataTable>
    				 </fieldset>	 
+			</h:panelGroup>		   	 
 					   	 
-					   	 
+			<h:panelGroup rendered="#{controleController.panel3}">			   	 
 			<fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
    				 <legend>Lots</legend>
    				 <p:dataTable id="filots" styleClass="table mb0 dt-on-steroids dataTable"  emptyMessage="Aucun lot trouvé">
-				        <p:column headerText="Ordre" styleClass="col-sm-6">
-				            <h:outputText  />
-				        </p:column>
-				       
-				         <p:column headerText="Libelle" styleClass="col-sm-4">
-				            <h:outputText  />
-				        </p:column>
-				        <p:column headerText="Imputation" styleClass="col-sm-2">
+				        
+				        <p:column headerText="N° Lot" styleClass="col-sm-1">
 				                <h:outputText  />
 				        </p:column>
+				        
+				        <p:column headerText="Objet" styleClass="col-sm-4">
+				            <h:outputText  />
+				        </p:column>
+				        <p:column headerText="Imputation" styleClass="col-sm-3">
+				                <h:outputText  />
+				        </p:column>
+				        <p:column headerText="Caution de la Garantie" styleClass="col-sm-2">
+				                <h:outputText  />
+				        </p:column>
+				       <p:column headerText="Variante ? (OUI / NON)" styleClass="col-sm-1">
+				                <h:outputText  />
+				        </p:column>
+				         
+				        
 				    </p:dataTable>
    			 </fieldset>
-   						   	 
+   	</h:panelGroup>		   	 
 					   	 
 			<fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
    				 <legend>Historique des Traitements</legend>
@@ -163,12 +207,23 @@
 				    <fieldset style="border: 1px solid; margin-bottom: 15px;padding: 10px;">
    				 <legend>Dossiers</legend>
    				 <p:dataTable id="stretrait" styleClass="table mb0 dt-on-steroids dataTable"   emptyMessage="Aucun dossier trouvé">
-				        <p:column headerText="Titulaire" styleClass="col-sm-6">
-				            <h:outputText  />
+				        
+				        <p:column headerText="Libellé" styleClass="col-sm-4">
+				             <h:outputText >
+		              			 </h:outputText>
 				        </p:column>
 				       
-				       
 				        <p:column headerText="Reference" styleClass="col-sm-4">
+				             <h:outputText >
+		              			 </h:outputText>
+				        </p:column>
+				        
+				         <p:column headerText="Date de Saisie" styleClass="col-sm-1">
+				             <h:outputText >
+		              			 </h:outputText>
+				        </p:column>
+				        
+				         <p:column headerText="Action" styleClass="col-sm-1">
 				             <h:outputText >
 		              			 </h:outputText>
 				        </p:column>
@@ -191,7 +246,7 @@
 								<div class="col-xs-6 col-sm-4"><label class="control-label"></label></div>
 
                         </div>
-                                                <p:commandLink styleClass="btn btn-danger mr10" style="margin-top:60px;margin-left:18px" value="Fermer"   update=":content"/>
+                                                <p:commandLink styleClass="btn btn-danger mr10" style="margin-top:60px;margin-left:18px" value="Fermer" action="#{situationController.renderPage('accueil','ACC')}"  update=":content"/>
                                                
                       </div><!-- /.widget-main -->
                         

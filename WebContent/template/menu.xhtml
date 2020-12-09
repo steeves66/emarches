@@ -1581,11 +1581,10 @@
           </ul>
         </li>
          <!-- FIN M6 -->
-         
-         
-         <!-- FIN M7 -->
-          <h:panelGroup rendered="false">
-          <li class="treeview">
+    
+       <!-- DEBUT M7 :  -->
+       <h:panelGroup rendered="false">
+         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Reporting</span>
             <span class="pull-right-container">
@@ -1593,32 +1592,291 @@
             </span>
           </a> 
            <ul class="treeview-menu">
-            <li>
-            <p:commandLink action="#{situationController.renderPage('sit1')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Situation DAO
-             </p:commandLink>
-            </li>
             
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
             <li>
-            <p:commandLink action="#{situationController.renderPage('sit2')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Situation de l'Avis
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation d'un AGPM
              </p:commandLink>
             </li>
             
              <li>
-            <p:commandLink action="#{situationController.renderPage('sit3','SIT')}" update=":content" > 
-            <i class="fa fa-circle-o"></i>Avis de Non Objection (ANO)
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>AGPM par période
              </p:commandLink>
             </li>
+
+          </ul>     
+         </li>
+              
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Classique</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#" update=":content" >
+            <i class="fa fa-circle-o"></i>Situation d'un PGPM
+             </p:commandLink>
+            </li>
+            
+            <li>
+              <p:commandLink action="#" update=":content" >
+            <i class="fa fa-circle-o"></i>PGPM par période
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+              <p:commandLink action="#" update=":content" >
+            <i class="fa fa-circle-o"></i>Situation d'un PPM
+             </p:commandLink>
+            </li>
+            
+            <li>
+              <p:commandLink action="#" update=":content" >
+            <i class="fa fa-circle-o"></i>PPM par période
+             </p:commandLink>
+            </li>
+          </ul>     
+         </li>
+          </ul>     
+         </li>
+         
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+              <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PGSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#" update=":content" >
+            <i class="fa fa-circle-o"></i>Situation d'un PGSPM
+             </p:commandLink>
+            </li>
+            
+            <li>
+            <p:commandLink action="#" update=":content" >
+            <i class="fa fa-circle-o"></i>PGSPM par période
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+           
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>PSPM</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation d'un PSPM
+             </p:commandLink>
+            </li>
+            
+              <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>PSPM par période
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
            
           </ul>     
          </li>
-          
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Gestion des AMI / PRQ</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>AMI</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+            <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation d'un AMI
+             </p:commandLink>
+            </li>           
+              <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>AMI par période
+             </p:commandLink>
+            </li>  
+          </ul>     
+         </li>
+         
+          <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Préqualification</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+          <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation d'une PRQ
+             </p:commandLink>
+            </li>
+           
+              <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>PRQ par période
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+        
+          </ul>     
+         </li>
+         
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Dossier d'Appel d'Offres</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           
+           
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Normale</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+            <p:commandLink action="#{daoController.renderPage('sit3','SITDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation d'un DAO
+             </p:commandLink>
+            </li>
+			 
+            <li>
+            <p:commandLink action="#{situationController.renderPage('per1','PERDAO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>DAO par période
+             </p:commandLink>
+            </li>
+         
+          </ul>     
+         </li>
+         
+         
+            <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Procédure Simplifiée</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation d'un DAO
+             </p:commandLink>
+            </li>
+			 
+            <li>
+            <p:commandLink action="#" update=":content" > 
+            <i class="fa fa-circle-o"></i>DAO par période
+             </p:commandLink>
+            </li>
+         
+          </ul>     
+         </li>
+           
+          </ul>     
+         </li>
+         
+         
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-list"></i> <span>Avis de Non Objection</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a> 
+           <ul class="treeview-menu">
+           <li>
+            <p:commandLink action="#{daoController.renderPage('sit3','SITANO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>Situation d'un ANO
+             </p:commandLink>
+            </li>
+			 
+            <li>
+            <p:commandLink action="#{situationController.renderPage('per1','PERANO')}" update=":content" > 
+            <i class="fa fa-circle-o"></i>ANO par période
+             </p:commandLink>
+            </li>
+
+          </ul>     
+         </li>
+         
+          </ul>     
+         </li>
          </h:panelGroup>
-        <!-- FIN M7 -->
+         <!-- FIN M7 -->  
          
          </h:panelGroup>
-          <!-- DEBUT TRAITEMENT DMP-->
+          <!-- FIN TRAITEMENT DMP-->
           
           <!-- DEBUT TRAITEMENT DU MENU CHEF DE SERVICE -->
          <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
