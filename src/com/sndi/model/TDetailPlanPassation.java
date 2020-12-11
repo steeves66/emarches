@@ -92,6 +92,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppDateRecepLettr;
 	private Date dppDateNotAtt;
 	private long dppNbOuv;
+	private Long dppDppId;
 	private Set<THistoPlanPassation> THistoPlanPassations = new HashSet<THistoPlanPassation>(0);
 	private Set<TCharge> TCharges = new HashSet<TCharge>(0);
 	private Set<TFinancementPpm> TFinancementPpms = new HashSet<TFinancementPpm>(0);
@@ -125,7 +126,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 			Date dppDateExecFin, String dppActeurSaisie, Date dppDateSaisie, String dppStructureConduc, String dppStructureBenefi, String dppPartiePmePmi,String dppStatutDao,Date dppInvEntre, Date dppDateAttApprobCpmp,Date dppDateJugementOffreTec,Date dppDateValAc,
 			Date dppDateValCpmp, Date dppDateValDmp,String dppBailleur,String dppTypeFinance,Date dppApprobAno,
 			Date dppDteModif,String dppRecherche,String dppFonCodPf, String dppFonCodDmp,Long dppMontant, String dppNatInt, String dppTypeStrConduc, String dppStatutAno,
-			 Date dppDateSolFact,Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,long dppNbOuv,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
+			 Date dppDateSolFact,Date dppDateRecepFact, Date dppDateRecepLettr, Date dppDateNotAtt,long dppNbOuv,Long dppDppId,Set<THistoPlanPassation> THistoPlanPassations, Set<TCharge> TCharges, Set<TDacSpecs> TDacSpecses,
 			Set<TFinancementPpm> TFinancementPpms) {
 		this.dppId = dppId;
 		this.TLBudgets = TLBudgets;
@@ -190,6 +191,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 		this.dppDateRecepLettr = dppDateRecepLettr;
 		this.dppDateNotAtt = dppDateNotAtt;
 		this.dppNbOuv = dppNbOuv;
+		this.dppDppId = dppDppId;
 		this.THistoPlanPassations = THistoPlanPassations;
 		this.TCharges = TCharges;
 		this.TFinancementPpms = TFinancementPpms;
@@ -811,6 +813,15 @@ public class TDetailPlanPassation implements java.io.Serializable {
 
 	public void setDppNbOuv(long dppNbOuv) {
 		this.dppNbOuv = dppNbOuv;
+	}
+	
+	@Column(name = "DPP_DPP_ID", precision = 10, scale = 0)
+	public Long getDppDppId() {
+		return this.dppDppId;
+	}
+
+	public void setDppDppId(Long dppDppId) {
+		this.dppDppId = dppDppId;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "TDetailPlanPassation")

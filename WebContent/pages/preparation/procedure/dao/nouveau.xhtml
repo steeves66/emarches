@@ -698,6 +698,7 @@
 		                </f:facet>
 		                <f:facet name="input"> 
 		                <p:inputText value="#{slctdTb.laaObjet}" style="width:100%">
+		                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
 		                <p:ajax event="blur" listener="#{daoController.updateListeLotLibelle()}" global="false" process="@this" update=":content" /> 
 		                 </p:inputText>
 		                 </f:facet>
@@ -742,7 +743,7 @@
 		                <f:facet name="input"> 
 		                <p:inputText styleClass="text-right"  value="#{slctdTb.laaMtEst}" style="width:100%">
 		                 <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-
+                        <p:ajax event="blur" listener="#{daoController.updateMontantEst()}" global="false" process="@this" update=":content" /> 
 		                 </p:inputText>
 		                 </f:facet>
 		               </p:cellEditor>
@@ -759,6 +760,7 @@
 		                <f:facet name="input"> 
 		                <p:inputText styleClass="text-right" id="mont_caut2" value="#{slctdTb.laaMtCaut}" style="width:100%">
 		                 <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                 <p:ajax event="blur" listener="#{daoController.updateMontantCaut()}" global="false" process="@this" update=":content" />
 		                 </p:inputText>
 		                 </f:facet>
 		               </p:cellEditor>
@@ -800,7 +802,7 @@
 				         <p:column headerText="Actions" width="5%">
 				            <p:commandLink styleClass="btn btn-xs btn-danger" style= "margin-left:5px" action="#{daoController.removeLot}" title="Supprimer" update="gnl">
 			                   <i class="ace-icon fa fa-trash bigger-120"  style="color: white"></i>  
-			                   <p:confirm header="Confirmation" message="Etes-vous sur de vouloir supprimer ?" icon="ui-icon-alert" />                              
+			                   <p:confirm header="Confirmation" message="Etes-vous sûr de vouloir supprimer ?" icon="ui-icon-alert" />                              
 			                   <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
 			                </p:commandLink>
 				        </p:column>

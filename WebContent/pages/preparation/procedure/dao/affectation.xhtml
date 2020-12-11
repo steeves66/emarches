@@ -10,8 +10,8 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
       <h3>
-       <!-- #{controleController.libelle} --> 
-       AFFECTATION DES DOSSIERS D'APPEL A CONCURRENCE
+        #{controleController.libelleDao3} 
+        
        <!-- #{controleController.libelle} --> 
       </h3>
       <ol class="breadcrumb">
@@ -223,7 +223,7 @@
   
     
     <h:form id="apercuDAOAff">
-	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="">
+	        <p:dialog  widgetVar="transDaoAff" modal="true"  showEffect="fade" hideEffect="fade" width="70%" closable="true" header="Réaffectation des DAO">
 	         <div class="row">
                    <div class="col-xs-12"><p:messages id="message" showDetail="false" autoUpdate="true"  closable="true"/></div>
              </div>
@@ -232,33 +232,33 @@
 	            <div class="col-md-12">
 		            <div class="box box-success box-solid" >
 		              <div class="box-header with-border">
-			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES DAO DEJA AFFECTES</div></div>
+			          <div class="col-md-12 "><div  style="color: #fff">LISTE DES #{controleController.libelleA} DEJA  AFFECTES</div></div>
 			         </div>
 			          <div class="box-body">
 			          
                         <p:dataTable id="tabDossier" styleClass="table dt-on-steroids mb0" var="slctdTb" value="#{daoController.listeDAO}"
-                        rowKey="#{slctdTb.dacCode}" selection="#{daoController.listeDAO}" emptyMessage="Aucun Dao enrégistré">
+                        rowKey="#{slctdTb.dacCode}" selection="#{daoController.reaffectlisteDAO}" emptyMessage="Aucun #{controleController.libelleA} enrégistré">
 			           
 			           
 			           <p:column selectionMode="multiple" style="width:40px;text-align:center"/>
 
                         <p:column headerText="N° #{controleController.type}" styleClass="col-sm-3" >
-         				<h:outputText value="#{slctdTb.tdcLibelle}" />
+         				<h:outputText value="#{slctdTb.dacCode}" />
 				        </p:column>
 				        
-				        <p:column headerText="Objet" styleClass="col-sm-6" >
+				        <p:column headerText="Objet" styleClass="col-sm-5" >
          				<h:outputText value="#{slctdTb.dacObjet}" />
 				        </p:column>
 				        
-				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-3" >
+				        <p:column headerText="Type #{controleController.type}" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.tdcLibelle}" />
 				        </p:column>
 				       
-         				 <p:column headerText="Type Marché" styleClass="col-sm-4" >
+         				 <p:column headerText="Type Marché" styleClass="col-sm-2" >
          				<h:outputText value="#{slctdTb.tymLibelleCourt}" />
 				        </p:column> 
 				       
-         				<p:column headerText="Mode de Passation" styleClass="col-sm-4" >
+         				<p:column headerText="Mode de Passation" styleClass="col-sm-3" >
          				<h:outputText value="#{slctdTb.mopLibelleLong}" />
 				        </p:column> 
 				        
@@ -270,11 +270,19 @@
 	            
 	            
 	             <div class="pull-right ">
-			            <p:commandLink action="#{daoController.reafficherCsv()}"  styleClass="btn btn-success row pull-right" oncomplete="PF('transDaoDlg').hide()" style="background-color: #036d3b; margin-right:5px;color:#fff" update=":gnl">
-			            <p:confirm header="Confirmation" message="Confirmez vous la réaffectation ?" icon="ui-icon-alert" />
+			            <p:commandLink action="#{daoController.reaffecterCsv()}"  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:5px;color:#fff" update="apercuDAOAff:tabDossier">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la réaffectation ?" icon="ui-icon-alert" />
 			             <i class="ace-icon fa fa-exchange"></i> Réaffecter 
 			            </p:commandLink>
               </div>
+              
+               <div class="pull-left">
+			           <p:commandLink styleClass="btn btn-warning" oncomplete="PF('transDaoAff').hide()" action="#{daoController.chargeFonctionImput()}" style="background-color: #f88b2e;margin-top:10px;" update=":gnl">
+                       <i class="ace-icon fa fa-close bigger-130"></i> Fermer
+		            </p:commandLink>
+              </div>
+              
+               
 	            
 	            
       </p:dialog>

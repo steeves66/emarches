@@ -170,12 +170,12 @@
 					 	
 							<div class="col-md-2 ">
 							<h:panelGroup rendered="#{controleController.btn_daoPn}" >
-								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGDAO')}"  update=":content">
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAO" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGDAO')}"  update=":content">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
 								</p:commandLink>
 						  </h:panelGroup>
 						  <h:panelGroup rendered="#{controleController.btn_daoPs}" >
-								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAC" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGDPS')}"  update=":content">
+								  <p:commandLink styleClass="btn btn-warning btn-rounded waves-effect waves-light pull-right" style=" background-color: #f88b2e" data-original-title="Nouveau DAO" data-toggle="tooltip" rendered="#{controleController.btn_new}" action="#{daoController.renderPage('dao2','ENGDPS')}"  update=":content">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs">Nouveau #{controleController.type}</span>
 								</p:commandLink>
 						  </h:panelGroup>
@@ -312,22 +312,30 @@
                                <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
                               <p:commandLink action="#{daoController.transmettreCpmp()}" styleClass="btn btn-xs btn-success"  title="Transmettre" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <p:confirm header="Confirmation" message="Confrmez-vous la transmission du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" />
+                                 <p:confirm header="Confirmation" message="Confirmez-vous la transmission du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
                               </h:panelGroup>
                               
                               
                               <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
-                                <h:panelGroup rendered="#{controleController.affDao}">   
+                             <h:panelGroup rendered="#{controleController.affDao}">   
                              <p:commandLink action="#{daoController.renderPage('dao5','AFFDAO')}" styleClass="btn btn-xs btn-success"  title="Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
                             </h:panelGroup>
+                            
+                               
+                             <p:commandLink rendered="#{controleController.affDao}" action="#{daoController.finAffectation()}" styleClass="btn btn-xs btn-success"  title="Fin de l'Affectation du DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
+                                 <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
+                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin à l'affectation du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
+                             </p:commandLink>
+                            
                             </h:panelGroup>
                             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CSV'}">
-                             <p:commandLink action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
+                             <p:commandLink rendered="#{controleController.btn_exam}" action="#{daoController.renderPage('dao6','EXADAO')}"  styleClass="btn btn-xs btn-success" style="background-color: #036d3b; border: #036d3b; margin-left: 3px" title="examen" update=":content">
                                 <i class="ace-icon fa fa-exchange bigger-130" style="color: white"></i> 
                                    <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" /> 
                             </p:commandLink>
@@ -335,7 +343,7 @@
                             
                                <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication du DAO ?" icon="ui-icon-alert" />
+                                 <p:confirm header="Confirmation" message="Confirmez-vous la publication du DAO ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
                              
@@ -350,7 +358,7 @@
                           <p:commandLink class="btn btn-xs btn-sucess" style="background-color: #036d3b;margin-right:3px"  action="#{daoController.finVente()}"
                                 title="Fin de la vente" update=":content">
                               <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
-                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente du DAC N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
+                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin à la vente du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
                           </p:commandLink>
                           
@@ -363,7 +371,7 @@
                           <p:commandLink rendered="false" class="btn btn-xs btn-sucess" style="background-color: #f88b2e;margin-right:3px"  action="#{daoController.finRetrait()}"
                                 title="Fin de retrait" update=":content">
                               <i class="ace-icon fa fa-close bigger-120"  style="color: white"></i>  
-                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin au retrait du DAC N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
+                                <p:confirm header="Confirmation" message="Voulez-vous mettre fin au retrait du DAO N° #{slctdTb.dacCode} ?" icon="ui-icon-alert" /> 
                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />                             
                           </p:commandLink>
                          </h:panelGroup> 
@@ -526,7 +534,7 @@
                             
                               <p:commandLink rendered="#{controleController.publication}" action="#{daoController.publier()}" styleClass="btn btn-xs btn-success"  title="Publier le DAO" style="background-color: #036d3b;margin-right:3px" update=":content">
                                 <i class="ace-icon fa fa-share bigger-130"  style="color: white"></i>
-                                 <p:confirm header="Confirmation" message="Confrmez-vous la publication du DAO ?" icon="ui-icon-alert" />
+                                 <p:confirm header="Confirmation" message="Confirmez-vous la publication du DAO ?" icon="ui-icon-alert" />
                                  <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.slctdTd}" />
                              </p:commandLink>
 				         </p:column>   

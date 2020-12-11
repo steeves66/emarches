@@ -2149,6 +2149,7 @@ public class ControleController {
 				   									         typePlan ="PN";
 				   									         libelle1="LISTE DES AVIS A MANIFESTATION D'INTERET (AMI)";
 				   							    			 libelleDao3="AFFECTATION DES AVIS A MANIFESTATION D'INTERET (AMI)";
+				   							    			 libelleA = "AMI";
 				   							    			 btn_new =false;
 				   							    			 btn_affec = true;
 				   							    			 btn_retrait = false;
@@ -3174,15 +3175,7 @@ public class ControleController {
 								panel2 =false;
 								panel3 = false;
 								panel4 = false;
-							/*	panel4 =false;
-								panel5 =false;
-								panel6=false;
-								panel7 = false;
-								panel8 = false;
-								panel9 = false;
-								panel10=false;
-								panel11 = false;
-								panel12 = false;*/
+					
 								venteRecherche = false; 
 								affectationRecherche = false;
 								examenRecherche = false;
@@ -3194,6 +3187,7 @@ public class ControleController {
 								chargeRecherche = false;
 								affDao=false;
 								exaDao=false;
+								btn_exam = true;
 								panelDaoTableauBordAff =false;
 								panelDaoTableauBordRet = false;
 								panelDaoTableauBordSai = false;
@@ -3261,23 +3255,17 @@ public class ControleController {
 				    				        fonctionalite ="listeAffectationCsv";
 				    				        libelle1="LISTE DES DAO EN PROCEDURE NORMALE";
 							    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
+							    			 libelleSmall = "Procédure Normale";
+							    			 libelleA = "DAO";
 							    			 btn_new =false;
 							    			 btn_affec = true;
+							    			 btn_exam = false;
 							    			 btn_retrait = false;
 							    			 btn_valid = false;
 							    			 panel1 =true;
 											 panel2 =false;
 											 panel3 = false;
 											 panel4 = false;
-									/*		 panel4 = false;
-											 panel5 = false;
-											 panel6=false;
-											 panel7 = false;
-											 panel8 = false;
-											 panel9 = false;
-											 panel10 = false;
-											 panel11 = false;
-											 panel12 = false;*/
 											 venteRecherche = false; 
 											 affectationRecherche = true;
 											 examenRecherche = false;
@@ -3352,15 +3340,7 @@ public class ControleController {
 												 panel2 =false;
 												 panel3 = false;
 												 panel4 = false;
-											/*	 panel4 = true;
-												 panel5 = false;
-												 panel6 = false;
-												 panel7=false;
-												 panel8 =false;
-												 panel9 =false;
-												 panel10 = false;
-												 panel11 = false;
-												 panel12 = false;*/
+											    
 												 venteRecherche = false; 
 												 affectationRecherche = false;
 												 examenRecherche = true;
@@ -3522,15 +3502,7 @@ public class ControleController {
 														 panel2 =false;
 														 panel3 = true;
 														 panel4 = false;
-														 /*panel4 = false;
-														 panel5 = false;
-														 panel6 = true;
-														 panel7 =false;
-														 panel8 =false;
-														 panel9 =false;
-														 panel10 = false;
-														 panel11 = false;
-														 panel12 = false;*/
+														
 														 venteRecherche = false; 
 														 affectationRecherche = false;
 														 examenRecherche = false;
@@ -4483,28 +4455,22 @@ public class ControleController {
 														    							     nbreAchat = false;
 														    						   }else
 											    									    	 if(action.equalsIgnoreCase("AFFDPS")) {
-											    									    		 typePlan ="PS";
-											    									    		 type = "DAC";
-											    									    		 libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
+											    									    		     typePlan ="PS";
+											    									    		     type = "DAC";
+											    									    		     libelle1="LISTE DES DAO EN PROCEDURE SIMPLIFIEE";
 											    									    			 libelleDao3="AFFECTATION DES DOSSIERS D'APPEL D'OFFRES";
 											    									    			 libelleSmall="Procédure Simplifiée";
+											    									    			 libelleA = "DAO";
 											    									    			 btn_new =false;
 											    									    			 btn_affec = true;
+											    									    			 btn_exam = false;
 											    									    			 btn_retrait = false;
 											    									    			 btn_valid = false;
 											    									    			 panel1 =true;
 											    													 panel2 =false;
 											    													 panel3 = false;
 											    													 panel4 = false;
-											    											/*		 panel4 = false;
-											    													 panel5 = false;
-											    													 panel6=false;
-											    													 panel7 = false;
-											    													 panel8 = false;
-											    													 panel9 = false;
-											    													 panel10 = false;
-											    													 panel11 = false;
-											    													 panel12 = false;*/
+											    											
 											    													 venteRecherche = false; 
 											    													 affectationRecherche = true;
 											    													 examenRecherche = false;
@@ -5438,6 +5404,8 @@ public class ControleController {
 																						    												 typePlan ="PN";
 																						    												 libelle1="LISTE DES PREQUALIFICATIONS (PRQ)";
 																    															    			 libelleDao3="AFFECTATION DES PREQUALIFICATIONS (PRQ)";
+																    															    			 libelleA = "DAO";
+																    															    			 libelleSmall ="Procédure Simlpe";
 																    															    			 btn_new =false;
 																    															    			 btn_affec = true;
 																    															    			 btn_retrait = false;
