@@ -2753,6 +2753,7 @@ public class PpmController {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
+						     mode ="PPM";
 						     _logger.info("Panel PPM Activé: "+pavetPPM);
 				    }
 			 }
@@ -2787,7 +2788,6 @@ public class PpmController {
 		     lignepn= false;
 		     ligneps= true;
 				}
-		 
 		//Fin Méthode Love 
 		 
 	 
