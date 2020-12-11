@@ -4826,7 +4826,7 @@ public class DaoController {
 									 						if (!listDao.isEmpty()) {
 									 							newDao= listDao.get(0);
 									 							//newDao.setTStatut(new TStatut("D3A"));
-									 							newDao.setDacStatutRetour("0");
+									 							//newDao.setDacStatutRetour("0");
 									 					        iservice.updateObject(newDao); 
 									 			   	                 }
 									 				  			 				  
@@ -4945,12 +4945,11 @@ public class DaoController {
 									              new WhereClause("DAC_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
 									              new WhereClause("DAC_TD_CODE",WhereClause.Comparateur.EQ,""+type),
 									              new WhereClause("DAC_TYPE_PLAN",WhereClause.Comparateur.EQ,""+plan));
-										
 								}  	  
 							  //Fin du Chargement de la liste des DAO déjà affectés
 							
 							 
-								//Charger la liste des pièces et observations à  examiner par le chef de service suivie de l'observation donnÃ¯Â¿Â½e par le responsable
+								//Charger la liste des pièces et observations à  examiner par le chef de service suivie de l'observation donnee par le responsable
 								 public void chargePiecesByCsv() {
 									 listeDetailCorrection= (List<VDetailCorrection>) iservice.getObjectsByColumn("VDetailCorrection", new ArrayList<String>(Arrays.asList("PID_CODE")),
 											    new WhereClause("DCO_RESPO",WhereClause.Comparateur.EQ,"O"),
@@ -4960,7 +4959,7 @@ public class DaoController {
 											    }
 								             }
 								 
-								//Chargement la liste des piÃ¯Â¿Â½ces et observations ÃƒÂ  examiner par le responsable
+								//Chargement la liste des pièces et observations à  examiner par le responsable
 								 public void chargePiecesByBinome() {
 									 listeCorrectionCharge= (List<VDetailCorrectionCharge>) iservice.getObjectsByColumn("VDetailCorrectionCharge", new ArrayList<String>(Arrays.asList("PID_CODE")),
 												new WhereClause("DCO_DAC_CODE",WhereClause.Comparateur.EQ,""+slctdTda.getDafDacCode()));
@@ -4978,7 +4977,7 @@ public class DaoController {
 
 								 }	
 								 
-								//Affichage de zone de mention si le chargÃ¯Â¿Â½ d'Etude est un responsable de binÃƒÂ´me
+								//Affichage de zone de mention si le chargé d'Etudes est un responsable de binome
 								  public void chargeRespoExiste(){
 									  daoExamen = ((List<TDaoAffectation>) iservice.getObjectsByColumn("TDaoAffectation", new ArrayList<String>(Arrays.asList("DAF_ID")),
 										              new WhereClause("DAF_STA_CODE",WhereClause.Comparateur.EQ,"D3A"),
@@ -6121,7 +6120,7 @@ public class DaoController {
 																}else
 																	 if(controleController.type == "AMI" && controleController.typePlan == "PN") {
 																		 if(userController.getSlctd().getTFonction().getTTypeFonction().getTyfCod().equalsIgnoreCase("CSV")) {
-																                //Affichage des differentes listes du Chef de Service ProcÃ¯Â¿Â½dure en fonction de l'action
+																                //Affichage des differentes listes du Chef de Service Procédure en fonction de l'action
 																	       if(fonct.equalsIgnoreCase("listeAmiCsv")) {
 																		      chargeDataAPublier("AMI", "PN","D6V","DPU");	
 																	        }else {

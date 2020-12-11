@@ -645,11 +645,15 @@
             <div class="col-md-5 "> 
               <div class="input-group input-group-sm col-md-12">
               <span class="input-group-btn">
-                        <p:commandLink action="#{ppmController.reinitialiserPpm('PN')}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+                        <p:commandLink rendered="#{controleController.recherchePPM}" action="#{ppmController.reinitialiserPpm('PN')}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
+                        
+                        <p:commandLink rendered="#{controleController.recherchePSPM}" action="#{ppmController.reinitialiserPpm('PS')}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update=":gnl"  />
                 </span>
                       <p:inputText styleClass="form-control" type="text" value="#{ppmController.multiFiltre}"  placeholder="Effectuer une recherche" ></p:inputText> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.chargerPpmRecherche('PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                      <p:commandLink rendered="#{controleController.recherchePPM}" action="#{ppmController.chargerPpmRecherche('PN')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
+                      
+                      <p:commandLink rendered="#{controleController.recherchePSPM}" action="#{ppmController.chargerPpmRecherche('PS')}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update=":gnl" />
                     </span>
            </div>
            </div>

@@ -2692,7 +2692,7 @@ public class PpmController {
 				 pavetAMI = true;
 				 pavetPRQ = false;
 				 
-				 mode ="AMI";
+				 mode ="de l'AMI";
 			 }else {
 				      if(modePassation.getMopCode().equalsIgnoreCase("PRQ")) {
 				    	     pavetPPM = false;
@@ -2704,6 +2704,7 @@ public class PpmController {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
+						     mode="";
 				    }
 			 }
 		 }
@@ -2714,7 +2715,7 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
-				 mode ="AMI";
+				 mode =" de l'AMI";
 				 _logger.info("Panel AMI Activé: "+pavetAMI);
 			 }else {
 				      if(passationListe.getMopCode().equalsIgnoreCase("PRQ")) {
@@ -2727,7 +2728,7 @@ public class PpmController {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
-						     mode ="PPM";
+						     mode ="";
 						     _logger.info("Panel PPM Activé: "+pavetPPM);
 				    }
 			 }

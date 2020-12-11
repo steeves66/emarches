@@ -373,7 +373,9 @@ public class ControleController {
 	private boolean btn_publier_ppm = false;
 	private boolean btn_publier_pspm = false;
 	private boolean btn_imprimer = false;
-	
+	//
+	private boolean recherchePPM = false;
+	private boolean recherchePSPM = false;
 	//ANO
 	private boolean panelAnoDemdeDmp = false;
 	private boolean panelAnoAvisDmp = false;
@@ -1214,6 +1216,8 @@ public class ControleController {
 							 selectLovePgspm = false;
 							 filtreLignePgpm = true;
 							 filtreLignePgspm = false;
+							 recherchePPM = true;
+							 recherchePSPM = false;
 							 selectPartPgpm = true;
 							 selectPartPgspm = false;
 							 selectTypMPgpm = true;
@@ -1272,6 +1276,8 @@ public class ControleController {
 			    				btn_new =false;
 								panel1 =true;
 								panel2 =false;
+								recherchePPM = true;
+								recherchePSPM = false;
 								panelPpmTableauBordSai = false;
 								panelPpmTableauBordVal = true;
 								panelPpm = true;
@@ -1490,6 +1496,8 @@ public class ControleController {
 							 selectPartPgspm = true;
 							 filtreLignePgpm = false;
 							 filtreLignePgspm = true;
+							 recherchePPM = false;
+							 recherchePSPM = true;
 							 selectTypMPgpm = false;
 							 selectTypMPgspm = true;
 							 panelPpm = false;
@@ -1561,6 +1569,8 @@ public class ControleController {
 								searchAcPs = false;
 								searchCpmpPs = true;
 								searchDmpPs = true;
+								recherchePPM = false;
+								recherchePSPM = true;
 			    			}else
 				    			if(action.equalsIgnoreCase("APEPSPM")) {
 				    				type = "PSPM";
@@ -5413,15 +5423,6 @@ public class ControleController {
 																    															    			 panel1 =true;
 																																				 panel2 =false;
 																																				 panel3 = false;
-																																				/* panel4 = false;
-																																				 panel5 = false;
-																																				 panel6 = false;
-																																				 panel7 = false;
-																																				 panel8 = true;
-																																				 panel9 = false;
-																																				 panel10 = false;
-																																				 panel11 = false;
-																																				 panel12 = false;*/
 																    																			 venteRecherche = false; 
 																    																			 affectationRecherche = true;
 																    																			 examenRecherche = false;
@@ -10186,6 +10187,26 @@ public class ControleController {
 
 	public void setColonne6(String colonne6) {
 		this.colonne6 = colonne6;
+	}
+
+
+	public boolean isRecherchePPM() {
+		return recherchePPM;
+	}
+
+
+	public void setRecherchePPM(boolean recherchePPM) {
+		this.recherchePPM = recherchePPM;
+	}
+
+
+	public boolean isRecherchePSPM() {
+		return recherchePSPM;
+	}
+
+
+	public void setRecherchePSPM(boolean recherchePSPM) {
+		this.recherchePSPM = recherchePSPM;
 	}
 	
 	
