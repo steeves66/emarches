@@ -273,7 +273,8 @@ public class PpmController {
 		 private long  totalLigne;
 		 private long  totalMontant;
 		 private long  totalMontantPpm;
-		 private long  nbreOuv;
+		 //private long  nbreOuv;
+		 private String  nbreOuv;
 		 private String filtreTypeMarche="";
 		 private String filtreModePassation="";
 		 private String observation="";
@@ -340,7 +341,7 @@ public class PpmController {
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
-		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null)
+		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -403,7 +404,7 @@ public class PpmController {
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope223")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
-		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null)
+		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -467,7 +468,7 @@ public class PpmController {
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope224")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
-		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null)
+		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -2412,9 +2413,9 @@ public class PpmController {
 		 //Afficher le nombre d'Ouvertures en choisissant le type de marché
 		 public void affichNbreOuvMarche() {
 			 if(marche.getTymCode().equalsIgnoreCase("11")) {
-				 nbreOuv = 2;
+				 nbreOuv = "2";
 			 }else {
-				 nbreOuv = 1;
+				 nbreOuv = "1";
 			 }
 		 }
 		 
@@ -2475,9 +2476,9 @@ public class PpmController {
 		 //Controler la part reservée aux PME à partir du PGPM
 		 public void controlePart() {
 			 if(pgpm.getGpgTymCode().equalsIgnoreCase("11") || pgpm.getGpgMopCode().equalsIgnoreCase("AAP")) {
-				 nbreOuv = 2;
+				 nbreOuv = "2";
 			 }else {
-				 nbreOuv = 1;
+				 nbreOuv = "1";
 			 }
 		 }
 		 
@@ -2667,9 +2668,9 @@ public class PpmController {
 		 //Afficher le nombre d'ouvertures en choisissant le mode de passation (Mode PN)
 		 public void affichNbreOuvMode() {
 			 if(modePassation.getMopCode().equalsIgnoreCase("AAP")) {
-				 nbreOuv = 2;
+				 nbreOuv = "2";
 			 }else {
-				 nbreOuv = 1; 
+				 nbreOuv = "1"; 
 			 }
 		 }
 		 
@@ -2677,9 +2678,9 @@ public class PpmController {
 		//Afficher le nombre d'ouvertures en choisissant le mode de passation (Mode PS)
 		 public void affichNbreOuvModePs() {
 			 if(passationListe.getMopCode().equalsIgnoreCase("AAP")) {
-				 nbreOuv = 2;
+				 nbreOuv = "2";
 			 }else {
-				 nbreOuv = 1; 
+				 nbreOuv = "1"; 
 			 }
 		 }
 		 
@@ -3234,7 +3235,7 @@ public class PpmController {
     	  		 detailPass.setTStatut(new TStatut("S1S"));
     	  		 detailPass.setDppStatutRetour("0");
     	  		 detailPass.setDppStatutDao("N");
-    	  		 detailPass.setDppNbOuv(nbreOuv);
+    	  		 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
     	  		 iservice.addObject(detailPass);
     	  		 
     	  		
@@ -6130,11 +6131,19 @@ public class PpmController {
 	}
 
 
-	public long getNbreOuv() {
+	/*public long getNbreOuv() {
 		return nbreOuv;
 	}
 
 	public void setNbreOuv(long nbreOuv) {
+		this.nbreOuv = nbreOuv;
+	}*/
+	
+	public String getNbreOuv() {
+		return nbreOuv;
+	}
+
+	public void setNbreOuv(String nbreOuv) {
 		this.nbreOuv = nbreOuv;
 	}
 
@@ -6142,6 +6151,7 @@ public class PpmController {
 	public boolean isPartPpm() {
 		return partPpm;
 	}
+
 	public void setPartPpm(boolean partPpm) {
 		this.partPpm = partPpm;
 	}

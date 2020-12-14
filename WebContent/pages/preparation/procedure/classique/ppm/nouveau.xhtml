@@ -310,13 +310,13 @@
                 </div> 
                 
            <div class="form-group">
-		     <label for="trdao" class="col-sm-3 control-label">Date Trans #{controleController.mode} <span style="color:red;"> *</span></label>
+		     <label for="trdao" class="col-sm-3 control-label">Date Trans #{ppmController.mode} <span style="color:red;"> *</span></label>
 		     <div class="col-sm-3">
 		       <p:calendar id="trdao"  value="#{ppmController.detailPass.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		       </p:calendar> 
 		   </div>
 		   
-		   <label for="rr" class="col-sm-2 control-label">Date Pub #{controleController.mode} <span style="color:red;">*</span></label>
+		   <label for="rr" class="col-sm-2 control-label">Date Pub #{ppmController.mode} <span style="color:red;">*</span></label>
 		     <div class="col-sm-3">
 		    <table>
 		      <tr>
@@ -684,6 +684,7 @@
 		                  <label for="notA" class="col-sm-6 control-label">Notification de l'Attribution<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="notA" value="#{ppmController.geneDate.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="blur" listener="#{ppmController.genereDate('dppDateNotAtt')}"  update=":gnl" />
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateNotAtt')}"  update=":gnl" />
 		                   </p:calendar> 
 		                  </div>
@@ -909,7 +910,7 @@
              <div class="col-md-6">
 		    <div class="form-group">
 		       
-		                  <label for="valdao22Ami" class="col-sm-6 control-label">Approbation #{daoController.mode} à la DMP<span style="color:red;"> *</span></label>
+		                  <label for="valdao22Ami" class="col-sm-6 control-label">Approbation #{ppmController.mode} à la DMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valdao22Ami" value="#{ppmController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoApprobDmp')}"  update=":gnl" />
@@ -920,7 +921,7 @@
              </div>
              <div class="col-md-6">
                <div class="form-group">
-		                  <label for="baildao2Ami" class="col-sm-6 control-label">Approbation #{daoController.mode} Bailleur </label>
+		                  <label for="baildao2Ami" class="col-sm-6 control-label">Approbation #{ppmController.mode} Bailleur </label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="baildao2Ami" value="#{ppmController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoApprobBail')}"  update=":gnl" />
@@ -953,7 +954,7 @@
 		                  </div>
 		                  
 		                 <div class="form-group">
-		                  <label for="rappAmi" class="col-sm-6 control-label">Rapport d'évaluation de #{daoController.mode}<span style="color:red;"></span></label>
+		                  <label for="rappAmi" class="col-sm-6 control-label">Rapport d'évaluation de #{ppmController.mode}<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="rappAmi" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateElabRapport')}"  update=":gnl" />
