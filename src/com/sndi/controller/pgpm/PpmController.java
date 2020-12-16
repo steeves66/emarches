@@ -46,6 +46,7 @@ import com.sndi.model.TTypeCharge;
 import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeProcedure;
+import com.sndi.model.VAmiDp;
 import com.sndi.model.VDatePub;
 import com.sndi.model.VDetPlaning;
 import com.sndi.model.VDetTabBordPgpm;
@@ -65,6 +66,7 @@ import com.sndi.model.VPgpmliste;
 import com.sndi.model.VPpmPub;
 import com.sndi.model.VPpmStatut;
 import com.sndi.model.VPpmliste;
+import com.sndi.model.VPrqAo;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VTypeStructConduc;
 import com.sndi.model.VUpdateFinancementPpm;
@@ -156,6 +158,8 @@ public class PpmController {
 	
 	 
 	     //Déclaration des Listes
+	     private List<VAmiDp> listeAmiDp = new ArrayList<VAmiDp>();
+	     private List<VPrqAo> listePrqDp = new ArrayList<VPrqAo>();
 		 private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
 		 private List<VDetPlaning> affichPpm = new ArrayList<VDetPlaning>();
 	     private List<VPpmliste> listePpm = new ArrayList<VPpmliste>();
@@ -233,6 +237,10 @@ public class PpmController {
 		 private VDetPlaning datePpm = new VDetPlaning();
 		 private VPgpmFonction recupPgpm = new VPgpmFonction();
 		 private VPgpmFonction recupPgspm = new VPgpmFonction();
+		 private VAmiDp recupAmiDp = new VAmiDp();
+		 private VPrqAo recupPrqDp = new VPrqAo();
+		 private VAmiDp amiDp = new VAmiDp();
+		 private VPrqAo prqDp = new VPrqAo();
 		 private TDetailPlanPassation passDetail = new TDetailPlanPassation();
 		 private VPpmliste slctdTdPpm = new VPpmliste();
 		 private TMinistere ministere= new TMinistere();
@@ -334,6 +342,8 @@ public class PpmController {
 	     public boolean pavetPPM= true;
 	     public boolean pavetAMI= false;
 	     public boolean pavetPRQ= false;
+	     public boolean pavetDPAMI= false;
+	     public boolean pavetDPPRQ= false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -2410,6 +2420,18 @@ public class PpmController {
 			 affichNbreOuvMarche();
 				}
 		 
+		 
+		//Méthode Love pour les DP
+		 public void onSelectAmiDp() {
+			 recupAmiDp .setDppId(amiDp.getDppId());
+			 recupAmiDp.setDppObjet(amiDp.getDppObjet());
+				}
+		 
+		//Méthode Love pour les DP
+		 public void onSelectPrqDp() {
+			 recupPrqDp.setDppId(prqDp.getDppId());
+			 recupPrqDp.setDppObjet(prqDp.getDppObjet());
+				}
 		 //Afficher le nombre d'Ouvertures en choisissant le type de marché
 		 public void affichNbreOuvMarche() {
 			 if(marche.getTymCode().equalsIgnoreCase("11")) {
@@ -2418,6 +2440,8 @@ public class PpmController {
 				 nbreOuv = "1";
 			 }
 		 }
+		 
+		 
 		 
 		
 		 
@@ -2692,6 +2716,8 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
+				 pavetDPAMI = false;
+				 pavetDPPRQ = false;
 				 
 				 mode ="de l'AMI";
 			 }else {
@@ -2699,12 +2725,32 @@ public class PpmController {
 				    	     pavetPPM = false;
 							 pavetAMI = false;
 							 pavetPRQ = true;
-							 
+							 pavetDPAMI = false;
+							 pavetDPPRQ = false;
 							 mode ="PRQ";
-				    }else {
+				    }else 
+				    	  if(modePassation.getMopCode().equalsIgnoreCase("DPA")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI = true;
+								 pavetDPPRQ = false;
+								 mode ="DP";
+					    }else 
+					    	if(modePassation.getMopCode().equalsIgnoreCase("DPQ")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI = false;
+								 pavetDPPRQ = true;
+								 mode ="DP";
+					    }else 
+				            {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
+						     pavetDPAMI = false;
+						     pavetDPPRQ = false;
 						     mode="";
 				    }
 			 }
@@ -2716,6 +2762,8 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
+				 pavetDPAMI = false;
+				 pavetDPPRQ = false;
 				 mode =" de l'AMI";
 				 _logger.info("Panel AMI Activé: "+pavetAMI);
 			 }else {
@@ -2723,12 +2771,33 @@ public class PpmController {
 				    	     pavetPPM = false;
 							 pavetAMI = false;
 							 pavetPRQ = true;
+							 pavetDPAMI = false;
+							 pavetDPPRQ = false;
 							 mode ="PRQ";
 							 _logger.info("Panel PRQ Activé: "+pavetPRQ);
-				    }else {
+				    }else 
+				    	  if(passationListe.getMopCode().equalsIgnoreCase("DPS")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI = true;
+								 pavetDPPRQ = false;
+								 mode ="DP";
+					    }else 
+					    	if(passationListe.getMopCode().equalsIgnoreCase("DQS")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI = false;
+								 pavetDPPRQ = true;
+								 mode ="DP";
+					    }else
+				      {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
+						     pavetDPAMI = false;
+						     pavetDPPRQ = false;
 						     mode ="";
 						     _logger.info("Panel PPM Activé: "+pavetPPM);
 				    }
@@ -2742,6 +2811,8 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
+				 pavetDPAMI = false;
+			     pavetDPPRQ = false;
 				 mode ="AMI";
 				 _logger.info("Panel AMI Activé: "+pavetAMI);
 			 }else {
@@ -2971,9 +3042,39 @@ public class PpmController {
 			 public void recupModeleDao() {
 			    			listeModele= (List<VModeleDac>) iservice.getObjectsByColumn("VModeleDac", new ArrayList<String>(Arrays.asList("DPP_ID")),
 			    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
-			    			/*if (!listeModele.isEmpty()) {
-			    				geneDate=listeModele.get(0); 
-			    			}*/
+			    			_logger.info("id ppm : "+detailPass.getDppId());
+			 }
+			 
+			//Afficher la liste des Ami DP
+			 public void chargeAmiDp() {
+				 if(controleController.typePlan == "PN") {
+					 chargeDpAmi("PN");
+				 }else
+					 if(controleController.typePlan == "PS") {
+						 chargeDpAmi("PS");
+					 }
+			 }
+			 
+			//Afficher la liste des Prq DP
+			 public void chargePrqDp() {
+				 if(controleController.typePlan == "PN") {
+					 chargeDpPrq("PN");
+				 }else
+					 if(controleController.typePlan == "PS") {
+						 chargeDpPrq("PS");
+					 }
+			 }
+			 
+			 //AMI
+			 public void chargeDpAmi(String typlan) {
+				 listeAmiDp = (List<VAmiDp>) iservice.getObjectsByColumn("VAmiDp",
+						 new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typlan)); 
+			 }
+			 
+			 //PRQ
+			 public void chargeDpPrq(String typlan) {
+				 listePrqDp  = (List<VPrqAo>) iservice.getObjectsByColumn("VPrqAo",
+						 new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typlan)); 
 			 }
 	  	 
 	  	 
@@ -3238,6 +3339,11 @@ public class PpmController {
     	  		 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
     	  		 iservice.addObject(detailPass);
     	  		 
+    	  		 detailPass.setDppDppId(recupPrqDp.getDppId());
+    	  		 detailPass.setDppDppId(recupAmiDp.getDppId());
+    	  		 iservice.addObject(detailPass);
+    	  		 
+    	  		 
     	  		
              }else 
                   if(controleController.type == "PSPM"){
@@ -3336,6 +3442,7 @@ public class PpmController {
        		  FacesContext.getCurrentInstance().addMessage(null,
         	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
        	      }else {
+       	    	      detailPass.setDppId(recupAmiDp.getDppId());
        	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
   		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
   		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
@@ -3354,6 +3461,9 @@ public class PpmController {
   		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
   		              detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 			          iservice.updateObject(detailPass);
+			          //if()
+			          detailPass.setDppId(recupAmiDp.getDppId());
+			          iservice.addObject(detailPass);
 			          boutonEdit =true;
 			          controleController.btn_creerDetailPpm = false;
 			          controleController.btn_creerDetailPspm = false;
@@ -4513,6 +4623,13 @@ public class PpmController {
 		    		 totalMontantPpm =0;
 		    		 strucCond = "";
 		    		 controleController.btn_creerDetailPpm = true;
+		    		 
+		    		 pavetPPM = true;
+				     pavetAMI = false;
+				     pavetPRQ = false;
+				     pavetDPAMI = false;
+				     pavetDPPRQ = false;
+				     mode ="";
 		    	 }
 				 
 				 
@@ -4537,10 +4654,13 @@ public class PpmController {
 					chargePpmPUB();
 					 vider();
 					 userController.initMessage();
-					_logger.info("value: "+value+" action "+action);	
+					_logger.info("value: "+value+" action "+action);
+					
 					break;
 				case "ppm2":
 					chargeGestions();
+					chargeAmiDp();
+					chargePrqDp();
 					chargeMarches();
 					chargeModePassation();
 					chargePgpm();
@@ -6261,6 +6381,71 @@ public class PpmController {
 	public void setMode(String mode) {
 		this.mode = mode;
 	}
+
+	public List<VAmiDp> getListeAmiDp() {
+		return listeAmiDp;
+	}
+
+	public void setListeAmiDp(List<VAmiDp> listeAmiDp) {
+		this.listeAmiDp = listeAmiDp;
+	}
+
+	public VAmiDp getRecupAmiDp() {
+		return recupAmiDp;
+	}
+
+	public void setRecupAmiDp(VAmiDp recupAmiDp) {
+		this.recupAmiDp = recupAmiDp;
+	}
+
+	public VAmiDp getAmiDp() {
+		return amiDp;
+	}
+
+	public void setAmiDp(VAmiDp amiDp) {
+		this.amiDp = amiDp;
+	}
+
+	public boolean isPavetDPAMI() {
+		return pavetDPAMI;
+	}
+
+	public void setPavetDPAMI(boolean pavetDPAMI) {
+		this.pavetDPAMI = pavetDPAMI;
+	}
+
+	public boolean isPavetDPPRQ() {
+		return pavetDPPRQ;
+	}
+
+	public void setPavetDPPRQ(boolean pavetDPPRQ) {
+		this.pavetDPPRQ = pavetDPPRQ;
+	}
+
+	public List<VPrqAo> getListePrqDp() {
+		return listePrqDp;
+	}
+
+	public void setListePrqDp(List<VPrqAo> listePrqDp) {
+		this.listePrqDp = listePrqDp;
+	}
+
+	public VPrqAo getRecupPrqDp() {
+		return recupPrqDp;
+	}
+
+	public void setRecupPrqDp(VPrqAo recupPrqDp) {
+		this.recupPrqDp = recupPrqDp;
+	}
+
+	public VPrqAo getPrqDp() {
+		return prqDp;
+	}
+
+	public void setPrqDp(VPrqAo prqDp) {
+		this.prqDp = prqDp;
+	}
+
 	
 	
 }

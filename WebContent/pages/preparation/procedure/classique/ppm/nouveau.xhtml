@@ -113,41 +113,7 @@
                   </div>
               </div>
                
-                <h:panelGroup rendered="#{controleController.selectTypMPgpm}" >
-                  <div class="form-group">
-                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
-				  <table>
-		                 <tr>
-		                 <td style="width: 650px"> <p:inputText id="typMa2" type="text" value="#{ppmController.recupPgpm.gpgTymCode} : #{ppmController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 <td>
-		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmController.chargeMarches}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                 </td>
-		                 </tr>
-                     </table>
-                  </div>
-                </div>
-                </h:panelGroup>
-                
-                 <h:panelGroup rendered="#{controleController.selectTypMPgspm}" >
-                  <div class="form-group">
-                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
-				   <table>
-		                 <tr>
-		                 <td style="width: 650px"><p:inputText id="typMa21" type="text" value="#{ppmController.recupPgspm.gpgTymCode} : #{ppmController.recupPgspm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 <td>
-		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmController.chargeMarches}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                 </td>
-		                 </tr>
-                     </table>
-                  </div>
-                </div>
-                </h:panelGroup>
+              
                 
                 <h:panelGroup rendered="#{controleController.selectOneMenuPassation}" >
                 <div class="form-group">
@@ -184,7 +150,79 @@
                   </div>
                 </div>
                 </h:panelGroup>
+                  <h:panelGroup rendered="#{controleController.selectTypMPgpm}" >
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+				  <table>
+		                 <tr>
+		                 <td style="width: 650px"> <p:inputText id="typMa2" type="text" value="#{ppmController.recupPgpm.gpgTymCode} : #{ppmController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmController.chargeMarches}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
                 
+                 <h:panelGroup rendered="#{controleController.selectTypMPgspm}" >
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 650px"><p:inputText id="typMa21" type="text" value="#{ppmController.recupPgspm.gpgTymCode} : #{ppmController.recupPgspm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmController.chargeMarches}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
+                 <h:panelGroup rendered="#{ppmController.pavetDPAMI}">
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">AMI de la DP</label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 650px">
+		                 <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmController.recupAmiDp.dppObjet}" readonly="true" style="width: 100%" />
+		                 </td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('dpDlg').show()" action="#{ppmController.chargeAmiDp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
+                 <h:panelGroup rendered="#{ppmController.pavetDPPRQ}">
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">PRQ de la DP</label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 650px">
+		                 <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmController.recupPrqDp.dppObjet}" readonly="true" style="width: 100%" />
+		                 </td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('dpPrqDlg').show()" action="#{ppmController.chargePrqDp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
                 <div class="form-group">
                   <label for="prod" class="col-sm-3 control-label">Bailleur<span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
@@ -205,6 +243,8 @@
 					 </p:selectOneRadio>
                   </div>
                 </div>
+                
+                
                 
 	        </div>
 	        
@@ -501,7 +541,7 @@
 	<div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">CHOIX DU DAO TYPE</div>
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
             <div class="col-md-6"><div  style="color: #fff">
 	              <div class="col-sm-6"></div>
             </div></div>
@@ -512,9 +552,9 @@
       
            <div class="col-md-12">
 		    <div class="form-group">
-		   <label for="moldao27" class="col-sm-2 control-label">Dao Type<span style="color:red;"> *</span></label>
+		   <label for="moldao27" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldao27" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldao27" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -862,11 +902,11 @@
 			         <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
 			     
-			      
+	<h:panelGroup rendered="false">		      
 	<div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">CHOIX DU DAO TYPE</div>
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
             <div class="col-md-6"><div  style="color: #fff">
 	              <div class="col-sm-6"></div>
             </div></div>
@@ -875,11 +915,12 @@
           <div class="box-body">
           <div class="row"> 
       
+      
            <div class="col-md-12">
 		    <div class="form-group">
-		   <label for="moldao271Ami" class="col-sm-2 control-label">Dao Type<span style="color:red;"> *</span></label>
+		   <label for="moldao271Ami" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldao271Ami" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldao271Ami" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -888,12 +929,12 @@
 		    </div> 
 
              </div>
-                             
+                           
 		   </div>
           </div>     
          </div>
          </div>		     
-			     
+		</h:panelGroup>  	     
 			     
      <div class="col-md-12">
              <div class="box box-success box-solid">
@@ -945,7 +986,7 @@
 		 <div class="row">
          <div class="col-md-6">
          <div class="form-group">
-		                  <label for="oftAmi" class="col-sm-6 control-label">Ouverture des Avis à Manifestation d'Intérêt<span style="color:red;"> *</span></label>
+		                  <label for="oftAmi" class="col-sm-6 control-label">Ouverture des Manifestations d'Intérêt<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="oftAmi" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateOuvertOt')}"  update=":gnl" />
@@ -954,7 +995,7 @@
 		                  </div>
 		                  
 		                 <div class="form-group">
-		                  <label for="rappAmi" class="col-sm-6 control-label">Rapport d'évaluation de #{ppmController.mode}<span style="color:red;"></span></label>
+		                  <label for="rappAmi" class="col-sm-6 control-label">Rapport d'évaluation #{ppmController.mode}<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="rappAmi" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
 		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateElabRapport')}"  update=":gnl" />
@@ -1008,12 +1049,12 @@
              <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
        <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.majDate()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			             <i class="ace-icon fa fa-save"></i> Enregistrer ff
 	   </p:commandLink>
 	   
 	     <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.majDate()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
 			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
-			             <i class="ace-icon fa fa-save"></i> Enregistrer
+			             <i class="ace-icon fa fa-save"></i> Enregistrer 
 	   </p:commandLink>
 	   </h:panelGroup>
 	   	  
@@ -1036,7 +1077,7 @@
 	<div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">CHOIX DU DAO TYPE</div>
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
             <div class="col-md-6"><div  style="color: #fff">
 	              <div class="col-sm-6"></div>
             </div></div>
@@ -1047,9 +1088,9 @@
       
            <div class="col-md-12">
 		    <div class="form-group">
-		   <label for="moldaoPrq" class="col-sm-2 control-label">Dao Type<span style="color:red;"> *</span></label>
+		   <label for="moldaoPrq" class="col-sm-2 control-label">Dossier type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldaoPrq" required="true" requiredMessage="Veuillez choisir le DAO-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldaoPrq" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
@@ -1900,6 +1941,98 @@
                            <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogDp">
+	        <p:dialog  widgetVar="dpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez l'AMI de la demande de proposition">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeAmiDp}"
+						  selectionMode="single" rowKey="#{slctdTb.dppId}"
+			               emptyMessage="Aucun AMI trouvé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="AMI" style="font-size:18px;"  action="#{ppmController.onSelectAmiDp()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.dppObjet}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.amiDp}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+         <h:form id="dlogDpPrq">
+	        <p:dialog  widgetVar="dpPrqDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la préqualification">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePrqDp}"
+						  selectionMode="single" rowKey="#{slctdTb.dppId}"
+			               emptyMessage="Aucun PRQ trouvé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="PRQ" style="font-size:18px;"  action="#{ppmController.onSelectPrqDp()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.dppObjet}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.prqDp}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
