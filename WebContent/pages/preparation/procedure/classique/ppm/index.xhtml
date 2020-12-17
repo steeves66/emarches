@@ -720,8 +720,17 @@
                 <h:outputText value="#{slctdTb.tymLibelleCourt}" />
                 </h:panelGroup>
                 </p:column>
+                <p:column headerText="Mode de passation" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                </h:panelGroup>
+                </p:column>
                
-                 <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
+                 <p:column headerText="Structure Conductrice" styleClass="col-sm-2" >
                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
                 <h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
                 </h:panelGroup>
@@ -732,7 +741,7 @@
                 </p:column> 
                 
                
-                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-2" >
                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
                 <h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
                 </h:panelGroup>
@@ -881,7 +890,17 @@
                 </h:panelGroup>
                 </p:column>
                
-                 <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
+                <p:column headerText="Mode de passation" styleClass="col-sm-2" >
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" style="color:red; font-weight:bold" />
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{slctdTb.dppStatutRetour != '1'}">
+                <h:outputText value="#{slctdTb.mopLibelleLong}" />
+                </h:panelGroup>
+                </p:column>
+               
+                 <p:column headerText="Structure Conductrice" styleClass="col-sm-2" >
                  <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
                 <h:outputText value="#{slctdTb.dppStructureConduc}" style="color:red; font-weight:bold "/>
                 </h:panelGroup>
@@ -892,7 +911,7 @@
                 </p:column> 
                 
                
-                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-2" >
                 <h:panelGroup rendered="#{slctdTb.dppStatutRetour == '1'}">
                 <h:outputText value="#{slctdTb.dppStructureBenefi}" style="color:red; font-weight:bold"/>
                 </h:panelGroup>
@@ -982,13 +1001,17 @@
                 <p:column headerText="Type Marché" styleClass="col-sm-2" >
                 <h:outputText value="#{slctdTb.tymLibelle}" />
                 </p:column>
+                
+                 <p:column headerText="Mode de passation" styleClass="col-sm-2" >
+                <h:outputText value="#{slctdTb.tymLibelle}" />
+                </p:column>
                
-                 <p:column headerText="Structure Conductrice" styleClass="col-sm-3" >
+                 <p:column headerText="Structure Conductrice" styleClass="col-sm-2" >
                 <h:outputText value="#{slctdTb.dppStrucConduc}" />
                 </p:column> 
                 
                
-                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-3" >
+                <p:column headerText="Structure Bénéficiare" styleClass="col-sm-2" >
                 <h:outputText value="#{slctdTb.dppStrucBenef}" />
                 </p:column> 
                 

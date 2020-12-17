@@ -221,6 +221,7 @@ public class PpmController {
 	     private List<TPlanPassation> listPlan = new ArrayList<TPlanPassation>();
 	     private List<VUpdatePpm> listUpdate = new ArrayList<VUpdatePpm>();
 	     private List<VTypeMarcheFils> listeTypeMarchesFils = new ArrayList<VTypeMarcheFils>();
+	     private List<VTypeMarcheFils> listeTypeMarchesFilsPs = new ArrayList<VTypeMarcheFils>();
 	     private List<VModeleDac> listeModele = new ArrayList<VModeleDac>();
 	     private List<VPpmPub> ppmPub = new ArrayList<VPpmPub>();
 	     private List<VDetTabBordPpm> detailTB = new ArrayList<VDetTabBordPpm>();
@@ -342,8 +343,8 @@ public class PpmController {
 	     public boolean pavetPPM= true;
 	     public boolean pavetAMI= false;
 	     public boolean pavetPRQ= false;
-	     public boolean pavetDPAMI= false;
-	     public boolean pavetDPPRQ= false;
+	     public boolean libelleDPAMI= false;
+	     public boolean libelleDPPRQ= false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -2087,7 +2088,39 @@ public class PpmController {
 		 public void chargeMarches() {
 			 listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
 			 //filtreTypeMarche ="";
-		 }	 
+		 }	
+		 
+		 public void chargetypeMarcheByModPass() {
+			 //listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
+			 listeTypeMarches.clear();
+			 if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA")) {
+				 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+						 new WhereClause("TYM_CODE",WhereClause.Comparateur.EQ,"11")); 
+			 }else
+				 if(recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ")) {
+					 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+							 new WhereClause("TYM_CODE",WhereClause.Comparateur.NEQ,"11")); 
+				 }else 
+				 {
+				 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils"); 
+			 }
+		 }
+		 
+		 public void chargetypeMarcheByModPassPs() {
+			 //listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
+			 listeTypeMarchesFilsPs.clear();
+			 if(recupPgspm.getGpgMopCode().equalsIgnoreCase("AMS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS")) {
+				 listeTypeMarchesFilsPs=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+						 new WhereClause("TYM_CODE",WhereClause.Comparateur.EQ,"11")); 
+			 }else
+				 if(recupPgspm.getGpgMopCode().equalsIgnoreCase("PQS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DQS")) {
+					 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+							 new WhereClause("TYM_CODE",WhereClause.Comparateur.NEQ,"11")); 
+				 }
+			 else {
+				 listeTypeMarchesFilsPs=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils"); 
+			 }
+		 }
 		 
 		 
 		//Chargement des modes de Passtion
@@ -2716,8 +2749,8 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
-				 pavetDPAMI = false;
-				 pavetDPPRQ = false;
+				 libelleDPAMI = false;
+				 libelleDPPRQ = false;
 				 
 				 mode ="de l'AMI";
 			 }else {
@@ -2725,32 +2758,32 @@ public class PpmController {
 				    	     pavetPPM = false;
 							 pavetAMI = false;
 							 pavetPRQ = true;
-							 pavetDPAMI = false;
-							 pavetDPPRQ = false;
+							 libelleDPAMI = false;
+							 libelleDPPRQ = false;
 							 mode ="PRQ";
 				    }else 
 				    	  if(modePassation.getMopCode().equalsIgnoreCase("DPA")) {
 					    	     pavetPPM = false;
-								 pavetAMI = false;
+								 pavetAMI = true;
 								 pavetPRQ = false;
-								 pavetDPAMI = true;
-								 pavetDPPRQ = false;
+								 libelleDPAMI = true;
+								 libelleDPPRQ = false;
 								 mode ="DP";
 					    }else 
 					    	if(modePassation.getMopCode().equalsIgnoreCase("DPQ")) {
 					    	     pavetPPM = false;
 								 pavetAMI = false;
-								 pavetPRQ = false;
-								 pavetDPAMI = false;
-								 pavetDPPRQ = true;
+								 pavetPRQ = true;
+								 libelleDPAMI = false;
+								 libelleDPPRQ = true;
 								 mode ="DP";
 					    }else 
 				            {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
-						     pavetDPAMI = false;
-						     pavetDPPRQ = false;
+						     libelleDPAMI = false;
+						     libelleDPPRQ = false;
 						     mode="";
 				    }
 			 }
@@ -2762,8 +2795,8 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
-				 pavetDPAMI = false;
-				 pavetDPPRQ = false;
+				 libelleDPAMI = false;
+				 libelleDPPRQ = false;
 				 mode =" de l'AMI";
 				 _logger.info("Panel AMI Activé: "+pavetAMI);
 			 }else {
@@ -2771,33 +2804,33 @@ public class PpmController {
 				    	     pavetPPM = false;
 							 pavetAMI = false;
 							 pavetPRQ = true;
-							 pavetDPAMI = false;
-							 pavetDPPRQ = false;
+							 libelleDPAMI = false;
+							 libelleDPPRQ = false;
 							 mode ="PRQ";
 							 _logger.info("Panel PRQ Activé: "+pavetPRQ);
 				    }else 
 				    	  if(passationListe.getMopCode().equalsIgnoreCase("DPS")) {
 					    	     pavetPPM = false;
-								 pavetAMI = false;
+								 pavetAMI = true;
 								 pavetPRQ = false;
-								 pavetDPAMI = true;
-								 pavetDPPRQ = false;
+								 libelleDPAMI = true;
+								 libelleDPPRQ = false;
 								 mode ="DP";
 					    }else 
 					    	if(passationListe.getMopCode().equalsIgnoreCase("DQS")) {
 					    	     pavetPPM = false;
 								 pavetAMI = false;
-								 pavetPRQ = false;
-								 pavetDPAMI = false;
-								 pavetDPPRQ = true;
+								 pavetPRQ = true;
+								 libelleDPAMI = false;
+								 libelleDPPRQ = true;
 								 mode ="DP";
 					    }else
 				      {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
-						     pavetDPAMI = false;
-						     pavetDPPRQ = false;
+						     libelleDPAMI = false;
+						     libelleDPPRQ = false;
 						     mode ="";
 						     _logger.info("Panel PPM Activé: "+pavetPPM);
 				    }
@@ -2811,8 +2844,8 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
-				 pavetDPAMI = false;
-			     pavetDPPRQ = false;
+				 libelleDPAMI = false;
+				 libelleDPPRQ = false;
 				 mode ="AMI";
 				 _logger.info("Panel AMI Activé: "+pavetAMI);
 			 }else {
@@ -3339,12 +3372,15 @@ public class PpmController {
     	  		 detailPass.setDppNbOuv(Long.valueOf(nbreOuv));
     	  		 iservice.addObject(detailPass);
     	  		 
-    	  		 detailPass.setDppDppId(recupPrqDp.getDppId());
-    	  		 detailPass.setDppDppId(recupAmiDp.getDppId());
-    	  		 iservice.addObject(detailPass);
-    	  		 
-    	  		 
-    	  		
+    	  		 //DP AMI ET PRQ
+     		    if(recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA")) {
+          	  		    detailPass.setDppDppId(recupAmiDp.getDppId());
+          	  		    iservice.addObject(detailPass); 
+     	        }else
+     	        	if(recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ")) {
+     	        		detailPass.setDppDppId(recupPrqDp.getDppId());
+          	  		    iservice.addObject(detailPass); 	
+     	        	}
              }else 
                   if(controleController.type == "PSPM"){
                 	
@@ -3381,6 +3417,17 @@ public class PpmController {
               		    detailPass.setDppStatutRetour("0");
               		    detailPass.setDppStatutDao("N");
               		    iservice.addObject(detailPass); 
+              		    
+              		  //DP AMI ET PRQ
+            		    if(recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS")) {
+                 	  		    detailPass.setDppDppId(recupAmiDp.getDppId());
+                 	  		    iservice.addObject(detailPass); 
+            	        }else
+            	        	if(recupPgspm.getGpgMopCode().equalsIgnoreCase("DQS")) {
+            	        		detailPass.setDppDppId(recupPrqDp.getDppId());
+                 	  		    iservice.addObject(detailPass); 	
+            	        	}
+           	  		 }
                 	    }else {
                 	    	
                 	    	  if(marche.getTymCode() == null) {
@@ -3413,7 +3460,16 @@ public class PpmController {
                 		    detailPass.setDppStatutRetour("0");
                 		    detailPass.setDppStatutDao("N");
                 		    iservice.addObject(detailPass); 
-                	    }
+                		    
+                		    //DP AMI ET PRQ
+                		    if(recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS")) {
+                     	  		    detailPass.setDppDppId(recupAmiDp.getDppId());
+                     	  		    iservice.addObject(detailPass); 
+                	        }else
+                	        	if(recupPgspm.getGpgMopCode().equalsIgnoreCase("DQS")) {
+                	        		detailPass.setDppDppId(recupPrqDp.getDppId());
+                     	  		    iservice.addObject(detailPass); 	
+                	        	}
 	   
              } 
 	  		
@@ -3442,7 +3498,6 @@ public class PpmController {
        		  FacesContext.getCurrentInstance().addMessage(null,
         	  	   	       new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veuillez choisir le DAO Type", "")); 
        	      }else {
-       	    	      detailPass.setDppId(recupAmiDp.getDppId());
        	    	      detailPass.setDppApprobAno(geneDate.getDppApprobAno());
   		              detailPass.setDppDateAttApproBail(geneDate.getDppDateAttApproBail());
   		              detailPass.setDppDateAttApprobCpmp(geneDate.getDppDateAttApprobCpmp());
@@ -3461,9 +3516,7 @@ public class PpmController {
   		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
   		              detailPass.setTModeleDacType(new TModeleDacType(tydCode));
 			          iservice.updateObject(detailPass);
-			          //if()
-			          detailPass.setDppId(recupAmiDp.getDppId());
-			          iservice.addObject(detailPass);
+			         
 			          boutonEdit =true;
 			          controleController.btn_creerDetailPpm = false;
 			          controleController.btn_creerDetailPspm = false;
@@ -4627,8 +4680,8 @@ public class PpmController {
 		    		 pavetPPM = true;
 				     pavetAMI = false;
 				     pavetPRQ = false;
-				     pavetDPAMI = false;
-				     pavetDPPRQ = false;
+				     libelleDPAMI = false;
+				     libelleDPPRQ = false;
 				     mode ="";
 		    	 }
 				 
@@ -6406,20 +6459,21 @@ public class PpmController {
 		this.amiDp = amiDp;
 	}
 
-	public boolean isPavetDPAMI() {
-		return pavetDPAMI;
+    
+	public boolean isLibelleDPAMI() {
+		return libelleDPAMI;
 	}
 
-	public void setPavetDPAMI(boolean pavetDPAMI) {
-		this.pavetDPAMI = pavetDPAMI;
+	public void setLibelleDPAMI(boolean libelleDPAMI) {
+		this.libelleDPAMI = libelleDPAMI;
 	}
 
-	public boolean isPavetDPPRQ() {
-		return pavetDPPRQ;
+	public boolean isLibelleDPPRQ() {
+		return libelleDPPRQ;
 	}
 
-	public void setPavetDPPRQ(boolean pavetDPPRQ) {
-		this.pavetDPPRQ = pavetDPPRQ;
+	public void setLibelleDPPRQ(boolean libelleDPPRQ) {
+		this.libelleDPPRQ = libelleDPPRQ;
 	}
 
 	public List<VPrqAo> getListePrqDp() {
@@ -6444,6 +6498,14 @@ public class PpmController {
 
 	public void setPrqDp(VPrqAo prqDp) {
 		this.prqDp = prqDp;
+	}
+
+	public List<VTypeMarcheFils> getListeTypeMarchesFilsPs() {
+		return listeTypeMarchesFilsPs;
+	}
+
+	public void setListeTypeMarchesFilsPs(List<VTypeMarcheFils> listeTypeMarchesFilsPs) {
+		this.listeTypeMarchesFilsPs = listeTypeMarchesFilsPs;
 	}
 
 	
