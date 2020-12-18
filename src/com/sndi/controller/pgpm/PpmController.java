@@ -345,14 +345,16 @@ public class PpmController {
 	     public boolean pavetPRQ= false;
 	     public boolean libelleDPAMI= false;
 	     public boolean libelleDPPRQ= false;
+	     public boolean libelleAmi= false;
+	     public boolean libellePrq= false;
+	     public boolean libellePpm= false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
 				//Controle Pavé création pour les ppm / pspm normaux
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
-		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
-		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null || nbreOuv == null)
+		  					|| detailPass.getDppStatutAno() == null || ligne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -413,9 +415,10 @@ public class PpmController {
 				 
 				//Controle Pavé création pour les AMI
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope223")) {
+					 
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
-		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
-		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null || nbreOuv == null)
+		  					|| detailPass.getDppStatutAno() == null
+		  				   || ligne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -478,8 +481,8 @@ public class PpmController {
 				//Controle Pavé création pour les PRQ
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope224")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
-		  					|| detailPass.getDppStatutAno() == null || pubDate.getDatepub() == null
-		  				   || ligne.getLbgCode() == null || detailPass.getDppDateDaoTrans() == null || nbreOuv == null)
+		  					|| detailPass.getDppStatutAno() == null 
+		  				   || ligne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -538,7 +541,44 @@ public class PpmController {
 		 
 		 //Fin de la Methode OnFlow
 		 
-		 
+		 public void controleLibelle() {
+			 if(mode=="AMI") {
+				 libelleDPPRQ= false;
+				 libelleDPAMI= false;
+			     libelleAmi= true;
+			     libellePrq= false;
+			     libellePpm= false;
+			 }else
+				 if(mode=="PRQ") {
+					 libelleDPPRQ= false;
+					 libelleDPAMI= false;
+				     libelleAmi= false;
+				     libellePrq= true;
+				     libellePpm= false;
+				 }else
+					 if(mode=="DPPRQ") {
+						 libelleDPPRQ= false;
+						 libelleDPAMI= false;
+					     libelleAmi= false;
+					     libellePrq= true;
+					     libellePpm= false; 
+					 }else
+						 if(mode=="DPAMI") {
+							 libelleDPPRQ= false;
+							 libelleDPAMI= true;
+						     libelleAmi= false;
+						     libellePrq= false;
+						     libellePpm= false; 
+						 }else
+						       {
+								 libelleDPPRQ= false;
+								 libelleDPAMI= false;
+							     libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= true; 
+							 }
+			 
+		 }
 		 
                 public void tableauBordbAc() {
 				   if(controleController.type == "PPM") {
@@ -2749,10 +2789,14 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
+				 
 				 libelleDPAMI = false;
 				 libelleDPPRQ = false;
+			     libelleAmi= true;
+			     libellePrq= false;
+			     libellePpm= false;
 				 
-				 mode ="de l'AMI";
+				 mode ="AMI";
 			 }else {
 				      if(modePassation.getMopCode().equalsIgnoreCase("PRQ")) {
 				    	     pavetPPM = false;
@@ -2760,6 +2804,11 @@ public class PpmController {
 							 pavetPRQ = true;
 							 libelleDPAMI = false;
 							 libelleDPPRQ = false;
+							 libelleAmi= false;
+						     libellePrq= true;
+						     libellePpm= false;
+							 libelleAmi= false;
+						     libellePrq= true;
 							 mode ="PRQ";
 				    }else 
 				    	  if(modePassation.getMopCode().equalsIgnoreCase("DPA")) {
@@ -2768,6 +2817,9 @@ public class PpmController {
 								 pavetPRQ = false;
 								 libelleDPAMI = true;
 								 libelleDPPRQ = false;
+								 libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
 								 mode ="DP";
 					    }else 
 					    	if(modePassation.getMopCode().equalsIgnoreCase("DPQ")) {
@@ -2776,6 +2828,9 @@ public class PpmController {
 								 pavetPRQ = true;
 								 libelleDPAMI = false;
 								 libelleDPPRQ = true;
+								 libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
 								 mode ="DP";
 					    }else 
 				            {
@@ -2784,6 +2839,9 @@ public class PpmController {
 						     pavetPRQ = false;
 						     libelleDPAMI = false;
 						     libelleDPPRQ = false;
+						     libelleAmi= false;
+						     libellePrq= false;
+						     libellePpm= true;
 						     mode="";
 				    }
 			 }
@@ -2797,7 +2855,7 @@ public class PpmController {
 				 pavetPRQ = false;
 				 libelleDPAMI = false;
 				 libelleDPPRQ = false;
-				 mode =" de l'AMI";
+				 mode ="AMI";
 				 _logger.info("Panel AMI Activé: "+pavetAMI);
 			 }else {
 				      if(passationListe.getMopCode().equalsIgnoreCase("PRQ")) {
@@ -2831,7 +2889,7 @@ public class PpmController {
 						     pavetPRQ = false;
 						     libelleDPAMI = false;
 						     libelleDPPRQ = false;
-						     mode ="";
+						     mode =" ";
 						     _logger.info("Panel PPM Activé: "+pavetPPM);
 				    }
 			 }
@@ -6506,6 +6564,30 @@ public class PpmController {
 
 	public void setListeTypeMarchesFilsPs(List<VTypeMarcheFils> listeTypeMarchesFilsPs) {
 		this.listeTypeMarchesFilsPs = listeTypeMarchesFilsPs;
+	}
+
+	public boolean isLibelleAmi() {
+		return libelleAmi;
+	}
+
+	public void setLibelleAmi(boolean libelleAmi) {
+		this.libelleAmi = libelleAmi;
+	}
+
+	public boolean isLibellePrq() {
+		return libellePrq;
+	}
+
+	public void setLibellePrq(boolean libellePrq) {
+		this.libellePrq = libellePrq;
+	}
+
+	public boolean isLibellePpm() {
+		return libellePpm;
+	}
+
+	public void setLibellePpm(boolean libellePpm) {
+		this.libellePpm = libellePpm;
 	}
 
 	
