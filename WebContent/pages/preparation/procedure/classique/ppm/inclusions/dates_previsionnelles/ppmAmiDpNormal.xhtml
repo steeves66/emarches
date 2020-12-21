@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//FR" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:panelGroup  layout="block" id="ppmAmiDpNormal" >  
+
+    <p:tab id="dpami" rendered="#{ppmController.pavetDPAMI}" title="Dates prévisionnelles pour la demande de proposition" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="row">
+			     <div class="col-md-8 col-md-offset-2">
+			     
+	<h:panelGroup rendered="false">		      
+	<div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+      
+           <div class="col-md-12">
+		    <div class="form-group">
+		   <label  class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmController.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+	         </div>
+		    </div> 
+
+             </div>
+                           
+		   </div>
+          </div>     
+         </div>
+         </div>		     
+		</h:panelGroup>  	     
+			     
+     <div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+            
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+             <div class="col-md-6">
+             
+              <div class="form-group">
+		       
+		                  <label for="trAmiDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="trAmiDp" value="#{ppmController.detailPass.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoTrans')}"  update=":gnl" />
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+             
+		    <div class="form-group">
+		       
+		                  <label for="valdao22AmiDp" class="col-sm-6 control-label">Approbation par la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="valdao22AmiDp" value="#{ppmController.geneDate.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoApprobDmp')}"  update=":gnl" />
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+		    
+		   
+		       
+             </div>
+             <div class="col-md-6">
+               <div class="form-group">
+		                  <label for="baildao2AmiDp" class="col-sm-6 control-label">Approbation par le Bailleur </label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="baildao2AmiDp" value="#{ppmController.geneDate.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateDaoApprobBail')}"  update=":gnl" />
+		                   </p:calendar> 
+		                </div>
+		                </div> 
+		                
+		                <div class="form-group">
+		                <h:panelGroup rendered="#{ppmController.libelleAmi}">
+		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmController.libelleDPAMI}">
+		                  <label  class="col-sm-6 control-label">Date de Programmation<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                    <table>
+						      <tr>
+						      <td style="width:50px"><p:calendar  readonly="true" showOn="false" value="#{ppmController.detailPass.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+						       </p:calendar></td>
+						       <td>
+						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							   <i class="fa fa-search-plus"></i>
+							  </p:commandLink>
+						     </td>
+						   </tr>
+				          </table>
+		                </div>
+		                </div> 
+             </div>
+	                        
+		   </div>
+          </div>     
+         </div>
+         </div>
+         
+
+          <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PASSATION DE MARCHE (2)</div>
+         </div>
+         <div class="box-body"></div>
+		 <div class="row">
+         <div class="col-md-6">
+         <div class="form-group">
+         <h:panelGroup rendered="#{ppmController.libelleAmi}">
+		                  <label for="oftAmiDp" class="col-sm-6 control-label">Ouverture des Manifestations d'Intérêt<span style="color:red;"> *</span></label>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmController.libelleDPAMI}">
+		                  <label for="oftAmiDp" class="col-sm-6 control-label">Ouverture des Offres<span style="color:red;"> *</span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="oftAmiDp" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateOuvertOt')}"  update=":gnl" />
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  
+		                 <div class="form-group">
+		                  <label for="rappAmiDp" class="col-sm-6 control-label">Rapport d'évaluation <span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rappAmiDp" value="#{ppmController.geneDate.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateElabRapport')}"  update=":gnl" />
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                 <h:panelGroup rendered="#{ppmController.libelleAmi}">
+		                  <label for="jugAmiDp" class="col-sm-6 control-label">Jugement des manifestations<span style="color:red;"></span></label>
+		                  </h:panelGroup>
+		                    <h:panelGroup rendered="#{ppmController.libelleDPAMI}">
+		                  <label class="col-sm-6 control-label">Jugement des offres<span style="color:red;"></span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jugAmiDp" value="#{ppmController.geneDate.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateJugementOffreTec')}"  update=":gnl" />
+		                   </p:calendar> 
+		                  </div>
+		                </div>      
+         </div>
+         
+         
+         <div class="col-md-6">
+       
+		                 <div class="form-group">
+		                  <label for="approbaAnoAmiDp" class="col-sm-6 control-label">Approbation de la liste restreinte (ANO #{controleController.structureLibAbrege})</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approbaAnoAmiDp" value="#{ppmController.geneDate.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppApprobAno')}"  update=":gnl" />
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                  <div class="form-group">
+		                  <label for="approbaAmiDp" class="col-sm-6 control-label">Approbation de la liste restreinte (ANO BAILLEUR)</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approbaAmiDp" value="#{ppmController.geneDate.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                    <p:ajax event="dateSelect" listener="#{ppmController.genereDate('dppDateAttApproBail')}"  update=":gnl" />
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                  </div>
+		                  </div>
+         </div>
+         </div>
+         
+      
+         <div class="col-md-12">
+          
+     
+     
+     
+   <div class="row">
+          <div class="col-md-12">
+             <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+       <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.majDate()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer
+	   </p:commandLink>
+	   
+	     <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmController.majDate()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez vous l'enregistrement?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Enregistrer 
+	   </p:commandLink>
+	   </h:panelGroup>
+	   	  
+          </div>
+         
+         </div>  
+     
+         </div>
+         
+         </div>
+       </div>
+	</p:tab>
+     </h:panelGroup>     
+</html>

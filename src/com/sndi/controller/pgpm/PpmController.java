@@ -343,6 +343,8 @@ public class PpmController {
 	     public boolean pavetPPM= true;
 	     public boolean pavetAMI= false;
 	     public boolean pavetPRQ= false;
+	     public boolean pavetDPAMI= false;
+	     public boolean pavetDPPRQ= false;
 	     public boolean libelleDPAMI= false;
 	     public boolean libelleDPPRQ= false;
 	     public boolean libelleAmi= false;
@@ -478,8 +480,134 @@ public class PpmController {
 				 //Fin de Contrôle pour les AMI
 				 
 				 
+				 
+				//Controle Pavé création pour les DPAMI
+				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("dpami")) {
+					 
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
+		  					|| detailPass.getDppStatutAno() == null
+		  				   || ligne.getLbgCode() == null || nbreOuv == null)
+		  			   {
+						 FacesContext.getCurrentInstance().addMessage(null,
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
+				          return "ope111";
+						} 
+		  			 
+		                 if(controleController.type == "PPM") {
+						        if(modePassation.getMopTypPlan() == null) {
+						        	 if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
+		                    			  FacesContext.getCurrentInstance().addMessage(null,
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		  }else {
+						        	        creerDetailPassation(pgpm.getMopTypPlan());
+		                    		  }
+						        }else {
+						        	if(marche.getTymCode() == null ||modePassation.getMopCode() == null) {
+	                    		    	  FacesContext.getCurrentInstance().addMessage(null,
+			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+	                    		      }else {
+	                    		    	  creerDetailPassation(modePassation.getMopTypPlan());
+	                    		      }
+						        	//creerDetailPassation(pgpm.getMopTypPlan());
+						        	//creerDetailPassation(modePassation.getMopTypPlan());
+						        }
+		                	 recupModeleDao();
+		                 }else 
+		                      if(controleController.type == "PSPM"){
+		                    	  if(passationListe.getMopTypPlan() == null) {
+		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
+		                    			  FacesContext.getCurrentInstance().addMessage(null,
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		  }else {
+		                    		         creerDetailPassation(pgpm.getMopTypPlan());
+		                    		  }
+		                    	  }else {
+		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
+		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		      }else {
+		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
+		                    		      }
+		                    		        //creerDetailPassation(pgpm.getMopTypPlan());  
+		                    		    //creerDetailPassation(passationListe.getMopTypPlan());
+		                    	  }
+		                    	  
+		                    	  recupModeleDao();
+		                    	  if(controleController.type == "PPM") {
+		                    		  controlPanel();
+		                    	  }else 
+		                    	  {
+		                    		 if(controleController.type == "PSPM") {
+		                    		      controlPanelPs();
+		                    		     }
+		                    	  }
+		                 }
+				     }
+				 //Fin de Contrôle pour les DPAMI
+				 
+				 
 				//Controle Pavé création pour les PRQ
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope224")) {
+		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
+		  					|| detailPass.getDppStatutAno() == null 
+		  				   || ligne.getLbgCode() == null || nbreOuv == null)
+		  			   {
+						 FacesContext.getCurrentInstance().addMessage(null,
+						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
+				          return "ope111";
+						} 
+		  			 
+		                 if(controleController.type == "PPM") {
+						        if(modePassation.getMopTypPlan() == null) {
+						        	 if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
+		                    			  FacesContext.getCurrentInstance().addMessage(null,
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		  }else {
+						        	        creerDetailPassation(pgpm.getMopTypPlan());
+		                    		  }
+						        }else {
+						        	if(marche.getTymCode() == null ||modePassation.getMopCode() == null) {
+	                    		    	  FacesContext.getCurrentInstance().addMessage(null,
+			                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+	                    		      }else {
+	                    		    	  creerDetailPassation(modePassation.getMopTypPlan());
+	                    		      }
+						        }
+		                	 recupModeleDao();
+		                 }else 
+		                      if(controleController.type == "PSPM"){
+		                    	  if(passationListe.getMopTypPlan() == null) {
+		                    		  if(pgpm.getGpgMopCode() == null || pgpm.getGpgTymCode() == null) {
+		                    			  FacesContext.getCurrentInstance().addMessage(null,
+		                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		  }else {
+		                    		         creerDetailPassation(pgpm.getMopTypPlan());
+		                    		  }
+		                    	  }else {
+		                    		      if(marche.getTymCode() == null ||passationListe.getMopCode() == null) {
+		                    		    	  FacesContext.getCurrentInstance().addMessage(null,
+				                 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez saisir tous les champs obligatoires, avant de cliquer sur suivant!", "")); 
+		                    		      }else {
+		                    		    	  creerDetailPassation(passationListe.getMopTypPlan());
+		                    		      }
+		                    		       
+		                    	  }
+		                    	  
+		                    	  recupModeleDao();
+		                    	  if(controleController.type == "PPM") {
+		                    		  controlPanel();
+		                    	  }else 
+		                    	  {
+		                    		 if(controleController.type == "PSPM") {
+		                    		      controlPanelPs();
+		                    		     }
+		                    	  }
+		                 }
+				     }
+				//Fin Controle Pavé création pour les PRQ
+				 
+				//Controle Pavé création pour les DPPRQ
+				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("dpPrq")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null 
 		  				   || ligne.getLbgCode() == null || nbreOuv == null)
@@ -2789,6 +2917,8 @@ public class PpmController {
 				 pavetPPM = false;
 				 pavetAMI = true;
 				 pavetPRQ = false;
+				 pavetDPAMI= false;
+				 pavetDPPRQ= false;
 				 
 				 libelleDPAMI = false;
 				 libelleDPPRQ = false;
@@ -2802,6 +2932,8 @@ public class PpmController {
 				    	     pavetPPM = false;
 							 pavetAMI = false;
 							 pavetPRQ = true;
+							 pavetDPAMI= false;
+							 pavetDPPRQ= false;
 							 libelleDPAMI = false;
 							 libelleDPPRQ = false;
 							 libelleAmi= false;
@@ -2813,8 +2945,10 @@ public class PpmController {
 				    }else 
 				    	  if(modePassation.getMopCode().equalsIgnoreCase("DPA")) {
 					    	     pavetPPM = false;
-								 pavetAMI = true;
+								 pavetAMI = false;
 								 pavetPRQ = false;
+								 pavetDPAMI= true;
+								 pavetDPPRQ= false;
 								 libelleDPAMI = true;
 								 libelleDPPRQ = false;
 								 libelleAmi= false;
@@ -2825,7 +2959,9 @@ public class PpmController {
 					    	if(modePassation.getMopCode().equalsIgnoreCase("DPQ")) {
 					    	     pavetPPM = false;
 								 pavetAMI = false;
-								 pavetPRQ = true;
+								 pavetPRQ = false;
+								 pavetDPAMI= false;
+								 pavetDPPRQ= true;
 								 libelleDPAMI = false;
 								 libelleDPPRQ = true;
 								 libelleAmi= false;
@@ -2837,6 +2973,8 @@ public class PpmController {
 				    	     pavetPPM = true;
 						     pavetAMI = false;
 						     pavetPRQ = false;
+						     pavetDPAMI= false;
+							 pavetDPPRQ= false;
 						     libelleDPAMI = false;
 						     libelleDPPRQ = false;
 						     libelleAmi= false;
@@ -6588,6 +6726,22 @@ public class PpmController {
 
 	public void setLibellePpm(boolean libellePpm) {
 		this.libellePpm = libellePpm;
+	}
+
+	public boolean isPavetDPAMI() {
+		return pavetDPAMI;
+	}
+
+	public void setPavetDPAMI(boolean pavetDPAMI) {
+		this.pavetDPAMI = pavetDPAMI;
+	}
+
+	public boolean isPavetDPPRQ() {
+		return pavetDPPRQ;
+	}
+
+	public void setPavetDPPRQ(boolean pavetDPPRQ) {
+		this.pavetDPPRQ = pavetDPPRQ;
 	}
 
 	
