@@ -32,6 +32,15 @@ public class VAmiDp implements java.io.Serializable {
 	private String dppTymCode;
 	private String dppMopCode;
 	private String dppNbOuv;
+	private String dppLbgCode;
+	private String natLibelle;
+	private Long dppGpgId;
+	private String gpgObjet;
+	private long lbgAeTr;
+	private long lbgAeDon;
+	private long lbgAeEmp;
+	private long lbgTotDot;
+	private long lbgDisTot;
 
 	public VAmiDp() {
 	}
@@ -42,7 +51,8 @@ public class VAmiDp implements java.io.Serializable {
 
 	public VAmiDp(long dppId, String dppObjet, String dppTypePlan,String dppPartiePmePmi, String dppStructureBenefi,
 			String dppStructureConduc, String dppTypeStrConduc, String dppStatutAno, String dppNatInt,
-			String dppBailleur, String dppTymCode, String dppMopCode, String dppNbOuv) {
+			String dppBailleur, String dppTymCode, String dppMopCode, String dppNbOuv, String dppLbgCode,String natLibelle,Long dppGpgId, String gpgObjet, long lbgAeTr, long lbgAeDon,
+			long lbgAeEmp, long lbgTotDot, long lbgDisTot) {
 		this.dppId = dppId;
 		this.dppObjet = dppObjet;
 		this.dppTypePlan = dppTypePlan;
@@ -56,6 +66,15 @@ public class VAmiDp implements java.io.Serializable {
 		this.dppTymCode = dppTymCode;
 		this.dppMopCode = dppMopCode;
 		this.dppNbOuv = dppNbOuv;
+		this.dppLbgCode = dppLbgCode;
+		this.natLibelle = natLibelle;
+		this.dppGpgId = dppGpgId;
+		this.gpgObjet = gpgObjet;
+		this.lbgAeTr = lbgAeTr;
+		this.lbgAeDon = lbgAeDon;
+		this.lbgAeEmp = lbgAeEmp;
+		this.lbgTotDot = lbgTotDot;
+		this.lbgDisTot = lbgDisTot;
 	}
 
 	@Id
@@ -174,5 +193,86 @@ public class VAmiDp implements java.io.Serializable {
 
 	public void setDppNbOuv(String dppNbOuv) {
 		this.dppNbOuv = dppNbOuv;
+	}
+	
+	@Column(name = "DPP_LBG_CODE", length = 50)
+	public String getDppLbgCode() {
+		return this.dppLbgCode;
+	}
+
+	public void setDppLbgCode(String dppLbgCode) {
+		this.dppLbgCode = dppLbgCode;
+	}
+
+	@Column(name = "NAT_LIBELLE", length = 200)
+	public String getNatLibelle() {
+		return this.natLibelle;
+	}
+
+	public void setNatLibelle(String natLibelle) {
+		this.natLibelle = natLibelle;
+	}
+	
+	@Column(name = "DPP_GPG_ID", precision = 10, scale = 0)
+	public Long getDppGpgId() {
+		return this.dppGpgId;
+	}
+
+	public void setDppGpgId(Long dppGpgId) {
+		this.dppGpgId = dppGpgId;
+	}
+
+	@Column(name = "GPG_OBJET", length = 1000)
+	public String getGpgObjet() {
+		return this.gpgObjet;
+	}
+
+	public void setGpgObjet(String gpgObjet) {
+		this.gpgObjet = gpgObjet;
+	}
+
+	@Column(name = "LBG_AE_TR", nullable = false, precision = 20, scale = 0)
+	public long getLbgAeTr() {
+		return this.lbgAeTr;
+	}
+
+	public void setLbgAeTr(long lbgAeTr) {
+		this.lbgAeTr = lbgAeTr;
+	}
+
+	@Column(name = "LBG_AE_DON", nullable = false, precision = 20, scale = 0)
+	public long getLbgAeDon() {
+		return this.lbgAeDon;
+	}
+
+	public void setLbgAeDon(long lbgAeDon) {
+		this.lbgAeDon = lbgAeDon;
+	}
+
+	@Column(name = "LBG_AE_EMP", nullable = false, precision = 20, scale = 0)
+	public long getLbgAeEmp() {
+		return this.lbgAeEmp;
+	}
+
+	public void setLbgAeEmp(long lbgAeEmp) {
+		this.lbgAeEmp = lbgAeEmp;
+	}
+
+	@Column(name = "LBG_TOT_DOT", nullable = false, precision = 20, scale = 0)
+	public long getLbgTotDot() {
+		return this.lbgTotDot;
+	}
+
+	public void setLbgTotDot(long lbgTotDot) {
+		this.lbgTotDot = lbgTotDot;
+	}
+
+	@Column(name = "LBG_DIS_TOT", precision = 20, scale = 0)
+	public long getLbgDisTot() {
+		return this.lbgDisTot;
+	}
+
+	public void setLbgDisTot(long lbgDisTot) {
+		this.lbgDisTot = lbgDisTot;
 	}
 }

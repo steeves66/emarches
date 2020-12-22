@@ -22,6 +22,7 @@ import com.sndi.dao.WhereClause;
 import com.sndi.dao.WhereClause.Comparateur;
 import com.sndi.model.TAffichagePgpm;
 import com.sndi.model.TAffichagePpm;
+import com.sndi.model.TAvisAppelOffre;
 import com.sndi.model.TBailleur;
 import com.sndi.model.TCharge;
 import com.sndi.model.TDetailPlanGeneral;
@@ -359,6 +360,8 @@ public class PpmController {
 	     public boolean finPrq = false;
 	     public boolean panelBailleur = false;
 	     public boolean panelAno = false;
+	     public boolean panelPgpmNormal = true;
+	     public boolean panelPgpmDp = false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -679,6 +682,22 @@ public class PpmController {
 		 
 		 //Fin de la Methode OnFlow
 		 
+		 
+		//Methode de récupération de l'AMI de la DP
+		 public void recupPpm(long dppId) {
+			 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+dppId));
+				if(!PPM.isEmpty()) detailPass = PPM.get(0);
+				
+				finLib = "DE l'AMI";
+				 finPgpm = false;
+			     finAmi = true;
+			     panelPgpmNormal = false;
+			     panelPgpmDp = true;
+				
+				listeFinancementAmi.clear();
+				 listeFinancementAmi = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+dppId)));
+		      }
 		 
 		 //Debut controle bailleur
 		 public void bailleurExiste() {
@@ -2663,9 +2682,34 @@ public class PpmController {
 		 
 		//Méthode Love pour les DP
 		 public void onSelectAmiDp() {
+			 finLib = "DE l'AMI";
+			 finPgpm = false;
+		     finAmi = true;
+		     panelPgpmNormal = false;
+		     panelPgpmDp = true;
+			 recupPgpm.setGpgObjet(amiDp.getGpgObjet());
+			 recupPgspm.setGpgObjet(amiDp.getGpgObjet());
 			 recupAmiDp.setDppId(amiDp.getDppId());
 			 recupAmiDp.setDppObjet(amiDp.getDppObjet());
-			 infosAmi();
+			 detailPass.dppStructureConduc = amiDp.getDppStructureConduc(); 
+			 nbreOuv = amiDp.getDppNbOuv();
+			 recupLigne.setLbgImputation(amiDp.getDppLbgCode());
+			 recupLigne.setNatLibelle(amiDp.getNatLibelle());
+			 recupLigne.setLbgTotDot(amiDp.getLbgTotDot());
+			 recupLigne.setLbgAeTr(amiDp.getLbgAeTr());
+			 recupLigne.setLbgAeEmp(amiDp.getLbgAeEmp());
+			 recupLigne.setLbgAeDon(amiDp.getLbgAeDon());
+			 recupLigne.setLbgDisTot(amiDp.getLbgDisTot());
+			 
+			 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+amiDp.getDppId()));
+				if(!PPM.isEmpty()) detailPass = PPM.get(0);
+				
+			 listeFinancementAmi.clear();
+			 listeFinancementAmi = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+amiDp.getDppId())));
+			 //recupPpm(amiDp.getDppId());
+            
+			 //infosAmi();
 				}
 		 
 		 
@@ -3829,6 +3873,8 @@ public class PpmController {
 		    				updatePpm=listUpdate.get(0); 
 		    			}
 		      }
+		 
+		 
 		 
 		 //Afficher les financements du projet ou pgpm selectionné
 		 public void chargeFinancementUpdate() {
@@ -6903,6 +6949,22 @@ public class PpmController {
 
 	public void setPanelAno(boolean panelAno) {
 		this.panelAno = panelAno;
+	}
+
+	public boolean isPanelPgpmNormal() {
+		return panelPgpmNormal;
+	}
+
+	public void setPanelPgpmNormal(boolean panelPgpmNormal) {
+		this.panelPgpmNormal = panelPgpmNormal;
+	}
+
+	public boolean isPanelPgpmDp() {
+		return panelPgpmDp;
+	}
+
+	public void setPanelPgpmDp(boolean panelPgpmDp) {
+		this.panelPgpmDp = panelPgpmDp;
 	}
 	
 }
