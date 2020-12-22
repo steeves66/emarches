@@ -357,6 +357,8 @@ public class PpmController {
 	     public boolean finPgpm = true;
 	     public boolean finAmi = false;
 	     public boolean finPrq = false;
+	     public boolean panelBailleur = false;
+	     public boolean panelAno = false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -671,10 +673,40 @@ public class PpmController {
 		                    	  }
 		                 }
 				     }
+				        
 			            return event.getNewStep();
 		    }
 		 
 		 //Fin de la Methode OnFlow
+		 
+		 
+		 //Debut controle bailleur
+		 public void bailleurExiste() {
+			if(detailPass.getDppBailleur().equalsIgnoreCase("B")) {
+				panelBailleur = true;
+				
+			}else
+			{
+				panelBailleur = false;	
+			}
+			_logger.info("bailleur: "+detailPass.getDppBailleur());
+			_logger.info("panelBailleur: "+panelBailleur);
+		 }
+		//Fin controle bailleur
+		 
+		//Debut controle ANO
+		 public void anoExiste() {
+			if(detailPass.getDppStatutAno().equalsIgnoreCase("O")) {
+				panelAno = true;
+				
+			}else
+			{
+				panelAno = false;	
+			}
+			_logger.info("ANO: "+detailPass.getDppStatutAno());
+			_logger.info("panelAno: "+panelAno);
+		 }
+		//Fin controle ANO
 		 
 		 public void controleLibelle() {
 			 if(mode=="AMI") {
@@ -3385,7 +3417,8 @@ public class PpmController {
 							String rechercheAll = search.replace("null","");
 							detailPass.setDppRecherche(rechercheAll);
 							iservice.updateObject(detailPass);
-							
+							bailleurExiste();
+							anoExiste();
 				 		     recupDateGenere();
 				 			chargeData(typePlan);
 				 			boutonEdit =true; 
@@ -3401,7 +3434,8 @@ public class PpmController {
 			 	 		  }else
 			 	 		  {
 			 	 			saveDetailPlan(planPass, ""+typePlan);
-			 	 			
+			 	 			bailleurExiste();
+			 	 			anoExiste();
 				 	  		String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 							String rechercheAll = search.replace("null","");
 							detailPass.setDppRecherche(rechercheAll);
@@ -3456,7 +3490,8 @@ public class PpmController {
 			 	  		     iservice.addObject(planPass);
 			 	  		    
 			 	  		    saveDetailPlan(planPass, ""+typePlan);
-			 		  		 
+			 	  		    bailleurExiste();
+			 	  		    anoExiste();
 			 	  		    String search = detailPass.getDppObjet()+""+detailPass.getDppSourceFin()+""+detailPass.getDppTypePlan()+""+detailPass.getTModePassation().getMopCode()+""+detailPass.getDppStructureBenefi()+""+detailPass.getDppStructureConduc()+""+detailPass.getDppSourceFin();
 							String rechercheAll = search.replace("null","");
 							detailPass.setDppRecherche(rechercheAll);
@@ -4938,6 +4973,9 @@ public class PpmController {
 				     libelleDPAMI = false;
 				     libelleDPPRQ = false;
 				     mode ="";
+				     
+				     panelBailleur = false;
+				     panelAno = false;
 		    	 }
 				 
 				 
@@ -6849,6 +6887,22 @@ public class PpmController {
 
 	public void setListeFinancementPrq(List<VFinancementPpm> listeFinancementPrq) {
 		this.listeFinancementPrq = listeFinancementPrq;
+	}
+
+	public boolean isPanelBailleur() {
+		return panelBailleur;
+	}
+
+	public void setPanelBailleur(boolean panelBailleur) {
+		this.panelBailleur = panelBailleur;
+	}
+
+	public boolean isPanelAno() {
+		return panelAno;
+	}
+
+	public void setPanelAno(boolean panelAno) {
+		this.panelAno = panelAno;
 	}
 	
 }
