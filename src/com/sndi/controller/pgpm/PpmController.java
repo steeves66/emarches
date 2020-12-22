@@ -52,6 +52,7 @@ import com.sndi.model.VDetPlaning;
 import com.sndi.model.VDetTabBordPgpm;
 import com.sndi.model.VDetTabBordPpm;
 import com.sndi.model.VFinancementPgpm;
+import com.sndi.model.VFinancementPpm;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VGenerationDate;
 import com.sndi.model.VLigneImputation;
@@ -176,6 +177,8 @@ public class PpmController {
 	     private List<VPgpmFonction> listePgpm = new ArrayList<VPgpmFonction>();
 	     private List<VPgpmFonction> listePgspm = new ArrayList<VPgpmFonction>();
 	     private List<TFinancementPpm> listeFinancement = new ArrayList<TFinancementPpm>();
+	     private List<VFinancementPpm> listeFinancementAmi = new ArrayList<VFinancementPpm>();
+	     private List<VFinancementPpm> listeFinancementPrq = new ArrayList<VFinancementPpm>();
 	     //private List<TFinancementPgpm> listeFinancementPgpm = new ArrayList<TFinancementPgpm>();
 	     private List<VFinancementPgpm> listeFinancementPgpm = new ArrayList<VFinancementPgpm>();
 	     private List<TMinistere> listeMinistere = new ArrayList<TMinistere>();
@@ -284,6 +287,7 @@ public class PpmController {
 		 private long  totalMontantPpm;
 		 //private long  nbreOuv;
 		 private String  nbreOuv;
+		 private String  finLib ="DU PGPM";
 		 private String filtreTypeMarche="";
 		 private String filtreModePassation="";
 		 private String observation="";
@@ -350,6 +354,9 @@ public class PpmController {
 	     public boolean libelleAmi= false;
 	     public boolean libellePrq= false;
 	     public boolean libellePpm= false;
+	     public boolean finPgpm = true;
+	     public boolean finAmi = false;
+	     public boolean finPrq = false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -2624,15 +2631,61 @@ public class PpmController {
 		 
 		//Méthode Love pour les DP
 		 public void onSelectAmiDp() {
-			 recupAmiDp .setDppId(amiDp.getDppId());
+			 recupAmiDp.setDppId(amiDp.getDppId());
 			 recupAmiDp.setDppObjet(amiDp.getDppObjet());
+			 infosAmi();
 				}
+		 
+		 
+		 //Informations de l'AMI Sélectionné
+		 public void infosAmi() {
+			 finLib = "DE l'AMI";
+			 finPgpm = false;
+		     finAmi = true;
+			 detailPass.dppStructureBenefi = amiDp.getDppStructureBenefi();
+			 detailPass.dppPartiePmePmi = amiDp.getDppPartiePmePmi();
+			 detailPass.dppStructureConduc = amiDp.getDppStructureConduc();
+			 strucCond = amiDp.getDppTypeStrConduc();
+			 detailPass.dppStatutAno = amiDp.getDppStatutAno();
+			 detailPass.dppNatInt = amiDp.getDppNatInt();
+			 detailPass.dppBailleur = amiDp.getDppBailleur();
+			 detailPass.dppObjet = amiDp.getDppObjet();
+			 nbreOuv = amiDp.getDppNbOuv();
+			 
+			 listeFinancementAmi.clear();
+			 listeFinancementAmi = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+amiDp.getDppId()))); 
+		 }
+		 
 		 
 		//Méthode Love pour les DP
 		 public void onSelectPrqDp() {
 			 recupPrqDp.setDppId(prqDp.getDppId());
 			 recupPrqDp.setDppObjet(prqDp.getDppObjet());
+			 infosPrq();
 				}
+		 
+		 
+		 //Informations de la PRQ Sélectionné
+		 public void infosPrq() {
+			 finLib = "DE LA PREQUALIFICATION";
+			 finPgpm = false;
+		     finAmi = false;
+		     finPrq = true;
+			 detailPass.dppStructureBenefi = prqDp.getDppStructureBenefi();
+			 detailPass.dppPartiePmePmi = prqDp.getDppPartiePmePmi();
+			 detailPass.dppStructureConduc = prqDp.getDppStructureConduc();
+			 strucCond = amiDp.getDppTypeStrConduc();
+			 detailPass.dppStatutAno = prqDp.getDppStatutAno();
+			 detailPass.dppNatInt = prqDp.getDppNatInt();
+			 detailPass.dppBailleur = prqDp.getDppBailleur();
+			 detailPass.dppObjet = prqDp.getDppObjet();
+			 nbreOuv = prqDp.getDppNbOuv();
+			 
+			 listeFinancementPrq.clear();
+			 listeFinancementPrq = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+prqDp.getDppId()))); 
+		 }
 		 //Afficher le nombre d'Ouvertures en choisissant le type de marché
 		 public void affichNbreOuvMarche() {
 			 if(marche.getTymCode().equalsIgnoreCase("11")) {
@@ -2678,6 +2731,9 @@ public class PpmController {
 			 partPgspm = false;
 			 panelFinPgpm = true;
 			 panelFinPpm = false;
+			 finPgpm = true;
+			 finAmi = false;
+		     finPrq = false;
 			 
 			 afficheDateFctPg();
 			 
@@ -2784,6 +2840,9 @@ public class PpmController {
 			 partPgspm = true;
 			 panelFinPgpm = true;
 			 panelFinPpm = false;
+			 finPgpm = true;
+			 finAmi = false;
+			 finPrq = false;
 			 
 			 afficheDateFctPg();
 			 
@@ -6744,6 +6803,52 @@ public class PpmController {
 		this.pavetDPPRQ = pavetDPPRQ;
 	}
 
-	
+	public boolean isFinPgpm() {
+		return finPgpm;
+	}
+
+	public void setFinPgpm(boolean finPgpm) {
+		this.finPgpm = finPgpm;
+	}
+
+	public boolean isFinAmi() {
+		return finAmi;
+	}
+
+	public void setFinAmi(boolean finAmi) {
+		this.finAmi = finAmi;
+	}
+
+	public String getFinLib() {
+		return finLib;
+	}
+
+	public void setFinLib(String finLib) {
+		this.finLib = finLib;
+	}
+
+	public List<VFinancementPpm> getListeFinancementAmi() {
+		return listeFinancementAmi;
+	}
+
+	public void setListeFinancementAmi(List<VFinancementPpm> listeFinancementAmi) {
+		this.listeFinancementAmi = listeFinancementAmi;
+	}
+
+	public boolean isFinPrq() {
+		return finPrq;
+	}
+
+	public void setFinPrq(boolean finPrq) {
+		this.finPrq = finPrq;
+	}
+
+	public List<VFinancementPpm> getListeFinancementPrq() {
+		return listeFinancementPrq;
+	}
+
+	public void setListeFinancementPrq(List<VFinancementPpm> listeFinancementPrq) {
+		this.listeFinancementPrq = listeFinancementPrq;
+	}
 	
 }

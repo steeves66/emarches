@@ -357,7 +357,7 @@
 			 
 		  <div class="box box-success box-solid">
               <div class="box-header with-border">
-               <div class="col-md-12 "><div  style="color: #fff">SOURCES DE FINANCEMENT PGPM</div></div>
+               <div class="col-md-12 "><div  style="color: #fff">SOURCES DE FINANCEMENT #{ppmController.finLib}</div></div>
                 <!-- <div class="col-md-1 "> 
 			           <p:commandLink oncomplete="PF('DetailDlg').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
@@ -399,7 +399,7 @@
                 </div>
             </h:panelGroup>
                 
-           <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
+         <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'CPM'}">
         <div class="form-group">
                   <label class="col-sm-3 control-label">Imputation Budgétaire<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
@@ -461,6 +461,7 @@
         
         <div class="col-md-12">
          
+        <h:panelGroup rendered="#{ppmController.finPgpm}">
          <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listeFinancementPgpm}"
           editable="true" editMode="cell"  emptyMessage="Aucun financement enregistré">
                         
@@ -504,6 +505,94 @@
 		               </p:cellEditor>
 				        </p:column>
                  </p:dataTable>
+               </h:panelGroup>  
+             
+                 
+          <h:panelGroup rendered="#{ppmController.finAmi}">
+         <p:dataTable id="financeAmi" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listeFinancementAmi}"
+          editable="true" editMode="cell"  emptyMessage="Aucun financement enregistré">
+                        
+                        <p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fppTypeFinance}"/>
+				        </p:column>
+          
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.souLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Part Bailleur" width="6%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppMontantCfa}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fppMontantCfa}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		               <p:ajax event="blur" process="@this" global="false" update="modelInput" /> 
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Part Trésor" width="5%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppPartTresor}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput1" value="#{slctdTb.fppPartTresor}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                <p:ajax event="blur" process="@this" global="false" update="modelInput1" /> 
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+                 </p:dataTable>
+               </h:panelGroup>   
+               
+               
+        <h:panelGroup rendered="#{ppmController.finPrq}">
+         <p:dataTable id="financePrq" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmController.listeFinancementPrq}"
+            emptyMessage="Aucun financement enregistré">
+                        
+                        <p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fppTypeFinance}"/>
+				        </p:column>
+          
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.souLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Part Bailleur" width="6%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppMontantCfa}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fppMontantCfa}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		               <p:ajax event="blur" process="@this" global="false" update="modelInput" /> 
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Part Trésor" width="5%">
+
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppPartTresor}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+				        </p:column>
+                 </p:dataTable>
+               </h:panelGroup>   
                  
         </div>
         
@@ -2634,7 +2723,7 @@
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePrqDp}"
 						  selectionMode="single" rowKey="#{slctdTb.dppId}"
-			               emptyMessage="Aucun PRQ trouvé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               emptyMessage="Aucune PRQ trouvée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
                            <h:commandLink id="fonction" title="PRQ" style="font-size:18px;"  action="#{ppmController.onSelectPrqDp()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.dppObjet}" />

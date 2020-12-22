@@ -45,7 +45,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private String dppCode;
 	private Integer dppNumeroOrdre;
 	private Date dppDate;
-	private String dppObjet;
+	public String dppObjet;
 	private String dppSourceFin;
 	private Date dppDateDaoTrans;
 	private Date dppDateDaoApprobDmp;
@@ -66,8 +66,8 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private String dppActeurSaisie;
 	private String dppStatutRetour;
 	private Date dppDateSaisie;
-	private String dppStructureConduc;
-	private String dppStructureBenefi;
+	public String dppStructureConduc;
+	public String dppStructureBenefi;
 	public String dppPartiePmePmi;
 	private String dppStatutDao;
 	private Date dppInvEntre;
@@ -76,7 +76,7 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private Date dppDateValAc;
 	private Date dppDateValCpmp;
 	private Date dppDateValDmp;
-	private String dppBailleur;
+	public String dppBailleur;
 	private String dppTypeFinance;
 	private Date dppApprobAno;
 	private Date dppDteModif;
@@ -84,9 +84,9 @@ public class TDetailPlanPassation implements java.io.Serializable {
 	private String dppFonCodPf;
 	private String dppFonCodDmp;
 	private Long dppMontant;
-	private String dppNatInt;
-	private String dppTypeStrConduc;
-	private String dppStatutAno;
+	public String dppNatInt;
+	public String dppTypeStrConduc;
+	public String dppStatutAno;
 	private Date dppDateSolFact;
 	private Date dppDateRecepFact;
 	private Date dppDateRecepLettr;
