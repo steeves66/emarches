@@ -572,17 +572,9 @@
 				        </p:column>
 				        
 				        <p:column headerText="Part Bailleur" width="6%">
-				          <p:cellEditor>
-		                <f:facet name="output">
 		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppMontantCfa}" >
 		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 		                </h:outputText>
-		                </f:facet>
-		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fppMontantCfa}" style="width:100%">
-		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
-		               <p:ajax event="blur" process="@this" global="false" update="modelInput" /> 
-		                 </p:inputText></f:facet>
-		               </p:cellEditor>
 				        </p:column>
 				        
 				        <p:column headerText="Part Trésor" width="5%">
