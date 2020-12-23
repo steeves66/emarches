@@ -2706,6 +2706,7 @@ public class PpmController {
 			 recupAmiDp.setDppObjet(amiDp.getDppObjet());
 			 detailPass.dppStructureConduc = amiDp.getDppStructureConduc(); 
 			 nbreOuv = amiDp.getDppNbOuv();
+			 recupLigne.setLbgCode(amiDp.getDppLbgCode());
 			 recupLigne.setLbgImputation(amiDp.getDppLbgCode());
 			 recupLigne.setNatLibelle(amiDp.getNatLibelle());
 			 recupLigne.setLbgTotDot(amiDp.getLbgTotDot());
@@ -2764,6 +2765,7 @@ public class PpmController {
 			 nbreOuv = prqDp.getDppNbOuv();
 			 strucCond = prqDp.getDppTypeStrConduc();
 			 recupLigne.setLbgImputation(prqDp.getDppLbgCode());
+			 recupLigne.setLbgCode(prqDp.getDppLbgCode());
 			 recupLigne.setNatLibelle(prqDp.getNatLibelle());
 			 recupLigne.setLbgTotDot(prqDp.getLbgTotDot());
 			 recupLigne.setLbgAeTr(prqDp.getLbgAeTr());
@@ -3787,7 +3789,6 @@ public class PpmController {
         	  		detailPass.setDppTypePlan(modePassation.getMopTypPlan());
         	  		 }
     	 		 detailPass.setTStructure(new TStructure(planPass.getTStructure().getStrCode()));
-    	 		
     	  		 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgpm.getGpgId()));
     	 		 detailPass.setDppGpgId(pgpm.getGpgId());
     	  		 detailPass.setDppTypeStrConduc(strucCond);
