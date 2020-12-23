@@ -86,7 +86,7 @@
                      </table>
                     </h:panelGroup>
                     <h:panelGroup rendered="#{ppmController.panelPgpmDp}">
-                     <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmController.recupPgpm.gpgObjet}" readonly="true" style="width: 100%" />
+                     <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmController.recupPgpm.gpgId} : #{ppmController.recupPgpm.gpgObjet}" readonly="true" style="width: 100%" />
                     </h:panelGroup>
                     
                   </div>
@@ -178,7 +178,16 @@
                      </table>
                      </h:panelGroup>
                      <h:panelGroup rendered="#{ppmController.panelTymDp}">
-                     <p:inputText type="text" value="#{ppmController.recupPgpm.gpgTymCode} : #{ppmController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                      <table>
+		                 <tr>
+		                 <td style="width: 650px">  <p:inputText type="text" value="#{ppmController.recupPgpm.gpgTymCode} : #{ppmController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmController.chargetypeMarcheByModPass()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogMar">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
                      </h:panelGroup>
                   </div>
                 </div>

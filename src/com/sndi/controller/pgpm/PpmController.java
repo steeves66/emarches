@@ -2329,7 +2329,7 @@ public class PpmController {
 		
 		 
 		 public void chargetypeMarcheByModPass() {
-			 //listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
+			/* //listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
 			 listeTypeMarches.clear();
 			 if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA")) {
 				 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
@@ -2339,9 +2339,9 @@ public class PpmController {
 					 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
 							 new WhereClause("TYM_CODE",WhereClause.Comparateur.NEQ,"11")); 
 				 }else 
-				 {
+				 {*/
 				 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils"); 
-			 }
+			 //}
 		 }
 		 
 		 public void chargetypeMarcheByModPassPs() {
@@ -2699,6 +2699,7 @@ public class PpmController {
 		     finAmi = true;
 		     panelPgpmNormal = false;
 		     panelPgpmDp = true;
+		     recupPgpm.setGpgId(amiDp.getDppGpgId());
 			 recupPgpm.setGpgObjet(amiDp.getGpgObjet());
 			 recupPgspm.setGpgObjet(amiDp.getGpgObjet());
 			 recupAmiDp.setDppId(amiDp.getDppId());
