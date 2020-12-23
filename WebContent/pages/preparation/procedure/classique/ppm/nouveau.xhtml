@@ -165,6 +165,7 @@
                   <div class="form-group">
                   <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
+				  <h:panelGroup rendered="#{ppmController.panelTymNormal}">
 				  <table>
 		                 <tr>
 		                 <td style="width: 650px"> <p:inputText id="typMa2" type="text" value="#{ppmController.recupPgpm.gpgTymCode} : #{ppmController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
@@ -175,6 +176,10 @@
 		                 </td>
 		                 </tr>
                      </table>
+                     </h:panelGroup>
+                     <h:panelGroup rendered="#{ppmController.panelTymDp}">
+                     <p:inputText type="text" value="#{ppmController.recupPgpm.gpgTymCode} : #{ppmController.recupPgpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                     </h:panelGroup>
                   </div>
                 </div>
                 </h:panelGroup>

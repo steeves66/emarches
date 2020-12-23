@@ -362,6 +362,8 @@ public class PpmController {
 	     public boolean panelAno = false;
 	     public boolean panelPgpmNormal = true;
 	     public boolean panelPgpmDp = false;
+	     public boolean panelTymNormal = true;
+	     public boolean panelTymDp = false;
 	     
 		 public String onFlowProcess(FlowEvent event) throws IOException {
 			 System.out.println("etape old= "+event.getOldStep()+" New= "+event.getNewStep());
@@ -2316,6 +2318,8 @@ public class PpmController {
 			 //filtreTypeMarche ="";
 		 }	
 		 
+		
+		 
 		 public void chargetypeMarcheByModPass() {
 			 //listeTypeMarchesFils=new ArrayList<>(constantService.getListeTypeMarchesFils());
 			 listeTypeMarches.clear();
@@ -3048,6 +3052,68 @@ public class PpmController {
 		     ligneftpgpm= false;
 		     lignepn= true;
 		     ligneps= false;
+		             //Ramener le type marché en fonction du mode de passation
+					 listeTypeMarches.clear();
+					 if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI")) {
+						 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+								 new WhereClause("TYM_CODE",WhereClause.Comparateur.EQ,"11")); 
+								 if (!listeTypeMarchesFils.isEmpty()) {
+									 marche=listeTypeMarchesFils.get(0); 
+									}
+								 recupPgpm.setGpgTymCode(marche.getTymCode());
+								 recupPgpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+								 panelTymNormal =false;
+								 panelTymDp=true; 
+								 panelPgpmNormal = true;
+							     panelPgpmDp = false;
+					 }else
+						 if(recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA")) {
+							 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+									 new WhereClause("TYM_CODE",WhereClause.Comparateur.EQ,"11")); 
+									 if (!listeTypeMarchesFils.isEmpty()) {
+										 marche=listeTypeMarchesFils.get(0); 
+										}
+									 recupPgpm.setGpgTymCode(marche.getTymCode());
+									 recupPgpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+									 panelTymNormal =false;
+									 panelTymDp=true;  
+									 panelPgpmNormal = false;
+								     panelPgpmDp = true;
+						 }else
+						 if(recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ")) {
+							 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+									 new WhereClause("TYM_CODE",WhereClause.Comparateur.NEQ,"11")); 
+							 if (!listeTypeMarchesFils.isEmpty()) {
+								 marche=listeTypeMarchesFils.get(0); 
+								}
+							 recupPgpm.setGpgTymCode(marche.getTymCode());
+							 recupPgpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+							 panelTymNormal =false;
+							 panelTymDp=true; 
+							 panelPgpmNormal = true;
+						     panelPgpmDp = false;
+						 }else
+							 if(recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ")) {
+								 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+										 new WhereClause("TYM_CODE",WhereClause.Comparateur.NEQ,"11")); 
+								 if (!listeTypeMarchesFils.isEmpty()) {
+									 marche=listeTypeMarchesFils.get(0); 
+									}
+								 recupPgpm.setGpgTymCode(marche.getTymCode());
+								 recupPgpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+								 panelTymNormal =false;
+								 panelTymDp=true; 
+								 panelPgpmNormal = false;
+							     panelPgpmDp = true;
+							 }else
+						     {
+							 recupPgpm.setGpgTymCode("");
+							 recupPgpm.setTymLibelleCourt("");
+							 panelTymNormal =true;
+							 panelTymDp=false; 
+							 panelPgpmNormal = true;
+						     panelPgpmDp = false;
+						 }
 				}
 		 
 		 //Afficher le nombre d'ouvertures en choisissant le mode de passation (Mode PN)
@@ -6992,5 +7058,23 @@ public class PpmController {
 	public void setPanelPgpmDp(boolean panelPgpmDp) {
 		this.panelPgpmDp = panelPgpmDp;
 	}
+
+	public boolean isPanelTymNormal() {
+		return panelTymNormal;
+	}
+
+	public void setPanelTymNormal(boolean panelTymNormal) {
+		this.panelTymNormal = panelTymNormal;
+	}
+
+	public boolean isPanelTymDp() {
+		return panelTymDp;
+	}
+
+	public void setPanelTymDp(boolean panelTymDp) {
+		this.panelTymDp = panelTymDp;
+	}
+	
+	
 	
 }
