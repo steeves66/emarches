@@ -368,7 +368,7 @@ public class PpmController {
 				//Controle Pavé création pour les ppm / pspm normaux
 				 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
-		  					|| detailPass.getDppStatutAno() == null || ligne.getLbgCode() == null || nbreOuv == null)
+		  					|| detailPass.getDppStatutAno() == null || /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -432,7 +432,7 @@ public class PpmController {
 					 
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null
-		  				   || ligne.getLbgCode() == null || nbreOuv == null)
+		  				   ||  /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -498,7 +498,7 @@ public class PpmController {
 					 
 		  			 if(strucCond == null || detailPass.getDppStructureBenefi() == null || detailPass.getDppObjet() == null ||detailPass.getDppBailleur() == null || detailPass.getDppNatInt() == null
 		  					|| detailPass.getDppStatutAno() == null
-		  				   || ligne.getLbgCode() == null || nbreOuv == null)
+		  				   ||  /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -2736,9 +2736,34 @@ public class PpmController {
 		 
 		//Méthode Love pour les DP
 		 public void onSelectPrqDp() {
+	
+			 finLib = "DE LA PREQUALIFICATION";
+			 finPgpm = false;
+		     finAmi = false;
+		     finPrq = true;
+		     panelPgpmNormal = false;
+		     panelPgpmDp = true;
+			 recupPgpm.setGpgObjet(prqDp.getGpgObjet());
+			 recupPgspm.setGpgObjet(prqDp.getGpgObjet());
 			 recupPrqDp.setDppId(prqDp.getDppId());
 			 recupPrqDp.setDppObjet(prqDp.getDppObjet());
-			 infosPrq();
+			 detailPass.dppStructureConduc = prqDp.getDppStructureConduc(); 
+			 nbreOuv = prqDp.getDppNbOuv();
+			 strucCond = prqDp.getDppTypeStrConduc();
+			 recupLigne.setLbgImputation(prqDp.getDppLbgCode());
+			 recupLigne.setNatLibelle(prqDp.getNatLibelle());
+			 recupLigne.setLbgTotDot(prqDp.getLbgTotDot());
+			 recupLigne.setLbgAeTr(prqDp.getLbgAeTr());
+			 recupLigne.setLbgAeEmp(prqDp.getLbgAeEmp());
+			 recupLigne.setLbgAeDon(prqDp.getLbgAeDon());
+			 recupLigne.setLbgDisTot(prqDp.getLbgDisTot());
+			 
+			 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+prqDp.getDppId()));
+				if(!PPM.isEmpty()) detailPass = PPM.get(0);
+				
+				 listeFinancementPrq.clear();
+				 listeFinancementPrq = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+prqDp.getDppId()))); 
 				}
 		 
 		 
@@ -3694,7 +3719,8 @@ public class PpmController {
     	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
     	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
     	  		 detailPass.setTPlanPassation(TPlanPassation);
-    	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+    	  		 //detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode())); 
+    	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
     	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
     	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
     	  		 detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());
@@ -3740,8 +3766,8 @@ public class PpmController {
               		    detailPass.setDppTypeStrConduc(strucCond);
               		    detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
               		    detailPass.setTPlanPassation(planPass);
-              		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
-              		    
+              		    //detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+              		    detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
               		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
               		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
               		    detailPass.setDppFonCodPf(userController.getSlctd().getTFonction().getFonCodePf());

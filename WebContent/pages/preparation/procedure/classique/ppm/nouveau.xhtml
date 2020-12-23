@@ -88,6 +88,7 @@
                     <h:panelGroup rendered="#{ppmController.panelPgpmDp}">
                      <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmController.recupPgpm.gpgObjet}" readonly="true" style="width: 100%" />
                     </h:panelGroup>
+                    
                   </div>
                 </div>
                 </h:panelGroup>
@@ -2650,11 +2651,11 @@
 						 
 				    <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				                <p:commandLink styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"/>
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le libellé de l'AMI" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                      <p:commandLink  styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  />
                     </span>
 					 </div>
 						 
@@ -2698,7 +2699,7 @@
 					    <span class="input-group-btn">
 				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir la préqualification" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
                       <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
                     </span>
