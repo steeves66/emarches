@@ -502,6 +502,14 @@ public class PpmController {
 		  					|| detailPass.getDppStatutAno() == null
 		  				   ||  /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
+		  				_logger.info("strucCond: "+strucCond);
+		  				_logger.info("structBen: "+detailPass.getDppStructureBenefi());
+		  				_logger.info("objet: "+detailPass.getDppObjet());
+		  				_logger.info("bailleur: "+detailPass.getDppBailleur());
+		  				_logger.info("national: "+detailPass.getDppNatInt());
+		  				_logger.info("lgbCode: "+recupLigne.getLbgCode());
+		  				_logger.info("nbreOuverture: "+nbreOuv);
+		  				
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
 				          return "ope111";
