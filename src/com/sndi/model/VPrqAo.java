@@ -36,6 +36,7 @@ public class VPrqAo implements java.io.Serializable {
     private String natLibelle;
     private Long dppGpgId;
     private String gpgObjet;
+    private String lbgImputation;
     private long lbgAeTr;
     private long lbgAeDon;
     private long lbgAeEmp;
@@ -52,7 +53,8 @@ public class VPrqAo implements java.io.Serializable {
 
 	public VPrqAo(long dppId, String dppObjet, String dppTypePlan, String dppPartiePmePmi, String dppStructureBenefi,
 			String dppStructureConduc, String dppTypeStrConduc, String dppStatutAno, String dppNatInt,
-			String dppBailleur, String dppTymCode, String dppMopCode, String dppNbOuv, String dppLbgCode, String natLibelle, Long dppGpgId, String gpgObjet, long lbgAeTr, long lbgAeDon, long lbgAeEmp, long lbgTotDot, long lbgDisTot) {
+			String dppBailleur, String dppTymCode, String dppMopCode, String dppNbOuv, String dppLbgCode, String natLibelle, Long dppGpgId, String gpgObjet,String lbgImputation, 
+			long lbgAeTr, long lbgAeDon, long lbgAeEmp, long lbgTotDot, long lbgDisTot) {
 		this.dppId = dppId;
 		this.dppObjet = dppObjet;
 		this.dppTypePlan = dppTypePlan;
@@ -70,6 +72,7 @@ public class VPrqAo implements java.io.Serializable {
 	    this.natLibelle = natLibelle;
 	    this.dppGpgId = dppGpgId;
 	    this.gpgObjet = gpgObjet;
+	    this.lbgImputation = lbgImputation;
 	    this.lbgAeTr = lbgAeTr;
 	    this.lbgAeDon = lbgAeDon;
 	    this.lbgAeEmp = lbgAeEmp;
@@ -234,7 +237,14 @@ public class VPrqAo implements java.io.Serializable {
 	        this.gpgObjet = gpgObjet;
 	    }
 
+		@Column(name = "LBG_IMPUTATION")
+		public String getLbgImputation() {
+			return this.lbgImputation;
+		}
 
+		public void setLbgImputation(String lbgImputation) {
+			this.lbgImputation = lbgImputation;
+		}
 	    @Column(name="LBG_AE_TR")
 	    public long getLbgAeTr() {
 	        return this.lbgAeTr;

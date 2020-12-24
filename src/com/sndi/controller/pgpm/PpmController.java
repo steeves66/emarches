@@ -2704,10 +2704,11 @@ public class PpmController {
 			 recupPgspm.setGpgObjet(amiDp.getGpgObjet());
 			 recupAmiDp.setDppId(amiDp.getDppId());
 			 recupAmiDp.setDppObjet(amiDp.getDppObjet());
-			 detailPass.dppStructureConduc = amiDp.getDppStructureConduc(); 
+			 detailPass.dppStructureConduc = amiDp.getDppStructureConduc();
+			 strucCond = amiDp.getDppTypeStrConduc();
 			 nbreOuv = amiDp.getDppNbOuv();
 			 recupLigne.setLbgCode(amiDp.getDppLbgCode());
-			 recupLigne.setLbgImputation(amiDp.getDppLbgCode());
+			 recupLigne.setLbgImputation(amiDp.getLbgImputation());
 			 recupLigne.setNatLibelle(amiDp.getNatLibelle());
 			 recupLigne.setLbgTotDot(amiDp.getLbgTotDot());
 			 recupLigne.setLbgAeTr(amiDp.getLbgAeTr());
@@ -2721,9 +2722,7 @@ public class PpmController {
 			 listeFinancementAmi.clear();
 			 listeFinancementAmi = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
 							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+amiDp.getDppId())));
-			 //recupPpm(amiDp.getDppId());
-            
-			 //infosAmi();
+			 _logger.info("Code de la ligne : "+recupLigne.getLbgCode() +" Imuptation :  "+recupLigne.getLbgImputation());
 				}
 		 
 		 
@@ -2764,7 +2763,7 @@ public class PpmController {
 			 detailPass.dppStructureConduc = prqDp.getDppStructureConduc(); 
 			 nbreOuv = prqDp.getDppNbOuv();
 			 strucCond = prqDp.getDppTypeStrConduc();
-			 recupLigne.setLbgImputation(prqDp.getDppLbgCode());
+			 recupLigne.setLbgImputation(prqDp.getLbgImputation());
 			 recupLigne.setLbgCode(prqDp.getDppLbgCode());
 			 recupLigne.setNatLibelle(prqDp.getNatLibelle());
 			 recupLigne.setLbgTotDot(prqDp.getLbgTotDot());
@@ -2779,6 +2778,8 @@ public class PpmController {
 				 listeFinancementPrq.clear();
 				 listeFinancementPrq = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
 							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+prqDp.getDppId()))); 
+				 
+				 _logger.info("Code de la ligne : "+recupLigne.getLbgCode() +" Imuptation :  "+recupLigne.getLbgImputation());
 				}
 		 
 		 
@@ -3565,7 +3566,7 @@ public class PpmController {
 							iservice.updateObject(detailPass);
 							bailleurExiste();
 							anoExiste();
-				 		     recupDateGenere();
+				 		    recupDateGenere();
 				 			chargeData(typePlan);
 				 			boutonEdit =true; 
 				 			boutonEditPspm =false;
@@ -3696,7 +3697,6 @@ public class PpmController {
 					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
 				if (!listeTsPpm.isEmpty()) {
 					
-					
 					if(controleController.type =="PPM") {
 						
 						if(marche.getTymCode() == null) {
@@ -3720,7 +3720,7 @@ public class PpmController {
 			 	  		 detailPass.setDppTypeStrConduc(strucCond);
 			 	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
 			 	  		 detailPass.setTPlanPassation(TPlanPassation);
-			 	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+			 	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
 			 	  		 detailPass.setDppTypePlan(typePlan);
 			 	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
 			 	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
@@ -3731,6 +3731,16 @@ public class PpmController {
 			 	  		 detailPass.setDppStatutRetour("0");
 			 	  		 detailPass.setDppStatutDao("N");
 			 	  		 iservice.updateObject(detailPass);
+			 	  		 
+			 	  		 //DP AMI ET PRQ
+			     		    if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("DPA")) {
+			          	  		    detailPass.setDppDppId(recupAmiDp.getDppId());
+			          	  		    iservice.addObject(detailPass); 
+			     	        }else
+			     	        	if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("DPQ")) {
+			     	        		detailPass.setDppDppId(recupPrqDp.getDppId());
+			          	  		    iservice.addObject(detailPass); 	
+			     	        	}
 						
 					}else {
 						
@@ -3755,7 +3765,7 @@ public class PpmController {
  			 	  		 detailPass.setDppTypeStrConduc(strucCond);
  			 	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
  			 	  		 detailPass.setTPlanPassation(TPlanPassation);
- 			 	  		 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+ 			 	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
  			 	  		 detailPass.setDppTypePlan(typePlan);
  			 	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
  			 	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
@@ -3766,8 +3776,18 @@ public class PpmController {
  			 	  		 detailPass.setDppStatutRetour("0");
  			 	  		 detailPass.setDppStatutDao("N");
  			 	  		 iservice.updateObject(detailPass);
+ 			 	  		 
+ 			 	  	    //DP AMI ET PRQ
+             		    if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("DPS")) {
+                  	  		    detailPass.setDppDppId(recupAmiDp.getDppId());
+                  	  		    iservice.addObject(detailPass); 
+             	        }else
+             	        	if(detailPass.getTModePassation().getMopCode().equalsIgnoreCase("DQS")) {
+             	        		detailPass.setDppDppId(recupPrqDp.getDppId());
+                  	  		    iservice.addObject(detailPass); 	
+             	        	}
 					}
-	  	 }
+	  	    }
 	  }	 
 	  	 
 	  	@Transactional
@@ -3795,7 +3815,6 @@ public class PpmController {
     	  		 detailPass.setDppDateAvisAoPublication(pubDate.getDatepub());
     	  		 detailPass.setDppSourceFin(pgpm.getGpgLibFin());
     	  		 detailPass.setTPlanPassation(TPlanPassation);
-    	  		 //detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode())); 
     	  		 detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
     	  		 detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
     	  		 detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
@@ -3885,7 +3904,7 @@ public class PpmController {
                 		    detailPass.setTModeleDacType(new TModeleDacType(tydCode));
                 		    detailPass.setDppTypeStrConduc(strucCond);
                 		    detailPass.setTPlanPassation(planPass);
-                		    detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+                		    detailPass.setTLBudgets(new TLBudgets(recupLigne.getLbgCode()));
                 		    //detailPass.setDppTypePlan(typePlan);
                 		    detailPass.setTStructure(userController.getSlctd().getTFonction().getTStructure());
                 		    detailPass.setDppActeurSaisie(userController.getSlctd().getTFonction().getFonCod());
