@@ -279,6 +279,7 @@ public class PpmController {
 		 private TStructure recupStructure= new TStructure();
 		 private THistoPlanPassation histoPpm = new THistoPlanPassation();
 		 private VUpdatePpm updatePpm = new VUpdatePpm();
+		 private VModeleDac modelDac = new VModeleDac();
 		
 	 
 		//Declaration des variables
@@ -502,13 +503,6 @@ public class PpmController {
 		  					|| detailPass.getDppStatutAno() == null
 		  				   ||  /*ligne.getLbgCode() == null*/ recupLigne.getLbgCode() == null || nbreOuv == null)
 		  			   {
-		  				_logger.info("strucCond: "+strucCond);
-		  				_logger.info("structBen: "+detailPass.getDppStructureBenefi());
-		  				_logger.info("objet: "+detailPass.getDppObjet());
-		  				_logger.info("bailleur: "+detailPass.getDppBailleur());
-		  				_logger.info("national: "+detailPass.getDppNatInt());
-		  				_logger.info("lgbCode: "+recupLigne.getLbgCode());
-		  				_logger.info("nbreOuverture: "+nbreOuv);
 		  				
 						 FacesContext.getCurrentInstance().addMessage(null,
 						 new FacesMessage(FacesMessage.SEVERITY_ERROR, "Veullez remplir tous les champs obligatoires, avant de cliquer sur suivant!", ""));
@@ -596,6 +590,7 @@ public class PpmController {
 	                    		      }
 						        }
 		                	 recupModeleDao();
+						        //recupModeleDaoAmiPrq();
 		                 }else 
 		                      if(controleController.type == "PSPM"){
 		                    	  if(passationListe.getMopTypPlan() == null) {
@@ -614,7 +609,7 @@ public class PpmController {
 		                    		      }
 		                    		       
 		                    	  }
-		                    	  
+		                    	  //recupModeleDaoAmiPrq();
 		                    	  recupModeleDao();
 		                    	  if(controleController.type == "PPM") {
 		                    		  controlPanel();
@@ -3512,6 +3507,16 @@ public class PpmController {
 			    			_logger.info("id ppm : "+detailPass.getDppId());
 			 }
 			 
+			//Recupertation du mode de qualification PRQ
+			 public void recupModeleDaoAmiPrq() {
+			    			listeModele= (List<VModeleDac>) iservice.getObjectsByColumn("VModeleDac", new ArrayList<String>(Arrays.asList("DPP_ID")),
+			    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+			    			if (!listeModele.isEmpty()) {
+			    				modelDac=listeModele.get(0); 
+			    			}
+			    			_logger.info("id ppm : "+detailPass.getDppId());
+			 }
+			 
 			//Afficher la liste des Ami DP
 			 public void chargeAmiDp() {
 				 if(controleController.typePlan == "PN") {
@@ -3969,7 +3974,16 @@ public class PpmController {
   		              detailPass.setDppDateOuvertOt(geneDate.getDppDateOuvertOt());
   		              detailPass.setDppDateSignatAc(geneDate.getDppDateSignatAc());
   		              detailPass.setDppDateSignatAttrib(geneDate.getDppDateSignatAttrib());
-  		              detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+  		              
+	  		         /*   if(recupPgpm.getGpgMopCode().equalsIgnoreCase("AMI") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPA") ||
+	  		            		recupPgpm.getGpgMopCode().equalsIgnoreCase("PRQ") || recupPgpm.getGpgMopCode().equalsIgnoreCase("DPQ") ||
+	  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("AMS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DPS") ||
+	  		            		recupPgspm.getGpgMopCode().equalsIgnoreCase("PQS") || recupPgspm.getGpgMopCode().equalsIgnoreCase("DQS")) {
+	  		            	detailPass.setTModeleDacType(new TModeleDacType(modelDac.getMdtCode()));
+	     	             }else {*/
+	     	            	detailPass.setTModeleDacType(new TModeleDacType(tydCode));
+	     	             //}
+
 			          iservice.updateObject(detailPass);
 			         
 			          boutonEdit =true;
@@ -5141,6 +5155,10 @@ public class PpmController {
 				     libelleDPPRQ = false;
 				     mode ="";
 				     
+				     panelPgpmNormal = true;
+				     panelPgpmDp = false;
+				     panelTymNormal = true;
+				     panelTymDp = false;
 				     panelBailleur = false;
 				     panelAno = false;
 		    	 }
@@ -7102,6 +7120,14 @@ public class PpmController {
 
 	public void setPanelTymDp(boolean panelTymDp) {
 		this.panelTymDp = panelTymDp;
+	}
+
+	public VModeleDac getModelDac() {
+		return modelDac;
+	}
+
+	public void setModelDac(VModeleDac modelDac) {
+		this.modelDac = modelDac;
 	}
 	
 	

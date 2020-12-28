@@ -1,6 +1,8 @@
 package com.sndi.model;
 // Generated 26 juin 2020 05:06:21 by Hibernate Tools 4.3.5.Final
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -16,7 +18,8 @@ import org.hibernate.annotations.Immutable;
 @Immutable
 @Table(name = "V_MODELE_DAC")
 public class VModeleDac implements java.io.Serializable {
-
+	
+	private BigDecimal RId;
 	private long dppId;
 	private String mdtCode;
 	private String mdtLibelleCourt;
@@ -34,8 +37,9 @@ public class VModeleDac implements java.io.Serializable {
 		this.dppMopCode = dppMopCode;
 	}
 
-	public VModeleDac(long dppId, String mdtCode, String mdtLibelleCourt, String mdtLibelleLong, String dppTymCode,
+	public VModeleDac(BigDecimal RId, long dppId, String mdtCode, String mdtLibelleCourt, String mdtLibelleLong, String dppTymCode,
 			String dppMopCode) {
+		this.RId = RId;
 		this.dppId = dppId;
 		this.mdtCode = mdtCode;
 		this.mdtLibelleCourt = mdtLibelleCourt;
@@ -45,6 +49,15 @@ public class VModeleDac implements java.io.Serializable {
 	}
 
 	@Id
+	@Column(name = "R_ID", precision = 22, scale = 0)
+	public BigDecimal getRId() {
+		return this.RId;
+	}
+
+	public void setRId(BigDecimal RId) {
+		this.RId = RId;
+	}
+	
 	@Column(name = "DPP_ID", nullable = false, precision = 10, scale = 0)
 	public long getDppId() {
 		return this.dppId;
