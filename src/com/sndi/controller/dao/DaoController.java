@@ -9186,92 +9186,13 @@ public class DaoController {
 	 }
 
 	 
-	 //POUR WINDOWS - ANCIEN
-	 /*public void chargeDaoFile() throws IOException {		 
-		 
-		 if(daoIter.getTymCode().equals("23") ||  daoIter.getTymCode().equals("21") || daoIter.getTymCode().equals("22") ||
-					daoIter.getTymCode().equals("26") || daoIter.getTymCode().equals("25") ) {
-					 setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX))));
-					 _logger.info("DAO TRAVAUX ROUTES ELECTRICITE chargé");
-					}
-		 
-		 if(daoIter.getTymCode().equals("01") || daoIter.getTymCode().equals("02") || daoIter.getTymCode().equals("03") ||
-					daoIter.getTymCode().equals("04") || daoIter.getTymCode().equals("06") || daoIter.getTymCode().equals("07") ||
-					daoIter.getTymCode().equals("08") || daoIter.getTymCode().equals("09") || daoIter.getTymCode().equals("0A")) {
-						setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES))));
-						_logger.info("DAO FOURNITURE chargé");
-					}
-		 
-		 switch(daoIter.getTymCode()) {
-			 // FOURNITURE	;
-		 case "0": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES))));
-			 _logger.info("DAO FOURNITURE chargé");
-			 _logger.info(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES);
-			 break;
-			 
-			 // FOURNITURE	
-			 case "00": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_FOURNITURES))));
-			 _logger.info("DAO FOURNITURE chargé");
-			 break;
-			 
-			// PRESTATIONS	
-			 case "1": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATION))));
-			 _logger.info("DAO PRESTATIONS chargé");
-			 break;
-			 
-			// PRESTATIONS	
-			 case "10": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_PRESTATION))));
-			 _logger.info("DAO PRESTATIONS chargé");
-			 break;
-			 
-			// TRAVAUX	
-			 case "2": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX))));
-			 _logger.info("DAO TRAVAUX chargé");
-			 break;
-			 
-			// TRAVAUX	
-			 case "20": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_TRAVAUX))));
-			 _logger.info("DAO TRAVAUX chargé");
-			 break;
-			 
-			 // FOURNITURE DE CARBURANT LEGER
-			 case "05": setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_CARBURANT_LEGER))));
-			 _logger.info("DAO FOURNITURE DE CARBURANT chargé");
-			 break;
-			 
-			 // DAO RESTAURATION
-			 case "16" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_RESTAURATIONS))));
-			 _logger.info("DAO RESTAURATION chargé");
-			 break;
-			 
-			 // DAO LOCATION DE MAIN D'OEUVRE - (Services courants)
-			 case "15" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES))));
-			 _logger.info("DAO LOCATION DE MAIN D'OEUVRE chargé");
-			 break;
-			 
-			// DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
-			 case "19" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_GESTION_DES_DOEUVRES))));
-			 _logger.info("DAO GESTION DE MAIN D'OEUVRE OCCASIONNELLE chargé");
-			 break;
-			 
-			// DAO SECURITE PRIVEE ou GARDIENNAGE - (Services courants)
-			 case "14" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_SECURITE_PRIVEE))));
-			 _logger.info("DAO SECURITE PRIVEE ou GARDIENNAGE chargé");
-			 break;
-			 
-			// DAO ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
-			 case "13" : setDocument(new XWPFDocument(new FileInputStream(new File(""+userController.getWorkingDir()+GRFProperties.FICHIER_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX))));
-			 _logger.info("DAO ENTRETIENS ESPACES VERTS ET LOCAUX chargé");
-			 break;
-		 }
-	 }
-	 */
+	
 	 
 	 //POUR WINDOWS - LAURENT
-	 public void chargeDaoFile() throws IOException {	
-		 /*
+	 /*public void chargeDaoFile() throws IOException {	
+		 
 		  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
-		  */
+		  
 
 		 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
 			(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0A")) ||
@@ -9356,9 +9277,9 @@ public class DaoController {
 			_logger.info("Dossier de référence PSL chargé");
 			}
 		
-		/*
+		
 		 * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
-		 */
+		 
 		
 		if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
 			(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0A")) ||
@@ -9450,9 +9371,9 @@ public class DaoController {
 			_logger.info("Dossier de référence chargé");
 		}
 		
-		/*
+		
 		  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
-		  */
+		  
 		 
 		if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
 			(daoAao.getTymCode().equals("00") && daoAao.getDacMopCode().equals("AOO")) || 
@@ -9558,7 +9479,7 @@ public class DaoController {
 			_logger.info("DAO ENTRETIEN DES LOCAUX chargé");
 		}			
 	 }
-	 
+	 */
 	 
 	 //POUR LINUX - ANCIEN
 	/* public void chargeDaoFile() throws IOException {		 
@@ -9628,9 +9549,9 @@ public class DaoController {
 	 
 	 
 	//POUR LINUX - LAURENT
-		/* public void chargeDaoFile() throws IOException {		 
+		 public void chargeDaoFile() throws IOException {		 
 			 
-			  * Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
+			  // Chargement des PSL  FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 
 			 if((daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("0"))  ||
@@ -9717,7 +9638,7 @@ public class DaoController {
 				}
 			
 			
-			  * Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
+			  //Chargement des PSO  FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			
 			if(	(daoAao.getDacMopCode().equals("PSO") && daoAao.getTymCode().equals("0"))  ||
@@ -9811,7 +9732,7 @@ public class DaoController {
 			}
 			
 			
-			  * Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
+			  // Chargement des AAO FOURNITURES - TRAVAUX - PRESTATIONS
 			  
 			 
 			if(	(daoAao.getTymCode().equals("0")  && daoAao.getDacMopCode().equals("AOO")) || 
@@ -9920,76 +9841,14 @@ public class DaoController {
 				
 		 }
 		
-		 */
+		 
 		 
 	
 	 // methode pour enregistrer le document apres avoir insérer les bookmarks
 	 
-	 //WINDOWS - ANCIEN
-	 /* public void saveDaoFile() throws IOException {
-		 
-		 if (daoIter.getTymCode().equals("26") || daoIter.getTymCode().equals("21") ||
-			daoIter.getTymCode().equals("22") || daoIter.getTymCode().equals("23")|| daoIter.getTymCode().equals("25")) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;;
-		 	}
-				 
-		if(daoIter.getTymCode().equals("01") || daoIter.getTymCode().equals("02") || daoIter.getTymCode().equals("03") ||
-			daoIter.getTymCode().equals("04") || daoIter.getTymCode().equals("06") || daoIter.getTymCode().equals("07") ||
-			daoIter.getTymCode().equals("08") || daoIter.getTymCode().equals("09") || daoIter.getTymCode().equals("0A")) {
-				DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
-			}
-		 
-		 switch(daoIter.getTymCode()) {		 
-			// TRAVAUX				
-			 case "2": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
-			 break;			 
-			 case "20": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX;
-			 break;
-			 
-			// PRESTATIONS
-			 case "1": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;  
-			 break;
-			 case "10": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS;
-			 break;
-			 
-			// FOURNITURE
-			 case "0": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
-			 break;
-			 case "00": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES;
-			 break;
-			
-			// FOURNITURE DE CARBURANT LEGER
-			 case "05": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER;   
-			 break;
-			 
-			// DAO RESTAURATION
-			 case "16": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATIONS;   
-			 break;
-			 
-			// LOCATION DE MAIN D'OEUVRE - (Services courants)
-			 case "15": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_DOEUVRES;
-			 break;
-			 
-			// GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
-			 case "19": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SERVICES_COURANT;
-			 break;
-			 
-			// SECURITE PRIVEE ou GARDIENNAGE
-			 case "14": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE;
-			 break;
-			 
-			// // ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
-			 case "13": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX;
-			 break;
-		 }
-		 _logger.info("path: "+DOWNLOAD_PATHNAME);
-		 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
-		 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-	 }*/
-	 
-	 
+	
 	     //WINDOWS - LAURENT
-		 public void saveDaoFile() throws IOException {
+		/* public void saveDaoFile() throws IOException {
 			 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
 				(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
 				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL;
@@ -10130,64 +9989,11 @@ public class DaoController {
 			 _logger.info("path: "+DOWNLOAD_PATHNAME);
 			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-		 }
-		 
-	 
-	      //LINUX - ANCIEN
-		/* public void saveDaoFile() throws IOException {
-			 switch(daoIter.getTymCode()) {		 
-				// TRAVAUX				
-				 case "2": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
-				 break;			 
-				 case "20": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_TRAVAUX_LINUX;
-				 break;
-				 
-				// PRESTATIONS
-				 case "1": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;  
-				 break;
-				 case "10": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_PRESTATIONS_LINUX;
-				 break;
-				 
-				 
-				// FOURNITURE
-				 case "0": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
-				 break;
-				 case "00": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_FOURNITURES_LINUX;
-				 break;
-				
-				// FOURNITURE DE CARBURANT LEGER
-				 case "05": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_CARBURANT_LEGER_LINUX;   
-				 break;
-				 
-				// DAO RESTAURATION
-				 case "16": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_RESTAURATION_LINUX;   
-				 break;
-				 
-				// LOCATION DE MAIN D'OEUVRE - (Services courants)
-				 case "15": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_LOCATION_MAIN_LINUX;
-				 break;
-				 
-				// GESTION DE MAIN D'OEUVRE OCCASIONNELLE - (Services courants)
-				 case "19": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_GESTION_DES_DOEUVRE_LINUX;
-				 break;
-				 
-				// SECURITE PRIVEE ou GARDIENNAGE
-				 case "14": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_SECURITE_PRIVEE_LINUX;
-				 break;
-				 
-				// // ENTRETIENS ESPACES VERTS ET LOCAUX - (Services courants)
-				 case "13": DOWNLOAD_PATHNAME =  ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_DAO_ENTRETIEN_DES_LOCAUX_LINUX;
-				 break;
-			 }
-			 _logger.info("path: "+DOWNLOAD_PATHNAME);
-			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
-			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
 		 }*/
 		 
-		 
-		 
-		    //LINUX - ANCIEN
-			/* public void saveDaoFile() throws IOException {
+	 
+		//LINUX
+			 public void saveDaoFile() throws IOException {
 				 if(daoAao.getDacMopCode().equals("PSL") && daoAao.getTymCode().equals("00") ||
 					(daoAao.getDacMopCode().equals("PLR") && daoAao.getTymCode().equals("00"))) {
 				 DOWNLOAD_PATHNAME = ""+userController.getWorkingDir()+GRFProperties.PARAM_UPLOAD_FOURNITURES_PSL_LINUX;
@@ -10328,7 +10134,7 @@ public class DaoController {
 			 _logger.info("path: "+DOWNLOAD_PATHNAME);
 			 DOWNLOAD_FILENAME = dao.getDacObjet() +"_" + dao.getDacCode()+ ".docx";
 			 getDocument().write(new FileOutputStream(new File(DOWNLOAD_PATHNAME + DOWNLOAD_FILENAME )));
-				}*/
+				}
 	
 	/* private List<XWPFParagraph> collectParagraphs() {
 		 List<XWPFParagraph> paragraphs = new ArrayList<>();

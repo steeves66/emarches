@@ -698,7 +698,6 @@
 		                </f:facet>
 		                <f:facet name="input"> 
 		                <p:inputText value="#{slctdTb.laaObjet}" style="width:100%">
-		                <f:setPropertyActionListener value="#{slctdTb}" target="#{daoController.selectLot}" />
 		                <p:ajax event="blur" listener="#{daoController.updateListeLotLibelle()}" global="false" process="@this" update=":content" /> 
 		                 </p:inputText>
 		                 </f:facet>
