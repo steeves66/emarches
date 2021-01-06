@@ -387,6 +387,24 @@ public class PpmModificationController {
 			     }
 			//Fin de Contrôle pour les PRQ
 			 
+			 //Affichage du coût de l'opération
+			 if(event.getOldStep().equals("ope222") && event.getNewStep().equals("Financements")) {
+	                    coutTotal();
+	                    coutOperation();
+			     }
+			 
+			 //Affichage du coût de l'opération
+			 if(event.getOldStep().equals("dpami") && event.getNewStep().equals("Financements")) {
+				 coutTotal();
+                 coutOperation(); 
+			     }
+			 
+			 //Affichage du coût de l'opération
+			 if(event.getOldStep().equals("dpPrq") && event.getNewStep().equals("Financements")) {
+				 coutTotal();
+                 coutOperation();   	 
+			     }
+			 
 		            return event.getNewStep();
 		    }
 		
@@ -1587,7 +1605,6 @@ public class PpmModificationController {
 		 
 		 //Methode OnSelect pour PGSPM
 		 public void onSelectPgspm() {
-			 //detailPass.setTDetailPlanGeneral(new TDetailPlanGeneral(pgspm.getGpgId())); 
 			 detailPass.setDppGpgId(pgspm.getGpgId());
 
 			 recupPgspm = new VPgpmFonction();
@@ -1821,7 +1838,7 @@ public class PpmModificationController {
 		 public void saveFinancementppm() {
 			//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
 			 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+						new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 			     TDetailPlanPassation pass = new TDetailPlanPassation();
 				 if(!PL.isEmpty()) {pass =PL.get(0);} 
 				     
@@ -1842,7 +1859,7 @@ public class PpmModificationController {
 			coutTotal();
 			
 			listeTsPpm =(List<TDetailPlanPassation>) iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+					new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 			if (!listeTsPpm.isEmpty()) {
 				detPass= listeTsPpm.get(0);
 				detPass.setDppSourceFin(newFinancement.getFppTypeFinance());
@@ -1888,6 +1905,8 @@ public class PpmModificationController {
 			 selectFinance.setFppMontantDevise(updatefinance.getFppMontantDevise());  
 			 selectFinance.setFppPartTresor(updatefinance.getFppPartTresor());
 			 iservice.updateObject(selectFinance);
+			 
+			 chargeFinancement();
 			 userController.setTexteMsg("Suppression éffectuée avec succès!");
 			 userController.setRenderMsg(true);
 			 userController.setSevrityMsg("success");  
@@ -2121,7 +2140,7 @@ public class PpmModificationController {
 					 
 					 if(controleController.type == "PPM") {
 						 List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-					   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+					   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 						     TDetailPlanPassation detail = new TDetailPlanPassation();
 									if(!PLG.isEmpty()) detail =PLG.get(0); 
 						             //detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
@@ -2164,6 +2183,7 @@ public class PpmModificationController {
 						             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
 						             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
 						             detail.setDppInvEntre(updatePpm.getDppInvEntre());
+						             detail.setDppDateNotAtt(updatePpm.getDppDateNotAtt());
 						             detail.setDppNbOuv(updatePpm.getDppNbOuv());
 						             iservice.updateObject(detail);
 						             
@@ -2173,7 +2193,7 @@ public class PpmModificationController {
 					          
 					           }else {
 					        	        List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-						   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+						   				new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 							            TDetailPlanPassation detail = new TDetailPlanPassation();
 										if(!PLG.isEmpty()) detail =PLG.get(0); 
 							             //detail.setTDetailPlanGeneral(new TDetailPlanGeneral(updatePpm.getDppGpgId()));
@@ -2216,6 +2236,7 @@ public class PpmModificationController {
 							             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
 							             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
 							             detail.setDppInvEntre(updatePpm.getDppInvEntre());
+							             detail.setDppDateNotAtt(updatePpm.getDppDateNotAtt());
 							             detail.setDppNbOuv(updatePpm.getDppNbOuv());
 							             iservice.updateObject(detail);
 							             

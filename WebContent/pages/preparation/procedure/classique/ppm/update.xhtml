@@ -278,7 +278,7 @@
                   <label  class="col-sm-3 control-label">Type Structure Conductrice</label>
 
                   <div class="col-sm-9">
-                  <p:selectOneMenu id="tpcond" required="true" requiredMessage="Veuillez choisir le type de structure conductrice" value="#{ppmModificationController.updatePpm.dppTypeStrConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+                  <p:selectOneMenu id="tpcond" value="#{ppmModificationController.updatePpm.dppTypeStrConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			      <f:selectItem  itemLabel="Choisir le type de structure.." />  
 			       <f:selectItems value="#{ppmModificationController.listeTypStruConduc}" var="typ" itemLabel="#{typ.libelle}" itemValue="#{typ.libelle}" />			   				   
 				  <f:selectItems />				   				    				   
@@ -2414,23 +2414,23 @@
          				  <h:outputText value="#{slctdTb.lbgTotDot}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber>
          				  </h:outputText>
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
                                 </h:commandLink>
 				        </p:column>	
 				        
 				        <p:column headerText="Nature" styleClass="col-sm-4" >
-                           <h:commandLink id="nature" title="Nature" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="nature" title="Nature" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.natLibelle}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
                                 </h:commandLink>
 				        </p:column>	
 				        
 				        <p:column headerText="Disponible" styleClass="col-sm-4" >
-                           <h:commandLink id="disponible" title="Disponible" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="disponible" title="Disponible" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.lbgDisTot}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber>
          				  </h:outputText>
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -2445,53 +2445,7 @@
       </p:dialog>
     </h:form>
     
-    
-       <h:form id="dlogStrc">
-	        <p:dialog  widgetVar="structuresDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la structure">
-				<div class="contentpanel">
-					<div class="g12">	 
-					<div class="panel-body panel-body-nopadding">
-					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmController.filtreStructure}"  class="gui-input"  placeholder="Saisir le code de la structure"  > 
-						    <p:ajax event="keyup" update=":dlogStrc:ndTbleStrc" listener="#{ppmController.filtreStructures()}" />
-							</p:inputText>
-						
-						</label>
-						</div>
-						</div>
-						
-						<div class="form-bordered form-horizontal">			
-                        <div class="form-group">
-                        <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleStrc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeStructures}"
-						  selectionMode="single" rowKey="#{slctdTb.strCode}"
-			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-			               <p:column headerText="Code Structure" styleClass="col-sm-1" >
-                           <h:commandLink id="structure1" title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectStructure()}" >				        
-         				  <h:outputText value="#{slctdTb.strCode}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
-                                </h:commandLink>
-				        </p:column>
-				          <p:column headerText="Libellé Structure" styleClass="col-sm-11" >
-                           <h:commandLink id="structure2" title="Libéllé" style="font-size:18px;"  action="#{ppmController.onSelectStructure()}" >				        
-         				  <h:outputText value="#{slctdTb.strLibelleLong}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
-                                </h:commandLink>
-				        </p:column>		
-						</p:dataTable>
-						</h:panelGrid>
-                     </div>
-                        
-                   
-                    </div>
-				</div>
-			</div>
-	    </div>
-      </p:dialog>
-    </h:form>
+  
     
      <h:form id="dlogPpm">
 	        <p:dialog  widgetVar="ppmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le PPM">
@@ -2646,14 +2600,14 @@
     </h:form>
     
       <h:form id="dlogLignCpmp">
-	        <p:dialog  widgetVar="imputationCpmDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la ligne Budgétaire">
+	        <p:dialog  widgetVar="imputationCpmDmpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Sélectionnez la ligne Budgétaire">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code nature"  > 
+							<p:inputText type="text" value="#{ppmModificationController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code nature"  > 
 						    <p:ajax event="keyup" update=":dlogLignCpmp:ndTbleLignCpm" listener="#{ppmController.filtreImputationCpmp()}" />
 							</p:inputText>
 						
@@ -2664,27 +2618,27 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleLignCpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeImputations}"
+						 <p:dataTable id="ndTbleLignCpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeImputations}"
 						  selectionMode="single" rowKey="#{slctdTb.lbgCode}"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               
 				          <p:column headerText="Imputation" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation1" title="Imputation" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="imputation1" title="Imputation" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.lbgImputation}" />
                               <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                                 </h:commandLink>
 				        </p:column>	
 				        
 				        <p:column headerText="Nature" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation3" title="Imputation" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="imputation3" title="Imputation" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.natLibelle}"/>
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
                                 </h:commandLink>
 				        </p:column>
 				        
 				         <p:column headerText="Dotation" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation4" title="Dotation Totale" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="imputation4" title="Dotation Totale" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.lbgTotDot}">
          				  <f:convertNumber pattern="##,###.##"></f:convertNumber>
          				  </h:outputText>
@@ -2693,11 +2647,11 @@
 				        </p:column>	
 				        
 				        <p:column headerText="Disponible" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation5" title="Montant Disponible" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="imputation5" title="Montant Disponible" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.lbgDisTot}" >
          				   <f:convertNumber pattern="##,###.##"></f:convertNumber>
          				  </h:outputText>
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
                          </h:commandLink>
 				        </p:column>	
 				        
@@ -2714,7 +2668,7 @@
     </h:form>
     
   <h:form id="dlogPasMode">
-	        <p:dialog  widgetVar="passationPgspmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passation">
+	        <p:dialog  widgetVar="passationPgspmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Sélectionnez le mode de Passation">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
@@ -2723,11 +2677,11 @@
 
 						 <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.razchargeMode()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm, dlogPasMode:filtrePasMode"/>
+				                <p:commandLink action="#{ppmModificationController.razchargeMode()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm, dlogPasMode:filtrePasMode"/>
 				        </span>
-                      <p:inputText  type="text" value="#{ppmController.filtreModePassation}" id="filtrePasMode"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  type="text" value="#{ppmModificationController.filtreModePassation}" id="filtrePasMode"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.filtreChargeMode()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm" />
+                      <p:commandLink action="#{ppmModificationController.filtreChargeMode()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm" />
                          </span>
 					 </div>
 						</div>
@@ -2737,26 +2691,26 @@
                         <div class="form-group">
                         
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeMode}"
+						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeMode}"
 						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.passationListe}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
-                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.passationListe}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{ppmController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2">				        
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2">				        
          				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.passationListe}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 						</p:dataTable>
@@ -2773,7 +2727,7 @@
     
     
     <h:form id="dlogMar">
-	        <p:dialog  widgetVar="marchesDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le type du marché">
+	        <p:dialog  widgetVar="marchesDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Sélectionnez le type du marché">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
@@ -2782,11 +2736,11 @@
 						 
 				    <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				                <p:commandLink action="#{ppmModificationController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmModificationController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                      <p:commandLink action="#{ppmModificationController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
                     </span>
 					 </div>
 						 
@@ -2797,20 +2751,20 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeTypeMarchesFils}"
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeTypeMarchesFils}"
 						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
 			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gn">				        
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectMarche()}" update="gn">				        
          				  <h:outputText value="#{slctdTb.tymCode}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.marche}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl">				        
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmModificationController.onSelectMarche()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.marche}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -2835,11 +2789,11 @@
 						 
 				    <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				                <p:commandLink action="#{ppmModificationController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmModificationController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                      <p:commandLink action="#{ppmModificationController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
                     </span>
 					 </div>
 						 
@@ -2850,20 +2804,20 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeTypeMarchesFilsPs}"
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeTypeMarchesFilsPs}"
 						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
 			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gn">				        
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectMarche()}" update="gn">				        
          				  <h:outputText value="#{slctdTb.tymCode}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.marche}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl">				        
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmModificationController.onSelectMarche()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.marche}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -2879,7 +2833,7 @@
     </h:form>
     
      <h:form id="dlogDp">
-	        <p:dialog  widgetVar="dpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez l'AMI de la demande de proposition">
+	        <p:dialog  widgetVar="dpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Sélectionnez l'AMI de la demande de proposition">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
@@ -2890,7 +2844,7 @@
 					    <span class="input-group-btn">
 				                <p:commandLink styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"/>
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le libellé de l'AMI" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmModificationController.filtreTypeMarche}"  placeholder="saisir le libellé de l'AMI" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
                       <p:commandLink  styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  />
                     </span>
@@ -2903,13 +2857,13 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeAmiDp}"
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeAmiDp}"
 						  selectionMode="single" rowKey="#{slctdTb.dppId}"
 			               emptyMessage="Aucun AMI trouvé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="AMI" style="font-size:18px;"  action="#{ppmController.onSelectAmiDp()}" update="gnl">				        
+                           <h:commandLink id="fonction" title="AMI" style="font-size:18px;"  action="#{ppmModificationController.onSelectAmiDp()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.dppObjet}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.amiDp}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.amiDp}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -2925,7 +2879,7 @@
     </h:form>
     
          <h:form id="dlogDpPrq">
-	        <p:dialog  widgetVar="dpPrqDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la préqualification">
+	        <p:dialog  widgetVar="dpPrqDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Sélectionnez la préqualification">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
@@ -2934,11 +2888,11 @@
 						 
 				    <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				                <p:commandLink action="#{ppmModificationController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
 				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir la préqualification" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmModificationController.filtreTypeMarche}"  placeholder="saisir la préqualification" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                      <p:commandLink action="#{ppmModificationController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
                     </span>
 					 </div>
 						 
@@ -2949,13 +2903,13 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePrqDp}"
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listePrqDp}"
 						  selectionMode="single" rowKey="#{slctdTb.dppId}"
 			               emptyMessage="Aucune PRQ trouvée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="PRQ" style="font-size:18px;"  action="#{ppmController.onSelectPrqDp()}" update="gnl">				        
+                           <h:commandLink id="fonction" title="PRQ" style="font-size:18px;"  action="#{ppmModificationController.onSelectPrqDp()}" update="gnl">				        
          				  <h:outputText value="#{slctdTb.dppObjet}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.prqDp}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.prqDp}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -2972,7 +2926,7 @@
     
     
     <h:form id="dlogPas">
-	        <p:dialog  widgetVar="passationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passation">
+	        <p:dialog  widgetVar="passationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Sélectionnez le mode de Passation">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
@@ -2985,7 +2939,7 @@
 				        </span>
                       <p:inputText  type="text" value="#{ppmModificationController.filtreModePassation}" id="filtrePass"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
+                      <p:commandLink action="#{ppmModificationController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
                          </span>
 					 </div>
 						 
@@ -3086,8 +3040,8 @@
 	                  <label for="xbail" class="col-sm-3 control-label"><b>Source</b></label>
 	                  <div class="col-sm-9">
 
-       		        <p:selectOneRadio id="situation" value="#{ppmController.sourfin}">
-       		         <p:ajax listener="#{ppmController.checkBailleur()}" update="dlogdet:idBail, dlogdet:idTres, dlogdet:idPartB, dlogdet:source" />
+       		        <p:selectOneRadio id="situation" value="#{ppmModificationController.sourfin}">
+       		         <p:ajax listener="#{ppmModificationController.checkBailleur()}" update="dlogdet:idBail, dlogdet:idTres, dlogdet:idPartB, dlogdet:source" />
 			            <div class="col-md-4">
 						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
 			            </div>
@@ -3103,14 +3057,14 @@
 	                </div>
 	                
 	                <h:panelGroup id="idBail"> 
-	                <h:panelGroup rendered="#{ppmController.selectBailleur}"> 
+	                <h:panelGroup rendered="#{ppmModificationController.selectBailleur}"> 
 	               <div class="form-group ">
 	                  <label for="xbail" class="col-sm-3 control-label"><b>Bailleur</b></label>
 	                  <div class="col-sm-9">
-	                   <p:selectOneMenu value="#{ppmController.baiCode}" id="xbail" 
+	                   <p:selectOneMenu value="#{ppmModificationController.baiCode}" id="xbail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+			       <f:selectItems value="#{ppmModificationController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -3122,10 +3076,10 @@
 	                <div class="form-group ">
 	                  <label for="source" class="col-sm-3 control-label"><b>Type</b></label>
 	                  <div class="col-sm-9">
-	                    <p:selectOneMenu value="#{ppmController.souCode}" id="source" 
+	                    <p:selectOneMenu value="#{ppmModificationController.souCode}" id="source" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
-			       <f:selectItems value="#{ppmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+			       <f:selectItems value="#{ppmModificationController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -3135,9 +3089,9 @@
 	                <div class="form-group ">
 	                  <label for="xdev" class="col-sm-3 control-label"><b>Devise</b></label>
 	                  <div class="col-sm-9">
-	                      <p:selectOneMenu value="#{ppmController.devCode}" id="xdev" 
+	                      <p:selectOneMenu value="#{ppmModificationController.devCode}" id="xdev" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
-			       <f:selectItems value="#{ppmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+			       <f:selectItems value="#{ppmModificationController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -3145,19 +3099,19 @@
 	                <div class="form-group ">
 	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" listener="#{ppmController.recupTresor()}" global="false" process="@this" update="xmontDev, partTresor" /> 
+	                    <p:ajax event="blur" listener="#{ppmModificationController.recupTresor()}" global="false" process="@this" update="xmontDev, partTresor" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div> 
 	                
 	                  <h:panelGroup id="idTres"> 
-	                <h:panelGroup rendered="#{ppmController.selectTresor}">
+	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
 	                <div class="form-group ">
 	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                    <p:ajax event="blur" process="@this" global="false" update="partTresor" /> 
 	                    </p:inputText>
@@ -3167,11 +3121,11 @@
 	                </h:panelGroup>
 	                
 	                 <h:panelGroup id="idPartB"> 
-	                <h:panelGroup rendered="#{ppmController.selectPartBai}">
+	                <h:panelGroup rendered="#{ppmModificationController.selectPartBai}">
 	                 <div class="form-group ">
 	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
+	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                     <p:ajax event="blur" process="@this" update="xmont" /> 
 	                    </p:inputText>
@@ -3184,7 +3138,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
              <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" 
-            oncomplete="PF('DetailDlg').hide()" action="#{ppmController.saveFinancementppm()}"  update=":content">
+            oncomplete="PF('DetailDlg').hide()" action="#{ppmModificationController.saveFinancementppm()}"  update=":content">
 				             <i class="ace-icon fa fa-save"></i> Ajouter
 				            </p:commandLink>
             </div>
@@ -3208,8 +3162,8 @@
 	                  <label for="xbail" class="col-sm-3 control-label"><b>Source</b></label>
 	                  <div class="col-sm-9">
 
-       		        <p:selectOneRadio id="situation" value="#{ppmController.updatefinance.fppTypeFinance}">
-       		         <p:ajax listener="#{ppmController.checkBailleur()}" update="dlogdetMod:idBail, dlogdetMod:source, dlogdetMod:idTres, dlogdetMod:idPartB" />
+       		        <p:selectOneRadio id="situation" value="#{ppmModificationController.updatefinance.fppTypeFinance}">
+       		         <p:ajax listener="#{ppmModificationController.checkBailleur()}" update="dlogdetMod:idBail, dlogdetMod:source, dlogdetMod:idTres, dlogdetMod:idPartB" />
 			            <div class="col-md-4">
 						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
 			            </div>
@@ -3225,14 +3179,14 @@
 	                </div>
 	                
 	                <h:panelGroup id="idBail"> 
-	                <h:panelGroup rendered="#{ppmController.selectBailleur}"> 
+	                <h:panelGroup rendered="#{ppmModificationController.selectBailleur}"> 
 	               <div class="form-group ">
 	                  <label for="xbail" class="col-sm-3 control-label"><b>Bailleur</b></label>
 	                  <div class="col-sm-9">
-	                   <p:selectOneMenu value="#{ppmController.updatefinance.fppBaiCode}" id="xbail" 
+	                   <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppBaiCode}" id="xbail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+			       <f:selectItems value="#{ppmModificationController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -3244,10 +3198,10 @@
 	                <div class="form-group ">
 	                  <label for="source" class="col-sm-3 control-label"><b>Type</b></label>
 	                  <div class="col-sm-9">
-	                    <p:selectOneMenu value="#{ppmController.updatefinance.fppSouCode}" id="source" 
+	                    <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppSouCode}" id="source" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
-			       <f:selectItems value="#{ppmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+			       <f:selectItems value="#{ppmModificationController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -3259,7 +3213,7 @@
 	                  <div class="col-sm-9">
 	                      <p:selectOneMenu value="#{ppmController.updatefinance.fppDevCode}" id="xdev" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
-			       <f:selectItems value="#{ppmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" /> 			   				   
+			       <f:selectItems value="#{ppmModificationController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" /> 			   				   
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -3267,19 +3221,19 @@
 	                <div class="form-group ">
 	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmController.updatefinance.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{ppmModificationController.updatefinance.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
-	                    <p:ajax event="blur" listener="#{ppmController.recupUpdate()}" global="false" process="@this" update="xmontDev, partTresor" />
+	                    <p:ajax event="blur" listener="#{ppmModificationController.recupUpdate()}" global="false" process="@this" update="xmontDev, partTresor" />
 	                    </p:inputText>
 	                  </div>
 	                </div> 
 	                
 	                  <h:panelGroup id="idTres"> 
-	                <h:panelGroup rendered="#{ppmController.selectTresor}">
+	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
 	                <div class="form-group ">
 	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmController.updatefinance.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{ppmModificationController.updatefinance.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                    <p:ajax event="blur" process="@this" update="partTresor" /> 
 	                    </p:inputText>
@@ -3289,11 +3243,11 @@
 	                </h:panelGroup>
 	                
 	                 <h:panelGroup id="idPartB"> 
-	                <h:panelGroup rendered="#{ppmController.selectPartBai}">
+	                <h:panelGroup rendered="#{ppmModificationController.selectPartBai}">
 	                 <div class="form-group ">
 	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmController.updatefinance.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
+	                    <p:inputText type="text" value="#{ppmModificationController.updatefinance.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                     <p:ajax event="blur" process="@this" update="xmont" /> 
 	                    </p:inputText>
@@ -3306,7 +3260,7 @@
             <!-- /.box-body -->
             <div class="box-footer">
              <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" 
-            oncomplete="PF('DetailDlgMod').hide()" action="#{ppmController.updateFinancement()}"  update=":content">
+            oncomplete="PF('DetailDlgMod').hide()" action="#{ppmModificationController.updateFinancement()}"  update=":content">
 				             <i class="ace-icon fa fa-save"></i> Modifier
 				            </p:commandLink>
             </div>
