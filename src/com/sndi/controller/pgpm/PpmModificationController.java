@@ -45,8 +45,10 @@ import com.sndi.model.TTypeCharge;
 import com.sndi.model.TTypeMarche;
 import com.sndi.model.TTypePiecesDac;
 import com.sndi.model.TTypeProcedure;
+import com.sndi.model.VAmiDp;
 import com.sndi.model.VDatePub;
 import com.sndi.model.VDetPlaning;
+import com.sndi.model.VFinancementPpm;
 import com.sndi.model.VFonctionMinistere;
 import com.sndi.model.VGenerationDate;
 import com.sndi.model.VLigneImputation;
@@ -58,6 +60,7 @@ import com.sndi.model.VModeleDao;
 import com.sndi.model.VPgpmFonction;
 import com.sndi.model.VPpmStatut;
 import com.sndi.model.VPpmliste;
+import com.sndi.model.VPrqAo;
 import com.sndi.model.VTypeMarcheFils;
 import com.sndi.model.VTypeStructConduc;
 import com.sndi.model.VUpdateFinancementPpm;
@@ -142,7 +145,9 @@ public class PpmModificationController {
 	 }
 	
 	 
-	      //Déclaration des Listes
+	     //Déclaration des Listes
+	     private List<VAmiDp> listeAmiDp = new ArrayList<VAmiDp>();
+	     private List<VPrqAo> listePrqDp = new ArrayList<VPrqAo>();
 		 private List<TDetailPlanPassation> listeTsPpm = new ArrayList<TDetailPlanPassation>();
 		 private List<VDetPlaning> affichPpm = new ArrayList<VDetPlaning>();
 	     //private List<TAffichagePpm> listePpm = new ArrayList<TAffichagePpm>();
@@ -176,6 +181,8 @@ public class PpmModificationController {
 		 private List<TModePassation> listeModePassation = new ArrayList<TModePassation>();
 		 private List<TGestion> listeGestion = new ArrayList<TGestion>(); 
 		 private List<VModePassationPn> listeModePassationPn = new ArrayList<VModePassationPn>();
+		 private List<VFinancementPpm> listeFinancementAmi = new ArrayList<VFinancementPpm>();
+		 private List<VFinancementPpm> listeFinancementPrq = new ArrayList<VFinancementPpm>();
 		 //private List<TAffichagePpm> validationListe = new ArrayList<TAffichagePpm>();
 		 private List<VPpmliste> validationListe = new ArrayList<VPpmliste>();
 		 private List<TAffichagePpm>listSelectionTransmission =new ArrayList<TAffichagePpm>();
@@ -240,6 +247,11 @@ public class PpmModificationController {
 		 private VModePassation recupModeListe = new VModePassation();
 		 private VModePassation passationListe = new VModePassation();
 		 private VUpdateFinancementPpm updatefinance =new VUpdateFinancementPpm();
+		 private VModeleDac modelDac = new VModeleDac();
+		 private VAmiDp recupAmiDp = new VAmiDp();
+		 private VPrqAo recupPrqDp = new VPrqAo();
+		 private VAmiDp amiDp = new VAmiDp();
+		 private VPrqAo prqDp = new VPrqAo();
 		
 	 
 		//Declaration des variables
@@ -247,6 +259,8 @@ public class PpmModificationController {
 		 private long  totalLigne;
 		 private long  totalMontant;
 		 private long  totalMontantPpm;
+		 private String  nbreOuv;
+		 private String  finLib ="DU PGPM";
 		 private String filtreTypeMarche="";
 		 private String filtreModePassation="";
 		 private String observation="";
@@ -275,6 +289,7 @@ public class PpmModificationController {
 		 private String filtrePgspm ="";
 		 private String multiFiltre ="";
 		 private String sourfin ="";
+		 private String mode = "";
 		 private Date dateApp;
 		 private Date datePub;
 		 private Date dateJugement;
@@ -289,19 +304,117 @@ public class PpmModificationController {
 		 public boolean selectBailleur=false;
 		 public boolean selectTresor =false;
 		 public boolean selectPartBai =false;
+		 //Nouveaux
+		 private boolean modelePrq =false;
+	     public boolean panelFinPgpm = false;
+	     public boolean panelFinPpm = true;
+	     public boolean partPpm = false;
+	     public boolean partPgpm = false;
+	     public boolean partPspm = false;
+	     public boolean partPgspm = false;
+	     //public boolean lignedefaut= true;
+	     public boolean ligneftpgpm= false;
+	     public boolean lignepn= false;
+	     public boolean ligneps= false;
+	     public boolean pavetPPM= true;
+	     public boolean pavetAMI= false;
+	     public boolean pavetPRQ= false;
+	     public boolean pavetDPAMI= false;
+	     public boolean pavetDPPRQ= false;
+	     public boolean libelleDPAMI= false;
+	     public boolean libelleDPPRQ= false;
+	     public boolean libelleAmi= false;
+	     public boolean libellePrq= false;
+	     public boolean libellePpm= false;
+	     public boolean finPgpm = true;
+	     public boolean finAmi = false;
+	     public boolean finPrq = false;
+	     public boolean panelBailleur = false;
+	     public boolean panelAno = false;
+	     public boolean panelPgpmNormal = true;
+	     public boolean panelPgpmDp = false;
+	     public boolean panelTymNormal = true;
+	     public boolean panelTymDp = false;
 	 
 	 
 	 
 		 public String onFlowProcess(FlowEvent event) {
-		        if(skip) {
-		            skip = false;   //reset in case user goes back
-		            return "confirm";
-		        }
-		        else {
+			//Controle Pavé création pour les ppm / pspm normaux
+			 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("ope222")) {
+				 bailleurExiste();
+				 anoExiste();
+				 afficheDate();
+				 recupModeleDao();
+			     }
+			 
+			 
+			 //Controle Pavé création pour les DPAMI
+			 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("dpami")) {
+	                    	  if(controleController.type == "PPM") {
+	                    		  //controlPanel();
+	                    		  afficheDate();
+	                    		  bailleurExiste();
+	             				  anoExiste();
+	                    		  recupModeleDao();
+	                    	  }else 
+	                    	  {
+	                    		 if(controleController.type == "PSPM") {
+	                    		     // controlPanelPs(); 
+	                    		      afficheDate();
+	                    		      bailleurExiste();
+	                 				  anoExiste();
+	                    		      recupModeleDao();
+	                    		     }
+	                    	  }
+			     }
+			 //Fin de Contrôle pour les DPAMI
+			 
+			 
+			//Controle Pavé création pour les DPPRQ
+			 if(event.getOldStep().equals("ope111") && event.getNewStep().equals("dpPrq")) {
+				 if(controleController.type == "PPM") {
+           		  //controlPanel();
+           		  afficheDate();
+           		  recupModeleDao();
+           	  }else 
+           	  {
+           		 if(controleController.type == "PSPM") {
+           		      //controlPanelPs(); 
+           		      afficheDate();
+           		      recupModeleDao();
+           		     }
+           	  }
+			     }
+			//Fin de Contrôle pour les PRQ
+			 
 		            return event.getNewStep();
-		        }
 		    }
+		
 		 
+		//Gestion des Panels PSPM
+		 public void controlPanelPs() {
+			 if(updatePpm.getDppMopCode().equalsIgnoreCase("PSC") ) {
+				 controleController.etatPsc = true;
+				 controleController.etatPsl = false;
+				 controleController.etatPso = false;
+				 controleController.etatPsl_Pso = false;
+			 }else {
+				   if(updatePpm.getDppMopCode().equalsIgnoreCase("PSO")) {
+					    controleController.etatPsc = false;
+						 controleController.etatPsl = false;
+						 controleController.etatPso = true;
+						 controleController.etatPsl_Pso = true;
+				   }else {
+					   
+					   if(updatePpm.getDppMopCode().equalsIgnoreCase("PSL")) {
+						     controleController.etatPsc = false;
+							 controleController.etatPsl = true;
+							 controleController.etatPso = false;
+							 controleController.etatPsl_Pso = true;
+					   }
+				   }
+			 }
+		 }
 		 
 		
 		  //Combobox type de structures conductrices
@@ -322,7 +435,104 @@ public class PpmModificationController {
 			 listeDatePub=new ArrayList<>(constantService.getListeDatePub()); 
 		 }
 		 
+		//Methode de récupération de l'AMI de la DP
+		 public void recupPpm(long dppId) {
+			 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+dppId));
+				if(!PPM.isEmpty()) detailPass = PPM.get(0);
+				
+				 finLib = "DE l'AMI"; 
+				 finPgpm = false;
+			     finAmi = true;
+			     panelPgpmNormal = false;
+			     panelPgpmDp = true;
+				
+				listeFinancementAmi.clear();
+				 listeFinancementAmi = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+dppId)));
+		      }
 		 
+		//Méthode Love pour les DP
+		 public void onSelectAmiDp() {
+			 finLib = "DE l'AMI";
+			 finPgpm = false;
+		     finAmi = true;
+		     panelPgpmNormal = false;
+		     panelPgpmDp = true;
+			 updatePpm.setDppStructureConduc(amiDp.getDppStructureConduc());
+			 updatePpm.setDppGpgId(amiDp.getDppGpgId());
+			 updatePpm.setDppId(amiDp.getDppId());
+			 updatePpm.setGpgObjet(amiDp.getGpgObjet());
+			 updatePpm.setDppObjet(amiDp.getDppObjet());
+			 updatePpm.setDppTypeStrConduc(amiDp.getDppTypeStrConduc());
+			 updatePpm.setDppNbOuv(Long.valueOf(amiDp.getDppNbOuv()));
+			 updatePpm.setDppLbgCode(amiDp.getDppLbgCode());
+			 updatePpm.setLbgImputation(amiDp.getLbgImputation());
+			 updatePpm.setLbgAeTr(amiDp.getLbgAeTr());
+			 updatePpm.setLbgAeEmp(amiDp.getLbgAeEmp());
+			 updatePpm.setLbgDisTot(amiDp.getLbgDisTot());
+			 updatePpm.setNatLibelle(amiDp.getNatLibelle());
+			 updatePpm.setLbgTotDot(amiDp.getLbgTotDot());
+			 updatePpm.setLbgAeDon(amiDp.getLbgAeDon());
+			 
+			 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+amiDp.getDppId()));
+				if(!PPM.isEmpty()) detailPass = PPM.get(0);
+				
+			 listeFinancementAmi.clear();
+			 listeFinancementAmi = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+amiDp.getDppId())));
+			 _logger.info("Code de la ligne : "+updatePpm.getLbgCode() +" Imuptation :  "+updatePpm.getLbgImputation());
+				}
+		 
+			//Méthode Love pour les DP
+		 public void onSelectPrqDp() {
+	
+			 finLib = "DE LA PREQUALIFICATION";
+			 finPgpm = false;
+		     finAmi = false;
+		     finPrq = true;
+		     panelPgpmNormal = false;
+		     panelPgpmDp = true;
+			 /*recupPgpm.setGpgObjet(prqDp.getGpgObjet());
+			 recupPgspm.setGpgObjet(prqDp.getGpgObjet());
+			 recupPrqDp.setDppId(prqDp.getDppId());
+			 recupPrqDp.setDppObjet(prqDp.getDppObjet());
+			 detailPass.dppStructureConduc = prqDp.getDppStructureConduc(); 
+			 nbreOuv = prqDp.getDppNbOuv();
+			 strucCond = prqDp.getDppTypeStrConduc();
+			 recupLigne.setLbgImputation(prqDp.getLbgImputation());
+			 recupLigne.setLbgCode(prqDp.getDppLbgCode());
+			 recupLigne.setNatLibelle(prqDp.getNatLibelle());
+			 recupLigne.setLbgTotDot(prqDp.getLbgTotDot());
+			 recupLigne.setLbgAeTr(prqDp.getLbgAeTr());
+			 recupLigne.setLbgAeEmp(prqDp.getLbgAeEmp());
+			 recupLigne.setLbgAeDon(prqDp.getLbgAeDon());
+			 recupLigne.setLbgDisTot(prqDp.getLbgDisTot());*/
+			 
+			 updatePpm.setDppStructureConduc(prqDp.getDppStructureConduc());
+			 updatePpm.setDppGpgId(prqDp.getDppGpgId());
+			 updatePpm.setDppId(prqDp.getDppId());
+			 updatePpm.setGpgObjet(prqDp.getGpgObjet());
+			 updatePpm.setDppObjet(prqDp.getDppObjet());
+			 updatePpm.setDppTypeStrConduc(prqDp.getDppTypeStrConduc());
+			 updatePpm.setDppNbOuv(Long.valueOf(prqDp.getDppNbOuv()));
+			 updatePpm.setDppLbgCode(prqDp.getDppLbgCode());
+			 updatePpm.setLbgImputation(prqDp.getLbgImputation());
+			 updatePpm.setLbgAeTr(prqDp.getLbgAeTr());
+			 updatePpm.setLbgAeEmp(prqDp.getLbgAeEmp());
+			 updatePpm.setLbgDisTot(prqDp.getLbgDisTot());
+			 updatePpm.setNatLibelle(prqDp.getNatLibelle());
+			 updatePpm.setLbgTotDot(prqDp.getLbgTotDot());
+			 updatePpm.setLbgAeDon(prqDp.getLbgAeDon());
+			 
+			 List<TDetailPlanPassation> PPM  = iservice.getObjectsByColumn("TDetailPlanPassation", new WhereClause("DPP_ID",Comparateur.EQ,""+prqDp.getDppId()));
+				if(!PPM.isEmpty()) detailPass = PPM.get(0);
+				
+				 listeFinancementPrq.clear();
+				 listeFinancementPrq = ((List<VFinancementPpm>)iservice.getObjectsByColumn("VFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+							 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+prqDp.getDppId()))); 
+				 
+				 _logger.info("Code de la ligne : "+updatePpm.getLbgCode() +" Imuptation :  "+updatePpm.getLbgImputation());
+				}
 		 
 		//Liste des Modes de Passation restreint
 		  public void razchargeMode() {
@@ -332,9 +542,6 @@ public class PpmModificationController {
 			} 
 		  
 		  
-	
-		 
-		 
 		 //Liste des Pspm transmis par l'acteur connecté
 		 public void chargePspmTrans() {
 			 pspmTrans.clear();
@@ -455,7 +662,7 @@ public class PpmModificationController {
 		 }
 		 
 		 
-		 public void onSelectModePassationPgspm() {
+		/* public void onSelectModePassationPgspm() {
 			 //detailPass.setTModePassation(new TModePassation(passationListe.getMopCode()));
 		    updatePpm.setDppMopCode(passationListe.getMopCode());
 		    updatePpm.setMopLibelleLong(passationListe.getMopLibelleLong());
@@ -463,13 +670,252 @@ public class PpmModificationController {
 		    recupPgspm.setGpgMopCode(passationListe.getMopCode());
 		    recupPgspm.setMopLibelleLong(passationListe.getMopLibelleLong());
 		    //chargeMode();
-				}
+				}*/
 		 
-		 public void onSelectModePassation() {
+		 //Methode de sélection du mode de Passation
+		 public void onSelectModePassationPgspm() {
+			updatePpm.setDppMopCode(passationListe.getMopCode());
+			updatePpm.setMopLibelleLong(passationListe.getMopLibelleLong());
+		
+		    //chargeMode();
+		    
+		    affichNbreOuvModePs();
+		    afficheDateModePs();
+		    
+		    controleController.lignedefaut= false;
+		     ligneftpgpm= false;
+		     lignepn= false;
+		     ligneps= true;
+				}
+		//Fin Méthode Love 
+		 
+	
+		//Afficher les dates prévisionnelles en fonction du mode de Passation choisi (Mode PS)
+		 public void afficheDateModePs() { 
+			 if(passationListe.getMopCode().equalsIgnoreCase("AMI")) {
+				 pavetPPM = false;
+				 pavetAMI = true;
+				 pavetPRQ = false;
+				 libelleDPAMI = false;
+				 libelleDPPRQ = false;
+				 mode ="AMI";
+				 _logger.info("Panel AMI Activé: "+pavetAMI);
+			 }else {
+				      if(passationListe.getMopCode().equalsIgnoreCase("PRQ")) {
+				    	     pavetPPM = false;
+							 pavetAMI = false;
+							 pavetPRQ = true;
+							 libelleDPAMI = false;
+							 libelleDPPRQ = false;
+							 mode ="PRQ";
+							 _logger.info("Panel PRQ Activé: "+pavetPRQ);
+				    }else 
+				    	  if(passationListe.getMopCode().equalsIgnoreCase("DPS")) {
+					    	     pavetPPM = false;
+								 pavetAMI = true;
+								 pavetPRQ = false;
+								 libelleDPAMI = true;
+								 libelleDPPRQ = false;
+								 mode ="DP";
+					    }else 
+					    	if(passationListe.getMopCode().equalsIgnoreCase("DQS")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = true;
+								 libelleDPAMI = false;
+								 libelleDPPRQ = true;
+								 mode ="DP";
+					    }else
+				      {
+				    	     pavetPPM = true;
+						     pavetAMI = false;
+						     pavetPRQ = false;
+						     libelleDPAMI = false;
+						     libelleDPPRQ = false;
+						     mode =" ";
+						     _logger.info("Panel PPM Activé: "+pavetPPM);
+				    }
+			 }
+		 }
+		 
+		 
+		/* public void onSelectModePassation() {
 			 
 		    updatePpm.setDppMopCode(modePassation.getMopCode());
 		    updatePpm.setMopLibelleLong(modePassation.getMopLibelleLong());
+				}*/
+		 
+		 //Afficher le nombre d'ouvertures en choisissant le mode de passation (Mode PN)
+		 public void affichNbreOuvMode() {
+			 if(updatePpm.getDppMopCode().equalsIgnoreCase("AAP")) {
+				 nbreOuv = "2"; 
+			 }else {
+				 nbreOuv = "1"; 
+			 }
+		 }
+		 
+		 
+		//Afficher le nombre d'ouvertures en choisissant le mode de passation (Mode PS)
+		 public void affichNbreOuvModePs() {
+			 if(updatePpm.getDppMopCode().equalsIgnoreCase("AAP")) {
+				 nbreOuv = "2";
+			 }else {
+				 nbreOuv = "1"; 
+			 }
+		 }
+		 
+		
+		 
+		 
+		//Sélection du mode de Passation
+		 public void onSelectModePassation() {
+			 updatePpm.setDppMopCode(modePassation.getMopCode());
+			 updatePpm.setMopLibelleLong(modePassation.getMopLibelleLong());
+			 
+			 affichNbreOuvMode();
+			 afficheDate() ;
+			 controleController.lignedefaut= false;
+		     ligneftpgpm= false;
+		     lignepn= true;
+		     ligneps= false;
+		             //Ramener le type marché en fonction du mode de passation
+					 listeTypeMarches.clear();
+					 if(updatePpm.getDppMopCode().equalsIgnoreCase("AMI")) {
+						 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+								 new WhereClause("TYM_CODE",WhereClause.Comparateur.EQ,"11")); 
+								 if (!listeTypeMarchesFils.isEmpty()) {
+									 marche=listeTypeMarchesFils.get(0); 
+									}
+								 updatePpm.setDppTymCode(marche.getTymCode());
+								 updatePpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+								 panelTymNormal =false;
+								 panelTymDp=true; 
+								 panelPgpmNormal = true;
+							     panelPgpmDp = false;
+					 }else
+						 if(updatePpm.getDppMopCode().equalsIgnoreCase("DPA")) {
+							 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+									 new WhereClause("TYM_CODE",WhereClause.Comparateur.EQ,"11")); 
+									 if (!listeTypeMarchesFils.isEmpty()) {
+										 marche=listeTypeMarchesFils.get(0); 
+										}
+									 updatePpm.setDppTymCode(marche.getTymCode());
+									 updatePpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+									 panelTymNormal =false;
+									 panelTymDp=true;  
+									 panelPgpmNormal = false;
+								     panelPgpmDp = true;
+						 }else
+						 if(updatePpm.getDppMopCode().equalsIgnoreCase("PRQ")) {
+							 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+									 new WhereClause("TYM_CODE",WhereClause.Comparateur.NEQ,"11")); 
+							 if (!listeTypeMarchesFils.isEmpty()) {
+								 marche=listeTypeMarchesFils.get(0); 
+								}
+							 updatePpm.setDppTymCode(marche.getTymCode());
+							 updatePpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+							 panelTymNormal =false;
+							 panelTymDp=true; 
+							 panelPgpmNormal = true;
+						     panelPgpmDp = false;
+						 }else
+							 if(updatePpm.getDppMopCode().equalsIgnoreCase("DPQ")) {
+								 listeTypeMarchesFils=(List<VTypeMarcheFils>) iservice.getObjectsByColumn("VTypeMarcheFils", 
+										 new WhereClause("TYM_CODE",WhereClause.Comparateur.NEQ,"11")); 
+								 if (!listeTypeMarchesFils.isEmpty()) {
+									 marche=listeTypeMarchesFils.get(0); 
+									}
+								 updatePpm.setDppTymCode(marche.getTymCode());
+								 updatePpm.setTymLibelleCourt(marche.getTymLibelleCourt());
+								 panelTymNormal =false;
+								 panelTymDp=true; 
+								 panelPgpmNormal = false;
+							     panelPgpmDp = true;
+							 }else
+						     {
+							 updatePpm.setDppTymCode("");
+							 updatePpm.setTymLibelleCourt("");
+							 panelTymNormal =true;
+							 panelTymDp=false; 
+							 panelPgpmNormal = true;
+						     panelPgpmDp = false;
+						 }
 				}
+		 
+		 
+		//Afficher les dates prévisionnelles en fonction du mode de Passation choisi (Mode PN)
+		 public void afficheDate() {  
+			 if(updatePpm.getDppMopCode().equalsIgnoreCase("AMI")) {
+				 pavetPPM = false;
+				 pavetAMI = true;
+				 pavetPRQ = false;
+				 pavetDPAMI= false;
+				 pavetDPPRQ= false;
+				 
+				 libelleDPAMI = false;
+				 libelleDPPRQ = false;
+			     libelleAmi= true;
+			     libellePrq= false;
+			     libellePpm= false;
+				 
+				 mode ="AMI";
+			 }else {
+				      if(updatePpm.getDppMopCode().equalsIgnoreCase("PRQ")) {
+				    	     pavetPPM = false;
+							 pavetAMI = false;
+							 pavetPRQ = true;
+							 pavetDPAMI= false;
+							 pavetDPPRQ= false;
+							 libelleDPAMI = false;
+							 libelleDPPRQ = false;
+							 libelleAmi= false;
+						     libellePrq= true;
+						     libellePpm= false;
+							 libelleAmi= false;
+						     libellePrq= true;
+							 mode ="PRQ";
+				    }else 
+				    	  if(updatePpm.getDppMopCode().equalsIgnoreCase("DPA")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI= true;
+								 pavetDPPRQ= false;
+								 libelleDPAMI = true;
+								 libelleDPPRQ = false;
+								 libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
+								 mode ="DP";
+					    }else 
+					    	if(updatePpm.getDppMopCode().equalsIgnoreCase("DPQ")) {
+					    	     pavetPPM = false;
+								 pavetAMI = false;
+								 pavetPRQ = false;
+								 pavetDPAMI= false;
+								 pavetDPPRQ= true;
+								 libelleDPAMI = false;
+								 libelleDPPRQ = true;
+								 libelleAmi= false;
+							     libellePrq= false;
+							     libellePpm= false;
+								 mode ="DP";
+					    }else 
+				            {
+				    	     pavetPPM = true;
+						     pavetAMI = false;
+						     pavetPRQ = false;
+						     pavetDPAMI= false;
+							 pavetDPPRQ= false;
+						     libelleDPAMI = false;
+						     libelleDPPRQ = false;
+						     libelleAmi= false;
+						     libellePrq= false;
+						     libellePpm= true;
+						     mode="";
+				    }
+			 }
+		 }
 		 	
 		 
 		 //Affichage dynamique des dates prévisionnelles
@@ -502,6 +948,50 @@ public class PpmModificationController {
       	 }
 		 
 		 
+         public void chargeImputationPg() {
+ 	    	if(controleController.typePlan == "PN") {
+ 	    		 listeImputations.clear();
+ 				 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+ 				         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+pgpm.getGpgTypePlan()),
+ 						 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+ 				 filtreLigne="";
+ 				 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+ 				 _logger.info("Type de plan: "+pgpm.getGpgTypePlan());
+ 	    	}else {
+ 	    		if(controleController.typePlan == "PS") {
+ 		    		 listeImputations.clear();
+ 					 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+ 					         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+pgpm.getGpgMopCode()),
+ 							 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+ 					 filtreLigne="";
+ 					 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+ 					 _logger.info("Type de plan: "+controleController.typePlan);
+ 					 _logger.info("LBG_MOP_CODE 1: "+pgpm.getGpgTypePlan());
+ 					 _logger.info("LBG_MOP_CODE 2: "+pgpm.getGpgMopCode());
+ 		    	}
+ 	    	}
+ 	    }
+ 	    
+ 	    
+ 	    public void chargeImputationPn() {
+ 	    		 listeImputations.clear();
+ 				 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+ 				         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+modePassation.getMopTypPlan()),
+ 						 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+ 				 filtreLigne="";
+ 				 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+ 				 _logger.info("Type de plan: "+modePassation.getMopTypPlan());
+ 	    }
+ 	    
+ 	    public void chargeImputationPros() {
+    		 listeImputations.clear();
+ 			 listeImputations =(List<VLigneImputation>) iservice.getObjectsByColumn("VLigneImputation", new ArrayList<String>(Arrays.asList("LBG_CODE")),
+ 			         new WhereClause("LBG_MOP_CODE",Comparateur.EQ,""+passationListe.getMopCode()),
+ 					 new WhereClause("LBG_FON_CODE_AC",Comparateur.EQ,userController.getSlctd().getTFonction().getFonCod()));//,
+ 			 filtreLigne="";
+ 			 _logger.info("Taille de liste listeImputations: "+listeImputations.size());
+ 			 _logger.info("Type de plan: "+modePassation.getMopTypPlan());
+    }
 		 
 		//Début des méthodes pour les affichages 
 			//Combobox Gestions
@@ -637,13 +1127,124 @@ public class PpmModificationController {
 	//Récupération du modèle DAO type
 	 public void recupModeleDao() {
 	    			listeModele= (List<VModeleDac>) iservice.getObjectsByColumn("VModeleDac", new ArrayList<String>(Arrays.asList("DPP_ID")),
-	    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+slctdTd.getDppId()));
+	    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 	    			/*if (!listeModele.isEmpty()) {
 	    				geneDate=listeModele.get(0); 
 	    			}*/
 	 }
 	
+	//Recupertation du mode de qualification PRQ
+	 public void recupModeleDaoAmiPrq() {
+	    			listeModele= (List<VModeleDac>) iservice.getObjectsByColumn("VModeleDac", new ArrayList<String>(Arrays.asList("DPP_ID")),
+	    					 new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
+	    			if (!listeModele.isEmpty()) {
+	    				modelDac=listeModele.get(0); 
+	    			}
+	    			_logger.info("id ppm : "+detailPass.getDppId());
+	 }
+	 
+	 
+		//Afficher la liste des Ami DP
+	 public void chargeAmiDp() {
+		 if(controleController.typePlan == "PN") {
+			 chargeDpAmi("PN");
+		 }else
+			 if(controleController.typePlan == "PS") {
+				 chargeDpAmi("PS");
+			 }
+	 }
+	 
+	//Afficher la liste des Prq DP
+	 public void chargePrqDp() {
+		 if(controleController.typePlan == "PN") {
+			 chargeDpPrq("PN");
+		 }else
+			 if(controleController.typePlan == "PS") {
+				 chargeDpPrq("PS");
+			 }
+	 }
+	 
+	 //AMI
+	 public void chargeDpAmi(String typlan) {
+		 listeAmiDp = (List<VAmiDp>) iservice.getObjectsByColumn("VAmiDp",
+				 new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typlan)); 
+	 }
+	 
+	 //PRQ
+	 public void chargeDpPrq(String typlan) {
+		 listePrqDp  = (List<VPrqAo>) iservice.getObjectsByColumn("VPrqAo",
+				 new WhereClause("DPP_TYPE_PLAN",WhereClause.Comparateur.EQ,""+typlan)); 
+	 }
+	 
 	
+	//Debut controle bailleur
+	 public void bailleurExiste() {
+		if(updatePpm.getDppBailleur().equalsIgnoreCase("B")) {
+			panelBailleur = true;
+			
+		}else
+		{
+			panelBailleur = false;	
+		}
+		_logger.info("bailleur: "+detailPass.getDppBailleur());
+		_logger.info("panelBailleur: "+panelBailleur);
+	 }
+	//Fin controle bailleur
+	 
+	//Debut controle ANO
+	 public void anoExiste() {
+		if(updatePpm.getDppStatutAno().equalsIgnoreCase("O")) {
+			panelAno = true;
+			
+		}else
+		{
+			panelAno = false;	
+		}
+		_logger.info("ANO: "+detailPass.getDppStatutAno());
+		_logger.info("panelAno: "+panelAno);
+	 }
+	//Fin controle ANO
+	 
+	 public void controleLibelle() {
+		 if(mode=="AMI") {
+			 libelleDPPRQ= false;
+			 libelleDPAMI= false;
+		     libelleAmi= true;
+		     libellePrq= false;
+		     libellePpm= false;
+		 }else
+			 if(mode=="PRQ") {
+				 libelleDPPRQ= false;
+				 libelleDPAMI= false;
+			     libelleAmi= false;
+			     libellePrq= true;
+			     libellePpm= false;
+			 }else
+				 if(mode=="DPPRQ") {
+					 libelleDPPRQ= false;
+					 libelleDPAMI= false;
+				     libelleAmi= false;
+				     libellePrq= true;
+				     libellePpm= false; 
+				 }else
+					 if(mode=="DPAMI") {
+						 libelleDPPRQ= false;
+						 libelleDPAMI= true;
+					     libelleAmi= false;
+					     libellePrq= false;
+					     libellePpm= false; 
+					 }else
+					       {
+							 libelleDPPRQ= false;
+							 libelleDPAMI= false;
+						     libelleAmi= false;
+						     libellePrq= false;
+						     libellePpm= true; 
+						 }
+		 
+	 }
+	 
+//Fin Nouveau	 
 	 
 		//Chargement des Types de Marchés
 		 /*public void chargeMarches() {
@@ -669,10 +1270,18 @@ public class PpmModificationController {
 			}
 		 
 		//Afficher les financements du projet ou agpm selectionné
-		 public void chargeFinancement() {
+		/* public void chargeFinancement() {
 			 listeFinancement.clear();
 			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
 						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+detailPass.getDppId())));		 		 
+		 }*/
+		 
+		 
+		//Afficher les financements du projet ou agpm selectionné
+		 public void chargeFinancement() {
+			 listeFinancement.clear();
+			 listeFinancement = ((List<TFinancementPpm>)iservice.getObjectsByColumn("TFinancementPpm",new ArrayList<String>(Arrays.asList("FPP_ID")),
+						 new WhereClause("FPP_DPP_ID",Comparateur.EQ,""+updatePpm.getDppId())));		 		 
 		 }
 		 
 		 //Afficher les Pgpm 
@@ -1004,11 +1613,9 @@ public class PpmModificationController {
 				  fipPgpm=listeFinancementPgpm.get(0);
 				    }
 			 
-			             
 			             if(pgspm.getGpgMopCode().equalsIgnoreCase("AMI")) {
 			   
 			                       }else {
-			      
 			   			       //Affichage du montant total
 			   			       coutOperation();       
 			                 }
@@ -1051,9 +1658,9 @@ public class PpmModificationController {
 		 
 		 
 		 public void onSelectLigneBudgetaire() { 
-			 detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
+			// detailPass.setTLBudgets(new TLBudgets(ligne.getLbgCode()));
 	         
-			 recupLigne = new VLigneImputation();
+			/* recupLigne = new VLigneImputation();
 			 recupLigne.setLbgAdmCentral(ligne.getLbgAdmCentral());
 			 recupLigne.setLbgActif(ligne.getLbgActif());
 			 recupLigne.setLbgActNumModif(ligne.getLbgActNumModif());
@@ -1095,7 +1702,14 @@ public class PpmModificationController {
 			 recupLigne.setLbgResEmp(ligne.getLbgResEmp());
 			 recupLigne.setNatLibelle(ligne.getNatLibelle());
 			 recupLigne.setLbgSigfip(ligne.getLbgSigfip());
-			 recupLigne.setLbgTraitmt(ligne.getLbgTraitmt());
+			 recupLigne.setLbgTraitmt(ligne.getLbgTraitmt());*/
+			 
+			 updatePpm.setLbgImputation(ligne.getLbgImputation());
+			 updatePpm.setLbgTotDot(ligne.getLbgTotDot());
+			 updatePpm.setLbgAeTr(ligne.getLbgAeTr());
+			 updatePpm.setLbgAeDon(ligne.getLbgAeDon());
+			 updatePpm.setNatLibelle(ligne.getNatLibelle());
+			 updatePpm.setLbgDisTot(ligne.getLbgDisTot());
 			 
 			 //montantOperation();
 			 coutOperation(); 
@@ -1371,7 +1985,7 @@ public class PpmModificationController {
 				
 				//Récuperons la dernière opération crée et faisons une mis à jour sur sa source de financement
 				 List<TDetailPlanPassation> PL =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
-							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+detailPass.getDppId()));
+							new WhereClause("DPP_ID",WhereClause.Comparateur.EQ,""+updatePpm.getDppId()));
 				 TDetailPlanPassation pass = new TDetailPlanPassation();
 					 if(!PL.isEmpty())  
 						 pass =PL.get(0); 
@@ -1523,6 +2137,7 @@ public class PpmModificationController {
 						             detail.setTModePassation(new TModePassation(modePassation.getMopCode()));	 	 
 						             }
 						             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
+						             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
 						             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
 						             detail.setDppNatInt(updatePpm.getDppNatInt());
 						             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
@@ -1549,7 +2164,12 @@ public class PpmModificationController {
 						             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
 						             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
 						             detail.setDppInvEntre(updatePpm.getDppInvEntre());
+						             detail.setDppNbOuv(updatePpm.getDppNbOuv());
 						             iservice.updateObject(detail);
+						             
+						             userController.setTexteMsg(" Modification effectuée avec succès !");
+									 userController.setRenderMsg(true);
+									 userController.setSevrityMsg("success");
 					          
 					           }else {
 					        	        List<TDetailPlanPassation> PLG =iservice.getObjectsByColumn("TDetailPlanPassation", new ArrayList<String>(Arrays.asList("DPP_ID")),
@@ -1569,6 +2189,7 @@ public class PpmModificationController {
 								         detail.setTModePassation(new TModePassation(modePassation.getMopCode()));	 	 
 								         }
 							             detail.setTLBudgets(new TLBudgets(updatePpm.getLbgCode()));
+							             detail.setTModeleDacType(new TModeleDacType(updatePpm.getMdtCode()));
 							             detail.setDppStructureConduc(updatePpm.getDppStructureConduc());
 							             detail.setDppNatInt(updatePpm.getDppNatInt());
 							             detail.setDppTypeStrConduc(updatePpm.getDppTypeStrConduc());
@@ -1595,7 +2216,12 @@ public class PpmModificationController {
 							             detail.setDppDateSignatAttrib(updatePpm.getDppDateSignatAttrib());
 							             detail.setDppDateSignatAc(updatePpm.getDppDateSignatAc());
 							             detail.setDppInvEntre(updatePpm.getDppInvEntre());
+							             detail.setDppNbOuv(updatePpm.getDppNbOuv());
 							             iservice.updateObject(detail);
+							             
+							             userController.setTexteMsg(" Modification effectuée avec succès !");
+										 userController.setRenderMsg(true);
+										 userController.setSevrityMsg("success");
 					            }
 					 
 					
@@ -3188,5 +3814,456 @@ public class PpmModificationController {
 		this.detPass = detPass;
 	}
 
-	
+
+
+	public boolean isModelePrq() {
+		return modelePrq;
+	}
+
+
+
+	public void setModelePrq(boolean modelePrq) {
+		this.modelePrq = modelePrq;
+	}
+
+
+
+	public boolean isPanelFinPgpm() {
+		return panelFinPgpm;
+	}
+
+
+
+	public void setPanelFinPgpm(boolean panelFinPgpm) {
+		this.panelFinPgpm = panelFinPgpm;
+	}
+
+
+
+	public boolean isPanelFinPpm() {
+		return panelFinPpm;
+	}
+
+
+
+	public void setPanelFinPpm(boolean panelFinPpm) {
+		this.panelFinPpm = panelFinPpm;
+	}
+
+
+
+	public boolean isPartPpm() {
+		return partPpm;
+	}
+
+
+
+	public void setPartPpm(boolean partPpm) {
+		this.partPpm = partPpm;
+	}
+
+
+
+	public boolean isPartPgpm() {
+		return partPgpm;
+	}
+
+
+
+	public void setPartPgpm(boolean partPgpm) {
+		this.partPgpm = partPgpm;
+	}
+
+
+
+	public boolean isPartPspm() {
+		return partPspm;
+	}
+
+
+
+	public void setPartPspm(boolean partPspm) {
+		this.partPspm = partPspm;
+	}
+
+
+
+	public boolean isPartPgspm() {
+		return partPgspm;
+	}
+
+
+
+	public void setPartPgspm(boolean partPgspm) {
+		this.partPgspm = partPgspm;
+	}
+
+
+
+	public boolean isLigneftpgpm() {
+		return ligneftpgpm;
+	}
+
+
+
+	public void setLigneftpgpm(boolean ligneftpgpm) {
+		this.ligneftpgpm = ligneftpgpm;
+	}
+
+
+
+	public boolean isLignepn() {
+		return lignepn;
+	}
+
+
+
+	public void setLignepn(boolean lignepn) {
+		this.lignepn = lignepn;
+	}
+
+
+
+	public boolean isLigneps() {
+		return ligneps;
+	}
+
+
+
+	public void setLigneps(boolean ligneps) {
+		this.ligneps = ligneps;
+	}
+
+
+
+	public boolean isPavetPPM() {
+		return pavetPPM;
+	}
+
+
+
+	public void setPavetPPM(boolean pavetPPM) {
+		this.pavetPPM = pavetPPM;
+	}
+
+
+
+	public boolean isPavetAMI() {
+		return pavetAMI;
+	}
+
+
+
+	public void setPavetAMI(boolean pavetAMI) {
+		this.pavetAMI = pavetAMI;
+	}
+
+
+
+	public boolean isPavetPRQ() {
+		return pavetPRQ;
+	}
+
+
+
+	public void setPavetPRQ(boolean pavetPRQ) {
+		this.pavetPRQ = pavetPRQ;
+	}
+
+
+
+	public boolean isPavetDPAMI() {
+		return pavetDPAMI;
+	}
+
+
+
+	public void setPavetDPAMI(boolean pavetDPAMI) {
+		this.pavetDPAMI = pavetDPAMI;
+	}
+
+
+
+	public boolean isPavetDPPRQ() {
+		return pavetDPPRQ;
+	}
+
+
+
+	public void setPavetDPPRQ(boolean pavetDPPRQ) {
+		this.pavetDPPRQ = pavetDPPRQ;
+	}
+
+
+
+	public boolean isLibelleDPAMI() {
+		return libelleDPAMI;
+	}
+
+
+
+	public void setLibelleDPAMI(boolean libelleDPAMI) {
+		this.libelleDPAMI = libelleDPAMI;
+	}
+
+
+
+	public boolean isLibelleDPPRQ() {
+		return libelleDPPRQ;
+	}
+
+
+
+	public void setLibelleDPPRQ(boolean libelleDPPRQ) {
+		this.libelleDPPRQ = libelleDPPRQ;
+	}
+
+
+
+	public boolean isLibelleAmi() {
+		return libelleAmi;
+	}
+
+
+
+	public void setLibelleAmi(boolean libelleAmi) {
+		this.libelleAmi = libelleAmi;
+	}
+
+
+
+	public boolean isLibellePrq() {
+		return libellePrq;
+	}
+
+
+
+	public void setLibellePrq(boolean libellePrq) {
+		this.libellePrq = libellePrq;
+	}
+
+
+
+	public boolean isLibellePpm() {
+		return libellePpm;
+	}
+
+
+
+	public void setLibellePpm(boolean libellePpm) {
+		this.libellePpm = libellePpm;
+	}
+
+
+
+	public boolean isFinPgpm() {
+		return finPgpm;
+	}
+
+
+
+	public void setFinPgpm(boolean finPgpm) {
+		this.finPgpm = finPgpm;
+	}
+
+
+
+	public boolean isFinAmi() {
+		return finAmi;
+	}
+
+
+
+	public void setFinAmi(boolean finAmi) {
+		this.finAmi = finAmi;
+	}
+
+
+
+	public boolean isFinPrq() {
+		return finPrq;
+	}
+
+
+
+	public void setFinPrq(boolean finPrq) {
+		this.finPrq = finPrq;
+	}
+
+
+
+	public boolean isPanelBailleur() {
+		return panelBailleur;
+	}
+
+
+
+	public void setPanelBailleur(boolean panelBailleur) {
+		this.panelBailleur = panelBailleur;
+	}
+
+
+
+	public boolean isPanelAno() {
+		return panelAno;
+	}
+
+
+
+	public void setPanelAno(boolean panelAno) {
+		this.panelAno = panelAno;
+	}
+
+
+
+	public boolean isPanelPgpmNormal() {
+		return panelPgpmNormal;
+	}
+
+
+
+	public void setPanelPgpmNormal(boolean panelPgpmNormal) {
+		this.panelPgpmNormal = panelPgpmNormal;
+	}
+
+
+
+	public boolean isPanelPgpmDp() {
+		return panelPgpmDp;
+	}
+
+	public void setPanelPgpmDp(boolean panelPgpmDp) {
+		this.panelPgpmDp = panelPgpmDp;
+	}
+
+
+
+	public boolean isPanelTymNormal() {
+		return panelTymNormal;
+	}
+
+	public void setPanelTymNormal(boolean panelTymNormal) {
+		this.panelTymNormal = panelTymNormal;
+	}
+
+
+
+	public boolean isPanelTymDp() {
+		return panelTymDp;
+	}
+
+	public void setPanelTymDp(boolean panelTymDp) {
+		this.panelTymDp = panelTymDp;
+	}
+
+
+
+	public VModeleDac getModelDac() {
+		return modelDac;
+	}
+
+	public void setModelDac(VModeleDac modelDac) {
+		this.modelDac = modelDac;
+	}
+
+
+
+	public List<VAmiDp> getListeAmiDp() {
+		return listeAmiDp;
+	}
+
+	public void setListeAmiDp(List<VAmiDp> listeAmiDp) {
+		this.listeAmiDp = listeAmiDp;
+	}
+
+
+
+	public List<VPrqAo> getListePrqDp() {
+		return listePrqDp;
+	}
+
+
+	public void setListePrqDp(List<VPrqAo> listePrqDp) {
+		this.listePrqDp = listePrqDp;
+	}
+
+
+	public String getMode() {
+		return mode;
+	}
+
+	public void setMode(String mode) {
+		this.mode = mode;
+	}
+
+
+
+	public VAmiDp getRecupAmiDp() {
+		return recupAmiDp;
+	}
+
+	public void setRecupAmiDp(VAmiDp recupAmiDp) {
+		this.recupAmiDp = recupAmiDp;
+	}
+
+
+
+	public VPrqAo getRecupPrqDp() {
+		return recupPrqDp;
+	}
+
+	public void setRecupPrqDp(VPrqAo recupPrqDp) {
+		this.recupPrqDp = recupPrqDp;
+	}
+
+
+
+	public VPrqAo getPrqDp() {
+		return prqDp;
+	}
+
+	public void setPrqDp(VPrqAo prqDp) {
+		this.prqDp = prqDp;
+	}
+
+
+
+	public String getNbreOuv() {
+		return nbreOuv;
+	}
+
+	public void setNbreOuv(String nbreOuv) {
+		this.nbreOuv = nbreOuv;
+	}
+
+
+	public List<VFinancementPpm> getListeFinancementAmi() {
+		return listeFinancementAmi;
+	}
+
+
+	public void setListeFinancementAmi(List<VFinancementPpm> listeFinancementAmi) {
+		this.listeFinancementAmi = listeFinancementAmi;
+	}
+
+
+	public List<VFinancementPpm> getListeFinancementPrq() {
+		return listeFinancementPrq;
+	}
+
+
+	public void setListeFinancementPrq(List<VFinancementPpm> listeFinancementPrq) {
+		this.listeFinancementPrq = listeFinancementPrq;
+	}
+
+
+	public String getFinLib() {
+		return finLib;
+	}
+
+
+	public void setFinLib(String finLib) {
+		this.finLib = finLib;
+	}
+
 }

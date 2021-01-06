@@ -1166,6 +1166,7 @@ public class ControleController {
 						 selectPartPgspm = false;
 						 selectTypMPgpm = true;
 						 selectTypMPgspm = false;
+						 lignedefaut = true;
 						 panelPpm = true;
 						 panelPspm = false;
 						 fermerVal = false;
@@ -1448,6 +1449,7 @@ public class ControleController {
 						 selectPartPgspm = true;
 						 selectTypMPgpm = true;
 						 selectTypMPgspm = false;
+						 lignedefaut = true;
 						 panelPpm = true;
 						 panelPspm = false;
 						 fermerVal = false;
@@ -1477,7 +1479,6 @@ public class ControleController {
 						 searchDmp = false;
 						 validCPMP = true;
 						 validDMP = false;
-						 
 			    	}else
 			    		if(action.equalsIgnoreCase("SAIPSPM")) {
 			    			 type = "PSPM";

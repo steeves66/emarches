@@ -11,8 +11,8 @@
 	<h:form id="gnl" styleClass="form-horizontal">
 <section class="content-header">
       <h3>
-        #{controleController.libelleProcedure} #{ppmModificationController.updatePpm.dppId} 
-       
+       #{controleController.libelleProcedure} #{ppmModificationController.updatePpm.dppId} 
+        <!-- <small>Nouveau PPM </small> -->
       </h3>
       <ol class="breadcrumb">
       <li>
@@ -22,12 +22,12 @@
             </li>
         <li>
         <p:commandLink action="#{ppmModificationController.renderPage('ppm1','SAIPPM')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>#{controleController.type} | Index
+            <i class="fa fa-dashboard"></i>#{controleController.type}| Index
              </p:commandLink>
             </li>
         <li class="active">
          <p:commandLink action="#{ppmModificationController.renderPage('ppm4','MODPPM')}" update=":content" > 
-            <i class="fa fa-dashboard"></i>#{controleController.type} | MODIFICATION 
+            <i class="fa fa-dashboard"></i>#{controleController.type} | MODIFICATION  
            <!--  #{controleController.libelle1}  -->
              </p:commandLink>
         </li>
@@ -53,14 +53,15 @@
        
 	 <div class="col-md-12">
        
-        
+        <!-- /.box-header -->
         <!-- /.box-header -->
         <p:wizard flowListener="#{ppmModificationController.onFlowProcess}"  nextLabel="Suivant" backLabel="Précédent" >
+              
 	      <p:tab id="ope111" title="Saisie des Operations" titleStyle="background-color: #f88b2e;background-image: none">
 	      
 	        <div class="box box-success box-solid">
               <div class="box-header with-border">
-               <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN PPM</div></div>
+               <div class="col-md-12 "><div  style="color: #fff">SAISIE D'UN #{controleController.type}</div></div>
              </div>
              
              <div class="box-body">
@@ -69,18 +70,49 @@
 	                 
 	                    <h:panelGroup rendered="#{controleController.selectLovePgpm}" >
              <div class="form-group">
-                  <label class="col-sm-3 control-label">PGPM<span style="color:red;"> *</span></label>
+                  <label class="col-sm-3 control-label">PGPM</label>
 				  <div class="col-sm-9">
-				  <p:inputText id="pgpm2" type="text" value="#{ppmModificationController.updatePpm.dppGpgId} : #{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" />
+				  <h:panelGroup rendered="#{ppmModificationController.panelPgpmNormal}">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="pgpm" type="text" value="#{ppmModificationController.updatePpm.dppGpgId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('pgpmDlg').show()" value="#{ppmModificationController.chargePgpm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="pgpm2" type="text" value="#{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                    </h:panelGroup>
+                    <h:panelGroup rendered="#{ppmModificationController.panelPgpmDp}">
+                     <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmModificationController.updatePpm.dppGpgId} : #{ppmModificationController.updatePpm.gpgObjet}" readonly="true" style="width: 100%" />
+                    </h:panelGroup>
+                    
                   </div>
                 </div>
                 </h:panelGroup>
                 
                 <h:panelGroup rendered="#{controleController.selectLovePgspm}" >
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">PGSPM<span style="color:red;"> *</span></label>
+                  <label class="col-sm-3 control-label">PGSPM</label>
 				  <div class="col-sm-9">
-				  <p:inputText id="pgspm2" type="text" value="#{ppmModificationController.updatePpm.gpgId} : #{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" />
+				  <h:panelGroup rendered="#{ppmModificationController.panelPgpmNormal}">
+                    <table>
+		                 <tr>
+		                 <td style="width: 160px"><p:inputText id="pgspm" type="text" value="#{ppmModificationController.updatePpm.dppGpgId}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('pgspmDlg').show()" value="#{ppmModificationController.chargePgspm()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 <td style="width: 530px"><p:inputText id="pgspm2" type="text" value="#{ppmModificationController.updatePpm.gpgObjet}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 </tr>
+                     </table>
+                     </h:panelGroup>
+                     <h:panelGroup rendered="#{ppmModificationController.panelPgpmDp}">
+                     <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmModificationController.updatePpm.dppGpgId} : #{ppmModificationController.updatePpm.gpgObjet}" readonly="true" style="width: 100%" />
+                    </h:panelGroup>
                   </div>
                 </div>
                 </h:panelGroup>
@@ -88,62 +120,26 @@
                <div class="form-group">
                   <label for="relalisation" class="col-sm-3 control-label">Objet de l'Opération<span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
-                  <p:inputTextarea  rows="2" cols="33" styleClass="form-control" value="#{ppmModificationController.updatePpm.dppObjet}" 
-                      id="relalisation" style="width: 100%" />
+                    <p:inputTextarea placeholder="Veuillez saisir l'objet de l'opération" rows="2" cols="33" styleClass="form-control" value="#{ppmModificationController.updatePpm.dppObjet}" id="relalisation" style="width: 100%" />
                   </div>
               </div>
                
-                <h:panelGroup rendered="#{controleController.selectTypMPgpm}" >
-                  <div class="form-group">
-                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
-				  <table>
-		                 <tr>
-		                 <td style="width: 650px"><p:inputText id="typMa2" type="text" value="#{ppmModificationController.updatePpm.dppTymCode} : #{ppmModificationController.updatePpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 <td>
-		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmModificationController.chargeMarches}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                 </td>
-		                 </tr>
-                     </table>
-                  </div>
-                </div>
-                </h:panelGroup>
-                
-                 <h:panelGroup rendered="#{controleController.selectTypMPgspm}" >
-                  <div class="form-group">
-                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
-				  <div class="col-sm-9">
-				  <table>
-		                 <tr>
-		                 <td style="width: 650px"><p:inputText id="typMa21" type="text" value="#{ppmModificationController.updatePpm.dppTymCode} : #{ppmModificationController.updatePpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
-		                 <td>
-		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmModificationController.chargeMarches}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-							<i class="fa fa-search-plus"></i>
-						  </p:commandLink>
-		                 </td>
-		                 </tr>
-                     </table>
-                  </div>
-                </div>
-                </h:panelGroup>
+              
                 
                 <h:panelGroup rendered="#{controleController.selectOneMenuPassation}" >
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Mode de passation<span style="color:red;"> *</span></label>
 				  <div class="col-sm-9">
-				 <table>
+                  <table>
 		                 <tr>
-		                 <td style="width: 650px"><p:inputText id="modeP2" type="text" value="#{ppmModificationController.updatePpm.dppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 650px"><p:inputText id="modeP2" type="text" value="#{ppmModificationController.updatePpm.dppMopCode} : #{ppmModificationController.updatePpm.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
-		                  <p:commandLink  oncomplete="PF('passationDlg').show()" action="#{ppmModificationController.chargeModePassation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+		                  <p:commandLink  oncomplete="PF('passationDlg').show()" action="#{ppmModificationController.chargeModePassation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogPas">
 							<i class="fa fa-search-plus"></i>
 						  </p:commandLink>
 		                 </td>
 		                 </tr>
                      </table>
-		         
                   </div>
                 </div>
                 </h:panelGroup>
@@ -152,10 +148,9 @@
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Mode de Passation</label>
                   <div class="col-sm-9">
-                  <!--  <p:inputText id="modeP21" type="text" value="#{ppmModificationController.updatePpm.dppMopCode}" styleClass="form-control"  readonly="true" style="width: 100%" /> -->
-                    <table>
+                   <table>
 		                 <tr>
-		                 <td style="width:650px"><p:inputText id="modeP21" type="text" value="#{ppmModificationController.updatePpm.dppMopCode} : #{ppmModificationController.updatePpm.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 650px"><p:inputText id="modeP21" type="text" value="#{ppmModificationController.updatePpm.dppTymCode} : #{ppmModificationController.updatePpm.mopLibelleLong}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
 		                  <p:commandLink  oncomplete="PF('passationPgspmDlg').show()" action="#{ppmModificationController.chargeMode}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
 							<i class="fa fa-search-plus"></i>
@@ -166,22 +161,94 @@
                   </div>
                 </div>
                 </h:panelGroup>
-                
-            <!--     <div class="form-group">
-                  <label  class="col-sm-3 control-label">Modèle de DAO-type</label>
-                  
-                  <h:panelGroup rendered="#{ppmModificationController.modeleDao}" >
-                  <div class="col-sm-9">
-                    <p:selectOneMenu id="tami" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
-			       <f:selectItems value="#{ppmModificationController.listeDao}" var="am" itemLabel="#{am.mdtLibelleLong}" itemValue="#{am.mdtCode}" />			   				   
-				<f:selectItems />				   				    				   
-		       	</p:selectOneMenu>
+                  <h:panelGroup rendered="#{controleController.selectTypMPgpm}" >
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+				  <h:panelGroup rendered="#{ppmModificationController.panelTymNormal}">
+				  <table>
+		                 <tr>
+		                 <td style="width: 650px"> <p:inputText id="typMa2" type="text" value="#{ppmModificationController.updatePpm.dppTymCode} : #{ppmModificationController.updatePpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmModificationController.chargetypeMarcheByModPass()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogMar">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                     </h:panelGroup>
+                     <h:panelGroup rendered="#{ppmModificationController.panelTymDp}">
+                      <table>
+		                 <tr>
+		                 <td style="width: 650px">  <p:inputText type="text" value="#{ppmModificationController.updatePpm.dppTymCode} : #{ppmModificationController.updatePpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesDlg').show()" action="#{ppmModificationController.chargetypeMarcheByModPass()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogMar">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                     </h:panelGroup>
                   </div>
-                  </h:panelGroup>  
-                  
-                </div>  -->
+                </div>
+                </h:panelGroup>
                 
-                 <div class="form-group">
+                 <h:panelGroup rendered="#{controleController.selectTypMPgspm}" >
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">Type de marché<span style="color:red;"> *</span></label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 650px"><p:inputText id="typMa21" type="text" value="#{ppmModificationController.updatePpm.dppTymCode} : #{ppmModificationController.updatePpm.tymLibelleCourt}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('marchesPsDlg').show()" action="#{ppmModificationController.chargetypeMarcheByModPassPs()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogMarPs">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
+                 <h:panelGroup rendered="#{ppmModificationController.libelleDPAMI}">
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">AMI de la DP</label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 650px">
+		                 <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmModificationController.updatePpm.dppObjet}" readonly="true" style="width: 100%" />
+		                 </td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('dpDlg').show()" action="#{ppmModificationController.chargeAmiDp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
+                 <h:panelGroup rendered="#{ppmModificationController.libelleDPPRQ}">
+                  <div class="form-group">
+                  <label class="col-sm-3 control-label">PRQ de la DP</label>
+				  <div class="col-sm-9">
+				   <table>
+		                 <tr>
+		                 <td style="width: 650px">
+		                 <p:inputTextarea rows="2" cols="33" styleClass="form-control" value="#{ppmModificationController.updatePpm.dppObjet}" readonly="true" style="width: 100%" />
+		                 </td>
+		                 <td>
+		                  <p:commandLink  oncomplete="PF('dpPrqDlg').show()" action="#{ppmModificationController.chargePrqDp()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+		                 </td>
+		                 </tr>
+                     </table>
+                  </div>
+                </div>
+                </h:panelGroup>
+                <div class="form-group">
                   <label for="prod" class="col-sm-3 control-label">Bailleur<span style="color:red;"> *</span></label>
                   <div class="col-sm-9">
                      <p:selectOneRadio value="#{ppmModificationController.updatePpm.dppBailleur}" id="prod">
@@ -191,8 +258,8 @@
                   </div>
                 </div> 
                 
-                 <div class="form-group">
-                  <label  class="col-sm-3 control-label">Appel d'Offres</label>
+                <div class="form-group">
+                  <label  class="col-sm-3 control-label">Appel d'Offres<span style="color:red;"> *</span></label>
 
                   <div class="col-sm-9">
                   <p:selectOneRadio value="#{ppmModificationController.updatePpm.dppNatInt}" id="natInt">
@@ -201,118 +268,162 @@
 					 </p:selectOneRadio>
                   </div>
                 </div>
+                
+                
+                
 	        </div>
 	        
 	       <div class="col-md-6">
 	          <div class="form-group">
                   <label  class="col-sm-3 control-label">Type Structure Conductrice</label>
+
                   <div class="col-sm-9">
-                  <p:selectOneMenu id="tpcond" value="#{ppmModificationController.updatePpm.dppTypeStrConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">  
+                  <p:selectOneMenu id="tpcond" required="true" requiredMessage="Veuillez choisir le type de structure conductrice" value="#{ppmModificationController.updatePpm.dppTypeStrConduc}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type de structure.." />  
 			       <f:selectItems value="#{ppmModificationController.listeTypStruConduc}" var="typ" itemLabel="#{typ.libelle}" itemValue="#{typ.libelle}" />			   				   
 				  <f:selectItems />				   				    				   
 		       	 </p:selectOneMenu>
                   </div>
-                </div>	
+                </div>
                 
-                <div class="form-group">
+                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Structure Conductrice</label>
                   <div class="col-sm-9">
                     <p:inputText  type="text" value="#{ppmModificationController.updatePpm.dppStructureConduc}" styleClass="form-control" style="width: 100%" />
                   </div>
                 </div>	
-        
+                
+                    
                  <div class="form-group">
                   <label  class="col-sm-3 control-label">Structure Bénéficiaire</label>
+
                   <div class="col-sm-9">
                     <p:inputText  type="text" value="#{ppmModificationController.updatePpm.dppStructureBenefi}" styleClass="form-control" style="width: 100%" />
                   </div>
                 </div>	
                 
-                   <h:panelGroup rendered="#{controleController.selectPartPgpm}" >
+                <h:panelGroup rendered="#{controleController.selectPartPgpm}" >
+                <h:panelGroup rendered="#{ppmModificationController.partPpm}" >
                 <div class="form-group">
                   <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
 
                   <div class="col-sm-9">
-       
-				<p:inputText id="modeP78" type="text" value="#{ppmModificationController.updatePpm.dppPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
-                  </div>
+                     <p:selectOneRadio  value="#{ppmModificationController.updatePpm.dppPartiePmePmi}" id="part78">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+				</div>
                 </div>
+                </h:panelGroup>
+                
+                <h:panelGroup rendered="#{ppmModificationController.partPgpm}" >
+                <div class="form-group">
+                  <label for="modeP78" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
+                <div class="col-sm-9">
+				<p:selectOneRadio  value="#{ppmModificationController.updatePpm.dppPartiePmePmi}" id="modeP78">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+				</p:selectOneRadio>
+					 
+                </div>
+                </div>
+                </h:panelGroup>
                 </h:panelGroup>
                 
                 <h:panelGroup rendered="#{controleController.selectPartPgspm}" >
+                 <h:panelGroup rendered="#{ppmModificationController.partPspm}" >
                 <div class="form-group">
-                  <label for="relalisation" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
+                  <label for="relalisation78" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
 
                   <div class="col-sm-9">
-       
-				<p:inputText id="modeP781" type="text" value="#{ppmModificationController.updatePpm.dppPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
-                  </div>
+                     <p:selectOneRadio  value="#{ppmModificationController.updatePpm.dppPartiePmePmi}" id="realisation78">
+						<f:selectItem itemLabel="OUI" itemValue="O" />
+						<f:selectItem itemLabel="NON" itemValue="N" />
+					 </p:selectOneRadio>
+				</div>
                 </div>
                 </h:panelGroup>
                 
-                  <div class="form-group">
-                  <label for="ano1" class="col-sm-3 control-label">ANO<span style="color:red;"> *</span></label>
+                <h:panelGroup rendered="#{ppmModificationController.partPgspm}" >
+                <div class="form-group">
+                  <label for="modeP781" class="col-sm-3 control-label">Part réservée aux PME<span style="color:red;">*</span></label>
                   <div class="col-sm-9">
-                     <p:selectOneRadio value="#{ppmController.updatePpm.dppStatutAno}" id="ano1">
+				  <p:inputText id="modeP781" type="text" value="#{ppmController.updatePpm.gpgPartiePmePmi == 'O'?'OUI':'NON'}" styleClass="form-control"  readonly="true" style="width: 100%" />
+                  </div>
+                </div>
+                </h:panelGroup>
+                </h:panelGroup>
+                
+                 <div class="form-group">
+ 
+                  <label for="ano1" class="col-sm-3 control-label">ANO<span style="color:red;"> *</span></label>
+                  <div class="col-sm-3">
+                     <p:selectOneRadio value="#{ppmModificationController.updatePpm.dppStatutAno}" id="ano1">
 						<f:selectItem itemLabel="OUI" itemValue="O" />
 						<f:selectItem itemLabel="NON" itemValue="N" />
 					 </p:selectOneRadio>
                   </div>
+                  
+                  <label for="ano2" class="col-sm-3 control-label">Nbre Ouverture<span style="color:red;"> *</span></label>
+                  <div class="col-sm-3">
+					 <p:selectOneMenu value="#{ppmModificationController.updatePpm.dppNbOuv}" effect="fade" style="width:100%">   
+			            <f:selectItem itemLabel="1" itemValue="1" /> 
+                        <f:selectItem itemLabel="2" itemValue="2" />				   	   				    				   
+			       </p:selectOneMenu>
+                  </div>
+                  
                 </div> 
                 
-              <div class="form-group">
-		     <label for="trdao" class="col-sm-3 control-label">Date Trans<span style="color:red;"> *</span></label>
-		     <div class="col-sm-3">
-		       <p:calendar id="trdao" value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" pattern="dd/MM/yyyy" style="width: 100%" >
-		       </p:calendar> 
-		   </div>
-		   
-		   <label for="rr" class="col-sm-2 control-label">Date Pub<span style="color:red;"> *</span></label>
-		     <div class="col-sm-3">
-		    <table>
-		      <tr>
-		      <td style="width:50px"><p:calendar id="rr" readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		       </p:calendar></td>
-		       <td>
-		       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
-			   <i class="fa fa-search-plus"></i>
-			  </p:commandLink>
-		     </td>
-		   </tr>
-          </table>    
-		   </div>
-		   </div>        
+                 
 	       </div>
                
-               </div>
+           </div>
 	      </div>
 			 
 		  <div class="box box-success box-solid">
               <div class="box-header with-border">
-               <div class="col-md-12 "><div  style="color: #fff">SOURCES DE FINANCEMENT</div></div>
+               <div class="col-md-12 "><div  style="color: #fff">SOURCES DE FINANCEMENT #{ppmController.finLib}</div></div>
+                <!-- <div class="col-md-1 "> 
+			           <p:commandLink oncomplete="PF('DetailDlg').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
+								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
+								
+								</p:commandLink>
+			         </div> -->
              </div>
              
              <div class="box-body">
-                   <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+                   
         <div class="form-group">
                   <label class="col-sm-2 control-label">Imputation Budgétaire<span style="color:red;"> *</span></label>
 				  <div class="col-sm-10">
-				  <p:inputText id="Imput23" type="text" value="#{ppmModificationController.updatePpm.lbgImputation} : #{ppmModificationController.updatePpm.natLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" />
-                    <!-- <table>
+                    <table>
 		                 <tr>
-		                  <td style="width: 20%"><p:inputText id="Imput13" type="text" value="#{ppmModificationController.updatePpm.lbgImputation}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+		                 <td style="width: 25%"><p:inputText id="Imput13" type="text" value="#{ppmModificationController.updatePpm.lbgImputation}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 <td>
-		                   <p:commandLink  oncomplete="PF('imputationDlg').show()" action="#{ppmModificationController.chargeImputation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+		                  <p:commandLink rendered="#{controleController.lignedefaut}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmController.chargeImputation()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
 							<i class="fa fa-search-plus"></i>
-						  </p:commandLink> 
-		                 </td> 
-		                 <td style="width: 100%"><p:inputText id="Imput23" type="text" value="#{ppmModificationController.updatePpm.lbgImputation} : #{ppmModificationController.updatePpm.natLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
+						  </p:commandLink>
+						  
+						  <p:commandLink rendered="#{ppmModificationController.ligneftpgpm}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmModificationController.chargeImputationPg()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+						  
+						   <p:commandLink rendered="#{ppmModificationController.lignepn}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmModificationController.chargeImputationPn()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign">
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+						  
+						   <p:commandLink rendered="#{ppmModificationController.ligneps}" title="Imputation budgétaire" oncomplete="PF('imputationDlg').show()" action="#{ppmModificationController.chargeImputationPros()}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e" update="dlogLign:ndTbleLign" >
+							<i class="fa fa-search-plus"></i>
+						  </p:commandLink>
+						  
+		                 </td>
+		                 <td style="width: 75%"><p:inputText id="Imput23" type="text" value="#{ppmModificationController.updatePpm.natLibelle}" styleClass="form-control"  readonly="true" style="width: 100%" /></td>
 		                 </tr>
-                     </table> -->
+                     </table>
                   </div>
                 </div>
-            </h:panelGroup>
-                      
+       
+                
            
                    <div class="col-md-12"> 
                 <table width="100%">
@@ -325,7 +436,7 @@
                 </tr>
                 
                 <tr>
-                <td><p:inputText  type="text"  value="#{ppmModificationController.updatePpm.lbgTotDot}" styleClass="form-control" id="dotation" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText>  </td>
+                <td><p:inputText  type="text"  value="#{ppmModificationController.updatePpm.lbgTotDot}" styleClass="form-control" id="dotation" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText></td>
                 <td><p:inputText  type="text" value="#{ppmModificationController.updatePpm.lbgAeTr}" styleClass="form-control" id="tre" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber> </p:inputText> </td>
                 <td><p:inputText  type="text" value="#{ppmModificationController.updatePpm.lbgAeEmp}" styleClass="form-control" id="emp" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
                 <td><p:inputText  type="text" value="#{ppmModificationController.updatePpm.lbgAeDon}" styleClass="form-control" id="don" readonly="true" style="width: 100%"><f:convertNumber pattern="##,###.##"></f:convertNumber></p:inputText> </td>
@@ -337,7 +448,56 @@
         </div>
         
         <div class="col-md-12">
-         <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmModificationController.listeFinancement}"
+         
+        <h:panelGroup rendered="#{ppmModificationController.finPgpm}">
+         <p:dataTable id="finance" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmModificationController.listeFinancementPgpm}"
+          editable="true" editMode="cell"  emptyMessage="Aucun financement enregistré">
+                        
+                        <p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fipTypeFinance}"/>
+				        </p:column>
+          
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.souLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Part Bailleur" width="6%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipMontantCfa}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fipMontantCfa}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		               <p:ajax event="blur" process="@this" global="false" update="modelInput" /> 
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+				        
+				        <p:column headerText="Part Trésor" width="5%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fipTresor}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput1" value="#{slctdTb.fipTresor}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                <p:ajax event="blur" process="@this" global="false" update="modelInput1" /> 
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
+				        </p:column>
+                 </p:dataTable>
+               </h:panelGroup>  
+             
+                 
+          <h:panelGroup rendered="#{ppmModificationController.finAmi}">
+         <p:dataTable id="financeAmi" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmModificationController.listeFinancementAmi}"
           editable="true" editMode="cell"  emptyMessage="Aucun financement enregistré">
                         
                         <p:column headerText="Source" styleClass="col-sm-1">
@@ -345,52 +505,99 @@
 				        </p:column>
           
          				<p:column headerText="Bailleur" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TBailleur.baiLibelle}"/>
+				            <h:outputText value="#{slctdTb.baiLibelle}"/>
 				        </p:column>
 				        
 				        <p:column headerText="Type" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.TSourceFinancement.souLibelle}" />
+				            <h:outputText value="#{slctdTb.souLibelle}" />
 				        </p:column>
 				        
-				        <p:column headerText="Part Bailleur" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fppMontantCfa}" />
+				        <p:column headerText="Part Bailleur" width="6%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppMontantCfa}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput" value="#{slctdTb.fppMontantCfa}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		               <p:ajax event="blur" process="@this" global="false" update="modelInput" /> 
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
 				        </p:column>
 				        
-				       <p:column headerText="Part Trésor" styleClass="col-sm-1">
-				            <h:outputText value="#{slctdTb.fppPartTresor}" />
+				        <p:column headerText="Part Trésor" width="5%">
+				          <p:cellEditor>
+		                <f:facet name="output">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppPartTresor}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+		                </f:facet>
+		                <f:facet name="input"> <p:inputText id="modelInput1" value="#{slctdTb.fppPartTresor}" style="width:100%">
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber>
+		                <p:ajax event="blur" process="@this" global="false" update="modelInput1" /> 
+		                 </p:inputText></f:facet>
+		               </p:cellEditor>
 				        </p:column>
-				          
-				   
-                 </p:dataTable>  
+                 </p:dataTable>
+               </h:panelGroup>   
+               
+               
+        <h:panelGroup rendered="#{ppmModificationController.finPrq}">
+         <p:dataTable id="financePrq" styleClass="table mb0 dt-on-steroids dataTable" var="slctdTb" value="#{ppmModificationController.listeFinancementPrq}"
+            emptyMessage="Aucun financement enregistré">
+                        
+                        <p:column headerText="Source" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.fppTypeFinance}"/>
+				        </p:column>
+          
+         				<p:column headerText="Bailleur" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.baiLibelle}"/>
+				        </p:column>
+				        
+				        <p:column headerText="Type" styleClass="col-sm-1">
+				            <h:outputText value="#{slctdTb.souLibelle}" />
+				        </p:column>
+				        
+				        <p:column headerText="Part Bailleur" width="6%">
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppMontantCfa}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+				        </p:column>
+				        
+				        <p:column headerText="Part Trésor" width="5%">
+
+		                <h:outputText styleClass="pull-right" value="#{slctdTb.fppPartTresor}" >
+		                <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+		                </h:outputText>
+				        </p:column>
+                 </p:dataTable>
+               </h:panelGroup>   
+                 
         </div>
         
-              <div class="col-md-12">
-        <div class="form-group">
-                  <label for="MontTot" class="col-sm-9 control-label">Cout total de l'operation</label>
-                  <div class="col-sm-3">
-                    <p:inputText  type="text" value="#{ppmModificationController.totalMontant}" styleClass="form-control" id="MontTot"  readonly="true">
-                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
-                    </p:inputText>
-                  </div>
-                </div>
-           </div>
+   
              </div>
-             
-             
              </div>
-               
-           
-			        </p:tab>
-			        
-	<p:tab id="ope222" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
-	 <div class="row">
+	</p:tab>
+	
+	
+	
+	<!--  <ui:include src="inclusions/dates_previsionnelles/ppmNormal.xhtml" />
+	 <ui:include src="inclusions/dates_previsionnelles/ppmAmiNormal.xhtml" />
+	 <ui:include src="inclusions/dates_previsionnelles/ppmAmiDpNormal.xhtml" />
+	 <ui:include src="inclusions/dates_previsionnelles/ppmPrqNormal.xhtml" />
+	 <ui:include src="inclusions/dates_previsionnelles/ppmPrqDpNormal.xhtml" /> -->
+		        
+	<p:tab id="ope222" rendered="#{ppmModificationController.pavetPPM}" title="Dates prévisionnelles" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="row">
 			     <div class="col-md-8 col-md-offset-2">
 			     
-			     
-	<!-- <div class="col-md-12">
+			      
+	<div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <div  style="color: #fff">CHOIX DU DAO TYPE</div>
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
             <div class="col-md-6"><div  style="color: #fff">
 	              <div class="col-sm-6"></div>
             </div></div>
@@ -401,9 +608,10 @@
       
            <div class="col-md-12">
 		    <div class="form-group">
-		   <label for="moldao27" class="col-sm-2 control-label">Dao Type</label>
+		   <label for="moldao27" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
             <div class="col-sm-10">
-		         <p:selectOneMenu id="moldao"  value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+		         <p:selectOneMenu id="moldao27" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
 			       <f:selectItems value="#{ppmModificationController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
 				<f:selectItems />				   				    				   
 		       	</p:selectOneMenu>
@@ -415,91 +623,131 @@
 		   </div>
           </div>     
          </div>
-         </div>	 -->	     	     	     
+         </div>		     
+			     
 			     
      <div class="col-md-12">
              <div class="box box-success box-solid">
         <div class="box-header with-border">
             <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+            
          </div>
           <div class="box-body">
-          <div class="row">       
-             <div class="col-md-6">
-               <h:panelGroup rendered="#{controleController.validDMP}"> 
-		    <div class="form-group">
+          <div class="row"> 
+              <div class="col-md-6">
+             
+              <div class="form-group">
 		       
-		                  <label for="valdao" class="col-sm-6 control-label">Validation DAO par DMP<span style="color:red;"> *</span></label>
+		                  <label  class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valdao" value="#{ppmModificationController.updatePpm.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar  value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
-		    </div>
-		    </h:panelGroup> 
+		    </div> 
 		    
-		    <h:panelGroup rendered="#{controleController.validCPMP}">
+		     <h:panelGroup rendered="#{controleController.validCPMP}">
 		    <div class="form-group">
-		                  <label for="valcp" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> *</span></label>
+		                  <label for="valcp2" class="col-sm-6 control-label">Validation par CPMP<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="valcp" value="#{ppmModificationController.updatePpm.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valcp2" value="#{ppmModificationController.updatePpm.dppDateAttApprobCpmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%">
 		                   </p:calendar> 
 		                  </div>
 		    </div> 
 		    </h:panelGroup>
-             </div>
+             
+		     
+		    
+            </div>
+            
+            
              <div class="col-md-6">
-               <div class="form-group">
-		                  <label for="baildao" class="col-sm-6 control-label">Validation DAO Bail</label>
+             <h:panelGroup rendered="#{controleController.validDMP}"> 
+		    <div class="form-group">
+		       
+		                  <label for="valdao2" class="col-sm-6 control-label">Validation DAO par la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="baildao" value="#{ppmModificationController.updatePpm.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="valdao2" value="#{ppmModificationController.updatePpm.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		    </div>
+		    </h:panelGroup> 
+		    <h:panelGroup rendered="#{ppmController.panelBailleur}">
+		    <div class="form-group">
+		                  <label for="baildao2" class="col-sm-6 control-label">Validation DAO Bail</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="baildao2" value="#{ppmModificationController.updatePpm.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                </div>
 		                </div> 
+		      </h:panelGroup>
+             </div>
+             <div class="col-md-6">
+             <div class="form-group">
+		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                  <div class="col-sm-6">
+		                    <table>
+						      <tr>
+						      <td style="width:50px"><p:calendar  readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+						       </p:calendar></td>
+						       <td>
+						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							   <i class="fa fa-search-plus"></i>
+							  </p:commandLink>
+						     </td>
+						   </tr>
+				          </table>
+		                </div>
+		                </div>
+               
              </div>
              
              <h:panelGroup rendered="#{controleController.etatPsc}">
             <div class="col-md-6">
              <div class="form-group">
-             <label for="solEnt" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> *</span></label>
+             <label for="solEnt1" class="col-sm-6 control-label">Sollicitation des Factures<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="solEnt" value="#{ppmController.updatePpm.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="solEnt1" value="#{ppmModificationController.updatePpm.dppDateSolFact}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
              </div>
              
              
              <div class="form-group">
-              <label for="solFact" class="col-sm-6 control-label">Reception des Factures<span style="color:red;"> *</span></label>
+              <label for="solFact1" class="col-sm-6 control-label">Reception des Factures<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="solFact" value="#{ppmController.updatePpm.dppDateRecepFact}"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="solFact1" value="#{ppmModificationController.updatePpm.dppDateRecepFact}"  mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
              </div>
               </div>
               </h:panelGroup>
-              
-              
-              <h:panelGroup rendered="#{controleController.etatPsl}">
+             
+             
+             <h:panelGroup rendered="#{controleController.etatPsl}">
              <div class="col-md-6">
               <div class="form-group">
-		                  <label for="invAoo" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
+		                  <label for="invAoo1" class="col-sm-6 control-label">Invitation des Entreprises<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="invAoo" value="#{ppmController.updatePpm.dppInvEntre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   <p:calendar id="invAoo1" value="#{ppmModificationController.updatePpm.dppInvEntre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		        </div>
              
              
              <div class="form-group">
-              <label for="repFact" class="col-sm-6 control-label">Reception des Lettres d'Intention<span style="color:red;"> *</span></label>
+              <label for="repFact1" class="col-sm-6 control-label">Reception des Lettres d'Intention<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar value="#{ppmController.updatePpm.dppDateRecepLettr}" id="repFact"   mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar value="#{ppmModificationController.updatePpm.dppDateRecepLettr}" id="repFact1"   mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
              </div>
              </div>
              </h:panelGroup>
 		  
-		         
+		        
 		                        
 		   </div>
           </div>     
@@ -513,26 +761,26 @@
             <div  style="color: #fff">PASSATION DE MARCHE (2)</div>
          </div>
          <div class="box-body"></div>
-		   <div class="row">
+		 <div class="row">
          <div class="col-md-6">
          <div class="form-group">
 		                  <label for="oft" class="col-sm-6 control-label">Ouverture Technique<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="oft" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" style="width: 100%" >
+		                   <p:calendar id="oft" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                  </div>
 		                  <div class="form-group">
 		                  <label for="off" class="col-sm-6 control-label">Ouverture Financière<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="off" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.dppDateOuvertOf}" style="width: 100%" >
+		                   <p:calendar id="off" value="#{ppmModificationController.updatePpm.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
 		                 <div class="form-group">
 		                  <label for="rapp" class="col-sm-6 control-label">Rapport d'évaluation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="rapp" mask="true" locale="fr" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   <p:calendar id="rapp" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -542,19 +790,29 @@
 		                   <p:calendar id="jug" value="#{ppmModificationController.updatePpm.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
-		                </div> 
+		                </div>
+		                
 		                <div class="form-group">
 		                  <label for="notA" class="col-sm-6 control-label">Notification de l'Attribution<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="notA" value="#{ppmModificationController.updatePpm.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
-		                </div>      
+		                </div>
+		                
          </div>
          
          
          <div class="col-md-6">
-       
+                     <h:panelGroup rendered="#{ppmController.panelAno}">
+		                 <div class="form-group">
+		                  <label for="approbaAno" class="col-sm-6 control-label">ANO de la #{controleController.structureLibAbrege}</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approbaAno" value="#{ppmModificationController.updatePpm.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
 		                  <div class="form-group">
 		                  <label for="approba" class="col-sm-6 control-label">ANO du Bailleur</label>
 		                  <div class="col-sm-6">
@@ -562,15 +820,7 @@
 		                   </p:calendar> 
 		                  </div>
 		                </div>
-		                
-		                 <div class="form-group">
-		                  <label for="approbaAno" class="col-sm-6 control-label">ANO de la DMP</label>
-		                  <div class="col-sm-6">
-		                   <p:calendar id="approbaAno" value="#{ppmModificationController.updatePpm.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
-		                   </p:calendar> 
-		                  </div>
-		                </div>
-		                
+		                </h:panelGroup>
 		                 <div class="form-group">
 		                  <label for="neg" class="col-sm-6 control-label">Négociation<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
@@ -582,7 +832,7 @@
 		                  <div class="form-group">
 		                  <label for="jug2" class="col-sm-6 control-label">Jugement Financier<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
-		                   <p:calendar id="jug2" mask="true" locale="fr" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.dppDateJugementOffre}" style="width: 100%" >
+		                   <p:calendar id="jug2" value="#{ppmModificationController.updatePpm.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
 		                   </p:calendar> 
 		                  </div>
 		                </div>
@@ -602,6 +852,7 @@
 		                  <label for="attr" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="attr" value="#{ppmModificationController.updatePpm.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
 		                   </p:calendar> 
 		                  </div>
 		                  </div>
@@ -614,18 +865,19 @@
 		                </div>
          </div>
          <div class="col-md-6">
-               <h:panelGroup id="psl_inv">
+               <h:panelGroup id="psl_inv1">
 				    <h:panelGroup rendered="#{controleController.etatPsl}">
                    <div class="form-group">
 		                  <label for="marcheApprob" class="col-sm-6 control-label">Approbation du marché<span style="color:red;"> *</span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="marcheApprob" value="#{ppmModificationController.updatePpm.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
 		                   </p:calendar> 
 		                  </div>
 		                </div>
 		                     
 		                <div class="form-group">
-		                  <label for="valDmp" class="col-sm-6 control-label">Validation Marché DMP<span style="color:red;"></span></label>
+		                  <label for="valDmp" class="col-sm-6 control-label">Validation Marché par la #{controleController.structureLibAbrege}<span style="color:red;"></span></label>
 		                  <div class="col-sm-6">
 		                   <p:calendar id="valDmp" mask="true" pattern="dd/MM/yyyy" value="#{ppmModificationController.updatePpm.dppDateAttApprobDmp}" style="width: 100%" >
 		                   </p:calendar> 
@@ -637,7 +889,7 @@
          </div>
          </div>
          
-              
+        
          </div>
          </div>
          <div class="col-md-12">
@@ -670,10 +922,588 @@
 	         
 	         
          </div>
-     	
+     
+     
+     
+  <div class="row">
+          <div class="col-md-12">
+       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+       <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PPM
+	   </p:commandLink>
+	   
+	     <p:commandLink  styleClass="btn btn-success row pull-right" action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PSPM
+	   </p:commandLink>
+	 
+	   </h:panelGroup>
+
+	    <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditUpdate}" action="#{ppmModificationController.imprimModifPpm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PPM 
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditPspm}" action="#{ppmModificationController.imprimModifPspm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PSPM 
+		</p:commandLink>
+	  
+          </div>
+         
+         </div>  
+     
+         </div>
+         
+         </div>
+       </div>
+	</p:tab>
+	
+	
+	
+	
+	<p:tab id="ope223" rendered="#{ppmModificationController.pavetAMI}" title="Dates prévisionnelles pour l'Avis à Manifestation d'Intétrêt" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="row">
+			     <div class="col-md-8 col-md-offset-2">
+			     
+		      
+	<div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+      
+           <div class="col-md-12">
+		    <div class="form-group">
+		   <label for="moldao271Ami" class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu id="moldao271Ami" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmModificationController.updatePpm.tydCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+	         </div>
+		    </div> 
+
+             </div>
+                           
+		   </div>
+          </div>     
+         </div>
+         </div>		     
+		     
+			     
+     <div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+            
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+             <div class="col-md-6">
+             
+              <div class="form-group">
+		       
+		                  <label for="trAmi" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="trAmi" value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+             
+		    <div class="form-group">
+		       
+		                  <label for="valdao22Ami" class="col-sm-6 control-label">Approbation par la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="valdao22Ami" value="#{ppmModificationController.updatePpm.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+		    
+		   
+		       
+             </div>
+             <div class="col-md-6">
+               <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+               <div class="form-group">
+		                  <label for="baildao2Ami" class="col-sm-6 control-label">Approbation par le Bailleur </label>
+		                  <div class="col-sm-6">
+		                  <p:calendar id="baildao2Ami" value="#{ppmModificationController.updatePpm.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                </div>
+		                </div> 
+		               </h:panelGroup>
+		                
+		                <div class="form-group">
+		                <h:panelGroup rendered="#{ppmModificationController.libelleAmi}">
+		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmModificationController.libelleDPAMI}">
+		                  <label  class="col-sm-6 control-label">Date de Programmation<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                    <table>
+						      <tr>
+						      <td style="width:50px"><p:calendar id="rr" readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+						       </p:calendar></td>
+						       <td>
+						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							   <i class="fa fa-search-plus"></i>
+							  </p:commandLink>
+						     </td>
+						   </tr>
+				          </table>
+		                </div>
+		                </div> 
+             </div>
+	                        
+		   </div>
+          </div>     
+         </div>
+         </div>
+         
+
+          <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PASSATION DE MARCHE (2)</div>
+         </div>
+         <div class="box-body"></div>
+		 <div class="row">
+         <div class="col-md-6">
+         <div class="form-group">
+         <h:panelGroup rendered="#{ppmModificationController.libelleAmi}">
+		                  <label for="oftAmi" class="col-sm-6 control-label">Ouverture des Manifestations d'Intérêt<span style="color:red;"> *</span></label>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmModificationController.libelleDPAMI}">
+		                  <label for="oftAmi" class="col-sm-6 control-label">Ouverture des Offres<span style="color:red;"> *</span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="oftAmi" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  
+		                 <div class="form-group">
+		                  <label for="rappAmi" class="col-sm-6 control-label">Rapport d'évaluation <span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rappAmi" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                 <h:panelGroup rendered="#{ppmModificationController.libelleAmi}">
+		                  <label for="jugAmi" class="col-sm-6 control-label">Jugement des manifestations<span style="color:red;"></span></label>
+		                  </h:panelGroup>
+		                    <h:panelGroup rendered="#{ppmModificationController.libelleDPAMI}">
+		                  <label class="col-sm-6 control-label">Jugement des offres<span style="color:red;"></span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jugAmi" value="#{ppmModificationController.updatePpm.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>      
+         </div>
          
          
-          <div class="row">
+         <div class="col-md-6">
+       
+		                 <h:panelGroup rendered="#{ppmModificationController.panelAno}">
+		                 <div class="form-group">
+		                  <label for="approbaAnoAmi" class="col-sm-6 control-label">Approbation de la liste restreinte (ANO #{controleController.structureLibAbrege})</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approbaAnoAmi" value="#{ppmModificationController.updatePpm.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                
+		                  <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+		                  <div class="form-group">
+		                  <label for="approbaAmi" class="col-sm-6 control-label">Approbation de la liste restreinte (ANO BAILLEUR)</label>
+		                  <div class="col-sm-6">
+		                  <p:calendar id="approbaAmi" value="#{ppmModificationController.updatePpm.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar>
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                
+		                  </div>
+		                  </div>
+         </div>
+         </div>
+         
+      
+         <div class="col-md-12">
+          
+     
+     
+     
+        <div class="row">
+          <div class="col-md-12">
+       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+       <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PPM
+	   </p:commandLink>
+	   
+	     <p:commandLink  styleClass="btn btn-success row pull-right" action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PSPM
+	   </p:commandLink>
+	 
+	   </h:panelGroup>
+
+	    <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditUpdate}" action="#{ppmModificationController.imprimModifPpm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PPM 
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditPspm}" action="#{ppmModificationController.imprimModifPspm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PSPM 
+		</p:commandLink>
+	  
+          </div>
+         
+         </div>  
+     
+         </div>
+         
+         </div>
+       </div>
+	</p:tab>
+	
+	
+	
+	 <p:tab id="dpami" rendered="#{ppmModificationController.pavetDPAMI}" title="Dates prévisionnelles pour la demande de proposition" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="row">
+			     <div class="col-md-8 col-md-offset-2">
+			     
+	<h:panelGroup rendered="false">		      
+	<div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+      
+           <div class="col-md-12">
+		    <div class="form-group">
+		   <label  class="col-sm-2 control-label">Dossier Type<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmModificationController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+	         </div>
+		    </div> 
+
+             </div>
+                           
+		   </div>
+          </div>     
+         </div>
+         </div>		     
+		</h:panelGroup>  	     
+			     
+     <div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+            
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+             <div class="col-md-6">
+             
+              <div class="form-group">
+		       
+		                  <label for="trAmiDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="trAmiDp" value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+             
+		    <div class="form-group">
+		       
+		                  <label for="valdao22AmiDp" class="col-sm-6 control-label">Approbation par la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="valdao22AmiDp" value="#{ppmModificationController.updatePpm.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+		    
+		   
+		       
+             </div>
+             <div class="col-md-6">
+             <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+               <div class="form-group">
+		                  <label for="baildao2AmiDp" class="col-sm-6 control-label">Approbation par le Bailleur </label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="baildao2AmiDp" value="#{ppmModificationController.updatePpm.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                </div>
+		                </div> 
+		               </h:panelGroup>
+		                
+		                <div class="form-group">
+		                <h:panelGroup rendered="#{ppmModificationController.libelleAmi}">
+		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmModificationController.libelleDPAMI}">
+		                  <label  class="col-sm-6 control-label">Date de Programmation<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                    <table>
+						      <tr>
+						      <td style="width:50px"><p:calendar  readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+						       </p:calendar></td>
+						       <td>
+						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							   <i class="fa fa-search-plus"></i>
+							  </p:commandLink>
+						     </td>
+						   </tr>
+				          </table>
+		                </div>
+		                </div> 
+             </div>
+	                        
+		   </div>
+          </div>     
+         </div>
+         </div>
+         
+
+          <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PASSATION DE MARCHE (2)</div>
+         </div>
+         <div class="box-body"></div>
+		 <div class="row">
+         <div class="col-md-6">
+         <div class="form-group">
+		                  <label for="oftDp" class="col-sm-6 control-label">Ouverture Technique<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="oftDp" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                 
+		                  
+		                 <div class="form-group">
+		                  <label for="rappAmiDp" class="col-sm-6 control-label">Rapport d'évaluation Techinique<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rappAmiDp" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                 <h:panelGroup rendered="#{ppmModificationController.libelleAmi}">
+		                  <label for="jugAmiDp" class="col-sm-6 control-label">Jugement des manifestations<span style="color:red;"></span></label>
+		                  </h:panelGroup>
+		                    <h:panelGroup rendered="#{ppmModificationController.libelleDPAMI}">
+		                  <label class="col-sm-6 control-label">Jugement offres Techiniques<span style="color:red;"></span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jugAmiDp" value="#{ppmModificationController.updatePpm.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div> 
+		                
+		                <h:panelGroup rendered="#{ppmModificationController.panelAno}">
+		                 <div class="form-group">
+		                  <label for="anoTechDp" class="col-sm-6 control-label">ANO Technique #{controleController.structureLibAbrege}</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoTechDp" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                  
+		                  <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+		                  <div class="form-group">
+		                  <label for="anoTechDpBil" class="col-sm-6 control-label">ANO Technique bailleur</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoTechDpBail" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		              
+         </div>
+         
+         
+         <div class="col-md-6">
+                        <div class="form-group">
+		                  <label for="offFinDp" class="col-sm-6 control-label">Ouverture Financière<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="offFinDp" value="#{ppmModificationController.updatePpm.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+       
+		                  <div class="form-group">
+		                  <label for="rappAmiDpFin" class="col-sm-6 control-label">Rapport d'évaluation Financiere<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rappAmiDpFin" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                <div class="form-group">
+		                  <label for="jug2Dp" class="col-sm-6 control-label">Jugement offres Financières<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jug2Dp" value="#{ppmModificationController.updatePpm.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                <h:panelGroup rendered="#{ppmModificationController.panelAno}">
+		                <div class="form-group">
+		                  <label for="anoFinDp" class="col-sm-6 control-label">ANO Financier #{controleController.structureLibAbrege}</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoFinDp" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		             
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+		                  <div class="form-group">
+		                  <label for="anoFinDpBauil" class="col-sm-6 control-label">ANO Financier Bailleur</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoFinDpBauil" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                  
+		                  <div class="form-group">
+		                  <label for="notADp" class="col-sm-6 control-label">Notification Attribution<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="notADp" value="#{ppmModificationController.updatePpm.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                 <div class="form-group">
+		                  <label for="negDp" class="col-sm-6 control-label">Négociation<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="negDp" value="#{ppmModificationController.updatePpm.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  
+		                  
+		                
+		                  </div>
+		                  </div>
+         </div>
+         </div>
+         
+         
+                           <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CONTRACTUALISATION (3)</div>
+         </div>
+         <div class="box-body">
+         <div class="col-md-6">
+            <div class="form-group">
+		                  <label for="attrDp" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="attrDp" value="#{ppmModificationController.updatePpm.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  <div class="form-group">
+		                  <label for="saiAcDp" class="col-sm-6 control-label">Signature de l'AC<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="saiAcDp" value="#{ppmModificationController.updatePpm.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+         </div>
+         <div class="col-md-6">
+              
+                   <div class="form-group">
+		                  <label for="marcheApprobDp" class="col-sm-6 control-label">Approbation du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="marcheApprobDp" value="#{ppmModificationController.updatePpm.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>        
+         </div>
+         </div>
+         
+        
+         </div>
+         </div>
+         
+         
+        <div class="col-md-12">
+             <div class="box box-success box-solid">
+	        <div class="box-header with-border">
+	            <div  style="color: #fff">DATES D'EXECUTION (4)</div>
+	         </div>
+	         <div class="box-body">
+			   <div class="row">
+		         <div class="col-md-6">
+		          <div class="form-group">
+		                  <label for="debutDp" class="col-sm-6 control-label">Début d'execution du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="debutDp" value="#{ppmModificationController.updatePpm.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		         </div>
+		         <div class="col-md-6">
+		         <div class="form-group">
+		                  <label for="finDp" class="col-sm-6 control-label">Fin d'execution du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="finDp" value="#{ppmModificationController.updatePpm.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		         </div>
+	          </div>
+	         </div>
+	         
+	         </div>
+         </div>
+      
+    <div class="col-md-12">
+    
+    <div class="row">
           <div class="col-md-12">
        <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
        <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
@@ -699,21 +1529,589 @@
           </div>
          
          </div>
+              
          </div>
          
          </div>
-         
-        
        </div>
 	</p:tab>
 	
 	
-	<p:tab   id="Financements" title="Modification des Financements du PPM"   titleStyle="background-color: #f88b2e;background-image: none">
-            <p:panel header="Financements du PPM">
+	<p:tab id="ope224" rendered="#{ppmModificationController.pavetPRQ}" title="Dates prévisionnelles pour les préqualifications" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="row">
+			     <div class="col-md-8 col-md-offset-2">
+			     
+	<div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+           <div class="col-md-12">
+		    <div class="form-group">
+		   <label for="moldaoPrq" class="col-sm-2 control-label">Dossier type<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		        <p:selectOneMenu required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmModificationController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+	         </div>
+		    </div> 
+
+             </div>
+                             
+		   </div>
+          </div>     
+         </div>
+         </div>		     
+			     
+			     
+     <div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+            
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+             <div class="col-md-6"> 
+             
+             <div class="form-group">
+		       
+		                  <label class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar  value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+                       
+		    <div class="form-group">
+		                  <label for="valdao233" class="col-sm-6 control-label">Approbation de la préqualification par la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="valdao233" value="#{ppmModificationController.updatePpm.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		    </div>
+		   
+		   
+             </div>
+             <div class="col-md-6">
+             <h:panelGroup rendered="#{ppmModificationController.panelBailleur}"> 
+               <div class="form-group">
+		                  <label for="baildaoPrq" class="col-sm-6 control-label">Approbation de la préqualification par le Bailleur</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="baildaoPrq" value="#{ppmModificationController.updatePpm.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                </div>
+		                </div> 
+		              </h:panelGroup>
+		              
+		                <div class="form-group">
+		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                  <div class="col-sm-6">
+		                    <table>
+						      <tr>
+						      <td style="width:50px"><p:calendar  readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+						       </p:calendar></td>
+						       <td>
+						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							   <i class="fa fa-search-plus"></i>
+							  </p:commandLink>
+						     </td>
+						   </tr>
+				          </table>
+		                </div>
+		                </div>
+             </div>        
+		                        
+		   </div>
+          </div>     
+         </div>
+         </div>
+         
+
+          <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PASSATION DE MARCHE (2)</div>
+         </div>
+         <div class="box-body"></div>
+		 <div class="row">
+         <div class="col-md-6">
+         <div class="form-group">
+		                  <label for="oft33" class="col-sm-6 control-label">Ouverture des préqualifications<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="oft33" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                 <div class="form-group">
+		                  <label for="rapp22" class="col-sm-6 control-label">Rapport d'évaluation<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rapp22" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                  <label for="jug36" class="col-sm-6 control-label">Jugement des Préqualifications <span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jug36" value="#{ppmModificationController.updatePpm.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                </div>        
+         </div>
+         
+         
+         <div class="col-md-6">
+       
+		                 <div class="form-group">
+		                  <label for="approbaAnoPrq" class="col-sm-6 control-label">Date d'Approbation de la liste restreinte (ANO #{controleController.structureLibAbrege})</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approbaAnoPrq" value="#{ppmModificationController.updatePpm.dppApprobAno}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                <h:panelGroup rendered="#{ppmModificationController.panelBailleur}"> 
+		                  <div class="form-group">
+		                  <label for="approbaPrq" class="col-sm-6 control-label">Date d'Approbation de la liste restreinte (ANO Bailleur)</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="approbaPrq" value="#{ppmModificationController.updatePpm.dppDateAttApproBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                    
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                </h:panelGroup>
+		                  </div>
+		             </div>
+         </div>
+         </div>
+         
+         
+         <div class="col-md-12">
+           
+                 <div class="row">
+          <div class="col-md-12">
+       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+       <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PPM
+	   </p:commandLink>
+	   
+	     <p:commandLink  styleClass="btn btn-success row pull-right" action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PSPM
+	   </p:commandLink>
+	 
+	   </h:panelGroup>
+
+	    <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditUpdate}" action="#{ppmModificationController.imprimModifPpm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PPM 
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditPspm}" action="#{ppmModificationController.imprimModifPspm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PSPM 
+		</p:commandLink>
+	  
+          </div>
+         
+         </div>  
+     
+         </div>
+         
+         </div>
+       </div>
+	</p:tab>
+	
+	
+	
+	 <p:tab id="dpPrq" rendered="#{ppmModificationController.pavetDPPRQ}" title="Dates prévisionnelles pour les DAO de préqualifications" titleStyle="background-color: #f88b2e;background-image: none">
+			         <div class="row">
+			     <div class="col-md-8 col-md-offset-2">
+	<h:panelGroup rendered="false">	     
+	<div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CHOIX DU DOSSIER TYPE</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+  
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+           <div class="col-md-12">
+		    <div class="form-group">
+		   <label for="moldaoPrqDp" class="col-sm-2 control-label">Dossier type<span style="color:red;"> *</span></label>
+            <div class="col-sm-10">
+		         <p:selectOneMenu id="moldaoPrqDp" required="true" requiredMessage="Veuillez choisir le Dossier-type" value="#{ppmModificationController.updatePpm.mdtCode}" effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			      <f:selectItem  itemLabel="Choisir le type DAC.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmModificationController.listeModele}" var="pr" itemLabel="#{pr.mdtLibelleLong}" itemValue="#{pr.mdtCode}" />			   				   
+				<f:selectItems />				   				    				   
+		       	</p:selectOneMenu>
+	         </div>
+		    </div> 
+
+             </div>
+                             
+		   </div>
+          </div>     
+         </div>
+         </div>		     
+	    </h:panelGroup>	     
+			<div class="col-md-12">
+             <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PREPARATION DE LA PROCEDURE (1)</div>
+            <div class="col-md-6"><div  style="color: #fff">
+	              <div class="col-sm-6"></div>
+            </div></div>
+            
+         </div>
+          <div class="box-body">
+          <div class="row"> 
+      
+             <div class="col-md-6">
+             
+              <div class="form-group">
+		       
+		                  <label for="trPrqDp" class="col-sm-6 control-label">Date de  transmission à la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="trPrqDp" value="#{ppmModificationController.updatePpm.dppDateDaoTrans}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+             
+		    <div class="form-group">
+		       
+		                  <label for="valdao22PrqDp" class="col-sm-6 control-label">Approbation par la #{controleController.structureLibAbrege}<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="valdao22PrqDp" value="#{ppmModificationController.updatePpm.dppDateDaoApprobDmp}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   </p:calendar> 
+		                  </div>
+		    </div> 
+		    
+		   
+		       
+             </div>
+             <div class="col-md-6">
+             <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+               <div class="form-group">
+		                  <label for="baildao2PrqDp" class="col-sm-6 control-label">Approbation par le Bailleur </label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="baildao2PrqDp" value="#{ppmModificationController.updatePpm.dppDateDaoApprobBail}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                </div>
+		                </div> 
+		               </h:panelGroup>
+		                
+		                <div class="form-group">
+		                <h:panelGroup rendered="#{ppmModificationController.libelleAmi}">
+		                  <label  class="col-sm-6 control-label">Date de Publication<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmModificationController.libelleDPPRQ}">
+		                  <label  class="col-sm-6 control-label">Date de Programmation<span style="color:red;">*</span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                    <table>
+						      <tr>
+						      <td style="width:50px"><p:calendar  readonly="true" showOn="false" value="#{ppmModificationController.updatePpm.dppDateAvisAoPublication}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+						       </p:calendar></td>
+						       <td>
+						       <p:commandLink  oncomplete="PF('datePubDlg').show()" action="#{ppmModificationController.chargeDatepub}" styleClass="btn btn-warning"  style="color:#fff;background-color: #f88b2e">
+							   <i class="fa fa-search-plus"></i>
+							  </p:commandLink>
+						     </td>
+						   </tr>
+				          </table>
+		                </div>
+		                </div> 
+             </div>
+	                        
+		   </div>
+          </div>     
+         </div>
+         </div>
+         
+
+          <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">PASSATION DE MARCHE (2)</div>
+         </div>
+         <div class="box-body"></div>
+		 <div class="row">
+         <div class="col-md-6">
+         <div class="form-group">
+		                  <label for="oftPrqDp" class="col-sm-6 control-label">Ouverture Technique<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="oftPrqDp" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                 
+		                  
+		                 <div class="form-group">
+		                  <label for="rappPrqDp" class="col-sm-6 control-label">Rapport d'évaluation Techinique<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rappPrqDp" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                 <div class="form-group">
+		                    <h:panelGroup rendered="#{ppmModificationController.libelleDPPRQ}">
+		                  <label class="col-sm-6 control-label">Jugement offres Techiniques<span style="color:red;"></span></label>
+		                  </h:panelGroup>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jugPrqDp" value="#{ppmModificationController.updatePpm.dppDateJugementOffreTec}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                </div> 
+		                
+		                <h:panelGroup rendered="#{ppmModificationController.panelAno}">
+		                 <div class="form-group">
+		                  <label for="anoTechPrqDp" class="col-sm-6 control-label">ANO Technique #{controleController.structureLibAbrege}</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoTechPrqDp" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                  
+		                  <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+		                  <div class="form-group">
+		                  <label for="anoTechPrqDpBail" class="col-sm-6 control-label">ANO Technique bailleur</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoTechPrqDpBail" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		              
+         </div>
+         
+         
+         <div class="col-md-6">
+                        <div class="form-group">
+		                  <label for="offFinPrqDp" class="col-sm-6 control-label">Ouverture Financière<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="offFinPrqDp" value="#{ppmModificationController.updatePpm.dppDateOuvertOf}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+       
+		                  <div class="form-group">
+		                  <label for="rappAmiPrqDpFin" class="col-sm-6 control-label">Rapport d'évaluation Financiere<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="rappAmiPrqDpFin" value="#{ppmModificationController.updatePpm.dppDateElabRapport}" mask="true" locale="fr"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                <div class="form-group">
+		                  <label for="jug2PrqDp" class="col-sm-6 control-label">Jugement offres Financières<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="jug2PrqDp" value="#{ppmModificationController.updatePpm.dppDateJugementOffre}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                <h:panelGroup rendered="#{ppmModificationController.panelAno}">
+		                <div class="form-group">
+		                  <label for="anoFinPrqDp" class="col-sm-6 control-label">ANO Financier #{controleController.structureLibAbrege}</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoFinPrqDp" value="#{ppmController.geneDate.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                  <h:panelGroup rendered="#{ppmModificationController.panelBailleur}">
+		                  <div class="form-group">
+		                  <label for="anoFinPrqDpBail" class="col-sm-6 control-label">ANO Financier Bailleur</label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="anoFinPrqDpBail" value="#{ppmModificationController.updatePpm.dppDateOuvertOt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  </h:panelGroup>
+		                  
+		                  <div class="form-group">
+		                  <label for="notADp" class="col-sm-6 control-label">Notification Attribution<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="notAPrqDp" value="#{ppmModificationController.updatePpm.dppDateNotAtt}" mask="true" locale="fr" pattern="dd/MM/yyyy"  style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                
+		                 <div class="form-group">
+		                  <label for="negPrqDp" class="col-sm-6 control-label">Négociation<span style="color:red;"></span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="negPrqDp" value="#{ppmModificationController.updatePpm.dppDateNegociation}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                   
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  
+		                  
+		                
+		                  </div>
+		                  </div>
+         </div>
+         </div>
+         
+         
+                           <div class="col-md-12">
+          <div class="box box-success box-solid">
+        <div class="box-header with-border">
+            <div  style="color: #fff">CONTRACTUALISATION (3)</div>
+         </div>
+         <div class="box-body">
+         <div class="col-md-6">
+            <div class="form-group">
+		                  <label for="attrPrqDp" class="col-sm-6 control-label">Signature Attributaire<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="attrPrqDp" value="#{ppmModificationController.updatePpm.dppDateSignatAttrib}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		               
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		                  <div class="form-group">
+		                  <label for="saiAcPrqDp" class="col-sm-6 control-label">Signature de l'AC<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="saiAcPrqDp" value="#{ppmModificationController.updatePpm.dppDateSignatAc}" mask="true"  pattern="dd/MM/yyyy" style="width: 100%" >
+		                    
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+         </div>
+         <div class="col-md-6">
+              
+                   <div class="form-group">
+		                  <label for="marcheApprobPrqDp" class="col-sm-6 control-label">Approbation du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="marcheApprobPrqDp" value="#{ppmModificationController.updatePpm.dppDateMarcheApprob}" mask="true" pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		                     
+		               
+         </div>
+         </div>
+         
+        
+         </div>
+         </div>
+         
+         
+        <div class="col-md-12">
+             <div class="box box-success box-solid">
+	        <div class="box-header with-border">
+	            <div  style="color: #fff">DATES D'EXECUTION (4)</div>
+	         </div>
+	         <div class="box-body">
+			   <div class="row">
+		         <div class="col-md-6">
+		          <div class="form-group">
+		                  <label for="debutPrqDp" class="col-sm-6 control-label">Début d'execution du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="debutPrqDp" value="#{ppmModificationController.updatePpm.dppDateExecDebut}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                  </div>
+		         </div>
+		         <div class="col-md-6">
+		         <div class="form-group">
+		                  <label for="finPrqDp" class="col-sm-6 control-label">Fin d'execution du marché<span style="color:red;"> *</span></label>
+		                  <div class="col-sm-6">
+		                   <p:calendar id="finPrqDp" value="#{ppmModificationController.updatePpm.dppDateExecFin}" mask="true" locale="fr" pattern="dd/MM/yyyy" style="width: 100%" >
+		                  
+		                   </p:calendar> 
+		                  </div>
+		                </div>
+		         </div>
+	          </div>
+	         </div>
+	         
+	         </div>
+         </div>     
+     
+           
+         
+   <div class="col-md-12">
+           
+    <div class="row">
+          <div class="col-md-12">
+       <h:panelGroup rendered="#{userController.fonction.TTypeFonction.tyfCod == 'ACR'}">
+       <p:commandLink  styleClass="btn btn-success row pull-right"  action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPpm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PPM
+	   </p:commandLink>
+	   
+	     <p:commandLink  styleClass="btn btn-success row pull-right" action="#{ppmModificationController.modifierDetailPlan()}" rendered="#{controleController.btn_creerDetailPspm}" style="background-color: #036d3b; margin-right:5px;color:#fff"   update=":content">
+			            <p:confirm header="Confirmation" message="Confirmez-vous la modification?" icon="ui-icon-alert" />
+			             <i class="ace-icon fa fa-save"></i> Modifier PSPM
+	   </p:commandLink>
+	 
+	   </h:panelGroup>
+
+	    <p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditUpdate}" action="#{ppmModificationController.imprimModifPpm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PPM 
+		</p:commandLink>
+		
+		<p:commandLink styleClass="btn btn-warning mr10 pull-right" style="background-color: #f88b2e; color:#fff; border-color:#f88b2e" rendered="#{ppmModificationController.boutonEditPspm}" action="#{ppmModificationController.imprimModifPspm()}" ajax="false">
+				     <i class="ace-icon fa fa-file-pdf-o bigger-120"></i> Editer le PSPM 
+		</p:commandLink>
+	  
+          </div>
+         
+         </div>
+     
+         </div>
+         
+         </div>
+       </div>
+	</p:tab>
+	
+	
+	
+         <p:tab  id="Financements" title="Ajout des Financements du #{controleController.type}"   titleStyle="background-color: #f88b2e;background-image: none">
+            <p:panel header="Financements du #{controleController.type} ">
              
              <div class="box box-success box-solid">
                <div class="box-header with-border">
-                  <div class="col-md-11"><div  style="color: #fff">FINANCEMENTS DU PPM</div></div> 
+                  <div class="col-md-11"><div  style="color: #fff">FINANCEMENTS DU #{controleController.type}</div></div> 
                   <div class="col-md-1"> 
 			           <p:commandLink oncomplete="PF('DetailDlg').show()" styleClass="btn btn-warning btn-rounded waves-effect waves-light"  style="background-color: #f88b2e">
 								<span class="btn-label"><i class="fa fa-plus"></i></span><span class="hidden-xs"></span>
@@ -775,16 +2173,15 @@
 				              action="#{ppmModificationController.deleteFinanacement()}" title="Suprimer" update=":gnl">
                                 <i class="ace-icon fa fa-remove bigger-120"  style="color: white"></i>  
                                 <p:confirm header="Confirmation" message="Confirmez vous la supression ?" icon="ui-icon-alert" />                           
-                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.selectFinance}" />
+                                 <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.selectFinance}" />
                                 </p:commandLink>
 				            <h:outputText  />
 				        </p:column>
                  </p:dataTable> 
                  
 	            </div>
-	            
-	            <div class="col-md-12">
-                   <div class="form-group">
+	       <div class="col-md-12">
+          <div class="form-group">
                   <label for="MontPpm" class="col-sm-9 control-label">Montant total de l'operation</label>
                   <div class="col-sm-3">
                     <p:inputText  type="text" value="#{ppmModificationController.totalMontantPpm}" styleClass="form-control" id="MontPpm"  readonly="true">
@@ -797,22 +2194,19 @@
             
             </p:panel>
             </p:tab>
-	
-	
-	-------------------------
-	
-			        </p:wizard>
-        
+			      
+			      
+</p:wizard>
         </div>
 	 </div>
     
       <div class="row">
        <div class="col-md-1">
-        <p:commandLink rendered="#{controleController.btn_fermer_saisie_ppm}"  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{ppmModificationController.fermer('ppm1','SAIPPM')}" update=":content">
+        <p:commandLink rendered="#{controleController.btn_fermer_saisie_ppm}"  styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{ppmController.fermer('ppm1','SAIPPM')}" update=":content">
 		<i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		</p:commandLink>
 		         
-		 <p:commandLink rendered="#{controleController.btn_fermer_saisie_pspm}" styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{ppmModificationController.fermerPspm('pspm1','SAIPSPM')}" update=":content">
+		 <p:commandLink rendered="#{controleController.btn_fermer_saisie_pspm}" styleClass="btn btn-warning mr10 " style=" background-color: #f88b2e" action="#{ppmController.fermerPspm('pspm1','SAIPSPM')}" update=":content">
 		 <i class="ace-icon fa fa-close bigger-130"></i> Fermer
 		 </p:commandLink>
 
@@ -830,8 +2224,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtreStructure}"  class="gui-input"  placeholder="Saisir le code de la structure"  > 
-						    <p:ajax event="keyup" update=":dlogMin:ndTbleMin" listener="#{ppmModificationController.filtreStructure()}" />
+							<p:inputText type="text" value="#{ppmController.filtreStructure}"  class="gui-input"  placeholder="Saisir le code de la structure"  > 
+						    <p:ajax event="keyup" update=":dlogMin:ndTbleMin" listener="#{ppmController.filtreStructure()}" />
 							</p:inputText>
 						
 						</label>
@@ -841,20 +2235,20 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleMin" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeStructure}"
+						 <p:dataTable id="ndTbleMin" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeStructure}"
 						  selectionMode="single" rowKey="#{slctdTb.strCode}"
 			               emptyMessage="Aucune structure enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectMinisterePpm()}" update="gnl:ministre">				        
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMinisterePpm()}" update="gnl:ministre">				        
          				  <h:outputText value="#{slctdTb.strCode}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.structure}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Libelle de la structure" style="font-size:18px;"  action="#{ppmModificationController.onSelectMinisterePpm()}">				        
+                           <h:commandLink id="fonction" title="Libelle de la structure" style="font-size:18px;"  action="#{ppmController.onSelectMinisterePpm()}">				        
          				  <h:outputText value="#{slctdTb.strLibelleLong}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.structure}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -877,8 +2271,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
-						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{ppmModificationController.filtreFonctionMin()}" />
+							<p:inputText type="text" value="#{ppmController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogAC:ndTbleFonc" listener="#{ppmController.filtreFonctionMin()}" />
 							</p:inputText>
 						
 						</label>
@@ -888,20 +2282,20 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeFonctions}"
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeFonctions}"
 						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
 			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-3" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectFonctionPpm()}" update="gnl:auto">				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectFonctionPpm()}" update="gnl:auto">				        
          				  <h:outputText value="#{slctdTb.fonCod}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.fonction}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.fonction}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Fonction" styleClass="col-sm-9" >
-                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{ppmModificationController.onSelectFonctionPpm()}">				        
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{ppmController.onSelectFonctionPpm()}">				        
          				  <h:outputText value="#{slctdTb.fonLibelle}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.fonction}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.fonction}" />
                                 </h:commandLink>
 				        </p:column>
 				      
@@ -924,8 +2318,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
-						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{ppmModificationController.filtreFonctionMin()}" />
+							<p:inputText type="text" value="#{ppmController.filtreFonction}"  class="gui-input"  placeholder="Saisir l'autorité contractante"  > 
+						     <p:ajax event="keyup" update=":dlogDMP:ndTbleFonc" listener="#{ppmController.filtreFonctionMin()}" />
 							</p:inputText>
 						
 						</label>
@@ -935,20 +2329,20 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeFonctions}"
+						 <p:dataTable id="ndTbleFonc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeFonctions}"
 						 selectionMode="single" rowKey="#{slctdTb.fonCod}"
 			               emptyMessage="Aucune autorité contractante enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-3" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectFonctionPpmDmp()}" update="gnl:auto">				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectFonctionPpmDmp()}" update="gnl:auto">				        
          				  <h:outputText value="#{slctdTb.fonCod}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.fonction}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.fonction}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Fonction" styleClass="col-sm-9" >
-                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{ppmModificationController.onSelectFonctionPpmDmp()}">				        
+                        <h:commandLink  title="Fonction" style="font-size:18px;"  action="#{ppmController.onSelectFonctionPpmDmp()}">				        
          				  <h:outputText value="#{slctdTb.fonLibelle}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.fonction}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.fonction}" />
                                 </h:commandLink>
 				        </p:column>
 				      
@@ -964,20 +2358,41 @@
     </h:form>
     
      <h:form id="dlogLign">
-	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la ligne Budgétaire">
+	        <p:dialog  widgetVar="imputationDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Sélectionnez la ligne Budgétaire">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
-						    <p:ajax event="keyup" update=":dlogLign:ndTbleLign" listener="#{ppmModificationController.filtreImputation()}" />
-							</p:inputText>
+						 <div class="col-md-6">
 						
-						</label>
+						
+						<h:panelGroup rendered="#{controleController.filtreLignePgpm}" >	 
+					<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmModificationController.chargeImputation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign, dlogLign:filtrePgm"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmModificationController.filtreLigne}" id="filtrePgm"  placeholder="saisir la nature" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmModificationController.filtreImputation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign" />
+                         </span>
+					 </div> 
+					</h:panelGroup> 
+					
+					<h:panelGroup rendered="#{controleController.filtreLignePgspm}" >	 
+					<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmModificationController.chargeImputationPs()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign, dlogLign:filtrePgs"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmModificationController.filtreLigne}" id="filtrePgs"  placeholder="saisir la nauture" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmModificationController.filtreImputationPs()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogLign:ndTbleLign" />
+                         </span>
+					 </div> 
+					</h:panelGroup> 
+						
+						
 						</div>
-						</div>
+						</div> 
 						
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
@@ -996,22 +2411,26 @@
 				        
 				        <p:column headerText="Dotation" styleClass="col-sm-4" >
                            <h:commandLink id="dotation" title="Dotation" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
-         				  <h:outputText value="#{slctdTb.lbgTotDot}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
+         				  <h:outputText value="#{slctdTb.lbgTotDot}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				  </h:outputText>
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                                 </h:commandLink>
 				        </p:column>	
 				        
 				        <p:column headerText="Nature" styleClass="col-sm-4" >
-                           <h:commandLink id="nature" title="Nature" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="nature" title="Nature" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.natLibelle}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                                 </h:commandLink>
 				        </p:column>	
 				        
 				        <p:column headerText="Disponible" styleClass="col-sm-4" >
-                           <h:commandLink id="disponible" title="Disponible" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
-         				  <h:outputText value="#{slctdTb.lbgDisTot}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
+                           <h:commandLink id="disponible" title="Disponible" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.lbgDisTot}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				  </h:outputText>
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -1035,8 +2454,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtreStructure}"  class="gui-input"  placeholder="Saisir le code de la structure"  > 
-						    <p:ajax event="keyup" update=":dlogStrc:ndTbleStrc" listener="#{ppmModificationController.filtreStructures()}" />
+							<p:inputText type="text" value="#{ppmController.filtreStructure}"  class="gui-input"  placeholder="Saisir le code de la structure"  > 
+						    <p:ajax event="keyup" update=":dlogStrc:ndTbleStrc" listener="#{ppmController.filtreStructures()}" />
 							</p:inputText>
 						
 						</label>
@@ -1046,20 +2465,20 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleStrc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeStructures}"
+						 <p:dataTable id="ndTbleStrc" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeStructures}"
 						  selectionMode="single" rowKey="#{slctdTb.strCode}"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Code Structure" styleClass="col-sm-1" >
-                           <h:commandLink id="structure1" title="Libellé" style="font-size:18px;"  action="#{ppmModificationController.onSelectStructure()}" >				        
+                           <h:commandLink id="structure1" title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectStructure()}" >				        
          				  <h:outputText value="#{slctdTb.strCode}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.structure}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Libellé Structure" styleClass="col-sm-11" >
-                           <h:commandLink id="structure2" title="Libéllé" style="font-size:18px;"  action="#{ppmModificationController.onSelectStructure()}" >				        
+                           <h:commandLink id="structure2" title="Libéllé" style="font-size:18px;"  action="#{ppmController.onSelectStructure()}" >				        
          				  <h:outputText value="#{slctdTb.strLibelleLong}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.structure}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.structure}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -1082,8 +2501,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtrePpm}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
-						    <p:ajax event="keyup" update=":dlogPpm:ndTblePpm" listener="#{ppmModificationController.filtreImputationCpmp()}" />
+							<p:inputText type="text" value="#{ppmController.filtrePpm}"  class="gui-input"  placeholder="Saisir le code de la ligne"  > 
+						    <p:ajax event="keyup" update=":dlogPpm:ndTblePpm" listener="#{ppmController.filtreImputationCpmp()}" />
 							</p:inputText>
 						
 						</label>
@@ -1093,20 +2512,20 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTblePpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listePpm}"
-						  selectionMode="single" rowKey="#{slctdTb.affDppId}"
+						 <p:dataTable id="ndTblePpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePpm}"
+						  selectionMode="single" rowKey="#{slctdTb.dppId}"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
-                           <h:commandLink id="ppm1" title="Libellé" style="font-size:18px;"  action="#{ppmModificationController.onSelectPpm()}" >				        
-         				  <h:outputText value="#{slctdTb.affDppId}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ppm}" />
+                           <h:commandLink id="ppm1" title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectPpm()}" >				        
+         				  <h:outputText value="#{slctdTb.dppId}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ppm}" />
                                 </h:commandLink>
 				        </p:column>
 				          <p:column headerText="Imputation" styleClass="col-sm-11" >
-                           <h:commandLink id="ppm2" title="Objet Opération" style="font-size:18px;"  action="#{ppmModificationController.onSelectPpm()}" >				        
+                           <h:commandLink id="ppm2" title="Objet Opération" style="font-size:18px;"  action="#{ppmController.onSelectPpm()}" >				        
          				  <h:outputText value="#{slctdTb.dppObjet}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ppm}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ppm}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -1129,33 +2548,37 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtrePgpm}"  class="gui-input"  placeholder="Saisir le code du PGPM"  > 
-						    <p:ajax event="keyup" update=":dlogPgpm:ndTblePgpm" listener="#{ppmModificationController.filtreMarche()}" />
-							</p:inputText>
+						 <div class="col-md-6">
 						
-						</label>
+						<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				        <p:commandLink action="#{ppmController.chargePgpm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPgpm:ndTblePgpm, dlogPgpm:filtrePgm1"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtrePgpm}" id="filtrePgm1"  placeholder="saisir l'objet" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreChargePgpm()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPgpm:ndTblePgpm" />
+                         </span>
+					 </div>
 						</div>
 						</div>
 						
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTblePgpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listePgpm}"
+						 <p:dataTable id="ndTblePgpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePgpm}"
 						  selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun Pgpm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
-                           <h:commandLink id="pgpm" title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectPgpm()}">				        
+                           <h:commandLink id="pgpm" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}" update="gnl:pgpm, gnl:pgpm2">				        
          				  <h:outputText value="#{slctdTb.gpgId}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.pgpm}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>
-				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
-                           <h:commandLink id="pgpm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmModificationController.onSelectPgpm()}">				        
-         				  <h:outputText value="#{slctdTb.gpgCommentaire}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.pgpm}" />
+				          <p:column headerText="Objet" styleClass="col-sm-11" >
+                           <h:commandLink id="pgpm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgpm()}" update="gnl:pgpm, gnl:pgpm2">				        
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -1176,33 +2599,38 @@
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
-						 <div class="col-md-3">
-						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtrePgspm}"  class="gui-input"  placeholder="Saisir le code du PGSPM"  > 
-						    <p:ajax event="keyup" update=":dlogPgspm:ndTblePgspm" listener="#{ppmModificationController.filtreMarche()}" />
-							</p:inputText>
+						 <div class="col-md-6">
+
+					<div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				        <p:commandLink action="#{ppmController.chargePgspm()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPgspm:ndTblePgspm, dlogPgspm:filtrePgsm1"/>
+				        </span>
+                      <p:inputText  type="text" value="#{ppmController.filtrePgspm}" id="filtrePgsm1"  placeholder="saisir l'objet" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreChargePgspm()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPgspm:ndTblePgspm" />
+                         </span>
+					 </div>
 						
-						</label>
 						</div>
 						</div>
 						
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listePgspm}"
+						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePgspm}"
 						  selectionMode="single" rowKey="#{slctdTb.gpgId}"
 			               emptyMessage="Aucun Pgspm enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 			               <p:column headerText="Identifiant" styleClass="col-sm-1" >
-                           <h:commandLink id="pgspm" title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectPgspm()}">				        
+                           <h:commandLink id="pgspm" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectPgspm()}">				        
          				  <h:outputText value="#{slctdTb.gpgId}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.pgspm}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>
-				          <p:column headerText="Commentaire" styleClass="col-sm-11" >
-                           <h:commandLink id="pgspm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmModificationController.onSelectPgspm()}">				        
-         				  <h:outputText value="#{slctdTb.gpgCommentaire}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.pgspm}" />
+				          <p:column headerText="Objet" styleClass="col-sm-11" >
+                           <h:commandLink id="pgspm_com" title="Commentaire" style="font-size:18px;"  action="#{ppmController.onSelectPgspm()}">				        
+         				  <h:outputText value="#{slctdTb.gpgObjet}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.pgpm}" />
                                 </h:commandLink>
 				        </p:column>		
 						</p:dataTable>
@@ -1225,8 +2653,8 @@
 					<div class="row">
 						 <div class="col-md-3">
 						<label class="field append-icon">
-							<p:inputText type="text" value="#{ppmModificationController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code nature"  > 
-						    <p:ajax event="keyup" update=":dlogLignCpmp:ndTbleLignCpm" listener="#{ppmModificationController.filtreImputationCpmp()}" />
+							<p:inputText type="text" value="#{ppmController.filtreLigne}"  class="gui-input"  placeholder="Saisir le code nature"  > 
+						    <p:ajax event="keyup" update=":dlogLignCpmp:ndTbleLignCpm" listener="#{ppmController.filtreImputationCpmp()}" />
 							</p:inputText>
 						
 						</label>
@@ -1236,41 +2664,40 @@
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleLignCpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeImputations}"
+						 <p:dataTable id="ndTbleLignCpm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeImputations}"
 						  selectionMode="single" rowKey="#{slctdTb.lbgCode}"
 			               emptyMessage="Aucune ligne enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
-			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="nature1" title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
-         				  <h:outputText value="#{slctdTb.lbgCode}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
-                                </h:commandLink>
-				        </p:column>
+			               
 				          <p:column headerText="Imputation" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation1" title="Imputation" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
+                           <h:commandLink id="imputation1" title="Imputation" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
          				  <h:outputText value="#{slctdTb.lbgImputation}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                                 </h:commandLink>
 				        </p:column>	
 				        
 				        <p:column headerText="Nature" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation3" title="Imputation" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
-         				  <h:outputText value="#{slctdTb.natLibelle}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
+                           <h:commandLink id="imputation3" title="Imputation" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.natLibelle}"/>
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                                 </h:commandLink>
 				        </p:column>
 				        
 				         <p:column headerText="Dotation" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation4" title="Dotation Totale" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
-         				  <h:outputText value="#{slctdTb.lbgTotDot}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
+                           <h:commandLink id="imputation4" title="Dotation Totale" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.lbgTotDot}">
+         				  <f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				  </h:outputText>
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                          </h:commandLink>
 				        </p:column>	
 				        
 				        <p:column headerText="Disponible" styleClass="col-sm-11" >
-                           <h:commandLink id="imputation5" title="Montant Disponible" style="font-size:18px;"  action="#{ppmModificationController.onSelectLigneBudgetaire()}" >				        
-         				  <h:outputText value="#{slctdTb.lbgDisTot}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.ligne}" />
+                           <h:commandLink id="imputation5" title="Montant Disponible" style="font-size:18px;"  action="#{ppmController.onSelectLigneBudgetaire()}" >				        
+         				  <h:outputText value="#{slctdTb.lbgDisTot}" >
+         				   <f:convertNumber pattern="##,###.##"></f:convertNumber>
+         				  </h:outputText>
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.ligne}" />
                          </h:commandLink>
 				        </p:column>	
 				        
@@ -1286,7 +2713,7 @@
       </p:dialog>
     </h:form>
     
-    <h:form id="dlogPasMode">
+  <h:form id="dlogPasMode">
 	        <p:dialog  widgetVar="passationPgspmDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le mode de Passation">
 				<div class="contentpanel">
 					<div class="g12">	 
@@ -1296,11 +2723,11 @@
 
 						 <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmModificationController.razchargeMode()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm, dlogPasMode:filtrePasMode"/>
+				                <p:commandLink action="#{ppmController.razchargeMode()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm, dlogPasMode:filtrePasMode"/>
 				        </span>
-                      <p:inputText  type="text" value="#{ppmModificationController.filtreModePassation}" id="filtrePasMode"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
+                      <p:inputText  type="text" value="#{ppmController.filtreModePassation}" id="filtrePasMode"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmModificationController.filtreChargeMode()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm" />
+                      <p:commandLink action="#{ppmController.filtreChargeMode()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPasMode:ndTblePgspm" />
                          </span>
 					 </div>
 						</div>
@@ -1308,27 +2735,28 @@
 						
 						<div class="form-bordered form-horizontal">			
                         <div class="form-group">
+                        
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTblePgspm" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeMode}"
 						 selectionMode="single" rowKey="#{slctdTb.mopCode}"
 			               emptyMessage="Aucun mode de passation enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
 			               
 							<p:column headerText="Code" styleClass="col-sm-1" >
-                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Code" style="font-size:18px;"  action="#{ppmController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopCode}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
-                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
+                        <h:commandLink  title="Libellé" style="font-size:18px;"  action="#{ppmController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2" >				        
          				  <h:outputText value="#{slctdTb.mopLibelleLong}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 				        <p:column headerText="Libellé Court" styleClass="col-sm-1" >
-                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{ppmModificationController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2">				        
+                        <h:commandLink  title="Ministere" style="font-size:18px;"  action="#{ppmController.onSelectModePassationPgspm()}" update="gnl:modeP1, gnl:modeP2">				        
          				  <h:outputText value="#{slctdTb.mopLibelleCourt}" />
-                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.passationListe}" />
+                          <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.passationListe}" />
                                 </h:commandLink>
 				        </p:column>
 						</p:dataTable>
@@ -1341,7 +2769,206 @@
 			</div>
 	    </div>
       </p:dialog>
-    </h:form> 
+    </h:form>  
+    
+    
+    <h:form id="dlogMar">
+	        <p:dialog  widgetVar="marchesDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le type du marché">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeTypeMarchesFils}"
+						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
+			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-1" >
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gn">				        
+         				  <h:outputText value="#{slctdTb.tymCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+    <h:form id="dlogMarPs">
+	        <p:dialog  widgetVar="marchesPsDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le type du marché">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeTypeMarchesFilsPs}"
+						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
+			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+			               
+			               <p:column headerText="Code" styleClass="col-sm-1" >
+                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gn">				        
+         				  <h:outputText value="#{slctdTb.tymCode}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                                </h:commandLink>
+				        </p:column>
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmController.onSelectMarche()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.marche}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+     <h:form id="dlogDp">
+	        <p:dialog  widgetVar="dpDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez l'AMI de la demande de proposition">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e"/>
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir le libellé de l'AMI" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink  styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e"  />
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listeAmiDp}"
+						  selectionMode="single" rowKey="#{slctdTb.dppId}"
+			               emptyMessage="Aucun AMI trouvé" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="AMI" style="font-size:18px;"  action="#{ppmController.onSelectAmiDp()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.dppObjet}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.amiDp}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
+    
+         <h:form id="dlogDpPrq">
+	        <p:dialog  widgetVar="dpPrqDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez la préqualification">
+				<div class="contentpanel">
+					<div class="g12">	 
+					<div class="panel-body panel-body-nopadding">
+					<div class="row">
+						 <div class="col-md-6">
+						 
+				    <div class="input-group input-group-sm col-md-12">
+					    <span class="input-group-btn">
+				                <p:commandLink action="#{ppmController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
+				        </span>
+                      <p:inputText  id="filtreMarche" type="text" value="#{ppmController.filtreTypeMarche}"  placeholder="saisir la préqualification" styleClass="gui-input" style="width: 100%"  /> 
+                       <span class="input-group-btn">
+                      <p:commandLink action="#{ppmController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
+                    </span>
+					 </div>
+						 
+						
+						</div>
+						</div>
+						
+						<div class="form-bordered form-horizontal">			
+                        <div class="form-group">
+                        <h:panelGrid style="width:100%; vertical-align: top;">
+						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmController.listePrqDp}"
+						  selectionMode="single" rowKey="#{slctdTb.dppId}"
+			               emptyMessage="Aucune PRQ trouvée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+				          <p:column headerText="Libelle" styleClass="col-sm-11" >
+                           <h:commandLink id="fonction" title="PRQ" style="font-size:18px;"  action="#{ppmController.onSelectPrqDp()}" update="gnl">				        
+         				  <h:outputText value="#{slctdTb.dppObjet}" />
+                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmController.prqDp}" />
+                                </h:commandLink>
+				        </p:column>		
+						</p:dataTable>
+						</h:panelGrid>
+                     </div>
+                        
+                   
+                    </div>
+				</div>
+			</div>
+	    </div>
+      </p:dialog>
+    </h:form>
     
     
     <h:form id="dlogPas">
@@ -1352,13 +2979,13 @@
 					<div class="row">
 						 <div class="col-md-6">
 						 
-						 <div class="input-group input-group-sm col-md-12">
+				    <div class="input-group input-group-sm col-md-12">
 					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmModificationController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
+				        <p:commandLink action="#{ppmController.razchargeModePassation()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogPas:ndTblePass, dlogPas:filtrePass"/>
 				        </span>
                       <p:inputText  type="text" value="#{ppmModificationController.filtreModePassation}" id="filtrePass"  placeholder="saisir le mode de passation" styleClass="gui-input" style="width: 100%"  /> 
                        <span class="input-group-btn">
-                      <p:commandLink action="#{ppmModificationController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
+                      <p:commandLink action="#{ppmController.filtreModePassation()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogPas:ndTblePass" />
                          </span>
 					 </div>
 						 
@@ -1400,73 +3027,19 @@
 			</div>
 	    </div>
       </p:dialog>
-    </h:form> 
-    
-    
-    <h:form id="dlogMar">
-	        <p:dialog  widgetVar="marchesDlg" modal="true"  showEffect="fade" hideEffect="fade" width="60%" closable="true" header="Selectionnez le type du marché">
-				<div class="contentpanel">
-					<div class="g12">	 
-					<div class="panel-body panel-body-nopadding">
-					<div class="row">
-						 <div class="col-md-6">
-						 
-				    <div class="input-group input-group-sm col-md-12">
-					    <span class="input-group-btn">
-				                <p:commandLink action="#{ppmModificationController.razchargeMarches()}" styleClass="btn btn-warning btn-flat" value="Initialiser" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar, dlogMar:filtreMarche"/>
-				        </span>
-                      <p:inputText  id="filtreMarche" type="text" value="#{ppmModificationController.filtreTypeMarche}"  placeholder="saisir le type de marché" styleClass="gui-input" style="width: 100%"  /> 
-                       <span class="input-group-btn">
-                      <p:commandLink action="#{ppmModificationController.filtreMarche()}" styleClass="btn btn-warning btn-flat" value="Rechercher" style=" background-color: #f88b2e" update="dlogMar:ndTbleMar" />
-                    </span>
-					 </div>
-						 
-						
-						</div>
-						</div>
-						
-						<div class="form-bordered form-horizontal">			
-                        <div class="form-group">
-                        <h:panelGrid style="width:100%; vertical-align: top;">
-						 <p:dataTable id="ndTbleMar" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeTypeMarchesFils}"
-						  selectionMode="single" rowKey="#{slctdTb.tymCode}"
-			               emptyMessage="Aucun type marché enregistré" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
-			               
-			               <p:column headerText="Code" styleClass="col-sm-1" >
-                           <h:commandLink id="ministere" title="Code" style="font-size:18px;"  action="#{ppmModificationController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
-         				  <h:outputText value="#{slctdTb.tymCode}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.marche}" />
-                                </h:commandLink>
-				        </p:column>
-				          <p:column headerText="Libelle" styleClass="col-sm-11" >
-                           <h:commandLink id="fonction" title="Marché" style="font-size:18px;"  action="#{ppmModificationController.onSelectMarche()}" update="gnl:typMa1, gnl:typMa2">				        
-         				  <h:outputText value="#{slctdTb.tymLibelleCourt}" />
-                              <f:setPropertyActionListener value="#{slctdTb}" target="#{ppmModificationController.marche}" />
-                                </h:commandLink>
-				        </p:column>		
-						</p:dataTable>
-						</h:panelGrid>
-                     </div>
-                        
-                   
-                    </div>
-				</div>
-			</div>
-	    </div>
-      </p:dialog>
     </h:form>
     
-     
+    
+    
     <h:form id="dlogDate">
-	        <p:dialog  widgetVar="datePubDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Selectionnez la date de Publication">
+	        <p:dialog  widgetVar="datePubDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="Sélectionnez la date de Publication">
 				<div class="contentpanel">
 					<div class="g12">	 
 					<div class="panel-body panel-body-nopadding">
 					<div class="row">
 						 <div class="col-md-6">
 						 
-				    
-						 
+
 						</div>
 						</div>
 						
@@ -1474,8 +3047,8 @@
                         <div class="form-group">
                         <h:panelGrid style="width:100%; vertical-align: top;">
 						 <p:dataTable id="ndTbleDateP" styleClass="table table-bordered table-hover" var="slctdTb" value="#{ppmModificationController.listeDatePub}"
-						 selectionMode="single" rowKey="#{slctdTb.datepub}"
-			               emptyMessage="Aucune date de Publication enregistrée" rows="10" paginator="true" rowsPerPageTemplate="5,10,15" >
+						 selectionMode="single" rowKey="#{slctdTb.datepub}"  scrollable="true" scrollHeight="400"
+			               emptyMessage="Aucune date de Publication enregistrée" >
 			               
 							
 						<p:column headerText="Libellé Long" styleClass="col-sm-1" >
@@ -1498,130 +3071,6 @@
     
     
     
-    <h:form id="dlogdetMod">
-	  <p:dialog  widgetVar="DetailDlgMod" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
-		<div class="box box-success box-solid">
-            <div class="box-header with-border">
-                      <div class="col-md-10 "><div  style="color: #fff">MODIFICATION DU FINANCEMENT</div></div> 
-			         <div class="col-md-2 ">
-			       
-			         </div>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-					 <div class="form-group ">
-	                  <label for="xbail" class="col-sm-3 control-label"><b>Source</b></label>
-	                  <div class="col-sm-9">
-
-       		        <p:selectOneRadio id="situation" value="#{ppmModificationController.updatefinance.fppTypeFinance}">
-       		         <p:ajax listener="#{ppmModificationController.checkBailleur()}" update="dlogdetMod:idBail, dlogdetMod:source, dlogdetMod:idTres, dlogdetMod:idPartB" />
-			            <div class="col-md-4">
-						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
-			            </div>
-			            <div class="col-md-4">
-			            <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
-			            </div>
-			            <div class="col-md-4">
-			            <f:selectItem itemLabel="ETAT" itemValue="ETAT" />
-			            </div>
-			           </p:selectOneRadio>
-		                <br/>
-	                  </div>
-	                </div>
-	                
-	                <h:panelGroup id="idBail"> 
-	                <h:panelGroup rendered="#{ppmModificationController.selectBailleur}"> 
-	               <div class="form-group ">
-	                  <label for="xbail" class="col-sm-3 control-label"><b>Bailleur</b></label>
-	                  <div class="col-sm-9">
-	                   <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppBaiCode}" id="xbail" 
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmModificationController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
-       		        </p:selectOneMenu>
-
-	                  </div>
-	                </div>
-	                </h:panelGroup>
-	                </h:panelGroup>
-	                
-	                
-	                <div class="form-group ">
-	                  <label for="source" class="col-sm-3 control-label"><b>Type</b></label>
-	                  <div class="col-sm-9">
-	                    <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppSouCode}" id="source" 
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
-			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
-			       <f:selectItems value="#{ppmModificationController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
-       		        </p:selectOneMenu>
-
-	                  </div>
-	                </div>
-	                
-	                
-	                <div class="form-group ">
-	                  <label for="xdev" class="col-sm-3 control-label"><b>Devise</b></label>
-	                  <div class="col-sm-9">
-	                      <p:selectOneMenu value="#{ppmModificationController.updatefinance.fppDevCode}" id="xdev" 
-	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
-			       <f:selectItems value="#{ppmModificationController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
-       		        </p:selectOneMenu>
-	                  </div>
-	                </div>
-	                
-	                <div class="form-group ">
-	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmModification.updatefinance.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
-	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" listener="#{ppmModificationController.recupTresor()}" global="false" process="@this" update="xmontDev, partTresor" /> 
-	                    </p:inputText>
-	                  </div>
-	                </div> 
-	                
-	                  <h:panelGroup id="idTres"> 
-	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
-	                <div class="form-group ">
-	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmModificationController.updatefinance.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
-	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" process="@this" update="partTresor" /> 
-	                    </p:inputText>
-	                  </div>
-	                </div>
-	                </h:panelGroup>
-	                </h:panelGroup>
-	                
-	                 <h:panelGroup id="idPartB"> 
-	                <h:panelGroup rendered="#{ppmModificationController.selectPartBai}">
-	                 <div class="form-group ">
-	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
-	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmModificationController.updatefinance.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
-	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                     <p:ajax event="blur" process="@this" update="xmont" /> 
-	                    </p:inputText>
-	                  </div>
-	                </div>
-	                </h:panelGroup>
-	                </h:panelGroup>              
-	           
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer">
-             <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" 
-            oncomplete="PF('DetailDlgMod').hide()" action="#{ppmModificationController.updateFinancement()}"  update=":content">
-				             <i class="ace-icon fa fa-save"></i> Modifier
-				            </p:commandLink>
-            </div>
-          </div>
-      </p:dialog>
-    </h:form>  
-    
-    
-    
-    
     <h:form id="dlogdet">
 	  <p:dialog  widgetVar="DetailDlg" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
 		<div class="box box-success box-solid">
@@ -1637,8 +3086,8 @@
 	                  <label for="xbail" class="col-sm-3 control-label"><b>Source</b></label>
 	                  <div class="col-sm-9">
 
-       		        <p:selectOneRadio id="situation" value="#{ppmModificationController.sourfin}">
-       		         <p:ajax listener="#{ppmModificationController.checkBailleur()}" update="dlogdet:idBail, dlogdet:idTres, dlogdet:idPartB, dlogdet:source" />
+       		        <p:selectOneRadio id="situation" value="#{ppmController.sourfin}">
+       		         <p:ajax listener="#{ppmController.checkBailleur()}" update="dlogdet:idBail, dlogdet:idTres, dlogdet:idPartB, dlogdet:source" />
 			            <div class="col-md-4">
 						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
 			            </div>
@@ -1654,14 +3103,14 @@
 	                </div>
 	                
 	                <h:panelGroup id="idBail"> 
-	                <h:panelGroup rendered="#{ppmModificationController.selectBailleur}"> 
+	                <h:panelGroup rendered="#{ppmController.selectBailleur}"> 
 	               <div class="form-group ">
 	                  <label for="xbail" class="col-sm-3 control-label"><b>Bailleur</b></label>
 	                  <div class="col-sm-9">
-	                   <p:selectOneMenu value="#{ppmModificationController.baiCode}" id="xbail" 
+	                   <p:selectOneMenu value="#{ppmController.baiCode}" id="xbail" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
-			       <f:selectItems value="#{ppmModificationController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+			       <f:selectItems value="#{ppmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -1673,10 +3122,10 @@
 	                <div class="form-group ">
 	                  <label for="source" class="col-sm-3 control-label"><b>Type</b></label>
 	                  <div class="col-sm-9">
-	                    <p:selectOneMenu value="#{ppmModificationController.souCode}" id="source" 
+	                    <p:selectOneMenu value="#{ppmController.souCode}" id="source" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
 			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
-			       <f:selectItems value="#{ppmModificationController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+			       <f:selectItems value="#{ppmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
        		        </p:selectOneMenu>
 
 	                  </div>
@@ -1686,9 +3135,9 @@
 	                <div class="form-group ">
 	                  <label for="xdev" class="col-sm-3 control-label"><b>Devise</b></label>
 	                  <div class="col-sm-9">
-	                      <p:selectOneMenu value="#{ppmModificationController.devCode}" id="xdev" 
+	                      <p:selectOneMenu value="#{ppmController.devCode}" id="xdev" 
 	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
-			       <f:selectItems value="#{ppmModificationController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
+			       <f:selectItems value="#{ppmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" />			   				   
        		        </p:selectOneMenu>
 	                  </div>
 	                </div>
@@ -1696,19 +3145,19 @@
 	                <div class="form-group ">
 	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
-	                    <p:ajax event="blur" global="false" process="@this" update="xmontDev" />
+	                    <p:ajax event="blur" listener="#{ppmController.recupTresor()}" global="false" process="@this" update="xmontDev, partTresor" /> 
 	                    </p:inputText>
 	                  </div>
 	                </div> 
 	                
 	                  <h:panelGroup id="idTres"> 
-	                <h:panelGroup rendered="#{ppmModificationController.selectTresor}">
+	                <h:panelGroup rendered="#{ppmController.selectTresor}">
 	                <div class="form-group ">
 	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                    <p:ajax event="blur" process="@this" global="false" update="partTresor" /> 
 	                    </p:inputText>
@@ -1722,7 +3171,7 @@
 	                 <div class="form-group ">
 	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
 	                  <div class="col-sm-9">
-	                    <p:inputText type="text" value="#{ppmModificationController.newFinancement.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
+	                    <p:inputText type="text" value="#{ppmController.newFinancement.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
 	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
 	                     <p:ajax event="blur" process="@this" update="xmont" /> 
 	                    </p:inputText>
@@ -1735,16 +3184,137 @@
             <!-- /.box-body -->
             <div class="box-footer">
              <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" 
-            oncomplete="PF('DetailDlg').hide()" action="#{ppmModificationController.saveFinancementppm()}"  update=":content">
+            oncomplete="PF('DetailDlg').hide()" action="#{ppmController.saveFinancementppm()}"  update=":content">
 				             <i class="ace-icon fa fa-save"></i> Ajouter
 				            </p:commandLink>
             </div>
           </div>
       </p:dialog>
-    </h:form>         
+    </h:form> 
+    
+    
+   <h:form id="dlogdetMod">
+	  <p:dialog  widgetVar="DetailDlgMod" modal="true"  showEffect="fade" hideEffect="fade" width="40%" closable="true" header="">
+		<div class="box box-success box-solid">
+            <div class="box-header with-border">
+                      <div class="col-md-10 "><div  style="color: #fff">MODIFICATION DU FINANCEMENT</div></div> 
+			         <div class="col-md-2 ">
+			       
+			         </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+					 <div class="form-group ">
+	                  <label for="xbail" class="col-sm-3 control-label"><b>Source</b></label>
+	                  <div class="col-sm-9">
+
+       		        <p:selectOneRadio id="situation" value="#{ppmController.updatefinance.fppTypeFinance}">
+       		         <p:ajax listener="#{ppmController.checkBailleur()}" update="dlogdetMod:idBail, dlogdetMod:source, dlogdetMod:idTres, dlogdetMod:idPartB" />
+			            <div class="col-md-4">
+						<f:selectItem itemLabel="BAILLEUR" itemValue="Bailleur" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="COFINANCE" itemValue="Cofinance" />
+			            </div>
+			            <div class="col-md-4">
+			            <f:selectItem itemLabel="ETAT" itemValue="ETAT" />
+			            </div>
+			           </p:selectOneRadio>
+		                <br/>
+	                  </div>
+	                </div>
+	                
+	                <h:panelGroup id="idBail"> 
+	                <h:panelGroup rendered="#{ppmController.selectBailleur}"> 
+	               <div class="form-group ">
+	                  <label for="xbail" class="col-sm-3 control-label"><b>Bailleur</b></label>
+	                  <div class="col-sm-9">
+	                   <p:selectOneMenu value="#{ppmController.updatefinance.fppBaiCode}" id="xbail" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le bailleur.." itemValue="empty" />  
+			       <f:selectItems value="#{ppmController.listeBailleurs}" var="ba" itemLabel="#{ba.baiLibelle}" itemValue="#{ba.baiCode}" />				   				   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                
+	                <div class="form-group ">
+	                  <label for="source" class="col-sm-3 control-label"><b>Type</b></label>
+	                  <div class="col-sm-9">
+	                    <p:selectOneMenu value="#{ppmController.updatefinance.fppSouCode}" id="source" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith">
+			       <f:selectItem  itemLabel="Choisir le type de financement.." itemValue="empty" />  	
+			       <f:selectItems value="#{ppmController.listeSourceFinance}" var="so" itemLabel="#{so.souLibelle}" itemValue="#{so.souCode}" />			   
+       		        </p:selectOneMenu>
+
+	                  </div>
+	                </div>
+	                
+	                
+	                <div class="form-group ">
+	                  <label for="xdev" class="col-sm-3 control-label"><b>Devise</b></label>
+	                  <div class="col-sm-9">
+	                      <p:selectOneMenu value="#{ppmController.updatefinance.fppDevCode}" id="xdev" 
+	                         effect="fade" style="width:100%" filter="true" filterMatchMode="startsWith"> 
+			       <f:selectItems value="#{ppmController.listeDevise}" var="dev" itemLabel="#{dev.devLibelle}" itemValue="#{dev.devCode}" /> 			   				   
+       		        </p:selectOneMenu>
+	                  </div>
+	                </div>
+	                
+	                <div class="form-group ">
+	                  <label for="xmontDev" class="col-sm-3 control-label"><b>Montant en Devise</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmController.updatefinance.fppMontantDevise}" id="xmontDev" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber>
+	                    <p:ajax event="blur" listener="#{ppmController.recupUpdate()}" global="false" process="@this" update="xmontDev, partTresor" />
+	                    </p:inputText>
+	                  </div>
+	                </div> 
+	                
+	                  <h:panelGroup id="idTres"> 
+	                <h:panelGroup rendered="#{ppmController.selectTresor}">
+	                <div class="form-group ">
+	                  <label for="partTresor" class="col-sm-3 control-label"><b>Part Trésor</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmController.updatefinance.fppPartTresor}" id="partTresor" styleClass="form-control"  style="width: 100%" >
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                    <p:ajax event="blur" process="@this" update="partTresor" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>
+	                
+	                 <h:panelGroup id="idPartB"> 
+	                <h:panelGroup rendered="#{ppmController.selectPartBai}">
+	                 <div class="form-group ">
+	                  <label for="xmont" class="col-sm-3 control-label"><b>Part Bailleur FCFA</b></label>
+	                  <div class="col-sm-9">
+	                    <p:inputText type="text" value="#{ppmController.updatefinance.fppMontantCfa}" id="xmont" styleClass="form-control" style="width: 100%">
+	                    <f:convertNumber pattern="##,###.##"></f:convertNumber> 
+	                     <p:ajax event="blur" process="@this" update="xmont" /> 
+	                    </p:inputText>
+	                  </div>
+	                </div>
+	                </h:panelGroup>
+	                </h:panelGroup>              
+	           
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+             <p:commandLink  styleClass="btn btn-success row pull-right" style="background-color: #036d3b; margin-right:14px;color:#fff" 
+            oncomplete="PF('DetailDlgMod').hide()" action="#{ppmController.updateFinancement()}"  update=":content">
+				             <i class="ace-icon fa fa-save"></i> Modifier
+				            </p:commandLink>
+            </div>
+          </div>
+      </p:dialog>
+    </h:form>          
       
-     
-  
+    
     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade"  width="30%" height="25%" >
  		<div align="center">
         <p:commandButton value="Confirmer" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />

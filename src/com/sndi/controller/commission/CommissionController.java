@@ -684,6 +684,7 @@ public class CommissionController {
 	 
 	//Liste des pièces de l'offre
 	 public void chargePieces() {
+		 listPiecesOuv.clear();
 		 listPiecesOuv = ((List<TCritereAnalyseDacOuv>)iservice.getObjectsByColumn("TCritereAnalyseDacOuv",
 				 new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
 				 new WhereClause("LAA_NUM",Comparateur.EQ,""+tlot.getLaaNum())));
@@ -961,7 +962,7 @@ public class CommissionController {
 		 
 		//Liste des lots d'un avis d'avis d'appel d'offre en fonction du candidat
 		 public void chargeLotsByCandidat() {
-			 //lotByCandidat.clear();
+			 lotByCandidat.clear();
 			 lotByCandidat = ((List<VLotCandidat>)iservice.getObjectsByColumn("VLotCandidat",new ArrayList<String>(Arrays.asList("LAA_ID")),
 					    new WhereClause("LAA_AAO_CODE",Comparateur.EQ,""+slctdTd.getAaoCode()),
 					    new WhereClause("CAN_SOU_NCC",Comparateur.EQ,""+candidat.getSouNcc())));
